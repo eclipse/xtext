@@ -75,18 +75,24 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalKeywordsTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalKeywordsTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalKeywordsTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalKeywordsTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalKeywordsTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalKeywordsTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -98,14 +104,16 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalKeywordsTestLanguage.g:58:1: ruleModel : ( ( (lv_first_0_0= 'foo\\\\bar' ) ) | ( (lv_second_1_0= 'foo\\\\' ) ) | ( (lv_third_2_0= '\\\\bar' ) ) | ( (lv_forth_3_0= '\\\\' ) ) | ( (lv_fifth_4_0= '\"a\"' ) ) | ( (lv_sixth_5_0= '\\'b\\'' ) ) | ( (lv_seventh_6_0= '\\'c\\'' ) ) | ( (lv_eighth_7_0= '\"d\"' ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalKeywordsTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( ( (lv_first_0_0= 'foo\\\\bar' ) ) | ( (lv_second_1_0= 'foo\\\\' ) ) | ( (lv_third_2_0= '\\\\bar' ) ) | ( (lv_forth_3_0= '\\\\' ) ) | ( (lv_fifth_4_0= '\"a\"' ) ) | ( (lv_sixth_5_0= '\\'b\\'' ) ) | ( (lv_seventh_6_0= '\\'c\\'' ) ) | ( (lv_eighth_7_0= '\"d\"' ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_first_0_0=null;
         Token lv_second_1_0=null;
         Token lv_third_2_0=null;
@@ -116,10 +124,10 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
         Token lv_eighth_7_0=null;
 
         try {
-            // PsiInternalKeywordsTestLanguage.g:58:10: ( ( ( (lv_first_0_0= 'foo\\\\bar' ) ) | ( (lv_second_1_0= 'foo\\\\' ) ) | ( (lv_third_2_0= '\\\\bar' ) ) | ( (lv_forth_3_0= '\\\\' ) ) | ( (lv_fifth_4_0= '\"a\"' ) ) | ( (lv_sixth_5_0= '\\'b\\'' ) ) | ( (lv_seventh_6_0= '\\'c\\'' ) ) | ( (lv_eighth_7_0= '\"d\"' ) ) ) )
-            // PsiInternalKeywordsTestLanguage.g:59:2: ( ( (lv_first_0_0= 'foo\\\\bar' ) ) | ( (lv_second_1_0= 'foo\\\\' ) ) | ( (lv_third_2_0= '\\\\bar' ) ) | ( (lv_forth_3_0= '\\\\' ) ) | ( (lv_fifth_4_0= '\"a\"' ) ) | ( (lv_sixth_5_0= '\\'b\\'' ) ) | ( (lv_seventh_6_0= '\\'c\\'' ) ) | ( (lv_eighth_7_0= '\"d\"' ) ) )
+            // PsiInternalKeywordsTestLanguage.g:60:1: ( ( ( (lv_first_0_0= 'foo\\\\bar' ) ) | ( (lv_second_1_0= 'foo\\\\' ) ) | ( (lv_third_2_0= '\\\\bar' ) ) | ( (lv_forth_3_0= '\\\\' ) ) | ( (lv_fifth_4_0= '\"a\"' ) ) | ( (lv_sixth_5_0= '\\'b\\'' ) ) | ( (lv_seventh_6_0= '\\'c\\'' ) ) | ( (lv_eighth_7_0= '\"d\"' ) ) ) )
+            // PsiInternalKeywordsTestLanguage.g:61:2: ( ( (lv_first_0_0= 'foo\\\\bar' ) ) | ( (lv_second_1_0= 'foo\\\\' ) ) | ( (lv_third_2_0= '\\\\bar' ) ) | ( (lv_forth_3_0= '\\\\' ) ) | ( (lv_fifth_4_0= '\"a\"' ) ) | ( (lv_sixth_5_0= '\\'b\\'' ) ) | ( (lv_seventh_6_0= '\\'c\\'' ) ) | ( (lv_eighth_7_0= '\"d\"' ) ) )
             {
-            // PsiInternalKeywordsTestLanguage.g:59:2: ( ( (lv_first_0_0= 'foo\\\\bar' ) ) | ( (lv_second_1_0= 'foo\\\\' ) ) | ( (lv_third_2_0= '\\\\bar' ) ) | ( (lv_forth_3_0= '\\\\' ) ) | ( (lv_fifth_4_0= '\"a\"' ) ) | ( (lv_sixth_5_0= '\\'b\\'' ) ) | ( (lv_seventh_6_0= '\\'c\\'' ) ) | ( (lv_eighth_7_0= '\"d\"' ) ) )
+            // PsiInternalKeywordsTestLanguage.g:61:2: ( ( (lv_first_0_0= 'foo\\\\bar' ) ) | ( (lv_second_1_0= 'foo\\\\' ) ) | ( (lv_third_2_0= '\\\\bar' ) ) | ( (lv_forth_3_0= '\\\\' ) ) | ( (lv_fifth_4_0= '\"a\"' ) ) | ( (lv_sixth_5_0= '\\'b\\'' ) ) | ( (lv_seventh_6_0= '\\'c\\'' ) ) | ( (lv_eighth_7_0= '\"d\"' ) ) )
             int alt1=8;
             switch ( input.LA(1) ) {
             case 11:
@@ -171,13 +179,13 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
 
             switch (alt1) {
                 case 1 :
-                    // PsiInternalKeywordsTestLanguage.g:60:3: ( (lv_first_0_0= 'foo\\\\bar' ) )
+                    // PsiInternalKeywordsTestLanguage.g:62:3: ( (lv_first_0_0= 'foo\\\\bar' ) )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:60:3: ( (lv_first_0_0= 'foo\\\\bar' ) )
-                    // PsiInternalKeywordsTestLanguage.g:61:4: (lv_first_0_0= 'foo\\\\bar' )
+                    // PsiInternalKeywordsTestLanguage.g:62:3: ( (lv_first_0_0= 'foo\\\\bar' ) )
+                    // PsiInternalKeywordsTestLanguage.g:63:4: (lv_first_0_0= 'foo\\\\bar' )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:61:4: (lv_first_0_0= 'foo\\\\bar' )
-                    // PsiInternalKeywordsTestLanguage.g:62:5: lv_first_0_0= 'foo\\\\bar'
+                    // PsiInternalKeywordsTestLanguage.g:63:4: (lv_first_0_0= 'foo\\\\bar' )
+                    // PsiInternalKeywordsTestLanguage.g:64:5: lv_first_0_0= 'foo\\\\bar'
                     {
 
                     					markLeaf(elementTypeProvider.getModel_FirstFooBarKeyword_0_0ElementType());
@@ -185,6 +193,12 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     lv_first_0_0=(Token)match(input,11,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_first_0_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -196,13 +210,13 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     break;
                 case 2 :
-                    // PsiInternalKeywordsTestLanguage.g:72:3: ( (lv_second_1_0= 'foo\\\\' ) )
+                    // PsiInternalKeywordsTestLanguage.g:80:3: ( (lv_second_1_0= 'foo\\\\' ) )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:72:3: ( (lv_second_1_0= 'foo\\\\' ) )
-                    // PsiInternalKeywordsTestLanguage.g:73:4: (lv_second_1_0= 'foo\\\\' )
+                    // PsiInternalKeywordsTestLanguage.g:80:3: ( (lv_second_1_0= 'foo\\\\' ) )
+                    // PsiInternalKeywordsTestLanguage.g:81:4: (lv_second_1_0= 'foo\\\\' )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:73:4: (lv_second_1_0= 'foo\\\\' )
-                    // PsiInternalKeywordsTestLanguage.g:74:5: lv_second_1_0= 'foo\\\\'
+                    // PsiInternalKeywordsTestLanguage.g:81:4: (lv_second_1_0= 'foo\\\\' )
+                    // PsiInternalKeywordsTestLanguage.g:82:5: lv_second_1_0= 'foo\\\\'
                     {
 
                     					markLeaf(elementTypeProvider.getModel_SecondFooKeyword_1_0ElementType());
@@ -210,6 +224,12 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     lv_second_1_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_second_1_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -221,13 +241,13 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     break;
                 case 3 :
-                    // PsiInternalKeywordsTestLanguage.g:84:3: ( (lv_third_2_0= '\\\\bar' ) )
+                    // PsiInternalKeywordsTestLanguage.g:98:3: ( (lv_third_2_0= '\\\\bar' ) )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:84:3: ( (lv_third_2_0= '\\\\bar' ) )
-                    // PsiInternalKeywordsTestLanguage.g:85:4: (lv_third_2_0= '\\\\bar' )
+                    // PsiInternalKeywordsTestLanguage.g:98:3: ( (lv_third_2_0= '\\\\bar' ) )
+                    // PsiInternalKeywordsTestLanguage.g:99:4: (lv_third_2_0= '\\\\bar' )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:85:4: (lv_third_2_0= '\\\\bar' )
-                    // PsiInternalKeywordsTestLanguage.g:86:5: lv_third_2_0= '\\\\bar'
+                    // PsiInternalKeywordsTestLanguage.g:99:4: (lv_third_2_0= '\\\\bar' )
+                    // PsiInternalKeywordsTestLanguage.g:100:5: lv_third_2_0= '\\\\bar'
                     {
 
                     					markLeaf(elementTypeProvider.getModel_ThirdBarKeyword_2_0ElementType());
@@ -235,6 +255,12 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     lv_third_2_0=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_third_2_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -246,13 +272,13 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     break;
                 case 4 :
-                    // PsiInternalKeywordsTestLanguage.g:96:3: ( (lv_forth_3_0= '\\\\' ) )
+                    // PsiInternalKeywordsTestLanguage.g:116:3: ( (lv_forth_3_0= '\\\\' ) )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:96:3: ( (lv_forth_3_0= '\\\\' ) )
-                    // PsiInternalKeywordsTestLanguage.g:97:4: (lv_forth_3_0= '\\\\' )
+                    // PsiInternalKeywordsTestLanguage.g:116:3: ( (lv_forth_3_0= '\\\\' ) )
+                    // PsiInternalKeywordsTestLanguage.g:117:4: (lv_forth_3_0= '\\\\' )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:97:4: (lv_forth_3_0= '\\\\' )
-                    // PsiInternalKeywordsTestLanguage.g:98:5: lv_forth_3_0= '\\\\'
+                    // PsiInternalKeywordsTestLanguage.g:117:4: (lv_forth_3_0= '\\\\' )
+                    // PsiInternalKeywordsTestLanguage.g:118:5: lv_forth_3_0= '\\\\'
                     {
 
                     					markLeaf(elementTypeProvider.getModel_ForthReverseSolidusKeyword_3_0ElementType());
@@ -260,6 +286,12 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     lv_forth_3_0=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_forth_3_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -271,13 +303,13 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     break;
                 case 5 :
-                    // PsiInternalKeywordsTestLanguage.g:108:3: ( (lv_fifth_4_0= '\"a\"' ) )
+                    // PsiInternalKeywordsTestLanguage.g:134:3: ( (lv_fifth_4_0= '\"a\"' ) )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:108:3: ( (lv_fifth_4_0= '\"a\"' ) )
-                    // PsiInternalKeywordsTestLanguage.g:109:4: (lv_fifth_4_0= '\"a\"' )
+                    // PsiInternalKeywordsTestLanguage.g:134:3: ( (lv_fifth_4_0= '\"a\"' ) )
+                    // PsiInternalKeywordsTestLanguage.g:135:4: (lv_fifth_4_0= '\"a\"' )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:109:4: (lv_fifth_4_0= '\"a\"' )
-                    // PsiInternalKeywordsTestLanguage.g:110:5: lv_fifth_4_0= '\"a\"'
+                    // PsiInternalKeywordsTestLanguage.g:135:4: (lv_fifth_4_0= '\"a\"' )
+                    // PsiInternalKeywordsTestLanguage.g:136:5: lv_fifth_4_0= '\"a\"'
                     {
 
                     					markLeaf(elementTypeProvider.getModel_FifthAKeyword_4_0ElementType());
@@ -285,6 +317,12 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     lv_fifth_4_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_fifth_4_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -296,13 +334,13 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     break;
                 case 6 :
-                    // PsiInternalKeywordsTestLanguage.g:120:3: ( (lv_sixth_5_0= '\\'b\\'' ) )
+                    // PsiInternalKeywordsTestLanguage.g:152:3: ( (lv_sixth_5_0= '\\'b\\'' ) )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:120:3: ( (lv_sixth_5_0= '\\'b\\'' ) )
-                    // PsiInternalKeywordsTestLanguage.g:121:4: (lv_sixth_5_0= '\\'b\\'' )
+                    // PsiInternalKeywordsTestLanguage.g:152:3: ( (lv_sixth_5_0= '\\'b\\'' ) )
+                    // PsiInternalKeywordsTestLanguage.g:153:4: (lv_sixth_5_0= '\\'b\\'' )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:121:4: (lv_sixth_5_0= '\\'b\\'' )
-                    // PsiInternalKeywordsTestLanguage.g:122:5: lv_sixth_5_0= '\\'b\\''
+                    // PsiInternalKeywordsTestLanguage.g:153:4: (lv_sixth_5_0= '\\'b\\'' )
+                    // PsiInternalKeywordsTestLanguage.g:154:5: lv_sixth_5_0= '\\'b\\''
                     {
 
                     					markLeaf(elementTypeProvider.getModel_SixthBKeyword_5_0ElementType());
@@ -310,6 +348,12 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     lv_sixth_5_0=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_sixth_5_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -321,13 +365,13 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     break;
                 case 7 :
-                    // PsiInternalKeywordsTestLanguage.g:132:3: ( (lv_seventh_6_0= '\\'c\\'' ) )
+                    // PsiInternalKeywordsTestLanguage.g:170:3: ( (lv_seventh_6_0= '\\'c\\'' ) )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:132:3: ( (lv_seventh_6_0= '\\'c\\'' ) )
-                    // PsiInternalKeywordsTestLanguage.g:133:4: (lv_seventh_6_0= '\\'c\\'' )
+                    // PsiInternalKeywordsTestLanguage.g:170:3: ( (lv_seventh_6_0= '\\'c\\'' ) )
+                    // PsiInternalKeywordsTestLanguage.g:171:4: (lv_seventh_6_0= '\\'c\\'' )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:133:4: (lv_seventh_6_0= '\\'c\\'' )
-                    // PsiInternalKeywordsTestLanguage.g:134:5: lv_seventh_6_0= '\\'c\\''
+                    // PsiInternalKeywordsTestLanguage.g:171:4: (lv_seventh_6_0= '\\'c\\'' )
+                    // PsiInternalKeywordsTestLanguage.g:172:5: lv_seventh_6_0= '\\'c\\''
                     {
 
                     					markLeaf(elementTypeProvider.getModel_SeventhCKeyword_6_0ElementType());
@@ -335,6 +379,12 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     lv_seventh_6_0=(Token)match(input,17,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_seventh_6_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -346,13 +396,13 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     }
                     break;
                 case 8 :
-                    // PsiInternalKeywordsTestLanguage.g:144:3: ( (lv_eighth_7_0= '\"d\"' ) )
+                    // PsiInternalKeywordsTestLanguage.g:188:3: ( (lv_eighth_7_0= '\"d\"' ) )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:144:3: ( (lv_eighth_7_0= '\"d\"' ) )
-                    // PsiInternalKeywordsTestLanguage.g:145:4: (lv_eighth_7_0= '\"d\"' )
+                    // PsiInternalKeywordsTestLanguage.g:188:3: ( (lv_eighth_7_0= '\"d\"' ) )
+                    // PsiInternalKeywordsTestLanguage.g:189:4: (lv_eighth_7_0= '\"d\"' )
                     {
-                    // PsiInternalKeywordsTestLanguage.g:145:4: (lv_eighth_7_0= '\"d\"' )
-                    // PsiInternalKeywordsTestLanguage.g:146:5: lv_eighth_7_0= '\"d\"'
+                    // PsiInternalKeywordsTestLanguage.g:189:4: (lv_eighth_7_0= '\"d\"' )
+                    // PsiInternalKeywordsTestLanguage.g:190:5: lv_eighth_7_0= '\"d\"'
                     {
 
                     					markLeaf(elementTypeProvider.getModel_EighthDKeyword_7_0ElementType());
@@ -360,6 +410,12 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
                     lv_eighth_7_0=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_eighth_7_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -383,7 +439,7 @@ public class PsiInternalKeywordsTestLanguageParser extends AbstractPsiAntlrParse
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 

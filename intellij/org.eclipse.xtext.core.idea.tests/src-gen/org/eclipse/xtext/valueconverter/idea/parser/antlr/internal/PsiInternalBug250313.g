@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -77,11 +79,23 @@ ruleModel:
 						{
 							doneLeaf(lv_value_1_1);
 						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						    |
 						{
 							markLeaf(elementTypeProvider.getModel_ValueSTRINGTerminalRuleCall_0_1_0_1ElementType());
 						}
 						lv_value_1_2=RULE_STRING
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_value_1_2);
 						}
@@ -92,6 +106,10 @@ ruleModel:
 						lv_value_1_3=ruleNestedDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -100,12 +118,22 @@ ruleModel:
 						lv_value_1_4=ruleDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
 							markLeaf(elementTypeProvider.getModel_ValueIDTerminalRuleCall_0_1_0_4ElementType());
 						}
 						lv_value_1_5=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_value_1_5);
 						}
@@ -132,11 +160,23 @@ ruleModel:
 						{
 							doneLeaf(lv_multiValue_3_1);
 						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						    |
 						{
 							markLeaf(elementTypeProvider.getModel_MultiValueSTRINGTerminalRuleCall_1_1_0_1ElementType());
 						}
 						lv_multiValue_3_2=RULE_STRING
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_multiValue_3_2);
 						}
@@ -147,6 +187,10 @@ ruleModel:
 						lv_multiValue_3_3=ruleNestedDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -155,12 +199,22 @@ ruleModel:
 						lv_multiValue_3_4=ruleDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
 							markLeaf(elementTypeProvider.getModel_MultiValueIDTerminalRuleCall_1_1_0_4ElementType());
 						}
 						lv_multiValue_3_5=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_multiValue_3_5);
 						}
@@ -184,6 +238,12 @@ ruleModel:
 					}
 					lv_value_5_0=RULE_STRING
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_value_5_0);
 					}
 				)
@@ -204,6 +264,12 @@ ruleModel:
 						markLeaf(elementTypeProvider.getModel_MultiValueSTRINGTerminalRuleCall_3_1_0ElementType());
 					}
 					lv_multiValue_7_0=RULE_STRING
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_multiValue_7_0);
 					}
@@ -227,6 +293,10 @@ ruleModel:
 					lv_value_9_0=ruleDatatype
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -248,6 +318,10 @@ ruleModel:
 					lv_multiValue_11_0=ruleDatatype
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -269,6 +343,10 @@ ruleModel:
 					lv_value_13_0=ruleNestedDatatype
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -290,6 +368,10 @@ ruleModel:
 					lv_multiValue_15_0=ruleNestedDatatype
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -312,6 +394,10 @@ ruleModel:
 						lv_children_17_0=ruleChild
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -328,6 +414,12 @@ ruleModel:
 					(
 						(
 							{
+								if (!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
+							}
+							{
 								markLeaf(elementTypeProvider.getModel_RefChild1CrossReference_8_1_1_0_0ElementType());
 							}
 							otherlv_19=RULE_STRING
@@ -335,6 +427,12 @@ ruleModel:
 								doneLeaf(otherlv_19);
 							}
 							    |
+							{
+								if (!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
+							}
 							{
 								markLeaf(elementTypeProvider.getModel_RefChild2CrossReference_8_1_1_0_1ElementType());
 							}
@@ -351,13 +449,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleDatatype
-entryRuleDatatype:
+entryRuleDatatype returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDatatypeElementType()); }
-	ruleDatatype
+	iv_ruleDatatype=ruleDatatype
+	{ $current=$iv_ruleDatatype.current; }
 	EOF;
 
 // Rule Datatype
-ruleDatatype:
+ruleDatatype returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDatatype_IDTerminalRuleCall_0ElementType());
@@ -384,13 +484,15 @@ ruleDatatype:
 ;
 
 //Entry rule entryRuleNestedDatatype
-entryRuleNestedDatatype:
+entryRuleNestedDatatype returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNestedDatatypeElementType()); }
-	ruleNestedDatatype
+	iv_ruleNestedDatatype=ruleNestedDatatype
+	{ $current=$iv_ruleNestedDatatype.current; }
 	EOF;
 
 // Rule NestedDatatype
-ruleNestedDatatype:
+ruleNestedDatatype returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getNestedDatatype_IDTerminalRuleCall_0ElementType());
@@ -419,46 +521,58 @@ ruleNestedDatatype:
 ;
 
 //Entry rule entryRuleChild
-entryRuleChild:
+entryRuleChild returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getChildElementType()); }
-	ruleChild
+	iv_ruleChild=ruleChild
+	{ $current=$iv_ruleChild.current; }
 	EOF;
 
 // Rule Child
-ruleChild:
+ruleChild returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getChild_Child1ParserRuleCall_0ElementType());
 		}
-		ruleChild1
+		this_Child1_0=ruleChild1
 		{
+			$current = $this_Child1_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getChild_Child2ParserRuleCall_1ElementType());
 		}
-		ruleChild2
+		this_Child2_1=ruleChild2
 		{
+			$current = $this_Child2_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleChild1
-entryRuleChild1:
+entryRuleChild1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getChild1ElementType()); }
-	ruleChild1
+	iv_ruleChild1=ruleChild1
+	{ $current=$iv_ruleChild1.current; }
 	EOF;
 
 // Rule Child1
-ruleChild1:
+ruleChild1 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getChild1_NameIDTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_ID
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -467,19 +581,27 @@ ruleChild1:
 ;
 
 //Entry rule entryRuleChild2
-entryRuleChild2:
+entryRuleChild2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getChild2ElementType()); }
-	ruleChild2
+	iv_ruleChild2=ruleChild2
+	{ $current=$iv_ruleChild2.current; }
 	EOF;
 
 // Rule Child2
-ruleChild2:
+ruleChild2 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getChild2_NameSTRINGTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_STRING
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_name_0_0);
 			}

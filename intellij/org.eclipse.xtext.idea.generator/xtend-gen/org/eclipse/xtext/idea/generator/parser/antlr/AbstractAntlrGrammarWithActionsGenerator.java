@@ -590,6 +590,10 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
     return false;
   }
   
+  protected String getCurrentType() {
+    return "EObject";
+  }
+  
   protected CharSequence compileInitHiddenTokens(final AbstractRule it, final AntlrOptions options) {
     if (it instanceof ParserRule) {
       return _compileInitHiddenTokens((ParserRule)it, options);

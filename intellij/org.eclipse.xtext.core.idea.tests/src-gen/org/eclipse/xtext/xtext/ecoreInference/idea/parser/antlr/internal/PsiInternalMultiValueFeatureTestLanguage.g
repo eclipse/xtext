@@ -49,19 +49,27 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleStart
-entryRuleStart:
+entryRuleStart returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getStartElementType()); }
-	ruleStart
+	iv_ruleStart=ruleStart
+	{ $current=$iv_ruleStart.current; }
 	EOF;
 
 // Rule Start
-ruleStart:
+ruleStart returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getStart_FeatureAIDTerminalRuleCall_0ElementType());
 			}
 			lv_featureA_0_0=RULE_ID
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_featureA_0_0);
 			}

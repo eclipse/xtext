@@ -32,7 +32,7 @@ public class PartialClassExtractor {
 	
 	private final String content;
 	private final String originalContent;
-	private static final Pattern SIGNATURE = Pattern.compile("^\\s*public final (void|EObject|AntlrDatatypeRuleToken) \\S*\\(\\) throws RecognitionException \\{\\s*$");
+	private static final Pattern SIGNATURE = Pattern.compile("^\\s*public final (void|EObject|AntlrDatatypeRuleToken|Boolean) \\S*\\(\\) throws RecognitionException \\{\\s*$");
 	private static final String ANTLR_END_MARKER = "    // $ANTLR end ";
 	private static final String ANTLR_START_MARKER = "    // $ANTLR start ";
 

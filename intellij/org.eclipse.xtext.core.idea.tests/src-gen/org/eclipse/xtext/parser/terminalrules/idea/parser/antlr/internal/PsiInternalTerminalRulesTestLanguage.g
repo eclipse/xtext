@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -63,6 +65,12 @@ ruleModel:
 					markLeaf(elementTypeProvider.getModel_IdValueIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_idValue_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_idValue_0_0);
 				}
@@ -76,6 +84,12 @@ ruleModel:
 				}
 				lv_intValue_1_0=RULE_INT
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_intValue_1_0);
 				}
 			)
@@ -87,6 +101,12 @@ ruleModel:
 					markLeaf(elementTypeProvider.getModel_StringValueSTRINGTerminalRuleCall_2_0ElementType());
 				}
 				lv_stringValue_2_0=RULE_STRING
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_stringValue_2_0);
 				}
@@ -100,6 +120,12 @@ ruleModel:
 				}
 				lv_richStringValue_3_0=RULE_RICH_STRING
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_richStringValue_3_0);
 				}
 			)
@@ -111,6 +137,12 @@ ruleModel:
 					markLeaf(elementTypeProvider.getModel_MlCommentValueML_COMMENTTerminalRuleCall_4_0ElementType());
 				}
 				lv_mlCommentValue_4_0=RULE_ML_COMMENT
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_mlCommentValue_4_0);
 				}
@@ -124,6 +156,12 @@ ruleModel:
 				}
 				lv_slCommentValue_5_0=RULE_SL_COMMENT
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_slCommentValue_5_0);
 				}
 			)
@@ -136,6 +174,12 @@ ruleModel:
 				}
 				lv_wsValue_6_0=RULE_WS
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_wsValue_6_0);
 				}
 			)
@@ -147,6 +191,12 @@ ruleModel:
 					markLeaf(elementTypeProvider.getModel_AnyValueANY_OTHERTerminalRuleCall_7_0ElementType());
 				}
 				lv_anyValue_7_0=RULE_ANY_OTHER
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_anyValue_7_0);
 				}

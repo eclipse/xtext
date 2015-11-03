@@ -108,6 +108,10 @@ abstract class AbstractPsiAntlrParser extends Parser {
 	protected def void markLeaf(IElementType elementType) {
 		psiInput.remapToken(elementType)
 	}
+	
+	protected def void associateWithSemanticElement() {
+		compositeMarkers.peek.hasSemanticElement = true	
+	}
 
 	protected def void precedeComposite(IElementType elementType) {
 		val compositeMarker = compositeMarkers.pop

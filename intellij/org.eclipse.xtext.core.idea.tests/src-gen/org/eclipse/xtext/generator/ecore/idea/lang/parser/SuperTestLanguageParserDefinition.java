@@ -1,9 +1,10 @@
 package org.eclipse.xtext.generator.ecore.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
-import org.eclipse.xtext.generator.ecore.idea.lang.SuperTestLanguageElementTypeProvider;
 import org.eclipse.xtext.generator.ecore.idea.lang.psi.impl.SuperTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.generator.ecore.idea.lang.SuperTestLanguageElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -25,38 +26,18 @@ public class SuperTestLanguageParserDefinition extends AbstractXtextParserDefini
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getSuperMainElementType()) {
-			return new PsiEObjectImpl(node) {};
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getSuperMainElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getAnotherSuperMainElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
-		if (elementType == elementTypeProvider.getSuperMain_GroupElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getSuperMain_SuperKeyword_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getSuperMain_NameAssignment_1ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getAnotherSuperMainElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getAnotherSuperMain_GroupElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getAnotherSuperMain_AnotherKeyword_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getAnotherSuperMain_NameAssignment_1ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getAnotherSuperMain_NameIDTerminalRuleCall_1_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
+		return super.createElement(node);
 	}
 
 }

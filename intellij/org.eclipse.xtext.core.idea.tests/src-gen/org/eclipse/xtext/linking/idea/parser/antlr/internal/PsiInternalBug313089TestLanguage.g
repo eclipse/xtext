@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleFoo
-entryRuleFoo:
+entryRuleFoo returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFooElementType()); }
-	ruleFoo
+	iv_ruleFoo=ruleFoo
+	{ $current=$iv_ruleFoo.current; }
 	EOF;
 
 // Rule Foo
-ruleFoo:
+ruleFoo returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -63,6 +65,12 @@ ruleFoo:
 					markLeaf(elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_0_0);
 				}
@@ -77,6 +85,10 @@ ruleFoo:
 					lv_bar_1_0=ruleBar
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -89,12 +101,22 @@ ruleFoo:
 					lv_baz_2_0=ruleBaz
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
 		)
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getFoo_RefFooCrossReference_2_0ElementType());
 				}
@@ -108,18 +130,21 @@ ruleFoo:
 ;
 
 //Entry rule entryRuleBar
-entryRuleBar:
+entryRuleBar returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getBarElementType()); }
-	ruleBar
+	iv_ruleBar=ruleBar
+	{ $current=$iv_ruleBar.current; }
 	EOF;
 
 // Rule Bar
-ruleBar:
+ruleBar returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getBar_BarAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -129,6 +154,12 @@ ruleBar:
 				}
 				lv_name_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_1_0);
 				}
 			)
@@ -137,13 +168,15 @@ ruleBar:
 ;
 
 //Entry rule entryRuleBaz
-entryRuleBaz:
+entryRuleBaz returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getBazElementType()); }
-	ruleBaz
+	iv_ruleBaz=ruleBaz
+	{ $current=$iv_ruleBaz.current; }
 	EOF;
 
 // Rule Baz
-ruleBaz:
+ruleBaz returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getBaz_BazKeyword_0ElementType());
@@ -159,6 +192,12 @@ ruleBaz:
 				}
 				lv_name_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_1_0);
 				}
 			)
@@ -168,6 +207,7 @@ ruleBaz:
 				{
 					precedeComposite(elementTypeProvider.getBaz_BazChildAction_2_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			{
@@ -183,6 +223,12 @@ ruleBaz:
 						markLeaf(elementTypeProvider.getBaz_NameIDTerminalRuleCall_2_2_0ElementType());
 					}
 					lv_name_4_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_name_4_0);
 					}

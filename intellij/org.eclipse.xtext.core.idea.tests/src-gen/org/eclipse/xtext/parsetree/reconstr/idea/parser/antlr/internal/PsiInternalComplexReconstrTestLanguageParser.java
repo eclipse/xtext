@@ -76,18 +76,24 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
 
     // $ANTLR start "entryRuleRoot"
-    // PsiInternalComplexReconstrTestLanguage.g:52:1: entryRuleRoot : ruleRoot EOF ;
-    public final void entryRuleRoot() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:52:1: entryRuleRoot returns [Boolean current=false] : iv_ruleRoot= ruleRoot EOF ;
+    public final Boolean entryRuleRoot() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleRoot = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:52:14: ( ruleRoot EOF )
-            // PsiInternalComplexReconstrTestLanguage.g:53:2: ruleRoot EOF
+            // PsiInternalComplexReconstrTestLanguage.g:52:46: (iv_ruleRoot= ruleRoot EOF )
+            // PsiInternalComplexReconstrTestLanguage.g:53:2: iv_ruleRoot= ruleRoot EOF
             {
              markComposite(elementTypeProvider.getRootElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleRoot();
+            iv_ruleRoot=ruleRoot();
 
             state._fsp--;
 
+             current =iv_ruleRoot; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -99,19 +105,26 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleRoot"
 
 
     // $ANTLR start "ruleRoot"
-    // PsiInternalComplexReconstrTestLanguage.g:58:1: ruleRoot : ( ruleOp | ruleTrickyG ) ;
-    public final void ruleRoot() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:59:1: ruleRoot returns [Boolean current=false] : (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG ) ;
+    public final Boolean ruleRoot() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_Op_0 = null;
+
+        Boolean this_TrickyG_1 = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:58:9: ( ( ruleOp | ruleTrickyG ) )
-            // PsiInternalComplexReconstrTestLanguage.g:59:2: ( ruleOp | ruleTrickyG )
+            // PsiInternalComplexReconstrTestLanguage.g:60:1: ( (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG ) )
+            // PsiInternalComplexReconstrTestLanguage.g:61:2: (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:59:2: ( ruleOp | ruleTrickyG )
+            // PsiInternalComplexReconstrTestLanguage.g:61:2: (this_Op_0= ruleOp | this_TrickyG_1= ruleTrickyG )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -129,34 +142,36 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalComplexReconstrTestLanguage.g:60:3: ruleOp
+                    // PsiInternalComplexReconstrTestLanguage.g:62:3: this_Op_0= ruleOp
                     {
 
                     			markComposite(elementTypeProvider.getRoot_OpParserRuleCall_0ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleOp();
+                    this_Op_0=ruleOp();
 
                     state._fsp--;
 
 
+                    			current = this_Op_0;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalComplexReconstrTestLanguage.g:68:3: ruleTrickyG
+                    // PsiInternalComplexReconstrTestLanguage.g:71:3: this_TrickyG_1= ruleTrickyG
                     {
 
                     			markComposite(elementTypeProvider.getRoot_TrickyGParserRuleCall_1ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleTrickyG();
+                    this_TrickyG_1=ruleTrickyG();
 
                     state._fsp--;
 
 
+                    			current = this_TrickyG_1;
                     			doneComposite();
                     		
 
@@ -175,24 +190,30 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleRoot"
 
 
     // $ANTLR start "entryRuleOp"
-    // PsiInternalComplexReconstrTestLanguage.g:79:1: entryRuleOp : ruleOp EOF ;
-    public final void entryRuleOp() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:83:1: entryRuleOp returns [Boolean current=false] : iv_ruleOp= ruleOp EOF ;
+    public final Boolean entryRuleOp() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleOp = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:79:12: ( ruleOp EOF )
-            // PsiInternalComplexReconstrTestLanguage.g:80:2: ruleOp EOF
+            // PsiInternalComplexReconstrTestLanguage.g:83:44: (iv_ruleOp= ruleOp EOF )
+            // PsiInternalComplexReconstrTestLanguage.g:84:2: iv_ruleOp= ruleOp EOF
             {
              markComposite(elementTypeProvider.getOpElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleOp();
+            iv_ruleOp=ruleOp();
 
             state._fsp--;
 
+             current =iv_ruleOp; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -204,36 +225,45 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleOp"
 
 
     // $ANTLR start "ruleOp"
-    // PsiInternalComplexReconstrTestLanguage.g:85:1: ruleOp : ( ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) ;
-    public final void ruleOp() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:90:1: ruleOp returns [Boolean current=false] : (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) ;
+    public final Boolean ruleOp() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_2=null;
         Token otherlv_5=null;
+        Boolean this_Term_0 = null;
+
+        Boolean lv_addOperands_3_0 = null;
+
+        Boolean lv_minusOperands_6_0 = null;
+
 
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:85:7: ( ( ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) )
-            // PsiInternalComplexReconstrTestLanguage.g:86:2: ( ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
+            // PsiInternalComplexReconstrTestLanguage.g:91:1: ( (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* ) )
+            // PsiInternalComplexReconstrTestLanguage.g:92:2: (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:86:2: ( ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
-            // PsiInternalComplexReconstrTestLanguage.g:87:3: ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
+            // PsiInternalComplexReconstrTestLanguage.g:92:2: (this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )* )
+            // PsiInternalComplexReconstrTestLanguage.g:93:3: this_Term_0= ruleTerm ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
             {
 
             			markComposite(elementTypeProvider.getOp_TermParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_3);
-            ruleTerm();
+            this_Term_0=ruleTerm();
 
             state._fsp--;
 
 
+            			current = this_Term_0;
             			doneComposite();
             		
-            // PsiInternalComplexReconstrTestLanguage.g:94:3: ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
+            // PsiInternalComplexReconstrTestLanguage.g:101:3: ( ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) ) | ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) ) )*
             loop2:
             do {
                 int alt2=3;
@@ -249,17 +279,18 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalComplexReconstrTestLanguage.g:95:4: ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
+            	    // PsiInternalComplexReconstrTestLanguage.g:102:4: ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
             	    {
-            	    // PsiInternalComplexReconstrTestLanguage.g:95:4: ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
-            	    // PsiInternalComplexReconstrTestLanguage.g:96:5: () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) )
+            	    // PsiInternalComplexReconstrTestLanguage.g:102:4: ( () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) ) )
+            	    // PsiInternalComplexReconstrTestLanguage.g:103:5: () otherlv_2= '+' ( (lv_addOperands_3_0= ruleTerm ) )
             	    {
-            	    // PsiInternalComplexReconstrTestLanguage.g:96:5: ()
-            	    // PsiInternalComplexReconstrTestLanguage.g:97:6: 
+            	    // PsiInternalComplexReconstrTestLanguage.g:103:5: ()
+            	    // PsiInternalComplexReconstrTestLanguage.g:104:6: 
             	    {
 
             	    						precedeComposite(elementTypeProvider.getOp_AddAddOperandsAction_1_0_0ElementType());
             	    						doneComposite();
+            	    						associateWithSemanticElement();
             	    					
 
             	    }
@@ -271,22 +302,26 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
             	    					doneLeaf(otherlv_2);
             	    				
-            	    // PsiInternalComplexReconstrTestLanguage.g:109:5: ( (lv_addOperands_3_0= ruleTerm ) )
-            	    // PsiInternalComplexReconstrTestLanguage.g:110:6: (lv_addOperands_3_0= ruleTerm )
+            	    // PsiInternalComplexReconstrTestLanguage.g:117:5: ( (lv_addOperands_3_0= ruleTerm ) )
+            	    // PsiInternalComplexReconstrTestLanguage.g:118:6: (lv_addOperands_3_0= ruleTerm )
             	    {
-            	    // PsiInternalComplexReconstrTestLanguage.g:110:6: (lv_addOperands_3_0= ruleTerm )
-            	    // PsiInternalComplexReconstrTestLanguage.g:111:7: lv_addOperands_3_0= ruleTerm
+            	    // PsiInternalComplexReconstrTestLanguage.g:118:6: (lv_addOperands_3_0= ruleTerm )
+            	    // PsiInternalComplexReconstrTestLanguage.g:119:7: lv_addOperands_3_0= ruleTerm
             	    {
 
             	    							markComposite(elementTypeProvider.getOp_AddOperandsTermParserRuleCall_1_0_2_0ElementType());
             	    						
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleTerm();
+            	    lv_addOperands_3_0=ruleTerm();
 
             	    state._fsp--;
 
 
             	    							doneComposite();
+            	    							if(!current) {
+            	    								associateWithSemanticElement();
+            	    								current = true;
+            	    							}
             	    						
 
             	    }
@@ -301,17 +336,18 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
             	    }
             	    break;
             	case 2 :
-            	    // PsiInternalComplexReconstrTestLanguage.g:122:4: ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
+            	    // PsiInternalComplexReconstrTestLanguage.g:134:4: ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
             	    {
-            	    // PsiInternalComplexReconstrTestLanguage.g:122:4: ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
-            	    // PsiInternalComplexReconstrTestLanguage.g:123:5: () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) )
+            	    // PsiInternalComplexReconstrTestLanguage.g:134:4: ( () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) ) )
+            	    // PsiInternalComplexReconstrTestLanguage.g:135:5: () otherlv_5= '-' ( (lv_minusOperands_6_0= ruleTerm ) )
             	    {
-            	    // PsiInternalComplexReconstrTestLanguage.g:123:5: ()
-            	    // PsiInternalComplexReconstrTestLanguage.g:124:6: 
+            	    // PsiInternalComplexReconstrTestLanguage.g:135:5: ()
+            	    // PsiInternalComplexReconstrTestLanguage.g:136:6: 
             	    {
 
             	    						precedeComposite(elementTypeProvider.getOp_MinusMinusOperandsAction_1_1_0ElementType());
             	    						doneComposite();
+            	    						associateWithSemanticElement();
             	    					
 
             	    }
@@ -323,22 +359,26 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
             	    					doneLeaf(otherlv_5);
             	    				
-            	    // PsiInternalComplexReconstrTestLanguage.g:136:5: ( (lv_minusOperands_6_0= ruleTerm ) )
-            	    // PsiInternalComplexReconstrTestLanguage.g:137:6: (lv_minusOperands_6_0= ruleTerm )
+            	    // PsiInternalComplexReconstrTestLanguage.g:149:5: ( (lv_minusOperands_6_0= ruleTerm ) )
+            	    // PsiInternalComplexReconstrTestLanguage.g:150:6: (lv_minusOperands_6_0= ruleTerm )
             	    {
-            	    // PsiInternalComplexReconstrTestLanguage.g:137:6: (lv_minusOperands_6_0= ruleTerm )
-            	    // PsiInternalComplexReconstrTestLanguage.g:138:7: lv_minusOperands_6_0= ruleTerm
+            	    // PsiInternalComplexReconstrTestLanguage.g:150:6: (lv_minusOperands_6_0= ruleTerm )
+            	    // PsiInternalComplexReconstrTestLanguage.g:151:7: lv_minusOperands_6_0= ruleTerm
             	    {
 
             	    							markComposite(elementTypeProvider.getOp_MinusOperandsTermParserRuleCall_1_1_2_0ElementType());
             	    						
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleTerm();
+            	    lv_minusOperands_6_0=ruleTerm();
 
             	    state._fsp--;
 
 
             	    							doneComposite();
+            	    							if(!current) {
+            	    								associateWithSemanticElement();
+            	    								current = true;
+            	    							}
             	    						
 
             	    }
@@ -371,24 +411,30 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleOp"
 
 
     // $ANTLR start "entryRuleTerm"
-    // PsiInternalComplexReconstrTestLanguage.g:153:1: entryRuleTerm : ruleTerm EOF ;
-    public final void entryRuleTerm() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:170:1: entryRuleTerm returns [Boolean current=false] : iv_ruleTerm= ruleTerm EOF ;
+    public final Boolean entryRuleTerm() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleTerm = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:153:14: ( ruleTerm EOF )
-            // PsiInternalComplexReconstrTestLanguage.g:154:2: ruleTerm EOF
+            // PsiInternalComplexReconstrTestLanguage.g:170:46: (iv_ruleTerm= ruleTerm EOF )
+            // PsiInternalComplexReconstrTestLanguage.g:171:2: iv_ruleTerm= ruleTerm EOF
             {
              markComposite(elementTypeProvider.getTermElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleTerm();
+            iv_ruleTerm=ruleTerm();
 
             state._fsp--;
 
+             current =iv_ruleTerm; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -400,19 +446,26 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleTerm"
 
 
     // $ANTLR start "ruleTerm"
-    // PsiInternalComplexReconstrTestLanguage.g:159:1: ruleTerm : ( ruleAtom | ruleParens ) ;
-    public final void ruleTerm() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:177:1: ruleTerm returns [Boolean current=false] : (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) ;
+    public final Boolean ruleTerm() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_Atom_0 = null;
+
+        Boolean this_Parens_1 = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:159:9: ( ( ruleAtom | ruleParens ) )
-            // PsiInternalComplexReconstrTestLanguage.g:160:2: ( ruleAtom | ruleParens )
+            // PsiInternalComplexReconstrTestLanguage.g:178:1: ( (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) )
+            // PsiInternalComplexReconstrTestLanguage.g:179:2: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:160:2: ( ruleAtom | ruleParens )
+            // PsiInternalComplexReconstrTestLanguage.g:179:2: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -430,34 +483,36 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalComplexReconstrTestLanguage.g:161:3: ruleAtom
+                    // PsiInternalComplexReconstrTestLanguage.g:180:3: this_Atom_0= ruleAtom
                     {
 
                     			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleAtom();
+                    this_Atom_0=ruleAtom();
 
                     state._fsp--;
 
 
+                    			current = this_Atom_0;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalComplexReconstrTestLanguage.g:169:3: ruleParens
+                    // PsiInternalComplexReconstrTestLanguage.g:189:3: this_Parens_1= ruleParens
                     {
 
                     			markComposite(elementTypeProvider.getTerm_ParensParserRuleCall_1ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleParens();
+                    this_Parens_1=ruleParens();
 
                     state._fsp--;
 
 
+                    			current = this_Parens_1;
                     			doneComposite();
                     		
 
@@ -476,24 +531,30 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleTerm"
 
 
     // $ANTLR start "entryRuleAtom"
-    // PsiInternalComplexReconstrTestLanguage.g:180:1: entryRuleAtom : ruleAtom EOF ;
-    public final void entryRuleAtom() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:201:1: entryRuleAtom returns [Boolean current=false] : iv_ruleAtom= ruleAtom EOF ;
+    public final Boolean entryRuleAtom() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAtom = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:180:14: ( ruleAtom EOF )
-            // PsiInternalComplexReconstrTestLanguage.g:181:2: ruleAtom EOF
+            // PsiInternalComplexReconstrTestLanguage.g:201:46: (iv_ruleAtom= ruleAtom EOF )
+            // PsiInternalComplexReconstrTestLanguage.g:202:2: iv_ruleAtom= ruleAtom EOF
             {
              markComposite(elementTypeProvider.getAtomElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAtom();
+            iv_ruleAtom=ruleAtom();
 
             state._fsp--;
 
+             current =iv_ruleAtom; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -505,30 +566,38 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAtom"
 
 
     // $ANTLR start "ruleAtom"
-    // PsiInternalComplexReconstrTestLanguage.g:186:1: ruleAtom : ( (lv_name_0_0= RULE_ID ) ) ;
-    public final void ruleAtom() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:208:1: ruleAtom returns [Boolean current=false] : ( (lv_name_0_0= RULE_ID ) ) ;
+    public final Boolean ruleAtom() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:186:9: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // PsiInternalComplexReconstrTestLanguage.g:187:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalComplexReconstrTestLanguage.g:209:1: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // PsiInternalComplexReconstrTestLanguage.g:210:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:187:2: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalComplexReconstrTestLanguage.g:188:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalComplexReconstrTestLanguage.g:210:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalComplexReconstrTestLanguage.g:211:3: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:188:3: (lv_name_0_0= RULE_ID )
-            // PsiInternalComplexReconstrTestLanguage.g:189:4: lv_name_0_0= RULE_ID
+            // PsiInternalComplexReconstrTestLanguage.g:211:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalComplexReconstrTestLanguage.g:212:4: lv_name_0_0= RULE_ID
             {
 
             				markLeaf(elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType());
             			
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
 
             				doneLeaf(lv_name_0_0);
             			
@@ -548,24 +617,30 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAtom"
 
 
     // $ANTLR start "entryRuleParens"
-    // PsiInternalComplexReconstrTestLanguage.g:201:1: entryRuleParens : ruleParens EOF ;
-    public final void entryRuleParens() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:230:1: entryRuleParens returns [Boolean current=false] : iv_ruleParens= ruleParens EOF ;
+    public final Boolean entryRuleParens() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleParens = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:201:16: ( ruleParens EOF )
-            // PsiInternalComplexReconstrTestLanguage.g:202:2: ruleParens EOF
+            // PsiInternalComplexReconstrTestLanguage.g:230:48: (iv_ruleParens= ruleParens EOF )
+            // PsiInternalComplexReconstrTestLanguage.g:231:2: iv_ruleParens= ruleParens EOF
             {
              markComposite(elementTypeProvider.getParensElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleParens();
+            iv_ruleParens=ruleParens();
 
             state._fsp--;
 
+             current =iv_ruleParens; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -577,24 +652,28 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleParens"
 
 
     // $ANTLR start "ruleParens"
-    // PsiInternalComplexReconstrTestLanguage.g:207:1: ruleParens : (otherlv_0= '(' ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) ;
-    public final void ruleParens() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:237:1: ruleParens returns [Boolean current=false] : (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) ;
+    public final Boolean ruleParens() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token lv_em_3_0=null;
+        Boolean this_Op_1 = null;
+
 
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:207:11: ( (otherlv_0= '(' ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) )
-            // PsiInternalComplexReconstrTestLanguage.g:208:2: (otherlv_0= '(' ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
+            // PsiInternalComplexReconstrTestLanguage.g:238:1: ( (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) )
+            // PsiInternalComplexReconstrTestLanguage.g:239:2: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:208:2: (otherlv_0= '(' ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
-            // PsiInternalComplexReconstrTestLanguage.g:209:3: otherlv_0= '(' ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )?
+            // PsiInternalComplexReconstrTestLanguage.g:239:2: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
+            // PsiInternalComplexReconstrTestLanguage.g:240:3: otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )?
             {
 
             			markLeaf(elementTypeProvider.getParens_LeftParenthesisKeyword_0ElementType());
@@ -607,11 +686,12 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
             			markComposite(elementTypeProvider.getParens_OpParserRuleCall_1ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_5);
-            ruleOp();
+            this_Op_1=ruleOp();
 
             state._fsp--;
 
 
+            			current = this_Op_1;
             			doneComposite();
             		
 
@@ -621,7 +701,7 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
             			doneLeaf(otherlv_2);
             		
-            // PsiInternalComplexReconstrTestLanguage.g:230:3: ( (lv_em_3_0= '!' ) )?
+            // PsiInternalComplexReconstrTestLanguage.g:262:3: ( (lv_em_3_0= '!' ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -630,10 +710,10 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalComplexReconstrTestLanguage.g:231:4: (lv_em_3_0= '!' )
+                    // PsiInternalComplexReconstrTestLanguage.g:263:4: (lv_em_3_0= '!' )
                     {
-                    // PsiInternalComplexReconstrTestLanguage.g:231:4: (lv_em_3_0= '!' )
-                    // PsiInternalComplexReconstrTestLanguage.g:232:5: lv_em_3_0= '!'
+                    // PsiInternalComplexReconstrTestLanguage.g:263:4: (lv_em_3_0= '!' )
+                    // PsiInternalComplexReconstrTestLanguage.g:264:5: lv_em_3_0= '!'
                     {
 
                     					markLeaf(elementTypeProvider.getParens_EmExclamationMarkKeyword_3_0ElementType());
@@ -641,6 +721,12 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
                     lv_em_3_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_em_3_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -664,24 +750,30 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleParens"
 
 
     // $ANTLR start "entryRuleTrickyG"
-    // PsiInternalComplexReconstrTestLanguage.g:245:1: entryRuleTrickyG : ruleTrickyG EOF ;
-    public final void entryRuleTrickyG() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:283:1: entryRuleTrickyG returns [Boolean current=false] : iv_ruleTrickyG= ruleTrickyG EOF ;
+    public final Boolean entryRuleTrickyG() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleTrickyG = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:245:17: ( ruleTrickyG EOF )
-            // PsiInternalComplexReconstrTestLanguage.g:246:2: ruleTrickyG EOF
+            // PsiInternalComplexReconstrTestLanguage.g:283:49: (iv_ruleTrickyG= ruleTrickyG EOF )
+            // PsiInternalComplexReconstrTestLanguage.g:284:2: iv_ruleTrickyG= ruleTrickyG EOF
             {
              markComposite(elementTypeProvider.getTrickyGElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleTrickyG();
+            iv_ruleTrickyG=ruleTrickyG();
 
             state._fsp--;
 
+             current =iv_ruleTrickyG; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -693,22 +785,26 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleTrickyG"
 
 
     // $ANTLR start "ruleTrickyG"
-    // PsiInternalComplexReconstrTestLanguage.g:251:1: ruleTrickyG : (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) ;
-    public final void ruleTrickyG() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:290:1: ruleTrickyG returns [Boolean current=false] : (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) ;
+    public final Boolean ruleTrickyG() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
+        Boolean lv_tree_1_0 = null;
+
 
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:251:12: ( (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) )
-            // PsiInternalComplexReconstrTestLanguage.g:252:2: (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
+            // PsiInternalComplexReconstrTestLanguage.g:291:1: ( (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) ) )
+            // PsiInternalComplexReconstrTestLanguage.g:292:2: (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:252:2: (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
-            // PsiInternalComplexReconstrTestLanguage.g:253:3: otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) )
+            // PsiInternalComplexReconstrTestLanguage.g:292:2: (otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
+            // PsiInternalComplexReconstrTestLanguage.g:293:3: otherlv_0= 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) )
             {
 
             			markLeaf(elementTypeProvider.getTrickyG_TGKeyword_0ElementType());
@@ -717,22 +813,26 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalComplexReconstrTestLanguage.g:260:3: ( (lv_tree_1_0= ruleTrickyG1 ) )
-            // PsiInternalComplexReconstrTestLanguage.g:261:4: (lv_tree_1_0= ruleTrickyG1 )
+            // PsiInternalComplexReconstrTestLanguage.g:300:3: ( (lv_tree_1_0= ruleTrickyG1 ) )
+            // PsiInternalComplexReconstrTestLanguage.g:301:4: (lv_tree_1_0= ruleTrickyG1 )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:261:4: (lv_tree_1_0= ruleTrickyG1 )
-            // PsiInternalComplexReconstrTestLanguage.g:262:5: lv_tree_1_0= ruleTrickyG1
+            // PsiInternalComplexReconstrTestLanguage.g:301:4: (lv_tree_1_0= ruleTrickyG1 )
+            // PsiInternalComplexReconstrTestLanguage.g:302:5: lv_tree_1_0= ruleTrickyG1
             {
 
             					markComposite(elementTypeProvider.getTrickyG_TreeTrickyG1ParserRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleTrickyG1();
+            lv_tree_1_0=ruleTrickyG1();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -753,24 +853,30 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleTrickyG"
 
 
     // $ANTLR start "entryRuleTrickyG1"
-    // PsiInternalComplexReconstrTestLanguage.g:275:1: entryRuleTrickyG1 : ruleTrickyG1 EOF ;
-    public final void entryRuleTrickyG1() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:319:1: entryRuleTrickyG1 returns [Boolean current=false] : iv_ruleTrickyG1= ruleTrickyG1 EOF ;
+    public final Boolean entryRuleTrickyG1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleTrickyG1 = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:275:18: ( ruleTrickyG1 EOF )
-            // PsiInternalComplexReconstrTestLanguage.g:276:2: ruleTrickyG1 EOF
+            // PsiInternalComplexReconstrTestLanguage.g:319:50: (iv_ruleTrickyG1= ruleTrickyG1 EOF )
+            // PsiInternalComplexReconstrTestLanguage.g:320:2: iv_ruleTrickyG1= ruleTrickyG1 EOF
             {
              markComposite(elementTypeProvider.getTrickyG1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleTrickyG1();
+            iv_ruleTrickyG1=ruleTrickyG1();
 
             state._fsp--;
 
+             current =iv_ruleTrickyG1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -782,24 +888,30 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleTrickyG1"
 
 
     // $ANTLR start "ruleTrickyG1"
-    // PsiInternalComplexReconstrTestLanguage.g:281:1: ruleTrickyG1 : (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' ) ;
-    public final void ruleTrickyG1() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:326:1: ruleTrickyG1 returns [Boolean current=false] : (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' ) ;
+    public final Boolean ruleTrickyG1() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
+        Boolean lv_vals_1_0 = null;
+
+        Boolean lv_vals_3_0 = null;
+
 
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:281:13: ( (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' ) )
-            // PsiInternalComplexReconstrTestLanguage.g:282:2: (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' )
+            // PsiInternalComplexReconstrTestLanguage.g:327:1: ( (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' ) )
+            // PsiInternalComplexReconstrTestLanguage.g:328:2: (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:282:2: (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' )
-            // PsiInternalComplexReconstrTestLanguage.g:283:3: otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']'
+            // PsiInternalComplexReconstrTestLanguage.g:328:2: (otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']' )
+            // PsiInternalComplexReconstrTestLanguage.g:329:3: otherlv_0= '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? otherlv_4= ']'
             {
 
             			markLeaf(elementTypeProvider.getTrickyG1_LeftSquareBracketKeyword_0ElementType());
@@ -808,7 +920,7 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalComplexReconstrTestLanguage.g:290:3: ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )?
+            // PsiInternalComplexReconstrTestLanguage.g:336:3: ( ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -817,24 +929,28 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalComplexReconstrTestLanguage.g:291:4: ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
+                    // PsiInternalComplexReconstrTestLanguage.g:337:4: ( (lv_vals_1_0= ruleTrickyG2 ) ) (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
                     {
-                    // PsiInternalComplexReconstrTestLanguage.g:291:4: ( (lv_vals_1_0= ruleTrickyG2 ) )
-                    // PsiInternalComplexReconstrTestLanguage.g:292:5: (lv_vals_1_0= ruleTrickyG2 )
+                    // PsiInternalComplexReconstrTestLanguage.g:337:4: ( (lv_vals_1_0= ruleTrickyG2 ) )
+                    // PsiInternalComplexReconstrTestLanguage.g:338:5: (lv_vals_1_0= ruleTrickyG2 )
                     {
-                    // PsiInternalComplexReconstrTestLanguage.g:292:5: (lv_vals_1_0= ruleTrickyG2 )
-                    // PsiInternalComplexReconstrTestLanguage.g:293:6: lv_vals_1_0= ruleTrickyG2
+                    // PsiInternalComplexReconstrTestLanguage.g:338:5: (lv_vals_1_0= ruleTrickyG2 )
+                    // PsiInternalComplexReconstrTestLanguage.g:339:6: lv_vals_1_0= ruleTrickyG2
                     {
 
                     						markComposite(elementTypeProvider.getTrickyG1_ValsTrickyG2ParserRuleCall_1_0_0ElementType());
                     					
                     pushFollow(FollowSets000.FOLLOW_9);
-                    ruleTrickyG2();
+                    lv_vals_1_0=ruleTrickyG2();
 
                     state._fsp--;
 
 
                     						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -842,7 +958,7 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
                     }
 
-                    // PsiInternalComplexReconstrTestLanguage.g:302:4: (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
+                    // PsiInternalComplexReconstrTestLanguage.g:352:4: (otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )*
                     loop5:
                     do {
                         int alt5=2;
@@ -855,7 +971,7 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalComplexReconstrTestLanguage.g:303:5: otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) )
+                    	    // PsiInternalComplexReconstrTestLanguage.g:353:5: otherlv_2= ',' ( (lv_vals_3_0= ruleTrickyG2 ) )
                     	    {
 
                     	    					markLeaf(elementTypeProvider.getTrickyG1_CommaKeyword_1_1_0ElementType());
@@ -864,22 +980,26 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
 
                     	    					doneLeaf(otherlv_2);
                     	    				
-                    	    // PsiInternalComplexReconstrTestLanguage.g:310:5: ( (lv_vals_3_0= ruleTrickyG2 ) )
-                    	    // PsiInternalComplexReconstrTestLanguage.g:311:6: (lv_vals_3_0= ruleTrickyG2 )
+                    	    // PsiInternalComplexReconstrTestLanguage.g:360:5: ( (lv_vals_3_0= ruleTrickyG2 ) )
+                    	    // PsiInternalComplexReconstrTestLanguage.g:361:6: (lv_vals_3_0= ruleTrickyG2 )
                     	    {
-                    	    // PsiInternalComplexReconstrTestLanguage.g:311:6: (lv_vals_3_0= ruleTrickyG2 )
-                    	    // PsiInternalComplexReconstrTestLanguage.g:312:7: lv_vals_3_0= ruleTrickyG2
+                    	    // PsiInternalComplexReconstrTestLanguage.g:361:6: (lv_vals_3_0= ruleTrickyG2 )
+                    	    // PsiInternalComplexReconstrTestLanguage.g:362:7: lv_vals_3_0= ruleTrickyG2
                     	    {
 
                     	    							markComposite(elementTypeProvider.getTrickyG1_ValsTrickyG2ParserRuleCall_1_1_1_0ElementType());
                     	    						
                     	    pushFollow(FollowSets000.FOLLOW_9);
-                    	    ruleTrickyG2();
+                    	    lv_vals_3_0=ruleTrickyG2();
 
                     	    state._fsp--;
 
 
                     	    							doneComposite();
+                    	    							if(!current) {
+                    	    								associateWithSemanticElement();
+                    	    								current = true;
+                    	    							}
                     	    						
 
                     	    }
@@ -922,24 +1042,30 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleTrickyG1"
 
 
     // $ANTLR start "entryRuleTrickyG2"
-    // PsiInternalComplexReconstrTestLanguage.g:334:1: entryRuleTrickyG2 : ruleTrickyG2 EOF ;
-    public final void entryRuleTrickyG2() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:388:1: entryRuleTrickyG2 returns [Boolean current=false] : iv_ruleTrickyG2= ruleTrickyG2 EOF ;
+    public final Boolean entryRuleTrickyG2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleTrickyG2 = null;
+
+
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:334:18: ( ruleTrickyG2 EOF )
-            // PsiInternalComplexReconstrTestLanguage.g:335:2: ruleTrickyG2 EOF
+            // PsiInternalComplexReconstrTestLanguage.g:388:50: (iv_ruleTrickyG2= ruleTrickyG2 EOF )
+            // PsiInternalComplexReconstrTestLanguage.g:389:2: iv_ruleTrickyG2= ruleTrickyG2 EOF
             {
              markComposite(elementTypeProvider.getTrickyG2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleTrickyG2();
+            iv_ruleTrickyG2=ruleTrickyG2();
 
             state._fsp--;
 
+             current =iv_ruleTrickyG2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -951,21 +1077,25 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleTrickyG2"
 
 
     // $ANTLR start "ruleTrickyG2"
-    // PsiInternalComplexReconstrTestLanguage.g:340:1: ruleTrickyG2 : ( ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) ;
-    public final void ruleTrickyG2() throws RecognitionException {
+    // PsiInternalComplexReconstrTestLanguage.g:395:1: ruleTrickyG2 returns [Boolean current=false] : (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) ;
+    public final Boolean ruleTrickyG2() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_val_1_0=null;
+        Boolean this_TrickyG1_0 = null;
+
 
         try {
-            // PsiInternalComplexReconstrTestLanguage.g:340:13: ( ( ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) )
-            // PsiInternalComplexReconstrTestLanguage.g:341:2: ( ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
+            // PsiInternalComplexReconstrTestLanguage.g:396:1: ( (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) ) )
+            // PsiInternalComplexReconstrTestLanguage.g:397:2: (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
             {
-            // PsiInternalComplexReconstrTestLanguage.g:341:2: ( ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
+            // PsiInternalComplexReconstrTestLanguage.g:397:2: (this_TrickyG1_0= ruleTrickyG1 | ( (lv_val_1_0= RULE_INT ) ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -983,35 +1113,42 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt7) {
                 case 1 :
-                    // PsiInternalComplexReconstrTestLanguage.g:342:3: ruleTrickyG1
+                    // PsiInternalComplexReconstrTestLanguage.g:398:3: this_TrickyG1_0= ruleTrickyG1
                     {
 
                     			markComposite(elementTypeProvider.getTrickyG2_TrickyG1ParserRuleCall_0ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleTrickyG1();
+                    this_TrickyG1_0=ruleTrickyG1();
 
                     state._fsp--;
 
 
+                    			current = this_TrickyG1_0;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalComplexReconstrTestLanguage.g:350:3: ( (lv_val_1_0= RULE_INT ) )
+                    // PsiInternalComplexReconstrTestLanguage.g:407:3: ( (lv_val_1_0= RULE_INT ) )
                     {
-                    // PsiInternalComplexReconstrTestLanguage.g:350:3: ( (lv_val_1_0= RULE_INT ) )
-                    // PsiInternalComplexReconstrTestLanguage.g:351:4: (lv_val_1_0= RULE_INT )
+                    // PsiInternalComplexReconstrTestLanguage.g:407:3: ( (lv_val_1_0= RULE_INT ) )
+                    // PsiInternalComplexReconstrTestLanguage.g:408:4: (lv_val_1_0= RULE_INT )
                     {
-                    // PsiInternalComplexReconstrTestLanguage.g:351:4: (lv_val_1_0= RULE_INT )
-                    // PsiInternalComplexReconstrTestLanguage.g:352:5: lv_val_1_0= RULE_INT
+                    // PsiInternalComplexReconstrTestLanguage.g:408:4: (lv_val_1_0= RULE_INT )
+                    // PsiInternalComplexReconstrTestLanguage.g:409:5: lv_val_1_0= RULE_INT
                     {
 
                     					markLeaf(elementTypeProvider.getTrickyG2_ValINTTerminalRuleCall_1_0ElementType());
                     				
                     lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_val_1_0);
                     				
@@ -1037,7 +1174,7 @@ public class PsiInternalComplexReconstrTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleTrickyG2"
 

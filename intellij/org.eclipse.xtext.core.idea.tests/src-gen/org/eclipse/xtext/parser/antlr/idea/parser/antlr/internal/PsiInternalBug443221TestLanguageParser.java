@@ -74,18 +74,24 @@ public class PsiInternalBug443221TestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalBug443221TestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalBug443221TestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalBug443221TestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalBug443221TestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalBug443221TestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalBug443221TestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -97,14 +103,16 @@ public class PsiInternalBug443221TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalBug443221TestLanguage.g:58:1: ruleModel : ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalBug443221TestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
         Token lv_name_2_0=null;
         Token otherlv_3=null;
@@ -115,18 +123,19 @@ public class PsiInternalBug443221TestLanguageParser extends AbstractPsiAntlrPars
         Token otherlv_8=null;
 
         try {
-            // PsiInternalBug443221TestLanguage.g:58:10: ( ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) )
-            // PsiInternalBug443221TestLanguage.g:59:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
+            // PsiInternalBug443221TestLanguage.g:60:1: ( ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) )
+            // PsiInternalBug443221TestLanguage.g:61:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
             {
-            // PsiInternalBug443221TestLanguage.g:59:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
-            // PsiInternalBug443221TestLanguage.g:60:3: () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign'
+            // PsiInternalBug443221TestLanguage.g:61:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
+            // PsiInternalBug443221TestLanguage.g:62:3: () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign'
             {
-            // PsiInternalBug443221TestLanguage.g:60:3: ()
-            // PsiInternalBug443221TestLanguage.g:61:4: 
+            // PsiInternalBug443221TestLanguage.g:62:3: ()
+            // PsiInternalBug443221TestLanguage.g:63:4: 
             {
 
             				precedeComposite(elementTypeProvider.getModel_ModelAction_0ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -138,16 +147,22 @@ public class PsiInternalBug443221TestLanguageParser extends AbstractPsiAntlrPars
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalBug443221TestLanguage.g:73:3: ( (lv_name_2_0= RULE_ID ) )
-            // PsiInternalBug443221TestLanguage.g:74:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalBug443221TestLanguage.g:76:3: ( (lv_name_2_0= RULE_ID ) )
+            // PsiInternalBug443221TestLanguage.g:77:4: (lv_name_2_0= RULE_ID )
             {
-            // PsiInternalBug443221TestLanguage.g:74:4: (lv_name_2_0= RULE_ID )
-            // PsiInternalBug443221TestLanguage.g:75:5: lv_name_2_0= RULE_ID
+            // PsiInternalBug443221TestLanguage.g:77:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalBug443221TestLanguage.g:78:5: lv_name_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_2_0ElementType());
             				
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_2_0);
             				
@@ -212,7 +227,7 @@ public class PsiInternalBug443221TestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 

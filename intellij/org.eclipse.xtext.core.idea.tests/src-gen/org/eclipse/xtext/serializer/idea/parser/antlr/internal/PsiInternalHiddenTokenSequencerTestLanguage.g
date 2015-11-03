@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,19 +66,25 @@ ruleModel:
 			lv_domainModel_0_0=ruleDomainModel
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleDomainModel
-entryRuleDomainModel:
+entryRuleDomainModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDomainModelElementType()); }
-	ruleDomainModel
+	iv_ruleDomainModel=ruleDomainModel
+	{ $current=$iv_ruleDomainModel.current; }
 	EOF;
 
 // Rule DomainModel
-ruleDomainModel:
+ruleDomainModel returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDomainModel_EntitiesKeyword_0ElementType());
@@ -93,6 +101,10 @@ ruleDomainModel:
 				lv_entities_1_0=ruleEntity
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -107,13 +119,15 @@ ruleDomainModel:
 ;
 
 //Entry rule entryRuleEntity
-entryRuleEntity:
+entryRuleEntity returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getEntityElementType()); }
-	ruleEntity
+	iv_ruleEntity=ruleEntity
+	{ $current=$iv_ruleEntity.current; }
 	EOF;
 
 // Rule Entity
-ruleEntity:
+ruleEntity returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -121,6 +135,12 @@ ruleEntity:
 					markLeaf(elementTypeProvider.getEntity_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_0_0);
 				}
@@ -132,6 +152,12 @@ ruleEntity:
 					markLeaf(elementTypeProvider.getEntity_DescriptionSTRINGTerminalRuleCall_1_0ElementType());
 				}
 				lv_description_1_0=RULE_STRING
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_description_1_0);
 				}

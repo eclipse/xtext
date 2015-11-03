@@ -7,37 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.psi.impl
 
-import com.google.common.base.Preconditions
 import com.google.inject.Inject
 import com.intellij.lang.ASTNode
 import com.intellij.psi.stubs.IStubElementType
 import com.intellij.util.IncorrectOperationException
+import org.eclipse.emf.ecore.EAttribute
+import org.eclipse.xtext.idea.nodemodel.ASTNodeExtension
 import org.eclipse.xtext.psi.PsiEObjectFactory
 import org.eclipse.xtext.psi.PsiNamedEObject
 import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub
-import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 
 class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiNamedEObjectStub<PsiE>> extends PsiEObjectImpl<PsiE, T> implements PsiNamedEObject {
+	
+	@Inject
+	extension ASTNodeExtension
 
 	@Inject
 	extension PsiEObjectFactory psiEObjectFactory
 
-	val IGrammarAwareElementType nameType
-
-	new(T stub, IStubElementType<T, PsiE> nodeType, IGrammarAwareElementType nameType) {
+	new(T stub, IStubElementType<T, PsiE> nodeType) {
 		super(stub, nodeType)
-		Preconditions.checkNotNull(nameType)
-		this.nameType = nameType
 	}
 
-	new(ASTNode node, IGrammarAwareElementType ... nameTypes) {
+	new(ASTNode node) {
 		super(node)
-		Preconditions.checkArgument(!nameTypes.empty)
-		this.nameType = nameTypes.findFirst [ nameType |
-			node.findChildByType(nameType) != null
-		]
 	}
 
 	override getNameIdentifier() {
@@ -63,10 +58,12 @@ class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiNamedEObjec
 
 	override PsiNamedEObject setName(String name) throws IncorrectOperationException {
 		val nameNode = findNameNode
-		if (nameNode == null) {
-			return this
-		}
-		if (nameType.grammarElement.terminalRuleCall) {
+		if (nameNode === null) return this
+		
+		val grammarElement = nameNode.grammarElement
+		if (grammarElement === null) return this
+		
+		if (grammarElement.terminalRuleCall) {
 			val newNameNode = name.createLeafIdentifier(nameNode)
 			nameNode.treeParent.replaceChild(nameNode, newNameNode)
 		} else {
@@ -74,16 +71,25 @@ class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiNamedEObjec
 			nameNode.replaceAllChildrenToChildrenOf(newNameNode)
 		}
 		this
+	} 
+	
+	protected def findNameNode() {
+		val nameFeature = nameFeature
+		if (nameFeature === null) return null
+
+		node.findNodesForFeature(nameFeature).head
 	}
 	
-	def protected findNameNode() {
-		node.findChildByType(nameType)
+	protected def getNameFeature() {
+		val feature = node.EClass?.getEStructuralFeature('name')
+		if (feature instanceof EAttribute && !feature.many && String.isAssignableFrom(feature.EType.instanceClass))
+			return feature
+
+		return null
 	}
 
 	override String toString() {
-		var StringBuilder builder = new StringBuilder('org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl')
-		builder.append("(").append(elementType).append(")")
-		return builder.toString()
+		'''org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(«elementType»:«findNameNode?.elementType ?: 'null'»)«IF class !== PsiNamedEObjectImpl»('anonymous')«ENDIF»'''
 	}
 
 }

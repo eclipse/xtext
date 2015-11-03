@@ -36,7 +36,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 		val element = file.getNamedElementAt('MyClass')
 		element.testFindUsages('''
 			primaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE)
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Type_NameValidIDParserRuleCall_2_0_3_0_ELEMENT_TYPE)('anonymous')
 			}
 			secondaryElements {
 				PsiClass:MyClass
@@ -60,7 +60,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 		val element = file.getNamedElementAt('MyClass')
 		element.testFindUsages('''
 			primaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE) {
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Type_NameValidIDParserRuleCall_2_0_3_0_ELEMENT_TYPE)('anonymous') {
 					MyClass (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
 						virtualFile : temp:///src/mypackage/MyClass2.xtend
 						navigationOffset : 42
@@ -99,7 +99,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 
 		file.getNamedElementAt('int x').testFindUsages('''
 			primaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE)
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Member_NameValidIDParserRuleCall_2_0_2_3_1_0_ELEMENT_TYPE)('anonymous')
 			}
 			secondaryElements {
 				PsiField:x {
@@ -136,7 +136,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 
 		file.getNamedElementAt('int y').testFindUsages('''
 			primaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE) {
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Member_NameValidIDParserRuleCall_2_0_2_3_1_0_ELEMENT_TYPE)('anonymous') {
 					y (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
 						virtualFile : temp:///src/mypackage/MyClass.xtend
 						navigationOffset : 128
@@ -184,7 +184,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 				PsiClass:MyClass
 			}
 			secondaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE)
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Type_NameValidIDParserRuleCall_2_0_3_0_ELEMENT_TYPE)('anonymous')
 			}
 		''')
 	}
@@ -218,7 +218,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 				}
 			}
 			secondaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE) {
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Type_NameValidIDParserRuleCall_2_0_3_0_ELEMENT_TYPE)('anonymous') {
 					MyClass (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
 						virtualFile : temp:///src/mypackage/MyClass2.xtend
 						navigationOffset : 42
@@ -254,7 +254,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 				}
 			}
 			secondaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE)
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Member_NameValidIDParserRuleCall_2_0_2_3_1_0_ELEMENT_TYPE)('anonymous')
 			}
 		''')
 	}
@@ -293,7 +293,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 				}
 			}
 			secondaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE) {
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Member_NameValidIDParserRuleCall_2_0_2_3_1_0_ELEMENT_TYPE)('anonymous') {
 					y (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
 						virtualFile : temp:///src/mypackage/MyClass.xtend
 						navigationOffset : 128
@@ -927,7 +927,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 		val namedElement = sourceFile.getNamedElementAt('operator_multiply') 
 		namedElement.testFindUsages('''
 			primaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE) {
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE:Member_NameFunctionIDParserRuleCall_2_1_5_4_0_0_ELEMENT_TYPE)('anonymous') {
 					* (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
 						virtualFile : temp:///src/mypackage/MyClass.xtend
 						navigationOffset : 144
@@ -990,7 +990,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 		val namedElement = sourceFile.getNamedElementAt('operator_multiply') 
 		namedElement.testFindUsages('''
 			primaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE) {
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE:Member_NameFunctionIDParserRuleCall_2_1_5_4_0_0_ELEMENT_TYPE)('anonymous') {
 					* (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
 						virtualFile : temp:///src/mypackage/MyClass.xtend
 						navigationOffset : 205
@@ -1045,7 +1045,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 		val namedElement = sourceFile.getNamedElementAt('operator_multiplyAssign') 
 		namedElement.testFindUsages('''
 			primaryElements {
-				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE) {
+				org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE:Member_NameFunctionIDParserRuleCall_2_1_5_4_0_0_ELEMENT_TYPE)('anonymous') {
 					*= (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {
 						virtualFile : temp:///src/mypackage/MyClass.xtend
 						navigationOffset : 356

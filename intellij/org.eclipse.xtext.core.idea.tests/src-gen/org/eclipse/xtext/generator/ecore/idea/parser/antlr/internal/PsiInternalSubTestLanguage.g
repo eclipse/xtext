@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleSubMain
-entryRuleSubMain:
+entryRuleSubMain returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSubMainElementType()); }
-	ruleSubMain
+	iv_ruleSubMain=ruleSubMain
+	{ $current=$iv_ruleSubMain.current; }
 	EOF;
 
 // Rule SubMain
-ruleSubMain:
+ruleSubMain returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSubMain_LeftCurlyBracketKeyword_0ElementType());
@@ -72,6 +74,10 @@ ruleSubMain:
 				lv_superMains_1_0=ruleSuperMain
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -90,6 +96,10 @@ ruleSubMain:
 				lv_another_3_0=ruleAnotherSuperMain
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?
@@ -97,13 +107,15 @@ ruleSubMain:
 ;
 
 //Entry rule entryRuleAnotherSuperMain
-entryRuleAnotherSuperMain:
+entryRuleAnotherSuperMain returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAnotherSuperMainElementType()); }
-	ruleAnotherSuperMain
+	iv_ruleAnotherSuperMain=ruleAnotherSuperMain
+	{ $current=$iv_ruleAnotherSuperMain.current; }
 	EOF;
 
 // Rule AnotherSuperMain
-ruleAnotherSuperMain:
+ruleAnotherSuperMain returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAnotherSuperMain_UpsKeyword_0ElementType());
@@ -119,6 +131,12 @@ ruleAnotherSuperMain:
 				}
 				lv_name_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_1_0);
 				}
 			)
@@ -127,13 +145,15 @@ ruleAnotherSuperMain:
 ;
 
 //Entry rule entryRuleSuperMain
-entryRuleSuperMain:
+entryRuleSuperMain returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSuperMainElementType()); }
-	ruleSuperMain
+	iv_ruleSuperMain=ruleSuperMain
+	{ $current=$iv_ruleSuperMain.current; }
 	EOF;
 
 // Rule SuperMain
-ruleSuperMain:
+ruleSuperMain returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSuperMain_SuperKeyword_0ElementType());
@@ -148,6 +168,12 @@ ruleSuperMain:
 					markLeaf(elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_1_0);
 				}

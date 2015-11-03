@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleModel:
 				lv_test_0_0=ruleTest
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -77,6 +83,10 @@ ruleModel:
 				lv_test_1_0=ruleParenthesis
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -84,13 +94,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleParenthesis
-entryRuleParenthesis:
+entryRuleParenthesis returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParenthesisElementType()); }
-	ruleParenthesis
+	iv_ruleParenthesis=ruleParenthesis
+	{ $current=$iv_ruleParenthesis.current; }
 	EOF;
 
 // Rule Parenthesis
-ruleParenthesis:
+ruleParenthesis returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getParenthesis_LeftParenthesisKeyword_0ElementType());
@@ -102,8 +114,9 @@ ruleParenthesis:
 		{
 			markComposite(elementTypeProvider.getParenthesis_TestParserRuleCall_1ElementType());
 		}
-		ruleTest
+		this_Test_1=ruleTest
 		{
+			$current = $this_Test_1.current;
 			doneComposite();
 		}
 		{
@@ -117,48 +130,55 @@ ruleParenthesis:
 ;
 
 //Entry rule entryRuleTest
-entryRuleTest:
+entryRuleTest returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTestElementType()); }
-	ruleTest
+	iv_ruleTest=ruleTest
+	{ $current=$iv_ruleTest.current; }
 	EOF;
 
 // Rule Test
-ruleTest:
+ruleTest returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getTest_TwoRequiredParserRuleCall_0ElementType());
 		}
-		ruleTwoRequired
+		this_TwoRequired_0=ruleTwoRequired
 		{
+			$current = $this_TwoRequired_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getTest_TwoOptionsParserRuleCall_1ElementType());
 		}
-		ruleTwoOptions
+		this_TwoOptions_1=ruleTwoOptions
 		{
+			$current = $this_TwoOptions_1.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getTest_IndentParserRuleCall_2ElementType());
 		}
-		ruleIndent
+		this_Indent_2=ruleIndent
 		{
+			$current = $this_Indent_2.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleTwoRequired
-entryRuleTwoRequired:
+entryRuleTwoRequired returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTwoRequiredElementType()); }
-	ruleTwoRequired
+	iv_ruleTwoRequired=ruleTwoRequired
+	{ $current=$iv_ruleTwoRequired.current; }
 	EOF;
 
 // Rule TwoRequired
-ruleTwoRequired:
+ruleTwoRequired returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getTwoRequired_TworequiredKeyword_0ElementType());
@@ -174,6 +194,12 @@ ruleTwoRequired:
 				}
 				lv_one_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_one_1_0);
 				}
 			)
@@ -185,6 +211,12 @@ ruleTwoRequired:
 				}
 				lv_two_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_two_2_0);
 				}
 			)
@@ -193,13 +225,15 @@ ruleTwoRequired:
 ;
 
 //Entry rule entryRuleTwoOptions
-entryRuleTwoOptions:
+entryRuleTwoOptions returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTwoOptionsElementType()); }
-	ruleTwoOptions
+	iv_ruleTwoOptions=ruleTwoOptions
+	{ $current=$iv_ruleTwoOptions.current; }
 	EOF;
 
 // Rule TwoOptions
-ruleTwoOptions:
+ruleTwoOptions returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getTwoOptions_TwooptionsKeyword_0ElementType());
@@ -224,6 +258,12 @@ ruleTwoOptions:
 						}
 						lv_one_2_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_one_2_0);
 						}
 					)
@@ -245,6 +285,12 @@ ruleTwoOptions:
 						}
 						lv_two_4_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_two_4_0);
 						}
 					)
@@ -255,13 +301,15 @@ ruleTwoOptions:
 ;
 
 //Entry rule entryRuleIndent
-entryRuleIndent:
+entryRuleIndent returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getIndentElementType()); }
-	ruleIndent
+	iv_ruleIndent=ruleIndent
+	{ $current=$iv_ruleIndent.current; }
 	EOF;
 
 // Rule Indent
-ruleIndent:
+ruleIndent returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getIndent_LeftCurlyBracketKeyword_0ElementType());
@@ -278,6 +326,10 @@ ruleIndent:
 				lv_req_1_0=ruleTwoRequired
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?
@@ -289,6 +341,10 @@ ruleIndent:
 				lv_opt_2_0=ruleTwoOptions
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?
@@ -300,6 +356,10 @@ ruleIndent:
 				lv_indent_3_0=ruleIndent
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*

@@ -49,18 +49,21 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getModel_ModelAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -76,6 +79,12 @@ ruleModel:
 					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_name_2_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_2_0);
 				}

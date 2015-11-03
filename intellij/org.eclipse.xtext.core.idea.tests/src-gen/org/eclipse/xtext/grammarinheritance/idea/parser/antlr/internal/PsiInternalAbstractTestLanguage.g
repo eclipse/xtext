@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleInheritedParserRule
-entryRuleInheritedParserRule:
+entryRuleInheritedParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getInheritedParserRuleElementType()); }
-	ruleInheritedParserRule
+	iv_ruleInheritedParserRule=ruleInheritedParserRule
+	{ $current=$iv_ruleInheritedParserRule.current; }
 	EOF;
 
 // Rule InheritedParserRule
-ruleInheritedParserRule:
+ruleInheritedParserRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getInheritedParserRule_ElementKeyword_0ElementType());
@@ -71,6 +73,12 @@ ruleInheritedParserRule:
 				}
 				lv_name_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_1_0);
 				}
 			)
@@ -79,13 +87,15 @@ ruleInheritedParserRule:
 ;
 
 //Entry rule entryRuleOverridableParserRule
-entryRuleOverridableParserRule:
+entryRuleOverridableParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getOverridableParserRuleElementType()); }
-	ruleOverridableParserRule
+	iv_ruleOverridableParserRule=ruleOverridableParserRule
+	{ $current=$iv_ruleOverridableParserRule.current; }
 	EOF;
 
 // Rule OverridableParserRule
-ruleOverridableParserRule:
+ruleOverridableParserRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getOverridableParserRule_ElementKeyword_0ElementType());
@@ -101,6 +111,12 @@ ruleOverridableParserRule:
 				}
 				lv_name_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_1_0);
 				}
 			)
@@ -109,13 +125,15 @@ ruleOverridableParserRule:
 ;
 
 //Entry rule entryRuleExtendableParserRule
-entryRuleExtendableParserRule:
+entryRuleExtendableParserRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getExtendableParserRuleElementType()); }
-	ruleExtendableParserRule
+	iv_ruleExtendableParserRule=ruleExtendableParserRule
+	{ $current=$iv_ruleExtendableParserRule.current; }
 	EOF;
 
 // Rule ExtendableParserRule
-ruleExtendableParserRule:
+ruleExtendableParserRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getExtendableParserRule_ElementKeyword_0ElementType());
@@ -130,6 +148,12 @@ ruleExtendableParserRule:
 					markLeaf(elementTypeProvider.getExtendableParserRule_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_1_0);
 				}

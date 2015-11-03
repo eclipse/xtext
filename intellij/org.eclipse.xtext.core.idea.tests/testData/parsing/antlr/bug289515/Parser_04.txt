@@ -1,4 +1,4 @@
 org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug289515TestLanguageFileImpl:a.bug289515testlanguage(0,3)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,3)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,3)
     PsiElement(Model_DigitFourKeyword_3_0_ELEMENT_TYPE)('4')(0,1)
     PsiElement(Model_ValueReverseSolidusPercentSignKeyword_3_1_0_ELEMENT_TYPE)('\%')(1,3)

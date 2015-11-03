@@ -49,18 +49,21 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleTree
-entryRuleTree:
+entryRuleTree returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTreeElementType()); }
-	ruleTree
+	iv_ruleTree=ruleTree
+	{ $current=$iv_ruleTree.current; }
 	EOF;
 
 // Rule Tree
-ruleTree:
+ruleTree returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getTree_TreeAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -71,6 +74,10 @@ ruleTree:
 				lv_nodes_1_0=ruleTreeNode
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -78,13 +85,15 @@ ruleTree:
 ;
 
 //Entry rule entryRuleTreeNode
-entryRuleTreeNode:
+entryRuleTreeNode returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTreeNodeElementType()); }
-	ruleTreeNode
+	iv_ruleTreeNode=ruleTreeNode
+	{ $current=$iv_ruleTreeNode.current; }
 	EOF;
 
 // Rule TreeNode
-ruleTreeNode:
+ruleTreeNode returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -92,6 +101,12 @@ ruleTreeNode:
 					markLeaf(elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_0_0);
 				}
@@ -113,6 +128,10 @@ ruleTreeNode:
 					lv_children_2_0=ruleTreeNode
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)*

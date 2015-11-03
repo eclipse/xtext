@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getModel_CaseKeyword_0ElementType());
@@ -81,6 +83,12 @@ ruleModel:
 				lv_value_2_0='CaSe'
 				{
 					doneLeaf(lv_value_2_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)

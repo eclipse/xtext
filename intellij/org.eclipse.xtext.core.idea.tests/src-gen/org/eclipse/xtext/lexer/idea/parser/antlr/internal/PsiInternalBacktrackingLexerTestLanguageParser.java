@@ -78,23 +78,30 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalBacktrackingLexerTestLanguage.g:59:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalBacktrackingLexerTestLanguage.g:59:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
         int entryRuleModel_StartIndex = input.index();
+        Boolean iv_ruleModel = null;
+
+
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 1) ) { return ; }
-            // PsiInternalBacktrackingLexerTestLanguage.g:59:15: ( ruleModel EOF )
-            // PsiInternalBacktrackingLexerTestLanguage.g:60:2: ruleModel EOF
+            if ( state.backtracking>0 && alreadyParsedRule(input, 1) ) { return current; }
+            // PsiInternalBacktrackingLexerTestLanguage.g:59:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalBacktrackingLexerTestLanguage.g:60:2: iv_ruleModel= ruleModel EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getModelElementType()); 
             }
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
-            if (state.failed) return ;
-            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleModel; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -106,28 +113,35 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
         finally {
             if ( state.backtracking>0 ) { memoize(input, 1, entryRuleModel_StartIndex); }
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalBacktrackingLexerTestLanguage.g:65:1: ruleModel : ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalBacktrackingLexerTestLanguage.g:66:1: ruleModel returns [Boolean current=false] : ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
         int ruleModel_StartIndex = input.index();
         Token lv_ycs_1_0=null;
         Token lv_ys_4_0=null;
         Token lv_as_5_0=null;
+        Boolean lv_enums_0_0 = null;
+
+        Boolean lv_abs_2_0 = null;
+
+        Boolean lv_xbs_3_0 = null;
+
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return ; }
-            // PsiInternalBacktrackingLexerTestLanguage.g:65:10: ( ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:66:2: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return current; }
+            // PsiInternalBacktrackingLexerTestLanguage.g:67:1: ( ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:68:2: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:66:2: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* )
-            // PsiInternalBacktrackingLexerTestLanguage.g:67:3: ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:68:2: ( ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )* )
+            // PsiInternalBacktrackingLexerTestLanguage.g:69:3: ( (lv_enums_0_0= ruleEnumName ) )* ( (lv_ycs_1_0= RULE_YC ) )* ( (lv_abs_2_0= ruleAb ) )* ( (lv_xbs_3_0= ruleXb ) )* ( (lv_ys_4_0= RULE_CHARY ) )* ( (lv_as_5_0= RULE_CHARA ) )*
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:67:3: ( (lv_enums_0_0= ruleEnumName ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:69:3: ( (lv_enums_0_0= ruleEnumName ) )*
             loop1:
             do {
                 int alt1=2;
@@ -140,10 +154,10 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:68:4: (lv_enums_0_0= ruleEnumName )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:70:4: (lv_enums_0_0= ruleEnumName )
             	    {
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:68:4: (lv_enums_0_0= ruleEnumName )
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:69:5: lv_enums_0_0= ruleEnumName
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:70:4: (lv_enums_0_0= ruleEnumName )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:71:5: lv_enums_0_0= ruleEnumName
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -151,13 +165,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
             	      				
             	    }
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleEnumName();
+            	    lv_enums_0_0=ruleEnumName();
 
             	    state._fsp--;
-            	    if (state.failed) return ;
+            	    if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      					doneComposite();
+            	      					if(!current) {
+            	      						associateWithSemanticElement();
+            	      						current = true;
+            	      					}
             	      				
             	    }
 
@@ -172,7 +190,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:78:3: ( (lv_ycs_1_0= RULE_YC ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:84:3: ( (lv_ycs_1_0= RULE_YC ) )*
             loop2:
             do {
                 int alt2=2;
@@ -185,17 +203,25 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:79:4: (lv_ycs_1_0= RULE_YC )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:85:4: (lv_ycs_1_0= RULE_YC )
             	    {
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:79:4: (lv_ycs_1_0= RULE_YC )
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:80:5: lv_ycs_1_0= RULE_YC
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:85:4: (lv_ycs_1_0= RULE_YC )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:86:5: lv_ycs_1_0= RULE_YC
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markLeaf(elementTypeProvider.getModel_YcsYcTerminalRuleCall_1_0ElementType());
             	      				
             	    }
-            	    lv_ycs_1_0=(Token)match(input,RULE_YC,FollowSets000.FOLLOW_4); if (state.failed) return ;
+            	    lv_ycs_1_0=(Token)match(input,RULE_YC,FollowSets000.FOLLOW_4); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      					if(!current) {
+            	      						associateWithSemanticElement();
+            	      						current = true;
+            	      					}
+            	      				
+            	    }
             	    if ( state.backtracking==0 ) {
 
             	      					doneLeaf(lv_ycs_1_0);
@@ -213,7 +239,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:89:3: ( (lv_abs_2_0= ruleAb ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:101:3: ( (lv_abs_2_0= ruleAb ) )*
             loop3:
             do {
                 int alt3=2;
@@ -232,10 +258,10 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:90:4: (lv_abs_2_0= ruleAb )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:102:4: (lv_abs_2_0= ruleAb )
             	    {
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:90:4: (lv_abs_2_0= ruleAb )
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:91:5: lv_abs_2_0= ruleAb
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:102:4: (lv_abs_2_0= ruleAb )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:103:5: lv_abs_2_0= ruleAb
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -243,13 +269,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
             	      				
             	    }
             	    pushFollow(FollowSets000.FOLLOW_5);
-            	    ruleAb();
+            	    lv_abs_2_0=ruleAb();
 
             	    state._fsp--;
-            	    if (state.failed) return ;
+            	    if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      					doneComposite();
+            	      					if(!current) {
+            	      						associateWithSemanticElement();
+            	      						current = true;
+            	      					}
             	      				
             	    }
 
@@ -264,7 +294,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:100:3: ( (lv_xbs_3_0= ruleXb ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:116:3: ( (lv_xbs_3_0= ruleXb ) )*
             loop4:
             do {
                 int alt4=2;
@@ -277,10 +307,10 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt4) {
             	case 1 :
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:101:4: (lv_xbs_3_0= ruleXb )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:117:4: (lv_xbs_3_0= ruleXb )
             	    {
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:101:4: (lv_xbs_3_0= ruleXb )
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:102:5: lv_xbs_3_0= ruleXb
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:117:4: (lv_xbs_3_0= ruleXb )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:118:5: lv_xbs_3_0= ruleXb
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -288,13 +318,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
             	      				
             	    }
             	    pushFollow(FollowSets000.FOLLOW_5);
-            	    ruleXb();
+            	    lv_xbs_3_0=ruleXb();
 
             	    state._fsp--;
-            	    if (state.failed) return ;
+            	    if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      					doneComposite();
+            	      					if(!current) {
+            	      						associateWithSemanticElement();
+            	      						current = true;
+            	      					}
             	      				
             	    }
 
@@ -309,7 +343,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:111:3: ( (lv_ys_4_0= RULE_CHARY ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:131:3: ( (lv_ys_4_0= RULE_CHARY ) )*
             loop5:
             do {
                 int alt5=2;
@@ -322,17 +356,25 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt5) {
             	case 1 :
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:112:4: (lv_ys_4_0= RULE_CHARY )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:132:4: (lv_ys_4_0= RULE_CHARY )
             	    {
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:112:4: (lv_ys_4_0= RULE_CHARY )
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:113:5: lv_ys_4_0= RULE_CHARY
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:132:4: (lv_ys_4_0= RULE_CHARY )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:133:5: lv_ys_4_0= RULE_CHARY
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markLeaf(elementTypeProvider.getModel_YsCharYTerminalRuleCall_4_0ElementType());
             	      				
             	    }
-            	    lv_ys_4_0=(Token)match(input,RULE_CHARY,FollowSets000.FOLLOW_6); if (state.failed) return ;
+            	    lv_ys_4_0=(Token)match(input,RULE_CHARY,FollowSets000.FOLLOW_6); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      					if(!current) {
+            	      						associateWithSemanticElement();
+            	      						current = true;
+            	      					}
+            	      				
+            	    }
             	    if ( state.backtracking==0 ) {
 
             	      					doneLeaf(lv_ys_4_0);
@@ -350,7 +392,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:122:3: ( (lv_as_5_0= RULE_CHARA ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:148:3: ( (lv_as_5_0= RULE_CHARA ) )*
             loop6:
             do {
                 int alt6=2;
@@ -363,17 +405,25 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
                 switch (alt6) {
             	case 1 :
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:123:4: (lv_as_5_0= RULE_CHARA )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:149:4: (lv_as_5_0= RULE_CHARA )
             	    {
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:123:4: (lv_as_5_0= RULE_CHARA )
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:124:5: lv_as_5_0= RULE_CHARA
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:149:4: (lv_as_5_0= RULE_CHARA )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:150:5: lv_as_5_0= RULE_CHARA
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      					markLeaf(elementTypeProvider.getModel_AsCharATerminalRuleCall_5_0ElementType());
             	      				
             	    }
-            	    lv_as_5_0=(Token)match(input,RULE_CHARA,FollowSets000.FOLLOW_7); if (state.failed) return ;
+            	    lv_as_5_0=(Token)match(input,RULE_CHARA,FollowSets000.FOLLOW_7); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      					if(!current) {
+            	      						associateWithSemanticElement();
+            	      						current = true;
+            	      					}
+            	      				
+            	    }
             	    if ( state.backtracking==0 ) {
 
             	      					doneLeaf(lv_as_5_0);
@@ -405,29 +455,36 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
         finally {
             if ( state.backtracking>0 ) { memoize(input, 2, ruleModel_StartIndex); }
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleAb"
-    // PsiInternalBacktrackingLexerTestLanguage.g:137:1: entryRuleAb : ruleAb EOF ;
-    public final void entryRuleAb() throws RecognitionException {
+    // PsiInternalBacktrackingLexerTestLanguage.g:169:1: entryRuleAb returns [Boolean current=false] : iv_ruleAb= ruleAb EOF ;
+    public final Boolean entryRuleAb() throws RecognitionException {
+        Boolean current = false;
         int entryRuleAb_StartIndex = input.index();
+        Boolean iv_ruleAb = null;
+
+
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return ; }
-            // PsiInternalBacktrackingLexerTestLanguage.g:137:12: ( ruleAb EOF )
-            // PsiInternalBacktrackingLexerTestLanguage.g:138:2: ruleAb EOF
+            if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return current; }
+            // PsiInternalBacktrackingLexerTestLanguage.g:169:44: (iv_ruleAb= ruleAb EOF )
+            // PsiInternalBacktrackingLexerTestLanguage.g:170:2: iv_ruleAb= ruleAb EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getAbElementType()); 
             }
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAb();
+            iv_ruleAb=ruleAb();
 
             state._fsp--;
-            if (state.failed) return ;
-            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAb; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -439,38 +496,47 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
         finally {
             if ( state.backtracking>0 ) { memoize(input, 3, entryRuleAb_StartIndex); }
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAb"
 
 
     // $ANTLR start "ruleAb"
-    // PsiInternalBacktrackingLexerTestLanguage.g:143:1: ruleAb : ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
-    public final void ruleAb() throws RecognitionException {
+    // PsiInternalBacktrackingLexerTestLanguage.g:176:1: ruleAb returns [Boolean current=false] : ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
+    public final Boolean ruleAb() throws RecognitionException {
+        Boolean current = false;
         int ruleAb_StartIndex = input.index();
         Token lv_x_0_0=null;
         Token lv_y_1_0=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return ; }
-            // PsiInternalBacktrackingLexerTestLanguage.g:143:7: ( ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:144:2: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return current; }
+            // PsiInternalBacktrackingLexerTestLanguage.g:177:1: ( ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:178:2: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:144:2: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:145:3: ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:178:2: ( ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:179:3: ( (lv_x_0_0= RULE_CHARA ) ) ( (lv_y_1_0= RULE_CHARB ) )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:145:3: ( (lv_x_0_0= RULE_CHARA ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:146:4: (lv_x_0_0= RULE_CHARA )
+            // PsiInternalBacktrackingLexerTestLanguage.g:179:3: ( (lv_x_0_0= RULE_CHARA ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:180:4: (lv_x_0_0= RULE_CHARA )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:146:4: (lv_x_0_0= RULE_CHARA )
-            // PsiInternalBacktrackingLexerTestLanguage.g:147:5: lv_x_0_0= RULE_CHARA
+            // PsiInternalBacktrackingLexerTestLanguage.g:180:4: (lv_x_0_0= RULE_CHARA )
+            // PsiInternalBacktrackingLexerTestLanguage.g:181:5: lv_x_0_0= RULE_CHARA
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf(elementTypeProvider.getAb_XCharATerminalRuleCall_0_0ElementType());
               				
             }
-            lv_x_0_0=(Token)match(input,RULE_CHARA,FollowSets000.FOLLOW_8); if (state.failed) return ;
+            lv_x_0_0=(Token)match(input,RULE_CHARA,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if(!current) {
+              						associateWithSemanticElement();
+              						current = true;
+              					}
+              				
+            }
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_x_0_0);
@@ -482,18 +548,26 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
             }
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:156:3: ( (lv_y_1_0= RULE_CHARB ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:157:4: (lv_y_1_0= RULE_CHARB )
+            // PsiInternalBacktrackingLexerTestLanguage.g:196:3: ( (lv_y_1_0= RULE_CHARB ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:197:4: (lv_y_1_0= RULE_CHARB )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:157:4: (lv_y_1_0= RULE_CHARB )
-            // PsiInternalBacktrackingLexerTestLanguage.g:158:5: lv_y_1_0= RULE_CHARB
+            // PsiInternalBacktrackingLexerTestLanguage.g:197:4: (lv_y_1_0= RULE_CHARB )
+            // PsiInternalBacktrackingLexerTestLanguage.g:198:5: lv_y_1_0= RULE_CHARB
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf(elementTypeProvider.getAb_YCharbTerminalRuleCall_1_0ElementType());
               				
             }
-            lv_y_1_0=(Token)match(input,RULE_CHARB,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            lv_y_1_0=(Token)match(input,RULE_CHARB,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if(!current) {
+              						associateWithSemanticElement();
+              						current = true;
+              					}
+              				
+            }
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_y_1_0);
@@ -519,29 +593,36 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
         finally {
             if ( state.backtracking>0 ) { memoize(input, 4, ruleAb_StartIndex); }
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAb"
 
 
     // $ANTLR start "entryRuleXb"
-    // PsiInternalBacktrackingLexerTestLanguage.g:171:1: entryRuleXb : ruleXb EOF ;
-    public final void entryRuleXb() throws RecognitionException {
+    // PsiInternalBacktrackingLexerTestLanguage.g:217:1: entryRuleXb returns [Boolean current=false] : iv_ruleXb= ruleXb EOF ;
+    public final Boolean entryRuleXb() throws RecognitionException {
+        Boolean current = false;
         int entryRuleXb_StartIndex = input.index();
+        Boolean iv_ruleXb = null;
+
+
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return ; }
-            // PsiInternalBacktrackingLexerTestLanguage.g:171:12: ( ruleXb EOF )
-            // PsiInternalBacktrackingLexerTestLanguage.g:172:2: ruleXb EOF
+            if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return current; }
+            // PsiInternalBacktrackingLexerTestLanguage.g:217:44: (iv_ruleXb= ruleXb EOF )
+            // PsiInternalBacktrackingLexerTestLanguage.g:218:2: iv_ruleXb= ruleXb EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getXbElementType()); 
             }
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleXb();
+            iv_ruleXb=ruleXb();
 
             state._fsp--;
-            if (state.failed) return ;
-            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleXb; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -553,38 +634,47 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
         finally {
             if ( state.backtracking>0 ) { memoize(input, 5, entryRuleXb_StartIndex); }
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleXb"
 
 
     // $ANTLR start "ruleXb"
-    // PsiInternalBacktrackingLexerTestLanguage.g:177:1: ruleXb : ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
-    public final void ruleXb() throws RecognitionException {
+    // PsiInternalBacktrackingLexerTestLanguage.g:224:1: ruleXb returns [Boolean current=false] : ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) ;
+    public final Boolean ruleXb() throws RecognitionException {
+        Boolean current = false;
         int ruleXb_StartIndex = input.index();
         Token lv_x_0_0=null;
         Token lv_y_1_0=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return ; }
-            // PsiInternalBacktrackingLexerTestLanguage.g:177:7: ( ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:178:2: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return current; }
+            // PsiInternalBacktrackingLexerTestLanguage.g:225:1: ( ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:226:2: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:178:2: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:179:3: ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:226:2: ( ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:227:3: ( (lv_x_0_0= RULE_CHARX ) ) ( (lv_y_1_0= RULE_CHARB ) )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:179:3: ( (lv_x_0_0= RULE_CHARX ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:180:4: (lv_x_0_0= RULE_CHARX )
+            // PsiInternalBacktrackingLexerTestLanguage.g:227:3: ( (lv_x_0_0= RULE_CHARX ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:228:4: (lv_x_0_0= RULE_CHARX )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:180:4: (lv_x_0_0= RULE_CHARX )
-            // PsiInternalBacktrackingLexerTestLanguage.g:181:5: lv_x_0_0= RULE_CHARX
+            // PsiInternalBacktrackingLexerTestLanguage.g:228:4: (lv_x_0_0= RULE_CHARX )
+            // PsiInternalBacktrackingLexerTestLanguage.g:229:5: lv_x_0_0= RULE_CHARX
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf(elementTypeProvider.getXb_XCharXTerminalRuleCall_0_0ElementType());
               				
             }
-            lv_x_0_0=(Token)match(input,RULE_CHARX,FollowSets000.FOLLOW_8); if (state.failed) return ;
+            lv_x_0_0=(Token)match(input,RULE_CHARX,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if(!current) {
+              						associateWithSemanticElement();
+              						current = true;
+              					}
+              				
+            }
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_x_0_0);
@@ -596,18 +686,26 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
 
             }
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:190:3: ( (lv_y_1_0= RULE_CHARB ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:191:4: (lv_y_1_0= RULE_CHARB )
+            // PsiInternalBacktrackingLexerTestLanguage.g:244:3: ( (lv_y_1_0= RULE_CHARB ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:245:4: (lv_y_1_0= RULE_CHARB )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:191:4: (lv_y_1_0= RULE_CHARB )
-            // PsiInternalBacktrackingLexerTestLanguage.g:192:5: lv_y_1_0= RULE_CHARB
+            // PsiInternalBacktrackingLexerTestLanguage.g:245:4: (lv_y_1_0= RULE_CHARB )
+            // PsiInternalBacktrackingLexerTestLanguage.g:246:5: lv_y_1_0= RULE_CHARB
             {
             if ( state.backtracking==0 ) {
 
               					markLeaf(elementTypeProvider.getXb_YCharbTerminalRuleCall_1_0ElementType());
               				
             }
-            lv_y_1_0=(Token)match(input,RULE_CHARB,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            lv_y_1_0=(Token)match(input,RULE_CHARB,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              					if(!current) {
+              						associateWithSemanticElement();
+              						current = true;
+              					}
+              				
+            }
             if ( state.backtracking==0 ) {
 
               					doneLeaf(lv_y_1_0);
@@ -633,24 +731,25 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
         finally {
             if ( state.backtracking>0 ) { memoize(input, 6, ruleXb_StartIndex); }
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleXb"
 
 
     // $ANTLR start "ruleEnumName"
-    // PsiInternalBacktrackingLexerTestLanguage.g:205:1: ruleEnumName : ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) ) ;
-    public final void ruleEnumName() throws RecognitionException {
+    // PsiInternalBacktrackingLexerTestLanguage.g:265:1: ruleEnumName returns [Boolean current=false] : ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) ) ;
+    public final Boolean ruleEnumName() throws RecognitionException {
+        Boolean current = false;
         int ruleEnumName_StartIndex = input.index();
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
 
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return ; }
-            // PsiInternalBacktrackingLexerTestLanguage.g:205:13: ( ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) ) )
-            // PsiInternalBacktrackingLexerTestLanguage.g:206:2: ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return current; }
+            // PsiInternalBacktrackingLexerTestLanguage.g:266:1: ( ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:267:2: ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) )
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:206:2: ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) )
+            // PsiInternalBacktrackingLexerTestLanguage.g:267:2: ( (enumLiteral_0= 'Abc' ) | (enumLiteral_1= 'Efg' ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -661,7 +760,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                 alt7=2;
             }
             else {
-                if (state.backtracking>0) {state.failed=true; return ;}
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 7, 0, input);
 
@@ -669,17 +768,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
             }
             switch (alt7) {
                 case 1 :
-                    // PsiInternalBacktrackingLexerTestLanguage.g:207:3: (enumLiteral_0= 'Abc' )
+                    // PsiInternalBacktrackingLexerTestLanguage.g:268:3: (enumLiteral_0= 'Abc' )
                     {
-                    // PsiInternalBacktrackingLexerTestLanguage.g:207:3: (enumLiteral_0= 'Abc' )
-                    // PsiInternalBacktrackingLexerTestLanguage.g:208:4: enumLiteral_0= 'Abc'
+                    // PsiInternalBacktrackingLexerTestLanguage.g:268:3: (enumLiteral_0= 'Abc' )
+                    // PsiInternalBacktrackingLexerTestLanguage.g:269:4: enumLiteral_0= 'Abc'
                     {
                     if ( state.backtracking==0 ) {
 
                       				markLeaf(elementTypeProvider.getEnumName_AbcEnumLiteralDeclaration_0ElementType());
                       			
                     }
-                    enumLiteral_0=(Token)match(input,12,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    enumLiteral_0=(Token)match(input,12,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				doneLeaf(enumLiteral_0);
@@ -692,17 +791,17 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
                     }
                     break;
                 case 2 :
-                    // PsiInternalBacktrackingLexerTestLanguage.g:217:3: (enumLiteral_1= 'Efg' )
+                    // PsiInternalBacktrackingLexerTestLanguage.g:278:3: (enumLiteral_1= 'Efg' )
                     {
-                    // PsiInternalBacktrackingLexerTestLanguage.g:217:3: (enumLiteral_1= 'Efg' )
-                    // PsiInternalBacktrackingLexerTestLanguage.g:218:4: enumLiteral_1= 'Efg'
+                    // PsiInternalBacktrackingLexerTestLanguage.g:278:3: (enumLiteral_1= 'Efg' )
+                    // PsiInternalBacktrackingLexerTestLanguage.g:279:4: enumLiteral_1= 'Efg'
                     {
                     if ( state.backtracking==0 ) {
 
                       				markLeaf(elementTypeProvider.getEnumName_EfgEnumLiteralDeclaration_1ElementType());
                       			
                     }
-                    enumLiteral_1=(Token)match(input,13,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                    enumLiteral_1=(Token)match(input,13,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				doneLeaf(enumLiteral_1);
@@ -728,7 +827,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
         finally {
             if ( state.backtracking>0 ) { memoize(input, 7, ruleEnumName_StartIndex); }
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleEnumName"
 

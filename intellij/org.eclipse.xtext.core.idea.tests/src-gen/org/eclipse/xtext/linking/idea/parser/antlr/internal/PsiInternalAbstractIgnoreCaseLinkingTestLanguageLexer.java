@@ -81,10 +81,10 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:131:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:131:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:155:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:155:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:131:11: ( '^' )?
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:155:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -93,7 +93,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:131:11: '^'
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:155:11: '^'
                     {
                     match('^'); 
 
@@ -111,7 +111,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:131:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:155:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -160,10 +160,10 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:133:10: ( ( '0' .. '9' )+ )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:133:12: ( '0' .. '9' )+
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:157:10: ( ( '0' .. '9' )+ )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:157:12: ( '0' .. '9' )+
             {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:133:12: ( '0' .. '9' )+
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:157:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -177,7 +177,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:133:13: '0' .. '9'
+            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:157:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -209,10 +209,10 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -230,10 +230,10 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -249,7 +249,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:21: '\\\\' .
+                    	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -257,7 +257,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -282,10 +282,10 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
                     }
                     break;
                 case 2 :
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -301,7 +301,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:54: '\\\\' .
+                    	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -309,7 +309,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:135:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:159:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -352,12 +352,12 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:137:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:137:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:161:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:161:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:137:24: ( options {greedy=false; } : . )*
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:161:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -382,7 +382,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:137:52: .
+            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:161:52: .
             	    {
             	    matchAny(); 
 
@@ -412,12 +412,12 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:139:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:139:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:163:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:163:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:139:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:163:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -430,7 +430,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:139:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:163:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -450,7 +450,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
                 }
             } while (true);
 
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:139:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:163:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -459,9 +459,9 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:139:41: ( '\\r' )? '\\n'
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:163:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:139:41: ( '\\r' )?
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:163:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -470,7 +470,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:139:41: '\\r'
+                            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:163:41: '\\r'
                             {
                             match('\r'); 
 
@@ -502,10 +502,10 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:141:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:141:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:165:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:165:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:141:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:165:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -559,8 +559,8 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageLexer extends Lexer
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:143:16: ( . )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:143:18: .
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:167:16: ( . )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:167:18: .
             {
             matchAny(); 
 

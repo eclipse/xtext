@@ -49,18 +49,21 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getModel_ModelAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -77,6 +80,12 @@ ruleModel:
 						markLeaf(elementTypeProvider.getModel_StringsSTRINGTerminalRuleCall_1_1_0ElementType());
 					}
 					lv_strings_2_0=RULE_STRING
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_strings_2_0);
 					}
@@ -106,6 +115,12 @@ ruleModel:
 						}
 						lv_keys_5_0=RULE_STRING
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_keys_5_0);
 						}
 					)
@@ -116,6 +131,12 @@ ruleModel:
 							markLeaf(elementTypeProvider.getModel_ValuesSTRINGTerminalRuleCall_2_1_1_0ElementType());
 						}
 						lv_values_6_0=RULE_STRING
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_values_6_0);
 						}
@@ -146,6 +167,10 @@ ruleModel:
 					lv_subModel_9_0=ruleSubModel
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -154,18 +179,21 @@ ruleModel:
 ;
 
 //Entry rule entryRuleSubModel
-entryRuleSubModel:
+entryRuleSubModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSubModelElementType()); }
-	ruleSubModel
+	iv_ruleSubModel=ruleSubModel
+	{ $current=$iv_ruleSubModel.current; }
 	EOF;
 
 // Rule SubModel
-ruleSubModel:
+ruleSubModel returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getSubModel_SubModelAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -189,6 +217,12 @@ ruleSubModel:
 						markLeaf(elementTypeProvider.getSubModel_StringsSTRINGTerminalRuleCall_1_2_0ElementType());
 					}
 					lv_strings_3_0=RULE_STRING
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_strings_3_0);
 					}

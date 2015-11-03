@@ -319,7 +319,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     String _entryRuleName_1 = this._grammarAccessExtensions.entryRuleName(it);
     _builder.append(_entryRuleName_1, "");
     _builder.append(" returns ");
-    String _compileEntryReturns = this.compileEntryReturns(it, options);
+    CharSequence _compileEntryReturns = this.compileEntryReturns(it, options);
     _builder.append(_compileEntryReturns, "");
     CharSequence _compileEntryInit = this.compileEntryInit(it, options);
     _builder.append(_compileEntryInit, "");
@@ -363,28 +363,20 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     return _builder.toString();
   }
   
-  protected String compileEntryReturns(final ParserRule it, final AntlrOptions options) {
-    String _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof ParserRule) {
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(it);
-        if (_isDatatypeRule) {
-          _matched=true;
-          _switchResult = "[String current=null]";
-        }
-      }
+  protected CharSequence compileEntryReturns(final ParserRule it, final AntlrOptions options) {
+    CharSequence _xifexpression = null;
+    boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(it);
+    if (_isDatatypeRule) {
+      _xifexpression = "[String current=null]";
+    } else {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("[");
+      String _currentType = this.getCurrentType();
+      _builder.append(_currentType, "");
+      _builder.append(" current=null]");
+      _xifexpression = _builder;
     }
-    if (!_matched) {
-      if (it instanceof ParserRule) {
-        _matched=true;
-        _switchResult = "[EObject current=null]";
-      }
-    }
-    if (!_matched) {
-      throw new IllegalStateException(("Unexpected rule: " + it));
-    }
-    return _switchResult;
+    return _xifexpression;
   }
   
   @Override
@@ -394,12 +386,13 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       if ((it instanceof ParserRule)) {
         boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
         boolean _not = (!_isPassCurrentIntoFragment);
-        String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not));
+        String _currentType = this.getCurrentType();
+        String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not), _currentType);
         _builder.append(_parameterList, "");
       }
     }
     _builder.append(" returns ");
-    String _compileReturns = this.compileReturns(it, options);
+    CharSequence _compileReturns = this.compileReturns(it, options);
     _builder.append(_compileReturns, "");
     _builder.newLineIfNotEmpty();
     _builder.append("@init {");
@@ -426,8 +419,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     return _builder.toString();
   }
   
-  protected String compileReturns(final AbstractRule it, final AntlrOptions options) {
-    String _switchResult = null;
+  protected CharSequence compileReturns(final AbstractRule it, final AntlrOptions options) {
+    CharSequence _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof EnumRule) {
@@ -437,7 +430,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     if (!_matched) {
       if (it instanceof ParserRule) {
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((ParserRule)it));
+        ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it));
+        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement);
         if (_isDatatypeRule) {
           _matched=true;
           _switchResult = "[AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]";
@@ -446,17 +440,28 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     if (!_matched) {
       if (it instanceof ParserRule) {
-        boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(it);
+        ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it));
+        boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(_originalElement);
         if (_isEObjectFragmentRule) {
           _matched=true;
-          _switchResult = "[EObject current=in_current]";
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("[");
+          String _currentType = this.getCurrentType();
+          _builder.append(_currentType, "");
+          _builder.append(" current=in_current]");
+          _switchResult = _builder;
         }
       }
     }
     if (!_matched) {
       if (it instanceof ParserRule) {
         _matched=true;
-        _switchResult = "[EObject current=null]";
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("[");
+        String _currentType = this.getCurrentType();
+        _builder.append(_currentType, "");
+        _builder.append(" current=null]");
+        _switchResult = _builder;
       }
     }
     if (!_matched) {
@@ -769,7 +774,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
         }
         if (!_matched) {
           if (rule instanceof ParserRule) {
-            boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((ParserRule)rule));
+            ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)rule));
+            boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement);
             if (_isDatatypeRule) {
               _matched=true;
             }

@@ -208,6 +208,10 @@ abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractAntlrGra
 		return false
 	}
 	
+	protected def getCurrentType() {
+		'EObject'
+	}
+	
 	dispatch override mustBeParenthesized(AbstractElement it) {
 		true
 	}

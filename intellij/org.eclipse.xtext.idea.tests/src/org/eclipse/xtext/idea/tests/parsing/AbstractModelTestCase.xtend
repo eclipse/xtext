@@ -12,7 +12,6 @@ import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.ModifiableRootModel
-import java.io.ByteArrayInputStream
 import java.io.IOException
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -22,9 +21,9 @@ import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
 import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.util.LazyStringInputStream
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
-import org.eclipse.xtext.util.LazyStringInputStream
 
 class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 
@@ -85,7 +84,7 @@ class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
 	}
 
 	def protected XtextResource getActualResource() {
-		xtextFile.resource as XtextResource
+		xtextFile.resource
 	}
 
 	def protected XtextResource createExpectedResource() {

@@ -1,9 +1,10 @@
 package org.eclipse.xtext.resource.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
-import org.eclipse.xtext.resource.idea.lang.LiveContainerBuilderIntegerationTestLanguageElementTypeProvider;
 import org.eclipse.xtext.resource.idea.lang.psi.impl.LiveContainerBuilderIntegerationTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.resource.idea.lang.LiveContainerBuilderIntegerationTestLanguageElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -25,17 +26,15 @@ public class LiveContainerBuilderIntegerationTestLanguageParserDefinition extend
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getModelElementType()) {
-			return new PsiEObjectImpl(node) {};
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getModelElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
-		if (elementType == elementTypeProvider.getModel_NameAssignmentElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		if (elementType == elementTypeProvider.getModel_NameIDTerminalRuleCall_0ElementType()) {
-			return new PsiEObjectImpl(node) {};
-		}
-		throw new java.lang.IllegalStateException("Unexpected element type: " + elementType);
+		return super.createElement(node);
 	}
 
 }

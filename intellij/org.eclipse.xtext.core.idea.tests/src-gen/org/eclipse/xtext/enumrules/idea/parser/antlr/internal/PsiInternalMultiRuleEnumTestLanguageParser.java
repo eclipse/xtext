@@ -73,18 +73,24 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalMultiRuleEnumTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalMultiRuleEnumTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalMultiRuleEnumTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalMultiRuleEnumTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalMultiRuleEnumTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalMultiRuleEnumTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -96,22 +102,30 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalMultiRuleEnumTestLanguage.g:58:1: ruleModel : (otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalMultiRuleEnumTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : (otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
+        Boolean lv_a_1_0 = null;
+
+        Boolean lv_b_2_0 = null;
+
+        Boolean lv_c_3_0 = null;
+
 
         try {
-            // PsiInternalMultiRuleEnumTestLanguage.g:58:10: ( (otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) ) ) )
-            // PsiInternalMultiRuleEnumTestLanguage.g:59:2: (otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:60:1: ( (otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) ) ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:61:2: (otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) ) )
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:59:2: (otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) ) )
-            // PsiInternalMultiRuleEnumTestLanguage.g:60:3: otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:61:2: (otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:62:3: otherlv_0= 'someEnum' ( (lv_a_1_0= ruleEnumRuleA ) ) ( (lv_b_2_0= ruleEnumRuleB ) ) ( (lv_c_3_0= ruleEnumRuleC ) )
             {
 
             			markLeaf(elementTypeProvider.getModel_SomeEnumKeyword_0ElementType());
@@ -120,22 +134,26 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalMultiRuleEnumTestLanguage.g:67:3: ( (lv_a_1_0= ruleEnumRuleA ) )
-            // PsiInternalMultiRuleEnumTestLanguage.g:68:4: (lv_a_1_0= ruleEnumRuleA )
+            // PsiInternalMultiRuleEnumTestLanguage.g:69:3: ( (lv_a_1_0= ruleEnumRuleA ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:70:4: (lv_a_1_0= ruleEnumRuleA )
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:68:4: (lv_a_1_0= ruleEnumRuleA )
-            // PsiInternalMultiRuleEnumTestLanguage.g:69:5: lv_a_1_0= ruleEnumRuleA
+            // PsiInternalMultiRuleEnumTestLanguage.g:70:4: (lv_a_1_0= ruleEnumRuleA )
+            // PsiInternalMultiRuleEnumTestLanguage.g:71:5: lv_a_1_0= ruleEnumRuleA
             {
 
             					markComposite(elementTypeProvider.getModel_AEnumRuleAEnumRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_4);
-            ruleEnumRuleA();
+            lv_a_1_0=ruleEnumRuleA();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -143,22 +161,26 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
 
             }
 
-            // PsiInternalMultiRuleEnumTestLanguage.g:78:3: ( (lv_b_2_0= ruleEnumRuleB ) )
-            // PsiInternalMultiRuleEnumTestLanguage.g:79:4: (lv_b_2_0= ruleEnumRuleB )
+            // PsiInternalMultiRuleEnumTestLanguage.g:84:3: ( (lv_b_2_0= ruleEnumRuleB ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:85:4: (lv_b_2_0= ruleEnumRuleB )
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:79:4: (lv_b_2_0= ruleEnumRuleB )
-            // PsiInternalMultiRuleEnumTestLanguage.g:80:5: lv_b_2_0= ruleEnumRuleB
+            // PsiInternalMultiRuleEnumTestLanguage.g:85:4: (lv_b_2_0= ruleEnumRuleB )
+            // PsiInternalMultiRuleEnumTestLanguage.g:86:5: lv_b_2_0= ruleEnumRuleB
             {
 
             					markComposite(elementTypeProvider.getModel_BEnumRuleBEnumRuleCall_2_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_5);
-            ruleEnumRuleB();
+            lv_b_2_0=ruleEnumRuleB();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -166,22 +188,26 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
 
             }
 
-            // PsiInternalMultiRuleEnumTestLanguage.g:89:3: ( (lv_c_3_0= ruleEnumRuleC ) )
-            // PsiInternalMultiRuleEnumTestLanguage.g:90:4: (lv_c_3_0= ruleEnumRuleC )
+            // PsiInternalMultiRuleEnumTestLanguage.g:99:3: ( (lv_c_3_0= ruleEnumRuleC ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:100:4: (lv_c_3_0= ruleEnumRuleC )
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:90:4: (lv_c_3_0= ruleEnumRuleC )
-            // PsiInternalMultiRuleEnumTestLanguage.g:91:5: lv_c_3_0= ruleEnumRuleC
+            // PsiInternalMultiRuleEnumTestLanguage.g:100:4: (lv_c_3_0= ruleEnumRuleC )
+            // PsiInternalMultiRuleEnumTestLanguage.g:101:5: lv_c_3_0= ruleEnumRuleC
             {
 
             					markComposite(elementTypeProvider.getModel_CEnumRuleCEnumRuleCall_3_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleEnumRuleC();
+            lv_c_3_0=ruleEnumRuleC();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -202,23 +228,25 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "ruleEnumRuleA"
-    // PsiInternalMultiRuleEnumTestLanguage.g:104:1: ruleEnumRuleA : ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'B' ) | (enumLiteral_2= 'C' ) ) ;
-    public final void ruleEnumRuleA() throws RecognitionException {
+    // PsiInternalMultiRuleEnumTestLanguage.g:118:1: ruleEnumRuleA returns [Boolean current=false] : ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'B' ) | (enumLiteral_2= 'C' ) ) ;
+    public final Boolean ruleEnumRuleA() throws RecognitionException {
+        Boolean current = false;
+
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
         Token enumLiteral_2=null;
 
         try {
-            // PsiInternalMultiRuleEnumTestLanguage.g:104:14: ( ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'B' ) | (enumLiteral_2= 'C' ) ) )
-            // PsiInternalMultiRuleEnumTestLanguage.g:105:2: ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'B' ) | (enumLiteral_2= 'C' ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:119:1: ( ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'B' ) | (enumLiteral_2= 'C' ) ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:120:2: ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'B' ) | (enumLiteral_2= 'C' ) )
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:105:2: ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'B' ) | (enumLiteral_2= 'C' ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:120:2: ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'B' ) | (enumLiteral_2= 'C' ) )
             int alt1=3;
             switch ( input.LA(1) ) {
             case 12:
@@ -245,10 +273,10 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
 
             switch (alt1) {
                 case 1 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:106:3: (enumLiteral_0= 'A' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:121:3: (enumLiteral_0= 'A' )
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:106:3: (enumLiteral_0= 'A' )
-                    // PsiInternalMultiRuleEnumTestLanguage.g:107:4: enumLiteral_0= 'A'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:121:3: (enumLiteral_0= 'A' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:122:4: enumLiteral_0= 'A'
                     {
 
                     				markLeaf(elementTypeProvider.getEnumRuleA_AEnumLiteralDeclaration_0ElementType());
@@ -264,10 +292,10 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 2 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:116:3: (enumLiteral_1= 'B' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:131:3: (enumLiteral_1= 'B' )
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:116:3: (enumLiteral_1= 'B' )
-                    // PsiInternalMultiRuleEnumTestLanguage.g:117:4: enumLiteral_1= 'B'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:131:3: (enumLiteral_1= 'B' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:132:4: enumLiteral_1= 'B'
                     {
 
                     				markLeaf(elementTypeProvider.getEnumRuleA_BEnumLiteralDeclaration_1ElementType());
@@ -283,10 +311,10 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 3 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:126:3: (enumLiteral_2= 'C' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:141:3: (enumLiteral_2= 'C' )
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:126:3: (enumLiteral_2= 'C' )
-                    // PsiInternalMultiRuleEnumTestLanguage.g:127:4: enumLiteral_2= 'C'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:141:3: (enumLiteral_2= 'C' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:142:4: enumLiteral_2= 'C'
                     {
 
                     				markLeaf(elementTypeProvider.getEnumRuleA_CEnumLiteralDeclaration_2ElementType());
@@ -314,23 +342,25 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleEnumRuleA"
 
 
     // $ANTLR start "ruleEnumRuleB"
-    // PsiInternalMultiRuleEnumTestLanguage.g:139:1: ruleEnumRuleB : ( (enumLiteral_0= 'C' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'E' ) ) ;
-    public final void ruleEnumRuleB() throws RecognitionException {
+    // PsiInternalMultiRuleEnumTestLanguage.g:154:1: ruleEnumRuleB returns [Boolean current=false] : ( (enumLiteral_0= 'C' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'E' ) ) ;
+    public final Boolean ruleEnumRuleB() throws RecognitionException {
+        Boolean current = false;
+
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
         Token enumLiteral_2=null;
 
         try {
-            // PsiInternalMultiRuleEnumTestLanguage.g:139:14: ( ( (enumLiteral_0= 'C' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'E' ) ) )
-            // PsiInternalMultiRuleEnumTestLanguage.g:140:2: ( (enumLiteral_0= 'C' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'E' ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:155:1: ( ( (enumLiteral_0= 'C' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'E' ) ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:156:2: ( (enumLiteral_0= 'C' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'E' ) )
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:140:2: ( (enumLiteral_0= 'C' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'E' ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:156:2: ( (enumLiteral_0= 'C' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'E' ) )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 14:
@@ -357,10 +387,10 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
 
             switch (alt2) {
                 case 1 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:141:3: (enumLiteral_0= 'C' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:157:3: (enumLiteral_0= 'C' )
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:141:3: (enumLiteral_0= 'C' )
-                    // PsiInternalMultiRuleEnumTestLanguage.g:142:4: enumLiteral_0= 'C'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:157:3: (enumLiteral_0= 'C' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:158:4: enumLiteral_0= 'C'
                     {
 
                     				markLeaf(elementTypeProvider.getEnumRuleB_CEnumLiteralDeclaration_0ElementType());
@@ -376,10 +406,10 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 2 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:151:3: (enumLiteral_1= 'D' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:167:3: (enumLiteral_1= 'D' )
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:151:3: (enumLiteral_1= 'D' )
-                    // PsiInternalMultiRuleEnumTestLanguage.g:152:4: enumLiteral_1= 'D'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:167:3: (enumLiteral_1= 'D' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:168:4: enumLiteral_1= 'D'
                     {
 
                     				markLeaf(elementTypeProvider.getEnumRuleB_DEnumLiteralDeclaration_1ElementType());
@@ -395,10 +425,10 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 3 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:161:3: (enumLiteral_2= 'E' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:177:3: (enumLiteral_2= 'E' )
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:161:3: (enumLiteral_2= 'E' )
-                    // PsiInternalMultiRuleEnumTestLanguage.g:162:4: enumLiteral_2= 'E'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:177:3: (enumLiteral_2= 'E' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:178:4: enumLiteral_2= 'E'
                     {
 
                     				markLeaf(elementTypeProvider.getEnumRuleB_EEnumLiteralDeclaration_2ElementType());
@@ -426,23 +456,25 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleEnumRuleB"
 
 
     // $ANTLR start "ruleEnumRuleC"
-    // PsiInternalMultiRuleEnumTestLanguage.g:174:1: ruleEnumRuleC : ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'B' ) ) ;
-    public final void ruleEnumRuleC() throws RecognitionException {
+    // PsiInternalMultiRuleEnumTestLanguage.g:190:1: ruleEnumRuleC returns [Boolean current=false] : ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'B' ) ) ;
+    public final Boolean ruleEnumRuleC() throws RecognitionException {
+        Boolean current = false;
+
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
         Token enumLiteral_2=null;
 
         try {
-            // PsiInternalMultiRuleEnumTestLanguage.g:174:14: ( ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'B' ) ) )
-            // PsiInternalMultiRuleEnumTestLanguage.g:175:2: ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'B' ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:191:1: ( ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'B' ) ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:192:2: ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'B' ) )
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:175:2: ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'B' ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:192:2: ( (enumLiteral_0= 'A' ) | (enumLiteral_1= 'D' ) | (enumLiteral_2= 'B' ) )
             int alt3=3;
             switch ( input.LA(1) ) {
             case 12:
@@ -469,10 +501,10 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
 
             switch (alt3) {
                 case 1 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:176:3: (enumLiteral_0= 'A' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:193:3: (enumLiteral_0= 'A' )
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:176:3: (enumLiteral_0= 'A' )
-                    // PsiInternalMultiRuleEnumTestLanguage.g:177:4: enumLiteral_0= 'A'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:193:3: (enumLiteral_0= 'A' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:194:4: enumLiteral_0= 'A'
                     {
 
                     				markLeaf(elementTypeProvider.getEnumRuleC_AEnumLiteralDeclaration_0ElementType());
@@ -488,10 +520,10 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 2 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:186:3: (enumLiteral_1= 'D' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:203:3: (enumLiteral_1= 'D' )
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:186:3: (enumLiteral_1= 'D' )
-                    // PsiInternalMultiRuleEnumTestLanguage.g:187:4: enumLiteral_1= 'D'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:203:3: (enumLiteral_1= 'D' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:204:4: enumLiteral_1= 'D'
                     {
 
                     				markLeaf(elementTypeProvider.getEnumRuleC_DEnumLiteralDeclaration_1ElementType());
@@ -507,10 +539,10 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 3 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:196:3: (enumLiteral_2= 'B' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:213:3: (enumLiteral_2= 'B' )
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:196:3: (enumLiteral_2= 'B' )
-                    // PsiInternalMultiRuleEnumTestLanguage.g:197:4: enumLiteral_2= 'B'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:213:3: (enumLiteral_2= 'B' )
+                    // PsiInternalMultiRuleEnumTestLanguage.g:214:4: enumLiteral_2= 'B'
                     {
 
                     				markLeaf(elementTypeProvider.getEnumRuleC_BEnumLiteralDeclaration_2ElementType());
@@ -538,7 +570,7 @@ public class PsiInternalMultiRuleEnumTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleEnumRuleC"
 

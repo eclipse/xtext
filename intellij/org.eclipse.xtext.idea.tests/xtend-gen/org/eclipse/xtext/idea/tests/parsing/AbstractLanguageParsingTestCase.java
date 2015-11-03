@@ -251,7 +251,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
             ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
             it.load(_byteArrayInputStream, null);
             PsiToEcoreAdapter _adapter = psiToEcoreTransformator.getAdapter();
-            _adapter.install(it);
+            _adapter.attachToEmfObject(it);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }

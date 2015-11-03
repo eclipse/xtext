@@ -62,8 +62,8 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_REAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractTestLanguage.g:141:11: ( RULE_INT '.' RULE_INT )
-            // PsiInternalAbstractTestLanguage.g:141:13: RULE_INT '.' RULE_INT
+            // PsiInternalAbstractTestLanguage.g:165:11: ( RULE_INT '.' RULE_INT )
+            // PsiInternalAbstractTestLanguage.g:165:13: RULE_INT '.' RULE_INT
             {
             mRULE_INT(); 
             match('.'); 
@@ -84,10 +84,10 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractTestLanguage.g:143:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalAbstractTestLanguage.g:143:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalAbstractTestLanguage.g:167:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalAbstractTestLanguage.g:167:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalAbstractTestLanguage.g:143:11: ( '^' )?
+            // PsiInternalAbstractTestLanguage.g:167:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -96,7 +96,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalAbstractTestLanguage.g:143:11: '^'
+                    // PsiInternalAbstractTestLanguage.g:167:11: '^'
                     {
                     match('^'); 
 
@@ -114,7 +114,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalAbstractTestLanguage.g:143:67: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalAbstractTestLanguage.g:167:67: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -161,10 +161,10 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_INT"
     public final void mRULE_INT() throws RecognitionException {
         try {
-            // PsiInternalAbstractTestLanguage.g:145:19: ( ( '0' .. '9' )+ )
-            // PsiInternalAbstractTestLanguage.g:145:21: ( '0' .. '9' )+
+            // PsiInternalAbstractTestLanguage.g:169:19: ( ( '0' .. '9' )+ )
+            // PsiInternalAbstractTestLanguage.g:169:21: ( '0' .. '9' )+
             {
-            // PsiInternalAbstractTestLanguage.g:145:21: ( '0' .. '9' )+
+            // PsiInternalAbstractTestLanguage.g:169:21: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -178,7 +178,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalAbstractTestLanguage.g:145:22: '0' .. '9'
+            	    // PsiInternalAbstractTestLanguage.g:169:22: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -208,10 +208,10 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractTestLanguage.g:147:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalAbstractTestLanguage.g:147:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalAbstractTestLanguage.g:171:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalAbstractTestLanguage.g:171:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalAbstractTestLanguage.g:147:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalAbstractTestLanguage.g:171:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -229,10 +229,10 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalAbstractTestLanguage.g:147:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalAbstractTestLanguage.g:171:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalAbstractTestLanguage.g:147:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalAbstractTestLanguage.g:171:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -248,7 +248,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalAbstractTestLanguage.g:147:21: '\\\\' .
+                    	    // PsiInternalAbstractTestLanguage.g:171:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -256,7 +256,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalAbstractTestLanguage.g:147:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalAbstractTestLanguage.g:171:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -281,10 +281,10 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalAbstractTestLanguage.g:147:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalAbstractTestLanguage.g:171:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalAbstractTestLanguage.g:147:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalAbstractTestLanguage.g:171:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -300,7 +300,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalAbstractTestLanguage.g:147:54: '\\\\' .
+                    	    // PsiInternalAbstractTestLanguage.g:171:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -308,7 +308,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalAbstractTestLanguage.g:147:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalAbstractTestLanguage.g:171:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -351,12 +351,12 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractTestLanguage.g:149:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalAbstractTestLanguage.g:149:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalAbstractTestLanguage.g:173:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalAbstractTestLanguage.g:173:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalAbstractTestLanguage.g:149:24: ( options {greedy=false; } : . )*
+            // PsiInternalAbstractTestLanguage.g:173:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -381,7 +381,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalAbstractTestLanguage.g:149:52: .
+            	    // PsiInternalAbstractTestLanguage.g:173:52: .
             	    {
             	    matchAny(); 
 
@@ -411,12 +411,12 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractTestLanguage.g:151:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalAbstractTestLanguage.g:151:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalAbstractTestLanguage.g:175:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalAbstractTestLanguage.g:175:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalAbstractTestLanguage.g:151:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalAbstractTestLanguage.g:175:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -429,7 +429,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalAbstractTestLanguage.g:151:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalAbstractTestLanguage.g:175:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -449,7 +449,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalAbstractTestLanguage.g:151:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalAbstractTestLanguage.g:175:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -458,9 +458,9 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalAbstractTestLanguage.g:151:41: ( '\\r' )? '\\n'
+                    // PsiInternalAbstractTestLanguage.g:175:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalAbstractTestLanguage.g:151:41: ( '\\r' )?
+                    // PsiInternalAbstractTestLanguage.g:175:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -469,7 +469,7 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalAbstractTestLanguage.g:151:41: '\\r'
+                            // PsiInternalAbstractTestLanguage.g:175:41: '\\r'
                             {
                             match('\r'); 
 
@@ -501,10 +501,10 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractTestLanguage.g:153:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalAbstractTestLanguage.g:153:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalAbstractTestLanguage.g:177:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalAbstractTestLanguage.g:177:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalAbstractTestLanguage.g:153:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalAbstractTestLanguage.g:177:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -558,8 +558,8 @@ public class PsiInternalAbstractTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalAbstractTestLanguage.g:155:16: ( . )
-            // PsiInternalAbstractTestLanguage.g:155:18: .
+            // PsiInternalAbstractTestLanguage.g:179:16: ( . )
+            // PsiInternalAbstractTestLanguage.g:179:18: .
             {
             matchAny(); 
 

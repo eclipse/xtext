@@ -76,18 +76,24 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleStatemachine"
-    // PsiInternalFowlerDslTestLanguage.g:52:1: entryRuleStatemachine : ruleStatemachine EOF ;
-    public final void entryRuleStatemachine() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:52:1: entryRuleStatemachine returns [Boolean current=false] : iv_ruleStatemachine= ruleStatemachine EOF ;
+    public final Boolean entryRuleStatemachine() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleStatemachine = null;
+
+
         try {
-            // PsiInternalFowlerDslTestLanguage.g:52:22: ( ruleStatemachine EOF )
-            // PsiInternalFowlerDslTestLanguage.g:53:2: ruleStatemachine EOF
+            // PsiInternalFowlerDslTestLanguage.g:52:54: (iv_ruleStatemachine= ruleStatemachine EOF )
+            // PsiInternalFowlerDslTestLanguage.g:53:2: iv_ruleStatemachine= ruleStatemachine EOF
             {
              markComposite(elementTypeProvider.getStatemachineElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleStatemachine();
+            iv_ruleStatemachine=ruleStatemachine();
 
             state._fsp--;
 
+             current =iv_ruleStatemachine; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -99,25 +105,33 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleStatemachine"
 
 
     // $ANTLR start "ruleStatemachine"
-    // PsiInternalFowlerDslTestLanguage.g:58:1: ruleStatemachine : (otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )* ) ;
-    public final void ruleStatemachine() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:59:1: ruleStatemachine returns [Boolean current=false] : (otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )* ) ;
+    public final Boolean ruleStatemachine() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_3=null;
         Token otherlv_5=null;
+        Boolean lv_events_1_0 = null;
+
+        Boolean lv_commands_4_0 = null;
+
+        Boolean lv_states_6_0 = null;
+
 
         try {
-            // PsiInternalFowlerDslTestLanguage.g:58:17: ( (otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )* ) )
-            // PsiInternalFowlerDslTestLanguage.g:59:2: (otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )* )
+            // PsiInternalFowlerDslTestLanguage.g:60:1: ( (otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )* ) )
+            // PsiInternalFowlerDslTestLanguage.g:61:2: (otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )* )
             {
-            // PsiInternalFowlerDslTestLanguage.g:59:2: (otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )* )
-            // PsiInternalFowlerDslTestLanguage.g:60:3: otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )*
+            // PsiInternalFowlerDslTestLanguage.g:61:2: (otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )* )
+            // PsiInternalFowlerDslTestLanguage.g:62:3: otherlv_0= 'events' ( (lv_events_1_0= ruleEvent ) )* otherlv_2= 'end' otherlv_3= 'commands' ( (lv_commands_4_0= ruleCommand ) )* otherlv_5= 'end' ( (lv_states_6_0= ruleState ) )*
             {
 
             			markLeaf(elementTypeProvider.getStatemachine_EventsKeyword_0ElementType());
@@ -126,7 +140,7 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalFowlerDslTestLanguage.g:67:3: ( (lv_events_1_0= ruleEvent ) )*
+            // PsiInternalFowlerDslTestLanguage.g:69:3: ( (lv_events_1_0= ruleEvent ) )*
             loop1:
             do {
                 int alt1=2;
@@ -139,21 +153,25 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalFowlerDslTestLanguage.g:68:4: (lv_events_1_0= ruleEvent )
+            	    // PsiInternalFowlerDslTestLanguage.g:70:4: (lv_events_1_0= ruleEvent )
             	    {
-            	    // PsiInternalFowlerDslTestLanguage.g:68:4: (lv_events_1_0= ruleEvent )
-            	    // PsiInternalFowlerDslTestLanguage.g:69:5: lv_events_1_0= ruleEvent
+            	    // PsiInternalFowlerDslTestLanguage.g:70:4: (lv_events_1_0= ruleEvent )
+            	    // PsiInternalFowlerDslTestLanguage.g:71:5: lv_events_1_0= ruleEvent
             	    {
 
             	    					markComposite(elementTypeProvider.getStatemachine_EventsEventParserRuleCall_1_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleEvent();
+            	    lv_events_1_0=ruleEvent();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -181,7 +199,7 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             			doneLeaf(otherlv_3);
             		
-            // PsiInternalFowlerDslTestLanguage.g:92:3: ( (lv_commands_4_0= ruleCommand ) )*
+            // PsiInternalFowlerDslTestLanguage.g:98:3: ( (lv_commands_4_0= ruleCommand ) )*
             loop2:
             do {
                 int alt2=2;
@@ -194,21 +212,25 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalFowlerDslTestLanguage.g:93:4: (lv_commands_4_0= ruleCommand )
+            	    // PsiInternalFowlerDslTestLanguage.g:99:4: (lv_commands_4_0= ruleCommand )
             	    {
-            	    // PsiInternalFowlerDslTestLanguage.g:93:4: (lv_commands_4_0= ruleCommand )
-            	    // PsiInternalFowlerDslTestLanguage.g:94:5: lv_commands_4_0= ruleCommand
+            	    // PsiInternalFowlerDslTestLanguage.g:99:4: (lv_commands_4_0= ruleCommand )
+            	    // PsiInternalFowlerDslTestLanguage.g:100:5: lv_commands_4_0= ruleCommand
             	    {
 
             	    					markComposite(elementTypeProvider.getStatemachine_CommandsCommandParserRuleCall_4_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_5);
-            	    ruleCommand();
+            	    lv_commands_4_0=ruleCommand();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -229,7 +251,7 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             			doneLeaf(otherlv_5);
             		
-            // PsiInternalFowlerDslTestLanguage.g:110:3: ( (lv_states_6_0= ruleState ) )*
+            // PsiInternalFowlerDslTestLanguage.g:120:3: ( (lv_states_6_0= ruleState ) )*
             loop3:
             do {
                 int alt3=2;
@@ -242,21 +264,25 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalFowlerDslTestLanguage.g:111:4: (lv_states_6_0= ruleState )
+            	    // PsiInternalFowlerDslTestLanguage.g:121:4: (lv_states_6_0= ruleState )
             	    {
-            	    // PsiInternalFowlerDslTestLanguage.g:111:4: (lv_states_6_0= ruleState )
-            	    // PsiInternalFowlerDslTestLanguage.g:112:5: lv_states_6_0= ruleState
+            	    // PsiInternalFowlerDslTestLanguage.g:121:4: (lv_states_6_0= ruleState )
+            	    // PsiInternalFowlerDslTestLanguage.g:122:5: lv_states_6_0= ruleState
             	    {
 
             	    					markComposite(elementTypeProvider.getStatemachine_StatesStateParserRuleCall_6_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_6);
-            	    ruleState();
+            	    lv_states_6_0=ruleState();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -283,24 +309,30 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleStatemachine"
 
 
     // $ANTLR start "entryRuleEvent"
-    // PsiInternalFowlerDslTestLanguage.g:125:1: entryRuleEvent : ruleEvent EOF ;
-    public final void entryRuleEvent() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:139:1: entryRuleEvent returns [Boolean current=false] : iv_ruleEvent= ruleEvent EOF ;
+    public final Boolean entryRuleEvent() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleEvent = null;
+
+
         try {
-            // PsiInternalFowlerDslTestLanguage.g:125:15: ( ruleEvent EOF )
-            // PsiInternalFowlerDslTestLanguage.g:126:2: ruleEvent EOF
+            // PsiInternalFowlerDslTestLanguage.g:139:47: (iv_ruleEvent= ruleEvent EOF )
+            // PsiInternalFowlerDslTestLanguage.g:140:2: iv_ruleEvent= ruleEvent EOF
             {
              markComposite(elementTypeProvider.getEventElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleEvent();
+            iv_ruleEvent=ruleEvent();
 
             state._fsp--;
 
+             current =iv_ruleEvent; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -312,26 +344,28 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleEvent"
 
 
     // $ANTLR start "ruleEvent"
-    // PsiInternalFowlerDslTestLanguage.g:131:1: ruleEvent : ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) ) ;
-    public final void ruleEvent() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:146:1: ruleEvent returns [Boolean current=false] : ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) ) ;
+    public final Boolean ruleEvent() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_resetting_0_0=null;
         Token lv_name_1_0=null;
         Token lv_code_2_0=null;
 
         try {
-            // PsiInternalFowlerDslTestLanguage.g:131:10: ( ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) ) )
-            // PsiInternalFowlerDslTestLanguage.g:132:2: ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) )
+            // PsiInternalFowlerDslTestLanguage.g:147:1: ( ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) ) )
+            // PsiInternalFowlerDslTestLanguage.g:148:2: ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) )
             {
-            // PsiInternalFowlerDslTestLanguage.g:132:2: ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) )
-            // PsiInternalFowlerDslTestLanguage.g:133:3: ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:148:2: ( ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) ) )
+            // PsiInternalFowlerDslTestLanguage.g:149:3: ( (lv_resetting_0_0= 'resetting' ) )? ( (lv_name_1_0= RULE_ID ) ) ( (lv_code_2_0= RULE_ID ) )
             {
-            // PsiInternalFowlerDslTestLanguage.g:133:3: ( (lv_resetting_0_0= 'resetting' ) )?
+            // PsiInternalFowlerDslTestLanguage.g:149:3: ( (lv_resetting_0_0= 'resetting' ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -340,10 +374,10 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalFowlerDslTestLanguage.g:134:4: (lv_resetting_0_0= 'resetting' )
+                    // PsiInternalFowlerDslTestLanguage.g:150:4: (lv_resetting_0_0= 'resetting' )
                     {
-                    // PsiInternalFowlerDslTestLanguage.g:134:4: (lv_resetting_0_0= 'resetting' )
-                    // PsiInternalFowlerDslTestLanguage.g:135:5: lv_resetting_0_0= 'resetting'
+                    // PsiInternalFowlerDslTestLanguage.g:150:4: (lv_resetting_0_0= 'resetting' )
+                    // PsiInternalFowlerDslTestLanguage.g:151:5: lv_resetting_0_0= 'resetting'
                     {
 
                     					markLeaf(elementTypeProvider.getEvent_ResettingResettingKeyword_0_0ElementType());
@@ -351,6 +385,12 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
                     lv_resetting_0_0=(Token)match(input,14,FollowSets000.FOLLOW_7); 
 
                     					doneLeaf(lv_resetting_0_0);
+                    				
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -361,16 +401,22 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalFowlerDslTestLanguage.g:144:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalFowlerDslTestLanguage.g:145:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:166:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:167:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalFowlerDslTestLanguage.g:145:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalFowlerDslTestLanguage.g:146:5: lv_name_1_0= RULE_ID
+            // PsiInternalFowlerDslTestLanguage.g:167:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:168:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getEvent_NameIDTerminalRuleCall_1_0ElementType());
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_1_0);
             				
@@ -380,16 +426,22 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalFowlerDslTestLanguage.g:155:3: ( (lv_code_2_0= RULE_ID ) )
-            // PsiInternalFowlerDslTestLanguage.g:156:4: (lv_code_2_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:183:3: ( (lv_code_2_0= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:184:4: (lv_code_2_0= RULE_ID )
             {
-            // PsiInternalFowlerDslTestLanguage.g:156:4: (lv_code_2_0= RULE_ID )
-            // PsiInternalFowlerDslTestLanguage.g:157:5: lv_code_2_0= RULE_ID
+            // PsiInternalFowlerDslTestLanguage.g:184:4: (lv_code_2_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:185:5: lv_code_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getEvent_CodeIDTerminalRuleCall_2_0ElementType());
             				
             lv_code_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_code_2_0);
             				
@@ -412,24 +464,30 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleEvent"
 
 
     // $ANTLR start "entryRuleCommand"
-    // PsiInternalFowlerDslTestLanguage.g:170:1: entryRuleCommand : ruleCommand EOF ;
-    public final void entryRuleCommand() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:204:1: entryRuleCommand returns [Boolean current=false] : iv_ruleCommand= ruleCommand EOF ;
+    public final Boolean entryRuleCommand() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleCommand = null;
+
+
         try {
-            // PsiInternalFowlerDslTestLanguage.g:170:17: ( ruleCommand EOF )
-            // PsiInternalFowlerDslTestLanguage.g:171:2: ruleCommand EOF
+            // PsiInternalFowlerDslTestLanguage.g:204:49: (iv_ruleCommand= ruleCommand EOF )
+            // PsiInternalFowlerDslTestLanguage.g:205:2: iv_ruleCommand= ruleCommand EOF
             {
              markComposite(elementTypeProvider.getCommandElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleCommand();
+            iv_ruleCommand=ruleCommand();
 
             state._fsp--;
 
+             current =iv_ruleCommand; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -441,34 +499,42 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleCommand"
 
 
     // $ANTLR start "ruleCommand"
-    // PsiInternalFowlerDslTestLanguage.g:176:1: ruleCommand : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) ) ;
-    public final void ruleCommand() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:211:1: ruleCommand returns [Boolean current=false] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) ) ;
+    public final Boolean ruleCommand() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
         Token lv_code_1_0=null;
 
         try {
-            // PsiInternalFowlerDslTestLanguage.g:176:12: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) ) )
-            // PsiInternalFowlerDslTestLanguage.g:177:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) )
+            // PsiInternalFowlerDslTestLanguage.g:212:1: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) ) )
+            // PsiInternalFowlerDslTestLanguage.g:213:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) )
             {
-            // PsiInternalFowlerDslTestLanguage.g:177:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) )
-            // PsiInternalFowlerDslTestLanguage.g:178:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:213:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) ) )
+            // PsiInternalFowlerDslTestLanguage.g:214:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_code_1_0= RULE_ID ) )
             {
-            // PsiInternalFowlerDslTestLanguage.g:178:3: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalFowlerDslTestLanguage.g:179:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:214:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:215:4: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalFowlerDslTestLanguage.g:179:4: (lv_name_0_0= RULE_ID )
-            // PsiInternalFowlerDslTestLanguage.g:180:5: lv_name_0_0= RULE_ID
+            // PsiInternalFowlerDslTestLanguage.g:215:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:216:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getCommand_NameIDTerminalRuleCall_0_0ElementType());
             				
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_0_0);
             				
@@ -478,16 +544,22 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalFowlerDslTestLanguage.g:189:3: ( (lv_code_1_0= RULE_ID ) )
-            // PsiInternalFowlerDslTestLanguage.g:190:4: (lv_code_1_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:231:3: ( (lv_code_1_0= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:232:4: (lv_code_1_0= RULE_ID )
             {
-            // PsiInternalFowlerDslTestLanguage.g:190:4: (lv_code_1_0= RULE_ID )
-            // PsiInternalFowlerDslTestLanguage.g:191:5: lv_code_1_0= RULE_ID
+            // PsiInternalFowlerDslTestLanguage.g:232:4: (lv_code_1_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:233:5: lv_code_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getCommand_CodeIDTerminalRuleCall_1_0ElementType());
             				
             lv_code_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_code_1_0);
             				
@@ -510,24 +582,30 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleCommand"
 
 
     // $ANTLR start "entryRuleState"
-    // PsiInternalFowlerDslTestLanguage.g:204:1: entryRuleState : ruleState EOF ;
-    public final void entryRuleState() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:252:1: entryRuleState returns [Boolean current=false] : iv_ruleState= ruleState EOF ;
+    public final Boolean entryRuleState() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleState = null;
+
+
         try {
-            // PsiInternalFowlerDslTestLanguage.g:204:15: ( ruleState EOF )
-            // PsiInternalFowlerDslTestLanguage.g:205:2: ruleState EOF
+            // PsiInternalFowlerDslTestLanguage.g:252:47: (iv_ruleState= ruleState EOF )
+            // PsiInternalFowlerDslTestLanguage.g:253:2: iv_ruleState= ruleState EOF
             {
              markComposite(elementTypeProvider.getStateElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleState();
+            iv_ruleState=ruleState();
 
             state._fsp--;
 
+             current =iv_ruleState; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -539,14 +617,16 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleState"
 
 
     // $ANTLR start "ruleState"
-    // PsiInternalFowlerDslTestLanguage.g:210:1: ruleState : (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end' ) ;
-    public final void ruleState() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:259:1: ruleState returns [Boolean current=false] : (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end' ) ;
+    public final Boolean ruleState() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
         Token otherlv_2=null;
@@ -554,13 +634,15 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         Token otherlv_4=null;
         Token otherlv_5=null;
         Token otherlv_7=null;
+        Boolean lv_transitions_6_0 = null;
+
 
         try {
-            // PsiInternalFowlerDslTestLanguage.g:210:10: ( (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end' ) )
-            // PsiInternalFowlerDslTestLanguage.g:211:2: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end' )
+            // PsiInternalFowlerDslTestLanguage.g:260:1: ( (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end' ) )
+            // PsiInternalFowlerDslTestLanguage.g:261:2: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end' )
             {
-            // PsiInternalFowlerDslTestLanguage.g:211:2: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end' )
-            // PsiInternalFowlerDslTestLanguage.g:212:3: otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end'
+            // PsiInternalFowlerDslTestLanguage.g:261:2: (otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end' )
+            // PsiInternalFowlerDslTestLanguage.g:262:3: otherlv_0= 'state' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )? ( (lv_transitions_6_0= ruleTransition ) )* otherlv_7= 'end'
             {
 
             			markLeaf(elementTypeProvider.getState_StateKeyword_0ElementType());
@@ -569,16 +651,22 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalFowlerDslTestLanguage.g:219:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalFowlerDslTestLanguage.g:220:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:269:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:270:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalFowlerDslTestLanguage.g:220:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalFowlerDslTestLanguage.g:221:5: lv_name_1_0= RULE_ID
+            // PsiInternalFowlerDslTestLanguage.g:270:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:271:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getState_NameIDTerminalRuleCall_1_0ElementType());
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_1_0);
             				
@@ -588,7 +676,7 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalFowlerDslTestLanguage.g:230:3: (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )?
+            // PsiInternalFowlerDslTestLanguage.g:286:3: (otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}' )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -597,7 +685,7 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalFowlerDslTestLanguage.g:231:4: otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}'
+                    // PsiInternalFowlerDslTestLanguage.g:287:4: otherlv_2= 'actions' otherlv_3= '{' ( (otherlv_4= RULE_ID ) )+ otherlv_5= '}'
                     {
 
                     				markLeaf(elementTypeProvider.getState_ActionsKeyword_2_0ElementType());
@@ -613,7 +701,7 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
                     				doneLeaf(otherlv_3);
                     			
-                    // PsiInternalFowlerDslTestLanguage.g:245:4: ( (otherlv_4= RULE_ID ) )+
+                    // PsiInternalFowlerDslTestLanguage.g:301:4: ( (otherlv_4= RULE_ID ) )+
                     int cnt5=0;
                     loop5:
                     do {
@@ -627,11 +715,17 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalFowlerDslTestLanguage.g:246:5: (otherlv_4= RULE_ID )
+                    	    // PsiInternalFowlerDslTestLanguage.g:302:5: (otherlv_4= RULE_ID )
                     	    {
-                    	    // PsiInternalFowlerDslTestLanguage.g:246:5: (otherlv_4= RULE_ID )
-                    	    // PsiInternalFowlerDslTestLanguage.g:247:6: otherlv_4= RULE_ID
+                    	    // PsiInternalFowlerDslTestLanguage.g:302:5: (otherlv_4= RULE_ID )
+                    	    // PsiInternalFowlerDslTestLanguage.g:303:6: otherlv_4= RULE_ID
                     	    {
+
+                    	    						if (!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
+                    	    					
 
                     	    						markLeaf(elementTypeProvider.getState_ActionsCommandCrossReference_2_2_0ElementType());
                     	    					
@@ -668,7 +762,7 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             }
 
-            // PsiInternalFowlerDslTestLanguage.g:264:3: ( (lv_transitions_6_0= ruleTransition ) )*
+            // PsiInternalFowlerDslTestLanguage.g:326:3: ( (lv_transitions_6_0= ruleTransition ) )*
             loop7:
             do {
                 int alt7=2;
@@ -681,21 +775,25 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalFowlerDslTestLanguage.g:265:4: (lv_transitions_6_0= ruleTransition )
+            	    // PsiInternalFowlerDslTestLanguage.g:327:4: (lv_transitions_6_0= ruleTransition )
             	    {
-            	    // PsiInternalFowlerDslTestLanguage.g:265:4: (lv_transitions_6_0= ruleTransition )
-            	    // PsiInternalFowlerDslTestLanguage.g:266:5: lv_transitions_6_0= ruleTransition
+            	    // PsiInternalFowlerDslTestLanguage.g:327:4: (lv_transitions_6_0= ruleTransition )
+            	    // PsiInternalFowlerDslTestLanguage.g:328:5: lv_transitions_6_0= ruleTransition
             	    {
 
             	    					markComposite(elementTypeProvider.getState_TransitionsTransitionParserRuleCall_3_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_5);
-            	    ruleTransition();
+            	    lv_transitions_6_0=ruleTransition();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -729,24 +827,30 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleState"
 
 
     // $ANTLR start "entryRuleTransition"
-    // PsiInternalFowlerDslTestLanguage.g:286:1: entryRuleTransition : ruleTransition EOF ;
-    public final void entryRuleTransition() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:352:1: entryRuleTransition returns [Boolean current=false] : iv_ruleTransition= ruleTransition EOF ;
+    public final Boolean entryRuleTransition() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleTransition = null;
+
+
         try {
-            // PsiInternalFowlerDslTestLanguage.g:286:20: ( ruleTransition EOF )
-            // PsiInternalFowlerDslTestLanguage.g:287:2: ruleTransition EOF
+            // PsiInternalFowlerDslTestLanguage.g:352:52: (iv_ruleTransition= ruleTransition EOF )
+            // PsiInternalFowlerDslTestLanguage.g:353:2: iv_ruleTransition= ruleTransition EOF
             {
              markComposite(elementTypeProvider.getTransitionElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleTransition();
+            iv_ruleTransition=ruleTransition();
 
             state._fsp--;
 
+             current =iv_ruleTransition; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -758,31 +862,39 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleTransition"
 
 
     // $ANTLR start "ruleTransition"
-    // PsiInternalFowlerDslTestLanguage.g:292:1: ruleTransition : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) ) ;
-    public final void ruleTransition() throws RecognitionException {
+    // PsiInternalFowlerDslTestLanguage.g:359:1: ruleTransition returns [Boolean current=false] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) ) ;
+    public final Boolean ruleTransition() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token otherlv_2=null;
 
         try {
-            // PsiInternalFowlerDslTestLanguage.g:292:15: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) ) )
-            // PsiInternalFowlerDslTestLanguage.g:293:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) )
+            // PsiInternalFowlerDslTestLanguage.g:360:1: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) ) )
+            // PsiInternalFowlerDslTestLanguage.g:361:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) )
             {
-            // PsiInternalFowlerDslTestLanguage.g:293:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) )
-            // PsiInternalFowlerDslTestLanguage.g:294:3: ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:361:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) )
+            // PsiInternalFowlerDslTestLanguage.g:362:3: ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) )
             {
-            // PsiInternalFowlerDslTestLanguage.g:294:3: ( (otherlv_0= RULE_ID ) )
-            // PsiInternalFowlerDslTestLanguage.g:295:4: (otherlv_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:362:3: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:363:4: (otherlv_0= RULE_ID )
             {
-            // PsiInternalFowlerDslTestLanguage.g:295:4: (otherlv_0= RULE_ID )
-            // PsiInternalFowlerDslTestLanguage.g:296:5: otherlv_0= RULE_ID
+            // PsiInternalFowlerDslTestLanguage.g:363:4: (otherlv_0= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:364:5: otherlv_0= RULE_ID
             {
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					markLeaf(elementTypeProvider.getTransition_EventEventCrossReference_0_0ElementType());
             				
@@ -803,12 +915,18 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalFowlerDslTestLanguage.g:312:3: ( (otherlv_2= RULE_ID ) )
-            // PsiInternalFowlerDslTestLanguage.g:313:4: (otherlv_2= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:386:3: ( (otherlv_2= RULE_ID ) )
+            // PsiInternalFowlerDslTestLanguage.g:387:4: (otherlv_2= RULE_ID )
             {
-            // PsiInternalFowlerDslTestLanguage.g:313:4: (otherlv_2= RULE_ID )
-            // PsiInternalFowlerDslTestLanguage.g:314:5: otherlv_2= RULE_ID
+            // PsiInternalFowlerDslTestLanguage.g:387:4: (otherlv_2= RULE_ID )
+            // PsiInternalFowlerDslTestLanguage.g:388:5: otherlv_2= RULE_ID
             {
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					markLeaf(elementTypeProvider.getTransition_StateStateCrossReference_2_0ElementType());
             				
@@ -835,7 +953,7 @@ public class PsiInternalFowlerDslTestLanguageParser extends AbstractPsiAntlrPars
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleTransition"
 

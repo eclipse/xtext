@@ -122,8 +122,8 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_APOSTROPHE_CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBug292245TestLanguage.g:311:22: ( '\\'' )
-            // PsiInternalBug292245TestLanguage.g:311:24: '\\''
+            // PsiInternalBug292245TestLanguage.g:335:22: ( '\\'' )
+            // PsiInternalBug292245TestLanguage.g:335:24: '\\''
             {
             match('\''); 
 
@@ -142,8 +142,8 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBug292245TestLanguage.g:313:11: ( ( 'A' .. 'Z' | '0' .. '9' ) )
-            // PsiInternalBug292245TestLanguage.g:313:13: ( 'A' .. 'Z' | '0' .. '9' )
+            // PsiInternalBug292245TestLanguage.g:337:11: ( ( 'A' .. 'Z' | '0' .. '9' ) )
+            // PsiInternalBug292245TestLanguage.g:337:13: ( 'A' .. 'Z' | '0' .. '9' )
             {
             if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z') ) {
                 input.consume();
@@ -170,10 +170,10 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBug292245TestLanguage.g:315:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalBug292245TestLanguage.g:315:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBug292245TestLanguage.g:339:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalBug292245TestLanguage.g:339:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalBug292245TestLanguage.g:315:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBug292245TestLanguage.g:339:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {

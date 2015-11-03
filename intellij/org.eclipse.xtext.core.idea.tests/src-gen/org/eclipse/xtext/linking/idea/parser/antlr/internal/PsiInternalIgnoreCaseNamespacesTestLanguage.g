@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleModel:
 				lv_imports_0_0=ruleImport
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -76,6 +82,10 @@ ruleModel:
 				lv_elements_1_0=ruleElement
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)+
@@ -83,19 +93,27 @@ ruleModel:
 ;
 
 //Entry rule entryRuleImport
-entryRuleImport:
+entryRuleImport returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getImportElementType()); }
-	ruleImport
+	iv_ruleImport=ruleImport
+	{ $current=$iv_ruleImport.current; }
 	EOF;
 
 // Rule Import
-ruleImport:
+ruleImport returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getImport_ImportedNamespaceSTRINGTerminalRuleCall_0ElementType());
 			}
 			lv_importedNamespace_0_0=RULE_STRING
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_importedNamespace_0_0);
 			}
@@ -104,13 +122,15 @@ ruleImport:
 ;
 
 //Entry rule entryRuleElement
-entryRuleElement:
+entryRuleElement returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
-	ruleElement
+	iv_ruleElement=ruleElement
+	{ $current=$iv_ruleElement.current; }
 	EOF;
 
 // Rule Element
-ruleElement:
+ruleElement returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -119,12 +139,24 @@ ruleElement:
 				}
 				lv_name_0_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getElement_ReferenceElementCrossReference_1_0ElementType());
 				}
@@ -149,6 +181,10 @@ ruleElement:
 				lv_elements_3_0=ruleElement
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*

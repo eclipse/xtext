@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleModel:
 				lv_extends_0_0=ruleExtendsNsURIEObject
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -76,6 +82,10 @@ ruleModel:
 				lv_extends_1_0=ruleExtendsPluginEObject
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -87,6 +97,10 @@ ruleModel:
 				lv_extends_2_0=ruleExtendsResourceEObject
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -94,13 +108,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleExtendsNsURIEObject
-entryRuleExtendsNsURIEObject:
+entryRuleExtendsNsURIEObject returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getExtendsNsURIEObjectElementType()); }
-	ruleExtendsNsURIEObject
+	iv_ruleExtendsNsURIEObject=ruleExtendsNsURIEObject
+	{ $current=$iv_ruleExtendsNsURIEObject.current; }
 	EOF;
 
 // Rule ExtendsNsURIEObject
-ruleExtendsNsURIEObject:
+ruleExtendsNsURIEObject returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getExtendsNsURIEObject_ExtendsNsURIEObjectKeyword_0ElementType());
@@ -117,6 +133,10 @@ ruleExtendsNsURIEObject:
 				lv_name_1_0=ruleValidID
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -131,6 +151,12 @@ ruleExtendsNsURIEObject:
 				}
 				(
 					(
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference1EObjectCrossReference_2_0_1_0ElementType());
 						}
@@ -153,6 +179,12 @@ ruleExtendsNsURIEObject:
 				(
 					(
 						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0ElementType());
 						}
 						otherlv_5=RULE_ID
@@ -173,6 +205,12 @@ ruleExtendsNsURIEObject:
 				}
 				(
 					(
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0ElementType());
 						}
@@ -195,6 +233,12 @@ ruleExtendsNsURIEObject:
 				(
 					(
 						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0ElementType());
 						}
 						otherlv_9=RULE_ID
@@ -216,6 +260,12 @@ ruleExtendsNsURIEObject:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markLeaf(elementTypeProvider.getExtendsNsURIEObject_EAttributeReferenceMyEAttributeCrossReference_3_1_0ElementType());
 					}
 					otherlv_11=RULE_ID
@@ -226,6 +276,12 @@ ruleExtendsNsURIEObject:
 			)
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference2ExtendsNsURIEObjectCrossReference_3_2_0ElementType());
 					}
@@ -238,6 +294,12 @@ ruleExtendsNsURIEObject:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference3ExtendsPluginEObjectCrossReference_3_3_0ElementType());
 					}
 					otherlv_13=RULE_ID
@@ -248,6 +310,12 @@ ruleExtendsNsURIEObject:
 			)
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getExtendsNsURIEObject_EObjectReference4ExtendsResourceEObjectCrossReference_3_4_0ElementType());
 					}
@@ -265,6 +333,10 @@ ruleExtendsNsURIEObject:
 					lv_eObjectContainment_15_0=ruleExtendsNsURIEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)?
@@ -276,6 +348,10 @@ ruleExtendsNsURIEObject:
 					lv_eObjectContainment_16_0=ruleExtendsPluginEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)?
@@ -287,6 +363,10 @@ ruleExtendsNsURIEObject:
 					lv_eObjectContainment_17_0=ruleExtendsResourceEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)?
@@ -298,6 +378,10 @@ ruleExtendsNsURIEObject:
 					lv_eObjectContainment_18_0=ruleEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -309,6 +393,10 @@ ruleExtendsNsURIEObject:
 					lv_eObjectContainment_19_0=ruleEAttribute
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -320,6 +408,10 @@ ruleExtendsNsURIEObject:
 					lv_eObjectContainment_20_0=ruleMyEAttribute
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -328,18 +420,21 @@ ruleExtendsNsURIEObject:
 ;
 
 //Entry rule entryRuleMyEAttribute
-entryRuleMyEAttribute:
+entryRuleMyEAttribute returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMyEAttributeElementType()); }
-	ruleMyEAttribute
+	iv_ruleMyEAttribute=ruleMyEAttribute
+	{ $current=$iv_ruleMyEAttribute.current; }
 	EOF;
 
 // Rule MyEAttribute
-ruleMyEAttribute:
+ruleMyEAttribute returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getMyEAttribute_MyEAttributeAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -353,18 +448,21 @@ ruleMyEAttribute:
 ;
 
 //Entry rule entryRuleEAttribute
-entryRuleEAttribute:
+entryRuleEAttribute returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getEAttributeElementType()); }
-	ruleEAttribute
+	iv_ruleEAttribute=ruleEAttribute
+	{ $current=$iv_ruleEAttribute.current; }
 	EOF;
 
 // Rule EAttribute
-ruleEAttribute:
+ruleEAttribute returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getEAttribute_EAttributeAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -378,13 +476,15 @@ ruleEAttribute:
 ;
 
 //Entry rule entryRuleExtendsPluginEObject
-entryRuleExtendsPluginEObject:
+entryRuleExtendsPluginEObject returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getExtendsPluginEObjectElementType()); }
-	ruleExtendsPluginEObject
+	iv_ruleExtendsPluginEObject=ruleExtendsPluginEObject
+	{ $current=$iv_ruleExtendsPluginEObject.current; }
 	EOF;
 
 // Rule ExtendsPluginEObject
-ruleExtendsPluginEObject:
+ruleExtendsPluginEObject returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getExtendsPluginEObject_ExtendsPluginEObjectKeyword_0ElementType());
@@ -401,6 +501,10 @@ ruleExtendsPluginEObject:
 				lv_name_1_0=ruleValidID
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -415,6 +519,12 @@ ruleExtendsPluginEObject:
 				}
 				(
 					(
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference1EObjectCrossReference_2_0_1_0ElementType());
 						}
@@ -437,6 +547,12 @@ ruleExtendsPluginEObject:
 				(
 					(
 						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0ElementType());
 						}
 						otherlv_5=RULE_ID
@@ -457,6 +573,12 @@ ruleExtendsPluginEObject:
 				}
 				(
 					(
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0ElementType());
 						}
@@ -479,6 +601,12 @@ ruleExtendsPluginEObject:
 				(
 					(
 						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0ElementType());
 						}
 						otherlv_9=RULE_ID
@@ -500,6 +628,12 @@ ruleExtendsPluginEObject:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference2ExtendsNsURIEObjectCrossReference_3_1_0ElementType());
 					}
 					otherlv_11=RULE_ID
@@ -511,6 +645,12 @@ ruleExtendsPluginEObject:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference3ExtendsPluginEObjectCrossReference_3_2_0ElementType());
 					}
 					otherlv_12=RULE_ID
@@ -521,6 +661,12 @@ ruleExtendsPluginEObject:
 			)
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getExtendsPluginEObject_EObjectReference4ExtendsResourceEObjectCrossReference_3_3_0ElementType());
 					}
@@ -538,6 +684,10 @@ ruleExtendsPluginEObject:
 					lv_eObjectContainment_14_0=ruleExtendsNsURIEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)?
@@ -549,6 +699,10 @@ ruleExtendsPluginEObject:
 					lv_eObjectContainment_15_0=ruleExtendsPluginEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)?
@@ -560,6 +714,10 @@ ruleExtendsPluginEObject:
 					lv_eObjectContainment_16_0=ruleExtendsResourceEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)?
@@ -571,6 +729,10 @@ ruleExtendsPluginEObject:
 					lv_eObjectContainment_17_0=ruleEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -582,6 +744,10 @@ ruleExtendsPluginEObject:
 					lv_eObjectContainment_18_0=ruleEAttribute
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -593,6 +759,10 @@ ruleExtendsPluginEObject:
 					lv_eObjectContainment_19_0=ruleMyEAttribute
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -601,13 +771,15 @@ ruleExtendsPluginEObject:
 ;
 
 //Entry rule entryRuleExtendsResourceEObject
-entryRuleExtendsResourceEObject:
+entryRuleExtendsResourceEObject returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getExtendsResourceEObjectElementType()); }
-	ruleExtendsResourceEObject
+	iv_ruleExtendsResourceEObject=ruleExtendsResourceEObject
+	{ $current=$iv_ruleExtendsResourceEObject.current; }
 	EOF;
 
 // Rule ExtendsResourceEObject
-ruleExtendsResourceEObject:
+ruleExtendsResourceEObject returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getExtendsResourceEObject_ExtendsResourceEObjectKeyword_0ElementType());
@@ -624,6 +796,10 @@ ruleExtendsResourceEObject:
 				lv_name_1_0=ruleValidID
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -638,6 +814,12 @@ ruleExtendsResourceEObject:
 				}
 				(
 					(
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference1EObjectCrossReference_2_0_1_0ElementType());
 						}
@@ -660,6 +842,12 @@ ruleExtendsResourceEObject:
 				(
 					(
 						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0ElementType());
 						}
 						otherlv_5=RULE_ID
@@ -680,6 +868,12 @@ ruleExtendsResourceEObject:
 				}
 				(
 					(
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0ElementType());
 						}
@@ -702,6 +896,12 @@ ruleExtendsResourceEObject:
 				(
 					(
 						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0ElementType());
 						}
 						otherlv_9=RULE_ID
@@ -723,6 +923,12 @@ ruleExtendsResourceEObject:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference2ExtendsNsURIEObjectCrossReference_3_1_0ElementType());
 					}
 					otherlv_11=RULE_ID
@@ -734,6 +940,12 @@ ruleExtendsResourceEObject:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference3ExtendsPluginEObjectCrossReference_3_2_0ElementType());
 					}
 					otherlv_12=RULE_ID
@@ -744,6 +956,12 @@ ruleExtendsResourceEObject:
 			)
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getExtendsResourceEObject_EObjectReference4ExtendsResourceEObjectCrossReference_3_3_0ElementType());
 					}
@@ -761,6 +979,10 @@ ruleExtendsResourceEObject:
 					lv_eObjectContainment_14_0=ruleExtendsNsURIEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -772,6 +994,10 @@ ruleExtendsResourceEObject:
 					lv_eObjectContainment_15_0=ruleExtendsPluginEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -783,6 +1009,10 @@ ruleExtendsResourceEObject:
 					lv_eObjectContainment_16_0=ruleExtendsResourceEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -794,6 +1024,10 @@ ruleExtendsResourceEObject:
 					lv_eObjectContainment_17_0=ruleEObject
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -805,6 +1039,10 @@ ruleExtendsResourceEObject:
 					lv_eObjectContainment_18_0=ruleEAttribute
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -816,6 +1054,10 @@ ruleExtendsResourceEObject:
 					lv_eObjectContainment_19_0=ruleMyEAttribute
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -824,18 +1066,21 @@ ruleExtendsResourceEObject:
 ;
 
 //Entry rule entryRuleEObject
-entryRuleEObject:
+entryRuleEObject returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getEObjectElementType()); }
-	ruleEObject
+	iv_ruleEObject=ruleEObject
+	{ $current=$iv_ruleEObject.current; }
 	EOF;
 
 // Rule EObject
-ruleEObject:
+ruleEObject returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getEObject_EObjectAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -849,13 +1094,15 @@ ruleEObject:
 ;
 
 //Entry rule entryRuleValidID
-entryRuleValidID:
+entryRuleValidID returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getValidIDElementType()); }
-	ruleValidID
+	iv_ruleValidID=ruleValidID
+	{ $current=$iv_ruleValidID.current; }
 	EOF;
 
 // Rule ValidID
-ruleValidID:
+ruleValidID returns [Boolean current=false]
+:
 	{
 		markLeaf(elementTypeProvider.getValidID_IDTerminalRuleCallElementType());
 	}

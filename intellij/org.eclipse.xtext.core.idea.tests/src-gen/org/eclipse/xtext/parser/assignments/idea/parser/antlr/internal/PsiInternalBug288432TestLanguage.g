@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleBody
-entryRuleBody:
+entryRuleBody returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getBodyElementType()); }
-	ruleBody
+	iv_ruleBody=ruleBody
+	{ $current=$iv_ruleBody.current; }
 	EOF;
 
 // Rule Body
-ruleBody:
+ruleBody returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -73,6 +75,10 @@ ruleBody:
 					lv_parameter_1_0=ruleParameter
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -92,6 +98,10 @@ ruleBody:
 						lv_parameter_3_0=ruleParameter
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -120,6 +130,10 @@ ruleBody:
 					lv_content_6_1=ruleContent
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -128,6 +142,10 @@ ruleBody:
 					lv_content_6_2=ruleParameterRef
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -140,6 +158,10 @@ ruleBody:
 				lv_foo_7_0=ruleFoo
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)+
@@ -154,19 +176,27 @@ ruleBody:
 ;
 
 //Entry rule entryRuleFoo
-entryRuleFoo:
+entryRuleFoo returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFooElementType()); }
-	ruleFoo
+	iv_ruleFoo=ruleFoo
+	{ $current=$iv_ruleFoo.current; }
 	EOF;
 
 // Rule Foo
-ruleFoo:
+ruleFoo returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getFoo_FooValueSTRINGTerminalRuleCall_0ElementType());
 			}
 			lv_fooValue_0_0=RULE_STRING
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_fooValue_0_0);
 			}
@@ -175,13 +205,15 @@ ruleFoo:
 ;
 
 //Entry rule entryRuleContent
-entryRuleContent:
+entryRuleContent returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getContentElementType()); }
-	ruleContent
+	iv_ruleContent=ruleContent
+	{ $current=$iv_ruleContent.current; }
 	EOF;
 
 // Rule Content
-ruleContent:
+ruleContent returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getContent_ContentKeyword_0ElementType());
@@ -193,8 +225,9 @@ ruleContent:
 		{
 			markComposite(elementTypeProvider.getContent_MyElementParserRuleCall_1ElementType());
 		}
-		ruleMyElement
+		this_MyElement_1=ruleMyElement
 		{
+			$current = $this_MyElement_1.current;
 			doneComposite();
 		}
 		{
@@ -208,13 +241,15 @@ ruleContent:
 ;
 
 //Entry rule entryRuleMyElement
-entryRuleMyElement:
+entryRuleMyElement returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMyElementElementType()); }
-	ruleMyElement
+	iv_ruleMyElement=ruleMyElement
+	{ $current=$iv_ruleMyElement.current; }
 	EOF;
 
 // Rule MyElement
-ruleMyElement:
+ruleMyElement returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getMyElement_ElementKeyword_0ElementType());
@@ -232,6 +267,10 @@ ruleMyElement:
 					lv_bar_1_1=ruleMyInt
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -240,6 +279,10 @@ ruleMyElement:
 					lv_bar_1_2=ruleParameterRef
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -248,13 +291,15 @@ ruleMyElement:
 ;
 
 //Entry rule entryRuleParameter
-entryRuleParameter:
+entryRuleParameter returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParameterElementType()); }
-	ruleParameter
+	iv_ruleParameter=ruleParameter
+	{ $current=$iv_ruleParameter.current; }
 	EOF;
 
 // Rule Parameter
-ruleParameter:
+ruleParameter returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -263,12 +308,24 @@ ruleParameter:
 				}
 				lv_name_0_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getParameter_ValueParameterObjectCrossReference_1_0ElementType());
 				}
@@ -282,15 +339,23 @@ ruleParameter:
 ;
 
 //Entry rule entryRuleParameterRef
-entryRuleParameterRef:
+entryRuleParameterRef returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParameterRefElementType()); }
-	ruleParameterRef
+	iv_ruleParameterRef=ruleParameterRef
+	{ $current=$iv_ruleParameterRef.current; }
 	EOF;
 
 // Rule ParameterRef
-ruleParameterRef:
+ruleParameterRef returns [Boolean current=false]
+:
 	(
 		(
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				markLeaf(elementTypeProvider.getParameterRef_ParameterParameterCrossReference_0ElementType());
 			}
@@ -303,19 +368,27 @@ ruleParameterRef:
 ;
 
 //Entry rule entryRuleMyInt
-entryRuleMyInt:
+entryRuleMyInt returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMyIntElementType()); }
-	ruleMyInt
+	iv_ruleMyInt=ruleMyInt
+	{ $current=$iv_ruleMyInt.current; }
 	EOF;
 
 // Rule MyInt
-ruleMyInt:
+ruleMyInt returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getMyInt_IntINTTerminalRuleCall_0ElementType());
 			}
 			lv_int_0_0=RULE_INT
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_int_0_0);
 			}

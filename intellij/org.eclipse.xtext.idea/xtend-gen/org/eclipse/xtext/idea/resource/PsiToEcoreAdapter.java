@@ -7,25 +7,47 @@
  */
 package org.eclipse.xtext.idea.resource;
 
-import com.google.common.base.Objects;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.FileASTNode;
+import com.intellij.psi.tree.IElementType;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformationContext;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
+import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+import org.eclipse.xtext.util.internal.EmfAdaptable;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@EmfAdaptable
 @SuppressWarnings("all")
-public class PsiToEcoreAdapter extends AdapterImpl {
+public class PsiToEcoreAdapter {
+  public static class PsiToEcoreAdapterAdapter extends AdapterImpl {
+    private PsiToEcoreAdapter element;
+    
+    public PsiToEcoreAdapterAdapter(final PsiToEcoreAdapter element) {
+      this.element = element;
+    }
+    
+    public PsiToEcoreAdapter get() {
+      return this.element;
+    }
+    
+    @Override
+    public boolean isAdapterForType(final Object object) {
+      return object == PsiToEcoreAdapter.class;
+    }
+  }
+  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final BaseXtextFile xtextFile;
   
@@ -46,21 +68,78 @@ public class PsiToEcoreAdapter extends AdapterImpl {
     this.reverseNodesMapping = _unmodifiableView_1;
   }
   
-  public boolean install(final Resource it) {
-    EList<Adapter> _eAdapters = it.eAdapters();
-    return _eAdapters.add(this);
+  public INode getINode(final ASTNode astNode) {
+    if ((astNode == null)) {
+      return null;
+    }
+    INode node = this.nodesMapping.get(astNode);
+    final IElementType elementType = astNode.getElementType();
+    if ((elementType instanceof IGrammarAwareElementType)) {
+      final EObject grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
+      while (((node instanceof ICompositeNode) && (node.getGrammarElement() != grammarElement))) {
+        INode _firstChild = ((ICompositeNode) node).getFirstChild();
+        node = _firstChild;
+      }
+    }
+    return node;
   }
   
-  @Override
-  public boolean isAdapterForType(final Object type) {
-    Class<? extends PsiToEcoreAdapter> _class = this.getClass();
-    return Objects.equal(_class, type);
+  public ASTNode getASTNode(final INode node) {
+    if ((node == null)) {
+      return null;
+    }
+    int index = 0;
+    INode originalNode = node;
+    while ((originalNode instanceof SyntheticCompositeNode)) {
+      {
+        ICompositeNode _parent = ((SyntheticCompositeNode)originalNode).getParent();
+        originalNode = _parent;
+        index++;
+      }
+    }
+    final List<ASTNode> astNodes = this.reverseNodesMapping.get(originalNode);
+    boolean _and = false;
+    if (!(astNodes == null)) {
+      _and = false;
+    } else {
+      ICompositeNode _rootNode = node.getRootNode();
+      boolean _tripleEquals = (_rootNode == node);
+      _and = _tripleEquals;
+    }
+    if (_and) {
+      FileASTNode _node = this.xtextFile.getNode();
+      return _node.getFirstChildNode();
+    }
+    return astNodes.get(index);
   }
   
-  public static PsiToEcoreAdapter get(final Resource it) {
-    EList<Adapter> _eAdapters = it.eAdapters();
-    Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, PsiToEcoreAdapter.class);
-    return ((PsiToEcoreAdapter) _adapter);
+  public static PsiToEcoreAdapter findInEmfObject(final Notifier emfObject) {
+    for (Adapter adapter : emfObject.eAdapters()) {
+    	if (adapter instanceof PsiToEcoreAdapter.PsiToEcoreAdapterAdapter) {
+    		return ((PsiToEcoreAdapter.PsiToEcoreAdapterAdapter) adapter).get();
+    	}
+    }
+    return null;
+  }
+  
+  public static PsiToEcoreAdapter removeFromEmfObject(final Notifier emfObject) {
+    List<Adapter> adapters = emfObject.eAdapters();
+    for(int i = 0, max = adapters.size(); i < max; i++) {
+    	Adapter adapter = adapters.get(i);
+    	if (adapter instanceof PsiToEcoreAdapter.PsiToEcoreAdapterAdapter) {
+    		emfObject.eAdapters().remove(i);
+    		return ((PsiToEcoreAdapter.PsiToEcoreAdapterAdapter) adapter).get();
+    	}
+    }
+    return null;
+  }
+  
+  public void attachToEmfObject(final Notifier emfObject) {
+    PsiToEcoreAdapter result = findInEmfObject(emfObject);
+    if (result != null)
+    	throw new IllegalStateException("The given EMF object already contains an adapter for PsiToEcoreAdapter");
+    PsiToEcoreAdapter.PsiToEcoreAdapterAdapter adapter = new PsiToEcoreAdapter.PsiToEcoreAdapterAdapter(this);
+    emfObject.eAdapters().add(adapter);
   }
   
   @Pure

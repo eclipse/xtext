@@ -81,10 +81,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:201:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:201:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:11: ( '^' )?
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:201:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -93,7 +93,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:11: '^'
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:201:11: '^'
                     {
                     match('^'); 
 
@@ -111,7 +111,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:201:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -160,10 +160,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:10: ( ( '0' .. '9' )+ )
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:12: ( '0' .. '9' )+
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:203:10: ( ( '0' .. '9' )+ )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:203:12: ( '0' .. '9' )+
             {
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:12: ( '0' .. '9' )+
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:203:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -177,7 +177,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:13: '0' .. '9'
+            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:203:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -209,10 +209,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -230,10 +230,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -249,7 +249,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:21: '\\\\' .
+                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -257,7 +257,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -282,10 +282,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -301,7 +301,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:54: '\\\\' .
+                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -309,7 +309,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:205:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -352,12 +352,12 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:207:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:207:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:24: ( options {greedy=false; } : . )*
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:207:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -382,7 +382,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:52: .
+            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:207:52: .
             	    {
             	    matchAny(); 
 
@@ -412,12 +412,12 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:209:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:209:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:209:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -430,7 +430,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:209:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -450,7 +450,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:209:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -459,9 +459,9 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:41: ( '\\r' )? '\\n'
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:209:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:41: ( '\\r' )?
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:209:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -470,7 +470,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:41: '\\r'
+                            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:209:41: '\\r'
                             {
                             match('\r'); 
 
@@ -502,10 +502,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:175:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:175:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:211:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:211:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:175:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:211:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -559,8 +559,8 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:177:16: ( . )
-            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:177:18: .
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:213:16: ( . )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:213:18: .
             {
             matchAny(); 
 

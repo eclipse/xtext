@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getModel_ModelKeyword_0ElementType());
@@ -72,6 +74,10 @@ ruleModel:
 				lv_name_1_0=ruleFQN
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -84,6 +90,10 @@ ruleModel:
 					lv_detail_2_1=ruleDetail
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -92,6 +102,10 @@ ruleModel:
 					lv_detail_2_2=ruleAssociatedDetail
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -100,13 +114,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleDetail
-entryRuleDetail:
+entryRuleDetail returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDetailElementType()); }
-	ruleDetail
+	iv_ruleDetail=ruleDetail
+	{ $current=$iv_ruleDetail.current; }
 	EOF;
 
 // Rule Detail
-ruleDetail:
+ruleDetail returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDetail_DetailKeyword_0ElementType());
@@ -125,6 +141,12 @@ ruleDetail:
 					{
 						doneLeaf(lv_visibility_1_1);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					    |
 					{
 						markLeaf(elementTypeProvider.getDetail_VisibilityProtectedKeyword_1_0_1ElementType());
@@ -132,6 +154,12 @@ ruleDetail:
 					lv_visibility_1_2='protected'
 					{
 						doneLeaf(lv_visibility_1_2);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -141,11 +169,23 @@ ruleDetail:
 					{
 						doneLeaf(lv_visibility_1_3);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 				)
 			)
 		)?
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markComposite(elementTypeProvider.getDetail_DetailClassModelCrossReference_2_0ElementType());
 				}
@@ -159,13 +199,15 @@ ruleDetail:
 ;
 
 //Entry rule entryRuleAssociatedDetail
-entryRuleAssociatedDetail:
+entryRuleAssociatedDetail returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAssociatedDetailElementType()); }
-	ruleAssociatedDetail
+	iv_ruleAssociatedDetail=ruleAssociatedDetail
+	{ $current=$iv_ruleAssociatedDetail.current; }
 	EOF;
 
 // Rule AssociatedDetail
-ruleAssociatedDetail:
+ruleAssociatedDetail returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAssociatedDetail_AssociatedKeyword_0ElementType());
@@ -176,6 +218,12 @@ ruleAssociatedDetail:
 		}
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markComposite(elementTypeProvider.getAssociatedDetail_DetailClassModelCrossReference_1_0ElementType());
 				}
@@ -196,13 +244,15 @@ ruleAssociatedDetail:
 ;
 
 //Entry rule entryRuleFQN
-entryRuleFQN:
+entryRuleFQN returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFQNElementType()); }
-	ruleFQN
+	iv_ruleFQN=ruleFQN
+	{ $current=$iv_ruleFQN.current; }
 	EOF;
 
 // Rule FQN
-ruleFQN:
+ruleFQN returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());

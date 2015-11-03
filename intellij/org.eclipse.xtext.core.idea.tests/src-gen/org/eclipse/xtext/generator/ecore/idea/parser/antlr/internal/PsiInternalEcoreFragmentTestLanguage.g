@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleSecond
-entryRuleSecond:
+entryRuleSecond returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSecondElementType()); }
-	ruleSecond
+	iv_ruleSecond=ruleSecond
+	{ $current=$iv_ruleSecond.current; }
 	EOF;
 
 // Rule Second
-ruleSecond:
+ruleSecond returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -63,6 +65,12 @@ ruleSecond:
 					markLeaf(elementTypeProvider.getSecond_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_0_0);
 				}
@@ -77,6 +85,12 @@ ruleSecond:
 		}
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getSecond_FirstFirstCrossReference_2_0ElementType());
 				}

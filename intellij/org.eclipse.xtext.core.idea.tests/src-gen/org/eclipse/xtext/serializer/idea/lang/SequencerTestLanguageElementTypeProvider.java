@@ -237,6 +237,12 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 		public static IGrammarAwareElementType createModel_X34ParameterCallerParserRuleCall_33_0ElementType() {
 			return new IGrammarAwareElementType("Model_X34ParameterCallerParserRuleCall_33_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX34ParameterCallerParserRuleCall_33_0());
 		}
+		public static IGrammarAwareElementType createModel_X35Assignment_34ElementType() {
+			return new IGrammarAwareElementType("Model_X35Assignment_34_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX35Assignment_34());
+		}
+		public static IGrammarAwareElementType createModel_X35ParameterDelegationParserRuleCall_34_0ElementType() {
+			return new IGrammarAwareElementType("Model_X35ParameterDelegationParserRuleCall_34_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getX35ParameterDelegationParserRuleCall_34_0());
+		}
 	}
 
 	public static final IGrammarAwareElementType Model_ELEMENT_TYPE = associate(ModelFactory.createModelElementType());
@@ -378,6 +384,10 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 	public static final IGrammarAwareElementType Model_X34Assignment_33_ELEMENT_TYPE = associate(ModelFactory.createModel_X34Assignment_33ElementType());
 
 	public static final IGrammarAwareElementType Model_X34ParameterCallerParserRuleCall_33_0_ELEMENT_TYPE = associate(ModelFactory.createModel_X34ParameterCallerParserRuleCall_33_0ElementType());
+
+	public static final IGrammarAwareElementType Model_X35Assignment_34_ELEMENT_TYPE = associate(ModelFactory.createModel_X35Assignment_34ElementType());
+
+	public static final IGrammarAwareElementType Model_X35ParameterDelegationParserRuleCall_34_0_ELEMENT_TYPE = associate(ModelFactory.createModel_X35ParameterDelegationParserRuleCall_34_0ElementType());
 
 	private static class SimpleGroupFactory {
 		public static IGrammarAwareElementType createSimpleGroupElementType() {
@@ -2914,6 +2924,157 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public static final IGrammarAwareElementType Parameterized_V3IDTerminalRuleCall_1_2_1_0_ELEMENT_TYPE = associate(ParameterizedFactory.createParameterized_V3IDTerminalRuleCall_1_2_1_0ElementType());
 
+	private static class ParameterDelegationFactory {
+		public static IGrammarAwareElementType createParameterDelegationElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationRule());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_GroupElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_Group_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_NumberSignDigitThreeDigitFiveKeyword_0ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_NumberSignDigitThreeDigitFiveKeyword_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getNumberSignDigitThreeDigitFiveKeyword_0());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_Alternatives_1ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_Alternatives_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getAlternatives_1());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_Group_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_Group_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getGroup_1_0());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_Kw1Keyword_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_Kw1Keyword_1_0_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getKw1Keyword_1_0_0());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_PAssignment_1_0_1ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_PAssignment_1_0_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getPAssignment_1_0_1());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_PDelegationParserRuleCall_1_0_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_PDelegationParserRuleCall_1_0_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getPDelegationParserRuleCall_1_0_1_0());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_Group_1_1ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_Group_1_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getGroup_1_1());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_Kw2Keyword_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_Kw2Keyword_1_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getKw2Keyword_1_1_0());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_PAssignment_1_1_1ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_PAssignment_1_1_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getPAssignment_1_1_1());
+		}
+		public static IGrammarAwareElementType createParameterDelegation_PDelegationParserRuleCall_1_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParameterDelegation_PDelegationParserRuleCall_1_1_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParameterDelegationAccess().getPDelegationParserRuleCall_1_1_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType ParameterDelegation_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegationElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_Group_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_GroupElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_NumberSignDigitThreeDigitFiveKeyword_0_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_NumberSignDigitThreeDigitFiveKeyword_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_Alternatives_1_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_Alternatives_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_Group_1_0_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_Group_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_Kw1Keyword_1_0_0_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_Kw1Keyword_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_PAssignment_1_0_1_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_PAssignment_1_0_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_PDelegationParserRuleCall_1_0_1_0_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_PDelegationParserRuleCall_1_0_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_Group_1_1_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_Group_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_Kw2Keyword_1_1_0_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_Kw2Keyword_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_PAssignment_1_1_1_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_PAssignment_1_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParameterDelegation_PDelegationParserRuleCall_1_1_1_0_ELEMENT_TYPE = associate(ParameterDelegationFactory.createParameterDelegation_PDelegationParserRuleCall_1_1_1_0ElementType());
+
+	private static class DelegationFactory {
+		public static IGrammarAwareElementType createDelegationElementType() {
+			return new IGrammarAwareElementType("Delegation_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationRule());
+		}
+		public static IGrammarAwareElementType createDelegation_AlternativesElementType() {
+			return new IGrammarAwareElementType("Delegation_Alternatives_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getAlternatives());
+		}
+		public static IGrammarAwareElementType createDelegation_Group_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_Group_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getGroup_0());
+		}
+		public static IGrammarAwareElementType createDelegation_Alternatives_0_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_Alternatives_0_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getAlternatives_0_0());
+		}
+		public static IGrammarAwareElementType createDelegation_Group_0_0_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_Group_0_0_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getGroup_0_0_0());
+		}
+		public static IGrammarAwareElementType createDelegation_PAssignment_0_0_0_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_PAssignment_0_0_0_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getPAssignment_0_0_0_0());
+		}
+		public static IGrammarAwareElementType createDelegation_PIDTerminalRuleCall_0_0_0_0_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_PIDTerminalRuleCall_0_0_0_0_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getPIDTerminalRuleCall_0_0_0_0_0());
+		}
+		public static IGrammarAwareElementType createDelegation_Group_0_0_1ElementType() {
+			return new IGrammarAwareElementType("Delegation_Group_0_0_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getGroup_0_0_1());
+		}
+		public static IGrammarAwareElementType createDelegation_NpAssignment_0_0_1_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_NpAssignment_0_0_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getNpAssignment_0_0_1_0());
+		}
+		public static IGrammarAwareElementType createDelegation_NpINTTerminalRuleCall_0_0_1_0_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_NpINTTerminalRuleCall_0_0_1_0_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getNpINTTerminalRuleCall_0_0_1_0_0());
+		}
+		public static IGrammarAwareElementType createDelegation_Group_1ElementType() {
+			return new IGrammarAwareElementType("Delegation_Group_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getGroup_1());
+		}
+		public static IGrammarAwareElementType createDelegation_KwdKeyword_1_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_KwdKeyword_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getKwdKeyword_1_0());
+		}
+		public static IGrammarAwareElementType createDelegation_DelegationParserRuleCall_1_1ElementType() {
+			return new IGrammarAwareElementType("Delegation_DelegationParserRuleCall_1_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getDelegationParserRuleCall_1_1());
+		}
+		public static IGrammarAwareElementType createDelegation_Group_1_2ElementType() {
+			return new IGrammarAwareElementType("Delegation_Group_1_2_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getGroup_1_2());
+		}
+		public static IGrammarAwareElementType createDelegation_DelegationALeftAction_1_2_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_DelegationALeftAction_1_2_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getDelegationALeftAction_1_2_0());
+		}
+		public static IGrammarAwareElementType createDelegation_Rc2Assignment_1_2_1ElementType() {
+			return new IGrammarAwareElementType("Delegation_Rc2Assignment_1_2_1_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getRc2Assignment_1_2_1());
+		}
+		public static IGrammarAwareElementType createDelegation_Rc2DelegationParserRuleCall_1_2_1_0ElementType() {
+			return new IGrammarAwareElementType("Delegation_Rc2DelegationParserRuleCall_1_2_1_0_ELEMENT_TYPE", SequencerTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getDelegationAccess().getRc2DelegationParserRuleCall_1_2_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Delegation_ELEMENT_TYPE = associate(DelegationFactory.createDelegationElementType());
+
+	public static final IGrammarAwareElementType Delegation_Alternatives_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_AlternativesElementType());
+
+	public static final IGrammarAwareElementType Delegation_Group_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_Group_0ElementType());
+
+	public static final IGrammarAwareElementType Delegation_Alternatives_0_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_Alternatives_0_0ElementType());
+
+	public static final IGrammarAwareElementType Delegation_Group_0_0_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_Group_0_0_0ElementType());
+
+	public static final IGrammarAwareElementType Delegation_PAssignment_0_0_0_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_PAssignment_0_0_0_0ElementType());
+
+	public static final IGrammarAwareElementType Delegation_PIDTerminalRuleCall_0_0_0_0_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_PIDTerminalRuleCall_0_0_0_0_0ElementType());
+
+	public static final IGrammarAwareElementType Delegation_Group_0_0_1_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_Group_0_0_1ElementType());
+
+	public static final IGrammarAwareElementType Delegation_NpAssignment_0_0_1_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_NpAssignment_0_0_1_0ElementType());
+
+	public static final IGrammarAwareElementType Delegation_NpINTTerminalRuleCall_0_0_1_0_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_NpINTTerminalRuleCall_0_0_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType Delegation_Group_1_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_Group_1ElementType());
+
+	public static final IGrammarAwareElementType Delegation_KwdKeyword_1_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_KwdKeyword_1_0ElementType());
+
+	public static final IGrammarAwareElementType Delegation_DelegationParserRuleCall_1_1_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_DelegationParserRuleCall_1_1ElementType());
+
+	public static final IGrammarAwareElementType Delegation_Group_1_2_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_Group_1_2ElementType());
+
+	public static final IGrammarAwareElementType Delegation_DelegationALeftAction_1_2_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_DelegationALeftAction_1_2_0ElementType());
+
+	public static final IGrammarAwareElementType Delegation_Rc2Assignment_1_2_1_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_Rc2Assignment_1_2_1ElementType());
+
+	public static final IGrammarAwareElementType Delegation_Rc2DelegationParserRuleCall_1_2_1_0_ELEMENT_TYPE = associate(DelegationFactory.createDelegation_Rc2DelegationParserRuleCall_1_2_1_0ElementType());
+
 	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
@@ -3202,6 +3363,14 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public IGrammarAwareElementType getModel_X34ParameterCallerParserRuleCall_33_0ElementType() {
 		return Model_X34ParameterCallerParserRuleCall_33_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getModel_X35Assignment_34ElementType() {
+		return Model_X35Assignment_34_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getModel_X35ParameterDelegationParserRuleCall_34_0ElementType() {
+		return Model_X35ParameterDelegationParserRuleCall_34_0_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getSimpleGroupElementType() {
@@ -5110,6 +5279,122 @@ public class SequencerTestLanguageElementTypeProvider implements IElementTypePro
 
 	public IGrammarAwareElementType getParameterized_V3IDTerminalRuleCall_1_2_1_0ElementType() {
 		return Parameterized_V3IDTerminalRuleCall_1_2_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegationElementType() {
+		return ParameterDelegation_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_GroupElementType() {
+		return ParameterDelegation_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_NumberSignDigitThreeDigitFiveKeyword_0ElementType() {
+		return ParameterDelegation_NumberSignDigitThreeDigitFiveKeyword_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_Alternatives_1ElementType() {
+		return ParameterDelegation_Alternatives_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_Group_1_0ElementType() {
+		return ParameterDelegation_Group_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_Kw1Keyword_1_0_0ElementType() {
+		return ParameterDelegation_Kw1Keyword_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_PAssignment_1_0_1ElementType() {
+		return ParameterDelegation_PAssignment_1_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_PDelegationParserRuleCall_1_0_1_0ElementType() {
+		return ParameterDelegation_PDelegationParserRuleCall_1_0_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_Group_1_1ElementType() {
+		return ParameterDelegation_Group_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_Kw2Keyword_1_1_0ElementType() {
+		return ParameterDelegation_Kw2Keyword_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_PAssignment_1_1_1ElementType() {
+		return ParameterDelegation_PAssignment_1_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParameterDelegation_PDelegationParserRuleCall_1_1_1_0ElementType() {
+		return ParameterDelegation_PDelegationParserRuleCall_1_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegationElementType() {
+		return Delegation_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_AlternativesElementType() {
+		return Delegation_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_Group_0ElementType() {
+		return Delegation_Group_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_Alternatives_0_0ElementType() {
+		return Delegation_Alternatives_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_Group_0_0_0ElementType() {
+		return Delegation_Group_0_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_PAssignment_0_0_0_0ElementType() {
+		return Delegation_PAssignment_0_0_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_PIDTerminalRuleCall_0_0_0_0_0ElementType() {
+		return Delegation_PIDTerminalRuleCall_0_0_0_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_Group_0_0_1ElementType() {
+		return Delegation_Group_0_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_NpAssignment_0_0_1_0ElementType() {
+		return Delegation_NpAssignment_0_0_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_NpINTTerminalRuleCall_0_0_1_0_0ElementType() {
+		return Delegation_NpINTTerminalRuleCall_0_0_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_Group_1ElementType() {
+		return Delegation_Group_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_KwdKeyword_1_0ElementType() {
+		return Delegation_KwdKeyword_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_DelegationParserRuleCall_1_1ElementType() {
+		return Delegation_DelegationParserRuleCall_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_Group_1_2ElementType() {
+		return Delegation_Group_1_2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_DelegationALeftAction_1_2_0ElementType() {
+		return Delegation_DelegationALeftAction_1_2_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_Rc2Assignment_1_2_1ElementType() {
+		return Delegation_Rc2Assignment_1_2_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getDelegation_Rc2DelegationParserRuleCall_1_2_1_0ElementType() {
+		return Delegation_Rc2DelegationParserRuleCall_1_2_1_0_ELEMENT_TYPE;
 	}
 
 }

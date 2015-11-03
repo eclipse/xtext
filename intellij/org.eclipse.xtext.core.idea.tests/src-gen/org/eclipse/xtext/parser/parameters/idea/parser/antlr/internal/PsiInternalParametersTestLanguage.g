@@ -49,18 +49,21 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleParserRuleParameters
-entryRuleParserRuleParameters:
+entryRuleParserRuleParameters returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParserRuleParametersElementType()); }
-	ruleParserRuleParameters
+	iv_ruleParserRuleParameters=ruleParserRuleParameters
+	{ $current=$iv_ruleParserRuleParameters.current; }
 	EOF;
 
 // Rule ParserRuleParameters
-ruleParserRuleParameters:
+ruleParserRuleParameters returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getParserRuleParameters_ParserRuleParametersAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -80,6 +83,10 @@ ruleParserRuleParameters:
 						lv_scenario_2_0=norm1_Scenario1
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -101,6 +108,10 @@ ruleParserRuleParameters:
 						lv_scenario_4_0=ruleScenario1
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -122,6 +133,10 @@ ruleParserRuleParameters:
 						lv_scenario_6_0=norm1_Scenario2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -143,6 +158,10 @@ ruleParserRuleParameters:
 						lv_scenario_8_0=ruleScenario2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -174,6 +193,10 @@ ruleParserRuleParameters:
 							lv_scenario_10_0=norm1_Scenario2
 							{
 								doneComposite();
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
 							}
 						)
 					)
@@ -206,6 +229,10 @@ ruleParserRuleParameters:
 							lv_scenario_12_0=ruleScenario2
 							{
 								doneComposite();
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
 							}
 						)
 					)
@@ -228,6 +255,10 @@ ruleParserRuleParameters:
 						lv_scenario_14_0=norm1_Scenario3
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -249,6 +280,10 @@ ruleParserRuleParameters:
 						lv_scenario_16_0=ruleScenario3
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -275,6 +310,10 @@ ruleParserRuleParameters:
 							lv_scenario_18_0=norm1_Scenario4
 							{
 								doneComposite();
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
 							}
 						)
 					)
@@ -288,6 +327,10 @@ ruleParserRuleParameters:
 								lv_scenario_19_0=norm1_Scenario2
 								{
 									doneComposite();
+									if(!$current) {
+										associateWithSemanticElement();
+										$current = true;
+									}
 								}
 							)
 						)
@@ -325,6 +368,10 @@ ruleParserRuleParameters:
 							lv_scenario_22_0=norm1_Scenario4
 							{
 								doneComposite();
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
 							}
 						)
 					)
@@ -338,6 +385,10 @@ ruleParserRuleParameters:
 								lv_scenario_23_0=ruleScenario2
 								{
 									doneComposite();
+									if(!$current) {
+										associateWithSemanticElement();
+										$current = true;
+									}
 								}
 							)
 						)
@@ -375,6 +426,10 @@ ruleParserRuleParameters:
 							lv_scenario_26_0=ruleScenario4
 							{
 								doneComposite();
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
 							}
 						)
 					)
@@ -388,6 +443,10 @@ ruleParserRuleParameters:
 								lv_scenario_27_0=norm1_Scenario2
 								{
 									doneComposite();
+									if(!$current) {
+										associateWithSemanticElement();
+										$current = true;
+									}
 								}
 							)
 						)
@@ -425,6 +484,10 @@ ruleParserRuleParameters:
 							lv_scenario_30_0=ruleScenario4
 							{
 								doneComposite();
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
 							}
 						)
 					)
@@ -438,6 +501,10 @@ ruleParserRuleParameters:
 								lv_scenario_31_0=ruleScenario2
 								{
 									doneComposite();
+									if(!$current) {
+										associateWithSemanticElement();
+										$current = true;
+									}
 								}
 							)
 						)
@@ -458,19 +525,27 @@ ruleParserRuleParameters:
 ;
 
 //Entry rule entryRuleScenario1
-entryRuleScenario1:
+entryRuleScenario1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getScenario1ElementType()); }
-	ruleScenario1
+	iv_ruleScenario1=ruleScenario1
+	{ $current=$iv_ruleScenario1.current; }
 	EOF;
 
 // Rule Scenario1
-ruleScenario1:
+ruleScenario1 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getScenario1_SecondIDTerminalRuleCall_1_0_0ElementType());
 			}
 			lv_second_0_0=RULE_ID
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_second_0_0);
 			}
@@ -480,13 +555,20 @@ ruleScenario1:
 
 
 // Rule Scenario1
-norm1_Scenario1:
+norm1_Scenario1 returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getScenario1_FirstIDTerminalRuleCall_0_0_0ElementType());
 			}
 			lv_first_0_0=RULE_ID
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_first_0_0);
 			}
@@ -495,13 +577,15 @@ norm1_Scenario1:
 ;
 
 //Entry rule entryRuleScenario2
-entryRuleScenario2:
+entryRuleScenario2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getScenario2ElementType()); }
-	ruleScenario2
+	iv_ruleScenario2=ruleScenario2
+	{ $current=$iv_ruleScenario2.current; }
 	EOF;
 
 // Rule Scenario2
-ruleScenario2:
+ruleScenario2 returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -510,6 +594,10 @@ ruleScenario2:
 			lv_first_0_0=ruleIdOrKeyword
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
@@ -517,7 +605,8 @@ ruleScenario2:
 
 
 // Rule Scenario2
-norm1_Scenario2:
+norm1_Scenario2 returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -526,19 +615,25 @@ norm1_Scenario2:
 			lv_first_0_0=norm1_IdOrKeyword
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleScenario3
-entryRuleScenario3:
+entryRuleScenario3 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getScenario3ElementType()); }
-	ruleScenario3
+	iv_ruleScenario3=ruleScenario3
+	{ $current=$iv_ruleScenario3.current; }
 	EOF;
 
 // Rule Scenario3
-ruleScenario3:
+ruleScenario3 returns [Boolean current=false]
+:
 	(
 		(
 			((
@@ -552,6 +647,10 @@ ruleScenario3:
 				lv_first_0_0=ruleIdOrKeyword
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -565,6 +664,12 @@ ruleScenario3:
 				{
 					doneLeaf(lv_second_1_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
@@ -572,7 +677,8 @@ ruleScenario3:
 
 
 // Rule Scenario3
-norm1_Scenario3:
+norm1_Scenario3 returns [Boolean current=false]
+:
 	(
 		(
 			((
@@ -586,6 +692,10 @@ norm1_Scenario3:
 				lv_first_0_0=norm1_IdOrKeyword
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -599,19 +709,27 @@ norm1_Scenario3:
 				{
 					doneLeaf(lv_second_1_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
 ;
 
 //Entry rule entryRuleScenario4
-entryRuleScenario4:
+entryRuleScenario4 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getScenario4ElementType()); }
-	ruleScenario4
+	iv_ruleScenario4=ruleScenario4
+	{ $current=$iv_ruleScenario4.current; }
 	EOF;
 
 // Rule Scenario4
-ruleScenario4:
+ruleScenario4 returns [Boolean current=false]
+:
 	(
 		(
 			((
@@ -625,6 +743,10 @@ ruleScenario4:
 				lv_second_0_0=ruleIdOrKeyword
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -640,7 +762,8 @@ ruleScenario4:
 
 
 // Rule Scenario4
-norm1_Scenario4:
+norm1_Scenario4 returns [Boolean current=false]
+:
 	(
 		(
 			((
@@ -654,6 +777,10 @@ norm1_Scenario4:
 				lv_second_0_0=norm1_IdOrKeyword
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -668,13 +795,15 @@ norm1_Scenario4:
 ;
 
 //Entry rule entryRuleIdOrKeyword
-entryRuleIdOrKeyword:
+entryRuleIdOrKeyword returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getIdOrKeywordElementType()); }
-	ruleIdOrKeyword
+	iv_ruleIdOrKeyword=ruleIdOrKeyword
+	{ $current=$iv_ruleIdOrKeyword.current; }
 	EOF;
 
 // Rule IdOrKeyword
-ruleIdOrKeyword:
+ruleIdOrKeyword returns [Boolean current=false]
+:
 	{
 		markLeaf(elementTypeProvider.getIdOrKeyword_IDTerminalRuleCall_1ElementType());
 	}
@@ -686,7 +815,8 @@ ruleIdOrKeyword:
 
 
 // Rule IdOrKeyword
-norm1_IdOrKeyword:
+norm1_IdOrKeyword returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getIdOrKeyword_KeywordKeyword_0_0ElementType());

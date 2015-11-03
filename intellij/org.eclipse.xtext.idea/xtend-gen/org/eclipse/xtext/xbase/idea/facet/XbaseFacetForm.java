@@ -352,8 +352,8 @@ public class XbaseFacetForm extends GeneratorFacetForm {
   
   public LanguageLevelCombo createLanguageLevelCombo() {
     abstract class __XbaseFacetForm_1 extends LanguageLevelCombo {
-      __XbaseFacetForm_1(final String arg0) {
-        super(arg0);
+      __XbaseFacetForm_1(final String defaultItem) {
+        super(defaultItem);
       }
       
       LanguageLevelModuleExtension llExt;

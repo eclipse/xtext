@@ -63,18 +63,24 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalEncodingTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalEncodingTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalEncodingTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalEncodingTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalEncodingTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalEncodingTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -86,19 +92,24 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalEncodingTestLanguage.g:58:1: ruleModel : ( (lv_words_0_0= ruleWord ) )* ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalEncodingTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (lv_words_0_0= ruleWord ) )* ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_words_0_0 = null;
+
+
         try {
-            // PsiInternalEncodingTestLanguage.g:58:10: ( ( (lv_words_0_0= ruleWord ) )* )
-            // PsiInternalEncodingTestLanguage.g:59:2: ( (lv_words_0_0= ruleWord ) )*
+            // PsiInternalEncodingTestLanguage.g:60:1: ( ( (lv_words_0_0= ruleWord ) )* )
+            // PsiInternalEncodingTestLanguage.g:61:2: ( (lv_words_0_0= ruleWord ) )*
             {
-            // PsiInternalEncodingTestLanguage.g:59:2: ( (lv_words_0_0= ruleWord ) )*
+            // PsiInternalEncodingTestLanguage.g:61:2: ( (lv_words_0_0= ruleWord ) )*
             loop1:
             do {
                 int alt1=2;
@@ -111,21 +122,25 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalEncodingTestLanguage.g:60:3: (lv_words_0_0= ruleWord )
+            	    // PsiInternalEncodingTestLanguage.g:62:3: (lv_words_0_0= ruleWord )
             	    {
-            	    // PsiInternalEncodingTestLanguage.g:60:3: (lv_words_0_0= ruleWord )
-            	    // PsiInternalEncodingTestLanguage.g:61:4: lv_words_0_0= ruleWord
+            	    // PsiInternalEncodingTestLanguage.g:62:3: (lv_words_0_0= ruleWord )
+            	    // PsiInternalEncodingTestLanguage.g:63:4: lv_words_0_0= ruleWord
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_WordsWordParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleWord();
+            	    lv_words_0_0=ruleWord();
 
             	    state._fsp--;
 
 
             	    				doneComposite();
+            	    				if(!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
             	    			
 
             	    }
@@ -149,24 +164,30 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleWord"
-    // PsiInternalEncodingTestLanguage.g:73:1: entryRuleWord : ruleWord EOF ;
-    public final void entryRuleWord() throws RecognitionException {
+    // PsiInternalEncodingTestLanguage.g:79:1: entryRuleWord returns [Boolean current=false] : iv_ruleWord= ruleWord EOF ;
+    public final Boolean entryRuleWord() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleWord = null;
+
+
         try {
-            // PsiInternalEncodingTestLanguage.g:73:14: ( ruleWord EOF )
-            // PsiInternalEncodingTestLanguage.g:74:2: ruleWord EOF
+            // PsiInternalEncodingTestLanguage.g:79:46: (iv_ruleWord= ruleWord EOF )
+            // PsiInternalEncodingTestLanguage.g:80:2: iv_ruleWord= ruleWord EOF
             {
              markComposite(elementTypeProvider.getWordElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleWord();
+            iv_ruleWord=ruleWord();
 
             state._fsp--;
 
+             current =iv_ruleWord; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -178,30 +199,38 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleWord"
 
 
     // $ANTLR start "ruleWord"
-    // PsiInternalEncodingTestLanguage.g:79:1: ruleWord : ( (lv_value_0_0= RULE_LEXEME ) ) ;
-    public final void ruleWord() throws RecognitionException {
+    // PsiInternalEncodingTestLanguage.g:86:1: ruleWord returns [Boolean current=false] : ( (lv_value_0_0= RULE_LEXEME ) ) ;
+    public final Boolean ruleWord() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_value_0_0=null;
 
         try {
-            // PsiInternalEncodingTestLanguage.g:79:9: ( ( (lv_value_0_0= RULE_LEXEME ) ) )
-            // PsiInternalEncodingTestLanguage.g:80:2: ( (lv_value_0_0= RULE_LEXEME ) )
+            // PsiInternalEncodingTestLanguage.g:87:1: ( ( (lv_value_0_0= RULE_LEXEME ) ) )
+            // PsiInternalEncodingTestLanguage.g:88:2: ( (lv_value_0_0= RULE_LEXEME ) )
             {
-            // PsiInternalEncodingTestLanguage.g:80:2: ( (lv_value_0_0= RULE_LEXEME ) )
-            // PsiInternalEncodingTestLanguage.g:81:3: (lv_value_0_0= RULE_LEXEME )
+            // PsiInternalEncodingTestLanguage.g:88:2: ( (lv_value_0_0= RULE_LEXEME ) )
+            // PsiInternalEncodingTestLanguage.g:89:3: (lv_value_0_0= RULE_LEXEME )
             {
-            // PsiInternalEncodingTestLanguage.g:81:3: (lv_value_0_0= RULE_LEXEME )
-            // PsiInternalEncodingTestLanguage.g:82:4: lv_value_0_0= RULE_LEXEME
+            // PsiInternalEncodingTestLanguage.g:89:3: (lv_value_0_0= RULE_LEXEME )
+            // PsiInternalEncodingTestLanguage.g:90:4: lv_value_0_0= RULE_LEXEME
             {
 
             				markLeaf(elementTypeProvider.getWord_ValueLEXEMETerminalRuleCall_0ElementType());
             			
             lv_value_0_0=(Token)match(input,RULE_LEXEME,FollowSets000.FOLLOW_2); 
+
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
 
             				doneLeaf(lv_value_0_0);
             			
@@ -221,7 +250,7 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleWord"
 
