@@ -2060,16 +2060,7 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
       }
     };
-    Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_allRules, _function);
-    final List<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>toList(_filter);
-    final Function1<AbstractRule, Boolean> _function_1 = new Function1<AbstractRule, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractRule it) {
-        return Boolean.valueOf(IdeaPluginGenerator.this.isNamed(it));
-      }
-    };
-    Iterable<AbstractRule> _filter_1 = IterableExtensions.<AbstractRule>filter(EObjectRules, _function_1);
-    final List<AbstractRule> namedEObjectRules = IterableExtensions.<AbstractRule>toList(_filter_1);
+    final Iterable<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
     TypeReference _parserDefinition = this._ideaPluginClassNames.getParserDefinition(grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -2084,7 +2075,7 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         {
-          boolean _isEmpty = EObjectRules.isEmpty();
+          boolean _isEmpty = IterableExtensions.isEmpty(EObjectRules);
           boolean _not = (!_isEmpty);
           if (_not) {
             _builder.newLine();
@@ -2124,7 +2115,7 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append("}");
         _builder.newLine();
         {
-          boolean _isEmpty_1 = EObjectRules.isEmpty();
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(EObjectRules);
           boolean _not_1 = (!_isEmpty_1);
           if (_not_1) {
             _builder.append("\t");
@@ -2171,8 +2162,8 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
                 _builder.append("ElementType()) {");
                 _builder.newLineIfNotEmpty();
                 {
-                  boolean _contains = namedEObjectRules.contains(rule);
-                  if (_contains) {
+                  boolean _isNamed = IdeaPluginGenerator.this.isNamed(rule);
+                  if (_isNamed) {
                     _builder.append("\t");
                     _builder.append("\t\t");
                     _builder.append("\t");
@@ -2196,86 +2187,40 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
                 _builder.append("}");
                 _builder.newLine();
                 {
-                  List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
-                  for(final AbstractElement element : _eAllOfType) {
+                  Iterable<AbstractElement> _eObjectElements = IdeaPluginGenerator.this.getEObjectElements(rule);
+                  for(final AbstractElement element : _eObjectElements) {
+                    _builder.append("\t");
+                    _builder.append("\t\t");
+                    _builder.append("if (elementType == elementTypeProvider.get");
+                    String _grammarElementIdentifier_1 = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(element);
+                    _builder.append(_grammarElementIdentifier_1, "\t\t\t");
+                    _builder.append("ElementType()) {");
+                    _builder.newLineIfNotEmpty();
                     {
-                      if ((element instanceof Action)) {
+                      boolean _isNamed_1 = IdeaPluginGenerator.this.isNamed(element);
+                      if (_isNamed_1) {
                         _builder.append("\t");
                         _builder.append("\t\t");
-                        _builder.append("if (elementType == elementTypeProvider.get");
-                        String _grammarElementIdentifier_1 = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(element);
-                        _builder.append(_grammarElementIdentifier_1, "\t\t\t");
-                        _builder.append("ElementType()) {");
+                        _builder.append("\t");
+                        _builder.append("return new ");
+                        TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
+                        _builder.append(_typeRef_7, "\t\t\t\t");
+                        _builder.append("(node) {};");
                         _builder.newLineIfNotEmpty();
-                        {
-                          boolean _contains_1 = namedEObjectRules.contains(rule);
-                          if (_contains_1) {
-                            _builder.append("\t");
-                            _builder.append("\t\t");
-                            _builder.append("\t");
-                            _builder.append("return new ");
-                            TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
-                            _builder.append(_typeRef_7, "\t\t\t\t");
-                            _builder.append("(node) {};");
-                            _builder.newLineIfNotEmpty();
-                          } else {
-                            _builder.append("\t");
-                            _builder.append("\t\t");
-                            _builder.append("\t");
-                            _builder.append("return new ");
-                            _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl", "\t\t\t\t");
-                            _builder.append("(node) {};");
-                            _builder.newLineIfNotEmpty();
-                          }
-                        }
+                      } else {
                         _builder.append("\t");
                         _builder.append("\t\t");
-                        _builder.append("}");
-                        _builder.newLine();
+                        _builder.append("\t");
+                        _builder.append("return new ");
+                        _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl", "\t\t\t\t");
+                        _builder.append("(node) {};");
+                        _builder.newLineIfNotEmpty();
                       }
                     }
-                    {
-                      if ((element instanceof RuleCall)) {
-                        {
-                          boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
-                          if (_isEObjectRuleCall) {
-                            _builder.append("\t");
-                            _builder.append("\t\t");
-                            _builder.append("if (elementType == elementTypeProvider.get");
-                            String _grammarElementIdentifier_2 = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(element);
-                            _builder.append(_grammarElementIdentifier_2, "\t\t\t");
-                            _builder.append("ElementType()) {");
-                            _builder.newLineIfNotEmpty();
-                            {
-                              AbstractRule _rule = ((RuleCall)element).getRule();
-                              boolean _contains_2 = namedEObjectRules.contains(_rule);
-                              if (_contains_2) {
-                                _builder.append("\t");
-                                _builder.append("\t\t");
-                                _builder.append("\t");
-                                _builder.append("return new ");
-                                TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
-                                _builder.append(_typeRef_8, "\t\t\t\t");
-                                _builder.append("(node) {};");
-                                _builder.newLineIfNotEmpty();
-                              } else {
-                                _builder.append("\t");
-                                _builder.append("\t\t");
-                                _builder.append("\t");
-                                _builder.append("return new ");
-                                _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl", "\t\t\t\t");
-                                _builder.append("(node) {};");
-                                _builder.newLineIfNotEmpty();
-                              }
-                            }
-                            _builder.append("\t");
-                            _builder.append("\t\t");
-                            _builder.append("}");
-                            _builder.newLine();
-                          }
-                        }
-                      }
-                    }
+                    _builder.append("\t");
+                    _builder.append("\t\t");
+                    _builder.append("}");
+                    _builder.newLine();
                   }
                 }
               }
@@ -2283,8 +2228,8 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
             _builder.append("\t");
             _builder.append("\t\t");
             _builder.append("throw new ");
-            TypeReference _typeRef_9 = TypeReference.typeRef("java.lang.IllegalStateException");
-            _builder.append(_typeRef_9, "\t\t\t");
+            TypeReference _typeRef_8 = TypeReference.typeRef("java.lang.IllegalStateException");
+            _builder.append(_typeRef_8, "\t\t\t");
             _builder.append("(\"Unexpected element type: \" + elementType);");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -2308,13 +2253,70 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
     return this.fileAccessFactory.createJavaFile(_parserDefinition, _client);
   }
   
-  protected boolean isNamed(final AbstractRule rule) {
+  protected Iterable<AbstractElement> getEObjectElements(final AbstractRule rule) {
+    List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
+    final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractElement element) {
+        boolean _switchResult = false;
+        boolean _matched = false;
+        if (!_matched) {
+          if (element instanceof Action) {
+            _matched=true;
+          }
+          if (!_matched) {
+            if (element instanceof RuleCall) {
+              boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+              if (_isEObjectRuleCall) {
+                _matched=true;
+              }
+            }
+          }
+          if (_matched) {
+            _switchResult = true;
+          }
+        }
+        if (!_matched) {
+          _switchResult = false;
+        }
+        return Boolean.valueOf(_switchResult);
+      }
+    };
+    return IterableExtensions.<AbstractElement>filter(_eAllOfType, _function);
+  }
+  
+  protected boolean isNamed(final EObject element) {
     boolean _xblockexpression = false;
     {
-      TypeRef _type = rule.getType();
+      TypeRef _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (element instanceof AbstractRule) {
+          _matched=true;
+          _switchResult = ((AbstractRule)element).getType();
+        }
+      }
+      if (!_matched) {
+        if (element instanceof RuleCall) {
+          _matched=true;
+          AbstractRule _rule = ((RuleCall)element).getRule();
+          TypeRef _type = null;
+          if (_rule!=null) {
+            _type=_rule.getType();
+          }
+          _switchResult = _type;
+        }
+      }
+      if (!_matched) {
+        if (element instanceof Action) {
+          _matched=true;
+          _switchResult = ((Action)element).getType();
+        }
+      }
+      final TypeRef type = _switchResult;
       EClassifier _classifier = null;
-      if (_type!=null) {
-        _classifier=_type.getClassifier();
+      if (type!=null) {
+        _classifier=type.getClassifier();
       }
       final EClassifier classifier = _classifier;
       EStructuralFeature _xifexpression = null;

@@ -21,7 +21,7 @@ class WizardConfiguration {
 	val Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration
 
 	Charset encoding = Charset.defaultCharset
-	BuildSystem preferredBuildSystem = BuildSystem.ECLIPSE
+	BuildSystem preferredBuildSystem = BuildSystem.NONE
 	
 	SourceLayout sourceLayout = SourceLayout.PLAIN
 	ProjectLayout projectLayout = ProjectLayout.FLAT

@@ -100,7 +100,7 @@ public class RegionAccessTestLanguageParserDefinition extends AbstractXtextParse
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrimary_NamedAction_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrimary_ParenthesizedParserRuleCall_1ElementType()) {
 				return new PsiEObjectImpl(node) {};

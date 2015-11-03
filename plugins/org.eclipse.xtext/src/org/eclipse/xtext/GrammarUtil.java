@@ -436,7 +436,7 @@ public class GrammarUtil {
 		Collection<AbstractElement> result = Collections2.filter(unfiltered, new Predicate<AbstractElement>() {
 			@Override
 			public boolean apply(AbstractElement input) {
-				return input.isPredicated();
+				return input.isPredicated() || input.isFirstSetPredicated();
 			}
 		});
 		return result;

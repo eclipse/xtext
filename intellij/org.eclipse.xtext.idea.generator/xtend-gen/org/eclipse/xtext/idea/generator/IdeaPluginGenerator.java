@@ -10,7 +10,6 @@ package org.eclipse.xtext.idea.generator;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -36,8 +35,6 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
@@ -2403,16 +2400,53 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
           return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
         }
       };
-      Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_allRules, _function);
-      final List<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>toList(_filter);
+      final Iterable<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
       final Function1<AbstractRule, Boolean> _function_1 = new Function1<AbstractRule, Boolean>() {
         @Override
         public Boolean apply(final AbstractRule it) {
-          return Boolean.valueOf(IdeaPluginGenerator.this.isNamed(it));
+          boolean _or = false;
+          boolean _isNamed = IdeaPluginGenerator.this.isNamed(it);
+          if (_isNamed) {
+            _or = true;
+          } else {
+            Iterable<AbstractElement> _eObjectElements = IdeaPluginGenerator.this.getEObjectElements(it);
+            final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
+              @Override
+              public Boolean apply(final AbstractElement it) {
+                return Boolean.valueOf(IdeaPluginGenerator.this.isNamed(it));
+              }
+            };
+            boolean _exists = IterableExtensions.<AbstractElement>exists(_eObjectElements, _function);
+            _or = _exists;
+          }
+          return Boolean.valueOf(_or);
         }
       };
-      Iterable<AbstractRule> _filter_1 = IterableExtensions.<AbstractRule>filter(EObjectRules, _function_1);
-      final List<AbstractRule> namedEObjectRules = IterableExtensions.<AbstractRule>toList(_filter_1);
+      final boolean hasNamed = IterableExtensions.<AbstractRule>exists(EObjectRules, _function_1);
+      final Function1<AbstractRule, Boolean> _function_2 = new Function1<AbstractRule, Boolean>() {
+        @Override
+        public Boolean apply(final AbstractRule it) {
+          boolean _or = false;
+          boolean _isNamed = IdeaPluginGenerator.this.isNamed(it);
+          boolean _not = (!_isNamed);
+          if (_not) {
+            _or = true;
+          } else {
+            Iterable<AbstractElement> _eObjectElements = IdeaPluginGenerator.this.getEObjectElements(it);
+            final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
+              @Override
+              public Boolean apply(final AbstractElement it) {
+                boolean _isNamed = IdeaPluginGenerator.this.isNamed(it);
+                return Boolean.valueOf((!_isNamed));
+              }
+            };
+            boolean _exists = IterableExtensions.<AbstractElement>exists(_eObjectElements, _function);
+            _or = _exists;
+          }
+          return Boolean.valueOf(_or);
+        }
+      };
+      final boolean hasNotNamed = IterableExtensions.<AbstractRule>exists(EObjectRules, _function_2);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package ");
       String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
@@ -2432,7 +2466,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       {
-        boolean _isEmpty = EObjectRules.isEmpty();
+        boolean _isEmpty = IterableExtensions.isEmpty(EObjectRules);
         boolean _not = (!_isEmpty);
         if (_not) {
           _builder.append("import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;");
@@ -2442,12 +2476,14 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
           _builder.append(_elementTypeProviderName, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
-          _builder.append("import org.eclipse.xtext.psi.impl.PsiEObjectImpl;");
-          _builder.newLine();
           {
-            boolean _isEmpty_1 = namedEObjectRules.isEmpty();
-            boolean _not_1 = (!_isEmpty_1);
-            if (_not_1) {
+            if (hasNotNamed) {
+              _builder.append("import org.eclipse.xtext.psi.impl.PsiEObjectImpl;");
+              _builder.newLine();
+            }
+          }
+          {
+            if (hasNamed) {
               _builder.append("import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;");
               _builder.newLine();
             }
@@ -2482,9 +2518,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
       {
-        boolean _isEmpty_2 = EObjectRules.isEmpty();
-        boolean _not_2 = (!_isEmpty_2);
-        if (_not_2) {
+        boolean _isEmpty_1 = IterableExtensions.isEmpty(EObjectRules);
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("@Inject ");
@@ -2516,9 +2552,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _builder.append("}");
       _builder.newLine();
       {
-        boolean _isEmpty_3 = EObjectRules.isEmpty();
-        boolean _not_3 = (!_isEmpty_3);
-        if (_not_3) {
+        boolean _isEmpty_2 = IterableExtensions.isEmpty(EObjectRules);
+        boolean _not_2 = (!_isEmpty_2);
+        if (_not_2) {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("@Override");
@@ -2551,8 +2587,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("ElementType()) {");
               _builder.newLineIfNotEmpty();
               {
-                boolean _contains = namedEObjectRules.contains(rule);
-                if (_contains) {
+                boolean _isNamed = this.isNamed(rule);
+                if (_isNamed) {
                   _builder.append("\t");
                   _builder.append("\t\t");
                   _builder.append("\t");
@@ -2571,76 +2607,35 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("}");
               _builder.newLine();
               {
-                List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
-                for(final AbstractElement element : _eAllOfType) {
+                Iterable<AbstractElement> _eObjectElements = this.getEObjectElements(rule);
+                for(final AbstractElement element : _eObjectElements) {
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("if (elementType == elementTypeProvider.get");
+                  String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(element);
+                  _builder.append(_grammarElementIdentifier_1, "\t\t\t");
+                  _builder.append("ElementType()) {");
+                  _builder.newLineIfNotEmpty();
                   {
-                    if ((element instanceof Action)) {
+                    boolean _isNamed_1 = this.isNamed(element);
+                    if (_isNamed_1) {
                       _builder.append("\t");
                       _builder.append("\t\t");
-                      _builder.append("if (elementType == elementTypeProvider.get");
-                      String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(element);
-                      _builder.append(_grammarElementIdentifier_1, "\t\t\t");
-                      _builder.append("ElementType()) {");
-                      _builder.newLineIfNotEmpty();
-                      {
-                        boolean _contains_1 = namedEObjectRules.contains(rule);
-                        if (_contains_1) {
-                          _builder.append("\t");
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("return new PsiNamedEObjectImpl(node) {};");
-                          _builder.newLine();
-                        } else {
-                          _builder.append("\t");
-                          _builder.append("\t\t");
-                          _builder.append("\t");
-                          _builder.append("return new PsiEObjectImpl(node) {};");
-                          _builder.newLine();
-                        }
-                      }
+                      _builder.append("\t");
+                      _builder.append("return new PsiNamedEObjectImpl(node) {};");
+                      _builder.newLine();
+                    } else {
                       _builder.append("\t");
                       _builder.append("\t\t");
-                      _builder.append("}");
+                      _builder.append("\t");
+                      _builder.append("return new PsiEObjectImpl(node) {};");
                       _builder.newLine();
                     }
                   }
-                  {
-                    if ((element instanceof RuleCall)) {
-                      {
-                        boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
-                        if (_isEObjectRuleCall) {
-                          _builder.append("\t");
-                          _builder.append("\t\t");
-                          _builder.append("if (elementType == elementTypeProvider.get");
-                          String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(element);
-                          _builder.append(_grammarElementIdentifier_2, "\t\t\t");
-                          _builder.append("ElementType()) {");
-                          _builder.newLineIfNotEmpty();
-                          {
-                            AbstractRule _rule = ((RuleCall)element).getRule();
-                            boolean _contains_2 = namedEObjectRules.contains(_rule);
-                            if (_contains_2) {
-                              _builder.append("\t");
-                              _builder.append("\t\t");
-                              _builder.append("\t");
-                              _builder.append("return new PsiNamedEObjectImpl(node) {};");
-                              _builder.newLine();
-                            } else {
-                              _builder.append("\t");
-                              _builder.append("\t\t");
-                              _builder.append("\t");
-                              _builder.append("return new PsiEObjectImpl(node) {};");
-                              _builder.newLine();
-                            }
-                          }
-                          _builder.append("\t");
-                          _builder.append("\t\t");
-                          _builder.append("}");
-                          _builder.newLine();
-                        }
-                      }
-                    }
-                  }
+                  _builder.append("\t");
+                  _builder.append("\t\t");
+                  _builder.append("}");
+                  _builder.newLine();
                 }
               }
             }
@@ -2670,13 +2665,70 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _xblockexpression;
   }
   
-  protected boolean isNamed(final AbstractRule rule) {
+  protected Iterable<AbstractElement> getEObjectElements(final AbstractRule rule) {
+    List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
+    final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractElement element) {
+        boolean _switchResult = false;
+        boolean _matched = false;
+        if (!_matched) {
+          if (element instanceof Action) {
+            _matched=true;
+          }
+          if (!_matched) {
+            if (element instanceof RuleCall) {
+              boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+              if (_isEObjectRuleCall) {
+                _matched=true;
+              }
+            }
+          }
+          if (_matched) {
+            _switchResult = true;
+          }
+        }
+        if (!_matched) {
+          _switchResult = false;
+        }
+        return Boolean.valueOf(_switchResult);
+      }
+    };
+    return IterableExtensions.<AbstractElement>filter(_eAllOfType, _function);
+  }
+  
+  protected boolean isNamed(final EObject element) {
     boolean _xblockexpression = false;
     {
-      TypeRef _type = rule.getType();
+      TypeRef _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (element instanceof AbstractRule) {
+          _matched=true;
+          _switchResult = ((AbstractRule)element).getType();
+        }
+      }
+      if (!_matched) {
+        if (element instanceof RuleCall) {
+          _matched=true;
+          AbstractRule _rule = ((RuleCall)element).getRule();
+          TypeRef _type = null;
+          if (_rule!=null) {
+            _type=_rule.getType();
+          }
+          _switchResult = _type;
+        }
+      }
+      if (!_matched) {
+        if (element instanceof Action) {
+          _matched=true;
+          _switchResult = ((Action)element).getType();
+        }
+      }
+      final TypeRef type = _switchResult;
       EClassifier _classifier = null;
-      if (_type!=null) {
-        _classifier=_type.getClassifier();
+      if (type!=null) {
+        _classifier=type.getClassifier();
       }
       final EClassifier classifier = _classifier;
       EStructuralFeature _xifexpression = null;
@@ -2704,125 +2756,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       _xblockexpression = _and;
     }
     return _xblockexpression;
-  }
-  
-  protected Iterable<CrossReference> getCrossReferences(final Grammar grammar) {
-    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-    final Function1<AbstractRule, Iterable<CrossReference>> _function = new Function1<AbstractRule, Iterable<CrossReference>>() {
-      @Override
-      public Iterable<CrossReference> apply(final AbstractRule it) {
-        TreeIterator<EObject> _eAllContents = it.eAllContents();
-        Iterator<CrossReference> _filter = Iterators.<CrossReference>filter(_eAllContents, CrossReference.class);
-        final Function1<CrossReference, Boolean> _function = new Function1<CrossReference, Boolean>() {
-          @Override
-          public Boolean apply(final CrossReference it) {
-            return Boolean.valueOf(GrammarUtil.isAssigned(it));
-          }
-        };
-        Iterator<CrossReference> _filter_1 = IteratorExtensions.<CrossReference>filter(_filter, _function);
-        return IteratorExtensions.<CrossReference>toIterable(_filter_1);
-      }
-    };
-    Iterable<Iterable<CrossReference>> _map = IterableExtensions.<AbstractRule, Iterable<CrossReference>>map(_allNonTerminalRules, _function);
-    return Iterables.<CrossReference>concat(_map);
-  }
-  
-  protected LinkedHashMultimap<String, String> getNamedGrammarElements(final Grammar grammar) {
-    LinkedHashMultimap<String, String> _xblockexpression = null;
-    {
-      final LinkedHashMultimap<String, String> namedGrammarElements = LinkedHashMultimap.<String, String>create();
-      Iterable<RuleCall> _nameRuleCalls = this.getNameRuleCalls(grammar);
-      for (final RuleCall nameRuleCall : _nameRuleCalls) {
-        {
-          final String nameRuleCallIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
-          Iterable<RuleCall> _ruleCallsWithName = this.getRuleCallsWithName(grammar, nameRuleCall);
-          for (final RuleCall ruleCall : _ruleCallsWithName) {
-            {
-              String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(ruleCall);
-              namedGrammarElements.put(_grammarElementIdentifier, nameRuleCallIdentifier);
-              AbstractRule _rule = ruleCall.getRule();
-              TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-              Iterator<Action> _filter = Iterators.<Action>filter(_eAllContents, Action.class);
-              Iterable<Action> _iterable = IteratorExtensions.<Action>toIterable(_filter);
-              for (final Action action : _iterable) {
-                String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(action);
-                namedGrammarElements.put(_grammarElementIdentifier_1, nameRuleCallIdentifier);
-              }
-            }
-          }
-        }
-      }
-      _xblockexpression = namedGrammarElements;
-    }
-    return _xblockexpression;
-  }
-  
-  protected Iterable<RuleCall> getRuleCallsWithName(final Grammar grammar, final RuleCall nameRuleCall) {
-    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-    final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
-      @Override
-      public Iterable<RuleCall> apply(final AbstractRule it) {
-        return IdeaPluginGenerator.this.getRuleCallsWithName(it, nameRuleCall);
-      }
-    };
-    Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(_allNonTerminalRules, _function);
-    return Iterables.<RuleCall>concat(_map);
-  }
-  
-  protected Iterable<RuleCall> getRuleCallsWithName(final EObject element, final RuleCall nameRuleCall) {
-    TreeIterator<EObject> _eAllContents = element.eAllContents();
-    Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
-    final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-      @Override
-      public Boolean apply(final RuleCall it) {
-        AbstractRule _rule = it.getRule();
-        TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-        final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-          @Override
-          public Boolean apply(final EObject it) {
-            return Boolean.valueOf(Objects.equal(it, nameRuleCall));
-          }
-        };
-        return Boolean.valueOf(IteratorExtensions.<EObject>exists(_eAllContents, _function));
-      }
-    };
-    Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
-    return IteratorExtensions.<RuleCall>toIterable(_filter_1);
-  }
-  
-  protected Iterable<RuleCall> getNameRuleCalls(final Grammar grammar) {
-    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-    final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
-      @Override
-      public Iterable<RuleCall> apply(final AbstractRule it) {
-        return IdeaPluginGenerator.this.getNameRuleCalls(it);
-      }
-    };
-    Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(_allNonTerminalRules, _function);
-    return Iterables.<RuleCall>concat(_map);
-  }
-  
-  protected Iterable<RuleCall> getNameRuleCalls(final EObject element) {
-    TreeIterator<EObject> _eAllContents = element.eAllContents();
-    Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
-    final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-      @Override
-      public Boolean apply(final RuleCall it) {
-        boolean _and = false;
-        boolean _isAssigned = GrammarUtil.isAssigned(it);
-        if (!_isAssigned) {
-          _and = false;
-        } else {
-          Assignment _containingAssignment = GrammarUtil.containingAssignment(it);
-          String _feature = _containingAssignment.getFeature();
-          boolean _equals = Objects.equal(_feature, "name");
-          _and = _equals;
-        }
-        return Boolean.valueOf(_and);
-      }
-    };
-    Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
-    return IteratorExtensions.<RuleCall>toIterable(_filter_1);
   }
   
   public CharSequence compileAbstractCompletionContributor(final Grammar grammar) {

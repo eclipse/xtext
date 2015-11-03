@@ -4,7 +4,6 @@ import org.eclipse.xtext.parser.bug419429.idea.lang.psi.impl.Bug419429FileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.parser.bug419429.idea.lang.Bug419429ElementTypeProvider;
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;

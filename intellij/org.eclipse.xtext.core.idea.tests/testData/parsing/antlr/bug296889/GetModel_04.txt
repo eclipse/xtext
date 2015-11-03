@@ -4,7 +4,7 @@ org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug296889TestLanguageFileImpl:
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ExpressionsExpressionParserRuleCall_0_1_0_ELEMENT_TYPE)(5,10)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Postop_PostopExprAction_1_0_ELEMENT_TYPE)('anonymous')(5,10)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(Expression_PostopParserRuleCall_0_ELEMENT_TYPE)(5,8)
-          org.eclipse.xtext.psi.impl.PsiEObjectImpl(Variable_VariableAction_0_ELEMENT_TYPE)('anonymous')(5,8)
+          org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Variable_VariableAction_0_ELEMENT_TYPE:Variable_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE)('anonymous')(5,8)
             org.eclipse.xtext.psi.impl.PsiEObjectImpl(Postop_VariableParserRuleCall_0_ELEMENT_TYPE)(5,5)
               <empty list>
             PsiWhiteSpace(' ')(5,6)
@@ -16,7 +16,7 @@ org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug296889TestLanguageFileImpl:
           <empty list>
         PsiWhiteSpace(' ')(10,11)
         PsiElement(Preop_FunctionNameHyphenMinusHyphenMinusKeyword_1_0_ELEMENT_TYPE)('--')(11,13)
-        org.eclipse.xtext.psi.impl.PsiEObjectImpl(Variable_VariableAction_0_ELEMENT_TYPE)('anonymous')(13,15)
+        org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Variable_VariableAction_0_ELEMENT_TYPE:Variable_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE)('anonymous')(13,15)
           org.eclipse.xtext.psi.impl.PsiEObjectImpl(Preop_ExprVariableParserRuleCall_2_0_ELEMENT_TYPE)(13,13)
             <empty list>
           PsiElement(Variable_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE)('ID')(13,15)

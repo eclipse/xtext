@@ -5,6 +5,7 @@ import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.parser.antlr.idea.lang.Bug296889TestLanguageElementTypeProvider;
 import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -66,7 +67,7 @@ public class Bug296889TestLanguageParserDefinition extends AbstractXtextParserDe
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getVariable_VariableAction_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}

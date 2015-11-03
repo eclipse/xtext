@@ -138,13 +138,13 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_XtendFieldAnnotationInfoAction_2_0_0_0_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_TypeJvmTypeReferenceParserRuleCall_2_0_0_0_4_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_XtendFieldAnnotationInfoAction_2_0_0_1_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_TypeJvmTypeReferenceParserRuleCall_2_0_0_1_2_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -153,7 +153,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_XtendClassAnnotationInfoAction_2_1_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_TypeParametersJvmTypeParameterParserRuleCall_2_1_4_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -174,7 +174,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_XtendInterfaceAnnotationInfoAction_2_2_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_TypeParametersJvmTypeParameterParserRuleCall_2_2_4_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -192,7 +192,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_XtendEnumAnnotationInfoAction_2_3_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_MembersXtendEnumLiteralParserRuleCall_2_3_5_0_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -201,7 +201,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_XtendAnnotationTypeAnnotationInfoAction_2_4_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getAnnotationField_MembersAnnotationFieldParserRuleCall_2_4_5_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -216,7 +216,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_XtendFieldAnnotationInfoAction_2_0_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_TypeJvmTypeReferenceParserRuleCall_2_0_2_0_2_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -234,7 +234,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_XtendFunctionAnnotationInfoAction_2_1_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_TypeParametersJvmTypeParameterParserRuleCall_2_1_4_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -300,7 +300,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_XtendClassAnnotationInfoAction_2_3_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_TypeParametersJvmTypeParameterParserRuleCall_2_3_4_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -321,7 +321,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_XtendInterfaceAnnotationInfoAction_2_4_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_TypeParametersJvmTypeParameterParserRuleCall_2_4_4_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -339,7 +339,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_XtendEnumAnnotationInfoAction_2_5_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_MembersXtendEnumLiteralParserRuleCall_2_5_5_0_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
@@ -348,7 +348,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_XtendAnnotationTypeAnnotationInfoAction_2_6_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMember_MembersAnnotationFieldParserRuleCall_2_6_5_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -417,7 +417,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXVariableDeclaration_XtendVariableDeclarationAction_0_0_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXVariableDeclaration_TypeJvmTypeReferenceParserRuleCall_1_0_0_0_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -432,7 +432,7 @@ public class XtendParserDefinition extends AbstractXtextParserDefinition {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXConstructorCall_AnonymousClassConstructorCallAction_1_0_0_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getXConstructorCall_MembersMemberParserRuleCall_1_1_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};

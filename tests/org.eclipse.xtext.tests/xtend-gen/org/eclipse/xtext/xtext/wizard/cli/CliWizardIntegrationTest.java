@@ -206,7 +206,7 @@ public class CliWizardIntegrationTest {
     @Override
     public void apply(final WizardConfiguration it) {
       it.setBaseName("org.xtext.example.eclipsePlugin");
-      it.setPreferredBuildSystem(BuildSystem.ECLIPSE);
+      it.setPreferredBuildSystem(BuildSystem.NONE);
       it.setSourceLayout(SourceLayout.PLAIN);
       it.setProjectLayout(ProjectLayout.FLAT);
       RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();

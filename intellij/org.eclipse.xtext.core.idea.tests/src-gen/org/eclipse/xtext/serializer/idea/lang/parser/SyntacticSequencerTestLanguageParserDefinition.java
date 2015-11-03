@@ -103,7 +103,7 @@ public class SyntacticSequencerTestLanguageParserDefinition extends AbstractXtex
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrim0_Val0Action_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getExp1ElementType()) {
 				return new PsiEObjectImpl(node) {};
@@ -127,7 +127,7 @@ public class SyntacticSequencerTestLanguageParserDefinition extends AbstractXtex
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrim1_Val1Action_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrim1_Addition1ParserRuleCall_1_1ElementType()) {
 				return new PsiEObjectImpl(node) {};
@@ -166,7 +166,7 @@ public class SyntacticSequencerTestLanguageParserDefinition extends AbstractXtex
 				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrim2_Val2Action_0_0ElementType()) {
-				return new PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPrim2_Addition2ParserRuleCall_1_1ElementType()) {
 				return new PsiEObjectImpl(node) {};

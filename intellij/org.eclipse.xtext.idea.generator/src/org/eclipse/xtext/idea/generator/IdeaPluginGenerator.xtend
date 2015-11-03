@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.generator
 
-import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Guice
 import com.google.inject.Inject
 import java.util.Set
@@ -22,7 +21,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
-import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.ISetup
@@ -795,8 +793,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	'''
 	
 	def compileParserDefinition(Grammar grammar) {
-		val EObjectRules = grammar.allRules.filter[EObjectRule].toList
-		val namedEObjectRules = EObjectRules.filter[named].toList
+		val EObjectRules = grammar.allRules.filter[EObjectRule]
+		val hasNamed = EObjectRules.exists[named || EObjectElements.exists[named]]
+		val hasNotNamed = EObjectRules.exists[!named || EObjectElements.exists[!named]]
 		'''
 			package «grammar.parserDefinitionName.toPackageName»;
 			
@@ -805,8 +804,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			«IF !EObjectRules.empty»
 			import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 			import «grammar.elementTypeProviderName»;
+			«IF hasNotNamed»
 			import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
-			«IF !namedEObjectRules.empty»
+			«ENDIF»
+			«IF hasNamed»
 			import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 			«ENDIF»
 			«ENDIF»
@@ -839,33 +840,20 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 						IElementType elementType = node.getElementType();
 						«FOR rule : EObjectRules»
 						if (elementType == elementTypeProvider.get«rule.grammarElementIdentifier»ElementType()) {
-							«IF namedEObjectRules.contains(rule)»
+							«IF rule.named»
 							return new PsiNamedEObjectImpl(node) {};
 							«ELSE»
 							return new PsiEObjectImpl(node) {};
 							«ENDIF»
 						}
-						«FOR element : rule.eAllOfType(AbstractElement)»
-						«IF element instanceof Action»
+						«FOR element : rule.EObjectElements»
 						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
-							«IF namedEObjectRules.contains(rule)»
+							«IF element.named»
 							return new PsiNamedEObjectImpl(node) {};
 							«ELSE»
 							return new PsiEObjectImpl(node) {};
 							«ENDIF»
 						}
-						«ENDIF»
-						«IF element instanceof RuleCall»
-						«IF element.EObjectRuleCall»
-						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
-							«IF namedEObjectRules.contains(element.rule)»
-							return new PsiNamedEObjectImpl(node) {};
-							«ELSE»
-							return new PsiEObjectImpl(node) {};
-							«ENDIF»
-						}
-						«ENDIF»
-						«ENDIF»
 						«ENDFOR»
 						«ENDFOR»
 						throw new IllegalStateException("Unexpected element type: " + elementType);
@@ -878,50 +866,25 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		'''
 	}
 	
-	protected def isNamed(AbstractRule rule) {
-		val classifier = rule.type?.classifier
+	protected def getEObjectElements(AbstractRule rule) {
+		rule.eAllOfType(AbstractElement).filter[ element |
+			switch element {
+				Action,
+				RuleCall case element.EObjectRuleCall: true
+				default: false
+			}
+		]
+	}
+	
+	protected def isNamed(EObject element) {
+		val type = switch element {
+			AbstractRule: element.type
+			RuleCall: element.rule?.type
+			Action: element.type
+		}
+		val classifier = type?.classifier
 		val feature = if(classifier instanceof EClass) classifier.getEStructuralFeature('name')
 		feature instanceof EAttribute && !feature.many && String.isAssignableFrom(feature.EType.instanceClass)
-	}
-	
-	protected def getCrossReferences(Grammar grammar) {
-		grammar.allNonTerminalRules.map[
-			eAllContents.filter(CrossReference).filter[assigned].toIterable
-		].flatten
-	}
-	
-	protected def getNamedGrammarElements(Grammar grammar) {
-		val namedGrammarElements = LinkedHashMultimap.<String, String>create
-		for (nameRuleCall : grammar.nameRuleCalls) {
-			val nameRuleCallIdentifier = nameRuleCall.grammarElementIdentifier
-			for (ruleCall : grammar.getRuleCallsWithName(nameRuleCall)) {
-				namedGrammarElements.put(ruleCall.grammarElementIdentifier, nameRuleCallIdentifier)
-				for (action : ruleCall.rule.eAllContents.filter(Action).toIterable) {
-					namedGrammarElements.put(action.grammarElementIdentifier, nameRuleCallIdentifier)
-				}
-			}
-		}
-		namedGrammarElements
-	}
-	
-	protected def getRuleCallsWithName(Grammar grammar, RuleCall nameRuleCall) {
-		grammar.allNonTerminalRules.map[getRuleCallsWithName(nameRuleCall)].flatten
-	}
-	
-	protected def getRuleCallsWithName(EObject element, RuleCall nameRuleCall) {
-		element.eAllContents.filter(RuleCall).filter [
-			rule.eAllContents.exists[it == nameRuleCall]
-		].toIterable
-	}
-	
-	protected def getNameRuleCalls(Grammar grammar) {
-		grammar.allNonTerminalRules.map[nameRuleCalls].flatten
-	}
-	
-	protected def getNameRuleCalls(EObject element) {
-		element.eAllContents.filter(RuleCall).filter [
-			assigned && containingAssignment.feature == 'name'
-		].toIterable
 	}
 	
 	def compileAbstractCompletionContributor(Grammar grammar) '''

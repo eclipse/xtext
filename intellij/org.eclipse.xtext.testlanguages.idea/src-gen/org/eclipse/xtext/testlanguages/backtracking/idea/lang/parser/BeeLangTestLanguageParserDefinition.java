@@ -194,7 +194,7 @@ public class BeeLangTestLanguageParserDefinition extends AbstractXtextParserDefi
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getVarDeclaration_DefValueAction_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getVarDeclaration_TypeTypeRefParserRuleCall_2_0_1_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -206,7 +206,7 @@ public class BeeLangTestLanguageParserDefinition extends AbstractXtextParserDefi
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getValDeclaration_DefValueAction_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getValDeclaration_TypeTypeRefParserRuleCall_3_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -359,7 +359,7 @@ public class BeeLangTestLanguageParserDefinition extends AbstractXtextParserDefi
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getInfixExpression_CallFeatureFuncExprAction_1_0_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getInfixExpression_ParameterListParameterListParserRuleCall_1_0_4_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -446,13 +446,13 @@ public class BeeLangTestLanguageParserDefinition extends AbstractXtextParserDefi
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getValue_VariableExpressionAction_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getKeywordVariablesElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getKeywordVariables_VariableExpressionAction_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getFeatureCallElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -464,7 +464,7 @@ public class BeeLangTestLanguageParserDefinition extends AbstractXtextParserDefi
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getOperationCall_CallNamedFunctionAction_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getOperationCall_ParameterListParameterListParserRuleCall_3_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
@@ -527,7 +527,7 @@ public class BeeLangTestLanguageParserDefinition extends AbstractXtextParserDefi
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getClosureExpression_FunctionAction_0ElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getClosureExpression_ReturnTypeTypeRefParserRuleCall_1_1_0ElementType()) {
 				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};

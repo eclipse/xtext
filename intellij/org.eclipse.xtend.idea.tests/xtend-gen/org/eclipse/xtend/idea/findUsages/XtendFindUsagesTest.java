@@ -54,7 +54,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("primaryElements {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE)");
+    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Type_NameValidIDParserRuleCall_2_0_3_0_ELEMENT_TYPE)(\'anonymous\')");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -92,7 +92,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_2.append("primaryElements {");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE) {");
+    _builder_2.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Type_NameValidIDParserRuleCall_2_0_3_0_ELEMENT_TYPE)(\'anonymous\') {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
     _builder_2.append("MyClass (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
@@ -181,7 +181,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("primaryElements {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE)");
+    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Member_NameValidIDParserRuleCall_2_0_2_3_1_0_ELEMENT_TYPE)(\'anonymous\')");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -264,7 +264,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("primaryElements {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE) {");
+    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Member_NameValidIDParserRuleCall_2_0_2_3_1_0_ELEMENT_TYPE)(\'anonymous\') {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("y (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
@@ -387,7 +387,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("secondaryElements {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE)");
+    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Type_NameValidIDParserRuleCall_2_0_3_0_ELEMENT_TYPE)(\'anonymous\')");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -461,7 +461,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_2.append("secondaryElements {");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE) {");
+    _builder_2.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Type_XtendClassAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Type_NameValidIDParserRuleCall_2_0_3_0_ELEMENT_TYPE)(\'anonymous\') {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
     _builder_2.append("MyClass (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
@@ -547,7 +547,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("secondaryElements {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE)");
+    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Member_NameValidIDParserRuleCall_2_0_2_3_1_0_ELEMENT_TYPE)(\'anonymous\')");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -642,7 +642,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("secondaryElements {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE) {");
+    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFieldAnnotationInfoAction_2_0_0_ELEMENT_TYPE:Member_NameValidIDParserRuleCall_2_0_2_3_1_0_ELEMENT_TYPE)(\'anonymous\') {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("y (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
@@ -2032,7 +2032,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("primaryElements {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE) {");
+    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE:Member_NameFunctionIDParserRuleCall_2_1_5_4_0_0_ELEMENT_TYPE)(\'anonymous\') {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("* (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
@@ -2181,7 +2181,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("primaryElements {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE) {");
+    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE:Member_NameFunctionIDParserRuleCall_2_1_5_4_0_0_ELEMENT_TYPE)(\'anonymous\') {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("* (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
@@ -2306,7 +2306,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     _builder_1.append("primaryElements {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE) {");
+    _builder_1.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Member_XtendFunctionAnnotationInfoAction_2_1_0_ELEMENT_TYPE:Member_NameFunctionIDParserRuleCall_2_1_5_4_0_0_ELEMENT_TYPE)(\'anonymous\') {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("*= (class org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl) {");
