@@ -19,8 +19,7 @@ import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -33,7 +32,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-class ImplicitFragment extends AbstractXtextGeneratorFragment {
+class ImplicitFragment extends AbstractStubGeneratingFragment {
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
@@ -41,10 +40,6 @@ class ImplicitFragment extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming naming;
-  
-  @Inject
-  @Extension
-  private CodeConfig _codeConfig;
   
   @Override
   public void generate() {
@@ -59,8 +54,8 @@ class ImplicitFragment extends AbstractXtextGeneratorFragment {
       Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext", "org.eclipse.xtext.util")));
-      boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs) {
+      boolean _generateXtendStub = this.generateXtendStub();
+      if (_generateXtendStub) {
         IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
         IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
         ManifestAccess _manifest_2 = _runtime_2.getManifest();
@@ -84,8 +79,8 @@ class ImplicitFragment extends AbstractXtextGeneratorFragment {
       Set<String> _requiredBundles_2 = _manifest_5.getRequiredBundles();
       _requiredBundles_2.addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.ui", "org.eclipse.xtext.ui.shared", "org.eclipse.ui.editors", "org.eclipse.ui")));
-      boolean _isPreferXtendStubs_1 = this._codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs_1) {
+      boolean _generateXtendStub_1 = this.generateXtendStub();
+      if (_generateXtendStub_1) {
         IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
         IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_6.getEclipsePlugin();
         ManifestAccess _manifest_6 = _eclipsePlugin_2.getManifest();

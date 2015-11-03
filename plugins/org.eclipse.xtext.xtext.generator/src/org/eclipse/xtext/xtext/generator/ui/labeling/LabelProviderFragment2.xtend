@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.labeling
 import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -37,9 +36,6 @@ class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 
 	@Inject
 	extension XbaseUsageDetector
-
-	@Inject
-	extension CodeConfig
 
 	@Inject
 	FileAccessFactory fileAccessFactory
@@ -112,7 +108,7 @@ class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 		}
 
 		if (generateStub && projectConfig.eclipsePlugin.src !== null) {
-			if (preferXtendStubs) {
+			if (generateXtendStub) {
 				generateXtendEObjectLabelProvider
 				generateXtendDescriptionLabelProvider
 			} else {
