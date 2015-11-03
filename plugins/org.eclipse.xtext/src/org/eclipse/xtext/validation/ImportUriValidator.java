@@ -22,7 +22,7 @@ public class ImportUriValidator extends AbstractDeclarativeValidator {
 	/**
 	 * @since 2.9
 	 */
-	public static String UNRESOLVABLE_IMPORT_URI = "unresolvable_import_uri";
+	public static final String UNRESOLVABLE_IMPORT_URI = "unresolvable_import_uri";
 
 	@Inject
 	private ImportUriResolver resolver;
