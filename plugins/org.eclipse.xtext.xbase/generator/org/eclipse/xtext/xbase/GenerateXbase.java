@@ -66,6 +66,8 @@ final class GenerateXbase {
 					setLineDelimiter(lineDelimiter);
 					setFileHeader(fileHeader);
 					setPreferXtendStubs(false);
+					setGenerateXtendModules(true);
+					setGenerateXtendSetups(true);
 				}});
 			}});
 
