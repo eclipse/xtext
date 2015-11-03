@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.RuleNames;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
@@ -72,6 +73,9 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   private String grammarUri;
   
   private String name;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private Boolean generateXtendStubs;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private Grammar grammar;
@@ -115,6 +119,9 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   
   @Inject
   private IXtextProjectConfig projectConfig;
+  
+  @Inject
+  private CodeConfig codeConfig;
   
   public void setGrammarUri(final String uri) {
     this.grammarUri = uri;
@@ -165,6 +172,18 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
       XtextGeneratorLanguage.LOG.info((("No explicit fileExtensions configured. Using \'*." + this.fileExtensions) + "\'."));
     }
     return this.fileExtensions;
+  }
+  
+  @Override
+  public boolean isGenerateXtendStubs() {
+    boolean _xifexpression = false;
+    boolean _notEquals = (!Objects.equal(this.generateXtendStubs, null));
+    if (_notEquals) {
+      _xifexpression = this.generateXtendStubs.booleanValue();
+    } else {
+      _xifexpression = this.codeConfig.isPreferXtendStubs();
+    }
+    return _xifexpression;
   }
   
   @Override
@@ -388,6 +407,10 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   private final static Logger LOG = Logger.getLogger(XtextGeneratorLanguage.class);
+  
+  public void setGenerateXtendStubs(final Boolean generateXtendStubs) {
+    this.generateXtendStubs = generateXtendStubs;
+  }
   
   @Pure
   public Grammar getGrammar() {

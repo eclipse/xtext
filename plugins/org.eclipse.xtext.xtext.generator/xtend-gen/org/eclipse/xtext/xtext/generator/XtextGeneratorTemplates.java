@@ -39,7 +39,6 @@ import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -58,9 +57,6 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnot
 @SuppressWarnings("all")
 public class XtextGeneratorTemplates {
   @Inject
-  private CodeConfig codeConfig;
-  
-  @Inject
   private FileAccessFactory fileAccessFactory;
   
   @Inject
@@ -69,8 +65,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createRuntimeSetup(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _isGenerateXtendStubs = langConfig.isGenerateXtendStubs();
+    if (_isGenerateXtendStubs) {
       TypeReference _runtimeSetup = this.naming.getRuntimeSetup(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -606,8 +602,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createRuntimeModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _isGenerateXtendStubs = langConfig.isGenerateXtendStubs();
+    if (_isGenerateXtendStubs) {
       TypeReference _runtimeModule = this.naming.getRuntimeModule(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -810,8 +806,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createEclipsePluginModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _isGenerateXtendStubs = langConfig.isGenerateXtendStubs();
+    if (_isGenerateXtendStubs) {
       TypeReference _eclipsePluginModule = this.naming.getEclipsePluginModule(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -977,8 +973,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createIdeaModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _isGenerateXtendStubs = langConfig.isGenerateXtendStubs();
+    if (_isGenerateXtendStubs) {
       TypeReference _ideaModule = this.naming.getIdeaModule(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -1106,8 +1102,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createWebModule(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _isGenerateXtendStubs = langConfig.isGenerateXtendStubs();
+    if (_isGenerateXtendStubs) {
       TypeReference _webModule = this.naming.getWebModule(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -1275,8 +1271,8 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createWebSetup(final IXtextGeneratorLanguage langConfig) {
     final Grammar it = langConfig.getGrammar();
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _isGenerateXtendStubs = langConfig.isGenerateXtendStubs();
+    if (_isGenerateXtendStubs) {
       TypeReference _webSetup = this.naming.getWebSetup(it);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override

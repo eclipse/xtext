@@ -33,4 +33,6 @@ public interface IXtextGeneratorLanguage {
   public abstract GuiceModuleAccess getWebGenModule();
   
   public abstract ResourceSet getResourceSet();
+  
+  public abstract boolean isGenerateXtendStubs();
 }
