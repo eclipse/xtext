@@ -9,7 +9,20 @@ package org.eclipse.xtext.xtext.generator
 
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtend.lib.annotations.Accessors
+import com.google.inject.Inject
 
 abstract class AbstractStubGeneratingFragment extends AbstractXtextGeneratorFragment {
-	@Accessors boolean generateStub = true
+
+	@Inject
+	extension CodeConfig
+
+	@Accessors
+	boolean generateStub = true
+	
+	@Accessors(PUBLIC_SETTER)
+	Boolean generateXtendStub = null
+	
+	def generateXtendStub() {
+		if (generateXtendStub != null) generateXtendStub.booleanValue else preferXtendStubs
+	}
 }

@@ -17,7 +17,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -44,10 +43,6 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
-  @Inject
-  @Extension
-  private CodeConfig _codeConfig;
   
   @Inject
   @Extension
@@ -115,8 +110,8 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       }
       boolean _tripleNotEquals = (_src != null);
       if (_tripleNotEquals) {
-        boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
-        if (_isPreferXtendStubs) {
+        boolean _generateXtendStub = this.generateXtendStub();
+        if (_generateXtendStub) {
           this.generateXtendQuickfixProvider();
         } else {
           this.generateJavaQuickfixProvider();

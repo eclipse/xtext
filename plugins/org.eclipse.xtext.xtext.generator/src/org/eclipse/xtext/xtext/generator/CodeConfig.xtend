@@ -46,6 +46,12 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	@Accessors
 	boolean preferXtendStubs = true
 	
+	@Accessors(PUBLIC_SETTER)
+	Boolean generateXtendModules = null
+	
+	@Accessors(PUBLIC_SETTER)
+	Boolean generateXtendSetups = null
+	
 	@Accessors(PUBLIC_GETTER)
 	XtextVersion xtextVersion
 	
@@ -133,4 +139,11 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 		return stringBuilder.toString
 	}
 	
+	def boolean generateXtendModules() {
+		if (generateXtendModules != null) generateXtendModules.booleanValue else preferXtendStubs
+	}
+	
+	def boolean generateXtendSetups() {
+		if (generateXtendSetups != null) generateXtendSetups.booleanValue else preferXtendStubs
+	}
 }

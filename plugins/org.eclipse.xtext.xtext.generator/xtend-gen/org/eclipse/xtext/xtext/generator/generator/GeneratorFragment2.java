@@ -188,8 +188,8 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
         _requiredBundles.add("org.eclipse.xtext.xbase.lib");
       }
-      boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs) {
+      boolean _generateXtendStub = this.generateXtendStub();
+      if (_generateXtendStub) {
         this.doGenerateXtendStubFile();
       } else {
         this.doGenerateJavaStubFile();
