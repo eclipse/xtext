@@ -75,6 +75,7 @@ final class GenerateXbase {
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
 				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
+				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
 				addFragment(new Formatter2Fragment2());
@@ -92,6 +93,7 @@ final class GenerateXbase {
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
 				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
+				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
 				addFragment(new ResourceFactoryFragment2());
@@ -129,6 +131,7 @@ final class GenerateXbase {
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
 				getStandaloneSetup().addLoadedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
+				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
 				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
 				addFragment(new ResourceFactoryFragment2());
