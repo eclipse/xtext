@@ -147,6 +147,23 @@ class AdvancedNewProjectPage extends WizardPage {
 				])
 			}
 		}
+		
+		if (preferredBuildSystem.isSelected(BuildSystem.NONE) && sourceLayout.isSelected(SourceLayout.MAVEN)) {
+			if (preferredBuildSystem === source) {
+				reportIssue(ERROR, '''
+				Maven/Gradle source layout is not supported without a build system.
+				Please <a>select '«SourceLayout.PLAIN»'</a> source layout.''', [
+					sourceLayout.select(SourceLayout.PLAIN)
+				])
+			} else {
+				reportIssue(ERROR, '''
+				Maven/Gradle source layout is only supported when using Maven or Gradle build system.
+				You need to choose maven or gradle build system.
+				Select <a>gradle</a> build.''', [
+					preferredBuildSystem.select(BuildSystem.GRADLE)
+				])
+			}
+		}
 
 		if (createWebProject.selection && preferredBuildSystem.isSelected(BuildSystem.NONE)) {
 			if (preferredBuildSystem === source) {
