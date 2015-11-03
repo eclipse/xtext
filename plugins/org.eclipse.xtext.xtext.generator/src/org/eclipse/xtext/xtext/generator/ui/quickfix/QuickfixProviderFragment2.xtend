@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.quickfix
 import javax.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -29,9 +28,6 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 
 	@Inject
 	extension XtextGeneratorNaming
-
-	@Inject
-	extension CodeConfig
 	
 	@Inject
 	extension ValidatorNaming
@@ -69,7 +65,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 
 		if (generateStub) {
 			if (projectConfig.eclipsePlugin?.src !== null) {
-				if (preferXtendStubs) {
+				if (generateXtendStub) {
 					generateXtendQuickfixProvider
 				} else {
 					generateJavaQuickfixProvider

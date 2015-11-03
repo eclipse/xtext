@@ -17,13 +17,11 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
-package class ImplicitFragment extends AbstractXtextGeneratorFragment {
+package class ImplicitFragment extends AbstractStubGeneratingFragment {
 	
 	@Inject extension XbaseUsageDetector
 	
 	@Inject extension XtextGeneratorNaming naming
-	
-	@Inject extension CodeConfig
 	
 	override generate() {
 		if (projectConfig.runtime.manifest !== null) {
@@ -31,7 +29,7 @@ package class ImplicitFragment extends AbstractXtextGeneratorFragment {
 				'org.eclipse.xtext', 'org.eclipse.xtext.util'
 			])
 			
-			if (preferXtendStubs) {
+			if (generateXtendStub) {
 				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtend.lib' 
 			}
 			
@@ -43,7 +41,7 @@ package class ImplicitFragment extends AbstractXtextGeneratorFragment {
 				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui'
 			])
 			
-			if (preferXtendStubs) {
+			if (generateXtendStub) {
 				projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtend.lib' 
 			}
 			

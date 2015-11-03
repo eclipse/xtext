@@ -15,7 +15,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -33,9 +32,6 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
  */
 @SuppressWarnings("all")
 public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment {
-  @Inject
-  private CodeConfig codeConfig;
-  
   @Inject
   private FileAccessFactory fileAccessFactory;
   
@@ -75,8 +71,8 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
     IXtextGeneratorFileSystemAccess _src = _eclipsePlugin_2.getSrc();
     boolean _tripleNotEquals = (_src != null);
     if (_tripleNotEquals) {
-      boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs) {
+      boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+      if (_isGenerateXtendStub) {
         this.generateXtendOutlineTreeProvider();
       } else {
         this.generateJavaOutlineTreeProvider();

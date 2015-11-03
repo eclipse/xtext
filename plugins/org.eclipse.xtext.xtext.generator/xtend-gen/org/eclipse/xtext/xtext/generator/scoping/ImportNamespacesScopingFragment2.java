@@ -25,7 +25,6 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -50,9 +49,6 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
-  @Inject
-  private CodeConfig codeConfig;
   
   @Inject
   private FileAccessFactory fileAccessFactory;
@@ -137,8 +133,8 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     this.generateGenScopeProvider();
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
-      boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs) {
+      boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+      if (_isGenerateXtendStub) {
         this.generateXtendScopeProvider();
       } else {
         this.generateJavaScopeProvider();
@@ -156,8 +152,8 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar);
         String _packageName = _scopeProviderClass.getPackageName();
         _exportedPackages.add(_packageName);
-        boolean _isPreferXtendStubs_1 = this.codeConfig.isPreferXtendStubs();
-        if (_isPreferXtendStubs_1) {
+        boolean _isGenerateXtendStub_1 = this.isGenerateXtendStub();
+        if (_isGenerateXtendStub_1) {
           IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
           IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
           ManifestAccess _manifest_2 = _runtime_2.getManifest();
