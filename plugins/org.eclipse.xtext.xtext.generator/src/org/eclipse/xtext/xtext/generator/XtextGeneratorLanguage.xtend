@@ -49,6 +49,9 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	
 	String name
 	
+	@Accessors(PUBLIC_SETTER)	
+	Boolean generateXtendStubs
+	
 	@Accessors(PUBLIC_GETTER)
 	Grammar grammar
 	
@@ -87,6 +90,8 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	
 	@Inject IXtextProjectConfig projectConfig
 	
+	@Inject CodeConfig codeConfig
+	
 	def void setGrammarUri(String uri) {
 		this.grammarUri = uri
 	}
@@ -109,6 +114,10 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 			LOG.info("No explicit fileExtensions configured. Using '*." + fileExtensions + "'.")
 		}
 		return fileExtensions
+	}
+	
+	override isGenerateXtendStubs() {
+		if (generateXtendStubs != null) generateXtendStubs.booleanValue else codeConfig.preferXtendStubs
 	}
 	
 	override initialize(Injector injector) {
