@@ -20,7 +20,7 @@ a:hover {
 
 .container {
 	display: block;
-	position: absolute;
+	position: relative;
 	width: 100%;
 	height: 100%;
 
@@ -57,18 +57,39 @@ a:hover {
 	margin: 20px;
 }
 
+.status {
+	position:absolute;
+	top:50px;
+	bottom: 0px;
+	left: 50%;
+	min-width: 20px;
+	margin: 10px;
+}
+
 .xtext-layout h2{
 	margin:10px 0 6px 5px;
 	font-size:14px;
 }
 
-#generate-button {
+#generate-java {
 	margin-bottom:10px;
 	margin-top:10px;
 	position:absolute;
-	top:0;
+	top:40%;
 	right:0;
-	width:70px;
+	margin:auto;
+	height:20px;
+	color:blue;
+	font:12px Verdana, Arial, Helvetica, sans-serif;
+	}
+	
+#generate-xtend {
+	margin-bottom:10px;
+	margin-top:10px;
+	position:absolute;
+	top:60%;
+	right:0;
+	margin:auto;
 	height:20px;
 	font:12px Verdana, Arial, Helvetica, sans-serif;
 	}
@@ -76,7 +97,7 @@ a:hover {
 #xtext-editor {
 	display: block;
 	position: absolute;
-	top: 40px;
+	top: 60px;
 	bottom: 0;
 	left: 0;
 	width:100%;
@@ -88,9 +109,9 @@ a:hover {
 .java-layout {
 	display: block;
 	position: absolute;
-	top: 50px;
+	top: 70px;
+	left: 55%;
 	bottom: 0;
-	width: 45%;
 	right: 0;
 	margin-right: 40px;
 	margin-top: 20px;
@@ -105,7 +126,7 @@ a:hover {
 #java-editor {
 	display: block;
 	position: absolute;
-	top: 40px;
+	top: 70px;
 	bottom: 0;
 	width:100%;
 	padding: 4px;

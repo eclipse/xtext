@@ -14,8 +14,10 @@ class Java2XtendService{
 	
 	def generate(String javaSrc,XtextWebDocumentAccess document) {
 		val xtendSrc = javaConverter.toXtend("Clazz",javaSrc)
-		
-		return new Java2XtendResult(formatter.format(xtendSrc.xtendCode))
+		if (xtendSrc.xtendCode==null || xtendSrc.problems.size>0){
+			return new Java2XtendResult(0,null)
+		}
+		return new Java2XtendResult(1,formatter.format(xtendSrc.xtendCode))
 	}
 	
 }

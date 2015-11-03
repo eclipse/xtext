@@ -2,14 +2,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
-	<title>Example Web Editor</title>
+	<title>Xtend Web Editor</title>
 	<link rel="stylesheet" type="text/css" href="xtext/2.9.0-SNAPSHOT/xtext-ace.css"/>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 	<script src="webjars/requirejs/2.1.20/require.min.js"></script>
 	<script type="text/javascript">
 		function generateJavaByHttpRequest(){  
 			var xmlhttp = new XMLHttpRequest();
-			var url = 'http://' + location.host + '/xtext-service/generate?resource=example.xtend';
+			var url = 'http://' + location.host + '/xtext-service/generate?resource=helloWorld.xtend';
 			xmlhttp.open("GET", url, true);
 			xmlhttp.onreadystatechange = function() {
 			    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -20,7 +20,6 @@
 			xmlhttp.send();
 		}
 		function generateJava(){
-			
 			editor.xtextServices.generate().done(function(generateResult) {	
 				aceEditor.getSession().setValue(generateResult);
 			});
@@ -28,6 +27,10 @@
 		
 		function Java2Xtend(){			
 			var sendmsg = 'srcJava='+aceEditor.getSession().getValue();
+			if (sendmsg=='srcJava='){
+				//alert("Please make sure the java code is not empty");
+				return ;
+			}
 			
 			var xmlhttp = new XMLHttpRequest();
 			var url = 'http://' + location.host + '/xtext-service/java2xtend?resource=java.xtend';
@@ -37,7 +40,9 @@
 			xmlhttp.onreadystatechange = function() {
 			    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			        var target = JSON.parse(xmlhttp.responseText);
-			        editor.getSession().setValue(target.generateText);
+			        if (target.stateID == 1){
+			        	editor.getSession().setValue(target.generateText);	
+			        }
 			    }
 			}
 			xmlhttp.send(sendmsg);
@@ -117,21 +122,68 @@
 				editor.keyBinding.addKeyboardHandler(quotes);
 				editor.keyBinding.addKeyboardHandler(single_quotes);
 				
+				editor.on('focus',function(){
+					document.getElementById("generate-java").style.color = "#0000FF";			
+					document.getElementById("generate-xtend").style.color = "#808080";
+				});
+				
+				
 				aceEditor = ace.edit("result");
 				aceEditor.getSession().setMode("ace/mode/java");
 				aceEditor.$blockScrolling = Infinity
 				//aceEditor.setBehavioursEnabled(true);
+				aceEditor.on('focus',function(){
+					document.getElementById("generate-xtend").style.color = "#0000FF";			
+					document.getElementById("generate-java").style.color = "#808080";
+				});
+				
+				aceEditor.getSession().on('change', function(e){
+					if (aceEditor.isFocused()){
+						Java2Xtend();	
+					}
+				});
+				
 				
 				editor.xtextServices.successListeners.push(function(serviceType, result) {
-					if (serviceType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
+					if (serviceType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})
+							&& editor.isFocused()) {
 							generateJava();
 						}
+					else if (serviceType == 'format'){
+							
+					}
+					
 				    });
-				
+					
 			});
 		});
 		
+		function changeExample() {
+			
+			var resourceId = "helloWorld.xtend";
+			switch(document.getElementById("exampleList").selectedIndex){
+				case 0: resourceId = "helloWorld.xtend";break;
+				case 1: resourceId = "BasicExpressions.xtend";break;
+				case 2: resourceId = "BottleSong.xtend";break;
+			}
+			resetResourceId(resourceId);
+			editor.xtextServices.loadResourceService.setState("strated");
+			//editor.xtextServices.loadResourceService = new editor.xtextServices.LoadResourceService(editor.xtextServices.options.serviceUrl, resourceId, false);
+			editor.xtextServices.loadResource();
+		}
 		
+		function resetResourceId(resourceId){
+			editor.xtextServices.options.resourceId = resourceId;
+			editor.xtextServices.loadResourceService._encodedResourceId = resourceId;
+			editor.xtextServices.saveResourceService._encodedResourceId = resourceId;
+			editor.xtextServices.contentAssistService._encodedResourceId = resourceId;
+			editor.xtextServices.formattingService._encodedResourceId = resourceId;
+			editor.xtextServices.generatorService._encodedResourceId = resourceId;
+			editor.xtextServices.occurrencesService._encodedResourceId = resourceId;
+			editor.xtextServices.revertResourceService._encodedResourceId = resourceId;
+			editor.xtextServices.updateService._encodedResourceId = resourceId;
+			editor.xtextServices.validationService._encodedResourceId = resourceId;
+		}
 	</script>
 </head>
 <body>
@@ -141,11 +193,18 @@
 		<h1>Xtend Web Editor</h1>
 	</div>
 	<div class="xtext-layout">
+		
 		<h2 id ="dirty-indicator">Xtend code</h2>
-		<button id = "generate-button" onclick="Java2Xtend()">&laquo;</button>
+		<select id="exampleList" onChange="changeExample()">
+    		<option id="helloWorld">Hello World</option>
+    		<option id="BasicExpressions">Basic Expressions</option>
+    		<option id="BottleSong">Bottle Song</option>
+    		
+		</select>
+		
 		<div id="xtext-editor" 
 		data-editor-xtext-lang="xtend"
-		data-editor-resource-id="example.xtend"
+		data-editor-resource-id="helloWorld.xtend"
 		data-editor-enable-save-action="true"
 		data-editor-enable-formatting-action="true"
 		data-editor-show-error-dialogs="true"
@@ -153,11 +212,16 @@
 		</div>
 	</div>
 	
+	<div class = "status">
+		<button id = "generate-xtend" >&lt;&lt;</button>
+		<button id = "generate-java"> &gt;&gt;</button>
+	</div>
+		
+	
 	<div class = "java-layout">
-		<h2 id="java-header">Generated Java code</h2>	
+		<h2 id="java-header">Java code</h2>	
 		<div id ="result" ></div>
 	</div>
-	
 </div>
 </body>
 </html>
