@@ -22,7 +22,7 @@ import org.eclipse.jdt.internal.ui.search.SearchResultUpdater;
 import org.eclipse.jdt.ui.search.QuerySpecification;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
-import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
+import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -60,7 +60,7 @@ public class CompositeSearchQuery extends JavaSearchQuery {
 	}
 
 	protected String getPluginId() {
-		return XtypeActivator.getInstance().getBundle().getSymbolicName();
+		return XbaseActivator.getInstance().getBundle().getSymbolicName();
 	}
 
 	public void setLabel(String label) {

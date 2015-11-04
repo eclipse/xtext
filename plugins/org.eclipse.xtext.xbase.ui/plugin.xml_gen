@@ -152,7 +152,7 @@
 			</visibleWhen>
 		</command>  
 		</menuContribution>
-		!-- copy qualified name -->
+		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
 				style="push" tooltip="Copy Qualified Name">
@@ -356,7 +356,7 @@
 			</visibleWhen>
 		</command>  
 		</menuContribution>
-		!-- copy qualified name -->
+		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
 				style="push" tooltip="Copy Qualified Name">
@@ -408,9 +408,7 @@
 			</activeWhen>
 		</handler>
 	</extension>
-	
 	<!-- adding resource factories -->
-	
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
@@ -424,7 +422,6 @@
 	        uriExtension="___xbase">
 	    </resourceServiceProvider>
 	</extension>
-	
 	<!-- marker definitions for org.eclipse.xtext.xbase.Xbase -->
 	<extension
 			id="xbase.check.fast"
@@ -742,7 +739,7 @@
 			</visibleWhen>
 		</command>  
 		</menuContribution>
-		!-- copy qualified name -->
+		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
 				style="push" tooltip="Copy Qualified Name">
@@ -794,9 +791,7 @@
 			</activeWhen>
 		</handler>
 	</extension>
-	
 	<!-- adding resource factories -->
-	
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
@@ -810,7 +805,6 @@
 	        uriExtension="___xbasewithannotations">
 	    </resourceServiceProvider>
 	</extension>
-	
 	<!-- marker definitions for org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations -->
 	<extension
 			id="xbasewithannotations.check.fast"

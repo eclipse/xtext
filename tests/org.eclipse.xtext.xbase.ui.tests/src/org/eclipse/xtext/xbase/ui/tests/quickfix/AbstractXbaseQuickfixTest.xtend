@@ -8,6 +8,7 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.ui.plugin.AbstractUIPlugin
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -16,19 +17,18 @@ import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext
 import org.eclipse.xtext.ui.shared.SharedStateModule
 import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.xbase.XbaseRuntimeModule
-import org.eclipse.xtext.xbase.ui.internal.XtypeActivator
+import org.eclipse.xtext.xbase.ui.XbaseUiModule
+import org.eclipse.xtext.xbase.ui.internal.XbaseActivator
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
 
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
-import org.eclipse.xtext.xbase.ui.XbaseUiModule
-import org.eclipse.ui.plugin.AbstractUIPlugin
 
 abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase implements IJavaProjectProvider {
 	IProject demandCreateProject;
 
 	static Injector injector = Guice::createInjector(
 		Modules2::mixin(new XbaseRuntimeModule(), new SharedStateModule(),
-			new TestQuickfixXbaseUIModule(XtypeActivator::instance))
+			new TestQuickfixXbaseUIModule(XbaseActivator::instance))
 	)
 
 	override void tearDown() throws Exception {
