@@ -59,6 +59,7 @@ final class GenerateXbase {
 				setProject(new StandardProjectConfig() {{
 					setRootPath(root);
 					setBaseName(projectName);
+					setCreateEclipseMetaData(true);
 					getEclipsePlugin().setEnabled(true);
 				}});
 				setCode(new CodeConfig() {{

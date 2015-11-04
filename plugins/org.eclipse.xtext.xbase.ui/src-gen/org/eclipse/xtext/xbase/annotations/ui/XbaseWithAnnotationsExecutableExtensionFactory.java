@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.annotations.ui;
 
 import com.google.inject.Injector;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
-import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
+import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 import org.osgi.framework.Bundle;
 
 /**
@@ -20,12 +20,12 @@ public class XbaseWithAnnotationsExecutableExtensionFactory extends AbstractGuic
 
 	@Override
 	protected Bundle getBundle() {
-		return XtypeActivator.getInstance().getBundle();
+		return XbaseActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return XtypeActivator.getInstance().getInjector(XtypeActivator.ORG_ECLIPSE_XTEXT_XBASE_ANNOTATIONS_XBASEWITHANNOTATIONS);
+		return XbaseActivator.getInstance().getInjector(XbaseActivator.ORG_ECLIPSE_XTEXT_XBASE_ANNOTATIONS_XBASEWITHANNOTATIONS);
 	}
 	
 }

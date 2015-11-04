@@ -29,15 +29,15 @@ import org.osgi.framework.BundleContext;
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
-public class XtypeActivator extends AbstractUIPlugin {
+public class XbaseActivator extends AbstractUIPlugin {
 
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_XTYPE = "org.eclipse.xtext.xbase.Xtype";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_XBASE = "org.eclipse.xtext.xbase.Xbase";
 	public static final String ORG_ECLIPSE_XTEXT_XBASE_ANNOTATIONS_XBASEWITHANNOTATIONS = "org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations";
 	
-	private static final Logger logger = Logger.getLogger(XtypeActivator.class);
+	private static final Logger logger = Logger.getLogger(XbaseActivator.class);
 	
-	private static XtypeActivator INSTANCE;
+	private static XbaseActivator INSTANCE;
 	
 	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
 	
@@ -54,7 +54,7 @@ public class XtypeActivator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 	
-	public static XtypeActivator getInstance() {
+	public static XbaseActivator getInstance() {
 		return INSTANCE;
 	}
 	

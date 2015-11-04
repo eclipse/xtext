@@ -59,7 +59,7 @@ import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.ui.imports.ImportsUtil;
-import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
+import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -243,8 +243,8 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 						xbaseClipboardData.getExtensionImports(), getXtextDocument());
 			}
 		} catch (Exception e) {
-			XtypeActivator.getInstance().getLog().log(new Status(IStatus.ERROR,
-					XtypeActivator.getInstance().getBundle().getSymbolicName(), "Unexpected internal error: ", e));
+			XbaseActivator.getInstance().getLog().log(new Status(IStatus.ERROR,
+					XbaseActivator.getInstance().getBundle().getSymbolicName(), "Unexpected internal error: ", e));
 		} finally {
 			if (target != null) {
 				target.endCompoundChange();
@@ -264,8 +264,8 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 						new String[] {}, getXtextDocument());
 			}
 		} catch (Exception e) {
-			XtypeActivator.getInstance().getLog().log(new Status(IStatus.ERROR,
-					XtypeActivator.getInstance().getBundle().getSymbolicName(), "Unexpected internal error: ", e));
+			XbaseActivator.getInstance().getLog().log(new Status(IStatus.ERROR,
+					XbaseActivator.getInstance().getBundle().getSymbolicName(), "Unexpected internal error: ", e));
 		} finally {
 			if (target != null) {
 				target.endCompoundChange();

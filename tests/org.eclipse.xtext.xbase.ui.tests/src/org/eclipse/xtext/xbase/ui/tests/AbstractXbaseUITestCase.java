@@ -27,7 +27,7 @@ import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
+import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -46,7 +46,7 @@ public abstract class AbstractXbaseUITestCase extends Assert implements Resource
 
 	protected String fileExtension;
 
-	static Injector injector = XtypeActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
+	static Injector injector = XbaseActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
 	
 	@Before
 	public void setUp() throws Exception {
@@ -96,7 +96,7 @@ public abstract class AbstractXbaseUITestCase extends Assert implements Resource
 	}
 	
 	public static IProject createPluginProject(String name) throws CoreException {
-		Injector injector = XtypeActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
+		Injector injector = XbaseActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
