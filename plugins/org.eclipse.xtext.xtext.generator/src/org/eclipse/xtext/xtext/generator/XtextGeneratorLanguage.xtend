@@ -61,11 +61,11 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	@Accessors(PUBLIC_GETTER)
 	List<String> fileExtensions
 	
-	@Accessors
-	ResourceSet resourceSet
+	@Accessors(PUBLIC_GETTER)
+	List<String> referencedResources = newArrayList()
 	
 	@Accessors
-	XtextLanguageStandaloneSetup standaloneSetup = new XtextLanguageStandaloneSetup
+	ResourceSet resourceSet
 	
 	@Accessors
 	Module guiceModule = [] 
@@ -85,12 +85,13 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	@Accessors
 	val webGenModule = new GuiceModuleAccess
 	
-	
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
 	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject CodeConfig codeConfig
+	
+	@Inject XtextGeneratorResourceSetInitializer resourceSetInitializer
 	
 	def void setGrammarUri(String uri) {
 		this.grammarUri = uri
@@ -106,6 +107,10 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	
 	def void setFileExtensions(String fileExtensions) {
 		this.fileExtensions = fileExtensions.trim.split('\\s*,\\s*').toList
+	}
+	
+	def void addReferencedResource(String referencedResource) {
+		this.referencedResources += referencedResource
 	}
 	
 	override getFileExtensions() {
@@ -125,7 +130,7 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 		injector.injectMembers(XtextGeneratorLanguage)
 		if (resourceSet === null)
 			resourceSet = resourceSetProvider.get()
-		standaloneSetup.initialize(injector)
+		resourceSetInitializer.initialize(resourceSet, referencedResources)
 		
 		if (!resourceSet.resources.isEmpty) {
 			installIndex()
