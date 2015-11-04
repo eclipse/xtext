@@ -123,10 +123,14 @@ class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> implements
 		for (objectDescription : crossReferenceDescription.variants) {
 			ProgressIndicatorProvider.checkCanceled
 			var name = qualifiedNameConverter.toString(objectDescription.name)
-			var element = objectDescription.getPsiElement(myElement.xtextFile.resource)
-			if (element != null) {
-				variants +=
-					LookupElementBuilder.create(name).withTypeText(element.navigationElement.containingFile.name)
+			// TODO for some unknown reason here we get an eobject description with a dangling object
+			// see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=481381
+			if (objectDescription.EObjectOrProxy.eIsProxy || objectDescription.EObjectOrProxy.eResource !== null) {
+				var element = objectDescription.getPsiElement(myElement.xtextFile.resource)
+				if (element != null) {
+					variants +=
+						LookupElementBuilder.create(name).withTypeText(element.navigationElement.containingFile.name)
+				}
 			}
 		}
 		variants
