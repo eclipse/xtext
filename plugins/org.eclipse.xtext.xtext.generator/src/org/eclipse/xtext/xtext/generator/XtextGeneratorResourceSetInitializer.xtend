@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import com.google.inject.Inject
-import com.google.inject.Injector
 import java.util.List
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage
@@ -24,26 +22,15 @@ import org.eclipse.xtext.util.internal.Log
 
 /**
  * @noextend
+ * @noreference
  */
 @Log
-class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorComponent {
-	List<String> loadedResources = newArrayList
+class XtextGeneratorResourceSetInitializer  {
 	
-	@Inject IXtextGeneratorLanguage language
-	
-	def void addLoadedResource(String uri) {
-		loadedResources += uri
-	}
-	
-	override initialize(Injector injector) {
-		injector.injectMembers(this)
-		setup(language.resourceSet)
-	}
-	
-	private def void setup(ResourceSet resourceSet) {
+	public def void initialize(ResourceSet resourceSet, List<String> referencedResources) {
 		val delegate = new StandaloneSetup
 		delegate.resourceSet = resourceSet
-		loadedResources.forEach[
+		referencedResources.forEach[
 			loadResource(resourceSet)
 		]
 		registerGenModels(resourceSet)
