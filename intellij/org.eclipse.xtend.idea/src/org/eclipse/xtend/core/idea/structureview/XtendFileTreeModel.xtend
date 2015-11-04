@@ -15,7 +15,6 @@ class XtendFileTreeModel extends XtextFileTreeModel {
 
 	new(BaseXtextFile xtextFile, Editor editor) {
 		super(xtextFile, editor)
-	//	filters += new SyntheticMemberFilter
 		nodeProviders += new XtendShowInheritedNodeProvider
 	}
 
