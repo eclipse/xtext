@@ -54,7 +54,6 @@ import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -86,7 +85,6 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	@Inject extension IGrammarConstraintProvider
 	@Inject DebugGraphGenerator debugGraphGenerator
 	@Inject FileAccessFactory fileAccessFactory
-	@Inject CodeConfig codeConfig
 	
 	@Accessors boolean generateDebugData = false
 	@Accessors boolean generateSupportForDeprecatedContextObject = false
@@ -154,7 +152,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	}
 	
 	protected def generateSemanticSequencer() {
-		if (codeConfig.preferXtendStubs) {
+		if (generateXtendStub) {
 			fileAccessFactory.createXtendFile(grammar.semanticSequencerClass, '''
 				class «grammar.semanticSequencerClass.simpleName» extends «grammar.abstractSemanticSequencerClass» {
 				}
@@ -170,7 +168,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	private def unassignedCalledTokenRuleName(AbstractRule rule) '''get«rule.name»Token'''
 	
 	protected def generateSyntacticSequencer() {
-		if (codeConfig.preferXtendStubs) {
+		if (generateXtendStub) {
 			fileAccessFactory.createXtendFile(grammar.syntacticSequencerClass, '''
 				class «grammar.syntacticSequencerClass.simpleName» extends «grammar.abstractSyntacticSequencerClass» {
 					«IF detectSyntheticTerminals»

@@ -11,7 +11,6 @@ import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -24,7 +23,6 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.ty
  */
 class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment {
 
-	@Inject CodeConfig codeConfig
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject extension XtextGeneratorNaming
 	
@@ -44,7 +42,7 @@ class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment {
 		}
 
 		if (projectConfig.eclipsePlugin.src !== null) {
-			if (codeConfig.preferXtendStubs) {
+			if (generateXtendStub) {
 				generateXtendOutlineTreeProvider
 			} else {
 				generateJavaOutlineTreeProvider

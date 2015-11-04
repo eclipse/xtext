@@ -16,7 +16,6 @@ import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.ComposedChecks
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -32,7 +31,6 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 	@Inject extension ValidatorNaming
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
-	@Inject CodeConfig codeConfig
 	
 	val List<String> composedChecks = newArrayList
 	
@@ -64,7 +62,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			.contributeTo(language.runtimeGenModule)
 		
 		if (generateStub) {
-			if (codeConfig.preferXtendStubs)
+			if (generateXtendStub)
 				generateXtendValidatorStub()
 			else
 				generateJavaValidatorStub()
