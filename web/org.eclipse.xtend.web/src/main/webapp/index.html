@@ -5,185 +5,13 @@
 	<title>Xtend Web Editor</title>
 	<link rel="stylesheet" type="text/css" href="xtext/2.9.0-SNAPSHOT/xtext-ace.css"/>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  
+  	<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js" charset="utf-8"></script>
 	<script src="webjars/requirejs/2.1.20/require.min.js"></script>
-	<script type="text/javascript">
-		function generateJavaByHttpRequest(){  
-			var xmlhttp = new XMLHttpRequest();
-			var url = 'http://' + location.host + '/xtext-service/generate?resource=helloWorld.xtend';
-			xmlhttp.open("GET", url, true);
-			xmlhttp.onreadystatechange = function() {
-			    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			        var target = xmlhttp.responseText;
-			        aceEditor.getSession().setValue(target);
-			    }
-			}
-			xmlhttp.send();
-		}
-		function generateJava(){
-			editor.xtextServices.generate().done(function(generateResult) {	
-				aceEditor.getSession().setValue(generateResult);
-			});
-		}
-		
-		function Java2Xtend(){			
-			var sendmsg = 'srcJava='+aceEditor.getSession().getValue();
-			if (sendmsg=='srcJava='){
-				//alert("Please make sure the java code is not empty");
-				return ;
-			}
-			
-			var xmlhttp = new XMLHttpRequest();
-			var url = 'http://' + location.host + '/xtext-service/java2xtend?resource=java.xtend';
-			xmlhttp.open("POST", url, true);
-			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	
-			xmlhttp.onreadystatechange = function() {
-			    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			        var target = JSON.parse(xmlhttp.responseText);
-			        if (target.stateID == 1){
-			        	editor.getSession().setValue(target.generateText);	
-			        }
-			    }
-			}
-			xmlhttp.send(sendmsg);
-		}
-		
-		function insertInto(str, input){
-		        var val = input.getSession().getValue(), s = input.selectionStart, e = input.selectionEnd;
-		        input.value = val.slice(0,e)+str+val.slice(e);
-		        if (e==s) input.selectionStart += str.length - 1;
-		        input.selectionEnd = e + str.length -1;
-		}
-		
-		var baseUrl = window.location.pathname;
-		var fileIndex = baseUrl.indexOf("index.html");
-		if (fileIndex > 0)
-			baseUrl = baseUrl.slice(0, fileIndex);
-		require.config({
-			baseUrl: baseUrl,
-			paths: {
-				"jquery": "webjars/jquery/2.1.4/jquery.min",
-				"ace/ext/language_tools": "webjars/ace/1.2.0/src/ext-language_tools",
-				"xtext/xtext-ace": "xtext/2.9.0-SNAPSHOT/xtext-ace"
-			}
-		});
-		
-		require(["webjars/ace/1.2.0/src/ace"], function() {
-			require(["xtext/xtext-ace"], function(xtext) {
-				editor = xtext.createEditor({
-					baseUrl: baseUrl,
-					syntaxDefinition: "xtext-resources/generated/mode-xtend"
-					});
-			
-				HashHandler = require("ace/keyboard/hash_handler").HashHandler
-				var parenthesis = new HashHandler([{
-				    bindKey: "(",
-				    exec: function(e){
-				    	var position = editor.getCursorPosition();
-				        editor.insert("()");
-				        editor.moveCursorTo(position.row,position.column+1);
-				    }
-				}]);
-				var bracket = new HashHandler([{
-				    bindKey: "[",
-				    exec: function(e){
-				    	var position = editor.getCursorPosition();
-				        editor.insert("[]");
-				        editor.moveCursorTo(position.row,position.column+1);
-				    }
-				}]);
-				var accolade = new HashHandler([{
-				    bindKey: "{",
-				    exec: function(e){
-				    	var position = editor.getCursorPosition();
-				        editor.insert("{}");
-				        editor.moveCursorTo(position.row,position.column+1);
-				    }
-				}]);
-				var quotes = new HashHandler([{
-				    bindKey: "\"",
-				    exec: function(e){
-				    	var position = editor.getCursorPosition();
-				        editor.insert("\"\"");
-				        editor.moveCursorTo(position.row,position.column+1);
-				    }
-				}]);
-				var single_quotes = new HashHandler([{
-				    bindKey: "\'",
-				    exec: function(e){
-				    	var position = editor.getCursorPosition();
-				        editor.insert("\'\'");
-				        editor.moveCursorTo(position.row,position.column+1);
-				    }
-				}]);
-				editor.keyBinding.addKeyboardHandler(parenthesis);
-				editor.keyBinding.addKeyboardHandler(bracket);
-				editor.keyBinding.addKeyboardHandler(accolade);
-				editor.keyBinding.addKeyboardHandler(quotes);
-				editor.keyBinding.addKeyboardHandler(single_quotes);
-				
-				editor.on('focus',function(){
-					document.getElementById("generate-java").style.color = "#0000FF";			
-					document.getElementById("generate-xtend").style.color = "#808080";
-				});
-				
-				
-				aceEditor = ace.edit("result");
-				aceEditor.getSession().setMode("ace/mode/java");
-				aceEditor.$blockScrolling = Infinity
-				//aceEditor.setBehavioursEnabled(true);
-				aceEditor.on('focus',function(){
-					document.getElementById("generate-xtend").style.color = "#0000FF";			
-					document.getElementById("generate-java").style.color = "#808080";
-				});
-				
-				aceEditor.getSession().on('change', function(e){
-					if (aceEditor.isFocused()){
-						Java2Xtend();	
-					}
-				});
-				
-				
-				editor.xtextServices.successListeners.push(function(serviceType, result) {
-					if (serviceType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})
-							&& editor.isFocused()) {
-							generateJava();
-						}
-					else if (serviceType == 'format'){
-							
-					}
-					
-				    });
-					
-			});
-		});
-		
-		function changeExample() {
-			
-			var resourceId = "helloWorld.xtend";
-			switch(document.getElementById("exampleList").selectedIndex){
-				case 0: resourceId = "helloWorld.xtend";break;
-				case 1: resourceId = "BasicExpressions.xtend";break;
-				case 2: resourceId = "BottleSong.xtend";break;
-			}
-			resetResourceId(resourceId);
-			editor.xtextServices.loadResourceService.setState("strated");
-			//editor.xtextServices.loadResourceService = new editor.xtextServices.LoadResourceService(editor.xtextServices.options.serviceUrl, resourceId, false);
-			editor.xtextServices.loadResource();
-		}
-		
-		function resetResourceId(resourceId){
-			editor.xtextServices.options.resourceId = resourceId;
-			editor.xtextServices.loadResourceService._encodedResourceId = resourceId;
-			editor.xtextServices.saveResourceService._encodedResourceId = resourceId;
-			editor.xtextServices.contentAssistService._encodedResourceId = resourceId;
-			editor.xtextServices.formattingService._encodedResourceId = resourceId;
-			editor.xtextServices.generatorService._encodedResourceId = resourceId;
-			editor.xtextServices.occurrencesService._encodedResourceId = resourceId;
-			editor.xtextServices.revertResourceService._encodedResourceId = resourceId;
-			editor.xtextServices.updateService._encodedResourceId = resourceId;
-			editor.xtextServices.validationService._encodedResourceId = resourceId;
-		}
+	<script type="text/javascript">
+
 	</script>
 </head>
 <body>
@@ -192,6 +20,7 @@
 	<div class="header">
 		<h1>Xtend Web Editor</h1>
 	</div>
+	<!----> 
 	<div class="xtext-layout">
 		
 		<h2 id ="dirty-indicator">Xtend code</h2>
@@ -199,7 +28,8 @@
     		<option id="helloWorld">Hello World</option>
     		<option id="BasicExpressions">Basic Expressions</option>
     		<option id="BottleSong">Bottle Song</option>
-    		
+    		<option id="HtmlBuilder">Html Builder</option>
+    		<option id="Movies">Movies</option>
 		</select>
 		
 		<div id="xtext-editor" 
@@ -219,9 +49,14 @@
 		
 	
 	<div class = "java-layout">
-		<h2 id="java-header">Java code</h2>	
-		<div id ="result" ></div>
+		<h2 id="java-header">Java code</h2>
+		<select id="javaFileList" onChange="changeJavaFile()">
+    		<option id="helloWorldJava">HelloWorld.java</option>
+		</select>
+      	<div id="java-editor"></div>
 	</div>
+	
 </div>
+<script src="script.js"></script>
 </body>
 </html>

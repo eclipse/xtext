@@ -3,10 +3,8 @@ package org.eclipse.xtend.web
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.IOException
-import java.io.OutputStreamWriter
 import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.common.util.WrappedException
-import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtend.core.formatting2.FormatterFacade
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
@@ -19,7 +17,7 @@ class ExampleResourceHandler implements IServerResourceHandler {
 	
 	@Inject Provider<XtextWebDocument> documentProvider
 	
-	@Inject IEncodingProvider encodingProvider
+	@Inject FormatterFacade formatter
 	
 	
 	val examples = #{
@@ -177,17 +175,18 @@ class ExampleResourceHandler implements IServerResourceHandler {
 				}
 			}
 		''',
-		'BottleSong.xtend' -> '''
-		import static extension BottleSupport.*
+		'BottleSong.xtend' -> "
+		package example3
+		import static extension example3.BottleSupport.*
 		import org.junit.Test
 		
 		/**
-		 * Prints the lyrics of the song "99 bottles of beer"
+		 * Prints the lyrics of the song \"99 bottles of beer\"
 		 * See http://99-bottles-of-beer.net/
 		 * 
 		 * Uses template expressions and extension methods.
-		 */'''
-		+"\nclass BottleSong {
+		 */
+		class BottleSong {
 			
 			@Test def void singIt() {
 				println(singTheSong(99))
@@ -219,6 +218,204 @@ class ExampleResourceHandler implements IServerResourceHandler {
 				bottles(i).toFirstUpper
 			}
 		}",
+		"HtmlBuilder.xtend"->"
+		package example4
+
+import java.util.ArrayList
+import org.eclipse.xtend.lib.annotations.Data
+import org.junit.Test
+
+/**
+ * This examples shows 
+ *  - the usage and declaration of a builder API.
+ *  - usage of @Data annotation
+ *  - non-static extension methods
+ */
+class DomExample {
+	
+	extension DomBuilder db = new DomBuilder
+	extension DomSerializer ds = new DomSerializer
+	
+	@Test
+	def void processDom() {
+		val dom = buildDom
+		println(dom.toText)
+	}
+	
+	def buildDom() {
+		new Html => [
+		  head [
+		    it.title [$(\"HTML with Xtend\")]
+		  ]
+		  body [
+		    h1 [$(\"HTML with Xtend\")]
+		    p [$(\"this format can be used as an alternative to templates.\")]
+		
+		    // an element with attributes and text content
+		    a(\"http://www.xtend-lang.org\") [$(\"Xtend\")]
+		
+		    // mixed content
+		    p [
+		      $(\"This is some \") 
+		      b[$(\"mixed\")] 
+		      $(\" text. For more see the \") 
+		      a(\"http://www.xtend-lang.org\")[$(\"Xtend\")] 
+		      $(\" project\")
+		    ]
+		    p [$(\"More text.\")]
+		  ]
+		]
+	}
+
+}
+
+class DomBuilder {
+	
+	def $(Node it, CharSequence contents) {
+		val text = new Contents(contents)
+		it.contents += text
+	}
+	
+	def head(Html it, (Head)=>void init) {
+		addAndApply(it, new Head, init)
+	}
+	def title(Head it, (Title)=>void init) {
+		addAndApply(it, new Title, init)
+	}
+	
+	def body(Html it, (Body)=>void init) {
+		addAndApply(it, new Body, init)
+	}
+	
+	def b(Node it, (B)=>void init) {
+		addAndApply(it, new B, init)
+	}
+	def p(Node it, (P)=>void init) {
+		addAndApply(it, new P, init)
+	}
+	
+	def a(Node it, String href, (A)=>void init) {
+		val a = new A(href)
+		addAndApply(it, a, init)
+	}
+	
+	def h1(Node it, (H1)=>void init) {
+		addAndApply(it, new H1, init)
+	}
+	
+	def h2(Node it, (H2)=>void init) {
+		addAndApply(it, new H2, init)
+	}
+	
+	def private <T extends Node> void addAndApply(Node parent, T t, (T)=>void init) {
+		parent.contents += t
+		init.apply(t)
+	}
+}
+
+class DomSerializer {
+	
+	def CharSequence toText(Node n) {
+		switch n {
+			Contents : 
+				n.text
+				
+			A : 
+				'''<a href=\"«n.href»\">«n.applyContents»</a>'''
+				
+			default : '''
+				<«n.tagName»>
+					«n.applyContents»
+				</«n.tagName»>
+			'''
+		}
+	}
+	
+	def private applyContents(Node n) {
+		n.contents?.map[ toText ]?.join
+	}
+}
+
+@Data class Node {
+	ArrayList<Node> contents = newArrayList
+	def String tagName() {
+		getClass.simpleName.toLowerCase
+	}
+}
+
+@Data class Html extends Node {
+}
+@Data class Head extends Node {}
+@Data class Title extends Node {}
+
+@Data class ContentNode extends Node {}
+@Data class Body extends ContentNode {}
+@Data class P extends ContentNode {}
+@Data class B extends ContentNode {}
+@Data class H1 extends ContentNode {}
+@Data class H2 extends ContentNode {}
+@Data class A extends ContentNode {
+	String href
+}
+@Data class Contents extends ContentNode {
+	CharSequence text
+}",
+		'Movies.xtend'->'''
+		package example6
+		
+		import java.io.FileReader
+		import java.util.Set
+		import org.eclipse.xtend.lib.annotations.Data
+		import org.junit.Test
+		
+		import static org.junit.Assert.*
+		
+		import static extension com.google.common.io.CharStreams.*
+		
+		class Movies {
+			
+			/**
+			 * @return the total number of action movies
+			 */ 
+			@Test def void numberOfActionMovies() {
+				assertEquals(828, movies.filter[categories.contains('Action')].size)
+			}
+			
+			/**
+			 * @return the year the best rated movie of 80ies (1980-1989) was released.
+			 */
+			@Test def void yearOfBestMovieFrom80ies() {
+				assertEquals(1989, movies.filter[(1980..1989).contains(year)].maxBy[rating].year)
+			}
+			
+			/**
+			 * @return the sum of the number of votes of the two top rated movies.
+			 */
+			@Test def void sumOfVotesOfTop2() {
+				val long movies = movies.sortBy[-rating].take(2).map[numberOfVotes].reduce[a, b| a + b]
+				assertEquals(47_229, movies)
+			}
+			
+			val movies = new FileReader('data.csv').readLines.map[ line |
+				val segments = line.split('  ').iterator
+				return new Movie(
+					segments.next, 
+					Integer.parseInt(segments.next), 
+					Double.parseDouble(segments.next), 
+					Long.parseLong(segments.next), 
+					segments.toSet
+				)
+			]
+		}
+		
+		@Data class Movie {
+			String title
+			int year
+			double rating
+			long numberOfVotes
+			Set<String> categories 
+		}
+		''',
 		'java.xtend' -> '''
 		class Example {
 						
@@ -231,7 +428,7 @@ class ExampleResourceHandler implements IServerResourceHandler {
 		val resourceSet = resourceSetProvider.get(resourceId)
 		val resource = resourceSet.createResource(URI.createURI(resourceId)) as XtextResource
 		result.setInput(resource,resourceId)
-		result.text = examples.get(resourceId) ?: ''
+		result.text = formatter.format(examples.get(resourceId) ?: '')
 		return result
 	}
 	
