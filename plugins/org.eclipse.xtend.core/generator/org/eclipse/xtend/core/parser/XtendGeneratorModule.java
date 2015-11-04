@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.parser;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
+import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
 public class XtendGeneratorModule extends DefaultGeneratorModule {
 	
@@ -34,6 +35,11 @@ public class XtendGeneratorModule extends DefaultGeneratorModule {
 			} else {
 				return super.getEclipsePluginBasePackage(grammar);
 			}
+		}
+		
+		@Override
+		public TypeReference getEclipsePluginActivator() {
+			return new TypeReference("org.eclipse.xtend.ide.internal", "XtendActivator");
 		}
 		
 		@Override
