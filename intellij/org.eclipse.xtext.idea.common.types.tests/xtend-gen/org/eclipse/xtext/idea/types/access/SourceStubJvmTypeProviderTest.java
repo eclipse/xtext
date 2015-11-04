@@ -899,6 +899,10 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
     delegate.testShortAnnotationValue_03();
   }
   
+  public void testShortAnnotationValue_WithConstant() throws Exception {
+    delegate.testShortAnnotationValue_WithConstant();
+  }
+  
   public void testStrictFpType() {
     delegate.testStrictFpType();
   }

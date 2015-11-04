@@ -1102,7 +1102,20 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
     if (!_matched) {
       if (value instanceof PsiReferenceExpression) {
         _matched=true;
-        _switchResult = ((PsiReferenceExpression)value).resolve();
+        Object _switchResult_1 = null;
+        PsiElement _resolve = ((PsiReferenceExpression)value).resolve();
+        final PsiElement r = _resolve;
+        boolean _matched_1 = false;
+        if (!_matched_1) {
+          if (r instanceof PsiEnumConstant) {
+            _matched_1=true;
+            _switchResult_1 = r;
+          }
+        }
+        if (!_matched_1) {
+          _switchResult_1 = helper.computeConstantExpression(value);
+        }
+        _switchResult = _switchResult_1;
       }
     }
     if (!_matched) {

@@ -102,6 +102,7 @@ import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes2;
 import org.eclipse.xtext.common.types.testSetups.RawIterable;
 import org.eclipse.xtext.common.types.testSetups.StaticNestedTypes;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotation;
+import org.eclipse.xtext.common.types.testSetups.TestAnnotation.Annotated;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotationWithDefaults;
 import org.eclipse.xtext.common.types.testSetups.TestAnnotationWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.TestConstants;
@@ -783,7 +784,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		String typeName = TestAnnotation.class.getName();
 		JvmAnnotationType type = (JvmAnnotationType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = TestAnnotation.class.getDeclaredMethods().length;
-		assertEquals(14, methodCount);
+		assertEquals(15, methodCount);
 		int innerTypesCount = TestAnnotation.class.getDeclaredClasses().length;
 		assertEquals(2, innerTypesCount);
 		assertEquals(methodCount + innerTypesCount, type.getMembers().size());
@@ -2426,8 +2427,8 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		JvmAnnotationReference annotationReference = target.getAnnotations().get(0);
 		assertSame(annotationType, annotationReference.getAnnotation());
 		if (isDefaultValueSupported())
-			assertEquals(13, annotationReference.getExplicitValues().size());
-		assertEquals(14, annotationReference.getValues().size());
+			assertEquals(14, annotationReference.getExplicitValues().size());
+		assertEquals(15, annotationReference.getValues().size());
 	}
 
 	@Test
@@ -2452,6 +2453,14 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(1, value.getValues().size());
 		Integer integer = value.getValues().get(0);
 		assertEquals(34, integer.intValue());
+	}
+	
+	@Test
+	public void testShortAnnotationValue_WithConstant() throws Exception {
+		JvmShortAnnotationValue value = (JvmShortAnnotationValue) getAnnotationValue("shortValue2", false);
+		assertEquals(1, value.getValues().size());
+		Short shortValue = value.getValues().get(0);
+		assertEquals(Annotated.CONSTANT, shortValue.shortValue());
 	}
 
 	@Test
