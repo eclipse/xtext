@@ -13,9 +13,9 @@ $(document).ready(function() {
 			return !($(this).attr('class') === undefined);
 		}
 	).each(function() {
-			$(this).attr('class', $(this).attr('class').replace('language','lang'));
-			$(this).addClass('prettyprint')
-			$(this).addClass('linenums')
+		$(this).attr('class', $(this).attr('class').replace('language','lang'));
+		$(this).addClass('prettyprint')
+		$(this).addClass('linenums')
 	})
 	prettyPrint();
 
@@ -42,11 +42,18 @@ $(document).ready(function() {
 	});
 	
 
-	$('.has-popover').popover();
+	$('.has-popover').popover({
+		trigger: 'click hover',
+		delay: { show: 100, hide: 50 },
+		placement: "bottom"
+	});
 
-	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	var po = document.createElement('script');
+	po.type = 'text/javascript';
+	po.async = true;
 	po.src = 'https://apis.google.com/js/plusone.js';
-	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(po, s);
 });
 
 

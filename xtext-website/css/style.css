@@ -109,11 +109,6 @@ hr {
   margin: 24px 0;
 }
 
-.doc-contents a {
-	color: inherit;
-	text-decoration: underline;
-}
-
 /* table */
 table {
 	background:#eaebec;
@@ -283,16 +278,6 @@ table tr:hover td {
 	background-size:  cover;
 }
 
-.flexslider a {
-	color: black;
-	text-decoration: underline;
-}
-
-.flexslider a .visited {
-	color: grey;
-	text-decoration: underline;
-}
-
 @media (max-width: 979px) {
   #header_wrapper {
 	min-height:103px;
@@ -307,10 +292,24 @@ table tr:hover td {
 
 }
 
+.quick-overview {
+	margin-top: 40px;
+}
 
+.quick-overview h1 {
+	margin-bottom: 25px;
+}
+
+.quick-overview img {
+	width: 18px;
+	height: 18px;
+	vertical-align: bottom;
+	margin-right: 3px;
+}
 
 .image-slider h2 {
-	margin-top: 80px; /*specify 'margin-top' as per your your choice*/
+	margin-top: 100px;
+	margin-bottom: 50px;
 	font-family: 'Lato', sans-serif;
 	font-size: 42px;
 	font-weight: 300;
@@ -346,54 +345,6 @@ table tr:hover td {
     list-style-type: none;
 }
 
-#features {
-	height: auto;
-	margin-bottom: 40px;
-	background: url('{{ site.baseurl }}/images/pattern1.jpg') repeat #ebebeb;
-}
-
-#features .carousel-indicator li {
-	text-align: center;
-	list-style-type: none;
-}
-
-#features .item {
-	height: 150px;
-}
-
-#features .span4 {
-	height: 200px;
-}
-
-#features h1 {
-	color: #444;
-	font-weight: 400;
-	line-height: 1.3em;
-	font-style: normal;
-	word-spacing: 1px;
-	text-align: center;
-	font-size: 32px;
-}
-
-#features h4 {
-	color: #444;
-	font-weight: 400;
-	line-height: 1.3em;
-	font-style: normal;
-	word-spacing: 1px;
-	text-align: center;
-	font-size: 24px;
-}
-
-#features p {
-	color: #444;
-	font-weight: 200;
-	line-height: 1.3em;
-	font-style: normal;
-	word-spacing: 1px;
-	text-align: center;
-}
-
 .companies img {
 	height : 40px;
 	margin-left : 40px;
@@ -404,6 +355,10 @@ table tr:hover td {
 
 .companies li {
 	list-style-type: none;
+}
+
+#intro-companies {
+	margin-top: 50px;
 }
 
 #platform-comparison {
@@ -1049,6 +1004,12 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 .navbar-fixed-top {
 	position: static;
+	border-bottom: 1px solid #000;
+}
+
+.navbar-inner {
+	padding-top: 10px;
+	padding-bottom: 5px;
 }
 
 .edit-on-github {
@@ -1157,37 +1118,30 @@ ul.list3 li {
 
 .navbar .brand {
 	display: block;
+	position: relative;
+	top: 0;
 	width: 90px;
 	height: 34px;
 	padding-top: 0;
 	padding-bottom: 0;
-	margin-top: 12px;
-	margin-left: 10px;
+	margin-top: 2px;
 	overflow: hidden;
+	font-weight: 600;
 	line-height: 600px;
 	color: #333;
 	background: url('{{ site.baseurl }}/images/logo.png') no-repeat 0 0px;
-	background-size: 90px ;
+	background-size: 90px;
 	background-position: center;
-
-	position: relative;
-	top: 0;
-	margin-left: 0;
-	font-weight: 600;
 }
 
-#intro {
+.intro-reference {
 	background: url('{{ site.baseurl }}/images/bg-footer.png');
 	padding-top: 10px;
 	color: #fff;
 	text-align: center;
 }
 
-#intro h1 {
-	text-transform: uppercase;
-}
-
-#intro .container {
+.intro-reference .container {
 	border-bottom: none;
 	padding: 10px;
 }
@@ -1199,6 +1153,10 @@ ul.list3 li {
 	line-height: 1.3em;
 	font-style: normal;
 	word-spacing: 1px;
+}
+
+.popover {
+	max-width: 450px;
 }
 
 .languages .row {
