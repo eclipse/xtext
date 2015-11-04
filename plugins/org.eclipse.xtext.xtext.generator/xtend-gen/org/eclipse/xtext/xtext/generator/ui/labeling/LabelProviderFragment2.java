@@ -15,7 +15,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -47,10 +46,6 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
-  
-  @Inject
-  @Extension
-  private CodeConfig _codeConfig;
   
   @Inject
   private FileAccessFactory fileAccessFactory;
@@ -184,8 +179,8 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
       _and = _tripleNotEquals;
     }
     if (_and) {
-      boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs) {
+      boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+      if (_isGenerateXtendStub) {
         this.generateXtendEObjectLabelProvider();
         this.generateXtendDescriptionLabelProvider();
       } else {

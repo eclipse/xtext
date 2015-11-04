@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -59,9 +58,6 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
   
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
-  @Inject
-  private CodeConfig codeConfig;
   
   private final List<String> composedChecks = CollectionLiterals.<String>newArrayList();
   
@@ -114,8 +110,8 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     _addTypeToTypeEagerSingleton.contributeTo(_runtimeGenModule);
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
-      boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs) {
+      boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+      if (_isGenerateXtendStub) {
         this.generateXtendValidatorStub();
       } else {
         this.generateJavaValidatorStub();
