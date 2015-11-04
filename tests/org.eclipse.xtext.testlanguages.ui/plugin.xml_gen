@@ -205,19 +205,19 @@
 		</handler>
 	</extension>
 	<!-- adding resource factories -->
-		<extension
-			point="org.eclipse.emf.ecore.extension_parser">
-			<parser
-				class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-				type="beelangtestlanguage">
-			</parser>
-		</extension>
-		<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-		    <resourceServiceProvider
-		        class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-		        uriExtension="beelangtestlanguage">
-		    </resourceServiceProvider>
-		</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="beelangtestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	        class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+	        uriExtension="beelangtestlanguage">
+	    </resourceServiceProvider>
+	</extension>
 	<!-- marker definitions for org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage -->
 	<extension
 			id="beelangtestlanguage.check.fast"
@@ -505,19 +505,19 @@
 		</handler>
 	</extension>
 	<!-- adding resource factories -->
-		<extension
-			point="org.eclipse.emf.ecore.extension_parser">
-			<parser
-				class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-				type="simplebeelangtestlanguage">
-			</parser>
-		</extension>
-		<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-		    <resourceServiceProvider
-		        class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-		        uriExtension="simplebeelangtestlanguage">
-		    </resourceServiceProvider>
-		</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="simplebeelangtestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	        class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+	        uriExtension="simplebeelangtestlanguage">
+	    </resourceServiceProvider>
+	</extension>
 	<!-- marker definitions for org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage -->
 	<extension
 			id="simplebeelangtestlanguage.check.fast"
@@ -805,19 +805,19 @@
 		</handler>
 	</extension>
 	<!-- adding resource factories -->
-		<extension
-			point="org.eclipse.emf.ecore.extension_parser">
-			<parser
-				class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-				type="exbeelangtestlanguage">
-			</parser>
-		</extension>
-		<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-		    <resourceServiceProvider
-		        class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-		        uriExtension="exbeelangtestlanguage">
-		    </resourceServiceProvider>
-		</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="exbeelangtestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	        class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+	        uriExtension="exbeelangtestlanguage">
+	    </resourceServiceProvider>
+	</extension>
 	<!-- marker definitions for org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage -->
 	<extension
 			id="exbeelangtestlanguage.check.fast"
@@ -1105,19 +1105,19 @@
 		</handler>
 	</extension>
 	<!-- adding resource factories -->
-		<extension
-			point="org.eclipse.emf.ecore.extension_parser">
-			<parser
-				class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-				type="nojdt">
-			</parser>
-		</extension>
-		<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-		    <resourceServiceProvider
-		        class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-		        uriExtension="nojdt">
-		    </resourceServiceProvider>
-		</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="nojdt">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	        class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+	        uriExtension="nojdt">
+	    </resourceServiceProvider>
+	</extension>
 	<!-- marker definitions for org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage -->
 	<extension
 			id="nojdttestlanguage.check.fast"
