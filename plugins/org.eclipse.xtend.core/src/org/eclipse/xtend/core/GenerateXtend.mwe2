@@ -75,6 +75,7 @@ Workflow {
 			name = "org.eclipse.xtend.core.Xtend"
 			fileExtensions = file.extensions
 			guiceModule = parser.XtendLanguageGeneratorModule {}
+			generateXtendStubs = true
 			
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 			fragment = serializer.SerializerFragment2 {
