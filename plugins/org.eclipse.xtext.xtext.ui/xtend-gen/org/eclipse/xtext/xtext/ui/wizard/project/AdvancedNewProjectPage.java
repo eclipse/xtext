@@ -8,9 +8,21 @@
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import org.eclipse.jdt.launching.IVMInstall;
+import org.eclipse.jdt.launching.IVMInstallType;
+import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.jface.dialogs.IMessageProvider;
+import org.eclipse.jface.util.Policy;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -28,6 +40,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -61,6 +74,8 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private Combo sourceLayout;
   
+  private ComboViewer jreToUse;
+  
   private StatusWidget statusWidget;
   
   public AdvancedNewProjectPage(final String pageName) {
@@ -80,6 +95,47 @@ public class AdvancedNewProjectPage extends WizardPage {
         GridLayout _gridLayout = new GridLayout(1, false);
         it.setLayout(_gridLayout);
         final Procedure1<Group> _function = new Procedure1<Group>() {
+          @Override
+          public void apply(final Group it) {
+            it.setText("Use an execution environment JRE");
+            final Procedure1<ComboViewer> _function = new Procedure1<ComboViewer>() {
+              @Override
+              public void apply(final ComboViewer it) {
+                Combo _combo = it.getCombo();
+                _combo.setEnabled(true);
+                List<Pair<IExecutionEnvironment, IVMInstall>> _collectBrees = AdvancedNewProjectPage.this.collectBrees();
+                Object[] _array = _collectBrees.toArray();
+                it.setInput(_array);
+                it.setLabelProvider(new LabelProvider() {
+                  @Override
+                  public String getText(final Object element) {
+                    if ((element instanceof Pair<?, ?>)) {
+                      StringConcatenation _builder = new StringConcatenation();
+                      Object _key = ((Pair<?, ?>)element).getKey();
+                      String _id = ((IExecutionEnvironment) _key).getId();
+                      _builder.append(_id, "");
+                      _builder.append(" - ");
+                      Object _value = ((Pair<?, ?>)element).getValue();
+                      String _name = ((IVMInstall) _value).getName();
+                      _builder.append(_name, "");
+                      return _builder.toString();
+                    } else {
+                      String _string = null;
+                      if (element!=null) {
+                        _string=element.toString();
+                      }
+                      return _string;
+                    }
+                  }
+                });
+              }
+            };
+            ComboViewer _ComboViewer = AdvancedNewProjectPage.this.ComboViewer(it, _function);
+            AdvancedNewProjectPage.this.jreToUse = _ComboViewer;
+          }
+        };
+        AdvancedNewProjectPage.this.Group(it, _function);
+        final Procedure1<Group> _function_1 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
             it.setText(Messages.WizardNewXtextProjectCreationPage_LabelFacets);
@@ -128,8 +184,8 @@ public class AdvancedNewProjectPage extends WizardPage {
             AdvancedNewProjectPage.this.createTestProject = _CheckBox_4;
           }
         };
-        AdvancedNewProjectPage.this.Group(it, _function);
-        final Procedure1<Group> _function_1 = new Procedure1<Group>() {
+        AdvancedNewProjectPage.this.Group(it, _function_1);
+        final Procedure1<Group> _function_2 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
             it.setText("Preferred Build System");
@@ -152,8 +208,8 @@ public class AdvancedNewProjectPage extends WizardPage {
             AdvancedNewProjectPage.this.preferredBuildSystem = _DropDown;
           }
         };
-        AdvancedNewProjectPage.this.Group(it, _function_1);
-        final Procedure1<Group> _function_2 = new Procedure1<Group>() {
+        AdvancedNewProjectPage.this.Group(it, _function_2);
+        final Procedure1<Group> _function_3 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
             it.setText("Source Layout");
@@ -176,16 +232,16 @@ public class AdvancedNewProjectPage extends WizardPage {
             AdvancedNewProjectPage.this.sourceLayout = _DropDown;
           }
         };
-        AdvancedNewProjectPage.this.Group(it, _function_2);
+        AdvancedNewProjectPage.this.Group(it, _function_3);
         StatusWidget _statusWidget = new StatusWidget(it, SWT.NONE);
-        final Procedure1<StatusWidget> _function_3 = new Procedure1<StatusWidget>() {
+        final Procedure1<StatusWidget> _function_4 = new Procedure1<StatusWidget>() {
           @Override
           public void apply(final StatusWidget it) {
             GridData _gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
             it.setLayoutData(_gridData);
           }
         };
-        StatusWidget _doubleArrow = ObjectExtensions.<StatusWidget>operator_doubleArrow(_statusWidget, _function_3);
+        StatusWidget _doubleArrow = ObjectExtensions.<StatusWidget>operator_doubleArrow(_statusWidget, _function_4);
         AdvancedNewProjectPage.this.statusWidget = _doubleArrow;
       }
     };
@@ -210,6 +266,67 @@ public class AdvancedNewProjectPage extends WizardPage {
     IWorkbenchHelpSystem _helpSystem = _workbench.getHelpSystem();
     Shell _shell = this.getShell();
     _helpSystem.setHelp(_shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced");
+  }
+  
+  public List<Pair<IExecutionEnvironment, IVMInstall>> collectBrees() {
+    IVMInstallType[] _vMInstallTypes = JavaRuntime.getVMInstallTypes();
+    final Function1<IVMInstallType, List<IVMInstall>> _function = new Function1<IVMInstallType, List<IVMInstall>>() {
+      @Override
+      public List<IVMInstall> apply(final IVMInstallType it) {
+        IVMInstall[] _vMInstalls = it.getVMInstalls();
+        return IterableExtensions.<IVMInstall>toList(((Iterable<IVMInstall>)Conversions.doWrapArray(_vMInstalls)));
+      }
+    };
+    List<List<IVMInstall>> _map = ListExtensions.<IVMInstallType, List<IVMInstall>>map(((List<IVMInstallType>)Conversions.doWrapArray(_vMInstallTypes)), _function);
+    final Iterable<IVMInstall> vms = Iterables.<IVMInstall>concat(_map);
+    IExecutionEnvironmentsManager _executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
+    final IExecutionEnvironment[] installedEEs = _executionEnvironmentsManager.getExecutionEnvironments();
+    final Function1<IExecutionEnvironment, Boolean> _function_1 = new Function1<IExecutionEnvironment, Boolean>() {
+      @Override
+      public Boolean apply(final IExecutionEnvironment ee) {
+        boolean _and = false;
+        String _id = ee.getId();
+        boolean _startsWith = _id.startsWith("J");
+        if (!_startsWith) {
+          _and = false;
+        } else {
+          final Function1<IVMInstall, Boolean> _function = new Function1<IVMInstall, Boolean>() {
+            @Override
+            public Boolean apply(final IVMInstall it) {
+              return Boolean.valueOf(ee.isStrictlyCompatible(it));
+            }
+          };
+          boolean _exists = IterableExtensions.<IVMInstall>exists(vms, _function);
+          _and = _exists;
+        }
+        return Boolean.valueOf(_and);
+      }
+    };
+    Iterable<IExecutionEnvironment> _filter = IterableExtensions.<IExecutionEnvironment>filter(((Iterable<IExecutionEnvironment>)Conversions.doWrapArray(installedEEs)), _function_1);
+    final Comparator<IExecutionEnvironment> _function_2 = new Comparator<IExecutionEnvironment>() {
+      @Override
+      public int compare(final IExecutionEnvironment $0, final IExecutionEnvironment $1) {
+        Comparator<Object> _comparator = Policy.getComparator();
+        String _id = $0.getId();
+        String _id_1 = $1.getId();
+        return _comparator.compare(_id, _id_1);
+      }
+    };
+    List<IExecutionEnvironment> _sortWith = IterableExtensions.<IExecutionEnvironment>sortWith(_filter, _function_2);
+    final Function1<IExecutionEnvironment, Pair<IExecutionEnvironment, IVMInstall>> _function_3 = new Function1<IExecutionEnvironment, Pair<IExecutionEnvironment, IVMInstall>>() {
+      @Override
+      public Pair<IExecutionEnvironment, IVMInstall> apply(final IExecutionEnvironment ee) {
+        final Function1<IVMInstall, Boolean> _function = new Function1<IVMInstall, Boolean>() {
+          @Override
+          public Boolean apply(final IVMInstall it) {
+            return Boolean.valueOf(ee.isStrictlyCompatible(it));
+          }
+        };
+        IVMInstall _findFirst = IterableExtensions.<IVMInstall>findFirst(vms, _function);
+        return Pair.<IExecutionEnvironment, IVMInstall>of(ee, _findFirst);
+      }
+    };
+    return ListExtensions.<IExecutionEnvironment, Pair<IExecutionEnvironment, IVMInstall>>map(_sortWith, _function_3);
   }
   
   public void validate(final SelectionEvent e) {
@@ -256,7 +373,8 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and_2 = _selection;
       }
       if (_and_2) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, "Building Eclipse Plugins with Gradle is not yet supported. An additional Maven Tycho build will be created");
+        this.<Control>reportIssue(IMessageProvider.WARNING, 
+          "Building Eclipse Plugins with Gradle is not yet supported. An additional Maven Tycho build will be created");
       }
       boolean _and_3 = false;
       boolean _isSelected_3 = this.isSelected(this.preferredBuildSystem, BuildSystem.MAVEN);
@@ -267,7 +385,8 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and_3 = _selection_1;
       }
       if (_and_3) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, "Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created");
+        this.<Control>reportIssue(IMessageProvider.WARNING, 
+          "Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created");
       }
       boolean _and_4 = false;
       boolean _isSelected_4 = this.isSelected(this.preferredBuildSystem, BuildSystem.NONE);
@@ -278,7 +397,8 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and_4 = _selection_2;
       }
       if (_and_4) {
-        this.<Control>reportIssue(IMessageProvider.INFORMATION, "IntelliJ Plugin requires Gradle build. An additional Gradle build will be created");
+        this.<Control>reportIssue(IMessageProvider.INFORMATION, 
+          "IntelliJ Plugin requires Gradle build. An additional Gradle build will be created");
       }
       Object _source = null;
       if (e!=null) {
@@ -605,6 +725,25 @@ public class AdvancedNewProjectPage extends WizardPage {
     return ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
   }
   
+  protected ComboViewer ComboViewer(final Composite parent, final Procedure1<? super ComboViewer> config) {
+    ComboViewer _comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
+    final Procedure1<ComboViewer> _function = new Procedure1<ComboViewer>() {
+      @Override
+      public void apply(final ComboViewer it) {
+        Combo _combo = it.getCombo();
+        Font _font = parent.getFont();
+        _combo.setFont(_font);
+        Combo _combo_1 = it.getCombo();
+        GridData _gridData = new GridData(GridData.FILL_HORIZONTAL);
+        _combo_1.setLayoutData(_gridData);
+        ArrayContentProvider _instance = ArrayContentProvider.getInstance();
+        it.setContentProvider(_instance);
+        config.apply(it);
+      }
+    };
+    return ObjectExtensions.<ComboViewer>operator_doubleArrow(_comboViewer, _function);
+  }
+  
   protected Combo DropDown(final Composite parent, final Procedure1<? super Combo> config) {
     Combo _combo = new Combo(parent, SWT.READ_ONLY);
     final Procedure1<Combo> _function = new Procedure1<Combo>() {
@@ -632,6 +771,9 @@ public class AdvancedNewProjectPage extends WizardPage {
     SourceLayout[] _values_1 = SourceLayout.values();
     Enum<?> _head_1 = IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(_values_1)));
     this.select(this.sourceLayout, _head_1);
+    String _defaultBREE = JREContainerProvider.getDefaultBREE();
+    StructuredSelection _structuredSelection = new StructuredSelection(_defaultBREE);
+    this.jreToUse.setSelection(_structuredSelection);
   }
   
   public boolean isCreateUiProject() {
