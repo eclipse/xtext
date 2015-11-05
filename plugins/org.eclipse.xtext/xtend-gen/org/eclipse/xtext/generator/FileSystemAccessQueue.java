@@ -2,11 +2,11 @@ package org.eclipse.xtext.generator;
 
 import java.util.concurrent.BlockingQueue;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.generator.FileSystemAccessRequest;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
@@ -41,14 +41,14 @@ public class FileSystemAccessQueue extends AdapterImpl {
     try {
       boolean _isCanceled = this.monitor.isCanceled();
       if (_isCanceled) {
-        throw new OperationCanceledException();
+        throw new OperationCanceledError();
       }
       this.requestQueue.put(request);
       return request;
     } catch (final Throwable _t) {
       if (_t instanceof InterruptedException) {
         final InterruptedException e = (InterruptedException)_t;
-        throw new OperationCanceledException();
+        throw new OperationCanceledError();
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

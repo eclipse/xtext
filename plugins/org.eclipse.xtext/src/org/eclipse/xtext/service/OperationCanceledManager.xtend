@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.service
 
-import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.xtext.util.CancelIndicator
 
 /**
@@ -21,7 +20,7 @@ class OperationCanceledManager {
 	
 	protected def RuntimeException getPlatformOperationCanceledException(Throwable t) {
 		switch t {
-			OperationCanceledException : t
+			RuntimeException case t.class.name == 'org.eclipse.core.runtime.OperationCanceledException' : t
 			RuntimeException case t.class.name == 'com.intellij.openapi.progress.ProcessCanceledException' : t
 			OperationCanceledError : t.wrapped
 			default : null
@@ -68,8 +67,11 @@ class OperationCanceledManager {
 		throw asWrappingOperationCanceledException(platformSpecificOperationCanceledException)
 	}
 	
-	protected def RuntimeException getPlatformSpecificOperationCanceledException() {
-		return new OperationCanceledException()
+	/**
+	 * @since 2.9
+	 */
+	protected def Throwable getPlatformSpecificOperationCanceledException() {
+		return new OperationCanceledError(null)
 	}
 	
 	def void checkCanceled(CancelIndicator indicator) {
@@ -84,6 +86,12 @@ class OperationCanceledManager {
  * @since 2.8
  */
 class OperationCanceledError extends Error {
+	/**
+	 * @since 2.9
+	 */
+ 	new() {
+		super()
+	}
 	new(RuntimeException cause) {
 		super(cause)
 	}

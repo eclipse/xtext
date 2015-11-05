@@ -8,7 +8,6 @@
 package org.eclipse.xtext.service;
 
 import com.google.common.base.Objects;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 
@@ -25,9 +24,14 @@ public class OperationCanceledManager {
     RuntimeException _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (t instanceof OperationCanceledException) {
-        _matched=true;
-        _switchResult = ((RuntimeException)t);
+      if (t instanceof RuntimeException) {
+        Class<? extends RuntimeException> _class = ((RuntimeException)t).getClass();
+        String _name = _class.getName();
+        boolean _equals = Objects.equal(_name, "org.eclipse.core.runtime.OperationCanceledException");
+        if (_equals) {
+          _matched=true;
+          _switchResult = ((RuntimeException)t);
+        }
       }
     }
     if (!_matched) {
@@ -94,12 +98,15 @@ public class OperationCanceledManager {
   }
   
   public void throwOperationCanceledException() {
-    RuntimeException _platformSpecificOperationCanceledException = this.getPlatformSpecificOperationCanceledException();
+    Throwable _platformSpecificOperationCanceledException = this.getPlatformSpecificOperationCanceledException();
     throw this.asWrappingOperationCanceledException(_platformSpecificOperationCanceledException);
   }
   
-  protected RuntimeException getPlatformSpecificOperationCanceledException() {
-    return new OperationCanceledException();
+  /**
+   * @since 2.9
+   */
+  protected Throwable getPlatformSpecificOperationCanceledException() {
+    return new OperationCanceledError(null);
   }
   
   public void checkCanceled(final CancelIndicator indicator) {

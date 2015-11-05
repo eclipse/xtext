@@ -1,11 +1,11 @@
 package org.eclipse.xtext.generator
 
 import java.util.concurrent.BlockingQueue
-import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.service.OperationCanceledError
 
 /**
  * @author Anton Kosyakov
@@ -32,12 +32,12 @@ class FileSystemAccessQueue extends AdapterImpl {
 	protected def send(FileSystemAccessRequest request) {
 		try {
 			if (monitor.isCanceled) {
-				throw new OperationCanceledException
+				throw new OperationCanceledError()
 			}
 			requestQueue.put(request)
 			return request
 		} catch (InterruptedException e) {
-			throw new OperationCanceledException
+			throw new OperationCanceledError()
 		}
 	}
 
