@@ -147,6 +147,7 @@ define([
 		};
 		var serviceBuilder = new AceServiceBuilder(editor, xtextServices);
 		serviceBuilder.createServices();
+		xtextServices.serviceBuilder = serviceBuilder;
 		editor.xtextServices = xtextServices;
 		return xtextServices;
 	}

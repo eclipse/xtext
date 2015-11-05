@@ -153,6 +153,7 @@ define([
 		};
 		var serviceBuilder = new CodeMirrorServiceBuilder(editor, xtextServices);
 		serviceBuilder.createServices();
+		xtextServices.serviceBuilder = serviceBuilder;
 		editor.xtextServices = xtextServices;
 		return xtextServices;
 	}
