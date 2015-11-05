@@ -199,6 +199,7 @@ define([
 			deferred.resolve(xtextServices);
 		}
 
+		xtextServices.serviceBuilder = serviceBuilder;
 		editorViewer.xtextServices = xtextServices;
 		return deferred.promise();
 	}
