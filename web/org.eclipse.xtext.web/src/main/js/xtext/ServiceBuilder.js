@@ -177,6 +177,28 @@ define([
 	}
 	
 	/**
+	 * Change the resource associated with this service builder.
+	 */
+	ServiceBuilder.prototype.changeResource = function(resourceId) {
+		var services = this.services;
+		var options = services.options;
+		options.resourceId = resourceId;
+		for (var p in services) {
+			if (services.hasOwnProperty(p)) {
+				var service = services[p];
+				if (service._serviceType && jQuery.isFunction(service.initialize))
+					services[p].initialize(options.serviceUrl, service._serviceType, resourceId, services.updateService);
+			}
+		}
+		var knownServerState = services.editorContext.getServerState();
+		delete knownServerState.stateId;
+		delete knownServerState.text;
+		if (options.loadFromServer && jQuery.isFunction(services.loadResource)) {
+			services.loadResource();
+		}
+	}
+	
+	/**
 	 * Create a copy of the given object.
 	 */
 	ServiceBuilder.copy = function(obj) {

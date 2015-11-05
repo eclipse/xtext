@@ -26,7 +26,7 @@
 					});
 					editorViewer.xtextServices.successListeners.push(function(serviceType, result) {
 						if (serviceType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
-							$('#generator-result').html('<iframe src="http://' + location.host + '/xtext-service/generate?resource=example.statemachine"></iframe>');
+							$('#generator-result').html('<iframe src="http://' + location.host + '/xtext-service/generate?resource=example1.statemachine"></iframe>');
 						}
 					});
 				});
@@ -38,7 +38,7 @@
 
 <div class="container">
 	<div class="xtext-editor"
-		data-editor-resource-id="example.statemachine"
+		data-editor-resource-id="example1.statemachine"
 		data-editor-dirty-element="dirty-indicator"
 		data-editor-enable-save-action="true"
 		data-editor-enable-formatting-action="true"
