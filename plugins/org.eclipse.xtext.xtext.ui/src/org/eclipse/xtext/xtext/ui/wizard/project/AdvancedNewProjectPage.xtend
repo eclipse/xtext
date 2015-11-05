@@ -7,6 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project
 
+import java.util.List
+import org.eclipse.jdt.launching.IVMInstall
+import org.eclipse.jdt.launching.JavaRuntime
+import org.eclipse.jdt.launching.environments.IExecutionEnvironment
+import org.eclipse.jface.util.Policy
+import org.eclipse.jface.viewers.ArrayContentProvider
+import org.eclipse.jface.viewers.ComboViewer
+import org.eclipse.jface.viewers.LabelProvider
+import org.eclipse.jface.viewers.StructuredSelection
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
 import org.eclipse.swt.events.SelectionAdapter
@@ -19,6 +28,7 @@ import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Control
 import org.eclipse.swt.widgets.Group
 import org.eclipse.ui.PlatformUI
+import org.eclipse.xtext.ui.util.JREContainerProvider
 import org.eclipse.xtext.xtext.ui.internal.Activator
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.SourceLayout
@@ -34,6 +44,7 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createTestProject
 	Combo preferredBuildSystem
 	Combo sourceLayout
+	ComboViewer jreToUse
 
 	StatusWidget statusWidget
 
@@ -44,49 +55,68 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	override createControl(Composite parent) {
-		control = new Composite(parent, SWT.NONE) => [
-			layoutData = new GridData(SWT.FILL, SWT.FILL, true, true)
-			layout = new GridLayout(1, false)
-			Group [
-				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
-				createUiProject = CheckBox [
-					text = "Eclipse Plugin"
-				]
-				createIdeaProject = CheckBox [
-					text = "IntelliJ IDEA Plugin"
-					enabled = true
-				]
-				createWebProject = CheckBox [
-					text = "Web Integration"
-					enabled = true
-				]
-				createIdeProject = CheckBox [
-					text = "Generic IDE Support"
-					enabled = true
-				]
-				createTestProject = CheckBox [
-					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
-				]
-			]
-			Group [
-				text = "Preferred Build System"
-				preferredBuildSystem = DropDown[
-					enabled = true
-					items = BuildSystem.values.map[toString]
-				]
-			]
-			Group [
-				text = "Source Layout"
-				sourceLayout = DropDown[
-					enabled = true
-					items = SourceLayout.values.map[toString]
-				]
+		control = new Composite(parent, SWT.NONE) =>
+			[
+				layoutData = new GridData(SWT.FILL, SWT.FILL, true, true)
+				layout = new GridLayout(1, false)
+				Group [
+					text = "Use an execution environment JRE"
+					jreToUse = ComboViewer [
+						combo.enabled = true
+						input = collectBrees().toArray
+						labelProvider = new LabelProvider() {
 
+							override getText(
+								Object element) {
+								if (element instanceof Pair<?, ?>) {
+									return '''«(element.key as IExecutionEnvironment).id» - «(element.value as IVMInstall).name»'''
+								} else {
+									return element?.toString
+								}
+							}
+						}
+					]
+				]
+				Group [
+					text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
+					createUiProject = CheckBox [
+						text = "Eclipse Plugin"
+					]
+					createIdeaProject = CheckBox [
+						text = "IntelliJ IDEA Plugin"
+						enabled = true
+					]
+					createWebProject = CheckBox [
+						text = "Web Integration"
+						enabled = true
+					]
+					createIdeProject = CheckBox [
+						text = "Generic IDE Support"
+						enabled = true
+					]
+					createTestProject = CheckBox [
+						text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
+					]
+				]
+				Group [
+					text = "Preferred Build System"
+					preferredBuildSystem = DropDown[
+						enabled = true
+						items = BuildSystem.values.map[toString]
+					]
+				]
+				Group [
+					text = "Source Layout"
+					sourceLayout = DropDown[
+						enabled = true
+						items = SourceLayout.values.map[toString]
+					]
+
+				]
+				statusWidget = new StatusWidget(it, SWT.NONE) => [
+					layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
+				]
 			]
-			statusWidget = new StatusWidget(it, SWT.NONE) => [
-				layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
-			]
-		]
 
 		val selectionControl = new SelectionAdapter() {
 			override widgetSelected(SelectionEvent e) {
@@ -107,6 +137,14 @@ class AdvancedNewProjectPage extends WizardPage {
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced")
 	}
 
+	def List<Pair<IExecutionEnvironment, IVMInstall>> collectBrees() {
+		val vms = JavaRuntime.VMInstallTypes.map[VMInstalls.toList].flatten
+		val installedEEs = JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments()
+		return installedEEs.filter[ee|ee.id.startsWith('J') && vms.exists[ee.isStrictlyCompatible(it)]].sortWith [
+			Policy.getComparator().compare($0.getId(), $1.getId())
+		].map[ee|ee -> vms.findFirst[ee.isStrictlyCompatible(it)]]
+	}
+
 	def void validate(SelectionEvent e) {
 		statusWidget.clearStatus
 		checkWidgets(e)
@@ -122,13 +160,16 @@ class AdvancedNewProjectPage extends WizardPage {
 			reportIssue(WARNING, 'Gradle integration for eclipse is not installed. Consider to install Buildship.')
 		}
 		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && createUiProject.selection) {
-			reportIssue(WARNING, 'Building Eclipse Plugins with Gradle is not yet supported. An additional Maven Tycho build will be created')
+			reportIssue(WARNING,
+				'Building Eclipse Plugins with Gradle is not yet supported. An additional Maven Tycho build will be created')
 		}
 		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && createIdeaProject.selection) {
-			reportIssue(WARNING, 'Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created')
+			reportIssue(WARNING,
+				'Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created')
 		}
 		if (preferredBuildSystem.isSelected(BuildSystem.NONE) && createIdeaProject.selection) {
-			reportIssue(INFORMATION, 'IntelliJ Plugin requires Gradle build. An additional Gradle build will be created')
+			reportIssue(INFORMATION,
+				'IntelliJ Plugin requires Gradle build. An additional Gradle build will be created')
 		}
 
 		val source = e?.source
@@ -147,7 +188,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				])
 			}
 		}
-		
+
 		if (preferredBuildSystem.isSelected(BuildSystem.NONE) && sourceLayout.isSelected(SourceLayout.MAVEN)) {
 			if (preferredBuildSystem === source) {
 				reportIssue(ERROR, '''
@@ -240,6 +281,15 @@ class AdvancedNewProjectPage extends WizardPage {
 		]
 	}
 
+	def protected ComboViewer(Composite parent, (ComboViewer)=>void config) {
+		new ComboViewer(parent, SWT.READ_ONLY) => [
+			combo.font = parent.font
+			combo.layoutData = new GridData(GridData.FILL_HORIZONTAL)
+			contentProvider = ArrayContentProvider.instance
+			config.apply(it)
+		]
+	}
+
 	def protected DropDown(Composite parent, (Combo)=>void config) {
 		new Combo(parent, SWT.READ_ONLY) => [
 			font = parent.font
@@ -256,6 +306,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		createWebProject.selection = false
 		preferredBuildSystem.select(BuildSystem.values.head)
 		sourceLayout.select(SourceLayout.values.head)
+		jreToUse.selection = new StructuredSelection(JREContainerProvider.defaultBREE)
 	}
 
 	def boolean isCreateUiProject() {
