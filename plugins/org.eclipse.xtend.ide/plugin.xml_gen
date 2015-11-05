@@ -153,7 +153,7 @@
 			</visibleWhen>
 		</command>  
 		</menuContribution>
-		!-- copy qualified name -->
+		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
 				style="push" tooltip="Copy Qualified Name">
@@ -205,9 +205,7 @@
 			</activeWhen>
 		</handler>
 	</extension>
-	
 	<!-- adding resource factories -->
-	
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
@@ -221,7 +219,6 @@
 	        uriExtension="xtend">
 	    </resourceServiceProvider>
 	</extension>
-	
 	<!-- marker definitions for org.eclipse.xtend.core.Xtend -->
 	<extension
 			id="xtend.check.fast"
@@ -247,8 +244,7 @@
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
 			class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-			fileExtensions="xtend">
-		</participant>
+			fileExtensions="xtend"/>
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page

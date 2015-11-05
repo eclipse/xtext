@@ -58,6 +58,7 @@ Workflow {
 					enabled = true
 					root = "../../intellij/org.eclipse.xtend.idea" 
 				}
+				createEclipseMetaData = true
 			}
 			code = {
 				encoding = "ISO-8859-1"
