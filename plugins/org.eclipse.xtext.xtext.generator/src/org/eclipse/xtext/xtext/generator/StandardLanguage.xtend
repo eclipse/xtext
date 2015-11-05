@@ -108,9 +108,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	new() {
 		try {
 			class.classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule")
-			standaloneSetup = new XtextLanguageStandaloneSetup => [
-				addLoadedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel")
-			]
+			addReferencedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel")
 		} catch (ClassNotFoundException e) {
 			LOG.info("Skipping registration of Xbase genmodel. Xbase is not on the classpath.")
 		}

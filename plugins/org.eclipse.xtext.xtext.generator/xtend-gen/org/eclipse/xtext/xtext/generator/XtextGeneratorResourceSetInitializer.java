@@ -9,8 +9,6 @@ package org.eclipse.xtext.xtext.generator;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 import java.lang.reflect.Method;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -28,47 +26,29 @@ import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.internal.Log;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 
 /**
  * @noextend
+ * @noreference
  */
 @Log
 @SuppressWarnings("all")
-public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorComponent {
-  private List<String> loadedResources = CollectionLiterals.<String>newArrayList();
-  
-  @Inject
-  private IXtextGeneratorLanguage language;
-  
-  public void addLoadedResource(final String uri) {
-    this.loadedResources.add(uri);
-  }
-  
-  @Override
-  public void initialize(final Injector injector) {
-    injector.injectMembers(this);
-    ResourceSet _resourceSet = this.language.getResourceSet();
-    this.setup(_resourceSet);
-  }
-  
-  private void setup(final ResourceSet resourceSet) {
+public class XtextGeneratorResourceSetInitializer {
+  public void initialize(final ResourceSet resourceSet, final List<String> referencedResources) {
     final StandaloneSetup delegate = new StandaloneSetup();
     delegate.setResourceSet(resourceSet);
     final Procedure1<String> _function = new Procedure1<String>() {
       @Override
       public void apply(final String it) {
-        XtextLanguageStandaloneSetup.this.loadResource(it, resourceSet);
+        XtextGeneratorResourceSetInitializer.this.loadResource(it, resourceSet);
       }
     };
-    IterableExtensions.<String>forEach(this.loadedResources, _function);
+    IterableExtensions.<String>forEach(referencedResources, _function);
     this.registerGenModels(resourceSet);
     this.registerEPackages(resourceSet);
   }
@@ -109,10 +89,10 @@ public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorCompone
             } catch (final Throwable _t) {
               if (_t instanceof ClassNotFoundException) {
                 final ClassNotFoundException e = (ClassNotFoundException)_t;
-                XtextLanguageStandaloneSetup.LOG.debug("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport not found, GenModels will not be indexed");
+                XtextGeneratorResourceSetInitializer.LOG.debug("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport not found, GenModels will not be indexed");
               } else if (_t instanceof Exception) {
                 final Exception e_1 = (Exception)_t;
-                XtextLanguageStandaloneSetup.LOG.error("Couldn\'t initialize GenModel support.", e_1);
+                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize GenModel support.", e_1);
               } else {
                 throw Exceptions.sneakyThrow(_t);
               }
@@ -147,12 +127,12 @@ public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorCompone
             } catch (final Throwable _t) {
               if (_t instanceof ClassNotFoundException) {
                 final ClassNotFoundException e = (ClassNotFoundException)_t;
-                XtextLanguageStandaloneSetup.LOG.error("Couldn\'t initialize Xcore support. Is it on the classpath?");
+                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support. Is it on the classpath?");
                 String _message = e.getMessage();
-                XtextLanguageStandaloneSetup.LOG.debug(_message, e);
+                XtextGeneratorResourceSetInitializer.LOG.debug(_message, e);
               } else if (_t instanceof Exception) {
                 final Exception e_1 = (Exception)_t;
-                XtextLanguageStandaloneSetup.LOG.error("Couldn\'t initialize Xcore support.", e_1);
+                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support.", e_1);
               } else {
                 throw Exceptions.sneakyThrow(_t);
               }
@@ -167,7 +147,7 @@ public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorCompone
               final WrappedException e_2 = (WrappedException)_t_1;
               boolean _xblockexpression_2 = false;
               {
-                XtextLanguageStandaloneSetup.LOG.error("Could not load XcoreLang.xcore.", e_2);
+                XtextGeneratorResourceSetInitializer.LOG.error("Could not load XcoreLang.xcore.", e_2);
                 final Resource brokenResource = resourceSet.getResource(xcoreLangURI, false);
                 EList<Resource> _resources = resourceSet.getResources();
                 _xblockexpression_2 = _resources.remove(brokenResource);
@@ -199,7 +179,7 @@ public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorCompone
     final Procedure1<EPackage> _function_1 = new Procedure1<EPackage>() {
       @Override
       public void apply(final EPackage it) {
-        XtextLanguageStandaloneSetup.this.registerEPackage(it);
+        XtextGeneratorResourceSetInitializer.this.registerEPackage(it);
       }
     };
     IterableExtensions.<EPackage>forEach(_filter, _function_1);
@@ -219,7 +199,7 @@ public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorCompone
     final Procedure1<GenModel> _function_1 = new Procedure1<GenModel>() {
       @Override
       public void apply(final GenModel it) {
-        XtextLanguageStandaloneSetup.this.registerGenModel(it);
+        XtextGeneratorResourceSetInitializer.this.registerGenModel(it);
       }
     };
     IterableExtensions.<GenModel>forEach(_filter, _function_1);
@@ -249,5 +229,5 @@ public class XtextLanguageStandaloneSetup implements IGuiceAwareGeneratorCompone
     return _xblockexpression;
   }
   
-  private final static Logger LOG = Logger.getLogger(XtextLanguageStandaloneSetup.class);
+  private final static Logger LOG = Logger.getLogger(XtextGeneratorResourceSetInitializer.class);
 }

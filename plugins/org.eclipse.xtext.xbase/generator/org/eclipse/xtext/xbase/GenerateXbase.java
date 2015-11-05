@@ -73,7 +73,7 @@ final class GenerateXbase {
 				String fileExtensions = "___xtype";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
-				getStandaloneSetup().addLoadedResource(xbaseGenModel);
+				addReferencedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
@@ -91,7 +91,7 @@ final class GenerateXbase {
 				String fileExtensions = "___xbase";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
-				getStandaloneSetup().addLoadedResource(xbaseGenModel);
+				addReferencedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
@@ -129,7 +129,7 @@ final class GenerateXbase {
 				String fileExtensions = "___xbasewithannotations";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
-				getStandaloneSetup().addLoadedResource(xbaseGenModel);
+				addReferencedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
 				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());

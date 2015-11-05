@@ -20,7 +20,6 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
-import org.eclipse.xtext.xtext.generator.XtextLanguageStandaloneSetup;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2;
@@ -131,15 +130,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       Class<? extends StandardLanguage> _class = this.getClass();
       ClassLoader _classLoader = _class.getClassLoader();
       _classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule");
-      XtextLanguageStandaloneSetup _xtextLanguageStandaloneSetup = new XtextLanguageStandaloneSetup();
-      final Procedure1<XtextLanguageStandaloneSetup> _function = new Procedure1<XtextLanguageStandaloneSetup>() {
-        @Override
-        public void apply(final XtextLanguageStandaloneSetup it) {
-          it.addLoadedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel");
-        }
-      };
-      XtextLanguageStandaloneSetup _doubleArrow = ObjectExtensions.<XtextLanguageStandaloneSetup>operator_doubleArrow(_xtextLanguageStandaloneSetup, _function);
-      this.setStandaloneSetup(_doubleArrow);
+      this.addReferencedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel");
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {
         final ClassNotFoundException e = (ClassNotFoundException)_t;
