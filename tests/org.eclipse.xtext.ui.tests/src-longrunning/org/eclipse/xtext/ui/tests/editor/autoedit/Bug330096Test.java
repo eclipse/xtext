@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.junit4.ui.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator;
+import org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
@@ -59,7 +59,7 @@ public class Bug330096Test extends AbstractCStyleLanguageAutoEditTest {
 	}
 	
 	protected IProject createPluginProject(String name) throws CoreException {
-		Injector injector = BeeLangTestLanguageActivator.getInstance().getInjector("org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage");
+		Injector injector = TestlanguagesActivator.getInstance().getInjector("org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
