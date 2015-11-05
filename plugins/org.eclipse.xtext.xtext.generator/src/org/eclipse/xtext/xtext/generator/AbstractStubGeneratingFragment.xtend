@@ -7,22 +7,37 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
-import org.eclipse.xtend.lib.annotations.Accessors
 import com.google.inject.Inject
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption
 
 abstract class AbstractStubGeneratingFragment extends AbstractXtextGeneratorFragment {
 
 	@Inject
 	extension CodeConfig
 
-	@Accessors
-	boolean generateStub = true
+	@Accessors(PUBLIC_GETTER)
+	val generateStub = new BooleanGeneratorOption(true)
 	
-	@Accessors(PUBLIC_SETTER)
-	Boolean generateXtendStub = null
+	val generateXtendStub = new BooleanGeneratorOption
 	
-	def isGenerateXtendStub() {
-		if (generateXtendStub != null) generateXtendStub.booleanValue else preferXtendStubs
+	def boolean isGenerateStub() {
+		generateStub.get
 	}
+	
+	def void setGenerateStub(boolean generateStub) {
+		this.generateStub.set(generateStub)
+	}
+	
+	def boolean isGenerateXtendStub() {
+		if (generateXtendStub.isSet)
+			generateXtendStub.get
+		else
+			preferXtendStubs
+	}
+	
+	def void setGenerateXtendStub(boolean generateXtendStub) {
+		this.generateXtendStub.set(generateXtendStub)
+	}
+	
 }

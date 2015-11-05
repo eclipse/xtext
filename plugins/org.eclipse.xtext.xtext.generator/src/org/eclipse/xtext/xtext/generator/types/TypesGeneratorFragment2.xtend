@@ -7,23 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.types
 
-import org.eclipse.xtext.scoping.IGlobalScopeProvider
-import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
-
-import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 import com.google.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption
+import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
+
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 class TypesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	
 	@Inject XbaseUsageDetector xbaseUsageDetector
 	
-	@Accessors boolean onlyEnabledIfGrammarIsUsed = false
+	@Accessors(PUBLIC_GETTER)
+	val onlyEnabledIfGrammarIsUsed = new BooleanGeneratorOption(false)
+	
+	def void setOnlyEnabledIfGrammarIsUsed(boolean onlyEnabledIfGrammarIsUsed) {
+		this.onlyEnabledIfGrammarIsUsed.set(onlyEnabledIfGrammarIsUsed)
+	}
 	
 	override generate() {
-		if (onlyEnabledIfGrammarIsUsed && !xbaseUsageDetector.inheritsXtype(language.grammar)) {
+		if (onlyEnabledIfGrammarIsUsed.get && !xbaseUsageDetector.inheritsXtype(language.grammar)) {
 			return;
 		}
 		new GuiceModuleAccess.BindingFactory()

@@ -60,7 +60,7 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 	boolean generateXtendMain = false
 	
 	override boolean isGenerateStub() {
-		!grammar.inheritsXbase && super.generateStub
+		!grammar.inheritsXbase && super.isGenerateStub
 	}
 	
 	def boolean isGenerateJavaMain() {

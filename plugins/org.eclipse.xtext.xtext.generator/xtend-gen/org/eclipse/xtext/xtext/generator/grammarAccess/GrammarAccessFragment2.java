@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractElement;
@@ -51,7 +52,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -71,9 +71,6 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 @Log
 @SuppressWarnings("all")
 public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
-  @Accessors
-  private String xmlVersion;
-  
   @Inject
   private FileAccessFactory fileAccessFactory;
   
@@ -84,6 +81,9 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String xmlVersion;
   
   @Override
   public void generate() {
@@ -1190,11 +1190,6 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
   }
   
   private final static Logger LOG = Logger.getLogger(GrammarAccessFragment2.class);
-  
-  @Pure
-  public String getXmlVersion() {
-    return this.xmlVersion;
-  }
   
   public void setXmlVersion(final String xmlVersion) {
     this.xmlVersion = xmlVersion;

@@ -49,13 +49,13 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 @Log
 class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 	
-	@Accessors
-	String xmlVersion
-	
 	@Inject FileAccessFactory fileAccessFactory
 	
 	@Inject extension GrammarAccessExtensions
 	@Inject extension XtextGeneratorNaming
+	
+	@Accessors(PUBLIC_SETTER)
+	String xmlVersion
 	
 	override generate() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator;
 
 import com.google.common.collect.Iterables;
+import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -42,6 +43,8 @@ import org.eclipse.xtext.xtext.generator.ui.outline.QuickOutlineFragment2;
 import org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2;
 import org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
+import org.eclipse.xtext.xtext.generator.util.GeneratorOption;
 import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2;
 import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
@@ -67,12 +70,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private ValidatorFragment2 validator = new ValidatorFragment2();
   
-  private Formatter2Fragment2 formatter = ObjectExtensions.<Formatter2Fragment2>operator_doubleArrow(new Formatter2Fragment2(), new Procedure1<Formatter2Fragment2>() {
-    @Override
-    public void apply(final Formatter2Fragment2 it) {
-      it.setGenerateStub(false);
-    }
-  });
+  private Formatter2Fragment2 formatter = new Formatter2Fragment2();
   
   private GeneratorFragment2 generator = new GeneratorFragment2();
   
@@ -102,12 +100,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment();
   
-  private TypesGeneratorFragment2 commonTypesSupport = ObjectExtensions.<TypesGeneratorFragment2>operator_doubleArrow(new TypesGeneratorFragment2(), new Procedure1<TypesGeneratorFragment2>() {
-    @Override
-    public void apply(final TypesGeneratorFragment2 it) {
-      it.setOnlyEnabledIfGrammarIsUsed(true);
-    }
-  });
+  private TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2();
   
   private XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2();
   
@@ -115,15 +108,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator();
   
-  private WebIntegrationFragment webSupport = ObjectExtensions.<WebIntegrationFragment>operator_doubleArrow(new WebIntegrationFragment(), new Procedure1<WebIntegrationFragment>() {
-    @Override
-    public void apply(final WebIntegrationFragment it) {
-      it.setFramework("Ace");
-      it.setGenerateServlet(true);
-      it.setGenerateJettyLauncher(true);
-      it.setGenerateHtmlExample(true);
-    }
-  });
+  private WebIntegrationFragment webSupport = new WebIntegrationFragment();
   
   public StandardLanguage() {
     try {
@@ -139,6 +124,47 @@ public class StandardLanguage extends XtextGeneratorLanguage {
         throw Exceptions.sneakyThrow(_t);
       }
     }
+  }
+  
+  @Override
+  public void initialize(final Injector injector) {
+    BooleanGeneratorOption _generateStub = this.formatter.getGenerateStub();
+    boolean _isSet = _generateStub.isSet();
+    boolean _not = (!_isSet);
+    if (_not) {
+      this.formatter.setGenerateStub(false);
+    }
+    BooleanGeneratorOption _onlyEnabledIfGrammarIsUsed = this.commonTypesSupport.getOnlyEnabledIfGrammarIsUsed();
+    boolean _isSet_1 = _onlyEnabledIfGrammarIsUsed.isSet();
+    boolean _not_1 = (!_isSet_1);
+    if (_not_1) {
+      this.commonTypesSupport.setOnlyEnabledIfGrammarIsUsed(true);
+    }
+    GeneratorOption<WebIntegrationFragment.Framework> _framework = this.webSupport.getFramework();
+    boolean _isSet_2 = _framework.isSet();
+    boolean _not_2 = (!_isSet_2);
+    if (_not_2) {
+      this.webSupport.setFramework("Ace");
+    }
+    BooleanGeneratorOption _generateServlet = this.webSupport.getGenerateServlet();
+    boolean _isSet_3 = _generateServlet.isSet();
+    boolean _not_3 = (!_isSet_3);
+    if (_not_3) {
+      this.webSupport.setGenerateServlet(true);
+    }
+    BooleanGeneratorOption _generateJettyLauncher = this.webSupport.getGenerateJettyLauncher();
+    boolean _isSet_4 = _generateJettyLauncher.isSet();
+    boolean _not_4 = (!_isSet_4);
+    if (_not_4) {
+      this.webSupport.setGenerateJettyLauncher(true);
+    }
+    BooleanGeneratorOption _generateHtmlExample = this.webSupport.getGenerateHtmlExample();
+    boolean _isSet_5 = _generateHtmlExample.isSet();
+    boolean _not_5 = (!_isSet_5);
+    if (_not_5) {
+      this.webSupport.setGenerateHtmlExample(true);
+    }
+    super.initialize(injector);
   }
   
   @Override

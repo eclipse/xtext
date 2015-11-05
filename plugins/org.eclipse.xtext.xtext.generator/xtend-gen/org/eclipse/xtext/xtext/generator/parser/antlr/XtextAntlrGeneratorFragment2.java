@@ -23,6 +23,7 @@ import org.antlr.runtime.CharStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -59,7 +60,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
@@ -86,22 +86,22 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.KeywordHelper;
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
 @SuppressWarnings("all")
 public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
-  @Accessors
+  @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean debugGrammar;
   
-  @Accessors
-  private Boolean combinedGrammar = null;
+  private final BooleanGeneratorOption combinedGrammar = new BooleanGeneratorOption();
   
-  @Accessors
+  @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean removeBacktrackingGuards;
   
   private int lookaheadThreshold;
   
-  @Accessors
+  @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean partialParsing;
   
   @Inject
@@ -129,6 +129,33 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   @Inject
   @Extension
   private SyntheticTerminalDetector _syntheticTerminalDetector;
+  
+  public void setCombinedGrammar(final boolean combinedGrammar) {
+    this.combinedGrammar.set(combinedGrammar);
+  }
+  
+  protected boolean isCombinedGrammar() {
+    boolean _xifexpression = false;
+    boolean _isSet = this.combinedGrammar.isSet();
+    if (_isSet) {
+      _xifexpression = this.combinedGrammar.get();
+    } else {
+      boolean _and = false;
+      AntlrOptions _options = this.getOptions();
+      boolean _isBacktrackLexer = _options.isBacktrackLexer();
+      boolean _not = (!_isBacktrackLexer);
+      if (!_not) {
+        _and = false;
+      } else {
+        AntlrOptions _options_1 = this.getOptions();
+        boolean _isIgnoreCase = _options_1.isIgnoreCase();
+        boolean _not_1 = (!_isIgnoreCase);
+        _and = _not_1;
+      }
+      _xifexpression = _and;
+    }
+    return _xifexpression;
+  }
   
   @Override
   protected void doGenerate() {
@@ -340,36 +367,6 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       KeywordHelper _helper_1 = KeywordHelper.getHelper(_grammar_1);
       this.cleanupParserTokensFile(lexerGrammar, parserGrammar, _helper_1, fsa);
     }
-  }
-  
-  public boolean isCombinedGrammar() {
-    boolean _or = false;
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _equals = Objects.equal(this.combinedGrammar, null);
-    if (!_equals) {
-      _and_1 = false;
-    } else {
-      AntlrOptions _options = this.getOptions();
-      boolean _isBacktrackLexer = _options.isBacktrackLexer();
-      boolean _not = (!_isBacktrackLexer);
-      _and_1 = _not;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      AntlrOptions _options_1 = this.getOptions();
-      boolean _isIgnoreCase = _options_1.isIgnoreCase();
-      boolean _not_1 = (!_isIgnoreCase);
-      _and = _not_1;
-    }
-    if (_and) {
-      _or = true;
-    } else {
-      boolean _equals_1 = Objects.equal(this.combinedGrammar, Boolean.TRUE);
-      _or = _equals_1;
-    }
-    return _or;
   }
   
   protected void generateDebugGrammar() {
@@ -1631,36 +1628,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     uiBindings.contributeTo(_eclipsePluginGenModule);
   }
   
-  @Pure
-  public boolean isDebugGrammar() {
-    return this.debugGrammar;
-  }
-  
   public void setDebugGrammar(final boolean debugGrammar) {
     this.debugGrammar = debugGrammar;
   }
   
-  @Pure
-  public Boolean getCombinedGrammar() {
-    return this.combinedGrammar;
-  }
-  
-  public void setCombinedGrammar(final Boolean combinedGrammar) {
-    this.combinedGrammar = combinedGrammar;
-  }
-  
-  @Pure
-  public boolean isRemoveBacktrackingGuards() {
-    return this.removeBacktrackingGuards;
-  }
-  
   public void setRemoveBacktrackingGuards(final boolean removeBacktrackingGuards) {
     this.removeBacktrackingGuards = removeBacktrackingGuards;
-  }
-  
-  @Pure
-  public boolean isPartialParsing() {
-    return this.partialParsing;
   }
   
   public void setPartialParsing(final boolean partialParsing) {

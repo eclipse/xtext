@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.inject.Injector
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
@@ -44,20 +45,18 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 @Log class StandardLanguage extends XtextGeneratorLanguage {
 	
 	GrammarAccessFragment2 grammarAccess = new GrammarAccessFragment2
-	 
+	
 	SerializerFragment2 serializer = new SerializerFragment2
 	
 	ResourceFactoryFragment2 resourceFactoryFragment = new ResourceFactoryFragment2
-
+	
 	EMFGeneratorFragment2 emfGenerator = new EMFGeneratorFragment2
 	
 	XtextAntlrGeneratorFragment2 parserGenerator = new XtextAntlrGeneratorFragment2
 	
 	ValidatorFragment2 validator = new ValidatorFragment2
 	
-	Formatter2Fragment2 formatter = new Formatter2Fragment2  => [
-		generateStub = false
-	]
+	Formatter2Fragment2 formatter = new Formatter2Fragment2
 	
 	GeneratorFragment2 generator = new GeneratorFragment2 
 	
@@ -66,7 +65,6 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	ImportNamespacesScopingFragment2 scopeProvider = new ImportNamespacesScopingFragment2
 	
 	QualifiedNamesFragment2 qualifiedNamesProvider = new QualifiedNamesFragment2
-	
 	
 	Junit4Fragment2 junitSupport = new Junit4Fragment2
 	
@@ -88,9 +86,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	 
 	XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment
 	
-	TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2 => [
-		onlyEnabledIfGrammarIsUsed = true
-	]
+	TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2
 	
 	XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2
 	
@@ -98,12 +94,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	
 	IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator
 	
-	WebIntegrationFragment webSupport = new WebIntegrationFragment => [
-		framework = "Ace"
-		generateServlet = true
-		generateJettyLauncher = true
-		generateHtmlExample = true
-	]
+	WebIntegrationFragment webSupport = new WebIntegrationFragment
 	
 	new() {
 		try {
@@ -112,6 +103,22 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 		} catch (ClassNotFoundException e) {
 			LOG.info("Skipping registration of Xbase genmodel. Xbase is not on the classpath.")
 		}
+	}
+	
+	override initialize(Injector injector) {
+		if (!formatter.getGenerateStub.isSet)
+			formatter.generateStub = false
+		if (!commonTypesSupport.onlyEnabledIfGrammarIsUsed.isSet)
+			commonTypesSupport.onlyEnabledIfGrammarIsUsed = true
+		if (!webSupport.framework.isSet)
+			webSupport.framework = 'Ace'
+		if (!webSupport.generateServlet.isSet)
+			webSupport.generateServlet = true
+		if (!webSupport.generateJettyLauncher.isSet)
+			webSupport.generateJettyLauncher = true
+		if (!webSupport.generateHtmlExample.isSet)
+			webSupport.generateHtmlExample = true
+		super.initialize(injector)
 	}
 	
 	override protected getImplicitFragments() {
