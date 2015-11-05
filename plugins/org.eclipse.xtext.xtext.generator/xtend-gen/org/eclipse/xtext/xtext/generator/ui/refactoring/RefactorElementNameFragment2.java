@@ -12,14 +12,12 @@ import com.google.inject.Inject;
 import com.google.inject.name.Names;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -29,6 +27,7 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 /**
@@ -46,18 +45,21 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
   
-  @Accessors
-  private Boolean useJdtRefactoring = null;
+  private final BooleanGeneratorOption useJdtRefactoring = new BooleanGeneratorOption();
   
   protected boolean isUseJdtRefactoring(final Grammar grammar) {
     boolean _xifexpression = false;
-    boolean _equals = Objects.equal(this.useJdtRefactoring, null);
-    if (_equals) {
-      _xifexpression = this._xbaseUsageDetector.inheritsXbase(grammar);
+    boolean _isSet = this.useJdtRefactoring.isSet();
+    if (_isSet) {
+      _xifexpression = this.useJdtRefactoring.get();
     } else {
-      return this.useJdtRefactoring.booleanValue();
+      _xifexpression = this._xbaseUsageDetector.inheritsXbase(grammar);
     }
     return _xifexpression;
+  }
+  
+  public void setUseJdtRefactoring(final boolean useJdtRefactoring) {
+    this.useJdtRefactoring.set(useJdtRefactoring);
   }
   
   @Override
@@ -294,14 +296,5 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
       _builder.newLine();
       _entries.add(_builder.toString());
     }
-  }
-  
-  @Pure
-  public Boolean getUseJdtRefactoring() {
-    return this.useJdtRefactoring;
-  }
-  
-  public void setUseJdtRefactoring(final Boolean useJdtRefactoring) {
-    this.useJdtRefactoring = useJdtRefactoring;
   }
 }

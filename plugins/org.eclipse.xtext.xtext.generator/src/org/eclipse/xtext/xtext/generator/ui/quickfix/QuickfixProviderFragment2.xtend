@@ -63,7 +63,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 					grammar.quickfixProviderClass
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (generateStub) {
+		if (isGenerateStub) {
 			if (projectConfig.eclipsePlugin?.src !== null) {
 				if (generateXtendStub) {
 					generateXtendQuickfixProvider
@@ -72,11 +72,11 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 				}
 			}
 
-			if (projectConfig.eclipsePlugin.manifest != null) {
+			if (projectConfig.eclipsePlugin.manifest !== null) {
 				projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.quickfixProviderClass.packageName
 			}
 
-			if (projectConfig.eclipsePlugin.pluginXml != null) {
+			if (projectConfig.eclipsePlugin.pluginXml !== null) {
 				addRegistrationToPluginXml
 			}
 
@@ -85,7 +85,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 				generateGenQuickfixProvider
 			}
 
-			if (projectConfig.eclipsePlugin.manifest != null) {
+			if (projectConfig.eclipsePlugin.manifest !== null) {
 				projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.quickfixProviderClass.packageName
 			}
 		}

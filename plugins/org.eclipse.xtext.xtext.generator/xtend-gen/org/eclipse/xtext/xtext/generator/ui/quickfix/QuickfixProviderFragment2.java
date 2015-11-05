@@ -120,8 +120,8 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
       ManifestAccess _manifest = _eclipsePlugin_1.getManifest();
-      boolean _notEquals = (!Objects.equal(_manifest, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals_1 = (_manifest != null);
+      if (_tripleNotEquals_1) {
         IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
         IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
         ManifestAccess _manifest_1 = _eclipsePlugin_2.getManifest();
@@ -134,8 +134,8 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
       PluginXmlAccess _pluginXml = _eclipsePlugin_3.getPluginXml();
-      boolean _notEquals_1 = (!Objects.equal(_pluginXml, null));
-      if (_notEquals_1) {
+      boolean _tripleNotEquals_2 = (_pluginXml != null);
+      if (_tripleNotEquals_2) {
         this.addRegistrationToPluginXml();
       }
     } else {
@@ -145,15 +145,15 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       if (_eclipsePlugin_4!=null) {
         _srcGen=_eclipsePlugin_4.getSrcGen();
       }
-      boolean _tripleNotEquals_1 = (_srcGen != null);
-      if (_tripleNotEquals_1) {
+      boolean _tripleNotEquals_3 = (_srcGen != null);
+      if (_tripleNotEquals_3) {
         this.generateGenQuickfixProvider();
       }
       IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_5.getEclipsePlugin();
       ManifestAccess _manifest_2 = _eclipsePlugin_5.getManifest();
-      boolean _notEquals_2 = (!Objects.equal(_manifest_2, null));
-      if (_notEquals_2) {
+      boolean _tripleNotEquals_4 = (_manifest_2 != null);
+      if (_tripleNotEquals_4) {
         IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
         IBundleProjectConfig _eclipsePlugin_6 = _projectConfig_6.getEclipsePlugin();
         ManifestAccess _manifest_3 = _eclipsePlugin_6.getManifest();

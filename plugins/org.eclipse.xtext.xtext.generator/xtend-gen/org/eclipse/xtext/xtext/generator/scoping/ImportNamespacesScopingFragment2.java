@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.name.Names;
 import java.util.Set;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
@@ -23,7 +24,6 @@ import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -53,7 +53,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   @Inject
   private FileAccessFactory fileAccessFactory;
   
-  @Accessors
+  @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean ignoreCase = false;
   
   protected TypeReference getScopeProviderClass(final Grammar grammar) {
@@ -340,11 +340,6 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
     _createXtendFile.writeTo(_src);
-  }
-  
-  @Pure
-  public boolean isIgnoreCase() {
-    return this.ignoreCase;
   }
   
   public void setIgnoreCase(final boolean ignoreCase) {

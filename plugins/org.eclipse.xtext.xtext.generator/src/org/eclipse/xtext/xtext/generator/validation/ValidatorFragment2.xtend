@@ -61,7 +61,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			.addTypeToTypeEagerSingleton(grammar.validatorClass, grammar.validatorClass)
 			.contributeTo(language.runtimeGenModule)
 		
-		if (generateStub) {
+		if (isGenerateStub) {
 			if (generateXtendStub)
 				generateXtendValidatorStub()
 			else
@@ -128,7 +128,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 		// take the non-abstract class signature for the src-gen class in case of !generateStub
 		//  as validators of sub languages refer to 'superGrammar.validatorClass',
 		//  see 'getGenValidatorSuperClass(...)'
-		val genClass = if (generateStub) grammar.abstractValidatorClass else grammar.validatorClass
+		val genClass = if (isGenerateStub) grammar.abstractValidatorClass else grammar.validatorClass
 
 		val javaFile = fileAccessFactory.createGeneratedJavaFile(genClass)
 		
@@ -136,7 +136,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			«IF !composedChecks.empty»
 			@«ComposedChecks»(validators = {«FOR validator: composedChecks SEPARATOR ", "»«validator.typeRef».class«ENDFOR»})
 			«ENDIF»
-			public «IF generateStub»abstract «ENDIF»class «genClass.simpleName» extends «grammar.genValidatorSuperClass» {
+			public «IF isGenerateStub»abstract «ENDIF»class «genClass.simpleName» extends «grammar.genValidatorSuperClass» {
 				
 				@Override
 				protected «List»<«EPackage»> getEPackages() {
