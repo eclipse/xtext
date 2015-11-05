@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.backtracking.formatting2;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.resource.XtextResource;
@@ -341,6 +342,9 @@ public class BeeLangTestLanguageFormatter extends AbstractFormatter2 {
       return;
     } else if (callNamedFunction instanceof Unit) {
       _format((Unit)callNamedFunction, document);
+      return;
+    } else if (callNamedFunction instanceof EObject) {
+      _format((EObject)callNamedFunction, document);
       return;
     } else if (callNamedFunction == null) {
       _format((Void)null, document);

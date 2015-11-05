@@ -965,6 +965,9 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     } else if (anonymousClass instanceof XImportSection) {
       _format((XImportSection)anonymousClass, format);
       return;
+    } else if (anonymousClass instanceof EObject) {
+      _format((EObject)anonymousClass, format);
+      return;
     } else if (anonymousClass == null) {
       _format((Void)null, format);
       return;

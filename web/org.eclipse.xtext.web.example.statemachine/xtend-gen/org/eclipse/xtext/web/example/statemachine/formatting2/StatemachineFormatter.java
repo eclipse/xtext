@@ -9,6 +9,7 @@ package org.eclipse.xtext.web.example.statemachine.formatting2;
 
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
@@ -138,6 +139,9 @@ public class StatemachineFormatter extends AbstractFormatter2 {
       return;
     } else if (command instanceof Transition) {
       _format((Transition)command, document);
+      return;
+    } else if (command instanceof EObject) {
+      _format((EObject)command, document);
       return;
     } else if (command == null) {
       _format((Void)null, document);

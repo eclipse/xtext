@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -417,6 +418,9 @@ public class DomainmodelFormatter extends XbaseFormatter {
       return;
     } else if (entity instanceof XImportSection) {
       _format((XImportSection)entity, document);
+      return;
+    } else if (entity instanceof EObject) {
+      _format((EObject)entity, document);
       return;
     } else if (entity == null) {
       _format((Void)null, document);

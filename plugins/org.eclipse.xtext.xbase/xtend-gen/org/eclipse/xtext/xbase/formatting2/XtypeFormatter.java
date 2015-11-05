@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -276,6 +277,9 @@ public class XtypeFormatter extends AbstractFormatter2 {
       return;
     } else if (ref instanceof XImportSection) {
       _format((XImportSection)ref, document);
+      return;
+    } else if (ref instanceof EObject) {
+      _format((EObject)ref, document);
       return;
     } else if (ref == null) {
       _format((Void)null, document);

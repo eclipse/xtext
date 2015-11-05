@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.annotations.formatting2;
 import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -248,6 +249,9 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
       return;
     } else if (ann instanceof XImportSection) {
       _format((XImportSection)ann, document);
+      return;
+    } else if (ann instanceof EObject) {
+      _format((EObject)ann, document);
       return;
     } else if (ann == null) {
       _format((Void)null, document);
