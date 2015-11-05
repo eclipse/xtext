@@ -84,7 +84,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 			generateGenJavaProposalProvider
 		}
 
-		if (generateStub && projectConfig.eclipsePlugin.src != null) {
+		if (isGenerateStub && projectConfig.eclipsePlugin.src != null) {
 			if (generateXtendStub) {
 				generateXtendProposalProviderStub
 
@@ -159,7 +159,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		//  as proposalProviders of sub languages refer to 'grammar.proposalProviderClass',
 		//  see 'getGenProposalProviderSuperClass(...)'
 		val genClass =
-			if (generateStub) grammar.genProposalProviderClass else grammar.proposalProviderClass;
+			if (isGenerateStub) grammar.genProposalProviderClass else grammar.proposalProviderClass;
 		
 		fileAccessFactory.createGeneratedJavaFile(genClass) => [
 			val superClass = grammar.genProposalProviderSuperClass
@@ -173,7 +173,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 			'''
 
 			content = '''
-				public «IF generateStub»abstract «ENDIF»class «genClass.simpleName» extends «superClass» {
+				public «IF isGenerateStub»abstract «ENDIF»class «genClass.simpleName» extends «superClass» {
 
 					«IF !assignments.empty»
 						«FOR assignment : assignments»

@@ -37,7 +37,7 @@ class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment {
 			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 		}
 		
-		if (!generateStub) {
+		if (!isGenerateStub) {
 			return;
 		}
 

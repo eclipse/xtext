@@ -49,7 +49,7 @@ class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
 	}
 	
 	override generate() {
-		if (!generateStub) 
+		if (!isGenerateStub)
 			return;
 		val StringConcatenationClient statement =
 			'''binder.bind(«IPreferenceValuesProvider».class).annotatedWith(«FormatterPreferences».class).to(«FormatterPreferenceValuesProvider».class);'''

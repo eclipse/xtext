@@ -36,7 +36,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	@Inject extension XbaseUsageDetector
 	@Inject FileAccessFactory fileAccessFactory
 
-	@Accessors
+	@Accessors(PUBLIC_SETTER)
 	boolean ignoreCase = false
 	
 	protected def TypeReference getScopeProviderClass(Grammar grammar) {
@@ -79,7 +79,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 		
 		generateGenScopeProvider()
 
-		if (generateStub) {
+		if (isGenerateStub) {
 			
 			if (generateXtendStub)
 				generateXtendScopeProvider()
@@ -108,11 +108,11 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	}
 	
 	def generateGenScopeProvider() {
-		val genClass = if (generateStub) grammar.abstractScopeProviderClass else grammar.scopeProviderClass		
+		val genClass = if (isGenerateStub) grammar.abstractScopeProviderClass else grammar.scopeProviderClass		
 		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
 		
 		file.content = '''
-			public «IF generateStub»abstract «ENDIF»class «genClass.simpleName» extends «grammar.scopeProviderSuperClass» {
+			public «IF isGenerateStub»abstract «ENDIF»class «genClass.simpleName» extends «grammar.scopeProviderSuperClass» {
 			}
 		'''
 		file.writeTo(projectConfig.runtime.srcGen)

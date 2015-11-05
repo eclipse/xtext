@@ -44,26 +44,27 @@ import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption
+import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
-import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
-import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
-	@Accessors
+	
+	@Accessors(PUBLIC_SETTER)
 	boolean debugGrammar
 	
-	@Accessors
-	Boolean combinedGrammar = null
+	val combinedGrammar = new BooleanGeneratorOption
 	
-	@Accessors
+	@Accessors(PUBLIC_SETTER)
 	boolean removeBacktrackingGuards
 	
 	int lookaheadThreshold
 	
-	@Accessors
+	@Accessors(PUBLIC_SETTER)
 	boolean partialParsing
 
 	@Inject AntlrGrammarGenerator productionGenerator
@@ -77,6 +78,17 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	@Inject extension GrammarAccessExtensions grammarUtil
 	@Inject extension SyntheticTerminalDetector
+	
+	def setCombinedGrammar(boolean combinedGrammar) {
+		this.combinedGrammar.set(combinedGrammar)
+	}
+	
+	protected def isCombinedGrammar() {
+		if (combinedGrammar.isSet)
+			combinedGrammar.get
+		else
+			!options.backtrackLexer && !options.ignoreCase
+	}
 
 	override protected doGenerate() {
 		new KeywordHelper(grammar, options.ignoreCase, grammarUtil)
@@ -159,10 +171,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		if (!isCombinedGrammar) {
 			cleanupParserTokensFile(lexerGrammar, parserGrammar, KeywordHelper.getHelper(grammar), fsa)
 		}
-	}
-	
-	def isCombinedGrammar() {
-		combinedGrammar == null && !options.backtrackLexer && !options.ignoreCase || combinedGrammar == Boolean.TRUE
 	}
 	
 	protected def generateDebugGrammar() {
