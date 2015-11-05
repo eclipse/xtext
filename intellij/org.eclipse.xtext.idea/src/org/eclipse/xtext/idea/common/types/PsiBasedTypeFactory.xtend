@@ -494,7 +494,12 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 	protected def Object computeAnnotationValue(PsiAnnotationMemberValue value, extension PsiConstantEvaluationHelper helper) {
 		switch value {
 			PsiAnnotation: value
-			PsiReferenceExpression: value.resolve
+			PsiReferenceExpression: {
+				switch r : value.resolve {
+					PsiEnumConstant : r
+					default : value.computeConstantExpression 
+				}
+			}
 			PsiClassObjectAccessExpression: value.operand.type
 			PsiArrayInitializerMemberValue: value.initializers.map[
 				computeAnnotationValue(helper)
