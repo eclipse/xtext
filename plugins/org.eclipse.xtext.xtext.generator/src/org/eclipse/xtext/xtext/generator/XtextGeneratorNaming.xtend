@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 import static org.eclipse.xtext.GrammarUtil.*
 
@@ -16,6 +18,9 @@ import static org.eclipse.xtext.GrammarUtil.*
  * @noreference
  */
 class XtextGeneratorNaming {
+	
+	@Inject
+	IXtextProjectConfig projectConfig
 	
 	def getRuntimeBasePackage(Grammar grammar) {
 		return getNamespace(grammar)
@@ -69,8 +74,17 @@ class XtextGeneratorNaming {
 		new TypeReference(grammar.eclipsePluginBasePackage, getSimpleName(grammar) + 'ExecutableExtensionFactory')
 	}
 	
-	def getEclipsePluginActivator(Grammar grammar) {
-		return new TypeReference(grammar.eclipsePluginBasePackage + '.internal',getSimpleName(grammar) + 'Activator')
+	def getEclipsePluginActivator() {
+		val pluginName = projectConfig.eclipsePlugin.name
+		
+		// start determining the activator's name by stripping the common ".ui" suffix
+		var activatorName = pluginName.replaceAll('\\.ui$', '')
+		
+		// build the activator's name based on the last segment of the stripped FQN
+		//  the call of 'new TypeReference(...)' below checks for invalid characters
+		activatorName = activatorName.substring(activatorName.lastIndexOf('.') + 1).toFirstUpper + 'Activator'
+		
+		new TypeReference(pluginName + '.internal', activatorName)
 	}
 	
 	def getGenericIdeBasePackage(Grammar grammar) {

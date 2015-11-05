@@ -179,16 +179,24 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	protected def generateManifests() {
 		val manifests = projectConfig.enabledProjects.filter(BundleProjectConfig)
 			.map[Tuples.create(manifest, metaInf, name)].toList
+		
 		// Filter null values and merge duplicate entries
 		val uri2Manifest = Maps.<URI, ManifestAccess>newHashMapWithExpectedSize(manifests.size)
 		val manifestIter = manifests.listIterator
+		
 		while (manifestIter.hasNext) {
 			val entry = manifestIter.next
 			val manifest = entry.first
 			val metaInf = entry.second
+			
 			if (manifest === null || metaInf === null) {
 				manifestIter.remove()
+				
 			} else {
+				if (manifest.activator === null && manifest === projectConfig.eclipsePlugin.manifest) {
+					manifest.activator = naming.eclipsePluginActivator
+				}
+				
 				val uri = metaInf.getURI(manifest.path)
 				if (uri2Manifest.containsKey(uri)) {
 					uri2Manifest.get(uri).merge(manifest)
@@ -204,10 +212,6 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			val metaInf = entry.second
 			if (manifest.bundleName === null) {
 				manifest.bundleName = entry.third
-			}
-			if (manifest === projectConfig.eclipsePlugin.manifest) {
-				val firstLanguage = languageConfigs.head
-				manifest.activator = naming?.getEclipsePluginActivator(firstLanguage.grammar)
 			}
 			if (metaInf.isFile(manifest.path)) {
 				if (manifest.merge) {
@@ -230,9 +234,11 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			merge.addExportedPackages(manifest.exportedPackages)
 			merge.addRequiredBundles(manifest.requiredBundles)
 			merge.addImportedPackages(manifest.importedPackages)
-			if (manifest.activator !== null && !merge.mainAttributes.containsKey(MergeableManifest.BUNDLE_ACTIVATOR)) {
-				merge.mainAttributes.put(MergeableManifest.BUNDLE_ACTIVATOR, manifest.activator.name)
+			
+			if (manifest.activator !== null && merge.bundleActivator.isNullOrEmpty) {
+				merge.bundleActivator = manifest.activator.name
 			}
+			
 			if (merge.isModified) {
 				val out = new ByteArrayOutputStream
 				merge.write(out)
