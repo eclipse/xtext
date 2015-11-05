@@ -71,12 +71,6 @@ class NamingAdapter extends XtextGeneratorNaming {
   }
   
   @Override
-  public TypeReference getEclipsePluginActivator(final Grammar grammar) {
-    String _activatorName = this.naming.activatorName();
-    return new TypeReference(_activatorName);
-  }
-  
-  @Override
   public String getGenericIdeBasePackage(final Grammar grammar) {
     return this.naming.basePackageIde(grammar);
   }

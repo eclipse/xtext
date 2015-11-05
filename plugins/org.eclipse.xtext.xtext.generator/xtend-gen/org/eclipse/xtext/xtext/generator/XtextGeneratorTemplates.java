@@ -1430,7 +1430,6 @@ public class XtextGeneratorTemplates {
   
   public JavaFileAccess createEclipsePluginExecutableExtensionFactory(final IXtextGeneratorLanguage langConfig, final IXtextGeneratorLanguage activatorLanguage) {
     final Grammar grammar = langConfig.getGrammar();
-    final Grammar activatorGrammar = activatorLanguage.getGrammar();
     TypeReference _eclipsePluginExecutableExtensionFactory = this.naming.getEclipsePluginExecutableExtensionFactory(grammar);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(_eclipsePluginExecutableExtensionFactory);
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -1474,7 +1473,7 @@ public class XtextGeneratorTemplates {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
-        TypeReference _eclipsePluginActivator = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator(activatorGrammar);
+        TypeReference _eclipsePluginActivator = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator, "\t\t");
         _builder.append(".getInstance().getBundle();");
         _builder.newLineIfNotEmpty();
@@ -1493,10 +1492,10 @@ public class XtextGeneratorTemplates {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("return ");
-        TypeReference _eclipsePluginActivator_1 = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator(activatorGrammar);
+        TypeReference _eclipsePluginActivator_1 = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator_1, "\t\t");
         _builder.append(".getInstance().getInjector(");
-        TypeReference _eclipsePluginActivator_2 = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator(activatorGrammar);
+        TypeReference _eclipsePluginActivator_2 = XtextGeneratorTemplates.this.naming.getEclipsePluginActivator();
         _builder.append(_eclipsePluginActivator_2, "\t\t");
         _builder.append(".");
         Grammar _grammar = langConfig.getGrammar();
@@ -1520,9 +1519,7 @@ public class XtextGeneratorTemplates {
   }
   
   public JavaFileAccess createEclipsePluginActivator(final List<? extends IXtextGeneratorLanguage> langConfigs) {
-    IXtextGeneratorLanguage _head = IterableExtensions.head(langConfigs);
-    Grammar _grammar = _head.getGrammar();
-    final TypeReference activator = this.naming.getEclipsePluginActivator(_grammar);
+    final TypeReference activator = this.naming.getEclipsePluginActivator();
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(activator);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
