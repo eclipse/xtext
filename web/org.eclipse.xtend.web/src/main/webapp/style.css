@@ -56,6 +56,13 @@ a:hover {
 	margin: 20px;
 }
 
+
+
+.xtext-layout h2 {
+	margin: 10px 0 6px 5px;
+	font-size: 14px;
+}
+
 .status {
 	position: absolute;
 	top: 50px;
@@ -63,11 +70,6 @@ a:hover {
 	left: 50%;
 	min-width: 20px;
 	margin: 10px;
-}
-
-.xtext-layout h2 {
-	margin: 10px 0 6px 5px;
-	font-size: 14px;
 }
 
 #generate-java {
@@ -93,10 +95,31 @@ a:hover {
 	font: 12px Verdana, Arial, Helvetica, sans-serif;
 }
 
+.xtext-layout #btn1 {
+	position:absolute;
+	top: 60px;
+	left:-20px;
+}
 #xtext-editor {
 	display: block;
 	position: absolute;
 	top: 60px;
+	bottom: 45%;
+	left: 0;
+	width: 100%;
+	padding: 4px;
+	border: 1px solid #aaa;
+}
+.xtext-layout #btn2 {
+	position:absolute;
+	top: 60%;
+	left:-20px;
+}
+
+#annotation-editor {
+	display: block;
+	position: absolute;
+	top: 60%;
 	bottom: 0;
 	left: 0;
 	width: 100%;

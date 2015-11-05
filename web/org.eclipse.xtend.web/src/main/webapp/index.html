@@ -21,8 +21,7 @@
 		<h1>Xtend Web Editor</h1>
 	</div>
 	<!----> 
-	<div class="xtext-layout">
-		
+	<div class="xtext-layout">	
 		<h2 id ="dirty-indicator">Xtend code</h2>
 		<select id="exampleList" onChange="changeExample()">
     		<option id="helloWorld">Hello World</option>
@@ -30,11 +29,21 @@
     		<option id="BottleSong">Bottle Song</option>
     		<option id="HtmlBuilder">Html Builder</option>
     		<option id="Movies">Movies</option>
+    		<option id="ActiveAnnotation">Active Annotation Example</option>
 		</select>
-		
+		<button id = "btn1" onclick="btn1Action()">-</button>
 		<div id="xtext-editor" 
 		data-editor-xtext-lang="xtend"
 		data-editor-resource-id="helloWorld.xtend"
+		data-editor-enable-save-action="true"
+		data-editor-enable-formatting-action="true"
+		data-editor-show-error-dialogs="true"
+		>
+		</div>
+		<button id = "btn2" onclick="btn2Action()">-</button>
+		<div id="annotation-editor" 
+		data-editor-xtext-lang="xtend"
+		data-editor-resource-id="java.xtend"
 		data-editor-enable-save-action="true"
 		data-editor-enable-formatting-action="true"
 		data-editor-show-error-dialogs="true"

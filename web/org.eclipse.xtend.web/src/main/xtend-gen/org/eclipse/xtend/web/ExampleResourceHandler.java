@@ -596,12 +596,20 @@ public class ExampleResourceHandler implements IServerResourceHandler {
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("class Example {");
       _builder_3.newLine();
-      _builder_3.append("\t\t\t\t");
+      _builder_3.append("\t");
       _builder_3.newLine();
       _builder_3.append("}");
       _builder_3.newLine();
-      Pair<String, String> _mappedTo_5 = Pair.<String, String>of("java.xtend", _builder_3.toString());
-      return Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5));
+      Pair<String, String> _mappedTo_5 = Pair.<String, String>of("ActiveAnnotationExample.xtend", _builder_3.toString());
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("class Example {");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t\t");
+      _builder_4.newLine();
+      _builder_4.append("}");
+      _builder_4.newLine();
+      Pair<String, String> _mappedTo_6 = Pair.<String, String>of("java.xtend", _builder_4.toString());
+      return Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6));
     }
   }.apply();
   

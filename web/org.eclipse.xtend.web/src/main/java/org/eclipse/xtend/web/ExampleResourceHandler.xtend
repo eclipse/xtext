@@ -416,6 +416,11 @@ class DomSerializer {
 			Set<String> categories 
 		}
 		''',
+		'ActiveAnnotationExample.xtend' ->'''
+		class Example {
+			
+		}
+		''',
 		'java.xtend' -> '''
 		class Example {
 						
