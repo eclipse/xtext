@@ -6,7 +6,7 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
-import org.eclipse.xtext.xbase.compiler.JavaVersion
+import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.After
 import org.junit.Assume

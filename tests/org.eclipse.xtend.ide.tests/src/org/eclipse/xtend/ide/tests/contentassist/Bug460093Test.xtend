@@ -11,7 +11,7 @@ import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 
-import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
+import static org.eclipse.xtext.util.JavaVersion.*
 
 /**
  * This test class is disabled due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=463547
