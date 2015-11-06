@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypesSwitch;
-import org.eclipse.xtext.xbase.compiler.JavaVersion;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 

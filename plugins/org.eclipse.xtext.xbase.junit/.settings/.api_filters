@@ -25,10 +25,9 @@
         </filter>
     </resource>
     <resource path="src/org/eclipse/xtext/xbase/compiler/JavaVersionModule.java" type="org.eclipse.xtext.xbase.compiler.JavaVersionModule">
-        <filter id="643850349">
+        <filter comment="moved javaVersion" id="338722907">
             <message_arguments>
-                <message_argument value="JavaVersion"/>
-                <message_argument value="JavaVersionModule"/>
+                <message_argument value="org.eclipse.xtext.xbase.compiler.JavaVersionModule"/>
                 <message_argument value="JavaVersionModule(JavaVersion)"/>
             </message_arguments>
         </filter>

@@ -19,7 +19,7 @@ import org.eclipse.ui.texteditor.MarkerUtilities
 import org.eclipse.xtend.ide.internal.XtendActivator
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
-import org.eclipse.xtext.xbase.compiler.JavaVersion
+import org.eclipse.xtext.util.JavaVersion
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.Assert

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.compiler;
+package org.eclipse.xtext.util;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import com.google.common.collect.Lists;
  * Enumeration of Java language versions. This is likely to be extended as new versions are released.
  * 
  * @author Miro Spoenemann - Initial contribution and API
+ * @since 2.9
  */
 public enum JavaVersion {
 

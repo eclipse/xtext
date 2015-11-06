@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ide.contentassist
 
 import com.google.common.collect.Sets
+import com.google.inject.Inject
 import java.util.Collections
 import java.util.List
 import java.util.Set
@@ -15,10 +16,12 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.xbase.compiler.JavaVersion
+import org.eclipse.xtext.util.JavaVersion
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedExecutable
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
+import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 import org.eclipse.xtext.xbase.typesystem.^override.ResolvedConstructor
 import org.eclipse.xtext.xbase.typesystem.^override.ResolvedFeatures
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
@@ -26,9 +29,6 @@ import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper
 
 import static com.google.common.collect.Lists.newArrayList
-import com.google.inject.Inject
-import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
-import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 
 /**
  * 
