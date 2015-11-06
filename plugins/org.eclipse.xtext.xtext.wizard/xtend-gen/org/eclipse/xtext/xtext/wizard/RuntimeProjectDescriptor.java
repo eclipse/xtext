@@ -870,7 +870,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("<artifactId>exec-maven-plugin</artifactId>");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("<version>1.2.1</version>");
+        _builder.append("<version>1.4.0</version>");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("<executions>");
@@ -928,6 +928,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t\t\t");
         _builder.append("<includePluginDependencies>true</includePluginDependencies>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("</configuration>");

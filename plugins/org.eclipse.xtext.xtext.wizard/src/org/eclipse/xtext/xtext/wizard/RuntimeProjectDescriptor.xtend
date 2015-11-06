@@ -307,7 +307,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						<plugin>
 							<groupId>org.codehaus.mojo</groupId>
 							<artifactId>exec-maven-plugin</artifactId>
-							<version>1.2.1</version>
+							<version>1.4.0</version>
 							<executions>
 								<execution>
 									<id>mwe2Launcher</id>
@@ -325,6 +325,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 									<argument>rootPath=/${project.basedir}/..</argument>
 								</arguments>
 								<includePluginDependencies>true</includePluginDependencies>
+								<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
 							</configuration>
 							«IF config.needsTychoBuild»
 								<dependencies>

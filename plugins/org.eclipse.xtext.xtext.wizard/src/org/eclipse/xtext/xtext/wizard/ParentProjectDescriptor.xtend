@@ -382,24 +382,48 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						</plugins>
 					</pluginManagement>
 				</build>
-				«IF config.xtextVersion.isSnapshot»
-					<repositories>
+				<repositories>
+					<repository>
+						<id>codehaus-snapshots</id>
+						<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+						<url>http://nexus.codehaus.org/snapshots/</url>
+						<releases>
+							<enabled>false</enabled>
+						</releases>
+						<snapshots>
+							<enabled>false</enabled>
+						</snapshots>
+					</repository>
+					«IF config.xtextVersion.isSnapshot»
 						<repository>
 							<id>sonatype-snapshots</id>
 							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 							<releases><enabled>false</enabled></releases>
 							<snapshots><enabled>true</enabled></snapshots>
 						</repository>
-					</repositories>
-					<pluginRepositories>
+					«ENDIF»
+				</repositories>
+				<pluginRepositories>
+					<pluginRepository>
+						<id>codehaus-snapshots</id>
+						<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+						<url>http://nexus.codehaus.org/snapshots/</url>
+						<releases>
+							<enabled>false</enabled>
+						</releases>
+						<snapshots>
+							<enabled>false</enabled>
+						</snapshots>
+					</pluginRepository>
+					«IF config.xtextVersion.isSnapshot»
 						<pluginRepository>
 							<id>sonatype-snapshots</id>
 							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 							<releases><enabled>false</enabled></releases>
 							<snapshots><enabled>true</enabled></snapshots>
 						</pluginRepository>
-					</pluginRepositories>
-				«ENDIF»
+					«ENDIF»
+				</pluginRepositories>
 			'''
 		]
 	}
