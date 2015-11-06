@@ -9,10 +9,16 @@ package org.eclipse.xtext.idea.build
 
 import com.google.common.collect.Sets
 import com.google.inject.Inject
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.Module
+import com.intellij.openapi.roots.ModuleRootManager
+import com.intellij.openapi.vfs.VfsUtil
+import java.net.URL
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider2
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.generator.OutputConfiguration
@@ -21,8 +27,7 @@ import org.eclipse.xtext.idea.facet.FacetProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 
 import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
-import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider2
-import org.eclipse.emf.ecore.resource.ResourceSet
+import java.io.File
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -49,7 +54,7 @@ class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationP
 		if (facet != null) {
 			val generatorConf = facet.configuration.state
 			val defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT)
-			defOut.outputDirectory = generatorConf.outputDirectory
+			defOut.outputDirectory = generatorConf.outputDirectory.toModuleRelativePath(module)
 			defOut.createOutputDirectory = generatorConf.createDirectory
 			defOut.canClearOutputDirectory = generatorConf.deleteGenerated
 			defOut.overrideExistingResources = generatorConf.overwriteExisting
@@ -58,15 +63,27 @@ class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationP
 			for (srcFolder : allSrcFolders) {
 				val mapping = new SourceMapping(srcFolder.relativePath)
 				if (srcFolder.testSource) {
-					mapping.outputDirectory = generatorConf.testOutputDirectory
+					mapping.outputDirectory = generatorConf.testOutputDirectory.toModuleRelativePath(module)
 				} else {
-					mapping.outputDirectory = generatorConf.outputDirectory
+					mapping.outputDirectory = generatorConf.outputDirectory.toModuleRelativePath(module)
 				}
 				defOut.sourceMappings.add(mapping)
 			}
 			return Sets.newHashSet(defOut)
 		}
 		return defaultOutput.outputConfigurations
+	}
+	
+	def String toModuleRelativePath(String path, Module module) {
+		if (new File(path).absolute) {
+			return ApplicationManager.application.<String>runReadAction[
+				val root = ModuleRootManager.getInstance(module).contentRoots.head
+				val file = root.fileSystem.findFileByPath(path)
+				val relativePath = VfsUtil.getRelativePath(file, root)
+				return relativePath
+			]
+		}
+		return path
 	}
 
 }
