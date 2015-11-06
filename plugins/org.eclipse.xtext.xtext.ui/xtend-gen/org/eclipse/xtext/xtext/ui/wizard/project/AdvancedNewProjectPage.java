@@ -8,20 +8,11 @@
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import org.eclipse.jdt.launching.IVMInstall;
-import org.eclipse.jdt.launching.IVMInstallType;
-import org.eclipse.jdt.launching.JavaRuntime;
-import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
-import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.jface.dialogs.IMessageProvider;
-import org.eclipse.jface.util.Policy;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -39,8 +30,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ui.util.JREContainerProvider;
-import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -60,34 +49,6 @@ import org.osgi.framework.BundleContext;
 
 @SuppressWarnings("all")
 public class AdvancedNewProjectPage extends WizardPage {
-  public static class BreeLabelProvider extends LabelProvider {
-    @Override
-    public String getText(final Object element) {
-      if ((element instanceof Pair<?, ?>)) {
-        Object _key = ((Pair<?, ?>)element).getKey();
-        final IExecutionEnvironment ee = ((IExecutionEnvironment) _key);
-        Object _value = ((Pair<?, ?>)element).getValue();
-        final IVMInstall vm = ((IVMInstall) _value);
-        StringConcatenation _builder = new StringConcatenation();
-        String _id = ee.getId();
-        _builder.append(_id, "");
-        _builder.append(" - ");
-        String _name = null;
-        if (vm!=null) {
-          _name=vm.getName();
-        }
-        _builder.append(_name, "");
-        return _builder.toString();
-      } else {
-        String _string = null;
-        if (element!=null) {
-          _string=element.toString();
-        }
-        return _string;
-      }
-    }
-  }
-  
   private Button createUiProject;
   
   private Button createIdeaProject;
@@ -101,8 +62,6 @@ public class AdvancedNewProjectPage extends WizardPage {
   private Combo preferredBuildSystem;
   
   private Combo sourceLayout;
-  
-  private ComboViewer jreToUse;
   
   private StatusWidget statusWidget;
   
@@ -123,27 +82,6 @@ public class AdvancedNewProjectPage extends WizardPage {
         GridLayout _gridLayout = new GridLayout(1, false);
         it.setLayout(_gridLayout);
         final Procedure1<Group> _function = new Procedure1<Group>() {
-          @Override
-          public void apply(final Group it) {
-            it.setText("Use an execution environment JRE");
-            final Procedure1<ComboViewer> _function = new Procedure1<ComboViewer>() {
-              @Override
-              public void apply(final ComboViewer it) {
-                Combo _combo = it.getCombo();
-                _combo.setEnabled(true);
-                List<Pair<IExecutionEnvironment, IVMInstall>> _collectBrees = AdvancedNewProjectPage.this.collectBrees();
-                Object[] _array = _collectBrees.toArray();
-                it.setInput(_array);
-                AdvancedNewProjectPage.BreeLabelProvider _breeLabelProvider = new AdvancedNewProjectPage.BreeLabelProvider();
-                it.setLabelProvider(_breeLabelProvider);
-              }
-            };
-            ComboViewer _ComboViewer = AdvancedNewProjectPage.this.ComboViewer(it, _function);
-            AdvancedNewProjectPage.this.jreToUse = _ComboViewer;
-          }
-        };
-        AdvancedNewProjectPage.this.Group(it, _function);
-        final Procedure1<Group> _function_1 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
             it.setText(Messages.WizardNewXtextProjectCreationPage_LabelFacets);
@@ -192,8 +130,8 @@ public class AdvancedNewProjectPage extends WizardPage {
             AdvancedNewProjectPage.this.createTestProject = _CheckBox_4;
           }
         };
-        AdvancedNewProjectPage.this.Group(it, _function_1);
-        final Procedure1<Group> _function_2 = new Procedure1<Group>() {
+        AdvancedNewProjectPage.this.Group(it, _function);
+        final Procedure1<Group> _function_1 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
             it.setText("Preferred Build System");
@@ -216,8 +154,8 @@ public class AdvancedNewProjectPage extends WizardPage {
             AdvancedNewProjectPage.this.preferredBuildSystem = _DropDown;
           }
         };
-        AdvancedNewProjectPage.this.Group(it, _function_2);
-        final Procedure1<Group> _function_3 = new Procedure1<Group>() {
+        AdvancedNewProjectPage.this.Group(it, _function_1);
+        final Procedure1<Group> _function_2 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
             it.setText("Source Layout");
@@ -240,16 +178,16 @@ public class AdvancedNewProjectPage extends WizardPage {
             AdvancedNewProjectPage.this.sourceLayout = _DropDown;
           }
         };
-        AdvancedNewProjectPage.this.Group(it, _function_3);
+        AdvancedNewProjectPage.this.Group(it, _function_2);
         StatusWidget _statusWidget = new StatusWidget(it, SWT.NONE);
-        final Procedure1<StatusWidget> _function_4 = new Procedure1<StatusWidget>() {
+        final Procedure1<StatusWidget> _function_3 = new Procedure1<StatusWidget>() {
           @Override
           public void apply(final StatusWidget it) {
             GridData _gridData = new GridData(SWT.FILL, SWT.TOP, true, false);
             it.setLayoutData(_gridData);
           }
         };
-        StatusWidget _doubleArrow = ObjectExtensions.<StatusWidget>operator_doubleArrow(_statusWidget, _function_4);
+        StatusWidget _doubleArrow = ObjectExtensions.<StatusWidget>operator_doubleArrow(_statusWidget, _function_3);
         AdvancedNewProjectPage.this.statusWidget = _doubleArrow;
       }
     };
@@ -274,75 +212,6 @@ public class AdvancedNewProjectPage extends WizardPage {
     IWorkbenchHelpSystem _helpSystem = _workbench.getHelpSystem();
     Shell _shell = this.getShell();
     _helpSystem.setHelp(_shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced");
-  }
-  
-  protected List<Pair<IExecutionEnvironment, IVMInstall>> collectBrees() {
-    IVMInstallType[] _vMInstallTypes = JavaRuntime.getVMInstallTypes();
-    final Function1<IVMInstallType, List<IVMInstall>> _function = new Function1<IVMInstallType, List<IVMInstall>>() {
-      @Override
-      public List<IVMInstall> apply(final IVMInstallType it) {
-        IVMInstall[] _vMInstalls = it.getVMInstalls();
-        return IterableExtensions.<IVMInstall>toList(((Iterable<IVMInstall>)Conversions.doWrapArray(_vMInstalls)));
-      }
-    };
-    List<List<IVMInstall>> _map = ListExtensions.<IVMInstallType, List<IVMInstall>>map(((List<IVMInstallType>)Conversions.doWrapArray(_vMInstallTypes)), _function);
-    final Iterable<IVMInstall> vms = Iterables.<IVMInstall>concat(_map);
-    IExecutionEnvironmentsManager _executionEnvironmentsManager = JavaRuntime.getExecutionEnvironmentsManager();
-    IExecutionEnvironment[] _executionEnvironments = _executionEnvironmentsManager.getExecutionEnvironments();
-    final Function1<IExecutionEnvironment, Boolean> _function_1 = new Function1<IExecutionEnvironment, Boolean>() {
-      @Override
-      public Boolean apply(final IExecutionEnvironment it) {
-        String _id = it.getId();
-        JavaVersion _fromBree = JavaVersion.fromBree(_id);
-        return Boolean.valueOf((_fromBree != null));
-      }
-    };
-    Iterable<IExecutionEnvironment> _filter = IterableExtensions.<IExecutionEnvironment>filter(((Iterable<IExecutionEnvironment>)Conversions.doWrapArray(_executionEnvironments)), _function_1);
-    final Comparator<IExecutionEnvironment> _function_2 = new Comparator<IExecutionEnvironment>() {
-      @Override
-      public int compare(final IExecutionEnvironment $0, final IExecutionEnvironment $1) {
-        Comparator<Object> _comparator = Policy.getComparator();
-        String _id = $0.getId();
-        String _id_1 = $1.getId();
-        return _comparator.compare(_id, _id_1);
-      }
-    };
-    List<IExecutionEnvironment> _sortWith = IterableExtensions.<IExecutionEnvironment>sortWith(_filter, _function_2);
-    final Function1<IExecutionEnvironment, Pair<IExecutionEnvironment, IVMInstall>> _function_3 = new Function1<IExecutionEnvironment, Pair<IExecutionEnvironment, IVMInstall>>() {
-      @Override
-      public Pair<IExecutionEnvironment, IVMInstall> apply(final IExecutionEnvironment ee) {
-        Pair<IExecutionEnvironment, IVMInstall> _xblockexpression = null;
-        {
-          IVMInstall _elvis = null;
-          IVMInstall _defaultVM = ee.getDefaultVM();
-          if (_defaultVM != null) {
-            _elvis = _defaultVM;
-          } else {
-            final Function1<IVMInstall, Boolean> _function = new Function1<IVMInstall, Boolean>() {
-              @Override
-              public Boolean apply(final IVMInstall it) {
-                return Boolean.valueOf(ee.isStrictlyCompatible(it));
-              }
-            };
-            IVMInstall _findFirst = IterableExtensions.<IVMInstall>findFirst(vms, _function);
-            _elvis = _findFirst;
-          }
-          final IVMInstall vm = _elvis;
-          _xblockexpression = Pair.<IExecutionEnvironment, IVMInstall>of(ee, vm);
-        }
-        return _xblockexpression;
-      }
-    };
-    List<Pair<IExecutionEnvironment, IVMInstall>> _map_1 = ListExtensions.<IExecutionEnvironment, Pair<IExecutionEnvironment, IVMInstall>>map(_sortWith, _function_3);
-    final Function1<Pair<IExecutionEnvironment, IVMInstall>, Boolean> _function_4 = new Function1<Pair<IExecutionEnvironment, IVMInstall>, Boolean>() {
-      @Override
-      public Boolean apply(final Pair<IExecutionEnvironment, IVMInstall> it) {
-        IVMInstall _value = it.getValue();
-        return Boolean.valueOf((_value != null));
-      }
-    };
-    final Iterable<Pair<IExecutionEnvironment, IVMInstall>> installedEEs = IterableExtensions.<Pair<IExecutionEnvironment, IVMInstall>>filter(_map_1, _function_4);
-    return IterableExtensions.<Pair<IExecutionEnvironment, IVMInstall>>toList(installedEEs);
   }
   
   public void validate(final SelectionEvent e) {
@@ -787,25 +656,6 @@ public class AdvancedNewProjectPage extends WizardPage {
     SourceLayout[] _values_1 = SourceLayout.values();
     Enum<?> _head_1 = IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(_values_1)));
     this.select(this.sourceLayout, _head_1);
-    Combo _combo = this.jreToUse.getCombo();
-    String[] _items = _combo.getItems();
-    Iterable<Pair<Integer, String>> _indexed = IterableExtensions.<String>indexed(((Iterable<? extends String>)Conversions.doWrapArray(_items)));
-    final Function1<Pair<Integer, String>, Boolean> _function = new Function1<Pair<Integer, String>, Boolean>() {
-      @Override
-      public Boolean apply(final Pair<Integer, String> it) {
-        String _value = it.getValue();
-        String _defaultBREE = JREContainerProvider.getDefaultBREE();
-        return Boolean.valueOf(_value.startsWith(_defaultBREE));
-      }
-    };
-    final Pair<Integer, String> idx = IterableExtensions.<Pair<Integer, String>>findFirst(_indexed, _function);
-    if ((idx == null)) {
-      Combo _combo_1 = this.jreToUse.getCombo();
-      _combo_1.select(0);
-    }
-    Combo _combo_2 = this.jreToUse.getCombo();
-    Integer _key = idx.getKey();
-    _combo_2.select((_key).intValue());
   }
   
   public boolean isCreateUiProject() {
@@ -838,15 +688,5 @@ public class AdvancedNewProjectPage extends WizardPage {
     SourceLayout[] _values = SourceLayout.values();
     int _selectionIndex = this.sourceLayout.getSelectionIndex();
     return _values[_selectionIndex];
-  }
-  
-  public JavaVersion getSelectedBree() {
-    Combo _combo = this.jreToUse.getCombo();
-    int _selectionIndex = _combo.getSelectionIndex();
-    Object _elementAt = this.jreToUse.getElementAt(_selectionIndex);
-    final Pair<IExecutionEnvironment, IVMInstall> selected = ((Pair<IExecutionEnvironment, IVMInstall>) _elementAt);
-    IExecutionEnvironment _key = selected.getKey();
-    String _id = _key.getId();
-    return JavaVersion.fromBree(_id);
   }
 }
