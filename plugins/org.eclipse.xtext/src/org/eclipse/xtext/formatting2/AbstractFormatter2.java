@@ -178,6 +178,14 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	}
 
 	/**
+	 * Fall-back for types that are not handled by a subclasse's dispatch method.
+	 */
+	protected void _format(EObject obj, IFormattableDocument document) {
+		for (EObject child : obj.eContents())
+			document.format(child);
+	}
+
+	/**
 	 * Fall-back for subclasses that accidently try to dispatch over null values.
 	 */
 	protected void _format(Void obj, IFormattableDocument document) {
