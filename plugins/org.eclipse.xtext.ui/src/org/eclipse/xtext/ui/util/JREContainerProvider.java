@@ -103,6 +103,18 @@ public class JREContainerProvider {
 		}
 		return null;
 	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static IClasspathEntry getJREContainerEntry(String bree)  {
+		IClasspathEntry jreContainerEntry = getDefaultJREContainerEntry();
+		IExecutionEnvironment ee = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(bree);
+		if(ee != null) {
+			return JavaCore.newContainerEntry(newJREContainerPath(ee));
+		}
+		return jreContainerEntry;
+	}
 
 	/**
 	 * @since 2.7

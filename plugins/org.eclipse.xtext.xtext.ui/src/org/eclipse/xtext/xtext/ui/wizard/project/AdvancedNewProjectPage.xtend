@@ -15,7 +15,6 @@ import org.eclipse.jface.util.Policy
 import org.eclipse.jface.viewers.ArrayContentProvider
 import org.eclipse.jface.viewers.ComboViewer
 import org.eclipse.jface.viewers.LabelProvider
-import org.eclipse.jface.viewers.StructuredSelection
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
 import org.eclipse.swt.events.SelectionAdapter
@@ -29,6 +28,7 @@ import org.eclipse.swt.widgets.Control
 import org.eclipse.swt.widgets.Group
 import org.eclipse.ui.PlatformUI
 import org.eclipse.xtext.ui.util.JREContainerProvider
+import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.xtext.ui.internal.Activator
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.SourceLayout
@@ -55,68 +55,57 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	override createControl(Composite parent) {
-		control = new Composite(parent, SWT.NONE) =>
-			[
-				layoutData = new GridData(SWT.FILL, SWT.FILL, true, true)
-				layout = new GridLayout(1, false)
-				Group [
-					text = "Use an execution environment JRE"
-					jreToUse = ComboViewer [
-						combo.enabled = true
-						input = collectBrees().toArray
-						labelProvider = new LabelProvider() {
-
-							override getText(
-								Object element) {
-								if (element instanceof Pair<?, ?>) {
-									return '''«(element.key as IExecutionEnvironment).id» - «(element.value as IVMInstall).name»'''
-								} else {
-									return element?.toString
-								}
-							}
-						}
-					]
-				]
-				Group [
-					text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
-					createUiProject = CheckBox [
-						text = "Eclipse Plugin"
-					]
-					createIdeaProject = CheckBox [
-						text = "IntelliJ IDEA Plugin"
-						enabled = true
-					]
-					createWebProject = CheckBox [
-						text = "Web Integration"
-						enabled = true
-					]
-					createIdeProject = CheckBox [
-						text = "Generic IDE Support"
-						enabled = true
-					]
-					createTestProject = CheckBox [
-						text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
-					]
-				]
-				Group [
-					text = "Preferred Build System"
-					preferredBuildSystem = DropDown[
-						enabled = true
-						items = BuildSystem.values.map[toString]
-					]
-				]
-				Group [
-					text = "Source Layout"
-					sourceLayout = DropDown[
-						enabled = true
-						items = SourceLayout.values.map[toString]
-					]
-
-				]
-				statusWidget = new StatusWidget(it, SWT.NONE) => [
-					layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
+		control = new Composite(parent, SWT.NONE) => [
+			layoutData = new GridData(SWT.FILL, SWT.FILL, true, true)
+			layout = new GridLayout(1, false)
+			Group [
+				text = "Use an execution environment JRE"
+				jreToUse = ComboViewer [
+					combo.enabled = true
+					input = collectBrees().toArray
+					labelProvider = new BreeLabelProvider()
 				]
 			]
+			Group [
+				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
+				createUiProject = CheckBox [
+					text = "Eclipse Plugin"
+				]
+				createIdeaProject = CheckBox [
+					text = "IntelliJ IDEA Plugin"
+					enabled = true
+				]
+				createWebProject = CheckBox [
+					text = "Web Integration"
+					enabled = true
+				]
+				createIdeProject = CheckBox [
+					text = "Generic IDE Support"
+					enabled = true
+				]
+				createTestProject = CheckBox [
+					text = Messages.WizardNewXtextProjectCreationPage_TestingSupport
+				]
+			]
+			Group [
+				text = "Preferred Build System"
+				preferredBuildSystem = DropDown[
+					enabled = true
+					items = BuildSystem.values.map[toString]
+				]
+			]
+			Group [
+				text = "Source Layout"
+				sourceLayout = DropDown[
+					enabled = true
+					items = SourceLayout.values.map[toString]
+				]
+
+			]
+			statusWidget = new StatusWidget(it, SWT.NONE) => [
+				layoutData = new GridData(SWT.FILL, SWT.TOP, true, false)
+			]
+		]
 
 		val selectionControl = new SelectionAdapter() {
 			override widgetSelected(SelectionEvent e) {
@@ -137,12 +126,17 @@ class AdvancedNewProjectPage extends WizardPage {
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced")
 	}
 
-	def List<Pair<IExecutionEnvironment, IVMInstall>> collectBrees() {
+	def protected List<Pair<IExecutionEnvironment, IVMInstall>> collectBrees() {
 		val vms = JavaRuntime.VMInstallTypes.map[VMInstalls.toList].flatten
-		val installedEEs = JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments()
-		return installedEEs.filter[ee|ee.id.startsWith('J') && vms.exists[ee.isStrictlyCompatible(it)]].sortWith [
+		val installedEEs = JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments().filter [
+			JavaVersion.fromBree(id) !== null
+		].sortWith [
 			Policy.getComparator().compare($0.getId(), $1.getId())
-		].map[ee|ee -> vms.findFirst[ee.isStrictlyCompatible(it)]]
+		].map [ ee |
+			val vm = ee.defaultVM ?: vms.findFirst[ee.isStrictlyCompatible(it)]
+			ee -> vm
+		].filter[it.value !== null]
+		return installedEEs.toList
 	}
 
 	def void validate(SelectionEvent e) {
@@ -306,7 +300,11 @@ class AdvancedNewProjectPage extends WizardPage {
 		createWebProject.selection = false
 		preferredBuildSystem.select(BuildSystem.values.head)
 		sourceLayout.select(SourceLayout.values.head)
-		jreToUse.selection = new StructuredSelection(JREContainerProvider.defaultBREE)
+		val idx = jreToUse.combo.items.indexed.findFirst[value.startsWith(JREContainerProvider.defaultBREE)]
+		if (idx === null) {
+			jreToUse.combo.select(0)
+		}
+		jreToUse.combo.select(idx.key)
 	}
 
 	def boolean isCreateUiProject() {
@@ -337,4 +335,21 @@ class AdvancedNewProjectPage extends WizardPage {
 		SourceLayout.values.get(sourceLayout.selectionIndex)
 	}
 
+	def JavaVersion getSelectedBree() {
+		val selected = jreToUse.getElementAt(jreToUse.combo.selectionIndex) as Pair<IExecutionEnvironment, IVMInstall>
+		return JavaVersion.fromBree(selected.key.id)
+	}
+
+	static class BreeLabelProvider extends LabelProvider {
+
+		override getText(Object element) {
+			if (element instanceof Pair<?, ?>) {
+				val ee = (element.key as IExecutionEnvironment)
+				val vm = (element.value as IVMInstall)
+				return '''«ee.id» - «vm?.name»'''
+			} else {
+				return element?.toString
+			}
+		}
+	}
 }
