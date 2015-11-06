@@ -525,10 +525,25 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       }
     }
     _builder.newLine();
-    _builder.append("jar.manifest {");
+    _builder.append("jar {");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("from(\'model\') {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("into(\'model\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("manifest {");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("attributes \'Bundle-SymbolicName\': project.name");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

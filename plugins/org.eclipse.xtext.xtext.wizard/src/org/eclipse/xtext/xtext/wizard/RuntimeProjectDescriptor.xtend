@@ -274,12 +274,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				compileXtend.dependsOn(generateXtextLanguage)
 				clean.dependsOn(cleanGenerateXtextLanguage)
 				eclipse.classpath.plusConfigurations += [configurations.mwe2]
-				
-				jar {
-					from('model/generated') {
-						into('model/generated')
-					}
-				}
 			'''
 		]
 	}

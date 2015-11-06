@@ -754,20 +754,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("eclipse.classpath.plusConfigurations += [configurations.mwe2]");
         _builder.newLine();
-        _builder.newLine();
-        _builder.append("jar {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("from(\'model/generated\') {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("into(\'model/generated\')");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
         it.setAdditionalContent(_builder.toString());
       }
     };
