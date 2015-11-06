@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -857,6 +858,41 @@ public class WizardConfigurationTest {
       @Override
       public void apply(final String it) {
         boolean _contains = it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
+        Assert.assertTrue(_contains);
+      }
+    };
+    IterableExtensions.<String>forEach(_map, _function_1);
+  }
+  
+  @Test
+  public void allBuildSystemsUseOtherJava() {
+    this.config.setJavaVersion(JavaVersion.JAVA8);
+    ParentProjectDescriptor _parentProject = this.config.getParentProject();
+    PomFile _pom = _parentProject.pom();
+    final String parentPom = _pom.getContent();
+    boolean _contains = parentPom.contains("<maven.compiler.source>1.8</maven.compiler.source>");
+    Assert.assertTrue(_contains);
+    boolean _contains_1 = parentPom.contains("<maven.compiler.target>1.8</maven.compiler.target>");
+    Assert.assertTrue(_contains_1);
+    ParentProjectDescriptor _parentProject_1 = this.config.getParentProject();
+    GradleBuildFile _buildGradle = _parentProject_1.buildGradle();
+    final String parentGradle = _buildGradle.getContent();
+    boolean _contains_2 = parentGradle.contains("sourceCompatibility = \'1.8\'");
+    Assert.assertTrue(_contains_2);
+    boolean _contains_3 = parentGradle.contains("targetCompatibility = \'1.8\'");
+    Assert.assertTrue(_contains_3);
+    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
+    final Function1<ProjectDescriptor, String> _function = new Function1<ProjectDescriptor, String>() {
+      @Override
+      public String apply(final ProjectDescriptor it) {
+        return it.manifest();
+      }
+    };
+    List<String> _map = ListExtensions.map(_allJavaProjects, _function);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
+      @Override
+      public void apply(final String it) {
+        boolean _contains = it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8");
         Assert.assertTrue(_contains);
       }
     };

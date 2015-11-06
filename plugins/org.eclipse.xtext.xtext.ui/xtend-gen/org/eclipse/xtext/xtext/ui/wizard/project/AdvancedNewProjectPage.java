@@ -11,8 +11,6 @@ import com.google.common.base.Objects;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.jface.dialogs.IMessageProvider;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -608,25 +606,6 @@ public class AdvancedNewProjectPage extends WizardPage {
       }
     };
     return ObjectExtensions.<Button>operator_doubleArrow(_button, _function);
-  }
-  
-  protected ComboViewer ComboViewer(final Composite parent, final Procedure1<? super ComboViewer> config) {
-    ComboViewer _comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
-    final Procedure1<ComboViewer> _function = new Procedure1<ComboViewer>() {
-      @Override
-      public void apply(final ComboViewer it) {
-        Combo _combo = it.getCombo();
-        Font _font = parent.getFont();
-        _combo.setFont(_font);
-        Combo _combo_1 = it.getCombo();
-        GridData _gridData = new GridData(GridData.FILL_HORIZONTAL);
-        _combo_1.setLayoutData(_gridData);
-        ArrayContentProvider _instance = ArrayContentProvider.getInstance();
-        it.setContentProvider(_instance);
-        config.apply(it);
-      }
-    };
-    return ObjectExtensions.<ComboViewer>operator_doubleArrow(_comboViewer, _function);
   }
   
   protected Combo DropDown(final Composite parent, final Procedure1<? super Combo> config) {

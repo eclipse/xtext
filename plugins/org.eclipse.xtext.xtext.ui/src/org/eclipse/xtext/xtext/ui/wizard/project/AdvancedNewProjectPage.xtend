@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project
 
-import org.eclipse.jface.viewers.ArrayContentProvider
-import org.eclipse.jface.viewers.ComboViewer
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT
 import org.eclipse.swt.events.SelectionAdapter
@@ -242,15 +240,6 @@ class AdvancedNewProjectPage extends WizardPage {
 		new Button(composite, SWT.CHECK) => [
 			font = parent.font
 			layoutData = new GridData(SWT.FILL, SWT.CENTER, true, false)
-			config.apply(it)
-		]
-	}
-
-	def protected ComboViewer(Composite parent, (ComboViewer)=>void config) {
-		new ComboViewer(parent, SWT.READ_ONLY) => [
-			combo.font = parent.font
-			combo.layoutData = new GridData(GridData.FILL_HORIZONTAL)
-			contentProvider = ArrayContentProvider.instance
 			config.apply(it)
 		]
 	}
