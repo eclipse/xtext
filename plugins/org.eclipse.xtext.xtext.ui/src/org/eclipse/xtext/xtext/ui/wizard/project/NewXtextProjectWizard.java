@@ -74,7 +74,8 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		}
 		projectInfo.setEncoding(encoding);
 		projectInfo.setWorkbench(getWorkbench());
-		JavaVersion selectedBree = advancedPage.getSelectedBree();
+		JavaVersion selectedBree = mainPage.getJavaVersion();
+		// Use old default for wizard as fall back, when something goes wrong
 		if (selectedBree != null) {
 			projectInfo.setJavaVersion(selectedBree);
 		}
