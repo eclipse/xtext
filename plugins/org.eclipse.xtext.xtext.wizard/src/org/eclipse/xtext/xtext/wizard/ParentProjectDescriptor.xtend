@@ -167,8 +167,13 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			}
 		«ENDIF»
 		
-		jar.manifest {
-			attributes 'Bundle-SymbolicName': project.name
+		jar {
+			from('model') {
+				into('model')
+			}
+			manifest {
+				attributes 'Bundle-SymbolicName': project.name
+			}
 		}
 		
 		plugins.withId('war') {

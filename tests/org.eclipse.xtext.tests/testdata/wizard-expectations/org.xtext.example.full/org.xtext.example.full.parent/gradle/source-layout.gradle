@@ -28,8 +28,13 @@ sourceSets.all {
 	resources.exclude '**/*.g', '**/*.xtext', '**/*.mwe2', '**/*.xtend', '**/*._trace'
 }
 
-jar.manifest {
-	attributes 'Bundle-SymbolicName': project.name
+jar {
+	from('model') {
+		into('model')
+	}
+	manifest {
+		attributes 'Bundle-SymbolicName': project.name
+	}
 }
 
 plugins.withId('war') {
