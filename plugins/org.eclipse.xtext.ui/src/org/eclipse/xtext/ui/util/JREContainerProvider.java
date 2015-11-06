@@ -150,12 +150,12 @@ public class JREContainerProvider {
 				new Predicate<IExecutionEnvironment>() {
 					@Override
 					public boolean apply(final IExecutionEnvironment ee) {
-						return ee.getDefaultVM() != null || tryFind(vms, new Predicate<IVMInstall>() {
+						return ee.getDefaultVM() != null || any(vms, new Predicate<IVMInstall>() {
 							@Override
 							public boolean apply(IVMInstall vm) {
 								return ee.isStrictlyCompatible(vm);
 							}
-						}).isPresent();
+						});
 					}
 				});
 		return transform(supportedEEs, new Function<IExecutionEnvironment, String>() {
