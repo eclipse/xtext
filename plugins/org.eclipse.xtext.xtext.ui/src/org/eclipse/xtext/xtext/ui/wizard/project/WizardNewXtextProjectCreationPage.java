@@ -17,6 +17,8 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.JavaConventions;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.util.Policy;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -88,7 +90,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 
 		Group breeGroup = new Group(parent, SWT.NONE);
 		breeGroup.setFont(parent.getFont());
-		breeGroup.setText("Java version");
+		breeGroup.setText(Messages.WizardNewXtextProjectCreationPage_EEGrTitle);
 		breeGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		breeGroup.setLayout(new GridLayout(1, false));
 
@@ -99,7 +101,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		Label breeLabel = new Label(composite, SWT.NONE);
 		GridData data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 1;
-		breeLabel.setText("Execution environment:");
+		breeLabel.setText(Messages.WizardNewXtextProjectCreationPage_EECombo);
 
 		breeCombo = new Combo(composite, SWT.BORDER | SWT.READ_ONLY);
 		data = new GridData(GridData.FILL_HORIZONTAL);
@@ -118,7 +120,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		// Create button
 		exeEnvButton = new Button(composite, SWT.PUSH);
 		exeEnvButton.setLayoutData(new GridData());
-		exeEnvButton.setText("Environments...");
+		exeEnvButton.setText(Messages.WizardNewXtextProjectCreationPage_EEButton);
 		exeEnvButton.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
@@ -129,13 +131,18 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		});
 	}
 
-	private void fillBreeCombo(Combo comboToFill) {
+	protected void fillBreeCombo(Combo comboToFill) {
 		Set<String> brees = Sets.newHashSet(JREContainerProvider.getDefaultBREE());
-		Set<String> availableBrees = Sets.newHashSet(JREContainerProvider.getConfiguredBREEs());
+		Set<String> availableBrees = Sets.newHashSet();
+		for (IExecutionEnvironment ee : JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments()) {
+			availableBrees.add(ee.getId());
+		}
 		for (JavaVersion supportedVersion : JavaVersion.values()) {
-			String bree = supportedVersion.getBree();
-			if (availableBrees.contains(bree))
-				brees.add(bree);
+			if (supportedVersion.isAtLeast(JavaVersion.JAVA6)) {
+				String bree = supportedVersion.getBree();
+				if (availableBrees.contains(bree))
+					brees.add(bree);
+			}
 		}
 		String[] array = brees.toArray(new String[] {});
 		Arrays.sort(array, Policy.getComparator());
@@ -162,7 +169,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	 *            the name of the DSL
 	 */
 	protected void setDefaults(String projectSuffix) {
-		languageNameField.setText("org.xtext.example." + projectSuffix + ".MyDsl"); //$NON-NLS-1$
+		languageNameField.setText("org.xtext.example." + projectSuffix + ".MyDsl"); //$NON-NLS-1$ //$NON-NLS-2$
 		extensionsField.setText(projectSuffix);
 		breeCombo.select(breeCombo.indexOf(JREContainerProvider.getDefaultBREE()));
 		validatePage();

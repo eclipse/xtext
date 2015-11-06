@@ -6,9 +6,11 @@ public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.xtext.ui.wizard.project.messages"; //$NON-NLS-1$
 	public static String XtextProjectCreator_CreatingProjectsMessage2;
 	public static String NewXtextProjectWizard_WindowTitle;
-	public static String NewRelengProjectWizard_WindowTitle;
 	public static String WizardNewXtextProjectCreationPage_TestingSupport;
 	public static String WizardNewXtextProjectCreationPage_Description;
+	public static String WizardNewXtextProjectCreationPage_EEButton;
+	public static String WizardNewXtextProjectCreationPage_EECombo;
+	public static String WizardNewXtextProjectCreationPage_EEGrTitle;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageLanguageName;
 	public static String WizardNewXtextProjectCreationPage_ErrorMessageProjectName;
 	public static String WizardNewXtextProjectCreationPage_LabelExtensions;
