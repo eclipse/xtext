@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.util.Policy;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
@@ -131,6 +132,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		});
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void fillBreeCombo(Combo comboToFill) {
 		Set<String> brees = Sets.newHashSet(JREContainerProvider.getDefaultBREE());
 		Set<String> availableBrees = Sets.newHashSet();
@@ -165,8 +167,9 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	/**
 	 * Sets the defaults for the languageName and extensions.
 	 * 
-	 * @param dslName
+	 * @param projectSuffix
 	 *            the name of the DSL
+	 * @see findNextValidProjectSuffix(String, String)
 	 */
 	protected void setDefaults(String projectSuffix) {
 		languageNameField.setText("org.xtext.example." + projectSuffix + ".MyDsl"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -209,6 +212,10 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		}
 		if (extensionsField.getText().length() == 0)
 			return false;
+		if (!Sets.newHashSet(JREContainerProvider.getConfiguredBREEs()).contains(breeCombo.getText())) {
+			setMessage("Selected Execution environment is not properly configured.", IMessageProvider.WARNING);
+			return true;
+		}
 		setErrorMessage(null);
 		setMessage(null);
 		return true;
