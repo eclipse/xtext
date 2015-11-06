@@ -24,6 +24,7 @@ import org.eclipse.jdt.launching.IVMInstallType;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
+import org.eclipse.xtext.util.JavaVersion;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -82,7 +83,7 @@ public class JREContainerProvider {
 	 * @return JRE container path {@link IPath} for standard VM "J2SE-1.5"
 	 */
 	protected static IPath newJRE15ContainerPath() {
-		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, "J2SE-1.5");
+		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, JavaVersion.JAVA5.getBree());
 	}
 
 	/**
