@@ -54,6 +54,12 @@ public class FragmentTestLanguageParserDefinition extends AbstractXtextParserDef
 			if (elementType == elementTypeProvider.getParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
+			if (elementType == elementTypeProvider.getParserRuleFragments_ElementPRFNamedRecursiveParserRuleCall_1_6_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getParserRuleFragments_ElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
 			if (elementType == elementTypeProvider.getPRFNamedElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
@@ -61,6 +67,18 @@ public class FragmentTestLanguageParserDefinition extends AbstractXtextParserDef
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPRFNamed_PRFNamedRefParserRuleCall_1_1_1ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getPRFNamedRecursiveElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getPRFNamedRecursive_RecursiveFromFragmentParserRuleCall_1ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getPRFNamedRecursiveFragmentElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getPRFNamedRecursiveFragment_RecursiveFragmentParserRuleCall_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPRFNamedRefFirstElementType()) {
@@ -94,6 +112,36 @@ public class FragmentTestLanguageParserDefinition extends AbstractXtextParserDef
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getPRFNamedRefElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getRecursiveFromFragmentElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getRecursiveFromFragment_PrevNamedInParenthesesParserRuleCall_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getNamedInParenthesesElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getNamedInParentheses_NamedInParenthesesParserRuleCall_0_1ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getNamedInParentheses_PRFNamedAction_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getRecursiveFragmentElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getRecursiveFragment_RecursiveFragmentParserRuleCall_0_1ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getRecursiveFragment_PrevNamedByActionParserRuleCall_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getNamedByActionElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getNamedByAction_PRFNamedAction_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

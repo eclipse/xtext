@@ -123,6 +123,30 @@ public class FragmentTestLanguageElementTypeProvider implements IElementTypeProv
 		public static IGrammarAwareElementType createParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0ElementType() {
 			return new IGrammarAwareElementType("ParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getElementPRFWithPredicateParserRuleCall_1_5_1_0());
 		}
+		public static IGrammarAwareElementType createParserRuleFragments_Group_1_6ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_Group_1_6_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getGroup_1_6());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_NumberSignDigitOneDigitZeroKeyword_1_6_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_NumberSignDigitOneDigitZeroKeyword_1_6_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getNumberSignDigitOneDigitZeroKeyword_1_6_0());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_ElementAssignment_1_6_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_ElementAssignment_1_6_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getElementAssignment_1_6_1());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_ElementPRFNamedRecursiveParserRuleCall_1_6_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_ElementPRFNamedRecursiveParserRuleCall_1_6_1_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getElementPRFNamedRecursiveParserRuleCall_1_6_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_Group_1_7ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_Group_1_7_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getGroup_1_7());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_NumberSignDigitOneDigitOneKeyword_1_7_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_NumberSignDigitOneDigitOneKeyword_1_7_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getNumberSignDigitOneDigitOneKeyword_1_7_0());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_ElementAssignment_1_7_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_ElementAssignment_1_7_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getElementAssignment_1_7_1());
+		}
+		public static IGrammarAwareElementType createParserRuleFragments_ElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleFragments_ElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleFragmentsAccess().getElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0());
+		}
 	}
 
 	public static final IGrammarAwareElementType ParserRuleFragments_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragmentsElementType());
@@ -189,6 +213,22 @@ public class FragmentTestLanguageElementTypeProvider implements IElementTypeProv
 
 	public static final IGrammarAwareElementType ParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0ElementType());
 
+	public static final IGrammarAwareElementType ParserRuleFragments_Group_1_6_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_Group_1_6ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_NumberSignDigitOneDigitZeroKeyword_1_6_0_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_NumberSignDigitOneDigitZeroKeyword_1_6_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_ElementAssignment_1_6_1_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_ElementAssignment_1_6_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_ElementPRFNamedRecursiveParserRuleCall_1_6_1_0_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_ElementPRFNamedRecursiveParserRuleCall_1_6_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_Group_1_7_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_Group_1_7ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_NumberSignDigitOneDigitOneKeyword_1_7_0_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_NumberSignDigitOneDigitOneKeyword_1_7_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_ElementAssignment_1_7_1_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_ElementAssignment_1_7_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleFragments_ElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0_ELEMENT_TYPE = associate(ParserRuleFragmentsFactory.createParserRuleFragments_ElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0ElementType());
+
 	private static class PRFNamedFactory {
 		public static IGrammarAwareElementType createPRFNamedElementType() {
 			return new IGrammarAwareElementType("PRFNamed_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRule());
@@ -251,6 +291,62 @@ public class FragmentTestLanguageElementTypeProvider implements IElementTypeProv
 	public static final IGrammarAwareElementType PRFNamed_HyphenMinusKeyword_1_1_0_ELEMENT_TYPE = associate(PRFNamedFactory.createPRFNamed_HyphenMinusKeyword_1_1_0ElementType());
 
 	public static final IGrammarAwareElementType PRFNamed_PRFNamedRefParserRuleCall_1_1_1_ELEMENT_TYPE = associate(PRFNamedFactory.createPRFNamed_PRFNamedRefParserRuleCall_1_1_1ElementType());
+
+	private static class PRFNamedRecursiveFactory {
+		public static IGrammarAwareElementType createPRFNamedRecursiveElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursive_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveRule());
+		}
+		public static IGrammarAwareElementType createPRFNamedRecursive_GroupElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursive_Group_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createPRFNamedRecursive_NameAssignment_0ElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursive_NameAssignment_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveAccess().getNameAssignment_0());
+		}
+		public static IGrammarAwareElementType createPRFNamedRecursive_NameIDTerminalRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursive_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveAccess().getNameIDTerminalRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createPRFNamedRecursive_RecursiveFromFragmentParserRuleCall_1ElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursive_RecursiveFromFragmentParserRuleCall_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveAccess().getRecursiveFromFragmentParserRuleCall_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType PRFNamedRecursive_ELEMENT_TYPE = associate(PRFNamedRecursiveFactory.createPRFNamedRecursiveElementType());
+
+	public static final IGrammarAwareElementType PRFNamedRecursive_Group_ELEMENT_TYPE = associate(PRFNamedRecursiveFactory.createPRFNamedRecursive_GroupElementType());
+
+	public static final IGrammarAwareElementType PRFNamedRecursive_NameAssignment_0_ELEMENT_TYPE = associate(PRFNamedRecursiveFactory.createPRFNamedRecursive_NameAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType PRFNamedRecursive_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE = associate(PRFNamedRecursiveFactory.createPRFNamedRecursive_NameIDTerminalRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType PRFNamedRecursive_RecursiveFromFragmentParserRuleCall_1_ELEMENT_TYPE = associate(PRFNamedRecursiveFactory.createPRFNamedRecursive_RecursiveFromFragmentParserRuleCall_1ElementType());
+
+	private static class PRFNamedRecursiveFragmentFactory {
+		public static IGrammarAwareElementType createPRFNamedRecursiveFragmentElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursiveFragment_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveFragmentRule());
+		}
+		public static IGrammarAwareElementType createPRFNamedRecursiveFragment_GroupElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursiveFragment_Group_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveFragmentAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createPRFNamedRecursiveFragment_NameAssignment_0ElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursiveFragment_NameAssignment_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveFragmentAccess().getNameAssignment_0());
+		}
+		public static IGrammarAwareElementType createPRFNamedRecursiveFragment_NameIDTerminalRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursiveFragment_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveFragmentAccess().getNameIDTerminalRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createPRFNamedRecursiveFragment_RecursiveFragmentParserRuleCall_1ElementType() {
+			return new IGrammarAwareElementType("PRFNamedRecursiveFragment_RecursiveFragmentParserRuleCall_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getPRFNamedRecursiveFragmentAccess().getRecursiveFragmentParserRuleCall_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType PRFNamedRecursiveFragment_ELEMENT_TYPE = associate(PRFNamedRecursiveFragmentFactory.createPRFNamedRecursiveFragmentElementType());
+
+	public static final IGrammarAwareElementType PRFNamedRecursiveFragment_Group_ELEMENT_TYPE = associate(PRFNamedRecursiveFragmentFactory.createPRFNamedRecursiveFragment_GroupElementType());
+
+	public static final IGrammarAwareElementType PRFNamedRecursiveFragment_NameAssignment_0_ELEMENT_TYPE = associate(PRFNamedRecursiveFragmentFactory.createPRFNamedRecursiveFragment_NameAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType PRFNamedRecursiveFragment_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE = associate(PRFNamedRecursiveFragmentFactory.createPRFNamedRecursiveFragment_NameIDTerminalRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType PRFNamedRecursiveFragment_RecursiveFragmentParserRuleCall_1_ELEMENT_TYPE = associate(PRFNamedRecursiveFragmentFactory.createPRFNamedRecursiveFragment_RecursiveFragmentParserRuleCall_1ElementType());
 
 	private static class PRFNamedRefFirstFactory {
 		public static IGrammarAwareElementType createPRFNamedRefFirstElementType() {
@@ -582,6 +678,148 @@ public class FragmentTestLanguageElementTypeProvider implements IElementTypeProv
 
 	public static final IGrammarAwareElementType PRFNamedRef_RefPRFNamedIDTerminalRuleCall_0_1_ELEMENT_TYPE = associate(PRFNamedRefFactory.createPRFNamedRef_RefPRFNamedIDTerminalRuleCall_0_1ElementType());
 
+	private static class RecursiveFromFragmentFactory {
+		public static IGrammarAwareElementType createRecursiveFromFragmentElementType() {
+			return new IGrammarAwareElementType("RecursiveFromFragment_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFromFragmentRule());
+		}
+		public static IGrammarAwareElementType createRecursiveFromFragment_PrevAssignmentElementType() {
+			return new IGrammarAwareElementType("RecursiveFromFragment_PrevAssignment_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFromFragmentAccess().getPrevAssignment());
+		}
+		public static IGrammarAwareElementType createRecursiveFromFragment_PrevNamedInParenthesesParserRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("RecursiveFromFragment_PrevNamedInParenthesesParserRuleCall_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFromFragmentAccess().getPrevNamedInParenthesesParserRuleCall_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType RecursiveFromFragment_ELEMENT_TYPE = associate(RecursiveFromFragmentFactory.createRecursiveFromFragmentElementType());
+
+	public static final IGrammarAwareElementType RecursiveFromFragment_PrevAssignment_ELEMENT_TYPE = associate(RecursiveFromFragmentFactory.createRecursiveFromFragment_PrevAssignmentElementType());
+
+	public static final IGrammarAwareElementType RecursiveFromFragment_PrevNamedInParenthesesParserRuleCall_0_ELEMENT_TYPE = associate(RecursiveFromFragmentFactory.createRecursiveFromFragment_PrevNamedInParenthesesParserRuleCall_0ElementType());
+
+	private static class NamedInParenthesesFactory {
+		public static IGrammarAwareElementType createNamedInParenthesesElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesRule());
+		}
+		public static IGrammarAwareElementType createNamedInParentheses_AlternativesElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_Alternatives_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesAccess().getAlternatives());
+		}
+		public static IGrammarAwareElementType createNamedInParentheses_Group_0ElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_Group_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesAccess().getGroup_0());
+		}
+		public static IGrammarAwareElementType createNamedInParentheses_LeftParenthesisKeyword_0_0ElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_LeftParenthesisKeyword_0_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesAccess().getLeftParenthesisKeyword_0_0());
+		}
+		public static IGrammarAwareElementType createNamedInParentheses_NamedInParenthesesParserRuleCall_0_1ElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_NamedInParenthesesParserRuleCall_0_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesAccess().getNamedInParenthesesParserRuleCall_0_1());
+		}
+		public static IGrammarAwareElementType createNamedInParentheses_RightParenthesisKeyword_0_2ElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_RightParenthesisKeyword_0_2_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesAccess().getRightParenthesisKeyword_0_2());
+		}
+		public static IGrammarAwareElementType createNamedInParentheses_Group_1ElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_Group_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesAccess().getGroup_1());
+		}
+		public static IGrammarAwareElementType createNamedInParentheses_PRFNamedAction_1_0ElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_PRFNamedAction_1_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesAccess().getPRFNamedAction_1_0());
+		}
+		public static IGrammarAwareElementType createNamedInParentheses_NameAssignment_1_1ElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_NameAssignment_1_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesAccess().getNameAssignment_1_1());
+		}
+		public static IGrammarAwareElementType createNamedInParentheses_NameIDTerminalRuleCall_1_1_0ElementType() {
+			return new IGrammarAwareElementType("NamedInParentheses_NameIDTerminalRuleCall_1_1_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedInParenthesesAccess().getNameIDTerminalRuleCall_1_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType NamedInParentheses_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParenthesesElementType());
+
+	public static final IGrammarAwareElementType NamedInParentheses_Alternatives_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParentheses_AlternativesElementType());
+
+	public static final IGrammarAwareElementType NamedInParentheses_Group_0_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParentheses_Group_0ElementType());
+
+	public static final IGrammarAwareElementType NamedInParentheses_LeftParenthesisKeyword_0_0_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParentheses_LeftParenthesisKeyword_0_0ElementType());
+
+	public static final IGrammarAwareElementType NamedInParentheses_NamedInParenthesesParserRuleCall_0_1_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParentheses_NamedInParenthesesParserRuleCall_0_1ElementType());
+
+	public static final IGrammarAwareElementType NamedInParentheses_RightParenthesisKeyword_0_2_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParentheses_RightParenthesisKeyword_0_2ElementType());
+
+	public static final IGrammarAwareElementType NamedInParentheses_Group_1_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParentheses_Group_1ElementType());
+
+	public static final IGrammarAwareElementType NamedInParentheses_PRFNamedAction_1_0_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParentheses_PRFNamedAction_1_0ElementType());
+
+	public static final IGrammarAwareElementType NamedInParentheses_NameAssignment_1_1_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParentheses_NameAssignment_1_1ElementType());
+
+	public static final IGrammarAwareElementType NamedInParentheses_NameIDTerminalRuleCall_1_1_0_ELEMENT_TYPE = associate(NamedInParenthesesFactory.createNamedInParentheses_NameIDTerminalRuleCall_1_1_0ElementType());
+
+	private static class RecursiveFragmentFactory {
+		public static IGrammarAwareElementType createRecursiveFragmentElementType() {
+			return new IGrammarAwareElementType("RecursiveFragment_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFragmentRule());
+		}
+		public static IGrammarAwareElementType createRecursiveFragment_AlternativesElementType() {
+			return new IGrammarAwareElementType("RecursiveFragment_Alternatives_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFragmentAccess().getAlternatives());
+		}
+		public static IGrammarAwareElementType createRecursiveFragment_Group_0ElementType() {
+			return new IGrammarAwareElementType("RecursiveFragment_Group_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFragmentAccess().getGroup_0());
+		}
+		public static IGrammarAwareElementType createRecursiveFragment_LeftParenthesisKeyword_0_0ElementType() {
+			return new IGrammarAwareElementType("RecursiveFragment_LeftParenthesisKeyword_0_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFragmentAccess().getLeftParenthesisKeyword_0_0());
+		}
+		public static IGrammarAwareElementType createRecursiveFragment_RecursiveFragmentParserRuleCall_0_1ElementType() {
+			return new IGrammarAwareElementType("RecursiveFragment_RecursiveFragmentParserRuleCall_0_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFragmentAccess().getRecursiveFragmentParserRuleCall_0_1());
+		}
+		public static IGrammarAwareElementType createRecursiveFragment_RightParenthesisKeyword_0_2ElementType() {
+			return new IGrammarAwareElementType("RecursiveFragment_RightParenthesisKeyword_0_2_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFragmentAccess().getRightParenthesisKeyword_0_2());
+		}
+		public static IGrammarAwareElementType createRecursiveFragment_PrevAssignment_1ElementType() {
+			return new IGrammarAwareElementType("RecursiveFragment_PrevAssignment_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFragmentAccess().getPrevAssignment_1());
+		}
+		public static IGrammarAwareElementType createRecursiveFragment_PrevNamedByActionParserRuleCall_1_0ElementType() {
+			return new IGrammarAwareElementType("RecursiveFragment_PrevNamedByActionParserRuleCall_1_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRecursiveFragmentAccess().getPrevNamedByActionParserRuleCall_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType RecursiveFragment_ELEMENT_TYPE = associate(RecursiveFragmentFactory.createRecursiveFragmentElementType());
+
+	public static final IGrammarAwareElementType RecursiveFragment_Alternatives_ELEMENT_TYPE = associate(RecursiveFragmentFactory.createRecursiveFragment_AlternativesElementType());
+
+	public static final IGrammarAwareElementType RecursiveFragment_Group_0_ELEMENT_TYPE = associate(RecursiveFragmentFactory.createRecursiveFragment_Group_0ElementType());
+
+	public static final IGrammarAwareElementType RecursiveFragment_LeftParenthesisKeyword_0_0_ELEMENT_TYPE = associate(RecursiveFragmentFactory.createRecursiveFragment_LeftParenthesisKeyword_0_0ElementType());
+
+	public static final IGrammarAwareElementType RecursiveFragment_RecursiveFragmentParserRuleCall_0_1_ELEMENT_TYPE = associate(RecursiveFragmentFactory.createRecursiveFragment_RecursiveFragmentParserRuleCall_0_1ElementType());
+
+	public static final IGrammarAwareElementType RecursiveFragment_RightParenthesisKeyword_0_2_ELEMENT_TYPE = associate(RecursiveFragmentFactory.createRecursiveFragment_RightParenthesisKeyword_0_2ElementType());
+
+	public static final IGrammarAwareElementType RecursiveFragment_PrevAssignment_1_ELEMENT_TYPE = associate(RecursiveFragmentFactory.createRecursiveFragment_PrevAssignment_1ElementType());
+
+	public static final IGrammarAwareElementType RecursiveFragment_PrevNamedByActionParserRuleCall_1_0_ELEMENT_TYPE = associate(RecursiveFragmentFactory.createRecursiveFragment_PrevNamedByActionParserRuleCall_1_0ElementType());
+
+	private static class NamedByActionFactory {
+		public static IGrammarAwareElementType createNamedByActionElementType() {
+			return new IGrammarAwareElementType("NamedByAction_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedByActionRule());
+		}
+		public static IGrammarAwareElementType createNamedByAction_GroupElementType() {
+			return new IGrammarAwareElementType("NamedByAction_Group_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedByActionAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createNamedByAction_PRFNamedAction_0ElementType() {
+			return new IGrammarAwareElementType("NamedByAction_PRFNamedAction_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedByActionAccess().getPRFNamedAction_0());
+		}
+		public static IGrammarAwareElementType createNamedByAction_NameAssignment_1ElementType() {
+			return new IGrammarAwareElementType("NamedByAction_NameAssignment_1_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedByActionAccess().getNameAssignment_1());
+		}
+		public static IGrammarAwareElementType createNamedByAction_NameIDTerminalRuleCall_1_0ElementType() {
+			return new IGrammarAwareElementType("NamedByAction_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE", FragmentTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedByActionAccess().getNameIDTerminalRuleCall_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType NamedByAction_ELEMENT_TYPE = associate(NamedByActionFactory.createNamedByActionElementType());
+
+	public static final IGrammarAwareElementType NamedByAction_Group_ELEMENT_TYPE = associate(NamedByActionFactory.createNamedByAction_GroupElementType());
+
+	public static final IGrammarAwareElementType NamedByAction_PRFNamedAction_0_ELEMENT_TYPE = associate(NamedByActionFactory.createNamedByAction_PRFNamedAction_0ElementType());
+
+	public static final IGrammarAwareElementType NamedByAction_NameAssignment_1_ELEMENT_TYPE = associate(NamedByActionFactory.createNamedByAction_NameAssignment_1ElementType());
+
+	public static final IGrammarAwareElementType NamedByAction_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE = associate(NamedByActionFactory.createNamedByAction_NameIDTerminalRuleCall_1_0ElementType());
+
 	@Override
 	public IFileElementType getFileType() {
 		return FILE_TYPE;
@@ -720,6 +958,38 @@ public class FragmentTestLanguageElementTypeProvider implements IElementTypeProv
 		return ParserRuleFragments_ElementPRFWithPredicateParserRuleCall_1_5_1_0_ELEMENT_TYPE;
 	}
 
+	public IGrammarAwareElementType getParserRuleFragments_Group_1_6ElementType() {
+		return ParserRuleFragments_Group_1_6_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_NumberSignDigitOneDigitZeroKeyword_1_6_0ElementType() {
+		return ParserRuleFragments_NumberSignDigitOneDigitZeroKeyword_1_6_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_ElementAssignment_1_6_1ElementType() {
+		return ParserRuleFragments_ElementAssignment_1_6_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_ElementPRFNamedRecursiveParserRuleCall_1_6_1_0ElementType() {
+		return ParserRuleFragments_ElementPRFNamedRecursiveParserRuleCall_1_6_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_Group_1_7ElementType() {
+		return ParserRuleFragments_Group_1_7_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_NumberSignDigitOneDigitOneKeyword_1_7_0ElementType() {
+		return ParserRuleFragments_NumberSignDigitOneDigitOneKeyword_1_7_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_ElementAssignment_1_7_1ElementType() {
+		return ParserRuleFragments_ElementAssignment_1_7_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleFragments_ElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0ElementType() {
+		return ParserRuleFragments_ElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0_ELEMENT_TYPE;
+	}
+
 	public IGrammarAwareElementType getPRFNamedElementType() {
 		return PRFNamed_ELEMENT_TYPE;
 	}
@@ -766,6 +1036,46 @@ public class FragmentTestLanguageElementTypeProvider implements IElementTypeProv
 
 	public IGrammarAwareElementType getPRFNamed_PRFNamedRefParserRuleCall_1_1_1ElementType() {
 		return PRFNamed_PRFNamedRefParserRuleCall_1_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursiveElementType() {
+		return PRFNamedRecursive_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursive_GroupElementType() {
+		return PRFNamedRecursive_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursive_NameAssignment_0ElementType() {
+		return PRFNamedRecursive_NameAssignment_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursive_NameIDTerminalRuleCall_0_0ElementType() {
+		return PRFNamedRecursive_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursive_RecursiveFromFragmentParserRuleCall_1ElementType() {
+		return PRFNamedRecursive_RecursiveFromFragmentParserRuleCall_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursiveFragmentElementType() {
+		return PRFNamedRecursiveFragment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursiveFragment_GroupElementType() {
+		return PRFNamedRecursiveFragment_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursiveFragment_NameAssignment_0ElementType() {
+		return PRFNamedRecursiveFragment_NameAssignment_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursiveFragment_NameIDTerminalRuleCall_0_0ElementType() {
+		return PRFNamedRecursiveFragment_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getPRFNamedRecursiveFragment_RecursiveFragmentParserRuleCall_1ElementType() {
+		return PRFNamedRecursiveFragment_RecursiveFragmentParserRuleCall_1_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getPRFNamedRefFirstElementType() {
@@ -1006,6 +1316,110 @@ public class FragmentTestLanguageElementTypeProvider implements IElementTypeProv
 
 	public IGrammarAwareElementType getPRFNamedRef_RefPRFNamedIDTerminalRuleCall_0_1ElementType() {
 		return PRFNamedRef_RefPRFNamedIDTerminalRuleCall_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFromFragmentElementType() {
+		return RecursiveFromFragment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFromFragment_PrevAssignmentElementType() {
+		return RecursiveFromFragment_PrevAssignment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFromFragment_PrevNamedInParenthesesParserRuleCall_0ElementType() {
+		return RecursiveFromFragment_PrevNamedInParenthesesParserRuleCall_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParenthesesElementType() {
+		return NamedInParentheses_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParentheses_AlternativesElementType() {
+		return NamedInParentheses_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParentheses_Group_0ElementType() {
+		return NamedInParentheses_Group_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParentheses_LeftParenthesisKeyword_0_0ElementType() {
+		return NamedInParentheses_LeftParenthesisKeyword_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParentheses_NamedInParenthesesParserRuleCall_0_1ElementType() {
+		return NamedInParentheses_NamedInParenthesesParserRuleCall_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParentheses_RightParenthesisKeyword_0_2ElementType() {
+		return NamedInParentheses_RightParenthesisKeyword_0_2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParentheses_Group_1ElementType() {
+		return NamedInParentheses_Group_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParentheses_PRFNamedAction_1_0ElementType() {
+		return NamedInParentheses_PRFNamedAction_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParentheses_NameAssignment_1_1ElementType() {
+		return NamedInParentheses_NameAssignment_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedInParentheses_NameIDTerminalRuleCall_1_1_0ElementType() {
+		return NamedInParentheses_NameIDTerminalRuleCall_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFragmentElementType() {
+		return RecursiveFragment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFragment_AlternativesElementType() {
+		return RecursiveFragment_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFragment_Group_0ElementType() {
+		return RecursiveFragment_Group_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFragment_LeftParenthesisKeyword_0_0ElementType() {
+		return RecursiveFragment_LeftParenthesisKeyword_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFragment_RecursiveFragmentParserRuleCall_0_1ElementType() {
+		return RecursiveFragment_RecursiveFragmentParserRuleCall_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFragment_RightParenthesisKeyword_0_2ElementType() {
+		return RecursiveFragment_RightParenthesisKeyword_0_2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFragment_PrevAssignment_1ElementType() {
+		return RecursiveFragment_PrevAssignment_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRecursiveFragment_PrevNamedByActionParserRuleCall_1_0ElementType() {
+		return RecursiveFragment_PrevNamedByActionParserRuleCall_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedByActionElementType() {
+		return NamedByAction_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedByAction_GroupElementType() {
+		return NamedByAction_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedByAction_PRFNamedAction_0ElementType() {
+		return NamedByAction_PRFNamedAction_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedByAction_NameAssignment_1ElementType() {
+		return NamedByAction_NameAssignment_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getNamedByAction_NameIDTerminalRuleCall_1_0ElementType() {
+		return NamedByAction_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
 
 }

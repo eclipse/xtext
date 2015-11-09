@@ -178,7 +178,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 
 	//terminal GERMAN_STRING:
 	//	'A'..'Z' | 'a'..'z'
-	//	| '\u00c4' | '\u00d6' | '\u00dc' | '\u00e4' | '\u00f6' | '\u00fc' | '\u1E9E'*;
+	//	| '\\u00c4' | '\\u00d6' | '\\u00dc' | '\\u00e4' | '\\u00f6' | '\\u00fc' | '\\u1E9E'*;
 	public TerminalRule getGERMAN_STRINGRule() {
 		return tGERMAN_STRING;
 	} 

@@ -35,7 +35,15 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 		if (epackage == FragmentTestLanguagePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case FragmentTestLanguagePackage.PRF_NAMED:
-				if (rule == grammarAccess.getPRFNamedRefFirstRule()) {
+				if (rule == grammarAccess.getNamedByActionRule()) {
+					sequence_NamedByAction(context, (PRFNamed) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getNamedInParenthesesRule()) {
+					sequence_NamedInParentheses(context, (PRFNamed) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getPRFNamedRefFirstRule()) {
 					sequence_PRFNamedFragment_PRFNamedRefFirst(context, (PRFNamed) semanticObject); 
 					return; 
 				}
@@ -54,8 +62,19 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 				}
 				else break;
 			case FragmentTestLanguagePackage.PRF_NAMED_WITH_ACTION:
-				sequence_PRFNamedWithAction(context, (PRFNamedWithAction) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getPRFNamedRecursiveFragmentRule()) {
+					sequence_PRFNamedRecursiveFragment_RecursiveFragment(context, (PRFNamedWithAction) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getPRFNamedRecursiveRule()) {
+					sequence_PRFNamedRecursive_RecursiveFromFragment(context, (PRFNamedWithAction) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getPRFNamedWithActionRule()) {
+					sequence_PRFNamedWithAction(context, (PRFNamedWithAction) semanticObject); 
+					return; 
+				}
+				else break;
 			case FragmentTestLanguagePackage.PARSER_RULE_FRAGMENTS:
 				sequence_ParserRuleFragments(context, (ParserRuleFragments) semanticObject); 
 				return; 
@@ -63,6 +82,42 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     NamedByAction returns PRFNamed
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_NamedByAction(ISerializationContext context, PRFNamed semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getNamedByActionAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     NamedInParentheses returns PRFNamed
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_NamedInParentheses(ISerializationContext context, PRFNamed semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getNamedInParenthesesAccess().getNameIDTerminalRuleCall_1_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -94,6 +149,48 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	 */
 	protected void sequence_PRFNamedFragment_PRFNamedRef(ISerializationContext context, PRFNamed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PRFNamedRecursiveFragment returns PRFNamedWithAction
+	 *
+	 * Constraint:
+	 *     (name=ID prev=NamedByAction)
+	 */
+	protected void sequence_PRFNamedRecursiveFragment_RecursiveFragment(ISerializationContext context, PRFNamedWithAction semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME));
+			if (transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED_WITH_ACTION__PREV) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED_WITH_ACTION__PREV));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPRFNamedRecursiveFragmentAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRecursiveFragmentAccess().getPrevNamedByActionParserRuleCall_1_0(), semanticObject.getPrev());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PRFNamedRecursive returns PRFNamedWithAction
+	 *
+	 * Constraint:
+	 *     (name=ID prev=NamedInParentheses)
+	 */
+	protected void sequence_PRFNamedRecursive_RecursiveFromFragment(ISerializationContext context, PRFNamedWithAction semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME));
+			if (transientValues.isValueTransient(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED_WITH_ACTION__PREV) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED_WITH_ACTION__PREV));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPRFNamedRecursiveAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRecursiveFromFragmentAccess().getPrevNamedInParenthesesParserRuleCall_0(), semanticObject.getPrev());
+		feeder.finish();
 	}
 	
 	
@@ -145,7 +242,9 @@ public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	 *         element=PRFNamedRefFirst | 
 	 *         element=PRFNamedWithAction | 
 	 *         element=PRFNamedWithFQN | 
-	 *         element=PRFWithPredicate
+	 *         element=PRFWithPredicate | 
+	 *         element=PRFNamedRecursive | 
+	 *         element=PRFNamedRecursiveFragment
 	 *     )
 	 */
 	protected void sequence_ParserRuleFragments(ISerializationContext context, ParserRuleFragments semanticObject) {

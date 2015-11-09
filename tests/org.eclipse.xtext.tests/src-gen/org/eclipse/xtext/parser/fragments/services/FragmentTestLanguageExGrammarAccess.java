@@ -90,7 +90,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	//	//  | '#6' element=PRFNamedWithActionInFragment2
 	//	//  | '#7' element=PRFNamedWithActionInFragment3
 	//	| '#8' element=PRFNamedWithFQN
-	//	| '#9' element=PRFWithPredicate);
+	//	| '#9' element=PRFWithPredicate
+	//	| '#10' element=PRFNamedRecursive
+	//	| '#11' element=PRFNamedRecursiveFragment);
 	public FragmentTestLanguageGrammarAccess.ParserRuleFragmentsElements getParserRuleFragmentsAccess() {
 		return gaFragmentTestLanguage.getParserRuleFragmentsAccess();
 	}
@@ -107,6 +109,26 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	
 	public ParserRule getPRFNamedRule() {
 		return getPRFNamedAccess().getRule();
+	}
+
+	//PRFNamedRecursive PRFNamedWithAction:
+	//	name=ID RecursiveFromFragment
+	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveElements getPRFNamedRecursiveAccess() {
+		return gaFragmentTestLanguage.getPRFNamedRecursiveAccess();
+	}
+	
+	public ParserRule getPRFNamedRecursiveRule() {
+		return getPRFNamedRecursiveAccess().getRule();
+	}
+
+	//PRFNamedRecursiveFragment PRFNamedWithAction:
+	//	name=ID RecursiveFragment
+	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveFragmentElements getPRFNamedRecursiveFragmentAccess() {
+		return gaFragmentTestLanguage.getPRFNamedRecursiveFragmentAccess();
+	}
+	
+	public ParserRule getPRFNamedRecursiveFragmentRule() {
+		return getPRFNamedRecursiveFragmentAccess().getRule();
 	}
 
 	//PRFNamedRefFirst PRFNamed:
@@ -229,6 +251,46 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	
 	public ParserRule getPRFNamedRefRule() {
 		return getPRFNamedRefAccess().getRule();
+	}
+
+	//fragment RecursiveFromFragment returns PRFNamedWithAction:
+	//	prev=NamedInParentheses;
+	public FragmentTestLanguageGrammarAccess.RecursiveFromFragmentElements getRecursiveFromFragmentAccess() {
+		return gaFragmentTestLanguage.getRecursiveFromFragmentAccess();
+	}
+	
+	public ParserRule getRecursiveFromFragmentRule() {
+		return getRecursiveFromFragmentAccess().getRule();
+	}
+
+	//NamedInParentheses PRFNamed:
+	//	'(' NamedInParentheses ')' | {PRFNamed} name=ID
+	public FragmentTestLanguageGrammarAccess.NamedInParenthesesElements getNamedInParenthesesAccess() {
+		return gaFragmentTestLanguage.getNamedInParenthesesAccess();
+	}
+	
+	public ParserRule getNamedInParenthesesRule() {
+		return getNamedInParenthesesAccess().getRule();
+	}
+
+	//fragment RecursiveFragment returns PRFNamedWithAction:
+	//	'(' RecursiveFragment ')' | prev=NamedByAction;
+	public FragmentTestLanguageGrammarAccess.RecursiveFragmentElements getRecursiveFragmentAccess() {
+		return gaFragmentTestLanguage.getRecursiveFragmentAccess();
+	}
+	
+	public ParserRule getRecursiveFragmentRule() {
+		return getRecursiveFragmentAccess().getRule();
+	}
+
+	//NamedByAction PRFNamed:
+	//	{PRFNamed} name=ID
+	public FragmentTestLanguageGrammarAccess.NamedByActionElements getNamedByActionAccess() {
+		return gaFragmentTestLanguage.getNamedByActionAccess();
+	}
+	
+	public ParserRule getNamedByActionRule() {
+		return getNamedByActionAccess().getRule();
 	}
 
 	//terminal ID:
