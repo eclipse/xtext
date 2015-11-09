@@ -213,7 +213,8 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		if (extensionsField.getText().length() == 0)
 			return false;
 		if (!Sets.newHashSet(JREContainerProvider.getConfiguredBREEs()).contains(breeCombo.getText())) {
-			setMessage("Selected Execution environment is not properly configured.", IMessageProvider.WARNING);
+			setMessage(Messages.WizardNewXtextProjectCreationPage_eeInfo_0 + breeCombo.getText()
+					+ Messages.WizardNewXtextProjectCreationPage_eeInfo_1, IMessageProvider.INFORMATION);
 			return true;
 		}
 		setErrorMessage(null);
