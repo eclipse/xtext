@@ -63,7 +63,11 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		}
 		return files
 	}
-
+	
+	def String getJavaVersion() {
+		config.javaVersion.qualifier	
+	}
+	
 	def private CharSequence loadResource(String resourcePath) {
 		Resources.toString(class.classLoader.getResource(resourcePath), Charsets.ISO_8859_1)
 	}
@@ -104,8 +108,8 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					group = '«config.baseName»'
 					version = '1.0.0-SNAPSHOT'
 					
-					sourceCompatibility = '1.6'
-					targetCompatibility = '1.6'
+					sourceCompatibility = '«javaVersion»'
+					targetCompatibility = '«javaVersion»'
 					
 					configurations.all {
 						exclude group: 'asm'
@@ -209,8 +213,8 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					«ENDIF»
 					<xtextVersion>«config.xtextVersion»</xtextVersion>
 					<project.build.sourceEncoding>«config.encoding»</project.build.sourceEncoding>
-					<maven.compiler.source>1.6</maven.compiler.source>
-					<maven.compiler.target>1.6</maven.compiler.target>
+					<maven.compiler.source>«javaVersion»</maven.compiler.source>
+					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 				</properties>
 				<modules>
 					«FOR p : config.enabledProjects.filter[it != this && partOfMavenBuild]»
