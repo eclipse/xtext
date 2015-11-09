@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.ParserRuleFragmen
 import org.eclipse.xtext.resource.XtextResource
 import org.junit.Test
 import org.junit.Ignore
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -191,6 +192,50 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 		assertNotNull(fragments)
 		assertEquals('myName', fragments.element.name)
 		assertEquals(fragments.element, fragments.element.ref)
+	}
+	
+	@Test
+	def void testFragmentRecursive_01() {
+		val fragments = '#10 myName myPrev'.parseAndValidate
+		assertNotNull(fragments)
+		assertEquals('myName', fragments.element.name)
+		val prev = (fragments.element as PRFNamedWithAction).prev
+		assertEquals('myPrev', prev.name)
+		val node = NodeModelUtils.findActualNodeFor(prev)
+		assertEquals(' myPrev', node.text)
+	}
+	
+	@Test
+	def void testFragmentRecursive_02() {
+		val fragments = '#10 myName ((myPrev))'.parseAndValidate
+		assertNotNull(fragments)
+		assertEquals('myName', fragments.element.name)
+		val prev = (fragments.element as PRFNamedWithAction).prev
+		assertEquals('myPrev', prev.name)
+		val node = NodeModelUtils.findActualNodeFor(prev)
+		assertEquals(' ((myPrev))', node.text)
+	}
+	
+	@Test
+	def void testFragmentRecursive_03() {
+		val fragments = '#11 myName myPrev'.parseAndValidate
+		assertNotNull(fragments)
+		assertEquals('myName', fragments.element.name)
+		val prev = (fragments.element as PRFNamedWithAction).prev
+		assertEquals('myPrev', prev.name)
+		val node = NodeModelUtils.findActualNodeFor(prev)
+		assertEquals(' myPrev', node.text)
+	}
+	
+	@Test
+	def void testFragmentRecursive_04() {
+		val fragments = '#11 myName ((myPrev))'.parseAndValidate
+		assertNotNull(fragments)
+		assertEquals('myName', fragments.element.name)
+		val prev = (fragments.element as PRFNamedWithAction).prev
+		assertEquals('myPrev', prev.name)
+		val node = NodeModelUtils.findActualNodeFor(prev)
+		assertEquals('myPrev', node.text)
 	}
 	
 	protected def parseAndValidate(CharSequence s) {
