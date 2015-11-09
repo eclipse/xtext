@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.analysis;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
@@ -147,6 +148,8 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 		}
 	}
 
+	private static Logger LOG = Logger.getLogger(GrammarPDAProvider.class);
+
 	@Inject
 	protected SerializerPDAElementFactory factory;
 
@@ -182,8 +185,12 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 			AbstractRule original = withParams.getOriginal();
 			if (original instanceof ParserRule && isValidRule((ParserRule) original)) {
 				ISerializationContext context = createContext((ParserRule) original, withParams.getParamValues());
-				Pda<ISerState, RuleCall> pda = createPDA(grammar, rule);
-				result.put(context, pda);
+				try {
+					Pda<ISerState, RuleCall> pda = createPDA(grammar, rule);
+					result.put(context, pda);
+				} catch (Exception e) {
+					LOG.error("Error creating PDA for context '" + context + "': " + e.getMessage(), e);
+				}
 			}
 		}
 		return result;
