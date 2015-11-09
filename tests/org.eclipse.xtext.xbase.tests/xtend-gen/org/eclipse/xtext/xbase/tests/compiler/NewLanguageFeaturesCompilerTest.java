@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.compiler.JavaVersion;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.tests.compiler.AbstractOutputComparingCompilerTests;

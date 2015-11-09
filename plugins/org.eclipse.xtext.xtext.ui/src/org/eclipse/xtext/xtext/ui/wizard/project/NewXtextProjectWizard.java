@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
@@ -73,6 +74,12 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		}
 		projectInfo.setEncoding(encoding);
 		projectInfo.setWorkbench(getWorkbench());
+		JavaVersion selectedBree = mainPage.getJavaVersion();
+		// Use old default for wizard as fall back, when something goes wrong
+		if (selectedBree != null) {
+			projectInfo.setJavaVersion(selectedBree);
+		}
+
 		BuildSystem buildSystem = advancedPage.getPreferredBuildSystem();
 		projectInfo.setPreferredBuildSystem(buildSystem);
 		projectInfo.setSourceLayout(advancedPage.getSourceLayout());

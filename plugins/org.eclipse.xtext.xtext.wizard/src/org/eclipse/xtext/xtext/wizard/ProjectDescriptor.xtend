@@ -101,8 +101,9 @@ abstract class ProjectDescriptor {
 		Bundle-RequiredExecutionEnvironment: «bree»
 	'''
 	
+	
 	def getBree() {
-		"JavaSE-1.6"
+		return config.javaVersion.bree
 	}
 	
 	private def manifestEntry(String key, Iterable<String> value) {

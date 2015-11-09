@@ -86,7 +86,7 @@ public class AdvancedNewProjectPage extends WizardPage {
             final Procedure1<Button> _function = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
-                it.setText("Eclipse Plugin");
+                it.setText(Messages.AdvancedNewProjectPage_projEclipse);
               }
             };
             Button _CheckBox = AdvancedNewProjectPage.this.CheckBox(it, _function);
@@ -94,7 +94,7 @@ public class AdvancedNewProjectPage extends WizardPage {
             final Procedure1<Button> _function_1 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
-                it.setText("IntelliJ IDEA Plugin");
+                it.setText(Messages.AdvancedNewProjectPage_projIdea);
                 it.setEnabled(true);
               }
             };
@@ -103,7 +103,7 @@ public class AdvancedNewProjectPage extends WizardPage {
             final Procedure1<Button> _function_2 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
-                it.setText("Web Integration");
+                it.setText(Messages.AdvancedNewProjectPage_projWeb);
                 it.setEnabled(true);
               }
             };
@@ -112,7 +112,7 @@ public class AdvancedNewProjectPage extends WizardPage {
             final Procedure1<Button> _function_3 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
-                it.setText("Generic IDE Support");
+                it.setText(Messages.AdvancedNewProjectPage_projIde);
                 it.setEnabled(true);
               }
             };
@@ -132,7 +132,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         final Procedure1<Group> _function_1 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
-            it.setText("Preferred Build System");
+            it.setText(Messages.AdvancedNewProjectPage_prefBuildSys);
             final Procedure1<Combo> _function = new Procedure1<Combo>() {
               @Override
               public void apply(final Combo it) {
@@ -156,7 +156,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         final Procedure1<Group> _function_2 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
-            it.setText("Source Layout");
+            it.setText(Messages.AdvancedNewProjectPage_srcLayout);
             final Procedure1<Combo> _function = new Procedure1<Combo>() {
               @Override
               public void apply(final Combo it) {
@@ -233,7 +233,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and = _not;
       }
       if (_and) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, "Maven integration for eclipse is not installed. Consider to install M2e.");
+        this.<Control>reportIssue(IMessageProvider.WARNING, Messages.AdvancedNewProjectPage_noM2e);
       }
       boolean _and_1 = false;
       boolean _isSelected_1 = this.isSelected(this.preferredBuildSystem, BuildSystem.GRADLE);
@@ -245,7 +245,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and_1 = _not_1;
       }
       if (_and_1) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, "Gradle integration for eclipse is not installed. Consider to install Buildship.");
+        this.<Control>reportIssue(IMessageProvider.WARNING, Messages.AdvancedNewProjectPage_noBuildship);
       }
       boolean _and_2 = false;
       boolean _isSelected_2 = this.isSelected(this.preferredBuildSystem, BuildSystem.GRADLE);
@@ -256,7 +256,8 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and_2 = _selection;
       }
       if (_and_2) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, "Building Eclipse Plugins with Gradle is not yet supported. An additional Maven Tycho build will be created");
+        this.<Control>reportIssue(IMessageProvider.WARNING, 
+          Messages.AdvancedNewProjectPage_eclipseAndGradleWarn);
       }
       boolean _and_3 = false;
       boolean _isSelected_3 = this.isSelected(this.preferredBuildSystem, BuildSystem.MAVEN);
@@ -267,7 +268,8 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and_3 = _selection_1;
       }
       if (_and_3) {
-        this.<Control>reportIssue(IMessageProvider.WARNING, "Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created");
+        this.<Control>reportIssue(IMessageProvider.WARNING, 
+          Messages.AdvancedNewProjectPage_ideaAndMavenWarn);
       }
       boolean _and_4 = false;
       boolean _isSelected_4 = this.isSelected(this.preferredBuildSystem, BuildSystem.NONE);
@@ -278,7 +280,8 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and_4 = _selection_2;
       }
       if (_and_4) {
-        this.<Control>reportIssue(IMessageProvider.INFORMATION, "IntelliJ Plugin requires Gradle build. An additional Gradle build will be created");
+        this.<Control>reportIssue(IMessageProvider.INFORMATION, 
+          Messages.AdvancedNewProjectPage_ideaReqGradleInfo);
       }
       Object _source = null;
       if (e!=null) {

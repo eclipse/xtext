@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -142,6 +143,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       }
     }
     return files;
+  }
+  
+  public String getJavaVersion() {
+    WizardConfiguration _config = this.getConfig();
+    JavaVersion _javaVersion = _config.getJavaVersion();
+    return _javaVersion.getQualifier();
   }
   
   private CharSequence loadResource(final String resourcePath) {
@@ -275,11 +282,17 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("sourceCompatibility = \'1.6\'");
-        _builder.newLine();
+        _builder.append("sourceCompatibility = \'");
+        String _javaVersion = ParentProjectDescriptor.this.getJavaVersion();
+        _builder.append(_javaVersion, "\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("targetCompatibility = \'1.6\'");
-        _builder.newLine();
+        _builder.append("targetCompatibility = \'");
+        String _javaVersion_1 = ParentProjectDescriptor.this.getJavaVersion();
+        _builder.append(_javaVersion_1, "\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
@@ -638,11 +651,17 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("</project.build.sourceEncoding>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("<maven.compiler.source>1.6</maven.compiler.source>");
-        _builder.newLine();
+        _builder.append("<maven.compiler.source>");
+        String _javaVersion = ParentProjectDescriptor.this.getJavaVersion();
+        _builder.append(_javaVersion, "\t");
+        _builder.append("</maven.compiler.source>");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("<maven.compiler.target>1.6</maven.compiler.target>");
-        _builder.newLine();
+        _builder.append("<maven.compiler.target>");
+        String _javaVersion_1 = ParentProjectDescriptor.this.getJavaVersion();
+        _builder.append(_javaVersion_1, "\t");
+        _builder.append("</maven.compiler.target>");
+        _builder.newLineIfNotEmpty();
         _builder.append("</properties>");
         _builder.newLine();
         _builder.append("<modules>");

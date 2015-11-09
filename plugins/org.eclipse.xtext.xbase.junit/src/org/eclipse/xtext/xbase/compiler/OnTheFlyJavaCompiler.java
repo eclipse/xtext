@@ -38,6 +38,7 @@ import org.eclipse.jdt.internal.compiler.batch.Main;
 import org.eclipse.jdt.internal.compiler.env.NameEnvironmentAnswer;
 import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.Tuples;
