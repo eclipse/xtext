@@ -27,10 +27,10 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xtext.RuleNames;
+import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Binder;
@@ -119,15 +119,9 @@ public class GrammarAccessUtil {
 	 * @since 2.7
 	 */
 	public static String serialize(EObject obj, String prefix, String lineDelimiter) {
-		String s;
-		try {
-			SaveOptions options = SaveOptions.newBuilder().format().getOptions();
-			s = getSerializer(lineDelimiter).serialize(obj, options);
-		} catch (Exception e) {
-			s = e.toString();
-		}
-		s = prefix + s.trim().replaceAll("(\\r?\\n)", "$1" + prefix).replaceAll("/\\*", "/ *").replaceAll("\\*/", "* /");
-		return s;
+		ISerializer serializer = getSerializer(lineDelimiter);
+		String result = GrammarAccessExtensions.grammarFragmentToString(serializer, obj, prefix);
+		return result;
 	}
 
 	private static ISerializer getSerializer(final String delimiter) {
