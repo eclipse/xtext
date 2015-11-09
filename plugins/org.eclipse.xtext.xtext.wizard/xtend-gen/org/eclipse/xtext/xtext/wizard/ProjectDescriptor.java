@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -229,7 +230,8 @@ public abstract class ProjectDescriptor {
   }
   
   public String getBree() {
-    return "JavaSE-1.6";
+    JavaVersion _javaVersion = this.config.getJavaVersion();
+    return _javaVersion.getBree();
   }
   
   private String manifestEntry(final String key, final Iterable<String> value) {

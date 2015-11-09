@@ -79,7 +79,7 @@ import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
-import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
+import static org.eclipse.xtext.util.JavaVersion.*
 import org.eclipse.xtext.common.types.JvmFeature
 import org.eclipse.xtext.workspace.IProjectConfig
 import org.eclipse.xtext.generator.trace.AbsoluteURI

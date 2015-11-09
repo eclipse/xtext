@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.JavaVersion;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -22,6 +23,9 @@ public class JavaVersionModule implements Module {
 
 	private final JavaVersion targetVersion;
 	
+	/**
+	 * @since 2.9
+	 */
 	public JavaVersionModule(JavaVersion version) {
 		this.targetVersion = version;
 	}

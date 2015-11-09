@@ -32,6 +32,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.JavaProjectFactory;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
@@ -111,6 +112,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		factory.addProjectNatures(JavaCore.NATURE_ID);
 		factory.addBuilderIds(JavaCore.BUILDER_ID);
 		factory.addFolders(Lists.newArrayList(descriptor.getSourceFolders()));
+		factory.setJreContainerEntry(JREContainerProvider.getJREContainerEntry(descriptor.getBree()));
 		if (needsM2eIntegration(descriptor)) {
 			factory.setDefaultOutput("target/classes");
 			if (!descriptor.isEclipsePluginProject()) {

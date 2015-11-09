@@ -22,7 +22,7 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.xtext.xtext.ui.internal.Activator
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.SourceLayout
-
+import static org.eclipse.xtext.xtext.ui.wizard.project.Messages.*
 import static org.osgi.framework.Bundle.*
 
 class AdvancedNewProjectPage extends WizardPage {
@@ -47,21 +47,22 @@ class AdvancedNewProjectPage extends WizardPage {
 		control = new Composite(parent, SWT.NONE) => [
 			layoutData = new GridData(SWT.FILL, SWT.FILL, true, true)
 			layout = new GridLayout(1, false)
+			
 			Group [
 				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
 				createUiProject = CheckBox [
-					text = "Eclipse Plugin"
+					text = AdvancedNewProjectPage_projEclipse
 				]
 				createIdeaProject = CheckBox [
-					text = "IntelliJ IDEA Plugin"
+					text = AdvancedNewProjectPage_projIdea
 					enabled = true
 				]
 				createWebProject = CheckBox [
-					text = "Web Integration"
+					text = AdvancedNewProjectPage_projWeb
 					enabled = true
 				]
 				createIdeProject = CheckBox [
-					text = "Generic IDE Support"
+					text = AdvancedNewProjectPage_projIde
 					enabled = true
 				]
 				createTestProject = CheckBox [
@@ -69,14 +70,14 @@ class AdvancedNewProjectPage extends WizardPage {
 				]
 			]
 			Group [
-				text = "Preferred Build System"
+				text = AdvancedNewProjectPage_prefBuildSys
 				preferredBuildSystem = DropDown[
 					enabled = true
 					items = BuildSystem.values.map[toString]
 				]
 			]
 			Group [
-				text = "Source Layout"
+				text = AdvancedNewProjectPage_srcLayout
 				sourceLayout = DropDown[
 					enabled = true
 					items = SourceLayout.values.map[toString]
@@ -116,19 +117,22 @@ class AdvancedNewProjectPage extends WizardPage {
 	def checkWidgets(SelectionEvent e) {
 
 		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && !isBundleResolved("org.eclipse.m2e.maven.runtime")) {
-			reportIssue(WARNING, 'Maven integration for eclipse is not installed. Consider to install M2e.')
+			reportIssue(WARNING, AdvancedNewProjectPage_noM2e)
 		}
 		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && !isBundleResolved("org.eclipse.buildship.core")) {
-			reportIssue(WARNING, 'Gradle integration for eclipse is not installed. Consider to install Buildship.')
+			reportIssue(WARNING, AdvancedNewProjectPage_noBuildship)
 		}
 		if (preferredBuildSystem.isSelected(BuildSystem.GRADLE) && createUiProject.selection) {
-			reportIssue(WARNING, 'Building Eclipse Plugins with Gradle is not yet supported. An additional Maven Tycho build will be created')
+			reportIssue(WARNING,
+				AdvancedNewProjectPage_eclipseAndGradleWarn)
 		}
 		if (preferredBuildSystem.isSelected(BuildSystem.MAVEN) && createIdeaProject.selection) {
-			reportIssue(WARNING, 'Building IntelliJ Plugins with Maven is not yet supported. An additional Gradle build will be created')
+			reportIssue(WARNING,
+				AdvancedNewProjectPage_ideaAndMavenWarn)
 		}
 		if (preferredBuildSystem.isSelected(BuildSystem.NONE) && createIdeaProject.selection) {
-			reportIssue(INFORMATION, 'IntelliJ Plugin requires Gradle build. An additional Gradle build will be created')
+			reportIssue(INFORMATION,
+				AdvancedNewProjectPage_ideaReqGradleInfo)
 		}
 
 		val source = e?.source
@@ -147,7 +151,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				])
 			}
 		}
-		
+
 		if (preferredBuildSystem.isSelected(BuildSystem.NONE) && sourceLayout.isSelected(SourceLayout.MAVEN)) {
 			if (preferredBuildSystem === source) {
 				reportIssue(ERROR, '''
