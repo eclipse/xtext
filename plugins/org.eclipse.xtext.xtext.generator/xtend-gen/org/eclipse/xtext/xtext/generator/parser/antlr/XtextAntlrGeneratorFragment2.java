@@ -920,7 +920,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
               _builder.append("\t");
               _builder.append("protected ");
               _builder.append(TokenSource.class, "\t");
-              _builder.append(" createLexer(CharStream stream) {");
+              _builder.append(" createLexer(");
+              _builder.append(CharStream.class, "\t");
+              _builder.append(" stream) {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("\t");
