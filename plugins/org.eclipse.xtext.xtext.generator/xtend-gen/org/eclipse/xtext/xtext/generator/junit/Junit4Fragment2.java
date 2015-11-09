@@ -133,11 +133,17 @@ public class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
     IBundleProjectConfig _runtimeTest_4 = _projectConfig_9.getRuntimeTest();
     IXtextGeneratorFileSystemAccess _src = _runtimeTest_4.getSrc();
     _generateExampleRuntimeTest.writeTo(_src);
-    JavaFileAccess _generateUiInjectorProvider = this.generateUiInjectorProvider();
     IXtextProjectConfig _projectConfig_10 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePluginTest_3 = _projectConfig_10.getEclipsePluginTest();
-    IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePluginTest_3.getSrcGen();
-    _generateUiInjectorProvider.writeTo(_srcGen_1);
+    IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_10.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin_2.getSrcGen();
+    boolean _tripleNotEquals = (_srcGen_1 != null);
+    if (_tripleNotEquals) {
+      JavaFileAccess _generateUiInjectorProvider = this.generateUiInjectorProvider();
+      IXtextProjectConfig _projectConfig_11 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePluginTest_3 = _projectConfig_11.getEclipsePluginTest();
+      IXtextGeneratorFileSystemAccess _srcGen_2 = _eclipsePluginTest_3.getSrcGen();
+      _generateUiInjectorProvider.writeTo(_srcGen_2);
+    }
   }
   
   public JavaFileAccess generateExampleRuntimeTest() {

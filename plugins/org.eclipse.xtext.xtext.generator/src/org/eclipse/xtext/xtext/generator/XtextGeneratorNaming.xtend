@@ -74,8 +74,15 @@ class XtextGeneratorNaming {
 		new TypeReference(grammar.eclipsePluginBasePackage, getSimpleName(grammar) + 'ExecutableExtensionFactory')
 	}
 	
+	/**
+	 * @return name for the eclipsePlugin Activator or <code>null</code> if eclipsePlugin has no name
+	 */
 	def getEclipsePluginActivator() {
 		val pluginName = projectConfig.eclipsePlugin.name
+		
+		if(pluginName === null) {
+			return null
+		}
 		
 		// start determining the activator's name by stripping the common ".ui" suffix
 		var activatorName = pluginName.replaceAll('\\.ui$', '')

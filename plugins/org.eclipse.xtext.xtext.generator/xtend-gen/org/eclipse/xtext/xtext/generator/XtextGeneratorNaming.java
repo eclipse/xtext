@@ -101,11 +101,17 @@ public class XtextGeneratorNaming {
     return new TypeReference(_eclipsePluginBasePackage, _plus);
   }
   
+  /**
+   * @return name for the eclipsePlugin Activator or <code>null</code> if eclipsePlugin has no name
+   */
   public TypeReference getEclipsePluginActivator() {
     TypeReference _xblockexpression = null;
     {
       IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
       final String pluginName = _eclipsePlugin.getName();
+      if ((pluginName == null)) {
+        return null;
+      }
       String activatorName = pluginName.replaceAll("\\.ui$", "");
       int _lastIndexOf = activatorName.lastIndexOf(".");
       int _plus = (_lastIndexOf + 1);

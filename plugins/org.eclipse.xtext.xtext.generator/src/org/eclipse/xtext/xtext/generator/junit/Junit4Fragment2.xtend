@@ -54,7 +54,8 @@ class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
 		]
 		generateInjectorProvider.writeTo(projectConfig.runtimeTest.srcGen)
 		generateExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)
-		generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginTest.srcGen)
+		if(projectConfig.eclipsePlugin.srcGen !== null)
+			generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginTest.srcGen)
 	}
 	
 	def JavaFileAccess generateExampleRuntimeTest() {

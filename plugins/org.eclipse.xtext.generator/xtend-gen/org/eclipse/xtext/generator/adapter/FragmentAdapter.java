@@ -597,7 +597,10 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
         String _eclipsePluginBasePackage = FragmentAdapter.this._xtextGeneratorNaming.getEclipsePluginBasePackage(_grammar_1);
         it.setUiBasePackage(_eclipsePluginBasePackage);
         TypeReference _eclipsePluginActivator = FragmentAdapter.this._xtextGeneratorNaming.getEclipsePluginActivator();
-        String _name = _eclipsePluginActivator.getName();
+        String _name = null;
+        if (_eclipsePluginActivator!=null) {
+          _name=_eclipsePluginActivator.getName();
+        }
         it.setActivatorName(_name);
         IXtextProjectConfig _projectConfig_3 = FragmentAdapter.this.getProjectConfig();
         IBundleProjectConfig _runtimeTest = _projectConfig_3.getRuntimeTest();
