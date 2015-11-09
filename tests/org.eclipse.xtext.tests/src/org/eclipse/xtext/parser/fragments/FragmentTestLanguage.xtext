@@ -19,6 +19,8 @@ ParserRuleFragments: {ParserRuleFragments}
 //  | '#7' element=PRFNamedWithActionInFragment3
   | '#8' element=PRFNamedWithFQN
   | '#9' element=PRFWithPredicate
+  | '#10' element=PRFNamedRecursive
+  | '#11' element=PRFNamedRecursiveFragment
   )
 ;
 
@@ -26,6 +28,14 @@ PRFNamed: PRFNamedFragment (
 	  ':' ref=[PRFNamed]
 	| '-' PRFNamedRef
 	)?
+;
+
+PRFNamedRecursive returns PRFNamedWithAction:
+	name=ID RecursiveFromFragment
+;
+
+PRFNamedRecursiveFragment returns PRFNamedWithAction:
+	name=ID RecursiveFragment
 ;
 
 PRFNamedRefFirst returns PRFNamed:
@@ -90,4 +100,19 @@ fragment PRFNamedFragment returns PRFNamed:
 
 fragment PRFNamedRef returns PRFNamed:
 	ref=[PRFNamed]
+;
+fragment RecursiveFromFragment returns PRFNamedWithAction:
+	prev=NamedInParentheses
+;
+
+NamedInParentheses returns PRFNamed:
+	'(' NamedInParentheses ')' | {PRFNamed} name=ID
+;
+
+fragment RecursiveFragment returns PRFNamedWithAction:
+	'(' RecursiveFragment ')' | prev=NamedByAction
+;
+
+NamedByAction returns PRFNamed:
+	{PRFNamed} name=ID
 ;

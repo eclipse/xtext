@@ -32,7 +32,15 @@ public class FragmentTestLanguageExSemanticSequencer extends FragmentTestLanguag
 		if (epackage == FragmentTestLanguagePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case FragmentTestLanguagePackage.PRF_NAMED:
-				if (rule == grammarAccess.getPRFNamedRefFirstRule()) {
+				if (rule == grammarAccess.getNamedByActionRule()) {
+					sequence_NamedByAction(context, (PRFNamed) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getNamedInParenthesesRule()) {
+					sequence_NamedInParentheses(context, (PRFNamed) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getPRFNamedRefFirstRule()) {
 					sequence_PRFNamedFragment_PRFNamedRefFirst(context, (PRFNamed) semanticObject); 
 					return; 
 				}
@@ -51,8 +59,19 @@ public class FragmentTestLanguageExSemanticSequencer extends FragmentTestLanguag
 				}
 				else break;
 			case FragmentTestLanguagePackage.PRF_NAMED_WITH_ACTION:
-				sequence_PRFNamedWithAction(context, (PRFNamedWithAction) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getPRFNamedRecursiveFragmentRule()) {
+					sequence_PRFNamedRecursiveFragment_RecursiveFragment(context, (PRFNamedWithAction) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getPRFNamedRecursiveRule()) {
+					sequence_PRFNamedRecursive_RecursiveFromFragment(context, (PRFNamedWithAction) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getPRFNamedWithActionRule()) {
+					sequence_PRFNamedWithAction(context, (PRFNamedWithAction) semanticObject); 
+					return; 
+				}
+				else break;
 			case FragmentTestLanguagePackage.PARSER_RULE_FRAGMENTS:
 				sequence_ParserRuleFragments(context, (ParserRuleFragments) semanticObject); 
 				return; 

@@ -237,6 +237,52 @@ ruleParserRuleFragments returns [EObject current=null]
 	    }
 
 )
+))
+    |(	otherlv_15='#10' 
+    {
+    	newLeafNode(otherlv_15, grammarAccess.getParserRuleFragmentsAccess().getNumberSignDigitOneDigitZeroKeyword_1_6_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParserRuleFragmentsAccess().getElementPRFNamedRecursiveParserRuleCall_1_6_1_0()); 
+	    }
+		lv_element_16_0=rulePRFNamedRecursive		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParserRuleFragmentsRule());
+	        }
+       		set(
+       			$current, 
+       			"element",
+        		lv_element_16_0, 
+        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFNamedRecursive");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |(	otherlv_17='#11' 
+    {
+    	newLeafNode(otherlv_17, grammarAccess.getParserRuleFragmentsAccess().getNumberSignDigitOneDigitOneKeyword_1_7_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParserRuleFragmentsAccess().getElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0()); 
+	    }
+		lv_element_18_0=rulePRFNamedRecursiveFragment		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParserRuleFragmentsRule());
+	        }
+       		set(
+       			$current, 
+       			"element",
+        		lv_element_18_0, 
+        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFNamedRecursiveFragment");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))))
 ;
 
@@ -305,6 +351,108 @@ rulePRFNamed returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 ))?)
+;
+
+
+
+
+
+// Entry rule entryRulePRFNamedRecursive
+entryRulePRFNamedRecursive returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getPRFNamedRecursiveRule()); }
+	 iv_rulePRFNamedRecursive=rulePRFNamedRecursive 
+	 { $current=$iv_rulePRFNamedRecursive.current; } 
+	 EOF 
+;
+
+// Rule PRFNamedRecursive
+rulePRFNamedRecursive returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		lv_name_0_0=RULE_ID
+		{
+			newLeafNode(lv_name_0_0, grammarAccess.getPRFNamedRecursiveAccess().getNameIDTerminalRuleCall_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getPRFNamedRecursiveRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_0_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+)
+    { 
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.getPRFNamedRecursiveRule());
+		}
+        newCompositeNode(grammarAccess.getPRFNamedRecursiveAccess().getRecursiveFromFragmentParserRuleCall_1()); 
+    }
+    this_RecursiveFromFragment_1=ruleRecursiveFromFragment[$current]
+    { 
+        $current = $this_RecursiveFromFragment_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRulePRFNamedRecursiveFragment
+entryRulePRFNamedRecursiveFragment returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getPRFNamedRecursiveFragmentRule()); }
+	 iv_rulePRFNamedRecursiveFragment=rulePRFNamedRecursiveFragment 
+	 { $current=$iv_rulePRFNamedRecursiveFragment.current; } 
+	 EOF 
+;
+
+// Rule PRFNamedRecursiveFragment
+rulePRFNamedRecursiveFragment returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		lv_name_0_0=RULE_ID
+		{
+			newLeafNode(lv_name_0_0, grammarAccess.getPRFNamedRecursiveFragmentAccess().getNameIDTerminalRuleCall_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getPRFNamedRecursiveFragmentRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_0_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+)
+    { 
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.getPRFNamedRecursiveFragmentRule());
+		}
+        newCompositeNode(grammarAccess.getPRFNamedRecursiveFragmentAccess().getRecursiveFragmentParserRuleCall_1()); 
+    }
+    this_RecursiveFragment_1=ruleRecursiveFragment[$current]
+    { 
+        $current = $this_RecursiveFragment_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
 ;
 
 
@@ -741,6 +889,197 @@ rulePRFNamedRef [EObject in_current] returns [EObject current=in_current]
 
 )
 )
+;
+
+
+
+
+
+
+// Rule RecursiveFromFragment
+ruleRecursiveFromFragment [EObject in_current] returns [EObject current=in_current] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRecursiveFromFragmentAccess().getPrevNamedInParenthesesParserRuleCall_0()); 
+	    }
+		lv_prev_0_0=ruleNamedInParentheses		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRecursiveFromFragmentRule());
+	        }
+       		set(
+       			$current, 
+       			"prev",
+        		lv_prev_0_0, 
+        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.NamedInParentheses");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+;
+
+
+
+
+
+// Entry rule entryRuleNamedInParentheses
+entryRuleNamedInParentheses returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNamedInParenthesesRule()); }
+	 iv_ruleNamedInParentheses=ruleNamedInParentheses 
+	 { $current=$iv_ruleNamedInParentheses.current; } 
+	 EOF 
+;
+
+// Rule NamedInParentheses
+ruleNamedInParentheses returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((	otherlv_0='(' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getNamedInParenthesesAccess().getLeftParenthesisKeyword_0_0());
+    }
+
+    { 
+        newCompositeNode(grammarAccess.getNamedInParenthesesAccess().getNamedInParenthesesParserRuleCall_0_1()); 
+    }
+    this_NamedInParentheses_1=ruleNamedInParentheses
+    { 
+        $current = $this_NamedInParentheses_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+	otherlv_2=')' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getNamedInParenthesesAccess().getRightParenthesisKeyword_0_2());
+    }
+)
+    |((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getNamedInParenthesesAccess().getPRFNamedAction_1_0(),
+            $current);
+    }
+)(
+(
+		lv_name_4_0=RULE_ID
+		{
+			newLeafNode(lv_name_4_0, grammarAccess.getNamedInParenthesesAccess().getNameIDTerminalRuleCall_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNamedInParenthesesRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_4_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+)))
+;
+
+
+
+
+
+
+// Rule RecursiveFragment
+ruleRecursiveFragment [EObject in_current] returns [EObject current=in_current] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((	otherlv_0='(' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getRecursiveFragmentAccess().getLeftParenthesisKeyword_0_0());
+    }
+
+    { 
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.getRecursiveFragmentRule());
+		}
+        newCompositeNode(grammarAccess.getRecursiveFragmentAccess().getRecursiveFragmentParserRuleCall_0_1()); 
+    }
+    this_RecursiveFragment_1=ruleRecursiveFragment[$current]
+    { 
+        $current = $this_RecursiveFragment_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+	otherlv_2=')' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getRecursiveFragmentAccess().getRightParenthesisKeyword_0_2());
+    }
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRecursiveFragmentAccess().getPrevNamedByActionParserRuleCall_1_0()); 
+	    }
+		lv_prev_3_0=ruleNamedByAction		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRecursiveFragmentRule());
+	        }
+       		set(
+       			$current, 
+       			"prev",
+        		lv_prev_3_0, 
+        		"org.eclipse.xtext.parser.fragments.FragmentTestLanguage.NamedByAction");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleNamedByAction
+entryRuleNamedByAction returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNamedByActionRule()); }
+	 iv_ruleNamedByAction=ruleNamedByAction 
+	 { $current=$iv_ruleNamedByAction.current; } 
+	 EOF 
+;
+
+// Rule NamedByAction
+ruleNamedByAction returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getNamedByActionAccess().getPRFNamedAction_0(),
+            $current);
+    }
+)(
+(
+		lv_name_1_0=RULE_ID
+		{
+			newLeafNode(lv_name_1_0, grammarAccess.getNamedByActionAccess().getNameIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNamedByActionRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+))
 ;
 
 
