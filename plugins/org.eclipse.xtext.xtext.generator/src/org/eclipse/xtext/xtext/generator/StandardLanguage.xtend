@@ -36,12 +36,13 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
+import java.util.List
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @noextend
  */
-@Accessors(PUBLIC_SETTER)
+@Accessors(PUBLIC_SETTER, PROTECTED_GETTER)
 @Log class StandardLanguage extends XtextGeneratorLanguage {
 	
 	GrammarAccessFragment2 grammarAccess = new GrammarAccessFragment2
@@ -124,32 +125,38 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 	override protected getImplicitFragments() {
 		val fragments = newArrayList 
 		fragments += super.getImplicitFragments
-		fragments.add(grammarAccess)
-		fragments.add(emfGenerator)
-		fragments.add(serializer)
-		fragments.add(resourceFactoryFragment)
-		fragments.add(parserGenerator)
-		fragments.add(validator)
-		fragments.add(scopeProvider)
-		fragments.add(qualifiedNamesProvider)
-		fragments.add(builder)
-		fragments.add(generator)
-		fragments.add(formatter)
-		fragments.add(labelProvider)
-		fragments.add(quickOutline)
-		fragments.add(outline)
-		fragments.add(quickFixProvider)
-		fragments.add(contentAssist)
-		fragments.add(junitSupport)
-		fragments.add(renameRefactoring)
-		fragments.add(commonTypesSupport)
-		fragments.add(xbaseSupport)
-		fragments.add(xtypeSupport)
-		fragments.add(codeTemplates)
-		fragments.add(compareEditor)
-		fragments.add(ideaParser)
-		fragments.add(ideaPlugin)
-		fragments.add(webSupport)
+		fragments += grammarAccess
+		fragments += emfGenerator
+		fragments += serializer
+		fragments += resourceFactoryFragment
+		fragments += parserGenerator
+		fragments += validator
+		fragments += scopeProvider
+		fragments += qualifiedNamesProvider
+		fragments += builder
+		fragments += generator
+		fragments += formatter
+		fragments += labelProvider
+		fragments += quickOutline
+		fragments += outline
+		fragments += quickFixProvider
+		fragments += contentAssist
+		fragments += junitSupport
+		fragments += renameRefactoring
+		fragments += commonTypesSupport
+		fragments += xbaseSupport
+		fragments += xtypeSupport
+		fragments += codeTemplates
+		fragments += compareEditor
+		fragments += ideaParser
+		fragments += ideaPlugin
+		fragments += webSupport
 		fragments
+	}
+	
+	private def +=(List<IXtextGeneratorFragment> list, IXtextGeneratorFragment fragment) {
+		if (fragment !== null) {
+			list.add(fragment)
+		}
 	}
 }
