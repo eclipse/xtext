@@ -15,7 +15,7 @@ body {
 	font-weight: 300;
 	font-size: 16px;
 	line-height: 1.5em; */
-	font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-weight: 300;
 	line-height: 20px;
 	font-size: 16px;
@@ -23,7 +23,7 @@ body {
 }
 
 p {
-	font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-weight: 300;
 	line-height: 1.4em;
 	font-size: 16px;
@@ -308,7 +308,7 @@ table tr:hover td {
 }
 
 .image-slider h2 {
-	margin-top: 100px;
+	margin-top: 80px;
 	margin-bottom: 50px;
 	font-family: 'Lato', sans-serif;
 	font-size: 42px;
@@ -510,11 +510,11 @@ img.screenshot {
     background-repeat: no-repeat;
 }
 
-#intro-screenshot {
+.intro-screenshot {
 	display: block;
     margin: 0 auto;
-	height: 460px; 
 	width: 580px;
+	box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.15);
 }
 
 .introduction .zoom {
@@ -894,7 +894,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 
 #extra .inner {
 	color: #fff;
-	font-family: 'Vollkorn', serif;
+	font-family: 'Lato', sans-serif;
 	font-weight: 400;
 	line-height: 1.3em;
 	font-style: normal;
@@ -1025,19 +1025,6 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	font-family: 'Lato', sans-serif;
 }
 
-#screenshots {
-	background: #E8E8E8;
-	border-top: 1px solid #CCC;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
-#screenshots .inner {
-	padding-top: 2.5em;
-	padding-bottom: 2.5em;
-	border-top: 1px solid #FFF;
-}
-
 #tweet a {
 	color: #fff;
 	text-decoration: underline;
@@ -1084,7 +1071,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 .page-heading {
-	font-family: 'Vollkorn', serif;
+	font-family: 'Lato', sans-serif;
 	color: #fff;
 	font-weight: 400;
 	line-height: 1.3em;
@@ -1094,7 +1081,7 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 }
 
 #page-heading {
-	font-family: 'Vollkorn', serif;
+	font-family: 'Lato', sans-serif;
 	color: #444;
 	text-align: center;
 }
@@ -1155,7 +1142,7 @@ ul.list3 li {
 }
 
 .navbar li {
-	font-family: 'Vollkorn', serif;
+	font-family: 'Lato', sans-serif;
 	color: #6B6B6B;
 	font-weight: 400;
 	line-height: 1.3em;

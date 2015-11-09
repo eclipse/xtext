@@ -6,39 +6,44 @@ title: Language Engineering Made Easy!
 <!--Container-->
 <div id="header_wrapper">
   <div class="container image-slider">
-    <div class="span11">
+    <div class="span12">
       <h2>
         Language Engineering For Everyone!
       </h2>
       <p>Xtext is a framework for development of programming languages
         and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure,
         including <b>parser</b>, <b>linker</b>, <b>typechecker</b>, <b>compiler</b> as well as editing support for <b>Eclipse</b>, <b>IntelliJ IDEA</b> and your favorite <b>web browser</b>.
-        <br/><i><a href="#intro-quotes">Read more...</a></i></p>
-        <a href="#"><img src="{{ site.baseurl }}/images/slides/Introduction.png"
-          alt="image" id="intro-screenshot"/></a>
-        <a href="https://vimeo.com/8260921"
-          data-rel="prettyPhoto" title="Introduction" class="zoom zoom_icon"></a>
-        <!--a href="download.html" class="btn_download pull_right"></a-->
-        <p>Check out the latest news :
-          {% for post in site.categories.news limit:1 %}
-            <a href="{{ site.baseurl }}/news.html">{{ post.title }}</a>
-          {% endfor %}</p>
+        <br/><i><a href="#intro-quotes">Learn more...</a></i></p>
     </div>
-    <!--div class="span6">
-      <p><strong><a href="releasenotes.html">Check out the latest release</a></strong></p>
-    </div-->
+    <div class="span12" style="margin-top: 10px; margin-bottom:10px;">
+      <ul id="screenshots" style="margin:0px;" class="newsticker">
+          <li><img class="intro-screenshot" src="{{ site.baseurl }}/images/eclipse_screenshot.png" alt="Xtext in Eclipse">
+          <li style="display:none;"><img class="intro-screenshot" src="{{ site.baseurl }}/images/idea_screenshot.png" alt="Xtext in IntelliJ IDEA">
+          <li style="display:none;"><img class="intro-screenshot" src="{{ site.baseurl }}/images/web_screenshot.png" alt="Xtext in Web Browser">
+      </ul>
+    </div>
+    <div class="span12" style="text-align:center;">
+      <a href="http://cta-redirect.hubspot.com/cta/redirect/761475/5f19e385-5578-4a5b-96b2-81413c6e6d20" style="margin:10px;" class="has-popover btn btn-primary btn-large pull_right">Download</a>
+      <script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script>
+      <script type="text/javascript">
+          hbspt.cta.load(761475, '5f19e385-5578-4a5b-96b2-81413c6e6d20');
+      </script>
+      <a href="http://cta-redirect.hubspot.com/cta/redirect/761475/1424bda7-dbb0-40bb-9469-8e93403bed7f" target="_blank" style="margin:10px;" class="has-popover btn btn-success btn-large">
+        Professional Support
+      </a>
+      <script type="text/javascript">
+        hbspt.cta.load(761475, '1424bda7-dbb0-40bb-9469-8e93403bed7f');
+      </script>
+    </div>
   </div>
 </div>
 
 <div id="intro-quotes" class="intro-reference">
   <div class="container">
-    <ul class="newsticker">
-      <li>“Easy grammar definition. Great IDE support. Very good tutorials and books.”</li>
-      <li>“It is very easy to start developing a language.”</li>
-      <li>“Xtext improves with every new release.”</li>
-      <li>“High code quality!”</li>
-      <li>“Xtext is a very comprehensive tool which enables fast-creation of DSLs.”</li>
-      <li>“Overall, I love Xtext, and use it in a variety of contexts.“</li>
+    <ul id="newsticker" class="newsticker">
+      {% for post in site.categories.news limit:2 %}
+            <li>Latest News: <a href="{{ site.baseurl }}/news.html" style="text-decoration: underline; color: #fff;">{{ post.title }}</a></li>
+      {% endfor %}</p>
     </ul>
   </div>
 </div>
@@ -66,8 +71,8 @@ title: Language Engineering Made Easy!
         <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
           Multi Platform</h4>
         <p>
-          Whether you are targeting developers or domain experts, you will be able to provide a dedicated smart editor. Syntax coloring, content assist and
-          <a href="#platform-comparison">many more features</a> are supported.
+          Whether you are targeting developers or domain experts, you will be able to provide a dedicated smart editor. Eclipse, IntelliJ IDEA and various browser
+          editors are supported. Have a look at our <a href="#platform-comparison">platform comparison chart</a>.
         </p>
       </div>
       <div class="span4">
@@ -94,10 +99,9 @@ title: Language Engineering Made Easy!
           For Gradle builds, you even get incremental compilation of your language files.
         </p>
       </div>
-    </div>
-    <hr/>
-    <div class="span12">
-      <p><i><a href="#feature-overview">Read more...</a></i></p>
+      <div class="span12">
+          <p><br/><i><a href="#feature-overview">Check out the features...</a></i></p>
+      </div>
     </div>
   </div>
 </div>
@@ -128,7 +132,7 @@ title: Language Engineering Made Easy!
           Build the Language You Want!</h4>
         <p>Xtext can build full-featured text editors for both general-purpose and domain-specific languages.
         In the background it uses the <i>LL(*)</i> parser generator of
-        <a href="http://www.antlr.org" target="_blank">ANTLR</a>, allowing to cover a wide range of syntaxes.
+        ANTLR, allowing to cover a wide range of syntaxes.
         Xtext editors have already been implemented for JavaScript, VHDL, Xtend, and many other languages.</p>
       </div>
       <div class="span4">
