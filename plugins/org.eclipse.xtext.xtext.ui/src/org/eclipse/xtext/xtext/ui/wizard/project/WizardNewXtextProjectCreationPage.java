@@ -148,8 +148,8 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		}
 		String[] array = brees.toArray(new String[] {});
 		Arrays.sort(array, Policy.getComparator());
-		comboToFill.setItems(array);
 		String selectionMemento = comboToFill.getText();
+		comboToFill.setItems(array);
 		int index = comboToFill.indexOf(selectionMemento);
 		if (index < 0) {
 			comboToFill.select(comboToFill.indexOf(JREContainerProvider.getDefaultBREE()));
