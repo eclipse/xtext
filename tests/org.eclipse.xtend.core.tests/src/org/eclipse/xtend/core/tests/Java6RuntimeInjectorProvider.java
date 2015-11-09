@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests;
 
-import org.eclipse.xtext.xbase.compiler.JavaVersion;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.compiler.JavaVersionModule;
 
 import com.google.inject.Guice;

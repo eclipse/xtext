@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.jvmmodel;
 
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.xbase.compiler.JavaVersion.*;
+import static org.eclipse.xtext.util.JavaVersion.*;
 
 import java.lang.annotation.Annotation;
 import java.util.Iterator;
