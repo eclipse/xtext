@@ -386,10 +386,17 @@ class GrammarAccessExtensions {
 	}
 	
 	def String grammarFragmentToString(EObject ele, String prefix) {
+		return serializer.grammarFragmentToString(ele, prefix)
+	}
+
+	/**
+	 * @noreference
+	 */
+	def static String grammarFragmentToString(ISerializer serializer, EObject object, String prefix) {
 		var String s
 		try {
 			val options = SaveOptions.newBuilder.format.options
-			s = serializer.serialize(ele, options)
+			s = serializer.serialize(object, options)
 		} catch (Exception e) {
 			s = e.toString
 		}

@@ -17,6 +17,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
@@ -52,7 +53,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2;
  * @author Sven Efftinge - Initial contribution and API
  * @noextend
  */
-@Accessors(AccessorType.PUBLIC_SETTER)
+@Accessors({ AccessorType.PUBLIC_SETTER, AccessorType.PROTECTED_GETTER })
 @Log
 @SuppressWarnings("all")
 public class StandardLanguage extends XtextGeneratorLanguage {
@@ -172,135 +173,273 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       final ArrayList<IXtextGeneratorFragment> fragments = CollectionLiterals.<IXtextGeneratorFragment>newArrayList();
       List<? extends IXtextGeneratorFragment> _implicitFragments = super.getImplicitFragments();
       Iterables.<IXtextGeneratorFragment>addAll(fragments, _implicitFragments);
-      fragments.add(this.grammarAccess);
-      fragments.add(this.emfGenerator);
-      fragments.add(this.serializer);
-      fragments.add(this.resourceFactoryFragment);
-      fragments.add(this.parserGenerator);
-      fragments.add(this.validator);
-      fragments.add(this.scopeProvider);
-      fragments.add(this.qualifiedNamesProvider);
-      fragments.add(this.builder);
-      fragments.add(this.generator);
-      fragments.add(this.formatter);
-      fragments.add(this.labelProvider);
-      fragments.add(this.quickOutline);
-      fragments.add(this.outline);
-      fragments.add(this.quickFixProvider);
-      fragments.add(this.contentAssist);
-      fragments.add(this.junitSupport);
-      fragments.add(this.renameRefactoring);
-      fragments.add(this.commonTypesSupport);
-      fragments.add(this.xbaseSupport);
-      fragments.add(this.xtypeSupport);
-      fragments.add(this.codeTemplates);
-      fragments.add(this.compareEditor);
-      fragments.add(this.ideaParser);
-      fragments.add(this.ideaPlugin);
-      fragments.add(this.webSupport);
+      this.operator_add(fragments, this.grammarAccess);
+      this.operator_add(fragments, this.emfGenerator);
+      this.operator_add(fragments, this.serializer);
+      this.operator_add(fragments, this.resourceFactoryFragment);
+      this.operator_add(fragments, this.parserGenerator);
+      this.operator_add(fragments, this.validator);
+      this.operator_add(fragments, this.scopeProvider);
+      this.operator_add(fragments, this.qualifiedNamesProvider);
+      this.operator_add(fragments, this.builder);
+      this.operator_add(fragments, this.generator);
+      this.operator_add(fragments, this.formatter);
+      this.operator_add(fragments, this.labelProvider);
+      this.operator_add(fragments, this.quickOutline);
+      this.operator_add(fragments, this.outline);
+      this.operator_add(fragments, this.quickFixProvider);
+      this.operator_add(fragments, this.contentAssist);
+      this.operator_add(fragments, this.junitSupport);
+      this.operator_add(fragments, this.renameRefactoring);
+      this.operator_add(fragments, this.commonTypesSupport);
+      this.operator_add(fragments, this.xbaseSupport);
+      this.operator_add(fragments, this.xtypeSupport);
+      this.operator_add(fragments, this.codeTemplates);
+      this.operator_add(fragments, this.compareEditor);
+      this.operator_add(fragments, this.ideaParser);
+      this.operator_add(fragments, this.ideaPlugin);
+      this.operator_add(fragments, this.webSupport);
       _xblockexpression = fragments;
     }
     return _xblockexpression;
+  }
+  
+  private boolean operator_add(final List<IXtextGeneratorFragment> list, final IXtextGeneratorFragment fragment) {
+    boolean _xifexpression = false;
+    if ((fragment != null)) {
+      _xifexpression = list.add(fragment);
+    }
+    return _xifexpression;
+  }
+  
+  @Pure
+  protected GrammarAccessFragment2 getGrammarAccess() {
+    return this.grammarAccess;
   }
   
   public void setGrammarAccess(final GrammarAccessFragment2 grammarAccess) {
     this.grammarAccess = grammarAccess;
   }
   
+  @Pure
+  protected SerializerFragment2 getSerializer() {
+    return this.serializer;
+  }
+  
   public void setSerializer(final SerializerFragment2 serializer) {
     this.serializer = serializer;
+  }
+  
+  @Pure
+  protected ResourceFactoryFragment2 getResourceFactoryFragment() {
+    return this.resourceFactoryFragment;
   }
   
   public void setResourceFactoryFragment(final ResourceFactoryFragment2 resourceFactoryFragment) {
     this.resourceFactoryFragment = resourceFactoryFragment;
   }
   
+  @Pure
+  protected EMFGeneratorFragment2 getEmfGenerator() {
+    return this.emfGenerator;
+  }
+  
   public void setEmfGenerator(final EMFGeneratorFragment2 emfGenerator) {
     this.emfGenerator = emfGenerator;
+  }
+  
+  @Pure
+  protected XtextAntlrGeneratorFragment2 getParserGenerator() {
+    return this.parserGenerator;
   }
   
   public void setParserGenerator(final XtextAntlrGeneratorFragment2 parserGenerator) {
     this.parserGenerator = parserGenerator;
   }
   
+  @Pure
+  protected ValidatorFragment2 getValidator() {
+    return this.validator;
+  }
+  
   public void setValidator(final ValidatorFragment2 validator) {
     this.validator = validator;
+  }
+  
+  @Pure
+  protected Formatter2Fragment2 getFormatter() {
+    return this.formatter;
   }
   
   public void setFormatter(final Formatter2Fragment2 formatter) {
     this.formatter = formatter;
   }
   
+  @Pure
+  protected GeneratorFragment2 getGenerator() {
+    return this.generator;
+  }
+  
   public void setGenerator(final GeneratorFragment2 generator) {
     this.generator = generator;
+  }
+  
+  @Pure
+  protected BuilderIntegrationFragment2 getBuilder() {
+    return this.builder;
   }
   
   public void setBuilder(final BuilderIntegrationFragment2 builder) {
     this.builder = builder;
   }
   
+  @Pure
+  protected ImportNamespacesScopingFragment2 getScopeProvider() {
+    return this.scopeProvider;
+  }
+  
   public void setScopeProvider(final ImportNamespacesScopingFragment2 scopeProvider) {
     this.scopeProvider = scopeProvider;
+  }
+  
+  @Pure
+  protected QualifiedNamesFragment2 getQualifiedNamesProvider() {
+    return this.qualifiedNamesProvider;
   }
   
   public void setQualifiedNamesProvider(final QualifiedNamesFragment2 qualifiedNamesProvider) {
     this.qualifiedNamesProvider = qualifiedNamesProvider;
   }
   
+  @Pure
+  protected Junit4Fragment2 getJunitSupport() {
+    return this.junitSupport;
+  }
+  
   public void setJunitSupport(final Junit4Fragment2 junitSupport) {
     this.junitSupport = junitSupport;
+  }
+  
+  @Pure
+  protected QuickfixProviderFragment2 getQuickFixProvider() {
+    return this.quickFixProvider;
   }
   
   public void setQuickFixProvider(final QuickfixProviderFragment2 quickFixProvider) {
     this.quickFixProvider = quickFixProvider;
   }
   
+  @Pure
+  protected LabelProviderFragment2 getLabelProvider() {
+    return this.labelProvider;
+  }
+  
   public void setLabelProvider(final LabelProviderFragment2 labelProvider) {
     this.labelProvider = labelProvider;
+  }
+  
+  @Pure
+  protected OutlineTreeProviderFragment2 getOutline() {
+    return this.outline;
   }
   
   public void setOutline(final OutlineTreeProviderFragment2 outline) {
     this.outline = outline;
   }
   
+  @Pure
+  protected QuickOutlineFragment2 getQuickOutline() {
+    return this.quickOutline;
+  }
+  
   public void setQuickOutline(final QuickOutlineFragment2 quickOutline) {
     this.quickOutline = quickOutline;
+  }
+  
+  @Pure
+  protected CompareFragment2 getCompareEditor() {
+    return this.compareEditor;
   }
   
   public void setCompareEditor(final CompareFragment2 compareEditor) {
     this.compareEditor = compareEditor;
   }
   
+  @Pure
+  protected ContentAssistFragment2 getContentAssist() {
+    return this.contentAssist;
+  }
+  
   public void setContentAssist(final ContentAssistFragment2 contentAssist) {
     this.contentAssist = contentAssist;
+  }
+  
+  @Pure
+  protected RefactorElementNameFragment2 getRenameRefactoring() {
+    return this.renameRefactoring;
   }
   
   public void setRenameRefactoring(final RefactorElementNameFragment2 renameRefactoring) {
     this.renameRefactoring = renameRefactoring;
   }
   
+  @Pure
+  protected CodetemplatesGeneratorFragment2 getCodeTemplates() {
+    return this.codeTemplates;
+  }
+  
   public void setCodeTemplates(final CodetemplatesGeneratorFragment2 codeTemplates) {
     this.codeTemplates = codeTemplates;
+  }
+  
+  @Pure
+  protected XtextAntlrIDEAGeneratorFragment getIdeaParser() {
+    return this.ideaParser;
   }
   
   public void setIdeaParser(final XtextAntlrIDEAGeneratorFragment ideaParser) {
     this.ideaParser = ideaParser;
   }
   
+  @Pure
+  protected TypesGeneratorFragment2 getCommonTypesSupport() {
+    return this.commonTypesSupport;
+  }
+  
   public void setCommonTypesSupport(final TypesGeneratorFragment2 commonTypesSupport) {
     this.commonTypesSupport = commonTypesSupport;
+  }
+  
+  @Pure
+  protected XtypeGeneratorFragment2 getXtypeSupport() {
+    return this.xtypeSupport;
   }
   
   public void setXtypeSupport(final XtypeGeneratorFragment2 xtypeSupport) {
     this.xtypeSupport = xtypeSupport;
   }
   
+  @Pure
+  protected XbaseGeneratorFragment2 getXbaseSupport() {
+    return this.xbaseSupport;
+  }
+  
   public void setXbaseSupport(final XbaseGeneratorFragment2 xbaseSupport) {
     this.xbaseSupport = xbaseSupport;
   }
   
+  @Pure
+  protected IdeaPluginGenerator getIdeaPlugin() {
+    return this.ideaPlugin;
+  }
+  
   public void setIdeaPlugin(final IdeaPluginGenerator ideaPlugin) {
     this.ideaPlugin = ideaPlugin;
+  }
+  
+  @Pure
+  protected WebIntegrationFragment getWebSupport() {
+    return this.webSupport;
   }
   
   public void setWebSupport(final WebIntegrationFragment webSupport) {

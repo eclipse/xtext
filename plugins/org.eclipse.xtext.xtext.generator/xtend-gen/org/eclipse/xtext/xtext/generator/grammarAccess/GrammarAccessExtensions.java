@@ -684,13 +684,20 @@ public class GrammarAccessExtensions {
   }
   
   public String grammarFragmentToString(final EObject ele, final String prefix) {
+    ISerializer _serializer = this.getSerializer();
+    return GrammarAccessExtensions.grammarFragmentToString(_serializer, ele, prefix);
+  }
+  
+  /**
+   * @noreference
+   */
+  public static String grammarFragmentToString(final ISerializer serializer, final EObject object, final String prefix) {
     String s = null;
     try {
       SaveOptions.Builder _newBuilder = SaveOptions.newBuilder();
       SaveOptions.Builder _format = _newBuilder.format();
       final SaveOptions options = _format.getOptions();
-      ISerializer _serializer = this.getSerializer();
-      String _serialize = _serializer.serialize(ele, options);
+      String _serialize = serializer.serialize(object, options);
       s = _serialize;
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
