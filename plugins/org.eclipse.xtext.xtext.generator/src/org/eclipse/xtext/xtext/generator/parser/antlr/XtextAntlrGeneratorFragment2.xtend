@@ -316,7 +316,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			
 				«IF grammar.allTerminalRules.exists[isSyntheticTerminalRule]»
 					@Override
-					protected «TokenSource» createLexer(CharStream stream) {
+					protected «TokenSource» createLexer(«CharStream» stream) {
 						return new «grammar.tokenSourceClass»(super.createLexer(stream));
 					}
 					
