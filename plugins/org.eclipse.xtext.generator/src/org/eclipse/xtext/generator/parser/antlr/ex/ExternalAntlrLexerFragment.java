@@ -52,6 +52,8 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 	
 	private boolean classSplitting = false;
 	
+	private boolean specialStateSwitchSplitting = false;
+	
 	private int casesPerSpecialStateSwitch = LexerSpecialStateTransitionSplitter.CASES_PER_SPECIAL_STATE_SWITCH;
 
 	private List<String> antlrParams = Lists.newArrayList();
@@ -134,6 +136,7 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 			String content = readFileIntoString(lexerJavaFile, encoding);
 			AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
 			splitter.setAllowDFAStaticClasses(false);
+			splitter.setSpecialStateSwitchSplitting(specialStateSwitchSplitting);
 			splitter.setCasesPerSpecialStateSwitch(casesPerSpecialStateSwitch);
 			writeStringIntoFile(lexerJavaFile, splitter.transform(), encoding);
 		}
@@ -282,6 +285,20 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 	 */
 	public void setClassSplitting(boolean value) {
 		this.classSplitting = value;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public boolean isSpecialStateSwitchSplitting() {
+		return specialStateSwitchSplitting;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setSpecialStateSwitchSplitting(boolean value) {
+		this.specialStateSwitchSplitting = value;
 	}
 
 	/**

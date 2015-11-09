@@ -69,6 +69,8 @@ public class LexerSpecialStateTransitionSplitter {
 	
 	private boolean allowDFAStaticClasses = true;
 	
+	private boolean specialStateSwitchSplitting = false;
+	
 	private int casesPerSpecialStateSwitch = CASES_PER_SPECIAL_STATE_SWITCH;
 	
 	public LexerSpecialStateTransitionSplitter(boolean ignoreCaseCountGuard) {
@@ -84,7 +86,12 @@ public class LexerSpecialStateTransitionSplitter {
 			if (allowDFAStaticClasses && !STATE_PATTERN.matcher(specialStateTransition).find())
 				staticOrNot = "static $1";
 			String tmpSpecialStateTransition = extractSpecialStateMethods(specialStateTransition);
-			String transformedDfa = staticOrNot + splitSpecialStateSwitch(tmpSpecialStateTransition) + "$3";
+			String transformedDfa;
+			if(specialStateSwitchSplitting){
+				transformedDfa = staticOrNot + splitSpecialStateSwitch(tmpSpecialStateTransition) + "$3";
+			}else{
+				transformedDfa = staticOrNot + tmpSpecialStateTransition + "$3";
+			}
 			dfaMatcher.appendReplacement(result, transformedDfa);
 		}
 		dfaMatcher.appendTail(result);
@@ -212,6 +219,20 @@ public class LexerSpecialStateTransitionSplitter {
 	 */
 	public void setAllowDFAStaticClasses(boolean value) {
 		this.allowDFAStaticClasses = value;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public boolean isSpecialStateSwitchSplitting() {
+		return specialStateSwitchSplitting;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setSpecialStateSwitchSplitting(boolean value) {
+		this.specialStateSwitchSplitting = value;
 	}
 	
 	/**

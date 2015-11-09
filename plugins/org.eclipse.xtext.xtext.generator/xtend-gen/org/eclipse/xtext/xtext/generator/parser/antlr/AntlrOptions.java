@@ -29,6 +29,8 @@ public class AntlrOptions {
   
   private boolean classSplitting = false;
   
+  private boolean specialStateSwitchSplitting = false;
+  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS;
   
@@ -58,10 +60,7 @@ public class AntlrOptions {
     this.methodsPerClass = _parseInt;
   }
   
-  /**
-   * @since 2.9
-   */
-  public void setCasesPerSpecialStateSwitch(final String casesPerSpecialStateSwitch){
+  public void setCasesPerSpecialStateSwitch(final String casesPerSpecialStateSwitch) {
     int _parseInt = Integer.parseInt(casesPerSpecialStateSwitch);
     this.casesPerSpecialStateSwitch = _parseInt;
   }
@@ -126,6 +125,15 @@ public class AntlrOptions {
   }
   
   @Pure
+  public boolean isSpecialStateSwitchSplitting() {
+    return this.specialStateSwitchSplitting;
+  }
+  
+  public void setSpecialStateSwitchSplitting(final boolean specialStateSwitchSplitting) {
+    this.specialStateSwitchSplitting = specialStateSwitchSplitting;
+  }
+  
+  @Pure
   public int getFieldsPerClass() {
     return this.fieldsPerClass;
   }
@@ -135,12 +143,9 @@ public class AntlrOptions {
     return this.methodsPerClass;
   }
   
-  /**
-   * @since 2.9
-   */
   @Pure
-  public int getCasesPerSpecialStateSwitch(){
-	return this.casesPerSpecialStateSwitch;
+  public int getCasesPerSpecialStateSwitch() {
+    return this.casesPerSpecialStateSwitch;
   }
   
   @Pure
