@@ -349,7 +349,7 @@ class XtextGeneratorTemplates {
 				 */
 				public class «webModule.simpleName» extends «webGenModule» {
 
-					public «webGenModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
+					public «webModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
 						super(executorServiceProvider);
 					}
 				}
@@ -413,15 +413,16 @@ class XtextGeneratorTemplates {
 				public class «webSetup.simpleName» extends «runtimeSetup» {
 					
 					private final «Provider»<«ExecutorService»> executorServiceProvider;
-
+					
 					«webSetup.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
-						this.executorServiceProvider = executorServiceProvider
+						this.executorServiceProvider = executorServiceProvider;
 					}
-
+					
+					@Override
 					public «Injector» createInjector() {
-						val runtimeModule = new «runtimeModule»()
-						val webModule = new «webModule»(executorServiceProvider)
-						return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule))
+						«runtimeModule» runtimeModule = new «runtimeModule»();
+						«webModule» webModule = new «webModule»(executorServiceProvider);
+						return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule));
 					}
 					
 				}

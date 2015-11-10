@@ -236,7 +236,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     _createXtendFile.writeTo(_src);
   }
   
-  public void generateJavaProposalProviderStub() {
+  protected void generateJavaProposalProviderStub() {
     Grammar _grammar = this.getGrammar();
     TypeReference _proposalProviderClass = this.getProposalProviderClass(_grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -275,7 +275,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     _createJavaFile.writeTo(_src);
   }
   
-  public GeneratedJavaFileAccess generateGenJavaProposalProvider() {
+  protected GeneratedJavaFileAccess generateGenJavaProposalProvider() {
     GeneratedJavaFileAccess _xblockexpression = null;
     {
       Grammar _grammar = this.getGrammar();
