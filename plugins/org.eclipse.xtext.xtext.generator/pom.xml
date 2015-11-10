@@ -58,7 +58,6 @@
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>xtext-antlr-generator</artifactId>
 			<version>${antlr-generator-version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<!-- FIXME should be transitively provided by xtext -->
@@ -72,7 +71,6 @@
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>${commons-logging.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<!-- FIXME should be transitively provided by mwe.utils -->
