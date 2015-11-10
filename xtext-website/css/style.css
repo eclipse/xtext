@@ -973,6 +973,14 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	list-style: none;
 }
 
+#nav-outline li {
+	margin-bottom: 3px;
+}
+
+.nav-part {
+	margin-top: 15px;
+	color: #333;
+}
 
 .navbar-inner {
 	border-radius: 0px;
