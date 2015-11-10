@@ -115,7 +115,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 
-	def generateJavaProposalProviderStub() {
+	protected def generateJavaProposalProviderStub() {
 		fileAccessFactory.createJavaFile(grammar.proposalProviderClass, '''
 			/**
 			 * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -129,7 +129,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 	// generation of the 'Abstract...ProposalProvider'
 	
-	def generateGenJavaProposalProvider() {
+	protected def generateGenJavaProposalProvider() {
 		// excluded features are those that stem from inherited grammars,
 		//  they are handled by the super grammars' proposal provider
 		val excludedFqnFeatureNames = grammar.getFQFeatureNamesToExclude
