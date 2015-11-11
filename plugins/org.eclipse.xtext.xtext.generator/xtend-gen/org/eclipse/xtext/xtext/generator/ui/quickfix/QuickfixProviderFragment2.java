@@ -331,24 +331,25 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
   protected boolean addRegistrationToPluginXml() {
     boolean _xblockexpression = false;
     {
-      Grammar _grammar = this.getGrammar();
-      String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(_grammar);
-      String _plus = (_eclipsePluginBasePackage + ".");
-      Grammar _grammar_1 = this.getGrammar();
-      String _simpleName = GrammarUtil.getSimpleName(_grammar_1);
-      String _lowerCase = _simpleName.toLowerCase();
-      final String markerTypePrefix = (_plus + _lowerCase);
-      Grammar _grammar_2 = this.getGrammar();
-      final TypeReference executableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(_grammar_2);
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-      PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
+      String _name = _eclipsePlugin.getName();
+      String _plus = (_name + ".");
+      Grammar _grammar = this.getGrammar();
+      String _simpleName = GrammarUtil.getSimpleName(_grammar);
+      String _lowerCase = _simpleName.toLowerCase();
+      final String markerTypePrefix = (_plus + _lowerCase);
+      Grammar _grammar_1 = this.getGrammar();
+      final TypeReference executableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(_grammar_1);
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+      PluginXmlAccess _pluginXml = _eclipsePlugin_1.getPluginXml();
       List<CharSequence> _entries = _pluginXml.getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<!-- quickfix marker resolution generator for ");
-      Grammar _grammar_3 = this.getGrammar();
-      String _name = _grammar_3.getName();
-      _builder.append(_name, "");
+      Grammar _grammar_2 = this.getGrammar();
+      String _name_1 = _grammar_2.getName();
+      _builder.append(_name_1, "");
       _builder.append(" -->");
       _builder.newLineIfNotEmpty();
       _builder.append("<extension");
