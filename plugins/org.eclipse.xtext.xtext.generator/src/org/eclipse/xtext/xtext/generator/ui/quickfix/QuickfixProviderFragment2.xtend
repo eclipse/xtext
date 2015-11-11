@@ -153,7 +153,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 	}
 	
 	protected def addRegistrationToPluginXml() {
-		val markerTypePrefix = grammar.eclipsePluginBasePackage + "." + grammar.simpleName.toLowerCase
+		val markerTypePrefix = projectConfig.eclipsePlugin.name + "." + grammar.simpleName.toLowerCase
 		val executableExtensionFactory = grammar.eclipsePluginExecutableExtensionFactory
 
 		projectConfig.eclipsePlugin.pluginXml.entries += '''
