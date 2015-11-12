@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.Atom;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.BracketmatchingPackage;
@@ -29,8 +27,13 @@ public class BmTestLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 	private BmTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == BracketmatchingPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == BracketmatchingPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case BracketmatchingPackage.ATOM:
 				sequence_Atom(context, (Atom) semanticObject); 
 				return; 
@@ -41,39 +44,52 @@ public class BmTestLanguageSemanticSequencer extends AbstractDelegatingSemanticS
 				sequence_SExpression(context, (SExpression) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Expression returns Atom
+	 *     Atom returns Atom
+	 *
 	 * Constraint:
 	 *     value=VALUE
 	 */
-	protected void sequence_Atom(EObject context, Atom semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, BracketmatchingPackage.Literals.ATOM__VALUE) == ValueTransient.YES)
+	protected void sequence_Atom(ISerializationContext context, Atom semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BracketmatchingPackage.Literals.ATOM__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BracketmatchingPackage.Literals.ATOM__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAtomAccess().getValueVALUEParserRuleCall_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     File returns File
+	 *
 	 * Constraint:
-	 *     expression+=Expression*
+	 *     expression+=Expression+
 	 */
-	protected void sequence_File(EObject context, File semanticObject) {
+	protected void sequence_File(ISerializationContext context, File semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns SExpression
+	 *     SExpression returns SExpression
+	 *
 	 * Constraint:
-	 *     (element+=Expression* | element+=Expression*)
+	 *     (element+=Expression+ | element+=Expression+)?
 	 */
-	protected void sequence_SExpression(EObject context, SExpression semanticObject) {
+	protected void sequence_SExpression(ISerializationContext context, SExpression semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

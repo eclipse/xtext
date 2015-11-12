@@ -3,19 +3,20 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.parametersTestLanguage.ParametersTestLanguagePackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.parametersTestLanguage.ParserRuleParameters;
 import org.eclipse.xtext.ui.tests.editor.contentassist.parametersTestLanguage.Scenario;
-import org.eclipse.xtext.ui.tests.editor.contentassist.serializer.ParametersTestLanguageSemanticSequencer;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.TwoParametersTestLanguageGrammarAccess;
 
 @SuppressWarnings("all")
@@ -25,50 +26,69 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	private TwoParametersTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == ParametersTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == ParametersTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case ParametersTestLanguagePackage.PARSER_RULE_PARAMETERS:
 				sequence_ParserRuleParameters(context, (ParserRuleParameters) semanticObject); 
 				return; 
 			case ParametersTestLanguagePackage.SCENARIO:
-				if(context == grammarAccess.getScenario1Rule()) {
-					sequence_Scenario1(context, (Scenario) semanticObject); 
+				if (rule == grammarAccess.getScenario1Rule() && (parameters.isEmpty())) {
+					sequence_Scenario1$Param$false$(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getScenario2Rule()) {
+				else if (rule == grammarAccess.getScenario1Rule() && (ImmutableSet.of(grammarAccess.getScenario1Rule().getParameters().get(0/*Param*/)).equals(parameters))) {
+					sequence_Scenario1$Param$true$(context, (Scenario) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getScenario2Rule()) {
 					sequence_Scenario2(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getScenario3Rule()) {
+				else if (rule == grammarAccess.getScenario3Rule()) {
 					sequence_Scenario3(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getScenario4Rule()) {
+				else if (rule == grammarAccess.getScenario4Rule()) {
 					sequence_Scenario4(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getScenario5Rule()) {
+				else if (rule == grammarAccess.getScenario5Rule() && (ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(0/*A*/), grammarAccess.getScenario5Rule().getParameters().get(1/*B*/)).equals(parameters))) {
+					sequence_Scenario5$A$true$B$true$(context, (Scenario) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getScenario5Rule() && (ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(0/*A*/)).equals(parameters)
+				 			|| ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(1/*B*/)).equals(parameters)
+				 			|| parameters.isEmpty())) {
 					sequence_Scenario5(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getScenario6Rule()) {
+				else if (rule == grammarAccess.getScenario6Rule()) {
 					sequence_Scenario6(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getScenario7Rule()) {
+				else if (rule == grammarAccess.getScenario7Rule()) {
 					sequence_Scenario7(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getScenario8Rule()) {
+				else if (rule == grammarAccess.getScenario8Rule()) {
 					sequence_Scenario8(context, (Scenario) semanticObject); 
 					return; 
 				}
 				else break;
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     ParserRuleParameters returns ParserRuleParameters
+	 *
 	 * Constraint:
 	 *     (
 	 *         scenario=Scenario5 | 
@@ -89,43 +109,104 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *         scenario=Scenario6
 	 *     )
 	 */
-	protected void sequence_ParserRuleParameters(EObject context, ParserRuleParameters semanticObject) {
+	protected void sequence_ParserRuleParameters(ISerializationContext context, ParserRuleParameters semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario5<A,B> returns Scenario
+	 *
 	 * Constraint:
-	 *     (first=ID | second=ID)
+	 *     first=ID
 	 */
-	protected void sequence_Scenario5(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_Scenario5$A$true$B$true$(ISerializationContext context, Scenario semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getScenario5Access().getFirstIDTerminalRuleCall_0_0_0(), semanticObject.getFirst());
+		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario5<A> returns Scenario
+	 *     Scenario5<B> returns Scenario
+	 *     Scenario5 returns Scenario
+	 *
+	 * Constraint:
+	 *     second=ID
+	 */
+	protected void sequence_Scenario5(ISerializationContext context, Scenario semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getScenario5Access().getSecondIDTerminalRuleCall_1_0_0(), semanticObject.getSecond());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Scenario6<A,B> returns Scenario
+	 *     Scenario6<A> returns Scenario
+	 *     Scenario6<B> returns Scenario
+	 *     Scenario6 returns Scenario
+	 *
 	 * Constraint:
 	 *     first=IdOrKeyword2
 	 */
-	protected void sequence_Scenario6(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_Scenario6(ISerializationContext context, Scenario semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getScenario6Access().getFirstIdOrKeyword2ParserRuleCall_0(), semanticObject.getFirst());
+		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario7<A,B> returns Scenario
+	 *     Scenario7<A> returns Scenario
+	 *     Scenario7<B> returns Scenario
+	 *     Scenario7 returns Scenario
+	 *
 	 * Constraint:
 	 *     (first=IdOrKeyword2 | second='scenario3')
 	 */
-	protected void sequence_Scenario7(EObject context, Scenario semanticObject) {
+	protected void sequence_Scenario7(ISerializationContext context, Scenario semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Scenario8<A,B> returns Scenario
+	 *     Scenario8<A> returns Scenario
+	 *     Scenario8<B> returns Scenario
+	 *     Scenario8 returns Scenario
+	 *
 	 * Constraint:
 	 *     second=IdOrKeyword2
 	 */
-	protected void sequence_Scenario8(EObject context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_Scenario8(ISerializationContext context, Scenario semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getScenario8Access().getSecondIdOrKeyword2ParserRuleCall_0_0(), semanticObject.getSecond());
+		feeder.finish();
 	}
+	
+	
 }

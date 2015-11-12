@@ -27,10 +27,10 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cE2Elem2ParserRuleCall_1_0 = (RuleCall)cE2Assignment_1.eContents().get(0);
 		
 		//Model:
-		//	e1+=Elem1 | e2+=Elem2+;
+		//	(e1+=Elem1 | e2+=Elem2)+;
 		@Override public ParserRule getRule() { return rule; }
 
-		//e1+=Elem1 | e2+=Elem2+
+		//(e1+=Elem1 | e2+=Elem2)+
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//e1+=Elem1
@@ -171,7 +171,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//	e1+=Elem1 | e2+=Elem2+;
+	//	(e1+=Elem1 | e2+=Elem2)+;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}

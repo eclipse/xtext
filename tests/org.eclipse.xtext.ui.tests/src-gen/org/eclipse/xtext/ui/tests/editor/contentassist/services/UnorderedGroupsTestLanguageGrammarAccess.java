@@ -168,8 +168,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//(abstract?='abstract' | final?='final')?) 'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 
-		//(visibility=('public' | 'private' | 'protected')? & static?='static'? & synchronized?='synchronized'? &
-		//(abstract?='abstract' | final?='final')?)
+		//visibility=('public' | 'private' | 'protected')? & static?='static'? & synchronized?='synchronized'? &
+		//(abstract?='abstract' | final?='final')?
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
 		//visibility=('public' | 'private' | 'protected')?
@@ -265,8 +265,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//(abstract?='abstract' | final?='final')?) 'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 
-		//(visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' &
-		//(abstract?='abstract' | final?='final')?)
+		//visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' &
+		//(abstract?='abstract' | final?='final')?
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
 		//visibility=('public' | 'private' | 'protected')
@@ -363,8 +363,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//(abstract+='abstract' | final+='final')*) 'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 
-		//(visibility+=('public' | 'private' | 'protected')* & static+='static'* & synchronized+='synchronized'* &
-		//(abstract+='abstract' | final+='final')*)
+		//visibility+=('public' | 'private' | 'protected')* & static+='static'* & synchronized+='synchronized'* &
+		//(abstract+='abstract' | final+='final')*
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
 		//visibility+=('public' | 'private' | 'protected')*
@@ -662,12 +662,12 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Bug304681Model:
 		//	{Bug304681Model}
-		//	"{" ("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"? & flag?="flag"
-		//	";"? & features+=Bug304681Feature*) "}";
+		//	"{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? &
+		//	(flag?="flag" ";")? & features+=Bug304681Feature*) "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Bug304681Model} "{" ("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"?
-		//& flag?="flag" ";"? & features+=Bug304681Feature*) "}"
+		//{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING
+		//";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}"
 		public Group getGroup() { return cGroup; }
 
 		//{Bug304681Model}
@@ -676,11 +676,11 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"? & flag?="flag" ";"? &
-		//features+=Bug304681Feature*)
+		//("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?="flag"
+		//";")? & features+=Bug304681Feature*
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
-		//"short" shortDescription=STRING ";"?
+		//("short" shortDescription=STRING ";")?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
 		//"short"
@@ -695,7 +695,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//";"
 		public Keyword getSemicolonKeyword_2_0_2() { return cSemicolonKeyword_2_0_2; }
 
-		//"long" longDescription=STRING ";"?
+		//("long" longDescription=STRING ";")?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"long"
@@ -710,7 +710,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//";"
 		public Keyword getSemicolonKeyword_2_1_2() { return cSemicolonKeyword_2_1_2; }
 
-		//"uid" uid=STRING ";"?
+		//("uid" uid=STRING ";")?
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//"uid"
@@ -725,7 +725,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//";"
 		public Keyword getSemicolonKeyword_2_2_2() { return cSemicolonKeyword_2_2_2; }
 
-		//flag?="flag" ";"?
+		//(flag?="flag" ";")?
 		public Group getGroup_2_3() { return cGroup_2_3; }
 
 		//flag?="flag"
@@ -967,8 +967,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	//Bug304681Model:
 	//	{Bug304681Model}
-	//	"{" ("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"? & flag?="flag"
-	//	";"? & features+=Bug304681Feature*) "}";
+	//	"{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? &
+	//	(flag?="flag" ";")? & features+=Bug304681Feature*) "}";
 	public Bug304681ModelElements getBug304681ModelAccess() {
 		return pBug304681Model;
 	}

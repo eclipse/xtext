@@ -30,6 +30,7 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	protected AbstractElementAlias match_Object_OptionalLoopKeyword_5_6_0_p;
 	protected AbstractElementAlias match_Object___AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a_BeforeKeyword_5_5_0__a;
 	protected AbstractElementAlias match_Object___BeforeKeyword_5_5_0_AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a__a;
+	protected AbstractElementAlias match_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__a;
 	protected AbstractElementAlias match_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__p;
 	protected AbstractElementAlias match_Object___OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p;
 	protected AbstractElementAlias match_Object_____BeforeKeyword_5_5_0_or___OptionalLoopKeyword_5_6_0_p_BeforeKeyword_5_5_0_____AfterKeyword_5_5_2__a;
@@ -48,6 +49,7 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 		match_Object_OptionalLoopKeyword_5_6_0_p = new TokenAlias(true, false, grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0());
 		match_Object___AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a_BeforeKeyword_5_5_0__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getObjectAccess().getAfterKeyword_5_5_2()), new TokenAlias(true, true, grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0()), new TokenAlias(false, false, grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0()));
 		match_Object___BeforeKeyword_5_5_0_AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0()), new TokenAlias(false, false, grammarAccess.getObjectAccess().getAfterKeyword_5_5_2()), new TokenAlias(true, true, grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0()));
+		match_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0()), new TokenAlias(false, false, grammarAccess.getObjectAccess().getAfterKeyword_5_5_2())));
 		match_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0()), new TokenAlias(false, false, grammarAccess.getObjectAccess().getAfterKeyword_5_5_2())));
 		match_Object___OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p = new GroupAlias(true, false, new TokenAlias(false, true, grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0()), new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0()), new TokenAlias(false, false, grammarAccess.getObjectAccess().getAfterKeyword_5_5_2())));
 		match_Object_____BeforeKeyword_5_5_0_or___OptionalLoopKeyword_5_6_0_p_BeforeKeyword_5_5_0_____AfterKeyword_5_5_2__a = new GroupAlias(true, true, new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(true, false, grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0()), new TokenAlias(false, false, grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0())), new TokenAlias(false, false, grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0())), new TokenAlias(false, false, grammarAccess.getObjectAccess().getAfterKeyword_5_5_2()));
@@ -68,33 +70,35 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Attribute2_SemicolonKeyword_3_1_or___LeftCurlyBracketKeyword_3_0_0_RightCurlyBracketKeyword_3_0_2__.equals(syntax))
+			if (match_Attribute2_SemicolonKeyword_3_1_or___LeftCurlyBracketKeyword_3_0_0_RightCurlyBracketKeyword_3_0_2__.equals(syntax))
 				emit_Attribute2_SemicolonKeyword_3_1_or___LeftCurlyBracketKeyword_3_0_0_RightCurlyBracketKeyword_3_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ConstraintDefinition___ParametersKeyword_3_0_0_SemicolonKeyword_3_0_2__a.equals(syntax))
+			else if (match_ConstraintDefinition___ParametersKeyword_3_0_0_SemicolonKeyword_3_0_2__a.equals(syntax))
 				emit_ConstraintDefinition___ParametersKeyword_3_0_0_SemicolonKeyword_3_0_2__a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ConstraintDefinition___ParametersKeyword_3_0_0_SemicolonKeyword_3_0_2__p.equals(syntax))
+			else if (match_ConstraintDefinition___ParametersKeyword_3_0_0_SemicolonKeyword_3_0_2__p.equals(syntax))
 				emit_ConstraintDefinition___ParametersKeyword_3_0_0_SemicolonKeyword_3_0_2__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ConstraintDefinition___SemicolonKeyword_3_0_2_ParametersKeyword_3_0_0__a.equals(syntax))
+			else if (match_ConstraintDefinition___SemicolonKeyword_3_0_2_ParametersKeyword_3_0_0__a.equals(syntax))
 				emit_ConstraintDefinition___SemicolonKeyword_3_0_2_ParametersKeyword_3_0_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Object_OptionalLoopKeyword_5_6_0_a.equals(syntax))
+			else if (match_Object_OptionalLoopKeyword_5_6_0_a.equals(syntax))
 				emit_Object_OptionalLoopKeyword_5_6_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Object_OptionalLoopKeyword_5_6_0_p.equals(syntax))
+			else if (match_Object_OptionalLoopKeyword_5_6_0_p.equals(syntax))
 				emit_Object_OptionalLoopKeyword_5_6_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Object___AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a_BeforeKeyword_5_5_0__a.equals(syntax))
+			else if (match_Object___AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a_BeforeKeyword_5_5_0__a.equals(syntax))
 				emit_Object___AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a_BeforeKeyword_5_5_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Object___BeforeKeyword_5_5_0_AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a__a.equals(syntax))
+			else if (match_Object___BeforeKeyword_5_5_0_AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a__a.equals(syntax))
 				emit_Object___BeforeKeyword_5_5_0_AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a__a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__p.equals(syntax))
+			else if (match_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__a.equals(syntax))
+				emit_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__p.equals(syntax))
 				emit_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Object___OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p.equals(syntax))
+			else if (match_Object___OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p.equals(syntax))
 				emit_Object___OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Object_____BeforeKeyword_5_5_0_or___OptionalLoopKeyword_5_6_0_p_BeforeKeyword_5_5_0_____AfterKeyword_5_5_2__a.equals(syntax))
+			else if (match_Object_____BeforeKeyword_5_5_0_or___OptionalLoopKeyword_5_6_0_p_BeforeKeyword_5_5_0_____AfterKeyword_5_5_2__a.equals(syntax))
 				emit_Object_____BeforeKeyword_5_5_0_or___OptionalLoopKeyword_5_6_0_p_BeforeKeyword_5_5_0_____AfterKeyword_5_5_2__a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Object_____OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p_MandatoryLoopKeyword_5_7_0__q.equals(syntax))
+			else if (match_Object_____OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p_MandatoryLoopKeyword_5_7_0__q.equals(syntax))
 				emit_Object_____OptionalLoopKeyword_5_6_0_q___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__q__p_MandatoryLoopKeyword_5_7_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Reference2_SemicolonKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__.equals(syntax))
+			else if (match_Reference2_SemicolonKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__.equals(syntax))
 				emit_Reference2_SemicolonKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Reference_SemicolonKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__.equals(syntax))
+			else if (match_Reference_SemicolonKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__.equals(syntax))
 				emit_Reference_SemicolonKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
@@ -217,6 +221,17 @@ public class Bug304681TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     features+=Feature 'after' 'optionalLoop'* (ambiguity) features+=Feature
 	 */
 	protected void emit_Object___BeforeKeyword_5_5_0_AfterKeyword_5_5_2_OptionalLoopKeyword_5_6_0_a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('optionalLoop' ('before' 'after')*)*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     features+=Feature (ambiguity) features+=Feature
+	 */
+	protected void emit_Object___OptionalLoopKeyword_5_6_0___BeforeKeyword_5_5_0_AfterKeyword_5_5_2__a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -26,11 +26,11 @@ public class Bug288760TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getEND_TAG_SHORTRule())
+		if (ruleCall.getRule() == grammarAccess.getEND_TAG_SHORTRule())
 			return getEND_TAG_SHORTToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getEQRule())
+		else if (ruleCall.getRule() == grammarAccess.getEQRule())
 			return getEQToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getGTRule())
+		else if (ruleCall.getRule() == grammarAccess.getGTRule())
 			return getGTToken(semanticObject, ruleCall, node);
 		return "";
 	}

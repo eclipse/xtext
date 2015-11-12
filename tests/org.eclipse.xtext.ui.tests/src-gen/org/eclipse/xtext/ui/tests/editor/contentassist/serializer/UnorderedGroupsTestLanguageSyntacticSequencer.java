@@ -41,7 +41,7 @@ public class UnorderedGroupsTestLanguageSyntacticSequencer extends AbstractSynta
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_LoopedAlternativeModel___BeforeKeyword_0_4_0_AfterKeyword_0_4_1_a__a.equals(syntax))
+			if (match_LoopedAlternativeModel___BeforeKeyword_0_4_0_AfterKeyword_0_4_1_a__a.equals(syntax))
 				emit_LoopedAlternativeModel___BeforeKeyword_0_4_0_AfterKeyword_0_4_1_a__a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

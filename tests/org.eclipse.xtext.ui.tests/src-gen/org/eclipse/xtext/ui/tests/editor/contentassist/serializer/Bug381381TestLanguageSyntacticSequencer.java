@@ -22,11 +22,13 @@ public class Bug381381TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 
 	protected Bug381381TestLanguageGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__a;
+	protected AbstractElementAlias match_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (Bug381381TestLanguageGrammarAccess) access;
 		match_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getCopyFieldNameToVariableStmtAccess().getCommaKeyword_1_2_0()), new TokenAlias(false, false, grammarAccess.getCopyFieldNameToVariableStmtAccess().getTYPEKeyword_1_2_1()), new TokenAlias(false, false, grammarAccess.getCopyFieldNameToVariableStmtAccess().getEqualsSignKeyword_1_2_2()), new TokenAlias(false, false, grammarAccess.getCopyFieldNameToVariableStmtAccess().getREPLACEKeyword_1_2_3()));
+		match_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getCopyFieldNameToVariableStmtAccess().getCommaKeyword_1_2_0()), new TokenAlias(false, false, grammarAccess.getCopyFieldNameToVariableStmtAccess().getTYPEKeyword_1_2_1()), new TokenAlias(false, false, grammarAccess.getCopyFieldNameToVariableStmtAccess().getEqualsSignKeyword_1_2_2()), new TokenAlias(false, false, grammarAccess.getCopyFieldNameToVariableStmtAccess().getREPLACEKeyword_1_2_3()));
 	}
 	
 	@Override
@@ -41,8 +43,10 @@ public class Bug381381TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__a.equals(syntax))
+			if (match_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__a.equals(syntax))
 				emit_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__p.equals(syntax))
+				emit_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -63,6 +67,17 @@ public class Bug381381TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	 *     name=ID (ambiguity) (rule end)
 	 */
 	protected void emit_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (',' 'TYPE' '=' 'REPLACE')+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'FIELD-NAME-TO-VARIABLE' (ambiguity) (rule start)
+	 */
+	protected void emit_CopyFieldNameToVariableStmt___CommaKeyword_1_2_0_TYPEKeyword_1_2_1_EqualsSignKeyword_1_2_2_REPLACEKeyword_1_2_3__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

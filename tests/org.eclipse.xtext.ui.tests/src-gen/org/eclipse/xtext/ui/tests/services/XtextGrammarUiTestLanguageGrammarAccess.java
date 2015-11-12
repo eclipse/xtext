@@ -598,7 +598,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		//(Assignment | AbstractTerminal) cardinality=('?' | '*' | '+')?
 		public Group getGroup() { return cGroup; }
 
-		//(Assignment | AbstractTerminal)
+		//Assignment | AbstractTerminal
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Assignment

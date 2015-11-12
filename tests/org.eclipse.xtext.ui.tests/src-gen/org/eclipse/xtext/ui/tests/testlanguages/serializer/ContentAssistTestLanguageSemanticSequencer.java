@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.testlanguages.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.AbstractRuleCall;
 import org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.ContentAssistTestLanguagePackage;
@@ -30,8 +28,13 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	private ContentAssistTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == ContentAssistTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == ContentAssistTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case ContentAssistTestLanguagePackage.ABSTRACT_RULE_CALL:
 				sequence_AbstractRuleCall(context, (AbstractRuleCall) semanticObject); 
 				return; 
@@ -45,47 +48,57 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 				sequence_Start(context, (Start) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     AbstractRuleCall returns AbstractRuleCall
+	 *
 	 * Constraint:
 	 *     rule=[AbstractRule|ID]
 	 */
-	protected void sequence_AbstractRuleCall(EObject context, AbstractRuleCall semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.ABSTRACT_RULE_CALL__RULE) == ValueTransient.YES)
+	protected void sequence_AbstractRuleCall(ISerializationContext context, AbstractRuleCall semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.ABSTRACT_RULE_CALL__RULE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContentAssistTestLanguagePackage.Literals.ABSTRACT_RULE_CALL__RULE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_0_1(), semanticObject.getRule());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns FirstAbstractRuleChild
+	 *     FirstAbstractRuleChild returns FirstAbstractRuleChild
+	 *
 	 * Constraint:
 	 *     (name=ID elements+=AbstractRule+)
 	 */
-	protected void sequence_FirstAbstractRuleChild(EObject context, FirstAbstractRuleChild semanticObject) {
+	protected void sequence_FirstAbstractRuleChild(ISerializationContext context, FirstAbstractRuleChild semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractRule returns SecondAbstractRuleChild
+	 *     SecondAbstractRuleChild returns SecondAbstractRuleChild
+	 *
 	 * Constraint:
 	 *     (name=ID rule=AbstractRuleCall)
 	 */
-	protected void sequence_SecondAbstractRuleChild(EObject context, SecondAbstractRuleChild semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.ABSTRACT_RULE__NAME) == ValueTransient.YES)
+	protected void sequence_SecondAbstractRuleChild(ISerializationContext context, SecondAbstractRuleChild semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.ABSTRACT_RULE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContentAssistTestLanguagePackage.Literals.ABSTRACT_RULE__NAME));
-			if(transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.SECOND_ABSTRACT_RULE_CHILD__RULE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, ContentAssistTestLanguagePackage.Literals.SECOND_ABSTRACT_RULE_CHILD__RULE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContentAssistTestLanguagePackage.Literals.SECOND_ABSTRACT_RULE_CHILD__RULE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSecondAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getSecondAbstractRuleChildAccess().getRuleAbstractRuleCallParserRuleCall_3_0(), semanticObject.getRule());
 		feeder.finish();
@@ -93,10 +106,15 @@ public class ContentAssistTestLanguageSemanticSequencer extends AbstractDelegati
 	
 	
 	/**
+	 * Contexts:
+	 *     Start returns Start
+	 *
 	 * Constraint:
 	 *     rules+=AbstractRule+
 	 */
-	protected void sequence_Start(EObject context, Start semanticObject) {
+	protected void sequence_Start(ISerializationContext context, Start semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

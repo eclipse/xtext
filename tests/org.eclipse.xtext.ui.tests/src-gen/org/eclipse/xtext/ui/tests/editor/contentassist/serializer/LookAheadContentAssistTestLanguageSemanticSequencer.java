@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTest.Attribute;
 import org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTest.LookAheadContentAssistTestPackage;
@@ -29,8 +27,13 @@ public class LookAheadContentAssistTestLanguageSemanticSequencer extends Abstrac
 	private LookAheadContentAssistTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == LookAheadContentAssistTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == LookAheadContentAssistTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case LookAheadContentAssistTestPackage.ATTRIBUTE:
 				sequence_Attribute(context, (Attribute) semanticObject); 
 				return; 
@@ -41,26 +44,32 @@ public class LookAheadContentAssistTestLanguageSemanticSequencer extends Abstrac
 				sequence_Pair(context, (Pair) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Attribute returns Attribute
+	 *
 	 * Constraint:
 	 *     value=ID
 	 */
-	protected void sequence_Attribute(EObject context, Attribute semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LookAheadContentAssistTestPackage.Literals.ATTRIBUTE__VALUE) == ValueTransient.YES)
+	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LookAheadContentAssistTestPackage.Literals.ATTRIBUTE__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookAheadContentAssistTestPackage.Literals.ATTRIBUTE__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAttributeAccess().getValueIDTerminalRuleCall_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         (attribute+=Attribute* attribute+=Pair*) | 
@@ -69,26 +78,30 @@ public class LookAheadContentAssistTestLanguageSemanticSequencer extends Abstrac
 	 *         (attribute+=Attribute+ attribute+=Pair+)
 	 *     )
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Pair returns Pair
+	 *
 	 * Constraint:
 	 *     (name=ID value=ID)
 	 */
-	protected void sequence_Pair(EObject context, Pair semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LookAheadContentAssistTestPackage.Literals.PAIR__NAME) == ValueTransient.YES)
+	protected void sequence_Pair(ISerializationContext context, Pair semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LookAheadContentAssistTestPackage.Literals.PAIR__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookAheadContentAssistTestPackage.Literals.PAIR__NAME));
-			if(transientValues.isValueTransient(semanticObject, LookAheadContentAssistTestPackage.Literals.PAIR__VALUE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, LookAheadContentAssistTestPackage.Literals.PAIR__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookAheadContentAssistTestPackage.Literals.PAIR__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPairAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getPairAccess().getValueIDTerminalRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
+	
+	
 }

@@ -4,15 +4,14 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.CrossReferenceProposalTestLanguageGrammarAccess;
@@ -24,8 +23,13 @@ public class CrossReferenceProposalTestLanguageSemanticSequencer extends Abstrac
 	private CrossReferenceProposalTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == CrossReferenceProposalTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == CrossReferenceProposalTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case CrossReferenceProposalTestPackage.CLASS:
 				sequence_Class(context, (org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class) semanticObject); 
 				return; 
@@ -33,23 +37,32 @@ public class CrossReferenceProposalTestLanguageSemanticSequencer extends Abstrac
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Class returns Class
+	 *
 	 * Constraint:
 	 *     (superClass=[Class|ID]? name=ID)
 	 */
-	protected void sequence_Class(EObject context, org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class semanticObject) {
+	protected void sequence_Class(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
-	 *     elements+=Class*
+	 *     elements+=Class+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

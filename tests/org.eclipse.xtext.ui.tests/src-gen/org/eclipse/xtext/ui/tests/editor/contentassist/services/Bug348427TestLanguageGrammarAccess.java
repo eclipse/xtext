@@ -165,7 +165,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'1.1'
 		public Keyword getDigitOneFullStopDigitOneKeyword_0() { return cDigitOneFullStopDigitOneKeyword_0; }
 
-		//(child+=Child1_1 | child+=Child1_2 | child+=Child1_3)
+		//child+=Child1_1 | child+=Child1_2 | child+=Child1_3
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//child+=Child1_1
@@ -559,7 +559,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'2.1'
 		public Keyword getDigitTwoFullStopDigitOneKeyword_0() { return cDigitTwoFullStopDigitOneKeyword_0; }
 
-		//(child+=Child2_1 | child+=Child2_2 | child+=Child2_3)
+		//child+=Child2_1 | child+=Child2_2 | child+=Child2_3
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//child+=Child2_1
@@ -661,7 +661,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'2.3'
 		public Keyword getDigitTwoFullStopDigitThreeKeyword_0() { return cDigitTwoFullStopDigitThreeKeyword_0; }
 
-		//(child+=Child2_4 | child+=Child2_5 | child+=Child2_6)
+		//child+=Child2_4 | child+=Child2_5 | child+=Child2_6
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//child+=Child2_4
@@ -1206,7 +1206,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'keyword'
 		public Keyword getKeywordKeyword_2_1() { return cKeywordKeyword_2_1; }
 
-		//(string='a' | string='b')
+		//string='a' | string='b'
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//string='a'
@@ -1275,7 +1275,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'keyword'
 		public Keyword getKeywordKeyword_2_1() { return cKeywordKeyword_2_1; }
 
-		//(string='a' | string='b')
+		//string='a' | string='b'
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//string='a'
@@ -1344,7 +1344,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'keyword'
 		public Keyword getKeywordKeyword_2_1() { return cKeywordKeyword_2_1; }
 
-		//(string='a' | string='b')
+		//string='a' | string='b'
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//string='a'

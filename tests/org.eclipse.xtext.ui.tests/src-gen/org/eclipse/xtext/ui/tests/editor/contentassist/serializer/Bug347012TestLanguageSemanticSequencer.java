@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.Bug347012TestLanguagePackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.Identifier;
@@ -35,8 +33,13 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug347012TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug347012TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug347012TestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug347012TestLanguagePackage.IDENTIFIER:
 				sequence_Identifier(context, (Identifier) semanticObject); 
 				return; 
@@ -65,100 +68,130 @@ public class Bug347012TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_MyProgram(context, (MyProgram) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Identifier returns Identifier
+	 *     MyPrimary returns Identifier
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Identifier(EObject context, Identifier semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug347012TestLanguagePackage.Literals.IDENTIFIER__NAME) == ValueTransient.YES)
+	protected void sequence_Identifier(ISerializationContext context, Identifier semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug347012TestLanguagePackage.Literals.IDENTIFIER__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug347012TestLanguagePackage.Literals.IDENTIFIER__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getIdentifierAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Literal returns Literal
+	 *     MyPrimary returns Literal
+	 *
 	 * Constraint:
 	 *     (num=NUMBER | str=STRING | bool='true' | bool='false')
 	 */
-	protected void sequence_Literal(EObject context, Literal semanticObject) {
+	protected void sequence_Literal(ISerializationContext context, Literal semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     MyAttribute returns MyAttribute
+	 *
 	 * Constraint:
 	 *     (PUBLIC='public' | PRIVATE='private')
 	 */
-	protected void sequence_MyAttribute(EObject context, MyAttribute semanticObject) {
+	protected void sequence_MyAttribute(ISerializationContext context, MyAttribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     MyAttributes returns MyAttributes
+	 *
 	 * Constraint:
-	 *     (attributes+=MyAttribute*)
+	 *     attributes+=MyAttribute*
 	 */
-	protected void sequence_MyAttributes(EObject context, MyAttributes semanticObject) {
+	protected void sequence_MyAttributes(ISerializationContext context, MyAttributes semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     MyBinding returns MyBinding
+	 *
 	 * Constraint:
 	 *     (name=ID type=FQN? expression=MyPrimary?)
 	 */
-	protected void sequence_MyBinding(EObject context, MyBinding semanticObject) {
+	protected void sequence_MyBinding(ISerializationContext context, MyBinding semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     MyClass returns MyClass
+	 *
 	 * Constraint:
 	 *     (name=ID directives+=MyField*)
 	 */
-	protected void sequence_MyClass(EObject context, MyClass semanticObject) {
+	protected void sequence_MyClass(ISerializationContext context, MyClass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     MyField returns MyField
+	 *
 	 * Constraint:
 	 *     (attr=MyAttributes bindings+=MyBinding bindings+=MyBinding*)
 	 */
-	protected void sequence_MyField(EObject context, MyField semanticObject) {
+	protected void sequence_MyField(ISerializationContext context, MyField semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     MyPackage returns MyPackage
+	 *
 	 * Constraint:
 	 *     (name=FQN directives+=MyClass*)
 	 */
-	protected void sequence_MyPackage(EObject context, MyPackage semanticObject) {
+	protected void sequence_MyPackage(ISerializationContext context, MyPackage semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     MyProgram returns MyProgram
+	 *
 	 * Constraint:
 	 *     package=MyPackage
 	 */
-	protected void sequence_MyProgram(EObject context, MyProgram semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug347012TestLanguagePackage.Literals.MY_PROGRAM__PACKAGE) == ValueTransient.YES)
+	protected void sequence_MyProgram(ISerializationContext context, MyProgram semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug347012TestLanguagePackage.Literals.MY_PROGRAM__PACKAGE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug347012TestLanguagePackage.Literals.MY_PROGRAM__PACKAGE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getMyProgramAccess().getPackageMyPackageParserRuleCall_2_0(), semanticObject.getPackage());
 		feeder.finish();
 	}
+	
+	
 }
