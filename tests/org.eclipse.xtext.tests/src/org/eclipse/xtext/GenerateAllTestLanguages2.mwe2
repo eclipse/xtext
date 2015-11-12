@@ -90,9 +90,9 @@ Workflow {
 		language = TestLanguage {
 			name = "org.eclipse.xtext.generator.ecore.SuperTestLanguage"
 		}
-//		language = TestLanguage {
-//			name = "org.eclipse.xtext.generator.ecore.SubTestLanguage"
-//		}
+		language = TestLanguage {
+			name = "org.eclipse.xtext.generator.ecore.SubTestLanguage"
+		}
 //		language = TestLanguage {
 //			name = "org.eclipse.xtext.XtextGrammarTestLanguage"
 //		}
