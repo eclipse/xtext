@@ -11,6 +11,7 @@ import org.eclipse.xtext.web.server.hover.HoverResult
 import org.junit.Test
 
 class HoverTest extends AbstractWebServerTest {
+	
 	def protected getHover(CharSequence resourceContent) {
 		val content = resourceContent.toString
 		val offset = content.indexOf('#')
@@ -18,6 +19,19 @@ class HoverTest extends AbstractWebServerTest {
 				'serviceType' -> 'hover',
 				'fullText' -> content.replace('#', ''),
 				'caretOffset' -> offset.toString
+			})
+		assertTrue(hover.hasTextInput)
+		hover.service.apply() as HoverResult
+	}
+	
+	protected def getContentAssistHover(CharSequence resourceContent, String proposal) {
+		val content = resourceContent.toString
+		val offset = content.indexOf('|')
+		val hover = getService(#{
+				'serviceType' -> 'hover',
+				'fullText' -> content.replace('|', ''),
+				'caretOffset' -> offset.toString,
+				'proposal' -> proposal
 			})
 		assertTrue(hover.hasTextInput)
 		hover.service.apply() as HoverResult
@@ -39,13 +53,11 @@ class HoverTest extends AbstractWebServerTest {
 	}
 	
 	@Test
-	def void testUnDocumentedElement() {
+	def void testUndocumentedElement() {
 		'''
 			state #foo
 		''' .hover
 			.assertContent('''
-				<div class="xtext-hover">
-				</div>
 			''')
 			.assertTitle('''
 				<div class="xtext-hover">
@@ -137,4 +149,58 @@ class HoverTest extends AbstractWebServerTest {
 			end
 		'''.hover.content.assertNull
 	}
+	
+	@Test
+	def void testContentAssistCrossref1() {
+		'''
+			input signal x
+			/* my nice state */
+			state foo
+			end
+			state bar
+				if x == true goto |
+			end
+		'''.getContentAssistHover('foo')
+			.assertTitle('''
+				<div class="xtext-hover">
+					<div class="State-icon default-icon">
+						<div class="element-name">
+							foo
+						</div>
+					</div>
+				</div>
+			''')
+			.assertContent('''
+				<div class="xtext-hover">
+					my nice state
+				</div>
+			''')
+	}
+	
+	@Test
+	def void testContentAssistCrossref2() {
+		'''
+			input signal x
+			/* my nice signal */
+			input signal y
+			state foo
+				if | == true goto foo
+			end
+		'''.getContentAssistHover('y')
+			.assertTitle('''
+				<div class="xtext-hover">
+					<div class="InputSignal-icon Signal-icon default-icon">
+						<div class="element-name">
+							y
+						</div>
+					</div>
+				</div>
+			''')
+			.assertContent('''
+				<div class="xtext-hover">
+					my nice signal
+				</div>
+			''')
+	}
+	
 }

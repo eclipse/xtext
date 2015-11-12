@@ -13,6 +13,7 @@ import com.google.inject.Singleton
 import java.util.HashSet
 import java.util.List
 import java.util.concurrent.ExecutorService
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor
@@ -20,6 +21,7 @@ import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.web.server.InvalidRequestException
+import org.eclipse.xtext.web.server.model.IXtextWebDocument
 import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 
 /**
@@ -32,23 +34,23 @@ class ContentAssistService {
 	
 	@Inject Provider<ContentAssistContextFactory> contextFactoryProvider
 	
-	@Inject IdeContentProposalProvider proposalProvider
-	
 	@Inject ExecutorService executorService
+	
+	@Accessors(PUBLIC_GETTER)
+	@Inject IdeContentProposalProvider proposalProvider
 	
 	/**
 	 * Create content assist proposals at the given caret offset. This document read operation
 	 * is scheduled with higher priority, so currently running operations may be canceled.
 	 * The document processing is rescheduled as background work afterwards.
 	 */
-	def ContentAssistResult createProposals(XtextWebDocumentAccess document, ITextRegion selection, int offset, int proposalsLimit)
-			throws InvalidRequestException {
-		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
+	def ContentAssistResult createProposals(XtextWebDocumentAccess document, ITextRegion selection, int caretOffset,
+			int proposalsLimit) throws InvalidRequestException {
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
-		val contexts = document.priorityReadOnly([ it, cancelIndicator |
+		val contexts = document.priorityReadOnly[ it, cancelIndicator |
 			stateIdWrapper.set(0, stateId)
-			contextFactory.create(text, selection, offset, resource)
-		])
+			getContexts(selection, caretOffset)
+		]
 		return createProposals(contexts, stateIdWrapper.get(0), proposalsLimit)
 	}
 	
@@ -58,18 +60,22 @@ class ContentAssistService {
 	 * The document processing is rescheduled as background work afterwards.
 	 */
 	def ContentAssistResult createProposalsWithUpdate(XtextWebDocumentAccess document, String deltaText, int deltaOffset,
-			int deltaReplaceLength, ITextRegion textSelection, int caretOffset, int proposalsLimit)
+			int deltaReplaceLength, ITextRegion selection, int caretOffset, int proposalsLimit)
 			throws InvalidRequestException {
-		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		val stateIdWrapper = ArrayLiterals.newArrayOfSize(1)
-		val contexts = document.modify [ it, cancelIndicator |
+		val contexts = document.modify[ it, cancelIndicator |
 			dirty = true
 			createNewStateId()
 			stateIdWrapper.set(0, stateId)
 			updateText(deltaText, deltaOffset, deltaReplaceLength)
-			contextFactory.create(text, textSelection, caretOffset, resource)
+			getContexts(selection, caretOffset)
 		]
 		return createProposals(contexts, stateIdWrapper.get(0), proposalsLimit)
+	}
+	
+	def ContentAssistContext[] getContexts(IXtextWebDocument document, ITextRegion selection, int caretOffset) {
+		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
+		contextFactory.create(document.text, selection, caretOffset, document.resource)
 	}
 	
 	/**

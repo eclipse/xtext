@@ -55,6 +55,7 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 				val scope = scopeProvider.getScope(context.currentModel, EVENT__SIGNAL)
 				for (description : scope.allElements.filter[getEClass == INPUT_SIGNAL]) {
 					val entry = new ContentAssistEntry => [
+						source = description
 						prefix = context.prefix
 						proposal = description.name.toString
 						description = 'input signal'
@@ -67,6 +68,7 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 				val scope = scopeProvider.getScope(context.currentModel, COMMAND__SIGNAL)
 				for (description : scope.allElements.filter[getEClass == OUTPUT_SIGNAL]) {
 					val entry = new ContentAssistEntry => [
+						source = description
 						prefix = context.prefix
 						proposal = description.name.toString
 						description = 'output signal'

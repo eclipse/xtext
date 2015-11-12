@@ -97,8 +97,43 @@ class ContentAssistTest extends AbstractWebServerTest {
 			]''')
 	}
 	
+	@Test def testCrossref() {
+		'''
+			input signal x
+			state foo
+			end
+			state bar
+				if x == true goto |
+			end
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "bar"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "foo"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
 	@Test def testCustomTerminal() {
-		'output signal x state foo set x = | end'.assertContentAssistResult('''
+		'''
+			output signal x
+			state foo
+				set x = |
+			end
+		'''.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
@@ -119,7 +154,12 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testCustomCrossref() {
-		'input signal x state foo if | == true goto foo end'.assertContentAssistResult('''
+		'''
+			input signal x
+			state foo
+				if | == true goto foo
+			end
+		'''.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
