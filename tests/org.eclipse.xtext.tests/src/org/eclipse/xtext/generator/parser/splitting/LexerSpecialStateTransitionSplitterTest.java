@@ -329,7 +329,6 @@ public class LexerSpecialStateTransitionSplitterTest extends Assert {
 	@Test public void testSpecialStateSwitchTransformation(){
 		int tmpCasesLimit = testMe.getCasesPerSpecialStateSwitch();
 		
-		testMe.setSpecialStateSwitchSplitting(true);
 		testMe.setCasesPerSpecialStateSwitch(3);
 		String actualSpecialStateSwitchSplit = testMe.transform(original);
 		assertEquals(transformedSpecialStateSplit,actualSpecialStateSwitchSplit);

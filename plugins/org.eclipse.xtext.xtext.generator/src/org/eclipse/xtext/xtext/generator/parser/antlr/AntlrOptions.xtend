@@ -20,7 +20,6 @@ class AntlrOptions {
 	int k = -1
 	boolean ignoreCase = false
 	boolean classSplitting = false
-	boolean specialStateSwitchSplitting = false
 	@Accessors(PUBLIC_GETTER)
 	int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS
 	@Accessors(PUBLIC_GETTER)
@@ -44,7 +43,7 @@ class AntlrOptions {
 	def void setCasesPerSpecialStateSwitch(String casesPerSpecialStateSwitch) {
 		this.casesPerSpecialStateSwitch = Integer.parseInt(casesPerSpecialStateSwitch)
 	}
-
+	
 	def void setKAsString(String k) {
 		this.k = Integer.parseInt(k)
 	}
