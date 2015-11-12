@@ -14,6 +14,8 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
@@ -34,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * Service class for content assist proposals.
@@ -47,43 +50,34 @@ public class ContentAssistService {
   private Provider<ContentAssistContextFactory> contextFactoryProvider;
   
   @Inject
-  private IdeContentProposalProvider proposalProvider;
-  
-  @Inject
   private ExecutorService executorService;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  @Inject
+  private IdeContentProposalProvider proposalProvider;
   
   /**
    * Create content assist proposals at the given caret offset. This document read operation
    * is scheduled with higher priority, so currently running operations may be canceled.
    * The document processing is rescheduled as background work afterwards.
    */
-  public ContentAssistResult createProposals(final XtextWebDocumentAccess document, final ITextRegion selection, final int offset, final int proposalsLimit) throws InvalidRequestException {
-    ContentAssistContextFactory _get = this.contextFactoryProvider.get();
-    final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
-      @Override
-      public void apply(final ContentAssistContextFactory it) {
-        it.setPool(ContentAssistService.this.executorService);
-      }
-    };
-    final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
+  public ContentAssistResult createProposals(final XtextWebDocumentAccess document, final ITextRegion selection, final int caretOffset, final int proposalsLimit) throws InvalidRequestException {
     final String[] stateIdWrapper = new String[1];
-    final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
+    final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
       @Override
       public ContentAssistContext[] exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
         ContentAssistContext[] _xblockexpression = null;
         {
           String _stateId = it.getStateId();
           stateIdWrapper[0] = _stateId;
-          String _text = it.getText();
-          XtextResource _resource = it.getResource();
-          _xblockexpression = contextFactory.create(_text, selection, offset, _resource);
+          _xblockexpression = ContentAssistService.this.getContexts(it, selection, caretOffset);
         }
         return _xblockexpression;
       }
     };
-    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function_1);
-    String _get_1 = stateIdWrapper[0];
-    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1, proposalsLimit);
+    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>priorityReadOnly(_function);
+    String _get = stateIdWrapper[0];
+    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get, proposalsLimit);
   }
   
   /**
@@ -91,17 +85,9 @@ public class ContentAssistService {
    * is scheduled with higher priority, so currently running operations may be canceled.
    * The document processing is rescheduled as background work afterwards.
    */
-  public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion textSelection, final int caretOffset, final int proposalsLimit) throws InvalidRequestException {
-    ContentAssistContextFactory _get = this.contextFactoryProvider.get();
-    final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
-      @Override
-      public void apply(final ContentAssistContextFactory it) {
-        it.setPool(ContentAssistService.this.executorService);
-      }
-    };
-    final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
+  public ContentAssistResult createProposalsWithUpdate(final XtextWebDocumentAccess document, final String deltaText, final int deltaOffset, final int deltaReplaceLength, final ITextRegion selection, final int caretOffset, final int proposalsLimit) throws InvalidRequestException {
     final String[] stateIdWrapper = new String[1];
-    final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
+    final CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument> _function = new CancelableUnitOfWork<ContentAssistContext[], IXtextWebDocument>() {
       @Override
       public ContentAssistContext[] exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
         ContentAssistContext[] _xblockexpression = null;
@@ -111,16 +97,32 @@ public class ContentAssistService {
           String _stateId = it.getStateId();
           stateIdWrapper[0] = _stateId;
           it.updateText(deltaText, deltaOffset, deltaReplaceLength);
-          String _text = it.getText();
-          XtextResource _resource = it.getResource();
-          _xblockexpression = contextFactory.create(_text, textSelection, caretOffset, _resource);
+          _xblockexpression = ContentAssistService.this.getContexts(it, selection, caretOffset);
         }
         return _xblockexpression;
       }
     };
-    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>modify(_function_1);
-    String _get_1 = stateIdWrapper[0];
-    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get_1, proposalsLimit);
+    final ContentAssistContext[] contexts = document.<ContentAssistContext[]>modify(_function);
+    String _get = stateIdWrapper[0];
+    return this.createProposals(((List<ContentAssistContext>)Conversions.doWrapArray(contexts)), _get, proposalsLimit);
+  }
+  
+  public ContentAssistContext[] getContexts(final IXtextWebDocument document, final ITextRegion selection, final int caretOffset) {
+    ContentAssistContext[] _xblockexpression = null;
+    {
+      ContentAssistContextFactory _get = this.contextFactoryProvider.get();
+      final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
+        @Override
+        public void apply(final ContentAssistContextFactory it) {
+          it.setPool(ContentAssistService.this.executorService);
+        }
+      };
+      final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
+      String _text = document.getText();
+      XtextResource _resource = document.getResource();
+      _xblockexpression = contextFactory.create(_text, selection, caretOffset, _resource);
+    }
+    return _xblockexpression;
   }
   
   /**
@@ -206,5 +208,10 @@ public class ContentAssistService {
       _entries.addAll(_map);
     }
     return result;
+  }
+  
+  @Pure
+  public IdeContentProposalProvider getProposalProvider() {
+    return this.proposalProvider;
   }
 }

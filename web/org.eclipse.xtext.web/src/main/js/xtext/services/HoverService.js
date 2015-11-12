@@ -18,10 +18,19 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	HoverService.prototype = new XtextService();
 
 	HoverService.prototype._initServerData = function(serverData, editorContext, params) {
+		// In order to display hover info for a selected completion proposal while the content
+		// assist popup is shown, the selected proposal is passed as parameter
+		if (params.proposal && params.proposal.proposal)
+			serverData.proposal = params.proposal.proposal;
 		if (params.offset)
 			serverData.caretOffset = params.offset;
 		else
 			serverData.caretOffset = editorContext.getCaretOffset();
+		var selection = params.selection ? params.selection : editorContext.getSelection();
+		if (selection.start != serverData.caretOffset || selection.end != serverData.caretOffset) {
+			serverData.selectionStart = selection.start;
+			serverData.selectionEnd = selection.end;
+		}
 	};
 	
 	HoverService.prototype._getSuccessCallback = function(editorContext, params, deferred) {
@@ -30,7 +39,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 			delay = 500;
 		var showTime = new Date().getTime() + delay;
 		return function(result) {
-			if (!result.content || result.conflict) {
+			if (result.conflict || !result.title && !result.content) {
 				deferred.reject();
 			} else {
 				var remainingTimeout = Math.max(0, showTime - new Date().getTime());

@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.contentassist
 
+import com.google.common.base.Predicate
 import com.google.common.base.Predicates
 import com.google.inject.Inject
-import java.util.List
+import java.util.Collection
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
@@ -19,9 +20,8 @@ import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
-import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
-import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.naming.IQualifiedNameConverter
+import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.xtext.CurrentTypeFinder
@@ -51,7 +51,18 @@ class IdeContentProposalProvider {
 	/**
 	 * Create content assist proposals and pass them to the given acceptor.
 	 */
-	def void createProposals(List<ContentAssistContext> contexts, IIdeContentProposalAcceptor acceptor) {
+	def void createProposals(Collection<ContentAssistContext> contexts, IIdeContentProposalAcceptor acceptor) {
+		for (context : getFilteredContexts(contexts)) {
+			for (element : context.firstSetGrammarElements) {
+				if (!acceptor.canAcceptMoreProposals) {
+					return
+				}
+				createProposals(element, context, acceptor)
+			}
+		}
+	}
+	
+	protected def Iterable<ContentAssistContext> getFilteredContexts(Collection<ContentAssistContext> contexts) {
 		var ContentAssistContext selectedContext
 		for (context : contexts) {
 			if (selectedContext === null || context.acceptable
@@ -59,16 +70,11 @@ class IdeContentProposalProvider {
 				selectedContext = context
 			}
 		}
-		for (context : contexts) {
-			if (context === selectedContext || context.prefix == selectedContext.prefix && context.acceptable) {
-				for (element : context.firstSetGrammarElements) {
-					if (!acceptor.canAcceptMoreProposals) {
-						return
-					}
-					createProposals(element, context, acceptor)
-				}
-			}
-		}
+		val finalSelectedContext = selectedContext
+		return contexts.filter[ context |
+			context === finalSelectedContext
+			|| context.prefix == finalSelectedContext.prefix && context.acceptable
+		]
 	}
 	
 	protected def isAcceptable(ContentAssistContext context) {
@@ -85,7 +91,7 @@ class IdeContentProposalProvider {
 			IIdeContentProposalAcceptor acceptor) {
 		val terminal = assignment.terminal
 		if (terminal instanceof CrossReference) {
-			createProposals(assignment.terminal, context, acceptor)
+			createProposals(terminal, context, acceptor)
 		} else if (terminal instanceof RuleCall) {
 			val rule = terminal.rule
 			if (rule instanceof TerminalRule && context.prefix.empty) {
@@ -116,7 +122,7 @@ class IdeContentProposalProvider {
 		}
 	}
 	
-	protected def filterKeyword(Keyword keyword, ContentAssistContext context) {
+	protected def boolean filterKeyword(Keyword keyword, ContentAssistContext context) {
 		keyword.value.regionMatches(true, 0, context.prefix, 0, context.prefix.length)
 			&& keyword.value.length > context.prefix.length
 	}
@@ -133,9 +139,15 @@ class IdeContentProposalProvider {
 			val ereference = GrammarUtil.getReference(reference, type)
 			if (ereference !== null) {
 				val scope = scopeProvider.getScope(context.currentModel, ereference)
-				crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor, Predicates.alwaysTrue)
+				crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor,
+					getCrossrefFilter(reference, context))
 			}
 		}
+	}
+	
+	protected def Predicate<IEObjectDescription> getCrossrefFilter(CrossReference reference,
+			ContentAssistContext context) {
+		Predicates.alwaysTrue
 	}
 	
 }

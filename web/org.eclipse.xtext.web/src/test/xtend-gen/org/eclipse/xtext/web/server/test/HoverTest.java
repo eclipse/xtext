@@ -42,6 +42,28 @@ public class HoverTest extends AbstractWebServerTest {
     return _xblockexpression;
   }
   
+  protected HoverResult getContentAssistHover(final CharSequence resourceContent, final String proposal) {
+    HoverResult _xblockexpression = null;
+    {
+      final String content = resourceContent.toString();
+      final int offset = content.indexOf("|");
+      Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "hover");
+      String _replace = content.replace("|", "");
+      Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _replace);
+      String _string = Integer.valueOf(offset).toString();
+      Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", _string);
+      Pair<String, String> _mappedTo_3 = Pair.<String, String>of("proposal", proposal);
+      final XtextServiceDispatcher.ServiceDescriptor hover = this.getService(
+        Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
+      boolean _isHasTextInput = hover.isHasTextInput();
+      Assert.assertTrue(_isHasTextInput);
+      Function0<? extends IServiceResult> _service = hover.getService();
+      IServiceResult _apply = _service.apply();
+      _xblockexpression = ((HoverResult) _apply);
+    }
+    return _xblockexpression;
+  }
+  
   protected HoverResult assertTitle(final HoverResult result, final String expectedTitle) {
     HoverResult _xblockexpression = null;
     {
@@ -70,16 +92,12 @@ public class HoverTest extends AbstractWebServerTest {
   }
   
   @Test
-  public void testUnDocumentedElement() {
+  public void testUndocumentedElement() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("state #foo");
     _builder.newLine();
     HoverResult _hover = this.getHover(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("<div class=\"xtext-hover\">");
-    _builder_1.newLine();
-    _builder_1.append("</div>");
-    _builder_1.newLine();
     HoverResult _assertContent = this.assertContent(_hover, _builder_1.toString());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("<div class=\"xtext-hover\">");
@@ -248,5 +266,105 @@ public class HoverTest extends AbstractWebServerTest {
     HoverResult _hover = this.getHover(_builder);
     String _content = _hover.getContent();
     Assert.assertNull(_content);
+  }
+  
+  @Test
+  public void testContentAssistCrossref1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("input signal x");
+    _builder.newLine();
+    _builder.append("/* my nice state */");
+    _builder.newLine();
+    _builder.append("state foo");
+    _builder.newLine();
+    _builder.append("end");
+    _builder.newLine();
+    _builder.append("state bar");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if x == true goto |");
+    _builder.newLine();
+    _builder.append("end");
+    _builder.newLine();
+    HoverResult _contentAssistHover = this.getContentAssistHover(_builder, "foo");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("<div class=\"xtext-hover\">");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<div class=\"State-icon default-icon\">");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("<div class=\"element-name\">");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("foo");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("</div>");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("</div>");
+    _builder_1.newLine();
+    _builder_1.append("</div>");
+    _builder_1.newLine();
+    HoverResult _assertTitle = this.assertTitle(_contentAssistHover, _builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("<div class=\"xtext-hover\">");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("my nice state");
+    _builder_2.newLine();
+    _builder_2.append("</div>");
+    _builder_2.newLine();
+    this.assertContent(_assertTitle, _builder_2.toString());
+  }
+  
+  @Test
+  public void testContentAssistCrossref2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("input signal x");
+    _builder.newLine();
+    _builder.append("/* my nice signal */");
+    _builder.newLine();
+    _builder.append("input signal y");
+    _builder.newLine();
+    _builder.append("state foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if | == true goto foo");
+    _builder.newLine();
+    _builder.append("end");
+    _builder.newLine();
+    HoverResult _contentAssistHover = this.getContentAssistHover(_builder, "y");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("<div class=\"xtext-hover\">");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<div class=\"InputSignal-icon Signal-icon default-icon\">");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("<div class=\"element-name\">");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("y");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("</div>");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("</div>");
+    _builder_1.newLine();
+    _builder_1.append("</div>");
+    _builder_1.newLine();
+    HoverResult _assertTitle = this.assertTitle(_contentAssistHover, _builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("<div class=\"xtext-hover\">");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("my nice signal");
+    _builder_2.newLine();
+    _builder_2.append("</div>");
+    _builder_2.newLine();
+    this.assertContent(_assertTitle, _builder_2.toString());
   }
 }

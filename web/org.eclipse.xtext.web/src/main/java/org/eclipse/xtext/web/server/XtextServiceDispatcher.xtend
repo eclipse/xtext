@@ -284,6 +284,8 @@ class XtextServiceDispatcher {
 	protected def getContentAssistService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		val offset = request.getInt('caretOffset', Optional.of(0))
+		if (offset < 0)
+			throw new InvalidParametersException('The parameter \'offset\' must not be negative.')
 		val document = getDocumentAccess(request, sessionStore)
 		val proposalsLimit = request.getInt('proposalsLimit', Optional.of(ContentAssistService.DEFAULT_PROPOSALS_LIMIT))
 		if (proposalsLimit <= 0)
@@ -346,10 +348,19 @@ class XtextServiceDispatcher {
 			throws InvalidRequestException {
 		val document = getDocumentAccess(request, sessionStore)
 		val offset = request.getInt('caretOffset', Optional.of(0))
+		if (offset < 0)
+			throw new InvalidParametersException('The parameter \'offset\' must not be negative.')
+		val selectionStart = request.getInt('selectionStart', Optional.of(offset))
+		val selectionEnd = request.getInt('selectionEnd', Optional.of(selectionStart))
+		val selection = new TextRegion(selectionStart, Math.max(selectionEnd - selectionStart, 0))
+		val proposal = request.getParameter('proposal')
 		new ServiceDescriptor => [
 			service = [
 				try {
-					hoverService.getHover(document, offset)
+					if (proposal.nullOrEmpty)
+						hoverService.getHover(document, offset)
+					else
+						hoverService.getHover(document, proposal, selection, offset)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}
@@ -377,6 +388,8 @@ class XtextServiceDispatcher {
 			throws InvalidRequestException {
 		val document = getDocumentAccess(request, sessionStore)
 		val offset = request.getInt('caretOffset', Optional.of(0))
+		if (offset < 0)
+			throw new InvalidParametersException('The parameter \'offset\' must not be negative.')
 		new ServiceDescriptor => [
 			service = [
 				try {

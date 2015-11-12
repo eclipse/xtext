@@ -117,6 +117,7 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
             final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
               @Override
               public void apply(final ContentAssistEntry it) {
+                it.setSource(description);
                 String _prefix = context.getPrefix();
                 it.setPrefix(_prefix);
                 QualifiedName _name = description.getName();
@@ -156,6 +157,7 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
             final Procedure1<ContentAssistEntry> _function_2 = new Procedure1<ContentAssistEntry>() {
               @Override
               public void apply(final ContentAssistEntry it) {
+                it.setSource(description_1);
                 String _prefix = context.getPrefix();
                 it.setPrefix(_prefix);
                 QualifiedName _name = description_1.getName();

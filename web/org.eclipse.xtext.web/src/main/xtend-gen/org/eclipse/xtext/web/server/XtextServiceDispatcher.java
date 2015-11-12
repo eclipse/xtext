@@ -42,6 +42,7 @@ import org.eclipse.xtext.web.server.ServiceConflictResult;
 import org.eclipse.xtext.web.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.web.server.formatting.FormattingService;
 import org.eclipse.xtext.web.server.generator.GeneratorService;
+import org.eclipse.xtext.web.server.hover.HoverResult;
 import org.eclipse.xtext.web.server.hover.HoverService;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
@@ -64,6 +65,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
@@ -568,6 +570,9 @@ public class XtextServiceDispatcher {
     {
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
       final int offset = this.getInt(request, "caretOffset", _of);
+      if ((offset < 0)) {
+        throw new InvalidRequestException.InvalidParametersException("The parameter \'offset\' must not be negative.");
+      }
       final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
       Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(ContentAssistService.DEFAULT_PROPOSALS_LIMIT));
       final int proposalsLimit = this.getInt(request, "proposalsLimit", _of_1);
@@ -706,6 +711,16 @@ public class XtextServiceDispatcher {
       final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
       final int offset = this.getInt(request, "caretOffset", _of);
+      if ((offset < 0)) {
+        throw new InvalidRequestException.InvalidParametersException("The parameter \'offset\' must not be negative.");
+      }
+      Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(offset));
+      final int selectionStart = this.getInt(request, "selectionStart", _of_1);
+      Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(selectionStart));
+      final int selectionEnd = this.getInt(request, "selectionEnd", _of_2);
+      int _max = Math.max((selectionEnd - selectionStart), 0);
+      final TextRegion selection = new TextRegion(selectionStart, _max);
+      final String proposal = request.getParameter("proposal");
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
@@ -715,7 +730,14 @@ public class XtextServiceDispatcher {
             public IServiceResult apply() {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
-                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.hoverService.getHover(document, offset);
+                HoverResult _xifexpression = null;
+                boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(proposal);
+                if (_isNullOrEmpty) {
+                  _xifexpression = XtextServiceDispatcher.this.hoverService.getHover(document, offset);
+                } else {
+                  _xifexpression = XtextServiceDispatcher.this.hoverService.getHover(document, proposal, selection, offset);
+                }
+                _xtrycatchfinallyexpression = _xifexpression;
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
@@ -780,6 +802,9 @@ public class XtextServiceDispatcher {
       final XtextWebDocumentAccess document = this.getDocumentAccess(request, sessionStore);
       Optional<Integer> _of = Optional.<Integer>of(Integer.valueOf(0));
       final int offset = this.getInt(request, "caretOffset", _of);
+      if ((offset < 0)) {
+        throw new InvalidRequestException.InvalidParametersException("The parameter \'offset\' must not be negative.");
+      }
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
