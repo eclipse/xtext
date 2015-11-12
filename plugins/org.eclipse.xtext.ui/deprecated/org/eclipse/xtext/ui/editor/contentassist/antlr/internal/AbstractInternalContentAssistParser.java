@@ -245,7 +245,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	private void removeUnexpectedElements() {
 		int dropParamAt = -1;
 		if (!grammarElementsWithParams.isEmpty()) {
-			dropParamAt = grammarElementsWithParams.get(grammarElementsWithParams.size() - 1);
+			dropParamAt = getLast(grammarElementsWithParams);
 		}
 		while (stackSize < grammarElements.size()) {
 			removeLast(grammarElements);
@@ -253,12 +253,16 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				removeLast(paramStack);
 				removeLast(grammarElementsWithParams);
 				if (!grammarElementsWithParams.isEmpty()) {
-					dropParamAt = grammarElementsWithParams.get(grammarElementsWithParams.size() - 1);
+					dropParamAt = getLast(grammarElementsWithParams);
 				}
 			}
 		}
 	}
-
+	
+	private <T> T getLast(List<T> list) {
+		return list.get(list.size() - 1);
+	}
+	
 	private <T> T removeLast(List<T> list) {
 		return list.remove(list.size() - 1);
 	}
@@ -541,7 +545,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	
 	protected AbstractElement getCurrentGrammarElement() {
 		for (int i = grammarElements.size() - 1; i >= 0; i--) {
-			EObject result = grammarElements.get(grammarElements.size() - 1);
+			EObject result = grammarElements.get(i);
 			if (result instanceof AbstractElement)
 				return (AbstractElement) result;
 		}
