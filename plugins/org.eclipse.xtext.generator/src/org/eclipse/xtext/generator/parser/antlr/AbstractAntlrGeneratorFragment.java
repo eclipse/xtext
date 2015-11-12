@@ -156,6 +156,8 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	protected void splitLexerClassFile(String filename, Charset encoding) throws IOException {
 		String content = readFileIntoString(filename, encoding);
 		AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
+		splitter.setSpecialStateSwitchSplitting(options.isSpecialStateSwitchSplitting());
+		splitter.setCasesPerSpecialStateSwitch(options.getCasesPerSpecialStateSwitch());
 		writeStringIntoFile(filename, splitter.transform(), encoding);
 	}
 

@@ -12,6 +12,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.internal.LexerSpecialStateTransitionSplitter;
 
 @Accessors
 @SuppressWarnings("all")
@@ -28,11 +29,16 @@ public class AntlrOptions {
   
   private boolean classSplitting = false;
   
+  private boolean specialStateSwitchSplitting = false;
+  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private int casesPerSpecialStateSwitch = LexerSpecialStateTransitionSplitter.CASES_PER_SPECIAL_STATE_SWITCH;
   
   private boolean skipUnusedRules = false;
   
@@ -52,6 +58,11 @@ public class AntlrOptions {
   public void setMethodsPerClass(final String methodsPerClass) {
     int _parseInt = Integer.parseInt(methodsPerClass);
     this.methodsPerClass = _parseInt;
+  }
+  
+  public void setCasesPerSpecialStateSwitch(final String casesPerSpecialStateSwitch) {
+    int _parseInt = Integer.parseInt(casesPerSpecialStateSwitch);
+    this.casesPerSpecialStateSwitch = _parseInt;
   }
   
   public void setKAsString(final String k) {
@@ -114,6 +125,15 @@ public class AntlrOptions {
   }
   
   @Pure
+  public boolean isSpecialStateSwitchSplitting() {
+    return this.specialStateSwitchSplitting;
+  }
+  
+  public void setSpecialStateSwitchSplitting(final boolean specialStateSwitchSplitting) {
+    this.specialStateSwitchSplitting = specialStateSwitchSplitting;
+  }
+  
+  @Pure
   public int getFieldsPerClass() {
     return this.fieldsPerClass;
   }
@@ -121,6 +141,11 @@ public class AntlrOptions {
   @Pure
   public int getMethodsPerClass() {
     return this.methodsPerClass;
+  }
+  
+  @Pure
+  public int getCasesPerSpecialStateSwitch() {
+    return this.casesPerSpecialStateSwitch;
   }
   
   @Pure
