@@ -10,7 +10,6 @@ package org.eclipse.xtext;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -21,6 +20,7 @@ import org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator;
 import org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.resourceFactory.ResourceFactoryFragment2;
 import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2;
@@ -48,6 +48,14 @@ public class TestLanguage extends XtextGeneratorLanguage {
     @Override
     public void apply(final XtextAntlrGeneratorFragment2 it) {
       it.setDebugGrammar(true);
+      AntlrOptions _options = it.getOptions();
+      final Procedure1<AntlrOptions> _function = new Procedure1<AntlrOptions>() {
+        @Override
+        public void apply(final AntlrOptions it) {
+          it.setClassSplitting(true);
+        }
+      };
+      ObjectExtensions.<AntlrOptions>operator_doubleArrow(_options, _function);
     }
   });
   
@@ -61,48 +69,48 @@ public class TestLanguage extends XtextGeneratorLanguage {
     final ArrayList<IXtextGeneratorFragment> result = new ArrayList<IXtextGeneratorFragment>(_implicitFragments);
     result.add(this.parserGenerator);
     final XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
-    AntlrOptions _antlrOptions = new AntlrOptions();
-    final Procedure1<AntlrOptions> _function = new Procedure1<AntlrOptions>() {
+    org.eclipse.xtext.generator.parser.antlr.AntlrOptions _antlrOptions = new org.eclipse.xtext.generator.parser.antlr.AntlrOptions();
+    final Procedure1<org.eclipse.xtext.generator.parser.antlr.AntlrOptions> _function = new Procedure1<org.eclipse.xtext.generator.parser.antlr.AntlrOptions>() {
       @Override
-      public void apply(final AntlrOptions it) {
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options = TestLanguage.this.parserGenerator.getOptions();
+      public void apply(final org.eclipse.xtext.generator.parser.antlr.AntlrOptions it) {
+        AntlrOptions _options = TestLanguage.this.parserGenerator.getOptions();
         boolean _isBacktrack = _options.isBacktrack();
         it.setBacktrack(_isBacktrack);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_1 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_1 = TestLanguage.this.parserGenerator.getOptions();
         boolean _isBacktrackLexer = _options_1.isBacktrackLexer();
         it.setBacktrackLexer(_isBacktrackLexer);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_2 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_2 = TestLanguage.this.parserGenerator.getOptions();
         boolean _isClassSplitting = _options_2.isClassSplitting();
         it.setClassSplitting(_isClassSplitting);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_3 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_3 = TestLanguage.this.parserGenerator.getOptions();
         int _casesPerSpecialStateSwitch = _options_3.getCasesPerSpecialStateSwitch();
         String _string = Integer.valueOf(_casesPerSpecialStateSwitch).toString();
         it.setCasesPerSpecialStateSwitch(_string);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_4 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_4 = TestLanguage.this.parserGenerator.getOptions();
         int _fieldsPerClass = _options_4.getFieldsPerClass();
         String _string_1 = Integer.valueOf(_fieldsPerClass).toString();
         it.setFieldsPerClass(_string_1);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_5 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_5 = TestLanguage.this.parserGenerator.getOptions();
         boolean _isIgnoreCase = _options_5.isIgnoreCase();
         it.setIgnoreCase(_isIgnoreCase);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_6 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_6 = TestLanguage.this.parserGenerator.getOptions();
         int _k = _options_6.getK();
         it.setK(_k);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_7 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_7 = TestLanguage.this.parserGenerator.getOptions();
         boolean _isMemoize = _options_7.isMemoize();
         it.setMemoize(_isMemoize);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_8 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_8 = TestLanguage.this.parserGenerator.getOptions();
         boolean _isOptimizeCodeQuality = _options_8.isOptimizeCodeQuality();
         it.setOptimizeCodeQuality(_isOptimizeCodeQuality);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_9 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_9 = TestLanguage.this.parserGenerator.getOptions();
         boolean _isSkipUnusedRules = _options_9.isSkipUnusedRules();
         it.setSkipUnusedRules(_isSkipUnusedRules);
-        org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions _options_10 = TestLanguage.this.parserGenerator.getOptions();
+        AntlrOptions _options_10 = TestLanguage.this.parserGenerator.getOptions();
         boolean _isStripAllComments = _options_10.isStripAllComments();
         it.setStripAllComments(_isStripAllComments);
       }
     };
-    AntlrOptions _doubleArrow = ObjectExtensions.<AntlrOptions>operator_doubleArrow(_antlrOptions, _function);
+    org.eclipse.xtext.generator.parser.antlr.AntlrOptions _doubleArrow = ObjectExtensions.<org.eclipse.xtext.generator.parser.antlr.AntlrOptions>operator_doubleArrow(_antlrOptions, _function);
     comparison.setOptions(_doubleArrow);
     result.add(comparison);
     result.add(this.grammarAccess);
