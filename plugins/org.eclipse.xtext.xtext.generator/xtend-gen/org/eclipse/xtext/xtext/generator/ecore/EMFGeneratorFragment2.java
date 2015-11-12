@@ -978,6 +978,9 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
         String _lineDelimiter = this.codeConfig.getLineDelimiter();
         genModel.setLineDelimiter(_lineDelimiter);
+        String _fileHeader = this.codeConfig.getFileHeader();
+        String _trimMultiLineComment = EMFGeneratorFragment2.trimMultiLineComment(_fileHeader);
+        genModel.setCopyrightText(_trimMultiLineComment);
       }
       EList<EObject> _contents_1 = genModelFile.getContents();
       _contents_1.add(genModel);
@@ -985,6 +988,13 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public static String trimMultiLineComment(final String string) {
+    String _replace = string.replace("*/", "");
+    String _replace_1 = _replace.replace("/*", "");
+    String _replace_2 = _replace_1.replace(" * ", "");
+    return _replace_2.trim();
   }
   
   protected Set<EPackage> getReferencedEPackages(final List<EPackage> packs) {
