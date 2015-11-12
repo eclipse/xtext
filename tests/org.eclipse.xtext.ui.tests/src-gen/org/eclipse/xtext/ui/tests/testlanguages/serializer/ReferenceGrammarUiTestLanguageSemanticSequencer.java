@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.testlanguages.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.Erwachsener;
 import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.Familie;
@@ -32,8 +30,13 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 	private ReferenceGrammarUiTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == ReferenceGrammarUiPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == ReferenceGrammarUiPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case ReferenceGrammarUiPackage.ERWACHSENER:
 				sequence_Erwachsener(context, (Erwachsener) semanticObject); 
 				return; 
@@ -53,22 +56,26 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 				sequence_Spielzeug(context, (Spielzeug) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Person returns Erwachsener
+	 *     Erwachsener returns Erwachsener
+	 *
 	 * Constraint:
 	 *     (name=ID age=INT)
 	 */
-	protected void sequence_Erwachsener(EObject context, Erwachsener semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__NAME) == ValueTransient.YES)
+	protected void sequence_Erwachsener(ISerializationContext context, Erwachsener semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__NAME));
-			if(transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__AGE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__AGE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__AGE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0(), semanticObject.getAge());
 		feeder.finish();
@@ -76,36 +83,45 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * Contexts:
+	 *     Familie returns Familie
+	 *
 	 * Constraint:
 	 *     ((name='keyword' | name=STRING | name=ID) mutter=[Erwachsener|ID] vater=[Erwachsener|ID] kinder+=[Kind|ID] kinder+=[Kind|ID]*)
 	 */
-	protected void sequence_Familie(EObject context, Familie semanticObject) {
+	protected void sequence_Familie(ISerializationContext context, Familie semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Farbe returns Farbe
+	 *
 	 * Constraint:
 	 *     (wert='ROT' | wert='BLAU' | wert='GELB' | wert='GRÜN')
 	 */
-	protected void sequence_Farbe(EObject context, Farbe semanticObject) {
+	protected void sequence_Farbe(ISerializationContext context, Farbe semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Person returns Kind
+	 *     Kind returns Kind
+	 *
 	 * Constraint:
 	 *     (name=ID age=INT)
 	 */
-	protected void sequence_Kind(EObject context, Kind semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__NAME) == ValueTransient.YES)
+	protected void sequence_Kind(ISerializationContext context, Kind semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__NAME));
-			if(transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__AGE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__AGE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ReferenceGrammarUiPackage.Literals.PERSON__AGE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0(), semanticObject.getAge());
 		feeder.finish();
@@ -113,29 +129,36 @@ public class ReferenceGrammarUiTestLanguageSemanticSequencer extends AbstractDel
 	
 	
 	/**
+	 * Contexts:
+	 *     Spielplatz returns Spielplatz
+	 *
 	 * Constraint:
-	 *     (groesse=INT beschreibung=STRING? (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*)?
+	 *     (groesse=INT beschreibung=STRING? (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*)
 	 */
-	protected void sequence_Spielplatz(EObject context, Spielplatz semanticObject) {
+	protected void sequence_Spielplatz(ISerializationContext context, Spielplatz semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Spielzeug returns Spielzeug
+	 *
 	 * Constraint:
 	 *     (name=ID farbe=Farbe)
 	 */
-	protected void sequence_Spielzeug(EObject context, Spielzeug semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.SPIELZEUG__NAME) == ValueTransient.YES)
+	protected void sequence_Spielzeug(ISerializationContext context, Spielzeug semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.SPIELZEUG__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ReferenceGrammarUiPackage.Literals.SPIELZEUG__NAME));
-			if(transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.SPIELZEUG__FARBE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, ReferenceGrammarUiPackage.Literals.SPIELZEUG__FARBE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ReferenceGrammarUiPackage.Literals.SPIELZEUG__FARBE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0(), semanticObject.getFarbe());
 		feeder.finish();
 	}
+	
+	
 }

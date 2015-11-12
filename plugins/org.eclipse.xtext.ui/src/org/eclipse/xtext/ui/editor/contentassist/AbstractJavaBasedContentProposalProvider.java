@@ -221,8 +221,17 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter) {
 		ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
 		if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
-			EReference ref = GrammarUtil.getReference(crossReference);
-			lookupCrossReference(crossReference, ref, contentAssistContext, acceptor, filter);
+			EReference ref;
+			if (containingParserRule.isWildcard()) {
+				// TODO we need better ctrl flow analysis here
+				// The cross reference may come from another parser rule then the current model 
+				ref = GrammarUtil.getReference(crossReference, contentAssistContext.getCurrentModel().eClass());
+			} else {
+				ref = GrammarUtil.getReference(crossReference);
+			}
+			if (ref != null) {
+				lookupCrossReference(crossReference, ref, contentAssistContext, acceptor, filter);
+			}
 		}
 	}
 

@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Bug332217TestLanguagePackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Cell;
@@ -23,7 +21,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Col
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.ExternalOpen;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.ObjectReference;
-import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Parameter;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Section;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Selector;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.StringConcat;
@@ -42,8 +39,13 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug332217TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug332217TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug332217TestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug332217TestLanguagePackage.CELL:
 				sequence_Cell(context, (Cell) semanticObject); 
 				return; 
@@ -60,21 +62,21 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			case Bug332217TestLanguagePackage.OBJECT_REFERENCE:
-				if(context == grammarAccess.getNestedObjectReferenceRule()) {
+				if (rule == grammarAccess.getNestedObjectReferenceRule()) {
 					sequence_NestedObjectReference(context, (ObjectReference) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getCollectionExpressionRule() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getImageExpressionRule() ||
-				   context == grammarAccess.getObjectReferenceRule() ||
-				   context == grammarAccess.getScalarExpressionRule()) {
+				else if (rule == grammarAccess.getObjectReferenceRule()
+						|| rule == grammarAccess.getExpressionRule()
+						|| rule == grammarAccess.getImageExpressionRule()
+						|| rule == grammarAccess.getScalarExpressionRule()
+						|| rule == grammarAccess.getCollectionExpressionRule()) {
 					sequence_ObjectReference(context, (ObjectReference) semanticObject); 
 					return; 
 				}
 				else break;
 			case Bug332217TestLanguagePackage.PARAMETER:
-				sequence_Parameter(context, (Parameter) semanticObject); 
+				sequence_Parameter(context, (org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Parameter) semanticObject); 
 				return; 
 			case Bug332217TestLanguagePackage.SECTION:
 				sequence_Section(context, (Section) semanticObject); 
@@ -104,39 +106,44 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_TypeDescription(context, (TypeDescription) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     ViewContentElement returns Cell
+	 *     Cell returns Cell
+	 *
 	 * Constraint:
 	 *     (
 	 *         type=CellType 
 	 *         iterator=CollectionIterator? 
-	 *         text=ScalarExpression? 
-	 *         details=ScalarExpression? 
-	 *         image=ScalarExpression? 
-	 *         action=ViewAction? 
-	 *         accessory=CellAccessory?
+	 *         (text=ScalarExpression | details=ScalarExpression | image=ScalarExpression | action=ViewAction | accessory=CellAccessory)*
 	 *     )
 	 */
-	protected void sequence_Cell(EObject context, Cell semanticObject) {
+	protected void sequence_Cell(ISerializationContext context, Cell semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns StringSplit
+	 *     CollectionExpression returns StringSplit
+	 *     CollectionFunction returns StringSplit
+	 *
 	 * Constraint:
 	 *     (value=ScalarExpression delimiter=ScalarExpression)
 	 */
-	protected void sequence_CollectionFunction(EObject context, StringSplit semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_SPLIT__VALUE) == ValueTransient.YES)
+	protected void sequence_CollectionFunction(ISerializationContext context, StringSplit semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_SPLIT__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_SPLIT__VALUE));
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_SPLIT__DELIMITER) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_SPLIT__DELIMITER) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_SPLIT__DELIMITER));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCollectionFunctionAccess().getValueScalarExpressionParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.accept(grammarAccess.getCollectionFunctionAccess().getDelimiterScalarExpressionParserRuleCall_4_0(), semanticObject.getDelimiter());
 		feeder.finish();
@@ -144,18 +151,21 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     PropertyPathPart returns CollectionIterator
+	 *     CollectionIterator returns CollectionIterator
+	 *
 	 * Constraint:
 	 *     (name=ID collection=CollectionExpression)
 	 */
-	protected void sequence_CollectionIterator(EObject context, CollectionIterator semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.PROPERTY_PATH_PART__NAME) == ValueTransient.YES)
+	protected void sequence_CollectionIterator(ISerializationContext context, CollectionIterator semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.PROPERTY_PATH_PART__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.PROPERTY_PATH_PART__NAME));
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.COLLECTION_ITERATOR__COLLECTION) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.COLLECTION_ITERATOR__COLLECTION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.COLLECTION_ITERATOR__COLLECTION));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCollectionIteratorAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getCollectionIteratorAccess().getCollectionCollectionExpressionParserRuleCall_3_0(), semanticObject.getCollection());
 		feeder.finish();
@@ -163,70 +173,94 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns CollectionLiteral
+	 *     CollectionExpression returns CollectionLiteral
+	 *     CollectionLiteral returns CollectionLiteral
+	 *
 	 * Constraint:
 	 *     (items+=ScalarExpression items+=ScalarExpression*)
 	 */
-	protected void sequence_CollectionLiteral(EObject context, CollectionLiteral semanticObject) {
+	protected void sequence_CollectionLiteral(ISerializationContext context, CollectionLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ViewAction returns ExternalOpen
+	 *     ExternalOpen returns ExternalOpen
+	 *
 	 * Constraint:
 	 *     url=ScalarExpression
 	 */
-	protected void sequence_ExternalOpen(EObject context, ExternalOpen semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.EXTERNAL_OPEN__URL) == ValueTransient.YES)
+	protected void sequence_ExternalOpen(ISerializationContext context, ExternalOpen semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.EXTERNAL_OPEN__URL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.EXTERNAL_OPEN__URL));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getExternalOpenAccess().getUrlScalarExpressionParserRuleCall_0(), semanticObject.getUrl());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
-	 *     elements+=TableView*
+	 *     elements+=TableView+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
-	 * Constraint:
-	 *     (object=[PropertyPathPart|ID] tail=NestedObjectReference?)
-	 */
-	protected void sequence_NestedObjectReference(EObject context, ObjectReference semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
+	 * Contexts:
+	 *     NestedObjectReference returns ObjectReference
+	 *
 	 * Constraint:
 	 *     (object=[PropertyPathPart|ID] tail=NestedObjectReference?)
 	 */
-	protected void sequence_ObjectReference(EObject context, ObjectReference semanticObject) {
+	protected void sequence_NestedObjectReference(ISerializationContext context, ObjectReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ObjectReference returns ObjectReference
+	 *     Expression returns ObjectReference
+	 *     ImageExpression returns ObjectReference
+	 *     ScalarExpression returns ObjectReference
+	 *     CollectionExpression returns ObjectReference
+	 *
+	 * Constraint:
+	 *     (object=[PropertyPathPart|ID] tail=NestedObjectReference?)
+	 */
+	protected void sequence_ObjectReference(ISerializationContext context, ObjectReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PropertyPathPart returns Parameter
+	 *     Parameter returns Parameter
+	 *
 	 * Constraint:
 	 *     (description=TypeDescription name=ID)
 	 */
-	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.PROPERTY_PATH_PART__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.PROPERTY_PATH_PART__NAME));
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.PARAMETER__DESCRIPTION) == ValueTransient.YES)
+	protected void sequence_Parameter(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Parameter semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.PARAMETER__DESCRIPTION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.PARAMETER__DESCRIPTION));
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.PROPERTY_PATH_PART__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.PROPERTY_PATH_PART__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getParameterAccess().getDescriptionTypeDescriptionParserRuleCall_0_0(), semanticObject.getDescription());
 		feeder.accept(grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
@@ -234,54 +268,72 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     ViewContentElement returns Section
+	 *     Section returns Section
+	 *
 	 * Constraint:
 	 *     (iterator=CollectionIterator? title=ScalarExpression? cells+=Cell+)
 	 */
-	protected void sequence_Section(EObject context, Section semanticObject) {
+	protected void sequence_Section(ISerializationContext context, Section semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ViewAction returns Selector
+	 *     Selector returns Selector
+	 *
 	 * Constraint:
 	 *     name=SelectorName
 	 */
-	protected void sequence_Selector(EObject context, Selector semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.SELECTOR__NAME) == ValueTransient.YES)
+	protected void sequence_Selector(ISerializationContext context, Selector semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.SELECTOR__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.SELECTOR__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSelectorAccess().getNameSelectorNameParserRuleCall_2_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns StringConcat
+	 *     ImageExpression returns StringConcat
+	 *     ScalarExpression returns StringConcat
+	 *     StringFunction returns StringConcat
+	 *
 	 * Constraint:
 	 *     values+=ScalarExpression+
 	 */
-	protected void sequence_StringFunction(EObject context, StringConcat semanticObject) {
+	protected void sequence_StringFunction(ISerializationContext context, StringConcat semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns StringReplace
+	 *     ImageExpression returns StringReplace
+	 *     ScalarExpression returns StringReplace
+	 *     StringFunction returns StringReplace
+	 *
 	 * Constraint:
 	 *     (value=ScalarExpression match=ScalarExpression replacement=ScalarExpression)
 	 */
-	protected void sequence_StringFunction(EObject context, StringReplace semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_REPLACE__VALUE) == ValueTransient.YES)
+	protected void sequence_StringFunction(ISerializationContext context, StringReplace semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_REPLACE__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_REPLACE__VALUE));
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_REPLACE__MATCH) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_REPLACE__MATCH) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_REPLACE__MATCH));
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_REPLACE__REPLACEMENT) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_REPLACE__REPLACEMENT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_REPLACE__REPLACEMENT));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getStringFunctionAccess().getValueScalarExpressionParserRuleCall_1_2_0(), semanticObject.getValue());
 		feeder.accept(grammarAccess.getStringFunctionAccess().getMatchScalarExpressionParserRuleCall_1_4_0(), semanticObject.getMatch());
 		feeder.accept(grammarAccess.getStringFunctionAccess().getReplacementScalarExpressionParserRuleCall_1_6_0(), semanticObject.getReplacement());
@@ -290,58 +342,69 @@ public class Bug332217TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns StringUrlConform
+	 *     ImageExpression returns StringUrlConform
+	 *     ScalarExpression returns StringUrlConform
+	 *     StringFunction returns StringUrlConform
+	 *
 	 * Constraint:
 	 *     value=ScalarExpression
 	 */
-	protected void sequence_StringFunction(EObject context, StringUrlConform semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_URL_CONFORM__VALUE) == ValueTransient.YES)
+	protected void sequence_StringFunction(ISerializationContext context, StringUrlConform semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_URL_CONFORM__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_URL_CONFORM__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getStringFunctionAccess().getValueScalarExpressionParserRuleCall_2_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Expression returns StringLiteral
+	 *     ImageExpression returns StringLiteral
+	 *     ScalarExpression returns StringLiteral
+	 *     StringLiteral returns StringLiteral
+	 *
 	 * Constraint:
 	 *     value=STRING
 	 */
-	protected void sequence_StringLiteral(EObject context, StringLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_LITERAL__VALUE) == ValueTransient.YES)
+	protected void sequence_StringLiteral(ISerializationContext context, StringLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug332217TestLanguagePackage.Literals.STRING_LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     TableView returns TableView
+	 *
 	 * Constraint:
-	 *     (
-	 *         name=ID 
-	 *         content=Parameter? 
-	 *         title=ScalarExpression? 
-	 *         titleImage=ImageExpression? 
-	 *         style=TableViewStyle? 
-	 *         sections+=Section*
-	 *     )
+	 *     (name=ID content=Parameter? (title=ScalarExpression | titleImage=ImageExpression | style=TableViewStyle)* sections+=Section*)
 	 */
-	protected void sequence_TableView(EObject context, TableView semanticObject) {
+	protected void sequence_TableView(ISerializationContext context, TableView semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeDescription returns TypeDescription
+	 *
 	 * Constraint:
 	 *     (type=ID many?='[]'?)
 	 */
-	protected void sequence_TypeDescription(EObject context, TypeDescription semanticObject) {
+	protected void sequence_TypeDescription(ISerializationContext context, TypeDescription semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

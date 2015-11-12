@@ -112,7 +112,8 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	//	scenario=Scenario2<false>) | '#7' scenario=Scenario3<true> | '#8' scenario=Scenario3<false> | '#9'
 	//	(scenario=Scenario4<true> | scenario=Scenario2<true> 'trailing'?) | '#10' (scenario=Scenario4<true> |
 	//	scenario=Scenario2<false> 'trailing'?) | '#11' (scenario=Scenario4<false> | scenario=Scenario2<true> 'trailing'?) |
-	//	'#12' (scenario=Scenario4<false> | scenario=Scenario2<false> 'trailing'?));
+	//	'#12' (scenario=Scenario4<false> | scenario=Scenario2<false> 'trailing'?) | '#13' scenario=Scenario5<false> | '#14'
+	//	scenario=Scenario5<true>);
 	public ParametersTestLanguageGrammarAccess.ParserRuleParametersElements getParametersTestLanguageParserRuleParametersAccess() {
 		return gaParametersTestLanguage.getParserRuleParametersAccess();
 	}
@@ -160,6 +161,18 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	
 	public ParserRule getScenario4Rule() {
 		return getScenario4Access().getRule();
+	}
+
+	//Scenario5 <Include Scenario:
+	//	<Include> {Scenario} 'include'
+	//	| {Scenario} 'trailing'
+	//	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false>
+	public ParametersTestLanguageGrammarAccess.Scenario5Elements getScenario5Access() {
+		return gaParametersTestLanguage.getScenario5Access();
+	}
+	
+	public ParserRule getScenario5Rule() {
+		return getScenario5Access().getRule();
 	}
 
 	//IdOrKeyword <Keyword>:

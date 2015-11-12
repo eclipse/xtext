@@ -128,7 +128,7 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getNLRule())
+		if (ruleCall.getRule() == grammarAccess.getNLRule())
 			return getNLToken(semanticObject, ruleCall, node);
 		return "";
 	}
@@ -150,103 +150,103 @@ public class Bug348199TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Timeperiod_NLTerminalRuleCall_3_0_2_0_p.equals(syntax))
+			if (match_Timeperiod_NLTerminalRuleCall_3_0_2_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_0_2_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_0_3_0_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_0_3_0_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_0_3_0_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_0_3_0_3_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_0_3_0_3_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_0_3_0_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_0_3_1_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_0_3_1_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_0_3_1_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_0_3_1_3_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_0_3_1_3_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_0_3_1_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_0_4_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_0_4_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_0_4_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_1_2_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_1_2_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_1_2_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_1_3_0_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_1_3_0_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_1_3_0_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_1_3_0_3_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_1_3_0_3_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_1_3_0_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_1_3_1_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_1_3_1_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_1_3_1_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_1_3_1_3_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_1_3_1_3_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_1_3_1_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_1_4_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_1_4_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_1_4_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_2_2_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_2_2_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_2_2_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_2_3_0_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_2_3_0_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_2_3_0_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_2_3_0_3_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_2_3_0_3_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_2_3_0_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_2_3_1_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_2_3_1_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_2_3_1_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_2_3_1_3_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_2_3_1_3_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_2_3_1_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_2_4_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_2_4_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_2_4_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_3_2_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_3_2_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_3_2_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_3_3_0_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_3_3_0_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_3_3_0_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_3_3_0_3_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_3_3_0_3_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_3_3_0_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_3_3_1_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_3_3_1_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_3_3_1_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_3_3_1_3_0_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_3_3_1_3_0_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_3_3_1_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_3_4_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_3_4_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_3_4_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_4_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_4_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_4_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_4_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_4_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_4_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_4_4_0_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_4_4_0_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_4_4_0_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_4_4_0_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_4_4_0_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_4_4_0_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_4_4_1_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_4_4_1_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_4_4_1_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_4_4_1_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_4_4_1_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_4_4_1_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_5_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_5_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_5_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_5_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_5_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_5_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_5_4_0_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_5_4_0_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_5_4_0_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_5_4_0_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_5_4_0_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_5_4_0_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_5_4_1_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_5_4_1_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_5_4_1_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_5_4_1_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_5_4_1_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_5_4_1_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_6_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_6_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_6_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_6_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_6_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_6_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_6_4_0_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_6_4_0_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_6_4_0_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_6_4_0_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_6_4_0_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_6_4_0_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_6_4_1_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_6_4_1_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_6_4_1_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_6_4_1_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_6_4_1_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_6_4_1_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_7_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_7_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_7_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_7_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_7_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_7_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_7_4_0_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_7_4_0_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_7_4_0_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_7_4_0_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_7_4_0_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_7_4_0_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_7_4_1_2_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_7_4_1_2_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_7_4_1_2_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod_NLTerminalRuleCall_3_7_4_1_3_1_p.equals(syntax))
+			else if (match_Timeperiod_NLTerminalRuleCall_3_7_4_1_3_1_p.equals(syntax))
 				emit_Timeperiod_NLTerminalRuleCall_3_7_4_1_3_1_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Timeperiod___DigitEightKeyword_3_7_0_LeftCurlyBracketKeyword_3_7_1_NLTerminalRuleCall_3_7_2_p_RightCurlyBracketKeyword_3_7_5___or___DigitFiveKeyword_3_4_0_LeftCurlyBracketKeyword_3_4_1_NLTerminalRuleCall_3_4_2_p_RightCurlyBracketKeyword_3_4_5___or___DigitFourKeyword_3_3_0_LeftCurlyBracketKeyword_3_3_1_NLTerminalRuleCall_3_3_4_p_RightCurlyBracketKeyword_3_3_5___or___DigitOneKeyword_3_0_0_LeftCurlyBracketKeyword_3_0_1_NLTerminalRuleCall_3_0_4_p_RightCurlyBracketKeyword_3_0_5___or___DigitSixKeyword_3_5_0_LeftCurlyBracketKeyword_3_5_1_NLTerminalRuleCall_3_5_2_p_RightCurlyBracketKeyword_3_5_5___or___DigitTwoKeyword_3_1_0_LeftCurlyBracketKeyword_3_1_1_NLTerminalRuleCall_3_1_4_p_RightCurlyBracketKeyword_3_1_5__.equals(syntax))
+			else if (match_Timeperiod___DigitEightKeyword_3_7_0_LeftCurlyBracketKeyword_3_7_1_NLTerminalRuleCall_3_7_2_p_RightCurlyBracketKeyword_3_7_5___or___DigitFiveKeyword_3_4_0_LeftCurlyBracketKeyword_3_4_1_NLTerminalRuleCall_3_4_2_p_RightCurlyBracketKeyword_3_4_5___or___DigitFourKeyword_3_3_0_LeftCurlyBracketKeyword_3_3_1_NLTerminalRuleCall_3_3_4_p_RightCurlyBracketKeyword_3_3_5___or___DigitOneKeyword_3_0_0_LeftCurlyBracketKeyword_3_0_1_NLTerminalRuleCall_3_0_4_p_RightCurlyBracketKeyword_3_0_5___or___DigitSixKeyword_3_5_0_LeftCurlyBracketKeyword_3_5_1_NLTerminalRuleCall_3_5_2_p_RightCurlyBracketKeyword_3_5_5___or___DigitTwoKeyword_3_1_0_LeftCurlyBracketKeyword_3_1_1_NLTerminalRuleCall_3_1_4_p_RightCurlyBracketKeyword_3_1_5__.equals(syntax))
 				emit_Timeperiod___DigitEightKeyword_3_7_0_LeftCurlyBracketKeyword_3_7_1_NLTerminalRuleCall_3_7_2_p_RightCurlyBracketKeyword_3_7_5___or___DigitFiveKeyword_3_4_0_LeftCurlyBracketKeyword_3_4_1_NLTerminalRuleCall_3_4_2_p_RightCurlyBracketKeyword_3_4_5___or___DigitFourKeyword_3_3_0_LeftCurlyBracketKeyword_3_3_1_NLTerminalRuleCall_3_3_4_p_RightCurlyBracketKeyword_3_3_5___or___DigitOneKeyword_3_0_0_LeftCurlyBracketKeyword_3_0_1_NLTerminalRuleCall_3_0_4_p_RightCurlyBracketKeyword_3_0_5___or___DigitSixKeyword_3_5_0_LeftCurlyBracketKeyword_3_5_1_NLTerminalRuleCall_3_5_2_p_RightCurlyBracketKeyword_3_5_5___or___DigitTwoKeyword_3_1_0_LeftCurlyBracketKeyword_3_1_1_NLTerminalRuleCall_3_1_4_p_RightCurlyBracketKeyword_3_1_5__(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

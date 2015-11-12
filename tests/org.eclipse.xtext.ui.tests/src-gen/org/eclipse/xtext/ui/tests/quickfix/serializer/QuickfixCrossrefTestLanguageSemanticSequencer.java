@@ -4,15 +4,14 @@
 package org.eclipse.xtext.ui.tests.quickfix.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element;
 import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main;
 import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage;
@@ -25,8 +24,13 @@ public class QuickfixCrossrefTestLanguageSemanticSequencer extends AbstractDeleg
 	private QuickfixCrossrefTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == QuickfixCrossrefPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == QuickfixCrossrefPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case QuickfixCrossrefPackage.ELEMENT:
 				sequence_Element(context, (Element) semanticObject); 
 				return; 
@@ -34,23 +38,32 @@ public class QuickfixCrossrefTestLanguageSemanticSequencer extends AbstractDeleg
 				sequence_Main(context, (Main) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
 	 *     (doc=STRING? name=ID contained+=Element* referenced+=[Element|ID]*)
 	 */
-	protected void sequence_Element(EObject context, Element semanticObject) {
+	protected void sequence_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Main returns Main
+	 *
 	 * Constraint:
-	 *     elements+=Element*
+	 *     elements+=Element+
 	 */
-	protected void sequence_Main(EObject context, Main semanticObject) {
+	protected void sequence_Main(ISerializationContext context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

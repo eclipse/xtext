@@ -44,11 +44,11 @@ public class DomainModelTestLanguageSyntacticSequencer extends AbstractSyntactic
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Attribute_SemicolonKeyword_4_q.equals(syntax))
+			if (match_Attribute_SemicolonKeyword_4_q.equals(syntax))
 				emit_Attribute_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_DataType_SemicolonKeyword_2_q.equals(syntax))
+			else if (match_DataType_SemicolonKeyword_2_q.equals(syntax))
 				emit_DataType_SemicolonKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Reference_SemicolonKeyword_4_q.equals(syntax))
+			else if (match_Reference_SemicolonKeyword_4_q.equals(syntax))
 				emit_Reference_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

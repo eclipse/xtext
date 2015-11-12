@@ -44,6 +44,7 @@ public class ParametersTestLanguageExParser extends AbstractContentAssistParser 
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getAlternatives_1_11_1(), "superParserRuleParameters__Alternatives_1_11_1");
 					put(grammarAccess.getParametersTestLanguageScenario1Access().getAlternatives(), "superScenario1__Alternatives");
 					put(grammarAccess.getScenario3Access().getAlternatives(), "rule__Scenario3__Alternatives");
+					put(grammarAccess.getScenario5Access().getAlternatives(), "rule__Scenario5__Alternatives");
 					put(grammarAccess.getIdOrKeywordAccess().getAlternatives(), "rule__IdOrKeyword__Alternatives");
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getGroup(), "superParserRuleParameters__Group__0");
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getGroup_1_0(), "superParserRuleParameters__Group_1_0__0");
@@ -64,9 +65,15 @@ public class ParametersTestLanguageExParser extends AbstractContentAssistParser 
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getGroup_1_10_1_1(), "superParserRuleParameters__Group_1_10_1_1__0");
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getGroup_1_11(), "superParserRuleParameters__Group_1_11__0");
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getGroup_1_11_1_1(), "superParserRuleParameters__Group_1_11_1_1__0");
+					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getGroup_1_12(), "superParserRuleParameters__Group_1_12__0");
+					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getGroup_1_13(), "superParserRuleParameters__Group_1_13__0");
 					put(grammarAccess.getParametersTestLanguageScenario1Access().getGroup_0(), "superScenario1__Group_0__0");
 					put(grammarAccess.getParametersTestLanguageScenario1Access().getGroup_1(), "superScenario1__Group_1__0");
 					put(grammarAccess.getScenario4Access().getGroup(), "rule__Scenario4__Group__0");
+					put(grammarAccess.getScenario5Access().getGroup_0(), "rule__Scenario5__Group_0__0");
+					put(grammarAccess.getScenario5Access().getGroup_1(), "rule__Scenario5__Group_1__0");
+					put(grammarAccess.getScenario5Access().getGroup_2(), "rule__Scenario5__Group_2__0");
+					put(grammarAccess.getScenario5Access().getGroup_2_2(), "rule__Scenario5__Group_2_2__0");
 					put(grammarAccess.getIdOrKeywordAccess().getGroup_0(), "rule__IdOrKeyword__Group_0__0");
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getScenarioAssignment_1_0_1(), "superParserRuleParameters__ScenarioAssignment_1_0_1");
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getScenarioAssignment_1_1_1(), "superParserRuleParameters__ScenarioAssignment_1_1_1");
@@ -84,12 +91,16 @@ public class ParametersTestLanguageExParser extends AbstractContentAssistParser 
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getScenarioAssignment_1_10_1_1_0(), "superParserRuleParameters__ScenarioAssignment_1_10_1_1_0");
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getScenarioAssignment_1_11_1_0(), "superParserRuleParameters__ScenarioAssignment_1_11_1_0");
 					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getScenarioAssignment_1_11_1_1_0(), "superParserRuleParameters__ScenarioAssignment_1_11_1_1_0");
+					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getScenarioAssignment_1_12_1(), "superParserRuleParameters__ScenarioAssignment_1_12_1");
+					put(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getScenarioAssignment_1_13_1(), "superParserRuleParameters__ScenarioAssignment_1_13_1");
 					put(grammarAccess.getParametersTestLanguageScenario1Access().getFirstAssignment_0_0(), "superScenario1__FirstAssignment_0_0");
 					put(grammarAccess.getParametersTestLanguageScenario1Access().getSecondAssignment_1_0(), "superScenario1__SecondAssignment_1_0");
 					put(grammarAccess.getScenario2Access().getFirstAssignment(), "rule__Scenario2__FirstAssignment");
 					put(grammarAccess.getScenario3Access().getFirstAssignment_0(), "rule__Scenario3__FirstAssignment_0");
 					put(grammarAccess.getScenario3Access().getSecondAssignment_1(), "rule__Scenario3__SecondAssignment_1");
 					put(grammarAccess.getScenario4Access().getSecondAssignment_0(), "rule__Scenario4__SecondAssignment_0");
+					put(grammarAccess.getScenario5Access().getFirstAssignment_2_3(), "rule__Scenario5__FirstAssignment_2_3");
+					put(grammarAccess.getScenario5Access().getSecondAssignment_2_4(), "rule__Scenario5__SecondAssignment_2_4");
 				}
 			};
 		}

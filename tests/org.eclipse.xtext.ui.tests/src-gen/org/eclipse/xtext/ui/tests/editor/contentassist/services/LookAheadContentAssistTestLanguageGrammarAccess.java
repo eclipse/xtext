@@ -66,8 +66,8 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 
-		//('(' attribute+=Attribute* attribute+=Pair* ')' | '[' attribute+=Attribute+ attribute+=Pair* ']' | '<'
-		//attribute+=Attribute* attribute+=Pair+ '>' | '{' attribute+=Attribute+ attribute+=Pair+ '}')
+		//'(' attribute+=Attribute* attribute+=Pair* ')' | '[' attribute+=Attribute+ attribute+=Pair* ']' | '<'
+		//attribute+=Attribute* attribute+=Pair+ '>' | '{' attribute+=Attribute+ attribute+=Pair+ '}'
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'(' attribute+=Attribute* attribute+=Pair* ')'

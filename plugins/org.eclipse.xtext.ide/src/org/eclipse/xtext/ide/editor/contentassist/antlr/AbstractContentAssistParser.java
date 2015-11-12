@@ -269,7 +269,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	private String[][] getRequiredRuleNames(String ruleName, List<Integer> paramStack, AbstractElement elementToParse) {
 		return requiredRuleNameComputer.getRequiredRuleNames(new RequiredRuleNameComputer.Param(ruleName, paramStack, elementToParse) {
 			@Override
-			protected String getBaseRuleName(AbstractElement element) {
+			public String getBaseRuleName(AbstractElement element) {
 				return getRuleName(element);
 			}
 		});

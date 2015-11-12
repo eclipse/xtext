@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.CompositeType;
 import org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.CompositeTypeEntry;
@@ -30,8 +28,13 @@ public class DatatypeRuleTestLanguageSemanticSequencer extends AbstractDelegatin
 	private DatatypeRuleTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == DatatypeRuleTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == DatatypeRuleTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case DatatypeRuleTestPackage.COMPOSITE_TYPE:
 				sequence_CompositeType(context, (CompositeType) semanticObject); 
 				return; 
@@ -45,38 +48,44 @@ public class DatatypeRuleTestLanguageSemanticSequencer extends AbstractDelegatin
 				sequence_Types(context, (Types) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     CompositeTypeEntry returns CompositeTypeEntry
+	 *
 	 * Constraint:
 	 *     dataType=[Type|TypeId]
 	 */
-	protected void sequence_CompositeTypeEntry(EObject context, CompositeTypeEntry semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, DatatypeRuleTestPackage.Literals.COMPOSITE_TYPE_ENTRY__DATA_TYPE) == ValueTransient.YES)
+	protected void sequence_CompositeTypeEntry(ISerializationContext context, CompositeTypeEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DatatypeRuleTestPackage.Literals.COMPOSITE_TYPE_ENTRY__DATA_TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DatatypeRuleTestPackage.Literals.COMPOSITE_TYPE_ENTRY__DATA_TYPE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCompositeTypeEntryAccess().getDataTypeTypeTypeIdParserRuleCall_0_1(), semanticObject.getDataType());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns CompositeType
+	 *     CompositeType returns CompositeType
+	 *
 	 * Constraint:
 	 *     (name=ID baseType=CompositeTypeEntry)
 	 */
-	protected void sequence_CompositeType(EObject context, CompositeType semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, DatatypeRuleTestPackage.Literals.TYPE__NAME) == ValueTransient.YES)
+	protected void sequence_CompositeType(ISerializationContext context, CompositeType semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DatatypeRuleTestPackage.Literals.TYPE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DatatypeRuleTestPackage.Literals.TYPE__NAME));
-			if(transientValues.isValueTransient(semanticObject, DatatypeRuleTestPackage.Literals.COMPOSITE_TYPE__BASE_TYPE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, DatatypeRuleTestPackage.Literals.COMPOSITE_TYPE__BASE_TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DatatypeRuleTestPackage.Literals.COMPOSITE_TYPE__BASE_TYPE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCompositeTypeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getCompositeTypeAccess().getBaseTypeCompositeTypeEntryParserRuleCall_3_0(), semanticObject.getBaseType());
 		feeder.finish();
@@ -84,26 +93,35 @@ public class DatatypeRuleTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns SimpleType
+	 *     SimpleType returns SimpleType
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_SimpleType(EObject context, SimpleType semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, DatatypeRuleTestPackage.Literals.TYPE__NAME) == ValueTransient.YES)
+	protected void sequence_SimpleType(ISerializationContext context, SimpleType semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DatatypeRuleTestPackage.Literals.TYPE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DatatypeRuleTestPackage.Literals.TYPE__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Types
+	 *     Types returns Types
+	 *
 	 * Constraint:
-	 *     (types+=Type*)
+	 *     types+=Type*
 	 */
-	protected void sequence_Types(EObject context, Types semanticObject) {
+	protected void sequence_Types(ISerializationContext context, Types semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

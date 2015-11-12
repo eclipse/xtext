@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Attribute;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Bug291022TestLanguagePackage;
@@ -29,8 +27,13 @@ public class Bug291022TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug291022TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug291022TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug291022TestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug291022TestLanguagePackage.ATTRIBUTE:
 				sequence_Attribute(context, (Attribute) semanticObject); 
 				return; 
@@ -41,22 +44,26 @@ public class Bug291022TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_RootModel(context, (RootModel) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     ModelAttribute returns Attribute
+	 *     Attribute returns Attribute
+	 *
 	 * Constraint:
 	 *     (feature=[ModelElement|ID] value=STRING)
 	 */
-	protected void sequence_Attribute(EObject context, Attribute semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug291022TestLanguagePackage.Literals.ATTRIBUTE__FEATURE) == ValueTransient.YES)
+	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug291022TestLanguagePackage.Literals.ATTRIBUTE__FEATURE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug291022TestLanguagePackage.Literals.ATTRIBUTE__FEATURE));
-			if(transientValues.isValueTransient(semanticObject, Bug291022TestLanguagePackage.Literals.ATTRIBUTE__VALUE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug291022TestLanguagePackage.Literals.ATTRIBUTE__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug291022TestLanguagePackage.Literals.ATTRIBUTE__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAttributeAccess().getFeatureModelElementIDTerminalRuleCall_0_0_1(), semanticObject.getFeature());
 		feeder.accept(grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
@@ -64,19 +71,28 @@ public class Bug291022TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     ModelElement returns ModelElement
+	 *     ModelAttribute returns ModelElement
+	 *
 	 * Constraint:
 	 *     (firstReference=[ModelElement|ID] name=ID? secondReference=[ModelElement|ID]? elements+=ModelAttribute*)
 	 */
-	protected void sequence_ModelElement(EObject context, ModelElement semanticObject) {
+	protected void sequence_ModelElement(ISerializationContext context, ModelElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     RootModel returns RootModel
+	 *
 	 * Constraint:
 	 *     (name=ID type=[ModelElement|ID]? elements+=ModelAttribute*)
 	 */
-	protected void sequence_RootModel(EObject context, RootModel semanticObject) {
+	protected void sequence_RootModel(ISerializationContext context, RootModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

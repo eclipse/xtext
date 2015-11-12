@@ -10,6 +10,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -24,6 +25,8 @@ public class ParametersTestLanguageSyntacticSequencer extends AbstractSyntacticS
 	protected AbstractElementAlias match_ParserRuleParameters_TrailingKeyword_1_11_1_1_1_q;
 	protected AbstractElementAlias match_ParserRuleParameters_TrailingKeyword_1_8_1_1_1_q;
 	protected AbstractElementAlias match_ParserRuleParameters_TrailingKeyword_1_9_1_1_1_q;
+	protected AbstractElementAlias match_Scenario5_IncludeKeyword_0_1_or_TrailingKeyword_1_1;
+	protected AbstractElementAlias match_Scenario5_IncludeKeyword_2_2_0_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
@@ -32,6 +35,8 @@ public class ParametersTestLanguageSyntacticSequencer extends AbstractSyntacticS
 		match_ParserRuleParameters_TrailingKeyword_1_11_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParserRuleParametersAccess().getTrailingKeyword_1_11_1_1_1());
 		match_ParserRuleParameters_TrailingKeyword_1_8_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParserRuleParametersAccess().getTrailingKeyword_1_8_1_1_1());
 		match_ParserRuleParameters_TrailingKeyword_1_9_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParserRuleParametersAccess().getTrailingKeyword_1_9_1_1_1());
+		match_Scenario5_IncludeKeyword_0_1_or_TrailingKeyword_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getScenario5Access().getIncludeKeyword_0_1()), new TokenAlias(false, false, grammarAccess.getScenario5Access().getTrailingKeyword_1_1()));
+		match_Scenario5_IncludeKeyword_2_2_0_q = new TokenAlias(false, true, grammarAccess.getScenario5Access().getIncludeKeyword_2_2_0());
 	}
 	
 	@Override
@@ -46,14 +51,18 @@ public class ParametersTestLanguageSyntacticSequencer extends AbstractSyntacticS
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_ParserRuleParameters_TrailingKeyword_1_10_1_1_1_q.equals(syntax))
+			if (match_ParserRuleParameters_TrailingKeyword_1_10_1_1_1_q.equals(syntax))
 				emit_ParserRuleParameters_TrailingKeyword_1_10_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParserRuleParameters_TrailingKeyword_1_11_1_1_1_q.equals(syntax))
+			else if (match_ParserRuleParameters_TrailingKeyword_1_11_1_1_1_q.equals(syntax))
 				emit_ParserRuleParameters_TrailingKeyword_1_11_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParserRuleParameters_TrailingKeyword_1_8_1_1_1_q.equals(syntax))
+			else if (match_ParserRuleParameters_TrailingKeyword_1_8_1_1_1_q.equals(syntax))
 				emit_ParserRuleParameters_TrailingKeyword_1_8_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParserRuleParameters_TrailingKeyword_1_9_1_1_1_q.equals(syntax))
+			else if (match_ParserRuleParameters_TrailingKeyword_1_9_1_1_1_q.equals(syntax))
 				emit_ParserRuleParameters_TrailingKeyword_1_9_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Scenario5_IncludeKeyword_0_1_or_TrailingKeyword_1_1.equals(syntax))
+				emit_Scenario5_IncludeKeyword_0_1_or_TrailingKeyword_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Scenario5_IncludeKeyword_2_2_0_q.equals(syntax))
+				emit_Scenario5_IncludeKeyword_2_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -99,6 +108,28 @@ public class ParametersTestLanguageSyntacticSequencer extends AbstractSyntacticS
 	 *     scenario=Scenario2 (ambiguity) (rule end)
 	 */
 	protected void emit_ParserRuleParameters_TrailingKeyword_1_9_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'include' | 'trailing'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
+	 */
+	protected void emit_Scenario5_IncludeKeyword_0_1_or_TrailingKeyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'include'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'scenario5' (ambiguity) first=IdOrKeyword
+	 */
+	protected void emit_Scenario5_IncludeKeyword_2_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

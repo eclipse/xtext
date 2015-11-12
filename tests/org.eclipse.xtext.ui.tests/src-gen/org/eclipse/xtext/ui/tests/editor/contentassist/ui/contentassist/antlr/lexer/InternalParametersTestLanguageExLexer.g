@@ -20,7 +20,11 @@ Scenario3 : 'scenario3';
 
 Scenario4 : 'scenario4';
 
+Scenario5 : 'scenario5';
+
 Trailing : 'trailing';
+
+Include : 'include';
 
 Keyword : 'keyword';
 
@@ -29,6 +33,10 @@ NumberSignDigitOneDigitZero : '#10';
 NumberSignDigitOneDigitOne : '#11';
 
 NumberSignDigitOneDigitTwo : '#12';
+
+NumberSignDigitOneDigitThree : '#13';
+
+NumberSignDigitOneDigitFour : '#14';
 
 NumberSignDigitOne : '#1';
 

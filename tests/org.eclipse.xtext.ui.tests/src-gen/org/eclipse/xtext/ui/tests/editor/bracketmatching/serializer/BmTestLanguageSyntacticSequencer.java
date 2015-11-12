@@ -44,9 +44,9 @@ public class BmTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Expression_LeftSquareBracketKeyword_2_0_a.equals(syntax))
+			if (match_Expression_LeftSquareBracketKeyword_2_0_a.equals(syntax))
 				emit_Expression_LeftSquareBracketKeyword_2_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SExpression___BeginKeyword_1_1_0_EndKeyword_1_1_2___or___LeftParenthesisKeyword_1_0_0_RightParenthesisKeyword_1_0_2__.equals(syntax))
+			else if (match_SExpression___BeginKeyword_1_1_0_EndKeyword_1_1_2___or___LeftParenthesisKeyword_1_0_0_RightParenthesisKeyword_1_0_2__.equals(syntax))
 				emit_SExpression___BeginKeyword_1_1_0_EndKeyword_1_1_2___or___LeftParenthesisKeyword_1_0_0_RightParenthesisKeyword_1_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
