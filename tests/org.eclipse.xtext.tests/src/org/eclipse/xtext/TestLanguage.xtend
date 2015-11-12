@@ -34,6 +34,9 @@ class TestLanguage extends XtextGeneratorLanguage {
 	EMFGeneratorFragment2 emfGenerator = new EMFGeneratorFragment2
 	XtextAntlrGeneratorFragment2 parserGenerator = new XtextAntlrGeneratorFragment2  => [
 		debugGrammar = true
+		options => [
+			classSplitting = true
+		]
 	]
 	XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment
 	
