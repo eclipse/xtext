@@ -54,7 +54,7 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 				}
 			} else if (rule instanceof TerminalRule) {
 				final TypeRef returnType = rule.getType();
-				return returnType == null || EcorePackage.eINSTANCE.getEString().equals(rule.getType().getClassifier());
+				return ((TerminalRule) rule).isFragment() || returnType == null || EcorePackage.eINSTANCE.getEString().equals(rule.getType().getClassifier());
 			}
 		}
 		else if (feature == XtextPackage.eINSTANCE.getCrossReference_Terminal()) {
