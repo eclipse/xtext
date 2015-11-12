@@ -979,8 +979,12 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         String _lineDelimiter = this.codeConfig.getLineDelimiter();
         genModel.setLineDelimiter(_lineDelimiter);
         String _fileHeader = this.codeConfig.getFileHeader();
-        String _trimMultiLineComment = EMFGeneratorFragment2.trimMultiLineComment(_fileHeader);
-        genModel.setCopyrightText(_trimMultiLineComment);
+        boolean _tripleNotEquals = (_fileHeader != null);
+        if (_tripleNotEquals) {
+          String _fileHeader_1 = this.codeConfig.getFileHeader();
+          String _trimMultiLineComment = EMFGeneratorFragment2.trimMultiLineComment(_fileHeader_1);
+          genModel.setCopyrightText(_trimMultiLineComment);
+        }
       }
       EList<EObject> _contents_1 = genModelFile.getContents();
       _contents_1.add(genModel);
