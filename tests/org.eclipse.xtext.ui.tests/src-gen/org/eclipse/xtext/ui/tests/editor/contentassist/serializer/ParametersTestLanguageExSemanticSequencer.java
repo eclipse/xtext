@@ -57,6 +57,10 @@ public class ParametersTestLanguageExSemanticSequencer extends ParametersTestLan
 					sequence_Scenario4(context, (Scenario) semanticObject); 
 					return; 
 				}
+				else if (rule == grammarAccess.getScenario5Rule()) {
+					sequence_Scenario5(context, (Scenario) semanticObject); 
+					return; 
+				}
 				else break;
 			}
 		if (errorAcceptor != null)

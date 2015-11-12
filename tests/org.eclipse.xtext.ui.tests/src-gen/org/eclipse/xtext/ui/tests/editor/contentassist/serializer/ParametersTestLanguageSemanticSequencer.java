@@ -58,6 +58,10 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 					sequence_Scenario4(context, (Scenario) semanticObject); 
 					return; 
 				}
+				else if (rule == grammarAccess.getScenario5Rule()) {
+					sequence_Scenario5(context, (Scenario) semanticObject); 
+					return; 
+				}
 				else break;
 			}
 		if (errorAcceptor != null)
@@ -85,7 +89,9 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 	 *         scenario=Scenario4 | 
 	 *         scenario=Scenario2 | 
 	 *         scenario=Scenario4 | 
-	 *         scenario=Scenario2
+	 *         scenario=Scenario2 | 
+	 *         scenario=Scenario5 | 
+	 *         scenario=Scenario5
 	 *     )
 	 */
 	protected void sequence_ParserRuleParameters(ISerializationContext context, ParserRuleParameters semanticObject) {
@@ -177,6 +183,19 @@ public class ParametersTestLanguageSemanticSequencer extends AbstractDelegatingS
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getScenario4Access().getSecondIdOrKeywordParserRuleCall_0_0(), semanticObject.getSecond());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Scenario5<Include> returns Scenario
+	 *     Scenario5 returns Scenario
+	 *
+	 * Constraint:
+	 *     (first=IdOrKeyword second=IdOrKeyword)?
+	 */
+	protected void sequence_Scenario5(ISerializationContext context, Scenario semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

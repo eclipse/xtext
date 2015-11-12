@@ -40,7 +40,6 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.LookAheadTerminalRuleCall
 import org.eclipse.xtext.ui.editor.contentassist.antlr.LookaheadKeyword;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
@@ -86,7 +85,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			result.setGrammarElement(current);
 			result.setTrace(Lists.newArrayList(Iterators.filter(grammarElements.iterator(), AbstractElement.class)));
 			result.setLocalTrace(Lists.newArrayList(Iterators.filter(localTrace.iterator(), AbstractElement.class)));
-			result.setParamStack(ImmutableList.copyOf(paramStack));
+			result.setParamStack(Lists.newArrayList(paramStack));
 			if (current instanceof UnorderedGroup) {
 				if (indexToHandledElements != null) {
 					int index = grammarElements.lastIndexOf(current);
@@ -119,6 +118,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	 * @since 2.9
 	 */
 	protected final List<Integer> paramStack;
+	/**
+	 * @since 2.9
+	 */
+	protected final List<Integer> grammarElementsWithParams;
 	protected int stackSize;
 	protected final Set<FollowElement> followElements;
 	protected ObservableXtextTokenStream.StreamListener delegate;
@@ -144,6 +147,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		this.grammarElements = new ArrayList<EObject>();
 		this.localTrace = new ArrayList<EObject>();
 		this.paramStack = new ArrayList<Integer>();
+		this.grammarElementsWithParams = new ArrayList<Integer>();
 		this.followElements = new LinkedHashSetWithoutNull<FollowElement>();
 	}
 	
@@ -153,6 +157,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		this.localTrace = new ArrayList<EObject>();
 		this.followElements = new LinkedHashSetWithoutNull<FollowElement>();
 		this.paramStack = new ArrayList<Integer>();
+		this.grammarElementsWithParams = new ArrayList<Integer>();
 	}
 	
 	/**
@@ -191,21 +196,23 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	public void before(EObject grammarElement, int paramConfig) {
 		before(grammarElement);
 		paramStack.add(paramConfig);
+		grammarElementsWithParams.add(stackSize);
 	}
 	
 	/**
 	 * @since 2.9
 	 */
 	public void after(EObject grammarElement, int paramConfig) {
-		int old = paramStack.remove(paramStack.size() - 1);
+		int old = removeLast(paramStack);
 		if (old != paramConfig) {
 			throw new IllegalStateException(paramConfig + "!=" + old);
 		}
+		removeLast(grammarElementsWithParams);
 		after(grammarElement);
 	}
 
 	public void after(EObject grammarElement) {
-		EObject foundGrammarElement = grammarElements.remove(grammarElements.size() - 1);
+		EObject foundGrammarElement = removeLast(grammarElements);
 		if (grammarElement != foundGrammarElement)
 			throw new IllegalStateException("expected element: '" + grammarElement + "', but was: '"
 					+ foundGrammarElement + "'");
@@ -236,8 +243,24 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 
 	private void removeUnexpectedElements() {
-		while (stackSize < grammarElements.size())
-			grammarElements.remove(grammarElements.size() - 1);
+		int dropParamAt = -1;
+		if (!grammarElementsWithParams.isEmpty()) {
+			dropParamAt = grammarElementsWithParams.get(grammarElementsWithParams.size() - 1);
+		}
+		while (stackSize < grammarElements.size()) {
+			removeLast(grammarElements);
+			if (dropParamAt == grammarElements.size()) {
+				removeLast(paramStack);
+				removeLast(grammarElementsWithParams);
+				if (!grammarElementsWithParams.isEmpty()) {
+					dropParamAt = grammarElementsWithParams.get(grammarElementsWithParams.size() - 1);
+				}
+			}
+		}
+	}
+
+	private <T> T removeLast(List<T> list) {
+		return list.remove(list.size() - 1);
 	}
 
 	@Override

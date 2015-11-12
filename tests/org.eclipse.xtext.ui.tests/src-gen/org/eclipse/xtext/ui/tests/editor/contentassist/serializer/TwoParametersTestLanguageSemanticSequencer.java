@@ -45,6 +45,10 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 					sequence_Scenario1$Param$true$(context, (Scenario) semanticObject); 
 					return; 
 				}
+				else if (rule == grammarAccess.getScenario10Rule()) {
+					sequence_Scenario10(context, (Scenario) semanticObject); 
+					return; 
+				}
 				else if (rule == grammarAccess.getScenario2Rule()) {
 					sequence_Scenario2(context, (Scenario) semanticObject); 
 					return; 
@@ -57,17 +61,17 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 					sequence_Scenario4(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if (rule == grammarAccess.getScenario5Rule() && (ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(0/*A*/), grammarAccess.getScenario5Rule().getParameters().get(1/*B*/)).equals(parameters))) {
-					sequence_Scenario5$A$true$B$true$(context, (Scenario) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getScenario5Rule() && (ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(0/*A*/)).equals(parameters)
-				 			|| ImmutableSet.of(grammarAccess.getScenario5Rule().getParameters().get(1/*B*/)).equals(parameters)
-				 			|| parameters.isEmpty())) {
+				else if (rule == grammarAccess.getScenario5Rule()) {
 					sequence_Scenario5(context, (Scenario) semanticObject); 
 					return; 
 				}
-				else if (rule == grammarAccess.getScenario6Rule()) {
+				else if (rule == grammarAccess.getScenario6Rule() && (ImmutableSet.of(grammarAccess.getScenario6Rule().getParameters().get(0/*A*/), grammarAccess.getScenario6Rule().getParameters().get(1/*B*/)).equals(parameters))) {
+					sequence_Scenario6$A$true$B$true$(context, (Scenario) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getScenario6Rule() && (ImmutableSet.of(grammarAccess.getScenario6Rule().getParameters().get(0/*A*/)).equals(parameters)
+				 			|| ImmutableSet.of(grammarAccess.getScenario6Rule().getParameters().get(1/*B*/)).equals(parameters)
+				 			|| parameters.isEmpty())) {
 					sequence_Scenario6(context, (Scenario) semanticObject); 
 					return; 
 				}
@@ -77,6 +81,10 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 				}
 				else if (rule == grammarAccess.getScenario8Rule()) {
 					sequence_Scenario8(context, (Scenario) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getScenario9Rule()) {
+					sequence_Scenario9(context, (Scenario) semanticObject); 
 					return; 
 				}
 				else break;
@@ -91,22 +99,24 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *
 	 * Constraint:
 	 *     (
-	 *         scenario=Scenario5 | 
-	 *         scenario=Scenario5 | 
-	 *         scenario=Scenario6 | 
-	 *         scenario=Scenario6 | 
 	 *         scenario=Scenario6 | 
 	 *         scenario=Scenario6 | 
 	 *         scenario=Scenario7 | 
 	 *         scenario=Scenario7 | 
+	 *         scenario=Scenario7 | 
+	 *         scenario=Scenario7 | 
 	 *         scenario=Scenario8 | 
-	 *         scenario=Scenario6 | 
 	 *         scenario=Scenario8 | 
-	 *         scenario=Scenario6 | 
-	 *         scenario=Scenario8 | 
-	 *         scenario=Scenario6 | 
-	 *         scenario=Scenario8 | 
-	 *         scenario=Scenario6
+	 *         scenario=Scenario9 | 
+	 *         scenario=Scenario7 | 
+	 *         scenario=Scenario9 | 
+	 *         scenario=Scenario7 | 
+	 *         scenario=Scenario9 | 
+	 *         scenario=Scenario7 | 
+	 *         scenario=Scenario9 | 
+	 *         scenario=Scenario7 | 
+	 *         scenario=Scenario10 | 
+	 *         scenario=Scenario10
 	 *     )
 	 */
 	protected void sequence_ParserRuleParameters(ISerializationContext context, ParserRuleParameters semanticObject) {
@@ -116,59 +126,53 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	
 	/**
 	 * Contexts:
-	 *     Scenario5<A,B> returns Scenario
+	 *     Scenario10<A,B> returns Scenario
+	 *     Scenario10<A> returns Scenario
+	 *     Scenario10<B> returns Scenario
+	 *     Scenario10 returns Scenario
 	 *
 	 * Constraint:
-	 *     first=ID
+	 *     (first=IdOrKeyword second=IdOrKeyword)?
 	 */
-	protected void sequence_Scenario5$A$true$B$true$(ISerializationContext context, Scenario semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getScenario5Access().getFirstIDTerminalRuleCall_0_0_0(), semanticObject.getFirst());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Scenario5<A> returns Scenario
-	 *     Scenario5<B> returns Scenario
-	 *     Scenario5 returns Scenario
-	 *
-	 * Constraint:
-	 *     second=ID
-	 */
-	protected void sequence_Scenario5(ISerializationContext context, Scenario semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getScenario5Access().getSecondIDTerminalRuleCall_1_0_0(), semanticObject.getSecond());
-		feeder.finish();
+	protected void sequence_Scenario10(ISerializationContext context, Scenario semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
 	 *     Scenario6<A,B> returns Scenario
-	 *     Scenario6<A> returns Scenario
-	 *     Scenario6<B> returns Scenario
-	 *     Scenario6 returns Scenario
 	 *
 	 * Constraint:
-	 *     first=IdOrKeyword2
+	 *     first=ID
 	 */
-	protected void sequence_Scenario6(ISerializationContext context, Scenario semanticObject) {
+	protected void sequence_Scenario6$A$true$B$true$(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getScenario6Access().getFirstIdOrKeyword2ParserRuleCall_0(), semanticObject.getFirst());
+		feeder.accept(grammarAccess.getScenario6Access().getFirstIDTerminalRuleCall_0_0_0(), semanticObject.getFirst());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Scenario6<A> returns Scenario
+	 *     Scenario6<B> returns Scenario
+	 *     Scenario6 returns Scenario
+	 *
+	 * Constraint:
+	 *     second=ID
+	 */
+	protected void sequence_Scenario6(ISerializationContext context, Scenario semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getScenario6Access().getSecondIDTerminalRuleCall_1_0_0(), semanticObject.getSecond());
 		feeder.finish();
 	}
 	
@@ -181,10 +185,16 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *     Scenario7 returns Scenario
 	 *
 	 * Constraint:
-	 *     (first=IdOrKeyword2 | second='scenario3')
+	 *     first=IdOrKeyword2
 	 */
 	protected void sequence_Scenario7(ISerializationContext context, Scenario semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__FIRST));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getScenario7Access().getFirstIdOrKeyword2ParserRuleCall_0(), semanticObject.getFirst());
+		feeder.finish();
 	}
 	
 	
@@ -196,15 +206,30 @@ public class TwoParametersTestLanguageSemanticSequencer extends ParametersTestLa
 	 *     Scenario8 returns Scenario
 	 *
 	 * Constraint:
-	 *     second=IdOrKeyword2
+	 *     (first=IdOrKeyword2 | second='scenario3')
 	 */
 	protected void sequence_Scenario8(ISerializationContext context, Scenario semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Scenario9<A,B> returns Scenario
+	 *     Scenario9<A> returns Scenario
+	 *     Scenario9<B> returns Scenario
+	 *     Scenario9 returns Scenario
+	 *
+	 * Constraint:
+	 *     second=IdOrKeyword2
+	 */
+	protected void sequence_Scenario9(ISerializationContext context, Scenario semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ParametersTestLanguagePackage.Literals.SCENARIO__SECOND));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getScenario8Access().getSecondIdOrKeyword2ParserRuleCall_0_0(), semanticObject.getSecond());
+		feeder.accept(grammarAccess.getScenario9Access().getSecondIdOrKeyword2ParserRuleCall_0_0(), semanticObject.getSecond());
 		feeder.finish();
 	}
 	
