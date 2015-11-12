@@ -575,7 +575,9 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 			genModel.runtimeVersion = emfRuntimeVersion
 			genModel.rootExtendsClass = 'org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container'
 			genModel.lineDelimiter = codeConfig.lineDelimiter
-			genModel.copyrightText = codeConfig.fileHeader.trimMultiLineComment
+			if (codeConfig.fileHeader !== null) {
+				genModel.copyrightText = codeConfig.fileHeader.trimMultiLineComment
+			}
 		}
 		genModelFile.contents.add(genModel)
 		return genModel
