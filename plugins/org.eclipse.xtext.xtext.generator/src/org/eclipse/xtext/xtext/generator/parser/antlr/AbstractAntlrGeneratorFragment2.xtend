@@ -90,6 +90,7 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGeneratorFra
 	def protected void splitLexerClassFile(IXtextGeneratorFileSystemAccess fsa, TypeReference lexer) {
 		val content = fsa.readTextFile(lexer.javaPath).toString
 		var AntlrLexerSplitter splitter = new AntlrLexerSplitter(content)
+		splitter.setCasesPerSpecialStateSwitch(options.getCasesPerSpecialStateSwitch());
 		fsa.generateFile(lexer.javaPath, splitter.transform)
 	}
 

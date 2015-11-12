@@ -32,7 +32,7 @@ public class AntlrToolFacade {
 	}
 
 	private String downloadURL = "http://download.itemis.com/antlr-generator-3.2.0-patch.jar";
-	private boolean askBeforeDownload = true;
+	private boolean askBeforeDownload = false;
 
 	public void setAskBeforeDownload(boolean shouldAsk) {
 		this.askBeforeDownload = shouldAsk;

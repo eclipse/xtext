@@ -136,7 +136,6 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 			String content = readFileIntoString(lexerJavaFile, encoding);
 			AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
 			splitter.setAllowDFAStaticClasses(false);
-			splitter.setSpecialStateSwitchSplitting(specialStateSwitchSplitting);
 			splitter.setCasesPerSpecialStateSwitch(casesPerSpecialStateSwitch);
 			writeStringIntoFile(lexerJavaFile, splitter.transform(), encoding);
 		}

@@ -45,7 +45,6 @@ public class AntlrLexerSplitter {
 	private final Scanner scanner;
 	
 	private boolean allowDFAStaticClasses = true;
-	private boolean specialStateSwitchSplitting = false;
 	
 	private int casesPerSpecialStateSwitch = LexerSpecialStateTransitionSplitter.CASES_PER_SPECIAL_STATE_SWITCH;
 	
@@ -78,7 +77,6 @@ public class AntlrLexerSplitter {
 		LexerSpecialStateTransitionSplitter lexerSplitter;
 		lexerSplitter = new LexerSpecialStateTransitionSplitter(false);
 		lexerSplitter.setAllowDFAStaticClasses(allowDFAStaticClasses);
-		lexerSplitter.setSpecialStateSwitchSplitting(specialStateSwitchSplitting);
 		lexerSplitter.setCasesPerSpecialStateSwitch(casesPerSpecialStateSwitch);
 		result = lexerSplitter.transform(result);
 		return result;
@@ -236,20 +234,6 @@ public class AntlrLexerSplitter {
 	 */
 	public void setAllowDFAStaticClasses(boolean value) {
 		this.allowDFAStaticClasses = value;
-	}
-	
-	/**
-	 * @since 2.9
-	 */
-	public boolean isSpecialStateSwitchSplitting() {
-		return specialStateSwitchSplitting;
-	}
-	
-	/**
-	 * @since 2.9
-	 */
-	public void setSpecialStateSwitchSplitting(boolean value) {
-		this.specialStateSwitchSplitting = value;
 	}
 	
 	/**
