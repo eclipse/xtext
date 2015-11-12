@@ -60,6 +60,11 @@ public class XtextTransientValueService2 extends TransientValueService {
 				final TypeRef returnType = rule.getType();
 				if (returnType == null)
 					return YES;
+				if (rule instanceof TerminalRule) {
+					if (((TerminalRule) rule).isFragment()) {
+						return YES;
+					}
+				}
 				if (EcorePackage.eINSTANCE.getEString().equals(rule.getType().getClassifier()))
 					return PREFERABLY;
 				return NO;
