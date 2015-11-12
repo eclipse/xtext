@@ -18,7 +18,7 @@ public abstract class AbstractParametersContentAssistTest extends AbstractConten
 
 	@Test public void testEmptyModel() throws Exception {
 		newBuilder().assertText(
-				"#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10", "#11", "#12");
+				"#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10", "#11", "#12", "#13", "#14");
 	}
 	
 	@Test public void test_01() throws Exception {
@@ -102,5 +102,21 @@ public abstract class AbstractParametersContentAssistTest extends AbstractConten
 
 	@Test public void test_12c() throws Exception {
 		newBuilder().append("#12 ID ").assertText("scenario4", "trailing");
+	}
+	
+	@Test public void test_13a() throws Exception {
+		newBuilder().append("#13 ").assertText("trailing", "scenario5");
+	}
+	
+	@Test public void test_13b() throws Exception {
+		newBuilder().append("#13 scenario5 ").assertText(Strings.EMPTY_ARRAY);
+	}
+	
+	@Test public void test_14a() throws Exception {
+		newBuilder().append("#14 ").assertText("include", "trailing", "scenario5");
+	}
+	
+	@Test public void test_14b() throws Exception {
+		newBuilder().append("#14 scenario5 ").assertText("include");
 	}
 }
