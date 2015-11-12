@@ -65,7 +65,7 @@ public class XtextTransientValueService2 extends TransientValueService {
 						return YES;
 					}
 				}
-				if (EcorePackage.eINSTANCE.getEString().equals(rule.getType().getClassifier()))
+				if (GrammarUtil.findEString(GrammarUtil.getGrammar(owner)).equals(rule.getType().getClassifier()))
 					return PREFERABLY;
 				return NO;
 			}
