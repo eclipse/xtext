@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class LexerSpecialStateTransitionSplitter {
 	
-	public static final int CASES_PER_SPECIAL_STATE_SWITCH = 1000;
+	public static final int CASES_PER_SPECIAL_STATE_SWITCH = -1;
 
 	public static final Pattern DFA_PATTERN = Pattern.compile(
 			"(class DFA\\d+ extends DFA \\{.*" +
@@ -69,8 +69,6 @@ public class LexerSpecialStateTransitionSplitter {
 	
 	private boolean allowDFAStaticClasses = true;
 	
-	private boolean specialStateSwitchSplitting = false;
-	
 	private int casesPerSpecialStateSwitch = CASES_PER_SPECIAL_STATE_SWITCH;
 	
 	public LexerSpecialStateTransitionSplitter(boolean ignoreCaseCountGuard) {
@@ -87,10 +85,10 @@ public class LexerSpecialStateTransitionSplitter {
 				staticOrNot = "static $1";
 			String tmpSpecialStateTransition = extractSpecialStateMethods(specialStateTransition);
 			String transformedDfa;
-			if(specialStateSwitchSplitting){
-				transformedDfa = staticOrNot + splitSpecialStateSwitch(tmpSpecialStateTransition) + "$3";
-			}else{
+			if (casesPerSpecialStateSwitch == -1) {
 				transformedDfa = staticOrNot + tmpSpecialStateTransition + "$3";
+			} else {
+				transformedDfa = staticOrNot + splitSpecialStateSwitch(tmpSpecialStateTransition) + "$3";
 			}
 			dfaMatcher.appendReplacement(result, transformedDfa);
 		}
@@ -219,20 +217,6 @@ public class LexerSpecialStateTransitionSplitter {
 	 */
 	public void setAllowDFAStaticClasses(boolean value) {
 		this.allowDFAStaticClasses = value;
-	}
-	
-	/**
-	 * @since 2.9
-	 */
-	public boolean isSpecialStateSwitchSplitting() {
-		return specialStateSwitchSplitting;
-	}
-	
-	/**
-	 * @since 2.9
-	 */
-	public void setSpecialStateSwitchSplitting(boolean value) {
-		this.specialStateSwitchSplitting = value;
 	}
 	
 	/**

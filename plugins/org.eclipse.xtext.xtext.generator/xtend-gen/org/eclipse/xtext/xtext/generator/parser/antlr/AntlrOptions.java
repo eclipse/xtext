@@ -29,8 +29,6 @@ public class AntlrOptions {
   
   private boolean classSplitting = false;
   
-  private boolean specialStateSwitchSplitting = false;
-  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS;
   
@@ -122,15 +120,6 @@ public class AntlrOptions {
   
   public void setClassSplitting(final boolean classSplitting) {
     this.classSplitting = classSplitting;
-  }
-  
-  @Pure
-  public boolean isSpecialStateSwitchSplitting() {
-    return this.specialStateSwitchSplitting;
-  }
-  
-  public void setSpecialStateSwitchSplitting(final boolean specialStateSwitchSplitting) {
-    this.specialStateSwitchSplitting = specialStateSwitchSplitting;
   }
   
   @Pure
