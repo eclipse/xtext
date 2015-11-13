@@ -94,6 +94,8 @@ abstract class AbstractAntlrGrammarGenerator {
 		«compileTokens(options)»
 		«compileLexerHeader(options)»
 		«compileKeywordRules(options)»
+		
+		// Rules duplicated to allow inter-rule references
 		«compileTerminalRules(options)»
 	'''
 	
@@ -196,22 +198,28 @@ abstract class AbstractAntlrGrammarGenerator {
 		val allKeywords = allKeywords.sort.sortBy[-length]
 		val allTerminalRules = allTerminalRules
 		
+		val synthetic_kw_alternatives = newArrayList
+		synthetic_kw_alternatives.addAll(allKeywords.indexed.map[
+			val ruleName = keywordHelper.getRuleName(value)
+			return '''(FRAGMENT_«ruleName»)=> FRAGMENT_«ruleName» {$type = «ruleName»; }'''
+		])
+		synthetic_kw_alternatives.addAll(allTerminalRules.indexed.map[
+			if (!isSyntheticTerminalRule(value) && !value.fragment) {
+				return '''(FRAGMENT_«value.ruleName»)=> FRAGMENT_«value.ruleName» {$type = «value.ruleName»; }'''
+			}
+		].filterNull.toList)
+		
 		'''
 			«IF options.isBacktrackLexer»
 				SYNTHETIC_ALL_KEYWORDS :
-				«FOR kw: allKeywords.indexed»
-					(FRAGMENT_«keywordHelper.getRuleName(kw.value)»)=> FRAGMENT_«keywordHelper.getRuleName(kw.value)» {$type = «keywordHelper.getRuleName(kw.value)»; } 
-					«IF kw.key != allKeywords.size || !allTerminalRules().isEmpty»|«ENDIF»
-				«ENDFOR»
-				«FOR rule : allTerminalRules.indexed»
-					«IF !isSyntheticTerminalRule(rule.value) && !rule.value.fragment»
-						(FRAGMENT_«rule.value.ruleName()»)=> FRAGMENT_«rule.value.ruleName()» {$type = «rule.value.ruleName()»; }
-						«IF rule.key != allTerminalRules.size»|«ENDIF»
-					«ENDIF»
-				«ENDFOR»
+					«FOR kw: synthetic_kw_alternatives SEPARATOR ' |'»
+						«kw»
+					«ENDFOR»
 				;
+				
 				«FOR kw:  allKeywords»
 					fragment FRAGMENT_«keywordHelper.getRuleName(kw)» : '«kw.toAntlrString()»';
+					
 				«ENDFOR»
 			«ELSE»
 				«FOR rule:allKeywords»
