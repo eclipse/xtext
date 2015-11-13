@@ -2340,7 +2340,8 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
                     _builder.append("\t\t");
                     _builder.append("\t");
                     _builder.append("return new ");
-                    _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl", "\t\t\t\t");
+                    TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiEObjectImpl");
+                    _builder.append(_typeRef_7, "\t\t\t\t");
                     _builder.append("(node) {};");
                     _builder.newLineIfNotEmpty();
                   }
@@ -2366,8 +2367,8 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
                         _builder.append("\t\t");
                         _builder.append("\t");
                         _builder.append("return new ");
-                        TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
-                        _builder.append(_typeRef_7, "\t\t\t\t");
+                        TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
+                        _builder.append(_typeRef_8, "\t\t\t\t");
                         _builder.append("(node) {};");
                         _builder.newLineIfNotEmpty();
                       } else {
@@ -2375,7 +2376,8 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
                         _builder.append("\t\t");
                         _builder.append("\t");
                         _builder.append("return new ");
-                        _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl", "\t\t\t\t");
+                        TypeReference _typeRef_9 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiEObjectImpl");
+                        _builder.append(_typeRef_9, "\t\t\t\t");
                         _builder.append("(node) {};");
                         _builder.newLineIfNotEmpty();
                       }
@@ -2391,8 +2393,8 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.append("\t");
             _builder.append("\t\t");
             _builder.append("throw new ");
-            TypeReference _typeRef_8 = TypeReference.typeRef("java.lang.IllegalStateException");
-            _builder.append(_typeRef_8, "\t\t\t");
+            TypeReference _typeRef_10 = TypeReference.typeRef("java.lang.IllegalStateException");
+            _builder.append(_typeRef_10, "\t\t\t");
             _builder.append("(\"Unexpected element type: \" + elementType);");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");

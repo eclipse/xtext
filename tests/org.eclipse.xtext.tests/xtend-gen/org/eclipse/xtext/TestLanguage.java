@@ -31,12 +31,25 @@ import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2;
 @Accessors
 @SuppressWarnings("all")
 public class TestLanguage extends XtextGeneratorLanguage {
+  private AntlrOptions parserOptions = ObjectExtensions.<AntlrOptions>operator_doubleArrow(new AntlrOptions(), new Procedure1<AntlrOptions>() {
+    @Override
+    public void apply(final AntlrOptions it) {
+      it.setClassSplitting(true);
+    }
+  });
+  
+  public void setParserOptions(final AntlrOptions parserOptions) {
+    this.parserOptions = parserOptions;
+    this.parserGenerator.setOptions(parserOptions);
+    this.ideaParser.setOptions(parserOptions);
+  }
+  
   private GrammarAccessFragment2 grammarAccess = new GrammarAccessFragment2();
   
   private SerializerFragment2 serializer = ObjectExtensions.<SerializerFragment2>operator_doubleArrow(new SerializerFragment2(), new Procedure1<SerializerFragment2>() {
     @Override
     public void apply(final SerializerFragment2 it) {
-      it.setGenerateStub(true);
+      it.setGenerateStub(false);
     }
   });
   
@@ -48,18 +61,16 @@ public class TestLanguage extends XtextGeneratorLanguage {
     @Override
     public void apply(final XtextAntlrGeneratorFragment2 it) {
       it.setDebugGrammar(true);
-      AntlrOptions _options = it.getOptions();
-      final Procedure1<AntlrOptions> _function = new Procedure1<AntlrOptions>() {
-        @Override
-        public void apply(final AntlrOptions it) {
-          it.setClassSplitting(true);
-        }
-      };
-      ObjectExtensions.<AntlrOptions>operator_doubleArrow(_options, _function);
+      it.setOptions(TestLanguage.this.parserOptions);
     }
   });
   
-  private XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment();
+  private XtextAntlrIDEAGeneratorFragment ideaParser = ObjectExtensions.<XtextAntlrIDEAGeneratorFragment>operator_doubleArrow(new XtextAntlrIDEAGeneratorFragment(), new Procedure1<XtextAntlrIDEAGeneratorFragment>() {
+    @Override
+    public void apply(final XtextAntlrIDEAGeneratorFragment it) {
+      it.setOptions(TestLanguage.this.parserOptions);
+    }
+  });
   
   private IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator();
   
@@ -120,6 +131,11 @@ public class TestLanguage extends XtextGeneratorLanguage {
     result.add(this.ideaParser);
     result.add(this.ideaPlugin);
     return result;
+  }
+  
+  @Pure
+  public AntlrOptions getParserOptions() {
+    return this.parserOptions;
   }
   
   @Pure
