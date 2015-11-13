@@ -778,31 +778,7 @@
         <filter id="338792546">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
-                <message_argument value="discardHelper(Grammar)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
-                <message_argument value="getAllKeywords()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
                 <message_argument value="getHelper(EObject)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
-                <message_argument value="getKeywordValue(String)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
-                <message_argument value="getRuleName(String)"/>
             </message_arguments>
         </filter>
         <filter id="338792546">
@@ -815,12 +791,6 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
                 <message_argument value="isAdapterForType(Object)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
-                <message_argument value="isKeywordRule(String)"/>
             </message_arguments>
         </filter>
         <filter id="338792546">

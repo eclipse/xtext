@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr.ex.common;
 
+import java.util.Set;
+
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 
@@ -20,4 +22,29 @@ public class KeywordHelper extends org.eclipse.xtext.xtext.generator.parser.antl
 		super(grammar, ignoreCase, new GrammarAccessExtensions());
 	}
 
+	@Override
+	public void discardHelper(Grammar grammar) {
+		super.discardHelper(grammar);
+	}
+
+	@Override
+	public String getRuleName(String keywordValue) {
+		return super.getRuleName(keywordValue);
+	}
+
+	@Override
+	public String getKeywordValue(String ruleName) {
+		return super.getKeywordValue(ruleName);
+	}
+
+	@Override
+	public boolean isKeywordRule(String ruleName) {
+		return super.isKeywordRule(ruleName);
+	}
+
+	@Override
+	public Set<String> getAllKeywords() {
+		return super.getAllKeywords();
+	}
+	
 }
