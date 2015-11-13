@@ -9,7 +9,6 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
@@ -53,9 +52,7 @@ public class TokenUtil {
 			if (node.getParent().hasDirectSemanticElement())
 				return node.getParent().getSemanticElement();
 			EObject parentGrammarElement = node.getParent().getGrammarElement();
-			boolean isParser = parentGrammarElement instanceof ParserRule
-					|| (parentGrammarElement instanceof RuleCall && 
-							((RuleCall) parentGrammarElement).getRule().getType().getClassifier() instanceof EClass);
+			boolean isParser = GrammarUtil.isEObjectRule(parentGrammarElement) || GrammarUtil.isEObjectRuleCall(parentGrammarElement);
 			for (INode sibling : node.getParent().getChildren())
 				if (sibling.hasDirectSemanticElement() && (isParser || sibling.getGrammarElement() instanceof Action))
 					return sibling.getSemanticElement();
