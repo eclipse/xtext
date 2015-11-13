@@ -677,7 +677,7 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 							«IF rule.named»
 							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
 							«ELSE»
-							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
+							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'.typeRef»(node) {};
 							«ENDIF»
 						}
 						«FOR element : rule.EObjectElements»
@@ -685,7 +685,7 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 							«IF element.named»
 							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
 							«ELSE»
-							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
+							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'.typeRef»(node) {};
 							«ENDIF»
 						}
 						«ENDFOR»
