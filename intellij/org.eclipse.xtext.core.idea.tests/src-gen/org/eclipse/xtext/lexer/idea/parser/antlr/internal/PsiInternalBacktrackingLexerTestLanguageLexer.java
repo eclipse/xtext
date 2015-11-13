@@ -12,17 +12,26 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
-    public static final int T__12=12;
-    public static final int T__13=13;
-    public static final int RULE_CHARX=8;
-    public static final int RULE_YC=4;
-    public static final int RULE_CHARY=5;
-    public static final int RULE_CHARA=6;
-    public static final int RULE_WS=10;
-    public static final int RULE_CHARB=7;
-    public static final int RULE_SL_COMMENT=11;
+    public static final int T__22=22;
+    public static final int T__21=21;
+    public static final int FRAGMENT_RULE_CHARY=18;
+    public static final int FRAGMENT_RULE_CHARA=14;
+    public static final int FRAGMENT_RULE_CHARX=16;
+    public static final int RULE_CHARY=10;
+    public static final int Abc=4;
     public static final int EOF=-1;
-    public static final int RULE_CHARC=9;
+    public static final int RULE_SL_COMMENT=13;
+    public static final int FRAGMENT_RULE_YC=17;
+    public static final int FRAGMENT_RULE_CHARB=15;
+    public static final int RULE_CHARX=8;
+    public static final int FRAGMENT_RULE_SL_COMMENT=20;
+    public static final int Efg=5;
+    public static final int RULE_YC=9;
+    public static final int FRAGMENT_RULE_WS=19;
+    public static final int RULE_WS=12;
+    public static final int RULE_CHARA=6;
+    public static final int RULE_CHARB=7;
+    public static final int RULE_CHARC=11;
 
     // delegates
     // delegators
@@ -37,10 +46,10 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
     }
     public String getGrammarFileName() { return "PsiInternalBacktrackingLexerTestLanguage.g"; }
 
-    // $ANTLR start "T__12"
-    public final void mT__12() throws RecognitionException {
+    // $ANTLR start "T__21"
+    public final void mT__21() throws RecognitionException {
         try {
-            int _type = T__12;
+            int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // PsiInternalBacktrackingLexerTestLanguage.g:11:7: ( 'Abc' )
             // PsiInternalBacktrackingLexerTestLanguage.g:11:9: 'Abc'
@@ -56,12 +65,12 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__12"
+    // $ANTLR end "T__21"
 
-    // $ANTLR start "T__13"
-    public final void mT__13() throws RecognitionException {
+    // $ANTLR start "T__22"
+    public final void mT__22() throws RecognitionException {
         try {
-            int _type = T__13;
+            int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // PsiInternalBacktrackingLexerTestLanguage.g:12:7: ( 'Efg' )
             // PsiInternalBacktrackingLexerTestLanguage.g:12:9: 'Efg'
@@ -77,114 +86,174 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__13"
+    // $ANTLR end "T__22"
 
     // $ANTLR start "RULE_CHARA"
     public final void mRULE_CHARA() throws RecognitionException {
         try {
-            int _type = RULE_CHARA;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:290:12: ( 'A' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:290:14: 'A'
+            // PsiInternalBacktrackingLexerTestLanguage.g:302:21: ( FRAGMENT_RULE_CHARA )
+            // PsiInternalBacktrackingLexerTestLanguage.g:302:23: FRAGMENT_RULE_CHARA
             {
-            match('A'); 
+            mFRAGMENT_RULE_CHARA(); 
 
             }
 
-            state.type = _type;
-            state.channel = _channel;
         }
         finally {
         }
     }
     // $ANTLR end "RULE_CHARA"
 
-    // $ANTLR start "RULE_CHARB"
-    public final void mRULE_CHARB() throws RecognitionException {
+    // $ANTLR start "FRAGMENT_RULE_CHARA"
+    public final void mFRAGMENT_RULE_CHARA() throws RecognitionException {
         try {
-            int _type = RULE_CHARB;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:292:12: ( 'b' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:292:14: 'b'
+            // PsiInternalBacktrackingLexerTestLanguage.g:303:30: ( 'A' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:303:32: 'A'
             {
-            match('b'); 
+            match('A'); 
 
             }
 
-            state.type = _type;
-            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "FRAGMENT_RULE_CHARA"
+
+    // $ANTLR start "RULE_CHARB"
+    public final void mRULE_CHARB() throws RecognitionException {
+        try {
+            // PsiInternalBacktrackingLexerTestLanguage.g:305:21: ( FRAGMENT_RULE_CHARB )
+            // PsiInternalBacktrackingLexerTestLanguage.g:305:23: FRAGMENT_RULE_CHARB
+            {
+            mFRAGMENT_RULE_CHARB(); 
+
+            }
+
         }
         finally {
         }
     }
     // $ANTLR end "RULE_CHARB"
 
-    // $ANTLR start "RULE_CHARX"
-    public final void mRULE_CHARX() throws RecognitionException {
+    // $ANTLR start "FRAGMENT_RULE_CHARB"
+    public final void mFRAGMENT_RULE_CHARB() throws RecognitionException {
         try {
-            int _type = RULE_CHARX;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:294:12: ( 'X' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:294:14: 'X'
+            // PsiInternalBacktrackingLexerTestLanguage.g:306:30: ( 'b' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:306:32: 'b'
             {
-            match('X'); 
+            match('b'); 
 
             }
 
-            state.type = _type;
-            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "FRAGMENT_RULE_CHARB"
+
+    // $ANTLR start "RULE_CHARX"
+    public final void mRULE_CHARX() throws RecognitionException {
+        try {
+            // PsiInternalBacktrackingLexerTestLanguage.g:308:21: ( FRAGMENT_RULE_CHARX )
+            // PsiInternalBacktrackingLexerTestLanguage.g:308:23: FRAGMENT_RULE_CHARX
+            {
+            mFRAGMENT_RULE_CHARX(); 
+
+            }
+
         }
         finally {
         }
     }
     // $ANTLR end "RULE_CHARX"
 
-    // $ANTLR start "RULE_YC"
-    public final void mRULE_YC() throws RecognitionException {
+    // $ANTLR start "FRAGMENT_RULE_CHARX"
+    public final void mFRAGMENT_RULE_CHARX() throws RecognitionException {
         try {
-            int _type = RULE_YC;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:296:9: ( RULE_CHARY RULE_CHARC )
-            // PsiInternalBacktrackingLexerTestLanguage.g:296:11: RULE_CHARY RULE_CHARC
+            // PsiInternalBacktrackingLexerTestLanguage.g:309:30: ( 'X' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:309:32: 'X'
             {
-            mRULE_CHARY(); 
-            mRULE_CHARC(); 
+            match('X'); 
 
             }
 
-            state.type = _type;
-            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "FRAGMENT_RULE_CHARX"
+
+    // $ANTLR start "RULE_YC"
+    public final void mRULE_YC() throws RecognitionException {
+        try {
+            // PsiInternalBacktrackingLexerTestLanguage.g:311:18: ( FRAGMENT_RULE_YC )
+            // PsiInternalBacktrackingLexerTestLanguage.g:311:20: FRAGMENT_RULE_YC
+            {
+            mFRAGMENT_RULE_YC(); 
+
+            }
+
         }
         finally {
         }
     }
     // $ANTLR end "RULE_YC"
 
-    // $ANTLR start "RULE_CHARY"
-    public final void mRULE_CHARY() throws RecognitionException {
+    // $ANTLR start "FRAGMENT_RULE_YC"
+    public final void mFRAGMENT_RULE_YC() throws RecognitionException {
         try {
-            int _type = RULE_CHARY;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:298:12: ( 'Y' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:298:14: 'Y'
+            // PsiInternalBacktrackingLexerTestLanguage.g:312:27: ( RULE_CHARY RULE_CHARC )
+            // PsiInternalBacktrackingLexerTestLanguage.g:312:29: RULE_CHARY RULE_CHARC
             {
-            match('Y'); 
+            mRULE_CHARY(); 
+            mRULE_CHARC(); 
 
             }
 
-            state.type = _type;
-            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "FRAGMENT_RULE_YC"
+
+    // $ANTLR start "RULE_CHARY"
+    public final void mRULE_CHARY() throws RecognitionException {
+        try {
+            // PsiInternalBacktrackingLexerTestLanguage.g:314:21: ( FRAGMENT_RULE_CHARY )
+            // PsiInternalBacktrackingLexerTestLanguage.g:314:23: FRAGMENT_RULE_CHARY
+            {
+            mFRAGMENT_RULE_CHARY(); 
+
+            }
+
         }
         finally {
         }
     }
     // $ANTLR end "RULE_CHARY"
 
+    // $ANTLR start "FRAGMENT_RULE_CHARY"
+    public final void mFRAGMENT_RULE_CHARY() throws RecognitionException {
+        try {
+            // PsiInternalBacktrackingLexerTestLanguage.g:315:30: ( 'Y' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:315:32: 'Y'
+            {
+            match('Y'); 
+
+            }
+
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "FRAGMENT_RULE_CHARY"
+
     // $ANTLR start "RULE_CHARC"
     public final void mRULE_CHARC() throws RecognitionException {
         try {
-            // PsiInternalBacktrackingLexerTestLanguage.g:300:21: ( 'c' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:300:23: 'c'
+            // PsiInternalBacktrackingLexerTestLanguage.g:317:21: ( 'c' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:317:23: 'c'
             {
             match('c'); 
 
@@ -199,12 +268,26 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_WS"
     public final void mRULE_WS() throws RecognitionException {
         try {
-            int _type = RULE_WS;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:302:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalBacktrackingLexerTestLanguage.g:302:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBacktrackingLexerTestLanguage.g:319:18: ( FRAGMENT_RULE_WS )
+            // PsiInternalBacktrackingLexerTestLanguage.g:319:20: FRAGMENT_RULE_WS
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:302:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            mFRAGMENT_RULE_WS(); 
+
+            }
+
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "RULE_WS"
+
+    // $ANTLR start "FRAGMENT_RULE_WS"
+    public final void mFRAGMENT_RULE_WS() throws RecognitionException {
+        try {
+            // PsiInternalBacktrackingLexerTestLanguage.g:320:27: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalBacktrackingLexerTestLanguage.g:320:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            {
+            // PsiInternalBacktrackingLexerTestLanguage.g:320:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {
@@ -245,25 +328,37 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
             }
 
-            state.type = _type;
-            state.channel = _channel;
         }
         finally {
         }
     }
-    // $ANTLR end "RULE_WS"
+    // $ANTLR end "FRAGMENT_RULE_WS"
 
     // $ANTLR start "RULE_SL_COMMENT"
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
-            int _type = RULE_SL_COMMENT;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:304:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalBacktrackingLexerTestLanguage.g:304:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalBacktrackingLexerTestLanguage.g:322:26: ( FRAGMENT_RULE_SL_COMMENT )
+            // PsiInternalBacktrackingLexerTestLanguage.g:322:28: FRAGMENT_RULE_SL_COMMENT
+            {
+            mFRAGMENT_RULE_SL_COMMENT(); 
+
+            }
+
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "RULE_SL_COMMENT"
+
+    // $ANTLR start "FRAGMENT_RULE_SL_COMMENT"
+    public final void mFRAGMENT_RULE_SL_COMMENT() throws RecognitionException {
+        try {
+            // PsiInternalBacktrackingLexerTestLanguage.g:323:35: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalBacktrackingLexerTestLanguage.g:323:37: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:304:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:323:42: (~ ( ( '\\n' | '\\r' ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -276,7 +371,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:304:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:323:42: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -296,7 +391,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:304:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalBacktrackingLexerTestLanguage.g:323:58: ( ( '\\r' )? '\\n' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -305,9 +400,9 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalBacktrackingLexerTestLanguage.g:304:41: ( '\\r' )? '\\n'
+                    // PsiInternalBacktrackingLexerTestLanguage.g:323:59: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalBacktrackingLexerTestLanguage.g:304:41: ( '\\r' )?
+                    // PsiInternalBacktrackingLexerTestLanguage.g:323:59: ( '\\r' )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -316,7 +411,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // PsiInternalBacktrackingLexerTestLanguage.g:304:41: '\\r'
+                            // PsiInternalBacktrackingLexerTestLanguage.g:323:59: '\\r'
                             {
                             match('\r'); 
 
@@ -335,79 +430,38 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
             }
 
-            state.type = _type;
-            state.channel = _channel;
         }
         finally {
         }
     }
-    // $ANTLR end "RULE_SL_COMMENT"
+    // $ANTLR end "FRAGMENT_RULE_SL_COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // PsiInternalBacktrackingLexerTestLanguage.g:1:8: ( T__12 | T__13 | RULE_CHARA | RULE_CHARB | RULE_CHARX | RULE_YC | RULE_CHARY | RULE_WS | RULE_SL_COMMENT )
-        int alt5=9;
-        alt5 = dfa5.predict(input);
+        // PsiInternalBacktrackingLexerTestLanguage.g:1:8: ( T__21 | T__22 )
+        int alt5=2;
+        int LA5_0 = input.LA(1);
+
+        if ( (LA5_0=='A') ) {
+            alt5 = mTokensHelper001();
+        }
+        else if ( (LA5_0=='E') ) {
+            alt5 = mTokensHelper002();
+        }
+        else {
+            alt5 = mTokensHelper003();
+        }
         switch (alt5) {
             case 1 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:10: T__12
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:10: T__21
                 {
-                mT__12(); 
+                mT__21(); 
 
                 }
                 break;
             case 2 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:16: T__13
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:16: T__22
                 {
-                mT__13(); 
-
-                }
-                break;
-            case 3 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:22: RULE_CHARA
-                {
-                mRULE_CHARA(); 
-
-                }
-                break;
-            case 4 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:33: RULE_CHARB
-                {
-                mRULE_CHARB(); 
-
-                }
-                break;
-            case 5 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:44: RULE_CHARX
-                {
-                mRULE_CHARX(); 
-
-                }
-                break;
-            case 6 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:55: RULE_YC
-                {
-                mRULE_YC(); 
-
-                }
-                break;
-            case 7 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:63: RULE_CHARY
-                {
-                mRULE_CHARY(); 
-
-                }
-                break;
-            case 8 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:74: RULE_WS
-                {
-                mRULE_WS(); 
-
-                }
-                break;
-            case 9 :
-                // PsiInternalBacktrackingLexerTestLanguage.g:1:82: RULE_SL_COMMENT
-                {
-                mRULE_SL_COMMENT(); 
+                mT__22(); 
 
                 }
                 break;
@@ -415,69 +469,23 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         }
 
     }
-
-
-    protected DFA5 dfa5 = new DFA5(this);
-    static final String DFA5_eotS =
-        "\1\uffff\1\11\3\uffff\1\12\6\uffff";
-    static final String DFA5_eofS =
-        "\14\uffff";
-    static final String DFA5_minS =
-        "\1\11\1\142\3\uffff\1\143\6\uffff";
-    static final String DFA5_maxS =
-        "\2\142\3\uffff\1\143\6\uffff";
-    static final String DFA5_acceptS =
-        "\2\uffff\1\2\1\4\1\5\1\uffff\1\10\1\11\1\1\1\3\1\7\1\6";
-    static final String DFA5_specialS =
-        "\14\uffff}>";
-    static final String[] DFA5_transitionS = {
-            "\2\6\2\uffff\1\6\22\uffff\1\6\16\uffff\1\7\21\uffff\1\1\3\uffff\1\2\22\uffff\1\4\1\5\10\uffff\1\3",
-            "\1\10",
-            "",
-            "",
-            "",
-            "\1\13",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-    };
-
-    static final short[] DFA5_eot = DFA.unpackEncodedString(DFA5_eotS);
-    static final short[] DFA5_eof = DFA.unpackEncodedString(DFA5_eofS);
-    static final char[] DFA5_min = DFA.unpackEncodedStringToUnsignedChars(DFA5_minS);
-    static final char[] DFA5_max = DFA.unpackEncodedStringToUnsignedChars(DFA5_maxS);
-    static final short[] DFA5_accept = DFA.unpackEncodedString(DFA5_acceptS);
-    static final short[] DFA5_special = DFA.unpackEncodedString(DFA5_specialS);
-    static final short[][] DFA5_transition;
-
-    static {
-        int numStates = DFA5_transitionS.length;
-        DFA5_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA5_transition[i] = DFA.unpackEncodedString(DFA5_transitionS[i]);
-        }
+    private int mTokensHelper001() throws RecognitionException {
+        return 1;
     }
 
-    class DFA5 extends DFA {
-
-        public DFA5(BaseRecognizer recognizer) {
-            this.recognizer = recognizer;
-            this.decisionNumber = 5;
-            this.eot = DFA5_eot;
-            this.eof = DFA5_eof;
-            this.min = DFA5_min;
-            this.max = DFA5_max;
-            this.accept = DFA5_accept;
-            this.special = DFA5_special;
-            this.transition = DFA5_transition;
-        }
-        public String getDescription() {
-            return "1:1: Tokens : ( T__12 | T__13 | RULE_CHARA | RULE_CHARB | RULE_CHARX | RULE_YC | RULE_CHARY | RULE_WS | RULE_SL_COMMENT );";
-        }
+    private int mTokensHelper002() throws RecognitionException {
+        return 2;
     }
+
+    private int mTokensHelper003() throws RecognitionException {
+        NoViableAltException nvae =
+            new NoViableAltException("", 5, 0, input);
+
+        throw nvae;
+    }
+
+
+
  
 
 }

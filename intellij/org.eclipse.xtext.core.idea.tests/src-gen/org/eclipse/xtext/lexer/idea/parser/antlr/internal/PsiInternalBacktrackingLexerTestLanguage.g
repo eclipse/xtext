@@ -8,6 +8,18 @@ options {
 	backtrack=true;
 	memoize=true;
 }
+tokens {
+	Abc;
+	Efg;
+	RULE_CHARA;
+	RULE_CHARB;
+	RULE_CHARX;
+	RULE_YC;
+	RULE_CHARY;
+	RULE_CHARC;
+	RULE_WS;
+	RULE_SL_COMMENT;
+}
 
 @lexer::header {
 package org.eclipse.xtext.lexer.idea.parser.antlr.internal;
@@ -287,18 +299,25 @@ ruleEnumName returns [Boolean current=false]
 	)
 ;
 
-RULE_CHARA : 'A';
+fragment RULE_CHARA : FRAGMENT_RULE_CHARA;
+fragment FRAGMENT_RULE_CHARA : 'A';
 
-RULE_CHARB : 'b';
+fragment RULE_CHARB : FRAGMENT_RULE_CHARB;
+fragment FRAGMENT_RULE_CHARB : 'b';
 
-RULE_CHARX : 'X';
+fragment RULE_CHARX : FRAGMENT_RULE_CHARX;
+fragment FRAGMENT_RULE_CHARX : 'X';
 
-RULE_YC : RULE_CHARY RULE_CHARC;
+fragment RULE_YC : FRAGMENT_RULE_YC;
+fragment FRAGMENT_RULE_YC : RULE_CHARY RULE_CHARC;
 
-RULE_CHARY : 'Y';
+fragment RULE_CHARY : FRAGMENT_RULE_CHARY;
+fragment FRAGMENT_RULE_CHARY : 'Y';
 
 fragment RULE_CHARC : 'c';
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+;
+fragment RULE_WS : FRAGMENT_RULE_WS;
+fragment FRAGMENT_RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
+fragment RULE_SL_COMMENT : FRAGMENT_RULE_SL_COMMENT;
+fragment FRAGMENT_RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
