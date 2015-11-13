@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.generator" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter id="923795461">
-            <message_arguments>
-                <message_argument value="2.9.0"/>
-                <message_argument value="2.8.0"/>
-            </message_arguments>
-        </filter>
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
                 <message_argument value="2.9.0"/>
@@ -739,116 +733,6 @@
                 <message_argument value="AntlrCodeQualityHelper"/>
                 <message_argument value="AbstractAntlrGeneratorFragment"/>
                 <message_argument value="setCodeQualityHelper(AntlrCodeQualityHelper)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/generator/parser/antlr/AntlrOptions.java" type="org.eclipse.xtext.generator.parser.antlr.AntlrOptions">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="getFieldsPerClass()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="getK()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="getMethodsPerClass()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="isBacktrack()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="isBacktrackLexer()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="isClassSplitting()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="isIgnoreCase()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="isMemoize()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="setBacktrack(boolean)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="setBacktrackLexer(boolean)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="setClassSplitting(boolean)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="setFieldsPerClass(String)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="setIgnoreCase(boolean)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="setK(int)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="setKAsString(String)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="setMemoize(boolean)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.AntlrOptions"/>
-                <message_argument value="setMethodsPerClass(String)"/>
-            </message_arguments>
-        </filter>
-        <filter id="576720909">
-            <message_arguments>
-                <message_argument value="AntlrOptions"/>
-                <message_argument value="AntlrOptions"/>
             </message_arguments>
         </filter>
     </resource>
