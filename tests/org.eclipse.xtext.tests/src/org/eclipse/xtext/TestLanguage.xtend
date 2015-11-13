@@ -26,19 +26,29 @@ import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 @Accessors
 class TestLanguage extends XtextGeneratorLanguage {
 	
+	org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions parserOptions = new org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions() => [
+		classSplitting = true
+	]
+	
+	def void setParserOptions(org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions parserOptions) {
+		this.parserOptions = parserOptions
+		parserGenerator.options = parserOptions
+		ideaParser.options = parserOptions
+	}
+	
 	GrammarAccessFragment2 grammarAccess = new GrammarAccessFragment2
 	SerializerFragment2 serializer = new SerializerFragment2 => [
-		generateStub = true
+		generateStub = false
 	]
 	ResourceFactoryFragment2 resourceFactoryFragment = new ResourceFactoryFragment2
 	EMFGeneratorFragment2 emfGenerator = new EMFGeneratorFragment2
 	XtextAntlrGeneratorFragment2 parserGenerator = new XtextAntlrGeneratorFragment2  => [
 		debugGrammar = true
-		options => [
-			classSplitting = true
-		]
+		options = parserOptions
 	]
-	XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment
+	XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment => [
+		options = parserOptions
+	]
 	
 	IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator
 	
