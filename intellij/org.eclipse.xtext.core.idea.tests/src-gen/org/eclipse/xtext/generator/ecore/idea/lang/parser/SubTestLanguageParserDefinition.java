@@ -13,6 +13,7 @@ import org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageElementTypePro
 import org.eclipse.xtext.generator.ecore.idea.lang.psi.impl.SubTestLanguageFileImpl;
 import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 public class SubTestLanguageParserDefinition extends AbstractXtextParserDefinition {
@@ -32,7 +33,7 @@ public class SubTestLanguageParserDefinition extends AbstractXtextParserDefiniti
 		if (hasSemanticElement != null && hasSemanticElement) {
 			IElementType elementType = node.getElementType();
 			if (elementType == elementTypeProvider.getSubMainElementType()) {
-				return new org.eclipse.xtext.psi.impl.PsiEObjectImpl(node) {};
+				return new PsiEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getSubMain_SuperMainsSuperMainParserRuleCall_1_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};

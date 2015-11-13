@@ -21,7 +21,7 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public abstract class AbstractSubTestLanguageSemanticSequencer extends SuperTestLanguageSemanticSequencer {
+public class SubTestLanguageSemanticSequencer extends SuperTestLanguageSemanticSequencer {
 
 	@Inject
 	private SubTestLanguageGrammarAccess grammarAccess;
