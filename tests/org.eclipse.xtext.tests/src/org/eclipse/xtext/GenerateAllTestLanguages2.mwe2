@@ -87,24 +87,24 @@ Workflow {
 				}
 			}
 		}
-		language = TestLanguage {
-			name = "org.eclipse.xtext.generator.ecore.SuperTestLanguage"
-		}
-		language = TestLanguage {
-			name = "org.eclipse.xtext.generator.ecore.SubTestLanguage"
-		}
+//		language = TestLanguage {
+//			name = "org.eclipse.xtext.generator.ecore.SuperTestLanguage"
+//		}
+//		language = TestLanguage {
+//			name = "org.eclipse.xtext.generator.ecore.SubTestLanguage"
+//		}
 //		language = TestLanguage {
 //			name = "org.eclipse.xtext.XtextGrammarTestLanguage"
 //		}
-//		language = TestLanguage {
-//			name = "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
-//			parserOptions = {
-//				backtrack = true
-//				backtrackLexer = true
-//				memoize = true
-//				classSplitting = true
-//			}
-//		}
+		language = TestLanguage {
+			name = "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			parserOptions = {
+				backtrack = true
+				backtrackLexer = true
+				memoize = true
+				classSplitting = true
+			}
+		}
 //		
 //		language = TestLanguage { 
 //			name = "org.eclipse.xtext.lexer.IgnoreCaseLexerTestLanguage"
