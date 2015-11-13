@@ -104,7 +104,7 @@ a:hover {
 	display: block;
 	position: absolute;
 	top: 60px;
-	bottom: 45%;
+	height: 45%;
 	left: 0;
 	width: 100%;
 	padding: 4px;
