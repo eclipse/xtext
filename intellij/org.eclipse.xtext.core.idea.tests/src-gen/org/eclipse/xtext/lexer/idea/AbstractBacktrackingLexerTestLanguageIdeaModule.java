@@ -15,7 +15,7 @@ import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.lexer.ide.contentassist.antlr.BacktrackingLexerTestLanguageParser;
-import org.eclipse.xtext.lexer.ide.contentassist.antlr.internal.InternalBacktrackingLexerTestLanguageLexer;
+import org.eclipse.xtext.lexer.ide.contentassist.antlr.lexer.InternalBacktrackingLexerTestLanguageLexer;
 import org.eclipse.xtext.lexer.idea.facet.BacktrackingLexerTestLanguageFacetConfiguration;
 import org.eclipse.xtext.lexer.idea.facet.BacktrackingLexerTestLanguageFacetType;
 import org.eclipse.xtext.lexer.idea.lang.BacktrackingLexerTestLanguageElementTypeProvider;

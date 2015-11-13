@@ -11,7 +11,7 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.lexer.parser.antlr.BacktrackingLexerTestLanguageAntlrTokenFileProvider;
 import org.eclipse.xtext.lexer.parser.antlr.BacktrackingLexerTestLanguageParser;
-import org.eclipse.xtext.lexer.parser.antlr.internal.InternalBacktrackingLexerTestLanguageLexer;
+import org.eclipse.xtext.lexer.parser.antlr.lexer.InternalBacktrackingLexerTestLanguageLexer;
 import org.eclipse.xtext.lexer.serializer.BacktrackingLexerTestLanguageSemanticSequencer;
 import org.eclipse.xtext.lexer.serializer.BacktrackingLexerTestLanguageSyntacticSequencer;
 import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAccess;
