@@ -4,7 +4,6 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import java.io.IOException
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.core.formatting2.FormatterFacade
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
@@ -16,8 +15,6 @@ class ExampleResourceHandler implements IServerResourceHandler {
 	@Inject IWebResourceSetProvider resourceSetProvider
 	
 	@Inject Provider<XtextWebDocument> documentProvider
-	
-	@Inject FormatterFacade formatter
 	
 	
 	val examples = #{
@@ -175,7 +172,7 @@ class ExampleResourceHandler implements IServerResourceHandler {
 				}
 			}
 		''',
-		'BottleSong.xtend' -> "
+		'BottleSong.xtend' -> '''
 		package example3
 		import static extension example3.BottleSupport.*
 		import org.junit.Test
@@ -192,15 +189,15 @@ class ExampleResourceHandler implements IServerResourceHandler {
 				println(singTheSong(99))
 			}
 			
-			def singTheSong(int all) '''
-				«FOR i : all .. 1»
-					«i.Bottles» of beer on the wall, «i.bottles» of beer.
-					Take one down and pass it around, «(i - 1).bottles» of beer on the wall.
+			def singTheSong(int all) «"'''"»
+				«"«FOR i : all .. 1»"»
+					«"«i.Bottles»"» of beer on the wall, «"«i.bottles»"» of beer.
+					Take one down and pass it around, «"«(i - 1).bottles»"» of beer on the wall.
 					
-				«ENDFOR»
+				«"«ENDFOR»"»
 				No more bottles of beer on the wall, no more bottles of beer.
-				Go to the store and buy some more, «all.bottles» of beer on the wall.
-			'''
+				Go to the store and buy some more, «"«all.bottles»"» of beer on the wall.
+			«"'''"»
 		
 		}
 		
@@ -210,156 +207,157 @@ class ExampleResourceHandler implements IServerResourceHandler {
 				switch i {
 					case 0 : 'no more bottles'
 					case 1 : 'one bottle'
-					default : '''«i» bottles'''
+					default : «"'''«i»"» bottles«"'''"»
 				}.toString
 			}
 			
 			def static Bottles(int i) {
 				bottles(i).toFirstUpper
 			}
-		}",
-		"HtmlBuilder.xtend"->"
+		}''',
+		"HtmlBuilder.xtend"->'''
 		package example4
-
-import java.util.ArrayList
-import org.eclipse.xtend.lib.annotations.Data
-import org.junit.Test
-
-/**
- * This examples shows 
- *  - the usage and declaration of a builder API.
- *  - usage of @Data annotation
- *  - non-static extension methods
- */
-class DomExample {
-	
-	extension DomBuilder db = new DomBuilder
-	extension DomSerializer ds = new DomSerializer
-	
-	@Test
-	def void processDom() {
-		val dom = buildDom
-		println(dom.toText)
-	}
-	
-	def buildDom() {
-		new Html => [
-		  head [
-		    it.title [$(\"HTML with Xtend\")]
-		  ]
-		  body [
-		    h1 [$(\"HTML with Xtend\")]
-		    p [$(\"this format can be used as an alternative to templates.\")]
 		
-		    // an element with attributes and text content
-		    a(\"http://www.xtend-lang.org\") [$(\"Xtend\")]
+		import java.util.ArrayList
+		import org.eclipse.xtend.lib.annotations.Data
+		import org.junit.Test
 		
-		    // mixed content
-		    p [
-		      $(\"This is some \") 
-		      b[$(\"mixed\")] 
-		      $(\" text. For more see the \") 
-		      a(\"http://www.xtend-lang.org\")[$(\"Xtend\")] 
-		      $(\" project\")
-		    ]
-		    p [$(\"More text.\")]
-		  ]
-		]
-	}
-
-}
-
-class DomBuilder {
-	
-	def $(Node it, CharSequence contents) {
-		val text = new Contents(contents)
-		it.contents += text
-	}
-	
-	def head(Html it, (Head)=>void init) {
-		addAndApply(it, new Head, init)
-	}
-	def title(Head it, (Title)=>void init) {
-		addAndApply(it, new Title, init)
-	}
-	
-	def body(Html it, (Body)=>void init) {
-		addAndApply(it, new Body, init)
-	}
-	
-	def b(Node it, (B)=>void init) {
-		addAndApply(it, new B, init)
-	}
-	def p(Node it, (P)=>void init) {
-		addAndApply(it, new P, init)
-	}
-	
-	def a(Node it, String href, (A)=>void init) {
-		val a = new A(href)
-		addAndApply(it, a, init)
-	}
-	
-	def h1(Node it, (H1)=>void init) {
-		addAndApply(it, new H1, init)
-	}
-	
-	def h2(Node it, (H2)=>void init) {
-		addAndApply(it, new H2, init)
-	}
-	
-	def private <T extends Node> void addAndApply(Node parent, T t, (T)=>void init) {
-		parent.contents += t
-		init.apply(t)
-	}
-}
-
-class DomSerializer {
-	
-	def CharSequence toText(Node n) {
-		switch n {
-			Contents : 
-				n.text
+		/**
+		 * This examples shows 
+		 *  - the usage and declaration of a builder API.
+		 *  - usage of @Data annotation
+		 *  - non-static extension methods
+		 */
+		class DomExample {
+			
+			extension DomBuilder db = new DomBuilder
+			extension DomSerializer ds = new DomSerializer
+			
+			@Test
+			def void processDom() {
+				val dom = buildDom
+				println(dom.toText)
+			}
+			
+			def buildDom() {
+				new Html => [
+				  head [
+				    it.title [$("HTML with Xtend")]
+				  ]
+				  body [
+				    h1 [$("HTML with Xtend")]
+				    p [$("this format can be used as an alternative to templates.")]
 				
-			A : 
-				'''<a href=\"«n.href»\">«n.applyContents»</a>'''
+				    // an element with attributes and text content
+				    a("http://www.xtend-lang.org") [$("Xtend")]
 				
-			default : '''
-				<«n.tagName»>
-					«n.applyContents»
-				</«n.tagName»>
-			'''
+				    // mixed content
+				    p [
+				      $("This is some ") 
+				      b[$("mixed")] 
+				      $(" text. For more see the ") 
+				      a("http://www.xtend-lang.org")[$("Xtend")] 
+				      $(" project")
+				    ]
+				    p [$("More text.")]
+				  ]
+				]
+			}
+		
 		}
-	}
-	
-	def private applyContents(Node n) {
-		n.contents?.map[ toText ]?.join
-	}
-}
-
-@Data class Node {
-	ArrayList<Node> contents = newArrayList
-	def String tagName() {
-		getClass.simpleName.toLowerCase
-	}
-}
-
-@Data class Html extends Node {
-}
-@Data class Head extends Node {}
-@Data class Title extends Node {}
-
-@Data class ContentNode extends Node {}
-@Data class Body extends ContentNode {}
-@Data class P extends ContentNode {}
-@Data class B extends ContentNode {}
-@Data class H1 extends ContentNode {}
-@Data class H2 extends ContentNode {}
-@Data class A extends ContentNode {
-	String href
-}
-@Data class Contents extends ContentNode {
-	CharSequence text
-}",
+		
+		class DomBuilder {
+			
+			def $(Node it, CharSequence contents) {
+				val text = new Contents(contents)
+				it.contents += text
+			}
+			
+			def head(Html it, (Head)=>void init) {
+				addAndApply(it, new Head, init)
+			}
+			def title(Head it, (Title)=>void init) {
+				addAndApply(it, new Title, init)
+			}
+			
+			def body(Html it, (Body)=>void init) {
+				addAndApply(it, new Body, init)
+			}
+			
+			def b(Node it, (B)=>void init) {
+				addAndApply(it, new B, init)
+			}
+			def p(Node it, (P)=>void init) {
+				addAndApply(it, new P, init)
+			}
+			
+			def a(Node it, String href, (A)=>void init) {
+				val a = new A(href)
+				addAndApply(it, a, init)
+			}
+			
+			def h1(Node it, (H1)=>void init) {
+				addAndApply(it, new H1, init)
+			}
+			
+			def h2(Node it, (H2)=>void init) {
+				addAndApply(it, new H2, init)
+			}
+			
+			def private <T extends Node> void addAndApply(Node parent, T t, (T)=>void init) {
+				parent.contents += t
+				init.apply(t)
+			}
+		}
+		
+		class DomSerializer {
+			
+			def CharSequence toText(Node n) {
+				switch n {
+					Contents : 
+						n.text
+						
+					A : 
+						«"'''"»<a href="«"«n.href»"»">«"«n.applyContents»"»</a>«"'''"»
+						
+					default : «"'''"»
+						<«"«n.tagName»"»>
+							«"«n.applyContents»"»
+						</«"«n.tagName»"»>
+					«"'''"»
+				}
+			}
+			
+			def private applyContents(Node n) {
+				n.contents?.map[ toText ]?.join
+			}
+		}
+		
+		@Data class Node {
+			ArrayList<Node> contents = newArrayList
+			def String tagName() {
+				getClass.simpleName.toLowerCase
+			}
+		}
+		
+		@Data class Html extends Node {
+		}
+		@Data class Head extends Node {}
+		@Data class Title extends Node {}
+		
+		@Data class ContentNode extends Node {}
+		@Data class Body extends ContentNode {}
+		@Data class P extends ContentNode {}
+		@Data class B extends ContentNode {}
+		@Data class H1 extends ContentNode {}
+		@Data class H2 extends ContentNode {}
+		@Data class A extends ContentNode {
+			String href
+		}
+		@Data class Contents extends ContentNode {
+			CharSequence text
+		}
+		''',
 		'Movies.xtend'->'''
 		package example6
 		
@@ -416,9 +414,356 @@ class DomSerializer {
 			Set<String> categories 
 		}
 		''',
-		'ActiveAnnotationExample.xtend' ->'''
-		class Example {
+		'Observable.xtend' ->'''
+		package observables
+		
+		import java.beans.PropertyChangeListener
+		import java.beans.PropertyChangeSupport
+		import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+		import org.eclipse.xtend.lib.macro.Active
+		import org.eclipse.xtend.lib.macro.TransformationContext
+		import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+		import java.lang.annotation.Target
+		import java.lang.annotation.ElementType
+		
+		/**
+		 * Adds a getter and setter method for all fields
+		 * Adds PropertyChangeSupport to this class and informs all listeners on change.
+		 */
+		@Target(ElementType.TYPE)
+		@Active(ObservableCompilationParticipant)
+		annotation Observable {
+		}
+		
+		class ObservableCompilationParticipant extends AbstractClassProcessor {
+		
+			override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+				// For every field in a class annotated with @Observable, we generate a getter and a setter.
+				// Additionally, the setter will fire change events. 
+				for (f : clazz.declaredFields) {
+					val fieldName = f.simpleName
+					val fieldType = f.type
+		
+					clazz.addMethod('get' + fieldName.toFirstUpper) [
+						returnType = fieldType
+						body = «"'''"»return this.«"«fieldName»"»;«"'''"»
+						primarySourceElement = f
+					]
+		
+					clazz.addMethod('set' + fieldName.toFirstUpper) [
+						addParameter(fieldName, fieldType)
+						body = «"'''"»
+							«"«fieldType»"» _oldValue = this.«"«fieldName»"»;
+							this.«"«fieldName»"» = «"«fieldName»"»;
+							_propertyChangeSupport.firePropertyChange("«"«fieldName»"»", _oldValue, «"«fieldName»"»);
+						«"'''"»
+						primarySourceElement = f
+					]
+					f.markAsRead
+				}
+		
+				// generated field to hold listeners, addPropertyChangeListener() and removePropertyChangeListener() 
+				val changeSupportType = PropertyChangeSupport.newTypeReference
+				clazz.addField("_propertyChangeSupport") [
+					type = changeSupportType
+					initializer = «"'''"»new «"«changeSupportType»"»(this)«"'''"»
+					primarySourceElement = clazz
+				]
+		
+				val propertyChangeListener = PropertyChangeListener.newTypeReference
+				clazz.addMethod("addPropertyChangeListener") [
+					addParameter("listener", propertyChangeListener)
+					body = «"'''"»this._propertyChangeSupport.addPropertyChangeListener(listener);«"'''"»
+					primarySourceElement = clazz
+				]
+				clazz.addMethod("removePropertyChangeListener") [
+					addParameter("listener", propertyChangeListener)
+					body = «"'''"»this._propertyChangeSupport.removePropertyChangeListener(listener);«"'''"»
+					primarySourceElement = clazz
+				]
+			}
+		}
+		''',"ObservableExample.xtend"->'''
+		package observables
+		
+		@Observable
+		class ObservableBean {
+			String firstName
+			String lastName
+		}
+		
+		class ObservableExample {
+			def static void main(String[] args) {
+				// 1. create observable bean 
+				new ObservableBean => [
+					
+					// 2. add an observer 
+					addPropertyChangeListener [
+						println(«"'''"»property «"«propertyName»"» changed from «"«oldValue»"» to «"«newValue»'''"»)
+					]
+					
+					// 3. invoke some setters
+					firstName = "Max"
+					lastName = "Mustermann"
+					
+					firstName = "John"
+					lastName = "Doe"
+				]
+			}
+		}
+		''',
+		'Extract.xtend' -> '''
+		package extract
+		
+		import java.lang.annotation.ElementType
+		import java.lang.annotation.Target
+		import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+		import org.eclipse.xtend.lib.macro.Active
+		import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+		import org.eclipse.xtend.lib.macro.TransformationContext
+		import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+		import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+		import org.eclipse.xtend.lib.macro.declaration.Visibility
+		
+		/**
+		 * Extracts an interface for all locally declared public methods.
+		 */
+		@Target(ElementType.TYPE)
+		@Active(ExtractProcessor)
+		annotation Extract {}
+		
+		class ExtractProcessor extends AbstractClassProcessor {
 			
+			override doRegisterGlobals(ClassDeclaration annotatedClass, RegisterGlobalsContext context) {
+				context.registerInterface(annotatedClass.interfaceName)
+			}
+		
+			def getInterfaceName(ClassDeclaration annotatedClass) {
+				annotatedClass.qualifiedName+"Interface"
+			}
+			
+			override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+				val interfaceType = findInterface(annotatedClass.interfaceName)
+				interfaceType.primarySourceElement = annotatedClass
+				// add the interface to the list of implemented interfaces
+				annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[interfaceType.newTypeReference]
+				
+				// add the public methods to the interface
+				for (method : annotatedClass.declaredMethods) {
+					if (method.visibility == Visibility.PUBLIC) {
+						interfaceType.addMethod(method.simpleName) [
+							docComment = method.docComment
+							returnType = method.returnType
+							for (p : method.parameters) {
+								addParameter(p.simpleName, p.type)
+							}
+							exceptions = method.exceptions
+							primarySourceElement = method
+						]
+					}
+				}
+			}
+			
+		}
+		''',
+		'ExtractExample.xtend' -> '''
+		package extract
+		
+		@Extract
+		class ExtractExample {
+			
+			/**
+			 * This method is extracted to an interface
+			 */
+			override void myPublicMethod() {
+			}
+			
+			/**
+			 * This method is not extracted
+			 */
+			protected def void myPrivateMethod() {
+				
+			}
+		}
+		''',
+		'Externalized.xtend' ->'''
+		package i18n
+		
+		import java.text.DateFormat
+		import java.text.MessageFormat
+		import java.text.NumberFormat
+		import java.util.Date
+		import java.util.MissingResourceException
+		import java.util.ResourceBundle
+		import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+		import org.eclipse.xtend.lib.macro.Active
+		import org.eclipse.xtend.lib.macro.CodeGenerationContext
+		import org.eclipse.xtend.lib.macro.TransformationContext
+		import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+		import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
+		import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+		import org.eclipse.xtend.lib.macro.CodeGenerationParticipant
+		import java.util.List
+		
+		@Active(ExternalizedProcessor)
+		annotation Externalized {
+		}
+		
+		class ExternalizedProcessor extends AbstractClassProcessor implements CodeGenerationParticipant<ClassDeclaration> {
+		
+			override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+				for (field : annotatedClass.declaredFields) {
+					val initializer = field.initializerAsString
+					val msgFormat = try {
+						new MessageFormat(initializer)
+					} catch(IllegalArgumentException e) {
+						field.initializer.addError("invalid format : " + e.message)
+						new MessageFormat("")
+					}
+					val formats = msgFormat.formatsByArgumentIndex
+					if(msgFormat.formats.length != formats.length) {
+						field.initializer.addWarning('Unused placeholders. They should start at index 0.')
+					}
+		
+					annotatedClass.addMethod(field.simpleName) [
+						formats.forEach [ format, idx |
+							addParameter("arg" + idx,
+								switch format {
+									NumberFormat: primitiveInt
+									DateFormat: Date.newTypeReference()
+									default: string
+								})
+						]
+						returnType = string
+						docComment = initializer
+						static = true
+						val params = parameters
+						body = «"'''"»
+								try {
+									String msg = RESOURCE_BUNDLE.getString("«"«field.simpleName»"»");
+									«"«IF formats.length > 0»"»
+										msg = «"«MessageFormat»"».format(msg,«"«params.map[simpleName].join(\",\")»"»);
+									«"«ENDIF»"»
+									return msg;
+								} catch («"«MissingResourceException»"» e) {
+									// TODO error logging
+									return "«"«initializer»"»";
+								}
+						«"'''"»
+						primarySourceElement = field
+					]
+				}
+				annotatedClass.declaredFields.forEach[remove]
+		
+				//private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+				annotatedClass.addField("RESOURCE_BUNDLE") [
+					static = true
+					final = true
+					type = ResourceBundle.newTypeReference
+					initializer = «"'''"»ResourceBundle.getBundle("«"«annotatedClass.qualifiedName»"»")«"'''"»
+					primarySourceElement = annotatedClass
+				]
+		
+			}
+		
+			override doGenerateCode(List<? extends ClassDeclaration> annotatedSourceElements, extension CodeGenerationContext context) {
+				for (clazz : annotatedSourceElements) {
+					val filePath = clazz.compilationUnit.filePath
+					val file = filePath.targetFolder.append(clazz.qualifiedName.replace('.', '/') + ".properties")
+					file.contents = «"'''"»
+						«"«FOR field : clazz.declaredFields»"»
+							«"«field.simpleName» = «field.initializerAsString»"»
+						«"«ENDFOR»"»
+					«"'''"»
+				}
+			}
+		
+			def getInitializerAsString(FieldDeclaration f) {
+				val string = f.initializer?.toString
+				if(string == null)
+					return "empty string"
+				return string.substring(1, string.length - 1)
+			}
+		
+		}
+		''',
+		'ExternalizedExample.xtend'->'''
+		package i18n
+		
+		import java.util.Date
+		
+		@Externalized
+		class ExternalizedExample {
+			
+			val GREETING = "Hello {0}!"
+			val DATE_AND_LOCATION = "Today is {0,date} and you are in {1}"
+			
+			def static void main(String[] args) {
+				println(«"'''"»
+					«"«GREETING(\"World\")»"»
+					«"«DATE_AND_LOCATION(new Date(), \"Kiel\")»"»
+				«"'''"»)
+			}
+		}
+		''',
+		'Lazy.xtend'->'''
+		package lazy
+		
+		import java.lang.annotation.ElementType
+		import java.lang.annotation.Target
+		import org.eclipse.xtend.lib.macro.AbstractFieldProcessor
+		import org.eclipse.xtend.lib.macro.Active
+		import org.eclipse.xtend.lib.macro.TransformationContext
+		import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+		import org.eclipse.xtend.lib.macro.declaration.Visibility
+		
+		/**
+		 * Adds a lazy getter and an initializer method.
+		 */
+		@Target(ElementType.FIELD)
+		@Active(LazyProcessor)
+		annotation Lazy {
+		}
+		
+		class LazyProcessor extends AbstractFieldProcessor {
+		
+			override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {
+				if (field.type.primitive)
+					field.addError("Fields with primitives are not supported by @Lazy")
+					
+				if (field.initializer == null)
+					field.addError("A lazy field must have an initializer.")
+				
+				field.declaringType.addMethod('_init' + field.simpleName) [
+					visibility = Visibility.PRIVATE
+					returnType = field.type
+					// reassign the initializer expression to be the init method's body
+					// this automatically removes the expression as the field's initializer
+					body = field.initializer
+					primarySourceElement = field
+				]
+		
+				// add a getter method which lazily initializes the field
+				field.declaringType.addMethod('get' + field.simpleName.toFirstUpper) [
+					field.markAsRead
+					returnType = field.type
+					body = «"'''"»
+						if («"«field.simpleName»"»==null)
+						  «"«field.simpleName»"» = _init«"«field.simpleName»"»();
+						return «"«field.simpleName»"»;
+					«"'''"»
+					primarySourceElement = field
+				]
+			}
+		
+		}
+		''',
+		'LazyExample.xtend'->'''
+		package lazy
+		
+		class LazyExample {
+			@Lazy String foo = 'holla'
+			@Lazy Integer another = 42 * getFoo.length
 		}
 		''',
 		'java.xtend' -> '''
@@ -433,7 +778,7 @@ class DomSerializer {
 		val resourceSet = resourceSetProvider.get(resourceId)
 		val resource = resourceSet.createResource(URI.createURI(resourceId)) as XtextResource
 		result.setInput(resource,resourceId)
-		result.text = formatter.format(examples.get(resourceId) ?: '')
+		result.text = examples.get(resourceId) ?: ''
 		return result
 	}
 	

@@ -32,7 +32,8 @@ public class Java2XtendService {
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
-        return new Java2XtendResult(Integer.valueOf(0), "");
+        String _xtendCode_2 = xtendSrc.getXtendCode();
+        return new Java2XtendResult(Integer.valueOf(1), _xtendCode_2);
       } else {
         throw Exceptions.sneakyThrow(_t);
       }

@@ -5,14 +5,12 @@
 	<title>Xtend Web Editor</title>
 	<link rel="stylesheet" type="text/css" href="xtext/2.9.0-SNAPSHOT/xtext-ace.css"/>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
   
-  	<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js" charset="utf-8"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script src="webjars/requirejs/2.1.20/require.min.js"></script>
-	
-	<script type="text/javascript">
-
-	</script>
+	<script src="script.js"></script>
 </head>
 <body>
 
@@ -20,18 +18,24 @@
 	<div class="header">
 		<h1>Xtend Web Editor</h1>
 	</div>
-	<!----> 
 	<div class="xtext-layout">	
-		<h2 id ="dirty-indicator">Xtend code</h2>
+		<h2 id ="dirty-indicator" title = "Formatting:		Ctrl/Command+Shift+F
+		
+Auto-Completion:	Ctrl/Command+Space">Xtend code</h2>
+
 		<select id="exampleList" onChange="changeExample()">
     		<option id="helloWorld">Hello World</option>
     		<option id="BasicExpressions">Basic Expressions</option>
     		<option id="BottleSong">Bottle Song</option>
     		<option id="HtmlBuilder">Html Builder</option>
     		<option id="Movies">Movies</option>
-    		<option id="ActiveAnnotation">Active Annotation Example</option>
+    		<option id="ObservableAnnotation">Observable Active Annotation Example</option>
+    		<option id="ExtractAnnotation">Extract Active Annotation Example</option>
+    		<option id="ExternalizedAnnotation">Externalized Active Annotation Example</option>
+    		<option id="LazyAnnotation">Lazy Active Annotation Example</option>
 		</select>
-		<button id = "btn1" onclick="btn1Action()">-</button>
+		
+		<button id = "btn1" onclick="btn1Action(this)">-</button>
 		<div id="xtext-editor" 
 		data-editor-xtext-lang="xtend"
 		data-editor-resource-id="helloWorld.xtend"
@@ -40,7 +44,8 @@
 		data-editor-show-error-dialogs="true"
 		>
 		</div>
-		<button id = "btn2" onclick="btn2Action()">-</button>
+		
+		<button id = "btn2" onclick="btn2Action(this)">-</button>
 		<div id="annotation-editor" 
 		data-editor-xtext-lang="xtend"
 		data-editor-resource-id="java.xtend"
@@ -56,7 +61,6 @@
 		<button id = "generate-java"> &gt;&gt;</button>
 	</div>
 		
-	
 	<div class = "java-layout">
 		<h2 id="java-header">Java code</h2>
 		<select id="javaFileList" onChange="changeJavaFile()">
@@ -64,8 +68,9 @@
 		</select>
       	<div id="java-editor"></div>
 	</div>
-	
+	<script type="text/javascript">
+	oneEditorMode();
+	</script>
 </div>
-<script src="script.js"></script>
 </body>
 </html>
