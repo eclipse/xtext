@@ -12,6 +12,7 @@ import com.google.inject.Injector;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
@@ -29,6 +30,9 @@ public class SubProjectConfig implements ISubProjectConfig {
   
   @Accessors
   private boolean enabled;
+  
+  @Accessors
+  private boolean overwriteSrc;
   
   @Accessors
   private String name;
@@ -79,22 +83,30 @@ public class SubProjectConfig implements ISubProjectConfig {
   @Override
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
-    if ((this.rootPath != null)) {
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.rootPath);
+    boolean _not = (!_isNullOrEmpty);
+    if (_not) {
       XtextGeneratorFileSystemAccess _newFileSystemAccess = this.owner.newFileSystemAccess(this.rootPath, true);
       this.root = _newFileSystemAccess;
       this.root.initialize(injector);
     }
-    if ((this.metaInfPath != null)) {
+    boolean _isNullOrEmpty_1 = StringExtensions.isNullOrEmpty(this.metaInfPath);
+    boolean _not_1 = (!_isNullOrEmpty_1);
+    if (_not_1) {
       XtextGeneratorFileSystemAccess _newFileSystemAccess_1 = this.owner.newFileSystemAccess(this.metaInfPath, true);
       this.metaInf = _newFileSystemAccess_1;
       this.metaInf.initialize(injector);
     }
-    if ((this.srcPath != null)) {
-      XtextGeneratorFileSystemAccess _newFileSystemAccess_2 = this.owner.newFileSystemAccess(this.srcPath, false);
+    boolean _isNullOrEmpty_2 = StringExtensions.isNullOrEmpty(this.srcPath);
+    boolean _not_2 = (!_isNullOrEmpty_2);
+    if (_not_2) {
+      XtextGeneratorFileSystemAccess _newFileSystemAccess_2 = this.owner.newFileSystemAccess(this.srcPath, this.overwriteSrc);
       this.src = _newFileSystemAccess_2;
       this.src.initialize(injector);
     }
-    if ((this.srcGenPath != null)) {
+    boolean _isNullOrEmpty_3 = StringExtensions.isNullOrEmpty(this.srcGenPath);
+    boolean _not_3 = (!_isNullOrEmpty_3);
+    if (_not_3) {
       XtextGeneratorFileSystemAccess _newFileSystemAccess_3 = this.owner.newFileSystemAccess(this.srcGenPath, true);
       this.srcGen = _newFileSystemAccess_3;
       this.srcGen.initialize(injector);
@@ -113,6 +125,15 @@ public class SubProjectConfig implements ISubProjectConfig {
   
   public void setEnabled(final boolean enabled) {
     this.enabled = enabled;
+  }
+  
+  @Pure
+  public boolean isOverwriteSrc() {
+    return this.overwriteSrc;
+  }
+  
+  public void setOverwriteSrc(final boolean overwriteSrc) {
+    this.overwriteSrc = overwriteSrc;
   }
   
   @Pure

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.generator.ecore.parser.antlr.internal; 
+package org.eclipse.xtext.generator.ecore.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -52,18 +52,18 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
 
 
      	private SuperTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalSuperTestLanguageParser(TokenStream input, SuperTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "SuperMain";	
+        	return "SuperMain";
        	}
-       	
+
        	@Override
        	protected SuperTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -71,8 +71,9 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
 
 
 
+
     // $ANTLR start "entryRuleSuperMain"
-    // InternalSuperTestLanguage.g:67:1: entryRuleSuperMain returns [EObject current=null] : iv_ruleSuperMain= ruleSuperMain EOF ;
+    // InternalSuperTestLanguage.g:64:1: entryRuleSuperMain returns [EObject current=null] : iv_ruleSuperMain= ruleSuperMain EOF ;
     public final EObject entryRuleSuperMain() throws RecognitionException {
         EObject current = null;
 
@@ -80,8 +81,8 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // InternalSuperTestLanguage.g:68:2: (iv_ruleSuperMain= ruleSuperMain EOF )
-            // InternalSuperTestLanguage.g:69:2: iv_ruleSuperMain= ruleSuperMain EOF
+            // InternalSuperTestLanguage.g:64:50: (iv_ruleSuperMain= ruleSuperMain EOF )
+            // InternalSuperTestLanguage.g:65:2: iv_ruleSuperMain= ruleSuperMain EOF
             {
              newCompositeNode(grammarAccess.getSuperMainRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -95,11 +96,11 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -108,49 +109,47 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleSuperMain"
-    // InternalSuperTestLanguage.g:76:1: ruleSuperMain returns [EObject current=null] : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalSuperTestLanguage.g:71:1: ruleSuperMain returns [EObject current=null] : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleSuperMain() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSuperTestLanguage.g:79:28: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalSuperTestLanguage.g:80:1: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSuperTestLanguage.g:77:2: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalSuperTestLanguage.g:78:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalSuperTestLanguage.g:80:1: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalSuperTestLanguage.g:80:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
+            // InternalSuperTestLanguage.g:78:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSuperTestLanguage.g:79:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
-                
-            // InternalSuperTestLanguage.g:84:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalSuperTestLanguage.g:85:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
+            		
+            // InternalSuperTestLanguage.g:83:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalSuperTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalSuperTestLanguage.g:85:1: (lv_name_1_0= RULE_ID )
-            // InternalSuperTestLanguage.g:86:3: lv_name_1_0= RULE_ID
+            // InternalSuperTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
+            // InternalSuperTestLanguage.g:85:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getSuperMainRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSuperMainRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -160,13 +159,18 @@ public class InternalSuperTestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.antlr.internal; 
+package org.eclipse.xtext.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -86,18 +86,18 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
      	private XtextGrammarTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalXtextGrammarTestLanguageParser(TokenStream input, XtextGrammarTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Grammar";	
+        	return "Grammar";
        	}
-       	
+
        	@Override
        	protected XtextGrammarTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -105,8 +105,9 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
 
+
     // $ANTLR start "entryRuleGrammar"
-    // InternalXtextGrammarTestLanguage.g:67:1: entryRuleGrammar returns [EObject current=null] : iv_ruleGrammar= ruleGrammar EOF ;
+    // InternalXtextGrammarTestLanguage.g:64:1: entryRuleGrammar returns [EObject current=null] : iv_ruleGrammar= ruleGrammar EOF ;
     public final EObject entryRuleGrammar() throws RecognitionException {
         EObject current = null;
 
@@ -114,8 +115,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:68:2: (iv_ruleGrammar= ruleGrammar EOF )
-            // InternalXtextGrammarTestLanguage.g:69:2: iv_ruleGrammar= ruleGrammar EOF
+            // InternalXtextGrammarTestLanguage.g:64:48: (iv_ruleGrammar= ruleGrammar EOF )
+            // InternalXtextGrammarTestLanguage.g:65:2: iv_ruleGrammar= ruleGrammar EOF
             {
              newCompositeNode(grammarAccess.getGrammarRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -129,11 +130,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -142,7 +143,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleGrammar"
-    // InternalXtextGrammarTestLanguage.g:76:1: ruleGrammar returns [EObject current=null] : (otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+ ) ;
+    // InternalXtextGrammarTestLanguage.g:71:1: ruleGrammar returns [EObject current=null] : (otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+ ) ;
     public final EObject ruleGrammar() throws RecognitionException {
         EObject current = null;
 
@@ -158,51 +159,52 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_rules_8_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:79:28: ( (otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+ ) )
-            // InternalXtextGrammarTestLanguage.g:80:1: (otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+ )
+            // InternalXtextGrammarTestLanguage.g:77:2: ( (otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+ ) )
+            // InternalXtextGrammarTestLanguage.g:78:2: (otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+ )
             {
-            // InternalXtextGrammarTestLanguage.g:80:1: (otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+ )
-            // InternalXtextGrammarTestLanguage.g:80:3: otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+
+            // InternalXtextGrammarTestLanguage.g:78:2: (otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+ )
+            // InternalXtextGrammarTestLanguage.g:79:3: otherlv_0= 'grammar' ( (lv_name_1_0= ruleGrammarID ) ) (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )? (this_HiddenClause_6= ruleHiddenClause[$current] )? ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )* ( (lv_rules_8_0= ruleAbstractRule ) )+
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getGrammarAccess().getGrammarKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:84:1: ( (lv_name_1_0= ruleGrammarID ) )
-            // InternalXtextGrammarTestLanguage.g:85:1: (lv_name_1_0= ruleGrammarID )
+            			newLeafNode(otherlv_0, grammarAccess.getGrammarAccess().getGrammarKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:83:3: ( (lv_name_1_0= ruleGrammarID ) )
+            // InternalXtextGrammarTestLanguage.g:84:4: (lv_name_1_0= ruleGrammarID )
             {
-            // InternalXtextGrammarTestLanguage.g:85:1: (lv_name_1_0= ruleGrammarID )
-            // InternalXtextGrammarTestLanguage.g:86:3: lv_name_1_0= ruleGrammarID
+            // InternalXtextGrammarTestLanguage.g:84:4: (lv_name_1_0= ruleGrammarID )
+            // InternalXtextGrammarTestLanguage.g:85:5: lv_name_1_0= ruleGrammarID
             {
-             
-            	        newCompositeNode(grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_4);
             lv_name_1_0=ruleGrammarID();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getGrammarRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.GrammarID");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getGrammarRule());
+            					}
+            					set(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.GrammarID");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:102:2: (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )?
+            // InternalXtextGrammarTestLanguage.g:102:3: (otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )* )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -211,41 +213,41 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt2) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:102:4: otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )*
+                    // InternalXtextGrammarTestLanguage.g:103:4: otherlv_2= 'with' ( ( ruleGrammarID ) ) (otherlv_4= ',' ( ( ruleGrammarID ) ) )*
                     {
                     otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getGrammarAccess().getWithKeyword_2_0());
-                        
-                    // InternalXtextGrammarTestLanguage.g:106:1: ( ( ruleGrammarID ) )
-                    // InternalXtextGrammarTestLanguage.g:107:1: ( ruleGrammarID )
+                    				newLeafNode(otherlv_2, grammarAccess.getGrammarAccess().getWithKeyword_2_0());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:107:4: ( ( ruleGrammarID ) )
+                    // InternalXtextGrammarTestLanguage.g:108:5: ( ruleGrammarID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:107:1: ( ruleGrammarID )
-                    // InternalXtextGrammarTestLanguage.g:108:3: ruleGrammarID
+                    // InternalXtextGrammarTestLanguage.g:108:5: ( ruleGrammarID )
+                    // InternalXtextGrammarTestLanguage.g:109:6: ruleGrammarID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getGrammarRule());
-                    	        }
-                            
-                     
-                    	        newCompositeNode(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarCrossReference_2_1_0()); 
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getGrammarRule());
+                    						}
+                    					
+
+                    						newCompositeNode(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarCrossReference_2_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_5);
                     ruleGrammarID();
 
                     state._fsp--;
 
-                     
-                    	        afterParserOrEnumRuleCall();
-                    	    
+
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:121:2: (otherlv_4= ',' ( ( ruleGrammarID ) ) )*
+                    // InternalXtextGrammarTestLanguage.g:123:4: (otherlv_4= ',' ( ( ruleGrammarID ) ) )*
                     loop1:
                     do {
                         int alt1=2;
@@ -258,34 +260,34 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt1) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:121:4: otherlv_4= ',' ( ( ruleGrammarID ) )
+                    	    // InternalXtextGrammarTestLanguage.g:124:5: otherlv_4= ',' ( ( ruleGrammarID ) )
                     	    {
                     	    otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_3); 
 
-                    	        	newLeafNode(otherlv_4, grammarAccess.getGrammarAccess().getCommaKeyword_2_2_0());
-                    	        
-                    	    // InternalXtextGrammarTestLanguage.g:125:1: ( ( ruleGrammarID ) )
-                    	    // InternalXtextGrammarTestLanguage.g:126:1: ( ruleGrammarID )
+                    	    					newLeafNode(otherlv_4, grammarAccess.getGrammarAccess().getCommaKeyword_2_2_0());
+                    	    				
+                    	    // InternalXtextGrammarTestLanguage.g:128:5: ( ( ruleGrammarID ) )
+                    	    // InternalXtextGrammarTestLanguage.g:129:6: ( ruleGrammarID )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:126:1: ( ruleGrammarID )
-                    	    // InternalXtextGrammarTestLanguage.g:127:3: ruleGrammarID
+                    	    // InternalXtextGrammarTestLanguage.g:129:6: ( ruleGrammarID )
+                    	    // InternalXtextGrammarTestLanguage.g:130:7: ruleGrammarID
                     	    {
 
-                    	    			if (current==null) {
-                    	    	            current = createModelElement(grammarAccess.getGrammarRule());
-                    	    	        }
-                    	            
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarCrossReference_2_2_1_0()); 
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElement(grammarAccess.getGrammarRule());
+                    	    							}
+                    	    						
+
+                    	    							newCompositeNode(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarCrossReference_2_2_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_5);
                     	    ruleGrammarID();
 
                     	    state._fsp--;
 
-                    	     
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -307,7 +309,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:140:6: (this_HiddenClause_6= ruleHiddenClause[$current] )?
+            // InternalXtextGrammarTestLanguage.g:146:3: (this_HiddenClause_6= ruleHiddenClause[$current] )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -316,30 +318,30 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt3) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:141:5: this_HiddenClause_6= ruleHiddenClause[$current]
+                    // InternalXtextGrammarTestLanguage.g:147:4: this_HiddenClause_6= ruleHiddenClause[$current]
                     {
-                     
-                    		if (current==null) {
-                    			current = createModelElement(grammarAccess.getGrammarRule());
-                    		}
-                            newCompositeNode(grammarAccess.getGrammarAccess().getHiddenClauseParserRuleCall_3()); 
-                        
+
+                    				if (current==null) {
+                    					current = createModelElement(grammarAccess.getGrammarRule());
+                    				}
+                    				newCompositeNode(grammarAccess.getGrammarAccess().getHiddenClauseParserRuleCall_3());
+                    			
                     pushFollow(FollowSets000.FOLLOW_4);
                     this_HiddenClause_6=ruleHiddenClause(current);
 
                     state._fsp--;
 
-                     
-                            current = this_HiddenClause_6; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_HiddenClause_6;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:152:3: ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )*
+            // InternalXtextGrammarTestLanguage.g:159:3: ( (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration ) )*
             loop4:
             do {
                 int alt4=2;
@@ -352,30 +354,30 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalXtextGrammarTestLanguage.g:153:1: (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration )
+            	    // InternalXtextGrammarTestLanguage.g:160:4: (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration )
             	    {
-            	    // InternalXtextGrammarTestLanguage.g:153:1: (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration )
-            	    // InternalXtextGrammarTestLanguage.g:154:3: lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration
+            	    // InternalXtextGrammarTestLanguage.g:160:4: (lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration )
+            	    // InternalXtextGrammarTestLanguage.g:161:5: lv_metamodelDeclarations_7_0= ruleAbstractMetamodelDeclaration
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getGrammarAccess().getMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getGrammarAccess().getMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_4);
             	    lv_metamodelDeclarations_7_0=ruleAbstractMetamodelDeclaration();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getGrammarRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"metamodelDeclarations",
-            	            		lv_metamodelDeclarations_7_0, 
-            	            		"org.eclipse.xtext.XtextGrammarTestLanguage.AbstractMetamodelDeclaration");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getGrammarRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"metamodelDeclarations",
+            	    						lv_metamodelDeclarations_7_0,
+            	    						"org.eclipse.xtext.XtextGrammarTestLanguage.AbstractMetamodelDeclaration");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -388,7 +390,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                 }
             } while (true);
 
-            // InternalXtextGrammarTestLanguage.g:170:3: ( (lv_rules_8_0= ruleAbstractRule ) )+
+            // InternalXtextGrammarTestLanguage.g:178:3: ( (lv_rules_8_0= ruleAbstractRule ) )+
             int cnt5=0;
             loop5:
             do {
@@ -402,30 +404,30 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalXtextGrammarTestLanguage.g:171:1: (lv_rules_8_0= ruleAbstractRule )
+            	    // InternalXtextGrammarTestLanguage.g:179:4: (lv_rules_8_0= ruleAbstractRule )
             	    {
-            	    // InternalXtextGrammarTestLanguage.g:171:1: (lv_rules_8_0= ruleAbstractRule )
-            	    // InternalXtextGrammarTestLanguage.g:172:3: lv_rules_8_0= ruleAbstractRule
+            	    // InternalXtextGrammarTestLanguage.g:179:4: (lv_rules_8_0= ruleAbstractRule )
+            	    // InternalXtextGrammarTestLanguage.g:180:5: lv_rules_8_0= ruleAbstractRule
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getGrammarAccess().getRulesAbstractRuleParserRuleCall_5_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getGrammarAccess().getRulesAbstractRuleParserRuleCall_5_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_6);
             	    lv_rules_8_0=ruleAbstractRule();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getGrammarRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"rules",
-            	            		lv_rules_8_0, 
-            	            		"org.eclipse.xtext.XtextGrammarTestLanguage.AbstractRule");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getGrammarRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"rules",
+            	    						lv_rules_8_0,
+            	    						"org.eclipse.xtext.XtextGrammarTestLanguage.AbstractRule");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -448,13 +450,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -463,7 +467,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleHiddenClause"
-    // InternalXtextGrammarTestLanguage.g:197:1: ruleHiddenClause[EObject in_current] returns [EObject current=in_current] : ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' ) ;
+    // InternalXtextGrammarTestLanguage.g:202:1: ruleHiddenClause[EObject in_current] returns [EObject current=in_current] : ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' ) ;
     public final EObject ruleHiddenClause(EObject in_current) throws RecognitionException {
         EObject current = in_current;
 
@@ -474,31 +478,32 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         Token otherlv_4=null;
         Token otherlv_5=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:200:28: ( ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' ) )
-            // InternalXtextGrammarTestLanguage.g:201:1: ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' )
+            // InternalXtextGrammarTestLanguage.g:208:2: ( ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' ) )
+            // InternalXtextGrammarTestLanguage.g:209:2: ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' )
             {
-            // InternalXtextGrammarTestLanguage.g:201:1: ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' )
-            // InternalXtextGrammarTestLanguage.g:201:2: ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')'
+            // InternalXtextGrammarTestLanguage.g:209:2: ( ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')' )
+            // InternalXtextGrammarTestLanguage.g:210:3: ( (lv_definesHiddenTokens_0_0= 'hidden' ) ) otherlv_1= '(' ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )? otherlv_5= ')'
             {
-            // InternalXtextGrammarTestLanguage.g:201:2: ( (lv_definesHiddenTokens_0_0= 'hidden' ) )
-            // InternalXtextGrammarTestLanguage.g:202:1: (lv_definesHiddenTokens_0_0= 'hidden' )
+            // InternalXtextGrammarTestLanguage.g:210:3: ( (lv_definesHiddenTokens_0_0= 'hidden' ) )
+            // InternalXtextGrammarTestLanguage.g:211:4: (lv_definesHiddenTokens_0_0= 'hidden' )
             {
-            // InternalXtextGrammarTestLanguage.g:202:1: (lv_definesHiddenTokens_0_0= 'hidden' )
-            // InternalXtextGrammarTestLanguage.g:203:3: lv_definesHiddenTokens_0_0= 'hidden'
+            // InternalXtextGrammarTestLanguage.g:211:4: (lv_definesHiddenTokens_0_0= 'hidden' )
+            // InternalXtextGrammarTestLanguage.g:212:5: lv_definesHiddenTokens_0_0= 'hidden'
             {
             lv_definesHiddenTokens_0_0=(Token)match(input,14,FollowSets000.FOLLOW_7); 
 
-                    newLeafNode(lv_definesHiddenTokens_0_0, grammarAccess.getHiddenClauseAccess().getDefinesHiddenTokensHiddenKeyword_0_0());
-                
+            					newLeafNode(lv_definesHiddenTokens_0_0, grammarAccess.getHiddenClauseAccess().getDefinesHiddenTokensHiddenKeyword_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getHiddenClauseRule());
-            	        }
-                   		setWithLastConsumed(current, "definesHiddenTokens", true, "hidden");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getHiddenClauseRule());
+            					}
+            					setWithLastConsumed(current, "definesHiddenTokens", true, "hidden");
+            				
 
             }
 
@@ -507,9 +512,9 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_8); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getHiddenClauseAccess().getLeftParenthesisKeyword_1());
-                
-            // InternalXtextGrammarTestLanguage.g:220:1: ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )?
+            			newLeafNode(otherlv_1, grammarAccess.getHiddenClauseAccess().getLeftParenthesisKeyword_1());
+            		
+            // InternalXtextGrammarTestLanguage.g:228:3: ( ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )* )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -518,30 +523,30 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt7) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:220:2: ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )*
+                    // InternalXtextGrammarTestLanguage.g:229:4: ( (otherlv_2= RULE_ID ) ) (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )*
                     {
-                    // InternalXtextGrammarTestLanguage.g:220:2: ( (otherlv_2= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:221:1: (otherlv_2= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:229:4: ( (otherlv_2= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:230:5: (otherlv_2= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:221:1: (otherlv_2= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:222:3: otherlv_2= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:230:5: (otherlv_2= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:231:6: otherlv_2= RULE_ID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getHiddenClauseRule());
-                    	        }
-                            
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getHiddenClauseRule());
+                    						}
+                    					
                     otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
-                    		newLeafNode(otherlv_2, grammarAccess.getHiddenClauseAccess().getHiddenTokensAbstractRuleCrossReference_2_0_0()); 
-                    	
+                    						newLeafNode(otherlv_2, grammarAccess.getHiddenClauseAccess().getHiddenTokensAbstractRuleCrossReference_2_0_0());
+                    					
 
                     }
 
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:233:2: (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )*
+                    // InternalXtextGrammarTestLanguage.g:242:4: (otherlv_3= ',' ( (otherlv_4= RULE_ID ) ) )*
                     loop6:
                     do {
                         int alt6=2;
@@ -554,27 +559,27 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt6) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:233:4: otherlv_3= ',' ( (otherlv_4= RULE_ID ) )
+                    	    // InternalXtextGrammarTestLanguage.g:243:5: otherlv_3= ',' ( (otherlv_4= RULE_ID ) )
                     	    {
                     	    otherlv_3=(Token)match(input,13,FollowSets000.FOLLOW_3); 
 
-                    	        	newLeafNode(otherlv_3, grammarAccess.getHiddenClauseAccess().getCommaKeyword_2_1_0());
-                    	        
-                    	    // InternalXtextGrammarTestLanguage.g:237:1: ( (otherlv_4= RULE_ID ) )
-                    	    // InternalXtextGrammarTestLanguage.g:238:1: (otherlv_4= RULE_ID )
+                    	    					newLeafNode(otherlv_3, grammarAccess.getHiddenClauseAccess().getCommaKeyword_2_1_0());
+                    	    				
+                    	    // InternalXtextGrammarTestLanguage.g:247:5: ( (otherlv_4= RULE_ID ) )
+                    	    // InternalXtextGrammarTestLanguage.g:248:6: (otherlv_4= RULE_ID )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:238:1: (otherlv_4= RULE_ID )
-                    	    // InternalXtextGrammarTestLanguage.g:239:3: otherlv_4= RULE_ID
+                    	    // InternalXtextGrammarTestLanguage.g:248:6: (otherlv_4= RULE_ID )
+                    	    // InternalXtextGrammarTestLanguage.g:249:7: otherlv_4= RULE_ID
                     	    {
 
-                    	    			if (current==null) {
-                    	    	            current = createModelElement(grammarAccess.getHiddenClauseRule());
-                    	    	        }
-                    	            
+                    	    							if (current==null) {
+                    	    								current = createModelElement(grammarAccess.getHiddenClauseRule());
+                    	    							}
+                    	    						
                     	    otherlv_4=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
-                    	    		newLeafNode(otherlv_4, grammarAccess.getHiddenClauseAccess().getHiddenTokensAbstractRuleCrossReference_2_1_1_0()); 
-                    	    	
+                    	    							newLeafNode(otherlv_4, grammarAccess.getHiddenClauseAccess().getHiddenTokensAbstractRuleCrossReference_2_1_1_0());
+                    	    						
 
                     	    }
 
@@ -598,21 +603,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_5=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getHiddenClauseAccess().getRightParenthesisKeyword_3());
-                
+            			newLeafNode(otherlv_5, grammarAccess.getHiddenClauseAccess().getRightParenthesisKeyword_3());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -621,7 +628,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleGrammarID"
-    // InternalXtextGrammarTestLanguage.g:262:1: entryRuleGrammarID returns [String current=null] : iv_ruleGrammarID= ruleGrammarID EOF ;
+    // InternalXtextGrammarTestLanguage.g:270:1: entryRuleGrammarID returns [String current=null] : iv_ruleGrammarID= ruleGrammarID EOF ;
     public final String entryRuleGrammarID() throws RecognitionException {
         String current = null;
 
@@ -629,8 +636,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:263:2: (iv_ruleGrammarID= ruleGrammarID EOF )
-            // InternalXtextGrammarTestLanguage.g:264:2: iv_ruleGrammarID= ruleGrammarID EOF
+            // InternalXtextGrammarTestLanguage.g:270:49: (iv_ruleGrammarID= ruleGrammarID EOF )
+            // InternalXtextGrammarTestLanguage.g:271:2: iv_ruleGrammarID= ruleGrammarID EOF
             {
              newCompositeNode(grammarAccess.getGrammarIDRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -644,11 +651,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -657,7 +664,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleGrammarID"
-    // InternalXtextGrammarTestLanguage.g:271:1: ruleGrammarID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // InternalXtextGrammarTestLanguage.g:277:1: ruleGrammarID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleGrammarID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -665,23 +672,24 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         Token kw=null;
         Token this_ID_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:274:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // InternalXtextGrammarTestLanguage.g:275:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalXtextGrammarTestLanguage.g:283:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // InternalXtextGrammarTestLanguage.g:284:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // InternalXtextGrammarTestLanguage.g:275:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // InternalXtextGrammarTestLanguage.g:275:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // InternalXtextGrammarTestLanguage.g:284:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalXtextGrammarTestLanguage.g:285:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_10); 
 
-            		current.merge(this_ID_0);
-                
-             
-                newLeafNode(this_ID_0, grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_0()); 
-                
-            // InternalXtextGrammarTestLanguage.g:282:1: (kw= '.' this_ID_2= RULE_ID )*
+            			current.merge(this_ID_0);
+            		
+
+            			newLeafNode(this_ID_0, grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:292:3: (kw= '.' this_ID_2= RULE_ID )*
             loop8:
             do {
                 int alt8=2;
@@ -694,20 +702,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalXtextGrammarTestLanguage.g:283:2: kw= '.' this_ID_2= RULE_ID
+            	    // InternalXtextGrammarTestLanguage.g:293:4: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,17,FollowSets000.FOLLOW_3); 
 
-            	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getGrammarIDAccess().getFullStopKeyword_1_0()); 
-            	        
+            	    				current.merge(kw);
+            	    				newLeafNode(kw, grammarAccess.getGrammarIDAccess().getFullStopKeyword_1_0());
+            	    			
             	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_10); 
 
-            	    		current.merge(this_ID_2);
-            	        
-            	     
-            	        newLeafNode(this_ID_2, grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_1_1()); 
-            	        
+            	    				current.merge(this_ID_2);
+            	    			
+
+            	    				newLeafNode(this_ID_2, grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_1_1());
+            	    			
 
             	    }
             	    break;
@@ -723,13 +731,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -738,7 +748,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAbstractRule"
-    // InternalXtextGrammarTestLanguage.g:303:1: entryRuleAbstractRule returns [EObject current=null] : iv_ruleAbstractRule= ruleAbstractRule EOF ;
+    // InternalXtextGrammarTestLanguage.g:310:1: entryRuleAbstractRule returns [EObject current=null] : iv_ruleAbstractRule= ruleAbstractRule EOF ;
     public final EObject entryRuleAbstractRule() throws RecognitionException {
         EObject current = null;
 
@@ -746,8 +756,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:304:2: (iv_ruleAbstractRule= ruleAbstractRule EOF )
-            // InternalXtextGrammarTestLanguage.g:305:2: iv_ruleAbstractRule= ruleAbstractRule EOF
+            // InternalXtextGrammarTestLanguage.g:310:53: (iv_ruleAbstractRule= ruleAbstractRule EOF )
+            // InternalXtextGrammarTestLanguage.g:311:2: iv_ruleAbstractRule= ruleAbstractRule EOF
             {
              newCompositeNode(grammarAccess.getAbstractRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -761,11 +771,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -774,7 +784,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAbstractRule"
-    // InternalXtextGrammarTestLanguage.g:312:1: ruleAbstractRule returns [EObject current=null] : (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule ) ;
+    // InternalXtextGrammarTestLanguage.g:317:1: ruleAbstractRule returns [EObject current=null] : (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule ) ;
     public final EObject ruleAbstractRule() throws RecognitionException {
         EObject current = null;
 
@@ -785,13 +795,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_EnumRule_2 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:315:28: ( (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule ) )
-            // InternalXtextGrammarTestLanguage.g:316:1: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )
+            // InternalXtextGrammarTestLanguage.g:323:2: ( (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule ) )
+            // InternalXtextGrammarTestLanguage.g:324:2: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )
             {
-            // InternalXtextGrammarTestLanguage.g:316:1: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )
+            // InternalXtextGrammarTestLanguage.g:324:2: (this_ParserRule_0= ruleParserRule | this_TerminalRule_1= ruleTerminalRule | this_EnumRule_2= ruleEnumRule )
             int alt9=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -819,56 +830,56 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             switch (alt9) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:317:5: this_ParserRule_0= ruleParserRule
+                    // InternalXtextGrammarTestLanguage.g:325:3: this_ParserRule_0= ruleParserRule
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractRuleAccess().getParserRuleParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractRuleAccess().getParserRuleParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_ParserRule_0=ruleParserRule();
 
                     state._fsp--;
 
-                     
-                            current = this_ParserRule_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_ParserRule_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:327:5: this_TerminalRule_1= ruleTerminalRule
+                    // InternalXtextGrammarTestLanguage.g:334:3: this_TerminalRule_1= ruleTerminalRule
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractRuleAccess().getTerminalRuleParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractRuleAccess().getTerminalRuleParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TerminalRule_1=ruleTerminalRule();
 
                     state._fsp--;
 
-                     
-                            current = this_TerminalRule_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_TerminalRule_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 3 :
-                    // InternalXtextGrammarTestLanguage.g:337:5: this_EnumRule_2= ruleEnumRule
+                    // InternalXtextGrammarTestLanguage.g:343:3: this_EnumRule_2= ruleEnumRule
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_EnumRule_2=ruleEnumRule();
 
                     state._fsp--;
 
-                     
-                            current = this_EnumRule_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_EnumRule_2;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -878,13 +889,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -893,7 +906,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAbstractMetamodelDeclaration"
-    // InternalXtextGrammarTestLanguage.g:353:1: entryRuleAbstractMetamodelDeclaration returns [EObject current=null] : iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF ;
+    // InternalXtextGrammarTestLanguage.g:355:1: entryRuleAbstractMetamodelDeclaration returns [EObject current=null] : iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF ;
     public final EObject entryRuleAbstractMetamodelDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -901,8 +914,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:354:2: (iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF )
-            // InternalXtextGrammarTestLanguage.g:355:2: iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF
+            // InternalXtextGrammarTestLanguage.g:355:69: (iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF )
+            // InternalXtextGrammarTestLanguage.g:356:2: iv_ruleAbstractMetamodelDeclaration= ruleAbstractMetamodelDeclaration EOF
             {
              newCompositeNode(grammarAccess.getAbstractMetamodelDeclarationRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -916,11 +929,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -938,13 +951,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_ReferencedMetamodel_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:365:28: ( (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel ) )
-            // InternalXtextGrammarTestLanguage.g:366:1: (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel )
+            // InternalXtextGrammarTestLanguage.g:368:2: ( (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel ) )
+            // InternalXtextGrammarTestLanguage.g:369:2: (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel )
             {
-            // InternalXtextGrammarTestLanguage.g:366:1: (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel )
+            // InternalXtextGrammarTestLanguage.g:369:2: (this_GeneratedMetamodel_0= ruleGeneratedMetamodel | this_ReferencedMetamodel_1= ruleReferencedMetamodel )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -962,38 +976,38 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt10) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:367:5: this_GeneratedMetamodel_0= ruleGeneratedMetamodel
+                    // InternalXtextGrammarTestLanguage.g:370:3: this_GeneratedMetamodel_0= ruleGeneratedMetamodel
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractMetamodelDeclarationAccess().getGeneratedMetamodelParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractMetamodelDeclarationAccess().getGeneratedMetamodelParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_GeneratedMetamodel_0=ruleGeneratedMetamodel();
 
                     state._fsp--;
 
-                     
-                            current = this_GeneratedMetamodel_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_GeneratedMetamodel_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:377:5: this_ReferencedMetamodel_1= ruleReferencedMetamodel
+                    // InternalXtextGrammarTestLanguage.g:379:3: this_ReferencedMetamodel_1= ruleReferencedMetamodel
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractMetamodelDeclarationAccess().getReferencedMetamodelParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractMetamodelDeclarationAccess().getReferencedMetamodelParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_ReferencedMetamodel_1=ruleReferencedMetamodel();
 
                     state._fsp--;
 
-                     
-                            current = this_ReferencedMetamodel_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_ReferencedMetamodel_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -1003,13 +1017,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1018,7 +1034,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleGeneratedMetamodel"
-    // InternalXtextGrammarTestLanguage.g:393:1: entryRuleGeneratedMetamodel returns [EObject current=null] : iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF ;
+    // InternalXtextGrammarTestLanguage.g:391:1: entryRuleGeneratedMetamodel returns [EObject current=null] : iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF ;
     public final EObject entryRuleGeneratedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -1026,8 +1042,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:394:2: (iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF )
-            // InternalXtextGrammarTestLanguage.g:395:2: iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF
+            // InternalXtextGrammarTestLanguage.g:391:59: (iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF )
+            // InternalXtextGrammarTestLanguage.g:392:2: iv_ruleGeneratedMetamodel= ruleGeneratedMetamodel EOF
             {
              newCompositeNode(grammarAccess.getGeneratedMetamodelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1041,11 +1057,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1054,7 +1070,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleGeneratedMetamodel"
-    // InternalXtextGrammarTestLanguage.g:402:1: ruleGeneratedMetamodel returns [EObject current=null] : (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ) ;
+    // InternalXtextGrammarTestLanguage.g:398:1: ruleGeneratedMetamodel returns [EObject current=null] : (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ) ;
     public final EObject ruleGeneratedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -1064,67 +1080,68 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         Token otherlv_3=null;
         Token lv_alias_4_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:405:28: ( (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ) )
-            // InternalXtextGrammarTestLanguage.g:406:1: (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? )
+            // InternalXtextGrammarTestLanguage.g:404:2: ( (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ) )
+            // InternalXtextGrammarTestLanguage.g:405:2: (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? )
             {
-            // InternalXtextGrammarTestLanguage.g:406:1: (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? )
+            // InternalXtextGrammarTestLanguage.g:405:2: (otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? )
             // InternalXtextGrammarTestLanguage.g:406:3: otherlv_0= 'generate' ( (lv_name_1_0= RULE_ID ) ) ( (otherlv_2= RULE_STRING ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )?
             {
             otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getGeneratedMetamodelAccess().getGenerateKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:410:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalXtextGrammarTestLanguage.g:411:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getGeneratedMetamodelAccess().getGenerateKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:410:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:411:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalXtextGrammarTestLanguage.g:411:1: (lv_name_1_0= RULE_ID )
-            // InternalXtextGrammarTestLanguage.g:412:3: lv_name_1_0= RULE_ID
+            // InternalXtextGrammarTestLanguage.g:411:4: (lv_name_1_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:412:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getGeneratedMetamodelAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getGeneratedMetamodelAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getGeneratedMetamodelRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getGeneratedMetamodelRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:428:2: ( (otherlv_2= RULE_STRING ) )
-            // InternalXtextGrammarTestLanguage.g:429:1: (otherlv_2= RULE_STRING )
+
+            }
+
+            // InternalXtextGrammarTestLanguage.g:428:3: ( (otherlv_2= RULE_STRING ) )
+            // InternalXtextGrammarTestLanguage.g:429:4: (otherlv_2= RULE_STRING )
             {
-            // InternalXtextGrammarTestLanguage.g:429:1: (otherlv_2= RULE_STRING )
-            // InternalXtextGrammarTestLanguage.g:430:3: otherlv_2= RULE_STRING
+            // InternalXtextGrammarTestLanguage.g:429:4: (otherlv_2= RULE_STRING )
+            // InternalXtextGrammarTestLanguage.g:430:5: otherlv_2= RULE_STRING
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getGeneratedMetamodelRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getGeneratedMetamodelRule());
+            					}
+            				
             otherlv_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_12); 
 
-            		newLeafNode(otherlv_2, grammarAccess.getGeneratedMetamodelAccess().getEPackageEPackageCrossReference_2_0()); 
-            	
+            					newLeafNode(otherlv_2, grammarAccess.getGeneratedMetamodelAccess().getEPackageEPackageCrossReference_2_0());
+            				
 
             }
 
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:441:2: (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )?
+            // InternalXtextGrammarTestLanguage.g:441:3: (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1133,32 +1150,32 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt11) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:441:4: otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:442:4: otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) )
                     {
                     otherlv_3=(Token)match(input,19,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_3, grammarAccess.getGeneratedMetamodelAccess().getAsKeyword_3_0());
-                        
-                    // InternalXtextGrammarTestLanguage.g:445:1: ( (lv_alias_4_0= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:446:1: (lv_alias_4_0= RULE_ID )
+                    				newLeafNode(otherlv_3, grammarAccess.getGeneratedMetamodelAccess().getAsKeyword_3_0());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:446:4: ( (lv_alias_4_0= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:447:5: (lv_alias_4_0= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:446:1: (lv_alias_4_0= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:447:3: lv_alias_4_0= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:447:5: (lv_alias_4_0= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:448:6: lv_alias_4_0= RULE_ID
                     {
                     lv_alias_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_alias_4_0, grammarAccess.getGeneratedMetamodelAccess().getAliasIDTerminalRuleCall_3_1_0()); 
-                    		
+                    						newLeafNode(lv_alias_4_0, grammarAccess.getGeneratedMetamodelAccess().getAliasIDTerminalRuleCall_3_1_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getGeneratedMetamodelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"alias",
-                            		lv_alias_4_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getGeneratedMetamodelRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"alias",
+                    							lv_alias_4_0,
+                    							"org.eclipse.xtext.common.Terminals.ID");
+                    					
 
                     }
 
@@ -1177,13 +1194,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1192,7 +1211,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleReferencedMetamodel"
-    // InternalXtextGrammarTestLanguage.g:471:1: entryRuleReferencedMetamodel returns [EObject current=null] : iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF ;
+    // InternalXtextGrammarTestLanguage.g:469:1: entryRuleReferencedMetamodel returns [EObject current=null] : iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF ;
     public final EObject entryRuleReferencedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -1200,8 +1219,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:472:2: (iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF )
-            // InternalXtextGrammarTestLanguage.g:473:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
+            // InternalXtextGrammarTestLanguage.g:469:60: (iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF )
+            // InternalXtextGrammarTestLanguage.g:470:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
             {
              newCompositeNode(grammarAccess.getReferencedMetamodelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1215,11 +1234,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1228,7 +1247,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleReferencedMetamodel"
-    // InternalXtextGrammarTestLanguage.g:480:1: ruleReferencedMetamodel returns [EObject current=null] : (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? ) ;
+    // InternalXtextGrammarTestLanguage.g:476:1: ruleReferencedMetamodel returns [EObject current=null] : (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? ) ;
     public final EObject ruleReferencedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -1237,41 +1256,42 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         Token otherlv_2=null;
         Token lv_alias_3_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:483:28: ( (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? ) )
-            // InternalXtextGrammarTestLanguage.g:484:1: (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? )
+            // InternalXtextGrammarTestLanguage.g:482:2: ( (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? ) )
+            // InternalXtextGrammarTestLanguage.g:483:2: (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? )
             {
-            // InternalXtextGrammarTestLanguage.g:484:1: (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? )
+            // InternalXtextGrammarTestLanguage.g:483:2: (otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )? )
             // InternalXtextGrammarTestLanguage.g:484:3: otherlv_0= 'import' ( (otherlv_1= RULE_STRING ) ) (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )?
             {
             otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_11); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:488:1: ( (otherlv_1= RULE_STRING ) )
-            // InternalXtextGrammarTestLanguage.g:489:1: (otherlv_1= RULE_STRING )
+            			newLeafNode(otherlv_0, grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:488:3: ( (otherlv_1= RULE_STRING ) )
+            // InternalXtextGrammarTestLanguage.g:489:4: (otherlv_1= RULE_STRING )
             {
-            // InternalXtextGrammarTestLanguage.g:489:1: (otherlv_1= RULE_STRING )
-            // InternalXtextGrammarTestLanguage.g:490:3: otherlv_1= RULE_STRING
+            // InternalXtextGrammarTestLanguage.g:489:4: (otherlv_1= RULE_STRING )
+            // InternalXtextGrammarTestLanguage.g:490:5: otherlv_1= RULE_STRING
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getReferencedMetamodelRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getReferencedMetamodelRule());
+            					}
+            				
             otherlv_1=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_12); 
 
-            		newLeafNode(otherlv_1, grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageCrossReference_1_0()); 
-            	
+            					newLeafNode(otherlv_1, grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageCrossReference_1_0());
+            				
 
             }
 
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:501:2: (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )?
+            // InternalXtextGrammarTestLanguage.g:501:3: (otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1280,32 +1300,32 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt12) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:501:4: otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:502:4: otherlv_2= 'as' ( (lv_alias_3_0= RULE_ID ) )
                     {
                     otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getReferencedMetamodelAccess().getAsKeyword_2_0());
-                        
-                    // InternalXtextGrammarTestLanguage.g:505:1: ( (lv_alias_3_0= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:506:1: (lv_alias_3_0= RULE_ID )
+                    				newLeafNode(otherlv_2, grammarAccess.getReferencedMetamodelAccess().getAsKeyword_2_0());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:506:4: ( (lv_alias_3_0= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:507:5: (lv_alias_3_0= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:506:1: (lv_alias_3_0= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:507:3: lv_alias_3_0= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:507:5: (lv_alias_3_0= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:508:6: lv_alias_3_0= RULE_ID
                     {
                     lv_alias_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_alias_3_0, grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_2_1_0()); 
-                    		
+                    						newLeafNode(lv_alias_3_0, grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_2_1_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getReferencedMetamodelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"alias",
-                            		lv_alias_3_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getReferencedMetamodelRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"alias",
+                    							lv_alias_3_0,
+                    							"org.eclipse.xtext.common.Terminals.ID");
+                    					
 
                     }
 
@@ -1324,13 +1344,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1339,7 +1361,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleParserRule"
-    // InternalXtextGrammarTestLanguage.g:531:1: entryRuleParserRule returns [EObject current=null] : iv_ruleParserRule= ruleParserRule EOF ;
+    // InternalXtextGrammarTestLanguage.g:529:1: entryRuleParserRule returns [EObject current=null] : iv_ruleParserRule= ruleParserRule EOF ;
     public final EObject entryRuleParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -1347,8 +1369,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:532:2: (iv_ruleParserRule= ruleParserRule EOF )
-            // InternalXtextGrammarTestLanguage.g:533:2: iv_ruleParserRule= ruleParserRule EOF
+            // InternalXtextGrammarTestLanguage.g:529:51: (iv_ruleParserRule= ruleParserRule EOF )
+            // InternalXtextGrammarTestLanguage.g:530:2: iv_ruleParserRule= ruleParserRule EOF
             {
              newCompositeNode(grammarAccess.getParserRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1362,11 +1384,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1375,7 +1397,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleParserRule"
-    // InternalXtextGrammarTestLanguage.g:540:1: ruleParserRule returns [EObject current=null] : ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' ) ;
+    // InternalXtextGrammarTestLanguage.g:536:1: ruleParserRule returns [EObject current=null] : ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' ) ;
     public final EObject ruleParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -1396,16 +1418,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_alternatives_8_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:543:28: ( ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' ) )
-            // InternalXtextGrammarTestLanguage.g:544:1: ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' )
+            // InternalXtextGrammarTestLanguage.g:542:2: ( ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' ) )
+            // InternalXtextGrammarTestLanguage.g:543:2: ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' )
             {
-            // InternalXtextGrammarTestLanguage.g:544:1: ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' )
-            // InternalXtextGrammarTestLanguage.g:544:2: ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';'
+            // InternalXtextGrammarTestLanguage.g:543:2: ( ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';' )
+            // InternalXtextGrammarTestLanguage.g:544:3: ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) ) (this_HiddenClause_6= ruleHiddenClause[$current] )? otherlv_7= ':' ( (lv_alternatives_8_0= ruleAlternatives ) ) otherlv_9= ';'
             {
-            // InternalXtextGrammarTestLanguage.g:544:2: ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) )
+            // InternalXtextGrammarTestLanguage.g:544:3: ( ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) ) | (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? ) )
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1423,49 +1446,49 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt16) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:544:3: ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) )
+                    // InternalXtextGrammarTestLanguage.g:545:4: ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:544:3: ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) )
-                    // InternalXtextGrammarTestLanguage.g:544:4: ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? )
+                    // InternalXtextGrammarTestLanguage.g:545:4: ( ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? ) )
+                    // InternalXtextGrammarTestLanguage.g:546:5: ( (lv_fragment_0_0= 'fragment' ) ) this_RuleNameAndParams_1= ruleRuleNameAndParams[$current] ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? )
                     {
-                    // InternalXtextGrammarTestLanguage.g:544:4: ( (lv_fragment_0_0= 'fragment' ) )
-                    // InternalXtextGrammarTestLanguage.g:545:1: (lv_fragment_0_0= 'fragment' )
+                    // InternalXtextGrammarTestLanguage.g:546:5: ( (lv_fragment_0_0= 'fragment' ) )
+                    // InternalXtextGrammarTestLanguage.g:547:6: (lv_fragment_0_0= 'fragment' )
                     {
-                    // InternalXtextGrammarTestLanguage.g:545:1: (lv_fragment_0_0= 'fragment' )
-                    // InternalXtextGrammarTestLanguage.g:546:3: lv_fragment_0_0= 'fragment'
+                    // InternalXtextGrammarTestLanguage.g:547:6: (lv_fragment_0_0= 'fragment' )
+                    // InternalXtextGrammarTestLanguage.g:548:7: lv_fragment_0_0= 'fragment'
                     {
                     lv_fragment_0_0=(Token)match(input,21,FollowSets000.FOLLOW_13); 
 
-                            newLeafNode(lv_fragment_0_0, grammarAccess.getParserRuleAccess().getFragmentFragmentKeyword_0_0_0_0());
-                        
+                    							newLeafNode(lv_fragment_0_0, grammarAccess.getParserRuleAccess().getFragmentFragmentKeyword_0_0_0_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getParserRuleRule());
-                    	        }
-                           		setWithLastConsumed(current, "fragment", true, "fragment");
-                    	    
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getParserRuleRule());
+                    							}
+                    							setWithLastConsumed(current, "fragment", true, "fragment");
+                    						
+
+                    }
+
 
                     }
 
 
-                    }
-
-                     
-                    		if (current==null) {
-                    			current = createModelElement(grammarAccess.getParserRuleRule());
-                    		}
-                            newCompositeNode(grammarAccess.getParserRuleAccess().getRuleNameAndParamsParserRuleCall_0_0_1()); 
-                        
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getParserRuleRule());
+                    					}
+                    					newCompositeNode(grammarAccess.getParserRuleAccess().getRuleNameAndParamsParserRuleCall_0_0_1());
+                    				
                     pushFollow(FollowSets000.FOLLOW_14);
                     this_RuleNameAndParams_1=ruleRuleNameAndParams(current);
 
                     state._fsp--;
 
-                     
-                            current = this_RuleNameAndParams_1; 
-                            afterParserOrEnumRuleCall();
-                        
-                    // InternalXtextGrammarTestLanguage.g:571:1: ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? )
+
+                    					current = this_RuleNameAndParams_1;
+                    					afterParserOrEnumRuleCall();
+                    				
+                    // InternalXtextGrammarTestLanguage.g:571:5: ( ( (lv_wildcard_2_0= '*' ) ) | (this_ReturnsClause_3= ruleReturnsClause[$current] )? )
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -1483,24 +1506,24 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalXtextGrammarTestLanguage.g:571:2: ( (lv_wildcard_2_0= '*' ) )
+                            // InternalXtextGrammarTestLanguage.g:572:6: ( (lv_wildcard_2_0= '*' ) )
                             {
-                            // InternalXtextGrammarTestLanguage.g:571:2: ( (lv_wildcard_2_0= '*' ) )
-                            // InternalXtextGrammarTestLanguage.g:572:1: (lv_wildcard_2_0= '*' )
+                            // InternalXtextGrammarTestLanguage.g:572:6: ( (lv_wildcard_2_0= '*' ) )
+                            // InternalXtextGrammarTestLanguage.g:573:7: (lv_wildcard_2_0= '*' )
                             {
-                            // InternalXtextGrammarTestLanguage.g:572:1: (lv_wildcard_2_0= '*' )
-                            // InternalXtextGrammarTestLanguage.g:573:3: lv_wildcard_2_0= '*'
+                            // InternalXtextGrammarTestLanguage.g:573:7: (lv_wildcard_2_0= '*' )
+                            // InternalXtextGrammarTestLanguage.g:574:8: lv_wildcard_2_0= '*'
                             {
                             lv_wildcard_2_0=(Token)match(input,22,FollowSets000.FOLLOW_15); 
 
-                                    newLeafNode(lv_wildcard_2_0, grammarAccess.getParserRuleAccess().getWildcardAsteriskKeyword_0_0_2_0_0());
-                                
+                            								newLeafNode(lv_wildcard_2_0, grammarAccess.getParserRuleAccess().getWildcardAsteriskKeyword_0_0_2_0_0());
+                            							
 
-                            	        if (current==null) {
-                            	            current = createModelElement(grammarAccess.getParserRuleRule());
-                            	        }
-                                   		setWithLastConsumed(current, "wildcard", true, "*");
-                            	    
+                            								if (current==null) {
+                            									current = createModelElement(grammarAccess.getParserRuleRule());
+                            								}
+                            								setWithLastConsumed(current, "wildcard", true, "*");
+                            							
 
                             }
 
@@ -1522,23 +1545,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                             }
                             switch (alt13) {
                                 case 1 :
-                                    // InternalXtextGrammarTestLanguage.g:588:5: this_ReturnsClause_3= ruleReturnsClause[$current]
+                                    // InternalXtextGrammarTestLanguage.g:588:7: this_ReturnsClause_3= ruleReturnsClause[$current]
                                     {
-                                     
-                                    		if (current==null) {
-                                    			current = createModelElement(grammarAccess.getParserRuleRule());
-                                    		}
-                                            newCompositeNode(grammarAccess.getParserRuleAccess().getReturnsClauseParserRuleCall_0_0_2_1()); 
-                                        
+
+                                    							if (current==null) {
+                                    								current = createModelElement(grammarAccess.getParserRuleRule());
+                                    							}
+                                    							newCompositeNode(grammarAccess.getParserRuleAccess().getReturnsClauseParserRuleCall_0_0_2_1());
+                                    						
                                     pushFollow(FollowSets000.FOLLOW_15);
                                     this_ReturnsClause_3=ruleReturnsClause(current);
 
                                     state._fsp--;
 
-                                     
-                                            current = this_ReturnsClause_3; 
-                                            afterParserOrEnumRuleCall();
-                                        
+
+                                    							current = this_ReturnsClause_3;
+                                    							afterParserOrEnumRuleCall();
+                                    						
 
                                     }
                                     break;
@@ -1558,27 +1581,27 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:600:6: (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? )
+                    // InternalXtextGrammarTestLanguage.g:603:4: (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? )
                     {
-                    // InternalXtextGrammarTestLanguage.g:600:6: (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? )
-                    // InternalXtextGrammarTestLanguage.g:601:5: this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )?
+                    // InternalXtextGrammarTestLanguage.g:603:4: (this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )? )
+                    // InternalXtextGrammarTestLanguage.g:604:5: this_RuleNameAndParams_4= ruleRuleNameAndParams[$current] (this_ReturnsClause_5= ruleReturnsClause[$current] )?
                     {
-                     
-                    		if (current==null) {
-                    			current = createModelElement(grammarAccess.getParserRuleRule());
-                    		}
-                            newCompositeNode(grammarAccess.getParserRuleAccess().getRuleNameAndParamsParserRuleCall_0_1_0()); 
-                        
+
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getParserRuleRule());
+                    					}
+                    					newCompositeNode(grammarAccess.getParserRuleAccess().getRuleNameAndParamsParserRuleCall_0_1_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_16);
                     this_RuleNameAndParams_4=ruleRuleNameAndParams(current);
 
                     state._fsp--;
 
-                     
-                            current = this_RuleNameAndParams_4; 
-                            afterParserOrEnumRuleCall();
-                        
-                    // InternalXtextGrammarTestLanguage.g:612:1: (this_ReturnsClause_5= ruleReturnsClause[$current] )?
+
+                    					current = this_RuleNameAndParams_4;
+                    					afterParserOrEnumRuleCall();
+                    				
+                    // InternalXtextGrammarTestLanguage.g:615:5: (this_ReturnsClause_5= ruleReturnsClause[$current] )?
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -1587,23 +1610,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     switch (alt15) {
                         case 1 :
-                            // InternalXtextGrammarTestLanguage.g:613:5: this_ReturnsClause_5= ruleReturnsClause[$current]
+                            // InternalXtextGrammarTestLanguage.g:616:6: this_ReturnsClause_5= ruleReturnsClause[$current]
                             {
-                             
-                            		if (current==null) {
-                            			current = createModelElement(grammarAccess.getParserRuleRule());
-                            		}
-                                    newCompositeNode(grammarAccess.getParserRuleAccess().getReturnsClauseParserRuleCall_0_1_1()); 
-                                
+
+                            						if (current==null) {
+                            							current = createModelElement(grammarAccess.getParserRuleRule());
+                            						}
+                            						newCompositeNode(grammarAccess.getParserRuleAccess().getReturnsClauseParserRuleCall_0_1_1());
+                            					
                             pushFollow(FollowSets000.FOLLOW_15);
                             this_ReturnsClause_5=ruleReturnsClause(current);
 
                             state._fsp--;
 
-                             
-                                    current = this_ReturnsClause_5; 
-                                    afterParserOrEnumRuleCall();
-                                
+
+                            						current = this_ReturnsClause_5;
+                            						afterParserOrEnumRuleCall();
+                            					
 
                             }
                             break;
@@ -1619,7 +1642,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:624:5: (this_HiddenClause_6= ruleHiddenClause[$current] )?
+            // InternalXtextGrammarTestLanguage.g:630:3: (this_HiddenClause_6= ruleHiddenClause[$current] )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1628,23 +1651,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt17) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:625:5: this_HiddenClause_6= ruleHiddenClause[$current]
+                    // InternalXtextGrammarTestLanguage.g:631:4: this_HiddenClause_6= ruleHiddenClause[$current]
                     {
-                     
-                    		if (current==null) {
-                    			current = createModelElement(grammarAccess.getParserRuleRule());
-                    		}
-                            newCompositeNode(grammarAccess.getParserRuleAccess().getHiddenClauseParserRuleCall_1()); 
-                        
+
+                    				if (current==null) {
+                    					current = createModelElement(grammarAccess.getParserRuleRule());
+                    				}
+                    				newCompositeNode(grammarAccess.getParserRuleAccess().getHiddenClauseParserRuleCall_1());
+                    			
                     pushFollow(FollowSets000.FOLLOW_17);
                     this_HiddenClause_6=ruleHiddenClause(current);
 
                     state._fsp--;
 
-                     
-                            current = this_HiddenClause_6; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_HiddenClause_6;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
@@ -1653,33 +1676,33 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_7=(Token)match(input,23,FollowSets000.FOLLOW_18); 
 
-                	newLeafNode(otherlv_7, grammarAccess.getParserRuleAccess().getColonKeyword_2());
-                
-            // InternalXtextGrammarTestLanguage.g:640:1: ( (lv_alternatives_8_0= ruleAlternatives ) )
-            // InternalXtextGrammarTestLanguage.g:641:1: (lv_alternatives_8_0= ruleAlternatives )
+            			newLeafNode(otherlv_7, grammarAccess.getParserRuleAccess().getColonKeyword_2());
+            		
+            // InternalXtextGrammarTestLanguage.g:647:3: ( (lv_alternatives_8_0= ruleAlternatives ) )
+            // InternalXtextGrammarTestLanguage.g:648:4: (lv_alternatives_8_0= ruleAlternatives )
             {
-            // InternalXtextGrammarTestLanguage.g:641:1: (lv_alternatives_8_0= ruleAlternatives )
-            // InternalXtextGrammarTestLanguage.g:642:3: lv_alternatives_8_0= ruleAlternatives
+            // InternalXtextGrammarTestLanguage.g:648:4: (lv_alternatives_8_0= ruleAlternatives )
+            // InternalXtextGrammarTestLanguage.g:649:5: lv_alternatives_8_0= ruleAlternatives
             {
-             
-            	        newCompositeNode(grammarAccess.getParserRuleAccess().getAlternativesAlternativesParserRuleCall_3_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getParserRuleAccess().getAlternativesAlternativesParserRuleCall_3_0());
+            				
             pushFollow(FollowSets000.FOLLOW_19);
             lv_alternatives_8_0=ruleAlternatives();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getParserRuleRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"alternatives",
-                    		lv_alternatives_8_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.Alternatives");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getParserRuleRule());
+            					}
+            					set(
+            						current,
+            						"alternatives",
+            						lv_alternatives_8_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.Alternatives");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -1688,21 +1711,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_9=(Token)match(input,24,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_9, grammarAccess.getParserRuleAccess().getSemicolonKeyword_4());
-                
+            			newLeafNode(otherlv_9, grammarAccess.getParserRuleAccess().getSemicolonKeyword_4());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1711,7 +1736,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleRuleNameAndParams"
-    // InternalXtextGrammarTestLanguage.g:671:1: ruleRuleNameAndParams[EObject in_current] returns [EObject current=in_current] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? ) ;
+    // InternalXtextGrammarTestLanguage.g:675:1: ruleRuleNameAndParams[EObject in_current] returns [EObject current=in_current] : ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? ) ;
     public final EObject ruleRuleNameAndParams(EObject in_current) throws RecognitionException {
         EObject current = in_current;
 
@@ -1724,42 +1749,43 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_parameters_4_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:674:28: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? ) )
-            // InternalXtextGrammarTestLanguage.g:675:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? )
+            // InternalXtextGrammarTestLanguage.g:681:2: ( ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? ) )
+            // InternalXtextGrammarTestLanguage.g:682:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? )
             {
-            // InternalXtextGrammarTestLanguage.g:675:1: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? )
-            // InternalXtextGrammarTestLanguage.g:675:2: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )?
+            // InternalXtextGrammarTestLanguage.g:682:2: ( ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )? )
+            // InternalXtextGrammarTestLanguage.g:683:3: ( (lv_name_0_0= RULE_ID ) ) (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )?
             {
-            // InternalXtextGrammarTestLanguage.g:675:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalXtextGrammarTestLanguage.g:676:1: (lv_name_0_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:683:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:684:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalXtextGrammarTestLanguage.g:676:1: (lv_name_0_0= RULE_ID )
-            // InternalXtextGrammarTestLanguage.g:677:3: lv_name_0_0= RULE_ID
+            // InternalXtextGrammarTestLanguage.g:684:4: (lv_name_0_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:685:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_20); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getRuleNameAndParamsAccess().getNameIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_name_0_0, grammarAccess.getRuleNameAndParamsAccess().getNameIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getRuleNameAndParamsRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getRuleNameAndParamsRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:693:2: (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )?
+
+            }
+
+            // InternalXtextGrammarTestLanguage.g:701:3: (otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']' )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -1768,13 +1794,13 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt20) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:693:4: otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']'
+                    // InternalXtextGrammarTestLanguage.g:702:4: otherlv_1= '[' ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )? otherlv_5= ']'
                     {
                     otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_21); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getRuleNameAndParamsAccess().getLeftSquareBracketKeyword_1_0());
-                        
-                    // InternalXtextGrammarTestLanguage.g:697:1: ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )?
+                    				newLeafNode(otherlv_1, grammarAccess.getRuleNameAndParamsAccess().getLeftSquareBracketKeyword_1_0());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:706:4: ( ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )* )?
                     int alt19=2;
                     int LA19_0 = input.LA(1);
 
@@ -1783,40 +1809,40 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     switch (alt19) {
                         case 1 :
-                            // InternalXtextGrammarTestLanguage.g:697:2: ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )*
+                            // InternalXtextGrammarTestLanguage.g:707:5: ( (lv_parameters_2_0= ruleParameter ) ) (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )*
                             {
-                            // InternalXtextGrammarTestLanguage.g:697:2: ( (lv_parameters_2_0= ruleParameter ) )
-                            // InternalXtextGrammarTestLanguage.g:698:1: (lv_parameters_2_0= ruleParameter )
+                            // InternalXtextGrammarTestLanguage.g:707:5: ( (lv_parameters_2_0= ruleParameter ) )
+                            // InternalXtextGrammarTestLanguage.g:708:6: (lv_parameters_2_0= ruleParameter )
                             {
-                            // InternalXtextGrammarTestLanguage.g:698:1: (lv_parameters_2_0= ruleParameter )
-                            // InternalXtextGrammarTestLanguage.g:699:3: lv_parameters_2_0= ruleParameter
+                            // InternalXtextGrammarTestLanguage.g:708:6: (lv_parameters_2_0= ruleParameter )
+                            // InternalXtextGrammarTestLanguage.g:709:7: lv_parameters_2_0= ruleParameter
                             {
-                             
-                            	        newCompositeNode(grammarAccess.getRuleNameAndParamsAccess().getParametersParameterParserRuleCall_1_1_0_0()); 
-                            	    
+
+                            							newCompositeNode(grammarAccess.getRuleNameAndParamsAccess().getParametersParameterParserRuleCall_1_1_0_0());
+                            						
                             pushFollow(FollowSets000.FOLLOW_22);
                             lv_parameters_2_0=ruleParameter();
 
                             state._fsp--;
 
 
-                            	        if (current==null) {
-                            	            current = createModelElementForParent(grammarAccess.getRuleNameAndParamsRule());
-                            	        }
-                                   		add(
-                                   			current, 
-                                   			"parameters",
-                                    		lv_parameters_2_0, 
-                                    		"org.eclipse.xtext.XtextGrammarTestLanguage.Parameter");
-                            	        afterParserOrEnumRuleCall();
-                            	    
+                            							if (current==null) {
+                            								current = createModelElementForParent(grammarAccess.getRuleNameAndParamsRule());
+                            							}
+                            							add(
+                            								current,
+                            								"parameters",
+                            								lv_parameters_2_0,
+                            								"org.eclipse.xtext.XtextGrammarTestLanguage.Parameter");
+                            							afterParserOrEnumRuleCall();
+                            						
 
                             }
 
 
                             }
 
-                            // InternalXtextGrammarTestLanguage.g:715:2: (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )*
+                            // InternalXtextGrammarTestLanguage.g:726:5: (otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) ) )*
                             loop18:
                             do {
                                 int alt18=2;
@@ -1829,37 +1855,37 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                                 switch (alt18) {
                             	case 1 :
-                            	    // InternalXtextGrammarTestLanguage.g:715:4: otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) )
+                            	    // InternalXtextGrammarTestLanguage.g:727:6: otherlv_3= ',' ( (lv_parameters_4_0= ruleParameter ) )
                             	    {
                             	    otherlv_3=(Token)match(input,13,FollowSets000.FOLLOW_3); 
 
-                            	        	newLeafNode(otherlv_3, grammarAccess.getRuleNameAndParamsAccess().getCommaKeyword_1_1_1_0());
-                            	        
-                            	    // InternalXtextGrammarTestLanguage.g:719:1: ( (lv_parameters_4_0= ruleParameter ) )
-                            	    // InternalXtextGrammarTestLanguage.g:720:1: (lv_parameters_4_0= ruleParameter )
+                            	    						newLeafNode(otherlv_3, grammarAccess.getRuleNameAndParamsAccess().getCommaKeyword_1_1_1_0());
+                            	    					
+                            	    // InternalXtextGrammarTestLanguage.g:731:6: ( (lv_parameters_4_0= ruleParameter ) )
+                            	    // InternalXtextGrammarTestLanguage.g:732:7: (lv_parameters_4_0= ruleParameter )
                             	    {
-                            	    // InternalXtextGrammarTestLanguage.g:720:1: (lv_parameters_4_0= ruleParameter )
-                            	    // InternalXtextGrammarTestLanguage.g:721:3: lv_parameters_4_0= ruleParameter
+                            	    // InternalXtextGrammarTestLanguage.g:732:7: (lv_parameters_4_0= ruleParameter )
+                            	    // InternalXtextGrammarTestLanguage.g:733:8: lv_parameters_4_0= ruleParameter
                             	    {
-                            	     
-                            	    	        newCompositeNode(grammarAccess.getRuleNameAndParamsAccess().getParametersParameterParserRuleCall_1_1_1_1_0()); 
-                            	    	    
+
+                            	    								newCompositeNode(grammarAccess.getRuleNameAndParamsAccess().getParametersParameterParserRuleCall_1_1_1_1_0());
+                            	    							
                             	    pushFollow(FollowSets000.FOLLOW_22);
                             	    lv_parameters_4_0=ruleParameter();
 
                             	    state._fsp--;
 
 
-                            	    	        if (current==null) {
-                            	    	            current = createModelElementForParent(grammarAccess.getRuleNameAndParamsRule());
-                            	    	        }
-                            	           		add(
-                            	           			current, 
-                            	           			"parameters",
-                            	            		lv_parameters_4_0, 
-                            	            		"org.eclipse.xtext.XtextGrammarTestLanguage.Parameter");
-                            	    	        afterParserOrEnumRuleCall();
-                            	    	    
+                            	    								if (current==null) {
+                            	    									current = createModelElementForParent(grammarAccess.getRuleNameAndParamsRule());
+                            	    								}
+                            	    								add(
+                            	    									current,
+                            	    									"parameters",
+                            	    									lv_parameters_4_0,
+                            	    									"org.eclipse.xtext.XtextGrammarTestLanguage.Parameter");
+                            	    								afterParserOrEnumRuleCall();
+                            	    							
 
                             	    }
 
@@ -1883,8 +1909,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                     otherlv_5=(Token)match(input,26,FollowSets000.FOLLOW_2); 
 
-                        	newLeafNode(otherlv_5, grammarAccess.getRuleNameAndParamsAccess().getRightSquareBracketKeyword_1_2());
-                        
+                    				newLeafNode(otherlv_5, grammarAccess.getRuleNameAndParamsAccess().getRightSquareBracketKeyword_1_2());
+                    			
 
                     }
                     break;
@@ -1897,13 +1923,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1912,7 +1940,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleReturnsClause"
-    // InternalXtextGrammarTestLanguage.g:750:1: ruleReturnsClause[EObject in_current] returns [EObject current=in_current] : (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:762:1: ruleReturnsClause[EObject in_current] returns [EObject current=in_current] : (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) ) ;
     public final EObject ruleReturnsClause(EObject in_current) throws RecognitionException {
         EObject current = in_current;
 
@@ -1920,44 +1948,45 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_type_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:753:28: ( (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:754:1: (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) )
+            // InternalXtextGrammarTestLanguage.g:768:2: ( (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:769:2: (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:754:1: (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) )
-            // InternalXtextGrammarTestLanguage.g:754:3: otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) )
+            // InternalXtextGrammarTestLanguage.g:769:2: (otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) ) )
+            // InternalXtextGrammarTestLanguage.g:770:3: otherlv_0= 'returns' ( (lv_type_1_0= ruleTypeRef ) )
             {
             otherlv_0=(Token)match(input,27,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getReturnsClauseAccess().getReturnsKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:758:1: ( (lv_type_1_0= ruleTypeRef ) )
-            // InternalXtextGrammarTestLanguage.g:759:1: (lv_type_1_0= ruleTypeRef )
+            			newLeafNode(otherlv_0, grammarAccess.getReturnsClauseAccess().getReturnsKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:774:3: ( (lv_type_1_0= ruleTypeRef ) )
+            // InternalXtextGrammarTestLanguage.g:775:4: (lv_type_1_0= ruleTypeRef )
             {
-            // InternalXtextGrammarTestLanguage.g:759:1: (lv_type_1_0= ruleTypeRef )
-            // InternalXtextGrammarTestLanguage.g:760:3: lv_type_1_0= ruleTypeRef
+            // InternalXtextGrammarTestLanguage.g:775:4: (lv_type_1_0= ruleTypeRef )
+            // InternalXtextGrammarTestLanguage.g:776:5: lv_type_1_0= ruleTypeRef
             {
-             
-            	        newCompositeNode(grammarAccess.getReturnsClauseAccess().getTypeTypeRefParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getReturnsClauseAccess().getTypeTypeRefParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_type_1_0=ruleTypeRef();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getReturnsClauseRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"type",
-                    		lv_type_1_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.TypeRef");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getReturnsClauseRule());
+            					}
+            					set(
+            						current,
+            						"type",
+            						lv_type_1_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.TypeRef");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -1970,13 +1999,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1985,7 +2016,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleParameter"
-    // InternalXtextGrammarTestLanguage.g:784:1: entryRuleParameter returns [EObject current=null] : iv_ruleParameter= ruleParameter EOF ;
+    // InternalXtextGrammarTestLanguage.g:797:1: entryRuleParameter returns [EObject current=null] : iv_ruleParameter= ruleParameter EOF ;
     public final EObject entryRuleParameter() throws RecognitionException {
         EObject current = null;
 
@@ -1993,8 +2024,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:785:2: (iv_ruleParameter= ruleParameter EOF )
-            // InternalXtextGrammarTestLanguage.g:786:2: iv_ruleParameter= ruleParameter EOF
+            // InternalXtextGrammarTestLanguage.g:797:50: (iv_ruleParameter= ruleParameter EOF )
+            // InternalXtextGrammarTestLanguage.g:798:2: iv_ruleParameter= ruleParameter EOF
             {
              newCompositeNode(grammarAccess.getParameterRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2008,11 +2039,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2021,54 +2052,57 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleParameter"
-    // InternalXtextGrammarTestLanguage.g:793:1: ruleParameter returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalXtextGrammarTestLanguage.g:804:1: ruleParameter returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleParameter() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:796:28: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalXtextGrammarTestLanguage.g:797:1: ( (lv_name_0_0= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:810:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalXtextGrammarTestLanguage.g:811:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalXtextGrammarTestLanguage.g:797:1: ( (lv_name_0_0= RULE_ID ) )
-            // InternalXtextGrammarTestLanguage.g:798:1: (lv_name_0_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:811:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:812:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalXtextGrammarTestLanguage.g:798:1: (lv_name_0_0= RULE_ID )
-            // InternalXtextGrammarTestLanguage.g:799:3: lv_name_0_0= RULE_ID
+            // InternalXtextGrammarTestLanguage.g:812:3: (lv_name_0_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:813:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0()); 
-            		
+            				newLeafNode(lv_name_0_0, grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getParameterRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getParameterRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"name",
+            					lv_name_0_0,
+            					"org.eclipse.xtext.common.Terminals.ID");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2077,7 +2111,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleTypeRef"
-    // InternalXtextGrammarTestLanguage.g:823:1: entryRuleTypeRef returns [EObject current=null] : iv_ruleTypeRef= ruleTypeRef EOF ;
+    // InternalXtextGrammarTestLanguage.g:832:1: entryRuleTypeRef returns [EObject current=null] : iv_ruleTypeRef= ruleTypeRef EOF ;
     public final EObject entryRuleTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -2085,8 +2119,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:824:2: (iv_ruleTypeRef= ruleTypeRef EOF )
-            // InternalXtextGrammarTestLanguage.g:825:2: iv_ruleTypeRef= ruleTypeRef EOF
+            // InternalXtextGrammarTestLanguage.g:832:48: (iv_ruleTypeRef= ruleTypeRef EOF )
+            // InternalXtextGrammarTestLanguage.g:833:2: iv_ruleTypeRef= ruleTypeRef EOF
             {
              newCompositeNode(grammarAccess.getTypeRefRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2100,11 +2134,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2113,7 +2147,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleTypeRef"
-    // InternalXtextGrammarTestLanguage.g:832:1: ruleTypeRef returns [EObject current=null] : ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:839:1: ruleTypeRef returns [EObject current=null] : ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) ) ;
     public final EObject ruleTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -2121,16 +2155,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         Token otherlv_1=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:835:28: ( ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:836:1: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) )
+            // InternalXtextGrammarTestLanguage.g:845:2: ( ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:846:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:836:1: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) )
-            // InternalXtextGrammarTestLanguage.g:836:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:846:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) ) )
+            // InternalXtextGrammarTestLanguage.g:847:3: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )? ( (otherlv_2= RULE_ID ) )
             {
-            // InternalXtextGrammarTestLanguage.g:836:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )?
+            // InternalXtextGrammarTestLanguage.g:847:3: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '::' )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -2143,23 +2178,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt21) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:836:3: ( (otherlv_0= RULE_ID ) ) otherlv_1= '::'
+                    // InternalXtextGrammarTestLanguage.g:848:4: ( (otherlv_0= RULE_ID ) ) otherlv_1= '::'
                     {
-                    // InternalXtextGrammarTestLanguage.g:836:3: ( (otherlv_0= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:837:1: (otherlv_0= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:848:4: ( (otherlv_0= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:849:5: (otherlv_0= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:837:1: (otherlv_0= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:838:3: otherlv_0= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:849:5: (otherlv_0= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:850:6: otherlv_0= RULE_ID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTypeRefRule());
-                    	        }
-                            
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getTypeRefRule());
+                    						}
+                    					
                     otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_23); 
 
-                    		newLeafNode(otherlv_0, grammarAccess.getTypeRefAccess().getMetamodelAbstractMetamodelDeclarationCrossReference_0_0_0()); 
-                    	
+                    						newLeafNode(otherlv_0, grammarAccess.getTypeRefAccess().getMetamodelAbstractMetamodelDeclarationCrossReference_0_0_0());
+                    					
 
                     }
 
@@ -2168,29 +2203,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                     otherlv_1=(Token)match(input,28,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getTypeRefAccess().getColonColonKeyword_0_1());
-                        
+                    				newLeafNode(otherlv_1, grammarAccess.getTypeRefAccess().getColonColonKeyword_0_1());
+                    			
 
                     }
                     break;
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:853:3: ( (otherlv_2= RULE_ID ) )
-            // InternalXtextGrammarTestLanguage.g:854:1: (otherlv_2= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:866:3: ( (otherlv_2= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:867:4: (otherlv_2= RULE_ID )
             {
-            // InternalXtextGrammarTestLanguage.g:854:1: (otherlv_2= RULE_ID )
-            // InternalXtextGrammarTestLanguage.g:855:3: otherlv_2= RULE_ID
+            // InternalXtextGrammarTestLanguage.g:867:4: (otherlv_2= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:868:5: otherlv_2= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getTypeRefRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTypeRefRule());
+            					}
+            				
             otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            		newLeafNode(otherlv_2, grammarAccess.getTypeRefAccess().getClassifierEClassifierCrossReference_1_0()); 
-            	
+            					newLeafNode(otherlv_2, grammarAccess.getTypeRefAccess().getClassifierEClassifierCrossReference_1_0());
+            				
 
             }
 
@@ -2203,13 +2238,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2218,7 +2255,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAlternatives"
-    // InternalXtextGrammarTestLanguage.g:874:1: entryRuleAlternatives returns [EObject current=null] : iv_ruleAlternatives= ruleAlternatives EOF ;
+    // InternalXtextGrammarTestLanguage.g:883:1: entryRuleAlternatives returns [EObject current=null] : iv_ruleAlternatives= ruleAlternatives EOF ;
     public final EObject entryRuleAlternatives() throws RecognitionException {
         EObject current = null;
 
@@ -2226,8 +2263,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:875:2: (iv_ruleAlternatives= ruleAlternatives EOF )
-            // InternalXtextGrammarTestLanguage.g:876:2: iv_ruleAlternatives= ruleAlternatives EOF
+            // InternalXtextGrammarTestLanguage.g:883:53: (iv_ruleAlternatives= ruleAlternatives EOF )
+            // InternalXtextGrammarTestLanguage.g:884:2: iv_ruleAlternatives= ruleAlternatives EOF
             {
              newCompositeNode(grammarAccess.getAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2241,11 +2278,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2254,7 +2291,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAlternatives"
-    // InternalXtextGrammarTestLanguage.g:883:1: ruleAlternatives returns [EObject current=null] : (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? ) ;
+    // InternalXtextGrammarTestLanguage.g:890:1: ruleAlternatives returns [EObject current=null] : (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? ) ;
     public final EObject ruleAlternatives() throws RecognitionException {
         EObject current = null;
 
@@ -2264,28 +2301,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_elements_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:886:28: ( (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? ) )
-            // InternalXtextGrammarTestLanguage.g:887:1: (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:896:2: ( (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? ) )
+            // InternalXtextGrammarTestLanguage.g:897:2: (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? )
             {
-            // InternalXtextGrammarTestLanguage.g:887:1: (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? )
-            // InternalXtextGrammarTestLanguage.g:888:5: this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )?
+            // InternalXtextGrammarTestLanguage.g:897:2: (this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:898:3: this_ConditionalBranch_0= ruleConditionalBranch ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )?
             {
-             
-                    newCompositeNode(grammarAccess.getAlternativesAccess().getConditionalBranchParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getAlternativesAccess().getConditionalBranchParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_24);
             this_ConditionalBranch_0=ruleConditionalBranch();
 
             state._fsp--;
 
-             
-                    current = this_ConditionalBranch_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:896:1: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )?
+
+            			current = this_ConditionalBranch_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:906:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+ )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -2294,20 +2332,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt23) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:896:2: () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:907:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+
                     {
-                    // InternalXtextGrammarTestLanguage.g:896:2: ()
-                    // InternalXtextGrammarTestLanguage.g:897:5: 
+                    // InternalXtextGrammarTestLanguage.g:907:4: ()
+                    // InternalXtextGrammarTestLanguage.g:908:5: 
                     {
 
-                            current = forceCreateModelElementAndAdd(
-                                grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0(),
-                                current);
-                        
+                    					current = forceCreateModelElementAndAdd(
+                    						grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0(),
+                    						current);
+                    				
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:902:2: (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:914:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) ) )+
                     int cnt22=0;
                     loop22:
                     do {
@@ -2321,37 +2359,37 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt22) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:902:4: otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) )
+                    	    // InternalXtextGrammarTestLanguage.g:915:5: otherlv_2= '|' ( (lv_elements_3_0= ruleConditionalBranch ) )
                     	    {
                     	    otherlv_2=(Token)match(input,29,FollowSets000.FOLLOW_18); 
 
-                    	        	newLeafNode(otherlv_2, grammarAccess.getAlternativesAccess().getVerticalLineKeyword_1_1_0());
-                    	        
-                    	    // InternalXtextGrammarTestLanguage.g:906:1: ( (lv_elements_3_0= ruleConditionalBranch ) )
-                    	    // InternalXtextGrammarTestLanguage.g:907:1: (lv_elements_3_0= ruleConditionalBranch )
+                    	    					newLeafNode(otherlv_2, grammarAccess.getAlternativesAccess().getVerticalLineKeyword_1_1_0());
+                    	    				
+                    	    // InternalXtextGrammarTestLanguage.g:919:5: ( (lv_elements_3_0= ruleConditionalBranch ) )
+                    	    // InternalXtextGrammarTestLanguage.g:920:6: (lv_elements_3_0= ruleConditionalBranch )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:907:1: (lv_elements_3_0= ruleConditionalBranch )
-                    	    // InternalXtextGrammarTestLanguage.g:908:3: lv_elements_3_0= ruleConditionalBranch
+                    	    // InternalXtextGrammarTestLanguage.g:920:6: (lv_elements_3_0= ruleConditionalBranch )
+                    	    // InternalXtextGrammarTestLanguage.g:921:7: lv_elements_3_0= ruleConditionalBranch
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getAlternativesAccess().getElementsConditionalBranchParserRuleCall_1_1_1_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getAlternativesAccess().getElementsConditionalBranchParserRuleCall_1_1_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_24);
                     	    lv_elements_3_0=ruleConditionalBranch();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getAlternativesRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"elements",
-                    	            		lv_elements_3_0, 
-                    	            		"org.eclipse.xtext.XtextGrammarTestLanguage.ConditionalBranch");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getAlternativesRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"elements",
+                    	    								lv_elements_3_0,
+                    	    								"org.eclipse.xtext.XtextGrammarTestLanguage.ConditionalBranch");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -2383,13 +2421,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2398,7 +2438,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleConditionalBranch"
-    // InternalXtextGrammarTestLanguage.g:932:1: entryRuleConditionalBranch returns [EObject current=null] : iv_ruleConditionalBranch= ruleConditionalBranch EOF ;
+    // InternalXtextGrammarTestLanguage.g:944:1: entryRuleConditionalBranch returns [EObject current=null] : iv_ruleConditionalBranch= ruleConditionalBranch EOF ;
     public final EObject entryRuleConditionalBranch() throws RecognitionException {
         EObject current = null;
 
@@ -2406,8 +2446,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:933:2: (iv_ruleConditionalBranch= ruleConditionalBranch EOF )
-            // InternalXtextGrammarTestLanguage.g:934:2: iv_ruleConditionalBranch= ruleConditionalBranch EOF
+            // InternalXtextGrammarTestLanguage.g:944:58: (iv_ruleConditionalBranch= ruleConditionalBranch EOF )
+            // InternalXtextGrammarTestLanguage.g:945:2: iv_ruleConditionalBranch= ruleConditionalBranch EOF
             {
              newCompositeNode(grammarAccess.getConditionalBranchRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2421,11 +2461,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2434,7 +2474,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleConditionalBranch"
-    // InternalXtextGrammarTestLanguage.g:941:1: ruleConditionalBranch returns [EObject current=null] : (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:951:1: ruleConditionalBranch returns [EObject current=null] : (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) ) ;
     public final EObject ruleConditionalBranch() throws RecognitionException {
         EObject current = null;
 
@@ -2448,13 +2488,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_guardedElement_6_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:944:28: ( (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:945:1: (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:957:2: ( (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:958:2: (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:945:1: (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:958:2: (this_UnorderedGroup_0= ruleUnorderedGroup | ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) ) )
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -2472,90 +2513,90 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt24) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:946:5: this_UnorderedGroup_0= ruleUnorderedGroup
+                    // InternalXtextGrammarTestLanguage.g:959:3: this_UnorderedGroup_0= ruleUnorderedGroup
                     {
-                     
-                            newCompositeNode(grammarAccess.getConditionalBranchAccess().getUnorderedGroupParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getConditionalBranchAccess().getUnorderedGroupParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_UnorderedGroup_0=ruleUnorderedGroup();
 
                     state._fsp--;
 
-                     
-                            current = this_UnorderedGroup_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_UnorderedGroup_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:955:6: ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) )
+                    // InternalXtextGrammarTestLanguage.g:968:3: ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:955:6: ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) )
-                    // InternalXtextGrammarTestLanguage.g:955:7: () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) )
+                    // InternalXtextGrammarTestLanguage.g:968:3: ( () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) ) )
+                    // InternalXtextGrammarTestLanguage.g:969:4: () otherlv_2= '[' ( (lv_filtered_3_0= ruleInverseLiteralValue ) ) ( (otherlv_4= RULE_ID ) ) otherlv_5= ']' ( (lv_guardedElement_6_0= ruleUnorderedGroup ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:955:7: ()
-                    // InternalXtextGrammarTestLanguage.g:956:5: 
+                    // InternalXtextGrammarTestLanguage.g:969:4: ()
+                    // InternalXtextGrammarTestLanguage.g:970:5: 
                     {
 
-                            current = forceCreateModelElement(
-                                grammarAccess.getConditionalBranchAccess().getConditionalBranchAction_1_0(),
-                                current);
-                        
+                    					current = forceCreateModelElement(
+                    						grammarAccess.getConditionalBranchAccess().getConditionalBranchAction_1_0(),
+                    						current);
+                    				
 
                     }
 
                     otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_25); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getConditionalBranchAccess().getLeftSquareBracketKeyword_1_1());
-                        
-                    // InternalXtextGrammarTestLanguage.g:965:1: ( (lv_filtered_3_0= ruleInverseLiteralValue ) )
-                    // InternalXtextGrammarTestLanguage.g:966:1: (lv_filtered_3_0= ruleInverseLiteralValue )
+                    				newLeafNode(otherlv_2, grammarAccess.getConditionalBranchAccess().getLeftSquareBracketKeyword_1_1());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:980:4: ( (lv_filtered_3_0= ruleInverseLiteralValue ) )
+                    // InternalXtextGrammarTestLanguage.g:981:5: (lv_filtered_3_0= ruleInverseLiteralValue )
                     {
-                    // InternalXtextGrammarTestLanguage.g:966:1: (lv_filtered_3_0= ruleInverseLiteralValue )
-                    // InternalXtextGrammarTestLanguage.g:967:3: lv_filtered_3_0= ruleInverseLiteralValue
+                    // InternalXtextGrammarTestLanguage.g:981:5: (lv_filtered_3_0= ruleInverseLiteralValue )
+                    // InternalXtextGrammarTestLanguage.g:982:6: lv_filtered_3_0= ruleInverseLiteralValue
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getConditionalBranchAccess().getFilteredInverseLiteralValueParserRuleCall_1_2_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getConditionalBranchAccess().getFilteredInverseLiteralValueParserRuleCall_1_2_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_3);
                     lv_filtered_3_0=ruleInverseLiteralValue();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getConditionalBranchRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"filtered",
-                            		lv_filtered_3_0, 
-                            		"org.eclipse.xtext.XtextGrammarTestLanguage.InverseLiteralValue");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getConditionalBranchRule());
+                    						}
+                    						set(
+                    							current,
+                    							"filtered",
+                    							lv_filtered_3_0,
+                    							"org.eclipse.xtext.XtextGrammarTestLanguage.InverseLiteralValue");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:983:2: ( (otherlv_4= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:984:1: (otherlv_4= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:999:4: ( (otherlv_4= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:1000:5: (otherlv_4= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:984:1: (otherlv_4= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:985:3: otherlv_4= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:1000:5: (otherlv_4= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:1001:6: otherlv_4= RULE_ID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getConditionalBranchRule());
-                    	        }
-                            
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getConditionalBranchRule());
+                    						}
+                    					
                     otherlv_4=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); 
 
-                    		newLeafNode(otherlv_4, grammarAccess.getConditionalBranchAccess().getParameterParameterCrossReference_1_3_0()); 
-                    	
+                    						newLeafNode(otherlv_4, grammarAccess.getConditionalBranchAccess().getParameterParameterCrossReference_1_3_0());
+                    					
 
                     }
 
@@ -2564,33 +2605,33 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                     otherlv_5=(Token)match(input,26,FollowSets000.FOLLOW_27); 
 
-                        	newLeafNode(otherlv_5, grammarAccess.getConditionalBranchAccess().getRightSquareBracketKeyword_1_4());
-                        
-                    // InternalXtextGrammarTestLanguage.g:1000:1: ( (lv_guardedElement_6_0= ruleUnorderedGroup ) )
-                    // InternalXtextGrammarTestLanguage.g:1001:1: (lv_guardedElement_6_0= ruleUnorderedGroup )
+                    				newLeafNode(otherlv_5, grammarAccess.getConditionalBranchAccess().getRightSquareBracketKeyword_1_4());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:1016:4: ( (lv_guardedElement_6_0= ruleUnorderedGroup ) )
+                    // InternalXtextGrammarTestLanguage.g:1017:5: (lv_guardedElement_6_0= ruleUnorderedGroup )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1001:1: (lv_guardedElement_6_0= ruleUnorderedGroup )
-                    // InternalXtextGrammarTestLanguage.g:1002:3: lv_guardedElement_6_0= ruleUnorderedGroup
+                    // InternalXtextGrammarTestLanguage.g:1017:5: (lv_guardedElement_6_0= ruleUnorderedGroup )
+                    // InternalXtextGrammarTestLanguage.g:1018:6: lv_guardedElement_6_0= ruleUnorderedGroup
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getConditionalBranchAccess().getGuardedElementUnorderedGroupParserRuleCall_1_5_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getConditionalBranchAccess().getGuardedElementUnorderedGroupParserRuleCall_1_5_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_guardedElement_6_0=ruleUnorderedGroup();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getConditionalBranchRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"guardedElement",
-                            		lv_guardedElement_6_0, 
-                            		"org.eclipse.xtext.XtextGrammarTestLanguage.UnorderedGroup");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getConditionalBranchRule());
+                    						}
+                    						set(
+                    							current,
+                    							"guardedElement",
+                    							lv_guardedElement_6_0,
+                    							"org.eclipse.xtext.XtextGrammarTestLanguage.UnorderedGroup");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -2609,13 +2650,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2624,7 +2667,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleUnorderedGroup"
-    // InternalXtextGrammarTestLanguage.g:1026:1: entryRuleUnorderedGroup returns [EObject current=null] : iv_ruleUnorderedGroup= ruleUnorderedGroup EOF ;
+    // InternalXtextGrammarTestLanguage.g:1040:1: entryRuleUnorderedGroup returns [EObject current=null] : iv_ruleUnorderedGroup= ruleUnorderedGroup EOF ;
     public final EObject entryRuleUnorderedGroup() throws RecognitionException {
         EObject current = null;
 
@@ -2632,8 +2675,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1027:2: (iv_ruleUnorderedGroup= ruleUnorderedGroup EOF )
-            // InternalXtextGrammarTestLanguage.g:1028:2: iv_ruleUnorderedGroup= ruleUnorderedGroup EOF
+            // InternalXtextGrammarTestLanguage.g:1040:55: (iv_ruleUnorderedGroup= ruleUnorderedGroup EOF )
+            // InternalXtextGrammarTestLanguage.g:1041:2: iv_ruleUnorderedGroup= ruleUnorderedGroup EOF
             {
              newCompositeNode(grammarAccess.getUnorderedGroupRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2647,11 +2690,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2660,7 +2703,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleUnorderedGroup"
-    // InternalXtextGrammarTestLanguage.g:1035:1: ruleUnorderedGroup returns [EObject current=null] : (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? ) ;
+    // InternalXtextGrammarTestLanguage.g:1047:1: ruleUnorderedGroup returns [EObject current=null] : (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? ) ;
     public final EObject ruleUnorderedGroup() throws RecognitionException {
         EObject current = null;
 
@@ -2670,28 +2713,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_elements_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1038:28: ( (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? ) )
-            // InternalXtextGrammarTestLanguage.g:1039:1: (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:1053:2: ( (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? ) )
+            // InternalXtextGrammarTestLanguage.g:1054:2: (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? )
             {
-            // InternalXtextGrammarTestLanguage.g:1039:1: (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? )
-            // InternalXtextGrammarTestLanguage.g:1040:5: this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )?
+            // InternalXtextGrammarTestLanguage.g:1054:2: (this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:1055:3: this_Group_0= ruleGroup ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )?
             {
-             
-                    newCompositeNode(grammarAccess.getUnorderedGroupAccess().getGroupParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getUnorderedGroupAccess().getGroupParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_28);
             this_Group_0=ruleGroup();
 
             state._fsp--;
 
-             
-                    current = this_Group_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:1048:1: ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )?
+
+            			current = this_Group_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:1063:3: ( () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+ )?
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -2700,20 +2744,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt26) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1048:2: () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:1064:4: () (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+
                     {
-                    // InternalXtextGrammarTestLanguage.g:1048:2: ()
-                    // InternalXtextGrammarTestLanguage.g:1049:5: 
+                    // InternalXtextGrammarTestLanguage.g:1064:4: ()
+                    // InternalXtextGrammarTestLanguage.g:1065:5: 
                     {
 
-                            current = forceCreateModelElementAndAdd(
-                                grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0(),
-                                current);
-                        
+                    					current = forceCreateModelElementAndAdd(
+                    						grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0(),
+                    						current);
+                    				
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:1054:2: (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:1071:4: (otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) ) )+
                     int cnt25=0;
                     loop25:
                     do {
@@ -2727,37 +2771,37 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt25) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:1054:4: otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) )
+                    	    // InternalXtextGrammarTestLanguage.g:1072:5: otherlv_2= '&' ( (lv_elements_3_0= ruleGroup ) )
                     	    {
                     	    otherlv_2=(Token)match(input,30,FollowSets000.FOLLOW_27); 
 
-                    	        	newLeafNode(otherlv_2, grammarAccess.getUnorderedGroupAccess().getAmpersandKeyword_1_1_0());
-                    	        
-                    	    // InternalXtextGrammarTestLanguage.g:1058:1: ( (lv_elements_3_0= ruleGroup ) )
-                    	    // InternalXtextGrammarTestLanguage.g:1059:1: (lv_elements_3_0= ruleGroup )
+                    	    					newLeafNode(otherlv_2, grammarAccess.getUnorderedGroupAccess().getAmpersandKeyword_1_1_0());
+                    	    				
+                    	    // InternalXtextGrammarTestLanguage.g:1076:5: ( (lv_elements_3_0= ruleGroup ) )
+                    	    // InternalXtextGrammarTestLanguage.g:1077:6: (lv_elements_3_0= ruleGroup )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:1059:1: (lv_elements_3_0= ruleGroup )
-                    	    // InternalXtextGrammarTestLanguage.g:1060:3: lv_elements_3_0= ruleGroup
+                    	    // InternalXtextGrammarTestLanguage.g:1077:6: (lv_elements_3_0= ruleGroup )
+                    	    // InternalXtextGrammarTestLanguage.g:1078:7: lv_elements_3_0= ruleGroup
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getUnorderedGroupAccess().getElementsGroupParserRuleCall_1_1_1_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getUnorderedGroupAccess().getElementsGroupParserRuleCall_1_1_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_28);
                     	    lv_elements_3_0=ruleGroup();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getUnorderedGroupRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"elements",
-                    	            		lv_elements_3_0, 
-                    	            		"org.eclipse.xtext.XtextGrammarTestLanguage.Group");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getUnorderedGroupRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"elements",
+                    	    								lv_elements_3_0,
+                    	    								"org.eclipse.xtext.XtextGrammarTestLanguage.Group");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -2789,13 +2833,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2804,7 +2850,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleGroup"
-    // InternalXtextGrammarTestLanguage.g:1084:1: entryRuleGroup returns [EObject current=null] : iv_ruleGroup= ruleGroup EOF ;
+    // InternalXtextGrammarTestLanguage.g:1101:1: entryRuleGroup returns [EObject current=null] : iv_ruleGroup= ruleGroup EOF ;
     public final EObject entryRuleGroup() throws RecognitionException {
         EObject current = null;
 
@@ -2812,8 +2858,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1085:2: (iv_ruleGroup= ruleGroup EOF )
-            // InternalXtextGrammarTestLanguage.g:1086:2: iv_ruleGroup= ruleGroup EOF
+            // InternalXtextGrammarTestLanguage.g:1101:46: (iv_ruleGroup= ruleGroup EOF )
+            // InternalXtextGrammarTestLanguage.g:1102:2: iv_ruleGroup= ruleGroup EOF
             {
              newCompositeNode(grammarAccess.getGroupRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2827,11 +2873,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2840,7 +2886,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleGroup"
-    // InternalXtextGrammarTestLanguage.g:1093:1: ruleGroup returns [EObject current=null] : (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? ) ;
+    // InternalXtextGrammarTestLanguage.g:1108:1: ruleGroup returns [EObject current=null] : (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? ) ;
     public final EObject ruleGroup() throws RecognitionException {
         EObject current = null;
 
@@ -2849,28 +2895,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_elements_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1096:28: ( (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? ) )
-            // InternalXtextGrammarTestLanguage.g:1097:1: (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:1114:2: ( (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? ) )
+            // InternalXtextGrammarTestLanguage.g:1115:2: (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? )
             {
-            // InternalXtextGrammarTestLanguage.g:1097:1: (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? )
-            // InternalXtextGrammarTestLanguage.g:1098:5: this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )?
+            // InternalXtextGrammarTestLanguage.g:1115:2: (this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:1116:3: this_AbstractToken_0= ruleAbstractToken ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )?
             {
-             
-                    newCompositeNode(grammarAccess.getGroupAccess().getAbstractTokenParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getGroupAccess().getAbstractTokenParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_29);
             this_AbstractToken_0=ruleAbstractToken();
 
             state._fsp--;
 
-             
-                    current = this_AbstractToken_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:1106:1: ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )?
+
+            			current = this_AbstractToken_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:1124:3: ( () ( (lv_elements_2_0= ruleAbstractToken ) )+ )?
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -2879,20 +2926,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt28) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1106:2: () ( (lv_elements_2_0= ruleAbstractToken ) )+
+                    // InternalXtextGrammarTestLanguage.g:1125:4: () ( (lv_elements_2_0= ruleAbstractToken ) )+
                     {
-                    // InternalXtextGrammarTestLanguage.g:1106:2: ()
-                    // InternalXtextGrammarTestLanguage.g:1107:5: 
+                    // InternalXtextGrammarTestLanguage.g:1125:4: ()
+                    // InternalXtextGrammarTestLanguage.g:1126:5: 
                     {
 
-                            current = forceCreateModelElementAndAdd(
-                                grammarAccess.getGroupAccess().getGroupElementsAction_1_0(),
-                                current);
-                        
+                    					current = forceCreateModelElementAndAdd(
+                    						grammarAccess.getGroupAccess().getGroupElementsAction_1_0(),
+                    						current);
+                    				
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:1112:2: ( (lv_elements_2_0= ruleAbstractToken ) )+
+                    // InternalXtextGrammarTestLanguage.g:1132:4: ( (lv_elements_2_0= ruleAbstractToken ) )+
                     int cnt27=0;
                     loop27:
                     do {
@@ -2906,30 +2953,30 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt27) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:1113:1: (lv_elements_2_0= ruleAbstractToken )
+                    	    // InternalXtextGrammarTestLanguage.g:1133:5: (lv_elements_2_0= ruleAbstractToken )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:1113:1: (lv_elements_2_0= ruleAbstractToken )
-                    	    // InternalXtextGrammarTestLanguage.g:1114:3: lv_elements_2_0= ruleAbstractToken
+                    	    // InternalXtextGrammarTestLanguage.g:1133:5: (lv_elements_2_0= ruleAbstractToken )
+                    	    // InternalXtextGrammarTestLanguage.g:1134:6: lv_elements_2_0= ruleAbstractToken
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getGroupAccess().getElementsAbstractTokenParserRuleCall_1_1_0()); 
-                    	    	    
+
+                    	    						newCompositeNode(grammarAccess.getGroupAccess().getElementsAbstractTokenParserRuleCall_1_1_0());
+                    	    					
                     	    pushFollow(FollowSets000.FOLLOW_29);
                     	    lv_elements_2_0=ruleAbstractToken();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getGroupRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"elements",
-                    	            		lv_elements_2_0, 
-                    	            		"org.eclipse.xtext.XtextGrammarTestLanguage.AbstractToken");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    						if (current==null) {
+                    	    							current = createModelElementForParent(grammarAccess.getGroupRule());
+                    	    						}
+                    	    						add(
+                    	    							current,
+                    	    							"elements",
+                    	    							lv_elements_2_0,
+                    	    							"org.eclipse.xtext.XtextGrammarTestLanguage.AbstractToken");
+                    	    						afterParserOrEnumRuleCall();
+                    	    					
 
                     	    }
 
@@ -2958,13 +3005,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2973,7 +3022,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAbstractToken"
-    // InternalXtextGrammarTestLanguage.g:1138:1: entryRuleAbstractToken returns [EObject current=null] : iv_ruleAbstractToken= ruleAbstractToken EOF ;
+    // InternalXtextGrammarTestLanguage.g:1156:1: entryRuleAbstractToken returns [EObject current=null] : iv_ruleAbstractToken= ruleAbstractToken EOF ;
     public final EObject entryRuleAbstractToken() throws RecognitionException {
         EObject current = null;
 
@@ -2981,8 +3030,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1139:2: (iv_ruleAbstractToken= ruleAbstractToken EOF )
-            // InternalXtextGrammarTestLanguage.g:1140:2: iv_ruleAbstractToken= ruleAbstractToken EOF
+            // InternalXtextGrammarTestLanguage.g:1156:54: (iv_ruleAbstractToken= ruleAbstractToken EOF )
+            // InternalXtextGrammarTestLanguage.g:1157:2: iv_ruleAbstractToken= ruleAbstractToken EOF
             {
              newCompositeNode(grammarAccess.getAbstractTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2996,11 +3045,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3009,7 +3058,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAbstractToken"
-    // InternalXtextGrammarTestLanguage.g:1147:1: ruleAbstractToken returns [EObject current=null] : (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction ) ;
+    // InternalXtextGrammarTestLanguage.g:1163:1: ruleAbstractToken returns [EObject current=null] : (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction ) ;
     public final EObject ruleAbstractToken() throws RecognitionException {
         EObject current = null;
 
@@ -3018,13 +3067,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_Action_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1150:28: ( (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction ) )
-            // InternalXtextGrammarTestLanguage.g:1151:1: (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction )
+            // InternalXtextGrammarTestLanguage.g:1169:2: ( (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction ) )
+            // InternalXtextGrammarTestLanguage.g:1170:2: (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction )
             {
-            // InternalXtextGrammarTestLanguage.g:1151:1: (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction )
+            // InternalXtextGrammarTestLanguage.g:1170:2: (this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality | this_Action_1= ruleAction )
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -3042,38 +3092,38 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt29) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1152:5: this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality
+                    // InternalXtextGrammarTestLanguage.g:1171:3: this_AbstractTokenWithCardinality_0= ruleAbstractTokenWithCardinality
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTokenAccess().getAbstractTokenWithCardinalityParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractTokenAccess().getAbstractTokenWithCardinalityParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_AbstractTokenWithCardinality_0=ruleAbstractTokenWithCardinality();
 
                     state._fsp--;
 
-                     
-                            current = this_AbstractTokenWithCardinality_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_AbstractTokenWithCardinality_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:1162:5: this_Action_1= ruleAction
+                    // InternalXtextGrammarTestLanguage.g:1180:3: this_Action_1= ruleAction
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTokenAccess().getActionParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractTokenAccess().getActionParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Action_1=ruleAction();
 
                     state._fsp--;
 
-                     
-                            current = this_Action_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Action_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -3083,13 +3133,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3098,7 +3150,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAbstractTokenWithCardinality"
-    // InternalXtextGrammarTestLanguage.g:1178:1: entryRuleAbstractTokenWithCardinality returns [EObject current=null] : iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF ;
+    // InternalXtextGrammarTestLanguage.g:1192:1: entryRuleAbstractTokenWithCardinality returns [EObject current=null] : iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF ;
     public final EObject entryRuleAbstractTokenWithCardinality() throws RecognitionException {
         EObject current = null;
 
@@ -3106,8 +3158,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1179:2: (iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF )
-            // InternalXtextGrammarTestLanguage.g:1180:2: iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF
+            // InternalXtextGrammarTestLanguage.g:1192:69: (iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF )
+            // InternalXtextGrammarTestLanguage.g:1193:2: iv_ruleAbstractTokenWithCardinality= ruleAbstractTokenWithCardinality EOF
             {
              newCompositeNode(grammarAccess.getAbstractTokenWithCardinalityRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3121,11 +3173,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3134,7 +3186,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAbstractTokenWithCardinality"
-    // InternalXtextGrammarTestLanguage.g:1187:1: ruleAbstractTokenWithCardinality returns [EObject current=null] : ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? ) ;
+    // InternalXtextGrammarTestLanguage.g:1199:1: ruleAbstractTokenWithCardinality returns [EObject current=null] : ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? ) ;
     public final EObject ruleAbstractTokenWithCardinality() throws RecognitionException {
         EObject current = null;
 
@@ -3145,16 +3197,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_Cardinalities_2 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1190:28: ( ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? ) )
-            // InternalXtextGrammarTestLanguage.g:1191:1: ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? )
+            // InternalXtextGrammarTestLanguage.g:1205:2: ( ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? ) )
+            // InternalXtextGrammarTestLanguage.g:1206:2: ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? )
             {
-            // InternalXtextGrammarTestLanguage.g:1191:1: ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? )
-            // InternalXtextGrammarTestLanguage.g:1191:2: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )?
+            // InternalXtextGrammarTestLanguage.g:1206:2: ( (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )? )
+            // InternalXtextGrammarTestLanguage.g:1207:3: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal ) (this_Cardinalities_2= ruleCardinalities[$current] )?
             {
-            // InternalXtextGrammarTestLanguage.g:1191:2: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal )
+            // InternalXtextGrammarTestLanguage.g:1207:3: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal )
             int alt30=2;
             switch ( input.LA(1) ) {
             case 40:
@@ -3252,45 +3305,45 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             switch (alt30) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1192:5: this_Assignment_0= ruleAssignment
+                    // InternalXtextGrammarTestLanguage.g:1208:4: this_Assignment_0= ruleAssignment
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTokenWithCardinalityAccess().getAssignmentParserRuleCall_0_0()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getAbstractTokenWithCardinalityAccess().getAssignmentParserRuleCall_0_0());
+                    			
                     pushFollow(FollowSets000.FOLLOW_30);
                     this_Assignment_0=ruleAssignment();
 
                     state._fsp--;
 
-                     
-                            current = this_Assignment_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Assignment_0;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:1202:5: this_AbstractTerminal_1= ruleAbstractTerminal
+                    // InternalXtextGrammarTestLanguage.g:1217:4: this_AbstractTerminal_1= ruleAbstractTerminal
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTokenWithCardinalityAccess().getAbstractTerminalParserRuleCall_0_1()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getAbstractTokenWithCardinalityAccess().getAbstractTerminalParserRuleCall_0_1());
+                    			
                     pushFollow(FollowSets000.FOLLOW_30);
                     this_AbstractTerminal_1=ruleAbstractTerminal();
 
                     state._fsp--;
 
-                     
-                            current = this_AbstractTerminal_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_AbstractTerminal_1;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:1210:2: (this_Cardinalities_2= ruleCardinalities[$current] )?
+            // InternalXtextGrammarTestLanguage.g:1226:3: (this_Cardinalities_2= ruleCardinalities[$current] )?
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -3299,23 +3352,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt31) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1211:5: this_Cardinalities_2= ruleCardinalities[$current]
+                    // InternalXtextGrammarTestLanguage.g:1227:4: this_Cardinalities_2= ruleCardinalities[$current]
                     {
-                     
-                    		if (current==null) {
-                    			current = createModelElement(grammarAccess.getAbstractTokenWithCardinalityRule());
-                    		}
-                            newCompositeNode(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalitiesParserRuleCall_1()); 
-                        
+
+                    				if (current==null) {
+                    					current = createModelElement(grammarAccess.getAbstractTokenWithCardinalityRule());
+                    				}
+                    				newCompositeNode(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalitiesParserRuleCall_1());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Cardinalities_2=ruleCardinalities(current);
 
                     state._fsp--;
 
-                     
-                            current = this_Cardinalities_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Cardinalities_2;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
@@ -3328,13 +3381,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3343,7 +3398,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleCardinalities"
-    // InternalXtextGrammarTestLanguage.g:1231:1: ruleCardinalities[EObject in_current] returns [EObject current=in_current] : ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:1244:1: ruleCardinalities[EObject in_current] returns [EObject current=in_current] : ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) ) ;
     public final EObject ruleCardinalities(EObject in_current) throws RecognitionException {
         EObject current = in_current;
 
@@ -3351,19 +3406,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         Token lv_cardinality_0_2=null;
         Token lv_cardinality_0_3=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1234:28: ( ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:1235:1: ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) )
+            // InternalXtextGrammarTestLanguage.g:1250:2: ( ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:1251:2: ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1235:1: ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) )
-            // InternalXtextGrammarTestLanguage.g:1236:1: ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) )
+            // InternalXtextGrammarTestLanguage.g:1251:2: ( ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) ) )
+            // InternalXtextGrammarTestLanguage.g:1252:3: ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1236:1: ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) )
-            // InternalXtextGrammarTestLanguage.g:1237:1: (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' )
+            // InternalXtextGrammarTestLanguage.g:1252:3: ( (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' ) )
+            // InternalXtextGrammarTestLanguage.g:1253:4: (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' )
             {
-            // InternalXtextGrammarTestLanguage.g:1237:1: (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' )
+            // InternalXtextGrammarTestLanguage.g:1253:4: (lv_cardinality_0_1= '?' | lv_cardinality_0_2= '*' | lv_cardinality_0_3= '+' )
             int alt32=3;
             switch ( input.LA(1) ) {
             case 31:
@@ -3390,50 +3446,50 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             switch (alt32) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1238:3: lv_cardinality_0_1= '?'
+                    // InternalXtextGrammarTestLanguage.g:1254:5: lv_cardinality_0_1= '?'
                     {
                     lv_cardinality_0_1=(Token)match(input,31,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_cardinality_0_1, grammarAccess.getCardinalitiesAccess().getCardinalityQuestionMarkKeyword_0_0());
-                        
+                    					newLeafNode(lv_cardinality_0_1, grammarAccess.getCardinalitiesAccess().getCardinalityQuestionMarkKeyword_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getCardinalitiesRule());
-                    	        }
-                           		setWithLastConsumed(current, "cardinality", lv_cardinality_0_1, null);
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getCardinalitiesRule());
+                    					}
+                    					setWithLastConsumed(current, "cardinality", lv_cardinality_0_1, null);
+                    				
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:1250:8: lv_cardinality_0_2= '*'
+                    // InternalXtextGrammarTestLanguage.g:1265:5: lv_cardinality_0_2= '*'
                     {
                     lv_cardinality_0_2=(Token)match(input,22,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_cardinality_0_2, grammarAccess.getCardinalitiesAccess().getCardinalityAsteriskKeyword_0_1());
-                        
+                    					newLeafNode(lv_cardinality_0_2, grammarAccess.getCardinalitiesAccess().getCardinalityAsteriskKeyword_0_1());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getCardinalitiesRule());
-                    	        }
-                           		setWithLastConsumed(current, "cardinality", lv_cardinality_0_2, null);
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getCardinalitiesRule());
+                    					}
+                    					setWithLastConsumed(current, "cardinality", lv_cardinality_0_2, null);
+                    				
 
                     }
                     break;
                 case 3 :
-                    // InternalXtextGrammarTestLanguage.g:1262:8: lv_cardinality_0_3= '+'
+                    // InternalXtextGrammarTestLanguage.g:1276:5: lv_cardinality_0_3= '+'
                     {
                     lv_cardinality_0_3=(Token)match(input,32,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_cardinality_0_3, grammarAccess.getCardinalitiesAccess().getCardinalityPlusSignKeyword_0_2());
-                        
+                    					newLeafNode(lv_cardinality_0_3, grammarAccess.getCardinalitiesAccess().getCardinalityPlusSignKeyword_0_2());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getCardinalitiesRule());
-                    	        }
-                           		setWithLastConsumed(current, "cardinality", lv_cardinality_0_3, null);
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getCardinalitiesRule());
+                    					}
+                    					setWithLastConsumed(current, "cardinality", lv_cardinality_0_3, null);
+                    				
 
                     }
                     break;
@@ -3449,13 +3505,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3464,7 +3522,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAction"
-    // InternalXtextGrammarTestLanguage.g:1285:1: entryRuleAction returns [EObject current=null] : iv_ruleAction= ruleAction EOF ;
+    // InternalXtextGrammarTestLanguage.g:1292:1: entryRuleAction returns [EObject current=null] : iv_ruleAction= ruleAction EOF ;
     public final EObject entryRuleAction() throws RecognitionException {
         EObject current = null;
 
@@ -3472,8 +3530,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1286:2: (iv_ruleAction= ruleAction EOF )
-            // InternalXtextGrammarTestLanguage.g:1287:2: iv_ruleAction= ruleAction EOF
+            // InternalXtextGrammarTestLanguage.g:1292:47: (iv_ruleAction= ruleAction EOF )
+            // InternalXtextGrammarTestLanguage.g:1293:2: iv_ruleAction= ruleAction EOF
             {
              newCompositeNode(grammarAccess.getActionRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3487,11 +3545,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3500,7 +3558,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAction"
-    // InternalXtextGrammarTestLanguage.g:1294:1: ruleAction returns [EObject current=null] : (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' ) ;
+    // InternalXtextGrammarTestLanguage.g:1299:1: ruleAction returns [EObject current=null] : (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' ) ;
     public final EObject ruleAction() throws RecognitionException {
         EObject current = null;
 
@@ -3514,51 +3572,52 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_type_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1297:28: ( (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' ) )
-            // InternalXtextGrammarTestLanguage.g:1298:1: (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' )
+            // InternalXtextGrammarTestLanguage.g:1305:2: ( (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' ) )
+            // InternalXtextGrammarTestLanguage.g:1306:2: (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' )
             {
-            // InternalXtextGrammarTestLanguage.g:1298:1: (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' )
-            // InternalXtextGrammarTestLanguage.g:1298:3: otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}'
+            // InternalXtextGrammarTestLanguage.g:1306:2: (otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}' )
+            // InternalXtextGrammarTestLanguage.g:1307:3: otherlv_0= '{' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )? otherlv_6= '}'
             {
             otherlv_0=(Token)match(input,33,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getActionAccess().getLeftCurlyBracketKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:1302:1: ( (lv_type_1_0= ruleTypeRef ) )
-            // InternalXtextGrammarTestLanguage.g:1303:1: (lv_type_1_0= ruleTypeRef )
+            			newLeafNode(otherlv_0, grammarAccess.getActionAccess().getLeftCurlyBracketKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:1311:3: ( (lv_type_1_0= ruleTypeRef ) )
+            // InternalXtextGrammarTestLanguage.g:1312:4: (lv_type_1_0= ruleTypeRef )
             {
-            // InternalXtextGrammarTestLanguage.g:1303:1: (lv_type_1_0= ruleTypeRef )
-            // InternalXtextGrammarTestLanguage.g:1304:3: lv_type_1_0= ruleTypeRef
+            // InternalXtextGrammarTestLanguage.g:1312:4: (lv_type_1_0= ruleTypeRef )
+            // InternalXtextGrammarTestLanguage.g:1313:5: lv_type_1_0= ruleTypeRef
             {
-             
-            	        newCompositeNode(grammarAccess.getActionAccess().getTypeTypeRefParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getActionAccess().getTypeTypeRefParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_31);
             lv_type_1_0=ruleTypeRef();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getActionRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"type",
-                    		lv_type_1_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.TypeRef");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getActionRule());
+            					}
+            					set(
+            						current,
+            						"type",
+            						lv_type_1_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.TypeRef");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:1320:2: (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )?
+            // InternalXtextGrammarTestLanguage.g:1330:3: (otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current' )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -3567,45 +3626,45 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt34) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1320:4: otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current'
+                    // InternalXtextGrammarTestLanguage.g:1331:4: otherlv_2= '.' ( (lv_feature_3_0= RULE_ID ) ) ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) ) otherlv_5= 'current'
                     {
                     otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getActionAccess().getFullStopKeyword_2_0());
-                        
-                    // InternalXtextGrammarTestLanguage.g:1324:1: ( (lv_feature_3_0= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:1325:1: (lv_feature_3_0= RULE_ID )
+                    				newLeafNode(otherlv_2, grammarAccess.getActionAccess().getFullStopKeyword_2_0());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:1335:4: ( (lv_feature_3_0= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:1336:5: (lv_feature_3_0= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1325:1: (lv_feature_3_0= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:1326:3: lv_feature_3_0= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:1336:5: (lv_feature_3_0= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:1337:6: lv_feature_3_0= RULE_ID
                     {
                     lv_feature_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_32); 
 
-                    			newLeafNode(lv_feature_3_0, grammarAccess.getActionAccess().getFeatureIDTerminalRuleCall_2_1_0()); 
-                    		
+                    						newLeafNode(lv_feature_3_0, grammarAccess.getActionAccess().getFeatureIDTerminalRuleCall_2_1_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getActionRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"feature",
-                            		lv_feature_3_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
-
-                    }
-
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getActionRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"feature",
+                    							lv_feature_3_0,
+                    							"org.eclipse.xtext.common.Terminals.ID");
+                    					
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:1342:2: ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) )
-                    // InternalXtextGrammarTestLanguage.g:1343:1: ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) )
+
+                    }
+
+                    // InternalXtextGrammarTestLanguage.g:1353:4: ( ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) ) )
+                    // InternalXtextGrammarTestLanguage.g:1354:5: ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1343:1: ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) )
-                    // InternalXtextGrammarTestLanguage.g:1344:1: (lv_operator_4_1= '=' | lv_operator_4_2= '+=' )
+                    // InternalXtextGrammarTestLanguage.g:1354:5: ( (lv_operator_4_1= '=' | lv_operator_4_2= '+=' ) )
+                    // InternalXtextGrammarTestLanguage.g:1355:6: (lv_operator_4_1= '=' | lv_operator_4_2= '+=' )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1344:1: (lv_operator_4_1= '=' | lv_operator_4_2= '+=' )
+                    // InternalXtextGrammarTestLanguage.g:1355:6: (lv_operator_4_1= '=' | lv_operator_4_2= '+=' )
                     int alt33=2;
                     int LA33_0 = input.LA(1);
 
@@ -3623,34 +3682,34 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     switch (alt33) {
                         case 1 :
-                            // InternalXtextGrammarTestLanguage.g:1345:3: lv_operator_4_1= '='
+                            // InternalXtextGrammarTestLanguage.g:1356:7: lv_operator_4_1= '='
                             {
                             lv_operator_4_1=(Token)match(input,34,FollowSets000.FOLLOW_33); 
 
-                                    newLeafNode(lv_operator_4_1, grammarAccess.getActionAccess().getOperatorEqualsSignKeyword_2_2_0_0());
-                                
+                            							newLeafNode(lv_operator_4_1, grammarAccess.getActionAccess().getOperatorEqualsSignKeyword_2_2_0_0());
+                            						
 
-                            	        if (current==null) {
-                            	            current = createModelElement(grammarAccess.getActionRule());
-                            	        }
-                                   		setWithLastConsumed(current, "operator", lv_operator_4_1, null);
-                            	    
+                            							if (current==null) {
+                            								current = createModelElement(grammarAccess.getActionRule());
+                            							}
+                            							setWithLastConsumed(current, "operator", lv_operator_4_1, null);
+                            						
 
                             }
                             break;
                         case 2 :
-                            // InternalXtextGrammarTestLanguage.g:1357:8: lv_operator_4_2= '+='
+                            // InternalXtextGrammarTestLanguage.g:1367:7: lv_operator_4_2= '+='
                             {
                             lv_operator_4_2=(Token)match(input,35,FollowSets000.FOLLOW_33); 
 
-                                    newLeafNode(lv_operator_4_2, grammarAccess.getActionAccess().getOperatorPlusSignEqualsSignKeyword_2_2_0_1());
-                                
+                            							newLeafNode(lv_operator_4_2, grammarAccess.getActionAccess().getOperatorPlusSignEqualsSignKeyword_2_2_0_1());
+                            						
 
-                            	        if (current==null) {
-                            	            current = createModelElement(grammarAccess.getActionRule());
-                            	        }
-                                   		setWithLastConsumed(current, "operator", lv_operator_4_2, null);
-                            	    
+                            							if (current==null) {
+                            								current = createModelElement(grammarAccess.getActionRule());
+                            							}
+                            							setWithLastConsumed(current, "operator", lv_operator_4_2, null);
+                            						
 
                             }
                             break;
@@ -3665,8 +3724,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                     otherlv_5=(Token)match(input,36,FollowSets000.FOLLOW_34); 
 
-                        	newLeafNode(otherlv_5, grammarAccess.getActionAccess().getCurrentKeyword_2_3());
-                        
+                    				newLeafNode(otherlv_5, grammarAccess.getActionAccess().getCurrentKeyword_2_3());
+                    			
 
                     }
                     break;
@@ -3675,21 +3734,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_6=(Token)match(input,37,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_6, grammarAccess.getActionAccess().getRightCurlyBracketKeyword_3());
-                
+            			newLeafNode(otherlv_6, grammarAccess.getActionAccess().getRightCurlyBracketKeyword_3());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3698,7 +3759,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAbstractTerminal"
-    // InternalXtextGrammarTestLanguage.g:1388:1: entryRuleAbstractTerminal returns [EObject current=null] : iv_ruleAbstractTerminal= ruleAbstractTerminal EOF ;
+    // InternalXtextGrammarTestLanguage.g:1393:1: entryRuleAbstractTerminal returns [EObject current=null] : iv_ruleAbstractTerminal= ruleAbstractTerminal EOF ;
     public final EObject entryRuleAbstractTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -3706,8 +3767,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1389:2: (iv_ruleAbstractTerminal= ruleAbstractTerminal EOF )
-            // InternalXtextGrammarTestLanguage.g:1390:2: iv_ruleAbstractTerminal= ruleAbstractTerminal EOF
+            // InternalXtextGrammarTestLanguage.g:1393:57: (iv_ruleAbstractTerminal= ruleAbstractTerminal EOF )
+            // InternalXtextGrammarTestLanguage.g:1394:2: iv_ruleAbstractTerminal= ruleAbstractTerminal EOF
             {
              newCompositeNode(grammarAccess.getAbstractTerminalRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3721,11 +3782,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3734,7 +3795,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAbstractTerminal"
-    // InternalXtextGrammarTestLanguage.g:1397:1: ruleAbstractTerminal returns [EObject current=null] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup ) ;
+    // InternalXtextGrammarTestLanguage.g:1400:1: ruleAbstractTerminal returns [EObject current=null] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup ) ;
     public final EObject ruleAbstractTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -3751,13 +3812,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_PredicatedGroup_5 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1400:28: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup ) )
-            // InternalXtextGrammarTestLanguage.g:1401:1: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup )
+            // InternalXtextGrammarTestLanguage.g:1406:2: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup ) )
+            // InternalXtextGrammarTestLanguage.g:1407:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup )
             {
-            // InternalXtextGrammarTestLanguage.g:1401:1: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup )
+            // InternalXtextGrammarTestLanguage.g:1407:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedElement_2= ruleParenthesizedElement | this_PredicatedKeyword_3= rulePredicatedKeyword | this_PredicatedRuleCall_4= rulePredicatedRuleCall | this_PredicatedGroup_5= rulePredicatedGroup )
             int alt35=6;
             switch ( input.LA(1) ) {
             case RULE_STRING:
@@ -3838,110 +3900,110 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             switch (alt35) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1402:5: this_Keyword_0= ruleKeyword
+                    // InternalXtextGrammarTestLanguage.g:1408:3: this_Keyword_0= ruleKeyword
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTerminalAccess().getKeywordParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractTerminalAccess().getKeywordParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Keyword_0=ruleKeyword();
 
                     state._fsp--;
 
-                     
-                            current = this_Keyword_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Keyword_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:1412:5: this_RuleCall_1= ruleRuleCall
+                    // InternalXtextGrammarTestLanguage.g:1417:3: this_RuleCall_1= ruleRuleCall
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTerminalAccess().getRuleCallParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractTerminalAccess().getRuleCallParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_RuleCall_1=ruleRuleCall();
 
                     state._fsp--;
 
-                     
-                            current = this_RuleCall_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_RuleCall_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 3 :
-                    // InternalXtextGrammarTestLanguage.g:1422:5: this_ParenthesizedElement_2= ruleParenthesizedElement
+                    // InternalXtextGrammarTestLanguage.g:1426:3: this_ParenthesizedElement_2= ruleParenthesizedElement
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTerminalAccess().getParenthesizedElementParserRuleCall_2()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractTerminalAccess().getParenthesizedElementParserRuleCall_2());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_ParenthesizedElement_2=ruleParenthesizedElement();
 
                     state._fsp--;
 
-                     
-                            current = this_ParenthesizedElement_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_ParenthesizedElement_2;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 4 :
-                    // InternalXtextGrammarTestLanguage.g:1432:5: this_PredicatedKeyword_3= rulePredicatedKeyword
+                    // InternalXtextGrammarTestLanguage.g:1435:3: this_PredicatedKeyword_3= rulePredicatedKeyword
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTerminalAccess().getPredicatedKeywordParserRuleCall_3()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractTerminalAccess().getPredicatedKeywordParserRuleCall_3());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_PredicatedKeyword_3=rulePredicatedKeyword();
 
                     state._fsp--;
 
-                     
-                            current = this_PredicatedKeyword_3; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_PredicatedKeyword_3;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 5 :
-                    // InternalXtextGrammarTestLanguage.g:1442:5: this_PredicatedRuleCall_4= rulePredicatedRuleCall
+                    // InternalXtextGrammarTestLanguage.g:1444:3: this_PredicatedRuleCall_4= rulePredicatedRuleCall
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTerminalAccess().getPredicatedRuleCallParserRuleCall_4()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractTerminalAccess().getPredicatedRuleCallParserRuleCall_4());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_PredicatedRuleCall_4=rulePredicatedRuleCall();
 
                     state._fsp--;
 
-                     
-                            current = this_PredicatedRuleCall_4; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_PredicatedRuleCall_4;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 6 :
-                    // InternalXtextGrammarTestLanguage.g:1452:5: this_PredicatedGroup_5= rulePredicatedGroup
+                    // InternalXtextGrammarTestLanguage.g:1453:3: this_PredicatedGroup_5= rulePredicatedGroup
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractTerminalAccess().getPredicatedGroupParserRuleCall_5()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractTerminalAccess().getPredicatedGroupParserRuleCall_5());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_PredicatedGroup_5=rulePredicatedGroup();
 
                     state._fsp--;
 
-                     
-                            current = this_PredicatedGroup_5; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_PredicatedGroup_5;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -3951,13 +4013,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3966,7 +4030,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleKeyword"
-    // InternalXtextGrammarTestLanguage.g:1468:1: entryRuleKeyword returns [EObject current=null] : iv_ruleKeyword= ruleKeyword EOF ;
+    // InternalXtextGrammarTestLanguage.g:1465:1: entryRuleKeyword returns [EObject current=null] : iv_ruleKeyword= ruleKeyword EOF ;
     public final EObject entryRuleKeyword() throws RecognitionException {
         EObject current = null;
 
@@ -3974,8 +4038,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1469:2: (iv_ruleKeyword= ruleKeyword EOF )
-            // InternalXtextGrammarTestLanguage.g:1470:2: iv_ruleKeyword= ruleKeyword EOF
+            // InternalXtextGrammarTestLanguage.g:1465:48: (iv_ruleKeyword= ruleKeyword EOF )
+            // InternalXtextGrammarTestLanguage.g:1466:2: iv_ruleKeyword= ruleKeyword EOF
             {
              newCompositeNode(grammarAccess.getKeywordRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3989,11 +4053,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4002,54 +4066,57 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleKeyword"
-    // InternalXtextGrammarTestLanguage.g:1477:1: ruleKeyword returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
+    // InternalXtextGrammarTestLanguage.g:1472:1: ruleKeyword returns [EObject current=null] : ( (lv_value_0_0= RULE_STRING ) ) ;
     public final EObject ruleKeyword() throws RecognitionException {
         EObject current = null;
 
         Token lv_value_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1480:28: ( ( (lv_value_0_0= RULE_STRING ) ) )
-            // InternalXtextGrammarTestLanguage.g:1481:1: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalXtextGrammarTestLanguage.g:1478:2: ( ( (lv_value_0_0= RULE_STRING ) ) )
+            // InternalXtextGrammarTestLanguage.g:1479:2: ( (lv_value_0_0= RULE_STRING ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1481:1: ( (lv_value_0_0= RULE_STRING ) )
-            // InternalXtextGrammarTestLanguage.g:1482:1: (lv_value_0_0= RULE_STRING )
+            // InternalXtextGrammarTestLanguage.g:1479:2: ( (lv_value_0_0= RULE_STRING ) )
+            // InternalXtextGrammarTestLanguage.g:1480:3: (lv_value_0_0= RULE_STRING )
             {
-            // InternalXtextGrammarTestLanguage.g:1482:1: (lv_value_0_0= RULE_STRING )
-            // InternalXtextGrammarTestLanguage.g:1483:3: lv_value_0_0= RULE_STRING
+            // InternalXtextGrammarTestLanguage.g:1480:3: (lv_value_0_0= RULE_STRING )
+            // InternalXtextGrammarTestLanguage.g:1481:4: lv_value_0_0= RULE_STRING
             {
             lv_value_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_value_0_0, grammarAccess.getKeywordAccess().getValueSTRINGTerminalRuleCall_0()); 
-            		
+            				newLeafNode(lv_value_0_0, grammarAccess.getKeywordAccess().getValueSTRINGTerminalRuleCall_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getKeywordRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"value",
-                    		lv_value_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.STRING");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getKeywordRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"value",
+            					lv_value_0_0,
+            					"org.eclipse.xtext.common.Terminals.STRING");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4058,7 +4125,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleRuleCall"
-    // InternalXtextGrammarTestLanguage.g:1507:1: entryRuleRuleCall returns [EObject current=null] : iv_ruleRuleCall= ruleRuleCall EOF ;
+    // InternalXtextGrammarTestLanguage.g:1500:1: entryRuleRuleCall returns [EObject current=null] : iv_ruleRuleCall= ruleRuleCall EOF ;
     public final EObject entryRuleRuleCall() throws RecognitionException {
         EObject current = null;
 
@@ -4066,8 +4133,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1508:2: (iv_ruleRuleCall= ruleRuleCall EOF )
-            // InternalXtextGrammarTestLanguage.g:1509:2: iv_ruleRuleCall= ruleRuleCall EOF
+            // InternalXtextGrammarTestLanguage.g:1500:49: (iv_ruleRuleCall= ruleRuleCall EOF )
+            // InternalXtextGrammarTestLanguage.g:1501:2: iv_ruleRuleCall= ruleRuleCall EOF
             {
              newCompositeNode(grammarAccess.getRuleCallRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4081,11 +4148,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4094,7 +4161,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleRuleCall"
-    // InternalXtextGrammarTestLanguage.g:1516:1: ruleRuleCall returns [EObject current=null] : ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? ) ;
+    // InternalXtextGrammarTestLanguage.g:1507:1: ruleRuleCall returns [EObject current=null] : ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? ) ;
     public final EObject ruleRuleCall() throws RecognitionException {
         EObject current = null;
 
@@ -4106,55 +4173,56 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_arguments_5_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1519:28: ( ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? ) )
-            // InternalXtextGrammarTestLanguage.g:1520:1: ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? )
+            // InternalXtextGrammarTestLanguage.g:1513:2: ( ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? ) )
+            // InternalXtextGrammarTestLanguage.g:1514:2: ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? )
             {
-            // InternalXtextGrammarTestLanguage.g:1520:1: ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? )
-            // InternalXtextGrammarTestLanguage.g:1520:2: () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )?
+            // InternalXtextGrammarTestLanguage.g:1514:2: ( () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )? )
+            // InternalXtextGrammarTestLanguage.g:1515:3: () ( ( ruleRuleID ) ) (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )?
             {
-            // InternalXtextGrammarTestLanguage.g:1520:2: ()
-            // InternalXtextGrammarTestLanguage.g:1521:5: 
+            // InternalXtextGrammarTestLanguage.g:1515:3: ()
+            // InternalXtextGrammarTestLanguage.g:1516:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getRuleCallAccess().getRuleCallAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getRuleCallAccess().getRuleCallAction_0(),
+            					current);
+            			
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:1526:2: ( ( ruleRuleID ) )
-            // InternalXtextGrammarTestLanguage.g:1527:1: ( ruleRuleID )
+            // InternalXtextGrammarTestLanguage.g:1522:3: ( ( ruleRuleID ) )
+            // InternalXtextGrammarTestLanguage.g:1523:4: ( ruleRuleID )
             {
-            // InternalXtextGrammarTestLanguage.g:1527:1: ( ruleRuleID )
-            // InternalXtextGrammarTestLanguage.g:1528:3: ruleRuleID
+            // InternalXtextGrammarTestLanguage.g:1523:4: ( ruleRuleID )
+            // InternalXtextGrammarTestLanguage.g:1524:5: ruleRuleID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getRuleCallRule());
-            	        }
-                    
-             
-            	        newCompositeNode(grammarAccess.getRuleCallAccess().getRuleAbstractRuleCrossReference_1_0()); 
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getRuleCallRule());
+            					}
+            				
+
+            					newCompositeNode(grammarAccess.getRuleCallAccess().getRuleAbstractRuleCrossReference_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_20);
             ruleRuleID();
 
             state._fsp--;
 
-             
-            	        afterParserOrEnumRuleCall();
-            	    
+
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:1541:2: (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )?
+            // InternalXtextGrammarTestLanguage.g:1538:3: (otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']' )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
@@ -4163,44 +4231,44 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt37) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1541:4: otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']'
+                    // InternalXtextGrammarTestLanguage.g:1539:4: otherlv_2= '[' ( (lv_arguments_3_0= ruleNamedArgument ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )* otherlv_6= ']'
                     {
                     otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_35); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getRuleCallAccess().getLeftSquareBracketKeyword_2_0());
-                        
-                    // InternalXtextGrammarTestLanguage.g:1545:1: ( (lv_arguments_3_0= ruleNamedArgument ) )
-                    // InternalXtextGrammarTestLanguage.g:1546:1: (lv_arguments_3_0= ruleNamedArgument )
+                    				newLeafNode(otherlv_2, grammarAccess.getRuleCallAccess().getLeftSquareBracketKeyword_2_0());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:1543:4: ( (lv_arguments_3_0= ruleNamedArgument ) )
+                    // InternalXtextGrammarTestLanguage.g:1544:5: (lv_arguments_3_0= ruleNamedArgument )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1546:1: (lv_arguments_3_0= ruleNamedArgument )
-                    // InternalXtextGrammarTestLanguage.g:1547:3: lv_arguments_3_0= ruleNamedArgument
+                    // InternalXtextGrammarTestLanguage.g:1544:5: (lv_arguments_3_0= ruleNamedArgument )
+                    // InternalXtextGrammarTestLanguage.g:1545:6: lv_arguments_3_0= ruleNamedArgument
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getRuleCallAccess().getArgumentsNamedArgumentParserRuleCall_2_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getRuleCallAccess().getArgumentsNamedArgumentParserRuleCall_2_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_22);
                     lv_arguments_3_0=ruleNamedArgument();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getRuleCallRule());
-                    	        }
-                           		add(
-                           			current, 
-                           			"arguments",
-                            		lv_arguments_3_0, 
-                            		"org.eclipse.xtext.XtextGrammarTestLanguage.NamedArgument");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getRuleCallRule());
+                    						}
+                    						add(
+                    							current,
+                    							"arguments",
+                    							lv_arguments_3_0,
+                    							"org.eclipse.xtext.XtextGrammarTestLanguage.NamedArgument");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:1563:2: (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )*
+                    // InternalXtextGrammarTestLanguage.g:1562:4: (otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) ) )*
                     loop36:
                     do {
                         int alt36=2;
@@ -4213,37 +4281,37 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt36) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:1563:4: otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) )
+                    	    // InternalXtextGrammarTestLanguage.g:1563:5: otherlv_4= ',' ( (lv_arguments_5_0= ruleNamedArgument ) )
                     	    {
                     	    otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_35); 
 
-                    	        	newLeafNode(otherlv_4, grammarAccess.getRuleCallAccess().getCommaKeyword_2_2_0());
-                    	        
-                    	    // InternalXtextGrammarTestLanguage.g:1567:1: ( (lv_arguments_5_0= ruleNamedArgument ) )
-                    	    // InternalXtextGrammarTestLanguage.g:1568:1: (lv_arguments_5_0= ruleNamedArgument )
+                    	    					newLeafNode(otherlv_4, grammarAccess.getRuleCallAccess().getCommaKeyword_2_2_0());
+                    	    				
+                    	    // InternalXtextGrammarTestLanguage.g:1567:5: ( (lv_arguments_5_0= ruleNamedArgument ) )
+                    	    // InternalXtextGrammarTestLanguage.g:1568:6: (lv_arguments_5_0= ruleNamedArgument )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:1568:1: (lv_arguments_5_0= ruleNamedArgument )
-                    	    // InternalXtextGrammarTestLanguage.g:1569:3: lv_arguments_5_0= ruleNamedArgument
+                    	    // InternalXtextGrammarTestLanguage.g:1568:6: (lv_arguments_5_0= ruleNamedArgument )
+                    	    // InternalXtextGrammarTestLanguage.g:1569:7: lv_arguments_5_0= ruleNamedArgument
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getRuleCallAccess().getArgumentsNamedArgumentParserRuleCall_2_2_1_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getRuleCallAccess().getArgumentsNamedArgumentParserRuleCall_2_2_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_22);
                     	    lv_arguments_5_0=ruleNamedArgument();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getRuleCallRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"arguments",
-                    	            		lv_arguments_5_0, 
-                    	            		"org.eclipse.xtext.XtextGrammarTestLanguage.NamedArgument");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getRuleCallRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"arguments",
+                    	    								lv_arguments_5_0,
+                    	    								"org.eclipse.xtext.XtextGrammarTestLanguage.NamedArgument");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -4261,8 +4329,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                     otherlv_6=(Token)match(input,26,FollowSets000.FOLLOW_2); 
 
-                        	newLeafNode(otherlv_6, grammarAccess.getRuleCallAccess().getRightSquareBracketKeyword_2_3());
-                        
+                    				newLeafNode(otherlv_6, grammarAccess.getRuleCallAccess().getRightSquareBracketKeyword_2_3());
+                    			
 
                     }
                     break;
@@ -4275,13 +4343,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4290,7 +4360,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleLiteralValue"
-    // InternalXtextGrammarTestLanguage.g:1597:1: entryRuleLiteralValue returns [String current=null] : iv_ruleLiteralValue= ruleLiteralValue EOF ;
+    // InternalXtextGrammarTestLanguage.g:1596:1: entryRuleLiteralValue returns [String current=null] : iv_ruleLiteralValue= ruleLiteralValue EOF ;
     public final String entryRuleLiteralValue() throws RecognitionException {
         String current = null;
 
@@ -4298,8 +4368,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1598:2: (iv_ruleLiteralValue= ruleLiteralValue EOF )
-            // InternalXtextGrammarTestLanguage.g:1599:2: iv_ruleLiteralValue= ruleLiteralValue EOF
+            // InternalXtextGrammarTestLanguage.g:1596:52: (iv_ruleLiteralValue= ruleLiteralValue EOF )
+            // InternalXtextGrammarTestLanguage.g:1597:2: iv_ruleLiteralValue= ruleLiteralValue EOF
             {
              newCompositeNode(grammarAccess.getLiteralValueRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4313,11 +4383,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4326,19 +4396,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleLiteralValue"
-    // InternalXtextGrammarTestLanguage.g:1606:1: ruleLiteralValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '!' | kw= '+' ) ;
+    // InternalXtextGrammarTestLanguage.g:1603:1: ruleLiteralValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '!' | kw= '+' ) ;
     public final AntlrDatatypeRuleToken ruleLiteralValue() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token kw=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1609:28: ( (kw= '!' | kw= '+' ) )
-            // InternalXtextGrammarTestLanguage.g:1610:1: (kw= '!' | kw= '+' )
+            // InternalXtextGrammarTestLanguage.g:1609:2: ( (kw= '!' | kw= '+' ) )
+            // InternalXtextGrammarTestLanguage.g:1610:2: (kw= '!' | kw= '+' )
             {
-            // InternalXtextGrammarTestLanguage.g:1610:1: (kw= '!' | kw= '+' )
+            // InternalXtextGrammarTestLanguage.g:1610:2: (kw= '!' | kw= '+' )
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -4356,24 +4427,24 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt38) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1611:2: kw= '!'
+                    // InternalXtextGrammarTestLanguage.g:1611:3: kw= '!'
                     {
                     kw=(Token)match(input,38,FollowSets000.FOLLOW_2); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getLiteralValueAccess().getExclamationMarkKeyword_0()); 
-                        
+                    			current.merge(kw);
+                    			newLeafNode(kw, grammarAccess.getLiteralValueAccess().getExclamationMarkKeyword_0());
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:1618:2: kw= '+'
+                    // InternalXtextGrammarTestLanguage.g:1617:3: kw= '+'
                     {
                     kw=(Token)match(input,32,FollowSets000.FOLLOW_2); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getLiteralValueAccess().getPlusSignKeyword_1()); 
-                        
+                    			current.merge(kw);
+                    			newLeafNode(kw, grammarAccess.getLiteralValueAccess().getPlusSignKeyword_1());
+                    		
 
                     }
                     break;
@@ -4383,13 +4454,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4398,7 +4471,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleInverseLiteralValue"
-    // InternalXtextGrammarTestLanguage.g:1631:1: entryRuleInverseLiteralValue returns [String current=null] : iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF ;
+    // InternalXtextGrammarTestLanguage.g:1626:1: entryRuleInverseLiteralValue returns [String current=null] : iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF ;
     public final String entryRuleInverseLiteralValue() throws RecognitionException {
         String current = null;
 
@@ -4406,8 +4479,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1632:2: (iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF )
-            // InternalXtextGrammarTestLanguage.g:1633:2: iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF
+            // InternalXtextGrammarTestLanguage.g:1626:59: (iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF )
+            // InternalXtextGrammarTestLanguage.g:1627:2: iv_ruleInverseLiteralValue= ruleInverseLiteralValue EOF
             {
              newCompositeNode(grammarAccess.getInverseLiteralValueRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4421,11 +4494,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4434,22 +4507,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleInverseLiteralValue"
-    // InternalXtextGrammarTestLanguage.g:1640:1: ruleInverseLiteralValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_LiteralValue_0= ruleLiteralValue ;
+    // InternalXtextGrammarTestLanguage.g:1633:1: ruleInverseLiteralValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_LiteralValue_0= ruleLiteralValue ;
     public final AntlrDatatypeRuleToken ruleInverseLiteralValue() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         AntlrDatatypeRuleToken this_LiteralValue_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1643:28: (this_LiteralValue_0= ruleLiteralValue )
-            // InternalXtextGrammarTestLanguage.g:1645:5: this_LiteralValue_0= ruleLiteralValue
+            // InternalXtextGrammarTestLanguage.g:1639:2: (this_LiteralValue_0= ruleLiteralValue )
+            // InternalXtextGrammarTestLanguage.g:1640:2: this_LiteralValue_0= ruleLiteralValue
             {
-             
-                    newCompositeNode(grammarAccess.getInverseLiteralValueAccess().getLiteralValueParserRuleCall()); 
-                
+
+            		newCompositeNode(grammarAccess.getInverseLiteralValueAccess().getLiteralValueParserRuleCall());
+            	
             pushFollow(FollowSets000.FOLLOW_2);
             this_LiteralValue_0=ruleLiteralValue();
 
@@ -4457,20 +4531,22 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
             		current.merge(this_LiteralValue_0);
-                
-             
-                    afterParserOrEnumRuleCall();
-                
+            	
+
+            		afterParserOrEnumRuleCall();
+            	
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4479,7 +4555,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleNamedArgument"
-    // InternalXtextGrammarTestLanguage.g:1663:1: entryRuleNamedArgument returns [EObject current=null] : iv_ruleNamedArgument= ruleNamedArgument EOF ;
+    // InternalXtextGrammarTestLanguage.g:1653:1: entryRuleNamedArgument returns [EObject current=null] : iv_ruleNamedArgument= ruleNamedArgument EOF ;
     public final EObject entryRuleNamedArgument() throws RecognitionException {
         EObject current = null;
 
@@ -4487,8 +4563,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1664:2: (iv_ruleNamedArgument= ruleNamedArgument EOF )
-            // InternalXtextGrammarTestLanguage.g:1665:2: iv_ruleNamedArgument= ruleNamedArgument EOF
+            // InternalXtextGrammarTestLanguage.g:1653:54: (iv_ruleNamedArgument= ruleNamedArgument EOF )
+            // InternalXtextGrammarTestLanguage.g:1654:2: iv_ruleNamedArgument= ruleNamedArgument EOF
             {
              newCompositeNode(grammarAccess.getNamedArgumentRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4502,11 +4578,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4515,7 +4591,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleNamedArgument"
-    // InternalXtextGrammarTestLanguage.g:1672:1: ruleNamedArgument returns [EObject current=null] : ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:1660:1: ruleNamedArgument returns [EObject current=null] : ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) ) ;
     public final EObject ruleNamedArgument() throws RecognitionException {
         EObject current = null;
 
@@ -4526,27 +4602,28 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         AntlrDatatypeRuleToken lv_literalValue_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1675:28: ( ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:1676:1: ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:1666:2: ( ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:1667:2: ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1676:1: ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:1676:2: () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:1667:2: ( () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:1668:3: () ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1676:2: ()
-            // InternalXtextGrammarTestLanguage.g:1677:5: 
+            // InternalXtextGrammarTestLanguage.g:1668:3: ()
+            // InternalXtextGrammarTestLanguage.g:1669:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getNamedArgumentAccess().getNamedArgumentAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getNamedArgumentAccess().getNamedArgumentAction_0(),
+            					current);
+            			
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:1682:2: ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:1675:3: ( ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) ) | ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) ) )
             int alt40=2;
             int LA40_0 = input.LA(1);
 
@@ -4577,12 +4654,12 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt40) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1682:3: ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) )
+                    // InternalXtextGrammarTestLanguage.g:1676:4: ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1682:3: ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) )
-                    // InternalXtextGrammarTestLanguage.g:1682:4: ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:1676:4: ( ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) ) )
+                    // InternalXtextGrammarTestLanguage.g:1677:5: ( (lv_literalValue_1_0= ruleLiteralValue ) )? ( (otherlv_2= RULE_ID ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1682:4: ( (lv_literalValue_1_0= ruleLiteralValue ) )?
+                    // InternalXtextGrammarTestLanguage.g:1677:5: ( (lv_literalValue_1_0= ruleLiteralValue ) )?
                     int alt39=2;
                     int LA39_0 = input.LA(1);
 
@@ -4591,30 +4668,30 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     switch (alt39) {
                         case 1 :
-                            // InternalXtextGrammarTestLanguage.g:1683:1: (lv_literalValue_1_0= ruleLiteralValue )
+                            // InternalXtextGrammarTestLanguage.g:1678:6: (lv_literalValue_1_0= ruleLiteralValue )
                             {
-                            // InternalXtextGrammarTestLanguage.g:1683:1: (lv_literalValue_1_0= ruleLiteralValue )
-                            // InternalXtextGrammarTestLanguage.g:1684:3: lv_literalValue_1_0= ruleLiteralValue
+                            // InternalXtextGrammarTestLanguage.g:1678:6: (lv_literalValue_1_0= ruleLiteralValue )
+                            // InternalXtextGrammarTestLanguage.g:1679:7: lv_literalValue_1_0= ruleLiteralValue
                             {
-                             
-                            	        newCompositeNode(grammarAccess.getNamedArgumentAccess().getLiteralValueLiteralValueParserRuleCall_1_0_0_0()); 
-                            	    
+
+                            							newCompositeNode(grammarAccess.getNamedArgumentAccess().getLiteralValueLiteralValueParserRuleCall_1_0_0_0());
+                            						
                             pushFollow(FollowSets000.FOLLOW_3);
                             lv_literalValue_1_0=ruleLiteralValue();
 
                             state._fsp--;
 
 
-                            	        if (current==null) {
-                            	            current = createModelElementForParent(grammarAccess.getNamedArgumentRule());
-                            	        }
-                                   		set(
-                                   			current, 
-                                   			"literalValue",
-                                    		lv_literalValue_1_0, 
-                                    		"org.eclipse.xtext.XtextGrammarTestLanguage.LiteralValue");
-                            	        afterParserOrEnumRuleCall();
-                            	    
+                            							if (current==null) {
+                            								current = createModelElementForParent(grammarAccess.getNamedArgumentRule());
+                            							}
+                            							set(
+                            								current,
+                            								"literalValue",
+                            								lv_literalValue_1_0,
+                            								"org.eclipse.xtext.XtextGrammarTestLanguage.LiteralValue");
+                            							afterParserOrEnumRuleCall();
+                            						
 
                             }
 
@@ -4624,21 +4701,21 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:1700:3: ( (otherlv_2= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:1701:1: (otherlv_2= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:1696:5: ( (otherlv_2= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:1697:6: (otherlv_2= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1701:1: (otherlv_2= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:1702:3: otherlv_2= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:1697:6: (otherlv_2= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:1698:7: otherlv_2= RULE_ID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getNamedArgumentRule());
-                    	        }
-                            
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getNamedArgumentRule());
+                    							}
+                    						
                     otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-                    		newLeafNode(otherlv_2, grammarAccess.getNamedArgumentAccess().getParameterParameterCrossReference_1_0_1_0()); 
-                    	
+                    							newLeafNode(otherlv_2, grammarAccess.getNamedArgumentAccess().getParameterParameterCrossReference_1_0_1_0());
+                    						
 
                     }
 
@@ -4652,26 +4729,26 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:1714:6: ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) )
+                    // InternalXtextGrammarTestLanguage.g:1711:4: ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1714:6: ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) )
-                    // InternalXtextGrammarTestLanguage.g:1714:7: ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:1711:4: ( ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) ) )
+                    // InternalXtextGrammarTestLanguage.g:1712:5: ( (otherlv_3= RULE_ID ) ) otherlv_4= '=' ( (otherlv_5= RULE_ID ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1714:7: ( (otherlv_3= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:1715:1: (otherlv_3= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:1712:5: ( (otherlv_3= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:1713:6: (otherlv_3= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1715:1: (otherlv_3= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:1716:3: otherlv_3= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:1713:6: (otherlv_3= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:1714:7: otherlv_3= RULE_ID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getNamedArgumentRule());
-                    	        }
-                            
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getNamedArgumentRule());
+                    							}
+                    						
                     otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_36); 
 
-                    		newLeafNode(otherlv_3, grammarAccess.getNamedArgumentAccess().getParameterParameterCrossReference_1_1_0_0()); 
-                    	
+                    							newLeafNode(otherlv_3, grammarAccess.getNamedArgumentAccess().getParameterParameterCrossReference_1_1_0_0());
+                    						
 
                     }
 
@@ -4680,23 +4757,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                     otherlv_4=(Token)match(input,34,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getNamedArgumentAccess().getEqualsSignKeyword_1_1_1());
-                        
-                    // InternalXtextGrammarTestLanguage.g:1731:1: ( (otherlv_5= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:1732:1: (otherlv_5= RULE_ID )
+                    					newLeafNode(otherlv_4, grammarAccess.getNamedArgumentAccess().getEqualsSignKeyword_1_1_1());
+                    				
+                    // InternalXtextGrammarTestLanguage.g:1729:5: ( (otherlv_5= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:1730:6: (otherlv_5= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:1732:1: (otherlv_5= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:1733:3: otherlv_5= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:1730:6: (otherlv_5= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:1731:7: otherlv_5= RULE_ID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getNamedArgumentRule());
-                    	        }
-                            
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getNamedArgumentRule());
+                    							}
+                    						
                     otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-                    		newLeafNode(otherlv_5, grammarAccess.getNamedArgumentAccess().getValueParameterCrossReference_1_1_2_0()); 
-                    	
+                    							newLeafNode(otherlv_5, grammarAccess.getNamedArgumentAccess().getValueParameterCrossReference_1_1_2_0());
+                    						
 
                     }
 
@@ -4718,13 +4795,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4733,7 +4812,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleTerminalRuleCall"
-    // InternalXtextGrammarTestLanguage.g:1752:1: entryRuleTerminalRuleCall returns [EObject current=null] : iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF ;
+    // InternalXtextGrammarTestLanguage.g:1748:1: entryRuleTerminalRuleCall returns [EObject current=null] : iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF ;
     public final EObject entryRuleTerminalRuleCall() throws RecognitionException {
         EObject current = null;
 
@@ -4741,8 +4820,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1753:2: (iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF )
-            // InternalXtextGrammarTestLanguage.g:1754:2: iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF
+            // InternalXtextGrammarTestLanguage.g:1748:57: (iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF )
+            // InternalXtextGrammarTestLanguage.g:1749:2: iv_ruleTerminalRuleCall= ruleTerminalRuleCall EOF
             {
              newCompositeNode(grammarAccess.getTerminalRuleCallRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4756,11 +4835,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4769,38 +4848,39 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleTerminalRuleCall"
-    // InternalXtextGrammarTestLanguage.g:1761:1: ruleTerminalRuleCall returns [EObject current=null] : ( ( ruleRuleID ) ) ;
+    // InternalXtextGrammarTestLanguage.g:1755:1: ruleTerminalRuleCall returns [EObject current=null] : ( ( ruleRuleID ) ) ;
     public final EObject ruleTerminalRuleCall() throws RecognitionException {
         EObject current = null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1764:28: ( ( ( ruleRuleID ) ) )
-            // InternalXtextGrammarTestLanguage.g:1765:1: ( ( ruleRuleID ) )
+            // InternalXtextGrammarTestLanguage.g:1761:2: ( ( ( ruleRuleID ) ) )
+            // InternalXtextGrammarTestLanguage.g:1762:2: ( ( ruleRuleID ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1765:1: ( ( ruleRuleID ) )
-            // InternalXtextGrammarTestLanguage.g:1766:1: ( ruleRuleID )
+            // InternalXtextGrammarTestLanguage.g:1762:2: ( ( ruleRuleID ) )
+            // InternalXtextGrammarTestLanguage.g:1763:3: ( ruleRuleID )
             {
-            // InternalXtextGrammarTestLanguage.g:1766:1: ( ruleRuleID )
-            // InternalXtextGrammarTestLanguage.g:1767:3: ruleRuleID
+            // InternalXtextGrammarTestLanguage.g:1763:3: ( ruleRuleID )
+            // InternalXtextGrammarTestLanguage.g:1764:4: ruleRuleID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getTerminalRuleCallRule());
-            	        }
-                    
-             
-            	        newCompositeNode(grammarAccess.getTerminalRuleCallAccess().getRuleAbstractRuleCrossReference_0()); 
-            	    
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getTerminalRuleCallRule());
+            				}
+            			
+
+            				newCompositeNode(grammarAccess.getTerminalRuleCallAccess().getRuleAbstractRuleCrossReference_0());
+            			
             pushFollow(FollowSets000.FOLLOW_2);
             ruleRuleID();
 
             state._fsp--;
 
-             
-            	        afterParserOrEnumRuleCall();
-            	    
+
+            				afterParserOrEnumRuleCall();
+            			
 
             }
 
@@ -4810,13 +4890,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4825,7 +4907,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleRuleID"
-    // InternalXtextGrammarTestLanguage.g:1788:1: entryRuleRuleID returns [String current=null] : iv_ruleRuleID= ruleRuleID EOF ;
+    // InternalXtextGrammarTestLanguage.g:1781:1: entryRuleRuleID returns [String current=null] : iv_ruleRuleID= ruleRuleID EOF ;
     public final String entryRuleRuleID() throws RecognitionException {
         String current = null;
 
@@ -4833,8 +4915,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1789:2: (iv_ruleRuleID= ruleRuleID EOF )
-            // InternalXtextGrammarTestLanguage.g:1790:2: iv_ruleRuleID= ruleRuleID EOF
+            // InternalXtextGrammarTestLanguage.g:1781:46: (iv_ruleRuleID= ruleRuleID EOF )
+            // InternalXtextGrammarTestLanguage.g:1782:2: iv_ruleRuleID= ruleRuleID EOF
             {
              newCompositeNode(grammarAccess.getRuleIDRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4848,11 +4930,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4861,7 +4943,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleRuleID"
-    // InternalXtextGrammarTestLanguage.g:1797:1: ruleRuleID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* ) ;
+    // InternalXtextGrammarTestLanguage.g:1788:1: ruleRuleID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleRuleID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4869,23 +4951,24 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         Token kw=null;
         Token this_ID_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1800:28: ( (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* ) )
-            // InternalXtextGrammarTestLanguage.g:1801:1: (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* )
+            // InternalXtextGrammarTestLanguage.g:1794:2: ( (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* ) )
+            // InternalXtextGrammarTestLanguage.g:1795:2: (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* )
             {
-            // InternalXtextGrammarTestLanguage.g:1801:1: (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* )
-            // InternalXtextGrammarTestLanguage.g:1801:6: this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )*
+            // InternalXtextGrammarTestLanguage.g:1795:2: (this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )* )
+            // InternalXtextGrammarTestLanguage.g:1796:3: this_ID_0= RULE_ID (kw= '::' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_37); 
 
-            		current.merge(this_ID_0);
-                
-             
-                newLeafNode(this_ID_0, grammarAccess.getRuleIDAccess().getIDTerminalRuleCall_0()); 
-                
-            // InternalXtextGrammarTestLanguage.g:1808:1: (kw= '::' this_ID_2= RULE_ID )*
+            			current.merge(this_ID_0);
+            		
+
+            			newLeafNode(this_ID_0, grammarAccess.getRuleIDAccess().getIDTerminalRuleCall_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:1803:3: (kw= '::' this_ID_2= RULE_ID )*
             loop41:
             do {
                 int alt41=2;
@@ -4898,20 +4981,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                 switch (alt41) {
             	case 1 :
-            	    // InternalXtextGrammarTestLanguage.g:1809:2: kw= '::' this_ID_2= RULE_ID
+            	    // InternalXtextGrammarTestLanguage.g:1804:4: kw= '::' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,28,FollowSets000.FOLLOW_3); 
 
-            	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getRuleIDAccess().getColonColonKeyword_1_0()); 
-            	        
+            	    				current.merge(kw);
+            	    				newLeafNode(kw, grammarAccess.getRuleIDAccess().getColonColonKeyword_1_0());
+            	    			
             	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_37); 
 
-            	    		current.merge(this_ID_2);
-            	        
-            	     
-            	        newLeafNode(this_ID_2, grammarAccess.getRuleIDAccess().getIDTerminalRuleCall_1_1()); 
-            	        
+            	    				current.merge(this_ID_2);
+            	    			
+
+            	    				newLeafNode(this_ID_2, grammarAccess.getRuleIDAccess().getIDTerminalRuleCall_1_1());
+            	    			
 
             	    }
             	    break;
@@ -4927,13 +5010,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4942,7 +5027,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRulePredicatedKeyword"
-    // InternalXtextGrammarTestLanguage.g:1829:1: entryRulePredicatedKeyword returns [EObject current=null] : iv_rulePredicatedKeyword= rulePredicatedKeyword EOF ;
+    // InternalXtextGrammarTestLanguage.g:1821:1: entryRulePredicatedKeyword returns [EObject current=null] : iv_rulePredicatedKeyword= rulePredicatedKeyword EOF ;
     public final EObject entryRulePredicatedKeyword() throws RecognitionException {
         EObject current = null;
 
@@ -4950,8 +5035,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1830:2: (iv_rulePredicatedKeyword= rulePredicatedKeyword EOF )
-            // InternalXtextGrammarTestLanguage.g:1831:2: iv_rulePredicatedKeyword= rulePredicatedKeyword EOF
+            // InternalXtextGrammarTestLanguage.g:1821:58: (iv_rulePredicatedKeyword= rulePredicatedKeyword EOF )
+            // InternalXtextGrammarTestLanguage.g:1822:2: iv_rulePredicatedKeyword= rulePredicatedKeyword EOF
             {
              newCompositeNode(grammarAccess.getPredicatedKeywordRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4965,11 +5050,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4978,7 +5063,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "rulePredicatedKeyword"
-    // InternalXtextGrammarTestLanguage.g:1838:1: rulePredicatedKeyword returns [EObject current=null] : (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:1828:1: rulePredicatedKeyword returns [EObject current=null] : (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) ) ;
     public final EObject rulePredicatedKeyword() throws RecognitionException {
         EObject current = null;
 
@@ -4986,53 +5071,51 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_Predicate_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1841:28: ( (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:1842:1: (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalXtextGrammarTestLanguage.g:1834:2: ( (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:1835:2: (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1842:1: (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) )
-            // InternalXtextGrammarTestLanguage.g:1843:5: this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) )
+            // InternalXtextGrammarTestLanguage.g:1835:2: (this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) ) )
+            // InternalXtextGrammarTestLanguage.g:1836:3: this_Predicate_0= rulePredicate[$current] ( (lv_value_1_0= RULE_STRING ) )
             {
-             
-            		if (current==null) {
-            			current = createModelElement(grammarAccess.getPredicatedKeywordRule());
-            		}
-                    newCompositeNode(grammarAccess.getPredicatedKeywordAccess().getPredicateParserRuleCall_0()); 
-                
+
+            			if (current==null) {
+            				current = createModelElement(grammarAccess.getPredicatedKeywordRule());
+            			}
+            			newCompositeNode(grammarAccess.getPredicatedKeywordAccess().getPredicateParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_11);
             this_Predicate_0=rulePredicate(current);
 
             state._fsp--;
 
-             
-                    current = this_Predicate_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:1854:1: ( (lv_value_1_0= RULE_STRING ) )
-            // InternalXtextGrammarTestLanguage.g:1855:1: (lv_value_1_0= RULE_STRING )
+
+            			current = this_Predicate_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:1847:3: ( (lv_value_1_0= RULE_STRING ) )
+            // InternalXtextGrammarTestLanguage.g:1848:4: (lv_value_1_0= RULE_STRING )
             {
-            // InternalXtextGrammarTestLanguage.g:1855:1: (lv_value_1_0= RULE_STRING )
-            // InternalXtextGrammarTestLanguage.g:1856:3: lv_value_1_0= RULE_STRING
+            // InternalXtextGrammarTestLanguage.g:1848:4: (lv_value_1_0= RULE_STRING )
+            // InternalXtextGrammarTestLanguage.g:1849:5: lv_value_1_0= RULE_STRING
             {
             lv_value_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_value_1_0, grammarAccess.getPredicatedKeywordAccess().getValueSTRINGTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_value_1_0, grammarAccess.getPredicatedKeywordAccess().getValueSTRINGTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getPredicatedKeywordRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"value",
-                    		lv_value_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.STRING");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getPredicatedKeywordRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"value",
+            						lv_value_1_0,
+            						"org.eclipse.xtext.common.Terminals.STRING");
+            				
 
             }
 
@@ -5042,13 +5125,18 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5057,7 +5145,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRulePredicatedRuleCall"
-    // InternalXtextGrammarTestLanguage.g:1880:1: entryRulePredicatedRuleCall returns [EObject current=null] : iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF ;
+    // InternalXtextGrammarTestLanguage.g:1869:1: entryRulePredicatedRuleCall returns [EObject current=null] : iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF ;
     public final EObject entryRulePredicatedRuleCall() throws RecognitionException {
         EObject current = null;
 
@@ -5065,8 +5153,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1881:2: (iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF )
-            // InternalXtextGrammarTestLanguage.g:1882:2: iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF
+            // InternalXtextGrammarTestLanguage.g:1869:59: (iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF )
+            // InternalXtextGrammarTestLanguage.g:1870:2: iv_rulePredicatedRuleCall= rulePredicatedRuleCall EOF
             {
              newCompositeNode(grammarAccess.getPredicatedRuleCallRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5080,11 +5168,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5093,7 +5181,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "rulePredicatedRuleCall"
-    // InternalXtextGrammarTestLanguage.g:1889:1: rulePredicatedRuleCall returns [EObject current=null] : (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:1876:1: rulePredicatedRuleCall returns [EObject current=null] : (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject rulePredicatedRuleCall() throws RecognitionException {
         EObject current = null;
 
@@ -5101,45 +5189,46 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_Predicate_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1892:28: ( (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:1893:1: (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) )
+            // InternalXtextGrammarTestLanguage.g:1882:2: ( (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:1883:2: (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1893:1: (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) )
-            // InternalXtextGrammarTestLanguage.g:1894:5: this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:1883:2: (this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) ) )
+            // InternalXtextGrammarTestLanguage.g:1884:3: this_Predicate_0= rulePredicate[$current] ( (otherlv_1= RULE_ID ) )
             {
-             
-            		if (current==null) {
-            			current = createModelElement(grammarAccess.getPredicatedRuleCallRule());
-            		}
-                    newCompositeNode(grammarAccess.getPredicatedRuleCallAccess().getPredicateParserRuleCall_0()); 
-                
+
+            			if (current==null) {
+            				current = createModelElement(grammarAccess.getPredicatedRuleCallRule());
+            			}
+            			newCompositeNode(grammarAccess.getPredicatedRuleCallAccess().getPredicateParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_3);
             this_Predicate_0=rulePredicate(current);
 
             state._fsp--;
 
-             
-                    current = this_Predicate_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:1905:1: ( (otherlv_1= RULE_ID ) )
-            // InternalXtextGrammarTestLanguage.g:1906:1: (otherlv_1= RULE_ID )
+
+            			current = this_Predicate_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:1895:3: ( (otherlv_1= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:1896:4: (otherlv_1= RULE_ID )
             {
-            // InternalXtextGrammarTestLanguage.g:1906:1: (otherlv_1= RULE_ID )
-            // InternalXtextGrammarTestLanguage.g:1907:3: otherlv_1= RULE_ID
+            // InternalXtextGrammarTestLanguage.g:1896:4: (otherlv_1= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:1897:5: otherlv_1= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getPredicatedRuleCallRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getPredicatedRuleCallRule());
+            					}
+            				
             otherlv_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            		newLeafNode(otherlv_1, grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleCrossReference_1_0()); 
-            	
+            					newLeafNode(otherlv_1, grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleCrossReference_1_0());
+            				
 
             }
 
@@ -5152,13 +5241,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5167,7 +5258,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAssignment"
-    // InternalXtextGrammarTestLanguage.g:1926:1: entryRuleAssignment returns [EObject current=null] : iv_ruleAssignment= ruleAssignment EOF ;
+    // InternalXtextGrammarTestLanguage.g:1912:1: entryRuleAssignment returns [EObject current=null] : iv_ruleAssignment= ruleAssignment EOF ;
     public final EObject entryRuleAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -5175,8 +5266,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:1927:2: (iv_ruleAssignment= ruleAssignment EOF )
-            // InternalXtextGrammarTestLanguage.g:1928:2: iv_ruleAssignment= ruleAssignment EOF
+            // InternalXtextGrammarTestLanguage.g:1912:51: (iv_ruleAssignment= ruleAssignment EOF )
+            // InternalXtextGrammarTestLanguage.g:1913:2: iv_ruleAssignment= ruleAssignment EOF
             {
              newCompositeNode(grammarAccess.getAssignmentRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5190,11 +5281,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5203,7 +5294,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAssignment"
-    // InternalXtextGrammarTestLanguage.g:1935:1: ruleAssignment returns [EObject current=null] : ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:1919:1: ruleAssignment returns [EObject current=null] : ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) ) ;
     public final EObject ruleAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -5216,16 +5307,17 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_terminal_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:1938:28: ( ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:1939:1: ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) )
+            // InternalXtextGrammarTestLanguage.g:1925:2: ( ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:1926:2: ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1939:1: ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) )
-            // InternalXtextGrammarTestLanguage.g:1939:2: (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) )
+            // InternalXtextGrammarTestLanguage.g:1926:2: ( (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) ) )
+            // InternalXtextGrammarTestLanguage.g:1927:3: (this_Predicate_0= rulePredicate[$current] )? ( (lv_feature_1_0= RULE_ID ) ) ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) ) ( (lv_terminal_3_0= ruleAssignableTerminal ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1939:2: (this_Predicate_0= rulePredicate[$current] )?
+            // InternalXtextGrammarTestLanguage.g:1927:3: (this_Predicate_0= rulePredicate[$current] )?
             int alt42=2;
             int LA42_0 = input.LA(1);
 
@@ -5234,62 +5326,62 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt42) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1940:5: this_Predicate_0= rulePredicate[$current]
+                    // InternalXtextGrammarTestLanguage.g:1928:4: this_Predicate_0= rulePredicate[$current]
                     {
-                     
-                    		if (current==null) {
-                    			current = createModelElement(grammarAccess.getAssignmentRule());
-                    		}
-                            newCompositeNode(grammarAccess.getAssignmentAccess().getPredicateParserRuleCall_0()); 
-                        
+
+                    				if (current==null) {
+                    					current = createModelElement(grammarAccess.getAssignmentRule());
+                    				}
+                    				newCompositeNode(grammarAccess.getAssignmentAccess().getPredicateParserRuleCall_0());
+                    			
                     pushFollow(FollowSets000.FOLLOW_3);
                     this_Predicate_0=rulePredicate(current);
 
                     state._fsp--;
 
-                     
-                            current = this_Predicate_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Predicate_0;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:1951:3: ( (lv_feature_1_0= RULE_ID ) )
-            // InternalXtextGrammarTestLanguage.g:1952:1: (lv_feature_1_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:1940:3: ( (lv_feature_1_0= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:1941:4: (lv_feature_1_0= RULE_ID )
             {
-            // InternalXtextGrammarTestLanguage.g:1952:1: (lv_feature_1_0= RULE_ID )
-            // InternalXtextGrammarTestLanguage.g:1953:3: lv_feature_1_0= RULE_ID
+            // InternalXtextGrammarTestLanguage.g:1941:4: (lv_feature_1_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:1942:5: lv_feature_1_0= RULE_ID
             {
             lv_feature_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_38); 
 
-            			newLeafNode(lv_feature_1_0, grammarAccess.getAssignmentAccess().getFeatureIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_feature_1_0, grammarAccess.getAssignmentAccess().getFeatureIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getAssignmentRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"feature",
-                    		lv_feature_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getAssignmentRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"feature",
+            						lv_feature_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:1969:2: ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) )
-            // InternalXtextGrammarTestLanguage.g:1970:1: ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) )
+
+            }
+
+            // InternalXtextGrammarTestLanguage.g:1958:3: ( ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) ) )
+            // InternalXtextGrammarTestLanguage.g:1959:4: ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) )
             {
-            // InternalXtextGrammarTestLanguage.g:1970:1: ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) )
-            // InternalXtextGrammarTestLanguage.g:1971:1: (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' )
+            // InternalXtextGrammarTestLanguage.g:1959:4: ( (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' ) )
+            // InternalXtextGrammarTestLanguage.g:1960:5: (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' )
             {
-            // InternalXtextGrammarTestLanguage.g:1971:1: (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' )
+            // InternalXtextGrammarTestLanguage.g:1960:5: (lv_operator_2_1= '+=' | lv_operator_2_2= '=' | lv_operator_2_3= '?=' )
             int alt43=3;
             switch ( input.LA(1) ) {
             case 35:
@@ -5316,50 +5408,50 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             switch (alt43) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:1972:3: lv_operator_2_1= '+='
+                    // InternalXtextGrammarTestLanguage.g:1961:6: lv_operator_2_1= '+='
                     {
                     lv_operator_2_1=(Token)match(input,35,FollowSets000.FOLLOW_39); 
 
-                            newLeafNode(lv_operator_2_1, grammarAccess.getAssignmentAccess().getOperatorPlusSignEqualsSignKeyword_2_0_0());
-                        
+                    						newLeafNode(lv_operator_2_1, grammarAccess.getAssignmentAccess().getOperatorPlusSignEqualsSignKeyword_2_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getAssignmentRule());
-                    	        }
-                           		setWithLastConsumed(current, "operator", lv_operator_2_1, null);
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getAssignmentRule());
+                    						}
+                    						setWithLastConsumed(current, "operator", lv_operator_2_1, null);
+                    					
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:1984:8: lv_operator_2_2= '='
+                    // InternalXtextGrammarTestLanguage.g:1972:6: lv_operator_2_2= '='
                     {
                     lv_operator_2_2=(Token)match(input,34,FollowSets000.FOLLOW_39); 
 
-                            newLeafNode(lv_operator_2_2, grammarAccess.getAssignmentAccess().getOperatorEqualsSignKeyword_2_0_1());
-                        
+                    						newLeafNode(lv_operator_2_2, grammarAccess.getAssignmentAccess().getOperatorEqualsSignKeyword_2_0_1());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getAssignmentRule());
-                    	        }
-                           		setWithLastConsumed(current, "operator", lv_operator_2_2, null);
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getAssignmentRule());
+                    						}
+                    						setWithLastConsumed(current, "operator", lv_operator_2_2, null);
+                    					
 
                     }
                     break;
                 case 3 :
-                    // InternalXtextGrammarTestLanguage.g:1996:8: lv_operator_2_3= '?='
+                    // InternalXtextGrammarTestLanguage.g:1983:6: lv_operator_2_3= '?='
                     {
                     lv_operator_2_3=(Token)match(input,39,FollowSets000.FOLLOW_39); 
 
-                            newLeafNode(lv_operator_2_3, grammarAccess.getAssignmentAccess().getOperatorQuestionMarkEqualsSignKeyword_2_0_2());
-                        
+                    						newLeafNode(lv_operator_2_3, grammarAccess.getAssignmentAccess().getOperatorQuestionMarkEqualsSignKeyword_2_0_2());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getAssignmentRule());
-                    	        }
-                           		setWithLastConsumed(current, "operator", lv_operator_2_3, null);
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getAssignmentRule());
+                    						}
+                    						setWithLastConsumed(current, "operator", lv_operator_2_3, null);
+                    					
 
                     }
                     break;
@@ -5372,31 +5464,31 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:2011:2: ( (lv_terminal_3_0= ruleAssignableTerminal ) )
-            // InternalXtextGrammarTestLanguage.g:2012:1: (lv_terminal_3_0= ruleAssignableTerminal )
+            // InternalXtextGrammarTestLanguage.g:1996:3: ( (lv_terminal_3_0= ruleAssignableTerminal ) )
+            // InternalXtextGrammarTestLanguage.g:1997:4: (lv_terminal_3_0= ruleAssignableTerminal )
             {
-            // InternalXtextGrammarTestLanguage.g:2012:1: (lv_terminal_3_0= ruleAssignableTerminal )
-            // InternalXtextGrammarTestLanguage.g:2013:3: lv_terminal_3_0= ruleAssignableTerminal
+            // InternalXtextGrammarTestLanguage.g:1997:4: (lv_terminal_3_0= ruleAssignableTerminal )
+            // InternalXtextGrammarTestLanguage.g:1998:5: lv_terminal_3_0= ruleAssignableTerminal
             {
-             
-            	        newCompositeNode(grammarAccess.getAssignmentAccess().getTerminalAssignableTerminalParserRuleCall_3_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getAssignmentAccess().getTerminalAssignableTerminalParserRuleCall_3_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_terminal_3_0=ruleAssignableTerminal();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getAssignmentRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"terminal",
-                    		lv_terminal_3_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.AssignableTerminal");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getAssignmentRule());
+            					}
+            					set(
+            						current,
+            						"terminal",
+            						lv_terminal_3_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.AssignableTerminal");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -5409,13 +5501,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5424,20 +5518,21 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "rulePredicate"
-    // InternalXtextGrammarTestLanguage.g:2038:1: rulePredicate[EObject in_current] returns [EObject current=in_current] : ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:2020:1: rulePredicate[EObject in_current] returns [EObject current=in_current] : ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ;
     public final EObject rulePredicate(EObject in_current) throws RecognitionException {
         EObject current = in_current;
 
         Token lv_predicated_0_0=null;
         Token lv_firstSetPredicated_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2041:28: ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:2042:1: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) )
+            // InternalXtextGrammarTestLanguage.g:2026:2: ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:2027:2: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:2042:1: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) )
+            // InternalXtextGrammarTestLanguage.g:2027:2: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) )
             int alt44=2;
             int LA44_0 = input.LA(1);
 
@@ -5455,24 +5550,24 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt44) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2042:2: ( (lv_predicated_0_0= '=>' ) )
+                    // InternalXtextGrammarTestLanguage.g:2028:3: ( (lv_predicated_0_0= '=>' ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2042:2: ( (lv_predicated_0_0= '=>' ) )
-                    // InternalXtextGrammarTestLanguage.g:2043:1: (lv_predicated_0_0= '=>' )
+                    // InternalXtextGrammarTestLanguage.g:2028:3: ( (lv_predicated_0_0= '=>' ) )
+                    // InternalXtextGrammarTestLanguage.g:2029:4: (lv_predicated_0_0= '=>' )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2043:1: (lv_predicated_0_0= '=>' )
-                    // InternalXtextGrammarTestLanguage.g:2044:3: lv_predicated_0_0= '=>'
+                    // InternalXtextGrammarTestLanguage.g:2029:4: (lv_predicated_0_0= '=>' )
+                    // InternalXtextGrammarTestLanguage.g:2030:5: lv_predicated_0_0= '=>'
                     {
                     lv_predicated_0_0=(Token)match(input,40,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_predicated_0_0, grammarAccess.getPredicateAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0());
-                        
+                    					newLeafNode(lv_predicated_0_0, grammarAccess.getPredicateAccess().getPredicatedEqualsSignGreaterThanSignKeyword_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getPredicateRule());
-                    	        }
-                           		setWithLastConsumed(current, "predicated", true, "=>");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getPredicateRule());
+                    					}
+                    					setWithLastConsumed(current, "predicated", true, "=>");
+                    				
 
                     }
 
@@ -5483,24 +5578,24 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:2058:6: ( (lv_firstSetPredicated_1_0= '->' ) )
+                    // InternalXtextGrammarTestLanguage.g:2043:3: ( (lv_firstSetPredicated_1_0= '->' ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2058:6: ( (lv_firstSetPredicated_1_0= '->' ) )
-                    // InternalXtextGrammarTestLanguage.g:2059:1: (lv_firstSetPredicated_1_0= '->' )
+                    // InternalXtextGrammarTestLanguage.g:2043:3: ( (lv_firstSetPredicated_1_0= '->' ) )
+                    // InternalXtextGrammarTestLanguage.g:2044:4: (lv_firstSetPredicated_1_0= '->' )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2059:1: (lv_firstSetPredicated_1_0= '->' )
-                    // InternalXtextGrammarTestLanguage.g:2060:3: lv_firstSetPredicated_1_0= '->'
+                    // InternalXtextGrammarTestLanguage.g:2044:4: (lv_firstSetPredicated_1_0= '->' )
+                    // InternalXtextGrammarTestLanguage.g:2045:5: lv_firstSetPredicated_1_0= '->'
                     {
                     lv_firstSetPredicated_1_0=(Token)match(input,41,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_firstSetPredicated_1_0, grammarAccess.getPredicateAccess().getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_1_0());
-                        
+                    					newLeafNode(lv_firstSetPredicated_1_0, grammarAccess.getPredicateAccess().getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_1_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getPredicateRule());
-                    	        }
-                           		setWithLastConsumed(current, "firstSetPredicated", true, "->");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getPredicateRule());
+                    					}
+                    					setWithLastConsumed(current, "firstSetPredicated", true, "->");
+                    				
 
                     }
 
@@ -5516,13 +5611,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5531,7 +5628,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAssignableTerminal"
-    // InternalXtextGrammarTestLanguage.g:2081:1: entryRuleAssignableTerminal returns [EObject current=null] : iv_ruleAssignableTerminal= ruleAssignableTerminal EOF ;
+    // InternalXtextGrammarTestLanguage.g:2061:1: entryRuleAssignableTerminal returns [EObject current=null] : iv_ruleAssignableTerminal= ruleAssignableTerminal EOF ;
     public final EObject entryRuleAssignableTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -5539,8 +5636,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2082:2: (iv_ruleAssignableTerminal= ruleAssignableTerminal EOF )
-            // InternalXtextGrammarTestLanguage.g:2083:2: iv_ruleAssignableTerminal= ruleAssignableTerminal EOF
+            // InternalXtextGrammarTestLanguage.g:2061:59: (iv_ruleAssignableTerminal= ruleAssignableTerminal EOF )
+            // InternalXtextGrammarTestLanguage.g:2062:2: iv_ruleAssignableTerminal= ruleAssignableTerminal EOF
             {
              newCompositeNode(grammarAccess.getAssignableTerminalRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5554,11 +5651,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5567,7 +5664,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAssignableTerminal"
-    // InternalXtextGrammarTestLanguage.g:2090:1: ruleAssignableTerminal returns [EObject current=null] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference ) ;
+    // InternalXtextGrammarTestLanguage.g:2068:1: ruleAssignableTerminal returns [EObject current=null] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference ) ;
     public final EObject ruleAssignableTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -5580,13 +5677,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_CrossReference_3 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2093:28: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference ) )
-            // InternalXtextGrammarTestLanguage.g:2094:1: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference )
+            // InternalXtextGrammarTestLanguage.g:2074:2: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference ) )
+            // InternalXtextGrammarTestLanguage.g:2075:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference )
             {
-            // InternalXtextGrammarTestLanguage.g:2094:1: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference )
+            // InternalXtextGrammarTestLanguage.g:2075:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall | this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement | this_CrossReference_3= ruleCrossReference )
             int alt45=4;
             switch ( input.LA(1) ) {
             case RULE_STRING:
@@ -5618,74 +5716,74 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             switch (alt45) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2095:5: this_Keyword_0= ruleKeyword
+                    // InternalXtextGrammarTestLanguage.g:2076:3: this_Keyword_0= ruleKeyword
                     {
-                     
-                            newCompositeNode(grammarAccess.getAssignableTerminalAccess().getKeywordParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAssignableTerminalAccess().getKeywordParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Keyword_0=ruleKeyword();
 
                     state._fsp--;
 
-                     
-                            current = this_Keyword_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Keyword_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:2105:5: this_RuleCall_1= ruleRuleCall
+                    // InternalXtextGrammarTestLanguage.g:2085:3: this_RuleCall_1= ruleRuleCall
                     {
-                     
-                            newCompositeNode(grammarAccess.getAssignableTerminalAccess().getRuleCallParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAssignableTerminalAccess().getRuleCallParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_RuleCall_1=ruleRuleCall();
 
                     state._fsp--;
 
-                     
-                            current = this_RuleCall_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_RuleCall_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 3 :
-                    // InternalXtextGrammarTestLanguage.g:2115:5: this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement
+                    // InternalXtextGrammarTestLanguage.g:2094:3: this_ParenthesizedAssignableElement_2= ruleParenthesizedAssignableElement
                     {
-                     
-                            newCompositeNode(grammarAccess.getAssignableTerminalAccess().getParenthesizedAssignableElementParserRuleCall_2()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAssignableTerminalAccess().getParenthesizedAssignableElementParserRuleCall_2());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_ParenthesizedAssignableElement_2=ruleParenthesizedAssignableElement();
 
                     state._fsp--;
 
-                     
-                            current = this_ParenthesizedAssignableElement_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_ParenthesizedAssignableElement_2;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 4 :
-                    // InternalXtextGrammarTestLanguage.g:2125:5: this_CrossReference_3= ruleCrossReference
+                    // InternalXtextGrammarTestLanguage.g:2103:3: this_CrossReference_3= ruleCrossReference
                     {
-                     
-                            newCompositeNode(grammarAccess.getAssignableTerminalAccess().getCrossReferenceParserRuleCall_3()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAssignableTerminalAccess().getCrossReferenceParserRuleCall_3());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_CrossReference_3=ruleCrossReference();
 
                     state._fsp--;
 
-                     
-                            current = this_CrossReference_3; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_CrossReference_3;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -5695,13 +5793,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5710,7 +5810,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleParenthesizedAssignableElement"
-    // InternalXtextGrammarTestLanguage.g:2141:1: entryRuleParenthesizedAssignableElement returns [EObject current=null] : iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF ;
+    // InternalXtextGrammarTestLanguage.g:2115:1: entryRuleParenthesizedAssignableElement returns [EObject current=null] : iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF ;
     public final EObject entryRuleParenthesizedAssignableElement() throws RecognitionException {
         EObject current = null;
 
@@ -5718,8 +5818,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2142:2: (iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF )
-            // InternalXtextGrammarTestLanguage.g:2143:2: iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF
+            // InternalXtextGrammarTestLanguage.g:2115:71: (iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF )
+            // InternalXtextGrammarTestLanguage.g:2116:2: iv_ruleParenthesizedAssignableElement= ruleParenthesizedAssignableElement EOF
             {
              newCompositeNode(grammarAccess.getParenthesizedAssignableElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5733,11 +5833,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5746,7 +5846,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleParenthesizedAssignableElement"
-    // InternalXtextGrammarTestLanguage.g:2150:1: ruleParenthesizedAssignableElement returns [EObject current=null] : (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' ) ;
+    // InternalXtextGrammarTestLanguage.g:2122:1: ruleParenthesizedAssignableElement returns [EObject current=null] : (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' ) ;
     public final EObject ruleParenthesizedAssignableElement() throws RecognitionException {
         EObject current = null;
 
@@ -5755,48 +5855,51 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_AssignableAlternatives_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2153:28: ( (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' ) )
-            // InternalXtextGrammarTestLanguage.g:2154:1: (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' )
+            // InternalXtextGrammarTestLanguage.g:2128:2: ( (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' ) )
+            // InternalXtextGrammarTestLanguage.g:2129:2: (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' )
             {
-            // InternalXtextGrammarTestLanguage.g:2154:1: (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' )
-            // InternalXtextGrammarTestLanguage.g:2154:3: otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')'
+            // InternalXtextGrammarTestLanguage.g:2129:2: (otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')' )
+            // InternalXtextGrammarTestLanguage.g:2130:3: otherlv_0= '(' this_AssignableAlternatives_1= ruleAssignableAlternatives otherlv_2= ')'
             {
             otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_39); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getParenthesizedAssignableElementAccess().getLeftParenthesisKeyword_0());
-                
-             
-                    newCompositeNode(grammarAccess.getParenthesizedAssignableElementAccess().getAssignableAlternativesParserRuleCall_1()); 
-                
+            			newLeafNode(otherlv_0, grammarAccess.getParenthesizedAssignableElementAccess().getLeftParenthesisKeyword_0());
+            		
+
+            			newCompositeNode(grammarAccess.getParenthesizedAssignableElementAccess().getAssignableAlternativesParserRuleCall_1());
+            		
             pushFollow(FollowSets000.FOLLOW_40);
             this_AssignableAlternatives_1=ruleAssignableAlternatives();
 
             state._fsp--;
 
-             
-                    current = this_AssignableAlternatives_1; 
-                    afterParserOrEnumRuleCall();
-                
+
+            			current = this_AssignableAlternatives_1;
+            			afterParserOrEnumRuleCall();
+            		
             otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getParenthesizedAssignableElementAccess().getRightParenthesisKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getParenthesizedAssignableElementAccess().getRightParenthesisKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5805,7 +5908,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAssignableAlternatives"
-    // InternalXtextGrammarTestLanguage.g:2179:1: entryRuleAssignableAlternatives returns [EObject current=null] : iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF ;
+    // InternalXtextGrammarTestLanguage.g:2150:1: entryRuleAssignableAlternatives returns [EObject current=null] : iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF ;
     public final EObject entryRuleAssignableAlternatives() throws RecognitionException {
         EObject current = null;
 
@@ -5813,8 +5916,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2180:2: (iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF )
-            // InternalXtextGrammarTestLanguage.g:2181:2: iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF
+            // InternalXtextGrammarTestLanguage.g:2150:63: (iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF )
+            // InternalXtextGrammarTestLanguage.g:2151:2: iv_ruleAssignableAlternatives= ruleAssignableAlternatives EOF
             {
              newCompositeNode(grammarAccess.getAssignableAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5828,11 +5931,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5841,7 +5944,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAssignableAlternatives"
-    // InternalXtextGrammarTestLanguage.g:2188:1: ruleAssignableAlternatives returns [EObject current=null] : (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? ) ;
+    // InternalXtextGrammarTestLanguage.g:2157:1: ruleAssignableAlternatives returns [EObject current=null] : (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? ) ;
     public final EObject ruleAssignableAlternatives() throws RecognitionException {
         EObject current = null;
 
@@ -5851,28 +5954,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_elements_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2191:28: ( (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? ) )
-            // InternalXtextGrammarTestLanguage.g:2192:1: (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:2163:2: ( (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? ) )
+            // InternalXtextGrammarTestLanguage.g:2164:2: (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? )
             {
-            // InternalXtextGrammarTestLanguage.g:2192:1: (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? )
-            // InternalXtextGrammarTestLanguage.g:2193:5: this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )?
+            // InternalXtextGrammarTestLanguage.g:2164:2: (this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:2165:3: this_AssignableTerminal_0= ruleAssignableTerminal ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )?
             {
-             
-                    newCompositeNode(grammarAccess.getAssignableAlternativesAccess().getAssignableTerminalParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getAssignableAlternativesAccess().getAssignableTerminalParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_24);
             this_AssignableTerminal_0=ruleAssignableTerminal();
 
             state._fsp--;
 
-             
-                    current = this_AssignableTerminal_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:2201:1: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )?
+
+            			current = this_AssignableTerminal_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:2173:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+ )?
             int alt47=2;
             int LA47_0 = input.LA(1);
 
@@ -5881,20 +5985,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt47) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2201:2: () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:2174:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+
                     {
-                    // InternalXtextGrammarTestLanguage.g:2201:2: ()
-                    // InternalXtextGrammarTestLanguage.g:2202:5: 
+                    // InternalXtextGrammarTestLanguage.g:2174:4: ()
+                    // InternalXtextGrammarTestLanguage.g:2175:5: 
                     {
 
-                            current = forceCreateModelElementAndAdd(
-                                grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0(),
-                                current);
-                        
+                    					current = forceCreateModelElementAndAdd(
+                    						grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0(),
+                    						current);
+                    				
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:2207:2: (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:2181:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) ) )+
                     int cnt46=0;
                     loop46:
                     do {
@@ -5908,37 +6012,37 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt46) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:2207:4: otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) )
+                    	    // InternalXtextGrammarTestLanguage.g:2182:5: otherlv_2= '|' ( (lv_elements_3_0= ruleAssignableTerminal ) )
                     	    {
                     	    otherlv_2=(Token)match(input,29,FollowSets000.FOLLOW_39); 
 
-                    	        	newLeafNode(otherlv_2, grammarAccess.getAssignableAlternativesAccess().getVerticalLineKeyword_1_1_0());
-                    	        
-                    	    // InternalXtextGrammarTestLanguage.g:2211:1: ( (lv_elements_3_0= ruleAssignableTerminal ) )
-                    	    // InternalXtextGrammarTestLanguage.g:2212:1: (lv_elements_3_0= ruleAssignableTerminal )
+                    	    					newLeafNode(otherlv_2, grammarAccess.getAssignableAlternativesAccess().getVerticalLineKeyword_1_1_0());
+                    	    				
+                    	    // InternalXtextGrammarTestLanguage.g:2186:5: ( (lv_elements_3_0= ruleAssignableTerminal ) )
+                    	    // InternalXtextGrammarTestLanguage.g:2187:6: (lv_elements_3_0= ruleAssignableTerminal )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:2212:1: (lv_elements_3_0= ruleAssignableTerminal )
-                    	    // InternalXtextGrammarTestLanguage.g:2213:3: lv_elements_3_0= ruleAssignableTerminal
+                    	    // InternalXtextGrammarTestLanguage.g:2187:6: (lv_elements_3_0= ruleAssignableTerminal )
+                    	    // InternalXtextGrammarTestLanguage.g:2188:7: lv_elements_3_0= ruleAssignableTerminal
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getAssignableAlternativesAccess().getElementsAssignableTerminalParserRuleCall_1_1_1_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getAssignableAlternativesAccess().getElementsAssignableTerminalParserRuleCall_1_1_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_24);
                     	    lv_elements_3_0=ruleAssignableTerminal();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getAssignableAlternativesRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"elements",
-                    	            		lv_elements_3_0, 
-                    	            		"org.eclipse.xtext.XtextGrammarTestLanguage.AssignableTerminal");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getAssignableAlternativesRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"elements",
+                    	    								lv_elements_3_0,
+                    	    								"org.eclipse.xtext.XtextGrammarTestLanguage.AssignableTerminal");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -5970,13 +6074,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5985,7 +6091,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleCrossReference"
-    // InternalXtextGrammarTestLanguage.g:2237:1: entryRuleCrossReference returns [EObject current=null] : iv_ruleCrossReference= ruleCrossReference EOF ;
+    // InternalXtextGrammarTestLanguage.g:2211:1: entryRuleCrossReference returns [EObject current=null] : iv_ruleCrossReference= ruleCrossReference EOF ;
     public final EObject entryRuleCrossReference() throws RecognitionException {
         EObject current = null;
 
@@ -5993,8 +6099,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2238:2: (iv_ruleCrossReference= ruleCrossReference EOF )
-            // InternalXtextGrammarTestLanguage.g:2239:2: iv_ruleCrossReference= ruleCrossReference EOF
+            // InternalXtextGrammarTestLanguage.g:2211:55: (iv_ruleCrossReference= ruleCrossReference EOF )
+            // InternalXtextGrammarTestLanguage.g:2212:2: iv_ruleCrossReference= ruleCrossReference EOF
             {
              newCompositeNode(grammarAccess.getCrossReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6008,11 +6114,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6021,7 +6127,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleCrossReference"
-    // InternalXtextGrammarTestLanguage.g:2246:1: ruleCrossReference returns [EObject current=null] : (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' ) ;
+    // InternalXtextGrammarTestLanguage.g:2218:1: ruleCrossReference returns [EObject current=null] : (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' ) ;
     public final EObject ruleCrossReference() throws RecognitionException {
         EObject current = null;
 
@@ -6033,51 +6139,52 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_terminal_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2249:28: ( (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' ) )
-            // InternalXtextGrammarTestLanguage.g:2250:1: (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' )
+            // InternalXtextGrammarTestLanguage.g:2224:2: ( (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' ) )
+            // InternalXtextGrammarTestLanguage.g:2225:2: (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' )
             {
-            // InternalXtextGrammarTestLanguage.g:2250:1: (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' )
-            // InternalXtextGrammarTestLanguage.g:2250:3: otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']'
+            // InternalXtextGrammarTestLanguage.g:2225:2: (otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']' )
+            // InternalXtextGrammarTestLanguage.g:2226:3: otherlv_0= '[' ( (lv_type_1_0= ruleTypeRef ) ) (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )? otherlv_4= ']'
             {
             otherlv_0=(Token)match(input,25,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getCrossReferenceAccess().getLeftSquareBracketKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:2254:1: ( (lv_type_1_0= ruleTypeRef ) )
-            // InternalXtextGrammarTestLanguage.g:2255:1: (lv_type_1_0= ruleTypeRef )
+            			newLeafNode(otherlv_0, grammarAccess.getCrossReferenceAccess().getLeftSquareBracketKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:2230:3: ( (lv_type_1_0= ruleTypeRef ) )
+            // InternalXtextGrammarTestLanguage.g:2231:4: (lv_type_1_0= ruleTypeRef )
             {
-            // InternalXtextGrammarTestLanguage.g:2255:1: (lv_type_1_0= ruleTypeRef )
-            // InternalXtextGrammarTestLanguage.g:2256:3: lv_type_1_0= ruleTypeRef
+            // InternalXtextGrammarTestLanguage.g:2231:4: (lv_type_1_0= ruleTypeRef )
+            // InternalXtextGrammarTestLanguage.g:2232:5: lv_type_1_0= ruleTypeRef
             {
-             
-            	        newCompositeNode(grammarAccess.getCrossReferenceAccess().getTypeTypeRefParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getCrossReferenceAccess().getTypeTypeRefParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_41);
             lv_type_1_0=ruleTypeRef();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getCrossReferenceRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"type",
-                    		lv_type_1_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.TypeRef");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getCrossReferenceRule());
+            					}
+            					set(
+            						current,
+            						"type",
+            						lv_type_1_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.TypeRef");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:2272:2: (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )?
+            // InternalXtextGrammarTestLanguage.g:2249:3: (otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) ) )?
             int alt48=2;
             int LA48_0 = input.LA(1);
 
@@ -6086,37 +6193,37 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt48) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2272:4: otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) )
+                    // InternalXtextGrammarTestLanguage.g:2250:4: otherlv_2= '|' ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) )
                     {
                     otherlv_2=(Token)match(input,29,FollowSets000.FOLLOW_42); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getCrossReferenceAccess().getVerticalLineKeyword_2_0());
-                        
-                    // InternalXtextGrammarTestLanguage.g:2276:1: ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) )
-                    // InternalXtextGrammarTestLanguage.g:2277:1: (lv_terminal_3_0= ruleCrossReferenceableTerminal )
+                    				newLeafNode(otherlv_2, grammarAccess.getCrossReferenceAccess().getVerticalLineKeyword_2_0());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:2254:4: ( (lv_terminal_3_0= ruleCrossReferenceableTerminal ) )
+                    // InternalXtextGrammarTestLanguage.g:2255:5: (lv_terminal_3_0= ruleCrossReferenceableTerminal )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2277:1: (lv_terminal_3_0= ruleCrossReferenceableTerminal )
-                    // InternalXtextGrammarTestLanguage.g:2278:3: lv_terminal_3_0= ruleCrossReferenceableTerminal
+                    // InternalXtextGrammarTestLanguage.g:2255:5: (lv_terminal_3_0= ruleCrossReferenceableTerminal )
+                    // InternalXtextGrammarTestLanguage.g:2256:6: lv_terminal_3_0= ruleCrossReferenceableTerminal
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getCrossReferenceAccess().getTerminalCrossReferenceableTerminalParserRuleCall_2_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getCrossReferenceAccess().getTerminalCrossReferenceableTerminalParserRuleCall_2_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_26);
                     lv_terminal_3_0=ruleCrossReferenceableTerminal();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getCrossReferenceRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"terminal",
-                            		lv_terminal_3_0, 
-                            		"org.eclipse.xtext.XtextGrammarTestLanguage.CrossReferenceableTerminal");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getCrossReferenceRule());
+                    						}
+                    						set(
+                    							current,
+                    							"terminal",
+                    							lv_terminal_3_0,
+                    							"org.eclipse.xtext.XtextGrammarTestLanguage.CrossReferenceableTerminal");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -6131,21 +6238,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_4=(Token)match(input,26,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getCrossReferenceAccess().getRightSquareBracketKeyword_3());
-                
+            			newLeafNode(otherlv_4, grammarAccess.getCrossReferenceAccess().getRightSquareBracketKeyword_3());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6154,7 +6263,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleCrossReferenceableTerminal"
-    // InternalXtextGrammarTestLanguage.g:2306:1: entryRuleCrossReferenceableTerminal returns [EObject current=null] : iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF ;
+    // InternalXtextGrammarTestLanguage.g:2282:1: entryRuleCrossReferenceableTerminal returns [EObject current=null] : iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF ;
     public final EObject entryRuleCrossReferenceableTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -6162,8 +6271,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2307:2: (iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF )
-            // InternalXtextGrammarTestLanguage.g:2308:2: iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF
+            // InternalXtextGrammarTestLanguage.g:2282:67: (iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF )
+            // InternalXtextGrammarTestLanguage.g:2283:2: iv_ruleCrossReferenceableTerminal= ruleCrossReferenceableTerminal EOF
             {
              newCompositeNode(grammarAccess.getCrossReferenceableTerminalRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6177,11 +6286,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6190,7 +6299,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleCrossReferenceableTerminal"
-    // InternalXtextGrammarTestLanguage.g:2315:1: ruleCrossReferenceableTerminal returns [EObject current=null] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall ) ;
+    // InternalXtextGrammarTestLanguage.g:2289:1: ruleCrossReferenceableTerminal returns [EObject current=null] : (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall ) ;
     public final EObject ruleCrossReferenceableTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -6199,13 +6308,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_RuleCall_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2318:28: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall ) )
-            // InternalXtextGrammarTestLanguage.g:2319:1: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall )
+            // InternalXtextGrammarTestLanguage.g:2295:2: ( (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall ) )
+            // InternalXtextGrammarTestLanguage.g:2296:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall )
             {
-            // InternalXtextGrammarTestLanguage.g:2319:1: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall )
+            // InternalXtextGrammarTestLanguage.g:2296:2: (this_Keyword_0= ruleKeyword | this_RuleCall_1= ruleRuleCall )
             int alt49=2;
             int LA49_0 = input.LA(1);
 
@@ -6223,38 +6333,38 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt49) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2320:5: this_Keyword_0= ruleKeyword
+                    // InternalXtextGrammarTestLanguage.g:2297:3: this_Keyword_0= ruleKeyword
                     {
-                     
-                            newCompositeNode(grammarAccess.getCrossReferenceableTerminalAccess().getKeywordParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getCrossReferenceableTerminalAccess().getKeywordParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Keyword_0=ruleKeyword();
 
                     state._fsp--;
 
-                     
-                            current = this_Keyword_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Keyword_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:2330:5: this_RuleCall_1= ruleRuleCall
+                    // InternalXtextGrammarTestLanguage.g:2306:3: this_RuleCall_1= ruleRuleCall
                     {
-                     
-                            newCompositeNode(grammarAccess.getCrossReferenceableTerminalAccess().getRuleCallParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getCrossReferenceableTerminalAccess().getRuleCallParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_RuleCall_1=ruleRuleCall();
 
                     state._fsp--;
 
-                     
-                            current = this_RuleCall_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_RuleCall_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -6264,13 +6374,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6279,7 +6391,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleParenthesizedElement"
-    // InternalXtextGrammarTestLanguage.g:2346:1: entryRuleParenthesizedElement returns [EObject current=null] : iv_ruleParenthesizedElement= ruleParenthesizedElement EOF ;
+    // InternalXtextGrammarTestLanguage.g:2318:1: entryRuleParenthesizedElement returns [EObject current=null] : iv_ruleParenthesizedElement= ruleParenthesizedElement EOF ;
     public final EObject entryRuleParenthesizedElement() throws RecognitionException {
         EObject current = null;
 
@@ -6287,8 +6399,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2347:2: (iv_ruleParenthesizedElement= ruleParenthesizedElement EOF )
-            // InternalXtextGrammarTestLanguage.g:2348:2: iv_ruleParenthesizedElement= ruleParenthesizedElement EOF
+            // InternalXtextGrammarTestLanguage.g:2318:61: (iv_ruleParenthesizedElement= ruleParenthesizedElement EOF )
+            // InternalXtextGrammarTestLanguage.g:2319:2: iv_ruleParenthesizedElement= ruleParenthesizedElement EOF
             {
              newCompositeNode(grammarAccess.getParenthesizedElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6302,11 +6414,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6315,7 +6427,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleParenthesizedElement"
-    // InternalXtextGrammarTestLanguage.g:2355:1: ruleParenthesizedElement returns [EObject current=null] : (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' ) ;
+    // InternalXtextGrammarTestLanguage.g:2325:1: ruleParenthesizedElement returns [EObject current=null] : (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' ) ;
     public final EObject ruleParenthesizedElement() throws RecognitionException {
         EObject current = null;
 
@@ -6324,48 +6436,51 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_Alternatives_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2358:28: ( (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' ) )
-            // InternalXtextGrammarTestLanguage.g:2359:1: (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' )
+            // InternalXtextGrammarTestLanguage.g:2331:2: ( (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' ) )
+            // InternalXtextGrammarTestLanguage.g:2332:2: (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' )
             {
-            // InternalXtextGrammarTestLanguage.g:2359:1: (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' )
-            // InternalXtextGrammarTestLanguage.g:2359:3: otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')'
+            // InternalXtextGrammarTestLanguage.g:2332:2: (otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')' )
+            // InternalXtextGrammarTestLanguage.g:2333:3: otherlv_0= '(' this_Alternatives_1= ruleAlternatives otherlv_2= ')'
             {
             otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_18); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getParenthesizedElementAccess().getLeftParenthesisKeyword_0());
-                
-             
-                    newCompositeNode(grammarAccess.getParenthesizedElementAccess().getAlternativesParserRuleCall_1()); 
-                
+            			newLeafNode(otherlv_0, grammarAccess.getParenthesizedElementAccess().getLeftParenthesisKeyword_0());
+            		
+
+            			newCompositeNode(grammarAccess.getParenthesizedElementAccess().getAlternativesParserRuleCall_1());
+            		
             pushFollow(FollowSets000.FOLLOW_40);
             this_Alternatives_1=ruleAlternatives();
 
             state._fsp--;
 
-             
-                    current = this_Alternatives_1; 
-                    afterParserOrEnumRuleCall();
-                
+
+            			current = this_Alternatives_1;
+            			afterParserOrEnumRuleCall();
+            		
             otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getParenthesizedElementAccess().getRightParenthesisKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getParenthesizedElementAccess().getRightParenthesisKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6374,7 +6489,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRulePredicatedGroup"
-    // InternalXtextGrammarTestLanguage.g:2384:1: entryRulePredicatedGroup returns [EObject current=null] : iv_rulePredicatedGroup= rulePredicatedGroup EOF ;
+    // InternalXtextGrammarTestLanguage.g:2353:1: entryRulePredicatedGroup returns [EObject current=null] : iv_rulePredicatedGroup= rulePredicatedGroup EOF ;
     public final EObject entryRulePredicatedGroup() throws RecognitionException {
         EObject current = null;
 
@@ -6382,8 +6497,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2385:2: (iv_rulePredicatedGroup= rulePredicatedGroup EOF )
-            // InternalXtextGrammarTestLanguage.g:2386:2: iv_rulePredicatedGroup= rulePredicatedGroup EOF
+            // InternalXtextGrammarTestLanguage.g:2353:56: (iv_rulePredicatedGroup= rulePredicatedGroup EOF )
+            // InternalXtextGrammarTestLanguage.g:2354:2: iv_rulePredicatedGroup= rulePredicatedGroup EOF
             {
              newCompositeNode(grammarAccess.getPredicatedGroupRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6397,11 +6512,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6410,7 +6525,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "rulePredicatedGroup"
-    // InternalXtextGrammarTestLanguage.g:2393:1: rulePredicatedGroup returns [EObject current=null] : (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' ) ;
+    // InternalXtextGrammarTestLanguage.g:2360:1: rulePredicatedGroup returns [EObject current=null] : (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' ) ;
     public final EObject rulePredicatedGroup() throws RecognitionException {
         EObject current = null;
 
@@ -6421,59 +6536,60 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_elements_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2396:28: ( (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' ) )
-            // InternalXtextGrammarTestLanguage.g:2397:1: (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' )
+            // InternalXtextGrammarTestLanguage.g:2366:2: ( (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' ) )
+            // InternalXtextGrammarTestLanguage.g:2367:2: (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' )
             {
-            // InternalXtextGrammarTestLanguage.g:2397:1: (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' )
-            // InternalXtextGrammarTestLanguage.g:2398:5: this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')'
+            // InternalXtextGrammarTestLanguage.g:2367:2: (this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')' )
+            // InternalXtextGrammarTestLanguage.g:2368:3: this_Predicate_0= rulePredicate[$current] otherlv_1= '(' ( (lv_elements_2_0= ruleAlternatives ) ) otherlv_3= ')'
             {
-             
-            		if (current==null) {
-            			current = createModelElement(grammarAccess.getPredicatedGroupRule());
-            		}
-                    newCompositeNode(grammarAccess.getPredicatedGroupAccess().getPredicateParserRuleCall_0()); 
-                
+
+            			if (current==null) {
+            				current = createModelElement(grammarAccess.getPredicatedGroupRule());
+            			}
+            			newCompositeNode(grammarAccess.getPredicatedGroupAccess().getPredicateParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_7);
             this_Predicate_0=rulePredicate(current);
 
             state._fsp--;
 
-             
-                    current = this_Predicate_0; 
-                    afterParserOrEnumRuleCall();
-                
+
+            			current = this_Predicate_0;
+            			afterParserOrEnumRuleCall();
+            		
             otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_18); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getPredicatedGroupAccess().getLeftParenthesisKeyword_1());
-                
-            // InternalXtextGrammarTestLanguage.g:2413:1: ( (lv_elements_2_0= ruleAlternatives ) )
-            // InternalXtextGrammarTestLanguage.g:2414:1: (lv_elements_2_0= ruleAlternatives )
+            			newLeafNode(otherlv_1, grammarAccess.getPredicatedGroupAccess().getLeftParenthesisKeyword_1());
+            		
+            // InternalXtextGrammarTestLanguage.g:2383:3: ( (lv_elements_2_0= ruleAlternatives ) )
+            // InternalXtextGrammarTestLanguage.g:2384:4: (lv_elements_2_0= ruleAlternatives )
             {
-            // InternalXtextGrammarTestLanguage.g:2414:1: (lv_elements_2_0= ruleAlternatives )
-            // InternalXtextGrammarTestLanguage.g:2415:3: lv_elements_2_0= ruleAlternatives
+            // InternalXtextGrammarTestLanguage.g:2384:4: (lv_elements_2_0= ruleAlternatives )
+            // InternalXtextGrammarTestLanguage.g:2385:5: lv_elements_2_0= ruleAlternatives
             {
-             
-            	        newCompositeNode(grammarAccess.getPredicatedGroupAccess().getElementsAlternativesParserRuleCall_2_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getPredicatedGroupAccess().getElementsAlternativesParserRuleCall_2_0());
+            				
             pushFollow(FollowSets000.FOLLOW_40);
             lv_elements_2_0=ruleAlternatives();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getPredicatedGroupRule());
-            	        }
-                   		add(
-                   			current, 
-                   			"elements",
-                    		lv_elements_2_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.Alternatives");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getPredicatedGroupRule());
+            					}
+            					add(
+            						current,
+            						"elements",
+            						lv_elements_2_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.Alternatives");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -6482,21 +6598,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_3=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_3, grammarAccess.getPredicatedGroupAccess().getRightParenthesisKeyword_3());
-                
+            			newLeafNode(otherlv_3, grammarAccess.getPredicatedGroupAccess().getRightParenthesisKeyword_3());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6505,7 +6623,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleTerminalRule"
-    // InternalXtextGrammarTestLanguage.g:2443:1: entryRuleTerminalRule returns [EObject current=null] : iv_ruleTerminalRule= ruleTerminalRule EOF ;
+    // InternalXtextGrammarTestLanguage.g:2410:1: entryRuleTerminalRule returns [EObject current=null] : iv_ruleTerminalRule= ruleTerminalRule EOF ;
     public final EObject entryRuleTerminalRule() throws RecognitionException {
         EObject current = null;
 
@@ -6513,8 +6631,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2444:2: (iv_ruleTerminalRule= ruleTerminalRule EOF )
-            // InternalXtextGrammarTestLanguage.g:2445:2: iv_ruleTerminalRule= ruleTerminalRule EOF
+            // InternalXtextGrammarTestLanguage.g:2410:53: (iv_ruleTerminalRule= ruleTerminalRule EOF )
+            // InternalXtextGrammarTestLanguage.g:2411:2: iv_ruleTerminalRule= ruleTerminalRule EOF
             {
              newCompositeNode(grammarAccess.getTerminalRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6528,11 +6646,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6541,7 +6659,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleTerminalRule"
-    // InternalXtextGrammarTestLanguage.g:2452:1: ruleTerminalRule returns [EObject current=null] : (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' ) ;
+    // InternalXtextGrammarTestLanguage.g:2417:1: ruleTerminalRule returns [EObject current=null] : (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' ) ;
     public final EObject ruleTerminalRule() throws RecognitionException {
         EObject current = null;
 
@@ -6556,20 +6674,21 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_alternatives_6_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2455:28: ( (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' ) )
-            // InternalXtextGrammarTestLanguage.g:2456:1: (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' )
+            // InternalXtextGrammarTestLanguage.g:2423:2: ( (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' ) )
+            // InternalXtextGrammarTestLanguage.g:2424:2: (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' )
             {
-            // InternalXtextGrammarTestLanguage.g:2456:1: (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' )
-            // InternalXtextGrammarTestLanguage.g:2456:3: otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';'
+            // InternalXtextGrammarTestLanguage.g:2424:2: (otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';' )
+            // InternalXtextGrammarTestLanguage.g:2425:3: otherlv_0= 'terminal' ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) ) otherlv_5= ':' ( (lv_alternatives_6_0= ruleTerminalAlternatives ) ) otherlv_7= ';'
             {
             otherlv_0=(Token)match(input,42,FollowSets000.FOLLOW_13); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getTerminalRuleAccess().getTerminalKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:2460:1: ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) )
+            			newLeafNode(otherlv_0, grammarAccess.getTerminalRuleAccess().getTerminalKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:2429:3: ( ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) ) | ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? ) )
             int alt51=2;
             int LA51_0 = input.LA(1);
 
@@ -6587,53 +6706,53 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt51) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2460:2: ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) )
+                    // InternalXtextGrammarTestLanguage.g:2430:4: ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2460:2: ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) )
-                    // InternalXtextGrammarTestLanguage.g:2460:3: ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:2430:4: ( ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) ) )
+                    // InternalXtextGrammarTestLanguage.g:2431:5: ( (lv_fragment_1_0= 'fragment' ) ) ( (lv_name_2_0= RULE_ID ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2460:3: ( (lv_fragment_1_0= 'fragment' ) )
-                    // InternalXtextGrammarTestLanguage.g:2461:1: (lv_fragment_1_0= 'fragment' )
+                    // InternalXtextGrammarTestLanguage.g:2431:5: ( (lv_fragment_1_0= 'fragment' ) )
+                    // InternalXtextGrammarTestLanguage.g:2432:6: (lv_fragment_1_0= 'fragment' )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2461:1: (lv_fragment_1_0= 'fragment' )
-                    // InternalXtextGrammarTestLanguage.g:2462:3: lv_fragment_1_0= 'fragment'
+                    // InternalXtextGrammarTestLanguage.g:2432:6: (lv_fragment_1_0= 'fragment' )
+                    // InternalXtextGrammarTestLanguage.g:2433:7: lv_fragment_1_0= 'fragment'
                     {
                     lv_fragment_1_0=(Token)match(input,21,FollowSets000.FOLLOW_3); 
 
-                            newLeafNode(lv_fragment_1_0, grammarAccess.getTerminalRuleAccess().getFragmentFragmentKeyword_1_0_0_0());
-                        
+                    							newLeafNode(lv_fragment_1_0, grammarAccess.getTerminalRuleAccess().getFragmentFragmentKeyword_1_0_0_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTerminalRuleRule());
-                    	        }
-                           		setWithLastConsumed(current, "fragment", true, "fragment");
-                    	    
-
-                    }
-
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getTerminalRuleRule());
+                    							}
+                    							setWithLastConsumed(current, "fragment", true, "fragment");
+                    						
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:2475:2: ( (lv_name_2_0= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:2476:1: (lv_name_2_0= RULE_ID )
+
+                    }
+
+                    // InternalXtextGrammarTestLanguage.g:2445:5: ( (lv_name_2_0= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:2446:6: (lv_name_2_0= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2476:1: (lv_name_2_0= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:2477:3: lv_name_2_0= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:2446:6: (lv_name_2_0= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:2447:7: lv_name_2_0= RULE_ID
                     {
                     lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_17); 
 
-                    			newLeafNode(lv_name_2_0, grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0_1_0()); 
-                    		
+                    							newLeafNode(lv_name_2_0, grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0_1_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTerminalRuleRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_2_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getTerminalRuleRule());
+                    							}
+                    							setWithLastConsumed(
+                    								current,
+                    								"name",
+                    								lv_name_2_0,
+                    								"org.eclipse.xtext.common.Terminals.ID");
+                    						
 
                     }
 
@@ -6647,38 +6766,38 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:2494:6: ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? )
+                    // InternalXtextGrammarTestLanguage.g:2465:4: ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2494:6: ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? )
-                    // InternalXtextGrammarTestLanguage.g:2494:7: ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )?
+                    // InternalXtextGrammarTestLanguage.g:2465:4: ( ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )? )
+                    // InternalXtextGrammarTestLanguage.g:2466:5: ( (lv_name_3_0= RULE_ID ) ) (this_ReturnsClause_4= ruleReturnsClause[$current] )?
                     {
-                    // InternalXtextGrammarTestLanguage.g:2494:7: ( (lv_name_3_0= RULE_ID ) )
-                    // InternalXtextGrammarTestLanguage.g:2495:1: (lv_name_3_0= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:2466:5: ( (lv_name_3_0= RULE_ID ) )
+                    // InternalXtextGrammarTestLanguage.g:2467:6: (lv_name_3_0= RULE_ID )
                     {
-                    // InternalXtextGrammarTestLanguage.g:2495:1: (lv_name_3_0= RULE_ID )
-                    // InternalXtextGrammarTestLanguage.g:2496:3: lv_name_3_0= RULE_ID
+                    // InternalXtextGrammarTestLanguage.g:2467:6: (lv_name_3_0= RULE_ID )
+                    // InternalXtextGrammarTestLanguage.g:2468:7: lv_name_3_0= RULE_ID
                     {
                     lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_43); 
 
-                    			newLeafNode(lv_name_3_0, grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_1_0_0()); 
-                    		
+                    							newLeafNode(lv_name_3_0, grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_1_0_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTerminalRuleRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_3_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
-
-                    }
-
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getTerminalRuleRule());
+                    							}
+                    							setWithLastConsumed(
+                    								current,
+                    								"name",
+                    								lv_name_3_0,
+                    								"org.eclipse.xtext.common.Terminals.ID");
+                    						
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:2512:2: (this_ReturnsClause_4= ruleReturnsClause[$current] )?
+
+                    }
+
+                    // InternalXtextGrammarTestLanguage.g:2484:5: (this_ReturnsClause_4= ruleReturnsClause[$current] )?
                     int alt50=2;
                     int LA50_0 = input.LA(1);
 
@@ -6687,23 +6806,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
                     }
                     switch (alt50) {
                         case 1 :
-                            // InternalXtextGrammarTestLanguage.g:2513:5: this_ReturnsClause_4= ruleReturnsClause[$current]
+                            // InternalXtextGrammarTestLanguage.g:2485:6: this_ReturnsClause_4= ruleReturnsClause[$current]
                             {
-                             
-                            		if (current==null) {
-                            			current = createModelElement(grammarAccess.getTerminalRuleRule());
-                            		}
-                                    newCompositeNode(grammarAccess.getTerminalRuleAccess().getReturnsClauseParserRuleCall_1_1_1()); 
-                                
+
+                            						if (current==null) {
+                            							current = createModelElement(grammarAccess.getTerminalRuleRule());
+                            						}
+                            						newCompositeNode(grammarAccess.getTerminalRuleAccess().getReturnsClauseParserRuleCall_1_1_1());
+                            					
                             pushFollow(FollowSets000.FOLLOW_17);
                             this_ReturnsClause_4=ruleReturnsClause(current);
 
                             state._fsp--;
 
-                             
-                                    current = this_ReturnsClause_4; 
-                                    afterParserOrEnumRuleCall();
-                                
+
+                            						current = this_ReturnsClause_4;
+                            						afterParserOrEnumRuleCall();
+                            					
 
                             }
                             break;
@@ -6721,33 +6840,33 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_5=(Token)match(input,23,FollowSets000.FOLLOW_44); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getTerminalRuleAccess().getColonKeyword_2());
-                
-            // InternalXtextGrammarTestLanguage.g:2528:1: ( (lv_alternatives_6_0= ruleTerminalAlternatives ) )
-            // InternalXtextGrammarTestLanguage.g:2529:1: (lv_alternatives_6_0= ruleTerminalAlternatives )
+            			newLeafNode(otherlv_5, grammarAccess.getTerminalRuleAccess().getColonKeyword_2());
+            		
+            // InternalXtextGrammarTestLanguage.g:2503:3: ( (lv_alternatives_6_0= ruleTerminalAlternatives ) )
+            // InternalXtextGrammarTestLanguage.g:2504:4: (lv_alternatives_6_0= ruleTerminalAlternatives )
             {
-            // InternalXtextGrammarTestLanguage.g:2529:1: (lv_alternatives_6_0= ruleTerminalAlternatives )
-            // InternalXtextGrammarTestLanguage.g:2530:3: lv_alternatives_6_0= ruleTerminalAlternatives
+            // InternalXtextGrammarTestLanguage.g:2504:4: (lv_alternatives_6_0= ruleTerminalAlternatives )
+            // InternalXtextGrammarTestLanguage.g:2505:5: lv_alternatives_6_0= ruleTerminalAlternatives
             {
-             
-            	        newCompositeNode(grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_3_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_3_0());
+            				
             pushFollow(FollowSets000.FOLLOW_19);
             lv_alternatives_6_0=ruleTerminalAlternatives();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getTerminalRuleRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"alternatives",
-                    		lv_alternatives_6_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalAlternatives");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getTerminalRuleRule());
+            					}
+            					set(
+            						current,
+            						"alternatives",
+            						lv_alternatives_6_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalAlternatives");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -6756,21 +6875,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_7=(Token)match(input,24,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_7, grammarAccess.getTerminalRuleAccess().getSemicolonKeyword_4());
-                
+            			newLeafNode(otherlv_7, grammarAccess.getTerminalRuleAccess().getSemicolonKeyword_4());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6779,7 +6900,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleTerminalAlternatives"
-    // InternalXtextGrammarTestLanguage.g:2558:1: entryRuleTerminalAlternatives returns [EObject current=null] : iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF ;
+    // InternalXtextGrammarTestLanguage.g:2530:1: entryRuleTerminalAlternatives returns [EObject current=null] : iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF ;
     public final EObject entryRuleTerminalAlternatives() throws RecognitionException {
         EObject current = null;
 
@@ -6787,8 +6908,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2559:2: (iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF )
-            // InternalXtextGrammarTestLanguage.g:2560:2: iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF
+            // InternalXtextGrammarTestLanguage.g:2530:61: (iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF )
+            // InternalXtextGrammarTestLanguage.g:2531:2: iv_ruleTerminalAlternatives= ruleTerminalAlternatives EOF
             {
              newCompositeNode(grammarAccess.getTerminalAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6802,11 +6923,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6815,7 +6936,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleTerminalAlternatives"
-    // InternalXtextGrammarTestLanguage.g:2567:1: ruleTerminalAlternatives returns [EObject current=null] : (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? ) ;
+    // InternalXtextGrammarTestLanguage.g:2537:1: ruleTerminalAlternatives returns [EObject current=null] : (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? ) ;
     public final EObject ruleTerminalAlternatives() throws RecognitionException {
         EObject current = null;
 
@@ -6825,28 +6946,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_elements_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2570:28: ( (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? ) )
-            // InternalXtextGrammarTestLanguage.g:2571:1: (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:2543:2: ( (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? ) )
+            // InternalXtextGrammarTestLanguage.g:2544:2: (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? )
             {
-            // InternalXtextGrammarTestLanguage.g:2571:1: (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? )
-            // InternalXtextGrammarTestLanguage.g:2572:5: this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )?
+            // InternalXtextGrammarTestLanguage.g:2544:2: (this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:2545:3: this_TerminalGroup_0= ruleTerminalGroup ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )?
             {
-             
-                    newCompositeNode(grammarAccess.getTerminalAlternativesAccess().getTerminalGroupParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getTerminalAlternativesAccess().getTerminalGroupParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_24);
             this_TerminalGroup_0=ruleTerminalGroup();
 
             state._fsp--;
 
-             
-                    current = this_TerminalGroup_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:2580:1: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )?
+
+            			current = this_TerminalGroup_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:2553:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+ )?
             int alt53=2;
             int LA53_0 = input.LA(1);
 
@@ -6855,20 +6977,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt53) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2580:2: () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:2554:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+
                     {
-                    // InternalXtextGrammarTestLanguage.g:2580:2: ()
-                    // InternalXtextGrammarTestLanguage.g:2581:5: 
+                    // InternalXtextGrammarTestLanguage.g:2554:4: ()
+                    // InternalXtextGrammarTestLanguage.g:2555:5: 
                     {
 
-                            current = forceCreateModelElementAndAdd(
-                                grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0(),
-                                current);
-                        
+                    					current = forceCreateModelElementAndAdd(
+                    						grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0(),
+                    						current);
+                    				
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:2586:2: (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:2561:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) ) )+
                     int cnt52=0;
                     loop52:
                     do {
@@ -6882,37 +7004,37 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt52) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:2586:4: otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) )
+                    	    // InternalXtextGrammarTestLanguage.g:2562:5: otherlv_2= '|' ( (lv_elements_3_0= ruleTerminalGroup ) )
                     	    {
                     	    otherlv_2=(Token)match(input,29,FollowSets000.FOLLOW_44); 
 
-                    	        	newLeafNode(otherlv_2, grammarAccess.getTerminalAlternativesAccess().getVerticalLineKeyword_1_1_0());
-                    	        
-                    	    // InternalXtextGrammarTestLanguage.g:2590:1: ( (lv_elements_3_0= ruleTerminalGroup ) )
-                    	    // InternalXtextGrammarTestLanguage.g:2591:1: (lv_elements_3_0= ruleTerminalGroup )
+                    	    					newLeafNode(otherlv_2, grammarAccess.getTerminalAlternativesAccess().getVerticalLineKeyword_1_1_0());
+                    	    				
+                    	    // InternalXtextGrammarTestLanguage.g:2566:5: ( (lv_elements_3_0= ruleTerminalGroup ) )
+                    	    // InternalXtextGrammarTestLanguage.g:2567:6: (lv_elements_3_0= ruleTerminalGroup )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:2591:1: (lv_elements_3_0= ruleTerminalGroup )
-                    	    // InternalXtextGrammarTestLanguage.g:2592:3: lv_elements_3_0= ruleTerminalGroup
+                    	    // InternalXtextGrammarTestLanguage.g:2567:6: (lv_elements_3_0= ruleTerminalGroup )
+                    	    // InternalXtextGrammarTestLanguage.g:2568:7: lv_elements_3_0= ruleTerminalGroup
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getTerminalAlternativesAccess().getElementsTerminalGroupParserRuleCall_1_1_1_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getTerminalAlternativesAccess().getElementsTerminalGroupParserRuleCall_1_1_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_24);
                     	    lv_elements_3_0=ruleTerminalGroup();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getTerminalAlternativesRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"elements",
-                    	            		lv_elements_3_0, 
-                    	            		"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalGroup");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getTerminalAlternativesRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"elements",
+                    	    								lv_elements_3_0,
+                    	    								"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalGroup");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -6944,13 +7066,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6959,7 +7083,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleTerminalGroup"
-    // InternalXtextGrammarTestLanguage.g:2616:1: entryRuleTerminalGroup returns [EObject current=null] : iv_ruleTerminalGroup= ruleTerminalGroup EOF ;
+    // InternalXtextGrammarTestLanguage.g:2591:1: entryRuleTerminalGroup returns [EObject current=null] : iv_ruleTerminalGroup= ruleTerminalGroup EOF ;
     public final EObject entryRuleTerminalGroup() throws RecognitionException {
         EObject current = null;
 
@@ -6967,8 +7091,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2617:2: (iv_ruleTerminalGroup= ruleTerminalGroup EOF )
-            // InternalXtextGrammarTestLanguage.g:2618:2: iv_ruleTerminalGroup= ruleTerminalGroup EOF
+            // InternalXtextGrammarTestLanguage.g:2591:54: (iv_ruleTerminalGroup= ruleTerminalGroup EOF )
+            // InternalXtextGrammarTestLanguage.g:2592:2: iv_ruleTerminalGroup= ruleTerminalGroup EOF
             {
              newCompositeNode(grammarAccess.getTerminalGroupRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6982,11 +7106,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6995,7 +7119,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleTerminalGroup"
-    // InternalXtextGrammarTestLanguage.g:2625:1: ruleTerminalGroup returns [EObject current=null] : (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? ) ;
+    // InternalXtextGrammarTestLanguage.g:2598:1: ruleTerminalGroup returns [EObject current=null] : (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? ) ;
     public final EObject ruleTerminalGroup() throws RecognitionException {
         EObject current = null;
 
@@ -7004,28 +7128,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_elements_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2628:28: ( (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? ) )
-            // InternalXtextGrammarTestLanguage.g:2629:1: (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:2604:2: ( (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? ) )
+            // InternalXtextGrammarTestLanguage.g:2605:2: (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? )
             {
-            // InternalXtextGrammarTestLanguage.g:2629:1: (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? )
-            // InternalXtextGrammarTestLanguage.g:2630:5: this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )?
+            // InternalXtextGrammarTestLanguage.g:2605:2: (this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:2606:3: this_TerminalToken_0= ruleTerminalToken ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )?
             {
-             
-                    newCompositeNode(grammarAccess.getTerminalGroupAccess().getTerminalTokenParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getTerminalGroupAccess().getTerminalTokenParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_45);
             this_TerminalToken_0=ruleTerminalToken();
 
             state._fsp--;
 
-             
-                    current = this_TerminalToken_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:2638:1: ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )?
+
+            			current = this_TerminalToken_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:2614:3: ( () ( (lv_elements_2_0= ruleTerminalToken ) )+ )?
             int alt55=2;
             int LA55_0 = input.LA(1);
 
@@ -7034,20 +7159,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt55) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2638:2: () ( (lv_elements_2_0= ruleTerminalToken ) )+
+                    // InternalXtextGrammarTestLanguage.g:2615:4: () ( (lv_elements_2_0= ruleTerminalToken ) )+
                     {
-                    // InternalXtextGrammarTestLanguage.g:2638:2: ()
-                    // InternalXtextGrammarTestLanguage.g:2639:5: 
+                    // InternalXtextGrammarTestLanguage.g:2615:4: ()
+                    // InternalXtextGrammarTestLanguage.g:2616:5: 
                     {
 
-                            current = forceCreateModelElementAndAdd(
-                                grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0(),
-                                current);
-                        
+                    					current = forceCreateModelElementAndAdd(
+                    						grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0(),
+                    						current);
+                    				
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:2644:2: ( (lv_elements_2_0= ruleTerminalToken ) )+
+                    // InternalXtextGrammarTestLanguage.g:2622:4: ( (lv_elements_2_0= ruleTerminalToken ) )+
                     int cnt54=0;
                     loop54:
                     do {
@@ -7061,30 +7186,30 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt54) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:2645:1: (lv_elements_2_0= ruleTerminalToken )
+                    	    // InternalXtextGrammarTestLanguage.g:2623:5: (lv_elements_2_0= ruleTerminalToken )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:2645:1: (lv_elements_2_0= ruleTerminalToken )
-                    	    // InternalXtextGrammarTestLanguage.g:2646:3: lv_elements_2_0= ruleTerminalToken
+                    	    // InternalXtextGrammarTestLanguage.g:2623:5: (lv_elements_2_0= ruleTerminalToken )
+                    	    // InternalXtextGrammarTestLanguage.g:2624:6: lv_elements_2_0= ruleTerminalToken
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getTerminalGroupAccess().getElementsTerminalTokenParserRuleCall_1_1_0()); 
-                    	    	    
+
+                    	    						newCompositeNode(grammarAccess.getTerminalGroupAccess().getElementsTerminalTokenParserRuleCall_1_1_0());
+                    	    					
                     	    pushFollow(FollowSets000.FOLLOW_45);
                     	    lv_elements_2_0=ruleTerminalToken();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getTerminalGroupRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"elements",
-                    	            		lv_elements_2_0, 
-                    	            		"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalToken");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    						if (current==null) {
+                    	    							current = createModelElementForParent(grammarAccess.getTerminalGroupRule());
+                    	    						}
+                    	    						add(
+                    	    							current,
+                    	    							"elements",
+                    	    							lv_elements_2_0,
+                    	    							"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalToken");
+                    	    						afterParserOrEnumRuleCall();
+                    	    					
 
                     	    }
 
@@ -7113,13 +7238,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7128,7 +7255,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleTerminalToken"
-    // InternalXtextGrammarTestLanguage.g:2670:1: entryRuleTerminalToken returns [EObject current=null] : iv_ruleTerminalToken= ruleTerminalToken EOF ;
+    // InternalXtextGrammarTestLanguage.g:2646:1: entryRuleTerminalToken returns [EObject current=null] : iv_ruleTerminalToken= ruleTerminalToken EOF ;
     public final EObject entryRuleTerminalToken() throws RecognitionException {
         EObject current = null;
 
@@ -7136,8 +7263,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2671:2: (iv_ruleTerminalToken= ruleTerminalToken EOF )
-            // InternalXtextGrammarTestLanguage.g:2672:2: iv_ruleTerminalToken= ruleTerminalToken EOF
+            // InternalXtextGrammarTestLanguage.g:2646:54: (iv_ruleTerminalToken= ruleTerminalToken EOF )
+            // InternalXtextGrammarTestLanguage.g:2647:2: iv_ruleTerminalToken= ruleTerminalToken EOF
             {
              newCompositeNode(grammarAccess.getTerminalTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7151,11 +7278,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7164,7 +7291,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleTerminalToken"
-    // InternalXtextGrammarTestLanguage.g:2679:1: ruleTerminalToken returns [EObject current=null] : (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? ) ;
+    // InternalXtextGrammarTestLanguage.g:2653:1: ruleTerminalToken returns [EObject current=null] : (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? ) ;
     public final EObject ruleTerminalToken() throws RecognitionException {
         EObject current = null;
 
@@ -7173,28 +7300,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_Cardinalities_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2682:28: ( (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? ) )
-            // InternalXtextGrammarTestLanguage.g:2683:1: (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? )
+            // InternalXtextGrammarTestLanguage.g:2659:2: ( (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? ) )
+            // InternalXtextGrammarTestLanguage.g:2660:2: (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? )
             {
-            // InternalXtextGrammarTestLanguage.g:2683:1: (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? )
-            // InternalXtextGrammarTestLanguage.g:2684:5: this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )?
+            // InternalXtextGrammarTestLanguage.g:2660:2: (this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )? )
+            // InternalXtextGrammarTestLanguage.g:2661:3: this_TerminalTokenElement_0= ruleTerminalTokenElement (this_Cardinalities_1= ruleCardinalities[$current] )?
             {
-             
-                    newCompositeNode(grammarAccess.getTerminalTokenAccess().getTerminalTokenElementParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getTerminalTokenAccess().getTerminalTokenElementParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_30);
             this_TerminalTokenElement_0=ruleTerminalTokenElement();
 
             state._fsp--;
 
-             
-                    current = this_TerminalTokenElement_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:2692:1: (this_Cardinalities_1= ruleCardinalities[$current] )?
+
+            			current = this_TerminalTokenElement_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:2669:3: (this_Cardinalities_1= ruleCardinalities[$current] )?
             int alt56=2;
             int LA56_0 = input.LA(1);
 
@@ -7203,23 +7331,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt56) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2693:5: this_Cardinalities_1= ruleCardinalities[$current]
+                    // InternalXtextGrammarTestLanguage.g:2670:4: this_Cardinalities_1= ruleCardinalities[$current]
                     {
-                     
-                    		if (current==null) {
-                    			current = createModelElement(grammarAccess.getTerminalTokenRule());
-                    		}
-                            newCompositeNode(grammarAccess.getTerminalTokenAccess().getCardinalitiesParserRuleCall_1()); 
-                        
+
+                    				if (current==null) {
+                    					current = createModelElement(grammarAccess.getTerminalTokenRule());
+                    				}
+                    				newCompositeNode(grammarAccess.getTerminalTokenAccess().getCardinalitiesParserRuleCall_1());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Cardinalities_1=ruleCardinalities(current);
 
                     state._fsp--;
 
-                     
-                            current = this_Cardinalities_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Cardinalities_1;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
@@ -7232,13 +7360,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7247,7 +7377,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleTerminalTokenElement"
-    // InternalXtextGrammarTestLanguage.g:2712:1: entryRuleTerminalTokenElement returns [EObject current=null] : iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF ;
+    // InternalXtextGrammarTestLanguage.g:2686:1: entryRuleTerminalTokenElement returns [EObject current=null] : iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF ;
     public final EObject entryRuleTerminalTokenElement() throws RecognitionException {
         EObject current = null;
 
@@ -7255,8 +7385,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2713:2: (iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF )
-            // InternalXtextGrammarTestLanguage.g:2714:2: iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF
+            // InternalXtextGrammarTestLanguage.g:2686:61: (iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF )
+            // InternalXtextGrammarTestLanguage.g:2687:2: iv_ruleTerminalTokenElement= ruleTerminalTokenElement EOF
             {
              newCompositeNode(grammarAccess.getTerminalTokenElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7270,11 +7400,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7283,7 +7413,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleTerminalTokenElement"
-    // InternalXtextGrammarTestLanguage.g:2721:1: ruleTerminalTokenElement returns [EObject current=null] : (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF ) ;
+    // InternalXtextGrammarTestLanguage.g:2693:1: ruleTerminalTokenElement returns [EObject current=null] : (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF ) ;
     public final EObject ruleTerminalTokenElement() throws RecognitionException {
         EObject current = null;
 
@@ -7300,13 +7430,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_EOF_5 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2724:28: ( (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF ) )
-            // InternalXtextGrammarTestLanguage.g:2725:1: (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF )
+            // InternalXtextGrammarTestLanguage.g:2699:2: ( (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF ) )
+            // InternalXtextGrammarTestLanguage.g:2700:2: (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF )
             {
-            // InternalXtextGrammarTestLanguage.g:2725:1: (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF )
+            // InternalXtextGrammarTestLanguage.g:2700:2: (this_CharacterRange_0= ruleCharacterRange | this_TerminalRuleCall_1= ruleTerminalRuleCall | this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement | this_AbstractNegatedToken_3= ruleAbstractNegatedToken | this_Wildcard_4= ruleWildcard | this_EOF_5= ruleEOF )
             int alt57=6;
             switch ( input.LA(1) ) {
             case RULE_STRING:
@@ -7349,110 +7480,110 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             switch (alt57) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2726:5: this_CharacterRange_0= ruleCharacterRange
+                    // InternalXtextGrammarTestLanguage.g:2701:3: this_CharacterRange_0= ruleCharacterRange
                     {
-                     
-                            newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getCharacterRangeParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getCharacterRangeParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_CharacterRange_0=ruleCharacterRange();
 
                     state._fsp--;
 
-                     
-                            current = this_CharacterRange_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_CharacterRange_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:2736:5: this_TerminalRuleCall_1= ruleTerminalRuleCall
+                    // InternalXtextGrammarTestLanguage.g:2710:3: this_TerminalRuleCall_1= ruleTerminalRuleCall
                     {
-                     
-                            newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getTerminalRuleCallParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getTerminalRuleCallParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TerminalRuleCall_1=ruleTerminalRuleCall();
 
                     state._fsp--;
 
-                     
-                            current = this_TerminalRuleCall_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_TerminalRuleCall_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 3 :
-                    // InternalXtextGrammarTestLanguage.g:2746:5: this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement
+                    // InternalXtextGrammarTestLanguage.g:2719:3: this_ParenthesizedTerminalElement_2= ruleParenthesizedTerminalElement
                     {
-                     
-                            newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getParenthesizedTerminalElementParserRuleCall_2()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getParenthesizedTerminalElementParserRuleCall_2());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_ParenthesizedTerminalElement_2=ruleParenthesizedTerminalElement();
 
                     state._fsp--;
 
-                     
-                            current = this_ParenthesizedTerminalElement_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_ParenthesizedTerminalElement_2;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 4 :
-                    // InternalXtextGrammarTestLanguage.g:2756:5: this_AbstractNegatedToken_3= ruleAbstractNegatedToken
+                    // InternalXtextGrammarTestLanguage.g:2728:3: this_AbstractNegatedToken_3= ruleAbstractNegatedToken
                     {
-                     
-                            newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getAbstractNegatedTokenParserRuleCall_3()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getAbstractNegatedTokenParserRuleCall_3());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_AbstractNegatedToken_3=ruleAbstractNegatedToken();
 
                     state._fsp--;
 
-                     
-                            current = this_AbstractNegatedToken_3; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_AbstractNegatedToken_3;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 5 :
-                    // InternalXtextGrammarTestLanguage.g:2766:5: this_Wildcard_4= ruleWildcard
+                    // InternalXtextGrammarTestLanguage.g:2737:3: this_Wildcard_4= ruleWildcard
                     {
-                     
-                            newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getWildcardParserRuleCall_4()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getWildcardParserRuleCall_4());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Wildcard_4=ruleWildcard();
 
                     state._fsp--;
 
-                     
-                            current = this_Wildcard_4; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Wildcard_4;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 6 :
-                    // InternalXtextGrammarTestLanguage.g:2776:5: this_EOF_5= ruleEOF
+                    // InternalXtextGrammarTestLanguage.g:2746:3: this_EOF_5= ruleEOF
                     {
-                     
-                            newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getEOFParserRuleCall_5()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getEOFParserRuleCall_5());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_EOF_5=ruleEOF();
 
                     state._fsp--;
 
-                     
-                            current = this_EOF_5; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_EOF_5;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -7462,13 +7593,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7477,7 +7610,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleParenthesizedTerminalElement"
-    // InternalXtextGrammarTestLanguage.g:2792:1: entryRuleParenthesizedTerminalElement returns [EObject current=null] : iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF ;
+    // InternalXtextGrammarTestLanguage.g:2758:1: entryRuleParenthesizedTerminalElement returns [EObject current=null] : iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF ;
     public final EObject entryRuleParenthesizedTerminalElement() throws RecognitionException {
         EObject current = null;
 
@@ -7485,8 +7618,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2793:2: (iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF )
-            // InternalXtextGrammarTestLanguage.g:2794:2: iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF
+            // InternalXtextGrammarTestLanguage.g:2758:69: (iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF )
+            // InternalXtextGrammarTestLanguage.g:2759:2: iv_ruleParenthesizedTerminalElement= ruleParenthesizedTerminalElement EOF
             {
              newCompositeNode(grammarAccess.getParenthesizedTerminalElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7500,11 +7633,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7513,7 +7646,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleParenthesizedTerminalElement"
-    // InternalXtextGrammarTestLanguage.g:2801:1: ruleParenthesizedTerminalElement returns [EObject current=null] : (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' ) ;
+    // InternalXtextGrammarTestLanguage.g:2765:1: ruleParenthesizedTerminalElement returns [EObject current=null] : (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' ) ;
     public final EObject ruleParenthesizedTerminalElement() throws RecognitionException {
         EObject current = null;
 
@@ -7522,48 +7655,51 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_TerminalAlternatives_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2804:28: ( (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' ) )
-            // InternalXtextGrammarTestLanguage.g:2805:1: (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' )
+            // InternalXtextGrammarTestLanguage.g:2771:2: ( (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' ) )
+            // InternalXtextGrammarTestLanguage.g:2772:2: (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' )
             {
-            // InternalXtextGrammarTestLanguage.g:2805:1: (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' )
-            // InternalXtextGrammarTestLanguage.g:2805:3: otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')'
+            // InternalXtextGrammarTestLanguage.g:2772:2: (otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')' )
+            // InternalXtextGrammarTestLanguage.g:2773:3: otherlv_0= '(' this_TerminalAlternatives_1= ruleTerminalAlternatives otherlv_2= ')'
             {
             otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_44); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getParenthesizedTerminalElementAccess().getLeftParenthesisKeyword_0());
-                
-             
-                    newCompositeNode(grammarAccess.getParenthesizedTerminalElementAccess().getTerminalAlternativesParserRuleCall_1()); 
-                
+            			newLeafNode(otherlv_0, grammarAccess.getParenthesizedTerminalElementAccess().getLeftParenthesisKeyword_0());
+            		
+
+            			newCompositeNode(grammarAccess.getParenthesizedTerminalElementAccess().getTerminalAlternativesParserRuleCall_1());
+            		
             pushFollow(FollowSets000.FOLLOW_40);
             this_TerminalAlternatives_1=ruleTerminalAlternatives();
 
             state._fsp--;
 
-             
-                    current = this_TerminalAlternatives_1; 
-                    afterParserOrEnumRuleCall();
-                
+
+            			current = this_TerminalAlternatives_1;
+            			afterParserOrEnumRuleCall();
+            		
             otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getParenthesizedTerminalElementAccess().getRightParenthesisKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getParenthesizedTerminalElementAccess().getRightParenthesisKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7572,7 +7708,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleAbstractNegatedToken"
-    // InternalXtextGrammarTestLanguage.g:2830:1: entryRuleAbstractNegatedToken returns [EObject current=null] : iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF ;
+    // InternalXtextGrammarTestLanguage.g:2793:1: entryRuleAbstractNegatedToken returns [EObject current=null] : iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF ;
     public final EObject entryRuleAbstractNegatedToken() throws RecognitionException {
         EObject current = null;
 
@@ -7580,8 +7716,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2831:2: (iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF )
-            // InternalXtextGrammarTestLanguage.g:2832:2: iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF
+            // InternalXtextGrammarTestLanguage.g:2793:61: (iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF )
+            // InternalXtextGrammarTestLanguage.g:2794:2: iv_ruleAbstractNegatedToken= ruleAbstractNegatedToken EOF
             {
              newCompositeNode(grammarAccess.getAbstractNegatedTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7595,11 +7731,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7608,7 +7744,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleAbstractNegatedToken"
-    // InternalXtextGrammarTestLanguage.g:2839:1: ruleAbstractNegatedToken returns [EObject current=null] : (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) ;
+    // InternalXtextGrammarTestLanguage.g:2800:1: ruleAbstractNegatedToken returns [EObject current=null] : (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) ;
     public final EObject ruleAbstractNegatedToken() throws RecognitionException {
         EObject current = null;
 
@@ -7617,13 +7753,14 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject this_UntilToken_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2842:28: ( (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) )
-            // InternalXtextGrammarTestLanguage.g:2843:1: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
+            // InternalXtextGrammarTestLanguage.g:2806:2: ( (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken ) )
+            // InternalXtextGrammarTestLanguage.g:2807:2: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
             {
-            // InternalXtextGrammarTestLanguage.g:2843:1: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
+            // InternalXtextGrammarTestLanguage.g:2807:2: (this_NegatedToken_0= ruleNegatedToken | this_UntilToken_1= ruleUntilToken )
             int alt58=2;
             int LA58_0 = input.LA(1);
 
@@ -7641,38 +7778,38 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt58) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:2844:5: this_NegatedToken_0= ruleNegatedToken
+                    // InternalXtextGrammarTestLanguage.g:2808:3: this_NegatedToken_0= ruleNegatedToken
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractNegatedTokenAccess().getNegatedTokenParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractNegatedTokenAccess().getNegatedTokenParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_NegatedToken_0=ruleNegatedToken();
 
                     state._fsp--;
 
-                     
-                            current = this_NegatedToken_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_NegatedToken_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalXtextGrammarTestLanguage.g:2854:5: this_UntilToken_1= ruleUntilToken
+                    // InternalXtextGrammarTestLanguage.g:2817:3: this_UntilToken_1= ruleUntilToken
                     {
-                     
-                            newCompositeNode(grammarAccess.getAbstractNegatedTokenAccess().getUntilTokenParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAbstractNegatedTokenAccess().getUntilTokenParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_UntilToken_1=ruleUntilToken();
 
                     state._fsp--;
 
-                     
-                            current = this_UntilToken_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_UntilToken_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -7682,13 +7819,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7697,7 +7836,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleNegatedToken"
-    // InternalXtextGrammarTestLanguage.g:2870:1: entryRuleNegatedToken returns [EObject current=null] : iv_ruleNegatedToken= ruleNegatedToken EOF ;
+    // InternalXtextGrammarTestLanguage.g:2829:1: entryRuleNegatedToken returns [EObject current=null] : iv_ruleNegatedToken= ruleNegatedToken EOF ;
     public final EObject entryRuleNegatedToken() throws RecognitionException {
         EObject current = null;
 
@@ -7705,8 +7844,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2871:2: (iv_ruleNegatedToken= ruleNegatedToken EOF )
-            // InternalXtextGrammarTestLanguage.g:2872:2: iv_ruleNegatedToken= ruleNegatedToken EOF
+            // InternalXtextGrammarTestLanguage.g:2829:53: (iv_ruleNegatedToken= ruleNegatedToken EOF )
+            // InternalXtextGrammarTestLanguage.g:2830:2: iv_ruleNegatedToken= ruleNegatedToken EOF
             {
              newCompositeNode(grammarAccess.getNegatedTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7720,11 +7859,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7733,7 +7872,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleNegatedToken"
-    // InternalXtextGrammarTestLanguage.g:2879:1: ruleNegatedToken returns [EObject current=null] : (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:2836:1: ruleNegatedToken returns [EObject current=null] : (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) ;
     public final EObject ruleNegatedToken() throws RecognitionException {
         EObject current = null;
 
@@ -7741,44 +7880,45 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_terminal_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2882:28: ( (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:2883:1: (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
+            // InternalXtextGrammarTestLanguage.g:2842:2: ( (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:2843:2: (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:2883:1: (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
-            // InternalXtextGrammarTestLanguage.g:2883:3: otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
+            // InternalXtextGrammarTestLanguage.g:2843:2: (otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
+            // InternalXtextGrammarTestLanguage.g:2844:3: otherlv_0= '!' ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
             {
             otherlv_0=(Token)match(input,38,FollowSets000.FOLLOW_44); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getNegatedTokenAccess().getExclamationMarkKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:2887:1: ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
-            // InternalXtextGrammarTestLanguage.g:2888:1: (lv_terminal_1_0= ruleTerminalTokenElement )
+            			newLeafNode(otherlv_0, grammarAccess.getNegatedTokenAccess().getExclamationMarkKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:2848:3: ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
+            // InternalXtextGrammarTestLanguage.g:2849:4: (lv_terminal_1_0= ruleTerminalTokenElement )
             {
-            // InternalXtextGrammarTestLanguage.g:2888:1: (lv_terminal_1_0= ruleTerminalTokenElement )
-            // InternalXtextGrammarTestLanguage.g:2889:3: lv_terminal_1_0= ruleTerminalTokenElement
+            // InternalXtextGrammarTestLanguage.g:2849:4: (lv_terminal_1_0= ruleTerminalTokenElement )
+            // InternalXtextGrammarTestLanguage.g:2850:5: lv_terminal_1_0= ruleTerminalTokenElement
             {
-             
-            	        newCompositeNode(grammarAccess.getNegatedTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getNegatedTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_terminal_1_0=ruleTerminalTokenElement();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getNegatedTokenRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"terminal",
-                    		lv_terminal_1_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalTokenElement");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getNegatedTokenRule());
+            					}
+            					set(
+            						current,
+            						"terminal",
+            						lv_terminal_1_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalTokenElement");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -7791,13 +7931,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7806,7 +7948,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleUntilToken"
-    // InternalXtextGrammarTestLanguage.g:2913:1: entryRuleUntilToken returns [EObject current=null] : iv_ruleUntilToken= ruleUntilToken EOF ;
+    // InternalXtextGrammarTestLanguage.g:2871:1: entryRuleUntilToken returns [EObject current=null] : iv_ruleUntilToken= ruleUntilToken EOF ;
     public final EObject entryRuleUntilToken() throws RecognitionException {
         EObject current = null;
 
@@ -7814,8 +7956,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2914:2: (iv_ruleUntilToken= ruleUntilToken EOF )
-            // InternalXtextGrammarTestLanguage.g:2915:2: iv_ruleUntilToken= ruleUntilToken EOF
+            // InternalXtextGrammarTestLanguage.g:2871:51: (iv_ruleUntilToken= ruleUntilToken EOF )
+            // InternalXtextGrammarTestLanguage.g:2872:2: iv_ruleUntilToken= ruleUntilToken EOF
             {
              newCompositeNode(grammarAccess.getUntilTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7829,11 +7971,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7842,7 +7984,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleUntilToken"
-    // InternalXtextGrammarTestLanguage.g:2922:1: ruleUntilToken returns [EObject current=null] : (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) ;
+    // InternalXtextGrammarTestLanguage.g:2878:1: ruleUntilToken returns [EObject current=null] : (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) ;
     public final EObject ruleUntilToken() throws RecognitionException {
         EObject current = null;
 
@@ -7850,44 +7992,45 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_terminal_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2925:28: ( (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
-            // InternalXtextGrammarTestLanguage.g:2926:1: (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
+            // InternalXtextGrammarTestLanguage.g:2884:2: ( (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) ) )
+            // InternalXtextGrammarTestLanguage.g:2885:2: (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
             {
-            // InternalXtextGrammarTestLanguage.g:2926:1: (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
-            // InternalXtextGrammarTestLanguage.g:2926:3: otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
+            // InternalXtextGrammarTestLanguage.g:2885:2: (otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) ) )
+            // InternalXtextGrammarTestLanguage.g:2886:3: otherlv_0= '->' ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
             {
             otherlv_0=(Token)match(input,41,FollowSets000.FOLLOW_44); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getUntilTokenAccess().getHyphenMinusGreaterThanSignKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:2930:1: ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
-            // InternalXtextGrammarTestLanguage.g:2931:1: (lv_terminal_1_0= ruleTerminalTokenElement )
+            			newLeafNode(otherlv_0, grammarAccess.getUntilTokenAccess().getHyphenMinusGreaterThanSignKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:2890:3: ( (lv_terminal_1_0= ruleTerminalTokenElement ) )
+            // InternalXtextGrammarTestLanguage.g:2891:4: (lv_terminal_1_0= ruleTerminalTokenElement )
             {
-            // InternalXtextGrammarTestLanguage.g:2931:1: (lv_terminal_1_0= ruleTerminalTokenElement )
-            // InternalXtextGrammarTestLanguage.g:2932:3: lv_terminal_1_0= ruleTerminalTokenElement
+            // InternalXtextGrammarTestLanguage.g:2891:4: (lv_terminal_1_0= ruleTerminalTokenElement )
+            // InternalXtextGrammarTestLanguage.g:2892:5: lv_terminal_1_0= ruleTerminalTokenElement
             {
-             
-            	        newCompositeNode(grammarAccess.getUntilTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getUntilTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_terminal_1_0=ruleTerminalTokenElement();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getUntilTokenRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"terminal",
-                    		lv_terminal_1_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalTokenElement");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getUntilTokenRule());
+            					}
+            					set(
+            						current,
+            						"terminal",
+            						lv_terminal_1_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.TerminalTokenElement");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -7900,13 +8043,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7915,7 +8060,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleWildcard"
-    // InternalXtextGrammarTestLanguage.g:2956:1: entryRuleWildcard returns [EObject current=null] : iv_ruleWildcard= ruleWildcard EOF ;
+    // InternalXtextGrammarTestLanguage.g:2913:1: entryRuleWildcard returns [EObject current=null] : iv_ruleWildcard= ruleWildcard EOF ;
     public final EObject entryRuleWildcard() throws RecognitionException {
         EObject current = null;
 
@@ -7923,8 +8068,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2957:2: (iv_ruleWildcard= ruleWildcard EOF )
-            // InternalXtextGrammarTestLanguage.g:2958:2: iv_ruleWildcard= ruleWildcard EOF
+            // InternalXtextGrammarTestLanguage.g:2913:49: (iv_ruleWildcard= ruleWildcard EOF )
+            // InternalXtextGrammarTestLanguage.g:2914:2: iv_ruleWildcard= ruleWildcard EOF
             {
              newCompositeNode(grammarAccess.getWildcardRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -7938,11 +8083,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -7951,49 +8096,52 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleWildcard"
-    // InternalXtextGrammarTestLanguage.g:2965:1: ruleWildcard returns [EObject current=null] : ( () otherlv_1= '.' ) ;
+    // InternalXtextGrammarTestLanguage.g:2920:1: ruleWildcard returns [EObject current=null] : ( () otherlv_1= '.' ) ;
     public final EObject ruleWildcard() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2968:28: ( ( () otherlv_1= '.' ) )
-            // InternalXtextGrammarTestLanguage.g:2969:1: ( () otherlv_1= '.' )
+            // InternalXtextGrammarTestLanguage.g:2926:2: ( ( () otherlv_1= '.' ) )
+            // InternalXtextGrammarTestLanguage.g:2927:2: ( () otherlv_1= '.' )
             {
-            // InternalXtextGrammarTestLanguage.g:2969:1: ( () otherlv_1= '.' )
-            // InternalXtextGrammarTestLanguage.g:2969:2: () otherlv_1= '.'
+            // InternalXtextGrammarTestLanguage.g:2927:2: ( () otherlv_1= '.' )
+            // InternalXtextGrammarTestLanguage.g:2928:3: () otherlv_1= '.'
             {
-            // InternalXtextGrammarTestLanguage.g:2969:2: ()
-            // InternalXtextGrammarTestLanguage.g:2970:5: 
+            // InternalXtextGrammarTestLanguage.g:2928:3: ()
+            // InternalXtextGrammarTestLanguage.g:2929:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getWildcardAccess().getWildcardAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getWildcardAccess().getWildcardAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getWildcardAccess().getFullStopKeyword_1());
-                
+            			newLeafNode(otherlv_1, grammarAccess.getWildcardAccess().getFullStopKeyword_1());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8002,7 +8150,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleEOF"
-    // InternalXtextGrammarTestLanguage.g:2987:1: entryRuleEOF returns [EObject current=null] : iv_ruleEOF= ruleEOF EOF ;
+    // InternalXtextGrammarTestLanguage.g:2943:1: entryRuleEOF returns [EObject current=null] : iv_ruleEOF= ruleEOF EOF ;
     public final EObject entryRuleEOF() throws RecognitionException {
         EObject current = null;
 
@@ -8010,8 +8158,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:2988:2: (iv_ruleEOF= ruleEOF EOF )
-            // InternalXtextGrammarTestLanguage.g:2989:2: iv_ruleEOF= ruleEOF EOF
+            // InternalXtextGrammarTestLanguage.g:2943:44: (iv_ruleEOF= ruleEOF EOF )
+            // InternalXtextGrammarTestLanguage.g:2944:2: iv_ruleEOF= ruleEOF EOF
             {
              newCompositeNode(grammarAccess.getEOFRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -8025,11 +8173,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8038,49 +8186,52 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleEOF"
-    // InternalXtextGrammarTestLanguage.g:2996:1: ruleEOF returns [EObject current=null] : ( () otherlv_1= 'EOF' ) ;
+    // InternalXtextGrammarTestLanguage.g:2950:1: ruleEOF returns [EObject current=null] : ( () otherlv_1= 'EOF' ) ;
     public final EObject ruleEOF() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:2999:28: ( ( () otherlv_1= 'EOF' ) )
-            // InternalXtextGrammarTestLanguage.g:3000:1: ( () otherlv_1= 'EOF' )
+            // InternalXtextGrammarTestLanguage.g:2956:2: ( ( () otherlv_1= 'EOF' ) )
+            // InternalXtextGrammarTestLanguage.g:2957:2: ( () otherlv_1= 'EOF' )
             {
-            // InternalXtextGrammarTestLanguage.g:3000:1: ( () otherlv_1= 'EOF' )
-            // InternalXtextGrammarTestLanguage.g:3000:2: () otherlv_1= 'EOF'
+            // InternalXtextGrammarTestLanguage.g:2957:2: ( () otherlv_1= 'EOF' )
+            // InternalXtextGrammarTestLanguage.g:2958:3: () otherlv_1= 'EOF'
             {
-            // InternalXtextGrammarTestLanguage.g:3000:2: ()
-            // InternalXtextGrammarTestLanguage.g:3001:5: 
+            // InternalXtextGrammarTestLanguage.g:2958:3: ()
+            // InternalXtextGrammarTestLanguage.g:2959:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getEOFAccess().getEOFAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getEOFAccess().getEOFAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,43,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getEOFAccess().getEOFKeyword_1());
-                
+            			newLeafNode(otherlv_1, grammarAccess.getEOFAccess().getEOFKeyword_1());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8089,7 +8240,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleCharacterRange"
-    // InternalXtextGrammarTestLanguage.g:3018:1: entryRuleCharacterRange returns [EObject current=null] : iv_ruleCharacterRange= ruleCharacterRange EOF ;
+    // InternalXtextGrammarTestLanguage.g:2973:1: entryRuleCharacterRange returns [EObject current=null] : iv_ruleCharacterRange= ruleCharacterRange EOF ;
     public final EObject entryRuleCharacterRange() throws RecognitionException {
         EObject current = null;
 
@@ -8097,8 +8248,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:3019:2: (iv_ruleCharacterRange= ruleCharacterRange EOF )
-            // InternalXtextGrammarTestLanguage.g:3020:2: iv_ruleCharacterRange= ruleCharacterRange EOF
+            // InternalXtextGrammarTestLanguage.g:2973:55: (iv_ruleCharacterRange= ruleCharacterRange EOF )
+            // InternalXtextGrammarTestLanguage.g:2974:2: iv_ruleCharacterRange= ruleCharacterRange EOF
             {
              newCompositeNode(grammarAccess.getCharacterRangeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -8112,11 +8263,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8125,7 +8276,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleCharacterRange"
-    // InternalXtextGrammarTestLanguage.g:3027:1: ruleCharacterRange returns [EObject current=null] : (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? ) ;
+    // InternalXtextGrammarTestLanguage.g:2980:1: ruleCharacterRange returns [EObject current=null] : (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? ) ;
     public final EObject ruleCharacterRange() throws RecognitionException {
         EObject current = null;
 
@@ -8135,28 +8286,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_right_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:3030:28: ( (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? ) )
-            // InternalXtextGrammarTestLanguage.g:3031:1: (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? )
+            // InternalXtextGrammarTestLanguage.g:2986:2: ( (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? ) )
+            // InternalXtextGrammarTestLanguage.g:2987:2: (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? )
             {
-            // InternalXtextGrammarTestLanguage.g:3031:1: (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? )
-            // InternalXtextGrammarTestLanguage.g:3032:5: this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )?
+            // InternalXtextGrammarTestLanguage.g:2987:2: (this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )? )
+            // InternalXtextGrammarTestLanguage.g:2988:3: this_Keyword_0= ruleKeyword ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )?
             {
-             
-                    newCompositeNode(grammarAccess.getCharacterRangeAccess().getKeywordParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getCharacterRangeAccess().getKeywordParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_46);
             this_Keyword_0=ruleKeyword();
 
             state._fsp--;
 
-             
-                    current = this_Keyword_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:3040:1: ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )?
+
+            			current = this_Keyword_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:2996:3: ( () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) ) )?
             int alt59=2;
             int LA59_0 = input.LA(1);
 
@@ -8165,48 +8317,48 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt59) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:3040:2: () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) )
+                    // InternalXtextGrammarTestLanguage.g:2997:4: () otherlv_2= '..' ( (lv_right_3_0= ruleKeyword ) )
                     {
-                    // InternalXtextGrammarTestLanguage.g:3040:2: ()
-                    // InternalXtextGrammarTestLanguage.g:3041:5: 
+                    // InternalXtextGrammarTestLanguage.g:2997:4: ()
+                    // InternalXtextGrammarTestLanguage.g:2998:5: 
                     {
 
-                            current = forceCreateModelElementAndSet(
-                                grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0(),
-                                current);
-                        
+                    					current = forceCreateModelElementAndSet(
+                    						grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0(),
+                    						current);
+                    				
 
                     }
 
                     otherlv_2=(Token)match(input,44,FollowSets000.FOLLOW_11); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getCharacterRangeAccess().getFullStopFullStopKeyword_1_1());
-                        
-                    // InternalXtextGrammarTestLanguage.g:3050:1: ( (lv_right_3_0= ruleKeyword ) )
-                    // InternalXtextGrammarTestLanguage.g:3051:1: (lv_right_3_0= ruleKeyword )
+                    				newLeafNode(otherlv_2, grammarAccess.getCharacterRangeAccess().getFullStopFullStopKeyword_1_1());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:3008:4: ( (lv_right_3_0= ruleKeyword ) )
+                    // InternalXtextGrammarTestLanguage.g:3009:5: (lv_right_3_0= ruleKeyword )
                     {
-                    // InternalXtextGrammarTestLanguage.g:3051:1: (lv_right_3_0= ruleKeyword )
-                    // InternalXtextGrammarTestLanguage.g:3052:3: lv_right_3_0= ruleKeyword
+                    // InternalXtextGrammarTestLanguage.g:3009:5: (lv_right_3_0= ruleKeyword )
+                    // InternalXtextGrammarTestLanguage.g:3010:6: lv_right_3_0= ruleKeyword
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getCharacterRangeAccess().getRightKeywordParserRuleCall_1_2_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getCharacterRangeAccess().getRightKeywordParserRuleCall_1_2_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_right_3_0=ruleKeyword();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getCharacterRangeRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"right",
-                            		lv_right_3_0, 
-                            		"org.eclipse.xtext.XtextGrammarTestLanguage.Keyword");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getCharacterRangeRule());
+                    						}
+                    						set(
+                    							current,
+                    							"right",
+                    							lv_right_3_0,
+                    							"org.eclipse.xtext.XtextGrammarTestLanguage.Keyword");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -8225,13 +8377,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8240,7 +8394,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleEnumRule"
-    // InternalXtextGrammarTestLanguage.g:3076:1: entryRuleEnumRule returns [EObject current=null] : iv_ruleEnumRule= ruleEnumRule EOF ;
+    // InternalXtextGrammarTestLanguage.g:3032:1: entryRuleEnumRule returns [EObject current=null] : iv_ruleEnumRule= ruleEnumRule EOF ;
     public final EObject entryRuleEnumRule() throws RecognitionException {
         EObject current = null;
 
@@ -8248,8 +8402,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:3077:2: (iv_ruleEnumRule= ruleEnumRule EOF )
-            // InternalXtextGrammarTestLanguage.g:3078:2: iv_ruleEnumRule= ruleEnumRule EOF
+            // InternalXtextGrammarTestLanguage.g:3032:49: (iv_ruleEnumRule= ruleEnumRule EOF )
+            // InternalXtextGrammarTestLanguage.g:3033:2: iv_ruleEnumRule= ruleEnumRule EOF
             {
              newCompositeNode(grammarAccess.getEnumRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -8263,11 +8417,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8276,7 +8430,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleEnumRule"
-    // InternalXtextGrammarTestLanguage.g:3085:1: ruleEnumRule returns [EObject current=null] : (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' ) ;
+    // InternalXtextGrammarTestLanguage.g:3039:1: ruleEnumRule returns [EObject current=null] : (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' ) ;
     public final EObject ruleEnumRule() throws RecognitionException {
         EObject current = null;
 
@@ -8289,46 +8443,47 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_alternatives_4_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:3088:28: ( (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' ) )
-            // InternalXtextGrammarTestLanguage.g:3089:1: (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' )
+            // InternalXtextGrammarTestLanguage.g:3045:2: ( (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' ) )
+            // InternalXtextGrammarTestLanguage.g:3046:2: (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' )
             {
-            // InternalXtextGrammarTestLanguage.g:3089:1: (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' )
-            // InternalXtextGrammarTestLanguage.g:3089:3: otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';'
+            // InternalXtextGrammarTestLanguage.g:3046:2: (otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';' )
+            // InternalXtextGrammarTestLanguage.g:3047:3: otherlv_0= 'enum' ( (lv_name_1_0= RULE_ID ) ) (this_ReturnsClause_2= ruleReturnsClause[$current] )? otherlv_3= ':' ( (lv_alternatives_4_0= ruleEnumLiterals ) ) otherlv_5= ';'
             {
             otherlv_0=(Token)match(input,45,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getEnumRuleAccess().getEnumKeyword_0());
-                
-            // InternalXtextGrammarTestLanguage.g:3093:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalXtextGrammarTestLanguage.g:3094:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getEnumRuleAccess().getEnumKeyword_0());
+            		
+            // InternalXtextGrammarTestLanguage.g:3051:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:3052:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalXtextGrammarTestLanguage.g:3094:1: (lv_name_1_0= RULE_ID )
-            // InternalXtextGrammarTestLanguage.g:3095:3: lv_name_1_0= RULE_ID
+            // InternalXtextGrammarTestLanguage.g:3052:4: (lv_name_1_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:3053:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_43); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getEnumRuleAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getEnumRuleAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getEnumRuleRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEnumRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:3111:2: (this_ReturnsClause_2= ruleReturnsClause[$current] )?
+
+            }
+
+            // InternalXtextGrammarTestLanguage.g:3069:3: (this_ReturnsClause_2= ruleReturnsClause[$current] )?
             int alt60=2;
             int LA60_0 = input.LA(1);
 
@@ -8337,23 +8492,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt60) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:3112:5: this_ReturnsClause_2= ruleReturnsClause[$current]
+                    // InternalXtextGrammarTestLanguage.g:3070:4: this_ReturnsClause_2= ruleReturnsClause[$current]
                     {
-                     
-                    		if (current==null) {
-                    			current = createModelElement(grammarAccess.getEnumRuleRule());
-                    		}
-                            newCompositeNode(grammarAccess.getEnumRuleAccess().getReturnsClauseParserRuleCall_2()); 
-                        
+
+                    				if (current==null) {
+                    					current = createModelElement(grammarAccess.getEnumRuleRule());
+                    				}
+                    				newCompositeNode(grammarAccess.getEnumRuleAccess().getReturnsClauseParserRuleCall_2());
+                    			
                     pushFollow(FollowSets000.FOLLOW_17);
                     this_ReturnsClause_2=ruleReturnsClause(current);
 
                     state._fsp--;
 
-                     
-                            current = this_ReturnsClause_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_ReturnsClause_2;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
@@ -8362,33 +8517,33 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_3=(Token)match(input,23,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_3, grammarAccess.getEnumRuleAccess().getColonKeyword_3());
-                
-            // InternalXtextGrammarTestLanguage.g:3127:1: ( (lv_alternatives_4_0= ruleEnumLiterals ) )
-            // InternalXtextGrammarTestLanguage.g:3128:1: (lv_alternatives_4_0= ruleEnumLiterals )
+            			newLeafNode(otherlv_3, grammarAccess.getEnumRuleAccess().getColonKeyword_3());
+            		
+            // InternalXtextGrammarTestLanguage.g:3086:3: ( (lv_alternatives_4_0= ruleEnumLiterals ) )
+            // InternalXtextGrammarTestLanguage.g:3087:4: (lv_alternatives_4_0= ruleEnumLiterals )
             {
-            // InternalXtextGrammarTestLanguage.g:3128:1: (lv_alternatives_4_0= ruleEnumLiterals )
-            // InternalXtextGrammarTestLanguage.g:3129:3: lv_alternatives_4_0= ruleEnumLiterals
+            // InternalXtextGrammarTestLanguage.g:3087:4: (lv_alternatives_4_0= ruleEnumLiterals )
+            // InternalXtextGrammarTestLanguage.g:3088:5: lv_alternatives_4_0= ruleEnumLiterals
             {
-             
-            	        newCompositeNode(grammarAccess.getEnumRuleAccess().getAlternativesEnumLiteralsParserRuleCall_4_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getEnumRuleAccess().getAlternativesEnumLiteralsParserRuleCall_4_0());
+            				
             pushFollow(FollowSets000.FOLLOW_19);
             lv_alternatives_4_0=ruleEnumLiterals();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getEnumRuleRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"alternatives",
-                    		lv_alternatives_4_0, 
-                    		"org.eclipse.xtext.XtextGrammarTestLanguage.EnumLiterals");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEnumRuleRule());
+            					}
+            					set(
+            						current,
+            						"alternatives",
+            						lv_alternatives_4_0,
+            						"org.eclipse.xtext.XtextGrammarTestLanguage.EnumLiterals");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -8397,21 +8552,23 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getEnumRuleAccess().getSemicolonKeyword_5());
-                
+            			newLeafNode(otherlv_5, grammarAccess.getEnumRuleAccess().getSemicolonKeyword_5());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8420,7 +8577,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleEnumLiterals"
-    // InternalXtextGrammarTestLanguage.g:3157:1: entryRuleEnumLiterals returns [EObject current=null] : iv_ruleEnumLiterals= ruleEnumLiterals EOF ;
+    // InternalXtextGrammarTestLanguage.g:3113:1: entryRuleEnumLiterals returns [EObject current=null] : iv_ruleEnumLiterals= ruleEnumLiterals EOF ;
     public final EObject entryRuleEnumLiterals() throws RecognitionException {
         EObject current = null;
 
@@ -8428,8 +8585,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:3158:2: (iv_ruleEnumLiterals= ruleEnumLiterals EOF )
-            // InternalXtextGrammarTestLanguage.g:3159:2: iv_ruleEnumLiterals= ruleEnumLiterals EOF
+            // InternalXtextGrammarTestLanguage.g:3113:53: (iv_ruleEnumLiterals= ruleEnumLiterals EOF )
+            // InternalXtextGrammarTestLanguage.g:3114:2: iv_ruleEnumLiterals= ruleEnumLiterals EOF
             {
              newCompositeNode(grammarAccess.getEnumLiteralsRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -8443,11 +8600,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8456,7 +8613,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleEnumLiterals"
-    // InternalXtextGrammarTestLanguage.g:3166:1: ruleEnumLiterals returns [EObject current=null] : (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? ) ;
+    // InternalXtextGrammarTestLanguage.g:3120:1: ruleEnumLiterals returns [EObject current=null] : (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? ) ;
     public final EObject ruleEnumLiterals() throws RecognitionException {
         EObject current = null;
 
@@ -8466,28 +8623,29 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_elements_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:3169:28: ( (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? ) )
-            // InternalXtextGrammarTestLanguage.g:3170:1: (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:3126:2: ( (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? ) )
+            // InternalXtextGrammarTestLanguage.g:3127:2: (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? )
             {
-            // InternalXtextGrammarTestLanguage.g:3170:1: (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? )
-            // InternalXtextGrammarTestLanguage.g:3171:5: this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )?
+            // InternalXtextGrammarTestLanguage.g:3127:2: (this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )? )
+            // InternalXtextGrammarTestLanguage.g:3128:3: this_EnumLiteralDeclaration_0= ruleEnumLiteralDeclaration ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )?
             {
-             
-                    newCompositeNode(grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_24);
             this_EnumLiteralDeclaration_0=ruleEnumLiteralDeclaration();
 
             state._fsp--;
 
-             
-                    current = this_EnumLiteralDeclaration_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalXtextGrammarTestLanguage.g:3179:1: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )?
+
+            			current = this_EnumLiteralDeclaration_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalXtextGrammarTestLanguage.g:3136:3: ( () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+ )?
             int alt62=2;
             int LA62_0 = input.LA(1);
 
@@ -8496,20 +8654,20 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt62) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:3179:2: () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:3137:4: () (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+
                     {
-                    // InternalXtextGrammarTestLanguage.g:3179:2: ()
-                    // InternalXtextGrammarTestLanguage.g:3180:5: 
+                    // InternalXtextGrammarTestLanguage.g:3137:4: ()
+                    // InternalXtextGrammarTestLanguage.g:3138:5: 
                     {
 
-                            current = forceCreateModelElementAndAdd(
-                                grammarAccess.getEnumLiteralsAccess().getAlternativesElementsAction_1_0(),
-                                current);
-                        
+                    					current = forceCreateModelElementAndAdd(
+                    						grammarAccess.getEnumLiteralsAccess().getAlternativesElementsAction_1_0(),
+                    						current);
+                    				
 
                     }
 
-                    // InternalXtextGrammarTestLanguage.g:3185:2: (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+
+                    // InternalXtextGrammarTestLanguage.g:3144:4: (otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) ) )+
                     int cnt61=0;
                     loop61:
                     do {
@@ -8523,37 +8681,37 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
                         switch (alt61) {
                     	case 1 :
-                    	    // InternalXtextGrammarTestLanguage.g:3185:4: otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) )
+                    	    // InternalXtextGrammarTestLanguage.g:3145:5: otherlv_2= '|' ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) )
                     	    {
                     	    otherlv_2=(Token)match(input,29,FollowSets000.FOLLOW_3); 
 
-                    	        	newLeafNode(otherlv_2, grammarAccess.getEnumLiteralsAccess().getVerticalLineKeyword_1_1_0());
-                    	        
-                    	    // InternalXtextGrammarTestLanguage.g:3189:1: ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) )
-                    	    // InternalXtextGrammarTestLanguage.g:3190:1: (lv_elements_3_0= ruleEnumLiteralDeclaration )
+                    	    					newLeafNode(otherlv_2, grammarAccess.getEnumLiteralsAccess().getVerticalLineKeyword_1_1_0());
+                    	    				
+                    	    // InternalXtextGrammarTestLanguage.g:3149:5: ( (lv_elements_3_0= ruleEnumLiteralDeclaration ) )
+                    	    // InternalXtextGrammarTestLanguage.g:3150:6: (lv_elements_3_0= ruleEnumLiteralDeclaration )
                     	    {
-                    	    // InternalXtextGrammarTestLanguage.g:3190:1: (lv_elements_3_0= ruleEnumLiteralDeclaration )
-                    	    // InternalXtextGrammarTestLanguage.g:3191:3: lv_elements_3_0= ruleEnumLiteralDeclaration
+                    	    // InternalXtextGrammarTestLanguage.g:3150:6: (lv_elements_3_0= ruleEnumLiteralDeclaration )
+                    	    // InternalXtextGrammarTestLanguage.g:3151:7: lv_elements_3_0= ruleEnumLiteralDeclaration
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getEnumLiteralsAccess().getElementsEnumLiteralDeclarationParserRuleCall_1_1_1_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getEnumLiteralsAccess().getElementsEnumLiteralDeclarationParserRuleCall_1_1_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_24);
                     	    lv_elements_3_0=ruleEnumLiteralDeclaration();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getEnumLiteralsRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"elements",
-                    	            		lv_elements_3_0, 
-                    	            		"org.eclipse.xtext.XtextGrammarTestLanguage.EnumLiteralDeclaration");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getEnumLiteralsRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"elements",
+                    	    								lv_elements_3_0,
+                    	    								"org.eclipse.xtext.XtextGrammarTestLanguage.EnumLiteralDeclaration");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -8585,13 +8743,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8600,7 +8760,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleEnumLiteralDeclaration"
-    // InternalXtextGrammarTestLanguage.g:3215:1: entryRuleEnumLiteralDeclaration returns [EObject current=null] : iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF ;
+    // InternalXtextGrammarTestLanguage.g:3174:1: entryRuleEnumLiteralDeclaration returns [EObject current=null] : iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF ;
     public final EObject entryRuleEnumLiteralDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -8608,8 +8768,8 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalXtextGrammarTestLanguage.g:3216:2: (iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF )
-            // InternalXtextGrammarTestLanguage.g:3217:2: iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF
+            // InternalXtextGrammarTestLanguage.g:3174:63: (iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF )
+            // InternalXtextGrammarTestLanguage.g:3175:2: iv_ruleEnumLiteralDeclaration= ruleEnumLiteralDeclaration EOF
             {
              newCompositeNode(grammarAccess.getEnumLiteralDeclarationRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -8623,11 +8783,11 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -8636,7 +8796,7 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleEnumLiteralDeclaration"
-    // InternalXtextGrammarTestLanguage.g:3224:1: ruleEnumLiteralDeclaration returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? ) ;
+    // InternalXtextGrammarTestLanguage.g:3181:1: ruleEnumLiteralDeclaration returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? ) ;
     public final EObject ruleEnumLiteralDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -8645,37 +8805,38 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
         EObject lv_literal_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalXtextGrammarTestLanguage.g:3227:28: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? ) )
-            // InternalXtextGrammarTestLanguage.g:3228:1: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? )
+            // InternalXtextGrammarTestLanguage.g:3187:2: ( ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? ) )
+            // InternalXtextGrammarTestLanguage.g:3188:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? )
             {
-            // InternalXtextGrammarTestLanguage.g:3228:1: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? )
-            // InternalXtextGrammarTestLanguage.g:3228:2: ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )?
+            // InternalXtextGrammarTestLanguage.g:3188:2: ( ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )? )
+            // InternalXtextGrammarTestLanguage.g:3189:3: ( (otherlv_0= RULE_ID ) ) (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )?
             {
-            // InternalXtextGrammarTestLanguage.g:3228:2: ( (otherlv_0= RULE_ID ) )
-            // InternalXtextGrammarTestLanguage.g:3229:1: (otherlv_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:3189:3: ( (otherlv_0= RULE_ID ) )
+            // InternalXtextGrammarTestLanguage.g:3190:4: (otherlv_0= RULE_ID )
             {
-            // InternalXtextGrammarTestLanguage.g:3229:1: (otherlv_0= RULE_ID )
-            // InternalXtextGrammarTestLanguage.g:3230:3: otherlv_0= RULE_ID
+            // InternalXtextGrammarTestLanguage.g:3190:4: (otherlv_0= RULE_ID )
+            // InternalXtextGrammarTestLanguage.g:3191:5: otherlv_0= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getEnumLiteralDeclarationRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEnumLiteralDeclarationRule());
+            					}
+            				
             otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_47); 
 
-            		newLeafNode(otherlv_0, grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0()); 
-            	
+            					newLeafNode(otherlv_0, grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralCrossReference_0_0());
+            				
 
             }
 
 
             }
 
-            // InternalXtextGrammarTestLanguage.g:3241:2: (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )?
+            // InternalXtextGrammarTestLanguage.g:3202:3: (otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) ) )?
             int alt63=2;
             int LA63_0 = input.LA(1);
 
@@ -8684,37 +8845,37 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt63) {
                 case 1 :
-                    // InternalXtextGrammarTestLanguage.g:3241:4: otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) )
+                    // InternalXtextGrammarTestLanguage.g:3203:4: otherlv_1= '=' ( (lv_literal_2_0= ruleKeyword ) )
                     {
                     otherlv_1=(Token)match(input,34,FollowSets000.FOLLOW_11); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getEnumLiteralDeclarationAccess().getEqualsSignKeyword_1_0());
-                        
-                    // InternalXtextGrammarTestLanguage.g:3245:1: ( (lv_literal_2_0= ruleKeyword ) )
-                    // InternalXtextGrammarTestLanguage.g:3246:1: (lv_literal_2_0= ruleKeyword )
+                    				newLeafNode(otherlv_1, grammarAccess.getEnumLiteralDeclarationAccess().getEqualsSignKeyword_1_0());
+                    			
+                    // InternalXtextGrammarTestLanguage.g:3207:4: ( (lv_literal_2_0= ruleKeyword ) )
+                    // InternalXtextGrammarTestLanguage.g:3208:5: (lv_literal_2_0= ruleKeyword )
                     {
-                    // InternalXtextGrammarTestLanguage.g:3246:1: (lv_literal_2_0= ruleKeyword )
-                    // InternalXtextGrammarTestLanguage.g:3247:3: lv_literal_2_0= ruleKeyword
+                    // InternalXtextGrammarTestLanguage.g:3208:5: (lv_literal_2_0= ruleKeyword )
+                    // InternalXtextGrammarTestLanguage.g:3209:6: lv_literal_2_0= ruleKeyword
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getEnumLiteralDeclarationAccess().getLiteralKeywordParserRuleCall_1_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getEnumLiteralDeclarationAccess().getLiteralKeywordParserRuleCall_1_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_literal_2_0=ruleKeyword();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getEnumLiteralDeclarationRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"literal",
-                            		lv_literal_2_0, 
-                            		"org.eclipse.xtext.XtextGrammarTestLanguage.Keyword");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getEnumLiteralDeclarationRule());
+                    						}
+                    						set(
+                    							current,
+                    							"literal",
+                    							lv_literal_2_0,
+                    							"org.eclipse.xtext.XtextGrammarTestLanguage.Keyword");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -8733,13 +8894,15 @@ public class InternalXtextGrammarTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

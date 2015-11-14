@@ -4,36 +4,37 @@
 package org.eclipse.xtext.generator.ecore.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalSuperTestLanguageParser;
 import org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class SuperTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class SuperTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private SuperTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalSuperTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalSuperTestLanguageParser(stream, getGrammarAccess());
+	protected InternalSuperTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalSuperTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "SuperMain";
 	}
-	
+
 	public SuperTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(SuperTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

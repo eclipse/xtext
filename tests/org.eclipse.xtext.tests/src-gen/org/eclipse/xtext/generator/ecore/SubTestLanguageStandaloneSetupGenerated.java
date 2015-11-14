@@ -3,22 +3,21 @@
  */
 package org.eclipse.xtext.generator.ecore;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-/**
- * Generated from StandaloneSetup.xpt!
- */
 @SuppressWarnings("all")
 public class SubTestLanguageStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.xtext.generator.ecore.SuperTestLanguageStandaloneSetup.doSetup();
+		SuperTestLanguageStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -26,19 +25,17 @@ public class SubTestLanguageStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.generator.ecore.SubTestLanguageRuntimeModule());
+		return Guice.createInjector(new SubTestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
-
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("subtestlanguage", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("subtestlanguage", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage")) {
+			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage", SubPackagePackage.eINSTANCE);
+		}
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage", org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage.eINSTANCE);
-	}
-
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("subtestlanguage", resourceFactory);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("subtestlanguage", serviceProvider);
 	}
 }
