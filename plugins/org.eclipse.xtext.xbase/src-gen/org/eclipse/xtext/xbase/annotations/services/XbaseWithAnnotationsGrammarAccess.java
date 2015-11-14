@@ -367,12 +367,16 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	private final Grammar grammar;
 	
 	private final XbaseGrammarAccess gaXbase;
+	
+	private final XtypeGrammarAccess gaXtype;
 
 	@Inject
 	public XbaseWithAnnotationsGrammarAccess(GrammarProvider grammarProvider,
-			XbaseGrammarAccess gaXbase) {
+			XbaseGrammarAccess gaXbase,
+			XtypeGrammarAccess gaXtype) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaXbase = gaXbase;
+		this.gaXtype = gaXtype;
 		this.pXAnnotation = new XAnnotationElements();
 		this.pXAnnotationElementValuePair = new XAnnotationElementValuePairElements();
 		this.pXAnnotationElementValueOrCommaList = new XAnnotationElementValueOrCommaListElements();
@@ -404,6 +408,10 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	
 	public XbaseGrammarAccess getXbaseGrammarAccess() {
 		return gaXbase;
+	}
+	
+	public XtypeGrammarAccess getXtypeGrammarAccess() {
+		return gaXtype;
 	}
 
 	
@@ -1174,7 +1182,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//	JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
 	//	| XFunctionTypeRef;
 	public XtypeGrammarAccess.JvmTypeReferenceElements getJvmTypeReferenceAccess() {
-		return gaXbase.getJvmTypeReferenceAccess();
+		return gaXtype.getJvmTypeReferenceAccess();
 	}
 	
 	public ParserRule getJvmTypeReferenceRule() {
@@ -1184,7 +1192,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//ArrayBrackets:
 	//	'[' ']';
 	public XtypeGrammarAccess.ArrayBracketsElements getArrayBracketsAccess() {
-		return gaXbase.getArrayBracketsAccess();
+		return gaXtype.getArrayBracketsAccess();
 	}
 	
 	public ParserRule getArrayBracketsRule() {
@@ -1194,7 +1202,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//XFunctionTypeRef:
 	//	('(' (paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)*)? ')')? '=>' returnType=JvmTypeReference;
 	public XtypeGrammarAccess.XFunctionTypeRefElements getXFunctionTypeRefAccess() {
-		return gaXbase.getXFunctionTypeRefAccess();
+		return gaXtype.getXFunctionTypeRefAccess();
 	}
 	
 	public ParserRule getXFunctionTypeRefRule() {
@@ -1206,7 +1214,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//	arguments+=JvmArgumentTypeReference)* '>' (=> ({JvmInnerTypeReference.outer=current} '.') type=[JvmType|ValidID] (=>
 	//	'<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?)*)?;
 	public XtypeGrammarAccess.JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
-		return gaXbase.getJvmParameterizedTypeReferenceAccess();
+		return gaXtype.getJvmParameterizedTypeReferenceAccess();
 	}
 	
 	public ParserRule getJvmParameterizedTypeReferenceRule() {
@@ -1216,7 +1224,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//JvmArgumentTypeReference JvmTypeReference:
 	//	JvmTypeReference | JvmWildcardTypeReference
 	public XtypeGrammarAccess.JvmArgumentTypeReferenceElements getJvmArgumentTypeReferenceAccess() {
-		return gaXbase.getJvmArgumentTypeReferenceAccess();
+		return gaXtype.getJvmArgumentTypeReferenceAccess();
 	}
 	
 	public ParserRule getJvmArgumentTypeReferenceRule() {
@@ -1227,7 +1235,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//	{JvmWildcardTypeReference} '?' (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*
 	//	| constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*)?;
 	public XtypeGrammarAccess.JvmWildcardTypeReferenceElements getJvmWildcardTypeReferenceAccess() {
-		return gaXbase.getJvmWildcardTypeReferenceAccess();
+		return gaXtype.getJvmWildcardTypeReferenceAccess();
 	}
 	
 	public ParserRule getJvmWildcardTypeReferenceRule() {
@@ -1237,7 +1245,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//JvmUpperBound:
 	//	'extends' typeReference=JvmTypeReference;
 	public XtypeGrammarAccess.JvmUpperBoundElements getJvmUpperBoundAccess() {
-		return gaXbase.getJvmUpperBoundAccess();
+		return gaXtype.getJvmUpperBoundAccess();
 	}
 	
 	public ParserRule getJvmUpperBoundRule() {
@@ -1247,7 +1255,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//JvmUpperBoundAnded JvmUpperBound:
 	//	'&' typeReference=JvmTypeReference
 	public XtypeGrammarAccess.JvmUpperBoundAndedElements getJvmUpperBoundAndedAccess() {
-		return gaXbase.getJvmUpperBoundAndedAccess();
+		return gaXtype.getJvmUpperBoundAndedAccess();
 	}
 	
 	public ParserRule getJvmUpperBoundAndedRule() {
@@ -1257,7 +1265,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//JvmLowerBound:
 	//	'super' typeReference=JvmTypeReference;
 	public XtypeGrammarAccess.JvmLowerBoundElements getJvmLowerBoundAccess() {
-		return gaXbase.getJvmLowerBoundAccess();
+		return gaXtype.getJvmLowerBoundAccess();
 	}
 	
 	public ParserRule getJvmLowerBoundRule() {
@@ -1267,7 +1275,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//JvmLowerBoundAnded JvmLowerBound:
 	//	'&' typeReference=JvmTypeReference
 	public XtypeGrammarAccess.JvmLowerBoundAndedElements getJvmLowerBoundAndedAccess() {
-		return gaXbase.getJvmLowerBoundAndedAccess();
+		return gaXtype.getJvmLowerBoundAndedAccess();
 	}
 	
 	public ParserRule getJvmLowerBoundAndedRule() {
@@ -1277,7 +1285,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//JvmTypeParameter:
 	//	name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?;
 	public XtypeGrammarAccess.JvmTypeParameterElements getJvmTypeParameterAccess() {
-		return gaXbase.getJvmTypeParameterAccess();
+		return gaXtype.getJvmTypeParameterAccess();
 	}
 	
 	public ParserRule getJvmTypeParameterRule() {
@@ -1287,7 +1295,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//QualifiedNameWithWildcard:
 	//	super::QualifiedName '.' '*';
 	public XtypeGrammarAccess.QualifiedNameWithWildcardElements getQualifiedNameWithWildcardAccess() {
-		return gaXbase.getQualifiedNameWithWildcardAccess();
+		return gaXtype.getQualifiedNameWithWildcardAccess();
 	}
 	
 	public ParserRule getQualifiedNameWithWildcardRule() {
@@ -1297,7 +1305,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//ValidID:
 	//	ID;
 	public XtypeGrammarAccess.ValidIDElements getValidIDAccess() {
-		return gaXbase.getValidIDAccess();
+		return gaXtype.getValidIDAccess();
 	}
 	
 	public ParserRule getValidIDRule() {
@@ -1307,7 +1315,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//XImportSection:
 	//	importDeclarations+=XImportDeclaration+;
 	public XtypeGrammarAccess.XImportSectionElements getXImportSectionAccess() {
-		return gaXbase.getXImportSectionAccess();
+		return gaXtype.getXImportSectionAccess();
 	}
 	
 	public ParserRule getXImportSectionRule() {
@@ -1319,7 +1327,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//	(wildcard?='*' | memberName=ValidID) | importedType=[JvmDeclaredType|super::QualifiedName] |
 	//	importedNamespace=QualifiedNameWithWildcard) ';'?;
 	public XtypeGrammarAccess.XImportDeclarationElements getXImportDeclarationAccess() {
-		return gaXbase.getXImportDeclarationAccess();
+		return gaXtype.getXImportDeclarationAccess();
 	}
 	
 	public ParserRule getXImportDeclarationRule() {
@@ -1329,7 +1337,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//QualifiedNameInStaticImport:
 	//	(ValidID '.')+;
 	public XtypeGrammarAccess.QualifiedNameInStaticImportElements getQualifiedNameInStaticImportAccess() {
-		return gaXbase.getQualifiedNameInStaticImportAccess();
+		return gaXtype.getQualifiedNameInStaticImportAccess();
 	}
 	
 	public ParserRule getQualifiedNameInStaticImportRule() {
@@ -1339,37 +1347,37 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '$' | '_') ('a'..'z' | 'A'..'Z' | '$' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
-		return gaXbase.getIDRule();
+		return gaXtype.getIDRule();
 	}
 	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"'? |
 	//	"'" ('\\' . | !('\\' | "'"))* "'"?;
 	public TerminalRule getSTRINGRule() {
-		return gaXbase.getSTRINGRule();
+		return gaXtype.getSTRINGRule();
 	}
 	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaXbase.getML_COMMENTRule();
+		return gaXtype.getML_COMMENTRule();
 	}
 	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaXbase.getSL_COMMENTRule();
+		return gaXtype.getSL_COMMENTRule();
 	}
 	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaXbase.getWSRule();
+		return gaXtype.getWSRule();
 	}
 	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaXbase.getANY_OTHERRule();
+		return gaXtype.getANY_OTHERRule();
 	}
 }
