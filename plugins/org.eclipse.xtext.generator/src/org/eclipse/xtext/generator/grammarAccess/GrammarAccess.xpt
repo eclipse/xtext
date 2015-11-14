@@ -37,7 +37,7 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
-«FOREACH allUsedGrammars().reject(g|g.rules.typeSelect(ParserRule).isEmpty && !usedGrammars.contains(g)) AS usedGrammar-»
+«FOREACH effectivelyUsedGrammars() AS usedGrammar-»
 import «usedGrammar.gaFQName()»;
 «ENDFOREACH-»
 
@@ -51,16 +51,16 @@ import «usedGrammar.gaFQName()»;
 	«EXPAND cache FOREACH rules-»
 	
 	private final Grammar grammar;
-«FOREACH usedGrammars AS g-»
+«FOREACH effectivelyUsedGrammars() AS g-»
 
 	private final «g.gaSimpleName()» «g.gaGrammarAccessLocalVarName()»;
 «ENDFOREACH-»
 
 	@Inject
-	public «gaSimpleName()»(GrammarProvider grammarProvider«FOREACH usedGrammars AS g-»,
+	public «gaSimpleName()»(GrammarProvider grammarProvider«FOREACH effectivelyUsedGrammars() AS g-»,
 		«g.gaSimpleName()» «g.gaGrammarAccessLocalVarName()»«ENDFOREACH») {
 		this.grammar = internalFindGrammar(grammarProvider);
-«FOREACH usedGrammars AS g-»
+«FOREACH effectivelyUsedGrammars() AS g-»
 		this.«g.gaGrammarAccessLocalVarName()» = «g.gaGrammarAccessLocalVarName()»;
 «ENDFOREACH-»
 		«EXPAND initializer FOREACH rules-»
@@ -87,7 +87,7 @@ import «usedGrammar.gaFQName()»;
 		return grammar;
 	}
 	
-«FOREACH usedGrammars AS g-»
+«FOREACH effectivelyUsedGrammars() AS g-»
 
 	public «g.gaSimpleName()» get«g.gaSimpleName()»() {
 		return «g.gaGrammarAccessLocalVarName()»;
@@ -177,7 +177,7 @@ import «usedGrammar.gaFQName()»;
 	}
 «ELSE-»	
 	public «containingGrammar().gaSimpleName()».«gaBaseRuleAccessorClassName()» «gaElementsAccessor()» {
-		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaBaseElementsAccessor()»;
+		return «containingGrammar().gaGrammarAccessLocalVarName()».«gaBaseElementsAccessor()»;
 	}
 «ENDIF-»
 	
@@ -194,7 +194,7 @@ import «usedGrammar.gaFQName()»;
 	}
 «ELSE-»	
 	public «containingGrammar().gaSimpleName()».«gaBaseRuleAccessorClassName()» «gaElementsAccessor()» {
-		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaBaseElementsAccessor()»;
+		return «containingGrammar().gaGrammarAccessLocalVarName()».«gaBaseElementsAccessor()»;
 	}
 «ENDIF-»
 	
@@ -209,7 +209,7 @@ import «usedGrammar.gaFQName()»;
 «IF containingGrammar() == original-»
 		return «gaRuleAccessorLocalVarName()»;
 «ELSE-»
-		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaBaseRuleAccessor()»;
+		return «containingGrammar().gaGrammarAccessLocalVarName()».«gaBaseRuleAccessor()»;
 «ENDIF-»
 	} 
 «ENDDEFINE»
