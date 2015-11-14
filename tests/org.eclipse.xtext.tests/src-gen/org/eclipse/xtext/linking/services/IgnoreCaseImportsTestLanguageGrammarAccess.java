@@ -13,6 +13,7 @@ import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
@@ -71,11 +72,15 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 
 	private final AbstractIgnoreCaseLinkingTestLanguageGrammarAccess gaAbstractIgnoreCaseLinkingTestLanguage;
 
+	private final TerminalsGrammarAccess gaTerminals;
+
 	@Inject
 	public IgnoreCaseImportsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		AbstractIgnoreCaseLinkingTestLanguageGrammarAccess gaAbstractIgnoreCaseLinkingTestLanguage) {
+		AbstractIgnoreCaseLinkingTestLanguageGrammarAccess gaAbstractIgnoreCaseLinkingTestLanguage,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaAbstractIgnoreCaseLinkingTestLanguage = gaAbstractIgnoreCaseLinkingTestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
 		this.pImport = new ImportElements();
 	}
@@ -104,6 +109,10 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 
 	public AbstractIgnoreCaseLinkingTestLanguageGrammarAccess getAbstractIgnoreCaseLinkingTestLanguageGrammarAccess() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage;
+	}
+
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
 	}
 
 	
@@ -143,43 +152,43 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
-		return gaAbstractIgnoreCaseLinkingTestLanguage.getIDRule();
+		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaAbstractIgnoreCaseLinkingTestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaAbstractIgnoreCaseLinkingTestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaAbstractIgnoreCaseLinkingTestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaAbstractIgnoreCaseLinkingTestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaAbstractIgnoreCaseLinkingTestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaAbstractIgnoreCaseLinkingTestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

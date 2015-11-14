@@ -13,6 +13,7 @@ import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLanguageGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
@@ -37,11 +38,15 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 
 	private final UnorderedGroupsTestLanguageGrammarAccess gaUnorderedGroupsTestLanguage;
 
+	private final TerminalsGrammarAccess gaTerminals;
+
 	@Inject
 	public ExUnorderedGroupsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		UnorderedGroupsTestLanguageGrammarAccess gaUnorderedGroupsTestLanguage) {
+		UnorderedGroupsTestLanguageGrammarAccess gaUnorderedGroupsTestLanguage,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaUnorderedGroupsTestLanguage = gaUnorderedGroupsTestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pDelegateModel = new DelegateModelElements();
 	}
 	
@@ -69,6 +74,10 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 
 	public UnorderedGroupsTestLanguageGrammarAccess getUnorderedGroupsTestLanguageGrammarAccess() {
 		return gaUnorderedGroupsTestLanguage;
+	}
+
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
 	}
 
 	
@@ -144,43 +153,43 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
-		return gaUnorderedGroupsTestLanguage.getIDRule();
+		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaUnorderedGroupsTestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaUnorderedGroupsTestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaUnorderedGroupsTestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaUnorderedGroupsTestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaUnorderedGroupsTestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaUnorderedGroupsTestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }
