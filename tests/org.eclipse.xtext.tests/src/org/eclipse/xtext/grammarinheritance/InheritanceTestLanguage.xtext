@@ -19,3 +19,5 @@ Model :
 Element :
 	"element" name=ID
 ;
+
+terminal ID: ('a'..'z')+;
