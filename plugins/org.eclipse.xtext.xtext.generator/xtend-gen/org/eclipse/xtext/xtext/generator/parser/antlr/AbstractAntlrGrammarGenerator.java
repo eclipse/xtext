@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.parser.antlr;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +32,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -184,9 +182,6 @@ public abstract class AbstractAntlrGrammarGenerator {
     CharSequence _compileKeywordRules = this.compileKeywordRules(it, options);
     _builder.append(_compileKeywordRules, "");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("// Rules duplicated to allow inter-rule references");
-    _builder.newLine();
     CharSequence _compileTerminalRules = this.compileTerminalRules(it, options);
     _builder.append(_compileTerminalRules, "");
     _builder.newLineIfNotEmpty();
@@ -475,66 +470,6 @@ public abstract class AbstractAntlrGrammarGenerator {
       };
       final List<String> allKeywords = IterableExtensions.<String, Integer>sortBy(_sort, _function);
       final List<TerminalRule> allTerminalRules = GrammarUtil.allTerminalRules(it);
-      final ArrayList<String> synthetic_kw_alternatives = CollectionLiterals.<String>newArrayList();
-      Iterable<Pair<Integer, String>> _indexed = IterableExtensions.<String>indexed(allKeywords);
-      final Function1<Pair<Integer, String>, String> _function_1 = new Function1<Pair<Integer, String>, String>() {
-        @Override
-        public String apply(final Pair<Integer, String> it) {
-          String _value = it.getValue();
-          final String ruleName = AbstractAntlrGrammarGenerator.this.keywordHelper.getRuleName(_value);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("(FRAGMENT_");
-          _builder.append(ruleName, "");
-          _builder.append(")=> FRAGMENT_");
-          _builder.append(ruleName, "");
-          _builder.append(" {$type = ");
-          _builder.append(ruleName, "");
-          _builder.append("; }");
-          return _builder.toString();
-        }
-      };
-      Iterable<String> _map = IterableExtensions.<Pair<Integer, String>, String>map(_indexed, _function_1);
-      Iterables.<String>addAll(synthetic_kw_alternatives, _map);
-      Iterable<Pair<Integer, TerminalRule>> _indexed_1 = IterableExtensions.<TerminalRule>indexed(allTerminalRules);
-      final Function1<Pair<Integer, TerminalRule>, String> _function_2 = new Function1<Pair<Integer, TerminalRule>, String>() {
-        @Override
-        public String apply(final Pair<Integer, TerminalRule> it) {
-          boolean _and = false;
-          TerminalRule _value = it.getValue();
-          boolean _isSyntheticTerminalRule = AbstractAntlrGrammarGenerator.this._syntheticTerminalDetector.isSyntheticTerminalRule(_value);
-          boolean _not = (!_isSyntheticTerminalRule);
-          if (!_not) {
-            _and = false;
-          } else {
-            TerminalRule _value_1 = it.getValue();
-            boolean _isFragment = _value_1.isFragment();
-            boolean _not_1 = (!_isFragment);
-            _and = _not_1;
-          }
-          if (_and) {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("(FRAGMENT_");
-            TerminalRule _value_2 = it.getValue();
-            String _ruleName = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_2);
-            _builder.append(_ruleName, "");
-            _builder.append(")=> FRAGMENT_");
-            TerminalRule _value_3 = it.getValue();
-            String _ruleName_1 = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_3);
-            _builder.append(_ruleName_1, "");
-            _builder.append(" {$type = ");
-            TerminalRule _value_4 = it.getValue();
-            String _ruleName_2 = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_4);
-            _builder.append(_ruleName_2, "");
-            _builder.append("; }");
-            return _builder.toString();
-          }
-          return null;
-        }
-      };
-      Iterable<String> _map_1 = IterableExtensions.<Pair<Integer, TerminalRule>, String>map(_indexed_1, _function_2);
-      Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map_1);
-      List<String> _list = IterableExtensions.<String>toList(_filterNull);
-      synthetic_kw_alternatives.addAll(_list);
       StringConcatenation _builder = new StringConcatenation();
       {
         boolean _isBacktrackLexer = options.isBacktrackLexer();
@@ -542,39 +477,105 @@ public abstract class AbstractAntlrGrammarGenerator {
           _builder.append("SYNTHETIC_ALL_KEYWORDS :");
           _builder.newLine();
           {
-            boolean _hasElements = false;
-            for(final String kw : synthetic_kw_alternatives) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate(" |", "\t");
-              }
-              _builder.append("\t");
-              _builder.append(kw, "\t");
+            Iterable<Pair<Integer, String>> _indexed = IterableExtensions.<String>indexed(allKeywords);
+            for(final Pair<Integer, String> kw : _indexed) {
+              _builder.append("(FRAGMENT_");
+              String _value = kw.getValue();
+              String _ruleName = this.keywordHelper.getRuleName(_value);
+              _builder.append(_ruleName, "");
+              _builder.append(")=> FRAGMENT_");
+              String _value_1 = kw.getValue();
+              String _ruleName_1 = this.keywordHelper.getRuleName(_value_1);
+              _builder.append(_ruleName_1, "");
+              _builder.append(" {$type = ");
+              String _value_2 = kw.getValue();
+              String _ruleName_2 = this.keywordHelper.getRuleName(_value_2);
+              _builder.append(_ruleName_2, "");
+              _builder.append("; } ");
               _builder.newLineIfNotEmpty();
+              {
+                boolean _or = false;
+                Integer _key = kw.getKey();
+                int _size = allKeywords.size();
+                boolean _notEquals = ((_key).intValue() != _size);
+                if (_notEquals) {
+                  _or = true;
+                } else {
+                  List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(it);
+                  boolean _isEmpty = _allTerminalRules.isEmpty();
+                  boolean _not = (!_isEmpty);
+                  _or = _not;
+                }
+                if (_or) {
+                  _builder.append("|");
+                }
+              }
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          {
+            Iterable<Pair<Integer, TerminalRule>> _indexed_1 = IterableExtensions.<TerminalRule>indexed(allTerminalRules);
+            for(final Pair<Integer, TerminalRule> rule : _indexed_1) {
+              {
+                boolean _and = false;
+                TerminalRule _value_3 = rule.getValue();
+                boolean _isSyntheticTerminalRule = this._syntheticTerminalDetector.isSyntheticTerminalRule(_value_3);
+                boolean _not_1 = (!_isSyntheticTerminalRule);
+                if (!_not_1) {
+                  _and = false;
+                } else {
+                  TerminalRule _value_4 = rule.getValue();
+                  boolean _isFragment = _value_4.isFragment();
+                  boolean _not_2 = (!_isFragment);
+                  _and = _not_2;
+                }
+                if (_and) {
+                  _builder.append("(FRAGMENT_");
+                  TerminalRule _value_5 = rule.getValue();
+                  String _ruleName_3 = this._grammarAccessExtensions.ruleName(_value_5);
+                  _builder.append(_ruleName_3, "");
+                  _builder.append(")=> FRAGMENT_");
+                  TerminalRule _value_6 = rule.getValue();
+                  String _ruleName_4 = this._grammarAccessExtensions.ruleName(_value_6);
+                  _builder.append(_ruleName_4, "");
+                  _builder.append(" {$type = ");
+                  TerminalRule _value_7 = rule.getValue();
+                  String _ruleName_5 = this._grammarAccessExtensions.ruleName(_value_7);
+                  _builder.append(_ruleName_5, "");
+                  _builder.append("; }");
+                  _builder.newLineIfNotEmpty();
+                  {
+                    Integer _key_1 = rule.getKey();
+                    int _size_1 = allTerminalRules.size();
+                    boolean _notEquals_1 = ((_key_1).intValue() != _size_1);
+                    if (_notEquals_1) {
+                      _builder.append("|");
+                    }
+                  }
+                  _builder.newLineIfNotEmpty();
+                }
+              }
             }
           }
           _builder.append(";");
           _builder.newLine();
-          _builder.newLine();
           {
             for(final String kw_1 : allKeywords) {
               _builder.append("fragment FRAGMENT_");
-              String _ruleName = this.keywordHelper.getRuleName(kw_1);
-              _builder.append(_ruleName, "");
+              String _ruleName_6 = this.keywordHelper.getRuleName(kw_1);
+              _builder.append(_ruleName_6, "");
               _builder.append(" : \'");
               String _antlrString = AntlrGrammarGenUtil.toAntlrString(kw_1);
               _builder.append(_antlrString, "");
               _builder.append("\';");
               _builder.newLineIfNotEmpty();
-              _builder.newLine();
             }
           }
         } else {
           {
-            for(final String rule : allKeywords) {
+            for(final String rule_1 : allKeywords) {
               _builder.newLine();
-              CharSequence _compileRule = this.compileRule(rule, it, options);
+              CharSequence _compileRule = this.compileRule(rule_1, it, options);
               _builder.append(_compileRule, "");
               _builder.newLineIfNotEmpty();
             }

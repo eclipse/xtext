@@ -3,22 +3,20 @@
  */
 package org.eclipse.xtext.generator.ecore.services;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
 import java.util.List;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
+
+import org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess;
 
 @Singleton
 public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+	
 	
 	public class SubMainElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.generator.ecore.SubTestLanguage.SubMain");
@@ -33,28 +31,29 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//SubMain:
 		//	"{" superMains+=SuperMain "}" another=AnotherSuperMain?;
 		@Override public ParserRule getRule() { return rule; }
-		
+
 		//"{" superMains+=SuperMain "}" another=AnotherSuperMain?
 		public Group getGroup() { return cGroup; }
-		
+
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
-		
+
 		//superMains+=SuperMain
 		public Assignment getSuperMainsAssignment_1() { return cSuperMainsAssignment_1; }
-		
+
 		//SuperMain
 		public RuleCall getSuperMainsSuperMainParserRuleCall_1_0() { return cSuperMainsSuperMainParserRuleCall_1_0; }
-		
+
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
-		
+
 		//another=AnotherSuperMain?
 		public Assignment getAnotherAssignment_3() { return cAnotherAssignment_3; }
-		
+
 		//AnotherSuperMain
 		public RuleCall getAnotherAnotherSuperMainParserRuleCall_3_0() { return cAnotherAnotherSuperMainParserRuleCall_3_0; }
 	}
+
 	public class AnotherSuperMainElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.generator.ecore.SubTestLanguage.AnotherSuperMain");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -65,16 +64,16 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//AnotherSuperMain:
 		//	"ups" name=ID;
 		@Override public ParserRule getRule() { return rule; }
-		
+
 		//"ups" name=ID
 		public Group getGroup() { return cGroup; }
-		
+
 		//"ups"
 		public Keyword getUpsKeyword_0() { return cUpsKeyword_0; }
-		
+
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
+
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
@@ -84,12 +83,12 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final AnotherSuperMainElements pAnotherSuperMain;
 	
 	private final Grammar grammar;
-	
+
 	private final SuperTestLanguageGrammarAccess gaSuperTestLanguage;
 
 	@Inject
 	public SubTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-			SuperTestLanguageGrammarAccess gaSuperTestLanguage) {
+		SuperTestLanguageGrammarAccess gaSuperTestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaSuperTestLanguage = gaSuperTestLanguage;
 		this.pSubMain = new SubMainElements();
@@ -117,7 +116,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+
 	public SuperTestLanguageGrammarAccess getSuperTestLanguageGrammarAccess() {
 		return gaSuperTestLanguage;
 	}
@@ -132,7 +131,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getSubMainRule() {
 		return getSubMainAccess().getRule();
 	}
-	
+
 	//AnotherSuperMain:
 	//	"ups" name=ID;
 	public AnotherSuperMainElements getAnotherSuperMainAccess() {
@@ -142,7 +141,7 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getAnotherSuperMainRule() {
 		return getAnotherSuperMainAccess().getRule();
 	}
-	
+
 	//SuperMain:
 	//	"super" name=ID;
 	public SuperTestLanguageGrammarAccess.SuperMainElements getSuperMainAccess() {
@@ -152,47 +151,47 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getSuperMainRule() {
 		return getSuperMainAccess().getRule();
 	}
-	
+
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaSuperTestLanguage.getIDRule();
-	}
-	
+	} 
+
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaSuperTestLanguage.getINTRule();
-	}
-	
+	} 
+
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaSuperTestLanguage.getSTRINGRule();
-	}
-	
+	} 
+
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaSuperTestLanguage.getML_COMMENTRule();
-	}
-	
+	} 
+
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaSuperTestLanguage.getSL_COMMENTRule();
-	}
-	
+	} 
+
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaSuperTestLanguage.getWSRule();
-	}
-	
+	} 
+
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaSuperTestLanguage.getANY_OTHERRule();
-	}
+	} 
 }

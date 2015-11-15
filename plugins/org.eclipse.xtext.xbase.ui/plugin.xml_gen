@@ -947,7 +947,7 @@
 	        point="org.eclipse.ui.ide.markerResolution">
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.xbase.ui.xbasewithannotations.check.fast">
+	        markerType="org.eclipse.xtext.xbase.annotations.ui.xbasewithannotations.check.fast">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -955,7 +955,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.xbase.ui.xbasewithannotations.check.normal">
+	        markerType="org.eclipse.xtext.xbase.annotations.ui.xbasewithannotations.check.normal">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -963,7 +963,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.xbase.ui.xbasewithannotations.check.expensive">
+	        markerType="org.eclipse.xtext.xbase.annotations.ui.xbasewithannotations.check.expensive">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">

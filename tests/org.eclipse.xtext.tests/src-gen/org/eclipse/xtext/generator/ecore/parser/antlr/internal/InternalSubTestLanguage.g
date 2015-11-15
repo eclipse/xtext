@@ -5,6 +5,7 @@ grammar InternalSubTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {
@@ -16,7 +17,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.generator.ecore.parser.antlr.internal;
+package org.eclipse.xtext.generator.ecore.parser.antlr.internal; 
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -34,178 +35,184 @@ import org.eclipse.xtext.generator.ecore.services.SubTestLanguageGrammarAccess;
 @parser::members {
 
  	private SubTestLanguageGrammarAccess grammarAccess;
-
+ 	
     public InternalSubTestLanguageParser(TokenStream input, SubTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-
+    
     @Override
     protected String getFirstRuleName() {
-    	return "SubMain";
+    	return "SubMain";	
    	}
-
+   	
    	@Override
    	protected SubTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
-
 }
 
-@rulecatch {
-    catch (RecognitionException re) {
-        recover(input,re);
+@rulecatch { 
+    catch (RecognitionException re) { 
+        recover(input,re); 
         appendSkippedTokens();
-    }
+    } 
 }
+
+
+
 
 // Entry rule entryRuleSubMain
-entryRuleSubMain returns [EObject current=null]:
+entryRuleSubMain returns [EObject current=null] 
+	:
 	{ newCompositeNode(grammarAccess.getSubMainRule()); }
-	iv_ruleSubMain=ruleSubMain
-	{ $current=$iv_ruleSubMain.current; }
-	EOF;
+	 iv_ruleSubMain=ruleSubMain 
+	 { $current=$iv_ruleSubMain.current; } 
+	 EOF 
+;
 
 // Rule SubMain
-ruleSubMain returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='{'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getSubMainAccess().getLeftCurlyBracketKeyword_0());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getSubMainAccess().getSuperMainsSuperMainParserRuleCall_1_0());
-				}
-				lv_superMains_1_0=ruleSuperMain
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getSubMainRule());
-					}
-					add(
-						$current,
-						"superMains",
-						lv_superMains_1_0,
-						"org.eclipse.xtext.generator.ecore.SuperTestLanguage.SuperMain");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_2='}'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getSubMainAccess().getRightCurlyBracketKeyword_2());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getSubMainAccess().getAnotherAnotherSuperMainParserRuleCall_3_0());
-				}
-				lv_another_3_0=ruleAnotherSuperMain
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getSubMainRule());
-					}
-					set(
-						$current,
-						"another",
-						lv_another_3_0,
-						"org.eclipse.xtext.generator.ecore.SubTestLanguage.AnotherSuperMain");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-	)
+ruleSubMain returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='{' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getSubMainAccess().getLeftCurlyBracketKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getSubMainAccess().getSuperMainsSuperMainParserRuleCall_1_0()); 
+	    }
+		lv_superMains_1_0=ruleSuperMain		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSubMainRule());
+	        }
+       		add(
+       			$current, 
+       			"superMains",
+        		lv_superMains_1_0, 
+        		"org.eclipse.xtext.generator.ecore.SuperTestLanguage.SuperMain");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_2='}' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getSubMainAccess().getRightCurlyBracketKeyword_2());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getSubMainAccess().getAnotherAnotherSuperMainParserRuleCall_3_0()); 
+	    }
+		lv_another_3_0=ruleAnotherSuperMain		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSubMainRule());
+	        }
+       		set(
+       			$current, 
+       			"another",
+        		lv_another_3_0, 
+        		"org.eclipse.xtext.generator.ecore.SubTestLanguage.AnotherSuperMain");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?)
 ;
+
+
+
+
 
 // Entry rule entryRuleAnotherSuperMain
-entryRuleAnotherSuperMain returns [EObject current=null]:
+entryRuleAnotherSuperMain returns [EObject current=null] 
+	:
 	{ newCompositeNode(grammarAccess.getAnotherSuperMainRule()); }
-	iv_ruleAnotherSuperMain=ruleAnotherSuperMain
-	{ $current=$iv_ruleAnotherSuperMain.current; }
-	EOF;
+	 iv_ruleAnotherSuperMain=ruleAnotherSuperMain 
+	 { $current=$iv_ruleAnotherSuperMain.current; } 
+	 EOF 
+;
 
 // Rule AnotherSuperMain
-ruleAnotherSuperMain returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='ups'
+ruleAnotherSuperMain returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='ups' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getAnotherSuperMainAccess().getUpsKeyword_0());
+    }
+(
+(
+		lv_name_1_0=RULE_ID
 		{
-			newLeafNode(otherlv_0, grammarAccess.getAnotherSuperMainAccess().getUpsKeyword_0());
+			newLeafNode(lv_name_1_0, grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
-		(
-			(
-				lv_name_1_0=RULE_ID
-				{
-					newLeafNode(lv_name_1_0, grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getAnotherSuperMainRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_1_0,
-						"org.eclipse.xtext.common.Terminals.ID");
-				}
-			)
-		)
-	)
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getAnotherSuperMainRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+))
 ;
+
+
+
+
 
 // Entry rule entryRuleSuperMain
-entryRuleSuperMain returns [EObject current=null]:
+entryRuleSuperMain returns [EObject current=null] 
+	:
 	{ newCompositeNode(grammarAccess.getSuperMainRule()); }
-	iv_ruleSuperMain=ruleSuperMain
-	{ $current=$iv_ruleSuperMain.current; }
-	EOF;
+	 iv_ruleSuperMain=ruleSuperMain 
+	 { $current=$iv_ruleSuperMain.current; } 
+	 EOF 
+;
 
 // Rule SuperMain
-ruleSuperMain returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='super'
+ruleSuperMain returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='super' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
+    }
+(
+(
+		lv_name_1_0=RULE_ID
 		{
-			newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
+			newLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
-		(
-			(
-				lv_name_1_0=RULE_ID
-				{
-					newLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getSuperMainRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_1_0,
-						"org.eclipse.xtext.common.Terminals.ID");
-				}
-			)
-		)
-	)
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSuperMainRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+))
 ;
+
+
+
+
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -220,3 +227,5 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
+
+

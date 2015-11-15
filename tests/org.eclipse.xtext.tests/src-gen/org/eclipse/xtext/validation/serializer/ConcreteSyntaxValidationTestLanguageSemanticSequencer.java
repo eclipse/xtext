@@ -225,7 +225,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	 *     AlternativeMultiplicities returns AlternativeMultiplicities
 	 *
 	 * Constraint:
-	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ val6+=ID? (val7+=ID? val6+=ID?)*)
+	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ val7+=ID? (val6+=ID? val7+=ID?)*)
 	 */
 	protected void sequence_AlternativeMultiplicities(ISerializationContext context, AlternativeMultiplicities semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
