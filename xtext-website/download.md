@@ -1,36 +1,68 @@
 ---
-layout: download
+layout: default
 title: Download
 ---
 
-Installation Instructions
-=========================
-
-Eclipse Xtext is implemented in Java, so you must have a [Java Runtime Environment](http://www.oracle.com/technetwork/java/index.html) installed in order to proceed.
-
-There are two easy ways to get Xtext up and running. A pre-configured Eclipse distribution is available which has already all the necessary plug-ins installed. Alternatively, you can install Xtext into your existing Eclipse by means of the Eclipse update mechanism.
-
-Install Pre-Configured Eclipse With Xtext
------------------------------------------
-
- * Download the distribution from above that matches your OS.
- * Unzip the archive into the directory of your choice.
-
-   **Windows Users should choose a directory close to the root since the zip contains a deeply nested folder structure. The maximum path length on windows may not exceed 256 characters.**
- * Launch Eclipse and select the workspace location. A workspace location is the directory for your user data and project files.
-
-Install Xtext From Update Site
-------------------------------
-
-If you have an Eclipse running :
-
- * Choose **Help -&gt; Install New Software...** from the menu bar and **Add...**. 
-
-   Insert one of the update site URLs from above. This site aggregates all the necessary and optional components and dependencies of Xtext.
- * Select the **Xtext SDK** from the category **Xtext** and complete the wizard by clicking the **Next** button until you can click **Finish**.
- * After a quick download and a restart of Eclipse, Xtext is ready to use.
-
-Note: Xtext relies on the Antlr generator library. Unfortunately, we cannot provide this library on the official Eclipse release update sites. Instead, Xtext will try to download it on demand. To avoid this, you can manually install the feature *Xtext Antlr* from the itemis update site [http://download.itemis.com/updates/](http://download.itemis.com/updates/). The general installation procedures are not affected by this issue.
-
-
-
+<div id="page">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<h2>Download Options</h2>
+				<p>
+		Xtext languages can be developed in Eclipse and IntelliJ IDEA. You can either use your favorite IDE's plug-in mechanism to add the Xtext SDK, using one of the URLs below, or go to the professional Xtext site to download a ready to use package.
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span6">
+				<h2>Eclipse Users</h2>
+				<h3>Download Eclipse</h3>
+				<p>itemis offers tested and ready to use Eclipse distributions on <a href="https://xtext.itemis.com">xtext.itemis.com</a>.</p>
+				<p><a href="http://cta-redirect.hubspot.com/cta/redirect/761475/5f19e385-5578-4a5b-96b2-81413c6e6d20" target="_parent" class="has-popover btn btn-success btn-large pull_right">Get Eclipse from itemis.com</a>
+			      <script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script>
+			      <script type="text/javascript">
+			          hbspt.cta.load(761475, '5f19e385-5578-4a5b-96b2-81413c6e6d20');
+			      </script>
+			    </p>
+				<h3>Eclipse Updatesites</h3>
+				<p> To install the xtext plug-in into a running Eclipse.</p>
+				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" class="has-popover btn btn-primary btn-medium">Releases (right click &amp; copy)</a></p>
+				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" class="has-popover btn btn-primary btn-medium">Milestones (right click &amp; copy)</a></p>
+				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/" class="has-popover btn btn-primary btn-medium">Nightly Builds (right click &amp; copy)</a></p>
+				<h3>Installation Instructions</h3>
+				<ul>
+					<li>Choose <e>Help -&gt; Install New Software...</e> from the menu bar and <e>Add...</e>.</li>
+					<li>Insert one of the update site URLs below. This site aggregates all the necessary and optional components and dependencies of Xtext.</li>
+					<li>Select the <e>Xtext SDK</e> from the category <e>Xtext</e> and complete the wizard by clicking the <e>Next</e> button until you can click <e>Finish</e>.</li>
+					<li>After a quick download and a restart of Eclipse, Xtext is ready to use.</li>
+				</ul>
+			</div>
+			<div class="span6">
+				<h2>IntelliJ IDEA 15 Users</h2>
+				<h3>Download IDEA</h3>
+				<p>You can download the Community Edition at <a href="http://www.jetbrains.com/idea/download/index.html">jetbrains.com/idea</a>.</p>
+				<p>
+					<a href="http://cta-redirect.hubspot.com/cta/redirect/761475/5f19e385-5578-4a5b-96b2-81413c6e6d20" target="_parent" class="has-popover btn btn-success btn-large pull_left">Get IDEA from jetbrains.com</a>
+					<script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script>
+					<script type="text/javascript">
+			          hbspt.cta.load(761475, '5f19e385-5578-4a5b-96b2-81413c6e6d20');
+			      </script>
+			    </p>
+				<h3>Plug-In Repositories</h3>
+				<p>Choose one of the following repository URLs for IDEA :</p>
+				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" class="has-popover btn btn-primary btn-medium">Releases (right click &amp; copy)</a></p>
+				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" class="has-popover btn btn-primary btn-medium">Milestones (right click &amp; copy)</a></p>
+				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/" class="has-popover btn btn-primary btn-medium">Nightly Builds (right click &amp; copy)</a>
+				</p>
+				<h3>Installation Instructions</h3>
+				<ul>
+				 <li>Choose <e>Preferences</e> from the menu bar. </li>
+				 <li>Chosse the <e>plugin</e> section and add one of the URLs as a new repository.</li>
+				 <li>Install <e>org.eclipse.xtext</e>, <e>org.eclipse.xtext.xtext</e>, and <e>org.eclipse.xtend</e>.</li>
+				 <li>Follow the instructions given by IDEA.</li>
+				</ul>
+				<p>See the <a href="documentation.html">getting started for IDEA</a> for the next steps.</p>
+			</div>
+		</div>
+	</div>
+</div>
