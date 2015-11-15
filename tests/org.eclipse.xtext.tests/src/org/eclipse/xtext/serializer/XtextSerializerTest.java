@@ -45,9 +45,6 @@ public class XtextSerializerTest extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		//		StandaloneSetup standaloneSetup = new StandaloneSetup();
-		//		standaloneSetup.setIgnoreBrokenProjectFiles(true);
-		//		standaloneSetup.setPlatformUri("../..");
 		with(new XtextStandaloneSetup());
 		getInjector().injectMembers(this);
 	}
@@ -81,6 +78,7 @@ public class XtextSerializerTest extends AbstractXtextTests {
 				return XtextSerializerTest.this.get(XtextResourceSet.class);
 			}
 		});
+		grammarProvider.setClassLoader(getClass().getClassLoader());
 		TerminalsGrammarAccess gaTerminals = new TerminalsGrammarAccess(grammarProvider);
 		BaseInheritanceTestLanguageGrammarAccess gaBaseInheritanceTestLanguage = new BaseInheritanceTestLanguageGrammarAccess(grammarProvider, gaTerminals);
 		InheritanceTestLanguageGrammarAccess grammarAccess = new InheritanceTestLanguageGrammarAccess(grammarProvider, gaBaseInheritanceTestLanguage, gaTerminals);
