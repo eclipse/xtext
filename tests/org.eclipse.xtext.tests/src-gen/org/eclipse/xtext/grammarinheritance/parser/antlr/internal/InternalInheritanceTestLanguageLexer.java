@@ -125,67 +125,37 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalInheritanceTestLanguage.g:180:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalInheritanceTestLanguage.g:180:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalInheritanceTestLanguage.g:180:9: ( ( 'a' .. 'z' )+ )
+            // InternalInheritanceTestLanguage.g:180:11: ( 'a' .. 'z' )+
             {
-            // InternalInheritanceTestLanguage.g:180:11: ( '^' )?
-            int alt1=2;
-            int LA1_0 = input.LA(1);
-
-            if ( (LA1_0=='^') ) {
-                alt1=1;
-            }
-            switch (alt1) {
-                case 1 :
-                    // InternalInheritanceTestLanguage.g:180:11: '^'
-                    {
-                    match('^'); 
-
-                    }
-                    break;
-
-            }
-
-            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
-                input.consume();
-
-            }
-            else {
-                MismatchedSetException mse = new MismatchedSetException(null,input);
-                recover(mse);
-                throw mse;}
-
-            // InternalInheritanceTestLanguage.g:180:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
-            loop2:
+            // InternalInheritanceTestLanguage.g:180:11: ( 'a' .. 'z' )+
+            int cnt1=0;
+            loop1:
             do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
+                int alt1=2;
+                int LA1_0 = input.LA(1);
 
-                if ( ((LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
-                    alt2=1;
+                if ( ((LA1_0>='a' && LA1_0<='z')) ) {
+                    alt1=1;
                 }
 
 
-                switch (alt2) {
+                switch (alt1) {
             	case 1 :
-            	    // InternalInheritanceTestLanguage.g:
+            	    // InternalInheritanceTestLanguage.g:180:12: 'a' .. 'z'
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
-            	        input.consume();
-
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;}
-
+            	    matchRange('a','z'); 
 
             	    }
             	    break;
 
             	default :
-            	    break loop2;
+            	    if ( cnt1 >= 1 ) break loop1;
+                        EarlyExitException eee =
+                            new EarlyExitException(1, input);
+                        throw eee;
                 }
+                cnt1++;
             } while (true);
 
 
@@ -208,18 +178,18 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
             // InternalInheritanceTestLanguage.g:182:12: ( '0' .. '9' )+
             {
             // InternalInheritanceTestLanguage.g:182:12: ( '0' .. '9' )+
-            int cnt3=0;
-            loop3:
+            int cnt2=0;
+            loop2:
             do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
+                int alt2=2;
+                int LA2_0 = input.LA(1);
 
-                if ( ((LA3_0>='0' && LA3_0<='9')) ) {
-                    alt3=1;
+                if ( ((LA2_0>='0' && LA2_0<='9')) ) {
+                    alt2=1;
                 }
 
 
-                switch (alt3) {
+                switch (alt2) {
             	case 1 :
             	    // InternalInheritanceTestLanguage.g:182:13: '0' .. '9'
             	    {
@@ -229,12 +199,12 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt3 >= 1 ) break loop3;
+            	    if ( cnt2 >= 1 ) break loop2;
                         EarlyExitException eee =
-                            new EarlyExitException(3, input);
+                            new EarlyExitException(2, input);
                         throw eee;
                 }
-                cnt3++;
+                cnt2++;
             } while (true);
 
 
@@ -257,41 +227,41 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
             // InternalInheritanceTestLanguage.g:184:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
             // InternalInheritanceTestLanguage.g:184:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            int alt5=2;
+            int LA5_0 = input.LA(1);
 
-            if ( (LA6_0=='\"') ) {
-                alt6=1;
+            if ( (LA5_0=='\"') ) {
+                alt5=1;
             }
-            else if ( (LA6_0=='\'') ) {
-                alt6=2;
+            else if ( (LA5_0=='\'') ) {
+                alt5=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 6, 0, input);
+                    new NoViableAltException("", 5, 0, input);
 
                 throw nvae;
             }
-            switch (alt6) {
+            switch (alt5) {
                 case 1 :
                     // InternalInheritanceTestLanguage.g:184:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
                     // InternalInheritanceTestLanguage.g:184:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
-                    loop4:
+                    loop3:
                     do {
-                        int alt4=3;
-                        int LA4_0 = input.LA(1);
+                        int alt3=3;
+                        int LA3_0 = input.LA(1);
 
-                        if ( (LA4_0=='\\') ) {
-                            alt4=1;
+                        if ( (LA3_0=='\\') ) {
+                            alt3=1;
                         }
-                        else if ( ((LA4_0>='\u0000' && LA4_0<='!')||(LA4_0>='#' && LA4_0<='[')||(LA4_0>=']' && LA4_0<='\uFFFF')) ) {
-                            alt4=2;
+                        else if ( ((LA3_0>='\u0000' && LA3_0<='!')||(LA3_0>='#' && LA3_0<='[')||(LA3_0>=']' && LA3_0<='\uFFFF')) ) {
+                            alt3=2;
                         }
 
 
-                        switch (alt4) {
+                        switch (alt3) {
                     	case 1 :
                     	    // InternalInheritanceTestLanguage.g:184:21: '\\\\' .
                     	    {
@@ -317,7 +287,7 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop4;
+                    	    break loop3;
                         }
                     } while (true);
 
@@ -330,20 +300,20 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
                     {
                     match('\''); 
                     // InternalInheritanceTestLanguage.g:184:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
-                    loop5:
+                    loop4:
                     do {
-                        int alt5=3;
-                        int LA5_0 = input.LA(1);
+                        int alt4=3;
+                        int LA4_0 = input.LA(1);
 
-                        if ( (LA5_0=='\\') ) {
-                            alt5=1;
+                        if ( (LA4_0=='\\') ) {
+                            alt4=1;
                         }
-                        else if ( ((LA5_0>='\u0000' && LA5_0<='&')||(LA5_0>='(' && LA5_0<='[')||(LA5_0>=']' && LA5_0<='\uFFFF')) ) {
-                            alt5=2;
+                        else if ( ((LA4_0>='\u0000' && LA4_0<='&')||(LA4_0>='(' && LA4_0<='[')||(LA4_0>=']' && LA4_0<='\uFFFF')) ) {
+                            alt4=2;
                         }
 
 
-                        switch (alt5) {
+                        switch (alt4) {
                     	case 1 :
                     	    // InternalInheritanceTestLanguage.g:184:54: '\\\\' .
                     	    {
@@ -369,7 +339,7 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop5;
+                    	    break loop4;
                         }
                     } while (true);
 
@@ -402,29 +372,29 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
             match("/*"); 
 
             // InternalInheritanceTestLanguage.g:186:24: ( options {greedy=false; } : . )*
-            loop7:
+            loop6:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt6=2;
+                int LA6_0 = input.LA(1);
 
-                if ( (LA7_0=='*') ) {
-                    int LA7_1 = input.LA(2);
+                if ( (LA6_0=='*') ) {
+                    int LA6_1 = input.LA(2);
 
-                    if ( (LA7_1=='/') ) {
-                        alt7=2;
+                    if ( (LA6_1=='/') ) {
+                        alt6=2;
                     }
-                    else if ( ((LA7_1>='\u0000' && LA7_1<='.')||(LA7_1>='0' && LA7_1<='\uFFFF')) ) {
-                        alt7=1;
+                    else if ( ((LA6_1>='\u0000' && LA6_1<='.')||(LA6_1>='0' && LA6_1<='\uFFFF')) ) {
+                        alt6=1;
                     }
 
 
                 }
-                else if ( ((LA7_0>='\u0000' && LA7_0<=')')||(LA7_0>='+' && LA7_0<='\uFFFF')) ) {
-                    alt7=1;
+                else if ( ((LA6_0>='\u0000' && LA6_0<=')')||(LA6_0>='+' && LA6_0<='\uFFFF')) ) {
+                    alt6=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt6) {
             	case 1 :
             	    // InternalInheritanceTestLanguage.g:186:52: .
             	    {
@@ -434,7 +404,7 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop7;
+            	    break loop6;
                 }
             } while (true);
 
@@ -462,17 +432,17 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
             match("//"); 
 
             // InternalInheritanceTestLanguage.g:188:24: (~ ( ( '\\n' | '\\r' ) ) )*
-            loop8:
+            loop7:
             do {
-                int alt8=2;
-                int LA8_0 = input.LA(1);
+                int alt7=2;
+                int LA7_0 = input.LA(1);
 
-                if ( ((LA8_0>='\u0000' && LA8_0<='\t')||(LA8_0>='\u000B' && LA8_0<='\f')||(LA8_0>='\u000E' && LA8_0<='\uFFFF')) ) {
-                    alt8=1;
+                if ( ((LA7_0>='\u0000' && LA7_0<='\t')||(LA7_0>='\u000B' && LA7_0<='\f')||(LA7_0>='\u000E' && LA7_0<='\uFFFF')) ) {
+                    alt7=1;
                 }
 
 
-                switch (alt8) {
+                switch (alt7) {
             	case 1 :
             	    // InternalInheritanceTestLanguage.g:188:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
@@ -490,29 +460,29 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop8;
+            	    break loop7;
                 }
             } while (true);
 
             // InternalInheritanceTestLanguage.g:188:40: ( ( '\\r' )? '\\n' )?
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            int alt9=2;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA10_0=='\n'||LA10_0=='\r') ) {
-                alt10=1;
+            if ( (LA9_0=='\n'||LA9_0=='\r') ) {
+                alt9=1;
             }
-            switch (alt10) {
+            switch (alt9) {
                 case 1 :
                     // InternalInheritanceTestLanguage.g:188:41: ( '\\r' )? '\\n'
                     {
                     // InternalInheritanceTestLanguage.g:188:41: ( '\\r' )?
-                    int alt9=2;
-                    int LA9_0 = input.LA(1);
+                    int alt8=2;
+                    int LA8_0 = input.LA(1);
 
-                    if ( (LA9_0=='\r') ) {
-                        alt9=1;
+                    if ( (LA8_0=='\r') ) {
+                        alt8=1;
                     }
-                    switch (alt9) {
+                    switch (alt8) {
                         case 1 :
                             // InternalInheritanceTestLanguage.g:188:41: '\\r'
                             {
@@ -550,18 +520,18 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
             // InternalInheritanceTestLanguage.g:190:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // InternalInheritanceTestLanguage.g:190:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
-            int cnt11=0;
-            loop11:
+            int cnt10=0;
+            loop10:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt10=2;
+                int LA10_0 = input.LA(1);
 
-                if ( ((LA11_0>='\t' && LA11_0<='\n')||LA11_0=='\r'||LA11_0==' ') ) {
-                    alt11=1;
+                if ( ((LA10_0>='\t' && LA10_0<='\n')||LA10_0=='\r'||LA10_0==' ') ) {
+                    alt10=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt10) {
             	case 1 :
             	    // InternalInheritanceTestLanguage.g:
             	    {
@@ -579,12 +549,12 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt11 >= 1 ) break loop11;
+            	    if ( cnt10 >= 1 ) break loop10;
                         EarlyExitException eee =
-                            new EarlyExitException(11, input);
+                            new EarlyExitException(10, input);
                         throw eee;
                 }
-                cnt11++;
+                cnt10++;
             } while (true);
 
 
@@ -620,9 +590,9 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
 
     public void mTokens() throws RecognitionException {
         // InternalInheritanceTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=11;
-        alt12 = dfa12.predict(input);
-        switch (alt12) {
+        int alt11=11;
+        alt11 = dfa11.predict(input);
+        switch (alt11) {
             case 1 :
                 // InternalInheritanceTestLanguage.g:1:10: T__11
                 {
@@ -706,83 +676,82 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
     }
 
 
-    protected DFA12 dfa12 = new DFA12(this);
-    static final String DFA12_eotS =
-        "\1\uffff\1\16\2\uffff\1\16\1\14\2\uffff\3\14\2\uffff\1\16\3\uffff\1\16\5\uffff\4\16\1\35\1\16\1\uffff\1\16\1\40\1\uffff";
-    static final String DFA12_eofS =
-        "\41\uffff";
-    static final String DFA12_minS =
-        "\1\0\1\157\2\uffff\1\154\1\101\2\uffff\2\0\1\52\2\uffff\1\144\3\uffff\1\145\5\uffff\1\145\1\155\1\154\1\145\1\60\1\156\1\uffff\1\164\1\60\1\uffff";
-    static final String DFA12_maxS =
-        "\1\uffff\1\157\2\uffff\1\154\1\172\2\uffff\2\uffff\1\57\2\uffff\1\144\3\uffff\1\145\5\uffff\1\145\1\155\1\154\1\145\1\172\1\156\1\uffff\1\164\1\172\1\uffff";
-    static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\3\2\uffff\1\5\1\6\3\uffff\1\12\1\13\1\uffff\1\5\1\2\1\3\1\uffff\1\6\1\7\1\10\1\11\1\12\6\uffff\1\1\2\uffff\1\4";
-    static final String DFA12_specialS =
-        "\1\1\7\uffff\1\0\1\2\27\uffff}>";
-    static final String[] DFA12_transitionS = {
-            "\11\14\2\13\2\14\1\13\22\14\1\13\1\14\1\10\4\14\1\11\7\14\1\12\12\7\7\14\32\6\3\14\1\5\1\6\1\14\4\6\1\4\7\6\1\1\15\6\1\2\1\14\1\3\uff82\14",
-            "\1\15",
+    protected DFA11 dfa11 = new DFA11(this);
+    static final String DFA11_eotS =
+        "\1\uffff\1\15\2\uffff\1\15\2\uffff\3\13\2\uffff\1\15\3\uffff\1\15\5\uffff\4\15\1\34\1\15\1\uffff\1\15\1\37\1\uffff";
+    static final String DFA11_eofS =
+        "\40\uffff";
+    static final String DFA11_minS =
+        "\1\0\1\157\2\uffff\1\154\2\uffff\2\0\1\52\2\uffff\1\144\3\uffff\1\145\5\uffff\1\145\1\155\1\154\1\145\1\141\1\156\1\uffff\1\164\1\141\1\uffff";
+    static final String DFA11_maxS =
+        "\1\uffff\1\157\2\uffff\1\154\2\uffff\2\uffff\1\57\2\uffff\1\144\3\uffff\1\145\5\uffff\1\145\1\155\1\154\1\145\1\172\1\156\1\uffff\1\164\1\172\1\uffff";
+    static final String DFA11_acceptS =
+        "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\3\uffff\1\12\1\13\1\uffff\1\5\1\2\1\3\1\uffff\1\6\1\7\1\10\1\11\1\12\6\uffff\1\1\2\uffff\1\4";
+    static final String DFA11_specialS =
+        "\1\0\6\uffff\1\2\1\1\27\uffff}>";
+    static final String[] DFA11_transitionS = {
+            "\11\13\2\12\2\13\1\12\22\13\1\12\1\13\1\7\4\13\1\10\7\13\1\11\12\6\47\13\4\5\1\4\7\5\1\1\15\5\1\2\1\13\1\3\uff82\13",
+            "\1\14",
             "",
             "",
-            "\1\21",
-            "\32\16\4\uffff\1\16\1\uffff\32\16",
+            "\1\20",
             "",
             "",
-            "\0\23",
-            "\0\23",
-            "\1\24\4\uffff\1\25",
+            "\0\22",
+            "\0\22",
+            "\1\23\4\uffff\1\24",
+            "",
+            "",
+            "\1\26",
+            "",
             "",
             "",
             "\1\27",
             "",
             "",
             "",
+            "",
+            "",
             "\1\30",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\31",
             "\1\32",
             "\1\33",
-            "\1\34",
-            "\12\16\7\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
-            "\1\36",
+            "\32\15",
+            "\1\35",
             "",
-            "\1\37",
-            "\12\16\7\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
+            "\1\36",
+            "\32\15",
             ""
     };
 
-    static final short[] DFA12_eot = DFA.unpackEncodedString(DFA12_eotS);
-    static final short[] DFA12_eof = DFA.unpackEncodedString(DFA12_eofS);
-    static final char[] DFA12_min = DFA.unpackEncodedStringToUnsignedChars(DFA12_minS);
-    static final char[] DFA12_max = DFA.unpackEncodedStringToUnsignedChars(DFA12_maxS);
-    static final short[] DFA12_accept = DFA.unpackEncodedString(DFA12_acceptS);
-    static final short[] DFA12_special = DFA.unpackEncodedString(DFA12_specialS);
-    static final short[][] DFA12_transition;
+    static final short[] DFA11_eot = DFA.unpackEncodedString(DFA11_eotS);
+    static final short[] DFA11_eof = DFA.unpackEncodedString(DFA11_eofS);
+    static final char[] DFA11_min = DFA.unpackEncodedStringToUnsignedChars(DFA11_minS);
+    static final char[] DFA11_max = DFA.unpackEncodedStringToUnsignedChars(DFA11_maxS);
+    static final short[] DFA11_accept = DFA.unpackEncodedString(DFA11_acceptS);
+    static final short[] DFA11_special = DFA.unpackEncodedString(DFA11_specialS);
+    static final short[][] DFA11_transition;
 
     static {
-        int numStates = DFA12_transitionS.length;
-        DFA12_transition = new short[numStates][];
+        int numStates = DFA11_transitionS.length;
+        DFA11_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA12_transition[i] = DFA.unpackEncodedString(DFA12_transitionS[i]);
+            DFA11_transition[i] = DFA.unpackEncodedString(DFA11_transitionS[i]);
         }
     }
 
-    static class DFA12 extends DFA {
+    static class DFA11 extends DFA {
 
-        public DFA12(BaseRecognizer recognizer) {
+        public DFA11(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 12;
-            this.eot = DFA12_eot;
-            this.eof = DFA12_eof;
-            this.min = DFA12_min;
-            this.max = DFA12_max;
-            this.accept = DFA12_accept;
-            this.special = DFA12_special;
-            this.transition = DFA12_transition;
+            this.decisionNumber = 11;
+            this.eot = DFA11_eot;
+            this.eof = DFA11_eof;
+            this.min = DFA11_min;
+            this.max = DFA11_max;
+            this.accept = DFA11_accept;
+            this.special = DFA11_special;
+            this.transition = DFA11_transition;
         }
         public String getDescription() {
             return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
@@ -792,58 +761,56 @@ public class InternalInheritanceTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_8 = input.LA(1);
+                        int LA11_0 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFF')) ) {s = 19;}
+                        if ( (LA11_0=='m') ) {s = 1;}
 
-                        else s = 12;
+                        else if ( (LA11_0=='{') ) {s = 2;}
+
+                        else if ( (LA11_0=='}') ) {s = 3;}
+
+                        else if ( (LA11_0=='e') ) {s = 4;}
+
+                        else if ( ((LA11_0>='a' && LA11_0<='d')||(LA11_0>='f' && LA11_0<='l')||(LA11_0>='n' && LA11_0<='z')) ) {s = 5;}
+
+                        else if ( ((LA11_0>='0' && LA11_0<='9')) ) {s = 6;}
+
+                        else if ( (LA11_0=='\"') ) {s = 7;}
+
+                        else if ( (LA11_0=='\'') ) {s = 8;}
+
+                        else if ( (LA11_0=='/') ) {s = 9;}
+
+                        else if ( ((LA11_0>='\t' && LA11_0<='\n')||LA11_0=='\r'||LA11_0==' ') ) {s = 10;}
+
+                        else if ( ((LA11_0>='\u0000' && LA11_0<='\b')||(LA11_0>='\u000B' && LA11_0<='\f')||(LA11_0>='\u000E' && LA11_0<='\u001F')||LA11_0=='!'||(LA11_0>='#' && LA11_0<='&')||(LA11_0>='(' && LA11_0<='.')||(LA11_0>=':' && LA11_0<='`')||LA11_0=='|'||(LA11_0>='~' && LA11_0<='\uFFFF')) ) {s = 11;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_0 = input.LA(1);
+                        int LA11_8 = input.LA(1);
 
                         s = -1;
-                        if ( (LA12_0=='m') ) {s = 1;}
+                        if ( ((LA11_8>='\u0000' && LA11_8<='\uFFFF')) ) {s = 18;}
 
-                        else if ( (LA12_0=='{') ) {s = 2;}
-
-                        else if ( (LA12_0=='}') ) {s = 3;}
-
-                        else if ( (LA12_0=='e') ) {s = 4;}
-
-                        else if ( (LA12_0=='^') ) {s = 5;}
-
-                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='f' && LA12_0<='l')||(LA12_0>='n' && LA12_0<='z')) ) {s = 6;}
-
-                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 7;}
-
-                        else if ( (LA12_0=='\"') ) {s = 8;}
-
-                        else if ( (LA12_0=='\'') ) {s = 9;}
-
-                        else if ( (LA12_0=='/') ) {s = 10;}
-
-                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 11;}
-
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 12;}
+                        else s = 11;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA12_9 = input.LA(1);
+                        int LA11_7 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_9>='\u0000' && LA12_9<='\uFFFF')) ) {s = 19;}
+                        if ( ((LA11_7>='\u0000' && LA11_7<='\uFFFF')) ) {s = 18;}
 
-                        else s = 12;
+                        else s = 11;
 
                         if ( s>=0 ) return s;
                         break;
             }
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 12, _s, input);
+                new NoViableAltException(getDescription(), 11, _s, input);
             error(nvae);
             throw nvae;
         }

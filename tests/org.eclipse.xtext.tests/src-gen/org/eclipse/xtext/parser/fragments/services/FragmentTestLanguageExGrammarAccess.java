@@ -13,6 +13,7 @@ import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.parser.fragments.services.FragmentTestLanguageGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementFinder {
@@ -37,11 +38,15 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 
 	private final FragmentTestLanguageGrammarAccess gaFragmentTestLanguage;
 
+	private final TerminalsGrammarAccess gaTerminals;
+
 	@Inject
 	public FragmentTestLanguageExGrammarAccess(GrammarProvider grammarProvider,
-		FragmentTestLanguageGrammarAccess gaFragmentTestLanguage) {
+		FragmentTestLanguageGrammarAccess gaFragmentTestLanguage,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaFragmentTestLanguage = gaFragmentTestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pParserRuleFragmentsEx = new ParserRuleFragmentsExElements();
 	}
 	
@@ -69,6 +74,10 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 
 	public FragmentTestLanguageGrammarAccess getFragmentTestLanguageGrammarAccess() {
 		return gaFragmentTestLanguage;
+	}
+
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
 	}
 
 	
@@ -296,43 +305,43 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
-		return gaFragmentTestLanguage.getIDRule();
+		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaFragmentTestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaFragmentTestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaFragmentTestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaFragmentTestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaFragmentTestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaFragmentTestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

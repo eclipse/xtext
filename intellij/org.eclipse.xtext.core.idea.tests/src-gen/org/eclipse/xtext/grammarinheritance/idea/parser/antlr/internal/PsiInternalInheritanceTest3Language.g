@@ -140,9 +140,9 @@ ruleElement returns [Boolean current=false]
 			(
 				(
 					{
-						markLeaf(elementTypeProvider.getElement_NameSTRINGTerminalRuleCall_2_2_0ElementType());
+						markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_2_2_0ElementType());
 					}
-					lv_name_6_0=RULE_STRING
+					lv_name_6_0=SUPER_1_ID
 					{
 						if(!$current) {
 							associateWithSemanticElement();
@@ -151,6 +151,40 @@ ruleElement returns [Boolean current=false]
 					}
 					{
 						doneLeaf(lv_name_6_0);
+					}
+				)
+			)
+		)
+		    |
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getElement_ElementAction_3_0ElementType());
+					doneComposite();
+					associateWithSemanticElement();
+				}
+			)
+			{
+				markLeaf(elementTypeProvider.getElement_ElementKeyword_3_1ElementType());
+			}
+			otherlv_8='element'
+			{
+				doneLeaf(otherlv_8);
+			}
+			(
+				(
+					{
+						markLeaf(elementTypeProvider.getElement_NameSTRINGTerminalRuleCall_3_2_0ElementType());
+					}
+					lv_name_9_0=RULE_STRING
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
+						doneLeaf(lv_name_9_0);
 					}
 				)
 			)
@@ -265,7 +299,9 @@ superElement returns [Boolean current=false]
 
 RULE_ID : 'id';
 
-SUPER_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+SUPER_ID : ('a'..'z')+;
+
+SUPER_1_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 

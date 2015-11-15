@@ -47,6 +47,9 @@ public class InheritanceTest3LanguageParserDefinition extends AbstractXtextParse
 			if (elementType == elementTypeProvider.getElement_ElementAction_2_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
+			if (elementType == elementTypeProvider.getElement_ElementAction_3_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
 			if (elementType == elementTypeProvider.getInheritanceTestLanguageModelElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}

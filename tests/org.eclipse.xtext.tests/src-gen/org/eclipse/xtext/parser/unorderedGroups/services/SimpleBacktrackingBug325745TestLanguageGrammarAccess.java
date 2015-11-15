@@ -13,6 +13,7 @@ import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.parser.unorderedGroups.services.BacktrackingBug325745TestLanguageGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
@@ -37,11 +38,15 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 
 	private final BacktrackingBug325745TestLanguageGrammarAccess gaBacktrackingBug325745TestLanguage;
 
+	private final TerminalsGrammarAccess gaTerminals;
+
 	@Inject
 	public SimpleBacktrackingBug325745TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		BacktrackingBug325745TestLanguageGrammarAccess gaBacktrackingBug325745TestLanguage) {
+		BacktrackingBug325745TestLanguageGrammarAccess gaBacktrackingBug325745TestLanguage,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBacktrackingBug325745TestLanguage = gaBacktrackingBug325745TestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pDelegateModel = new DelegateModelElements();
 	}
 	
@@ -69,6 +74,10 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 
 	public BacktrackingBug325745TestLanguageGrammarAccess getBacktrackingBug325745TestLanguageGrammarAccess() {
 		return gaBacktrackingBug325745TestLanguage;
+	}
+
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
 	}
 
 	
@@ -141,43 +150,43 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
-		return gaBacktrackingBug325745TestLanguage.getIDRule();
+		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaBacktrackingBug325745TestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaBacktrackingBug325745TestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaBacktrackingBug325745TestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaBacktrackingBug325745TestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaBacktrackingBug325745TestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaBacktrackingBug325745TestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }
