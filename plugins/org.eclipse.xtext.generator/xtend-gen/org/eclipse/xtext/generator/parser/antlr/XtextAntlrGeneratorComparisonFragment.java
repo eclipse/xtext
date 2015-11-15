@@ -181,7 +181,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     @Override
     public String getLexerGrammarFileName(final Grammar g) {
       String _basePackageRuntime = this.naming.basePackageRuntime(g);
-      String _plus = (_basePackageRuntime + ".parser.antlr.lexer.Internal");
+      String _plus = (_basePackageRuntime + ".parser.antlr.internal.Internal");
       String _simpleName = GrammarUtil.getSimpleName(g);
       String _plus_1 = (_plus + _simpleName);
       return (_plus_1 + "Lexer");
@@ -190,7 +190,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     @Override
     public String getContentAssistLexerGrammarFileName(final Grammar g) {
       String _basePackageIde = this.naming.basePackageIde(g);
-      String _plus = (_basePackageIde + ".contentassist.antlr.lexer.Internal");
+      String _plus = (_basePackageIde + ".contentassist.antlr.internal.Internal");
       String _simpleName = GrammarUtil.getSimpleName(g);
       String _plus_1 = (_plus + _simpleName);
       return (_plus_1 + "Lexer");

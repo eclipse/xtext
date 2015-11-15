@@ -1,0 +1,7 @@
+package org.eclipse.xtext.generator.ecore.idea.highlighting;
+
+import org.eclipse.xtext.generator.ecore.idea.highlighting.SubTestLanguageBaseColorSettingsPage;
+
+@SuppressWarnings("all")
+public class SubTestLanguageColorSettingsPage extends SubTestLanguageBaseColorSettingsPage {
+}

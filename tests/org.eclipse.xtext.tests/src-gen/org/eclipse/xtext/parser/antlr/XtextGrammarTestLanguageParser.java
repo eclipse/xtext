@@ -4,35 +4,36 @@
 package org.eclipse.xtext.parser.antlr;
 
 import com.google.inject.Inject;
-import org.eclipse.xtext.parser.antlr.internal.InternalXtextGrammarTestLanguageParser;
+
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 
-public class XtextGrammarTestLanguageParser extends AbstractAntlrParser {
-
+public class XtextGrammarTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+	
 	@Inject
 	private XtextGrammarTestLanguageGrammarAccess grammarAccess;
-
+	
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
-
 	@Override
-	protected InternalXtextGrammarTestLanguageParser createParser(XtextTokenStream stream) {
-		return new InternalXtextGrammarTestLanguageParser(stream, getGrammarAccess());
+	protected org.eclipse.xtext.parser.antlr.internal.InternalXtextGrammarTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.parser.antlr.internal.InternalXtextGrammarTestLanguageParser(stream, getGrammarAccess());
 	}
-
+	
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Grammar";
 	}
-
+	
 	public XtextGrammarTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-
+	
 	public void setGrammarAccess(XtextGrammarTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
+	
 }

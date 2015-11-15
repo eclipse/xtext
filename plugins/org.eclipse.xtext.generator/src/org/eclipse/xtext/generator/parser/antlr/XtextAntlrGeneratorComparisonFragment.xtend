@@ -213,10 +213,10 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		}
 		
 		override getLexerGrammarFileName(Grammar g) {
-			return naming.basePackageRuntime(g) + ".parser.antlr.lexer.Internal" + GrammarUtil.getSimpleName(g) + "Lexer";
+			return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getSimpleName(g) + "Lexer";
 		}
 		override getContentAssistLexerGrammarFileName(Grammar g) {
-			return naming.basePackageIde(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getSimpleName(g) + "Lexer";
+			return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getSimpleName(g) + "Lexer";
 		}
 
 	}

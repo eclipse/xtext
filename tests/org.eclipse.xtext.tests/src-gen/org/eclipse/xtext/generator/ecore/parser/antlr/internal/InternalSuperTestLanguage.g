@@ -5,6 +5,7 @@ grammar InternalSuperTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	
 }
 
 @lexer::header {
@@ -16,7 +17,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.generator.ecore.parser.antlr.internal;
+package org.eclipse.xtext.generator.ecore.parser.antlr.internal; 
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -34,72 +35,78 @@ import org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess
 @parser::members {
 
  	private SuperTestLanguageGrammarAccess grammarAccess;
-
+ 	
     public InternalSuperTestLanguageParser(TokenStream input, SuperTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-
+    
     @Override
     protected String getFirstRuleName() {
-    	return "SuperMain";
+    	return "SuperMain";	
    	}
-
+   	
    	@Override
    	protected SuperTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
-
 }
 
-@rulecatch {
-    catch (RecognitionException re) {
-        recover(input,re);
+@rulecatch { 
+    catch (RecognitionException re) { 
+        recover(input,re); 
         appendSkippedTokens();
-    }
+    } 
 }
+
+
+
 
 // Entry rule entryRuleSuperMain
-entryRuleSuperMain returns [EObject current=null]:
+entryRuleSuperMain returns [EObject current=null] 
+	:
 	{ newCompositeNode(grammarAccess.getSuperMainRule()); }
-	iv_ruleSuperMain=ruleSuperMain
-	{ $current=$iv_ruleSuperMain.current; }
-	EOF;
+	 iv_ruleSuperMain=ruleSuperMain 
+	 { $current=$iv_ruleSuperMain.current; } 
+	 EOF 
+;
 
 // Rule SuperMain
-ruleSuperMain returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0='super'
+ruleSuperMain returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='super' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
+    }
+(
+(
+		lv_name_1_0=RULE_ID
 		{
-			newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
+			newLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
-		(
-			(
-				lv_name_1_0=RULE_ID
-				{
-					newLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getSuperMainRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_1_0,
-						"org.eclipse.xtext.common.Terminals.ID");
-				}
-			)
-		)
-	)
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSuperMainRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+))
 ;
+
+
+
+
+
+
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -114,3 +121,5 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
+
+

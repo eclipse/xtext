@@ -865,8 +865,8 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ValidID");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//ValidID:
-		//	ID;
+		//ValidID EString:
+		//	ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//ID
@@ -1064,8 +1064,8 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getEObjectAccess().getRule();
 	}
 
-	//ValidID:
-	//	ID;
+	//ValidID EString:
+	//	ID
 	public ValidIDElements getValidIDAccess() {
 		return pValidID;
 	}
@@ -1074,7 +1074,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getValidIDAccess().getRule();
 	}
 
-	//terminal ID:
+	//terminal ID returns ecore::EString:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
@@ -1086,32 +1086,32 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		return gaTerminals.getINTRule();
 	} 
 
-	//terminal STRING:
+	//terminal STRING returns ecore::EString:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
-	//terminal ML_COMMENT:
+	//terminal ML_COMMENT returns ecore::EString:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
-	//terminal SL_COMMENT:
+	//terminal SL_COMMENT returns ecore::EString:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
-	//terminal WS:
+	//terminal WS returns ecore::EString:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
-	//terminal ANY_OTHER:
+	//terminal ANY_OTHER returns ecore::EString:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
