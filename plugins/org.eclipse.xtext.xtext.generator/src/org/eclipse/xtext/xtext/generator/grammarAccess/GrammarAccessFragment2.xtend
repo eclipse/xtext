@@ -191,16 +191,16 @@ class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 				«ENDFOR»
 				
 				private final «Grammar» grammar;
-				«FOR g : language.grammar.usedGrammars»
+				«FOR g : language.grammar.effectivelyUsedGrammars»
 					
 					private final «g.grammarAccess» «g.gaGrammarAccessLocalVarName»;
 				«ENDFOR»
 			
 				@«Inject»
-				public «language.grammar.grammarAccess.simpleName»(«GrammarProvider» grammarProvider«FOR g : language.grammar.usedGrammars»,
+				public «language.grammar.grammarAccess.simpleName»(«GrammarProvider» grammarProvider«FOR g : language.grammar.effectivelyUsedGrammars»,
 						«g.grammarAccess» «g.gaGrammarAccessLocalVarName»«ENDFOR») {
 					this.grammar = internalFindGrammar(grammarProvider);
-					«FOR g : language.grammar.usedGrammars»
+					«FOR g : language.grammar.effectivelyUsedGrammars»
 						this.«g.gaGrammarAccessLocalVarName» = «g.gaGrammarAccessLocalVarName»;
 					«ENDFOR»
 					«FOR r : language.grammar.rules»
@@ -229,7 +229,7 @@ class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 					return grammar;
 				}
 				
-				«FOR g : language.grammar.usedGrammars»
+				«FOR g : language.grammar.effectivelyUsedGrammars»
 					
 					public «g.grammarAccess» get«g.grammarAccess.simpleName»() {
 						return «g.gaGrammarAccessLocalVarName»;
@@ -311,7 +311,7 @@ class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 			}
 		«ELSE»	
 			public «it.grammar.grammarAccess».«gaBaseRuleAccessorClassName» «gaElementsAccessor» {
-				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaBaseElementsAccessor»;
+				return «it.grammar.gaGrammarAccessLocalVarName».«gaBaseElementsAccessor»;
 			}
 		«ENDIF»
 		
@@ -328,7 +328,7 @@ class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 			}
 		«ELSE»	
 			public «it.grammar.grammarAccess».«gaRuleAccessorClassName» «gaElementsAccessor» {
-				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaElementsAccessor»;
+				return «it.grammar.gaGrammarAccessLocalVarName».«gaElementsAccessor»;
 			}
 		«ENDIF»
 		
@@ -343,7 +343,7 @@ class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 			«IF it.grammar === original»
 				return «gaRuleAccessorLocalVarName»;
 			«ELSE»
-				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaBaseRuleAccessor»;
+				return «it.grammar.gaGrammarAccessLocalVarName».«gaBaseRuleAccessor»;
 			«ENDIF»
 		}
 	'''
@@ -379,8 +379,11 @@ class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 			"rule"
 	}
 	
-	protected def Grammar usedGrammar(AbstractRule rule, Grammar parent) {
-		parent.usedGrammars.findFirst[allRules.contains(rule)]
+	/**
+	 * Returns all grammars from the hierarchy that are used from rules of this grammar.
+	 */
+	protected def getEffectivelyUsedGrammars(Grammar grammar) {
+		grammar.allRules.map[ GrammarUtil.getGrammar(it) ].filter[ it !== grammar ].toSet.toList
 	}
 	
 }
