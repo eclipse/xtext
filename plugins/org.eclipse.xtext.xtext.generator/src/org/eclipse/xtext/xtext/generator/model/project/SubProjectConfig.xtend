@@ -25,9 +25,6 @@ class SubProjectConfig implements ISubProjectConfig {
 	boolean enabled
 	
 	@Accessors
-	boolean overwriteSrc
-	
-	@Accessors
 	String name
 	
 	@Accessors(PUBLIC_GETTER)
@@ -75,19 +72,19 @@ class SubProjectConfig implements ISubProjectConfig {
 	
 	override initialize(Injector injector) {
 		injector.injectMembers(this)
-		if (!rootPath.isNullOrEmpty) {
+		if (rootPath !== null) {
 			root = owner.newFileSystemAccess(rootPath, true)
 			root.initialize(injector)
 		}
-		if (!metaInfPath.isNullOrEmpty) {
+		if (metaInfPath !== null) {
 			metaInf = owner.newFileSystemAccess(metaInfPath, true)
 			metaInf.initialize(injector)
 		}
-		if (!srcPath.isNullOrEmpty) {
-			src = owner.newFileSystemAccess(srcPath, overwriteSrc)
+		if (srcPath !== null) {
+			src = owner.newFileSystemAccess(srcPath, false)
 			src.initialize(injector)
 		}
-		if (!srcGenPath.isNullOrEmpty) {
+		if (srcGenPath !== null) {
 			srcGen = owner.newFileSystemAccess(srcGenPath, true)
 			srcGen.initialize(injector)
 		}

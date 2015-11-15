@@ -34,12 +34,7 @@ class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjec
 			val relativePath = ecoreModel.path.substring(root.path.length).replace('\\', '/')
 			return CharMatcher.is('/').trimFrom(relativePath)
 		}
-		throw new RuntimeException('''
-			Could not derive the Ecore model folder from the project configuration. 
-			Please make sure that \'root\' is a prefix of \'ecoreModel\'.
-			was (root='«root.path»', ecoreModel='«ecoreModel.path»')
-			
-		''')
+		throw new RuntimeException('Could not derive the Ecore model folder from the project configuration. Please make sure that \'root\' is a prefix of \'ecoreModel\'.')
 	}
 	
 	override initialize(Injector injector) {

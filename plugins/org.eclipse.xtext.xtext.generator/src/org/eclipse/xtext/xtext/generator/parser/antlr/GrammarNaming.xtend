@@ -32,21 +32,13 @@ class GrammarNaming {
 	protected def String getInternalParserPackage(Grammar it) {
 		parserPackage + ".internal"
 	}
-	
-	protected def String getInternalLexerPackage(Grammar it) {
-		parserPackage + ".lexer"
-	}
 
 	def AntlrGrammar getParserGrammar(Grammar it) {
 		new AntlrGrammar(internalParserPackage, '''«grammarNamePrefix»Internal«simpleName»«IF !combinedGrammar»Parser«ENDIF»''')
 	}
 
 	def AntlrGrammar getLexerGrammar(Grammar it) {
-		if (combinedGrammar) {
-			getParserGrammar(it)
-		} else {
-			new AntlrGrammar(internalLexerPackage, '''«grammarNamePrefix»Internal«simpleName»Lexer''')
-		}
+		new AntlrGrammar(internalParserPackage, '''«grammarNamePrefix»Internal«simpleName»«IF !combinedGrammar»Lexer«ENDIF»''')
 	}
 	
 	protected def String getGrammarNamePrefix(Grammar it) {
