@@ -83,6 +83,8 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	
 	private ResourceSet forcedResourceSet = null;
 	
+	private String encoding;
+	
 	/**
 	 * @since 2.1
 	 */
@@ -238,6 +240,9 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			}
 			EcoreUtil.resolveAll(rs);
 		}
+		if (encoding != null) {
+			rs.getLoadOptions().put(XtextResource.OPTION_ENCODING, encoding);
+		}
 		XtextResource resource = (XtextResource) rs.getResource(URI.createURI(uri), true);
 		if (resource.getContents().isEmpty()) {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.");
@@ -341,4 +346,17 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		return grammar;
 	}
 
+	/**
+	 * @since 2.9
+	 */
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public String getEncoding() {
+		return encoding;
+	}
 }

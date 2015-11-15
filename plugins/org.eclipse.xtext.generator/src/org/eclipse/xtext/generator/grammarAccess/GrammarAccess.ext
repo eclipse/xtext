@@ -260,8 +260,8 @@ String gaRuleAccessorLocalVarName(EnumRule rule):
 String getClassName(EObject obj):
 	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getClassName(org.eclipse.emf.ecore.EObject);
 	
-Grammar usedGrammar(AbstractRule rule, Grammar parent):
-	parent.usedGrammars.selectFirst(g|g.allRules().contains(rule));
+List[Grammar] effectivelyUsedGrammars(Grammar grammar):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getEffectivelyUsedGrammars(org.eclipse.xtext.Grammar);
 
 String loadElementParentStatement(AbstractElement ele):
 	if (AbstractElement.isInstance(ele.eContainer())) then
