@@ -289,7 +289,10 @@ table tr:hover td {
   	 margin-top: 0px;
 	 min-height:3px;
   }
-
+  .container {
+  	padding-right: 20px;
+  	padding-left: 20px;
+  }
 }
 
 .ui-coverflow-wrapper {
