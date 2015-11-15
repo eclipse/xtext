@@ -292,6 +292,45 @@ table tr:hover td {
 
 }
 
+.ui-coverflow-wrapper {
+	height : 430px;
+	padding-top: 20px;
+}
+@media (max-width: 979px) {
+  .ui-coverflow-wrapper {
+	height : 380px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ui-coverflow-wrapper {
+  	 height : 280px;
+  }
+}
+
+.intro-screenshot {
+	display: block;
+    margin: 0 auto;
+	width: 620px;
+	box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 979px) {
+  .intro-screenshot {
+  	 width: 520px;
+  }
+}
+@media (max-width: 767px) {
+  .intro-screenshot {
+  	 width: 420px;
+  }
+}
+
+
+.cta-section {
+	padding-bottom: 30px;
+}
+
 .quick-overview {
 	margin-top: 40px;
 }
@@ -510,12 +549,6 @@ img.screenshot {
     background-repeat: no-repeat;
 }
 
-.intro-screenshot {
-	display: block;
-    margin: 0 auto;
-	width: 580px;
-	box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.15);
-}
 
 .introduction .zoom {
 	background: url('{{ site.baseurl }}/images/videoOverlayBig.png') 0 0 no-repeat transparent;
