@@ -112,7 +112,6 @@ hr {
 /* table */
 table {
 	background:#eaebec;
-	margin:20px;
 	border:#ccc 1px solid;
 
 	-moz-border-radius:4px;
@@ -142,7 +141,10 @@ table tr:first-child th:last-child {
 table td:first-child {
 	text-align: left;
 	
-	border-left: 0;
+	
+	-moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius:3px;
+	border-top-right-radius:3px;
 }
 table td {
 	padding: 4px 6px;
