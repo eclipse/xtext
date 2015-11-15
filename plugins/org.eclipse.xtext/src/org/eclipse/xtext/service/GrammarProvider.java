@@ -74,4 +74,14 @@ public class GrammarProvider {
 		}
 		return grammar;
 	}
+	
+	/**
+	 * Public for testing purpose.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @since 2.9
+	 */
+	public void setClassLoader(ClassLoader classLoader) {
+		this.classLoader = classLoader;
+	}
 }
