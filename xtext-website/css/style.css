@@ -886,23 +886,23 @@ UNUSED.btn-the-bizzniss-4.active,UNUSED.btn-the-bizzniss-4:active {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(0, 0, 0, .1);
 	padding: 10px;
 	margin-bottom: 15px;
-	height: 60px;
+	height:62px;
 	position: relative;
 }
 
 @media (min-width: 1200px) {
   .team {
-    height: 70px;
+    height:70px;
   } 
 }
 @media (max-width: 979px) {
   .team {
-    height: 70px;
+    
   }
 }
 @media (max-width: 767px) {
   .team {
-    height: 110px;
+    height:110px;
   }
 }
 
