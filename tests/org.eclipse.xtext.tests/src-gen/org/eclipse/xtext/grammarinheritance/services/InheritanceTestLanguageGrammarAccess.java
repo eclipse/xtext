@@ -88,6 +88,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 	
 	private final ModelElements pModel;
 	private final ElementElements pElement;
+	private final TerminalRule tID;
 	
 	private final Grammar grammar;
 
@@ -104,6 +105,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
 		this.pElement = new ElementElements();
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.ID");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -159,8 +161,14 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getElementAccess().getRule();
 	}
 
+	//terminal ID:
+	//	'a'..'z'+;
+	public TerminalRule getIDRule() {
+		return tID;
+	} 
+
 	//FQN:
-	//	ID ('.' ID)*;
+	//	super::ID ('.' super::ID)*;
 	public BaseInheritanceTestLanguageGrammarAccess.FQNElements getFQNAccess() {
 		return gaBaseInheritanceTestLanguage.getFQNAccess();
 	}
@@ -168,12 +176,6 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
-	public TerminalRule getIDRule() {
-		return gaTerminals.getIDRule();
-	} 
 
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;

@@ -152,8 +152,14 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 		return getElementAccess().getRule();
 	}
 
+	//terminal ID:
+	//	'a'..'z'+;
+	public TerminalRule getIDRule() {
+		return gaInheritanceTestLanguage.getIDRule();
+	} 
+
 	//FQN:
-	//	ID ('.' ID)*;
+	//	super::ID ('.' super::ID)*;
 	public BaseInheritanceTestLanguageGrammarAccess.FQNElements getFQNAccess() {
 		return gaBaseInheritanceTestLanguage.getFQNAccess();
 	}
@@ -161,12 +167,6 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
-	public TerminalRule getIDRule() {
-		return gaTerminals.getIDRule();
-	} 
 
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;

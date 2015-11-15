@@ -45,15 +45,22 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		private final Action cElementAction_2_0 = (Action)cGroup_2.eContents().get(0);
 		private final Keyword cElementKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		private final Assignment cNameAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cNameSTRINGTerminalRuleCall_2_2_0 = (RuleCall)cNameAssignment_2_2.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_2_2_0 = (RuleCall)cNameAssignment_2_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
+		private final Action cElementAction_3_0 = (Action)cGroup_3.eContents().get(0);
+		private final Keyword cElementKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Assignment cNameAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cNameSTRINGTerminalRuleCall_3_2_0 = (RuleCall)cNameAssignment_3_2.eContents().get(0);
 		
 		//Element:
 		//	super::Element
 		//	| {Element} "element" name=super::ID
+		//	| {Element} "element" name=Terminals::ID
 		//	| {Element} "element" name=super::STRING;
 		@Override public ParserRule getRule() { return rule; }
 
-		//super::Element | {Element} "element" name=super::ID | {Element} "element" name=super::STRING
+		//super::Element | {Element} "element" name=super::ID | {Element} "element" name=Terminals::ID | {Element} "element"
+		//name=super::STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//super::Element
@@ -74,7 +81,7 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		//super::ID
 		public RuleCall getNameIDTerminalRuleCall_1_2_0() { return cNameIDTerminalRuleCall_1_2_0; }
 
-		//{Element} "element" name=super::STRING
+		//{Element} "element" name=Terminals::ID
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{Element}
@@ -83,11 +90,26 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		//"element"
 		public Keyword getElementKeyword_2_1() { return cElementKeyword_2_1; }
 
-		//name=super::STRING
+		//name=Terminals::ID
 		public Assignment getNameAssignment_2_2() { return cNameAssignment_2_2; }
 
+		//Terminals::ID
+		public RuleCall getNameIDTerminalRuleCall_2_2_0() { return cNameIDTerminalRuleCall_2_2_0; }
+
+		//{Element} "element" name=super::STRING
+		public Group getGroup_3() { return cGroup_3; }
+
+		//{Element}
+		public Action getElementAction_3_0() { return cElementAction_3_0; }
+
+		//"element"
+		public Keyword getElementKeyword_3_1() { return cElementKeyword_3_1; }
+
+		//name=super::STRING
+		public Assignment getNameAssignment_3_2() { return cNameAssignment_3_2; }
+
 		//super::STRING
-		public RuleCall getNameSTRINGTerminalRuleCall_2_2_0() { return cNameSTRINGTerminalRuleCall_2_2_0; }
+		public RuleCall getNameSTRINGTerminalRuleCall_3_2_0() { return cNameSTRINGTerminalRuleCall_3_2_0; }
 	}
 	
 	
@@ -165,6 +187,7 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	//Element:
 	//	super::Element
 	//	| {Element} "element" name=super::ID
+	//	| {Element} "element" name=Terminals::ID
 	//	| {Element} "element" name=super::STRING;
 	public ElementElements getElementAccess() {
 		return pElement;
@@ -201,6 +224,12 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getInheritanceTestLanguageElementRule() {
 		return getInheritanceTestLanguageElementAccess().getRule();
 	}
+
+	//terminal ID:
+	//	'a'..'z'+;
+	public TerminalRule getInheritanceTestLanguageIDRule() {
+		return gaInheritanceTestLanguage.getIDRule();
+	} 
 
 	//FQN:
 	//	super::ID ('.' super::ID)*;
