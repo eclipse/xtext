@@ -11,6 +11,7 @@ import org.eclipse.xtext.ide.editor.model.TokenTypeToStringMapper
 
 /** 
  * @author Anton Kosyakov - Initial contribution and API
+ * @since 2.9
  */
 abstract class AbstractAntlrTokenToAttributeIdMapper extends TokenTypeToStringMapper {
 

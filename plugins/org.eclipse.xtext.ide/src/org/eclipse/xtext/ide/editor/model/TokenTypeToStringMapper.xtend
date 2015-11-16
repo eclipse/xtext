@@ -17,6 +17,8 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider
 
 /**
  * @author Anton Kosyakov
+ * 
+ * @since 2.9
  */
 abstract class TokenTypeToStringMapper {
 

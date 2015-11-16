@@ -16,6 +16,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 
 /**
  * @author Anton Kosyakov
+ * @since 2.9
  */
 @Singleton
 @SuppressWarnings("all")
