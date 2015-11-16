@@ -29,6 +29,9 @@ import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 @Accessors
 @SuppressWarnings("all")
 public class StandardProjectConfig extends XtextProjectConfig {
+  /**
+   * set to {@code true} by the project wizard(s) in case "Maven/Gradle" source layout is selected.
+   */
   private boolean mavenLayout;
   
   private boolean createEclipseMetaData;
@@ -204,6 +207,10 @@ public class StandardProjectConfig extends XtextProjectConfig {
     return ((this.rootPath + "/") + _name);
   }
   
+  /**
+   * In case of "Maven/Gradle" source layout the src outlet is named 'src/main/java',
+   * test classes go into 'src/test/java' instead of any dedicated '...tests' project.
+   */
   protected String computeSrc(final SubProjectConfig project) {
     String _rootPath = project.getRootPath();
     String _plus = (_rootPath + "/");
@@ -218,6 +225,11 @@ public class StandardProjectConfig extends XtextProjectConfig {
     return (_plus + _xifexpression);
   }
   
+  /**
+   * In case of "Maven/Gradle" source layout the srcGen outlet is named 'src/main/xtext-gen',
+   * test-related srcGen classes go into 'src/test/xtext-gen' instead of any dedicated '...tests' project.
+   * Don't confuse it with 'src/main/xtend-gen'!
+   */
   protected String computeSrcGen(final SubProjectConfig project) {
     String _rootPath = project.getRootPath();
     String _plus = (_rootPath + "/");
