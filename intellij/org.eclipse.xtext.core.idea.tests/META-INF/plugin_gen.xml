@@ -1,92 +1,92 @@
 <idea-plugin version="2">
 	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
 		<package
-			uri="http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage"
-			class="org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage"
+			uri="http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest"
+			class="org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage"
 		/>
 		<resourceFactory 
-			type="subtestlanguage"
+			type="backtrackinglexertestlanguage"
 			class="org.eclipse.xtext.resource.IResourceFactory"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 		/>
 		<resourceServiceProvider
-			uriExtension="subtestlanguage"
+			uriExtension="backtrackinglexertestlanguage"
 			class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 		/>
 
 		<lang.setup
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			implementationClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageIdeaSetup"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			implementationClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageIdeaSetup"
 		/>
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.generator.ecore.idea.lang.psi.SubTestLanguageCodeBlockModificationListener"/>
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.lexer.idea.lang.psi.BacktrackingLexerTestLanguageCodeBlockModificationListener"/>
 
-		<fileTypeFactory implementation="org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageFileTypeFactory"/>
-		<stubElementTypeHolder class="org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageElementTypeProvider"/>
+		<fileTypeFactory implementation="org.eclipse.xtext.lexer.idea.lang.BacktrackingLexerTestLanguageFileTypeFactory"/>
+		<stubElementTypeHolder class="org.eclipse.xtext.lexer.idea.lang.BacktrackingLexerTestLanguageElementTypeProvider"/>
 		<lang.ast.factory 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 			implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"
 		/>
 		<lang.parserDefinition 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
-			implementationClass="org.eclipse.xtext.generator.ecore.idea.lang.parser.SubTestLanguageParserDefinition"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
+			implementationClass="org.eclipse.xtext.lexer.idea.lang.parser.BacktrackingLexerTestLanguageParserDefinition"
 		/>
 		<lang.findUsagesProvider 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 			implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"
 		/>
 		<lang.refactoringSupport 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 			implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"
 		/>
 		<lang.namesValidator 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 			implementationClass="com.intellij.lang.refactoring.NamesValidator"
 		/>
-		<lang.syntaxHighlighterFactory key="org.eclipse.xtext.generator.ecore.SubTestLanguage" implementationClass="org.eclipse.xtext.generator.ecore.idea.highlighting.SubTestLanguageSyntaxHighlighterFactory" />
+		<lang.syntaxHighlighterFactory key="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage" implementationClass="org.eclipse.xtext.lexer.idea.highlighting.BacktrackingLexerTestLanguageSyntaxHighlighterFactory" />
 		<lang.braceMatcher 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 			implementationClass="com.intellij.lang.PairedBraceMatcher"
 		/>
 		<annotator 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 			implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"
 		/>
-		<completion.contributor language="org.eclipse.xtext.generator.ecore.SubTestLanguage" implementationClass="org.eclipse.xtext.generator.ecore.idea.completion.SubTestLanguageCompletionContributor"/>
-		<pom.declarationSearcher implementation="org.eclipse.xtext.generator.ecore.idea.lang.pom.SubTestLanguagePomDeclarationSearcher"/>
+		<completion.contributor language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage" implementationClass="org.eclipse.xtext.lexer.idea.completion.BacktrackingLexerTestLanguageCompletionContributor"/>
+		<pom.declarationSearcher implementation="org.eclipse.xtext.lexer.idea.lang.pom.BacktrackingLexerTestLanguagePomDeclarationSearcher"/>
 
 		<lang.psiStructureViewFactory 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 			implementationClass="com.intellij.lang.PsiStructureViewFactory"
 		/>
-		<facetType implementation="org.eclipse.xtext.generator.ecore.idea.facet.SubTestLanguageFacetType"/>
+		<facetType implementation="org.eclipse.xtext.lexer.idea.facet.BacktrackingLexerTestLanguageFacetType"/>
       	<lang.documentationProvider 
-      		language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-      		factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+      		language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+      		factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
       		implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
       	/>
-		<colorSettingsPage implementation="org.eclipse.xtext.generator.ecore.idea.highlighting.SubTestLanguageColorSettingsPage"/>
-		<highlightVisitor implementation="org.eclipse.xtext.generator.ecore.idea.highlighting.SubTestLanguageSemanticHighlightVisitor"/>
+		<colorSettingsPage implementation="org.eclipse.xtext.lexer.idea.highlighting.BacktrackingLexerTestLanguageColorSettingsPage"/>
+		<highlightVisitor implementation="org.eclipse.xtext.lexer.idea.highlighting.BacktrackingLexerTestLanguageSemanticHighlightVisitor"/>
 
 		<lang.formatter 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 			implementationClass="com.intellij.formatting.FormattingModelBuilder"
 		/>
 		<lang.commenter 
-			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
-			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
 			implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"
 		/>
 	</extensions>
