@@ -319,7 +319,6 @@ public class XtendUiModule extends AbstractXtendUiModule {
     return RichStringAwareToggleCommentAction.Factory.class;
   }
   
-  @Override
   public Class<? extends IOccurrenceComputer> bindIOccurrenceComputer() {
     return OccurrenceComputer.class;
   }
