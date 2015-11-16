@@ -66,16 +66,16 @@ Workflow {
 		pathTestProject = runtimeProject
 		projectNameRt = projectName
 		
-		language = {
-			uri = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				srcGenOnly = false
-			}
-		}
-		language = {
-			uri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
-		}
+//		language = {
+//			uri = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.xtext"
+//			fragment = @TestLanguagesFragments {
+//				srcGenOnly = false
+//			}
+//		}
+//		language = {
+//			uri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
+//			fragment = @TestLanguagesFragments {}
+//		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}

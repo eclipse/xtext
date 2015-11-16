@@ -89,9 +89,15 @@ Workflow {
 		}
 		language = TestLanguage {
 			name = "org.eclipse.xtext.generator.ecore.SuperTestLanguage"
+			ideaPlugin = {
+				generateXtendStub = true
+			}
 		}
 		language = TestLanguage {
 			name = "org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			ideaPlugin = {
+				generateXtendStub = true
+			}
 		}
 //		language = TestLanguage {
 //			name = "org.eclipse.xtext.XtextGrammarTestLanguage"
