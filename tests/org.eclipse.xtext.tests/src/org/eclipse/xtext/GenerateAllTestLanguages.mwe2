@@ -80,14 +80,14 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
-		language = { 
-			uri = "classpath:/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
-				backtrack = true
-				backtrackLexer = true
-				memoize = true
-			}
-		}
+//		language = { 
+//			uri = "classpath:/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.xtext"
+//			fragment = @TestLanguagesFragmentsEx {
+//				backtrack = true
+//				backtrackLexer = true
+//				memoize = true
+//			}
+//		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsEx {
