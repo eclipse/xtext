@@ -67,18 +67,24 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalEcoreTerminalsTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalEcoreTerminalsTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalEcoreTerminalsTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalEcoreTerminalsTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalEcoreTerminalsTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalEcoreTerminalsTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -90,14 +96,16 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalEcoreTerminalsTestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalEcoreTerminalsTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_intValues_1_0=null;
         Token otherlv_2=null;
@@ -106,10 +114,10 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
         Token lv_dateValues_5_0=null;
 
         try {
-            // PsiInternalEcoreTerminalsTestLanguage.g:58:10: ( ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* )
-            // PsiInternalEcoreTerminalsTestLanguage.g:59:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
+            // PsiInternalEcoreTerminalsTestLanguage.g:60:1: ( ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* )
+            // PsiInternalEcoreTerminalsTestLanguage.g:61:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
             {
-            // PsiInternalEcoreTerminalsTestLanguage.g:59:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
+            // PsiInternalEcoreTerminalsTestLanguage.g:61:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
             loop1:
             do {
                 int alt1=4;
@@ -134,10 +142,10 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:60:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:62:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
             	    {
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:60:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:61:4: otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:62:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:63:4: otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) )
             	    {
 
             	    				markLeaf(elementTypeProvider.getModel_IntKeyword_0_0ElementType());
@@ -146,16 +154,22 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
             	    				doneLeaf(otherlv_0);
             	    			
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:68:4: ( (lv_intValues_1_0= RULE_EINT ) )
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:69:5: (lv_intValues_1_0= RULE_EINT )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:70:4: ( (lv_intValues_1_0= RULE_EINT ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:71:5: (lv_intValues_1_0= RULE_EINT )
             	    {
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:69:5: (lv_intValues_1_0= RULE_EINT )
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:70:6: lv_intValues_1_0= RULE_EINT
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:71:5: (lv_intValues_1_0= RULE_EINT )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:72:6: lv_intValues_1_0= RULE_EINT
             	    {
 
             	    						markLeaf(elementTypeProvider.getModel_IntValuesEINTTerminalRuleCall_0_1_0ElementType());
             	    					
             	    lv_intValues_1_0=(Token)match(input,RULE_EINT,FollowSets000.FOLLOW_4); 
+
+            	    						if(!current) {
+            	    							associateWithSemanticElement();
+            	    							current = true;
+            	    						}
+            	    					
 
             	    						doneLeaf(lv_intValues_1_0);
             	    					
@@ -172,10 +186,10 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
             	    }
             	    break;
             	case 2 :
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:81:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:89:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
             	    {
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:81:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:82:4: otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:89:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:90:4: otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
             	    {
 
             	    				markLeaf(elementTypeProvider.getModel_DoubleKeyword_1_0ElementType());
@@ -184,16 +198,22 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
             	    				doneLeaf(otherlv_2);
             	    			
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:89:4: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:90:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:97:4: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:98:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
             	    {
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:90:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:91:6: lv_doubleValues_3_0= RULE_EDOUBLE
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:98:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:99:6: lv_doubleValues_3_0= RULE_EDOUBLE
             	    {
 
             	    						markLeaf(elementTypeProvider.getModel_DoubleValuesEDOUBLETerminalRuleCall_1_1_0ElementType());
             	    					
             	    lv_doubleValues_3_0=(Token)match(input,RULE_EDOUBLE,FollowSets000.FOLLOW_4); 
+
+            	    						if(!current) {
+            	    							associateWithSemanticElement();
+            	    							current = true;
+            	    						}
+            	    					
 
             	    						doneLeaf(lv_doubleValues_3_0);
             	    					
@@ -210,10 +230,10 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
             	    }
             	    break;
             	case 3 :
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:102:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:116:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
             	    {
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:102:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:103:4: otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:116:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:117:4: otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
             	    {
 
             	    				markLeaf(elementTypeProvider.getModel_DateKeyword_2_0ElementType());
@@ -222,16 +242,22 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
 
             	    				doneLeaf(otherlv_4);
             	    			
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:110:4: ( (lv_dateValues_5_0= RULE_EDATE ) )
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:111:5: (lv_dateValues_5_0= RULE_EDATE )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:124:4: ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:125:5: (lv_dateValues_5_0= RULE_EDATE )
             	    {
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:111:5: (lv_dateValues_5_0= RULE_EDATE )
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:112:6: lv_dateValues_5_0= RULE_EDATE
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:125:5: (lv_dateValues_5_0= RULE_EDATE )
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:126:6: lv_dateValues_5_0= RULE_EDATE
             	    {
 
             	    						markLeaf(elementTypeProvider.getModel_DateValuesEDATETerminalRuleCall_2_1_0ElementType());
             	    					
             	    lv_dateValues_5_0=(Token)match(input,RULE_EDATE,FollowSets000.FOLLOW_4); 
+
+            	    						if(!current) {
+            	    							associateWithSemanticElement();
+            	    							current = true;
+            	    						}
+            	    					
 
             	    						doneLeaf(lv_dateValues_5_0);
             	    					
@@ -263,7 +289,7 @@ public class PsiInternalEcoreTerminalsTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 

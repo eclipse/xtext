@@ -12,6 +12,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
@@ -41,7 +42,7 @@ public abstract class LightXtendTest extends LightToolingTest {
     try {
       LibraryUtil.addXtendLibrary(model);
       VirtualFile _file = contentEntry.getFile();
-      final VirtualFile xtendGenFolder = _file.createChildDirectory(null, "xtend-gen");
+      final VirtualFile xtendGenFolder = VfsUtil.createDirectoryIfMissing(_file, "xtend-gen");
       contentEntry.addSourceFolder(xtendGenFolder, false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

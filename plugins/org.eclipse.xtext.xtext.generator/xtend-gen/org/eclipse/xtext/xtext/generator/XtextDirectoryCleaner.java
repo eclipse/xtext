@@ -24,15 +24,18 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
-import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
-import org.eclipse.xtext.xtext.generator.SubProjectConfig;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 
+/**
+ * @noextend
+ */
 @SuppressWarnings("all")
 public class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
   @Inject
-  private XtextProjectConfig config;
+  private IXtextProjectConfig config;
   
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean enabled = true;
@@ -57,15 +60,15 @@ public class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
       return;
     }
     final ArrayList<String> directories = CollectionLiterals.<String>newArrayList();
-    List<? extends SubProjectConfig> _enabledProjects = this.config.getEnabledProjects();
-    final Function1<SubProjectConfig, IXtextGeneratorFileSystemAccess> _function = new Function1<SubProjectConfig, IXtextGeneratorFileSystemAccess>() {
+    List<? extends ISubProjectConfig> _enabledProjects = this.config.getEnabledProjects();
+    final Function1<ISubProjectConfig, IXtextGeneratorFileSystemAccess> _function = new Function1<ISubProjectConfig, IXtextGeneratorFileSystemAccess>() {
       @Override
-      public IXtextGeneratorFileSystemAccess apply(final SubProjectConfig it) {
+      public IXtextGeneratorFileSystemAccess apply(final ISubProjectConfig it) {
         return it.getSrcGen();
       }
     };
     List<IXtextGeneratorFileSystemAccess> _map = ListExtensions.map(_enabledProjects, _function);
-    RuntimeProjectConfig _runtime = this.config.getRuntime();
+    IRuntimeProjectConfig _runtime = this.config.getRuntime();
     IXtextGeneratorFileSystemAccess _ecoreModel = _runtime.getEcoreModel();
     Iterable<IXtextGeneratorFileSystemAccess> _plus = Iterables.<IXtextGeneratorFileSystemAccess>concat(_map, Collections.<IXtextGeneratorFileSystemAccess>unmodifiableList(CollectionLiterals.<IXtextGeneratorFileSystemAccess>newArrayList(_ecoreModel)));
     Iterable<IXtextGeneratorFileSystemAccess> _filterNull = IterableExtensions.<IXtextGeneratorFileSystemAccess>filterNull(_plus);

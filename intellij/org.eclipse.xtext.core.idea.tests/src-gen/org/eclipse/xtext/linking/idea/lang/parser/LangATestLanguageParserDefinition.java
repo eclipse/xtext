@@ -1,9 +1,10 @@
 package org.eclipse.xtext.linking.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectReference;
-import org.eclipse.xtext.linking.idea.lang.LangATestLanguageElementTypeProvider;
 import org.eclipse.xtext.linking.idea.lang.psi.impl.LangATestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.linking.idea.lang.LangATestLanguageElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -26,20 +27,25 @@ public class LangATestLanguageParserDefinition extends AbstractXtextParserDefini
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getMain_TypesTypeParserRuleCall_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getType_ExtendsTypeCrossReference_2_1_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getType_ImplementsTypeCrossReference_3_1_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getType_ImplementsTypeCrossReference_3_2_1_0ElementType()) {
-			return new PsiEObjectReference(node);
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getMainElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getMain_ImportsImportParserRuleCall_0_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getMain_TypesTypeParserRuleCall_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getImportElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getTypeElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);
 	}

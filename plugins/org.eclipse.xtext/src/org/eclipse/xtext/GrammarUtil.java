@@ -41,6 +41,7 @@ import org.eclipse.xtext.xtext.CurrentTypeFinder;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -397,6 +398,61 @@ public class GrammarUtil {
 
 	public static List<TerminalRule> allTerminalRules(Grammar _this) {
 		return typeSelect(allRules(_this), TerminalRule.class);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static Collection<? extends AbstractElement> getAllAlternatives(Grammar g) {
+		return getAllElementsByType(g, Alternatives.class);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public static Collection<? extends AbstractElement> getAllGroups(Grammar g) {
+		return getAllElementsByType(g, Group.class);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public static Collection<? extends AbstractElement> getAllUnorderedGroups(Grammar g) {
+		return getAllElementsByType(g, UnorderedGroup.class);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public static Collection<? extends AbstractElement> getAllAssignments(Grammar g) {
+		return getAllElementsByType(g, Assignment.class);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public static Collection<? extends AbstractElement> getAllPredicatedElements(Grammar g) {
+		Collection<AbstractElement> unfiltered = getAllElementsByType(g, AbstractElement.class);
+		Collection<AbstractElement> result = Collections2.filter(unfiltered, new Predicate<AbstractElement>() {
+			@Override
+			public boolean apply(AbstractElement input) {
+				return input.isPredicated() || input.isFirstSetPredicated();
+			}
+		});
+		return result;
+	}
+	
+	private static <T extends AbstractElement> Collection<T> getAllElementsByType(Grammar g, Class<T> type) {
+		Collection<ParserRule> allParserRules = GrammarUtil.allParserRules(g);
+		List<T> result = new ArrayList<T>(30);
+		for (ParserRule rule : allParserRules) {
+			result.addAll(EcoreUtil2.getAllContentsOfType(rule, type));
+		}
+		Collection<EnumRule> allEnumRules = GrammarUtil.allEnumRules(g);
+		for (EnumRule rule : allEnumRules) {
+			result.addAll(EcoreUtil2.getAllContentsOfType(rule, type));
+		}
+		return result;
 	}
 
 	public static List<AbstractMetamodelDeclaration> allMetamodelDeclarations(Grammar grammar) {

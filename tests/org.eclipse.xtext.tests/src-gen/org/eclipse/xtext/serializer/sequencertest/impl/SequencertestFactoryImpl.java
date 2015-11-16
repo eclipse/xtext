@@ -16,6 +16,8 @@ import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.Complex1;
 import org.eclipse.xtext.serializer.sequencertest.DefEnum;
+import org.eclipse.xtext.serializer.sequencertest.Delegation;
+import org.eclipse.xtext.serializer.sequencertest.DelegationA;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.FragmentCallerType;
@@ -30,6 +32,9 @@ import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
 import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
+import org.eclipse.xtext.serializer.sequencertest.ParameterCaller;
+import org.eclipse.xtext.serializer.sequencertest.ParameterDelegation;
+import org.eclipse.xtext.serializer.sequencertest.Parameterized;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestFactory;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
@@ -148,6 +153,11 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.NULL_VALUE: return createNullValue();
       case SequencertestPackage.NULL_CROSS_REF: return createNullCrossRef();
       case SequencertestPackage.FRAGMENT_CALLER_TYPE: return createFragmentCallerType();
+      case SequencertestPackage.PARAMETER_CALLER: return createParameterCaller();
+      case SequencertestPackage.PARAMETERIZED: return createParameterized();
+      case SequencertestPackage.PARAMETER_DELEGATION: return createParameterDelegation();
+      case SequencertestPackage.DELEGATION: return createDelegation();
+      case SequencertestPackage.DELEGATION_A: return createDelegationA();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -636,6 +646,61 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     FragmentCallerTypeImpl fragmentCallerType = new FragmentCallerTypeImpl();
     return fragmentCallerType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParameterCaller createParameterCaller()
+  {
+    ParameterCallerImpl parameterCaller = new ParameterCallerImpl();
+    return parameterCaller;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Parameterized createParameterized()
+  {
+    ParameterizedImpl parameterized = new ParameterizedImpl();
+    return parameterized;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParameterDelegation createParameterDelegation()
+  {
+    ParameterDelegationImpl parameterDelegation = new ParameterDelegationImpl();
+    return parameterDelegation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Delegation createDelegation()
+  {
+    DelegationImpl delegation = new DelegationImpl();
+    return delegation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DelegationA createDelegationA()
+  {
+    DelegationAImpl delegationA = new DelegationAImpl();
+    return delegationA;
   }
 
   /**

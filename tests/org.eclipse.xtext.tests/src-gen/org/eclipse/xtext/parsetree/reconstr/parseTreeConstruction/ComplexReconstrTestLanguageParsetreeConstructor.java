@@ -2162,7 +2162,7 @@ protected class TrickyF_TypeAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// (name+=ID | type+=INT)
+// name+=ID | type+=INT
 protected class TrickyF_Alternatives_2 extends AlternativesToken {
 
 	public TrickyF_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

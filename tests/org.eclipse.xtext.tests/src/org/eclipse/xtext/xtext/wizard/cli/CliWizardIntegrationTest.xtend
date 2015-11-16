@@ -22,7 +22,6 @@ import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions
 import org.eclipse.xtext.xtext.wizard.ProjectLayout
 import org.eclipse.xtext.xtext.wizard.SourceLayout
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
-import org.junit.Before
 import org.junit.ComparisonFailure
 import org.junit.Rule
 import org.junit.Test
@@ -31,14 +30,79 @@ import org.junit.rules.TemporaryFolder
 import static org.junit.Assert.*
 
 class CliWizardIntegrationTest {
-	@Rule public TemporaryFolder temp = new TemporaryFolder
-	
-	WizardConfiguration config
-	CliProjectsCreator creator
-	
-	@Before
-	def void setup() {
-		config = new WizardConfiguration => [
+
+	/**
+	 * Use this main method to update the expectations to whatever the wizard currently generates
+	 */
+	static def void main(String[] args) {
+		val creator = newProjectCreator
+		projectConfigs.forEach [ config |
+			val targetLocation = new File("testdata/wizard-expectations", config.baseName)
+			targetLocation.mkdirs
+			org.eclipse.xtext.util.Files.sweepFolder(targetLocation)
+			config.rootLocation = targetLocation.path
+			creator.createProjects(config)
+			println("Updating expectations for " + config.baseName)
+		]
+	}
+
+	static val projectConfigs = #[
+		newProjectConfig => [
+			baseName = "org.xtext.example.plainMaven"
+			preferredBuildSystem = BuildSystem.MAVEN
+			sourceLayout = SourceLayout.MAVEN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = true
+			ideProject.enabled = true
+			webProject.enabled = true
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.mavenTycho"
+			preferredBuildSystem = BuildSystem.MAVEN
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = true
+			uiProject.enabled = true
+			uiProject.testProject.enabled = true
+			ideProject.enabled = true
+			webProject.enabled = true
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.gradle"
+			preferredBuildSystem = BuildSystem.GRADLE
+			sourceLayout = SourceLayout.MAVEN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = true
+			ideProject.enabled = true
+			webProject.enabled = true
+			intellijProject.enabled = true
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.eclipsePlugin"
+			preferredBuildSystem = BuildSystem.NONE
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.FLAT
+			runtimeProject.testProject.enabled = true
+			ideProject.enabled = true
+			uiProject.enabled = true
+			uiProject.testProject.enabled = true
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.full"
+			preferredBuildSystem = BuildSystem.GRADLE
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = true
+			uiProject.enabled = true
+			uiProject.testProject.enabled = true
+			ideProject.enabled = true
+			webProject.enabled = true
+			intellijProject.enabled = true
+		]
+	]
+
+	private static def newProjectConfig() {
+		new WizardConfiguration => [
 			xtextVersion = new XtextVersion("2.9.0-SNAPSHOT")
 			encoding = Charsets.UTF_8
 			language => [
@@ -46,132 +110,84 @@ class CliWizardIntegrationTest {
 				fileExtensions = FileExtensions.fromString("mydsl")
 			]
 		]
-		creator = new CliProjectsCreator
 	}
-	
+
+	private static def newProjectCreator() {
+		new CliProjectsCreator => [
+			lineDelimiter = "\n"
+		]
+	}
+
+	@Rule public TemporaryFolder temp = new TemporaryFolder
+
+	WizardConfiguration config
+	CliProjectsCreator creator
+
 	@Test
-	def testPlainMavenProject() {
-		config.baseName = "org.xtext.example.plainMaven"
-		config.preferredBuildSystem = BuildSystem.MAVEN
-		config.sourceLayout = SourceLayout.MAVEN
-		config.projectLayout = ProjectLayout.HIERARCHICAL
-		config.runtimeProject.testProject.enabled = true
-		config.ideProject.enabled = true
-		config.webProject.enabled = true
-		validateCreatedProjects
+	def testProjectCreation() {
+		creator = newProjectCreator
+		projectConfigs.forEach[config|
+			this.config = config
+			validateCreatedProjects
+		]
 	}
-	
-	@Test
-	def testMavenTychoProject() {
-		config.baseName = "org.xtext.example.mavenTycho"
-		config.preferredBuildSystem = BuildSystem.MAVEN
-		config.sourceLayout = SourceLayout.PLAIN
-		config.projectLayout = ProjectLayout.HIERARCHICAL
-		config.runtimeProject.testProject.enabled = true
-		config.uiProject.enabled = true
-		config.uiProject.testProject.enabled = true
-		config.ideProject.enabled = true
-		config.webProject.enabled = true
-		validateCreatedProjects
-	}
-	
-	@Test
-	def testGradleProject() {
-		config.baseName = "org.xtext.example.gradle"
-		config.preferredBuildSystem = BuildSystem.GRADLE
-		config.sourceLayout = SourceLayout.MAVEN
-		config.projectLayout = ProjectLayout.HIERARCHICAL
-		config.runtimeProject.testProject.enabled = true
-		config.ideProject.enabled = true
-		config.webProject.enabled = true
-		config.intellijProject.enabled = true
-		validateCreatedProjects
-	}
-	
-	@Test
-	def testEclipsePluginProject() {
-		config.baseName = "org.xtext.example.eclipsePlugin"
-		config.preferredBuildSystem = BuildSystem.ECLIPSE
-		config.sourceLayout = SourceLayout.PLAIN
-		config.projectLayout = ProjectLayout.FLAT
-		config.runtimeProject.testProject.enabled = true
-		config.ideProject.enabled = true
-		config.uiProject.enabled = true
-		config.uiProject.testProject.enabled = true
-		validateCreatedProjects
-	}
-	
-	@Test
-	def testFullProject() {
-		config.baseName = "org.xtext.example.full"
-		config.preferredBuildSystem = BuildSystem.GRADLE
-		config.sourceLayout = SourceLayout.PLAIN
-		config.projectLayout = ProjectLayout.HIERARCHICAL
-		config.runtimeProject.testProject.enabled = true
-		config.uiProject.enabled = true
-		config.uiProject.testProject.enabled = true
-		config.ideProject.enabled = true
-		config.webProject.enabled = true
-		config.intellijProject.enabled = true
-		validateCreatedProjects
-	}
-	
+
 	private def void validateCreatedProjects() {
 		val targetLocation = new File(temp.root, config.baseName)
 		config.rootLocation = targetLocation.path
 		creator.createProjects(config)
-		
+
 		val expectationLocation = new File("testdata/wizard-expectations", config.baseName)
-		val expectedFiles= expectationLocation.toFileSet
+		val expectedFiles = expectationLocation.toFileSet
 		val actualFiles = targetLocation.toFileSet
-		
+
 		compareFileTrees(expectedFiles, actualFiles)
 	}
-	
+
 	private def toFileSet(File root) {
 		val allFiles = newArrayList
 		collectAllFiles(root, allFiles)
-		val generatedFiles = allFiles.map[
+		val generatedFiles = allFiles.map [
 			val relativePath = path.replace(root.path, "")
 			toGeneratedFile(relativePath)
 		];
 		val Comparator<GeneratedFile> sortByPath = [$0.relativePath <=> $1.relativePath]
 		newTreeSet(sortByPath, generatedFiles)
 	}
-	
+
 	private def void collectAllFiles(File root, List<File> children) {
-		children.add(root)
 		if (root.isDirectory) {
 			root.listFiles.forEach[collectAllFiles(children)]
+		} else {
+			children.add(root)
 		}
 	}
-	
+
 	private def toGeneratedFile(File file, String relativePath) {
-		new GeneratedFile(relativePath, if (file.isDirectory) "" else Files.toString(file, config.encoding))
+		new GeneratedFile(relativePath, if(file.isDirectory) "" else Files.toString(file, config.encoding))
 	}
-	
+
 	private def compareFileTrees(Set<GeneratedFile> expectedFiles, Set<GeneratedFile> actualFiles) {
 		val expectedFilesByPath = expectedFiles.toMap[relativePath]
 		val actualFilesByPath = actualFiles.toMap[relativePath]
-		
-		val difference = Sets.difference(expectedFiles, actualFiles)
-		val missingFiles = difference.filter[expectedFiles.contains(it)]
-		val unexpectedFiles = difference.filter[actualFiles.contains(it)]
+
+		val missingFiles = Sets.difference(expectedFiles, actualFiles)
+		val unexpectedFiles = Sets.difference(actualFiles, expectedFiles)
 		val comparableFiles = Sets.intersection(expectedFiles, actualFiles)
 
-		missingFiles.forEach[
+		missingFiles.forEach [
 			throw new ComparisonFailure('''Missing file: «relativePath»''', content, "")
 		]
-		unexpectedFiles.forEach[
+		unexpectedFiles.forEach [
 			throw new ComparisonFailure('''Unexpected file: «relativePath»''', "", content)
 		]
-		comparableFiles.forEach[
+		comparableFiles.forEach [
 			val expectedContent = LineDelimiters.toUnix(expectedFilesByPath.get(relativePath).content)
 			val actualContent = LineDelimiters.toUnix(actualFilesByPath.get(relativePath).content)
 			assertEquals(relativePath, expectedContent, actualContent)
 		]
 	}
-	
+
 	@Data
 	private static class GeneratedFile {
 		String relativePath

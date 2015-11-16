@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -63,6 +65,12 @@ ruleModel:
 					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_0_0);
 				}
@@ -76,11 +84,21 @@ ruleModel:
 				lv_enabled_1_0=ruleUnassignedAction
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getModel_ReferenceModelCrossReference_2_0ElementType());
 				}
@@ -94,18 +112,21 @@ ruleModel:
 ;
 
 //Entry rule entryRuleUnassignedAction
-entryRuleUnassignedAction:
+entryRuleUnassignedAction returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnassignedActionElementType()); }
-	ruleUnassignedAction
+	iv_ruleUnassignedAction=ruleUnassignedAction
+	{ $current=$iv_ruleUnassignedAction.current; }
 	EOF;
 
 // Rule UnassignedAction
-ruleUnassignedAction:
+ruleUnassignedAction returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getUnassignedAction_UnassignedActionAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{

@@ -4,15 +4,14 @@
 package org.eclipse.xtext.testlanguages.indent.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.testlanguages.indent.indentLang.IndentLangPackage;
 import org.eclipse.xtext.testlanguages.indent.indentLang.Node;
 import org.eclipse.xtext.testlanguages.indent.indentLang.NodeList;
@@ -25,8 +24,13 @@ public class IndentationAwareTestLanguageSemanticSequencer extends AbstractDeleg
 	private IndentationAwareTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == IndentLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == IndentLangPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case IndentLangPackage.NODE:
 				sequence_Node(context, (Node) semanticObject); 
 				return; 
@@ -34,23 +38,32 @@ public class IndentationAwareTestLanguageSemanticSequencer extends AbstractDeleg
 				sequence_NodeList(context, (NodeList) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     NodeList returns NodeList
+	 *
 	 * Constraint:
 	 *     (children+=Node children+=Node*)
 	 */
-	protected void sequence_NodeList(EObject context, NodeList semanticObject) {
+	protected void sequence_NodeList(ISerializationContext context, NodeList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Node returns Node
+	 *
 	 * Constraint:
 	 *     (name=String children=NodeList?)
 	 */
-	protected void sequence_Node(EObject context, Node semanticObject) {
+	protected void sequence_Node(ISerializationContext context, Node semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

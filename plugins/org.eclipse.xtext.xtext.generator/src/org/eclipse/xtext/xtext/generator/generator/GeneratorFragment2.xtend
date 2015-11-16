@@ -19,14 +19,15 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.GeneratorDelegate
+import org.eclipse.xtext.generator.IFileSystemAccess2
+import org.eclipse.xtext.generator.IGenerator2
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
@@ -36,8 +37,11 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.generator.AbstractGenerator
+import org.eclipse.xtext.generator.IGeneratorContext
+import org.eclipse.xtext.generator.GeneratorContext
 
-class GeneratorFragment2 extends AbstractGeneratorFragment2 {
+class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 	
 	@Inject CodeConfig codeConfig
 	
@@ -55,11 +59,8 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	@Accessors(PUBLIC_SETTER)
 	boolean generateXtendMain = false
 	
-	@Accessors(PUBLIC_SETTER)
-	boolean generateStubs = true
-	
-	def boolean isGenerateStub() {
-		!grammar.inheritsXbase && generateStubs
+	override boolean isGenerateStub() {
+		!grammar.inheritsXbase && super.isGenerateStub
 	}
 	
 	def boolean isGenerateJavaMain() {
@@ -93,11 +94,16 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	override generate() {
 		if (isGenerateStub) {
 			new GuiceModuleAccess.BindingFactory()
-				.addTypeToType(IGenerator.typeRef, language.grammar.generatorStub)
+				.addTypeToType(IGenerator2.typeRef, language.grammar.generatorStub)
 				.contributeTo(language.runtimeGenModule)
 			if (projectConfig.runtime.manifest !== null)
 				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
-			doGenerateStubFile
+
+			if (generateXtendStub) {
+				doGenerateXtendStubFile
+			} else {
+				doGenerateJavaStubFile
+			}
 		}
 		if (isGenerateStub || isGenerateJavaMain) {
 			if (projectConfig.runtime.manifest !== null)
@@ -121,7 +127,11 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	protected def contributeEclipsePluginGuiceBindings() {
 		val StringConcatenationClient expression = '''«'org.eclipse.core.resources.ResourcesPlugin'.typeRef».getWorkspace().getRoot()'''
 		val StringConcatenationClient statement =
-			'''binder.bind(«'org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer'.typeRef».class).annotatedWith(«Names».named("builderPreferenceInitializer")).to(«'org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer'.typeRef».class);'''
+			'''
+				binder.bind(«'org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer'.typeRef».class)
+					.annotatedWith(«Names».named("builderPreferenceInitializer"))
+					.to(«new TypeReference('org.eclipse.xtext.builder.preferences', 'BuilderPreferenceAccess.Initializer')».class);
+			'''
 		new GuiceModuleAccess.BindingFactory()
 			.addTypeToType('org.eclipse.xtext.builder.IXtextBuilderParticipant'.typeRef,
 					'org.eclipse.xtext.builder.BuilderParticipant'.typeRef)
@@ -130,23 +140,47 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			.contributeTo(language.eclipsePluginGenModule)
 	}
 
-	protected def void doGenerateStubFile() {
+	protected def void doGenerateXtendStubFile() {
 		fileAccessFactory.createXtendFile(grammar.generatorStub, '''
 			/**
 			 * Generates code from your model files on save.
 			 * 
 			 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
 			 */
-			class «language.grammar.generatorStub.simpleName» implements «IGenerator» {
+			class «language.grammar.generatorStub.simpleName» extends «AbstractGenerator» {
 			
-				override void doGenerate(«Resource» resource, «IFileSystemAccess» fsa) {
+				override void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «IGeneratorContext» context) {
 			//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 			//			resource.allContents
 			//				.filter(typeof(Greeting))
 			//				.map[name]
 			//				.join(', '))
 				}
-			
+			}
+		''').writeTo(projectConfig.runtime.src)
+	}
+
+	protected def void doGenerateJavaStubFile() {
+		fileAccessFactory.createJavaFile(grammar.generatorStub, '''
+			/**
+			 * Generates code from your model files on save.
+			 * 
+			 * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
+			 */
+			public class «language.grammar.generatorStub.simpleName» extends «AbstractGenerator» {
+
+				@«Override»
+				public void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «IGeneratorContext» context) {
+			//		Iterator<Greeting> filtered = Iterators.filter(resource.getAllContents(), Greeting.class);
+			//		Iterator<String> names = Iterators.transform(filtered, new Function<Greeting, String>() {
+			//
+			//			@«Override»
+			//			public String apply(Greeting greeting) {
+			//				return greeting.getName();
+			//			}
+			//		});
+			//		fsa.generateFile("greetings.txt", "People to greet: " + IteratorExtensions.join(names, ", "));
+				}
 			}
 		''').writeTo(projectConfig.runtime.src)
 	}
@@ -172,7 +206,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 				private «IResourceValidator» validator;
 			
 				@«Inject»
-				private «IGenerator» generator;
+				private «GeneratorDelegate» generator;
 			
 				@«Inject» 
 				private «JavaIoFileSystemAccess» fileAccess;
@@ -193,7 +227,9 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			
 					// Configure and start the generator
 					fileAccess.setOutputPath("src-gen/");
-					generator.doGenerate(resource, fileAccess);
+					«GeneratorContext» context = new «GeneratorContext»();
+					context.setCancelIndicator(«CancelIndicator».NullImpl);
+					generator.generate(resource, fileAccess, context);
 			
 					System.out.println("Code generation finished.");
 				}
@@ -219,7 +255,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			
 				@«Inject» «IResourceValidator» validator
 			
-				@«Inject» «IGenerator» generator
+				@«Inject» «GeneratorDelegate» generator
 			
 				@«Inject» «JavaIoFileSystemAccess» fileAccess
 			
@@ -237,7 +273,10 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			
 					// Configure and start the generator
 					fileAccess.outputPath = 'src-gen/'
-					generator.doGenerate(resource, fileAccess)
+					val context = new «GeneratorContext» => [
+						cancelIndicator = «CancelIndicator».NullImpl
+					]
+					generator.generate(resource, fileAccess, context)
 					System.out.println('Code generation finished.')
 				}
 			}
@@ -288,8 +327,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			<extension point="org.eclipse.xtext.builder.participant">
 				<participant
 					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-					fileExtensions="«language.fileExtensions.join(',')»">
-				</participant>
+					fileExtensions="«language.fileExtensions.join(',')»"/>
 			</extension>
 			<extension point="org.eclipse.ui.preferencePages">
 				<page

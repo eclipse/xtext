@@ -1,9 +1,10 @@
 package org.eclipse.xtext.testlanguages.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectReference;
-import org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageElementTypeProvider;
 import org.eclipse.xtext.testlanguages.idea.lang.psi.impl.FowlerDslTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.testlanguages.idea.lang.FowlerDslTestLanguageElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -26,30 +27,37 @@ public class FowlerDslTestLanguageParserDefinition extends AbstractXtextParserDe
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getStatemachine_EventsEventParserRuleCall_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getEvent_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getStatemachine_CommandsCommandParserRuleCall_4_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getCommand_NameIDTerminalRuleCall_0_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getStatemachine_StatesStateParserRuleCall_6_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getState_NameIDTerminalRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getState_ActionsCommandCrossReference_2_2_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getTransition_EventEventCrossReference_0_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getTransition_StateStateCrossReference_2_0ElementType()) {
-			return new PsiEObjectReference(node);
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getStatemachineElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getStatemachine_EventsEventParserRuleCall_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getStatemachine_CommandsCommandParserRuleCall_4_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getStatemachine_StatesStateParserRuleCall_6_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getEventElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getCommandElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getStateElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getState_TransitionsTransitionParserRuleCall_3_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getTransitionElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);
 	}

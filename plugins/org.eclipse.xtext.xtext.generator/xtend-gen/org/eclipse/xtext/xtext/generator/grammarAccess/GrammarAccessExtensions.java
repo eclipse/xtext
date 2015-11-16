@@ -41,6 +41,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
@@ -134,7 +135,7 @@ public class GrammarAccessExtensions {
   }
   
   /**
-   * Converts an arbitary string to a valid Java identifier.
+   * Converts an arbitary string to a valid Java identifier that is valid in an Antlr grammar action context, too.
    * The string is split up along the the characters that are not valid as java
    * identifier. The first character of each segments is made upper case which
    * leads to a camel-case style.
@@ -212,30 +213,24 @@ public class GrammarAccessExtensions {
     char[] _charArray = text.toCharArray();
     for (final char c : _charArray) {
       {
-        boolean _xifexpression = false;
-        if (start) {
-          _xifexpression = Character.isJavaIdentifierStart(c);
-        } else {
-          _xifexpression = Character.isJavaIdentifierPart(c);
-        }
-        final boolean valid = _xifexpression;
+        final boolean valid = this.isValidJavaLatinIdentifier(c, start);
         if (valid) {
           if (start) {
-            char _xifexpression_1 = (char) 0;
+            char _xifexpression = (char) 0;
             if (uppercaseFirst) {
+              _xifexpression = Character.toUpperCase(c);
+            } else {
+              _xifexpression = Character.toLowerCase(c);
+            }
+            builder.append(_xifexpression);
+          } else {
+            char _xifexpression_1 = (char) 0;
+            if (up) {
               _xifexpression_1 = Character.toUpperCase(c);
             } else {
-              _xifexpression_1 = Character.toLowerCase(c);
+              _xifexpression_1 = c;
             }
             builder.append(_xifexpression_1);
-          } else {
-            char _xifexpression_2 = (char) 0;
-            if (up) {
-              _xifexpression_2 = Character.toUpperCase(c);
-            } else {
-              _xifexpression_2 = c;
-            }
-            builder.append(_xifexpression_2);
           }
           up = false;
           start = false;
@@ -245,6 +240,70 @@ public class GrammarAccessExtensions {
       }
     }
     return builder.toString();
+  }
+  
+  public boolean isValidJavaLatinIdentifier(final char c, final boolean start) {
+    boolean valid = ((c >= 'A') && (c <= 'Z'));
+    valid = (valid || ((c >= 'a') && (c <= 'z')));
+    boolean _or = false;
+    boolean _or_1 = false;
+    boolean _or_2 = false;
+    boolean _or_3 = false;
+    boolean _or_4 = false;
+    boolean _or_5 = false;
+    if (valid) {
+      _or_5 = true;
+    } else {
+      boolean _eq = GrammarAccessExtensions.eq(c, 'ä');
+      _or_5 = _eq;
+    }
+    if (_or_5) {
+      _or_4 = true;
+    } else {
+      boolean _eq_1 = GrammarAccessExtensions.eq(c, 'ö');
+      _or_4 = _eq_1;
+    }
+    if (_or_4) {
+      _or_3 = true;
+    } else {
+      boolean _eq_2 = GrammarAccessExtensions.eq(c, 'ü');
+      _or_3 = _eq_2;
+    }
+    if (_or_3) {
+      _or_2 = true;
+    } else {
+      boolean _eq_3 = GrammarAccessExtensions.eq(c, 'Ä');
+      _or_2 = _eq_3;
+    }
+    if (_or_2) {
+      _or_1 = true;
+    } else {
+      boolean _eq_4 = GrammarAccessExtensions.eq(c, 'Ö');
+      _or_1 = _eq_4;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      boolean _eq_5 = GrammarAccessExtensions.eq(c, 'Ü');
+      _or = _eq_5;
+    }
+    valid = _or;
+    boolean _or_6 = false;
+    if (valid) {
+      _or_6 = true;
+    } else {
+      boolean _eq_6 = GrammarAccessExtensions.eq(c, '_');
+      _or_6 = _eq_6;
+    }
+    valid = _or_6;
+    if ((!start)) {
+      valid = (valid || ((c >= '0') && (c <= '9')));
+    }
+    return valid;
+  }
+  
+  private static boolean eq(final char c1, final char c2) {
+    return (c1 == c2);
   }
   
   /**
@@ -493,6 +552,22 @@ public class GrammarAccessExtensions {
   }
   
   /**
+   * Returns the invocation of a ParserRule Parameter as Java expression.
+   */
+  public String gaRuleParameterAccessor(final Parameter parameter) {
+    final ParserRule rule = GrammarUtil.containingParserRule(parameter);
+    EList<Parameter> _parameters = rule.getParameters();
+    final int index = _parameters.indexOf(parameter);
+    String _gaRuleAccessor = this.gaRuleAccessor(rule);
+    String _plus = (_gaRuleAccessor + ".getParameters().get(");
+    String _plus_1 = (_plus + Integer.valueOf(index));
+    String _plus_2 = (_plus_1 + "/*");
+    String _name = parameter.getName();
+    String _plus_3 = (_plus_2 + _name);
+    return (_plus_3 + "*/)");
+  }
+  
+  /**
    * Returns the invocation of the rule accessor method as Java statement.
    */
   public String gaBaseRuleAccessor(final AbstractRule rule) {
@@ -594,6 +669,12 @@ public class GrammarAccessExtensions {
       }
     }
     if (!_matched) {
+      if (ele instanceof Parameter) {
+        _matched=true;
+        _switchResult = this.gaRuleParameterAccessor(((Parameter)ele));
+      }
+    }
+    if (!_matched) {
       EClass _eClass = ele.eClass();
       String _name = _eClass.getName();
       String _plus = ("<error: unknown type " + _name);
@@ -603,13 +684,20 @@ public class GrammarAccessExtensions {
   }
   
   public String grammarFragmentToString(final EObject ele, final String prefix) {
+    ISerializer _serializer = this.getSerializer();
+    return GrammarAccessExtensions.grammarFragmentToString(_serializer, ele, prefix);
+  }
+  
+  /**
+   * @noreference
+   */
+  public static String grammarFragmentToString(final ISerializer serializer, final EObject object, final String prefix) {
     String s = null;
     try {
       SaveOptions.Builder _newBuilder = SaveOptions.newBuilder();
       SaveOptions.Builder _format = _newBuilder.format();
       final SaveOptions options = _format.getOptions();
-      ISerializer _serializer = this.getSerializer();
-      String _serialize = _serializer.serialize(ele, options);
+      String _serialize = serializer.serialize(object, options);
       s = _serialize;
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
@@ -624,7 +712,8 @@ public class GrammarAccessExtensions {
     String _replaceAll = _trim.replaceAll("(\\r?\\n)", ("$1" + prefix));
     String _replaceAll_1 = _replaceAll.replaceAll("/\\*", "/ *");
     String _replaceAll_2 = _replaceAll_1.replaceAll("\\*/", "* /");
-    String _plus = (prefix + _replaceAll_2);
+    String _replace = _replaceAll_2.replace("\\u", "\\\\u");
+    String _plus = (prefix + _replace);
     s = _plus;
     return s;
   }
@@ -753,50 +842,6 @@ public class GrammarAccessExtensions {
       _and = _not;
     }
     return _and;
-  }
-  
-  protected boolean _mustBeParenthesized(final AbstractElement it) {
-    return true;
-  }
-  
-  protected boolean _mustBeParenthesized(final Keyword it) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _predicated = this.predicated(it);
-    if (_predicated) {
-      _or_1 = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or_1 = _isFirstSetPredicated;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      String _cardinality = it.getCardinality();
-      boolean _notEquals = (!Objects.equal(_cardinality, null));
-      _or = _notEquals;
-    }
-    return _or;
-  }
-  
-  protected boolean _mustBeParenthesized(final RuleCall it) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _predicated = this.predicated(it);
-    if (_predicated) {
-      _or_1 = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or_1 = _isFirstSetPredicated;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      String _cardinality = it.getCardinality();
-      boolean _notEquals = (!Objects.equal(_cardinality, null));
-      _or = _notEquals;
-    }
-    return _or;
   }
   
   protected boolean _predicated(final AbstractElement it) {
@@ -965,13 +1010,7 @@ public class GrammarAccessExtensions {
         boolean _notEquals = (!Objects.equal(_rule, null));
         if (_notEquals) {
           _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("\"");
-          AbstractRule _rule_1 = ((RuleCall)it).getRule();
-          String _name = _rule_1.getName();
-          _builder.append(_name, "");
-          _builder.append("\"");
-          _switchResult = _builder;
+          _switchResult = AntlrGrammarGenUtil.getQualifiedNameAsString(((RuleCall)it));
         }
       }
     }
@@ -1034,19 +1073,6 @@ public class GrammarAccessExtensions {
       return _grammarElementAccess((AbstractRule)it);
     } else if (it != null) {
       return _grammarElementAccess(it);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it).toString());
-    }
-  }
-  
-  public boolean mustBeParenthesized(final AbstractElement it) {
-    if (it instanceof Keyword) {
-      return _mustBeParenthesized((Keyword)it);
-    } else if (it instanceof RuleCall) {
-      return _mustBeParenthesized((RuleCall)it);
-    } else if (it != null) {
-      return _mustBeParenthesized(it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it).toString());

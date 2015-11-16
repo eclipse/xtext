@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleModel:
 				lv_x1_0_0=ruleSimpleGroup
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -77,6 +83,10 @@ ruleModel:
 				lv_x2_1_0=ruleSimpleAlternative
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -89,6 +99,10 @@ ruleModel:
 				lv_x3_2_0=ruleSimpleMultiplicities
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -101,6 +115,10 @@ ruleModel:
 				lv_x4_3_0=ruleGroupMultiplicities
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -113,6 +131,10 @@ ruleModel:
 				lv_x5_4_0=ruleAlternativeMultiplicities
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -125,6 +147,10 @@ ruleModel:
 				lv_x6_5_0=ruleList1
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -137,6 +163,10 @@ ruleModel:
 				lv_x7_6_0=ruleList2
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -149,6 +179,10 @@ ruleModel:
 				lv_x8_7_0=ruleAltList1
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -161,6 +195,10 @@ ruleModel:
 				lv_x9_8_0=ruleAltList2
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -173,6 +211,10 @@ ruleModel:
 				lv_x10_9_0=ruleSingleKeywords
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -185,6 +227,10 @@ ruleModel:
 				lv_x11_10_0=ruleSingleKeywordsOrID
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -197,6 +243,10 @@ ruleModel:
 				lv_x12_11_0=ruleSingleTerminals
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -209,6 +259,10 @@ ruleModel:
 				lv_x10_12_0=ruleMultiKeywords
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -221,6 +275,10 @@ ruleModel:
 				lv_x11_13_0=ruleMultiKeywordsOrID
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -233,6 +291,10 @@ ruleModel:
 				lv_x12_14_0=ruleMultiTerminals
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -245,6 +307,10 @@ ruleModel:
 				lv_x13_15_0=ruleSingleEnum
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -257,6 +323,10 @@ ruleModel:
 				lv_x14_16_0=ruleSingleCrossReference
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -269,6 +339,10 @@ ruleModel:
 				lv_x15_17_0=ruleSingleContainmentReference
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -281,6 +355,10 @@ ruleModel:
 				lv_x19_18_0=ruleDependentAlternative1
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -293,6 +371,10 @@ ruleModel:
 				lv_x20_19_0=ruleDependentAlternative2
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -305,6 +387,10 @@ ruleModel:
 				lv_x21_20_0=ruleOptional
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -317,6 +403,10 @@ ruleModel:
 				lv_x22_21_0=ruleFloat
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -329,6 +419,10 @@ ruleModel:
 				lv_x23_22_0=ruleUnorderedAlternative
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -341,6 +435,10 @@ ruleModel:
 				lv_x24_23_0=ruleUnorderedGroup
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -353,6 +451,10 @@ ruleModel:
 				lv_x25_24_0=ruleUnorderedGroupOptional
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -365,6 +467,10 @@ ruleModel:
 				lv_x26_25_0=ruleUnorderedGroupBoolean
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -377,6 +483,10 @@ ruleModel:
 				lv_x27_26_0=ruleComplex1
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -389,6 +499,10 @@ ruleModel:
 				lv_x28_27_0=ruleOptionalDouble
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -401,6 +515,10 @@ ruleModel:
 				lv_x29_28_0=ruleNullValueGenerated
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -413,6 +531,10 @@ ruleModel:
 				lv_x30_29_0=ruleNullValueInterpreted
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -425,6 +547,10 @@ ruleModel:
 				lv_x31_30_0=ruleNullCrossRefGenerated
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -437,6 +563,58 @@ ruleModel:
 				lv_x32_31_0=ruleNullCrossRefInterpreted
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+			)
+		)
+		    |
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getModel_X33FragmentCallerParserRuleCall_32_0ElementType());
+				}
+				lv_x33_32_0=ruleFragmentCaller
+				{
+					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+			)
+		)
+		    |
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getModel_X34ParameterCallerParserRuleCall_33_0ElementType());
+				}
+				lv_x34_33_0=ruleParameterCaller
+				{
+					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+			)
+		)
+		    |
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getModel_X35ParameterDelegationParserRuleCall_34_0ElementType());
+				}
+				lv_x35_34_0=ruleParameterDelegation
+				{
+					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -444,13 +622,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleSimpleGroup
-entryRuleSimpleGroup:
+entryRuleSimpleGroup returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSimpleGroupElementType()); }
-	ruleSimpleGroup
+	iv_ruleSimpleGroup=ruleSimpleGroup
+	{ $current=$iv_ruleSimpleGroup.current; }
 	EOF;
 
 // Rule SimpleGroup
-ruleSimpleGroup:
+ruleSimpleGroup returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSimpleGroup_NumberSignDigitOneKeyword_0ElementType());
@@ -466,6 +646,12 @@ ruleSimpleGroup:
 				}
 				lv_val1_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_val1_1_0);
 				}
 			)
@@ -477,6 +663,12 @@ ruleSimpleGroup:
 				}
 				lv_val2_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_val2_2_0);
 				}
 			)
@@ -485,13 +677,15 @@ ruleSimpleGroup:
 ;
 
 //Entry rule entryRuleSimpleAlternative
-entryRuleSimpleAlternative:
+entryRuleSimpleAlternative returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSimpleAlternativeElementType()); }
-	ruleSimpleAlternative
+	iv_ruleSimpleAlternative=ruleSimpleAlternative
+	{ $current=$iv_ruleSimpleAlternative.current; }
 	EOF;
 
 // Rule SimpleAlternative
-ruleSimpleAlternative:
+ruleSimpleAlternative returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSimpleAlternative_NumberSignDigitTwoKeyword_0ElementType());
@@ -516,6 +710,12 @@ ruleSimpleAlternative:
 						}
 						lv_val1_2_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val1_2_0);
 						}
 					)
@@ -537,6 +737,12 @@ ruleSimpleAlternative:
 						}
 						lv_val2_4_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val2_4_0);
 						}
 					)
@@ -547,13 +753,15 @@ ruleSimpleAlternative:
 ;
 
 //Entry rule entryRuleSimpleMultiplicities
-entryRuleSimpleMultiplicities:
+entryRuleSimpleMultiplicities returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSimpleMultiplicitiesElementType()); }
-	ruleSimpleMultiplicities
+	iv_ruleSimpleMultiplicities=ruleSimpleMultiplicities
+	{ $current=$iv_ruleSimpleMultiplicities.current; }
 	EOF;
 
 // Rule SimpleMultiplicities
-ruleSimpleMultiplicities:
+ruleSimpleMultiplicities returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSimpleMultiplicities_NumberSignDigitThreeKeyword_0ElementType());
@@ -568,6 +776,12 @@ ruleSimpleMultiplicities:
 					markLeaf(elementTypeProvider.getSimpleMultiplicities_Val1IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_val1_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_val1_1_0);
 				}
@@ -587,6 +801,12 @@ ruleSimpleMultiplicities:
 				}
 				lv_val2_3_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_val2_3_0);
 				}
 			)
@@ -604,6 +824,12 @@ ruleSimpleMultiplicities:
 					markLeaf(elementTypeProvider.getSimpleMultiplicities_Val3IDTerminalRuleCall_5_0ElementType());
 				}
 				lv_val3_5_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_val3_5_0);
 				}
@@ -623,6 +849,12 @@ ruleSimpleMultiplicities:
 				}
 				lv_val4_7_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_val4_7_0);
 				}
 			)
@@ -631,13 +863,15 @@ ruleSimpleMultiplicities:
 ;
 
 //Entry rule entryRuleGroupMultiplicities
-entryRuleGroupMultiplicities:
+entryRuleGroupMultiplicities returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getGroupMultiplicitiesElementType()); }
-	ruleGroupMultiplicities
+	iv_ruleGroupMultiplicities=ruleGroupMultiplicities
+	{ $current=$iv_ruleGroupMultiplicities.current; }
 	EOF;
 
 // Rule GroupMultiplicities
-ruleGroupMultiplicities:
+ruleGroupMultiplicities returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getGroupMultiplicities_NumberSignDigitFourKeyword_0ElementType());
@@ -652,6 +886,12 @@ ruleGroupMultiplicities:
 					markLeaf(elementTypeProvider.getGroupMultiplicities_Val1IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_val1_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_val1_1_0);
 				}
@@ -672,6 +912,12 @@ ruleGroupMultiplicities:
 					}
 					lv_val2_3_0=RULE_ID
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val2_3_0);
 					}
 				)
@@ -682,6 +928,12 @@ ruleGroupMultiplicities:
 						markLeaf(elementTypeProvider.getGroupMultiplicities_Val3IDTerminalRuleCall_3_1_0ElementType());
 					}
 					lv_val3_4_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val3_4_0);
 					}
@@ -703,6 +955,12 @@ ruleGroupMultiplicities:
 					}
 					lv_val4_6_0=RULE_ID
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val4_6_0);
 					}
 				)
@@ -713,6 +971,12 @@ ruleGroupMultiplicities:
 						markLeaf(elementTypeProvider.getGroupMultiplicities_Val5IDTerminalRuleCall_5_1_0ElementType());
 					}
 					lv_val5_7_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val5_7_0);
 					}
@@ -734,6 +998,12 @@ ruleGroupMultiplicities:
 					}
 					lv_val6_9_0=RULE_ID
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val6_9_0);
 					}
 				)
@@ -745,6 +1015,12 @@ ruleGroupMultiplicities:
 					}
 					lv_val7_10_0=RULE_ID
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val7_10_0);
 					}
 				)
@@ -754,13 +1030,15 @@ ruleGroupMultiplicities:
 ;
 
 //Entry rule entryRuleAlternativeMultiplicities
-entryRuleAlternativeMultiplicities:
+entryRuleAlternativeMultiplicities returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAlternativeMultiplicitiesElementType()); }
-	ruleAlternativeMultiplicities
+	iv_ruleAlternativeMultiplicities=ruleAlternativeMultiplicities
+	{ $current=$iv_ruleAlternativeMultiplicities.current; }
 	EOF;
 
 // Rule AlternativeMultiplicities
-ruleAlternativeMultiplicities:
+ruleAlternativeMultiplicities returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAlternativeMultiplicities_NumberSignDigitFiveKeyword_0ElementType());
@@ -776,6 +1054,12 @@ ruleAlternativeMultiplicities:
 						markLeaf(elementTypeProvider.getAlternativeMultiplicities_Val2IDTerminalRuleCall_1_0_0ElementType());
 					}
 					lv_val2_1_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val2_1_0);
 					}
@@ -796,6 +1080,12 @@ ruleAlternativeMultiplicities:
 							markLeaf(elementTypeProvider.getAlternativeMultiplicities_Val3IDTerminalRuleCall_1_1_1_0ElementType());
 						}
 						lv_val3_3_0=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_val3_3_0);
 						}
@@ -818,6 +1108,12 @@ ruleAlternativeMultiplicities:
 					}
 					lv_val4_5_0=RULE_ID
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val4_5_0);
 					}
 				)
@@ -837,6 +1133,12 @@ ruleAlternativeMultiplicities:
 							markLeaf(elementTypeProvider.getAlternativeMultiplicities_Val5IDTerminalRuleCall_3_1_1_0ElementType());
 						}
 						lv_val5_7_0=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_val5_7_0);
 						}
@@ -859,6 +1161,12 @@ ruleAlternativeMultiplicities:
 					}
 					lv_val6_9_0=RULE_ID
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val6_9_0);
 					}
 				)
@@ -879,6 +1187,12 @@ ruleAlternativeMultiplicities:
 						}
 						lv_val7_11_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val7_11_0);
 						}
 					)
@@ -889,13 +1203,15 @@ ruleAlternativeMultiplicities:
 ;
 
 //Entry rule entryRuleList1
-entryRuleList1:
+entryRuleList1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getList1ElementType()); }
-	ruleList1
+	iv_ruleList1=ruleList1
+	{ $current=$iv_ruleList1.current; }
 	EOF;
 
 // Rule List1
-ruleList1:
+ruleList1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getList1_NumberSignDigitSixKeyword_0ElementType());
@@ -910,6 +1226,12 @@ ruleList1:
 					markLeaf(elementTypeProvider.getList1_Val1IDTerminalRuleCall_1_0ElementType());
 				}
 				lv_val1_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_val1_1_0);
 				}
@@ -930,6 +1252,12 @@ ruleList1:
 					}
 					lv_val1_3_0=RULE_ID
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val1_3_0);
 					}
 				)
@@ -939,13 +1267,15 @@ ruleList1:
 ;
 
 //Entry rule entryRuleList2
-entryRuleList2:
+entryRuleList2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getList2ElementType()); }
-	ruleList2
+	iv_ruleList2=ruleList2
+	{ $current=$iv_ruleList2.current; }
 	EOF;
 
 // Rule List2
-ruleList2:
+ruleList2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getList2_NumberSignDigitSevenKeyword_0ElementType());
@@ -958,6 +1288,7 @@ ruleList2:
 			{
 				precedeComposite(elementTypeProvider.getList2_List2Action_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -967,6 +1298,12 @@ ruleList2:
 						markLeaf(elementTypeProvider.getList2_Val1IDTerminalRuleCall_2_0_0ElementType());
 					}
 					lv_val1_2_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val1_2_0);
 					}
@@ -987,6 +1324,12 @@ ruleList2:
 						}
 						lv_val1_4_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val1_4_0);
 						}
 					)
@@ -997,13 +1340,15 @@ ruleList2:
 ;
 
 //Entry rule entryRuleAltList1
-entryRuleAltList1:
+entryRuleAltList1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAltList1ElementType()); }
-	ruleAltList1
+	iv_ruleAltList1=ruleAltList1
+	{ $current=$iv_ruleAltList1.current; }
 	EOF;
 
 // Rule AltList1
-ruleAltList1:
+ruleAltList1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAltList1_NumberSignDigitEightKeyword_0ElementType());
@@ -1021,6 +1366,12 @@ ruleAltList1:
 						}
 						lv_val1_1_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val1_1_0);
 						}
 					)
@@ -1031,6 +1382,12 @@ ruleAltList1:
 							markLeaf(elementTypeProvider.getAltList1_Val2IDTerminalRuleCall_1_0_1_0ElementType());
 						}
 						lv_val2_2_0=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_val2_2_0);
 						}
@@ -1053,6 +1410,12 @@ ruleAltList1:
 						}
 						lv_val1_4_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val1_4_0);
 						}
 					)
@@ -1063,6 +1426,12 @@ ruleAltList1:
 							markLeaf(elementTypeProvider.getAltList1_Val3IDTerminalRuleCall_1_1_2_0ElementType());
 						}
 						lv_val3_5_0=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_val3_5_0);
 						}
@@ -1085,6 +1454,12 @@ ruleAltList1:
 						}
 						lv_val1_7_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val1_7_0);
 						}
 					)
@@ -1096,6 +1471,12 @@ ruleAltList1:
 						}
 						lv_val4_8_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val4_8_0);
 						}
 					)
@@ -1106,13 +1487,15 @@ ruleAltList1:
 ;
 
 //Entry rule entryRuleAltList2
-entryRuleAltList2:
+entryRuleAltList2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAltList2ElementType()); }
-	ruleAltList2
+	iv_ruleAltList2=ruleAltList2
+	{ $current=$iv_ruleAltList2.current; }
 	EOF;
 
 // Rule AltList2
-ruleAltList2:
+ruleAltList2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAltList2_NumberSignDigitNineKeyword_0ElementType());
@@ -1130,6 +1513,12 @@ ruleAltList2:
 						}
 						lv_val1_1_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val1_1_0);
 						}
 					)
@@ -1140,6 +1529,12 @@ ruleAltList2:
 							markLeaf(elementTypeProvider.getAltList2_Val2IDTerminalRuleCall_1_0_1_0ElementType());
 						}
 						lv_val2_2_0=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_val2_2_0);
 						}
@@ -1162,6 +1557,12 @@ ruleAltList2:
 						}
 						lv_val1_4_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val1_4_0);
 						}
 					)
@@ -1181,6 +1582,12 @@ ruleAltList2:
 							}
 							lv_val1_6_0=RULE_ID
 							{
+								if(!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
+							}
+							{
 								doneLeaf(lv_val1_6_0);
 							}
 						)
@@ -1193,6 +1600,12 @@ ruleAltList2:
 						}
 						lv_val3_7_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val3_7_0);
 						}
 					)
@@ -1203,13 +1616,15 @@ ruleAltList2:
 ;
 
 //Entry rule entryRuleSingleKeywords
-entryRuleSingleKeywords:
+entryRuleSingleKeywords returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleKeywordsElementType()); }
-	ruleSingleKeywords
+	iv_ruleSingleKeywords=ruleSingleKeywords
+	{ $current=$iv_ruleSingleKeywords.current; }
 	EOF;
 
 // Rule SingleKeywords
-ruleSingleKeywords:
+ruleSingleKeywords returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSingleKeywords_NumberSignDigitOneDigitZeroKeyword_0ElementType());
@@ -1228,6 +1643,12 @@ ruleSingleKeywords:
 					{
 						doneLeaf(lv_val_1_1);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					    |
 					{
 						markLeaf(elementTypeProvider.getSingleKeywords_ValKw2Keyword_1_0_1ElementType());
@@ -1235,6 +1656,12 @@ ruleSingleKeywords:
 					lv_val_1_2='kw2'
 					{
 						doneLeaf(lv_val_1_2);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -1244,6 +1671,12 @@ ruleSingleKeywords:
 					{
 						doneLeaf(lv_val_1_3);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 				)
 			)
 		)
@@ -1251,13 +1684,15 @@ ruleSingleKeywords:
 ;
 
 //Entry rule entryRuleSingleKeywordsOrID
-entryRuleSingleKeywordsOrID:
+entryRuleSingleKeywordsOrID returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleKeywordsOrIDElementType()); }
-	ruleSingleKeywordsOrID
+	iv_ruleSingleKeywordsOrID=ruleSingleKeywordsOrID
+	{ $current=$iv_ruleSingleKeywordsOrID.current; }
 	EOF;
 
 // Rule SingleKeywordsOrID
-ruleSingleKeywordsOrID:
+ruleSingleKeywordsOrID returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSingleKeywordsOrID_NumberSignDigitOneDigitOneKeyword_0ElementType());
@@ -1276,6 +1711,12 @@ ruleSingleKeywordsOrID:
 					{
 						doneLeaf(lv_val_1_1);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					    |
 					{
 						markLeaf(elementTypeProvider.getSingleKeywordsOrID_ValKw2Keyword_1_0_1ElementType());
@@ -1283,6 +1724,12 @@ ruleSingleKeywordsOrID:
 					lv_val_1_2='kw2'
 					{
 						doneLeaf(lv_val_1_2);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -1292,11 +1739,23 @@ ruleSingleKeywordsOrID:
 					{
 						doneLeaf(lv_val_1_3);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					    |
 					{
 						markLeaf(elementTypeProvider.getSingleKeywordsOrID_ValIDTerminalRuleCall_1_0_3ElementType());
 					}
 					lv_val_1_4=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val_1_4);
 					}
@@ -1307,13 +1766,15 @@ ruleSingleKeywordsOrID:
 ;
 
 //Entry rule entryRuleSingleTerminals
-entryRuleSingleTerminals:
+entryRuleSingleTerminals returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleTerminalsElementType()); }
-	ruleSingleTerminals
+	iv_ruleSingleTerminals=ruleSingleTerminals
+	{ $current=$iv_ruleSingleTerminals.current; }
 	EOF;
 
 // Rule SingleTerminals
-ruleSingleTerminals:
+ruleSingleTerminals returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSingleTerminals_NumberSignDigitOneDigitTwoKeyword_0ElementType());
@@ -1330,6 +1791,12 @@ ruleSingleTerminals:
 					}
 					lv_val_1_1=RULE_ID1
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val_1_1);
 					}
 					    |
@@ -1337,6 +1804,12 @@ ruleSingleTerminals:
 						markLeaf(elementTypeProvider.getSingleTerminals_ValID2TerminalRuleCall_1_0_1ElementType());
 					}
 					lv_val_1_2=RULE_ID2
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val_1_2);
 					}
@@ -1347,13 +1820,15 @@ ruleSingleTerminals:
 ;
 
 //Entry rule entryRuleSingleEnum
-entryRuleSingleEnum:
+entryRuleSingleEnum returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleEnumElementType()); }
-	ruleSingleEnum
+	iv_ruleSingleEnum=ruleSingleEnum
+	{ $current=$iv_ruleSingleEnum.current; }
 	EOF;
 
 // Rule SingleEnum
-ruleSingleEnum:
+ruleSingleEnum returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSingleEnum_NumberSignDigitOneDigitThreeKeyword_0ElementType());
@@ -1371,6 +1846,10 @@ ruleSingleEnum:
 					lv_val_1_1=ruleDefEnum1
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -1379,6 +1858,10 @@ ruleSingleEnum:
 					lv_val_1_2=ruleDefEnum2
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -1387,6 +1870,10 @@ ruleSingleEnum:
 					lv_val_1_3=ruleDefEnum3
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -1395,13 +1882,15 @@ ruleSingleEnum:
 ;
 
 //Entry rule entryRuleSingleCrossReference
-entryRuleSingleCrossReference:
+entryRuleSingleCrossReference returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleCrossReferenceElementType()); }
-	ruleSingleCrossReference
+	iv_ruleSingleCrossReference=ruleSingleCrossReference
+	{ $current=$iv_ruleSingleCrossReference.current; }
 	EOF;
 
 // Rule SingleCrossReference
-ruleSingleCrossReference:
+ruleSingleCrossReference returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSingleCrossReference_NumberSignDigitOneDigitFourKeyword_0ElementType());
@@ -1418,6 +1907,12 @@ ruleSingleCrossReference:
 					}
 					lv_name_1_1=RULE_ID1
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_name_1_1);
 					}
 					    |
@@ -1425,6 +1920,12 @@ ruleSingleCrossReference:
 						markLeaf(elementTypeProvider.getSingleCrossReference_NameID2TerminalRuleCall_1_0_1ElementType());
 					}
 					lv_name_1_2=RULE_ID2
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_name_1_2);
 					}
@@ -1434,6 +1935,12 @@ ruleSingleCrossReference:
 					}
 					lv_name_1_3=RULE_ID3
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_name_1_3);
 					}
 				)
@@ -1442,6 +1949,12 @@ ruleSingleCrossReference:
 		(
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getSingleCrossReference_RefSingleCrossReferenceCrossReference_2_0_0ElementType());
 					}
@@ -1455,6 +1968,12 @@ ruleSingleCrossReference:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markLeaf(elementTypeProvider.getSingleCrossReference_RefSingleCrossReferenceCrossReference_2_1_0ElementType());
 					}
 					otherlv_3=RULE_ID2
@@ -1466,6 +1985,12 @@ ruleSingleCrossReference:
 			    |
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getSingleCrossReference_RefSingleCrossReferenceCrossReference_2_2_0ElementType());
 					}
@@ -1480,13 +2005,15 @@ ruleSingleCrossReference:
 ;
 
 //Entry rule entryRuleSingleContainmentReference
-entryRuleSingleContainmentReference:
+entryRuleSingleContainmentReference returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleContainmentReferenceElementType()); }
-	ruleSingleContainmentReference
+	iv_ruleSingleContainmentReference=ruleSingleContainmentReference
+	{ $current=$iv_ruleSingleContainmentReference.current; }
 	EOF;
 
 // Rule SingleContainmentReference
-ruleSingleContainmentReference:
+ruleSingleContainmentReference returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSingleContainmentReference_NumberSignDigitOneDigitFiveKeyword_0ElementType());
@@ -1504,6 +2031,10 @@ ruleSingleContainmentReference:
 					lv_child_1_1=ruleSingleContainmentReferenceChild1
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -1512,6 +2043,10 @@ ruleSingleContainmentReference:
 					lv_child_1_2=ruleSingleContainmentReferenceChild2
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -1520,6 +2055,10 @@ ruleSingleContainmentReference:
 					lv_child_1_3=ruleSingleContainmentReferenceChild3
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -1528,13 +2067,15 @@ ruleSingleContainmentReference:
 ;
 
 //Entry rule entryRuleSingleContainmentReferenceChild1
-entryRuleSingleContainmentReferenceChild1:
+entryRuleSingleContainmentReferenceChild1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleContainmentReferenceChild1ElementType()); }
-	ruleSingleContainmentReferenceChild1
+	iv_ruleSingleContainmentReferenceChild1=ruleSingleContainmentReferenceChild1
+	{ $current=$iv_ruleSingleContainmentReferenceChild1.current; }
 	EOF;
 
 // Rule SingleContainmentReferenceChild1
-ruleSingleContainmentReferenceChild1:
+ruleSingleContainmentReferenceChild1 returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -1544,18 +2085,26 @@ ruleSingleContainmentReferenceChild1:
 			{
 				doneLeaf(lv_val_0_0);
 			}
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 		)
 	)
 ;
 
 //Entry rule entryRuleSingleContainmentReferenceChild2
-entryRuleSingleContainmentReferenceChild2:
+entryRuleSingleContainmentReferenceChild2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleContainmentReferenceChild2ElementType()); }
-	ruleSingleContainmentReferenceChild2
+	iv_ruleSingleContainmentReferenceChild2=ruleSingleContainmentReferenceChild2
+	{ $current=$iv_ruleSingleContainmentReferenceChild2.current; }
 	EOF;
 
 // Rule SingleContainmentReferenceChild2
-ruleSingleContainmentReferenceChild2:
+ruleSingleContainmentReferenceChild2 returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -1565,18 +2114,26 @@ ruleSingleContainmentReferenceChild2:
 			{
 				doneLeaf(lv_val_0_0);
 			}
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 		)
 	)
 ;
 
 //Entry rule entryRuleSingleContainmentReferenceChild3
-entryRuleSingleContainmentReferenceChild3:
+entryRuleSingleContainmentReferenceChild3 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleContainmentReferenceChild3ElementType()); }
-	ruleSingleContainmentReferenceChild3
+	iv_ruleSingleContainmentReferenceChild3=ruleSingleContainmentReferenceChild3
+	{ $current=$iv_ruleSingleContainmentReferenceChild3.current; }
 	EOF;
 
 // Rule SingleContainmentReferenceChild3
-ruleSingleContainmentReferenceChild3:
+ruleSingleContainmentReferenceChild3 returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -1586,18 +2143,26 @@ ruleSingleContainmentReferenceChild3:
 			{
 				doneLeaf(lv_val_0_0);
 			}
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 		)
 	)
 ;
 
 //Entry rule entryRuleMultiKeywords
-entryRuleMultiKeywords:
+entryRuleMultiKeywords returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMultiKeywordsElementType()); }
-	ruleMultiKeywords
+	iv_ruleMultiKeywords=ruleMultiKeywords
+	{ $current=$iv_ruleMultiKeywords.current; }
 	EOF;
 
 // Rule MultiKeywords
-ruleMultiKeywords:
+ruleMultiKeywords returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getMultiKeywords_NumberSignDigitOneDigitSixKeyword_0ElementType());
@@ -1616,6 +2181,12 @@ ruleMultiKeywords:
 					{
 						doneLeaf(lv_val_1_1);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					    |
 					{
 						markLeaf(elementTypeProvider.getMultiKeywords_ValKw2Keyword_1_0_1ElementType());
@@ -1623,6 +2194,12 @@ ruleMultiKeywords:
 					lv_val_1_2='kw2'
 					{
 						doneLeaf(lv_val_1_2);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -1632,6 +2209,12 @@ ruleMultiKeywords:
 					{
 						doneLeaf(lv_val_1_3);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 				)
 			)
 		)
@@ -1639,13 +2222,15 @@ ruleMultiKeywords:
 ;
 
 //Entry rule entryRuleMultiKeywordsOrID
-entryRuleMultiKeywordsOrID:
+entryRuleMultiKeywordsOrID returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMultiKeywordsOrIDElementType()); }
-	ruleMultiKeywordsOrID
+	iv_ruleMultiKeywordsOrID=ruleMultiKeywordsOrID
+	{ $current=$iv_ruleMultiKeywordsOrID.current; }
 	EOF;
 
 // Rule MultiKeywordsOrID
-ruleMultiKeywordsOrID:
+ruleMultiKeywordsOrID returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getMultiKeywordsOrID_NumberSignDigitOneDigitSevenKeyword_0ElementType());
@@ -1664,6 +2249,12 @@ ruleMultiKeywordsOrID:
 					{
 						doneLeaf(lv_val_1_1);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					    |
 					{
 						markLeaf(elementTypeProvider.getMultiKeywordsOrID_ValKw2Keyword_1_0_1ElementType());
@@ -1671,6 +2262,12 @@ ruleMultiKeywordsOrID:
 					lv_val_1_2='kw2'
 					{
 						doneLeaf(lv_val_1_2);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 					    |
 					{
@@ -1680,11 +2277,23 @@ ruleMultiKeywordsOrID:
 					{
 						doneLeaf(lv_val_1_3);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					    |
 					{
 						markLeaf(elementTypeProvider.getMultiKeywordsOrID_ValIDTerminalRuleCall_1_0_3ElementType());
 					}
 					lv_val_1_4=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val_1_4);
 					}
@@ -1695,13 +2304,15 @@ ruleMultiKeywordsOrID:
 ;
 
 //Entry rule entryRuleMultiTerminals
-entryRuleMultiTerminals:
+entryRuleMultiTerminals returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMultiTerminalsElementType()); }
-	ruleMultiTerminals
+	iv_ruleMultiTerminals=ruleMultiTerminals
+	{ $current=$iv_ruleMultiTerminals.current; }
 	EOF;
 
 // Rule MultiTerminals
-ruleMultiTerminals:
+ruleMultiTerminals returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getMultiTerminals_NumberSignDigitOneDigitEightKeyword_0ElementType());
@@ -1718,6 +2329,12 @@ ruleMultiTerminals:
 					}
 					lv_val_1_1=RULE_ID1
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val_1_1);
 					}
 					    |
@@ -1725,6 +2342,12 @@ ruleMultiTerminals:
 						markLeaf(elementTypeProvider.getMultiTerminals_ValID2TerminalRuleCall_1_0_1ElementType());
 					}
 					lv_val_1_2=RULE_ID2
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val_1_2);
 					}
@@ -1735,13 +2358,15 @@ ruleMultiTerminals:
 ;
 
 //Entry rule entryRuleDependentAlternative1
-entryRuleDependentAlternative1:
+entryRuleDependentAlternative1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDependentAlternative1ElementType()); }
-	ruleDependentAlternative1
+	iv_ruleDependentAlternative1=ruleDependentAlternative1
+	{ $current=$iv_ruleDependentAlternative1.current; }
 	EOF;
 
 // Rule DependentAlternative1
-ruleDependentAlternative1:
+ruleDependentAlternative1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDependentAlternative1_NumberSignDigitOneDigitNineKeyword_0ElementType());
@@ -1758,6 +2383,12 @@ ruleDependentAlternative1:
 					}
 					lv_val_1_0=RULE_ID
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_val_1_0);
 					}
 				)
@@ -1770,6 +2401,12 @@ ruleDependentAlternative1:
 							markLeaf(elementTypeProvider.getDependentAlternative1_ValIDTerminalRuleCall_1_1_0_0ElementType());
 						}
 						lv_val_2_0=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_val_2_0);
 						}
@@ -1784,6 +2421,12 @@ ruleDependentAlternative1:
 						{
 							doneLeaf(lv_flag_3_0);
 						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 					)
 				)
 			)
@@ -1792,13 +2435,15 @@ ruleDependentAlternative1:
 ;
 
 //Entry rule entryRuleDependentAlternative2
-entryRuleDependentAlternative2:
+entryRuleDependentAlternative2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDependentAlternative2ElementType()); }
-	ruleDependentAlternative2
+	iv_ruleDependentAlternative2=ruleDependentAlternative2
+	{ $current=$iv_ruleDependentAlternative2.current; }
 	EOF;
 
 // Rule DependentAlternative2
-ruleDependentAlternative2:
+ruleDependentAlternative2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDependentAlternative2_NumberSignDigitTwoDigitZeroKeyword_0ElementType());
@@ -1816,6 +2461,12 @@ ruleDependentAlternative2:
 						}
 						lv_val_1_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val_1_0);
 						}
 					)
@@ -1826,6 +2477,12 @@ ruleDependentAlternative2:
 							markLeaf(elementTypeProvider.getDependentAlternative2_ValIDTerminalRuleCall_1_0_1_0ElementType());
 						}
 						lv_val_2_0=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_val_2_0);
 						}
@@ -1841,6 +2498,12 @@ ruleDependentAlternative2:
 						}
 						lv_val_3_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val_3_0);
 						}
 					)
@@ -1854,6 +2517,12 @@ ruleDependentAlternative2:
 						{
 							doneLeaf(lv_flag_4_0);
 						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 					)
 				)
 			)
@@ -1862,13 +2531,15 @@ ruleDependentAlternative2:
 ;
 
 //Entry rule entryRuleOptional
-entryRuleOptional:
+entryRuleOptional returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getOptionalElementType()); }
-	ruleOptional
+	iv_ruleOptional=ruleOptional
+	{ $current=$iv_ruleOptional.current; }
 	EOF;
 
 // Rule Optional
-ruleOptional:
+ruleOptional returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getOptional_NumberSignDigitTwoDigitOneKeyword_0ElementType());
@@ -1884,6 +2555,12 @@ ruleOptional:
 				}
 				lv_int0_1_0=RULE_INT
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_int0_1_0);
 				}
 			)
@@ -1896,6 +2573,12 @@ ruleOptional:
 					}
 					lv_int1_2_0=RULE_INT
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_int1_2_0);
 					}
 				)
@@ -1907,6 +2590,12 @@ ruleOptional:
 					}
 					lv_int2_3_0=RULE_INT
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_int2_3_0);
 					}
 				)
@@ -1916,13 +2605,15 @@ ruleOptional:
 ;
 
 //Entry rule entryRuleFloat
-entryRuleFloat:
+entryRuleFloat returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFloatElementType()); }
-	ruleFloat
+	iv_ruleFloat=ruleFloat
+	{ $current=$iv_ruleFloat.current; }
 	EOF;
 
 // Rule Float
-ruleFloat:
+ruleFloat returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getFloat_NumberSignDigitTwoDigitTwoKeyword_0ElementType());
@@ -1935,6 +2626,7 @@ ruleFloat:
 			{
 				precedeComposite(elementTypeProvider.getFloat_FloatAction_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -1948,13 +2640,15 @@ ruleFloat:
 ;
 
 //Entry rule entryRuleUnorderedAlternative
-entryRuleUnorderedAlternative:
+entryRuleUnorderedAlternative returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedAlternativeElementType()); }
-	ruleUnorderedAlternative
+	iv_ruleUnorderedAlternative=ruleUnorderedAlternative
+	{ $current=$iv_ruleUnorderedAlternative.current; }
 	EOF;
 
 // Rule UnorderedAlternative
-ruleUnorderedAlternative:
+ruleUnorderedAlternative returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getUnorderedAlternative_NumberSignDigitTwoDigitThreeKeyword_0ElementType());
@@ -1967,6 +2661,7 @@ ruleUnorderedAlternative:
 			{
 				precedeComposite(elementTypeProvider.getUnorderedAlternative_UnorderedAlternativeAction_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -1976,6 +2671,12 @@ ruleUnorderedAlternative:
 						markLeaf(elementTypeProvider.getUnorderedAlternative_Val1IDTerminalRuleCall_2_0_0ElementType());
 					}
 					lv_val1_2_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val1_2_0);
 					}
@@ -1988,6 +2689,12 @@ ruleUnorderedAlternative:
 						markLeaf(elementTypeProvider.getUnorderedAlternative_Val2INTTerminalRuleCall_2_1_0ElementType());
 					}
 					lv_val2_3_0=RULE_INT
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val2_3_0);
 					}
@@ -2002,6 +2709,10 @@ ruleUnorderedAlternative:
 					lv_val3_4_0=ruleUnorderedAlternativeVal
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -2014,6 +2725,10 @@ ruleUnorderedAlternative:
 					lv_val4_5_0=ruleUnorderedAlternativeValDelegate
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -2022,13 +2737,15 @@ ruleUnorderedAlternative:
 ;
 
 //Entry rule entryRuleUnorderedAlternativeVal
-entryRuleUnorderedAlternativeVal:
+entryRuleUnorderedAlternativeVal returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedAlternativeValElementType()); }
-	ruleUnorderedAlternativeVal
+	iv_ruleUnorderedAlternativeVal=ruleUnorderedAlternativeVal
+	{ $current=$iv_ruleUnorderedAlternativeVal.current; }
 	EOF;
 
 // Rule UnorderedAlternativeVal
-ruleUnorderedAlternativeVal:
+ruleUnorderedAlternativeVal returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getUnorderedAlternativeVal_Kw1Keyword_0ElementType());
@@ -2044,6 +2761,12 @@ ruleUnorderedAlternativeVal:
 				}
 				lv_val_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_val_1_0);
 				}
 			)
@@ -2052,30 +2775,35 @@ ruleUnorderedAlternativeVal:
 ;
 
 //Entry rule entryRuleUnorderedAlternativeValDelegate
-entryRuleUnorderedAlternativeValDelegate:
+entryRuleUnorderedAlternativeValDelegate returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedAlternativeValDelegateElementType()); }
-	ruleUnorderedAlternativeValDelegate
+	iv_ruleUnorderedAlternativeValDelegate=ruleUnorderedAlternativeValDelegate
+	{ $current=$iv_ruleUnorderedAlternativeValDelegate.current; }
 	EOF;
 
 // Rule UnorderedAlternativeValDelegate
-ruleUnorderedAlternativeValDelegate:
+ruleUnorderedAlternativeValDelegate returns [Boolean current=false]
+:
 	{
 		markComposite(elementTypeProvider.getUnorderedAlternativeValDelegate_UnorderedAlternativeVal2ParserRuleCallElementType());
 	}
-	ruleUnorderedAlternativeVal2
+	this_UnorderedAlternativeVal2_0=ruleUnorderedAlternativeVal2
 	{
+		$current = $this_UnorderedAlternativeVal2_0.current;
 		doneComposite();
 	}
 ;
 
 //Entry rule entryRuleUnorderedAlternativeVal2
-entryRuleUnorderedAlternativeVal2:
+entryRuleUnorderedAlternativeVal2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedAlternativeVal2ElementType()); }
-	ruleUnorderedAlternativeVal2
+	iv_ruleUnorderedAlternativeVal2=ruleUnorderedAlternativeVal2
+	{ $current=$iv_ruleUnorderedAlternativeVal2.current; }
 	EOF;
 
 // Rule UnorderedAlternativeVal2
-ruleUnorderedAlternativeVal2:
+ruleUnorderedAlternativeVal2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getUnorderedAlternativeVal2_Kw2Keyword_0ElementType());
@@ -2091,6 +2819,12 @@ ruleUnorderedAlternativeVal2:
 				}
 				lv_val_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_val_1_0);
 				}
 			)
@@ -2099,13 +2833,15 @@ ruleUnorderedAlternativeVal2:
 ;
 
 //Entry rule entryRuleUnorderedGroup
-entryRuleUnorderedGroup:
+entryRuleUnorderedGroup returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedGroupElementType()); }
-	ruleUnorderedGroup
+	iv_ruleUnorderedGroup=ruleUnorderedGroup
+	{ $current=$iv_ruleUnorderedGroup.current; }
 	EOF;
 
 // Rule UnorderedGroup
-ruleUnorderedGroup:
+ruleUnorderedGroup returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getUnorderedGroup_NumberSignDigitTwoDigitFourKeyword_0ElementType());
@@ -2132,6 +2868,12 @@ ruleUnorderedGroup:
 									}
 									lv_val1_2_0=RULE_ID
 									{
+										if(!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
+									}
+									{
 										doneLeaf(lv_val1_2_0);
 									}
 								)
@@ -2151,6 +2893,12 @@ ruleUnorderedGroup:
 										markLeaf(elementTypeProvider.getUnorderedGroup_Val2INTTerminalRuleCall_1_1_0ElementType());
 									}
 									lv_val2_3_0=RULE_INT
+									{
+										if(!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
+									}
 									{
 										doneLeaf(lv_val2_3_0);
 									}
@@ -2173,6 +2921,10 @@ ruleUnorderedGroup:
 									lv_val3_4_0=ruleUnorderedGroupVal
 									{
 										doneComposite();
+										if(!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
 									}
 								)
 								))
@@ -2193,6 +2945,10 @@ ruleUnorderedGroup:
 									lv_val4_5_0=ruleUnorderedGroupValDelegate
 									{
 										doneComposite();
+										if(!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
 									}
 								)
 								))
@@ -2213,13 +2969,15 @@ ruleUnorderedGroup:
 ;
 
 //Entry rule entryRuleUnorderedGroupVal
-entryRuleUnorderedGroupVal:
+entryRuleUnorderedGroupVal returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedGroupValElementType()); }
-	ruleUnorderedGroupVal
+	iv_ruleUnorderedGroupVal=ruleUnorderedGroupVal
+	{ $current=$iv_ruleUnorderedGroupVal.current; }
 	EOF;
 
 // Rule UnorderedGroupVal
-ruleUnorderedGroupVal:
+ruleUnorderedGroupVal returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getUnorderedGroupVal_Kw1Keyword_0ElementType());
@@ -2235,6 +2993,12 @@ ruleUnorderedGroupVal:
 				}
 				lv_val_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_val_1_0);
 				}
 			)
@@ -2243,30 +3007,35 @@ ruleUnorderedGroupVal:
 ;
 
 //Entry rule entryRuleUnorderedGroupValDelegate
-entryRuleUnorderedGroupValDelegate:
+entryRuleUnorderedGroupValDelegate returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedGroupValDelegateElementType()); }
-	ruleUnorderedGroupValDelegate
+	iv_ruleUnorderedGroupValDelegate=ruleUnorderedGroupValDelegate
+	{ $current=$iv_ruleUnorderedGroupValDelegate.current; }
 	EOF;
 
 // Rule UnorderedGroupValDelegate
-ruleUnorderedGroupValDelegate:
+ruleUnorderedGroupValDelegate returns [Boolean current=false]
+:
 	{
 		markComposite(elementTypeProvider.getUnorderedGroupValDelegate_UnorderedGroupVal2ParserRuleCallElementType());
 	}
-	ruleUnorderedGroupVal2
+	this_UnorderedGroupVal2_0=ruleUnorderedGroupVal2
 	{
+		$current = $this_UnorderedGroupVal2_0.current;
 		doneComposite();
 	}
 ;
 
 //Entry rule entryRuleUnorderedGroupVal2
-entryRuleUnorderedGroupVal2:
+entryRuleUnorderedGroupVal2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedGroupVal2ElementType()); }
-	ruleUnorderedGroupVal2
+	iv_ruleUnorderedGroupVal2=ruleUnorderedGroupVal2
+	{ $current=$iv_ruleUnorderedGroupVal2.current; }
 	EOF;
 
 // Rule UnorderedGroupVal2
-ruleUnorderedGroupVal2:
+ruleUnorderedGroupVal2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getUnorderedGroupVal2_Kw2Keyword_0ElementType());
@@ -2282,6 +3051,12 @@ ruleUnorderedGroupVal2:
 				}
 				lv_val_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_val_1_0);
 				}
 			)
@@ -2290,13 +3065,15 @@ ruleUnorderedGroupVal2:
 ;
 
 //Entry rule entryRuleUnorderedGroupOptional
-entryRuleUnorderedGroupOptional:
+entryRuleUnorderedGroupOptional returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedGroupOptionalElementType()); }
-	ruleUnorderedGroupOptional
+	iv_ruleUnorderedGroupOptional=ruleUnorderedGroupOptional
+	{ $current=$iv_ruleUnorderedGroupOptional.current; }
 	EOF;
 
 // Rule UnorderedGroupOptional
-ruleUnorderedGroupOptional:
+ruleUnorderedGroupOptional returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getUnorderedGroupOptional_NumberSignDigitTwoDigitFiveKeyword_0ElementType());
@@ -2309,6 +3086,7 @@ ruleUnorderedGroupOptional:
 			{
 				precedeComposite(elementTypeProvider.getUnorderedGroupOptional_UnorderedGroupOptionalAction_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -2336,6 +3114,12 @@ ruleUnorderedGroupOptional:
 											markLeaf(elementTypeProvider.getUnorderedGroupOptional_Val1IDTerminalRuleCall_2_0_1_0ElementType());
 										}
 										lv_val1_4_0=RULE_ID
+										{
+											if(!$current) {
+												associateWithSemanticElement();
+												$current = true;
+											}
+										}
 										{
 											doneLeaf(lv_val1_4_0);
 										}
@@ -2366,6 +3150,12 @@ ruleUnorderedGroupOptional:
 										}
 										lv_va2_6_0=RULE_ID
 										{
+											if(!$current) {
+												associateWithSemanticElement();
+												$current = true;
+											}
+										}
+										{
 											doneLeaf(lv_va2_6_0);
 										}
 									)
@@ -2395,6 +3185,12 @@ ruleUnorderedGroupOptional:
 										}
 										lv_val3_8_0=RULE_ID
 										{
+											if(!$current) {
+												associateWithSemanticElement();
+												$current = true;
+											}
+										}
+										{
 											doneLeaf(lv_val3_8_0);
 										}
 									)
@@ -2416,13 +3212,15 @@ ruleUnorderedGroupOptional:
 ;
 
 //Entry rule entryRuleUnorderedGroupBoolean
-entryRuleUnorderedGroupBoolean:
+entryRuleUnorderedGroupBoolean returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedGroupBooleanElementType()); }
-	ruleUnorderedGroupBoolean
+	iv_ruleUnorderedGroupBoolean=ruleUnorderedGroupBoolean
+	{ $current=$iv_ruleUnorderedGroupBoolean.current; }
 	EOF;
 
 // Rule UnorderedGroupBoolean
-ruleUnorderedGroupBoolean:
+ruleUnorderedGroupBoolean returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getUnorderedGroupBoolean_NumberSignDigitTwoDigitSixKeyword_0ElementType());
@@ -2435,6 +3233,7 @@ ruleUnorderedGroupBoolean:
 			{
 				precedeComposite(elementTypeProvider.getUnorderedGroupBoolean_UnorderedGroupBooleanAction_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -2457,6 +3256,12 @@ ruleUnorderedGroupBoolean:
 									{
 										doneLeaf(lv_val1_3_0);
 									}
+									{
+										if (!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
+									}
 								)
 								))
 					{ 
@@ -2476,6 +3281,12 @@ ruleUnorderedGroupBoolean:
 									lv_val2_4_0='kw2'
 									{
 										doneLeaf(lv_val2_4_0);
+									}
+									{
+										if (!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
 									}
 								)
 								))
@@ -2497,6 +3308,12 @@ ruleUnorderedGroupBoolean:
 									{
 										doneLeaf(lv_val3_5_0);
 									}
+									{
+										if (!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
+									}
 								)
 								))
 					{ 
@@ -2515,13 +3332,15 @@ ruleUnorderedGroupBoolean:
 ;
 
 //Entry rule entryRuleComplex1
-entryRuleComplex1:
+entryRuleComplex1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getComplex1ElementType()); }
-	ruleComplex1
+	iv_ruleComplex1=ruleComplex1
+	{ $current=$iv_ruleComplex1.current; }
 	EOF;
 
 // Rule Complex1
-ruleComplex1:
+ruleComplex1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getComplex1_NumberSignDigitTwoDigitSevenKeyword_0ElementType());
@@ -2534,6 +3353,7 @@ ruleComplex1:
 			{
 				precedeComposite(elementTypeProvider.getComplex1_Complex1Action_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -2550,6 +3370,12 @@ ruleComplex1:
 						markLeaf(elementTypeProvider.getComplex1_Val1IDTerminalRuleCall_2_1_0ElementType());
 					}
 					lv_val1_3_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val1_3_0);
 					}
@@ -2570,6 +3396,12 @@ ruleComplex1:
 						markLeaf(elementTypeProvider.getComplex1_Val2IDTerminalRuleCall_3_1_0ElementType());
 					}
 					lv_val2_5_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_val2_5_0);
 					}
@@ -2592,6 +3424,12 @@ ruleComplex1:
 						}
 						lv_val3_7_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val3_7_0);
 						}
 					)
@@ -2612,6 +3450,12 @@ ruleComplex1:
 							markLeaf(elementTypeProvider.getComplex1_Val4IDTerminalRuleCall_4_1_1_0ElementType());
 						}
 						lv_val4_9_0=RULE_ID
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_val4_9_0);
 						}
@@ -2634,6 +3478,12 @@ ruleComplex1:
 						}
 						lv_val5_11_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val5_11_0);
 						}
 					)
@@ -2655,6 +3505,12 @@ ruleComplex1:
 						}
 						lv_val6_13_0=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_val6_13_0);
 						}
 					)
@@ -2665,13 +3521,15 @@ ruleComplex1:
 ;
 
 //Entry rule entryRuleOptionalDouble
-entryRuleOptionalDouble:
+entryRuleOptionalDouble returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getOptionalDoubleElementType()); }
-	ruleOptionalDouble
+	iv_ruleOptionalDouble=ruleOptionalDouble
+	{ $current=$iv_ruleOptionalDouble.current; }
 	EOF;
 
 // Rule OptionalDouble
-ruleOptionalDouble:
+ruleOptionalDouble returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getOptionalDouble_NumberSignDigitTwoDigitEightKeyword_0ElementType());
@@ -2688,6 +3546,10 @@ ruleOptionalDouble:
 				lv_double0_1_0=ruleDOUBLE
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -2700,6 +3562,10 @@ ruleOptionalDouble:
 					lv_double1_2_0=ruleDOUBLE
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -2711,6 +3577,10 @@ ruleOptionalDouble:
 					lv_double2_3_0=ruleDOUBLE
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -2719,13 +3589,15 @@ ruleOptionalDouble:
 ;
 
 //Entry rule entryRuleDOUBLE
-entryRuleDOUBLE:
+entryRuleDOUBLE returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDOUBLEElementType()); }
-	ruleDOUBLE
+	iv_ruleDOUBLE=ruleDOUBLE
+	{ $current=$iv_ruleDOUBLE.current; }
 	EOF;
 
 // Rule DOUBLE
-ruleDOUBLE:
+ruleDOUBLE returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDOUBLE_INTTerminalRuleCall_0ElementType());
@@ -2754,13 +3626,15 @@ ruleDOUBLE:
 ;
 
 //Entry rule entryRuleNullValueGenerated
-entryRuleNullValueGenerated:
+entryRuleNullValueGenerated returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNullValueGeneratedElementType()); }
-	ruleNullValueGenerated
+	iv_ruleNullValueGenerated=ruleNullValueGenerated
+	{ $current=$iv_ruleNullValueGenerated.current; }
 	EOF;
 
 // Rule NullValueGenerated
-ruleNullValueGenerated:
+ruleNullValueGenerated returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getNullValueGenerated_NumberSignDigitTwoDigitNineKeyword_0ElementType());
@@ -2777,6 +3651,10 @@ ruleNullValueGenerated:
 				lv_value_1_0=ruleNULL_STRING
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -2784,13 +3662,15 @@ ruleNullValueGenerated:
 ;
 
 //Entry rule entryRuleNullValueInterpreted
-entryRuleNullValueInterpreted:
+entryRuleNullValueInterpreted returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNullValueInterpretedElementType()); }
-	ruleNullValueInterpreted
+	iv_ruleNullValueInterpreted=ruleNullValueInterpreted
+	{ $current=$iv_ruleNullValueInterpreted.current; }
 	EOF;
 
 // Rule NullValueInterpreted
-ruleNullValueInterpreted:
+ruleNullValueInterpreted returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getNullValueInterpreted_NumberSignDigitThreeDigitZeroKeyword_0ElementType());
@@ -2807,6 +3687,10 @@ ruleNullValueInterpreted:
 				lv_value_1_0=ruleNULL_STRING
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -2817,6 +3701,12 @@ ruleNullValueInterpreted:
 				}
 				lv_foo_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_foo_2_0);
 				}
 			)
@@ -2825,13 +3715,15 @@ ruleNullValueInterpreted:
 ;
 
 //Entry rule entryRuleNULL_STRING
-entryRuleNULL_STRING:
+entryRuleNULL_STRING returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNULL_STRINGElementType()); }
-	ruleNULL_STRING
+	iv_ruleNULL_STRING=ruleNULL_STRING
+	{ $current=$iv_ruleNULL_STRING.current; }
 	EOF;
 
 // Rule NULL_STRING
-ruleNULL_STRING:
+ruleNULL_STRING returns [Boolean current=false]
+:
 	{
 		markLeaf(elementTypeProvider.getNULL_STRING_STRINGTerminalRuleCallElementType());
 	}
@@ -2842,13 +3734,15 @@ ruleNULL_STRING:
 ;
 
 //Entry rule entryRuleNullCrossRefGenerated
-entryRuleNullCrossRefGenerated:
+entryRuleNullCrossRefGenerated returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNullCrossRefGeneratedElementType()); }
-	ruleNullCrossRefGenerated
+	iv_ruleNullCrossRefGenerated=ruleNullCrossRefGenerated
+	{ $current=$iv_ruleNullCrossRefGenerated.current; }
 	EOF;
 
 // Rule NullCrossRefGenerated
-ruleNullCrossRefGenerated:
+ruleNullCrossRefGenerated returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getNullCrossRefGenerated_NumberSignDigitThreeDigitOneKeyword_0ElementType());
@@ -2859,6 +3753,12 @@ ruleNullCrossRefGenerated:
 		}
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getNullCrossRefGenerated_RefEObjectCrossReference_1_0ElementType());
 				}
@@ -2872,13 +3772,15 @@ ruleNullCrossRefGenerated:
 ;
 
 //Entry rule entryRuleNullCrossRefInterpreted
-entryRuleNullCrossRefInterpreted:
+entryRuleNullCrossRefInterpreted returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNullCrossRefInterpretedElementType()); }
-	ruleNullCrossRefInterpreted
+	iv_ruleNullCrossRefInterpreted=ruleNullCrossRefInterpreted
+	{ $current=$iv_ruleNullCrossRefInterpreted.current; }
 	EOF;
 
 // Rule NullCrossRefInterpreted
-ruleNullCrossRefInterpreted:
+ruleNullCrossRefInterpreted returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getNullCrossRefInterpreted_NumberSignDigitThreeDigitTwoKeyword_0ElementType());
@@ -2889,6 +3791,12 @@ ruleNullCrossRefInterpreted:
 		}
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getNullCrossRefInterpreted_RefEObjectCrossReference_1_0ElementType());
 				}
@@ -2905,6 +3813,12 @@ ruleNullCrossRefInterpreted:
 				}
 				lv_foo_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_foo_2_0);
 				}
 			)
@@ -2912,8 +3826,599 @@ ruleNullCrossRefInterpreted:
 	)
 ;
 
+//Entry rule entryRuleFragmentCaller
+entryRuleFragmentCaller returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getFragmentCallerElementType()); }
+	iv_ruleFragmentCaller=ruleFragmentCaller
+	{ $current=$iv_ruleFragmentCaller.current; }
+	EOF;
+
+// Rule FragmentCaller
+ruleFragmentCaller returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getFragmentCaller_NumberSignDigitThreeDigitThreeKeyword_0ElementType());
+		}
+		otherlv_0='#33'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getFragmentCaller_Val1IDTerminalRuleCall_1_0ElementType());
+				}
+				lv_val1_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_val1_1_0);
+				}
+			)
+		)
+		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
+			markComposite(elementTypeProvider.getFragmentCaller_Fragment1ParserRuleCall_2ElementType());
+		}
+		this_Fragment1_2=ruleFragment1[$current]
+		{
+			$current = $this_Fragment1_2.current;
+			doneComposite();
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getFragmentCaller_ValIDTerminalRuleCall_3_0ElementType());
+				}
+				lv_val_3_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_val_3_0);
+				}
+			)
+		)
+	)
+;
+
+
+// Rule Fragment1
+ruleFragment1[Boolean in_current]  returns [Boolean current=in_current]
+:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getFragment1_FragValIDTerminalRuleCall_0ElementType());
+			}
+			lv_fragVal_0_0=RULE_ID
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
+			{
+				doneLeaf(lv_fragVal_0_0);
+			}
+		)
+	)
+;
+
+//Entry rule entryRuleParameterCaller
+entryRuleParameterCaller returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getParameterCallerElementType()); }
+	iv_ruleParameterCaller=ruleParameterCaller
+	{ $current=$iv_ruleParameterCaller.current; }
+	EOF;
+
+// Rule ParameterCaller
+ruleParameterCaller returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterCaller_NumberSignDigitThreeDigitFourKeyword_0ElementType());
+		}
+		otherlv_0='#34'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterCaller_Kw1Keyword_1_0_0ElementType());
+				}
+				otherlv_1='kw1'
+				{
+					doneLeaf(otherlv_1);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterCaller_PParameterizedParserRuleCall_1_0_1_0ElementType());
+						}
+						lv_p_2_0=norm3_Parameterized
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterCaller_Kw2Keyword_1_1_0ElementType());
+				}
+				otherlv_3='kw2'
+				{
+					doneLeaf(otherlv_3);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterCaller_PParameterizedParserRuleCall_1_1_1_0ElementType());
+						}
+						lv_p_4_0=norm1_Parameterized
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterCaller_Kw3Keyword_1_2_0ElementType());
+				}
+				otherlv_5='kw3'
+				{
+					doneLeaf(otherlv_5);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterCaller_PParameterizedParserRuleCall_1_2_1_0ElementType());
+						}
+						lv_p_6_0=norm2_Parameterized
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterCaller_Kw4Keyword_1_3_0ElementType());
+				}
+				otherlv_7='kw4'
+				{
+					doneLeaf(otherlv_7);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterCaller_PParameterizedParserRuleCall_1_3_1_0ElementType());
+						}
+						lv_p_8_0=ruleParameterized
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+		)
+	)
+;
+
+//Entry rule entryRuleParameterized
+entryRuleParameterized returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getParameterizedElementType()); }
+	iv_ruleParameterized=ruleParameterized
+	{ $current=$iv_ruleParameterized.current; }
+	EOF;
+
+// Rule Parameterized
+ruleParameterized returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterized_Kwp2Keyword_1_0ElementType());
+		}
+		otherlv_0='kwp2'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterized_V2IDTerminalRuleCall_1_1_0ElementType());
+				}
+				lv_v2_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_v2_1_0);
+				}
+			)
+		)
+	)
+;
+
+
+// Rule Parameterized
+norm1_Parameterized returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterized_Kwp1Keyword_0_0ElementType());
+		}
+		otherlv_0='kwp1'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterized_V1IDTerminalRuleCall_0_1_0ElementType());
+				}
+				lv_v1_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_v1_1_0);
+				}
+			)
+		)
+	)
+;
+
+
+// Rule Parameterized
+norm2_Parameterized returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterized_Kwp2Keyword_1_0ElementType());
+		}
+		otherlv_0='kwp2'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterized_V2IDTerminalRuleCall_1_1_0ElementType());
+				}
+				lv_v2_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_v2_1_0);
+				}
+			)
+		)
+		(
+			{
+				markLeaf(elementTypeProvider.getParameterized_Kwp3Keyword_1_2_0ElementType());
+			}
+			otherlv_2='kwp3'
+			{
+				doneLeaf(otherlv_2);
+			}
+			(
+				(
+					{
+						markLeaf(elementTypeProvider.getParameterized_V3IDTerminalRuleCall_1_2_1_0ElementType());
+					}
+					lv_v3_3_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
+						doneLeaf(lv_v3_3_0);
+					}
+				)
+			)
+		)?
+	)
+;
+
+
+// Rule Parameterized
+norm3_Parameterized returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterized_Kwp1Keyword_0_0ElementType());
+		}
+		otherlv_0='kwp1'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterized_V1IDTerminalRuleCall_0_1_0ElementType());
+				}
+				lv_v1_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_v1_1_0);
+				}
+			)
+		)
+	)
+;
+
+//Entry rule entryRuleParameterDelegation
+entryRuleParameterDelegation returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getParameterDelegationElementType()); }
+	iv_ruleParameterDelegation=ruleParameterDelegation
+	{ $current=$iv_ruleParameterDelegation.current; }
+	EOF;
+
+// Rule ParameterDelegation
+ruleParameterDelegation returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getParameterDelegation_NumberSignDigitThreeDigitFiveKeyword_0ElementType());
+		}
+		otherlv_0='#35'
+		{
+			doneLeaf(otherlv_0);
+		}
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterDelegation_Kw1Keyword_1_0_0ElementType());
+				}
+				otherlv_1='kw1'
+				{
+					doneLeaf(otherlv_1);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterDelegation_PDelegationParserRuleCall_1_0_1_0ElementType());
+						}
+						lv_p_2_0=norm3_Delegation
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParameterDelegation_Kw2Keyword_1_1_0ElementType());
+				}
+				otherlv_3='kw2'
+				{
+					doneLeaf(otherlv_3);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParameterDelegation_PDelegationParserRuleCall_1_1_1_0ElementType());
+						}
+						lv_p_4_0=norm1_Delegation
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+		)
+	)
+;
+
+//Entry rule entryRuleDelegation
+entryRuleDelegation returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getDelegationElementType()); }
+	iv_ruleDelegation=ruleDelegation
+	{ $current=$iv_ruleDelegation.current; }
+	EOF;
+
+// Rule Delegation
+ruleDelegation returns [Boolean current=false]
+:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getDelegation_NpINTTerminalRuleCall_0_0_1_0_0ElementType());
+			}
+			lv_np_0_0=RULE_INT
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
+			{
+				doneLeaf(lv_np_0_0);
+			}
+		)
+	)
+;
+
+
+// Rule Delegation
+norm1_Delegation returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getDelegation_KwdKeyword_1_0ElementType());
+		}
+		otherlv_0='kwd'
+		{
+			doneLeaf(otherlv_0);
+		}
+		{
+			markComposite(elementTypeProvider.getDelegation_DelegationParserRuleCall_1_1ElementType());
+		}
+		this_Delegation_1=ruleDelegation
+		{
+			$current = $this_Delegation_1.current;
+			doneComposite();
+		}
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getDelegation_DelegationALeftAction_1_2_0ElementType());
+					doneComposite();
+					associateWithSemanticElement();
+				}
+			)
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getDelegation_Rc2DelegationParserRuleCall_1_2_1_0ElementType());
+					}
+					lv_rc2_3_0=ruleDelegation
+					{
+						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)
+		)?
+	)
+;
+
+
+// Rule Delegation
+norm2_Delegation returns [Boolean current=false]
+:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getDelegation_PIDTerminalRuleCall_0_0_0_0_0ElementType());
+			}
+			lv_p_0_0=RULE_ID
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
+			{
+				doneLeaf(lv_p_0_0);
+			}
+		)
+	)
+;
+
+
+// Rule Delegation
+norm3_Delegation returns [Boolean current=false]
+:
+	(
+		{
+			markLeaf(elementTypeProvider.getDelegation_KwdKeyword_1_0ElementType());
+		}
+		otherlv_0='kwd'
+		{
+			doneLeaf(otherlv_0);
+		}
+		{
+			markComposite(elementTypeProvider.getDelegation_DelegationParserRuleCall_1_1ElementType());
+		}
+		this_Delegation_1=norm2_Delegation
+		{
+			$current = $this_Delegation_1.current;
+			doneComposite();
+		}
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getDelegation_DelegationALeftAction_1_2_0ElementType());
+					doneComposite();
+					associateWithSemanticElement();
+				}
+			)
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getDelegation_Rc2DelegationParserRuleCall_1_2_1_0ElementType());
+					}
+					lv_rc2_3_0=norm2_Delegation
+					{
+						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)
+		)?
+	)
+;
+
 // Rule DefEnum1
-ruleDefEnum1:
+ruleDefEnum1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDefEnum1_Kw1EnumLiteralDeclarationElementType());
@@ -2926,7 +4431,8 @@ ruleDefEnum1:
 ;
 
 // Rule DefEnum2
-ruleDefEnum2:
+ruleDefEnum2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDefEnum2_Kw2EnumLiteralDeclarationElementType());
@@ -2939,7 +4445,8 @@ ruleDefEnum2:
 ;
 
 // Rule DefEnum3
-ruleDefEnum3:
+ruleDefEnum3 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDefEnum3_Kw3EnumLiteralDeclarationElementType());

@@ -32,21 +32,21 @@ import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.NamingAware
 import org.eclipse.xtext.generator.NewlineNormalizer
 import org.eclipse.xtext.parser.IEncodingProvider
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
 import org.eclipse.xtext.xtext.generator.MweIssues
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
-import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.guessTypeRef
 
 /**
  * @since 2.9
  */
-class FragmentAdapter extends AbstractGeneratorFragment2 {
+class FragmentAdapter extends AbstractXtextGeneratorFragment {
 	
 	@Inject CodeConfig codeConfig
 	
@@ -148,10 +148,10 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	private def translateBinding(Binding it) {
 		val newKey =
 			if (value.statements === null || value.statements.empty)
-				new GuiceModuleAccess.BindKey(null, key.type?.typeRef, key.singleton, key.eagerSingleton)
+				new GuiceModuleAccess.BindKey(null, key.type?.guessTypeRef, key.singleton, key.eagerSingleton)
 			else
 				new GuiceModuleAccess.BindKey(key.type.className, null, key.singleton, key.eagerSingleton)
-		val newValue = new GuiceModuleAccess.BindValue(value.expression, value.typeName?.typeRef,
+		val newValue = new GuiceModuleAccess.BindValue(value.expression, value.typeName?.guessTypeRef,
 				value.provider, value.statements.map[s | if (s.endsWith(';')) s else s + ';'])
 		new GuiceModuleAccess.Binding(newKey, newValue, final, contributedBy)
 	}
@@ -273,7 +273,7 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 			projectNameUi = projectConfig.eclipsePlugin.root?.path.lastSegment
 			ideBasePackage = config2.grammar.genericIdeBasePackage
 			uiBasePackage = config2.grammar.eclipsePluginBasePackage
-			activatorName = config2.grammar.eclipsePluginActivator.name
+			activatorName = eclipsePluginActivator?.name
 			pathTestProject = projectConfig.runtimeTest.root?.path
 			lineDelimiter = codeConfig.lineDelimiter
 			fileHeader = codeConfig.fileHeader
@@ -289,11 +289,11 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def LanguageConfig createLanguageConfig() {
-		val config2 = language as LanguageConfig2
+		val config2 = language as XtextGeneratorLanguage
 		val config = new LanguageConfig
 		config.forcedResourceSet = config2.resourceSet
 		config.fileExtensions = config2.fileExtensions.join(',')
-		config.uri = config2.uri
+		config.uri = config2.grammarUri
 		config.registerNaming(naming)
 		return config
 	}

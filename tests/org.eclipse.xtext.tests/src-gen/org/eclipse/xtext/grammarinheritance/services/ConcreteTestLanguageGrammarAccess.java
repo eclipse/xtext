@@ -13,6 +13,7 @@ import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
@@ -315,11 +316,15 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 
 	private final AbstractTestLanguageGrammarAccess gaAbstractTestLanguage;
 
+	private final TerminalsGrammarAccess gaTerminals;
+
 	@Inject
 	public ConcreteTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		AbstractTestLanguageGrammarAccess gaAbstractTestLanguage) {
+		AbstractTestLanguageGrammarAccess gaAbstractTestLanguage,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaAbstractTestLanguage = gaAbstractTestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pRootRule = new RootRuleElements();
 		this.pConcreteParserRule = new ConcreteParserRuleElements();
 		this.pOverridableParserRule = new OverridableParserRuleElements();
@@ -357,6 +362,10 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 
 	public AbstractTestLanguageGrammarAccess getAbstractTestLanguageGrammarAccess() {
 		return gaAbstractTestLanguage;
+	}
+
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
 	}
 
 	
@@ -515,37 +524,37 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaAbstractTestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaAbstractTestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaAbstractTestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaAbstractTestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaAbstractTestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaAbstractTestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

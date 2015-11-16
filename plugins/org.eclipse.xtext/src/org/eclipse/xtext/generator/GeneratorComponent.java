@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;
 import org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.base.Function;
 import com.google.inject.Injector;
@@ -127,7 +128,9 @@ public class GeneratorComponent implements IWorkflowComponent {
 					if (!(object2 instanceof Resource)) {
 						throw new IllegalStateException("Slot contents was not a Resource but a '"+object.getClass().getSimpleName()+"'!");
 					}
-					instance.generate((Resource) object2, fileSystemAccess);
+					GeneratorContext context = new GeneratorContext();
+					context.setCancelIndicator(CancelIndicator.NullImpl);
+					instance.generate((Resource) object2, fileSystemAccess, context);
 				}
 			} else if (object instanceof Resource) {
 				instance.doGenerate((Resource) object, fileSystemAccess);

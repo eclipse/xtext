@@ -71,18 +71,24 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalPartialSerializationTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalPartialSerializationTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalPartialSerializationTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalPartialSerializationTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalPartialSerializationTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalPartialSerializationTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -94,27 +100,33 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalPartialSerializationTestLanguage.g:58:1: ruleModel : ruleNodeRoot ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalPartialSerializationTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : this_NodeRoot_0= ruleNodeRoot ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_NodeRoot_0 = null;
+
+
         try {
-            // PsiInternalPartialSerializationTestLanguage.g:58:10: ( ruleNodeRoot )
-            // PsiInternalPartialSerializationTestLanguage.g:59:2: ruleNodeRoot
+            // PsiInternalPartialSerializationTestLanguage.g:60:1: (this_NodeRoot_0= ruleNodeRoot )
+            // PsiInternalPartialSerializationTestLanguage.g:61:2: this_NodeRoot_0= ruleNodeRoot
             {
 
             		markComposite(elementTypeProvider.getModel_NodeRootParserRuleCallElementType());
             	
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleNodeRoot();
+            this_NodeRoot_0=ruleNodeRoot();
 
             state._fsp--;
 
 
+            		current = this_NodeRoot_0;
             		doneComposite();
             	
 
@@ -127,24 +139,30 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleNodeRoot"
-    // PsiInternalPartialSerializationTestLanguage.g:69:1: entryRuleNodeRoot : ruleNodeRoot EOF ;
-    public final void entryRuleNodeRoot() throws RecognitionException {
+    // PsiInternalPartialSerializationTestLanguage.g:72:1: entryRuleNodeRoot returns [Boolean current=false] : iv_ruleNodeRoot= ruleNodeRoot EOF ;
+    public final Boolean entryRuleNodeRoot() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNodeRoot = null;
+
+
         try {
-            // PsiInternalPartialSerializationTestLanguage.g:69:18: ( ruleNodeRoot EOF )
-            // PsiInternalPartialSerializationTestLanguage.g:70:2: ruleNodeRoot EOF
+            // PsiInternalPartialSerializationTestLanguage.g:72:50: (iv_ruleNodeRoot= ruleNodeRoot EOF )
+            // PsiInternalPartialSerializationTestLanguage.g:73:2: iv_ruleNodeRoot= ruleNodeRoot EOF
             {
              markComposite(elementTypeProvider.getNodeRootElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNodeRoot();
+            iv_ruleNodeRoot=ruleNodeRoot();
 
             state._fsp--;
 
+             current =iv_ruleNodeRoot; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -156,22 +174,26 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNodeRoot"
 
 
     // $ANTLR start "ruleNodeRoot"
-    // PsiInternalPartialSerializationTestLanguage.g:75:1: ruleNodeRoot : (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) ;
-    public final void ruleNodeRoot() throws RecognitionException {
+    // PsiInternalPartialSerializationTestLanguage.g:79:1: ruleNodeRoot returns [Boolean current=false] : (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) ;
+    public final Boolean ruleNodeRoot() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
+        Boolean lv_node_1_0 = null;
+
 
         try {
-            // PsiInternalPartialSerializationTestLanguage.g:75:13: ( (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) )
-            // PsiInternalPartialSerializationTestLanguage.g:76:2: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
+            // PsiInternalPartialSerializationTestLanguage.g:80:1: ( (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) )
+            // PsiInternalPartialSerializationTestLanguage.g:81:2: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
             {
-            // PsiInternalPartialSerializationTestLanguage.g:76:2: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
-            // PsiInternalPartialSerializationTestLanguage.g:77:3: otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) )
+            // PsiInternalPartialSerializationTestLanguage.g:81:2: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
+            // PsiInternalPartialSerializationTestLanguage.g:82:3: otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) )
             {
 
             			markLeaf(elementTypeProvider.getNodeRoot_NumberSignDigitOneKeyword_0ElementType());
@@ -180,22 +202,26 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalPartialSerializationTestLanguage.g:84:3: ( (lv_node_1_0= ruleNode ) )
-            // PsiInternalPartialSerializationTestLanguage.g:85:4: (lv_node_1_0= ruleNode )
+            // PsiInternalPartialSerializationTestLanguage.g:89:3: ( (lv_node_1_0= ruleNode ) )
+            // PsiInternalPartialSerializationTestLanguage.g:90:4: (lv_node_1_0= ruleNode )
             {
-            // PsiInternalPartialSerializationTestLanguage.g:85:4: (lv_node_1_0= ruleNode )
-            // PsiInternalPartialSerializationTestLanguage.g:86:5: lv_node_1_0= ruleNode
+            // PsiInternalPartialSerializationTestLanguage.g:90:4: (lv_node_1_0= ruleNode )
+            // PsiInternalPartialSerializationTestLanguage.g:91:5: lv_node_1_0= ruleNode
             {
 
             					markComposite(elementTypeProvider.getNodeRoot_NodeNodeParserRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleNode();
+            lv_node_1_0=ruleNode();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -216,24 +242,30 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNodeRoot"
 
 
     // $ANTLR start "entryRuleNode"
-    // PsiInternalPartialSerializationTestLanguage.g:99:1: entryRuleNode : ruleNode EOF ;
-    public final void entryRuleNode() throws RecognitionException {
+    // PsiInternalPartialSerializationTestLanguage.g:108:1: entryRuleNode returns [Boolean current=false] : iv_ruleNode= ruleNode EOF ;
+    public final Boolean entryRuleNode() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNode = null;
+
+
         try {
-            // PsiInternalPartialSerializationTestLanguage.g:99:14: ( ruleNode EOF )
-            // PsiInternalPartialSerializationTestLanguage.g:100:2: ruleNode EOF
+            // PsiInternalPartialSerializationTestLanguage.g:108:46: (iv_ruleNode= ruleNode EOF )
+            // PsiInternalPartialSerializationTestLanguage.g:109:2: iv_ruleNode= ruleNode EOF
             {
              markComposite(elementTypeProvider.getNodeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNode();
+            iv_ruleNode=ruleNode();
 
             state._fsp--;
 
+             current =iv_ruleNode; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -245,25 +277,29 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNode"
 
 
     // $ANTLR start "ruleNode"
-    // PsiInternalPartialSerializationTestLanguage.g:105:1: ruleNode : (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) ;
-    public final void ruleNode() throws RecognitionException {
+    // PsiInternalPartialSerializationTestLanguage.g:115:1: ruleNode returns [Boolean current=false] : (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) ;
+    public final Boolean ruleNode() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
+        Boolean lv_children_3_0 = null;
+
 
         try {
-            // PsiInternalPartialSerializationTestLanguage.g:105:9: ( (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) )
-            // PsiInternalPartialSerializationTestLanguage.g:106:2: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
+            // PsiInternalPartialSerializationTestLanguage.g:116:1: ( (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) )
+            // PsiInternalPartialSerializationTestLanguage.g:117:2: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
             {
-            // PsiInternalPartialSerializationTestLanguage.g:106:2: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
-            // PsiInternalPartialSerializationTestLanguage.g:107:3: otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
+            // PsiInternalPartialSerializationTestLanguage.g:117:2: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
+            // PsiInternalPartialSerializationTestLanguage.g:118:3: otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
             {
 
             			markLeaf(elementTypeProvider.getNode_NodeKeyword_0ElementType());
@@ -272,16 +308,22 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalPartialSerializationTestLanguage.g:114:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalPartialSerializationTestLanguage.g:115:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalPartialSerializationTestLanguage.g:125:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalPartialSerializationTestLanguage.g:126:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalPartialSerializationTestLanguage.g:115:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalPartialSerializationTestLanguage.g:116:5: lv_name_1_0= RULE_ID
+            // PsiInternalPartialSerializationTestLanguage.g:126:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalPartialSerializationTestLanguage.g:127:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getNode_NameIDTerminalRuleCall_1_0ElementType());
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_1_0);
             				
@@ -291,7 +333,7 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
             }
 
-            // PsiInternalPartialSerializationTestLanguage.g:125:3: (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
+            // PsiInternalPartialSerializationTestLanguage.g:142:3: (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -300,7 +342,7 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalPartialSerializationTestLanguage.g:126:4: otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')'
+                    // PsiInternalPartialSerializationTestLanguage.g:143:4: otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')'
                     {
 
                     				markLeaf(elementTypeProvider.getNode_LeftParenthesisKeyword_2_0ElementType());
@@ -309,7 +351,7 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalPartialSerializationTestLanguage.g:133:4: ( (lv_children_3_0= ruleNode ) )+
+                    // PsiInternalPartialSerializationTestLanguage.g:150:4: ( (lv_children_3_0= ruleNode ) )+
                     int cnt1=0;
                     loop1:
                     do {
@@ -323,21 +365,25 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
                         switch (alt1) {
                     	case 1 :
-                    	    // PsiInternalPartialSerializationTestLanguage.g:134:5: (lv_children_3_0= ruleNode )
+                    	    // PsiInternalPartialSerializationTestLanguage.g:151:5: (lv_children_3_0= ruleNode )
                     	    {
-                    	    // PsiInternalPartialSerializationTestLanguage.g:134:5: (lv_children_3_0= ruleNode )
-                    	    // PsiInternalPartialSerializationTestLanguage.g:135:6: lv_children_3_0= ruleNode
+                    	    // PsiInternalPartialSerializationTestLanguage.g:151:5: (lv_children_3_0= ruleNode )
+                    	    // PsiInternalPartialSerializationTestLanguage.g:152:6: lv_children_3_0= ruleNode
                     	    {
 
                     	    						markComposite(elementTypeProvider.getNode_ChildrenNodeParserRuleCall_2_1_0ElementType());
                     	    					
                     	    pushFollow(FollowSets000.FOLLOW_6);
-                    	    ruleNode();
+                    	    lv_children_3_0=ruleNode();
 
                     	    state._fsp--;
 
 
                     	    						doneComposite();
+                    	    						if(!current) {
+                    	    							associateWithSemanticElement();
+                    	    							current = true;
+                    	    						}
                     	    					
 
                     	    }
@@ -381,7 +427,7 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNode"
 

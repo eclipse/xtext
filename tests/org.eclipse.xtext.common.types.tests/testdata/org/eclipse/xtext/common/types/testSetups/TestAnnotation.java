@@ -25,6 +25,7 @@ public @interface TestAnnotation  {
 	double doubleValue();
 	boolean booleanValue() default true;
 	short shortValue();
+	short shortValue2() default NestedAnnotation.SHORT_2;
 	long[] longValue();
 	char[] charValue();
 	TestEnum enumValue();
@@ -38,6 +39,8 @@ public @interface TestAnnotation  {
 	@Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 	@interface NestedAnnotation {
 		String value() default "MyString";
+		
+		public static final short SHORT_2 = 42;
 	}
 	
 	@TestAnnotation(
@@ -52,9 +55,12 @@ public @interface TestAnnotation  {
 			floatValue = 0.8f, 
 			longValue = { 6 , 5 + 2}, 
 			shortValue = 4, 
+			shortValue2 = Annotated.CONSTANT, 
 			stringArrayValue = { "array", "value", "duplicate", "duplicate" }, 
 			stringValue = "stringValue")
 	public static class Annotated {
+		
+		public static final short CONSTANT = 4 + NestedAnnotation.SHORT_2;
 		
 		@NestedAnnotation()
 		public Annotated field;

@@ -26,7 +26,7 @@ public class HiddenTerminalsTestLanguageSyntacticSequencer extends AbstractSynta
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getDatatypeRuleRule())
+		if (ruleCall.getRule() == grammarAccess.getDatatypeRuleRule())
 			return getDatatypeRuleToken(semanticObject, ruleCall, node);
 		return "";
 	}

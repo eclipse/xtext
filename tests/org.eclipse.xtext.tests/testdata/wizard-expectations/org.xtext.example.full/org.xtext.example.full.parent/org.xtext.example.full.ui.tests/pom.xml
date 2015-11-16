@@ -27,4 +27,17 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>testing-on-mac</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<tycho.testArgLine>-XstartOnFirstThread</tycho.testArgLine>
+			</properties>
+		</profile>
+	</profiles>
 </project>

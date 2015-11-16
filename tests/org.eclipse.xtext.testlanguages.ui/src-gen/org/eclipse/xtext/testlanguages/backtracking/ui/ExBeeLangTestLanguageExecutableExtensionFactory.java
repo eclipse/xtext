@@ -3,12 +3,10 @@
  */
 package org.eclipse.xtext.testlanguages.backtracking.ui;
 
+import com.google.inject.Injector;
+import org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
-
-import com.google.inject.Injector;
-
-import org.eclipse.xtext.testlanguages.backtracking.ui.internal.BeeLangTestLanguageActivator;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +16,12 @@ public class ExBeeLangTestLanguageExecutableExtensionFactory extends AbstractGui
 
 	@Override
 	protected Bundle getBundle() {
-		return BeeLangTestLanguageActivator.getInstance().getBundle();
+		return TestlanguagesActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return BeeLangTestLanguageActivator.getInstance().getInjector(BeeLangTestLanguageActivator.ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE);
+		return TestlanguagesActivator.getInstance().getInjector(TestlanguagesActivator.ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE);
 	}
 	
 }

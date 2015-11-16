@@ -6,15 +6,15 @@
 	<title>Xtext-Web Domainmodel Example</title>
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-ace.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
+	<script src="webjars/requirejs/2.1.20/require.min.js"></script>
 	<script type="text/javascript">
 		require.config({
 			paths: {
 				"jquery": "webjars/jquery/2.1.4/jquery.min",
-				"ace/ext/language_tools": "webjars/ace/1.1.9/src/ext-language_tools"
+				"ace/ext/language_tools": "webjars/ace/1.2.0/src/ext-language_tools"
 			}
 		});
-		require(["webjars/ace/1.1.9/src/ace"], function() {
+		require(["webjars/ace/1.2.0/src/ace"], function() {
 			require(["xtext/xtext-ace"], function(xtext) {
 				var editor = xtext.createEditor({syntaxDefinition: "xtext/ace-mode-statemachine"});
 				$("#save-button").click(function() {
@@ -24,7 +24,11 @@
 					editor.xtextServices.revertResource();
 				});
 				$("#generate-button").click(function() {
-					window.open('http://' + location.host + '/xtext-service/generate?resource=example.statemachine');
+					window.open('http://' + location.host + '/xtext-service/generate?resource=' + editor.xtextServices.options.resourceId);
+				});
+				$("#change-resource").change(function() {
+					var resourceId = $("#change-resource option:selected").attr("value");
+					editor.xtextServices.serviceBuilder.changeResource(resourceId);
 				});
 			});
 		});
@@ -34,7 +38,7 @@
 
 <div class="container">
 	<div id="xtext-editor"
-		data-editor-resource-id="example.statemachine"
+		data-editor-resource-id="example1.statemachine"
 		data-editor-dirty-element="dirty-indicator"
 		data-editor-enable-save-action="true"
 		data-editor-enable-formatting-action="true"
@@ -47,6 +51,10 @@
 		<button id="save-button">Save</button>
 		<button id="revert-button">Revert</button>
 		<button id="generate-button">Generate</button>
+		<select id="change-resource">
+			<option value="example1.statemachine">Example 1</option>
+			<option value="example2.statemachine">Example 2</option>
+		</select>
 	</div>
 </div>
 

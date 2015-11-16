@@ -49,46 +49,53 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleRoot
-entryRuleRoot:
+entryRuleRoot returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getRootElementType()); }
-	ruleRoot
+	iv_ruleRoot=ruleRoot
+	{ $current=$iv_ruleRoot.current; }
 	EOF;
 
 // Rule Root
-ruleRoot:
+ruleRoot returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getRoot_OpParserRuleCall_0ElementType());
 		}
-		ruleOp
+		this_Op_0=ruleOp
 		{
+			$current = $this_Op_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getRoot_TrickyGParserRuleCall_1ElementType());
 		}
-		ruleTrickyG
+		this_TrickyG_1=ruleTrickyG
 		{
+			$current = $this_TrickyG_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleOp
-entryRuleOp:
+entryRuleOp returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getOpElementType()); }
-	ruleOp
+	iv_ruleOp=ruleOp
+	{ $current=$iv_ruleOp.current; }
 	EOF;
 
 // Rule Op
-ruleOp:
+ruleOp returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getOp_TermParserRuleCall_0ElementType());
 		}
-		ruleTerm
+		this_Term_0=ruleTerm
 		{
+			$current = $this_Term_0.current;
 			doneComposite();
 		}
 		(
@@ -97,6 +104,7 @@ ruleOp:
 					{
 						precedeComposite(elementTypeProvider.getOp_AddAddOperandsAction_1_0_0ElementType());
 						doneComposite();
+						associateWithSemanticElement();
 					}
 				)
 				{
@@ -114,6 +122,10 @@ ruleOp:
 						lv_addOperands_3_0=ruleTerm
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -124,6 +136,7 @@ ruleOp:
 					{
 						precedeComposite(elementTypeProvider.getOp_MinusMinusOperandsAction_1_1_0ElementType());
 						doneComposite();
+						associateWithSemanticElement();
 					}
 				)
 				{
@@ -141,6 +154,10 @@ ruleOp:
 						lv_minusOperands_6_0=ruleTerm
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -150,46 +167,58 @@ ruleOp:
 ;
 
 //Entry rule entryRuleTerm
-entryRuleTerm:
+entryRuleTerm returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTermElementType()); }
-	ruleTerm
+	iv_ruleTerm=ruleTerm
+	{ $current=$iv_ruleTerm.current; }
 	EOF;
 
 // Rule Term
-ruleTerm:
+ruleTerm returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
 		}
-		ruleAtom
+		this_Atom_0=ruleAtom
 		{
+			$current = $this_Atom_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getTerm_ParensParserRuleCall_1ElementType());
 		}
-		ruleParens
+		this_Parens_1=ruleParens
 		{
+			$current = $this_Parens_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleAtom
-entryRuleAtom:
+entryRuleAtom returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAtomElementType()); }
-	ruleAtom
+	iv_ruleAtom=ruleAtom
+	{ $current=$iv_ruleAtom.current; }
 	EOF;
 
 // Rule Atom
-ruleAtom:
+ruleAtom returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_ID
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -198,13 +227,15 @@ ruleAtom:
 ;
 
 //Entry rule entryRuleParens
-entryRuleParens:
+entryRuleParens returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParensElementType()); }
-	ruleParens
+	iv_ruleParens=ruleParens
+	{ $current=$iv_ruleParens.current; }
 	EOF;
 
 // Rule Parens
-ruleParens:
+ruleParens returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getParens_LeftParenthesisKeyword_0ElementType());
@@ -216,8 +247,9 @@ ruleParens:
 		{
 			markComposite(elementTypeProvider.getParens_OpParserRuleCall_1ElementType());
 		}
-		ruleOp
+		this_Op_1=ruleOp
 		{
+			$current = $this_Op_1.current;
 			doneComposite();
 		}
 		{
@@ -236,19 +268,27 @@ ruleParens:
 				{
 					doneLeaf(lv_em_3_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)?
 	)
 ;
 
 //Entry rule entryRuleTrickyG
-entryRuleTrickyG:
+entryRuleTrickyG returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTrickyGElementType()); }
-	ruleTrickyG
+	iv_ruleTrickyG=ruleTrickyG
+	{ $current=$iv_ruleTrickyG.current; }
 	EOF;
 
 // Rule TrickyG
-ruleTrickyG:
+ruleTrickyG returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getTrickyG_TGKeyword_0ElementType());
@@ -265,6 +305,10 @@ ruleTrickyG:
 				lv_tree_1_0=ruleTrickyG1
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -272,13 +316,15 @@ ruleTrickyG:
 ;
 
 //Entry rule entryRuleTrickyG1
-entryRuleTrickyG1:
+entryRuleTrickyG1 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTrickyG1ElementType()); }
-	ruleTrickyG1
+	iv_ruleTrickyG1=ruleTrickyG1
+	{ $current=$iv_ruleTrickyG1.current; }
 	EOF;
 
 // Rule TrickyG1
-ruleTrickyG1:
+ruleTrickyG1 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getTrickyG1_LeftSquareBracketKeyword_0ElementType());
@@ -296,6 +342,10 @@ ruleTrickyG1:
 					lv_vals_1_0=ruleTrickyG2
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -315,6 +365,10 @@ ruleTrickyG1:
 						lv_vals_3_0=ruleTrickyG2
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -331,19 +385,22 @@ ruleTrickyG1:
 ;
 
 //Entry rule entryRuleTrickyG2
-entryRuleTrickyG2:
+entryRuleTrickyG2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTrickyG2ElementType()); }
-	ruleTrickyG2
+	iv_ruleTrickyG2=ruleTrickyG2
+	{ $current=$iv_ruleTrickyG2.current; }
 	EOF;
 
 // Rule TrickyG2
-ruleTrickyG2:
+ruleTrickyG2 returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getTrickyG2_TrickyG1ParserRuleCall_0ElementType());
 		}
-		ruleTrickyG1
+		this_TrickyG1_0=ruleTrickyG1
 		{
+			$current = $this_TrickyG1_0.current;
 			doneComposite();
 		}
 		    |
@@ -353,6 +410,12 @@ ruleTrickyG2:
 					markLeaf(elementTypeProvider.getTrickyG2_ValINTTerminalRuleCall_1_0ElementType());
 				}
 				lv_val_1_0=RULE_INT
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_val_1_0);
 				}

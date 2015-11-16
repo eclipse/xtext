@@ -82,8 +82,22 @@ public class XtextVersion {
     return this.version.endsWith("-SNAPSHOT");
   }
   
+  public boolean isStable() {
+    boolean _and = false;
+    boolean _isSnapshot = this.isSnapshot();
+    boolean _not = (!_isSnapshot);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _matches = this.version.matches("\\d+\\.\\d+(\\.\\d+)+");
+      boolean _not_1 = (!_matches);
+      _and = _not_1;
+    }
+    return _and;
+  }
+  
   public String getXtendGradlePluginVersion() {
-    return "0.4.8";
+    return "0.4.12";
   }
   
   public String getXtextGradlePluginVersion() {

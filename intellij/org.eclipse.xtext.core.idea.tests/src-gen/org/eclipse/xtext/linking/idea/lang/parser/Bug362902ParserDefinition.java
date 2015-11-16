@@ -1,9 +1,10 @@
 package org.eclipse.xtext.linking.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectReference;
-import org.eclipse.xtext.linking.idea.lang.Bug362902ElementTypeProvider;
 import org.eclipse.xtext.linking.idea.lang.psi.impl.Bug362902FileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.linking.idea.lang.Bug362902ElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -26,14 +27,19 @@ public class Bug362902ParserDefinition extends AbstractXtextParserDefinition {
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getModel_GreetingsGreetingParserRuleCall_0_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getGreeting_NameMyIdParserRuleCall_1_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getModel_FavouriteGreetingCrossReference_2_0ElementType()) {
-			return new PsiEObjectReference(node);
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getModelElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_GreetingsGreetingParserRuleCall_0_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getGreetingElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);
 	}

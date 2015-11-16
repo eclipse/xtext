@@ -14,7 +14,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2.1</version>
+				<version>1.4.0</version>
 				<executions>
 					<execution>
 						<id>mwe2Launcher</id>
@@ -32,16 +32,22 @@
 						<argument>rootPath=/${project.basedir}/..</argument>
 					</arguments>
 					<includePluginDependencies>true</includePluginDependencies>
+					<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
 				</configuration>
 				<dependencies>
 					<dependency>
-						<groupId>org.eclipse.xtext</groupId>
-						<artifactId>org.eclipse.xtext.xtext</artifactId>
-						<version>${xtextVersion}</version>
+						<groupId>org.eclipse.emf</groupId>
+						<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+						<version>[2.8.2,3.0)</version>
 					</dependency>
 					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
 						<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+						<version>${xtextVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.xtext</groupId>
+						<artifactId>org.eclipse.xtext.xbase</artifactId>
 						<version>${xtextVersion}</version>
 					</dependency>
 				</dependencies>
@@ -58,21 +64,39 @@
 					<filesets combine.children="append">
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.tests/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.ide/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.ui/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.ui.tests/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/../org.xtext.example.full.web/src-gen/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
 						</fileset>
 						<fileset>
 							<directory>${basedir}/model/generated/</directory>

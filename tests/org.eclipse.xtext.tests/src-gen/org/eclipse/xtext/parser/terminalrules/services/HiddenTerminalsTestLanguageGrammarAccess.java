@@ -228,7 +228,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//'('
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		//(called=InheritingHiddensCall | hidingCalled=HidingHiddens)
+		//called=InheritingHiddensCall | hidingCalled=HidingHiddens
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//called=InheritingHiddensCall

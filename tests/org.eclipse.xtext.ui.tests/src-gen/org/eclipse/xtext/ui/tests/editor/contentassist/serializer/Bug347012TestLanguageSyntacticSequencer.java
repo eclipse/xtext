@@ -64,9 +64,9 @@ public class Bug347012TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if(ruleCall.getRule() == grammarAccess.getLTRule())
+		if (ruleCall.getRule() == grammarAccess.getLTRule())
 			return getLTToken(semanticObject, ruleCall, node);
-		else if(ruleCall.getRule() == grammarAccess.getVirtualSemiRule())
+		else if (ruleCall.getRule() == grammarAccess.getVirtualSemiRule())
 			return getVirtualSemiToken(semanticObject, ruleCall, node);
 		return "";
 	}
@@ -97,41 +97,41 @@ public class Bug347012TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_MyBinding_LTTerminalRuleCall_1_0_a.equals(syntax))
+			if (match_MyBinding_LTTerminalRuleCall_1_0_a.equals(syntax))
 				emit_MyBinding_LTTerminalRuleCall_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyBinding_LTTerminalRuleCall_1_2_a.equals(syntax))
+			else if (match_MyBinding_LTTerminalRuleCall_1_2_a.equals(syntax))
 				emit_MyBinding_LTTerminalRuleCall_1_2_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyBinding_LTTerminalRuleCall_2_0_a.equals(syntax))
+			else if (match_MyBinding_LTTerminalRuleCall_2_0_a.equals(syntax))
 				emit_MyBinding_LTTerminalRuleCall_2_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyBinding_LTTerminalRuleCall_2_2_a.equals(syntax))
+			else if (match_MyBinding_LTTerminalRuleCall_2_2_a.equals(syntax))
 				emit_MyBinding_LTTerminalRuleCall_2_2_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyClass_LTTerminalRuleCall_2_a.equals(syntax))
+			else if (match_MyClass_LTTerminalRuleCall_2_a.equals(syntax))
 				emit_MyClass_LTTerminalRuleCall_2_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyClass_LTTerminalRuleCall_4_a.equals(syntax))
+			else if (match_MyClass_LTTerminalRuleCall_4_a.equals(syntax))
 				emit_MyClass_LTTerminalRuleCall_4_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyClass_LTTerminalRuleCall_6_a.equals(syntax))
+			else if (match_MyClass_LTTerminalRuleCall_6_a.equals(syntax))
 				emit_MyClass_LTTerminalRuleCall_6_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyClass_LTTerminalRuleCall_7_1_a.equals(syntax))
+			else if (match_MyClass_LTTerminalRuleCall_7_1_a.equals(syntax))
 				emit_MyClass_LTTerminalRuleCall_7_1_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyClass_PublicKeyword_0_q.equals(syntax))
+			else if (match_MyClass_PublicKeyword_0_q.equals(syntax))
 				emit_MyClass_PublicKeyword_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyField_LTTerminalRuleCall_2_a.equals(syntax))
+			else if (match_MyField_LTTerminalRuleCall_2_a.equals(syntax))
 				emit_MyField_LTTerminalRuleCall_2_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyField_LTTerminalRuleCall_4_0_a.equals(syntax))
+			else if (match_MyField_LTTerminalRuleCall_4_0_a.equals(syntax))
 				emit_MyField_LTTerminalRuleCall_4_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyField_LTTerminalRuleCall_4_2_a.equals(syntax))
+			else if (match_MyField_LTTerminalRuleCall_4_2_a.equals(syntax))
 				emit_MyField_LTTerminalRuleCall_4_2_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyPackage_LTTerminalRuleCall_1_a.equals(syntax))
+			else if (match_MyPackage_LTTerminalRuleCall_1_a.equals(syntax))
 				emit_MyPackage_LTTerminalRuleCall_1_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyPackage_LTTerminalRuleCall_3_a.equals(syntax))
+			else if (match_MyPackage_LTTerminalRuleCall_3_a.equals(syntax))
 				emit_MyPackage_LTTerminalRuleCall_3_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyPackage_LTTerminalRuleCall_5_a.equals(syntax))
+			else if (match_MyPackage_LTTerminalRuleCall_5_a.equals(syntax))
 				emit_MyPackage_LTTerminalRuleCall_5_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyPackage_LTTerminalRuleCall_6_1_a.equals(syntax))
+			else if (match_MyPackage_LTTerminalRuleCall_6_1_a.equals(syntax))
 				emit_MyPackage_LTTerminalRuleCall_6_1_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyProgram_LTTerminalRuleCall_1_a.equals(syntax))
+			else if (match_MyProgram_LTTerminalRuleCall_1_a.equals(syntax))
 				emit_MyProgram_LTTerminalRuleCall_1_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MyProgram_LTTerminalRuleCall_3_a.equals(syntax))
+			else if (match_MyProgram_LTTerminalRuleCall_3_a.equals(syntax))
 				emit_MyProgram_LTTerminalRuleCall_3_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

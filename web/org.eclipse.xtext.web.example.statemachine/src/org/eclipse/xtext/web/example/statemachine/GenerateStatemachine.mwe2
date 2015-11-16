@@ -7,10 +7,8 @@
  *******************************************************************************/
 module org.eclipse.xtext.web.example.statemachine.GenerateStatemachine
 
-import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
 import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
 
 var rootPath = ".."
 var baseName = "org.eclipse.xtext.web.example.statemachine"
@@ -19,7 +17,7 @@ Workflow {
 	
 	component = XtextGenerator auto-inject {
 		configuration = StateMachineGeneratorModule {
-			project = WizardConfig auto-inject {
+			project = StandardProjectConfig auto-inject {
 				genericIde = {
 					enabled = true
 				}
@@ -44,7 +42,7 @@ Workflow {
 			}
 		}
 		language = auto-inject {
-			uri = "classpath:/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
 			fileExtensions = "statemachine"
 			
 			// Java API to access grammar elements (required by several other fragments)
@@ -53,21 +51,15 @@ Workflow {
 			// generates Java API for the generated EPackages
 			fragment = ecore.EMFGeneratorFragment2 auto-inject {}
 
-			fragment = adapter.FragmentAdapter {
-				fragment = serializer.SerializerFragment auto-inject {
-					generateStub = false
-				}
+			fragment = serializer.SerializerFragment2 auto-inject {
+				generateStub = false
 			}
 
 			// a custom ResourceFactory for use with EMF
-			fragment = adapter.FragmentAdapter {
-				fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
-			}
+			fragment = resourceFactory.ResourceFactoryFragment2 auto-inject {}
 
 			// The antlr parser generator fragment.
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
-				}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
 			}
 
 			// Xtend-based API for validation
@@ -84,11 +76,6 @@ Workflow {
 
 			// formatter API
 			fragment = formatting.Formatter2Fragment2 auto-inject {}
-			
-			// a light-weight parser used for content assist
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
-			}
 			
 			// JavaScript-based syntax highlighting
 			fragment = web.WebIntegrationFragment auto-inject {

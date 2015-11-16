@@ -16,7 +16,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.formatting2.IFormatter2;
-import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IParser;
@@ -26,6 +26,8 @@ import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -83,54 +85,56 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 		return StatemachineGrammarAccess.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
 		return StatemachineSemanticSequencer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
 		return StatemachineSyntacticSequencer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends IParser> bindIParser() {
 		return StatemachineParser.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends ITokenToStringConverter> bindITokenToStringConverter() {
 		return AntlrTokenToStringConverter.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return StatemachineAntlrTokenFileProvider.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends Lexer> bindLexer() {
 		return InternalStatemachineLexer.class;
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Provider<InternalStatemachineLexer> provideInternalStatemachineLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.web.example.statemachine.parser.antlr.internal.InternalStatemachineLexer.class);
-	}
-	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public void configureRuntimeLexer(Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.web.example.statemachine.parser.antlr.internal.InternalStatemachineLexer.class);
-	}
-	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
 		return AntlrTokenDefProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Provider<InternalStatemachineLexer> provideInternalStatemachineLexer() {
+		return LexerProvider.create(InternalStatemachineLexer.class);
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public void configureRuntimeLexer(Binder binder) {
+		binder.bind(Lexer.class)
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(InternalStatemachineLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
@@ -165,7 +169,7 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
-	public Class<? extends IGenerator> bindIGenerator() {
+	public Class<? extends IGenerator2> bindIGenerator2() {
 		return StatemachineGenerator.class;
 	}
 	

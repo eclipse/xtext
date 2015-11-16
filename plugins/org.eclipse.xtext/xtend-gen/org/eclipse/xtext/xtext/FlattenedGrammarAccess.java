@@ -26,6 +26,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -43,6 +44,7 @@ import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -93,7 +95,8 @@ public class FlattenedGrammarAccess {
     flattenedGrammar.setName(_name);
     LinkedHashMap<RuleWithParameterValues, AbstractRule> origToCopy = Maps.<RuleWithParameterValues, AbstractRule>newLinkedHashMap();
     List<AbstractRule> _rules = filter.getRules(grammar);
-    final ArrayList<AbstractRule> copies = this.copyRuleStubs(names, origToCopy, _rules);
+    boolean _isDiscardRuleTypeRef = filter.isDiscardRuleTypeRef();
+    final ArrayList<AbstractRule> copies = this.copyRuleStubs(names, origToCopy, _rules, _isDiscardRuleTypeRef);
     EList<AbstractRule> _rules_1 = flattenedGrammar.getRules();
     Iterables.<AbstractRule>addAll(_rules_1, copies);
     Multimap<TerminalRule, AbstractRule> calledFrom = this.copyRuleBodies(copies, origToCopy);
@@ -302,7 +305,6 @@ public class FlattenedGrammarAccess {
                   return element;
                 } else {
                   AbstractElement element_1 = elements.get(0);
-                  this.mergeCardinalities(((AbstractElement)result), element_1);
                   this.mergePredicates(((AbstractElement)result), element_1);
                   element_1.setFirstSetPredicated(false);
                   element_1.setPredicated(false);
@@ -443,7 +445,17 @@ public class FlattenedGrammarAccess {
     return calledFrom;
   }
   
-  private ArrayList<AbstractRule> copyRuleStubs(final RuleNames names, final Map<RuleWithParameterValues, AbstractRule> origToCopy, final List<AbstractRule> rulesToCopy) {
+  private TypeRef copyTypeRef(final TypeRef ref) {
+    if ((ref == null)) {
+      return null;
+    }
+    final TypeRef copy = this.<TypeRef>copy(ref);
+    EClassifier _classifier = ref.getClassifier();
+    copy.setClassifier(_classifier);
+    return copy;
+  }
+  
+  private ArrayList<AbstractRule> copyRuleStubs(final RuleNames names, final Map<RuleWithParameterValues, AbstractRule> origToCopy, final List<AbstractRule> rulesToCopy, final boolean discardTypeRef) {
     final ArrayList<AbstractRule> result = CollectionLiterals.<AbstractRule>newArrayList();
     for (final AbstractRule rule : rulesToCopy) {
       {
@@ -461,6 +473,11 @@ public class FlattenedGrammarAccess {
               copy.setFragment(_isFragment);
               boolean _isWildcard = ((ParserRule)rule).isWildcard();
               copy.setWildcard(_isWildcard);
+              if ((!discardTypeRef)) {
+                TypeRef _type = ((ParserRule)rule).getType();
+                TypeRef _copyTypeRef = this.copyTypeRef(_type);
+                copy.setType(_copyTypeRef);
+              }
               this.attachTo(copy, rule, origToCopy);
               result.add(copy);
             } else {
@@ -477,6 +494,11 @@ public class FlattenedGrammarAccess {
                   copy.setFragment(_isFragment);
                   boolean _isWildcard = ((ParserRule)rule).isWildcard();
                   copy.setWildcard(_isWildcard);
+                  if ((!discardTypeRef)) {
+                    TypeRef _type = ((ParserRule)rule).getType();
+                    TypeRef _copyTypeRef = FlattenedGrammarAccess.this.copyTypeRef(_type);
+                    copy.setType(_copyTypeRef);
+                  }
                   origToCopy.put(parameterValues, copy);
                   parameterValues.attachToEmfObject(copy);
                   result.add(copy);

@@ -8,10 +8,8 @@
 package org.eclipse.xtext.xtext.generator.ui.labeling
 
 import com.google.inject.Inject
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -25,7 +23,7 @@ import static extension org.eclipse.xtext.GrammarUtil.*
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
+class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 
 	private static val XBASE_LABEL_PROVIDER = 
 		"org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider"
@@ -40,13 +38,7 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 	extension XbaseUsageDetector
 
 	@Inject
-	extension CodeConfig
-
-	@Inject
 	FileAccessFactory fileAccessFactory
-
-	@Accessors
-	private boolean generateStub = true;
 
 	def protected TypeReference getEObjectLabelProviderClass(Grammar g) {
 		return new TypeReference(
@@ -89,18 +81,18 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 
 
 	override generate() {
-		if (generateStub || grammar.inheritsXbase) {
+		if (isGenerateStub || grammar.inheritsXbase) {
 
 			if (projectConfig.eclipsePlugin.manifest != null) {
 				projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 			}
 	
 			val labelProviderClass =
-				if (generateStub) grammar.EObjectLabelProviderClass
+				if (isGenerateStub) grammar.EObjectLabelProviderClass
 				else new TypeReference(XBASE_LABEL_PROVIDER)
 	
 			val descriptionLabelProviderClass =
-				if (generateStub) grammar.descriptionLabelProviderClass
+				if (isGenerateStub) grammar.descriptionLabelProviderClass
 				else new TypeReference(XBASE_DESCRIPTION_LABEL_PROVIDER)			 
 	
 			val iLabelProviderClass = new TypeReference("org.eclipse.jface.viewers.ILabelProvider")
@@ -115,8 +107,8 @@ class LabelProviderFragment2 extends AbstractGeneratorFragment2 {
 					''').contributeTo(language.eclipsePluginGenModule)			
 		}
 
-		if (generateStub && projectConfig.eclipsePlugin.src !== null) {
-			if (preferXtendStubs) {
+		if (isGenerateStub && projectConfig.eclipsePlugin.src !== null) {
+			if (generateXtendStub) {
 				generateXtendEObjectLabelProvider
 				generateXtendDescriptionLabelProvider
 			} else {

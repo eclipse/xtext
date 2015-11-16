@@ -392,6 +392,51 @@ public interface SequencertestFactory extends EFactory
   FragmentCallerType createFragmentCallerType();
 
   /**
+   * Returns a new object of class '<em>Parameter Caller</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter Caller</em>'.
+   * @generated
+   */
+  ParameterCaller createParameterCaller();
+
+  /**
+   * Returns a new object of class '<em>Parameterized</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameterized</em>'.
+   * @generated
+   */
+  Parameterized createParameterized();
+
+  /**
+   * Returns a new object of class '<em>Parameter Delegation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter Delegation</em>'.
+   * @generated
+   */
+  ParameterDelegation createParameterDelegation();
+
+  /**
+   * Returns a new object of class '<em>Delegation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Delegation</em>'.
+   * @generated
+   */
+  Delegation createDelegation();
+
+  /**
+   * Returns a new object of class '<em>Delegation A</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Delegation A</em>'.
+   * @generated
+   */
+  DelegationA createDelegationA();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

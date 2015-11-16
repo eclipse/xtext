@@ -51,6 +51,14 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Keyword cNumberSignDigitNineKeyword_1_5_0 = (Keyword)cGroup_1_5.eContents().get(0);
 		private final Assignment cElementAssignment_1_5_1 = (Assignment)cGroup_1_5.eContents().get(1);
 		private final RuleCall cElementPRFWithPredicateParserRuleCall_1_5_1_0 = (RuleCall)cElementAssignment_1_5_1.eContents().get(0);
+		private final Group cGroup_1_6 = (Group)cAlternatives_1.eContents().get(6);
+		private final Keyword cNumberSignDigitOneDigitZeroKeyword_1_6_0 = (Keyword)cGroup_1_6.eContents().get(0);
+		private final Assignment cElementAssignment_1_6_1 = (Assignment)cGroup_1_6.eContents().get(1);
+		private final RuleCall cElementPRFNamedRecursiveParserRuleCall_1_6_1_0 = (RuleCall)cElementAssignment_1_6_1.eContents().get(0);
+		private final Group cGroup_1_7 = (Group)cAlternatives_1.eContents().get(7);
+		private final Keyword cNumberSignDigitOneDigitOneKeyword_1_7_0 = (Keyword)cGroup_1_7.eContents().get(0);
+		private final Assignment cElementAssignment_1_7_1 = (Assignment)cGroup_1_7.eContents().get(1);
+		private final RuleCall cElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0 = (RuleCall)cElementAssignment_1_7_1.eContents().get(0);
 		
 		//ParserRuleFragments:
 		//	{ParserRuleFragments} ('#1' element=PRFNamed
@@ -60,24 +68,28 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//	//  | '#6' element=PRFNamedWithActionInFragment2
 		//	//  | '#7' element=PRFNamedWithActionInFragment3
 		//	| '#8' element=PRFNamedWithFQN
-		//	| '#9' element=PRFWithPredicate);
+		//	| '#9' element=PRFWithPredicate
+		//	| '#10' element=PRFNamedRecursive
+		//	| '#11' element=PRFNamedRecursiveFragment);
 		@Override public ParserRule getRule() { return rule; }
 
 		//{ParserRuleFragments} ('#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
 		//| '#4' element=PRFNamedWithAction //  | '#5' element=PRFNamedWithActionInFragment
 		////  | '#6' element=PRFNamedWithActionInFragment2
 		////  | '#7' element=PRFNamedWithActionInFragment3
-		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate)
+		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate | '#10' element=PRFNamedRecursive | '#11'
+		//element=PRFNamedRecursiveFragment)
 		public Group getGroup() { return cGroup; }
 
 		//{ParserRuleFragments}
 		public Action getParserRuleFragmentsAction_0() { return cParserRuleFragmentsAction_0; }
 
-		//('#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst | '#4'
+		//'#1' element=PRFNamed | '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst | '#4'
 		//element=PRFNamedWithAction //  | '#5' element=PRFNamedWithActionInFragment
 		////  | '#6' element=PRFNamedWithActionInFragment2
 		////  | '#7' element=PRFNamedWithActionInFragment3
-		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate)
+		//| '#8' element=PRFNamedWithFQN | '#9' element=PRFWithPredicate | '#10' element=PRFNamedRecursive | '#11'
+		//element=PRFNamedRecursiveFragment
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'#1' element=PRFNamed
@@ -163,6 +175,30 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 
 		//PRFWithPredicate
 		public RuleCall getElementPRFWithPredicateParserRuleCall_1_5_1_0() { return cElementPRFWithPredicateParserRuleCall_1_5_1_0; }
+
+		//'#10' element=PRFNamedRecursive
+		public Group getGroup_1_6() { return cGroup_1_6; }
+
+		//'#10'
+		public Keyword getNumberSignDigitOneDigitZeroKeyword_1_6_0() { return cNumberSignDigitOneDigitZeroKeyword_1_6_0; }
+
+		//element=PRFNamedRecursive
+		public Assignment getElementAssignment_1_6_1() { return cElementAssignment_1_6_1; }
+
+		//PRFNamedRecursive
+		public RuleCall getElementPRFNamedRecursiveParserRuleCall_1_6_1_0() { return cElementPRFNamedRecursiveParserRuleCall_1_6_1_0; }
+
+		//'#11' element=PRFNamedRecursiveFragment
+		public Group getGroup_1_7() { return cGroup_1_7; }
+
+		//'#11'
+		public Keyword getNumberSignDigitOneDigitOneKeyword_1_7_0() { return cNumberSignDigitOneDigitOneKeyword_1_7_0; }
+
+		//element=PRFNamedRecursiveFragment
+		public Assignment getElementAssignment_1_7_1() { return cElementAssignment_1_7_1; }
+
+		//PRFNamedRecursiveFragment
+		public RuleCall getElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0() { return cElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0; }
 	}
 
 	public class PRFNamedElements extends AbstractParserRuleElementFinder {
@@ -215,6 +251,54 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 
 		//PRFNamedRef
 		public RuleCall getPRFNamedRefParserRuleCall_1_1_1() { return cPRFNamedRefParserRuleCall_1_1_1; }
+	}
+
+	public class PRFNamedRecursiveElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFNamedRecursive");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final RuleCall cRecursiveFromFragmentParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//PRFNamedRecursive PRFNamedWithAction:
+		//	name=ID RecursiveFromFragment
+		@Override public ParserRule getRule() { return rule; }
+
+		//name=ID RecursiveFromFragment
+		public Group getGroup() { return cGroup; }
+
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+
+		//RecursiveFromFragment
+		public RuleCall getRecursiveFromFragmentParserRuleCall_1() { return cRecursiveFromFragmentParserRuleCall_1; }
+	}
+
+	public class PRFNamedRecursiveFragmentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguage.PRFNamedRecursiveFragment");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final RuleCall cRecursiveFragmentParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//PRFNamedRecursiveFragment PRFNamedWithAction:
+		//	name=ID RecursiveFragment
+		@Override public ParserRule getRule() { return rule; }
+
+		//name=ID RecursiveFragment
+		public Group getGroup() { return cGroup; }
+
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+
+		//RecursiveFragment
+		public RuleCall getRecursiveFragmentParserRuleCall_1() { return cRecursiveFragmentParserRuleCall_1; }
 	}
 
 	public class PRFNamedRefFirstElements extends AbstractParserRuleElementFinder {
@@ -378,7 +462,7 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//=> ('-' PRFNamedRef)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//('-' PRFNamedRef)
+		//'-' PRFNamedRef
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//'-'
@@ -518,10 +602,132 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//ID
 		public RuleCall getRefPRFNamedIDTerminalRuleCall_0_1() { return cRefPRFNamedIDTerminalRuleCall_0_1; }
 	}
+
+	public class RecursiveFromFragmentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguage.RecursiveFromFragment");
+		private final Assignment cPrevAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cPrevNamedInParenthesesParserRuleCall_0 = (RuleCall)cPrevAssignment.eContents().get(0);
+		
+		//fragment RecursiveFromFragment returns PRFNamedWithAction:
+		//	prev=NamedInParentheses;
+		@Override public ParserRule getRule() { return rule; }
+
+		//prev=NamedInParentheses
+		public Assignment getPrevAssignment() { return cPrevAssignment; }
+
+		//NamedInParentheses
+		public RuleCall getPrevNamedInParenthesesParserRuleCall_0() { return cPrevNamedInParenthesesParserRuleCall_0; }
+	}
+
+	public class NamedInParenthesesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguage.NamedInParentheses");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final RuleCall cNamedInParenthesesParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cPRFNamedAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cNameAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_1_0 = (RuleCall)cNameAssignment_1_1.eContents().get(0);
+		
+		//NamedInParentheses PRFNamed:
+		//	'(' NamedInParentheses ')' | {PRFNamed} name=ID
+		@Override public ParserRule getRule() { return rule; }
+
+		//'(' NamedInParentheses ')' | {PRFNamed} name=ID
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//'(' NamedInParentheses ')'
+		public Group getGroup_0() { return cGroup_0; }
+
+		//'('
+		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
+
+		//NamedInParentheses
+		public RuleCall getNamedInParenthesesParserRuleCall_0_1() { return cNamedInParenthesesParserRuleCall_0_1; }
+
+		//')'
+		public Keyword getRightParenthesisKeyword_0_2() { return cRightParenthesisKeyword_0_2; }
+
+		//{PRFNamed} name=ID
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{PRFNamed}
+		public Action getPRFNamedAction_1_0() { return cPRFNamedAction_1_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1_1() { return cNameAssignment_1_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_1_0() { return cNameIDTerminalRuleCall_1_1_0; }
+	}
+
+	public class RecursiveFragmentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguage.RecursiveFragment");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final RuleCall cRecursiveFragmentParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
+		private final Assignment cPrevAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cPrevNamedByActionParserRuleCall_1_0 = (RuleCall)cPrevAssignment_1.eContents().get(0);
+		
+		//fragment RecursiveFragment returns PRFNamedWithAction:
+		//	'(' RecursiveFragment ')' | prev=NamedByAction;
+		@Override public ParserRule getRule() { return rule; }
+
+		//'(' RecursiveFragment ')' | prev=NamedByAction
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//'(' RecursiveFragment ')'
+		public Group getGroup_0() { return cGroup_0; }
+
+		//'('
+		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
+
+		//RecursiveFragment
+		public RuleCall getRecursiveFragmentParserRuleCall_0_1() { return cRecursiveFragmentParserRuleCall_0_1; }
+
+		//')'
+		public Keyword getRightParenthesisKeyword_0_2() { return cRightParenthesisKeyword_0_2; }
+
+		//prev=NamedByAction
+		public Assignment getPrevAssignment_1() { return cPrevAssignment_1; }
+
+		//NamedByAction
+		public RuleCall getPrevNamedByActionParserRuleCall_1_0() { return cPrevNamedByActionParserRuleCall_1_0; }
+	}
+
+	public class NamedByActionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguage.NamedByAction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cPRFNamedAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//NamedByAction PRFNamed:
+		//	{PRFNamed} name=ID
+		@Override public ParserRule getRule() { return rule; }
+
+		//{PRFNamed} name=ID
+		public Group getGroup() { return cGroup; }
+
+		//{PRFNamed}
+		public Action getPRFNamedAction_0() { return cPRFNamedAction_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
 	
 	
 	private final ParserRuleFragmentsElements pParserRuleFragments;
 	private final PRFNamedElements pPRFNamed;
+	private final PRFNamedRecursiveElements pPRFNamedRecursive;
+	private final PRFNamedRecursiveFragmentElements pPRFNamedRecursiveFragment;
 	private final PRFNamedRefFirstElements pPRFNamedRefFirst;
 	private final PRFNamedWithActionElements pPRFNamedWithAction;
 	private final PRFNamedWithFQNElements pPRFNamedWithFQN;
@@ -532,6 +738,10 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	private final Suffix2Elements pSuffix2;
 	private final PRFNamedFragmentElements pPRFNamedFragment;
 	private final PRFNamedRefElements pPRFNamedRef;
+	private final RecursiveFromFragmentElements pRecursiveFromFragment;
+	private final NamedInParenthesesElements pNamedInParentheses;
+	private final RecursiveFragmentElements pRecursiveFragment;
+	private final NamedByActionElements pNamedByAction;
 	
 	private final Grammar grammar;
 
@@ -544,6 +754,8 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		this.gaTerminals = gaTerminals;
 		this.pParserRuleFragments = new ParserRuleFragmentsElements();
 		this.pPRFNamed = new PRFNamedElements();
+		this.pPRFNamedRecursive = new PRFNamedRecursiveElements();
+		this.pPRFNamedRecursiveFragment = new PRFNamedRecursiveFragmentElements();
 		this.pPRFNamedRefFirst = new PRFNamedRefFirstElements();
 		this.pPRFNamedWithAction = new PRFNamedWithActionElements();
 		this.pPRFNamedWithFQN = new PRFNamedWithFQNElements();
@@ -554,6 +766,10 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		this.pSuffix2 = new Suffix2Elements();
 		this.pPRFNamedFragment = new PRFNamedFragmentElements();
 		this.pPRFNamedRef = new PRFNamedRefElements();
+		this.pRecursiveFromFragment = new RecursiveFromFragmentElements();
+		this.pNamedInParentheses = new NamedInParenthesesElements();
+		this.pRecursiveFragment = new RecursiveFragmentElements();
+		this.pNamedByAction = new NamedByActionElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -591,7 +807,9 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	//	//  | '#6' element=PRFNamedWithActionInFragment2
 	//	//  | '#7' element=PRFNamedWithActionInFragment3
 	//	| '#8' element=PRFNamedWithFQN
-	//	| '#9' element=PRFWithPredicate);
+	//	| '#9' element=PRFWithPredicate
+	//	| '#10' element=PRFNamedRecursive
+	//	| '#11' element=PRFNamedRecursiveFragment);
 	public ParserRuleFragmentsElements getParserRuleFragmentsAccess() {
 		return pParserRuleFragments;
 	}
@@ -608,6 +826,26 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	
 	public ParserRule getPRFNamedRule() {
 		return getPRFNamedAccess().getRule();
+	}
+
+	//PRFNamedRecursive PRFNamedWithAction:
+	//	name=ID RecursiveFromFragment
+	public PRFNamedRecursiveElements getPRFNamedRecursiveAccess() {
+		return pPRFNamedRecursive;
+	}
+	
+	public ParserRule getPRFNamedRecursiveRule() {
+		return getPRFNamedRecursiveAccess().getRule();
+	}
+
+	//PRFNamedRecursiveFragment PRFNamedWithAction:
+	//	name=ID RecursiveFragment
+	public PRFNamedRecursiveFragmentElements getPRFNamedRecursiveFragmentAccess() {
+		return pPRFNamedRecursiveFragment;
+	}
+	
+	public ParserRule getPRFNamedRecursiveFragmentRule() {
+		return getPRFNamedRecursiveFragmentAccess().getRule();
 	}
 
 	//PRFNamedRefFirst PRFNamed:
@@ -730,6 +968,46 @@ public class FragmentTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	
 	public ParserRule getPRFNamedRefRule() {
 		return getPRFNamedRefAccess().getRule();
+	}
+
+	//fragment RecursiveFromFragment returns PRFNamedWithAction:
+	//	prev=NamedInParentheses;
+	public RecursiveFromFragmentElements getRecursiveFromFragmentAccess() {
+		return pRecursiveFromFragment;
+	}
+	
+	public ParserRule getRecursiveFromFragmentRule() {
+		return getRecursiveFromFragmentAccess().getRule();
+	}
+
+	//NamedInParentheses PRFNamed:
+	//	'(' NamedInParentheses ')' | {PRFNamed} name=ID
+	public NamedInParenthesesElements getNamedInParenthesesAccess() {
+		return pNamedInParentheses;
+	}
+	
+	public ParserRule getNamedInParenthesesRule() {
+		return getNamedInParenthesesAccess().getRule();
+	}
+
+	//fragment RecursiveFragment returns PRFNamedWithAction:
+	//	'(' RecursiveFragment ')' | prev=NamedByAction;
+	public RecursiveFragmentElements getRecursiveFragmentAccess() {
+		return pRecursiveFragment;
+	}
+	
+	public ParserRule getRecursiveFragmentRule() {
+		return getRecursiveFragmentAccess().getRule();
+	}
+
+	//NamedByAction PRFNamed:
+	//	{PRFNamed} name=ID
+	public NamedByActionElements getNamedByActionAccess() {
+		return pNamedByAction;
+	}
+	
+	public ParserRule getNamedByActionRule() {
+		return getNamedByActionAccess().getRule();
 	}
 
 	//terminal ID:

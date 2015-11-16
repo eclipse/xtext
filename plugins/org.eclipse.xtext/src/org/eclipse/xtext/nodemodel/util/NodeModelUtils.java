@@ -29,8 +29,10 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+import org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.util.LineAndColumn;
 
 import com.google.common.collect.Lists;
 
@@ -45,7 +47,7 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class NodeModelUtils {
+public class NodeModelUtils extends InternalNodeModelUtils {
 
 	/**
 	 * Find the leaf node at the given offset. May return <code>null</code> if the given offset is not valid for the
@@ -102,6 +104,25 @@ public class NodeModelUtils {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Compute the line and column information at the given offset from any node that belongs the the document. The line is one-based, e.g.
+	 * the first line has the line number '1'. The line break belongs the line that it breaks. In other words, the first line break in the
+	 * document also has the line number '1'. The column number starts at '1', too. In effect, the document offset '0' will always return
+	 * line '1' and column '1'.
+	 * 
+	 * If the given documentOffset points exactly to {@code anyNode.root.text.length}, it's assumed to be a virtual character thus
+	 * the offset is valid and the column and line information is returned as if it was there.
+	 * 
+	 * This contract is in sync with {@link org.eclipse.emf.ecore.resource.Resource.Diagnostic}.
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if the document offset does not belong to the document, 
+	 *             {@code documentOffset < 0 || documentOffset > anyNode.rootNode.text.length}
+	 */
+	public static LineAndColumn getLineAndColumn(INode anyNode, int documentOffset) {
+		return InternalNodeModelUtils.getLineAndColumn(anyNode, documentOffset);
 	}
 
 	private static boolean intersects(int offset, int length, int lookupOffset) {
@@ -213,8 +234,13 @@ public class NodeModelUtils {
 	public static ICompositeNode findActualNodeFor(/* @Nullable */ EObject semanticObject) {
 		ICompositeNode node = getNode(semanticObject);
 		if (node != null) {
-			while (GrammarUtil.containingAssignment(node.getGrammarElement()) == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
-				node = node.getParent();
+			while(GrammarUtil.containingAssignment(node.getGrammarElement()) == null) {
+				ICompositeNode parent = node.getParent();
+				if (parent != null && !parent.hasDirectSemanticElement() && !GrammarUtil.isEObjectFragmentRuleCall(parent.getGrammarElement())) {
+					node = parent;
+				} else {
+					break;
+				}
 			}
 		}
 		return node;

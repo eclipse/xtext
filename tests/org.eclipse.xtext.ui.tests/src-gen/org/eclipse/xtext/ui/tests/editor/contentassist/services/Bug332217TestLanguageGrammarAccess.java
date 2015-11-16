@@ -524,14 +524,14 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//TableView:
-		//	'tableview' name=ID ('(' content=Parameter ')')? '{' ('title:' title=ScalarExpression?
-		//	& 'titleImage:' titleImage=ImageExpression?
-		//	& 'style:' style=TableViewStyle?) sections+=Section*
+		//	'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)?
+		//	& ('titleImage:' titleImage=ImageExpression)?
+		//	& ('style:' style=TableViewStyle)?) sections+=Section*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'tableview' name=ID ('(' content=Parameter ')')? '{' ('title:' title=ScalarExpression? & 'titleImage:'
-		//titleImage=ImageExpression? & 'style:' style=TableViewStyle?) sections+=Section* '}'
+		//'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)? & ('titleImage:'
+		//titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?) sections+=Section* '}'
 		public Group getGroup() { return cGroup; }
 
 		//'tableview'
@@ -561,10 +561,10 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//('title:' title=ScalarExpression? & 'titleImage:' titleImage=ImageExpression? & 'style:' style=TableViewStyle?)
+		//('title:' title=ScalarExpression)? & ('titleImage:' titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 
-		//'title:' title=ScalarExpression?
+		//('title:' title=ScalarExpression)?
 		public Group getGroup_4_0() { return cGroup_4_0; }
 
 		//'title:'
@@ -576,7 +576,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ScalarExpression
 		public RuleCall getTitleScalarExpressionParserRuleCall_4_0_1_0() { return cTitleScalarExpressionParserRuleCall_4_0_1_0; }
 
-		//'titleImage:' titleImage=ImageExpression?
+		//('titleImage:' titleImage=ImageExpression)?
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//'titleImage:'
@@ -588,7 +588,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ImageExpression
 		public RuleCall getTitleImageImageExpressionParserRuleCall_4_1_1_0() { return cTitleImageImageExpressionParserRuleCall_4_1_1_0; }
 
-		//'style:' style=TableViewStyle?
+		//('style:' style=TableViewStyle)?
 		public Group getGroup_4_2() { return cGroup_4_2; }
 
 		//'style:'
@@ -721,17 +721,17 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Cell:
-		//	'cell' type=CellType iterator=CollectionIterator? '{' ('text:' text=ScalarExpression?
-		//	& 'details:' details=ScalarExpression?
-		//	& 'image:' image=ScalarExpression?
-		//	& 'action:' action=ViewAction?
-		//	& 'accessory:' accessory=CellAccessory?)
+		//	'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)?
+		//	& ('details:' details=ScalarExpression)?
+		//	& ('image:' image=ScalarExpression)?
+		//	& ('action:' action=ViewAction)?
+		//	& ('accessory:' accessory=CellAccessory)?)
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'cell' type=CellType iterator=CollectionIterator? '{' ('text:' text=ScalarExpression? & 'details:'
-		//details=ScalarExpression? & 'image:' image=ScalarExpression? & 'action:' action=ViewAction? & 'accessory:'
-		//accessory=CellAccessory?) '}'
+		//'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)? & ('details:'
+		//details=ScalarExpression)? & ('image:' image=ScalarExpression)? & ('action:' action=ViewAction)? & ('accessory:'
+		//accessory=CellAccessory)?) '}'
 		public Group getGroup() { return cGroup; }
 
 		//'cell'
@@ -752,11 +752,11 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//('text:' text=ScalarExpression? & 'details:' details=ScalarExpression? & 'image:' image=ScalarExpression? & 'action:'
-		//action=ViewAction? & 'accessory:' accessory=CellAccessory?)
+		//('text:' text=ScalarExpression)? & ('details:' details=ScalarExpression)? & ('image:' image=ScalarExpression)? &
+		//('action:' action=ViewAction)? & ('accessory:' accessory=CellAccessory)?
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 
-		//'text:' text=ScalarExpression?
+		//('text:' text=ScalarExpression)?
 		public Group getGroup_4_0() { return cGroup_4_0; }
 
 		//'text:'
@@ -768,7 +768,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ScalarExpression
 		public RuleCall getTextScalarExpressionParserRuleCall_4_0_1_0() { return cTextScalarExpressionParserRuleCall_4_0_1_0; }
 
-		//'details:' details=ScalarExpression?
+		//('details:' details=ScalarExpression)?
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//'details:'
@@ -780,7 +780,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ScalarExpression
 		public RuleCall getDetailsScalarExpressionParserRuleCall_4_1_1_0() { return cDetailsScalarExpressionParserRuleCall_4_1_1_0; }
 
-		//'image:' image=ScalarExpression?
+		//('image:' image=ScalarExpression)?
 		public Group getGroup_4_2() { return cGroup_4_2; }
 
 		//'image:'
@@ -792,7 +792,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ScalarExpression
 		public RuleCall getImageScalarExpressionParserRuleCall_4_2_1_0() { return cImageScalarExpressionParserRuleCall_4_2_1_0; }
 
-		//'action:' action=ViewAction?
+		//('action:' action=ViewAction)?
 		public Group getGroup_4_3() { return cGroup_4_3; }
 
 		//'action:'
@@ -804,7 +804,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ViewAction
 		public RuleCall getActionViewActionParserRuleCall_4_3_1_0() { return cActionViewActionParserRuleCall_4_3_1_0; }
 
-		//'accessory:' accessory=CellAccessory?
+		//('accessory:' accessory=CellAccessory)?
 		public Group getGroup_4_4() { return cGroup_4_4; }
 
 		//'accessory:'
@@ -1328,9 +1328,9 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TableView:
-	//	'tableview' name=ID ('(' content=Parameter ')')? '{' ('title:' title=ScalarExpression?
-	//	& 'titleImage:' titleImage=ImageExpression?
-	//	& 'style:' style=TableViewStyle?) sections+=Section*
+	//	'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)?
+	//	& ('titleImage:' titleImage=ImageExpression)?
+	//	& ('style:' style=TableViewStyle)?) sections+=Section*
 	//	'}';
 	public TableViewElements getTableViewAccess() {
 		return pTableView;
@@ -1363,11 +1363,11 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Cell:
-	//	'cell' type=CellType iterator=CollectionIterator? '{' ('text:' text=ScalarExpression?
-	//	& 'details:' details=ScalarExpression?
-	//	& 'image:' image=ScalarExpression?
-	//	& 'action:' action=ViewAction?
-	//	& 'accessory:' accessory=CellAccessory?)
+	//	'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)?
+	//	& ('details:' details=ScalarExpression)?
+	//	& ('image:' image=ScalarExpression)?
+	//	& ('action:' action=ViewAction)?
+	//	& ('accessory:' accessory=CellAccessory)?)
 	//	'}';
 	public CellElements getCellAccess() {
 		return pCell;

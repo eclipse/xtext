@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.trace
 
-import com.intellij.openapi.module.Module
 import org.eclipse.xtext.generator.trace.SourceRelativeURI
 import org.eclipse.xtext.generator.trace.internal.LocationInResource
 
@@ -25,11 +24,8 @@ class LocationInVirtualFile extends LocationInResource implements ILocationInVir
 	}
 	
 	override VirtualFileInProject getPlatformResource() {
-		return getTrace().findVirtualFileInProject(getSrcRelativeResourceURI(), getProject());
+		return getTrace().findVirtualFileInProject(getSrcRelativeResourceURI());
 	}
 
-	def Module getProject() {
-		return getTrace().getLocalProject();
-	}
 }
 

@@ -4,15 +4,14 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.ContentAssistContextTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.FirstLevel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.SecondLevelA;
@@ -30,8 +29,13 @@ public class ContentAssistContextTestLanguageSemanticSequencer extends AbstractD
 	private ContentAssistContextTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == ContentAssistContextTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == ContentAssistContextTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case ContentAssistContextTestPackage.FIRST_LEVEL:
 				sequence_FirstLevel(context, (FirstLevel) semanticObject); 
 				return; 
@@ -54,68 +58,92 @@ public class ContentAssistContextTestLanguageSemanticSequencer extends AbstractD
 				sequence_ThirdLevelB2(context, (ThirdLevelB2) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     FirstLevel returns FirstLevel
+	 *
 	 * Constraint:
-	 *     (secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*)
+	 *     ((secondLevelA+=SecondLevelA+ secondLevelB+=SecondLevelB+) | secondLevelB+=SecondLevelB+)?
 	 */
-	protected void sequence_FirstLevel(EObject context, FirstLevel semanticObject) {
+	protected void sequence_FirstLevel(ISerializationContext context, FirstLevel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     SecondLevelA returns SecondLevelA
+	 *
 	 * Constraint:
 	 *     (thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+)
 	 */
-	protected void sequence_SecondLevelA(EObject context, SecondLevelA semanticObject) {
+	protected void sequence_SecondLevelA(ISerializationContext context, SecondLevelA semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     SecondLevelB returns SecondLevelB
+	 *
 	 * Constraint:
 	 *     (thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+)
 	 */
-	protected void sequence_SecondLevelB(EObject context, SecondLevelB semanticObject) {
+	protected void sequence_SecondLevelB(ISerializationContext context, SecondLevelB semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ThirdLevelA1 returns ThirdLevelA1
+	 *
 	 * Constraint:
-	 *     (name=ID?)
+	 *     name=ID?
 	 */
-	protected void sequence_ThirdLevelA1(EObject context, ThirdLevelA1 semanticObject) {
+	protected void sequence_ThirdLevelA1(ISerializationContext context, ThirdLevelA1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ThirdLevelA2 returns ThirdLevelA2
+	 *
 	 * Constraint:
-	 *     (name=ID?)
+	 *     name=ID?
 	 */
-	protected void sequence_ThirdLevelA2(EObject context, ThirdLevelA2 semanticObject) {
+	protected void sequence_ThirdLevelA2(ISerializationContext context, ThirdLevelA2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ThirdLevelB1 returns ThirdLevelB1
+	 *
 	 * Constraint:
-	 *     (name=ID?)
+	 *     name=ID?
 	 */
-	protected void sequence_ThirdLevelB1(EObject context, ThirdLevelB1 semanticObject) {
+	protected void sequence_ThirdLevelB1(ISerializationContext context, ThirdLevelB1 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ThirdLevelB2 returns ThirdLevelB2
+	 *
 	 * Constraint:
-	 *     (name=ID?)
+	 *     name=ID?
 	 */
-	protected void sequence_ThirdLevelB2(EObject context, ThirdLevelB2 semanticObject) {
+	protected void sequence_ThirdLevelB2(ISerializationContext context, ThirdLevelB2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

@@ -78,9 +78,9 @@
         </filter>
         <filter id="643842064">
             <message_arguments>
-                <message_argument value="FileWorkspaceConfig"/>
+                <message_argument value="FileProjectConfig"/>
                 <message_argument value="XtendBatchCompiler"/>
-                <message_argument value="getWorkspaceConfig()"/>
+                <message_argument value="getProjectConfig()"/>
             </message_arguments>
         </filter>
         <filter id="643842064">
@@ -104,14 +104,6 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer.infer(EObject, IJvmDeclaredTypeAcceptor, boolean)"/>
                 <message_argument value="IJvmDeclaredTypeAcceptor"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtend/core/parser/XtendNodeModelBuilder.java" type="org.eclipse.xtend.core.parser.XtendNodeModelBuilder">
-        <filter id="571473929">
-            <message_arguments>
-                <message_argument value="NodeModelBuilder"/>
-                <message_argument value="XtendNodeModelBuilder"/>
             </message_arguments>
         </filter>
     </resource>

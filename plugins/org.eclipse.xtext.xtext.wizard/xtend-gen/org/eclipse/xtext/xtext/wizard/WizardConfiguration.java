@@ -14,6 +14,7 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -48,11 +49,15 @@ public class WizardConfiguration {
   
   private Charset encoding = Charset.defaultCharset();
   
-  private BuildSystem preferredBuildSystem = BuildSystem.ECLIPSE;
+  private BuildSystem preferredBuildSystem = BuildSystem.NONE;
   
   private SourceLayout sourceLayout = SourceLayout.PLAIN;
   
   private ProjectLayout projectLayout = ProjectLayout.FLAT;
+  
+  private boolean needsGradleWrapper = true;
+  
+  private JavaVersion javaVersion = JavaVersion.JAVA6;
   
   private final LanguageDescriptor language = new LanguageDescriptor();
   
@@ -152,6 +157,17 @@ public class WizardConfiguration {
     return _or;
   }
   
+  public boolean isNeedsGradleWrapper() {
+    boolean _and = false;
+    if (!this.needsGradleWrapper) {
+      _and = false;
+    } else {
+      boolean _needsGradleBuild = this.needsGradleBuild();
+      _and = _needsGradleBuild;
+    }
+    return _and;
+  }
+  
   @Pure
   public String getRootLocation() {
     return this.rootLocation;
@@ -218,6 +234,19 @@ public class WizardConfiguration {
   
   public void setProjectLayout(final ProjectLayout projectLayout) {
     this.projectLayout = projectLayout;
+  }
+  
+  public void setNeedsGradleWrapper(final boolean needsGradleWrapper) {
+    this.needsGradleWrapper = needsGradleWrapper;
+  }
+  
+  @Pure
+  public JavaVersion getJavaVersion() {
+    return this.javaVersion;
+  }
+  
+  public void setJavaVersion(final JavaVersion javaVersion) {
+    this.javaVersion = javaVersion;
   }
   
   @Pure

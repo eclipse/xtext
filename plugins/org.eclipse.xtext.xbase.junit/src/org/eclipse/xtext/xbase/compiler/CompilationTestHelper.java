@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -41,8 +42,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.FileProjectConfig;
-import org.eclipse.xtext.workspace.FileWorkspaceConfig;
-import org.eclipse.xtext.workspace.WorkspaceConfigAdapter;
+import org.eclipse.xtext.workspace.ProjectConfigAdapter;
 import org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess.GeneratedFile;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -246,10 +246,9 @@ public class CompilationTestHelper {
 	public ResourceSet resourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();
 		result.setClasspathURIContext(classpathUriContext);
-		FileWorkspaceConfig workspaceConfig = new FileWorkspaceConfig(workspaceRoot);
-		FileProjectConfig projectConfig = workspaceConfig.addProject(PROJECT_NAME);
+		FileProjectConfig projectConfig = new FileProjectConfig(new File(workspaceRoot,PROJECT_NAME), PROJECT_NAME);
 		projectConfig.addSourceFolder("src");
-		result.eAdapters().add(new WorkspaceConfigAdapter(workspaceConfig));
+		ProjectConfigAdapter.install(result, projectConfig);
 		for (Pair<String, ? extends CharSequence> entry : resources) {
 			URI uri = copyToWorkspace(getSourceFolderPath()+"/"+entry.getKey(), entry.getValue());
 			Resource resource = result.createResource(uri);
@@ -512,7 +511,9 @@ public class CompilationTestHelper {
 						IResourceServiceProvider resourceServiceProvider = xtextResource.getResourceServiceProvider();
 						GeneratorDelegate generator = resourceServiceProvider.get(GeneratorDelegate.class);
 						if (generator != null) {
-							generator.generate(xtextResource, access);
+							GeneratorContext context = new GeneratorContext();
+							context.setCancelIndicator(CancelIndicator.NullImpl);
+							generator.generate(xtextResource, access, context);
 						}
 					}
 				}

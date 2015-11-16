@@ -85,7 +85,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//(('.' | '-') ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//('.' | '-')
+		//'.' | '-'
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 
 		//'.'

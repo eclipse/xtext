@@ -3,22 +3,20 @@ package org.eclipse.xtext.xbase;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
-import org.eclipse.xtext.generator.adapter.FragmentAdapter;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.generator.parser.antlr.DebugAntlrGeneratorFragment;
-import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment;
-import org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment;
-import org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment;
-import org.eclipse.xtext.generator.serializer.SerializerFragment;
+import org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
-import org.eclipse.xtext.xtext.generator.WizardConfig;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
+import org.eclipse.xtext.xtext.generator.model.project.StandardProjectConfig;
+import org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.resourceFactory.ResourceFactoryFragment2;
 import org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2;
+import org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2;
 import org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2;
 import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2;
@@ -58,9 +56,10 @@ final class GenerateXbase {
 		
 		final XtextGenerator generator = new XtextGenerator() {{
 			setConfiguration(new DefaultGeneratorModule() {{
-				setProject(new WizardConfig() {{
+				setProject(new StandardProjectConfig() {{
 					setRootPath(root);
 					setBaseName(projectName);
+					setCreateEclipseMetaData(true);
 					getEclipsePlugin().setEnabled(true);
 				}});
 				setCode(new CodeConfig() {{
@@ -71,39 +70,40 @@ final class GenerateXbase {
 				}});
 			}});
 
-			addLanguage(new LanguageConfig2() {{
+			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xtype";
 				
-				setUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
-				getStandaloneSetup().addLoadedResource(xbaseGenModel);
+				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
+				addReferencedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
+				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new FragmentAdapter(new SerializerFragment()));
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
 				addFragment(new Formatter2Fragment2());
+				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				addFragment(new ContentAssistFragment2());
-				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
 				antlr.setOptions(antlrOptions);
-				addFragment(new FragmentAdapter(antlr));
+				addFragment(antlr);
+				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
+				comparison.setOptions(antlrOptions);
+				addFragment(comparison);
 			}});
-			addLanguage(new LanguageConfig2() {{
+			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xbase";
 				
-				setUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
-				getStandaloneSetup().addLoadedResource(xbaseGenModel);
+				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
+				addReferencedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
+				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new FragmentAdapter(new SerializerFragment()));
-				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
-				resourceFactory.setFileExtensions(fileExtensions);
-				addFragment(new FragmentAdapter(resourceFactory));
-				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
+				addFragment(new ResourceFactoryFragment2());
+				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
+				antlr.setDebugGrammar(true);
 				antlr.setOptions(antlrOptions);
 				antlr.addAntlrParam("-Xconversiontimeout");
 				antlr.addAntlrParam("10000");
-				addFragment(new FragmentAdapter(antlr));
-				DebugAntlrGeneratorFragment antlrDebug = new DebugAntlrGeneratorFragment();
-				antlrDebug.setOptions(antlrOptions);
-				addFragment(new FragmentAdapter(antlrDebug));
+				addFragment(antlr);
 				ValidatorFragment2 validator = new ValidatorFragment2();
 				validator.setInheritImplementation(false);
 				addFragment(validator);
@@ -122,31 +122,26 @@ final class GenerateXbase {
 				addFragment(label);
 				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new ContentAssistFragment2());
-				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
-				antlrUI.setOptions(antlrOptions);
-				antlrUI.addAntlrParam("-Xconversiontimeout");
-				antlrUI.addAntlrParam("10000");
-				addFragment(new FragmentAdapter(antlrUI));
+				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
+				comparison.setOptions(antlrOptions);
+				addFragment(comparison);
 			}});
-			addLanguage(new LanguageConfig2() {{
+			addLanguage(new XtextGeneratorLanguage() {{
 				String fileExtensions = "___xbasewithannotations";
 				
-				setUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
-				getStandaloneSetup().addLoadedResource(xbaseGenModel);
+				setGrammarUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
+				addReferencedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
+				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new FragmentAdapter(new SerializerFragment()));
-				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
-				resourceFactory.setFileExtensions(fileExtensions);
-				addFragment(new FragmentAdapter(resourceFactory));
-				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
+				addFragment(new ResourceFactoryFragment2());
+				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				antlr.setOptions(antlrOptions);
+				antlr.setDebugGrammar(true);
 				antlr.addAntlrParam("-Xconversiontimeout");
 				antlr.addAntlrParam("10000");
-				addFragment(new FragmentAdapter(antlr));
-				DebugAntlrGeneratorFragment antlrDebug = new DebugAntlrGeneratorFragment();
-				antlrDebug.setOptions(antlrOptions);
-				addFragment(new FragmentAdapter(antlrDebug));
+				addFragment(antlr);
 				addFragment(new ValidatorFragment2());
 				addFragment(new ImportNamespacesScopingFragment2());
 				addFragment(new TypesGeneratorFragment2());
@@ -163,11 +158,9 @@ final class GenerateXbase {
 				addFragment(label);
 				addFragment(new OutlineTreeProviderFragment2());
 				addFragment(new ContentAssistFragment2());
-				XtextAntlrUiGeneratorFragment antlrUI = new XtextAntlrUiGeneratorFragment();
-				antlrUI.setOptions(antlrOptions);
-				antlrUI.addAntlrParam("-Xconversiontimeout");
-				antlrUI.addAntlrParam("10000");
-				addFragment(new FragmentAdapter(antlrUI));
+				XtextAntlrGeneratorComparisonFragment comparison = new XtextAntlrGeneratorComparisonFragment();
+				comparison.setOptions(antlrOptions);
+				addFragment(comparison);
 			}});
 		}};
 		

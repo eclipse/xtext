@@ -244,9 +244,8 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   protected IXtendOutlineContext buildFeature(final JvmDeclaredType inferredType, final JvmFeature jvmFeature, final EObject semanticFeature, final IXtendOutlineContext context) {
     IXtendOutlineContext _xifexpression = null;
     boolean _isSynthetic = this._jvmTypeExtensions.isSynthetic(jvmFeature);
-    if (_isSynthetic) {
-      _xifexpression = this.xtendOutlineNodeBuilder.buildFeatureNode(inferredType, jvmFeature, context);
-    } else {
+    boolean _not = (!_isSynthetic);
+    if (_not) {
       _xifexpression = this.xtendOutlineNodeBuilder.buildFeatureNode(inferredType, semanticFeature, context);
     }
     return _xifexpression;

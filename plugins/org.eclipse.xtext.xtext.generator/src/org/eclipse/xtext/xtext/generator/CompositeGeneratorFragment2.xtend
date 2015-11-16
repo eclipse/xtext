@@ -12,36 +12,42 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
- * A composite generator fragment delegates to its contained fragments.
+ * @noreference
  */
-class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
-	
+class CompositeGeneratorFragment2 implements IXtextGeneratorFragment {
+
 	@Accessors(PROTECTED_GETTER)
-	val List<IGeneratorFragment2> fragments = newArrayList
-	
-	def void addFragment(IGeneratorFragment2 fragment) {
+	val List<IXtextGeneratorFragment> fragments = newArrayList
+
+	def void addFragment(IXtextGeneratorFragment fragment) {
 		if (fragment === this)
 			throw new IllegalArgumentException
 		this.fragments.add(fragment)
 	}
-	
+
 	override checkConfiguration(Issues issues) {
 		for (fragment : fragments) {
 			fragment.checkConfiguration(issues)
 		}
 	}
-	
+
+	override generate() {
+		val composite = new CompositeGeneratorException
+		for (fragment : fragments) {
+			try {
+				fragment.generate
+			} catch (Exception e) {
+				composite.addException(e)
+			}
+		}
+		if (composite.hasExceptions) {
+			throw composite
+		}
+	}
+
 	override initialize(Injector injector) {
-		injector.injectMembers(this)
 		for (fragment : fragments) {
 			fragment.initialize(injector)
 		}
 	}
-	
-	override generate() {
-		for (fragment : fragments) {
-			fragment.generate()
-		}
-	}
-	
 }

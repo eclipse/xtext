@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.Inject;
 
@@ -26,48 +27,49 @@ public class GeneratorDelegate implements IGenerator, IGenerator2 {
 	public IGenerator getLegacyGenerator() {
 		return legacyGenerator;
 	}
+	
+	public void generate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		try {
+			beforeGenerate(input, fsa, context);
+			doGenerate(input, fsa, context);
+		} finally {
+			afterGenerate(input, fsa, context);
+		}
+	}
 
 	@Override
-	public void doGenerate(Resource input, IFileSystemAccess2 fsa) {
+	public void doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		if (generator != null) {
-			generator.doGenerate(input, fsa);
+			generator.doGenerate(input, fsa, context);
 		} else if (getLegacyGenerator() != null) {
 			getLegacyGenerator().doGenerate(input, fsa);
 		}
 	}
 
 	@Override
-	public void beforeGenerate(Resource input, IFileSystemAccess2 fsa) {
+	public void beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		if (generator != null) {
-			generator.beforeGenerate(input, fsa);
+			generator.beforeGenerate(input, fsa, context);
 		}
 	}
 
 	@Override
-	public void afterGenerate(Resource input, IFileSystemAccess2 fsa) {
+	public void afterGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		if (generator != null) {
-			generator.afterGenerate(input, fsa);
-		}
-	}
-	
-	public void generate(Resource input, IFileSystemAccess2 fsa) {
-		try {
-			beforeGenerate(input, fsa);
-			doGenerate(input, fsa);
-		} finally {
-			afterGenerate(input, fsa);
+			generator.afterGenerate(input, fsa, context);
 		}
 	}
 
 	@Override
 	public void doGenerate(Resource input, IFileSystemAccess fsa) {
 		IFileSystemAccess2 casted = (IFileSystemAccess2) fsa;
+		GeneratorContext context = new GeneratorContext();
+		context.setCancelIndicator(CancelIndicator.NullImpl);
 		try {
-			beforeGenerate(input, casted);
-			doGenerate(input, casted);
+			beforeGenerate(input, casted, context);
+			doGenerate(input, casted, context);
 		} finally {
-			afterGenerate(input, casted);
+			afterGenerate(input, casted, context);
 		}
 	}
-	
 }

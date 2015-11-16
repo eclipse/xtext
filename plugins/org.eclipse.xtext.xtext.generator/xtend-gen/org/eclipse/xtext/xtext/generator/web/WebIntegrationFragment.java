@@ -24,6 +24,8 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
@@ -35,21 +37,24 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.WebProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
+import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
+import org.eclipse.xtext.xtext.generator.util.GeneratorOption;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 import org.eclipse.xtext.xtext.generator.web.RegexpExtensions;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
@@ -58,8 +63,8 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
  * Main generator fragment for web integration.
  */
 @SuppressWarnings("all")
-public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
-  private enum Framework {
+public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
+  public enum Framework {
     ORION,
     
     ACE,
@@ -67,15 +72,15 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     CODEMIRROR;
   }
   
-  private final static String REQUIREJS_VERSION = "2.1.17";
+  private final static String REQUIREJS_VERSION = "2.1.20";
   
-  private final static String REQUIREJS_TEXT_VERSION = "2.0.10-3";
+  private final static String REQUIREJS_TEXT_VERSION = "2.0.14";
   
   private final static String JQUERY_VERSION = "2.1.4";
   
-  private final static String ACE_VERSION = "1.1.9";
+  private final static String ACE_VERSION = "1.2.0";
   
-  private final static String CODEMIRROR_VERSION = "5.5";
+  private final static String CODEMIRROR_VERSION = "5.7";
   
   @Inject
   private FileAccessFactory fileAccessFactory;
@@ -88,8 +93,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Inject
-  @Extension
-  private GrammarNaming _grammarNaming;
+  private ContentAssistGrammarNaming caNaming;
   
   @Inject
   @Extension
@@ -99,9 +103,23 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   
   private final HashSet<String> suppressedPatterns = new HashSet<String>();
   
-  private WebIntegrationFragment.Framework framework;
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final GeneratorOption<WebIntegrationFragment.Framework> framework = new GeneratorOption<WebIntegrationFragment.Framework>();
   
-  private boolean generateJsHighlighting = true;
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final BooleanGeneratorOption generateJsHighlighting = new BooleanGeneratorOption(true);
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final BooleanGeneratorOption generateServlet = new BooleanGeneratorOption(false);
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final BooleanGeneratorOption generateJettyLauncher = new BooleanGeneratorOption(false);
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final BooleanGeneratorOption generateWebXml = new BooleanGeneratorOption(false);
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final BooleanGeneratorOption generateHtmlExample = new BooleanGeneratorOption(false);
   
   private String highlightingModuleName;
   
@@ -109,15 +127,22 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   
   private String keywordsFilter = "\\w+";
   
-  private boolean generateServlet = false;
-  
-  private boolean generateWebXml = false;
-  
   private boolean useServlet3Api = true;
   
-  private boolean generateJettyLauncher = false;
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String requireJsVersion = WebIntegrationFragment.REQUIREJS_VERSION;
   
-  private boolean generateHtmlExample = false;
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String requireJsTextVersion = WebIntegrationFragment.REQUIREJS_TEXT_VERSION;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String jQueryVersion = WebIntegrationFragment.JQUERY_VERSION;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String aceVersion = WebIntegrationFragment.ACE_VERSION;
+  
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String codeMirrorVersion = WebIntegrationFragment.CODEMIRROR_VERSION;
   
   /**
    * Choose one of the supported frameworks: {@code "Orion"}, {@code "Ace"}, or {@code "CodeMirror"}
@@ -126,14 +151,14 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   public void setFramework(final String frameworkName) {
     String _upperCase = frameworkName.toUpperCase();
     WebIntegrationFragment.Framework _valueOf = WebIntegrationFragment.Framework.valueOf(_upperCase);
-    this.framework = _valueOf;
+    this.framework.set(_valueOf);
   }
   
   /**
    * Whether JavaScript-based syntax highlighting should be generated. The default is {@code true}.
    */
   public void setGenerateJsHighlighting(final boolean generateJsHighlighting) {
-    this.generateJsHighlighting = generateJsHighlighting;
+    this.generateJsHighlighting.set(generateJsHighlighting);
   }
   
   /**
@@ -163,14 +188,14 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
    * Whether a servlet for DSL-specific services should be generated. The default is {@code false}.
    */
   public void setGenerateServlet(final boolean generateServlet) {
-    this.generateServlet = generateServlet;
+    this.generateServlet.set(generateServlet);
   }
   
   /**
    * Whether a web.xml file should be generated. The default is {@code false} (not necessary for Servlet 3 compatible containers).
    */
   public void setGenerateWebXml(final boolean generateWebXml) {
-    this.generateWebXml = generateWebXml;
+    this.generateWebXml.set(generateWebXml);
   }
   
   /**
@@ -186,7 +211,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
    * is {@code false}.
    */
   public void setGenerateJettyLauncher(final boolean generateJettyLauncher) {
-    this.generateJettyLauncher = generateJettyLauncher;
+    this.generateJettyLauncher.set(generateJettyLauncher);
   }
   
   /**
@@ -194,7 +219,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
    * The default is {@code false}.
    */
   public void setGenerateHtmlExample(final boolean generateHtmlExample) {
-    this.generateHtmlExample = generateHtmlExample;
+    this.generateHtmlExample.set(generateHtmlExample);
   }
   
   /**
@@ -232,60 +257,10 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
-    if ((this.framework == null)) {
+    boolean _isSet = this.framework.isSet();
+    boolean _not = (!_isSet);
+    if (_not) {
       issues.addError("The property \'framework\' is required.");
-    }
-    boolean _and = false;
-    if (!this.generateJsHighlighting) {
-      _and = false;
-    } else {
-      XtextProjectConfig _projectConfig = this.getProjectConfig();
-      WebProjectConfig _web = _projectConfig.getWeb();
-      IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
-      boolean _tripleEquals = (_assets == null);
-      _and = _tripleEquals;
-    }
-    if (_and) {
-      issues.addWarning("The \'webApp\' outlet is not defined in the project configuration; JS syntax highlighting is disabled.");
-    }
-    boolean _and_1 = false;
-    if (!this.generateServlet) {
-      _and_1 = false;
-    } else {
-      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      WebProjectConfig _web_1 = _projectConfig_1.getWeb();
-      IXtextGeneratorFileSystemAccess _src = _web_1.getSrc();
-      boolean _tripleEquals_1 = (_src == null);
-      _and_1 = _tripleEquals_1;
-    }
-    if (_and_1) {
-      issues.addWarning("The \'web.src\' outlet is not defined in the project configuration; the generated servlet is disabled.");
-    }
-    boolean _and_2 = false;
-    if (!this.generateJettyLauncher) {
-      _and_2 = false;
-    } else {
-      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      WebProjectConfig _web_2 = _projectConfig_2.getWeb();
-      IXtextGeneratorFileSystemAccess _src_1 = _web_2.getSrc();
-      boolean _tripleEquals_2 = (_src_1 == null);
-      _and_2 = _tripleEquals_2;
-    }
-    if (_and_2) {
-      issues.addWarning("The \'web.src\' outlet is not defined in the project configuration; the Jetty launcher is disabled.");
-    }
-    boolean _and_3 = false;
-    if (!this.generateHtmlExample) {
-      _and_3 = false;
-    } else {
-      XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      WebProjectConfig _web_3 = _projectConfig_3.getWeb();
-      IXtextGeneratorFileSystemAccess _assets_1 = _web_3.getAssets();
-      boolean _tripleEquals_3 = (_assets_1 == null);
-      _and_3 = _tripleEquals_3;
-    }
-    if (_and_3) {
-      issues.addWarning("The \'webApp\' outlet is not defined in the project configuration; the example HTML page is disabled.");
     }
     final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
       @Override
@@ -302,25 +277,26 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   @Override
   public void generate() {
     boolean _and = false;
-    if (!this.generateJsHighlighting) {
+    boolean _get = this.generateJsHighlighting.get();
+    if (!_get) {
       _and = false;
     } else {
-      XtextProjectConfig _projectConfig = this.getProjectConfig();
-      WebProjectConfig _web = _projectConfig.getWeb();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IWebProjectConfig _web = _projectConfig.getWeb();
       IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
       boolean _tripleNotEquals = (_assets != null);
       _and = _tripleNotEquals;
     }
     if (_and) {
-      ILanguageConfig _language = this.getLanguage();
+      IXtextGeneratorLanguage _language = this.getLanguage();
       List<String> _fileExtensions = _language.getFileExtensions();
       final String langId = IterableExtensions.<String>head(_fileExtensions);
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.highlightingModuleName);
       if (_isNullOrEmpty) {
         String _switchResult = null;
-        final WebIntegrationFragment.Framework framework = this.framework;
-        if (framework != null) {
-          switch (framework) {
+        WebIntegrationFragment.Framework _get_1 = this.framework.get();
+        if (_get_1 != null) {
+          switch (_get_1) {
             case ORION:
               _switchResult = (("xtext-resources/generated/" + langId) + "-syntax");
               break;
@@ -349,11 +325,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       this.generateJsHighlighting(langId);
     }
     boolean _and_1 = false;
-    if (!this.generateServlet) {
+    boolean _get_2 = this.generateServlet.get();
+    if (!_get_2) {
       _and_1 = false;
     } else {
-      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
       IXtextGeneratorFileSystemAccess _src = _web_1.getSrc();
       boolean _tripleNotEquals_1 = (_src != null);
       _and_1 = _tripleNotEquals_1;
@@ -362,11 +339,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       this.generateServlet();
     }
     boolean _and_2 = false;
-    if (!this.generateJettyLauncher) {
+    boolean _get_3 = this.generateJettyLauncher.get();
+    if (!_get_3) {
       _and_2 = false;
     } else {
-      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      WebProjectConfig _web_2 = _projectConfig_2.getWeb();
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
       IXtextGeneratorFileSystemAccess _src_1 = _web_2.getSrc();
       boolean _tripleNotEquals_2 = (_src_1 != null);
       _and_2 = _tripleNotEquals_2;
@@ -375,11 +353,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       this.generateServerLauncher();
     }
     boolean _and_3 = false;
-    if (!this.generateHtmlExample) {
+    boolean _get_4 = this.generateHtmlExample.get();
+    if (!_get_4) {
       _and_3 = false;
     } else {
-      XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      WebProjectConfig _web_3 = _projectConfig_3.getWeb();
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IWebProjectConfig _web_3 = _projectConfig_3.getWeb();
       IXtextGeneratorFileSystemAccess _assets_1 = _web_3.getAssets();
       boolean _tripleNotEquals_3 = (_assets_1 != null);
       _and_3 = _tripleNotEquals_3;
@@ -389,11 +368,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       this.generateStyleSheet();
     }
     boolean _and_4 = false;
-    if (!this.generateWebXml) {
+    boolean _get_5 = this.generateWebXml.get();
+    if (!_get_5) {
       _and_4 = false;
     } else {
-      XtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-      WebProjectConfig _web_4 = _projectConfig_4.getWeb();
+      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+      IWebProjectConfig _web_4 = _projectConfig_4.getWeb();
       IXtextGeneratorFileSystemAccess _assets_2 = _web_4.getAssets();
       boolean _tripleNotEquals_4 = (_assets_2 != null);
       _and_4 = _tripleNotEquals_4;
@@ -414,8 +394,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append(_typeRef_1, "");
         _builder.append(".CONTENT_ASSIST)).to(");
         Grammar _grammar = WebIntegrationFragment.this.getGrammar();
-        TypeReference _internalContentAssistLexerClass = WebIntegrationFragment.this._grammarNaming.getInternalContentAssistLexerClass(_grammar);
-        _builder.append(_internalContentAssistLexerClass, "");
+        TypeReference _lexerClass = WebIntegrationFragment.this.caNaming.getLexerClass(_grammar);
+        _builder.append(_lexerClass, "");
         _builder.append(".class);");
       }
     };
@@ -424,9 +404,9 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     GuiceModuleAccess.BindingFactory _addConfiguredBinding = _bindingFactory.addConfiguredBinding("ContentAssistLexer", lexerStatement);
     TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
     Grammar _grammar = this.getGrammar();
-    TypeReference _contentAssistParserClass = this._grammarNaming.getContentAssistParserClass(_grammar);
-    GuiceModuleAccess.BindingFactory _addTypeToType = _addConfiguredBinding.addTypeToType(_typeRef, _contentAssistParserClass);
-    ILanguageConfig _language_1 = this.getLanguage();
+    TypeReference _parserClass = this.caNaming.getParserClass(_grammar);
+    GuiceModuleAccess.BindingFactory _addTypeToType = _addConfiguredBinding.addTypeToType(_typeRef, _parserClass);
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
     GuiceModuleAccess _webGenModule = _language_1.getWebGenModule();
     _addTypeToType.contributeTo(_webGenModule);
   }
@@ -471,9 +451,9 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     Collections.<String>sort(nonWordKeywords);
     final TextFileAccess jsFile = this.fileAccessFactory.createTextFile();
     jsFile.setPath(this.highlightingPath);
-    final WebIntegrationFragment.Framework framework = this.framework;
-    if (framework != null) {
-      switch (framework) {
+    WebIntegrationFragment.Framework _get = this.framework.get();
+    if (_get != null) {
+      switch (_get) {
         case ORION:
           final Collection<String> patterns = this.createOrionPatterns(langId, allKeywords);
           boolean _isEmpty = wordKeywords.isEmpty();
@@ -886,8 +866,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
           break;
       }
     }
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     jsFile.writeTo(_assets);
   }
@@ -1417,7 +1397,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       patterns.put("start", _builder_9.toString());
     }
     boolean _and_12 = false;
-    boolean _equals = Objects.equal(this.framework, WebIntegrationFragment.Framework.CODEMIRROR);
+    WebIntegrationFragment.Framework _get = this.framework.get();
+    boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR);
     if (!_equals) {
       _and_12 = false;
     } else {
@@ -1430,7 +1411,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       patterns.put("meta", _builder_10.toString());
     }
     boolean _and_13 = false;
-    boolean _equals_1 = Objects.equal(this.framework, WebIntegrationFragment.Framework.CODEMIRROR);
+    WebIntegrationFragment.Framework _get_1 = this.framework.get();
+    boolean _equals_1 = Objects.equal(_get_1, WebIntegrationFragment.Framework.CODEMIRROR);
     if (!_equals_1) {
       _and_13 = false;
     } else {
@@ -1445,8 +1427,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   }
   
   protected void generateIndexDoc() {
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     boolean _isFile = _assets.isFile("index.html");
     if (_isFile) {
@@ -1471,7 +1453,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("<title>Example Web Editor</title>");
         _builder.newLine();
         {
-          boolean _equals = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ORION);
+          WebIntegrationFragment.Framework _get = WebIntegrationFragment.this.framework.get();
+          boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.ORION);
           if (_equals) {
             _builder.append("\t");
             _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"orion/code_edit/built-codeEdit.css\"/>");
@@ -1483,7 +1466,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.append("/xtext-orion.css\"/>");
             _builder.newLineIfNotEmpty();
           } else {
-            boolean _equals_1 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ACE);
+            WebIntegrationFragment.Framework _get_1 = WebIntegrationFragment.this.framework.get();
+            boolean _equals_1 = Objects.equal(_get_1, WebIntegrationFragment.Framework.ACE);
             if (_equals_1) {
               _builder.append("\t");
               _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
@@ -1492,16 +1476,17 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               _builder.append("/xtext-ace.css\"/>");
               _builder.newLineIfNotEmpty();
             } else {
-              boolean _equals_2 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.CODEMIRROR);
+              WebIntegrationFragment.Framework _get_2 = WebIntegrationFragment.this.framework.get();
+              boolean _equals_2 = Objects.equal(_get_2, WebIntegrationFragment.Framework.CODEMIRROR);
               if (_equals_2) {
                 _builder.append("\t");
                 _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
-                _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
+                _builder.append(WebIntegrationFragment.this.codeMirrorVersion, "\t");
                 _builder.append("/lib/codemirror.css\"/>");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
                 _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
-                _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
+                _builder.append(WebIntegrationFragment.this.codeMirrorVersion, "\t");
                 _builder.append("/addon/hint/show-hint.css\"/>");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -1519,7 +1504,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("<script src=\"webjars/requirejs/");
-        _builder.append(WebIntegrationFragment.REQUIREJS_VERSION, "\t");
+        _builder.append(WebIntegrationFragment.this.requireJsVersion, "\t");
         _builder.append("/require.min.js\"></script>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1538,7 +1523,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("baseUrl = baseUrl.slice(0, fileIndex);");
         _builder.newLine();
         {
-          boolean _equals_3 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ORION);
+          WebIntegrationFragment.Framework _get_3 = WebIntegrationFragment.this.framework.get();
+          boolean _equals_3 = Objects.equal(_get_3, WebIntegrationFragment.Framework.ORION);
           if (_equals_3) {
             _builder.append("\t\t");
             _builder.append("require.config({");
@@ -1554,13 +1540,13 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.append("\t\t");
             _builder.append("\t\t");
             _builder.append("\"text\": \"webjars/requirejs-text/");
-            _builder.append(WebIntegrationFragment.REQUIREJS_TEXT_VERSION, "\t\t\t\t");
+            _builder.append(WebIntegrationFragment.this.requireJsTextVersion, "\t\t\t\t");
             _builder.append("/text\",");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("\t\t");
             _builder.append("\"jquery\": \"webjars/jquery/");
-            _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+            _builder.append(WebIntegrationFragment.this.jQueryVersion, "\t\t\t\t");
             _builder.append("/jquery.min\",");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
@@ -1596,7 +1582,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.append("\t\t\t");
             _builder.append("syntaxDefinition: \"");
             String _xifexpression = null;
-            if (WebIntegrationFragment.this.generateJsHighlighting) {
+            boolean _get_4 = WebIntegrationFragment.this.generateJsHighlighting.get();
+            if (_get_4) {
               _xifexpression = WebIntegrationFragment.this.highlightingModuleName;
             } else {
               _xifexpression = "none";
@@ -1616,7 +1603,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.append("});");
             _builder.newLine();
           } else {
-            boolean _equals_4 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ACE);
+            WebIntegrationFragment.Framework _get_5 = WebIntegrationFragment.this.framework.get();
+            boolean _equals_4 = Objects.equal(_get_5, WebIntegrationFragment.Framework.ACE);
             if (_equals_4) {
               _builder.append("\t\t");
               _builder.append("require.config({");
@@ -1632,13 +1620,13 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               _builder.append("\t\t");
               _builder.append("\t\t");
               _builder.append("\"jquery\": \"webjars/jquery/");
-              _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+              _builder.append(WebIntegrationFragment.this.jQueryVersion, "\t\t\t\t");
               _builder.append("/jquery.min\",");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
               _builder.append("\t\t");
               _builder.append("\"ace/ext/language_tools\": \"webjars/ace/");
-              _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t\t\t");
+              _builder.append(WebIntegrationFragment.this.aceVersion, "\t\t\t\t");
               _builder.append("/src/ext-language_tools\",");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -1657,7 +1645,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("require([\"webjars/ace/");
-              _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t");
+              _builder.append(WebIntegrationFragment.this.aceVersion, "\t\t");
               _builder.append("/src/ace\"], function() {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
@@ -1676,7 +1664,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               _builder.append("\t\t\t");
               _builder.append("syntaxDefinition: \"");
               String _xifexpression_1 = null;
-              if (WebIntegrationFragment.this.generateJsHighlighting) {
+              boolean _get_6 = WebIntegrationFragment.this.generateJsHighlighting.get();
+              if (_get_6) {
                 _xifexpression_1 = WebIntegrationFragment.this.highlightingModuleName;
               } else {
                 _xifexpression_1 = "none";
@@ -1696,7 +1685,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
               _builder.append("});");
               _builder.newLine();
             } else {
-              boolean _equals_5 = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.CODEMIRROR);
+              WebIntegrationFragment.Framework _get_7 = WebIntegrationFragment.this.framework.get();
+              boolean _equals_5 = Objects.equal(_get_7, WebIntegrationFragment.Framework.CODEMIRROR);
               if (_equals_5) {
                 _builder.append("\t\t");
                 _builder.append("require.config({");
@@ -1712,7 +1702,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
                 _builder.append("\t\t");
                 _builder.append("\t\t");
                 _builder.append("\"jquery\": \"webjars/jquery/");
-                _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+                _builder.append(WebIntegrationFragment.this.jQueryVersion, "\t\t\t\t");
                 _builder.append("/jquery.min\",");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
@@ -1737,7 +1727,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
                 _builder.append("\t\t");
                 _builder.append("\t\t");
                 _builder.append("location: \"webjars/codemirror/");
-                _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t\t\t\t");
+                _builder.append(WebIntegrationFragment.this.codeMirrorVersion, "\t\t\t\t");
                 _builder.append("\",");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
@@ -1754,7 +1744,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
                 _builder.append("\t\t");
                 _builder.append("require([");
                 {
-                  if (WebIntegrationFragment.this.generateJsHighlighting) {
+                  boolean _get_8 = WebIntegrationFragment.this.generateJsHighlighting.get();
+                  if (_get_8) {
                     _builder.append("\"");
                     _builder.append(WebIntegrationFragment.this.highlightingModuleName, "\t\t");
                     _builder.append("\", ");
@@ -1762,7 +1753,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
                 }
                 _builder.append("\"xtext/xtext-codemirror\"], function(");
                 {
-                  if (WebIntegrationFragment.this.generateJsHighlighting) {
+                  boolean _get_9 = WebIntegrationFragment.this.generateJsHighlighting.get();
+                  if (_get_9) {
                     _builder.append("mode, ");
                   }
                 }
@@ -1776,7 +1768,9 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
                 _builder.append("\t\t");
                 _builder.append("baseUrl: baseUrl");
                 {
-                  if ((!WebIntegrationFragment.this.generateJsHighlighting)) {
+                  boolean _get_10 = WebIntegrationFragment.this.generateJsHighlighting.get();
+                  boolean _not = (!_get_10);
+                  if (_not) {
                     _builder.append(",");
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t\t");
@@ -1824,7 +1818,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("<div id=\"xtext-editor\" data-editor-xtext-lang=\"");
-        ILanguageConfig _language = WebIntegrationFragment.this.getLanguage();
+        IXtextGeneratorLanguage _language = WebIntegrationFragment.this.getLanguage();
         List<String> _fileExtensions = _language.getFileExtensions();
         String _head = IterableExtensions.<String>head(_fileExtensions);
         _builder.append(_head, "\t\t");
@@ -1843,15 +1837,15 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     indexFile.setContent(_client);
-    XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
     IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
     indexFile.writeTo(_assets_1);
   }
   
   protected void generateStyleSheet() {
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     boolean _isFile = _assets.isFile("style.css");
     if (_isFile) {
@@ -2005,7 +1999,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("}");
         _builder.newLine();
         {
-          boolean _equals = Objects.equal(WebIntegrationFragment.this.framework, WebIntegrationFragment.Framework.ORION);
+          WebIntegrationFragment.Framework _get = WebIntegrationFragment.this.framework.get();
+          boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.ORION);
           if (_equals) {
             _builder.newLine();
             _builder.append("/************* Examples for custom icons *************/");
@@ -2049,8 +2044,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     styleFile.setContent(_client);
-    XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
     IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
     styleFile.writeTo(_assets_1);
   }
@@ -2099,12 +2094,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
         _builder.append("resourceBase = \'");
-        XtextProjectConfig _projectConfig = WebIntegrationFragment.this.getProjectConfig();
-        WebProjectConfig _web = _projectConfig.getWeb();
+        IXtextProjectConfig _projectConfig = WebIntegrationFragment.this.getProjectConfig();
+        IWebProjectConfig _web = _projectConfig.getWeb();
         IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
         String _path = _assets.getPath();
-        XtextProjectConfig _projectConfig_1 = WebIntegrationFragment.this.getProjectConfig();
-        WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+        IXtextProjectConfig _projectConfig_1 = WebIntegrationFragment.this.getProjectConfig();
+        IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
         IXtextGeneratorFileSystemAccess _root = _web_1.getRoot();
         String _path_1 = _root.getPath();
         String _plus = (_path_1 + "/");
@@ -2152,12 +2147,12 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.jetty.webapp.WebInfConfiguration");
         _builder.append(_typeRef_7, "\t\t\t");
         _builder.append(".CONTAINER_JAR_PATTERN, \'.*/");
-        XtextProjectConfig _projectConfig_2 = WebIntegrationFragment.this.getProjectConfig();
-        WebProjectConfig _web_2 = _projectConfig_2.getWeb();
+        IXtextProjectConfig _projectConfig_2 = WebIntegrationFragment.this.getProjectConfig();
+        IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
         String _name = _web_2.getName();
         String _replace_1 = _name.replace(".", "\\\\.");
         _builder.append(_replace_1, "\t\t\t");
-        _builder.append("/.*,.*/org\\\\.eclipse\\\\.xtext\\\\.web.*,.*/org\\\\.webjars.*\')");
+        _builder.append("/.*,.*\\\\.jar\')");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("]");
@@ -2232,8 +2227,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_serverLauncherClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _src = _web.getSrc();
     _createXtendFile.writeTo(_src);
   }
@@ -2331,15 +2326,15 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_servletClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _src = _web.getSrc();
     _createXtendFile.writeTo(_src);
   }
   
   protected void generateWebXml() {
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    WebProjectConfig _web = _projectConfig.getWeb();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     boolean _isFile = _assets.isFile("WEB-INF/web.xml");
     if (_isFile) {
@@ -2375,7 +2370,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("</description>");
         _builder.newLine();
         {
-          if (WebIntegrationFragment.this.generateServlet) {
+          boolean _get = WebIntegrationFragment.this.generateServlet.get();
+          if (_get) {
             _builder.append("\t");
             _builder.newLine();
             _builder.append("\t");
@@ -2495,7 +2491,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
           }
         }
         {
-          if (WebIntegrationFragment.this.generateHtmlExample) {
+          boolean _get_1 = WebIntegrationFragment.this.generateHtmlExample.get();
+          if (_get_1) {
             _builder.append("\t");
             _builder.newLine();
             _builder.append("\t");
@@ -2526,9 +2523,59 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       }
     };
     xmlFile.setContent(_client);
-    XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    WebProjectConfig _web_1 = _projectConfig_1.getWeb();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
     IXtextGeneratorFileSystemAccess _assets_1 = _web_1.getAssets();
     xmlFile.writeTo(_assets_1);
+  }
+  
+  @Pure
+  public GeneratorOption<WebIntegrationFragment.Framework> getFramework() {
+    return this.framework;
+  }
+  
+  @Pure
+  public BooleanGeneratorOption getGenerateJsHighlighting() {
+    return this.generateJsHighlighting;
+  }
+  
+  @Pure
+  public BooleanGeneratorOption getGenerateServlet() {
+    return this.generateServlet;
+  }
+  
+  @Pure
+  public BooleanGeneratorOption getGenerateJettyLauncher() {
+    return this.generateJettyLauncher;
+  }
+  
+  @Pure
+  public BooleanGeneratorOption getGenerateWebXml() {
+    return this.generateWebXml;
+  }
+  
+  @Pure
+  public BooleanGeneratorOption getGenerateHtmlExample() {
+    return this.generateHtmlExample;
+  }
+  
+  public void setRequireJsVersion(final String requireJsVersion) {
+    this.requireJsVersion = requireJsVersion;
+  }
+  
+  public void setRequireJsTextVersion(final String requireJsTextVersion) {
+    this.requireJsTextVersion = requireJsTextVersion;
+  }
+  
+  public void setJQueryVersion(final String jQueryVersion) {
+    this.jQueryVersion = jQueryVersion;
+  }
+  
+  public void setAceVersion(final String aceVersion) {
+    this.aceVersion = aceVersion;
+  }
+  
+  public void setCodeMirrorVersion(final String codeMirrorVersion) {
+    this.codeMirrorVersion = codeMirrorVersion;
   }
 }

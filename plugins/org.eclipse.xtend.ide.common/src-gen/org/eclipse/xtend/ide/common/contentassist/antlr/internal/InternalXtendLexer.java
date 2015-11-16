@@ -1,5 +1,4 @@
 package org.eclipse.xtend.ide.common.contentassist.antlr.internal;
-// Currently there is no other way to specify the superclass for the lexer.
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 
 

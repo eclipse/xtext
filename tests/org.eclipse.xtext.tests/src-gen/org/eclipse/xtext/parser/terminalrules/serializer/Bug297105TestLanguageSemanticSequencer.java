@@ -4,23 +4,21 @@
 package org.eclipse.xtext.parser.terminalrules.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.Bug297105TestLanguagePackage;
 import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.Expression;
 import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.IntLiteral;
 import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.Model;
 import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.RealLiteral;
 import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -30,8 +28,13 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug297105TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug297105TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug297105TestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug297105TestLanguagePackage.EXPRESSION:
 				sequence_Expression(context, (Expression) semanticObject); 
 				return; 
@@ -45,22 +48,25 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_RealLiteral(context, (RealLiteral) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Expression returns Expression
+	 *
 	 * Constraint:
 	 *     (left=Literal right=Literal)
 	 */
-	protected void sequence_Expression(EObject context, Expression semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug297105TestLanguagePackage.Literals.EXPRESSION__LEFT) == ValueTransient.YES)
+	protected void sequence_Expression(ISerializationContext context, Expression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug297105TestLanguagePackage.Literals.EXPRESSION__LEFT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug297105TestLanguagePackage.Literals.EXPRESSION__LEFT));
-			if(transientValues.isValueTransient(semanticObject, Bug297105TestLanguagePackage.Literals.EXPRESSION__RIGHT) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug297105TestLanguagePackage.Literals.EXPRESSION__RIGHT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug297105TestLanguagePackage.Literals.EXPRESSION__RIGHT));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getExpressionAccess().getLeftLiteralParserRuleCall_0_0(), semanticObject.getLeft());
 		feeder.accept(grammarAccess.getExpressionAccess().getRightLiteralParserRuleCall_2_0(), semanticObject.getRight());
 		feeder.finish();
@@ -68,42 +74,53 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Literal returns IntLiteral
+	 *     IntLiteral returns IntLiteral
+	 *
 	 * Constraint:
 	 *     value=IntValue
 	 */
-	protected void sequence_IntLiteral(EObject context, IntLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug297105TestLanguagePackage.Literals.LITERAL__VALUE) == ValueTransient.YES)
+	protected void sequence_IntLiteral(ISerializationContext context, IntLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug297105TestLanguagePackage.Literals.LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug297105TestLanguagePackage.Literals.LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getIntLiteralAccess().getValueIntValueParserRuleCall_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     expressions+=Expression+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Literal returns RealLiteral
+	 *     RealLiteral returns RealLiteral
+	 *
 	 * Constraint:
 	 *     value=RealValue
 	 */
-	protected void sequence_RealLiteral(EObject context, RealLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug297105TestLanguagePackage.Literals.LITERAL__VALUE) == ValueTransient.YES)
+	protected void sequence_RealLiteral(ISerializationContext context, RealLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug297105TestLanguagePackage.Literals.LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug297105TestLanguagePackage.Literals.LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getRealLiteralAccess().getValueRealValueParserRuleCall_0(), semanticObject.getValue());
 		feeder.finish();
 	}
+	
+	
 }

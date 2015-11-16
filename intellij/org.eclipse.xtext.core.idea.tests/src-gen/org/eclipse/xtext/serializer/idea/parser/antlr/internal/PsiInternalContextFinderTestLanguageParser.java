@@ -83,18 +83,24 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalContextFinderTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalContextFinderTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalContextFinderTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalContextFinderTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -106,14 +112,16 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalContextFinderTestLanguage.g:58:1: ruleModel : ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
@@ -125,12 +133,46 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         Token lv_name_15_0=null;
         Token otherlv_17=null;
         Token lv_name_18_0=null;
+        Boolean lv_model_1_0 = null;
+
+        Boolean lv_attributeExclusion_3_1 = null;
+
+        Boolean lv_attributeExclusion_3_2 = null;
+
+        Boolean lv_nestedType_5_1 = null;
+
+        Boolean lv_nestedType_5_2 = null;
+
+        Boolean lv_nestedTypeRecursiveTest2_7_1 = null;
+
+        Boolean lv_nestedTypeRecursiveTest2_7_2 = null;
+
+        Boolean lv_parentRef_9_1 = null;
+
+        Boolean lv_parentRef_9_2 = null;
+
+        Boolean lv_quantityExclusion_11_1 = null;
+
+        Boolean lv_quantityExclusion_11_2 = null;
+
+        Boolean lv_valueExclusion_13_1 = null;
+
+        Boolean lv_valueExclusion_13_2 = null;
+
+        Boolean lv_nodeExclusion_16_1 = null;
+
+        Boolean lv_nodeExclusion_16_2 = null;
+
+        Boolean lv_nodeExclusionList_19_1 = null;
+
+        Boolean lv_nodeExclusionList_19_2 = null;
+
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:58:10: ( ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) ) )
-            // PsiInternalContextFinderTestLanguage.g:59:2: ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:60:1: ( ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:61:2: ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:59:2: ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:61:2: ( (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) ) | (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) ) | (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) ) | (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) ) | (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) ) | (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) ) | (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) ) | (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) ) | (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) ) )
             int alt9=9;
             switch ( input.LA(1) ) {
             case 11:
@@ -187,10 +229,10 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             switch (alt9) {
                 case 1 :
-                    // PsiInternalContextFinderTestLanguage.g:60:3: (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:62:3: (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:60:3: (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:61:4: otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:62:3: (otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:63:4: otherlv_0= '#0' ( (lv_model_1_0= ruleModel2 ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_NumberSignDigitZeroKeyword_0_0ElementType());
@@ -199,22 +241,26 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     				doneLeaf(otherlv_0);
                     			
-                    // PsiInternalContextFinderTestLanguage.g:68:4: ( (lv_model_1_0= ruleModel2 ) )
-                    // PsiInternalContextFinderTestLanguage.g:69:5: (lv_model_1_0= ruleModel2 )
+                    // PsiInternalContextFinderTestLanguage.g:70:4: ( (lv_model_1_0= ruleModel2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:71:5: (lv_model_1_0= ruleModel2 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:69:5: (lv_model_1_0= ruleModel2 )
-                    // PsiInternalContextFinderTestLanguage.g:70:6: lv_model_1_0= ruleModel2
+                    // PsiInternalContextFinderTestLanguage.g:71:5: (lv_model_1_0= ruleModel2 )
+                    // PsiInternalContextFinderTestLanguage.g:72:6: lv_model_1_0= ruleModel2
                     {
 
                     						markComposite(elementTypeProvider.getModel_ModelModel2ParserRuleCall_0_1_0ElementType());
                     					
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleModel2();
+                    lv_model_1_0=ruleModel2();
 
                     state._fsp--;
 
 
                     						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
                     					
 
                     }
@@ -229,10 +275,10 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 2 :
-                    // PsiInternalContextFinderTestLanguage.g:81:3: (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:87:3: (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:81:3: (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:82:4: otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:87:3: (otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:88:4: otherlv_2= '#1' ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_NumberSignDigitOneKeyword_1_0ElementType());
@@ -241,13 +287,13 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalContextFinderTestLanguage.g:89:4: ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:90:5: ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:95:4: ( ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:96:5: ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:90:5: ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) )
-                    // PsiInternalContextFinderTestLanguage.g:91:6: (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:96:5: ( (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:97:6: (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:91:6: (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:97:6: (lv_attributeExclusion_3_1= ruleAttributeExclusionTest1 | lv_attributeExclusion_3_2= ruleAttributeExclusionTest2 )
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -265,35 +311,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     switch (alt1) {
                         case 1 :
-                            // PsiInternalContextFinderTestLanguage.g:92:7: lv_attributeExclusion_3_1= ruleAttributeExclusionTest1
+                            // PsiInternalContextFinderTestLanguage.g:98:7: lv_attributeExclusion_3_1= ruleAttributeExclusionTest1
                             {
 
                             							markComposite(elementTypeProvider.getModel_AttributeExclusionAttributeExclusionTest1ParserRuleCall_1_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleAttributeExclusionTest1();
+                            lv_attributeExclusion_3_1=ruleAttributeExclusionTest1();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalContextFinderTestLanguage.g:100:7: lv_attributeExclusion_3_2= ruleAttributeExclusionTest2
+                            // PsiInternalContextFinderTestLanguage.g:110:7: lv_attributeExclusion_3_2= ruleAttributeExclusionTest2
                             {
 
                             							markComposite(elementTypeProvider.getModel_AttributeExclusionAttributeExclusionTest2ParserRuleCall_1_1_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleAttributeExclusionTest2();
+                            lv_attributeExclusion_3_2=ruleAttributeExclusionTest2();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -314,10 +368,10 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 3 :
-                    // PsiInternalContextFinderTestLanguage.g:112:3: (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:126:3: (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:112:3: (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:113:4: otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:126:3: (otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:127:4: otherlv_4= '#2' ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_NumberSignDigitTwoKeyword_2_0ElementType());
@@ -326,13 +380,13 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalContextFinderTestLanguage.g:120:4: ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:121:5: ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:134:4: ( ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:135:5: ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:121:5: ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) )
-                    // PsiInternalContextFinderTestLanguage.g:122:6: (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:135:5: ( (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:136:6: (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:122:6: (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:136:6: (lv_nestedType_5_1= ruleNestedTypeTest1 | lv_nestedType_5_2= ruleNestedTypeTest2 )
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -350,35 +404,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     switch (alt2) {
                         case 1 :
-                            // PsiInternalContextFinderTestLanguage.g:123:7: lv_nestedType_5_1= ruleNestedTypeTest1
+                            // PsiInternalContextFinderTestLanguage.g:137:7: lv_nestedType_5_1= ruleNestedTypeTest1
                             {
 
                             							markComposite(elementTypeProvider.getModel_NestedTypeNestedTypeTest1ParserRuleCall_2_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleNestedTypeTest1();
+                            lv_nestedType_5_1=ruleNestedTypeTest1();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalContextFinderTestLanguage.g:131:7: lv_nestedType_5_2= ruleNestedTypeTest2
+                            // PsiInternalContextFinderTestLanguage.g:149:7: lv_nestedType_5_2= ruleNestedTypeTest2
                             {
 
                             							markComposite(elementTypeProvider.getModel_NestedTypeNestedTypeTest2ParserRuleCall_2_1_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleNestedTypeTest2();
+                            lv_nestedType_5_2=ruleNestedTypeTest2();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -399,10 +461,10 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 4 :
-                    // PsiInternalContextFinderTestLanguage.g:143:3: (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:165:3: (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:143:3: (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:144:4: otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:165:3: (otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:166:4: otherlv_6= '#3' ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_NumberSignDigitThreeKeyword_3_0ElementType());
@@ -411,13 +473,13 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     				doneLeaf(otherlv_6);
                     			
-                    // PsiInternalContextFinderTestLanguage.g:151:4: ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:152:5: ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:173:4: ( ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:174:5: ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:152:5: ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) )
-                    // PsiInternalContextFinderTestLanguage.g:153:6: (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:174:5: ( (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:175:6: (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:153:6: (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:175:6: (lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1 | lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2 )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -435,35 +497,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     switch (alt3) {
                         case 1 :
-                            // PsiInternalContextFinderTestLanguage.g:154:7: lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1
+                            // PsiInternalContextFinderTestLanguage.g:176:7: lv_nestedTypeRecursiveTest2_7_1= ruleNestedTypeRecursiveTest1
                             {
 
                             							markComposite(elementTypeProvider.getModel_NestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_3_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleNestedTypeRecursiveTest1();
+                            lv_nestedTypeRecursiveTest2_7_1=ruleNestedTypeRecursiveTest1();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalContextFinderTestLanguage.g:162:7: lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2
+                            // PsiInternalContextFinderTestLanguage.g:188:7: lv_nestedTypeRecursiveTest2_7_2= ruleNestedTypeRecursiveTest2
                             {
 
                             							markComposite(elementTypeProvider.getModel_NestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_3_1_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleNestedTypeRecursiveTest2();
+                            lv_nestedTypeRecursiveTest2_7_2=ruleNestedTypeRecursiveTest2();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -484,10 +554,10 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 5 :
-                    // PsiInternalContextFinderTestLanguage.g:174:3: (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:204:3: (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:174:3: (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:175:4: otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:204:3: (otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:205:4: otherlv_8= '#4' ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_NumberSignDigitFourKeyword_4_0ElementType());
@@ -496,13 +566,13 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     				doneLeaf(otherlv_8);
                     			
-                    // PsiInternalContextFinderTestLanguage.g:182:4: ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:183:5: ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:212:4: ( ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:213:5: ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:183:5: ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) )
-                    // PsiInternalContextFinderTestLanguage.g:184:6: (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:213:5: ( (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:214:6: (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:184:6: (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:214:6: (lv_parentRef_9_1= ruleParentRefTest1 | lv_parentRef_9_2= ruleParentRefTest2 )
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -520,35 +590,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     switch (alt4) {
                         case 1 :
-                            // PsiInternalContextFinderTestLanguage.g:185:7: lv_parentRef_9_1= ruleParentRefTest1
+                            // PsiInternalContextFinderTestLanguage.g:215:7: lv_parentRef_9_1= ruleParentRefTest1
                             {
 
                             							markComposite(elementTypeProvider.getModel_ParentRefParentRefTest1ParserRuleCall_4_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleParentRefTest1();
+                            lv_parentRef_9_1=ruleParentRefTest1();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalContextFinderTestLanguage.g:193:7: lv_parentRef_9_2= ruleParentRefTest2
+                            // PsiInternalContextFinderTestLanguage.g:227:7: lv_parentRef_9_2= ruleParentRefTest2
                             {
 
                             							markComposite(elementTypeProvider.getModel_ParentRefParentRefTest2ParserRuleCall_4_1_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleParentRefTest2();
+                            lv_parentRef_9_2=ruleParentRefTest2();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -569,10 +647,10 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 6 :
-                    // PsiInternalContextFinderTestLanguage.g:205:3: (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:243:3: (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:205:3: (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:206:4: otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:243:3: (otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:244:4: otherlv_10= '#5' ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_NumberSignDigitFiveKeyword_5_0ElementType());
@@ -581,13 +659,13 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     				doneLeaf(otherlv_10);
                     			
-                    // PsiInternalContextFinderTestLanguage.g:213:4: ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:214:5: ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:251:4: ( ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:252:5: ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:214:5: ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) )
-                    // PsiInternalContextFinderTestLanguage.g:215:6: (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:252:5: ( (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:253:6: (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:215:6: (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:253:6: (lv_quantityExclusion_11_1= ruleQuantityExclusionTest1 | lv_quantityExclusion_11_2= ruleQuantityExclusionTest2 )
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
@@ -605,35 +683,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     switch (alt5) {
                         case 1 :
-                            // PsiInternalContextFinderTestLanguage.g:216:7: lv_quantityExclusion_11_1= ruleQuantityExclusionTest1
+                            // PsiInternalContextFinderTestLanguage.g:254:7: lv_quantityExclusion_11_1= ruleQuantityExclusionTest1
                             {
 
                             							markComposite(elementTypeProvider.getModel_QuantityExclusionQuantityExclusionTest1ParserRuleCall_5_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleQuantityExclusionTest1();
+                            lv_quantityExclusion_11_1=ruleQuantityExclusionTest1();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalContextFinderTestLanguage.g:224:7: lv_quantityExclusion_11_2= ruleQuantityExclusionTest2
+                            // PsiInternalContextFinderTestLanguage.g:266:7: lv_quantityExclusion_11_2= ruleQuantityExclusionTest2
                             {
 
                             							markComposite(elementTypeProvider.getModel_QuantityExclusionQuantityExclusionTest2ParserRuleCall_5_1_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleQuantityExclusionTest2();
+                            lv_quantityExclusion_11_2=ruleQuantityExclusionTest2();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -654,10 +740,10 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 7 :
-                    // PsiInternalContextFinderTestLanguage.g:236:3: (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:282:3: (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:236:3: (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:237:4: otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:282:3: (otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:283:4: otherlv_12= '#6' ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_NumberSignDigitSixKeyword_6_0ElementType());
@@ -666,13 +752,13 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     				doneLeaf(otherlv_12);
                     			
-                    // PsiInternalContextFinderTestLanguage.g:244:4: ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:245:5: ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:290:4: ( ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:291:5: ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:245:5: ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) )
-                    // PsiInternalContextFinderTestLanguage.g:246:6: (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:291:5: ( (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:292:6: (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:246:6: (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 )
+                    // PsiInternalContextFinderTestLanguage.g:292:6: (lv_valueExclusion_13_1= ruleValueExclusionTest1 | lv_valueExclusion_13_2= ruleValueExclusionTest2 )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -690,35 +776,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     switch (alt6) {
                         case 1 :
-                            // PsiInternalContextFinderTestLanguage.g:247:7: lv_valueExclusion_13_1= ruleValueExclusionTest1
+                            // PsiInternalContextFinderTestLanguage.g:293:7: lv_valueExclusion_13_1= ruleValueExclusionTest1
                             {
 
                             							markComposite(elementTypeProvider.getModel_ValueExclusionValueExclusionTest1ParserRuleCall_6_1_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleValueExclusionTest1();
+                            lv_valueExclusion_13_1=ruleValueExclusionTest1();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalContextFinderTestLanguage.g:255:7: lv_valueExclusion_13_2= ruleValueExclusionTest2
+                            // PsiInternalContextFinderTestLanguage.g:305:7: lv_valueExclusion_13_2= ruleValueExclusionTest2
                             {
 
                             							markComposite(elementTypeProvider.getModel_ValueExclusionValueExclusionTest2ParserRuleCall_6_1_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleValueExclusionTest2();
+                            lv_valueExclusion_13_2=ruleValueExclusionTest2();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -739,10 +833,10 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 8 :
-                    // PsiInternalContextFinderTestLanguage.g:267:3: (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:321:3: (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:267:3: (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:268:4: otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:321:3: (otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:322:4: otherlv_14= '#7' ( (lv_name_15_0= RULE_STRING ) ) ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_NumberSignDigitSevenKeyword_7_0ElementType());
@@ -751,16 +845,22 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     				doneLeaf(otherlv_14);
                     			
-                    // PsiInternalContextFinderTestLanguage.g:275:4: ( (lv_name_15_0= RULE_STRING ) )
-                    // PsiInternalContextFinderTestLanguage.g:276:5: (lv_name_15_0= RULE_STRING )
+                    // PsiInternalContextFinderTestLanguage.g:329:4: ( (lv_name_15_0= RULE_STRING ) )
+                    // PsiInternalContextFinderTestLanguage.g:330:5: (lv_name_15_0= RULE_STRING )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:276:5: (lv_name_15_0= RULE_STRING )
-                    // PsiInternalContextFinderTestLanguage.g:277:6: lv_name_15_0= RULE_STRING
+                    // PsiInternalContextFinderTestLanguage.g:330:5: (lv_name_15_0= RULE_STRING )
+                    // PsiInternalContextFinderTestLanguage.g:331:6: lv_name_15_0= RULE_STRING
                     {
 
                     						markLeaf(elementTypeProvider.getModel_NameSTRINGTerminalRuleCall_7_1_0ElementType());
                     					
                     lv_name_15_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_7); 
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
 
                     						doneLeaf(lv_name_15_0);
                     					
@@ -770,13 +870,13 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     }
 
-                    // PsiInternalContextFinderTestLanguage.g:286:4: ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:287:5: ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:346:4: ( ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:347:5: ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:287:5: ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) )
-                    // PsiInternalContextFinderTestLanguage.g:288:6: (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 )
+                    // PsiInternalContextFinderTestLanguage.g:347:5: ( (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 ) )
+                    // PsiInternalContextFinderTestLanguage.g:348:6: (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:288:6: (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 )
+                    // PsiInternalContextFinderTestLanguage.g:348:6: (lv_nodeExclusion_16_1= ruleNodeExclusion1 | lv_nodeExclusion_16_2= ruleNodeExclusion2 )
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -794,35 +894,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     switch (alt7) {
                         case 1 :
-                            // PsiInternalContextFinderTestLanguage.g:289:7: lv_nodeExclusion_16_1= ruleNodeExclusion1
+                            // PsiInternalContextFinderTestLanguage.g:349:7: lv_nodeExclusion_16_1= ruleNodeExclusion1
                             {
 
                             							markComposite(elementTypeProvider.getModel_NodeExclusionNodeExclusion1ParserRuleCall_7_2_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleNodeExclusion1();
+                            lv_nodeExclusion_16_1=ruleNodeExclusion1();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalContextFinderTestLanguage.g:297:7: lv_nodeExclusion_16_2= ruleNodeExclusion2
+                            // PsiInternalContextFinderTestLanguage.g:361:7: lv_nodeExclusion_16_2= ruleNodeExclusion2
                             {
 
                             							markComposite(elementTypeProvider.getModel_NodeExclusionNodeExclusion2ParserRuleCall_7_2_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleNodeExclusion2();
+                            lv_nodeExclusion_16_2=ruleNodeExclusion2();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -843,10 +951,10 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 9 :
-                    // PsiInternalContextFinderTestLanguage.g:309:3: (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:377:3: (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:309:3: (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:310:4: otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:377:3: (otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:378:4: otherlv_17= '#8' ( (lv_name_18_0= RULE_STRING ) ) ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_NumberSignDigitEightKeyword_8_0ElementType());
@@ -855,16 +963,22 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     				doneLeaf(otherlv_17);
                     			
-                    // PsiInternalContextFinderTestLanguage.g:317:4: ( (lv_name_18_0= RULE_STRING ) )
-                    // PsiInternalContextFinderTestLanguage.g:318:5: (lv_name_18_0= RULE_STRING )
+                    // PsiInternalContextFinderTestLanguage.g:385:4: ( (lv_name_18_0= RULE_STRING ) )
+                    // PsiInternalContextFinderTestLanguage.g:386:5: (lv_name_18_0= RULE_STRING )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:318:5: (lv_name_18_0= RULE_STRING )
-                    // PsiInternalContextFinderTestLanguage.g:319:6: lv_name_18_0= RULE_STRING
+                    // PsiInternalContextFinderTestLanguage.g:386:5: (lv_name_18_0= RULE_STRING )
+                    // PsiInternalContextFinderTestLanguage.g:387:6: lv_name_18_0= RULE_STRING
                     {
 
                     						markLeaf(elementTypeProvider.getModel_NameSTRINGTerminalRuleCall_8_1_0ElementType());
                     					
                     lv_name_18_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_7); 
+
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
 
                     						doneLeaf(lv_name_18_0);
                     					
@@ -874,13 +988,13 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                     }
 
-                    // PsiInternalContextFinderTestLanguage.g:328:4: ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) )
-                    // PsiInternalContextFinderTestLanguage.g:329:5: ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) )
+                    // PsiInternalContextFinderTestLanguage.g:402:4: ( ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) ) )
+                    // PsiInternalContextFinderTestLanguage.g:403:5: ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:329:5: ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) )
-                    // PsiInternalContextFinderTestLanguage.g:330:6: (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List )
+                    // PsiInternalContextFinderTestLanguage.g:403:5: ( (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List ) )
+                    // PsiInternalContextFinderTestLanguage.g:404:6: (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:330:6: (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List )
+                    // PsiInternalContextFinderTestLanguage.g:404:6: (lv_nodeExclusionList_19_1= ruleNodeExclusion1List | lv_nodeExclusionList_19_2= ruleNodeExclusion2List )
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -898,35 +1012,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
                     }
                     switch (alt8) {
                         case 1 :
-                            // PsiInternalContextFinderTestLanguage.g:331:7: lv_nodeExclusionList_19_1= ruleNodeExclusion1List
+                            // PsiInternalContextFinderTestLanguage.g:405:7: lv_nodeExclusionList_19_1= ruleNodeExclusion1List
                             {
 
                             							markComposite(elementTypeProvider.getModel_NodeExclusionListNodeExclusion1ListParserRuleCall_8_2_0_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleNodeExclusion1List();
+                            lv_nodeExclusionList_19_1=ruleNodeExclusion1List();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalContextFinderTestLanguage.g:339:7: lv_nodeExclusionList_19_2= ruleNodeExclusion2List
+                            // PsiInternalContextFinderTestLanguage.g:417:7: lv_nodeExclusionList_19_2= ruleNodeExclusion2List
                             {
 
                             							markComposite(elementTypeProvider.getModel_NodeExclusionListNodeExclusion2ListParserRuleCall_8_2_0_1ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_2);
-                            ruleNodeExclusion2List();
+                            lv_nodeExclusionList_19_2=ruleNodeExclusion2List();
 
                             state._fsp--;
 
 
                             							doneComposite();
+                            							if(!current) {
+                            								associateWithSemanticElement();
+                            								current = true;
+                            							}
                             						
 
                             }
@@ -959,24 +1081,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleModel2"
-    // PsiInternalContextFinderTestLanguage.g:354:1: entryRuleModel2 : ruleModel2 EOF ;
-    public final void entryRuleModel2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:436:1: entryRuleModel2 returns [Boolean current=false] : iv_ruleModel2= ruleModel2 EOF ;
+    public final Boolean entryRuleModel2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:354:16: ( ruleModel2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:355:2: ruleModel2 EOF
+            // PsiInternalContextFinderTestLanguage.g:436:48: (iv_ruleModel2= ruleModel2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:437:2: iv_ruleModel2= ruleModel2 EOF
             {
              markComposite(elementTypeProvider.getModel2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel2();
+            iv_ruleModel2=ruleModel2();
 
             state._fsp--;
 
+             current =iv_ruleModel2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -988,29 +1116,32 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel2"
 
 
     // $ANTLR start "ruleModel2"
-    // PsiInternalContextFinderTestLanguage.g:360:1: ruleModel2 : ( () otherlv_1= 'model' ) ;
-    public final void ruleModel2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:443:1: ruleModel2 returns [Boolean current=false] : ( () otherlv_1= 'model' ) ;
+    public final Boolean ruleModel2() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:360:11: ( ( () otherlv_1= 'model' ) )
-            // PsiInternalContextFinderTestLanguage.g:361:2: ( () otherlv_1= 'model' )
+            // PsiInternalContextFinderTestLanguage.g:444:1: ( ( () otherlv_1= 'model' ) )
+            // PsiInternalContextFinderTestLanguage.g:445:2: ( () otherlv_1= 'model' )
             {
-            // PsiInternalContextFinderTestLanguage.g:361:2: ( () otherlv_1= 'model' )
-            // PsiInternalContextFinderTestLanguage.g:362:3: () otherlv_1= 'model'
+            // PsiInternalContextFinderTestLanguage.g:445:2: ( () otherlv_1= 'model' )
+            // PsiInternalContextFinderTestLanguage.g:446:3: () otherlv_1= 'model'
             {
-            // PsiInternalContextFinderTestLanguage.g:362:3: ()
-            // PsiInternalContextFinderTestLanguage.g:363:4: 
+            // PsiInternalContextFinderTestLanguage.g:446:3: ()
+            // PsiInternalContextFinderTestLanguage.g:447:4: 
             {
 
             				precedeComposite(elementTypeProvider.getModel2_ModelAction_0ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -1035,24 +1166,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel2"
 
 
     // $ANTLR start "entryRuleAttributeExclusionTest1"
-    // PsiInternalContextFinderTestLanguage.g:379:1: entryRuleAttributeExclusionTest1 : ruleAttributeExclusionTest1 EOF ;
-    public final void entryRuleAttributeExclusionTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:464:1: entryRuleAttributeExclusionTest1 returns [Boolean current=false] : iv_ruleAttributeExclusionTest1= ruleAttributeExclusionTest1 EOF ;
+    public final Boolean entryRuleAttributeExclusionTest1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAttributeExclusionTest1 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:379:33: ( ruleAttributeExclusionTest1 EOF )
-            // PsiInternalContextFinderTestLanguage.g:380:2: ruleAttributeExclusionTest1 EOF
+            // PsiInternalContextFinderTestLanguage.g:464:65: (iv_ruleAttributeExclusionTest1= ruleAttributeExclusionTest1 EOF )
+            // PsiInternalContextFinderTestLanguage.g:465:2: iv_ruleAttributeExclusionTest1= ruleAttributeExclusionTest1 EOF
             {
              markComposite(elementTypeProvider.getAttributeExclusionTest1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAttributeExclusionTest1();
+            iv_ruleAttributeExclusionTest1=ruleAttributeExclusionTest1();
 
             state._fsp--;
 
+             current =iv_ruleAttributeExclusionTest1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1064,23 +1201,25 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAttributeExclusionTest1"
 
 
     // $ANTLR start "ruleAttributeExclusionTest1"
-    // PsiInternalContextFinderTestLanguage.g:385:1: ruleAttributeExclusionTest1 : (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ) ;
-    public final void ruleAttributeExclusionTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:471:1: ruleAttributeExclusionTest1 returns [Boolean current=false] : (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ) ;
+    public final Boolean ruleAttributeExclusionTest1() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_attr1_1_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:385:28: ( (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ) )
-            // PsiInternalContextFinderTestLanguage.g:386:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:472:1: ( (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:473:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:386:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) )
-            // PsiInternalContextFinderTestLanguage.g:387:3: otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:473:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:474:3: otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getAttributeExclusionTest1_Kw1Keyword_0ElementType());
@@ -1089,16 +1228,22 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalContextFinderTestLanguage.g:394:3: ( (lv_attr1_1_0= RULE_ID ) )
-            // PsiInternalContextFinderTestLanguage.g:395:4: (lv_attr1_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:481:3: ( (lv_attr1_1_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:482:4: (lv_attr1_1_0= RULE_ID )
             {
-            // PsiInternalContextFinderTestLanguage.g:395:4: (lv_attr1_1_0= RULE_ID )
-            // PsiInternalContextFinderTestLanguage.g:396:5: lv_attr1_1_0= RULE_ID
+            // PsiInternalContextFinderTestLanguage.g:482:4: (lv_attr1_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:483:5: lv_attr1_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getAttributeExclusionTest1_Attr1IDTerminalRuleCall_1_0ElementType());
             				
             lv_attr1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_attr1_1_0);
             				
@@ -1121,24 +1266,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAttributeExclusionTest1"
 
 
     // $ANTLR start "entryRuleAttributeExclusionTest2"
-    // PsiInternalContextFinderTestLanguage.g:409:1: entryRuleAttributeExclusionTest2 : ruleAttributeExclusionTest2 EOF ;
-    public final void entryRuleAttributeExclusionTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:502:1: entryRuleAttributeExclusionTest2 returns [Boolean current=false] : iv_ruleAttributeExclusionTest2= ruleAttributeExclusionTest2 EOF ;
+    public final Boolean entryRuleAttributeExclusionTest2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAttributeExclusionTest2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:409:33: ( ruleAttributeExclusionTest2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:410:2: ruleAttributeExclusionTest2 EOF
+            // PsiInternalContextFinderTestLanguage.g:502:65: (iv_ruleAttributeExclusionTest2= ruleAttributeExclusionTest2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:503:2: iv_ruleAttributeExclusionTest2= ruleAttributeExclusionTest2 EOF
             {
              markComposite(elementTypeProvider.getAttributeExclusionTest2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAttributeExclusionTest2();
+            iv_ruleAttributeExclusionTest2=ruleAttributeExclusionTest2();
 
             state._fsp--;
 
+             current =iv_ruleAttributeExclusionTest2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1150,23 +1301,25 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAttributeExclusionTest2"
 
 
     // $ANTLR start "ruleAttributeExclusionTest2"
-    // PsiInternalContextFinderTestLanguage.g:415:1: ruleAttributeExclusionTest2 : (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) ) ;
-    public final void ruleAttributeExclusionTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:509:1: ruleAttributeExclusionTest2 returns [Boolean current=false] : (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) ) ;
+    public final Boolean ruleAttributeExclusionTest2() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_attr2_1_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:415:28: ( (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) ) )
-            // PsiInternalContextFinderTestLanguage.g:416:2: (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:510:1: ( (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:511:2: (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:416:2: (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) )
-            // PsiInternalContextFinderTestLanguage.g:417:3: otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:511:2: (otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:512:3: otherlv_0= 'kw2' ( (lv_attr2_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getAttributeExclusionTest2_Kw2Keyword_0ElementType());
@@ -1175,16 +1328,22 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalContextFinderTestLanguage.g:424:3: ( (lv_attr2_1_0= RULE_ID ) )
-            // PsiInternalContextFinderTestLanguage.g:425:4: (lv_attr2_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:519:3: ( (lv_attr2_1_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:520:4: (lv_attr2_1_0= RULE_ID )
             {
-            // PsiInternalContextFinderTestLanguage.g:425:4: (lv_attr2_1_0= RULE_ID )
-            // PsiInternalContextFinderTestLanguage.g:426:5: lv_attr2_1_0= RULE_ID
+            // PsiInternalContextFinderTestLanguage.g:520:4: (lv_attr2_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:521:5: lv_attr2_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getAttributeExclusionTest2_Attr2IDTerminalRuleCall_1_0ElementType());
             				
             lv_attr2_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_attr2_1_0);
             				
@@ -1207,24 +1366,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAttributeExclusionTest2"
 
 
     // $ANTLR start "entryRuleNestedTypeTest1"
-    // PsiInternalContextFinderTestLanguage.g:439:1: entryRuleNestedTypeTest1 : ruleNestedTypeTest1 EOF ;
-    public final void entryRuleNestedTypeTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:540:1: entryRuleNestedTypeTest1 returns [Boolean current=false] : iv_ruleNestedTypeTest1= ruleNestedTypeTest1 EOF ;
+    public final Boolean entryRuleNestedTypeTest1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNestedTypeTest1 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:439:25: ( ruleNestedTypeTest1 EOF )
-            // PsiInternalContextFinderTestLanguage.g:440:2: ruleNestedTypeTest1 EOF
+            // PsiInternalContextFinderTestLanguage.g:540:57: (iv_ruleNestedTypeTest1= ruleNestedTypeTest1 EOF )
+            // PsiInternalContextFinderTestLanguage.g:541:2: iv_ruleNestedTypeTest1= ruleNestedTypeTest1 EOF
             {
              markComposite(elementTypeProvider.getNestedTypeTest1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNestedTypeTest1();
+            iv_ruleNestedTypeTest1=ruleNestedTypeTest1();
 
             state._fsp--;
 
+             current =iv_ruleNestedTypeTest1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1236,34 +1401,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNestedTypeTest1"
 
 
     // $ANTLR start "ruleNestedTypeTest1"
-    // PsiInternalContextFinderTestLanguage.g:445:1: ruleNestedTypeTest1 : ( (lv_nested_0_0= ruleNestedTypeChild1 ) ) ;
-    public final void ruleNestedTypeTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:547:1: ruleNestedTypeTest1 returns [Boolean current=false] : ( (lv_nested_0_0= ruleNestedTypeChild1 ) ) ;
+    public final Boolean ruleNestedTypeTest1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_nested_0_0 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:445:20: ( ( (lv_nested_0_0= ruleNestedTypeChild1 ) ) )
-            // PsiInternalContextFinderTestLanguage.g:446:2: ( (lv_nested_0_0= ruleNestedTypeChild1 ) )
+            // PsiInternalContextFinderTestLanguage.g:548:1: ( ( (lv_nested_0_0= ruleNestedTypeChild1 ) ) )
+            // PsiInternalContextFinderTestLanguage.g:549:2: ( (lv_nested_0_0= ruleNestedTypeChild1 ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:446:2: ( (lv_nested_0_0= ruleNestedTypeChild1 ) )
-            // PsiInternalContextFinderTestLanguage.g:447:3: (lv_nested_0_0= ruleNestedTypeChild1 )
+            // PsiInternalContextFinderTestLanguage.g:549:2: ( (lv_nested_0_0= ruleNestedTypeChild1 ) )
+            // PsiInternalContextFinderTestLanguage.g:550:3: (lv_nested_0_0= ruleNestedTypeChild1 )
             {
-            // PsiInternalContextFinderTestLanguage.g:447:3: (lv_nested_0_0= ruleNestedTypeChild1 )
-            // PsiInternalContextFinderTestLanguage.g:448:4: lv_nested_0_0= ruleNestedTypeChild1
+            // PsiInternalContextFinderTestLanguage.g:550:3: (lv_nested_0_0= ruleNestedTypeChild1 )
+            // PsiInternalContextFinderTestLanguage.g:551:4: lv_nested_0_0= ruleNestedTypeChild1
             {
 
             				markComposite(elementTypeProvider.getNestedTypeTest1_NestedNestedTypeChild1ParserRuleCall_0ElementType());
             			
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleNestedTypeChild1();
+            lv_nested_0_0=ruleNestedTypeChild1();
 
             state._fsp--;
 
 
             				doneComposite();
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
             			
 
             }
@@ -1281,24 +1455,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNestedTypeTest1"
 
 
     // $ANTLR start "entryRuleNestedTypeTest2"
-    // PsiInternalContextFinderTestLanguage.g:460:1: entryRuleNestedTypeTest2 : ruleNestedTypeTest2 EOF ;
-    public final void entryRuleNestedTypeTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:567:1: entryRuleNestedTypeTest2 returns [Boolean current=false] : iv_ruleNestedTypeTest2= ruleNestedTypeTest2 EOF ;
+    public final Boolean entryRuleNestedTypeTest2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNestedTypeTest2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:460:25: ( ruleNestedTypeTest2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:461:2: ruleNestedTypeTest2 EOF
+            // PsiInternalContextFinderTestLanguage.g:567:57: (iv_ruleNestedTypeTest2= ruleNestedTypeTest2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:568:2: iv_ruleNestedTypeTest2= ruleNestedTypeTest2 EOF
             {
              markComposite(elementTypeProvider.getNestedTypeTest2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNestedTypeTest2();
+            iv_ruleNestedTypeTest2=ruleNestedTypeTest2();
 
             state._fsp--;
 
+             current =iv_ruleNestedTypeTest2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1310,34 +1490,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNestedTypeTest2"
 
 
     // $ANTLR start "ruleNestedTypeTest2"
-    // PsiInternalContextFinderTestLanguage.g:466:1: ruleNestedTypeTest2 : ( (lv_nested_0_0= ruleNestedTypeChild2 ) ) ;
-    public final void ruleNestedTypeTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:574:1: ruleNestedTypeTest2 returns [Boolean current=false] : ( (lv_nested_0_0= ruleNestedTypeChild2 ) ) ;
+    public final Boolean ruleNestedTypeTest2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_nested_0_0 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:466:20: ( ( (lv_nested_0_0= ruleNestedTypeChild2 ) ) )
-            // PsiInternalContextFinderTestLanguage.g:467:2: ( (lv_nested_0_0= ruleNestedTypeChild2 ) )
+            // PsiInternalContextFinderTestLanguage.g:575:1: ( ( (lv_nested_0_0= ruleNestedTypeChild2 ) ) )
+            // PsiInternalContextFinderTestLanguage.g:576:2: ( (lv_nested_0_0= ruleNestedTypeChild2 ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:467:2: ( (lv_nested_0_0= ruleNestedTypeChild2 ) )
-            // PsiInternalContextFinderTestLanguage.g:468:3: (lv_nested_0_0= ruleNestedTypeChild2 )
+            // PsiInternalContextFinderTestLanguage.g:576:2: ( (lv_nested_0_0= ruleNestedTypeChild2 ) )
+            // PsiInternalContextFinderTestLanguage.g:577:3: (lv_nested_0_0= ruleNestedTypeChild2 )
             {
-            // PsiInternalContextFinderTestLanguage.g:468:3: (lv_nested_0_0= ruleNestedTypeChild2 )
-            // PsiInternalContextFinderTestLanguage.g:469:4: lv_nested_0_0= ruleNestedTypeChild2
+            // PsiInternalContextFinderTestLanguage.g:577:3: (lv_nested_0_0= ruleNestedTypeChild2 )
+            // PsiInternalContextFinderTestLanguage.g:578:4: lv_nested_0_0= ruleNestedTypeChild2
             {
 
             				markComposite(elementTypeProvider.getNestedTypeTest2_NestedNestedTypeChild2ParserRuleCall_0ElementType());
             			
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleNestedTypeChild2();
+            lv_nested_0_0=ruleNestedTypeChild2();
 
             state._fsp--;
 
 
             				doneComposite();
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
             			
 
             }
@@ -1355,24 +1544,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNestedTypeTest2"
 
 
     // $ANTLR start "entryRuleNestedTypeChild1"
-    // PsiInternalContextFinderTestLanguage.g:481:1: entryRuleNestedTypeChild1 : ruleNestedTypeChild1 EOF ;
-    public final void entryRuleNestedTypeChild1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:594:1: entryRuleNestedTypeChild1 returns [Boolean current=false] : iv_ruleNestedTypeChild1= ruleNestedTypeChild1 EOF ;
+    public final Boolean entryRuleNestedTypeChild1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNestedTypeChild1 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:481:26: ( ruleNestedTypeChild1 EOF )
-            // PsiInternalContextFinderTestLanguage.g:482:2: ruleNestedTypeChild1 EOF
+            // PsiInternalContextFinderTestLanguage.g:594:58: (iv_ruleNestedTypeChild1= ruleNestedTypeChild1 EOF )
+            // PsiInternalContextFinderTestLanguage.g:595:2: iv_ruleNestedTypeChild1= ruleNestedTypeChild1 EOF
             {
              markComposite(elementTypeProvider.getNestedTypeChild1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNestedTypeChild1();
+            iv_ruleNestedTypeChild1=ruleNestedTypeChild1();
 
             state._fsp--;
 
+             current =iv_ruleNestedTypeChild1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1384,23 +1579,25 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNestedTypeChild1"
 
 
     // $ANTLR start "ruleNestedTypeChild1"
-    // PsiInternalContextFinderTestLanguage.g:487:1: ruleNestedTypeChild1 : (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) ) ;
-    public final void ruleNestedTypeChild1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:601:1: ruleNestedTypeChild1 returns [Boolean current=false] : (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) ) ;
+    public final Boolean ruleNestedTypeChild1() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_val_1_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:487:21: ( (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) ) )
-            // PsiInternalContextFinderTestLanguage.g:488:2: (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:602:1: ( (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:603:2: (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:488:2: (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) )
-            // PsiInternalContextFinderTestLanguage.g:489:3: otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:603:2: (otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:604:3: otherlv_0= 'kw1' ( (lv_val_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getNestedTypeChild1_Kw1Keyword_0ElementType());
@@ -1409,16 +1606,22 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalContextFinderTestLanguage.g:496:3: ( (lv_val_1_0= RULE_ID ) )
-            // PsiInternalContextFinderTestLanguage.g:497:4: (lv_val_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:611:3: ( (lv_val_1_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:612:4: (lv_val_1_0= RULE_ID )
             {
-            // PsiInternalContextFinderTestLanguage.g:497:4: (lv_val_1_0= RULE_ID )
-            // PsiInternalContextFinderTestLanguage.g:498:5: lv_val_1_0= RULE_ID
+            // PsiInternalContextFinderTestLanguage.g:612:4: (lv_val_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:613:5: lv_val_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getNestedTypeChild1_ValIDTerminalRuleCall_1_0ElementType());
             				
             lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_val_1_0);
             				
@@ -1441,24 +1644,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNestedTypeChild1"
 
 
     // $ANTLR start "entryRuleNestedTypeChild2"
-    // PsiInternalContextFinderTestLanguage.g:511:1: entryRuleNestedTypeChild2 : ruleNestedTypeChild2 EOF ;
-    public final void entryRuleNestedTypeChild2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:632:1: entryRuleNestedTypeChild2 returns [Boolean current=false] : iv_ruleNestedTypeChild2= ruleNestedTypeChild2 EOF ;
+    public final Boolean entryRuleNestedTypeChild2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNestedTypeChild2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:511:26: ( ruleNestedTypeChild2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:512:2: ruleNestedTypeChild2 EOF
+            // PsiInternalContextFinderTestLanguage.g:632:58: (iv_ruleNestedTypeChild2= ruleNestedTypeChild2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:633:2: iv_ruleNestedTypeChild2= ruleNestedTypeChild2 EOF
             {
              markComposite(elementTypeProvider.getNestedTypeChild2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNestedTypeChild2();
+            iv_ruleNestedTypeChild2=ruleNestedTypeChild2();
 
             state._fsp--;
 
+             current =iv_ruleNestedTypeChild2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1470,23 +1679,25 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNestedTypeChild2"
 
 
     // $ANTLR start "ruleNestedTypeChild2"
-    // PsiInternalContextFinderTestLanguage.g:517:1: ruleNestedTypeChild2 : (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) ) ;
-    public final void ruleNestedTypeChild2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:639:1: ruleNestedTypeChild2 returns [Boolean current=false] : (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) ) ;
+    public final Boolean ruleNestedTypeChild2() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_val_1_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:517:21: ( (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) ) )
-            // PsiInternalContextFinderTestLanguage.g:518:2: (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:640:1: ( (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:641:2: (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:518:2: (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) )
-            // PsiInternalContextFinderTestLanguage.g:519:3: otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:641:2: (otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:642:3: otherlv_0= 'kw2' ( (lv_val_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getNestedTypeChild2_Kw2Keyword_0ElementType());
@@ -1495,16 +1706,22 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalContextFinderTestLanguage.g:526:3: ( (lv_val_1_0= RULE_ID ) )
-            // PsiInternalContextFinderTestLanguage.g:527:4: (lv_val_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:649:3: ( (lv_val_1_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:650:4: (lv_val_1_0= RULE_ID )
             {
-            // PsiInternalContextFinderTestLanguage.g:527:4: (lv_val_1_0= RULE_ID )
-            // PsiInternalContextFinderTestLanguage.g:528:5: lv_val_1_0= RULE_ID
+            // PsiInternalContextFinderTestLanguage.g:650:4: (lv_val_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:651:5: lv_val_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getNestedTypeChild2_ValIDTerminalRuleCall_1_0ElementType());
             				
             lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_val_1_0);
             				
@@ -1527,24 +1744,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNestedTypeChild2"
 
 
     // $ANTLR start "entryRuleNestedTypeRecursiveTest1"
-    // PsiInternalContextFinderTestLanguage.g:541:1: entryRuleNestedTypeRecursiveTest1 : ruleNestedTypeRecursiveTest1 EOF ;
-    public final void entryRuleNestedTypeRecursiveTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:670:1: entryRuleNestedTypeRecursiveTest1 returns [Boolean current=false] : iv_ruleNestedTypeRecursiveTest1= ruleNestedTypeRecursiveTest1 EOF ;
+    public final Boolean entryRuleNestedTypeRecursiveTest1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNestedTypeRecursiveTest1 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:541:34: ( ruleNestedTypeRecursiveTest1 EOF )
-            // PsiInternalContextFinderTestLanguage.g:542:2: ruleNestedTypeRecursiveTest1 EOF
+            // PsiInternalContextFinderTestLanguage.g:670:66: (iv_ruleNestedTypeRecursiveTest1= ruleNestedTypeRecursiveTest1 EOF )
+            // PsiInternalContextFinderTestLanguage.g:671:2: iv_ruleNestedTypeRecursiveTest1= ruleNestedTypeRecursiveTest1 EOF
             {
              markComposite(elementTypeProvider.getNestedTypeRecursiveTest1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNestedTypeRecursiveTest1();
+            iv_ruleNestedTypeRecursiveTest1=ruleNestedTypeRecursiveTest1();
 
             state._fsp--;
 
+             current =iv_ruleNestedTypeRecursiveTest1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1556,30 +1779,33 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNestedTypeRecursiveTest1"
 
 
     // $ANTLR start "ruleNestedTypeRecursiveTest1"
-    // PsiInternalContextFinderTestLanguage.g:547:1: ruleNestedTypeRecursiveTest1 : ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ ) ;
-    public final void ruleNestedTypeRecursiveTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:677:1: ruleNestedTypeRecursiveTest1 returns [Boolean current=false] : ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ ) ;
+    public final Boolean ruleNestedTypeRecursiveTest1() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
         Token otherlv_3=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:547:29: ( ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ ) )
-            // PsiInternalContextFinderTestLanguage.g:548:2: ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ )
+            // PsiInternalContextFinderTestLanguage.g:678:1: ( ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ ) )
+            // PsiInternalContextFinderTestLanguage.g:679:2: ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ )
             {
-            // PsiInternalContextFinderTestLanguage.g:548:2: ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ )
-            // PsiInternalContextFinderTestLanguage.g:549:3: () otherlv_1= 'kw1' ( () otherlv_3= '.' )+
+            // PsiInternalContextFinderTestLanguage.g:679:2: ( () otherlv_1= 'kw1' ( () otherlv_3= '.' )+ )
+            // PsiInternalContextFinderTestLanguage.g:680:3: () otherlv_1= 'kw1' ( () otherlv_3= '.' )+
             {
-            // PsiInternalContextFinderTestLanguage.g:549:3: ()
-            // PsiInternalContextFinderTestLanguage.g:550:4: 
+            // PsiInternalContextFinderTestLanguage.g:680:3: ()
+            // PsiInternalContextFinderTestLanguage.g:681:4: 
             {
 
             				precedeComposite(elementTypeProvider.getNestedTypeRecursiveTest1_NestedTypeRecursiveTest1Action_0ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -1591,7 +1817,7 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalContextFinderTestLanguage.g:562:3: ( () otherlv_3= '.' )+
+            // PsiInternalContextFinderTestLanguage.g:694:3: ( () otherlv_3= '.' )+
             int cnt10=0;
             loop10:
             do {
@@ -1605,14 +1831,15 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                 switch (alt10) {
             	case 1 :
-            	    // PsiInternalContextFinderTestLanguage.g:563:4: () otherlv_3= '.'
+            	    // PsiInternalContextFinderTestLanguage.g:695:4: () otherlv_3= '.'
             	    {
-            	    // PsiInternalContextFinderTestLanguage.g:563:4: ()
-            	    // PsiInternalContextFinderTestLanguage.g:564:5: 
+            	    // PsiInternalContextFinderTestLanguage.g:695:4: ()
+            	    // PsiInternalContextFinderTestLanguage.g:696:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getNestedTypeRecursiveTest1_NestedTypeRecursiveTestLeftAction_2_0ElementType());
             	    					doneComposite();
+            	    					associateWithSemanticElement();
             	    				
 
             	    }
@@ -1650,24 +1877,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNestedTypeRecursiveTest1"
 
 
     // $ANTLR start "entryRuleNestedTypeRecursiveTest2"
-    // PsiInternalContextFinderTestLanguage.g:581:1: entryRuleNestedTypeRecursiveTest2 : ruleNestedTypeRecursiveTest2 EOF ;
-    public final void entryRuleNestedTypeRecursiveTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:714:1: entryRuleNestedTypeRecursiveTest2 returns [Boolean current=false] : iv_ruleNestedTypeRecursiveTest2= ruleNestedTypeRecursiveTest2 EOF ;
+    public final Boolean entryRuleNestedTypeRecursiveTest2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNestedTypeRecursiveTest2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:581:34: ( ruleNestedTypeRecursiveTest2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:582:2: ruleNestedTypeRecursiveTest2 EOF
+            // PsiInternalContextFinderTestLanguage.g:714:66: (iv_ruleNestedTypeRecursiveTest2= ruleNestedTypeRecursiveTest2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:715:2: iv_ruleNestedTypeRecursiveTest2= ruleNestedTypeRecursiveTest2 EOF
             {
              markComposite(elementTypeProvider.getNestedTypeRecursiveTest2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNestedTypeRecursiveTest2();
+            iv_ruleNestedTypeRecursiveTest2=ruleNestedTypeRecursiveTest2();
 
             state._fsp--;
 
+             current =iv_ruleNestedTypeRecursiveTest2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1679,30 +1912,33 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNestedTypeRecursiveTest2"
 
 
     // $ANTLR start "ruleNestedTypeRecursiveTest2"
-    // PsiInternalContextFinderTestLanguage.g:587:1: ruleNestedTypeRecursiveTest2 : ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ ) ;
-    public final void ruleNestedTypeRecursiveTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:721:1: ruleNestedTypeRecursiveTest2 returns [Boolean current=false] : ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ ) ;
+    public final Boolean ruleNestedTypeRecursiveTest2() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
         Token otherlv_3=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:587:29: ( ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ ) )
-            // PsiInternalContextFinderTestLanguage.g:588:2: ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ )
+            // PsiInternalContextFinderTestLanguage.g:722:1: ( ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ ) )
+            // PsiInternalContextFinderTestLanguage.g:723:2: ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ )
             {
-            // PsiInternalContextFinderTestLanguage.g:588:2: ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ )
-            // PsiInternalContextFinderTestLanguage.g:589:3: () otherlv_1= 'kw2' ( () otherlv_3= '.' )+
+            // PsiInternalContextFinderTestLanguage.g:723:2: ( () otherlv_1= 'kw2' ( () otherlv_3= '.' )+ )
+            // PsiInternalContextFinderTestLanguage.g:724:3: () otherlv_1= 'kw2' ( () otherlv_3= '.' )+
             {
-            // PsiInternalContextFinderTestLanguage.g:589:3: ()
-            // PsiInternalContextFinderTestLanguage.g:590:4: 
+            // PsiInternalContextFinderTestLanguage.g:724:3: ()
+            // PsiInternalContextFinderTestLanguage.g:725:4: 
             {
 
             				precedeComposite(elementTypeProvider.getNestedTypeRecursiveTest2_NestedTypeRecursiveTest2Action_0ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -1714,7 +1950,7 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalContextFinderTestLanguage.g:602:3: ( () otherlv_3= '.' )+
+            // PsiInternalContextFinderTestLanguage.g:738:3: ( () otherlv_3= '.' )+
             int cnt11=0;
             loop11:
             do {
@@ -1728,14 +1964,15 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                 switch (alt11) {
             	case 1 :
-            	    // PsiInternalContextFinderTestLanguage.g:603:4: () otherlv_3= '.'
+            	    // PsiInternalContextFinderTestLanguage.g:739:4: () otherlv_3= '.'
             	    {
-            	    // PsiInternalContextFinderTestLanguage.g:603:4: ()
-            	    // PsiInternalContextFinderTestLanguage.g:604:5: 
+            	    // PsiInternalContextFinderTestLanguage.g:739:4: ()
+            	    // PsiInternalContextFinderTestLanguage.g:740:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getNestedTypeRecursiveTest2_NestedTypeRecursiveTestLeftAction_2_0ElementType());
             	    					doneComposite();
+            	    					associateWithSemanticElement();
             	    				
 
             	    }
@@ -1773,24 +2010,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNestedTypeRecursiveTest2"
 
 
     // $ANTLR start "entryRuleParentRefTest1"
-    // PsiInternalContextFinderTestLanguage.g:621:1: entryRuleParentRefTest1 : ruleParentRefTest1 EOF ;
-    public final void entryRuleParentRefTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:758:1: entryRuleParentRefTest1 returns [Boolean current=false] : iv_ruleParentRefTest1= ruleParentRefTest1 EOF ;
+    public final Boolean entryRuleParentRefTest1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleParentRefTest1 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:621:24: ( ruleParentRefTest1 EOF )
-            // PsiInternalContextFinderTestLanguage.g:622:2: ruleParentRefTest1 EOF
+            // PsiInternalContextFinderTestLanguage.g:758:56: (iv_ruleParentRefTest1= ruleParentRefTest1 EOF )
+            // PsiInternalContextFinderTestLanguage.g:759:2: iv_ruleParentRefTest1= ruleParentRefTest1 EOF
             {
              markComposite(elementTypeProvider.getParentRefTest1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleParentRefTest1();
+            iv_ruleParentRefTest1=ruleParentRefTest1();
 
             state._fsp--;
 
+             current =iv_ruleParentRefTest1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1802,22 +2045,26 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleParentRefTest1"
 
 
     // $ANTLR start "ruleParentRefTest1"
-    // PsiInternalContextFinderTestLanguage.g:627:1: ruleParentRefTest1 : (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) ) ;
-    public final void ruleParentRefTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:765:1: ruleParentRefTest1 returns [Boolean current=false] : (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) ) ;
+    public final Boolean ruleParentRefTest1() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
+        Boolean lv_child1_1_0 = null;
+
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:627:19: ( (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) ) )
-            // PsiInternalContextFinderTestLanguage.g:628:2: (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) )
+            // PsiInternalContextFinderTestLanguage.g:766:1: ( (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:767:2: (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:628:2: (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) )
-            // PsiInternalContextFinderTestLanguage.g:629:3: otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) )
+            // PsiInternalContextFinderTestLanguage.g:767:2: (otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) ) )
+            // PsiInternalContextFinderTestLanguage.g:768:3: otherlv_0= 'kw1' ( (lv_child1_1_0= ruleParentRefTestChild1 ) )
             {
 
             			markLeaf(elementTypeProvider.getParentRefTest1_Kw1Keyword_0ElementType());
@@ -1826,22 +2073,26 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalContextFinderTestLanguage.g:636:3: ( (lv_child1_1_0= ruleParentRefTestChild1 ) )
-            // PsiInternalContextFinderTestLanguage.g:637:4: (lv_child1_1_0= ruleParentRefTestChild1 )
+            // PsiInternalContextFinderTestLanguage.g:775:3: ( (lv_child1_1_0= ruleParentRefTestChild1 ) )
+            // PsiInternalContextFinderTestLanguage.g:776:4: (lv_child1_1_0= ruleParentRefTestChild1 )
             {
-            // PsiInternalContextFinderTestLanguage.g:637:4: (lv_child1_1_0= ruleParentRefTestChild1 )
-            // PsiInternalContextFinderTestLanguage.g:638:5: lv_child1_1_0= ruleParentRefTestChild1
+            // PsiInternalContextFinderTestLanguage.g:776:4: (lv_child1_1_0= ruleParentRefTestChild1 )
+            // PsiInternalContextFinderTestLanguage.g:777:5: lv_child1_1_0= ruleParentRefTestChild1
             {
 
             					markComposite(elementTypeProvider.getParentRefTest1_Child1ParentRefTestChild1ParserRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleParentRefTestChild1();
+            lv_child1_1_0=ruleParentRefTestChild1();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -1862,24 +2113,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleParentRefTest1"
 
 
     // $ANTLR start "entryRuleParentRefTest2"
-    // PsiInternalContextFinderTestLanguage.g:651:1: entryRuleParentRefTest2 : ruleParentRefTest2 EOF ;
-    public final void entryRuleParentRefTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:794:1: entryRuleParentRefTest2 returns [Boolean current=false] : iv_ruleParentRefTest2= ruleParentRefTest2 EOF ;
+    public final Boolean entryRuleParentRefTest2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleParentRefTest2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:651:24: ( ruleParentRefTest2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:652:2: ruleParentRefTest2 EOF
+            // PsiInternalContextFinderTestLanguage.g:794:56: (iv_ruleParentRefTest2= ruleParentRefTest2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:795:2: iv_ruleParentRefTest2= ruleParentRefTest2 EOF
             {
              markComposite(elementTypeProvider.getParentRefTest2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleParentRefTest2();
+            iv_ruleParentRefTest2=ruleParentRefTest2();
 
             state._fsp--;
 
+             current =iv_ruleParentRefTest2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1891,22 +2148,26 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleParentRefTest2"
 
 
     // $ANTLR start "ruleParentRefTest2"
-    // PsiInternalContextFinderTestLanguage.g:657:1: ruleParentRefTest2 : (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) ) ;
-    public final void ruleParentRefTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:801:1: ruleParentRefTest2 returns [Boolean current=false] : (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) ) ;
+    public final Boolean ruleParentRefTest2() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
+        Boolean lv_child2_1_0 = null;
+
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:657:19: ( (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) ) )
-            // PsiInternalContextFinderTestLanguage.g:658:2: (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) )
+            // PsiInternalContextFinderTestLanguage.g:802:1: ( (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:803:2: (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:658:2: (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) )
-            // PsiInternalContextFinderTestLanguage.g:659:3: otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) )
+            // PsiInternalContextFinderTestLanguage.g:803:2: (otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) ) )
+            // PsiInternalContextFinderTestLanguage.g:804:3: otherlv_0= 'kw2' ( (lv_child2_1_0= ruleParentRefTestChild2 ) )
             {
 
             			markLeaf(elementTypeProvider.getParentRefTest2_Kw2Keyword_0ElementType());
@@ -1915,22 +2176,26 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalContextFinderTestLanguage.g:666:3: ( (lv_child2_1_0= ruleParentRefTestChild2 ) )
-            // PsiInternalContextFinderTestLanguage.g:667:4: (lv_child2_1_0= ruleParentRefTestChild2 )
+            // PsiInternalContextFinderTestLanguage.g:811:3: ( (lv_child2_1_0= ruleParentRefTestChild2 ) )
+            // PsiInternalContextFinderTestLanguage.g:812:4: (lv_child2_1_0= ruleParentRefTestChild2 )
             {
-            // PsiInternalContextFinderTestLanguage.g:667:4: (lv_child2_1_0= ruleParentRefTestChild2 )
-            // PsiInternalContextFinderTestLanguage.g:668:5: lv_child2_1_0= ruleParentRefTestChild2
+            // PsiInternalContextFinderTestLanguage.g:812:4: (lv_child2_1_0= ruleParentRefTestChild2 )
+            // PsiInternalContextFinderTestLanguage.g:813:5: lv_child2_1_0= ruleParentRefTestChild2
             {
 
             					markComposite(elementTypeProvider.getParentRefTest2_Child2ParentRefTestChild2ParserRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleParentRefTestChild2();
+            lv_child2_1_0=ruleParentRefTestChild2();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -1951,24 +2216,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleParentRefTest2"
 
 
     // $ANTLR start "entryRuleParentRefTestChild1"
-    // PsiInternalContextFinderTestLanguage.g:681:1: entryRuleParentRefTestChild1 : ruleParentRefTestChild1 EOF ;
-    public final void entryRuleParentRefTestChild1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:830:1: entryRuleParentRefTestChild1 returns [Boolean current=false] : iv_ruleParentRefTestChild1= ruleParentRefTestChild1 EOF ;
+    public final Boolean entryRuleParentRefTestChild1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleParentRefTestChild1 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:681:29: ( ruleParentRefTestChild1 EOF )
-            // PsiInternalContextFinderTestLanguage.g:682:2: ruleParentRefTestChild1 EOF
+            // PsiInternalContextFinderTestLanguage.g:830:61: (iv_ruleParentRefTestChild1= ruleParentRefTestChild1 EOF )
+            // PsiInternalContextFinderTestLanguage.g:831:2: iv_ruleParentRefTestChild1= ruleParentRefTestChild1 EOF
             {
              markComposite(elementTypeProvider.getParentRefTestChild1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleParentRefTestChild1();
+            iv_ruleParentRefTestChild1=ruleParentRefTestChild1();
 
             state._fsp--;
 
+             current =iv_ruleParentRefTestChild1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -1980,29 +2251,34 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleParentRefTestChild1"
 
 
     // $ANTLR start "ruleParentRefTestChild1"
-    // PsiInternalContextFinderTestLanguage.g:687:1: ruleParentRefTestChild1 : ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? ) ;
-    public final void ruleParentRefTestChild1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:837:1: ruleParentRefTestChild1 returns [Boolean current=false] : ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? ) ;
+    public final Boolean ruleParentRefTestChild1() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
+        Boolean lv_child_2_0 = null;
+
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:687:24: ( ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? ) )
-            // PsiInternalContextFinderTestLanguage.g:688:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? )
+            // PsiInternalContextFinderTestLanguage.g:838:1: ( ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? ) )
+            // PsiInternalContextFinderTestLanguage.g:839:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? )
             {
-            // PsiInternalContextFinderTestLanguage.g:688:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? )
-            // PsiInternalContextFinderTestLanguage.g:689:3: () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )?
+            // PsiInternalContextFinderTestLanguage.g:839:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )? )
+            // PsiInternalContextFinderTestLanguage.g:840:3: () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild1 ) )?
             {
-            // PsiInternalContextFinderTestLanguage.g:689:3: ()
-            // PsiInternalContextFinderTestLanguage.g:690:4: 
+            // PsiInternalContextFinderTestLanguage.g:840:3: ()
+            // PsiInternalContextFinderTestLanguage.g:841:4: 
             {
 
             				precedeComposite(elementTypeProvider.getParentRefTestChild1_ParentRefTestChildAction_0ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -2014,7 +2290,7 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalContextFinderTestLanguage.g:702:3: ( (lv_child_2_0= ruleParentRefTestChild1 ) )?
+            // PsiInternalContextFinderTestLanguage.g:854:3: ( (lv_child_2_0= ruleParentRefTestChild1 ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -2023,21 +2299,25 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
             }
             switch (alt12) {
                 case 1 :
-                    // PsiInternalContextFinderTestLanguage.g:703:4: (lv_child_2_0= ruleParentRefTestChild1 )
+                    // PsiInternalContextFinderTestLanguage.g:855:4: (lv_child_2_0= ruleParentRefTestChild1 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:703:4: (lv_child_2_0= ruleParentRefTestChild1 )
-                    // PsiInternalContextFinderTestLanguage.g:704:5: lv_child_2_0= ruleParentRefTestChild1
+                    // PsiInternalContextFinderTestLanguage.g:855:4: (lv_child_2_0= ruleParentRefTestChild1 )
+                    // PsiInternalContextFinderTestLanguage.g:856:5: lv_child_2_0= ruleParentRefTestChild1
                     {
 
                     					markComposite(elementTypeProvider.getParentRefTestChild1_ChildParentRefTestChild1ParserRuleCall_2_0ElementType());
                     				
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleParentRefTestChild1();
+                    lv_child_2_0=ruleParentRefTestChild1();
 
                     state._fsp--;
 
 
                     					doneComposite();
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -2061,24 +2341,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleParentRefTestChild1"
 
 
     // $ANTLR start "entryRuleParentRefTestChild2"
-    // PsiInternalContextFinderTestLanguage.g:717:1: entryRuleParentRefTestChild2 : ruleParentRefTestChild2 EOF ;
-    public final void entryRuleParentRefTestChild2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:873:1: entryRuleParentRefTestChild2 returns [Boolean current=false] : iv_ruleParentRefTestChild2= ruleParentRefTestChild2 EOF ;
+    public final Boolean entryRuleParentRefTestChild2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleParentRefTestChild2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:717:29: ( ruleParentRefTestChild2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:718:2: ruleParentRefTestChild2 EOF
+            // PsiInternalContextFinderTestLanguage.g:873:61: (iv_ruleParentRefTestChild2= ruleParentRefTestChild2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:874:2: iv_ruleParentRefTestChild2= ruleParentRefTestChild2 EOF
             {
              markComposite(elementTypeProvider.getParentRefTestChild2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleParentRefTestChild2();
+            iv_ruleParentRefTestChild2=ruleParentRefTestChild2();
 
             state._fsp--;
 
+             current =iv_ruleParentRefTestChild2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2090,29 +2376,34 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleParentRefTestChild2"
 
 
     // $ANTLR start "ruleParentRefTestChild2"
-    // PsiInternalContextFinderTestLanguage.g:723:1: ruleParentRefTestChild2 : ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? ) ;
-    public final void ruleParentRefTestChild2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:880:1: ruleParentRefTestChild2 returns [Boolean current=false] : ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? ) ;
+    public final Boolean ruleParentRefTestChild2() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_1=null;
+        Boolean lv_child_2_0 = null;
+
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:723:24: ( ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? ) )
-            // PsiInternalContextFinderTestLanguage.g:724:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? )
+            // PsiInternalContextFinderTestLanguage.g:881:1: ( ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? ) )
+            // PsiInternalContextFinderTestLanguage.g:882:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? )
             {
-            // PsiInternalContextFinderTestLanguage.g:724:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? )
-            // PsiInternalContextFinderTestLanguage.g:725:3: () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )?
+            // PsiInternalContextFinderTestLanguage.g:882:2: ( () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )? )
+            // PsiInternalContextFinderTestLanguage.g:883:3: () otherlv_1= 'foo' ( (lv_child_2_0= ruleParentRefTestChild2 ) )?
             {
-            // PsiInternalContextFinderTestLanguage.g:725:3: ()
-            // PsiInternalContextFinderTestLanguage.g:726:4: 
+            // PsiInternalContextFinderTestLanguage.g:883:3: ()
+            // PsiInternalContextFinderTestLanguage.g:884:4: 
             {
 
             				precedeComposite(elementTypeProvider.getParentRefTestChild2_ParentRefTestChildAction_0ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -2124,7 +2415,7 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_1);
             		
-            // PsiInternalContextFinderTestLanguage.g:738:3: ( (lv_child_2_0= ruleParentRefTestChild2 ) )?
+            // PsiInternalContextFinderTestLanguage.g:897:3: ( (lv_child_2_0= ruleParentRefTestChild2 ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2133,21 +2424,25 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
             }
             switch (alt13) {
                 case 1 :
-                    // PsiInternalContextFinderTestLanguage.g:739:4: (lv_child_2_0= ruleParentRefTestChild2 )
+                    // PsiInternalContextFinderTestLanguage.g:898:4: (lv_child_2_0= ruleParentRefTestChild2 )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:739:4: (lv_child_2_0= ruleParentRefTestChild2 )
-                    // PsiInternalContextFinderTestLanguage.g:740:5: lv_child_2_0= ruleParentRefTestChild2
+                    // PsiInternalContextFinderTestLanguage.g:898:4: (lv_child_2_0= ruleParentRefTestChild2 )
+                    // PsiInternalContextFinderTestLanguage.g:899:5: lv_child_2_0= ruleParentRefTestChild2
                     {
 
                     					markComposite(elementTypeProvider.getParentRefTestChild2_ChildParentRefTestChild2ParserRuleCall_2_0ElementType());
                     				
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleParentRefTestChild2();
+                    lv_child_2_0=ruleParentRefTestChild2();
 
                     state._fsp--;
 
 
                     					doneComposite();
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -2171,24 +2466,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleParentRefTestChild2"
 
 
     // $ANTLR start "entryRuleQuantityExclusionTest1"
-    // PsiInternalContextFinderTestLanguage.g:753:1: entryRuleQuantityExclusionTest1 : ruleQuantityExclusionTest1 EOF ;
-    public final void entryRuleQuantityExclusionTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:916:1: entryRuleQuantityExclusionTest1 returns [Boolean current=false] : iv_ruleQuantityExclusionTest1= ruleQuantityExclusionTest1 EOF ;
+    public final Boolean entryRuleQuantityExclusionTest1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleQuantityExclusionTest1 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:753:32: ( ruleQuantityExclusionTest1 EOF )
-            // PsiInternalContextFinderTestLanguage.g:754:2: ruleQuantityExclusionTest1 EOF
+            // PsiInternalContextFinderTestLanguage.g:916:64: (iv_ruleQuantityExclusionTest1= ruleQuantityExclusionTest1 EOF )
+            // PsiInternalContextFinderTestLanguage.g:917:2: iv_ruleQuantityExclusionTest1= ruleQuantityExclusionTest1 EOF
             {
              markComposite(elementTypeProvider.getQuantityExclusionTest1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleQuantityExclusionTest1();
+            iv_ruleQuantityExclusionTest1=ruleQuantityExclusionTest1();
 
             state._fsp--;
 
+             current =iv_ruleQuantityExclusionTest1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2200,24 +2501,26 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleQuantityExclusionTest1"
 
 
     // $ANTLR start "ruleQuantityExclusionTest1"
-    // PsiInternalContextFinderTestLanguage.g:759:1: ruleQuantityExclusionTest1 : (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? ) ;
-    public final void ruleQuantityExclusionTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:923:1: ruleQuantityExclusionTest1 returns [Boolean current=false] : (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? ) ;
+    public final Boolean ruleQuantityExclusionTest1() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_attr1_1_0=null;
         Token lv_attr2_2_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:759:27: ( (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? ) )
-            // PsiInternalContextFinderTestLanguage.g:760:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? )
+            // PsiInternalContextFinderTestLanguage.g:924:1: ( (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? ) )
+            // PsiInternalContextFinderTestLanguage.g:925:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? )
             {
-            // PsiInternalContextFinderTestLanguage.g:760:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? )
-            // PsiInternalContextFinderTestLanguage.g:761:3: otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )?
+            // PsiInternalContextFinderTestLanguage.g:925:2: (otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )? )
+            // PsiInternalContextFinderTestLanguage.g:926:3: otherlv_0= 'kw1' ( (lv_attr1_1_0= RULE_ID ) ) ( (lv_attr2_2_0= RULE_ID ) )?
             {
 
             			markLeaf(elementTypeProvider.getQuantityExclusionTest1_Kw1Keyword_0ElementType());
@@ -2226,16 +2529,22 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalContextFinderTestLanguage.g:768:3: ( (lv_attr1_1_0= RULE_ID ) )
-            // PsiInternalContextFinderTestLanguage.g:769:4: (lv_attr1_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:933:3: ( (lv_attr1_1_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:934:4: (lv_attr1_1_0= RULE_ID )
             {
-            // PsiInternalContextFinderTestLanguage.g:769:4: (lv_attr1_1_0= RULE_ID )
-            // PsiInternalContextFinderTestLanguage.g:770:5: lv_attr1_1_0= RULE_ID
+            // PsiInternalContextFinderTestLanguage.g:934:4: (lv_attr1_1_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:935:5: lv_attr1_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getQuantityExclusionTest1_Attr1IDTerminalRuleCall_1_0ElementType());
             				
             lv_attr1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_attr1_1_0);
             				
@@ -2245,7 +2554,7 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             }
 
-            // PsiInternalContextFinderTestLanguage.g:779:3: ( (lv_attr2_2_0= RULE_ID ) )?
+            // PsiInternalContextFinderTestLanguage.g:950:3: ( (lv_attr2_2_0= RULE_ID ) )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -2254,15 +2563,21 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
             }
             switch (alt14) {
                 case 1 :
-                    // PsiInternalContextFinderTestLanguage.g:780:4: (lv_attr2_2_0= RULE_ID )
+                    // PsiInternalContextFinderTestLanguage.g:951:4: (lv_attr2_2_0= RULE_ID )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:780:4: (lv_attr2_2_0= RULE_ID )
-                    // PsiInternalContextFinderTestLanguage.g:781:5: lv_attr2_2_0= RULE_ID
+                    // PsiInternalContextFinderTestLanguage.g:951:4: (lv_attr2_2_0= RULE_ID )
+                    // PsiInternalContextFinderTestLanguage.g:952:5: lv_attr2_2_0= RULE_ID
                     {
 
                     					markLeaf(elementTypeProvider.getQuantityExclusionTest1_Attr2IDTerminalRuleCall_2_0ElementType());
                     				
                     lv_attr2_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_attr2_2_0);
                     				
@@ -2288,24 +2603,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleQuantityExclusionTest1"
 
 
     // $ANTLR start "entryRuleQuantityExclusionTest2"
-    // PsiInternalContextFinderTestLanguage.g:794:1: entryRuleQuantityExclusionTest2 : ruleQuantityExclusionTest2 EOF ;
-    public final void entryRuleQuantityExclusionTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:971:1: entryRuleQuantityExclusionTest2 returns [Boolean current=false] : iv_ruleQuantityExclusionTest2= ruleQuantityExclusionTest2 EOF ;
+    public final Boolean entryRuleQuantityExclusionTest2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleQuantityExclusionTest2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:794:32: ( ruleQuantityExclusionTest2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:795:2: ruleQuantityExclusionTest2 EOF
+            // PsiInternalContextFinderTestLanguage.g:971:64: (iv_ruleQuantityExclusionTest2= ruleQuantityExclusionTest2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:972:2: iv_ruleQuantityExclusionTest2= ruleQuantityExclusionTest2 EOF
             {
              markComposite(elementTypeProvider.getQuantityExclusionTest2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleQuantityExclusionTest2();
+            iv_ruleQuantityExclusionTest2=ruleQuantityExclusionTest2();
 
             state._fsp--;
 
+             current =iv_ruleQuantityExclusionTest2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2317,24 +2638,26 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleQuantityExclusionTest2"
 
 
     // $ANTLR start "ruleQuantityExclusionTest2"
-    // PsiInternalContextFinderTestLanguage.g:800:1: ruleQuantityExclusionTest2 : (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) ) ;
-    public final void ruleQuantityExclusionTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:978:1: ruleQuantityExclusionTest2 returns [Boolean current=false] : (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) ) ;
+    public final Boolean ruleQuantityExclusionTest2() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_attr1_1_0=null;
         Token lv_attr2_2_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:800:27: ( (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) ) )
-            // PsiInternalContextFinderTestLanguage.g:801:2: (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:979:1: ( (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) ) )
+            // PsiInternalContextFinderTestLanguage.g:980:2: (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:801:2: (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) )
-            // PsiInternalContextFinderTestLanguage.g:802:3: otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:980:2: (otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:981:3: otherlv_0= 'kw2' ( (lv_attr1_1_0= RULE_ID ) )? ( (lv_attr2_2_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getQuantityExclusionTest2_Kw2Keyword_0ElementType());
@@ -2343,7 +2666,7 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalContextFinderTestLanguage.g:809:3: ( (lv_attr1_1_0= RULE_ID ) )?
+            // PsiInternalContextFinderTestLanguage.g:988:3: ( (lv_attr1_1_0= RULE_ID ) )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2356,15 +2679,21 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
             }
             switch (alt15) {
                 case 1 :
-                    // PsiInternalContextFinderTestLanguage.g:810:4: (lv_attr1_1_0= RULE_ID )
+                    // PsiInternalContextFinderTestLanguage.g:989:4: (lv_attr1_1_0= RULE_ID )
                     {
-                    // PsiInternalContextFinderTestLanguage.g:810:4: (lv_attr1_1_0= RULE_ID )
-                    // PsiInternalContextFinderTestLanguage.g:811:5: lv_attr1_1_0= RULE_ID
+                    // PsiInternalContextFinderTestLanguage.g:989:4: (lv_attr1_1_0= RULE_ID )
+                    // PsiInternalContextFinderTestLanguage.g:990:5: lv_attr1_1_0= RULE_ID
                     {
 
                     					markLeaf(elementTypeProvider.getQuantityExclusionTest2_Attr1IDTerminalRuleCall_1_0ElementType());
                     				
                     lv_attr1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_attr1_1_0);
                     				
@@ -2377,16 +2706,22 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
             }
 
-            // PsiInternalContextFinderTestLanguage.g:820:3: ( (lv_attr2_2_0= RULE_ID ) )
-            // PsiInternalContextFinderTestLanguage.g:821:4: (lv_attr2_2_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:1005:3: ( (lv_attr2_2_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:1006:4: (lv_attr2_2_0= RULE_ID )
             {
-            // PsiInternalContextFinderTestLanguage.g:821:4: (lv_attr2_2_0= RULE_ID )
-            // PsiInternalContextFinderTestLanguage.g:822:5: lv_attr2_2_0= RULE_ID
+            // PsiInternalContextFinderTestLanguage.g:1006:4: (lv_attr2_2_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:1007:5: lv_attr2_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getQuantityExclusionTest2_Attr2IDTerminalRuleCall_2_0ElementType());
             				
             lv_attr2_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_attr2_2_0);
             				
@@ -2409,24 +2744,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleQuantityExclusionTest2"
 
 
     // $ANTLR start "entryRuleValueExclusionTest1"
-    // PsiInternalContextFinderTestLanguage.g:835:1: entryRuleValueExclusionTest1 : ruleValueExclusionTest1 EOF ;
-    public final void entryRuleValueExclusionTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1026:1: entryRuleValueExclusionTest1 returns [Boolean current=false] : iv_ruleValueExclusionTest1= ruleValueExclusionTest1 EOF ;
+    public final Boolean entryRuleValueExclusionTest1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleValueExclusionTest1 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:835:29: ( ruleValueExclusionTest1 EOF )
-            // PsiInternalContextFinderTestLanguage.g:836:2: ruleValueExclusionTest1 EOF
+            // PsiInternalContextFinderTestLanguage.g:1026:61: (iv_ruleValueExclusionTest1= ruleValueExclusionTest1 EOF )
+            // PsiInternalContextFinderTestLanguage.g:1027:2: iv_ruleValueExclusionTest1= ruleValueExclusionTest1 EOF
             {
              markComposite(elementTypeProvider.getValueExclusionTest1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleValueExclusionTest1();
+            iv_ruleValueExclusionTest1=ruleValueExclusionTest1();
 
             state._fsp--;
 
+             current =iv_ruleValueExclusionTest1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2438,34 +2779,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleValueExclusionTest1"
 
 
     // $ANTLR start "ruleValueExclusionTest1"
-    // PsiInternalContextFinderTestLanguage.g:841:1: ruleValueExclusionTest1 : ( (lv_val_0_0= ruleValueExclusionTestEn1 ) ) ;
-    public final void ruleValueExclusionTest1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1033:1: ruleValueExclusionTest1 returns [Boolean current=false] : ( (lv_val_0_0= ruleValueExclusionTestEn1 ) ) ;
+    public final Boolean ruleValueExclusionTest1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_val_0_0 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:841:24: ( ( (lv_val_0_0= ruleValueExclusionTestEn1 ) ) )
-            // PsiInternalContextFinderTestLanguage.g:842:2: ( (lv_val_0_0= ruleValueExclusionTestEn1 ) )
+            // PsiInternalContextFinderTestLanguage.g:1034:1: ( ( (lv_val_0_0= ruleValueExclusionTestEn1 ) ) )
+            // PsiInternalContextFinderTestLanguage.g:1035:2: ( (lv_val_0_0= ruleValueExclusionTestEn1 ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:842:2: ( (lv_val_0_0= ruleValueExclusionTestEn1 ) )
-            // PsiInternalContextFinderTestLanguage.g:843:3: (lv_val_0_0= ruleValueExclusionTestEn1 )
+            // PsiInternalContextFinderTestLanguage.g:1035:2: ( (lv_val_0_0= ruleValueExclusionTestEn1 ) )
+            // PsiInternalContextFinderTestLanguage.g:1036:3: (lv_val_0_0= ruleValueExclusionTestEn1 )
             {
-            // PsiInternalContextFinderTestLanguage.g:843:3: (lv_val_0_0= ruleValueExclusionTestEn1 )
-            // PsiInternalContextFinderTestLanguage.g:844:4: lv_val_0_0= ruleValueExclusionTestEn1
+            // PsiInternalContextFinderTestLanguage.g:1036:3: (lv_val_0_0= ruleValueExclusionTestEn1 )
+            // PsiInternalContextFinderTestLanguage.g:1037:4: lv_val_0_0= ruleValueExclusionTestEn1
             {
 
             				markComposite(elementTypeProvider.getValueExclusionTest1_ValValueExclusionTestEn1EnumRuleCall_0ElementType());
             			
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleValueExclusionTestEn1();
+            lv_val_0_0=ruleValueExclusionTestEn1();
 
             state._fsp--;
 
 
             				doneComposite();
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
             			
 
             }
@@ -2483,24 +2833,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleValueExclusionTest1"
 
 
     // $ANTLR start "entryRuleValueExclusionTest2"
-    // PsiInternalContextFinderTestLanguage.g:856:1: entryRuleValueExclusionTest2 : ruleValueExclusionTest2 EOF ;
-    public final void entryRuleValueExclusionTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1053:1: entryRuleValueExclusionTest2 returns [Boolean current=false] : iv_ruleValueExclusionTest2= ruleValueExclusionTest2 EOF ;
+    public final Boolean entryRuleValueExclusionTest2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleValueExclusionTest2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:856:29: ( ruleValueExclusionTest2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:857:2: ruleValueExclusionTest2 EOF
+            // PsiInternalContextFinderTestLanguage.g:1053:61: (iv_ruleValueExclusionTest2= ruleValueExclusionTest2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:1054:2: iv_ruleValueExclusionTest2= ruleValueExclusionTest2 EOF
             {
              markComposite(elementTypeProvider.getValueExclusionTest2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleValueExclusionTest2();
+            iv_ruleValueExclusionTest2=ruleValueExclusionTest2();
 
             state._fsp--;
 
+             current =iv_ruleValueExclusionTest2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2512,34 +2868,43 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleValueExclusionTest2"
 
 
     // $ANTLR start "ruleValueExclusionTest2"
-    // PsiInternalContextFinderTestLanguage.g:862:1: ruleValueExclusionTest2 : ( (lv_val_0_0= ruleValueExclusionTestEn2 ) ) ;
-    public final void ruleValueExclusionTest2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1060:1: ruleValueExclusionTest2 returns [Boolean current=false] : ( (lv_val_0_0= ruleValueExclusionTestEn2 ) ) ;
+    public final Boolean ruleValueExclusionTest2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_val_0_0 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:862:24: ( ( (lv_val_0_0= ruleValueExclusionTestEn2 ) ) )
-            // PsiInternalContextFinderTestLanguage.g:863:2: ( (lv_val_0_0= ruleValueExclusionTestEn2 ) )
+            // PsiInternalContextFinderTestLanguage.g:1061:1: ( ( (lv_val_0_0= ruleValueExclusionTestEn2 ) ) )
+            // PsiInternalContextFinderTestLanguage.g:1062:2: ( (lv_val_0_0= ruleValueExclusionTestEn2 ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:863:2: ( (lv_val_0_0= ruleValueExclusionTestEn2 ) )
-            // PsiInternalContextFinderTestLanguage.g:864:3: (lv_val_0_0= ruleValueExclusionTestEn2 )
+            // PsiInternalContextFinderTestLanguage.g:1062:2: ( (lv_val_0_0= ruleValueExclusionTestEn2 ) )
+            // PsiInternalContextFinderTestLanguage.g:1063:3: (lv_val_0_0= ruleValueExclusionTestEn2 )
             {
-            // PsiInternalContextFinderTestLanguage.g:864:3: (lv_val_0_0= ruleValueExclusionTestEn2 )
-            // PsiInternalContextFinderTestLanguage.g:865:4: lv_val_0_0= ruleValueExclusionTestEn2
+            // PsiInternalContextFinderTestLanguage.g:1063:3: (lv_val_0_0= ruleValueExclusionTestEn2 )
+            // PsiInternalContextFinderTestLanguage.g:1064:4: lv_val_0_0= ruleValueExclusionTestEn2
             {
 
             				markComposite(elementTypeProvider.getValueExclusionTest2_ValValueExclusionTestEn2EnumRuleCall_0ElementType());
             			
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleValueExclusionTestEn2();
+            lv_val_0_0=ruleValueExclusionTestEn2();
 
             state._fsp--;
 
 
             				doneComposite();
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
             			
 
             }
@@ -2557,24 +2922,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleValueExclusionTest2"
 
 
     // $ANTLR start "entryRuleNodeExclusion1"
-    // PsiInternalContextFinderTestLanguage.g:877:1: entryRuleNodeExclusion1 : ruleNodeExclusion1 EOF ;
-    public final void entryRuleNodeExclusion1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1080:1: entryRuleNodeExclusion1 returns [Boolean current=false] : iv_ruleNodeExclusion1= ruleNodeExclusion1 EOF ;
+    public final Boolean entryRuleNodeExclusion1() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNodeExclusion1 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:877:24: ( ruleNodeExclusion1 EOF )
-            // PsiInternalContextFinderTestLanguage.g:878:2: ruleNodeExclusion1 EOF
+            // PsiInternalContextFinderTestLanguage.g:1080:56: (iv_ruleNodeExclusion1= ruleNodeExclusion1 EOF )
+            // PsiInternalContextFinderTestLanguage.g:1081:2: iv_ruleNodeExclusion1= ruleNodeExclusion1 EOF
             {
              markComposite(elementTypeProvider.getNodeExclusion1ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNodeExclusion1();
+            iv_ruleNodeExclusion1=ruleNodeExclusion1();
 
             state._fsp--;
 
+             current =iv_ruleNodeExclusion1; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2586,26 +2957,34 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNodeExclusion1"
 
 
     // $ANTLR start "ruleNodeExclusion1"
-    // PsiInternalContextFinderTestLanguage.g:883:1: ruleNodeExclusion1 : ( (otherlv_0= RULE_ID ) ) ;
-    public final void ruleNodeExclusion1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1087:1: ruleNodeExclusion1 returns [Boolean current=false] : ( (otherlv_0= RULE_ID ) ) ;
+    public final Boolean ruleNodeExclusion1() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:883:19: ( ( (otherlv_0= RULE_ID ) ) )
-            // PsiInternalContextFinderTestLanguage.g:884:2: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:1088:1: ( ( (otherlv_0= RULE_ID ) ) )
+            // PsiInternalContextFinderTestLanguage.g:1089:2: ( (otherlv_0= RULE_ID ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:884:2: ( (otherlv_0= RULE_ID ) )
-            // PsiInternalContextFinderTestLanguage.g:885:3: (otherlv_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:1089:2: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalContextFinderTestLanguage.g:1090:3: (otherlv_0= RULE_ID )
             {
-            // PsiInternalContextFinderTestLanguage.g:885:3: (otherlv_0= RULE_ID )
-            // PsiInternalContextFinderTestLanguage.g:886:4: otherlv_0= RULE_ID
+            // PsiInternalContextFinderTestLanguage.g:1090:3: (otherlv_0= RULE_ID )
+            // PsiInternalContextFinderTestLanguage.g:1091:4: otherlv_0= RULE_ID
             {
+
+            				if (!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
 
             				markLeaf(elementTypeProvider.getNodeExclusion1_RefModelCrossReference_0ElementType());
             			
@@ -2629,24 +3008,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNodeExclusion1"
 
 
     // $ANTLR start "entryRuleNodeExclusion2"
-    // PsiInternalContextFinderTestLanguage.g:898:1: entryRuleNodeExclusion2 : ruleNodeExclusion2 EOF ;
-    public final void entryRuleNodeExclusion2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1109:1: entryRuleNodeExclusion2 returns [Boolean current=false] : iv_ruleNodeExclusion2= ruleNodeExclusion2 EOF ;
+    public final Boolean entryRuleNodeExclusion2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNodeExclusion2 = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:898:24: ( ruleNodeExclusion2 EOF )
-            // PsiInternalContextFinderTestLanguage.g:899:2: ruleNodeExclusion2 EOF
+            // PsiInternalContextFinderTestLanguage.g:1109:56: (iv_ruleNodeExclusion2= ruleNodeExclusion2 EOF )
+            // PsiInternalContextFinderTestLanguage.g:1110:2: iv_ruleNodeExclusion2= ruleNodeExclusion2 EOF
             {
              markComposite(elementTypeProvider.getNodeExclusion2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNodeExclusion2();
+            iv_ruleNodeExclusion2=ruleNodeExclusion2();
 
             state._fsp--;
 
+             current =iv_ruleNodeExclusion2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2658,26 +3043,34 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNodeExclusion2"
 
 
     // $ANTLR start "ruleNodeExclusion2"
-    // PsiInternalContextFinderTestLanguage.g:904:1: ruleNodeExclusion2 : ( (otherlv_0= RULE_STRING ) ) ;
-    public final void ruleNodeExclusion2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1116:1: ruleNodeExclusion2 returns [Boolean current=false] : ( (otherlv_0= RULE_STRING ) ) ;
+    public final Boolean ruleNodeExclusion2() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:904:19: ( ( (otherlv_0= RULE_STRING ) ) )
-            // PsiInternalContextFinderTestLanguage.g:905:2: ( (otherlv_0= RULE_STRING ) )
+            // PsiInternalContextFinderTestLanguage.g:1117:1: ( ( (otherlv_0= RULE_STRING ) ) )
+            // PsiInternalContextFinderTestLanguage.g:1118:2: ( (otherlv_0= RULE_STRING ) )
             {
-            // PsiInternalContextFinderTestLanguage.g:905:2: ( (otherlv_0= RULE_STRING ) )
-            // PsiInternalContextFinderTestLanguage.g:906:3: (otherlv_0= RULE_STRING )
+            // PsiInternalContextFinderTestLanguage.g:1118:2: ( (otherlv_0= RULE_STRING ) )
+            // PsiInternalContextFinderTestLanguage.g:1119:3: (otherlv_0= RULE_STRING )
             {
-            // PsiInternalContextFinderTestLanguage.g:906:3: (otherlv_0= RULE_STRING )
-            // PsiInternalContextFinderTestLanguage.g:907:4: otherlv_0= RULE_STRING
+            // PsiInternalContextFinderTestLanguage.g:1119:3: (otherlv_0= RULE_STRING )
+            // PsiInternalContextFinderTestLanguage.g:1120:4: otherlv_0= RULE_STRING
             {
+
+            				if (!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
 
             				markLeaf(elementTypeProvider.getNodeExclusion2_RefModelCrossReference_0ElementType());
             			
@@ -2701,24 +3094,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNodeExclusion2"
 
 
     // $ANTLR start "entryRuleNodeExclusion1List"
-    // PsiInternalContextFinderTestLanguage.g:919:1: entryRuleNodeExclusion1List : ruleNodeExclusion1List EOF ;
-    public final void entryRuleNodeExclusion1List() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1138:1: entryRuleNodeExclusion1List returns [Boolean current=false] : iv_ruleNodeExclusion1List= ruleNodeExclusion1List EOF ;
+    public final Boolean entryRuleNodeExclusion1List() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNodeExclusion1List = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:919:28: ( ruleNodeExclusion1List EOF )
-            // PsiInternalContextFinderTestLanguage.g:920:2: ruleNodeExclusion1List EOF
+            // PsiInternalContextFinderTestLanguage.g:1138:60: (iv_ruleNodeExclusion1List= ruleNodeExclusion1List EOF )
+            // PsiInternalContextFinderTestLanguage.g:1139:2: iv_ruleNodeExclusion1List= ruleNodeExclusion1List EOF
             {
              markComposite(elementTypeProvider.getNodeExclusion1ListElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNodeExclusion1List();
+            iv_ruleNodeExclusion1List=ruleNodeExclusion1List();
 
             state._fsp--;
 
+             current =iv_ruleNodeExclusion1List; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2730,21 +3129,23 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNodeExclusion1List"
 
 
     // $ANTLR start "ruleNodeExclusion1List"
-    // PsiInternalContextFinderTestLanguage.g:925:1: ruleNodeExclusion1List : ( (otherlv_0= RULE_ID ) )+ ;
-    public final void ruleNodeExclusion1List() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1145:1: ruleNodeExclusion1List returns [Boolean current=false] : ( (otherlv_0= RULE_ID ) )+ ;
+    public final Boolean ruleNodeExclusion1List() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:925:23: ( ( (otherlv_0= RULE_ID ) )+ )
-            // PsiInternalContextFinderTestLanguage.g:926:2: ( (otherlv_0= RULE_ID ) )+
+            // PsiInternalContextFinderTestLanguage.g:1146:1: ( ( (otherlv_0= RULE_ID ) )+ )
+            // PsiInternalContextFinderTestLanguage.g:1147:2: ( (otherlv_0= RULE_ID ) )+
             {
-            // PsiInternalContextFinderTestLanguage.g:926:2: ( (otherlv_0= RULE_ID ) )+
+            // PsiInternalContextFinderTestLanguage.g:1147:2: ( (otherlv_0= RULE_ID ) )+
             int cnt16=0;
             loop16:
             do {
@@ -2758,11 +3159,17 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                 switch (alt16) {
             	case 1 :
-            	    // PsiInternalContextFinderTestLanguage.g:927:3: (otherlv_0= RULE_ID )
+            	    // PsiInternalContextFinderTestLanguage.g:1148:3: (otherlv_0= RULE_ID )
             	    {
-            	    // PsiInternalContextFinderTestLanguage.g:927:3: (otherlv_0= RULE_ID )
-            	    // PsiInternalContextFinderTestLanguage.g:928:4: otherlv_0= RULE_ID
+            	    // PsiInternalContextFinderTestLanguage.g:1148:3: (otherlv_0= RULE_ID )
+            	    // PsiInternalContextFinderTestLanguage.g:1149:4: otherlv_0= RULE_ID
             	    {
+
+            	    				if (!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
+            	    			
 
             	    				markLeaf(elementTypeProvider.getNodeExclusion1List_RefModelCrossReference_0ElementType());
             	    			
@@ -2796,24 +3203,30 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNodeExclusion1List"
 
 
     // $ANTLR start "entryRuleNodeExclusion2List"
-    // PsiInternalContextFinderTestLanguage.g:940:1: entryRuleNodeExclusion2List : ruleNodeExclusion2List EOF ;
-    public final void entryRuleNodeExclusion2List() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1167:1: entryRuleNodeExclusion2List returns [Boolean current=false] : iv_ruleNodeExclusion2List= ruleNodeExclusion2List EOF ;
+    public final Boolean entryRuleNodeExclusion2List() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleNodeExclusion2List = null;
+
+
         try {
-            // PsiInternalContextFinderTestLanguage.g:940:28: ( ruleNodeExclusion2List EOF )
-            // PsiInternalContextFinderTestLanguage.g:941:2: ruleNodeExclusion2List EOF
+            // PsiInternalContextFinderTestLanguage.g:1167:60: (iv_ruleNodeExclusion2List= ruleNodeExclusion2List EOF )
+            // PsiInternalContextFinderTestLanguage.g:1168:2: iv_ruleNodeExclusion2List= ruleNodeExclusion2List EOF
             {
              markComposite(elementTypeProvider.getNodeExclusion2ListElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleNodeExclusion2List();
+            iv_ruleNodeExclusion2List=ruleNodeExclusion2List();
 
             state._fsp--;
 
+             current =iv_ruleNodeExclusion2List; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -2825,21 +3238,23 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleNodeExclusion2List"
 
 
     // $ANTLR start "ruleNodeExclusion2List"
-    // PsiInternalContextFinderTestLanguage.g:946:1: ruleNodeExclusion2List : ( (otherlv_0= RULE_STRING ) )+ ;
-    public final void ruleNodeExclusion2List() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1174:1: ruleNodeExclusion2List returns [Boolean current=false] : ( (otherlv_0= RULE_STRING ) )+ ;
+    public final Boolean ruleNodeExclusion2List() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:946:23: ( ( (otherlv_0= RULE_STRING ) )+ )
-            // PsiInternalContextFinderTestLanguage.g:947:2: ( (otherlv_0= RULE_STRING ) )+
+            // PsiInternalContextFinderTestLanguage.g:1175:1: ( ( (otherlv_0= RULE_STRING ) )+ )
+            // PsiInternalContextFinderTestLanguage.g:1176:2: ( (otherlv_0= RULE_STRING ) )+
             {
-            // PsiInternalContextFinderTestLanguage.g:947:2: ( (otherlv_0= RULE_STRING ) )+
+            // PsiInternalContextFinderTestLanguage.g:1176:2: ( (otherlv_0= RULE_STRING ) )+
             int cnt17=0;
             loop17:
             do {
@@ -2853,11 +3268,17 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
 
                 switch (alt17) {
             	case 1 :
-            	    // PsiInternalContextFinderTestLanguage.g:948:3: (otherlv_0= RULE_STRING )
+            	    // PsiInternalContextFinderTestLanguage.g:1177:3: (otherlv_0= RULE_STRING )
             	    {
-            	    // PsiInternalContextFinderTestLanguage.g:948:3: (otherlv_0= RULE_STRING )
-            	    // PsiInternalContextFinderTestLanguage.g:949:4: otherlv_0= RULE_STRING
+            	    // PsiInternalContextFinderTestLanguage.g:1177:3: (otherlv_0= RULE_STRING )
+            	    // PsiInternalContextFinderTestLanguage.g:1178:4: otherlv_0= RULE_STRING
             	    {
+
+            	    				if (!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
+            	    			
 
             	    				markLeaf(elementTypeProvider.getNodeExclusion2List_RefModelCrossReference_0ElementType());
             	    			
@@ -2891,22 +3312,24 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleNodeExclusion2List"
 
 
     // $ANTLR start "ruleValueExclusionTestEn1"
-    // PsiInternalContextFinderTestLanguage.g:961:1: ruleValueExclusionTestEn1 : (enumLiteral_0= 'lit1' ) ;
-    public final void ruleValueExclusionTestEn1() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1196:1: ruleValueExclusionTestEn1 returns [Boolean current=false] : (enumLiteral_0= 'lit1' ) ;
+    public final Boolean ruleValueExclusionTestEn1() throws RecognitionException {
+        Boolean current = false;
+
         Token enumLiteral_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:961:26: ( (enumLiteral_0= 'lit1' ) )
-            // PsiInternalContextFinderTestLanguage.g:962:2: (enumLiteral_0= 'lit1' )
+            // PsiInternalContextFinderTestLanguage.g:1197:1: ( (enumLiteral_0= 'lit1' ) )
+            // PsiInternalContextFinderTestLanguage.g:1198:2: (enumLiteral_0= 'lit1' )
             {
-            // PsiInternalContextFinderTestLanguage.g:962:2: (enumLiteral_0= 'lit1' )
-            // PsiInternalContextFinderTestLanguage.g:963:3: enumLiteral_0= 'lit1'
+            // PsiInternalContextFinderTestLanguage.g:1198:2: (enumLiteral_0= 'lit1' )
+            // PsiInternalContextFinderTestLanguage.g:1199:3: enumLiteral_0= 'lit1'
             {
 
             			markLeaf(elementTypeProvider.getValueExclusionTestEn1_Lit1EnumLiteralDeclarationElementType());
@@ -2928,22 +3351,24 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleValueExclusionTestEn1"
 
 
     // $ANTLR start "ruleValueExclusionTestEn2"
-    // PsiInternalContextFinderTestLanguage.g:974:1: ruleValueExclusionTestEn2 : (enumLiteral_0= 'lit2' ) ;
-    public final void ruleValueExclusionTestEn2() throws RecognitionException {
+    // PsiInternalContextFinderTestLanguage.g:1210:1: ruleValueExclusionTestEn2 returns [Boolean current=false] : (enumLiteral_0= 'lit2' ) ;
+    public final Boolean ruleValueExclusionTestEn2() throws RecognitionException {
+        Boolean current = false;
+
         Token enumLiteral_0=null;
 
         try {
-            // PsiInternalContextFinderTestLanguage.g:974:26: ( (enumLiteral_0= 'lit2' ) )
-            // PsiInternalContextFinderTestLanguage.g:975:2: (enumLiteral_0= 'lit2' )
+            // PsiInternalContextFinderTestLanguage.g:1211:1: ( (enumLiteral_0= 'lit2' ) )
+            // PsiInternalContextFinderTestLanguage.g:1212:2: (enumLiteral_0= 'lit2' )
             {
-            // PsiInternalContextFinderTestLanguage.g:975:2: (enumLiteral_0= 'lit2' )
-            // PsiInternalContextFinderTestLanguage.g:976:3: enumLiteral_0= 'lit2'
+            // PsiInternalContextFinderTestLanguage.g:1212:2: (enumLiteral_0= 'lit2' )
+            // PsiInternalContextFinderTestLanguage.g:1213:3: enumLiteral_0= 'lit2'
             {
 
             			markLeaf(elementTypeProvider.getValueExclusionTestEn2_Lit2EnumLiteralDeclarationElementType());
@@ -2965,7 +3390,7 @@ public class PsiInternalContextFinderTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleValueExclusionTestEn2"
 

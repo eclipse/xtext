@@ -27,10 +27,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cContextsContextDeclParserRuleCall_1_0 = (RuleCall)cContextsAssignment_1.eContents().get(0);
 		
 		//Document:
-		//	packages+=PackageDeclaration | contexts+=ContextDecl*;
+		//	(packages+=PackageDeclaration | contexts+=ContextDecl)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//packages+=PackageDeclaration | contexts+=ContextDecl*
+		//(packages+=PackageDeclaration | contexts+=ContextDecl)*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//packages+=PackageDeclaration
@@ -699,10 +699,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cInitInitParserRuleCall_4_1_1_0 = (RuleCall)cInitAssignment_4_1_1.eContents().get(0);
 		
 		//PropertyContextDecl:
-		//	'context' property=PropertyRef ':' type=TypeExp (init=Init der=Der?? | der=Der init=Init?);
+		//	'context' property=PropertyRef ':' type=TypeExp ((init=Init der=Der?)? | der=Der init=Init?);
 		@Override public ParserRule getRule() { return rule; }
 
-		//'context' property=PropertyRef ':' type=TypeExp (init=Init der=Der?? | der=Der init=Init?)
+		//'context' property=PropertyRef ':' type=TypeExp ((init=Init der=Der?)? | der=Der init=Init?)
 		public Group getGroup() { return cGroup; }
 
 		//'context'
@@ -723,10 +723,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TypeExp
 		public RuleCall getTypeTypeExpParserRuleCall_3_0() { return cTypeTypeExpParserRuleCall_3_0; }
 
-		//(init=Init der=Der?? | der=Der init=Init?)
+		//(init=Init der=Der?)? | der=Der init=Init?
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
-		//init=Init der=Der??
+		//(init=Init der=Der?)?
 		public Group getGroup_4_0() { return cGroup_4_0; }
 
 		//init=Init
@@ -1310,7 +1310,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//(('e' | 'E') ('+' | '-')? INT)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//('e' | 'E')
+		//'e' | 'E'
 		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
 
 		//'e'
@@ -1965,7 +1965,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//{BooleanLiteralExp}
 		public Action getBooleanLiteralExpAction_0() { return cBooleanLiteralExpAction_0; }
 
-		//(isTrue?='true' | 'false')
+		//isTrue?='true' | 'false'
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//isTrue?='true'
@@ -3363,7 +3363,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 
 	
 	//Document:
-	//	packages+=PackageDeclaration | contexts+=ContextDecl*;
+	//	(packages+=PackageDeclaration | contexts+=ContextDecl)*;
 	public DocumentElements getDocumentAccess() {
 		return pDocument;
 	}
@@ -3528,7 +3528,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//PropertyContextDecl:
-	//	'context' property=PropertyRef ':' type=TypeExp (init=Init der=Der?? | der=Der init=Init?);
+	//	'context' property=PropertyRef ':' type=TypeExp ((init=Init der=Der?)? | der=Der init=Init?);
 	public PropertyContextDeclElements getPropertyContextDeclAccess() {
 		return pPropertyContextDecl;
 	}

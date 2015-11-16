@@ -377,23 +377,23 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		////	'as' alias=ValidID
 		////;
 		//ParserRule:
-		//	(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | 'returns' type=TypeRef?) | RuleNameAndParams ('returns'
+		//	(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) | RuleNameAndParams ('returns'
 		//	type=TypeRef)?) (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (','
 		//	hiddenTokens+=[AbstractRule|RuleID])*)? ')')? ':'
 		//	alternatives=Alternatives
 		//	';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | 'returns' type=TypeRef?) | RuleNameAndParams ('returns'
+		//(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) | RuleNameAndParams ('returns'
 		//type=TypeRef)?) (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (','
 		//hiddenTokens+=[AbstractRule|RuleID])*)? ')')? ':' alternatives=Alternatives ';'
 		public Group getGroup() { return cGroup; }
 
-		//(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | 'returns' type=TypeRef?) | RuleNameAndParams ('returns'
-		//type=TypeRef)?)
+		//^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) | RuleNameAndParams ('returns'
+		//type=TypeRef)?
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
-		//^fragment?='fragment' RuleNameAndParams (wildcard?='*' | 'returns' type=TypeRef?)
+		//^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?)
 		public Group getGroup_0_0() { return cGroup_0_0; }
 
 		//^fragment?='fragment'
@@ -405,7 +405,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//RuleNameAndParams
 		public RuleCall getRuleNameAndParamsParserRuleCall_0_0_1() { return cRuleNameAndParamsParserRuleCall_0_0_1; }
 
-		//(wildcard?='*' | 'returns' type=TypeRef?)
+		//wildcard?='*' | ('returns' type=TypeRef)?
 		public Alternatives getAlternatives_0_0_2() { return cAlternatives_0_0_2; }
 
 		//wildcard?='*'
@@ -414,7 +414,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//'*'
 		public Keyword getWildcardAsteriskKeyword_0_0_2_0_0() { return cWildcardAsteriskKeyword_0_0_2_0_0; }
 
-		//'returns' type=TypeRef?
+		//('returns' type=TypeRef)?
 		public Group getGroup_0_0_2_1() { return cGroup_0_0_2_1; }
 
 		//'returns'
@@ -821,7 +821,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//(Assignment | AbstractTerminal) cardinality=('?' | '*' | '+')?
 		public Group getGroup() { return cGroup; }
 
-		//(Assignment | AbstractTerminal)
+		//Assignment | AbstractTerminal
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Assignment
@@ -1091,7 +1091,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//{LiteralCondition}
 		public Action getLiteralConditionAction_0() { return cLiteralConditionAction_0; }
 
-		//(true?='true' | 'false')
+		//true?='true' | 'false'
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//true?='true'
@@ -1370,7 +1370,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//(predicated?='=>' | firstSetPredicated?='->') value=STRING
 		public Group getGroup() { return cGroup; }
 
-		//(predicated?='=>' | firstSetPredicated?='->')
+		//predicated?='=>' | firstSetPredicated?='->'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//predicated?='=>'
@@ -1422,7 +1422,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//arguments+=NamedArgument)* '>')?
 		public Group getGroup() { return cGroup; }
 
-		//(predicated?='=>' | firstSetPredicated?='->')
+		//predicated?='=>' | firstSetPredicated?='->'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//predicated?='=>'
@@ -1743,7 +1743,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//(predicated?='=>' | firstSetPredicated?='->') '(' elements+=Alternatives ')'
 		public Group getGroup() { return cGroup; }
 
-		//(predicated?='=>' | firstSetPredicated?='->')
+		//predicated?='=>' | firstSetPredicated?='->'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//predicated?='=>'
@@ -1806,7 +1806,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//'terminal'
 		public Keyword getTerminalKeyword_0() { return cTerminalKeyword_0; }
 
-		//(^fragment?='fragment' name=ValidID | name=ValidID ('returns' type=TypeRef)?)
+		//^fragment?='fragment' name=ValidID | name=ValidID ('returns' type=TypeRef)?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//^fragment?='fragment' name=ValidID
@@ -2532,7 +2532,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	////	'as' alias=ValidID
 	////;
 	//ParserRule:
-	//	(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | 'returns' type=TypeRef?) | RuleNameAndParams ('returns'
+	//	(^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) | RuleNameAndParams ('returns'
 	//	type=TypeRef)?) (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule|RuleID] (','
 	//	hiddenTokens+=[AbstractRule|RuleID])*)? ')')? ':'
 	//	alternatives=Alternatives

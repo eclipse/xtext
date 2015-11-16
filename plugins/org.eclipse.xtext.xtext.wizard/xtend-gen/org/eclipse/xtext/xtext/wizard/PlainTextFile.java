@@ -19,6 +19,11 @@ public class PlainTextFile extends TextFile {
   @Accessors
   private final CharSequence content;
   
+  public PlainTextFile(final Outlet outlet, final String relativePath, final ProjectDescriptor project, final CharSequence content, final boolean executable) {
+    super(outlet, relativePath, project, executable);
+    this.content = content;
+  }
+  
   @Override
   public String getContent() {
     return this.content.toString();

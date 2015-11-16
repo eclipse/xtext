@@ -39,12 +39,12 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Spielplatz:
-		//	"spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
-		//	familie+=Familie)* "}"?;
+		//	("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
+		//	familie+=Familie)* "}")?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
-		//familie+=Familie)* "}"?
+		//("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
+		//familie+=Familie)* "}")?
 		public Group getGroup() { return cGroup; }
 
 		//"spielplatz"
@@ -425,8 +425,8 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Spielplatz:
-	//	"spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
-	//	familie+=Familie)* "}"?;
+	//	("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
+	//	familie+=Familie)* "}")?;
 	public SpielplatzElements getSpielplatzAccess() {
 		return pSpielplatz;
 	}

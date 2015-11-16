@@ -49,45 +49,52 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleRoot
-entryRuleRoot:
+entryRuleRoot returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getRootElementType()); }
-	ruleRoot
+	iv_ruleRoot=ruleRoot
+	{ $current=$iv_ruleRoot.current; }
 	EOF;
 
 // Rule Root
-ruleRoot:
+ruleRoot returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getRoot_IDListParserRuleCall_0ElementType());
 		}
-		ruleIDList
+		this_IDList_0=ruleIDList
 		{
+			$current = $this_IDList_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getRoot_KWListParserRuleCall_1ElementType());
 		}
-		ruleKWList
+		this_KWList_1=ruleKWList
 		{
+			$current = $this_KWList_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleIDList
-entryRuleIDList:
+entryRuleIDList returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getIDListElementType()); }
-	ruleIDList
+	iv_ruleIDList=ruleIDList
+	{ $current=$iv_ruleIDList.current; }
 	EOF;
 
 // Rule IDList
-ruleIDList:
+ruleIDList returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getIDList_IDListAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -104,6 +111,12 @@ ruleIDList:
 				}
 				lv_ids_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_ids_2_0);
 				}
 			)
@@ -112,18 +125,21 @@ ruleIDList:
 ;
 
 //Entry rule entryRuleKWList
-entryRuleKWList:
+entryRuleKWList returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getKWListElementType()); }
-	ruleKWList
+	iv_ruleKWList=ruleKWList
+	{ $current=$iv_ruleKWList.current; }
 	EOF;
 
 // Rule KWList
-ruleKWList:
+ruleKWList returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getKWList_KWListAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -142,6 +158,12 @@ ruleKWList:
 				{
 					doneLeaf(lv_kw1_2_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)?
 		(
@@ -152,6 +174,12 @@ ruleKWList:
 				lv_kw2_3_0='kw2'
 				{
 					doneLeaf(lv_kw2_3_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?
@@ -164,6 +192,12 @@ ruleKWList:
 				{
 					doneLeaf(lv_kw3_4_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)?
 		(
@@ -175,6 +209,12 @@ ruleKWList:
 				{
 					doneLeaf(lv_kw4_5_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)?
 		(
@@ -185,6 +225,12 @@ ruleKWList:
 				lv_kw5_6_0='kw5'
 				{
 					doneLeaf(lv_kw5_6_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)?

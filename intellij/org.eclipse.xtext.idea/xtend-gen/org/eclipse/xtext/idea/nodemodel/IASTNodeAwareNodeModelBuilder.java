@@ -31,6 +31,8 @@ public interface IASTNodeAwareNodeModelBuilder {
   
   public final static Key<IElementType> TOKEN_TYPE_KEY = Key.<IElementType>create("TOKEN_TYPE_KEY");
   
+  public final static Key<Boolean> HAS_SEMANTIC_ELEMENT_KEY = Key.<Boolean>create("HAS_SEMANTIC_ELEMENT_KEY");
+  
   public abstract Map<ASTNode, INode> getNodesMapping();
   
   public abstract Map<INode, List<ASTNode>> getReverseNodesMapping();

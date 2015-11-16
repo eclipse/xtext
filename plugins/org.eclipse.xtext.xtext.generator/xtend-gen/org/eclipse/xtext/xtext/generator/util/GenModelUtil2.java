@@ -101,25 +101,6 @@ public class GenModelUtil2 {
     throw new RuntimeException(_builder.toString());
   }
   
-  public static String getGenIntLiteral(final EClass clazz, final EStructuralFeature feature, final ResourceSet resourceSet) {
-    final GenFeature genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
-    final GenClass genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
-    GenPackage _genPackage = genClass.getGenPackage();
-    String _packageInterfaceName = _genPackage.getPackageInterfaceName();
-    String _plus = (_packageInterfaceName + ".");
-    String _featureID = genClass.getFeatureID(genFeature);
-    return (_plus + _featureID);
-  }
-  
-  public static String getGenIntLiteral(final EClassifier classifier, final ResourceSet resourceSet) {
-    final GenClassifier genClassifier = GenModelUtil2.getGenClassifier(classifier, resourceSet);
-    GenPackage _genPackage = genClassifier.getGenPackage();
-    String _packageInterfaceName = _genPackage.getPackageInterfaceName();
-    String _plus = (_packageInterfaceName + ".");
-    String _classifierID = genClassifier.getClassifierID();
-    return (_plus + _classifierID);
-  }
-  
   public static GenPackage getGenPackage(final EPackage pkg, final ResourceSet resourceSet) {
     final String nsURI = pkg.getNsURI();
     String location = null;
@@ -233,41 +214,46 @@ public class GenModelUtil2 {
     return genModelResource;
   }
   
-  public static String getGenTypeLiteral(final EClassifier classifier, final ResourceSet resourceSet) {
+  public static String getPackageLiteral() {
+    return "eINSTANCE";
+  }
+  
+  public static String getIntLiteral(final EClass clazz, final EStructuralFeature feature, final ResourceSet resourceSet) {
+    GenClass _genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
+    GenFeature _genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
+    return _genClass.getFeatureID(_genFeature);
+  }
+  
+  public static String getIntLiteral(final EClassifier classifier, final ResourceSet resourceSet) {
+    GenClassifier _genClassifier = GenModelUtil2.getGenClassifier(classifier, resourceSet);
+    return _genClassifier.getClassifierID();
+  }
+  
+  public static String getTypeLiteral(final EClassifier classifier, final ResourceSet resourceSet) {
     final GenClassifier genClassifier = GenModelUtil2.getGenClassifier(classifier, resourceSet);
     GenPackage _genPackage = genClassifier.getGenPackage();
-    String pkg = _genPackage.getPackageInterfaceName();
-    GenPackage _genPackage_1 = genClassifier.getGenPackage();
-    boolean _isLiteralsInterface = _genPackage_1.isLiteralsInterface();
+    boolean _isLiteralsInterface = _genPackage.isLiteralsInterface();
     if (_isLiteralsInterface) {
       String _classifierID = genClassifier.getClassifierID();
-      return ((pkg + ".Literals.") + _classifierID);
+      return ("Literals." + _classifierID);
     } else {
       String _classifierAccessorName = genClassifier.getClassifierAccessorName();
-      String _plus = ((pkg + ".eINSTANCE.get") + _classifierAccessorName);
+      String _plus = ("eINSTANCE.get" + _classifierAccessorName);
       return (_plus + "()");
     }
   }
   
-  public static String getGenTypeLiteral(final EPackage pkg, final ResourceSet resourceSet) {
-    GenPackage _genPackage = GenModelUtil2.getGenPackage(pkg, resourceSet);
-    String _packageInterfaceName = _genPackage.getPackageInterfaceName();
-    return (_packageInterfaceName + ".eINSTANCE");
-  }
-  
-  public static String getGenTypeLiteral(final EStructuralFeature feature, final ResourceSet resourceSet) {
+  public static String getFeatureLiteral(final EStructuralFeature feature, final ResourceSet resourceSet) {
     final GenFeature genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
     GenPackage _genPackage = genFeature.getGenPackage();
-    final String pkg = _genPackage.getPackageInterfaceName();
-    GenPackage _genPackage_1 = genFeature.getGenPackage();
-    boolean _isLiteralsInterface = _genPackage_1.isLiteralsInterface();
+    boolean _isLiteralsInterface = _genPackage.isLiteralsInterface();
     if (_isLiteralsInterface) {
       GenClass _genClass = genFeature.getGenClass();
       String _featureID = _genClass.getFeatureID(genFeature);
-      return ((pkg + ".Literals.") + _featureID);
+      return ("Literals." + _featureID);
     } else {
       String _featureAccessorName = genFeature.getFeatureAccessorName();
-      String _plus = ((pkg + ".eINSTANCE.get") + _featureAccessorName);
+      String _plus = ("eINSTANCE.get" + _featureAccessorName);
       return (_plus + "()");
     }
   }
@@ -279,5 +265,24 @@ public class GenModelUtil2 {
     } else {
       return ((GenDataType) genClassifier).getQualifiedInstanceClassName();
     }
+  }
+  
+  public static String getGetAccessor(final EStructuralFeature feature, final ResourceSet resourceSet) {
+    final GenFeature genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
+    final GenClass genClass = genFeature.getGenClass();
+    boolean _isMapEntry = genClass.isMapEntry();
+    if (_isMapEntry) {
+      GenFeature _mapEntryKeyFeature = genClass.getMapEntryKeyFeature();
+      boolean _equals = Objects.equal(genFeature, _mapEntryKeyFeature);
+      if (_equals) {
+        return "getKey";
+      }
+      GenFeature _mapEntryValueFeature = genClass.getMapEntryValueFeature();
+      boolean _equals_1 = Objects.equal(genFeature, _mapEntryValueFeature);
+      if (_equals_1) {
+        return "getValue";
+      }
+    }
+    return genFeature.getGetAccessor();
   }
 }

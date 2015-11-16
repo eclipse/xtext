@@ -98,7 +98,11 @@ class IdeaResourceSetProvider {
 				return;
 			}
 			ApplicationManager.application.runWriteAction [
-				FileDocumentManager.instance.saveAllDocuments
+				if (!XtextAutoBuilderComponent.TEST_MODE) {
+					// test will run the build in sync with the document event
+					// so we need to suppress the re-entrant save op
+					FileDocumentManager.instance.saveAllDocuments
+				}
 
 				for (uri : localWritten.keySet) {
 					var file = getOrCreateVirtualFile(uri)

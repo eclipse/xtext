@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.model
 
-import com.google.common.collect.Lists
-import java.util.Collections
 import java.util.Map
 import org.eclipse.emf.codegen.util.CodeGenUtil
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
@@ -49,7 +48,7 @@ class JavaFileAccess extends TextFileAccess {
 	@Accessors
 	boolean markedAsGenerated
 	
-	@Accessors(PROTECTED_SETTER)
+	@Accessors(PUBLIC_SETTER)
 	ResourceSet resourceSet
 	
 	protected new(TypeReference typeRef, CodeConfig codeConfig) {
@@ -105,22 +104,22 @@ class JavaFileAccess extends TextFileAccess {
 		true
 	}
 	
-	override getContent() {
-		val sortedImports = Lists.newArrayList(imports.values)
-		Collections.sort(sortedImports)
-		return '''
-			«codeConfig.fileHeader»
-			package «javaType.packageName»«IF appendSemicolons»;«ENDIF»
-			
-			«FOR importName : sortedImports»
-				import «importName»«IF appendSemicolons»;«ENDIF»
-			«ENDFOR»
-			
-			«internalContents»
-		'''
+	override getContent() '''
+		«codeConfig.fileHeader»
+		package «javaType.packageName»«IF appendSemicolons»;«ENDIF»
+
+		«FOR importName : imports.values.toSet.sort»
+			import «importName»«IF appendSemicolons»;«ENDIF»
+		«ENDFOR»
+		
+		«getInternalContent»
+	'''
+	
+	protected def getInternalContent() {
+		internalContents
 	}
 	
-	private static class JavaTypeAwareStringConcatenation extends StringConcatenation {
+	protected static class JavaTypeAwareStringConcatenation extends StringConcatenation {
 		
 		val JavaFileAccess access
 		
@@ -136,6 +135,8 @@ class JavaFileAccess extends TextFileAccess {
 				access.importType(new TypeReference(object))
 			else if (object instanceof EClass && access.resourceSet !== null)
 				access.importType(new TypeReference(object as EClass, access.resourceSet))
+			else if (object instanceof EPackage && access.resourceSet !== null)
+				access.importType(new TypeReference(object as EPackage, access.resourceSet))
 			else
 				object.toString
 		}

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.wizard
 
+import com.google.common.base.Charsets
+import com.google.common.io.Resources
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 @FinalFieldsConstructor
@@ -52,8 +54,22 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			files += file(Outlet.ROOT, 'settings.gradle', settingsGradle)
 			files += file(Outlet.ROOT, 'gradle/source-layout.gradle', sourceLayoutGradle)
 			files += file(Outlet.ROOT, 'gradle/maven-deployment.gradle', mavenDeploymentGradle)
+			if(config.needsGradleWrapper) {
+				files += file(Outlet.ROOT, 'gradlew', loadResource("gradlew/gradlew"), true)
+				files += file(Outlet.ROOT, 'gradlew.bat', loadResource("gradlew/gradlew.bat"))
+				files += file(Outlet.ROOT, 'gradle/wrapper/gradle-wrapper.properties', loadResource("gradlew/gradle-wrapper.properties"))
+				files += binaryFile(Outlet.ROOT, 'gradle/wrapper/gradle-wrapper.jar', class.classLoader.getResource("gradlew/gradle-wrapper.jar"))
+			}
 		}
 		return files
+	}
+	
+	def String getJavaVersion() {
+		config.javaVersion.qualifier	
+	}
+	
+	def private CharSequence loadResource(String resourcePath) {
+		Resources.toString(class.classLoader.getResource(resourcePath), Charsets.ISO_8859_1)
 	}
 
 	override buildGradle() {
@@ -92,8 +108,8 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					group = '«config.baseName»'
 					version = '1.0.0-SNAPSHOT'
 					
-					sourceCompatibility = '1.6'
-					targetCompatibility = '1.6'
+					sourceCompatibility = '«javaVersion»'
+					targetCompatibility = '«javaVersion»'
 					
 					configurations.all {
 						exclude group: 'asm'
@@ -155,8 +171,13 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			}
 		«ENDIF»
 		
-		jar.manifest {
-			attributes 'Bundle-SymbolicName': project.name
+		jar {
+			from('model') {
+				into('model')
+			}
+			manifest {
+				attributes 'Bundle-SymbolicName': project.name
+			}
 		}
 		
 		plugins.withId('war') {
@@ -192,8 +213,8 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					«ENDIF»
 					<xtextVersion>«config.xtextVersion»</xtextVersion>
 					<project.build.sourceEncoding>«config.encoding»</project.build.sourceEncoding>
-					<maven.compiler.source>1.6</maven.compiler.source>
-					<maven.compiler.target>1.6</maven.compiler.target>
+					<maven.compiler.source>«javaVersion»</maven.compiler.source>
+					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 				</properties>
 				<modules>
 					«FOR p : config.enabledProjects.filter[it != this && partOfMavenBuild]»
@@ -270,6 +291,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 										<fileset>
 											«FOR dir : #[Outlet.MAIN_XTEND_GEN, Outlet.TEST_XTEND_GEN].toSet.map[sourceFolder]»
 												<directory>${basedir}/«dir»</directory>
+												<includes>
+													<include>**/*</include>
+												</includes>
 											«ENDFOR»
 										</fileset>
 									</filesets>
@@ -350,28 +374,65 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 									</lifecycleMappingMetadata>
 								</configuration>
 							</plugin>
+							«IF config.needsTychoBuild»
+							<plugin>
+								<!-- 
+									Can be removed after first generator execution
+									https://bugs.eclipse.org/bugs/show_bug.cgi?id=480097
+								-->
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>tycho-compiler-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<configuration>
+									<compilerArgument>-err:-forbidden</compilerArgument>
+								</configuration>
+							</plugin>
+							«ENDIF»
 						</plugins>
-						
 					</pluginManagement>
 				</build>
-				«IF config.xtextVersion.isSnapshot»
-					<repositories>
+				<repositories>
+					<repository>
+						<id>codehaus-snapshots</id>
+						<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+						<url>http://nexus.codehaus.org/snapshots/</url>
+						<releases>
+							<enabled>false</enabled>
+						</releases>
+						<snapshots>
+							<enabled>false</enabled>
+						</snapshots>
+					</repository>
+					«IF config.xtextVersion.isSnapshot»
 						<repository>
 							<id>sonatype-snapshots</id>
 							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 							<releases><enabled>false</enabled></releases>
 							<snapshots><enabled>true</enabled></snapshots>
 						</repository>
-					</repositories>
-					<pluginRepositories>
+					«ENDIF»
+				</repositories>
+				<pluginRepositories>
+					<pluginRepository>
+						<id>codehaus-snapshots</id>
+						<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+						<url>http://nexus.codehaus.org/snapshots/</url>
+						<releases>
+							<enabled>false</enabled>
+						</releases>
+						<snapshots>
+							<enabled>false</enabled>
+						</snapshots>
+					</pluginRepository>
+					«IF config.xtextVersion.isSnapshot»
 						<pluginRepository>
 							<id>sonatype-snapshots</id>
 							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 							<releases><enabled>false</enabled></releases>
 							<snapshots><enabled>true</enabled></snapshots>
 						</pluginRepository>
-					</pluginRepositories>
-				«ENDIF»
+					«ENDIF»
+				</pluginRepositories>
 			'''
 		]
 	}

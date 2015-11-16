@@ -139,18 +139,14 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	'''
 	
 	protected def compileEntryReturns(ParserRule it, AntlrOptions options) {
-		switch it {
-			ParserRule case datatypeRule:
-				'[String current=null]'
-			ParserRule:
-				'[EObject current=null]'
-			default:
-				throw new IllegalStateException("Unexpected rule: " + it)
-		}
+		if (datatypeRule)
+			'[String current=null]'
+		else
+			'''[«currentType» current=null]'''
 	}
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) '''
-		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment)»«ENDIF» returns «compileReturns(options)»
+		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment, currentType)»«ENDIF» returns «compileReturns(options)»
 		@init {
 			enterRule();
 			«compileInitHiddenTokens(options)»
@@ -160,18 +156,17 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 			leaveRule();
 		}'''
 	
-	
 		
 	protected def compileReturns(AbstractRule it, AntlrOptions options) {
 		switch it {
 			EnumRule:
 				'returns [Enumerator current=null]'
-			ParserRule case datatypeRule:
+			ParserRule case originalElement.datatypeRule:
 				'[AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]'
-			ParserRule case isEObjectFragmentRule:
-				'[EObject current=in_current]'
+			ParserRule case originalElement.isEObjectFragmentRule:
+				'''[«currentType» current=in_current]'''
 			ParserRule:
-				'[EObject current=null]'
+				'''[«currentType» current=null]'''
 			default:
 				throw new IllegalStateException("Unexpected rule: " + it)
 		}
@@ -278,7 +273,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 				ParserRule case assigned: 
 					super._ebnf2(it, options, supportActions)
 				EnumRule, 
-				ParserRule case rule.datatypeRule: '''
+				ParserRule case rule.originalElement.datatypeRule: '''
 					«IF options.backtrack»
 					{
 						/* */

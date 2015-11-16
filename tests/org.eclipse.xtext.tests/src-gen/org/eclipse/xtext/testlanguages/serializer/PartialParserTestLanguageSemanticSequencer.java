@@ -4,17 +4,15 @@
 package org.eclipse.xtext.testlanguages.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.AbstractChildren;
 import org.eclipse.xtext.testlanguages.partialParserTestLanguage.Child;
@@ -34,8 +32,13 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	private PartialParserTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == PartialParserTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == PartialParserTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case PartialParserTestLanguagePackage.ABSTRACT_CHILDREN:
 				sequence_AbstractChildren(context, (AbstractChildren) semanticObject); 
 				return; 
@@ -61,91 +64,120 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 				sequence_SomeContainer(context, (SomeContainer) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Content returns AbstractChildren
+	 *     AbstractChildren returns AbstractChildren
+	 *
 	 * Constraint:
 	 *     abstractChildren+=AbstractChild+
 	 */
-	protected void sequence_AbstractChildren(EObject context, AbstractChildren semanticObject) {
+	protected void sequence_AbstractChildren(ISerializationContext context, AbstractChildren semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Child returns Child
+	 *
 	 * Constraint:
 	 *     value=Named
 	 */
-	protected void sequence_Child(EObject context, Child semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, PartialParserTestLanguagePackage.Literals.CHILD__VALUE) == ValueTransient.YES)
+	protected void sequence_Child(ISerializationContext context, Child semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PartialParserTestLanguagePackage.Literals.CHILD__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PartialParserTestLanguagePackage.Literals.CHILD__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getChildAccess().getValueNamedParserRuleCall_3_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Content returns Children
+	 *     Children returns Children
+	 *
 	 * Constraint:
 	 *     (children+=Child children+=Child*)
 	 */
-	protected void sequence_Children(EObject context, Children semanticObject) {
+	protected void sequence_Children(ISerializationContext context, Children semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractChild returns FirstConcrete
+	 *     FirstConcrete returns FirstConcrete
+	 *
 	 * Constraint:
 	 *     (value=Named referencedContainer=[SomeContainer|ID]?)
 	 */
-	protected void sequence_FirstConcrete(EObject context, FirstConcrete semanticObject) {
+	protected void sequence_FirstConcrete(ISerializationContext context, FirstConcrete semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Named returns Named
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Named(EObject context, Named semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, PartialParserTestLanguagePackage.Literals.NAMED__NAME) == ValueTransient.YES)
+	protected void sequence_Named(ISerializationContext context, Named semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PartialParserTestLanguagePackage.Literals.NAMED__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PartialParserTestLanguagePackage.Literals.NAMED__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getNamedAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Nested returns Nested
+	 *
 	 * Constraint:
 	 *     nested+=SomeContainer+
 	 */
-	protected void sequence_Nested(EObject context, Nested semanticObject) {
+	protected void sequence_Nested(ISerializationContext context, Nested semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     AbstractChild returns SecondConcrete
+	 *     SecondConcrete returns SecondConcrete
+	 *
 	 * Constraint:
 	 *     (value=Named referencedChildren+=[Child|ID]?)
 	 */
-	protected void sequence_SecondConcrete(EObject context, SecondConcrete semanticObject) {
+	protected void sequence_SecondConcrete(ISerializationContext context, SecondConcrete semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     SomeContainer returns SomeContainer
+	 *
 	 * Constraint:
 	 *     (name=ID (nested+=Nested | content+=Content)*)
 	 */
-	protected void sequence_SomeContainer(EObject context, SomeContainer semanticObject) {
+	protected void sequence_SomeContainer(ISerializationContext context, SomeContainer semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

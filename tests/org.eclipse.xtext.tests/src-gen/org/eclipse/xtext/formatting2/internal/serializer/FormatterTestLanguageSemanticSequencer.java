@@ -4,19 +4,18 @@
 package org.eclipse.xtext.formatting2.internal.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.FormattertestlanguagePackage;
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList;
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.KWList;
 import org.eclipse.xtext.formatting2.internal.services.FormatterTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 
 @SuppressWarnings("all")
 public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -25,8 +24,13 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private FormatterTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == FormattertestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == FormattertestlanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case FormattertestlanguagePackage.ID_LIST:
 				sequence_IDList(context, (IDList) semanticObject); 
 				return; 
@@ -34,23 +38,34 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_KWList(context, (KWList) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Root returns IDList
+	 *     IDList returns IDList
+	 *
 	 * Constraint:
 	 *     ids+=ID*
 	 */
-	protected void sequence_IDList(EObject context, IDList semanticObject) {
+	protected void sequence_IDList(ISerializationContext context, IDList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns KWList
+	 *     KWList returns KWList
+	 *
 	 * Constraint:
 	 *     (kw1?='kw1'? kw2?='kw2'? kw3?='kw3'? kw4?='kw4'? kw5?='kw5'?)
 	 */
-	protected void sequence_KWList(EObject context, KWList semanticObject) {
+	protected void sequence_KWList(ISerializationContext context, KWList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

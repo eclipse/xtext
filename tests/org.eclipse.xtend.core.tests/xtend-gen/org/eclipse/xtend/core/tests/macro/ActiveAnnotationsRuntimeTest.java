@@ -8,8 +8,6 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -37,8 +35,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.FileProjectConfig;
-import org.eclipse.xtext.workspace.FileWorkspaceConfig;
-import org.eclipse.xtext.workspace.WorkspaceConfigAdapter;
+import org.eclipse.xtext.workspace.ProjectConfigAdapter;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -163,54 +160,47 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   }
   
   public XtextResourceSet compileMacroResourceSet(final Pair<String, String> macroFile, final Pair<String, String> clientFile) {
-    XtextResourceSet _xblockexpression = null;
-    {
-      final URI macroURI = this.copyToDisk(this.macroProject, macroFile);
-      final URI clientURI = this.copyToDisk(this.clientProject, clientFile);
-      FileWorkspaceConfig _fileWorkspaceConfig = new FileWorkspaceConfig(this.workspaceRoot);
-      final Procedure1<FileWorkspaceConfig> _function = new Procedure1<FileWorkspaceConfig>() {
-        @Override
-        public void apply(final FileWorkspaceConfig it) {
-          it.addProject(ActiveAnnotationsRuntimeTest.this.macroProject);
-          it.addProject(ActiveAnnotationsRuntimeTest.this.clientProject);
-          Set<? extends FileProjectConfig> _projects = it.getProjects();
-          final Procedure1<FileProjectConfig> _function = new Procedure1<FileProjectConfig>() {
-            @Override
-            public void apply(final FileProjectConfig it) {
-              it.addSourceFolder("src");
-            }
-          };
-          IterableExtensions.forEach(_projects, _function);
-        }
-      };
-      final FileWorkspaceConfig workspaceConfig = ObjectExtensions.<FileWorkspaceConfig>operator_doubleArrow(_fileWorkspaceConfig, _function);
-      final XtextResourceSet macroResourceSet = this.resourceSetProvider.get();
-      EList<Adapter> _eAdapters = macroResourceSet.eAdapters();
-      WorkspaceConfigAdapter _workspaceConfigAdapter = new WorkspaceConfigAdapter(workspaceConfig);
-      _eAdapters.add(_workspaceConfigAdapter);
-      Class<? extends ActiveAnnotationsRuntimeTest> _class = this.getClass();
-      ClassLoader _classLoader = _class.getClassLoader();
-      macroResourceSet.setClasspathURIContext(_classLoader);
-      macroResourceSet.createResource(macroURI);
-      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
-      EList<Adapter> _eAdapters_1 = resourceSet.eAdapters();
-      WorkspaceConfigAdapter _workspaceConfigAdapter_1 = new WorkspaceConfigAdapter(workspaceConfig);
-      _eAdapters_1.add(_workspaceConfigAdapter_1);
-      resourceSet.createResource(clientURI);
-      final IAcceptor<CompilationTestHelper.Result> _function_1 = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result result) {
-          Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
-          ClassLoader _classLoader = _class.getClassLoader();
-          final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader, result);
-          resourceSet.setClasspathURIContext(classLoader);
-          ActiveAnnotationsRuntimeTest.this.compiler.setJavaCompilerClassPath(classLoader);
-        }
-      };
-      this.compiler.compile(macroResourceSet, _function_1);
-      _xblockexpression = resourceSet;
-    }
-    return _xblockexpression;
+    final URI macroURI = this.copyToDisk(this.macroProject, macroFile);
+    final URI clientURI = this.copyToDisk(this.clientProject, clientFile);
+    File _file = new File(this.workspaceRoot, this.macroProject);
+    FileProjectConfig _fileProjectConfig = new FileProjectConfig(_file);
+    final Procedure1<FileProjectConfig> _function = new Procedure1<FileProjectConfig>() {
+      @Override
+      public void apply(final FileProjectConfig it) {
+        it.addSourceFolder("src");
+      }
+    };
+    final FileProjectConfig macroProjectConfig = ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_fileProjectConfig, _function);
+    File _file_1 = new File(this.workspaceRoot, this.clientProject);
+    FileProjectConfig _fileProjectConfig_1 = new FileProjectConfig(_file_1);
+    final Procedure1<FileProjectConfig> _function_1 = new Procedure1<FileProjectConfig>() {
+      @Override
+      public void apply(final FileProjectConfig it) {
+        it.addSourceFolder("src");
+      }
+    };
+    final FileProjectConfig clientProjectConfig = ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_fileProjectConfig_1, _function_1);
+    final XtextResourceSet macroResourceSet = this.resourceSetProvider.get();
+    ProjectConfigAdapter.install(macroResourceSet, macroProjectConfig);
+    Class<? extends ActiveAnnotationsRuntimeTest> _class = this.getClass();
+    ClassLoader _classLoader = _class.getClassLoader();
+    macroResourceSet.setClasspathURIContext(_classLoader);
+    macroResourceSet.createResource(macroURI);
+    final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+    ProjectConfigAdapter.install(resourceSet, clientProjectConfig);
+    resourceSet.createResource(clientURI);
+    final IAcceptor<CompilationTestHelper.Result> _function_2 = new IAcceptor<CompilationTestHelper.Result>() {
+      @Override
+      public void accept(final CompilationTestHelper.Result result) {
+        Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
+        ClassLoader _classLoader = _class.getClassLoader();
+        final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader, result);
+        resourceSet.setClasspathURIContext(classLoader);
+        ActiveAnnotationsRuntimeTest.this.compiler.setJavaCompilerClassPath(classLoader);
+      }
+    };
+    this.compiler.compile(macroResourceSet, _function_2);
+    return resourceSet;
   }
   
   @Test

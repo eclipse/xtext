@@ -65,18 +65,24 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalIgnoreCaseLexerTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalIgnoreCaseLexerTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -88,24 +94,26 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalIgnoreCaseLexerTestLanguage.g:58:1: ruleModel : (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalIgnoreCaseLexerTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_value_2_0=null;
 
         try {
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:58:10: ( (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) ) )
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:59:2: (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:60:1: ( (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) ) )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:61:2: (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) )
             {
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:59:2: (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) )
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:60:3: otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:61:2: (otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) ) )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:62:3: otherlv_0= 'case' (otherlv_1= 'foo' )? ( (lv_value_2_0= 'CaSe' ) )
             {
 
             			markLeaf(elementTypeProvider.getModel_CaseKeyword_0ElementType());
@@ -114,7 +122,7 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:67:3: (otherlv_1= 'foo' )?
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:69:3: (otherlv_1= 'foo' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -123,7 +131,7 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalIgnoreCaseLexerTestLanguage.g:68:4: otherlv_1= 'foo'
+                    // PsiInternalIgnoreCaseLexerTestLanguage.g:70:4: otherlv_1= 'foo'
                     {
 
                     				markLeaf(elementTypeProvider.getModel_FooKeyword_1ElementType());
@@ -138,11 +146,11 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
 
             }
 
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:76:3: ( (lv_value_2_0= 'CaSe' ) )
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:77:4: (lv_value_2_0= 'CaSe' )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:78:3: ( (lv_value_2_0= 'CaSe' ) )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:79:4: (lv_value_2_0= 'CaSe' )
             {
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:77:4: (lv_value_2_0= 'CaSe' )
-            // PsiInternalIgnoreCaseLexerTestLanguage.g:78:5: lv_value_2_0= 'CaSe'
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:79:4: (lv_value_2_0= 'CaSe' )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:80:5: lv_value_2_0= 'CaSe'
             {
 
             					markLeaf(elementTypeProvider.getModel_ValueCaSeKeyword_2_0ElementType());
@@ -150,6 +158,12 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
             lv_value_2_0=(Token)match(input,8,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_value_2_0);
+            				
+
+            					if (!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -170,7 +184,7 @@ public class PsiInternalIgnoreCaseLexerTestLanguageParser extends AbstractPsiAnt
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 

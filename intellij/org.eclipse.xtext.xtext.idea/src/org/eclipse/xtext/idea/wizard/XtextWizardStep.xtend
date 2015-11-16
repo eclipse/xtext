@@ -2,7 +2,6 @@ package org.eclipse.xtext.idea.wizard
 
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
 import com.intellij.ide.util.projectWizard.WizardContext
-import com.intellij.ide.wizard.CommitStepException
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.options.ConfigurationException
 import com.intellij.openapi.ui.ComboBox
@@ -10,13 +9,14 @@ import javax.swing.JCheckBox
 import javax.swing.JPanel
 import javax.swing.JTextField
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory
-import org.eclipse.xtext.xtext.wizard.BuildSystem
+import static org.eclipse.xtext.xtext.wizard.BuildSystem.*
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions
 import org.eclipse.xtext.xtext.wizard.ProjectLayout
 import org.eclipse.xtext.xtext.wizard.SourceLayout
+import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor
 
 import static java.awt.GridBagConstraints.*
-import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor
+import org.eclipse.xtext.xtext.wizard.BuildSystem
 
 class XtextWizardStep extends ModuleWizardStep {
 	static final Logger LOG = Logger.getInstance(XtextWizardStep.name)
@@ -65,21 +65,17 @@ class XtextWizardStep extends ModuleWizardStep {
 
 			row [separator("Facets")]
 			row [idea = checkBox("Intellij Idea Plugin")]
-			//row [eclipse = checkBox("Eclipse Plugin")]
+			// row [eclipse = checkBox("Eclipse Plugin")]
 			row [web = checkBox("Web Integration")]
 			row [test = checkBox("Testing Support")]
 			row [label(" ")]
 
 			row [separator("Project Settings")]
-			row([label("Build System:")], [
-				indentRight(400)
-				buildSystem = comboBox(BuildSystem.GRADLE, BuildSystem.MAVEN)
-			])
+			row([label("Build System:")], [indentRight(400) buildSystem = comboBox(GRADLE, MAVEN)])
 			row([label("Source Layout:")], [indentRight(400) layout = comboBox(SourceLayout.MAVEN, SourceLayout.PLAIN)])
 
 			row [expand(VERTICAL) label("")]
 		]
-		
 	}
 
 	override updateDataModel() {
@@ -102,19 +98,11 @@ class XtextWizardStep extends ModuleWizardStep {
 	}
 
 	override validate() throws ConfigurationException {
-		println("validate")
 		val superCall = super.validate()
 //		if(eclipse.isSelected && layout.selectedItem == SourceLayout.MAVEN) {
 //			throw new ConfigurationException('''For "Eclipse Plugin" please select Source Layout: «SourceLayout.PLAIN».''')
 //		}
 		return superCall
-	}
-
-	override updateStep() {
-		println("update")
-	}
-
-	override onWizardFinished() throws CommitStepException {
 	}
 
 }

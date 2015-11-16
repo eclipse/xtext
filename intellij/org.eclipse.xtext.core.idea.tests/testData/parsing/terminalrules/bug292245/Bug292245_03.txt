@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug292245TestLanguageFileImpl:a.bug292245testlanguage(0,9)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,9)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,9)
     PsiElement(Model_ERRORKeyword_1_0_ELEMENT_TYPE)('ERROR')(0,5)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ErrorErrorParserRuleCall_1_1_0_ELEMENT_TYPE)(5,9)
       PsiWhiteSpace(' ')(5,6)

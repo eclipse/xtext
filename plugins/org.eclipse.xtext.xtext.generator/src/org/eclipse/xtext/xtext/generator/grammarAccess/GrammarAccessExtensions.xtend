@@ -48,6 +48,7 @@ import static extension java.lang.Character.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.Parameter
 
 /**
  * This API can be used by other templates to generate code
@@ -80,7 +81,7 @@ class GrammarAccessExtensions {
 	}
 
 	/**
-	 * Converts an arbitary string to a valid Java identifier.
+	 * Converts an arbitary string to a valid Java identifier that is valid in an Antlr grammar action context, too.
 	 * The string is split up along the the characters that are not valid as java 
 	 * identifier. The first character of each segments is made upper case which 
 	 * leads to a camel-case style.
@@ -132,7 +133,7 @@ class GrammarAccessExtensions {
 		var up = true
 		val builder = new StringBuilder
 		for (c : text.toCharArray) {
-			val valid = if (start) c.isJavaIdentifierStart else c.isJavaIdentifierPart
+			val valid = c.isValidJavaLatinIdentifier(start)
 			if (valid) {
 				if (start)
 					builder.append(if (uppercaseFirst) c.toUpperCase else c.toLowerCase)
@@ -144,6 +145,21 @@ class GrammarAccessExtensions {
 				up = true
 		}
 		return builder.toString
+	}
+	
+	def boolean isValidJavaLatinIdentifier(char c, boolean start) {
+		var boolean valid = c >= 'A' && c<= 'Z';
+		valid = valid || c >= 'a' && c<= 'z';
+		valid = valid || c.eq('ä') || c.eq('ö') || c.eq('ü') || c.eq('Ä') || c.eq('Ö') || c.eq('Ü');
+		valid = valid || c.eq('_');
+		if (!start) {
+			valid = valid || c>='0' && c<='9';
+		}
+		return valid;
+	}
+	
+	private def static eq(char c1, char c2) {
+		c1 == c2
 	}
 		
 	/** 
@@ -294,6 +310,15 @@ class GrammarAccessExtensions {
 	def String gaRuleAccessor(AbstractRule rule) {
 		rule.gaRuleAccessMethodName + '()'
 	}
+
+	/**
+	 * Returns the invocation of a ParserRule Parameter as Java expression. 
+	 */	
+	def String gaRuleParameterAccessor(Parameter parameter) {
+		val rule = parameter.containingParserRule
+		val index = rule.parameters.indexOf(parameter)
+		return rule.gaRuleAccessor + ".getParameters().get(" + index + "/*" + parameter.name + "*/)"
+	}
 	
 	/**
 	 * Returns the invocation of the rule accessor method as Java statement.
@@ -355,19 +380,27 @@ class GrammarAccessExtensions {
 		switch ele {
 			AbstractElement: ele.gaRuleElementAccessor
 			AbstractRule: ele.gaRuleAccessor
+			Parameter: ele.gaRuleParameterAccessor
 			default: '<error: unknown type ' + ele.eClass.name + '>'
 		}
 	}
 	
 	def String grammarFragmentToString(EObject ele, String prefix) {
+		return serializer.grammarFragmentToString(ele, prefix)
+	}
+
+	/**
+	 * @noreference
+	 */
+	def static String grammarFragmentToString(ISerializer serializer, EObject object, String prefix) {
 		var String s
 		try {
 			val options = SaveOptions.newBuilder.format.options
-			s = serializer.serialize(ele, options)
+			s = serializer.serialize(object, options)
 		} catch (Exception e) {
 			s = e.toString
 		}
-		s = prefix + s.trim.replaceAll('(\\r?\\n)', '$1' + prefix).replaceAll('/\\*', '/ *').replaceAll('\\*/', '* /')
+		s = prefix + s.trim.replaceAll('(\\r?\\n)', '$1' + prefix).replaceAll('/\\*', '/ *').replaceAll('\\*/', '* /').replace("\\u", "\\\\u")
 		return s
 	}
 	
@@ -425,12 +458,6 @@ class GrammarAccessExtensions {
 		options.backtrack && !eAllContentsAsList.typeSelect(UnorderedGroup).empty
 	}
 
-	dispatch def mustBeParenthesized(AbstractElement it) { true }
-
-	dispatch def mustBeParenthesized(Keyword it) { predicated() || firstSetPredicated || cardinality != null }
-
-	dispatch def mustBeParenthesized(RuleCall it) { predicated() || firstSetPredicated || cardinality != null }
-	
 	dispatch def boolean predicated(AbstractElement it) {
 		predicated
 	}
@@ -501,7 +528,7 @@ class GrammarAccessExtensions {
 
 	def toStringLiteral(AbstractElement it) {
 		switch it {
-			RuleCall case rule != null: '''"«rule.name»"'''
+			RuleCall case rule != null: qualifiedNameAsString
 			Keyword: '''"«value.toStringInAntlrAction»"'''
 			default:
 				"null"

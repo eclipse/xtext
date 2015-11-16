@@ -13,6 +13,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.util.JavaVersion
 
 class WizardConfigurationTest {
 
@@ -107,7 +108,8 @@ class WizardConfigurationTest {
 		config.preferredBuildSystem = BuildSystem.MAVEN
 		config.sourceLayout = SourceLayout.MAVEN
 		val pom = config.runtimeProject.files.findFirst[relativePath == "pom.xml"]
-		assertTrue(pom.content.toString.contains("<artifactId>org.example.mydsl</artifactId>"))
+		assertTrue(pom instanceof PomFile)
+		assertTrue((pom as PomFile).content.toString.contains("<artifactId>org.example.mydsl</artifactId>"))
 	}
 	
 	@Test
@@ -312,6 +314,20 @@ class WizardConfigurationTest {
 		assertTrue(parentGradle.contains("targetCompatibility = '1.6'"))
 		allJavaProjects.map[manifest].forEach[
 			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.6"))
+		]
+	}
+	
+	@Test
+	def void allBuildSystemsUseOtherJava() {
+		config.javaVersion = JavaVersion.JAVA8
+		val parentPom = config.parentProject.pom.content
+		assertTrue(parentPom.contains("<maven.compiler.source>1.8</maven.compiler.source>"))
+		assertTrue(parentPom.contains("<maven.compiler.target>1.8</maven.compiler.target>"))
+		val parentGradle = config.parentProject.buildGradle.content
+		assertTrue(parentGradle.contains("sourceCompatibility = '1.8'"))
+		assertTrue(parentGradle.contains("targetCompatibility = '1.8'"))
+		allJavaProjects.map[manifest].forEach[
+			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8"))
 		]
 	}
 	

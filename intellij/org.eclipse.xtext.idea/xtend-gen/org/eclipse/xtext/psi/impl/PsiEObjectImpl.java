@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
@@ -145,13 +146,18 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
   
   @Override
   public String toString() {
-    Class<? extends PsiEObjectImpl> _class = this.getClass();
-    String _name = _class.getName();
-    StringBuilder builder = new StringBuilder(_name);
-    StringBuilder _append = builder.append("(");
-    StringBuilder _append_1 = _append.append(this.elementType);
-    _append_1.append(")");
-    return builder.toString();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("org.eclipse.xtext.psi.impl.PsiEObjectImpl(");
+    _builder.append(this.elementType, "");
+    _builder.append(")");
+    {
+      Class<? extends PsiEObjectImpl> _class = this.getClass();
+      boolean _tripleNotEquals = (_class != PsiEObjectImpl.class);
+      if (_tripleNotEquals) {
+        _builder.append("(\'anonymous\')");
+      }
+    }
+    return _builder.toString();
   }
   
   @Override

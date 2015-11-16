@@ -34,7 +34,8 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
+import org.eclipse.xtext.workspace.IProjectConfigProvider
+import org.eclipse.xtext.generator.GeneratorContext
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -138,9 +139,9 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 					}
 				}
 			}
-			generator.beforeGenerate(resource, fileSystemAccess)
-			generator.doGenerate(resource, fileSystemAccess)
-			generator.afterGenerate(resource, fileSystemAccess)
+			val generatorContext = new GeneratorContext
+			generatorContext.cancelIndicator = request.cancelIndicator
+			generator.generate(resource, fileSystemAccess, generatorContext)
 			// delete everything that was previously generated, but not this time
 			previous.forEach[
 				LOG.info('Deleting stale generated file ' + it)
@@ -150,9 +151,9 @@ import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 		}
 	
 		protected def createFileSystemAccess(IResourceServiceProvider serviceProvider, Resource resource) {
-			val workspaceConfigProvider = serviceProvider.get(IWorkspaceConfigProvider)
-			val workspaceConfig = workspaceConfigProvider?.getWorkspaceConfig(resource.resourceSet)
-			val sourceFolder = workspaceConfig?.findProjectContaining(resource.getURI)?.findSourceFolderContaining(resource.getURI)
+			val projectConfigProvider = serviceProvider.get(IProjectConfigProvider)
+			val projectConfig = projectConfigProvider?.getProjectConfig(resource.resourceSet)
+			val sourceFolder = projectConfig?.findSourceFolderContaining(resource.getURI)
 			new URIBasedFileSystemAccess() => [
 				val outputConfigProvider = serviceProvider.get(IContextualOutputConfigurationProvider)
 				outputConfigurations = outputConfigProvider.getOutputConfigurations(resource).toMap[name]

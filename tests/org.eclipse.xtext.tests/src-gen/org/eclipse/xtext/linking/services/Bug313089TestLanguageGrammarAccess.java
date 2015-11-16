@@ -45,7 +45,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//(bar=Bar | baz=Baz)
+		//bar=Bar | baz=Baz
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//bar=Bar

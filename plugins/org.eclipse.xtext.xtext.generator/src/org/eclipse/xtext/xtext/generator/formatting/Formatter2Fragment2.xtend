@@ -24,7 +24,7 @@ import org.eclipse.xtext.formatting2.FormatterPreferences
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IFormatter2
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -36,19 +36,22 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtext.util.internal.Log
 
-class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
+@Log class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
 	@Inject extension XtextGeneratorNaming
 	@Inject extension GrammarAccessExtensions
-	
+
 	protected def TypeReference getFormatter2Stub(Grammar grammar) {
 		new TypeReference(grammar.runtimeBasePackage + '.formatting2.' + getSimpleName(grammar) + 'Formatter')
 	}
 	
 	override generate() {
+		if (!isGenerateStub)
+			return;
 		val StringConcatenationClient statement =
 			'''binder.bind(«IPreferenceValuesProvider».class).annotatedWith(«FormatterPreferences».class).to(«FormatterPreferenceValuesProvider».class);'''
 		new GuiceModuleAccess.BindingFactory()
@@ -64,36 +67,47 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	protected def doGenerateStubFile() {
-		val xtendFile = fileAccessFactory.createXtendFile(grammar.formatter2Stub)
-		
-		val type2ref = LinkedHashMultimap.<EClass, EReference>create
-		getLocallyAssignedContainmentReferences(language.grammar, type2ref)
-		val inheritedTypes = LinkedHashMultimap.<EClass, EReference>create
-		getInheritedContainmentReferences(language.grammar, inheritedTypes, newHashSet)
-		
-		xtendFile.content = '''
-			class «grammar.formatter2Stub.simpleName» extends «stubSuperClass» {
-				
-				@«Inject» extension «grammar.grammarAccess»
-				«FOR type : type2ref.keySet»
+		if(!isGenerateStub)
+			return;
+			
+		if(isGenerateXtendStub) {
+			val xtendFile = fileAccessFactory.createXtendFile(grammar.formatter2Stub)
+			xtendFile.resourceSet = language.resourceSet
+			
+			val type2ref = LinkedHashMultimap.<EClass, EReference>create
+			getLocallyAssignedContainmentReferences(language.grammar, type2ref)
+			val inheritedTypes = LinkedHashMultimap.<EClass, EReference>create
+			getInheritedContainmentReferences(language.grammar, inheritedTypes, newHashSet)
+			val types = type2ref.keySet
+			
+			xtendFile.content = '''
+				class «grammar.formatter2Stub.simpleName» extends «stubSuperClass» {
+					
+					@«Inject» extension «grammar.grammarAccess»
+					«FOR type : types.take(2)»
 
-					«type.generateFormatMethod(type2ref.get(type), inheritedTypes.containsKey(type))»
-				«ENDFOR»	
-			}
-		'''
-		xtendFile.writeTo(projectConfig.runtime.src)
+						«type.generateFormatMethod(type2ref.get(type), inheritedTypes.containsKey(type))»
+					«ENDFOR»	
+					
+					// TODO: implement for «types.drop(2).map[name].join(", ")»
+				}
+			'''
+			xtendFile.writeTo(projectConfig.runtime.src) 
+		} else {
+			LOG.error(this.class.name +  " has been configured to generate a Java stub, but that's not yet supported. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=481563")	
+		}
 	}
 	
 	protected def StringConcatenationClient generateFormatMethod(EClass clazz, Collection<EReference> containmentRefs, boolean isOverriding) '''
-		«IF isOverriding»override«ELSE»def«ENDIF» dispatch void format(«clazz.typeRef(language)» «clazz.toVarName», extension «IFormattableDocument» document) {
+		«IF isOverriding»override«ELSE»def«ENDIF» dispatch void format(«clazz» «clazz.toVarName», extension «IFormattableDocument» document) {
 			// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
-					for («ref.EReferenceType.typeRef(language)» «ref.toVarName» : «clazz.toVarName».«ref.getGetAccessor()»()) {
-						format(«ref.toVarName», document);
+					for («ref.EReferenceType» «ref.toVarName» : «clazz.toVarName».«ref.getGetAccessor()»()) {
+						«ref.toVarName».format;
 					}
 				«ELSE»
-					format(«clazz.toVarName».«ref.getGetAccessor()»(), document);
+					«clazz.toVarName».«ref.getGetAccessor()».format;
 				«ENDIF»
 			«ENDFOR»
 		}

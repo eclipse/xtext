@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -50,6 +51,7 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.idea.completion.XbaseLookupElementWeigher;
 import org.eclipse.xtext.xbase.idea.completion.XtypeCompletionContributor;
+import org.eclipse.xtext.xbase.idea.imports.DocumentAwareRewritableImportSectionFactory;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -60,7 +62,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
 public class XbaseCompletionContributor extends XtypeCompletionContributor {
   public static class ImportAddingInsertHandler implements InsertHandler<JavaPsiClassReferenceElement> {
     @Inject
-    private RewritableImportSection.Factory factory;
+    private DocumentAwareRewritableImportSectionFactory factory;
     
     @Override
     public void handleInsert(final InsertionContext context, final JavaPsiClassReferenceElement item) {
@@ -257,5 +259,22 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
       }
     };
     JavaClassNameCompletionContributor.addAllClasses(completionParameters, _lessEqualsThan, _prefixMatcher, _function);
+  }
+  
+  @Override
+  protected boolean isKeywordWorthyToPropose(final Keyword keyword) {
+    boolean _and = false;
+    String _value = keyword.getValue();
+    int _length = _value.length();
+    boolean _greaterThan = (_length > 1);
+    if (!_greaterThan) {
+      _and = false;
+    } else {
+      String _value_1 = keyword.getValue();
+      char _charAt = _value_1.charAt(0);
+      boolean _isLetter = Character.isLetter(_charAt);
+      _and = _isLetter;
+    }
+    return _and;
   }
 }

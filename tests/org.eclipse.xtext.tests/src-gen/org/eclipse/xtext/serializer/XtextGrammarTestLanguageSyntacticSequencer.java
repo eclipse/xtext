@@ -53,19 +53,19 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_a.equals(syntax))
+			if (match_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_a.equals(syntax))
 				emit_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_p.equals(syntax))
+			else if (match_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_p.equals(syntax))
 				emit_ParenthesizedAssignableElement_LeftParenthesisKeyword_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParenthesizedElement_LeftParenthesisKeyword_0_a.equals(syntax))
+			else if (match_ParenthesizedElement_LeftParenthesisKeyword_0_a.equals(syntax))
 				emit_ParenthesizedElement_LeftParenthesisKeyword_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParenthesizedElement_LeftParenthesisKeyword_0_p.equals(syntax))
+			else if (match_ParenthesizedElement_LeftParenthesisKeyword_0_p.equals(syntax))
 				emit_ParenthesizedElement_LeftParenthesisKeyword_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_a.equals(syntax))
+			else if (match_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_a.equals(syntax))
 				emit_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_p.equals(syntax))
+			else if (match_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_p.equals(syntax))
 				emit_ParenthesizedTerminalElement_LeftParenthesisKeyword_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_RuleNameAndParams___LeftSquareBracketKeyword_1_0_RightSquareBracketKeyword_1_2__q.equals(syntax))
+			else if (match_RuleNameAndParams___LeftSquareBracketKeyword_1_0_RightSquareBracketKeyword_1_2__q.equals(syntax))
 				emit_RuleNameAndParams___LeftSquareBracketKeyword_1_0_RightSquareBracketKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
@@ -147,7 +147,13 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) '!' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '->' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '.' (rule start)
+	 *     (rule start) (ambiguity) '.' cardinality='*'
+	 *     (rule start) (ambiguity) '.' cardinality='+'
+	 *     (rule start) (ambiguity) '.' cardinality='?'
 	 *     (rule start) (ambiguity) 'EOF' (rule start)
+	 *     (rule start) (ambiguity) 'EOF' cardinality='*'
+	 *     (rule start) (ambiguity) 'EOF' cardinality='+'
+	 *     (rule start) (ambiguity) 'EOF' cardinality='?'
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}
@@ -166,7 +172,13 @@ public class XtextGrammarTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 *     (rule start) (ambiguity) '!' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '->' terminal=TerminalTokenElement
 	 *     (rule start) (ambiguity) '.' ')' (rule start)
+	 *     (rule start) (ambiguity) '.' cardinality='*'
+	 *     (rule start) (ambiguity) '.' cardinality='+'
+	 *     (rule start) (ambiguity) '.' cardinality='?'
 	 *     (rule start) (ambiguity) 'EOF' ')' (rule start)
+	 *     (rule start) (ambiguity) 'EOF' cardinality='*'
+	 *     (rule start) (ambiguity) 'EOF' cardinality='+'
+	 *     (rule start) (ambiguity) 'EOF' cardinality='?'
 	 *     (rule start) (ambiguity) rule=[AbstractRule|RuleID]
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {Alternatives.elements+=}

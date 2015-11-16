@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.ContentAssistCustomizingTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.Model;
@@ -29,8 +27,13 @@ public class ContentAssistCustomizingTestLanguageSemanticSequencer extends Abstr
 	private ContentAssistCustomizingTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == ContentAssistCustomizingTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == ContentAssistCustomizingTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case ContentAssistCustomizingTestPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
@@ -41,39 +44,50 @@ public class ContentAssistCustomizingTestLanguageSemanticSequencer extends Abstr
 				sequence_TypeRef(context, (TypeRef) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
-	 *     types+=Type*
+	 *     types+=Type+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     TypeRef returns TypeRef
+	 *
 	 * Constraint:
 	 *     type=[Type|FQN]
 	 */
-	protected void sequence_TypeRef(EObject context, TypeRef semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ContentAssistCustomizingTestPackage.Literals.TYPE_REF__TYPE) == ValueTransient.YES)
+	protected void sequence_TypeRef(ISerializationContext context, TypeRef semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ContentAssistCustomizingTestPackage.Literals.TYPE_REF__TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContentAssistCustomizingTestPackage.Literals.TYPE_REF__TYPE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTypeRefAccess().getTypeTypeFQNParserRuleCall_0_1(), semanticObject.getType());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns Type
+	 *
 	 * Constraint:
 	 *     ((name=FQN | name='FQN') superType=TypeRef?)
 	 */
-	protected void sequence_Type(EObject context, Type semanticObject) {
+	protected void sequence_Type(ISerializationContext context, Type semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

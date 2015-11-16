@@ -3,7 +3,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath 'org.xtend:xtend-gradle-plugin:0.4.8'
+		classpath 'org.xtend:xtend-gradle-plugin:0.4.12'
 		classpath 'org.xtext:xtext-idea-gradle-plugin:0.3.25'
 	}
 }

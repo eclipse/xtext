@@ -12,8 +12,9 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 
 public interface IWorkspaceConfig {
+	
 	/**
-	 * @return the set of projects belonging to the current workspace
+	 * @return the set of projects belonging to the current workspace. Note that these are usually only populated in the context of an IDE.
 	 */
 	Set<? extends IProjectConfig> getProjects();
 	

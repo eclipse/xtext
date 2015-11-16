@@ -4,11 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
 	<title>Xtext-Web State Machine Example</title>
-	<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.5/lib/codemirror.css" />
-	<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.5/addon/hint/show-hint.css" />
+	<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.7/lib/codemirror.css" />
+	<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.7/addon/hint/show-hint.css" />
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-codemirror.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
+	<script src="webjars/requirejs/2.1.20/require.min.js"></script>
 	<script type="text/javascript">
 		require.config({
 			paths: {
@@ -16,7 +16,7 @@
 			},
 			packages: [{
 				name: "codemirror",
-				location: "webjars/codemirror/5.5",
+				location: "webjars/codemirror/5.7",
 				main: "lib/codemirror"
 			}]
 		});
@@ -29,7 +29,11 @@
 				editor.xtextServices.revertResource();
 			});
 			$("#generate-button").click(function() {
-				window.open('http://' + location.host + '/xtext-service/generate?resource=example.statemachine');
+				window.open('http://' + location.host + '/xtext-service/generate?resource=' + editor.xtextServices.options.resourceId);
+			});
+			$("#change-resource").change(function() {
+				var resourceId = $("#change-resource option:selected").attr("value");
+				editor.xtextServices.serviceBuilder.changeResource(resourceId);
 			});
 		});
 	</script>
@@ -38,7 +42,7 @@
 
 <div class="container">
 	<div id="xtext-editor"
-		data-editor-resource-id="example.statemachine"
+		data-editor-resource-id="example1.statemachine"
 		data-editor-dirty-element="dirty-indicator"
 		data-editor-enable-save-action="true"
 		data-editor-enable-formatting-action="true"
@@ -51,6 +55,10 @@
 		<button id="save-button">Save</button>
 		<button id="revert-button">Revert</button>
 		<button id="generate-button">Generate</button>
+		<select id="change-resource">
+			<option value="example1.statemachine">Example 1</option>
+			<option value="example2.statemachine">Example 2</option>
+		</select>
 	</div>
 </div>
 

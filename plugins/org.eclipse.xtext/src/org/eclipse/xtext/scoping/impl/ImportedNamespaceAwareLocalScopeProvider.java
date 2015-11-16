@@ -161,7 +161,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		if (Strings.isEmpty(namespace))
 			return null;
 		QualifiedName importedNamespace = qualifiedNameConverter.toQualifiedName(namespace);
-		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
+		if (importedNamespace == null || importedNamespace.isEmpty()) {
 			return null;
 		}
 		boolean hasWildCard = ignoreCase ? 
@@ -191,7 +191,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		boolean ignoreCase = isIgnoreCase(reference);
 		final List<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context, ignoreCase);
 		if (!namespaceResolvers.isEmpty()) {
-			if (isRelativeImport() && name!=null) {
+			if (isRelativeImport() && name!=null && !name.isEmpty()) {
 				ImportNormalizer localNormalizer = doCreateImportNormalizer(name, true, ignoreCase); 
 				result = createImportScope(result, singletonList(localNormalizer), allDescriptions, reference.getEReferenceType(), isIgnoreCase(reference));
 			}

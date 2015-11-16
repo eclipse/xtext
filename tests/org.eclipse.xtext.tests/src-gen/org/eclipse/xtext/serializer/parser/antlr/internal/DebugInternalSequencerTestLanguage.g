@@ -37,7 +37,9 @@ ruleModel :
 	ruleNullValueInterpreted |
 	ruleNullCrossRefGenerated |
 	ruleNullCrossRefInterpreted |
-	ruleFragmentCaller
+	ruleFragmentCaller |
+	ruleParameterCaller |
+	ruleParameterDelegation
 ;
 
 // Rule SimpleGroup
@@ -381,6 +383,66 @@ ruleFragmentCaller :
 // Rule Fragment1
 ruleFragment1 :
 	RULE_ID
+;
+
+// Rule ParameterCaller
+ruleParameterCaller :
+	'#34' (
+		'kw1' norm3_Parameterized |
+		'kw2' norm1_Parameterized |
+		'kw3' norm2_Parameterized |
+		'kw4' ruleParameterized
+	)
+;
+
+// Rule Parameterized
+ruleParameterized :
+	'kwp2' RULE_ID
+;
+
+// Rule Parameterized
+norm1_Parameterized :
+	'kwp1' RULE_ID
+;
+
+// Rule Parameterized
+norm2_Parameterized :
+	'kwp2' RULE_ID (
+		'kwp3' RULE_ID
+	)?
+;
+
+// Rule Parameterized
+norm3_Parameterized :
+	'kwp1' RULE_ID
+;
+
+// Rule ParameterDelegation
+ruleParameterDelegation :
+	'#35' (
+		'kw1' norm3_Delegation |
+		'kw2' norm1_Delegation
+	)
+;
+
+// Rule Delegation
+ruleDelegation :
+	RULE_INT
+;
+
+// Rule Delegation
+norm1_Delegation :
+	'kwd' ruleDelegation ruleDelegation?
+;
+
+// Rule Delegation
+norm2_Delegation :
+	RULE_ID
+;
+
+// Rule Delegation
+norm3_Delegation :
+	'kwd' norm2_Delegation norm2_Delegation?
 ;
 
 // Rule DefEnum1

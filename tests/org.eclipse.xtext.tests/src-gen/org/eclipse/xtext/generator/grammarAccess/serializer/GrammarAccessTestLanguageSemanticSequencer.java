@@ -4,21 +4,20 @@
 package org.eclipse.xtext.generator.grammarAccess.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AModel;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AType;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AsubpackagePackage;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.emptyPackage.subsubpackage.AnotherType;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.emptyPackage.subsubpackage.SubsubpackagePackage;
 import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 
 @SuppressWarnings("all")
 public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -27,8 +26,13 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	private GrammarAccessTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == AsubpackagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == AsubpackagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case AsubpackagePackage.AMODEL:
 				sequence_Root(context, (AModel) semanticObject); 
 				return; 
@@ -36,37 +40,52 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 				sequence_AType(context, (AType) semanticObject); 
 				return; 
 			}
-		else if(semanticObject.eClass().getEPackage() == SubsubpackagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+		else if (epackage == SubsubpackagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case SubsubpackagePackage.ANOTHER_TYPE:
 				sequence_AnotherType(context, (AnotherType) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Type returns AType
+	 *     AType returns AType
+	 *
 	 * Constraint:
 	 *     {AType}
 	 */
-	protected void sequence_AType(EObject context, AType semanticObject) {
+	protected void sequence_AType(ISerializationContext context, AType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns AnotherType
+	 *     AnotherType returns AnotherType
+	 *
 	 * Constraint:
 	 *     {AnotherType}
 	 */
-	protected void sequence_AnotherType(EObject context, AnotherType semanticObject) {
+	protected void sequence_AnotherType(ISerializationContext context, AnotherType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Root returns AModel
+	 *
 	 * Constraint:
 	 *     elements+=Type+
 	 */
-	protected void sequence_Root(EObject context, AModel semanticObject) {
+	protected void sequence_Root(ISerializationContext context, AModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

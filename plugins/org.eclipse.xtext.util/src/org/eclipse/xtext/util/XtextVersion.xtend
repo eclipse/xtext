@@ -48,8 +48,12 @@ class XtextVersion {
 		version.endsWith("-SNAPSHOT")
 	}
 	
+	def isStable() {
+		return !isSnapshot && !version.matches("\\d+\\.\\d+(\\.\\d+)+")
+	}
+	
 	def getXtendGradlePluginVersion() {
-		'0.4.8'
+		'0.4.12'
 	}
 	
 	def getXtextGradlePluginVersion() {

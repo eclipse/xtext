@@ -8,14 +8,19 @@
 package org.eclipse.xtext.generator;
 
 import com.google.common.annotations.Beta;
+import com.google.common.base.Objects;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -33,8 +38,22 @@ public interface IShouldGenerate {
     
     @Override
     public boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator) {
-      List<Issue> _validate = this.resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, cancelIndicator);
-      return _validate.isEmpty();
+      EList<Resource.Diagnostic> _errors = resource.getErrors();
+      boolean _isEmpty = _errors.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        return false;
+      }
+      final List<Issue> issues = this.resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, cancelIndicator);
+      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
+        @Override
+        public Boolean apply(final Issue it) {
+          Severity _severity = it.getSeverity();
+          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
+        }
+      };
+      boolean _exists = IterableExtensions.<Issue>exists(issues, _function);
+      return (!_exists);
     }
   }
   
@@ -47,7 +66,7 @@ public interface IShouldGenerate {
   }
   
   /**
-   * whether code should be generated for this resource
+   * whether code should be generated for this resource.
    */
   public abstract boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator);
 }

@@ -631,7 +631,7 @@ protected class TwoOptions_TwooptionsKeyword_0 extends KeywordToken  {
 
 }
 
-// ("one" one=ID | "two" two=ID)
+// "one" one=ID | "two" two=ID
 protected class TwoOptions_Alternatives_1 extends AlternativesToken {
 
 	public TwoOptions_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

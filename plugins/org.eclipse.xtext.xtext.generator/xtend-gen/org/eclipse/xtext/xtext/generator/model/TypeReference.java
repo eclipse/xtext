@@ -8,12 +8,14 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Splitter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -23,9 +25,8 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @Accessors
@@ -36,26 +37,26 @@ public class TypeReference {
     return new TypeReference(name, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
   
+  /**
+   * @deprecated this method is available for backwards compatibility reasons
+   */
+  @Deprecated
+  public static TypeReference guessTypeRef(final String name, final TypeReference... arguments) {
+    return new TypeReference(name, (List<TypeReference>)Conversions.doWrapArray(arguments), false);
+  }
+  
   public static TypeReference typeRef(final Class<?> clazz, final TypeReference... arguments) {
     return new TypeReference(clazz, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
   
-  public static TypeReference typeRef(final EClass clazz, final ILanguageConfig language, final EClass... arguments) {
+  public static TypeReference typeRef(final EClass clazz, final IXtextGeneratorLanguage language) {
     ResourceSet _resourceSet = language.getResourceSet();
-    final Function1<EClass, TypeReference> _function = new Function1<EClass, TypeReference>() {
-      @Override
-      public TypeReference apply(final EClass it) {
-        ResourceSet _resourceSet = language.getResourceSet();
-        return new TypeReference(it, _resourceSet);
-      }
-    };
-    List<TypeReference> _map = ListExtensions.<EClass, TypeReference>map(((List<EClass>)Conversions.doWrapArray(arguments)), _function);
-    return new TypeReference(clazz, _resourceSet, _map);
+    return new TypeReference(clazz, _resourceSet);
   }
   
-  private final static Pattern PACKAGE_MATCHER = Pattern.compile("[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*");
+  private final static Pattern PACKAGE_MATCHER = Pattern.compile("([a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*)?");
   
-  private final static Pattern CLASS_MATCHER = Pattern.compile("[A-Z][a-zA-Z0-9_]*(\\.[A-Z][a-zA-Z0-9_]*)*");
+  private final static Pattern CLASS_MATCHER = Pattern.compile("[a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*");
   
   private final String packageName;
   
@@ -68,7 +69,11 @@ public class TypeReference {
   }
   
   public TypeReference(final String qualifiedName, final List<TypeReference> arguments) {
-    this(TypeReference.getPackageName(qualifiedName), TypeReference.getClassName(qualifiedName), arguments);
+    this(qualifiedName, arguments, true);
+  }
+  
+  private TypeReference(final String qualifiedName, final List<TypeReference> arguments, final boolean strict) {
+    this(TypeReference.getPackageName(qualifiedName, strict), TypeReference.getClassName(qualifiedName, strict), arguments);
   }
   
   public TypeReference(final String packageName, final String className) {
@@ -161,47 +166,79 @@ public class TypeReference {
   }
   
   public TypeReference(final EClass clazz, final ResourceSet resourceSet) {
-    this(clazz, resourceSet, null);
+    this(TypeReference.getQualifiedName(clazz, resourceSet));
   }
   
-  public TypeReference(final EClass clazz, final ResourceSet resourceSet, final List<TypeReference> arguments) {
-    this(TypeReference.getQualifiedName(clazz, resourceSet), arguments);
+  public TypeReference(final EPackage epackage, final ResourceSet resourceSet) {
+    this(TypeReference.getQualifiedName(epackage, resourceSet));
   }
   
-  private static String getPackageName(final String qualifiedName) {
-    int packageEnd = qualifiedName.length();
-    for (int i = (qualifiedName.length() - 1); (i >= 0); i--) {
-      char _charAt = qualifiedName.charAt(i);
-      boolean _matches = TypeReference.matches(_charAt, '.');
-      if (_matches) {
-        char _charAt_1 = qualifiedName.charAt((i + 1));
-        boolean _isLowerCase = Character.isLowerCase(_charAt_1);
-        if (_isLowerCase) {
-          return qualifiedName.substring(0, packageEnd);
+  private static String getPackageName(final String qualifiedName, final boolean strict) {
+    Splitter _on = Splitter.on(".");
+    Iterable<String> _split = _on.split(qualifiedName);
+    final List<String> segments = IterableExtensions.<String>toList(_split);
+    int _size = segments.size();
+    boolean _equals = (_size == 1);
+    if (_equals) {
+      return "";
+    }
+    if (strict) {
+      int _length = ((Object[])Conversions.unwrapArray(segments, Object.class)).length;
+      int _minus = (_length - 1);
+      final List<String> packageSegments = segments.subList(0, _minus);
+      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+        @Override
+        public Boolean apply(final String it) {
+          char _charAt = it.charAt(0);
+          return Boolean.valueOf(Character.isUpperCase(_charAt));
+        }
+      };
+      Iterable<String> _filter = IterableExtensions.<String>filter(packageSegments, _function);
+      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        throw new IllegalArgumentException((("Cannot determine the package name of \'" + qualifiedName) + "\'. Please use the TypeReference(packageName, className) constructor"));
+      }
+      return IterableExtensions.join(packageSegments, ".");
+    } else {
+      int _length_1 = ((Object[])Conversions.unwrapArray(segments, Object.class)).length;
+      int _minus_1 = (_length_1 - 1);
+      List<String> packageSegments_1 = segments.subList(0, _minus_1);
+      while ((!packageSegments_1.isEmpty())) {
+        String _last = IterableExtensions.<String>last(packageSegments_1);
+        char _charAt = _last.charAt(0);
+        boolean _isUpperCase = Character.isUpperCase(_charAt);
+        if (_isUpperCase) {
+          final List<String> _converted_packageSegments_1 = (List<String>)packageSegments_1;
+          int _length_2 = ((Object[])Conversions.unwrapArray(_converted_packageSegments_1, Object.class)).length;
+          int _minus_2 = (_length_2 - 1);
+          List<String> _subList = packageSegments_1.subList(0, _minus_2);
+          packageSegments_1 = _subList;
         } else {
-          packageEnd = i;
+          return IterableExtensions.join(packageSegments_1, ".");
         }
       }
+      return "";
     }
-    return null;
   }
   
-  private static String getClassName(final String qualifiedName) {
-    int classStart = qualifiedName.length();
-    for (int i = (qualifiedName.length() - 1); (i >= 0); i--) {
-      char _charAt = qualifiedName.charAt(i);
-      boolean _matches = TypeReference.matches(_charAt, '.');
-      if (_matches) {
-        char _charAt_1 = qualifiedName.charAt((i + 1));
-        boolean _isLowerCase = Character.isLowerCase(_charAt_1);
-        if (_isLowerCase) {
-          return qualifiedName.substring(classStart);
-        } else {
-          classStart = (i + 1);
-        }
+  private static String getClassName(final String qualifiedName, final boolean strict) {
+    String _xblockexpression = null;
+    {
+      final String packageName = TypeReference.getPackageName(qualifiedName, strict);
+      String _xifexpression = null;
+      boolean _isEmpty = packageName.isEmpty();
+      if (_isEmpty) {
+        _xifexpression = qualifiedName;
+      } else {
+        int _length = packageName.length();
+        int _plus = (_length + 1);
+        int _length_1 = qualifiedName.length();
+        _xifexpression = qualifiedName.substring(_plus, _length_1);
       }
+      _xblockexpression = _xifexpression;
     }
-    return null;
+    return _xblockexpression;
   }
   
   private static String getQualifiedName(final EClass clazz, final ResourceSet resourceSet) {
@@ -219,8 +256,9 @@ public class TypeReference {
     return _xifexpression;
   }
   
-  private static boolean matches(final char c1, final char c2) {
-    return (c1 == c2);
+  private static String getQualifiedName(final EPackage epackage, final ResourceSet resourceSet) {
+    GenPackage _genPackage = GenModelUtil2.getGenPackage(epackage, resourceSet);
+    return _genPackage.getQualifiedPackageInterfaceName();
   }
   
   @Override
@@ -250,6 +288,16 @@ public class TypeReference {
     String _plus = (_replace + "/");
     String _head = IterableExtensions.<String>head(this.simpleNames);
     return (_plus + _head);
+  }
+  
+  public String getJavaPath() {
+    String _path = this.getPath();
+    return (_path + ".java");
+  }
+  
+  public String getXtendPath() {
+    String _path = this.getPath();
+    return (_path + ".xtend");
   }
   
   @Pure

@@ -22,7 +22,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
@@ -57,7 +56,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//=> ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
 		public Group getGroup_0_1() { return cGroup_0_1; }
 		
-		//({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)
+		//{JvmGenericArrayTypeReference.componentType=current} ArrayBrackets
 		public Group getGroup_0_1_0() { return cGroup_0_1_0; }
 		
 		//{JvmGenericArrayTypeReference.componentType=current}
@@ -240,7 +239,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//=> ({JvmInnerTypeReference.outer=current} '.')
 		public Group getGroup_1_4_0() { return cGroup_1_4_0; }
 		
-		//({JvmInnerTypeReference.outer=current} '.')
+		//{JvmInnerTypeReference.outer=current} '.'
 		public Group getGroup_1_4_0_0() { return cGroup_1_4_0_0; }
 		
 		//{JvmInnerTypeReference.outer=current}
@@ -616,8 +615,8 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 		
-		//(static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' |
-		//memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard)
+		//static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' |
+		//memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] | importedNamespace=QualifiedNameWithWildcard
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 		
 		//static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedNameInStaticImport] (wildcard?='*' |
@@ -645,7 +644,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedNameInStaticImport
 		public RuleCall getImportedTypeJvmDeclaredTypeQualifiedNameInStaticImportParserRuleCall_1_0_2_0_1() { return cImportedTypeJvmDeclaredTypeQualifiedNameInStaticImportParserRuleCall_1_0_2_0_1; }
 		
-		//(wildcard?='*' | memberName=ValidID)
+		//wildcard?='*' | memberName=ValidID
 		public Alternatives getAlternatives_1_0_3() { return cAlternatives_1_0_3; }
 		
 		//wildcard?='*'
@@ -685,10 +684,10 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//QualifiedNameInStaticImport:
-		//	ValidID '.'+;
+		//	(ValidID '.')+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ValidID '.'+
+		//(ValidID '.')+
 		public Group getGroup() { return cGroup; }
 		
 		//ValidID
@@ -943,7 +942,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//QualifiedNameInStaticImport:
-	//	ValidID '.'+;
+	//	(ValidID '.')+;
 	public QualifiedNameInStaticImportElements getQualifiedNameInStaticImportAccess() {
 		return pQualifiedNameInStaticImport;
 	}

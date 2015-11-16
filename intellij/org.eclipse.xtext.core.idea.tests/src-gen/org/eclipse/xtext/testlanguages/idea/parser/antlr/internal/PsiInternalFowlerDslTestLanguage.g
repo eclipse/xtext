@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleStatemachine
-entryRuleStatemachine:
+entryRuleStatemachine returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getStatemachineElementType()); }
-	ruleStatemachine
+	iv_ruleStatemachine=ruleStatemachine
+	{ $current=$iv_ruleStatemachine.current; }
 	EOF;
 
 // Rule Statemachine
-ruleStatemachine:
+ruleStatemachine returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getStatemachine_EventsKeyword_0ElementType());
@@ -72,6 +74,10 @@ ruleStatemachine:
 				lv_events_1_0=ruleEvent
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -97,6 +103,10 @@ ruleStatemachine:
 				lv_commands_4_0=ruleCommand
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -115,6 +125,10 @@ ruleStatemachine:
 				lv_states_6_0=ruleState
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -122,13 +136,15 @@ ruleStatemachine:
 ;
 
 //Entry rule entryRuleEvent
-entryRuleEvent:
+entryRuleEvent returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getEventElementType()); }
-	ruleEvent
+	iv_ruleEvent=ruleEvent
+	{ $current=$iv_ruleEvent.current; }
 	EOF;
 
 // Rule Event
-ruleEvent:
+ruleEvent returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -139,6 +155,12 @@ ruleEvent:
 				{
 					doneLeaf(lv_resetting_0_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)?
 		(
@@ -147,6 +169,12 @@ ruleEvent:
 					markLeaf(elementTypeProvider.getEvent_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -159,6 +187,12 @@ ruleEvent:
 				}
 				lv_code_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_code_2_0);
 				}
 			)
@@ -167,13 +201,15 @@ ruleEvent:
 ;
 
 //Entry rule entryRuleCommand
-entryRuleCommand:
+entryRuleCommand returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getCommandElementType()); }
-	ruleCommand
+	iv_ruleCommand=ruleCommand
+	{ $current=$iv_ruleCommand.current; }
 	EOF;
 
 // Rule Command
-ruleCommand:
+ruleCommand returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -181,6 +217,12 @@ ruleCommand:
 					markLeaf(elementTypeProvider.getCommand_NameIDTerminalRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_0_0);
 				}
@@ -193,6 +235,12 @@ ruleCommand:
 				}
 				lv_code_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_code_1_0);
 				}
 			)
@@ -201,13 +249,15 @@ ruleCommand:
 ;
 
 //Entry rule entryRuleState
-entryRuleState:
+entryRuleState returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getStateElementType()); }
-	ruleState
+	iv_ruleState=ruleState
+	{ $current=$iv_ruleState.current; }
 	EOF;
 
 // Rule State
-ruleState:
+ruleState returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getState_StateKeyword_0ElementType());
@@ -222,6 +272,12 @@ ruleState:
 					markLeaf(elementTypeProvider.getState_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_1_0);
 				}
@@ -244,6 +300,12 @@ ruleState:
 			}
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getState_ActionsCommandCrossReference_2_2_0ElementType());
 					}
@@ -269,6 +331,10 @@ ruleState:
 				lv_transitions_6_0=ruleTransition
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -283,16 +349,24 @@ ruleState:
 ;
 
 //Entry rule entryRuleTransition
-entryRuleTransition:
+entryRuleTransition returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTransitionElementType()); }
-	ruleTransition
+	iv_ruleTransition=ruleTransition
+	{ $current=$iv_ruleTransition.current; }
 	EOF;
 
 // Rule Transition
-ruleTransition:
+ruleTransition returns [Boolean current=false]
+:
 	(
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getTransition_EventEventCrossReference_0_0ElementType());
 				}
@@ -311,6 +385,12 @@ ruleTransition:
 		}
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getTransition_StateStateCrossReference_2_0ElementType());
 				}

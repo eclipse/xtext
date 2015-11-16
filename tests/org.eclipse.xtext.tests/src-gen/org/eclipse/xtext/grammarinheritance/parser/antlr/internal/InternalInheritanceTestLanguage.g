@@ -95,7 +95,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
+        		"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.ID");
 	    }
 
 )
@@ -164,7 +164,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
+        		"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.ID");
 	    }
 
 )
@@ -177,7 +177,7 @@ ruleElement returns [EObject current=null]
 
 
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_ID : ('a'..'z')+;
 
 RULE_INT : ('0'..'9')+;
 

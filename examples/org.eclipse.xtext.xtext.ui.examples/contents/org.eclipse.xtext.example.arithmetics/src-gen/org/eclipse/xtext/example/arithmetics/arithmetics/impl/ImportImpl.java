@@ -5,12 +5,14 @@ package org.eclipse.xtext.example.arithmetics.arithmetics.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
+import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +22,7 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.ImportImpl#getModule <em>Module</em>}</li>
  * </ul>
  *
  * @generated
@@ -28,24 +30,14 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Import;
 public class ImportImpl extends MinimalEObjectImpl.Container implements Import
 {
   /**
-   * The default value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
+   * The cached value of the '{@link #getModule() <em>Module</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImportedNamespace()
+   * @see #getModule()
    * @generated
    * @ordered
    */
-  protected static final String IMPORTED_NAMESPACE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getImportedNamespace()
-   * @generated
-   * @ordered
-   */
-  protected String importedNamespace = IMPORTED_NAMESPACE_EDEFAULT;
+  protected Module module;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,9 +65,19 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getImportedNamespace()
+  public Module getModule()
   {
-    return importedNamespace;
+    if (module != null && module.eIsProxy())
+    {
+      InternalEObject oldModule = (InternalEObject)module;
+      module = (Module)eResolveProxy(oldModule);
+      if (module != oldModule)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArithmeticsPackage.IMPORT__MODULE, oldModule, module));
+      }
+    }
+    return module;
   }
 
   /**
@@ -83,12 +85,22 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setImportedNamespace(String newImportedNamespace)
+  public Module basicGetModule()
   {
-    String oldImportedNamespace = importedNamespace;
-    importedNamespace = newImportedNamespace;
+    return module;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setModule(Module newModule)
+  {
+    Module oldModule = module;
+    module = newModule;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ArithmeticsPackage.IMPORT__IMPORTED_NAMESPACE, oldImportedNamespace, importedNamespace));
+      eNotify(new ENotificationImpl(this, Notification.SET, ArithmeticsPackage.IMPORT__MODULE, oldModule, module));
   }
 
   /**
@@ -101,8 +113,9 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
   {
     switch (featureID)
     {
-      case ArithmeticsPackage.IMPORT__IMPORTED_NAMESPACE:
-        return getImportedNamespace();
+      case ArithmeticsPackage.IMPORT__MODULE:
+        if (resolve) return getModule();
+        return basicGetModule();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -117,8 +130,8 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
   {
     switch (featureID)
     {
-      case ArithmeticsPackage.IMPORT__IMPORTED_NAMESPACE:
-        setImportedNamespace((String)newValue);
+      case ArithmeticsPackage.IMPORT__MODULE:
+        setModule((Module)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -134,8 +147,8 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
   {
     switch (featureID)
     {
-      case ArithmeticsPackage.IMPORT__IMPORTED_NAMESPACE:
-        setImportedNamespace(IMPORTED_NAMESPACE_EDEFAULT);
+      case ArithmeticsPackage.IMPORT__MODULE:
+        setModule((Module)null);
         return;
     }
     super.eUnset(featureID);
@@ -151,27 +164,10 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
   {
     switch (featureID)
     {
-      case ArithmeticsPackage.IMPORT__IMPORTED_NAMESPACE:
-        return IMPORTED_NAMESPACE_EDEFAULT == null ? importedNamespace != null : !IMPORTED_NAMESPACE_EDEFAULT.equals(importedNamespace);
+      case ArithmeticsPackage.IMPORT__MODULE:
+        return module != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (importedNamespace: ");
-    result.append(importedNamespace);
-    result.append(')');
-    return result.toString();
   }
 
 } //ImportImpl

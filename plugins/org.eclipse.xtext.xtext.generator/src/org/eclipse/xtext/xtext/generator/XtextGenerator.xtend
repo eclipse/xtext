@@ -19,6 +19,7 @@ import java.util.HashMap
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.mwe.core.WorkflowContext
+import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 import org.eclipse.emf.mwe.utils.StandaloneSetup
@@ -32,12 +33,14 @@ import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
+import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
 
 /**
- * The Xtext language infrastructure generator. Can be configured with {@link IGeneratorFragment2}
+ * The Xtext language infrastructure generator. Can be configured with {@link IXtextGeneratorFragment}
  * instances as well as with some properties declared via setter or adder methods.
  * 
- * <p><b>NOTE: This is a reimplementation of org.eclipse.xtext.generator.Generator</b></p>
+ * @noextend
  */
  //TODO make Generator independent of mwe and add a thin wrapper (GeneratorComponent)
  //TODO only implement mwe2.IWorkflowComponent, get rid of "Issues", just logging/exceptions?
@@ -48,7 +51,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	DefaultGeneratorModule configuration = new DefaultGeneratorModule
 	
 	@Accessors
-	val List<LanguageConfig2> languageConfigs = newArrayList
+	val List<XtextGeneratorLanguage> languageConfigs = newArrayList
 	
 	@Accessors
 	XtextDirectoryCleaner cleaner = new XtextDirectoryCleaner
@@ -58,7 +61,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	Injector injector
 	
-	@Inject XtextProjectConfig projectConfig
+	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject XtextGeneratorTemplates templates
 	
@@ -71,7 +74,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	/**
 	 * Add a language configuration to be included in the code generation process.
 	 */
-	def void addLanguage(LanguageConfig2 language) {
+	def void addLanguage(XtextGeneratorLanguage language) {
 		this.languageConfigs.add(language)
 	}
 	
@@ -115,33 +118,49 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		Guice.createInjector(configuration)
 	}
 	
-	protected def Injector createLanguageInjector(Injector parent, LanguageConfig2 language) {
+	protected def Injector createLanguageInjector(Injector parent, XtextGeneratorLanguage language) {
 		parent.createChildInjector(new LanguageModule(language))
 	}
 	
 	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, org.eclipse.emf.mwe.core.issues.Issues issues) {
 		initialize
-		cleaner.clean
-		for (language : languageConfigs) {
-			LOG.info('Generating ' + language.grammar.name)
-			language.generate
-			language.generateSetups
-			language.generateModules
-			language.generateExecutableExtensionFactory
+		try {
+			cleaner.clean
+			for (language : languageConfigs) {
+				try {
+					LOG.info('Generating ' + language.grammar.name)
+					language.generate
+					language.generateSetups
+					language.generateModules
+					language.generateExecutableExtensionFactory
+				} catch(Exception e) {
+					handleException(e, issues)
+				}
+			}
+			LOG.info('Generating common infrastructure')
+			generatePluginXmls
+			generateManifests
+			generateActivator
+		} catch (Exception e) {
+			handleException(e, issues)
 		}
-		LOG.info('Generating common infrastructure')
-		generatePluginXmls
-		generateManifests
-		generateActivator
 	}
 	
-	protected def generateSetups(ILanguageConfig language) {
+	private def void handleException(Exception ex, Issues issues) {
+		if (ex instanceof CompositeGeneratorException) {
+			ex.exceptions.forEach[handleException(issues)]
+		} else {
+			issues.addError(this, "GeneratorException: ", null, ex, null)
+		}
+	}
+	
+	protected def generateSetups(IXtextGeneratorLanguage language) {
 		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtime.srcGen)
 		templates.createRuntimeSetup(language).writeTo(projectConfig.runtime.src)
 		templates.createWebSetup(language).writeTo(projectConfig.web.src)
 	}
 	
-	protected def generateModules(ILanguageConfig language) {
+	protected def generateModules(IXtextGeneratorLanguage language) {
 		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtime.srcGen)
 		templates.createRuntimeModule(language).writeTo(projectConfig.runtime.src)
 		templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePlugin.srcGen)
@@ -152,7 +171,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		templates.createWebModule(language).writeTo(projectConfig.web.src)
 	}
 	
-	protected def generateExecutableExtensionFactory(ILanguageConfig language) {
+	protected def generateExecutableExtensionFactory(IXtextGeneratorLanguage language) {
 		if (projectConfig.eclipsePlugin.srcGen !== null)
 			templates.createEclipsePluginExecutableExtensionFactory(language, languageConfigs.head).writeTo(projectConfig.eclipsePlugin.srcGen)
 	}
@@ -160,16 +179,24 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	protected def generateManifests() {
 		val manifests = projectConfig.enabledProjects.filter(BundleProjectConfig)
 			.map[Tuples.create(manifest, metaInf, name)].toList
+		
 		// Filter null values and merge duplicate entries
 		val uri2Manifest = Maps.<URI, ManifestAccess>newHashMapWithExpectedSize(manifests.size)
 		val manifestIter = manifests.listIterator
+		
 		while (manifestIter.hasNext) {
 			val entry = manifestIter.next
 			val manifest = entry.first
 			val metaInf = entry.second
+			
 			if (manifest === null || metaInf === null) {
 				manifestIter.remove()
+				
 			} else {
+				if (manifest.activator === null && manifest === projectConfig.eclipsePlugin.manifest) {
+					manifest.activator = naming.eclipsePluginActivator
+				}
+				
 				val uri = metaInf.getURI(manifest.path)
 				if (uri2Manifest.containsKey(uri)) {
 					uri2Manifest.get(uri).merge(manifest)
@@ -185,10 +212,6 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			val metaInf = entry.second
 			if (manifest.bundleName === null) {
 				manifest.bundleName = entry.third
-			}
-			if (manifest === projectConfig.eclipsePlugin.manifest) {
-				val firstLanguage = languageConfigs.head
-				manifest.activator = naming?.getEclipsePluginActivator(firstLanguage.grammar)
 			}
 			if (metaInf.isFile(manifest.path)) {
 				if (manifest.merge) {
@@ -211,9 +234,11 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			merge.addExportedPackages(manifest.exportedPackages)
 			merge.addRequiredBundles(manifest.requiredBundles)
 			merge.addImportedPackages(manifest.importedPackages)
-			if (manifest.activator !== null && !merge.mainAttributes.containsKey(MergeableManifest.BUNDLE_ACTIVATOR)) {
-				merge.mainAttributes.put(MergeableManifest.BUNDLE_ACTIVATOR, manifest.activator.name)
+			
+			if (manifest.activator !== null && merge.bundleActivator.isNullOrEmpty) {
+				merge.bundleActivator = manifest.activator.name
 			}
+			
 			if (merge.isModified) {
 				val out = new ByteArrayOutputStream
 				merge.write(out)

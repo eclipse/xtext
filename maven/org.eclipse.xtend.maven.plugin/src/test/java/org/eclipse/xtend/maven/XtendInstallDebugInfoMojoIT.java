@@ -7,12 +7,18 @@ import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class XtendInstallDebugInfoMojoIT {
 
 	private static String ROOT = "/it/install_debug_info";
-
+	
+	@BeforeClass
+	static public void setUpOnce() throws IOException, VerificationException {
+		MavenVerifierUtil.checkMavenExecutable(ROOT);
+	}
+	
 	@Test
 	public void simpleSMAP() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/simple_smap");

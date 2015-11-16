@@ -1,5 +1,6 @@
 package org.eclipse.xtext.idea.wizard;
 
+import com.google.common.io.Resources;
 import com.google.inject.Inject;
 import com.intellij.ide.highlighter.ModuleFileType;
 import com.intellij.openapi.module.ModifiableModuleModel;
@@ -12,6 +13,7 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import java.io.File;
+import java.net.URL;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.xtext.idea.config.XtextProjectConfigurator;
@@ -24,6 +26,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
+import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -71,10 +75,10 @@ public class IdeaProjectCreator implements ProjectsCreator {
       String _location = project.getLocation();
       final VirtualFile projectRoot = VfsUtil.createDirectories(_location);
       final LocalFileSystem fileSystem = LocalFileSystem.getInstance();
-      Iterable<? extends TextFile> _files = project.getFiles();
-      final Procedure1<TextFile> _function = new Procedure1<TextFile>() {
+      Iterable<? extends AbstractFile> _files = project.getFiles();
+      final Procedure1<AbstractFile> _function = new Procedure1<AbstractFile>() {
         @Override
-        public void apply(final TextFile it) {
+        public void apply(final AbstractFile it) {
           try {
             WizardConfiguration _config = project.getConfig();
             SourceLayout _sourceLayout = _config.getSourceLayout();
@@ -89,9 +93,27 @@ public class IdeaProjectCreator implements ProjectsCreator {
             File _parentFile = ioFile.getParentFile();
             _parentFile.mkdirs();
             ioFile.createNewFile();
-            VirtualFile _refreshAndFindFileByIoFile = fileSystem.refreshAndFindFileByIoFile(ioFile);
-            String _content = it.getContent();
-            VfsUtil.saveText(_refreshAndFindFileByIoFile, _content);
+            boolean _isExecutable = it.isExecutable();
+            if (_isExecutable) {
+              ioFile.setExecutable(true);
+            }
+            final VirtualFile virtualFile = fileSystem.refreshAndFindFileByIoFile(ioFile);
+            boolean _matched = false;
+            if (!_matched) {
+              if (it instanceof TextFile) {
+                _matched=true;
+                String _content = ((TextFile)it).getContent();
+                VfsUtil.saveText(virtualFile, _content);
+              }
+            }
+            if (!_matched) {
+              if (it instanceof BinaryFile) {
+                _matched=true;
+                URL _content = ((BinaryFile)it).getContent();
+                byte[] _byteArray = Resources.toByteArray(_content);
+                virtualFile.setBinaryContent(_byteArray);
+              }
+            }
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }

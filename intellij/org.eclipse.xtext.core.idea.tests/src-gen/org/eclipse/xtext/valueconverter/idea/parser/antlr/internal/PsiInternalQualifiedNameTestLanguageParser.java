@@ -70,18 +70,24 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleElement"
-    // PsiInternalQualifiedNameTestLanguage.g:52:1: entryRuleElement : ruleElement EOF ;
-    public final void entryRuleElement() throws RecognitionException {
+    // PsiInternalQualifiedNameTestLanguage.g:52:1: entryRuleElement returns [Boolean current=false] : iv_ruleElement= ruleElement EOF ;
+    public final Boolean entryRuleElement() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleElement = null;
+
+
         try {
-            // PsiInternalQualifiedNameTestLanguage.g:52:17: ( ruleElement EOF )
-            // PsiInternalQualifiedNameTestLanguage.g:53:2: ruleElement EOF
+            // PsiInternalQualifiedNameTestLanguage.g:52:49: (iv_ruleElement= ruleElement EOF )
+            // PsiInternalQualifiedNameTestLanguage.g:53:2: iv_ruleElement= ruleElement EOF
             {
              markComposite(elementTypeProvider.getElementElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleElement();
+            iv_ruleElement=ruleElement();
 
             state._fsp--;
 
+             current =iv_ruleElement; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -93,22 +99,26 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleElement"
 
 
     // $ANTLR start "ruleElement"
-    // PsiInternalQualifiedNameTestLanguage.g:58:1: ruleElement : (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) ) ;
-    public final void ruleElement() throws RecognitionException {
+    // PsiInternalQualifiedNameTestLanguage.g:59:1: ruleElement returns [Boolean current=false] : (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) ) ;
+    public final Boolean ruleElement() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
+        Boolean lv_qualifiedName_1_0 = null;
+
 
         try {
-            // PsiInternalQualifiedNameTestLanguage.g:58:12: ( (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) ) )
-            // PsiInternalQualifiedNameTestLanguage.g:59:2: (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) )
+            // PsiInternalQualifiedNameTestLanguage.g:60:1: ( (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) ) )
+            // PsiInternalQualifiedNameTestLanguage.g:61:2: (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) )
             {
-            // PsiInternalQualifiedNameTestLanguage.g:59:2: (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) )
-            // PsiInternalQualifiedNameTestLanguage.g:60:3: otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) )
+            // PsiInternalQualifiedNameTestLanguage.g:61:2: (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) )
+            // PsiInternalQualifiedNameTestLanguage.g:62:3: otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) )
             {
 
             			markLeaf(elementTypeProvider.getElement_KeywordKeyword_0ElementType());
@@ -117,22 +127,26 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalQualifiedNameTestLanguage.g:67:3: ( (lv_qualifiedName_1_0= ruleQualifiedName ) )
-            // PsiInternalQualifiedNameTestLanguage.g:68:4: (lv_qualifiedName_1_0= ruleQualifiedName )
+            // PsiInternalQualifiedNameTestLanguage.g:69:3: ( (lv_qualifiedName_1_0= ruleQualifiedName ) )
+            // PsiInternalQualifiedNameTestLanguage.g:70:4: (lv_qualifiedName_1_0= ruleQualifiedName )
             {
-            // PsiInternalQualifiedNameTestLanguage.g:68:4: (lv_qualifiedName_1_0= ruleQualifiedName )
-            // PsiInternalQualifiedNameTestLanguage.g:69:5: lv_qualifiedName_1_0= ruleQualifiedName
+            // PsiInternalQualifiedNameTestLanguage.g:70:4: (lv_qualifiedName_1_0= ruleQualifiedName )
+            // PsiInternalQualifiedNameTestLanguage.g:71:5: lv_qualifiedName_1_0= ruleQualifiedName
             {
 
             					markComposite(elementTypeProvider.getElement_QualifiedNameQualifiedNameParserRuleCall_1_0ElementType());
             				
             pushFollow(FollowSets000.FOLLOW_2);
-            ruleQualifiedName();
+            lv_qualifiedName_1_0=ruleQualifiedName();
 
             state._fsp--;
 
 
             					doneComposite();
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
             				
 
             }
@@ -153,24 +167,30 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleElement"
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // PsiInternalQualifiedNameTestLanguage.g:82:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
-    public final void entryRuleQualifiedName() throws RecognitionException {
+    // PsiInternalQualifiedNameTestLanguage.g:88:1: entryRuleQualifiedName returns [Boolean current=false] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    public final Boolean entryRuleQualifiedName() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleQualifiedName = null;
+
+
         try {
-            // PsiInternalQualifiedNameTestLanguage.g:82:23: ( ruleQualifiedName EOF )
-            // PsiInternalQualifiedNameTestLanguage.g:83:2: ruleQualifiedName EOF
+            // PsiInternalQualifiedNameTestLanguage.g:88:55: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // PsiInternalQualifiedNameTestLanguage.g:89:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
              markComposite(elementTypeProvider.getQualifiedNameElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleQualifiedName();
+            iv_ruleQualifiedName=ruleQualifiedName();
 
             state._fsp--;
 
+             current =iv_ruleQualifiedName; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -182,24 +202,26 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleQualifiedName"
 
 
     // $ANTLR start "ruleQualifiedName"
-    // PsiInternalQualifiedNameTestLanguage.g:88:1: ruleQualifiedName : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? ) ;
-    public final void ruleQualifiedName() throws RecognitionException {
+    // PsiInternalQualifiedNameTestLanguage.g:95:1: ruleQualifiedName returns [Boolean current=false] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? ) ;
+    public final Boolean ruleQualifiedName() throws RecognitionException {
+        Boolean current = false;
+
         Token this_ID_0=null;
         Token kw=null;
         Token this_ID_2=null;
 
         try {
-            // PsiInternalQualifiedNameTestLanguage.g:88:18: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? ) )
-            // PsiInternalQualifiedNameTestLanguage.g:89:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? )
+            // PsiInternalQualifiedNameTestLanguage.g:96:1: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? ) )
+            // PsiInternalQualifiedNameTestLanguage.g:97:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? )
             {
-            // PsiInternalQualifiedNameTestLanguage.g:89:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? )
-            // PsiInternalQualifiedNameTestLanguage.g:90:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )?
+            // PsiInternalQualifiedNameTestLanguage.g:97:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? )
+            // PsiInternalQualifiedNameTestLanguage.g:98:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )?
             {
 
             			markLeaf(elementTypeProvider.getQualifiedName_IDTerminalRuleCall_0ElementType());
@@ -208,7 +230,7 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(this_ID_0);
             		
-            // PsiInternalQualifiedNameTestLanguage.g:97:3: (kw= '.' this_ID_2= RULE_ID )*
+            // PsiInternalQualifiedNameTestLanguage.g:105:3: (kw= '.' this_ID_2= RULE_ID )*
             loop1:
             do {
                 int alt1=2;
@@ -227,7 +249,7 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalQualifiedNameTestLanguage.g:98:4: kw= '.' this_ID_2= RULE_ID
+            	    // PsiInternalQualifiedNameTestLanguage.g:106:4: kw= '.' this_ID_2= RULE_ID
             	    {
 
             	    				markLeaf(elementTypeProvider.getQualifiedName_FullStopKeyword_1_0ElementType());
@@ -252,7 +274,7 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
                 }
             } while (true);
 
-            // PsiInternalQualifiedNameTestLanguage.g:113:3: (kw= '.' kw= '*' )?
+            // PsiInternalQualifiedNameTestLanguage.g:121:3: (kw= '.' kw= '*' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -261,7 +283,7 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalQualifiedNameTestLanguage.g:114:4: kw= '.' kw= '*'
+                    // PsiInternalQualifiedNameTestLanguage.g:122:4: kw= '.' kw= '*'
                     {
 
                     				markLeaf(elementTypeProvider.getQualifiedName_FullStopKeyword_2_0ElementType());
@@ -296,7 +318,7 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleQualifiedName"
 

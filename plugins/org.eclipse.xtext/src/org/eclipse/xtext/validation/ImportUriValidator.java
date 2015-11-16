@@ -18,6 +18,11 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ImportUriValidator extends AbstractDeclarativeValidator {
+	
+	/**
+	 * @since 2.9
+	 */
+	public static final String UNRESOLVABLE_IMPORT_URI = "unresolvable_import_uri";
 
 	@Inject
 	private ImportUriResolver resolver;
@@ -26,7 +31,7 @@ public class ImportUriValidator extends AbstractDeclarativeValidator {
 	public void checkImportUriIsValid(EObject object) {
 		String importURI = getResolver().resolve(object);
 		if (importURI != null && !EcoreUtil2.isValidUri(object, URI.createURI(importURI))) {
-			error("Imported resource could not be found.", getResolver().getAttribute(object));
+			error("Imported resource could not be found.", getResolver().getAttribute(object), UNRESOLVABLE_IMPORT_URI);
 		}
 	}
 

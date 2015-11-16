@@ -20,8 +20,9 @@ import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 
 public class XtendPsiParser extends AbstractXtextPsiParser {
+
 	private static final Set<String> INITIAL_HIDDEN_TOKENS = new HashSet<String>(Arrays.asList("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT"));
-	
+
 	@Inject 
 	private XtendGrammarAccess grammarAccess;
 
@@ -32,6 +33,7 @@ public class XtendPsiParser extends AbstractXtextPsiParser {
 	protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
 		return new PsiInternalXtendParser(builder, tokenStream, elementTypeProvider, grammarAccess);
 	}
+
 	@Override
 	protected Set<String> getInitialHiddenTokens() {
 		return INITIAL_HIDDEN_TOKENS;

@@ -11,6 +11,8 @@ import org.eclipse.xtext.serializer.sequencertest.AltList1;
 import org.eclipse.xtext.serializer.sequencertest.AltList2;
 import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
 import org.eclipse.xtext.serializer.sequencertest.Complex1;
+import org.eclipse.xtext.serializer.sequencertest.Delegation;
+import org.eclipse.xtext.serializer.sequencertest.DelegationA;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
 import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
 import org.eclipse.xtext.serializer.sequencertest.FragmentCallerType;
@@ -25,6 +27,9 @@ import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
 import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.OptionalDouble;
+import org.eclipse.xtext.serializer.sequencertest.ParameterCaller;
+import org.eclipse.xtext.serializer.sequencertest.ParameterDelegation;
+import org.eclipse.xtext.serializer.sequencertest.Parameterized;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
 import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
@@ -398,6 +403,42 @@ public class SequencertestSwitch<T> extends Switch<T>
       {
         FragmentCallerType fragmentCallerType = (FragmentCallerType)theEObject;
         T result = caseFragmentCallerType(fragmentCallerType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.PARAMETER_CALLER:
+      {
+        ParameterCaller parameterCaller = (ParameterCaller)theEObject;
+        T result = caseParameterCaller(parameterCaller);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.PARAMETERIZED:
+      {
+        Parameterized parameterized = (Parameterized)theEObject;
+        T result = caseParameterized(parameterized);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.PARAMETER_DELEGATION:
+      {
+        ParameterDelegation parameterDelegation = (ParameterDelegation)theEObject;
+        T result = caseParameterDelegation(parameterDelegation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.DELEGATION:
+      {
+        Delegation delegation = (Delegation)theEObject;
+        T result = caseDelegation(delegation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.DELEGATION_A:
+      {
+        DelegationA delegationA = (DelegationA)theEObject;
+        T result = caseDelegationA(delegationA);
+        if (result == null) result = caseDelegation(delegationA);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1057,6 +1098,86 @@ public class SequencertestSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseFragmentCallerType(FragmentCallerType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Caller</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Caller</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterCaller(ParameterCaller object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameterized</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameterized</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterized(Parameterized object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Delegation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Delegation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterDelegation(ParameterDelegation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Delegation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Delegation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDelegation(Delegation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Delegation A</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Delegation A</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDelegationA(DelegationA object)
   {
     return null;
   }

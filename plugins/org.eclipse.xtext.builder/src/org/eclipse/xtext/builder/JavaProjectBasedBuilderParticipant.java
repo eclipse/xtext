@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 
@@ -136,7 +138,13 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 			return;
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
 		if (shouldGenerate(resource, context)) {
-			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess);
+			CancelIndicator cancelIndicator = CancelIndicator.NullImpl;
+			if (fileSystemAccess instanceof EclipseResourceFileSystemAccess2) {
+				cancelIndicator = new MonitorBasedCancelIndicator(((EclipseResourceFileSystemAccess2) fileSystemAccess).getMonitor());
+			}
+			GeneratorContext generatorContext = new GeneratorContext();
+			generatorContext.setCancelIndicator(cancelIndicator);
+			generator.generate(resource, (IFileSystemAccess2) fileSystemAccess, generatorContext);
 			context.needRebuild();
 		}
 	}

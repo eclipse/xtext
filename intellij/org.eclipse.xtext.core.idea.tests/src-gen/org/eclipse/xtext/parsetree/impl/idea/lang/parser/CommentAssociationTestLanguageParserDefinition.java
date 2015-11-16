@@ -1,8 +1,10 @@
 package org.eclipse.xtext.parsetree.impl.idea.lang.parser;
 
-import org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageElementTypeProvider;
 import org.eclipse.xtext.parsetree.impl.idea.lang.psi.impl.CommentAssociationTestLanguageFileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.parsetree.impl.idea.lang.CommentAssociationTestLanguageElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -25,18 +27,22 @@ public class CommentAssociationTestLanguageParserDefinition extends AbstractXtex
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getModel_ElementsElementParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType(),
-				elementTypeProvider.getElement_NameIDTerminalRuleCall_2_2_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getElement_ElementChildAction_2_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType(),
-				elementTypeProvider.getElement_NameIDTerminalRuleCall_2_2_0ElementType()
-			);
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getModelElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_ElementsElementParserRuleCall_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getElementElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getElement_ElementChildAction_2_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);
 	}

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.generator.parser.antlr
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter
 import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtractor
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.internal.LexerSpecialStateTransitionSplitter
 
 @Accessors
 class AntlrOptions {
@@ -23,6 +24,8 @@ class AntlrOptions {
 	int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS
 	@Accessors(PUBLIC_GETTER)
 	int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS
+	@Accessors(PUBLIC_GETTER)
+	int casesPerSpecialStateSwitch = LexerSpecialStateTransitionSplitter.CASES_PER_SPECIAL_STATE_SWITCH
 	boolean skipUnusedRules = false
 	boolean optimizeCodeQuality = true
 	boolean stripAllComments = false
@@ -36,7 +39,11 @@ class AntlrOptions {
 	def void setMethodsPerClass(String methodsPerClass) {
 		this.methodsPerClass = Integer.parseInt(methodsPerClass)
 	}
-
+	
+	def void setCasesPerSpecialStateSwitch(String casesPerSpecialStateSwitch) {
+		this.casesPerSpecialStateSwitch = Integer.parseInt(casesPerSpecialStateSwitch)
+	}
+	
 	def void setKAsString(String k) {
 		this.k = Integer.parseInt(k)
 	}

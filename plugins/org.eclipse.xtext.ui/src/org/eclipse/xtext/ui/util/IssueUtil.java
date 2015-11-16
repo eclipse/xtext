@@ -49,7 +49,9 @@ public class IssueUtil {
 			Object message = attributes.get(IMarker.MESSAGE);
 			issue.setMessage(message  instanceof String ? (String) message : null);
 			Object lineNumber = attributes.get(IMarker.LINE_NUMBER);
-			issue.setLineNumber(lineNumber instanceof Integer ? (Integer) lineNumber -1 : null);
+			issue.setLineNumber(lineNumber instanceof Integer ? (Integer) lineNumber : null);
+			Object column = attributes.get(Issue.COLUMN_KEY);
+			issue.setColumn(column instanceof Integer ? (Integer) column : null);
 			Object offset = attributes.get(IMarker.CHAR_START);
 			Object endOffset = attributes.get(IMarker.CHAR_END);
 			if(offset instanceof Integer && endOffset instanceof Integer) {

@@ -10,22 +10,22 @@ package org.eclipse.xtext.idea.filesystem;
 import com.google.common.base.Objects;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
 import java.util.List;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
+import org.eclipse.xtext.idea.filesystem.IdeaProjectConfig;
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -36,10 +36,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
+@Log
 @SuppressWarnings("all")
 public class IdeaWorkspaceConfig implements IWorkspaceConfig {
-  private final static Logger LOGGER = Logger.getInstance(IdeaWorkspaceConfig.class);
-  
   private final Project project;
   
   @Override
@@ -52,19 +51,19 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
         return _instance.getModules();
       }
     };
-    Module[] _runReadAction = _application.<Module[]>runReadAction(_function);
-    final Function1<Module, IdeaModuleConfig> _function_1 = new Function1<Module, IdeaModuleConfig>() {
+    final Module[] modules = _application.<Module[]>runReadAction(_function);
+    final Function1<Module, IdeaProjectConfig> _function_1 = new Function1<Module, IdeaProjectConfig>() {
       @Override
-      public IdeaModuleConfig apply(final Module it) {
-        return IdeaWorkspaceConfig.this.toIdeaModuleConfig(it);
+      public IdeaProjectConfig apply(final Module it) {
+        return IdeaWorkspaceConfig.this.toIdeaProjectConfig(it);
       }
     };
-    List<IdeaModuleConfig> _map = ListExtensions.<Module, IdeaModuleConfig>map(((List<Module>)Conversions.doWrapArray(_runReadAction)), _function_1);
-    return IterableExtensions.<IdeaModuleConfig>toSet(_map);
+    List<IdeaProjectConfig> _map = ListExtensions.<Module, IdeaProjectConfig>map(((List<Module>)Conversions.doWrapArray(modules)), _function_1);
+    return IterableExtensions.<IdeaProjectConfig>toSet(_map);
   }
   
   @Override
-  public IdeaModuleConfig findProjectByName(final String name) {
+  public IdeaProjectConfig findProjectByName(final String name) {
     Application _application = ApplicationManager.getApplication();
     final Computable<Module> _function = new Computable<Module>() {
       @Override
@@ -73,64 +72,50 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
         return _instance.findModuleByName(name);
       }
     };
-    Module _runReadAction = _application.<Module>runReadAction(_function);
-    return this.toIdeaModuleConfig(_runReadAction);
+    final Module module = _application.<Module>runReadAction(_function);
+    if ((module != null)) {
+      return this.toIdeaProjectConfig(module);
+    } else {
+      return null;
+    }
   }
   
-  protected IdeaModuleConfig toIdeaModuleConfig(final Module module) {
-    boolean _equals = Objects.equal(module, null);
-    if (_equals) {
-      return null;
-    }
-    final VirtualFile contentRoot = this.getDefaultContentRoot(module);
-    boolean _equals_1 = Objects.equal(contentRoot, null);
-    if (_equals_1) {
-      return null;
-    }
-    return new IdeaModuleConfig(module, contentRoot);
+  private IdeaProjectConfig toIdeaProjectConfig(final Module module) {
+    return new IdeaProjectConfig(module);
   }
   
   @Override
-  public IdeaModuleConfig findProjectContaining(final URI member) {
-    VirtualFileManager _instance = VirtualFileManager.getInstance();
-    String _string = member.toString();
-    final VirtualFile file = _instance.findFileByUrl(_string);
-    boolean _equals = Objects.equal(file, null);
-    if (_equals) {
+  public IdeaProjectConfig findProjectContaining(final URI member) {
+    final VirtualFile file = VirtualFileURIUtil.getVirtualFile(member);
+    if ((file == null)) {
       return null;
     }
-    ProjectRootManager _instance_1 = ProjectRootManager.getInstance(this.project);
-    final ProjectFileIndex fileIndex = _instance_1.getFileIndex();
-    final Module module = fileIndex.getModuleForFile(file, false);
-    boolean _equals_1 = Objects.equal(module, null);
-    if (_equals_1) {
+    ProjectRootManager _instance = ProjectRootManager.getInstance(this.project);
+    final ProjectFileIndex fileIndex = _instance.getFileIndex();
+    final Module module = fileIndex.getModuleForFile(file, true);
+    if ((module == null)) {
       return null;
     }
-    final VirtualFile contentRoot = fileIndex.getContentRootForFile(file, false);
-    boolean _equals_2 = Objects.equal(contentRoot, null);
-    if (_equals_2) {
+    final VirtualFile contentRoot = fileIndex.getContentRootForFile(file, true);
+    if ((contentRoot == null)) {
       return null;
     }
-    final VirtualFile defaultContentRoot = this.getDefaultContentRoot(module);
-    boolean _notEquals = (!Objects.equal(contentRoot, defaultContentRoot));
+    final IdeaProjectConfig result = new IdeaProjectConfig(module);
+    VirtualFile _contentRoot = result.getContentRoot();
+    boolean _notEquals = (!Objects.equal(contentRoot, _contentRoot));
     if (_notEquals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The file (");
       _builder.append(member, "");
       _builder.append(") should belong to the first content root (");
-      _builder.append(defaultContentRoot, "");
+      VirtualFile _contentRoot_1 = result.getContentRoot();
+      _builder.append(_contentRoot_1, "");
       _builder.append(") but belongs to ");
       _builder.append(contentRoot, "");
       _builder.append(".");
-      IdeaWorkspaceConfig.LOGGER.error(_builder);
+      IdeaWorkspaceConfig.LOG.error(_builder);
     }
-    return new IdeaModuleConfig(module, contentRoot);
-  }
-  
-  protected VirtualFile getDefaultContentRoot(final Module module) {
-    ModuleRootManager _instance = ModuleRootManager.getInstance(module);
-    VirtualFile[] _contentRoots = _instance.getContentRoots();
-    return IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
+    return result;
   }
   
   public IdeaWorkspaceConfig(final Project project) {
@@ -177,4 +162,6 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
   public Project getProject() {
     return this.project;
   }
+  
+  private final static Logger LOG = Logger.getLogger(IdeaWorkspaceConfig.class);
 }

@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.ui.ide;bundle-version="3.6.0",
  org.eclipse.jdt.core;bundle-version="3.6.0",
  org.eclipse.debug.ui;bundle-version="3.6.0",
+ org.eclipse.help;bundle-version="3.5.0",
  org.eclipse.emf.codegen.ecore;bundle-version="2.10.2",
  org.eclipse.core.expressions;bundle-version="3.4.0",
  org.eclipse.xtext.ui.shared,
@@ -29,11 +30,15 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.core.databinding.beans;bundle-version="1.2.0",
  org.eclipse.core.databinding.property;bundle-version="1.2.0",
  org.eclipse.xtend.lib;resolution:=optional,
- org.eclipse.xtext.xtext.wizard
+ org.eclipse.xtext.xtext.wizard,
+ org.eclipse.jdt.launching;bundle-version="3.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xtext.xtext.ecoreInference;x-friends:="org.eclipse.xtext.xtext.ui.tests",
+Export-Package: org.eclipse.xtext.ui.contentassist;x-internal:=true,
+ org.eclipse.xtext.ui.contentassist.antlr;x-internal:=true,
+ org.eclipse.xtext.ui.contentassist.antlr.internal;x-internal:=true,
+ org.eclipse.xtext.xtext.ecoreInference;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.launcher;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.ui;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.ui.editor.autoedit;x-friends:="org.eclipse.xtext.xtext.ui.tests",

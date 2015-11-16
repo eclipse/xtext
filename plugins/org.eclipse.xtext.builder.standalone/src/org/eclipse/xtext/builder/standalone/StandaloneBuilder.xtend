@@ -38,6 +38,7 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.UriUtil
 import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.generator.GeneratorContext
 
 class StandaloneBuilder {
 	static final Logger LOG = Logger.getLogger(StandaloneBuilder);
@@ -251,6 +252,8 @@ class StandaloneBuilder {
 	}
 
 	def protected generate(List<Resource> sourceResources) {
+		val context = new GeneratorContext
+		context.cancelIndicator = CancelIndicator.NullImpl
 		for (Resource it : sourceResources) {
 			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
 			registerCurrentSource(it.URI)
@@ -263,7 +266,7 @@ class StandaloneBuilder {
 					}
 				}
 			}
-			access.generator.generate(it, fileSystemAccess);
+			access.generator.generate(it, fileSystemAccess, context);
 		}
 	}
 

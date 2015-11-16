@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest;
-import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
+import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -56,7 +56,7 @@ public class ContentAssistInBlockTest extends AbstractXbaseContentAssistInBlockT
 	
 	@Override
 	protected Injector getInjector() {
-		return XtypeActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
+		return XbaseActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
 	}
 	
 	@Override

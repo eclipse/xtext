@@ -156,7 +156,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
+                    		"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.ID");
             	    
 
             }
@@ -347,7 +347,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
+                    		"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.ID");
             	    
 
             }

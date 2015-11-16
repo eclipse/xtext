@@ -4,15 +4,14 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Attribute;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Bug289187TestLanguagePackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Model;
@@ -26,8 +25,13 @@ public class Bug289187TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug289187TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug289187TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug289187TestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug289187TestLanguagePackage.ATTRIBUTE:
 				sequence_Attribute(context, (Attribute) semanticObject); 
 				return; 
@@ -41,19 +45,26 @@ public class Bug289187TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_Operation(context, (Operation) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Attribute returns Attribute
+	 *
 	 * Constraint:
 	 *     (visibility=Visibility? name=ID)
 	 */
-	protected void sequence_Attribute(EObject context, Attribute semanticObject) {
+	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Class returns Class
+	 *
 	 * Constraint:
 	 *     (
 	 *         abstract?='abstract'? 
@@ -68,25 +79,33 @@ public class Bug289187TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	 *         operations+=Operation*
 	 *     )
 	 */
-	protected void sequence_Class(EObject context, org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class semanticObject) {
+	protected void sequence_Class(ISerializationContext context, org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
-	 *     classes+=Class*
+	 *     classes+=Class+
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Operation returns Operation
+	 *
 	 * Constraint:
 	 *     (visibility=Visibility? name=ID)
 	 */
-	protected void sequence_Operation(EObject context, Operation semanticObject) {
+	protected void sequence_Operation(ISerializationContext context, Operation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

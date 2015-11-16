@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Alternative;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Bug360834TestLanguagePackage;
@@ -33,8 +31,13 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug360834TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug360834TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug360834TestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug360834TestLanguagePackage.ALTERNATIVE:
 				sequence_Alternative(context, (Alternative) semanticObject); 
 				return; 
@@ -45,11 +48,11 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			case Bug360834TestLanguagePackage.MODIFIERS:
-				if(context == grammarAccess.getAlternativeClassModifiersRule()) {
+				if (rule == grammarAccess.getAlternativeClassModifiersRule()) {
 					sequence_AlternativeClassModifiers(context, (Modifiers) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getUnorderedModifiersRule()) {
+				else if (rule == grammarAccess.getUnorderedModifiersRule()) {
 					sequence_UnorderedModifiers(context, (Modifiers) semanticObject); 
 					return; 
 				}
@@ -64,31 +67,37 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_Unordered(context, (Unordered) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     AlternativeClassModifiers returns Modifiers
+	 *
 	 * Constraint:
-	 *     (final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility?)
+	 *     (final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility)?
 	 */
-	protected void sequence_AlternativeClassModifiers(EObject context, Modifiers semanticObject) {
+	protected void sequence_AlternativeClassModifiers(ISerializationContext context, Modifiers semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Alternative returns Alternative
+	 *
 	 * Constraint:
 	 *     (name=FQN rootDeclaration=RecursiveClassDeclaration)
 	 */
-	protected void sequence_Alternative(EObject context, Alternative semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.ALTERNATIVE__NAME) == ValueTransient.YES)
+	protected void sequence_Alternative(ISerializationContext context, Alternative semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.ALTERNATIVE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug360834TestLanguagePackage.Literals.ALTERNATIVE__NAME));
-			if(transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.ALTERNATIVE__ROOT_DECLARATION) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.ALTERNATIVE__ROOT_DECLARATION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug360834TestLanguagePackage.Literals.ALTERNATIVE__ROOT_DECLARATION));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAlternativeAccess().getNameFQNParserRuleCall_1_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getAlternativeAccess().getRootDeclarationRecursiveClassDeclarationParserRuleCall_3_0(), semanticObject.getRootDeclaration());
 		feeder.finish();
@@ -96,18 +105,20 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     ClassMember returns ClassMember
+	 *
 	 * Constraint:
 	 *     (modifiers=UnorderedModifiers name=ID)
 	 */
-	protected void sequence_ClassMember(EObject context, ClassMember semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.CLASS_MEMBER__MODIFIERS) == ValueTransient.YES)
+	protected void sequence_ClassMember(ISerializationContext context, ClassMember semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.CLASS_MEMBER__MODIFIERS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug360834TestLanguagePackage.Literals.CLASS_MEMBER__MODIFIERS));
-			if(transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.CLASS_MEMBER__NAME) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.CLASS_MEMBER__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug360834TestLanguagePackage.Literals.CLASS_MEMBER__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getClassMemberAccess().getModifiersUnorderedModifiersParserRuleCall_0_0(), semanticObject.getModifiers());
 		feeder.accept(grammarAccess.getClassMemberAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
 		feeder.finish();
@@ -115,56 +126,72 @@ public class Bug360834TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (element=Alternative | element=Unordered)
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     RecursiveClassDeclaration returns RecursiveClassDeclaration
+	 *
 	 * Constraint:
 	 *     (modifiers=AlternativeClassModifiers name=ID members+=RecursiveClassDeclaration*)
 	 */
-	protected void sequence_RecursiveClassDeclaration(EObject context, RecursiveClassDeclaration semanticObject) {
+	protected void sequence_RecursiveClassDeclaration(ISerializationContext context, RecursiveClassDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     SimpleClassDeclaration returns SimpleClassDeclaration
+	 *
 	 * Constraint:
 	 *     (modifiers=UnorderedModifiers name=ID members+=ClassMember*)
 	 */
-	protected void sequence_SimpleClassDeclaration(EObject context, SimpleClassDeclaration semanticObject) {
+	protected void sequence_SimpleClassDeclaration(ISerializationContext context, SimpleClassDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     UnorderedModifiers returns Modifiers
+	 *
 	 * Constraint:
-	 *     (final?='final'? abstract?='abstract'? extern?='extern'? visibility=Visibility?)
+	 *     (final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility)*
 	 */
-	protected void sequence_UnorderedModifiers(EObject context, Modifiers semanticObject) {
+	protected void sequence_UnorderedModifiers(ISerializationContext context, Modifiers semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Unordered returns Unordered
+	 *
 	 * Constraint:
 	 *     (name=FQN rootDeclaration=SimpleClassDeclaration)
 	 */
-	protected void sequence_Unordered(EObject context, Unordered semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.UNORDERED__NAME) == ValueTransient.YES)
+	protected void sequence_Unordered(ISerializationContext context, Unordered semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.UNORDERED__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug360834TestLanguagePackage.Literals.UNORDERED__NAME));
-			if(transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.UNORDERED__ROOT_DECLARATION) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug360834TestLanguagePackage.Literals.UNORDERED__ROOT_DECLARATION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug360834TestLanguagePackage.Literals.UNORDERED__ROOT_DECLARATION));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getUnorderedAccess().getNameFQNParserRuleCall_1_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getUnorderedAccess().getRootDeclarationSimpleClassDeclarationParserRuleCall_3_0(), semanticObject.getRootDeclaration());
 		feeder.finish();
 	}
+	
+	
 }

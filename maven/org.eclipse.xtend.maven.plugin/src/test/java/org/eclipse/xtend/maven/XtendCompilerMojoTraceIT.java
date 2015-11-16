@@ -10,13 +10,19 @@ import org.apache.maven.it.util.ResourceExtractor;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class XtendCompilerMojoTraceIT {
 
 	private static String ROOT = "/it/compile";
 	private boolean debug = false;
-
+	
+	@BeforeClass
+	static public void setUpOnce() throws IOException, VerificationException {
+		MavenVerifierUtil.checkMavenExecutable(ROOT);
+	}
+	
 	private String loadTraceSourcePath(String file) {
 		try {
 			FileInputStream in = new FileInputStream(file);

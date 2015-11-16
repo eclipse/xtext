@@ -28,6 +28,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.AbstractElement
 
 class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	
@@ -40,27 +41,9 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 		naming
 	}
 	
-	override protected compileOptions(Grammar it, AntlrOptions options) '''
-
-		options {
-			superClass=AbstractPsiAntlrParser;
-			«IF options.backtrack || options.memoize || options.k >= 0»
-				«IF options.backtrack»
-					backtrack=true;
-				«ENDIF»
-				«IF options.memoize»
-					memoize=true;
-				«ENDIF»
-				«IF options.k >= 0»
-					memoize=«options.k»;
-				«ENDIF»
-			«ENDIF»
-		}
-	'''
-	
 	override protected compileParserImports(Grammar it, AntlrOptions options) '''
 
-		import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
+		import «grammarNaming.getInternalParserSuperClass(it).name»;
 		import «grammar.elementTypeProvider»;
 		import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -107,12 +90,13 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 		false
 	}
 	
-	override protected compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
+	override protected dispatch compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
 		«IF isValidEntryRule»
 			//Entry rule «entryRuleName»
-			«entryRuleName»«compileEntryInit(options)»:
+			«entryRuleName» returns [«currentType» current=false]«compileEntryInit(options)»:
 				{ «markComposite» }
-				«ruleName»«defaultArgumentList»
+				iv_«originalElement.ruleName»=«originalElement.ruleName»«defaultArgumentList»
+				{ $current=$iv_«originalElement.ruleName».current; }
 				EOF;
 			«compileEntryFinally(options)»
 		«ENDIF»
@@ -121,8 +105,17 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 	'''
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) '''
-		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment)»«ENDIF»
+		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment, currentType)»«ENDIF» returns «compileReturns(options)»
 		«super.compileInit(it, options)»'''
+	
+	protected def compileReturns(AbstractRule it, AntlrOptions options) {
+		switch it {
+			ParserRule case !originalElement.datatypeRule && originalElement.isEObjectFragmentRule:
+				'''[«currentType» current=in_current]'''
+			default:
+				'''[«currentType» current=false]'''
+		}
+	}
 	
 	override protected _dataTypeEbnf2(Keyword it, boolean supportActions) {
 		if (supportActions) '''
@@ -184,6 +177,7 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 			{
 				«precedeComposite»
 				«doneComposite»
+				«associateWithSemanticElement»
 			}
 		'''
 	}
@@ -232,7 +226,7 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 				ParserRule case assigned: 
 					super._ebnf2(it, options, supportActions)
 				EnumRule, 
-				ParserRule: '''
+				ParserRule case rule.originalElement.datatypeRule: '''
 					«IF options.backtrack»
 					{
 						/* */
@@ -243,6 +237,27 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 					}
 					«super._ebnf2(it, options, supportActions)»
 					{
+						«doneComposite»
+					}
+				'''
+				ParserRule: '''
+					«IF options.backtrack»
+					{
+						/* */
+					}
+					«ENDIF»
+					{
+						«IF isEObjectFragmentRuleCall»
+							if (!$current) {
+								«associateWithSemanticElement»
+								$current = true;
+							}
+						«ENDIF»
+						«markComposite»
+					}
+					«localVar»=«super._ebnf2(it, options, supportActions)»
+					{
+						$current = $«localVar».current;
 						«doneComposite»
 					}
 				'''
@@ -293,6 +308,38 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 		}
 	}
 	
+	override protected _assignmentEbnf(CrossReference it, Assignment assignment, AntlrOptions options, boolean supportActions) {
+		if (supportActions) '''
+			«IF options.backtrack»
+			{
+				/* */
+			}
+			«ENDIF»
+			{
+				if (!$current) {
+					«associateWithSemanticElement»
+					$current = true;
+				}
+			}
+			«super._assignmentEbnf(it, assignment, options, supportActions)»'''
+		else
+		super._assignmentEbnf(it, assignment, options, supportActions)
+	}
+	
+	override protected _assignmentEbnf(AbstractElement it, Assignment assignment, AntlrOptions options, boolean supportActions) {
+		if (supportActions) '''
+			«super._assignmentEbnf(it, assignment, options, supportActions)»
+			{
+				if (!$current) {
+					«associateWithSemanticElement»
+					$current = true;
+				}
+			}
+		'''
+		else
+			super._assignmentEbnf(it, assignment, options, supportActions)
+	}
+	
 	override protected _assignmentEbnf(RuleCall it, Assignment assignment, AntlrOptions options, boolean supportActions) {
 		if (supportActions) {
 			switch rule {
@@ -304,6 +351,10 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 					«assignment.localVar(it)»=«super._assignmentEbnf(it, assignment, options, supportActions)»
 					{
 						«doneComposite»
+						if(!$current) {
+							«associateWithSemanticElement»
+							$current = true;
+						}
 					}
 				'''
 				TerminalRule: '''
@@ -311,6 +362,12 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 						«markLeaf»
 					}
 					«assignment.localVar(it)»=«super._assignmentEbnf(it, assignment, options, supportActions)»
+					{
+						if(!$current) {
+							«associateWithSemanticElement»
+							$current = true;
+						}
+					}
 					{
 						«doneLeaf(assignment.localVar(it))»
 					}
@@ -332,5 +389,15 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 	def protected doneComposite(EObject it) '''doneComposite();'''
 	
 	def protected precedeComposite(EObject it) '''precedeComposite(elementTypeProvider.get«originalElement.grammarElementIdentifier»ElementType());'''
+	
+	def protected associateWithSemanticElement() '''associateWithSemanticElement();'''
+	
+	override protected isPassCurrentIntoFragment() {
+		true
+	}
+	
+	override protected getCurrentType() {
+		'Boolean'
+	}
 	
 }

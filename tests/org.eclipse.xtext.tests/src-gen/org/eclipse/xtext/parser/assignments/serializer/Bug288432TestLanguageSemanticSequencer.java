@@ -4,25 +4,22 @@
 package org.eclipse.xtext.parser.assignments.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parser.assignments.bug288432Test.Body;
 import org.eclipse.xtext.parser.assignments.bug288432Test.Bug288432TestPackage;
 import org.eclipse.xtext.parser.assignments.bug288432Test.Foo;
 import org.eclipse.xtext.parser.assignments.bug288432Test.MyElement;
 import org.eclipse.xtext.parser.assignments.bug288432Test.MyInt;
-import org.eclipse.xtext.parser.assignments.bug288432Test.Parameter;
 import org.eclipse.xtext.parser.assignments.bug288432Test.ParameterRef;
 import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -32,8 +29,13 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug288432TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug288432TestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug288432TestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug288432TestPackage.BODY:
 				sequence_Body(context, (Body) semanticObject); 
 				return; 
@@ -47,86 +49,108 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_MyInt(context, (MyInt) semanticObject); 
 				return; 
 			case Bug288432TestPackage.PARAMETER:
-				sequence_Parameter(context, (Parameter) semanticObject); 
+				sequence_Parameter(context, (org.eclipse.xtext.parser.assignments.bug288432Test.Parameter) semanticObject); 
 				return; 
 			case Bug288432TestPackage.PARAMETER_REF:
 				sequence_ParameterRef(context, (ParameterRef) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Body returns Body
+	 *
 	 * Constraint:
 	 *     ((parameter+=Parameter parameter+=Parameter*)? (content=Content | content=ParameterRef) foo+=Foo+)
 	 */
-	protected void sequence_Body(EObject context, Body semanticObject) {
+	protected void sequence_Body(ISerializationContext context, Body semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Foo returns Foo
+	 *
 	 * Constraint:
 	 *     fooValue=STRING
 	 */
-	protected void sequence_Foo(EObject context, Foo semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug288432TestPackage.Literals.FOO__FOO_VALUE) == ValueTransient.YES)
+	protected void sequence_Foo(ISerializationContext context, Foo semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug288432TestPackage.Literals.FOO__FOO_VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug288432TestPackage.Literals.FOO__FOO_VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getFooAccess().getFooValueSTRINGTerminalRuleCall_0(), semanticObject.getFooValue());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Content returns MyElement
+	 *     MyElement returns MyElement
+	 *     ParameterObject returns MyElement
+	 *
 	 * Constraint:
 	 *     (bar=MyInt | bar=ParameterRef)
 	 */
-	protected void sequence_MyElement(EObject context, MyElement semanticObject) {
+	protected void sequence_MyElement(ISerializationContext context, MyElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ParameterObject returns MyInt
+	 *     MyInt returns MyInt
+	 *
 	 * Constraint:
 	 *     int=INT
 	 */
-	protected void sequence_MyInt(EObject context, MyInt semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug288432TestPackage.Literals.MY_INT__INT) == ValueTransient.YES)
+	protected void sequence_MyInt(ISerializationContext context, MyInt semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug288432TestPackage.Literals.MY_INT__INT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug288432TestPackage.Literals.MY_INT__INT));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getMyIntAccess().getIntINTTerminalRuleCall_0(), semanticObject.getInt());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ParameterObject returns ParameterRef
+	 *     ParameterRef returns ParameterRef
+	 *
 	 * Constraint:
 	 *     parameter=[Parameter|ID]
 	 */
-	protected void sequence_ParameterRef(EObject context, ParameterRef semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug288432TestPackage.Literals.PARAMETER_REF__PARAMETER) == ValueTransient.YES)
+	protected void sequence_ParameterRef(ISerializationContext context, ParameterRef semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug288432TestPackage.Literals.PARAMETER_REF__PARAMETER) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug288432TestPackage.Literals.PARAMETER_REF__PARAMETER));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getParameterRefAccess().getParameterParameterIDTerminalRuleCall_0_1(), semanticObject.getParameter());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Parameter returns Parameter
+	 *
 	 * Constraint:
 	 *     (name=ID value=[ParameterObject|ID]?)
 	 */
-	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
+	protected void sequence_Parameter(ISerializationContext context, org.eclipse.xtext.parser.assignments.bug288432Test.Parameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

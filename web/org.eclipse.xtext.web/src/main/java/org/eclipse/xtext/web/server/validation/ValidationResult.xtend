@@ -24,8 +24,18 @@ class ValidationResult implements IServiceResult {
 	@ToString(skipNulls = true)
 	static class Issue {
 		String description
-		String severity 
+		String severity
+		/**
+		 * One based, the first line has the number 1.
+		 */ 
 		Integer line
+		/**
+		 * One based, the first column in a line has the number 1.
+		 */
+		Integer column
+		/**
+		 * Zero based, the first char in a document has the offset 0.
+		 */
 		Integer offset
 		Integer length
 	}

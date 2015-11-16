@@ -37,6 +37,7 @@ import org.eclipse.xtext.XtextPackage
 import org.eclipse.xtext.util.internal.EmfAdaptable
 
 import static extension org.eclipse.xtext.xtext.RuleWithParameterValues.*
+import org.eclipse.xtext.TypeRef
 
 /** 
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -52,7 +53,7 @@ class FlattenedGrammarAccess {
 		var flattenedGrammar = copy(grammar)
 		flattenedGrammar.name = grammar.name
 		var origToCopy = Maps.newLinkedHashMap()
-		val copies = copyRuleStubs(names, origToCopy, filter.getRules(grammar))
+		val copies = copyRuleStubs(names, origToCopy, filter.getRules(grammar), filter.discardRuleTypeRef)
 		flattenedGrammar.rules += copies
 		var calledFrom = copyRuleBodies(copies, origToCopy)
 		flattenedGrammar.setHiddenTokens(grammar, origToCopy)
@@ -160,7 +161,6 @@ class FlattenedGrammarAccess {
 								return element
 							} else {
 								var element = elements.get(0)
-								result.mergeCardinalities(element)
 								result.mergePredicates(element)
 								element.firstSetPredicated = false
 								element.predicated = false
@@ -221,11 +221,20 @@ class FlattenedGrammarAccess {
 		}
 		return calledFrom
 	}
+	
+	def private copyTypeRef(TypeRef ref) {
+		if (ref === null)
+			return null
+		val copy = copy(ref)
+		copy.classifier = ref.classifier
+		return copy
+	}
 
 	def private copyRuleStubs(
 		RuleNames names,
 		Map<RuleWithParameterValues, AbstractRule> origToCopy,
-		List<AbstractRule> rulesToCopy
+		List<AbstractRule> rulesToCopy,
+		boolean discardTypeRef
 	) {
 		val result = <AbstractRule>newArrayList
 		for (AbstractRule rule : rulesToCopy) {
@@ -238,6 +247,9 @@ class FlattenedGrammarAccess {
 						copy.name = ruleName
 						copy.fragment = rule.isFragment
 						copy.wildcard = rule.isWildcard
+						if (!discardTypeRef) {
+							copy.type = copyTypeRef(rule.type)
+						}
 						copy.attachTo(rule, origToCopy)
 						result += copy
 					} else {
@@ -247,6 +259,9 @@ class FlattenedGrammarAccess {
 							copy.name = names.getAntlrRuleName(rule, i)
 							copy.fragment = rule.isFragment
 							copy.wildcard = rule.isWildcard
+							if (!discardTypeRef) {
+								copy.type = copyTypeRef(rule.type)
+							}
 							origToCopy.put(parameterValues, copy)
 							parameterValues.attachToEmfObject(copy)
 							result += copy

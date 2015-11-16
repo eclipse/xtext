@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.xbase;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Names;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -27,18 +26,13 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -46,11 +40,14 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
+public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean generateXtendInferrer = true;
   
@@ -88,18 +85,6 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     return new TypeReference(_plus_2);
   }
   
-  protected TypeReference getImportScopeProvider(final ILanguageConfig langConfig) {
-    TypeReference _xifexpression = null;
-    Grammar _grammar = langConfig.getGrammar();
-    boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(_grammar);
-    if (_usesXImportSection) {
-      _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider");
-    } else {
-      _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider");
-    }
-    return _xifexpression;
-  }
-  
   @Override
   public void generate() {
     Grammar _grammar = this.getGrammar();
@@ -110,8 +95,8 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     }
     this.contributeRuntimeGuiceBindings();
     this.contributeEclipsePluginGuiceBindings();
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
     boolean _tripleNotEquals = (_pluginXml != null);
     if (_tripleNotEquals) {
@@ -120,20 +105,20 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
     if (this.generateXtendInferrer) {
       this.doGenerateXtendInferrer();
     }
-    XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-    RuntimeProjectConfig _runtime = _projectConfig_1.getRuntime();
+    IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig_1.getRuntime();
     ManifestAccess _manifest = _runtime.getManifest();
     boolean _tripleNotEquals_1 = (_manifest != null);
     if (_tripleNotEquals_1) {
-      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      RuntimeProjectConfig _runtime_1 = _projectConfig_2.getRuntime();
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_2.getRuntime();
       ManifestAccess _manifest_1 = _runtime_1.getManifest();
       Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
       _requiredBundles.addAll(
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase", "org.eclipse.xtext.xbase.lib")));
       if (((this.generateXtendInferrer || this.useInferredJvmModel) && (!this.skipExportedPackage))) {
-        XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-        RuntimeProjectConfig _runtime_2 = _projectConfig_3.getRuntime();
+        IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+        IRuntimeProjectConfig _runtime_2 = _projectConfig_3.getRuntime();
         ManifestAccess _manifest_2 = _runtime_2.getManifest();
         Set<String> _exportedPackages = _manifest_2.getExportedPackages();
         TypeReference _jvmModelInferrer = this.getJvmModelInferrer();
@@ -141,13 +126,13 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
         _exportedPackages.add(_packageName);
       }
     }
-    XtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin_1 = _projectConfig_4.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_4.getEclipsePlugin();
     ManifestAccess _manifest_3 = _eclipsePlugin_1.getManifest();
     boolean _tripleNotEquals_2 = (_manifest_3 != null);
     if (_tripleNotEquals_2) {
-      XtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-      BundleProjectConfig _eclipsePlugin_2 = _projectConfig_5.getEclipsePlugin();
+      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_5.getEclipsePlugin();
       ManifestAccess _manifest_4 = _eclipsePlugin_2.getManifest();
       Set<String> _requiredBundles_1 = _manifest_4.getRequiredBundles();
       _requiredBundles_1.addAll(
@@ -189,46 +174,20 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_16 = TypeReference.typeRef("org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider");
       bindingFactory.addTypeToType(_typeRef_15, _typeRef_16);
     }
-    ILanguageConfig _language = this.getLanguage();
-    Grammar _grammar = _language.getGrammar();
-    boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(_grammar);
-    if (_usesXImportSection) {
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("binder.bind(");
-          _builder.append(IScopeProvider.class, "");
-          _builder.append(".class).annotatedWith(");
-          _builder.append(Names.class, "");
-          _builder.append(".named(");
-          _builder.append(AbstractDeclarativeScopeProvider.class, "");
-          _builder.append(".NAMED_DELEGATE)).to(");
-          ILanguageConfig _language = XbaseGeneratorFragment2.this.getLanguage();
-          TypeReference _importScopeProvider = XbaseGeneratorFragment2.this.getImportScopeProvider(_language);
-          _builder.append(_importScopeProvider, "");
-          _builder.append(".class);");
-          _builder.newLineIfNotEmpty();
-        }
-      };
-      final StringConcatenationClient statement = _client;
-      String _simpleName = IScopeProvider.class.getSimpleName();
-      String _plus = (_simpleName + "Delegate");
-      bindingFactory.addConfiguredBinding(_plus, statement);
-    }
-    ILanguageConfig _language_1 = this.getLanguage();
-    GuiceModuleAccess _runtimeGenModule = _language_1.getRuntimeGenModule();
+    IXtextGeneratorLanguage _language = this.getLanguage();
+    GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     bindingFactory.contributeTo(_runtimeGenModule);
-    ILanguageConfig _language_2 = this.getLanguage();
-    Grammar _grammar_1 = _language_2.getGrammar();
-    boolean _inheritsXbaseWithAnnotations = this._xbaseUsageDetector.inheritsXbaseWithAnnotations(_grammar_1);
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
+    Grammar _grammar = _language_1.getGrammar();
+    boolean _inheritsXbaseWithAnnotations = this._xbaseUsageDetector.inheritsXbaseWithAnnotations(_grammar);
     if (_inheritsXbaseWithAnnotations) {
-      ILanguageConfig _language_3 = this.getLanguage();
-      GuiceModuleAccess _runtimeGenModule_1 = _language_3.getRuntimeGenModule();
+      IXtextGeneratorLanguage _language_2 = this.getLanguage();
+      GuiceModuleAccess _runtimeGenModule_1 = _language_2.getRuntimeGenModule();
       TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.DefaultXbaseWithAnnotationsRuntimeModule");
       _runtimeGenModule_1.setSuperClass(_typeRef_17);
     } else {
-      ILanguageConfig _language_4 = this.getLanguage();
-      GuiceModuleAccess _runtimeGenModule_2 = _language_4.getRuntimeGenModule();
+      IXtextGeneratorLanguage _language_3 = this.getLanguage();
+      GuiceModuleAccess _runtimeGenModule_2 = _language_3.getRuntimeGenModule();
       TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule");
       _runtimeGenModule_2.setSuperClass(_typeRef_18);
     }
@@ -292,76 +251,76 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_12 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameStrategy");
       TypeReference _typeRef_13 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy");
       GuiceModuleAccess.BindingFactory _addTypeToType_5 = _addfinalTypeToType.addTypeToType(_typeRef_12, _typeRef_13);
-      TypeReference _typeRef_14 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant.ContextFactory");
-      TypeReference _typeRef_15 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext.ContextFactory");
-      GuiceModuleAccess.BindingFactory _addTypeToType_6 = _addTypeToType_5.addTypeToType(_typeRef_14, _typeRef_15);
-      TypeReference _typeRef_16 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener");
-      TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.jvmmodel.outline.JvmOutlineNodeElementOpener");
-      GuiceModuleAccess.BindingFactory _addTypeToType_7 = _addTypeToType_6.addTypeToType(_typeRef_16, _typeRef_17);
-      TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.GlobalURIEditorOpener");
-      TypeReference _typeRef_19 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener");
-      GuiceModuleAccess.BindingFactory _addTypeToType_8 = _addTypeToType_7.addTypeToType(_typeRef_18, _typeRef_19);
-      TypeReference _typeRef_20 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer");
-      TypeReference _typeRef_21 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer");
-      GuiceModuleAccess.BindingFactory _addTypeToType_9 = _addTypeToType_8.addTypeToType(_typeRef_20, _typeRef_21);
-      TypeReference _typeRef_22 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation");
-      TypeReference _typeRef_23 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation.No");
-      GuiceModuleAccess.BindingFactory _addTypeToType_10 = _addTypeToType_9.addTypeToType(_typeRef_22, _typeRef_23);
+      TypeReference _typeReference = new TypeReference("org.eclipse.xtext.common.types.ui.refactoring.participant", "JdtRenameParticipant.ContextFactory");
+      TypeReference _typeReference_1 = new TypeReference("org.eclipse.xtext.xbase.ui.jvmmodel.refactoring", "JvmModelJdtRenameParticipantContext.ContextFactory");
+      GuiceModuleAccess.BindingFactory _addTypeToType_6 = _addTypeToType_5.addTypeToType(_typeReference, _typeReference_1);
+      TypeReference _typeRef_14 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener");
+      TypeReference _typeRef_15 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.jvmmodel.outline.JvmOutlineNodeElementOpener");
+      GuiceModuleAccess.BindingFactory _addTypeToType_7 = _addTypeToType_6.addTypeToType(_typeRef_14, _typeRef_15);
+      TypeReference _typeRef_16 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.GlobalURIEditorOpener");
+      TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener");
+      GuiceModuleAccess.BindingFactory _addTypeToType_8 = _addTypeToType_7.addTypeToType(_typeRef_16, _typeRef_17);
+      TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer");
+      TypeReference _typeRef_19 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer");
+      GuiceModuleAccess.BindingFactory _addTypeToType_9 = _addTypeToType_8.addTypeToType(_typeRef_18, _typeRef_19);
+      TypeReference _typeRef_20 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation");
+      TypeReference _typeReference_2 = new TypeReference("org.eclipse.xtext.common.types.ui.query", "IJavaSearchParticipation.No");
+      GuiceModuleAccess.BindingFactory _addTypeToType_10 = _addTypeToType_9.addTypeToType(_typeRef_20, _typeReference_2);
       _addTypeToType_10.addConfiguredBinding("LanguageSpecificURIEditorOpener", statement);
     } else {
-      TypeReference _typeRef_24 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameStrategy");
-      TypeReference _typeRef_25 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
-      bindingFactory.addTypeToType(_typeRef_24, _typeRef_25);
+      TypeReference _typeRef_21 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameStrategy");
+      TypeReference _typeRef_22 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
+      bindingFactory.addTypeToType(_typeRef_21, _typeRef_22);
     }
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(_grammar);
     if (_usesXImportSection) {
-      TypeReference _typeRef_26 = TypeReference.typeRef("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver");
-      TypeReference _typeRef_27 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver");
-      GuiceModuleAccess.BindingFactory _addTypeToType_11 = bindingFactory.addTypeToType(_typeRef_26, _typeRef_27);
-      TypeReference _typeRef_28 = TypeReference.typeRef("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider");
-      TypeReference _typeRef_29 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider");
-      GuiceModuleAccess.BindingFactory _addTypeToType_12 = _addTypeToType_11.addTypeToType(_typeRef_28, _typeRef_29);
-      TypeReference _typeRef_30 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType");
-      TypeReference _typeRef_31 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType");
-      _addTypeToType_12.addTypeToType(_typeRef_30, _typeRef_31);
+      TypeReference _typeRef_23 = TypeReference.typeRef("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver");
+      TypeReference _typeRef_24 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver");
+      GuiceModuleAccess.BindingFactory _addTypeToType_11 = bindingFactory.addTypeToType(_typeRef_23, _typeRef_24);
+      TypeReference _typeRef_25 = TypeReference.typeRef("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider");
+      TypeReference _typeRef_26 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider");
+      GuiceModuleAccess.BindingFactory _addTypeToType_12 = _addTypeToType_11.addTypeToType(_typeRef_25, _typeRef_26);
+      TypeReference _typeRef_27 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType");
+      TypeReference _typeRef_28 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType");
+      _addTypeToType_12.addTypeToType(_typeRef_27, _typeRef_28);
     } else {
-      TypeReference _typeRef_32 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes");
-      TypeReference _typeRef_33 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection");
-      bindingFactory.addTypeToType(_typeRef_32, _typeRef_33);
+      TypeReference _typeRef_29 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes");
+      TypeReference _typeRef_30 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection");
+      bindingFactory.addTypeToType(_typeRef_29, _typeRef_30);
     }
-    ILanguageConfig _language_1 = this.getLanguage();
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language_1.getEclipsePluginGenModule();
     bindingFactory.contributeTo(_eclipsePluginGenModule);
-    ILanguageConfig _language_2 = this.getLanguage();
+    IXtextGeneratorLanguage _language_2 = this.getLanguage();
     Grammar _grammar_1 = _language_2.getGrammar();
     boolean _inheritsXbaseWithAnnotations = this._xbaseUsageDetector.inheritsXbaseWithAnnotations(_grammar_1);
     if (_inheritsXbaseWithAnnotations) {
-      ILanguageConfig _language_3 = this.getLanguage();
+      IXtextGeneratorLanguage _language_3 = this.getLanguage();
       GuiceModuleAccess _eclipsePluginGenModule_1 = _language_3.getEclipsePluginGenModule();
-      TypeReference _typeRef_34 = TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule");
-      _eclipsePluginGenModule_1.setSuperClass(_typeRef_34);
+      TypeReference _typeRef_31 = TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule");
+      _eclipsePluginGenModule_1.setSuperClass(_typeRef_31);
     } else {
-      ILanguageConfig _language_4 = this.getLanguage();
+      IXtextGeneratorLanguage _language_4 = this.getLanguage();
       GuiceModuleAccess _eclipsePluginGenModule_2 = _language_4.getEclipsePluginGenModule();
-      TypeReference _typeRef_35 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule");
-      _eclipsePluginGenModule_2.setSuperClass(_typeRef_35);
+      TypeReference _typeRef_32 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule");
+      _eclipsePluginGenModule_2.setSuperClass(_typeRef_32);
     }
-    ILanguageConfig _language_5 = this.getLanguage();
+    IXtextGeneratorLanguage _language_5 = this.getLanguage();
     GuiceModuleAccess _webGenModule = _language_5.getWebGenModule();
-    TypeReference _typeRef_36 = TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule");
-    _webGenModule.setSuperClass(_typeRef_36);
+    TypeReference _typeRef_33 = TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule");
+    _webGenModule.setSuperClass(_typeRef_33);
   }
   
   protected void doGenerateXtendInferrer() {
-    ILanguageConfig _language = this.getLanguage();
+    IXtextGeneratorLanguage _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     EList<AbstractRule> _rules = _grammar.getRules();
     AbstractRule _head = IterableExtensions.<AbstractRule>head(_rules);
     TypeRef _type = _head.getType();
     EClassifier _classifier = _type.getClassifier();
-    ILanguageConfig _language_1 = this.getLanguage();
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
     Grammar _grammar_1 = _language_1.getGrammar();
     Resource _eResource = _grammar_1.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
@@ -538,8 +497,8 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_jvmModelInferrer, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
     _createXtendFile.writeTo(_src);
   }
@@ -547,12 +506,12 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
   protected boolean contributeEclipsePluginExtensions() {
     boolean _xblockexpression = false;
     {
-      ILanguageConfig _language = this.getLanguage();
+      IXtextGeneratorLanguage _language = this.getLanguage();
       Grammar _grammar = _language.getGrammar();
       final String name = _grammar.getName();
       if (this.jdtTypeHierarchy) {
-        XtextProjectConfig _projectConfig = this.getProjectConfig();
-        BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+        IXtextProjectConfig _projectConfig = this.getProjectConfig();
+        IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
         PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
         List<CharSequence> _entries = _pluginXml.getEntries();
         StringConcatenation _builder = new StringConcatenation();
@@ -627,7 +586,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.append("</handler>");
         _builder.newLine();
         {
-          ILanguageConfig _language_1 = this.getLanguage();
+          IXtextGeneratorLanguage _language_1 = this.getLanguage();
           Grammar _grammar_3 = _language_1.getGrammar();
           boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(_grammar_3);
           if (_usesXImportSection) {
@@ -678,7 +637,7 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder.append("<extension point=\"org.eclipse.ui.menus\">");
         _builder.newLine();
         {
-          ILanguageConfig _language_2 = this.getLanguage();
+          IXtextGeneratorLanguage _language_2 = this.getLanguage();
           Grammar _grammar_5 = _language_2.getGrammar();
           boolean _usesXImportSection_1 = this._xbaseUsageDetector.usesXImportSection(_grammar_5);
           if (_usesXImportSection_1) {
@@ -805,8 +764,8 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
         _entries.add(_builder.toString());
       }
       if (this.jdtCallHierarchy) {
-        XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        BundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
         PluginXmlAccess _pluginXml_1 = _eclipsePlugin_1.getPluginXml();
         List<CharSequence> _entries_1 = _pluginXml_1.getEntries();
         StringConcatenation _builder_1 = new StringConcatenation();
@@ -887,8 +846,8 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
         _builder_1.newLine();
         _entries_1.add(_builder_1.toString());
       }
-      XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      BundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
       PluginXmlAccess _pluginXml_2 = _eclipsePlugin_2.getPluginXml();
       List<CharSequence> _entries_2 = _pluginXml_2.getEntries();
       StringConcatenation _builder_2 = new StringConcatenation();

@@ -1,9 +1,10 @@
 package org.eclipse.xtext.valueconverter.idea.lang.parser;
 
-import org.eclipse.xtext.psi.impl.PsiEObjectReference;
-import org.eclipse.xtext.valueconverter.idea.lang.Bug250313ElementTypeProvider;
 import org.eclipse.xtext.valueconverter.idea.lang.psi.impl.Bug250313FileImpl;
 import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.valueconverter.idea.lang.Bug250313ElementTypeProvider;
+import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
@@ -26,22 +27,31 @@ public class Bug250313ParserDefinition extends AbstractXtextParserDefinition {
 	@Override
 	@SuppressWarnings("rawtypes")
 	public PsiElement createElement(ASTNode node) {
-		IElementType elementType = node.getElementType();
-		if (elementType == elementTypeProvider.getChild_Child1ParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getChild1_NameIDTerminalRuleCall_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getChild_Child2ParserRuleCall_1ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getChild2_NameSTRINGTerminalRuleCall_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getModel_RefChild1CrossReference_8_1_1_0_0ElementType()) {
-			return new PsiEObjectReference(node);
-		}
-		if (elementType == elementTypeProvider.getModel_RefChild2CrossReference_8_1_1_0_1ElementType()) {
-			return new PsiEObjectReference(node);
+		Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
+		if (hasSemanticElement != null && hasSemanticElement) {
+			IElementType elementType = node.getElementType();
+			if (elementType == elementTypeProvider.getModelElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getModel_ChildrenChildParserRuleCall_8_0_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getChildElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getChild_Child1ParserRuleCall_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getChild_Child2ParserRuleCall_1ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getChild1ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getChild2ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			throw new IllegalStateException("Unexpected element type: " + elementType);
 		}
 		return super.createElement(node);
 	}

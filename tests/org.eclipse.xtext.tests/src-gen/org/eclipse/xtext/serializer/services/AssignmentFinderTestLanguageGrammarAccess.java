@@ -576,7 +576,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Terminal2
 		public RuleCall getNameTerminal2TerminalRuleCall_0_0_1() { return cNameTerminal2TerminalRuleCall_0_0_1; }
 
-		//(crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2])
+		//crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//crossRef=[CrossRef|Terminal1]

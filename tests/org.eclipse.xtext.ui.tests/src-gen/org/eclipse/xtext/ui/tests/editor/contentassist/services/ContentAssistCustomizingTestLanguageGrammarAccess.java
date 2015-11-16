@@ -55,7 +55,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		//(name=FQN | name='FQN') ('extends' superType=TypeRef)? ';'
 		public Group getGroup() { return cGroup; }
 
-		//(name=FQN | name='FQN')
+		//name=FQN | name='FQN'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//name=FQN

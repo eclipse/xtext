@@ -4,8 +4,12 @@
 package org.eclipse.xtext.index.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.File;
@@ -14,15 +18,9 @@ import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.index.indexTestLanguage.Namespace;
 import org.eclipse.xtext.index.indexTestLanguage.Property;
 import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -32,8 +30,13 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	private IndexTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == IndexTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == IndexTestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case IndexTestLanguagePackage.DATATYPE:
 				sequence_Datatype(context, (Datatype) semanticObject); 
 				return; 
@@ -53,83 +56,107 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 				sequence_Property(context, (Property) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Datatype
+	 *     Type returns Datatype
+	 *     Datatype returns Datatype
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Datatype(EObject context, Datatype semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, IndexTestLanguagePackage.Literals.TYPE__NAME) == ValueTransient.YES)
+	protected void sequence_Datatype(ISerializationContext context, Datatype semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, IndexTestLanguagePackage.Literals.TYPE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IndexTestLanguagePackage.Literals.TYPE__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getDatatypeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Element returns Entity
+	 *     Type returns Entity
+	 *     Entity returns Entity
+	 *
 	 * Constraint:
 	 *     (name=ID properties+=Property*)
 	 */
-	protected void sequence_Entity(EObject context, Entity semanticObject) {
+	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     File returns File
+	 *
 	 * Constraint:
 	 *     elements+=Element+
 	 */
-	protected void sequence_File(EObject context, File semanticObject) {
+	protected void sequence_File(ISerializationContext context, File semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *     Element returns Import
+	 *
 	 * Constraint:
 	 *     importedNamespace=QualifiedNameWithWildCard
 	 */
-	protected void sequence_Import(EObject context, Import semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, IndexTestLanguagePackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
+	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, IndexTestLanguagePackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IndexTestLanguagePackage.Literals.IMPORT__IMPORTED_NAMESPACE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0(), semanticObject.getImportedNamespace());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Namespace returns Namespace
+	 *     Element returns Namespace
+	 *
 	 * Constraint:
 	 *     (name=QualifiedName elements+=Element*)
 	 */
-	protected void sequence_Namespace(EObject context, Namespace semanticObject) {
+	protected void sequence_Namespace(ISerializationContext context, Namespace semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Property returns Property
+	 *
 	 * Constraint:
 	 *     (type=[Type|QualifiedName] name=ID)
 	 */
-	protected void sequence_Property(EObject context, Property semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, IndexTestLanguagePackage.Literals.PROPERTY__TYPE) == ValueTransient.YES)
+	protected void sequence_Property(ISerializationContext context, Property semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, IndexTestLanguagePackage.Literals.PROPERTY__TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IndexTestLanguagePackage.Literals.PROPERTY__TYPE));
-			if(transientValues.isValueTransient(semanticObject, IndexTestLanguagePackage.Literals.PROPERTY__NAME) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, IndexTestLanguagePackage.Literals.PROPERTY__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IndexTestLanguagePackage.Literals.PROPERTY__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPropertyAccess().getTypeTypeQualifiedNameParserRuleCall_0_0_1(), semanticObject.getType());
 		feeder.accept(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
+	
+	
 }

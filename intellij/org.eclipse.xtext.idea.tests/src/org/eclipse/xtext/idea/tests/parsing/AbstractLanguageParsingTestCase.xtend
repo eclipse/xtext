@@ -11,7 +11,6 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.intellij.lang.Language
 import com.intellij.lang.LanguageASTFactory
-import com.intellij.lang.LanguageParserDefinitions
 import com.intellij.lang.ParserDefinition
 import com.intellij.mock.MockEditorFactory
 import com.intellij.mock.MockFileDocumentManagerImpl
@@ -77,7 +76,7 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 		addExplicitExtension(LanguageSetup.INSTANCE, myLanguage, setup)
 		xtextLanguage.injectMembers(this)
 		
-		addExplicitExtension(LanguageParserDefinitions.INSTANCE, myLanguage, parserDefinition);
+		configureFromParserDefinition(parserDefinition, myFileExt)
 		addExplicitExtension(LanguageASTFactory.INSTANCE, myLanguage, astFactory)
 
 		val appContainer = application.picoContainer
@@ -179,7 +178,7 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 		createFreshResourceSet().createResource(uri) as XtextResource => [
 			parser = psiToEcoreTransformator
 			load(new ByteArrayInputStream(newByteArrayOfSize(0)), null)
-			psiToEcoreTransformator.adapter.install(it)
+			psiToEcoreTransformator.adapter.attachToEmfObject(it)
 		]
 	}
 	

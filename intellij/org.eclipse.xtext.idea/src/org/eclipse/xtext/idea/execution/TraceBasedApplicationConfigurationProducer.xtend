@@ -4,15 +4,16 @@ import com.google.inject.Inject
 import com.intellij.execution.actions.ConfigurationContext
 import com.intellij.execution.application.ApplicationConfiguration
 import com.intellij.execution.application.ApplicationConfigurationProducer
+import com.intellij.execution.application.ApplicationConfigurationType
 import com.intellij.openapi.util.Ref
 import com.intellij.psi.PsiElement
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 
-class TraceBasedApplicationConfigurationProducer extends ApplicationConfigurationProducer {
+class TraceBasedApplicationConfigurationProducer extends ApplicationConfigurationProducer<ApplicationConfiguration> {
 	@Inject extension ConfigurationProducerExtensions
 
 	new(IXtextLanguage xtextLanguage) {
-		super()
+		super(ApplicationConfigurationType.instance)
 		xtextLanguage.injectMembers(this)
 	}
 

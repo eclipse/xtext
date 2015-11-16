@@ -8,12 +8,19 @@
 package org.eclipse.xtext.xtext.wizard.cli;
 
 import com.google.common.io.Files;
+import com.google.common.io.Resources;
 import java.io.File;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Set;
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
+import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectsCreator;
@@ -23,6 +30,9 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @SuppressWarnings("all")
 public class CliProjectsCreator implements ProjectsCreator {
+  @Accessors
+  private String lineDelimiter;
+  
   @Override
   public void createProjects(final WizardConfiguration config) {
     Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
@@ -39,10 +49,10 @@ public class CliProjectsCreator implements ProjectsCreator {
     String _location = project.getLocation();
     final File projectRoot = new File(_location);
     projectRoot.mkdirs();
-    Iterable<? extends TextFile> _files = project.getFiles();
-    final Procedure1<TextFile> _function = new Procedure1<TextFile>() {
+    Iterable<? extends AbstractFile> _files = project.getFiles();
+    final Procedure1<AbstractFile> _function = new Procedure1<AbstractFile>() {
       @Override
-      public void apply(final TextFile it) {
+      public void apply(final AbstractFile it) {
         try {
           WizardConfiguration _config = project.getConfig();
           SourceLayout _sourceLayout = _config.getSourceLayout();
@@ -54,10 +64,30 @@ public class CliProjectsCreator implements ProjectsCreator {
           final File file = new File(projectRoot, projectRelativePath);
           File _parentFile = file.getParentFile();
           _parentFile.mkdirs();
-          String _content = it.getContent();
-          WizardConfiguration _config_1 = project.getConfig();
-          Charset _encoding = _config_1.getEncoding();
-          Files.write(_content, file, _encoding);
+          boolean _matched = false;
+          if (!_matched) {
+            if (it instanceof TextFile) {
+              _matched=true;
+              String _content = ((TextFile)it).getContent();
+              String _newLine = Strings.newLine();
+              final String normalizedContent = _content.replace(_newLine, CliProjectsCreator.this.lineDelimiter);
+              WizardConfiguration _config_1 = project.getConfig();
+              Charset _encoding = _config_1.getEncoding();
+              Files.write(normalizedContent, file, _encoding);
+            }
+          }
+          if (!_matched) {
+            if (it instanceof BinaryFile) {
+              _matched=true;
+              URL _content = ((BinaryFile)it).getContent();
+              byte[] _byteArray = Resources.toByteArray(_content);
+              Files.write(_byteArray, file);
+            }
+          }
+          boolean _isExecutable = it.isExecutable();
+          if (_isExecutable) {
+            file.setExecutable(true);
+          }
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
@@ -73,5 +103,14 @@ public class CliProjectsCreator implements ProjectsCreator {
       }
     };
     IterableExtensions.<String>forEach(_sourceFolders, _function_1);
+  }
+  
+  @Pure
+  public String getLineDelimiter() {
+    return this.lineDelimiter;
+  }
+  
+  public void setLineDelimiter(final String lineDelimiter) {
+    this.lineDelimiter = lineDelimiter;
   }
 }

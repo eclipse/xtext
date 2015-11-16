@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.generator" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter id="923795461">
-            <message_arguments>
-                <message_argument value="2.9.0"/>
-                <message_argument value="2.8.0"/>
-            </message_arguments>
-        </filter>
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
                 <message_argument value="2.9.0"/>
@@ -771,6 +765,64 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.validation.SimpleAntlrJavaValidator"/>
                 <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/generator/parser/antlr/ex/common/KeywordHelper.java" type="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper">
+        <filter id="338755678">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
+                <message_argument value="keywordComparator"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
+                <message_argument value="getHelper(EObject)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
+                <message_argument value="getTarget()"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
+                <message_argument value="isAdapterForType(Object)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
+                <message_argument value="notifyChanged(Notification)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper"/>
+                <message_argument value="setTarget(Notifier)"/>
+            </message_arguments>
+        </filter>
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="KeywordHelper"/>
+                <message_argument value="KeywordHelper"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/generator/parser/antlr/ex/common/MutableTokenDefProvider.java" type="org.eclipse.xtext.generator.parser.antlr.ex.common.MutableTokenDefProvider">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.ex.common.MutableTokenDefProvider"/>
+                <message_argument value="writeTokenFile(PrintWriter)"/>
+            </message_arguments>
+        </filter>
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="MutableTokenDefProvider"/>
+                <message_argument value="MutableTokenDefProvider"/>
             </message_arguments>
         </filter>
     </resource>

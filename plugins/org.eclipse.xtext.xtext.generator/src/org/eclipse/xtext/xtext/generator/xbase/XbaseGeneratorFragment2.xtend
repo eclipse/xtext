@@ -8,18 +8,13 @@
 package org.eclipse.xtext.xtext.generator.xbase
 
 import com.google.inject.Inject
-import com.google.inject.name.Names
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
-import org.eclipse.xtext.scoping.IScopeProvider
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.ILanguageConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -27,8 +22,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
-class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
+class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Accessors(PUBLIC_SETTER)
 	boolean generateXtendInferrer = true
@@ -53,13 +49,6 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def TypeReference getJvmModelInferrer() {
 		new TypeReference(grammar.runtimeBasePackage + '.jvmmodel.' + GrammarUtil.getSimpleName(grammar) + 'JvmModelInferrer')
-	}
-	
-	protected def TypeReference getImportScopeProvider(ILanguageConfig langConfig) {
-		if (langConfig.grammar.usesXImportSection)
-			'org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider'.typeRef
-		else
-			'org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider'.typeRef 
 	}
 	
 	override generate() {
@@ -117,13 +106,6 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 						'org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider'.typeRef)
 
 		}
-		if (language.grammar.usesXImportSection) {
-			val StringConcatenationClient statement = '''
-				binder.bind(«IScopeProvider».class).annotatedWith(«Names».named(«AbstractDeclarativeScopeProvider».NAMED_DELEGATE)).to(«language.importScopeProvider».class);
-			'''
-			bindingFactory
-					.addConfiguredBinding(IScopeProvider.simpleName + 'Delegate', statement);
-		}
 		bindingFactory.contributeTo(language.runtimeGenModule)
 		
 		if (language.grammar.inheritsXbaseWithAnnotations)
@@ -164,8 +146,8 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 				.addTypeToType('org.eclipse.xtext.ui.refactoring.IRenameStrategy'.typeRef, 
 						'org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy'.typeRef)
 				
-				.addTypeToType('org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant.ContextFactory'.typeRef,
-						'org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext.ContextFactory'.typeRef)
+				.addTypeToType(new TypeReference('org.eclipse.xtext.common.types.ui.refactoring.participant', 'JdtRenameParticipant.ContextFactory'),
+						new TypeReference ('org.eclipse.xtext.xbase.ui.jvmmodel.refactoring', 'JvmModelJdtRenameParticipantContext.ContextFactory'))
 				.addTypeToType('org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener'.typeRef, 
 						'org.eclipse.xtext.xbase.ui.jvmmodel.outline.JvmOutlineNodeElementOpener'.typeRef)
 				.addTypeToType('org.eclipse.xtext.ui.editor.GlobalURIEditorOpener'.typeRef, 
@@ -173,7 +155,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 				.addTypeToType('org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer'.typeRef, 
 						'org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer'.typeRef)
 				.addTypeToType('org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation'.typeRef, 
-						'org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation.No'.typeRef)
+						new TypeReference('org.eclipse.xtext.common.types.ui.query', 'IJavaSearchParticipation.No'))
 				// DerivedMemberAwareEditorOpener
 				.addConfiguredBinding('LanguageSpecificURIEditorOpener', statement)
 		} else {

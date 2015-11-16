@@ -1,139 +1,321 @@
 ---
 layout: default
-title: Language Development Made Easy!
+title: Language Engineering Made Easy!
 ---
-{% include ribbon.html %}
+<!--{% include ribbon.html %}-->
 <!--Container-->
 <div id="header_wrapper">
-  <div class="container">
-  <div class="flexslider image-slider">
-    <div class="span5 slide">
-      <h2>
-        Language Development made <strong>Easy!</strong>
-      </h2>
-      <br />
-      <p>Building your own domain-specific languages has never been so
-        easy. Just put your grammar in place and you not only get the
-        working parser and linker but also first class Eclipse support.</p>
-      <p><strong><a href="releasenotes.html">Latest Release Notes</a></strong></p>
-      <a href="download.html" class="btn_download"></a>
-    </div>
-    <div class="span6">
-      <div class="introduction">
-        <a href="#"><img src="{{ site.baseurl }}/images/slides/Introduction.png"
-          alt="image" id="intro-screenshot"/></a> 
-        <a href="https://vimeo.com/8260921"
-          data-rel="prettyPhoto" title="Introduction" class="zoom zoom_icon"></a>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
-
-<div id="intro">
-  <div class="container">
-    <h1>What is Xtext?</h1>
-    <p>Xtext is a framework for development of programming languages
-      and domain specific languages.</p>
-    <p>It covers all aspects of a complete language infrastructure,
-      from parsers, over linker, compiler or interpreter to fully-blown
-      top-notch Eclipse IDE integration. It comes with great defaults for
-      all these aspects which at the same time can be easily tailored to your 
-      individual needs.</p>
-  </div>
-</div>
-
-<div id="features">
-  <div class="container">
+  <div class="container image-slider">
     <div class="row">
+      <h2>
+        Language Engineering For Everyone!
+      </h2>
+      <p>Xtext is a framework for development of programming languages
+        and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure,
+        including <b>parser</b>, <b>linker</b>, <b>typechecker</b>, <b>compiler</b> as well as editing support for <b>Eclipse</b>, <b>IntelliJ IDEA</b> and your favorite <b>web browser</b>.
+        <br/><i><a href="#intro-quotes">Learn more...</a></i></p>
+    </div>
+  </div>
+  <div class="row" style="text-align:center">
+    <div>
+      <div id="coverflow">
+        <img class="intro-screenshot" style="display:none;" src="{{ site.baseurl }}/images/web_screenshot.png" alt="Xtext in Web Browser">
+        <img class="intro-screenshot" src="{{ site.baseurl }}/images/eclipse_screenshot.png" alt="Xtext in Eclipse">
+        <img class="intro-screenshot" style="display:none;" src="{{ site.baseurl }}/images/idea_screenshot.png" alt="Xtext in IntelliJ IDEA">
+      </div>
+    </div>
+    <div class="cta-section">
+      <a href="{{ site.baseurl }}/download.html" style="margin:10px;" class="has-popover btn btn-primary btn-large pull_right">Download</a>
+      <script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script>
+      <script type="text/javascript">
+          hbspt.cta.load(761475, '5f19e385-5578-4a5b-96b2-81413c6e6d20');
+      </script>
+      <a href="http://cta-redirect.hubspot.com/cta/redirect/761475/1424bda7-dbb0-40bb-9469-8e93403bed7f" target="_blank" style="margin:10px;" class="has-popover btn btn-success btn-large">
+        Professional Support
+      </a>
+      <script type="text/javascript">
+        hbspt.cta.load(761475, '1424bda7-dbb0-40bb-9469-8e93403bed7f');
+      </script>
+    </div>
+  </div>
+</div>
+
+<div id="intro-quotes" class="intro-reference">
+  <div class="container">
+    <ul id="newsticker" class="newsticker">
+      {% for post in site.categories.news limit:2 %}
+            <li>Latest News: <a href="{{ site.baseurl }}/news.html" style="text-decoration: underline; color: #fff;">{{ post.title }}</a></li>
+      {% endfor %}</p>
+    </ul>
+  </div>
+</div>
+
+<div id="why-xtext">
+  <div class="container">
+    <div class="row quick-overview">
       <div class="span12">
-        <br /> <br />
-        <h1>A Selection Of Supported Features</h1>
-        <br />
+        <h1>Why Xtext?</h1>
       </div>
       <div class="span4">
-        <div class="thumb">
-          <a href="#"><img class="screenshot"
-            src="{{ site.baseurl }}/images/feature2_syntax_coloring.png" alt="Image" /></a> <a
-            href="https://vimeo.com/12824833" data-rel="prettyPhoto"
-            title="Syntax Coloring" class="zoom zoom_icon"></a>
-        </div>
-        <h4>Syntax Coloring</h4>
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Easy To Learn</h4>
         <p>
-          Out of the box, the editor supports <b>syntax coloring based
-            on the lexical structure</b> and the <b>semantic data</b> of your
-          files. Users are free to customize the highlighting and configure
-          their favorite styles.
+          Xtext is designed to onboard you smoothly. Simple languages are easily done within minutes.
+          Yet Xtext is flexible enough to build fully-featured, statically-typed programming languages.
         </p>
       </div>
       <div class="span4">
-        <div class="thumb">
-          <a href="#"><img class="screenshot"
-            src="{{ site.baseurl }}/images/feature2_content_assist.png" alt="Image" /></a> <a
-            href="https://vimeo.com/12824786" data-rel="prettyPhoto"
-            title="Content Assist" class="zoom zoom_icon"></a>
-        </div>
-        <h4>Content Assist</h4>
-        <p>An Xtext editor proposes valid code completions at any place
-          in the document, helping your users with the syntactical details
-          of your language.</p>
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+         High Quality</h4>
+        <p>The core framework has been in development for eight years and is used throughout the world in many reasearch and industry projects and even commercial products.</p>
       </div>
       <div class="span4">
-        <div class="thumb">
-          <a href="#"><img class="screenshot"
-            src="{{ site.baseurl }}/images/feature2_quick_fix.png" alt="Image" /></a> <a
-            href="https://vimeo.com/12824853" data-rel="prettyPhoto"
-            title="Validation and Quick Fixes" class="zoom zoom_icon"></a>
-        </div>
-        <h4>Validation and Quick Fixes</h4>
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Multi Platform</h4>
         <p>
-          Xtext has outstanding support for static analysis and validation
-          of your models. It has never been so easy to define constraints to
-          tackle <b>errors and warnings</b> in your code instantaneously.
-          With custom <b>quick fixes</b> you can correct these with a single
-          keystroke.
+          Whether you are targeting developers or domain experts, you will be able to provide a dedicated smart editor. Eclipse, IntelliJ IDEA and various browser
+          editors are supported. Have a look at our <a href="#platform-comparison">platform comparison chart</a>.
         </p>
       </div>
       <div class="span4">
-        <div class="thumb">
-          <a href="#"><img class="screenshot"
-            src="{{ site.baseurl }}/images/feature2_xbase2.png" alt="Image" /></a> <a
-            href="https://vimeo.com/26150627" data-rel="prettyPhoto"
-            title="Java Integration" class="zoom zoom_icon"></a>
-        </div>
-        <h4>Advanced Java Integration</h4>
-        <p>If your language targets the JVM, you'll love the Java
-          support Xtext provides. You get fully statically typed expressions
-          right embedded in your DSL and can refer to any Java type.</p>
-      </div>
-      <div class="span4">
-        <div class="thumb">
-          <a href="#"><img class="screenshot"
-            src="{{ site.baseurl }}/images/feature2_emf_integration.png" alt="Image" /></a> <a
-            href="https://vimeo.com/12824804" data-rel="prettyPhoto"
-            title="Integration with arbitrary Eclipse tools"
-            class="zoom zoom_icon"></a>
-        </div>
-        <h4>Integration with other Eclipse tools</h4>
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Performance</h4>
         <p>
-          Xtext provides a rich API to work with resources. Therefore
-          developing additional <b>graphical and structural views</b> is
-          comparably easy.
+          We know that tools need to be fast in order to be helpful. That is why we spend considerable effort on optimization in every release.
+          You can also fine-tune your language if needed, thanks to the configurability of Xtext.
         </p>
       </div>
       <div class="span4">
-        <div class="thumb">
-          <a href="#"><img class="screenshot"
-            src="{{ site.baseurl }}/images/feature2_advanced_workbench.png" alt="Image" /></a> <a
-            href="https://vimeo.com/12824746" data-rel="prettyPhoto"
-            title="More IDE Features" class="zoom zoom_icon"></a>
-        </div>
-        <h4>More IDE Features</h4>
-        <p>
-          Xtext's advanced Eclipse integration goes far beyond the editor. <b>You
-            will not feel any difference between your language and Java.</b>
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Easy JVM languages</h4>
+        <p>You can build languages for any target platform with Xtext.
+          If you target the JVM you can reuse Xbase, a statically typed expression language.
+          Linking against Java types, code generation and debugging work out of the box.
         </p>
+      </div>
+      <div class="span4">
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Continuous Integration</h4>
+        <p>
+          Xtext supports both Gradle and Maven to build your language and use it in downstream projects.
+          For Gradle builds, you even get incremental compilation of your language files.
+        </p>
+      </div>
+      <div class="span12">
+          <p><br/><i><a href="#feature-overview">Check out the features...</a></i></p>
       </div>
     </div>
   </div>
+</div>
+
+<div id="intro-companies" class="intro-reference">
+  <div class="container">
+    <ul class="companies">
+      <li><img src="{{ site.baseurl }}/images/logo-google.png" alt="Google"/>
+        <img src="{{ site.baseurl }}/images/Siemens-logo.svg" alt="Siemens"/>
+        <img src="{{ site.baseurl }}/images/logo_morgan_stanley.svg" alt="Morgan Stanley"/></li>
+      <li>
+        <img src="{{ site.baseurl }}/images/ESA_logo.svg" alt="ESA"/>
+        <img src="{{ site.baseurl }}/images/Bosch-Logo.svg" alt="Bosch"/>
+        <img src="{{ site.baseurl }}/images/SAIC_Logo.svg" alt="SAIC"/>
+        <img src="{{ site.baseurl }}/images/SAP-Logo.svg" alt="SAP"/></li>
+    </ul>
+  </div>
+</div>
+
+<div id="feature-overview">
+  <div class="container">
+    <div class="row quick-overview">
+      <div class="span12">
+        <h1>Features</h1>
+      </div>
+      <div class="span4">
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Build the Language You Want!</h4>
+        <p>Xtext can build full-featured text editors for both general-purpose and domain-specific languages.
+        In the background it uses the <i>LL(*)</i> parser generator of
+        ANTLR, allowing to cover a wide range of syntaxes.
+        Xtext editors have already been implemented for JavaScript, VHDL, Xtend, and many other languages.</p>
+      </div>
+      <div class="span4">
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Compile to Whatever You Want!</h4>
+        <p>You define the target format to which your language is compiled. No matter if it's Java, C, XML,
+        comma-separated values, or even a binary format, Xtext does not limit your choice.
+        And in combination with <a href="http://xtend-lang.org" target="_blank">Xtend</a> writing a compiler
+        becomes easier than ever before.</p>
+      </div>
+      <div class="span4">
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Highly Customizable</h4>
+        <p>The default behavior of Xtext is optimized to cover a wide range of languages and use cases.
+        However, every language has characteristics that must be reflected in the IDE. Therefore Xtext
+        allows to insert custom behavior for every single feature by replacing the default implementation.
+        This is done through dependency injection based on
+        <a href="https://github.com/google/guice" target="_blank">Google Guice</a>.</p>
+      </div>
+      <div class="span4">
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Single Sourcing</h4>
+        <p>The grammar definition language of Xtext is not just for the parser. Many IDE features provided
+        by Xtext adapt to your language automatically, so whenever you change your grammar definition,
+        the behavior of the text editor is updated without any further code changes. This includes complex
+        features such as handling of cross-references, code completion, navigation, syntax coloring,
+        validation, and more.</p>
+      </div>
+      <div class="span4">
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Incremental Compiler</h4>
+        <p>Xtext is built to scale, so no matter if you have a few source files written in your language
+        or hundreds of them, the IDE remains responsive and reacts smoothly to any text change. This is
+        realized through an incremental compiler that maintains an index of the available source files
+        for fast look-up of language elements.</p>
+      </div>
+      <div class="span4">
+        <h4><img src="{{ site.baseurl }}/images/xtext-bullet.png"/>
+          Compatible with Graphical Editors</h4>
+        <p>You can combine the text-based formats created with Xtext with many graphical editing frameworks,
+        e.g. <a href="https://www.eclipse.org/sirius/" target="_blank">Sirius</a> or
+        <a href="https://www.eclipse.org/graphiti/" target="_blank">Graphiti</a>. Xtext offers this flexibility
+        by supporting <a href="https://www.eclipse.org/modeling/emf/" target="_blank">EMF</a> as common data
+        layer. An Xtext language can be used as storage format for another primary editor, and you can even
+        embed text editors inside a graphical editor.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="platform-comparison" class="container">
+  <h2>Editor Features By Platform</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <th style="width:25%;vertical-align: middle;"><img src="{{ site.baseurl }}/images/logo_intellij_idea.png" alt="IntelliJ IDEA" style="width:100%;"></th>
+        <th style="width:25%;vertical-align: middle;"><img src="{{ site.baseurl }}/images/logo_eclipse.png" alt="Eclipse" style="width:100%;"></th>
+        <th style="width:25%;vertical-align: middle;"><img src="{{ site.baseurl }}/images/logo_browsers.png" alt="Web Browser" style="width:100%;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="has-popover"
+      	data-content="Keywords, comments, strings, and other basic text elements are colored according to the syntax definition.">
+        <td>Syntax Coloring</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Text elements with special meaning in the context of your language can be highlighted with a custom text style, e.g. static fields in Java have an italic font.">
+        <td>Semantic Coloring</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="General errors in the text files are marked automatically, e.g. violations of the specified syntax or references to undefined elements. Additionally, Xtext offers a simple API to implement language-specific checks.">
+        <td>Error Checking</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Auto-completion is a powerful tool to speed up writing text in your language. Type Ctrl+Space to invoke it at the current cursor position.">
+        <td>Auto-Completion</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Once you have defined rules for handling white space (line breaks, tabs etc.) in your language, you can apply automatic formatting to whole files or parts of them.">
+        <td>Formatting</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Display additional information when the mouse hovers over a specific language element, e.g. the comments associated with that element.">
+        <td>Hover Information</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="When the cursor is moved to a language element that is referenced from multiple places, all these occurrences are highlighted.">
+        <td>Mark Occurences</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Press F3 to navigate directly to the declaration of a referenced element.">
+        <td>Go To Declaration</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="When you rename a language element, automatically update all references to it.">
+        <td>Rename Refactoring</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="If your language interoperates with Java, the source files are considered during debug sessions in your IDE, i.e. you can set breakpoints and step through statements.">
+        <td>Debugging</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Disable the selected lines of code by inserting comments into each line, or reenable them by removing such comments.">
+        <td>Toggle Comments</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Display an outline of a file highlighting its structure. This is useful for quick navigation.">
+        <td>Outline / Structure View</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Automatic fixes can be proposed for problems that have been found by the error checker.">
+        <td>Quick Fix Proposals</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Generate a list of all references to the selected language element.">
+        <td>Find References</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="If your language interoperates with Java, a tree view of all directly and indirectly called methods can be generated for the selected method.">
+        <td>Call Hierarchy</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="If your language interoperates with Java, a tree view of all directly and indirectly inherited classes and interfaces can be generated for the selected type.">
+        <td>Type Hierarchy</td>
+        <td><div class="supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+      <tr class="has-popover"
+      	data-content="Collapse parts of a file that are not important for your current task.">
+        <td>Folding</td>
+        <td><div class="not-supported"></div></td>
+        <td><div class="supported"></div></td>
+        <td><div class="not-supported"></div></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

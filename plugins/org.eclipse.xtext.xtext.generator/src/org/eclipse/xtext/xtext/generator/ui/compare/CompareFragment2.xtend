@@ -8,33 +8,28 @@
 package org.eclipse.xtext.xtext.generator.ui.compare
 
 import com.google.inject.Inject
-import org.apache.log4j.Logger
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 /**
  * Contributes the registration of compare infrastructure. 
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class CompareFragment2 extends AbstractGeneratorFragment2 {
+class CompareFragment2 extends AbstractXtextGeneratorFragment {
 
-	private static final Logger log = Logger.getLogger(CompareFragment2);
-	
 	@Inject
 	extension XtextGeneratorNaming
 
 	override generate() {
-		if (log.isInfoEnabled()) {
-			log.info("generating Compare Framework infrastructure");
-		}
-
-		if (projectConfig.eclipsePlugin.manifest != null) {
-			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
+		if (projectConfig.eclipsePlugin?.manifest !== null) {
+			projectConfig.eclipsePlugin.manifest.requiredBundles += #[
+				"org.eclipse.compare", "org.eclipse.xtext.ui"
+			]
 		}
 
 		new GuiceModuleAccess.BindingFactory()
@@ -43,7 +38,7 @@ class CompareFragment2 extends AbstractGeneratorFragment2 {
 					new TypeReference("org.eclipse.xtext.ui.compare.DefaultViewerCreator")
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (projectConfig.eclipsePlugin.pluginXml != null) {
+		if (projectConfig.eclipsePlugin?.pluginXml != null) {
 			projectConfig.eclipsePlugin.pluginXml.entries += '''
 			<extension point="org.eclipse.compare.contentViewers">
 				<viewer id="«grammar.name».compare.contentViewers"

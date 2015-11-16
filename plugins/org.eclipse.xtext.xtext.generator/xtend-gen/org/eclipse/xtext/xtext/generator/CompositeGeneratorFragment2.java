@@ -12,19 +12,21 @@ import java.util.List;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.CompositeGeneratorException;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.Issues;
 
 /**
- * A composite generator fragment delegates to its contained fragments.
+ * @noreference
  */
 @SuppressWarnings("all")
-public class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
+public class CompositeGeneratorFragment2 implements IXtextGeneratorFragment {
   @Accessors(AccessorType.PROTECTED_GETTER)
-  private final List<IGeneratorFragment2> fragments = CollectionLiterals.<IGeneratorFragment2>newArrayList();
+  private final List<IXtextGeneratorFragment> fragments = CollectionLiterals.<IXtextGeneratorFragment>newArrayList();
   
-  public void addFragment(final IGeneratorFragment2 fragment) {
+  public void addFragment(final IXtextGeneratorFragment fragment) {
     if ((fragment == this)) {
       throw new IllegalArgumentException();
     }
@@ -33,28 +35,41 @@ public class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
   
   @Override
   public void checkConfiguration(final Issues issues) {
-    for (final IGeneratorFragment2 fragment : this.fragments) {
+    for (final IXtextGeneratorFragment fragment : this.fragments) {
       fragment.checkConfiguration(issues);
     }
   }
   
   @Override
-  public void initialize(final Injector injector) {
-    injector.injectMembers(this);
-    for (final IGeneratorFragment2 fragment : this.fragments) {
-      fragment.initialize(injector);
+  public void generate() {
+    final CompositeGeneratorException composite = new CompositeGeneratorException();
+    for (final IXtextGeneratorFragment fragment : this.fragments) {
+      try {
+        fragment.generate();
+      } catch (final Throwable _t) {
+        if (_t instanceof Exception) {
+          final Exception e = (Exception)_t;
+          composite.addException(e);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    }
+    boolean _hasExceptions = composite.hasExceptions();
+    if (_hasExceptions) {
+      throw composite;
     }
   }
   
   @Override
-  public void generate() {
-    for (final IGeneratorFragment2 fragment : this.fragments) {
-      fragment.generate();
+  public void initialize(final Injector injector) {
+    for (final IXtextGeneratorFragment fragment : this.fragments) {
+      fragment.initialize(injector);
     }
   }
   
   @Pure
-  protected List<IGeneratorFragment2> getFragments() {
+  protected List<IXtextGeneratorFragment> getFragments() {
     return this.fragments;
   }
 }

@@ -886,7 +886,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//BooleanOperator
 		public RuleCall getOperatorBooleanOperatorEnumRuleCall_3_0() { return cOperatorBooleanOperatorEnumRuleCall_3_0; }
 
-		//(isTrue?="true" | "false")
+		//isTrue?="true" | "false"
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
 		//isTrue?="true"

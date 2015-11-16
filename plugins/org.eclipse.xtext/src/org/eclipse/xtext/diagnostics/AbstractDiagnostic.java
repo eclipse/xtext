@@ -11,6 +11,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.LineAndColumn;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -41,6 +43,11 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 
 	@Override
 	public int getColumn() {
+		INode node = getNode();
+		if (node != null) {
+			LineAndColumn lineAndColumn = NodeModelUtils.getLineAndColumn(node, getOffset());
+			return lineAndColumn.getColumn();
+		}
 		return 0;
 	}
 

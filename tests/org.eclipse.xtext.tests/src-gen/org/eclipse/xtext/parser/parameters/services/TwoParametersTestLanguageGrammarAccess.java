@@ -13,6 +13,7 @@ import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.parser.parameters.services.ParametersTestLanguageGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
@@ -114,12 +115,12 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//{ParserRuleParameters}
 		public Action getParserRuleParametersAction_0() { return cParserRuleParametersAction_0; }
 
-		//('#1' scenario=Scenario5<true,true> | '#2' scenario=Scenario5<false,false> | '#3' scenario=Scenario6<true,true> | '#4'
+		//'#1' scenario=Scenario5<true,true> | '#2' scenario=Scenario5<false,false> | '#3' scenario=Scenario6<true,true> | '#4'
 		//scenario=Scenario6<false,true> | => ('#5' scenario=Scenario6<true,true>) | => ('#6' scenario=Scenario6<false,false>) |
 		//'#7' scenario=Scenario7<true,true> | '#8' scenario=Scenario7<false,true> | '#9' (scenario=Scenario8<true,true> |
 		//scenario=Scenario6<true,true> 'keyword'?) | '#10' (scenario=Scenario8<true,true> | scenario=Scenario6<false,false>
 		//'keyword'?) | '#11' (scenario=Scenario8<false,false> | scenario=Scenario6<true,true> 'keyword'?) | '#12'
-		//(scenario=Scenario8<false,false> | scenario=Scenario6<false,false> 'keyword'?))
+		//(scenario=Scenario8<false,false> | scenario=Scenario6<false,false> 'keyword'?)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'#1' scenario=Scenario5<true,true>
@@ -173,7 +174,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//=> ('#5' scenario=Scenario6<true,true>)
 		public Group getGroup_1_4() { return cGroup_1_4; }
 
-		//('#5' scenario=Scenario6<true,true>)
+		//'#5' scenario=Scenario6<true,true>
 		public Group getGroup_1_4_0() { return cGroup_1_4_0; }
 
 		//'#5'
@@ -188,7 +189,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//=> ('#6' scenario=Scenario6<false,false>)
 		public Group getGroup_1_5() { return cGroup_1_5; }
 
-		//('#6' scenario=Scenario6<false,false>)
+		//'#6' scenario=Scenario6<false,false>
 		public Group getGroup_1_5_0() { return cGroup_1_5_0; }
 
 		//'#6'
@@ -230,7 +231,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//'#9'
 		public Keyword getNumberSignDigitNineKeyword_1_8_0() { return cNumberSignDigitNineKeyword_1_8_0; }
 
-		//(scenario=Scenario8<true,true> | scenario=Scenario6<true,true> 'keyword'?)
+		//scenario=Scenario8<true,true> | scenario=Scenario6<true,true> 'keyword'?
 		public Alternatives getAlternatives_1_8_1() { return cAlternatives_1_8_1; }
 
 		//scenario=Scenario8<true,true>
@@ -257,7 +258,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//'#10'
 		public Keyword getNumberSignDigitOneDigitZeroKeyword_1_9_0() { return cNumberSignDigitOneDigitZeroKeyword_1_9_0; }
 
-		//(scenario=Scenario8<true,true> | scenario=Scenario6<false,false> 'keyword'?)
+		//scenario=Scenario8<true,true> | scenario=Scenario6<false,false> 'keyword'?
 		public Alternatives getAlternatives_1_9_1() { return cAlternatives_1_9_1; }
 
 		//scenario=Scenario8<true,true>
@@ -284,7 +285,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//'#11'
 		public Keyword getNumberSignDigitOneDigitOneKeyword_1_10_0() { return cNumberSignDigitOneDigitOneKeyword_1_10_0; }
 
-		//(scenario=Scenario8<false,false> | scenario=Scenario6<true,true> 'keyword'?)
+		//scenario=Scenario8<false,false> | scenario=Scenario6<true,true> 'keyword'?
 		public Alternatives getAlternatives_1_10_1() { return cAlternatives_1_10_1; }
 
 		//scenario=Scenario8<false,false>
@@ -311,7 +312,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//'#12'
 		public Keyword getNumberSignDigitOneDigitTwoKeyword_1_11_0() { return cNumberSignDigitOneDigitTwoKeyword_1_11_0; }
 
-		//(scenario=Scenario8<false,false> | scenario=Scenario6<false,false> 'keyword'?)
+		//scenario=Scenario8<false,false> | scenario=Scenario6<false,false> 'keyword'?
 		public Alternatives getAlternatives_1_11_1() { return cAlternatives_1_11_1; }
 
 		//scenario=Scenario8<false,false>
@@ -475,11 +476,15 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	private final ParametersTestLanguageGrammarAccess gaParametersTestLanguage;
 
+	private final TerminalsGrammarAccess gaTerminals;
+
 	@Inject
 	public TwoParametersTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		ParametersTestLanguageGrammarAccess gaParametersTestLanguage) {
+		ParametersTestLanguageGrammarAccess gaParametersTestLanguage,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaParametersTestLanguage = gaParametersTestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pParserRuleParameters = new ParserRuleParametersElements();
 		this.pScenario5 = new Scenario5Elements();
 		this.pScenario6 = new Scenario6Elements();
@@ -512,6 +517,10 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	public ParametersTestLanguageGrammarAccess getParametersTestLanguageGrammarAccess() {
 		return gaParametersTestLanguage;
+	}
+
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
 	}
 
 	
@@ -637,43 +646,43 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
-		return gaParametersTestLanguage.getIDRule();
+		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaParametersTestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaParametersTestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaParametersTestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaParametersTestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaParametersTestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaParametersTestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

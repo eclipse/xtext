@@ -11,13 +11,11 @@ import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EPackage
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator
 import org.eclipse.xtext.validation.ComposedChecks
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -28,17 +26,11 @@ import static org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
-class ValidatorFragment2 extends AbstractGeneratorFragment2 {
+class ValidatorFragment2 extends AbstractInheritingFragment {
 	
+	@Inject extension ValidatorNaming
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
-	@Inject CodeConfig codeConfig
-	
-	@Accessors
-	boolean generateStub = true
-	
-	@Accessors
-	boolean inheritImplementation = true
 	
 	val List<String> composedChecks = newArrayList
 	
@@ -52,19 +44,7 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 		composedChecks += composedCheckValidator
 	}
 	
-	/**
-	 * @return a {@link TypeReference} wrapping the desired validator class' simple name and package name
-	 */
-	public def TypeReference getValidatorClass(Grammar grammar) {
-		// is public for being callable by QuickFixProviderFragement2
-		new TypeReference(grammar.runtimeBasePackage + '.validation.' + getSimpleName(grammar) + 'Validator')
-	}
-	
-	protected def TypeReference getAbstractValidatorClass(Grammar grammar) {
-		new TypeReference(grammar.runtimeBasePackage + '.validation.Abstract' + getSimpleName(grammar) + 'Validator')
-	}
-	
-	protected def TypeReference getValidatorSuperClass(Grammar grammar) {
+	protected def TypeReference getGenValidatorSuperClass(Grammar grammar) {
 		val superGrammar = grammar.nonTerminalsSuperGrammar
 		if (inheritImplementation && superGrammar !== null) 
 			superGrammar.validatorClass
@@ -77,20 +57,17 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	override generate() {
-		val bindingFactory = new GuiceModuleAccess.BindingFactory()
-		if (generateStub)
-			bindingFactory.addTypeToTypeEagerSingleton(grammar.validatorClass, grammar.validatorClass)
-		else
-			bindingFactory.addTypeToTypeEagerSingleton(grammar.abstractValidatorClass, grammar.abstractValidatorClass)
-		bindingFactory.contributeTo(language.runtimeGenModule)
+		new GuiceModuleAccess.BindingFactory()
+			.addTypeToTypeEagerSingleton(grammar.validatorClass, grammar.validatorClass)
+			.contributeTo(language.runtimeGenModule)
 		
-		if (generateStub) {
-			if (codeConfig.preferXtendStubs)
+		if (isGenerateStub) {
+			if (generateXtendStub)
 				generateXtendValidatorStub()
 			else
 				generateJavaValidatorStub()
 		}
-		generateAbstractValidator()
+		generateGenValidator()
 		
 		if (projectConfig.runtime.manifest !== null)
 			projectConfig.runtime.manifest.exportedPackages += grammar.validatorClass.packageName
@@ -101,8 +78,6 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def generateXtendValidatorStub() {
 		fileAccessFactory.createXtendFile(grammar.validatorClass, '''
-			//import org.eclipse.xtext.validation.Check
-			
 			/**
 			 * This class contains custom validation rules. 
 			 *
@@ -116,7 +91,7 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 			//	def checkGreetingStartsWithCapital(Greeting greeting) {
 			//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
 			//			warning('Name should start with a capital', 
-			//					MyDslPackage.Literals.GREETING__NAME,
+			//					«grammar.simpleName»Package.Literals.GREETING__NAME,
 			//					INVALID_NAME)
 			//		}
 			//	}
@@ -127,8 +102,6 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def generateJavaValidatorStub() {
 		fileAccessFactory.createJavaFile(grammar.validatorClass, '''
-			//import org.eclipse.xtext.validation.Check;
-			
 			/**
 			 * This class contains custom validation rules. 
 			 *
@@ -136,10 +109,14 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			public class «grammar.validatorClass.simpleName» extends «grammar.abstractValidatorClass» {
 				
+			//  public static final INVALID_NAME = 'invalidName'
+			//
 			//	@Check
 			//	public void checkGreetingStartsWithCapital(Greeting greeting) {
 			//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-			//			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
+			//			warning("Name should start with a capital",
+			//					«grammar.simpleName»Package.Literals.GREETING__NAME,
+			//					INVALID_NAME);
 			//		}
 			//	}
 				
@@ -147,13 +124,19 @@ class ValidatorFragment2 extends AbstractGeneratorFragment2 {
 		''').writeTo(projectConfig.runtime.src)
 	}
 	
-	protected def generateAbstractValidator() {
-		val javaFile = fileAccessFactory.createGeneratedJavaFile(grammar.abstractValidatorClass)
+	protected def generateGenValidator() {
+		// take the non-abstract class signature for the src-gen class in case of !generateStub
+		//  as validators of sub languages refer to 'superGrammar.validatorClass',
+		//  see 'getGenValidatorSuperClass(...)'
+		val genClass = if (isGenerateStub) grammar.abstractValidatorClass else grammar.validatorClass
+
+		val javaFile = fileAccessFactory.createGeneratedJavaFile(genClass)
+		
 		javaFile.content = '''
 			«IF !composedChecks.empty»
 			@«ComposedChecks»(validators = {«FOR validator: composedChecks SEPARATOR ", "»«validator.typeRef».class«ENDFOR»})
 			«ENDIF»
-			public «IF generateStub»abstract «ENDIF»class «grammar.abstractValidatorClass.simpleName» extends «grammar.validatorSuperClass» {
+			public «IF isGenerateStub»abstract «ENDIF»class «genClass.simpleName» extends «grammar.genValidatorSuperClass» {
 				
 				@Override
 				protected «List»<«EPackage»> getEPackages() {

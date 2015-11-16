@@ -11,18 +11,27 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import static extension org.eclipse.xtext.GrammarUtil.*
+import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 
 @Singleton
 class PsiGrammarNaming extends GrammarNaming {
 	@Inject
 	extension XtextGeneratorNaming
 	
-	override String getParserPackage(Grammar it) '''«ideaBasePackage».parser.antlr.internal'''
-
-	override getGrammarClass(Grammar it) {
-		new TypeReference(parserPackage, '''PsiInternal«simpleName»''')
+	override isCombinedGrammar(Grammar it) {
+		// separated grammars are not supported for IDEA yet
+		true
 	}
+	
+	override String getParserPackage(Grammar it) '''«ideaBasePackage».parser.antlr'''
+	
+	override getInternalParserSuperClass(Grammar it) {
+		new TypeReference("org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser")
+	}
+	
+	override protected getGrammarNamePrefix(Grammar it) {
+		"Psi"
+	}
+	
 }

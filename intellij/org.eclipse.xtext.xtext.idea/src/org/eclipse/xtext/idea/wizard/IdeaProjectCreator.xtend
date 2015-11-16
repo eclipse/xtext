@@ -19,6 +19,9 @@ import org.eclipse.xtext.xtext.wizard.ProjectsCreator
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration
 import org.jetbrains.jps.model.java.JavaSourceRootType
 import org.jetbrains.jps.model.java.JpsJavaExtensionService
+import org.eclipse.xtext.xtext.wizard.TextFile
+import org.eclipse.xtext.xtext.wizard.BinaryFile
+import com.google.common.io.Resources
 
 class IdeaProjectCreator implements ProjectsCreator {
 
@@ -52,7 +55,16 @@ class IdeaProjectCreator implements ProjectsCreator {
 			val ioFile = new File(new File(projectRoot.path), projectRelativePath)
 			ioFile.parentFile.mkdirs
 			ioFile.createNewFile
-			VfsUtil.saveText(fileSystem.refreshAndFindFileByIoFile(ioFile), content)
+			if(executable) {
+				ioFile.executable = true
+			}
+			val virtualFile = fileSystem.refreshAndFindFileByIoFile(ioFile)
+			switch(it) {
+				TextFile:
+					VfsUtil.saveText(virtualFile, content)
+				BinaryFile:
+					virtualFile.binaryContent = Resources.toByteArray(content)
+			}
 		]
 
 		val module = model.newModule(project.moduleFilePath, StdModuleTypes.JAVA.id)

@@ -20,23 +20,61 @@ class GrammarNaming {
 
 	@Inject
 	extension XtextGeneratorNaming
+	
+	def isCombinedGrammar(Grammar it) {
+		CombinedGrammarMarker.findInEmfObject(it).isCombinedGrammar
+	}
 
-	def String getParserPackage(Grammar it) '''«runtimeBasePackage».parser.antlr.internal'''
+	protected def String getParserPackage(Grammar it) {
+		runtimeBasePackage + ".parser.antlr"
+	}
 
-	def TypeReference getGrammarClass(Grammar it) {
-		new TypeReference(parserPackage, '''Internal«simpleName»''')
+	protected def String getInternalParserPackage(Grammar it) {
+		parserPackage + ".internal"
+	}
+
+	def AntlrGrammar getParserGrammar(Grammar it) {
+		new AntlrGrammar(internalParserPackage, '''«grammarNamePrefix»Internal«simpleName»«IF !combinedGrammar»Parser«ENDIF»''')
+	}
+
+	def AntlrGrammar getLexerGrammar(Grammar it) {
+		new AntlrGrammar(internalParserPackage, '''«grammarNamePrefix»Internal«simpleName»«IF !combinedGrammar»Lexer«ENDIF»''')
+	}
+	
+	protected def String getGrammarNamePrefix(Grammar it) {
+		""
+	}
+
+	def TypeReference getLexerClass(Grammar it) {
+		new TypeReference(lexerGrammar.packageName, '''«lexerGrammar.simpleName»«IF combinedGrammar»Lexer«ENDIF»''')
+	}
+	
+	def TypeReference getLexerSuperClass(Grammar it) {
+		new TypeReference("org.eclipse.xtext.parser.antlr.Lexer")
+	}
+
+	def TypeReference getParserClass(Grammar it) {
+		new TypeReference(parserPackage, '''«simpleName»Parser''')
+	}
+
+	def TypeReference getParserSuperClass(Grammar it, boolean partialParsing) {
+		new TypeReference("org.eclipse.xtext.parser.antlr.AbstractAntlrParser")
 	}
 
 	def TypeReference getInternalParserClass(Grammar it) {
-		new TypeReference(parserPackage, '''Internal«simpleName»Parser''')
+		new TypeReference(parserGrammar.packageName, '''«parserGrammar.simpleName»«IF combinedGrammar»Parser«ENDIF»''')
 	}
 
-	def TypeReference getContentAssistParserClass(Grammar it) {
-		new TypeReference('''«genericIdeBasePackage».contentassist.antlr''', '''«simpleName»Parser''')
+	def TypeReference getInternalParserSuperClass(Grammar it) {
+		new TypeReference("org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser")
 	}
-	
-	def TypeReference getInternalContentAssistLexerClass(Grammar it) {
-		new TypeReference('''«genericIdeBasePackage».contentassist.antlr.internal''', '''Internal«simpleName»Lexer''')
+
+	def TypeReference getAntlrTokenFileProviderClass(Grammar it) {
+		new TypeReference(parserPackage, '''«simpleName»AntlrTokenFileProvider''')
+	}
+
+	def TypeReference getTokenSourceClass(Grammar it) {
+		new TypeReference(parserPackage, simpleName + "TokenSource")
 	}
 
 }

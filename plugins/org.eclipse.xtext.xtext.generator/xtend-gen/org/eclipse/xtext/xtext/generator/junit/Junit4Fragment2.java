@@ -20,19 +20,19 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @SuppressWarnings("all")
-public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
+public class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -42,13 +42,13 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate() {
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    BundleProjectConfig _runtimeTest = _projectConfig.getRuntimeTest();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _runtimeTest = _projectConfig.getRuntimeTest();
     ManifestAccess _manifest = _runtimeTest.getManifest();
     boolean _notEquals = (!Objects.equal(_manifest, null));
     if (_notEquals) {
-      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      BundleProjectConfig _runtimeTest_1 = _projectConfig_1.getRuntimeTest();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IBundleProjectConfig _runtimeTest_1 = _projectConfig_1.getRuntimeTest();
       ManifestAccess _manifest_1 = _runtimeTest_1.getManifest();
       final Procedure1<ManifestAccess> _function = new Procedure1<ManifestAccess>() {
         @Override
@@ -65,13 +65,13 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }
-    XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    BundleProjectConfig _eclipsePluginTest = _projectConfig_2.getEclipsePluginTest();
+    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePluginTest = _projectConfig_2.getEclipsePluginTest();
     ManifestAccess _manifest_2 = _eclipsePluginTest.getManifest();
     boolean _notEquals_1 = (!Objects.equal(_manifest_2, null));
     if (_notEquals_1) {
-      XtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      BundleProjectConfig _eclipsePluginTest_1 = _projectConfig_3.getEclipsePluginTest();
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePluginTest_1 = _projectConfig_3.getEclipsePluginTest();
       ManifestAccess _manifest_3 = _eclipsePluginTest_1.getManifest();
       final Procedure1<ManifestAccess> _function_1 = new Procedure1<ManifestAccess>() {
         @Override
@@ -88,25 +88,24 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_3, _function_1);
     }
-    XtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin = _projectConfig_4.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig_4.getEclipsePlugin();
     ManifestAccess _manifest_4 = _eclipsePlugin.getManifest();
     boolean _notEquals_2 = (!Objects.equal(_manifest_4, null));
     if (_notEquals_2) {
-      XtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-      BundleProjectConfig _eclipsePlugin_1 = _projectConfig_5.getEclipsePlugin();
+      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_5.getEclipsePlugin();
       ManifestAccess _manifest_5 = _eclipsePlugin_1.getManifest();
       Set<String> _exportedPackages = _manifest_5.getExportedPackages();
-      Grammar _grammar = this.getGrammar();
-      TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar);
+      TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator();
       String _packageName = _eclipsePluginActivator.getPackageName();
       _exportedPackages.add(_packageName);
     }
-    XtextProjectConfig _projectConfig_6 = this.getProjectConfig();
-    BundleProjectConfig _runtimeTest_2 = _projectConfig_6.getRuntimeTest();
+    IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
+    IBundleProjectConfig _runtimeTest_2 = _projectConfig_6.getRuntimeTest();
     ManifestAccess _manifest_6 = _runtimeTest_2.getManifest();
-    XtextProjectConfig _projectConfig_7 = this.getProjectConfig();
-    BundleProjectConfig _eclipsePluginTest_2 = _projectConfig_7.getEclipsePluginTest();
+    IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePluginTest_2 = _projectConfig_7.getEclipsePluginTest();
     ManifestAccess _manifest_7 = _eclipsePluginTest_2.getManifest();
     Iterable<ManifestAccess> _filterNull = IterableExtensions.<ManifestAccess>filterNull(Collections.<ManifestAccess>unmodifiableList(CollectionLiterals.<ManifestAccess>newArrayList(_manifest_6, _manifest_7)));
     final Procedure1<ManifestAccess> _function_2 = new Procedure1<ManifestAccess>() {
@@ -125,20 +124,26 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
     };
     IterableExtensions.<ManifestAccess>forEach(_filterNull, _function_2);
     JavaFileAccess _generateInjectorProvider = this.generateInjectorProvider();
-    XtextProjectConfig _projectConfig_8 = this.getProjectConfig();
-    BundleProjectConfig _runtimeTest_3 = _projectConfig_8.getRuntimeTest();
+    IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
+    IBundleProjectConfig _runtimeTest_3 = _projectConfig_8.getRuntimeTest();
     IXtextGeneratorFileSystemAccess _srcGen = _runtimeTest_3.getSrcGen();
     _generateInjectorProvider.writeTo(_srcGen);
     JavaFileAccess _generateExampleRuntimeTest = this.generateExampleRuntimeTest();
-    XtextProjectConfig _projectConfig_9 = this.getProjectConfig();
-    BundleProjectConfig _runtimeTest_4 = _projectConfig_9.getRuntimeTest();
+    IXtextProjectConfig _projectConfig_9 = this.getProjectConfig();
+    IBundleProjectConfig _runtimeTest_4 = _projectConfig_9.getRuntimeTest();
     IXtextGeneratorFileSystemAccess _src = _runtimeTest_4.getSrc();
     _generateExampleRuntimeTest.writeTo(_src);
-    JavaFileAccess _generateUiInjectorProvider = this.generateUiInjectorProvider();
-    XtextProjectConfig _projectConfig_10 = this.getProjectConfig();
-    BundleProjectConfig _eclipsePluginTest_3 = _projectConfig_10.getEclipsePluginTest();
-    IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePluginTest_3.getSrcGen();
-    _generateUiInjectorProvider.writeTo(_srcGen_1);
+    IXtextProjectConfig _projectConfig_10 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_10.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin_2.getSrcGen();
+    boolean _tripleNotEquals = (_srcGen_1 != null);
+    if (_tripleNotEquals) {
+      JavaFileAccess _generateUiInjectorProvider = this.generateUiInjectorProvider();
+      IXtextProjectConfig _projectConfig_11 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePluginTest_3 = _projectConfig_11.getEclipsePluginTest();
+      IXtextGeneratorFileSystemAccess _srcGen_2 = _eclipsePluginTest_3.getSrcGen();
+      _generateUiInjectorProvider.writeTo(_srcGen_2);
+    }
   }
   
   public JavaFileAccess generateExampleRuntimeTest() {
@@ -241,7 +246,7 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
       TypeReference _injectorProvider = this.injectorProvider();
       final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_injectorProvider);
       final TypeReference globalRegistries = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries");
-      final TypeReference globalStateMemento = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento");
+      final TypeReference globalStateMemento = new TypeReference("org.eclipse.xtext.junit4", "GlobalRegistries.GlobalStateMemento");
       final TypeReference iRegistryConfigurator = new TypeReference("org.eclipse.xtext.junit4.IRegistryConfigurator");
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -291,7 +296,7 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
           _builder.append("\t");
           _builder.append("public ");
           _builder.append(Injector.class, "\t");
-          _builder.append(" getInjector()\t{");
+          _builder.append(" getInjector() {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("if (injector == null) {");
@@ -414,12 +419,11 @@ public class Junit4Fragment2 extends AbstractGeneratorFragment2 {
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("return ");
-          Grammar _grammar = Junit4Fragment2.this.getGrammar();
-          TypeReference _eclipsePluginActivator = Junit4Fragment2.this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar);
+          TypeReference _eclipsePluginActivator = Junit4Fragment2.this._xtextGeneratorNaming.getEclipsePluginActivator();
           _builder.append(_eclipsePluginActivator, "\t\t");
           _builder.append(".getInstance().getInjector(\"");
-          Grammar _grammar_1 = Junit4Fragment2.this.getGrammar();
-          String _name = _grammar_1.getName();
+          Grammar _grammar = Junit4Fragment2.this.getGrammar();
+          String _name = _grammar.getName();
           _builder.append(_name, "\t\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();

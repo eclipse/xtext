@@ -15,6 +15,7 @@ import org.eclipse.xtext.generator.*
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
+var encoding = 'ISO-8859-1'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -44,31 +45,31 @@ Workflow {
 	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		projectNameRt = projectName
-		language = {
+		language = auto-inject {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				srcGenOnly = false
 			}
 		}
-		language = {
+		language = auto-inject {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
-		language = {
+		language = auto-inject {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
-		language = {
+		language = auto-inject {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				srcGenOnly = false
 			}
 		}
-		language = {
+		language = auto-inject {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
-		language = {
+		language = auto-inject {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest3Language.xtext"
 			fragment = @TestLanguagesFragments {}
 		}

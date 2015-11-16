@@ -4,19 +4,17 @@
 package org.eclipse.xtext.grammarinheritance.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.Element;
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage;
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.Model;
-import org.eclipse.xtext.grammarinheritance.serializer.InheritanceTestLanguageSemanticSequencer;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTest3LanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.ISerializationContext;
 
 @SuppressWarnings("all")
 public class InheritanceTest3LanguageSemanticSequencer extends InheritanceTestLanguageSemanticSequencer {
@@ -25,15 +23,20 @@ public class InheritanceTest3LanguageSemanticSequencer extends InheritanceTestLa
 	private InheritanceTest3LanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == InheritanceTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == InheritanceTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case InheritanceTestPackage.ELEMENT:
-				if(context == grammarAccess.getElementRule()) {
-					sequence_Element_InheritanceTestLanguageElement(context, (Element) semanticObject); 
+				if (rule == grammarAccess.getInheritanceTestLanguageElementRule()) {
+					sequence_Element(context, (Element) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getInheritanceTestLanguageElementRule()) {
-					sequence_Element(context, (Element) semanticObject); 
+				else if (rule == grammarAccess.getElementRule()) {
+					sequence_Element_Element(context, (Element) semanticObject); 
 					return; 
 				}
 				else break;
@@ -41,14 +44,20 @@ public class InheritanceTest3LanguageSemanticSequencer extends InheritanceTestLa
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Element returns Element
+	 *
 	 * Constraint:
-	 *     (name=ID | name=STRING | name=ID)
+	 *     (name=ID | name=ID | name=STRING | name=ID)
 	 */
-	protected void sequence_Element_InheritanceTestLanguageElement(EObject context, Element semanticObject) {
+	protected void sequence_Element_Element(ISerializationContext context, Element semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

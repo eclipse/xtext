@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
+/**
+ * @noreference
+ */
 @FinalFieldsConstructor
 class MweIssues implements Issues {
 	

@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -28,15 +27,10 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.BundleProjectConfig;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.ILanguageConfig;
-import org.eclipse.xtext.xtext.generator.RuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
+import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GeneratedJavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -46,25 +40,24 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
+import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
+import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
+import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming;
 
 @SuppressWarnings("all")
-public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
+public class ValidatorFragment2 extends AbstractInheritingFragment {
+  @Inject
+  @Extension
+  private ValidatorNaming _validatorNaming;
+  
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Inject
   private FileAccessFactory fileAccessFactory;
-  
-  @Inject
-  private CodeConfig codeConfig;
-  
-  @Accessors
-  private boolean generateStub = true;
-  
-  @Accessors
-  private boolean inheritImplementation = true;
   
   private final List<String> composedChecks = CollectionLiterals.<String>newArrayList();
   
@@ -78,40 +71,20 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
     this.composedChecks.add(composedCheckValidator);
   }
   
-  /**
-   * @return a {@link TypeReference} wrapping the desired validator class' simple name and package name
-   */
-  public TypeReference getValidatorClass(final Grammar grammar) {
-    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
-    String _plus = (_runtimeBasePackage + ".validation.");
-    String _simpleName = GrammarUtil.getSimpleName(grammar);
-    String _plus_1 = (_plus + _simpleName);
-    String _plus_2 = (_plus_1 + "Validator");
-    return new TypeReference(_plus_2);
-  }
-  
-  protected TypeReference getAbstractValidatorClass(final Grammar grammar) {
-    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(grammar);
-    String _plus = (_runtimeBasePackage + ".validation.Abstract");
-    String _simpleName = GrammarUtil.getSimpleName(grammar);
-    String _plus_1 = (_plus + _simpleName);
-    String _plus_2 = (_plus_1 + "Validator");
-    return new TypeReference(_plus_2);
-  }
-  
-  protected TypeReference getValidatorSuperClass(final Grammar grammar) {
+  protected TypeReference getGenValidatorSuperClass(final Grammar grammar) {
     TypeReference _xblockexpression = null;
     {
       final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(grammar);
       TypeReference _xifexpression = null;
       boolean _and = false;
-      if (!this.inheritImplementation) {
+      boolean _isInheritImplementation = this.isInheritImplementation();
+      if (!_isInheritImplementation) {
         _and = false;
       } else {
         _and = (superGrammar != null);
       }
       if (_and) {
-        _xifexpression = this.getValidatorClass(superGrammar);
+        _xifexpression = this._validatorNaming.getValidatorClass(superGrammar);
       } else {
         _xifexpression = this.getDefaultValidatorSuperClass();
       }
@@ -126,48 +99,41 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate() {
-    final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
-    if (this.generateStub) {
-      Grammar _grammar = this.getGrammar();
-      TypeReference _validatorClass = this.getValidatorClass(_grammar);
-      Grammar _grammar_1 = this.getGrammar();
-      TypeReference _validatorClass_1 = this.getValidatorClass(_grammar_1);
-      bindingFactory.addTypeToTypeEagerSingleton(_validatorClass, _validatorClass_1);
-    } else {
-      Grammar _grammar_2 = this.getGrammar();
-      TypeReference _abstractValidatorClass = this.getAbstractValidatorClass(_grammar_2);
-      Grammar _grammar_3 = this.getGrammar();
-      TypeReference _abstractValidatorClass_1 = this.getAbstractValidatorClass(_grammar_3);
-      bindingFactory.addTypeToTypeEagerSingleton(_abstractValidatorClass, _abstractValidatorClass_1);
-    }
-    ILanguageConfig _language = this.getLanguage();
+    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
+    Grammar _grammar = this.getGrammar();
+    TypeReference _validatorClass = this._validatorNaming.getValidatorClass(_grammar);
+    Grammar _grammar_1 = this.getGrammar();
+    TypeReference _validatorClass_1 = this._validatorNaming.getValidatorClass(_grammar_1);
+    GuiceModuleAccess.BindingFactory _addTypeToTypeEagerSingleton = _bindingFactory.addTypeToTypeEagerSingleton(_validatorClass, _validatorClass_1);
+    IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
-    bindingFactory.contributeTo(_runtimeGenModule);
-    if (this.generateStub) {
-      boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs) {
+    _addTypeToTypeEagerSingleton.contributeTo(_runtimeGenModule);
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
+      boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+      if (_isGenerateXtendStub) {
         this.generateXtendValidatorStub();
       } else {
         this.generateJavaValidatorStub();
       }
     }
-    this.generateAbstractValidator();
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    this.generateGenValidator();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     ManifestAccess _manifest = _runtime.getManifest();
     boolean _tripleNotEquals = (_manifest != null);
     if (_tripleNotEquals) {
-      XtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      RuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
       ManifestAccess _manifest_1 = _runtime_1.getManifest();
       Set<String> _exportedPackages = _manifest_1.getExportedPackages();
-      Grammar _grammar_4 = this.getGrammar();
-      TypeReference _validatorClass_2 = this.getValidatorClass(_grammar_4);
+      Grammar _grammar_2 = this.getGrammar();
+      TypeReference _validatorClass_2 = this._validatorNaming.getValidatorClass(_grammar_2);
       String _packageName = _validatorClass_2.getPackageName();
       _exportedPackages.add(_packageName);
     }
-    XtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-    BundleProjectConfig _eclipsePlugin = _projectConfig_2.getEclipsePlugin();
+    IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig_2.getEclipsePlugin();
     PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
     boolean _tripleNotEquals_1 = (_pluginXml != null);
     if (_tripleNotEquals_1) {
@@ -177,13 +143,10 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
   
   protected void generateXtendValidatorStub() {
     Grammar _grammar = this.getGrammar();
-    TypeReference _validatorClass = this.getValidatorClass(_grammar);
+    TypeReference _validatorClass = this._validatorNaming.getValidatorClass(_grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("//import org.eclipse.xtext.validation.Check");
-        _builder.newLine();
-        _builder.newLine();
         _builder.append("/**");
         _builder.newLine();
         _builder.append(" ");
@@ -200,12 +163,12 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("class ");
         Grammar _grammar = ValidatorFragment2.this.getGrammar();
-        TypeReference _validatorClass = ValidatorFragment2.this.getValidatorClass(_grammar);
+        TypeReference _validatorClass = ValidatorFragment2.this._validatorNaming.getValidatorClass(_grammar);
         String _simpleName = _validatorClass.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
         Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
-        TypeReference _abstractValidatorClass = ValidatorFragment2.this.getAbstractValidatorClass(_grammar_1);
+        TypeReference _abstractValidatorClass = ValidatorFragment2.this._validatorNaming.getAbstractValidatorClass(_grammar_1);
         _builder.append(_abstractValidatorClass, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -223,8 +186,12 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("//\t\t\twarning(\'Name should start with a capital\', ");
         _builder.newLine();
-        _builder.append("//\t\t\t\t\tMyDslPackage.Literals.GREETING__NAME,");
-        _builder.newLine();
+        _builder.append("//\t\t\t\t\t");
+        Grammar _grammar_2 = ValidatorFragment2.this.getGrammar();
+        String _simpleName_1 = GrammarUtil.getSimpleName(_grammar_2);
+        _builder.append(_simpleName_1, "");
+        _builder.append("Package.Literals.GREETING__NAME,");
+        _builder.newLineIfNotEmpty();
         _builder.append("//\t\t\t\t\tINVALID_NAME)");
         _builder.newLine();
         _builder.append("//\t\t}");
@@ -238,21 +205,18 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     XtendFileAccess _createXtendFile = this.fileAccessFactory.createXtendFile(_validatorClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
     _createXtendFile.writeTo(_src);
   }
   
   protected void generateJavaValidatorStub() {
     Grammar _grammar = this.getGrammar();
-    TypeReference _validatorClass = this.getValidatorClass(_grammar);
+    TypeReference _validatorClass = this._validatorNaming.getValidatorClass(_grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("//import org.eclipse.xtext.validation.Check;");
-        _builder.newLine();
-        _builder.newLine();
         _builder.append("/**");
         _builder.newLine();
         _builder.append(" ");
@@ -269,16 +233,20 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("public class ");
         Grammar _grammar = ValidatorFragment2.this.getGrammar();
-        TypeReference _validatorClass = ValidatorFragment2.this.getValidatorClass(_grammar);
+        TypeReference _validatorClass = ValidatorFragment2.this._validatorNaming.getValidatorClass(_grammar);
         String _simpleName = _validatorClass.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
         Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
-        TypeReference _abstractValidatorClass = ValidatorFragment2.this.getAbstractValidatorClass(_grammar_1);
+        TypeReference _abstractValidatorClass = ValidatorFragment2.this._validatorNaming.getAbstractValidatorClass(_grammar_1);
         _builder.append(_abstractValidatorClass, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
+        _builder.newLine();
+        _builder.append("//  public static final INVALID_NAME = \'invalidName\'");
+        _builder.newLine();
+        _builder.append("//");
         _builder.newLine();
         _builder.append("//\t@Check");
         _builder.newLine();
@@ -286,7 +254,15 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("//\t\tif (!Character.isUpperCase(greeting.getName().charAt(0))) {");
         _builder.newLine();
-        _builder.append("//\t\t\twarning(\"Name should start with a capital\", MyDslPackage.Literals.GREETING__NAME);");
+        _builder.append("//\t\t\twarning(\"Name should start with a capital\",");
+        _builder.newLine();
+        _builder.append("//\t\t\t\t\t");
+        Grammar _grammar_2 = ValidatorFragment2.this.getGrammar();
+        String _simpleName_1 = GrammarUtil.getSimpleName(_grammar_2);
+        _builder.append(_simpleName_1, "");
+        _builder.append("Package.Literals.GREETING__NAME,");
+        _builder.newLineIfNotEmpty();
+        _builder.append("//\t\t\t\t\tINVALID_NAME);");
         _builder.newLine();
         _builder.append("//\t\t}");
         _builder.newLine();
@@ -299,16 +275,24 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     JavaFileAccess _createJavaFile = this.fileAccessFactory.createJavaFile(_validatorClass, _client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
     _createJavaFile.writeTo(_src);
   }
   
-  protected void generateAbstractValidator() {
-    Grammar _grammar = this.getGrammar();
-    TypeReference _abstractValidatorClass = this.getAbstractValidatorClass(_grammar);
-    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(_abstractValidatorClass);
+  protected void generateGenValidator() {
+    TypeReference _xifexpression = null;
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
+      Grammar _grammar = this.getGrammar();
+      _xifexpression = this._validatorNaming.getAbstractValidatorClass(_grammar);
+    } else {
+      Grammar _grammar_1 = this.getGrammar();
+      _xifexpression = this._validatorNaming.getValidatorClass(_grammar_1);
+    }
+    final TypeReference genClass = _xifexpression;
+    final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -338,19 +322,18 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         }
         _builder.append("public ");
         {
-          if (ValidatorFragment2.this.generateStub) {
+          boolean _isGenerateStub = ValidatorFragment2.this.isGenerateStub();
+          if (_isGenerateStub) {
             _builder.append("abstract ");
           }
         }
         _builder.append("class ");
-        Grammar _grammar = ValidatorFragment2.this.getGrammar();
-        TypeReference _abstractValidatorClass = ValidatorFragment2.this.getAbstractValidatorClass(_grammar);
-        String _simpleName = _abstractValidatorClass.getSimpleName();
+        String _simpleName = genClass.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
-        Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
-        TypeReference _validatorSuperClass = ValidatorFragment2.this.getValidatorSuperClass(_grammar_1);
-        _builder.append(_validatorSuperClass, "");
+        Grammar _grammar = ValidatorFragment2.this.getGrammar();
+        TypeReference _genValidatorSuperClass = ValidatorFragment2.this.getGenValidatorSuperClass(_grammar);
+        _builder.append(_genValidatorSuperClass, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -376,11 +359,12 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
         _builder.append(">(");
         {
           boolean _and = false;
-          if (!ValidatorFragment2.this.inheritImplementation) {
+          boolean _isInheritImplementation = ValidatorFragment2.this.isInheritImplementation();
+          if (!_isInheritImplementation) {
             _and = false;
           } else {
-            Grammar _grammar_2 = ValidatorFragment2.this.getGrammar();
-            Grammar _nonTerminalsSuperGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(_grammar_2);
+            Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
+            Grammar _nonTerminalsSuperGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(_grammar_1);
             boolean _tripleNotEquals = (_nonTerminalsSuperGrammar != null);
             _and = _tripleNotEquals;
           }
@@ -425,8 +409,8 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     javaFile.setContent(_client);
-    XtextProjectConfig _projectConfig = this.getProjectConfig();
-    RuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
     javaFile.writeTo(_srcGen);
   }
@@ -483,8 +467,8 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
     {
       Grammar _grammar = this.getGrammar();
       final String simpleName = GrammarUtil.getSimpleName(_grammar);
-      XtextProjectConfig _projectConfig = this.getProjectConfig();
-      BundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
       PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
       List<CharSequence> _entries = _pluginXml.getEntries();
       StringConcatenation _builder = new StringConcatenation();
@@ -569,23 +553,5 @@ public class ValidatorFragment2 extends AbstractGeneratorFragment2 {
       _xblockexpression = _entries.add(_builder.toString());
     }
     return _xblockexpression;
-  }
-  
-  @Pure
-  public boolean isGenerateStub() {
-    return this.generateStub;
-  }
-  
-  public void setGenerateStub(final boolean generateStub) {
-    this.generateStub = generateStub;
-  }
-  
-  @Pure
-  public boolean isInheritImplementation() {
-    return this.inheritImplementation;
-  }
-  
-  public void setInheritImplementation(final boolean inheritImplementation) {
-    this.inheritImplementation = inheritImplementation;
   }
 }

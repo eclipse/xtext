@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.tests.resource;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.ArrayList;
@@ -22,13 +23,21 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
@@ -208,6 +217,63 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
         }
       };
       this.doWorkInJob(_function_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testUpstreamResourcesAreLoadedFromStorage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class MyClass {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.helper.createFile("mypack/MyClass.xtend", _builder.toString());
+      IProject _project = this.helper.getProject();
+      String _name = _project.getName();
+      final IProject downStreamProject = WorkbenchTestHelper.createPluginProject("downstream", _name);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package downstream");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class SomeClass {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void foo(mypack.MyClass myClass) {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      final IFile downstreamFile = this.helper.createFileImpl("/downstream/src/downstream/SomeClass.xtend", _builder_1.toString());
+      IResourcesSetupUtil.waitForBuild();
+      final URI downstreamUri = this.uriMapper.getUri(downstreamFile);
+      final ResourceSet resourceSet = this.resourceSetProvider.get(downStreamProject);
+      SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(downstreamUri)));
+      Resource _resource = resourceSet.getResource(downstreamUri, true);
+      final StorageAwareResource downstreamResource = ((StorageAwareResource) _resource);
+      EList<EObject> _contents = downstreamResource.getContents();
+      EObject _get = _contents.get(1);
+      final JvmGenericType type = ((JvmGenericType) _get);
+      EList<JvmMember> _members = type.getMembers();
+      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
+      JvmOperation _head = IterableExtensions.<JvmOperation>head(_filter);
+      EList<JvmFormalParameter> _parameters = _head.getParameters();
+      JvmFormalParameter _head_1 = IterableExtensions.<JvmFormalParameter>head(_parameters);
+      JvmTypeReference _parameterType = _head_1.getParameterType();
+      final JvmType parameterType = _parameterType.getType();
+      Assert.assertNotNull(parameterType);
+      Resource _eResource = parameterType.eResource();
+      boolean _isLoadedFromStorage = ((StorageAwareResource) _eResource).isLoadedFromStorage();
+      Assert.assertTrue(_isLoadedFromStorage);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

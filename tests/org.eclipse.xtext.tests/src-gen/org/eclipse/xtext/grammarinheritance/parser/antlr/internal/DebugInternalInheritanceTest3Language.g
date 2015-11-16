@@ -12,6 +12,7 @@ ruleModel :
 ruleElement :
 	superElement |
 	'element' SUPER_ID |
+	'element' SUPER_1_ID |
 	'element' RULE_STRING
 ;
 
@@ -30,6 +31,10 @@ RULE_ID :
 ;
 
 SUPER_ID :
+	'a' .. 'z'+
+;
+
+SUPER_1_ID :
 	'^'? (
 		'a' .. 'z' |
 		'A' .. 'Z' |

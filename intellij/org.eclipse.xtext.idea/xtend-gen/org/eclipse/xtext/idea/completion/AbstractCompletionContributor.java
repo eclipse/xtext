@@ -515,18 +515,6 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected boolean isKeywordWorthyToPropose(final Keyword keyword) {
-    boolean _and = false;
-    String _value = keyword.getValue();
-    int _length = _value.length();
-    boolean _greaterThan = (_length > 1);
-    if (!_greaterThan) {
-      _and = false;
-    } else {
-      String _value_1 = keyword.getValue();
-      char _charAt = _value_1.charAt(0);
-      boolean _isLetter = Character.isLetter(_charAt);
-      _and = _isLetter;
-    }
-    return _and;
+    return true;
   }
 }

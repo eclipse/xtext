@@ -11,6 +11,7 @@ import com.google.inject.Inject
 import com.intellij.codeInsight.completion.AllClassesGetter
 import com.intellij.codeInsight.completion.CompletionParameters
 import com.intellij.codeInsight.completion.CompletionResultSet
+import com.intellij.codeInsight.completion.CompletionSorter
 import com.intellij.codeInsight.completion.CompletionType
 import com.intellij.codeInsight.completion.InsertHandler
 import com.intellij.codeInsight.completion.InsertionContext
@@ -26,10 +27,10 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.xbase.XbasePackage
-import org.eclipse.xtext.xbase.imports.RewritableImportSection
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xtype.XtypePackage
-import com.intellij.codeInsight.completion.CompletionSorter
+import org.eclipse.xtext.xbase.idea.imports.DocumentAwareRewritableImportSectionFactory
+import org.eclipse.xtext.Keyword
 
 class XbaseCompletionContributor extends XtypeCompletionContributor {
 	
@@ -126,9 +127,13 @@ class XbaseCompletionContributor extends XtypeCompletionContributor {
 		]
 	}
 	
+	protected override isKeywordWorthyToPropose(Keyword keyword) {
+		keyword.value.length > 1 && Character.isLetter(keyword.value.charAt(0))
+	}
+	
 	static class ImportAddingInsertHandler implements InsertHandler<JavaPsiClassReferenceElement> {
 		
-		@Inject RewritableImportSection.Factory factory
+		@Inject DocumentAwareRewritableImportSectionFactory factory
 		
 		override handleInsert(InsertionContext context, JavaPsiClassReferenceElement item) {
 			val file = context.file

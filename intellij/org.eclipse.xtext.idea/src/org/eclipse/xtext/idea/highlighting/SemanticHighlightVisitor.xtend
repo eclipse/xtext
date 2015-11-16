@@ -13,17 +13,17 @@ import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder
 import com.intellij.openapi.fileEditor.FileEditorManager
-import com.intellij.openapi.progress.ProgressManager
+import com.intellij.openapi.progress.ProgressIndicatorProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import org.eclipse.xtext.Constants
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
+import org.eclipse.xtext.idea.util.CancelProgressIndicator
 import org.eclipse.xtext.psi.XtextPsiUtils
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.service.OperationCanceledManager
-import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -46,7 +46,7 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 			return true
 		try {
 			acceptor = [ offset, length, styles |
-				ProgressManager.checkCanceled
+				ProgressIndicatorProvider.checkCanceled
 				if (length > 0) {
 					styles.forEach [
 						val info = HighlightInfo.newHighlightInfo(highlightInfoType).range(offset, offset + length).
@@ -55,7 +55,7 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 					]
 				}
 			]
-			ProgressManager.checkCanceled
+			ProgressIndicatorProvider.checkCanceled
 			action.run
 		} finally {
 			acceptor = null
@@ -78,7 +78,7 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 			if (element instanceof BaseXtextFile) {
 				val resource = element.resource
 				lastRun = resource.modificationStamp
-				highlightCalculator.provideHighlightingFor(resource, acceptor, CancelIndicator.NullImpl)
+				highlightCalculator.provideHighlightingFor(resource, acceptor, new CancelProgressIndicator())
 			}
 		} catch (OperationCanceledError error) {
 			operationCanceledManager.propagateIfCancelException(error)

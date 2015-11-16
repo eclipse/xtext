@@ -16,6 +16,10 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
+NumberSignDigitOneDigitZero : '#10';
+
+NumberSignDigitOneDigitOne : '#11';
+
 NumberSignDigitOne : '#1';
 
 NumberSignDigitTwo : '#2';
@@ -31,6 +35,10 @@ NumberSignDigitNine : '#9';
 HyphenMinusGreaterThanSign : '->';
 
 LessThanSignHyphenMinus : '<-';
+
+LeftParenthesis : '(';
+
+RightParenthesis : ')';
 
 HyphenMinus : '-';
 

@@ -22,6 +22,7 @@ import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder;
 import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
@@ -55,7 +56,7 @@ public class FormattingService {
   /**
    * Format the given document. This operation modifies the document content and returns the
    */
-  public FormattingResult format(final XtextWebDocumentAccess document, final ITextRegion selection) throws InvalidRequestException {
+  public FormattingResult format(final XtextWebDocumentAccess document, final ITextRegion selection, final ITypedPreferenceValues preferences) throws InvalidRequestException {
     FormattingResult _xblockexpression = null;
     {
       final Wrapper<String> textWrapper = new Wrapper<String>();
@@ -65,7 +66,7 @@ public class FormattingService {
         public FormattingResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
           if ((FormattingService.this.formatter2Provider != null)) {
             XtextResource _resource = it.getResource();
-            String _format2 = FormattingService.this.format2(_resource, selection);
+            String _format2 = FormattingService.this.format2(_resource, selection, preferences);
             textWrapper.set(_format2);
             if ((selection != null)) {
               int _offset = selection.getOffset();
@@ -136,12 +137,15 @@ public class FormattingService {
     return this.formatter1.format(rootNode, _offset_1, _length_1);
   }
   
-  protected String format2(final XtextResource resource, final ITextRegion selection) {
+  protected String format2(final XtextResource resource, final ITextRegion selection, final ITypedPreferenceValues preferences) {
     final FormatterRequest request = this.formatterRequestProvider.get();
     request.setAllowIdentityEdits(false);
     request.setFormatUndefinedHiddenRegionsOnly(false);
     if ((selection != null)) {
       request.setRegions(Collections.<ITextRegion>unmodifiableList(CollectionLiterals.<ITextRegion>newArrayList(selection)));
+    }
+    if ((preferences != null)) {
+      request.setPreferences(preferences);
     }
     TextRegionAccessBuilder _forNodeModel = this.regionBuilder.forNodeModel(resource);
     final ITextRegionAccess regionAccess = _forNodeModel.create();

@@ -9916,19 +9916,13 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
 
 
     protected DFA33 dfa33 = new DFA33(this);
-    static final String DFA33_eotS =
-        "\13\uffff";
-    static final String DFA33_eofS =
-        "\3\uffff\3\6\1\uffff\3\6\1\uffff";
-    static final String DFA33_minS =
-        "\6\4\1\uffff\3\4\1\uffff";
-    static final String DFA33_maxS =
-        "\1\52\2\47\3\53\1\uffff\3\53\1\uffff";
-    static final String DFA33_acceptS =
-        "\6\uffff\1\2\3\uffff\1\1";
-    static final String DFA33_specialS =
-        "\13\uffff}>";
-    static final String[] DFA33_transitionS = {
+    static final String dfa_1s = "\13\uffff";
+    static final String dfa_2s = "\3\uffff\3\6\1\uffff\3\6\1\uffff";
+    static final String dfa_3s = "\6\4\1\uffff\3\4\1\uffff";
+    static final String dfa_4s = "\1\52\2\47\3\53\1\uffff\3\53\1\uffff";
+    static final String dfa_5s = "\6\uffff\1\2\3\uffff\1\1";
+    static final String dfa_6s = "\13\uffff}>";
+    static final String[] dfa_7s = {
             "\1\6\1\3\11\uffff\1\6\26\uffff\1\4\1\5\1\uffff\1\1\1\2",
             "\1\6\1\7\11\uffff\1\6\26\uffff\1\10\1\11",
             "\1\6\1\7\11\uffff\1\6\26\uffff\1\10\1\11",
@@ -9942,34 +9936,26 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             ""
     };
 
-    static final short[] DFA33_eot = DFA.unpackEncodedString(DFA33_eotS);
-    static final short[] DFA33_eof = DFA.unpackEncodedString(DFA33_eofS);
-    static final char[] DFA33_min = DFA.unpackEncodedStringToUnsignedChars(DFA33_minS);
-    static final char[] DFA33_max = DFA.unpackEncodedStringToUnsignedChars(DFA33_maxS);
-    static final short[] DFA33_accept = DFA.unpackEncodedString(DFA33_acceptS);
-    static final short[] DFA33_special = DFA.unpackEncodedString(DFA33_specialS);
-    static final short[][] DFA33_transition;
-
-    static {
-        int numStates = DFA33_transitionS.length;
-        DFA33_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA33_transition[i] = DFA.unpackEncodedString(DFA33_transitionS[i]);
-        }
-    }
+    static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
+    static final short[] dfa_2 = DFA.unpackEncodedString(dfa_2s);
+    static final char[] dfa_3 = DFA.unpackEncodedStringToUnsignedChars(dfa_3s);
+    static final char[] dfa_4 = DFA.unpackEncodedStringToUnsignedChars(dfa_4s);
+    static final short[] dfa_5 = DFA.unpackEncodedString(dfa_5s);
+    static final short[] dfa_6 = DFA.unpackEncodedString(dfa_6s);
+    static final short[][] dfa_7 = unpackEncodedStringArray(dfa_7s);
 
     class DFA33 extends DFA {
 
         public DFA33(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
             this.decisionNumber = 33;
-            this.eot = DFA33_eot;
-            this.eof = DFA33_eof;
-            this.min = DFA33_min;
-            this.max = DFA33_max;
-            this.accept = DFA33_accept;
-            this.special = DFA33_special;
-            this.transition = DFA33_transition;
+            this.eot = dfa_1;
+            this.eof = dfa_2;
+            this.min = dfa_3;
+            this.max = dfa_4;
+            this.accept = dfa_5;
+            this.special = dfa_6;
+            this.transition = dfa_7;
         }
         public String getDescription() {
             return "1195:2: (this_Assignment_0= ruleAssignment | this_AbstractTerminal_1= ruleAbstractTerminal )";

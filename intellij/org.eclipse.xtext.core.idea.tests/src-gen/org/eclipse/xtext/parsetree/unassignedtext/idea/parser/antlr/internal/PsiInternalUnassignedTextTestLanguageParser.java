@@ -76,18 +76,24 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalUnassignedTextTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalUnassignedTextTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalUnassignedTextTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalUnassignedTextTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -99,19 +105,32 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalUnassignedTextTestLanguage.g:58:1: ruleModel : ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_CaseInsensitiveKeywordRule_0 = null;
+
+        Boolean this_PluralRule_1 = null;
+
+        Boolean this_MultiRule_2 = null;
+
+        Boolean this_DatatypeRule_3 = null;
+
+        Boolean this_CommonTerminalsRule_4 = null;
+
+
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:58:10: ( ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule ) )
-            // PsiInternalUnassignedTextTestLanguage.g:59:2: ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule )
+            // PsiInternalUnassignedTextTestLanguage.g:60:1: ( (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule ) )
+            // PsiInternalUnassignedTextTestLanguage.g:61:2: (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:59:2: ( ruleCaseInsensitiveKeywordRule | rulePluralRule | ruleMultiRule | ruleDatatypeRule | ruleCommonTerminalsRule )
+            // PsiInternalUnassignedTextTestLanguage.g:61:2: (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule )
             int alt1=5;
             switch ( input.LA(1) ) {
             case RULE_CASEINSENSITIVEKEYWORD:
@@ -148,85 +167,90 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             switch (alt1) {
                 case 1 :
-                    // PsiInternalUnassignedTextTestLanguage.g:60:3: ruleCaseInsensitiveKeywordRule
+                    // PsiInternalUnassignedTextTestLanguage.g:62:3: this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_CaseInsensitiveKeywordRuleParserRuleCall_0ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleCaseInsensitiveKeywordRule();
+                    this_CaseInsensitiveKeywordRule_0=ruleCaseInsensitiveKeywordRule();
 
                     state._fsp--;
 
 
+                    			current = this_CaseInsensitiveKeywordRule_0;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalUnassignedTextTestLanguage.g:68:3: rulePluralRule
+                    // PsiInternalUnassignedTextTestLanguage.g:71:3: this_PluralRule_1= rulePluralRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_PluralRuleParserRuleCall_1ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    rulePluralRule();
+                    this_PluralRule_1=rulePluralRule();
 
                     state._fsp--;
 
 
+                    			current = this_PluralRule_1;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 3 :
-                    // PsiInternalUnassignedTextTestLanguage.g:76:3: ruleMultiRule
+                    // PsiInternalUnassignedTextTestLanguage.g:80:3: this_MultiRule_2= ruleMultiRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_MultiRuleParserRuleCall_2ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleMultiRule();
+                    this_MultiRule_2=ruleMultiRule();
 
                     state._fsp--;
 
 
+                    			current = this_MultiRule_2;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 4 :
-                    // PsiInternalUnassignedTextTestLanguage.g:84:3: ruleDatatypeRule
+                    // PsiInternalUnassignedTextTestLanguage.g:89:3: this_DatatypeRule_3= ruleDatatypeRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_DatatypeRuleParserRuleCall_3ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleDatatypeRule();
+                    this_DatatypeRule_3=ruleDatatypeRule();
 
                     state._fsp--;
 
 
+                    			current = this_DatatypeRule_3;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 5 :
-                    // PsiInternalUnassignedTextTestLanguage.g:92:3: ruleCommonTerminalsRule
+                    // PsiInternalUnassignedTextTestLanguage.g:98:3: this_CommonTerminalsRule_4= ruleCommonTerminalsRule
                     {
 
                     			markComposite(elementTypeProvider.getModel_CommonTerminalsRuleParserRuleCall_4ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleCommonTerminalsRule();
+                    this_CommonTerminalsRule_4=ruleCommonTerminalsRule();
 
                     state._fsp--;
 
 
+                    			current = this_CommonTerminalsRule_4;
                     			doneComposite();
                     		
 
@@ -245,24 +269,30 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleCaseInsensitiveKeywordRule"
-    // PsiInternalUnassignedTextTestLanguage.g:103:1: entryRuleCaseInsensitiveKeywordRule : ruleCaseInsensitiveKeywordRule EOF ;
-    public final void entryRuleCaseInsensitiveKeywordRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:110:1: entryRuleCaseInsensitiveKeywordRule returns [Boolean current=false] : iv_ruleCaseInsensitiveKeywordRule= ruleCaseInsensitiveKeywordRule EOF ;
+    public final Boolean entryRuleCaseInsensitiveKeywordRule() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleCaseInsensitiveKeywordRule = null;
+
+
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:103:36: ( ruleCaseInsensitiveKeywordRule EOF )
-            // PsiInternalUnassignedTextTestLanguage.g:104:2: ruleCaseInsensitiveKeywordRule EOF
+            // PsiInternalUnassignedTextTestLanguage.g:110:68: (iv_ruleCaseInsensitiveKeywordRule= ruleCaseInsensitiveKeywordRule EOF )
+            // PsiInternalUnassignedTextTestLanguage.g:111:2: iv_ruleCaseInsensitiveKeywordRule= ruleCaseInsensitiveKeywordRule EOF
             {
              markComposite(elementTypeProvider.getCaseInsensitiveKeywordRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleCaseInsensitiveKeywordRule();
+            iv_ruleCaseInsensitiveKeywordRule=ruleCaseInsensitiveKeywordRule();
 
             state._fsp--;
 
+             current =iv_ruleCaseInsensitiveKeywordRule; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -274,23 +304,25 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleCaseInsensitiveKeywordRule"
 
 
     // $ANTLR start "ruleCaseInsensitiveKeywordRule"
-    // PsiInternalUnassignedTextTestLanguage.g:109:1: ruleCaseInsensitiveKeywordRule : (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) ;
-    public final void ruleCaseInsensitiveKeywordRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:117:1: ruleCaseInsensitiveKeywordRule returns [Boolean current=false] : (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) ;
+    public final Boolean ruleCaseInsensitiveKeywordRule() throws RecognitionException {
+        Boolean current = false;
+
         Token this_CaseInsensitiveKeyword_0=null;
         Token lv_val_1_0=null;
 
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:109:31: ( (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) )
-            // PsiInternalUnassignedTextTestLanguage.g:110:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
+            // PsiInternalUnassignedTextTestLanguage.g:118:1: ( (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) )
+            // PsiInternalUnassignedTextTestLanguage.g:119:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:110:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
-            // PsiInternalUnassignedTextTestLanguage.g:111:3: this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) )
+            // PsiInternalUnassignedTextTestLanguage.g:119:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
+            // PsiInternalUnassignedTextTestLanguage.g:120:3: this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) )
             {
 
             			markLeaf(elementTypeProvider.getCaseInsensitiveKeywordRule_CaseInsensitiveKeywordTerminalRuleCall_0ElementType());
@@ -299,16 +331,22 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(this_CaseInsensitiveKeyword_0);
             		
-            // PsiInternalUnassignedTextTestLanguage.g:118:3: ( (lv_val_1_0= RULE_INT ) )
-            // PsiInternalUnassignedTextTestLanguage.g:119:4: (lv_val_1_0= RULE_INT )
+            // PsiInternalUnassignedTextTestLanguage.g:127:3: ( (lv_val_1_0= RULE_INT ) )
+            // PsiInternalUnassignedTextTestLanguage.g:128:4: (lv_val_1_0= RULE_INT )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:119:4: (lv_val_1_0= RULE_INT )
-            // PsiInternalUnassignedTextTestLanguage.g:120:5: lv_val_1_0= RULE_INT
+            // PsiInternalUnassignedTextTestLanguage.g:128:4: (lv_val_1_0= RULE_INT )
+            // PsiInternalUnassignedTextTestLanguage.g:129:5: lv_val_1_0= RULE_INT
             {
 
             					markLeaf(elementTypeProvider.getCaseInsensitiveKeywordRule_ValINTTerminalRuleCall_1_0ElementType());
             				
             lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_val_1_0);
             				
@@ -331,24 +369,30 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleCaseInsensitiveKeywordRule"
 
 
     // $ANTLR start "entryRulePluralRule"
-    // PsiInternalUnassignedTextTestLanguage.g:133:1: entryRulePluralRule : rulePluralRule EOF ;
-    public final void entryRulePluralRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:148:1: entryRulePluralRule returns [Boolean current=false] : iv_rulePluralRule= rulePluralRule EOF ;
+    public final Boolean entryRulePluralRule() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_rulePluralRule = null;
+
+
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:133:20: ( rulePluralRule EOF )
-            // PsiInternalUnassignedTextTestLanguage.g:134:2: rulePluralRule EOF
+            // PsiInternalUnassignedTextTestLanguage.g:148:52: (iv_rulePluralRule= rulePluralRule EOF )
+            // PsiInternalUnassignedTextTestLanguage.g:149:2: iv_rulePluralRule= rulePluralRule EOF
             {
              markComposite(elementTypeProvider.getPluralRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            rulePluralRule();
+            iv_rulePluralRule=rulePluralRule();
 
             state._fsp--;
 
+             current =iv_rulePluralRule; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -360,24 +404,26 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRulePluralRule"
 
 
     // $ANTLR start "rulePluralRule"
-    // PsiInternalUnassignedTextTestLanguage.g:139:1: rulePluralRule : (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) ;
-    public final void rulePluralRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:155:1: rulePluralRule returns [Boolean current=false] : (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) ;
+    public final Boolean rulePluralRule() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_count_1_0=null;
         Token this_Plural_2=null;
 
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:139:15: ( (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) )
-            // PsiInternalUnassignedTextTestLanguage.g:140:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
+            // PsiInternalUnassignedTextTestLanguage.g:156:1: ( (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) )
+            // PsiInternalUnassignedTextTestLanguage.g:157:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:140:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
-            // PsiInternalUnassignedTextTestLanguage.g:141:3: otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL
+            // PsiInternalUnassignedTextTestLanguage.g:157:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
+            // PsiInternalUnassignedTextTestLanguage.g:158:3: otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL
             {
 
             			markLeaf(elementTypeProvider.getPluralRule_ContentsKeyword_0ElementType());
@@ -386,16 +432,22 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalUnassignedTextTestLanguage.g:148:3: ( (lv_count_1_0= RULE_INT ) )
-            // PsiInternalUnassignedTextTestLanguage.g:149:4: (lv_count_1_0= RULE_INT )
+            // PsiInternalUnassignedTextTestLanguage.g:165:3: ( (lv_count_1_0= RULE_INT ) )
+            // PsiInternalUnassignedTextTestLanguage.g:166:4: (lv_count_1_0= RULE_INT )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:149:4: (lv_count_1_0= RULE_INT )
-            // PsiInternalUnassignedTextTestLanguage.g:150:5: lv_count_1_0= RULE_INT
+            // PsiInternalUnassignedTextTestLanguage.g:166:4: (lv_count_1_0= RULE_INT )
+            // PsiInternalUnassignedTextTestLanguage.g:167:5: lv_count_1_0= RULE_INT
             {
 
             					markLeaf(elementTypeProvider.getPluralRule_CountINTTerminalRuleCall_1_0ElementType());
             				
             lv_count_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_count_1_0);
             				
@@ -425,24 +477,30 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "rulePluralRule"
 
 
     // $ANTLR start "entryRuleMultiRule"
-    // PsiInternalUnassignedTextTestLanguage.g:170:1: entryRuleMultiRule : ruleMultiRule EOF ;
-    public final void entryRuleMultiRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:193:1: entryRuleMultiRule returns [Boolean current=false] : iv_ruleMultiRule= ruleMultiRule EOF ;
+    public final Boolean entryRuleMultiRule() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleMultiRule = null;
+
+
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:170:19: ( ruleMultiRule EOF )
-            // PsiInternalUnassignedTextTestLanguage.g:171:2: ruleMultiRule EOF
+            // PsiInternalUnassignedTextTestLanguage.g:193:51: (iv_ruleMultiRule= ruleMultiRule EOF )
+            // PsiInternalUnassignedTextTestLanguage.g:194:2: iv_ruleMultiRule= ruleMultiRule EOF
             {
              markComposite(elementTypeProvider.getMultiRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleMultiRule();
+            iv_ruleMultiRule=ruleMultiRule();
 
             state._fsp--;
 
+             current =iv_ruleMultiRule; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -454,14 +512,16 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleMultiRule"
 
 
     // $ANTLR start "ruleMultiRule"
-    // PsiInternalUnassignedTextTestLanguage.g:176:1: ruleMultiRule : (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) ;
-    public final void ruleMultiRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:200:1: ruleMultiRule returns [Boolean current=false] : (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) ;
+    public final Boolean ruleMultiRule() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_val_1_0=null;
         Token this_Multi_2=null;
@@ -469,11 +529,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         Token this_Multi_4=null;
 
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:176:14: ( (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) )
-            // PsiInternalUnassignedTextTestLanguage.g:177:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
+            // PsiInternalUnassignedTextTestLanguage.g:201:1: ( (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) )
+            // PsiInternalUnassignedTextTestLanguage.g:202:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:177:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
-            // PsiInternalUnassignedTextTestLanguage.g:178:3: otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI
+            // PsiInternalUnassignedTextTestLanguage.g:202:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
+            // PsiInternalUnassignedTextTestLanguage.g:203:3: otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI
             {
 
             			markLeaf(elementTypeProvider.getMultiRule_MultiKeyword_0ElementType());
@@ -482,16 +542,22 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalUnassignedTextTestLanguage.g:185:3: ( (lv_val_1_0= RULE_INT ) )
-            // PsiInternalUnassignedTextTestLanguage.g:186:4: (lv_val_1_0= RULE_INT )
+            // PsiInternalUnassignedTextTestLanguage.g:210:3: ( (lv_val_1_0= RULE_INT ) )
+            // PsiInternalUnassignedTextTestLanguage.g:211:4: (lv_val_1_0= RULE_INT )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:186:4: (lv_val_1_0= RULE_INT )
-            // PsiInternalUnassignedTextTestLanguage.g:187:5: lv_val_1_0= RULE_INT
+            // PsiInternalUnassignedTextTestLanguage.g:211:4: (lv_val_1_0= RULE_INT )
+            // PsiInternalUnassignedTextTestLanguage.g:212:5: lv_val_1_0= RULE_INT
             {
 
             					markLeaf(elementTypeProvider.getMultiRule_ValINTTerminalRuleCall_1_0ElementType());
             				
             lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_val_1_0);
             				
@@ -535,24 +601,30 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleMultiRule"
 
 
     // $ANTLR start "entryRuleDatatypeRule"
-    // PsiInternalUnassignedTextTestLanguage.g:221:1: entryRuleDatatypeRule : ruleDatatypeRule EOF ;
-    public final void entryRuleDatatypeRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:252:1: entryRuleDatatypeRule returns [Boolean current=false] : iv_ruleDatatypeRule= ruleDatatypeRule EOF ;
+    public final Boolean entryRuleDatatypeRule() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleDatatypeRule = null;
+
+
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:221:22: ( ruleDatatypeRule EOF )
-            // PsiInternalUnassignedTextTestLanguage.g:222:2: ruleDatatypeRule EOF
+            // PsiInternalUnassignedTextTestLanguage.g:252:54: (iv_ruleDatatypeRule= ruleDatatypeRule EOF )
+            // PsiInternalUnassignedTextTestLanguage.g:253:2: iv_ruleDatatypeRule= ruleDatatypeRule EOF
             {
              markComposite(elementTypeProvider.getDatatypeRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleDatatypeRule();
+            iv_ruleDatatypeRule=ruleDatatypeRule();
 
             state._fsp--;
 
+             current =iv_ruleDatatypeRule; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -564,23 +636,25 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleDatatypeRule"
 
 
     // $ANTLR start "ruleDatatypeRule"
-    // PsiInternalUnassignedTextTestLanguage.g:227:1: ruleDatatypeRule : (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) ;
-    public final void ruleDatatypeRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:259:1: ruleDatatypeRule returns [Boolean current=false] : (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) ;
+    public final Boolean ruleDatatypeRule() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_val_1_0=null;
 
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:227:17: ( (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) )
-            // PsiInternalUnassignedTextTestLanguage.g:228:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
+            // PsiInternalUnassignedTextTestLanguage.g:260:1: ( (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) )
+            // PsiInternalUnassignedTextTestLanguage.g:261:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:228:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
-            // PsiInternalUnassignedTextTestLanguage.g:229:3: otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype
+            // PsiInternalUnassignedTextTestLanguage.g:261:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
+            // PsiInternalUnassignedTextTestLanguage.g:262:3: otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype
             {
 
             			markLeaf(elementTypeProvider.getDatatypeRule_DatatypeKeyword_0ElementType());
@@ -589,16 +663,22 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalUnassignedTextTestLanguage.g:236:3: ( (lv_val_1_0= RULE_INT ) )
-            // PsiInternalUnassignedTextTestLanguage.g:237:4: (lv_val_1_0= RULE_INT )
+            // PsiInternalUnassignedTextTestLanguage.g:269:3: ( (lv_val_1_0= RULE_INT ) )
+            // PsiInternalUnassignedTextTestLanguage.g:270:4: (lv_val_1_0= RULE_INT )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:237:4: (lv_val_1_0= RULE_INT )
-            // PsiInternalUnassignedTextTestLanguage.g:238:5: lv_val_1_0= RULE_INT
+            // PsiInternalUnassignedTextTestLanguage.g:270:4: (lv_val_1_0= RULE_INT )
+            // PsiInternalUnassignedTextTestLanguage.g:271:5: lv_val_1_0= RULE_INT
             {
 
             					markLeaf(elementTypeProvider.getDatatypeRule_ValINTTerminalRuleCall_1_0ElementType());
             				
             lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_6); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_val_1_0);
             				
@@ -632,24 +712,30 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleDatatypeRule"
 
 
     // $ANTLR start "entryRuleDatatype"
-    // PsiInternalUnassignedTextTestLanguage.g:258:1: entryRuleDatatype : ruleDatatype EOF ;
-    public final void entryRuleDatatype() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:297:1: entryRuleDatatype returns [Boolean current=false] : iv_ruleDatatype= ruleDatatype EOF ;
+    public final Boolean entryRuleDatatype() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleDatatype = null;
+
+
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:258:18: ( ruleDatatype EOF )
-            // PsiInternalUnassignedTextTestLanguage.g:259:2: ruleDatatype EOF
+            // PsiInternalUnassignedTextTestLanguage.g:297:50: (iv_ruleDatatype= ruleDatatype EOF )
+            // PsiInternalUnassignedTextTestLanguage.g:298:2: iv_ruleDatatype= ruleDatatype EOF
             {
              markComposite(elementTypeProvider.getDatatypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleDatatype();
+            iv_ruleDatatype=ruleDatatype();
 
             state._fsp--;
 
+             current =iv_ruleDatatype; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -661,22 +747,24 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleDatatype"
 
 
     // $ANTLR start "ruleDatatype"
-    // PsiInternalUnassignedTextTestLanguage.g:264:1: ruleDatatype : (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 ) ;
-    public final void ruleDatatype() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:304:1: ruleDatatype returns [Boolean current=false] : (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 ) ;
+    public final Boolean ruleDatatype() throws RecognitionException {
+        Boolean current = false;
+
         Token kw=null;
         Token this_INT_1=null;
 
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:264:13: ( (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 ) )
-            // PsiInternalUnassignedTextTestLanguage.g:265:2: (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 )
+            // PsiInternalUnassignedTextTestLanguage.g:305:1: ( (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 ) )
+            // PsiInternalUnassignedTextTestLanguage.g:306:2: (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:265:2: (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 )
+            // PsiInternalUnassignedTextTestLanguage.g:306:2: (kw= 'str' | this_INT_1= RULE_INT | ruleDatatype2 )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 18:
@@ -703,7 +791,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             switch (alt2) {
                 case 1 :
-                    // PsiInternalUnassignedTextTestLanguage.g:266:3: kw= 'str'
+                    // PsiInternalUnassignedTextTestLanguage.g:307:3: kw= 'str'
                     {
 
                     			markLeaf(elementTypeProvider.getDatatype_StrKeyword_0ElementType());
@@ -716,7 +804,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
                     }
                     break;
                 case 2 :
-                    // PsiInternalUnassignedTextTestLanguage.g:274:3: this_INT_1= RULE_INT
+                    // PsiInternalUnassignedTextTestLanguage.g:315:3: this_INT_1= RULE_INT
                     {
 
                     			markLeaf(elementTypeProvider.getDatatype_INTTerminalRuleCall_1ElementType());
@@ -729,7 +817,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
                     }
                     break;
                 case 3 :
-                    // PsiInternalUnassignedTextTestLanguage.g:282:3: ruleDatatype2
+                    // PsiInternalUnassignedTextTestLanguage.g:323:3: ruleDatatype2
                     {
 
                     			markComposite(elementTypeProvider.getDatatype_Datatype2ParserRuleCall_2ElementType());
@@ -758,24 +846,30 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleDatatype"
 
 
     // $ANTLR start "entryRuleDatatype2"
-    // PsiInternalUnassignedTextTestLanguage.g:293:1: entryRuleDatatype2 : ruleDatatype2 EOF ;
-    public final void entryRuleDatatype2() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:334:1: entryRuleDatatype2 returns [Boolean current=false] : iv_ruleDatatype2= ruleDatatype2 EOF ;
+    public final Boolean entryRuleDatatype2() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleDatatype2 = null;
+
+
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:293:19: ( ruleDatatype2 EOF )
-            // PsiInternalUnassignedTextTestLanguage.g:294:2: ruleDatatype2 EOF
+            // PsiInternalUnassignedTextTestLanguage.g:334:51: (iv_ruleDatatype2= ruleDatatype2 EOF )
+            // PsiInternalUnassignedTextTestLanguage.g:335:2: iv_ruleDatatype2= ruleDatatype2 EOF
             {
              markComposite(elementTypeProvider.getDatatype2ElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleDatatype2();
+            iv_ruleDatatype2=ruleDatatype2();
 
             state._fsp--;
 
+             current =iv_ruleDatatype2; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -787,19 +881,21 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleDatatype2"
 
 
     // $ANTLR start "ruleDatatype2"
-    // PsiInternalUnassignedTextTestLanguage.g:299:1: ruleDatatype2 : this_STRING_0= RULE_STRING ;
-    public final void ruleDatatype2() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:341:1: ruleDatatype2 returns [Boolean current=false] : this_STRING_0= RULE_STRING ;
+    public final Boolean ruleDatatype2() throws RecognitionException {
+        Boolean current = false;
+
         Token this_STRING_0=null;
 
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:299:14: (this_STRING_0= RULE_STRING )
-            // PsiInternalUnassignedTextTestLanguage.g:300:2: this_STRING_0= RULE_STRING
+            // PsiInternalUnassignedTextTestLanguage.g:342:1: (this_STRING_0= RULE_STRING )
+            // PsiInternalUnassignedTextTestLanguage.g:343:2: this_STRING_0= RULE_STRING
             {
 
             		markLeaf(elementTypeProvider.getDatatype2_STRINGTerminalRuleCallElementType());
@@ -818,24 +914,30 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleDatatype2"
 
 
     // $ANTLR start "entryRuleCommonTerminalsRule"
-    // PsiInternalUnassignedTextTestLanguage.g:310:1: entryRuleCommonTerminalsRule : ruleCommonTerminalsRule EOF ;
-    public final void entryRuleCommonTerminalsRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:353:1: entryRuleCommonTerminalsRule returns [Boolean current=false] : iv_ruleCommonTerminalsRule= ruleCommonTerminalsRule EOF ;
+    public final Boolean entryRuleCommonTerminalsRule() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleCommonTerminalsRule = null;
+
+
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:310:29: ( ruleCommonTerminalsRule EOF )
-            // PsiInternalUnassignedTextTestLanguage.g:311:2: ruleCommonTerminalsRule EOF
+            // PsiInternalUnassignedTextTestLanguage.g:353:61: (iv_ruleCommonTerminalsRule= ruleCommonTerminalsRule EOF )
+            // PsiInternalUnassignedTextTestLanguage.g:354:2: iv_ruleCommonTerminalsRule= ruleCommonTerminalsRule EOF
             {
              markComposite(elementTypeProvider.getCommonTerminalsRuleElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleCommonTerminalsRule();
+            iv_ruleCommonTerminalsRule=ruleCommonTerminalsRule();
 
             state._fsp--;
 
+             current =iv_ruleCommonTerminalsRule; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -847,14 +949,16 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleCommonTerminalsRule"
 
 
     // $ANTLR start "ruleCommonTerminalsRule"
-    // PsiInternalUnassignedTextTestLanguage.g:316:1: ruleCommonTerminalsRule : (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) ;
-    public final void ruleCommonTerminalsRule() throws RecognitionException {
+    // PsiInternalUnassignedTextTestLanguage.g:360:1: ruleCommonTerminalsRule returns [Boolean current=false] : (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) ;
+    public final Boolean ruleCommonTerminalsRule() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token this_ID_1=null;
         Token this_INT_2=null;
@@ -862,11 +966,11 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         Token lv_val_4_0=null;
 
         try {
-            // PsiInternalUnassignedTextTestLanguage.g:316:24: ( (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) )
-            // PsiInternalUnassignedTextTestLanguage.g:317:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
+            // PsiInternalUnassignedTextTestLanguage.g:361:1: ( (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) )
+            // PsiInternalUnassignedTextTestLanguage.g:362:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:317:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
-            // PsiInternalUnassignedTextTestLanguage.g:318:3: otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) )
+            // PsiInternalUnassignedTextTestLanguage.g:362:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
+            // PsiInternalUnassignedTextTestLanguage.g:363:3: otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getCommonTerminalsRule_TerminalsKeyword_0ElementType());
@@ -896,16 +1000,22 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
 
             			doneLeaf(this_STRING_3);
             		
-            // PsiInternalUnassignedTextTestLanguage.g:346:3: ( (lv_val_4_0= RULE_ID ) )
-            // PsiInternalUnassignedTextTestLanguage.g:347:4: (lv_val_4_0= RULE_ID )
+            // PsiInternalUnassignedTextTestLanguage.g:391:3: ( (lv_val_4_0= RULE_ID ) )
+            // PsiInternalUnassignedTextTestLanguage.g:392:4: (lv_val_4_0= RULE_ID )
             {
-            // PsiInternalUnassignedTextTestLanguage.g:347:4: (lv_val_4_0= RULE_ID )
-            // PsiInternalUnassignedTextTestLanguage.g:348:5: lv_val_4_0= RULE_ID
+            // PsiInternalUnassignedTextTestLanguage.g:392:4: (lv_val_4_0= RULE_ID )
+            // PsiInternalUnassignedTextTestLanguage.g:393:5: lv_val_4_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getCommonTerminalsRule_ValIDTerminalRuleCall_4_0ElementType());
             				
             lv_val_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_val_4_0);
             				
@@ -928,7 +1038,7 @@ public class PsiInternalUnassignedTextTestLanguageParser extends AbstractPsiAntl
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleCommonTerminalsRule"
 

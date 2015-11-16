@@ -12,14 +12,14 @@ import java.io.InputStream
 import java.io.OutputStream
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
+import org.eclipse.xtext.workspace.IProjectConfigProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 
-	@Inject IWorkspaceConfigProvider workspaceConfigProvider
+	@Inject IProjectConfigProvider projectConfigProvider
 
 	override createResourceStorageLoadable(InputStream in) {
 		return new BatchLinkableResourceStorageLoadable(in, isStoreNodeModel)
@@ -30,12 +30,14 @@ class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 	}
 
 	override protected getSourceContainerURI(StorageAwareResource resource) {
-		val workspaceConfig = workspaceConfigProvider.getWorkspaceConfig(resource.resourceSet)
 		val uri = resource.URI
-		val project = workspaceConfig.findProjectContaining(uri)
-		val sourceFolder = project?.findSourceFolderContaining(uri)
-		if (sourceFolder != null) {
-			return sourceFolder.path
+		val mainProject = projectConfigProvider.getProjectConfig(resource.resourceSet)
+		if (mainProject !== null) {
+			val project = mainProject.workspaceConfig.findProjectContaining(uri)
+			val sourceFolder = project?.findSourceFolderContaining(uri)
+			if (sourceFolder != null) {
+				return sourceFolder.path
+			}
 		}
 		return super.getSourceContainerURI(resource)
 	}

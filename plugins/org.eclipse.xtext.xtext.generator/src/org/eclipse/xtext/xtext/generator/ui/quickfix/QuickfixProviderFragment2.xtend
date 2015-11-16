@@ -8,16 +8,15 @@
 package org.eclipse.xtext.xtext.generator.ui.quickfix
 
 import javax.inject.Inject
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
+import org.eclipse.xtext.xtext.generator.validation.ValidatorNaming
 
+import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
 /**
@@ -25,25 +24,16 @@ import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
+class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 
 	@Inject
 	extension XtextGeneratorNaming
-
-	@Inject
-	extension CodeConfig
 	
 	@Inject
-	extension ValidatorFragment2
+	extension ValidatorNaming
 
 	@Inject
 	FileAccessFactory fileAccessFactory
-
-	@Accessors
-	private boolean generateStub = true;
-
-	@Accessors	
-	private boolean inheritImplementation;
 
 	def protected TypeReference getQuickfixProviderClass(Grammar g) {
 		return new TypeReference(
@@ -67,30 +57,53 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 	} 
 
 	override generate() {
-		val instanceClass = 
-			if (generateStub) grammar.quickfixProviderClass else grammar.quickfixProviderSuperClass;
-
 		new GuiceModuleAccess.BindingFactory()
 				.addTypeToType(
 					new TypeReference("org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider"),
-					instanceClass
+					grammar.quickfixProviderClass
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (generateStub && projectConfig.eclipsePlugin.src !== null) {
-			if (preferXtendStubs) {
-				generateXtendQuickfixProvider
-			} else {
-				generateJavaQuickfixProvider
+		if (isGenerateStub) {
+			if (projectConfig.eclipsePlugin?.src !== null) {
+				if (generateXtendStub) {
+					generateXtendQuickfixProvider
+				} else {
+					generateJavaQuickfixProvider
+				}
 			}
 
-			if (projectConfig.eclipsePlugin.manifest != null) {
+			if (projectConfig.eclipsePlugin.manifest !== null) {
 				projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.quickfixProviderClass.packageName
 			}
 
-			if (projectConfig.eclipsePlugin.pluginXml != null) {
+			if (projectConfig.eclipsePlugin.pluginXml !== null) {
 				addRegistrationToPluginXml
 			}
+
+		} else {
+			if (projectConfig.eclipsePlugin?.srcGen !== null) {
+				generateGenQuickfixProvider
+			}
+
+			if (projectConfig.eclipsePlugin.manifest !== null) {
+				projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.quickfixProviderClass.packageName
+			}
 		}
+	}
+	
+	def generateGenQuickfixProvider() {
+		// take the ordinary concrete class signature for the src-gen class, too
+		//  as quickfixProviders of sub languages refer to 'superGrammar.quickfixProviderClass',
+		//  see 'getGenQuickfixProviderSuperClass(...)'
+		val genClass = grammar.quickfixProviderClass
+		
+		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
+		
+		file.content = '''
+			public class «genClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
+			}
+		'''
+		file.writeTo(projectConfig.eclipsePlugin.srcGen)
 	}
 
 	protected def generateXtendQuickfixProvider() {
@@ -102,7 +115,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
-			//	@Fix(«grammar.validatorClass».INVALID_NAME)
+			//	@Fix(«grammar.validatorClass.simpleName».INVALID_NAME)
 			//	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {
 			//		acceptor.accept(issue, 'Capitalize name', 'Capitalize the name.', 'upcase.png') [
 			//			context |
@@ -124,7 +137,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 			 */
 			public class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
-			//	@Fix(«grammar.validatorClass».INVALID_NAME)
+			//	@Fix(«grammar.validatorClass.simpleName».INVALID_NAME)
 			//	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
 			//		acceptor.accept(issue, "Capitalize name", "Capitalize the name.", "upcase.png", new IModification() {
 			//			public void apply(IModificationContext context) throws BadLocationException {
@@ -140,7 +153,7 @@ class QuickfixProviderFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def addRegistrationToPluginXml() {
-		val markerTypePrefix = grammar.eclipsePluginBasePackage + "." + grammar.simpleName.toLowerCase
+		val markerTypePrefix = projectConfig.eclipsePlugin.name + "." + grammar.simpleName.toLowerCase
 		val executableExtensionFactory = grammar.eclipsePluginExecutableExtensionFactory
 
 		projectConfig.eclipsePlugin.pluginXml.entries += '''

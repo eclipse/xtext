@@ -37,24 +37,6 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		naming
 	}
 	
-	protected override compileOptions(Grammar it, AntlrOptions options) '''
-		
-		options {
-			superClass=AbstractInternalAntlrParser;
-			«IF options.backtrack || options.memoize || options.k >= 0»
-			«IF options.backtrack»
-			backtrack=true;
-			«ENDIF»
-			«IF options.memoize»
-			memoize=true;
-			«ENDIF»
-			«IF options.k >= 0»
-			memoize=«options.k»;
-			«ENDIF»
-			«ENDIF»
-		}
-	''' 
-	
 	protected override compileParserImports(Grammar it, AntlrOptions options) '''
 
 		import org.eclipse.xtext.*;
@@ -65,7 +47,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		«IF !allEnumRules.empty»
 		import org.eclipse.emf.common.util.Enumerator;
 		«ENDIF»
-		import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
+		import «grammarNaming.getInternalParserSuperClass(it).name»;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 		«IF !allParserRules.map[eAllContentsAsList].flatten.filter(UnorderedGroup).empty && options.backtrack»
@@ -78,7 +60,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	
 	protected override compileParserMembers(Grammar it, AntlrOptions options) '''
 		
-		@parser::members {
+		@«IF combinedGrammar»parser::«ENDIF»members {
 		
 		«IF options.backtrack»
 		/*
@@ -97,7 +79,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		
 		    @Override
 		    protected String getFirstRuleName() {
-		    	return "«allParserRules.head.name»";
+		    	return "«allParserRules.head.originalElement.name»";
 		   	}
 		
 		   	@Override
@@ -122,8 +104,8 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		false
 	}
 	
-	protected override compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
-		«IF !it.isFragment»
+	protected override dispatch compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
+		«IF isValidEntryRule()»
 			«compileEntryRule(grammar, options)»
 		«ENDIF»
 		
@@ -131,24 +113,24 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	'''
 	
 	protected def String compileEntryRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
-		// Entry rule «entryRuleName»
-		«entryRuleName» returns «compileEntryReturns(options)»«compileEntryInit(options)»:
+		// Entry rule «originalElement.entryRuleName»
+		«originalElement.entryRuleName» returns «compileEntryReturns(options)»«compileEntryInit(options)»:
 			{ «newCompositeNode» }
-			iv_«ruleName»=«ruleName»«defaultArgumentList»
-			{ $current=$iv_«ruleName».current«IF datatypeRule».getText()«ENDIF»; }
+			iv_«originalElement.ruleName»=«ruleName»«defaultArgumentList»
+			{ $current=$iv_«ruleName».current«IF originalElement.datatypeRule».getText()«ENDIF»; }
 			EOF;
 		«compileEntryFinally(options)»
 	'''
 	
 	protected def compileEntryReturns(ParserRule it, AntlrOptions options) {
-		if (datatypeRule)
+		if (originalElement.datatypeRule)
 			return '[String current=null]'
 		else
-			return '[EObject current=null]'
+			return '''[«currentType» current=null]'''
 	}
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) '''
-		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment)»«ENDIF» returns «compileReturns(options)»
+		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment, currentType)»«ENDIF» returns «compileReturns(options)»
 		@init {
 			enterRule();
 			«compileInitHiddenTokens(options)»
@@ -163,13 +145,13 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	protected def compileReturns(AbstractRule it, AntlrOptions options) {
 		switch it {
 			EnumRule:
-				'returns [Enumerator current=null]'
-			ParserRule case datatypeRule:
+				'[Enumerator current=null]'
+			ParserRule case originalElement.datatypeRule:
 				'[AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]'
-			ParserRule case isEObjectFragmentRule:
-				'[EObject current=in_current]'
+			ParserRule case originalElement.isEObjectFragmentRule:
+				'''[«currentType» current=in_current]'''
 			ParserRule:
-				'[EObject current=null]'
+				'''[«currentType» current=null]'''
 			default:
 				throw new IllegalStateException("Unexpected rule: " + it)
 		}
@@ -231,7 +213,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 			«ENDIF»
 			{
 				$current = forceCreateModelElement«IF feature != null»And«setOrAdd.toFirstUpper»«ENDIF»(
-					grammarAccess.«grammarElementAccess»,
+					grammarAccess.«originalElement.grammarElementAccess»,
 					$current);
 			}
 		'''
@@ -262,6 +244,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 		else '''
 			«localVar»=«super._ebnf2(it, options, supportActions)»
 			{
+				$current = grammarAccess.«grammarElementAccess(originalElement)».getEnumLiteral().getInstance();
 				«newLeafNode(localVar)»
 			}
 		'''
@@ -276,18 +259,13 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 				ParserRule case assigned: 
 					super._ebnf2(it, options, supportActions)
 				EnumRule, 
-				ParserRule case rule.datatypeRule: '''
+				ParserRule case rule.originalElement.datatypeRule: '''
 					«IF options.backtrack»
 					{
 						/* */
 					}
 					«ENDIF»
 					{
-						«IF isEObjectFragmentRuleCall»
-							if ($current==null) {
-								$current = «it.createModelElement»;
-							}
-						«ENDIF»
 						«newCompositeNode»
 					}
 					«super._ebnf2(it, options, supportActions)»
@@ -302,6 +280,11 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 					}
 					«ENDIF»
 					{
+						«IF isEObjectFragmentRuleCall»
+							if ($current==null) {
+								$current = «it.createModelElement»;
+							}
+						«ENDIF»
 						«newCompositeNode»
 					}
 					«localVar»=«super._ebnf2(it, options, supportActions)»
@@ -430,13 +413,13 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	}
 	
 	protected def createModelElement(EObject grammarElement) '''
-		createModelElement(grammarAccess.«grammarElement.containingParserRule.grammarElementAccess»)'''
+		createModelElement(grammarAccess.«grammarElement.containingParserRule.originalElement.grammarElementAccess»)'''
 	
 	protected def createModelElementForParent(EObject grammarElement) '''
-		createModelElementForParent(grammarAccess.«grammarElement.containingParserRule.grammarElementAccess»)'''
+		createModelElementForParent(grammarAccess.«grammarElement.containingParserRule.originalElement.grammarElementAccess»)'''
 	
-	protected def newCompositeNode(EObject it) '''newCompositeNode(grammarAccess.«grammarElementAccess»);'''
+	protected def newCompositeNode(EObject it) '''newCompositeNode(grammarAccess.«originalElement.grammarElementAccess»);'''
 
-	protected def newLeafNode(EObject it, String token) '''newLeafNode(«token», grammarAccess.«grammarElementAccess»);'''
+	protected def newLeafNode(EObject it, String token) '''newLeafNode(«token», grammarAccess.«originalElement.grammarElementAccess»);'''
 
 }

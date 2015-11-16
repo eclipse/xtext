@@ -23,7 +23,7 @@ public class TextFileAccess {
   
   protected CharSequence internalContents;
   
-  public CharSequence setContent(final StringConcatenationClient content) {
+  public void setContent(final StringConcatenationClient content) {
     StringConcatenation _stringConcatenation = new StringConcatenation();
     final Procedure1<StringConcatenation> _function = new Procedure1<StringConcatenation>() {
       @Override
@@ -32,7 +32,7 @@ public class TextFileAccess {
       }
     };
     StringConcatenation _doubleArrow = ObjectExtensions.<StringConcatenation>operator_doubleArrow(_stringConcatenation, _function);
-    return this.internalContents = _doubleArrow;
+    this.internalContents = _doubleArrow;
   }
   
   public CharSequence getContent() {

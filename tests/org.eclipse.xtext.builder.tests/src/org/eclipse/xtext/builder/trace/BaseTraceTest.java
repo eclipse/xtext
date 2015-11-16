@@ -50,17 +50,17 @@ public class BaseTraceTest {
 
 			@Override
 			/* @NonNull */
-			protected InputStream getContents(/* @NonNull */ SourceRelativeURI uri, /* @NonNull */ IProjectConfig project) throws IOException {
+			protected InputStream getContents(/* @NonNull */ SourceRelativeURI uri) throws IOException {
 				throw new UnsupportedOperationException();
 			}
 
 			@Override
-			protected Reader getContentsAsText(SourceRelativeURI uri, IProjectConfig project) throws IOException {
+			protected Reader getContentsAsText(SourceRelativeURI uri) throws IOException {
 				throw new UnsupportedOperationException();
 			}
 
 			@Override
-			protected Reader getLocalContentsAsText(IProjectConfig projectConfig) throws IOException {
+			protected Reader getLocalContentsAsText() throws IOException {
 				throw new UnsupportedOperationException();
 			}
 		};

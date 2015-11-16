@@ -43,6 +43,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX31 <em>X31</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX32 <em>X32</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX33 <em>X33</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX34 <em>X34</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX35 <em>X35</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel()
@@ -830,5 +832,57 @@ public interface Model extends EObject
    * @generated
    */
   void setX33(FragmentCallerType value);
+
+  /**
+   * Returns the value of the '<em><b>X34</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X34</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X34</em>' containment reference.
+   * @see #setX34(ParameterCaller)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X34()
+   * @model containment="true"
+   * @generated
+   */
+  ParameterCaller getX34();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX34 <em>X34</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X34</em>' containment reference.
+   * @see #getX34()
+   * @generated
+   */
+  void setX34(ParameterCaller value);
+
+  /**
+   * Returns the value of the '<em><b>X35</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X35</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X35</em>' containment reference.
+   * @see #setX35(ParameterDelegation)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X35()
+   * @model containment="true"
+   * @generated
+   */
+  ParameterDelegation getX35();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX35 <em>X35</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X35</em>' containment reference.
+   * @see #getX35()
+   * @generated
+   */
+  void setX35(ParameterDelegation value);
 
 } // Model

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.util.JavaVersion
 
 /**
  * @author Holger Schill - Initial contribution and API

@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.xtext.wizard.RuntimeTestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
@@ -46,6 +46,8 @@ import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 
 @SuppressWarnings("all")
 public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
+  private final String MWE2_VERSION = "[2.8.2,3.0)";
+  
   private final Ecore2XtextGrammarCreator grammarCreator = new Ecore2XtextGrammarCreator();
   
   private final RuntimeTestProjectDescriptor testProject;
@@ -81,7 +83,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     boolean _or = false;
     WizardConfiguration _config = this.getConfig();
     BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
-    boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.ECLIPSE);
+    boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.NONE);
     if (_equals) {
       _or = true;
     } else {
@@ -194,14 +196,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     return CollectionLiterals.<String>newLinkedHashSet(
       "org.eclipse.xtext.xbase", 
       "org.eclipse.xtext.common.types", 
-      "org.eclipse.xtext.generator", 
       "org.eclipse.xtext.xtext.generator", 
       "org.eclipse.emf.codegen.ecore", 
       "org.eclipse.emf.mwe.utils", 
       "org.eclipse.emf.mwe2.launch", 
+      "org.eclipse.emf.mwe2.lib", 
       "org.objectweb.asm", 
       "org.apache.commons.logging", 
-      "org.apache.log4j");
+      "org.apache.log4j", 
+      "com.ibm.icu");
   }
   
   @Override
@@ -218,10 +221,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   }
   
   @Override
-  public Iterable<? extends TextFile> getFiles() {
-    final ArrayList<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
-    Iterable<? extends TextFile> _files = super.getFiles();
-    Iterables.<TextFile>addAll(files, _files);
+  public Iterable<? extends AbstractFile> getFiles() {
+    final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
+    Iterable<? extends AbstractFile> _files = super.getFiles();
+    Iterables.<AbstractFile>addAll(files, _files);
     PlainTextFile _grammarFile = this.getGrammarFile();
     files.add(_grammarFile);
     String _workflowFilePath = this.getWorkflowFilePath();
@@ -353,43 +356,35 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append(_replaceAll, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import org.eclipse.emf.mwe.utils.*");
-    _builder.newLine();
     _builder.append("import org.eclipse.xtext.xtext.generator.*");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.generator.*");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.ui.generator.*");
+    _builder.append("import org.eclipse.xtext.xtext.generator.model.project.*");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("var baseName = \"");
-    String _name = this.getName();
-    _builder.append(_name, "");
-    _builder.append("\"");
-    _builder.newLineIfNotEmpty();
     _builder.append("var rootPath = \"..\"");
     _builder.newLine();
-    _builder.newLine();
-    _builder.append("var fileExtensions = \"");
-    WizardConfiguration _config_2 = this.getConfig();
-    LanguageDescriptor _language_2 = _config_2.getLanguage();
-    LanguageDescriptor.FileExtensions _fileExtensions = _language_2.getFileExtensions();
-    _builder.append(_fileExtensions, "");
-    _builder.append("\"");
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("Workflow {");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("component = XtextGenerator auto-inject {");
+    _builder.append("component = XtextGenerator {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("configuration = {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("project = WizardConfig auto-inject {");
+    _builder.append("project = StandardProjectConfig {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("baseName = \"");
+    String _name = this.getName();
+    _builder.append(_name, "\t\t\t\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t");
+    _builder.append("rootPath = rootPath");
     _builder.newLine();
     {
       boolean _isEnabled = this.testProject.isEnabled();
@@ -408,18 +403,18 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     }
     {
       boolean _and = false;
-      WizardConfiguration _config_3 = this.getConfig();
-      IdeProjectDescriptor _ideProject = _config_3.getIdeProject();
+      WizardConfiguration _config_2 = this.getConfig();
+      IdeProjectDescriptor _ideProject = _config_2.getIdeProject();
       boolean _isEnabled_1 = _ideProject.isEnabled();
       if (!_isEnabled_1) {
         _and = false;
       } else {
+        WizardConfiguration _config_3 = this.getConfig();
+        WebProjectDescriptor _webProject = _config_3.getWebProject();
         WizardConfiguration _config_4 = this.getConfig();
-        WebProjectDescriptor _webProject = _config_4.getWebProject();
+        IntellijProjectDescriptor _intellijProject = _config_4.getIntellijProject();
         WizardConfiguration _config_5 = this.getConfig();
-        IntellijProjectDescriptor _intellijProject = _config_5.getIntellijProject();
-        WizardConfiguration _config_6 = this.getConfig();
-        UiProjectDescriptor _uiProject = _config_6.getUiProject();
+        UiProjectDescriptor _uiProject = _config_5.getUiProject();
         final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
           @Override
           public Boolean apply(final ProjectDescriptor it) {
@@ -444,8 +439,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_7 = this.getConfig();
-      UiProjectDescriptor _uiProject_1 = _config_7.getUiProject();
+      WizardConfiguration _config_6 = this.getConfig();
+      UiProjectDescriptor _uiProject_1 = _config_6.getUiProject();
       boolean _isEnabled_2 = _uiProject_1.isEnabled();
       if (_isEnabled_2) {
         _builder.append("\t\t\t\t");
@@ -461,8 +456,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_8 = this.getConfig();
-      UiProjectDescriptor _uiProject_2 = _config_8.getUiProject();
+      WizardConfiguration _config_7 = this.getConfig();
+      UiProjectDescriptor _uiProject_2 = _config_7.getUiProject();
       TestProjectDescriptor _testProject = _uiProject_2.getTestProject();
       boolean _isEnabled_3 = _testProject.isEnabled();
       if (_isEnabled_3) {
@@ -479,8 +474,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_9 = this.getConfig();
-      IntellijProjectDescriptor _intellijProject_1 = _config_9.getIntellijProject();
+      WizardConfiguration _config_8 = this.getConfig();
+      IntellijProjectDescriptor _intellijProject_1 = _config_8.getIntellijProject();
       boolean _isEnabled_4 = _intellijProject_1.isEnabled();
       if (_isEnabled_4) {
         _builder.append("\t\t\t\t");
@@ -496,8 +491,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_10 = this.getConfig();
-      WebProjectDescriptor _webProject_1 = _config_10.getWebProject();
+      WizardConfiguration _config_9 = this.getConfig();
+      WebProjectDescriptor _webProject_1 = _config_9.getWebProject();
       boolean _isEnabled_5 = _webProject_1.isEnabled();
       if (_isEnabled_5) {
         _builder.append("\t\t\t\t");
@@ -513,8 +508,8 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       }
     }
     {
-      WizardConfiguration _config_11 = this.getConfig();
-      SourceLayout _sourceLayout = _config_11.getSourceLayout();
+      WizardConfiguration _config_10 = this.getConfig();
+      SourceLayout _sourceLayout = _config_10.getSourceLayout();
       boolean _equals = Objects.equal(_sourceLayout, SourceLayout.MAVEN);
       if (_equals) {
         _builder.append("\t\t\t\t");
@@ -534,18 +529,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("code = auto-inject {");
+    _builder.append("code = {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("encoding = \"");
-    WizardConfiguration _config_12 = this.getConfig();
-    Charset _encoding = _config_12.getEncoding();
+    WizardConfiguration _config_11 = this.getConfig();
+    Charset _encoding = _config_11.getEncoding();
     _builder.append(_encoding, "\t\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t");
-    _builder.append("lineDelimiter = \"\\n\"");
-    _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("fileHeader = \"/*\\n * generated by Xtext \\${version}\\n */\"");
     _builder.newLine();
@@ -556,408 +548,103 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("language = auto-inject {");
+    _builder.append("language = StandardLanguage {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("uri = \"platform:/resource/${baseName}/");
-    String _sourceFolder = this.sourceFolder(Outlet.MAIN_JAVA);
-    _builder.append(_sourceFolder, "\t\t\t");
-    _builder.append("/");
-    String _grammarFilePath = this.getGrammarFilePath();
-    _builder.append(_grammarFilePath, "\t\t\t");
+    _builder.append("name = \"");
+    WizardConfiguration _config_12 = this.getConfig();
+    LanguageDescriptor _language_2 = _config_12.getLanguage();
+    String _name_1 = _language_2.getName();
+    _builder.append(_name_1, "\t\t\t");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
-    _builder.append("standaloneSetup = {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("//can be removed if Xbase is not used");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("loadedResource = \"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel\"");
-    _builder.newLine();
+    _builder.append("fileExtensions = \"");
+    WizardConfiguration _config_13 = this.getConfig();
+    LanguageDescriptor _language_3 = _config_13.getLanguage();
+    LanguageDescriptor.FileExtensions _fileExtensions = _language_3.getFileExtensions();
+    _builder.append(_fileExtensions, "\t\t\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
     {
-      WizardConfiguration _config_13 = this.getConfig();
-      Ecore2XtextConfiguration _ecore2Xtext = _config_13.getEcore2Xtext();
+      WizardConfiguration _config_14 = this.getConfig();
+      Ecore2XtextConfiguration _ecore2Xtext = _config_14.getEcore2Xtext();
       Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
-      final Function1<EPackageInfo, String> _function_1 = new Function1<EPackageInfo, String>() {
-        @Override
-        public String apply(final EPackageInfo it) {
-          URI _genmodelURI = it.getGenmodelURI();
-          return _genmodelURI.toString();
+      boolean _isEmpty = _ePackageInfos.isEmpty();
+      boolean _not_1 = (!_isEmpty);
+      if (_not_1) {
+        _builder.append("\t\t\t");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("standaloneSetup = {");
+        _builder.newLine();
+        {
+          WizardConfiguration _config_15 = this.getConfig();
+          Ecore2XtextConfiguration _ecore2Xtext_1 = _config_15.getEcore2Xtext();
+          Set<EPackageInfo> _ePackageInfos_1 = _ecore2Xtext_1.getEPackageInfos();
+          final Function1<EPackageInfo, String> _function_1 = new Function1<EPackageInfo, String>() {
+            @Override
+            public String apply(final EPackageInfo it) {
+              URI _genmodelURI = it.getGenmodelURI();
+              return _genmodelURI.toString();
+            }
+          };
+          Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos_1, _function_1);
+          Set<String> _set = IterableExtensions.<String>toSet(_map);
+          for(final String genmodelURI : _set) {
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("loadedResource = \"");
+            _builder.append(genmodelURI, "\t\t\t\t");
+            _builder.append("\"");
+            _builder.newLineIfNotEmpty();
+          }
         }
-      };
-      Iterable<String> _map = IterableExtensions.<EPackageInfo, String>map(_ePackageInfos, _function_1);
-      Set<String> _set = IterableExtensions.<String>toSet(_map);
-      for(final String genmodelURI : _set) {
-        _builder.append("\t\t\t\t");
-        _builder.append("loadedResource = \"");
-        _builder.append(genmodelURI, "\t\t\t\t");
-        _builder.append("\"");
-        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
       }
     }
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// Java API to access grammar elements (required by several other fragments)");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.newLine();
     {
       boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
       if (_isFromExistingEcoreModels) {
         _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter { ");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");
-        _builder.append("fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment auto-inject {}");
+        _builder.append("fragment = ecore2xtext.FormatterFragment {}");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("}");
         _builder.newLine();
       }
     }
-    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("// generates Java API for the generated EPackages");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = adapter.FragmentAdapter { ");
+    _builder.append("serializer = {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("fragment = ecore.EMFGeneratorFragment auto-inject {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("javaModelDirectory = \"/${baseName}/");
-    String _sourceFolder_1 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
-    _builder.append(_sourceFolder_1, "\t\t\t\t\t");
-    _builder.append("\"");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("updateBuildProperties = ");
-    boolean _isEclipsePluginProject_1 = this.isEclipsePluginProject();
-    _builder.append(_isEclipsePluginProject_1, "\t\t\t\t\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = adapter.FragmentAdapter {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("fragment = serializer.SerializerFragment auto-inject {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
     _builder.append("generateStub = false");
     _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
-    _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("// a custom ResourceFactory for use with EMF");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = adapter.FragmentAdapter {");
+    _builder.append("validator = {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("fragment = resourceFactory.ResourceFactoryFragment auto-inject {}");
+    _builder.append("// composedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// The antlr parser generator fragment.");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = adapter.FragmentAdapter {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// Xtend-based API for validation");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = validation.ValidatorFragment2 auto-inject {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("//\tcomposedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// scoping and exporting API");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = scoping.ImportNamespacesScopingFragment2 auto-inject {}");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = exporting.QualifiedNamesFragment2 auto-inject {}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// generator API");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = generator.GeneratorFragment2 {}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// formatter API");
-    _builder.newLine();
-    {
-      boolean _isFromExistingEcoreModels_1 = this.isFromExistingEcoreModels();
-      if (_isFromExistingEcoreModels_1) {
-        _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = ecore2xtext.FormatterFragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
-      } else {
-        _builder.append("\t\t\t");
-        _builder.append("fragment = formatting.Formatter2Fragment2 {}");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    {
-      WizardConfiguration _config_14 = this.getConfig();
-      Set<ProjectDescriptor> _enabledProjects = _config_14.getEnabledProjects();
-      Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(_enabledProjects, TestedProjectDescriptor.class);
-      final Function1<TestedProjectDescriptor, Boolean> _function_2 = new Function1<TestedProjectDescriptor, Boolean>() {
-        @Override
-        public Boolean apply(final TestedProjectDescriptor it) {
-          return Boolean.valueOf(RuntimeProjectDescriptor.this.testProject.isEnabled());
-        }
-      };
-      boolean _exists_1 = IterableExtensions.<TestedProjectDescriptor>exists(_filter, _function_2);
-      if (_exists_1) {
-        _builder.append("\t\t\t");
-        _builder.append("fragment = junit.Junit4Fragment2 auto-inject {}");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    {
-      WizardConfiguration _config_15 = this.getConfig();
-      UiProjectDescriptor _uiProject_3 = _config_15.getUiProject();
-      boolean _isEnabled_6 = _uiProject_3.isEnabled();
-      if (_isEnabled_6) {
-        _builder.append("\t\t\t");
-        _builder.append("fragment = builder.BuilderIntegrationFragment2 auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("// labeling API");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = ui.labeling.LabelProviderFragment2 auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("// outline API");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = ui.outline.OutlineTreeProviderFragment2 auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("// quick outline menu contribution");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = ui.outline.QuickOutlineFragment2 auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("// quickfix API");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = ui.quickfix.QuickfixProviderFragment2 auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("// content assist API");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = ui.contentAssist.ContentAssistFragment2 auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("// provides a preference page for template proposals");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = templates.CodetemplatesGeneratorFragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("// rename refactoring");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = refactoring.RefactorElementNameFragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("// provides a compare view");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = ui.compare.CompareFragment2 auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.newLine();
-      }
-    }
-    {
-      boolean _or = false;
-      WizardConfiguration _config_16 = this.getConfig();
-      UiProjectDescriptor _uiProject_4 = _config_16.getUiProject();
-      boolean _isEnabled_7 = _uiProject_4.isEnabled();
-      if (_isEnabled_7) {
-        _or = true;
-      } else {
-        WizardConfiguration _config_17 = this.getConfig();
-        IdeProjectDescriptor _ideProject_1 = _config_17.getIdeProject();
-        boolean _isEnabled_8 = _ideProject_1.isEnabled();
-        _or = _isEnabled_8;
-      }
-      if (_or) {
-        _builder.append("\t\t\t");
-        _builder.append("// generates a more lightweight Antlr parser and lexer tailored for content assist");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t\t\t");
-    _builder.append("// provides the necessary bindings for java types integration");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = types.TypesGeneratorFragment2 auto-inject {}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// generates the required bindings only if the grammar inherits from Xbase");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = xbase.XbaseGeneratorFragment2 auto-inject {}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("// generates the required bindings only if the grammar inherits from Xtype");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("fragment = xbase.XtypeGeneratorFragment2 auto-inject {}");
-    _builder.newLine();
-    _builder.newLine();
-    {
-      WizardConfiguration _config_18 = this.getConfig();
-      IntellijProjectDescriptor _intellijProject_2 = _config_18.getIntellijProject();
-      boolean _isEnabled_9 = _intellijProject_2.isEnabled();
-      if (_isEnabled_9) {
-        _builder.append("\t\t\t");
-        _builder.append("// Intellij IDEA integration");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = idea.IdeaPluginGenerator auto-inject {}");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    {
-      WizardConfiguration _config_19 = this.getConfig();
-      WebProjectDescriptor _webProject_2 = _config_19.getWebProject();
-      boolean _isEnabled_10 = _webProject_2.isEnabled();
-      if (_isEnabled_10) {
-        _builder.append("\t\t\t");
-        _builder.append("// web integration");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("fragment = web.WebIntegrationFragment auto-inject {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("framework = \"Ace\"");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("generateServlet = true");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("generateJettyLauncher = true");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("\t");
-        _builder.append("generateHtmlExample = true");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
-      }
-    }
     _builder.append("\t\t");
     _builder.append("}");
     _builder.newLine();
@@ -1001,8 +688,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("dependencies {");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext:${xtextVersion}\"");
-        _builder.newLine();
+        _builder.append("mwe2 \"org.eclipse.emf:org.eclipse.emf.mwe2.launch:");
+        _builder.append(RuntimeProjectDescriptor.this.MWE2_VERSION, "\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}\"");
         _builder.newLine();
@@ -1064,20 +753,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("clean.dependsOn(cleanGenerateXtextLanguage)");
         _builder.newLine();
         _builder.append("eclipse.classpath.plusConfigurations += [configurations.mwe2]");
-        _builder.newLine();
-        _builder.newLine();
-        _builder.append("jar {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("from(\'model/generated\') {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("into(\'model/generated\')");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("}");
         _builder.newLine();
         it.setAdditionalContent(_builder.toString());
       }
@@ -1181,7 +856,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("<artifactId>exec-maven-plugin</artifactId>");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("<version>1.2.1</version>");
+        _builder.append("<version>1.4.0</version>");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("<executions>");
@@ -1240,45 +915,86 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("\t\t\t\t");
         _builder.append("<includePluginDependencies>true</includePluginDependencies>");
         _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->");
+        _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("</configuration>");
         _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("<dependencies>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("<dependency>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t");
-        _builder.append("<groupId>org.eclipse.xtext</groupId>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t");
-        _builder.append("<artifactId>org.eclipse.xtext.xtext</artifactId>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t");
-        _builder.append("<version>${xtextVersion}</version>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("</dependency>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("<dependency>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t");
-        _builder.append("<groupId>org.eclipse.xtext</groupId>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t");
-        _builder.append("<artifactId>org.eclipse.xtext.xtext.generator</artifactId>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t\t");
-        _builder.append("<version>${xtextVersion}</version>");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("</dependency>");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("</dependencies>");
-        _builder.newLine();
+        {
+          WizardConfiguration _config_1 = RuntimeProjectDescriptor.this.getConfig();
+          boolean _needsTychoBuild = _config_1.needsTychoBuild();
+          if (_needsTychoBuild) {
+            _builder.append("\t\t\t");
+            _builder.append("<dependencies>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<dependency>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<groupId>org.eclipse.emf</groupId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<artifactId>org.eclipse.emf.mwe2.launch</artifactId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<version>");
+            _builder.append(RuntimeProjectDescriptor.this.MWE2_VERSION, "\t\t\t\t\t");
+            _builder.append("</version>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("</dependency>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<dependency>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<groupId>org.eclipse.xtext</groupId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<artifactId>org.eclipse.xtext.xtext.generator</artifactId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<version>${xtextVersion}</version>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("</dependency>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("<dependency>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<groupId>org.eclipse.xtext</groupId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<artifactId>org.eclipse.xtext.xbase</artifactId>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t\t");
+            _builder.append("<version>${xtextVersion}</version>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("</dependency>");
+            _builder.newLine();
+            _builder.append("\t\t\t");
+            _builder.append("</dependencies>");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t\t");
         _builder.append("</plugin>");
         _builder.newLine();
@@ -1311,12 +1027,12 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("<filesets combine.children=\"append\">");
         _builder.newLine();
         {
-          WizardConfiguration _config_1 = RuntimeProjectDescriptor.this.getConfig();
-          IdeProjectDescriptor _ideProject = _config_1.getIdeProject();
           WizardConfiguration _config_2 = RuntimeProjectDescriptor.this.getConfig();
-          UiProjectDescriptor _uiProject = _config_2.getUiProject();
+          IdeProjectDescriptor _ideProject = _config_2.getIdeProject();
           WizardConfiguration _config_3 = RuntimeProjectDescriptor.this.getConfig();
-          WebProjectDescriptor _webProject = _config_3.getWebProject();
+          UiProjectDescriptor _uiProject = _config_3.getUiProject();
+          WizardConfiguration _config_4 = RuntimeProjectDescriptor.this.getConfig();
+          WebProjectDescriptor _webProject = _config_4.getWebProject();
           for(final ProjectDescriptor p : Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(RuntimeProjectDescriptor.this, _ideProject, _uiProject, _webProject))) {
             {
               boolean _isEnabled = p.isEnabled();
@@ -1334,6 +1050,18 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
                 _builder.append(_sourceFolder_3, "\t\t\t\t\t\t");
                 _builder.append("/</directory>");
                 _builder.newLineIfNotEmpty();
+                _builder.append("\t\t\t\t\t");
+                _builder.append("\t");
+                _builder.append("<includes>");
+                _builder.newLine();
+                _builder.append("\t\t\t\t\t");
+                _builder.append("\t\t");
+                _builder.append("<include>**/*</include>");
+                _builder.newLine();
+                _builder.append("\t\t\t\t\t");
+                _builder.append("\t");
+                _builder.append("</includes>");
+                _builder.newLine();
                 _builder.append("\t\t\t\t\t");
                 _builder.append("</fileset>");
                 _builder.newLine();
@@ -1364,6 +1092,18 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
                         _builder.append(_sourceFolder_4, "\t\t\t\t\t\t");
                         _builder.append("/</directory>");
                         _builder.newLineIfNotEmpty();
+                        _builder.append("\t\t\t\t\t");
+                        _builder.append("\t");
+                        _builder.append("<includes>");
+                        _builder.newLine();
+                        _builder.append("\t\t\t\t\t");
+                        _builder.append("\t\t");
+                        _builder.append("<include>**/*</include>");
+                        _builder.newLine();
+                        _builder.append("\t\t\t\t\t");
+                        _builder.append("\t");
+                        _builder.append("</includes>");
+                        _builder.newLine();
                         _builder.append("\t\t\t\t\t");
                         _builder.append("</fileset>");
                         _builder.newLine();

@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,19 +66,25 @@ ruleModel:
 			lv_referenceHolder_0_0=ruleReferenceHolder
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleReferenceHolder
-entryRuleReferenceHolder:
+entryRuleReferenceHolder returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getReferenceHolderElementType()); }
-	ruleReferenceHolder
+	iv_ruleReferenceHolder=ruleReferenceHolder
+	{ $current=$iv_ruleReferenceHolder.current; }
 	EOF;
 
 // Rule ReferenceHolder
-ruleReferenceHolder:
+ruleReferenceHolder returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -85,12 +93,24 @@ ruleReferenceHolder:
 				}
 				lv_name_0_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_0_0);
 				}
 			)
 		)
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markComposite(elementTypeProvider.getReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType());
 				}
@@ -104,13 +124,15 @@ ruleReferenceHolder:
 ;
 
 //Entry rule entryRuleFQN
-entryRuleFQN:
+entryRuleFQN returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFQNElementType()); }
-	ruleFQN
+	iv_ruleFQN=ruleFQN
+	{ $current=$iv_ruleFQN.current; }
 	EOF;
 
 // Rule FQN
-ruleFQN:
+ruleFQN returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());

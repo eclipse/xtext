@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,52 +66,68 @@ ruleModel:
 			lv_strings_0_0=ruleAbstractString
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleAbstractString
-entryRuleAbstractString:
+entryRuleAbstractString returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAbstractStringElementType()); }
-	ruleAbstractString
+	iv_ruleAbstractString=ruleAbstractString
+	{ $current=$iv_ruleAbstractString.current; }
 	EOF;
 
 // Rule AbstractString
-ruleAbstractString:
+ruleAbstractString returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getAbstractString_GStringParserRuleCall_0ElementType());
 		}
-		ruleGString
+		this_GString_0=ruleGString
 		{
+			$current = $this_GString_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getAbstractString_QuotedStringParserRuleCall_1ElementType());
 		}
-		ruleQuotedString
+		this_QuotedString_1=ruleQuotedString
 		{
+			$current = $this_QuotedString_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleGString
-entryRuleGString:
+entryRuleGString returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getGStringElementType()); }
-	ruleGString
+	iv_ruleGString=ruleGString
+	{ $current=$iv_ruleGString.current; }
 	EOF;
 
 // Rule GString
-ruleGString:
+ruleGString returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getGString_NameGERMAN_STRINGTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_GERMAN_STRING
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -118,19 +136,27 @@ ruleGString:
 ;
 
 //Entry rule entryRuleQuotedString
-entryRuleQuotedString:
+entryRuleQuotedString returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getQuotedStringElementType()); }
-	ruleQuotedString
+	iv_ruleQuotedString=ruleQuotedString
+	{ $current=$iv_ruleQuotedString.current; }
 	EOF;
 
 // Rule QuotedString
-ruleQuotedString:
+ruleQuotedString returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getQuotedString_NameSTRINGTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_STRING
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_name_0_0);
 			}

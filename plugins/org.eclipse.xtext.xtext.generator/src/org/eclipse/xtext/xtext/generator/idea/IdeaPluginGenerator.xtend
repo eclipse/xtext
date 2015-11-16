@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.idea
 
-import com.google.common.collect.LinkedHashMultimap
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -20,11 +19,13 @@ import java.util.HashSet
 import java.util.Map
 import java.util.Set
 import org.antlr.runtime.Token
+import org.eclipse.emf.ecore.EAttribute
+import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
+import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
-import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.ISetup
@@ -34,7 +35,7 @@ import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.parser.antlr.LexerBindings
 import org.eclipse.xtext.service.LanguageSpecific
 import org.eclipse.xtext.util.Modules2
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -42,16 +43,17 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess.BindingFactory
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
+import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
 
-class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
+class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	@Inject extension XtextGeneratorNaming
 	@Inject extension XbaseUsageDetector
-	@Inject extension GrammarNaming
+	@Inject ContentAssistGrammarNaming caNaming
 	
 	@Inject
 	extension IdeaPluginExtension
@@ -75,6 +77,8 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	}
 
 	override generate() {
+		if (!projectConfig.ideaPlugin.enabled)
+			return;
 		val fileExtension = language.getFileExtensions().head
 		val grammar = language.grammar
 
@@ -92,12 +96,12 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider'.typeRef, grammar.elementTypeProvider)
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.facet.AbstractFacetConfiguration'.typeRef, grammar.facetConfiguration)
 		bindFactory.addTypeToInstance('com.intellij.facet.FacetTypeId'.typeRef, '''«grammar.facetType».TYPEID''')
-		bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef, grammar.contentAssistParserClass)
+		bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef, caNaming.getParserClass(grammar))
 		bindFactory.addConfiguredBinding('ContentAssistLexer',
-			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«grammar.internalContentAssistLexerClass».class);''')
+			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«caNaming.getLexerClass(grammar)».class);''')
 		if (grammar.inheritsXbase) {
 			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider'.typeRef, 'org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider'.typeRef)
-			bindFactory.addTypeToType('org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider'.typeRef, 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider'.typeRef)
+			bindFactory.addTypeToType(new TypeReference('org.eclipse.xtext.xbase.typesystem.internal', 'IFeatureScopeTracker.Provider'), 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider'.typeRef)
 			bindFactory.addConfiguredBinding('LanguageSpecificPsiModelAssociations', '''
 				binder.bind(«"org.eclipse.xtext.psi.IPsiModelAssociations".typeRef».class)
 					.annotatedWith(«LanguageSpecific».class)
@@ -109,7 +113,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.IReferenceSearcher'.typeRef, 'org.eclipse.xtext.xbase.idea.findusages.JvmElementAwareReferenceSearcher'.typeRef)
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider'.typeRef)
-			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.WordsScannerProvider'.typeRef, 'org.eclipse.xtext.xbase.idea.findusages.XbaseWordsScanner.XbaseWordsScannerProvider'.typeRef)
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.WordsScannerProvider'.typeRef, new TypeReference('org.eclipse.xtext.xbase.idea.findusages', 'XbaseWordsScanner.XbaseWordsScannerProvider'))
 		}
 
 		bindFactory.contributeTo(language.ideaGenModule)
@@ -197,6 +201,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	def compilePomDeclarationSearcher(Grammar it) {
 		fileAccessFactory.createJavaFile(pomDeclarationSearcher, '''
 			public class «pomDeclarationSearcher.simpleName» extends «"org.eclipse.xtext.idea.pom.AbstractXtextPomDeclarationSearcher".typeRef» {
+
 				public «pomDeclarationSearcher.simpleName»() {
 					super(«grammar.ideaLanguage».INSTANCE);
 				}
@@ -207,12 +212,13 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	def compilePsiParser(Grammar grammar) {
 		fileAccessFactory.createJavaFile(grammar.psiParser, '''
 			public class «grammar.psiParser.simpleName» extends «"org.eclipse.xtext.idea.parser.AbstractXtextPsiParser".typeRef» {
+
 				«IF !grammar.initialHiddenTokens.empty»
 				private static final «Set»<«String»> INITIAL_HIDDEN_TOKENS = new «HashSet»<«String»>(«Arrays».asList(«FOR hidden:grammar.initialHiddenTokens SEPARATOR ', '»"«hidden»"«ENDFOR»));
 				«ELSE»
 				private static final «Set»<«String»> INITIAL_HIDDEN_TOKENS = «Collections».emptySet();
 				«ENDIF»
-				
+
 				@«Inject» 
 				private «grammar.grammarAccess» grammarAccess;
 
@@ -223,6 +229,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 				protected «"org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser".typeRef» createParser(«"com.intellij.lang.PsiBuilder".typeRef» builder, «"org.antlr.runtime.TokenStream".typeRef» tokenStream) {
 					return new «grammar.psiInternalParser»(builder, tokenStream, elementTypeProvider, grammarAccess);
 				}
+
 				@«Override»
 				protected «Set»<«String»> getInitialHiddenTokens() {
 					return INITIAL_HIDDEN_TOKENS;
@@ -402,7 +409,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	
 	def compileLanguage(Grammar grammar) {
 		fileAccessFactory.createJavaFile(grammar.ideaLanguage, '''
-			public final class «grammar.ideaLanguage.simpleName» extends «"org.eclipse.xtext.idea.lang.AbstractXtextLanguage".typeRef»{
+			public final class «grammar.ideaLanguage.simpleName» extends «"org.eclipse.xtext.idea.lang.AbstractXtextLanguage".typeRef» {
 			
 				public static final «grammar.ideaLanguage.simpleName» INSTANCE = new «grammar.ideaLanguage.simpleName»();
 			
@@ -511,9 +518,10 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	def compileTokenTypeProvider(Grammar grammar) {
 		val tokenSet = "com.intellij.psi.tree.TokenSet".typeRef
 		val iElementType = "com.intellij.psi.tree.IElementType".typeRef
-		val indexedElementType = "org.eclipse.xtext.idea.parser.TokenTypeProvider.IndexedElementType".typeRef
+		val indexedElementType = "IndexedElementType" // no typeRef is used here as 'IndexedElementType' is inner class of 'TokenTypeProvider'
 		return fileAccessFactory.createJavaFile(grammar.tokenTypeProvider, '''
-			@«Singleton» public class «grammar.tokenTypeProvider.simpleName» implements «"org.eclipse.xtext.idea.parser.TokenTypeProvider".typeRef» {
+			@«Singleton»
+			public class «grammar.tokenTypeProvider.simpleName» implements «"org.eclipse.xtext.idea.parser.TokenTypeProvider".typeRef» {
 			
 				private static final String[] TOKEN_NAMES = new «grammar.psiInternalParser»(null).getTokenNames();
 			
@@ -547,8 +555,7 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			
 				@Override
 			    public int getAntlrType(«iElementType» iElementType) {
-			        return (iElementType instanceof «indexedElementType») ? ((«indexedElementType») iElementType).getLocalIndex()
-			        				: «Token».INVALID_TOKEN_TYPE;
+			        return (iElementType instanceof «indexedElementType») ? ((«indexedElementType») iElementType).getLocalIndex() : «Token».INVALID_TOKEN_TYPE;
 			    }
 			    
 			    @Override
@@ -601,82 +608,74 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 	}
 	
 	def compileParserDefinition(Grammar grammar) {
-		val crossReferences = grammar.crossReferences
-		val namedGrammarElement = grammar.namedGrammarElements
+		val EObjectRules = grammar.allRules.filter[EObjectRule]
 		return fileAccessFactory.createJavaFile(grammar.parserDefinition, '''
 			public class «grammar.parserDefinition.simpleName» extends «grammar.superParserDefinition» {
-			
+				«IF !EObjectRules.empty»
+
 				@«Inject» 
 				private «grammar.elementTypeProvider» elementTypeProvider;
+				«ENDIF»
 			
 				@Override
 				public «"com.intellij.psi.PsiFile".typeRef» createFile(«"com.intellij.psi.FileViewProvider".typeRef» viewProvider) {
 					return new «grammar.fileImpl»(viewProvider);
 				}
-			
+				«IF !EObjectRules.empty»
+				
 				@Override
 				@SuppressWarnings("rawtypes")
-				public «"com.intellij.psi.PsiElement".typeRef» createElement(«"com.intellij.lang.ASTNode".typeRef» node) {
-					«"com.intellij.psi.tree.IElementType".typeRef» elementType = node.getElementType();
-					«FOR namedElementType:namedGrammarElement.keySet»
-					if (elementType == elementTypeProvider.get«namedElementType»ElementType()) {
-						return new «"org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl".typeRef»(node,
-							«FOR nameType:namedGrammarElement.get(namedElementType) SEPARATOR ','»
-							elementTypeProvider.get«nameType»ElementType()
-							«ENDFOR»
-						);
+				public «'com.intellij.psi.PsiElement'.typeRef» createElement(«'com.intellij.lang.ASTNode'.typeRef» node) {
+					Boolean hasSemanticElement = node.getUserData(«'org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder'.typeRef».HAS_SEMANTIC_ELEMENT_KEY);
+					if (hasSemanticElement != null && hasSemanticElement) {
+						«'com.intellij.psi.tree.IElementType'.typeRef» elementType = node.getElementType();
+						«FOR rule : EObjectRules»
+						if (elementType == elementTypeProvider.get«rule.grammarElementIdentifier»ElementType()) {
+							«IF rule.named»
+							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
+							«ELSE»
+							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
+							«ENDIF»
+						}
+						«FOR element : rule.EObjectElements»
+						if (elementType == elementTypeProvider.get«element.grammarElementIdentifier»ElementType()) {
+							«IF element.named»
+							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
+							«ELSE»
+							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
+							«ENDIF»
+						}
+						«ENDFOR»
+						«ENDFOR»
+						throw new «'java.lang.IllegalStateException'.typeRef»("Unexpected element type: " + elementType);
 					}
-					«ENDFOR»
-					«FOR crossReference : crossReferences»
-					if (elementType == elementTypeProvider.get«crossReference.grammarElementIdentifier»ElementType()) {
-						return new «"org.eclipse.xtext.psi.impl.PsiEObjectReference".typeRef»(node);
-					}
-					«ENDFOR»
 					return super.createElement(node);
 				}
+				«ENDIF»
 			
 			}
 		''')
 	}
 	
-	protected def getCrossReferences(Grammar grammar) {
-		grammar.allNonTerminalRules.map[
-			eAllContents.filter(CrossReference).filter[assigned].toIterable
-		].flatten
-	}
-	
-	protected def getNamedGrammarElements(Grammar grammar) {
-		val namedGrammarElements = LinkedHashMultimap.<String, String>create
-		for (nameRuleCall : grammar.nameRuleCalls) {
-			val nameRuleCallIdentifier = nameRuleCall.grammarElementIdentifier
-			for (ruleCall : grammar.getRuleCallsWithName(nameRuleCall)) {
-				namedGrammarElements.put(ruleCall.grammarElementIdentifier, nameRuleCallIdentifier)
-				for (action : ruleCall.rule.eAllContents.filter(Action).toIterable) {
-					namedGrammarElements.put(action.grammarElementIdentifier, nameRuleCallIdentifier)
-				}
+	protected def getEObjectElements(AbstractRule rule) {
+		rule.eAllOfType(AbstractElement).filter[ element |
+			switch element {
+				Action,
+				RuleCall case element.EObjectRuleCall: true
+				default: false
 			}
+		]
+	}
+	
+	protected def isNamed(EObject element) {
+		val type = switch element {
+			AbstractRule: element.type
+			RuleCall: element.rule?.type
+			Action: element.type
 		}
-		namedGrammarElements
-	}
-	
-	protected def getRuleCallsWithName(Grammar grammar, RuleCall nameRuleCall) {
-		grammar.allNonTerminalRules.map[getRuleCallsWithName(nameRuleCall)].flatten
-	}
-	
-	protected def getRuleCallsWithName(EObject element, RuleCall nameRuleCall) {
-		element.eAllContents.filter(RuleCall).filter [
-			rule.eAllContents.exists[it == nameRuleCall]
-		].toIterable
-	}
-	
-	protected def getNameRuleCalls(Grammar grammar) {
-		grammar.allNonTerminalRules.map[nameRuleCalls].flatten
-	}
-	
-	protected def getNameRuleCalls(EObject element) {
-		element.eAllContents.filter(RuleCall).filter [
-			assigned && containingAssignment.feature == 'name'
-		].toIterable
+		val classifier = type?.classifier
+		val feature = if(classifier instanceof EClass) classifier.getEStructuralFeature('name')
+		feature instanceof EAttribute && !feature.many && String.isAssignableFrom(feature.EType.instanceClass)
 	}
 	
 	def compileAbstractCompletionContributor(Grammar grammar) {

@@ -2506,7 +2506,7 @@ protected class Transient1_NumberSignDigitFiveKeyword_0 extends KeywordToken  {
 
 }
 
-// (precStar?='*' | prec=INT)
+// precStar?='*' | prec=INT
 protected class Transient1_Alternatives_1 extends AlternativesToken {
 
 	public Transient1_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2642,7 +2642,7 @@ protected class Transient1_CommaKeyword_2_0 extends KeywordToken  {
 
 }
 
-// (scaleStar?='*' | scale=INT)
+// scaleStar?='*' | scale=INT
 protected class Transient1_Alternatives_2_1 extends AlternativesToken {
 
 	public Transient1_Alternatives_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2796,7 +2796,7 @@ protected class Consumed1_NumberSignDigitSixKeyword_0 extends KeywordToken  {
 
 }
 
-// ('v1' v1+=INT* v2+=ID | 'v2' v2+=ID* v1+=INT)
+// 'v1' v1+=INT* v2+=ID | 'v2' v2+=ID* v1+=INT
 protected class Consumed1_Alternatives_1 extends AlternativesToken {
 
 	public Consumed1_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3426,7 +3426,7 @@ protected class Loop2_IdAssignment_1 extends AssignmentToken  {
 
 }
 
-// ('kw1' | id+=ID 'kw2')
+// 'kw1' | id+=ID 'kw2'
 protected class Loop2_Alternatives_2 extends AlternativesToken {
 
 	public Loop2_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3653,7 +3653,7 @@ protected class Loop2_Kw4Keyword_3_1_1 extends KeywordToken  {
 
 
 
-// ('kw5' | 'kw6')
+// 'kw5' | 'kw6'
 protected class Loop2_Alternatives_4 extends AlternativesToken {
 
 	public Loop2_Alternatives_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3740,7 +3740,7 @@ protected class Loop3_Group extends GroupToken {
 
 }
 
-// ('kw1' | 'kw2' | 'kw3')
+// 'kw1' | 'kw2' | 'kw3'
 protected class Loop3_Alternatives_0 extends AlternativesToken {
 
 	public Loop3_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4003,7 +4003,7 @@ protected class Loop4_NumberSignDigitOneDigitOneKeyword_0 extends KeywordToken  
 
 }
 
-// ('kw1' | 'kw2' | 'kw3' 'kw4')
+// 'kw1' | 'kw2' | 'kw3' 'kw4'
 protected class Loop4_Alternatives_1 extends AlternativesToken {
 
 	public Loop4_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4188,7 +4188,7 @@ protected class LoopBug285452_NumberSignDigitOneDigitTwoKeyword_0 extends Keywor
 
 }
 
-// (interface?="interface" | "class")
+// interface?="interface" | "class"
 protected class LoopBug285452_Alternatives_1 extends AlternativesToken {
 
 	public LoopBug285452_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5465,7 +5465,7 @@ protected class TypeBug305577_1_NumberSignDigitOneDigitSevenKeyword_0 extends Ke
 
 }
 
-// (TypeBug1A | TypeBug1B)
+// TypeBug1A | TypeBug1B
 protected class TypeBug305577_1_Alternatives_1 extends AlternativesToken {
 
 	public TypeBug305577_1_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5625,7 +5625,7 @@ protected class TypeBug305577_2_NumberSignDigitOneDigitEightKeyword_0 extends Ke
 
 }
 
-// (TypeBug2B | TypeBug2A)
+// TypeBug2B | TypeBug2A
 protected class TypeBug305577_2_Alternatives_1 extends AlternativesToken {
 
 	public TypeBug305577_2_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6364,7 +6364,7 @@ protected class Bug305171_NumberSignDigitOneDigitNineKeyword_0 extends KeywordTo
 
 }
 
-// (('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?))
+// ('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)
 protected class Bug305171_Group_1 extends GroupToken {
 	
 	public Bug305171_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6546,7 +6546,7 @@ protected class Bug305171_XAssignment_1_0_2_1 extends AssignmentToken  {
 
 
 
-// (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)
+// ('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?
 protected class Bug305171_Group_1_1 extends GroupToken {
 	
 	public Bug305171_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

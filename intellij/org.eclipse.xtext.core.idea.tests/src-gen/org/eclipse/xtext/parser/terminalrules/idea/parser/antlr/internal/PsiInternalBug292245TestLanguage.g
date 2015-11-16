@@ -49,18 +49,20 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel@init {
+entryRuleModel returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 }:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule Model
-ruleModel@init {
+ruleModel returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 }:
 	(
@@ -80,6 +82,10 @@ ruleModel@init {
 					lv_fix_1_0=ruleFix
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)+
@@ -101,6 +107,10 @@ ruleModel@init {
 					lv_error_3_0=ruleError
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)+
@@ -122,6 +132,10 @@ ruleModel@init {
 					lv_tick_5_0=ruleApostrophe
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)+
@@ -133,18 +147,20 @@ finally {
 }
 
 //Entry rule entryRuleError
-entryRuleError@init {
+entryRuleError returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	{ markComposite(elementTypeProvider.getErrorElementType()); }
-	ruleError
+	iv_ruleError=ruleError
+	{ $current=$iv_ruleError.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule Error
-ruleError@init {
+ruleError returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	(
@@ -176,18 +192,20 @@ finally {
 }
 
 //Entry rule entryRuleFix
-entryRuleFix@init {
+entryRuleFix returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	{ markComposite(elementTypeProvider.getFixElementType()); }
-	ruleFix
+	iv_ruleFix=ruleFix
+	{ $current=$iv_ruleFix.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule Fix
-ruleFix@init {
+ruleFix returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }:
 	(
@@ -226,18 +244,20 @@ finally {
 }
 
 //Entry rule entryRuleApostrophe
-entryRuleApostrophe@init {
+entryRuleApostrophe returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 }:
 	{ markComposite(elementTypeProvider.getApostropheElementType()); }
-	ruleApostrophe
+	iv_ruleApostrophe=ruleApostrophe
+	{ $current=$iv_ruleApostrophe.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule Apostrophe
-ruleApostrophe@init {
+ruleApostrophe returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 }:
 	{
@@ -253,18 +273,20 @@ finally {
 }
 
 //Entry rule entryRuleRehide
-entryRuleRehide@init {
+entryRuleRehide returns [Boolean current=false]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 }:
 	{ markComposite(elementTypeProvider.getRehideElementType()); }
-	ruleRehide
+	iv_ruleRehide=ruleRehide
+	{ $current=$iv_ruleRehide.current; }
 	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule Rehide
-ruleRehide@init {
+ruleRehide returns [Boolean current=false]
+@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 }:
 	(
@@ -282,13 +304,15 @@ finally {
 }
 
 //Entry rule entryRuleGraphical
-entryRuleGraphical:
+entryRuleGraphical returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getGraphicalElementType()); }
-	ruleGraphical
+	iv_ruleGraphical=ruleGraphical
+	{ $current=$iv_ruleGraphical.current; }
 	EOF;
 
 // Rule Graphical
-ruleGraphical:
+ruleGraphical returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getGraphical_CHARTerminalRuleCall_0ElementType());

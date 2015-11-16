@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
@@ -27,10 +28,13 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xtext.RuleNames;
+import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Binder;
@@ -119,15 +123,9 @@ public class GrammarAccessUtil {
 	 * @since 2.7
 	 */
 	public static String serialize(EObject obj, String prefix, String lineDelimiter) {
-		String s;
-		try {
-			SaveOptions options = SaveOptions.newBuilder().format().getOptions();
-			s = getSerializer(lineDelimiter).serialize(obj, options);
-		} catch (Exception e) {
-			s = e.toString();
-		}
-		s = prefix + s.trim().replaceAll("(\\r?\\n)", "$1" + prefix).replaceAll("/\\*", "/ *").replaceAll("\\*/", "* /");
-		return s;
+		ISerializer serializer = getSerializer(lineDelimiter);
+		String result = GrammarAccessExtensions.grammarFragmentToString(serializer, obj, prefix);
+		return result;
 	}
 
 	private static ISerializer getSerializer(final String delimiter) {
@@ -258,5 +256,27 @@ public class GrammarAccessUtil {
 			t.printStackTrace();
 			return "%_FAILURE_(" + text + ")%";
 		}
+	}
+	
+	// Duplicated from GrammarAccessFragment2
+	/**
+	 * @since 2.9
+	 */
+	public static List<Grammar> getEffectivelyUsedGrammars(final Grammar grammar) {
+		List<AbstractRule> allRules = GrammarUtil.allRules(grammar);
+		List<Grammar> _map = ListExtensions.map(allRules, new Function1<AbstractRule, Grammar>() {
+			@Override
+			public Grammar apply(final AbstractRule it) {
+				return GrammarUtil.getGrammar(it);
+			}
+		});
+		Iterable<Grammar> filtered = IterableExtensions.filter(_map, new Function1<Grammar, Boolean>() {
+			@Override
+			public Boolean apply(final Grammar it) {
+				return Boolean.valueOf((it != grammar));
+			}
+		});
+		Set<Grammar> set = IterableExtensions.toSet(filtered);
+		return IterableExtensions.toList(set);
 	}
 }

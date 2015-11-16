@@ -3,6 +3,7 @@ package org.eclipse.xtext.xbase.compiler
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Map
+import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.Result
 
 /** 

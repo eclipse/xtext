@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.contentAssist
 import com.google.common.collect.Sets
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
@@ -19,8 +18,7 @@ import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -35,22 +33,13 @@ import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
  * 
  * @author Christian Schneider - Initial contribution and API
  */
-class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
+class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 	@Inject
 	extension XtextGeneratorNaming
 	
 	@Inject
-	extension CodeConfig
-	
-	@Inject
 	FileAccessFactory fileAccessFactory
-
-	@Accessors
-	boolean generateStub = true;
-
-	@Accessors
-	boolean inheritImplementation = true
 
 	def protected TypeReference getProposalProviderClass(Grammar g) {
 		return new TypeReference(
@@ -65,7 +54,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	def protected TypeReference getGenProposalProviderSuperClass(Grammar g) {
-		val superGrammar = g.nonTerminalsSuperGrammar
+		val superGrammar = g.usedGrammars.head
 		if(inheritImplementation && superGrammar != null)
 			superGrammar.proposalProviderClass
 		else getDefaultGenProposalProviderSuperClass
@@ -78,10 +67,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		new TypeReference("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider")
 	}
 
-
 	override generate() {
-		val chosenClass = 
-			if (generateStub) grammar.getProposalProviderClass else grammar.getGenProposalProviderClass;
 		
 		if (projectConfig.eclipsePlugin.manifest != null) {
 			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
@@ -90,7 +76,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		new GuiceModuleAccess.BindingFactory()
 				.addTypeToType(
 					new TypeReference("org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider"),
-					chosenClass
+					grammar.getProposalProviderClass
 				).contributeTo(language.eclipsePluginGenModule);
 
 		if (projectConfig.eclipsePlugin.srcGen !== null) {
@@ -98,8 +84,8 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 			generateGenJavaProposalProvider
 		}
 
-		if (generateStub && projectConfig.eclipsePlugin.src != null) {
-			if (preferXtendStubs) {
+		if (isGenerateStub && projectConfig.eclipsePlugin.src != null) {
+			if (generateXtendStub) {
 				generateXtendProposalProviderStub
 
 				if (projectConfig.eclipsePlugin.manifest != null) {
@@ -129,7 +115,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 
-	def generateJavaProposalProviderStub() {
+	protected def generateJavaProposalProviderStub() {
 		fileAccessFactory.createJavaFile(grammar.proposalProviderClass, '''
 			/**
 			 * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -143,14 +129,13 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 
 	// generation of the 'Abstract...ProposalProvider'
 	
-	def generateGenJavaProposalProvider() {
+	protected def generateGenJavaProposalProvider() {
 		// excluded features are those that stem from inherited grammars,
 		//  they are handled by the super grammars' proposal provider
 		val excludedFqnFeatureNames = grammar.getFQFeatureNamesToExclude
 		val processedNames = newHashSet()
 
 		// determine all assignments within the grammar that are not excluded and not handled yet
-		//  (fold evaluates eager!)
 		val assignments = grammar.containedAssignments().fold(<Assignment>newArrayList()) [ candidates, assignment |
 			val fqFeatureName = assignment.FQFeatureName
 			if (!processedNames.contains(fqFeatureName) && !excludedFqnFeatureNames.contains(fqFeatureName)) {
@@ -170,29 +155,42 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 			candidates
 		]
 		
-		val superClass = grammar.getGenProposalProviderSuperClass
-		fileAccessFactory.createJavaFile(grammar.getGenProposalProviderClass, '''
-			/**
-			 * Represents a generated, default implementation of superclass {@link «superClass»}.
-			 * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
-			 * with a more concrete subtype. 
-			 */
-			@SuppressWarnings("all")
-			public class «grammar.getGenProposalProviderClass.simpleName» extends «superClass» {
-			
-				«FOR assignment : assignments»
-					«assignment.handleAssignment»
-			  	«ENDFOR»
-				
-				«FOR rule : remainingRules»
-					public void complete«rule.FQFeatureName»(«EObject» model, «RuleCall» ruleCall, «
-							contentAssistContextClass» context, «ICompletionProposalAcceptorClass» acceptor) {
-						// subclasses may override
-					}
-		    	«ENDFOR»
-			}
-		''').writeTo(projectConfig.eclipsePlugin.srcGen)	
+		// take the non-abstract class signature for the src-gen class in case of !generateStub
+		//  as proposalProviders of sub languages refer to 'grammar.proposalProviderClass',
+		//  see 'getGenProposalProviderSuperClass(...)'
+		val genClass =
+			if (isGenerateStub) grammar.genProposalProviderClass else grammar.proposalProviderClass;
+		
+		fileAccessFactory.createGeneratedJavaFile(genClass) => [
+			val superClass = grammar.genProposalProviderSuperClass
 
+			typeComment = '''
+				/**
+				 * Represents a generated, default implementation of superclass {@link «superClass»}.
+				 * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
+				 * with a more concrete subtype. 
+				 */
+			'''
+
+			content = '''
+				public «IF isGenerateStub»abstract «ENDIF»class «genClass.simpleName» extends «superClass» {
+
+					«IF !assignments.empty»
+						«FOR assignment : assignments»
+							«assignment.handleAssignment»
+					  	«ENDFOR»
+
+				  	«ENDIF»
+					«FOR rule : remainingRules»
+						public void complete«rule.FQFeatureName»(«EObject» model, «RuleCall» ruleCall, «
+								contentAssistContextClass» context, «ICompletionProposalAcceptorClass» acceptor) {
+							// subclasses may override
+						}
+			    	«ENDFOR»
+				}
+			'''
+			writeTo(projectConfig.eclipsePlugin.srcGen)	
+		]
 	}
 
 	private def StringConcatenationClient handleAssignment(Assignment assignment) {
@@ -213,7 +211,7 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 				«IF terminalTypes.size > 1»
 					«terminals.handleAssignmentOptions»
 				«ELSE»
-					«assignment.terminal.assignmentTerminal("assignment.getTerminal()")»
+					«assignment.terminal.assignmentTerminal('''assignment.getTerminal()''')»
 				«ENDIF»
 			}
 		'''
@@ -222,8 +220,8 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 	private def StringConcatenationClient handleAssignmentOptions(Iterable<AbstractElement> terminals) {
 		val processedTerminals = newHashSet();
 		
-		// for each type of terminal occurring in 'terminals' (fold evaluates eager!) ...
-		val candidates = terminals.fold(<AbstractElement>newHashSet) [ candidates, terminal |
+		// for each type of terminal occurring in 'terminals' ...
+		val candidates = terminals.fold(<AbstractElement>newArrayList()) [ candidates, terminal |
 			if (!processedTerminals.contains(terminal.eClass)) {
 				processedTerminals += terminal.eClass
 				candidates += terminal
@@ -235,27 +233,27 @@ class ContentAssistFragment2 extends AbstractGeneratorFragment2 {
 		'''
 			«FOR terminal : candidates»
 				if (assignment.getTerminal() instanceof «terminal.eClass.instanceClass») {
-					«terminal.assignmentTerminal("assignment.getTerminal()")»
+					«terminal.assignmentTerminal('''assignment.getTerminal()''')»
 				}
 			«ENDFOR»		
 		'''
 	}
 
-	private def dispatch StringConcatenationClient assignmentTerminal(AbstractElement element, String accessor) '''
+	private def dispatch StringConcatenationClient assignmentTerminal(AbstractElement element, StringConcatenationClient accessor) '''
 		// subclasses may override
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, String accessor)  '''
+	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, StringConcatenationClient accessor)  '''
 		lookupCrossReference(((«CrossReference»)«accessor»), context, acceptor);
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(RuleCall element, String accessor) '''
+	private def dispatch StringConcatenationClient assignmentTerminal(RuleCall element, StringConcatenationClient accessor) '''
 		completeRuleCall(((«RuleCall»)«accessor»), context, acceptor);
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(Alternatives alternatives, String accessor) '''
+	private def dispatch StringConcatenationClient assignmentTerminal(Alternatives alternatives, StringConcatenationClient accessor) '''
 		«FOR pair : alternatives.elements.indexed»
-			«pair.value.assignmentTerminal("((Alternatives)" + accessor + ").getElements.get("+ pair.key +")")»
+			«pair.value.assignmentTerminal('''((«Alternatives»)«accessor»).getElements().get(«pair.key»)''')»
 		«ENDFOR»
 	'''
 

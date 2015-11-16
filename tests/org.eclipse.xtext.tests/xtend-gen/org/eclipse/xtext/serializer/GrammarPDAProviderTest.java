@@ -9,12 +9,14 @@ package org.eclipse.xtext.serializer;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -22,14 +24,19 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.internal.XtextInjectorProvider;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
+import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaListFormatter;
 import org.eclipse.xtext.util.formallang.PdaToDot;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -304,6 +311,54 @@ public class GrammarPDAProviderTest {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("name=ID -> <<Called");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testUnassignedDatatypeRule() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Rule: val=ID Called;");
+    _builder.newLine();
+    _builder.append("Called: \'kw1\';");
+    _builder.newLine();
+    final String actual = this.toPda(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Rule:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("start -> val=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("Called -> stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val=ID -> Called");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testUnassignedTerminalRule() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Rule: val=ID Called;");
+    _builder.newLine();
+    _builder.append("terminal Called: \'kw1\';");
+    _builder.newLine();
+    final String actual = this.toPda(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Rule:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("start -> val=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("Called -> stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val=ID -> Called");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
     Assert.assertEquals(expected, actual);
@@ -729,7 +784,6 @@ public class GrammarPDAProviderTest {
   }
   
   @Test
-  @Ignore
   public void testParameter1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("M: \"kw1\" s=S<true> | \"kw2\" s=S<false>;");
@@ -738,28 +792,136 @@ public class GrammarPDAProviderTest {
     _builder.newLine();
     final String actual = this.toPda(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Greeting:");
+    _builder_1.append("M:");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("start -> \'(\', val=ID");
+    _builder_1.append("start -> \'kw1\', \'kw2\'");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("\'(\' -> >>Greeting");
+    _builder_1.append("\'kw1\' -> (s=S|)");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("\')\' -> {Foo.child=}");
+    _builder_1.append("\'kw2\' -> (|s=S)");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("<<Greeting -> \')\'");
+    _builder_1.append("(s=S|) -> stop");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append(">>Greeting -> \'(\', val=ID");
+    _builder_1.append("(|s=S) -> stop");
+    _builder_1.newLine();
+    _builder_1.append("S<P>:");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("val=ID -> <<Greeting, stop");
+    _builder_1.append("start -> v1=ID");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("{Foo.child=} -> <<Greeting, stop");
+    _builder_1.append("v1=ID -> stop");
+    _builder_1.newLine();
+    _builder_1.append("S:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("start -> v2=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("v2=ID -> stop");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testDoubleFragment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("R: F1 F2;");
+    _builder.newLine();
+    _builder.append("fragment F1: f1=ID;  ");
+    _builder.newLine();
+    _builder.append("fragment F2: f2=ID;  ");
+    _builder.newLine();
+    final String actual = this.toPda(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("R:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("start -> >>F1");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F1 -> >>F2");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F2 -> stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F1 -> f1=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F2 -> f2=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("f1=ID -> <<F1");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("f2=ID -> <<F2");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testFragmentLoop() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("R: F+;");
+    _builder.newLine();
+    _builder.append("fragment F: f+=ID;  ");
+    _builder.newLine();
+    final String actual = this.toPda(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("R:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("start -> >>F");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F -> >>F, stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F -> f+=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("f+=ID -> <<F");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testParameterizedDoubleDelegation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("R: F<true> | F<false>;");
+    _builder.newLine();
+    _builder.append("fragment F<X>: f+=ID;");
+    _builder.newLine();
+    final String actual = this.toPda(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("R:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("start -> >>F, >>F");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F -> stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("<<F -> stop");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F -> f+=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(">>F -> f+=ID");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("f+=ID -> <<F, <<F");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
     Assert.assertEquals(expected, actual);
@@ -778,36 +940,60 @@ public class GrammarPDAProviderTest {
       _builder.newLineIfNotEmpty();
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);
-      final Set<ParserRule> rules = this.pdaProvider.getAllRules(grammar);
-      final Function1<ParserRule, Pda<ISerState, RuleCall>> _function = new Function1<ParserRule, Pda<ISerState, RuleCall>>() {
+      final Map<ISerializationContext, Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
+      Collection<Pda<ISerState, RuleCall>> _values = pdas.values();
+      final Procedure1<Pda<ISerState, RuleCall>> _function = new Procedure1<Pda<ISerState, RuleCall>>() {
         @Override
-        public Pda<ISerState, RuleCall> apply(final ParserRule it) {
-          return GrammarPDAProviderTest.this.pdaProvider.getGrammarPDA(grammar, it);
+        public void apply(final Pda<ISerState, RuleCall> it) {
+          GrammarPDAProviderTest.this.assertNoLeakedGrammarElements(grammar, it);
         }
       };
-      final Map<ParserRule, Pda<ISerState, RuleCall>> pdas = IterableExtensions.<ParserRule, Pda<ISerState, RuleCall>>toInvertedMap(rules, _function);
-      Set<Map.Entry<ParserRule, Pda<ISerState, RuleCall>>> _entrySet = pdas.entrySet();
-      final Function1<Map.Entry<ParserRule, Pda<ISerState, RuleCall>>, String> _function_1 = new Function1<Map.Entry<ParserRule, Pda<ISerState, RuleCall>>, String>() {
+      IterableExtensions.<Pda<ISerState, RuleCall>>forEach(_values, _function);
+      Set<ISerializationContext> _keySet = pdas.keySet();
+      List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_keySet);
+      final Function1<ISerializationContext, String> _function_1 = new Function1<ISerializationContext, String>() {
         @Override
-        public String apply(final Map.Entry<ParserRule, Pda<ISerState, RuleCall>> it) {
+        public String apply(final ISerializationContext it) {
           StringConcatenation _builder = new StringConcatenation();
-          ParserRule _key = it.getKey();
-          String _name = _key.getName();
-          _builder.append(_name, "");
+          _builder.append(it, "");
           _builder.append(":");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          Pda<ISerState, RuleCall> _value = it.getValue();
-          String _listString = GrammarPDAProviderTest.this.toListString(_value);
+          Pda<ISerState, RuleCall> _get = pdas.get(it);
+          String _listString = GrammarPDAProviderTest.this.toListString(_get);
           _builder.append(_listString, "\t");
           _builder.newLineIfNotEmpty();
           return _builder.toString();
         }
       };
-      Iterable<String> _map = IterableExtensions.<Map.Entry<ParserRule, Pda<ISerState, RuleCall>>, String>map(_entrySet, _function_1);
+      List<String> _map = ListExtensions.<ISerializationContext, String>map(_sort, _function_1);
       return IterableExtensions.join(_map);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertNoLeakedGrammarElements(final Grammar grammar, final Pda<ISerState, RuleCall> pda) {
+    NfaUtil _nfaUtil = new NfaUtil();
+    Set<ISerState> _collect = _nfaUtil.<ISerState>collect(pda);
+    final Function1<ISerState, AbstractElement> _function = new Function1<ISerState, AbstractElement>() {
+      @Override
+      public AbstractElement apply(final ISerState it) {
+        return it.getGrammarElement();
+      }
+    };
+    Iterable<AbstractElement> _map = IterableExtensions.<ISerState, AbstractElement>map(_collect, _function);
+    Iterable<AbstractElement> _filterNull = IterableExtensions.<AbstractElement>filterNull(_map);
+    for (final AbstractElement ele : _filterNull) {
+      {
+        final Grammar actual = GrammarUtil.getGrammar(ele);
+        if ((actual != grammar)) {
+          String _objPath = EmfFormatter.objPath(ele);
+          String _plus = ("Element " + _objPath);
+          String _plus_1 = (_plus + " leaked!");
+          Assert.fail(_plus_1);
+        }
+      }
     }
   }
   

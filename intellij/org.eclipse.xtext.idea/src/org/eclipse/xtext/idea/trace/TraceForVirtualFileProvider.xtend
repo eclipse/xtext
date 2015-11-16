@@ -27,12 +27,12 @@ import org.eclipse.xtext.generator.trace.SourceRelativeURI
 import org.eclipse.xtext.generator.trace.internal.AbstractTraceForURIProvider
 import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
-import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig
-import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfig
-import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
+import org.eclipse.xtext.idea.filesystem.IdeaProjectConfig
+import org.eclipse.xtext.idea.filesystem.IdeaProjectConfigProvider
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.workspace.IProjectConfig
-import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider
+
+import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -118,8 +118,8 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	}
 	
 	override protected asFile(AbsoluteURI absoluteURI, IProjectConfig project) {
-		val file = VirtualFileManager.instance.findFileByUrl(absoluteURI.URI.toString)
-		val module = (project as IdeaModuleConfig).module
+		val file = absoluteURI.URI.virtualFile
+		val module = (project as IdeaProjectConfig).module
 		val ideaProject = module.project
 		return new VirtualFileInProject(file, ideaProject)
 	}
@@ -131,14 +131,8 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		if(builder === null) {
 			return newArrayList
 		}
-		val generatedSources = builder.getGeneratedSources(VirtualFileURIUtil.getURI(sourceFile.file))
-		val mngr = VirtualFileManager.instance
-		val generatedFiles = generatedSources.map [
-			mngr.findFileByUrl(it.toString)
-		]
-		val generatedTraces = generatedFiles.filter[
-			isTraceFile(it)
-		]
+		val generatedSources = builder.getGeneratedSources(sourceFile.file.URI)
+		val generatedTraces = generatedSources.map[virtualFile].filterNull.filter[isTraceFile]
 		val result = generatedTraces.map[
 			new VirtualFilePersistedTrace(it, this) as PersistedTrace
 		].toList
@@ -146,7 +140,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	}
 	
 	override SourceRelativeURI getGeneratedUriForTrace(IProjectConfig projectConfig, AbsoluteURI absoluteSourceResource, AbsoluteURI generatedFileURI, ITraceURIConverter traceURIConverter) {
-		val module = (projectConfig as IdeaModuleConfig).module
+		val module = (projectConfig as IdeaProjectConfig).module
 		val outputConfigurationProvider = getServiceProvider(absoluteSourceResource).get(IdeaOutputConfigurationProvider)
 		val outputConfigurations = outputConfigurationProvider.getOutputConfigurations(module)
 		val sourceFolder = projectConfig.findSourceFolderContaining(absoluteSourceResource.getURI)
@@ -170,7 +164,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 			val result = super.getGeneratedUriForTrace(projectConfig, absoluteSourceResource, generatedFileURI, traceURIConverter)
 			return result
 		}
-		val sourceFolderURI = VirtualFileURIUtil.getURI(outputSourceFolder)
+		val sourceFolderURI = outputSourceFolder.URI
 		val result = generatedFileURI.deresolve(sourceFolderURI)
 		return result
 	}
@@ -201,11 +195,16 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	}
 	
 	def protected getAbsoluteLocation(VirtualFile file) {
-		return new AbsoluteURI(VirtualFileURIUtil.getURI(file))
+		return new AbsoluteURI(file.URI)
 	}
 	
-	override protected IdeaModuleConfig getProjectConfig(VirtualFileInProject sourceFile) {
-		return new IdeaWorkspaceConfig(sourceFile.project).findProjectContaining(VirtualFileURIUtil.getURI(sourceFile.file))
+	override protected IdeaProjectConfig getProjectConfig(VirtualFileInProject sourceFile) {
+		val module = sourceFile.module
+		if (module === null) {
+			return null
+		} else {
+			return new IdeaProjectConfig(module)
+		} 
 	}
 	
 	override isGenerated(VirtualFileInProject file) {
@@ -216,9 +215,9 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		val result = super.getTraceToTarget(sourceFile, absoluteSourceResource, projectConfig)
 		if (result !== null) {
 			val outputConfigurationProvider = getServiceProvider(absoluteSourceResource).get(IdeaOutputConfigurationProvider)
-			val workspaceConfigProvider = getServiceProvider(absoluteSourceResource).get(IdeaWorkspaceConfigProvider)
+			val projectConfigProvider = getServiceProvider(absoluteSourceResource).get(IdeaProjectConfigProvider)
 			result.outputConfigurationProvider = outputConfigurationProvider
-			result.workspaceConfigProvider = workspaceConfigProvider 
+			result.projectConfigProvider = projectConfigProvider 
 		}
 		return result
 	}
@@ -227,7 +226,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		val result = traceProvider.get();
 		result.localStorage = file
 		val jarRoot = JarFileSystem.instance.getRootByEntry(file.file)
-		if (jarRoot != null) {
+		if (jarRoot !== null) {
 			result.jarRoot = jarRoot			
 		} else {
 			result.localProjectConfig = file.projectConfig

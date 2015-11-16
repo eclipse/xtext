@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,10 @@ ruleModel:
 				lv_foos_0_0=ruleFoo
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -77,6 +83,10 @@ ruleModel:
 				lv_bars_1_0=ruleAbstractBar
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -84,13 +94,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleAbstractBar
-entryRuleAbstractBar:
+entryRuleAbstractBar returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAbstractBarElementType()); }
-	ruleAbstractBar
+	iv_ruleAbstractBar=ruleAbstractBar
+	{ $current=$iv_ruleAbstractBar.current; }
 	EOF;
 
 // Rule AbstractBar
-ruleAbstractBar:
+ruleAbstractBar returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -113,8 +125,9 @@ ruleAbstractBar:
 		{
 			markComposite(elementTypeProvider.getAbstractBar_BarParserRuleCall_2ElementType());
 		}
-		ruleBar
+		this_Bar_2=ruleBar
 		{
+			$current = $this_Bar_2.current;
 			doneComposite();
 		}
 		(
@@ -122,6 +135,7 @@ ruleAbstractBar:
 				{
 					precedeComposite(elementTypeProvider.getAbstractBar_FooBarBarAction_3_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			{
@@ -133,6 +147,12 @@ ruleAbstractBar:
 			}
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markComposite(elementTypeProvider.getAbstractBar_FooFooCrossReference_3_2_0ElementType());
 					}
@@ -146,6 +166,12 @@ ruleAbstractBar:
 		(
 			(
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					markComposite(elementTypeProvider.getAbstractBar_FooFooCrossReference_4_0ElementType());
 				}
 				ruleQualifiedNameWithOtherDelim
@@ -158,13 +184,15 @@ ruleAbstractBar:
 ;
 
 //Entry rule entryRuleBar
-entryRuleBar:
+entryRuleBar returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getBarElementType()); }
-	ruleBar
+	iv_ruleBar=ruleBar
+	{ $current=$iv_ruleBar.current; }
 	EOF;
 
 // Rule Bar
-ruleBar:
+ruleBar returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getBar_BarKeyword_0ElementType());
@@ -180,12 +208,24 @@ ruleBar:
 				}
 				lv_name_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_1_0);
 				}
 			)
 		)
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markComposite(elementTypeProvider.getBar_FooFooCrossReference_2_0ElementType());
 				}
@@ -206,6 +246,12 @@ ruleBar:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markComposite(elementTypeProvider.getBar_FooFooCrossReference_3_1_0ElementType());
 					}
 					ruleQualifiedNameWithOtherDelim
@@ -219,13 +265,15 @@ ruleBar:
 ;
 
 //Entry rule entryRuleFoo
-entryRuleFoo:
+entryRuleFoo returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFooElementType()); }
-	ruleFoo
+	iv_ruleFoo=ruleFoo
+	{ $current=$iv_ruleFoo.current; }
 	EOF;
 
 // Rule Foo
-ruleFoo:
+ruleFoo returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getFoo_FooKeyword_0ElementType());
@@ -242,6 +290,10 @@ ruleFoo:
 				lv_name_1_0=ruleQualifiedNameWithOtherDelim
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -249,13 +301,15 @@ ruleFoo:
 ;
 
 //Entry rule entryRuleQualifiedNameWithOtherDelim
-entryRuleQualifiedNameWithOtherDelim:
+entryRuleQualifiedNameWithOtherDelim returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getQualifiedNameWithOtherDelimElementType()); }
-	ruleQualifiedNameWithOtherDelim
+	iv_ruleQualifiedNameWithOtherDelim=ruleQualifiedNameWithOtherDelim
+	{ $current=$iv_ruleQualifiedNameWithOtherDelim.current; }
 	EOF;
 
 // Rule QualifiedNameWithOtherDelim
-ruleQualifiedNameWithOtherDelim:
+ruleQualifiedNameWithOtherDelim returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getQualifiedNameWithOtherDelim_QualifiedNameParserRuleCall_0ElementType());
@@ -284,13 +338,15 @@ ruleQualifiedNameWithOtherDelim:
 ;
 
 //Entry rule entryRuleQualifiedName
-entryRuleQualifiedName:
+entryRuleQualifiedName returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getQualifiedNameElementType()); }
-	ruleQualifiedName
+	iv_ruleQualifiedName=ruleQualifiedName
+	{ $current=$iv_ruleQualifiedName.current; }
 	EOF;
 
 // Rule QualifiedName
-ruleQualifiedName:
+ruleQualifiedName returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getQualifiedName_IDTerminalRuleCall_0ElementType());

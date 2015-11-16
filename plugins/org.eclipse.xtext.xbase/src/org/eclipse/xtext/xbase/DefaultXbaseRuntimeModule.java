@@ -18,6 +18,8 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
+import org.eclipse.xtext.parser.antlr.IPartialParsingHelper;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -30,8 +32,8 @@ import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
-import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
-import org.eclipse.xtext.workspace.RuntimeWorkspaceConfigProvider;
+import org.eclipse.xtext.workspace.IProjectConfigProvider;
+import org.eclipse.xtext.workspace.ProjectConfigProvider;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
@@ -45,6 +47,8 @@ import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper;
 import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
+import org.eclipse.xtext.xbase.parser.TokenSequencePreservingPartialParsingHelper;
+import org.eclipse.xtext.xbase.parser.LookAheadPreservingNodeModelBuilder;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
@@ -197,8 +201,8 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	/**
 	 * @since 2.9
 	 */
-	public Class<? extends IWorkspaceConfigProvider> bindWorkspaceConfigProvider() {
-		return RuntimeWorkspaceConfigProvider.class;
+	public Class<? extends IProjectConfigProvider> bindProjectConfigProvider() {
+		return ProjectConfigProvider.class;
 	}
 	
 	/**
@@ -207,4 +211,17 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
 		return UnresolvedFeatureCallTypeAwareMessageProvider.class;
 	}
+	
+	@Override
+	public Class<? extends IPartialParsingHelper> bindIPartialParserHelper() {
+		return TokenSequencePreservingPartialParsingHelper.class;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public Class<? extends NodeModelBuilder> bindNodeModelBuilder() {
+		return LookAheadPreservingNodeModelBuilder.class;
+	}
+	
 }

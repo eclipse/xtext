@@ -13,16 +13,21 @@ import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISerState.SerStateType;
+import org.eclipse.xtext.serializer.analysis.SerializationContext.ActionContext;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDAElementFactory;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDAState;
 import org.eclipse.xtext.util.Pair;
@@ -70,10 +75,10 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		}
 	}
 
-	private final Map<Grammar, Map<EObject, Pda<ISerState, RuleCall>>> cache = Maps.newHashMap();
+	private static Logger LOG = Logger.getLogger(ContextPDAProvider.class);
 
 	@Inject
-	private SerializerPDAElementFactory factory;
+	protected SerializerPDAElementFactory factory;
 
 	@Inject
 	private IGrammarPDAProvider grammarPdaProvider;
@@ -85,8 +90,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 	protected PdaUtil pdaUtil;
 
 	protected void collectExtracted(ISerState orig, Collection<? extends ISerState> precedents, SerializerPDAState copy,
-			Map<Pair<AbstractElement, SerStateType>, SerializerPDAState> oldToNew, final CallStack inTop,
-			SerializerPDAState start) {
+			Map<Pair<AbstractElement, SerStateType>, SerializerPDAState> oldToNew, final CallStack inTop, SerializerPDAState start) {
 		for (ISerState pre : precedents) {
 			CallStack top = inTop;
 			AbstractElement element = pre.getGrammarElement();
@@ -136,8 +140,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		return result;
 	}
 
-	protected void collectPushForAction(ISerState state, ParserRule rule, Set<ISerState> result,
-			Set<ISerState> visited) {
+	protected void collectPushForAction(ISerState state, ParserRule rule, Set<ISerState> result, Set<ISerState> visited) {
 		if (!visited.add(state))
 			return;
 		switch (state.getType()) {
@@ -167,18 +170,11 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		precedent.getFollowers().add(follower);
 	}
 
-	protected Pda<ISerState, RuleCall> extract(ISerState last) {
+	protected SerializerPDA extract(ISerState last) {
 		SerializerPDA result = factory.create(null, null);
 		HashMap<Pair<AbstractElement, SerStateType>, SerializerPDAState> oldToNew = Maps.newHashMap();
 		CallStack callStack = new CallStack(null, null);
 		collectExtracted(last, last.getPrecedents(), result.getStop(), oldToNew, callStack, result.getStart());
-		return result;
-	}
-
-	@Override
-	public Set<EObject> getAllContexts(Grammar grammar) {
-		Map<EObject, Pda<ISerState, RuleCall>> map = getOrCreate(grammar);
-		Set<EObject> result = map.keySet();
 		return result;
 	}
 
@@ -192,23 +188,14 @@ public class ContextPDAProvider implements IContextPDAProvider {
 	}
 
 	@Override
-	public Pda<ISerState, RuleCall> getContextPDA(Grammar grammar, EObject context) {
-		Map<EObject, Pda<ISerState, RuleCall>> map = getOrCreate(grammar);
-		Pda<ISerState, RuleCall> pda = map.get(context);
-		if (pda == null)
-			throw new IllegalStateException("Invlid context for serialization: " + context);
-		return pda;
-	}
-
-	protected Map<EObject, Pda<ISerState, RuleCall>> getOrCreate(Grammar grammar) {
-		Map<EObject, Pda<ISerState, RuleCall>> result = cache.get(grammar);
-		if (result != null)
-			return result;
-		result = Maps.newLinkedHashMap();
-		Set<ParserRule> allParserRules = grammarPdaProvider.getAllRules(grammar);
-		Multimap<Action, Pda<ISerState, RuleCall>> actionPdas = HashMultimap.create();
-		for (ParserRule rule : allParserRules) {
-			Pda<ISerState, RuleCall> pda = grammarPdaProvider.getGrammarPDA(grammar, rule);
+	public Map<ISerializationContext, Pda<ISerState, RuleCall>> getContextPDAs(Grammar grammar) {
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = Maps.newLinkedHashMap();
+		Map<ISerializationContext, Pda<ISerState, RuleCall>> grammarPDAs = grammarPdaProvider.getGrammarPDAs(grammar);
+		Multimap<Action, SerializerPDA> actionPdas = HashMultimap.create();
+		Multimap<Action, ISerializationContext> actionContexts = HashMultimap.create();
+		for (Entry<ISerializationContext, Pda<ISerState, RuleCall>> e : grammarPDAs.entrySet()) {
+			ISerializationContext context = e.getKey();
+			Pda<ISerState, RuleCall> pda = e.getValue();
 			List<ISerState> actions = Lists.newArrayList();
 			for (ISerState state : nfaUtil.collect(pda)) {
 				if (GrammarUtil.isAssignedAction(state.getGrammarElement())) {
@@ -216,25 +203,41 @@ public class ContextPDAProvider implements IContextPDAProvider {
 				}
 			}
 			if (actions.isEmpty()) {
-				result.put(rule, pda);
+				result.put(context, pda);
 			} else {
-				Pda<ISerState, RuleCall> rulePda = extract(pda.getStop());
-				result.put(rule, rulePda);
-				for (ISerState action : actions) {
-					Pda<ISerState, RuleCall> actionPda = extract(action);
-					actionPdas.put((Action) action.getGrammarElement(), actionPda);
+				try {
+					SerializerPDA rulePda = extract(pda.getStop());
+					result.put(context, rulePda);
+					for (ISerState state : actions) {
+						Action action = (Action) state.getGrammarElement();
+						SerializerPDA actionPda = extract(state);
+						actionPdas.put(action, actionPda);
+						actionContexts.put(action, context);
+					}
+				} catch (Exception x) {
+					LOG.error("Error extracting PDA for action in context '" + context + "': " + x.getMessage(), x);
 				}
 			}
 		}
-		for (Map.Entry<Action, Collection<Pda<ISerState, RuleCall>>> action : actionPdas.asMap().entrySet()) {
-			Pda<ISerState, RuleCall> merged = merge(action.getValue());
-			result.put(action.getKey(), merged);
+		for (Map.Entry<Action, Collection<SerializerPDA>> action : actionPdas.asMap().entrySet()) {
+			SerializerPDA merged = merge(new ActionContext(null, action.getKey()), action.getValue());
+			Set<Set<Parameter>> parameterPermutations = Sets.newLinkedHashSet();
+			for (ISerializationContext container : actionContexts.get(action.getKey())) {
+				parameterPermutations.add(container.getEnabledBooleanParameters());
+			}
+			//			for (IContext container : actionContexts.get(action.getKey())) {
+			for (Set<Parameter> parameters : parameterPermutations) {
+				ISerializationContext context = new ActionContext( /*container */ null, action.getKey());
+				if (!parameters.isEmpty())
+					context = new SerializationContext.ParameterValueContext(context, parameters);
+				result.put(context, merged);
+			}
+			//			}
 		}
-		cache.put(grammar, result);
 		return result;
 	}
 
-	protected Pda<ISerState, RuleCall> merge(Collection<Pda<ISerState, RuleCall>> pdas) {
+	protected SerializerPDA merge(ISerializationContext context, Collection<SerializerPDA> pdas) {
 		if (pdas.isEmpty())
 			throw new IllegalStateException();
 		if (pdas.size() == 1)

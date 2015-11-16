@@ -61,6 +61,9 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.append("line = 1");
     _builder.newLine();
     _builder.append("      ");
+    _builder.append("column = 1");
+    _builder.newLine();
+    _builder.append("      ");
     _builder.append("offset = 0");
     _builder.newLine();
     _builder.append("      ");
@@ -97,6 +100,9 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.append("line = 1");
     _builder.newLine();
     _builder.append("      ");
+    _builder.append("column = 15");
+    _builder.newLine();
+    _builder.append("      ");
     _builder.append("offset = 14");
     _builder.newLine();
     _builder.append("      ");
@@ -131,6 +137,9 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("line = 1");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("column = 30");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("offset = 29");
@@ -179,6 +188,9 @@ public class ValidationTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("line = 1");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("column = 1");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("offset = 0");

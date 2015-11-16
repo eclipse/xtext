@@ -34,12 +34,12 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cTickApostropheParserRuleCall_2_1_0 = (RuleCall)cTickAssignment_2_1.eContents().get(0);
 		
 		//Model hidden(WS):
-		//	'FIX' fix+=Fix+
+		//	('FIX' fix+=Fix+
 		//	| 'ERROR' error+=Error+
-		//	| 'TICK' tick+=Apostrophe+*;
+		//	| 'TICK' tick+=Apostrophe+)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//'FIX' fix+=Fix+ | 'ERROR' error+=Error+ | 'TICK' tick+=Apostrophe+*
+		//('FIX' fix+=Fix+ | 'ERROR' error+=Error+ | 'TICK' tick+=Apostrophe+)*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//'FIX' fix+=Fix+
@@ -227,9 +227,9 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model hidden(WS):
-	//	'FIX' fix+=Fix+
+	//	('FIX' fix+=Fix+
 	//	| 'ERROR' error+=Error+
-	//	| 'TICK' tick+=Apostrophe+*;
+	//	| 'TICK' tick+=Apostrophe+)*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}

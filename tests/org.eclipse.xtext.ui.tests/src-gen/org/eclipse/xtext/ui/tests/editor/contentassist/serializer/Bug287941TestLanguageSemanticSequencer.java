@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.AliasWhereEntry;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.AndWhereEntry;
@@ -45,8 +43,13 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug287941TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug287941TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug287941TestLanguagePackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug287941TestLanguagePackage.ALIAS_WHERE_ENTRY:
 				sequence_AliasWhereEntry(context, (AliasWhereEntry) semanticObject); 
 				return; 
@@ -105,22 +108,31 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_VariableWhereEntry(context, (VariableWhereEntry) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns AliasWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns AliasWhereEntry
+	 *     AndWhereEntry returns AliasWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns AliasWhereEntry
+	 *     ConcreteWhereEntry returns AliasWhereEntry
+	 *     ParWhereEntry returns AliasWhereEntry
+	 *     AliasWhereEntry returns AliasWhereEntry
+	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] rightAlias=[FromEntry|ID])
 	 */
-	protected void sequence_AliasWhereEntry(EObject context, AliasWhereEntry semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ALIAS_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
+	protected void sequence_AliasWhereEntry(ISerializationContext context, AliasWhereEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ALIAS_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ALIAS_WHERE_ENTRY__ALIAS));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ALIAS_WHERE_ENTRY__RIGHT_ALIAS) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ALIAS_WHERE_ENTRY__RIGHT_ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ALIAS_WHERE_ENTRY__RIGHT_ALIAS));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAliasWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
 		feeder.accept(grammarAccess.getAliasWhereEntryAccess().getRightAliasFromEntryIDTerminalRuleCall_2_0_1(), semanticObject.getRightAlias());
 		feeder.finish();
@@ -128,40 +140,68 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns AndWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns AndWhereEntry
+	 *     AndWhereEntry returns AndWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns AndWhereEntry
+	 *     ConcreteWhereEntry returns AndWhereEntry
+	 *     ParWhereEntry returns AndWhereEntry
+	 *
 	 * Constraint:
 	 *     (entries+=AndWhereEntry_AndWhereEntry_1_0 entries+=ConcreteWhereEntry+)
 	 */
-	protected void sequence_AndWhereEntry(EObject context, AndWhereEntry semanticObject) {
+	protected void sequence_AndWhereEntry(ISerializationContext context, AndWhereEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns BooleanAttributeWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns BooleanAttributeWhereEntry
+	 *     AndWhereEntry returns BooleanAttributeWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns BooleanAttributeWhereEntry
+	 *     ConcreteWhereEntry returns BooleanAttributeWhereEntry
+	 *     ParWhereEntry returns BooleanAttributeWhereEntry
+	 *     AttributeWhereEntry returns BooleanAttributeWhereEntry
+	 *     BooleanAttributeWhereEntry returns BooleanAttributeWhereEntry
+	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=BooleanOperator isTrue?='true'?)
 	 */
-	protected void sequence_BooleanAttributeWhereEntry(EObject context, BooleanAttributeWhereEntry semanticObject) {
+	protected void sequence_BooleanAttributeWhereEntry(ISerializationContext context, BooleanAttributeWhereEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns DoubleWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns DoubleWhereEntry
+	 *     AndWhereEntry returns DoubleWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns DoubleWhereEntry
+	 *     ConcreteWhereEntry returns DoubleWhereEntry
+	 *     ParWhereEntry returns DoubleWhereEntry
+	 *     AttributeWhereEntry returns DoubleWhereEntry
+	 *     NumericAttributeWhereEntry returns DoubleWhereEntry
+	 *     DoubleWhereEntry returns DoubleWhereEntry
+	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=NumericOperator value=SIGNED_DOUBLE)
 	 */
-	protected void sequence_DoubleWhereEntry(EObject context, DoubleWhereEntry semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
+	protected void sequence_DoubleWhereEntry(ISerializationContext context, DoubleWhereEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NUMERIC_ATTRIBUTE_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NUMERIC_ATTRIBUTE_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.NUMERIC_ATTRIBUTE_WHERE_ENTRY__OPERATOR));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.DOUBLE_WHERE_ENTRY__VALUE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.DOUBLE_WHERE_ENTRY__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.DOUBLE_WHERE_ENTRY__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getDoubleWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
 		feeder.accept(grammarAccess.getDoubleWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.getAttribute());
 		feeder.accept(grammarAccess.getDoubleWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
@@ -171,56 +211,75 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Scope returns ElementScope
+	 *     ElementScope returns ElementScope
+	 *
 	 * Constraint:
 	 *     (uris+=STRING uris+=STRING*)
 	 */
-	protected void sequence_ElementScope(EObject context, ElementScope semanticObject) {
+	protected void sequence_ElementScope(ISerializationContext context, ElementScope semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     FromEntry returns FromEntry
+	 *
 	 * Constraint:
 	 *     (type=[EClass|ID] withoutsubtypes?='withoutsubtypes'? alias=ID scopeClause=ScopeClause?)
 	 */
-	protected void sequence_FromEntry(EObject context, FromEntry semanticObject) {
+	protected void sequence_FromEntry(ISerializationContext context, FromEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *
 	 * Constraint:
 	 *     importURI=STRING
 	 */
-	protected void sequence_Import(EObject context, Import semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.IMPORT__IMPORT_URI) == ValueTransient.YES)
+	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.IMPORT__IMPORT_URI) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.IMPORT__IMPORT_URI));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0(), semanticObject.getImportURI());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns LongWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns LongWhereEntry
+	 *     AndWhereEntry returns LongWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns LongWhereEntry
+	 *     ConcreteWhereEntry returns LongWhereEntry
+	 *     ParWhereEntry returns LongWhereEntry
+	 *     AttributeWhereEntry returns LongWhereEntry
+	 *     NumericAttributeWhereEntry returns LongWhereEntry
+	 *     LongWhereEntry returns LongWhereEntry
+	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=NumericOperator value=SINGED_LONG)
 	 */
-	protected void sequence_LongWhereEntry(EObject context, LongWhereEntry semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
+	protected void sequence_LongWhereEntry(ISerializationContext context, LongWhereEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NUMERIC_ATTRIBUTE_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NUMERIC_ATTRIBUTE_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.NUMERIC_ATTRIBUTE_WHERE_ENTRY__OPERATOR));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.LONG_WHERE_ENTRY__VALUE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.LONG_WHERE_ENTRY__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.LONG_WHERE_ENTRY__VALUE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLongWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
 		feeder.accept(grammarAccess.getLongWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.getAttribute());
 		feeder.accept(grammarAccess.getLongWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
@@ -230,38 +289,52 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     MQLquery returns MQLquery
+	 *
 	 * Constraint:
 	 *     (selectEntries+=SelectEntry selectEntries+=SelectEntry* fromEntries+=FromEntry fromEntries+=FromEntry* whereEntries+=WhereEntry*)
 	 */
-	protected void sequence_MQLquery(EObject context, MQLquery semanticObject) {
+	protected void sequence_MQLquery(ISerializationContext context, MQLquery semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (imports+=Import* query=MQLquery)
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns NullWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns NullWhereEntry
+	 *     AndWhereEntry returns NullWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns NullWhereEntry
+	 *     ConcreteWhereEntry returns NullWhereEntry
+	 *     ParWhereEntry returns NullWhereEntry
+	 *     NullWhereEntry returns NullWhereEntry
+	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] feature=[EStructuralFeature|ID] operator=BooleanOperator)
 	 */
-	protected void sequence_NullWhereEntry(EObject context, NullWhereEntry semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
+	protected void sequence_NullWhereEntry(ISerializationContext context, NullWhereEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__ALIAS));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__FEATURE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__FEATURE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__FEATURE));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.NULL_WHERE_ENTRY__OPERATOR));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getNullWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
 		feeder.accept(grammarAccess.getNullWhereEntryAccess().getFeatureEStructuralFeatureIDTerminalRuleCall_2_0_1(), semanticObject.getFeature());
 		feeder.accept(grammarAccess.getNullWhereEntryAccess().getOperatorBooleanOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
@@ -270,20 +343,28 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns ReferenceAliasWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns ReferenceAliasWhereEntry
+	 *     AndWhereEntry returns ReferenceAliasWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns ReferenceAliasWhereEntry
+	 *     ConcreteWhereEntry returns ReferenceAliasWhereEntry
+	 *     ParWhereEntry returns ReferenceAliasWhereEntry
+	 *     ReferenceAliasWhereEntry returns ReferenceAliasWhereEntry
+	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] reference=[EReference|ID] rightAlias=[FromEntry|ID])
 	 */
-	protected void sequence_ReferenceAliasWhereEntry(EObject context, ReferenceAliasWhereEntry semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
+	protected void sequence_ReferenceAliasWhereEntry(ISerializationContext context, ReferenceAliasWhereEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__ALIAS));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__REFERENCE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__REFERENCE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__REFERENCE));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__RIGHT_ALIAS) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__RIGHT_ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.REFERENCE_ALIAS_WHERE_ENTRY__RIGHT_ALIAS));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getReferenceAliasWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
 		feeder.accept(grammarAccess.getReferenceAliasWhereEntryAccess().getReferenceEReferenceIDTerminalRuleCall_2_0_1(), semanticObject.getReference());
 		feeder.accept(grammarAccess.getReferenceAliasWhereEntryAccess().getRightAliasFromEntryIDTerminalRuleCall_4_0_1(), semanticObject.getRightAlias());
@@ -292,49 +373,68 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     Scope returns ResourceScope
+	 *     ResourceScope returns ResourceScope
+	 *
 	 * Constraint:
 	 *     (uris+=STRING uris+=STRING*)
 	 */
-	protected void sequence_ResourceScope(EObject context, ResourceScope semanticObject) {
+	protected void sequence_ResourceScope(ISerializationContext context, ResourceScope semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ScopeClause returns ScopeClause
+	 *
 	 * Constraint:
 	 *     (notIn?='not'? scope=Scope)
 	 */
-	protected void sequence_ScopeClause(EObject context, ScopeClause semanticObject) {
+	protected void sequence_ScopeClause(ISerializationContext context, ScopeClause semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     SelectEntry returns SelectEntry
+	 *
 	 * Constraint:
 	 *     (select=[FromEntry|ID] attribute=[EAttribute|ID]?)
 	 */
-	protected void sequence_SelectEntry(EObject context, SelectEntry semanticObject) {
+	protected void sequence_SelectEntry(ISerializationContext context, SelectEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns StringAttributeWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns StringAttributeWhereEntry
+	 *     AndWhereEntry returns StringAttributeWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns StringAttributeWhereEntry
+	 *     ConcreteWhereEntry returns StringAttributeWhereEntry
+	 *     ParWhereEntry returns StringAttributeWhereEntry
+	 *     AttributeWhereEntry returns StringAttributeWhereEntry
+	 *     StringAttributeWhereEntry returns StringAttributeWhereEntry
+	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=StringOperator pattern=STRING)
 	 */
-	protected void sequence_StringAttributeWhereEntry(EObject context, StringAttributeWhereEntry semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
+	protected void sequence_StringAttributeWhereEntry(ISerializationContext context, StringAttributeWhereEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.STRING_ATTRIBUTE_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.STRING_ATTRIBUTE_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.STRING_ATTRIBUTE_WHERE_ENTRY__OPERATOR));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.STRING_ATTRIBUTE_WHERE_ENTRY__PATTERN) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.STRING_ATTRIBUTE_WHERE_ENTRY__PATTERN) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.STRING_ATTRIBUTE_WHERE_ENTRY__PATTERN));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getStringAttributeWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
 		feeder.accept(grammarAccess.getStringAttributeWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.getAttribute());
 		feeder.accept(grammarAccess.getStringAttributeWhereEntryAccess().getOperatorStringOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
@@ -344,33 +444,51 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns SubselectWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns SubselectWhereEntry
+	 *     AndWhereEntry returns SubselectWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns SubselectWhereEntry
+	 *     ConcreteWhereEntry returns SubselectWhereEntry
+	 *     ParWhereEntry returns SubselectWhereEntry
+	 *     SubselectWhereEntry returns SubselectWhereEntry
+	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] reference=[EReference|ID] notIn?='not'? subQuery=MQLquery)
 	 */
-	protected void sequence_SubselectWhereEntry(EObject context, SubselectWhereEntry semanticObject) {
+	protected void sequence_SubselectWhereEntry(ISerializationContext context, SubselectWhereEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns VariableWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns VariableWhereEntry
+	 *     AndWhereEntry returns VariableWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns VariableWhereEntry
+	 *     ConcreteWhereEntry returns VariableWhereEntry
+	 *     ParWhereEntry returns VariableWhereEntry
+	 *     AttributeWhereEntry returns VariableWhereEntry
+	 *     VariableWhereEntry returns VariableWhereEntry
+	 *
 	 * Constraint:
 	 *     (alias=[FromEntry|ID] attribute=[EAttribute|ID] operator=NumericOperator rightAlias=[FromEntry|ID] rightAttribute=[EAttribute|ID])
 	 */
-	protected void sequence_VariableWhereEntry(EObject context, VariableWhereEntry semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
+	protected void sequence_VariableWhereEntry(ISerializationContext context, VariableWhereEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ALIAS));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.ATTRIBUTE_WHERE_ENTRY__ATTRIBUTE));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__OPERATOR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__OPERATOR));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__RIGHT_ALIAS) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__RIGHT_ALIAS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__RIGHT_ALIAS));
-			if(transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__RIGHT_ATTRIBUTE) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__RIGHT_ATTRIBUTE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug287941TestLanguagePackage.Literals.VARIABLE_WHERE_ENTRY__RIGHT_ATTRIBUTE));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getAliasFromEntryIDTerminalRuleCall_0_0_1(), semanticObject.getAlias());
 		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getAttributeEAttributeIDTerminalRuleCall_2_0_1(), semanticObject.getAttribute());
 		feeder.accept(grammarAccess.getVariableWhereEntryAccess().getOperatorNumericOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
@@ -381,10 +499,20 @@ public class Bug287941TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     WhereEntry returns OrWhereEntry
+	 *     WhereEntry.OrWhereEntry_1_0 returns OrWhereEntry
+	 *     AndWhereEntry returns OrWhereEntry
+	 *     AndWhereEntry.AndWhereEntry_1_0 returns OrWhereEntry
+	 *     ConcreteWhereEntry returns OrWhereEntry
+	 *     ParWhereEntry returns OrWhereEntry
+	 *
 	 * Constraint:
 	 *     (entries+=WhereEntry_OrWhereEntry_1_0 entries+=AndWhereEntry+)
 	 */
-	protected void sequence_WhereEntry(EObject context, OrWhereEntry semanticObject) {
+	protected void sequence_WhereEntry(ISerializationContext context, OrWhereEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

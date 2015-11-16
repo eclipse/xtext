@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleElement
-entryRuleElement:
+entryRuleElement returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getElementElementType()); }
-	ruleElement
+	iv_ruleElement=ruleElement
+	{ $current=$iv_ruleElement.current; }
 	EOF;
 
 // Rule Element
-ruleElement:
+ruleElement returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getElement_KeywordKeyword_0ElementType());
@@ -72,6 +74,10 @@ ruleElement:
 				lv_qualifiedName_1_0=ruleQualifiedName
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -79,13 +85,15 @@ ruleElement:
 ;
 
 //Entry rule entryRuleQualifiedName
-entryRuleQualifiedName:
+entryRuleQualifiedName returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getQualifiedNameElementType()); }
-	ruleQualifiedName
+	iv_ruleQualifiedName=ruleQualifiedName
+	{ $current=$iv_ruleQualifiedName.current; }
 	EOF;
 
 // Rule QualifiedName
-ruleQualifiedName:
+ruleQualifiedName returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getQualifiedName_IDTerminalRuleCall_0ElementType());

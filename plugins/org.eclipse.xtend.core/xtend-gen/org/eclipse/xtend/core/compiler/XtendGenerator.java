@@ -55,6 +55,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGenerator2;
+import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -105,17 +106,17 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
   }
   
   @Override
-  public void beforeGenerate(final Resource input, final IFileSystemAccess2 fsa) {
+  public void beforeGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.issueProviderFactory.attachData(input);
   }
   
   @Override
-  public void afterGenerate(final Resource input, final IFileSystemAccess2 fsa) {
+  public void afterGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.issueProviderFactory.detachData(input);
   }
   
   @Override
-  public void doGenerate(final Resource input, final IFileSystemAccess2 fsa) {
+  public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     this.doGenerate(input, ((IFileSystemAccess) fsa));
   }
   

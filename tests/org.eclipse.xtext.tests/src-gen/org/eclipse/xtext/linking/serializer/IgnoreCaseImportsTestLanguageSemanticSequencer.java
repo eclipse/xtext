@@ -4,23 +4,20 @@
 package org.eclipse.xtext.linking.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.linking.ignoreCaseImportsTest.IgnoreCaseImportsTestPackage;
 import org.eclipse.xtext.linking.ignoreCaseImportsTest.Import;
 import org.eclipse.xtext.linking.ignoreCaseImportsTest.Model;
 import org.eclipse.xtext.linking.ignoreCaseLinkingTest.Element;
 import org.eclipse.xtext.linking.ignoreCaseLinkingTest.IgnoreCaseLinkingTestPackage;
-import org.eclipse.xtext.linking.serializer.AbstractIgnoreCaseLinkingTestLanguageSemanticSequencer;
 import org.eclipse.xtext.linking.services.IgnoreCaseImportsTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -30,8 +27,13 @@ public class IgnoreCaseImportsTestLanguageSemanticSequencer extends AbstractIgno
 	private IgnoreCaseImportsTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == IgnoreCaseImportsTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == IgnoreCaseImportsTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case IgnoreCaseImportsTestPackage.IMPORT:
 				sequence_Import(context, (Import) semanticObject); 
 				return; 
@@ -39,35 +41,44 @@ public class IgnoreCaseImportsTestLanguageSemanticSequencer extends AbstractIgno
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			}
-		else if(semanticObject.eClass().getEPackage() == IgnoreCaseLinkingTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+		else if (epackage == IgnoreCaseLinkingTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case IgnoreCaseLinkingTestPackage.ELEMENT:
 				sequence_Element(context, (Element) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *
 	 * Constraint:
 	 *     importURI=STRING
 	 */
-	protected void sequence_Import(EObject context, Import semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, IgnoreCaseImportsTestPackage.Literals.IMPORT__IMPORT_URI) == ValueTransient.YES)
+	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, IgnoreCaseImportsTestPackage.Literals.IMPORT__IMPORT_URI) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IgnoreCaseImportsTestPackage.Literals.IMPORT__IMPORT_URI));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_0(), semanticObject.getImportURI());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (imports+=Import* elements+=Element+)
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

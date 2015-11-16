@@ -146,10 +146,10 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNoJdtTestLanguage.g:177:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalNoJdtTestLanguage.g:177:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalNoJdtTestLanguage.g:171:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalNoJdtTestLanguage.g:171:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalNoJdtTestLanguage.g:177:11: ( '^' )?
+            // InternalNoJdtTestLanguage.g:171:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -158,7 +158,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalNoJdtTestLanguage.g:177:11: '^'
+                    // InternalNoJdtTestLanguage.g:171:11: '^'
                     {
                     match('^'); 
 
@@ -176,7 +176,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalNoJdtTestLanguage.g:177:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalNoJdtTestLanguage.g:171:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -225,10 +225,10 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNoJdtTestLanguage.g:179:10: ( ( '0' .. '9' )+ )
-            // InternalNoJdtTestLanguage.g:179:12: ( '0' .. '9' )+
+            // InternalNoJdtTestLanguage.g:173:10: ( ( '0' .. '9' )+ )
+            // InternalNoJdtTestLanguage.g:173:12: ( '0' .. '9' )+
             {
-            // InternalNoJdtTestLanguage.g:179:12: ( '0' .. '9' )+
+            // InternalNoJdtTestLanguage.g:173:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -242,7 +242,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalNoJdtTestLanguage.g:179:13: '0' .. '9'
+            	    // InternalNoJdtTestLanguage.g:173:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -274,10 +274,10 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNoJdtTestLanguage.g:181:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalNoJdtTestLanguage.g:181:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalNoJdtTestLanguage.g:175:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalNoJdtTestLanguage.g:175:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalNoJdtTestLanguage.g:181:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalNoJdtTestLanguage.g:175:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -295,10 +295,10 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalNoJdtTestLanguage.g:181:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalNoJdtTestLanguage.g:175:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalNoJdtTestLanguage.g:181:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalNoJdtTestLanguage.g:175:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -314,7 +314,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalNoJdtTestLanguage.g:181:21: '\\\\' .
+                    	    // InternalNoJdtTestLanguage.g:175:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -322,7 +322,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalNoJdtTestLanguage.g:181:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalNoJdtTestLanguage.g:175:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -347,10 +347,10 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalNoJdtTestLanguage.g:181:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalNoJdtTestLanguage.g:175:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalNoJdtTestLanguage.g:181:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalNoJdtTestLanguage.g:175:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -366,7 +366,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalNoJdtTestLanguage.g:181:54: '\\\\' .
+                    	    // InternalNoJdtTestLanguage.g:175:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -374,7 +374,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalNoJdtTestLanguage.g:181:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalNoJdtTestLanguage.g:175:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -417,12 +417,12 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNoJdtTestLanguage.g:183:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalNoJdtTestLanguage.g:183:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalNoJdtTestLanguage.g:177:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalNoJdtTestLanguage.g:177:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalNoJdtTestLanguage.g:183:24: ( options {greedy=false; } : . )*
+            // InternalNoJdtTestLanguage.g:177:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -447,7 +447,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalNoJdtTestLanguage.g:183:52: .
+            	    // InternalNoJdtTestLanguage.g:177:52: .
             	    {
             	    matchAny(); 
 
@@ -477,12 +477,12 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNoJdtTestLanguage.g:185:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalNoJdtTestLanguage.g:185:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalNoJdtTestLanguage.g:179:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalNoJdtTestLanguage.g:179:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalNoJdtTestLanguage.g:185:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalNoJdtTestLanguage.g:179:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -495,7 +495,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalNoJdtTestLanguage.g:185:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalNoJdtTestLanguage.g:179:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -515,7 +515,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalNoJdtTestLanguage.g:185:40: ( ( '\\r' )? '\\n' )?
+            // InternalNoJdtTestLanguage.g:179:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -524,9 +524,9 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalNoJdtTestLanguage.g:185:41: ( '\\r' )? '\\n'
+                    // InternalNoJdtTestLanguage.g:179:41: ( '\\r' )? '\\n'
                     {
-                    // InternalNoJdtTestLanguage.g:185:41: ( '\\r' )?
+                    // InternalNoJdtTestLanguage.g:179:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -535,7 +535,7 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalNoJdtTestLanguage.g:185:41: '\\r'
+                            // InternalNoJdtTestLanguage.g:179:41: '\\r'
                             {
                             match('\r'); 
 
@@ -567,10 +567,10 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNoJdtTestLanguage.g:187:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalNoJdtTestLanguage.g:187:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalNoJdtTestLanguage.g:181:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalNoJdtTestLanguage.g:181:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalNoJdtTestLanguage.g:187:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalNoJdtTestLanguage.g:181:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -624,8 +624,8 @@ public class InternalNoJdtTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalNoJdtTestLanguage.g:189:16: ( . )
-            // InternalNoJdtTestLanguage.g:189:18: .
+            // InternalNoJdtTestLanguage.g:183:16: ( . )
+            // InternalNoJdtTestLanguage.g:183:18: .
             {
             matchAny(); 
 

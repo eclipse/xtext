@@ -24,12 +24,12 @@ import org.eclipse.xtext.xbase.tests.parser.XbaseParserTest;
 public class XbaseModelTestCase extends AbstractModelTestCase {
   @FinalFieldsConstructor
   private static class Delegate extends XbaseParserTest {
-    private final ModelChecker expresssionChecker;
+    private final ModelChecker expressionChecker;
     
     @Override
     protected XExpression expression(final CharSequence string) throws Exception {
       String _string = string.toString();
-      Model _checkModel = this.expresssionChecker.<Model>checkModel(_string, false);
+      Model _checkModel = this.expressionChecker.<Model>checkModel(_string, false);
       XBlockExpression _block = _checkModel.getBlock();
       EList<XExpression> _expressions = _block.getExpressions();
       return IterableExtensions.<XExpression>head(_expressions);
@@ -38,15 +38,15 @@ public class XbaseModelTestCase extends AbstractModelTestCase {
     @Override
     protected XExpression expression(final CharSequence string, final boolean resolve) throws Exception {
       String _string = string.toString();
-      Model _checkModel = this.expresssionChecker.<Model>checkModel(_string, resolve);
+      Model _checkModel = this.expressionChecker.<Model>checkModel(_string, resolve);
       XBlockExpression _block = _checkModel.getBlock();
       EList<XExpression> _expressions = _block.getExpressions();
       return IterableExtensions.<XExpression>head(_expressions);
     }
     
-    public Delegate(final ModelChecker expresssionChecker) {
+    public Delegate(final ModelChecker expressionChecker) {
       super();
-      this.expresssionChecker = expresssionChecker;
+      this.expressionChecker = expressionChecker;
     }
   }
   

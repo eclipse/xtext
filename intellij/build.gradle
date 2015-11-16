@@ -18,11 +18,15 @@ if (version.endsWith("-SNAPSHOT")) {
 }
 ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**', '**/*common.types.tests*/**'
 
+runIdea {
+	jvmArgs '-ea'
+}
+
 allprojects {
 	apply plugin: 'org.xtext.idea-dev'
 
 	ideaDevelopment {
-		ideaVersion = "142.3371.3"
+		ideaVersion = "143.381.42"
 		pluginDependencies {
 			id 'junit'
 		}
@@ -48,6 +52,7 @@ configure(subprojects - eclipsePluginProjects) {
 		// Eclipse produced. They are immediately available and
 		// contain debug information.
 		compileJava.enabled = false
+		processResources.enabled = false
 
 		task copyFromBin(type: Sync) {
 		    from 'bin'

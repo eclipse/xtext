@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
@@ -25,21 +24,26 @@ public class PsiGrammarNaming extends GrammarNaming {
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
   @Override
+  public boolean isCombinedGrammar(final Grammar it) {
+    return true;
+  }
+  
+  @Override
   public String getParserPackage(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(it);
     _builder.append(_ideaBasePackage, "");
-    _builder.append(".parser.antlr.internal");
+    _builder.append(".parser.antlr");
     return _builder.toString();
   }
   
   @Override
-  public TypeReference getGrammarClass(final Grammar it) {
-    String _parserPackage = this.getParserPackage(it);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("PsiInternal");
-    String _simpleName = GrammarUtil.getSimpleName(it);
-    _builder.append(_simpleName, "");
-    return new TypeReference(_parserPackage, _builder.toString());
+  public TypeReference getInternalParserSuperClass(final Grammar it) {
+    return new TypeReference("org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser");
+  }
+  
+  @Override
+  protected String getGrammarNamePrefix(final Grammar it) {
+    return "Psi";
   }
 }

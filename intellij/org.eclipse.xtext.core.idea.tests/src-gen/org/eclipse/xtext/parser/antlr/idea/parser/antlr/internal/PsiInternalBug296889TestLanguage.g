@@ -55,13 +55,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -79,6 +81,10 @@ ruleModel:
 					lv_expressions_1_0=ruleExpression
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)*
@@ -100,6 +106,10 @@ ruleModel:
 					lv_values_3_0=ruleDataTypeExpression
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)*
@@ -108,13 +118,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleExpression
-entryRuleExpression:
+entryRuleExpression returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getExpressionElementType()); }
-	ruleExpression
+	iv_ruleExpression=ruleExpression
+	{ $current=$iv_ruleExpression.current; }
 	EOF;
 
 // Rule Expression
-ruleExpression:
+ruleExpression returns [Boolean current=false]
+:
 	(
 		{
 			/* */
@@ -122,8 +134,9 @@ ruleExpression:
 		{
 			markComposite(elementTypeProvider.getExpression_PostopParserRuleCall_0ElementType());
 		}
-		rulePostop
+		this_Postop_0=rulePostop
 		{
+			$current = $this_Postop_0.current;
 			doneComposite();
 		}
 		    |
@@ -133,21 +146,24 @@ ruleExpression:
 		{
 			markComposite(elementTypeProvider.getExpression_PreopParserRuleCall_1ElementType());
 		}
-		rulePreop
+		this_Preop_1=rulePreop
 		{
+			$current = $this_Preop_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRulePreop
-entryRulePreop:
+entryRulePreop returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getPreopElementType()); }
-	rulePreop
+	iv_rulePreop=rulePreop
+	{ $current=$iv_rulePreop.current; }
 	EOF;
 
 // Rule Preop
-rulePreop:
+rulePreop returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -156,6 +172,7 @@ rulePreop:
 			{
 				precedeComposite(elementTypeProvider.getPreop_PreopAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -167,6 +184,12 @@ rulePreop:
 				{
 					doneLeaf(lv_functionName_1_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 		(
@@ -177,6 +200,10 @@ rulePreop:
 				lv_expr_2_0=ruleVariable
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -184,13 +211,15 @@ rulePreop:
 ;
 
 //Entry rule entryRulePostop
-entryRulePostop:
+entryRulePostop returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getPostopElementType()); }
-	rulePostop
+	iv_rulePostop=rulePostop
+	{ $current=$iv_rulePostop.current; }
 	EOF;
 
 // Rule Postop
-rulePostop:
+rulePostop returns [Boolean current=false]
+:
 	(
 		{
 			/* */
@@ -198,8 +227,9 @@ rulePostop:
 		{
 			markComposite(elementTypeProvider.getPostop_VariableParserRuleCall_0ElementType());
 		}
-		ruleVariable
+		this_Variable_0=ruleVariable
 		{
+			$current = $this_Variable_0.current;
 			doneComposite();
 		}
 		(
@@ -210,6 +240,7 @@ rulePostop:
 				{
 					precedeComposite(elementTypeProvider.getPostop_PostopExprAction_1_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			(
@@ -221,6 +252,12 @@ rulePostop:
 					{
 						doneLeaf(lv_functionName_2_0);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 				)
 			)
 		)?
@@ -228,13 +265,15 @@ rulePostop:
 ;
 
 //Entry rule entryRuleVariable
-entryRuleVariable:
+entryRuleVariable returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getVariableElementType()); }
-	ruleVariable
+	iv_ruleVariable=ruleVariable
+	{ $current=$iv_ruleVariable.current; }
 	EOF;
 
 // Rule Variable
-ruleVariable:
+ruleVariable returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -243,6 +282,7 @@ ruleVariable:
 			{
 				precedeComposite(elementTypeProvider.getVariable_VariableAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -252,6 +292,12 @@ ruleVariable:
 				}
 				lv_name_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_1_0);
 				}
 			)
@@ -260,13 +306,15 @@ ruleVariable:
 ;
 
 //Entry rule entryRuleDataTypeExpression
-entryRuleDataTypeExpression:
+entryRuleDataTypeExpression returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDataTypeExpressionElementType()); }
-	ruleDataTypeExpression
+	iv_ruleDataTypeExpression=ruleDataTypeExpression
+	{ $current=$iv_ruleDataTypeExpression.current; }
 	EOF;
 
 // Rule DataTypeExpression
-ruleDataTypeExpression:
+ruleDataTypeExpression returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getDataTypeExpression_DataTypePostopParserRuleCall_0ElementType());
@@ -287,13 +335,15 @@ ruleDataTypeExpression:
 ;
 
 //Entry rule entryRuleDataTypePreop
-entryRuleDataTypePreop:
+entryRuleDataTypePreop returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDataTypePreopElementType()); }
-	ruleDataTypePreop
+	iv_ruleDataTypePreop=ruleDataTypePreop
+	{ $current=$iv_ruleDataTypePreop.current; }
 	EOF;
 
 // Rule DataTypePreop
-ruleDataTypePreop:
+ruleDataTypePreop returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDataTypePreop_HyphenMinusHyphenMinusKeyword_0ElementType());
@@ -313,13 +363,15 @@ ruleDataTypePreop:
 ;
 
 //Entry rule entryRuleDataTypePostop
-entryRuleDataTypePostop:
+entryRuleDataTypePostop returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDataTypePostopElementType()); }
-	ruleDataTypePostop
+	iv_ruleDataTypePostop=ruleDataTypePostop
+	{ $current=$iv_ruleDataTypePostop.current; }
 	EOF;
 
 // Rule DataTypePostop
-ruleDataTypePostop:
+ruleDataTypePostop returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getDataTypePostop_DataTypeVariableParserRuleCall_0ElementType());
@@ -341,13 +393,15 @@ ruleDataTypePostop:
 ;
 
 //Entry rule entryRuleDataTypeVariable
-entryRuleDataTypeVariable:
+entryRuleDataTypeVariable returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDataTypeVariableElementType()); }
-	ruleDataTypeVariable
+	iv_ruleDataTypeVariable=ruleDataTypeVariable
+	{ $current=$iv_ruleDataTypeVariable.current; }
 	EOF;
 
 // Rule DataTypeVariable
-ruleDataTypeVariable:
+ruleDataTypeVariable returns [Boolean current=false]
+:
 	{
 		markLeaf(elementTypeProvider.getDataTypeVariable_IDTerminalRuleCallElementType());
 	}

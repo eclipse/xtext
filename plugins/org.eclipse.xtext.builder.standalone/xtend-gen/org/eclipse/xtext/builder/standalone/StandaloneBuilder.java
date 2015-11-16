@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.descriptions.IStubGenerator;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
+import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -445,6 +446,8 @@ public class StandaloneBuilder {
   }
   
   protected void generate(final List<Resource> sourceResources) {
+    final GeneratorContext context = new GeneratorContext();
+    context.setCancelIndicator(CancelIndicator.NullImpl);
     for (final Resource it : sourceResources) {
       {
         URI _uRI = it.getURI();
@@ -473,7 +476,7 @@ public class StandaloneBuilder {
           }
         }
         GeneratorDelegate _generator = access.getGenerator();
-        _generator.generate(it, fileSystemAccess);
+        _generator.generate(it, fileSystemAccess, context);
       }
     }
   }

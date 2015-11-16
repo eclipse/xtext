@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,25 +66,37 @@ ruleModel:
 			lv_words_0_0=ruleWord
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleWord
-entryRuleWord:
+entryRuleWord returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getWordElementType()); }
-	ruleWord
+	iv_ruleWord=ruleWord
+	{ $current=$iv_ruleWord.current; }
 	EOF;
 
 // Rule Word
-ruleWord:
+ruleWord returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getWord_ValueLEXEMETerminalRuleCall_0ElementType());
 			}
 			lv_value_0_0=RULE_LEXEME
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_value_0_0);
 			}

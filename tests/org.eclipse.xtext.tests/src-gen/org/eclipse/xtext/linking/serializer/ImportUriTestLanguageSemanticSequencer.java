@@ -4,22 +4,20 @@
 package org.eclipse.xtext.linking.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.linking.importedURI.Import;
 import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.linking.importedURI.Main;
 import org.eclipse.xtext.linking.importedURI.Type;
 import org.eclipse.xtext.linking.services.ImportUriTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -29,8 +27,13 @@ public class ImportUriTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private ImportUriTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == ImportedURIPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == ImportedURIPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case ImportedURIPackage.IMPORT:
 				sequence_Import(context, (Import) semanticObject); 
 				return; 
@@ -41,49 +44,59 @@ public class ImportUriTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_Type(context, (Type) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Import returns Import
+	 *
 	 * Constraint:
 	 *     importURI=STRING
 	 */
-	protected void sequence_Import(EObject context, Import semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ImportedURIPackage.Literals.IMPORT__IMPORT_URI) == ValueTransient.YES)
+	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ImportedURIPackage.Literals.IMPORT__IMPORT_URI) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ImportedURIPackage.Literals.IMPORT__IMPORT_URI));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0(), semanticObject.getImportURI());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Main returns Main
+	 *
 	 * Constraint:
 	 *     ((imports+=Import+ types+=Type+) | types+=Type+)?
 	 */
-	protected void sequence_Main(EObject context, Main semanticObject) {
+	protected void sequence_Main(ISerializationContext context, Main semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Type returns Type
+	 *
 	 * Constraint:
 	 *     (name=ID extends=[Type|ID])
 	 */
-	protected void sequence_Type(EObject context, Type semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, ImportedURIPackage.Literals.TYPE__NAME) == ValueTransient.YES)
+	protected void sequence_Type(ISerializationContext context, Type semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ImportedURIPackage.Literals.TYPE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ImportedURIPackage.Literals.TYPE__NAME));
-			if(transientValues.isValueTransient(semanticObject, ImportedURIPackage.Literals.TYPE__EXTENDS) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, ImportedURIPackage.Literals.TYPE__EXTENDS) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ImportedURIPackage.Literals.TYPE__EXTENDS));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getTypeAccess().getExtendsTypeIDTerminalRuleCall_3_0_1(), semanticObject.getExtends());
 		feeder.finish();
 	}
+	
+	
 }

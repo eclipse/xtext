@@ -4,8 +4,12 @@
 package org.eclipse.xtext.parsetree.unassignedtext.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.CaseInsensitiveKeywordRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.CommonTerminalsRule;
@@ -13,15 +17,9 @@ import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.DatatypeRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.MultiRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.PluralRule;
 import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -31,8 +29,13 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	private UnassignedTextTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == UnassignedtextPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == UnassignedtextPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case UnassignedtextPackage.CASE_INSENSITIVE_KEYWORD_RULE:
 				sequence_CaseInsensitiveKeywordRule(context, (CaseInsensitiveKeywordRule) semanticObject); 
 				return; 
@@ -49,85 +52,103 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 				sequence_PluralRule(context, (PluralRule) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Model returns CaseInsensitiveKeywordRule
+	 *     CaseInsensitiveKeywordRule returns CaseInsensitiveKeywordRule
+	 *
 	 * Constraint:
 	 *     val=INT
 	 */
-	protected void sequence_CaseInsensitiveKeywordRule(EObject context, CaseInsensitiveKeywordRule semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.CASE_INSENSITIVE_KEYWORD_RULE__VAL) == ValueTransient.YES)
+	protected void sequence_CaseInsensitiveKeywordRule(ISerializationContext context, CaseInsensitiveKeywordRule semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.CASE_INSENSITIVE_KEYWORD_RULE__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, UnassignedtextPackage.Literals.CASE_INSENSITIVE_KEYWORD_RULE__VAL));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCaseInsensitiveKeywordRuleAccess().getValINTTerminalRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns CommonTerminalsRule
+	 *     CommonTerminalsRule returns CommonTerminalsRule
+	 *
 	 * Constraint:
 	 *     val=ID
 	 */
-	protected void sequence_CommonTerminalsRule(EObject context, CommonTerminalsRule semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.COMMON_TERMINALS_RULE__VAL) == ValueTransient.YES)
+	protected void sequence_CommonTerminalsRule(ISerializationContext context, CommonTerminalsRule semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.COMMON_TERMINALS_RULE__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, UnassignedtextPackage.Literals.COMMON_TERMINALS_RULE__VAL));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCommonTerminalsRuleAccess().getValIDTerminalRuleCall_4_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns DatatypeRule
+	 *     DatatypeRule returns DatatypeRule
+	 *
 	 * Constraint:
 	 *     val=INT
 	 */
-	protected void sequence_DatatypeRule(EObject context, DatatypeRule semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.DATATYPE_RULE__VAL) == ValueTransient.YES)
+	protected void sequence_DatatypeRule(ISerializationContext context, DatatypeRule semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.DATATYPE_RULE__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, UnassignedtextPackage.Literals.DATATYPE_RULE__VAL));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getDatatypeRuleAccess().getValINTTerminalRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns MultiRule
+	 *     MultiRule returns MultiRule
+	 *
 	 * Constraint:
 	 *     val=INT
 	 */
-	protected void sequence_MultiRule(EObject context, MultiRule semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.MULTI_RULE__VAL) == ValueTransient.YES)
+	protected void sequence_MultiRule(ISerializationContext context, MultiRule semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.MULTI_RULE__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, UnassignedtextPackage.Literals.MULTI_RULE__VAL));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getMultiRuleAccess().getValINTTerminalRuleCall_1_0(), semanticObject.getVal());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns PluralRule
+	 *     PluralRule returns PluralRule
+	 *
 	 * Constraint:
 	 *     count=INT
 	 */
-	protected void sequence_PluralRule(EObject context, PluralRule semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.PLURAL_RULE__COUNT) == ValueTransient.YES)
+	protected void sequence_PluralRule(ISerializationContext context, PluralRule semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, UnassignedtextPackage.Literals.PLURAL_RULE__COUNT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, UnassignedtextPackage.Literals.PLURAL_RULE__COUNT));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPluralRuleAccess().getCountINTTerminalRuleCall_1_0(), semanticObject.getCount());
 		feeder.finish();
 	}
+	
+	
 }

@@ -7,9 +7,9 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.web:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}"
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}"
-	compile "org.webjars:requirejs:2.1.17"
+	compile "org.webjars:requirejs:2.1.20"
 	compile "org.webjars:jquery:2.1.4"
-	compile "org.webjars:ace:1.1.9"
+	compile "org.webjars:ace:1.2.0"
 	providedCompile "org.eclipse.jetty:jetty-annotations:9.2.11.v20150529"
 	providedCompile "org.slf4j:slf4j-simple:1.7.12"
 }

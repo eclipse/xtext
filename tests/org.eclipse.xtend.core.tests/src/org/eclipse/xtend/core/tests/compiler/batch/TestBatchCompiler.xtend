@@ -116,11 +116,9 @@ class TestBatchCompiler {
 		assertTrue(batchCompiler.compile)	
 	}
 
-	@Test def void testWorkspaceConfig() {
+	@Test def void testProjectConfig() {
 		batchCompiler.compile
-		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('..').canonicalPath+ File.separator, config.path.toFileString)
-		val project = config.projects.head
+		val project = batchCompiler.projectConfig
 		val projectPath = new File(".").canonicalFile.name
 		assertEquals(projectPath, project.name)
 		val output = batchCompiler.outputConfiguration
@@ -130,13 +128,11 @@ class TestBatchCompiler {
 		assertEquals("test-result", target.toString)
 	}
 
-	@Test def void testWorkspaceConfigMultipleSourceDirs1() {
+	@Test def void testProjectConfigMultipleSourceDirs1() {
 		batchCompiler.sourcePath = '''ws/prj1/src«File.pathSeparator»ws/prj1/src-gen'''
 		batchCompiler.outputPath = '''ws/prj1/bin'''
 		batchCompiler.compile
-		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('ws').canonicalPath + File.separator, config.path.toFileString)
-		val project = config.projects.head
+		val project = batchCompiler.projectConfig
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
 		assertEquals(2, project.sourceFolders.size)
@@ -151,14 +147,12 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testWorkspaceConfigMultipleSourceDirs2AbsPaths() {
+	@Test def void testProjectConfigMultipleSourceDirs2AbsPaths() {
 		batchCompiler.sourcePath = '''/tmp/ws/prj1/src«File.pathSeparator»/tmp/ws/prj1/src-gen'''
 		batchCompiler.outputPath = '''/tmp/ws/prj1/bin'''
 
 		batchCompiler.compile
-		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('/tmp/ws').canonicalPath+ File.separator, config.path.toFileString)
-		val project = config.projects.head
+		val project = batchCompiler.projectConfig
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
 		assertEquals(2, project.sourceFolders.size)
@@ -173,14 +167,12 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testWorkspaceConfigMultipleSourceDirs3() {
+	@Test def void testProjectConfigMultipleSourceDirs3() {
 		batchCompiler.sourcePath = '''ws/prj1/dir1/src«File.pathSeparator»ws/prj1/src-gen'''
 		batchCompiler.outputPath = '''ws/prj1/dir2/bin'''
 
 		batchCompiler.compile
-		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('ws').canonicalPath + File.separator, config.path.toFileString)
-		val project = config.projects.head
+		val project = batchCompiler.projectConfig
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
 		assertEquals(2, project.sourceFolders.size)
@@ -195,15 +187,13 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testWorkspaceConfigMultipleSourceDirs4() {
+	@Test def void testProjectConfigMultipleSourceDirs4() {
 		batchCompiler.sourcePath = '''ws/prj1/src«File.pathSeparator»ws/prj1/dir1/src-gen'''
 		batchCompiler.outputPath = '''ws/prj1/bin'''
 
 		batchCompiler.compile
 
-		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('ws').canonicalPath + File.separator, config.path.toFileString)
-		val project = config.projects.head
+		val project = batchCompiler.projectConfig
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
 		assertEquals(2, project.sourceFolders.size)
@@ -218,14 +208,12 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testWorkspaceConfigMultipleSourceDirs5() {
+	@Test def void testProjectConfigMultipleSourceDirs5() {
 		batchCompiler.sourcePath = '''ws/prj1/dir1/dir1a/src«File.pathSeparator»ws/prj1/dir3/dir3a/src-gen'''
 		batchCompiler.outputPath = '''ws/prj1/dir2/dir2a/bin'''
 
 		batchCompiler.compile
-		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('ws').canonicalPath + File.separator, config.path.toFileString)
-		val project = config.projects.head
+		val project = batchCompiler.projectConfig
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
 		assertEquals(2, project.sourceFolders.size)
@@ -240,16 +228,14 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testWorkspaceConfigMultipleSourceDirs6() {
+	@Test def void testProjectConfigMultipleSourceDirs6() {
 		batchCompiler.sourcePath = '''dir1/ws/prj1/dir2/dir3/dir4/src1«File.pathSeparator»dir1/ws/prj1/dir2/dir3/src2«File.
 			pathSeparator»dir1/ws/prj1/dir2/src3«File.pathSeparator»dir1/ws/prj1/src4'''
 		batchCompiler.outputPath = '''dir1/ws/prj1/dir2/dir3/dir4/dir5/bin'''
 
 		batchCompiler.compile
 
-		val config = batchCompiler.workspaceConfig
-		assertEquals(new File('dir1/ws').canonicalPath + File.separator, config.path.toFileString)
-		val project = config.projects.head
+		val project = batchCompiler.projectConfig
 		assertEquals("prj1", project.name)
 		val output = batchCompiler.outputConfiguration
 		assertEquals(4, project.sourceFolders.size)
@@ -272,37 +258,37 @@ class TestBatchCompiler {
 		]
 	}
 
-	@Test def void testWorkspaceConfigSameDir() {
+	@Test def void testProjectConfigSameDir() {
 		batchCompiler.sourcePath = "ws/prj1"
 		batchCompiler.outputPath = "ws/prj1"
 
 		assertFalse(batchCompiler.compile)
-		assertNull(batchCompiler.workspaceConfig)
+		assertNull(batchCompiler.projectConfig)
 	}
 
-	@Test def void testWorkspaceConfigWithoutCommonProjectDir() {
+	@Test def void testProjectConfigWithoutCommonProjectDir() {
 		batchCompiler.sourcePath = '''/tmp/ws/prj1/src'''
 		batchCompiler.outputPath = '''/usr/local/tmp/ws/prj1/bin'''
 
 		batchCompiler.compile
-		assertNull(batchCompiler.workspaceConfig)
+		assertNull(batchCompiler.projectConfig)
 		assertNull(batchCompiler.outputConfiguration)
 	}
 
-	@Test def void testWorkspaceConfigWithoutCommonWorkspaceDir() {
+	@Test def void testProjectConfigWithoutCommonWorkspaceDir() {
 		batchCompiler.sourcePath = '''/some_non_existing_folder/src'''
 		batchCompiler.outputPath = '''/some_non_existing_folder/bin'''
 
 		batchCompiler.compile
-		assertNull(batchCompiler.workspaceConfig)
+		assertNull(batchCompiler.projectConfig)
 		assertNull(batchCompiler.outputConfiguration)
 	}
 
-	@Test def void testWorkspaceConfigWithTopLevelCommonWorkspaceDir() {
+	@Test def void testProjectConfigWithTopLevelCommonWorkspaceDir() {
 		batchCompiler.sourcePath = '''/tmp/prj/src'''
 		batchCompiler.outputPath = '''/tmp/prj/bin'''
 		batchCompiler.compile
-		assertNotNull(batchCompiler.workspaceConfig)
+		assertNotNull(batchCompiler.projectConfig)
 		assertNotNull(batchCompiler.outputConfiguration)
 	}
 

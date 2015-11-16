@@ -11,8 +11,16 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.intellij.facet.Facet;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.SourceFolder;
+import com.intellij.openapi.util.Computable;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileSystem;
+import java.io.File;
 import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -26,6 +34,8 @@ import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.FacetProvider;
 import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -61,7 +71,8 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
       final GeneratorConfigurationState generatorConf = _configuration.getState();
       final OutputConfiguration defOut = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
       String _outputDirectory = generatorConf.getOutputDirectory();
-      defOut.setOutputDirectory(_outputDirectory);
+      String _moduleRelativePath = this.toModuleRelativePath(_outputDirectory, module);
+      defOut.setOutputDirectory(_moduleRelativePath);
       boolean _isCreateDirectory = generatorConf.isCreateDirectory();
       defOut.setCreateOutputDirectory(_isCreateDirectory);
       boolean _isDeleteGenerated = generatorConf.isDeleteGenerated();
@@ -77,10 +88,12 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
           boolean _isTestSource = srcFolder.isTestSource();
           if (_isTestSource) {
             String _testOutputDirectory = generatorConf.getTestOutputDirectory();
-            mapping.setOutputDirectory(_testOutputDirectory);
+            String _moduleRelativePath_1 = this.toModuleRelativePath(_testOutputDirectory, module);
+            mapping.setOutputDirectory(_moduleRelativePath_1);
           } else {
             String _outputDirectory_1 = generatorConf.getOutputDirectory();
-            mapping.setOutputDirectory(_outputDirectory_1);
+            String _moduleRelativePath_2 = this.toModuleRelativePath(_outputDirectory_1, module);
+            mapping.setOutputDirectory(_moduleRelativePath_2);
           }
           Set<OutputConfiguration.SourceMapping> _sourceMappings = defOut.getSourceMappings();
           _sourceMappings.add(mapping);
@@ -89,5 +102,27 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
       return Sets.<OutputConfiguration>newHashSet(defOut);
     }
     return this.defaultOutput.getOutputConfigurations();
+  }
+  
+  public String toModuleRelativePath(final String path, final Module module) {
+    File _file = new File(path);
+    boolean _isAbsolute = _file.isAbsolute();
+    if (_isAbsolute) {
+      Application _application = ApplicationManager.getApplication();
+      final Computable<String> _function = new Computable<String>() {
+        @Override
+        public String compute() {
+          ModuleRootManager _instance = ModuleRootManager.getInstance(module);
+          VirtualFile[] _contentRoots = _instance.getContentRoots();
+          final VirtualFile root = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
+          VirtualFileSystem _fileSystem = root.getFileSystem();
+          final VirtualFile file = _fileSystem.findFileByPath(path);
+          final String relativePath = VfsUtil.getRelativePath(file, root);
+          return relativePath;
+        }
+      };
+      return _application.<String>runReadAction(_function);
+    }
+    return path;
   }
 }

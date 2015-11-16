@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleSpielplatz
-entryRuleSpielplatz:
+entryRuleSpielplatz returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSpielplatzElementType()); }
-	ruleSpielplatz
+	iv_ruleSpielplatz=ruleSpielplatz
+	{ $current=$iv_ruleSpielplatz.current; }
 	EOF;
 
 // Rule Spielplatz
-ruleSpielplatz:
+ruleSpielplatz returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSpielplatz_SpielplatzKeyword_0ElementType());
@@ -71,6 +73,12 @@ ruleSpielplatz:
 				}
 				lv_groesse_1_0=RULE_INT
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_groesse_1_0);
 				}
 			)
@@ -81,6 +89,12 @@ ruleSpielplatz:
 					markLeaf(elementTypeProvider.getSpielplatz_BeschreibungSTRINGTerminalRuleCall_2_0ElementType());
 				}
 				lv_beschreibung_2_0=RULE_STRING
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_beschreibung_2_0);
 				}
@@ -102,6 +116,10 @@ ruleSpielplatz:
 					lv_kinder_4_0=ruleKind
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -114,6 +132,10 @@ ruleSpielplatz:
 					lv_erzieher_5_0=ruleErwachsener
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -126,6 +148,10 @@ ruleSpielplatz:
 					lv_spielzeuge_6_0=ruleSpielzeug
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -138,6 +164,10 @@ ruleSpielplatz:
 					lv_familie_7_0=ruleFamilie
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -153,13 +183,15 @@ ruleSpielplatz:
 ;
 
 //Entry rule entryRuleKind
-entryRuleKind:
+entryRuleKind returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getKindElementType()); }
-	ruleKind
+	iv_ruleKind=ruleKind
+	{ $current=$iv_ruleKind.current; }
 	EOF;
 
 // Rule Kind
-ruleKind:
+ruleKind returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getKind_KindKeyword_0ElementType());
@@ -182,6 +214,12 @@ ruleKind:
 				}
 				lv_name_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_2_0);
 				}
 			)
@@ -192,6 +230,12 @@ ruleKind:
 					markLeaf(elementTypeProvider.getKind_AgeINTTerminalRuleCall_3_0ElementType());
 				}
 				lv_age_3_0=RULE_INT
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_age_3_0);
 				}
@@ -208,13 +252,15 @@ ruleKind:
 ;
 
 //Entry rule entryRuleErwachsener
-entryRuleErwachsener:
+entryRuleErwachsener returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getErwachsenerElementType()); }
-	ruleErwachsener
+	iv_ruleErwachsener=ruleErwachsener
+	{ $current=$iv_ruleErwachsener.current; }
 	EOF;
 
 // Rule Erwachsener
-ruleErwachsener:
+ruleErwachsener returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getErwachsener_ErwachsenerKeyword_0ElementType());
@@ -237,6 +283,12 @@ ruleErwachsener:
 				}
 				lv_name_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_2_0);
 				}
 			)
@@ -247,6 +299,12 @@ ruleErwachsener:
 					markLeaf(elementTypeProvider.getErwachsener_AgeINTTerminalRuleCall_3_0ElementType());
 				}
 				lv_age_3_0=RULE_INT
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_age_3_0);
 				}
@@ -263,13 +321,15 @@ ruleErwachsener:
 ;
 
 //Entry rule entryRuleSpielzeug
-entryRuleSpielzeug:
+entryRuleSpielzeug returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSpielzeugElementType()); }
-	ruleSpielzeug
+	iv_ruleSpielzeug=ruleSpielzeug
+	{ $current=$iv_ruleSpielzeug.current; }
 	EOF;
 
 // Rule Spielzeug
-ruleSpielzeug:
+ruleSpielzeug returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSpielzeug_SpielzeugKeyword_0ElementType());
@@ -292,6 +352,12 @@ ruleSpielzeug:
 				}
 				lv_name_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_2_0);
 				}
 			)
@@ -304,6 +370,10 @@ ruleSpielzeug:
 				lv_farbe_3_0=ruleFarbe
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -318,13 +388,15 @@ ruleSpielzeug:
 ;
 
 //Entry rule entryRuleFarbe
-entryRuleFarbe:
+entryRuleFarbe returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFarbeElementType()); }
-	ruleFarbe
+	iv_ruleFarbe=ruleFarbe
+	{ $current=$iv_ruleFarbe.current; }
 	EOF;
 
 // Rule Farbe
-ruleFarbe:
+ruleFarbe returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -335,6 +407,12 @@ ruleFarbe:
 				{
 					doneLeaf(lv_wert_0_1);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				    |
 				{
 					markLeaf(elementTypeProvider.getFarbe_WertBLAUKeyword_0_1ElementType());
@@ -342,6 +420,12 @@ ruleFarbe:
 				lv_wert_0_2='BLAU'
 				{
 					doneLeaf(lv_wert_0_2);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 				    |
 				{
@@ -351,6 +435,12 @@ ruleFarbe:
 				{
 					doneLeaf(lv_wert_0_3);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				    |
 				{
 					markLeaf(elementTypeProvider.getFarbe_WertGRÜNKeyword_0_3ElementType());
@@ -359,19 +449,27 @@ ruleFarbe:
 				{
 					doneLeaf(lv_wert_0_4);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 	)
 ;
 
 //Entry rule entryRuleFamilie
-entryRuleFamilie:
+entryRuleFamilie returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFamilieElementType()); }
-	ruleFamilie
+	iv_ruleFamilie=ruleFamilie
+	{ $current=$iv_ruleFamilie.current; }
 	EOF;
 
 // Rule Familie
-ruleFamilie:
+ruleFamilie returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getFamilie_FamilieKeyword_0ElementType());
@@ -397,11 +495,23 @@ ruleFamilie:
 					{
 						doneLeaf(lv_name_2_1);
 					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					    |
 					{
 						markLeaf(elementTypeProvider.getFamilie_NameSTRINGTerminalRuleCall_2_0_1ElementType());
 					}
 					lv_name_2_2=RULE_STRING
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_name_2_2);
 					}
@@ -411,6 +521,12 @@ ruleFamilie:
 					}
 					lv_name_2_3=RULE_ID
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_name_2_3);
 					}
 				)
@@ -418,6 +534,12 @@ ruleFamilie:
 		)
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getFamilie_MutterErwachsenerCrossReference_3_0ElementType());
 				}
@@ -430,6 +552,12 @@ ruleFamilie:
 		(
 			(
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					markLeaf(elementTypeProvider.getFamilie_VaterErwachsenerCrossReference_4_0ElementType());
 				}
 				otherlv_4=RULE_ID
@@ -440,6 +568,12 @@ ruleFamilie:
 		)
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getFamilie_KinderKindCrossReference_5_0ElementType());
 				}
@@ -459,6 +593,12 @@ ruleFamilie:
 			}
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getFamilie_KinderKindCrossReference_6_1_0ElementType());
 					}

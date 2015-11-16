@@ -2379,6 +2379,9 @@ public class XbaseFormatter extends XtypeFormatter {
     } else if (expr instanceof XImportSection) {
       _format((XImportSection)expr, format);
       return;
+    } else if (expr instanceof EObject) {
+      _format((EObject)expr, format);
+      return;
     } else if (expr == null) {
       _format((Void)null, format);
       return;

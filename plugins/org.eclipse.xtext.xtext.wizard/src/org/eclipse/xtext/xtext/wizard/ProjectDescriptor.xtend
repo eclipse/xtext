@@ -12,6 +12,7 @@ import java.util.List
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import java.net.URL
 
 @FinalFieldsConstructor
 @Accessors
@@ -41,7 +42,7 @@ abstract class ProjectDescriptor {
 		#[Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN].map[sourceFolder].toSet
 	}
 
-	def Iterable<? extends TextFile> getFiles() {
+	def Iterable<? extends AbstractFile> getFiles() {
 		val List<TextFile> files = newArrayList
 		if (eclipsePluginProject) {
 			files += file(Outlet.META_INF, "MANIFEST.MF", manifest)
@@ -100,14 +101,15 @@ abstract class ProjectDescriptor {
 		Bundle-RequiredExecutionEnvironment: «bree»
 	'''
 	
+	
 	def getBree() {
-		"JavaSE-1.6"
+		return config.javaVersion.bree
 	}
 	
 	private def manifestEntry(String key, Iterable<String> value) {
 		if (value.isEmpty)
 			return ""
-		return '''«key»: «requiredBundles.join(",\n ")»'''
+		return '''«key»: «value.join(",\n ")»'''
 	}
 
 	def Set<String> getRequiredBundles() {
@@ -144,5 +146,13 @@ abstract class ProjectDescriptor {
 
 	protected def file(Outlet outlet, String relativePath, CharSequence content) {
 		new PlainTextFile(outlet, relativePath, this, content)
+	}
+	
+	protected def file(Outlet outlet, String relativePath, CharSequence content, boolean executable) {
+		new PlainTextFile(outlet, relativePath, this, content, executable)
+	}
+	
+	protected def binaryFile(Outlet outlet, String relativePath, URL url) {
+		return new BinaryFile(outlet, relativePath, this, false, url)
 	}
 }

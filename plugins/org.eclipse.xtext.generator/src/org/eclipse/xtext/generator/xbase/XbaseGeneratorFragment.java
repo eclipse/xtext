@@ -43,6 +43,7 @@ import com.google.common.collect.Lists;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  * @author Holger Schill
+ * @since 2.9
  */
 public class XbaseGeneratorFragment extends AbstractGeneratorFragment implements IGeneratorFragmentExtension4 {
 	

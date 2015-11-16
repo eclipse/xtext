@@ -10,19 +10,20 @@ package org.eclipse.xtext.idea.resource
 import com.intellij.lang.ASTNode
 import java.util.List
 import java.util.Map
-import org.eclipse.emf.common.notify.impl.AdapterImpl
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
-
-import static org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode
 import org.eclipse.xtext.psi.impl.BaseXtextFile
+import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
+import org.eclipse.xtext.util.internal.EmfAdaptable
 
-class PsiToEcoreAdapter extends AdapterImpl {
-	
+@EmfAdaptable
+class PsiToEcoreAdapter {
+
 	@Accessors(PUBLIC_GETTER)
 	val BaseXtextFile xtextFile
-	
+
 	@Accessors(PUBLIC_GETTER)
 	val Map<ASTNode, INode> nodesMapping
 
@@ -35,16 +36,33 @@ class PsiToEcoreAdapter extends AdapterImpl {
 		reverseNodesMapping = context.reverseNodesMapping.unmodifiableView
 	}
 
-	def install(Resource it) {
-		eAdapters += this
+	def INode getINode(ASTNode astNode) {
+		if (astNode === null) return null
+
+		var node = nodesMapping.get(astNode)
+		val elementType = astNode.elementType
+		if (elementType instanceof IGrammarAwareElementType) {
+			val grammarElement = elementType.grammarElement
+			while (node instanceof ICompositeNode && node.grammarElement !== grammarElement)
+				node = (node as ICompositeNode).firstChild
+		}
+		return node
 	}
 
-	override isAdapterForType(Object type) {
-		class == type
-	}
-
-	static def get(Resource it) {
-		getAdapter(eAdapters, PsiToEcoreAdapter) as PsiToEcoreAdapter
+	def ASTNode getASTNode(INode node) {
+		if(node === null) return null
+		
+		var index = 0
+		var originalNode = node
+		while (originalNode instanceof SyntheticCompositeNode) {
+			originalNode = originalNode.getParent()
+			index++
+		}
+		val astNodes = reverseNodesMapping.get(originalNode)
+		if (astNodes === null && node.rootNode === node) {
+			return xtextFile.node.firstChildNode
+		}
+		return astNodes.get(index)
 	}
 
 }

@@ -1,5 +1,5 @@
 org.eclipse.xtext.enumrules.idea.lang.psi.impl.EnumRulesTestLanguageFileImpl:a.enumrulestestlanguage(0,17)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,17)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,17)
     PsiElement(Model_ExistingKeyword_0_0_ELEMENT_TYPE)('existing')(0,8)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ExistingExistingEnumEnumRuleCall_0_1_0_ELEMENT_TYPE)(8,17)
       PsiWhiteSpace(' ')(8,9)

@@ -113,13 +113,13 @@ public interface ArithmeticsPackage extends EPackage
   int IMPORT = 1;
 
   /**
-   * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
+   * The feature id for the '<em><b>Module</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPORT__IMPORTED_NAMESPACE = 0;
+  int IMPORT__MODULE = 0;
 
   /**
    * The number of structural features of the '<em>Import</em>' class.
@@ -566,15 +566,15 @@ public interface ArithmeticsPackage extends EPackage
   EClass getImport();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.arithmetics.arithmetics.Import#getImportedNamespace <em>Imported Namespace</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.example.arithmetics.arithmetics.Import#getModule <em>Module</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-   * @see org.eclipse.xtext.example.arithmetics.arithmetics.Import#getImportedNamespace()
+   * @return the meta object for the reference '<em>Module</em>'.
+   * @see org.eclipse.xtext.example.arithmetics.arithmetics.Import#getModule()
    * @see #getImport()
    * @generated
    */
-  EAttribute getImport_ImportedNamespace();
+  EReference getImport_Module();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.arithmetics.arithmetics.Statement <em>Statement</em>}'.
@@ -929,12 +929,12 @@ public interface ArithmeticsPackage extends EPackage
     EClass IMPORT = eINSTANCE.getImport();
 
     /**
-     * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Module</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+    EReference IMPORT__MODULE = eINSTANCE.getImport_Module();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.StatementImpl <em>Statement</em>}' class.

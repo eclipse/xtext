@@ -12,7 +12,6 @@ import com.google.inject.Provider;
 import com.intellij.lang.ASTFactory;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageASTFactory;
-import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.mock.MockApplicationEx;
 import com.intellij.mock.MockEditorFactory;
@@ -103,7 +102,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     this.<ISetup>addExplicitExtension(LanguageSetup.INSTANCE, this.myLanguage, _setup);
     IXtextLanguage _xtextLanguage = this.getXtextLanguage();
     _xtextLanguage.injectMembers(this);
-    this.<ParserDefinition>addExplicitExtension(LanguageParserDefinitions.INSTANCE, this.myLanguage, this.parserDefinition);
+    this.configureFromParserDefinition(this.parserDefinition, this.myFileExt);
     this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, this.myLanguage, this.astFactory);
     MockApplicationEx _application = PlatformLiteFixture.getApplication();
     final MutablePicoContainer appContainer = _application.getPicoContainer();
@@ -252,7 +251,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
             ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
             it.load(_byteArrayInputStream, null);
             PsiToEcoreAdapter _adapter = psiToEcoreTransformator.getAdapter();
-            _adapter.install(it);
+            _adapter.attachToEmfObject(it);
           } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }

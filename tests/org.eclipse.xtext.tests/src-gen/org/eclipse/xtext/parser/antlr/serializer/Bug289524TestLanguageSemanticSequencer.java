@@ -4,22 +4,20 @@
 package org.eclipse.xtext.parser.antlr.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parser.antlr.bug289524Test.Bug289524TestPackage;
 import org.eclipse.xtext.parser.antlr.bug289524Test.Contained;
 import org.eclipse.xtext.parser.antlr.bug289524Test.Model;
 import org.eclipse.xtext.parser.antlr.bug289524Test.ModelElement;
 import org.eclipse.xtext.parser.antlr.services.Bug289524TestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
@@ -29,8 +27,13 @@ public class Bug289524TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private Bug289524TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == Bug289524TestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == Bug289524TestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case Bug289524TestPackage.CONTAINED:
 				sequence_Contained(context, (Contained) semanticObject); 
 				return; 
@@ -41,39 +44,50 @@ public class Bug289524TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_ModelElement(context, (ModelElement) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Contained returns Contained
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Contained(EObject context, Contained semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, Bug289524TestPackage.Literals.CONTAINED__NAME) == ValueTransient.YES)
+	protected void sequence_Contained(ISerializationContext context, Contained semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, Bug289524TestPackage.Literals.CONTAINED__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug289524TestPackage.Literals.CONTAINED__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getContainedAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     ModelElement returns ModelElement
+	 *
 	 * Constraint:
 	 *     (containments+=Contained | (refs+=[Contained|ID] refs+=[Contained|ID]*))+
 	 */
-	protected void sequence_ModelElement(EObject context, ModelElement semanticObject) {
+	protected void sequence_ModelElement(ISerializationContext context, ModelElement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     refs+=ModelElement*
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

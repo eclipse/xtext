@@ -167,10 +167,10 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalLookaheadTestLanguage.g:316:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalLookaheadTestLanguage.g:316:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalLookaheadTestLanguage.g:393:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalLookaheadTestLanguage.g:393:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalLookaheadTestLanguage.g:316:11: ( '^' )?
+            // PsiInternalLookaheadTestLanguage.g:393:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -179,7 +179,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalLookaheadTestLanguage.g:316:11: '^'
+                    // PsiInternalLookaheadTestLanguage.g:393:11: '^'
                     {
                     match('^'); 
 
@@ -197,7 +197,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalLookaheadTestLanguage.g:316:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalLookaheadTestLanguage.g:393:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -246,10 +246,10 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalLookaheadTestLanguage.g:318:10: ( ( '0' .. '9' )+ )
-            // PsiInternalLookaheadTestLanguage.g:318:12: ( '0' .. '9' )+
+            // PsiInternalLookaheadTestLanguage.g:395:10: ( ( '0' .. '9' )+ )
+            // PsiInternalLookaheadTestLanguage.g:395:12: ( '0' .. '9' )+
             {
-            // PsiInternalLookaheadTestLanguage.g:318:12: ( '0' .. '9' )+
+            // PsiInternalLookaheadTestLanguage.g:395:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -263,7 +263,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalLookaheadTestLanguage.g:318:13: '0' .. '9'
+            	    // PsiInternalLookaheadTestLanguage.g:395:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -295,10 +295,10 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalLookaheadTestLanguage.g:320:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalLookaheadTestLanguage.g:320:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalLookaheadTestLanguage.g:397:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalLookaheadTestLanguage.g:397:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalLookaheadTestLanguage.g:320:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalLookaheadTestLanguage.g:397:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -316,10 +316,10 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalLookaheadTestLanguage.g:320:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalLookaheadTestLanguage.g:397:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalLookaheadTestLanguage.g:320:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalLookaheadTestLanguage.g:397:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -335,7 +335,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalLookaheadTestLanguage.g:320:21: '\\\\' .
+                    	    // PsiInternalLookaheadTestLanguage.g:397:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -343,7 +343,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalLookaheadTestLanguage.g:320:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalLookaheadTestLanguage.g:397:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -368,10 +368,10 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalLookaheadTestLanguage.g:320:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalLookaheadTestLanguage.g:397:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalLookaheadTestLanguage.g:320:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalLookaheadTestLanguage.g:397:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -387,7 +387,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalLookaheadTestLanguage.g:320:54: '\\\\' .
+                    	    // PsiInternalLookaheadTestLanguage.g:397:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -395,7 +395,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalLookaheadTestLanguage.g:320:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalLookaheadTestLanguage.g:397:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -438,12 +438,12 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalLookaheadTestLanguage.g:322:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalLookaheadTestLanguage.g:322:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalLookaheadTestLanguage.g:399:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalLookaheadTestLanguage.g:399:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalLookaheadTestLanguage.g:322:24: ( options {greedy=false; } : . )*
+            // PsiInternalLookaheadTestLanguage.g:399:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -468,7 +468,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalLookaheadTestLanguage.g:322:52: .
+            	    // PsiInternalLookaheadTestLanguage.g:399:52: .
             	    {
             	    matchAny(); 
 
@@ -498,12 +498,12 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalLookaheadTestLanguage.g:324:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalLookaheadTestLanguage.g:324:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalLookaheadTestLanguage.g:401:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalLookaheadTestLanguage.g:401:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalLookaheadTestLanguage.g:324:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalLookaheadTestLanguage.g:401:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -516,7 +516,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalLookaheadTestLanguage.g:324:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalLookaheadTestLanguage.g:401:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -536,7 +536,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalLookaheadTestLanguage.g:324:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalLookaheadTestLanguage.g:401:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -545,9 +545,9 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalLookaheadTestLanguage.g:324:41: ( '\\r' )? '\\n'
+                    // PsiInternalLookaheadTestLanguage.g:401:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalLookaheadTestLanguage.g:324:41: ( '\\r' )?
+                    // PsiInternalLookaheadTestLanguage.g:401:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -556,7 +556,7 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalLookaheadTestLanguage.g:324:41: '\\r'
+                            // PsiInternalLookaheadTestLanguage.g:401:41: '\\r'
                             {
                             match('\r'); 
 
@@ -588,10 +588,10 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalLookaheadTestLanguage.g:326:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalLookaheadTestLanguage.g:326:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalLookaheadTestLanguage.g:403:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalLookaheadTestLanguage.g:403:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalLookaheadTestLanguage.g:326:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalLookaheadTestLanguage.g:403:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -645,8 +645,8 @@ public class PsiInternalLookaheadTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalLookaheadTestLanguage.g:328:16: ( . )
-            // PsiInternalLookaheadTestLanguage.g:328:18: .
+            // PsiInternalLookaheadTestLanguage.g:405:16: ( . )
+            // PsiInternalLookaheadTestLanguage.g:405:18: .
             {
             matchAny(); 
 

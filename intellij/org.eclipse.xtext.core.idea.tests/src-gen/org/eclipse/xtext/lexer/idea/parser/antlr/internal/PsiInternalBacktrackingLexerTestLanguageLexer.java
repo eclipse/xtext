@@ -84,8 +84,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHARA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:229:12: ( 'A' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:229:14: 'A'
+            // PsiInternalBacktrackingLexerTestLanguage.g:290:12: ( 'A' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:290:14: 'A'
             {
             match('A'); 
 
@@ -104,8 +104,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHARB;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:231:12: ( 'b' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:231:14: 'b'
+            // PsiInternalBacktrackingLexerTestLanguage.g:292:12: ( 'b' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:292:14: 'b'
             {
             match('b'); 
 
@@ -124,8 +124,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHARX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:233:12: ( 'X' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:233:14: 'X'
+            // PsiInternalBacktrackingLexerTestLanguage.g:294:12: ( 'X' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:294:14: 'X'
             {
             match('X'); 
 
@@ -144,8 +144,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_YC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:235:9: ( RULE_CHARY RULE_CHARC )
-            // PsiInternalBacktrackingLexerTestLanguage.g:235:11: RULE_CHARY RULE_CHARC
+            // PsiInternalBacktrackingLexerTestLanguage.g:296:9: ( RULE_CHARY RULE_CHARC )
+            // PsiInternalBacktrackingLexerTestLanguage.g:296:11: RULE_CHARY RULE_CHARC
             {
             mRULE_CHARY(); 
             mRULE_CHARC(); 
@@ -165,8 +165,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHARY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:237:12: ( 'Y' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:237:14: 'Y'
+            // PsiInternalBacktrackingLexerTestLanguage.g:298:12: ( 'Y' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:298:14: 'Y'
             {
             match('Y'); 
 
@@ -183,8 +183,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_CHARC"
     public final void mRULE_CHARC() throws RecognitionException {
         try {
-            // PsiInternalBacktrackingLexerTestLanguage.g:239:21: ( 'c' )
-            // PsiInternalBacktrackingLexerTestLanguage.g:239:23: 'c'
+            // PsiInternalBacktrackingLexerTestLanguage.g:300:21: ( 'c' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:300:23: 'c'
             {
             match('c'); 
 
@@ -201,10 +201,10 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:241:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalBacktrackingLexerTestLanguage.g:241:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBacktrackingLexerTestLanguage.g:302:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalBacktrackingLexerTestLanguage.g:302:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalBacktrackingLexerTestLanguage.g:241:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBacktrackingLexerTestLanguage.g:302:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {
@@ -258,12 +258,12 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingLexerTestLanguage.g:243:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalBacktrackingLexerTestLanguage.g:243:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalBacktrackingLexerTestLanguage.g:304:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalBacktrackingLexerTestLanguage.g:304:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:243:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:304:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -276,7 +276,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalBacktrackingLexerTestLanguage.g:243:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:304:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -296,7 +296,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalBacktrackingLexerTestLanguage.g:243:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalBacktrackingLexerTestLanguage.g:304:40: ( ( '\\r' )? '\\n' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -305,9 +305,9 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalBacktrackingLexerTestLanguage.g:243:41: ( '\\r' )? '\\n'
+                    // PsiInternalBacktrackingLexerTestLanguage.g:304:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalBacktrackingLexerTestLanguage.g:243:41: ( '\\r' )?
+                    // PsiInternalBacktrackingLexerTestLanguage.g:304:41: ( '\\r' )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -316,7 +316,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // PsiInternalBacktrackingLexerTestLanguage.g:243:41: '\\r'
+                            // PsiInternalBacktrackingLexerTestLanguage.g:304:41: '\\r'
                             {
                             match('\r'); 
 

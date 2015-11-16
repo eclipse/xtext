@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -74,6 +76,10 @@ ruleModel:
 						lv_single_1_0=ruleSingleValue
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -86,6 +92,10 @@ ruleModel:
 						lv_multi_2_0=ruleMultiValue
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -98,6 +108,10 @@ ruleModel:
 						lv_single_3_0=ruleSingleDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -110,6 +124,10 @@ ruleModel:
 						lv_multi_4_0=ruleMultiDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -133,6 +151,10 @@ ruleModel:
 						lv_object_6_1=ruleSingleValue
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -141,6 +163,10 @@ ruleModel:
 						lv_object_6_2=ruleMultiValue
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -149,6 +175,10 @@ ruleModel:
 						lv_object_6_3=ruleSingleDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -157,6 +187,10 @@ ruleModel:
 						lv_object_6_4=ruleMultiDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -166,13 +200,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleSingleValue
-entryRuleSingleValue:
+entryRuleSingleValue returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleValueElementType()); }
-	ruleSingleValue
+	iv_ruleSingleValue=ruleSingleValue
+	{ $current=$iv_ruleSingleValue.current; }
 	EOF;
 
 // Rule SingleValue
-ruleSingleValue:
+ruleSingleValue returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -188,6 +224,12 @@ ruleSingleValue:
 						markLeaf(elementTypeProvider.getSingleValue_ValueIDTerminalRuleCall_0_1_0ElementType());
 					}
 					lv_value_1_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_value_1_0);
 					}
@@ -211,6 +253,12 @@ ruleSingleValue:
 						}
 						lv_value_3_1=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_value_3_1);
 						}
 						    |
@@ -218,6 +266,12 @@ ruleSingleValue:
 							markLeaf(elementTypeProvider.getSingleValue_ValueSTRINGTerminalRuleCall_1_1_0_1ElementType());
 						}
 						lv_value_3_2=RULE_STRING
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_value_3_2);
 						}
@@ -241,6 +295,12 @@ ruleSingleValue:
 					}
 					lv_value_5_0=RULE_STRING
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_value_5_0);
 					}
 				)
@@ -250,13 +310,15 @@ ruleSingleValue:
 ;
 
 //Entry rule entryRuleMultiValue
-entryRuleMultiValue:
+entryRuleMultiValue returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMultiValueElementType()); }
-	ruleMultiValue
+	iv_ruleMultiValue=ruleMultiValue
+	{ $current=$iv_ruleMultiValue.current; }
 	EOF;
 
 // Rule MultiValue
-ruleMultiValue:
+ruleMultiValue returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -272,6 +334,12 @@ ruleMultiValue:
 						markLeaf(elementTypeProvider.getMultiValue_ValueIDTerminalRuleCall_0_1_0ElementType());
 					}
 					lv_value_1_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						doneLeaf(lv_value_1_0);
 					}
@@ -295,6 +363,12 @@ ruleMultiValue:
 						}
 						lv_value_3_1=RULE_ID
 						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+						{
 							doneLeaf(lv_value_3_1);
 						}
 						    |
@@ -302,6 +376,12 @@ ruleMultiValue:
 							markLeaf(elementTypeProvider.getMultiValue_ValueSTRINGTerminalRuleCall_1_1_0_1ElementType());
 						}
 						lv_value_3_2=RULE_STRING
+						{
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							doneLeaf(lv_value_3_2);
 						}
@@ -325,6 +405,12 @@ ruleMultiValue:
 					}
 					lv_value_5_0=RULE_STRING
 					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						doneLeaf(lv_value_5_0);
 					}
 				)
@@ -334,13 +420,15 @@ ruleMultiValue:
 ;
 
 //Entry rule entryRuleSingleDatatype
-entryRuleSingleDatatype:
+entryRuleSingleDatatype returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSingleDatatypeElementType()); }
-	ruleSingleDatatype
+	iv_ruleSingleDatatype=ruleSingleDatatype
+	{ $current=$iv_ruleSingleDatatype.current; }
 	EOF;
 
 // Rule SingleDatatype
-ruleSingleDatatype:
+ruleSingleDatatype returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -358,6 +446,10 @@ ruleSingleDatatype:
 					lv_value_1_0=ruleIdDatatype
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -380,6 +472,10 @@ ruleSingleDatatype:
 						lv_value_3_1=ruleIdDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -388,6 +484,10 @@ ruleSingleDatatype:
 						lv_value_3_2=ruleStringDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -410,6 +510,10 @@ ruleSingleDatatype:
 					lv_value_5_0=ruleStringDatatype
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -418,13 +522,15 @@ ruleSingleDatatype:
 ;
 
 //Entry rule entryRuleMultiDatatype
-entryRuleMultiDatatype:
+entryRuleMultiDatatype returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMultiDatatypeElementType()); }
-	ruleMultiDatatype
+	iv_ruleMultiDatatype=ruleMultiDatatype
+	{ $current=$iv_ruleMultiDatatype.current; }
 	EOF;
 
 // Rule MultiDatatype
-ruleMultiDatatype:
+ruleMultiDatatype returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -442,6 +548,10 @@ ruleMultiDatatype:
 					lv_value_1_0=ruleIdDatatype
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -464,6 +574,10 @@ ruleMultiDatatype:
 						lv_value_3_1=ruleIdDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 						    |
 						{
@@ -472,6 +586,10 @@ ruleMultiDatatype:
 						lv_value_3_2=ruleStringDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -494,6 +612,10 @@ ruleMultiDatatype:
 					lv_value_5_0=ruleStringDatatype
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -502,13 +624,15 @@ ruleMultiDatatype:
 ;
 
 //Entry rule entryRuleIdDatatype
-entryRuleIdDatatype:
+entryRuleIdDatatype returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getIdDatatypeElementType()); }
-	ruleIdDatatype
+	iv_ruleIdDatatype=ruleIdDatatype
+	{ $current=$iv_ruleIdDatatype.current; }
 	EOF;
 
 // Rule IdDatatype
-ruleIdDatatype:
+ruleIdDatatype returns [Boolean current=false]
+:
 	{
 		markLeaf(elementTypeProvider.getIdDatatype_IDTerminalRuleCallElementType());
 	}
@@ -519,13 +643,15 @@ ruleIdDatatype:
 ;
 
 //Entry rule entryRuleStringDatatype
-entryRuleStringDatatype:
+entryRuleStringDatatype returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getStringDatatypeElementType()); }
-	ruleStringDatatype
+	iv_ruleStringDatatype=ruleStringDatatype
+	{ $current=$iv_ruleStringDatatype.current; }
 	EOF;
 
 // Rule StringDatatype
-ruleStringDatatype:
+ruleStringDatatype returns [Boolean current=false]
+:
 	{
 		markLeaf(elementTypeProvider.getStringDatatype_STRINGTerminalRuleCallElementType());
 	}

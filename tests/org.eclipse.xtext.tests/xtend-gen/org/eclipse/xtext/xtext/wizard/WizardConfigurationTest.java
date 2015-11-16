@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
@@ -34,7 +36,6 @@ import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.TextFile;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
@@ -217,16 +218,17 @@ public class WizardConfigurationTest {
     this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
     this.config.setSourceLayout(SourceLayout.MAVEN);
     RuntimeProjectDescriptor _runtimeProject_1 = this.config.getRuntimeProject();
-    Iterable<? extends TextFile> _files = _runtimeProject_1.getFiles();
-    final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+    Iterable<? extends AbstractFile> _files = _runtimeProject_1.getFiles();
+    final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
       @Override
-      public Boolean apply(final TextFile it) {
+      public Boolean apply(final AbstractFile it) {
         String _relativePath = it.getRelativePath();
         return Boolean.valueOf(Objects.equal(_relativePath, "pom.xml"));
       }
     };
-    final TextFile pom = IterableExtensions.findFirst(_files, _function);
-    String _content = pom.getContent();
+    final AbstractFile pom = IterableExtensions.findFirst(_files, _function);
+    Assert.assertTrue((pom instanceof PomFile));
+    String _content = ((PomFile) pom).getContent();
     String _string = _content.toString();
     boolean _contains = _string.contains("<artifactId>org.example.mydsl</artifactId>");
     Assert.assertTrue(_contains);
@@ -322,10 +324,10 @@ public class WizardConfigurationTest {
       @Override
       public void apply(final ProjectDescriptor it) {
         it.setEnabled(true);
-        Iterable<? extends TextFile> _files = it.getFiles();
-        final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+        Iterable<? extends AbstractFile> _files = it.getFiles();
+        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
           @Override
-          public Boolean apply(final TextFile it) {
+          public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "pom.xml"));
           }
@@ -352,10 +354,10 @@ public class WizardConfigurationTest {
       @Override
       public void apply(final ProjectDescriptor it) {
         it.setEnabled(true);
-        Iterable<? extends TextFile> _files = it.getFiles();
-        final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+        Iterable<? extends AbstractFile> _files = it.getFiles();
+        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
           @Override
-          public Boolean apply(final TextFile it) {
+          public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "build.gradle"));
           }
@@ -381,20 +383,20 @@ public class WizardConfigurationTest {
       @Override
       public void apply(final ProjectDescriptor it) {
         it.setEnabled(true);
-        Iterable<? extends TextFile> _files = it.getFiles();
-        final Function1<TextFile, Boolean> _function = new Function1<TextFile, Boolean>() {
+        Iterable<? extends AbstractFile> _files = it.getFiles();
+        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
           @Override
-          public Boolean apply(final TextFile it) {
+          public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "MANIFEST.MF"));
           }
         };
         boolean _exists = IterableExtensions.exists(_files, _function);
         Assert.assertTrue(_exists);
-        Iterable<? extends TextFile> _files_1 = it.getFiles();
-        final Function1<TextFile, Boolean> _function_1 = new Function1<TextFile, Boolean>() {
+        Iterable<? extends AbstractFile> _files_1 = it.getFiles();
+        final Function1<AbstractFile, Boolean> _function_1 = new Function1<AbstractFile, Boolean>() {
           @Override
-          public Boolean apply(final TextFile it) {
+          public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "build.properties"));
           }
@@ -856,6 +858,41 @@ public class WizardConfigurationTest {
       @Override
       public void apply(final String it) {
         boolean _contains = it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
+        Assert.assertTrue(_contains);
+      }
+    };
+    IterableExtensions.<String>forEach(_map, _function_1);
+  }
+  
+  @Test
+  public void allBuildSystemsUseOtherJava() {
+    this.config.setJavaVersion(JavaVersion.JAVA8);
+    ParentProjectDescriptor _parentProject = this.config.getParentProject();
+    PomFile _pom = _parentProject.pom();
+    final String parentPom = _pom.getContent();
+    boolean _contains = parentPom.contains("<maven.compiler.source>1.8</maven.compiler.source>");
+    Assert.assertTrue(_contains);
+    boolean _contains_1 = parentPom.contains("<maven.compiler.target>1.8</maven.compiler.target>");
+    Assert.assertTrue(_contains_1);
+    ParentProjectDescriptor _parentProject_1 = this.config.getParentProject();
+    GradleBuildFile _buildGradle = _parentProject_1.buildGradle();
+    final String parentGradle = _buildGradle.getContent();
+    boolean _contains_2 = parentGradle.contains("sourceCompatibility = \'1.8\'");
+    Assert.assertTrue(_contains_2);
+    boolean _contains_3 = parentGradle.contains("targetCompatibility = \'1.8\'");
+    Assert.assertTrue(_contains_3);
+    List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
+    final Function1<ProjectDescriptor, String> _function = new Function1<ProjectDescriptor, String>() {
+      @Override
+      public String apply(final ProjectDescriptor it) {
+        return it.manifest();
+      }
+    };
+    List<String> _map = ListExtensions.map(_allJavaProjects, _function);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
+      @Override
+      public void apply(final String it) {
+        boolean _contains = it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8");
         Assert.assertTrue(_contains);
       }
     };

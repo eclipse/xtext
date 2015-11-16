@@ -11,18 +11,29 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
+import com.google.common.collect.Maps;
+
 public class MapBasedPreferenceValues implements ITypedPreferenceValues, IPreferenceValuesProvider {
 	private final IPreferenceValues delegate;
 	private final Map<String, String> values;
 
+	/**
+	 * Creates preference values that are backed by the given {@code values} {@link Map}.
+	 * The values map is used as is. Subsequent changes to {@code values} will be reflected
+	 * by this preference instance and modifying operations on the preferences will be done
+	 * on the given map.
+	 */
 	public MapBasedPreferenceValues(IPreferenceValues delegate, Map<String, String> values) {
 		this.delegate = delegate;
 		this.values = values;
 	}
 
 	public MapBasedPreferenceValues(Map<String, String> values) {
-		this.delegate = null;
-		this.values = values;
+		this(null, values);
+	}
+	
+	public MapBasedPreferenceValues() {
+		this(null, Maps.<String, String>newLinkedHashMap());
 	}
 
 	public void clear() {

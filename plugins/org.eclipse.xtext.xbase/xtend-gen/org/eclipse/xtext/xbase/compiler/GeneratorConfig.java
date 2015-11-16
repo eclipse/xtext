@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.xbase.compiler.JavaVersion;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**

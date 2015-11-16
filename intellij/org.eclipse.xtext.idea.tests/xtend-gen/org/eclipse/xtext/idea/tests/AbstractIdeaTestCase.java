@@ -12,6 +12,7 @@ import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.Computable;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
@@ -54,10 +55,9 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
       public VirtualFile compute() {
         try {
           String _key = file.getKey();
-          final VirtualFile result = AbstractIdeaTestCase.this.srcFolder.createChildData(null, _key);
+          final VirtualFile result = AbstractIdeaTestCase.this.srcFolder.findOrCreateChildData(AbstractIdeaTestCase.this, _key);
           String _value = file.getValue();
-          byte[] _bytes = _value.getBytes();
-          result.setBinaryContent(_bytes);
+          VfsUtil.saveText(result, _value);
           AbstractIdeaTestCase.this.assertNoCompileErrors(result);
           return result;
         } catch (Throwable _e) {
@@ -83,9 +83,10 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
           final ContentEntry entry = model.addContentEntry(_baseDir);
           Project _project_1 = AbstractIdeaTestCase.this.getProject();
           VirtualFile _baseDir_1 = _project_1.getBaseDir();
-          VirtualFile _createChildDirectory = _baseDir_1.createChildDirectory(null, "src");
-          AbstractIdeaTestCase.this.srcFolder = _createChildDirectory;
-          entry.addSourceFolder(AbstractIdeaTestCase.this.srcFolder, false);
+          VirtualFile _createDirectoryIfMissing = VfsUtil.createDirectoryIfMissing(_baseDir_1, "src");
+          AbstractIdeaTestCase.this.srcFolder = _createDirectoryIfMissing;
+          boolean _isTestSource = AbstractIdeaTestCase.this.isTestSource(AbstractIdeaTestCase.this.srcFolder);
+          entry.addSourceFolder(AbstractIdeaTestCase.this.srcFolder, _isTestSource);
           Module _module_1 = AbstractIdeaTestCase.this.getModule();
           AbstractIdeaTestCase.this.configureModule(_module_1, model, entry);
           model.commit();
@@ -96,6 +97,10 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
       }
     };
     this.<Object>write(_function);
+  }
+  
+  protected boolean isTestSource(final VirtualFile srcFolder) {
+    return false;
   }
   
   protected void assertNoCompileErrors(final VirtualFile file) {

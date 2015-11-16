@@ -8,63 +8,24 @@
 package org.eclipse.xtext.workspace
 
 import java.io.File
-import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 import static extension org.eclipse.xtext.util.UriUtil.*
 import org.eclipse.xtext.util.UriUtil
-
-@FinalFieldsConstructor
-class FileWorkspaceConfig implements IWorkspaceConfig {
-	val File root
-	val Map<String, FileProjectConfig> projects = newHashMap
-
-	def FileProjectConfig addProject(String name) {
-		val project = new FileProjectConfig(this, name)
-		projects.put(project.name, project)
-		project
-	}
-
-	override FileProjectConfig findProjectContaining(URI member) {
-		projects.values.findFirst[project|project.path.isPrefixOf(member)]
-	}
-
-	def getPath() {
-		UriUtil.createFolderURI(root)
-	}
-	
-	override Set<? extends FileProjectConfig> getProjects() {
-		projects.values.toSet
-	}
-
-	override FileProjectConfig findProjectByName(String name) {
-		projects.get(name)
-	}
-
-	override equals(Object obj) {
-		if (obj instanceof FileWorkspaceConfig) {
-			return path == obj.path
-		}
-		return false
-	}
-
-	override hashCode() {
-		path.hashCode
-	}
-	
-	override toString() {
-		'''Workspace («path»)'''
-	}
-
-}
+import org.eclipse.xtend.lib.annotations.Data
 
 @FinalFieldsConstructor
 class FileProjectConfig implements IProjectConfig {
-	val FileWorkspaceConfig parent
+	val File root
 	val String name
 	val Set<FileSourceFolder> sourceFolders = newHashSet
+	
+	new (File file) {
+		this.root = file
+		this.name = root.name
+	}
 
 	def FileSourceFolder addSourceFolder(String relativePath) {
 		val sourceFolder = new FileSourceFolder(this, relativePath)
@@ -81,7 +42,7 @@ class FileProjectConfig implements IProjectConfig {
 	}
 
 	override getPath() {
-		URI.createFileURI(name).resolve(parent.path).appendSegment("")
+		UriUtil.createFolderURI(root)
 	}
 
 	override Set<FileSourceFolder> getSourceFolders() {
@@ -101,6 +62,10 @@ class FileProjectConfig implements IProjectConfig {
 	
 	override toString() {
 		'''Project «name» («path»)'''
+	}
+	
+	override getWorkspaceConfig() {
+		return new SingleProjectWorkspaceConfig(this)
 	}
 
 }
@@ -131,6 +96,27 @@ class FileSourceFolder implements ISourceFolder {
 	
 	override toString() {
 		'''«name» («path»)'''
+	}
+	
+}
+
+@Data
+class SingleProjectWorkspaceConfig implements IWorkspaceConfig {
+	
+	IProjectConfig projectConfig
+	
+	override findProjectByName(String name) {
+		if (projectConfig.name == name)
+			return projectConfig
+	}
+	
+	override findProjectContaining(URI member) {
+		if (projectConfig.path.isPrefixOf(member))
+			return projectConfig
+	}
+	
+	override getProjects() {
+		return #{projectConfig}
 	}
 	
 }

@@ -39,6 +39,9 @@ import org.eclipse.xtext.web.server.persistence.ResourcePersistenceService
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingService
 import org.eclipse.xtext.web.server.validation.ValidationService
 import org.eclipse.xtext.web.server.model.PrecomputedServiceRegistry
+import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues
+import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
 
 /**
  * The entry class for Xtext service invocations. Use {@link #getService(IRequestData, ISessionStore)}
@@ -385,12 +388,26 @@ class XtextServiceDispatcher {
 			hasTextInput = request.parameterKeys.contains('fullText')
 		]
 	}
-	
+
+	/**
+	 * @see FormatterPreferenceKeys
+	 */
 	protected def getFormattingService(IRequestData request, ISessionStore sessionStore)
 			throws InvalidRequestException {
 		val document = getDocumentAccess(request, sessionStore)
 		val selectionStart = request.getInt('selectionStart', Optional.of(0))
 		val selectionEnd = request.getInt('selectionEnd', Optional.of(selectionStart))
+		val lineSeparator = request.getString('lineSeparator', Optional.of(Strings.newLine()))
+		val indentation = request.getString('indentation', Optional.of('\t'))
+		val indentationLength = request.getInt('indentationLength', Optional.of(4))
+		val maxLineWidth = request.getInt('maxLineWidth', Optional.of(120))
+
+		val preferences = new MapBasedPreferenceValues(newLinkedHashMap())
+		preferences.put(FormatterPreferenceKeys.lineSeparator, lineSeparator)
+		preferences.put(FormatterPreferenceKeys.indentation, indentation)
+		preferences.put(FormatterPreferenceKeys.indentationLength, indentationLength)
+		preferences.put(FormatterPreferenceKeys.maxLineWidth, maxLineWidth)
+
 		val selection =
 			if (selectionEnd > selectionStart)
 				new TextRegion(selectionStart, selectionEnd - selectionStart)
@@ -398,7 +415,7 @@ class XtextServiceDispatcher {
 		new ServiceDescriptor => [
 			service = [
 				try {
-					formattingService.format(document, selection)
+					formattingService.format(document, selection, preferences)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}
@@ -474,6 +491,25 @@ class XtextServiceDispatcher {
 		} catch (IOException ioe) {
 			return null
 		}
+	}
+	
+	/**
+	 * Read an string-valued parameter. If the parameter is not available, the
+	 * {@code defaultValue} is returned.
+	 * 
+	 * @throws InvalidRequestException.InvalidParametersException if the parameter
+	 * 		is not available and {@code defaultValue} is absent
+	 */
+	protected def getString(IRequestData request, String key, Optional<String> defaultValue)
+			throws InvalidParametersException {
+		val stringValue = request.getParameter(key)
+		if (stringValue === null) {
+			if (!defaultValue.present) {
+				throw new InvalidParametersException('The parameter \'' + key + '\' must be specified.')
+			}
+			return defaultValue.get
+		}
+		return stringValue
 	}
 	
 	/**

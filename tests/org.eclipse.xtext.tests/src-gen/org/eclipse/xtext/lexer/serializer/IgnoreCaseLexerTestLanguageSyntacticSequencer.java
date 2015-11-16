@@ -40,7 +40,7 @@ public class IgnoreCaseLexerTestLanguageSyntacticSequencer extends AbstractSynta
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Model_FooKeyword_1_q.equals(syntax))
+			if (match_Model_FooKeyword_1_q.equals(syntax))
 				emit_Model_FooKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}

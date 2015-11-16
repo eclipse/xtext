@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.DerivedResourceMarkers.GeneratorIdProvider;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2.IFileCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
+import org.eclipse.xtext.generator.GeneratorContext;
 import org.eclipse.xtext.generator.GeneratorDelegate;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
@@ -548,7 +549,10 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		saveResourceStorage(resource, fileSystemAccess);
 		if (shouldGenerate(resource, context)) {
 			try {
-				generatorDelegate.generate(resource, fileSystemAccess);
+				MonitorBasedCancelIndicator cancelIndicator = new MonitorBasedCancelIndicator(fileSystemAccess.getMonitor());
+				GeneratorContext generatorContext = new GeneratorContext();
+				generatorContext.setCancelIndicator(cancelIndicator);
+				generatorDelegate.generate(resource, fileSystemAccess, generatorContext);
 			} catch (OperationCanceledException e) {
 				// don't look into the cause for OCE
 				throw e;

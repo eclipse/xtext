@@ -36,10 +36,10 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_NL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIndentationAwareTestLanguage.g:170:9: ( ( '\\r' | '\\n' )+ ( '\\t' )* )
-            // PsiInternalIndentationAwareTestLanguage.g:170:11: ( '\\r' | '\\n' )+ ( '\\t' )*
+            // PsiInternalIndentationAwareTestLanguage.g:192:9: ( ( '\\r' | '\\n' )+ ( '\\t' )* )
+            // PsiInternalIndentationAwareTestLanguage.g:192:11: ( '\\r' | '\\n' )+ ( '\\t' )*
             {
-            // PsiInternalIndentationAwareTestLanguage.g:170:11: ( '\\r' | '\\n' )+
+            // PsiInternalIndentationAwareTestLanguage.g:192:11: ( '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {
@@ -77,7 +77,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
                 cnt1++;
             } while (true);
 
-            // PsiInternalIndentationAwareTestLanguage.g:170:24: ( '\\t' )*
+            // PsiInternalIndentationAwareTestLanguage.g:192:24: ( '\\t' )*
             loop2:
             do {
                 int alt2=2;
@@ -90,7 +90,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalIndentationAwareTestLanguage.g:170:24: '\\t'
+            	    // PsiInternalIndentationAwareTestLanguage.g:192:24: '\\t'
             	    {
             	    match('\t'); 
 
@@ -118,8 +118,8 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_BEGIN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIndentationAwareTestLanguage.g:172:12: ( '{' )
-            // PsiInternalIndentationAwareTestLanguage.g:172:14: '{'
+            // PsiInternalIndentationAwareTestLanguage.g:194:12: ( '{' )
+            // PsiInternalIndentationAwareTestLanguage.g:194:14: '{'
             {
             match('{'); 
 
@@ -138,8 +138,8 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIndentationAwareTestLanguage.g:174:10: ( '}' )
-            // PsiInternalIndentationAwareTestLanguage.g:174:12: '}'
+            // PsiInternalIndentationAwareTestLanguage.g:196:10: ( '}' )
+            // PsiInternalIndentationAwareTestLanguage.g:196:12: '}'
             {
             match('}'); 
 
@@ -158,8 +158,8 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalIndentationAwareTestLanguage.g:176:12: ( . )
-            // PsiInternalIndentationAwareTestLanguage.g:176:14: .
+            // PsiInternalIndentationAwareTestLanguage.g:198:12: ( . )
+            // PsiInternalIndentationAwareTestLanguage.g:198:14: .
             {
             matchAny(); 
 

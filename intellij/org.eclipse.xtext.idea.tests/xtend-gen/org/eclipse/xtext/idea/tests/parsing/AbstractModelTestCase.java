@@ -13,7 +13,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -31,6 +30,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -113,8 +113,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   
   protected XtextResource getActualResource() {
     BaseXtextFile _xtextFile = this.getXtextFile();
-    XtextResource _resource = _xtextFile.getResource();
-    return ((XtextResource) _resource);
+    return _xtextFile.getResource();
   }
   
   protected XtextResource createExpectedResource() {
@@ -128,9 +127,8 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
     try {
       BaseXtextFile _xtextFile_1 = this.getXtextFile();
       String _text = _xtextFile_1.getText();
-      byte[] _bytes = _text.getBytes();
-      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_bytes);
-      resource.load(_byteArrayInputStream, null);
+      LazyStringInputStream _lazyStringInputStream = new LazyStringInputStream(_text);
+      resource.load(_lazyStringInputStream, null);
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException e = (IOException)_t;

@@ -4,17 +4,15 @@
 package org.eclipse.xtext.testlanguages.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.testlanguages.lookaheadLang.Entry;
 import org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead0;
@@ -32,8 +30,13 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	private LookaheadTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == LookaheadLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == LookaheadLangPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case LookaheadLangPackage.ENTRY:
 				sequence_Entry(context, (Entry) semanticObject); 
 				return; 
@@ -53,49 +56,59 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				sequence_LookAhead4(context, (LookAhead4) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Entry returns Entry
+	 *
 	 * Constraint:
 	 *     contents+=Alts+
 	 */
-	protected void sequence_Entry(EObject context, Entry semanticObject) {
+	protected void sequence_Entry(ISerializationContext context, Entry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Alts returns LookAhead0
+	 *     LookAhead0 returns LookAhead0
+	 *
 	 * Constraint:
 	 *     x='a'
 	 */
-	protected void sequence_LookAhead0(EObject context, LookAhead0 semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
+	protected void sequence_LookAhead0(ISerializationContext context, LookAhead0 semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.ALTS__X));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), semanticObject.getX());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Alts returns LookAhead1
+	 *     LookAhead1 returns LookAhead1
+	 *
 	 * Constraint:
 	 *     (y=LookAhead2 x='b' z='d')
 	 */
-	protected void sequence_LookAhead1(EObject context, LookAhead1 semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Y) == ValueTransient.YES)
+	protected void sequence_LookAhead1(ISerializationContext context, LookAhead1 semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Y) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Y));
-			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.ALTS__X));
-			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Z) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Z) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD1__Z));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0(), semanticObject.getY());
 		feeder.accept(grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), semanticObject.getX());
 		feeder.accept(grammarAccess.getLookAhead1Access().getZDKeyword_3_0(), semanticObject.getZ());
@@ -104,27 +117,33 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     LookAhead2 returns LookAhead2
+	 *
 	 * Constraint:
 	 *     (z='foo' | z='bar')
 	 */
-	protected void sequence_LookAhead2(EObject context, LookAhead2 semanticObject) {
+	protected void sequence_LookAhead2(ISerializationContext context, LookAhead2 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Alts returns LookAhead3
+	 *     LookAhead3 returns LookAhead3
+	 *
 	 * Constraint:
 	 *     (x='b' z=LookAhead4)
 	 */
-	protected void sequence_LookAhead3(EObject context, LookAhead3 semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
+	protected void sequence_LookAhead3(ISerializationContext context, LookAhead3 semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.ALTS__X) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.ALTS__X));
-			if(transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD3__Z) == ValueTransient.YES)
+			if (transientValues.isValueTransient(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD3__Z) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LookaheadLangPackage.Literals.LOOK_AHEAD3__Z));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getLookAhead3Access().getXBKeyword_2_0(), semanticObject.getX());
 		feeder.accept(grammarAccess.getLookAhead3Access().getZLookAhead4ParserRuleCall_3_0(), semanticObject.getZ());
 		feeder.finish();
@@ -132,10 +151,15 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	
 	
 	/**
+	 * Contexts:
+	 *     LookAhead4 returns LookAhead4
+	 *
 	 * Constraint:
 	 *     (x='c' | x='d')
 	 */
-	protected void sequence_LookAhead4(EObject context, LookAhead4 semanticObject) {
+	protected void sequence_LookAhead4(ISerializationContext context, LookAhead4 semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

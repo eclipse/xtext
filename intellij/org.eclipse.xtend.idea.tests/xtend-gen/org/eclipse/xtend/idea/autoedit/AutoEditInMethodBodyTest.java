@@ -70,6 +70,13 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
   }
   
   @Override
+  public void testCurlyBracesBlock_6() {
+    this.configureByText("{| }");
+    this.myFixture.type("\n");
+    this.assertState("{\n\t\t|\n}");
+  }
+  
+  @Override
   public void testCurlyBracesBlock_11() {
     this.configureByText("{|}");
     this.myFixture.type("\n");
@@ -95,6 +102,20 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
     this.configureByText("/* */\n * |");
     this.myFixture.type("\n");
     this.assertState("/* */\n * \n\t|");
+  }
+  
+  @Override
+  public void testSingleLineComment_01() {
+    this.configureByText("  // test|test");
+    this.myFixture.type("\n");
+    this.assertState("  // test\n\t// |test");
+  }
+  
+  @Override
+  public void testSingleLineComment_02() {
+    this.configureByText("  // test|test\n");
+    this.myFixture.type("\n");
+    this.assertState("  // test\n\t// |test\n");
   }
   
   @Override

@@ -49,18 +49,21 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getModel_ModelAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -92,6 +95,12 @@ ruleModel:
 											{
 												doneLeaf(lv_first_3_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -111,6 +120,12 @@ ruleModel:
 											lv_second_4_0='b'
 											{
 												doneLeaf(lv_second_4_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -157,6 +172,12 @@ ruleModel:
 											{
 												doneLeaf(lv_first_7_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -176,6 +197,12 @@ ruleModel:
 											lv_second_8_0='b'
 											{
 												doneLeaf(lv_second_8_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -197,6 +224,12 @@ ruleModel:
 											{
 												doneLeaf(lv_third_9_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -216,6 +249,12 @@ ruleModel:
 											lv_forth_10_0='d'
 											{
 												doneLeaf(lv_forth_10_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -262,6 +301,12 @@ ruleModel:
 											{
 												doneLeaf(lv_first_13_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -281,6 +326,12 @@ ruleModel:
 											lv_second_14_0='b'
 											{
 												doneLeaf(lv_second_14_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -326,6 +377,12 @@ ruleModel:
 											{
 												doneLeaf(lv_first_17_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -345,6 +402,12 @@ ruleModel:
 											lv_second_18_0='b'
 											{
 												doneLeaf(lv_second_18_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -391,6 +454,12 @@ ruleModel:
 											{
 												doneLeaf(lv_first_21_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -410,6 +479,12 @@ ruleModel:
 											lv_second_22_0='b'
 											{
 												doneLeaf(lv_second_22_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -456,6 +531,12 @@ ruleModel:
 											{
 												doneLeaf(lv_firstAsList_25_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))+
 							{ 
@@ -475,6 +556,12 @@ ruleModel:
 											lv_secondAsList_26_0='b'
 											{
 												doneLeaf(lv_secondAsList_26_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))+
@@ -521,6 +608,12 @@ ruleModel:
 											{
 												doneLeaf(lv_firstAsList_29_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))+
 							{ 
@@ -540,6 +633,12 @@ ruleModel:
 											lv_secondAsList_30_0='b'
 											{
 												doneLeaf(lv_secondAsList_30_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))+
@@ -601,6 +700,12 @@ ruleModel:
 												{
 													doneLeaf(lv_first_35_0);
 												}
+												{
+													if (!$current) {
+														associateWithSemanticElement();
+														$current = true;
+													}
+												}
 											)
 										)
 										))
@@ -636,6 +741,12 @@ ruleModel:
 												lv_second_38_0='d'
 												{
 													doneLeaf(lv_second_38_0);
+												}
+												{
+													if (!$current) {
+														associateWithSemanticElement();
+														$current = true;
+													}
 												}
 											)
 										)
@@ -683,6 +794,12 @@ ruleModel:
 											{
 												doneLeaf(lv_firstAsList_41_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -702,6 +819,12 @@ ruleModel:
 											lv_secondAsList_42_0='b'
 											{
 												doneLeaf(lv_secondAsList_42_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -748,6 +871,12 @@ ruleModel:
 											{
 												doneLeaf(lv_firstAsList_45_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -767,6 +896,12 @@ ruleModel:
 											lv_secondAsList_46_0='b'
 											{
 												doneLeaf(lv_secondAsList_46_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -813,6 +948,12 @@ ruleModel:
 											{
 												doneLeaf(lv_first_49_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -832,6 +973,12 @@ ruleModel:
 											lv_second_50_0='b'
 											{
 												doneLeaf(lv_second_50_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -878,6 +1025,12 @@ ruleModel:
 											{
 												doneLeaf(lv_firstAsList_53_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -897,6 +1050,12 @@ ruleModel:
 											lv_secondAsList_54_0='b'
 											{
 												doneLeaf(lv_secondAsList_54_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -933,6 +1092,12 @@ ruleModel:
 											{
 												doneLeaf(lv_firstAsList_56_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -952,6 +1117,12 @@ ruleModel:
 											lv_secondAsList_57_0='b'
 											{
 												doneLeaf(lv_secondAsList_57_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -998,6 +1169,12 @@ ruleModel:
 											{
 												doneLeaf(lv_firstAsList_60_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -1017,6 +1194,12 @@ ruleModel:
 											lv_secondAsList_61_0='b'
 											{
 												doneLeaf(lv_secondAsList_61_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -1042,6 +1225,12 @@ ruleModel:
 						{
 							doneLeaf(lv_firstAsList_62_0);
 						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 					)
 				)
 				(
@@ -1052,6 +1241,12 @@ ruleModel:
 						lv_secondAsList_63_0='b'
 						{
 							doneLeaf(lv_secondAsList_63_0);
+						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -1096,6 +1291,12 @@ ruleModel:
 																{
 																	doneLeaf(lv_firstAsList_67_0);
 																}
+																{
+																	if (!$current) {
+																		associateWithSemanticElement();
+																		$current = true;
+																	}
+																}
 															)
 															))
 												{ 
@@ -1115,6 +1316,12 @@ ruleModel:
 																lv_secondAsList_68_0='b'
 																{
 																	doneLeaf(lv_secondAsList_68_0);
+																}
+																{
+																	if (!$current) {
+																		associateWithSemanticElement();
+																		$current = true;
+																	}
 																}
 															)
 															))
@@ -1160,6 +1367,12 @@ ruleModel:
 																{
 																	doneLeaf(lv_thirdAsList_70_0);
 																}
+																{
+																	if (!$current) {
+																		associateWithSemanticElement();
+																		$current = true;
+																	}
+																}
 															)
 															))
 												{ 
@@ -1179,6 +1392,12 @@ ruleModel:
 																lv_forthAsList_71_0='d'
 																{
 																	doneLeaf(lv_forthAsList_71_0);
+																}
+																{
+																	if (!$current) {
+																		associateWithSemanticElement();
+																		$current = true;
+																	}
 																}
 															)
 															))
@@ -1226,6 +1445,10 @@ ruleModel:
 						lv_value_73_0=ruleUnorderedDatatype
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -1247,6 +1470,10 @@ ruleModel:
 						lv_serialized_75_0=ruleUnorderedSerialization
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -1268,6 +1495,10 @@ ruleModel:
 						lv_nestedModel_77_0=ruleNestedModel
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)*
@@ -1277,18 +1508,21 @@ ruleModel:
 ;
 
 //Entry rule entryRuleNestedModel
-entryRuleNestedModel:
+entryRuleNestedModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getNestedModelElementType()); }
-	ruleNestedModel
+	iv_ruleNestedModel=ruleNestedModel
+	{ $current=$iv_ruleNestedModel.current; }
 	EOF;
 
 // Rule NestedModel
-ruleNestedModel:
+ruleNestedModel returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getNestedModel_NestedModelAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -1311,6 +1545,12 @@ ruleNestedModel:
 									{
 										doneLeaf(lv_first_2_0);
 									}
+									{
+										if (!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
+									}
 								)
 								))
 					{ 
@@ -1330,6 +1570,12 @@ ruleNestedModel:
 									lv_second_3_0='b'
 									{
 										doneLeaf(lv_second_3_0);
+									}
+									{
+										if (!$current) {
+											associateWithSemanticElement();
+											$current = true;
+										}
 									}
 								)
 								))
@@ -1357,13 +1603,15 @@ ruleNestedModel:
 ;
 
 //Entry rule entryRuleUnorderedDatatype
-entryRuleUnorderedDatatype:
+entryRuleUnorderedDatatype returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedDatatypeElementType()); }
-	ruleUnorderedDatatype
+	iv_ruleUnorderedDatatype=ruleUnorderedDatatype
+	{ $current=$iv_ruleUnorderedDatatype.current; }
 	EOF;
 
 // Rule UnorderedDatatype
-ruleUnorderedDatatype:
+ruleUnorderedDatatype returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -2434,18 +2682,21 @@ ruleUnorderedDatatype:
 ;
 
 //Entry rule entryRuleUnorderedSerialization
-entryRuleUnorderedSerialization:
+entryRuleUnorderedSerialization returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnorderedSerializationElementType()); }
-	ruleUnorderedSerialization
+	iv_ruleUnorderedSerialization=ruleUnorderedSerialization
+	{ $current=$iv_ruleUnorderedSerialization.current; }
 	EOF;
 
 // Rule UnorderedSerialization
-ruleUnorderedSerialization:
+ruleUnorderedSerialization returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getUnorderedSerialization_UnorderedSerializationAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -2477,6 +2728,12 @@ ruleUnorderedSerialization:
 											{
 												doneLeaf(lv_first_3_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 									)?
 									))
@@ -2498,6 +2755,12 @@ ruleUnorderedSerialization:
 										{
 											doneLeaf(lv_second_4_0);
 										}
+										{
+											if (!$current) {
+												associateWithSemanticElement();
+												$current = true;
+											}
+										}
 									)
 									))
 						{ 
@@ -2518,6 +2781,12 @@ ruleUnorderedSerialization:
 										{
 											doneLeaf(lv_third_5_0);
 										}
+										{
+											if (!$current) {
+												associateWithSemanticElement();
+												$current = true;
+											}
+										}
 									)
 									))
 						{ 
@@ -2537,6 +2806,12 @@ ruleUnorderedSerialization:
 										lv_forth_6_0='d'
 										{
 											doneLeaf(lv_forth_6_0);
+										}
+										{
+											if (!$current) {
+												associateWithSemanticElement();
+												$current = true;
+											}
 										}
 									)
 									))
@@ -2582,6 +2857,12 @@ ruleUnorderedSerialization:
 											{
 												doneLeaf(lv_firstAsList_9_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))
 							{ 
@@ -2601,6 +2882,12 @@ ruleUnorderedSerialization:
 											lv_secondAsList_10_0='b'
 											{
 												doneLeaf(lv_secondAsList_10_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))
@@ -2647,6 +2934,12 @@ ruleUnorderedSerialization:
 											{
 												doneLeaf(lv_firstAsList_13_0);
 											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
+											}
 										)
 										))+
 							{ 
@@ -2666,6 +2959,12 @@ ruleUnorderedSerialization:
 											lv_second_14_0='b'
 											{
 												doneLeaf(lv_second_14_0);
+											}
+											{
+												if (!$current) {
+													associateWithSemanticElement();
+													$current = true;
+												}
 											}
 										)
 										))

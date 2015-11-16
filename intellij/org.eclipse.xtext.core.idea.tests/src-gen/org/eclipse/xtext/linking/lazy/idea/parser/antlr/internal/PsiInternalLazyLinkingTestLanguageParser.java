@@ -76,18 +76,24 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalLazyLinkingTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalLazyLinkingTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalLazyLinkingTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalLazyLinkingTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalLazyLinkingTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalLazyLinkingTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -99,19 +105,24 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalLazyLinkingTestLanguage.g:58:1: ruleModel : ( (lv_types_0_0= ruleType ) )* ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalLazyLinkingTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (lv_types_0_0= ruleType ) )* ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_types_0_0 = null;
+
+
         try {
-            // PsiInternalLazyLinkingTestLanguage.g:58:10: ( ( (lv_types_0_0= ruleType ) )* )
-            // PsiInternalLazyLinkingTestLanguage.g:59:2: ( (lv_types_0_0= ruleType ) )*
+            // PsiInternalLazyLinkingTestLanguage.g:60:1: ( ( (lv_types_0_0= ruleType ) )* )
+            // PsiInternalLazyLinkingTestLanguage.g:61:2: ( (lv_types_0_0= ruleType ) )*
             {
-            // PsiInternalLazyLinkingTestLanguage.g:59:2: ( (lv_types_0_0= ruleType ) )*
+            // PsiInternalLazyLinkingTestLanguage.g:61:2: ( (lv_types_0_0= ruleType ) )*
             loop1:
             do {
                 int alt1=2;
@@ -124,21 +135,25 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalLazyLinkingTestLanguage.g:60:3: (lv_types_0_0= ruleType )
+            	    // PsiInternalLazyLinkingTestLanguage.g:62:3: (lv_types_0_0= ruleType )
             	    {
-            	    // PsiInternalLazyLinkingTestLanguage.g:60:3: (lv_types_0_0= ruleType )
-            	    // PsiInternalLazyLinkingTestLanguage.g:61:4: lv_types_0_0= ruleType
+            	    // PsiInternalLazyLinkingTestLanguage.g:62:3: (lv_types_0_0= ruleType )
+            	    // PsiInternalLazyLinkingTestLanguage.g:63:4: lv_types_0_0= ruleType
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_TypesTypeParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleType();
+            	    lv_types_0_0=ruleType();
 
             	    state._fsp--;
 
 
             	    				doneComposite();
+            	    				if(!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
             	    			
 
             	    }
@@ -162,24 +177,30 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleType"
-    // PsiInternalLazyLinkingTestLanguage.g:73:1: entryRuleType : ruleType EOF ;
-    public final void entryRuleType() throws RecognitionException {
+    // PsiInternalLazyLinkingTestLanguage.g:79:1: entryRuleType returns [Boolean current=false] : iv_ruleType= ruleType EOF ;
+    public final Boolean entryRuleType() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleType = null;
+
+
         try {
-            // PsiInternalLazyLinkingTestLanguage.g:73:14: ( ruleType EOF )
-            // PsiInternalLazyLinkingTestLanguage.g:74:2: ruleType EOF
+            // PsiInternalLazyLinkingTestLanguage.g:79:46: (iv_ruleType= ruleType EOF )
+            // PsiInternalLazyLinkingTestLanguage.g:80:2: iv_ruleType= ruleType EOF
             {
              markComposite(elementTypeProvider.getTypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleType();
+            iv_ruleType=ruleType();
 
             state._fsp--;
 
+             current =iv_ruleType; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -191,14 +212,16 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleType"
 
 
     // $ANTLR start "ruleType"
-    // PsiInternalLazyLinkingTestLanguage.g:79:1: ruleType : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}' ) ;
-    public final void ruleType() throws RecognitionException {
+    // PsiInternalLazyLinkingTestLanguage.g:86:1: ruleType returns [Boolean current=false] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}' ) ;
+    public final Boolean ruleType() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
         Token otherlv_2=null;
@@ -211,13 +234,17 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
         Token otherlv_9=null;
         Token otherlv_10=null;
         Token otherlv_13=null;
+        Boolean lv_properties_11_0 = null;
+
+        Boolean lv_unresolvedProxyProperty_12_0 = null;
+
 
         try {
-            // PsiInternalLazyLinkingTestLanguage.g:79:9: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}' ) )
-            // PsiInternalLazyLinkingTestLanguage.g:80:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}' )
+            // PsiInternalLazyLinkingTestLanguage.g:87:1: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}' ) )
+            // PsiInternalLazyLinkingTestLanguage.g:88:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}' )
             {
-            // PsiInternalLazyLinkingTestLanguage.g:80:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}' )
-            // PsiInternalLazyLinkingTestLanguage.g:81:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}'
+            // PsiInternalLazyLinkingTestLanguage.g:88:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}' )
+            // PsiInternalLazyLinkingTestLanguage.g:89:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )? (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )? otherlv_10= '{' ( (lv_properties_11_0= ruleProperty ) )* ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )* otherlv_13= '}'
             {
 
             			markLeaf(elementTypeProvider.getType_TypeKeyword_0ElementType());
@@ -226,16 +253,22 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalLazyLinkingTestLanguage.g:88:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalLazyLinkingTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalLazyLinkingTestLanguage.g:96:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalLazyLinkingTestLanguage.g:97:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalLazyLinkingTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalLazyLinkingTestLanguage.g:90:5: lv_name_1_0= RULE_ID
+            // PsiInternalLazyLinkingTestLanguage.g:97:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalLazyLinkingTestLanguage.g:98:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getType_NameIDTerminalRuleCall_1_0ElementType());
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_1_0);
             				
@@ -245,7 +278,7 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
             }
 
-            // PsiInternalLazyLinkingTestLanguage.g:99:3: (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )?
+            // PsiInternalLazyLinkingTestLanguage.g:113:3: (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -254,7 +287,7 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalLazyLinkingTestLanguage.g:100:4: otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) )
+                    // PsiInternalLazyLinkingTestLanguage.g:114:4: otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) otherlv_4= '.' ( (otherlv_5= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getType_ExtendsKeyword_2_0ElementType());
@@ -263,12 +296,18 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_2);
                     			
-                    // PsiInternalLazyLinkingTestLanguage.g:107:4: ( (otherlv_3= RULE_ID ) )
-                    // PsiInternalLazyLinkingTestLanguage.g:108:5: (otherlv_3= RULE_ID )
+                    // PsiInternalLazyLinkingTestLanguage.g:121:4: ( (otherlv_3= RULE_ID ) )
+                    // PsiInternalLazyLinkingTestLanguage.g:122:5: (otherlv_3= RULE_ID )
                     {
-                    // PsiInternalLazyLinkingTestLanguage.g:108:5: (otherlv_3= RULE_ID )
-                    // PsiInternalLazyLinkingTestLanguage.g:109:6: otherlv_3= RULE_ID
+                    // PsiInternalLazyLinkingTestLanguage.g:122:5: (otherlv_3= RULE_ID )
+                    // PsiInternalLazyLinkingTestLanguage.g:123:6: otherlv_3= RULE_ID
                     {
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
 
                     						markLeaf(elementTypeProvider.getType_ExtendsTypeCrossReference_2_1_0ElementType());
                     					
@@ -289,12 +328,18 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_4);
                     			
-                    // PsiInternalLazyLinkingTestLanguage.g:125:4: ( (otherlv_5= RULE_ID ) )
-                    // PsiInternalLazyLinkingTestLanguage.g:126:5: (otherlv_5= RULE_ID )
+                    // PsiInternalLazyLinkingTestLanguage.g:145:4: ( (otherlv_5= RULE_ID ) )
+                    // PsiInternalLazyLinkingTestLanguage.g:146:5: (otherlv_5= RULE_ID )
                     {
-                    // PsiInternalLazyLinkingTestLanguage.g:126:5: (otherlv_5= RULE_ID )
-                    // PsiInternalLazyLinkingTestLanguage.g:127:6: otherlv_5= RULE_ID
+                    // PsiInternalLazyLinkingTestLanguage.g:146:5: (otherlv_5= RULE_ID )
+                    // PsiInternalLazyLinkingTestLanguage.g:147:6: otherlv_5= RULE_ID
                     {
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
 
                     						markLeaf(elementTypeProvider.getType_ParentIdPropertyCrossReference_2_3_0ElementType());
                     					
@@ -314,7 +359,7 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
             }
 
-            // PsiInternalLazyLinkingTestLanguage.g:137:3: (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )?
+            // PsiInternalLazyLinkingTestLanguage.g:163:3: (otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -323,7 +368,7 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalLazyLinkingTestLanguage.g:138:4: otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) )
+                    // PsiInternalLazyLinkingTestLanguage.g:164:4: otherlv_6= 'for' ( (otherlv_7= RULE_ID ) ) otherlv_8= 'in' ( (otherlv_9= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getType_ForKeyword_3_0ElementType());
@@ -332,12 +377,18 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_6);
                     			
-                    // PsiInternalLazyLinkingTestLanguage.g:145:4: ( (otherlv_7= RULE_ID ) )
-                    // PsiInternalLazyLinkingTestLanguage.g:146:5: (otherlv_7= RULE_ID )
+                    // PsiInternalLazyLinkingTestLanguage.g:171:4: ( (otherlv_7= RULE_ID ) )
+                    // PsiInternalLazyLinkingTestLanguage.g:172:5: (otherlv_7= RULE_ID )
                     {
-                    // PsiInternalLazyLinkingTestLanguage.g:146:5: (otherlv_7= RULE_ID )
-                    // PsiInternalLazyLinkingTestLanguage.g:147:6: otherlv_7= RULE_ID
+                    // PsiInternalLazyLinkingTestLanguage.g:172:5: (otherlv_7= RULE_ID )
+                    // PsiInternalLazyLinkingTestLanguage.g:173:6: otherlv_7= RULE_ID
                     {
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
 
                     						markLeaf(elementTypeProvider.getType_ParentIdPropertyCrossReference_3_1_0ElementType());
                     					
@@ -358,12 +409,18 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
                     				doneLeaf(otherlv_8);
                     			
-                    // PsiInternalLazyLinkingTestLanguage.g:163:4: ( (otherlv_9= RULE_ID ) )
-                    // PsiInternalLazyLinkingTestLanguage.g:164:5: (otherlv_9= RULE_ID )
+                    // PsiInternalLazyLinkingTestLanguage.g:195:4: ( (otherlv_9= RULE_ID ) )
+                    // PsiInternalLazyLinkingTestLanguage.g:196:5: (otherlv_9= RULE_ID )
                     {
-                    // PsiInternalLazyLinkingTestLanguage.g:164:5: (otherlv_9= RULE_ID )
-                    // PsiInternalLazyLinkingTestLanguage.g:165:6: otherlv_9= RULE_ID
+                    // PsiInternalLazyLinkingTestLanguage.g:196:5: (otherlv_9= RULE_ID )
+                    // PsiInternalLazyLinkingTestLanguage.g:197:6: otherlv_9= RULE_ID
                     {
+
+                    						if (!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
 
                     						markLeaf(elementTypeProvider.getType_ExtendsTypeCrossReference_3_3_0ElementType());
                     					
@@ -390,7 +447,7 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
             			doneLeaf(otherlv_10);
             		
-            // PsiInternalLazyLinkingTestLanguage.g:182:3: ( (lv_properties_11_0= ruleProperty ) )*
+            // PsiInternalLazyLinkingTestLanguage.g:220:3: ( (lv_properties_11_0= ruleProperty ) )*
             loop4:
             do {
                 int alt4=2;
@@ -403,21 +460,25 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt4) {
             	case 1 :
-            	    // PsiInternalLazyLinkingTestLanguage.g:183:4: (lv_properties_11_0= ruleProperty )
+            	    // PsiInternalLazyLinkingTestLanguage.g:221:4: (lv_properties_11_0= ruleProperty )
             	    {
-            	    // PsiInternalLazyLinkingTestLanguage.g:183:4: (lv_properties_11_0= ruleProperty )
-            	    // PsiInternalLazyLinkingTestLanguage.g:184:5: lv_properties_11_0= ruleProperty
+            	    // PsiInternalLazyLinkingTestLanguage.g:221:4: (lv_properties_11_0= ruleProperty )
+            	    // PsiInternalLazyLinkingTestLanguage.g:222:5: lv_properties_11_0= ruleProperty
             	    {
 
             	    					markComposite(elementTypeProvider.getType_PropertiesPropertyParserRuleCall_5_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_10);
-            	    ruleProperty();
+            	    lv_properties_11_0=ruleProperty();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -431,7 +492,7 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
                 }
             } while (true);
 
-            // PsiInternalLazyLinkingTestLanguage.g:193:3: ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )*
+            // PsiInternalLazyLinkingTestLanguage.g:235:3: ( (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty ) )*
             loop5:
             do {
                 int alt5=2;
@@ -444,21 +505,25 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt5) {
             	case 1 :
-            	    // PsiInternalLazyLinkingTestLanguage.g:194:4: (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty )
+            	    // PsiInternalLazyLinkingTestLanguage.g:236:4: (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty )
             	    {
-            	    // PsiInternalLazyLinkingTestLanguage.g:194:4: (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty )
-            	    // PsiInternalLazyLinkingTestLanguage.g:195:5: lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty
+            	    // PsiInternalLazyLinkingTestLanguage.g:236:4: (lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty )
+            	    // PsiInternalLazyLinkingTestLanguage.g:237:5: lv_unresolvedProxyProperty_12_0= ruleUnresolvedProxyProperty
             	    {
 
             	    					markComposite(elementTypeProvider.getType_UnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_11);
-            	    ruleUnresolvedProxyProperty();
+            	    lv_unresolvedProxyProperty_12_0=ruleUnresolvedProxyProperty();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -492,24 +557,30 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleType"
 
 
     // $ANTLR start "entryRuleProperty"
-    // PsiInternalLazyLinkingTestLanguage.g:215:1: entryRuleProperty : ruleProperty EOF ;
-    public final void entryRuleProperty() throws RecognitionException {
+    // PsiInternalLazyLinkingTestLanguage.g:261:1: entryRuleProperty returns [Boolean current=false] : iv_ruleProperty= ruleProperty EOF ;
+    public final Boolean entryRuleProperty() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleProperty = null;
+
+
         try {
-            // PsiInternalLazyLinkingTestLanguage.g:215:18: ( ruleProperty EOF )
-            // PsiInternalLazyLinkingTestLanguage.g:216:2: ruleProperty EOF
+            // PsiInternalLazyLinkingTestLanguage.g:261:50: (iv_ruleProperty= ruleProperty EOF )
+            // PsiInternalLazyLinkingTestLanguage.g:262:2: iv_ruleProperty= ruleProperty EOF
             {
              markComposite(elementTypeProvider.getPropertyElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleProperty();
+            iv_ruleProperty=ruleProperty();
 
             state._fsp--;
 
+             current =iv_ruleProperty; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -521,26 +592,28 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleProperty"
 
 
     // $ANTLR start "ruleProperty"
-    // PsiInternalLazyLinkingTestLanguage.g:221:1: ruleProperty : ( ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
-    public final void ruleProperty() throws RecognitionException {
+    // PsiInternalLazyLinkingTestLanguage.g:268:1: ruleProperty returns [Boolean current=false] : ( ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
+    public final Boolean ruleProperty() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_name_1_0=null;
         Token otherlv_2=null;
 
         try {
-            // PsiInternalLazyLinkingTestLanguage.g:221:13: ( ( ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
-            // PsiInternalLazyLinkingTestLanguage.g:222:2: ( ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // PsiInternalLazyLinkingTestLanguage.g:269:1: ( ( ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
+            // PsiInternalLazyLinkingTestLanguage.g:270:2: ( ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
             {
-            // PsiInternalLazyLinkingTestLanguage.g:222:2: ( ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
-            // PsiInternalLazyLinkingTestLanguage.g:223:3: ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
+            // PsiInternalLazyLinkingTestLanguage.g:270:2: ( ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // PsiInternalLazyLinkingTestLanguage.g:271:3: ( (otherlv_0= RULE_ID ) )+ ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
             {
-            // PsiInternalLazyLinkingTestLanguage.g:223:3: ( (otherlv_0= RULE_ID ) )+
+            // PsiInternalLazyLinkingTestLanguage.g:271:3: ( (otherlv_0= RULE_ID ) )+
             int cnt6=0;
             loop6:
             do {
@@ -560,11 +633,17 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt6) {
             	case 1 :
-            	    // PsiInternalLazyLinkingTestLanguage.g:224:4: (otherlv_0= RULE_ID )
+            	    // PsiInternalLazyLinkingTestLanguage.g:272:4: (otherlv_0= RULE_ID )
             	    {
-            	    // PsiInternalLazyLinkingTestLanguage.g:224:4: (otherlv_0= RULE_ID )
-            	    // PsiInternalLazyLinkingTestLanguage.g:225:5: otherlv_0= RULE_ID
+            	    // PsiInternalLazyLinkingTestLanguage.g:272:4: (otherlv_0= RULE_ID )
+            	    // PsiInternalLazyLinkingTestLanguage.g:273:5: otherlv_0= RULE_ID
             	    {
+
+            	    					if (!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
+            	    				
 
             	    					markLeaf(elementTypeProvider.getProperty_TypeTypeCrossReference_0_0ElementType());
             	    				
@@ -588,16 +667,22 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
                 cnt6++;
             } while (true);
 
-            // PsiInternalLazyLinkingTestLanguage.g:234:3: ( (lv_name_1_0= RULE_ID ) )
-            // PsiInternalLazyLinkingTestLanguage.g:235:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalLazyLinkingTestLanguage.g:288:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalLazyLinkingTestLanguage.g:289:4: (lv_name_1_0= RULE_ID )
             {
-            // PsiInternalLazyLinkingTestLanguage.g:235:4: (lv_name_1_0= RULE_ID )
-            // PsiInternalLazyLinkingTestLanguage.g:236:5: lv_name_1_0= RULE_ID
+            // PsiInternalLazyLinkingTestLanguage.g:289:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalLazyLinkingTestLanguage.g:290:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getProperty_NameIDTerminalRuleCall_1_0ElementType());
             				
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_1_0);
             				
@@ -627,24 +712,30 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleProperty"
 
 
     // $ANTLR start "entryRuleUnresolvedProxyProperty"
-    // PsiInternalLazyLinkingTestLanguage.g:256:1: entryRuleUnresolvedProxyProperty : ruleUnresolvedProxyProperty EOF ;
-    public final void entryRuleUnresolvedProxyProperty() throws RecognitionException {
+    // PsiInternalLazyLinkingTestLanguage.g:316:1: entryRuleUnresolvedProxyProperty returns [Boolean current=false] : iv_ruleUnresolvedProxyProperty= ruleUnresolvedProxyProperty EOF ;
+    public final Boolean entryRuleUnresolvedProxyProperty() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleUnresolvedProxyProperty = null;
+
+
         try {
-            // PsiInternalLazyLinkingTestLanguage.g:256:33: ( ruleUnresolvedProxyProperty EOF )
-            // PsiInternalLazyLinkingTestLanguage.g:257:2: ruleUnresolvedProxyProperty EOF
+            // PsiInternalLazyLinkingTestLanguage.g:316:65: (iv_ruleUnresolvedProxyProperty= ruleUnresolvedProxyProperty EOF )
+            // PsiInternalLazyLinkingTestLanguage.g:317:2: iv_ruleUnresolvedProxyProperty= ruleUnresolvedProxyProperty EOF
             {
              markComposite(elementTypeProvider.getUnresolvedProxyPropertyElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleUnresolvedProxyProperty();
+            iv_ruleUnresolvedProxyProperty=ruleUnresolvedProxyProperty();
 
             state._fsp--;
 
+             current =iv_ruleUnresolvedProxyProperty; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -656,25 +747,27 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleUnresolvedProxyProperty"
 
 
     // $ANTLR start "ruleUnresolvedProxyProperty"
-    // PsiInternalLazyLinkingTestLanguage.g:262:1: ruleUnresolvedProxyProperty : (otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' ) ;
-    public final void ruleUnresolvedProxyProperty() throws RecognitionException {
+    // PsiInternalLazyLinkingTestLanguage.g:323:1: ruleUnresolvedProxyProperty returns [Boolean current=false] : (otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' ) ;
+    public final Boolean ruleUnresolvedProxyProperty() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_name_2_0=null;
         Token otherlv_3=null;
 
         try {
-            // PsiInternalLazyLinkingTestLanguage.g:262:28: ( (otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' ) )
-            // PsiInternalLazyLinkingTestLanguage.g:263:2: (otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' )
+            // PsiInternalLazyLinkingTestLanguage.g:324:1: ( (otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' ) )
+            // PsiInternalLazyLinkingTestLanguage.g:325:2: (otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' )
             {
-            // PsiInternalLazyLinkingTestLanguage.g:263:2: (otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' )
-            // PsiInternalLazyLinkingTestLanguage.g:264:3: otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';'
+            // PsiInternalLazyLinkingTestLanguage.g:325:2: (otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';' )
+            // PsiInternalLazyLinkingTestLanguage.g:326:3: otherlv_0= 'unresolved' ( (otherlv_1= RULE_ID ) )+ ( (lv_name_2_0= RULE_ID ) ) otherlv_3= ';'
             {
 
             			markLeaf(elementTypeProvider.getUnresolvedProxyProperty_UnresolvedKeyword_0ElementType());
@@ -683,7 +776,7 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalLazyLinkingTestLanguage.g:271:3: ( (otherlv_1= RULE_ID ) )+
+            // PsiInternalLazyLinkingTestLanguage.g:333:3: ( (otherlv_1= RULE_ID ) )+
             int cnt7=0;
             loop7:
             do {
@@ -703,11 +796,17 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalLazyLinkingTestLanguage.g:272:4: (otherlv_1= RULE_ID )
+            	    // PsiInternalLazyLinkingTestLanguage.g:334:4: (otherlv_1= RULE_ID )
             	    {
-            	    // PsiInternalLazyLinkingTestLanguage.g:272:4: (otherlv_1= RULE_ID )
-            	    // PsiInternalLazyLinkingTestLanguage.g:273:5: otherlv_1= RULE_ID
+            	    // PsiInternalLazyLinkingTestLanguage.g:334:4: (otherlv_1= RULE_ID )
+            	    // PsiInternalLazyLinkingTestLanguage.g:335:5: otherlv_1= RULE_ID
             	    {
+
+            	    					if (!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
+            	    				
 
             	    					markLeaf(elementTypeProvider.getUnresolvedProxyProperty_TypeTypeCrossReference_1_0ElementType());
             	    				
@@ -731,16 +830,22 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
                 cnt7++;
             } while (true);
 
-            // PsiInternalLazyLinkingTestLanguage.g:282:3: ( (lv_name_2_0= RULE_ID ) )
-            // PsiInternalLazyLinkingTestLanguage.g:283:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalLazyLinkingTestLanguage.g:350:3: ( (lv_name_2_0= RULE_ID ) )
+            // PsiInternalLazyLinkingTestLanguage.g:351:4: (lv_name_2_0= RULE_ID )
             {
-            // PsiInternalLazyLinkingTestLanguage.g:283:4: (lv_name_2_0= RULE_ID )
-            // PsiInternalLazyLinkingTestLanguage.g:284:5: lv_name_2_0= RULE_ID
+            // PsiInternalLazyLinkingTestLanguage.g:351:4: (lv_name_2_0= RULE_ID )
+            // PsiInternalLazyLinkingTestLanguage.g:352:5: lv_name_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getUnresolvedProxyProperty_NameIDTerminalRuleCall_2_0ElementType());
             				
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_2_0);
             				
@@ -770,7 +875,7 @@ public class PsiInternalLazyLinkingTestLanguageParser extends AbstractPsiAntlrPa
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleUnresolvedProxyProperty"
 

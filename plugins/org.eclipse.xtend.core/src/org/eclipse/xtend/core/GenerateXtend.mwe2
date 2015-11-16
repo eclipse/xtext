@@ -9,6 +9,7 @@ module org.eclipse.xtend.core.GenerateXtend
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 import org.eclipse.xtext.generator.parser.antlr.*
@@ -41,7 +42,7 @@ Workflow {
 
 	component = XtextGenerator auto-inject {
 		configuration = parser.XtendGeneratorModule {
-			project = WizardConfig auto-inject {
+			project = StandardProjectConfig auto-inject {
 				runtime = {
 					name = runtimeProjectName
 				}
@@ -57,6 +58,7 @@ Workflow {
 					enabled = true
 					root = "../../intellij/org.eclipse.xtend.idea" 
 				}
+				createEclipseMetaData = true
 			}
 			code = {
 				encoding = "ISO-8859-1"
@@ -67,34 +69,28 @@ Workflow {
 		}
 		language = {
 			resourceSet = XtextResourceSet : resourceSet {}
-			standaloneSetup = {
-				loadedResource = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
-				loadedResource = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
-			}
-			uri = "classpath:/org/eclipse/xtend/core/Xtend.xtext"
+			referencedResource = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
+			referencedResource = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
+			name = "org.eclipse.xtend.core.Xtend"
 			fileExtensions = file.extensions
 			guiceModule = parser.XtendLanguageGeneratorModule {}
+			generateXtendStubs = true
 			
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
-			fragment = adapter.FragmentAdapter {
-				fragment = serializer.SerializerFragment {
-					// generateDebugData = true
-				}
+			fragment = serializer.SerializerFragment2 {
+				// generateDebugData = true
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = resourceFactory.ResourceFactoryFragment {
-					fileExtensions = file.extensions
-				}
+			fragment = resourceFactory.ResourceFactoryFragment2 {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
+				removeBacktrackingGuards = true
+				lookaheadThreshold = '5'
+				partialParsing = true
+				debugGrammar = true
+				options = auto-inject {}
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.ParserGenerator auto-inject {
-					options = auto-inject {}
-				}
-			}
-			fragment = adapter.FragmentAdapter {
-				fragment = DebugAntlrGeneratorFragment auto-inject {
-					options = auto-inject {}
-				}
+			fragment = parser.antlr.XtextAntlrGeneratorComparisonFragment auto-inject {
+				registerAdvice = "org::eclipse::xtend::core::parser::AntlrGrammarWithTokens"
+				registerAdvice = "org::eclipse::xtend::core::parser::ContentAssistAntlrGrammarWithTokens"
 			}
 			fragment = validation.ValidatorFragment2 {}
 			fragment = formatting.Formatter2Fragment2 {}
@@ -113,30 +109,19 @@ Workflow {
 			fragment = ui.outline.QuickOutlineFragment2 {}
 
 			fragment = ui.compare.CompareFragment2 {}
-			
+
 			fragment = ui.contentAssist.ContentAssistFragment2 {}
-			fragment = adapter.FragmentAdapter {
-				fragment = parser.ContentAssistParserGenerator auto-inject {
-					removeBacktrackingGuards = true
-					lookaheadThreshold = '5'
-					options = auto-inject {}
-					partialParsing = true
-				}
-			}
-			fragment = adapter.FragmentAdapter {
-				fragment = refactoring.RefactorElementNameFragment {
-					useJdtRefactoring = true
-				}
+
+			fragment = ui.refactoring.RefactorElementNameFragment2 auto-inject {
+				useJdtRefactoring = true
 			}
 			fragment = types.TypesGeneratorFragment2 {}
 			fragment = xbase.XbaseGeneratorFragment2 {
 				generateXtendInferrer = false
 			}
-			fragment = adapter.FragmentAdapter {
-				fragment = templates.CodetemplatesGeneratorFragment {
-					suppressRestriction = false
-				}
-			}
+
+			fragment = ui.templates.CodetemplatesGeneratorFragment2 {}
+
 			fragment = adapter.FragmentAdapter {
 				fragment = parser.JFlexGeneratorFragment auto-inject {
 					patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
