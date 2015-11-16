@@ -1,63 +1,93 @@
 <idea-plugin version="2">
 	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
-		<package uri="http://example.xtext.org/IndentationAwareTestLanguage"
-				 class="org.eclipse.xtext.testlanguages.indent.indentLang.IndentLangPackage"/>
-		<resourceFactory type="indentationawaretestlanguage"
-						 class="org.eclipse.xtext.resource.IResourceFactory"
-						 factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"/>
-		<resourceServiceProvider uriExtension="indentationawaretestlanguage"
-								 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
-								 factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"/>
+		<package
+			uri="http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage"
+			class="org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage"
+		/>
+		<resourceFactory 
+			type="subtestlanguage"
+			class="org.eclipse.xtext.resource.IResourceFactory"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+		/>
+		<resourceServiceProvider
+			uriExtension="subtestlanguage"
+			class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+		/>
 
-		<lang.setup language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-					implementationClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageIdeaSetup"/>
+		<lang.setup
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			implementationClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageIdeaSetup"
+		/>
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.testlanguages.indent.idea.lang.psi.IndentationAwareTestLanguageCodeBlockModificationListener"/>
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.generator.ecore.idea.lang.psi.SubTestLanguageCodeBlockModificationListener"/>
 
-		<fileTypeFactory implementation="org.eclipse.xtext.testlanguages.indent.idea.lang.IndentationAwareTestLanguageFileTypeFactory"/>
-		<stubElementTypeHolder class="org.eclipse.xtext.testlanguages.indent.idea.lang.IndentationAwareTestLanguageElementTypeProvider"/>
-		<lang.ast.factory language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
-		<lang.parserDefinition language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-								implementationClass="org.eclipse.xtext.testlanguages.indent.idea.lang.parser.IndentationAwareTestLanguageParserDefinition"/>
-		<lang.findUsagesProvider language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
-		<lang.refactoringSupport language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
-		<lang.namesValidator language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage" implementationClass="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageSyntaxHighlighterFactory" />
-		<lang.braceMatcher language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
-      	<annotator language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-      							factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
-      	<completion.contributor language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage" implementationClass="org.eclipse.xtext.testlanguages.indent.idea.completion.IndentationAwareTestLanguageCompletionContributor"/>
-      	<pom.declarationSearcher implementation="org.eclipse.xtext.testlanguages.indent.idea.lang.pom.IndentationAwareTestLanguagePomDeclarationSearcher"/>
+		<fileTypeFactory implementation="org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageFileTypeFactory"/>
+		<stubElementTypeHolder class="org.eclipse.xtext.generator.ecore.idea.lang.SubTestLanguageElementTypeProvider"/>
+		<lang.ast.factory 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"
+		/>
+		<lang.parserDefinition 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="org.eclipse.xtext.generator.ecore.idea.lang.parser.SubTestLanguageParserDefinition"
+		/>
+		<lang.findUsagesProvider 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"
+		/>
+		<lang.refactoringSupport 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"
+		/>
+		<lang.namesValidator 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="com.intellij.lang.refactoring.NamesValidator"
+		/>
+		<lang.syntaxHighlighterFactory key="org.eclipse.xtext.generator.ecore.SubTestLanguage" implementationClass="org.eclipse.xtext.generator.ecore.idea.highlighting.SubTestLanguageSyntaxHighlighterFactory" />
+		<lang.braceMatcher 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="com.intellij.lang.PairedBraceMatcher"
+		/>
+		<annotator 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"
+		/>
+		<completion.contributor language="org.eclipse.xtext.generator.ecore.SubTestLanguage" implementationClass="org.eclipse.xtext.generator.ecore.idea.completion.SubTestLanguageCompletionContributor"/>
+		<pom.declarationSearcher implementation="org.eclipse.xtext.generator.ecore.idea.lang.pom.SubTestLanguagePomDeclarationSearcher"/>
 
-      	<lang.psiStructureViewFactory language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-      							factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
-      	<lang.documentationProvider language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-      							factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-      							implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"/>
-		<facetType implementation="org.eclipse.xtext.testlanguages.indent.idea.facet.IndentationAwareTestLanguageFacetType"/>
-		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageColorSettingsPage"/>
-		<highlightVisitor implementation="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageSemanticHighlightVisitor"/>
+		<lang.psiStructureViewFactory 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="com.intellij.lang.PsiStructureViewFactory"
+		/>
+		<facetType implementation="org.eclipse.xtext.generator.ecore.idea.facet.SubTestLanguageFacetType"/>
+      	<lang.documentationProvider 
+      		language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+      		factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+      		implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
+      	/>
+		<colorSettingsPage implementation="org.eclipse.xtext.generator.ecore.idea.highlighting.SubTestLanguageColorSettingsPage"/>
+		<highlightVisitor implementation="org.eclipse.xtext.generator.ecore.idea.highlighting.SubTestLanguageSemanticHighlightVisitor"/>
 
-		<lang.formatter language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-								implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
-		<lang.commenter language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
-								factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
-								implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
+		<lang.formatter 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="com.intellij.formatting.FormattingModelBuilder"
+		/>
+		<lang.commenter 
+			language="org.eclipse.xtext.generator.ecore.SubTestLanguage"
+			factoryClass="org.eclipse.xtext.generator.ecore.idea.SubTestLanguageExtensionFactory"
+			implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"
+		/>
 	</extensions>
 </idea-plugin>
