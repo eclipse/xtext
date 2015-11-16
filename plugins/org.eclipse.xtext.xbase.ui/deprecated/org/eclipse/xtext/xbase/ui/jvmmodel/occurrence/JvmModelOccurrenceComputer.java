@@ -11,6 +11,7 @@ import org.eclipse.xtext.ui.editor.occurrences.DefaultOccurrenceComputer;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @deprecated use {@link DefaultOccurrenceComputer} instead.
  */
 @Deprecated
 public class JvmModelOccurrenceComputer extends DefaultOccurrenceComputer {
