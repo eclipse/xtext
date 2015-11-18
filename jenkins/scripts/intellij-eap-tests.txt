@@ -1,0 +1,1 @@
+clean -PideaBuildId=143.747.5 compileEclipsePlugins :intellij:check
