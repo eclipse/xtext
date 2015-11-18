@@ -62,7 +62,7 @@
       <command>rm -rf buildroot xtend.* repositories/* output
 mkdir buildroot
 mkdir output
-metacity --sm-disable --replace &amp;</command>
+screen -d -m metacity --sm-disable --replace</command>
     </hudson.tasks.Shell>
     <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.31">
       <project>target-platforms-master</project>
