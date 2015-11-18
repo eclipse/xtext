@@ -35,7 +35,7 @@ import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.parser.antlr.LexerBindings
 import org.eclipse.xtext.service.LanguageSpecific
 import org.eclipse.xtext.util.Modules2
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -49,8 +49,10 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import com.google.inject.Injector
+import com.google.inject.Module
 
-class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
+class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 	@Inject extension XtextGeneratorNaming
 	@Inject extension XbaseUsageDetector
 	@Inject ContentAssistGrammarNaming caNaming
@@ -396,15 +398,28 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	}
 	
 	def compileFileType(Grammar grammar) {
-		fileAccessFactory.createXtendFile(grammar.fileType, '''
-			class «grammar.fileType.simpleName» extends «grammar.abstractFileType» {
-				public static final «grammar.fileType.simpleName» INSTANCE = new «grammar.fileType.simpleName»()
-				
-				new() {
-					super(«grammar.ideaLanguage».INSTANCE)
+		if (isGenerateXtendStub) {
+			fileAccessFactory.createXtendFile(grammar.fileType, '''
+				class «grammar.fileType.simpleName» extends «grammar.abstractFileType» {
+					public static final «grammar.fileType.simpleName» INSTANCE = new «grammar.fileType.simpleName»()
+					
+					new() {
+						super(«grammar.ideaLanguage».INSTANCE)
+					}
 				}
-			}
-		''')
+			''')
+		} else {
+			fileAccessFactory.createJavaFile(grammar.fileType, '''
+				public class «grammar.fileType.simpleName» extends «grammar.abstractFileType» {
+					public static final «grammar.fileType.simpleName» INSTANCE = new «grammar.fileType.simpleName»();
+					
+					public «grammar.fileType.simpleName»() {
+						super(«grammar.ideaLanguage».INSTANCE);
+					}
+				}
+			''')
+			
+		}
 	}
 	
 	def compileLanguage(Grammar grammar) {
@@ -422,29 +437,57 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	}
 	
 	def compileStandaloneSetup(Grammar grammar) {
-		fileAccessFactory.createXtendFile(grammar.ideaStandaloneSetup, '''
-			class «grammar.ideaStandaloneSetup.simpleName» extends «grammar.runtimeGenSetup» {
-				override createInjector() {
-					val runtimeModule = new «grammar.runtimeModule»()
-					val ideaModule = new «grammar.ideaModule»()
-					val mergedModule = «Modules2».mixin(runtimeModule, ideaModule)
-					return «Guice».createInjector(mergedModule)
+		if (isGenerateXtendStub) {
+			fileAccessFactory.createXtendFile(grammar.ideaStandaloneSetup, '''
+				class «grammar.ideaStandaloneSetup.simpleName» extends «grammar.runtimeGenSetup» {
+					override createInjector() {
+						val runtimeModule = new «grammar.runtimeModule»()
+						val ideaModule = new «grammar.ideaModule»()
+						val mergedModule = «Modules2».mixin(runtimeModule, ideaModule)
+						return «Guice».createInjector(mergedModule)
+					}
 				}
-			}
-		''')
+			''')
+		} else {
+			fileAccessFactory.createJavaFile(grammar.ideaStandaloneSetup, '''
+				public class «grammar.ideaStandaloneSetup.simpleName» extends «grammar.runtimeGenSetup» {
+					@Override
+					public «Injector» createInjector() {
+						«grammar.runtimeModule» runtimeModule = new «grammar.runtimeModule»();
+						«grammar.ideaModule» ideaModule = new «grammar.ideaModule»();
+						«Module» mergedModule = «Modules2».mixin(runtimeModule, ideaModule);
+						return «Guice».createInjector(mergedModule);
+					}
+				}
+			''')
+		}
 	}
 		
 	def compileIdeaSetup(Grammar grammar) {
-		fileAccessFactory.createXtendFile(grammar.ideaSetup, '''
-			class «grammar.ideaSetup.simpleName» implements «ISetup» {
-			
-				override createInjectorAndDoEMFRegistration() {
-					«"org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries".typeRef».ensureInitialized
-					new «grammar.ideaStandaloneSetup»().createInjector
+		if (generateXtendStub) {
+			fileAccessFactory.createXtendFile(grammar.ideaSetup, '''
+				class «grammar.ideaSetup.simpleName» implements «ISetup» {
+				
+					override createInjectorAndDoEMFRegistration() {
+						«"org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries".typeRef».ensureInitialized
+						new «grammar.ideaStandaloneSetup»().createInjector
+					}
+				
 				}
-			
-			}
-		''')
+			''')
+		} else {
+			fileAccessFactory.createJavaFile(grammar.ideaSetup, '''
+				public class «grammar.ideaSetup.simpleName» implements «ISetup» {
+				
+					@Override
+					public «Injector» createInjectorAndDoEMFRegistration() {
+						«"org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries".typeRef».ensureInitialized();
+						return new «grammar.ideaStandaloneSetup»().createInjector();
+					}
+				
+				}
+			''')
+		}
 	}
 	
 	def compileElementTypeProvider(Grammar grammar) {
@@ -634,7 +677,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 							«IF rule.named»
 							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
 							«ELSE»
-							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
+							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'.typeRef»(node) {};
 							«ENDIF»
 						}
 						«FOR element : rule.EObjectElements»
@@ -642,7 +685,7 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 							«IF element.named»
 							return new «'org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl'.typeRef»(node) {};
 							«ELSE»
-							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'»(node) {};
+							return new «'org.eclipse.xtext.psi.impl.PsiEObjectImpl'.typeRef»(node) {};
 							«ENDIF»
 						}
 						«ENDFOR»
@@ -689,18 +732,35 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	}
 	
 	def JavaFileAccess compileCompletionContributor(Grammar grammar) {
-		fileAccessFactory.createXtendFile(grammar.completionContributor, '''
-			class «grammar.completionContributor.simpleName» extends «grammar.abstractCompletionContributor» {
-				new() {
-					this(«grammar.ideaLanguage».INSTANCE)
+		if (isGenerateXtendStub) {
+			
+			fileAccessFactory.createXtendFile(grammar.completionContributor, '''
+				class «grammar.completionContributor.simpleName» extends «grammar.abstractCompletionContributor» {
+					new() {
+						this(«grammar.ideaLanguage».INSTANCE)
+					}
+					
+					new(«"org.eclipse.xtext.idea.lang.AbstractXtextLanguage".typeRef» lang) {
+						super(lang)
+						//custom rules here
+					}
 				}
-				
-				new(«"org.eclipse.xtext.idea.lang.AbstractXtextLanguage".typeRef» lang) {
-					super(lang)
-					//custom rules here
+			''')
+		} else {
+			
+			fileAccessFactory.createJavaFile(grammar.completionContributor, '''
+				public class «grammar.completionContributor.simpleName» extends «grammar.abstractCompletionContributor» {
+					public «grammar.completionContributor.simpleName»() {
+						this(«grammar.ideaLanguage».INSTANCE);
+					}
+					
+					public «grammar.completionContributor.simpleName»(«"org.eclipse.xtext.idea.lang.AbstractXtextLanguage".typeRef» lang) {
+						super(lang);
+						//custom rules here
+					}
 				}
-			}
-		''')
+			''')
+		}
 	}
 	def TextFileAccess compileServicesISetup(Grammar grammar) {
 		fileAccessFactory.createTextFile(
@@ -710,7 +770,11 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	}
 	
 	def JavaFileAccess compileFacetConfiguration(Grammar grammar) {
-		val file = fileAccessFactory.createXtendFile(grammar.facetConfiguration)
+		val file = if (isGenerateXtendStub) {
+			fileAccessFactory.createXtendFile(grammar.facetConfiguration)
+		} else {
+			fileAccessFactory.createJavaFile(grammar.facetConfiguration)
+		}
 		file.importType("com.intellij.openapi.components.PersistentStateComponent".typeRef)
 		file.importType("com.intellij.openapi.components.State".typeRef)
 		file.importType("com.intellij.openapi.components.Storage".typeRef)
@@ -724,11 +788,18 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 			file.importType("org.eclipse.xtext.idea.facet.GeneratorConfigurationState".typeRef)
 		}
 		file.content = '''
-			@State(name = "«grammar.name»Generator", storages = #[
-					@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-					@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
-							+ "/«grammar.simpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)])
-			class «grammar.facetConfiguration.simpleName» extends «IF grammar.inheritsXbase»XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>«ELSE»AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>«ENDIF»{
+			«IF isGenerateXtendStub»
+				@State(name = "«grammar.name»Generator", storages = #[
+						@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+						@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
+								+ "/«grammar.simpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)])
+			«ELSE»
+				@State(name = "«grammar.name»Generator", storages = {
+						@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+						@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
+								+ "/«grammar.simpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
+			«ENDIF»
+			«IF !isGenerateXtendStub»public«ENDIF» class «grammar.facetConfiguration.simpleName» extends «IF grammar.inheritsXbase»XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>«ELSE»AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>«ENDIF»{
 			
 			}
 		'''
@@ -767,9 +838,16 @@ class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
 	}
 	
 	def JavaFileAccess compileColorSettingsPage(Grammar grammar) {
-		fileAccessFactory.createXtendFile(grammar.colorSettingsPage, '''
-			class «grammar.colorSettingsPage.simpleName» extends «grammar.baseColorSettingsPage» {
-			}
-		''')
+		if (isGenerateXtendStub) {
+			fileAccessFactory.createXtendFile(grammar.colorSettingsPage, '''
+				class «grammar.colorSettingsPage.simpleName» extends «grammar.baseColorSettingsPage» {
+				}
+			''')
+		} else {
+			fileAccessFactory.createJavaFile(grammar.colorSettingsPage, '''
+				public class «grammar.colorSettingsPage.simpleName» extends «grammar.baseColorSettingsPage» {
+				}
+			''')
+		}
 	}
 }
