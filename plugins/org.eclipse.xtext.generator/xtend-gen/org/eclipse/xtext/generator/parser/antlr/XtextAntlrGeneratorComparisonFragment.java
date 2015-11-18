@@ -24,7 +24,6 @@ import org.eclipse.xpand2.output.Output;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.Naming;
@@ -54,6 +53,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammar;
+import org.eclipse.xtext.xtext.generator.parser.antlr.CombinedGrammarMarker;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming;
 
@@ -171,29 +171,29 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
   }
   
   private static class AntlrFragmentHelperEx extends AntlrFragmentHelper {
-    private Naming naming;
+    private Naming oldNaming;
     
-    public AntlrFragmentHelperEx(final Naming naming) {
-      super(naming);
-      this.naming = naming;
+    private GrammarNaming prodNaming;
+    
+    private ContentAssistGrammarNaming caNaming;
+    
+    public AntlrFragmentHelperEx(final Naming oldNaming, final GrammarNaming prodNaming, final ContentAssistGrammarNaming caNaming) {
+      super(oldNaming);
+      this.oldNaming = oldNaming;
+      this.prodNaming = prodNaming;
+      this.caNaming = caNaming;
     }
     
     @Override
     public String getLexerGrammarFileName(final Grammar g) {
-      String _basePackageRuntime = this.naming.basePackageRuntime(g);
-      String _plus = (_basePackageRuntime + ".parser.antlr.internal.Internal");
-      String _simpleName = GrammarUtil.getSimpleName(g);
-      String _plus_1 = (_plus + _simpleName);
-      return (_plus_1 + "Lexer");
+      AntlrGrammar _lexerGrammar = this.prodNaming.getLexerGrammar(g);
+      return _lexerGrammar.getName();
     }
     
     @Override
     public String getContentAssistLexerGrammarFileName(final Grammar g) {
-      String _basePackageIde = this.naming.basePackageIde(g);
-      String _plus = (_basePackageIde + ".contentassist.antlr.internal.Internal");
-      String _simpleName = GrammarUtil.getSimpleName(g);
-      String _plus_1 = (_plus + _simpleName);
-      return (_plus_1 + "Lexer");
+      AntlrGrammar _lexerGrammar = this.caNaming.getLexerGrammar(g);
+      return _lexerGrammar.getName();
     }
   }
   
@@ -452,11 +452,13 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     XtextAntlrGeneratorComparisonFragment.AntlrFragmentHelperEx _xifexpression = null;
     if ((!combined)) {
       Naming _naming = this.getNaming();
-      _xifexpression = new XtextAntlrGeneratorComparisonFragment.AntlrFragmentHelperEx(_naming);
+      _xifexpression = new XtextAntlrGeneratorComparisonFragment.AntlrFragmentHelperEx(_naming, this.productionNaming, this.contentAssistNaming);
     }
     final XtextAntlrGeneratorComparisonFragment.AntlrFragmentHelperEx helper = _xifexpression;
     String template = null;
     Object[] params = null;
+    CombinedGrammarMarker _combinedGrammarMarker = new CombinedGrammarMarker(combined);
+    _combinedGrammarMarker.attachToEmfObject(flattened);
     boolean _and = false;
     boolean _equals = Objects.equal(outlet, Generator.SRC_GEN);
     if (!_equals) {
@@ -468,9 +470,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _and = _notEquals;
     }
     if (_and) {
-      Grammar _grammar_2 = this.getGrammar();
-      boolean _isCombinedGrammar = this.productionNaming.isCombinedGrammar(_grammar_2);
-      if (_isCombinedGrammar) {
+      if (combined) {
         String _name = XtextAntlrGeneratorFragment.class.getName();
         template = _name;
         params = new Object[] { this.options };
@@ -496,9 +496,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
         _and_1 = _notEquals_1;
       }
       if (_and_1) {
-        Grammar _grammar_3 = this.getGrammar();
-        boolean _isCombinedGrammar_1 = this.productionNaming.isCombinedGrammar(_grammar_3);
-        if (_isCombinedGrammar_1) {
+        if (combined) {
           String _name_2 = XtextAntlrUiGeneratorFragment.class.getName();
           template = _name_2;
           Naming _naming_1 = this.getNaming();

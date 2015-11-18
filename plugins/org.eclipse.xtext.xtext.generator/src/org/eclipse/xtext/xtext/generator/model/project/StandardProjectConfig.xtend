@@ -17,6 +17,7 @@ import org.eclipse.xtext.xtext.generator.Issues
 @Accessors
 class StandardProjectConfig extends XtextProjectConfig {
 
+	/** set to {@code true} by the project wizard(s) in case "Maven/Gradle" source layout is selected. */
 	boolean mavenLayout
 	boolean createEclipseMetaData
 	String rootPath
@@ -88,10 +89,19 @@ class StandardProjectConfig extends XtextProjectConfig {
 		rootPath + '/' + project.name
 	}
 
+	/**
+	 * In case of "Maven/Gradle" source layout the src outlet is named 'src/main/java',
+	 * test classes go into 'src/test/java' instead of any dedicated '...tests' project.
+	 */
 	protected def computeSrc(SubProjectConfig project) {
 		project.rootPath + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/java' else 'src'
 	}
 
+	/**
+	 * In case of "Maven/Gradle" source layout the srcGen outlet is named 'src/main/xtext-gen',
+	 * test-related srcGen classes go into 'src/test/xtext-gen' instead of any dedicated '...tests' project.
+	 * Don't confuse it with 'src/main/xtend-gen'!
+	 */
 	protected def computeSrcGen(SubProjectConfig project) {
 		project.rootPath + '/' + if(mavenLayout) 'src/' + project.computeSourceSet + '/xtext-gen' else 'src-gen'
 	}
