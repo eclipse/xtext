@@ -49,8 +49,6 @@ public class ContentAssistTest extends AbstractWebServerTest {
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
     boolean _isHasSideEffects = contentAssist.isHasSideEffects();
     Assert.assertFalse(_isHasSideEffects);
-    boolean _isHasTextInput = contentAssist.isHasTextInput();
-    Assert.assertTrue(_isHasTextInput);
     Function0<? extends IServiceResult> _service = contentAssist.getService();
     IServiceResult _apply = _service.apply();
     final ContentAssistResult result = ((ContentAssistResult) _apply);

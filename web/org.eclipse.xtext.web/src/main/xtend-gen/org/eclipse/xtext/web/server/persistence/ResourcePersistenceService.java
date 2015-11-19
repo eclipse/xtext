@@ -12,7 +12,8 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
-import org.eclipse.xtext.web.server.ISessionStore;
+import org.eclipse.xtext.web.server.IServiceContext;
+import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
@@ -38,16 +39,17 @@ public class ResourcePersistenceService {
   /**
    * Load the content of a document.
    */
-  public ResourceContentResult load(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
+  public ResourceContentResult load(final String resourceId, final IServerResourceHandler resourceHandler, final IServiceContext serviceContext) throws InvalidRequestException {
     ResourceContentResult _xblockexpression = null;
     {
+      ISession _session = serviceContext.getSession();
       Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
       final Function0<XtextWebDocument> _function = new Function0<XtextWebDocument>() {
         @Override
         public XtextWebDocument apply() {
           XtextWebDocument _xtrycatchfinallyexpression = null;
           try {
-            _xtrycatchfinallyexpression = resourceHandler.get(resourceId);
+            _xtrycatchfinallyexpression = resourceHandler.get(resourceId, serviceContext);
           } catch (final Throwable _t) {
             if (_t instanceof IOException) {
               final IOException ioe = (IOException)_t;
@@ -59,7 +61,7 @@ public class ResourcePersistenceService {
           return _xtrycatchfinallyexpression;
         }
       };
-      final XtextWebDocument document = sessionStore.<XtextWebDocument>get(_mappedTo, _function);
+      final XtextWebDocument document = _session.<XtextWebDocument>get(_mappedTo, _function);
       XtextWebDocumentAccess _create = this.documentAccessFactory.create(document, false);
       final CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument> _function_1 = new CancelableUnitOfWork<ResourceContentResult, IXtextWebDocument>() {
         @Override
@@ -78,11 +80,12 @@ public class ResourcePersistenceService {
   /**
    * Revert the content of a document to the last saved state.
    */
-  public ResourceContentResult revert(final String resourceId, final IServerResourceHandler resourceHandler, final ISessionStore sessionStore) throws InvalidRequestException {
+  public ResourceContentResult revert(final String resourceId, final IServerResourceHandler resourceHandler, final IServiceContext serviceContext) throws InvalidRequestException {
     try {
-      final XtextWebDocument document = resourceHandler.get(resourceId);
+      final XtextWebDocument document = resourceHandler.get(resourceId, serviceContext);
+      ISession _session = serviceContext.getSession();
       Pair<Class<XtextWebDocument>, String> _mappedTo = Pair.<Class<XtextWebDocument>, String>of(XtextWebDocument.class, resourceId);
-      sessionStore.put(_mappedTo, document);
+      _session.put(_mappedTo, document);
       String _text = document.getText();
       String _stateId = document.getStateId();
       return new ResourceContentResult(_text, _stateId, false);
@@ -99,12 +102,12 @@ public class ResourcePersistenceService {
   /**
    * Save the content of a document.
    */
-  public DocumentStateResult save(final XtextWebDocumentAccess document, final IServerResourceHandler resourceHandler) throws InvalidRequestException {
+  public DocumentStateResult save(final XtextWebDocumentAccess document, final IServerResourceHandler resourceHandler, final IServiceContext serviceContext) throws InvalidRequestException {
     final CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument> _function = new CancelableUnitOfWork<DocumentStateResult, IXtextWebDocument>() {
       @Override
       public DocumentStateResult exec(final IXtextWebDocument it, final CancelIndicator cancelIndicator) throws Exception {
         try {
-          resourceHandler.put(it);
+          resourceHandler.put(it, serviceContext);
           it.setDirty(false);
         } catch (final Throwable _t) {
           if (_t instanceof IOException) {

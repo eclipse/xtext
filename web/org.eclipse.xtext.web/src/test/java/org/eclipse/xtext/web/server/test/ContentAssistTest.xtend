@@ -32,7 +32,6 @@ class ContentAssistTest extends AbstractWebServerTest {
 				'caretOffset' -> offset.toString
 			})
 		assertFalse(contentAssist.hasSideEffects)
-		assertTrue(contentAssist.hasTextInput)
 		val result = contentAssist.service.apply() as ContentAssistResult
 		assertEquals(expectedResult.toString, result.toString)
 	}

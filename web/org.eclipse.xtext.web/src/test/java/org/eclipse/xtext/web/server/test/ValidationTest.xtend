@@ -18,7 +18,6 @@ class ValidationTest extends AbstractWebServerTest {
 	protected def assertValidationResult(String resourceContent, String expectedResult) {
 		val validate = getService(#{'serviceType' -> 'validate', 'fullText' -> resourceContent})
 		assertFalse(validate.hasSideEffects)
-		assertTrue(validate.hasTextInput)
 		val result = validate.service.apply() as ValidationResult
 		assertEquals(expectedResult, result.toString)
 	}
@@ -75,7 +74,6 @@ class ValidationTest extends AbstractWebServerTest {
 		val file = createFile('stat foo end')
 		val validate = getService(#{'serviceType' -> 'validate', 'resource' -> file.name})
 		assertFalse(validate.hasSideEffects)
-		assertFalse(validate.hasTextInput)
 		val result = validate.service.apply() as ValidationResult
 		val String expectedResult = '''
 			ValidationResult [

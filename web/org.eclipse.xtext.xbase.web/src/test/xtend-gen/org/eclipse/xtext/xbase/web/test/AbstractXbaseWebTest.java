@@ -25,7 +25,7 @@ import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.util.Modules2;
-import org.eclipse.xtext.web.server.ISessionStore;
+import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -34,8 +34,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.web.test.HashMapSessionStore;
-import org.eclipse.xtext.xbase.web.test.MockRequestData;
+import org.eclipse.xtext.xbase.web.test.HashMapSession;
+import org.eclipse.xtext.xbase.web.test.MockServiceContext;
 import org.eclipse.xtext.xbase.web.test.languages.EntitiesWebModule;
 
 @Accessors(AccessorType.PROTECTED_GETTER)
@@ -132,15 +132,15 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
   }
   
   protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters) {
-    HashMapSessionStore _hashMapSessionStore = new HashMapSessionStore();
-    return this.getService(parameters, _hashMapSessionStore);
+    HashMapSession _hashMapSession = new HashMapSession();
+    return this.getService(parameters, _hashMapSession);
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters, final ISessionStore sessionStore) {
+  protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters, final ISession session) {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final MockRequestData requestData = new MockRequestData(parameters);
-      _xblockexpression = this.dispatcher.getService(requestData, sessionStore);
+      final MockServiceContext serviceContext = new MockServiceContext(parameters, session);
+      _xblockexpression = this.dispatcher.getService(serviceContext);
     }
     return _xblockexpression;
   }

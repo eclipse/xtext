@@ -33,8 +33,6 @@ public class HoverTest extends AbstractWebServerTest {
       Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", _string);
       final XtextServiceDispatcher.ServiceDescriptor hover = this.getService(
         Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
-      boolean _isHasTextInput = hover.isHasTextInput();
-      Assert.assertTrue(_isHasTextInput);
       Function0<? extends IServiceResult> _service = hover.getService();
       IServiceResult _apply = _service.apply();
       _xblockexpression = ((HoverResult) _apply);
@@ -55,8 +53,6 @@ public class HoverTest extends AbstractWebServerTest {
       Pair<String, String> _mappedTo_3 = Pair.<String, String>of("proposal", proposal);
       final XtextServiceDispatcher.ServiceDescriptor hover = this.getService(
         Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
-      boolean _isHasTextInput = hover.isHasTextInput();
-      Assert.assertTrue(_isHasTextInput);
       Function0<? extends IServiceResult> _service = hover.getService();
       IServiceResult _apply = _service.apply();
       _xblockexpression = ((HoverResult) _apply);

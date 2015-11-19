@@ -25,11 +25,11 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
-import org.eclipse.xtext.web.server.ISessionStore;
+import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
-import org.eclipse.xtext.web.server.test.HashMapSessionStore;
-import org.eclipse.xtext.web.server.test.MockRequestData;
+import org.eclipse.xtext.web.server.test.HashMapSession;
+import org.eclipse.xtext.web.server.test.MockServiceContext;
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -133,15 +133,15 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   }
   
   protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters) {
-    HashMapSessionStore _hashMapSessionStore = new HashMapSessionStore();
-    return this.getService(parameters, _hashMapSessionStore);
+    HashMapSession _hashMapSession = new HashMapSession();
+    return this.getService(parameters, _hashMapSession);
   }
   
-  protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters, final ISessionStore sessionStore) {
+  protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters, final ISession session) {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final MockRequestData requestData = new MockRequestData(parameters);
-      _xblockexpression = this.dispatcher.getService(requestData, sessionStore);
+      final MockServiceContext requestData = new MockServiceContext(parameters, session);
+      _xblockexpression = this.dispatcher.getService(requestData);
     }
     return _xblockexpression;
   }

@@ -7,18 +7,20 @@
  */
 package org.eclipse.xtext.web.example.jetty
 
+import com.google.inject.Binder
+import com.google.inject.Provider
 import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
-import org.eclipse.xtext.web.example.jetty.contentassist.StatemachineWebContentProposalProvider
+import org.eclipse.xtext.web.example.jetty.resource.StatemachineResourceSetProvider
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineSemanticHighlightingCalculator
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineWebContentProposalProvider
+import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
-import com.google.inject.Binder
-import com.google.inject.Provider
 
 /** 
  * Use this class to register components to be used within the web application.
@@ -29,6 +31,10 @@ class StatemachineWebModule extends AbstractStatemachineWebModule {
 
 	new(Provider<ExecutorService> executorServiceProvider) {
 		super(executorServiceProvider)
+	}
+	
+	def Class<? extends IWebResourceSetProvider> bindIWebResourceSetProvider() {
+		return StatemachineResourceSetProvider
 	}
 
 	def void setResourceBaseProvider(IResourceBaseProvider resourceBaseProvider) {
@@ -42,7 +48,7 @@ class StatemachineWebModule extends AbstractStatemachineWebModule {
 	def Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
 		return FileResourceHandler
 	}
-
+	
 	def Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
 		return StatemachineWebContentProposalProvider
 	}
@@ -54,4 +60,5 @@ class StatemachineWebModule extends AbstractStatemachineWebModule {
 	def Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return StatemachineSemanticHighlightingCalculator
 	}
+	
 }

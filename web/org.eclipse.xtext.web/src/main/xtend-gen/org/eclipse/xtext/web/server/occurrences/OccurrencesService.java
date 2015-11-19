@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.web.server.occurrences;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -14,6 +15,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.TargetURIs;
@@ -79,16 +81,11 @@ public class OccurrencesService {
             @Override
             public void accept(final EObject source, final URI sourceURI, final EReference eReference, final int index, final EObject targetOrProxy, final URI targetURI) {
               final ITextRegion region = OccurrencesService.this._iLocationInFileProvider.getSignificantTextRegion(source, eReference, index);
-              if ((region instanceof TextRegion)) {
-                List<TextRegion> _readRegions = occurrencesResult.getReadRegions();
-                _readRegions.add(((TextRegion)region));
-              } else {
-                List<TextRegion> _readRegions_1 = occurrencesResult.getReadRegions();
-                int _offset = region.getOffset();
-                int _length = region.getLength();
-                TextRegion _textRegion = new TextRegion(_offset, _length);
-                _readRegions_1.add(_textRegion);
-              }
+              List<TextRegion> _readRegions = occurrencesResult.getReadRegions();
+              int _offset = region.getOffset();
+              int _length = region.getLength();
+              TextRegion _textRegion = new TextRegion(_offset, _length);
+              _readRegions.add(_textRegion);
             }
             
             @Override
@@ -98,17 +95,17 @@ public class OccurrencesService {
           XtextResource _resource_1 = it.getResource();
           CancelIndicatorProgressMonitor _cancelIndicatorProgressMonitor = new CancelIndicatorProgressMonitor(cancelIndicator);
           OccurrencesService.this._iReferenceFinder.findReferences(targetURIs, _resource_1, acceptor, _cancelIndicatorProgressMonitor);
-          final ITextRegion definitionRegion = OccurrencesService.this._iLocationInFileProvider.getSignificantTextRegion(element);
-          if (((definitionRegion != null) && (definitionRegion != ITextRegionWithLineInformation.EMPTY_REGION))) {
-            if ((definitionRegion instanceof TextRegion)) {
+          Resource _eResource = element.eResource();
+          XtextResource _resource_2 = it.getResource();
+          boolean _equals = Objects.equal(_eResource, _resource_2);
+          if (_equals) {
+            final ITextRegion definitionRegion = OccurrencesService.this._iLocationInFileProvider.getSignificantTextRegion(element);
+            if (((definitionRegion != null) && (definitionRegion != ITextRegionWithLineInformation.EMPTY_REGION))) {
               List<TextRegion> _writeRegions = occurrencesResult.getWriteRegions();
-              _writeRegions.add(((TextRegion)definitionRegion));
-            } else {
-              List<TextRegion> _writeRegions_1 = occurrencesResult.getWriteRegions();
               int _offset = definitionRegion.getOffset();
               int _length = definitionRegion.getLength();
               TextRegion _textRegion = new TextRegion(_offset, _length);
-              _writeRegions_1.add(_textRegion);
+              _writeRegions.add(_textRegion);
             }
           }
         }

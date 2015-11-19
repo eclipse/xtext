@@ -16,7 +16,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
@@ -32,6 +32,7 @@ public class StaticContentServlet extends HttpServlet {
   
   @Override
   public void init(final ServletConfig config) throws ServletException {
+    super.init(config);
     String disableCache = config.getInitParameter("disableCache");
     if ((disableCache != null)) {
       boolean _parseBoolean = Boolean.parseBoolean(disableCache);
@@ -46,8 +47,7 @@ public class StaticContentServlet extends HttpServlet {
       String _plus = ("/META-INF/resources" + _servletPath);
       String _pathInfo = request.getPathInfo();
       final String resourceURI = (_plus + _pathInfo);
-      Class<? extends StaticContentServlet> _class = this.getClass();
-      final InputStream inputStream = _class.getResourceAsStream(resourceURI);
+      final InputStream inputStream = this.getResourceAsStream(resourceURI);
       if ((inputStream != null)) {
         final String[] tokens = resourceURI.split("/");
         int _length = tokens.length;
@@ -69,8 +69,7 @@ public class StaticContentServlet extends HttpServlet {
           response.setDateHeader("Expires", _plus_1);
           response.addHeader("Cache-Control", ("private, max-age=" + Long.valueOf(StaticContentServlet.DEFAULT_EXPIRE_TIME_S)));
         }
-        HttpSession _session = request.getSession();
-        ServletContext _servletContext = _session.getServletContext();
+        ServletContext _servletContext = request.getServletContext();
         final String mimeType = _servletContext.getMimeType(fileName);
         String _elvis = null;
         if (mimeType != null) {
@@ -87,5 +86,10 @@ public class StaticContentServlet extends HttpServlet {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected InputStream getResourceAsStream(final String resourceURI) {
+    ClassLoader _classLoader = XtextServiceDispatcher.class.getClassLoader();
+    return _classLoader.getResourceAsStream(resourceURI);
   }
 }

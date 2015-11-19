@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.web.example.jetty.contentassist;
+package org.eclipse.xtext.web.example.statemachine.ide;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;

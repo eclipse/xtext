@@ -9,9 +9,10 @@ package org.eclipse.xtext.web.server
 
 /**
  * Provides means to store information that can be accessed for subsequent requests.
- * This allows to improve the server performance by avoiding duplicate computations.
+ * This allows to improve the server performance by avoiding duplicate computations,
+ * and to share resources across multiple service requests.
  */
-interface ISessionStore {
+interface ISession {
 
 	/**
 	 * Get the stored information for the given key. Returns {@code null} if nothing
@@ -40,7 +41,7 @@ interface ISessionStore {
 	/**
 	 * A default implementation that stores nothing.
 	 */
-	static class NullImpl implements ISessionStore {
+	static class NullImpl implements ISession {
 		override <T> get(Object key) {}
 		override <T> get(Object key, ()=>T factory) {factory.apply()}
 		override put(Object key, Object value) {}
