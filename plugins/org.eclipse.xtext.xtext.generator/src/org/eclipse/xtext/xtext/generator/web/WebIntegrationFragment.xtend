@@ -777,12 +777,12 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				«IF !useServlet3Api»
 					
 					<servlet>
-						<servlet-name>StaticContentServlet</servlet-name>
-						<servlet-class>org.eclipse.xtext.web.servlet.StaticContentServlet</servlet-class>
+						<servlet-name>XtextResourcesServlet</servlet-name>
+						<servlet-class>org.eclipse.xtext.web.servlet.XtextResourcesServlet</servlet-class>
 					</servlet>
 					
 					<servlet-mapping>
-						<servlet-name>StaticContentServlet</servlet-name>
+						<servlet-name>XtextResourcesServlet</servlet-name>
 						<url-pattern>/xtext/*</url-pattern>
 					</servlet-mapping>
 					
