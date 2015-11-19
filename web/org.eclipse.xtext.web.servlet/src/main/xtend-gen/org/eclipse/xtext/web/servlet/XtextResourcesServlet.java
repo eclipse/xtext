@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
  * This servlet is required only in servlet containers that do not support the servlet 3.0 API.
  */
 @SuppressWarnings("all")
-public class StaticContentServlet extends HttpServlet {
+public class XtextResourcesServlet extends HttpServlet {
   private final static long DEFAULT_EXPIRE_TIME_MS = 86400000L;
   
   private final static long DEFAULT_EXPIRE_TIME_S = 86400L;
@@ -65,9 +65,9 @@ public class StaticContentServlet extends HttpServlet {
           final String version = tokens[3];
           response.setHeader("ETag", ((fileName + "_") + version));
           long _currentTimeMillis = System.currentTimeMillis();
-          long _plus_1 = (_currentTimeMillis + StaticContentServlet.DEFAULT_EXPIRE_TIME_MS);
+          long _plus_1 = (_currentTimeMillis + XtextResourcesServlet.DEFAULT_EXPIRE_TIME_MS);
           response.setDateHeader("Expires", _plus_1);
-          response.addHeader("Cache-Control", ("private, max-age=" + Long.valueOf(StaticContentServlet.DEFAULT_EXPIRE_TIME_S)));
+          response.addHeader("Cache-Control", ("private, max-age=" + Long.valueOf(XtextResourcesServlet.DEFAULT_EXPIRE_TIME_S)));
         }
         ServletContext _servletContext = request.getServletContext();
         final String mimeType = _servletContext.getMimeType(fileName);
