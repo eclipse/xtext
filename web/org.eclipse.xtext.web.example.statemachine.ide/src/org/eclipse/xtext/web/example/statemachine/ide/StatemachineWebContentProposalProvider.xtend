@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.server.test.languages.contentassist
+package org.eclipse.xtext.web.example.statemachine.ide
 
 import com.google.inject.Inject
 import org.eclipse.xtext.Assignment
@@ -26,7 +26,7 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 			IIdeContentProposalAcceptor acceptor) {
 		switch (ruleCall.rule) {
 			
-			case BOOLEANRule: {
+			case getBOOLEANRule: {
 				if ('true'.startsWith(context.prefix)) {
 					val trueEntry = new ContentAssistEntry => [
 						prefix = context.prefix

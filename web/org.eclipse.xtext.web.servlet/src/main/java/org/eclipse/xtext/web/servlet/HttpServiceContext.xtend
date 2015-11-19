@@ -12,26 +12,22 @@ import java.net.URLDecoder
 import java.nio.charset.Charset
 import java.util.Collections
 import java.util.Map
-import java.util.Set
 import javax.servlet.http.HttpServletRequest
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.web.server.IRequestData
+import org.eclipse.xtext.web.server.IServiceContext
 
 /**
  * Provides the parameters and metadata of an {@link HttpServletRequest}.
  */
-class HttpServletRequestData implements IRequestData {
+class HttpServiceContext implements IServiceContext {
 	
+	@Accessors
 	val HttpServletRequest request
 	
 	val Map<String, String> parameters = newHashMap
 	
-	@Accessors
-	val Set<String> metadataKeys = #{'authType', 'characterEncoding', 'contentType', 'contextPath',
-		'localAddr', 'localName', 'localPort', 'method', 'pathInfo', 'pathTranslated',
-		'protocol', 'queryString', 'remoteAddr', 'remoteHost', 'remotePort', 'remoteUser',
-		'requestedSessionId', 'requestURI', 'scheme', 'serverName', 'serverPort', 'servletPath'}
-
+	HttpSessionWrapper sessionWrapper
+	
 	new(HttpServletRequest request) {
 		this.request = request
 		initializeParameters()
@@ -60,8 +56,8 @@ class HttpServletRequestData implements IRequestData {
             val name = paramNames.nextElement
             parameters.put(name, request.getParameter(name))
         }
-        if (!parameters.containsKey(IRequestData.SERVICE_TYPE))
-        	parameters.put(IRequestData.SERVICE_TYPE, request.pathInfo?.substring(1))
+        if (!parameters.containsKey(IServiceContext.SERVICE_TYPE))
+        	parameters.put(IServiceContext.SERVICE_TYPE, request.pathInfo?.substring(1))
 	}
 	
 	override getParameterKeys() {
@@ -72,31 +68,10 @@ class HttpServletRequestData implements IRequestData {
 		parameters.get(key)
 	}
 	
-	override getMetadata(String key) {
-		switch key {
-			case 'authType': request.authType
-			case 'characterEncoding': request.characterEncoding
-			case 'contentType': request.contentType
-			case 'contextPath': request.contextPath
-			case 'localAddr': request.localAddr
-			case 'localName': request.localName
-			case 'localPort': request.localPort.toString
-			case 'method': request.method
-			case 'pathInfo': request.pathInfo
-			case 'pathTranslated': request.pathTranslated
-			case 'protocol': request.protocol
-			case 'queryString': request.queryString
-			case 'remoteAddr': request.remoteAddr
-			case 'remoteHost': request.remoteHost
-			case 'remotePort': request.remotePort.toString
-			case 'remoteUser': request.remoteUser
-			case 'requestedSessionId': request.requestedSessionId
-			case 'requestURI': request.requestURI
-			case 'scheme': request.scheme
-			case 'serverName': request.serverName
-			case 'serverPort': request.serverPort.toString
-			case 'servletPath': request.servletPath
-		}
+	override getSession() {
+		if (sessionWrapper == null)
+			sessionWrapper = new HttpSessionWrapper(request.getSession(true))
+		return sessionWrapper
 	}
 	
 }

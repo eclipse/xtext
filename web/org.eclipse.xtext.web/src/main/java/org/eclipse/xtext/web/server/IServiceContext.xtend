@@ -12,7 +12,7 @@ import java.util.Set
 /**
  * Provides the parameters and meta data of a service request.
  */
-interface IRequestData {
+interface IServiceContext {
 	
 	/**
 	 * Key for the service type parameter, which determines the actual service to be invoked.
@@ -30,16 +30,12 @@ interface IRequestData {
 	def String getParameter(String key)
 	
 	/**
-	 * The available keys that can be used as arguments to {@link #getMetadata(String)}.
-	 * The returned collection contains all keys that are supported by this implementation,
-	 * but the actual values for some of these keys may be {@code null} because it might
-	 * be too expensive to determine the non-null metadata upfront.
+	 * Returns a session into which information can be stored across multiple requests from
+	 * the same client. If a session does not exist yet, one is created.
+	 * 
+	 * <p><em>Warning:</em> This method may have side effects on the response sent to the client,
+	 * such as adding a session Id.</p>
 	 */
-	def Set<String> getMetadataKeys()
-	
-	/**
-	 * Returns the request metadata for the given key.
-	 */
-	def String getMetadata(String key)
+	def ISession getSession()
 	
 }

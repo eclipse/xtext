@@ -95,7 +95,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 				if (onComplete && result.stateId !== undefined && result.stateId != editorContext.getServerState().stateId) {
 					var listeners = editorContext.updateServerState(currentText, result.stateId);
 					for (var i = 0; i < listeners.length; i++) {
-						self._updateService.addCompletionCallback(listeners[i]);
+						self._updateService.addCompletionCallback(listeners[i], params);
 					}
 				}
 				deferred.resolve(result.entries);
@@ -117,7 +117,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 			},
 			
 			complete: onComplete
-		});
+		}, !params.sendFullText);
 		var result = deferred.promise();
 		if (onComplete) {
 			result.always(function() {

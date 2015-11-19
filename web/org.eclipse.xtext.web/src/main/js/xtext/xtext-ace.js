@@ -39,8 +39,12 @@
  *     Whether validation should be enabled.
  * loadFromServer = true {Boolean}
  *     Whether to load the editor content from the server.
- * parent {String | DOMElement}
+ * parent = 'xtext-editor' {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
+ * parentClass = 'xtext-editor' {String}
+ *     If the 'parent' option is not given, this option is used to find elements that match the given class name.
+ * position {String}
+ *     If this option is set, the 'position' CSS attribute of the created editor is set accordingly.
  * resourceId {String}
  *     The identifier of the resource displayed in the text editor; this option is sent to the server to
  *     communicate required information on the respective resource.
@@ -84,43 +88,35 @@ define([
 	exports.createEditor = function(options) {
 		if (!options)
 			options = {};
-		if (!options.parent)
-			options.parent = 'xtext-editor';
 		
-		var parentsSpec;
-		if (jQuery.isArray(options.parent)) {
-			parentsSpec = options.parent;
+		var query;
+		if (jQuery.type(options.parent) === 'string') {
+			query = jQuery('#' + options.parent, options.document);
+		} else if (options.parent) {
+			query = jQuery(options.parent);
+		} else if (jQuery.type(options.parentClass) === 'string') {
+			query = jQuery('.' + options.parent, options.document);
 		} else {
-			parentsSpec = [options.parent];
-		}
-		var parents = [];
-		var doc = options.document || document;
-		for (var i = 0; i < parentsSpec.length; i++) {
-			var spec = parentsSpec[i];
-			if (typeof(spec) === 'string') {
-				var element = doc.getElementById(spec);
-				if (element)
-					parents.push(element);
-				else
-					parents.concat(doc.getElementsByClassName(options.parent));
-			} else {
-				parents.push(spec);
-			}
+			query = jQuery('#xtext-editor', options.document);
+			if (query.length == 0)
+				query = jQuery('.xtext-editor', options.document);
 		}
 		
 		var editors = [];
-		for (var i = 0; i < parents.length; i++) {
-			var editor = ace.edit(parents[i]);
+		query.each(function(index, parent) {
+			var editor = ace.edit(parent);
 			editor.$blockScrolling = Infinity;
+			if (options.position)
+				jQuery(parent).css('position', options.position);
 			
-			var editorOptions = ServiceBuilder.mergeOptions(parents[i], options);
+			var editorOptions = ServiceBuilder.mergeParentOptions(parent, options);
 			exports.createServices(editor, editorOptions);
 			if (editorOptions.theme)
 				editor.setTheme(editorOptions.theme);
 			else
 				editor.setTheme('ace/theme/eclipse');
-			editors[i] = editor;
-		}
+			editors[index] = editor;
+		});
 		
 		if (editors.length == 1)
 			return editors[0];

@@ -20,7 +20,6 @@ class HoverTest extends AbstractWebServerTest {
 				'fullText' -> content.replace('#', ''),
 				'caretOffset' -> offset.toString
 			})
-		assertTrue(hover.hasTextInput)
 		hover.service.apply() as HoverResult
 	}
 	
@@ -33,7 +32,6 @@ class HoverTest extends AbstractWebServerTest {
 				'caretOffset' -> offset.toString,
 				'proposal' -> proposal
 			})
-		assertTrue(hover.hasTextInput)
 		hover.service.apply() as HoverResult
 	}
 	

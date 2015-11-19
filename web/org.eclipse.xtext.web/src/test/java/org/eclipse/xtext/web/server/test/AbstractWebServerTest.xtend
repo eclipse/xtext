@@ -16,16 +16,16 @@ import java.util.HashMap
 import java.util.List
 import java.util.Map
 import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
-import org.eclipse.xtext.web.server.ISessionStore
+import org.eclipse.xtext.web.server.ISession
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule
-import java.util.concurrent.Executors
 
 @Accessors(PROTECTED_GETTER)
 class AbstractWebServerTest extends AbstractXtextTests {
@@ -78,12 +78,12 @@ class AbstractWebServerTest extends AbstractXtextTests {
 	}
 	
 	protected def getService(Map<String, String> parameters) {
-		getService(parameters, new HashMapSessionStore)
+		getService(parameters, new HashMapSession)
 	}
 	
-	protected def getService(Map<String, String> parameters, ISessionStore sessionStore) {
-		val requestData = new MockRequestData(parameters)
-		dispatcher.getService(requestData, sessionStore)
+	protected def getService(Map<String, String> parameters, ISession session) {
+		val requestData = new MockServiceContext(parameters, session)
+		dispatcher.getService(requestData)
 	}
 	
 }

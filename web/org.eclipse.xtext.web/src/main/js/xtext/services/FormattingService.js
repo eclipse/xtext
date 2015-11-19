@@ -36,7 +36,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 			editorContext.setText(result.formattedText);
 		var listeners = editorContext.updateServerState(editorContext.getText(), result.stateId);
 		for (var i = 0; i < listeners.length; i++) {
-			listeners[i]();
+			listeners[i]({});
 		}
 	};
 	

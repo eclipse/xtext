@@ -20,7 +20,6 @@ class OccurrenceTest extends AbstractWebServerTest {
 				'fullText' -> content.replace('#', ''),
 				'caretOffset' -> offset.toString
 			})
-		assertTrue(occurrences.hasTextInput)
 		occurrences.service.apply() as OccurrencesResult
 	}
 	
@@ -52,7 +51,7 @@ class OccurrenceTest extends AbstractWebServerTest {
 			OccurrencesResult [
 			  stateId = "-80000000"
 			  writeRegions = ArrayList (
-			    TextRegionWithLineInformation [6:3][lineNumber=0, endLineNumber=0]
+			    [6:3]
 			  )
 			  readRegions = ArrayList ()
 			]
@@ -71,11 +70,11 @@ class OccurrenceTest extends AbstractWebServerTest {
 			OccurrencesResult [
 			  stateId = "-80000000"
 			  writeRegions = ArrayList (
-			    TextRegionWithLineInformation [13:3][lineNumber=0, endLineNumber=0]
+			    [13:3]
 			  )
 			  readRegions = ArrayList (
-			    TextRegionWithLineInformation [33:3][lineNumber=2, endLineNumber=2],
-			    TextRegionWithLineInformation [50:3][lineNumber=3, endLineNumber=3]
+			    [33:3],
+			    [50:3]
 			  )
 			]
 		''')
@@ -93,11 +92,11 @@ class OccurrenceTest extends AbstractWebServerTest {
 			OccurrencesResult [
 			  stateId = "-80000000"
 			  writeRegions = ArrayList (
-			    TextRegionWithLineInformation [13:3][lineNumber=0, endLineNumber=0]
+			    [13:3]
 			  )
 			  readRegions = ArrayList (
-			    TextRegionWithLineInformation [33:3][lineNumber=2, endLineNumber=2],
-			    TextRegionWithLineInformation [50:3][lineNumber=3, endLineNumber=3]
+			    [33:3],
+			    [50:3]
 			  )
 			]
 		''')
