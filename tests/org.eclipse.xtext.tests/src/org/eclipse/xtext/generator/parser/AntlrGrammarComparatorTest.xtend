@@ -7,10 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser
 
-import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarComparator
 import org.junit.Test
-
-import static org.junit.Assert.*
 
 /**
  * Contributes unit tests for {@link AntlrGrammarComparator}.
@@ -19,14 +16,8 @@ import static org.junit.Assert.*
  */
 class AntlrGrammarComparatorTest {
 
-	AntlrGrammarComparator comparator = new AntlrGrammarComparator
+	private extension AntlrGrammarComparatorTestHelper = new AntlrGrammarComparatorTestHelper();
 
-	TestErrorHandler errorHandler = new TestErrorHandler
-	
-	private def compare(CharSequence grammar, CharSequence grammarReference) {
-		comparator.compareGrammars(grammar, grammarReference, errorHandler);
-	}
-	
 	/**
 	 * The pattern of "\"" is not expected to occur in ANTLR grammar,
 	 *  so I use it for testing the unmatched token check.
@@ -324,28 +315,157 @@ class AntlrGrammarComparatorTest {
 		
 		testee.compare(expected)		
 	}
-
-
-
-	private static class TestErrorHandler implements AntlrGrammarComparator.IErrorHandler {
+	
+	@Test
+	def void sLCommentIgnoring01() {
+		val testee = '''
+			A: 'A'
+			
+			// rule B
+			B: 'B'
+		'''
 		
-		override handleMismatch(String match, String matchReference, AntlrGrammarComparator.ErrorContext context) {
-			fail('''
-				Inputs differs at token «match» (line «context.testedGrammar.lineNumber»), expected token «
-					matchReference» (line «context.referenceGrammar.lineNumber» ).
-			''')
-		}
+		val expected = '''
+			A: 'A'
+			
+			B: 'B'
+		'''
 		
-		override handleInvalidGeneratedGrammarFile(AntlrGrammarComparator.ErrorContext context) {
-			fail('''
-				Noticed an unmatched character sequence in 'testee' in/before line «context.testedGrammar.lineNumber».
-			''')
-		}
+		testee.compare(expected)
+	}
+	
+	@Test
+	def void sLCommentIgnoring01b() {
+		val testee = '''
+			A: 'A'
+			
+			B: 'B'
+		'''
 		
-		override handleInvalidReferenceGrammarFile(AntlrGrammarComparator.ErrorContext context) {
-			fail('''
-				Noticed an unmatched character sequence in 'expected' in/before line «context.referenceGrammar.lineNumber».
-			''')
-		}
+		val expected = '''
+			A: 'A'
+			
+			// rule B
+			B: 'B'
+		'''
+		
+		testee.compare(expected)
+	}
+	
+	@Test
+	def void mismatchWithSLComment01() {
+		val testee = '''
+			A: 'A'
+			
+			B: 'B'
+		'''
+		
+		val expected = '''
+			A: 'A'
+			
+			// rule B
+			B: 'C'
+		'''
+		
+		testee.compareAndExpectMismatchInLines(expected, 3, 4)
+	}
+	
+	@Test(expected = AssertionError)
+	def void mismatchWithSLComment01b() {
+		val testee = '''
+			A: 'A'
+			
+			B: 'B'
+		'''
+		
+		val expected = '''
+			A: 'A'
+			
+			// rule B
+			B: 'C'
+		'''
+		// expected to fail because of wrong 'lineNoTestee'
+		testee.compareAndExpectMismatchInLines(expected, 4, 4)
+	}
+	
+	@Test
+	def void mLCommentIgnoring01() {
+		val testee = '''
+			A: 'A'
+			
+			/*
+			 * rule B
+			 */
+			B: 'B'
+		'''
+		
+		val expected = '''
+			A: 'A'
+			
+			B: 'B'
+		'''
+		
+		testee.compare(expected)
+	}
+	
+	@Test
+	def void mLCommentIgnoring01b() {
+		val testee = '''
+			A: 'A'
+			
+			B: 'B'
+		'''
+		
+		val expected = '''
+			A: 'A'
+			
+			/*
+			 * rule B
+			 */
+			B: 'B'
+		'''
+		
+		testee.compare(expected)
+	}
+	
+	@Test
+	def void mismatchWithMLComment01() {
+		val testee = '''
+			A: 'A'
+			
+			B: 'B'
+		'''
+		
+		val expected = '''
+			A: 'A'
+			
+			/*
+			 * rule B
+			 */
+			B: 'C'
+		'''
+		
+		testee.compareAndExpectMismatchInLines(expected, 3, 6)
+	}
+	
+	@Test(expected = AssertionError)
+	def void mismatchWithMLComment01b() {
+		val testee = '''
+			A: 'A'
+			
+			B: 'B'
+		'''
+		
+		val expected = '''
+			A: 'A'
+			
+			/*
+			 * rule B
+			 */
+			B: 'C'
+		'''
+		
+		// expected to fail because of wrong 'lineNoExpected'
+		testee.compareAndExpectMismatchInLines(expected, 3, 5)
 	}
 }

@@ -78,12 +78,22 @@ class AntlrGrammarComparator {
 	private static val NEWLINE = "\\r?\\n|\\r"
 	
 	// other white space to be ignored, is distinguished for testing for any unmatched character sequences
-	private static val WS = "( |\\t)+"		
+	private static val WS = "( |\\t)+"
 	
+	// single line comments starting with a '//' and being terminated by the end of the line
+	private static val SL_COMMENT = "//[^\\r\\n]*"
+	
+	// multi line comments start with a '/*', may contain an arbitrary amount of
+	//  '*'s followed by anything else than a '/', and non-'*' characters including newlines and whitespace,
+	//  and end with a '*/' sequence
+	private static val ML_COMMENT = '''/\*(\*[^/]|[^\*])*\*/'''
+	
+	private val p_slComment = Pattern.compile(SL_COMMENT)
+	private val p_mlComment = Pattern.compile(ML_COMMENT)
 	private val p_token = Pattern.compile(TOKEN)
 	private val p_newline = Pattern.compile(NEWLINE)
 	private val p_ws = Pattern.compile(WS)
-	private val compoundPattern = Pattern.compile('''(«TOKEN»)|(«NEWLINE»)|(«WS»)''', Pattern.MULTILINE) 		
+	private val compoundPattern = Pattern.compile('''(«SL_COMMENT»)|(«ML_COMMENT»)|(«TOKEN»)|(«NEWLINE»)|(«WS»)''', Pattern.MULTILINE)
 	
 	private ErrorContext errorContext
 
@@ -159,17 +169,21 @@ class AntlrGrammarComparator {
 			
 			val match = matcher.group()
 			state.previousToken = match
+			state.position = matcher.end
 			
 			if (p_newline.matcher(match).matches()) {
-				state.position = matcher.end
 				state.lineNumber++
 			
-			} else if (p_ws.matcher(match).matches) {
-				state.position = matcher.end
-				
-			} else if (p_token.matcher(match).matches()) {
-				state.position = matcher.end
+			} else if (p_slComment.matcher(match).matches || p_ws.matcher(match).matches) {
+				// do nothing
 			
+			} else if (p_mlComment.matcher(match).matches) {
+				val newlines = p_newline.matcher(match);
+				while (newlines.find) {
+					state.lineNumber++;
+				}
+			
+			} else if (p_token.matcher(match).matches()) {
 				// in case a valid token has been found stop here
 				return true
 			}
