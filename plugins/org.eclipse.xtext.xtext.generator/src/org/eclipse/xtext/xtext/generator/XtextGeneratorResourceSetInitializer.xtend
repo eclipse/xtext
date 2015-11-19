@@ -37,13 +37,13 @@ class XtextGeneratorResourceSetInitializer  {
 		registerEPackages(resourceSet)
 	}
 	
-	private def loadResource(String loadedResource, ResourceSet resourceSet) {
+	private def void loadResource(String loadedResource, ResourceSet resourceSet) {
 		val loadedResourceUri = URI.createURI(loadedResource)
 		ensureResourceCanBeLoaded(loadedResourceUri, resourceSet)
 		resourceSet.getResource(loadedResourceUri, true)
 	}
 	
-	private def ensureResourceCanBeLoaded(URI loadedResource, ResourceSet resourceSet) {
+	private def void ensureResourceCanBeLoaded(URI loadedResource, ResourceSet resourceSet) {
 		switch (loadedResource.fileExtension) {
 			case 'genmodel': {
 				GenModelPackage.eINSTANCE.getEFactoryInstance
@@ -91,22 +91,30 @@ class XtextGeneratorResourceSetInitializer  {
 		}
 	}
 	
-	private def registerEPackages(ResourceSet resourceSet) {
-		resourceSet.resources.map[contents].flatten.filter(EPackage).forEach[registerEPackage]
+	private def void registerEPackages(ResourceSet resourceSet) {
+		resourceSet.each(EPackage) [ register ]
 	}
 	
-	private def registerGenModels(ResourceSet resourceSet) {
-		resourceSet.resources.map[contents].flatten.filter(GenModel).forEach[registerGenModel]
-	}
-	
-	private def registerGenModel(GenModel genModel) {
-		new GenModelHelper().registerGenModel(genModel)
-	}
-	
-	private def registerEPackage(EPackage ePackage) {
+	private def void register(EPackage ePackage) {
 		val registry = ePackage.eResource.resourceSet.packageRegistry
 		if (registry.get(ePackage.nsURI) === null) {
 			registry.put(ePackage.nsURI, ePackage)
+		}
+	}
+	
+	private def void registerGenModels(ResourceSet resourceSet) {
+		resourceSet.each(GenModel) [ register ]
+	}
+	
+	private def void register(GenModel genModel) {
+		new GenModelHelper().registerGenModel(genModel)
+	}
+	
+	private def <Type> void each(ResourceSet resourceSet, Class<Type> type, (Type)=>void strategy) {
+		// don't use forEach loop since the given strategy may trigger additional resource loading
+		for(var i = 0; i < resourceSet.resources.size; i++) {
+			val resource = resourceSet.resources.get(i)
+			resource.contents.filter(type).forEach[ strategy.apply(it) ]
 		}
 	}
 }
