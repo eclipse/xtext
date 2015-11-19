@@ -67,6 +67,9 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   private SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector();
   
   @Accessors
+  private boolean generateSupportForDeprecatedContextEObject = false;
+  
+  @Accessors
   private boolean generateXtendStub;
   
   private Generator2AdapterSetup adapterSetup;
@@ -163,6 +166,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     delegate.setGenerateStub(_isGenerateStub);
     delegate.setDetectSyntheticTerminals(this.detectSyntheticTerminals);
     delegate.setGenerateDebugData(this.generateDebugData);
+    delegate.setGenerateSupportForDeprecatedContextEObject(this.generateSupportForDeprecatedContextEObject);
     Injector _injector = this.adapterSetup.getInjector();
     CodeConfig _instance = _injector.<CodeConfig>getInstance(CodeConfig.class);
     boolean _isGenerateXtendStub = this.isGenerateXtendStub();
@@ -197,6 +201,15 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   
   public void setSyntheticTerminalDetector(final SyntheticTerminalDetector syntheticTerminalDetector) {
     this.syntheticTerminalDetector = syntheticTerminalDetector;
+  }
+  
+  @Pure
+  public boolean isGenerateSupportForDeprecatedContextEObject() {
+    return this.generateSupportForDeprecatedContextEObject;
+  }
+  
+  public void setGenerateSupportForDeprecatedContextEObject(final boolean generateSupportForDeprecatedContextEObject) {
+    this.generateSupportForDeprecatedContextEObject = generateSupportForDeprecatedContextEObject;
   }
   
   @Pure
