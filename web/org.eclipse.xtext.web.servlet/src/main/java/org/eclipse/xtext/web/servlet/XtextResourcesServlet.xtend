@@ -19,7 +19,7 @@ import org.eclipse.xtext.web.server.XtextServiceDispatcher
 /** 
  * This servlet is required only in servlet containers that do not support the servlet 3.0 API.
  */
-class StaticContentServlet extends HttpServlet {
+class XtextResourcesServlet extends HttpServlet {
 	
 	static val DEFAULT_EXPIRE_TIME_MS = 86400000L // 1 day
 	static val DEFAULT_EXPIRE_TIME_S = 86400L     // 1 day
