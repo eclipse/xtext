@@ -90,7 +90,9 @@ configure(ideaPluginProjects) {
 }
 
 configure(ideaTestProjects) {
-	sourceSets.test.java.srcDirs ('src', 'src-gen', 'xtend-gen', 'tests')
+	// 'src-gen2' has been introduced to separate test language sources obtained
+	//  with the new generator from those created by the old one
+	sourceSets.test.java.srcDirs ('src', 'src-gen', 'src-gen2', 'xtend-gen', 'tests')
 	sourceSets.main.java.srcDirs = []
 
 	dependencies {
