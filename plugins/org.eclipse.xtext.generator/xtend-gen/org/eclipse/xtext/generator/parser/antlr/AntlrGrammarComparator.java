@@ -149,6 +149,20 @@ public class AntlrGrammarComparator {
   
   private final static String WS = "( |\\t)+";
   
+  private final static String SL_COMMENT = "//[^\\r\\n]*";
+  
+  private final static String ML_COMMENT = new Function0<String>() {
+    public String apply() {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/\\*(\\*[^/]|[^\\*])*\\*/");
+      return _builder.toString();
+    }
+  }.apply();
+  
+  private final Pattern p_slComment = Pattern.compile(AntlrGrammarComparator.SL_COMMENT);
+  
+  private final Pattern p_mlComment = Pattern.compile(AntlrGrammarComparator.ML_COMMENT);
+  
   private final Pattern p_token = Pattern.compile(AntlrGrammarComparator.TOKEN);
   
   private final Pattern p_newline = Pattern.compile(AntlrGrammarComparator.NEWLINE);
@@ -159,6 +173,10 @@ public class AntlrGrammarComparator {
     public Pattern apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("(");
+      _builder.append(AntlrGrammarComparator.SL_COMMENT, "");
+      _builder.append(")|(");
+      _builder.append(AntlrGrammarComparator.ML_COMMENT, "");
+      _builder.append(")|(");
       _builder.append(AntlrGrammarComparator.TOKEN, "");
       _builder.append(")|(");
       _builder.append(AntlrGrammarComparator.NEWLINE, "");
@@ -252,25 +270,38 @@ public class AntlrGrammarComparator {
         }
         final String match = matcher.group();
         state.previousToken = match;
+        int _end = matcher.end();
+        state.position = _end;
         Matcher _matcher = this.p_newline.matcher(match);
         boolean _matches = _matcher.matches();
         if (_matches) {
-          int _end = matcher.end();
-          state.position = _end;
           state.lineNumber++;
         } else {
-          Matcher _matcher_1 = this.p_ws.matcher(match);
+          boolean _or = false;
+          Matcher _matcher_1 = this.p_slComment.matcher(match);
           boolean _matches_1 = _matcher_1.matches();
           if (_matches_1) {
-            int _end_1 = matcher.end();
-            state.position = _end_1;
+            _or = true;
           } else {
-            Matcher _matcher_2 = this.p_token.matcher(match);
+            Matcher _matcher_2 = this.p_ws.matcher(match);
             boolean _matches_2 = _matcher_2.matches();
-            if (_matches_2) {
-              int _end_2 = matcher.end();
-              state.position = _end_2;
-              return true;
+            _or = _matches_2;
+          }
+          if (_or) {
+          } else {
+            Matcher _matcher_3 = this.p_mlComment.matcher(match);
+            boolean _matches_3 = _matcher_3.matches();
+            if (_matches_3) {
+              final Matcher newlines = this.p_newline.matcher(match);
+              while (newlines.find()) {
+                state.lineNumber++;
+              }
+            } else {
+              Matcher _matcher_4 = this.p_token.matcher(match);
+              boolean _matches_4 = _matcher_4.matches();
+              if (_matches_4) {
+                return true;
+              }
             }
           }
         }
