@@ -27,9 +27,7 @@ import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -53,62 +51,45 @@ public class XtextGeneratorResourceSetInitializer {
     this.registerEPackages(resourceSet);
   }
   
-  private Resource loadResource(final String loadedResource, final ResourceSet resourceSet) {
-    Resource _xblockexpression = null;
-    {
-      final URI loadedResourceUri = URI.createURI(loadedResource);
-      this.ensureResourceCanBeLoaded(loadedResourceUri, resourceSet);
-      _xblockexpression = resourceSet.getResource(loadedResourceUri, true);
-    }
-    return _xblockexpression;
+  private void loadResource(final String loadedResource, final ResourceSet resourceSet) {
+    final URI loadedResourceUri = URI.createURI(loadedResource);
+    this.ensureResourceCanBeLoaded(loadedResourceUri, resourceSet);
+    resourceSet.getResource(loadedResourceUri, true);
   }
   
-  private Object ensureResourceCanBeLoaded(final URI loadedResource, final ResourceSet resourceSet) {
-    Object _switchResult = null;
+  private void ensureResourceCanBeLoaded(final URI loadedResource, final ResourceSet resourceSet) {
     String _fileExtension = loadedResource.fileExtension();
     boolean _matched = false;
     if (!_matched) {
       if (Objects.equal(_fileExtension, "genmodel")) {
         _matched=true;
-        Object _xblockexpression = null;
-        {
-          GenModelPackage.eINSTANCE.getEFactoryInstance();
-          final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
-          Object _xifexpression = null;
-          if ((resourceServiceProvider == null)) {
-            Object _xtrycatchfinallyexpression = null;
-            try {
-              Object _xblockexpression_1 = null;
-              {
-                final Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
-                final Object instance = genModelSupport.newInstance();
-                Method _declaredMethod = genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration");
-                _xblockexpression_1 = _declaredMethod.invoke(instance);
-              }
-              _xtrycatchfinallyexpression = _xblockexpression_1;
-            } catch (final Throwable _t) {
-              if (_t instanceof ClassNotFoundException) {
-                final ClassNotFoundException e = (ClassNotFoundException)_t;
-                XtextGeneratorResourceSetInitializer.LOG.debug("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport not found, GenModels will not be indexed");
-              } else if (_t instanceof Exception) {
-                final Exception e_1 = (Exception)_t;
-                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize GenModel support.", e_1);
-              } else {
-                throw Exceptions.sneakyThrow(_t);
-              }
+        GenModelPackage.eINSTANCE.getEFactoryInstance();
+        final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
+        if ((resourceServiceProvider == null)) {
+          try {
+            final Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
+            final Object instance = genModelSupport.newInstance();
+            Method _declaredMethod = genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration");
+            _declaredMethod.invoke(instance);
+          } catch (final Throwable _t) {
+            if (_t instanceof ClassNotFoundException) {
+              final ClassNotFoundException e = (ClassNotFoundException)_t;
+              XtextGeneratorResourceSetInitializer.LOG.debug("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport not found, GenModels will not be indexed");
+            } else if (_t instanceof Exception) {
+              final Exception e_1 = (Exception)_t;
+              XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize GenModel support.", e_1);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
             }
-            _xifexpression = _xtrycatchfinallyexpression;
           }
-          _xblockexpression = _xifexpression;
         }
-        _switchResult = _xblockexpression;
       }
     }
     if (!_matched) {
       if (Objects.equal(_fileExtension, "ecore")) {
         _matched=true;
-        final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
-        if ((resourceServiceProvider == null)) {
+        final IResourceServiceProvider resourceServiceProvider_1 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
+        if ((resourceServiceProvider_1 == null)) {
           EcoreSupportStandaloneSetup.setup();
         }
       }
@@ -116,117 +97,98 @@ public class XtextGeneratorResourceSetInitializer {
     if (!_matched) {
       if (Objects.equal(_fileExtension, "xcore")) {
         _matched=true;
-        Object _xblockexpression_1 = null;
-        {
-          final IResourceServiceProvider resourceServiceProvider_1 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
-          if ((resourceServiceProvider_1 == null)) {
-            try {
-              final Class<?> xcore = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
-              Method _declaredMethod = xcore.getDeclaredMethod("doSetup", new Class[] {});
-              _declaredMethod.invoke(null);
-            } catch (final Throwable _t) {
-              if (_t instanceof ClassNotFoundException) {
-                final ClassNotFoundException e = (ClassNotFoundException)_t;
-                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support. Is it on the classpath?");
-                String _message = e.getMessage();
-                XtextGeneratorResourceSetInitializer.LOG.debug(_message, e);
-              } else if (_t instanceof Exception) {
-                final Exception e_1 = (Exception)_t;
-                XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support.", e_1);
-              } else {
-                throw Exceptions.sneakyThrow(_t);
-              }
-            }
-          }
-          final URI xcoreLangURI = URI.createPlatformResourceURI("/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore", true);
-          Object _xtrycatchfinallyexpression = null;
+        final IResourceServiceProvider resourceServiceProvider_2 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
+        if ((resourceServiceProvider_2 == null)) {
           try {
-            _xtrycatchfinallyexpression = resourceSet.getResource(xcoreLangURI, true);
+            final Class<?> xcore = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
+            Method _declaredMethod_1 = xcore.getDeclaredMethod("doSetup", new Class[] {});
+            _declaredMethod_1.invoke(null);
           } catch (final Throwable _t_1) {
-            if (_t_1 instanceof WrappedException) {
-              final WrappedException e_2 = (WrappedException)_t_1;
-              boolean _xblockexpression_2 = false;
-              {
-                XtextGeneratorResourceSetInitializer.LOG.error("Could not load XcoreLang.xcore.", e_2);
-                final Resource brokenResource = resourceSet.getResource(xcoreLangURI, false);
-                EList<Resource> _resources = resourceSet.getResources();
-                _xblockexpression_2 = _resources.remove(brokenResource);
-              }
-              _xtrycatchfinallyexpression = Boolean.valueOf(_xblockexpression_2);
+            if (_t_1 instanceof ClassNotFoundException) {
+              final ClassNotFoundException e_2 = (ClassNotFoundException)_t_1;
+              XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support. Is it on the classpath?");
+              String _message = e_2.getMessage();
+              XtextGeneratorResourceSetInitializer.LOG.debug(_message, e_2);
+            } else if (_t_1 instanceof Exception) {
+              final Exception e_3 = (Exception)_t_1;
+              XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support.", e_3);
             } else {
               throw Exceptions.sneakyThrow(_t_1);
             }
           }
-          _xblockexpression_1 = _xtrycatchfinallyexpression;
         }
-        _switchResult = _xblockexpression_1;
+        final URI xcoreLangURI = URI.createPlatformResourceURI("/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore", true);
+        try {
+          resourceSet.getResource(xcoreLangURI, true);
+        } catch (final Throwable _t_2) {
+          if (_t_2 instanceof WrappedException) {
+            final WrappedException e_4 = (WrappedException)_t_2;
+            XtextGeneratorResourceSetInitializer.LOG.error("Could not load XcoreLang.xcore.", e_4);
+            final Resource brokenResource = resourceSet.getResource(xcoreLangURI, false);
+            EList<Resource> _resources = resourceSet.getResources();
+            _resources.remove(brokenResource);
+          } else {
+            throw Exceptions.sneakyThrow(_t_2);
+          }
+        }
       }
     }
-    return _switchResult;
   }
   
   private void registerEPackages(final ResourceSet resourceSet) {
-    EList<Resource> _resources = resourceSet.getResources();
-    final Function1<Resource, EList<EObject>> _function = new Function1<Resource, EList<EObject>>() {
-      @Override
-      public EList<EObject> apply(final Resource it) {
-        return it.getContents();
-      }
-    };
-    List<EList<EObject>> _map = ListExtensions.<Resource, EList<EObject>>map(_resources, _function);
-    Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
-    Iterable<EPackage> _filter = Iterables.<EPackage>filter(_flatten, EPackage.class);
-    final Procedure1<EPackage> _function_1 = new Procedure1<EPackage>() {
+    final Procedure1<EPackage> _function = new Procedure1<EPackage>() {
       @Override
       public void apply(final EPackage it) {
-        XtextGeneratorResourceSetInitializer.this.registerEPackage(it);
+        XtextGeneratorResourceSetInitializer.this.register(it);
       }
     };
-    IterableExtensions.<EPackage>forEach(_filter, _function_1);
+    this.<EPackage>each(resourceSet, EPackage.class, _function);
+  }
+  
+  private void register(final EPackage ePackage) {
+    Resource _eResource = ePackage.eResource();
+    ResourceSet _resourceSet = _eResource.getResourceSet();
+    final EPackage.Registry registry = _resourceSet.getPackageRegistry();
+    String _nsURI = ePackage.getNsURI();
+    Object _get = registry.get(_nsURI);
+    boolean _tripleEquals = (_get == null);
+    if (_tripleEquals) {
+      String _nsURI_1 = ePackage.getNsURI();
+      registry.put(_nsURI_1, ePackage);
+    }
   }
   
   private void registerGenModels(final ResourceSet resourceSet) {
-    EList<Resource> _resources = resourceSet.getResources();
-    final Function1<Resource, EList<EObject>> _function = new Function1<Resource, EList<EObject>>() {
-      @Override
-      public EList<EObject> apply(final Resource it) {
-        return it.getContents();
-      }
-    };
-    List<EList<EObject>> _map = ListExtensions.<Resource, EList<EObject>>map(_resources, _function);
-    Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
-    Iterable<GenModel> _filter = Iterables.<GenModel>filter(_flatten, GenModel.class);
-    final Procedure1<GenModel> _function_1 = new Procedure1<GenModel>() {
+    final Procedure1<GenModel> _function = new Procedure1<GenModel>() {
       @Override
       public void apply(final GenModel it) {
-        XtextGeneratorResourceSetInitializer.this.registerGenModel(it);
+        XtextGeneratorResourceSetInitializer.this.register(it);
       }
     };
-    IterableExtensions.<GenModel>forEach(_filter, _function_1);
+    this.<GenModel>each(resourceSet, GenModel.class, _function);
   }
   
-  private void registerGenModel(final GenModel genModel) {
+  private void register(final GenModel genModel) {
     GenModelHelper _genModelHelper = new GenModelHelper();
     _genModelHelper.registerGenModel(genModel);
   }
   
-  private Object registerEPackage(final EPackage ePackage) {
-    Object _xblockexpression = null;
-    {
-      Resource _eResource = ePackage.eResource();
-      ResourceSet _resourceSet = _eResource.getResourceSet();
-      final EPackage.Registry registry = _resourceSet.getPackageRegistry();
-      Object _xifexpression = null;
-      String _nsURI = ePackage.getNsURI();
-      Object _get = registry.get(_nsURI);
-      boolean _tripleEquals = (_get == null);
-      if (_tripleEquals) {
-        String _nsURI_1 = ePackage.getNsURI();
-        _xifexpression = registry.put(_nsURI_1, ePackage);
+  private <Type extends Object> void each(final ResourceSet resourceSet, final Class<Type> type, final Procedure1<? super Type> strategy) {
+    for (int i = 0; (i < resourceSet.getResources().size()); i++) {
+      {
+        EList<Resource> _resources = resourceSet.getResources();
+        final Resource resource = _resources.get(i);
+        EList<EObject> _contents = resource.getContents();
+        Iterable<Type> _filter = Iterables.<Type>filter(_contents, type);
+        final Procedure1<Type> _function = new Procedure1<Type>() {
+          @Override
+          public void apply(final Type it) {
+            strategy.apply(it);
+          }
+        };
+        IterableExtensions.<Type>forEach(_filter, _function);
       }
-      _xblockexpression = _xifexpression;
     }
-    return _xblockexpression;
   }
   
   private final static Logger LOG = Logger.getLogger(XtextGeneratorResourceSetInitializer.class);
