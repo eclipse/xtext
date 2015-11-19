@@ -8,8 +8,10 @@
 package org.eclipse.xtext.web.server.model
 
 import com.google.inject.ImplementedBy
+import com.google.inject.Inject
+import com.google.inject.Provider
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.web.server.IServiceContext
 
 /**
  * Provider for resource set instances.
@@ -17,15 +19,22 @@ import org.eclipse.xtext.resource.XtextResourceSet
 @ImplementedBy(DefaultImpl)
 interface IWebResourceSetProvider {
 	
-	def ResourceSet get(String resourceId)
+	/**
+	 * Provides a resource set. The resourceId may be {@code null}, which means that the
+	 * request should be processed in stateless mode. Fetching the session from the service
+	 * context should be avoided in this case.
+	 */
+	def ResourceSet get(String resourceId, IServiceContext serviceContext)
 	
 	/**
 	 * The default implementation creates a new resource set for each resource.
 	 */
 	class DefaultImpl implements IWebResourceSetProvider {
 		
-		override get(String resourceId) {
-			return new XtextResourceSet
+		@Inject Provider<ResourceSet> provider
+		
+		override get(String resourceId, IServiceContext serviceContext) {
+			provider.get
 		}
 		
 	}

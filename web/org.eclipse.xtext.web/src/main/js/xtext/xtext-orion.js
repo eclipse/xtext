@@ -14,6 +14,10 @@
  *
  * baseUrl = "/" {String}
  *     The path segment where the Xtext service is found; see serviceUrl option.
+ * contentAssistCharTriggers {String}
+ *     Characters that invoke the content assist service when typed (see Orion documentation).
+ * contentAssistExcludedStyles {String}
+ *     Excluded styles for character triggers (see Orion documentation).
  * contentType {String}
  *     The content type included in requests to the Xtext server.
  * dirtyElement {String | DOMElement}
@@ -45,8 +49,10 @@
  *     Whether to load the editor content from the server.
  * mouseHoverDelay = 500 {Number}
  *     The number of milliseconds to wait after a mouse hover before the information tooltip is displayed.
- * parent {String | DOMElement}
- *     The parent element for the view; it can be either a DOM element or an ID or class name for a DOM element.
+ * parent = 'xtext-editor' {String | DOMElement}
+ *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
+ * parentClass = 'xtext-editor' {String}
+ *     If the 'parent' option is not given, this option is used to find elements that match the given class name.
  * resourceId {String}
  *     The identifier of the resource displayed in the text editor; this option is sent to the server to
  *     communicate required information on the respective resource.
@@ -91,50 +97,35 @@ define([
 	exports.createEditor = function(options) {
 		if (!options)
 			options = {};
-		if (!options.parent)
-			options.parent = 'xtext-editor';
 		
-		var parentsSpec;
-		if (jQuery.isArray(options.parent)) {
-			parentsSpec = options.parent;
+		var query;
+		if (jQuery.type(options.parent) === 'string') {
+			query = jQuery('#' + options.parent, options.document);
+		} else if (options.parent) {
+			query = jQuery(options.parent);
+		} else if (jQuery.type(options.parentClass) === 'string') {
+			query = jQuery('.' + options.parent, options.document);
 		} else {
-			parentsSpec = [options.parent];
-		}
-		var parents = [];
-		var doc = options.document || document;
-		for (var i = 0; i < parentsSpec.length; i++) {
-			var spec = parentsSpec[i];
-			if (typeof(spec) === 'string') {
-				var element = doc.getElementById(spec);
-				if (element) {
-					parents.push(element);
-				} else {
-					var elements = doc.getElementsByClassName(options.parent);
-					for (var j = 0; j < elements.length; j++) {
-						parents.push(elements[j]);
-					}
-				}
-			} else {
-				parents.push(spec);
-			}
+			query = jQuery('#xtext-editor', options.document);
+			if (query.length == 0)
+				query = jQuery('.xtext-editor', options.document);
 		}
 		
 		var deferred = jQuery.Deferred();
 		var editorViewers = [];
-		editorViewers.length = parents.length;
 		var finishedViewers = 0;
 		var codeEdit = new CodeEdit();
-		for (var i = 0; i < parents.length; i++) {
-			var editorOptions = ServiceBuilder.mergeOptions(parents[i], options);
-			var content = jQuery(parents[i]).text();
+		query.each(function(index, parent) {
+			var editorOptions = ServiceBuilder.mergeParentOptions(parent, options);
+			var content = jQuery(parent).text();
 			
-			codeEdit.create({parent: parents[i]}).then(function(editorViewer) {
+			codeEdit.create({parent: parent}).then(function(editorViewer) {
 				exports.createServices(editorViewer, editorOptions).done(function(xtextServices) {
 					if (!xtextServices.options.loadFromServer)
 						editorViewer.setContents(content, xtextServices.contentType);
-					editorViewers[i] = editorViewer;
+					editorViewers[index] = editorViewer;
 					finishedViewers++;
-					if (finishedViewers == parents.length) {
+					if (finishedViewers == query.length) {
 						if (finishedViewers == 1)
 							deferred.resolve(editorViewer);
 						else
@@ -145,7 +136,9 @@ define([
 				deferred.reject(error);
 			});
 			
-		}
+		});
+		if (query.length == 0)
+			deferred.reject();
 		return deferred.promise();
 	}
 	
@@ -185,8 +178,8 @@ define([
 		};
 		var serviceBuilder = new OrionServiceBuilder(editorViewer, xtextServices);
 		
-		if (options.syntaxDefinition != 'none' && (typeof(options.syntaxDefinition) === 'string' || options.xtextLang)) {
-			var syntaxDefinition = options.syntaxDefinition;
+		var syntaxDefinition = options.syntaxDefinition;
+		if (syntaxDefinition != 'none' && (jQuery.type(syntaxDefinition) === 'string' || !syntaxDefinition && options.xtextLang)) {
 			if (!syntaxDefinition)
 				syntaxDefinition = 'xtext-resources/' + options.xtextLang + '-syntax';
 			require([syntaxDefinition], function(grammar) {
@@ -289,9 +282,19 @@ define([
 			});
 			return deferred.promise;
 		}
-		this.viewer.serviceRegistry.registerService('orion.edit.contentAssist',
-				{computeContentAssist: computeContentAssist},
-				{name: 'Xtext content assist service', contentType: [services.contentType]});
+		var editorViewer = this.viewer;
+		var serviceInfo = {
+			name: 'Xtext content assist service',
+			contentType: [services.contentType]
+		};
+		if (options.contentAssistCharTriggers) {
+			serviceInfo.charTriggers = options.contentAssistCharTriggers;
+			serviceInfo.excludedStyles = options.contentAssistExcludedStyles;
+			if (editorViewer.settings)
+				editorViewer.settings.contentAssistAutoTrigger = true;
+		}
+		editorViewer.serviceRegistry.registerService('orion.edit.contentAssist',
+				{computeContentAssist: computeContentAssist}, serviceInfo);
 	}
 	
 	/**
@@ -333,11 +336,10 @@ define([
 						styleClass: styleClass
 					});
 				});
-				editorViewer.editor.showAnnotations(annotations, services._highlightAnnotationTypes, null, 
-					function(annotation) {
-						return self._getHighlightAnnotationType(annotation.styleClass, editorViewer, services);
-					});
 			}
+			editorViewer.editor.showAnnotations(annotations, services._highlightAnnotationTypes, null, function(annotation) {
+				return self._getHighlightAnnotationType(annotation.styleClass, editorViewer, services);
+			});
 		});
 	}
 			
@@ -372,7 +374,7 @@ define([
 					params[p] = options[p];
 			}
 			services.hoverService.invoke(services.editorContext, params).done(function(entry) {
-				deferred.resolve({ 
+				deferred.resolve({
 					content: entry.title + entry.content,
 					type: 'html'
 				});
@@ -392,10 +394,6 @@ define([
 	OrionServiceBuilder.prototype.setupOccurrencesService = function() {
 		var services = this.services;
 		var options = services.options;
-//		textView._setLinksVisible(true);
-//		var selectionUpdateDelay = options.selectionUpdateDelay;
-//		if (!selectionUpdateDelay)
-//			selectionUpdateDelay = 550;
 		function computeOccurrences(orionContext, params) {
 			var deferred = new OrionDeferred();
 			for (var p in options) {
@@ -423,7 +421,10 @@ define([
 			});
 			return deferred.promise;
 		}
-		this.viewer.serviceRegistry.registerService('orion.edit.occurrences',
+		var editorViewer = this.viewer;
+		if (editorViewer.settings)
+			editorViewer.settings.showOccurrences = true;
+		editorViewer.serviceRegistry.registerService('orion.edit.occurrences',
 				{computeOccurrences: computeOccurrences}, {contentType: [services.contentType]});
 	}
 	

@@ -5,26 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.servlet
+package org.eclipse.xtext.web.server.test
 
-import javax.servlet.http.HttpSession
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.web.server.ISessionStore
+import java.util.HashMap
+import org.eclipse.xtext.web.server.ISession
 
-/**
- * Provides access to the information stored in a {@link HttpSession}.
- */
-@FinalFieldsConstructor
-class HttpServletSessionStore implements ISessionStore {
+class HashMapSession implements ISession {
 	
-	val HttpSession session
-	
+	val map = new HashMap<Object, Object>
+		
 	override <T> get(Object key) {
-		session.getAttribute(key.toString) as T
+		map.get(key) as T
 	}
 	
 	override <T> get(Object key, ()=>T factory) {
-		synchronized (session) {
+		synchronized (map) {
 			val sessionValue = get(key)
 			if (sessionValue !== null) {
 				return sessionValue
@@ -37,11 +32,11 @@ class HttpServletSessionStore implements ISessionStore {
 	}
 	
 	override put(Object key, Object value) {
-		session.setAttribute(key.toString, value)
+		map.put(key, value)
 	}
 	
 	override remove(Object key) {
-		session.removeAttribute(key.toString)
+		map.remove(key)
 	}
 	
 }

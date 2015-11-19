@@ -5,17 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.web.test
+package org.eclipse.xtext.web.server.test
 
 import java.util.Collections
 import java.util.Map
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.web.server.IRequestData
+import org.eclipse.xtext.web.server.IServiceContext
+import org.eclipse.xtext.web.server.ISession
 
 @FinalFieldsConstructor
-class MockRequestData implements IRequestData {
+class MockServiceContext implements IServiceContext {
 	
 	val Map<String, String> parameters
+	
+	@Accessors
+	val ISession session
 	
 	override getParameterKeys() {
 		Collections.unmodifiableSet(parameters.keySet)
@@ -23,13 +28,6 @@ class MockRequestData implements IRequestData {
 	
 	override getParameter(String key) {
 		parameters.get(key)
-	}
-	
-	override getMetadataKeys() {
-		Collections.emptySet
-	}
-	
-	override getMetadata(String key) {
 	}
 	
 }

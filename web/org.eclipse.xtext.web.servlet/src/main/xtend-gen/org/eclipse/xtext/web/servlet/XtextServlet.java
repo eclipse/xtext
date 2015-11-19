@@ -13,21 +13,20 @@ import com.google.inject.Injector;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.web.server.IRequestData;
+import org.eclipse.xtext.web.server.IServiceContext;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.generator.GeneratorResult;
-import org.eclipse.xtext.web.servlet.HttpServletRequestData;
-import org.eclipse.xtext.web.servlet.HttpServletSessionStore;
+import org.eclipse.xtext.web.servlet.HttpServiceContext;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -123,8 +122,8 @@ public class XtextServlet extends HttpServlet {
       if (_isHasSideEffects) {
         _or = true;
       } else {
-        boolean _isHasTextInput = service.isHasTextInput();
-        _or = _isHasTextInput;
+        boolean _hasTextInput = this.hasTextInput(service);
+        _or = _hasTextInput;
       }
       _and = _or;
     }
@@ -138,8 +137,8 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doPut(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    IRequestData _request = service.getRequest();
-    final String type = _request.getParameter(IRequestData.SERVICE_TYPE);
+    IServiceContext _context = service.getContext();
+    final String type = _context.getParameter(IServiceContext.SERVICE_TYPE);
     boolean _and = false;
     boolean _isHasConflict = service.isHasConflict();
     boolean _not = (!_isHasConflict);
@@ -159,8 +158,8 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    IRequestData _request = service.getRequest();
-    final String type = _request.getParameter(IRequestData.SERVICE_TYPE);
+    IServiceContext _context = service.getContext();
+    final String type = _context.getParameter(IServiceContext.SERVICE_TYPE);
     boolean _and = false;
     boolean _isHasConflict = service.isHasConflict();
     boolean _not = (!_isHasConflict);
@@ -174,8 +173,8 @@ public class XtextServlet extends HttpServlet {
       if (!_not_1) {
         _and_1 = false;
       } else {
-        boolean _isHasTextInput = service.isHasTextInput();
-        boolean _not_2 = (!_isHasTextInput);
+        boolean _hasTextInput = this.hasTextInput(service);
+        boolean _not_2 = (!_hasTextInput);
         _and_1 = _not_2;
       }
       if (_and_1) {
@@ -193,19 +192,34 @@ public class XtextServlet extends HttpServlet {
     }
   }
   
+  protected boolean hasTextInput(final XtextServiceDispatcher.ServiceDescriptor service) {
+    boolean _xblockexpression = false;
+    {
+      IServiceContext _context = service.getContext();
+      final Set<String> parameterKeys = _context.getParameterKeys();
+      boolean _or = false;
+      boolean _contains = parameterKeys.contains("fullText");
+      if (_contains) {
+        _or = true;
+      } else {
+        boolean _contains_1 = parameterKeys.contains("deltaText");
+        _or = _contains_1;
+      }
+      _xblockexpression = _or;
+    }
+    return _xblockexpression;
+  }
+  
   /**
    * Retrieve the service metadata for the given request. This involves resolving the Guice
    * injector for the respective language, querying the {@link XtextServiceDispatcher}, and
    * checking the permission to invoke the service.
    */
   protected XtextServiceDispatcher.ServiceDescriptor getService(final HttpServletRequest request) throws InvalidRequestException {
-    HttpSession _session = request.getSession();
-    final HttpServletSessionStore sessionStore = new HttpServletSessionStore(_session);
-    final HttpServletRequestData requestData = new HttpServletRequestData(request);
-    final Injector injector = this.getInjector(requestData);
+    final HttpServiceContext serviceContext = new HttpServiceContext(request);
+    final Injector injector = this.getInjector(serviceContext);
     final XtextServiceDispatcher serviceDispatcher = injector.<XtextServiceDispatcher>getInstance(XtextServiceDispatcher.class);
-    final XtextServiceDispatcher.ServiceDescriptor service = serviceDispatcher.getService(requestData, sessionStore);
-    this.checkPermission(request, service);
+    final XtextServiceDispatcher.ServiceDescriptor service = serviceDispatcher.getService(serviceContext);
     return service;
   }
   
@@ -263,26 +277,19 @@ public class XtextServlet extends HttpServlet {
   }
   
   /**
-   * Check whether it is allowed to invoke the given service.
-   * @throws InvalidRequestException.PermissionDeniedException if permission is denied
+   * Resolve the Guice injector for the language associated with the given context.
    */
-  protected void checkPermission(final HttpServletRequest request, final XtextServiceDispatcher.ServiceDescriptor service) throws InvalidRequestException.PermissionDeniedException {
-  }
-  
-  /**
-   * Resolve the Guice injector for the language associated with the given request.
-   */
-  protected Injector getInjector(final IRequestData requestData) throws InvalidRequestException.UnknownLanguageException {
+  protected Injector getInjector(final HttpServiceContext serviceContext) throws InvalidRequestException.UnknownLanguageException {
     IResourceServiceProvider resourceServiceProvider = null;
     String _elvis = null;
-    String _parameter = requestData.getParameter("resource");
+    String _parameter = serviceContext.getParameter("resource");
     if (_parameter != null) {
       _elvis = _parameter;
     } else {
       _elvis = "";
     }
     final URI emfURI = URI.createURI(_elvis);
-    final String contentType = requestData.getParameter("contentType");
+    final String contentType = serviceContext.getParameter("contentType");
     if ((contentType == null)) {
       IResourceServiceProvider _resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
       resourceServiceProvider = _resourceServiceProvider;

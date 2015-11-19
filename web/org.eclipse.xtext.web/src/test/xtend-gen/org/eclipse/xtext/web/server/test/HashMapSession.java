@@ -5,14 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.web.test;
+package org.eclipse.xtext.web.server.test;
 
 import java.util.HashMap;
-import org.eclipse.xtext.web.server.ISessionStore;
+import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @SuppressWarnings("all")
-public class HashMapSessionStore implements ISessionStore {
+public class HashMapSession implements ISession {
   private final HashMap<Object, Object> map = new HashMap<Object, Object>();
   
   @Override

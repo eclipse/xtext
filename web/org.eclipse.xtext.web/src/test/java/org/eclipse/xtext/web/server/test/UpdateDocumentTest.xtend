@@ -97,16 +97,15 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	@Test def testCorrectStateId() {
 		resourceValidator.reset(0)
 		val file = createFile('input signal x state foo end')
-		val sessionStore = new HashMapSessionStore
+		val session = new HashMapSession
 		var update = getService(#{
 				'serviceType' -> 'update',
 				'resource' -> file.name,
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '21',
 				'deltaReplaceLength' -> '3'
-			}, sessionStore)
+			}, session)
 		assertTrue(update.hasSideEffects)
-		assertTrue(update.hasTextInput)
 		val updateResult = update.service.apply() as DocumentStateResult
 		
 		update = getService(#{
@@ -116,9 +115,9 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'deltaOffset' -> '24',
 				'deltaReplaceLength' -> '0',
 				'requiredStateId' -> updateResult.stateId
-			}, sessionStore)
+			}, session)
 		update.service.apply()
-		val load = getService(#{'serviceType' -> 'load', 'resource' -> file.name}, sessionStore)
+		val load = getService(#{'serviceType' -> 'load', 'resource' -> file.name}, session)
 		val loadResult = load.service.apply() as ResourceContentResult
 		assertEquals('input signal x state bar set x = true end', loadResult.fullText)
 	}
@@ -143,14 +142,14 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	@Test def testIncorrectStateId2() {
 		resourceValidator.reset(0)
 		val file = createFile('input signal x state foo end')
-		val sessionStore = new HashMapSessionStore
+		val session = new HashMapSession
 		val update1 = getService(#{
 				'serviceType' -> 'update',
 				'resource' -> file.name,
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '21',
 				'deltaReplaceLength' -> '3'
-			}, sessionStore)
+			}, session)
 		val updateResult = update1.service.apply() as DocumentStateResult
 		
 		val update2 = getService(#{
@@ -160,7 +159,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'deltaOffset' -> '24',
 				'deltaReplaceLength' -> '0',
 				'requiredStateId' -> updateResult.stateId
-			}, sessionStore)
+			}, session)
 		val update3 = getService(#{
 				'serviceType' -> 'update',
 				'resource' -> file.name,
@@ -168,7 +167,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'deltaOffset' -> '12',
 				'deltaReplaceLength' -> '1',
 				'requiredStateId' -> updateResult.stateId
-			}, sessionStore)
+			}, session)
 		update2.service.apply()
 		val result = update3.service.apply()
 		assertThat(result, instanceOf(ServiceConflictResult))
@@ -178,16 +177,15 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	@Test def testNoBackgroundWorkWhenConflict() {
 		resourceValidator.reset(0)
 		val file = createFile('input signal x state foo end')
-		val sessionStore = new HashMapSessionStore
+		val session = new HashMapSession
 		var update = getService(#{
 				'serviceType' -> 'update',
 				'resource' -> file.name,
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '21',
 				'deltaReplaceLength' -> '3'
-			}, sessionStore)
+			}, session)
 		assertTrue(update.hasSideEffects)
-		assertTrue(update.hasTextInput)
 		val updateResult = update.service.apply() as DocumentStateResult
 		
 		update = getService(#{
@@ -197,12 +195,12 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'deltaOffset' -> '24',
 				'deltaReplaceLength' -> '0',
 				'requiredStateId' -> updateResult.stateId
-			}, sessionStore)
-		val XtextWebDocument document = sessionStore.get(XtextWebDocument -> file.name)
+			}, session)
+		val XtextWebDocument document = session.get(XtextWebDocument -> file.name)
 		document.resource.modificationStamp = 1234
 		val result = update.service.apply()
 		assertThat(result, instanceOf(ServiceConflictResult))
-		val load = getService(#{'serviceType' -> 'load', 'resource' -> file.name}, sessionStore)
+		val load = getService(#{'serviceType' -> 'load', 'resource' -> file.name}, session)
 		val loadResult = load.service.apply() as ResourceContentResult
 		assertEquals('input signal x state bar end', loadResult.fullText)
 	}
@@ -210,14 +208,14 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	@Test def testCancelBackgroundWork1() {
 		resourceValidator.reset(300)
 		val file = createFile('input signal x state foo end')
-		val sessionStore = new HashMapSessionStore
+		val session = new HashMapSession
 		val update1 = getService(#{
 				'serviceType' -> 'update',
 				'resource' -> file.name,
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '21',
 				'deltaReplaceLength' -> '3'
-			}, sessionStore)
+			}, session)
 		val updateResult = update1.service.apply() as DocumentStateResult
 		val update2 = getService(#{
 				'serviceType' -> 'update',
@@ -226,7 +224,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'deltaOffset' -> '24',
 				'deltaReplaceLength' -> '0',
 				'requiredStateId' -> updateResult.stateId
-			}, sessionStore)
+			}, session)
 		resourceValidator.waitUntil[entryCounter == 1]
 		injector.getInstance(ExecutorService).submit[update2.service.apply()]
 		resourceValidator.waitUntil[exitCounter == 1]
@@ -238,21 +236,21 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	@Test def testCancelBackgroundWork2() {
 		resourceValidator.reset(300)
 		val file = createFile('input signal x state foo end')
-		val sessionStore = new HashMapSessionStore
+		val session = new HashMapSession
 		val update = getService(#{
 				'serviceType' -> 'update',
 				'resource' -> file.name,
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '21',
 				'deltaReplaceLength' -> '3'
-			}, sessionStore)
+			}, session)
 		val updateResult = update.service.apply() as DocumentStateResult
 		val contentAssist = getService(#{
 				'serviceType' -> 'assist',
 				'resource' -> file.name,
 				'caretOffset' -> '15',
 				'requiredStateId' -> updateResult.stateId
-			}, sessionStore)
+			}, session)
 		resourceValidator.waitUntil[entryCounter == 1]
 		injector.getInstance(ExecutorService).submit[contentAssist.service.apply()]
 		resourceValidator.waitUntil[exitCounter == 1]
@@ -264,15 +262,15 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	@Test def testCancelLowPriorityService1() {
 		resourceValidator.reset(3000)
 		val file = createFile('state foo end')
-		val sessionStore = new HashMapSessionStore
-		val validate = getService(#{'serviceType' -> 'validate', 'resource' -> file.name}, sessionStore)
+		val session = new HashMapSession
+		val validate = getService(#{'serviceType' -> 'validate', 'resource' -> file.name}, session)
 		val update = getService(#{
 				'serviceType' -> 'update',
 				'resource' -> file.name,
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '6',
 				'deltaReplaceLength' -> '3'
-			}, sessionStore)
+			}, session)
 		injector.getInstance(ExecutorService).submit[validate.service.apply()]
 		resourceValidator.waitUntil[entryCounter == 1]
 		update.service.apply()
@@ -285,13 +283,13 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	@Test def testCancelLowPriorityService2() {
 		resourceValidator.reset(3000)
 		val file = createFile('state foo end')
-		val sessionStore = new HashMapSessionStore
-		val validate = getService(#{'serviceType' -> 'validate', 'resource' -> file.name}, sessionStore)
+		val session = new HashMapSession
+		val validate = getService(#{'serviceType' -> 'validate', 'resource' -> file.name}, session)
 		val contentAssist = getService(#{
 				'serviceType' -> 'assist',
 				'resource' -> file.name,
 				'caretOffset' -> '0'
-			}, sessionStore)
+			}, session)
 		injector.getInstance(ExecutorService).submit[validate.service.apply()]
 		resourceValidator.waitUntil[entryCounter == 1]
 		contentAssist.service.apply()
@@ -304,14 +302,14 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	@Test def testContentAssistWithUpdate() {
 		resourceValidator.reset(0)
 		val file = createFile('input signal x state foo end')
-		val sessionStore = new HashMapSessionStore
+		val session = new HashMapSession
 		var update = getService(#{
 				'serviceType' -> 'update',
 				'resource' -> file.name,
 				'deltaText' -> 'bar',
 				'deltaOffset' -> '21',
 				'deltaReplaceLength' -> '3'
-			}, sessionStore)
+			}, session)
 		val updateResult = update.service.apply() as DocumentStateResult
 		
 		val contentAssist = getService(#{
@@ -322,9 +320,9 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'deltaOffset' -> '24',
 				'deltaReplaceLength' -> '0',
 				'requiredStateId' -> updateResult.stateId
-			}, sessionStore)
+			}, session)
 		contentAssist.service.apply()
-		val load = getService(#{'serviceType' -> 'load', 'resource' -> file.name}, sessionStore)
+		val load = getService(#{'serviceType' -> 'load', 'resource' -> file.name}, session)
 		val loadResult = load.service.apply() as ResourceContentResult
 		assertEquals('input signal x state bar set x =  end', loadResult.fullText)
 	}
@@ -332,19 +330,19 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 	@Test def testNoPrecomputationInStatelessMode() {
 		resourceValidator.reset(0)
 		val file = createFile('')
-		val sessionStore = new HashMapSessionStore
+		val session = new HashMapSession
 		getService(#{
 				'serviceType' -> 'assist',
 				'resource' -> file.name,
 				'caretOffset' -> '6',
 				'fullText' -> 'input signal x state foo end'
-		}, sessionStore).service.apply
+		}, session).service.apply
 		getService(#{
 				'serviceType' -> 'assist',
 				'resource' -> file.name,
 				'caretOffset' -> '6',
 				'fullText' -> 'input signal x state foo end'
-		}, sessionStore).service.apply
+		}, session).service.apply
 		assertEquals(0, resourceValidator.entryCounter)
 	}
 	

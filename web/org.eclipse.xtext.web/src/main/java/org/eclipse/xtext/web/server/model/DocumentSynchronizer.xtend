@@ -20,7 +20,7 @@ import org.eclipse.xtext.util.CancelIndicator
  * is not bound to a thread, so it is possible for one thread to call {@link #acquireLock(boolean)}
  * and for another thread to call {@link #releaseLock()}.
  */
-package class DocumentSynchronizer implements CancelIndicator {
+class DocumentSynchronizer implements CancelIndicator {
 	
 	val semaphore = new Semaphore(1, true)
 	

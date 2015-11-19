@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.web.server.IRequestData
+import org.eclipse.xtext.web.server.IServiceContext
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException
 import org.eclipse.xtext.web.server.InvalidRequestException.PermissionDeniedException
@@ -81,7 +81,7 @@ class XtextServlet extends HttpServlet {
 	
 	override protected doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		val service = getService(req)
-		val type = service.request.getParameter(IRequestData.SERVICE_TYPE)
+		val type = service.context.getParameter(IServiceContext.SERVICE_TYPE)
 		if (!service.hasConflict && type != 'update') {
 			// Send error 405 (method not allowed)
 			super.doPut(req, resp)
@@ -92,7 +92,7 @@ class XtextServlet extends HttpServlet {
 	
 	override protected doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		val service = getService(req)
-		val type = service.request.getParameter(IRequestData.SERVICE_TYPE)
+		val type = service.context.getParameter(IServiceContext.SERVICE_TYPE)
 		if (!service.hasConflict && (!service.hasSideEffects && !service.hasTextInput || type == 'update')) {
 			// Send error 405 (method not allowed)
 			super.doPost(req, resp)
@@ -101,18 +101,21 @@ class XtextServlet extends HttpServlet {
 		}
 	}
 	
+	protected def hasTextInput(XtextServiceDispatcher.ServiceDescriptor service) {
+		val parameterKeys = service.context.parameterKeys
+		parameterKeys.contains('fullText') || parameterKeys.contains('deltaText')
+	}
+	
 	/**
 	 * Retrieve the service metadata for the given request. This involves resolving the Guice
 	 * injector for the respective language, querying the {@link XtextServiceDispatcher}, and
 	 * checking the permission to invoke the service.
 	 */
 	protected def XtextServiceDispatcher.ServiceDescriptor getService(HttpServletRequest request) throws InvalidRequestException {
-		val sessionStore = new HttpServletSessionStore(request.session)
-		val requestData = new HttpServletRequestData(request)
-		val injector = getInjector(requestData)
+		val serviceContext = new HttpServiceContext(request)
+		val injector = getInjector(serviceContext)
 		val serviceDispatcher = injector.getInstance(XtextServiceDispatcher)
-		val service = serviceDispatcher.getService(requestData, sessionStore)
-		checkPermission(request, service)
+		val service = serviceDispatcher.getService(serviceContext)
 		return service
 	}
 	
@@ -149,22 +152,13 @@ class XtextServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Check whether it is allowed to invoke the given service.
-	 * @throws InvalidRequestException.PermissionDeniedException if permission is denied
+	 * Resolve the Guice injector for the language associated with the given context.
 	 */
-	protected def void checkPermission(HttpServletRequest request, XtextServiceDispatcher.ServiceDescriptor service)
-			throws PermissionDeniedException {
-		// The default implementation allows all services
-	}
-	
-	/**
-	 * Resolve the Guice injector for the language associated with the given request.
-	 */
-	protected def Injector getInjector(IRequestData requestData) throws UnknownLanguageException {
+	protected def Injector getInjector(HttpServiceContext serviceContext) throws UnknownLanguageException {
 		var IResourceServiceProvider resourceServiceProvider
 		
-		val emfURI = URI.createURI(requestData.getParameter('resource') ?: '')
-		val contentType = requestData.getParameter('contentType')
+		val emfURI = URI.createURI(serviceContext.getParameter('resource') ?: '')
+		val contentType = serviceContext.getParameter('contentType')
 		if (contentType === null)
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI)
 		else

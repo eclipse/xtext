@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * and for another thread to call {@link #releaseLock()}.
  */
 @SuppressWarnings("all")
-class DocumentSynchronizer implements CancelIndicator {
+public class DocumentSynchronizer implements CancelIndicator {
   private final Semaphore semaphore = new Semaphore(1, true);
   
   private final AtomicInteger waitingPriorityJobs = new AtomicInteger();

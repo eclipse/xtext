@@ -20,13 +20,13 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineSemanticHighlightingCalculator
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineWebContentProposalProvider
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.StatemachineParser
 import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal.InternalStatemachineLexer
 import org.eclipse.xtext.web.server.DefaultWebModule
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
-import org.eclipse.xtext.web.server.test.languages.contentassist.StatemachineWebContentProposalProvider
 
 @Accessors
 class StatemachineWebModule extends DefaultWebModule {

@@ -36,6 +36,9 @@ class IdeCrossrefProposalProvider {
 			IIdeContentProposalAcceptor acceptor, Predicate<IEObjectDescription> filter) {
 		try {
 			for (candidate : queryScope(scope, crossReference, context)) {
+				if (!acceptor.canAcceptMoreProposals) {
+					return
+				}
 				if (filter.apply(candidate)) {
 					val entry = createProposal(candidate, crossReference, context)
 					acceptor.accept(entry, proposalPriorities.getCrossRefPriority(candidate, entry))
@@ -72,6 +75,7 @@ class IdeCrossrefProposalProvider {
 	
 	protected def ContentAssistEntry createProposal(IEObjectDescription candidate, CrossReference crossRef, ContentAssistContext context) {
 		return new ContentAssistEntry => [
+			source = candidate
 			prefix = context.prefix
 			proposal = qualifiedNameConverter.toString(candidate.name)
 			description = candidate.getEClass?.name

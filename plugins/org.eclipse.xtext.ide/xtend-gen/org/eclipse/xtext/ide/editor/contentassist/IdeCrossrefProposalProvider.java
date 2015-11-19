@@ -49,11 +49,18 @@ public class IdeCrossrefProposalProvider {
     try {
       Iterable<IEObjectDescription> _queryScope = this.queryScope(scope, crossReference, context);
       for (final IEObjectDescription candidate : _queryScope) {
-        boolean _apply = filter.apply(candidate);
-        if (_apply) {
-          final ContentAssistEntry entry = this.createProposal(candidate, crossReference, context);
-          int _crossRefPriority = this.proposalPriorities.getCrossRefPriority(candidate, entry);
-          acceptor.accept(entry, _crossRefPriority);
+        {
+          boolean _canAcceptMoreProposals = acceptor.canAcceptMoreProposals();
+          boolean _not = (!_canAcceptMoreProposals);
+          if (_not) {
+            return;
+          }
+          boolean _apply = filter.apply(candidate);
+          if (_apply) {
+            final ContentAssistEntry entry = this.createProposal(candidate, crossReference, context);
+            int _crossRefPriority = this.proposalPriorities.getCrossRefPriority(candidate, entry);
+            acceptor.accept(entry, _crossRefPriority);
+          }
         }
       }
     } catch (final Throwable _t) {
@@ -135,6 +142,7 @@ public class IdeCrossrefProposalProvider {
     final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
       @Override
       public void apply(final ContentAssistEntry it) {
+        it.setSource(candidate);
         String _prefix = context.getPrefix();
         it.setPrefix(_prefix);
         QualifiedName _name = candidate.getName();

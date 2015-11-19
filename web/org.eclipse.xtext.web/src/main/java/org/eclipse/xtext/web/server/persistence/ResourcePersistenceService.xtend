@@ -10,7 +10,7 @@ package org.eclipse.xtext.web.server.persistence
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.IOException
-import org.eclipse.xtext.web.server.ISessionStore
+import org.eclipse.xtext.web.server.IServiceContext
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.InvalidRequestException.ResourceNotFoundException
 import org.eclipse.xtext.web.server.model.DocumentStateResult
@@ -30,11 +30,11 @@ class ResourcePersistenceService {
 	/**
 	 * Load the content of a document.
 	 */
-	def ResourceContentResult load(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
+	def ResourceContentResult load(String resourceId, IServerResourceHandler resourceHandler, IServiceContext serviceContext)
 			throws InvalidRequestException {
-		val document = sessionStore.get(XtextWebDocument -> resourceId, [
+		val document = serviceContext.session.get(XtextWebDocument -> resourceId, [
 			try {
-				resourceHandler.get(resourceId)
+				resourceHandler.get(resourceId, serviceContext)
 			} catch (IOException ioe) {
 				throw new ResourceNotFoundException('The requested resource was not found.', ioe)
 			}
@@ -47,11 +47,11 @@ class ResourcePersistenceService {
 	/**
 	 * Revert the content of a document to the last saved state.
 	 */
-	def ResourceContentResult revert(String resourceId, IServerResourceHandler resourceHandler, ISessionStore sessionStore)
+	def ResourceContentResult revert(String resourceId, IServerResourceHandler resourceHandler, IServiceContext serviceContext)
 			throws InvalidRequestException {
 		try {
-			val document = resourceHandler.get(resourceId)
-			sessionStore.put(XtextWebDocument -> resourceId, document)
+			val document = resourceHandler.get(resourceId, serviceContext)
+			serviceContext.session.put(XtextWebDocument -> resourceId, document)
 			return new ResourceContentResult(document.text, document.stateId, false)
 		} catch (IOException ioe) {
 			throw new ResourceNotFoundException('The requested resource was not found.', ioe)
@@ -61,11 +61,11 @@ class ResourcePersistenceService {
 	/**
 	 * Save the content of a document.
 	 */
-	def DocumentStateResult save(XtextWebDocumentAccess document, IServerResourceHandler resourceHandler)
+	def DocumentStateResult save(XtextWebDocumentAccess document, IServerResourceHandler resourceHandler, IServiceContext serviceContext)
 			throws InvalidRequestException {
 		document.readOnly[ it, cancelIndicator |
 			try {
-				resourceHandler.put(it)
+				resourceHandler.put(it, serviceContext)
 				dirty = false
 			} catch (IOException ioe) {
 				throw new ResourceNotFoundException(ioe.message, ioe)

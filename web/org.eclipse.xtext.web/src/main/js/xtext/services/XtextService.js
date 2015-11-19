@@ -8,6 +8,8 @@
 
 define(['jquery'], function(jQuery) {
 	
+	var globalState = {};
+	
 	/**
 	 * Generic service implementation that can serve as superclass for specialized services.
 	 */
@@ -139,7 +141,7 @@ define(['jquery'], function(jQuery) {
 				data: serverData,
 				success: onSuccess,
 				error: onError
-			});
+			}, !params.sendFullText);
 			return deferred.promise().always(function() {
 				self._recursionCount = undefined;
 			});
@@ -148,7 +150,7 @@ define(['jquery'], function(jQuery) {
 		/**
 		 * Send an HTTP request to invoke the service.
 		 */
-		sendRequest: function(editorContext, settings) {
+		sendRequest: function(editorContext, settings, needsSession) {
 			var self = this;
 			self.setState('started');
 			
@@ -194,7 +196,34 @@ define(['jquery'], function(jQuery) {
 				else
 					requestUrl += '?resource=' + self._encodedResourceId;
 			}
-			jQuery.ajax(requestUrl, settings);
+			
+			if (needsSession && globalState._initPending) {
+				// We have to wait until the initial request has finished to make sure the client has
+				// received a valid session id
+				if (!globalState._waitingRequests)
+					globalState._waitingRequests = [];
+				globalState._waitingRequests.push({requestUrl: requestUrl, settings: settings});
+			} else {
+				if (needsSession && !globalState._initDone) {
+					globalState._initPending = true;
+					var onComplete = settings.complete;
+					settings.complete = function(xhr, textStatus) {
+						if (jQuery.isFunction(onComplete)) {
+							onComplete(xhr, textStatus);
+						}
+						delete globalState._initPending;
+						globalState._initDone = true;
+						if (globalState._waitingRequests) {
+							for (var i = 0; i < globalState._waitingRequests.length; i++) {
+								var request = globalState._waitingRequests[i];
+								jQuery.ajax(request.requestUrl, request.settings);
+							}
+							delete globalState._waitingRequests;
+						}
+					}
+				}
+				jQuery.ajax(requestUrl, settings);
+			}
 		},
 		
 		/**

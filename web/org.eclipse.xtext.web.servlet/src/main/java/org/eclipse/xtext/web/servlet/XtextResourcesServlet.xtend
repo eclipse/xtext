@@ -8,16 +8,18 @@
 package org.eclipse.xtext.web.servlet
 
 import com.google.common.io.ByteStreams
+import java.io.InputStream
 import javax.servlet.ServletConfig
 import javax.servlet.ServletException
 import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.eclipse.xtext.web.server.XtextServiceDispatcher
 
 /** 
  * This servlet is required only in servlet containers that do not support the servlet 3.0 API.
  */
-class StaticContentServlet extends HttpServlet {
+class XtextResourcesServlet extends HttpServlet {
 	
 	static val DEFAULT_EXPIRE_TIME_MS = 86400000L // 1 day
 	static val DEFAULT_EXPIRE_TIME_S = 86400L     // 1 day
@@ -25,6 +27,7 @@ class StaticContentServlet extends HttpServlet {
 	boolean disableCache = false
 
 	override init(ServletConfig config) throws ServletException {
+		super.init(config)
 		var String disableCache = config.getInitParameter('disableCache')
 		if (disableCache !== null) {
 			disableCache = Boolean.parseBoolean(disableCache)
@@ -33,7 +36,7 @@ class StaticContentServlet extends HttpServlet {
 
 	override doGet(HttpServletRequest request, HttpServletResponse response) {
 		val resourceURI = '/META-INF/resources' + request.servletPath + request.pathInfo
-		val inputStream = class.getResourceAsStream(resourceURI)
+		val inputStream = getResourceAsStream(resourceURI)
 		if (inputStream !== null) {
 			val tokens = resourceURI.split('/')
 			val fileName = tokens.get(tokens.length - 1)
@@ -43,12 +46,16 @@ class StaticContentServlet extends HttpServlet {
 				response.setDateHeader('Expires', System.currentTimeMillis + DEFAULT_EXPIRE_TIME_MS)
 				response.addHeader('Cache-Control', 'private, max-age=' + DEFAULT_EXPIRE_TIME_S)
 			}
-			val mimeType = request.session.servletContext.getMimeType(fileName)
+			val mimeType = request.servletContext.getMimeType(fileName)
 			response.setContentType(mimeType ?: 'application/octet-stream')
 			ByteStreams.copy(inputStream, response.outputStream)
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND)
 		}
+	}
+	
+	protected def InputStream getResourceAsStream(String resourceURI) {
+		XtextServiceDispatcher.classLoader.getResourceAsStream(resourceURI)
 	}
 
 }

@@ -88,8 +88,6 @@ public class GeneratorTest extends AbstractWebServerTest {
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
     boolean _isHasSideEffects = generate.isHasSideEffects();
     Assert.assertFalse(_isHasSideEffects);
-    boolean _isHasTextInput = generate.isHasTextInput();
-    Assert.assertFalse(_isHasTextInput);
     Function0<? extends IServiceResult> _service = generate.getService();
     IServiceResult _apply = _service.apply();
     final GeneratorResult result = ((GeneratorResult) _apply);

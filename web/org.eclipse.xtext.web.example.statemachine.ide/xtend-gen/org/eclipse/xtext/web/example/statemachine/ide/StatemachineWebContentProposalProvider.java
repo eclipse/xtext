@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.web.server.test.languages.contentassist;
+package org.eclipse.xtext.web.example.statemachine.ide;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
@@ -117,6 +117,7 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
             final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
               @Override
               public void apply(final ContentAssistEntry it) {
+                it.setSource(description);
                 String _prefix = context.getPrefix();
                 it.setPrefix(_prefix);
                 QualifiedName _name = description.getName();
@@ -156,6 +157,7 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
             final Procedure1<ContentAssistEntry> _function_2 = new Procedure1<ContentAssistEntry>() {
               @Override
               public void apply(final ContentAssistEntry it) {
+                it.setSource(description_1);
                 String _prefix = context.getPrefix();
                 it.setPrefix(_prefix);
                 QualifiedName _name = description_1.getName();

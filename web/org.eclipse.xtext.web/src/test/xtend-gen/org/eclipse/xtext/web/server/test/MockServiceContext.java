@@ -10,13 +10,19 @@ package org.eclipse.xtext.web.server.test;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.web.server.IRequestData;
+import org.eclipse.xtext.web.server.IServiceContext;
+import org.eclipse.xtext.web.server.ISession;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class MockRequestData implements IRequestData {
+public class MockServiceContext implements IServiceContext {
   private final Map<String, String> parameters;
+  
+  @Accessors
+  private final ISession session;
   
   @Override
   public Set<String> getParameterKeys() {
@@ -29,18 +35,14 @@ public class MockRequestData implements IRequestData {
     return this.parameters.get(key);
   }
   
-  @Override
-  public Set<String> getMetadataKeys() {
-    return Collections.<String>emptySet();
-  }
-  
-  @Override
-  public String getMetadata(final String key) {
-    return null;
-  }
-  
-  public MockRequestData(final Map<String, String> parameters) {
+  public MockServiceContext(final Map<String, String> parameters, final ISession session) {
     super();
     this.parameters = parameters;
+    this.session = session;
+  }
+  
+  @Pure
+  public ISession getSession() {
+    return this.session;
   }
 }

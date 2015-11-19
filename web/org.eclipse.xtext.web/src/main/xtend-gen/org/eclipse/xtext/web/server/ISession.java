@@ -11,14 +11,15 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 /**
  * Provides means to store information that can be accessed for subsequent requests.
- * This allows to improve the server performance by avoiding duplicate computations.
+ * This allows to improve the server performance by avoiding duplicate computations,
+ * and to share resources across multiple service requests.
  */
 @SuppressWarnings("all")
-public interface ISessionStore {
+public interface ISession {
   /**
    * A default implementation that stores nothing.
    */
-  public static class NullImpl implements ISessionStore {
+  public static class NullImpl implements ISession {
     @Override
     public <T extends Object> T get(final Object key) {
       return null;

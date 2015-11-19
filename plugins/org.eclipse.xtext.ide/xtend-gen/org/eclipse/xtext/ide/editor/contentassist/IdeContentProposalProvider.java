@@ -14,7 +14,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -40,6 +40,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -76,7 +78,24 @@ public class IdeContentProposalProvider {
   /**
    * Create content assist proposals and pass them to the given acceptor.
    */
-  public void createProposals(final List<ContentAssistContext> contexts, final IIdeContentProposalAcceptor acceptor) {
+  public void createProposals(final Collection<ContentAssistContext> contexts, final IIdeContentProposalAcceptor acceptor) {
+    Iterable<ContentAssistContext> _filteredContexts = this.getFilteredContexts(contexts);
+    for (final ContentAssistContext context : _filteredContexts) {
+      ImmutableList<AbstractElement> _firstSetGrammarElements = context.getFirstSetGrammarElements();
+      for (final AbstractElement element : _firstSetGrammarElements) {
+        {
+          boolean _canAcceptMoreProposals = acceptor.canAcceptMoreProposals();
+          boolean _not = (!_canAcceptMoreProposals);
+          if (_not) {
+            return;
+          }
+          this.createProposals(element, context, acceptor);
+        }
+      }
+    }
+  }
+  
+  protected Iterable<ContentAssistContext> getFilteredContexts(final Collection<ContentAssistContext> contexts) {
     ContentAssistContext selectedContext = null;
     for (final ContentAssistContext context : contexts) {
       boolean _or = false;
@@ -109,37 +128,30 @@ public class IdeContentProposalProvider {
         selectedContext = context;
       }
     }
-    for (final ContentAssistContext context_1 : contexts) {
-      boolean _or_2 = false;
-      if ((context_1 == selectedContext)) {
-        _or_2 = true;
-      } else {
-        boolean _and_1 = false;
-        String _prefix_2 = context_1.getPrefix();
-        String _prefix_3 = selectedContext.getPrefix();
-        boolean _equals = Objects.equal(_prefix_2, _prefix_3);
-        if (!_equals) {
-          _and_1 = false;
+    final ContentAssistContext finalSelectedContext = selectedContext;
+    final Function1<ContentAssistContext, Boolean> _function = new Function1<ContentAssistContext, Boolean>() {
+      @Override
+      public Boolean apply(final ContentAssistContext context) {
+        boolean _or = false;
+        if ((context == finalSelectedContext)) {
+          _or = true;
         } else {
-          boolean _isAcceptable_2 = this.isAcceptable(context_1);
-          _and_1 = _isAcceptable_2;
-        }
-        _or_2 = _and_1;
-      }
-      if (_or_2) {
-        ImmutableList<AbstractElement> _firstSetGrammarElements = context_1.getFirstSetGrammarElements();
-        for (final AbstractElement element : _firstSetGrammarElements) {
-          {
-            boolean _canAcceptMoreProposals = acceptor.canAcceptMoreProposals();
-            boolean _not_1 = (!_canAcceptMoreProposals);
-            if (_not_1) {
-              return;
-            }
-            this.createProposals(element, context_1, acceptor);
+          boolean _and = false;
+          String _prefix = context.getPrefix();
+          String _prefix_1 = finalSelectedContext.getPrefix();
+          boolean _equals = Objects.equal(_prefix, _prefix_1);
+          if (!_equals) {
+            _and = false;
+          } else {
+            boolean _isAcceptable = IdeContentProposalProvider.this.isAcceptable(context);
+            _and = _isAcceptable;
           }
+          _or = _and;
         }
+        return Boolean.valueOf(_or);
       }
-    }
+    };
+    return IterableExtensions.<ContentAssistContext>filter(contexts, _function);
   }
   
   protected boolean isAcceptable(final ContentAssistContext context) {
@@ -164,8 +176,7 @@ public class IdeContentProposalProvider {
   protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     final AbstractElement terminal = assignment.getTerminal();
     if ((terminal instanceof CrossReference)) {
-      AbstractElement _terminal = assignment.getTerminal();
-      this.createProposals(_terminal, context, acceptor);
+      this.createProposals(terminal, context, acceptor);
     } else {
       if ((terminal instanceof RuleCall)) {
         final AbstractRule rule = ((RuleCall)terminal).getRule();
@@ -271,10 +282,14 @@ public class IdeContentProposalProvider {
       if ((ereference != null)) {
         EObject _currentModel = context.getCurrentModel();
         final IScope scope = this.scopeProvider.getScope(_currentModel, ereference);
-        Predicate<IEObjectDescription> _alwaysTrue = Predicates.<IEObjectDescription>alwaysTrue();
-        this.crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor, _alwaysTrue);
+        Predicate<IEObjectDescription> _crossrefFilter = this.getCrossrefFilter(reference, context);
+        this.crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor, _crossrefFilter);
       }
     }
+  }
+  
+  protected Predicate<IEObjectDescription> getCrossrefFilter(final CrossReference reference, final ContentAssistContext context) {
+    return Predicates.<IEObjectDescription>alwaysTrue();
   }
   
   protected void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {

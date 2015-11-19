@@ -8,12 +8,13 @@
 package org.eclipse.xtext.web.server;
 
 import java.util.Set;
+import org.eclipse.xtext.web.server.ISession;
 
 /**
  * Provides the parameters and meta data of a service request.
  */
 @SuppressWarnings("all")
-public interface IRequestData {
+public interface IServiceContext {
   /**
    * Key for the service type parameter, which determines the actual service to be invoked.
    */
@@ -30,15 +31,11 @@ public interface IRequestData {
   public abstract String getParameter(final String key);
   
   /**
-   * The available keys that can be used as arguments to {@link #getMetadata(String)}.
-   * The returned collection contains all keys that are supported by this implementation,
-   * but the actual values for some of these keys may be {@code null} because it might
-   * be too expensive to determine the non-null metadata upfront.
+   * Returns a session into which information can be stored across multiple requests from
+   * the same client. If a session does not exist yet, one is created.
+   * 
+   * <p><em>Warning:</em> This method may have side effects on the response sent to the client,
+   * such as adding a session Id.</p>
    */
-  public abstract Set<String> getMetadataKeys();
-  
-  /**
-   * Returns the request metadata for the given key.
-   */
-  public abstract String getMetadata(final String key);
+  public abstract ISession getSession();
 }

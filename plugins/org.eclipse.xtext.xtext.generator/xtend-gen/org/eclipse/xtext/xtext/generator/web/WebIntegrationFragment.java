@@ -2431,11 +2431,11 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("<servlet-name>StaticContentServlet</servlet-name>");
+            _builder.append("<servlet-name>XtextResourcesServlet</servlet-name>");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("<servlet-class>org.eclipse.xtext.web.servlet.StaticContentServlet</servlet-class>");
+            _builder.append("<servlet-class>org.eclipse.xtext.web.servlet.XtextResourcesServlet</servlet-class>");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("</servlet>");
@@ -2447,7 +2447,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("<servlet-name>StaticContentServlet</servlet-name>");
+            _builder.append("<servlet-name>XtextResourcesServlet</servlet-name>");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t");

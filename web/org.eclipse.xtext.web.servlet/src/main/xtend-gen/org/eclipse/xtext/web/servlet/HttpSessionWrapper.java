@@ -8,16 +8,19 @@
 package org.eclipse.xtext.web.servlet;
 
 import javax.servlet.http.HttpSession;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.web.server.ISessionStore;
+import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * Provides access to the information stored in a {@link HttpSession}.
  */
 @FinalFieldsConstructor
+@Accessors
 @SuppressWarnings("all")
-public class HttpServletSessionStore implements ISessionStore {
+public class HttpSessionWrapper implements ISession {
   private final HttpSession session;
   
   @Override
@@ -53,8 +56,13 @@ public class HttpServletSessionStore implements ISessionStore {
     this.session.removeAttribute(_string);
   }
   
-  public HttpServletSessionStore(final HttpSession session) {
+  public HttpSessionWrapper(final HttpSession session) {
     super();
     this.session = session;
+  }
+  
+  @Pure
+  public HttpSession getSession() {
+    return this.session;
   }
 }

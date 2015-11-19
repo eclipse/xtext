@@ -30,6 +30,7 @@ import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.PrecomputedServiceRegistry;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * Accessor class for documents. Use {@link #readOnly(CancelableUnitOfWork)} to
@@ -231,9 +232,9 @@ public class XtextWebDocumentAccess {
           _and = _not_1;
         }
         if (_and) {
-          final Runnable _function = new Runnable() {
+          final Procedure1<Object> _function = new Procedure1<Object>() {
             @Override
-            public void run() {
+            public void apply(final Object it) {
               try {
                 if ((asynchronousWork != null)) {
                   asynchronousWork.setCancelIndicator(synchronizer);
@@ -261,11 +262,16 @@ public class XtextWebDocumentAccess {
               }
             }
           };
-          this.executorService1.submit(_function);
+          this.executorService1.submit(
+            ((Runnable) new Runnable() {
+                public void run() {
+                  _function.apply(null);
+                }
+            }));
           currentThreadOwnsLock = false;
-          final Runnable _function_1 = new Runnable() {
+          final Procedure1<Object> _function_1 = new Procedure1<Object>() {
             @Override
-            public void run() {
+            public void apply(final Object it) {
               try {
                 XtextWebDocumentAccess.this.performPrecomputation(synchronizer);
               } catch (final Throwable _t) {
@@ -289,7 +295,12 @@ public class XtextWebDocumentAccess {
               }
             }
           };
-          this.executorService2.submit(_function_1);
+          this.executorService2.submit(
+            ((Runnable) new Runnable() {
+                public void run() {
+                  _function_1.apply(null);
+                }
+            }));
         }
       } catch (final Throwable _t) {
         if (_t instanceof RejectedExecutionException) {

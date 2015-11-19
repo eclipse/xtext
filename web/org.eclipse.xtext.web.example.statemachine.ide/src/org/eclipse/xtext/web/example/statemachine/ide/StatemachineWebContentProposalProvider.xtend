@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.example.jetty.contentassist
+package org.eclipse.xtext.web.example.statemachine.ide
 
 import com.google.inject.Inject
 import org.eclipse.xtext.Assignment
@@ -26,7 +26,7 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 			IIdeContentProposalAcceptor acceptor) {
 		switch (ruleCall.rule) {
 			
-			case BOOLEANRule: {
+			case getBOOLEANRule: {
 				if ('true'.startsWith(context.prefix)) {
 					val trueEntry = new ContentAssistEntry => [
 						prefix = context.prefix
@@ -55,6 +55,7 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 				val scope = scopeProvider.getScope(context.currentModel, EVENT__SIGNAL)
 				for (description : scope.allElements.filter[getEClass == INPUT_SIGNAL]) {
 					val entry = new ContentAssistEntry => [
+						source = description
 						prefix = context.prefix
 						proposal = description.name.toString
 						description = 'input signal'
@@ -67,6 +68,7 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 				val scope = scopeProvider.getScope(context.currentModel, COMMAND__SIGNAL)
 				for (description : scope.allElements.filter[getEClass == OUTPUT_SIGNAL]) {
 					val entry = new ContentAssistEntry => [
+						source = description
 						prefix = context.prefix
 						proposal = description.name.toString
 						description = 'output signal'
