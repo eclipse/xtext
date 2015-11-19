@@ -8,8 +8,8 @@
 package org.eclipse.xtext.generator.parser;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarComparator;
-import org.junit.Assert;
+import org.eclipse.xtext.generator.parser.AntlrGrammarComparatorTestHelper;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 
 /**
@@ -19,59 +19,8 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class AntlrGrammarComparatorTest {
-  private static class TestErrorHandler implements AntlrGrammarComparator.IErrorHandler {
-    @Override
-    public void handleMismatch(final String match, final String matchReference, final AntlrGrammarComparator.ErrorContext context) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Inputs differs at token ");
-      _builder.append(match, "");
-      _builder.append(" (line ");
-      AntlrGrammarComparator.MatchState _testedGrammar = context.getTestedGrammar();
-      int _lineNumber = _testedGrammar.getLineNumber();
-      _builder.append(_lineNumber, "");
-      _builder.append("), expected token ");
-      _builder.append(matchReference, "");
-      _builder.append(" (line ");
-      AntlrGrammarComparator.MatchState _referenceGrammar = context.getReferenceGrammar();
-      int _lineNumber_1 = _referenceGrammar.getLineNumber();
-      _builder.append(_lineNumber_1, "");
-      _builder.append(" ).");
-      _builder.newLineIfNotEmpty();
-      Assert.fail(_builder.toString());
-    }
-    
-    @Override
-    public void handleInvalidGeneratedGrammarFile(final AntlrGrammarComparator.ErrorContext context) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Noticed an unmatched character sequence in \'testee\' in/before line ");
-      AntlrGrammarComparator.MatchState _testedGrammar = context.getTestedGrammar();
-      int _lineNumber = _testedGrammar.getLineNumber();
-      _builder.append(_lineNumber, "");
-      _builder.append(".");
-      _builder.newLineIfNotEmpty();
-      Assert.fail(_builder.toString());
-    }
-    
-    @Override
-    public void handleInvalidReferenceGrammarFile(final AntlrGrammarComparator.ErrorContext context) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Noticed an unmatched character sequence in \'expected\' in/before line ");
-      AntlrGrammarComparator.MatchState _referenceGrammar = context.getReferenceGrammar();
-      int _lineNumber = _referenceGrammar.getLineNumber();
-      _builder.append(_lineNumber, "");
-      _builder.append(".");
-      _builder.newLineIfNotEmpty();
-      Assert.fail(_builder.toString());
-    }
-  }
-  
-  private AntlrGrammarComparator comparator = new AntlrGrammarComparator();
-  
-  private AntlrGrammarComparatorTest.TestErrorHandler errorHandler = new AntlrGrammarComparatorTest.TestErrorHandler();
-  
-  private AntlrGrammarComparator.ErrorContext compare(final CharSequence grammar, final CharSequence grammarReference) {
-    return this.comparator.compareGrammars(grammar, grammarReference, this.errorHandler);
-  }
+  @Extension
+  private AntlrGrammarComparatorTestHelper _antlrGrammarComparatorTestHelper = new AntlrGrammarComparatorTestHelper();
   
   /**
    * The pattern of "\"" is not expected to occur in ANTLR grammar,
@@ -83,7 +32,7 @@ public class AntlrGrammarComparatorTest {
     _builder.append("\"\\\"\"a");
     _builder.newLine();
     final String testee = _builder.toString();
-    this.compare(testee, testee);
+    this._antlrGrammarComparatorTestHelper.compare(testee, testee);
   }
   
   @Test
@@ -96,7 +45,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("hans");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test
@@ -107,7 +56,7 @@ public class AntlrGrammarComparatorTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("hans");
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test
@@ -120,7 +69,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("hans hugo");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test
@@ -131,7 +80,7 @@ public class AntlrGrammarComparatorTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("hans hugo");
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -144,7 +93,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("hugo hans");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -155,7 +104,7 @@ public class AntlrGrammarComparatorTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("hugo hans");
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -168,7 +117,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("hans hugo");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -179,7 +128,7 @@ public class AntlrGrammarComparatorTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("hans hugo");
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -192,7 +141,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("hans");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -203,7 +152,7 @@ public class AntlrGrammarComparatorTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("hans");
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -214,7 +163,7 @@ public class AntlrGrammarComparatorTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("hans hugo");
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -225,7 +174,7 @@ public class AntlrGrammarComparatorTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("hans hu");
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test
@@ -238,7 +187,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("RULE_IN_RICH_STRING ?");
     _builder_1.newLine();
     final String testee = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test
@@ -251,7 +200,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("RULE_IN_RICH_STRING *");
     _builder_1.newLine();
     final String testee = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test
@@ -264,7 +213,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("RULE_IN_RICH_STRING +");
     _builder_1.newLine();
     final String testee = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test
@@ -294,7 +243,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String testee = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test
@@ -322,7 +271,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("(\'abstract\' | \'annotation\' | \'class\' | \'(\' | RULE_ID | RULE_HEX )");
     _builder_1.newLine();
     final String testee = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test
@@ -331,7 +280,7 @@ public class AntlrGrammarComparatorTest {
     _builder.append("RULE_RICH_TEXT : \'\\\'\\\'\\\'\' RULE_IN_RICH_STRING* (\'\\\'\\\'\\\'\'|(\'\\\'\' \'\\\'\'?)? EOF);");
     _builder.newLine();
     final String testee = _builder.toString();
-    this.compare(testee, testee);
+    this._antlrGrammarComparatorTestHelper.compare(testee, testee);
   }
   
   @Test
@@ -352,7 +301,7 @@ public class AntlrGrammarComparatorTest {
     _builder.append("RULE_COMMENT_RICH_TEXT_END : \'\\u00AB\\u00AB\' ~((\'\\n\'|\'\\r\'))* (\'\\r\'? \'\\n\' RULE_IN_RICH_STRING* (\'\\\'\\\'\\\'\'|(\'\\\'\' \'\\\'\'?)? EOF)|EOF);");
     _builder.newLine();
     final String testee = _builder.toString();
-    this.compare(testee, testee);
+    this._antlrGrammarComparatorTestHelper.compare(testee, testee);
   }
   
   @Test(expected = AssertionError.class)
@@ -365,7 +314,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("hans ( hugo )");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -378,7 +327,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("hans ( hugo )");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -391,7 +340,7 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("{ \'(\' \')\' }");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
   }
   
   @Test(expected = AssertionError.class)
@@ -404,6 +353,198 @@ public class AntlrGrammarComparatorTest {
     _builder_1.append("{ \'(\' \'(\' \')\' }");
     _builder_1.newLine();
     final String expected = _builder_1.toString();
-    this.compare(testee, expected);
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
+  }
+  
+  @Test
+  public void sLCommentIgnoring01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("A: \'A\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// rule B");
+    _builder.newLine();
+    _builder.append("B: \'B\'");
+    _builder.newLine();
+    final String testee = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("A: \'A\'");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("B: \'B\'");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
+  }
+  
+  @Test
+  public void sLCommentIgnoring01b() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("A: \'A\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("B: \'B\'");
+    _builder.newLine();
+    final String testee = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("A: \'A\'");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("// rule B");
+    _builder_1.newLine();
+    _builder_1.append("B: \'B\'");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
+  }
+  
+  @Test
+  public void mismatchWithSLComment01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("A: \'A\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("B: \'B\'");
+    _builder.newLine();
+    final String testee = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("A: \'A\'");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("// rule B");
+    _builder_1.newLine();
+    _builder_1.append("B: \'C\'");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    this._antlrGrammarComparatorTestHelper.compareAndExpectMismatchInLines(testee, expected, 3, 4);
+  }
+  
+  @Test(expected = AssertionError.class)
+  public void mismatchWithSLComment01b() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("A: \'A\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("B: \'B\'");
+    _builder.newLine();
+    final String testee = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("A: \'A\'");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("// rule B");
+    _builder_1.newLine();
+    _builder_1.append("B: \'C\'");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    this._antlrGrammarComparatorTestHelper.compareAndExpectMismatchInLines(testee, expected, 4, 4);
+  }
+  
+  @Test
+  public void mLCommentIgnoring01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("A: \'A\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* rule B");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("B: \'B\'");
+    _builder.newLine();
+    final String testee = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("A: \'A\'");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("B: \'B\'");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
+  }
+  
+  @Test
+  public void mLCommentIgnoring01b() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("A: \'A\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("B: \'B\'");
+    _builder.newLine();
+    final String testee = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("A: \'A\'");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("/*");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* rule B");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("B: \'B\'");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    this._antlrGrammarComparatorTestHelper.compare(testee, expected);
+  }
+  
+  @Test
+  public void mismatchWithMLComment01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("A: \'A\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("B: \'B\'");
+    _builder.newLine();
+    final String testee = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("A: \'A\'");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("/*");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* rule B");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("B: \'C\'");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    this._antlrGrammarComparatorTestHelper.compareAndExpectMismatchInLines(testee, expected, 3, 6);
+  }
+  
+  @Test(expected = AssertionError.class)
+  public void mismatchWithMLComment01b() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("A: \'A\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("B: \'B\'");
+    _builder.newLine();
+    final String testee = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("A: \'A\'");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("/*");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* rule B");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("B: \'C\'");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    this._antlrGrammarComparatorTestHelper.compareAndExpectMismatchInLines(testee, expected, 3, 5);
   }
 }
