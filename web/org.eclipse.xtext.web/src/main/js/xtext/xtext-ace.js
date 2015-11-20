@@ -149,6 +149,43 @@ define([
 	}
 	
 	/**
+	 * Remove all services and listeners that have been previously created with createServices(editor, options).
+	 */
+	exports.removeServices = function(editor) {
+		if (!editor.xtextServices)
+			return;
+		var services = editor.xtextServices;
+		var session = editor.getSession();
+		if (services.modelChangeListener)
+			editor.off('change', services.modelChangeListener);
+		if (services.changeCursorListener)
+			editor.getSelection().off('changeCursor', services.changeCursorListener);
+		if (editor.commands) {
+			if (services.options.enableSaveAction)
+				editor.commands.removeCommand('xtext-save');
+			if (services.options.enableFormattingAction)
+				editor.commands.removeCommand('xtext-format');
+		}
+		if (services.contentAssistService)
+			editor.setOptions({ enableBasicAutocompletion: false });
+		var editorContext = services.editorContext;
+		var annotations = editorContext._annotations;
+		if (annotations) {
+			for (var i = 0; i < annotations.length; i++) {
+				session.removeMarker(annotations[i].markerId);
+			}
+			session.setAnnotations([]);
+		}
+		var occurrenceMarkers = editorContext._occurrenceMarkers;
+		if (occurrenceMarkers) {
+			for (var i = 0; i < occurrenceMarkers.length; i++)  {
+				session.removeMarker(occurrenceMarkers[i]);
+			}
+		}
+		delete editor.xtextServices;
+	}
+	
+	/**
 	 * Syntax highlighting (without semantic highlighting).
 	 */
 	AceServiceBuilder.prototype.setupSyntaxHighlighting = function() {
@@ -177,7 +214,7 @@ define([
 		var textUpdateDelay = services.options.textUpdateDelay;
 		if (!textUpdateDelay)
 			textUpdateDelay = 500;
-		function modelChangeListener(event) {
+		services.modelChangeListener = function(event) {
 			if (!event._xtext_init)
 				editorContext.setDirty(true);
 			if (editorContext._modelChangeTimeout)
@@ -190,8 +227,8 @@ define([
 			}, textUpdateDelay);
 		}
 		if (!services.options.resourceId || !services.options.loadFromServer)
-			modelChangeListener({_xtext_init: true});
-		this.editor.on('change', modelChangeListener);
+			services.modelChangeListener({_xtext_init: true});
+		this.editor.on('change', services.modelChangeListener);
 	}
 	
 	/**
@@ -201,7 +238,7 @@ define([
 		var services = this.services;
 		if (services.options.enableSaveAction && this.editor.commands) {
 			this.editor.commands.addCommand({
-				name: 'save',
+				name: 'xtext-save',
 				bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
 				exec: function(editor) {
 					services.saveResource();
@@ -237,8 +274,7 @@ define([
 				});
 			}
 		}
-		languageTools.setCompleters([completer]);
-		this.editor.setOptions({ enableBasicAutocompletion: true });
+		this.editor.setOptions({ enableBasicAutocompletion: [completer] });
 	}
 	
 	/**
@@ -299,7 +335,7 @@ define([
 		var editor = this.editor;
 		var session = editor.getSession();
 		var self = this;
-		editor.getSelection().on('changeCursor', function() {
+		services.changeCursorListener = function() {
 			if (editorContext._selectionChangeTimeout) {
 				clearTimeout(editorContext._selectionChangeTimeout);
 			}
@@ -328,7 +364,8 @@ define([
 					}
 				});
 			}, selectionUpdateDelay);
-		});
+		};
+		editor.getSelection().on('changeCursor', services.changeCursorListener);
 	}
 		
 	/**
@@ -338,7 +375,7 @@ define([
 		var services = this.services;
 		if (services.options.enableFormattingAction && this.editor.commands) {
 			this.editor.commands.addCommand({
-				name: 'format',
+				name: 'xtext-format',
 				bindKey: {win: 'Ctrl-Shift-F', mac: 'Command-Shift-F'},
 				exec: function(editor) {
 					services.format();
