@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.util
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 
-// TODO move this to GrammarUtil?
 class GrammarUtil2 extends GrammarUtil {
 	
 	public static val TERMINALS = 'org.eclipse.xtext.common.Terminals'

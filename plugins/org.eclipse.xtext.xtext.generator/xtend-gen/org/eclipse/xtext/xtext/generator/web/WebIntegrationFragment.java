@@ -129,6 +129,8 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   
   private boolean useServlet3Api = true;
   
+  private boolean ignoreCase = false;
+  
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String requireJsVersion = WebIntegrationFragment.REQUIREJS_VERSION;
   
@@ -204,6 +206,13 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
    */
   public void setUseServlet3Api(final boolean useServlet3Api) {
     this.useServlet3Api = useServlet3Api;
+  }
+  
+  /**
+   * Whether the generated syntax highlighting should ignore case for language keywords.
+   */
+  public void setIgnoreCase(final boolean ignoreCase) {
+    this.ignoreCase = ignoreCase;
   }
   
   /**
@@ -470,7 +479,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("{name: \"keyword.");
             _builder.append(langId, "");
-            _builder.append("\", match: \"\\\\b(?:\" + keywords + \")\\\\b\"}");
+            _builder.append("\", match: ");
+            CharSequence _generateKeywordsRegExp = this.generateKeywordsRegExp();
+            _builder.append(_generateKeywordsRegExp, "");
+            _builder.append("}");
             patterns.add(_builder.toString());
           }
           boolean _isEmpty_1 = nonWordKeywords.isEmpty();
@@ -479,9 +491,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             StringConcatenation _builder_1 = new StringConcatenation();
             _builder_1.append("{name: \"keyword.extra.");
             _builder_1.append(langId, "");
-            _builder_1.append("\", match: \"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
-            _builder_1.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
-            _builder_1.append("|$)\"}");
+            _builder_1.append("\", match: ");
+            CharSequence _generateExtraKeywordsRegExp = this.generateExtraKeywordsRegExp();
+            _builder_1.append(_generateExtraKeywordsRegExp, "");
+            _builder_1.append("}");
             patterns.add(_builder_1.toString());
           }
           StringConcatenationClient _client = new StringConcatenationClient() {
@@ -499,50 +512,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               }
               _builder.append("[], function() {");
               _builder.newLineIfNotEmpty();
-              {
-                boolean _isEmpty = wordKeywords.isEmpty();
-                boolean _not_1 = (!_isEmpty);
-                if (_not_1) {
-                  _builder.append("\t");
-                  _builder.append("var keywords = \"");
-                  {
-                    boolean _hasElements = false;
-                    for(final String kw : wordKeywords) {
-                      if (!_hasElements) {
-                        _hasElements = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t");
-                      }
-                      String _regexpString = RegexpExtensions.toRegexpString(kw);
-                      _builder.append(_regexpString, "\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-              {
-                boolean _isEmpty_1 = nonWordKeywords.isEmpty();
-                boolean _not_2 = (!_isEmpty_1);
-                if (_not_2) {
-                  _builder.append("\t");
-                  _builder.append("var extraKeywords = \"");
-                  {
-                    boolean _hasElements_1 = false;
-                    for(final String kw_1 : nonWordKeywords) {
-                      if (!_hasElements_1) {
-                        _hasElements_1 = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t");
-                      }
-                      String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1);
-                      _builder.append(_regexpString_1, "\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
+              _builder.append("\t");
+              CharSequence _generateKeywords = WebIntegrationFragment.this.generateKeywords(wordKeywords, nonWordKeywords);
+              _builder.append(_generateKeywords, "\t");
+              _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("return {");
               _builder.newLine();
@@ -561,10 +534,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               _builder.newLine();
               _builder.append("\t\t\t");
               {
-                boolean _hasElements_2 = false;
+                boolean _hasElements = false;
                 for(final String pattern : patterns) {
-                  if (!_hasElements_2) {
-                    _hasElements_2 = true;
+                  if (!_hasElements) {
+                    _hasElements = true;
                   } else {
                     _builder.appendImmediate(",\n", "\t\t\t");
                   }
@@ -590,16 +563,20 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           boolean _not_2 = (!_isEmpty_2);
           if (_not_2) {
             StringConcatenation _builder_2 = new StringConcatenation();
-            _builder_2.append("{token: \"keyword\", regex: \"\\\\b(?:\" + keywords + \")\\\\b\"}");
+            _builder_2.append("{token: \"keyword\", regex: ");
+            CharSequence _generateKeywordsRegExp_1 = this.generateKeywordsRegExp();
+            _builder_2.append(_generateKeywordsRegExp_1, "");
+            _builder_2.append("}");
             patterns_1.put("start", _builder_2.toString());
           }
           boolean _isEmpty_3 = nonWordKeywords.isEmpty();
           boolean _not_3 = (!_isEmpty_3);
           if (_not_3) {
             StringConcatenation _builder_3 = new StringConcatenation();
-            _builder_3.append("{token: \"keyword\", regex: \"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
-            _builder_3.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
-            _builder_3.append("|$)\"}");
+            _builder_3.append("{token: \"keyword\", regex: ");
+            CharSequence _generateExtraKeywordsRegExp_1 = this.generateExtraKeywordsRegExp();
+            _builder_3.append(_generateExtraKeywordsRegExp_1, "");
+            _builder_3.append("}");
             patterns_1.put("start", _builder_3.toString());
           }
           StringConcatenationClient _client_1 = new StringConcatenationClient() {
@@ -620,59 +597,19 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               _builder.append("\t");
               _builder.append("var HighlightRules = function() {");
               _builder.newLine();
-              {
-                boolean _isEmpty = wordKeywords.isEmpty();
-                boolean _not_1 = (!_isEmpty);
-                if (_not_1) {
-                  _builder.append("\t\t");
-                  _builder.append("var keywords = \"");
-                  {
-                    boolean _hasElements = false;
-                    for(final String kw : wordKeywords) {
-                      if (!_hasElements) {
-                        _hasElements = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t\t");
-                      }
-                      String _regexpString = RegexpExtensions.toRegexpString(kw);
-                      _builder.append(_regexpString, "\t\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-              {
-                boolean _isEmpty_1 = nonWordKeywords.isEmpty();
-                boolean _not_2 = (!_isEmpty_1);
-                if (_not_2) {
-                  _builder.append("\t\t");
-                  _builder.append("var extraKeywords = \"");
-                  {
-                    boolean _hasElements_1 = false;
-                    for(final String kw_1 : nonWordKeywords) {
-                      if (!_hasElements_1) {
-                        _hasElements_1 = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t\t");
-                      }
-                      String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1);
-                      _builder.append(_regexpString_1, "\t\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
+              _builder.append("\t\t");
+              CharSequence _generateKeywords = WebIntegrationFragment.this.generateKeywords(wordKeywords, nonWordKeywords);
+              _builder.append(_generateKeywords, "\t\t");
+              _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
               _builder.append("this.$rules = {");
               _builder.newLine();
               {
                 Set<String> _keySet = patterns_1.keySet();
-                boolean _hasElements_2 = false;
+                boolean _hasElements = false;
                 for(final String state : _keySet) {
-                  if (!_hasElements_2) {
-                    _hasElements_2 = true;
+                  if (!_hasElements) {
+                    _hasElements = true;
                   } else {
                     _builder.appendImmediate(",", "\t\t\t");
                   }
@@ -685,10 +622,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                   _builder.append("\t");
                   {
                     Collection<String> _get = patterns_1.get(state);
-                    boolean _hasElements_3 = false;
+                    boolean _hasElements_1 = false;
                     for(final String rule : _get) {
-                      if (!_hasElements_3) {
-                        _hasElements_3 = true;
+                      if (!_hasElements_1) {
+                        _hasElements_1 = true;
                       } else {
                         _builder.appendImmediate(",\n", "\t\t\t\t");
                       }
@@ -761,16 +698,20 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           boolean _not_4 = (!_isEmpty_4);
           if (_not_4) {
             StringConcatenation _builder_4 = new StringConcatenation();
-            _builder_4.append("{token: \"keyword\", regex: \"\\\\b(?:\" + keywords + \")\\\\b\"}");
+            _builder_4.append("{token: \"keyword\", regex: ");
+            CharSequence _generateKeywordsRegExp_2 = this.generateKeywordsRegExp();
+            _builder_4.append(_generateKeywordsRegExp_2, "");
+            _builder_4.append("}");
             patterns_2.put("start", _builder_4.toString());
           }
           boolean _isEmpty_5 = nonWordKeywords.isEmpty();
           boolean _not_5 = (!_isEmpty_5);
           if (_not_5) {
             StringConcatenation _builder_5 = new StringConcatenation();
-            _builder_5.append("{token: \"keyword\", regex: \"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
-            _builder_5.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
-            _builder_5.append("|$)\"}");
+            _builder_5.append("{token: \"keyword\", regex: ");
+            CharSequence _generateExtraKeywordsRegExp_2 = this.generateExtraKeywordsRegExp();
+            _builder_5.append(_generateExtraKeywordsRegExp_2, "");
+            _builder_5.append("}");
             patterns_2.put("start", _builder_5.toString());
           }
           StringConcatenationClient _client_2 = new StringConcatenationClient() {
@@ -788,50 +729,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               }
               _builder.append("[\"codemirror\", \"codemirror/addon/mode/simple\"], function(CodeMirror, SimpleMode) {");
               _builder.newLineIfNotEmpty();
-              {
-                boolean _isEmpty = wordKeywords.isEmpty();
-                boolean _not_1 = (!_isEmpty);
-                if (_not_1) {
-                  _builder.append("\t");
-                  _builder.append("var keywords = \"");
-                  {
-                    boolean _hasElements = false;
-                    for(final String kw : wordKeywords) {
-                      if (!_hasElements) {
-                        _hasElements = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t");
-                      }
-                      String _regexpString = RegexpExtensions.toRegexpString(kw);
-                      _builder.append(_regexpString, "\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-              {
-                boolean _isEmpty_1 = nonWordKeywords.isEmpty();
-                boolean _not_2 = (!_isEmpty_1);
-                if (_not_2) {
-                  _builder.append("\t");
-                  _builder.append("var extraKeywords = \"");
-                  {
-                    boolean _hasElements_1 = false;
-                    for(final String kw_1 : nonWordKeywords) {
-                      if (!_hasElements_1) {
-                        _hasElements_1 = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t");
-                      }
-                      String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1);
-                      _builder.append(_regexpString_1, "\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
+              _builder.append("\t");
+              CharSequence _generateKeywords = WebIntegrationFragment.this.generateKeywords(wordKeywords, nonWordKeywords);
+              _builder.append(_generateKeywords, "\t");
+              _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("CodeMirror.defineSimpleMode(\"xtext/");
               _builder.append(langId, "\t");
@@ -839,10 +740,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               _builder.newLineIfNotEmpty();
               {
                 Set<String> _keySet = patterns_2.keySet();
-                boolean _hasElements_2 = false;
+                boolean _hasElements = false;
                 for(final String state : _keySet) {
-                  if (!_hasElements_2) {
-                    _hasElements_2 = true;
+                  if (!_hasElements) {
+                    _hasElements = true;
                   } else {
                     _builder.appendImmediate(",", "\t\t");
                   }
@@ -862,10 +763,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                   _builder.append("\t");
                   {
                     Collection<String> _get = patterns_2.get(state);
-                    boolean _hasElements_3 = false;
+                    boolean _hasElements_1 = false;
                     for(final String rule : _get) {
-                      if (!_hasElements_3) {
-                        _hasElements_3 = true;
+                      if (!_hasElements_1) {
+                        _hasElements_1 = true;
                       } else {
                         _builder.appendImmediate(",\n", "\t\t\t");
                       }
@@ -902,6 +803,117 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     jsFile.writeTo(_assets);
+  }
+  
+  protected CharSequence generateKeywords(final List<String> wordKeywords, final List<String> nonWordKeywords) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isEmpty = wordKeywords.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("var keywords = \"");
+        {
+          boolean _hasElements = false;
+          for(final String kw : wordKeywords) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate("|", "");
+            }
+            boolean _and = false;
+            WebIntegrationFragment.Framework _get = this.framework.get();
+            boolean _notEquals = (!Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR));
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              _and = this.ignoreCase;
+            }
+            String _regexpString = RegexpExtensions.toRegexpString(kw, _and);
+            _builder.append(_regexpString, "");
+          }
+        }
+        _builder.append("\";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_1 = nonWordKeywords.isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      if (_not_1) {
+        _builder.append("var extraKeywords = \"");
+        {
+          boolean _hasElements_1 = false;
+          for(final String kw_1 : nonWordKeywords) {
+            if (!_hasElements_1) {
+              _hasElements_1 = true;
+            } else {
+              _builder.appendImmediate("|", "");
+            }
+            boolean _and_1 = false;
+            WebIntegrationFragment.Framework _get_1 = this.framework.get();
+            boolean _notEquals_1 = (!Objects.equal(_get_1, WebIntegrationFragment.Framework.CODEMIRROR));
+            if (!_notEquals_1) {
+              _and_1 = false;
+            } else {
+              _and_1 = this.ignoreCase;
+            }
+            String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1, _and_1);
+            _builder.append(_regexpString_1, "");
+          }
+        }
+        _builder.append("\";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  protected CharSequence generateKeywordsRegExp() {
+    CharSequence _xifexpression = null;
+    boolean _and = false;
+    WebIntegrationFragment.Framework _get = this.framework.get();
+    boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR);
+    if (!_equals) {
+      _and = false;
+    } else {
+      _and = this.ignoreCase;
+    }
+    if (_and) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("new RegExp(\"\\\\b(?:\" + keywords + \")\\\\b\", \"gi\")");
+      _xifexpression = _builder;
+    } else {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\"\\\\b(?:\" + keywords + \")\\\\b\"");
+      _xifexpression = _builder_1;
+    }
+    return _xifexpression;
+  }
+  
+  protected CharSequence generateExtraKeywordsRegExp() {
+    CharSequence _xifexpression = null;
+    boolean _and = false;
+    WebIntegrationFragment.Framework _get = this.framework.get();
+    boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR);
+    if (!_equals) {
+      _and = false;
+    } else {
+      _and = this.ignoreCase;
+    }
+    if (_and) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("new RegExp(\"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
+      _builder.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
+      _builder.append("|$)\", \"gi\")");
+      _xifexpression = _builder;
+    } else {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
+      _builder_1.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
+      _builder_1.append("|$)\"");
+      _xifexpression = _builder_1;
+    }
+    return _xifexpression;
   }
   
   protected Collection<String> createOrionPatterns(final String langId, final Set<String> keywords) {
