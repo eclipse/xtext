@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.editor.syntaxcoloring;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
+ * @since 2.9
  */
 @SuppressWarnings("all")
 public interface HighlightingStyles {

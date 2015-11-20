@@ -12,6 +12,7 @@ import java.util.regex.Pattern
 
 /** 
  * @author Anton Kosyakov
+ * @since 2.9
  */
 @Singleton
 class DefaultAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToAttributeIdMapper {
