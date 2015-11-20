@@ -30,6 +30,9 @@
 					var resourceId = $("#change-resource option:selected").attr("value");
 					editor.xtextServices.serviceBuilder.changeResource(resourceId);
 				});
+				$("#disable-button").click(function() {
+					xtext.removeServices(editor);
+				});
 			});
 		});
 	</script>
@@ -55,6 +58,7 @@
 			<option value="example1.statemachine">Example 1</option>
 			<option value="example2.statemachine">Example 2</option>
 		</select>
+		<button id="disable-button">Disable</button>
 	</div>
 </div>
 

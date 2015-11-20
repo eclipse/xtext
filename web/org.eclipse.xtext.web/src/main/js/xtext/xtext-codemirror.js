@@ -151,6 +151,47 @@ define([
 	}
 	
 	/**
+	 * Remove all services and listeners that have been previously created with createServices(editor, options).
+	 */
+	exports.removeServices = function(editor) {
+		if (!editor.xtextServices)
+			return;
+		var services = editor.xtextServices;
+		if (services.modelChangeListener)
+			editor.off('changes', services.modelChangeListener);
+		if (services.cursorActivityListener)
+			editor.off('cursorActivity', services.cursorActivityListener);
+		if (services.saveKeyMap)
+			editor.removeKeyMap(services.saveKeyMap);
+		if (services.contentAssistKeyMap)
+			editor.removeKeyMap(services.contentAssistKeyMap);
+		if (services.formatKeyMap)
+			editor.removeKeyMap(services.formatKeyMap);
+		var editorContext = services.editorContext;
+		var highlightingMarkers = editorContext._highlightingMarkers;
+		if (highlightingMarkers) {
+			for (var i = 0; i < highlightingMarkers.length; i++) {
+				highlightingMarkers[i].clear();
+			}
+		}
+		if (editorContext._validationAnnotations)
+			services.serviceBuilder._clearAnnotations(editorContext._validationAnnotations);
+		var validationMarkers = editorContext._validationMarkers;
+		if (validationMarkers) {
+			for (var i = 0; i < validationMarkers.length; i++) {
+				validationMarkers[i].clear();
+			}
+		}
+		var occurrenceMarkers = editorContext._occurrenceMarkers;
+		if (occurrenceMarkers) {
+			for (var i = 0; i < occurrenceMarkers.length; i++)  {
+				occurrenceMarkers[i].clear();
+			}
+		}
+		delete editor.xtextServices;
+	}
+	
+	/**
 	 * Syntax highlighting (without semantic highlighting).
 	 */
 	CodeMirrorServiceBuilder.prototype.setupSyntaxHighlighting = function() {
@@ -170,7 +211,7 @@ define([
 		var textUpdateDelay = services.options.textUpdateDelay;
 		if (!textUpdateDelay)
 			textUpdateDelay = 500;
-		function modelChangeListener(event) {
+		services.modelChangeListener = function(event) {
 			if (!event._xtext_init)
 				editorContext.setDirty(true);
 			if (editorContext._modelChangeTimeout)
@@ -183,8 +224,8 @@ define([
 			}, textUpdateDelay);
 		}
 		if (!services.options.resourceId || !services.options.loadFromServer)
-			modelChangeListener({_xtext_init: true});
-		this.editor.on('changes', modelChangeListener);
+			services.modelChangeListener({_xtext_init: true});
+		this.editor.on('changes', services.modelChangeListener);
 	}
 	
 	/**
@@ -197,7 +238,8 @@ define([
 			var saveFunction = function(editor) {
 				services.saveResource();
 			};
-			this.editor.addKeyMap(/mac os/.test(userAgent) ? {'Cmd-S': saveFunction}: {'Ctrl-S': saveFunction});
+			services.saveKeyMap = /mac os/.test(userAgent) ? {'Cmd-S': saveFunction}: {'Ctrl-S': saveFunction};
+			this.editor.addKeyMap(services.saveKeyMap);
 		}
 	}
 		
@@ -207,7 +249,7 @@ define([
 	CodeMirrorServiceBuilder.prototype.setupContentAssistService = function() {
 		var services = this.services;
 		var editorContext = services.editorContext;
-		this.editor.addKeyMap({'Ctrl-Space': function(editor) {
+		services.contentAssistKeyMap = {'Ctrl-Space': function(editor) {
 			var params = ServiceBuilder.copy(services.options);
 			var cursor = editor.getCursor();
 			params.offset = editor.indexFromPos(cursor);
@@ -235,7 +277,8 @@ define([
 					};
 				}});
 			});
-		}});
+		}};
+		this.editor.addKeyMap(services.contentAssistKeyMap);
 	}
 		
 	/**
@@ -367,7 +410,7 @@ define([
 			selectionUpdateDelay = 550;
 		var editor = this.editor;
 		var self = this;
-		editor.on('cursorActivity', function() {
+		services.cursorActivityListener = function() {
 			if (editorContext._selectionChangeTimeout) {
 				clearTimeout(editorContext._selectionChangeTimeout);
 			}
@@ -400,7 +443,8 @@ define([
 					}
 				});
 			}, selectionUpdateDelay);
-		});
+		}
+		editor.on('cursorActivity', services.cursorActivityListener);
 	}
 		
 	/**
@@ -413,7 +457,8 @@ define([
 			var formatFunction = function(editor) {
 				services.format();
 			};
-			this.editor.addKeyMap(/mac os/.test(userAgent) ? {'Shift-Cmd-F': formatFunction}: {'Shift-Ctrl-S': formatFunction});
+			services.formatKeyMap = /mac os/.test(userAgent) ? {'Shift-Cmd-F': formatFunction}: {'Shift-Ctrl-S': formatFunction};
+			this.editor.addKeyMap(services.formatKeyMap);
 		}
 	}
 	

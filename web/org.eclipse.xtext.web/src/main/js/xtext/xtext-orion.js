@@ -206,12 +206,40 @@ define([
 	}
 	
 	/**
+	 * Remove all services and listeners that have been previously created with createServices(editor, options).
+	 */
+	exports.removeServices = function(editorViewer) {
+		if (!editorViewer.xtextServices)
+			return;
+		var services = editorViewer.xtextServices;
+		if (services.highlighterRegistration)
+			services.highlighterRegistration.unregister();
+		if (services.modelRegistration)
+			services.modelRegistration.unregister();
+		if (services.saveCommandRegistration)
+			services.saveCommandRegistration.unregister();
+		if (services.contentAssistRegistration)
+			services.contentAssistRegistration.unregister();
+		if (services.hoverRegistration)
+			services.hoverRegistration.unregister();
+		if (services.occurrencesRegistration)
+			services.occurrencesRegistration.unregister();
+		if (services.formatCommandRegistration)
+			services.formatCommandRegistration.unregister();
+		editorViewer.editor.showAnnotations([], services._highlightAnnotationTypes);
+		editorViewer.editor.showProblems([]);
+		delete editorViewer.xtextServices;
+	}
+	
+	/**
 	 * Syntax highlighting (without semantic highlighting).
 	 */
 	OrionServiceBuilder.prototype.setupSyntaxHighlighting = function() {
-		var syntaxDefinition = this.services.options.syntaxDefinition;
+		var services = this.services;
+		var syntaxDefinition = services.options.syntaxDefinition;
 		if (syntaxDefinition != 'none') {
-			this.viewer.serviceRegistry.registerService('orion.edit.highlighter', {}, syntaxDefinition);
+			services.highlighterRegistration = this.viewer.serviceRegistry.registerService(
+					'orion.edit.highlighter', {}, syntaxDefinition);
 		}
 	}
 	
@@ -240,7 +268,7 @@ define([
 			}, textUpdateDelay);
 		}
 		editorContext._xtext_init = true;
-		this.viewer.serviceRegistry.registerService('orion.edit.model',
+		services.modelRegistration = this.viewer.serviceRegistry.registerService('orion.edit.model',
 				{onModelChanged: modelChangeListener}, {contentType: [services.contentType]});
 	}
 	
@@ -250,7 +278,8 @@ define([
 	OrionServiceBuilder.prototype.setupPersistenceServices = function() {
 		var services = this.services;
 		if (services.options.enableSaveAction) {
-			this.viewer.serviceRegistry.registerService('orion.edit.command', {execute: services.saveResource}, {
+			services.saveCommandRegistration = this.viewer.serviceRegistry.registerService('orion.edit.command',
+					{execute: services.saveResource}, {
 				name: 'Save Xtext document',
 				id: 'xtext.save',
 				key: ['s', true],
@@ -297,7 +326,7 @@ define([
 			if (editorViewer.settings)
 				editorViewer.settings.contentAssistAutoTrigger = true;
 		}
-		editorViewer.serviceRegistry.registerService('orion.edit.contentAssist',
+		services.contentAssistRegistration = editorViewer.serviceRegistry.registerService('orion.edit.contentAssist',
 				{computeContentAssist: computeContentAssist}, serviceInfo);
 	}
 	
@@ -384,7 +413,7 @@ define([
 			});
 			return deferred.promise;
 		}
-		this.viewer.serviceRegistry.registerService('orion.edit.hover',
+		services.hoverRegistration = this.viewer.serviceRegistry.registerService('orion.edit.hover',
 				{computeHoverInfo: computeHoverInfo},
 				{name: 'Xtext hover service', contentType: [services.contentType]});
 	}
@@ -422,7 +451,7 @@ define([
 		var editorViewer = this.viewer;
 		if (editorViewer.settings)
 			editorViewer.settings.showOccurrences = true;
-		editorViewer.serviceRegistry.registerService('orion.edit.occurrences',
+		services.occurrencesRegistration = editorViewer.serviceRegistry.registerService('orion.edit.occurrences',
 				{computeOccurrences: computeOccurrences}, {contentType: [services.contentType]});
 	}
 	
@@ -443,7 +472,8 @@ define([
 				});
 				return deferred.promise;
 			}
-			this.viewer.serviceRegistry.registerService('orion.edit.command', {execute: execute}, {
+			services.formatCommandRegistration = this.viewer.serviceRegistry.registerService('orion.edit.command',
+					{execute: execute}, {
 				name: 'Xtext formatting service',
 				id: 'xtext.formatter',
 				key: ['f', true, true],
