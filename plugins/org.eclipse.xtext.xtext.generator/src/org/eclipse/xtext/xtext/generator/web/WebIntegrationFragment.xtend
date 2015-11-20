@@ -215,18 +215,16 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 	}
 	
 	override generate() {
+		if (highlightingModuleName !== null && highlightingModuleName.endsWith('.js'))
+			highlightingModuleName = highlightingModuleName.substring(0, highlightingModuleName.length - 3)
+		val langId = language.fileExtensions.head
+		val hlModName = highlightingModuleName ?: switch framework.get {
+			case ORION: 'xtext-resources/generated/' + langId + '-syntax'
+			case ACE, case CODEMIRROR: 'xtext-resources/generated/mode-' + langId
+		}
 		if (generateJsHighlighting.get && projectConfig.web.assets !== null) {
-			val langId = language.fileExtensions.head
-			if (highlightingModuleName.nullOrEmpty) {
-				highlightingModuleName = switch framework.get {
-					case ORION: 'xtext-resources/generated/' + langId + '-syntax'
-					case ACE, case CODEMIRROR: 'xtext-resources/generated/mode-' + langId
-				}
-			} else if (highlightingModuleName.endsWith('.js'))
-				highlightingModuleName = highlightingModuleName.substring(0, highlightingModuleName.length - 3)
 			if (highlightingPath.nullOrEmpty)
-				highlightingPath = highlightingModuleName + '.js'
-			
+				highlightingPath = hlModName + '.js'
 			generateJsHighlighting(langId)
 		}
 		
@@ -237,7 +235,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 			generateServerLauncher()
 		}
 		if (generateHtmlExample.get && projectConfig.web.assets !== null) {
-			generateIndexDoc()
+			generateIndexDoc(hlModName)
 			generateStyleSheet()
 		}
 		if (generateWebXml.get && projectConfig.web.assets !== null) {
@@ -280,7 +278,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				if (!nonWordKeywords.empty)
 					patterns += '''{name: "keyword.extra.«langId»", match: "(?:^|\\s)(?:" + extraKeywords + ")(?=«DELIMITERS_PATTERN»|$)"}'''
 				jsFile.content = '''
-					define("«highlightingModuleName»", function() {
+					define(«IF !highlightingModuleName.nullOrEmpty»"«highlightingModuleName»", «ENDIF»[], function() {
 						«IF !wordKeywords.empty»
 							var keywords = "«FOR kw : wordKeywords SEPARATOR '|'»«kw.toRegexpString»«ENDFOR»";
 						«ENDIF»
@@ -305,7 +303,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				if (!nonWordKeywords.empty)
 					patterns.put('start', '''{token: "keyword", regex: "(?:^|\\s)(?:" + extraKeywords + ")(?=«DELIMITERS_PATTERN»|$)"}''')
 				jsFile.content = '''
-					define("«highlightingModuleName»", ["ace/lib/oop", "ace/mode/text", "ace/mode/text_highlight_rules"], function(oop, mText, mTextHighlightRules) {
+					define(«IF !highlightingModuleName.nullOrEmpty»"«highlightingModuleName»", «ENDIF»["ace/lib/oop", "ace/mode/text", "ace/mode/text_highlight_rules"], function(oop, mText, mTextHighlightRules) {
 						var HighlightRules = function() {
 							«IF !wordKeywords.empty»
 								var keywords = "«FOR kw : wordKeywords SEPARATOR '|'»«kw.toRegexpString»«ENDFOR»";
@@ -346,7 +344,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				if (!nonWordKeywords.empty)
 					patterns.put('start', '''{token: "keyword", regex: "(?:^|\\s)(?:" + extraKeywords + ")(?=«DELIMITERS_PATTERN»|$)"}''')
 				jsFile.content = '''
-					define("«highlightingModuleName»", ["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, SimpleMode) {
+					define(«IF !highlightingModuleName.nullOrEmpty»"«highlightingModuleName»", «ENDIF»["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, SimpleMode) {
 						«IF !wordKeywords.empty»
 							var keywords = "«FOR kw : wordKeywords SEPARATOR '|'»«kw.toRegexpString»«ENDFOR»";
 						«ENDIF»
@@ -480,7 +478,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 		return patterns
 	}
 	
-	protected def void generateIndexDoc() {
+	protected def void generateIndexDoc(String hlModName) {
 		if (projectConfig.web.assets.isFile('index.html')) {
 			// Don't overwrite an existing index document
 			return
@@ -524,7 +522,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 							require(["xtext/xtext-orion"], function(xtext) {
 								xtext.createEditor({
 									baseUrl: baseUrl,
-									syntaxDefinition: "«if (generateJsHighlighting.get) highlightingModuleName else 'none'»"
+									syntaxDefinition: "«if (generateJsHighlighting.get) hlModName else 'none'»"
 								});
 							});
 						});
@@ -541,7 +539,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 							require(["xtext/xtext-ace"], function(xtext) {
 								xtext.createEditor({
 									baseUrl: baseUrl,
-									syntaxDefinition: "«if (generateJsHighlighting.get) highlightingModuleName else 'none'»"
+									syntaxDefinition: "«if (generateJsHighlighting.get) hlModName else 'none'»"
 								});
 							});
 						});
@@ -558,7 +556,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 								main: "lib/codemirror"
 							}]
 						});
-						require([«IF generateJsHighlighting.get»"«highlightingModuleName»", «ENDIF»"xtext/xtext-codemirror"], function(«IF generateJsHighlighting.get»mode, «ENDIF»xtext) {
+						require([«IF generateJsHighlighting.get»"«hlModName»", «ENDIF»"xtext/xtext-codemirror"], function(«IF generateJsHighlighting.get»mode, «ENDIF»xtext) {
 							xtext.createEditor({
 								baseUrl: baseUrl«IF !generateJsHighlighting.get»,
 								syntaxDefinition: "none"
