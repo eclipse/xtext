@@ -47,7 +47,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="emf.update.site"
-      value="http://download.eclipse.org/modeling/emf/emf/updates/2.11milestones/"/>
+      value="http://download.eclipse.org/modeling/emf/emf/updates/2.12milestones/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="antlr-gen.update.site"
