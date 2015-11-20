@@ -32,9 +32,10 @@ class GeneratorTest extends AbstractWebServerTest {
 		override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext ctx) {
 			invocationCount++
 			val statemachine = input.contents.filter(Statemachine).head
-			fsa.generateFile('test.txt', '''
+			fsa.generateFile('/DEFAULT_ARTIFACT', '''
 				«FOR state : statemachine.states SEPARATOR ','»«state.name»«ENDFOR»
 			''')
+			fsa.generateFile('/test.txt', '''hello, world!''')
 		}
 
 	}
@@ -54,13 +55,22 @@ class GeneratorTest extends AbstractWebServerTest {
 		val result = generate.service.apply() as GeneratorResult
 		val String expectedResult = '''
 			GeneratorResult [
-			  documents = ArrayList (
-			    GeneratedDocument [
-			      name = "DEFAULT_OUTPUTtest.txt"
-			      contentType = "text/plain"
-			      content = "foo,bar\n"
-			    ]
-			  )
+			  name = "DEFAULT_OUTPUT/DEFAULT_ARTIFACT"
+			  content = "foo,bar\n"
+			]'''
+		assertEquals(expectedResult, result.toString)
+	}
+	
+	@Test def testGenerateAdditionalText() {
+		val file = createFile('state foo end state bar end')
+		val generate = getService(#{'serviceType' -> 'generate', 'resource' -> file.name, 'artifact' -> 'DEFAULT_OUTPUT/test.txt'})
+		assertFalse(generate.hasSideEffects)
+		val result = generate.service.apply() as GeneratorResult
+		val String expectedResult = '''
+			GeneratorResult [
+			  name = "DEFAULT_OUTPUT/test.txt"
+			  contentType = "text/plain"
+			  content = "hello, world!"
 			]'''
 		assertEquals(expectedResult, result.toString)
 	}

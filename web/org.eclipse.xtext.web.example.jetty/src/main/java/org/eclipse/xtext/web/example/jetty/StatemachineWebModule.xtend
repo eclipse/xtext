@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
+import org.eclipse.xtext.web.example.jetty.resource.StatemachineContentTypeProvider
 import org.eclipse.xtext.web.example.jetty.resource.StatemachineResourceSetProvider
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineSemanticHighlightingCalculator
@@ -31,6 +32,10 @@ class StatemachineWebModule extends AbstractStatemachineWebModule {
 
 	new(Provider<ExecutorService> executorServiceProvider) {
 		super(executorServiceProvider)
+	}
+	
+	override bindIContentTypeProvider() {
+		return StatemachineContentTypeProvider
 	}
 	
 	def Class<? extends IWebResourceSetProvider> bindIWebResourceSetProvider() {

@@ -146,6 +146,10 @@ define([
 		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
 			services.generatorService = new XtextService();
 			services.generatorService.initialize(options.serviceUrl, 'generate', options.resourceId, services.updateService);
+			services.generatorService._initServerData = function(serverData, editorContext, params) {
+				if (params.artifactId)
+					serverData.artifact = params.artifactId;
+			}
 			services.generate = function(addParams) {
 				return services.generatorService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 			}
