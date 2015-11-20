@@ -53,6 +53,8 @@
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
  * parentClass = 'xtext-editor' {String}
  *     If the 'parent' option is not given, this option is used to find elements that match the given class name.
+ * randomContentType = true {Boolean}
+ *     Whether to generate a random content type to avoid clashes between multiple editor instances.
  * resourceId {String}
  *     The identifier of the resource displayed in the text editor; this option is sent to the server to
  *     communicate required information on the respective resource.
@@ -155,12 +157,14 @@ define([
 	exports.createServices = function(editorViewer, options) {
 		var deferred = jQuery.Deferred();
 		if (!options.xtextLang && options.resourceId)
-			options.xtextLang = options.resourceId.split('.').pop();
+			options.xtextLang = options.resourceId.split(/[?#]/)[0].split('.').pop();
 		var contentType = options.contentType;
 		if (!contentType && options.xtextLang)
 			contentType = 'xtext/' + options.xtextLang;
 		else if (!contentType)
 			contentType = 'xtext';
+		if (options.randomContentType === undefined || options.randomContentType)
+			contentType = contentType + '_' + Math.floor(Math.random() * 2147483648).toString(16);
 		editorViewer.serviceRegistry.registerService('orion.core.contenttype', {}, {
 			contentTypes: [{
 				id: contentType,
@@ -183,6 +187,10 @@ define([
 			if (!syntaxDefinition)
 				syntaxDefinition = 'xtext-resources/' + options.xtextLang + '-syntax';
 			require([syntaxDefinition], function(grammar) {
+				if (!grammar.contentTypes)
+					grammar.contentTypes = [contentType];
+				else if (jQuery.inArray(contentType, grammar.contentTypes) < 0)
+					grammar.contentTypes.push(contentType);
 				options.syntaxDefinition = grammar;
 				serviceBuilder.createServices();
 				deferred.resolve(xtextServices);
@@ -241,14 +249,13 @@ define([
 	 */
 	OrionServiceBuilder.prototype.setupPersistenceServices = function() {
 		var services = this.services;
-		var options = services.options;
-		if (options.enableSaveAction) {
-			var textView = this.viewer.editor.getTextView();
-			textView.setKeyBinding(new mKeyBinding.KeyStroke('s', true), 'saveXtextDocument');
-			textView.setAction('saveXtextDocument', function() {
-				services.saveResourceService.saveResource(services.editorContext, options);
-				return true;
-			}, {name: 'Save'});
+		if (services.options.enableSaveAction) {
+			this.viewer.serviceRegistry.registerService('orion.edit.command', {execute: services.saveResource}, {
+				name: 'Save Xtext document',
+				id: 'xtext.save',
+				key: ['s', true],
+				contentType: [services.contentType]
+			});
 		}
 	}
 	
@@ -259,10 +266,7 @@ define([
 		var services = this.services;
 		var options = services.options;
 		function computeContentAssist(orionContext, params) {
-			for (var p in options) {
-				if (options.hasOwnProperty(p))
-					params[p] = options[p];
-			}
+			ServiceBuilder.mergeOptions(params, options);
 			var deferred = new OrionDeferred();
 			services.contentAssistService.invoke(services.editorContext, params).done(function(entries) {
 				deferred.resolve(entries.map(function(entry) {
@@ -369,10 +373,7 @@ define([
 		var options = services.options;
 		function computeHoverInfo(orionContext, params) {
 			var deferred = new OrionDeferred();
-			for (var p in options) {
-				if (options.hasOwnProperty(p))
-					params[p] = options[p];
-			}
+			ServiceBuilder.mergeOptions(params, options);
 			services.hoverService.invoke(services.editorContext, params).done(function(entry) {
 				deferred.resolve({
 					content: entry.title + entry.content,
@@ -396,10 +397,7 @@ define([
 		var options = services.options;
 		function computeOccurrences(orionContext, params) {
 			var deferred = new OrionDeferred();
-			for (var p in options) {
-				if (options.hasOwnProperty(p))
-					params[p] = options[p];
-			}
+			ServiceBuilder.mergeOptions(params, options);
 			services.occurrencesService.invoke(services.editorContext, params).done(function(occurrencesResult) {
 				var readAnnotations = occurrencesResult.readRegions.map(function(region) {
 					return {
@@ -437,10 +435,7 @@ define([
 		if (options.enableFormattingAction) {
 			function execute(orionContext, params) {
 				var deferred = new OrionDeferred();
-				for (var p in options) {
-					if (options.hasOwnProperty(p))
-						params[p] = options[p];
-				}
+				ServiceBuilder.mergeOptions(params, options);
 				services.formattingService.invoke(services.editorContext, params).done(function(result) {
 					deferred.resolve();
 				}).fail(function() {

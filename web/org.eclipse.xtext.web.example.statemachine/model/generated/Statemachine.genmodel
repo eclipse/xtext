@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.web.example.statemachine/src-gen"
-    modelPluginID="org.eclipse.xtext.web.example.statemachine" forceOverwrite="true"
-    modelName="Statemachine" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="******************************************************************************&#xA;Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA; ******************************************************************************"
+    modelDirectory="/org.eclipse.xtext.web.example.statemachine/src-gen" modelPluginID="org.eclipse.xtext.web.example.statemachine"
+    forceOverwrite="true" modelName="Statemachine" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.11">
   <genPackages prefix="Statemachine" basePackage="org.eclipse.xtext.web.example.statemachine"
       disposableProviderFactory="true" fileExtensions="statemachine" ecorePackage="Statemachine.ecore#/">

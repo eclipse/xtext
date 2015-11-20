@@ -277,108 +277,116 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   @Override
   public void generate() {
     boolean _and = false;
-    boolean _get = this.generateJsHighlighting.get();
-    if (!_get) {
+    if (!(this.highlightingModuleName != null)) {
       _and = false;
+    } else {
+      boolean _endsWith = this.highlightingModuleName.endsWith(".js");
+      _and = _endsWith;
+    }
+    if (_and) {
+      int _length = this.highlightingModuleName.length();
+      int _minus = (_length - 3);
+      String _substring = this.highlightingModuleName.substring(0, _minus);
+      this.highlightingModuleName = _substring;
+    }
+    IXtextGeneratorLanguage _language = this.getLanguage();
+    List<String> _fileExtensions = _language.getFileExtensions();
+    final String langId = IterableExtensions.<String>head(_fileExtensions);
+    String _elvis = null;
+    if (this.highlightingModuleName != null) {
+      _elvis = this.highlightingModuleName;
+    } else {
+      String _switchResult = null;
+      WebIntegrationFragment.Framework _get = this.framework.get();
+      if (_get != null) {
+        switch (_get) {
+          case ORION:
+            _switchResult = (("xtext-resources/generated/" + langId) + "-syntax");
+            break;
+          case ACE:
+          case CODEMIRROR:
+            _switchResult = ("xtext-resources/generated/mode-" + langId);
+            break;
+          default:
+            break;
+        }
+      }
+      _elvis = _switchResult;
+    }
+    final String hlModName = _elvis;
+    boolean _and_1 = false;
+    boolean _get_1 = this.generateJsHighlighting.get();
+    if (!_get_1) {
+      _and_1 = false;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IWebProjectConfig _web = _projectConfig.getWeb();
       IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
       boolean _tripleNotEquals = (_assets != null);
-      _and = _tripleNotEquals;
+      _and_1 = _tripleNotEquals;
     }
-    if (_and) {
-      IXtextGeneratorLanguage _language = this.getLanguage();
-      List<String> _fileExtensions = _language.getFileExtensions();
-      final String langId = IterableExtensions.<String>head(_fileExtensions);
-      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.highlightingModuleName);
+    if (_and_1) {
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.highlightingPath);
       if (_isNullOrEmpty) {
-        String _switchResult = null;
-        WebIntegrationFragment.Framework _get_1 = this.framework.get();
-        if (_get_1 != null) {
-          switch (_get_1) {
-            case ORION:
-              _switchResult = (("xtext-resources/generated/" + langId) + "-syntax");
-              break;
-            case ACE:
-            case CODEMIRROR:
-              _switchResult = ("xtext-resources/generated/mode-" + langId);
-              break;
-            default:
-              break;
-          }
-        }
-        this.highlightingModuleName = _switchResult;
-      } else {
-        boolean _endsWith = this.highlightingModuleName.endsWith(".js");
-        if (_endsWith) {
-          int _length = this.highlightingModuleName.length();
-          int _minus = (_length - 3);
-          String _substring = this.highlightingModuleName.substring(0, _minus);
-          this.highlightingModuleName = _substring;
-        }
-      }
-      boolean _isNullOrEmpty_1 = StringExtensions.isNullOrEmpty(this.highlightingPath);
-      if (_isNullOrEmpty_1) {
-        this.highlightingPath = (this.highlightingModuleName + ".js");
+        this.highlightingPath = (hlModName + ".js");
       }
       this.generateJsHighlighting(langId);
     }
-    boolean _and_1 = false;
+    boolean _and_2 = false;
     boolean _get_2 = this.generateServlet.get();
     if (!_get_2) {
-      _and_1 = false;
+      _and_2 = false;
     } else {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
       IXtextGeneratorFileSystemAccess _src = _web_1.getSrc();
       boolean _tripleNotEquals_1 = (_src != null);
-      _and_1 = _tripleNotEquals_1;
+      _and_2 = _tripleNotEquals_1;
     }
-    if (_and_1) {
+    if (_and_2) {
       this.generateServlet();
     }
-    boolean _and_2 = false;
+    boolean _and_3 = false;
     boolean _get_3 = this.generateJettyLauncher.get();
     if (!_get_3) {
-      _and_2 = false;
+      _and_3 = false;
     } else {
       IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
       IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
       IXtextGeneratorFileSystemAccess _src_1 = _web_2.getSrc();
       boolean _tripleNotEquals_2 = (_src_1 != null);
-      _and_2 = _tripleNotEquals_2;
+      _and_3 = _tripleNotEquals_2;
     }
-    if (_and_2) {
+    if (_and_3) {
       this.generateServerLauncher();
     }
-    boolean _and_3 = false;
+    boolean _and_4 = false;
     boolean _get_4 = this.generateHtmlExample.get();
     if (!_get_4) {
-      _and_3 = false;
+      _and_4 = false;
     } else {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IWebProjectConfig _web_3 = _projectConfig_3.getWeb();
       IXtextGeneratorFileSystemAccess _assets_1 = _web_3.getAssets();
       boolean _tripleNotEquals_3 = (_assets_1 != null);
-      _and_3 = _tripleNotEquals_3;
+      _and_4 = _tripleNotEquals_3;
     }
-    if (_and_3) {
-      this.generateIndexDoc();
+    if (_and_4) {
+      this.generateIndexDoc(hlModName);
       this.generateStyleSheet();
     }
-    boolean _and_4 = false;
+    boolean _and_5 = false;
     boolean _get_5 = this.generateWebXml.get();
     if (!_get_5) {
-      _and_4 = false;
+      _and_5 = false;
     } else {
       IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
       IWebProjectConfig _web_4 = _projectConfig_4.getWeb();
       IXtextGeneratorFileSystemAccess _assets_2 = _web_4.getAssets();
       boolean _tripleNotEquals_4 = (_assets_2 != null);
-      _and_4 = _tripleNotEquals_4;
+      _and_5 = _tripleNotEquals_4;
     }
-    if (_and_4) {
+    if (_and_5) {
       this.generateWebXml();
     }
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -479,14 +487,22 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("define(\"");
-              _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
-              _builder.append("\", function() {");
+              _builder.append("define(");
+              {
+                boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(WebIntegrationFragment.this.highlightingModuleName);
+                boolean _not = (!_isNullOrEmpty);
+                if (_not) {
+                  _builder.append("\"");
+                  _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+                  _builder.append("\", ");
+                }
+              }
+              _builder.append("[], function() {");
               _builder.newLineIfNotEmpty();
               {
                 boolean _isEmpty = wordKeywords.isEmpty();
-                boolean _not = (!_isEmpty);
-                if (_not) {
+                boolean _not_1 = (!_isEmpty);
+                if (_not_1) {
                   _builder.append("\t");
                   _builder.append("var keywords = \"");
                   {
@@ -507,8 +523,8 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               }
               {
                 boolean _isEmpty_1 = nonWordKeywords.isEmpty();
-                boolean _not_1 = (!_isEmpty_1);
-                if (_not_1) {
+                boolean _not_2 = (!_isEmpty_1);
+                if (_not_2) {
                   _builder.append("\t");
                   _builder.append("var extraKeywords = \"");
                   {
@@ -589,17 +605,25 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           StringConcatenationClient _client_1 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("define(\"");
-              _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
-              _builder.append("\", [\"ace/lib/oop\", \"ace/mode/text\", \"ace/mode/text_highlight_rules\"], function(oop, mText, mTextHighlightRules) {");
+              _builder.append("define(");
+              {
+                boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(WebIntegrationFragment.this.highlightingModuleName);
+                boolean _not = (!_isNullOrEmpty);
+                if (_not) {
+                  _builder.append("\"");
+                  _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+                  _builder.append("\", ");
+                }
+              }
+              _builder.append("[\"ace/lib/oop\", \"ace/mode/text\", \"ace/mode/text_highlight_rules\"], function(oop, mText, mTextHighlightRules) {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("var HighlightRules = function() {");
               _builder.newLine();
               {
                 boolean _isEmpty = wordKeywords.isEmpty();
-                boolean _not = (!_isEmpty);
-                if (_not) {
+                boolean _not_1 = (!_isEmpty);
+                if (_not_1) {
                   _builder.append("\t\t");
                   _builder.append("var keywords = \"");
                   {
@@ -620,8 +644,8 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               }
               {
                 boolean _isEmpty_1 = nonWordKeywords.isEmpty();
-                boolean _not_1 = (!_isEmpty_1);
-                if (_not_1) {
+                boolean _not_2 = (!_isEmpty_1);
+                if (_not_2) {
                   _builder.append("\t\t");
                   _builder.append("var extraKeywords = \"");
                   {
@@ -752,14 +776,22 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           StringConcatenationClient _client_2 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("define(\"");
-              _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
-              _builder.append("\", [\"codemirror\", \"codemirror/addon/mode/simple\"], function(CodeMirror, SimpleMode) {");
+              _builder.append("define(");
+              {
+                boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(WebIntegrationFragment.this.highlightingModuleName);
+                boolean _not = (!_isNullOrEmpty);
+                if (_not) {
+                  _builder.append("\"");
+                  _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+                  _builder.append("\", ");
+                }
+              }
+              _builder.append("[\"codemirror\", \"codemirror/addon/mode/simple\"], function(CodeMirror, SimpleMode) {");
               _builder.newLineIfNotEmpty();
               {
                 boolean _isEmpty = wordKeywords.isEmpty();
-                boolean _not = (!_isEmpty);
-                if (_not) {
+                boolean _not_1 = (!_isEmpty);
+                if (_not_1) {
                   _builder.append("\t");
                   _builder.append("var keywords = \"");
                   {
@@ -780,8 +812,8 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               }
               {
                 boolean _isEmpty_1 = nonWordKeywords.isEmpty();
-                boolean _not_1 = (!_isEmpty_1);
-                if (_not_1) {
+                boolean _not_2 = (!_isEmpty_1);
+                if (_not_2) {
                   _builder.append("\t");
                   _builder.append("var extraKeywords = \"");
                   {
@@ -1426,7 +1458,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     return patterns;
   }
   
-  protected void generateIndexDoc() {
+  protected void generateIndexDoc(final String hlModName) {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
@@ -1584,7 +1616,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             String _xifexpression = null;
             boolean _get_4 = WebIntegrationFragment.this.generateJsHighlighting.get();
             if (_get_4) {
-              _xifexpression = WebIntegrationFragment.this.highlightingModuleName;
+              _xifexpression = hlModName;
             } else {
               _xifexpression = "none";
             }
@@ -1666,7 +1698,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               String _xifexpression_1 = null;
               boolean _get_6 = WebIntegrationFragment.this.generateJsHighlighting.get();
               if (_get_6) {
-                _xifexpression_1 = WebIntegrationFragment.this.highlightingModuleName;
+                _xifexpression_1 = hlModName;
               } else {
                 _xifexpression_1 = "none";
               }
@@ -1747,7 +1779,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                   boolean _get_8 = WebIntegrationFragment.this.generateJsHighlighting.get();
                   if (_get_8) {
                     _builder.append("\"");
-                    _builder.append(WebIntegrationFragment.this.highlightingModuleName, "\t\t");
+                    _builder.append(hlModName, "\t\t");
                     _builder.append("\", ");
                   }
                 }
