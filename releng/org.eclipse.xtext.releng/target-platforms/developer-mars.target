@@ -5,7 +5,7 @@
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.11milestones/"/>
+<repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xpand.feature.group" version="0.0.0"/>

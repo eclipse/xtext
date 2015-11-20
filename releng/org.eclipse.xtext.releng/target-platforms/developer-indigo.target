@@ -14,7 +14,7 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.11milestones"/>
+<repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jdt.feature.group" version="3.7.1.r371_v20110810-0800-7z8gFcoFMLfTabvKsR5Qm9rBGEBK"/>
