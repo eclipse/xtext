@@ -42,8 +42,6 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
  * 
  * @noextend
  */
- //TODO make Generator independent of mwe and add a thin wrapper (GeneratorComponent)
- //TODO only implement mwe2.IWorkflowComponent, get rid of "Issues", just logging/exceptions?
 @Log
 class XtextGenerator extends AbstractWorkflowComponent2 {
 

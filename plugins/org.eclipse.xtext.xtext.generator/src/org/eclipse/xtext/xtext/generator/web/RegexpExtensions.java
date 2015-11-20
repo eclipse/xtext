@@ -11,7 +11,7 @@ import org.eclipse.xtext.util.Strings;
 
 public class RegexpExtensions {
 	
-	public static String toRegexpString(String string) {
+	public static String toRegexpString(String string, boolean ignoreCase) {
 		int length = string.length();
 		StringBuilder out = new StringBuilder(2 * length);
 
@@ -52,7 +52,12 @@ public class RegexpExtensions {
 					out.append(c);
 					break;
 				default:
-					if (c < 0x20 || c > 0x7e) {
+					if (ignoreCase && Character.isLetter(c)) {
+						out.append('[');
+						out.append(Character.toLowerCase(c));
+						out.append(Character.toUpperCase(c));
+						out.append(']');
+					} else if (c < 0x20 || c > 0x7e) {
 						out.append("\\\\u");
 						out.append(Strings.toHex((c >> 12) & 0xf));
 						out.append(Strings.toHex((c >> 8) & 0xf));
