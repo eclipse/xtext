@@ -129,6 +129,8 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   
   private boolean useServlet3Api = true;
   
+  private boolean ignoreCase = false;
+  
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String requireJsVersion = WebIntegrationFragment.REQUIREJS_VERSION;
   
@@ -207,6 +209,13 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   }
   
   /**
+   * Whether the generated syntax highlighting should ignore case for language keywords.
+   */
+  public void setIgnoreCase(final boolean ignoreCase) {
+    this.ignoreCase = ignoreCase;
+  }
+  
+  /**
    * Whether a Java main-class for launching a local Jetty server should be generated. The default
    * is {@code false}.
    */
@@ -277,108 +286,116 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   @Override
   public void generate() {
     boolean _and = false;
-    boolean _get = this.generateJsHighlighting.get();
-    if (!_get) {
+    if (!(this.highlightingModuleName != null)) {
       _and = false;
+    } else {
+      boolean _endsWith = this.highlightingModuleName.endsWith(".js");
+      _and = _endsWith;
+    }
+    if (_and) {
+      int _length = this.highlightingModuleName.length();
+      int _minus = (_length - 3);
+      String _substring = this.highlightingModuleName.substring(0, _minus);
+      this.highlightingModuleName = _substring;
+    }
+    IXtextGeneratorLanguage _language = this.getLanguage();
+    List<String> _fileExtensions = _language.getFileExtensions();
+    final String langId = IterableExtensions.<String>head(_fileExtensions);
+    String _elvis = null;
+    if (this.highlightingModuleName != null) {
+      _elvis = this.highlightingModuleName;
+    } else {
+      String _switchResult = null;
+      WebIntegrationFragment.Framework _get = this.framework.get();
+      if (_get != null) {
+        switch (_get) {
+          case ORION:
+            _switchResult = (("xtext-resources/generated/" + langId) + "-syntax");
+            break;
+          case ACE:
+          case CODEMIRROR:
+            _switchResult = ("xtext-resources/generated/mode-" + langId);
+            break;
+          default:
+            break;
+        }
+      }
+      _elvis = _switchResult;
+    }
+    final String hlModName = _elvis;
+    boolean _and_1 = false;
+    boolean _get_1 = this.generateJsHighlighting.get();
+    if (!_get_1) {
+      _and_1 = false;
     } else {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IWebProjectConfig _web = _projectConfig.getWeb();
       IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
       boolean _tripleNotEquals = (_assets != null);
-      _and = _tripleNotEquals;
+      _and_1 = _tripleNotEquals;
     }
-    if (_and) {
-      IXtextGeneratorLanguage _language = this.getLanguage();
-      List<String> _fileExtensions = _language.getFileExtensions();
-      final String langId = IterableExtensions.<String>head(_fileExtensions);
-      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.highlightingModuleName);
+    if (_and_1) {
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.highlightingPath);
       if (_isNullOrEmpty) {
-        String _switchResult = null;
-        WebIntegrationFragment.Framework _get_1 = this.framework.get();
-        if (_get_1 != null) {
-          switch (_get_1) {
-            case ORION:
-              _switchResult = (("xtext-resources/generated/" + langId) + "-syntax");
-              break;
-            case ACE:
-            case CODEMIRROR:
-              _switchResult = ("xtext-resources/generated/mode-" + langId);
-              break;
-            default:
-              break;
-          }
-        }
-        this.highlightingModuleName = _switchResult;
-      } else {
-        boolean _endsWith = this.highlightingModuleName.endsWith(".js");
-        if (_endsWith) {
-          int _length = this.highlightingModuleName.length();
-          int _minus = (_length - 3);
-          String _substring = this.highlightingModuleName.substring(0, _minus);
-          this.highlightingModuleName = _substring;
-        }
-      }
-      boolean _isNullOrEmpty_1 = StringExtensions.isNullOrEmpty(this.highlightingPath);
-      if (_isNullOrEmpty_1) {
-        this.highlightingPath = (this.highlightingModuleName + ".js");
+        this.highlightingPath = (hlModName + ".js");
       }
       this.generateJsHighlighting(langId);
     }
-    boolean _and_1 = false;
+    boolean _and_2 = false;
     boolean _get_2 = this.generateServlet.get();
     if (!_get_2) {
-      _and_1 = false;
+      _and_2 = false;
     } else {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
       IXtextGeneratorFileSystemAccess _src = _web_1.getSrc();
       boolean _tripleNotEquals_1 = (_src != null);
-      _and_1 = _tripleNotEquals_1;
+      _and_2 = _tripleNotEquals_1;
     }
-    if (_and_1) {
+    if (_and_2) {
       this.generateServlet();
     }
-    boolean _and_2 = false;
+    boolean _and_3 = false;
     boolean _get_3 = this.generateJettyLauncher.get();
     if (!_get_3) {
-      _and_2 = false;
+      _and_3 = false;
     } else {
       IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
       IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
       IXtextGeneratorFileSystemAccess _src_1 = _web_2.getSrc();
       boolean _tripleNotEquals_2 = (_src_1 != null);
-      _and_2 = _tripleNotEquals_2;
+      _and_3 = _tripleNotEquals_2;
     }
-    if (_and_2) {
+    if (_and_3) {
       this.generateServerLauncher();
     }
-    boolean _and_3 = false;
+    boolean _and_4 = false;
     boolean _get_4 = this.generateHtmlExample.get();
     if (!_get_4) {
-      _and_3 = false;
+      _and_4 = false;
     } else {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IWebProjectConfig _web_3 = _projectConfig_3.getWeb();
       IXtextGeneratorFileSystemAccess _assets_1 = _web_3.getAssets();
       boolean _tripleNotEquals_3 = (_assets_1 != null);
-      _and_3 = _tripleNotEquals_3;
+      _and_4 = _tripleNotEquals_3;
     }
-    if (_and_3) {
-      this.generateIndexDoc();
+    if (_and_4) {
+      this.generateIndexDoc(hlModName);
       this.generateStyleSheet();
     }
-    boolean _and_4 = false;
+    boolean _and_5 = false;
     boolean _get_5 = this.generateWebXml.get();
     if (!_get_5) {
-      _and_4 = false;
+      _and_5 = false;
     } else {
       IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
       IWebProjectConfig _web_4 = _projectConfig_4.getWeb();
       IXtextGeneratorFileSystemAccess _assets_2 = _web_4.getAssets();
       boolean _tripleNotEquals_4 = (_assets_2 != null);
-      _and_4 = _tripleNotEquals_4;
+      _and_5 = _tripleNotEquals_4;
     }
-    if (_and_4) {
+    if (_and_5) {
       this.generateWebXml();
     }
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -462,7 +479,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("{name: \"keyword.");
             _builder.append(langId, "");
-            _builder.append("\", match: \"\\\\b(?:\" + keywords + \")\\\\b\"}");
+            _builder.append("\", match: ");
+            CharSequence _generateKeywordsRegExp = this.generateKeywordsRegExp();
+            _builder.append(_generateKeywordsRegExp, "");
+            _builder.append("}");
             patterns.add(_builder.toString());
           }
           boolean _isEmpty_1 = nonWordKeywords.isEmpty();
@@ -471,62 +491,31 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             StringConcatenation _builder_1 = new StringConcatenation();
             _builder_1.append("{name: \"keyword.extra.");
             _builder_1.append(langId, "");
-            _builder_1.append("\", match: \"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
-            _builder_1.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
-            _builder_1.append("|$)\"}");
+            _builder_1.append("\", match: ");
+            CharSequence _generateExtraKeywordsRegExp = this.generateExtraKeywordsRegExp();
+            _builder_1.append(_generateExtraKeywordsRegExp, "");
+            _builder_1.append("}");
             patterns.add(_builder_1.toString());
           }
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("define(\"");
-              _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
-              _builder.append("\", function() {");
-              _builder.newLineIfNotEmpty();
+              _builder.append("define(");
               {
-                boolean _isEmpty = wordKeywords.isEmpty();
-                boolean _not = (!_isEmpty);
+                boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(WebIntegrationFragment.this.highlightingModuleName);
+                boolean _not = (!_isNullOrEmpty);
                 if (_not) {
-                  _builder.append("\t");
-                  _builder.append("var keywords = \"");
-                  {
-                    boolean _hasElements = false;
-                    for(final String kw : wordKeywords) {
-                      if (!_hasElements) {
-                        _hasElements = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t");
-                      }
-                      String _regexpString = RegexpExtensions.toRegexpString(kw);
-                      _builder.append(_regexpString, "\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
+                  _builder.append("\"");
+                  _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+                  _builder.append("\", ");
                 }
               }
-              {
-                boolean _isEmpty_1 = nonWordKeywords.isEmpty();
-                boolean _not_1 = (!_isEmpty_1);
-                if (_not_1) {
-                  _builder.append("\t");
-                  _builder.append("var extraKeywords = \"");
-                  {
-                    boolean _hasElements_1 = false;
-                    for(final String kw_1 : nonWordKeywords) {
-                      if (!_hasElements_1) {
-                        _hasElements_1 = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t");
-                      }
-                      String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1);
-                      _builder.append(_regexpString_1, "\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
+              _builder.append("[], function() {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              CharSequence _generateKeywords = WebIntegrationFragment.this.generateKeywords(wordKeywords, nonWordKeywords);
+              _builder.append(_generateKeywords, "\t");
+              _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("return {");
               _builder.newLine();
@@ -545,10 +534,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               _builder.newLine();
               _builder.append("\t\t\t");
               {
-                boolean _hasElements_2 = false;
+                boolean _hasElements = false;
                 for(final String pattern : patterns) {
-                  if (!_hasElements_2) {
-                    _hasElements_2 = true;
+                  if (!_hasElements) {
+                    _hasElements = true;
                   } else {
                     _builder.appendImmediate(",\n", "\t\t\t");
                   }
@@ -574,81 +563,53 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           boolean _not_2 = (!_isEmpty_2);
           if (_not_2) {
             StringConcatenation _builder_2 = new StringConcatenation();
-            _builder_2.append("{token: \"keyword\", regex: \"\\\\b(?:\" + keywords + \")\\\\b\"}");
+            _builder_2.append("{token: \"keyword\", regex: ");
+            CharSequence _generateKeywordsRegExp_1 = this.generateKeywordsRegExp();
+            _builder_2.append(_generateKeywordsRegExp_1, "");
+            _builder_2.append("}");
             patterns_1.put("start", _builder_2.toString());
           }
           boolean _isEmpty_3 = nonWordKeywords.isEmpty();
           boolean _not_3 = (!_isEmpty_3);
           if (_not_3) {
             StringConcatenation _builder_3 = new StringConcatenation();
-            _builder_3.append("{token: \"keyword\", regex: \"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
-            _builder_3.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
-            _builder_3.append("|$)\"}");
+            _builder_3.append("{token: \"keyword\", regex: ");
+            CharSequence _generateExtraKeywordsRegExp_1 = this.generateExtraKeywordsRegExp();
+            _builder_3.append(_generateExtraKeywordsRegExp_1, "");
+            _builder_3.append("}");
             patterns_1.put("start", _builder_3.toString());
           }
           StringConcatenationClient _client_1 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("define(\"");
-              _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
-              _builder.append("\", [\"ace/lib/oop\", \"ace/mode/text\", \"ace/mode/text_highlight_rules\"], function(oop, mText, mTextHighlightRules) {");
+              _builder.append("define(");
+              {
+                boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(WebIntegrationFragment.this.highlightingModuleName);
+                boolean _not = (!_isNullOrEmpty);
+                if (_not) {
+                  _builder.append("\"");
+                  _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+                  _builder.append("\", ");
+                }
+              }
+              _builder.append("[\"ace/lib/oop\", \"ace/mode/text\", \"ace/mode/text_highlight_rules\"], function(oop, mText, mTextHighlightRules) {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("var HighlightRules = function() {");
               _builder.newLine();
-              {
-                boolean _isEmpty = wordKeywords.isEmpty();
-                boolean _not = (!_isEmpty);
-                if (_not) {
-                  _builder.append("\t\t");
-                  _builder.append("var keywords = \"");
-                  {
-                    boolean _hasElements = false;
-                    for(final String kw : wordKeywords) {
-                      if (!_hasElements) {
-                        _hasElements = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t\t");
-                      }
-                      String _regexpString = RegexpExtensions.toRegexpString(kw);
-                      _builder.append(_regexpString, "\t\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-              {
-                boolean _isEmpty_1 = nonWordKeywords.isEmpty();
-                boolean _not_1 = (!_isEmpty_1);
-                if (_not_1) {
-                  _builder.append("\t\t");
-                  _builder.append("var extraKeywords = \"");
-                  {
-                    boolean _hasElements_1 = false;
-                    for(final String kw_1 : nonWordKeywords) {
-                      if (!_hasElements_1) {
-                        _hasElements_1 = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t\t");
-                      }
-                      String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1);
-                      _builder.append(_regexpString_1, "\t\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
+              _builder.append("\t\t");
+              CharSequence _generateKeywords = WebIntegrationFragment.this.generateKeywords(wordKeywords, nonWordKeywords);
+              _builder.append(_generateKeywords, "\t\t");
+              _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
               _builder.append("this.$rules = {");
               _builder.newLine();
               {
                 Set<String> _keySet = patterns_1.keySet();
-                boolean _hasElements_2 = false;
+                boolean _hasElements = false;
                 for(final String state : _keySet) {
-                  if (!_hasElements_2) {
-                    _hasElements_2 = true;
+                  if (!_hasElements) {
+                    _hasElements = true;
                   } else {
                     _builder.appendImmediate(",", "\t\t\t");
                   }
@@ -661,10 +622,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                   _builder.append("\t");
                   {
                     Collection<String> _get = patterns_1.get(state);
-                    boolean _hasElements_3 = false;
+                    boolean _hasElements_1 = false;
                     for(final String rule : _get) {
-                      if (!_hasElements_3) {
-                        _hasElements_3 = true;
+                      if (!_hasElements_1) {
+                        _hasElements_1 = true;
                       } else {
                         _builder.appendImmediate(",\n", "\t\t\t\t");
                       }
@@ -737,69 +698,41 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           boolean _not_4 = (!_isEmpty_4);
           if (_not_4) {
             StringConcatenation _builder_4 = new StringConcatenation();
-            _builder_4.append("{token: \"keyword\", regex: \"\\\\b(?:\" + keywords + \")\\\\b\"}");
+            _builder_4.append("{token: \"keyword\", regex: ");
+            CharSequence _generateKeywordsRegExp_2 = this.generateKeywordsRegExp();
+            _builder_4.append(_generateKeywordsRegExp_2, "");
+            _builder_4.append("}");
             patterns_2.put("start", _builder_4.toString());
           }
           boolean _isEmpty_5 = nonWordKeywords.isEmpty();
           boolean _not_5 = (!_isEmpty_5);
           if (_not_5) {
             StringConcatenation _builder_5 = new StringConcatenation();
-            _builder_5.append("{token: \"keyword\", regex: \"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
-            _builder_5.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
-            _builder_5.append("|$)\"}");
+            _builder_5.append("{token: \"keyword\", regex: ");
+            CharSequence _generateExtraKeywordsRegExp_2 = this.generateExtraKeywordsRegExp();
+            _builder_5.append(_generateExtraKeywordsRegExp_2, "");
+            _builder_5.append("}");
             patterns_2.put("start", _builder_5.toString());
           }
           StringConcatenationClient _client_2 = new StringConcatenationClient() {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("define(\"");
-              _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
-              _builder.append("\", [\"codemirror\", \"codemirror/addon/mode/simple\"], function(CodeMirror, SimpleMode) {");
-              _builder.newLineIfNotEmpty();
+              _builder.append("define(");
               {
-                boolean _isEmpty = wordKeywords.isEmpty();
-                boolean _not = (!_isEmpty);
+                boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(WebIntegrationFragment.this.highlightingModuleName);
+                boolean _not = (!_isNullOrEmpty);
                 if (_not) {
-                  _builder.append("\t");
-                  _builder.append("var keywords = \"");
-                  {
-                    boolean _hasElements = false;
-                    for(final String kw : wordKeywords) {
-                      if (!_hasElements) {
-                        _hasElements = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t");
-                      }
-                      String _regexpString = RegexpExtensions.toRegexpString(kw);
-                      _builder.append(_regexpString, "\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
+                  _builder.append("\"");
+                  _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+                  _builder.append("\", ");
                 }
               }
-              {
-                boolean _isEmpty_1 = nonWordKeywords.isEmpty();
-                boolean _not_1 = (!_isEmpty_1);
-                if (_not_1) {
-                  _builder.append("\t");
-                  _builder.append("var extraKeywords = \"");
-                  {
-                    boolean _hasElements_1 = false;
-                    for(final String kw_1 : nonWordKeywords) {
-                      if (!_hasElements_1) {
-                        _hasElements_1 = true;
-                      } else {
-                        _builder.appendImmediate("|", "\t");
-                      }
-                      String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1);
-                      _builder.append(_regexpString_1, "\t");
-                    }
-                  }
-                  _builder.append("\";");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
+              _builder.append("[\"codemirror\", \"codemirror/addon/mode/simple\"], function(CodeMirror, SimpleMode) {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              CharSequence _generateKeywords = WebIntegrationFragment.this.generateKeywords(wordKeywords, nonWordKeywords);
+              _builder.append(_generateKeywords, "\t");
+              _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("CodeMirror.defineSimpleMode(\"xtext/");
               _builder.append(langId, "\t");
@@ -807,10 +740,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               _builder.newLineIfNotEmpty();
               {
                 Set<String> _keySet = patterns_2.keySet();
-                boolean _hasElements_2 = false;
+                boolean _hasElements = false;
                 for(final String state : _keySet) {
-                  if (!_hasElements_2) {
-                    _hasElements_2 = true;
+                  if (!_hasElements) {
+                    _hasElements = true;
                   } else {
                     _builder.appendImmediate(",", "\t\t");
                   }
@@ -830,10 +763,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                   _builder.append("\t");
                   {
                     Collection<String> _get = patterns_2.get(state);
-                    boolean _hasElements_3 = false;
+                    boolean _hasElements_1 = false;
                     for(final String rule : _get) {
-                      if (!_hasElements_3) {
-                        _hasElements_3 = true;
+                      if (!_hasElements_1) {
+                        _hasElements_1 = true;
                       } else {
                         _builder.appendImmediate(",\n", "\t\t\t");
                       }
@@ -870,6 +803,117 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
     jsFile.writeTo(_assets);
+  }
+  
+  protected CharSequence generateKeywords(final List<String> wordKeywords, final List<String> nonWordKeywords) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isEmpty = wordKeywords.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _builder.append("var keywords = \"");
+        {
+          boolean _hasElements = false;
+          for(final String kw : wordKeywords) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate("|", "");
+            }
+            boolean _and = false;
+            WebIntegrationFragment.Framework _get = this.framework.get();
+            boolean _notEquals = (!Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR));
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              _and = this.ignoreCase;
+            }
+            String _regexpString = RegexpExtensions.toRegexpString(kw, _and);
+            _builder.append(_regexpString, "");
+          }
+        }
+        _builder.append("\";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      boolean _isEmpty_1 = nonWordKeywords.isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      if (_not_1) {
+        _builder.append("var extraKeywords = \"");
+        {
+          boolean _hasElements_1 = false;
+          for(final String kw_1 : nonWordKeywords) {
+            if (!_hasElements_1) {
+              _hasElements_1 = true;
+            } else {
+              _builder.appendImmediate("|", "");
+            }
+            boolean _and_1 = false;
+            WebIntegrationFragment.Framework _get_1 = this.framework.get();
+            boolean _notEquals_1 = (!Objects.equal(_get_1, WebIntegrationFragment.Framework.CODEMIRROR));
+            if (!_notEquals_1) {
+              _and_1 = false;
+            } else {
+              _and_1 = this.ignoreCase;
+            }
+            String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1, _and_1);
+            _builder.append(_regexpString_1, "");
+          }
+        }
+        _builder.append("\";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder;
+  }
+  
+  protected CharSequence generateKeywordsRegExp() {
+    CharSequence _xifexpression = null;
+    boolean _and = false;
+    WebIntegrationFragment.Framework _get = this.framework.get();
+    boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR);
+    if (!_equals) {
+      _and = false;
+    } else {
+      _and = this.ignoreCase;
+    }
+    if (_and) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("new RegExp(\"\\\\b(?:\" + keywords + \")\\\\b\", \"gi\")");
+      _xifexpression = _builder;
+    } else {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\"\\\\b(?:\" + keywords + \")\\\\b\"");
+      _xifexpression = _builder_1;
+    }
+    return _xifexpression;
+  }
+  
+  protected CharSequence generateExtraKeywordsRegExp() {
+    CharSequence _xifexpression = null;
+    boolean _and = false;
+    WebIntegrationFragment.Framework _get = this.framework.get();
+    boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR);
+    if (!_equals) {
+      _and = false;
+    } else {
+      _and = this.ignoreCase;
+    }
+    if (_and) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("new RegExp(\"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
+      _builder.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
+      _builder.append("|$)\", \"gi\")");
+      _xifexpression = _builder;
+    } else {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
+      _builder_1.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
+      _builder_1.append("|$)\"");
+      _xifexpression = _builder_1;
+    }
+    return _xifexpression;
   }
   
   protected Collection<String> createOrionPatterns(final String langId, final Set<String> keywords) {
@@ -1426,7 +1470,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     return patterns;
   }
   
-  protected void generateIndexDoc() {
+  protected void generateIndexDoc(final String hlModName) {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IWebProjectConfig _web = _projectConfig.getWeb();
     IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
@@ -1584,7 +1628,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             String _xifexpression = null;
             boolean _get_4 = WebIntegrationFragment.this.generateJsHighlighting.get();
             if (_get_4) {
-              _xifexpression = WebIntegrationFragment.this.highlightingModuleName;
+              _xifexpression = hlModName;
             } else {
               _xifexpression = "none";
             }
@@ -1666,7 +1710,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               String _xifexpression_1 = null;
               boolean _get_6 = WebIntegrationFragment.this.generateJsHighlighting.get();
               if (_get_6) {
-                _xifexpression_1 = WebIntegrationFragment.this.highlightingModuleName;
+                _xifexpression_1 = hlModName;
               } else {
                 _xifexpression_1 = "none";
               }
@@ -1747,7 +1791,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                   boolean _get_8 = WebIntegrationFragment.this.generateJsHighlighting.get();
                   if (_get_8) {
                     _builder.append("\"");
-                    _builder.append(WebIntegrationFragment.this.highlightingModuleName, "\t\t");
+                    _builder.append(hlModName, "\t\t");
                     _builder.append("\", ");
                   }
                 }

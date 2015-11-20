@@ -80,15 +80,15 @@ Workflow {
 			// JavaScript-based syntax highlighting
 			fragment = web.WebIntegrationFragment auto-inject {
 				framework = "Orion"
-				highlightingModuleName = "xtext/statemachine-syntax"
+				highlightingPath = "xtext/statemachine-syntax.js"
 			}
 			fragment = web.WebIntegrationFragment auto-inject {
 				framework = "Ace"
-				highlightingModuleName = "xtext/ace-mode-statemachine"
+				highlightingPath = "xtext/ace-mode-statemachine.js"
 			}
 			fragment = web.WebIntegrationFragment auto-inject {
 				framework = "CodeMirror"
-				highlightingModuleName = "xtext/cm-mode-statemachine"
+				highlightingPath = "xtext/cm-mode-statemachine.js"
 			}
 		}
 	}

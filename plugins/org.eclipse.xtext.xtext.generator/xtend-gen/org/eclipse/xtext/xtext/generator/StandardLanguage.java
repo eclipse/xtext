@@ -59,51 +59,51 @@ import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2;
 public class StandardLanguage extends XtextGeneratorLanguage {
   private GrammarAccessFragment2 grammarAccess = new GrammarAccessFragment2();
   
+  private EMFGeneratorFragment2 emfGenerator = new EMFGeneratorFragment2();
+  
   private SerializerFragment2 serializer = new SerializerFragment2();
   
   private ResourceFactoryFragment2 resourceFactoryFragment = new ResourceFactoryFragment2();
-  
-  private EMFGeneratorFragment2 emfGenerator = new EMFGeneratorFragment2();
   
   private XtextAntlrGeneratorFragment2 parserGenerator = new XtextAntlrGeneratorFragment2();
   
   private ValidatorFragment2 validator = new ValidatorFragment2();
   
-  private Formatter2Fragment2 formatter = new Formatter2Fragment2();
-  
-  private GeneratorFragment2 generator = new GeneratorFragment2();
-  
-  private BuilderIntegrationFragment2 builder = new BuilderIntegrationFragment2();
-  
   private ImportNamespacesScopingFragment2 scopeProvider = new ImportNamespacesScopingFragment2();
   
   private QualifiedNamesFragment2 qualifiedNamesProvider = new QualifiedNamesFragment2();
   
-  private Junit4Fragment2 junitSupport = new Junit4Fragment2();
+  private BuilderIntegrationFragment2 builder = new BuilderIntegrationFragment2();
   
-  private QuickfixProviderFragment2 quickFixProvider = new QuickfixProviderFragment2();
+  private GeneratorFragment2 generator = new GeneratorFragment2();
+  
+  private Formatter2Fragment2 formatter = new Formatter2Fragment2();
   
   private LabelProviderFragment2 labelProvider = new LabelProviderFragment2();
   
-  private OutlineTreeProviderFragment2 outline = new OutlineTreeProviderFragment2();
-  
   private QuickOutlineFragment2 quickOutline = new QuickOutlineFragment2();
   
-  private CompareFragment2 compareEditor = new CompareFragment2();
+  private OutlineTreeProviderFragment2 outline = new OutlineTreeProviderFragment2();
+  
+  private QuickfixProviderFragment2 quickFixProvider = new QuickfixProviderFragment2();
   
   private ContentAssistFragment2 contentAssist = new ContentAssistFragment2();
   
+  private Junit4Fragment2 junitSupport = new Junit4Fragment2();
+  
   private RefactorElementNameFragment2 renameRefactoring = new RefactorElementNameFragment2();
-  
-  private CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2();
-  
-  private XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment();
   
   private TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2();
   
   private XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2();
   
   private XbaseGeneratorFragment2 xbaseSupport = new XbaseGeneratorFragment2();
+  
+  private CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2();
+  
+  private CompareFragment2 compareEditor = new CompareFragment2();
+  
+  private XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment();
   
   private IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator();
   
@@ -222,6 +222,15 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   }
   
   @Pure
+  protected EMFGeneratorFragment2 getEmfGenerator() {
+    return this.emfGenerator;
+  }
+  
+  public void setEmfGenerator(final EMFGeneratorFragment2 emfGenerator) {
+    this.emfGenerator = emfGenerator;
+  }
+  
+  @Pure
   protected SerializerFragment2 getSerializer() {
     return this.serializer;
   }
@@ -237,15 +246,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   public void setResourceFactoryFragment(final ResourceFactoryFragment2 resourceFactoryFragment) {
     this.resourceFactoryFragment = resourceFactoryFragment;
-  }
-  
-  @Pure
-  protected EMFGeneratorFragment2 getEmfGenerator() {
-    return this.emfGenerator;
-  }
-  
-  public void setEmfGenerator(final EMFGeneratorFragment2 emfGenerator) {
-    this.emfGenerator = emfGenerator;
   }
   
   @Pure
@@ -267,33 +267,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   }
   
   @Pure
-  protected Formatter2Fragment2 getFormatter() {
-    return this.formatter;
-  }
-  
-  public void setFormatter(final Formatter2Fragment2 formatter) {
-    this.formatter = formatter;
-  }
-  
-  @Pure
-  protected GeneratorFragment2 getGenerator() {
-    return this.generator;
-  }
-  
-  public void setGenerator(final GeneratorFragment2 generator) {
-    this.generator = generator;
-  }
-  
-  @Pure
-  protected BuilderIntegrationFragment2 getBuilder() {
-    return this.builder;
-  }
-  
-  public void setBuilder(final BuilderIntegrationFragment2 builder) {
-    this.builder = builder;
-  }
-  
-  @Pure
   protected ImportNamespacesScopingFragment2 getScopeProvider() {
     return this.scopeProvider;
   }
@@ -312,21 +285,30 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   }
   
   @Pure
-  protected Junit4Fragment2 getJunitSupport() {
-    return this.junitSupport;
+  protected BuilderIntegrationFragment2 getBuilder() {
+    return this.builder;
   }
   
-  public void setJunitSupport(final Junit4Fragment2 junitSupport) {
-    this.junitSupport = junitSupport;
+  public void setBuilder(final BuilderIntegrationFragment2 builder) {
+    this.builder = builder;
   }
   
   @Pure
-  protected QuickfixProviderFragment2 getQuickFixProvider() {
-    return this.quickFixProvider;
+  protected GeneratorFragment2 getGenerator() {
+    return this.generator;
   }
   
-  public void setQuickFixProvider(final QuickfixProviderFragment2 quickFixProvider) {
-    this.quickFixProvider = quickFixProvider;
+  public void setGenerator(final GeneratorFragment2 generator) {
+    this.generator = generator;
+  }
+  
+  @Pure
+  protected Formatter2Fragment2 getFormatter() {
+    return this.formatter;
+  }
+  
+  public void setFormatter(final Formatter2Fragment2 formatter) {
+    this.formatter = formatter;
   }
   
   @Pure
@@ -339,15 +321,6 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   }
   
   @Pure
-  protected OutlineTreeProviderFragment2 getOutline() {
-    return this.outline;
-  }
-  
-  public void setOutline(final OutlineTreeProviderFragment2 outline) {
-    this.outline = outline;
-  }
-  
-  @Pure
   protected QuickOutlineFragment2 getQuickOutline() {
     return this.quickOutline;
   }
@@ -357,12 +330,21 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   }
   
   @Pure
-  protected CompareFragment2 getCompareEditor() {
-    return this.compareEditor;
+  protected OutlineTreeProviderFragment2 getOutline() {
+    return this.outline;
   }
   
-  public void setCompareEditor(final CompareFragment2 compareEditor) {
-    this.compareEditor = compareEditor;
+  public void setOutline(final OutlineTreeProviderFragment2 outline) {
+    this.outline = outline;
+  }
+  
+  @Pure
+  protected QuickfixProviderFragment2 getQuickFixProvider() {
+    return this.quickFixProvider;
+  }
+  
+  public void setQuickFixProvider(final QuickfixProviderFragment2 quickFixProvider) {
+    this.quickFixProvider = quickFixProvider;
   }
   
   @Pure
@@ -375,30 +357,21 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   }
   
   @Pure
+  protected Junit4Fragment2 getJunitSupport() {
+    return this.junitSupport;
+  }
+  
+  public void setJunitSupport(final Junit4Fragment2 junitSupport) {
+    this.junitSupport = junitSupport;
+  }
+  
+  @Pure
   protected RefactorElementNameFragment2 getRenameRefactoring() {
     return this.renameRefactoring;
   }
   
   public void setRenameRefactoring(final RefactorElementNameFragment2 renameRefactoring) {
     this.renameRefactoring = renameRefactoring;
-  }
-  
-  @Pure
-  protected CodetemplatesGeneratorFragment2 getCodeTemplates() {
-    return this.codeTemplates;
-  }
-  
-  public void setCodeTemplates(final CodetemplatesGeneratorFragment2 codeTemplates) {
-    this.codeTemplates = codeTemplates;
-  }
-  
-  @Pure
-  protected XtextAntlrIDEAGeneratorFragment getIdeaParser() {
-    return this.ideaParser;
-  }
-  
-  public void setIdeaParser(final XtextAntlrIDEAGeneratorFragment ideaParser) {
-    this.ideaParser = ideaParser;
   }
   
   @Pure
@@ -426,6 +399,33 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   public void setXbaseSupport(final XbaseGeneratorFragment2 xbaseSupport) {
     this.xbaseSupport = xbaseSupport;
+  }
+  
+  @Pure
+  protected CodetemplatesGeneratorFragment2 getCodeTemplates() {
+    return this.codeTemplates;
+  }
+  
+  public void setCodeTemplates(final CodetemplatesGeneratorFragment2 codeTemplates) {
+    this.codeTemplates = codeTemplates;
+  }
+  
+  @Pure
+  protected CompareFragment2 getCompareEditor() {
+    return this.compareEditor;
+  }
+  
+  public void setCompareEditor(final CompareFragment2 compareEditor) {
+    this.compareEditor = compareEditor;
+  }
+  
+  @Pure
+  protected XtextAntlrIDEAGeneratorFragment getIdeaParser() {
+    return this.ideaParser;
+  }
+  
+  public void setIdeaParser(final XtextAntlrIDEAGeneratorFragment ideaParser) {
+    this.ideaParser = ideaParser;
   }
   
   @Pure

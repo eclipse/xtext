@@ -9,5 +9,5 @@ package org.eclipse.xtext.web.example.statemachine.scoping;
 
 import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider;
 
-public class AbstractStatemachineScopeProvider extends DelegatingScopeProvider {
+public abstract class AbstractStatemachineScopeProvider extends DelegatingScopeProvider {
 }

@@ -46,7 +46,7 @@ define([
 		}
 		if (options.resourceId) {
 			if (!options.xtextLang)
-				options.xtextLang = options.resourceId.split('.').pop();
+				options.xtextLang = options.resourceId.split(/[?#]/)[0].split('.').pop();
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = true;
 			if (options.loadFromServer && this.setupPersistenceServices) {
