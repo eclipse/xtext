@@ -1,4 +1,4 @@
-define("xtext/cm-mode-statemachine", ["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, SimpleMode) {
+define(["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, SimpleMode) {
 	var keywords = "and|end|goto|if|input|output|set|signal|state";
 	CodeMirror.defineSimpleMode("xtext/statemachine", {
 		start: [

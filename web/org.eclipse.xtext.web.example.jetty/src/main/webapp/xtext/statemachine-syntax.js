@@ -1,4 +1,4 @@
-define("xtext/statemachine-syntax", function() {
+define([], function() {
 	var keywords = "and|end|goto|if|input|output|set|signal|state";
 	return {
 		id: "xtext.statemachine",
