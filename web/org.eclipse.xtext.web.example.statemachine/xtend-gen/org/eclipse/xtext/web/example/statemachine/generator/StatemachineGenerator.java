@@ -38,7 +38,10 @@ public class StatemachineGenerator extends AbstractGenerator {
     final Statemachine statemachine = IterableExtensions.<Statemachine>head(_filter);
     if ((statemachine != null)) {
       CharSequence _generateHtml = this.generateHtml(statemachine);
-      fsa.generateFile("statemachine.html", _generateHtml);
+      fsa.generateFile("/DEFAULT_ARTIFACT", _generateHtml);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("This is an additional generator artifact.");
+      fsa.generateFile("/hidden.txt", _builder);
     }
   }
   

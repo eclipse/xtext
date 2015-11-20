@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import com.google.inject.Injector;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,8 +28,6 @@ import org.eclipse.xtext.web.server.generator.GeneratorResult;
 import org.eclipse.xtext.web.servlet.HttpServiceContext;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * An HTTP servlet for publishing the Xtext services. Include this into your web server by creating
@@ -225,8 +222,7 @@ public class XtextServlet extends HttpServlet {
   
   /**
    * Invoke the service function of the given service descriptor and write its result to the
-   * servlet response in Json format. An exception is made for code generation where exactly
-   * one document is generated and a content type is assigned to it. In this case the document
+   * servlet response in Json format. An exception is made for code generation: here the document
    * itself is written into the response instead of wrapping it into a Json object.
    */
   protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse response) {
@@ -234,36 +230,26 @@ public class XtextServlet extends HttpServlet {
       Function0<? extends IServiceResult> _service = service.getService();
       final IServiceResult result = _service.apply();
       response.setStatus(HttpServletResponse.SC_OK);
-      String _encoding = this.getEncoding(service);
+      String _encoding = this.getEncoding(service, result);
       response.setCharacterEncoding(_encoding);
       response.setHeader("Cache-Control", "no-cache");
-      boolean _and = false;
-      if (!(result instanceof GeneratorResult)) {
-        _and = false;
-      } else {
-        List<GeneratorResult.GeneratedDocument> _documents = ((GeneratorResult) result).getDocuments();
-        int _size = _documents.size();
-        boolean _equals = (_size == 1);
-        _and = _equals;
-      }
-      if (_and) {
-        List<GeneratorResult.GeneratedDocument> _documents_1 = ((GeneratorResult) result).getDocuments();
-        final GeneratorResult.GeneratedDocument document = IterableExtensions.<GeneratorResult.GeneratedDocument>head(_documents_1);
-        String _contentType = document.getContentType();
-        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_contentType);
-        boolean _not = (!_isNullOrEmpty);
-        if (_not) {
-          String _contentType_1 = document.getContentType();
-          response.setContentType(_contentType_1);
-          PrintWriter _writer = response.getWriter();
-          String _content = document.getContent();
-          _writer.write(_content);
-          return;
+      if ((result instanceof GeneratorResult)) {
+        String _elvis = null;
+        String _contentType = ((GeneratorResult)result).getContentType();
+        if (_contentType != null) {
+          _elvis = _contentType;
+        } else {
+          _elvis = "text/plain";
         }
+        response.setContentType(_elvis);
+        PrintWriter _writer = response.getWriter();
+        String _content = ((GeneratorResult)result).getContent();
+        _writer.write(_content);
+      } else {
+        response.setContentType("text/x-json");
+        PrintWriter _writer_1 = response.getWriter();
+        this.gson.toJson(result, _writer_1);
       }
-      response.setContentType("text/x-json");
-      PrintWriter _writer_1 = response.getWriter();
-      this.gson.toJson(result, _writer_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -272,7 +258,7 @@ public class XtextServlet extends HttpServlet {
   /**
    * Determine the encoding to apply to servlet responses. The default is UTF-8.
    */
-  protected String getEncoding(final XtextServiceDispatcher.ServiceDescriptor service) {
+  protected String getEncoding(final XtextServiceDispatcher.ServiceDescriptor service, final IServiceResult result) {
     return "UTF-8";
   }
   

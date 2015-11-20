@@ -18,6 +18,7 @@ import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.web.server.IServiceContext
+import org.eclipse.xtext.web.server.IServiceResult
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException
 import org.eclipse.xtext.web.server.InvalidRequestException.PermissionDeniedException
@@ -121,33 +122,28 @@ class XtextServlet extends HttpServlet {
 	
 	/**
 	 * Invoke the service function of the given service descriptor and write its result to the
-	 * servlet response in Json format. An exception is made for code generation where exactly
-	 * one document is generated and a content type is assigned to it. In this case the document
+	 * servlet response in Json format. An exception is made for code generation: here the document
 	 * itself is written into the response instead of wrapping it into a Json object.
 	 */
 	protected def void doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse response) {
 		val result = service.service.apply()
 		response.status = HttpServletResponse.SC_OK
-		response.characterEncoding = service.encoding
+		response.characterEncoding = getEncoding(service, result)
 		response.setHeader('Cache-Control', 'no-cache')
 		
-		if (result instanceof GeneratorResult && (result as GeneratorResult).documents.size == 1) {
-			val document = (result as GeneratorResult).documents.head
-			if (!document.contentType.nullOrEmpty) {
-				response.contentType = document.contentType
-				response.writer.write(document.content)
-				return
-			}
+		if (result instanceof GeneratorResult) {
+			response.contentType = result.contentType ?: 'text/plain'
+			response.writer.write(result.content)
+		} else {
+			response.contentType = 'text/x-json'
+			gson.toJson(result, response.writer)
 		}
-		
-		response.contentType = 'text/x-json'
-		gson.toJson(result, response.writer)
 	}
 	
 	/**
 	 * Determine the encoding to apply to servlet responses. The default is UTF-8.
 	 */
-	protected def String getEncoding(XtextServiceDispatcher.ServiceDescriptor service) {
+	protected def String getEncoding(XtextServiceDispatcher.ServiceDescriptor service, IServiceResult result) {
 		'UTF-8'
 	}
 	

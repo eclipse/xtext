@@ -872,6 +872,7 @@ public class XtextServiceDispatcher {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       final XtextWebDocumentAccess document = this.getDocumentAccess(context);
+      final String artifactId = context.getParameter("artifact");
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
@@ -881,7 +882,7 @@ public class XtextServiceDispatcher {
             public IServiceResult apply() {
               IServiceResult _xtrycatchfinallyexpression = null;
               try {
-                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.getResult(document);
+                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.getArtifact(document, artifactId);
               } catch (final Throwable _t) {
                 if (_t instanceof Throwable) {
                   final Throwable throwable = (Throwable)_t;
