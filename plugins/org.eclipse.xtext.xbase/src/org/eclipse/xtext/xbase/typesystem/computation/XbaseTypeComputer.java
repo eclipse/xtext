@@ -58,6 +58,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
@@ -460,6 +461,21 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 				expressionState.computeTypes(expression);
 				if (expression instanceof XVariableDeclaration) {
 					addLocalToCurrentScope((XVariableDeclaration)expression, state);
+				}
+				if (expression instanceof XAssignment) {
+					List<? extends IFeatureLinkingCandidate> candidates = expressionState.getLinkingCandidates((XAssignment)expression);
+					if (candidates.size() == 1) {
+						JvmIdentifiableElement assignable = getRefinableCandidate(expression, expressionState);
+						if (assignable != null) {
+							IResolvedTypes computedTypes = expressionState.getComputedTypes();
+							LightweightTypeReference actual = computedTypes.getActualType(((XAssignment) expression).getValue());
+							LightweightTypeReference expected = computedTypes.getActualType(assignable);
+							if (actual != null && (expected == null || expected.isAssignableFrom(actual))) {
+								state = state.withTypeCheckpoint(expression);
+								state.reassignType(assignable, actual);
+							}
+						}
+					}
 				}
 			}
 			XExpression lastExpression = children.get(children.size() - 1);
@@ -1051,8 +1067,8 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 			}
 			return getRefinableCandidate(switchExpression.getSwitch(), state);
 		}
-		if (object instanceof XFeatureCall) {
-			List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates((XFeatureCall)object);
+		if (object instanceof XAssignment || object instanceof XFeatureCall) {
+			List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates((XAbstractFeatureCall)object);
 			if (candidates.size() == 1) {
 				JvmIdentifiableElement linkedFeature = candidates.get(0).getFeature();
 				if (isRefinableFeature(linkedFeature)) {

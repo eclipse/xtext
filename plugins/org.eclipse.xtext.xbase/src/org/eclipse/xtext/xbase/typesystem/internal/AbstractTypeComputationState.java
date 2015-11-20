@@ -114,6 +114,12 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		}
 	}
 	
+	public final IResolvedTypes getComputedTypes() {
+		if(resolvedTypes.getMonitor().isCanceled())
+			throw new OperationCanceledException();
+		return getResolvedTypes();
+	}
+	
 	protected ExpressionAwareStackedResolvedTypes doComputeTypes(XExpression expression) {
 		ExpressionAwareStackedResolvedTypes stackedResolvedTypes = pushTypes(expression);
 		ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);

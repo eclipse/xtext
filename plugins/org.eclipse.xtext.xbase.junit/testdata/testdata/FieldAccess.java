@@ -17,6 +17,9 @@ public class FieldAccess {
 	public final String finalField;
 	public static String staticField;
 	
+	public static Object staticObjectField;
+	public Object objectField;
+	
 	public FieldAccess() {
 		finalField = "finalField";
 	}

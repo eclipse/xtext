@@ -1598,6 +1598,35 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				+ "}");
 	}
 	
+	@Test public void testAssignment_41() throws Exception {
+		assertEvaluatesTo("bar", 
+				"{"
+				+ "  var list = 'foo' as Object"
+				+ "  list = 'bar'"
+				+ "  var String another = list"
+				+ "  another"
+				+ "}");
+	}
+	
+	@Test public void testAssignment_42() throws Exception {
+		assertEvaluatesTo("bar", 
+				"{"
+				+ "  testdata.FieldAccess.staticObjectField = 'bar'"
+				+ "  var String another = testdata.FieldAccess.staticObjectField"
+				+ "  another"
+				+ "}");
+	}
+	
+	@Test public void testAssignment_43() throws Exception {
+		assertEvaluatesTo("bar", 
+				"{"
+						+ "  val obj = new testdata.FieldAccess()"
+						+ "  obj.objectField = 'bar'"
+						+ "  var String another = obj.objectField"
+						+ "  another"
+						+ "}");
+	}
+	
 	@Test public void testAssignmentInBlock_01() throws Exception {
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
 	}
@@ -2455,6 +2484,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testSwitchExpression_55() throws Exception {
 		assertEvaluatesTo(null, "{ switch (Thread.State x : Thread.State.NEW) { default: { } } }");
 	}
+	
+	@Test public void testSwitchExpression_56() throws Exception {
+		assertEvaluatesTo("STRING", "{ switch (testdata.FieldAccess.staticObjectField = 'string') { String: { testdata.FieldAccess.staticObjectField.toUpperCase } } }");
+	}
 
 	@Test public void testSwitchExpressionOverEnum() throws Exception {
 		assertEvaluatesTo(1, 
@@ -2793,6 +2826,13 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	 */
 	@Test public void testInstanceOf_14() throws Exception {
 		assertEvaluatesTo("0", "{ val Object x = new StringBuilder; if (x instanceof Appendable) if (x instanceof CharSequence) x.append(x.length().toString()) x.toString }");
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	@Test public void testInstanceOf_15() throws Exception {
+		assertEvaluatesTo("hello", "{ var CharSequence x; (if ((x = new StringBuilder) instanceof Appendable) x.append('hello')).toString }");
 	}
 	
 	@Test public void testClosure_01() throws Exception {
