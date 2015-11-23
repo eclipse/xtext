@@ -4,11 +4,11 @@
 lexer grammar InternalExBeeLangTestLanguageLexer;
 
 @header {
-package org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal;
+package org.eclipse.xtext.testlanguages.backtracking.parser.antlr.lexer;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 RequiresMax : 'requires-max';
@@ -140,6 +140,8 @@ LeftCurlyBracket : '{';
 VerticalLine : '|';
 
 RightCurlyBracket : '}';
+
+// Rules duplicated to allow inter-rule references
 
 RULE_DOCUMENTATION : '/**' ( options {greedy=false;} : . )*'*/';
 

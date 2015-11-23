@@ -14,16 +14,17 @@ import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource;
 import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.ExBeeLangTestLanguageParser;
-import org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal.InternalExBeeLangTestLanguageLexer;
+import org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.lexer.InternalExBeeLangTestLanguageLexer;
 import org.eclipse.xtext.testlanguages.backtracking.ui.contentassist.ExBeeLangTestLanguageProposalProvider;
 import org.eclipse.xtext.testlanguages.backtracking.ui.labeling.ExBeeLangTestLanguageDescriptionLabelProvider;
 import org.eclipse.xtext.testlanguages.backtracking.ui.labeling.ExBeeLangTestLanguageLabelProvider;
@@ -70,23 +71,23 @@ public abstract class AbstractExBeeLangTestLanguageUiModule extends DefaultUiMod
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureHighlightingLexer(Binder binder) {
+	public void configureContentAssistLexer(Binder binder) {
 		binder.bind(Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST))
 			.to(InternalExBeeLangTestLanguageLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureContentAssistLexer(Binder binder) {
-		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST))
-			.to(org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal.InternalExBeeLangTestLanguageLexer.class);
+	public void configureHighlightingLexer(Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
+			.to(org.eclipse.xtext.testlanguages.backtracking.parser.antlr.lexer.InternalExBeeLangTestLanguageLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureHighlightingTokenDefProvider(Binder binder) {
 		binder.bind(ITokenDefProvider.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
 			.to(AntlrTokenDefProvider.class);
 	}
 	
@@ -102,8 +103,7 @@ public abstract class AbstractExBeeLangTestLanguageUiModule extends DefaultUiMod
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
-		binder.bind(org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal.InternalExBeeLangTestLanguageLexer.class)
-			.toProvider(LexerProvider.create(org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal.InternalExBeeLangTestLanguageLexer.class));
+		binder.bind(InternalExBeeLangTestLanguageLexer.class).toProvider(LexerProvider.create(InternalExBeeLangTestLanguageLexer.class));
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2

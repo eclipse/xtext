@@ -11,6 +11,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
@@ -35,12 +36,16 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final Grammar grammar;
 	
 	private final BeeLangTestLanguageGrammarAccess gaBeeLangTestLanguage;
+	
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ExBeeLangTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-			BeeLangTestLanguageGrammarAccess gaBeeLangTestLanguage) {
+			BeeLangTestLanguageGrammarAccess gaBeeLangTestLanguage,
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBeeLangTestLanguage = gaBeeLangTestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pDelegateModel = new DelegateModelElements();
 	}
 	
@@ -68,6 +73,10 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public BeeLangTestLanguageGrammarAccess getBeeLangTestLanguageGrammarAccess() {
 		return gaBeeLangTestLanguage;
+	}
+	
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
 	}
 
 	
@@ -721,43 +730,43 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
-		return gaBeeLangTestLanguage.getIDRule();
+		return gaTerminals.getIDRule();
 	}
 	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaBeeLangTestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	}
 	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaBeeLangTestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	}
 	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaBeeLangTestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	}
 	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaBeeLangTestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	}
 	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaBeeLangTestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	}
 	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaBeeLangTestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	}
 }

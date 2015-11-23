@@ -14,16 +14,17 @@ import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource;
 import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.BeeLangTestLanguageParser;
-import org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal.InternalBeeLangTestLanguageLexer;
+import org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal.InternalBeeLangTestLanguageLexer;
 import org.eclipse.xtext.testlanguages.backtracking.ui.contentassist.BeeLangTestLanguageProposalProvider;
 import org.eclipse.xtext.testlanguages.backtracking.ui.labeling.BeeLangTestLanguageDescriptionLabelProvider;
 import org.eclipse.xtext.testlanguages.backtracking.ui.labeling.BeeLangTestLanguageLabelProvider;
@@ -70,23 +71,23 @@ public abstract class AbstractBeeLangTestLanguageUiModule extends DefaultUiModul
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureHighlightingLexer(Binder binder) {
+	public void configureContentAssistLexer(Binder binder) {
 		binder.bind(Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST))
 			.to(InternalBeeLangTestLanguageLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureContentAssistLexer(Binder binder) {
-		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST))
-			.to(org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal.InternalBeeLangTestLanguageLexer.class);
+	public void configureHighlightingLexer(Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
+			.to(org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal.InternalBeeLangTestLanguageLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureHighlightingTokenDefProvider(Binder binder) {
 		binder.bind(ITokenDefProvider.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
 			.to(AntlrTokenDefProvider.class);
 	}
 	
@@ -102,8 +103,7 @@ public abstract class AbstractBeeLangTestLanguageUiModule extends DefaultUiModul
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
-		binder.bind(org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal.InternalBeeLangTestLanguageLexer.class)
-			.toProvider(LexerProvider.create(org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal.InternalBeeLangTestLanguageLexer.class));
+		binder.bind(InternalBeeLangTestLanguageLexer.class).toProvider(LexerProvider.create(InternalBeeLangTestLanguageLexer.class));
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2
