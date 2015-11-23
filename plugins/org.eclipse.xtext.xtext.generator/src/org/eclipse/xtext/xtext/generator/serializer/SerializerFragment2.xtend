@@ -87,7 +87,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	@Inject FileAccessFactory fileAccessFactory
 	
 	@Accessors boolean generateDebugData = false
-	@Accessors boolean generateSupportForDeprecatedContextObject = false
+	@Accessors boolean generateSupportForDeprecatedContextEObject = false
 	
 	boolean detectSyntheticTerminals = true
 	
@@ -396,7 +396,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 				«ENDIF»
 			}
 			
-			«IF generateSupportForDeprecatedContextObject»
+			«IF generateSupportForDeprecatedContextEObject»
 				@Deprecated
 				protected void sequence_«c.simpleName»(«EObject» context, «c.type» semanticObject) {
 					sequence_«c.simpleName»(createContext(context, semanticObject), semanticObject);

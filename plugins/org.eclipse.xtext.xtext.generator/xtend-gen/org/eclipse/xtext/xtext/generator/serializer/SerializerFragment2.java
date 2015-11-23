@@ -146,7 +146,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   private boolean generateDebugData = false;
   
   @Accessors
-  private boolean generateSupportForDeprecatedContextObject = false;
+  private boolean generateSupportForDeprecatedContextEObject = false;
   
   private boolean detectSyntheticTerminals = true;
   
@@ -1237,7 +1237,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           _builder.newLine();
           _builder.newLine();
           {
-            if (SerializerFragment2.this.generateSupportForDeprecatedContextObject) {
+            if (SerializerFragment2.this.generateSupportForDeprecatedContextEObject) {
               _builder.append("@Deprecated");
               _builder.newLine();
               _builder.append("protected void sequence_");
@@ -1953,11 +1953,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   }
   
   @Pure
-  public boolean isGenerateSupportForDeprecatedContextObject() {
-    return this.generateSupportForDeprecatedContextObject;
+  public boolean isGenerateSupportForDeprecatedContextEObject() {
+    return this.generateSupportForDeprecatedContextEObject;
   }
   
-  public void setGenerateSupportForDeprecatedContextObject(final boolean generateSupportForDeprecatedContextObject) {
-    this.generateSupportForDeprecatedContextObject = generateSupportForDeprecatedContextObject;
+  public void setGenerateSupportForDeprecatedContextEObject(final boolean generateSupportForDeprecatedContextEObject) {
+    this.generateSupportForDeprecatedContextEObject = generateSupportForDeprecatedContextEObject;
   }
 }

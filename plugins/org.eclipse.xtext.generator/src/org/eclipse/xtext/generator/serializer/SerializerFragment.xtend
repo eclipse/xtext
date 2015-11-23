@@ -55,6 +55,8 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 	 */
 	@Accessors SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector()
 	
+	@Accessors boolean generateSupportForDeprecatedContextEObject = false
+	
 	@Accessors boolean generateXtendStub
 	
 	Generator2AdapterSetup adapterSetup
@@ -121,6 +123,7 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 		delegate.generateStub = isGenerateStub
 		delegate.detectSyntheticTerminals = detectSyntheticTerminals
 		delegate.generateDebugData = generateDebugData
+		delegate.generateSupportForDeprecatedContextEObject = generateSupportForDeprecatedContextEObject
 		adapterSetup.injector.getInstance(CodeConfig).preferXtendStubs = isGenerateXtendStub
 		delegate.initialize(adapterSetup.injector)
 		delegate.generate()

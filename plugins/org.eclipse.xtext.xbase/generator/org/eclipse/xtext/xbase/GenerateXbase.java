@@ -78,7 +78,7 @@ final class GenerateXbase {
 				setFileExtensions(fileExtensions);
 				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextEObject(true); }} );
 				addFragment(new Formatter2Fragment2());
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				addFragment(new ContentAssistFragment2());
@@ -96,7 +96,7 @@ final class GenerateXbase {
 				setFileExtensions(fileExtensions);
 				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextEObject(true); }} );
 				addFragment(new ResourceFactoryFragment2());
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				antlr.setDebugGrammar(true);
@@ -134,7 +134,7 @@ final class GenerateXbase {
 				setFileExtensions(fileExtensions);
 				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextEObject(true); }} );
 				addFragment(new ResourceFactoryFragment2());
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				antlr.setOptions(antlrOptions);
