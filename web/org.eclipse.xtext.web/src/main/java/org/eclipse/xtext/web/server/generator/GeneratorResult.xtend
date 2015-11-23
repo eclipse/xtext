@@ -7,28 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.generator
 
-import java.util.List
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.web.server.IServiceResult
 
 /**
- * Result object returned by the generator service. If the result contains exactly one entry,
- * the content of that entry should be sent as response to the client instead of wrapping
- * it in a result object. This allows to conveniently view generator results by pointing a
- * web browser to the generator service URL.
+ * Result object returned by the generator service. This object is usually not sent in
+ * JSON format, but the content itself is returned to the client.
  */
 @Data
 @ToString(skipNulls = true)
 class GeneratorResult implements IServiceResult {
 	
-	val List<GeneratedDocument> documents = newArrayList
-	
-	@Data
-	static class GeneratedDocument {
-		String name
-		String contentType
-		String content
-	}
+	String name
+	String contentType
+	String content
 	
 }

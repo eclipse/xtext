@@ -24,7 +24,8 @@ class StatemachineGenerator extends AbstractGenerator {
 	override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		val statemachine = resource.contents.filter(Statemachine).head
 		if (statemachine !== null) {
-			fsa.generateFile('statemachine.html', generateHtml(statemachine))
+			fsa.generateFile('/DEFAULT_ARTIFACT', generateHtml(statemachine))
+			fsa.generateFile('/hidden.txt', '''This is an additional generator artifact.''')
 		}
 	}
 	

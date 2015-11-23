@@ -15,10 +15,12 @@ import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider;
 import org.eclipse.xtext.web.example.jetty.AbstractStatemachineWebModule;
+import org.eclipse.xtext.web.example.jetty.resource.StatemachineContentTypeProvider;
 import org.eclipse.xtext.web.example.jetty.resource.StatemachineResourceSetProvider;
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider;
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineSemanticHighlightingCalculator;
 import org.eclipse.xtext.web.example.statemachine.ide.StatemachineWebContentProposalProvider;
+import org.eclipse.xtext.web.server.generator.IContentTypeProvider;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
@@ -33,6 +35,11 @@ public class StatemachineWebModule extends AbstractStatemachineWebModule {
   
   public StatemachineWebModule(final Provider<ExecutorService> executorServiceProvider) {
     super(executorServiceProvider);
+  }
+  
+  @Override
+  public Class<? extends IContentTypeProvider> bindIContentTypeProvider() {
+    return StatemachineContentTypeProvider.class;
   }
   
   public Class<? extends IWebResourceSetProvider> bindIWebResourceSetProvider() {

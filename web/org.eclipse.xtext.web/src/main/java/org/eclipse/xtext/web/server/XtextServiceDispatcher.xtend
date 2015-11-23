@@ -427,10 +427,11 @@ class XtextServiceDispatcher {
 	protected def getGeneratorService(IServiceContext context)
 			throws InvalidRequestException {
 		val document = getDocumentAccess(context)
+		val artifactId = context.getParameter('artifact')
 		new ServiceDescriptor => [
 			service = [
 				try {
-					generatorService.getResult(document)
+					generatorService.getArtifact(document, artifactId)
 				} catch (Throwable throwable) {
 					handleError(throwable)
 				}
