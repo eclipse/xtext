@@ -18,10 +18,11 @@ import org.eclipse.xtext.builder.clustering.CurrentDescriptions;
 import org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource;
 import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
@@ -47,7 +48,7 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.XbaseWithAnnotationsParser;
-import org.eclipse.xtext.xbase.annotations.parser.antlr.internal.InternalXbaseWithAnnotationsLexer;
+import org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer;
 import org.eclipse.xtext.xbase.annotations.ui.contentassist.XbaseWithAnnotationsProposalProvider;
 import org.eclipse.xtext.xbase.annotations.ui.outline.XbaseWithAnnotationsOutlineTreeProvider;
 import org.eclipse.xtext.xbase.annotations.ui.quickfix.XbaseWithAnnotationsQuickfixProvider;
@@ -96,23 +97,23 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureHighlightingLexer(Binder binder) {
+	public void configureContentAssistLexer(Binder binder) {
 		binder.bind(Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST))
 			.to(InternalXbaseWithAnnotationsLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureContentAssistLexer(Binder binder) {
-		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST))
-			.to(org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer.class);
+	public void configureHighlightingLexer(Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
+			.to(org.eclipse.xtext.xbase.annotations.parser.antlr.internal.InternalXbaseWithAnnotationsLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureHighlightingTokenDefProvider(Binder binder) {
 		binder.bind(ITokenDefProvider.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
 			.to(AntlrTokenDefProvider.class);
 	}
 	
@@ -128,8 +129,7 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultXbaseW
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
-		binder.bind(org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer.class)
-			.toProvider(LexerProvider.create(org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal.InternalXbaseWithAnnotationsLexer.class));
+		binder.bind(InternalXbaseWithAnnotationsLexer.class).toProvider(LexerProvider.create(InternalXbaseWithAnnotationsLexer.class));
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.types.TypesGeneratorFragment2

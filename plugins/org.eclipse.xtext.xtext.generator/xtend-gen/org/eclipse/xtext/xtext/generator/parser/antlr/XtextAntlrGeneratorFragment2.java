@@ -1496,6 +1496,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   public void addUiBindingsAndImports() {
     @Extension
     final ContentAssistGrammarNaming naming = this.contentAssistNaming;
+    Grammar _grammar = this.getGrammar();
+    final TypeReference caLexerClass = naming.getLexerClass(_grammar);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
     ManifestAccess _manifest = _genericIde.getManifest();
@@ -1508,14 +1510,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         @Override
         public void apply(final ManifestAccess it) {
           Set<String> _exportedPackages = it.getExportedPackages();
+          String _packageName = caLexerClass.getPackageName();
           Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _lexerClass = naming.getLexerClass(_grammar);
-          String _packageName = _lexerClass.getPackageName();
-          Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _parserClass = naming.getParserClass(_grammar_1);
+          TypeReference _parserClass = naming.getParserClass(_grammar);
           String _packageName_1 = _parserClass.getPackageName();
-          Grammar _grammar_2 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_2);
+          Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
+          TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_1);
           String _packageName_2 = _internalParserClass.getPackageName();
           Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_packageName, _packageName_1, _packageName_2)));
         }
@@ -1530,13 +1530,41 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
+        Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
+        TypeReference _lexerSuperClass = naming.getLexerSuperClass(_grammar);
+        _builder.append(_lexerSuperClass, "");
+        _builder.append(".class)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".annotatedWith(");
+        _builder.append(Names.class, "\t");
+        _builder.append(".named(");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.LexerIdeBindings");
+        _builder.append(_typeRef, "\t");
+        _builder.append(".CONTENT_ASSIST))");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".to(");
+        _builder.append(caLexerClass, "\t");
+        _builder.append(".class);");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType.addConfiguredBinding("ContentAssistLexer", _client);
+    StringConcatenationClient _client_1 = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("binder.bind(");
         _builder.append(Lexer.class, "");
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append(".annotatedWith(");
         _builder.append(Names.class, "\t");
-        _builder.append(".named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))");
+        _builder.append(".named(");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.LexerIdeBindings");
+        _builder.append(_typeRef, "\t");
+        _builder.append(".HIGHLIGHTING))");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append(".to(");
@@ -1547,31 +1575,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.newLineIfNotEmpty();
       }
     };
-    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType.addConfiguredBinding("HighlightingLexer", _client);
-    StringConcatenationClient _client_1 = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("binder.bind(");
-        Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-        TypeReference _lexerSuperClass = naming.getLexerSuperClass(_grammar);
-        _builder.append(_lexerSuperClass, "");
-        _builder.append(".class)");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append(".annotatedWith(");
-        _builder.append(Names.class, "\t");
-        _builder.append(".named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST))");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append(".to(");
-        Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
-        TypeReference _lexerClass = naming.getLexerClass(_grammar_1);
-        _builder.append(_lexerClass, "\t");
-        _builder.append(".class);");
-        _builder.newLineIfNotEmpty();
-      }
-    };
-    GuiceModuleAccess.BindingFactory _addConfiguredBinding_1 = _addConfiguredBinding.addConfiguredBinding("ContentAssistLexer", _client_1);
+    GuiceModuleAccess.BindingFactory _addConfiguredBinding_1 = _addConfiguredBinding.addConfiguredBinding("HighlightingLexer", _client_1);
     StringConcatenationClient _client_2 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1582,7 +1586,10 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.append("\t");
         _builder.append(".annotatedWith(");
         _builder.append(Names.class, "\t");
-        _builder.append(".named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))");
+        _builder.append(".named(");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.LexerIdeBindings");
+        _builder.append(_typeRef, "\t");
+        _builder.append(".HIGHLIGHTING))");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append(".to(");
@@ -1596,25 +1603,18 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory");
     GuiceModuleAccess.BindingFactory _addTypeToType_1 = _addConfiguredBinding_2.addTypeToType(_typeReference, _typeRef_2);
     TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
-    Grammar _grammar = this.getGrammar();
-    TypeReference _parserClass = naming.getParserClass(_grammar);
+    Grammar _grammar_1 = this.getGrammar();
+    TypeReference _parserClass = naming.getParserClass(_grammar_1);
     GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_3, _parserClass);
     StringConcatenationClient _client_3 = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-        TypeReference _lexerClass = naming.getLexerClass(_grammar);
-        _builder.append(_lexerClass, "");
-        _builder.append(".class)");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append(".toProvider(");
-        _builder.append(LexerProvider.class, "\t");
+        _builder.append(caLexerClass, "");
+        _builder.append(".class).toProvider(");
+        _builder.append(LexerProvider.class, "");
         _builder.append(".create(");
-        Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
-        TypeReference _lexerClass_1 = naming.getLexerClass(_grammar_1);
-        _builder.append(_lexerClass_1, "\t");
+        _builder.append(caLexerClass, "");
         _builder.append(".class));");
         _builder.newLineIfNotEmpty();
       }
