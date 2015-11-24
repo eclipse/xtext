@@ -1272,6 +1272,26 @@ public abstract class AbstractAntlrGrammarGenerator {
     return _or;
   }
   
+  protected boolean _mustBeParenthesized(final Assignment it) {
+    boolean _or = false;
+    boolean _or_1 = false;
+    boolean _predicated = this._grammarAccessExtensions.predicated(it);
+    if (_predicated) {
+      _or_1 = true;
+    } else {
+      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
+      _or_1 = _isFirstSetPredicated;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      AbstractElement _terminal = it.getTerminal();
+      boolean _mustBeParenthesized = this.mustBeParenthesized(_terminal);
+      _or = _mustBeParenthesized;
+    }
+    return _or;
+  }
+  
   protected boolean _mustBeParenthesized(final Alternatives it) {
     return true;
   }
@@ -1374,6 +1394,8 @@ public abstract class AbstractAntlrGrammarGenerator {
       return _mustBeParenthesized((Alternatives)it);
     } else if (it instanceof Group) {
       return _mustBeParenthesized((Group)it);
+    } else if (it instanceof Assignment) {
+      return _mustBeParenthesized((Assignment)it);
     } else if (it != null) {
       return _mustBeParenthesized(it);
     } else {

@@ -220,6 +220,10 @@ abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractAntlrGra
 		true
 	}
 	
+	dispatch override mustBeParenthesized(Assignment it) {
+		true
+	}
+	
 	dispatch override mustBeParenthesized(Alternatives it) {
 		true
 	}
