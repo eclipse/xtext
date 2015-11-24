@@ -216,8 +216,6 @@ define([
 			services.highlighterRegistration.unregister();
 		if (services.modelRegistration)
 			services.modelRegistration.unregister();
-		if (services.saveCommandRegistration)
-			services.saveCommandRegistration.unregister();
 		if (services.contentAssistRegistration)
 			services.contentAssistRegistration.unregister();
 		if (services.hoverRegistration)
@@ -226,6 +224,8 @@ define([
 			services.occurrencesRegistration.unregister();
 		if (services.formatCommandRegistration)
 			services.formatCommandRegistration.unregister();
+		if (services.originalSaveFunc)
+			editorViewer.inputManager.save = services.originalSaveFunc;
 		editorViewer.editor.showAnnotations([], services._highlightAnnotationTypes);
 		editorViewer.editor.showProblems([]);
 		delete editorViewer.xtextServices;
@@ -277,14 +277,14 @@ define([
 	 */
 	OrionServiceBuilder.prototype.setupPersistenceServices = function() {
 		var services = this.services;
-		if (services.options.enableSaveAction) {
-			services.saveCommandRegistration = this.viewer.serviceRegistry.registerService('orion.edit.command',
-					{execute: services.saveResource}, {
-				name: 'Save Xtext document',
-				id: 'xtext.save',
-				key: ['s', true],
-				contentType: [services.contentType]
-			});
+		var editorViewer = this.viewer;
+		if (services.options.enableSaveAction && editorViewer.inputManager) {
+			editorViewer.inputManager.setAutoSaveTimeout(-1);
+			services.originalSaveFunc = editorViewer.inputManager.save;
+			editorViewer.inputManager.save = function () {
+				services.saveResource();
+				return new OrionDeferred().resolve();
+			}
 		}
 	}
 	
