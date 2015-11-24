@@ -52,7 +52,7 @@ public class AntlrGeneratorFragmentTest extends AbstractXtextTests {
   }
   
   @Test
-  public void testDebugGrammar_Bug482677() {
+  public void testDebugGrammar_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar com.foo.bar ");
     _builder.newLine();
@@ -64,7 +64,7 @@ public class AntlrGeneratorFragmentTest extends AbstractXtextTests {
     _builder.append("MyRule :");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("->((\'a\'|\'b\'|\'c\') x=\'d\') ");
+    _builder.append("->((\'a\'|\'b\'|\'c\') \'d\') ");
     _builder.newLine();
     _builder.append(";");
     _builder.newLine();
@@ -108,6 +108,138 @@ public class AntlrGeneratorFragmentTest extends AbstractXtextTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append(")");
+    _builder_1.newLine();
+    _builder_1.append(";");
+    _builder_1.newLine();
+    this.asserTranslatesToDebugGrammar(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void testDebugGrammar_Bug482677() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar com.foo.bar ");
+    _builder.newLine();
+    _builder.append("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore");
+    _builder.newLine();
+    _builder.append("generate myPack \'http://mypack\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("MyRule :");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("->(x=(\'a\'|\'b\'|\'c\') y=\'d\') ");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("grammar DebugInternalbar;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("// Rule MyRule");
+    _builder_1.newLine();
+    _builder_1.append("ruleMyRule:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("(");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("(\'a\' | \'b\' | \'c\')=>");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("(");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'a\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t    ");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'b\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t    ");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'c\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append(")");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'d\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(")");
+    _builder_1.newLine();
+    _builder_1.append(";");
+    _builder_1.newLine();
+    this.asserTranslatesToDebugGrammar(_builder, _builder_1.toString());
+  }
+  
+  @Test
+  public void testDebugGrammar_Bug482677_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar com.foo.bar ");
+    _builder.newLine();
+    _builder.append("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore");
+    _builder.newLine();
+    _builder.append("generate myPack \'http://mypack\'");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("MyRule :");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'foo\' ->(\'bar\' prop=(\'a\'|\'b\'|\'c\') more=\'more\')?");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("grammar DebugInternalbar;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("// Rule MyRule");
+    _builder_1.newLine();
+    _builder_1.append("ruleMyRule:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\'foo\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("(");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("(\'bar\')=>");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'bar\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("(");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'a\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t    ");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'b\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t    ");
+    _builder_1.append("|");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("\'c\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append(")");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("\'more\'");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(")?");
     _builder_1.newLine();
     _builder_1.append(";");
     _builder_1.newLine();

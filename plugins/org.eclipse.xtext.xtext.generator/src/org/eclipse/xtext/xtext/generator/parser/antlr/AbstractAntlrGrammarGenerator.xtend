@@ -448,6 +448,10 @@ abstract class AbstractAntlrGrammarGenerator {
 		predicated() || firstSetPredicated || cardinality != null
 	}
 	
+	def dispatch boolean mustBeParenthesized(Assignment it) {
+		predicated() || firstSetPredicated || it.terminal.mustBeParenthesized
+	}
+	
 	def dispatch mustBeParenthesized(Alternatives it) {
 		true
 	}
