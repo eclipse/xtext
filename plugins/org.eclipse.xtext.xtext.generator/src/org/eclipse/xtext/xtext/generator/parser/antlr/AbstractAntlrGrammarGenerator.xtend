@@ -449,6 +449,6 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	def dispatch mustBeParenthesized(Alternatives it) {
-		predicated() || firstSetPredicated || cardinality != null
+		true
 	}
 }

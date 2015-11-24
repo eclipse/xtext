@@ -1273,23 +1273,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   }
   
   protected boolean _mustBeParenthesized(final Alternatives it) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _predicated = this._grammarAccessExtensions.predicated(it);
-    if (_predicated) {
-      _or_1 = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or_1 = _isFirstSetPredicated;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      String _cardinality = it.getCardinality();
-      boolean _notEquals = (!Objects.equal(_cardinality, null));
-      _or = _notEquals;
-    }
-    return _or;
+    return true;
   }
   
   protected CharSequence compileRule(final Object it, final Grammar grammar, final AntlrOptions options) {
