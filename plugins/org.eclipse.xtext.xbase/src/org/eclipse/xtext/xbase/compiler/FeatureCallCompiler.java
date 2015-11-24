@@ -909,7 +909,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return;
 		}
 		JvmIdentifiableElement feature = call.getFeature();
-		String name;
+		String name = null;
 		if (feature instanceof JvmConstructor) {
 			JvmDeclaredType constructorContainer = ((JvmConstructor) feature).getDeclaringType();
 			JvmIdentifiableElement logicalContainer = contextProvider.getNearestLogicalContainer(call);
@@ -918,7 +918,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				name = "this";
 			else
 				name = "super";
-		} else {
+		} else if(feature != null) {
 			if (b.hasName(feature)) {
 				name = b.getName(feature);
 			} else {
