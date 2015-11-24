@@ -458,9 +458,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 				XExpression expression = children.get(i);
 				ITypeComputationState expressionState = state.withoutExpectation(); // no expectation
 				expressionState.computeTypes(expression);
-				if (expression instanceof XVariableDeclaration) {
-					addLocalToCurrentScope((XVariableDeclaration)expression, state);
-				}
+				addLocalToCurrentScope(expression, state);
 			}
 			XExpression lastExpression = children.get(children.size() - 1);
 			for (ITypeExpectation expectation: state.getExpectations()) {
@@ -468,20 +466,28 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 				if (expectedType != null && expectedType.isPrimitiveVoid()) {
 					ITypeComputationState expressionState = state.withoutExpectation(); // no expectation
 					expressionState.computeTypes(lastExpression);
-					if (lastExpression instanceof XVariableDeclaration) {
-						addLocalToCurrentScope((XVariableDeclaration)lastExpression, state);
-					}
+					addLocalToCurrentScope(lastExpression, state);
 					expectation.acceptActualType(getPrimitiveVoid(state), ConformanceFlags.CHECKED_SUCCESS);
 				} else {
 					state.computeTypes(lastExpression);
 					// add the last expression to the scope, too in order validate for duplicate names, even
 					// though the variable declaration could be removed automatically to keep only the side effect
 					// of the initializer
-					if (lastExpression instanceof XVariableDeclaration) {
-						addLocalToCurrentScope((XVariableDeclaration)lastExpression, state);
-					}
+					addLocalToCurrentScope(lastExpression, state);
 				}
 			}
+		}
+	}
+
+	/**
+	 * If the expression is a variable declaration, then add it to the current scope;
+	 * DSLs introducing new containers for variable declarations should override this method
+	 * and explicitly add nested variable declarations.
+	 * @since 2.9
+	 */
+	protected void addLocalToCurrentScope(XExpression expression, ITypeComputationState state) {
+		if (expression instanceof XVariableDeclaration) {
+			addLocalToCurrentScope((XVariableDeclaration)expression, state);
 		}
 	}
 
@@ -668,9 +674,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		for(XExpression initExpression : object.getInitExpressions()) {
 			ITypeComputationState expressionState = state.withoutExpectation();
 			expressionState.computeTypes(initExpression);
-			if (initExpression instanceof XVariableDeclaration) {
-				addLocalToCurrentScope((XVariableDeclaration) initExpression, state);
-			}
+			addLocalToCurrentScope(initExpression, state);
 		}
 		state.withinScope(object);
 		XExpression expression = object.getExpression();
