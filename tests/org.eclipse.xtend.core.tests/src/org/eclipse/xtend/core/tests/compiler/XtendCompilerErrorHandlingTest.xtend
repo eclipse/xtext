@@ -366,8 +366,26 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		''')
 	}
 	
-	def assertCompilesTo(CharSequence input, CharSequence expected) {
-		val file = file(input.toString(), false)
+	@Test
+	def void testBug482845() {
+		'''
+			class C {
+				val foo = String.
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  private final Object foo = String.class./* name is null */;
+			}
+		''', false)
+	}
+	
+	def assertCompilesTo(CharSequence input, CharSequence expected) { 
+		assertCompilesTo(input, expected, true)	
+	}
+	
+	def assertCompilesTo(CharSequence input, CharSequence expected, boolean shouldBeSyntacticallyValid) {
+		val file = file(input.toString(), false, shouldBeSyntacticallyValid)
 		val resource = file.eResource
 		try {
 			// we need to attach the data here explicitly since #generateType is called directly
