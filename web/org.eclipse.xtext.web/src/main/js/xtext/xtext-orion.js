@@ -224,8 +224,8 @@ define([
 			services.occurrencesRegistration.unregister();
 		if (services.formatCommandRegistration)
 			services.formatCommandRegistration.unregister();
-		if (services.originalSaveFunc)
-			editorViewer.inputManager.save = services.originalSaveFunc;
+		if (services.saveEventListener)
+			editorViewer.editor.removeEventListener('InputChanged', services.saveEventListener);
 		editorViewer.editor.showAnnotations([], services._highlightAnnotationTypes);
 		editorViewer.editor.showProblems([]);
 		delete editorViewer.xtextServices;
@@ -278,13 +278,14 @@ define([
 	OrionServiceBuilder.prototype.setupPersistenceServices = function() {
 		var services = this.services;
 		var editorViewer = this.viewer;
-		if (services.options.enableSaveAction && editorViewer.inputManager) {
+		if (services.options.enableSaveAction) {
 			editorViewer.inputManager.setAutoSaveTimeout(-1);
-			services.originalSaveFunc = editorViewer.inputManager.save;
-			editorViewer.inputManager.save = function () {
-				services.saveResource();
-				return new OrionDeferred().resolve();
-			}
+			services.saveEventListener = function(event) {
+				if (event.contentsSaved) {
+					services.saveResource();
+				}
+		    }
+			editorViewer.editor.addEventListener('InputChanged', services.saveEventListener);
 		}
 	}
 	
