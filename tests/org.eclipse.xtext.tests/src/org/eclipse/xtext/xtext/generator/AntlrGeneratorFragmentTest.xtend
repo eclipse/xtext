@@ -25,14 +25,14 @@ class AntlrGeneratorFragmentTest extends AbstractXtextTests {
 		with(XtextStandaloneSetup)
 	}
 	
-	@Test def void testDebugGrammar_Bug482677() {
+	@Test def void testDebugGrammar_01() {
 		'''
 			grammar com.foo.bar 
 			import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 			generate myPack 'http://mypack'
 			
 			MyRule :
-				->(('a'|'b'|'c') x='d') 
+				->(('a'|'b'|'c') 'd') 
 			;
 		'''.asserTranslatesToDebugGrammar('''
 			grammar DebugInternalbar;
@@ -53,7 +53,67 @@ class AntlrGeneratorFragmentTest extends AbstractXtextTests {
 			;
 		''')
 	}
-		
+	
+	@Test def void testDebugGrammar_Bug482677() {
+		'''
+			grammar com.foo.bar 
+			import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+			generate myPack 'http://mypack'
+			
+			MyRule :
+				->(x=('a'|'b'|'c') y='d') 
+			;
+		'''.asserTranslatesToDebugGrammar('''
+			grammar DebugInternalbar;
+			
+			// Rule MyRule
+			ruleMyRule:
+				(
+					('a' | 'b' | 'c')=>
+					(
+						'a'
+						    |
+						'b'
+						    |
+						'c'
+					)
+					'd'
+				)
+			;
+		''')
+	}
+	
+	@Test def void testDebugGrammar_Bug482677_02() {
+		'''
+			grammar com.foo.bar 
+			import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+			generate myPack 'http://mypack'
+			
+			MyRule :
+				'foo' ->('bar' prop=('a'|'b'|'c') more='more')?
+			;
+		'''.asserTranslatesToDebugGrammar('''
+			grammar DebugInternalbar;
+			
+			// Rule MyRule
+			ruleMyRule:
+				'foo'
+				(
+					('bar')=>
+					'bar'
+					(
+						'a'
+						    |
+						'b'
+						    |
+						'c'
+					)
+					'more'
+				)?
+			;
+		''')
+	}
+	
 	protected def void asserTranslatesToDebugGrammar(CharSequence xtextGrammar, String expectedDebugGrammar) {
 		val grammar = super.getModel(xtextGrammar.toString) as Grammar
 		val injector = Guice.createInjector(new DefaultGeneratorModule)
