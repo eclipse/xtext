@@ -19,7 +19,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.ExBeeLangTestLanguageParser;
-import org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.internal.InternalExBeeLangTestLanguageLexer;
+import org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.lexer.InternalExBeeLangTestLanguageLexer;
 import org.eclipse.xtext.testlanguages.backtracking.idea.facet.ExBeeLangTestLanguageFacetConfiguration;
 import org.eclipse.xtext.testlanguages.backtracking.idea.facet.ExBeeLangTestLanguageFacetType;
 import org.eclipse.xtext.testlanguages.backtracking.idea.lang.ExBeeLangTestLanguageElementTypeProvider;
