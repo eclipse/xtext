@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.formatting;
 
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * Result object returned by the formatting service.
  */
 @Data
+@ToString(skipNulls = true)
 @SuppressWarnings("all")
 public class FormattingResult implements IServiceResult {
   private final String stateId;
@@ -75,6 +77,7 @@ public class FormattingResult implements IServiceResult {
   @Pure
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
+    b.skipNulls();
     b.add("stateId", this.stateId);
     b.add("formattedText", this.formattedText);
     b.add("replaceRegion", this.replaceRegion);

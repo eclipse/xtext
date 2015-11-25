@@ -48,7 +48,8 @@ class UpdateDocumentService {
 			createNewStateId()
 			return new DocumentStateResult(stateId)
 		], [ it, cancelIndicator |
-			updateText(deltaText, offset, replaceLength)
+			if (offset <= text.length)
+				updateText(deltaText, offset, replaceLength)
 			return null
 		])
 	}

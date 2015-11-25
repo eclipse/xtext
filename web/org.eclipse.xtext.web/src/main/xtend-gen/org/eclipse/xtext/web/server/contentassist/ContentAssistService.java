@@ -110,6 +110,12 @@ public class ContentAssistService {
   public ContentAssistContext[] getContexts(final IXtextWebDocument document, final ITextRegion selection, final int caretOffset) {
     ContentAssistContext[] _xblockexpression = null;
     {
+      String _text = document.getText();
+      int _length = _text.length();
+      boolean _greaterThan = (caretOffset > _length);
+      if (_greaterThan) {
+        return new ContentAssistContext[] {};
+      }
       ContentAssistContextFactory _get = this.contextFactoryProvider.get();
       final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
         @Override
@@ -118,9 +124,9 @@ public class ContentAssistService {
         }
       };
       final ContentAssistContextFactory contextFactory = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
-      String _text = document.getText();
+      String _text_1 = document.getText();
       XtextResource _resource = document.getResource();
-      _xblockexpression = contextFactory.create(_text, selection, caretOffset, _resource);
+      _xblockexpression = contextFactory.create(_text_1, selection, caretOffset, _resource);
     }
     return _xblockexpression;
   }

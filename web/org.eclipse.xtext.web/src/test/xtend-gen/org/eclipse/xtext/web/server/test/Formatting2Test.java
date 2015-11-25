@@ -41,10 +41,7 @@ public class Formatting2Test extends AbstractWebServerTest {
     _builder.append("stateId = \"-7fffffff\"");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("formattedText = \"/* bla */\\noutput signal x\\nstate foo\\n\tset x = true\\nend\"");
-    _builder.newLine();
-    _builder.append("  ");
-    _builder.append("replaceRegion = null");
+    _builder.append("formattedText = \"/* bla */ output signal x\\nstate foo\\n\tset x = true\\nend\\n\"");
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();
