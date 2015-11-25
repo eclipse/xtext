@@ -74,6 +74,8 @@ class ContentAssistService {
 	}
 	
 	def ContentAssistContext[] getContexts(IXtextWebDocument document, ITextRegion selection, int caretOffset) {
+		if (caretOffset > document.text.length)
+			return #[]
 		val contextFactory = contextFactoryProvider.get() => [it.pool = executorService]
 		contextFactory.create(document.text, selection, caretOffset, document.resource)
 	}
