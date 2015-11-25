@@ -113,7 +113,19 @@ define([
 				query = jQuery('.xtext-editor', options.document);
 		}
 		
-		var embeddedEditor = new mEmbeddedEditor({defaultPlugins: ['webToolsPlugin.html', 'embeddedToolingPlugin.html']});
+		var startupOptions = options.startupOptions;
+		if (!startupOptions)
+			startupOptions = { defaultPlugins: [] };
+		var embeddedEditor = new mEmbeddedEditor(startupOptions);
+		if (!startupOptions.defaultPlugins || startupOptions.defaultPlugins.length == 0) {
+			embeddedEditor.serviceRegistry.registerService('orion.core.contenttype', {}, {
+				contentTypes: [{
+					id: 'text/plain',
+					extension: ['txt'],
+					name: 'Text'
+				}]
+			});
+		}
 		var editorData = [];
 		query.each(function(index, parent) {
 			var editorOptions = ServiceBuilder.mergeParentOptions(parent, options);
