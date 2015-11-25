@@ -43,5 +43,20 @@ define([], function() {
 		}
 	}
 	
+	if (!Array.prototype.forEach) {
+		Array.prototype.forEach = function(callback, thisArg) {
+			if (this == null)
+				throw new TypeError('this is null');
+			if (typeof callback !== 'function')
+				throw new TypeError('callback is not callable');
+			var srcArray = Object(this);
+			var len = srcArray.length >>> 0;
+			for (var i = 0; i < len; i++) {
+				if (i in srcArray)
+					callback.call(thisArg, srcArray[i], i, srcArray);
+			}
+		}
+	}
+	
 	return {};
 });

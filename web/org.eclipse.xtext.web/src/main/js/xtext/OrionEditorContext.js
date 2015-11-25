@@ -83,8 +83,14 @@ define(function() {
 			this._editor.getTextView().setSelection(selection.start, selection.end);
 		},
 		
-		setText: function(text) {
-			this._editorViewer.setContents(text, this._contentType);
+		setText: function(text, start, end) {
+			if (start === undefined || end === undefined) {
+				this._editorViewer.setContents(text, this._contentType);
+			} else {
+				var fullText = this._editor.getText();
+				var newText = fullText.substring(0, start) + text + fullText.substring(end);
+				this._editorViewer.setContents(newText, this._contentType);
+			}
 		}
 		
 	};

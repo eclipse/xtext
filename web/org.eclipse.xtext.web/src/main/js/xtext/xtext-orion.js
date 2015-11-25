@@ -80,13 +80,13 @@
 define([
 	'jquery',
 	'orion/Deferred',
-	'orion/codeEdit',
 	'orion/keyBinding',
 	'orion/editor/annotations',
+	'embeddedEditor/builder/embeddedEditor',
 	'xtext/compatibility',
 	'xtext/ServiceBuilder',
 	'xtext/OrionEditorContext'
-], function(jQuery, OrionDeferred, CodeEdit, mKeyBinding, mAnnotations, compatibility,
+], function(jQuery, OrionDeferred, mKeyBinding, mAnnotations, mEmbeddedEditor, compatibility,
 		ServiceBuilder, EditorContext) {
 	
 	var exports = {};
@@ -113,31 +113,54 @@ define([
 				query = jQuery('.xtext-editor', options.document);
 		}
 		
+		var embeddedEditor = new mEmbeddedEditor({defaultPlugins: ['webToolsPlugin.html', 'embeddedToolingPlugin.html']});
+		var editorData = [];
+		query.each(function(index, parent) {
+			var editorOptions = ServiceBuilder.mergeParentOptions(parent, options);
+			var contentType = exports.registerContentType(embeddedEditor, editorOptions);
+			editorData.push({
+				parent: parent,
+				options: editorOptions,
+				contentType: contentType
+			});
+		});
+		
 		var deferred = jQuery.Deferred();
 		var editorViewers = [];
 		var finishedViewers = 0;
-		var codeEdit = new CodeEdit();
-		query.each(function(index, parent) {
-			var editorOptions = ServiceBuilder.mergeParentOptions(parent, options);
-			var content = jQuery(parent).text();
+		editorData.forEach(function(data, index) {
+			var contentType = data.contentType;
+			var content = jQuery(data.parent).text();
+			var createResult = embeddedEditor.create({parent: data.parent, contentType: contentType});
 			
-			codeEdit.create({parent: parent}).then(function(editorViewer) {
-				exports.createServices(editorViewer, editorOptions).done(function(xtextServices) {
-					if (!xtextServices.options.loadFromServer)
-						editorViewer.setContents(content, xtextServices.contentType);
-					editorViewers[index] = editorViewer;
-					finishedViewers++;
-					if (finishedViewers == query.length) {
-						if (finishedViewers == 1)
-							deferred.resolve(editorViewer);
-						else
-							deferred.resolve(editorViewers);
-					}
-				});
-			}, function(error) {
+			function onEditorCreated(editorViewer) {
+				var xtextServices = exports.createServices(editorViewer, data.options, contentType);
+				if (!xtextServices.options.loadFromServer)
+					editorViewer.setContents(content, contentType);
+				editorViewers[index] = editorViewer;
+				finishedViewers++;
+				if (finishedViewers == query.length) {
+					if (finishedViewers == 1)
+						deferred.resolve(editorViewer);
+					else
+						deferred.resolve(editorViewers);
+				}
+			}
+			function onEditorFailed(error) {
 				deferred.reject(error);
-			});
+			}
 			
+			var syntaxDefinition = data.options.syntaxDefinition;
+			if (syntaxDefinition != 'none' && (jQuery.type(syntaxDefinition) === 'string' || !syntaxDefinition && data.options.xtextLang)) {
+				if (!syntaxDefinition)
+					syntaxDefinition = 'xtext-resources/' + data.options.xtextLang + '-syntax';
+				require([syntaxDefinition], function(grammar) {
+					data.options.syntaxDefinition = grammar;
+					createResult.then(onEditorCreated, onEditorFailed);
+				});
+			} else {
+				createResult.then(onEditorCreated, onEditorFailed);
+			}
 		});
 		if (query.length == 0)
 			deferred.reject();
@@ -151,13 +174,13 @@ define([
 	OrionServiceBuilder.prototype = new ServiceBuilder();
 	
 	/**
-	 * Configure Xtext services for the given editor. The editor does not have to be created
-	 * with createEditor(options).
+	 * Register the content type derived from the given editor options. This has to be done
+	 * before the editor is created.
 	 */
-	exports.createServices = function(editorViewer, options) {
-		var deferred = jQuery.Deferred();
-		if (!options.xtextLang && options.resourceId)
-			options.xtextLang = options.resourceId.split(/[?#]/)[0].split('.').pop();
+	exports.registerContentType = function(embeddedEditor, options) {
+		var extension = options.xtextLang;
+		if (!extension && options.resourceId)
+			extension = options.resourceId.split(/[?#]/)[0].split('.').pop();
 		var contentType = options.contentType;
 		if (!contentType && options.xtextLang)
 			contentType = 'xtext/' + options.xtextLang;
@@ -165,15 +188,24 @@ define([
 			contentType = 'xtext';
 		if (options.randomContentType === undefined || options.randomContentType)
 			contentType = contentType + '_' + Math.floor(Math.random() * 2147483648).toString(16);
-		editorViewer.serviceRegistry.registerService('orion.core.contenttype', {}, {
+		embeddedEditor.serviceRegistry.registerService('orion.core.contenttype', {}, {
 			contentTypes: [{
 				id: contentType,
-				extension: [options.xtextLang],
+				extension: [extension],
 				name: 'Xtext Language',
 				'extends': 'text/plain'
 			}]
 		});
-		
+		return contentType;
+	}
+	
+	/**
+	 * Configure Xtext services for the given editor. The editor does not have to be created
+	 * with createEditor(options).
+	 */
+	exports.createServices = function(editorViewer, options, contentType) {
+		if (!contentType && options.contentType)
+			contentType = options.contentType;
 		var xtextServices = {
 			options: options,
 			editorContext: new EditorContext(editorViewer, contentType),
@@ -181,28 +213,10 @@ define([
 			_highlightAnnotationTypes: []
 		};
 		var serviceBuilder = new OrionServiceBuilder(editorViewer, xtextServices);
-		
-		var syntaxDefinition = options.syntaxDefinition;
-		if (syntaxDefinition != 'none' && (jQuery.type(syntaxDefinition) === 'string' || !syntaxDefinition && options.xtextLang)) {
-			if (!syntaxDefinition)
-				syntaxDefinition = 'xtext-resources/' + options.xtextLang + '-syntax';
-			require([syntaxDefinition], function(grammar) {
-				if (!grammar.contentTypes)
-					grammar.contentTypes = [contentType];
-				else if (jQuery.inArray(contentType, grammar.contentTypes) < 0)
-					grammar.contentTypes.push(contentType);
-				options.syntaxDefinition = grammar;
-				serviceBuilder.createServices();
-				deferred.resolve(xtextServices);
-			});
-		} else {
-			serviceBuilder.createServices();
-			deferred.resolve(xtextServices);
-		}
-
+		serviceBuilder.createServices();
 		xtextServices.serviceBuilder = serviceBuilder;
 		editorViewer.xtextServices = xtextServices;
-		return deferred.promise();
+		return xtextServices;
 	}
 	
 	/**
@@ -237,7 +251,12 @@ define([
 	OrionServiceBuilder.prototype.setupSyntaxHighlighting = function() {
 		var services = this.services;
 		var syntaxDefinition = services.options.syntaxDefinition;
-		if (syntaxDefinition != 'none') {
+		if (jQuery.type(syntaxDefinition) !== 'string') {
+			var contentType = services.contentType;
+			if (!syntaxDefinition.contentTypes)
+				syntaxDefinition.contentTypes = [contentType];
+			else if (jQuery.inArray(contentType, syntaxDefinition.contentTypes) < 0)
+				syntaxDefinition.contentTypes.push(contentType);
 			services.highlighterRegistration = this.viewer.serviceRegistry.registerService(
 					'orion.edit.highlighter', {}, syntaxDefinition);
 		}

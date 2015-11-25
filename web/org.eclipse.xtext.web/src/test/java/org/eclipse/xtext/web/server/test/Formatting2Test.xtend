@@ -20,8 +20,7 @@ class Formatting2Test extends AbstractWebServerTest {
 		val String expectedResult = '''
 			FormattingResult [
 			  stateId = "-7fffffff"
-			  formattedText = "/* bla */\noutput signal x\nstate foo\n	set x = true\nend"
-			  replaceRegion = null
+			  formattedText = "/* bla */ output signal x\nstate foo\n	set x = true\nend\n"
 			]'''
 		assertEquals(expectedResult, result.toString)
 	}

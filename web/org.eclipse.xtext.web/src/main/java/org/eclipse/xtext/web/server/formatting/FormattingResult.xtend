@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.formatting
 
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.web.server.IServiceResult
 
@@ -15,6 +16,7 @@ import org.eclipse.xtext.web.server.IServiceResult
  * Result object returned by the formatting service.
  */
 @Data
+@ToString(skipNulls = true)
 class FormattingResult implements IServiceResult {
 	
 	String stateId
