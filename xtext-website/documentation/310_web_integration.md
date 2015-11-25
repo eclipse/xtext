@@ -54,7 +54,7 @@ The set of supported language-related services depends on which editor library i
     </tr>
     <tr>
       <td><a href="#mark-occurrences">Mark occurrences</a></td>
-      <td><div class="not-supported"></div></td>
+      <td><div class="supported"></div></td>
       <td><div class="supported"></div></td>
       <td><div class="supported"></div></td>
     </tr>
@@ -103,6 +103,7 @@ require(["orion/code_edit/built-codeEdit-amd"], function() {
     });
 });
 ```
+Since Orion is not available on WebJars, it has to be downloaded manually at [download.eclipse.org](http://download.eclipse.org/orion/).
 
 #### Ace
 
@@ -144,7 +145,7 @@ require(["xtext/xtext-codemirror"], function(xtext) {
 
 #### `xtext.createEditor(options)`
 
-Creates one or more editor instances and initializes Xtext services for them. The available options are described below. The return value is the created editor if exactly one was created, or an array of editors otherwise:
+Creates one or more editor instances and initializes Xtext services for them. If not specified other The available options are described below. The return value is the created editor if exactly one was created, or an array of editors otherwise:
 
 ```javascript
 var editor = xtext.createEditor();
@@ -158,9 +159,15 @@ xtext.createEditor().done(function(editorViewer) {
 });
 ```
 
+If the parent element for the editor is not specified through the options, this function looks for an element with `id="xtext-editor"`. If none exists, the function looks for elements with `class="xtext-editor"`.
+
 #### `xtext.createServices(editor, options)`
 
 Initializes Xtext services for an already created editor. Use this variant if you want full control over the editor creation.
+
+#### `xtext.removeServices(editor)`
+
+Removes all services and associated listeners from the given editor. The JavaScript-based syntax highlighting is not affected by this operation.
 
 #### Options
 
@@ -185,10 +192,14 @@ The following options are supported.
 
  * `baseUrl`
    The path segment where the Xtext service is found (default: `'/'`). See the `serviceUrl` option.
+ * `contentAssistCharTriggers`
+   Characters that invoke the content assist service when typed (Orion only).
+ * `contentAssistExcludedStyles`
+   Excluded styles for character triggers (Orion only).
  * `contentType`
    The content type included in requests to the Xtext server. If no content type is given, the file extension in the `resourceId` option is used to determine the language.
  * `dirtyElement`
-   An element into which the dirty status class is written when the editor is marked dirty; it can be either a DOM element or an ID for a DOM element.
+   An element into which the dirty status class is written when the editor is marked dirty; it can be either a DOM element or an id for a DOM element.
  * `dirtyStatusClass`
    A CSS class name written into the dirtyElement when the editor is marked dirty (default: `'dirty'`).
  * `document`
@@ -216,7 +227,9 @@ The following options are supported.
  * `mouseHoverDelay`
    The number of milliseconds to wait after a mouse hover before the information tooltip is displayed (default: 500).
  * `parent`
-   The parent element into which the editor should be created. It can be either a DOM element or an ID or class name for a DOM element (default: `'xtext-editor'`).
+   The parent element into which the editor should be created. It can be either a DOM element or an id for a DOM element (default: `'xtext-editor'`).
+ * `parentClass`
+   If the `parent` option is not given, this option is used to find elements that match the given class name (default: `'xtext-editor'`).
  * `resourceId`
    The identifier of the resource displayed in the text editor. This option is sent to the server to communicate required information on the respective resource.
  * `selectionUpdateDelay`
@@ -234,9 +247,21 @@ The following options are supported.
  * `xtextLang`
    The language name (usually the file extension configured for the language). This is used to set the `resourceId` and `syntaxDefinition` options if they have not been specified.
 
+#### Operation Modes
+
+The web integration of Xtext supports two operation modes, which are described in the following.
+
+##### Stateful Mode
+
+This mode is active when `sendFullText` is `false`, which is the default setting. In stateful mode, an update request is sent to the server whenever the text content of the editor changes. With this approach a copy of the text is kept in the session state of the server, and many Xtext-related services such as AST parsing and validation are cached together with that copy. This means that services run much faster on the server, and the message size of most requests is very small. Use this mode in order to optimize response times of service requests.
+
+##### Stateless Mode
+
+This mode is active when `sendFullText` is set to `true`. In this case no update request is necessary when the text content changes, but the full text content is attached to all other service requests. This means that the text has to be parsed again for each request, and the message size is proportional to the size of the text content. Use this mode only when you want to avoid server-side sessions and respective session ids stored in cookies.
+
 #### Invoking Services
 
-The `createEditor` and `createServices` functions set up listeners for editor events such that most services are invoked automatically while using the editor. However, all services can also be invoked programmatically using the `xtextServices` object that is attached to each editor instance. For example, the following code saves the resource associated with the editor when the button with the ID `save-button` is clicked:
+The `createEditor` and `createServices` functions set up listeners for editor events such that most services are invoked automatically while using the editor. However, all services can also be invoked programmatically using the `xtextServices` object that is attached to each editor instance. For example, the following code saves the resource associated with the editor when the button with the id `save-button` is clicked:
 
 ```javascript
 var editor = xtext.createEditor();
@@ -245,7 +270,7 @@ $("#save-button").click(function() {
 });
 ```
 
-The following functions are available, provided that the respective services are enabled and supported by the employed editor library. All functions return a _promise_ that is eventually resolved to the requested data.
+The following functions are available, provided that the respective services are enabled and supported by the employed editor library. All functions return a _promise_ that is eventually resolved to the requested data. Furthermore, all these functions can be supplied with an `options` parameter to override some of the options declared when the editor was built.
 
  * `getContentAssist()`
    Returns the content assist proposals in the format explained in the [section below](#content-assist).
@@ -274,6 +299,7 @@ The following functions are available, provided that the respective services are
  * `revertResource()`
    Reverts the resource to the last saved state and returns an object with properties `fullText` and `dirty`.
  * `update()`
+   Computes the difference between the current editor content and the last version that has been committed to the server. If there is a difference, an update request is sent to refresh the server state. The return value has a single property `stateId`, which is an identifier for the new server state. All requests have to include the last obtained state identifier in order to suceed.
 
 ### Syntax Highlighting {#syntax-highlighting}
 
@@ -283,12 +309,24 @@ The path to the highlighting specification is set with the `syntaxDefinition` op
 
 ## The Server {#server}
 
+TODO
+
 ### Content Assist {#content-assist}
+
+TODO
 
 ### Semantic Highlighting {#semantic-highlighting}
 
+TODO
+
 ### Mark Occurrences {#mark-occurrences}
+
+TODO
 
 ### Hover Information {#hover-info}
 
+TODO
+
 ### Persistence {#persistence}
+
+TODO
