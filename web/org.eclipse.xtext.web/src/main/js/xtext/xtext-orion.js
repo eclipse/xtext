@@ -117,15 +117,6 @@ define([
 		if (!startupOptions)
 			startupOptions = { defaultPlugins: [] };
 		var embeddedEditor = new mEmbeddedEditor(startupOptions);
-		if (!startupOptions.defaultPlugins || startupOptions.defaultPlugins.length == 0) {
-			embeddedEditor.serviceRegistry.registerService('orion.core.contenttype', {}, {
-				contentTypes: [{
-					id: 'text/plain',
-					extension: ['txt'],
-					name: 'Text'
-				}]
-			});
-		}
 		var editorData = [];
 		query.each(function(index, parent) {
 			var editorOptions = ServiceBuilder.mergeParentOptions(parent, options);
