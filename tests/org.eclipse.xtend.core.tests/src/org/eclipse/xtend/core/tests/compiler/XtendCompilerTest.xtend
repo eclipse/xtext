@@ -4904,6 +4904,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			package org.xtext.example.mydsl;
 			
+			import java.io.Serializable;
 			import java.util.Collections;
 			import java.util.Map;
 			import java.util.Set;
@@ -4924,7 +4925,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      1, 2);
 			    final Map<Object, Object> map = Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap(pair, _pair, _mappedTo, Bug412642_2.staticPair, this.pairField, _methodStaticPair, _plus));
 			    Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<?> set = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
+			    final Set<? extends Serializable> set = Collections.<Serializable>unmodifiableSet(CollectionLiterals.<Serializable>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
 			  }
 			  
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
@@ -4974,6 +4975,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			package org.xtext.example.mydsl;
 			
+			import java.io.Serializable;
 			import java.util.Collections;
 			import java.util.Map;
 			import java.util.Set;
@@ -4994,7 +4996,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      1, 2);
 			    final Map<Object, Object> map = Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap(pair, _pair, _mappedTo, Bug412642_2.staticPair, this.pairField, _methodStaticPair, _plus));
 			    Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<?> set = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
+			    final Set<? extends Serializable> set = Collections.<Serializable>unmodifiableSet(CollectionLiterals.<Serializable>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
 			  }
 			  
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
