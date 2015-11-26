@@ -8,6 +8,8 @@ part: Reference Documentation
 
 Since version 2.9 Xtext offers an interface for integration of text editors in web applications. The text editors are implemented in JavaScript, and language-related services such as code completion are realized through HTTP requests to a server-side component.
 
+**Warning:** This documentation is not complete yet, hence some cross-references are broken.
+
 ## The Client {#client}
 
 Xtext supports three JavaScript text editor libraries:
@@ -169,7 +171,7 @@ Initializes Xtext services for an already created editor. Use this variant if yo
 
 Removes all services and associated listeners from the given editor. The JavaScript-based syntax highlighting is not affected by this operation.
 
-#### Options
+### Options
 
 Options can be specified with an object passed to the `createEditor` or `createServices` functions:
 
@@ -188,7 +190,85 @@ Alternatively, if `createEditor` is used, options can be set as attributes of th
     data-editor-syntax-definition="xtext/ace-mode-statemachine"></div>
 ```
 
-The following options are supported.
+See below for a [full list of available options](#options-reference).
+
+### Getting the Text Content
+
+The text content is either loaded from the Xtext server or provided through JavaScript. In either case, the Xtext server needs to identify the language you are using in order to process any requests. A language is usually identified using a file extension or a content type. The file extension can be specified with the `xtextLang` option, while the content type is given with the `contentType` option.
+
+#### Loading text from the server
+
+If you specify a value for the `resourceId` option, the language may be identified from the file extension included in that id. In this case it is not necessary to provide the `xtextLang` option. Another effect of using `resourceId` is that the server will try to load the respective resource from its persistence layer. The Xtext server does not define any default persistence, so you have to customize it as described in [Persistence](#persistence) in order to use this approach.
+
+The `resourceId` string may contain whatever information you need to identify a specific text content on the server. Usually the [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) syntax is used, but this is not mandatory.
+
+#### Providing text through JavaScript
+
+The persistence layer of the Xtext server is totally optional, so you can use whatever means you like to fetch the content, e.g. generate it in the client or request it through your own service. If the DOM element into which the editor is created already contains some text, this text is used as initial content. Otherwise the editor is initially empty, and you can use the API of the chosen editor framework to change the content whenever you like.
+
+If you would like to specify a `resourceId` without using the persistence services shipped with Xtext, you can do so by setting the option `loadFromServer` to `false`.
+
+### Operation Modes
+
+The web integration of Xtext supports two operation modes, which are described in the following.
+
+#### Stateful mode
+
+This mode is active when `sendFullText` is `false`, which is the default setting. In stateful mode, an update request is sent to the server whenever the text content of the editor changes. With this approach a copy of the text is kept in the session state of the server, and many Xtext-related services such as AST parsing and validation are cached together with that copy. This means that services run much faster on the server, and the message size of most requests is very small. Use this mode in order to optimize response times of service requests.
+
+#### Stateless mode
+
+This mode is active when `sendFullText` is set to `true`. In this case no update request is necessary when the text content changes, but the full text content is attached to all other service requests. This means that the text has to be parsed again for each request, and the message size is proportional to the size of the text content. Use this mode only when you want to avoid server-side sessions and respective session ids stored in cookies.
+
+### Syntax Highlighting {#syntax-highlighting}
+
+In contrast to [semantic highlighting](#semantic-highlighting), syntax highlighting can be computed purely in JavaScript without requiring a connection to the server. This is realized with the highlighting capabilities of the employed editor libraries. All three libraries offer a JavaScript API for specifying highlighting rules. The `WebIntegrationFragment` of the Xtext language generator is able to generate a highlighting specification that includes keywords and some basic tokens such as numbers and comments (see [The Language Generator](302_configuration.html#generator)). If the highlighting generated in this way is not sufficient, you can still implement the specification yourself following the documentation of the chosen editor library.
+
+The path to the highlighting specification is set with the `syntaxDefinition` option while setting up the Xtext editor. If no value is specified for that option, it is built from the `xtextLang` option in the form `'xtext-resources/{xtextLang}-syntax'` (Orion) or `'xtext-resources/mode-{xtextLang}'` (Ace). For CodeMirror syntax highlighting is configured by registering a _mode_ and setting the `mode` option accordingly (default mode name: `'xtext/{xtextLang}'`).
+
+### Invoking Services
+
+The `createEditor` and `createServices` functions set up listeners for editor events such that most services are invoked automatically while using the editor. However, all services can also be invoked programmatically using the `xtextServices` object that is attached to each editor instance. For example, the following code saves the resource associated with the editor when the button with the id `save-button` is clicked:
+
+```javascript
+var editor = xtext.createEditor();
+$("#save-button").click(function() {
+    editor.xtextServices.saveResource();
+});
+```
+
+The following functions are available, provided that the respective services are enabled and supported by the employed editor library. All functions return a _promise_ that is eventually resolved to the requested data. Furthermore, all these functions can be supplied with an `options` parameter to override some of the options declared when the editor was built.
+
+ * `getContentAssist()`
+   Returns the content assist proposals in the format explained in Section [Content Assist](#content-assist).
+ * `validate()`
+   Returns the validation result. The returned object has a property `issues`, which is an array of objects with the following properties:
+    * `description`: A description to be displayed to the user.
+    * `severity`: one of `'error'`, `'warning'`, or `'info'`
+    * `line`: the line where the issue occurs (one-based)
+    * `column`: the column where the issue occurs (one-based)
+    * `offset`: the character offset in the document (zero-based)
+    * `length`: the length of the affected text region
+ * `computeHighlighting()`
+   Returns the text styling data for semantic highlighting (see Section [Semantic Highlighting](#semantic-highlighting)).
+ * `getOccurrences()`
+   Returns the occurrences of the element at the current cursor position (see Section [Mark Occurrences](#mark-occurrences)).
+ * `getHoverInfo()`
+   Returns the hover information at the current cursor position (see Section [Hover Information](#hover-info)).
+ * `format()`
+   Formats the current selection (or the whole document if the selection has zero length) and returns the formatted text.
+ * `generate()`
+   Returns the document generated from the associated resource. If more than one document has been generated, an object with a property `documents` is returned, which is an array of objects with the properties `name`, `contentType`, and `content`.
+ * `loadResource()`
+   Loads the associated resource and returns an object with properties `fullText` and `dirty`. If the resource has been modified during the current session, the modified version is returned even if the page is reloaded.
+ * `saveResource()`
+   Saves the current state of the resource.
+ * `revertResource()`
+   Reverts the resource to the last saved state and returns an object with properties `fullText` and `dirty`.
+ * `update()`
+   Computes the difference between the current editor content and the last version that has been committed to the server. If there is a difference, an update request is sent to refresh the server state. The return value has a single property `stateId`, which is an identifier for the new server state. All requests have to include the last obtained state identifier in order to suceed.
+
+### Full List of Options {#options-reference}
 
  * `baseUrl`
    The path segment where the Xtext service is found (default: `'/'`). See the `serviceUrl` option.
@@ -241,72 +321,13 @@ The following options are supported.
  * `showErrorDialogs`
    Whether errors should be displayed in popup dialogs (default: `false`).
  * `syntaxDefinition`
-   A path to a JS file containing a syntax definition. Set this option to `'none'` to disable syntax highlighting. See [below](#syntax-highlighting) for more details.
+   A path to a JS file containing a syntax definition. Set this option to `'none'` to disable syntax highlighting. See [Syntax Highlighting](#syntax-highlighting) for more details.
  * `textUpdateDelay`
    The number of milliseconds to wait after a text change before Xtext services are invoked (default: 500).
  * `xtextLang`
    The language name (usually the file extension configured for the language). This is used to set the `resourceId` and `syntaxDefinition` options if they have not been specified.
 
-#### Operation Modes
-
-The web integration of Xtext supports two operation modes, which are described in the following.
-
-##### Stateful Mode
-
-This mode is active when `sendFullText` is `false`, which is the default setting. In stateful mode, an update request is sent to the server whenever the text content of the editor changes. With this approach a copy of the text is kept in the session state of the server, and many Xtext-related services such as AST parsing and validation are cached together with that copy. This means that services run much faster on the server, and the message size of most requests is very small. Use this mode in order to optimize response times of service requests.
-
-##### Stateless Mode
-
-This mode is active when `sendFullText` is set to `true`. In this case no update request is necessary when the text content changes, but the full text content is attached to all other service requests. This means that the text has to be parsed again for each request, and the message size is proportional to the size of the text content. Use this mode only when you want to avoid server-side sessions and respective session ids stored in cookies.
-
-#### Invoking Services
-
-The `createEditor` and `createServices` functions set up listeners for editor events such that most services are invoked automatically while using the editor. However, all services can also be invoked programmatically using the `xtextServices` object that is attached to each editor instance. For example, the following code saves the resource associated with the editor when the button with the id `save-button` is clicked:
-
-```javascript
-var editor = xtext.createEditor();
-$("#save-button").click(function() {
-    editor.xtextServices.saveResource();
-});
-```
-
-The following functions are available, provided that the respective services are enabled and supported by the employed editor library. All functions return a _promise_ that is eventually resolved to the requested data. Furthermore, all these functions can be supplied with an `options` parameter to override some of the options declared when the editor was built.
-
- * `getContentAssist()`
-   Returns the content assist proposals in the format explained in the [section below](#content-assist).
- * `validate()`
-   Returns the validation result. The returned object has a property `issues`, which is an array of objects with the following properties:
-    * `description`: A description to be displayed to the user.
-    * `severity`: one of `'error'`, `'warning'`, or `'info'`
-    * `line`: the line where the issue occurs (one-based)
-    * `column`: the column where the issue occurs (one-based)
-    * `offset`: the character offset in the document (zero-based)
-    * `length`: the length of the affected text region
- * `computeHighlighting()`
-   Returns the text styling data for semantic highlighting (see the [section below](#semantic-highlighting)).
- * `getOccurrences()`
-   Returns the occurrences of the element at the current cursor position (see the [section below](#mark-occurrences)).
- * `getHoverInfo()`
-   Returns the hover information at the current cursor position (see the [section below](#hover-info)).
- * `format()`
-   Formats the current selection (or the whole document if the selection has zero length) and returns the formatted text.
- * `generate()`
-   Returns the document generated from the associated resource. If more than one document has been generated, an object with a property `documents` is returned, which is an array of objects with the properties `name`, `contentType`, and `content`.
- * `loadResource()`
-   Loads the associated resource and returns an object with properties `fullText` and `dirty`. If the resource has been modified during the current session, the modified version is returned even if the page is reloaded.
- * `saveResource()`
-   Saves the current state of the resource.
- * `revertResource()`
-   Reverts the resource to the last saved state and returns an object with properties `fullText` and `dirty`.
- * `update()`
-   Computes the difference between the current editor content and the last version that has been committed to the server. If there is a difference, an update request is sent to refresh the server state. The return value has a single property `stateId`, which is an identifier for the new server state. All requests have to include the last obtained state identifier in order to suceed.
-
-### Syntax Highlighting {#syntax-highlighting}
-
-In contrast to [semantic highlighting](#semantic-highlighting), syntax highlighting can be computed purely in JavaScript without requiring a connection to the server. This is realized with the highlighting capabilities of the employed editor libraries. All three libraries offer a JavaScript API for specifying highlighting rules. The `WebIntegrationFragment` of the Xtext language generator is able to generate a highlighting specification that includes keywords and some basic tokens such as numbers and comments (see [The Language Generator](302_configuration.html#generator)). If the highlighting generated in this way is not sufficient, you can still implement the specification yourself following the documentation of the chosen editor library.
-
-The path to the highlighting specification is set with the `syntaxDefinition` option while setting up the Xtext editor. If no value is specified for that option, it is built from the `xtextLang` option in the form `'xtext-resources/{xtextLang}-syntax'` (Orion) or `'xtext-resources/mode-{xtextLang}'` (Ace). For CodeMirror syntax highlighting is configured by registering a _mode_ and setting the `mode` option accordingly (default mode name: `'xtext/{xtextLang}'`).
-
+<!--
 ## The Server {#server}
 
 TODO
@@ -330,3 +351,4 @@ TODO
 ### Persistence {#persistence}
 
 TODO
+-->
