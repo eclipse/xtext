@@ -199,24 +199,40 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 
 	@Override
 	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
+		return getStorages(uri, true);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	@Override
+	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri, boolean includeArchivesAndExternals) {
 		if (!uri.isPlatformResource()) {
 			// support storage lookup by absolute file URI as it is possibly resolved by importURI references
 			if (uri.isFile()) {
 				IPath path = new Path(uri.toFileString());
 				if (path.isAbsolute()) {
 					IFile file = getWorkspaceRoot().getFileForLocation(path);
-					return getStorages(uri, file);
+					return getStorages(uri, file, includeArchivesAndExternals);
 				}
 			}
-			return contribution.getStorages(uri);
+			if (includeArchivesAndExternals) {
+				return contribution.getStorages(uri);
+			} else {
+				return Collections.emptyList(); 
+			}
 		}
 		IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
-		return getStorages(uri, file);
+		return getStorages(uri, file, includeArchivesAndExternals);
 	}
 
-	private Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri, IFile file) {
+	private Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri, IFile file, boolean includeArchivesAndExternals) {
 		if (file == null || !file.isAccessible()) {
-			return contribution.getStorages(uri);
+			if (includeArchivesAndExternals) {
+				return contribution.getStorages(uri);
+			} else {
+				return Collections.emptyList();
+			}
 		}
 		return Collections.singleton(Tuples.<IStorage,IProject>create(file, file.getProject()));
 	}

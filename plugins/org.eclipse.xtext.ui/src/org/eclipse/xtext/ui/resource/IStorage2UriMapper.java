@@ -32,6 +32,19 @@ public interface IStorage2UriMapper {
 	 * @return IStorages corresponding to the given URI. Never <code>null</code>. 
 	 */
 	Iterable<Pair<IStorage, IProject>> getStorages(URI uri);
+	
+	/**
+	 * Find the storages that can be mapped to the given URI. It will typically 
+	 * be only one {@link IStorage} associated with one {@link IProject} but 
+	 * in the case that the same external class folder or jar is referenced in 
+	 * multiple projects multiple {@link IStorage}s are returned.
+	 * @param uri the {@link URI}. May not be <code>null</code>.
+	 * @param includeArchivesAndExternals if <code>true</code> the resources within whole classpath will be provided,
+	 * 			otherwise only resources being contained/linked in workspace projects are considered  
+	 * @return IStorages corresponding to the given URI. Never <code>null</code>.
+	 * @since 2.9 
+	 */
+	Iterable<Pair<IStorage, IProject>> getStorages(URI uri, boolean includeArchivesAndExternals);
 
 	/**
 	 * Returns the URI for the given {@link IStorage} or <code>null</code> if no valid URI exists.
