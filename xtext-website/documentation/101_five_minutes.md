@@ -8,7 +8,7 @@ part: Getting Started
 
 In this chapter you will learn how to create a new Xtext project, generate a fully working language infrastructure, and how to start editors tailored to your language for testing. We show you how this works for editors based on the Eclipse IDE, IntelliJ IDEA, and web browsers.
 
-But before we get started, make sure you have Eclipse Xtext properly [installed](../download.html). If you did not work with Eclipse yet you might want to choose the [Full Eclipse](../download.html) distribution, which you can unpack into the folder of your choice and run. Otherwise you may install Xtext via one of our [Update Sites](../download.html#updatesites) into your existing Eclipse IDE, and continue [here](#new-project).
+But before we get started, make sure you have Eclipse Xtext properly [installed](../download.html). If you did not work with Eclipse yet you might want to choose the [Full Eclipse](../download.html) distribution, which you can unpack into the folder of your choice and run. Otherwise you may install Xtext via the Eclipseone of our [Update Sites](../download.html#updatesites) or the [Eclipse Market Place](http://marketplace.eclipse.org/content/xtext) into your existing Eclipse IDE, and continue [here](#new-project). If you're interested in Xtext's IntelliJ IDEA or web support you need to install [Buildship](http://projects.eclipse.org/projects/tools.buildship), too, which is available via the [Eclipse Marketplace](http://marketplace.eclipse.org/content/buildship-gradle-integration), as well.
 
 After launching the Eclipse IDE you will be asked for a workspace directory, into which all the files and settings will be stored. You can start with the default proposal.
 
@@ -51,28 +51,13 @@ In order to test drive this language, you will have to generate the respective l
 
 ![](images/FiveMinTutorial_GenerateXtext.png)
 
-Note: The first time you will be asked to confirm the following:
-
-```
-*ATTENTION*
-It is recommended to use the ANTLR 3 parser generator
-	(BSD licence - http://www.antlr.org/license.html).
-Do you agree to download it (size 1MB) from
-	'http://download.itemis.com/antlr-generator-3.2.0-patch.jar'?
-(type 'y' or 'n' and hit enter)
-```
-
-Click into the *Console* view, type *y* and confirm. A file named *antlr-generator-3.2.0-patch.jar* will be copied into your project folder.
-
-You now obtain a runnable language infrastructure with a powerful Eclipse editor for a brain-dead language :-).
-
 ## Try The Eclipse Editor {#testing-eclipse-editor}
 
 Let's give the editor a try. If you select *Run As &rarr; Eclipse Application* from the project's context menu. A new Eclipse IDE instance will be launched and allows to test drive the editor.
 
 ![](images/FiveMinTutorial_RunEditor.png)
 
-Before you can create a file for the sample language in the test IDE you need to close the welcome page, of course, and create a sample project. Select *File &rarr; New &rarr; Project...* and choose a project type of your choice, e.g. *Java Project*, name it *Sample* and create a new file in the *src* folder of the project: From the context menu of the folder choose *New &rarr; File*, call it *Sample.mydsl* and hit *Finish*. The newly created editor for your language will open and ask you in a dialog, whether you want to add the Xtext nature to your project, which should be confirmed. You can now give the editor a try, e.g. use content assist (*Ctrl+Space*) to insert the keyword `Hello` and see how the input is validated immediately.
+Before you can create a file for the sample language in the test IDE you need to close the welcome page, of course, and create a sample project. Select *File &rarr; New &rarr; Project...* and choose a project type of your choice, e.g. *Java Project*, name it *Sample* and create a new file in the *src* folder of the project: From the context menu of the folder choose *New &rarr; File*, call it *Sample.mydsl* and hit *Finish*. The newly created editor for your language will open and ask you in a dialog, whether you want to add the Xtext nature to your project, which you should confirm. You can now give the editor a try, e.g. use content assist (*Ctrl+Space*) to insert the keyword `Hello` and see how the input is validated immediately.
 
 ![](images/FiveMinTutorial_EclipseEditor.png)
 
