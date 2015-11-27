@@ -9,18 +9,17 @@ import javax.swing.JCheckBox
 import javax.swing.JPanel
 import javax.swing.JTextField
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory
-import static org.eclipse.xtext.xtext.wizard.BuildSystem.*
+import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions
 import org.eclipse.xtext.xtext.wizard.ProjectLayout
 import org.eclipse.xtext.xtext.wizard.SourceLayout
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor
 
 import static java.awt.GridBagConstraints.*
-import org.eclipse.xtext.xtext.wizard.BuildSystem
+import static org.eclipse.xtext.xtext.wizard.BuildSystem.*
 
 class XtextWizardStep extends ModuleWizardStep {
 	static final Logger LOG = Logger.getInstance(XtextWizardStep.name)
-
 	extension IdeaWidgetFactory = new IdeaWidgetFactory
 
 	JPanel mainPanel
@@ -29,7 +28,7 @@ class XtextWizardStep extends ModuleWizardStep {
 	JTextField extensionField
 
 	JCheckBox idea
-//	JCheckBox eclipse
+	// JCheckBox eclipse
 	JCheckBox web
 	JCheckBox test
 
@@ -88,21 +87,21 @@ class XtextWizardStep extends ModuleWizardStep {
 		config.runtimeProject.enabled = true
 		config.ideProject.enabled = idea.selected || web.selected
 		config.intellijProject.enabled = idea.selected
-//		config.uiProject.enabled = eclipse.selected
+		// config.uiProject.enabled = eclipse.selected
 		config.webProject.enabled = web.selected
 		config.enabledProjects.filter(TestedProjectDescriptor).forEach[testProject.enabled = test.selected]
 
 		config.preferredBuildSystem = buildSystem.selectedItem as BuildSystem
 		config.sourceLayout = layout.selectedItem as SourceLayout
 		config.projectLayout = ProjectLayout.HIERARCHICAL
+
 	}
 
 	override validate() throws ConfigurationException {
 		val superCall = super.validate()
-//		if(eclipse.isSelected && layout.selectedItem == SourceLayout.MAVEN) {
-//			throw new ConfigurationException('''For "Eclipse Plugin" please select Source Layout: «SourceLayout.PLAIN».''')
-//		}
+		// if(eclipse.isSelected && layout.selectedItem == SourceLayout.MAVEN) {
+		// throw new ConfigurationException('''For "Eclipse Plugin" please select Source Layout: «SourceLayout.PLAIN».''')
+		// }
 		return superCall
 	}
-
 }
