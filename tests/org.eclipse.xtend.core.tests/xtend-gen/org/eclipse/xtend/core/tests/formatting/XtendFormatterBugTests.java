@@ -391,6 +391,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("  ");
     _builder_1.append("abstract  package  class  XtendTest  {  static  final  def  void  foo  (  )  {  }  }");
@@ -430,5 +431,32 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
       }
     };
     this.tester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void testBug482665() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void someMethod() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("\t");
+    _builder_1.append("class Foo { ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("def void someMethod() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    this.assertFormatted(_builder, _builder_1);
   }
 }
