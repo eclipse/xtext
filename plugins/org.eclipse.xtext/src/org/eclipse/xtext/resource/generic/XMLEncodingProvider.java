@@ -30,12 +30,8 @@ public class XMLEncodingProvider implements IEncodingProvider {
 
 	@Override
 	public String getEncoding(URI uri) {
-		if (uri == null) {
-			return Charset.defaultCharset().name();
-		}
 		try {
-			if(!URIConverter.INSTANCE.exists(uri, newHashMap())) {
-				// TODO move up to first if in v2.10
+			if (uri == null || !URIConverter.INSTANCE.exists(uri, newHashMap())) {
 				return Charset.defaultCharset().name();
 			}
 			byte[] buffer = null;
