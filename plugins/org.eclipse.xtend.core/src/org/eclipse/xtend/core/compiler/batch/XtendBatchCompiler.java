@@ -319,7 +319,15 @@ public class XtendBatchCompiler {
 	 * @since 2.8
 	 */
 	public void setJavaSourceVersion(final String javaSourceVersion) {
-		generatorConfig.setJavaSourceVersion(JavaVersion.fromQualifier(javaSourceVersion));
+		JavaVersion javaVersion = JavaVersion.fromQualifier(javaSourceVersion);
+		if(javaVersion == null) {
+			List<String> qualifiers = Lists.newArrayList();
+			for (JavaVersion version : JavaVersion.values())
+				qualifiers.add(version.getQualifier());
+			
+			throw new RuntimeException("Unknown Java Version Qualifier:" + javaSourceVersion + ". Valid values are:" + Joiner.on(", ").join(qualifiers));
+		}
+		generatorConfig.setJavaSourceVersion(javaVersion);
 	}
 
 	public void setVerbose(boolean verbose) {
