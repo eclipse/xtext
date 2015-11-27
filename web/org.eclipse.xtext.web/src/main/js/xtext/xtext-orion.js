@@ -115,7 +115,7 @@ define([
 		
 		var startupOptions = options.startupOptions;
 		if (!startupOptions)
-			startupOptions = { defaultPlugins: [] };
+			startupOptions = { defaultPlugins: ['webToolsPlugin.html'] };
 		var embeddedEditor = new mEmbeddedEditor(startupOptions);
 		var editorData = [];
 		query.each(function(index, parent) {
