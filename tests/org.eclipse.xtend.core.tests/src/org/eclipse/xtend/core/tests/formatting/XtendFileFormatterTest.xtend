@@ -59,7 +59,8 @@ class XtendFileFormatterTest extends AbstractXtendFormatterTest {
 			package foo
 			
 			class bar {
-			}''', '''   package  foo  class  bar  {  }''')	
+			}
+			''', '''   package  foo  class  bar  {  }''')	
 	}
 	
 	@Test def formatClass2() {
