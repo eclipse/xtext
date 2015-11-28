@@ -43,7 +43,7 @@ class TypeReference {
 		new TypeReference(clazz, language.resourceSet)
 	}
 	
-	static val PACKAGE_MATCHER = Pattern.compile('([a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*)?')
+	static val PACKAGE_MATCHER = Pattern.compile('([a-zA-Z_$][a-zA-Z0-9_$]*(\\.[a-zA-Z_$][a-zA-Z0-9_$]*)*)?')
 	static val CLASS_MATCHER = Pattern.compile('[a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*')
 	
 	val String packageName
