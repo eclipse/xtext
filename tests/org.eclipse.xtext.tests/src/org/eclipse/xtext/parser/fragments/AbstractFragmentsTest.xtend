@@ -203,6 +203,8 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 		assertEquals('myPrev', prev.name)
 		val node = NodeModelUtils.findActualNodeFor(prev)
 		assertEquals(' myPrev', node.text)
+		val lookup = NodeModelUtils.findActualSemanticObjectFor(node)
+		assertSame(prev, lookup)
 	}
 	
 	@Test
@@ -214,6 +216,8 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 		assertEquals('myPrev', prev.name)
 		val node = NodeModelUtils.findActualNodeFor(prev)
 		assertEquals(' ((myPrev))', node.text)
+		val lookup = NodeModelUtils.findActualSemanticObjectFor(node)
+		assertSame(prev, lookup)
 	}
 	
 	@Test
@@ -225,6 +229,8 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 		assertEquals('myPrev', prev.name)
 		val node = NodeModelUtils.findActualNodeFor(prev)
 		assertEquals(' myPrev', node.text)
+		val lookup = NodeModelUtils.findActualSemanticObjectFor(node)
+		assertSame(prev, lookup)
 	}
 	
 	@Test
@@ -236,6 +242,8 @@ abstract class AbstractFragmentsTest extends AbstractXtextTests {
 		assertEquals('myPrev', prev.name)
 		val node = NodeModelUtils.findActualNodeFor(prev)
 		assertEquals('myPrev', node.text)
+		val lookup = NodeModelUtils.findActualSemanticObjectFor(node)
+		assertSame(prev, lookup)
 	}
 	
 	protected def parseAndValidate(CharSequence s) {
