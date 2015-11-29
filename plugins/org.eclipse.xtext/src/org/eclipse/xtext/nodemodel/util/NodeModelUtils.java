@@ -265,6 +265,11 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 			return findActualSemanticObjectFor(parent);
 		Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
 		if (assignment != null) {
+			if (GrammarUtil.isEObjectFragmentRule(GrammarUtil.containingRule(assignment))) {
+				EObject result = findActualSemanticObjectInChildren(node, grammarElement);
+				if (result != null)
+					return result;
+			}
 			if (parent.hasDirectSemanticElement())
 				return findActualSemanticObjectFor(parent);
 			INode sibling = parent.getFirstChild();

@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.fragments;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -273,6 +274,8 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
     String _text = node.getText();
     Assert.assertEquals(" myPrev", _text);
+    final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
+    Assert.assertSame(prev, lookup);
   }
   
   @Test
@@ -289,6 +292,8 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
     String _text = node.getText();
     Assert.assertEquals(" ((myPrev))", _text);
+    final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
+    Assert.assertSame(prev, lookup);
   }
   
   @Test
@@ -305,6 +310,8 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
     String _text = node.getText();
     Assert.assertEquals(" myPrev", _text);
+    final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
+    Assert.assertSame(prev, lookup);
   }
   
   @Test
@@ -321,6 +328,8 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
     String _text = node.getText();
     Assert.assertEquals("myPrev", _text);
+    final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
+    Assert.assertSame(prev, lookup);
   }
   
   protected ParserRuleFragments parseAndValidate(final CharSequence s) {
