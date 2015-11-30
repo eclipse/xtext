@@ -36,8 +36,7 @@ gradle.beforeProject {project ->
 		apply from: "$rootDir/gradle/build-server-detection.gradle"
 		apply from: "$rootDir/gradle/eclipse-settings.gradle"
 		apply from: "$rootDir/gradle/java-compiler-settings.gradle"
-		apply from: "$rootDir/gradle/versions-from-parent-pom.gradle"
-		apply from: "$rootDir/gradle/versioning.gradle"
+		apply from: "$rootDir/gradle/versions.gradle"
 		apply from: "$rootDir/gradle/dependency-hygiene.gradle"
 
 		def isEclipsePlugin = project.file('build.properties').exists()
