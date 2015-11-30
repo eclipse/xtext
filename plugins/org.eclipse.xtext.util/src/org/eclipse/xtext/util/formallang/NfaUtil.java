@@ -292,7 +292,7 @@ public class NfaUtil {
 	}
 
 	public <S> Map<S, Integer> distanceFromStateMap(Nfa<S> nfa, Predicate<S> matches) {
-		Map<S, Integer> distances = Maps.newHashMap();
+		Map<S, Integer> distances = Maps.newLinkedHashMap();
 		collectDistancesForm(nfa, nfa.getStart(), Integer.MAX_VALUE, distances, matches);
 		return distances;
 	}

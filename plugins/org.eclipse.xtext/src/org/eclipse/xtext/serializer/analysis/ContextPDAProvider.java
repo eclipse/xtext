@@ -36,7 +36,7 @@ import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaUtil;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -191,8 +191,8 @@ public class ContextPDAProvider implements IContextPDAProvider {
 	public Map<ISerializationContext, Pda<ISerState, RuleCall>> getContextPDAs(Grammar grammar) {
 		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = Maps.newLinkedHashMap();
 		Map<ISerializationContext, Pda<ISerState, RuleCall>> grammarPDAs = grammarPdaProvider.getGrammarPDAs(grammar);
-		Multimap<Action, SerializerPDA> actionPdas = HashMultimap.create();
-		Multimap<Action, ISerializationContext> actionContexts = HashMultimap.create();
+		Multimap<Action, SerializerPDA> actionPdas = LinkedHashMultimap.create();
+		Multimap<Action, ISerializationContext> actionContexts = LinkedHashMultimap.create();
 		for (Entry<ISerializationContext, Pda<ISerState, RuleCall>> e : grammarPDAs.entrySet()) {
 			ISerializationContext context = e.getKey();
 			Pda<ISerState, RuleCall> pda = e.getValue();
