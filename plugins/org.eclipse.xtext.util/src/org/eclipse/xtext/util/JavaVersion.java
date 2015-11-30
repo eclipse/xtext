@@ -7,11 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import java.util.List;
-
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
-
 /**
  * Enumeration of Java language versions. This is likely to be extended as new versions are released.
  * 
@@ -56,10 +51,7 @@ public enum JavaVersion {
 		for (JavaVersion version : JavaVersion.values())
 			if (version.qualifier.equals(qualifier))
 				return version;
-		List<String> qualifiers = Lists.newArrayList();
-		for (JavaVersion version : JavaVersion.values())
-			qualifiers.add(version.getQualifier());
-		throw new RuntimeException("Unknown Java Version Qualifier:" + qualifier + ". Valid values are:" + Joiner.on(", ").join(qualifiers));
+		return null;
 	}
 
 	public static JavaVersion fromBree(String bree) {
@@ -86,5 +78,4 @@ public enum JavaVersion {
 		// This implementation relies on the correct order of declaration of the enum constants
 		return this.ordinal() >= other.ordinal();
 	}
-
 }
