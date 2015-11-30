@@ -2,7 +2,7 @@
  * This script collects all the projects and categorizes them.
  * It adds cross-configuration to the subprojects according to their category.
  * All cross-configuration should happen here.
- * All other build scripts should only configure their own project. 
+ * All other build scripts should only configure their own project.
  * This ensures minimum configuration time, which means fast builds.
  */
 
@@ -39,9 +39,9 @@ gradle.beforeProject {project ->
 		apply from: "$rootDir/gradle/versions-from-parent-pom.gradle"
 		apply from: "$rootDir/gradle/versioning.gradle"
 		apply from: "$rootDir/gradle/dependency-hygiene.gradle"
-	
+
 		def isEclipsePlugin = project.file('build.properties').exists()
-		
+
 		if (isEclipsePlugin) {
 			apply from: "${rootDir}/gradle/eclipse-plugin-project.gradle"
 		} else if (path.startsWith(':web:')) {
@@ -53,14 +53,14 @@ gradle.beforeProject {project ->
 			if (name != 'intellij') {
 				apply plugin: org.xtext.gradle.idea.IdeaComponentPlugin
 				apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-	
+
 				def isTestProject = it.name.endsWith('tests')
 				def isIntellijPlugin = it.file('META-INF/plugin.xml').exists() && !isTestProject
-				
+
 				if (isIntellijPlugin) {
 					apply plugin: org.xtext.gradle.idea.IdeaPluginPlugin
 				}
 			}
-		} 
+		}
 	}
 }

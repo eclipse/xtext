@@ -3,6 +3,15 @@
  * so you can launch them all together. It also creates a repository
  * from where users can install our plugins
  */
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.25"
+	}
+}
+
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
 
