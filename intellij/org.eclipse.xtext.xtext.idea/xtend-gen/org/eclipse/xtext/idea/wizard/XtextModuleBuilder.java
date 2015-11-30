@@ -25,6 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.JavaSdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.roots.ui.configuration.ModulesProvider;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.idea.lang.XtextLanguage;
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil;
 import org.eclipse.xtext.idea.wizard.IdeaProjectCreator;
 import org.eclipse.xtext.idea.wizard.XtextWizardStep;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -180,6 +182,12 @@ public class XtextModuleBuilder extends ModuleBuilder {
     }
     final ModifiableModuleModel moduleModel = _xifexpression;
     this.setupWizardConfiguration(this.wizardConfiguration);
+    ProjectRootManagerEx _instanceEx = ProjectRootManagerEx.getInstanceEx(project);
+    String _projectSdkName = _instanceEx.getProjectSdkName();
+    final JavaVersion projectJavaVersion = JavaVersion.fromQualifier(_projectSdkName);
+    if ((projectJavaVersion != null)) {
+      this.wizardConfiguration.setJavaVersion(projectJavaVersion);
+    }
     VirtualFile _baseDir = project.getBaseDir();
     String _path = _baseDir.getPath();
     this.wizardConfiguration.setRootLocation(_path);
@@ -238,6 +246,9 @@ public class XtextModuleBuilder extends ModuleBuilder {
     return (List<Module>)Conversions.doWrapArray(moduleModel.getModules());
   }
   
+  /**
+   * Preset Idea defaults
+   */
   public void setupWizardConfiguration(final WizardConfiguration wizardConfiguration) {
     wizardConfiguration.setNeedsGradleWrapper(false);
   }

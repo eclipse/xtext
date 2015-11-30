@@ -8,10 +8,12 @@
 package org.eclipse.xtext.formatting2.internal;
 
 import com.google.inject.Inject;
+import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
+import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.FormattingNotApplicableException;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormattableSubDocument;
@@ -30,6 +32,8 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -379,6 +383,41 @@ public class FormattableDocumentTest {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("kwlist kw1 kw2");
         _builder_1.newLine();
+        it.setExpectation(_builder_1);
+      }
+    };
+    this._genericFormatterTester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void aroundDocument() {
+    final Procedure1<GenericFormatterTestRequest> _function = new Procedure1<GenericFormatterTestRequest>() {
+      @Override
+      public void apply(final GenericFormatterTestRequest it) {
+        FormatterRequest _request = it.getRequest();
+        Collection<ITextRegion> _regions = _request.getRegions();
+        TextRegion _textRegion = new TextRegion(0, 6);
+        _regions.add(_textRegion);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("idlist");
+        it.setToBeFormatted(_builder);
+        final GenericFormatter<IDList> _function = new GenericFormatter<IDList>() {
+          @Override
+          protected void format(final IDList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
+            ISemanticRegionsFinder _regionFor = regions.regionFor(model);
+            ISemanticRegion _keyword = _regionFor.keyword("idlist");
+            final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+              @Override
+              public void apply(final IHiddenRegionFormatter it) {
+                it.setSpace("!");
+              }
+            };
+            document.surround(_keyword, _function);
+          }
+        };
+        it.setFormatter(_function);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("!idlist!");
         it.setExpectation(_builder_1);
       }
     };

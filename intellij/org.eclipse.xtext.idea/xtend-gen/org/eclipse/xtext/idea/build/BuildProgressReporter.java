@@ -67,9 +67,13 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
       return;
     }
     ProblemsView _problemsView = this.getProblemsView();
-    _problemsView.clearProgress();
-    ProblemsView _problemsView_1 = this.getProblemsView();
-    _problemsView_1.clearOldMessages(this.affectedScope, this.sessionId);
+    boolean _tripleNotEquals = (_problemsView != null);
+    if (_tripleNotEquals) {
+      ProblemsView _problemsView_1 = this.getProblemsView();
+      _problemsView_1.clearProgress();
+      ProblemsView _problemsView_2 = this.getProblemsView();
+      _problemsView_2.clearOldMessages(this.affectedScope, this.sessionId);
+    }
   }
   
   public void rehighlight() {
@@ -152,7 +156,11 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     }
     final CompilerMessage compilerMessage = this.getCompilerMessage(validated, issue);
     ProblemsView _problemsView = this.getProblemsView();
-    _problemsView.addMessage(compilerMessage, this.sessionId);
+    boolean _tripleNotEquals = (_problemsView != null);
+    if (_tripleNotEquals) {
+      ProblemsView _problemsView_1 = this.getProblemsView();
+      _problemsView_1.addMessage(compilerMessage, this.sessionId);
+    }
   }
   
   protected boolean isUnitTestMode() {

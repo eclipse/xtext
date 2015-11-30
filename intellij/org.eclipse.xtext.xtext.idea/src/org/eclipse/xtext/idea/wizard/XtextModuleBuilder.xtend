@@ -35,6 +35,8 @@ import org.jetbrains.idea.maven.project.MavenProjectsManager
 import org.jetbrains.plugins.gradle.settings.DistributionType
 import org.jetbrains.plugins.gradle.settings.GradleProjectSettings
 import org.jetbrains.plugins.gradle.util.GradleConstants
+import com.intellij.openapi.roots.ex.ProjectRootManagerEx
+import org.eclipse.xtext.util.JavaVersion
 
 class XtextModuleBuilder extends ModuleBuilder {
 
@@ -118,6 +120,9 @@ class XtextModuleBuilder extends ModuleBuilder {
 
 		setupWizardConfiguration(wizardConfiguration)
 
+		val projectJavaVersion = JavaVersion.fromQualifier(ProjectRootManagerEx.getInstanceEx(project).projectSdkName)
+		if (projectJavaVersion !== null)
+			wizardConfiguration.javaVersion = projectJavaVersion
 		wizardConfiguration.rootLocation = project.baseDir.path
 		wizardConfiguration.baseName = name
 
@@ -152,6 +157,9 @@ class XtextModuleBuilder extends ModuleBuilder {
 		return moduleModel.modules
 	}
 
+	/**
+	 * Preset Idea defaults
+	 */
 	def void setupWizardConfiguration(WizardConfiguration wizardConfiguration) {
 		wizardConfiguration.needsGradleWrapper = false
 		// TODO root module will became a '.parent' ending SettingsPage will not validate this
