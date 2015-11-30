@@ -8,7 +8,7 @@ def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exis
 def ideaPluginProjects = subprojects.findAll{it.file('META-INF/plugin.xml').exists() && ! it.name.endsWith('tests')} + project('org.eclipse.xtext.idea.common.types.tests')
 def ideaTestProjects = subprojects.findAll{it.name.endsWith('idea.tests')} + project('org.eclipse.xtext.idea.common.types.tests') - project('org.eclipse.xtext.idea.tests')
 
-ext.ideaBuildId = project.hasProperty('ideaEAP') ? "143.747.5" :  "143.381.42"
+ext.ideaBuildId = project.hasProperty('ideaEAP') ? "143.1015.7" :  "143.381.42"
 
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
