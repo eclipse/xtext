@@ -23,7 +23,6 @@ if (version.endsWith("-SNAPSHOT")) {
 
 ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**'
 
-//TODO unnecessary, make build server execute form the correct folder instead!
 evaluationDependsOnChildren()
 task check {
 	dependsOn subprojects*.check
