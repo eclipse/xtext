@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.util;
 
+import static com.google.common.collect.Iterables.*;
 import static org.eclipse.jdt.launching.JavaRuntime.*;
+
+import java.util.Arrays;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -16,12 +20,21 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.launching.StandardVMType;
 import org.eclipse.jdt.launching.IVMInstall;
+import org.eclipse.jdt.launching.IVMInstallType;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
+import org.eclipse.xtext.util.JavaVersion;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Sets;
 
 /**
+ * 
  * @author kosyakov - Initial contribution and API
+ * @author Dennis Huebner
+ * 
  * @since 2.6
  */
 public class JREContainerProvider {
@@ -70,7 +83,7 @@ public class JREContainerProvider {
 	 * @return JRE container path {@link IPath} for standard VM "J2SE-1.5"
 	 */
 	protected static IPath newJRE15ContainerPath() {
-		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, "J2SE-1.5");
+		return newJREContainerPath(StandardVMType.ID_STANDARD_VM_TYPE, JavaVersion.JAVA5.getBree());
 	}
 
 	/**
@@ -96,8 +109,7 @@ public class JREContainerProvider {
 		IClasspathEntry[] rawClasspath = javaProject.getRawClasspath();
 		for (IClasspathEntry classpathEntry : rawClasspath) {
 			int entryKind = classpathEntry.getEntryKind();
-			if (entryKind == IClasspathEntry.CPE_CONTAINER
-					&& defaultJREContainerEntry.getPath().isPrefixOf(classpathEntry.getPath())) {
+			if (entryKind == IClasspathEntry.CPE_CONTAINER && defaultJREContainerEntry.getPath().isPrefixOf(classpathEntry.getPath())) {
 				return classpathEntry;
 			}
 		}
@@ -105,9 +117,52 @@ public class JREContainerProvider {
 	}
 
 	/**
+	 * @since 2.9
+	 */
+	public static IClasspathEntry getJREContainerEntry(String bree) {
+		IClasspathEntry jreContainerEntry = getDefaultJREContainerEntry();
+		IExecutionEnvironment ee = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(bree);
+		if (ee != null) {
+			return JavaCore.newContainerEntry(newJREContainerPath(ee));
+		}
+		return jreContainerEntry;
+	}
+
+	/**
 	 * @since 2.7
 	 */
 	public static String getDefaultBREE() {
 		return getDefaultJREContainerPath().lastSegment();
+	}
+
+	/**
+	 * @return an {@link Iterable} of BREE that have a configured default VM<br>
+	 *         or have a strictly compatible installed JRE (aka "perfect match")
+	 * @since 2.9
+	 */
+	public static Iterable<String> getConfiguredBREEs() {
+		final Set<IVMInstall> vms = Sets.newHashSet();
+		for (IVMInstallType vmType : JavaRuntime.getVMInstallTypes()) {
+			vms.addAll(Arrays.asList(vmType.getVMInstalls()));
+		}
+		Iterable<IExecutionEnvironment> supportedEEs = filter(
+				Arrays.asList(JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments()),
+				new Predicate<IExecutionEnvironment>() {
+					@Override
+					public boolean apply(final IExecutionEnvironment ee) {
+						return ee.getDefaultVM() != null || any(vms, new Predicate<IVMInstall>() {
+							@Override
+							public boolean apply(IVMInstall vm) {
+								return ee.isStrictlyCompatible(vm);
+							}
+						});
+					}
+				});
+		return transform(supportedEEs, new Function<IExecutionEnvironment, String>() {
+			@Override
+			public String apply(IExecutionEnvironment input) {
+				return input.getId();
+			}
+		});
 	}
 }

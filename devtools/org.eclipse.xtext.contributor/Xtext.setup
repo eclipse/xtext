@@ -47,7 +47,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="emf.update.site"
-      value="http://download.eclipse.org/modeling/emf/emf/updates/2.11milestones/"/>
+      value="http://download.eclipse.org/modeling/emf/emf/updates/2.12milestones/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="antlr-gen.update.site"
@@ -745,7 +745,7 @@
       <setupTask
           xsi:type="launching:LaunchTask"
           id="refresh-gradle-dependencies"
-          launcher="/intellij/refresh-gradle-dependencies.launch">
+          launcher="/intellij/refresh-gradle-dependencies-idea.launch">
         <description>
           Refreshes the .classpath files for the Gradle projects
           Downloads Intellij IDEA if needed
@@ -754,7 +754,7 @@
       <setupTask
           xsi:type="launching:LaunchTask"
           id="refresh-gradle-dependencies-web"
-          launcher="/web/refresh-gradle-dependencies.launch">
+          launcher="/web/refresh-gradle-dependencies-web.launch">
         <description>
           Refreshes the .classpath files for the Gradle projects
           Downloads Intellij IDEA if needed

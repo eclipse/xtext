@@ -41,6 +41,8 @@ public class JavaProjectFactory extends ProjectFactory {
 	private List<IClasspathEntry> extraClasspathEntries = Lists.newArrayList();
 	private String defaultOutput = "bin";
 
+	private IClasspathEntry jreContainerEntry;
+
 	@Override
 	protected void enhanceProject(IProject project, SubMonitor monitor, Shell shell) throws CoreException {
 		super.enhanceProject(project, monitor, shell);
@@ -62,7 +64,7 @@ public class JavaProjectFactory extends ProjectFactory {
 				}
 				classpathEntries.addAll(extraClasspathEntries);
 
-				IClasspathEntry defaultJREContainerEntry = getDefaultJREContainerEntry();
+				IClasspathEntry defaultJREContainerEntry = getJreContainerEntry();
 				classpathEntries.add(defaultJREContainerEntry);
 				addMoreClasspathEntriesTo(classpathEntries);
 				
@@ -80,6 +82,23 @@ public class JavaProjectFactory extends ProjectFactory {
 		}
 	}
 
+	private IClasspathEntry getJreContainerEntry() {
+		if(jreContainerEntry == null) {
+			return getDefaultJREContainerEntry();
+		}
+		return jreContainerEntry;
+	}
+	
+	/**
+	 * @since 2.9
+	 * 
+	 * @param jreContainerEntry the JRE to use. If not set the default from <code>JREContainerProvider</code> will be used.
+	 * @see org.eclipse.xtext.ui.util.JREContainerProvider#getDefaultJREContainerEntry
+	 */
+	public void setJreContainerEntry(IClasspathEntry jreContainerEntry) {
+		this.jreContainerEntry = jreContainerEntry;
+	}
+	
 	protected void addMoreClasspathEntriesTo(List<IClasspathEntry> classpathEntries) {
 	}
 

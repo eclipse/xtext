@@ -205,19 +205,19 @@
 		</handler>
 	</extension>
 	<!-- adding resource factories -->
-		<extension
-			point="org.eclipse.emf.ecore.extension_parser">
-			<parser
-				class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-				type="beelangtestlanguage">
-			</parser>
-		</extension>
-		<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-		    <resourceServiceProvider
-		        class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-		        uriExtension="beelangtestlanguage">
-		    </resourceServiceProvider>
-		</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="beelangtestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	        class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+	        uriExtension="beelangtestlanguage">
+	    </resourceServiceProvider>
+	</extension>
 	<!-- marker definitions for org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage -->
 	<extension
 			id="beelangtestlanguage.check.fast"
@@ -278,7 +278,7 @@
 	        point="org.eclipse.ui.ide.markerResolution">
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.backtracking.ui.beelangtestlanguage.check.fast">
+	        markerType="org.eclipse.xtext.testlanguages.ui.beelangtestlanguage.check.fast">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -286,7 +286,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.backtracking.ui.beelangtestlanguage.check.normal">
+	        markerType="org.eclipse.xtext.testlanguages.ui.beelangtestlanguage.check.normal">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -294,7 +294,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.backtracking.ui.BeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.backtracking.ui.beelangtestlanguage.check.expensive">
+	        markerType="org.eclipse.xtext.testlanguages.ui.beelangtestlanguage.check.expensive">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -505,19 +505,19 @@
 		</handler>
 	</extension>
 	<!-- adding resource factories -->
-		<extension
-			point="org.eclipse.emf.ecore.extension_parser">
-			<parser
-				class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-				type="simplebeelangtestlanguage">
-			</parser>
-		</extension>
-		<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-		    <resourceServiceProvider
-		        class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-		        uriExtension="simplebeelangtestlanguage">
-		    </resourceServiceProvider>
-		</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="simplebeelangtestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	        class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+	        uriExtension="simplebeelangtestlanguage">
+	    </resourceServiceProvider>
+	</extension>
 	<!-- marker definitions for org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage -->
 	<extension
 			id="simplebeelangtestlanguage.check.fast"
@@ -578,7 +578,7 @@
 	        point="org.eclipse.ui.ide.markerResolution">
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.backtracking.ui.simplebeelangtestlanguage.check.fast">
+	        markerType="org.eclipse.xtext.testlanguages.ui.simplebeelangtestlanguage.check.fast">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -586,7 +586,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.backtracking.ui.simplebeelangtestlanguage.check.normal">
+	        markerType="org.eclipse.xtext.testlanguages.ui.simplebeelangtestlanguage.check.normal">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -594,7 +594,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.backtracking.ui.simplebeelangtestlanguage.check.expensive">
+	        markerType="org.eclipse.xtext.testlanguages.ui.simplebeelangtestlanguage.check.expensive">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -805,19 +805,19 @@
 		</handler>
 	</extension>
 	<!-- adding resource factories -->
-		<extension
-			point="org.eclipse.emf.ecore.extension_parser">
-			<parser
-				class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-				type="exbeelangtestlanguage">
-			</parser>
-		</extension>
-		<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-		    <resourceServiceProvider
-		        class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-		        uriExtension="exbeelangtestlanguage">
-		    </resourceServiceProvider>
-		</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="exbeelangtestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	        class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+	        uriExtension="exbeelangtestlanguage">
+	    </resourceServiceProvider>
+	</extension>
 	<!-- marker definitions for org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage -->
 	<extension
 			id="exbeelangtestlanguage.check.fast"
@@ -878,7 +878,7 @@
 	        point="org.eclipse.ui.ide.markerResolution">
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.backtracking.ui.exbeelangtestlanguage.check.fast">
+	        markerType="org.eclipse.xtext.testlanguages.ui.exbeelangtestlanguage.check.fast">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -886,7 +886,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.backtracking.ui.exbeelangtestlanguage.check.normal">
+	        markerType="org.eclipse.xtext.testlanguages.ui.exbeelangtestlanguage.check.normal">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -894,7 +894,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.backtracking.ui.exbeelangtestlanguage.check.expensive">
+	        markerType="org.eclipse.xtext.testlanguages.ui.exbeelangtestlanguage.check.expensive">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -1105,19 +1105,19 @@
 		</handler>
 	</extension>
 	<!-- adding resource factories -->
-		<extension
-			point="org.eclipse.emf.ecore.extension_parser">
-			<parser
-				class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-				type="nojdt">
-			</parser>
-		</extension>
-		<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-		    <resourceServiceProvider
-		        class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-		        uriExtension="nojdt">
-		    </resourceServiceProvider>
-		</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="nojdt">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	        class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+	        uriExtension="nojdt">
+	    </resourceServiceProvider>
+	</extension>
 	<!-- marker definitions for org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage -->
 	<extension
 			id="nojdttestlanguage.check.fast"
@@ -1226,7 +1226,7 @@
 	        point="org.eclipse.ui.ide.markerResolution">
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.noJdt.ui.nojdttestlanguage.check.fast">
+	        markerType="org.eclipse.xtext.testlanguages.ui.nojdttestlanguage.check.fast">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -1234,7 +1234,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.noJdt.ui.nojdttestlanguage.check.normal">
+	        markerType="org.eclipse.xtext.testlanguages.ui.nojdttestlanguage.check.normal">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -1242,7 +1242,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.testlanguages.noJdt.ui.nojdttestlanguage.check.expensive">
+	        markerType="org.eclipse.xtext.testlanguages.ui.nojdttestlanguage.check.expensive">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">

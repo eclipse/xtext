@@ -28,6 +28,7 @@ import org.eclipse.jdt.internal.compiler.problem.DefaultProblemFactory
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler.Result
 
 /**

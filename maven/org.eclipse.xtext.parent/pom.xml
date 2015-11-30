@@ -159,8 +159,7 @@
 					<additionalparam>${javadoc.opts}</additionalparam>
 				</configuration>
 			</plugin>
-			<!-- add install and deploy here, otherwise deploying (deployAtEnd) may
-				be skipped -->
+			<!-- add install and deploy here, otherwise deploying (deployAtEnd) may be skipped -->
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
 				<version>${maven-install-version}</version>
@@ -176,8 +175,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings
-					only. It has no influence on the Maven build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on 
+					the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -321,6 +320,35 @@
 					</snapshots>
 					<releases>
 						<enabled>false</enabled>
+					</releases>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+		<profile>
+			<id>staging-build</id>
+			<repositories>
+				<repository>
+					<id>oss staging</id>
+					<url>https://oss.sonatype.org/content/groups/staging/</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+						<checksumPolicy>fail</checksumPolicy>
+					</releases>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>oss staging</id>
+					<url>https://oss.sonatype.org/content/groups/staging/</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+						<checksumPolicy>fail</checksumPolicy>
 					</releases>
 				</pluginRepository>
 			</pluginRepositories>
