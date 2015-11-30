@@ -229,17 +229,4 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 			'''
 		]
 	}
-	
-	@Test def testBug482665() {
-		assertFormatted('''
-			class Foo {
-				def void someMethod() {
-				}
-			}
-		''','''
-			class Foo { 
-				def void someMethod() {
-				}
-		}''')
-	}
 }
