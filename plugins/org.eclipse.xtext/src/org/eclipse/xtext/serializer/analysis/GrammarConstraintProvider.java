@@ -44,9 +44,9 @@ import org.eclipse.xtext.util.formallang.ProductionFormatter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -413,12 +413,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	private NfaUtil nfaUtil;
 
 	protected Multimap<Parameter, Boolean> collectAllParameterValues(IConstraint constraint) {
-		Set<Parameter> all = Sets.newHashSet();
+		Set<Parameter> all = Sets.newLinkedHashSet();
 		List<ISerializationContext> contexts = constraint.getContexts();
 		for (ISerializationContext context : contexts) {
 			all.addAll(((SerializationContext) context).getDeclaredParameters());
 		}
-		HashMultimap<Parameter, Boolean> values = HashMultimap.create();
+		Multimap<Parameter, Boolean> values = LinkedHashMultimap.create();
 		for (ISerializationContext ctx : contexts) {
 			Set<Parameter> params = ctx.getEnabledBooleanParameters();
 			for (Parameter param : all)
@@ -453,7 +453,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			}
 		}
 		if (relevantRules.isEmpty()) {
-			Set<ParserRule> allRules = Sets.newHashSet(contextRules);
+			Set<ParserRule> allRules = Sets.newLinkedHashSet(contextRules);
 			for (ISerializationContext ctx : constraint.getContexts()) {
 				Action action = ctx.getAssignedAction();
 				if (action != null)
@@ -510,7 +510,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		Map<ISerializationContext, Nfa<ISemState>> nfas = nfaProvider.getSemanticSequencerNFAs(grammar);
 		ArrayList<ISerializationContext> contexts = Lists.newArrayList(nfas.keySet());
 		Collections.sort(contexts);
-		Map<Pair<EClass, Nfa<ISemState>>, Constraint> constraints = Maps.newHashMap();
+		Map<Pair<EClass, Nfa<ISemState>>, Constraint> constraints = Maps.newLinkedHashMap();
 		for (ISerializationContext context : contexts) {
 			Nfa<ISemState> nfa = nfas.get(context);
 			EClass type = context.getType();
