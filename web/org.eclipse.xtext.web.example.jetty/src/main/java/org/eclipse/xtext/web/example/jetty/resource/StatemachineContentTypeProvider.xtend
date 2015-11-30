@@ -5,24 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.web.server.formatting
+package org.eclipse.xtext.web.example.jetty.resource
 
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtend.lib.annotations.ToString
-import org.eclipse.xtext.util.TextRegion
-import org.eclipse.xtext.web.server.IServiceResult
+import org.eclipse.xtext.web.server.generator.DefaultContentTypeProvider
+import org.eclipse.xtext.web.server.generator.GeneratorService
 
-/**
- * Result object returned by the formatting service.
- */
-@Data
-@ToString(skipNulls = true)
-class FormattingResult implements IServiceResult {
+class StatemachineContentTypeProvider extends DefaultContentTypeProvider {
 	
-	String stateId
-	
-	String formattedText
-	
-	TextRegion replaceRegion
+	override getContentType(String fileName) {
+		if (fileName == GeneratorService.DEFAULT_ARTIFACT)
+			return 'text/html'
+		super.getContentType(fileName)
+	}
 	
 }

@@ -16,13 +16,11 @@ class Formatting2Test extends AbstractWebServerTest {
 		val file = createFile('/* bla */ output signal x state foo set x = true end')
 		val format = getService(#{'serviceType' -> 'format', 'resource' -> file.name})
 		assertTrue(format.hasSideEffects)
-		assertFalse(format.hasTextInput)
 		val result = format.service.apply() as FormattingResult
 		val String expectedResult = '''
 			FormattingResult [
 			  stateId = "-7fffffff"
-			  formattedText = "/* bla */\noutput signal x\nstate foo\n	set x = true\nend"
-			  replaceRegion = null
+			  formattedText = "/* bla */ output signal x\nstate foo\n	set x = true\nend\n"
 			]'''
 		assertEquals(expectedResult, result.toString)
 	}
@@ -36,7 +34,6 @@ class Formatting2Test extends AbstractWebServerTest {
 				'resource' -> file.name
 			})
 		assertTrue(format.hasSideEffects)
-		assertFalse(format.hasTextInput)
 		val result = format.service.apply() as FormattingResult
 		val String expectedResult = '''
 			FormattingResult [

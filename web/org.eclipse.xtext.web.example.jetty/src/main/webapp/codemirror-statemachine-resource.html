@@ -29,7 +29,14 @@
 				editor.xtextServices.revertResource();
 			});
 			$("#generate-button").click(function() {
-				window.open('http://' + location.host + '/xtext-service/generate?resource=example.statemachine');
+				window.open('http://' + location.host + '/xtext-service/generate?resource=' + editor.xtextServices.options.resourceId);
+			});
+			$("#change-resource").change(function() {
+				var resourceId = $("#change-resource option:selected").attr("value");
+				editor.xtextServices.serviceBuilder.changeResource(resourceId);
+			});
+			$("#disable-button").click(function() {
+				xtext.removeServices(editor);
 			});
 		});
 	</script>
@@ -38,7 +45,7 @@
 
 <div class="container">
 	<div id="xtext-editor"
-		data-editor-resource-id="example.statemachine"
+		data-editor-resource-id="example1.statemachine"
 		data-editor-dirty-element="dirty-indicator"
 		data-editor-enable-save-action="true"
 		data-editor-enable-formatting-action="true"
@@ -51,6 +58,11 @@
 		<button id="save-button">Save</button>
 		<button id="revert-button">Revert</button>
 		<button id="generate-button">Generate</button>
+		<select id="change-resource">
+			<option value="example1.statemachine">Example 1</option>
+			<option value="example2.statemachine">Example 2</option>
+		</select>
+		<button id="disable-button">Disable</button>
 	</div>
 </div>
 

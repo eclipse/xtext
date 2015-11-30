@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
-	<title>Xtext-Web State Machine Example (Stateless Server)</title>
+	<title>Xtext-Web State Machine Example (Multiple Resources)</title>
 	<link rel="stylesheet" type="text/css" href="orion/code_edit/built-codeEdit.css" />
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
@@ -17,39 +17,55 @@
 		});
 		require(["orion/code_edit/built-codeEdit-amd"], function() {
 			require(["xtext/xtext-orion"], function(xtext) {
-				xtext.createEditor({syntaxDefinition: "xtext/statemachine-syntax"});
+				xtext.createEditor({
+					syntaxDefinition: "xtext/statemachine-syntax",
+					loadFromServer: false,
+					enableFormattingAction: true
+				}).done(function(editorViewers) {
+					var leftServices = editorViewers[0].xtextServices;
+					var rightServices = editorViewers[1].xtextServices;
+					leftServices.editorContext.addServerStateListener(function(params) {
+						if (!params.forceUpdate)
+							rightServices.update({forceUpdate: true});
+					});
+					rightServices.editorContext.addServerStateListener(function(params) {
+						if (!params.forceUpdate)
+							leftServices.update({forceUpdate: true});
+					});
+				});
 			});
 		});
 	</script>
 </head>
 <body>
 
-<div class="container">
+<div class="container-left">
 	<div class="xtext-editor"
-	    data-editor-xtext-lang="statemachine"
-		data-editor-dirty-element="dirty-indicator"
-		data-editor-enable-formatting-action="true"
-		data-editor-send-full-text="true"
+		data-editor-resource-id="multi-resource-static/left-dummy.statemachine"
 	><pre>
 /*
- * A simple State Machine example.
+ * A first State Machine resource.
  */
 input signal x
 input signal y
-output signal z
 
 state State1
 	set z = false
 	if x == true goto State2
-end
+end</pre></div>
+</div>
+<div class="container-right">
+	<div class="xtext-editor"
+		data-editor-resource-id="multi-resource-static/right-dummy.statemachine"
+	><pre>
+/*
+ * A second State Machine resource.
+ */
+output signal z
 
 state State2
 	if x == false and y == true goto State1
 end</pre></div>
-	<div class="status-wrapper">
-		<div id="dirty-indicator">modified</div>
-		<div id="status">Welcome to Xtext-Web</div>
-	</div>
 </div>
 
 </body>

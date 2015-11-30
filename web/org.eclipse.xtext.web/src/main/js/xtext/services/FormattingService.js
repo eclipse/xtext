@@ -29,14 +29,21 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	};
 	
 	FormattingService.prototype._processResult = function(result, editorContext) {
-		if (result.replaceRegion)
-			editorContext.setText(result.formattedText, result.replaceRegion.offset,
-					result.replaceRegion.offset + result.replaceRegion.length);
-		else
+		// The text update may be asynchronous, so we have to compute the new text ourselves
+		var newText;
+		if (result.replaceRegion) {
+			var fullText = editorContext.getText();
+			var start = result.replaceRegion.offset;
+			var end = result.replaceRegion.offset + result.replaceRegion.length;
+			editorContext.setText(result.formattedText, start, end);
+			newText = fullText.substring(0, start) + result.formattedText + fullText.substring(end);
+		} else {
 			editorContext.setText(result.formattedText);
-		var listeners = editorContext.updateServerState(editorContext.getText(), result.stateId);
+			newText = result.formattedText;
+		}
+		var listeners = editorContext.updateServerState(newText, result.stateId);
 		for (var i = 0; i < listeners.length; i++) {
-			listeners[i]();
+			listeners[i]({});
 		}
 	};
 	

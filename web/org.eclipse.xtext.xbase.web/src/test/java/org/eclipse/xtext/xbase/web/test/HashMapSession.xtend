@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.web.test
 
-import org.eclipse.xtext.web.server.ISessionStore
 import java.util.HashMap
+import org.eclipse.xtext.web.server.ISession
 
-class HashMapSessionStore implements ISessionStore {
+class HashMapSession implements ISession {
 	
 	val map = new HashMap<Object, Object>
 		

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="en-us">
+	<title>Xtext-Web State Machine Example (Multiple Resources)</title>
+	<link rel="stylesheet" type="text/css" href="xtext/xtext-ace.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="webjars/requirejs/2.1.20/require.min.js"></script>
+	<script type="text/javascript">
+		require.config({
+			paths: {
+				"jquery": "webjars/jquery/2.1.4/jquery.min",
+				"ace/ext/language_tools": "webjars/ace/1.2.0/src/ext-language_tools"
+			}
+		});
+		require(["webjars/ace/1.2.0/src/ace"], function() {
+			require(["xtext/xtext-ace"], function(xtext) {
+				var editors = xtext.createEditor({
+					position: "absolute",
+					syntaxDefinition: "xtext/ace-mode-statemachine",
+					enableFormattingAction: true
+				});
+				var leftServices = editors[0].xtextServices;
+				var rightServices = editors[1].xtextServices;
+				leftServices.editorContext.addServerStateListener(function(params) {
+					if (!params.forceUpdate)
+						rightServices.update({forceUpdate: true});
+				});
+				rightServices.editorContext.addServerStateListener(function(params) {
+					if (!params.forceUpdate)
+						leftServices.update({forceUpdate: true});
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div class="container-left">
+	<div class="xtext-editor"
+		data-editor-resource-id="multi-resource/left.statemachine">
+	</div>
+</div>
+<div class="container-right">
+	<div class="xtext-editor"
+		data-editor-resource-id="multi-resource/right.statemachine">
+	</div>
+</div>
+
+</body>
+</html>

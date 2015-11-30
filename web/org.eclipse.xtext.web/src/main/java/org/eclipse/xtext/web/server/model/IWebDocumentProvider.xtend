@@ -10,31 +10,36 @@ package org.eclipse.xtext.web.server.model
 import com.google.inject.ImplementedBy
 import com.google.inject.Inject
 import com.google.inject.Provider
-import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.web.server.IServiceContext
 
 /**
- * Provider for resource set instances.
+ * Provider for document instances.
  */
 @ImplementedBy(DefaultImpl)
-interface IWebResourceSetProvider {
+interface IWebDocumentProvider {
 	
 	/**
-	 * Provides a resource set. The resourceId may be {@code null}, which means that the
-	 * request should be processed in stateless mode. Fetching the session from the service
+	 * Creates and configures a document. The resourceId may be {@code null}, which means that
+	 * the request should be processed in stateless mode. Fetching the session from the service
 	 * context should be avoided in this case.
 	 */
-	def ResourceSet get(String resourceId, IServiceContext serviceContext)
+	def XtextWebDocument get(String resourceId, IServiceContext serviceContext)
 	
 	/**
-	 * The default implementation creates a new resource set for each resource.
+	 * The default implementation creates one document synchronizer per session. If stateless
+	 * mode is requested, each document gets its own synchronizer.
 	 */
-	class DefaultImpl implements IWebResourceSetProvider {
+	class DefaultImpl implements IWebDocumentProvider {
 		
-		@Inject Provider<ResourceSet> provider
+		@Inject Provider<DocumentSynchronizer> synchronizerProvider
 		
 		override get(String resourceId, IServiceContext serviceContext) {
-			provider.get
+			val synchronizer =
+				if (resourceId === null)
+					synchronizerProvider.get
+				else
+					serviceContext.session.get(DocumentSynchronizer, [synchronizerProvider.get])
+			new XtextWebDocument(resourceId, synchronizer)
 		}
 		
 	}

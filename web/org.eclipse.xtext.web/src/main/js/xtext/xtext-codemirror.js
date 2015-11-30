@@ -45,8 +45,10 @@
  * mode {String}
  *     The name of the syntax highlighting mode to use; the mode has to be registered externally
  *     (see CodeMirror documentation).
- * parent {String | DOMElement}
+ * parent = 'xtext-editor' {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
+ * parentClass = 'xtext-editor' {String}
+ *     If the 'parent' option is not given, this option is used to find elements that match the given class name.
  * resourceId {String}
  *     The identifier of the resource displayed in the text editor; this option is sent to the server to
  *     communicate required information on the respective resource.
@@ -87,42 +89,32 @@ define([
 	exports.createEditor = function(options) {
 		if (!options)
 			options = {};
-		if (!options.parent)
-			options.parent = 'xtext-editor';
 		
-		var parentsSpec;
-		if (jQuery.isArray(options.parent)) {
-			parentsSpec = options.parent;
+		var query;
+		if (jQuery.type(options.parent) === 'string') {
+			query = jQuery('#' + options.parent, options.document);
+		} else if (options.parent) {
+			query = jQuery(options.parent);
+		} else if (jQuery.type(options.parentClass) === 'string') {
+			query = jQuery('.' + options.parent, options.document);
 		} else {
-			parentsSpec = [options.parent];
-		}
-		var parents = [];
-		var doc = options.document || document;
-		for (var i = 0; i < parentsSpec.length; i++) {
-			var spec = parentsSpec[i];
-			if (typeof(spec) === 'string') {
-				var element = doc.getElementById(spec);
-				if (element)
-					parents.push(element);
-				else
-					parents.concat(doc.getElementsByClassName(options.parent));
-			} else {
-				parents.push(spec);
-			}
+			query = jQuery('#xtext-editor', options.document);
+			if (query.length == 0)
+				query = jQuery('.xtext-editor', options.document);
 		}
 		
 		var editors = [];
-		for (var i = 0; i < parents.length; i++) {
-			var editorOptions = ServiceBuilder.mergeOptions(parents[i], options);
+		query.each(function(index, parent) {
+			var editorOptions = ServiceBuilder.mergeParentOptions(parent, options);
 			if (!editorOptions.value)
-				editorOptions.value = jQuery(parents[i]).text();
+				editorOptions.value = jQuery(parent).text();
 			var editor = CodeMirror(function(element) {
-				jQuery(parents[i]).empty().append(element);
+				jQuery(parent).empty().append(element);
 			}, editorOptions);
 			
 			exports.createServices(editor, editorOptions);
-			editors[i] = editor;
-		}
+			editors[index] = editor;
+		});
 		
 		if (editors.length == 1)
 			return editors[0];
@@ -153,8 +145,50 @@ define([
 		};
 		var serviceBuilder = new CodeMirrorServiceBuilder(editor, xtextServices);
 		serviceBuilder.createServices();
+		xtextServices.serviceBuilder = serviceBuilder;
 		editor.xtextServices = xtextServices;
 		return xtextServices;
+	}
+	
+	/**
+	 * Remove all services and listeners that have been previously created with createServices(editor, options).
+	 */
+	exports.removeServices = function(editor) {
+		if (!editor.xtextServices)
+			return;
+		var services = editor.xtextServices;
+		if (services.modelChangeListener)
+			editor.off('changes', services.modelChangeListener);
+		if (services.cursorActivityListener)
+			editor.off('cursorActivity', services.cursorActivityListener);
+		if (services.saveKeyMap)
+			editor.removeKeyMap(services.saveKeyMap);
+		if (services.contentAssistKeyMap)
+			editor.removeKeyMap(services.contentAssistKeyMap);
+		if (services.formatKeyMap)
+			editor.removeKeyMap(services.formatKeyMap);
+		var editorContext = services.editorContext;
+		var highlightingMarkers = editorContext._highlightingMarkers;
+		if (highlightingMarkers) {
+			for (var i = 0; i < highlightingMarkers.length; i++) {
+				highlightingMarkers[i].clear();
+			}
+		}
+		if (editorContext._validationAnnotations)
+			services.serviceBuilder._clearAnnotations(editorContext._validationAnnotations);
+		var validationMarkers = editorContext._validationMarkers;
+		if (validationMarkers) {
+			for (var i = 0; i < validationMarkers.length; i++) {
+				validationMarkers[i].clear();
+			}
+		}
+		var occurrenceMarkers = editorContext._occurrenceMarkers;
+		if (occurrenceMarkers) {
+			for (var i = 0; i < occurrenceMarkers.length; i++)  {
+				occurrenceMarkers[i].clear();
+			}
+		}
+		delete editor.xtextServices;
 	}
 	
 	/**
@@ -177,7 +211,7 @@ define([
 		var textUpdateDelay = services.options.textUpdateDelay;
 		if (!textUpdateDelay)
 			textUpdateDelay = 500;
-		function modelChangeListener(event) {
+		services.modelChangeListener = function(event) {
 			if (!event._xtext_init)
 				editorContext.setDirty(true);
 			if (editorContext._modelChangeTimeout)
@@ -190,8 +224,8 @@ define([
 			}, textUpdateDelay);
 		}
 		if (!services.options.resourceId || !services.options.loadFromServer)
-			modelChangeListener({_xtext_init: true});
-		this.editor.on('changes', modelChangeListener);
+			services.modelChangeListener({_xtext_init: true});
+		this.editor.on('changes', services.modelChangeListener);
 	}
 	
 	/**
@@ -204,7 +238,8 @@ define([
 			var saveFunction = function(editor) {
 				services.saveResource();
 			};
-			this.editor.addKeyMap(/mac os/.test(userAgent) ? {'Cmd-S': saveFunction}: {'Ctrl-S': saveFunction});
+			services.saveKeyMap = /mac os/.test(userAgent) ? {'Cmd-S': saveFunction}: {'Ctrl-S': saveFunction};
+			this.editor.addKeyMap(services.saveKeyMap);
 		}
 	}
 		
@@ -214,7 +249,7 @@ define([
 	CodeMirrorServiceBuilder.prototype.setupContentAssistService = function() {
 		var services = this.services;
 		var editorContext = services.editorContext;
-		this.editor.addKeyMap({'Ctrl-Space': function(editor) {
+		services.contentAssistKeyMap = {'Ctrl-Space': function(editor) {
 			var params = ServiceBuilder.copy(services.options);
 			var cursor = editor.getCursor();
 			params.offset = editor.indexFromPos(cursor);
@@ -242,7 +277,8 @@ define([
 					};
 				}});
 			});
-		}});
+		}};
+		this.editor.addKeyMap(services.contentAssistKeyMap);
 	}
 		
 	/**
@@ -374,7 +410,7 @@ define([
 			selectionUpdateDelay = 550;
 		var editor = this.editor;
 		var self = this;
-		editor.on('cursorActivity', function() {
+		services.cursorActivityListener = function() {
 			if (editorContext._selectionChangeTimeout) {
 				clearTimeout(editorContext._selectionChangeTimeout);
 			}
@@ -407,7 +443,8 @@ define([
 					}
 				});
 			}, selectionUpdateDelay);
-		});
+		}
+		editor.on('cursorActivity', services.cursorActivityListener);
 	}
 		
 	/**
@@ -420,7 +457,8 @@ define([
 			var formatFunction = function(editor) {
 				services.format();
 			};
-			this.editor.addKeyMap(/mac os/.test(userAgent) ? {'Shift-Cmd-F': formatFunction}: {'Shift-Ctrl-S': formatFunction});
+			services.formatKeyMap = /mac os/.test(userAgent) ? {'Shift-Cmd-F': formatFunction}: {'Shift-Ctrl-S': formatFunction};
+			this.editor.addKeyMap(services.formatKeyMap);
 		}
 	}
 	

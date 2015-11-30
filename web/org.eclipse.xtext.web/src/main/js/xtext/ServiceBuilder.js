@@ -36,6 +36,7 @@ define([
 		var options = services.options;
 		var editorContext = services.editorContext;
 		editorContext.xtextServices = services;
+		var self = this;
 		if (!options.serviceUrl) {
 			if (!options.baseUrl)
 				options.baseUrl = '/';
@@ -45,21 +46,21 @@ define([
 		}
 		if (options.resourceId) {
 			if (!options.xtextLang)
-				options.xtextLang = options.resourceId.split('.').pop();
+				options.xtextLang = options.resourceId.split(/[?#]/)[0].split('.').pop();
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = true;
 			if (options.loadFromServer && this.setupPersistenceServices) {
 				services.loadResourceService = new LoadResourceService(options.serviceUrl, options.resourceId, false);
-				services.loadResource = function() {
-					return services.loadResourceService.invoke(editorContext, options);
+				services.loadResource = function(addParams) {
+					return services.loadResourceService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 				}
 				services.saveResourceService = new SaveResourceService(options.serviceUrl, options.resourceId);
-				services.saveResource = function() {
-					return services.saveResourceService.invoke(editorContext, options);
+				services.saveResource = function(addParams) {
+					return services.saveResourceService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 				}
 				services.revertResourceService = new LoadResourceService(options.serviceUrl, options.resourceId, true);
-				services.revertResource = function() {
-					return services.revertResourceService.invoke(editorContext, options);
+				services.revertResource = function(addParams) {
+					return services.revertResourceService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 				}
 				this.setupPersistenceServices();
 				services.loadResource();
@@ -67,24 +68,25 @@ define([
 		} else {
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = false;
-			if (options.xtextLang)
-				options.resourceId = 'text.' + options.xtextLang;
+			if (options.xtextLang) {
+				var randomId = Math.floor(Math.random() * 2147483648).toString(16);
+				options.resourceId = randomId + '.' + options.xtextLang;
+			}
 		}
 		
-		var self = this;
 		if (this.setupSyntaxHighlighting) {
 			this.setupSyntaxHighlighting();
 		}
 		if (options.enableHighlightingService || options.enableHighlightingService === undefined) {
 			services.highlightingService = new HighlightingService(options.serviceUrl, options.resourceId);
-			services.computeHighlighting = function() {
-				return services.highlightingService.invoke(editorContext, options);
+			services.computeHighlighting = function(addParams) {
+				return services.highlightingService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 			}
 		}
 		if (options.enableValidationService || options.enableValidationService === undefined) {
 			services.validationService = new ValidationService(options.serviceUrl, options.resourceId);
-			services.validate = function() {
-				return services.validationService.invoke(editorContext, options);
+			services.validate = function(addParams) {
+				return services.validationService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 			}
 		}
 		if (this.setupUpdateService) {
@@ -100,8 +102,8 @@ define([
 			}
 			if (!options.sendFullText) {
 				services.updateService = new UpdateService(options.serviceUrl, options.resourceId);
-				services.update = function() {
-					return services.updateService.invoke(editorContext, options);
+				services.update = function(addParams) {
+					return services.updateService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 				}
 				if (services.saveResourceService)
 					services.saveResourceService._updateService = services.updateService;
@@ -112,40 +114,44 @@ define([
 		if ((options.enableContentAssistService || options.enableContentAssistService === undefined)
 				&& this.setupContentAssistService) {
 			services.contentAssistService = new ContentAssistService(options.serviceUrl, options.resourceId, services.updateService);
-			services.getContentAssist = function() {
-				return services.contentAssistService.invoke(editorContext, options);
+			services.getContentAssist = function(addParams) {
+				return services.contentAssistService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 			}
 			this.setupContentAssistService();
 		}
 		if ((options.enableHoverService || options.enableHoverService === undefined)
 				&& this.setupHoverService) {
 			services.hoverService = new HoverService(options.serviceUrl, options.resourceId, services.updateService);
-			services.getHoverInfo = function() {
-				return services.hoverService.invoke(editorContext, options);
+			services.getHoverInfo = function(addParams) {
+				return services.hoverService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 			}
 			this.setupHoverService();
 		}
 		if ((options.enableOccurrencesService || options.enableOccurrencesService === undefined)
 				&& this.setupOccurrencesService) {
 			services.occurrencesService = new OccurrencesService(options.serviceUrl, options.resourceId, services.updateService);
-			services.getOccurrences = function() {
-				return services.occurrencesService.invoke(editorContext, options);
+			services.getOccurrences = function(addParams) {
+				return services.occurrencesService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 			}
 			this.setupOccurrencesService();
 		}
 		if ((options.enableFormattingService || options.enableFormattingService === undefined)
 				&& this.setupFormattingService) {
 			services.formattingService = new FormattingService(options.serviceUrl, options.resourceId, services.updateService);
-			services.format = function() {
-				return services.formattingService.invoke(editorContext, options);
+			services.format = function(addParams) {
+				return services.formattingService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 			}
 			this.setupFormattingService();
 		}
 		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
 			services.generatorService = new XtextService();
 			services.generatorService.initialize(options.serviceUrl, 'generate', options.resourceId, services.updateService);
-			services.generate = function() {
-				return services.generatorService.invoke(editorContext, options);
+			services.generatorService._initServerData = function(serverData, editorContext, params) {
+				if (params.artifactId)
+					serverData.artifact = params.artifactId;
+			}
+			services.generate = function(addParams) {
+				return services.generatorService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
 			}
 		}
 		
@@ -177,6 +183,28 @@ define([
 	}
 	
 	/**
+	 * Change the resource associated with this service builder.
+	 */
+	ServiceBuilder.prototype.changeResource = function(resourceId) {
+		var services = this.services;
+		var options = services.options;
+		options.resourceId = resourceId;
+		for (var p in services) {
+			if (services.hasOwnProperty(p)) {
+				var service = services[p];
+				if (service._serviceType && jQuery.isFunction(service.initialize))
+					services[p].initialize(options.serviceUrl, service._serviceType, resourceId, services.updateService);
+			}
+		}
+		var knownServerState = services.editorContext.getServerState();
+		delete knownServerState.stateId;
+		delete knownServerState.text;
+		if (options.loadFromServer && jQuery.isFunction(services.loadResource)) {
+			services.loadResource();
+		}
+	}
+	
+	/**
 	 * Create a copy of the given object.
 	 */
 	ServiceBuilder.copy = function(obj) {
@@ -204,9 +232,24 @@ define([
 	}
 	
 	/**
+	 * Copy all default options into the given set of additional options.
+	 */
+	ServiceBuilder.mergeOptions = function(options, defaultOptions) {
+		if (options) {
+			for (var p in defaultOptions) {
+				if (defaultOptions.hasOwnProperty(p))
+					options[p] = defaultOptions[p];
+			}
+			return options;
+		} else {
+			return defaultOptions;
+		}
+	}
+	
+	/**
 	 * Merge all properties of the given parent element with the given default options.
 	 */
-	ServiceBuilder.mergeOptions = function(parent, defaultOptions) {
+	ServiceBuilder.mergeParentOptions = function(parent, defaultOptions) {
 		var options = ServiceBuilder.copy(defaultOptions);
 		for (var attr, j = 0, attrs = parent.attributes, l = attrs.length; j < l; j++) {
 			attr = attrs.item(j);
