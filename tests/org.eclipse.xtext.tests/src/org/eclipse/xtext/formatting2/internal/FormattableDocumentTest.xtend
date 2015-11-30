@@ -17,6 +17,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
+import org.eclipse.xtext.util.TextRegion
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -134,6 +135,18 @@ class FormattableDocumentTest {
 			expectation = '''
 				kwlist kw1 kw2
 			'''
+		]
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=482665
+	@Test def void aroundDocument() {
+		assertFormatted[
+			request.regions += new TextRegion(0, 6)
+			toBeFormatted = '''idlist'''
+			formatter = [ IDList model, extension regions, extension document |
+				model.regionFor.keyword("idlist").surround[space = "!"]
+			]
+			expectation = '''!idlist!'''
 		]
 	}
 }
