@@ -1,4 +1,5 @@
 dependencies {
+	compile project(':intellij:org.eclipse.xtext.idea.generator')
 	testCompile project(':intellij:org.eclipse.xtext.idea.junit')
 	testCompile project(":plugins:org.eclipse.xtend.lib")
 	testCompile project(':tests:org.eclipse.xtext.common.types.tests')

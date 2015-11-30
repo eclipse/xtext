@@ -1,6 +1,6 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.HiddenTerminalsTestLanguageFileImpl:a.hiddenterminalstestlanguage(0,14)
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,14)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_DatatypeHiddensParserRuleCall_4_ELEMENT_TYPE)(0,14)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_DatatypeHiddensParserRuleCall_4_ELEMENT_TYPE)('anonymous')(0,14)
       PsiElement(DatatypeHiddens_DatatypeKeyword_0_ELEMENT_TYPE)('datatype')(0,8)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(DatatypeHiddens_ValidDatatypeRuleParserRuleCall_1_0_ELEMENT_TYPE)(8,14)
         PsiWhiteSpace(' ')(8,9)

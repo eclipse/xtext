@@ -19,7 +19,6 @@ import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -38,9 +37,6 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 	@Inject
 	extension XtextGeneratorNaming
-	
-	@Inject
-	extension CodeConfig
 	
 	@Inject
 	FileAccessFactory fileAccessFactory
@@ -88,8 +84,8 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 			generateGenJavaProposalProvider
 		}
 
-		if (generateStub && projectConfig.eclipsePlugin.src != null) {
-			if (preferXtendStubs) {
+		if (isGenerateStub && projectConfig.eclipsePlugin.src != null) {
+			if (generateXtendStub) {
 				generateXtendProposalProviderStub
 
 				if (projectConfig.eclipsePlugin.manifest != null) {
@@ -119,7 +115,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		''').writeTo(projectConfig.eclipsePlugin.src)
 	}
 
-	def generateJavaProposalProviderStub() {
+	protected def generateJavaProposalProviderStub() {
 		fileAccessFactory.createJavaFile(grammar.proposalProviderClass, '''
 			/**
 			 * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -133,7 +129,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 	// generation of the 'Abstract...ProposalProvider'
 	
-	def generateGenJavaProposalProvider() {
+	protected def generateGenJavaProposalProvider() {
 		// excluded features are those that stem from inherited grammars,
 		//  they are handled by the super grammars' proposal provider
 		val excludedFqnFeatureNames = grammar.getFQFeatureNamesToExclude
@@ -163,7 +159,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		//  as proposalProviders of sub languages refer to 'grammar.proposalProviderClass',
 		//  see 'getGenProposalProviderSuperClass(...)'
 		val genClass =
-			if (generateStub) grammar.genProposalProviderClass else grammar.proposalProviderClass;
+			if (isGenerateStub) grammar.genProposalProviderClass else grammar.proposalProviderClass;
 		
 		fileAccessFactory.createGeneratedJavaFile(genClass) => [
 			val superClass = grammar.genProposalProviderSuperClass
@@ -177,7 +173,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 			'''
 
 			content = '''
-				public «IF generateStub»abstract «ENDIF»class «genClass.simpleName» extends «superClass» {
+				public «IF isGenerateStub»abstract «ENDIF»class «genClass.simpleName» extends «superClass» {
 
 					«IF !assignments.empty»
 						«FOR assignment : assignments»
@@ -215,7 +211,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 				«IF terminalTypes.size > 1»
 					«terminals.handleAssignmentOptions»
 				«ELSE»
-					«assignment.terminal.assignmentTerminal("assignment.getTerminal()")»
+					«assignment.terminal.assignmentTerminal('''assignment.getTerminal()''')»
 				«ENDIF»
 			}
 		'''
@@ -237,27 +233,27 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		'''
 			«FOR terminal : candidates»
 				if (assignment.getTerminal() instanceof «terminal.eClass.instanceClass») {
-					«terminal.assignmentTerminal("assignment.getTerminal()")»
+					«terminal.assignmentTerminal('''assignment.getTerminal()''')»
 				}
 			«ENDFOR»		
 		'''
 	}
 
-	private def dispatch StringConcatenationClient assignmentTerminal(AbstractElement element, String accessor) '''
+	private def dispatch StringConcatenationClient assignmentTerminal(AbstractElement element, StringConcatenationClient accessor) '''
 		// subclasses may override
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, String accessor)  '''
+	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, StringConcatenationClient accessor)  '''
 		lookupCrossReference(((«CrossReference»)«accessor»), context, acceptor);
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(RuleCall element, String accessor) '''
+	private def dispatch StringConcatenationClient assignmentTerminal(RuleCall element, StringConcatenationClient accessor) '''
 		completeRuleCall(((«RuleCall»)«accessor»), context, acceptor);
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(Alternatives alternatives, String accessor) '''
+	private def dispatch StringConcatenationClient assignmentTerminal(Alternatives alternatives, StringConcatenationClient accessor) '''
 		«FOR pair : alternatives.elements.indexed»
-			«pair.value.assignmentTerminal("((Alternatives)" + accessor + ").getElements.get("+ pair.key +")")»
+			«pair.value.assignmentTerminal('''((«Alternatives»)«accessor»).getElements().get(«pair.key»)''')»
 		«ENDFOR»
 	'''
 

@@ -14,6 +14,7 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -48,11 +49,15 @@ public class WizardConfiguration {
   
   private Charset encoding = Charset.defaultCharset();
   
-  private BuildSystem preferredBuildSystem = BuildSystem.ECLIPSE;
+  private BuildSystem preferredBuildSystem = BuildSystem.NONE;
   
   private SourceLayout sourceLayout = SourceLayout.PLAIN;
   
   private ProjectLayout projectLayout = ProjectLayout.FLAT;
+  
+  private boolean needsGradleWrapper = true;
+  
+  private JavaVersion javaVersion = JavaVersion.JAVA6;
   
   private final LanguageDescriptor language = new LanguageDescriptor();
   
@@ -69,8 +74,6 @@ public class WizardConfiguration {
   private final ParentProjectDescriptor parentProject = new ParentProjectDescriptor(this);
   
   private final TargetPlatformProject targetPlatformProject = new TargetPlatformProject(this);
-  
-  private boolean needsGradleWrapper = true;
   
   public Set<ProjectDescriptor> getEnabledProjects() {
     ImmutableSet<ProjectDescriptor> _xblockexpression = null;
@@ -233,6 +236,19 @@ public class WizardConfiguration {
     this.projectLayout = projectLayout;
   }
   
+  public void setNeedsGradleWrapper(final boolean needsGradleWrapper) {
+    this.needsGradleWrapper = needsGradleWrapper;
+  }
+  
+  @Pure
+  public JavaVersion getJavaVersion() {
+    return this.javaVersion;
+  }
+  
+  public void setJavaVersion(final JavaVersion javaVersion) {
+    this.javaVersion = javaVersion;
+  }
+  
   @Pure
   public LanguageDescriptor getLanguage() {
     return this.language;
@@ -271,9 +287,5 @@ public class WizardConfiguration {
   @Pure
   public TargetPlatformProject getTargetPlatformProject() {
     return this.targetPlatformProject;
-  }
-  
-  public void setNeedsGradleWrapper(final boolean needsGradleWrapper) {
-    this.needsGradleWrapper = needsGradleWrapper;
   }
 }

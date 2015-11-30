@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -196,11 +197,13 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	}
 
+	private static Logger LOG = Logger.getLogger(SemanticSequencerNfaProvider.class);
+
 	protected Map<Grammar, Map<ISerializationContext, Nfa<ISemState>>> cache = Maps.newHashMap();
 
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
-
+	
 	@Inject
 	private NfaUtil util;
 
@@ -240,8 +243,12 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		for (Entry<ISerializationContext, ISynAbsorberState> e : PDAs.entrySet()) {
 			ISynAbsorberState synState = e.getValue();
 			ISerializationContext context = e.getKey();
-			SemNfa nfa = createNfa(grammar, synState, context);
-			result.put(context, nfa);
+			try {
+				SemNfa nfa = createNfa(grammar, synState, context);
+				result.put(context, nfa);
+			} catch (Exception x) {
+				LOG.error("Error during static analysis of context '" + context + "': " + x.getMessage(), x);
+			}
 		}
 		return result;
 	}

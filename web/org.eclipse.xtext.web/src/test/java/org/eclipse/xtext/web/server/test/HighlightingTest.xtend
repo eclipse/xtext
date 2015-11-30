@@ -18,7 +18,6 @@ class HighlightingTest extends AbstractWebServerTest {
 			'serviceType' -> 'highlight',
 			'fullText' -> content.replace('#', '')
 		})
-		assertTrue(highlighting.hasTextInput)
 		val result = highlighting.service.apply() as HighlightingResult
 		assertEquals(styleClasses.length, result.regions.size)
 		var offset = 0

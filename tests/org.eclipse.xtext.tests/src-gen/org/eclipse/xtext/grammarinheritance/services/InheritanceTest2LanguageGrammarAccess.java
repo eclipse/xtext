@@ -14,6 +14,7 @@ import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess;
 import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElementFinder {
@@ -77,11 +78,19 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 
 	private final InheritanceTestLanguageGrammarAccess gaInheritanceTestLanguage;
 
+	private final BaseInheritanceTestLanguageGrammarAccess gaBaseInheritanceTestLanguage;
+
+	private final TerminalsGrammarAccess gaTerminals;
+
 	@Inject
 	public InheritanceTest2LanguageGrammarAccess(GrammarProvider grammarProvider,
-		InheritanceTestLanguageGrammarAccess gaInheritanceTestLanguage) {
+		InheritanceTestLanguageGrammarAccess gaInheritanceTestLanguage,
+		BaseInheritanceTestLanguageGrammarAccess gaBaseInheritanceTestLanguage,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaInheritanceTestLanguage = gaInheritanceTestLanguage;
+		this.gaBaseInheritanceTestLanguage = gaBaseInheritanceTestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
 	}
 	
@@ -111,6 +120,14 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 		return gaInheritanceTestLanguage;
 	}
 
+	public BaseInheritanceTestLanguageGrammarAccess getBaseInheritanceTestLanguageGrammarAccess() {
+		return gaBaseInheritanceTestLanguage;
+	}
+
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
+	}
+
 	
 	//Model:
 	//	"model" name=ID "{"
@@ -135,56 +152,56 @@ public class InheritanceTest2LanguageGrammarAccess extends AbstractGrammarElemen
 		return getElementAccess().getRule();
 	}
 
+	//terminal ID:
+	//	'a'..'z'+;
+	public TerminalRule getIDRule() {
+		return gaInheritanceTestLanguage.getIDRule();
+	} 
+
 	//FQN:
-	//	ID ('.' ID)*;
+	//	super::ID ('.' super::ID)*;
 	public BaseInheritanceTestLanguageGrammarAccess.FQNElements getFQNAccess() {
-		return gaInheritanceTestLanguage.getFQNAccess();
+		return gaBaseInheritanceTestLanguage.getFQNAccess();
 	}
 	
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
 
-	//terminal ID:
-	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
-	public TerminalRule getIDRule() {
-		return gaInheritanceTestLanguage.getIDRule();
-	} 
-
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaInheritanceTestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaInheritanceTestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaInheritanceTestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaInheritanceTestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaInheritanceTestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaInheritanceTestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

@@ -7,11 +7,11 @@
  */
 package org.eclipse.xtext.web.server.model;
 
-import com.google.inject.Inject;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -29,10 +29,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * Container for an {@link XtextResource}.
  */
 @Log
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class XtextWebDocument implements IXtextWebDocument {
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private String resourceId;
+  private final String resourceId;
+  
+  @Accessors(AccessorType.PACKAGE_GETTER)
+  private final DocumentSynchronizer synchronizer;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private XtextResource resource;
@@ -43,11 +47,7 @@ public class XtextWebDocument implements IXtextWebDocument {
   @Accessors
   private boolean dirty;
   
-  @Accessors(AccessorType.PACKAGE_GETTER)
-  @Inject
-  private DocumentSynchronizer synchronizer;
-  
-  private Map<Class<?>, IServiceResult> cachedServiceResults = CollectionLiterals.<Class<?>, IServiceResult>newHashMap();
+  private final Map<Class<?>, IServiceResult> cachedServiceResults = CollectionLiterals.<Class<?>, IServiceResult>newHashMap();
   
   protected void clearCachedServiceResults() {
     this.cachedServiceResults.clear();
@@ -94,12 +94,11 @@ public class XtextWebDocument implements IXtextWebDocument {
     return _xblockexpression;
   }
   
-  public String setInput(final XtextResource resource, final String resourceId) {
+  public String setInput(final XtextResource resource) {
     String _xblockexpression = null;
     {
       this.clearCachedServiceResults();
       this.resource = resource;
-      this.resourceId = resourceId;
       _xblockexpression = this.refreshText();
     }
     return _xblockexpression;
@@ -157,9 +156,20 @@ public class XtextWebDocument implements IXtextWebDocument {
   
   private final static Logger LOG = Logger.getLogger(XtextWebDocument.class);
   
+  public XtextWebDocument(final String resourceId, final DocumentSynchronizer synchronizer) {
+    super();
+    this.resourceId = resourceId;
+    this.synchronizer = synchronizer;
+  }
+  
   @Pure
   public String getResourceId() {
     return this.resourceId;
+  }
+  
+  @Pure
+  DocumentSynchronizer getSynchronizer() {
+    return this.synchronizer;
   }
   
   @Pure
@@ -179,10 +189,5 @@ public class XtextWebDocument implements IXtextWebDocument {
   
   public void setDirty(final boolean dirty) {
     this.dirty = dirty;
-  }
-  
-  @Pure
-  DocumentSynchronizer getSynchronizer() {
-    return this.synchronizer;
   }
 }

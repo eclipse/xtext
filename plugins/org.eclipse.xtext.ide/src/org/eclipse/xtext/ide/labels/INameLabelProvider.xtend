@@ -28,7 +28,7 @@ class SimpleNameLabelProvider implements INameLabelProvider {
 				SimpleAttributeResolver.NAME_RESOLVER.apply(element)
 			IEObjectDescription:
 				element.name.lastSegment
-			default: 
+			default:
 				null
 		}
 	}

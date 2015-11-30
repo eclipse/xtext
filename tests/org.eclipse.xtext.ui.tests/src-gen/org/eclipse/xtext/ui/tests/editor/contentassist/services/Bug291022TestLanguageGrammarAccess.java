@@ -34,12 +34,12 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//RootModel ModelElement:
-		//	{RootModel} name=ID type=[ModelElement]? ('{'
+		//	({RootModel} name=ID type=[ModelElement]? ('{'
 		//	elements+=ModelAttribute*
-		//	'}')??
+		//	'}')?)?
 		@Override public ParserRule getRule() { return rule; }
 
-		//{RootModel} name=ID type=[ModelElement]? ('{' elements+=ModelAttribute* '}')??
+		//({RootModel} name=ID type=[ModelElement]? ('{' elements+=ModelAttribute* '}')?)?
 		public Group getGroup() { return cGroup; }
 
 		//{RootModel}
@@ -135,7 +135,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getSecondReferenceModelElementIDTerminalRuleCall_2_0_1() { return cSecondReferenceModelElementIDTerminalRuleCall_2_0_1; }
 
-		//(';' | '{' elements+=ModelAttribute* '}')
+		//';' | '{' elements+=ModelAttribute* '}'
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
 		//';'
@@ -262,9 +262,9 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//RootModel ModelElement:
-	//	{RootModel} name=ID type=[ModelElement]? ('{'
+	//	({RootModel} name=ID type=[ModelElement]? ('{'
 	//	elements+=ModelAttribute*
-	//	'}')??
+	//	'}')?)?
 	public RootModelElements getRootModelAccess() {
 		return pRootModel;
 	}

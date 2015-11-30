@@ -102,10 +102,10 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_EDOUBLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEcoreTerminalsTestLanguage.g:125:14: ( ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* ) ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )? )
-            // PsiInternalEcoreTerminalsTestLanguage.g:125:16: ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* ) ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )?
+            // PsiInternalEcoreTerminalsTestLanguage.g:145:14: ( ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* ) ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )? )
+            // PsiInternalEcoreTerminalsTestLanguage.g:145:16: ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* ) ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )?
             {
-            // PsiInternalEcoreTerminalsTestLanguage.g:125:16: ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* )
+            // PsiInternalEcoreTerminalsTestLanguage.g:145:16: ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -123,10 +123,10 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalEcoreTerminalsTestLanguage.g:125:17: '.' ( '0' .. '9' )+
+                    // PsiInternalEcoreTerminalsTestLanguage.g:145:17: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
-                    // PsiInternalEcoreTerminalsTestLanguage.g:125:21: ( '0' .. '9' )+
+                    // PsiInternalEcoreTerminalsTestLanguage.g:145:21: ( '0' .. '9' )+
                     int cnt1=0;
                     loop1:
                     do {
@@ -140,7 +140,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt1) {
                     	case 1 :
-                    	    // PsiInternalEcoreTerminalsTestLanguage.g:125:22: '0' .. '9'
+                    	    // PsiInternalEcoreTerminalsTestLanguage.g:145:22: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -160,9 +160,9 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalEcoreTerminalsTestLanguage.g:125:33: ( '0' .. '9' )+ '.' ( '0' .. '9' )*
+                    // PsiInternalEcoreTerminalsTestLanguage.g:145:33: ( '0' .. '9' )+ '.' ( '0' .. '9' )*
                     {
-                    // PsiInternalEcoreTerminalsTestLanguage.g:125:33: ( '0' .. '9' )+
+                    // PsiInternalEcoreTerminalsTestLanguage.g:145:33: ( '0' .. '9' )+
                     int cnt2=0;
                     loop2:
                     do {
@@ -176,7 +176,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt2) {
                     	case 1 :
-                    	    // PsiInternalEcoreTerminalsTestLanguage.g:125:34: '0' .. '9'
+                    	    // PsiInternalEcoreTerminalsTestLanguage.g:145:34: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -193,7 +193,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
                     } while (true);
 
                     match('.'); 
-                    // PsiInternalEcoreTerminalsTestLanguage.g:125:49: ( '0' .. '9' )*
+                    // PsiInternalEcoreTerminalsTestLanguage.g:145:49: ( '0' .. '9' )*
                     loop3:
                     do {
                         int alt3=2;
@@ -206,7 +206,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // PsiInternalEcoreTerminalsTestLanguage.g:125:50: '0' .. '9'
+                    	    // PsiInternalEcoreTerminalsTestLanguage.g:145:50: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -224,7 +224,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
             }
 
-            // PsiInternalEcoreTerminalsTestLanguage.g:125:62: ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )?
+            // PsiInternalEcoreTerminalsTestLanguage.g:145:62: ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -233,7 +233,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // PsiInternalEcoreTerminalsTestLanguage.g:125:63: ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+
+                    // PsiInternalEcoreTerminalsTestLanguage.g:145:63: ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -244,7 +244,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // PsiInternalEcoreTerminalsTestLanguage.g:125:73: ( '-' | ( '+' )? )
+                    // PsiInternalEcoreTerminalsTestLanguage.g:145:73: ( '-' | ( '+' )? )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -262,16 +262,16 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // PsiInternalEcoreTerminalsTestLanguage.g:125:74: '-'
+                            // PsiInternalEcoreTerminalsTestLanguage.g:145:74: '-'
                             {
                             match('-'); 
 
                             }
                             break;
                         case 2 :
-                            // PsiInternalEcoreTerminalsTestLanguage.g:125:78: ( '+' )?
+                            // PsiInternalEcoreTerminalsTestLanguage.g:145:78: ( '+' )?
                             {
-                            // PsiInternalEcoreTerminalsTestLanguage.g:125:78: ( '+' )?
+                            // PsiInternalEcoreTerminalsTestLanguage.g:145:78: ( '+' )?
                             int alt5=2;
                             int LA5_0 = input.LA(1);
 
@@ -280,7 +280,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
                             }
                             switch (alt5) {
                                 case 1 :
-                                    // PsiInternalEcoreTerminalsTestLanguage.g:125:78: '+'
+                                    // PsiInternalEcoreTerminalsTestLanguage.g:145:78: '+'
                                     {
                                     match('+'); 
 
@@ -295,7 +295,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                     }
 
-                    // PsiInternalEcoreTerminalsTestLanguage.g:125:84: ( '0' .. '9' )+
+                    // PsiInternalEcoreTerminalsTestLanguage.g:145:84: ( '0' .. '9' )+
                     int cnt7=0;
                     loop7:
                     do {
@@ -309,7 +309,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // PsiInternalEcoreTerminalsTestLanguage.g:125:85: '0' .. '9'
+                    	    // PsiInternalEcoreTerminalsTestLanguage.g:145:85: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -347,8 +347,8 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_EDATE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEcoreTerminalsTestLanguage.g:127:12: ( '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' '.' '0' .. '9' '0' .. '9' '0' .. '9' ( '+' | '-' ) '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' )
-            // PsiInternalEcoreTerminalsTestLanguage.g:127:14: '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' '.' '0' .. '9' '0' .. '9' '0' .. '9' ( '+' | '-' ) '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9'
+            // PsiInternalEcoreTerminalsTestLanguage.g:147:12: ( '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' '.' '0' .. '9' '0' .. '9' '0' .. '9' ( '+' | '-' ) '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' )
+            // PsiInternalEcoreTerminalsTestLanguage.g:147:14: '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' '.' '0' .. '9' '0' .. '9' '0' .. '9' ( '+' | '-' ) '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9'
             {
             matchRange('0','9'); 
             matchRange('0','9'); 
@@ -402,10 +402,10 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_EINT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEcoreTerminalsTestLanguage.g:129:11: ( ( '-' )? ( '0' .. '9' )+ )
-            // PsiInternalEcoreTerminalsTestLanguage.g:129:13: ( '-' )? ( '0' .. '9' )+
+            // PsiInternalEcoreTerminalsTestLanguage.g:149:11: ( ( '-' )? ( '0' .. '9' )+ )
+            // PsiInternalEcoreTerminalsTestLanguage.g:149:13: ( '-' )? ( '0' .. '9' )+
             {
-            // PsiInternalEcoreTerminalsTestLanguage.g:129:13: ( '-' )?
+            // PsiInternalEcoreTerminalsTestLanguage.g:149:13: ( '-' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -414,7 +414,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // PsiInternalEcoreTerminalsTestLanguage.g:129:13: '-'
+                    // PsiInternalEcoreTerminalsTestLanguage.g:149:13: '-'
                     {
                     match('-'); 
 
@@ -423,7 +423,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
             }
 
-            // PsiInternalEcoreTerminalsTestLanguage.g:129:18: ( '0' .. '9' )+
+            // PsiInternalEcoreTerminalsTestLanguage.g:149:18: ( '0' .. '9' )+
             int cnt10=0;
             loop10:
             do {
@@ -437,7 +437,7 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // PsiInternalEcoreTerminalsTestLanguage.g:129:19: '0' .. '9'
+            	    // PsiInternalEcoreTerminalsTestLanguage.g:149:19: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -469,10 +469,10 @@ public class PsiInternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEcoreTerminalsTestLanguage.g:131:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalEcoreTerminalsTestLanguage.g:131:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalEcoreTerminalsTestLanguage.g:151:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalEcoreTerminalsTestLanguage.g:151:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalEcoreTerminalsTestLanguage.g:131:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalEcoreTerminalsTestLanguage.g:151:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {

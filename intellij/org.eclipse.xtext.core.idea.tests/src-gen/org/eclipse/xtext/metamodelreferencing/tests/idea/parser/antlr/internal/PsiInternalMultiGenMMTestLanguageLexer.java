@@ -39,10 +39,10 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiGenMMTestLanguage.g:106:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalMultiGenMMTestLanguage.g:106:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalMultiGenMMTestLanguage.g:126:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalMultiGenMMTestLanguage.g:126:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalMultiGenMMTestLanguage.g:106:11: ( '^' )?
+            // PsiInternalMultiGenMMTestLanguage.g:126:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -51,7 +51,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalMultiGenMMTestLanguage.g:106:11: '^'
+                    // PsiInternalMultiGenMMTestLanguage.g:126:11: '^'
                     {
                     match('^'); 
 
@@ -69,7 +69,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalMultiGenMMTestLanguage.g:106:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalMultiGenMMTestLanguage.g:126:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -118,10 +118,10 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiGenMMTestLanguage.g:108:10: ( ( '0' .. '9' )+ )
-            // PsiInternalMultiGenMMTestLanguage.g:108:12: ( '0' .. '9' )+
+            // PsiInternalMultiGenMMTestLanguage.g:128:10: ( ( '0' .. '9' )+ )
+            // PsiInternalMultiGenMMTestLanguage.g:128:12: ( '0' .. '9' )+
             {
-            // PsiInternalMultiGenMMTestLanguage.g:108:12: ( '0' .. '9' )+
+            // PsiInternalMultiGenMMTestLanguage.g:128:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -135,7 +135,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalMultiGenMMTestLanguage.g:108:13: '0' .. '9'
+            	    // PsiInternalMultiGenMMTestLanguage.g:128:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -167,10 +167,10 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiGenMMTestLanguage.g:110:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalMultiGenMMTestLanguage.g:110:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalMultiGenMMTestLanguage.g:130:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalMultiGenMMTestLanguage.g:130:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalMultiGenMMTestLanguage.g:110:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalMultiGenMMTestLanguage.g:130:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -188,10 +188,10 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalMultiGenMMTestLanguage.g:110:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalMultiGenMMTestLanguage.g:130:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalMultiGenMMTestLanguage.g:110:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalMultiGenMMTestLanguage.g:130:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -207,7 +207,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalMultiGenMMTestLanguage.g:110:21: '\\\\' .
+                    	    // PsiInternalMultiGenMMTestLanguage.g:130:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -215,7 +215,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalMultiGenMMTestLanguage.g:110:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalMultiGenMMTestLanguage.g:130:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -240,10 +240,10 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalMultiGenMMTestLanguage.g:110:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalMultiGenMMTestLanguage.g:130:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalMultiGenMMTestLanguage.g:110:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalMultiGenMMTestLanguage.g:130:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -259,7 +259,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalMultiGenMMTestLanguage.g:110:54: '\\\\' .
+                    	    // PsiInternalMultiGenMMTestLanguage.g:130:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -267,7 +267,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalMultiGenMMTestLanguage.g:110:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalMultiGenMMTestLanguage.g:130:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -310,12 +310,12 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiGenMMTestLanguage.g:112:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalMultiGenMMTestLanguage.g:112:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalMultiGenMMTestLanguage.g:132:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalMultiGenMMTestLanguage.g:132:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalMultiGenMMTestLanguage.g:112:24: ( options {greedy=false; } : . )*
+            // PsiInternalMultiGenMMTestLanguage.g:132:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -340,7 +340,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalMultiGenMMTestLanguage.g:112:52: .
+            	    // PsiInternalMultiGenMMTestLanguage.g:132:52: .
             	    {
             	    matchAny(); 
 
@@ -370,12 +370,12 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiGenMMTestLanguage.g:114:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalMultiGenMMTestLanguage.g:114:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalMultiGenMMTestLanguage.g:134:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalMultiGenMMTestLanguage.g:134:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalMultiGenMMTestLanguage.g:114:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalMultiGenMMTestLanguage.g:134:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -388,7 +388,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalMultiGenMMTestLanguage.g:114:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalMultiGenMMTestLanguage.g:134:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -408,7 +408,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalMultiGenMMTestLanguage.g:114:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalMultiGenMMTestLanguage.g:134:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -417,9 +417,9 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalMultiGenMMTestLanguage.g:114:41: ( '\\r' )? '\\n'
+                    // PsiInternalMultiGenMMTestLanguage.g:134:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalMultiGenMMTestLanguage.g:114:41: ( '\\r' )?
+                    // PsiInternalMultiGenMMTestLanguage.g:134:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -428,7 +428,7 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalMultiGenMMTestLanguage.g:114:41: '\\r'
+                            // PsiInternalMultiGenMMTestLanguage.g:134:41: '\\r'
                             {
                             match('\r'); 
 
@@ -460,10 +460,10 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiGenMMTestLanguage.g:116:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalMultiGenMMTestLanguage.g:116:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalMultiGenMMTestLanguage.g:136:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalMultiGenMMTestLanguage.g:136:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalMultiGenMMTestLanguage.g:116:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalMultiGenMMTestLanguage.g:136:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -517,8 +517,8 @@ public class PsiInternalMultiGenMMTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiGenMMTestLanguage.g:118:16: ( . )
-            // PsiInternalMultiGenMMTestLanguage.g:118:18: .
+            // PsiInternalMultiGenMMTestLanguage.g:138:16: ( . )
+            // PsiInternalMultiGenMMTestLanguage.g:138:18: .
             {
             matchAny(); 
 

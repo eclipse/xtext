@@ -70,18 +70,24 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalTerminalRulesTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalTerminalRulesTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalTerminalRulesTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalTerminalRulesTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalTerminalRulesTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalTerminalRulesTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -93,14 +99,16 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalTerminalRulesTestLanguage.g:58:1: ruleModel : ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalTerminalRulesTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_idValue_0_0=null;
         Token lv_intValue_1_0=null;
         Token lv_stringValue_2_0=null;
@@ -111,10 +119,10 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
         Token lv_anyValue_7_0=null;
 
         try {
-            // PsiInternalTerminalRulesTestLanguage.g:58:10: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) )
-            // PsiInternalTerminalRulesTestLanguage.g:59:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
+            // PsiInternalTerminalRulesTestLanguage.g:60:1: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) )
+            // PsiInternalTerminalRulesTestLanguage.g:61:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
             {
-            // PsiInternalTerminalRulesTestLanguage.g:59:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
+            // PsiInternalTerminalRulesTestLanguage.g:61:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
             int alt1=8;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -166,18 +174,24 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
 
             switch (alt1) {
                 case 1 :
-                    // PsiInternalTerminalRulesTestLanguage.g:60:3: ( (lv_idValue_0_0= RULE_ID ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:62:3: ( (lv_idValue_0_0= RULE_ID ) )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:60:3: ( (lv_idValue_0_0= RULE_ID ) )
-                    // PsiInternalTerminalRulesTestLanguage.g:61:4: (lv_idValue_0_0= RULE_ID )
+                    // PsiInternalTerminalRulesTestLanguage.g:62:3: ( (lv_idValue_0_0= RULE_ID ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:63:4: (lv_idValue_0_0= RULE_ID )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:61:4: (lv_idValue_0_0= RULE_ID )
-                    // PsiInternalTerminalRulesTestLanguage.g:62:5: lv_idValue_0_0= RULE_ID
+                    // PsiInternalTerminalRulesTestLanguage.g:63:4: (lv_idValue_0_0= RULE_ID )
+                    // PsiInternalTerminalRulesTestLanguage.g:64:5: lv_idValue_0_0= RULE_ID
                     {
 
                     					markLeaf(elementTypeProvider.getModel_IdValueIDTerminalRuleCall_0_0ElementType());
                     				
                     lv_idValue_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_idValue_0_0);
                     				
@@ -191,18 +205,24 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 2 :
-                    // PsiInternalTerminalRulesTestLanguage.g:72:3: ( (lv_intValue_1_0= RULE_INT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:80:3: ( (lv_intValue_1_0= RULE_INT ) )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:72:3: ( (lv_intValue_1_0= RULE_INT ) )
-                    // PsiInternalTerminalRulesTestLanguage.g:73:4: (lv_intValue_1_0= RULE_INT )
+                    // PsiInternalTerminalRulesTestLanguage.g:80:3: ( (lv_intValue_1_0= RULE_INT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:81:4: (lv_intValue_1_0= RULE_INT )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:73:4: (lv_intValue_1_0= RULE_INT )
-                    // PsiInternalTerminalRulesTestLanguage.g:74:5: lv_intValue_1_0= RULE_INT
+                    // PsiInternalTerminalRulesTestLanguage.g:81:4: (lv_intValue_1_0= RULE_INT )
+                    // PsiInternalTerminalRulesTestLanguage.g:82:5: lv_intValue_1_0= RULE_INT
                     {
 
                     					markLeaf(elementTypeProvider.getModel_IntValueINTTerminalRuleCall_1_0ElementType());
                     				
                     lv_intValue_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_intValue_1_0);
                     				
@@ -216,18 +236,24 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 3 :
-                    // PsiInternalTerminalRulesTestLanguage.g:84:3: ( (lv_stringValue_2_0= RULE_STRING ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:98:3: ( (lv_stringValue_2_0= RULE_STRING ) )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:84:3: ( (lv_stringValue_2_0= RULE_STRING ) )
-                    // PsiInternalTerminalRulesTestLanguage.g:85:4: (lv_stringValue_2_0= RULE_STRING )
+                    // PsiInternalTerminalRulesTestLanguage.g:98:3: ( (lv_stringValue_2_0= RULE_STRING ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:99:4: (lv_stringValue_2_0= RULE_STRING )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:85:4: (lv_stringValue_2_0= RULE_STRING )
-                    // PsiInternalTerminalRulesTestLanguage.g:86:5: lv_stringValue_2_0= RULE_STRING
+                    // PsiInternalTerminalRulesTestLanguage.g:99:4: (lv_stringValue_2_0= RULE_STRING )
+                    // PsiInternalTerminalRulesTestLanguage.g:100:5: lv_stringValue_2_0= RULE_STRING
                     {
 
                     					markLeaf(elementTypeProvider.getModel_StringValueSTRINGTerminalRuleCall_2_0ElementType());
                     				
                     lv_stringValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_stringValue_2_0);
                     				
@@ -241,18 +267,24 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 4 :
-                    // PsiInternalTerminalRulesTestLanguage.g:96:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:116:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:96:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
-                    // PsiInternalTerminalRulesTestLanguage.g:97:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
+                    // PsiInternalTerminalRulesTestLanguage.g:116:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:117:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:97:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
-                    // PsiInternalTerminalRulesTestLanguage.g:98:5: lv_richStringValue_3_0= RULE_RICH_STRING
+                    // PsiInternalTerminalRulesTestLanguage.g:117:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
+                    // PsiInternalTerminalRulesTestLanguage.g:118:5: lv_richStringValue_3_0= RULE_RICH_STRING
                     {
 
                     					markLeaf(elementTypeProvider.getModel_RichStringValueRICH_STRINGTerminalRuleCall_3_0ElementType());
                     				
                     lv_richStringValue_3_0=(Token)match(input,RULE_RICH_STRING,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_richStringValue_3_0);
                     				
@@ -266,18 +298,24 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 5 :
-                    // PsiInternalTerminalRulesTestLanguage.g:108:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:134:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:108:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
-                    // PsiInternalTerminalRulesTestLanguage.g:109:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
+                    // PsiInternalTerminalRulesTestLanguage.g:134:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:135:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:109:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
-                    // PsiInternalTerminalRulesTestLanguage.g:110:5: lv_mlCommentValue_4_0= RULE_ML_COMMENT
+                    // PsiInternalTerminalRulesTestLanguage.g:135:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
+                    // PsiInternalTerminalRulesTestLanguage.g:136:5: lv_mlCommentValue_4_0= RULE_ML_COMMENT
                     {
 
                     					markLeaf(elementTypeProvider.getModel_MlCommentValueML_COMMENTTerminalRuleCall_4_0ElementType());
                     				
                     lv_mlCommentValue_4_0=(Token)match(input,RULE_ML_COMMENT,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_mlCommentValue_4_0);
                     				
@@ -291,18 +329,24 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 6 :
-                    // PsiInternalTerminalRulesTestLanguage.g:120:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:152:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:120:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
-                    // PsiInternalTerminalRulesTestLanguage.g:121:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
+                    // PsiInternalTerminalRulesTestLanguage.g:152:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:153:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:121:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
-                    // PsiInternalTerminalRulesTestLanguage.g:122:5: lv_slCommentValue_5_0= RULE_SL_COMMENT
+                    // PsiInternalTerminalRulesTestLanguage.g:153:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
+                    // PsiInternalTerminalRulesTestLanguage.g:154:5: lv_slCommentValue_5_0= RULE_SL_COMMENT
                     {
 
                     					markLeaf(elementTypeProvider.getModel_SlCommentValueSL_COMMENTTerminalRuleCall_5_0ElementType());
                     				
                     lv_slCommentValue_5_0=(Token)match(input,RULE_SL_COMMENT,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_slCommentValue_5_0);
                     				
@@ -316,18 +360,24 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 7 :
-                    // PsiInternalTerminalRulesTestLanguage.g:132:3: ( (lv_wsValue_6_0= RULE_WS ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:170:3: ( (lv_wsValue_6_0= RULE_WS ) )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:132:3: ( (lv_wsValue_6_0= RULE_WS ) )
-                    // PsiInternalTerminalRulesTestLanguage.g:133:4: (lv_wsValue_6_0= RULE_WS )
+                    // PsiInternalTerminalRulesTestLanguage.g:170:3: ( (lv_wsValue_6_0= RULE_WS ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:171:4: (lv_wsValue_6_0= RULE_WS )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:133:4: (lv_wsValue_6_0= RULE_WS )
-                    // PsiInternalTerminalRulesTestLanguage.g:134:5: lv_wsValue_6_0= RULE_WS
+                    // PsiInternalTerminalRulesTestLanguage.g:171:4: (lv_wsValue_6_0= RULE_WS )
+                    // PsiInternalTerminalRulesTestLanguage.g:172:5: lv_wsValue_6_0= RULE_WS
                     {
 
                     					markLeaf(elementTypeProvider.getModel_WsValueWSTerminalRuleCall_6_0ElementType());
                     				
                     lv_wsValue_6_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_wsValue_6_0);
                     				
@@ -341,18 +391,24 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 8 :
-                    // PsiInternalTerminalRulesTestLanguage.g:144:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:188:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:144:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
-                    // PsiInternalTerminalRulesTestLanguage.g:145:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
+                    // PsiInternalTerminalRulesTestLanguage.g:188:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:189:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
                     {
-                    // PsiInternalTerminalRulesTestLanguage.g:145:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
-                    // PsiInternalTerminalRulesTestLanguage.g:146:5: lv_anyValue_7_0= RULE_ANY_OTHER
+                    // PsiInternalTerminalRulesTestLanguage.g:189:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
+                    // PsiInternalTerminalRulesTestLanguage.g:190:5: lv_anyValue_7_0= RULE_ANY_OTHER
                     {
 
                     					markLeaf(elementTypeProvider.getModel_AnyValueANY_OTHERTerminalRuleCall_7_0ElementType());
                     				
                     lv_anyValue_7_0=(Token)match(input,RULE_ANY_OTHER,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					doneLeaf(lv_anyValue_7_0);
                     				
@@ -378,7 +434,7 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 

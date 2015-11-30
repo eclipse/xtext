@@ -14,7 +14,7 @@ buildscript {
 apply plugin: org.xtext.gradle.idea.IdeaDevelopmentPlugin
 
 ideaDevelopment {
-	ideaVersion = "143.249.6"
+	ideaVersion = project.hasProperty('ideaEAP') ? "143.747.5" :  "143.381.42"
 	pluginDependencies {
 		id 'junit'
 	}

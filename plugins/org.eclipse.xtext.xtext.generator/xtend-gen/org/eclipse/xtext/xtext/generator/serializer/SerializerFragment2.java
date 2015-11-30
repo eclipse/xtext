@@ -73,7 +73,6 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
@@ -143,14 +142,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   @Inject
   private FileAccessFactory fileAccessFactory;
   
-  @Inject
-  private CodeConfig codeConfig;
-  
   @Accessors
   private boolean generateDebugData = false;
   
   @Accessors
-  private boolean generateSupportForDeprecatedContextObject = false;
+  private boolean generateSupportForDeprecatedContextEObject = false;
   
   private boolean detectSyntheticTerminals = true;
   
@@ -264,8 +260,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   }
   
   protected void generateSemanticSequencer() {
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (_isGenerateXtendStub) {
       Grammar _grammar = this.getGrammar();
       TypeReference _semanticSequencerClass = this.getSemanticSequencerClass(_grammar);
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -330,8 +326,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   }
   
   protected void generateSyntacticSequencer() {
-    boolean _isPreferXtendStubs = this.codeConfig.isPreferXtendStubs();
-    if (_isPreferXtendStubs) {
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (_isGenerateXtendStub) {
       Grammar _grammar = this.getGrammar();
       TypeReference _syntacticSequencerClass = this.getSyntacticSequencerClass(_grammar);
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -1241,7 +1237,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           _builder.newLine();
           _builder.newLine();
           {
-            if (SerializerFragment2.this.generateSupportForDeprecatedContextObject) {
+            if (SerializerFragment2.this.generateSupportForDeprecatedContextEObject) {
               _builder.append("@Deprecated");
               _builder.newLine();
               _builder.append("protected void sequence_");
@@ -1957,11 +1953,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   }
   
   @Pure
-  public boolean isGenerateSupportForDeprecatedContextObject() {
-    return this.generateSupportForDeprecatedContextObject;
+  public boolean isGenerateSupportForDeprecatedContextEObject() {
+    return this.generateSupportForDeprecatedContextEObject;
   }
   
-  public void setGenerateSupportForDeprecatedContextObject(final boolean generateSupportForDeprecatedContextObject) {
-    this.generateSupportForDeprecatedContextObject = generateSupportForDeprecatedContextObject;
+  public void setGenerateSupportForDeprecatedContextEObject(final boolean generateSupportForDeprecatedContextEObject) {
+    this.generateSupportForDeprecatedContextEObject = generateSupportForDeprecatedContextEObject;
   }
 }

@@ -245,6 +245,25 @@ public class MergeableManifest extends Manifest {
 		getMainAttributes().put(BUNDLE_REQUIRED_EXECUTION_ENV, bree);
 		this.modified = true;
 	}
+
+	/**
+	 * @since 2.9
+	 */
+	public String getBundleActivator() {
+		return (String) getMainAttributes().get(BUNDLE_ACTIVATOR);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public void setBundleActivator(String activator) {
+		String oldValue = getBundleActivator();
+		if(Objects.equal(oldValue, activator)) {
+			return;
+		}
+		getMainAttributes().put(BUNDLE_ACTIVATOR, activator);
+		this.modified = true;
+	}
 	
 	public boolean isModified() {
 		return modified;

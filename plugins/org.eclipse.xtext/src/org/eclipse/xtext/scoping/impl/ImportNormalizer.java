@@ -23,7 +23,7 @@ public class ImportNormalizer {
 
 	public ImportNormalizer(QualifiedName importedNamespace, boolean wildCard, boolean ignoreCase) {
 		this.ignoreCase = ignoreCase;
-		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
+		if (importedNamespace == null || importedNamespace.isEmpty()) {
 			throw new IllegalArgumentException("Imported namespace must not be null / empty");
 		}
 		hasWildCard = wildCard;

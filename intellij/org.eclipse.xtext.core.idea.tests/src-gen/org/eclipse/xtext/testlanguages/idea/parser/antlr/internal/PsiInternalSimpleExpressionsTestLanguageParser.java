@@ -73,18 +73,24 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "entryRuleSequence"
-    // PsiInternalSimpleExpressionsTestLanguage.g:52:1: entryRuleSequence : ruleSequence EOF ;
-    public final void entryRuleSequence() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:52:1: entryRuleSequence returns [Boolean current=false] : iv_ruleSequence= ruleSequence EOF ;
+    public final Boolean entryRuleSequence() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleSequence = null;
+
+
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:52:18: ( ruleSequence EOF )
-            // PsiInternalSimpleExpressionsTestLanguage.g:53:2: ruleSequence EOF
+            // PsiInternalSimpleExpressionsTestLanguage.g:52:50: (iv_ruleSequence= ruleSequence EOF )
+            // PsiInternalSimpleExpressionsTestLanguage.g:53:2: iv_ruleSequence= ruleSequence EOF
             {
              markComposite(elementTypeProvider.getSequenceElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleSequence();
+            iv_ruleSequence=ruleSequence();
 
             state._fsp--;
 
+             current =iv_ruleSequence; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -96,33 +102,41 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleSequence"
 
 
     // $ANTLR start "ruleSequence"
-    // PsiInternalSimpleExpressionsTestLanguage.g:58:1: ruleSequence : ( ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )* ) ;
-    public final void ruleSequence() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:59:1: ruleSequence returns [Boolean current=false] : (this_Addition_0= ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )* ) ;
+    public final Boolean ruleSequence() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_Addition_0 = null;
+
+        Boolean lv_expressions_2_0 = null;
+
+
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:58:13: ( ( ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )* ) )
-            // PsiInternalSimpleExpressionsTestLanguage.g:59:2: ( ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )* )
+            // PsiInternalSimpleExpressionsTestLanguage.g:60:1: ( (this_Addition_0= ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )* ) )
+            // PsiInternalSimpleExpressionsTestLanguage.g:61:2: (this_Addition_0= ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )* )
             {
-            // PsiInternalSimpleExpressionsTestLanguage.g:59:2: ( ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )* )
-            // PsiInternalSimpleExpressionsTestLanguage.g:60:3: ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )*
+            // PsiInternalSimpleExpressionsTestLanguage.g:61:2: (this_Addition_0= ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )* )
+            // PsiInternalSimpleExpressionsTestLanguage.g:62:3: this_Addition_0= ruleAddition ( () ( (lv_expressions_2_0= ruleAddition ) ) )*
             {
 
             			markComposite(elementTypeProvider.getSequence_AdditionParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_3);
-            ruleAddition();
+            this_Addition_0=ruleAddition();
 
             state._fsp--;
 
 
+            			current = this_Addition_0;
             			doneComposite();
             		
-            // PsiInternalSimpleExpressionsTestLanguage.g:67:3: ( () ( (lv_expressions_2_0= ruleAddition ) ) )*
+            // PsiInternalSimpleExpressionsTestLanguage.g:70:3: ( () ( (lv_expressions_2_0= ruleAddition ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -135,34 +149,39 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:68:4: () ( (lv_expressions_2_0= ruleAddition ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:71:4: () ( (lv_expressions_2_0= ruleAddition ) )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:68:4: ()
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:69:5: 
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:71:4: ()
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:72:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getSequence_SequenceExpressionsAction_1_0ElementType());
             	    					doneComposite();
+            	    					associateWithSemanticElement();
             	    				
 
             	    }
 
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:74:4: ( (lv_expressions_2_0= ruleAddition ) )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:75:5: (lv_expressions_2_0= ruleAddition )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:78:4: ( (lv_expressions_2_0= ruleAddition ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:79:5: (lv_expressions_2_0= ruleAddition )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:75:5: (lv_expressions_2_0= ruleAddition )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:76:6: lv_expressions_2_0= ruleAddition
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:79:5: (lv_expressions_2_0= ruleAddition )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:80:6: lv_expressions_2_0= ruleAddition
             	    {
 
             	    						markComposite(elementTypeProvider.getSequence_ExpressionsAdditionParserRuleCall_1_1_0ElementType());
             	    					
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleAddition();
+            	    lv_expressions_2_0=ruleAddition();
 
             	    state._fsp--;
 
 
             	    						doneComposite();
+            	    						if(!current) {
+            	    							associateWithSemanticElement();
+            	    							current = true;
+            	    						}
             	    					
 
             	    }
@@ -192,24 +211,30 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleSequence"
 
 
     // $ANTLR start "entryRuleAddition"
-    // PsiInternalSimpleExpressionsTestLanguage.g:90:1: entryRuleAddition : ruleAddition EOF ;
-    public final void entryRuleAddition() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:98:1: entryRuleAddition returns [Boolean current=false] : iv_ruleAddition= ruleAddition EOF ;
+    public final Boolean entryRuleAddition() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAddition = null;
+
+
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:90:18: ( ruleAddition EOF )
-            // PsiInternalSimpleExpressionsTestLanguage.g:91:2: ruleAddition EOF
+            // PsiInternalSimpleExpressionsTestLanguage.g:98:50: (iv_ruleAddition= ruleAddition EOF )
+            // PsiInternalSimpleExpressionsTestLanguage.g:99:2: iv_ruleAddition= ruleAddition EOF
             {
              markComposite(elementTypeProvider.getAdditionElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAddition();
+            iv_ruleAddition=ruleAddition();
 
             state._fsp--;
 
+             current =iv_ruleAddition; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -221,36 +246,43 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAddition"
 
 
     // $ANTLR start "ruleAddition"
-    // PsiInternalSimpleExpressionsTestLanguage.g:96:1: ruleAddition : ( ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )* ) ;
-    public final void ruleAddition() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:105:1: ruleAddition returns [Boolean current=false] : (this_Multiplication_0= ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )* ) ;
+    public final Boolean ruleAddition() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_operator_2_1=null;
         Token lv_operator_2_2=null;
+        Boolean this_Multiplication_0 = null;
+
+        Boolean lv_values_3_0 = null;
+
 
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:96:13: ( ( ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )* ) )
-            // PsiInternalSimpleExpressionsTestLanguage.g:97:2: ( ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )* )
+            // PsiInternalSimpleExpressionsTestLanguage.g:106:1: ( (this_Multiplication_0= ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )* ) )
+            // PsiInternalSimpleExpressionsTestLanguage.g:107:2: (this_Multiplication_0= ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )* )
             {
-            // PsiInternalSimpleExpressionsTestLanguage.g:97:2: ( ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )* )
-            // PsiInternalSimpleExpressionsTestLanguage.g:98:3: ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )*
+            // PsiInternalSimpleExpressionsTestLanguage.g:107:2: (this_Multiplication_0= ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )* )
+            // PsiInternalSimpleExpressionsTestLanguage.g:108:3: this_Multiplication_0= ruleMultiplication ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )*
             {
 
             			markComposite(elementTypeProvider.getAddition_MultiplicationParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_4);
-            ruleMultiplication();
+            this_Multiplication_0=ruleMultiplication();
 
             state._fsp--;
 
 
+            			current = this_Multiplication_0;
             			doneComposite();
             		
-            // PsiInternalSimpleExpressionsTestLanguage.g:105:3: ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )*
+            // PsiInternalSimpleExpressionsTestLanguage.g:116:3: ( () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) ) )*
             loop3:
             do {
                 int alt3=2;
@@ -263,25 +295,26 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:106:4: () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:117:4: () ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) ) ( (lv_values_3_0= ruleMultiplication ) )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:106:4: ()
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:107:5: 
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:117:4: ()
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:118:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getAddition_OpValuesAction_1_0ElementType());
             	    					doneComposite();
+            	    					associateWithSemanticElement();
             	    				
 
             	    }
 
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:112:4: ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:113:5: ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:124:4: ( ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:125:5: ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:113:5: ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:114:6: (lv_operator_2_1= '+' | lv_operator_2_2= '-' )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:125:5: ( (lv_operator_2_1= '+' | lv_operator_2_2= '-' ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:126:6: (lv_operator_2_1= '+' | lv_operator_2_2= '-' )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:114:6: (lv_operator_2_1= '+' | lv_operator_2_2= '-' )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:126:6: (lv_operator_2_1= '+' | lv_operator_2_2= '-' )
             	    int alt2=2;
             	    int LA2_0 = input.LA(1);
 
@@ -299,7 +332,7 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
             	    }
             	    switch (alt2) {
             	        case 1 :
-            	            // PsiInternalSimpleExpressionsTestLanguage.g:115:7: lv_operator_2_1= '+'
+            	            // PsiInternalSimpleExpressionsTestLanguage.g:127:7: lv_operator_2_1= '+'
             	            {
 
             	            							markLeaf(elementTypeProvider.getAddition_OperatorPlusSignKeyword_1_1_0_0ElementType());
@@ -309,10 +342,16 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
             	            							doneLeaf(lv_operator_2_1);
             	            						
 
+            	            							if (!current) {
+            	            								associateWithSemanticElement();
+            	            								current = true;
+            	            							}
+            	            						
+
             	            }
             	            break;
             	        case 2 :
-            	            // PsiInternalSimpleExpressionsTestLanguage.g:123:7: lv_operator_2_2= '-'
+            	            // PsiInternalSimpleExpressionsTestLanguage.g:141:7: lv_operator_2_2= '-'
             	            {
 
             	            							markLeaf(elementTypeProvider.getAddition_OperatorHyphenMinusKeyword_1_1_0_1ElementType());
@@ -322,6 +361,12 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
             	            							doneLeaf(lv_operator_2_2);
             	            						
 
+            	            							if (!current) {
+            	            								associateWithSemanticElement();
+            	            								current = true;
+            	            							}
+            	            						
+
             	            }
             	            break;
 
@@ -333,22 +378,26 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
 
             	    }
 
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:133:4: ( (lv_values_3_0= ruleMultiplication ) )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:134:5: (lv_values_3_0= ruleMultiplication )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:157:4: ( (lv_values_3_0= ruleMultiplication ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:158:5: (lv_values_3_0= ruleMultiplication )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:134:5: (lv_values_3_0= ruleMultiplication )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:135:6: lv_values_3_0= ruleMultiplication
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:158:5: (lv_values_3_0= ruleMultiplication )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:159:6: lv_values_3_0= ruleMultiplication
             	    {
 
             	    						markComposite(elementTypeProvider.getAddition_ValuesMultiplicationParserRuleCall_1_2_0ElementType());
             	    					
             	    pushFollow(FollowSets000.FOLLOW_4);
-            	    ruleMultiplication();
+            	    lv_values_3_0=ruleMultiplication();
 
             	    state._fsp--;
 
 
             	    						doneComposite();
+            	    						if(!current) {
+            	    							associateWithSemanticElement();
+            	    							current = true;
+            	    						}
             	    					
 
             	    }
@@ -378,24 +427,30 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAddition"
 
 
     // $ANTLR start "entryRuleMultiplication"
-    // PsiInternalSimpleExpressionsTestLanguage.g:149:1: entryRuleMultiplication : ruleMultiplication EOF ;
-    public final void entryRuleMultiplication() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:177:1: entryRuleMultiplication returns [Boolean current=false] : iv_ruleMultiplication= ruleMultiplication EOF ;
+    public final Boolean entryRuleMultiplication() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleMultiplication = null;
+
+
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:149:24: ( ruleMultiplication EOF )
-            // PsiInternalSimpleExpressionsTestLanguage.g:150:2: ruleMultiplication EOF
+            // PsiInternalSimpleExpressionsTestLanguage.g:177:56: (iv_ruleMultiplication= ruleMultiplication EOF )
+            // PsiInternalSimpleExpressionsTestLanguage.g:178:2: iv_ruleMultiplication= ruleMultiplication EOF
             {
              markComposite(elementTypeProvider.getMultiplicationElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleMultiplication();
+            iv_ruleMultiplication=ruleMultiplication();
 
             state._fsp--;
 
+             current =iv_ruleMultiplication; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -407,36 +462,43 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleMultiplication"
 
 
     // $ANTLR start "ruleMultiplication"
-    // PsiInternalSimpleExpressionsTestLanguage.g:155:1: ruleMultiplication : ( ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )* ) ;
-    public final void ruleMultiplication() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:184:1: ruleMultiplication returns [Boolean current=false] : (this_Term_0= ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )* ) ;
+    public final Boolean ruleMultiplication() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_operator_2_1=null;
         Token lv_operator_2_2=null;
+        Boolean this_Term_0 = null;
+
+        Boolean lv_values_3_0 = null;
+
 
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:155:19: ( ( ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )* ) )
-            // PsiInternalSimpleExpressionsTestLanguage.g:156:2: ( ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )* )
+            // PsiInternalSimpleExpressionsTestLanguage.g:185:1: ( (this_Term_0= ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )* ) )
+            // PsiInternalSimpleExpressionsTestLanguage.g:186:2: (this_Term_0= ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )* )
             {
-            // PsiInternalSimpleExpressionsTestLanguage.g:156:2: ( ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )* )
-            // PsiInternalSimpleExpressionsTestLanguage.g:157:3: ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )*
+            // PsiInternalSimpleExpressionsTestLanguage.g:186:2: (this_Term_0= ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )* )
+            // PsiInternalSimpleExpressionsTestLanguage.g:187:3: this_Term_0= ruleTerm ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )*
             {
 
             			markComposite(elementTypeProvider.getMultiplication_TermParserRuleCall_0ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_6);
-            ruleTerm();
+            this_Term_0=ruleTerm();
 
             state._fsp--;
 
 
+            			current = this_Term_0;
             			doneComposite();
             		
-            // PsiInternalSimpleExpressionsTestLanguage.g:164:3: ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )*
+            // PsiInternalSimpleExpressionsTestLanguage.g:195:3: ( () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) ) )*
             loop5:
             do {
                 int alt5=2;
@@ -449,25 +511,26 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
 
                 switch (alt5) {
             	case 1 :
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:165:4: () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:196:4: () ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) ) ( (lv_values_3_0= ruleTerm ) )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:165:4: ()
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:166:5: 
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:196:4: ()
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:197:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getMultiplication_OpValuesAction_1_0ElementType());
             	    					doneComposite();
+            	    					associateWithSemanticElement();
             	    				
 
             	    }
 
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:171:4: ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:172:5: ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:203:4: ( ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:204:5: ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:172:5: ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:173:6: (lv_operator_2_1= '*' | lv_operator_2_2= '/' )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:204:5: ( (lv_operator_2_1= '*' | lv_operator_2_2= '/' ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:205:6: (lv_operator_2_1= '*' | lv_operator_2_2= '/' )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:173:6: (lv_operator_2_1= '*' | lv_operator_2_2= '/' )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:205:6: (lv_operator_2_1= '*' | lv_operator_2_2= '/' )
             	    int alt4=2;
             	    int LA4_0 = input.LA(1);
 
@@ -485,7 +548,7 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
             	    }
             	    switch (alt4) {
             	        case 1 :
-            	            // PsiInternalSimpleExpressionsTestLanguage.g:174:7: lv_operator_2_1= '*'
+            	            // PsiInternalSimpleExpressionsTestLanguage.g:206:7: lv_operator_2_1= '*'
             	            {
 
             	            							markLeaf(elementTypeProvider.getMultiplication_OperatorAsteriskKeyword_1_1_0_0ElementType());
@@ -495,10 +558,16 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
             	            							doneLeaf(lv_operator_2_1);
             	            						
 
+            	            							if (!current) {
+            	            								associateWithSemanticElement();
+            	            								current = true;
+            	            							}
+            	            						
+
             	            }
             	            break;
             	        case 2 :
-            	            // PsiInternalSimpleExpressionsTestLanguage.g:182:7: lv_operator_2_2= '/'
+            	            // PsiInternalSimpleExpressionsTestLanguage.g:220:7: lv_operator_2_2= '/'
             	            {
 
             	            							markLeaf(elementTypeProvider.getMultiplication_OperatorSolidusKeyword_1_1_0_1ElementType());
@@ -508,6 +577,12 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
             	            							doneLeaf(lv_operator_2_2);
             	            						
 
+            	            							if (!current) {
+            	            								associateWithSemanticElement();
+            	            								current = true;
+            	            							}
+            	            						
+
             	            }
             	            break;
 
@@ -519,22 +594,26 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
 
             	    }
 
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:192:4: ( (lv_values_3_0= ruleTerm ) )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:193:5: (lv_values_3_0= ruleTerm )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:236:4: ( (lv_values_3_0= ruleTerm ) )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:237:5: (lv_values_3_0= ruleTerm )
             	    {
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:193:5: (lv_values_3_0= ruleTerm )
-            	    // PsiInternalSimpleExpressionsTestLanguage.g:194:6: lv_values_3_0= ruleTerm
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:237:5: (lv_values_3_0= ruleTerm )
+            	    // PsiInternalSimpleExpressionsTestLanguage.g:238:6: lv_values_3_0= ruleTerm
             	    {
 
             	    						markComposite(elementTypeProvider.getMultiplication_ValuesTermParserRuleCall_1_2_0ElementType());
             	    					
             	    pushFollow(FollowSets000.FOLLOW_6);
-            	    ruleTerm();
+            	    lv_values_3_0=ruleTerm();
 
             	    state._fsp--;
 
 
             	    						doneComposite();
+            	    						if(!current) {
+            	    							associateWithSemanticElement();
+            	    							current = true;
+            	    						}
             	    					
 
             	    }
@@ -564,24 +643,30 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleMultiplication"
 
 
     // $ANTLR start "entryRuleTerm"
-    // PsiInternalSimpleExpressionsTestLanguage.g:208:1: entryRuleTerm : ruleTerm EOF ;
-    public final void entryRuleTerm() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:256:1: entryRuleTerm returns [Boolean current=false] : iv_ruleTerm= ruleTerm EOF ;
+    public final Boolean entryRuleTerm() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleTerm = null;
+
+
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:208:14: ( ruleTerm EOF )
-            // PsiInternalSimpleExpressionsTestLanguage.g:209:2: ruleTerm EOF
+            // PsiInternalSimpleExpressionsTestLanguage.g:256:46: (iv_ruleTerm= ruleTerm EOF )
+            // PsiInternalSimpleExpressionsTestLanguage.g:257:2: iv_ruleTerm= ruleTerm EOF
             {
              markComposite(elementTypeProvider.getTermElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleTerm();
+            iv_ruleTerm=ruleTerm();
 
             state._fsp--;
 
+             current =iv_ruleTerm; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -593,19 +678,26 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleTerm"
 
 
     // $ANTLR start "ruleTerm"
-    // PsiInternalSimpleExpressionsTestLanguage.g:214:1: ruleTerm : ( ruleAtom | ruleParens ) ;
-    public final void ruleTerm() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:263:1: ruleTerm returns [Boolean current=false] : (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) ;
+    public final Boolean ruleTerm() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_Atom_0 = null;
+
+        Boolean this_Parens_1 = null;
+
+
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:214:9: ( ( ruleAtom | ruleParens ) )
-            // PsiInternalSimpleExpressionsTestLanguage.g:215:2: ( ruleAtom | ruleParens )
+            // PsiInternalSimpleExpressionsTestLanguage.g:264:1: ( (this_Atom_0= ruleAtom | this_Parens_1= ruleParens ) )
+            // PsiInternalSimpleExpressionsTestLanguage.g:265:2: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
             {
-            // PsiInternalSimpleExpressionsTestLanguage.g:215:2: ( ruleAtom | ruleParens )
+            // PsiInternalSimpleExpressionsTestLanguage.g:265:2: (this_Atom_0= ruleAtom | this_Parens_1= ruleParens )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -623,34 +715,36 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalSimpleExpressionsTestLanguage.g:216:3: ruleAtom
+                    // PsiInternalSimpleExpressionsTestLanguage.g:266:3: this_Atom_0= ruleAtom
                     {
 
                     			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleAtom();
+                    this_Atom_0=ruleAtom();
 
                     state._fsp--;
 
 
+                    			current = this_Atom_0;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalSimpleExpressionsTestLanguage.g:224:3: ruleParens
+                    // PsiInternalSimpleExpressionsTestLanguage.g:275:3: this_Parens_1= ruleParens
                     {
 
                     			markComposite(elementTypeProvider.getTerm_ParensParserRuleCall_1ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleParens();
+                    this_Parens_1=ruleParens();
 
                     state._fsp--;
 
 
+                    			current = this_Parens_1;
                     			doneComposite();
                     		
 
@@ -669,24 +763,30 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleTerm"
 
 
     // $ANTLR start "entryRuleAtom"
-    // PsiInternalSimpleExpressionsTestLanguage.g:235:1: entryRuleAtom : ruleAtom EOF ;
-    public final void entryRuleAtom() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:287:1: entryRuleAtom returns [Boolean current=false] : iv_ruleAtom= ruleAtom EOF ;
+    public final Boolean entryRuleAtom() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAtom = null;
+
+
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:235:14: ( ruleAtom EOF )
-            // PsiInternalSimpleExpressionsTestLanguage.g:236:2: ruleAtom EOF
+            // PsiInternalSimpleExpressionsTestLanguage.g:287:46: (iv_ruleAtom= ruleAtom EOF )
+            // PsiInternalSimpleExpressionsTestLanguage.g:288:2: iv_ruleAtom= ruleAtom EOF
             {
              markComposite(elementTypeProvider.getAtomElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAtom();
+            iv_ruleAtom=ruleAtom();
 
             state._fsp--;
 
+             current =iv_ruleAtom; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -698,30 +798,38 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAtom"
 
 
     // $ANTLR start "ruleAtom"
-    // PsiInternalSimpleExpressionsTestLanguage.g:241:1: ruleAtom : ( (lv_name_0_0= RULE_ID ) ) ;
-    public final void ruleAtom() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:294:1: ruleAtom returns [Boolean current=false] : ( (lv_name_0_0= RULE_ID ) ) ;
+    public final Boolean ruleAtom() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:241:9: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // PsiInternalSimpleExpressionsTestLanguage.g:242:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalSimpleExpressionsTestLanguage.g:295:1: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // PsiInternalSimpleExpressionsTestLanguage.g:296:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // PsiInternalSimpleExpressionsTestLanguage.g:242:2: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalSimpleExpressionsTestLanguage.g:243:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalSimpleExpressionsTestLanguage.g:296:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalSimpleExpressionsTestLanguage.g:297:3: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalSimpleExpressionsTestLanguage.g:243:3: (lv_name_0_0= RULE_ID )
-            // PsiInternalSimpleExpressionsTestLanguage.g:244:4: lv_name_0_0= RULE_ID
+            // PsiInternalSimpleExpressionsTestLanguage.g:297:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalSimpleExpressionsTestLanguage.g:298:4: lv_name_0_0= RULE_ID
             {
 
             				markLeaf(elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType());
             			
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
 
             				doneLeaf(lv_name_0_0);
             			
@@ -741,24 +849,30 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAtom"
 
 
     // $ANTLR start "entryRuleParens"
-    // PsiInternalSimpleExpressionsTestLanguage.g:256:1: entryRuleParens : ruleParens EOF ;
-    public final void entryRuleParens() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:316:1: entryRuleParens returns [Boolean current=false] : iv_ruleParens= ruleParens EOF ;
+    public final Boolean entryRuleParens() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleParens = null;
+
+
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:256:16: ( ruleParens EOF )
-            // PsiInternalSimpleExpressionsTestLanguage.g:257:2: ruleParens EOF
+            // PsiInternalSimpleExpressionsTestLanguage.g:316:48: (iv_ruleParens= ruleParens EOF )
+            // PsiInternalSimpleExpressionsTestLanguage.g:317:2: iv_ruleParens= ruleParens EOF
             {
              markComposite(elementTypeProvider.getParensElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleParens();
+            iv_ruleParens=ruleParens();
 
             state._fsp--;
 
+             current =iv_ruleParens; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -770,23 +884,27 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleParens"
 
 
     // $ANTLR start "ruleParens"
-    // PsiInternalSimpleExpressionsTestLanguage.g:262:1: ruleParens : (otherlv_0= '(' ruleAddition otherlv_2= ')' ) ;
-    public final void ruleParens() throws RecognitionException {
+    // PsiInternalSimpleExpressionsTestLanguage.g:323:1: ruleParens returns [Boolean current=false] : (otherlv_0= '(' this_Addition_1= ruleAddition otherlv_2= ')' ) ;
+    public final Boolean ruleParens() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
+        Boolean this_Addition_1 = null;
+
 
         try {
-            // PsiInternalSimpleExpressionsTestLanguage.g:262:11: ( (otherlv_0= '(' ruleAddition otherlv_2= ')' ) )
-            // PsiInternalSimpleExpressionsTestLanguage.g:263:2: (otherlv_0= '(' ruleAddition otherlv_2= ')' )
+            // PsiInternalSimpleExpressionsTestLanguage.g:324:1: ( (otherlv_0= '(' this_Addition_1= ruleAddition otherlv_2= ')' ) )
+            // PsiInternalSimpleExpressionsTestLanguage.g:325:2: (otherlv_0= '(' this_Addition_1= ruleAddition otherlv_2= ')' )
             {
-            // PsiInternalSimpleExpressionsTestLanguage.g:263:2: (otherlv_0= '(' ruleAddition otherlv_2= ')' )
-            // PsiInternalSimpleExpressionsTestLanguage.g:264:3: otherlv_0= '(' ruleAddition otherlv_2= ')'
+            // PsiInternalSimpleExpressionsTestLanguage.g:325:2: (otherlv_0= '(' this_Addition_1= ruleAddition otherlv_2= ')' )
+            // PsiInternalSimpleExpressionsTestLanguage.g:326:3: otherlv_0= '(' this_Addition_1= ruleAddition otherlv_2= ')'
             {
 
             			markLeaf(elementTypeProvider.getParens_LeftParenthesisKeyword_0ElementType());
@@ -799,11 +917,12 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
             			markComposite(elementTypeProvider.getParens_AdditionParserRuleCall_1ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_7);
-            ruleAddition();
+            this_Addition_1=ruleAddition();
 
             state._fsp--;
 
 
+            			current = this_Addition_1;
             			doneComposite();
             		
 
@@ -826,7 +945,7 @@ public class PsiInternalSimpleExpressionsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleParens"
 

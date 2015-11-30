@@ -52,11 +52,12 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.RuleNames;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.ImplicitFragment;
-import org.eclipse.xtext.xtext.generator.XtextLanguageStandaloneSetup;
+import org.eclipse.xtext.xtext.generator.XtextGeneratorResourceSetInitializer;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
@@ -73,6 +74,9 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   
   private String name;
   
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private Boolean generateXtendStubs;
+  
   @Accessors(AccessorType.PUBLIC_GETTER)
   private Grammar grammar;
   
@@ -82,11 +86,11 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   @Accessors(AccessorType.PUBLIC_GETTER)
   private List<String> fileExtensions;
   
-  @Accessors
-  private ResourceSet resourceSet;
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private List<String> referencedResources = CollectionLiterals.<String>newArrayList();
   
   @Accessors
-  private XtextLanguageStandaloneSetup standaloneSetup = new XtextLanguageStandaloneSetup();
+  private ResourceSet resourceSet;
   
   @Accessors
   private Module guiceModule = new Module() {
@@ -115,6 +119,12 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   
   @Inject
   private IXtextProjectConfig projectConfig;
+  
+  @Inject
+  private CodeConfig codeConfig;
+  
+  @Inject
+  private XtextGeneratorResourceSetInitializer resourceSetInitializer;
   
   public void setGrammarUri(final String uri) {
     this.grammarUri = uri;
@@ -149,6 +159,10 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
     this.fileExtensions = _list;
   }
   
+  public void addReferencedResource(final String referencedResource) {
+    this.referencedResources.add(referencedResource);
+  }
+  
   @Override
   public List<String> getFileExtensions() {
     boolean _or = false;
@@ -168,6 +182,18 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   @Override
+  public boolean isGenerateXtendStubs() {
+    boolean _xifexpression = false;
+    boolean _notEquals = (!Objects.equal(this.generateXtendStubs, null));
+    if (_notEquals) {
+      _xifexpression = this.generateXtendStubs.booleanValue();
+    } else {
+      _xifexpression = this.codeConfig.isPreferXtendStubs();
+    }
+    return _xifexpression;
+  }
+  
+  @Override
   public void initialize(final Injector injector) {
     List<IXtextGeneratorFragment> _fragments = this.getFragments();
     List<? extends IXtextGeneratorFragment> _implicitFragments = this.getImplicitFragments();
@@ -177,7 +203,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
       ResourceSet _get = this.resourceSetProvider.get();
       this.resourceSet = _get;
     }
-    this.standaloneSetup.initialize(injector);
+    this.resourceSetInitializer.initialize(this.resourceSet, this.referencedResources);
     EList<Resource> _resources = this.resourceSet.getResources();
     boolean _isEmpty = _resources.isEmpty();
     boolean _not = (!_isEmpty);
@@ -389,6 +415,10 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   
   private final static Logger LOG = Logger.getLogger(XtextGeneratorLanguage.class);
   
+  public void setGenerateXtendStubs(final Boolean generateXtendStubs) {
+    this.generateXtendStubs = generateXtendStubs;
+  }
+  
   @Pure
   public Grammar getGrammar() {
     return this.grammar;
@@ -400,21 +430,17 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   @Pure
+  public List<String> getReferencedResources() {
+    return this.referencedResources;
+  }
+  
+  @Pure
   public ResourceSet getResourceSet() {
     return this.resourceSet;
   }
   
   public void setResourceSet(final ResourceSet resourceSet) {
     this.resourceSet = resourceSet;
-  }
-  
-  @Pure
-  public XtextLanguageStandaloneSetup getStandaloneSetup() {
-    return this.standaloneSetup;
-  }
-  
-  public void setStandaloneSetup(final XtextLanguageStandaloneSetup standaloneSetup) {
-    this.standaloneSetup = standaloneSetup;
   }
   
   @Pure

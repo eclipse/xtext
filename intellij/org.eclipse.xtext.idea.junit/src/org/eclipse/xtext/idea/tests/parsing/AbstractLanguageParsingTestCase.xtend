@@ -178,7 +178,7 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 		createFreshResourceSet().createResource(uri) as XtextResource => [
 			parser = psiToEcoreTransformator
 			load(new ByteArrayInputStream(newByteArrayOfSize(0)), null)
-			psiToEcoreTransformator.adapter.install(it)
+			psiToEcoreTransformator.adapter.attachToEmfObject(it)
 		]
 	}
 	

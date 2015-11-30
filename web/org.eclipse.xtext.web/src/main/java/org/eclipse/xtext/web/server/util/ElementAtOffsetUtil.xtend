@@ -24,7 +24,7 @@ class ElementAtOffsetUtil {
 			return crossLinkedEObject
 		} else {
 			var containedEObject = resource.resolveContainedElementAt(offset)
-			if(containedEObject != null) {
+			if (containedEObject != null) {
 				val nameRegion = containedEObject.significantTextRegion
 				if (nameRegion.contains(offset))
 					return containedEObject

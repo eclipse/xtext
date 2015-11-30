@@ -152,7 +152,7 @@
 			</visibleWhen>
 		</command>  
 		</menuContribution>
-		!-- copy qualified name -->
+		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
 				style="push" tooltip="Copy Qualified Name">
@@ -356,7 +356,7 @@
 			</visibleWhen>
 		</command>  
 		</menuContribution>
-		!-- copy qualified name -->
+		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
 				style="push" tooltip="Copy Qualified Name">
@@ -408,9 +408,7 @@
 			</activeWhen>
 		</handler>
 	</extension>
-	
 	<!-- adding resource factories -->
-	
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
@@ -424,7 +422,6 @@
 	        uriExtension="___xbase">
 	    </resourceServiceProvider>
 	</extension>
-	
 	<!-- marker definitions for org.eclipse.xtext.xbase.Xbase -->
 	<extension
 			id="xbase.check.fast"
@@ -742,7 +739,7 @@
 			</visibleWhen>
 		</command>  
 		</menuContribution>
-		!-- copy qualified name -->
+		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
 				style="push" tooltip="Copy Qualified Name">
@@ -794,9 +791,7 @@
 			</activeWhen>
 		</handler>
 	</extension>
-	
 	<!-- adding resource factories -->
-	
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
@@ -810,7 +805,6 @@
 	        uriExtension="___xbasewithannotations">
 	    </resourceServiceProvider>
 	</extension>
-	
 	<!-- marker definitions for org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations -->
 	<extension
 			id="xbasewithannotations.check.fast"
@@ -953,7 +947,7 @@
 	        point="org.eclipse.ui.ide.markerResolution">
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.xbase.annotations.ui.xbasewithannotations.check.fast">
+	        markerType="org.eclipse.xtext.xbase.ui.xbasewithannotations.check.fast">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -961,7 +955,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.xbase.annotations.ui.xbasewithannotations.check.normal">
+	        markerType="org.eclipse.xtext.xbase.ui.xbasewithannotations.check.normal">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">
@@ -969,7 +963,7 @@
 	    </markerResolutionGenerator>
 	    <markerResolutionGenerator
 	        class="org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.xbase.annotations.ui.xbasewithannotations.check.expensive">
+	        markerType="org.eclipse.xtext.xbase.ui.xbasewithannotations.check.expensive">
 	        <attribute
 	            name="FIXABLE_KEY"
 	            value="true">

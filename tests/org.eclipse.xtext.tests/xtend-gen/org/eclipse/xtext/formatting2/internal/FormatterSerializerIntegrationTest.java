@@ -91,6 +91,9 @@ public class FormatterSerializerIntegrationTest {
       } else if (model instanceof IDList) {
         _format((IDList)model, document);
         return;
+      } else if (model instanceof EObject) {
+        _format((EObject)model, document);
+        return;
       } else if (model == null) {
         _format((Void)null, document);
         return;

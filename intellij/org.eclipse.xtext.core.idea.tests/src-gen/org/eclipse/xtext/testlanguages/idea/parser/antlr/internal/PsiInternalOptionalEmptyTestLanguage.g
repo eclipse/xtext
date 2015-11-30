@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,19 +66,25 @@ ruleModel:
 			lv_child_0_0=ruleGreeting
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)?
 ;
 
 //Entry rule entryRuleGreeting
-entryRuleGreeting:
+entryRuleGreeting returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getGreetingElementType()); }
-	ruleGreeting
+	iv_ruleGreeting=ruleGreeting
+	{ $current=$iv_ruleGreeting.current; }
 	EOF;
 
 // Rule Greeting
-ruleGreeting:
+ruleGreeting returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getGreeting_HalloKeyword_0ElementType());
@@ -91,6 +99,12 @@ ruleGreeting:
 					markLeaf(elementTypeProvider.getGreeting_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_1_0);
 				}

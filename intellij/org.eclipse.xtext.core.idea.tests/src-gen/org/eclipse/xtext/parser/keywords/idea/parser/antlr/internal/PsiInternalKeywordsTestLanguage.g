@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -65,6 +67,12 @@ ruleModel:
 				lv_first_0_0='foo\\bar'
 				{
 					doneLeaf(lv_first_0_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -78,6 +86,12 @@ ruleModel:
 				{
 					doneLeaf(lv_second_1_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 		    |
@@ -89,6 +103,12 @@ ruleModel:
 				lv_third_2_0='\\bar'
 				{
 					doneLeaf(lv_third_2_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -102,6 +122,12 @@ ruleModel:
 				{
 					doneLeaf(lv_forth_3_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 		    |
@@ -113,6 +139,12 @@ ruleModel:
 				lv_fifth_4_0='"a"'
 				{
 					doneLeaf(lv_fifth_4_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -126,6 +158,12 @@ ruleModel:
 				{
 					doneLeaf(lv_sixth_5_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 		    |
@@ -138,6 +176,12 @@ ruleModel:
 				{
 					doneLeaf(lv_seventh_6_0);
 				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 			)
 		)
 		    |
@@ -149,6 +193,12 @@ ruleModel:
 				lv_eighth_7_0='"d"'
 				{
 					doneLeaf(lv_eighth_7_0);
+				}
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)

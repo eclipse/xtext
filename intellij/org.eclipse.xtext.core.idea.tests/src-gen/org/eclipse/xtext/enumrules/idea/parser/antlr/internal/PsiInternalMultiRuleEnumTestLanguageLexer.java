@@ -166,10 +166,10 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiRuleEnumTestLanguage.g:208:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalMultiRuleEnumTestLanguage.g:208:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalMultiRuleEnumTestLanguage.g:225:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalMultiRuleEnumTestLanguage.g:225:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:208:11: ( '^' )?
+            // PsiInternalMultiRuleEnumTestLanguage.g:225:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -178,7 +178,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:208:11: '^'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:225:11: '^'
                     {
                     match('^'); 
 
@@ -196,7 +196,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalMultiRuleEnumTestLanguage.g:208:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalMultiRuleEnumTestLanguage.g:225:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -245,10 +245,10 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiRuleEnumTestLanguage.g:210:10: ( ( '0' .. '9' )+ )
-            // PsiInternalMultiRuleEnumTestLanguage.g:210:12: ( '0' .. '9' )+
+            // PsiInternalMultiRuleEnumTestLanguage.g:227:10: ( ( '0' .. '9' )+ )
+            // PsiInternalMultiRuleEnumTestLanguage.g:227:12: ( '0' .. '9' )+
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:210:12: ( '0' .. '9' )+
+            // PsiInternalMultiRuleEnumTestLanguage.g:227:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -262,7 +262,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalMultiRuleEnumTestLanguage.g:210:13: '0' .. '9'
+            	    // PsiInternalMultiRuleEnumTestLanguage.g:227:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -294,10 +294,10 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiRuleEnumTestLanguage.g:212:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalMultiRuleEnumTestLanguage.g:212:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalMultiRuleEnumTestLanguage.g:229:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalMultiRuleEnumTestLanguage.g:229:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:212:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalMultiRuleEnumTestLanguage.g:229:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -315,10 +315,10 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:212:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:229:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalMultiRuleEnumTestLanguage.g:212:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalMultiRuleEnumTestLanguage.g:229:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -334,7 +334,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalMultiRuleEnumTestLanguage.g:212:21: '\\\\' .
+                    	    // PsiInternalMultiRuleEnumTestLanguage.g:229:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -342,7 +342,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalMultiRuleEnumTestLanguage.g:212:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalMultiRuleEnumTestLanguage.g:229:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -367,10 +367,10 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:212:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalMultiRuleEnumTestLanguage.g:229:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalMultiRuleEnumTestLanguage.g:212:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalMultiRuleEnumTestLanguage.g:229:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -386,7 +386,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalMultiRuleEnumTestLanguage.g:212:54: '\\\\' .
+                    	    // PsiInternalMultiRuleEnumTestLanguage.g:229:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -394,7 +394,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalMultiRuleEnumTestLanguage.g:212:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalMultiRuleEnumTestLanguage.g:229:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -437,12 +437,12 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiRuleEnumTestLanguage.g:214:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalMultiRuleEnumTestLanguage.g:214:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalMultiRuleEnumTestLanguage.g:231:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalMultiRuleEnumTestLanguage.g:231:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalMultiRuleEnumTestLanguage.g:214:24: ( options {greedy=false; } : . )*
+            // PsiInternalMultiRuleEnumTestLanguage.g:231:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -467,7 +467,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalMultiRuleEnumTestLanguage.g:214:52: .
+            	    // PsiInternalMultiRuleEnumTestLanguage.g:231:52: .
             	    {
             	    matchAny(); 
 
@@ -497,12 +497,12 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiRuleEnumTestLanguage.g:216:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalMultiRuleEnumTestLanguage.g:216:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalMultiRuleEnumTestLanguage.g:233:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalMultiRuleEnumTestLanguage.g:233:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalMultiRuleEnumTestLanguage.g:216:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalMultiRuleEnumTestLanguage.g:233:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -515,7 +515,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalMultiRuleEnumTestLanguage.g:216:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalMultiRuleEnumTestLanguage.g:233:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -535,7 +535,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalMultiRuleEnumTestLanguage.g:216:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalMultiRuleEnumTestLanguage.g:233:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -544,9 +544,9 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalMultiRuleEnumTestLanguage.g:216:41: ( '\\r' )? '\\n'
+                    // PsiInternalMultiRuleEnumTestLanguage.g:233:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalMultiRuleEnumTestLanguage.g:216:41: ( '\\r' )?
+                    // PsiInternalMultiRuleEnumTestLanguage.g:233:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -555,7 +555,7 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalMultiRuleEnumTestLanguage.g:216:41: '\\r'
+                            // PsiInternalMultiRuleEnumTestLanguage.g:233:41: '\\r'
                             {
                             match('\r'); 
 
@@ -587,10 +587,10 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiRuleEnumTestLanguage.g:218:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalMultiRuleEnumTestLanguage.g:218:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalMultiRuleEnumTestLanguage.g:235:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalMultiRuleEnumTestLanguage.g:235:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalMultiRuleEnumTestLanguage.g:218:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalMultiRuleEnumTestLanguage.g:235:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -644,8 +644,8 @@ public class PsiInternalMultiRuleEnumTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalMultiRuleEnumTestLanguage.g:220:16: ( . )
-            // PsiInternalMultiRuleEnumTestLanguage.g:220:18: .
+            // PsiInternalMultiRuleEnumTestLanguage.g:237:16: ( . )
+            // PsiInternalMultiRuleEnumTestLanguage.g:237:18: .
             {
             matchAny(); 
 

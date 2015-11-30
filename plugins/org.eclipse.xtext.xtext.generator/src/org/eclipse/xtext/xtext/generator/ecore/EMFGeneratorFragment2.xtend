@@ -64,13 +64,13 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static org.eclipse.xtext.GrammarUtil.*
 
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 
 @Log
 class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
@@ -575,11 +575,18 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 			genModel.runtimeVersion = emfRuntimeVersion
 			genModel.rootExtendsClass = 'org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container'
 			genModel.lineDelimiter = codeConfig.lineDelimiter
+			if (codeConfig.fileHeader !== null) {
+				genModel.copyrightText = codeConfig.fileHeader.trimMultiLineComment
+			}
 		}
 		genModelFile.contents.add(genModel)
 		return genModel
 	}
-
+	
+	def static String trimMultiLineComment(String string) {
+		return string.replace('*/','').replace('/*','').replace(' * ','').trim
+	}
+	
 	protected def Set<EPackage> getReferencedEPackages(List<EPackage> packs) {
 		val result = newHashSet
 		for (pkg : packs) {

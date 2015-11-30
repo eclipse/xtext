@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.generator.types;
 
 import com.google.inject.Inject;
 import java.util.Set;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
@@ -29,13 +31,18 @@ public class TypesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   @Inject
   private XbaseUsageDetector xbaseUsageDetector;
   
-  @Accessors
-  private boolean onlyEnabledIfGrammarIsUsed = false;
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private final BooleanGeneratorOption onlyEnabledIfGrammarIsUsed = new BooleanGeneratorOption(false);
+  
+  public void setOnlyEnabledIfGrammarIsUsed(final boolean onlyEnabledIfGrammarIsUsed) {
+    this.onlyEnabledIfGrammarIsUsed.set(onlyEnabledIfGrammarIsUsed);
+  }
   
   @Override
   public void generate() {
     boolean _and = false;
-    if (!this.onlyEnabledIfGrammarIsUsed) {
+    boolean _get = this.onlyEnabledIfGrammarIsUsed.get();
+    if (!_get) {
       _and = false;
     } else {
       IXtextGeneratorLanguage _language = this.getLanguage();
@@ -109,11 +116,7 @@ public class TypesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   }
   
   @Pure
-  public boolean isOnlyEnabledIfGrammarIsUsed() {
+  public BooleanGeneratorOption getOnlyEnabledIfGrammarIsUsed() {
     return this.onlyEnabledIfGrammarIsUsed;
-  }
-  
-  public void setOnlyEnabledIfGrammarIsUsed(final boolean onlyEnabledIfGrammarIsUsed) {
-    this.onlyEnabledIfGrammarIsUsed = onlyEnabledIfGrammarIsUsed;
   }
 }

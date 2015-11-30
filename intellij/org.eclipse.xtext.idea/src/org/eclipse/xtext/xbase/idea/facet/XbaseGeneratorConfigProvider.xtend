@@ -18,7 +18,7 @@ import org.eclipse.xtext.idea.resource.ModuleProvider
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
-import org.eclipse.xtext.xbase.compiler.JavaVersion
+import org.eclipse.xtext.util.JavaVersion
 
 import static com.intellij.openapi.application.ApplicationManager.*
 

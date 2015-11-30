@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xtext.wizard;
 
 public enum BuildSystem {
-	ECLIPSE("Eclipse"),
+	NONE("None"),
 	MAVEN("Maven"),
 	GRADLE("Gradle");
 	

@@ -64,4 +64,10 @@ class ContentAssistEntry {
 	 */
 	val editPositions = new ArrayList<TextRegion>
 	
+	/**
+	 * The EObject or IEObjectDescription for which this entry has been created, if any.
+	 * This field is <em>not</em> serialized when the entry is sent over a communication channel.
+	 */
+	transient Object source
+	
 }

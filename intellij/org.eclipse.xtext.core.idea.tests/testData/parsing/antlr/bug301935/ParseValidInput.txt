@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.antlr.idea.lang.psi.impl.Bug301935TestLanguageFileImpl:a.bug301935testlanguage(0,6)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,6)
+  org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(Model_ELEMENT_TYPE:Model_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE)('anonymous')(0,6)
     PsiElement(Model_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE)('a')(0,1)
     PsiElement(Model_WSTerminalRuleCall_1_ELEMENT_TYPE)(' ')(1,2)
     PsiElement(Model_ValueIDTerminalRuleCall_2_0_ELEMENT_TYPE)('b')(2,3)

@@ -63,7 +63,11 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		}
 		return files
 	}
-
+	
+	def String getJavaVersion() {
+		config.javaVersion.qualifier	
+	}
+	
 	def private CharSequence loadResource(String resourcePath) {
 		Resources.toString(class.classLoader.getResource(resourcePath), Charsets.ISO_8859_1)
 	}
@@ -104,8 +108,8 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					group = '«config.baseName»'
 					version = '1.0.0-SNAPSHOT'
 					
-					sourceCompatibility = '1.6'
-					targetCompatibility = '1.6'
+					sourceCompatibility = '«javaVersion»'
+					targetCompatibility = '«javaVersion»'
 					
 					configurations.all {
 						exclude group: 'asm'
@@ -167,8 +171,13 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			}
 		«ENDIF»
 		
-		jar.manifest {
-			attributes 'Bundle-SymbolicName': project.name
+		jar {
+			from('model') {
+				into('model')
+			}
+			manifest {
+				attributes 'Bundle-SymbolicName': project.name
+			}
 		}
 		
 		plugins.withId('war') {
@@ -204,8 +213,8 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					«ENDIF»
 					<xtextVersion>«config.xtextVersion»</xtextVersion>
 					<project.build.sourceEncoding>«config.encoding»</project.build.sourceEncoding>
-					<maven.compiler.source>1.6</maven.compiler.source>
-					<maven.compiler.target>1.6</maven.compiler.target>
+					<maven.compiler.source>«javaVersion»</maven.compiler.source>
+					<maven.compiler.target>«javaVersion»</maven.compiler.target>
 				</properties>
 				<modules>
 					«FOR p : config.enabledProjects.filter[it != this && partOfMavenBuild]»
@@ -382,24 +391,48 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						</plugins>
 					</pluginManagement>
 				</build>
-				«IF config.xtextVersion.isSnapshot»
-					<repositories>
+				<repositories>
+					<repository>
+						<id>codehaus-snapshots</id>
+						<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+						<url>http://nexus.codehaus.org/snapshots/</url>
+						<releases>
+							<enabled>false</enabled>
+						</releases>
+						<snapshots>
+							<enabled>false</enabled>
+						</snapshots>
+					</repository>
+					«IF config.xtextVersion.isSnapshot»
 						<repository>
 							<id>sonatype-snapshots</id>
 							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 							<releases><enabled>false</enabled></releases>
 							<snapshots><enabled>true</enabled></snapshots>
 						</repository>
-					</repositories>
-					<pluginRepositories>
+					«ENDIF»
+				</repositories>
+				<pluginRepositories>
+					<pluginRepository>
+						<id>codehaus-snapshots</id>
+						<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+						<url>http://nexus.codehaus.org/snapshots/</url>
+						<releases>
+							<enabled>false</enabled>
+						</releases>
+						<snapshots>
+							<enabled>false</enabled>
+						</snapshots>
+					</pluginRepository>
+					«IF config.xtextVersion.isSnapshot»
 						<pluginRepository>
 							<id>sonatype-snapshots</id>
 							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 							<releases><enabled>false</enabled></releases>
 							<snapshots><enabled>true</enabled></snapshots>
 						</pluginRepository>
-					</pluginRepositories>
-				«ENDIF»
+					«ENDIF»
+				</pluginRepositories>
 			'''
 		]
 	}

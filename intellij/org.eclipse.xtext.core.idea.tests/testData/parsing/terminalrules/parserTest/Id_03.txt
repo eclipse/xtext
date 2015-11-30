@@ -1,3 +1,3 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.TerminalRulesTestLanguageFileImpl:a.terminalrulestestlanguage(0,4)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,4)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,4)
     PsiElement(Model_IdValueIDTerminalRuleCall_0_0_ELEMENT_TYPE)('abc1')(0,4)

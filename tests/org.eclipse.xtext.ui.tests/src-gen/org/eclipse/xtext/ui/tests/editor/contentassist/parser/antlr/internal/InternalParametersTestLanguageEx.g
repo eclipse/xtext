@@ -558,7 +558,53 @@ ruleIdOrKeyword
     {
     	newLeafNode(otherlv_32, grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getTrailingKeyword_1_11_1_1_1());
     }
-)?)))))
+)?)))
+    |(	otherlv_33='#13' 
+    {
+    	newLeafNode(otherlv_33, grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getNumberSignDigitOneDigitThreeKeyword_1_12_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getScenarioScenario5ParserRuleCall_1_12_1_0()); 
+	    }
+		lv_scenario_34_0=ruleScenario5		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParametersTestLanguageParserRuleParametersRule());
+	        }
+       		set(
+       			$current, 
+       			"scenario",
+        		lv_scenario_34_0, 
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguage.Scenario5");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |(	otherlv_35='#14' 
+    {
+    	newLeafNode(otherlv_35, grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getNumberSignDigitOneDigitFourKeyword_1_13_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getScenarioScenario5ParserRuleCall_1_13_1_0()); 
+	    }
+		lv_scenario_36_0=norm1_Scenario5		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParametersTestLanguageParserRuleParametersRule());
+	        }
+       		set(
+       			$current, 
+       			"scenario",
+        		lv_scenario_36_0, 
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguage.Scenario5");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))))
 ;
 
 
@@ -895,6 +941,169 @@ norm1_IdOrKeyword
     	newLeafNode(otherlv_1, grammarAccess.getScenario4Access().getScenario4Keyword_1());
     }
 )
+;
+
+
+
+
+
+// Entry rule entryRuleScenario5
+entryRuleScenario5 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getScenario5Rule()); }
+	 iv_ruleScenario5=ruleScenario5 
+	 { $current=$iv_ruleScenario5.current; } 
+	 EOF 
+;
+
+// Rule Scenario5
+ruleScenario5 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getScenario5Access().getScenarioAction_1_0(),
+            $current);
+    }
+)	otherlv_1='trailing' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getScenario5Access().getTrailingKeyword_1_1());
+    }
+)
+    |((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getScenario5Access().getScenarioAction_2_0(),
+            $current);
+    }
+)	otherlv_3='scenario5' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getScenario5Access().getScenario5Keyword_2_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getScenario5Access().getFirstIdOrKeywordParserRuleCall_2_3_0()); 
+	    }
+		lv_first_4_0=norm1_IdOrKeyword		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getScenario5Rule());
+	        }
+       		set(
+       			$current, 
+       			"first",
+        		lv_first_4_0, 
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguage.IdOrKeyword");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getScenario5Access().getSecondIdOrKeywordParserRuleCall_2_4_0()); 
+	    }
+		lv_second_5_0=ruleIdOrKeyword		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getScenario5Rule());
+	        }
+       		set(
+       			$current, 
+       			"second",
+        		lv_second_5_0, 
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguage.IdOrKeyword");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)))
+;
+
+
+
+
+
+
+// Rule Scenario5
+norm1_Scenario5 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getScenario5Access().getScenarioAction_0_0(),
+            $current);
+    }
+)	otherlv_1='include' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getScenario5Access().getIncludeKeyword_0_1());
+    }
+)
+    |((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getScenario5Access().getScenarioAction_1_0(),
+            $current);
+    }
+)	otherlv_3='trailing' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getScenario5Access().getTrailingKeyword_1_1());
+    }
+)
+    |((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getScenario5Access().getScenarioAction_2_0(),
+            $current);
+    }
+)	otherlv_5='scenario5' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getScenario5Access().getScenario5Keyword_2_1());
+    }
+(	otherlv_6='include' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getScenario5Access().getIncludeKeyword_2_2_0());
+    }
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getScenario5Access().getFirstIdOrKeywordParserRuleCall_2_3_0()); 
+	    }
+		lv_first_7_0=norm1_IdOrKeyword		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getScenario5Rule());
+	        }
+       		set(
+       			$current, 
+       			"first",
+        		lv_first_7_0, 
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguage.IdOrKeyword");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getScenario5Access().getSecondIdOrKeywordParserRuleCall_2_4_0()); 
+	    }
+		lv_second_8_0=ruleIdOrKeyword		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getScenario5Rule());
+	        }
+       		set(
+       			$current, 
+       			"second",
+        		lv_second_8_0, 
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguage.IdOrKeyword");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)))
 ;
 
 

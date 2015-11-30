@@ -1,6 +1,6 @@
 org.eclipse.xtext.parser.unorderedGroups.idea.lang.psi.impl.ExUnorderedGroupsTestLanguageFileImpl:a.exunorderedgroupstestlanguage(0,9)
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ELEMENT_TYPE)(0,9)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)(0,9)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ModelAction_0_ELEMENT_TYPE)('anonymous')(0,9)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(DelegateModel_ModelParserRuleCall_ELEMENT_TYPE)(0,0)
         <empty list>
       PsiElement(Model_DigitSevenKeyword_1_6_0_ELEMENT_TYPE)('7')(0,1)

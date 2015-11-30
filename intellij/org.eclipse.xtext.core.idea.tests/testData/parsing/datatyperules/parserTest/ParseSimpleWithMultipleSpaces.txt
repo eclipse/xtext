@@ -1,6 +1,6 @@
 org.eclipse.xtext.parser.datatyperules.idea.lang.psi.impl.DatatypeRulesTestLanguageFileImpl:a.datatyperulestestlanguage(0,24)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ELEMENT_TYPE)(0,24)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ModelModelParserRuleCall_0_ELEMENT_TYPE)(0,24)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ELEMENT_TYPE)('anonymous')(0,24)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(CompositeModel_ModelModelParserRuleCall_0_ELEMENT_TYPE)('anonymous')(0,24)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_IdNestedModelIdParserRuleCall_0_0_ELEMENT_TYPE)(0,21)
         org.eclipse.xtext.psi.impl.PsiEObjectImpl(NestedModelId_ModelIdParserRuleCall_0_ELEMENT_TYPE)(0,9)
           PsiWhiteSpace('  ')(0,2)

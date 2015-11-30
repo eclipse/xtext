@@ -17,7 +17,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -44,10 +43,6 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
-  @Inject
-  @Extension
-  private CodeConfig _codeConfig;
   
   @Inject
   @Extension
@@ -115,8 +110,8 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       }
       boolean _tripleNotEquals = (_src != null);
       if (_tripleNotEquals) {
-        boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
-        if (_isPreferXtendStubs) {
+        boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+        if (_isGenerateXtendStub) {
           this.generateXtendQuickfixProvider();
         } else {
           this.generateJavaQuickfixProvider();
@@ -125,8 +120,8 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
       ManifestAccess _manifest = _eclipsePlugin_1.getManifest();
-      boolean _notEquals = (!Objects.equal(_manifest, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals_1 = (_manifest != null);
+      if (_tripleNotEquals_1) {
         IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
         IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
         ManifestAccess _manifest_1 = _eclipsePlugin_2.getManifest();
@@ -139,8 +134,8 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
       PluginXmlAccess _pluginXml = _eclipsePlugin_3.getPluginXml();
-      boolean _notEquals_1 = (!Objects.equal(_pluginXml, null));
-      if (_notEquals_1) {
+      boolean _tripleNotEquals_2 = (_pluginXml != null);
+      if (_tripleNotEquals_2) {
         this.addRegistrationToPluginXml();
       }
     } else {
@@ -150,15 +145,15 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       if (_eclipsePlugin_4!=null) {
         _srcGen=_eclipsePlugin_4.getSrcGen();
       }
-      boolean _tripleNotEquals_1 = (_srcGen != null);
-      if (_tripleNotEquals_1) {
+      boolean _tripleNotEquals_3 = (_srcGen != null);
+      if (_tripleNotEquals_3) {
         this.generateGenQuickfixProvider();
       }
       IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_5.getEclipsePlugin();
       ManifestAccess _manifest_2 = _eclipsePlugin_5.getManifest();
-      boolean _notEquals_2 = (!Objects.equal(_manifest_2, null));
-      if (_notEquals_2) {
+      boolean _tripleNotEquals_4 = (_manifest_2 != null);
+      if (_tripleNotEquals_4) {
         IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
         IBundleProjectConfig _eclipsePlugin_6 = _projectConfig_6.getEclipsePlugin();
         ManifestAccess _manifest_3 = _eclipsePlugin_6.getManifest();
@@ -336,24 +331,25 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
   protected boolean addRegistrationToPluginXml() {
     boolean _xblockexpression = false;
     {
-      Grammar _grammar = this.getGrammar();
-      String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(_grammar);
-      String _plus = (_eclipsePluginBasePackage + ".");
-      Grammar _grammar_1 = this.getGrammar();
-      String _simpleName = GrammarUtil.getSimpleName(_grammar_1);
-      String _lowerCase = _simpleName.toLowerCase();
-      final String markerTypePrefix = (_plus + _lowerCase);
-      Grammar _grammar_2 = this.getGrammar();
-      final TypeReference executableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(_grammar_2);
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-      PluginXmlAccess _pluginXml = _eclipsePlugin.getPluginXml();
+      String _name = _eclipsePlugin.getName();
+      String _plus = (_name + ".");
+      Grammar _grammar = this.getGrammar();
+      String _simpleName = GrammarUtil.getSimpleName(_grammar);
+      String _lowerCase = _simpleName.toLowerCase();
+      final String markerTypePrefix = (_plus + _lowerCase);
+      Grammar _grammar_1 = this.getGrammar();
+      final TypeReference executableExtensionFactory = this._xtextGeneratorNaming.getEclipsePluginExecutableExtensionFactory(_grammar_1);
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
+      PluginXmlAccess _pluginXml = _eclipsePlugin_1.getPluginXml();
       List<CharSequence> _entries = _pluginXml.getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<!-- quickfix marker resolution generator for ");
-      Grammar _grammar_3 = this.getGrammar();
-      String _name = _grammar_3.getName();
-      _builder.append(_name, "");
+      Grammar _grammar_2 = this.getGrammar();
+      String _name_1 = _grammar_2.getName();
+      _builder.append(_name_1, "");
       _builder.append(" -->");
       _builder.newLineIfNotEmpty();
       _builder.append("<extension");

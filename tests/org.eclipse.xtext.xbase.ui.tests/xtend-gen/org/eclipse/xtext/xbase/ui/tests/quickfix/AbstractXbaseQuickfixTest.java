@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.XbaseRuntimeModule;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
+import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
 import org.eclipse.xtext.xbase.ui.tests.quickfix.TestQuickfixXbaseUIModule;
 import org.junit.Assert;
@@ -29,7 +29,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
   
   private static Injector injector = Guice.createInjector(
     Modules2.mixin(new XbaseRuntimeModule(), new SharedStateModule(), 
-      new TestQuickfixXbaseUIModule(XtypeActivator.getInstance())));
+      new TestQuickfixXbaseUIModule(XbaseActivator.getInstance())));
   
   @Override
   public void tearDown() throws Exception {

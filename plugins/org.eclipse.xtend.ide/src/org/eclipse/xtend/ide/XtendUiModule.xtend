@@ -276,7 +276,7 @@ class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return RichStringAwareToggleCommentAction.Factory
 	}
 
-	override Class<? extends IOccurrenceComputer> bindIOccurrenceComputer() {
+	def Class<? extends IOccurrenceComputer> bindIOccurrenceComputer() {
 		return OccurrenceComputer
 	}
 

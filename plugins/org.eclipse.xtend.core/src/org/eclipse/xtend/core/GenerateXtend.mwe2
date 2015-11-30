@@ -58,6 +58,7 @@ Workflow {
 					enabled = true
 					root = "../../intellij/org.eclipse.xtend.idea" 
 				}
+				createEclipseMetaData = true
 			}
 			code = {
 				encoding = "ISO-8859-1"
@@ -68,13 +69,12 @@ Workflow {
 		}
 		language = {
 			resourceSet = XtextResourceSet : resourceSet {}
-			standaloneSetup = {
-				loadedResource = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
-				loadedResource = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
-			}
+			referencedResource = "platform:/resource/${runtimeProjectName}/model/RichStrings.genmodel"
+			referencedResource = "platform:/resource/${runtimeProjectName}/model/Xtend.genmodel"
 			name = "org.eclipse.xtend.core.Xtend"
 			fileExtensions = file.extensions
 			guiceModule = parser.XtendLanguageGeneratorModule {}
+			generateXtendStubs = true
 			
 			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 			fragment = serializer.SerializerFragment2 {
@@ -138,7 +138,9 @@ Workflow {
 			fragment = org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
 				options = auto-inject {}
 			}
-			fragment = org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator auto-inject {}
+			fragment = org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator auto-inject {
+				generateXtendStub = true
+			}
 		}
 	}
 	

@@ -69,18 +69,24 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalIgnoreCaseImportsTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalIgnoreCaseImportsTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -92,22 +98,29 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalIgnoreCaseImportsTestLanguage.g:58:1: ruleModel : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalIgnoreCaseImportsTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_imports_0_0 = null;
+
+        Boolean lv_elements_1_0 = null;
+
+
         try {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:58:10: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ ) )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:59:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:60:1: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ ) )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:61:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ )
             {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:59:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:60:3: ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:61:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:62:3: ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+
             {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:60:3: ( (lv_imports_0_0= ruleImport ) )*
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:62:3: ( (lv_imports_0_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -120,21 +133,25 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:61:4: (lv_imports_0_0= ruleImport )
+            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:63:4: (lv_imports_0_0= ruleImport )
             	    {
-            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:61:4: (lv_imports_0_0= ruleImport )
-            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:62:5: lv_imports_0_0= ruleImport
+            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:63:4: (lv_imports_0_0= ruleImport )
+            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:64:5: lv_imports_0_0= ruleImport
             	    {
 
             	    					markComposite(elementTypeProvider.getModel_ImportsImportParserRuleCall_0_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleImport();
+            	    lv_imports_0_0=ruleImport();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -148,7 +165,7 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
                 }
             } while (true);
 
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:71:3: ( (lv_elements_1_0= ruleElement ) )+
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:77:3: ( (lv_elements_1_0= ruleElement ) )+
             int cnt2=0;
             loop2:
             do {
@@ -162,21 +179,25 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
 
                 switch (alt2) {
             	case 1 :
-            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:72:4: (lv_elements_1_0= ruleElement )
+            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:78:4: (lv_elements_1_0= ruleElement )
             	    {
-            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:72:4: (lv_elements_1_0= ruleElement )
-            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:73:5: lv_elements_1_0= ruleElement
+            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:78:4: (lv_elements_1_0= ruleElement )
+            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:79:5: lv_elements_1_0= ruleElement
             	    {
 
             	    					markComposite(elementTypeProvider.getModel_ElementsElementParserRuleCall_1_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_4);
-            	    ruleElement();
+            	    lv_elements_1_0=ruleElement();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -207,24 +228,30 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleImport"
-    // PsiInternalIgnoreCaseImportsTestLanguage.g:86:1: entryRuleImport : ruleImport EOF ;
-    public final void entryRuleImport() throws RecognitionException {
+    // PsiInternalIgnoreCaseImportsTestLanguage.g:96:1: entryRuleImport returns [Boolean current=false] : iv_ruleImport= ruleImport EOF ;
+    public final Boolean entryRuleImport() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleImport = null;
+
+
         try {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:86:16: ( ruleImport EOF )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:87:2: ruleImport EOF
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:96:48: (iv_ruleImport= ruleImport EOF )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:97:2: iv_ruleImport= ruleImport EOF
             {
              markComposite(elementTypeProvider.getImportElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleImport();
+            iv_ruleImport=ruleImport();
 
             state._fsp--;
 
+             current =iv_ruleImport; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -236,30 +263,38 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleImport"
 
 
     // $ANTLR start "ruleImport"
-    // PsiInternalIgnoreCaseImportsTestLanguage.g:92:1: ruleImport : ( (lv_importURI_0_0= RULE_STRING ) ) ;
-    public final void ruleImport() throws RecognitionException {
+    // PsiInternalIgnoreCaseImportsTestLanguage.g:103:1: ruleImport returns [Boolean current=false] : ( (lv_importURI_0_0= RULE_STRING ) ) ;
+    public final Boolean ruleImport() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_importURI_0_0=null;
 
         try {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:92:11: ( ( (lv_importURI_0_0= RULE_STRING ) ) )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:93:2: ( (lv_importURI_0_0= RULE_STRING ) )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:104:1: ( ( (lv_importURI_0_0= RULE_STRING ) ) )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:105:2: ( (lv_importURI_0_0= RULE_STRING ) )
             {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:93:2: ( (lv_importURI_0_0= RULE_STRING ) )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:94:3: (lv_importURI_0_0= RULE_STRING )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:105:2: ( (lv_importURI_0_0= RULE_STRING ) )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:106:3: (lv_importURI_0_0= RULE_STRING )
             {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:94:3: (lv_importURI_0_0= RULE_STRING )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:95:4: lv_importURI_0_0= RULE_STRING
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:106:3: (lv_importURI_0_0= RULE_STRING )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:107:4: lv_importURI_0_0= RULE_STRING
             {
 
             				markLeaf(elementTypeProvider.getImport_ImportURISTRINGTerminalRuleCall_0ElementType());
             			
             lv_importURI_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
+
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
 
             				doneLeaf(lv_importURI_0_0);
             			
@@ -279,24 +314,30 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleImport"
 
 
     // $ANTLR start "entryRuleElement"
-    // PsiInternalIgnoreCaseImportsTestLanguage.g:107:1: entryRuleElement : ruleElement EOF ;
-    public final void entryRuleElement() throws RecognitionException {
+    // PsiInternalIgnoreCaseImportsTestLanguage.g:125:1: entryRuleElement returns [Boolean current=false] : iv_ruleElement= ruleElement EOF ;
+    public final Boolean entryRuleElement() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleElement = null;
+
+
         try {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:107:17: ( ruleElement EOF )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:108:2: ruleElement EOF
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:125:49: (iv_ruleElement= ruleElement EOF )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:126:2: iv_ruleElement= ruleElement EOF
             {
              markComposite(elementTypeProvider.getElementElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleElement();
+            iv_ruleElement=ruleElement();
 
             state._fsp--;
 
+             current =iv_ruleElement; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -308,36 +349,46 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleElement"
 
 
     // $ANTLR start "ruleElement"
-    // PsiInternalIgnoreCaseImportsTestLanguage.g:113:1: ruleElement : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
-    public final void ruleElement() throws RecognitionException {
+    // PsiInternalIgnoreCaseImportsTestLanguage.g:132:1: ruleElement returns [Boolean current=false] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
+    public final Boolean ruleElement() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
         Token otherlv_1=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
+        Boolean lv_elements_3_0 = null;
+
 
         try {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:113:12: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:133:1: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:134:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
             {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:134:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:135:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
             {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:135:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:136:4: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:117:5: lv_name_0_0= RULE_ID
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:136:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:137:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType());
             				
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_0_0);
             				
@@ -347,7 +398,7 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
 
             }
 
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:126:3: ( (otherlv_1= RULE_ID ) )?
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:152:3: ( (otherlv_1= RULE_ID ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -356,11 +407,17 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalIgnoreCaseImportsTestLanguage.g:127:4: (otherlv_1= RULE_ID )
+                    // PsiInternalIgnoreCaseImportsTestLanguage.g:153:4: (otherlv_1= RULE_ID )
                     {
-                    // PsiInternalIgnoreCaseImportsTestLanguage.g:127:4: (otherlv_1= RULE_ID )
-                    // PsiInternalIgnoreCaseImportsTestLanguage.g:128:5: otherlv_1= RULE_ID
+                    // PsiInternalIgnoreCaseImportsTestLanguage.g:153:4: (otherlv_1= RULE_ID )
+                    // PsiInternalIgnoreCaseImportsTestLanguage.g:154:5: otherlv_1= RULE_ID
                     {
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					markLeaf(elementTypeProvider.getElement_ReferenceElementCrossReference_1_0ElementType());
                     				
@@ -384,7 +441,7 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
 
             			doneLeaf(otherlv_2);
             		
-            // PsiInternalIgnoreCaseImportsTestLanguage.g:144:3: ( (lv_elements_3_0= ruleElement ) )*
+            // PsiInternalIgnoreCaseImportsTestLanguage.g:176:3: ( (lv_elements_3_0= ruleElement ) )*
             loop4:
             do {
                 int alt4=2;
@@ -397,21 +454,25 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
 
                 switch (alt4) {
             	case 1 :
-            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:145:4: (lv_elements_3_0= ruleElement )
+            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:177:4: (lv_elements_3_0= ruleElement )
             	    {
-            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:145:4: (lv_elements_3_0= ruleElement )
-            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:146:5: lv_elements_3_0= ruleElement
+            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:177:4: (lv_elements_3_0= ruleElement )
+            	    // PsiInternalIgnoreCaseImportsTestLanguage.g:178:5: lv_elements_3_0= ruleElement
             	    {
 
             	    					markComposite(elementTypeProvider.getElement_ElementsElementParserRuleCall_3_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_7);
-            	    ruleElement();
+            	    lv_elements_3_0=ruleElement();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -445,7 +506,7 @@ public class PsiInternalIgnoreCaseImportsTestLanguageParser extends AbstractPsiA
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleElement"
 

@@ -49,18 +49,21 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleParserRuleFragments
-entryRuleParserRuleFragments:
+entryRuleParserRuleFragments returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParserRuleFragmentsElementType()); }
-	ruleParserRuleFragments
+	iv_ruleParserRuleFragments=ruleParserRuleFragments
+	{ $current=$iv_ruleParserRuleFragments.current; }
 	EOF;
 
 // Rule ParserRuleFragments
-ruleParserRuleFragments:
+ruleParserRuleFragments returns [Boolean current=false]
+:
 	(
 		(
 			{
 				precedeComposite(elementTypeProvider.getParserRuleFragments_ParserRuleFragmentsAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -80,6 +83,10 @@ ruleParserRuleFragments:
 						lv_element_2_0=rulePRFNamed
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -101,6 +108,10 @@ ruleParserRuleFragments:
 						lv_element_4_0=rulePRFNamed
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -113,6 +124,12 @@ ruleParserRuleFragments:
 				}
 				(
 					(
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							markLeaf(elementTypeProvider.getParserRuleFragments_RefPRFNamedCrossReference_1_1_3_0ElementType());
 						}
@@ -140,6 +157,10 @@ ruleParserRuleFragments:
 						lv_element_8_0=rulePRFNamedRefFirst
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -161,6 +182,10 @@ ruleParserRuleFragments:
 						lv_element_10_0=rulePRFNamedWithAction
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -182,6 +207,10 @@ ruleParserRuleFragments:
 						lv_element_12_0=rulePRFNamedWithFQN
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -203,6 +232,60 @@ ruleParserRuleFragments:
 						lv_element_14_0=rulePRFWithPredicate
 						{
 							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParserRuleFragments_NumberSignDigitOneDigitZeroKeyword_1_6_0ElementType());
+				}
+				otherlv_15='#10'
+				{
+					doneLeaf(otherlv_15);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParserRuleFragments_ElementPRFNamedRecursiveParserRuleCall_1_6_1_0ElementType());
+						}
+						lv_element_16_0=rulePRFNamedRecursive
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
+					)
+				)
+			)
+			    |
+			(
+				{
+					markLeaf(elementTypeProvider.getParserRuleFragments_NumberSignDigitOneDigitOneKeyword_1_7_0ElementType());
+				}
+				otherlv_17='#11'
+				{
+					doneLeaf(otherlv_17);
+				}
+				(
+					(
+						{
+							markComposite(elementTypeProvider.getParserRuleFragments_ElementPRFNamedRecursiveFragmentParserRuleCall_1_7_1_0ElementType());
+						}
+						lv_element_18_0=rulePRFNamedRecursiveFragment
+						{
+							doneComposite();
+							if(!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -212,19 +295,26 @@ ruleParserRuleFragments:
 ;
 
 //Entry rule entryRulePRFNamed
-entryRulePRFNamed:
+entryRulePRFNamed returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getPRFNamedElementType()); }
-	rulePRFNamed
+	iv_rulePRFNamed=rulePRFNamed
+	{ $current=$iv_rulePRFNamed.current; }
 	EOF;
 
 // Rule PRFNamed
-rulePRFNamed:
+rulePRFNamed returns [Boolean current=false]
+:
 	(
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getPRFNamed_PRFNamedFragmentParserRuleCall_0ElementType());
 		}
-		rulePRFNamedFragment
+		this_PRFNamedFragment_0=rulePRFNamedFragment[$current]
 		{
+			$current = $this_PRFNamedFragment_0.current;
 			doneComposite();
 		}
 		(
@@ -238,6 +328,12 @@ rulePRFNamed:
 				}
 				(
 					(
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							markLeaf(elementTypeProvider.getPRFNamed_RefPRFNamedCrossReference_1_0_1_0ElementType());
 						}
@@ -258,10 +354,15 @@ rulePRFNamed:
 					doneLeaf(otherlv_3);
 				}
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 					markComposite(elementTypeProvider.getPRFNamed_PRFNamedRefParserRuleCall_1_1_1ElementType());
 				}
-				rulePRFNamedRef
+				this_PRFNamedRef_4=rulePRFNamedRef[$current]
 				{
+					$current = $this_PRFNamedRef_4.current;
 					doneComposite();
 				}
 			)
@@ -269,17 +370,111 @@ rulePRFNamed:
 	)
 ;
 
-//Entry rule entryRulePRFNamedRefFirst
-entryRulePRFNamedRefFirst:
-	{ markComposite(elementTypeProvider.getPRFNamedRefFirstElementType()); }
-	rulePRFNamedRefFirst
+//Entry rule entryRulePRFNamedRecursive
+entryRulePRFNamedRecursive returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getPRFNamedRecursiveElementType()); }
+	iv_rulePRFNamedRecursive=rulePRFNamedRecursive
+	{ $current=$iv_rulePRFNamedRecursive.current; }
 	EOF;
 
-// Rule PRFNamedRefFirst
-rulePRFNamedRefFirst:
+// Rule PRFNamedRecursive
+rulePRFNamedRecursive returns [Boolean current=false]
+:
 	(
 		(
 			(
+				{
+					markLeaf(elementTypeProvider.getPRFNamedRecursive_NameIDTerminalRuleCall_0_0ElementType());
+				}
+				lv_name_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_name_0_0);
+				}
+			)
+		)
+		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
+			markComposite(elementTypeProvider.getPRFNamedRecursive_RecursiveFromFragmentParserRuleCall_1ElementType());
+		}
+		this_RecursiveFromFragment_1=ruleRecursiveFromFragment[$current]
+		{
+			$current = $this_RecursiveFromFragment_1.current;
+			doneComposite();
+		}
+	)
+;
+
+//Entry rule entryRulePRFNamedRecursiveFragment
+entryRulePRFNamedRecursiveFragment returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getPRFNamedRecursiveFragmentElementType()); }
+	iv_rulePRFNamedRecursiveFragment=rulePRFNamedRecursiveFragment
+	{ $current=$iv_rulePRFNamedRecursiveFragment.current; }
+	EOF;
+
+// Rule PRFNamedRecursiveFragment
+rulePRFNamedRecursiveFragment returns [Boolean current=false]
+:
+	(
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getPRFNamedRecursiveFragment_NameIDTerminalRuleCall_0_0ElementType());
+				}
+				lv_name_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_name_0_0);
+				}
+			)
+		)
+		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
+			markComposite(elementTypeProvider.getPRFNamedRecursiveFragment_RecursiveFragmentParserRuleCall_1ElementType());
+		}
+		this_RecursiveFragment_1=ruleRecursiveFragment[$current]
+		{
+			$current = $this_RecursiveFragment_1.current;
+			doneComposite();
+		}
+	)
+;
+
+//Entry rule entryRulePRFNamedRefFirst
+entryRulePRFNamedRefFirst returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getPRFNamedRefFirstElementType()); }
+	iv_rulePRFNamedRefFirst=rulePRFNamedRefFirst
+	{ $current=$iv_rulePRFNamedRefFirst.current; }
+	EOF;
+
+// Rule PRFNamedRefFirst
+rulePRFNamedRefFirst returns [Boolean current=false]
+:
+	(
+		(
+			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getPRFNamedRefFirst_RefPRFNamedCrossReference_0_0ElementType());
 				}
@@ -297,35 +492,44 @@ rulePRFNamedRefFirst:
 			doneLeaf(otherlv_1);
 		}
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getPRFNamedRefFirst_PRFNamedFragmentParserRuleCall_2ElementType());
 		}
-		rulePRFNamedFragment
+		this_PRFNamedFragment_2=rulePRFNamedFragment[$current]
 		{
+			$current = $this_PRFNamedFragment_2.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRulePRFNamedWithAction
-entryRulePRFNamedWithAction:
+entryRulePRFNamedWithAction returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getPRFNamedWithActionElementType()); }
-	rulePRFNamedWithAction
+	iv_rulePRFNamedWithAction=rulePRFNamedWithAction
+	{ $current=$iv_rulePRFNamedWithAction.current; }
 	EOF;
 
 // Rule PRFNamedWithAction
-rulePRFNamedWithAction:
+rulePRFNamedWithAction returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getPRFNamedWithAction_PRFNamedParserRuleCall_0ElementType());
 		}
-		rulePRFNamed
+		this_PRFNamed_0=rulePRFNamed
 		{
+			$current = $this_PRFNamed_0.current;
 			doneComposite();
 		}
 		(
 			{
 				precedeComposite(elementTypeProvider.getPRFNamedWithAction_PRFNamedWithActionPrevAction_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -335,6 +539,12 @@ rulePRFNamedWithAction:
 				}
 				lv_name_2_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_2_0);
 				}
 			)
@@ -342,6 +552,12 @@ rulePRFNamedWithAction:
 		(
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getPRFNamedWithAction_RefPRFNamedCrossReference_3_0_0ElementType());
 					}
@@ -353,6 +569,12 @@ rulePRFNamedWithAction:
 			)
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getPRFNamedWithAction_Ref2PRFNamedCrossReference_3_1_0ElementType());
 					}
@@ -367,13 +589,15 @@ rulePRFNamedWithAction:
 ;
 
 //Entry rule entryRulePRFNamedWithFQN
-entryRulePRFNamedWithFQN:
+entryRulePRFNamedWithFQN returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getPRFNamedWithFQNElementType()); }
-	rulePRFNamedWithFQN
+	iv_rulePRFNamedWithFQN=rulePRFNamedWithFQN
+	{ $current=$iv_rulePRFNamedWithFQN.current; }
 	EOF;
 
 // Rule PRFNamedWithFQN
-rulePRFNamedWithFQN:
+rulePRFNamedWithFQN returns [Boolean current=false]
+:
 	(
 		(
 			(
@@ -383,6 +607,10 @@ rulePRFNamedWithFQN:
 				lv_name_0_0=ruleFQN
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)
@@ -397,6 +625,12 @@ rulePRFNamedWithFQN:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markComposite(elementTypeProvider.getPRFNamedWithFQN_RefPRFNamedCrossReference_1_1_0ElementType());
 					}
 					ruleFQN2
@@ -410,25 +644,32 @@ rulePRFNamedWithFQN:
 ;
 
 //Entry rule entryRulePRFWithPredicate
-entryRulePRFWithPredicate:
+entryRulePRFWithPredicate returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getPRFWithPredicateElementType()); }
-	rulePRFWithPredicate
+	iv_rulePRFWithPredicate=rulePRFWithPredicate
+	{ $current=$iv_rulePRFWithPredicate.current; }
 	EOF;
 
 // Rule PRFWithPredicate
-rulePRFWithPredicate:
+rulePRFWithPredicate returns [Boolean current=false]
+:
 	(
 		{
+			if (!$current) {
+				associateWithSemanticElement();
+				$current = true;
+			}
 			markComposite(elementTypeProvider.getPRFWithPredicate_PRFNamedFragmentParserRuleCall_0ElementType());
 		}
-		rulePRFNamedFragment
+		this_PRFNamedFragment_0=rulePRFNamedFragment[$current]
 		{
+			$current = $this_PRFNamedFragment_0.current;
 			doneComposite();
 		}
 		(
 			((
 				'-'
-				rulePRFNamedRef
+				rulePRFNamedRef[null]
 			)
 			)=>
 			(
@@ -440,10 +681,15 @@ rulePRFWithPredicate:
 					doneLeaf(otherlv_1);
 				}
 				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 					markComposite(elementTypeProvider.getPRFWithPredicate_PRFNamedRefParserRuleCall_1_0_1ElementType());
 				}
-				rulePRFNamedRef
+				this_PRFNamedRef_2=rulePRFNamedRef[$current]
 				{
+					$current = $this_PRFNamedRef_2.current;
 					doneComposite();
 				}
 			)
@@ -452,13 +698,15 @@ rulePRFWithPredicate:
 ;
 
 //Entry rule entryRuleFQN
-entryRuleFQN:
+entryRuleFQN returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFQNElementType()); }
-	ruleFQN
+	iv_ruleFQN=ruleFQN
+	{ $current=$iv_ruleFQN.current; }
 	EOF;
 
 // Rule FQN
-ruleFQN:
+ruleFQN returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());
@@ -480,13 +728,15 @@ ruleFQN:
 ;
 
 //Entry rule entryRuleFQN2
-entryRuleFQN2:
+entryRuleFQN2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getFQN2ElementType()); }
-	ruleFQN2
+	iv_ruleFQN2=ruleFQN2
+	{ $current=$iv_ruleFQN2.current; }
 	EOF;
 
 // Rule FQN2
-ruleFQN2:
+ruleFQN2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getFQN2_IDTerminalRuleCall_0ElementType());
@@ -509,7 +759,8 @@ ruleFQN2:
 
 
 // Rule Suffix
-ruleSuffix:
+ruleSuffix returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSuffix_FullStopKeyword_0ElementType());
@@ -539,7 +790,8 @@ ruleSuffix:
 
 
 // Rule Suffix2
-ruleSuffix2:
+ruleSuffix2 returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getSuffix2_FullStopKeyword_0ElementType());
@@ -560,13 +812,20 @@ ruleSuffix2:
 
 
 // Rule PRFNamedFragment
-rulePRFNamedFragment:
+rulePRFNamedFragment[Boolean in_current]  returns [Boolean current=in_current]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getPRFNamedFragment_NameIDTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_ID
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -576,9 +835,16 @@ rulePRFNamedFragment:
 
 
 // Rule PRFNamedRef
-rulePRFNamedRef:
+rulePRFNamedRef[Boolean in_current]  returns [Boolean current=in_current]
+:
 	(
 		(
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				markLeaf(elementTypeProvider.getPRFNamedRef_RefPRFNamedCrossReference_0ElementType());
 			}
@@ -586,6 +852,182 @@ rulePRFNamedRef:
 			{
 				doneLeaf(otherlv_0);
 			}
+		)
+	)
+;
+
+
+// Rule RecursiveFromFragment
+ruleRecursiveFromFragment[Boolean in_current]  returns [Boolean current=in_current]
+:
+	(
+		(
+			{
+				markComposite(elementTypeProvider.getRecursiveFromFragment_PrevNamedInParenthesesParserRuleCall_0ElementType());
+			}
+			lv_prev_0_0=ruleNamedInParentheses
+			{
+				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
+		)
+	)
+;
+
+//Entry rule entryRuleNamedInParentheses
+entryRuleNamedInParentheses returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getNamedInParenthesesElementType()); }
+	iv_ruleNamedInParentheses=ruleNamedInParentheses
+	{ $current=$iv_ruleNamedInParentheses.current; }
+	EOF;
+
+// Rule NamedInParentheses
+ruleNamedInParentheses returns [Boolean current=false]
+:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getNamedInParentheses_LeftParenthesisKeyword_0_0ElementType());
+			}
+			otherlv_0='('
+			{
+				doneLeaf(otherlv_0);
+			}
+			{
+				markComposite(elementTypeProvider.getNamedInParentheses_NamedInParenthesesParserRuleCall_0_1ElementType());
+			}
+			this_NamedInParentheses_1=ruleNamedInParentheses
+			{
+				$current = $this_NamedInParentheses_1.current;
+				doneComposite();
+			}
+			{
+				markLeaf(elementTypeProvider.getNamedInParentheses_RightParenthesisKeyword_0_2ElementType());
+			}
+			otherlv_2=')'
+			{
+				doneLeaf(otherlv_2);
+			}
+		)
+		    |
+		(
+			(
+				{
+					precedeComposite(elementTypeProvider.getNamedInParentheses_PRFNamedAction_1_0ElementType());
+					doneComposite();
+					associateWithSemanticElement();
+				}
+			)
+			(
+				(
+					{
+						markLeaf(elementTypeProvider.getNamedInParentheses_NameIDTerminalRuleCall_1_1_0ElementType());
+					}
+					lv_name_4_0=RULE_ID
+					{
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
+						doneLeaf(lv_name_4_0);
+					}
+				)
+			)
+		)
+	)
+;
+
+
+// Rule RecursiveFragment
+ruleRecursiveFragment[Boolean in_current]  returns [Boolean current=in_current]
+:
+	(
+		(
+			{
+				markLeaf(elementTypeProvider.getRecursiveFragment_LeftParenthesisKeyword_0_0ElementType());
+			}
+			otherlv_0='('
+			{
+				doneLeaf(otherlv_0);
+			}
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+				markComposite(elementTypeProvider.getRecursiveFragment_RecursiveFragmentParserRuleCall_0_1ElementType());
+			}
+			this_RecursiveFragment_1=ruleRecursiveFragment[$current]
+			{
+				$current = $this_RecursiveFragment_1.current;
+				doneComposite();
+			}
+			{
+				markLeaf(elementTypeProvider.getRecursiveFragment_RightParenthesisKeyword_0_2ElementType());
+			}
+			otherlv_2=')'
+			{
+				doneLeaf(otherlv_2);
+			}
+		)
+		    |
+		(
+			(
+				{
+					markComposite(elementTypeProvider.getRecursiveFragment_PrevNamedByActionParserRuleCall_1_0ElementType());
+				}
+				lv_prev_3_0=ruleNamedByAction
+				{
+					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+			)
+		)
+	)
+;
+
+//Entry rule entryRuleNamedByAction
+entryRuleNamedByAction returns [Boolean current=false]:
+	{ markComposite(elementTypeProvider.getNamedByActionElementType()); }
+	iv_ruleNamedByAction=ruleNamedByAction
+	{ $current=$iv_ruleNamedByAction.current; }
+	EOF;
+
+// Rule NamedByAction
+ruleNamedByAction returns [Boolean current=false]
+:
+	(
+		(
+			{
+				precedeComposite(elementTypeProvider.getNamedByAction_PRFNamedAction_0ElementType());
+				doneComposite();
+				associateWithSemanticElement();
+			}
+		)
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getNamedByAction_NameIDTerminalRuleCall_1_0ElementType());
+				}
+				lv_name_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_name_1_0);
+				}
+			)
 		)
 	)
 ;

@@ -15,6 +15,7 @@ import com.intellij.debugger.impl.DebuggerManagerImpl;
 import com.intellij.debugger.impl.DebuggerSession;
 import com.intellij.debugger.impl.DebuggerStateManager;
 import com.intellij.debugger.impl.GenericDebuggerRunnerSettings;
+import com.intellij.debugger.impl.OutputChecker;
 import com.intellij.debugger.settings.DebuggerSettings;
 import com.intellij.debugger.ui.breakpoints.BreakpointManager;
 import com.intellij.debugger.ui.breakpoints.LineBreakpoint;
@@ -123,7 +124,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     TestCase.assertTrue(_isProcessTerminated);
   }
   
-  protected LineBreakpoint addLineBreakpoint(final VirtualFile file, final int line) {
+  protected LineBreakpoint<?> addLineBreakpoint(final VirtualFile file, final int line) {
     DebuggerManagerEx _instanceEx = DebuggerManagerImpl.getInstanceEx(this.myProject);
     final BreakpointManager breakpointManager = _instanceEx.getBreakpointManager();
     PsiManager _instance = PsiManager.getInstance(this.myProject);
@@ -355,17 +356,36 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   }
   
   private DebuggerSession createLocalProcess(final int transport, final JavaParameters myJavaParameters) throws ExecutionException, InterruptedException, InvocationTargetException {
+    abstract class __AbstractDebuggerTestCase_1 extends DebuggerTestCase {
+      public abstract DebuggerTestCase.MockConfiguration createMockConf();
+    }
+    
     final DebuggerSession[] debuggerSession = { null };
     DebuggerSettings _instance = DebuggerSettings.getInstance();
     _instance.DEBUGGER_TRANSPORT = transport;
     GenericDebuggerRunnerSettings debuggerRunnerSettings = new GenericDebuggerRunnerSettings();
     debuggerRunnerSettings.LOCAL = true;
     debuggerRunnerSettings.setDebugPort("3456");
+    __AbstractDebuggerTestCase_1 ___AbstractDebuggerTestCase_1 = new __AbstractDebuggerTestCase_1() {
+      @Override
+      protected String getTestAppPath() {
+        return null;
+      }
+      
+      @Override
+      protected OutputChecker initOutputChecker() {
+        return null;
+      }
+      
+      public DebuggerTestCase.MockConfiguration createMockConf() {
+        return new DebuggerTestCase.MockConfiguration();
+      }
+    };
+    final DebuggerTestCase.MockConfiguration profile = ___AbstractDebuggerTestCase_1.createMockConf();
     Executor _debugExecutorInstance = DefaultDebugExecutor.getDebugExecutorInstance();
     ExecutionEnvironmentBuilder _executionEnvironmentBuilder = new ExecutionEnvironmentBuilder(this.myProject, _debugExecutorInstance);
     ExecutionEnvironmentBuilder _runnerSettings = _executionEnvironmentBuilder.runnerSettings(debuggerRunnerSettings);
-    DebuggerTestCase.MockConfiguration _mockConfiguration = new DebuggerTestCase.MockConfiguration();
-    ExecutionEnvironmentBuilder _runProfile = _runnerSettings.runProfile(_mockConfiguration);
+    ExecutionEnvironmentBuilder _runProfile = _runnerSettings.runProfile(profile);
     ExecutionEnvironment environment = _runProfile.build();
     final JavaCommandLineState javaCommandLineState = new JavaCommandLineState(environment) {
       @Override

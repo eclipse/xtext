@@ -9,12 +9,14 @@ package org.eclipse.xtext.parser.fragments;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.PRFNamed;
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.PRFNamedWithAction;
@@ -256,6 +258,78 @@ public abstract class AbstractFragmentsTest extends AbstractXtextTests {
     PRFNamed _element_2 = fragments.getElement();
     PRFNamed _ref = _element_2.getRef();
     Assert.assertEquals(_element_1, _ref);
+  }
+  
+  @Test
+  public void testFragmentRecursive_01() {
+    final ParserRuleFragments fragments = this.parseAndValidate("#10 myName myPrev");
+    Assert.assertNotNull(fragments);
+    PRFNamed _element = fragments.getElement();
+    String _name = _element.getName();
+    Assert.assertEquals("myName", _name);
+    PRFNamed _element_1 = fragments.getElement();
+    final PRFNamed prev = ((PRFNamedWithAction) _element_1).getPrev();
+    String _name_1 = prev.getName();
+    Assert.assertEquals("myPrev", _name_1);
+    final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
+    String _text = node.getText();
+    Assert.assertEquals(" myPrev", _text);
+    final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
+    Assert.assertSame(prev, lookup);
+  }
+  
+  @Test
+  public void testFragmentRecursive_02() {
+    final ParserRuleFragments fragments = this.parseAndValidate("#10 myName ((myPrev))");
+    Assert.assertNotNull(fragments);
+    PRFNamed _element = fragments.getElement();
+    String _name = _element.getName();
+    Assert.assertEquals("myName", _name);
+    PRFNamed _element_1 = fragments.getElement();
+    final PRFNamed prev = ((PRFNamedWithAction) _element_1).getPrev();
+    String _name_1 = prev.getName();
+    Assert.assertEquals("myPrev", _name_1);
+    final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
+    String _text = node.getText();
+    Assert.assertEquals(" ((myPrev))", _text);
+    final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
+    Assert.assertSame(prev, lookup);
+  }
+  
+  @Test
+  public void testFragmentRecursive_03() {
+    final ParserRuleFragments fragments = this.parseAndValidate("#11 myName myPrev");
+    Assert.assertNotNull(fragments);
+    PRFNamed _element = fragments.getElement();
+    String _name = _element.getName();
+    Assert.assertEquals("myName", _name);
+    PRFNamed _element_1 = fragments.getElement();
+    final PRFNamed prev = ((PRFNamedWithAction) _element_1).getPrev();
+    String _name_1 = prev.getName();
+    Assert.assertEquals("myPrev", _name_1);
+    final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
+    String _text = node.getText();
+    Assert.assertEquals(" myPrev", _text);
+    final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
+    Assert.assertSame(prev, lookup);
+  }
+  
+  @Test
+  public void testFragmentRecursive_04() {
+    final ParserRuleFragments fragments = this.parseAndValidate("#11 myName ((myPrev))");
+    Assert.assertNotNull(fragments);
+    PRFNamed _element = fragments.getElement();
+    String _name = _element.getName();
+    Assert.assertEquals("myName", _name);
+    PRFNamed _element_1 = fragments.getElement();
+    final PRFNamed prev = ((PRFNamedWithAction) _element_1).getPrev();
+    String _name_1 = prev.getName();
+    Assert.assertEquals("myPrev", _name_1);
+    final ICompositeNode node = NodeModelUtils.findActualNodeFor(prev);
+    String _text = node.getText();
+    Assert.assertEquals("myPrev", _text);
+    final EObject lookup = NodeModelUtils.findActualSemanticObjectFor(node);
+    Assert.assertSame(prev, lookup);
   }
   
   protected ParserRuleFragments parseAndValidate(final CharSequence s) {

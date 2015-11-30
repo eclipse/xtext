@@ -11,6 +11,7 @@ import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.base.Objects;
@@ -18,6 +19,11 @@ import com.google.common.base.Objects;
 public class XtendCompilerMojoIT {
 
 	private static String ROOT = "/it/compile";
+	
+	@BeforeClass
+	static public void setUpOnce() throws IOException, VerificationException {
+		MavenVerifierUtil.checkMavenExecutable(ROOT);
+	}
 
 	@Test
 	public void fileSystemAccess() throws Exception {

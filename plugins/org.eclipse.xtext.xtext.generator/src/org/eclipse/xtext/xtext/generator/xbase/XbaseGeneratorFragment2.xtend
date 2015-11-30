@@ -152,8 +152,6 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 						'org.eclipse.xtext.xbase.ui.jvmmodel.outline.JvmOutlineNodeElementOpener'.typeRef)
 				.addTypeToType('org.eclipse.xtext.ui.editor.GlobalURIEditorOpener'.typeRef, 
 						'org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener'.typeRef)
-				.addTypeToType('org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer'.typeRef, 
-						'org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer'.typeRef)
 				.addTypeToType('org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation'.typeRef, 
 						new TypeReference('org.eclipse.xtext.common.types.ui.query', 'IJavaSearchParticipation.No'))
 				// DerivedMemberAwareEditorOpener

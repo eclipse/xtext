@@ -32,6 +32,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
+import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.JavaProjectFactory;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
@@ -45,7 +46,6 @@ import org.eclipse.xtext.xtext.wizard.TextFile;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.io.Resources;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -112,6 +112,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		factory.addProjectNatures(JavaCore.NATURE_ID);
 		factory.addBuilderIds(JavaCore.BUILDER_ID);
 		factory.addFolders(Lists.newArrayList(descriptor.getSourceFolders()));
+		factory.setJreContainerEntry(JREContainerProvider.getJREContainerEntry(descriptor.getBree()));
 		if (needsM2eIntegration(descriptor)) {
 			factory.setDefaultOutput("target/classes");
 			if (!descriptor.isEclipsePluginProject()) {
@@ -188,7 +189,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 			IFile created = fileWriter.writeToFile("", path);
 			InputStream stream = null;
 			try {
-				stream = Resources.newInputStreamSupplier(url).getInput();
+				stream = url.openStream();
 				created.setContents(stream, IResource.FORCE, new NullProgressMonitor());
 			} catch (Exception e) {
 				LOG.error("Failed to create binary file " + created.getFullPath().toOSString(), e);

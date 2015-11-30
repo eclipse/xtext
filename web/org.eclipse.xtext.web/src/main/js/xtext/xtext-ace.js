@@ -39,8 +39,12 @@
  *     Whether validation should be enabled.
  * loadFromServer = true {Boolean}
  *     Whether to load the editor content from the server.
- * parent {String | DOMElement}
+ * parent = 'xtext-editor' {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
+ * parentClass = 'xtext-editor' {String}
+ *     If the 'parent' option is not given, this option is used to find elements that match the given class name.
+ * position {String}
+ *     If this option is set, the 'position' CSS attribute of the created editor is set accordingly.
  * resourceId {String}
  *     The identifier of the resource displayed in the text editor; this option is sent to the server to
  *     communicate required information on the respective resource.
@@ -84,43 +88,35 @@ define([
 	exports.createEditor = function(options) {
 		if (!options)
 			options = {};
-		if (!options.parent)
-			options.parent = 'xtext-editor';
 		
-		var parentsSpec;
-		if (jQuery.isArray(options.parent)) {
-			parentsSpec = options.parent;
+		var query;
+		if (jQuery.type(options.parent) === 'string') {
+			query = jQuery('#' + options.parent, options.document);
+		} else if (options.parent) {
+			query = jQuery(options.parent);
+		} else if (jQuery.type(options.parentClass) === 'string') {
+			query = jQuery('.' + options.parent, options.document);
 		} else {
-			parentsSpec = [options.parent];
-		}
-		var parents = [];
-		var doc = options.document || document;
-		for (var i = 0; i < parentsSpec.length; i++) {
-			var spec = parentsSpec[i];
-			if (typeof(spec) === 'string') {
-				var element = doc.getElementById(spec);
-				if (element)
-					parents.push(element);
-				else
-					parents.concat(doc.getElementsByClassName(options.parent));
-			} else {
-				parents.push(spec);
-			}
+			query = jQuery('#xtext-editor', options.document);
+			if (query.length == 0)
+				query = jQuery('.xtext-editor', options.document);
 		}
 		
 		var editors = [];
-		for (var i = 0; i < parents.length; i++) {
-			var editor = ace.edit(parents[i]);
+		query.each(function(index, parent) {
+			var editor = ace.edit(parent);
 			editor.$blockScrolling = Infinity;
+			if (options.position)
+				jQuery(parent).css('position', options.position);
 			
-			var editorOptions = ServiceBuilder.mergeOptions(parents[i], options);
+			var editorOptions = ServiceBuilder.mergeParentOptions(parent, options);
 			exports.createServices(editor, editorOptions);
 			if (editorOptions.theme)
 				editor.setTheme(editorOptions.theme);
 			else
 				editor.setTheme('ace/theme/eclipse');
-			editors[i] = editor;
-		}
+			editors[index] = editor;
+		});
 		
 		if (editors.length == 1)
 			return editors[0];
@@ -147,8 +143,46 @@ define([
 		};
 		var serviceBuilder = new AceServiceBuilder(editor, xtextServices);
 		serviceBuilder.createServices();
+		xtextServices.serviceBuilder = serviceBuilder;
 		editor.xtextServices = xtextServices;
 		return xtextServices;
+	}
+	
+	/**
+	 * Remove all services and listeners that have been previously created with createServices(editor, options).
+	 */
+	exports.removeServices = function(editor) {
+		if (!editor.xtextServices)
+			return;
+		var services = editor.xtextServices;
+		var session = editor.getSession();
+		if (services.modelChangeListener)
+			editor.off('change', services.modelChangeListener);
+		if (services.changeCursorListener)
+			editor.getSelection().off('changeCursor', services.changeCursorListener);
+		if (editor.commands) {
+			if (services.options.enableSaveAction)
+				editor.commands.removeCommand('xtext-save');
+			if (services.options.enableFormattingAction)
+				editor.commands.removeCommand('xtext-format');
+		}
+		if (services.contentAssistService)
+			editor.setOptions({ enableBasicAutocompletion: false });
+		var editorContext = services.editorContext;
+		var annotations = editorContext._annotations;
+		if (annotations) {
+			for (var i = 0; i < annotations.length; i++) {
+				session.removeMarker(annotations[i].markerId);
+			}
+			session.setAnnotations([]);
+		}
+		var occurrenceMarkers = editorContext._occurrenceMarkers;
+		if (occurrenceMarkers) {
+			for (var i = 0; i < occurrenceMarkers.length; i++)  {
+				session.removeMarker(occurrenceMarkers[i]);
+			}
+		}
+		delete editor.xtextServices;
 	}
 	
 	/**
@@ -180,7 +214,7 @@ define([
 		var textUpdateDelay = services.options.textUpdateDelay;
 		if (!textUpdateDelay)
 			textUpdateDelay = 500;
-		function modelChangeListener(event) {
+		services.modelChangeListener = function(event) {
 			if (!event._xtext_init)
 				editorContext.setDirty(true);
 			if (editorContext._modelChangeTimeout)
@@ -193,8 +227,8 @@ define([
 			}, textUpdateDelay);
 		}
 		if (!services.options.resourceId || !services.options.loadFromServer)
-			modelChangeListener({_xtext_init: true});
-		this.editor.on('change', modelChangeListener);
+			services.modelChangeListener({_xtext_init: true});
+		this.editor.on('change', services.modelChangeListener);
 	}
 	
 	/**
@@ -204,7 +238,7 @@ define([
 		var services = this.services;
 		if (services.options.enableSaveAction && this.editor.commands) {
 			this.editor.commands.addCommand({
-				name: 'save',
+				name: 'xtext-save',
 				bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
 				exec: function(editor) {
 					services.saveResource();
@@ -240,8 +274,7 @@ define([
 				});
 			}
 		}
-		languageTools.setCompleters([completer]);
-		this.editor.setOptions({ enableBasicAutocompletion: true });
+		this.editor.setOptions({ enableBasicAutocompletion: [completer] });
 	}
 	
 	/**
@@ -302,7 +335,7 @@ define([
 		var editor = this.editor;
 		var session = editor.getSession();
 		var self = this;
-		editor.getSelection().on('changeCursor', function() {
+		services.changeCursorListener = function() {
 			if (editorContext._selectionChangeTimeout) {
 				clearTimeout(editorContext._selectionChangeTimeout);
 			}
@@ -331,7 +364,8 @@ define([
 					}
 				});
 			}, selectionUpdateDelay);
-		});
+		};
+		editor.getSelection().on('changeCursor', services.changeCursorListener);
 	}
 		
 	/**
@@ -341,7 +375,7 @@ define([
 		var services = this.services;
 		if (services.options.enableFormattingAction && this.editor.commands) {
 			this.editor.commands.addCommand({
-				name: 'format',
+				name: 'xtext-format',
 				bindKey: {win: 'Ctrl-Shift-F', mac: 'Command-Shift-F'},
 				exec: function(editor) {
 					services.format();

@@ -24,138 +24,11 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultSemanticHighlightingCalculator.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator">
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="doProvideHighlightingFor(XtextResource, IHighlightedPositionAcceptor, CancelIndicator)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="highlightElement(EObject, IHighlightedPositionAcceptor, CancelIndicator)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="highlightElementRecursively(EObject, IHighlightedPositionAcceptor, CancelIndicator)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="highlightFeature(IHighlightedPositionAcceptor, EObject, EStructuralFeature, String[])"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="highlightNode(IHighlightedPositionAcceptor, INode, String[])"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="highlightTasks(XtextResource, IHighlightedPositionAcceptor)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="provideHighlightingFor(XtextResource, IHighlightedPositionAcceptor, CancelIndicator)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DefaultSemanticHighlightingCalculator"/>
-                <message_argument value="searchAndHighlightElements(XtextResource, IHighlightedPositionAcceptor, CancelIndicator)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor">
-        <filter id="576720909">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor$DeprecationHelper">
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DeprecationHelper"/>
-                <message_argument value="upcast(IHighlightedPositionAcceptor)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="DeprecationHelper"/>
-                <message_argument value="cast(IHighlightedPositionAcceptor)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator$NewToOldDelegate">
-        <filter id="643850349">
-            <message_arguments>
-                <message_argument value="ISemanticHighlightingCalculator"/>
-                <message_argument value="NewToOldDelegate"/>
-                <message_argument value="NewToOldDelegate(ISemanticHighlightingCalculator)"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/LightweightPosition.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition">
         <filter id="338792546">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition"/>
                 <message_argument value="compareTo(LightweightPosition)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition"/>
-                <message_argument value="getIds()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition"/>
-                <message_argument value="getLength()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition"/>
-                <message_argument value="getOffset()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition"/>
-                <message_argument value="getTimestamp()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition"/>
-                <message_argument value="setLength(int)"/>
-            </message_arguments>
-        </filter>
-        <filter id="576720909">
-            <message_arguments>
-                <message_argument value="LightweightPosition"/>
-                <message_argument value="LightweightPosition"/>
             </message_arguments>
         </filter>
     </resource>
@@ -164,49 +37,6 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition.IntToStringArray"/>
                 <message_argument value="compareTo(LightweightPosition.IntToStringArray)"/>
-            </message_arguments>
-        </filter>
-        <filter id="576720909">
-            <message_arguments>
-                <message_argument value="IntToStringArray"/>
-                <message_argument value="IntToStringArray"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/MergingHighlightedPositionAcceptor.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.MergingHighlightedPositionAcceptor">
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="LightweightPosition"/>
-                <message_argument value="MergingHighlightedPositionAcceptor"/>
-                <message_argument value="newPosition(int, int, int, LightweightPositionIntToStringArray[])"/>
-            </message_arguments>
-        </filter>
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="LightweightPosition"/>
-                <message_argument value="MergingHighlightedPositionAcceptor"/>
-                <message_argument value="newPosition(int, int, int, String[])"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IHighlightedPositionAcceptor"/>
-                <message_argument value="MergingHighlightedPositionAcceptor"/>
-                <message_argument value="provideHighlightingFor(XtextResource, IHighlightedPositionAcceptor, CancelIndicator)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IntToStringArray"/>
-                <message_argument value="MergingHighlightedPositionAcceptor"/>
-                <message_argument value="newPosition(int, int, int, LightweightPositionIntToStringArray[])"/>
-            </message_arguments>
-        </filter>
-        <filter id="643850349">
-            <message_arguments>
-                <message_argument value="ISemanticHighlightingCalculator"/>
-                <message_argument value="MergingHighlightedPositionAcceptor"/>
-                <message_argument value="MergingHighlightedPositionAcceptor(ISemanticHighlightingCalculator)"/>
             </message_arguments>
         </filter>
     </resource>

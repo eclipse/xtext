@@ -49,19 +49,22 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleSequence
-entryRuleSequence:
+entryRuleSequence returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getSequenceElementType()); }
-	ruleSequence
+	iv_ruleSequence=ruleSequence
+	{ $current=$iv_ruleSequence.current; }
 	EOF;
 
 // Rule Sequence
-ruleSequence:
+ruleSequence returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getSequence_AdditionParserRuleCall_0ElementType());
 		}
-		ruleAddition
+		this_Addition_0=ruleAddition
 		{
+			$current = $this_Addition_0.current;
 			doneComposite();
 		}
 		(
@@ -69,6 +72,7 @@ ruleSequence:
 				{
 					precedeComposite(elementTypeProvider.getSequence_SequenceExpressionsAction_1_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			(
@@ -79,6 +83,10 @@ ruleSequence:
 					lv_expressions_2_0=ruleAddition
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -87,19 +95,22 @@ ruleSequence:
 ;
 
 //Entry rule entryRuleAddition
-entryRuleAddition:
+entryRuleAddition returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAdditionElementType()); }
-	ruleAddition
+	iv_ruleAddition=ruleAddition
+	{ $current=$iv_ruleAddition.current; }
 	EOF;
 
 // Rule Addition
-ruleAddition:
+ruleAddition returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getAddition_MultiplicationParserRuleCall_0ElementType());
 		}
-		ruleMultiplication
+		this_Multiplication_0=ruleMultiplication
 		{
+			$current = $this_Multiplication_0.current;
 			doneComposite();
 		}
 		(
@@ -107,6 +118,7 @@ ruleAddition:
 				{
 					precedeComposite(elementTypeProvider.getAddition_OpValuesAction_1_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			(
@@ -119,6 +131,12 @@ ruleAddition:
 						{
 							doneLeaf(lv_operator_2_1);
 						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						    |
 						{
 							markLeaf(elementTypeProvider.getAddition_OperatorHyphenMinusKeyword_1_1_0_1ElementType());
@@ -126,6 +144,12 @@ ruleAddition:
 						lv_operator_2_2='-'
 						{
 							doneLeaf(lv_operator_2_2);
+						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -138,6 +162,10 @@ ruleAddition:
 					lv_values_3_0=ruleMultiplication
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -146,19 +174,22 @@ ruleAddition:
 ;
 
 //Entry rule entryRuleMultiplication
-entryRuleMultiplication:
+entryRuleMultiplication returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMultiplicationElementType()); }
-	ruleMultiplication
+	iv_ruleMultiplication=ruleMultiplication
+	{ $current=$iv_ruleMultiplication.current; }
 	EOF;
 
 // Rule Multiplication
-ruleMultiplication:
+ruleMultiplication returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getMultiplication_TermParserRuleCall_0ElementType());
 		}
-		ruleTerm
+		this_Term_0=ruleTerm
 		{
+			$current = $this_Term_0.current;
 			doneComposite();
 		}
 		(
@@ -166,6 +197,7 @@ ruleMultiplication:
 				{
 					precedeComposite(elementTypeProvider.getMultiplication_OpValuesAction_1_0ElementType());
 					doneComposite();
+					associateWithSemanticElement();
 				}
 			)
 			(
@@ -178,6 +210,12 @@ ruleMultiplication:
 						{
 							doneLeaf(lv_operator_2_1);
 						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						    |
 						{
 							markLeaf(elementTypeProvider.getMultiplication_OperatorSolidusKeyword_1_1_0_1ElementType());
@@ -185,6 +223,12 @@ ruleMultiplication:
 						lv_operator_2_2='/'
 						{
 							doneLeaf(lv_operator_2_2);
+						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
 						}
 					)
 				)
@@ -197,6 +241,10 @@ ruleMultiplication:
 					lv_values_3_0=ruleTerm
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -205,46 +253,58 @@ ruleMultiplication:
 ;
 
 //Entry rule entryRuleTerm
-entryRuleTerm:
+entryRuleTerm returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTermElementType()); }
-	ruleTerm
+	iv_ruleTerm=ruleTerm
+	{ $current=$iv_ruleTerm.current; }
 	EOF;
 
 // Rule Term
-ruleTerm:
+ruleTerm returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getTerm_AtomParserRuleCall_0ElementType());
 		}
-		ruleAtom
+		this_Atom_0=ruleAtom
 		{
+			$current = $this_Atom_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getTerm_ParensParserRuleCall_1ElementType());
 		}
-		ruleParens
+		this_Parens_1=ruleParens
 		{
+			$current = $this_Parens_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleAtom
-entryRuleAtom:
+entryRuleAtom returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAtomElementType()); }
-	ruleAtom
+	iv_ruleAtom=ruleAtom
+	{ $current=$iv_ruleAtom.current; }
 	EOF;
 
 // Rule Atom
-ruleAtom:
+ruleAtom returns [Boolean current=false]
+:
 	(
 		(
 			{
 				markLeaf(elementTypeProvider.getAtom_NameIDTerminalRuleCall_0ElementType());
 			}
 			lv_name_0_0=RULE_ID
+			{
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+			}
 			{
 				doneLeaf(lv_name_0_0);
 			}
@@ -253,13 +313,15 @@ ruleAtom:
 ;
 
 //Entry rule entryRuleParens
-entryRuleParens:
+entryRuleParens returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getParensElementType()); }
-	ruleParens
+	iv_ruleParens=ruleParens
+	{ $current=$iv_ruleParens.current; }
 	EOF;
 
 // Rule Parens
-ruleParens:
+ruleParens returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getParens_LeftParenthesisKeyword_0ElementType());
@@ -271,8 +333,9 @@ ruleParens:
 		{
 			markComposite(elementTypeProvider.getParens_AdditionParserRuleCall_1ElementType());
 		}
-		ruleAddition
+		this_Addition_1=ruleAddition
 		{
+			$current = $this_Addition_1.current;
 			doneComposite();
 		}
 		{

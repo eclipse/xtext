@@ -10,6 +10,7 @@ package org.eclipse.xtext.example.homeautomation.formatting2;
 import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -621,6 +622,9 @@ public class RuleEngineFormatter extends XbaseFormatter {
       return;
     } else if (device instanceof XImportSection) {
       _format((XImportSection)device, document);
+      return;
+    } else if (device instanceof EObject) {
+      _format((EObject)device, document);
       return;
     } else if (device == null) {
       _format((Void)null, document);

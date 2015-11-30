@@ -19,7 +19,7 @@ import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.util.JREContainerProvider
 import org.eclipse.xtext.ui.util.PluginProjectFactory
-import org.eclipse.xtext.xbase.compiler.JavaVersion
+import org.eclipse.xtext.util.JavaVersion
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

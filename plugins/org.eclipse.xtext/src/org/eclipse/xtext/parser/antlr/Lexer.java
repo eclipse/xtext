@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.FailedPredicateException;
 import org.antlr.runtime.NoViableAltException;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
@@ -69,7 +70,8 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 			}
 			catch (RecognitionException re) {
 				reportError(re);
-				if (re instanceof NoViableAltException) {
+				if (re instanceof NoViableAltException ||
+					re instanceof FailedPredicateException) {
 					recover(re);
 				}
 				// create token that holds mismatched char

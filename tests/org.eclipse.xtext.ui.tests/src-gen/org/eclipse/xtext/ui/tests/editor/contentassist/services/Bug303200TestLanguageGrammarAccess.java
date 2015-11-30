@@ -338,7 +338,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//PostfixExpression
 		public RuleCall getExpressionPostfixExpressionParserRuleCall_1_1_0() { return cExpressionPostfixExpressionParserRuleCall_1_1_0; }
 
-		//(';' | LT)
+		//';' | LT
 		public Alternatives getAlternatives_1_2() { return cAlternatives_1_2; }
 
 		//';'

@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
-import java.util.jar.Attributes;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -48,6 +47,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorException;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
@@ -330,6 +330,21 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           if (((manifest == null) || (metaInf == null))) {
             manifestIter.remove();
           } else {
+            boolean _and = false;
+            TypeReference _activator = manifest.getActivator();
+            boolean _tripleEquals = (_activator == null);
+            if (!_tripleEquals) {
+              _and = false;
+            } else {
+              IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
+              ManifestAccess _manifest = _eclipsePlugin.getManifest();
+              boolean _tripleEquals_1 = (manifest == _manifest);
+              _and = _tripleEquals_1;
+            }
+            if (_and) {
+              TypeReference _eclipsePluginActivator = this.naming.getEclipsePluginActivator();
+              manifest.setActivator(_eclipsePluginActivator);
+            }
             String _path = manifest.getPath();
             final URI uri = metaInf.getURI(_path);
             boolean _containsKey = uri2Manifest.containsKey(uri);
@@ -352,18 +367,6 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           if (_tripleEquals) {
             String _third = entry.getThird();
             manifest.setBundleName(_third);
-          }
-          IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
-          ManifestAccess _manifest = _eclipsePlugin.getManifest();
-          boolean _tripleEquals_1 = (manifest == _manifest);
-          if (_tripleEquals_1) {
-            final XtextGeneratorLanguage firstLanguage = IterableExtensions.<XtextGeneratorLanguage>head(this.languageConfigs);
-            TypeReference _eclipsePluginActivator = null;
-            if (this.naming!=null) {
-              Grammar _grammar = firstLanguage.getGrammar();
-              _eclipsePluginActivator=this.naming.getEclipsePluginActivator(_grammar);
-            }
-            manifest.setActivator(_eclipsePluginActivator);
           }
           String _path = manifest.getPath();
           boolean _isFile = metaInf.isFile(_path);
@@ -411,16 +414,14 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       if (!_tripleNotEquals) {
         _and = false;
       } else {
-        Attributes _mainAttributes = merge.getMainAttributes();
-        boolean _containsKey = _mainAttributes.containsKey(MergeableManifest.BUNDLE_ACTIVATOR);
-        boolean _not = (!_containsKey);
-        _and = _not;
+        String _bundleActivator = merge.getBundleActivator();
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_bundleActivator);
+        _and = _isNullOrEmpty;
       }
       if (_and) {
-        Attributes _mainAttributes_1 = merge.getMainAttributes();
         TypeReference _activator_1 = manifest.getActivator();
         String _name = _activator_1.getName();
-        _mainAttributes_1.put(MergeableManifest.BUNDLE_ACTIVATOR, _name);
+        merge.setBundleActivator(_name);
       }
       boolean _isModified = merge.isModified();
       if (_isModified) {

@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.tests.compiler
 
 import org.junit.Test
 
-import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
+import static org.eclipse.xtext.util.JavaVersion.*
 
 /**
  * @author Miro Spoenemann - Initial contribution and API

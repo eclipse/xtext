@@ -136,7 +136,7 @@ import java.util.concurrent.RejectedExecutionException
 					&& !Thread.currentThread.interrupted) {
 				
 				// Start a thread for background work and pass the lock to this new thread
-				executorService1.submit [
+				executorService1.submit([
 					try {
 						if (asynchronousWork !== null) {
 							asynchronousWork.cancelIndicator = synchronizer
@@ -154,11 +154,11 @@ import java.util.concurrent.RejectedExecutionException
 					} finally {
 						synchronizer.releaseLock()
 					}
-				]
+				] as Runnable)
 				currentThreadOwnsLock = false
 				
 				// Start another thread for precomputation
-				executorService2.submit [
+				executorService2.submit([
 					try {
 						performPrecomputation(synchronizer)
 					} catch (VirtualMachineError error) {
@@ -173,7 +173,7 @@ import java.util.concurrent.RejectedExecutionException
 							LOG.error('Error during precomputation.', throwable)
 						}
 					}
-				]
+				] as Runnable)
 				
 			}
 		} catch (RejectedExecutionException ree) {

@@ -234,8 +234,13 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	public static ICompositeNode findActualNodeFor(/* @Nullable */ EObject semanticObject) {
 		ICompositeNode node = getNode(semanticObject);
 		if (node != null) {
-			while (GrammarUtil.containingAssignment(node.getGrammarElement()) == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
-				node = node.getParent();
+			while(GrammarUtil.containingAssignment(node.getGrammarElement()) == null) {
+				ICompositeNode parent = node.getParent();
+				if (parent != null && !parent.hasDirectSemanticElement() && !GrammarUtil.isEObjectFragmentRuleCall(parent.getGrammarElement())) {
+					node = parent;
+				} else {
+					break;
+				}
 			}
 		}
 		return node;
@@ -260,6 +265,11 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 			return findActualSemanticObjectFor(parent);
 		Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
 		if (assignment != null) {
+			if (GrammarUtil.isEObjectFragmentRule(GrammarUtil.containingRule(assignment))) {
+				EObject result = findActualSemanticObjectInChildren(node, grammarElement);
+				if (result != null)
+					return result;
+			}
 			if (parent.hasDirectSemanticElement())
 				return findActualSemanticObjectFor(parent);
 			INode sibling = parent.getFirstChild();

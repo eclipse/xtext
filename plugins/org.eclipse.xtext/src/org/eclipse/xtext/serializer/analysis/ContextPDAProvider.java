@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
@@ -73,6 +74,11 @@ public class ContextPDAProvider implements IContextPDAProvider {
 			return false;
 		}
 	}
+
+	private static Logger LOG = Logger.getLogger(ContextPDAProvider.class);
+
+	@Inject
+	protected SerializerPDAElementFactory factory;
 
 	@Inject
 	private IGrammarPDAProvider grammarPdaProvider;
@@ -164,9 +170,6 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		precedent.getFollowers().add(follower);
 	}
 
-	@Inject
-	protected SerializerPDAElementFactory factory;
-
 	protected SerializerPDA extract(ISerState last) {
 		SerializerPDA result = factory.create(null, null);
 		HashMap<Pair<AbstractElement, SerStateType>, SerializerPDAState> oldToNew = Maps.newHashMap();
@@ -202,13 +205,17 @@ public class ContextPDAProvider implements IContextPDAProvider {
 			if (actions.isEmpty()) {
 				result.put(context, pda);
 			} else {
-				SerializerPDA rulePda = extract(pda.getStop());
-				result.put(context, rulePda);
-				for (ISerState state : actions) {
-					Action action = (Action) state.getGrammarElement();
-					SerializerPDA actionPda = extract(state);
-					actionPdas.put(action, actionPda);
-					actionContexts.put(action, context);
+				try {
+					SerializerPDA rulePda = extract(pda.getStop());
+					result.put(context, rulePda);
+					for (ISerState state : actions) {
+						Action action = (Action) state.getGrammarElement();
+						SerializerPDA actionPda = extract(state);
+						actionPdas.put(action, actionPda);
+						actionContexts.put(action, context);
+					}
+				} catch (Exception x) {
+					LOG.error("Error extracting PDA for action in context '" + context + "': " + x.getMessage(), x);
 				}
 			}
 		}

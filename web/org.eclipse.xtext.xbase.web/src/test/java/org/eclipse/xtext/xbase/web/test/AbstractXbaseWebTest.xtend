@@ -21,7 +21,7 @@ import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup
 import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.util.Modules2
-import org.eclipse.xtext.web.server.ISessionStore
+import org.eclipse.xtext.web.server.ISession
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.xbase.web.test.languages.EntitiesWebModule
@@ -77,12 +77,12 @@ class AbstractXbaseWebTest extends AbstractXtextTests {
 	}
 	
 	protected def getService(Map<String, String> parameters) {
-		getService(parameters, new HashMapSessionStore)
+		getService(parameters, new HashMapSession)
 	}
 	
-	protected def getService(Map<String, String> parameters, ISessionStore sessionStore) {
-		val requestData = new MockRequestData(parameters)
-		dispatcher.getService(requestData, sessionStore)
+	protected def getService(Map<String, String> parameters, ISession session) {
+		val serviceContext = new MockServiceContext(parameters, session)
+		dispatcher.getService(serviceContext)
 	}
 	
 }

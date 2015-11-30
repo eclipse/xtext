@@ -244,7 +244,7 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 		if (Strings.isEmpty(namespace))
 			return null;
 		QualifiedName importedNamespace = qualifiedNameConverter.toQualifiedName(namespace);
-		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
+		if (importedNamespace == null || importedNamespace.isEmpty()) {
 			return null;
 		}
 		boolean hasWildCard = ignoreCase ? 

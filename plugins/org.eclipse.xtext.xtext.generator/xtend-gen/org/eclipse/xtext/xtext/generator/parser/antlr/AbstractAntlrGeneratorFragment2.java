@@ -147,6 +147,8 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
     CharSequence _readTextFile = fsa.readTextFile(_javaPath);
     final String content = _readTextFile.toString();
     AntlrLexerSplitter splitter = new AntlrLexerSplitter(content);
+    int _casesPerSpecialStateSwitch = this.options.getCasesPerSpecialStateSwitch();
+    splitter.setCasesPerSpecialStateSwitch(_casesPerSpecialStateSwitch);
     String _javaPath_1 = lexer.getJavaPath();
     String _transform = splitter.transform();
     fsa.generateFile(_javaPath_1, _transform);

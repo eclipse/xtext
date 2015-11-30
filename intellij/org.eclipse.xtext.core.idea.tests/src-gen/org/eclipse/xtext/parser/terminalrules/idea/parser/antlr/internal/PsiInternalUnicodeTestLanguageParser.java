@@ -68,18 +68,24 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalUnicodeTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalUnicodeTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalUnicodeTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalUnicodeTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalUnicodeTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalUnicodeTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -91,19 +97,24 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalUnicodeTestLanguage.g:58:1: ruleModel : ( (lv_strings_0_0= ruleAbstractString ) )* ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalUnicodeTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (lv_strings_0_0= ruleAbstractString ) )* ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_strings_0_0 = null;
+
+
         try {
-            // PsiInternalUnicodeTestLanguage.g:58:10: ( ( (lv_strings_0_0= ruleAbstractString ) )* )
-            // PsiInternalUnicodeTestLanguage.g:59:2: ( (lv_strings_0_0= ruleAbstractString ) )*
+            // PsiInternalUnicodeTestLanguage.g:60:1: ( ( (lv_strings_0_0= ruleAbstractString ) )* )
+            // PsiInternalUnicodeTestLanguage.g:61:2: ( (lv_strings_0_0= ruleAbstractString ) )*
             {
-            // PsiInternalUnicodeTestLanguage.g:59:2: ( (lv_strings_0_0= ruleAbstractString ) )*
+            // PsiInternalUnicodeTestLanguage.g:61:2: ( (lv_strings_0_0= ruleAbstractString ) )*
             loop1:
             do {
                 int alt1=2;
@@ -116,21 +127,25 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalUnicodeTestLanguage.g:60:3: (lv_strings_0_0= ruleAbstractString )
+            	    // PsiInternalUnicodeTestLanguage.g:62:3: (lv_strings_0_0= ruleAbstractString )
             	    {
-            	    // PsiInternalUnicodeTestLanguage.g:60:3: (lv_strings_0_0= ruleAbstractString )
-            	    // PsiInternalUnicodeTestLanguage.g:61:4: lv_strings_0_0= ruleAbstractString
+            	    // PsiInternalUnicodeTestLanguage.g:62:3: (lv_strings_0_0= ruleAbstractString )
+            	    // PsiInternalUnicodeTestLanguage.g:63:4: lv_strings_0_0= ruleAbstractString
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_StringsAbstractStringParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleAbstractString();
+            	    lv_strings_0_0=ruleAbstractString();
 
             	    state._fsp--;
 
 
             	    				doneComposite();
+            	    				if(!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
             	    			
 
             	    }
@@ -154,24 +169,30 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleAbstractString"
-    // PsiInternalUnicodeTestLanguage.g:73:1: entryRuleAbstractString : ruleAbstractString EOF ;
-    public final void entryRuleAbstractString() throws RecognitionException {
+    // PsiInternalUnicodeTestLanguage.g:79:1: entryRuleAbstractString returns [Boolean current=false] : iv_ruleAbstractString= ruleAbstractString EOF ;
+    public final Boolean entryRuleAbstractString() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAbstractString = null;
+
+
         try {
-            // PsiInternalUnicodeTestLanguage.g:73:24: ( ruleAbstractString EOF )
-            // PsiInternalUnicodeTestLanguage.g:74:2: ruleAbstractString EOF
+            // PsiInternalUnicodeTestLanguage.g:79:56: (iv_ruleAbstractString= ruleAbstractString EOF )
+            // PsiInternalUnicodeTestLanguage.g:80:2: iv_ruleAbstractString= ruleAbstractString EOF
             {
              markComposite(elementTypeProvider.getAbstractStringElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAbstractString();
+            iv_ruleAbstractString=ruleAbstractString();
 
             state._fsp--;
 
+             current =iv_ruleAbstractString; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -183,19 +204,26 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAbstractString"
 
 
     // $ANTLR start "ruleAbstractString"
-    // PsiInternalUnicodeTestLanguage.g:79:1: ruleAbstractString : ( ruleGString | ruleQuotedString ) ;
-    public final void ruleAbstractString() throws RecognitionException {
+    // PsiInternalUnicodeTestLanguage.g:86:1: ruleAbstractString returns [Boolean current=false] : (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString ) ;
+    public final Boolean ruleAbstractString() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_GString_0 = null;
+
+        Boolean this_QuotedString_1 = null;
+
+
         try {
-            // PsiInternalUnicodeTestLanguage.g:79:19: ( ( ruleGString | ruleQuotedString ) )
-            // PsiInternalUnicodeTestLanguage.g:80:2: ( ruleGString | ruleQuotedString )
+            // PsiInternalUnicodeTestLanguage.g:87:1: ( (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString ) )
+            // PsiInternalUnicodeTestLanguage.g:88:2: (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString )
             {
-            // PsiInternalUnicodeTestLanguage.g:80:2: ( ruleGString | ruleQuotedString )
+            // PsiInternalUnicodeTestLanguage.g:88:2: (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -213,34 +241,36 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalUnicodeTestLanguage.g:81:3: ruleGString
+                    // PsiInternalUnicodeTestLanguage.g:89:3: this_GString_0= ruleGString
                     {
 
                     			markComposite(elementTypeProvider.getAbstractString_GStringParserRuleCall_0ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleGString();
+                    this_GString_0=ruleGString();
 
                     state._fsp--;
 
 
+                    			current = this_GString_0;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalUnicodeTestLanguage.g:89:3: ruleQuotedString
+                    // PsiInternalUnicodeTestLanguage.g:98:3: this_QuotedString_1= ruleQuotedString
                     {
 
                     			markComposite(elementTypeProvider.getAbstractString_QuotedStringParserRuleCall_1ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleQuotedString();
+                    this_QuotedString_1=ruleQuotedString();
 
                     state._fsp--;
 
 
+                    			current = this_QuotedString_1;
                     			doneComposite();
                     		
 
@@ -259,24 +289,30 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAbstractString"
 
 
     // $ANTLR start "entryRuleGString"
-    // PsiInternalUnicodeTestLanguage.g:100:1: entryRuleGString : ruleGString EOF ;
-    public final void entryRuleGString() throws RecognitionException {
+    // PsiInternalUnicodeTestLanguage.g:110:1: entryRuleGString returns [Boolean current=false] : iv_ruleGString= ruleGString EOF ;
+    public final Boolean entryRuleGString() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleGString = null;
+
+
         try {
-            // PsiInternalUnicodeTestLanguage.g:100:17: ( ruleGString EOF )
-            // PsiInternalUnicodeTestLanguage.g:101:2: ruleGString EOF
+            // PsiInternalUnicodeTestLanguage.g:110:49: (iv_ruleGString= ruleGString EOF )
+            // PsiInternalUnicodeTestLanguage.g:111:2: iv_ruleGString= ruleGString EOF
             {
              markComposite(elementTypeProvider.getGStringElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleGString();
+            iv_ruleGString=ruleGString();
 
             state._fsp--;
 
+             current =iv_ruleGString; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -288,31 +324,39 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleGString"
 
 
     // $ANTLR start "ruleGString"
-    // PsiInternalUnicodeTestLanguage.g:106:1: ruleGString : ( (lv_name_0_0= RULE_GERMAN_STRING ) ) ;
-    public final void ruleGString() throws RecognitionException {
+    // PsiInternalUnicodeTestLanguage.g:117:1: ruleGString returns [Boolean current=false] : ( (lv_name_0_0= RULE_GERMAN_STRING ) ) ;
+    public final Boolean ruleGString() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalUnicodeTestLanguage.g:106:12: ( ( (lv_name_0_0= RULE_GERMAN_STRING ) ) )
-            // PsiInternalUnicodeTestLanguage.g:107:2: ( (lv_name_0_0= RULE_GERMAN_STRING ) )
+            // PsiInternalUnicodeTestLanguage.g:118:1: ( ( (lv_name_0_0= RULE_GERMAN_STRING ) ) )
+            // PsiInternalUnicodeTestLanguage.g:119:2: ( (lv_name_0_0= RULE_GERMAN_STRING ) )
             {
-            // PsiInternalUnicodeTestLanguage.g:107:2: ( (lv_name_0_0= RULE_GERMAN_STRING ) )
-            // PsiInternalUnicodeTestLanguage.g:108:3: (lv_name_0_0= RULE_GERMAN_STRING )
+            // PsiInternalUnicodeTestLanguage.g:119:2: ( (lv_name_0_0= RULE_GERMAN_STRING ) )
+            // PsiInternalUnicodeTestLanguage.g:120:3: (lv_name_0_0= RULE_GERMAN_STRING )
             {
-            // PsiInternalUnicodeTestLanguage.g:108:3: (lv_name_0_0= RULE_GERMAN_STRING )
-            // PsiInternalUnicodeTestLanguage.g:109:4: lv_name_0_0= RULE_GERMAN_STRING
+            // PsiInternalUnicodeTestLanguage.g:120:3: (lv_name_0_0= RULE_GERMAN_STRING )
+            // PsiInternalUnicodeTestLanguage.g:121:4: lv_name_0_0= RULE_GERMAN_STRING
             {
 
             				markLeaf(elementTypeProvider.getGString_NameGERMAN_STRINGTerminalRuleCall_0ElementType());
             			
             lv_name_0_0=(Token)match(input,RULE_GERMAN_STRING,FollowSets000.FOLLOW_2); 
 
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
+
             				doneLeaf(lv_name_0_0);
             			
 
@@ -331,24 +375,30 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleGString"
 
 
     // $ANTLR start "entryRuleQuotedString"
-    // PsiInternalUnicodeTestLanguage.g:121:1: entryRuleQuotedString : ruleQuotedString EOF ;
-    public final void entryRuleQuotedString() throws RecognitionException {
+    // PsiInternalUnicodeTestLanguage.g:139:1: entryRuleQuotedString returns [Boolean current=false] : iv_ruleQuotedString= ruleQuotedString EOF ;
+    public final Boolean entryRuleQuotedString() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleQuotedString = null;
+
+
         try {
-            // PsiInternalUnicodeTestLanguage.g:121:22: ( ruleQuotedString EOF )
-            // PsiInternalUnicodeTestLanguage.g:122:2: ruleQuotedString EOF
+            // PsiInternalUnicodeTestLanguage.g:139:54: (iv_ruleQuotedString= ruleQuotedString EOF )
+            // PsiInternalUnicodeTestLanguage.g:140:2: iv_ruleQuotedString= ruleQuotedString EOF
             {
              markComposite(elementTypeProvider.getQuotedStringElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleQuotedString();
+            iv_ruleQuotedString=ruleQuotedString();
 
             state._fsp--;
 
+             current =iv_ruleQuotedString; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -360,30 +410,38 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleQuotedString"
 
 
     // $ANTLR start "ruleQuotedString"
-    // PsiInternalUnicodeTestLanguage.g:127:1: ruleQuotedString : ( (lv_name_0_0= RULE_STRING ) ) ;
-    public final void ruleQuotedString() throws RecognitionException {
+    // PsiInternalUnicodeTestLanguage.g:146:1: ruleQuotedString returns [Boolean current=false] : ( (lv_name_0_0= RULE_STRING ) ) ;
+    public final Boolean ruleQuotedString() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalUnicodeTestLanguage.g:127:17: ( ( (lv_name_0_0= RULE_STRING ) ) )
-            // PsiInternalUnicodeTestLanguage.g:128:2: ( (lv_name_0_0= RULE_STRING ) )
+            // PsiInternalUnicodeTestLanguage.g:147:1: ( ( (lv_name_0_0= RULE_STRING ) ) )
+            // PsiInternalUnicodeTestLanguage.g:148:2: ( (lv_name_0_0= RULE_STRING ) )
             {
-            // PsiInternalUnicodeTestLanguage.g:128:2: ( (lv_name_0_0= RULE_STRING ) )
-            // PsiInternalUnicodeTestLanguage.g:129:3: (lv_name_0_0= RULE_STRING )
+            // PsiInternalUnicodeTestLanguage.g:148:2: ( (lv_name_0_0= RULE_STRING ) )
+            // PsiInternalUnicodeTestLanguage.g:149:3: (lv_name_0_0= RULE_STRING )
             {
-            // PsiInternalUnicodeTestLanguage.g:129:3: (lv_name_0_0= RULE_STRING )
-            // PsiInternalUnicodeTestLanguage.g:130:4: lv_name_0_0= RULE_STRING
+            // PsiInternalUnicodeTestLanguage.g:149:3: (lv_name_0_0= RULE_STRING )
+            // PsiInternalUnicodeTestLanguage.g:150:4: lv_name_0_0= RULE_STRING
             {
 
             				markLeaf(elementTypeProvider.getQuotedString_NameSTRINGTerminalRuleCall_0ElementType());
             			
             lv_name_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
+
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
 
             				doneLeaf(lv_name_0_0);
             			
@@ -403,7 +461,7 @@ public class PsiInternalUnicodeTestLanguageParser extends AbstractPsiAntlrParser
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleQuotedString"
 

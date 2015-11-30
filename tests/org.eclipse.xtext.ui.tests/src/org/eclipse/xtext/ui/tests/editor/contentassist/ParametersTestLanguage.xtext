@@ -22,6 +22,8 @@ ParserRuleParameters: {ParserRuleParameters}
   | '#10' (scenario=Scenario4<true> | scenario=Scenario2<false> 'trailing'?)
   | '#11' (scenario=Scenario4<false> | scenario=Scenario2<true> 'trailing'?)
   | '#12' (scenario=Scenario4<false> | scenario=Scenario2<false> 'trailing'?)
+  | '#13' scenario=Scenario5<false>
+  | '#14' scenario=Scenario5<true>
   )
 ;
 
@@ -41,6 +43,12 @@ Scenario3<AllowKeyword> returns Scenario:
 
 Scenario4<AllowKeyword> returns Scenario:
 	=>second=IdOrKeyword<AllowKeyword> 'scenario4'
+;
+
+Scenario5<Include> returns Scenario:
+	  <Include> {Scenario} 'include'
+	| {Scenario} 'trailing'
+	| {Scenario} 'scenario5' (<Include> 'include')? first=IdOrKeyword<true> second=IdOrKeyword<false>
 ;
 
 IdOrKeyword<Keyword>:

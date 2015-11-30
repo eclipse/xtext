@@ -26,6 +26,7 @@ import com.google.common.annotations.GwtCompatible;
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) < 0</code>
 	 */
+	@Pure /* not guaranteed, since compareTo() is invoked */
 	@Inline("($1.compareTo($2) < 0)")
 	public static <C> boolean operator_lessThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) < 0;
@@ -40,6 +41,7 @@ import com.google.common.annotations.GwtCompatible;
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) > 0</code>
 	 */
+	@Pure /* not guaranteed, since compareTo() is invoked */
 	@Inline("($1.compareTo($2) > 0)")
 	public static <C> boolean operator_greaterThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) > 0;
@@ -54,6 +56,7 @@ import com.google.common.annotations.GwtCompatible;
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) <= 0</code>
 	 */
+	@Pure /* not guaranteed, since compareTo() is invoked */
 	@Inline("($1.compareTo($2) <= 0)")
 	public static <C> boolean operator_lessEqualsThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) <= 0;
@@ -68,6 +71,7 @@ import com.google.common.annotations.GwtCompatible;
 	 *            the value to compare with
 	 * @return <code>left.compareTo(right) >= 0</code>
 	 */
+	@Pure /* not guaranteed, since compareTo() is invoked */
 	@Inline("($1.compareTo($2) >= 0)")
 	public static <C> boolean operator_greaterEqualsThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) >= 0;
@@ -83,6 +87,7 @@ import com.google.common.annotations.GwtCompatible;
 	 * @return <code>left.compareTo(right)</code>
 	 * @since 2.4
 	 */
+	@Pure /* not guaranteed, since compareTo() is invoked */
 	@Inline("($1.compareTo($2))")
 	public static <C> int operator_spaceship(Comparable<? super C> left, C right) {
 		return left.compareTo(right);

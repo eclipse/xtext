@@ -23,6 +23,7 @@ import org.eclipse.xtext.resource.XtextResource;
 @Accessors
 @SuppressWarnings("all")
 public abstract class GenericFormatter<T extends EObject> extends AbstractFormatter2 {
+  @Override
   protected void _format(final EObject obj, final IFormattableDocument document) {
     FormatterRequest _request = this.getRequest();
     ITextRegionAccess _textRegionAccess = _request.getTextRegionAccess();

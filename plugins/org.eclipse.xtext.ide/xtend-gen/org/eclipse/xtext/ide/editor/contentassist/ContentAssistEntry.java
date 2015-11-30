@@ -66,6 +66,12 @@ public class ContentAssistEntry {
    */
   private final ArrayList<TextRegion> editPositions = new ArrayList<TextRegion>();
   
+  /**
+   * The EObject or IEObjectDescription for which this entry has been created, if any.
+   * This field is <em>not</em> serialized when the entry is sent over a communication channel.
+   */
+  private transient Object source;
+  
   @Pure
   public String getPrefix() {
     return this.prefix;
@@ -119,6 +125,15 @@ public class ContentAssistEntry {
   @Pure
   public ArrayList<TextRegion> getEditPositions() {
     return this.editPositions;
+  }
+  
+  @Pure
+  public Object getSource() {
+    return this.source;
+  }
+  
+  public void setSource(final Object source) {
+    this.source = source;
   }
   
   @Override

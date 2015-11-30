@@ -1,7 +1,7 @@
 def runtimeSuites = ['xtext', 'xtend'].collect{it + '-runtime-tests'}
 def ideSuites = ['xtext', 'xtend'].collect{it + '-ide-tests'}
 def java8Suites= ['xtend-runtime-tests-java8']
-def intellijSuites = ['intellij-tests']
+def intellijSuites = ['intellij-tests','intellij-eap-tests']
 def onPushSuites = runtimeSuites + ideSuites + java8Suites + intellijSuites
 
 def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
@@ -124,7 +124,12 @@ branches.each { branch ->
 							builder.installationName = 'buckminster-4.4'
 						}
 						if (generatorSuites.contains(job.suite)) {
-							params += '\n-DECLIPSE.TARGET.ALIAS=${ECLIPSE_TARGET_ALIAS}\n-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/'
+						
+							if(branch.name == 'master') {
+								params += '\n-DECLIPSE.TARGET.ALIAS=Stable\n-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/'
+							} else {
+								params += '\n-DECLIPSE.TARGET.ALIAS=Stable\n-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/'
+							}
 							builder.installationName = 'buckminster-mwe2-headless'
 						}
 						builder.commands = testScripts[job.suite]

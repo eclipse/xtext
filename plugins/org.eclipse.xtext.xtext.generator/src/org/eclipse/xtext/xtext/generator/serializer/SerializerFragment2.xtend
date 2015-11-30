@@ -54,7 +54,6 @@ import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -86,10 +85,9 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	@Inject extension IGrammarConstraintProvider
 	@Inject DebugGraphGenerator debugGraphGenerator
 	@Inject FileAccessFactory fileAccessFactory
-	@Inject CodeConfig codeConfig
 	
 	@Accessors boolean generateDebugData = false
-	@Accessors boolean generateSupportForDeprecatedContextObject = false
+	@Accessors boolean generateSupportForDeprecatedContextEObject = false
 	
 	boolean detectSyntheticTerminals = true
 	
@@ -140,7 +138,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 		
 		generateAbstractSemanticSequencer()
 		generateAbstractSyntacticSequencer()
-		if (generateStub) {
+		if (isGenerateStub) {
 			generateSemanticSequencer()
 			generateSyntacticSequencer()
 		}
@@ -154,7 +152,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	}
 	
 	protected def generateSemanticSequencer() {
-		if (codeConfig.preferXtendStubs) {
+		if (generateXtendStub) {
 			fileAccessFactory.createXtendFile(grammar.semanticSequencerClass, '''
 				class «grammar.semanticSequencerClass.simpleName» extends «grammar.abstractSemanticSequencerClass» {
 				}
@@ -170,7 +168,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	private def unassignedCalledTokenRuleName(AbstractRule rule) '''get«rule.name»Token'''
 	
 	protected def generateSyntacticSequencer() {
-		if (codeConfig.preferXtendStubs) {
+		if (generateXtendStub) {
 			fileAccessFactory.createXtendFile(grammar.syntacticSequencerClass, '''
 				class «grammar.syntacticSequencerClass.simpleName» extends «grammar.abstractSyntacticSequencerClass» {
 					«IF detectSyntheticTerminals»
@@ -212,7 +210,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 		val localConstraints = grammar.grammarConstraints
 		val superConstraints = grammar.superGrammar.grammarConstraints
 		val newLocalConstraints = localConstraints.filter[type !== null && !superConstraints.contains(it)].toSet
-		val clazz = if (generateStub) grammar.abstractSemanticSequencerClass else grammar.semanticSequencerClass
+		val clazz = if (isGenerateStub) grammar.abstractSemanticSequencerClass else grammar.semanticSequencerClass
 		val superClazz = if (localConstraints.exists[superConstraints.contains(it)]) 
 				grammar.usedGrammars.head.semanticSequencerClass
 			else
@@ -221,7 +219,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 		javaFile.resourceSet = language.resourceSet
 		
 		javaFile.content = '''
-			public «IF generateStub»abstract «ENDIF»class «clazz.simpleName» extends «superClazz» {
+			public «IF isGenerateStub»abstract «ENDIF»class «clazz.simpleName» extends «superClazz» {
 			
 				@«Inject»
 				private «grammar.grammarAccess» grammarAccess;
@@ -398,7 +396,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 				«ENDIF»
 			}
 			
-			«IF generateSupportForDeprecatedContextObject»
+			«IF generateSupportForDeprecatedContextEObject»
 				@Deprecated
 				protected void sequence_«c.simpleName»(«EObject» context, «c.type» semanticObject) {
 					sequence_«c.simpleName»(createContext(context, semanticObject), semanticObject);
@@ -408,12 +406,12 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	}
 	
 	protected def generateAbstractSyntacticSequencer() {
-		val clazz = if (generateStub) grammar.abstractSyntacticSequencerClass else grammar.syntacticSequencerClass
+		val clazz = if (isGenerateStub) grammar.abstractSyntacticSequencerClass else grammar.syntacticSequencerClass
 		val javaFile = fileAccessFactory.createGeneratedJavaFile(clazz)
 		javaFile.resourceSet = language.resourceSet
 		
 		javaFile.content = '''
-			public «IF generateStub»abstract «ENDIF»class «clazz.simpleName» extends «AbstractSyntacticSequencer» {
+			public «IF isGenerateStub»abstract «ENDIF»class «clazz.simpleName» extends «AbstractSyntacticSequencer» {
 			
 				protected «grammar.grammarAccess» grammarAccess;
 				«FOR group : allAmbiguousTransitionsBySyntax»
@@ -507,9 +505,9 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 				return '''
 					/**
 					 * Synthetic terminal rule. The concrete syntax is to be specified by clients.
-					«IF !generateStub» * Defaults to the empty string.«ENDIF»
+					«IF !isGenerateStub» * Defaults to the empty string.«ENDIF»
 					 */
-					protected «IF generateStub»abstract «ENDIF»String «rule.unassignedCalledTokenRuleName»(«EObject» semanticObject, «RuleCall» ruleCall, «INode» node)«IF generateStub»;«ELSE» { return ""; }«ENDIF»
+					protected «IF isGenerateStub»abstract «ENDIF»String «rule.unassignedCalledTokenRuleName»(«EObject» semanticObject, «RuleCall» ruleCall, «INode» node)«IF isGenerateStub»;«ELSE» { return ""; }«ENDIF»
 				'''
 			}
 		}

@@ -18,36 +18,59 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.xtext.ConditionEvaluator;
 import org.eclipse.xtext.xtext.RuleNames;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
+ * Computes the Antlr method names that need to be invoked to continue the
+ * follow element computation for content proposals. It is used if a previous
+ * round produced follow elements with a lookahead bigger than 1. The result
+ * of {@link #getRequiredRuleNames(Param)} is the list of methods that need
+ * need to be invoked to force the parser in one or the other direction at the
+ * current decision point.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.9
  */
 @Singleton
 public class RequiredRuleNameComputer {
 
-	public static abstract class Param {
-		private String ruleName;
-		private List<Integer> paramStack;
-		private AbstractElement elementToParse;
+	private static final String[][] EMPTY_ARRAY = new String[0][];
 
+	public static abstract class Param {
+		public String ruleName;
+		public List<Integer> paramStack;
+		public AbstractElement elementToParse;
+
+		private Set<Parameter> assignedParameters;
+		
 		protected Param(String ruleName, List<Integer> paramStack, AbstractElement elementToParse) {
 			this.ruleName = ruleName;
 			this.paramStack = paramStack;
 			this.elementToParse = elementToParse;
 		}
 		
-		protected abstract String getBaseRuleName(AbstractElement element);
+		public Set<Parameter> getAssignedParametes() {
+			if (assignedParameters == null) {
+				return assignedParameters = getAssignedParameters(elementToParse, paramStack);
+			}
+			return assignedParameters;
+		}
+		
+		public abstract String getBaseRuleName(AbstractElement element);
 	}
 	
 	@Inject
 	private RuleNames ruleNames;
 	
 	public String[][] getRequiredRuleNames(Param param) {
+		if (isFiltered(param)) {
+			return EMPTY_ARRAY;
+		}
 		AbstractElement elementToParse = param.elementToParse;
 		String ruleName = param.ruleName;
 		if (ruleName == null) {
@@ -56,7 +79,7 @@ public class RequiredRuleNameComputer {
 				if (call.getRule() instanceof ParserRule) {
 					String antlrRuleName = ruleNames.getAntlrRuleName(call.getRule());
 					if (!call.getArguments().isEmpty()) {
-						Set<Parameter> context = getAssignedParameters(elementToParse, param.paramStack);
+						Set<Parameter> context = param.getAssignedParametes();
 						Set<Parameter> arguments = getAssignedArguments(call, context);
 						int config = getParameterConfig(arguments);
 						antlrRuleName = ruleNames.getAntlrRuleName(call.getRule(), config);
@@ -64,14 +87,14 @@ public class RequiredRuleNameComputer {
 					return new String[][] {{ antlrRuleName }};
 				}
 			}
-			return new String[0][];
+			return EMPTY_ARRAY;
 		}
 		String adjustedRuleName = adjustRuleName(ruleName, param);
 		if (!(GrammarUtil.isOptionalCardinality(elementToParse) || GrammarUtil.isOneOrMoreCardinality(elementToParse))) {
 			return new String[][] {{ adjustedRuleName }};
 		}
 		if ((elementToParse.eContainer() instanceof Group)) {
-			List<AbstractElement> tokens = ((Group) elementToParse.eContainer()).getElements();
+			List<AbstractElement> tokens = getFilteredElements(((Group) elementToParse.eContainer()).getElements(), param);
 			int idx = tokens.indexOf(elementToParse) + 1;
 			if (idx != tokens.size()) {
 				String secondRule = param.getBaseRuleName((AbstractElement) elementToParse.eContainer());
@@ -85,7 +108,35 @@ public class RequiredRuleNameComputer {
 		return new String[][] {{ ruleName }};
 	}
 	
-	private String adjustRuleName(String ruleName, Param param) {
+	protected List<AbstractElement> getFilteredElements(List<AbstractElement> elements, Param param) {
+		List<AbstractElement> result = Lists.newArrayListWithExpectedSize(elements.size());
+		for(AbstractElement element: elements) {
+			if (!isFiltered(element, param)) {
+				result.add(element);
+			}
+		}
+		return result;
+	}
+
+	protected boolean isFiltered(Param param) {
+		return isFiltered(param.elementToParse, param);
+	}
+	
+	protected boolean isFiltered(AbstractElement canddiate, Param param) {
+		if (canddiate instanceof Group) {
+			Group group = (Group) canddiate;
+			if (group.getGuardCondition() != null) {
+				Set<Parameter> context = param.getAssignedParametes();
+				ConditionEvaluator evaluator = new ConditionEvaluator(context);
+				if (!evaluator.evaluate(group.getGuardCondition())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	protected String adjustRuleName(String ruleName, Param param) {
 		AbstractElement elementToParse = param.elementToParse;
 		Set<Parameter> context = getAssignedParameters(elementToParse, param.paramStack);
 		if (!context.isEmpty()) {
@@ -100,6 +151,14 @@ public class RequiredRuleNameComputer {
 			return result;
 		}
 		return ruleName;
+	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	protected RuleNames getRuleNames() {
+		return ruleNames;
 	}
 	
 }

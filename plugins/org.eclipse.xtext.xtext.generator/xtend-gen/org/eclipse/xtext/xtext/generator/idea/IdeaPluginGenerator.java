@@ -10,9 +10,10 @@ package org.eclipse.xtext.xtext.generator.idea;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 import java.io.InputStream;
@@ -27,8 +28,12 @@ import java.util.Set;
 import org.antlr.runtime.Token;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -36,14 +41,14 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
@@ -57,7 +62,7 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
@@ -69,14 +74,13 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.model.project.ISubProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
-public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
+public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -257,10 +261,10 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
     IXtextGeneratorLanguage _language_2 = this.getLanguage();
     GuiceModuleAccess _ideaGenModule = _language_2.getIdeaGenModule();
     bindFactory.contributeTo(_ideaGenModule);
-    XtendFileAccess _compileStandaloneSetup = this.compileStandaloneSetup(grammar);
-    XtendFileAccess _compileIdeaSetup = this.compileIdeaSetup(grammar);
+    JavaFileAccess _compileStandaloneSetup = this.compileStandaloneSetup(grammar);
+    JavaFileAccess _compileIdeaSetup = this.compileIdeaSetup(grammar);
     JavaFileAccess _compileCompletionContributor = this.compileCompletionContributor(grammar);
-    XtendFileAccess _compileFileType = this.compileFileType(grammar);
+    JavaFileAccess _compileFileType = this.compileFileType(grammar);
     JavaFileAccess _compileFacetConfiguration = this.compileFacetConfiguration(grammar);
     JavaFileAccess _compileColorSettingsPage = this.compileColorSettingsPage(grammar);
     final Procedure1<JavaFileAccess> _function = new Procedure1<JavaFileAccess>() {
@@ -272,7 +276,7 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         it.writeTo(_src);
       }
     };
-    IterableExtensions.forEach(Collections.<JavaFileAccess>unmodifiableList(CollectionLiterals.<JavaFileAccess>newArrayList(_compileStandaloneSetup, _compileIdeaSetup, _compileCompletionContributor, _compileFileType, _compileFacetConfiguration, _compileColorSettingsPage)), _function);
+    IterableExtensions.<JavaFileAccess>forEach(Collections.<JavaFileAccess>unmodifiableList(CollectionLiterals.<JavaFileAccess>newArrayList(_compileStandaloneSetup, _compileIdeaSetup, _compileCompletionContributor, _compileFileType, _compileFacetConfiguration, _compileColorSettingsPage)), _function);
     TextFileAccess _compileServicesISetup = this.compileServicesISetup(grammar);
     JavaFileAccess _compileAbstractCompletionContributor = this.compileAbstractCompletionContributor(grammar);
     JavaFileAccess _compileLanguage = this.compileLanguage(grammar);
@@ -1215,50 +1219,103 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
     return this.fileAccessFactory.createJavaFile(_abstractFileType, _client);
   }
   
-  public XtendFileAccess compileFileType(final Grammar grammar) {
-    TypeReference _fileType = this._ideaPluginClassNames.getFileType(grammar);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("class ");
-        TypeReference _fileType = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-        String _simpleName = _fileType.getSimpleName();
-        _builder.append(_simpleName, "");
-        _builder.append(" extends ");
-        TypeReference _abstractFileType = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractFileType(grammar);
-        _builder.append(_abstractFileType, "");
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("public static final ");
-        TypeReference _fileType_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-        String _simpleName_1 = _fileType_1.getSimpleName();
-        _builder.append(_simpleName_1, "\t");
-        _builder.append(" INSTANCE = new ");
-        TypeReference _fileType_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
-        String _simpleName_2 = _fileType_2.getSimpleName();
-        _builder.append(_simpleName_2, "\t");
-        _builder.append("()");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("new() {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("super(");
-        TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
-        _builder.append(_ideaLanguage, "\t\t");
-        _builder.append(".INSTANCE)");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-      }
-    };
-    return this.fileAccessFactory.createXtendFile(_fileType, _client);
+  public JavaFileAccess compileFileType(final Grammar grammar) {
+    JavaFileAccess _xifexpression = null;
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (_isGenerateXtendStub) {
+      TypeReference _fileType = this._ideaPluginClassNames.getFileType(grammar);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("class ");
+          TypeReference _fileType = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
+          String _simpleName = _fileType.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" extends ");
+          TypeReference _abstractFileType = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractFileType(grammar);
+          _builder.append(_abstractFileType, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("public static final ");
+          TypeReference _fileType_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
+          String _simpleName_1 = _fileType_1.getSimpleName();
+          _builder.append(_simpleName_1, "\t");
+          _builder.append(" INSTANCE = new ");
+          TypeReference _fileType_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
+          String _simpleName_2 = _fileType_2.getSimpleName();
+          _builder.append(_simpleName_2, "\t");
+          _builder.append("()");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("new() {");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("super(");
+          TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
+          _builder.append(_ideaLanguage, "\t\t");
+          _builder.append(".INSTANCE)");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createXtendFile(_fileType, _client);
+    } else {
+      TypeReference _fileType_1 = this._ideaPluginClassNames.getFileType(grammar);
+      StringConcatenationClient _client_1 = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("public class ");
+          TypeReference _fileType = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
+          String _simpleName = _fileType.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" extends ");
+          TypeReference _abstractFileType = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractFileType(grammar);
+          _builder.append(_abstractFileType, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("public static final ");
+          TypeReference _fileType_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
+          String _simpleName_1 = _fileType_1.getSimpleName();
+          _builder.append(_simpleName_1, "\t");
+          _builder.append(" INSTANCE = new ");
+          TypeReference _fileType_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
+          String _simpleName_2 = _fileType_2.getSimpleName();
+          _builder.append(_simpleName_2, "\t");
+          _builder.append("();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public ");
+          TypeReference _fileType_3 = IdeaPluginGenerator.this._ideaPluginClassNames.getFileType(grammar);
+          String _simpleName_3 = _fileType_3.getSimpleName();
+          _builder.append(_simpleName_3, "\t");
+          _builder.append("() {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("super(");
+          TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
+          _builder.append(_ideaLanguage, "\t\t");
+          _builder.append(".INSTANCE);");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createJavaFile(_fileType_1, _client_1);
+    }
+    return _xifexpression;
   }
   
   public JavaFileAccess compileLanguage(final Grammar grammar) {
@@ -1312,92 +1369,201 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
     return this.fileAccessFactory.createJavaFile(_ideaLanguage, _client);
   }
   
-  public XtendFileAccess compileStandaloneSetup(final Grammar grammar) {
-    TypeReference _ideaStandaloneSetup = this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("class ");
-        TypeReference _ideaStandaloneSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
-        String _simpleName = _ideaStandaloneSetup.getSimpleName();
-        _builder.append(_simpleName, "");
-        _builder.append(" extends ");
-        TypeReference _runtimeGenSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeGenSetup(grammar);
-        _builder.append(_runtimeGenSetup, "");
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("override createInjector() {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("val runtimeModule = new ");
-        TypeReference _runtimeModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeModule(grammar);
-        _builder.append(_runtimeModule, "\t\t");
-        _builder.append("()");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("val ideaModule = new ");
-        TypeReference _ideaModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaModule(grammar);
-        _builder.append(_ideaModule, "\t\t");
-        _builder.append("()");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("val mergedModule = ");
-        _builder.append(Modules2.class, "\t\t");
-        _builder.append(".mixin(runtimeModule, ideaModule)");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("return ");
-        _builder.append(Guice.class, "\t\t");
-        _builder.append(".createInjector(mergedModule)");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-      }
-    };
-    return this.fileAccessFactory.createXtendFile(_ideaStandaloneSetup, _client);
+  public JavaFileAccess compileStandaloneSetup(final Grammar grammar) {
+    JavaFileAccess _xifexpression = null;
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (_isGenerateXtendStub) {
+      TypeReference _ideaStandaloneSetup = this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("class ");
+          TypeReference _ideaStandaloneSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
+          String _simpleName = _ideaStandaloneSetup.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" extends ");
+          TypeReference _runtimeGenSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeGenSetup(grammar);
+          _builder.append(_runtimeGenSetup, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("override createInjector() {");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("val runtimeModule = new ");
+          TypeReference _runtimeModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeModule(grammar);
+          _builder.append(_runtimeModule, "\t\t");
+          _builder.append("()");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("val ideaModule = new ");
+          TypeReference _ideaModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaModule(grammar);
+          _builder.append(_ideaModule, "\t\t");
+          _builder.append("()");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("val mergedModule = ");
+          _builder.append(Modules2.class, "\t\t");
+          _builder.append(".mixin(runtimeModule, ideaModule)");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("return ");
+          _builder.append(Guice.class, "\t\t");
+          _builder.append(".createInjector(mergedModule)");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createXtendFile(_ideaStandaloneSetup, _client);
+    } else {
+      TypeReference _ideaStandaloneSetup_1 = this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
+      StringConcatenationClient _client_1 = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("public class ");
+          TypeReference _ideaStandaloneSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
+          String _simpleName = _ideaStandaloneSetup.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" extends ");
+          TypeReference _runtimeGenSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeGenSetup(grammar);
+          _builder.append(_runtimeGenSetup, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public ");
+          _builder.append(Injector.class, "\t");
+          _builder.append(" createInjector() {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _runtimeModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeModule(grammar);
+          _builder.append(_runtimeModule, "\t\t");
+          _builder.append(" runtimeModule = new ");
+          TypeReference _runtimeModule_1 = IdeaPluginGenerator.this._xtextGeneratorNaming.getRuntimeModule(grammar);
+          _builder.append(_runtimeModule_1, "\t\t");
+          _builder.append("();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _ideaModule = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaModule(grammar);
+          _builder.append(_ideaModule, "\t\t");
+          _builder.append(" ideaModule = new ");
+          TypeReference _ideaModule_1 = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaModule(grammar);
+          _builder.append(_ideaModule_1, "\t\t");
+          _builder.append("();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append(Module.class, "\t\t");
+          _builder.append(" mergedModule = ");
+          _builder.append(Modules2.class, "\t\t");
+          _builder.append(".mixin(runtimeModule, ideaModule);");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("return ");
+          _builder.append(Guice.class, "\t\t");
+          _builder.append(".createInjector(mergedModule);");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createJavaFile(_ideaStandaloneSetup_1, _client_1);
+    }
+    return _xifexpression;
   }
   
-  public XtendFileAccess compileIdeaSetup(final Grammar grammar) {
-    TypeReference _ideaSetup = this._ideaPluginClassNames.getIdeaSetup(grammar);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("class ");
-        TypeReference _ideaSetup = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaSetup(grammar);
-        String _simpleName = _ideaSetup.getSimpleName();
-        _builder.append(_simpleName, "");
-        _builder.append(" implements ");
-        _builder.append(ISetup.class, "");
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("override createInjectorAndDoEMFRegistration() {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries");
-        _builder.append(_typeRef, "\t\t");
-        _builder.append(".ensureInitialized");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("new ");
-        TypeReference _ideaStandaloneSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
-        _builder.append(_ideaStandaloneSetup, "\t\t");
-        _builder.append("().createInjector");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-      }
-    };
-    return this.fileAccessFactory.createXtendFile(_ideaSetup, _client);
+  public JavaFileAccess compileIdeaSetup(final Grammar grammar) {
+    JavaFileAccess _xifexpression = null;
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (_isGenerateXtendStub) {
+      TypeReference _ideaSetup = this._ideaPluginClassNames.getIdeaSetup(grammar);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("class ");
+          TypeReference _ideaSetup = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaSetup(grammar);
+          String _simpleName = _ideaSetup.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" implements ");
+          _builder.append(ISetup.class, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("override createInjectorAndDoEMFRegistration() {");
+          _builder.newLine();
+          _builder.append("\t\t");
+          TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries");
+          _builder.append(_typeRef, "\t\t");
+          _builder.append(".ensureInitialized");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("new ");
+          TypeReference _ideaStandaloneSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
+          _builder.append(_ideaStandaloneSetup, "\t\t");
+          _builder.append("().createInjector");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createXtendFile(_ideaSetup, _client);
+    } else {
+      TypeReference _ideaSetup_1 = this._ideaPluginClassNames.getIdeaSetup(grammar);
+      StringConcatenationClient _client_1 = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("public class ");
+          TypeReference _ideaSetup = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaSetup(grammar);
+          String _simpleName = _ideaSetup.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" implements ");
+          _builder.append(ISetup.class, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("@Override");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public ");
+          _builder.append(Injector.class, "\t");
+          _builder.append(" createInjectorAndDoEMFRegistration() {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.extensions.EcoreGlobalRegistries");
+          _builder.append(_typeRef, "\t\t");
+          _builder.append(".ensureInitialized();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("return new ");
+          TypeReference _ideaStandaloneSetup = IdeaPluginGenerator.this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
+          _builder.append(_ideaStandaloneSetup, "\t\t");
+          _builder.append("().createInjector();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createJavaFile(_ideaSetup_1, _client_1);
+    }
+    return _xifexpression;
   }
   
   public JavaFileAccess compileElementTypeProvider(final Grammar grammar) {
@@ -2050,9 +2216,14 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
   }
   
   public JavaFileAccess compileParserDefinition(final Grammar grammar) {
-    Iterable<CrossReference> _crossReferences = this.getCrossReferences(grammar);
-    final List<CrossReference> crossReferences = IterableExtensions.<CrossReference>toList(_crossReferences);
-    final LinkedHashMultimap<String, String> namedGrammarElement = this.getNamedGrammarElements(grammar);
+    List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
+    final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractRule it) {
+        return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
+      }
+    };
+    final Iterable<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
     TypeReference _parserDefinition = this._ideaPluginClassNames.getParserDefinition(grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -2066,18 +2237,24 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append(_superParserDefinition, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@");
-        _builder.append(Inject.class, "\t");
-        _builder.append(" ");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("private ");
-        TypeReference _elementTypeProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getElementTypeProvider(grammar);
-        _builder.append(_elementTypeProvider, "\t");
-        _builder.append(" elementTypeProvider;");
-        _builder.newLineIfNotEmpty();
+        {
+          boolean _isEmpty = IterableExtensions.isEmpty(EObjectRules);
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@");
+            _builder.append(Inject.class, "\t");
+            _builder.append(" ");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("private ");
+            TypeReference _elementTypeProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getElementTypeProvider(grammar);
+            _builder.append(_elementTypeProvider, "\t");
+            _builder.append(" elementTypeProvider;");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@Override");
@@ -2100,164 +2277,139 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@SuppressWarnings(\"rawtypes\")");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public ");
-        TypeReference _typeRef_2 = TypeReference.typeRef("com.intellij.psi.PsiElement");
-        _builder.append(_typeRef_2, "\t");
-        _builder.append(" createElement(");
-        TypeReference _typeRef_3 = TypeReference.typeRef("com.intellij.lang.ASTNode");
-        _builder.append(_typeRef_3, "\t");
-        _builder.append(" node) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        TypeReference _typeRef_4 = TypeReference.typeRef("com.intellij.psi.tree.IElementType");
-        _builder.append(_typeRef_4, "\t\t");
-        _builder.append(" elementType = node.getElementType();");
-        _builder.newLineIfNotEmpty();
         {
-          Set<String> _keySet = namedGrammarElement.keySet();
-          for(final String namedElementType : _keySet) {
-            _builder.append("\t\t");
-            _builder.append("if (elementType == elementTypeProvider.get");
-            _builder.append(namedElementType, "\t\t");
-            _builder.append("ElementType()) {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(EObjectRules);
+          boolean _not_1 = (!_isEmpty_1);
+          if (_not_1) {
             _builder.append("\t");
-            _builder.append("return new ");
-            TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@Override");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@SuppressWarnings(\"rawtypes\")");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("public ");
+            TypeReference _typeRef_2 = TypeReference.typeRef("com.intellij.psi.PsiElement");
+            _builder.append(_typeRef_2, "\t");
+            _builder.append(" createElement(");
+            TypeReference _typeRef_3 = TypeReference.typeRef("com.intellij.lang.ASTNode");
+            _builder.append(_typeRef_3, "\t");
+            _builder.append(" node) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("Boolean hasSemanticElement = node.getUserData(");
+            TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder");
+            _builder.append(_typeRef_4, "\t\t");
+            _builder.append(".HAS_SEMANTIC_ELEMENT_KEY);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("if (hasSemanticElement != null && hasSemanticElement) {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t\t");
+            TypeReference _typeRef_5 = TypeReference.typeRef("com.intellij.psi.tree.IElementType");
             _builder.append(_typeRef_5, "\t\t\t");
-            _builder.append("(node,");
+            _builder.append(" elementType = node.getElementType();");
             _builder.newLineIfNotEmpty();
             {
-              Set<String> _get = namedGrammarElement.get(namedElementType);
-              boolean _hasElements = false;
-              for(final String nameType : _get) {
-                if (!_hasElements) {
-                  _hasElements = true;
-                } else {
-                  _builder.appendImmediate(",", "\t\t\t\t");
-                }
-                _builder.append("\t\t");
-                _builder.append("\t\t");
-                _builder.append("elementTypeProvider.get");
-                _builder.append(nameType, "\t\t\t\t");
-                _builder.append("ElementType()");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            _builder.append("\t\t");
-            _builder.append("\t");
-            _builder.append(") {};");
-            _builder.newLine();
-            _builder.append("\t\t");
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-        {
-          for(final CrossReference crossReference : crossReferences) {
-            _builder.append("\t\t");
-            _builder.append("if (elementType == elementTypeProvider.get");
-            String _grammarElementIdentifier = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(crossReference);
-            _builder.append(_grammarElementIdentifier, "\t\t");
-            _builder.append("ElementType()) {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("\t");
-            _builder.append("return new ");
-            TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiEObjectReference");
-            _builder.append(_typeRef_6, "\t\t\t");
-            _builder.append("(node) {};");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-        {
-          Iterable<AbstractRule> _allNonTerminalRules = IdeaPluginGenerator.this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-          for(final AbstractRule rule : _allNonTerminalRules) {
-            _builder.append("\t\t");
-            _builder.append("if (elementType == elementTypeProvider.get");
-            String _grammarElementIdentifier_1 = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(rule);
-            _builder.append(_grammarElementIdentifier_1, "\t\t");
-            _builder.append("ElementType()) {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("\t");
-            _builder.append("return new ");
-            TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiEObjectImpl");
-            _builder.append(_typeRef_7, "\t\t\t");
-            _builder.append("(node) {};");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("}");
-            _builder.newLine();
-            {
-              TreeIterator<EObject> _eAllContents = rule.eAllContents();
-              Iterator<AbstractElement> _filter = Iterators.<AbstractElement>filter(_eAllContents, AbstractElement.class);
-              final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-                @Override
-                public Boolean apply(final AbstractElement element) {
-                  boolean _contains = crossReferences.contains(element);
-                  return Boolean.valueOf((!_contains));
-                }
-              };
-              Iterator<AbstractElement> _filter_1 = IteratorExtensions.<AbstractElement>filter(_filter, _function);
-              final Function1<AbstractElement, String> _function_1 = new Function1<AbstractElement, String>() {
-                @Override
-                public String apply(final AbstractElement it) {
-                  return IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(it);
-                }
-              };
-              Iterator<String> _map = IteratorExtensions.<AbstractElement, String>map(_filter_1, _function_1);
-              final Function1<String, Boolean> _function_2 = new Function1<String, Boolean>() {
-                @Override
-                public Boolean apply(final String identifier) {
-                  Set<String> _keySet = namedGrammarElement.keySet();
-                  boolean _contains = _keySet.contains(identifier);
-                  return Boolean.valueOf((!_contains));
-                }
-              };
-              Iterator<String> _filter_2 = IteratorExtensions.<String>filter(_map, _function_2);
-              Iterable<String> _iterable = IteratorExtensions.<String>toIterable(_filter_2);
-              for(final String grammarElementIdentifier : _iterable) {
+              for(final AbstractRule rule : EObjectRules) {
+                _builder.append("\t");
                 _builder.append("\t\t");
                 _builder.append("if (elementType == elementTypeProvider.get");
-                _builder.append(grammarElementIdentifier, "\t\t");
+                String _grammarElementIdentifier = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(rule);
+                _builder.append(_grammarElementIdentifier, "\t\t\t");
                 _builder.append("ElementType()) {");
                 _builder.newLineIfNotEmpty();
-                _builder.append("\t\t");
+                {
+                  boolean _isNamed = IdeaPluginGenerator.this.isNamed(rule);
+                  if (_isNamed) {
+                    _builder.append("\t");
+                    _builder.append("\t\t");
+                    _builder.append("\t");
+                    _builder.append("return new ");
+                    TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
+                    _builder.append(_typeRef_6, "\t\t\t\t");
+                    _builder.append("(node) {};");
+                    _builder.newLineIfNotEmpty();
+                  } else {
+                    _builder.append("\t");
+                    _builder.append("\t\t");
+                    _builder.append("\t");
+                    _builder.append("return new ");
+                    TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiEObjectImpl");
+                    _builder.append(_typeRef_7, "\t\t\t\t");
+                    _builder.append("(node) {};");
+                    _builder.newLineIfNotEmpty();
+                  }
+                }
                 _builder.append("\t");
-                _builder.append("return new ");
-                TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiEObjectImpl");
-                _builder.append(_typeRef_8, "\t\t\t");
-                _builder.append("(node) {};");
-                _builder.newLineIfNotEmpty();
                 _builder.append("\t\t");
                 _builder.append("}");
                 _builder.newLine();
+                {
+                  Iterable<AbstractElement> _eObjectElements = IdeaPluginGenerator.this.getEObjectElements(rule);
+                  for(final AbstractElement element : _eObjectElements) {
+                    _builder.append("\t");
+                    _builder.append("\t\t");
+                    _builder.append("if (elementType == elementTypeProvider.get");
+                    String _grammarElementIdentifier_1 = IdeaPluginGenerator.this._grammarAccessExtensions.grammarElementIdentifier(element);
+                    _builder.append(_grammarElementIdentifier_1, "\t\t\t");
+                    _builder.append("ElementType()) {");
+                    _builder.newLineIfNotEmpty();
+                    {
+                      boolean _isNamed_1 = IdeaPluginGenerator.this.isNamed(element);
+                      if (_isNamed_1) {
+                        _builder.append("\t");
+                        _builder.append("\t\t");
+                        _builder.append("\t");
+                        _builder.append("return new ");
+                        TypeReference _typeRef_8 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
+                        _builder.append(_typeRef_8, "\t\t\t\t");
+                        _builder.append("(node) {};");
+                        _builder.newLineIfNotEmpty();
+                      } else {
+                        _builder.append("\t");
+                        _builder.append("\t\t");
+                        _builder.append("\t");
+                        _builder.append("return new ");
+                        TypeReference _typeRef_9 = TypeReference.typeRef("org.eclipse.xtext.psi.impl.PsiEObjectImpl");
+                        _builder.append(_typeRef_9, "\t\t\t\t");
+                        _builder.append("(node) {};");
+                        _builder.newLineIfNotEmpty();
+                      }
+                    }
+                    _builder.append("\t");
+                    _builder.append("\t\t");
+                    _builder.append("}");
+                    _builder.newLine();
+                  }
+                }
               }
             }
+            _builder.append("\t");
+            _builder.append("\t\t");
+            _builder.append("throw new ");
+            TypeReference _typeRef_10 = TypeReference.typeRef("java.lang.IllegalStateException");
+            _builder.append(_typeRef_10, "\t\t\t");
+            _builder.append("(\"Unexpected element type: \" + elementType);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("return super.createElement(node);");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
           }
         }
-        _builder.append("\t\t");
-        _builder.append("throw new ");
-        TypeReference _typeRef_9 = TypeReference.typeRef("java.lang.IllegalStateException");
-        _builder.append(_typeRef_9, "\t\t");
-        _builder.append("(\"Unexpected element type: \" + elementType);");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
@@ -2266,123 +2418,97 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
     return this.fileAccessFactory.createJavaFile(_parserDefinition, _client);
   }
   
-  protected Iterable<CrossReference> getCrossReferences(final Grammar grammar) {
-    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-    final Function1<AbstractRule, Iterable<CrossReference>> _function = new Function1<AbstractRule, Iterable<CrossReference>>() {
+  protected Iterable<AbstractElement> getEObjectElements(final AbstractRule rule) {
+    List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
+    final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
       @Override
-      public Iterable<CrossReference> apply(final AbstractRule it) {
-        TreeIterator<EObject> _eAllContents = it.eAllContents();
-        Iterator<CrossReference> _filter = Iterators.<CrossReference>filter(_eAllContents, CrossReference.class);
-        final Function1<CrossReference, Boolean> _function = new Function1<CrossReference, Boolean>() {
-          @Override
-          public Boolean apply(final CrossReference it) {
-            return Boolean.valueOf(GrammarUtil.isAssigned(it));
+      public Boolean apply(final AbstractElement element) {
+        boolean _switchResult = false;
+        boolean _matched = false;
+        if (!_matched) {
+          if (element instanceof Action) {
+            _matched=true;
           }
-        };
-        Iterator<CrossReference> _filter_1 = IteratorExtensions.<CrossReference>filter(_filter, _function);
-        return IteratorExtensions.<CrossReference>toIterable(_filter_1);
-      }
-    };
-    Iterable<Iterable<CrossReference>> _map = IterableExtensions.<AbstractRule, Iterable<CrossReference>>map(_allNonTerminalRules, _function);
-    return Iterables.<CrossReference>concat(_map);
-  }
-  
-  protected LinkedHashMultimap<String, String> getNamedGrammarElements(final Grammar grammar) {
-    LinkedHashMultimap<String, String> _xblockexpression = null;
-    {
-      final LinkedHashMultimap<String, String> namedGrammarElements = LinkedHashMultimap.<String, String>create();
-      Iterable<RuleCall> _nameRuleCalls = this.getNameRuleCalls(grammar);
-      for (final RuleCall nameRuleCall : _nameRuleCalls) {
-        {
-          final String nameRuleCallIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
-          Iterable<RuleCall> _ruleCallsWithName = this.getRuleCallsWithName(grammar, nameRuleCall);
-          for (final RuleCall ruleCall : _ruleCallsWithName) {
-            {
-              String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(ruleCall);
-              namedGrammarElements.put(_grammarElementIdentifier, nameRuleCallIdentifier);
-              AbstractRule _rule = ruleCall.getRule();
-              TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-              Iterator<Action> _filter = Iterators.<Action>filter(_eAllContents, Action.class);
-              Iterable<Action> _iterable = IteratorExtensions.<Action>toIterable(_filter);
-              for (final Action action : _iterable) {
-                String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(action);
-                namedGrammarElements.put(_grammarElementIdentifier_1, nameRuleCallIdentifier);
+          if (!_matched) {
+            if (element instanceof RuleCall) {
+              boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+              if (_isEObjectRuleCall) {
+                _matched=true;
               }
             }
           }
+          if (_matched) {
+            _switchResult = true;
+          }
+        }
+        if (!_matched) {
+          _switchResult = false;
+        }
+        return Boolean.valueOf(_switchResult);
+      }
+    };
+    return IterableExtensions.<AbstractElement>filter(_eAllOfType, _function);
+  }
+  
+  protected boolean isNamed(final EObject element) {
+    boolean _xblockexpression = false;
+    {
+      TypeRef _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (element instanceof AbstractRule) {
+          _matched=true;
+          _switchResult = ((AbstractRule)element).getType();
         }
       }
-      _xblockexpression = namedGrammarElements;
+      if (!_matched) {
+        if (element instanceof RuleCall) {
+          _matched=true;
+          AbstractRule _rule = ((RuleCall)element).getRule();
+          TypeRef _type = null;
+          if (_rule!=null) {
+            _type=_rule.getType();
+          }
+          _switchResult = _type;
+        }
+      }
+      if (!_matched) {
+        if (element instanceof Action) {
+          _matched=true;
+          _switchResult = ((Action)element).getType();
+        }
+      }
+      final TypeRef type = _switchResult;
+      EClassifier _classifier = null;
+      if (type!=null) {
+        _classifier=type.getClassifier();
+      }
+      final EClassifier classifier = _classifier;
+      EStructuralFeature _xifexpression = null;
+      if ((classifier instanceof EClass)) {
+        _xifexpression = ((EClass)classifier).getEStructuralFeature("name");
+      }
+      final EStructuralFeature feature = _xifexpression;
+      boolean _and = false;
+      boolean _and_1 = false;
+      if (!(feature instanceof EAttribute)) {
+        _and_1 = false;
+      } else {
+        boolean _isMany = feature.isMany();
+        boolean _not = (!_isMany);
+        _and_1 = _not;
+      }
+      if (!_and_1) {
+        _and = false;
+      } else {
+        EClassifier _eType = feature.getEType();
+        Class<?> _instanceClass = _eType.getInstanceClass();
+        boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
+        _and = _isAssignableFrom;
+      }
+      _xblockexpression = _and;
     }
     return _xblockexpression;
-  }
-  
-  protected Iterable<RuleCall> getRuleCallsWithName(final Grammar grammar, final RuleCall nameRuleCall) {
-    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-    final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
-      @Override
-      public Iterable<RuleCall> apply(final AbstractRule it) {
-        return IdeaPluginGenerator.this.getRuleCallsWithName(it, nameRuleCall);
-      }
-    };
-    Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(_allNonTerminalRules, _function);
-    return Iterables.<RuleCall>concat(_map);
-  }
-  
-  protected Iterable<RuleCall> getRuleCallsWithName(final EObject element, final RuleCall nameRuleCall) {
-    TreeIterator<EObject> _eAllContents = element.eAllContents();
-    Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
-    final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-      @Override
-      public Boolean apply(final RuleCall it) {
-        AbstractRule _rule = it.getRule();
-        TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-        final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-          @Override
-          public Boolean apply(final EObject it) {
-            return Boolean.valueOf(Objects.equal(it, nameRuleCall));
-          }
-        };
-        return Boolean.valueOf(IteratorExtensions.<EObject>exists(_eAllContents, _function));
-      }
-    };
-    Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
-    return IteratorExtensions.<RuleCall>toIterable(_filter_1);
-  }
-  
-  protected Iterable<RuleCall> getNameRuleCalls(final Grammar grammar) {
-    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
-    final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
-      @Override
-      public Iterable<RuleCall> apply(final AbstractRule it) {
-        return IdeaPluginGenerator.this.getNameRuleCalls(it);
-      }
-    };
-    Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(_allNonTerminalRules, _function);
-    return Iterables.<RuleCall>concat(_map);
-  }
-  
-  protected Iterable<RuleCall> getNameRuleCalls(final EObject element) {
-    TreeIterator<EObject> _eAllContents = element.eAllContents();
-    Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
-    final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-      @Override
-      public Boolean apply(final RuleCall it) {
-        boolean _and = false;
-        boolean _isAssigned = GrammarUtil.isAssigned(it);
-        if (!_isAssigned) {
-          _and = false;
-        } else {
-          Assignment _containingAssignment = GrammarUtil.containingAssignment(it);
-          String _feature = _containingAssignment.getFeature();
-          boolean _equals = Objects.equal(_feature, "name");
-          _and = _equals;
-        }
-        return Boolean.valueOf(_and);
-      }
-    };
-    Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
-    return IteratorExtensions.<RuleCall>toIterable(_filter_1);
   }
   
   public JavaFileAccess compileAbstractCompletionContributor(final Grammar grammar) {
@@ -2423,53 +2549,114 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
   }
   
   public JavaFileAccess compileCompletionContributor(final Grammar grammar) {
-    TypeReference _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("class ");
-        TypeReference _completionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
-        String _simpleName = _completionContributor.getSimpleName();
-        _builder.append(_simpleName, "");
-        _builder.append(" extends ");
-        TypeReference _abstractCompletionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
-        _builder.append(_abstractCompletionContributor, "");
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("new() {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("this(");
-        TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
-        _builder.append(_ideaLanguage, "\t\t");
-        _builder.append(".INSTANCE)");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("new(");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.AbstractXtextLanguage");
-        _builder.append(_typeRef, "\t");
-        _builder.append(" lang) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("super(lang)");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("//custom rules here");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-      }
-    };
-    return this.fileAccessFactory.createXtendFile(_completionContributor, _client);
+    JavaFileAccess _xifexpression = null;
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (_isGenerateXtendStub) {
+      TypeReference _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("class ");
+          TypeReference _completionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
+          String _simpleName = _completionContributor.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" extends ");
+          TypeReference _abstractCompletionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
+          _builder.append(_abstractCompletionContributor, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("new() {");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("this(");
+          TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
+          _builder.append(_ideaLanguage, "\t\t");
+          _builder.append(".INSTANCE)");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("new(");
+          TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.AbstractXtextLanguage");
+          _builder.append(_typeRef, "\t");
+          _builder.append(" lang) {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("super(lang)");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("//custom rules here");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createXtendFile(_completionContributor, _client);
+    } else {
+      TypeReference _completionContributor_1 = this._ideaPluginClassNames.getCompletionContributor(grammar);
+      StringConcatenationClient _client_1 = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("public class ");
+          TypeReference _completionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
+          String _simpleName = _completionContributor.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" extends ");
+          TypeReference _abstractCompletionContributor = IdeaPluginGenerator.this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
+          _builder.append(_abstractCompletionContributor, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("public ");
+          TypeReference _completionContributor_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
+          String _simpleName_1 = _completionContributor_1.getSimpleName();
+          _builder.append(_simpleName_1, "\t");
+          _builder.append("() {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("this(");
+          TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
+          _builder.append(_ideaLanguage, "\t\t");
+          _builder.append(".INSTANCE);");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("public ");
+          TypeReference _completionContributor_2 = IdeaPluginGenerator.this._ideaPluginClassNames.getCompletionContributor(grammar);
+          String _simpleName_2 = _completionContributor_2.getSimpleName();
+          _builder.append(_simpleName_2, "\t");
+          _builder.append("(");
+          TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.AbstractXtextLanguage");
+          _builder.append(_typeRef, "\t");
+          _builder.append(" lang) {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("super(lang);");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("//custom rules here");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createJavaFile(_completionContributor_1, _client_1);
+    }
+    return _xifexpression;
   }
   
   public TextFileAccess compileServicesISetup(final Grammar grammar) {
@@ -2489,8 +2676,16 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
   }
   
   public JavaFileAccess compileFacetConfiguration(final Grammar grammar) {
-    TypeReference _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-    final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_facetConfiguration);
+    JavaFileAccess _xifexpression = null;
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (_isGenerateXtendStub) {
+      TypeReference _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
+      _xifexpression = this.fileAccessFactory.createXtendFile(_facetConfiguration);
+    } else {
+      TypeReference _facetConfiguration_1 = this._ideaPluginClassNames.getFacetConfiguration(grammar);
+      _xifexpression = this.fileAccessFactory.createJavaFile(_facetConfiguration_1);
+    }
+    final JavaFileAccess file = _xifexpression;
     TypeReference _typeRef = TypeReference.typeRef("com.intellij.openapi.components.PersistentStateComponent");
     file.importType(_typeRef);
     TypeReference _typeRef_1 = TypeReference.typeRef("com.intellij.openapi.components.State");
@@ -2516,27 +2711,57 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("@State(name = \"");
-        String _name = grammar.getName();
-        _builder.append(_name, "");
-        _builder.append("Generator\", storages = #[");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("@Storage(id = \"default\", file = StoragePathMacros.PROJECT_FILE),");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("@Storage(id = \"dir\", file = StoragePathMacros.PROJECT_CONFIG_DIR");
-        _builder.newLine();
-        _builder.append("\t\t\t\t");
-        _builder.append("+ \"/");
-        String _simpleName = IdeaPluginGenerator.this._ideaPluginExtension.getSimpleName(grammar);
-        _builder.append(_simpleName, "\t\t\t\t");
-        _builder.append("GeneratorConfig.xml\", scheme = StorageScheme.DIRECTORY_BASED)])");
-        _builder.newLineIfNotEmpty();
-        _builder.append("class ");
+        {
+          boolean _isGenerateXtendStub = IdeaPluginGenerator.this.isGenerateXtendStub();
+          if (_isGenerateXtendStub) {
+            _builder.append("@State(name = \"");
+            String _name = grammar.getName();
+            _builder.append(_name, "");
+            _builder.append("Generator\", storages = #[");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("@Storage(id = \"default\", file = StoragePathMacros.PROJECT_FILE),");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("@Storage(id = \"dir\", file = StoragePathMacros.PROJECT_CONFIG_DIR");
+            _builder.newLine();
+            _builder.append("\t\t\t\t");
+            _builder.append("+ \"/");
+            String _simpleName = IdeaPluginGenerator.this._ideaPluginExtension.getSimpleName(grammar);
+            _builder.append(_simpleName, "\t\t\t\t");
+            _builder.append("GeneratorConfig.xml\", scheme = StorageScheme.DIRECTORY_BASED)])");
+            _builder.newLineIfNotEmpty();
+          } else {
+            _builder.append("@State(name = \"");
+            String _name_1 = grammar.getName();
+            _builder.append(_name_1, "");
+            _builder.append("Generator\", storages = {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("@Storage(id = \"default\", file = StoragePathMacros.PROJECT_FILE),");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("@Storage(id = \"dir\", file = StoragePathMacros.PROJECT_CONFIG_DIR");
+            _builder.newLine();
+            _builder.append("\t\t\t\t");
+            _builder.append("+ \"/");
+            String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginExtension.getSimpleName(grammar);
+            _builder.append(_simpleName_1, "\t\t\t\t");
+            _builder.append("GeneratorConfig.xml\", scheme = StorageScheme.DIRECTORY_BASED)})");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+        {
+          boolean _isGenerateXtendStub_1 = IdeaPluginGenerator.this.isGenerateXtendStub();
+          boolean _not = (!_isGenerateXtendStub_1);
+          if (_not) {
+            _builder.append("public");
+          }
+        }
+        _builder.append(" class ");
         TypeReference _facetConfiguration = IdeaPluginGenerator.this._ideaPluginClassNames.getFacetConfiguration(grammar);
-        String _simpleName_1 = _facetConfiguration.getSimpleName();
-        _builder.append(_simpleName_1, "");
+        String _simpleName_2 = _facetConfiguration.getSimpleName();
+        _builder.append(_simpleName_2, "");
         _builder.append(" extends ");
         {
           boolean _inheritsXbase = IdeaPluginGenerator.this._xbaseUsageDetector.inheritsXbase(grammar);
@@ -2673,24 +2898,48 @@ public class IdeaPluginGenerator extends AbstractXtextGeneratorFragment {
   }
   
   public JavaFileAccess compileColorSettingsPage(final Grammar grammar) {
-    TypeReference _colorSettingsPage = this._ideaPluginClassNames.colorSettingsPage(grammar);
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("class ");
-        TypeReference _colorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.colorSettingsPage(grammar);
-        String _simpleName = _colorSettingsPage.getSimpleName();
-        _builder.append(_simpleName, "");
-        _builder.append(" extends ");
-        TypeReference _baseColorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.baseColorSettingsPage(grammar);
-        _builder.append(_baseColorSettingsPage, "");
-        _builder.append(" {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("}");
-        _builder.newLine();
-      }
-    };
-    return this.fileAccessFactory.createXtendFile(_colorSettingsPage, _client);
+    JavaFileAccess _xifexpression = null;
+    boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+    if (_isGenerateXtendStub) {
+      TypeReference _colorSettingsPage = this._ideaPluginClassNames.colorSettingsPage(grammar);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("class ");
+          TypeReference _colorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.colorSettingsPage(grammar);
+          String _simpleName = _colorSettingsPage.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" extends ");
+          TypeReference _baseColorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.baseColorSettingsPage(grammar);
+          _builder.append(_baseColorSettingsPage, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createXtendFile(_colorSettingsPage, _client);
+    } else {
+      TypeReference _colorSettingsPage_1 = this._ideaPluginClassNames.colorSettingsPage(grammar);
+      StringConcatenationClient _client_1 = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("public class ");
+          TypeReference _colorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.colorSettingsPage(grammar);
+          String _simpleName = _colorSettingsPage.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append(" extends ");
+          TypeReference _baseColorSettingsPage = IdeaPluginGenerator.this._ideaPluginClassNames.baseColorSettingsPage(grammar);
+          _builder.append(_baseColorSettingsPage, "");
+          _builder.append(" {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      };
+      _xifexpression = this.fileAccessFactory.createJavaFile(_colorSettingsPage_1, _client_1);
+    }
+    return _xifexpression;
   }
   
   @Pure

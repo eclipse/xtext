@@ -1,6 +1,6 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.HiddenTerminalsTestLanguageFileImpl:a.hiddenterminalstestlanguage(0,25)
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,25)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_WithHiddensParserRuleCall_1_ELEMENT_TYPE)(0,25)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_WithHiddensParserRuleCall_1_ELEMENT_TYPE)('anonymous')(0,25)
       PsiElement(WithHiddens_WithKeyword_0_ELEMENT_TYPE)('with')(0,4)
       PsiComment(RULE_ML_COMMENT)('/* comment */')(4,17)
       PsiElement(WithHiddens_HiddensKeyword_1_ELEMENT_TYPE)('hiddens')(17,24)

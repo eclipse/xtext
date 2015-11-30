@@ -63,15 +63,17 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 		var callbacks = this._completionCallbacks;
 		this._completionCallbacks = [];
 		for (var i = 0; i < callbacks.length; i++) {
-			callbacks[i]();
+			var callback = callbacks[i].callback;
+			var params = callbacks[i].params;
+			callback(params);
 		}
 	}
 	
 	/**
 	 * Add a callback to be invoked when the service call has completed.
 	 */
-	UpdateService.prototype.addCompletionCallback = function(callback) {
-		this._completionCallbacks.push(callback);
+	UpdateService.prototype.addCompletionCallback = function(callback, params) {
+		this._completionCallbacks.push({callback: callback, params: params});
 	}
 
 	UpdateService.prototype.invoke = function(editorContext, params, deferred) {
@@ -94,9 +96,15 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 		} else {
 			this.computeDelta(knownServerState.text, currentText, serverData);
 			if (serverData.deltaText === undefined) {
-				deferred.resolve(knownServerState);
-				this.onComplete();
-				return deferred.promise();
+				if (params.forceUpdate) {
+					serverData.deltaText = '';
+					serverData.deltaOffset = editorContext.getCaretOffset();
+					serverData.deltaReplaceLength = 0;
+				} else {
+					deferred.resolve(knownServerState);
+					this.onComplete();
+					return deferred.promise();
+				}
 			}
 			serverData.requiredStateId = knownServerState.stateId;
 		}
@@ -122,7 +130,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 				}
 				var listeners = editorContext.updateServerState(currentText, result.stateId);
 				for (var i = 0; i < listeners.length; i++) {
-					self.addCompletionCallback(listeners[i]);
+					self.addCompletionCallback(listeners[i], params);
 				}
 				deferred.resolve(result);
 			},
@@ -140,7 +148,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 			},
 			
 			complete: self.onComplete.bind(self)
-		});
+		}, true);
 		return deferred.promise().always(function() {
 			knownServerState.updateInProgress = false;
 		});

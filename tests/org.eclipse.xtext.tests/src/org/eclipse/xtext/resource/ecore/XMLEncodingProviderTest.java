@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.ecore;
 
+import java.nio.charset.Charset;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
@@ -34,6 +36,15 @@ public class XMLEncodingProviderTest extends Assert {
 		assertEquals("UTF-8", xmlEncodingProvider.getEncoding(getURI("utf8.ecore")));
 		assertEquals("ISO-8859-1", xmlEncodingProvider.getEncoding(getURI("iso-8859-1.ecore")));
 		assertEquals("UTF-16", xmlEncodingProvider.getEncoding(getURI("utf16.ecore")));
+	}
+	
+	@Test public void testMissingFile() throws Exception {
+		XMLEncodingProvider xmlEncodingProvider = new XMLEncodingProvider();
+		try {
+			assertEquals(Charset.defaultCharset().name(), xmlEncodingProvider.getEncoding(URI.createFileURI("missing.ecore")));
+		} catch (Exception e) {
+			fail("Missing file should return default encoding");
+		}
 	}
 	
 	protected URI getURI(String fileName) {

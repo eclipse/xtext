@@ -102,7 +102,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//{SExpression}
 		public Action getSExpressionAction_0() { return cSExpressionAction_0; }
 
-		//("(" element+=Expression* ")" | "begin" element+=Expression* "end")
+		//"(" element+=Expression* ")" | "begin" element+=Expression* "end"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"(" element+=Expression* ")"

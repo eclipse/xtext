@@ -8,57 +8,48 @@
 package org.eclipse.xtext.psi.impl;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import java.util.List;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.idea.nodemodel.ASTNodeExtension;
 import org.eclipse.xtext.psi.PsiEObjectFactory;
 import org.eclipse.xtext.psi.PsiEObjectIdentifier;
 import org.eclipse.xtext.psi.PsiNamedEObject;
 import org.eclipse.xtext.psi.impl.PsiEObjectIdentifierImpl;
 import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
 import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
-import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiNamedEObjectStub<PsiE>> extends PsiEObjectImpl<PsiE, T> implements PsiNamedEObject {
   @Inject
   @Extension
+  private ASTNodeExtension _aSTNodeExtension;
+  
+  @Inject
+  @Extension
   private PsiEObjectFactory psiEObjectFactory;
   
-  private final IGrammarAwareElementType nameType;
-  
-  public PsiNamedEObjectImpl(final T stub, final IStubElementType<T, PsiE> nodeType, final IGrammarAwareElementType nameType) {
+  public PsiNamedEObjectImpl(final T stub, final IStubElementType<T, PsiE> nodeType) {
     super(stub, nodeType);
-    Preconditions.<IGrammarAwareElementType>checkNotNull(nameType);
-    this.nameType = nameType;
   }
   
-  public PsiNamedEObjectImpl(final ASTNode node, final IGrammarAwareElementType... nameTypes) {
+  public PsiNamedEObjectImpl(final ASTNode node) {
     super(node);
-    boolean _isEmpty = ((List<IGrammarAwareElementType>)Conversions.doWrapArray(nameTypes)).isEmpty();
-    boolean _not = (!_isEmpty);
-    Preconditions.checkArgument(_not);
-    final Function1<IGrammarAwareElementType, Boolean> _function = new Function1<IGrammarAwareElementType, Boolean>() {
-      @Override
-      public Boolean apply(final IGrammarAwareElementType nameType) {
-        ASTNode _findChildByType = node.findChildByType(nameType);
-        return Boolean.valueOf((!Objects.equal(_findChildByType, null)));
-      }
-    };
-    IGrammarAwareElementType _findFirst = IterableExtensions.<IGrammarAwareElementType>findFirst(((Iterable<IGrammarAwareElementType>)Conversions.doWrapArray(nameTypes)), _function);
-    this.nameType = _findFirst;
   }
   
   @Override
@@ -98,12 +89,14 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
     PsiNamedEObjectImpl<PsiE, T> _xblockexpression = null;
     {
       final ASTNode nameNode = this.findNameNode();
-      boolean _equals = Objects.equal(nameNode, null);
-      if (_equals) {
+      if ((nameNode == null)) {
         return this;
       }
-      EObject _grammarElement = this.nameType.getGrammarElement();
-      boolean _isTerminalRuleCall = GrammarUtil.isTerminalRuleCall(_grammarElement);
+      final EObject grammarElement = this._aSTNodeExtension.getGrammarElement(nameNode);
+      if ((grammarElement == null)) {
+        return this;
+      }
+      boolean _isTerminalRuleCall = GrammarUtil.isTerminalRuleCall(grammarElement);
       if (_isTerminalRuleCall) {
         final ASTNode newNameNode = this.psiEObjectFactory.createLeafIdentifier(name, nameNode);
         ASTNode _treeParent = nameNode.getTreeParent();
@@ -120,17 +113,77 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
   }
   
   protected ASTNode findNameNode() {
+    ASTNode _xblockexpression = null;
+    {
+      final EStructuralFeature nameFeature = this.getNameFeature();
+      if ((nameFeature == null)) {
+        return null;
+      }
+      ASTNode _node = this.getNode();
+      List<ASTNode> _findNodesForFeature = this._aSTNodeExtension.findNodesForFeature(_node, nameFeature);
+      _xblockexpression = IterableExtensions.<ASTNode>head(_findNodesForFeature);
+    }
+    return _xblockexpression;
+  }
+  
+  protected EStructuralFeature getNameFeature() {
     ASTNode _node = this.getNode();
-    return _node.findChildByType(this.nameType);
+    EClass _eClass = this._aSTNodeExtension.getEClass(_node);
+    EStructuralFeature _eStructuralFeature = null;
+    if (_eClass!=null) {
+      _eStructuralFeature=_eClass.getEStructuralFeature("name");
+    }
+    final EStructuralFeature feature = _eStructuralFeature;
+    boolean _and = false;
+    boolean _and_1 = false;
+    if (!(feature instanceof EAttribute)) {
+      _and_1 = false;
+    } else {
+      boolean _isMany = feature.isMany();
+      boolean _not = (!_isMany);
+      _and_1 = _not;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      EClassifier _eType = feature.getEType();
+      Class<?> _instanceClass = _eType.getInstanceClass();
+      boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
+      _and = _isAssignableFrom;
+    }
+    if (_and) {
+      return feature;
+    }
+    return null;
   }
   
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl");
-    StringBuilder _append = builder.append("(");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(");
     IStubElementType _elementType = this.getElementType();
-    StringBuilder _append_1 = _append.append(_elementType);
-    _append_1.append(")");
-    return builder.toString();
+    _builder.append(_elementType, "");
+    _builder.append(":");
+    Object _elvis = null;
+    ASTNode _findNameNode = this.findNameNode();
+    IElementType _elementType_1 = null;
+    if (_findNameNode!=null) {
+      _elementType_1=_findNameNode.getElementType();
+    }
+    if (_elementType_1 != null) {
+      _elvis = _elementType_1;
+    } else {
+      _elvis = "null";
+    }
+    _builder.append(_elvis, "");
+    _builder.append(")");
+    {
+      Class<? extends PsiNamedEObjectImpl> _class = this.getClass();
+      boolean _tripleNotEquals = (_class != PsiNamedEObjectImpl.class);
+      if (_tripleNotEquals) {
+        _builder.append("(\'anonymous\')");
+      }
+    }
+    return _builder.toString();
   }
 }

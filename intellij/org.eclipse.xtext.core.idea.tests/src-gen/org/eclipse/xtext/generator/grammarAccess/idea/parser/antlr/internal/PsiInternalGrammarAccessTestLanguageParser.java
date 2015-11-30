@@ -69,18 +69,24 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleRoot"
-    // PsiInternalGrammarAccessTestLanguage.g:52:1: entryRuleRoot : ruleRoot EOF ;
-    public final void entryRuleRoot() throws RecognitionException {
+    // PsiInternalGrammarAccessTestLanguage.g:52:1: entryRuleRoot returns [Boolean current=false] : iv_ruleRoot= ruleRoot EOF ;
+    public final Boolean entryRuleRoot() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleRoot = null;
+
+
         try {
-            // PsiInternalGrammarAccessTestLanguage.g:52:14: ( ruleRoot EOF )
-            // PsiInternalGrammarAccessTestLanguage.g:53:2: ruleRoot EOF
+            // PsiInternalGrammarAccessTestLanguage.g:52:46: (iv_ruleRoot= ruleRoot EOF )
+            // PsiInternalGrammarAccessTestLanguage.g:53:2: iv_ruleRoot= ruleRoot EOF
             {
              markComposite(elementTypeProvider.getRootElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleRoot();
+            iv_ruleRoot=ruleRoot();
 
             state._fsp--;
 
+             current =iv_ruleRoot; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -92,19 +98,24 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleRoot"
 
 
     // $ANTLR start "ruleRoot"
-    // PsiInternalGrammarAccessTestLanguage.g:58:1: ruleRoot : ( (lv_elements_0_0= ruleType ) )* ;
-    public final void ruleRoot() throws RecognitionException {
+    // PsiInternalGrammarAccessTestLanguage.g:59:1: ruleRoot returns [Boolean current=false] : ( (lv_elements_0_0= ruleType ) )* ;
+    public final Boolean ruleRoot() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_elements_0_0 = null;
+
+
         try {
-            // PsiInternalGrammarAccessTestLanguage.g:58:9: ( ( (lv_elements_0_0= ruleType ) )* )
-            // PsiInternalGrammarAccessTestLanguage.g:59:2: ( (lv_elements_0_0= ruleType ) )*
+            // PsiInternalGrammarAccessTestLanguage.g:60:1: ( ( (lv_elements_0_0= ruleType ) )* )
+            // PsiInternalGrammarAccessTestLanguage.g:61:2: ( (lv_elements_0_0= ruleType ) )*
             {
-            // PsiInternalGrammarAccessTestLanguage.g:59:2: ( (lv_elements_0_0= ruleType ) )*
+            // PsiInternalGrammarAccessTestLanguage.g:61:2: ( (lv_elements_0_0= ruleType ) )*
             loop1:
             do {
                 int alt1=2;
@@ -117,21 +128,25 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalGrammarAccessTestLanguage.g:60:3: (lv_elements_0_0= ruleType )
+            	    // PsiInternalGrammarAccessTestLanguage.g:62:3: (lv_elements_0_0= ruleType )
             	    {
-            	    // PsiInternalGrammarAccessTestLanguage.g:60:3: (lv_elements_0_0= ruleType )
-            	    // PsiInternalGrammarAccessTestLanguage.g:61:4: lv_elements_0_0= ruleType
+            	    // PsiInternalGrammarAccessTestLanguage.g:62:3: (lv_elements_0_0= ruleType )
+            	    // PsiInternalGrammarAccessTestLanguage.g:63:4: lv_elements_0_0= ruleType
             	    {
 
             	    				markComposite(elementTypeProvider.getRoot_ElementsTypeParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleType();
+            	    lv_elements_0_0=ruleType();
 
             	    state._fsp--;
 
 
             	    				doneComposite();
+            	    				if(!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
             	    			
 
             	    }
@@ -155,24 +170,30 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleRoot"
 
 
     // $ANTLR start "entryRuleType"
-    // PsiInternalGrammarAccessTestLanguage.g:73:1: entryRuleType : ruleType EOF ;
-    public final void entryRuleType() throws RecognitionException {
+    // PsiInternalGrammarAccessTestLanguage.g:79:1: entryRuleType returns [Boolean current=false] : iv_ruleType= ruleType EOF ;
+    public final Boolean entryRuleType() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleType = null;
+
+
         try {
-            // PsiInternalGrammarAccessTestLanguage.g:73:14: ( ruleType EOF )
-            // PsiInternalGrammarAccessTestLanguage.g:74:2: ruleType EOF
+            // PsiInternalGrammarAccessTestLanguage.g:79:46: (iv_ruleType= ruleType EOF )
+            // PsiInternalGrammarAccessTestLanguage.g:80:2: iv_ruleType= ruleType EOF
             {
              markComposite(elementTypeProvider.getTypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleType();
+            iv_ruleType=ruleType();
 
             state._fsp--;
 
+             current =iv_ruleType; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -184,19 +205,26 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleType"
 
 
     // $ANTLR start "ruleType"
-    // PsiInternalGrammarAccessTestLanguage.g:79:1: ruleType : ( ruleAType | ruleAnotherType ) ;
-    public final void ruleType() throws RecognitionException {
+    // PsiInternalGrammarAccessTestLanguage.g:86:1: ruleType returns [Boolean current=false] : (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) ;
+    public final Boolean ruleType() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_AType_0 = null;
+
+        Boolean this_AnotherType_1 = null;
+
+
         try {
-            // PsiInternalGrammarAccessTestLanguage.g:79:9: ( ( ruleAType | ruleAnotherType ) )
-            // PsiInternalGrammarAccessTestLanguage.g:80:2: ( ruleAType | ruleAnotherType )
+            // PsiInternalGrammarAccessTestLanguage.g:87:1: ( (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType ) )
+            // PsiInternalGrammarAccessTestLanguage.g:88:2: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
             {
-            // PsiInternalGrammarAccessTestLanguage.g:80:2: ( ruleAType | ruleAnotherType )
+            // PsiInternalGrammarAccessTestLanguage.g:88:2: (this_AType_0= ruleAType | this_AnotherType_1= ruleAnotherType )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -214,34 +242,36 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalGrammarAccessTestLanguage.g:81:3: ruleAType
+                    // PsiInternalGrammarAccessTestLanguage.g:89:3: this_AType_0= ruleAType
                     {
 
                     			markComposite(elementTypeProvider.getType_ATypeParserRuleCall_0ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleAType();
+                    this_AType_0=ruleAType();
 
                     state._fsp--;
 
 
+                    			current = this_AType_0;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalGrammarAccessTestLanguage.g:89:3: ruleAnotherType
+                    // PsiInternalGrammarAccessTestLanguage.g:98:3: this_AnotherType_1= ruleAnotherType
                     {
 
                     			markComposite(elementTypeProvider.getType_AnotherTypeParserRuleCall_1ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleAnotherType();
+                    this_AnotherType_1=ruleAnotherType();
 
                     state._fsp--;
 
 
+                    			current = this_AnotherType_1;
                     			doneComposite();
                     		
 
@@ -260,24 +290,30 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleType"
 
 
     // $ANTLR start "entryRuleAType"
-    // PsiInternalGrammarAccessTestLanguage.g:100:1: entryRuleAType : ruleAType EOF ;
-    public final void entryRuleAType() throws RecognitionException {
+    // PsiInternalGrammarAccessTestLanguage.g:110:1: entryRuleAType returns [Boolean current=false] : iv_ruleAType= ruleAType EOF ;
+    public final Boolean entryRuleAType() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAType = null;
+
+
         try {
-            // PsiInternalGrammarAccessTestLanguage.g:100:15: ( ruleAType EOF )
-            // PsiInternalGrammarAccessTestLanguage.g:101:2: ruleAType EOF
+            // PsiInternalGrammarAccessTestLanguage.g:110:47: (iv_ruleAType= ruleAType EOF )
+            // PsiInternalGrammarAccessTestLanguage.g:111:2: iv_ruleAType= ruleAType EOF
             {
              markComposite(elementTypeProvider.getATypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAType();
+            iv_ruleAType=ruleAType();
 
             state._fsp--;
 
+             current =iv_ruleAType; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -289,22 +325,24 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAType"
 
 
     // $ANTLR start "ruleAType"
-    // PsiInternalGrammarAccessTestLanguage.g:106:1: ruleAType : (otherlv_0= 'foo' () ) ;
-    public final void ruleAType() throws RecognitionException {
+    // PsiInternalGrammarAccessTestLanguage.g:117:1: ruleAType returns [Boolean current=false] : (otherlv_0= 'foo' () ) ;
+    public final Boolean ruleAType() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
 
         try {
-            // PsiInternalGrammarAccessTestLanguage.g:106:10: ( (otherlv_0= 'foo' () ) )
-            // PsiInternalGrammarAccessTestLanguage.g:107:2: (otherlv_0= 'foo' () )
+            // PsiInternalGrammarAccessTestLanguage.g:118:1: ( (otherlv_0= 'foo' () ) )
+            // PsiInternalGrammarAccessTestLanguage.g:119:2: (otherlv_0= 'foo' () )
             {
-            // PsiInternalGrammarAccessTestLanguage.g:107:2: (otherlv_0= 'foo' () )
-            // PsiInternalGrammarAccessTestLanguage.g:108:3: otherlv_0= 'foo' ()
+            // PsiInternalGrammarAccessTestLanguage.g:119:2: (otherlv_0= 'foo' () )
+            // PsiInternalGrammarAccessTestLanguage.g:120:3: otherlv_0= 'foo' ()
             {
 
             			markLeaf(elementTypeProvider.getAType_FooKeyword_0ElementType());
@@ -313,12 +351,13 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalGrammarAccessTestLanguage.g:115:3: ()
-            // PsiInternalGrammarAccessTestLanguage.g:116:4: 
+            // PsiInternalGrammarAccessTestLanguage.g:127:3: ()
+            // PsiInternalGrammarAccessTestLanguage.g:128:4: 
             {
 
             				precedeComposite(elementTypeProvider.getAType_ATypeAction_1ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -336,24 +375,30 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAType"
 
 
     // $ANTLR start "entryRuleAnotherType"
-    // PsiInternalGrammarAccessTestLanguage.g:125:1: entryRuleAnotherType : ruleAnotherType EOF ;
-    public final void entryRuleAnotherType() throws RecognitionException {
+    // PsiInternalGrammarAccessTestLanguage.g:138:1: entryRuleAnotherType returns [Boolean current=false] : iv_ruleAnotherType= ruleAnotherType EOF ;
+    public final Boolean entryRuleAnotherType() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleAnotherType = null;
+
+
         try {
-            // PsiInternalGrammarAccessTestLanguage.g:125:21: ( ruleAnotherType EOF )
-            // PsiInternalGrammarAccessTestLanguage.g:126:2: ruleAnotherType EOF
+            // PsiInternalGrammarAccessTestLanguage.g:138:53: (iv_ruleAnotherType= ruleAnotherType EOF )
+            // PsiInternalGrammarAccessTestLanguage.g:139:2: iv_ruleAnotherType= ruleAnotherType EOF
             {
              markComposite(elementTypeProvider.getAnotherTypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleAnotherType();
+            iv_ruleAnotherType=ruleAnotherType();
 
             state._fsp--;
 
+             current =iv_ruleAnotherType; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -365,22 +410,24 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleAnotherType"
 
 
     // $ANTLR start "ruleAnotherType"
-    // PsiInternalGrammarAccessTestLanguage.g:131:1: ruleAnotherType : (otherlv_0= 'bar' () ) ;
-    public final void ruleAnotherType() throws RecognitionException {
+    // PsiInternalGrammarAccessTestLanguage.g:145:1: ruleAnotherType returns [Boolean current=false] : (otherlv_0= 'bar' () ) ;
+    public final Boolean ruleAnotherType() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
 
         try {
-            // PsiInternalGrammarAccessTestLanguage.g:131:16: ( (otherlv_0= 'bar' () ) )
-            // PsiInternalGrammarAccessTestLanguage.g:132:2: (otherlv_0= 'bar' () )
+            // PsiInternalGrammarAccessTestLanguage.g:146:1: ( (otherlv_0= 'bar' () ) )
+            // PsiInternalGrammarAccessTestLanguage.g:147:2: (otherlv_0= 'bar' () )
             {
-            // PsiInternalGrammarAccessTestLanguage.g:132:2: (otherlv_0= 'bar' () )
-            // PsiInternalGrammarAccessTestLanguage.g:133:3: otherlv_0= 'bar' ()
+            // PsiInternalGrammarAccessTestLanguage.g:147:2: (otherlv_0= 'bar' () )
+            // PsiInternalGrammarAccessTestLanguage.g:148:3: otherlv_0= 'bar' ()
             {
 
             			markLeaf(elementTypeProvider.getAnotherType_BarKeyword_0ElementType());
@@ -389,12 +436,13 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalGrammarAccessTestLanguage.g:140:3: ()
-            // PsiInternalGrammarAccessTestLanguage.g:141:4: 
+            // PsiInternalGrammarAccessTestLanguage.g:155:3: ()
+            // PsiInternalGrammarAccessTestLanguage.g:156:4: 
             {
 
             				precedeComposite(elementTypeProvider.getAnotherType_AnotherTypeAction_1ElementType());
             				doneComposite();
+            				associateWithSemanticElement();
             			
 
             }
@@ -412,7 +460,7 @@ public class PsiInternalGrammarAccessTestLanguageParser extends AbstractPsiAntlr
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleAnotherType"
 

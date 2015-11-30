@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleRoot
-entryRuleRoot:
+entryRuleRoot returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getRootElementType()); }
-	ruleRoot
+	iv_ruleRoot=ruleRoot
+	{ $current=$iv_ruleRoot.current; }
 	EOF;
 
 // Rule Root
-ruleRoot:
+ruleRoot returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,46 +66,56 @@ ruleRoot:
 			lv_elements_0_0=ruleType
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleType
-entryRuleType:
+entryRuleType returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTypeElementType()); }
-	ruleType
+	iv_ruleType=ruleType
+	{ $current=$iv_ruleType.current; }
 	EOF;
 
 // Rule Type
-ruleType:
+ruleType returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getType_ATypeParserRuleCall_0ElementType());
 		}
-		ruleAType
+		this_AType_0=ruleAType
 		{
+			$current = $this_AType_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getType_AnotherTypeParserRuleCall_1ElementType());
 		}
-		ruleAnotherType
+		this_AnotherType_1=ruleAnotherType
 		{
+			$current = $this_AnotherType_1.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleAType
-entryRuleAType:
+entryRuleAType returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getATypeElementType()); }
-	ruleAType
+	iv_ruleAType=ruleAType
+	{ $current=$iv_ruleAType.current; }
 	EOF;
 
 // Rule AType
-ruleAType:
+ruleAType returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAType_FooKeyword_0ElementType());
@@ -116,19 +128,22 @@ ruleAType:
 			{
 				precedeComposite(elementTypeProvider.getAType_ATypeAction_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 	)
 ;
 
 //Entry rule entryRuleAnotherType
-entryRuleAnotherType:
+entryRuleAnotherType returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getAnotherTypeElementType()); }
-	ruleAnotherType
+	iv_ruleAnotherType=ruleAnotherType
+	{ $current=$iv_ruleAnotherType.current; }
 	EOF;
 
 // Rule AnotherType
-ruleAnotherType:
+ruleAnotherType returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getAnotherType_BarKeyword_0ElementType());
@@ -141,6 +156,7 @@ ruleAnotherType:
 			{
 				precedeComposite(elementTypeProvider.getAnotherType_AnotherTypeAction_1ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 	)

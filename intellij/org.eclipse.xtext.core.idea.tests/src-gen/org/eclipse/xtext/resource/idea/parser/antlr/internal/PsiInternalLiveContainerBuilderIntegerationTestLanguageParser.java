@@ -67,18 +67,24 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageParser exten
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -90,30 +96,38 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageParser exten
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:58:1: ruleModel : ( (lv_name_0_0= RULE_ID ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (lv_name_0_0= RULE_ID ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
 
         try {
-            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:58:10: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:59:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:60:1: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:61:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:59:2: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:60:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:61:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:62:3: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:60:3: (lv_name_0_0= RULE_ID )
-            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:61:4: lv_name_0_0= RULE_ID
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:62:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:63:4: lv_name_0_0= RULE_ID
             {
 
             				markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_0ElementType());
             			
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            				if(!current) {
+            					associateWithSemanticElement();
+            					current = true;
+            				}
+            			
 
             				doneLeaf(lv_name_0_0);
             			
@@ -133,7 +147,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageParser exten
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 

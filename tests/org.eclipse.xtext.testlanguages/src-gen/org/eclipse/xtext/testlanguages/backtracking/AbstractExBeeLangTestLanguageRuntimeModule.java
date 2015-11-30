@@ -48,7 +48,7 @@ import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.testlanguages.backtracking.formatting2.ExBeeLangTestLanguageFormatter;
 import org.eclipse.xtext.testlanguages.backtracking.parser.antlr.ExBeeLangTestLanguageAntlrTokenFileProvider;
 import org.eclipse.xtext.testlanguages.backtracking.parser.antlr.ExBeeLangTestLanguageParser;
-import org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal.InternalExBeeLangTestLanguageLexer;
+import org.eclipse.xtext.testlanguages.backtracking.parser.antlr.lexer.InternalExBeeLangTestLanguageLexer;
 import org.eclipse.xtext.testlanguages.backtracking.scoping.ExBeeLangTestLanguageScopeProvider;
 import org.eclipse.xtext.testlanguages.backtracking.serializer.ExBeeLangTestLanguageSemanticSequencer;
 import org.eclipse.xtext.testlanguages.backtracking.serializer.ExBeeLangTestLanguageSyntacticSequencer;

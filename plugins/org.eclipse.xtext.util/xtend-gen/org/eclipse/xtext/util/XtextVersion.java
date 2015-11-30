@@ -82,8 +82,18 @@ public class XtextVersion {
     return this.version.endsWith("-SNAPSHOT");
   }
   
-  public boolean isBeta() {
-    return this.version.matches(".*beta(\\d)*");
+  public boolean isStable() {
+    boolean _and = false;
+    boolean _isSnapshot = this.isSnapshot();
+    boolean _not = (!_isSnapshot);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _matches = this.version.matches("\\d+\\.\\d+(\\.\\d+)+");
+      boolean _not_1 = (!_matches);
+      _and = _not_1;
+    }
+    return _and;
   }
   
   public String getXtendGradlePluginVersion() {

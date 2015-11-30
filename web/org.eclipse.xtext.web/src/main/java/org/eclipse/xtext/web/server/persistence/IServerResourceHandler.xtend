@@ -9,6 +9,7 @@ package org.eclipse.xtext.web.server.persistence
 
 import com.google.inject.ImplementedBy
 import java.io.IOException
+import org.eclipse.xtext.web.server.IServiceContext
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 
@@ -19,15 +20,15 @@ import org.eclipse.xtext.web.server.model.XtextWebDocument
 @ImplementedBy(NullImpl)
 interface IServerResourceHandler {
 	
-	def XtextWebDocument get(String resourceId) throws IOException
+	def XtextWebDocument get(String resourceId, IServiceContext serviceContext) throws IOException
 	
-	def void put(IXtextWebDocument document) throws IOException
+	def void put(IXtextWebDocument document, IServiceContext serviceContext) throws IOException
 	
 	static class NullImpl implements IServerResourceHandler {
-		override get(String resourceId) throws IOException {
+		override get(String resourceId, IServiceContext serviceContext) throws IOException {
 			throw new IOException("This server does not support resource handling.")
 		}
-		override put(IXtextWebDocument document) throws IOException {
+		override put(IXtextWebDocument document, IServiceContext serviceContext) throws IOException {
 			throw new IOException("This server does not support resource handling.")
 		}
 	}

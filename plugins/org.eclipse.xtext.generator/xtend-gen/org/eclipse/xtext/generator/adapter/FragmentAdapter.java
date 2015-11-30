@@ -596,9 +596,11 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
         Grammar _grammar_1 = config2.getGrammar();
         String _eclipsePluginBasePackage = FragmentAdapter.this._xtextGeneratorNaming.getEclipsePluginBasePackage(_grammar_1);
         it.setUiBasePackage(_eclipsePluginBasePackage);
-        Grammar _grammar_2 = config2.getGrammar();
-        TypeReference _eclipsePluginActivator = FragmentAdapter.this._xtextGeneratorNaming.getEclipsePluginActivator(_grammar_2);
-        String _name = _eclipsePluginActivator.getName();
+        TypeReference _eclipsePluginActivator = FragmentAdapter.this._xtextGeneratorNaming.getEclipsePluginActivator();
+        String _name = null;
+        if (_eclipsePluginActivator!=null) {
+          _name=_eclipsePluginActivator.getName();
+        }
         it.setActivatorName(_name);
         IXtextProjectConfig _projectConfig_3 = FragmentAdapter.this.getProjectConfig();
         IBundleProjectConfig _runtimeTest = _projectConfig_3.getRuntimeTest();
@@ -622,8 +624,8 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
         String _projectNameIde = it.getProjectNameIde();
         boolean _tripleNotEquals_1 = (_projectNameIde != null);
         it.setHasIde(_tripleNotEquals_1);
-        Grammar _grammar_3 = config2.getGrammar();
-        String _name_1 = _grammar_3.getName();
+        Grammar _grammar_2 = config2.getGrammar();
+        String _name_1 = _grammar_2.getName();
         it.setGrammarId(_name_1);
       }
     };

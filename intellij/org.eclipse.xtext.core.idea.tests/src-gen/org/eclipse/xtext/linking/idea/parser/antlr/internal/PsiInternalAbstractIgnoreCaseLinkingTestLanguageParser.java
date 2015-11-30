@@ -69,18 +69,24 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -92,19 +98,24 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:58:1: ruleModel : ( (lv_elements_0_0= ruleElement ) )+ ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( (lv_elements_0_0= ruleElement ) )+ ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_elements_0_0 = null;
+
+
         try {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:58:10: ( ( (lv_elements_0_0= ruleElement ) )+ )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )+
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:60:1: ( ( (lv_elements_0_0= ruleElement ) )+ )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:61:2: ( (lv_elements_0_0= ruleElement ) )+
             {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )+
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:61:2: ( (lv_elements_0_0= ruleElement ) )+
             int cnt1=0;
             loop1:
             do {
@@ -118,21 +129,25 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
                 switch (alt1) {
             	case 1 :
-            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
+            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:62:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
-            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:61:4: lv_elements_0_0= ruleElement
+            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:62:3: (lv_elements_0_0= ruleElement )
+            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:63:4: lv_elements_0_0= ruleElement
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_ElementsElementParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
-            	    ruleElement();
+            	    lv_elements_0_0=ruleElement();
 
             	    state._fsp--;
 
 
             	    				doneComposite();
+            	    				if(!current) {
+            	    					associateWithSemanticElement();
+            	    					current = true;
+            	    				}
             	    			
 
             	    }
@@ -160,24 +175,30 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleElement"
-    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:73:1: entryRuleElement : ruleElement EOF ;
-    public final void entryRuleElement() throws RecognitionException {
+    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:79:1: entryRuleElement returns [Boolean current=false] : iv_ruleElement= ruleElement EOF ;
+    public final Boolean entryRuleElement() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleElement = null;
+
+
         try {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:73:17: ( ruleElement EOF )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:74:2: ruleElement EOF
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:79:49: (iv_ruleElement= ruleElement EOF )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:80:2: iv_ruleElement= ruleElement EOF
             {
              markComposite(elementTypeProvider.getElementElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleElement();
+            iv_ruleElement=ruleElement();
 
             state._fsp--;
 
+             current =iv_ruleElement; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -189,36 +210,46 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleElement"
 
 
     // $ANTLR start "ruleElement"
-    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:79:1: ruleElement : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
-    public final void ruleElement() throws RecognitionException {
+    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:86:1: ruleElement returns [Boolean current=false] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
+    public final Boolean ruleElement() throws RecognitionException {
+        Boolean current = false;
+
         Token lv_name_0_0=null;
         Token otherlv_1=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
+        Boolean lv_elements_3_0 = null;
+
 
         try {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:79:12: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:80:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:87:1: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:88:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
             {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:80:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:81:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:88:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:89:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
             {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:81:3: ( (lv_name_0_0= RULE_ID ) )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:82:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:89:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:90:4: (lv_name_0_0= RULE_ID )
             {
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:82:4: (lv_name_0_0= RULE_ID )
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:83:5: lv_name_0_0= RULE_ID
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:90:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:91:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_0_0ElementType());
             				
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_name_0_0);
             				
@@ -228,7 +259,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
             }
 
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:92:3: ( (otherlv_1= RULE_ID ) )?
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:106:3: ( (otherlv_1= RULE_ID ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -237,11 +268,17 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
             }
             switch (alt2) {
                 case 1 :
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:93:4: (otherlv_1= RULE_ID )
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:107:4: (otherlv_1= RULE_ID )
                     {
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:93:4: (otherlv_1= RULE_ID )
-                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:94:5: otherlv_1= RULE_ID
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:107:4: (otherlv_1= RULE_ID )
+                    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:108:5: otherlv_1= RULE_ID
                     {
+
+                    					if (!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
 
                     					markLeaf(elementTypeProvider.getElement_ReferenceElementCrossReference_1_0ElementType());
                     				
@@ -265,7 +302,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
             			doneLeaf(otherlv_2);
             		
-            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:110:3: ( (lv_elements_3_0= ruleElement ) )*
+            // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:130:3: ( (lv_elements_3_0= ruleElement ) )*
             loop3:
             do {
                 int alt3=2;
@@ -278,21 +315,25 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:111:4: (lv_elements_3_0= ruleElement )
+            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:131:4: (lv_elements_3_0= ruleElement )
             	    {
-            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:111:4: (lv_elements_3_0= ruleElement )
-            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:112:5: lv_elements_3_0= ruleElement
+            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:131:4: (lv_elements_3_0= ruleElement )
+            	    // PsiInternalAbstractIgnoreCaseLinkingTestLanguage.g:132:5: lv_elements_3_0= ruleElement
             	    {
 
             	    					markComposite(elementTypeProvider.getElement_ElementsElementParserRuleCall_3_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_6);
-            	    ruleElement();
+            	    lv_elements_3_0=ruleElement();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -326,7 +367,7 @@ public class PsiInternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abst
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleElement"
 

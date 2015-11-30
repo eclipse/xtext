@@ -32,8 +32,6 @@ public class HighlightingTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _replace);
     final XtextServiceDispatcher.ServiceDescriptor highlighting = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
-    boolean _isHasTextInput = highlighting.isHasTextInput();
-    Assert.assertTrue(_isHasTextInput);
     Function0<? extends IServiceResult> _service = highlighting.getService();
     IServiceResult _apply = _service.apply();
     final HighlightingResult result = ((HighlightingResult) _apply);

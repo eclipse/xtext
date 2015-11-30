@@ -63,7 +63,10 @@ public class GeneratorTest extends AbstractWebServerTest {
         }
       }
       _builder.newLineIfNotEmpty();
-      fsa.generateFile("test.txt", _builder);
+      fsa.generateFile("/DEFAULT_ARTIFACT", _builder);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("hello, world!");
+      fsa.generateFile("/test.txt", _builder_1);
     }
   }
   
@@ -88,8 +91,6 @@ public class GeneratorTest extends AbstractWebServerTest {
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
     boolean _isHasSideEffects = generate.isHasSideEffects();
     Assert.assertFalse(_isHasSideEffects);
-    boolean _isHasTextInput = generate.isHasTextInput();
-    Assert.assertFalse(_isHasTextInput);
     Function0<? extends IServiceResult> _service = generate.getService();
     IServiceResult _apply = _service.apply();
     final GeneratorResult result = ((GeneratorResult) _apply);
@@ -97,25 +98,41 @@ public class GeneratorTest extends AbstractWebServerTest {
     _builder.append("GeneratorResult [");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("documents = ArrayList (");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("GeneratedDocument [");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("name = \"DEFAULT_OUTPUTtest.txt\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("contentType = \"text/plain\"");
-    _builder.newLine();
-    _builder.append("      ");
-    _builder.append("content = \"foo,bar\\n\"");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("]");
+    _builder.append("name = \"DEFAULT_OUTPUT/DEFAULT_ARTIFACT\"");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append(")");
+    _builder.append("content = \"foo,bar\\n\"");
+    _builder.newLine();
+    _builder.append("]");
+    final String expectedResult = _builder.toString();
+    String _string = result.toString();
+    Assert.assertEquals(expectedResult, _string);
+  }
+  
+  @Test
+  public void testGenerateAdditionalText() {
+    final File file = this.createFile("state foo end state bar end");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "generate");
+    String _name = file.getName();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("artifact", "DEFAULT_OUTPUT/test.txt");
+    final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
+    boolean _isHasSideEffects = generate.isHasSideEffects();
+    Assert.assertFalse(_isHasSideEffects);
+    Function0<? extends IServiceResult> _service = generate.getService();
+    IServiceResult _apply = _service.apply();
+    final GeneratorResult result = ((GeneratorResult) _apply);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("GeneratorResult [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("name = \"DEFAULT_OUTPUT/test.txt\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("contentType = \"text/plain\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("content = \"hello, world!\"");
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();

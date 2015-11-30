@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
-	<title>Xtext-Web State Machine Example</title>
+	<title>Xtext-Web State Machine Example (Auto-Generator)</title>
 	<link rel="stylesheet" type="text/css" href="orion/code_edit/built-codeEdit.css" />
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
@@ -26,7 +26,7 @@
 					});
 					editorViewer.xtextServices.successListeners.push(function(serviceType, result) {
 						if (serviceType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
-							$('#generator-result').html('<iframe src="http://' + location.host + '/xtext-service/generate?resource=example.statemachine"></iframe>');
+							$('#generator-result').html('<iframe src="http://' + location.host + '/xtext-service/generate?resource=example1.statemachine"></iframe>');
 						}
 					});
 				});
@@ -38,7 +38,7 @@
 
 <div class="container">
 	<div class="xtext-editor"
-		data-editor-resource-id="example.statemachine"
+		data-editor-resource-id="example1.statemachine"
 		data-editor-dirty-element="dirty-indicator"
 		data-editor-enable-save-action="true"
 		data-editor-enable-formatting-action="true"

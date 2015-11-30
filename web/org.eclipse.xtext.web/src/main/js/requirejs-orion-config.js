@@ -15,10 +15,12 @@
 		"orion/codeEdit": "empty:",
 		"orion/keyBinding": "empty:",
 		"orion/editor/annotations": "empty:",
+		"embeddedEditor/builder/embeddedEditor": "empty:",
 		"embeddedEditor/helper/bootstrap": "empty:"
 	},
 	exclude: [
 		"jquery", "orion/Deferred", "orion/codeEdit", "orion/keyBinding",
-		"orion/editor/annotations", "embeddedEditor/helper/bootstrap"
+		"orion/editor/annotations", "embeddedEditor/builder/embeddedEditor",
+		"embeddedEditor/helper/bootstrap"
 	]
 })

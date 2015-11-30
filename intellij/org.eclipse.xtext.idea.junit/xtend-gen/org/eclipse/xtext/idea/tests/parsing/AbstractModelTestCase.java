@@ -113,8 +113,7 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
   
   protected XtextResource getActualResource() {
     BaseXtextFile _xtextFile = this.getXtextFile();
-    XtextResource _resource = _xtextFile.getResource();
-    return ((XtextResource) _resource);
+    return _xtextFile.getResource();
   }
   
   protected XtextResource createExpectedResource() {

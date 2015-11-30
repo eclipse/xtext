@@ -17,6 +17,7 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
@@ -196,6 +197,23 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		ILeafNode lessThan = NodeModelUtils.findLeafNodeAtOffset(NodeModelUtils.getNode(grammar), grammarString.indexOf("<"));
 		EObject object = NodeModelUtils.findActualSemanticObjectFor(lessThan);
 		assertTrue(object instanceof ParserRule);
+	}
+	
+	@Test public void testFindActualNode_01() throws Exception {
+		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model<Param>:name=ID;";
+		Grammar grammar = (Grammar) getModel(grammarString);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		Parameter parameter = rule.getParameters().get(0);
+		ICompositeNode node = NodeModelUtils.findActualNodeFor(parameter);
+		assertEquals("Param", node.getText());
+	}
+	
+	@Test public void testFindActualNode_02() throws Exception {
+		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model<Param>:name=ID;";
+		Grammar grammar = (Grammar) getModel(grammarString);
+		ParserRule rule = (ParserRule) grammar.getRules().get(0);
+		ICompositeNode node = NodeModelUtils.findActualNodeFor(rule);
+		assertEquals(" Model<Param>:name=ID;", node.getText());
 	}
 	
 	@Test public void testCompactDump_1() throws Exception {

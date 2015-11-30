@@ -166,10 +166,10 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingBug325745TestLanguage.g:434:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalBacktrackingBug325745TestLanguage.g:434:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalBacktrackingBug325745TestLanguage.g:516:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalBacktrackingBug325745TestLanguage.g:516:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalBacktrackingBug325745TestLanguage.g:434:11: ( '^' )?
+            // PsiInternalBacktrackingBug325745TestLanguage.g:516:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -178,7 +178,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalBacktrackingBug325745TestLanguage.g:434:11: '^'
+                    // PsiInternalBacktrackingBug325745TestLanguage.g:516:11: '^'
                     {
                     match('^'); 
 
@@ -196,7 +196,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalBacktrackingBug325745TestLanguage.g:434:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalBacktrackingBug325745TestLanguage.g:516:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -245,10 +245,10 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingBug325745TestLanguage.g:436:10: ( ( '0' .. '9' )+ )
-            // PsiInternalBacktrackingBug325745TestLanguage.g:436:12: ( '0' .. '9' )+
+            // PsiInternalBacktrackingBug325745TestLanguage.g:518:10: ( ( '0' .. '9' )+ )
+            // PsiInternalBacktrackingBug325745TestLanguage.g:518:12: ( '0' .. '9' )+
             {
-            // PsiInternalBacktrackingBug325745TestLanguage.g:436:12: ( '0' .. '9' )+
+            // PsiInternalBacktrackingBug325745TestLanguage.g:518:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -262,7 +262,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalBacktrackingBug325745TestLanguage.g:436:13: '0' .. '9'
+            	    // PsiInternalBacktrackingBug325745TestLanguage.g:518:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -294,10 +294,10 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingBug325745TestLanguage.g:438:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalBacktrackingBug325745TestLanguage.g:438:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalBacktrackingBug325745TestLanguage.g:520:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalBacktrackingBug325745TestLanguage.g:520:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalBacktrackingBug325745TestLanguage.g:438:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalBacktrackingBug325745TestLanguage.g:520:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -315,10 +315,10 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalBacktrackingBug325745TestLanguage.g:438:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalBacktrackingBug325745TestLanguage.g:520:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalBacktrackingBug325745TestLanguage.g:438:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalBacktrackingBug325745TestLanguage.g:520:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -334,7 +334,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalBacktrackingBug325745TestLanguage.g:438:21: '\\\\' .
+                    	    // PsiInternalBacktrackingBug325745TestLanguage.g:520:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -342,7 +342,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalBacktrackingBug325745TestLanguage.g:438:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalBacktrackingBug325745TestLanguage.g:520:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -367,10 +367,10 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalBacktrackingBug325745TestLanguage.g:438:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalBacktrackingBug325745TestLanguage.g:520:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalBacktrackingBug325745TestLanguage.g:438:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalBacktrackingBug325745TestLanguage.g:520:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -386,7 +386,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalBacktrackingBug325745TestLanguage.g:438:54: '\\\\' .
+                    	    // PsiInternalBacktrackingBug325745TestLanguage.g:520:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -394,7 +394,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalBacktrackingBug325745TestLanguage.g:438:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalBacktrackingBug325745TestLanguage.g:520:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -437,12 +437,12 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingBug325745TestLanguage.g:440:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalBacktrackingBug325745TestLanguage.g:440:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalBacktrackingBug325745TestLanguage.g:522:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalBacktrackingBug325745TestLanguage.g:522:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalBacktrackingBug325745TestLanguage.g:440:24: ( options {greedy=false; } : . )*
+            // PsiInternalBacktrackingBug325745TestLanguage.g:522:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -467,7 +467,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalBacktrackingBug325745TestLanguage.g:440:52: .
+            	    // PsiInternalBacktrackingBug325745TestLanguage.g:522:52: .
             	    {
             	    matchAny(); 
 
@@ -497,12 +497,12 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingBug325745TestLanguage.g:442:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalBacktrackingBug325745TestLanguage.g:442:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalBacktrackingBug325745TestLanguage.g:524:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalBacktrackingBug325745TestLanguage.g:524:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalBacktrackingBug325745TestLanguage.g:442:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalBacktrackingBug325745TestLanguage.g:524:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -515,7 +515,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalBacktrackingBug325745TestLanguage.g:442:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalBacktrackingBug325745TestLanguage.g:524:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -535,7 +535,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalBacktrackingBug325745TestLanguage.g:442:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalBacktrackingBug325745TestLanguage.g:524:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -544,9 +544,9 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalBacktrackingBug325745TestLanguage.g:442:41: ( '\\r' )? '\\n'
+                    // PsiInternalBacktrackingBug325745TestLanguage.g:524:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalBacktrackingBug325745TestLanguage.g:442:41: ( '\\r' )?
+                    // PsiInternalBacktrackingBug325745TestLanguage.g:524:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -555,7 +555,7 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalBacktrackingBug325745TestLanguage.g:442:41: '\\r'
+                            // PsiInternalBacktrackingBug325745TestLanguage.g:524:41: '\\r'
                             {
                             match('\r'); 
 
@@ -587,10 +587,10 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingBug325745TestLanguage.g:444:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalBacktrackingBug325745TestLanguage.g:444:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBacktrackingBug325745TestLanguage.g:526:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalBacktrackingBug325745TestLanguage.g:526:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalBacktrackingBug325745TestLanguage.g:444:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBacktrackingBug325745TestLanguage.g:526:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -644,8 +644,8 @@ public class PsiInternalBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalBacktrackingBug325745TestLanguage.g:446:16: ( . )
-            // PsiInternalBacktrackingBug325745TestLanguage.g:446:18: .
+            // PsiInternalBacktrackingBug325745TestLanguage.g:528:16: ( . )
+            // PsiInternalBacktrackingBug325745TestLanguage.g:528:18: .
             {
             matchAny(); 
 

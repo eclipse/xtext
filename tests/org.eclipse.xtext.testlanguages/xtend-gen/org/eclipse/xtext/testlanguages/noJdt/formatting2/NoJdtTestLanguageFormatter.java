@@ -6,6 +6,7 @@ package org.eclipse.xtext.testlanguages.noJdt.formatting2;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.resource.XtextResource;
@@ -33,6 +34,9 @@ public class NoJdtTestLanguageFormatter extends AbstractFormatter2 {
       return;
     } else if (model instanceof Model) {
       _format((Model)model, document);
+      return;
+    } else if (model instanceof EObject) {
+      _format((EObject)model, document);
       return;
     } else if (model == null) {
       _format((Void)null, document);

@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.model
 
-import com.google.inject.Inject
 import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
@@ -18,10 +18,15 @@ import org.eclipse.xtext.web.server.IServiceResult
 /**
  * Container for an {@link XtextResource}.
  */
-@Log class XtextWebDocument implements IXtextWebDocument {
+@Log
+@FinalFieldsConstructor
+class XtextWebDocument implements IXtextWebDocument {
 	
 	@Accessors(PUBLIC_GETTER)
-	String resourceId
+	val String resourceId
+	
+	@Accessors(PACKAGE_GETTER)
+    val DocumentSynchronizer synchronizer
 	
 	@Accessors(PUBLIC_GETTER)
 	XtextResource resource
@@ -31,12 +36,9 @@ import org.eclipse.xtext.web.server.IServiceResult
 	
 	@Accessors
 	boolean dirty
-	
-	@Accessors(PACKAGE_GETTER)
-    @Inject DocumentSynchronizer synchronizer
     
-    Map<Class<?>, IServiceResult> cachedServiceResults = newHashMap
-
+    val Map<Class<?>, IServiceResult> cachedServiceResults = newHashMap
+    
 	protected def clearCachedServiceResults() {
 		cachedServiceResults.clear
 	}
@@ -59,10 +61,9 @@ import org.eclipse.xtext.web.server.IServiceResult
 		super.toString()
 	}
 	
-	def setInput(XtextResource resource, String resourceId) {
+	def setInput(XtextResource resource) {
 		clearCachedServiceResults()
 		this.resource = resource
-		this.resourceId = resourceId
 		refreshText()
 	}
 	

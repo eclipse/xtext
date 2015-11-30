@@ -35,10 +35,10 @@ public class PsiInternalEncodingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_LEXEME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEncodingTestLanguage.g:93:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
-            // PsiInternalEncodingTestLanguage.g:93:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            // PsiInternalEncodingTestLanguage.g:107:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
+            // PsiInternalEncodingTestLanguage.g:107:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
             {
-            // PsiInternalEncodingTestLanguage.g:93:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            // PsiInternalEncodingTestLanguage.g:107:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
             loop1:
             do {
                 int alt1=2;
@@ -87,10 +87,10 @@ public class PsiInternalEncodingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEncodingTestLanguage.g:95:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalEncodingTestLanguage.g:95:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalEncodingTestLanguage.g:109:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalEncodingTestLanguage.g:109:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalEncodingTestLanguage.g:95:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalEncodingTestLanguage.g:109:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt2=0;
             loop2:
             do {
@@ -144,8 +144,8 @@ public class PsiInternalEncodingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEncodingTestLanguage.g:97:16: ( . )
-            // PsiInternalEncodingTestLanguage.g:97:18: .
+            // PsiInternalEncodingTestLanguage.g:111:16: ( . )
+            // PsiInternalEncodingTestLanguage.g:111:18: .
             {
             matchAny(); 
 

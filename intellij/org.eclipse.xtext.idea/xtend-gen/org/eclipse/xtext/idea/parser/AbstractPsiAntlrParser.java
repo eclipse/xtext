@@ -168,6 +168,11 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     this.psiInput.remapToken(elementType);
   }
   
+  protected void associateWithSemanticElement() {
+    CompositeMarker _peek = this.compositeMarkers.peek();
+    _peek.setHasSemanticElement(true);
+  }
+  
   protected void precedeComposite(final IElementType elementType) {
     final CompositeMarker compositeMarker = this.compositeMarkers.pop();
     CompositeMarker _precede = compositeMarker.precede(elementType);

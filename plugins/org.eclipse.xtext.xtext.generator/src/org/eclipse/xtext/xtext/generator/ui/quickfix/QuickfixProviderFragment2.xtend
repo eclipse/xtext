@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.quickfix
 import javax.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -29,9 +28,6 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 
 	@Inject
 	extension XtextGeneratorNaming
-
-	@Inject
-	extension CodeConfig
 	
 	@Inject
 	extension ValidatorNaming
@@ -67,20 +63,20 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 					grammar.quickfixProviderClass
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (generateStub) {
+		if (isGenerateStub) {
 			if (projectConfig.eclipsePlugin?.src !== null) {
-				if (preferXtendStubs) {
+				if (generateXtendStub) {
 					generateXtendQuickfixProvider
 				} else {
 					generateJavaQuickfixProvider
 				}
 			}
 
-			if (projectConfig.eclipsePlugin.manifest != null) {
+			if (projectConfig.eclipsePlugin.manifest !== null) {
 				projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.quickfixProviderClass.packageName
 			}
 
-			if (projectConfig.eclipsePlugin.pluginXml != null) {
+			if (projectConfig.eclipsePlugin.pluginXml !== null) {
 				addRegistrationToPluginXml
 			}
 
@@ -89,7 +85,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 				generateGenQuickfixProvider
 			}
 
-			if (projectConfig.eclipsePlugin.manifest != null) {
+			if (projectConfig.eclipsePlugin.manifest !== null) {
 				projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.quickfixProviderClass.packageName
 			}
 		}
@@ -157,7 +153,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 	}
 	
 	protected def addRegistrationToPluginXml() {
-		val markerTypePrefix = grammar.eclipsePluginBasePackage + "." + grammar.simpleName.toLowerCase
+		val markerTypePrefix = projectConfig.eclipsePlugin.name + "." + grammar.simpleName.toLowerCase
 		val executableExtensionFactory = grammar.eclipsePluginExecutableExtensionFactory
 
 		projectConfig.eclipsePlugin.pluginXml.entries += '''

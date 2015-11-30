@@ -11,6 +11,7 @@ import com.google.common.base.CharMatcher;
 import com.google.inject.Injector;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
@@ -53,7 +54,22 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
       CharMatcher _is = CharMatcher.is('/');
       return _is.trimFrom(relativePath);
     }
-    throw new RuntimeException("Could not derive the Ecore model folder from the project configuration. Please make sure that \'root\' is a prefix of \'ecoreModel\'.");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Could not derive the Ecore model folder from the project configuration. ");
+    _builder.newLine();
+    _builder.append("Please make sure that \\\'root\\\' is a prefix of \\\'ecoreModel\\\'.");
+    _builder.newLine();
+    _builder.append("was (root=\'");
+    IXtextGeneratorFileSystemAccess _root_2 = this.getRoot();
+    String _path_4 = _root_2.getPath();
+    _builder.append(_path_4, "");
+    _builder.append("\', ecoreModel=\'");
+    String _path_5 = this.ecoreModel.getPath();
+    _builder.append(_path_5, "");
+    _builder.append("\')");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    throw new RuntimeException(_builder.toString());
   }
   
   @Override

@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.ui.labeling
 import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
-import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -37,9 +36,6 @@ class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 
 	@Inject
 	extension XbaseUsageDetector
-
-	@Inject
-	extension CodeConfig
 
 	@Inject
 	FileAccessFactory fileAccessFactory
@@ -85,18 +81,18 @@ class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 
 
 	override generate() {
-		if (generateStub || grammar.inheritsXbase) {
+		if (isGenerateStub || grammar.inheritsXbase) {
 
 			if (projectConfig.eclipsePlugin.manifest != null) {
 				projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 			}
 	
 			val labelProviderClass =
-				if (generateStub) grammar.EObjectLabelProviderClass
+				if (isGenerateStub) grammar.EObjectLabelProviderClass
 				else new TypeReference(XBASE_LABEL_PROVIDER)
 	
 			val descriptionLabelProviderClass =
-				if (generateStub) grammar.descriptionLabelProviderClass
+				if (isGenerateStub) grammar.descriptionLabelProviderClass
 				else new TypeReference(XBASE_DESCRIPTION_LABEL_PROVIDER)			 
 	
 			val iLabelProviderClass = new TypeReference("org.eclipse.jface.viewers.ILabelProvider")
@@ -111,8 +107,8 @@ class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
 					''').contributeTo(language.eclipsePluginGenModule)			
 		}
 
-		if (generateStub && projectConfig.eclipsePlugin.src !== null) {
-			if (preferXtendStubs) {
+		if (isGenerateStub && projectConfig.eclipsePlugin.src !== null) {
+			if (generateXtendStub) {
 				generateXtendEObjectLabelProvider
 				generateXtendDescriptionLabelProvider
 			} else {

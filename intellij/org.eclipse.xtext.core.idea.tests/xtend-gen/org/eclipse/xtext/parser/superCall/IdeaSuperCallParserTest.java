@@ -82,4 +82,8 @@ public class IdeaSuperCallParserTest extends AbstractLanguageParsingTestCase {
   public void test_04() throws Exception {
     delegate.test_04();
   }
+  
+  public void test_05() throws Exception {
+    delegate.test_05();
+  }
 }

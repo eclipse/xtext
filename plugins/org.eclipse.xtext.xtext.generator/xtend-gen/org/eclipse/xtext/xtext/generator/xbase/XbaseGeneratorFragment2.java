@@ -260,35 +260,32 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       TypeReference _typeRef_16 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.GlobalURIEditorOpener");
       TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.navigation.GlobalDerivedMemberAwareURIEditorOpener");
       GuiceModuleAccess.BindingFactory _addTypeToType_8 = _addTypeToType_7.addTypeToType(_typeRef_16, _typeRef_17);
-      TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer");
-      TypeReference _typeRef_19 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer");
-      GuiceModuleAccess.BindingFactory _addTypeToType_9 = _addTypeToType_8.addTypeToType(_typeRef_18, _typeRef_19);
-      TypeReference _typeRef_20 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation");
+      TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation");
       TypeReference _typeReference_2 = new TypeReference("org.eclipse.xtext.common.types.ui.query", "IJavaSearchParticipation.No");
-      GuiceModuleAccess.BindingFactory _addTypeToType_10 = _addTypeToType_9.addTypeToType(_typeRef_20, _typeReference_2);
-      _addTypeToType_10.addConfiguredBinding("LanguageSpecificURIEditorOpener", statement);
+      GuiceModuleAccess.BindingFactory _addTypeToType_9 = _addTypeToType_8.addTypeToType(_typeRef_18, _typeReference_2);
+      _addTypeToType_9.addConfiguredBinding("LanguageSpecificURIEditorOpener", statement);
     } else {
-      TypeReference _typeRef_21 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameStrategy");
-      TypeReference _typeRef_22 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
-      bindingFactory.addTypeToType(_typeRef_21, _typeRef_22);
+      TypeReference _typeRef_19 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IRenameStrategy");
+      TypeReference _typeRef_20 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
+      bindingFactory.addTypeToType(_typeRef_19, _typeRef_20);
     }
     IXtextGeneratorLanguage _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     boolean _usesXImportSection = this._xbaseUsageDetector.usesXImportSection(_grammar);
     if (_usesXImportSection) {
-      TypeReference _typeRef_23 = TypeReference.typeRef("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver");
-      TypeReference _typeRef_24 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver");
-      GuiceModuleAccess.BindingFactory _addTypeToType_11 = bindingFactory.addTypeToType(_typeRef_23, _typeRef_24);
-      TypeReference _typeRef_25 = TypeReference.typeRef("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider");
-      TypeReference _typeRef_26 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider");
-      GuiceModuleAccess.BindingFactory _addTypeToType_12 = _addTypeToType_11.addTypeToType(_typeRef_25, _typeRef_26);
-      TypeReference _typeRef_27 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType");
-      TypeReference _typeRef_28 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType");
-      _addTypeToType_12.addTypeToType(_typeRef_27, _typeRef_28);
+      TypeReference _typeRef_21 = TypeReference.typeRef("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver");
+      TypeReference _typeRef_22 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver");
+      GuiceModuleAccess.BindingFactory _addTypeToType_10 = bindingFactory.addTypeToType(_typeRef_21, _typeRef_22);
+      TypeReference _typeRef_23 = TypeReference.typeRef("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider");
+      TypeReference _typeRef_24 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider");
+      GuiceModuleAccess.BindingFactory _addTypeToType_11 = _addTypeToType_10.addTypeToType(_typeRef_23, _typeRef_24);
+      TypeReference _typeRef_25 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType");
+      TypeReference _typeRef_26 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.templates.XbaseTemplateContextType");
+      _addTypeToType_11.addTypeToType(_typeRef_25, _typeRef_26);
     } else {
-      TypeReference _typeRef_29 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes");
-      TypeReference _typeRef_30 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection");
-      bindingFactory.addTypeToType(_typeRef_29, _typeRef_30);
+      TypeReference _typeRef_27 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes");
+      TypeReference _typeRef_28 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection");
+      bindingFactory.addTypeToType(_typeRef_27, _typeRef_28);
     }
     IXtextGeneratorLanguage _language_1 = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language_1.getEclipsePluginGenModule();
@@ -299,18 +296,18 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     if (_inheritsXbaseWithAnnotations) {
       IXtextGeneratorLanguage _language_3 = this.getLanguage();
       GuiceModuleAccess _eclipsePluginGenModule_1 = _language_3.getEclipsePluginGenModule();
-      TypeReference _typeRef_31 = TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule");
-      _eclipsePluginGenModule_1.setSuperClass(_typeRef_31);
+      TypeReference _typeRef_29 = TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule");
+      _eclipsePluginGenModule_1.setSuperClass(_typeRef_29);
     } else {
       IXtextGeneratorLanguage _language_4 = this.getLanguage();
       GuiceModuleAccess _eclipsePluginGenModule_2 = _language_4.getEclipsePluginGenModule();
-      TypeReference _typeRef_32 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule");
-      _eclipsePluginGenModule_2.setSuperClass(_typeRef_32);
+      TypeReference _typeRef_30 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule");
+      _eclipsePluginGenModule_2.setSuperClass(_typeRef_30);
     }
     IXtextGeneratorLanguage _language_5 = this.getLanguage();
     GuiceModuleAccess _webGenModule = _language_5.getWebGenModule();
-    TypeReference _typeRef_33 = TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule");
-    _webGenModule.setSuperClass(_typeRef_33);
+    TypeReference _typeRef_31 = TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule");
+    _webGenModule.setSuperClass(_typeRef_31);
   }
   
   protected void doGenerateXtendInferrer() {

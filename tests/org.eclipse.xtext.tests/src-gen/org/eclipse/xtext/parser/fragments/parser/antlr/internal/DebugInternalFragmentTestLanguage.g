@@ -10,7 +10,9 @@ ruleParserRuleFragments :
 	'#3' rulePRFNamedRefFirst |
 	'#4' rulePRFNamedWithAction |
 	'#8' rulePRFNamedWithFQN |
-	'#9' rulePRFWithPredicate
+	'#9' rulePRFWithPredicate |
+	'#10' rulePRFNamedRecursive |
+	'#11' rulePRFNamedRecursiveFragment
 ;
 
 // Rule PRFNamed
@@ -19,6 +21,16 @@ rulePRFNamed :
 		':' RULE_ID |
 		'-' rulePRFNamedRef
 	)?
+;
+
+// Rule PRFNamedRecursive
+rulePRFNamedRecursive :
+	RULE_ID ruleRecursiveFromFragment
+;
+
+// Rule PRFNamedRecursiveFragment
+rulePRFNamedRecursiveFragment :
+	RULE_ID ruleRecursiveFragment
 ;
 
 // Rule PRFNamedRefFirst
@@ -76,6 +88,28 @@ rulePRFNamedFragment :
 
 // Rule PRFNamedRef
 rulePRFNamedRef :
+	RULE_ID
+;
+
+// Rule RecursiveFromFragment
+ruleRecursiveFromFragment :
+	ruleNamedInParentheses
+;
+
+// Rule NamedInParentheses
+ruleNamedInParentheses :
+	'(' ruleNamedInParentheses ')' |
+	RULE_ID
+;
+
+// Rule RecursiveFragment
+ruleRecursiveFragment :
+	'(' ruleRecursiveFragment ')' |
+	ruleNamedByAction
+;
+
+// Rule NamedByAction
+ruleNamedByAction :
 	RULE_ID
 ;
 

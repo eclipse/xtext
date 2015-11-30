@@ -105,10 +105,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEnumAndReferenceTestLanguage.g:128:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalEnumAndReferenceTestLanguage.g:128:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalEnumAndReferenceTestLanguage.g:147:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalEnumAndReferenceTestLanguage.g:147:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:128:11: ( '^' )?
+            // PsiInternalEnumAndReferenceTestLanguage.g:147:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -117,7 +117,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalEnumAndReferenceTestLanguage.g:128:11: '^'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:147:11: '^'
                     {
                     match('^'); 
 
@@ -135,7 +135,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalEnumAndReferenceTestLanguage.g:128:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalEnumAndReferenceTestLanguage.g:147:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -184,10 +184,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEnumAndReferenceTestLanguage.g:130:10: ( ( '0' .. '9' )+ )
-            // PsiInternalEnumAndReferenceTestLanguage.g:130:12: ( '0' .. '9' )+
+            // PsiInternalEnumAndReferenceTestLanguage.g:149:10: ( ( '0' .. '9' )+ )
+            // PsiInternalEnumAndReferenceTestLanguage.g:149:12: ( '0' .. '9' )+
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:130:12: ( '0' .. '9' )+
+            // PsiInternalEnumAndReferenceTestLanguage.g:149:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -201,7 +201,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalEnumAndReferenceTestLanguage.g:130:13: '0' .. '9'
+            	    // PsiInternalEnumAndReferenceTestLanguage.g:149:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -233,10 +233,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEnumAndReferenceTestLanguage.g:132:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalEnumAndReferenceTestLanguage.g:132:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalEnumAndReferenceTestLanguage.g:151:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:151:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:132:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalEnumAndReferenceTestLanguage.g:151:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -254,10 +254,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalEnumAndReferenceTestLanguage.g:132:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:151:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalEnumAndReferenceTestLanguage.g:132:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalEnumAndReferenceTestLanguage.g:151:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -273,7 +273,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalEnumAndReferenceTestLanguage.g:132:21: '\\\\' .
+                    	    // PsiInternalEnumAndReferenceTestLanguage.g:151:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -281,7 +281,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalEnumAndReferenceTestLanguage.g:132:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalEnumAndReferenceTestLanguage.g:151:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -306,10 +306,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalEnumAndReferenceTestLanguage.g:132:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalEnumAndReferenceTestLanguage.g:151:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalEnumAndReferenceTestLanguage.g:132:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalEnumAndReferenceTestLanguage.g:151:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -325,7 +325,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalEnumAndReferenceTestLanguage.g:132:54: '\\\\' .
+                    	    // PsiInternalEnumAndReferenceTestLanguage.g:151:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -333,7 +333,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalEnumAndReferenceTestLanguage.g:132:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalEnumAndReferenceTestLanguage.g:151:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -376,12 +376,12 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEnumAndReferenceTestLanguage.g:134:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalEnumAndReferenceTestLanguage.g:134:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalEnumAndReferenceTestLanguage.g:153:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalEnumAndReferenceTestLanguage.g:153:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalEnumAndReferenceTestLanguage.g:134:24: ( options {greedy=false; } : . )*
+            // PsiInternalEnumAndReferenceTestLanguage.g:153:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -406,7 +406,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalEnumAndReferenceTestLanguage.g:134:52: .
+            	    // PsiInternalEnumAndReferenceTestLanguage.g:153:52: .
             	    {
             	    matchAny(); 
 
@@ -436,12 +436,12 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEnumAndReferenceTestLanguage.g:136:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalEnumAndReferenceTestLanguage.g:136:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalEnumAndReferenceTestLanguage.g:155:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalEnumAndReferenceTestLanguage.g:155:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalEnumAndReferenceTestLanguage.g:136:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalEnumAndReferenceTestLanguage.g:155:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -454,7 +454,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalEnumAndReferenceTestLanguage.g:136:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalEnumAndReferenceTestLanguage.g:155:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -474,7 +474,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalEnumAndReferenceTestLanguage.g:136:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalEnumAndReferenceTestLanguage.g:155:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -483,9 +483,9 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalEnumAndReferenceTestLanguage.g:136:41: ( '\\r' )? '\\n'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:155:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalEnumAndReferenceTestLanguage.g:136:41: ( '\\r' )?
+                    // PsiInternalEnumAndReferenceTestLanguage.g:155:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -494,7 +494,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalEnumAndReferenceTestLanguage.g:136:41: '\\r'
+                            // PsiInternalEnumAndReferenceTestLanguage.g:155:41: '\\r'
                             {
                             match('\r'); 
 
@@ -526,10 +526,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEnumAndReferenceTestLanguage.g:138:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalEnumAndReferenceTestLanguage.g:138:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalEnumAndReferenceTestLanguage.g:157:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalEnumAndReferenceTestLanguage.g:157:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalEnumAndReferenceTestLanguage.g:138:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalEnumAndReferenceTestLanguage.g:157:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -583,8 +583,8 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalEnumAndReferenceTestLanguage.g:140:16: ( . )
-            // PsiInternalEnumAndReferenceTestLanguage.g:140:18: .
+            // PsiInternalEnumAndReferenceTestLanguage.g:159:16: ( . )
+            // PsiInternalEnumAndReferenceTestLanguage.g:159:18: .
             {
             matchAny(); 
 

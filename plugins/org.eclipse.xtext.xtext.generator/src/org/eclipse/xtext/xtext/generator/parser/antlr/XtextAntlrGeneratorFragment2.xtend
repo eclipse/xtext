@@ -44,26 +44,27 @@ import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption
+import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
-import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
-import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
-	@Accessors
+	
+	@Accessors(PUBLIC_SETTER)
 	boolean debugGrammar
 	
-	@Accessors
-	Boolean combinedGrammar = null
+	val combinedGrammar = new BooleanGeneratorOption
 	
-	@Accessors
+	@Accessors(PUBLIC_SETTER)
 	boolean removeBacktrackingGuards
 	
 	int lookaheadThreshold
 	
-	@Accessors
+	@Accessors(PUBLIC_SETTER)
 	boolean partialParsing
 
 	@Inject AntlrGrammarGenerator productionGenerator
@@ -77,6 +78,17 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	@Inject extension GrammarAccessExtensions grammarUtil
 	@Inject extension SyntheticTerminalDetector
+	
+	def setCombinedGrammar(boolean combinedGrammar) {
+		this.combinedGrammar.set(combinedGrammar)
+	}
+	
+	protected def isCombinedGrammar() {
+		if (combinedGrammar.isSet)
+			combinedGrammar.get
+		else
+			!options.backtrackLexer && !options.ignoreCase
+	}
 
 	override protected doGenerate() {
 		new KeywordHelper(grammar, options.ignoreCase, grammarUtil)
@@ -159,10 +171,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		if (!isCombinedGrammar) {
 			cleanupParserTokensFile(lexerGrammar, parserGrammar, KeywordHelper.getHelper(grammar), fsa)
 		}
-	}
-	
-	def isCombinedGrammar() {
-		combinedGrammar == null && !options.backtrackLexer && !options.ignoreCase || combinedGrammar == Boolean.TRUE
 	}
 	
 	protected def generateDebugGrammar() {
@@ -308,7 +316,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			
 				«IF grammar.allTerminalRules.exists[isSyntheticTerminalRule]»
 					@Override
-					protected «TokenSource» createLexer(CharStream stream) {
+					protected «TokenSource» createLexer(«CharStream» stream) {
 						return new «grammar.tokenSourceClass»(super.createLexer(stream));
 					}
 					
@@ -458,10 +466,12 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	def addUiBindingsAndImports() {
 		val extension naming = contentAssistNaming
+		val caLexerClass = grammar.lexerClass
+		
 		if (projectConfig.genericIde.manifest !== null) {
 			projectConfig.genericIde.manifest=>[
 				exportedPackages += #[
-					grammar.lexerClass.packageName,
+					caLexerClass.packageName,
 					grammar.parserClass.packageName,
 					grammar.internalParserClass.packageName
 				]
@@ -472,19 +482,22 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				"org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper".typeRef, 
 				"org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper".typeRef
 			)
-			.addConfiguredBinding("HighlightingLexer", '''
-				binder.bind(«Lexer».class)
-					.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
-					.to(«productionNaming.getLexerClass(grammar)».class);
-			''')
 			.addConfiguredBinding("ContentAssistLexer", '''
 				binder.bind(«grammar.lexerSuperClass».class)
-					.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST))
-					.to(«grammar.lexerClass».class);
+					.annotatedWith(«Names».named(«"org.eclipse.xtext.ide.LexerIdeBindings".typeRef».CONTENT_ASSIST))
+					.to(«caLexerClass».class);
+			''')
+			// registration of the 'ContentAssistLexer' is put in front of the 'HighlightingLexer'
+			//  in order to let 'caLexerClass' get added to the imports, since it is referenced
+			//  several times and the lexer classes' simple names are usually identical
+			.addConfiguredBinding("HighlightingLexer", '''
+				binder.bind(«Lexer».class)
+					.annotatedWith(«Names».named(«"org.eclipse.xtext.ide.LexerIdeBindings".typeRef».HIGHLIGHTING))
+					.to(«productionNaming.getLexerClass(grammar)».class);
 			''')
 			.addConfiguredBinding("HighlightingTokenDefProvider", '''
 				binder.bind(«ITokenDefProvider».class)
-					.annotatedWith(«Names».named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+					.annotatedWith(«Names».named(«"org.eclipse.xtext.ide.LexerIdeBindings".typeRef».HIGHLIGHTING))
 					.to(«AntlrTokenDefProvider».class);
 			''')
 			.addTypeToType(
@@ -496,8 +509,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				grammar.parserClass
 			)
 			.addConfiguredBinding("ContentAssistLexerProvider", '''
-				binder.bind(«grammar.lexerClass».class)
-					.toProvider(«LexerProvider».create(«grammar.lexerClass».class));
+				binder.bind(«caLexerClass».class).toProvider(«LexerProvider».create(«caLexerClass».class));
 			''')
 		if (partialParsing) {
 			uiBindings.addTypeToType(

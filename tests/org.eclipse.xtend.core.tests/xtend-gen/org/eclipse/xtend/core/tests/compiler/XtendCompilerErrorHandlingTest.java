@@ -632,10 +632,37 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void testBug482845() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val foo = String.");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Object foo = String.class./* name is null */;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1, false);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
+    this.assertCompilesTo(input, expected, true);
+  }
+  
+  public void assertCompilesTo(final CharSequence input, final CharSequence expected, final boolean shouldBeSyntacticallyValid) {
     try {
       String _string = input.toString();
-      final XtendFile file = this.file(_string, false);
+      final XtendFile file = this.file(_string, false, shouldBeSyntacticallyValid);
       final Resource resource = file.eResource();
       try {
         this.issueProviderFactory.attachData(resource);

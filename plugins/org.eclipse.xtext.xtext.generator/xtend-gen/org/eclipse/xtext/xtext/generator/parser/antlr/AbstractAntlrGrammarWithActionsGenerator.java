@@ -630,6 +630,10 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
     return false;
   }
   
+  protected String getCurrentType() {
+    return "EObject";
+  }
+  
   @Override
   protected boolean _mustBeParenthesized(final AbstractElement it) {
     return true;
@@ -637,6 +641,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
   
   @Override
   protected boolean _mustBeParenthesized(final Group it) {
+    return true;
+  }
+  
+  @Override
+  protected boolean _mustBeParenthesized(final Assignment it) {
     return true;
   }
   
@@ -780,6 +789,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
       return _mustBeParenthesized((Alternatives)it);
     } else if (it instanceof Group) {
       return _mustBeParenthesized((Group)it);
+    } else if (it instanceof Assignment) {
+      return _mustBeParenthesized((Assignment)it);
     } else if (it instanceof Keyword) {
       return _mustBeParenthesized((Keyword)it);
     } else if (it instanceof RuleCall) {

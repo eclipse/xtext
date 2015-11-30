@@ -17,6 +17,7 @@ Model:
 Element :
 	  super::Element
 	| {Element} "element" name=super::ID
+	| {Element} "element" name=Terminals::ID
 	| {Element} "element" name=super::STRING
 ;
 

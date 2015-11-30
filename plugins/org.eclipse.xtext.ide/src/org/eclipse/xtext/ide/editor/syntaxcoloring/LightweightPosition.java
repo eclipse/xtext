@@ -14,6 +14,7 @@ import java.util.Set;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.9
  */
 public class LightweightPosition implements Comparable<LightweightPosition>{
 

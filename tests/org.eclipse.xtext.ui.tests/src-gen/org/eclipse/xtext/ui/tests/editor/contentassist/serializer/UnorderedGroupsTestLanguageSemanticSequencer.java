@@ -4,17 +4,15 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.serializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Parameter;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
-import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.UnorderedGroupsTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Attribute;
@@ -35,8 +33,13 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	private UnorderedGroupsTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
-	public void createSequence(EObject context, EObject semanticObject) {
-		if(semanticObject.eClass().getEPackage() == UnorderedGroupsTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+	public void sequence(ISerializationContext context, EObject semanticObject) {
+		EPackage epackage = semanticObject.eClass().getEPackage();
+		ParserRule rule = context.getParserRule();
+		Action action = context.getAssignedAction();
+		Set<Parameter> parameters = context.getEnabledBooleanParameters();
+		if (epackage == UnorderedGroupsTestPackage.eINSTANCE)
+			switch (semanticObject.eClass().getClassifierID()) {
 			case UnorderedGroupsTestPackage.BUG304681_ATTRIBUTE:
 				sequence_Bug304681Attribute(context, (Bug304681Attribute) semanticObject); 
 				return; 
@@ -65,68 +68,64 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 				sequence_SimpleModel(context, (SimpleModel) semanticObject); 
 				return; 
 			}
-		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null)
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
+	 * Contexts:
+	 *     Bug304681Feature returns Bug304681Attribute
+	 *     Bug304681Attribute returns Bug304681Attribute
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Bug304681Attribute(EObject context, Bug304681Attribute semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, UnorderedGroupsTestPackage.Literals.BUG304681_FEATURE__NAME) == ValueTransient.YES)
+	protected void sequence_Bug304681Attribute(ISerializationContext context, Bug304681Attribute semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, UnorderedGroupsTestPackage.Literals.BUG304681_FEATURE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, UnorderedGroupsTestPackage.Literals.BUG304681_FEATURE__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getBug304681AttributeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Bug304681Model returns Bug304681Model
+	 *
 	 * Constraint:
-	 *     (shortDescription=STRING? longDescription=STRING? uid=STRING? flag?='flag'? features+=Bug304681Feature*)
+	 *     (shortDescription=STRING | longDescription=STRING | uid=STRING | flag?='flag' | features+=Bug304681Feature)*
 	 */
-	protected void sequence_Bug304681Model(EObject context, Bug304681Model semanticObject) {
+	protected void sequence_Bug304681Model(ISerializationContext context, Bug304681Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     Bug304681Feature returns Bug304681Reference
+	 *     Bug304681Reference returns Bug304681Reference
+	 *
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Bug304681Reference(EObject context, Bug304681Reference semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, UnorderedGroupsTestPackage.Literals.BUG304681_FEATURE__NAME) == ValueTransient.YES)
+	protected void sequence_Bug304681Reference(ISerializationContext context, Bug304681Reference semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, UnorderedGroupsTestPackage.Literals.BUG304681_FEATURE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, UnorderedGroupsTestPackage.Literals.BUG304681_FEATURE__NAME));
 		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getBug304681ReferenceAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
 	
 	/**
-	 * Constraint:
-	 *     (
-	 *         (
-	 *             (visibility+='public' | visibility+='private' | visibility+='protected') 
-	 *             static+='static' 
-	 *             synchronized+='synchronized' 
-	 *             (abstract+='abstract' | final+='final')
-	 *         )* 
-	 *         name=ID
-	 *     )
-	 */
-	protected void sequence_GroupLoopedModel(EObject context, GroupLoopedModel semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
+	 * Contexts:
+	 *     GroupLoopedModel returns GroupLoopedModel
+	 *
 	 * Constraint:
 	 *     (
 	 *         (
@@ -141,42 +140,84 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	 *         name=ID
 	 *     )
 	 */
-	protected void sequence_LoopedAlternativeModel(EObject context, LoopedAlternativeModel semanticObject) {
+	protected void sequence_GroupLoopedModel(ISerializationContext context, GroupLoopedModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     LoopedAlternativeModel returns LoopedAlternativeModel
+	 *
 	 * Constraint:
 	 *     (
-	 *         (visibility+='public' | visibility+='private' | visibility+='protected')* 
-	 *         static+='static'* 
-	 *         synchronized+='synchronized'* 
-	 *         (abstract+='abstract' | final+='final')* 
+	 *         (
+	 *             visibility+='public' | 
+	 *             visibility+='private' | 
+	 *             visibility+='protected' | 
+	 *             static+='static' | 
+	 *             synchronized+='synchronized' | 
+	 *             abstract+='abstract' | 
+	 *             final+='final'
+	 *         )* 
 	 *         name=ID
 	 *     )
 	 */
-	protected void sequence_LoopedModel(EObject context, LoopedModel semanticObject) {
+	protected void sequence_LoopedAlternativeModel(ISerializationContext context, LoopedAlternativeModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     LoopedModel returns LoopedModel
+	 *
 	 * Constraint:
 	 *     (
-	 *         (visibility='public' | visibility='private' | visibility='protected') 
-	 *         static?='static' 
-	 *         synchronized?='synchronized' 
-	 *         (abstract?='abstract' | final?='final')? 
+	 *         (
+	 *             visibility+='public' | 
+	 *             visibility+='private' | 
+	 *             visibility+='protected' | 
+	 *             static+='static' | 
+	 *             synchronized+='synchronized' | 
+	 *             abstract+='abstract' | 
+	 *             final+='final'
+	 *         )* 
 	 *         name=ID
 	 *     )
 	 */
-	protected void sequence_MandatoryModel(EObject context, MandatoryModel semanticObject) {
+	protected void sequence_LoopedModel(ISerializationContext context, LoopedModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     MandatoryModel returns MandatoryModel
+	 *
+	 * Constraint:
+	 *     (
+	 *         (
+	 *             visibility='public' | 
+	 *             visibility='private' | 
+	 *             visibility='protected' | 
+	 *             static?='static' | 
+	 *             synchronized?='synchronized' | 
+	 *             abstract?='abstract' | 
+	 *             final?='final'
+	 *         )* 
+	 *         name=ID
+	 *     )
+	 */
+	protected void sequence_MandatoryModel(ISerializationContext context, MandatoryModel semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Model returns Model
+	 *
 	 * Constraint:
 	 *     (
 	 *         first=SimpleModel | 
@@ -187,22 +228,32 @@ public class UnorderedGroupsTestLanguageSemanticSequencer extends AbstractDelega
 	 *         model=Bug304681Model
 	 *     )
 	 */
-	protected void sequence_Model(EObject context, Model semanticObject) {
+	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
+	 * Contexts:
+	 *     SimpleModel returns SimpleModel
+	 *
 	 * Constraint:
 	 *     (
-	 *         (visibility='public' | visibility='private' | visibility='protected')? 
-	 *         static?='static'? 
-	 *         synchronized?='synchronized'? 
-	 *         (abstract?='abstract' | final?='final')? 
+	 *         (
+	 *             visibility='public' | 
+	 *             visibility='private' | 
+	 *             visibility='protected' | 
+	 *             static?='static' | 
+	 *             synchronized?='synchronized' | 
+	 *             abstract?='abstract' | 
+	 *             final?='final'
+	 *         )* 
 	 *         name=ID
 	 *     )
 	 */
-	protected void sequence_SimpleModel(EObject context, SimpleModel semanticObject) {
+	protected void sequence_SimpleModel(ISerializationContext context, SimpleModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
+	
+	
 }

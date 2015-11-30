@@ -132,9 +132,8 @@ abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTreeBuild
 	}
 	
 	protected def buildFeature(JvmDeclaredType inferredType, JvmFeature jvmFeature, EObject semanticFeature, IXtendOutlineContext context) {
-		if (jvmFeature.synthetic) {
-			inferredType.buildFeatureNode(jvmFeature, context)
-		} else {
+		// disabled org.eclipse.xtend.core.idea.structureview.SyntheticMemberFilter in XtendFileTreeModel
+		if (!jvmFeature.synthetic) {
 			inferredType.buildFeatureNode(semanticFeature, context)
 		}
 	}

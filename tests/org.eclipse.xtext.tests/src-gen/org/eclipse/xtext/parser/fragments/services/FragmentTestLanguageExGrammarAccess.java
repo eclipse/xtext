@@ -13,6 +13,7 @@ import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
 
 import org.eclipse.xtext.parser.fragments.services.FragmentTestLanguageGrammarAccess;
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementFinder {
@@ -37,11 +38,15 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 
 	private final FragmentTestLanguageGrammarAccess gaFragmentTestLanguage;
 
+	private final TerminalsGrammarAccess gaTerminals;
+
 	@Inject
 	public FragmentTestLanguageExGrammarAccess(GrammarProvider grammarProvider,
-		FragmentTestLanguageGrammarAccess gaFragmentTestLanguage) {
+		FragmentTestLanguageGrammarAccess gaFragmentTestLanguage,
+		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaFragmentTestLanguage = gaFragmentTestLanguage;
+		this.gaTerminals = gaTerminals;
 		this.pParserRuleFragmentsEx = new ParserRuleFragmentsExElements();
 	}
 	
@@ -71,6 +76,10 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 		return gaFragmentTestLanguage;
 	}
 
+	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
+		return gaTerminals;
+	}
+
 	
 	//ParserRuleFragmentsEx ParserRuleFragments:
 	//	ParserRuleFragments
@@ -90,7 +99,9 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	//	//  | '#6' element=PRFNamedWithActionInFragment2
 	//	//  | '#7' element=PRFNamedWithActionInFragment3
 	//	| '#8' element=PRFNamedWithFQN
-	//	| '#9' element=PRFWithPredicate);
+	//	| '#9' element=PRFWithPredicate
+	//	| '#10' element=PRFNamedRecursive
+	//	| '#11' element=PRFNamedRecursiveFragment);
 	public FragmentTestLanguageGrammarAccess.ParserRuleFragmentsElements getParserRuleFragmentsAccess() {
 		return gaFragmentTestLanguage.getParserRuleFragmentsAccess();
 	}
@@ -107,6 +118,26 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	
 	public ParserRule getPRFNamedRule() {
 		return getPRFNamedAccess().getRule();
+	}
+
+	//PRFNamedRecursive PRFNamedWithAction:
+	//	name=ID RecursiveFromFragment
+	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveElements getPRFNamedRecursiveAccess() {
+		return gaFragmentTestLanguage.getPRFNamedRecursiveAccess();
+	}
+	
+	public ParserRule getPRFNamedRecursiveRule() {
+		return getPRFNamedRecursiveAccess().getRule();
+	}
+
+	//PRFNamedRecursiveFragment PRFNamedWithAction:
+	//	name=ID RecursiveFragment
+	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveFragmentElements getPRFNamedRecursiveFragmentAccess() {
+		return gaFragmentTestLanguage.getPRFNamedRecursiveFragmentAccess();
+	}
+	
+	public ParserRule getPRFNamedRecursiveFragmentRule() {
+		return getPRFNamedRecursiveFragmentAccess().getRule();
 	}
 
 	//PRFNamedRefFirst PRFNamed:
@@ -231,46 +262,86 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 		return getPRFNamedRefAccess().getRule();
 	}
 
+	//fragment RecursiveFromFragment returns PRFNamedWithAction:
+	//	prev=NamedInParentheses;
+	public FragmentTestLanguageGrammarAccess.RecursiveFromFragmentElements getRecursiveFromFragmentAccess() {
+		return gaFragmentTestLanguage.getRecursiveFromFragmentAccess();
+	}
+	
+	public ParserRule getRecursiveFromFragmentRule() {
+		return getRecursiveFromFragmentAccess().getRule();
+	}
+
+	//NamedInParentheses PRFNamed:
+	//	'(' NamedInParentheses ')' | {PRFNamed} name=ID
+	public FragmentTestLanguageGrammarAccess.NamedInParenthesesElements getNamedInParenthesesAccess() {
+		return gaFragmentTestLanguage.getNamedInParenthesesAccess();
+	}
+	
+	public ParserRule getNamedInParenthesesRule() {
+		return getNamedInParenthesesAccess().getRule();
+	}
+
+	//fragment RecursiveFragment returns PRFNamedWithAction:
+	//	'(' RecursiveFragment ')' | prev=NamedByAction;
+	public FragmentTestLanguageGrammarAccess.RecursiveFragmentElements getRecursiveFragmentAccess() {
+		return gaFragmentTestLanguage.getRecursiveFragmentAccess();
+	}
+	
+	public ParserRule getRecursiveFragmentRule() {
+		return getRecursiveFragmentAccess().getRule();
+	}
+
+	//NamedByAction PRFNamed:
+	//	{PRFNamed} name=ID
+	public FragmentTestLanguageGrammarAccess.NamedByActionElements getNamedByActionAccess() {
+		return gaFragmentTestLanguage.getNamedByActionAccess();
+	}
+	
+	public ParserRule getNamedByActionRule() {
+		return getNamedByActionAccess().getRule();
+	}
+
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
-		return gaFragmentTestLanguage.getIDRule();
+		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaFragmentTestLanguage.getINTRule();
+		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
-		return gaFragmentTestLanguage.getSTRINGRule();
+		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
-		return gaFragmentTestLanguage.getML_COMMENTRule();
+		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaFragmentTestLanguage.getSL_COMMENTRule();
+		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaFragmentTestLanguage.getWSRule();
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaFragmentTestLanguage.getANY_OTHERRule();
+		return gaTerminals.getANY_OTHERRule();
 	} 
 }

@@ -75,18 +75,24 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleModel"
-    // PsiInternalSerializationErrorTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
-    public final void entryRuleModel() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:52:1: entryRuleModel returns [Boolean current=false] : iv_ruleModel= ruleModel EOF ;
+    public final Boolean entryRuleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleModel = null;
+
+
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:52:15: ( ruleModel EOF )
-            // PsiInternalSerializationErrorTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalSerializationErrorTestLanguage.g:52:47: (iv_ruleModel= ruleModel EOF )
+            // PsiInternalSerializationErrorTestLanguage.g:53:2: iv_ruleModel= ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleModel();
+            iv_ruleModel=ruleModel();
 
             state._fsp--;
 
+             current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -98,19 +104,26 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleModel"
 
 
     // $ANTLR start "ruleModel"
-    // PsiInternalSerializationErrorTestLanguage.g:58:1: ruleModel : ( ( (lv_test_0_0= ruleTest ) ) | ( (lv_test_1_0= ruleParenthesis ) ) ) ;
-    public final void ruleModel() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:59:1: ruleModel returns [Boolean current=false] : ( ( (lv_test_0_0= ruleTest ) ) | ( (lv_test_1_0= ruleParenthesis ) ) ) ;
+    public final Boolean ruleModel() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean lv_test_0_0 = null;
+
+        Boolean lv_test_1_0 = null;
+
+
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:58:10: ( ( ( (lv_test_0_0= ruleTest ) ) | ( (lv_test_1_0= ruleParenthesis ) ) ) )
-            // PsiInternalSerializationErrorTestLanguage.g:59:2: ( ( (lv_test_0_0= ruleTest ) ) | ( (lv_test_1_0= ruleParenthesis ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:60:1: ( ( ( (lv_test_0_0= ruleTest ) ) | ( (lv_test_1_0= ruleParenthesis ) ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:61:2: ( ( (lv_test_0_0= ruleTest ) ) | ( (lv_test_1_0= ruleParenthesis ) ) )
             {
-            // PsiInternalSerializationErrorTestLanguage.g:59:2: ( ( (lv_test_0_0= ruleTest ) ) | ( (lv_test_1_0= ruleParenthesis ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:61:2: ( ( (lv_test_0_0= ruleTest ) ) | ( (lv_test_1_0= ruleParenthesis ) ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -128,24 +141,28 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalSerializationErrorTestLanguage.g:60:3: ( (lv_test_0_0= ruleTest ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:62:3: ( (lv_test_0_0= ruleTest ) )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:60:3: ( (lv_test_0_0= ruleTest ) )
-                    // PsiInternalSerializationErrorTestLanguage.g:61:4: (lv_test_0_0= ruleTest )
+                    // PsiInternalSerializationErrorTestLanguage.g:62:3: ( (lv_test_0_0= ruleTest ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:63:4: (lv_test_0_0= ruleTest )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:61:4: (lv_test_0_0= ruleTest )
-                    // PsiInternalSerializationErrorTestLanguage.g:62:5: lv_test_0_0= ruleTest
+                    // PsiInternalSerializationErrorTestLanguage.g:63:4: (lv_test_0_0= ruleTest )
+                    // PsiInternalSerializationErrorTestLanguage.g:64:5: lv_test_0_0= ruleTest
                     {
 
                     					markComposite(elementTypeProvider.getModel_TestTestParserRuleCall_0_0ElementType());
                     				
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleTest();
+                    lv_test_0_0=ruleTest();
 
                     state._fsp--;
 
 
                     					doneComposite();
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -157,24 +174,28 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // PsiInternalSerializationErrorTestLanguage.g:72:3: ( (lv_test_1_0= ruleParenthesis ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:78:3: ( (lv_test_1_0= ruleParenthesis ) )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:72:3: ( (lv_test_1_0= ruleParenthesis ) )
-                    // PsiInternalSerializationErrorTestLanguage.g:73:4: (lv_test_1_0= ruleParenthesis )
+                    // PsiInternalSerializationErrorTestLanguage.g:78:3: ( (lv_test_1_0= ruleParenthesis ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:79:4: (lv_test_1_0= ruleParenthesis )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:73:4: (lv_test_1_0= ruleParenthesis )
-                    // PsiInternalSerializationErrorTestLanguage.g:74:5: lv_test_1_0= ruleParenthesis
+                    // PsiInternalSerializationErrorTestLanguage.g:79:4: (lv_test_1_0= ruleParenthesis )
+                    // PsiInternalSerializationErrorTestLanguage.g:80:5: lv_test_1_0= ruleParenthesis
                     {
 
                     					markComposite(elementTypeProvider.getModel_TestParenthesisParserRuleCall_1_0ElementType());
                     				
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleParenthesis();
+                    lv_test_1_0=ruleParenthesis();
 
                     state._fsp--;
 
 
                     					doneComposite();
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -198,24 +219,30 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleModel"
 
 
     // $ANTLR start "entryRuleParenthesis"
-    // PsiInternalSerializationErrorTestLanguage.g:87:1: entryRuleParenthesis : ruleParenthesis EOF ;
-    public final void entryRuleParenthesis() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:97:1: entryRuleParenthesis returns [Boolean current=false] : iv_ruleParenthesis= ruleParenthesis EOF ;
+    public final Boolean entryRuleParenthesis() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleParenthesis = null;
+
+
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:87:21: ( ruleParenthesis EOF )
-            // PsiInternalSerializationErrorTestLanguage.g:88:2: ruleParenthesis EOF
+            // PsiInternalSerializationErrorTestLanguage.g:97:53: (iv_ruleParenthesis= ruleParenthesis EOF )
+            // PsiInternalSerializationErrorTestLanguage.g:98:2: iv_ruleParenthesis= ruleParenthesis EOF
             {
              markComposite(elementTypeProvider.getParenthesisElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleParenthesis();
+            iv_ruleParenthesis=ruleParenthesis();
 
             state._fsp--;
 
+             current =iv_ruleParenthesis; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -227,23 +254,27 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleParenthesis"
 
 
     // $ANTLR start "ruleParenthesis"
-    // PsiInternalSerializationErrorTestLanguage.g:93:1: ruleParenthesis : (otherlv_0= '(' ruleTest otherlv_2= ')' ) ;
-    public final void ruleParenthesis() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:104:1: ruleParenthesis returns [Boolean current=false] : (otherlv_0= '(' this_Test_1= ruleTest otherlv_2= ')' ) ;
+    public final Boolean ruleParenthesis() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_2=null;
+        Boolean this_Test_1 = null;
+
 
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:93:16: ( (otherlv_0= '(' ruleTest otherlv_2= ')' ) )
-            // PsiInternalSerializationErrorTestLanguage.g:94:2: (otherlv_0= '(' ruleTest otherlv_2= ')' )
+            // PsiInternalSerializationErrorTestLanguage.g:105:1: ( (otherlv_0= '(' this_Test_1= ruleTest otherlv_2= ')' ) )
+            // PsiInternalSerializationErrorTestLanguage.g:106:2: (otherlv_0= '(' this_Test_1= ruleTest otherlv_2= ')' )
             {
-            // PsiInternalSerializationErrorTestLanguage.g:94:2: (otherlv_0= '(' ruleTest otherlv_2= ')' )
-            // PsiInternalSerializationErrorTestLanguage.g:95:3: otherlv_0= '(' ruleTest otherlv_2= ')'
+            // PsiInternalSerializationErrorTestLanguage.g:106:2: (otherlv_0= '(' this_Test_1= ruleTest otherlv_2= ')' )
+            // PsiInternalSerializationErrorTestLanguage.g:107:3: otherlv_0= '(' this_Test_1= ruleTest otherlv_2= ')'
             {
 
             			markLeaf(elementTypeProvider.getParenthesis_LeftParenthesisKeyword_0ElementType());
@@ -256,11 +287,12 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
             			markComposite(elementTypeProvider.getParenthesis_TestParserRuleCall_1ElementType());
             		
             pushFollow(FollowSets000.FOLLOW_4);
-            ruleTest();
+            this_Test_1=ruleTest();
 
             state._fsp--;
 
 
+            			current = this_Test_1;
             			doneComposite();
             		
 
@@ -283,24 +315,30 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleParenthesis"
 
 
     // $ANTLR start "entryRuleTest"
-    // PsiInternalSerializationErrorTestLanguage.g:120:1: entryRuleTest : ruleTest EOF ;
-    public final void entryRuleTest() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:133:1: entryRuleTest returns [Boolean current=false] : iv_ruleTest= ruleTest EOF ;
+    public final Boolean entryRuleTest() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleTest = null;
+
+
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:120:14: ( ruleTest EOF )
-            // PsiInternalSerializationErrorTestLanguage.g:121:2: ruleTest EOF
+            // PsiInternalSerializationErrorTestLanguage.g:133:46: (iv_ruleTest= ruleTest EOF )
+            // PsiInternalSerializationErrorTestLanguage.g:134:2: iv_ruleTest= ruleTest EOF
             {
              markComposite(elementTypeProvider.getTestElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleTest();
+            iv_ruleTest=ruleTest();
 
             state._fsp--;
 
+             current =iv_ruleTest; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -312,19 +350,28 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleTest"
 
 
     // $ANTLR start "ruleTest"
-    // PsiInternalSerializationErrorTestLanguage.g:126:1: ruleTest : ( ruleTwoRequired | ruleTwoOptions | ruleIndent ) ;
-    public final void ruleTest() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:140:1: ruleTest returns [Boolean current=false] : (this_TwoRequired_0= ruleTwoRequired | this_TwoOptions_1= ruleTwoOptions | this_Indent_2= ruleIndent ) ;
+    public final Boolean ruleTest() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean this_TwoRequired_0 = null;
+
+        Boolean this_TwoOptions_1 = null;
+
+        Boolean this_Indent_2 = null;
+
+
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:126:9: ( ( ruleTwoRequired | ruleTwoOptions | ruleIndent ) )
-            // PsiInternalSerializationErrorTestLanguage.g:127:2: ( ruleTwoRequired | ruleTwoOptions | ruleIndent )
+            // PsiInternalSerializationErrorTestLanguage.g:141:1: ( (this_TwoRequired_0= ruleTwoRequired | this_TwoOptions_1= ruleTwoOptions | this_Indent_2= ruleIndent ) )
+            // PsiInternalSerializationErrorTestLanguage.g:142:2: (this_TwoRequired_0= ruleTwoRequired | this_TwoOptions_1= ruleTwoOptions | this_Indent_2= ruleIndent )
             {
-            // PsiInternalSerializationErrorTestLanguage.g:127:2: ( ruleTwoRequired | ruleTwoOptions | ruleIndent )
+            // PsiInternalSerializationErrorTestLanguage.g:142:2: (this_TwoRequired_0= ruleTwoRequired | this_TwoOptions_1= ruleTwoOptions | this_Indent_2= ruleIndent )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -351,51 +398,54 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
             switch (alt2) {
                 case 1 :
-                    // PsiInternalSerializationErrorTestLanguage.g:128:3: ruleTwoRequired
+                    // PsiInternalSerializationErrorTestLanguage.g:143:3: this_TwoRequired_0= ruleTwoRequired
                     {
 
                     			markComposite(elementTypeProvider.getTest_TwoRequiredParserRuleCall_0ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleTwoRequired();
+                    this_TwoRequired_0=ruleTwoRequired();
 
                     state._fsp--;
 
 
+                    			current = this_TwoRequired_0;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalSerializationErrorTestLanguage.g:136:3: ruleTwoOptions
+                    // PsiInternalSerializationErrorTestLanguage.g:152:3: this_TwoOptions_1= ruleTwoOptions
                     {
 
                     			markComposite(elementTypeProvider.getTest_TwoOptionsParserRuleCall_1ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleTwoOptions();
+                    this_TwoOptions_1=ruleTwoOptions();
 
                     state._fsp--;
 
 
+                    			current = this_TwoOptions_1;
                     			doneComposite();
                     		
 
                     }
                     break;
                 case 3 :
-                    // PsiInternalSerializationErrorTestLanguage.g:144:3: ruleIndent
+                    // PsiInternalSerializationErrorTestLanguage.g:161:3: this_Indent_2= ruleIndent
                     {
 
                     			markComposite(elementTypeProvider.getTest_IndentParserRuleCall_2ElementType());
                     		
                     pushFollow(FollowSets000.FOLLOW_2);
-                    ruleIndent();
+                    this_Indent_2=ruleIndent();
 
                     state._fsp--;
 
 
+                    			current = this_Indent_2;
                     			doneComposite();
                     		
 
@@ -414,24 +464,30 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleTest"
 
 
     // $ANTLR start "entryRuleTwoRequired"
-    // PsiInternalSerializationErrorTestLanguage.g:155:1: entryRuleTwoRequired : ruleTwoRequired EOF ;
-    public final void entryRuleTwoRequired() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:173:1: entryRuleTwoRequired returns [Boolean current=false] : iv_ruleTwoRequired= ruleTwoRequired EOF ;
+    public final Boolean entryRuleTwoRequired() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleTwoRequired = null;
+
+
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:155:21: ( ruleTwoRequired EOF )
-            // PsiInternalSerializationErrorTestLanguage.g:156:2: ruleTwoRequired EOF
+            // PsiInternalSerializationErrorTestLanguage.g:173:53: (iv_ruleTwoRequired= ruleTwoRequired EOF )
+            // PsiInternalSerializationErrorTestLanguage.g:174:2: iv_ruleTwoRequired= ruleTwoRequired EOF
             {
              markComposite(elementTypeProvider.getTwoRequiredElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleTwoRequired();
+            iv_ruleTwoRequired=ruleTwoRequired();
 
             state._fsp--;
 
+             current =iv_ruleTwoRequired; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -443,24 +499,26 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleTwoRequired"
 
 
     // $ANTLR start "ruleTwoRequired"
-    // PsiInternalSerializationErrorTestLanguage.g:161:1: ruleTwoRequired : (otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) ) ) ;
-    public final void ruleTwoRequired() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:180:1: ruleTwoRequired returns [Boolean current=false] : (otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) ) ) ;
+    public final Boolean ruleTwoRequired() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token lv_one_1_0=null;
         Token lv_two_2_0=null;
 
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:161:16: ( (otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) ) ) )
-            // PsiInternalSerializationErrorTestLanguage.g:162:2: (otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:181:1: ( (otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:182:2: (otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) ) )
             {
-            // PsiInternalSerializationErrorTestLanguage.g:162:2: (otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) ) )
-            // PsiInternalSerializationErrorTestLanguage.g:163:3: otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) )
+            // PsiInternalSerializationErrorTestLanguage.g:182:2: (otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:183:3: otherlv_0= 'tworequired' ( (lv_one_1_0= RULE_ID ) ) ( (lv_two_2_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getTwoRequired_TworequiredKeyword_0ElementType());
@@ -469,16 +527,22 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSerializationErrorTestLanguage.g:170:3: ( (lv_one_1_0= RULE_ID ) )
-            // PsiInternalSerializationErrorTestLanguage.g:171:4: (lv_one_1_0= RULE_ID )
+            // PsiInternalSerializationErrorTestLanguage.g:190:3: ( (lv_one_1_0= RULE_ID ) )
+            // PsiInternalSerializationErrorTestLanguage.g:191:4: (lv_one_1_0= RULE_ID )
             {
-            // PsiInternalSerializationErrorTestLanguage.g:171:4: (lv_one_1_0= RULE_ID )
-            // PsiInternalSerializationErrorTestLanguage.g:172:5: lv_one_1_0= RULE_ID
+            // PsiInternalSerializationErrorTestLanguage.g:191:4: (lv_one_1_0= RULE_ID )
+            // PsiInternalSerializationErrorTestLanguage.g:192:5: lv_one_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getTwoRequired_OneIDTerminalRuleCall_1_0ElementType());
             				
             lv_one_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_one_1_0);
             				
@@ -488,16 +552,22 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSerializationErrorTestLanguage.g:181:3: ( (lv_two_2_0= RULE_ID ) )
-            // PsiInternalSerializationErrorTestLanguage.g:182:4: (lv_two_2_0= RULE_ID )
+            // PsiInternalSerializationErrorTestLanguage.g:207:3: ( (lv_two_2_0= RULE_ID ) )
+            // PsiInternalSerializationErrorTestLanguage.g:208:4: (lv_two_2_0= RULE_ID )
             {
-            // PsiInternalSerializationErrorTestLanguage.g:182:4: (lv_two_2_0= RULE_ID )
-            // PsiInternalSerializationErrorTestLanguage.g:183:5: lv_two_2_0= RULE_ID
+            // PsiInternalSerializationErrorTestLanguage.g:208:4: (lv_two_2_0= RULE_ID )
+            // PsiInternalSerializationErrorTestLanguage.g:209:5: lv_two_2_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getTwoRequired_TwoIDTerminalRuleCall_2_0ElementType());
             				
             lv_two_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+            					if(!current) {
+            						associateWithSemanticElement();
+            						current = true;
+            					}
+            				
 
             					doneLeaf(lv_two_2_0);
             				
@@ -520,24 +590,30 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleTwoRequired"
 
 
     // $ANTLR start "entryRuleTwoOptions"
-    // PsiInternalSerializationErrorTestLanguage.g:196:1: entryRuleTwoOptions : ruleTwoOptions EOF ;
-    public final void entryRuleTwoOptions() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:228:1: entryRuleTwoOptions returns [Boolean current=false] : iv_ruleTwoOptions= ruleTwoOptions EOF ;
+    public final Boolean entryRuleTwoOptions() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleTwoOptions = null;
+
+
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:196:20: ( ruleTwoOptions EOF )
-            // PsiInternalSerializationErrorTestLanguage.g:197:2: ruleTwoOptions EOF
+            // PsiInternalSerializationErrorTestLanguage.g:228:52: (iv_ruleTwoOptions= ruleTwoOptions EOF )
+            // PsiInternalSerializationErrorTestLanguage.g:229:2: iv_ruleTwoOptions= ruleTwoOptions EOF
             {
              markComposite(elementTypeProvider.getTwoOptionsElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleTwoOptions();
+            iv_ruleTwoOptions=ruleTwoOptions();
 
             state._fsp--;
 
+             current =iv_ruleTwoOptions; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -549,14 +625,16 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleTwoOptions"
 
 
     // $ANTLR start "ruleTwoOptions"
-    // PsiInternalSerializationErrorTestLanguage.g:202:1: ruleTwoOptions : (otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) ) ) ;
-    public final void ruleTwoOptions() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:235:1: ruleTwoOptions returns [Boolean current=false] : (otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) ) ) ;
+    public final Boolean ruleTwoOptions() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token lv_one_2_0=null;
@@ -564,11 +642,11 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         Token lv_two_4_0=null;
 
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:202:15: ( (otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) ) ) )
-            // PsiInternalSerializationErrorTestLanguage.g:203:2: (otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:236:1: ( (otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:237:2: (otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) ) )
             {
-            // PsiInternalSerializationErrorTestLanguage.g:203:2: (otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) ) )
-            // PsiInternalSerializationErrorTestLanguage.g:204:3: otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:237:2: (otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:238:3: otherlv_0= 'twooptions' ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) )
             {
 
             			markLeaf(elementTypeProvider.getTwoOptions_TwooptionsKeyword_0ElementType());
@@ -577,7 +655,7 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSerializationErrorTestLanguage.g:211:3: ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) )
+            // PsiInternalSerializationErrorTestLanguage.g:245:3: ( (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) ) | (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -595,10 +673,10 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
             }
             switch (alt3) {
                 case 1 :
-                    // PsiInternalSerializationErrorTestLanguage.g:212:4: (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:246:4: (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:212:4: (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) )
-                    // PsiInternalSerializationErrorTestLanguage.g:213:5: otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:246:4: (otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:247:5: otherlv_1= 'one' ( (lv_one_2_0= RULE_ID ) )
                     {
 
                     					markLeaf(elementTypeProvider.getTwoOptions_OneKeyword_1_0_0ElementType());
@@ -607,16 +685,22 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
                     					doneLeaf(otherlv_1);
                     				
-                    // PsiInternalSerializationErrorTestLanguage.g:220:5: ( (lv_one_2_0= RULE_ID ) )
-                    // PsiInternalSerializationErrorTestLanguage.g:221:6: (lv_one_2_0= RULE_ID )
+                    // PsiInternalSerializationErrorTestLanguage.g:254:5: ( (lv_one_2_0= RULE_ID ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:255:6: (lv_one_2_0= RULE_ID )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:221:6: (lv_one_2_0= RULE_ID )
-                    // PsiInternalSerializationErrorTestLanguage.g:222:7: lv_one_2_0= RULE_ID
+                    // PsiInternalSerializationErrorTestLanguage.g:255:6: (lv_one_2_0= RULE_ID )
+                    // PsiInternalSerializationErrorTestLanguage.g:256:7: lv_one_2_0= RULE_ID
                     {
 
                     							markLeaf(elementTypeProvider.getTwoOptions_OneIDTerminalRuleCall_1_0_1_0ElementType());
                     						
                     lv_one_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+                    							if(!current) {
+                    								associateWithSemanticElement();
+                    								current = true;
+                    							}
+                    						
 
                     							doneLeaf(lv_one_2_0);
                     						
@@ -633,10 +717,10 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
                     }
                     break;
                 case 2 :
-                    // PsiInternalSerializationErrorTestLanguage.g:233:4: (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:273:4: (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:233:4: (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) )
-                    // PsiInternalSerializationErrorTestLanguage.g:234:5: otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:273:4: (otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:274:5: otherlv_3= 'two' ( (lv_two_4_0= RULE_ID ) )
                     {
 
                     					markLeaf(elementTypeProvider.getTwoOptions_TwoKeyword_1_1_0ElementType());
@@ -645,16 +729,22 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
                     					doneLeaf(otherlv_3);
                     				
-                    // PsiInternalSerializationErrorTestLanguage.g:241:5: ( (lv_two_4_0= RULE_ID ) )
-                    // PsiInternalSerializationErrorTestLanguage.g:242:6: (lv_two_4_0= RULE_ID )
+                    // PsiInternalSerializationErrorTestLanguage.g:281:5: ( (lv_two_4_0= RULE_ID ) )
+                    // PsiInternalSerializationErrorTestLanguage.g:282:6: (lv_two_4_0= RULE_ID )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:242:6: (lv_two_4_0= RULE_ID )
-                    // PsiInternalSerializationErrorTestLanguage.g:243:7: lv_two_4_0= RULE_ID
+                    // PsiInternalSerializationErrorTestLanguage.g:282:6: (lv_two_4_0= RULE_ID )
+                    // PsiInternalSerializationErrorTestLanguage.g:283:7: lv_two_4_0= RULE_ID
                     {
 
                     							markLeaf(elementTypeProvider.getTwoOptions_TwoIDTerminalRuleCall_1_1_1_0ElementType());
                     						
                     lv_two_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+                    							if(!current) {
+                    								associateWithSemanticElement();
+                    								current = true;
+                    							}
+                    						
 
                     							doneLeaf(lv_two_4_0);
                     						
@@ -686,24 +776,30 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleTwoOptions"
 
 
     // $ANTLR start "entryRuleIndent"
-    // PsiInternalSerializationErrorTestLanguage.g:258:1: entryRuleIndent : ruleIndent EOF ;
-    public final void entryRuleIndent() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:304:1: entryRuleIndent returns [Boolean current=false] : iv_ruleIndent= ruleIndent EOF ;
+    public final Boolean entryRuleIndent() throws RecognitionException {
+        Boolean current = false;
+
+        Boolean iv_ruleIndent = null;
+
+
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:258:16: ( ruleIndent EOF )
-            // PsiInternalSerializationErrorTestLanguage.g:259:2: ruleIndent EOF
+            // PsiInternalSerializationErrorTestLanguage.g:304:48: (iv_ruleIndent= ruleIndent EOF )
+            // PsiInternalSerializationErrorTestLanguage.g:305:2: iv_ruleIndent= ruleIndent EOF
             {
              markComposite(elementTypeProvider.getIndentElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleIndent();
+            iv_ruleIndent=ruleIndent();
 
             state._fsp--;
 
+             current =iv_ruleIndent; 
             match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
@@ -715,23 +811,31 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "entryRuleIndent"
 
 
     // $ANTLR start "ruleIndent"
-    // PsiInternalSerializationErrorTestLanguage.g:264:1: ruleIndent : (otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}' ) ;
-    public final void ruleIndent() throws RecognitionException {
+    // PsiInternalSerializationErrorTestLanguage.g:311:1: ruleIndent returns [Boolean current=false] : (otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}' ) ;
+    public final Boolean ruleIndent() throws RecognitionException {
+        Boolean current = false;
+
         Token otherlv_0=null;
         Token otherlv_4=null;
+        Boolean lv_req_1_0 = null;
+
+        Boolean lv_opt_2_0 = null;
+
+        Boolean lv_indent_3_0 = null;
+
 
         try {
-            // PsiInternalSerializationErrorTestLanguage.g:264:11: ( (otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}' ) )
-            // PsiInternalSerializationErrorTestLanguage.g:265:2: (otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}' )
+            // PsiInternalSerializationErrorTestLanguage.g:312:1: ( (otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}' ) )
+            // PsiInternalSerializationErrorTestLanguage.g:313:2: (otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}' )
             {
-            // PsiInternalSerializationErrorTestLanguage.g:265:2: (otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}' )
-            // PsiInternalSerializationErrorTestLanguage.g:266:3: otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}'
+            // PsiInternalSerializationErrorTestLanguage.g:313:2: (otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}' )
+            // PsiInternalSerializationErrorTestLanguage.g:314:3: otherlv_0= '{' ( (lv_req_1_0= ruleTwoRequired ) )? ( (lv_opt_2_0= ruleTwoOptions ) )? ( (lv_indent_3_0= ruleIndent ) )* otherlv_4= '}'
             {
 
             			markLeaf(elementTypeProvider.getIndent_LeftCurlyBracketKeyword_0ElementType());
@@ -740,7 +844,7 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
             			doneLeaf(otherlv_0);
             		
-            // PsiInternalSerializationErrorTestLanguage.g:273:3: ( (lv_req_1_0= ruleTwoRequired ) )?
+            // PsiInternalSerializationErrorTestLanguage.g:321:3: ( (lv_req_1_0= ruleTwoRequired ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -749,21 +853,25 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
             }
             switch (alt4) {
                 case 1 :
-                    // PsiInternalSerializationErrorTestLanguage.g:274:4: (lv_req_1_0= ruleTwoRequired )
+                    // PsiInternalSerializationErrorTestLanguage.g:322:4: (lv_req_1_0= ruleTwoRequired )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:274:4: (lv_req_1_0= ruleTwoRequired )
-                    // PsiInternalSerializationErrorTestLanguage.g:275:5: lv_req_1_0= ruleTwoRequired
+                    // PsiInternalSerializationErrorTestLanguage.g:322:4: (lv_req_1_0= ruleTwoRequired )
+                    // PsiInternalSerializationErrorTestLanguage.g:323:5: lv_req_1_0= ruleTwoRequired
                     {
 
                     					markComposite(elementTypeProvider.getIndent_ReqTwoRequiredParserRuleCall_1_0ElementType());
                     				
                     pushFollow(FollowSets000.FOLLOW_7);
-                    ruleTwoRequired();
+                    lv_req_1_0=ruleTwoRequired();
 
                     state._fsp--;
 
 
                     					doneComposite();
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -774,7 +882,7 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSerializationErrorTestLanguage.g:284:3: ( (lv_opt_2_0= ruleTwoOptions ) )?
+            // PsiInternalSerializationErrorTestLanguage.g:336:3: ( (lv_opt_2_0= ruleTwoOptions ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -783,21 +891,25 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
             }
             switch (alt5) {
                 case 1 :
-                    // PsiInternalSerializationErrorTestLanguage.g:285:4: (lv_opt_2_0= ruleTwoOptions )
+                    // PsiInternalSerializationErrorTestLanguage.g:337:4: (lv_opt_2_0= ruleTwoOptions )
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:285:4: (lv_opt_2_0= ruleTwoOptions )
-                    // PsiInternalSerializationErrorTestLanguage.g:286:5: lv_opt_2_0= ruleTwoOptions
+                    // PsiInternalSerializationErrorTestLanguage.g:337:4: (lv_opt_2_0= ruleTwoOptions )
+                    // PsiInternalSerializationErrorTestLanguage.g:338:5: lv_opt_2_0= ruleTwoOptions
                     {
 
                     					markComposite(elementTypeProvider.getIndent_OptTwoOptionsParserRuleCall_2_0ElementType());
                     				
                     pushFollow(FollowSets000.FOLLOW_7);
-                    ruleTwoOptions();
+                    lv_opt_2_0=ruleTwoOptions();
 
                     state._fsp--;
 
 
                     					doneComposite();
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
                     				
 
                     }
@@ -808,7 +920,7 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
             }
 
-            // PsiInternalSerializationErrorTestLanguage.g:295:3: ( (lv_indent_3_0= ruleIndent ) )*
+            // PsiInternalSerializationErrorTestLanguage.g:351:3: ( (lv_indent_3_0= ruleIndent ) )*
             loop6:
             do {
                 int alt6=2;
@@ -821,21 +933,25 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
 
                 switch (alt6) {
             	case 1 :
-            	    // PsiInternalSerializationErrorTestLanguage.g:296:4: (lv_indent_3_0= ruleIndent )
+            	    // PsiInternalSerializationErrorTestLanguage.g:352:4: (lv_indent_3_0= ruleIndent )
             	    {
-            	    // PsiInternalSerializationErrorTestLanguage.g:296:4: (lv_indent_3_0= ruleIndent )
-            	    // PsiInternalSerializationErrorTestLanguage.g:297:5: lv_indent_3_0= ruleIndent
+            	    // PsiInternalSerializationErrorTestLanguage.g:352:4: (lv_indent_3_0= ruleIndent )
+            	    // PsiInternalSerializationErrorTestLanguage.g:353:5: lv_indent_3_0= ruleIndent
             	    {
 
             	    					markComposite(elementTypeProvider.getIndent_IndentIndentParserRuleCall_3_0ElementType());
             	    				
             	    pushFollow(FollowSets000.FOLLOW_7);
-            	    ruleIndent();
+            	    lv_indent_3_0=ruleIndent();
 
             	    state._fsp--;
 
 
             	    					doneComposite();
+            	    					if(!current) {
+            	    						associateWithSemanticElement();
+            	    						current = true;
+            	    					}
             	    				
 
             	    }
@@ -869,7 +985,7 @@ public class PsiInternalSerializationErrorTestLanguageParser extends AbstractPsi
         }
         finally {
         }
-        return ;
+        return current;
     }
     // $ANTLR end "ruleIndent"
 

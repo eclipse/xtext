@@ -49,13 +49,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -64,19 +66,25 @@ ruleModel:
 			lv_types_0_0=ruleType
 			{
 				doneComposite();
+				if(!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
 			}
 		)
 	)*
 ;
 
 //Entry rule entryRuleType
-entryRuleType:
+entryRuleType returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getTypeElementType()); }
-	ruleType
+	iv_ruleType=ruleType
+	{ $current=$iv_ruleType.current; }
 	EOF;
 
 // Rule Type
-ruleType:
+ruleType returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getType_TypeKeyword_0ElementType());
@@ -92,6 +100,12 @@ ruleType:
 				}
 				lv_name_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_1_0);
 				}
 			)
@@ -106,6 +120,12 @@ ruleType:
 			}
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getType_ExtendsTypeCrossReference_2_1_0ElementType());
 					}
@@ -124,6 +144,12 @@ ruleType:
 			}
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getType_ParentIdPropertyCrossReference_2_3_0ElementType());
 					}
@@ -145,6 +171,12 @@ ruleType:
 			(
 				(
 					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+					{
 						markLeaf(elementTypeProvider.getType_ParentIdPropertyCrossReference_3_1_0ElementType());
 					}
 					otherlv_7=RULE_ID
@@ -162,6 +194,12 @@ ruleType:
 			}
 			(
 				(
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
 					{
 						markLeaf(elementTypeProvider.getType_ExtendsTypeCrossReference_3_3_0ElementType());
 					}
@@ -187,6 +225,10 @@ ruleType:
 				lv_properties_11_0=ruleProperty
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -198,6 +240,10 @@ ruleType:
 				lv_unresolvedProxyProperty_12_0=ruleUnresolvedProxyProperty
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -212,16 +258,24 @@ ruleType:
 ;
 
 //Entry rule entryRuleProperty
-entryRuleProperty:
+entryRuleProperty returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getPropertyElementType()); }
-	ruleProperty
+	iv_ruleProperty=ruleProperty
+	{ $current=$iv_ruleProperty.current; }
 	EOF;
 
 // Rule Property
-ruleProperty:
+ruleProperty returns [Boolean current=false]
+:
 	(
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getProperty_TypeTypeCrossReference_0_0ElementType());
 				}
@@ -238,6 +292,12 @@ ruleProperty:
 				}
 				lv_name_1_0=RULE_ID
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_name_1_0);
 				}
 			)
@@ -253,13 +313,15 @@ ruleProperty:
 ;
 
 //Entry rule entryRuleUnresolvedProxyProperty
-entryRuleUnresolvedProxyProperty:
+entryRuleUnresolvedProxyProperty returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getUnresolvedProxyPropertyElementType()); }
-	ruleUnresolvedProxyProperty
+	iv_ruleUnresolvedProxyProperty=ruleUnresolvedProxyProperty
+	{ $current=$iv_ruleUnresolvedProxyProperty.current; }
 	EOF;
 
 // Rule UnresolvedProxyProperty
-ruleUnresolvedProxyProperty:
+ruleUnresolvedProxyProperty returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getUnresolvedProxyProperty_UnresolvedKeyword_0ElementType());
@@ -270,6 +332,12 @@ ruleUnresolvedProxyProperty:
 		}
 		(
 			(
+				{
+					if (!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					markLeaf(elementTypeProvider.getUnresolvedProxyProperty_TypeTypeCrossReference_1_0ElementType());
 				}
@@ -285,6 +353,12 @@ ruleUnresolvedProxyProperty:
 					markLeaf(elementTypeProvider.getUnresolvedProxyProperty_NameIDTerminalRuleCall_2_0ElementType());
 				}
 				lv_name_2_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_2_0);
 				}

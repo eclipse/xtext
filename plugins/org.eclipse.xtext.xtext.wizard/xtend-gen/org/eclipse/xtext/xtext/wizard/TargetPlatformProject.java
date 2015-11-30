@@ -138,8 +138,8 @@ public class TargetPlatformProject extends ProjectDescriptor {
       } else {
         WizardConfiguration _config_1 = this.getConfig();
         XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
-        boolean _isBeta = _xtextVersion_1.isBeta();
-        if (_isBeta) {
+        boolean _isStable = _xtextVersion_1.isStable();
+        if (_isStable) {
           _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/milestones/\"/>");
           _builder.newLine();
         } else {

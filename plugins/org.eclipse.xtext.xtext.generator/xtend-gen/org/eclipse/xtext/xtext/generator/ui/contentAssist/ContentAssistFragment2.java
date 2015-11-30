@@ -40,7 +40,6 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
-import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
@@ -66,10 +65,6 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
-  @Inject
-  @Extension
-  private CodeConfig _codeConfig;
   
   @Inject
   private FileAccessFactory fileAccessFactory;
@@ -163,8 +158,8 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       _and = _notEquals_1;
     }
     if (_and) {
-      boolean _isPreferXtendStubs = this._codeConfig.isPreferXtendStubs();
-      if (_isPreferXtendStubs) {
+      boolean _isGenerateXtendStub = this.isGenerateXtendStub();
+      if (_isGenerateXtendStub) {
         this.generateXtendProposalProviderStub();
         IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
         IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_4.getEclipsePlugin();
@@ -241,7 +236,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     _createXtendFile.writeTo(_src);
   }
   
-  public void generateJavaProposalProviderStub() {
+  protected void generateJavaProposalProviderStub() {
     Grammar _grammar = this.getGrammar();
     TypeReference _proposalProviderClass = this.getProposalProviderClass(_grammar);
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -280,7 +275,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     _createJavaFile.writeTo(_src);
   }
   
-  public GeneratedJavaFileAccess generateGenJavaProposalProvider() {
+  protected GeneratedJavaFileAccess generateGenJavaProposalProvider() {
     GeneratedJavaFileAccess _xblockexpression = null;
     {
       Grammar _grammar = this.getGrammar();
@@ -517,7 +512,13 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
             } else {
               _builder.append("\t");
               AbstractElement _terminal = assignment.getTerminal();
-              StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_terminal, "assignment.getTerminal()");
+              StringConcatenationClient _client = new StringConcatenationClient() {
+                @Override
+                protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                  _builder.append("assignment.getTerminal()");
+                }
+              };
+              StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_terminal, _client);
               _builder.append(_assignmentTerminal, "\t");
               _builder.newLineIfNotEmpty();
             }
@@ -567,7 +568,13 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
               _builder.append(") {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
-              StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(terminal, "assignment.getTerminal()");
+              StringConcatenationClient _client = new StringConcatenationClient() {
+                @Override
+                protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                  _builder.append("assignment.getTerminal()");
+                }
+              };
+              StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(terminal, _client);
               _builder.append(_assignmentTerminal, "\t");
               _builder.newLineIfNotEmpty();
               _builder.append("}");
@@ -581,7 +588,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _xblockexpression;
   }
   
-  private StringConcatenationClient _assignmentTerminal(final AbstractElement element, final String accessor) {
+  private StringConcatenationClient _assignmentTerminal(final AbstractElement element, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -592,7 +599,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _client;
   }
   
-  private StringConcatenationClient _assignmentTerminal(final CrossReference element, final String accessor) {
+  private StringConcatenationClient _assignmentTerminal(final CrossReference element, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -607,7 +614,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _client;
   }
   
-  private StringConcatenationClient _assignmentTerminal(final RuleCall element, final String accessor) {
+  private StringConcatenationClient _assignmentTerminal(final RuleCall element, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -622,7 +629,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _client;
   }
   
-  private StringConcatenationClient _assignmentTerminal(final Alternatives alternatives, final String accessor) {
+  private StringConcatenationClient _assignmentTerminal(final Alternatives alternatives, final StringConcatenationClient accessor) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -631,10 +638,20 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
           Iterable<Pair<Integer, AbstractElement>> _indexed = IterableExtensions.<AbstractElement>indexed(_elements);
           for(final Pair<Integer, AbstractElement> pair : _indexed) {
             AbstractElement _value = pair.getValue();
-            Integer _key = pair.getKey();
-            String _plus = ((("((Alternatives)" + accessor) + ").getElements.get(") + _key);
-            String _plus_1 = (_plus + ")");
-            StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_value, _plus_1);
+            StringConcatenationClient _client = new StringConcatenationClient() {
+              @Override
+              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                _builder.append("((");
+                _builder.append(Alternatives.class, "");
+                _builder.append(")");
+                _builder.append(accessor, "");
+                _builder.append(").getElements().get(");
+                Integer _key = pair.getKey();
+                _builder.append(_key, "");
+                _builder.append(")");
+              }
+            };
+            StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_value, _client);
             _builder.append(_assignmentTerminal, "");
             _builder.newLineIfNotEmpty();
           }
@@ -715,7 +732,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     return _xifexpression;
   }
   
-  private StringConcatenationClient assignmentTerminal(final AbstractElement alternatives, final String accessor) {
+  private StringConcatenationClient assignmentTerminal(final AbstractElement alternatives, final StringConcatenationClient accessor) {
     if (alternatives instanceof Alternatives) {
       return _assignmentTerminal((Alternatives)alternatives, accessor);
     } else if (alternatives instanceof CrossReference) {

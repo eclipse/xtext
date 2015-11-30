@@ -76,8 +76,23 @@ public class InheritanceTest3LanguageElementTypeProvider implements IElementType
 		public static IGrammarAwareElementType createElement_NameAssignment_2_2ElementType() {
 			return new IGrammarAwareElementType("Element_NameAssignment_2_2_ELEMENT_TYPE", InheritanceTest3LanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getElementAccess().getNameAssignment_2_2());
 		}
-		public static IGrammarAwareElementType createElement_NameSTRINGTerminalRuleCall_2_2_0ElementType() {
-			return new IGrammarAwareElementType("Element_NameSTRINGTerminalRuleCall_2_2_0_ELEMENT_TYPE", InheritanceTest3LanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getElementAccess().getNameSTRINGTerminalRuleCall_2_2_0());
+		public static IGrammarAwareElementType createElement_NameIDTerminalRuleCall_2_2_0ElementType() {
+			return new IGrammarAwareElementType("Element_NameIDTerminalRuleCall_2_2_0_ELEMENT_TYPE", InheritanceTest3LanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getElementAccess().getNameIDTerminalRuleCall_2_2_0());
+		}
+		public static IGrammarAwareElementType createElement_Group_3ElementType() {
+			return new IGrammarAwareElementType("Element_Group_3_ELEMENT_TYPE", InheritanceTest3LanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getElementAccess().getGroup_3());
+		}
+		public static IGrammarAwareElementType createElement_ElementAction_3_0ElementType() {
+			return new IGrammarAwareElementType("Element_ElementAction_3_0_ELEMENT_TYPE", InheritanceTest3LanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getElementAccess().getElementAction_3_0());
+		}
+		public static IGrammarAwareElementType createElement_ElementKeyword_3_1ElementType() {
+			return new IGrammarAwareElementType("Element_ElementKeyword_3_1_ELEMENT_TYPE", InheritanceTest3LanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getElementAccess().getElementKeyword_3_1());
+		}
+		public static IGrammarAwareElementType createElement_NameAssignment_3_2ElementType() {
+			return new IGrammarAwareElementType("Element_NameAssignment_3_2_ELEMENT_TYPE", InheritanceTest3LanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getElementAccess().getNameAssignment_3_2());
+		}
+		public static IGrammarAwareElementType createElement_NameSTRINGTerminalRuleCall_3_2_0ElementType() {
+			return new IGrammarAwareElementType("Element_NameSTRINGTerminalRuleCall_3_2_0_ELEMENT_TYPE", InheritanceTest3LanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getElementAccess().getNameSTRINGTerminalRuleCall_3_2_0());
 		}
 	}
 
@@ -105,7 +120,17 @@ public class InheritanceTest3LanguageElementTypeProvider implements IElementType
 
 	public static final IGrammarAwareElementType Element_NameAssignment_2_2_ELEMENT_TYPE = associate(ElementFactory.createElement_NameAssignment_2_2ElementType());
 
-	public static final IGrammarAwareElementType Element_NameSTRINGTerminalRuleCall_2_2_0_ELEMENT_TYPE = associate(ElementFactory.createElement_NameSTRINGTerminalRuleCall_2_2_0ElementType());
+	public static final IGrammarAwareElementType Element_NameIDTerminalRuleCall_2_2_0_ELEMENT_TYPE = associate(ElementFactory.createElement_NameIDTerminalRuleCall_2_2_0ElementType());
+
+	public static final IGrammarAwareElementType Element_Group_3_ELEMENT_TYPE = associate(ElementFactory.createElement_Group_3ElementType());
+
+	public static final IGrammarAwareElementType Element_ElementAction_3_0_ELEMENT_TYPE = associate(ElementFactory.createElement_ElementAction_3_0ElementType());
+
+	public static final IGrammarAwareElementType Element_ElementKeyword_3_1_ELEMENT_TYPE = associate(ElementFactory.createElement_ElementKeyword_3_1ElementType());
+
+	public static final IGrammarAwareElementType Element_NameAssignment_3_2_ELEMENT_TYPE = associate(ElementFactory.createElement_NameAssignment_3_2ElementType());
+
+	public static final IGrammarAwareElementType Element_NameSTRINGTerminalRuleCall_3_2_0_ELEMENT_TYPE = associate(ElementFactory.createElement_NameSTRINGTerminalRuleCall_3_2_0ElementType());
 
 	private static class InheritanceTestLanguageModelFactory {
 		public static IGrammarAwareElementType createInheritanceTestLanguageModelElementType() {
@@ -282,8 +307,28 @@ public class InheritanceTest3LanguageElementTypeProvider implements IElementType
 		return Element_NameAssignment_2_2_ELEMENT_TYPE;
 	}
 
-	public IGrammarAwareElementType getElement_NameSTRINGTerminalRuleCall_2_2_0ElementType() {
-		return Element_NameSTRINGTerminalRuleCall_2_2_0_ELEMENT_TYPE;
+	public IGrammarAwareElementType getElement_NameIDTerminalRuleCall_2_2_0ElementType() {
+		return Element_NameIDTerminalRuleCall_2_2_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getElement_Group_3ElementType() {
+		return Element_Group_3_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getElement_ElementAction_3_0ElementType() {
+		return Element_ElementAction_3_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getElement_ElementKeyword_3_1ElementType() {
+		return Element_ElementKeyword_3_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getElement_NameAssignment_3_2ElementType() {
+		return Element_NameAssignment_3_2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getElement_NameSTRINGTerminalRuleCall_3_2_0ElementType() {
+		return Element_NameSTRINGTerminalRuleCall_3_2_0_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getInheritanceTestLanguageModelElementType() {

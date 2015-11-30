@@ -49,64 +49,73 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		{
 			markComposite(elementTypeProvider.getModel_CaseInsensitiveKeywordRuleParserRuleCall_0ElementType());
 		}
-		ruleCaseInsensitiveKeywordRule
+		this_CaseInsensitiveKeywordRule_0=ruleCaseInsensitiveKeywordRule
 		{
+			$current = $this_CaseInsensitiveKeywordRule_0.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_PluralRuleParserRuleCall_1ElementType());
 		}
-		rulePluralRule
+		this_PluralRule_1=rulePluralRule
 		{
+			$current = $this_PluralRule_1.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_MultiRuleParserRuleCall_2ElementType());
 		}
-		ruleMultiRule
+		this_MultiRule_2=ruleMultiRule
 		{
+			$current = $this_MultiRule_2.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_DatatypeRuleParserRuleCall_3ElementType());
 		}
-		ruleDatatypeRule
+		this_DatatypeRule_3=ruleDatatypeRule
 		{
+			$current = $this_DatatypeRule_3.current;
 			doneComposite();
 		}
 		    |
 		{
 			markComposite(elementTypeProvider.getModel_CommonTerminalsRuleParserRuleCall_4ElementType());
 		}
-		ruleCommonTerminalsRule
+		this_CommonTerminalsRule_4=ruleCommonTerminalsRule
 		{
+			$current = $this_CommonTerminalsRule_4.current;
 			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleCaseInsensitiveKeywordRule
-entryRuleCaseInsensitiveKeywordRule:
+entryRuleCaseInsensitiveKeywordRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getCaseInsensitiveKeywordRuleElementType()); }
-	ruleCaseInsensitiveKeywordRule
+	iv_ruleCaseInsensitiveKeywordRule=ruleCaseInsensitiveKeywordRule
+	{ $current=$iv_ruleCaseInsensitiveKeywordRule.current; }
 	EOF;
 
 // Rule CaseInsensitiveKeywordRule
-ruleCaseInsensitiveKeywordRule:
+ruleCaseInsensitiveKeywordRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getCaseInsensitiveKeywordRule_CaseInsensitiveKeywordTerminalRuleCall_0ElementType());
@@ -122,6 +131,12 @@ ruleCaseInsensitiveKeywordRule:
 				}
 				lv_val_1_0=RULE_INT
 				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
 					doneLeaf(lv_val_1_0);
 				}
 			)
@@ -130,13 +145,15 @@ ruleCaseInsensitiveKeywordRule:
 ;
 
 //Entry rule entryRulePluralRule
-entryRulePluralRule:
+entryRulePluralRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getPluralRuleElementType()); }
-	rulePluralRule
+	iv_rulePluralRule=rulePluralRule
+	{ $current=$iv_rulePluralRule.current; }
 	EOF;
 
 // Rule PluralRule
-rulePluralRule:
+rulePluralRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getPluralRule_ContentsKeyword_0ElementType());
@@ -151,6 +168,12 @@ rulePluralRule:
 					markLeaf(elementTypeProvider.getPluralRule_CountINTTerminalRuleCall_1_0ElementType());
 				}
 				lv_count_1_0=RULE_INT
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_count_1_0);
 				}
@@ -167,13 +190,15 @@ rulePluralRule:
 ;
 
 //Entry rule entryRuleMultiRule
-entryRuleMultiRule:
+entryRuleMultiRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getMultiRuleElementType()); }
-	ruleMultiRule
+	iv_ruleMultiRule=ruleMultiRule
+	{ $current=$iv_ruleMultiRule.current; }
 	EOF;
 
 // Rule MultiRule
-ruleMultiRule:
+ruleMultiRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getMultiRule_MultiKeyword_0ElementType());
@@ -188,6 +213,12 @@ ruleMultiRule:
 					markLeaf(elementTypeProvider.getMultiRule_ValINTTerminalRuleCall_1_0ElementType());
 				}
 				lv_val_1_0=RULE_INT
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_val_1_0);
 				}
@@ -218,13 +249,15 @@ ruleMultiRule:
 ;
 
 //Entry rule entryRuleDatatypeRule
-entryRuleDatatypeRule:
+entryRuleDatatypeRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDatatypeRuleElementType()); }
-	ruleDatatypeRule
+	iv_ruleDatatypeRule=ruleDatatypeRule
+	{ $current=$iv_ruleDatatypeRule.current; }
 	EOF;
 
 // Rule DatatypeRule
-ruleDatatypeRule:
+ruleDatatypeRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDatatypeRule_DatatypeKeyword_0ElementType());
@@ -239,6 +272,12 @@ ruleDatatypeRule:
 					markLeaf(elementTypeProvider.getDatatypeRule_ValINTTerminalRuleCall_1_0ElementType());
 				}
 				lv_val_1_0=RULE_INT
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_val_1_0);
 				}
@@ -255,13 +294,15 @@ ruleDatatypeRule:
 ;
 
 //Entry rule entryRuleDatatype
-entryRuleDatatype:
+entryRuleDatatype returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDatatypeElementType()); }
-	ruleDatatype
+	iv_ruleDatatype=ruleDatatype
+	{ $current=$iv_ruleDatatype.current; }
 	EOF;
 
 // Rule Datatype
-ruleDatatype:
+ruleDatatype returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getDatatype_StrKeyword_0ElementType());
@@ -290,13 +331,15 @@ ruleDatatype:
 ;
 
 //Entry rule entryRuleDatatype2
-entryRuleDatatype2:
+entryRuleDatatype2 returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getDatatype2ElementType()); }
-	ruleDatatype2
+	iv_ruleDatatype2=ruleDatatype2
+	{ $current=$iv_ruleDatatype2.current; }
 	EOF;
 
 // Rule Datatype2
-ruleDatatype2:
+ruleDatatype2 returns [Boolean current=false]
+:
 	{
 		markLeaf(elementTypeProvider.getDatatype2_STRINGTerminalRuleCallElementType());
 	}
@@ -307,13 +350,15 @@ ruleDatatype2:
 ;
 
 //Entry rule entryRuleCommonTerminalsRule
-entryRuleCommonTerminalsRule:
+entryRuleCommonTerminalsRule returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getCommonTerminalsRuleElementType()); }
-	ruleCommonTerminalsRule
+	iv_ruleCommonTerminalsRule=ruleCommonTerminalsRule
+	{ $current=$iv_ruleCommonTerminalsRule.current; }
 	EOF;
 
 // Rule CommonTerminalsRule
-ruleCommonTerminalsRule:
+ruleCommonTerminalsRule returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getCommonTerminalsRule_TerminalsKeyword_0ElementType());
@@ -349,6 +394,12 @@ ruleCommonTerminalsRule:
 					markLeaf(elementTypeProvider.getCommonTerminalsRule_ValIDTerminalRuleCall_4_0ElementType());
 				}
 				lv_val_4_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_val_4_0);
 				}

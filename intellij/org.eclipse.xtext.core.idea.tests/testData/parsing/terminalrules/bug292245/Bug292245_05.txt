@@ -1,5 +1,5 @@
 org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.Bug292245TestLanguageFileImpl:a.bug292245testlanguage(0,8)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)(0,8)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,8)
     PsiElement(Model_FIXKeyword_0_0_ELEMENT_TYPE)('FIX')(0,3)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_FixFixParserRuleCall_0_1_0_ELEMENT_TYPE)(3,7)
       PsiWhiteSpace(' ')(3,4)

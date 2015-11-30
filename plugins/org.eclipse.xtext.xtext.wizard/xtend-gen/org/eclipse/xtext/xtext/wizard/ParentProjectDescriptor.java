@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -142,6 +143,12 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       }
     }
     return files;
+  }
+  
+  public String getJavaVersion() {
+    WizardConfiguration _config = this.getConfig();
+    JavaVersion _javaVersion = _config.getJavaVersion();
+    return _javaVersion.getQualifier();
   }
   
   private CharSequence loadResource(final String resourcePath) {
@@ -275,11 +282,17 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("sourceCompatibility = \'1.6\'");
-        _builder.newLine();
+        _builder.append("sourceCompatibility = \'");
+        String _javaVersion = ParentProjectDescriptor.this.getJavaVersion();
+        _builder.append(_javaVersion, "\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("targetCompatibility = \'1.6\'");
-        _builder.newLine();
+        _builder.append("targetCompatibility = \'");
+        String _javaVersion_1 = ParentProjectDescriptor.this.getJavaVersion();
+        _builder.append(_javaVersion_1, "\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
@@ -525,10 +538,25 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       }
     }
     _builder.newLine();
-    _builder.append("jar.manifest {");
+    _builder.append("jar {");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("from(\'model\') {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("into(\'model\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("manifest {");
+    _builder.newLine();
+    _builder.append("\t\t");
     _builder.append("attributes \'Bundle-SymbolicName\': project.name");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -623,11 +651,17 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("</project.build.sourceEncoding>");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("<maven.compiler.source>1.6</maven.compiler.source>");
-        _builder.newLine();
+        _builder.append("<maven.compiler.source>");
+        String _javaVersion = ParentProjectDescriptor.this.getJavaVersion();
+        _builder.append(_javaVersion, "\t");
+        _builder.append("</maven.compiler.source>");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("<maven.compiler.target>1.6</maven.compiler.target>");
-        _builder.newLine();
+        _builder.append("<maven.compiler.target>");
+        String _javaVersion_1 = ParentProjectDescriptor.this.getJavaVersion();
+        _builder.append(_javaVersion_1, "\t");
+        _builder.append("</maven.compiler.target>");
+        _builder.newLineIfNotEmpty();
         _builder.append("</properties>");
         _builder.newLine();
         _builder.append("<modules>");
@@ -1284,57 +1318,138 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("</build>");
         _builder.newLine();
+        _builder.append("<repositories>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<repository>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<id>codehaus-snapshots</id>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<name>disable dead \'Codehaus Snapshots\' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<url>http://nexus.codehaus.org/snapshots/</url>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<releases>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<enabled>false</enabled>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("</releases>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<snapshots>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<enabled>false</enabled>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("</snapshots>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("</repository>");
+        _builder.newLine();
         {
           WizardConfiguration _config_10 = ParentProjectDescriptor.this.getConfig();
           XtextVersion _xtextVersion_1 = _config_10.getXtextVersion();
           boolean _isSnapshot = _xtextVersion_1.isSnapshot();
           if (_isSnapshot) {
-            _builder.append("<repositories>");
-            _builder.newLine();
             _builder.append("\t");
             _builder.append("<repository>");
             _builder.newLine();
-            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
             _builder.append("<id>sonatype-snapshots</id>");
             _builder.newLine();
-            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
             _builder.append("<url>https://oss.sonatype.org/content/repositories/snapshots</url>");
             _builder.newLine();
-            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
             _builder.append("<releases><enabled>false</enabled></releases>");
             _builder.newLine();
-            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
             _builder.append("<snapshots><enabled>true</enabled></snapshots>");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("</repository>");
             _builder.newLine();
-            _builder.append("</repositories>");
-            _builder.newLine();
-            _builder.append("<pluginRepositories>");
-            _builder.newLine();
+          }
+        }
+        _builder.append("</repositories>");
+        _builder.newLine();
+        _builder.append("<pluginRepositories>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<pluginRepository>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<id>codehaus-snapshots</id>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<name>disable dead \'Codehaus Snapshots\' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<url>http://nexus.codehaus.org/snapshots/</url>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<releases>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<enabled>false</enabled>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("</releases>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<snapshots>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<enabled>false</enabled>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("</snapshots>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("</pluginRepository>");
+        _builder.newLine();
+        {
+          WizardConfiguration _config_11 = ParentProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion_2 = _config_11.getXtextVersion();
+          boolean _isSnapshot_1 = _xtextVersion_2.isSnapshot();
+          if (_isSnapshot_1) {
             _builder.append("\t");
             _builder.append("<pluginRepository>");
             _builder.newLine();
-            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
             _builder.append("<id>sonatype-snapshots</id>");
             _builder.newLine();
-            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
             _builder.append("<url>https://oss.sonatype.org/content/repositories/snapshots</url>");
             _builder.newLine();
-            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
             _builder.append("<releases><enabled>false</enabled></releases>");
             _builder.newLine();
-            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
             _builder.append("<snapshots><enabled>true</enabled></snapshots>");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("</pluginRepository>");
             _builder.newLine();
-            _builder.append("</pluginRepositories>");
-            _builder.newLine();
           }
         }
+        _builder.append("</pluginRepositories>");
+        _builder.newLine();
         it.setBuildSection(_builder.toString());
       }
     };

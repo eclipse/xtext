@@ -83,7 +83,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     boolean _or = false;
     WizardConfiguration _config = this.getConfig();
     BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
-    boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.ECLIPSE);
+    boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.NONE);
     if (_equals) {
       _or = true;
     } else {
@@ -754,20 +754,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("eclipse.classpath.plusConfigurations += [configurations.mwe2]");
         _builder.newLine();
-        _builder.newLine();
-        _builder.append("jar {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("from(\'model/generated\') {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("into(\'model/generated\')");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
         it.setAdditionalContent(_builder.toString());
       }
     };
@@ -870,7 +856,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("<artifactId>exec-maven-plugin</artifactId>");
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("<version>1.2.1</version>");
+        _builder.append("<version>1.4.0</version>");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("<executions>");
@@ -928,6 +914,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t\t\t");
         _builder.append("<includePluginDependencies>true</includePluginDependencies>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("</configuration>");

@@ -75,5 +75,7 @@ XtextGeneratorLanguage {
     	options = auto-inject {}
     }
     
-	fragment = idea.IdeaPluginGenerator auto-inject {}
+	fragment = idea.IdeaPluginGenerator auto-inject {
+		generateXtendStub = true
+	}
 }

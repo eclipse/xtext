@@ -50,21 +50,16 @@ class OccurrencesService {
 				val acceptor = new IReferenceFinder.Acceptor() {
 					override accept(EObject source, URI sourceURI, EReference eReference, int index, EObject targetOrProxy, URI targetURI) {
 						val region = source.getSignificantTextRegion(eReference, index)
-						if (region instanceof TextRegion)
-							occurrencesResult.readRegions += region
-						else
-							occurrencesResult.readRegions += new TextRegion(region.offset, region.length)
+						occurrencesResult.readRegions += new TextRegion(region.offset, region.length)
 					}
 					
 					override accept(IReferenceDescription description) {
 					}
 				}
 				findReferences(targetURIs, resource, acceptor, new CancelIndicatorProgressMonitor(cancelIndicator))
-				val definitionRegion = element.significantTextRegion
-				if (definitionRegion !== null && definitionRegion !== ITextRegionWithLineInformation.EMPTY_REGION) {
-					if (definitionRegion instanceof TextRegion)
-						occurrencesResult.writeRegions += definitionRegion
-					else
+				if (element.eResource == resource) {
+					val definitionRegion = element.significantTextRegion
+					if (definitionRegion !== null && definitionRegion !== ITextRegionWithLineInformation.EMPTY_REGION)
 						occurrencesResult.writeRegions += new TextRegion(definitionRegion.offset, definitionRegion.length)
 				}
 			}

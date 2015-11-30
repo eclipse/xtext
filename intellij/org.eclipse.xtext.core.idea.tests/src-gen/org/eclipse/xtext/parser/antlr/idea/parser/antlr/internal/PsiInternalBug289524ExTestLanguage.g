@@ -55,13 +55,15 @@ import com.intellij.lang.PsiBuilder;
 }
 
 //Entry rule entryRuleModel
-entryRuleModel:
+entryRuleModel returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementType()); }
-	ruleModel
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
 	EOF;
 
 // Rule Model
-ruleModel:
+ruleModel returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -70,6 +72,7 @@ ruleModel:
 			{
 				precedeComposite(elementTypeProvider.getModel_ModelAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		{
@@ -87,6 +90,10 @@ ruleModel:
 				lv_refs_2_0=ruleModelElement
 				{
 					doneComposite();
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
 				}
 			)
 		)*
@@ -94,13 +101,15 @@ ruleModel:
 ;
 
 //Entry rule entryRuleModelElement
-entryRuleModelElement:
+entryRuleModelElement returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getModelElementElementType()); }
-	ruleModelElement
+	iv_ruleModelElement=ruleModelElement
+	{ $current=$iv_ruleModelElement.current; }
 	EOF;
 
 // Rule ModelElement
-ruleModelElement:
+ruleModelElement returns [Boolean current=false]
+:
 	(
 		(
 			{
@@ -109,6 +118,7 @@ ruleModelElement:
 			{
 				precedeComposite(elementTypeProvider.getModelElement_ModelElementAction_0ElementType());
 				doneComposite();
+				associateWithSemanticElement();
 			}
 		)
 		(
@@ -120,6 +130,10 @@ ruleModelElement:
 					lv_containments_1_0=ruleContained
 					{
 						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
 					}
 				)
 			)
@@ -134,6 +148,15 @@ ruleModelElement:
 				}
 				(
 					(
+						{
+							/* */
+						}
+						{
+							if (!$current) {
+								associateWithSemanticElement();
+								$current = true;
+							}
+						}
 						{
 							markLeaf(elementTypeProvider.getModelElement_RefsContainedCrossReference_1_1_1_0ElementType());
 						}
@@ -154,6 +177,15 @@ ruleModelElement:
 					(
 						(
 							{
+								/* */
+							}
+							{
+								if (!$current) {
+									associateWithSemanticElement();
+									$current = true;
+								}
+							}
+							{
 								markLeaf(elementTypeProvider.getModelElement_RefsContainedCrossReference_1_1_2_1_0ElementType());
 							}
 							otherlv_5=RULE_ID
@@ -169,13 +201,15 @@ ruleModelElement:
 ;
 
 //Entry rule entryRuleContained
-entryRuleContained:
+entryRuleContained returns [Boolean current=false]:
 	{ markComposite(elementTypeProvider.getContainedElementType()); }
-	ruleContained
+	iv_ruleContained=ruleContained
+	{ $current=$iv_ruleContained.current; }
 	EOF;
 
 // Rule Contained
-ruleContained:
+ruleContained returns [Boolean current=false]
+:
 	(
 		{
 			markLeaf(elementTypeProvider.getContained_ContainmentKeyword_0ElementType());
@@ -190,6 +224,12 @@ ruleContained:
 					markLeaf(elementTypeProvider.getContained_NameIDTerminalRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
 				{
 					doneLeaf(lv_name_1_0);
 				}

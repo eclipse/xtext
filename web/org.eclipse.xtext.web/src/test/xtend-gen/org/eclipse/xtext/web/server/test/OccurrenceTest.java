@@ -35,8 +35,6 @@ public class OccurrenceTest extends AbstractWebServerTest {
       Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", _string);
       final XtextServiceDispatcher.ServiceDescriptor occurrences = this.getService(
         Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
-      boolean _isHasTextInput = occurrences.isHasTextInput();
-      Assert.assertTrue(_isHasTextInput);
       Function0<? extends IServiceResult> _service = occurrences.getService();
       IServiceResult _apply = _service.apply();
       _xblockexpression = ((OccurrencesResult) _apply);
@@ -93,7 +91,7 @@ public class OccurrenceTest extends AbstractWebServerTest {
     _builder_1.append("writeRegions = ArrayList (");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("TextRegionWithLineInformation [6:3][lineNumber=0, endLineNumber=0]");
+    _builder_1.append("[6:3]");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append(")");
@@ -131,7 +129,7 @@ public class OccurrenceTest extends AbstractWebServerTest {
     _builder_1.append("writeRegions = ArrayList (");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("TextRegionWithLineInformation [13:3][lineNumber=0, endLineNumber=0]");
+    _builder_1.append("[13:3]");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append(")");
@@ -140,10 +138,10 @@ public class OccurrenceTest extends AbstractWebServerTest {
     _builder_1.append("readRegions = ArrayList (");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("TextRegionWithLineInformation [33:3][lineNumber=2, endLineNumber=2],");
+    _builder_1.append("[33:3],");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("TextRegionWithLineInformation [50:3][lineNumber=3, endLineNumber=3]");
+    _builder_1.append("[50:3]");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append(")");
@@ -178,7 +176,7 @@ public class OccurrenceTest extends AbstractWebServerTest {
     _builder_1.append("writeRegions = ArrayList (");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("TextRegionWithLineInformation [13:3][lineNumber=0, endLineNumber=0]");
+    _builder_1.append("[13:3]");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append(")");
@@ -187,10 +185,10 @@ public class OccurrenceTest extends AbstractWebServerTest {
     _builder_1.append("readRegions = ArrayList (");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("TextRegionWithLineInformation [33:3][lineNumber=2, endLineNumber=2],");
+    _builder_1.append("[33:3],");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("TextRegionWithLineInformation [50:3][lineNumber=3, endLineNumber=3]");
+    _builder_1.append("[50:3]");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append(")");

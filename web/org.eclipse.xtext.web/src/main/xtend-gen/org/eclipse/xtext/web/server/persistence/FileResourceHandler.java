@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.web.server.persistence;
 
-import com.google.inject.Provider;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -19,6 +18,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.web.server.IServiceContext;
+import org.eclipse.xtext.web.server.model.IWebDocumentProvider;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
@@ -41,27 +42,27 @@ public class FileResourceHandler implements IServerResourceHandler {
   private IWebResourceSetProvider resourceSetProvider;
   
   @Inject
-  private Provider<XtextWebDocument> documentProvider;
+  private IWebDocumentProvider documentProvider;
   
   @Inject
   private IEncodingProvider encodingProvider;
   
   @Override
-  public XtextWebDocument get(final String resourceId) throws IOException {
+  public XtextWebDocument get(final String resourceId, final IServiceContext serviceContext) throws IOException {
     try {
       try {
         final URI uri = this.resourceBaseProvider.getFileURI(resourceId);
         if ((uri == null)) {
           throw new IOException("The requested resource does not exist.");
         }
-        final ResourceSet resourceSet = this.resourceSetProvider.get(resourceId);
+        final ResourceSet resourceSet = this.resourceSetProvider.get(resourceId, serviceContext);
         Resource _resource = resourceSet.getResource(uri, true);
         final XtextResource resource = ((XtextResource) _resource);
-        XtextWebDocument _get = this.documentProvider.get();
+        XtextWebDocument _get = this.documentProvider.get(resourceId, serviceContext);
         final Procedure1<XtextWebDocument> _function = new Procedure1<XtextWebDocument>() {
           @Override
           public void apply(final XtextWebDocument it) {
-            it.setInput(resource, resourceId);
+            it.setInput(resource);
           }
         };
         return ObjectExtensions.<XtextWebDocument>operator_doubleArrow(_get, _function);
@@ -79,7 +80,7 @@ public class FileResourceHandler implements IServerResourceHandler {
   }
   
   @Override
-  public void put(final IXtextWebDocument document) throws IOException {
+  public void put(final IXtextWebDocument document, final IServiceContext serviceContext) throws IOException {
     try {
       try {
         String _resourceId = document.getResourceId();

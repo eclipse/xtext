@@ -16,9 +16,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.ide.common.contentassist.antlr.PartialXtendContentAssistParser;
 import org.eclipse.xtend.ide.common.contentassist.antlr.XtendParser;
+import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.ide.contentassist.XtendProposalProvider;
 import org.eclipse.xtend.ide.outline.XtendOutlineTreeProvider;
 import org.eclipse.xtend.ide.quickfix.XtendQuickfixProvider;
@@ -38,13 +38,14 @@ import org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenamePartic
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
@@ -76,7 +77,6 @@ import org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryExecutor;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
-import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
@@ -105,7 +105,6 @@ import org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor;
 import org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener;
-import org.eclipse.xtext.xbase.ui.jvmmodel.occurrence.JvmModelOccurrenceComputer;
 import org.eclipse.xtext.xbase.ui.jvmmodel.outline.JvmOutlineNodeElementOpener;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.DefaultJvmModelRenameStrategy;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator;
@@ -153,23 +152,23 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureHighlightingLexer(Binder binder) {
+	public void configureContentAssistLexer(Binder binder) {
 		binder.bind(Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST))
 			.to(InternalXtendLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureContentAssistLexer(Binder binder) {
-		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST))
-			.to(org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer.class);
+	public void configureHighlightingLexer(Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
+			.to(org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureHighlightingTokenDefProvider(Binder binder) {
 		binder.bind(ITokenDefProvider.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
 			.to(AntlrTokenDefProvider.class);
 	}
 	
@@ -185,8 +184,7 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
-		binder.bind(org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer.class)
-			.toProvider(LexerProvider.create(org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer.class));
+		binder.bind(InternalXtendLexer.class).toProvider(LexerProvider.create(InternalXtendLexer.class));
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
@@ -351,11 +349,6 @@ public abstract class AbstractXtendUiModule extends DefaultXbaseWithAnnotationsU
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 	public Class<? extends GlobalURIEditorOpener> bindGlobalURIEditorOpener() {
 		return GlobalDerivedMemberAwareURIEditorOpener.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
-	public Class<? extends IOccurrenceComputer> bindIOccurrenceComputer() {
-		return JvmModelOccurrenceComputer.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2

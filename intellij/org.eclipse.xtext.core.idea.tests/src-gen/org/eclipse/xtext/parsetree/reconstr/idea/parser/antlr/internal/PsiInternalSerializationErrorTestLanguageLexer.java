@@ -211,10 +211,10 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSerializationErrorTestLanguage.g:316:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // PsiInternalSerializationErrorTestLanguage.g:316:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalSerializationErrorTestLanguage.g:376:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalSerializationErrorTestLanguage.g:376:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // PsiInternalSerializationErrorTestLanguage.g:316:11: ( '^' )?
+            // PsiInternalSerializationErrorTestLanguage.g:376:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -223,7 +223,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // PsiInternalSerializationErrorTestLanguage.g:316:11: '^'
+                    // PsiInternalSerializationErrorTestLanguage.g:376:11: '^'
                     {
                     match('^'); 
 
@@ -241,7 +241,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // PsiInternalSerializationErrorTestLanguage.g:316:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalSerializationErrorTestLanguage.g:376:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -290,10 +290,10 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSerializationErrorTestLanguage.g:318:10: ( ( '0' .. '9' )+ )
-            // PsiInternalSerializationErrorTestLanguage.g:318:12: ( '0' .. '9' )+
+            // PsiInternalSerializationErrorTestLanguage.g:378:10: ( ( '0' .. '9' )+ )
+            // PsiInternalSerializationErrorTestLanguage.g:378:12: ( '0' .. '9' )+
             {
-            // PsiInternalSerializationErrorTestLanguage.g:318:12: ( '0' .. '9' )+
+            // PsiInternalSerializationErrorTestLanguage.g:378:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -307,7 +307,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // PsiInternalSerializationErrorTestLanguage.g:318:13: '0' .. '9'
+            	    // PsiInternalSerializationErrorTestLanguage.g:378:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -339,10 +339,10 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSerializationErrorTestLanguage.g:320:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // PsiInternalSerializationErrorTestLanguage.g:320:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalSerializationErrorTestLanguage.g:380:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalSerializationErrorTestLanguage.g:380:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // PsiInternalSerializationErrorTestLanguage.g:320:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalSerializationErrorTestLanguage.g:380:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -360,10 +360,10 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // PsiInternalSerializationErrorTestLanguage.g:320:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalSerializationErrorTestLanguage.g:380:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // PsiInternalSerializationErrorTestLanguage.g:320:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalSerializationErrorTestLanguage.g:380:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -379,7 +379,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // PsiInternalSerializationErrorTestLanguage.g:320:21: '\\\\' .
+                    	    // PsiInternalSerializationErrorTestLanguage.g:380:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -387,7 +387,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalSerializationErrorTestLanguage.g:320:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalSerializationErrorTestLanguage.g:380:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -412,10 +412,10 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // PsiInternalSerializationErrorTestLanguage.g:320:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalSerializationErrorTestLanguage.g:380:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // PsiInternalSerializationErrorTestLanguage.g:320:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalSerializationErrorTestLanguage.g:380:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -431,7 +431,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // PsiInternalSerializationErrorTestLanguage.g:320:54: '\\\\' .
+                    	    // PsiInternalSerializationErrorTestLanguage.g:380:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -439,7 +439,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // PsiInternalSerializationErrorTestLanguage.g:320:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalSerializationErrorTestLanguage.g:380:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -482,12 +482,12 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSerializationErrorTestLanguage.g:322:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // PsiInternalSerializationErrorTestLanguage.g:322:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalSerializationErrorTestLanguage.g:382:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalSerializationErrorTestLanguage.g:382:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // PsiInternalSerializationErrorTestLanguage.g:322:24: ( options {greedy=false; } : . )*
+            // PsiInternalSerializationErrorTestLanguage.g:382:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -512,7 +512,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // PsiInternalSerializationErrorTestLanguage.g:322:52: .
+            	    // PsiInternalSerializationErrorTestLanguage.g:382:52: .
             	    {
             	    matchAny(); 
 
@@ -542,12 +542,12 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSerializationErrorTestLanguage.g:324:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // PsiInternalSerializationErrorTestLanguage.g:324:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalSerializationErrorTestLanguage.g:384:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalSerializationErrorTestLanguage.g:384:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // PsiInternalSerializationErrorTestLanguage.g:324:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalSerializationErrorTestLanguage.g:384:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -560,7 +560,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // PsiInternalSerializationErrorTestLanguage.g:324:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalSerializationErrorTestLanguage.g:384:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -580,7 +580,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // PsiInternalSerializationErrorTestLanguage.g:324:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalSerializationErrorTestLanguage.g:384:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -589,9 +589,9 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // PsiInternalSerializationErrorTestLanguage.g:324:41: ( '\\r' )? '\\n'
+                    // PsiInternalSerializationErrorTestLanguage.g:384:41: ( '\\r' )? '\\n'
                     {
-                    // PsiInternalSerializationErrorTestLanguage.g:324:41: ( '\\r' )?
+                    // PsiInternalSerializationErrorTestLanguage.g:384:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -600,7 +600,7 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // PsiInternalSerializationErrorTestLanguage.g:324:41: '\\r'
+                            // PsiInternalSerializationErrorTestLanguage.g:384:41: '\\r'
                             {
                             match('\r'); 
 
@@ -632,10 +632,10 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSerializationErrorTestLanguage.g:326:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // PsiInternalSerializationErrorTestLanguage.g:326:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalSerializationErrorTestLanguage.g:386:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalSerializationErrorTestLanguage.g:386:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // PsiInternalSerializationErrorTestLanguage.g:326:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalSerializationErrorTestLanguage.g:386:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -689,8 +689,8 @@ public class PsiInternalSerializationErrorTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // PsiInternalSerializationErrorTestLanguage.g:328:16: ( . )
-            // PsiInternalSerializationErrorTestLanguage.g:328:18: .
+            // PsiInternalSerializationErrorTestLanguage.g:388:16: ( . )
+            // PsiInternalSerializationErrorTestLanguage.g:388:18: .
             {
             matchAny(); 
 

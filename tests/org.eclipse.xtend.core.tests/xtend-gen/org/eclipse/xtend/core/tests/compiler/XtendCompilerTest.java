@@ -10812,6 +10812,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package org.xtext.example.mydsl;");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("import java.io.Serializable;");
+    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Map;");
@@ -10862,7 +10864,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of(\"Banana\", Integer.valueOf(2));");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Set<?> set = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));");
+    _builder_1.append("final Set<? extends Serializable> set = Collections.<Serializable>unmodifiableSet(CollectionLiterals.<Serializable>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -10978,6 +10980,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package org.xtext.example.mydsl;");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("import java.io.Serializable;");
+    _builder_1.newLine();
     _builder_1.append("import java.util.Collections;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Map;");
@@ -11028,7 +11032,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of(\"Banana\", Integer.valueOf(2));");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Set<?> set = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));");
+    _builder_1.append("final Set<? extends Serializable> set = Collections.<Serializable>unmodifiableSet(CollectionLiterals.<Serializable>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
