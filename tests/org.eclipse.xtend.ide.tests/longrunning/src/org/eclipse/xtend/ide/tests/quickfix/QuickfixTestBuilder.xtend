@@ -17,7 +17,7 @@ import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.validation.Issue
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.compiler.JavaVersion
+import org.eclipse.xtext.util.JavaVersion
 import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess
 import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider
