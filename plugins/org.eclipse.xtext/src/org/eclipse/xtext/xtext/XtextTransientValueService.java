@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
@@ -54,7 +53,7 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 				}
 			} else if (rule instanceof TerminalRule) {
 				final TypeRef returnType = rule.getType();
-				return returnType == null || EcorePackage.eINSTANCE.getEString().equals(rule.getType().getClassifier());
+				return ((TerminalRule) rule).isFragment() || returnType == null || GrammarUtil.findEString(GrammarUtil.getGrammar(owner)).equals(rule.getType().getClassifier());
 			}
 		}
 		else if (feature == XtextPackage.eINSTANCE.getCrossReference_Terminal()) {

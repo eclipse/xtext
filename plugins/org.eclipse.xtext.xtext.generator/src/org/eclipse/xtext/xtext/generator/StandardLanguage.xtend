@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.inject.Injector
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
@@ -35,116 +36,127 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
+import java.util.List
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @noextend
  */
-@Accessors(PUBLIC_SETTER)
+@Accessors(PUBLIC_SETTER, PROTECTED_GETTER)
 @Log class StandardLanguage extends XtextGeneratorLanguage {
 	
 	GrammarAccessFragment2 grammarAccess = new GrammarAccessFragment2
-	 
+	
+	EMFGeneratorFragment2 emfGenerator = new EMFGeneratorFragment2
+	
 	SerializerFragment2 serializer = new SerializerFragment2
 	
 	ResourceFactoryFragment2 resourceFactoryFragment = new ResourceFactoryFragment2
-
-	EMFGeneratorFragment2 emfGenerator = new EMFGeneratorFragment2
 	
 	XtextAntlrGeneratorFragment2 parserGenerator = new XtextAntlrGeneratorFragment2
 	
 	ValidatorFragment2 validator = new ValidatorFragment2
 	
-	Formatter2Fragment2 formatter = new Formatter2Fragment2  => [
-		generateStub = false
-	]
-	
-	GeneratorFragment2 generator = new GeneratorFragment2 
-	
-	BuilderIntegrationFragment2 builder = new BuilderIntegrationFragment2 
-	
 	ImportNamespacesScopingFragment2 scopeProvider = new ImportNamespacesScopingFragment2
 	
 	QualifiedNamesFragment2 qualifiedNamesProvider = new QualifiedNamesFragment2
 	
+	BuilderIntegrationFragment2 builder = new BuilderIntegrationFragment2
+	
+	GeneratorFragment2 generator = new GeneratorFragment2
+	
+	Formatter2Fragment2 formatter = new Formatter2Fragment2
+	
+	LabelProviderFragment2 labelProvider = new LabelProviderFragment2
+	
+	QuickOutlineFragment2 quickOutline = new QuickOutlineFragment2
+	
+	OutlineTreeProviderFragment2 outline = new OutlineTreeProviderFragment2
+	
+	QuickfixProviderFragment2 quickFixProvider =  new QuickfixProviderFragment2
+	
+	ContentAssistFragment2 contentAssist = new ContentAssistFragment2
 	
 	Junit4Fragment2 junitSupport = new Junit4Fragment2
 	
-	QuickfixProviderFragment2 quickFixProvider =  new QuickfixProviderFragment2 
-	
-	LabelProviderFragment2 labelProvider = new LabelProviderFragment2 
-	
-	OutlineTreeProviderFragment2 outline = new OutlineTreeProviderFragment2 
-	
-	QuickOutlineFragment2 quickOutline = new QuickOutlineFragment2 
-	
-	CompareFragment2 compareEditor = new CompareFragment2 
-	
-	ContentAssistFragment2 contentAssist = new ContentAssistFragment2 
-	
 	RefactorElementNameFragment2 renameRefactoring = new RefactorElementNameFragment2
 	
-	CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2
-	 
-	XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment
-	
-	TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2 => [
-		onlyEnabledIfGrammarIsUsed = true
-	]
+	TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2
 	
 	XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2
 	
 	XbaseGeneratorFragment2 xbaseSupport = new XbaseGeneratorFragment2
 	
+	CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2
+	
+	CompareFragment2 compareEditor = new CompareFragment2
+	 
+	XtextAntlrIDEAGeneratorFragment ideaParser = new XtextAntlrIDEAGeneratorFragment
+	
 	IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator
 	
-	WebIntegrationFragment webSupport = new WebIntegrationFragment => [
-		framework = "Ace"
-		generateServlet = true
-		generateJettyLauncher = true
-		generateHtmlExample = true
-	]
+	WebIntegrationFragment webSupport = new WebIntegrationFragment
 	
 	new() {
 		try {
 			class.classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule")
-			standaloneSetup = new XtextLanguageStandaloneSetup => [
-				addLoadedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel")
-			]
+			addReferencedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel")
 		} catch (ClassNotFoundException e) {
 			LOG.info("Skipping registration of Xbase genmodel. Xbase is not on the classpath.")
 		}
 	}
 	
+	override initialize(Injector injector) {
+		if (!formatter.getGenerateStub.isSet)
+			formatter.generateStub = false
+		if (!commonTypesSupport.onlyEnabledIfGrammarIsUsed.isSet)
+			commonTypesSupport.onlyEnabledIfGrammarIsUsed = true
+		if (!webSupport.framework.isSet)
+			webSupport.framework = 'Ace'
+		if (!webSupport.generateServlet.isSet)
+			webSupport.generateServlet = true
+		if (!webSupport.generateJettyLauncher.isSet)
+			webSupport.generateJettyLauncher = true
+		if (!webSupport.generateHtmlExample.isSet)
+			webSupport.generateHtmlExample = true
+		super.initialize(injector)
+	}
+	
 	override protected getImplicitFragments() {
 		val fragments = newArrayList 
 		fragments += super.getImplicitFragments
-		fragments.add(grammarAccess)
-		fragments.add(emfGenerator)
-		fragments.add(serializer)
-		fragments.add(resourceFactoryFragment)
-		fragments.add(parserGenerator)
-		fragments.add(validator)
-		fragments.add(scopeProvider)
-		fragments.add(qualifiedNamesProvider)
-		fragments.add(builder)
-		fragments.add(generator)
-		fragments.add(formatter)
-		fragments.add(labelProvider)
-		fragments.add(quickOutline)
-		fragments.add(outline)
-		fragments.add(quickFixProvider)
-		fragments.add(contentAssist)
-		fragments.add(junitSupport)
-		fragments.add(renameRefactoring)
-		fragments.add(commonTypesSupport)
-		fragments.add(xbaseSupport)
-		fragments.add(xtypeSupport)
-		fragments.add(codeTemplates)
-		fragments.add(compareEditor)
-		fragments.add(ideaParser)
-		fragments.add(ideaPlugin)
-		fragments.add(webSupport)
+		fragments += grammarAccess
+		fragments += emfGenerator
+		fragments += serializer
+		fragments += resourceFactoryFragment
+		fragments += parserGenerator
+		fragments += validator
+		fragments += scopeProvider
+		fragments += qualifiedNamesProvider
+		fragments += builder
+		fragments += generator
+		fragments += formatter
+		fragments += labelProvider
+		fragments += quickOutline
+		fragments += outline
+		fragments += quickFixProvider
+		fragments += contentAssist
+		fragments += junitSupport
+		fragments += renameRefactoring
+		fragments += commonTypesSupport
+		fragments += xbaseSupport
+		fragments += xtypeSupport
+		fragments += codeTemplates
+		fragments += compareEditor
+		fragments += ideaParser
+		fragments += ideaPlugin
+		fragments += webSupport
 		fragments
+	}
+	
+	private def +=(List<IXtextGeneratorFragment> list, IXtextGeneratorFragment fragment) {
+		if (fragment !== null) {
+			list.add(fragment)
+		}
 	}
 }

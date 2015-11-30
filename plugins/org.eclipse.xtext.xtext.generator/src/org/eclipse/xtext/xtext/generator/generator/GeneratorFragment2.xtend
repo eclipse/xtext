@@ -60,7 +60,7 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 	boolean generateXtendMain = false
 	
 	override boolean isGenerateStub() {
-		!grammar.inheritsXbase && super.generateStub
+		!grammar.inheritsXbase && super.isGenerateStub
 	}
 	
 	def boolean isGenerateJavaMain() {
@@ -99,7 +99,7 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 			if (projectConfig.runtime.manifest !== null)
 				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
 
-			if (codeConfig.preferXtendStubs) {
+			if (generateXtendStub) {
 				doGenerateXtendStubFile
 			} else {
 				doGenerateJavaStubFile

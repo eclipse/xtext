@@ -46,7 +46,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	
 	@Override
 	public InputStream getContents() throws IOException {
-		return trace.getContents(getSrcRelativeResourceURI(), getProjectConfig());
+		return trace.getContents(getSrcRelativeResourceURI());
 	}
 	
 	@Override

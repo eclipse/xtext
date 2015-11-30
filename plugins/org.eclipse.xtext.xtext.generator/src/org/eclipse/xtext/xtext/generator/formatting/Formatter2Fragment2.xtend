@@ -36,8 +36,9 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtext.util.internal.Log
 
-class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
+@Log class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
@@ -49,7 +50,7 @@ class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
 	}
 	
 	override generate() {
-		if (!generateStub) 
+		if (!isGenerateStub)
 			return;
 		val StringConcatenationClient statement =
 			'''binder.bind(«IPreferenceValuesProvider».class).annotatedWith(«FormatterPreferences».class).to(«FormatterPreferenceValuesProvider».class);'''
@@ -66,25 +67,35 @@ class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
 	}
 
 	protected def doGenerateStubFile() {
-		val xtendFile = fileAccessFactory.createXtendFile(grammar.formatter2Stub)
-		xtendFile.resourceSet = language.resourceSet
-		
-		val type2ref = LinkedHashMultimap.<EClass, EReference>create
-		getLocallyAssignedContainmentReferences(language.grammar, type2ref)
-		val inheritedTypes = LinkedHashMultimap.<EClass, EReference>create
-		getInheritedContainmentReferences(language.grammar, inheritedTypes, newHashSet)
-		
-		xtendFile.content = '''
-			class «grammar.formatter2Stub.simpleName» extends «stubSuperClass» {
-				
-				@«Inject» extension «grammar.grammarAccess»
-				«FOR type : type2ref.keySet»
+		if(!isGenerateStub)
+			return;
+			
+		if(isGenerateXtendStub) {
+			val xtendFile = fileAccessFactory.createXtendFile(grammar.formatter2Stub)
+			xtendFile.resourceSet = language.resourceSet
+			
+			val type2ref = LinkedHashMultimap.<EClass, EReference>create
+			getLocallyAssignedContainmentReferences(language.grammar, type2ref)
+			val inheritedTypes = LinkedHashMultimap.<EClass, EReference>create
+			getInheritedContainmentReferences(language.grammar, inheritedTypes, newHashSet)
+			val types = type2ref.keySet
+			
+			xtendFile.content = '''
+				class «grammar.formatter2Stub.simpleName» extends «stubSuperClass» {
+					
+					@«Inject» extension «grammar.grammarAccess»
+					«FOR type : types.take(2)»
 
-					«type.generateFormatMethod(type2ref.get(type), inheritedTypes.containsKey(type))»
-				«ENDFOR»	
-			}
-		'''
-		xtendFile.writeTo(projectConfig.runtime.src)
+						«type.generateFormatMethod(type2ref.get(type), inheritedTypes.containsKey(type))»
+					«ENDFOR»	
+					
+					// TODO: implement for «types.drop(2).map[name].join(", ")»
+				}
+			'''
+			xtendFile.writeTo(projectConfig.runtime.src) 
+		} else {
+			LOG.error(this.class.name +  " has been configured to generate a Java stub, but that's not yet supported. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=481563")	
+		}
 	}
 	
 	protected def StringConcatenationClient generateFormatMethod(EClass clazz, Collection<EReference> containmentRefs, boolean isOverriding) '''
@@ -93,10 +104,10 @@ class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
 					for («ref.EReferenceType» «ref.toVarName» : «clazz.toVarName».«ref.getGetAccessor()»()) {
-						format(«ref.toVarName», document);
+						«ref.toVarName».format;
 					}
 				«ELSE»
-					format(«clazz.toVarName».«ref.getGetAccessor()»(), document);
+					«clazz.toVarName».«ref.getGetAccessor()».format;
 				«ENDIF»
 			«ENDFOR»
 		}

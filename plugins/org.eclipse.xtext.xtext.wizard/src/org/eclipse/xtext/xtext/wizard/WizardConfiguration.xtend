@@ -12,6 +12,7 @@ import java.nio.charset.Charset
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.XtextVersion
+import org.eclipse.xtext.util.JavaVersion
 
 @Accessors
 class WizardConfiguration {
@@ -21,11 +22,14 @@ class WizardConfiguration {
 	val Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration
 
 	Charset encoding = Charset.defaultCharset
-	BuildSystem preferredBuildSystem = BuildSystem.ECLIPSE
+	BuildSystem preferredBuildSystem = BuildSystem.NONE
 	
 	SourceLayout sourceLayout = SourceLayout.PLAIN
 	ProjectLayout projectLayout = ProjectLayout.FLAT
-
+	
+	boolean needsGradleWrapper = true
+	JavaVersion  javaVersion = JavaVersion.JAVA6
+	
 	val LanguageDescriptor language = new LanguageDescriptor
 
 	val runtimeProject = new RuntimeProjectDescriptor(this)
@@ -35,8 +39,7 @@ class WizardConfiguration {
 	val webProject = new WebProjectDescriptor(this)
 	val parentProject = new ParentProjectDescriptor(this)
 	val targetPlatformProject = new TargetPlatformProject(this)
-	
-	boolean needsGradleWrapper = true
+
 
 	def Set<ProjectDescriptor> getEnabledProjects() {
 		val productionProjects = #[

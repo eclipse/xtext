@@ -9,16 +9,16 @@ package org.eclipse.xtext.xtext.generator.ui.refactoring
 
 import com.google.inject.Inject
 import com.google.inject.name.Names
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
+import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
-import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 /**
  * Contributes the registration of element renaming infrastructure.
@@ -33,15 +33,17 @@ class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment {
 	@Inject
 	extension XbaseUsageDetector
 
-	@Accessors
-	private Boolean useJdtRefactoring = null; // no default (depends on whether xbase is used or not)	
+	val useJdtRefactoring = new BooleanGeneratorOption
 
 	protected def isUseJdtRefactoring(Grammar grammar) {
-		if (useJdtRefactoring == null) {
+		if (useJdtRefactoring.isSet)
+			useJdtRefactoring.get
+		else
 			grammar.inheritsXbase
-		} else {
-			return useJdtRefactoring.booleanValue()
-		}
+	}
+	
+	def void setUseJdtRefactoring(boolean useJdtRefactoring) {
+		this.useJdtRefactoring.set(useJdtRefactoring)
 	}
 
 	override generate() {

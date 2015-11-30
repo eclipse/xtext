@@ -17,7 +17,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
-package class ImplicitFragment extends AbstractXtextGeneratorFragment {
+package class ImplicitFragment extends AbstractStubGeneratingFragment {
 	
 	@Inject extension XbaseUsageDetector
 	
@@ -26,16 +26,28 @@ package class ImplicitFragment extends AbstractXtextGeneratorFragment {
 	override generate() {
 		if (projectConfig.runtime.manifest !== null) {
 			projectConfig.runtime.manifest.requiredBundles.addAll(#[
-				'org.eclipse.xtext', 'org.eclipse.xtext.util', 'org.eclipse.xtend.lib'
+				'org.eclipse.xtext', 'org.eclipse.xtext.util'
 			])
+			
+			if (generateXtendStub) {
+				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtend.lib' 
+			}
+			
 			projectConfig.runtime.manifest.importedPackages.add('org.apache.log4j')
 		}
+		
 		if (projectConfig.eclipsePlugin.manifest !== null) {
 			projectConfig.eclipsePlugin.manifest.requiredBundles.addAll(#[
-				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui', 'org.eclipse.xtend.lib'
+				'org.eclipse.xtext.ui', 'org.eclipse.xtext.ui.shared', 'org.eclipse.ui.editors', 'org.eclipse.ui'
 			])
+			
+			if (generateXtendStub) {
+				projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtend.lib' 
+			}
+			
 			projectConfig.eclipsePlugin.manifest.importedPackages.add('org.apache.log4j')
 		}
+		
 		if (projectConfig.eclipsePlugin.pluginXml !== null) {
 			projectConfig.eclipsePlugin.pluginXml.entries += grammar.implicitPluginXmlEnties
 		}

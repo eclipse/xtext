@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.xtext.AbstractElement;
@@ -218,6 +219,10 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 
 	}
 
+	private static Logger LOG = Logger.getLogger(ContextTypePDAProvider.class);
+
+	private Map<Grammar, Map<ISerializationContext, Pda<ISerState, RuleCall>>> cache = Maps.newHashMap();
+
 	@Inject
 	protected SerializerPDACloneFactory factory;
 
@@ -226,8 +231,6 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 
 	@Inject
 	protected PdaUtil pdaUtil;
-
-	private Map<Grammar, Map<ISerializationContext, Pda<ISerState, RuleCall>>> cache = Maps.newHashMap();
 
 	protected Set<EClass> collectTypes(Pda<ISerState, RuleCall> contextPda) {
 		TypeCollector collector = newTypeCollector();
@@ -252,16 +255,20 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 		for (Entry<ISerializationContext, Pda<ISerState, RuleCall>> e : contextPDAs.entrySet()) {
 			ISerializationContext parent = e.getKey();
 			Pda<ISerState, RuleCall> contextPDA = e.getValue();
-			Set<EClass> types = collectTypes(contextPDA);
-			if (types.size() == 1) {
-				TypeContext ctx = new TypeContext(parent, types.iterator().next());
-				result.put(ctx, contextPDA);
-			} else {
-				for (EClass type : types) {
-					TypeContext typeContext = new TypeContext(parent, type);
-					Pda<ISerState, RuleCall> filtered = filterByType(contextPDA, type);
-					result.put(typeContext, filtered);
+			try {
+				Set<EClass> types = collectTypes(contextPDA);
+				if (types.size() == 1) {
+					TypeContext ctx = new TypeContext(parent, types.iterator().next());
+					result.put(ctx, contextPDA);
+				} else {
+					for (EClass type : types) {
+						TypeContext typeContext = new TypeContext(parent, type);
+						Pda<ISerState, RuleCall> filtered = filterByType(contextPDA, type);
+						result.put(typeContext, filtered);
+					}
 				}
+			} catch (Exception x) {
+				LOG.error("Error extracting PDAs for types for context '" + parent + "': " + x.getMessage(), x);
 			}
 		}
 		return result;

@@ -5,36 +5,9 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/SuperTestLanguage" 
-       class = "org.eclipse.xtext.generator.ecore.superPackage.SuperPackagePackage"
-       genModel = "org/eclipse/xtext/generator/ecore/SuperTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage" 
-       class = "org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage"
-       genModel = "org/eclipse/xtext/generator/ecore/SubTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
        uri = "http://www.eclipse.org/2008/Test/XtextTest" 
        class = "org.eclipse.xtext.xtextTest.XtextTestPackage"
        genModel = "org/eclipse/xtext/XtextGrammarTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest" 
-       class = "org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage"
-       genModel = "org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.genmodel" /> 
 	
   </extension>
 

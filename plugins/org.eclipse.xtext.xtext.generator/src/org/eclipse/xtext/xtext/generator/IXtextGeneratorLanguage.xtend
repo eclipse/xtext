@@ -34,4 +34,6 @@ interface IXtextGeneratorLanguage {
 	
 	def ResourceSet getResourceSet()
 	
+	def boolean isGenerateXtendStubs() 
+	
 }

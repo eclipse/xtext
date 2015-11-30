@@ -56,14 +56,14 @@ public class SequenceFeeder {
 		protected IValueSerializer valueSerializer;
 
 		/**
-		 * @deprecated use {@link #create(ISerializationContext, EObject, INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, Acceptor)}
+		 * @deprecated {@link #create(ISerializationContext, EObject, INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, Acceptor)}
 		 */
 		@Deprecated
-		public SequenceFeeder create(EObject semanticObject, INodesForEObjectProvider nodes,
-				ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-			return new SequenceFeeder(this, null, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
+		public SequenceFeeder create(EObject semanticObject, INodesForEObjectProvider nodes, ISemanticSequencer masterSequencer,
+				ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+			return new SequenceFeeder(this, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
 		}
-		
+
 		public SequenceFeeder create(ISerializationContext context, EObject semanticObject, INodesForEObjectProvider nodes,
 				ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 			return new SequenceFeeder(this, context, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
@@ -83,6 +83,15 @@ public class SequenceFeeder {
 	protected final ISemanticSequenceAcceptor sequenceAcceptor;
 	
 	protected final ISerializationContext context;
+	
+	/**
+	 * @deprecated {@link #SequenceFeeder(Provider, ISerializationContext, EObject, INodesForEObjectProvider, ISemanticSequencer, ISemanticSequenceAcceptor, Acceptor)}
+	 */
+	@Deprecated
+	protected SequenceFeeder(Provider provider, EObject semanticObject, INodesForEObjectProvider nodes, ISemanticSequencer masterSequencer,
+			ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+		this(provider, null, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
+	}
 
 	protected SequenceFeeder(Provider provider, ISerializationContext context, EObject semanticObject, INodesForEObjectProvider nodes,
 			ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
