@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import static com.google.common.collect.Sets.*;
-import static org.eclipse.xtext.xbase.compiler.JavaVersion.*;
+import static org.eclipse.xtext.util.JavaVersion.*;
 
 import java.util.Collection;
 import java.util.Collections;

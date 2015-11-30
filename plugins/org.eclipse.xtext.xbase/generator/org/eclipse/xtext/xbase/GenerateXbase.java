@@ -59,6 +59,7 @@ final class GenerateXbase {
 				setProject(new StandardProjectConfig() {{
 					setRootPath(root);
 					setBaseName(projectName);
+					setCreateEclipseMetaData(true);
 					getEclipsePlugin().setEnabled(true);
 				}});
 				setCode(new CodeConfig() {{
@@ -73,10 +74,11 @@ final class GenerateXbase {
 				String fileExtensions = "___xtype";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
-				getStandaloneSetup().addLoadedResource(xbaseGenModel);
+				addReferencedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
+				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextEObject(true); }} );
 				addFragment(new Formatter2Fragment2());
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				addFragment(new ContentAssistFragment2());
@@ -90,10 +92,11 @@ final class GenerateXbase {
 				String fileExtensions = "___xbase";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
-				getStandaloneSetup().addLoadedResource(xbaseGenModel);
+				addReferencedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
+				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextEObject(true); }} );
 				addFragment(new ResourceFactoryFragment2());
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				antlr.setDebugGrammar(true);
@@ -127,10 +130,11 @@ final class GenerateXbase {
 				String fileExtensions = "___xbasewithannotations";
 				
 				setGrammarUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
-				getStandaloneSetup().addLoadedResource(xbaseGenModel);
+				addReferencedResource(xbaseGenModel);
 				setFileExtensions(fileExtensions);
+				setGenerateXtendStubs(true);
 				addFragment(new GrammarAccessFragment2());
-				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextObject(true); }} );
+				addFragment(new SerializerFragment2() {{ setGenerateSupportForDeprecatedContextEObject(true); }} );
 				addFragment(new ResourceFactoryFragment2());
 				XtextAntlrGeneratorFragment2 antlr = new XtextAntlrGeneratorFragment2();
 				antlr.setOptions(antlrOptions);

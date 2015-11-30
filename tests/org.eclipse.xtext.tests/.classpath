@@ -13,6 +13,11 @@
 			<attribute name="ignore_optional_problems" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src-gen2">
+		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="src" path="suites"/>
 	<classpathentry exported="true" kind="lib" path="lib/simple.jar"/>

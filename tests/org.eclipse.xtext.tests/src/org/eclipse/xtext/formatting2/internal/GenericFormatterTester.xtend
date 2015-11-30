@@ -52,7 +52,7 @@ class GenericFormatterTestRequest extends FormatterTestRequest {
  */
 @Accessors
 abstract class GenericFormatter<T extends EObject> extends AbstractFormatter2 {
-	def dispatch format(EObject obj, IFormattableDocument document) {
+	override dispatch format(EObject obj, IFormattableDocument document) {
 		format(obj as T, request.textRegionAccess.extensions, document)
 	}
 

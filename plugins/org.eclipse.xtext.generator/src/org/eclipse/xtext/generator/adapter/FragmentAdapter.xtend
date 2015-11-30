@@ -273,7 +273,7 @@ class FragmentAdapter extends AbstractXtextGeneratorFragment {
 			projectNameUi = projectConfig.eclipsePlugin.root?.path.lastSegment
 			ideBasePackage = config2.grammar.genericIdeBasePackage
 			uiBasePackage = config2.grammar.eclipsePluginBasePackage
-			activatorName = config2.grammar.eclipsePluginActivator.name
+			activatorName = eclipsePluginActivator?.name
 			pathTestProject = projectConfig.runtimeTest.root?.path
 			lineDelimiter = codeConfig.lineDelimiter
 			fileHeader = codeConfig.fileHeader

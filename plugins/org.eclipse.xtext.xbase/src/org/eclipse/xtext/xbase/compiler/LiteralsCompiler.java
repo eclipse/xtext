@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import static org.eclipse.xtext.xbase.compiler.JavaVersion.*;
+import static org.eclipse.xtext.util.JavaVersion.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
