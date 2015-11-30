@@ -36,7 +36,7 @@ import org.eclipse.xtext.util.formallang.NfaFactory;
 import org.eclipse.xtext.util.formallang.NfaGraphFormatter;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -203,7 +203,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
-	
+
 	@Inject
 	private NfaUtil util;
 
@@ -254,7 +254,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 	}
 
 	protected void initContentValidationNeeded(EClass clazz, Nfa<ISemState> nfa) {
-		Multimap<EStructuralFeature, AbstractElement> assignments = HashMultimap.create();
+		Multimap<EStructuralFeature, AbstractElement> assignments = LinkedHashMultimap.create();
 		Set<ISemState> states = new NfaUtil().collect(nfa);
 		for (ISemState state : states)
 			if (state.getFeature() != null)

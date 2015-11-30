@@ -106,7 +106,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		protected List<ISynAbsorberState> outAbsorber = Lists.newArrayList();
 
-		protected Map<AbstractElement, ISynTransition> outTransitionsByElement = Maps.newHashMap();
+		protected Map<AbstractElement, ISynTransition> outTransitionsByElement = Maps.newLinkedHashMap();
 
 		public SynAbsorberState(SynStateType type, AbstractElement element, EClass eClass) {
 			super(type, element);
@@ -122,7 +122,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 				case ELEMENT:
 				case STOP:
 					if (outTransitionsByElement.isEmpty())
-						outTransitionsByElement = Maps.newHashMap();
+						outTransitionsByElement = Maps.newLinkedHashMap();
 					outTransitionsByElement.put(transition.getTarget().getGrammarElement(), transition);
 					break;
 				case RULECALL_ENTER:
@@ -536,14 +536,14 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return result;
 		}
 		absorbers.put(state, result = createAbsorberState(getType(state), state.getGrammarElement(), eClass));
-		Set<ISerState> followers = Sets.newHashSet();
+		Set<ISerState> followers = Sets.newLinkedHashSet();
 		collectFollowingAbsorberStates(state, false, Sets.<ISerState> newHashSet(), followers);
 		for (ISerState follower : followers) {
 			SynAbsorberState target = createAbsorberState(follower, absorbers, emitters, eClass);
 			SynTransition transition = createTransition(result, target);
 			Map<ISerState, SynState> emitter = emitters.get(target);
 			if (emitter == null)
-				emitters.put(target, emitter = Maps.newHashMap());
+				emitters.put(target, emitter = Maps.newLinkedHashMap());
 			transition.setFollowers(createEmitterStates(state, follower, target, emitter));
 			result.addTransition(transition);
 		}
@@ -601,8 +601,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			List<ISerializationContext> contexts = e.getFirst();
 			try {
 				EClass type = contexts.get(0).getType();
-				Map<ISerState, SynAbsorberState> absorbers = Maps.newHashMap();
-				Map<SynAbsorberState, Map<ISerState, SynState>> emitters = Maps.newHashMap();
+				Map<ISerState, SynAbsorberState> absorbers = Maps.newLinkedHashMap();
+				Map<SynAbsorberState, Map<ISerState, SynState>> emitters = Maps.newLinkedHashMap();
 				SynAbsorberState state = createAbsorberState(pda.getStart(), absorbers, emitters, type);
 				for (ISerializationContext ctx : contexts) {
 					result.put(ctx, state);
