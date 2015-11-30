@@ -51,8 +51,10 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 		if (unitTestMode || project.isDisposed)
 			return;
 
-		problemsView.clearProgress
-		problemsView.clearOldMessages(affectedScope, sessionId)
+		if(problemsView !== null) {
+			problemsView.clearProgress
+			problemsView.clearOldMessages(affectedScope, sessionId)
+		}
 	}
 	
 	def void rehighlight() {
@@ -89,7 +91,8 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 		if (unitTestMode || project.isDisposed)
 			return;
 		val compilerMessage = getCompilerMessage(validated, issue)
-		problemsView.addMessage(compilerMessage, sessionId)
+		if(problemsView !== null)
+			problemsView.addMessage(compilerMessage, sessionId)
 	}
 
 	protected def isUnitTestMode() {
