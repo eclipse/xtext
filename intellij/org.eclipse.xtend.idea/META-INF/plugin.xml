@@ -5,8 +5,8 @@
       This plugin enables smart editing of Xtend files.
 	</description>
 	<version>2.9.0-SNAPSHOT</version>
+	<category>Custom Languages</category>
 	<vendor url="http://xtend-lang.org">Eclipse Xtend</vendor>
-
 	<idea-version since-build="131"/>
 	<depends>JUnit</depends>
 	<depends>org.jetbrains.idea.maven</depends>
