@@ -1,7 +1,7 @@
 <ul id="nav-outline" style="margin-left: 0px;">
 	<li class="nav-part">Getting Started</li>
-	<li><a href="101_five_minutes.html">5 Minutes Tutorial</a>
-	</li>
+	<!--li><a href="101_five_minutes.html">5 Minutes Tutorial</a>
+	</li-->
 	<li><a href="102_domainmodelwalkthrough.html">15 Minutes Tutorial</a>
 	</li>
 	<li><a href="103_domainmodelnextsteps.html">15 Minutes Tutorial - Extended</a>
