@@ -26,7 +26,7 @@ class Formatting2Test extends AbstractWebServerTest {
 	}
 	
 	@Test def testFormatSelection() {
-		val file = createFile('/* bla */ output signal x state foo set x = true end')
+		val file = createFile('/* bla */ output signal x state foo set x = true end ')
 		val format = getService(#{
 				'serviceType' -> 'format',
 				'selectionStart' -> '26',
