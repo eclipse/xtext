@@ -62,8 +62,8 @@
 		<dependency>
 			<!-- FIXME should be transitively provided by xtext -->
 			<groupId>org.eclipse.equinox</groupId>
-			<artifactId>org.eclipse.equinox.common</artifactId>
-			<version>[3.6.0,)</version>
+			<artifactId>common</artifactId>
+			<version>${equinox-common-version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>

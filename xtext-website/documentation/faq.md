@@ -26,7 +26,7 @@ Xtext is used in many different industries. It is used in the field of mobile de
 
 Xtext is a professional Open-Source project. We, the main developers and the project lead, work for itemis, which is a well known consulting company specialized on model-based development. Therefore we are able to work almost full-time on the project. Xtext is an Eclipse.org project. Besides many other advantages this means that you don't have to fear any IP issues, because the Eclipse Foundation has their own lawyers who take care that no intellectual property is violated. 
 
-You may ask: Where does the money for Open-Source development come from? Well, we provide professional services around Xtext. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages. We do not only know the framework very well but we are also experts in programming and domain-specific language design. Don't hesitate to get in contact with us ([www.itemis.com](http://xtext.itemis.com)).
+You may ask: Where does the money for Open-Source development come from? Well, we provide professional services around Xtext. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages. We do not only know the framework very well but we are also experts in programming and domain-specific language design. Don't hesitate to get in contact with us ([www.itemis.com](http://www.itemis.com)).
 
 ## What is a Domain-Specific Language {#DSL}?
 

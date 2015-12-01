@@ -66,8 +66,9 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.serializer.analysis.SerializationContext.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+import org.eclipse.xtext.util.internal.Log
 
-class SerializerFragment2 extends AbstractStubGeneratingFragment {
+@Log class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	
 	private static def <K, V> Map<K, V> toMap(Iterable<Pair<K, V>> items) {
 		val result = newLinkedHashMap
@@ -217,6 +218,7 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 				AbstractDelegatingSemanticSequencer.typeRef
 		val javaFile = fileAccessFactory.createGeneratedJavaFile(clazz)
 		javaFile.resourceSet = language.resourceSet
+		val methodSignatures = newHashSet()
 		
 		javaFile.content = '''
 			public «IF isGenerateStub»abstract «ENDIF»class «clazz.simpleName» extends «superClazz» {
@@ -227,7 +229,12 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 				«genMethodCreateSequence»
 				
 				«FOR c : newLocalConstraints.sort»
-					«genMethodSequence(c)»
+					«IF methodSignatures.add(c.simpleName -> c.type)»
+						«genMethodSequence(c)»
+					«ELSE»
+						«LOG.warn("Skipped generating duplicate method in " + clazz.simpleName)»
+						«genMethodSequenceComment(c)»
+					«ENDIF»
 					
 				«ENDFOR»
 			}
@@ -362,7 +369,21 @@ class SerializerFragment2 extends AbstractStubGeneratingFragment {
 		'''
 	}
 	
-	private def StringConcatenationClient genMethodSequence(IGrammarConstraintProvider.IConstraint c) {
+	private def StringConcatenationClient genMethodSequenceComment(IConstraint c) '''
+		// This method is commented out because it has the same signature as another method in this class.
+		// This is probably a bug in Xtext's serializer, please report it here: 
+		// https://bugs.eclipse.org/bugs/enter_bug.cgi?product=TMF
+		//
+		// Contexts:
+		//     «c.contexts.sort.join("\n").replaceAll("\\n","\n//     ")»
+		//
+		// Constraint:
+		//     «IF c.body === null»{«c.type.name»}«ELSE»«c.body.toString.replaceAll("\\n","\n//     ")»«ENDIF»
+		//
+		// protected void sequence_«c.simpleName»(«ISerializationContext» context, «c.type» semanticObject) { }
+	'''
+		
+	private def StringConcatenationClient genMethodSequence(IConstraint c) {
 		val rs = language.resourceSet
 		val StringConcatenationClient cast =
 			if (c.type.getGenClass(rs).isEObjectExtension)

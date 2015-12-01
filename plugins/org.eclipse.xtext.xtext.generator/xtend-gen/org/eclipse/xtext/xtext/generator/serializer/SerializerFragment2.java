@@ -19,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -64,6 +65,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -96,6 +98,7 @@ import org.eclipse.xtext.xtext.generator.serializer.SyntacticSequencerExtensions
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector;
 
+@Log
 @SuppressWarnings("all")
 public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   private static <K extends Object, V extends Object> Map<K, V> toMap(final Iterable<Pair<K, V>> items) {
@@ -544,6 +547,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     IXtextGeneratorLanguage _language = this.getLanguage();
     ResourceSet _resourceSet = _language.getResourceSet();
     javaFile.setResourceSet(_resourceSet);
+    final HashSet<Pair<String, EClass>> methodSignatures = CollectionLiterals.<Pair<String, EClass>>newHashSet();
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -584,10 +588,28 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         {
           List<IGrammarConstraintProvider.IConstraint> _sort = IterableExtensions.<IGrammarConstraintProvider.IConstraint>sort(newLocalConstraints);
           for(final IGrammarConstraintProvider.IConstraint c : _sort) {
-            _builder.append("\t");
-            StringConcatenationClient _genMethodSequence = SerializerFragment2.this.genMethodSequence(c);
-            _builder.append(_genMethodSequence, "\t");
-            _builder.newLineIfNotEmpty();
+            {
+              String _simpleName_1 = c.getSimpleName();
+              EClass _type = c.getType();
+              Pair<String, EClass> _mappedTo = Pair.<String, EClass>of(_simpleName_1, _type);
+              boolean _add = methodSignatures.add(_mappedTo);
+              if (_add) {
+                _builder.append("\t");
+                StringConcatenationClient _genMethodSequence = SerializerFragment2.this.genMethodSequence(c);
+                _builder.append(_genMethodSequence, "\t");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("\t");
+                String _simpleName_2 = clazz.getSimpleName();
+                String _plus = ("Skipped generating duplicate method in " + _simpleName_2);
+                SerializerFragment2.LOG.warn(_plus);
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                StringConcatenationClient _genMethodSequenceComment = SerializerFragment2.this.genMethodSequenceComment(c);
+                _builder.append(_genMethodSequenceComment, "\t");
+                _builder.newLineIfNotEmpty();
+              }
+            }
             _builder.append("\t");
             _builder.newLine();
           }
@@ -1071,6 +1093,66 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       _xblockexpression = _client;
     }
     return _xblockexpression;
+  }
+  
+  private StringConcatenationClient genMethodSequenceComment(final IGrammarConstraintProvider.IConstraint c) {
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("// This method is commented out because it has the same signature as another method in this class.");
+        _builder.newLine();
+        _builder.append("// This is probably a bug in Xtext\'s serializer, please report it here: ");
+        _builder.newLine();
+        _builder.append("// https://bugs.eclipse.org/bugs/enter_bug.cgi?product=TMF");
+        _builder.newLine();
+        _builder.append("//");
+        _builder.newLine();
+        _builder.append("// Contexts:");
+        _builder.newLine();
+        _builder.append("//     ");
+        List<ISerializationContext> _contexts = c.getContexts();
+        List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_contexts);
+        String _join = IterableExtensions.join(_sort, "\n");
+        String _replaceAll = _join.replaceAll("\\n", "\n//     ");
+        _builder.append(_replaceAll, "");
+        _builder.newLineIfNotEmpty();
+        _builder.append("//");
+        _builder.newLine();
+        _builder.append("// Constraint:");
+        _builder.newLine();
+        _builder.append("//     ");
+        {
+          IGrammarConstraintProvider.IConstraintElement _body = c.getBody();
+          boolean _tripleEquals = (_body == null);
+          if (_tripleEquals) {
+            _builder.append("{");
+            EClass _type = c.getType();
+            String _name = _type.getName();
+            _builder.append(_name, "");
+            _builder.append("}");
+          } else {
+            IGrammarConstraintProvider.IConstraintElement _body_1 = c.getBody();
+            String _string = _body_1.toString();
+            String _replaceAll_1 = _string.replaceAll("\\n", "\n//     ");
+            _builder.append(_replaceAll_1, "");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+        _builder.append("//");
+        _builder.newLine();
+        _builder.append("// protected void sequence_");
+        String _simpleName = c.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append("(");
+        _builder.append(ISerializationContext.class, "");
+        _builder.append(" context, ");
+        EClass _type_1 = c.getType();
+        _builder.append(_type_1, "");
+        _builder.append(" semanticObject) { }");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    return _client;
   }
   
   private StringConcatenationClient genMethodSequence(final IGrammarConstraintProvider.IConstraint c) {
@@ -1942,6 +2024,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     IXtextGeneratorFileSystemAccess _srcGen = _runtime.getSrcGen();
     _createTextFile.writeTo(_srcGen);
   }
+  
+  private final static Logger LOG = Logger.getLogger(SerializerFragment2.class);
   
   @Pure
   public boolean isGenerateDebugData() {

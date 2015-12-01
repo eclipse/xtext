@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Integration with Web Applications
+title: Web Editor Support
 part: Reference Documentation
 ---
 

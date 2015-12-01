@@ -11,13 +11,18 @@ title: Download
 				<p>
 		Xtext languages can be developed in Eclipse and IntelliJ IDEA. You can either use your favorite IDE's plug-in mechanism to add the Xtext SDK, using one of the URLs below, or go to the professional Xtext site to download a ready to use package.
 				</p>
+				<p>
+				{% for post in site.categories.releasenotes limit:1 %}
+					<strong><a href="releasenotes.html">{{ post.title }}</a></strong>
+				{% endfor %}
+				</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="span6">
 				<h2>Eclipse Users</h2>
 				<h3>Download Eclipse</h3>
-				<p>itemis offers tested and ready to use Eclipse distributions on <a href="https://xtext.itemis.com">xtext.itemis.com</a>.</p>
+				<p>itemis offers tested and ready to use Eclipse distributions on <a href="https://itemis.com">itemis.com</a>.</p>
 				<p><a href="http://cta-redirect.hubspot.com/cta/redirect/761475/5f19e385-5578-4a5b-96b2-81413c6e6d20" target="_parent" class="has-popover btn btn-success btn-large pull_right">Get Eclipse from itemis.com</a>
 			      <script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script>
 			      <script type="text/javascript">
