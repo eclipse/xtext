@@ -27,6 +27,20 @@ class TypeReferenceTest {
 	}
 	
 	@Test
+	def void testUnderscopresAnd$() {
+		val ref = "E_$tring".typeRef
+		assertEquals("", ref.packageName)
+		assertEquals("E_$tring", ref.simpleName)
+	}
+	
+	@Test
+	def void testUnderscopresAnd$02() {
+		val ref = "$.$._$.E_$tring".typeRef
+		assertEquals("$.$._$", ref.packageName)
+		assertEquals("E_$tring", ref.simpleName)
+	}
+	
+	@Test
 	def void testPackageName() {
 		val ref = "org.example.MyType".typeRef
 		assertEquals("MyType", ref.simpleName)
