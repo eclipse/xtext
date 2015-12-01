@@ -11,6 +11,11 @@ title: Download
 				<p>
 		Xtext languages can be developed in Eclipse and IntelliJ IDEA. You can either use your favorite IDE's plug-in mechanism to add the Xtext SDK, using one of the URLs below, or go to the professional Xtext site to download a ready to use package.
 				</p>
+				<p>
+				{% for post in site.categories.releasenotes limit:1 %}
+					<strong><a href="releasenotes.html">{{ post.title }}</a></strong>
+				{% endfor %}
+				</p>
 			</div>
 		</div>
 		<div class="row">
