@@ -134,9 +134,11 @@ public abstract class SerializationContext implements ISerializationContext {
 		EClass type = sem == null ? null : sem.eClass();
 		//		RuleContext ruleContext = new RuleContext(null, container.getParserRule());
 		ISerializationContext context = new TypeContext(new ActionContext(/*ruleContext*/null, assignedAction), type);
-		Set<Parameter> params = container.getEnabledBooleanParameters();
-		if (!params.isEmpty())
-			context = new ParameterValueContext(context, params);
+		if (container != null) {
+			Set<Parameter> params = container.getEnabledBooleanParameters();
+			if (!params.isEmpty())
+				context = new ParameterValueContext(context, params);
+		}
 		return context;
 	}
 
@@ -144,7 +146,7 @@ public abstract class SerializationContext implements ISerializationContext {
 		EClass type = sem == null ? null : sem.eClass();
 		ISerializationContext result = new TypeContext(new RuleContext(null, (ParserRule) ruleCall.getRule()), type);
 		EList<NamedArgument> arguments = ruleCall.getArguments();
-		if (!arguments.isEmpty()) {
+		if (!arguments.isEmpty() && container != null) {
 			Set<Parameter> params = Sets.newLinkedHashSet();
 			ConditionEvaluator evaluator = new ConditionEvaluator(container.getEnabledBooleanParameters());
 			for (NamedArgument argument : arguments) {

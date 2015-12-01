@@ -51,7 +51,7 @@ public class Formatting2Test extends AbstractWebServerTest {
   
   @Test
   public void testFormatSelection() {
-    final File file = this.createFile("/* bla */ output signal x state foo set x = true end");
+    final File file = this.createFile("/* bla */ output signal x state foo set x = true end ");
     Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "format");
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("selectionStart", "26");
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("selectionEnd", "52");
