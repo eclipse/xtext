@@ -132,11 +132,6 @@
 			<artifactId>xtext-antlr-generator</artifactId>
 			<version>2.1.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.equinox</groupId>
-			<artifactId>common</artifactId>
-			<version>${equinox-common-version}</version>
-		</dependency>
 	</dependencies>
 	<description>Containst any own content. Just redirects to dependencies.</description>
 </project>

@@ -1,0 +1,29 @@
+plugins.withType(JavaBasePlugin) {
+	sourceCompatibility = 1.6
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'ISO-8859-1'
+}
+
+/*
+ * Skip java compiler completely on local machines,
+ * because we all have Eclipse running, which
+ * already compiles the code. Just reuse the classes
+ * from the bin folder
+ */
+if (!isBuildServer) {
+	plugins.withType(JavaPlugin) {
+		compileJava.enabled = false
+		processResources.enabled = false
+	
+		task copyFromBin(type: Sync) {
+		    from 'bin'
+		    into 'build/classes/main'
+		}
+	
+		classes {
+			dependsOn(copyFromBin)
+		}
+	}
+}

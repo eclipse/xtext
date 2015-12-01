@@ -1,13 +1,4 @@
 dependencies {
-	compile project(":plugins:org.eclipse.xtext.ide")
-	compile project(":plugins:org.eclipse.xtext.xbase")
 	compile project(":plugins:org.eclipse.xtext.xbase.ide")
-	compile project(":plugins:org.eclipse.xtend.lib.macro")
-
 	compile project(':plugins:org.eclipse.xtext.ecore')
-	compile project(':plugins:org.eclipse.xtext.builder.standalone')
-	
-	compile ('org.eclipse.equinox:org.eclipse.equinox.common:3.6.0') { transitive = false}
-	
-	ideaProvided fileTree("${ideaDevelopment.ideaHome}/plugins/junit/lib/").include("*.jar")
 }

@@ -1,20 +1,44 @@
+/*
+ * This script collects all the projects and categorizes them.
+ * It adds cross-configuration to the subprojects according to their category.
+ * All cross-configuration should happen here.
+ * All other build scripts should only configure their own project.
+ * This ensures minimum configuration time, which means fast builds.
+ */
 rootProject.name = 'xtext'
+
 include 'jenkins'
 include 'maven'
 
-['plugins', 'tests'].each { folder ->
+['plugins', 'tests','intellij', 'web'].each { folder ->
 	new File(settingsDir, folder).listFiles().findAll {
-		new File(it, 'build.properties').exists()
+		it.isDirectory() && it.name.startsWith("org.eclipse")
 	}
 	.each {
 		include "${folder}:${it.name}"
 	}
 }
 
-['intellij', 'web'].each {folder ->
-	new File(settingsDir, folder).listFiles().findAll {
-		it.isDirectory() && it.name.startsWith("org.eclipse")
-	}.each {
-		include "${folder}:${it.name}"
+gradle.beforeProject {project ->
+	project.with {
+		repositories {
+			jcenter()
+		}
+
+		apply from: "$rootDir/gradle/versions.gradle"
+		apply from: "$rootDir/gradle/build-server-detection.gradle"
+		apply from: "$rootDir/gradle/eclipse-settings.gradle"
+		apply from: "$rootDir/gradle/java-compiler-settings.gradle"
+		apply from: "$rootDir/gradle/dependency-hygiene.gradle"
+
+		def isEclipsePlugin = project.file('build.properties').exists()
+
+		if (isEclipsePlugin) {
+			apply from: "${rootDir}/gradle/eclipse-plugin-project.gradle"
+		} else if (path.startsWith(':web:')) {
+			apply from: "$rootDir/gradle/web-project.gradle"
+		} else if (path.startsWith(':intellij')) {
+			apply from: "$rootDir/gradle/intellij-project.gradle"
+		}
 	}
 }

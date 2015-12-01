@@ -1,5 +1,5 @@
 dependencies {
-	testCompile project(':intellij:org.eclipse.xtext.idea.tests')
+	testCompile project(':intellij:org.eclipse.xtext.idea.junit')
 }
 
 ideaDevelopment {

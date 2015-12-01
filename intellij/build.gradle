@@ -1,14 +1,16 @@
+/*
+ * This project serves as an aggregator for all idea plugins,
+ * so you can launch them all together. It also creates a repository
+ * from where users can install our plugins
+ */
 buildscript {
+	repositories {
+		jcenter()
+	}
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.25"
+		classpath "org.xtext:xtext-idea-gradle-plugin:${versions.ideaGradlePluginVersion}"
 	}
 }
-
-def eclipsePluginProjects = subprojects.findAll{it.file('build.properties').exists()}
-def ideaPluginProjects = subprojects.findAll{it.file('META-INF/plugin.xml').exists() && ! it.name.endsWith('tests')} + project('org.eclipse.xtext.idea.common.types.tests')
-def ideaTestProjects = subprojects.findAll{it.name.endsWith('idea.tests')} + project('org.eclipse.xtext.idea.common.types.tests') - project('org.eclipse.xtext.idea.tests')
-
-ext.ideaBuildId = project.hasProperty('ideaEAP') ? "143.1015.7" :  "143.381.42"
 
 apply plugin: 'org.xtext.idea-repository'
 apply plugin: 'org.xtext.idea-aggregator'
@@ -18,95 +20,8 @@ if (version.endsWith("-SNAPSHOT")) {
 } else {
 	ideaRepository.rootUrl = "http://download.eclipse.org/modeling/tmf/xtext/idea/${version}"
 }
-ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**', '**/*common.types.tests*/**'
 
-runIdea {
-	jvmArgs '-ea'
-}
-
-allprojects {
-	apply plugin: 'org.xtext.idea-dev'
-
-	ideaDevelopment {
-		ideaVersion = "${ideaBuildId}"
-		pluginDependencies {
-			id 'junit'
-		}
-	}
-}
-
-configure(eclipsePluginProjects) {
-	apply from: "${rootDir}/gradle/eclipse-plugin-project.gradle"
-}
-
-configure(subprojects - eclipsePluginProjects) {
-	apply plugin: 'org.xtext.idea-component'
-	apply from: "$rootDir/gradle/eclipse-settings.gradle"
-	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-
-	dependencies {
-		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
-	}
-
-	if (!isBuildServer) {
-		// Disable the java task if not on the build server
-		// This allows to reuse the artifacts from /bin that
-		// Eclipse produced. They are immediately available and
-		// contain debug information.
-		compileJava.enabled = false
-		processResources.enabled = false
-
-		task copyFromBin(type: Sync) {
-		    from 'bin'
-		    into 'build/classes/main'
-		}
-
-		classes {
-			dependsOn(copyFromBin)
-		}
-	}
-}
-
-configure(ideaPluginProjects + ideaTestProjects) {
-	configurations.compile {
-		//TODO this should be excluded by the plugin by default
-		exclude group: 'org.eclipse.equinox', module: 'common'
-
-		if( project.name != 'org.eclipse.xtend.idea') {
-			exclude module:'org.eclipse.jdt.core'
-		}
-
-		//TODO this should be excluded higher in the dependency chain
-		exclude module:'cglib'
-	}
-
-	task cleanTestSystem(type: Delete) {
-		delete "${ideaDevelopment.ideaHome}/test-system"
-	}
-}
-
-configure(ideaPluginProjects) {
-	apply plugin: 'org.xtext.idea-plugin'
-}
-
-configure(ideaTestProjects) {
-	// 'src-gen2' has been introduced to separate test language sources obtained
-	//  with the new generator from those created by the old one
-	sourceSets.test.java.srcDirs ('src', 'src-gen', 'src-gen2', 'xtend-gen', 'tests')
-	sourceSets.main.java.srcDirs = []
-
-	dependencies {
-		testCompile project(':intellij:org.eclipse.xtext.idea.tests')
-	}
-
-	test {
-		minHeapSize = "1024m"
-		systemProperty 'idea.system.path', "${project.buildDir}/idea-test-system"
-		systemProperty 'idea.config.path', "${project.buildDir}/idea-test-config"
-		jvmArgs '-XX:MaxPermSize=256m'
-		exclude {it.name.endsWith('Delegate.class')}
-	}
-}
+ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**'
 
 task check {
 	dependsOn subprojects*.check

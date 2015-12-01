@@ -1,0 +1,18 @@
+version = '2.9.0-SNAPSHOT'
+
+ext.versions = [
+  'ideaVersion' : project.hasProperty('ideaEAP') ? "LATEST-EAP-SNAPSHOT" : "143.381.42",
+  'ideaGradlePluginVersion' : '0.3.26'
+]
+
+/*
+ * We currently maintain a list of versions for external
+ * dependencies in our org.eclipse.xtext.parent pom.
+ * This snippet makes these version available to all Gradle
+ * projects
+ */
+if (!rootProject.hasProperty("parentPomVersions")) {
+	def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
+	rootProject.ext.parentPomVersions = new XmlSlurper().parse(parentPom).properties.children().collectEntries{[(it.name()) : it.text()]}
+}
+versions += rootProject.parentPomVersions

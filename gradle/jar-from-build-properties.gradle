@@ -1,0 +1,42 @@
+/*
+ * Lazily reads build.properties to configure the contents of the jar
+ */
+
+task configureJarFromBuildProperties {
+	doLast {
+		jar {
+			/*
+			 * We use Tycho on the build server, which outputs to target/classes.
+			 * Locally we use Eclipse which outputs to bin
+			 * This should be streamlined (Eclipse configured to target/classes)
+			 */
+			if(isBuildServer) {
+				from('target/classes')
+			} else {
+				from('bin')
+			}
+
+			manifest {
+				from('META-INF/MANIFEST.MF')
+			}
+			Properties buildProperties = new Properties()
+			File propertiesFile = file('build.properties')
+			propertiesFile.withInputStream {
+					buildProperties.load(it)
+			}
+			def binIncludes = buildProperties.get("bin.includes").split(',').findAll{it != "."}
+			binIncludes.each{ include ->
+				if (project.file(include).isDirectory()) {
+					from(include) {
+						into(include)
+					}
+				} else {
+					from(include)
+				}
+			}
+			duplicatesStrategy 'fail'
+		}
+	}
+}
+
+jar.dependsOn(configureJarFromBuildProperties)

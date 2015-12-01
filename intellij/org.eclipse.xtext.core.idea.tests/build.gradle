@@ -1,4 +1,5 @@
 dependencies {
+	testCompile project(':intellij:org.eclipse.xtext.idea.junit')
 	testCompile project(':intellij:org.eclipse.xtext.testlanguages.idea')
 	testCompile project(':tests:org.eclipse.xtext.tests')
 }

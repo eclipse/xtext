@@ -53,7 +53,6 @@ Export-Package: org.eclipse.xtend.core;x-internal:=true,
  org.eclipse.xtend.core.xtend.util;x-internal:=true
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.6.0",
  org.eclipse.emf.ecore;bundle-version="2.10.2";visibility:=reexport,
- org.eclipse.emf.codegen;bundle-version="2.10.0",
  org.eclipse.xtext.common.types;visibility:=reexport,
  org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.xtext,
@@ -67,6 +66,6 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.6.0",
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  org.eclipse.xtext.xbase.junit;resolution:=optional,
  org.eclipse.xtext.generator;resolution:=optional,
- org.eclipse.emf.mwe2.launch;bundle-version="2.7.1";resolution:=optional
+ org.eclipse.emf.mwe2.launch;resolution:=optional
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"

@@ -1,23 +1,25 @@
-/**
- * This is where we translate Manifest.MF dependencies to Maven Central dependencies.
+/*
+ * Reads the Manifest.mf of a project and translates the required bundles to maven-style dependencies.
+ * The versions are taken from the org.eclipse.xtext.parent pom.xml
  */
-def versions
-if (rootProject.hasProperty("parentPomVersions")) {
-	versions = rootProject.parentPomVersions
-} else {
-	def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
-	versions = new XmlSlurper().parse(parentPom).properties.children().collectEntries{[(it.name()) : it.text()]}
-	rootProject.ext.parentPomVersions = versions
+
+import org.apache.ivy.osgi.core.ManifestParser
+
+buildscript {
+	repositories.jcenter()
+	dependencies {
+		classpath (group: 'org.apache.ivy', name: 'ivy', version: '2.4.0')
+	}
 }
 
-ext.toDependency = { requirement ->
+def toDependency = {requirement ->
+	if (requirement.resolution == 'optional') {
+		return null
+	}
 	if (requirement.name.contains('.ui') || requirement.name.contains('.editor')) {
 		return null
 	}
-	def projectDependency = rootProject.project(':plugins').findProject(requirement.name)
-		?: rootProject.project(':tests').findProject(requirement.name)
-		?: rootProject.project(':intellij').findProject(requirement.name)
-		?: rootProject.project(':web').findProject(requirement.name)
+	def projectDependency = rootProject.allprojects.find{it.name == requirement.name}
 	if (projectDependency) {
 		return projectDependency
 	}
@@ -28,7 +30,7 @@ ext.toDependency = { requirement ->
 		return [group:'org.antlr', name:'antlr-runtime', version:versions.'antlr.version']
 	}
 	if (requirement.name == 'org.eclipse.equinox.common') {
-		return [group:'org.eclipse.equinox', name:'common', version:versions.'equinox-common-version']
+		return [group:'org.eclipse.equinox', name:'org.eclipse.equinox.common', version:versions.'equinox-common-version']
 	}
 	if (requirement.name.startsWith('org.eclipse.emf.mwe2')) {
 		return [group:'org.eclipse.emf', name: requirement.name, version:versions.'mwe2-version']
@@ -40,7 +42,7 @@ ext.toDependency = { requirement ->
 		return [group:'org.eclipse.emf', name: requirement.name, version:versions.'emf.version']
 	}
 	if (requirement.name == 'org.eclipse.jdt.core') {
-		return [group:'org.eclipse.tycho', name: 'org.eclipse.jdt.core', version:versions.'jdt-core-version']
+		return [group:'org.eclipse.jdt', name: 'org.eclipse.jdt.core', version:versions.'jdt-core-version']
 	}
 	if (requirement.name == 'org.apache.log4j') {
 		return [group:'log4j', name: 'log4j', version:versions.'log4j.version']
@@ -67,4 +69,15 @@ ext.toDependency = { requirement ->
 		return [group:'javax.inject', name: 'javax.inject', version:versions.'javax-inject.version']
 	}
 	logger.debug("Requirement '${requirement}' of ${project} is not mapped to a Maven dependency")
+}
+
+dependencies {
+	def manifestFile = file('META-INF/MANIFEST.MF')
+	def manifest = ManifestParser.parseManifest(manifestFile)
+	manifest.requires
+		.collect{toDependency(it)}
+		.findAll {it != null}
+		.each {
+			add('compile', it)
+		}
 }

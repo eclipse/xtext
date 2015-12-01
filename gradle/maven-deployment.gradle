@@ -1,8 +1,19 @@
+/*
+ * Configures a project so that it produces Maven-Central compliant
+ * artifacts (jar, sources, javadoc, signatures). The project-metadata
+ * is read from our org.eclipse.xtext.parent pom.xml
+ */
+
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+if (name.startsWith('org.eclipse.xtend')) {
+	group = 'org.eclipse.xtend'
+} else {
+	group = 'org.eclipse.xtext'
+}
 
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
@@ -42,8 +53,11 @@ configure(deployer) {
 }
 
 [installer, deployer]*.pom*.project {
-	def parentPom = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
-	def parent = new XmlSlurper().parse(parentPom)
+	if (!rootProject.hasProperty("parentPom")) {
+		def parentPomXml = file("$rootDir/maven/org.eclipse.xtext.parent/pom.xml")
+		rootProject.ext.parentPom = new XmlSlurper().parse(parentPomXml)
+	}
+	def parent = rootProject.parentPom
 
 	name = project.name
 	url = parent.url

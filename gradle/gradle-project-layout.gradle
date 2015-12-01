@@ -1,0 +1,11 @@
+/*
+ * For projects that use the default Gradle layout,
+ * we don't need to change a lot, only add non-standard 
+ * source directories.
+ */
+sourceSets {
+	main.java.srcDir 'src/main/xtext-gen'
+	main.java.srcDir 'src/main/xtend-gen'
+	test.java.srcDir 'src/test/xtext-gen'
+	test.java.srcDir 'src/test/xtend-gen'
+}

@@ -1,0 +1,3 @@
+apply plugin: 'java'
+apply from: "$rootDir/gradle/gradle-project-layout.gradle"
+apply from: "$rootDir/gradle/maven-deployment.gradle"

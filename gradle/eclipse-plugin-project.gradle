@@ -5,68 +5,28 @@
  * just like tycho would do it and then use that in the downstream projects.
  */
 
-import org.apache.ivy.osgi.core.ManifestParser
 
-buildscript {
-	repositories.jcenter()
-	dependencies {
-		classpath (group: 'org.apache.ivy', name: 'ivy', version: '2.4.0')
+apply plugin: 'java-base'
+
+configurations {
+	compile
+	'default' {
+		extendsFrom compile
 	}
 }
 
-apply plugin: 'java'
-apply from: "${rootDir}/gradle/dependency-mapping.gradle"
+task jar(type:Jar) {}
 
-dependencies {
-	def manifestFile = file('META-INF/MANIFEST.MF')
-	def manifest = ManifestParser.parseManifest(manifestFile)
-	manifest.requires
-		.collect{toDependency(it)}
-		.findAll {it != null}
-		.each {
-			add('compile', it)
-		}
+artifacts {
+	'default' jar
 }
 
-task configureJarFromBuildProperties {
-	doLast {
-		jar {
-			//TODO get rid of this distinction by reconfiguring
-			//the Eclipse output folder for the mavenized projects
-			if(isBuildServer) {
-				from('target/classes')
-			} else {
-				from('bin')
-			}
-
-			manifest {
-				from('META-INF/MANIFEST.MF')
-			}
-			Properties buildProperties = new Properties()
-			File propertiesFile = file('build.properties')
-			propertiesFile.withInputStream {
-					buildProperties.load(it)
-			}
-			def binIncludes = buildProperties.get("bin.includes").split(',').findAll{it != "."}
-			binIncludes.each{ include ->
-				if (project.file(include).isDirectory()) {
-					from(include) {
-						into(include)
-					}
-				} else {
-					from(include)
-				}
-			}
-			duplicatesStrategy 'exclude'
-		}
-	}
-}
-
-jar.dependsOn(configureJarFromBuildProperties)
 if (isBuildServer) {
 	jar.dependsOn(':maven:compileEclipsePlugins')
 }
 
-//skip compilation, done by Eclipse/Maven
-compileJava.enabled = false
-processResources.enabled = false
+apply from: "${rootDir}/gradle/dependencies-from-manifest.gradle"
+apply from: "${rootDir}/gradle/jar-from-build-properties.gradle"
+
+eclipseClasspath.enabled = false
+cleanEclipseClasspath.enabled = false
