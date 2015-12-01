@@ -23,10 +23,5 @@
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.equinox</groupId>
-			<artifactId>common</artifactId>
-			<version>${equinox-common-version}</version>
-		</dependency>
 	</dependencies>
 </project>

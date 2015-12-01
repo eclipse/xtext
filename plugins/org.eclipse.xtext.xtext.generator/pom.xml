@@ -60,13 +60,6 @@
 			<version>${antlr-generator-version}</version>
 		</dependency>
 		<dependency>
-			<!-- FIXME should be transitively provided by xtext -->
-			<groupId>org.eclipse.equinox</groupId>
-			<artifactId>common</artifactId>
-			<version>${equinox-common-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<!-- FIXME should be transitively provided by mwe.utils -->
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
