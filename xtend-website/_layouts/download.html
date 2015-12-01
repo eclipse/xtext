@@ -18,7 +18,7 @@ download:
 	<h2>Download Options</h2>
 	<p>
 	{% for post in site.categories.releasenotes limit:1 %}
-		<strong><a href="releasenotes.html#{{ post.id }}">{{ post.title }}</a></strong>
+		<strong><a href="releasenotes.html">{{ post.title }}</a></strong>
 	{% endfor %}
     </p>
 	<hr>
