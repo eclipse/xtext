@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext.generator.model
 import com.google.common.base.Splitter
 import java.util.Collections
 import java.util.List
-import java.util.regex.Pattern
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -43,9 +42,6 @@ class TypeReference {
 		new TypeReference(clazz, language.resourceSet)
 	}
 	
-	static val PACKAGE_MATCHER = Pattern.compile('([a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*)?')
-	static val CLASS_MATCHER = Pattern.compile('[a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*')
-	
 	val String packageName
 	
 	val List<String> simpleNames
@@ -69,9 +65,9 @@ class TypeReference {
 	}
 	
 	new(String packageName, String className, List<TypeReference> arguments) {
-		if (packageName === null || !PACKAGE_MATCHER.matcher(packageName).matches)
+		if (packageName === null)
 			throw new IllegalArgumentException('Invalid package name: ' + packageName)
-		if (className === null || !CLASS_MATCHER.matcher(className).matches)
+		if (className === null)
 			throw new IllegalArgumentException('Invalid class name: ' + className)
 		this.packageName = packageName
 		this.simpleNames = className.split('\\.')
