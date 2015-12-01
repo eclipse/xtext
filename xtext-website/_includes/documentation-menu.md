@@ -42,7 +42,7 @@
 	</li>
 	<li><a href="308_emf_integration.html">Integration with EMF and Other EMF Editors</a>
 	</li>
-	<li><a href="309_idea_integration.html">IntelliJ IDEA Support</a>
+	<!--li><a href="309_idea_integration.html">IntelliJ IDEA Support</a-->
 	</li>
 	<li><a href="310_web_integration.html">Web Editor Support</a>
 	</li>
