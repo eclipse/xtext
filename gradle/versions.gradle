@@ -1,8 +1,8 @@
 version = '2.9.0-SNAPSHOT'
 
 ext.versions = [
-  'ideaVersion' : project.hasProperty('ideaEAP') ? "143.1015.7" : "143.381.42",
-  'ideaGradlePluginVersion' : '0.3.25'
+  'ideaVersion' : project.hasProperty('ideaEAP') ? "LATEST-EAP-SNAPSHOT" : "143.381.42",
+  'ideaGradlePluginVersion' : '0.3.26'
 ]
 
 /*

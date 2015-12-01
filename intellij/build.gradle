@@ -23,7 +23,6 @@ if (version.endsWith("-SNAPSHOT")) {
 
 ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**'
 
-evaluationDependsOnChildren()
 task check {
 	dependsOn subprojects*.check
 }

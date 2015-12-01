@@ -37,8 +37,6 @@ if (file("src").exists()) {
 }
 
 tasks.withType(Test) {
-	systemProperty 'idea.system.path', "${project.buildDir}/idea-test-system" //TODO should be part of the idea-dev plugin
-	systemProperty 'idea.config.path', "${project.buildDir}/idea-test-config" //TODO should be part of the idea-dev plugin
 	minHeapSize = "1024m"
 	jvmArgs '-XX:MaxPermSize=256m', '-ea'
 	/*
@@ -48,8 +46,4 @@ tasks.withType(Test) {
 	 * look like one. So we need to filter them out here
 	 */
 	exclude {it.name.endsWith('Delegate.class')}
-}
-
-tasks.withType(org.xtext.gradle.idea.tasks.RunIdea) {
-	jvmArgs '-ea' //TODO should be part of the idea-dev plugin
 }

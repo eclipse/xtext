@@ -24,7 +24,7 @@ gradle.beforeProject {project ->
 		repositories {
 			jcenter()
 		}
-		
+
 		apply from: "$rootDir/gradle/versions.gradle"
 		apply from: "$rootDir/gradle/build-server-detection.gradle"
 		apply from: "$rootDir/gradle/eclipse-settings.gradle"
