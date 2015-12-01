@@ -5,6 +5,7 @@
       This plugin enables smart editing of Xtext files.
 	</description>
 	<version>2.9.0-SNAPSHOT</version>
+	<category>Custom Languages</category>
 	<vendor url="http://xtext.org">Eclipse Xtext</vendor>
 
 	<idea-version since-build="131"/>

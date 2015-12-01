@@ -4,7 +4,7 @@
 	<description>Xtext IDEA Core.</description>
 	<version>2.9.0-SNAPSHOT</version>
 	<vendor url="http://xtext.org" logo="/icons/dsl-package_16.png">Eclipse Xtext</vendor>
-	
+	<category>Custom Languages</category>
 	<idea-version since-build="131"/>
 	<depends>JUnit</depends>
 
