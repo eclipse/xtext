@@ -7,7 +7,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.25"
+		classpath "org.xtext:xtext-idea-gradle-plugin:${versions.ideaGradlePluginVersion}"
 	}
 }
 
@@ -17,6 +17,22 @@ ideaDevelopment {
 	ideaVersion = versions.ideaVersion
 	pluginDependencies {
 		id 'junit'
+	}
+}
+
+if (file("src").exists()) {
+	apply plugin: org.xtext.gradle.idea.IdeaComponentPlugin
+	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+
+	dependencies {
+		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
+	}
+
+	def isTestProject = name.endsWith('tests')
+	def isIntellijPlugin = file('META-INF/plugin.xml').exists() && !isTestProject
+
+	if (isIntellijPlugin) {
+		apply plugin: org.xtext.gradle.idea.IdeaPluginPlugin
 	}
 }
 
@@ -36,10 +52,4 @@ tasks.withType(Test) {
 
 tasks.withType(org.xtext.gradle.idea.tasks.RunIdea) {
 	jvmArgs '-ea' //TODO should be part of the idea-dev plugin
-}
-
-plugins.withType(org.xtext.gradle.idea.IdeaComponentPlugin) {
-	dependencies {
-		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
-	}
 }

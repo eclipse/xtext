@@ -5,17 +5,8 @@
  * All other build scripts should only configure their own project.
  * This ensures minimum configuration time, which means fast builds.
  */
-
-buildscript {
-	repositories {
-		jcenter()
-	}
-	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.25"
-	}
-}
-
 rootProject.name = 'xtext'
+
 include 'jenkins'
 include 'maven'
 
@@ -33,10 +24,11 @@ gradle.beforeProject {project ->
 		repositories {
 			jcenter()
 		}
+		
+		apply from: "$rootDir/gradle/versions.gradle"
 		apply from: "$rootDir/gradle/build-server-detection.gradle"
 		apply from: "$rootDir/gradle/eclipse-settings.gradle"
 		apply from: "$rootDir/gradle/java-compiler-settings.gradle"
-		apply from: "$rootDir/gradle/versions.gradle"
 		apply from: "$rootDir/gradle/dependency-hygiene.gradle"
 
 		def isEclipsePlugin = project.file('build.properties').exists()
@@ -44,22 +36,9 @@ gradle.beforeProject {project ->
 		if (isEclipsePlugin) {
 			apply from: "${rootDir}/gradle/eclipse-plugin-project.gradle"
 		} else if (path.startsWith(':web:')) {
-			apply plugin: 'java'
-			apply from: "$rootDir/gradle/gradle-project-layout.gradle"
-			apply from: "$rootDir/gradle/maven-deployment.gradle"
+			apply from: "$rootDir/gradle/web-project.gradle"
 		} else if (path.startsWith(':intellij')) {
-			apply from: "$rootDir/gradle/intellij-development.gradle"
-			if (name != 'intellij') {
-				apply plugin: org.xtext.gradle.idea.IdeaComponentPlugin
-				apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
-
-				def isTestProject = it.name.endsWith('tests')
-				def isIntellijPlugin = it.file('META-INF/plugin.xml').exists() && !isTestProject
-
-				if (isIntellijPlugin) {
-					apply plugin: org.xtext.gradle.idea.IdeaPluginPlugin
-				}
-			}
+			apply from: "$rootDir/gradle/intellij-project.gradle"
 		}
 	}
 }

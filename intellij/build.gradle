@@ -8,7 +8,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath "org.xtext:xtext-idea-gradle-plugin:0.3.25"
+		classpath "org.xtext:xtext-idea-gradle-plugin:${versions.ideaGradlePluginVersion}"
 	}
 }
 
