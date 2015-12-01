@@ -30,6 +30,24 @@ public class TypeReferenceTest {
   }
   
   @Test
+  public void testUnderscopresAnd$() {
+    final TypeReference ref = TypeReference.typeRef("E_$tring");
+    String _packageName = ref.getPackageName();
+    Assert.assertEquals("", _packageName);
+    String _simpleName = ref.getSimpleName();
+    Assert.assertEquals("E_$tring", _simpleName);
+  }
+  
+  @Test
+  public void testUnderscopresAnd$02() {
+    final TypeReference ref = TypeReference.typeRef("$.$._$.E_$tring");
+    String _packageName = ref.getPackageName();
+    Assert.assertEquals("$.$._$", _packageName);
+    String _simpleName = ref.getSimpleName();
+    Assert.assertEquals("E_$tring", _simpleName);
+  }
+  
+  @Test
   public void testPackageName() {
     final TypeReference ref = TypeReference.typeRef("org.example.MyType");
     String _simpleName = ref.getSimpleName();

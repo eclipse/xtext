@@ -12,8 +12,6 @@ import com.google.common.base.Splitter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.ecore.EClass;
@@ -54,10 +52,6 @@ public class TypeReference {
     return new TypeReference(clazz, _resourceSet);
   }
   
-  private final static Pattern PACKAGE_MATCHER = Pattern.compile("([a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*)?");
-  
-  private final static Pattern CLASS_MATCHER = Pattern.compile("[a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)*");
-  
   private final String packageName;
   
   private final List<String> simpleNames;
@@ -81,28 +75,10 @@ public class TypeReference {
   }
   
   public TypeReference(final String packageName, final String className, final List<TypeReference> arguments) {
-    boolean _or = false;
     if ((packageName == null)) {
-      _or = true;
-    } else {
-      Matcher _matcher = TypeReference.PACKAGE_MATCHER.matcher(packageName);
-      boolean _matches = _matcher.matches();
-      boolean _not = (!_matches);
-      _or = _not;
-    }
-    if (_or) {
       throw new IllegalArgumentException(("Invalid package name: " + packageName));
     }
-    boolean _or_1 = false;
     if ((className == null)) {
-      _or_1 = true;
-    } else {
-      Matcher _matcher_1 = TypeReference.CLASS_MATCHER.matcher(className);
-      boolean _matches_1 = _matcher_1.matches();
-      boolean _not_1 = (!_matches_1);
-      _or_1 = _not_1;
-    }
-    if (_or_1) {
       throw new IllegalArgumentException(("Invalid class name: " + className));
     }
     this.packageName = packageName;
