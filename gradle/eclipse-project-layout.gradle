@@ -7,14 +7,14 @@
 def isTestProject = name.endsWith('tests')
 
 sourceSets {
-	isTestProject? test : main  {
+	configure(isTestProject? test : main)  {
 		java.srcDirs = ['src', 'xtend-gen', 'src-gen', 'srg-gen2']
 		resources {
 			srcDirs = ['src', 'src-gen', 'src-gen2']
 			exclude '**/*._trace', '**/*.xtendbin', '**/*.xtend', '**/*.mwe2'
 		}
 	}
-	isTestProject? main : test  {
+	configure(isTestProject? main : test)  {
 		java.srcDirs = []
 		resources.srcDirs = []
 	}
