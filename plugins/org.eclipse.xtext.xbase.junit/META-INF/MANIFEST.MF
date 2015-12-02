@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtext.xbase.junit
-Bundle-Version: 2.9.0.qualifier
+Bundle-Version: 2.9.1.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtext.xbase.lib;visibility:=reexport,
