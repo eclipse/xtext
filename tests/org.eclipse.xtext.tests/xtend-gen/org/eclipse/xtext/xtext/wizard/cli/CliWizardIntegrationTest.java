@@ -250,7 +250,7 @@ public class CliWizardIntegrationTest {
     final Procedure1<WizardConfiguration> _function = new Procedure1<WizardConfiguration>() {
       @Override
       public void apply(final WizardConfiguration it) {
-        XtextVersion _xtextVersion = new XtextVersion("2.9.0-SNAPSHOT");
+        XtextVersion _xtextVersion = new XtextVersion("2.10.0-SNAPSHOT");
         it.setXtextVersion(_xtextVersion);
         it.setEncoding(Charsets.UTF_8);
         LanguageDescriptor _language = it.getLanguage();
