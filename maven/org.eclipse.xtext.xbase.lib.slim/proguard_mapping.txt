@@ -1637,11 +1637,11 @@ org.eclipse.xtext.xbase.lib.CollectionLiterals -> org.eclipse.xtext.xbase.lib.Co
     255:257:java.util.TreeMap newTreeMap(java.util.Comparator,org.eclipse.xtext.xbase.lib.Pair[]) -> newTreeMap
     261:266:void putAll(java.util.Map,org.eclipse.xtext.xbase.lib.Pair[]) -> putAll
 org.eclipse.xtext.xbase.lib.ComparableExtensions -> org.eclipse.xtext.xbase.lib.ComparableExtensions:
-    31:31:boolean operator_lessThan(java.lang.Comparable,java.lang.Object) -> operator_lessThan
-    45:45:boolean operator_greaterThan(java.lang.Comparable,java.lang.Object) -> operator_greaterThan
-    59:59:boolean operator_lessEqualsThan(java.lang.Comparable,java.lang.Object) -> operator_lessEqualsThan
-    73:73:boolean operator_greaterEqualsThan(java.lang.Comparable,java.lang.Object) -> operator_greaterEqualsThan
-    88:88:int operator_spaceship(java.lang.Comparable,java.lang.Object) -> operator_spaceship
+    32:32:boolean operator_lessThan(java.lang.Comparable,java.lang.Object) -> operator_lessThan
+    47:47:boolean operator_greaterThan(java.lang.Comparable,java.lang.Object) -> operator_greaterThan
+    62:62:boolean operator_lessEqualsThan(java.lang.Comparable,java.lang.Object) -> operator_lessEqualsThan
+    77:77:boolean operator_greaterEqualsThan(java.lang.Comparable,java.lang.Object) -> operator_greaterEqualsThan
+    93:93:int operator_spaceship(java.lang.Comparable,java.lang.Object) -> operator_spaceship
 org.eclipse.xtext.xbase.lib.Conversions -> org.eclipse.xtext.xbase.lib.Conversions:
     41:52:java.lang.Object doWrapArray(java.lang.Object) -> doWrapArray
     67:67:java.lang.Object unwrapArray(java.lang.Object) -> unwrapArray
@@ -2425,14 +2425,15 @@ org.eclipse.xtext.xbase.lib.ObjectExtensions -> org.eclipse.xtext.xbase.lib.Obje
     156:156:java.lang.String operator_plus(java.lang.Object,java.lang.String) -> operator_plus
     179:181:java.lang.Object operator_elvis(java.lang.Object,java.lang.Object) -> operator_elvis
 org.eclipse.xtext.xbase.lib.Pair -> org.eclipse.xtext.xbase.lib.Pair:
+    long serialVersionUID -> serialVersionUID
     java.lang.Object k -> k
     java.lang.Object v -> v
-    41:41:org.eclipse.xtext.xbase.lib.Pair of(java.lang.Object,java.lang.Object) -> of
-    66:66:java.lang.Object getKey() -> getKey
-    76:76:java.lang.Object getValue() -> getValue
-    81:86:boolean equals(java.lang.Object) -> equals
-    91:91:int hashCode() -> hashCode
-    96:96:java.lang.String toString() -> toString
+    44:44:org.eclipse.xtext.xbase.lib.Pair of(java.lang.Object,java.lang.Object) -> of
+    69:69:java.lang.Object getKey() -> getKey
+    79:79:java.lang.Object getValue() -> getValue
+    84:89:boolean equals(java.lang.Object) -> equals
+    94:94:int hashCode() -> hashCode
+    99:99:java.lang.String toString() -> toString
 org.eclipse.xtext.xbase.lib.ProcedureExtensions -> org.eclipse.xtext.xbase.lib.ProcedureExtensions:
     39:41:org.eclipse.xtext.xbase.lib.Procedures$Procedure0 curry(org.eclipse.xtext.xbase.lib.Procedures$Procedure1,java.lang.Object) -> curry
     60:62:org.eclipse.xtext.xbase.lib.Procedures$Procedure1 curry(org.eclipse.xtext.xbase.lib.Procedures$Procedure2,java.lang.Object) -> curry
