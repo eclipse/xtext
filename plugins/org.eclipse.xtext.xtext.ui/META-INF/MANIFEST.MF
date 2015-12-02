@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui;singleton:=true
-Bundle-Version: 2.9.0.qualifier
+Bundle-Version: 2.9.1.qualifier
 Bundle-Activator: org.eclipse.xtext.xtext.ui.Activator
 Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.ui.ide;bundle-version="3.6.0",

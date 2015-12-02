@@ -83,7 +83,7 @@ public class BracePairMatcher implements ICharacterPairMatcher {
     return this.characterPairMatcher.getAnchor();
   }
   
-  public IRegion match(final IDocument document, final int offset) {
-    return this.characterPairMatcher.match(document, offset);
+  public IRegion match(final IDocument iDocument, final int i) {
+    return this.characterPairMatcher.match(iDocument, i);
   }
 }

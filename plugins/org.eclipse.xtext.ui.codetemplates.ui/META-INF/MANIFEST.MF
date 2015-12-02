@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.9.0.qualifier
+Bundle-Version: 2.9.1.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.ui.codetemplates.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
