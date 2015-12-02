@@ -3,9 +3,9 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtend.lib
 Bundle-Name: Xtend Runtime Library
 Bundle-Vendor: Eclipse Xtend
-Bundle-Version: 2.9.0.qualifier
+Bundle-Version: 2.9.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xtend.lib;version="2.9.0";uses:="org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend.lib.macro",
- org.eclipse.xtend.lib.annotations;version="2.9.0";uses:="org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend2.lib,org.eclipse.xtend.lib.macro"
+Export-Package: org.eclipse.xtend.lib;version="2.9.1";uses:="org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend.lib.macro",
+ org.eclipse.xtend.lib.annotations;version="2.9.1";uses:="org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend2.lib,org.eclipse.xtend.lib.macro"
 Require-Bundle: org.eclipse.xtext.xbase.lib;visibility:=reexport,
  org.eclipse.xtend.lib.macro;visibility:=reexport
