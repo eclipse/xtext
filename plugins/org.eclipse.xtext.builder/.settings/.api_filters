@@ -18,12 +18,6 @@
         </filter>
     </resource>
     <resource path="src/org/eclipse/xtext/builder/BuilderParticipant.java" type="org.eclipse.xtext.builder.BuilderParticipant">
-        <filter comment="Changes to trace API" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.builder.BuilderParticipant"/>
-                <message_argument value="getDerivedResourceMarkers()"/>
-            </message_arguments>
-        </filter>
         <filter id="643842064">
             <message_arguments>
                 <message_argument value="IDerivedResourceMarkers"/>
@@ -40,27 +34,7 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/builder/EclipseResourceFileSystemAccess2.java" type="org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2">
-        <filter comment="Trace refactoring" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2"/>
-                <message_argument value="getTraceMarkers()"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/builder/ParallelFileSystemAccess.java" type="org.eclipse.xtext.builder.ParallelFileSystemAccess">
-        <filter comment="Changes to trace API" id="338722907">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.builder.ParallelFileSystemAccess"/>
-                <message_argument value="ParallelFileSystemAccess(IFileSystemAccess, IResourceDescription.Delta, FileSystemAccessQueue, String, EclipseResourceFileSystemAccess2.IFileCallback)"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Changes to trace API" id="422776937">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.builder.ParallelFileSystemAccess.sendAsync(Procedures.Procedure1&lt;? super T&gt;)"/>
-                <message_argument value="T"/>
-            </message_arguments>
-        </filter>
         <filter id="574619656">
             <message_arguments>
                 <message_argument value="IFileSystemAccess2"/>

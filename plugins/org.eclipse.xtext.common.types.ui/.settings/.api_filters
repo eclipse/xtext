@@ -116,14 +116,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/common/types/access/jdt/WorkingCopyOwnerProvider.java" type="org.eclipse.xtext.common.types.access.jdt.WorkingCopyOwnerProvider">
-        <filter comment="Need more info for nested types" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.common.types.access.jdt.WorkingCopyOwnerProvider"/>
-                <message_argument value="getSource(String, String, IEObjectDescription, ResourceSet)"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/common/types/util/jdt/JavaElementFinder.java" type="org.eclipse.xtext.common.types.util.jdt.JavaElementFinder$Implementation">
         <filter id="576720909">
             <message_arguments>
