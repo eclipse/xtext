@@ -415,7 +415,7 @@ public class WizardConfigurationTest {
     _uiProject.setEnabled(true);
     IntellijProjectDescriptor _intellijProject = this.config.getIntellijProject();
     _intellijProject.setEnabled(true);
-    XtextVersion _xtextVersion = new XtextVersion("2.10.0-SNAPSHOT");
+    XtextVersion _xtextVersion = new XtextVersion("2.9.0-SNAPSHOT");
     this.config.setXtextVersion(_xtextVersion);
     final String snapshotsRepo = "repositories/snapshots";
     ParentProjectDescriptor _parentProject = this.config.getParentProject();
