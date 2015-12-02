@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Core UI Tests
 Bundle-SymbolicName: org.eclipse.xtext.ui.tests;singleton:=true
-Bundle-Version: 2.9.0.qualifier
+Bundle-Version: 2.10.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.core.filesystem;bundle-version="1.2.0",
