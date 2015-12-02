@@ -727,12 +727,6 @@
     <stream
         name="master">
       <setupTask
-          xsi:type="pde:APIBaselineTask"
-          name="xtext"
-          version="2.8"
-          location="${installation.location}/api/v2.8/"
-          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.8.0/R201503090534/tmf-xtext-Update-2.8.0.zip&amp;r=1"/>
-      <setupTask
           xsi:type="projects:ProjectsImportTask">
         <sourceLocator
             rootFolder="${git.clone.xtext.location/intellij}"
@@ -742,6 +736,12 @@
             locateNestedProjects="true"/>
         <description>Maven Dependencies</description>
       </setupTask>
+      <setupTask
+          xsi:type="pde:APIBaselineTask"
+          name="xtext"
+          version="2.9"
+          location="${installation.location}/api/v2.9/"
+          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.9.0/R201512010527/tmf-xtext-Update-2.9.0.zip&amp;r=1"/>
       <setupTask
           xsi:type="launching:LaunchTask"
           id="refresh-gradle-dependencies"
@@ -778,30 +778,14 @@
       <setupTask
           xsi:type="pde:APIBaselineTask"
           name="xtext"
-          version="2.7"
-          location="${installation.location}/api/v2.7/"
-          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.7.0/R201409021032/tmf-xtext-Update-2.7.0.zip&amp;r=1"/>
+          version="2.8"
+          location="${installation.location}/api/v2.8/"
+          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.8.0/R201503090534/tmf-xtext-Update-2.8.0.zip&amp;r=1"/>
       <setupTask
           xsi:type="launching:LaunchTask"
           id="Maven Install"
           excludedTriggers="MANUAL"
           launcher="/org.eclipse.xtext.parent/org.eclipse.xtext.parent.launch"/>
-      <setupTask
-          xsi:type="setup.targlets:TargletTask">
-        <targlet
-            name="JUnit 3"
-            activeRepositoryList="OrbitLunaSR2">
-          <requirement
-              name="org.junit"
-              versionRange="[3.8.0,4.0.0)"
-              filter=""/>
-          <repositoryList
-              name="OrbitLunaSR2">
-            <repository
-                url="http://download.eclipse.org/tools/orbit/downloads/drops/R20150124073747/repository/"/>
-          </repositoryList>
-        </targlet>
-      </setupTask>
     </stream>
     <description>Provide the core grammar infrastructure</description>
   </project>
