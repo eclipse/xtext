@@ -8,9 +8,9 @@ def isTestProject = name.endsWith('tests')
 
 sourceSets {
 	configure(isTestProject? test : main)  {
-		java.srcDirs = ['src', 'xtend-gen', 'src-gen', 'srg-gen2']
+		java.srcDirs = ['src', 'xtend-gen', 'src-gen', 'srg-gen2', 'tests']
 		resources {
-			srcDirs = ['src', 'src-gen', 'src-gen2']
+			srcDirs = ['src', 'src-gen', 'src-gen2', 'tests']
 			exclude '**/*._trace', '**/*.xtendbin', '**/*.xtend', '**/*.mwe2'
 		}
 	}
