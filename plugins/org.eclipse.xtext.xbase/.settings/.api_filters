@@ -8,39 +8,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src-gen/org/eclipse/xtext/xbase/AbstractXbaseRuntimeModule.java" type="org.eclipse.xtext.xbase.AbstractXbaseRuntimeModule">
-        <filter comment="Xbase languages inherit DefaultXbaseRuntimeModule" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.xbase.AbstractXbaseRuntimeModule"/>
-                <message_argument value="bindXbaseJavaValidator()"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Xbase languages inherit DefaultXbaseRuntimeModule" id="1143996420">
-            <message_arguments>
-                <message_argument value="bindXbaseValidator()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/xbase/DefaultXbaseRuntimeModule.java" type="org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule"/>
-                <message_argument value="bindFileLocations()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule"/>
-                <message_argument value="bindMutableFileSystemSupport()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule"/>
-                <message_argument value="provideWorkspaceConfig()"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/xbase/jvmmodel/JvmModelTargetURICollector.java" type="org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector">
         <filter id="576720909">
             <message_arguments>

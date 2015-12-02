@@ -8,204 +8,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess">
-        <filter id="305324134">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess"/>
-                <message_argument value="org.eclipse.xtext_2.10.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.IDerivedResourceMarkers">
-        <filter comment="remove dep to core.resources" id="305324134">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.IDerivedResourceMarkers"/>
-                <message_argument value="org.eclipse.xtext_2.10.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="emf-gen/org/eclipse/xtext/XtextPackage.java" type="org.eclipse.xtext.XtextPackage">
-        <filter id="388194388">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage"/>
-                <message_argument value="GROUP_FEATURE_COUNT"/>
-                <message_argument value="4"/>
-            </message_arguments>
-        </filter>
-        <filter id="388194388">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage"/>
-                <message_argument value="PARSER_RULE_FEATURE_COUNT"/>
-                <message_argument value="5"/>
-            </message_arguments>
-        </filter>
-        <filter id="388194388">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage"/>
-                <message_argument value="RULE_CALL_FEATURE_COUNT"/>
-                <message_argument value="4"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="emf-gen/org/eclipse/xtext/XtextPackage.java" type="org.eclipse.xtext.XtextPackage$Literals">
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="COMPOSITE_CONDITION"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="COMPOSITE_CONDITION__LEFT"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="COMPOSITE_CONDITION__RIGHT"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="CONDITION"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="CONJUNCTION"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="DISJUNCTION"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="GROUP__GUARD_CONDITION"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="LITERAL_CONDITION"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="LITERAL_CONDITION__TRUE"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="NAMED_ARGUMENT"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="NAMED_ARGUMENT__CALLED_BY_NAME"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="NAMED_ARGUMENT__PARAMETER"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="NAMED_ARGUMENT__VALUE"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="NEGATION"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="NEGATION__VALUE"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="PARAMETER"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="PARAMETER_REFERENCE"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="PARAMETER_REFERENCE__PARAMETER"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="PARAMETER__NAME"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="PARSER_RULE__FRAGMENT"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="PARSER_RULE__PARAMETERS"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="PARSER_RULE__WILDCARD"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="RULE_CALL__ARGUMENTS"/>
-            </message_arguments>
-        </filter>
-        <filter id="403767336">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
-                <message_argument value="RULE_CALL__EXPLICITLY_CALLED"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/AbstractXtextRuntimeModule.java" type="org.eclipse.xtext.AbstractXtextRuntimeModule">
-        <filter comment="the parse tree constructor is no longer used" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.AbstractXtextRuntimeModule"/>
-                <message_argument value="bindIParseTreeConstructor()"/>
-            </message_arguments>
-        </filter>
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="bindISyntacticSequencer()"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src-gen/org/eclipse/xtext/parser/antlr/XtextParser.java" type="org.eclipse.xtext.parser.antlr.XtextParser">
         <filter id="643842064">
             <message_arguments>
@@ -234,11 +36,6 @@
             <message_arguments>
                 <message_argument value="AbstractDelegatingSemanticSequencer"/>
                 <message_argument value="XtextSemanticSequencer"/>
-            </message_arguments>
-        </filter>
-        <filter id="1110441988">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.serializer.XtextSemanticSequencer"/>
             </message_arguments>
         </filter>
     </resource>
@@ -389,11 +186,6 @@
                 <message_argument value="emitUnassignedTokens(EObject, ISyntacticSequencerPDAProviderISynTransition, INode, INode)"/>
             </message_arguments>
         </filter>
-        <filter id="1110441988">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.serializer.XtextSyntacticSequencer"/>
-            </message_arguments>
-        </filter>
     </resource>
     <resource path="src/org/eclipse/xtext/GrammarToDot.java" type="org.eclipse.xtext.GrammarToDot">
         <filter id="627060751">
@@ -401,20 +193,6 @@
                 <message_argument value="GrammarElementTitleSwitch"/>
                 <message_argument value="GrammarToDot"/>
                 <message_argument value="aeSwitch"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/XtextRuntimeModule.java" type="org.eclipse.xtext.XtextRuntimeModule">
-        <filter comment="removed xtext.xtext QualifiedNameProvider" id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextRuntimeModule"/>
-                <message_argument value="bindIQualifiedNameConverter()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.XtextRuntimeModule"/>
-                <message_argument value="bindIXtext2EcorePostProcessor()"/>
             </message_arguments>
         </filter>
     </resource>
@@ -468,20 +246,6 @@
             <message_arguments>
                 <message_argument value="AbstractNFATransition&lt;S, T&gt;"/>
                 <message_argument value="MatcherTransition"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/generator/GeneratorComponent.java" type="org.eclipse.xtext.generator.GeneratorComponent">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.GeneratorComponent"/>
-                <message_argument value="getCompiler()"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.GeneratorComponent"/>
-                <message_argument value="getConfiguredFileSystemAccess()"/>
             </message_arguments>
         </filter>
     </resource>
@@ -562,22 +326,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/resource/IResourceServiceProviderExtension.java" type="org.eclipse.xtext.resource.IResourceServiceProviderExtension">
-        <filter comment="Renamed isReadOnly to isSource" id="405901410">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.resource.IResourceServiceProviderExtension"/>
-                <message_argument value="isReadOnly(URI)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/resource/impl/DefaultResourceServiceProvider.java" type="org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider"/>
-                <message_argument value="isReadOnly(URI)"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/validation/IssueSeverities.java" type="org.eclipse.xtext.validation.IssueSeverities">
         <filter id="643850349">
             <message_arguments>
@@ -602,28 +350,6 @@
                 <message_argument value="UriUtil"/>
                 <message_argument value="BuildRequest"/>
                 <message_argument value="createFolderURI(File)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/generator/FileSystemAccessQueue.java" type="org.eclipse.xtext.generator.FileSystemAccessQueue">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessQueue"/>
-                <message_argument value="sendAsync(URI, Procedures.Procedure0)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/generator/FileSystemAccessRequest.java" type="org.eclipse.xtext.generator.FileSystemAccessRequest">
-        <filter id="338722907">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessRequest"/>
-                <message_argument value="FileSystemAccessRequest(URI, Procedures.Procedure0)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemAccessRequest"/>
-                <message_argument value="getProcedure()"/>
             </message_arguments>
         </filter>
     </resource>
@@ -654,27 +380,6 @@
                 <message_argument value="TraceRegionSerializer"/>
                 <message_argument value="URIBasedFileSystemAccess"/>
                 <message_argument value="setTraceRegionSerializer(TraceRegionSerializer)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/resource/OutdatedStateManager.java" type="org.eclipse.xtext.resource.OutdatedStateManager">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.resource.OutdatedStateManager"/>
-                <message_argument value="newCancelIndiciator(ResourceSet)"/>
-            </message_arguments>
-        </filter>
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="newCancelIndicator(ResourceSet)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/service/OperationCanceledManager.java" type="org.eclipse.xtext.service.OperationCanceledManager">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.service.OperationCanceledManager"/>
-                <message_argument value="checkCanceled(IProgressMonitor)"/>
             </message_arguments>
         </filter>
     </resource>

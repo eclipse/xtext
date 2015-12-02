@@ -8,58 +8,12 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess">
-        <filter id="305422471">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.8.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.IDerivedResourceMarkers">
-        <filter id="305422471">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.IDerivedResourceMarkers"/>
-                <message_argument value="org.eclipse.xtext.xbase.junit_2.8.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/xbase/compiler/JavaVersionModule.java" type="org.eclipse.xtext.xbase.compiler.JavaVersionModule">
-        <filter comment="moved javaVersion" id="338722907">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.xbase.compiler.JavaVersionModule"/>
-                <message_argument value="JavaVersionModule(JavaVersion)"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="xtend-gen/org/eclipse/xtext/xbase/compiler/InMemoryJavaCompiler.java" type="org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler">
         <filter id="643850349">
             <message_arguments>
                 <message_argument value="CompilerOptions"/>
                 <message_argument value="InMemoryJavaCompiler"/>
                 <message_argument value="InMemoryJavaCompiler(ClassLoader, CompilerOptions)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/xbase/compiler/RegisteringFileSystemAccess.java" type="org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess"/>
-                <message_argument value="getTextFiles()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="xtend-gen/org/eclipse/xtext/xbase/compiler/RegisteringFileSystemAccess.java" type="org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess$GeneratedFile">
-        <filter id="338722907">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess.GeneratedFile"/>
-                <message_argument value="GeneratedFile(Path, String, CharSequence)"/>
-            </message_arguments>
-        </filter>
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess.GeneratedFile"/>
-                <message_argument value="getPath()"/>
             </message_arguments>
         </filter>
     </resource>

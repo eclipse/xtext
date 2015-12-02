@@ -8,46 +8,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess">
-        <filter id="305422471">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess"/>
-                <message_argument value="org.eclipse.xtext.ui_2.8.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.IDerivedResourceMarkers">
-        <filter id="305422471">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.IDerivedResourceMarkers"/>
-                <message_argument value="org.eclipse.xtext.ui_2.8.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/LightweightPosition.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition"/>
-                <message_argument value="compareTo(LightweightPosition)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="deprecated/org/eclipse/xtext/ui/editor/syntaxcoloring/LightweightPosition.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition$IntToStringArray">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition.IntToStringArray"/>
-                <message_argument value="compareTo(LightweightPosition.IntToStringArray)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/DefaultUiModule.java" type="org.eclipse.xtext.ui.DefaultUiModule">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.DefaultUiModule"/>
-                <message_argument value="bindITraceURIConverter()"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/IDirtyResource.java" type="org.eclipse.xtext.ui.editor.IDirtyResource$ICurrentStateProvidingExtension">
         <filter id="643842064">
             <message_arguments>
@@ -104,28 +64,11 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/occurrences/MarkOccurrenceActionContributor.java" type="org.eclipse.xtext.ui.editor.occurrences.MarkOccurrenceActionContributor">
-        <filter id="388194388">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.occurrences.MarkOccurrenceActionContributor"/>
-                <message_argument value="EDITOR_MARK_OCCURRENCES"/>
-                <message_argument value="markOccurrences"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/quickfix/XtextResourceMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel">
         <filter id="571473929">
             <message_arguments>
                 <message_argument value="ResourceMarkerAnnotationModel"/>
                 <message_argument value="XtextResourceMarkerAnnotationModel"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/syntaxcoloring/HighlightingReconciler.java" type="org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingReconciler">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingReconciler"/>
-                <message_argument value="isModelInSyncWithDocument(XtextResource)"/>
             </message_arguments>
         </filter>
     </resource>
@@ -138,12 +81,6 @@
         </filter>
     </resource>
     <resource path="src/org/eclipse/xtext/ui/resource/DefaultResourceUIServiceProvider.java" type="org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider"/>
-                <message_argument value="isReadOnly(URI)"/>
-            </message_arguments>
-        </filter>
         <filter id="574619656">
             <message_arguments>
                 <message_argument value="IResourceServiceProviderExtension"/>
