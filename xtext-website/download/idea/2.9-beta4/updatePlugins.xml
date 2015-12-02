@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins>
+  <plugin id="org.eclipse.xtend.idea" url="http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta4/org.eclipse.xtend.idea-2.9.0.beta4.zip" version="2.9.0.beta4"/>
+  <plugin id="org.eclipse.xtext.idea" url="http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta4/org.eclipse.xtext.idea-2.9.0.beta4.zip" version="2.9.0.beta4"/>
+  <plugin id="org.eclipse.xtext.xtext.idea" url="http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0.beta4/org.eclipse.xtext.xtext.idea-2.9.0.beta4.zip" version="2.9.0.beta4"/>
+</plugins>

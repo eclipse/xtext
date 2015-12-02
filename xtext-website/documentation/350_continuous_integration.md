@@ -128,7 +128,7 @@ The second plug-in invokes the MWE2 file through a standard Java process:
     <execution>
       <phase>generate-sources</phase>
       <goals>
-  <goal>java</goal>
+        <goal>java</goal>
       </goals>
     </execution>
   </executions>
@@ -137,7 +137,15 @@ The second plug-in invokes the MWE2 file through a standard Java process:
     <includePluginDependencies>true</includePluginDependencies>
     <mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
     <arguments>
-      <argument>file://${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2</argument>
+      <argument>
+        file://${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2
+      </argument>
+      <argument>
+          -p
+      </argument>
+      <argument>
+          runtimeProject=/${project.basedir}
+      </argument>
     </arguments>
   </configuration>
   <dependencies>
