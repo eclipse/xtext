@@ -65,12 +65,17 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 		IMarkerContributor markerContributor = getMarkerContributor(uri);
 		CheckMode normalAndFastMode = CheckMode.NORMAL_AND_FAST;
 
-		for (Pair<IStorage, IProject> pair : mapper.getStorages(uri)) {
+		for (Pair<IStorage, IProject> pair : mapper.getStorages(uri, false)) {
 			if (monitor.isCanceled()) {
 				throw new OperationCanceledException();
 			}
 			if (pair.getFirst() instanceof IFile) {
 				IFile file = (IFile) pair.getFirst();
+				
+				// if (file.isLinked(IResource.CHECK_ANCESTORS)) {
+				//		continue;
+				// }
+				
 				if (delta.getNew() != null) {
 					if (resourceSet == null)
 						throw new IllegalArgumentException("resourceSet may not be null for changed resources.");
