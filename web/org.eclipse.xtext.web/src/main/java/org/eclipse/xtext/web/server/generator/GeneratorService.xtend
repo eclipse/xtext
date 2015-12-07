@@ -68,7 +68,11 @@ class GeneratorService extends AbstractCachedService<GeneratorService.GeneratedA
 	def getArtifact(XtextWebDocumentAccess document, String artifactId) {
 		val artifacts = getResult(document).artifacts
 		val searchString = artifactId ?: DEFAULT_ARTIFACT
-		val result = artifacts.findFirst[name == searchString]
+		var result = artifacts.findFirst[name == searchString]
+		if (result === null && !searchString.startsWith(IFileSystemAccess.DEFAULT_OUTPUT)) {
+			val defaultSearchString = IFileSystemAccess.DEFAULT_OUTPUT + searchString
+			result = artifacts.findFirst[name == defaultSearchString]
+		}
 		if (result === null)
 			throw new ResourceNotFoundException('The requested generator artifact was not found.')
 		return result
