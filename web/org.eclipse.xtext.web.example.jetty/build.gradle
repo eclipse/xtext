@@ -21,7 +21,7 @@ dependencies {
 
 def orionDir = file('src/main/webapp/orion')
 def orionZip = file("$buildDir/orion/built-codeEdit.zip")
-def orionUrl = 'http://download.eclipse.org/orion/drops/I20151125-2217/built-codeEdit.zip'
+def orionUrl = 'http://download.eclipse.org/orion/drops/S20151203-1425/built-codeEdit.zip'
 
 task downloadOrion {
 	onlyIf {!orionZip.exists()}

@@ -37,9 +37,13 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
  * @author Dennis Huebner
+ * @author Christian Schneider
  */
 public class MarkerUpdaterImpl implements IMarkerUpdater {
 	
+	/** Duplicate of ExternalFoldersManager.EXTERNAL_PROJECT_NAME for avoiding any dependency on that (internal) API. */
+	private static final String EXTERNAL_PROJECT_NAME = ".org.eclipse.jdt.core.external.folders";
+
 	public static final Logger LOG = Logger.getLogger(MarkerUpdaterImpl.class);
 
 	@Inject
@@ -71,6 +75,15 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			}
 			if (pair.getFirst() instanceof IFile) {
 				IFile file = (IFile) pair.getFirst();
+				
+				if (EXTERNAL_PROJECT_NAME.equals(file.getProject().getName())) {
+					// if the file is found via the source attachment of a classpath entry, which happens
+					//  in case of running a test IDE with bundles from the workspace of the development IDE
+					//  (the workspace bundles' bin folder is linked to the classpath of bundles in the test IDE),
+					// skip the marker processing of that file, as the user can't react on any markers anyway.
+					continue;
+				}
+				
 				if (delta.getNew() != null) {
 					if (resourceSet == null)
 						throw new IllegalArgumentException("resourceSet may not be null for changed resources.");
