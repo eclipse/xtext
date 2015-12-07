@@ -131,7 +131,7 @@ public class InternalNodeModelUtils {
 			} else {
 				// we found two subsequent line breaks, e.g. \n\n
 				// and the offset is the second line break.
-				// the column number is 0 for that case.
+				// the column number is 1 for that case.
 				column = lineBreak - prevLineBreak;
 			}
 		}
