@@ -12,18 +12,31 @@ tasks.withType(JavaCompile) {
  * already compiles the code. Just reuse the classes
  * from the bin folder
  */
+
 if (!isBuildServer) {
+	project.gradle.addListener LocalBuildWarning.INSTANCE
+
 	plugins.withType(JavaPlugin) {
 		compileJava.enabled = false
 		processResources.enabled = false
-	
+
 		task copyFromBin(type: Sync) {
 		    from 'bin'
 		    into 'build/classes/main'
 		}
-	
+
 		classes {
 			dependsOn(copyFromBin)
+		}
+	}
+}
+
+class LocalBuildWarning extends BuildAdapter {
+	static def INSTANCE = new LocalBuildWarning()
+
+	void buildFinished(BuildResult result) {
+		if (result.failure) {
+			result.gradle.rootProject.logger.warn("This was a local build, make sure Eclipse is running and successfully compiled the code. Otherwise use the '-PbuildServer' option")
 		}
 	}
 }
