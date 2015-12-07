@@ -122,6 +122,10 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	 *             {@code documentOffset < 0 || documentOffset > anyNode.rootNode.text.length}
 	 */
 	public static LineAndColumn getLineAndColumn(INode anyNode, int documentOffset) {
+		// special treatment for inconsistent nodes such as SyntheticLinkingLeafNode
+		if (anyNode.getParent() == null) {
+			return LineAndColumn.from(1,1);
+		}
 		return InternalNodeModelUtils.getLineAndColumn(anyNode, documentOffset);
 	}
 
