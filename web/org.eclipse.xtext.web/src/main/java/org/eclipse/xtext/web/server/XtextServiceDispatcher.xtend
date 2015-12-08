@@ -188,7 +188,7 @@ class XtextServiceDispatcher {
 	}
 	
 	protected def getLoadResourceService(boolean revert, IServiceContext context) throws InvalidRequestException {
-		val resourceId = context.getParameter('resource')
+		val resourceId = context.resourceID
 		if (resourceId === null)
 			throw new InvalidParametersException('The parameter \'resource\' is required.')
 		new ServiceDescriptor => [
@@ -223,7 +223,7 @@ class XtextServiceDispatcher {
 	
 	protected def getUpdateDocumentService(IServiceContext context)
 			throws InvalidRequestException {
-		val resourceId = context.getParameter('resource')
+		val resourceId = context.resourceID
 		if (resourceId === null)
 			throw new InvalidParametersException('The parameter \'resource\' is required.')
 		val fullText = context.getParameter('fullText')
@@ -449,16 +449,23 @@ class XtextServiceDispatcher {
 		var XtextWebDocument document
 		var initializedFromFullText = false
 		if (context.parameterKeys.contains('fullText')) {
-			document = getFullTextDocument(context.getParameter('fullText'), null, context)
+			document = getFullTextDocument(context.getParameter('fullText'), context.resourceID, context)
 			initializedFromFullText = true
 		} else if (context.parameterKeys.contains('resource')) {
-			document = getResourceDocument(context.getParameter('resource'), context)
+			document = getResourceDocument(context.resourceID, context)
 			if (document === null)
 				throw new ResourceNotFoundException('The requested resource was not found.')
 		} else {
 			throw new InvalidParametersException('At least one of the parameters \'resource\' and \'fullText\' must be specified.')
 		}
 		return documentAccessFactory.create(document, context.getParameter('requiredStateId'), initializedFromFullText)
+	}
+	
+	/**
+	 * Returns the resource ID from the service context. Potentially null. 
+	 */
+	protected def getResourceID(IServiceContext context) {
+		return context.getParameter('resource')
 	}
 	
 	/**
