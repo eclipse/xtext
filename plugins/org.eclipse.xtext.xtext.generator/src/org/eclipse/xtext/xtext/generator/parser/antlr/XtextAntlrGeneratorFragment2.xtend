@@ -103,8 +103,8 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
 		generateContentAssistParser.writeTo(projectConfig.genericIde.srcGen)
 		if (!isCombinedGrammar && grammar.allTerminalRules().exists[ isSyntheticTerminalRule ]) {
-			generateProductionTokenSource.writeTo(projectConfig.runtime.srcGen)
-			generateContentAssistTokenSource.writeTo(projectConfig.genericIde.srcGen)
+			generateProductionTokenSource.writeTo(projectConfig.runtime.src)
+			generateContentAssistTokenSource.writeTo(projectConfig.genericIde.src)
 		}
 		addRuntimeBindingsAndImports
 		addUiBindingsAndImports
@@ -248,7 +248,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	def JavaFileAccess generateProductionTokenSource() {
 		val extension naming = productionNaming
-		val file = fileFactory.createGeneratedJavaFile(grammar.tokenSourceClass)
+		val file = fileFactory.createJavaFile(grammar.tokenSourceClass)
 		val open = grammar.allTerminalRules.filter[#{"BEGIN", "INDENT", "OPEN"}.contains(name.toUpperCase)]
 		val close = grammar.allTerminalRules.filter[#{"END", "DEDENT", "CLOSE"}.contains(name.toUpperCase)]
 		file.content = '''
@@ -260,7 +260,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			
 				@Override
 				protected boolean shouldSplitTokenImpl(«Token» token) {
-					«IF grammar.allTerminalRules.exists[name.toUpperCase == "WS"]»
+					«IF grammar.allTerminalRules.map[originalElement].exists[name.toUpperCase == "WS"]»
 						// TODO Review assumption
 						return token.getType() == «grammar.internalParserClass».RULE_WS;
 					«ELSE»
@@ -366,7 +366,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	def JavaFileAccess generateContentAssistTokenSource() {
 		val extension naming = contentAssistNaming
-		val file = fileFactory.createGeneratedJavaFile(grammar.tokenSourceClass)
+		val file = fileFactory.createJavaFile(grammar.tokenSourceClass)
 		val open = grammar.allTerminalRules.filter[#{"BEGIN", "INDENT", "OPEN"}.contains(name.toUpperCase)]
 		val close = grammar.allTerminalRules.filter[#{"END", "DEDENT", "CLOSE"}.contains(name.toUpperCase)]
 		file.content = '''
