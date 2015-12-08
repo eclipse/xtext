@@ -262,8 +262,16 @@ public class IncrementalBuilder {
           CancelIndicator _cancelIndicator_2 = InternalStatefulIncrementalBuilder.this.request.getCancelIndicator();
           InternalStatefulIncrementalBuilder.this._operationCanceledManager.checkCanceled(_cancelIndicator_2);
           boolean _and = false;
-          boolean _validate = InternalStatefulIncrementalBuilder.this.validate(resource);
-          if (!_validate) {
+          boolean _and_1 = false;
+          boolean _isIndexOnly = InternalStatefulIncrementalBuilder.this.request.isIndexOnly();
+          boolean _not = (!_isIndexOnly);
+          if (!_not) {
+            _and_1 = false;
+          } else {
+            boolean _validate = InternalStatefulIncrementalBuilder.this.validate(resource);
+            _and_1 = _validate;
+          }
+          if (!_and_1) {
             _and = false;
           } else {
             IShouldGenerate _get = serviceProvider.<IShouldGenerate>get(IShouldGenerate.class);
