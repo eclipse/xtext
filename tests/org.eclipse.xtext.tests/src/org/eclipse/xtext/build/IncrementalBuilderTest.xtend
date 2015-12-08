@@ -153,6 +153,24 @@ class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		build(buildRequest)
 	}
 	
+	@Test
+	def void testIndexOnly() {
+		val buildRequest = newBuildRequest [
+			indexOnly = true
+			dirtyFiles = #[
+				'src/MyFile.indextestlanguage' - '''
+					foo {
+						entity A {}
+					}
+				'''
+			]
+			afterValidate = [throw new IllegalStateException]
+			afterGenerateFile = [throw new IllegalStateException]
+		]
+		val result = build(buildRequest)
+		assertEquals(1, result.resourceDescriptions.allResourceDescriptions.size)
+	}
+	
 	private static class CancelOnFirstModel implements IPostValidationCallback, CancelIndicator {
 		
 		boolean canceled

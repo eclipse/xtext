@@ -16,13 +16,16 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.build.BuildRequest;
+import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.index.IndexTestLanguageInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.build.AbstractIncrementalBuilderTest;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -285,6 +288,47 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     };
     final BuildRequest buildRequest = this.newBuildRequest(_function);
     this.build(buildRequest);
+  }
+  
+  @Test
+  public void testIndexOnly() {
+    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
+      @Override
+      public void apply(final BuildRequest it) {
+        it.setIndexOnly(true);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("foo {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("entity A {}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        URI _minus = IncrementalBuilderTest.this.operator_minus(
+          "src/MyFile.indextestlanguage", _builder.toString());
+        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
+        final BuildRequest.IPostValidationCallback _function = new BuildRequest.IPostValidationCallback() {
+          @Override
+          public boolean afterValidate(final URI $0, final Iterable<Issue> $1) {
+            throw new IllegalStateException();
+          }
+        };
+        it.setAfterValidate(_function);
+        final Procedure2<URI, URI> _function_1 = new Procedure2<URI, URI>() {
+          @Override
+          public void apply(final URI $0, final URI $1) {
+            throw new IllegalStateException();
+          }
+        };
+        it.setAfterGenerateFile(_function_1);
+      }
+    };
+    final BuildRequest buildRequest = this.newBuildRequest(_function);
+    final IndexState result = this.build(buildRequest);
+    ResourceDescriptionsData _resourceDescriptions = result.getResourceDescriptions();
+    Iterable<IResourceDescription> _allResourceDescriptions = _resourceDescriptions.getAllResourceDescriptions();
+    int _size = IterableExtensions.size(_allResourceDescriptions);
+    Assert.assertEquals(1, _size);
   }
   
   @Test
