@@ -383,7 +383,7 @@ public class XtextServiceDispatcher {
   protected XtextServiceDispatcher.ServiceDescriptor getLoadResourceService(final boolean revert, final IServiceContext context) throws InvalidRequestException {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final String resourceId = context.getParameter("resource");
+      final String resourceId = this.getResourceID(context);
       if ((resourceId == null)) {
         throw new InvalidRequestException.InvalidParametersException("The parameter \'resource\' is required.");
       }
@@ -458,7 +458,7 @@ public class XtextServiceDispatcher {
   }
   
   protected XtextServiceDispatcher.ServiceDescriptor getUpdateDocumentService(final IServiceContext context) throws InvalidRequestException {
-    final String resourceId = context.getParameter("resource");
+    final String resourceId = this.getResourceID(context);
     if ((resourceId == null)) {
       throw new InvalidRequestException.InvalidParametersException("The parameter \'resource\' is required.");
     }
@@ -914,15 +914,16 @@ public class XtextServiceDispatcher {
     boolean _contains = _parameterKeys.contains("fullText");
     if (_contains) {
       String _parameter = context.getParameter("fullText");
-      XtextWebDocument _fullTextDocument = this.getFullTextDocument(_parameter, null, context);
+      String _resourceID = this.getResourceID(context);
+      XtextWebDocument _fullTextDocument = this.getFullTextDocument(_parameter, _resourceID, context);
       document = _fullTextDocument;
       initializedFromFullText = true;
     } else {
       Set<String> _parameterKeys_1 = context.getParameterKeys();
       boolean _contains_1 = _parameterKeys_1.contains("resource");
       if (_contains_1) {
-        String _parameter_1 = context.getParameter("resource");
-        XtextWebDocument _resourceDocument = this.getResourceDocument(_parameter_1, context);
+        String _resourceID_1 = this.getResourceID(context);
+        XtextWebDocument _resourceDocument = this.getResourceDocument(_resourceID_1, context);
         document = _resourceDocument;
         if ((document == null)) {
           throw new InvalidRequestException.ResourceNotFoundException("The requested resource was not found.");
@@ -931,8 +932,15 @@ public class XtextServiceDispatcher {
         throw new InvalidRequestException.InvalidParametersException("At least one of the parameters \'resource\' and \'fullText\' must be specified.");
       }
     }
-    String _parameter_2 = context.getParameter("requiredStateId");
-    return this.documentAccessFactory.create(document, _parameter_2, initializedFromFullText);
+    String _parameter_1 = context.getParameter("requiredStateId");
+    return this.documentAccessFactory.create(document, _parameter_1, initializedFromFullText);
+  }
+  
+  /**
+   * Returns the resource ID from the service context. Potentially null.
+   */
+  protected String getResourceID(final IServiceContext context) {
+    return context.getParameter("resource");
   }
   
   /**

@@ -155,14 +155,16 @@ class XtextServlet extends HttpServlet {
 		
 		val emfURI = URI.createURI(serviceContext.getParameter('resource') ?: '')
 		val contentType = serviceContext.getParameter('contentType')
-		if (contentType === null)
+		if (contentType === null) {
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI)
-		else
+			if (resourceServiceProvider == null)
+				throw new UnknownLanguageException('''Unable to identify the Xtext language for resource «emfURI».''')
+		}
+		else {
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType)
-		
-		if (resourceServiceProvider == null)
-			throw new UnknownLanguageException('Unable to identify the Xtext language.')
-		
+			if (resourceServiceProvider == null)
+				throw new UnknownLanguageException('''Unable to identify the Xtext language for contentType «contentType».''')
+		}
 		return resourceServiceProvider.get(Injector)
 	}
 	
