@@ -36,7 +36,7 @@ kramdown:
     coderay_css:               style
 
 src:
-  xtext: "https://github.com/eclipse/xtext/blob/v2.8.0"
+  xtext: "https://github.com/eclipse/xtext/blob/v2.9.0"
   mwe: "https://github.com/eclipse/mwe/blob/v2.7.1"
   emf: "https://github.com/eclipse/emf/blob/R2_9_0"
   gef: "https://github.com/eclipse/gef/blob/master"
@@ -46,8 +46,8 @@ javadoc:
   xtext: "http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.8"
   eclipse-platform: "http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api"
   eclipse-jdt: "http://help.eclipse.org/luna/topic/org.eclipse.jdt.doc.isv/reference/api"
-  java: "http://docs.oracle.com/javase/8/docs/api"
-  javaee: "http://docs.oracle.com/javaee/5/api"
+  java: "http://docs.oracle.com/javase/8/docs/api/"
+  javaee: "https://docs.oracle.com/javaee/7/api"
   junit: "http://junit.sourceforge.net/javadoc"
   guice: "https://google.github.io/guice/api-docs/latest/javadoc"
   mongodb: "http://api.mongodb.org/java/2.6"
