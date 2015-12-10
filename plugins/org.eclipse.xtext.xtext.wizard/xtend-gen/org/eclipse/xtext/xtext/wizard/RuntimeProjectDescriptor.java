@@ -136,31 +136,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       };
       ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
       deps.add(_doubleArrow);
-      WizardConfiguration _config = this.getConfig();
-      Ecore2XtextConfiguration _ecore2Xtext = _config.getEcore2Xtext();
-      Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
-      for (final EPackageInfo ePackage : _ePackageInfos) {
-        {
-          String _bundleID = ePackage.getBundleID();
-          ExternalDependency _createBundleDependency = ExternalDependency.createBundleDependency(_bundleID);
-          deps.add(_createBundleDependency);
-          URI _genmodelURI = ePackage.getGenmodelURI();
-          String _fileExtension = _genmodelURI.fileExtension();
-          boolean _equals = Objects.equal(_fileExtension, "xcore");
-          if (_equals) {
-            ExternalDependency _createBundleDependency_1 = ExternalDependency.createBundleDependency("org.eclipse.emf.ecore.xcore");
-            deps.add(_createBundleDependency_1);
-          }
-        }
-      }
       boolean _and = false;
       boolean _isEclipsePluginProject = this.isEclipsePluginProject();
       boolean _not = (!_isEclipsePluginProject);
       if (!_not) {
         _and = false;
       } else {
-        WizardConfiguration _config_1 = this.getConfig();
-        boolean _needsMavenBuild = _config_1.needsMavenBuild();
+        WizardConfiguration _config = this.getConfig();
+        boolean _needsMavenBuild = _config.needsMavenBuild();
         _and = _needsMavenBuild;
       }
       if (_and) {
@@ -192,7 +175,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   
   @Override
   public Set<String> getDevelopmentBundles() {
-    return CollectionLiterals.<String>newLinkedHashSet(
+    final LinkedHashSet<String> result = CollectionLiterals.<String>newLinkedHashSet(
       "org.eclipse.xtext.xbase", 
       "org.eclipse.xtext.common.types", 
       "org.eclipse.xtext.xtext.generator", 
@@ -204,6 +187,26 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       "org.apache.commons.logging", 
       "org.apache.log4j", 
       "com.ibm.icu");
+    boolean _isFromExistingEcoreModels = this.isFromExistingEcoreModels();
+    if (_isFromExistingEcoreModels) {
+      WizardConfiguration _config = this.getConfig();
+      Ecore2XtextConfiguration _ecore2Xtext = _config.getEcore2Xtext();
+      Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
+      final Function1<EPackageInfo, Boolean> _function = new Function1<EPackageInfo, Boolean>() {
+        @Override
+        public Boolean apply(final EPackageInfo it) {
+          URI _genmodelURI = it.getGenmodelURI();
+          String _fileExtension = _genmodelURI.fileExtension();
+          return Boolean.valueOf(Objects.equal(_fileExtension, "xcore"));
+        }
+      };
+      boolean _exists = IterableExtensions.<EPackageInfo>exists(_ePackageInfos, _function);
+      if (_exists) {
+        result.add("org.eclipse.emf.ecore.xcore");
+      }
+      result.add("org.eclipse.xtext.generator");
+    }
+    return result;
   }
   
   @Override
@@ -572,11 +575,6 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       boolean _isEmpty = _ePackageInfos.isEmpty();
       boolean _not_1 = (!_isEmpty);
       if (_not_1) {
-        _builder.append("\t\t\t");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("standaloneSetup = {");
-        _builder.newLine();
         {
           WizardConfiguration _config_15 = this.getConfig();
           Ecore2XtextConfiguration _ecore2Xtext_1 = _config_15.getEcore2Xtext();
@@ -592,16 +590,12 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           Set<String> _set = IterableExtensions.<String>toSet(_map);
           for(final String genmodelURI : _set) {
             _builder.append("\t\t\t");
-            _builder.append("\t");
-            _builder.append("loadedResource = \"");
-            _builder.append(genmodelURI, "\t\t\t\t");
+            _builder.append("referencedResource = \"");
+            _builder.append(genmodelURI, "\t\t\t");
             _builder.append("\"");
             _builder.newLineIfNotEmpty();
           }
         }
-        _builder.append("\t\t\t");
-        _builder.append("}");
-        _builder.newLine();
       }
     }
     {
@@ -614,11 +608,11 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.append("fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");
-        _builder.append("fragment = ecore2xtext.FormatterFragment {}");
+        _builder.append("fragment = org.eclipse.xtext.generator.ecore2xtext.FormatterFragment {}");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("}");

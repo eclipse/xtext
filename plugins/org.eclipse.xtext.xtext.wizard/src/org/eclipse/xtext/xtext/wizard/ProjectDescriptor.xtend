@@ -125,7 +125,11 @@ abstract class ProjectDescriptor {
 	}
 	
 	def Set<ExternalDependency> getExternalDependencies() {
-		emptySet
+		val deps = newLinkedHashSet()
+		for (ePackage: config.ecore2Xtext.EPackageInfos) {
+			deps += ExternalDependency.createBundleDependency(ePackage.bundleID)
+		}
+		return deps
 	}
 	
 	def getActivatorClassName() {
