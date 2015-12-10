@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.web.server.IServiceContext;
 import org.eclipse.xtext.web.server.IServiceResult;
@@ -279,13 +280,25 @@ public class XtextServlet extends HttpServlet {
     if ((contentType == null)) {
       IResourceServiceProvider _resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
       resourceServiceProvider = _resourceServiceProvider;
+      boolean _equals = Objects.equal(resourceServiceProvider, null);
+      if (_equals) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Unable to identify the Xtext language for resource ");
+        _builder.append(emfURI, "");
+        _builder.append(".");
+        throw new InvalidRequestException.UnknownLanguageException(_builder.toString());
+      }
     } else {
       IResourceServiceProvider _resourceServiceProvider_1 = this.serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType);
       resourceServiceProvider = _resourceServiceProvider_1;
-    }
-    boolean _equals = Objects.equal(resourceServiceProvider, null);
-    if (_equals) {
-      throw new InvalidRequestException.UnknownLanguageException("Unable to identify the Xtext language.");
+      boolean _equals_1 = Objects.equal(resourceServiceProvider, null);
+      if (_equals_1) {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("Unable to identify the Xtext language for contentType ");
+        _builder_1.append(contentType, "");
+        _builder_1.append(".");
+        throw new InvalidRequestException.UnknownLanguageException(_builder_1.toString());
+      }
     }
     return resourceServiceProvider.<Injector>get(Injector.class);
   }

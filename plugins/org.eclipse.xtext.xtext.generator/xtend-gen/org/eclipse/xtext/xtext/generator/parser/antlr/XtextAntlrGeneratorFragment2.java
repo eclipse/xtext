@@ -214,13 +214,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       JavaFileAccess _generateProductionTokenSource = this.generateProductionTokenSource();
       IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
       IRuntimeProjectConfig _runtime_2 = _projectConfig_4.getRuntime();
-      IXtextGeneratorFileSystemAccess _srcGen_4 = _runtime_2.getSrcGen();
-      _generateProductionTokenSource.writeTo(_srcGen_4);
+      IXtextGeneratorFileSystemAccess _src = _runtime_2.getSrc();
+      _generateProductionTokenSource.writeTo(_src);
       JavaFileAccess _generateContentAssistTokenSource = this.generateContentAssistTokenSource();
       IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
       IBundleProjectConfig _genericIde_2 = _projectConfig_5.getGenericIde();
-      IXtextGeneratorFileSystemAccess _srcGen_5 = _genericIde_2.getSrcGen();
-      _generateContentAssistTokenSource.writeTo(_srcGen_5);
+      IXtextGeneratorFileSystemAccess _src_1 = _genericIde_2.getSrc();
+      _generateContentAssistTokenSource.writeTo(_src_1);
     }
     this.addRuntimeBindingsAndImports();
     this.addUiBindingsAndImports();
@@ -643,13 +643,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   }
   
   public JavaFileAccess generateProductionTokenSource() {
-    GeneratedJavaFileAccess _xblockexpression = null;
+    JavaFileAccess _xblockexpression = null;
     {
       @Extension
       final GrammarNaming naming = this.productionNaming;
       Grammar _grammar = this.getGrammar();
       TypeReference _tokenSourceClass = naming.getTokenSourceClass(_grammar);
-      final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_tokenSourceClass);
+      final JavaFileAccess file = this.fileFactory.createJavaFile(_tokenSourceClass);
       Grammar _grammar_1 = this.getGrammar();
       List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_1);
       final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
@@ -713,7 +713,14 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           {
             Grammar _grammar_2 = XtextAntlrGeneratorFragment2.this.getGrammar();
             List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
-            final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+            final Function1<TerminalRule, TerminalRule> _function = new Function1<TerminalRule, TerminalRule>() {
+              @Override
+              public TerminalRule apply(final TerminalRule it) {
+                return AntlrGrammarGenUtil.<TerminalRule>getOriginalElement(it);
+              }
+            };
+            List<TerminalRule> _map = ListExtensions.<TerminalRule, TerminalRule>map(_allTerminalRules, _function);
+            final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
               @Override
               public Boolean apply(final TerminalRule it) {
                 String _name = it.getName();
@@ -721,7 +728,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
                 return Boolean.valueOf(Objects.equal(_upperCase, "WS"));
               }
             };
-            boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+            boolean _exists = IterableExtensions.<TerminalRule>exists(_map, _function_1);
             if (_exists) {
               _builder.append("\t\t");
               _builder.append("// TODO Review assumption");
@@ -1136,13 +1143,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   }
   
   public JavaFileAccess generateContentAssistTokenSource() {
-    GeneratedJavaFileAccess _xblockexpression = null;
+    JavaFileAccess _xblockexpression = null;
     {
       @Extension
       final ContentAssistGrammarNaming naming = this.contentAssistNaming;
       Grammar _grammar = this.getGrammar();
       TypeReference _tokenSourceClass = naming.getTokenSourceClass(_grammar);
-      final GeneratedJavaFileAccess file = this.fileFactory.createGeneratedJavaFile(_tokenSourceClass);
+      final JavaFileAccess file = this.fileFactory.createJavaFile(_tokenSourceClass);
       Grammar _grammar_1 = this.getGrammar();
       List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_1);
       final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
