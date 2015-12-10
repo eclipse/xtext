@@ -34,12 +34,6 @@
 			<version>[${project.version}]</version>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.codegen</artifactId>
-			<version>${emf.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
