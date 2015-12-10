@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -29,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.util.internal.CodeGenUtil2;
 
 import com.google.common.collect.Sets;
 
@@ -68,7 +68,7 @@ public class ImportManager {
 		if (thisType != null) {
 			thisTypeSimpleNames.add(thisType.getSimpleName());
 			thisTypeQualifiedNames.add(thisType.getQualifiedName(innerTypeSeparator));
-			thisCollidesWithJavaLang |= CodeGenUtil.isJavaLangType(thisType.getSimpleName());
+			thisCollidesWithJavaLang |= CodeGenUtil2.isJavaLangType(thisType.getSimpleName());
 			registerSimpleNamesOfInnerClasses(thisType, new LinkedHashSet<JvmType>());
 		}
 	}
@@ -80,7 +80,7 @@ public class ImportManager {
 		for (JvmDeclaredType jvmDeclaredType : nested) {
 			thisTypeSimpleNames.add(jvmDeclaredType.getSimpleName());
 			thisTypeQualifiedNames.add(jvmDeclaredType.getQualifiedName(innerTypeSeparator));
-			thisCollidesWithJavaLang |= CodeGenUtil.isJavaLangType(jvmDeclaredType.getSimpleName());
+			thisCollidesWithJavaLang |= CodeGenUtil2.isJavaLangType(jvmDeclaredType.getSimpleName());
 		}
 		for (JvmTypeReference superType: thisType.getSuperTypes()) {
 			if (superType.getType() instanceof JvmDeclaredType) {
@@ -201,7 +201,7 @@ public class ImportManager {
 
 	protected boolean needsQualifiedName(String qualifiedName, String simpleName) {
 		return !organizeImports || (thisTypeSimpleNames.contains(simpleName) && !thisTypeQualifiedNames.contains(qualifiedName))
-				|| CodeGenUtil.isJavaLangType(simpleName);
+				|| CodeGenUtil2.isJavaLangType(simpleName);
 	}
 
 	public boolean addImportFor(JvmType type) {
@@ -219,4 +219,5 @@ public class ImportManager {
 		Collections.sort(result);
 		return result;
 	}
+	
 }
