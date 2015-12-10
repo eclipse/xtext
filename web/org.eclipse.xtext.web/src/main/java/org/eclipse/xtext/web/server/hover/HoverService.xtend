@@ -108,7 +108,7 @@ class HoverService {
 	}
 
 	protected def String surroundWithDiv(String html, String... divClasses) '''
-		<div class="«divClasses.map[it].join(' ')»">
+		<div«IF divClasses.length > 0» class="«divClasses.join(' ')»"«ENDIF»>
 			«html»
 		</div>
 	'''
