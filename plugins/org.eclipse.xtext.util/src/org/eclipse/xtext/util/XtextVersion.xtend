@@ -60,6 +60,10 @@ class XtextVersion {
 		'0.3.25'
 	}
 	
+	def getMweVersion() {
+		'2.8.2'
+	}
+	
 	override toString() {
 		version
 	}

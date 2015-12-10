@@ -12,9 +12,7 @@ import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 
 class RuntimeProjectDescriptor extends TestedProjectDescriptor {
-	
-	val String MWE2_VERSION = "[2.8.2,3.0)"
-	
+
 	val grammarCreator = new Ecore2XtextGrammarCreator
 	val RuntimeTestProjectDescriptor testProject
 	
@@ -256,7 +254,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				}
 
 				dependencies {
-					mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:«MWE2_VERSION»"
+					mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:«config.xtextVersion.mweVersion»"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 				}
 				
@@ -326,7 +324,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 									<dependency>
 										<groupId>org.eclipse.emf</groupId>
 										<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-										<version>«MWE2_VERSION»</version>
+										<version>«config.xtextVersion.mweVersion»</version>
 									</dependency>
 									<dependency>
 										<groupId>org.eclipse.xtext</groupId>
