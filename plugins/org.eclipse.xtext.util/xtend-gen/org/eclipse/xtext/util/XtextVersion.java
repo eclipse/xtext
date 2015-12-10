@@ -104,6 +104,10 @@ public class XtextVersion {
     return "0.3.25";
   }
   
+  public String getMweVersion() {
+    return "2.8.2";
+  }
+  
   @Override
   public String toString() {
     return this.version;
