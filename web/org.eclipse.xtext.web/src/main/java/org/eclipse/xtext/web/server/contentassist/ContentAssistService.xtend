@@ -89,6 +89,8 @@ class ContentAssistService {
 			val proposals = new HashSet<Pair<Integer, ContentAssistEntry>>
 			val acceptor = new IIdeContentProposalAcceptor {
 				override accept(ContentAssistEntry entry, int priority) {
+					if (entry.proposal === null)
+						throw new IllegalArgumentException('proposal must not be null.')
 					proposals.add(priority -> entry)
 				}
 				override canAcceptMoreProposals() {
@@ -102,16 +104,9 @@ class ContentAssistService {
 				val prioResult = p2.key.compareTo(p1.key)
 				if (prioResult != 0)
 					return prioResult
-				val v1 = p1.value
-				val v2 = p2.value
-				if (v1.label !== null && v2.label !== null)
-					return v1.label.compareTo(v2.label)
-				else if (v1.label !== null)
-					return v1.label.compareTo(v2.proposal)
-				else if (v2.label !== null)
-					return v1.proposal.compareTo(v2.label)
-				else
-					return v1.proposal.compareTo(v2.proposal)
+				val s1 = p1.value.label ?: p1.value.proposal
+				val s2 = p2.value.label ?: p2.value.proposal
+				return s1.compareTo(s2)
 			].map[value])
 		}
 		return result
