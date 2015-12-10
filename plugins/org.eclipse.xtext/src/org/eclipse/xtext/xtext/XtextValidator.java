@@ -19,7 +19,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -77,6 +76,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.XtextSwitch;
+import org.eclipse.xtext.util.internal.CodeGenUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
 import org.eclipse.xtext.validation.Check;
@@ -336,11 +336,11 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				if ("Class".equals(accessorName) || "Name".equals(accessorName))
 					accessorName += "_";
 				accessorNameToElement.put("get" + accessorName, classifier);
-				String classifierConstantName = CodeGenUtil.format(classifier.getName(), '_', null, true, true).toUpperCase();
+				String classifierConstantName = CodeGenUtil2.format(classifier.getName(), '_', null, true, true).toUpperCase();
 				constantNameToElement.put(classifierConstantName, classifier);
 				if (classifier instanceof EClass) {
 					for(EStructuralFeature feature: ((EClass) classifier).getEAllStructuralFeatures()) {
-						String featureConstantPart = CodeGenUtil.format(feature.getName(), '_', null, false, false).toUpperCase();
+						String featureConstantPart = CodeGenUtil2.format(feature.getName(), '_', null, false, false).toUpperCase();
 						String featureConstantName = classifierConstantName + "__" + featureConstantPart;
 						constantNameToElement.put(featureConstantName, feature);
 						String featureAccessorName = "get" + classifier.getName() + "_" + Strings.toFirstUpper(feature.getName());
