@@ -915,6 +915,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("</arguments>");
         _builder.newLine();
         _builder.append("\t\t\t\t");
+        _builder.append("<classpathScope>compile</classpathScope>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
         _builder.append("<includePluginDependencies>true</includePluginDependencies>");
         _builder.newLine();
         _builder.append("\t\t\t\t");
