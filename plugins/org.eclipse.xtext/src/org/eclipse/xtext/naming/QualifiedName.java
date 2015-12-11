@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.CommonUtil;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectInputStream;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream;
 import org.eclipse.xtext.util.Strings;
@@ -32,6 +33,8 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	private final String[] segments;
 
 	private QualifiedName lowerCase;
+
+	private static final boolean USE_INTERNING = Boolean.getBoolean("xtext.qn.interning");
 
 	public static final QualifiedName EMPTY = new QualifiedName() {
 		@Override
@@ -76,12 +79,30 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		if (segments.length == 1) {
 			return create(segments[0]);
 		}
+		String [] newArray = new String [segments.length];
 		for (int i = 0; i < segments.length; i++) {
-			if (segments[i] == null) {
+			String string = segments[i];
+			if (string == null) {
 				throw new IllegalArgumentException("Segment cannot be null");
 			}
+			newArray[i] = intern(string);
 		}
-		return new QualifiedName(segments.clone());
+		return new QualifiedName(newArray);
+	}
+
+	/**
+	 * Returns string internal instance from string pool, if a system property {@code xtext.qn.interning} is set to {@code true}, or the
+	 * same object otherwise.
+	 * <p>
+	 * Implementation notes:
+	 * <ol>
+	 * <li>Interning {@link String} objects may affect performance, see bug 484215.
+	 * <li>Interning {@link String} objects is not recommended for older JVM's, because of possible perm gen memory explosion, see
+	 * http://java-performance.info/string-intern-in-java-6-7-8/.
+	 * </ol>
+	 */
+	private static String intern(String string) {
+		return USE_INTERNING? CommonUtil.intern(string) : string;
 	}
 
 	/**
@@ -101,6 +122,9 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			lowerCase = true;
 			// first was null, read another string which is the actual first segment
 			firstSegment = eObjectInputStream.readSegmentedString();
+			if(firstSegment == null){
+				throw new IllegalStateException("Read unexpected first segment from object stream");
+			}
 		}
 
 		String[] segments = readSegmentArray(eObjectInputStream, segmentCount, firstSegment);
@@ -113,10 +137,13 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	private static String[] readSegmentArray(EObjectInputStream from, int count, String first) throws IOException {
 		String[] segments = new String[count];
-		segments[0] = first;
+		segments[0] = intern(first);
 		for (int i = 1; i < count; i++) {
 			String segment = from.readSegmentedString();
-			segments[i] = segment;
+			if(segment == null){
+				throw new IllegalStateException("Read unexpected segment (#" + i + ") from object stream");
+			}
+			segments[i] = intern(segment);
 		}
 		return segments;
 	}
@@ -151,11 +178,13 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			String singleSegment = segments.get(0);
 			return QualifiedName.create(singleSegment);
 		}
-		String[] segmentArray = segments.toArray(new String[segments.size()]);
-		for (int i = 0; i < segmentArray.length; i++) {
-			if (segmentArray[i] == null) {
+		String[] segmentArray = new String[segments.size()];
+		for (int i = 0; i < segments.size(); i++) {
+			String string = segments.get(i);
+			if (string == null) {
 				throw new IllegalArgumentException("Segment cannot be null");
 			}
+			segmentArray[i] = intern(string);
 		}
 		return new QualifiedName(segmentArray);
 	}
@@ -173,7 +202,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		if (singleSegment == null) {
 			throw new IllegalArgumentException("Segment cannot be null");
 		}
-		return new QualifiedName(singleSegment);
+		return new QualifiedName(intern(singleSegment));
 	}
 
 	/**
@@ -229,7 +258,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		}
 		String[] newSegments = new String[getSegmentCount() + 1];
 		System.arraycopy(segments, 0, newSegments, 0, segments.length);
-		newSegments[segments.length] = segment;
+		newSegments[segments.length] = intern(segment);
 		return new QualifiedName(newSegments);
 	}
 
@@ -283,7 +312,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			String segment = segments[i];
 			String lowerCaseSegment = segment.toLowerCase();
 			isLowerCase = isLowerCase && segment == lowerCaseSegment;
-			newSegments[i] = lowerCaseSegment;
+			newSegments[i] = intern(lowerCaseSegment);
 		}
 		if (isLowerCase) {
 			lowerCase = this;
@@ -326,7 +355,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	public QualifiedName toUpperCase() {
 		String[] newSegments = new String[getSegmentCount()];
 		for (int i = 0; i < getSegmentCount(); ++i)
-			newSegments[i] = segments[i].toUpperCase();
+			newSegments[i] = intern(segments[i].toUpperCase());
 		QualifiedName result = new QualifiedName(newSegments);
 		result.lowerCase = this.lowerCase;
 		return result;
