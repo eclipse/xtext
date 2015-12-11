@@ -143,6 +143,11 @@ public class ContentAssistService {
       final IIdeContentProposalAcceptor acceptor = new IIdeContentProposalAcceptor() {
         @Override
         public void accept(final ContentAssistEntry entry, final int priority) {
+          String _proposal = entry.getProposal();
+          boolean _tripleEquals = (_proposal == null);
+          if (_tripleEquals) {
+            throw new IllegalArgumentException("proposal must not be null.");
+          }
           Pair<Integer, ContentAssistEntry> _mappedTo = Pair.<Integer, ContentAssistEntry>of(Integer.valueOf(priority), entry);
           proposals.add(_mappedTo);
         }
@@ -164,43 +169,29 @@ public class ContentAssistService {
           if ((prioResult != 0)) {
             return prioResult;
           }
-          final ContentAssistEntry v1 = p1.getValue();
-          final ContentAssistEntry v2 = p2.getValue();
-          boolean _and = false;
-          String _label = v1.getLabel();
-          boolean _tripleNotEquals = (_label != null);
-          if (!_tripleNotEquals) {
-            _and = false;
+          String _elvis = null;
+          ContentAssistEntry _value = p1.getValue();
+          String _label = _value.getLabel();
+          if (_label != null) {
+            _elvis = _label;
           } else {
-            String _label_1 = v2.getLabel();
-            boolean _tripleNotEquals_1 = (_label_1 != null);
-            _and = _tripleNotEquals_1;
+            ContentAssistEntry _value_1 = p1.getValue();
+            String _proposal = _value_1.getProposal();
+            _elvis = _proposal;
           }
-          if (_and) {
-            String _label_2 = v1.getLabel();
-            String _label_3 = v2.getLabel();
-            return _label_2.compareTo(_label_3);
+          final String s1 = _elvis;
+          String _elvis_1 = null;
+          ContentAssistEntry _value_2 = p2.getValue();
+          String _label_1 = _value_2.getLabel();
+          if (_label_1 != null) {
+            _elvis_1 = _label_1;
           } else {
-            String _label_4 = v1.getLabel();
-            boolean _tripleNotEquals_2 = (_label_4 != null);
-            if (_tripleNotEquals_2) {
-              String _label_5 = v1.getLabel();
-              String _proposal = v2.getProposal();
-              return _label_5.compareTo(_proposal);
-            } else {
-              String _label_6 = v2.getLabel();
-              boolean _tripleNotEquals_3 = (_label_6 != null);
-              if (_tripleNotEquals_3) {
-                String _proposal_1 = v1.getProposal();
-                String _label_7 = v2.getLabel();
-                return _proposal_1.compareTo(_label_7);
-              } else {
-                String _proposal_2 = v1.getProposal();
-                String _proposal_3 = v2.getProposal();
-                return _proposal_2.compareTo(_proposal_3);
-              }
-            }
+            ContentAssistEntry _value_3 = p2.getValue();
+            String _proposal_1 = _value_3.getProposal();
+            _elvis_1 = _proposal_1;
           }
+          final String s2 = _elvis_1;
+          return s1.compareTo(s2);
         }
       };
       List<Pair<Integer, ContentAssistEntry>> _sortWith = IterableExtensions.<Pair<Integer, ContentAssistEntry>>sortWith(proposals, _function);

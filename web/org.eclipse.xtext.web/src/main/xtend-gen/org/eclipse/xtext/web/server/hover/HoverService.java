@@ -243,17 +243,18 @@ public class HoverService {
   
   protected String surroundWithDiv(final String html, final String... divClasses) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<div class=\"");
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return it;
+    _builder.append("<div");
+    {
+      int _length = divClasses.length;
+      boolean _greaterThan = (_length > 0);
+      if (_greaterThan) {
+        _builder.append(" class=\"");
+        String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(divClasses)), " ");
+        _builder.append(_join, "");
+        _builder.append("\"");
       }
-    };
-    List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(divClasses)), _function);
-    String _join = IterableExtensions.join(_map, " ");
-    _builder.append(_join, "");
-    _builder.append("\">");
+    }
+    _builder.append(">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append(html, "\t");

@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.server.persistence;
 import java.io.File;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 
 /**
@@ -24,14 +25,22 @@ public class ResourceBaseProviderImpl implements IResourceBaseProvider {
   
   @Override
   public URI getFileURI(final String resourceId) {
-    URI _xifexpression = null;
-    boolean _endsWith = this.resourceBase.endsWith(File.separator);
-    if (_endsWith) {
-      _xifexpression = URI.createFileURI((this.resourceBase + resourceId));
-    } else {
-      _xifexpression = URI.createFileURI(((this.resourceBase + File.separator) + resourceId));
+    URI _xblockexpression = null;
+    {
+      boolean _contains = resourceId.contains("..");
+      if (_contains) {
+        throw new InvalidRequestException.InvalidParametersException("Invalid resource path.");
+      }
+      URI _xifexpression = null;
+      boolean _endsWith = this.resourceBase.endsWith(File.separator);
+      if (_endsWith) {
+        _xifexpression = URI.createFileURI((this.resourceBase + resourceId));
+      } else {
+        _xifexpression = URI.createFileURI(((this.resourceBase + File.separator) + resourceId));
+      }
+      _xblockexpression = _xifexpression;
     }
-    return _xifexpression;
+    return _xblockexpression;
   }
   
   public ResourceBaseProviderImpl(final String resourceBase) {
