@@ -944,7 +944,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		
 		if (thrownException != null && !thrownException.isUnknown()) {
 			if (!state.isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && thrownException.isSubtypeOf(Throwable.class)
-					&& !thrownException.isSubtypeOf(RuntimeException.class)) {
+					&& !thrownException.isSubtypeOf(RuntimeException.class) && !thrownException.isSubtypeOf(Error.class)) {
 				boolean declarationFound = false;
 				for (LightweightTypeReference declaredException : state.getExpectedExceptions())
 					if (declaredException.isAssignableFrom(thrownException)) {
