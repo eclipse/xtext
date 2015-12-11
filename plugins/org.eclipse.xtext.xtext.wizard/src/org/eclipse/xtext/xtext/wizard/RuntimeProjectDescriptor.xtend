@@ -66,12 +66,6 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				version = "3.5.0"
 			]
 		]
-		for (ePackage: config.ecore2Xtext.EPackageInfos) {
-			deps += createBundleDependency(ePackage.bundleID)
-			if (ePackage.genmodelURI.fileExtension == "xcore") {
-				deps += createBundleDependency("org.eclipse.emf.ecore.xcore")
-			}
-		}
 		if (!isEclipsePluginProject && config.needsMavenBuild) {
 			deps += createXtextDependency("org.eclipse.xtext.xtext") => [maven.optional = true]
 			deps += createXtextDependency("org.eclipse.xtext.xtext.generator")  => [maven.optional = true]
@@ -80,7 +74,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override getDevelopmentBundles() {
-		newLinkedHashSet(
+		val result = newLinkedHashSet(
 			"org.eclipse.xtext.xbase", 
 			"org.eclipse.xtext.common.types", 
 			"org.eclipse.xtext.xtext.generator",
@@ -93,6 +87,13 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			"org.apache.log4j",
 			"com.ibm.icu"
 		)
+		if (isFromExistingEcoreModels) {
+			if (config.ecore2Xtext.EPackageInfos.exists[genmodelURI.fileExtension == "xcore"]) {
+				result.add("org.eclipse.emf.ecore.xcore")
+			}
+			result.add('org.eclipse.xtext.generator')
+		}
+		return result
 	}
 	
 	override getBinIncludes() {
@@ -212,19 +213,16 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						name = "«config.language.name»"
 						fileExtensions = "«config.language.fileExtensions»"
 						«IF !config.ecore2Xtext.EPackageInfos.empty»
-							
-							standaloneSetup = {
-								«FOR genmodelURI : config.ecore2Xtext.EPackageInfos.map[genmodelURI.toString].toSet»
-									loadedResource = "«genmodelURI»"
-								«ENDFOR»
-							}
+							«FOR genmodelURI : config.ecore2Xtext.EPackageInfos.map[genmodelURI.toString].toSet»
+								referencedResource = "«genmodelURI»"
+							«ENDFOR»
 						«ENDIF»
 						«IF fromExistingEcoreModels»
 							
 							fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 
-							fragment = adapter.FragmentAdapter {
-								fragment = ecore2xtext.FormatterFragment {}
+							fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
+								fragment = org.eclipse.xtext.generator.ecore2xtext.FormatterFragment {}
 							}
 						«ENDIF»
 

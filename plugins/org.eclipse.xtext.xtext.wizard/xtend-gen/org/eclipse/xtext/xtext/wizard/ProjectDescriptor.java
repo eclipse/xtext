@@ -26,6 +26,8 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
+import org.eclipse.xtext.xtext.wizard.EPackageInfo;
+import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
@@ -315,7 +317,15 @@ public abstract class ProjectDescriptor {
   }
   
   public Set<ExternalDependency> getExternalDependencies() {
-    return CollectionLiterals.<ExternalDependency>emptySet();
+    final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
+    Ecore2XtextConfiguration _ecore2Xtext = this.config.getEcore2Xtext();
+    Set<EPackageInfo> _ePackageInfos = _ecore2Xtext.getEPackageInfos();
+    for (final EPackageInfo ePackage : _ePackageInfos) {
+      String _bundleID = ePackage.getBundleID();
+      ExternalDependency _createBundleDependency = ExternalDependency.createBundleDependency(_bundleID);
+      deps.add(_createBundleDependency);
+    }
+    return deps;
   }
   
   public Object getActivatorClassName() {
