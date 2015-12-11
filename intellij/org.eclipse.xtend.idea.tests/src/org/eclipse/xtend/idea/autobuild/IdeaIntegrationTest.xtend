@@ -607,6 +607,8 @@ class IdeaIntegrationTest extends LightXtendTest {
 
 	def void assertFileContents(String path, CharSequence sequence) {
 		val file = myFixture.findFileInTempDir(path)
+		if (file === null)
+			fail("Expected a file for "+path)
 		assertEquals(sequence.toString, CharStreams.toString(new InputStreamReader(file.inputStream, file.charset)))
 	}
 }
