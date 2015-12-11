@@ -150,4 +150,4 @@ Note that there still are synchronization issues, that's why we keep this one ma
 
 ---
 
-**[Next Chapter: Continuous Integration](350_continuous_integration.html)**
+**[Next Chapter: Web Editor Support](310_web_integration.html)**

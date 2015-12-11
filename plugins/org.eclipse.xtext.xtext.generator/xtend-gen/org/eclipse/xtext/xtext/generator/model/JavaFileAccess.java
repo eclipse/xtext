@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -21,6 +20,7 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.util.internal.CodeGenUtil2;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -158,7 +158,7 @@ public class JavaFileAccess extends TextFileAccess {
             usableName = ((simpleName + ".") + usableName);
           }
           boolean _and = false;
-          boolean _isJavaDefaultType = CodeGenUtil.isJavaDefaultType(simpleName);
+          boolean _isJavaDefaultType = CodeGenUtil2.isJavaDefaultType(simpleName);
           boolean _not = (!_isJavaDefaultType);
           if (!_not) {
             _and = false;

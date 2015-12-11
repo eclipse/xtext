@@ -16,6 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -46,8 +47,6 @@ import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 
 @SuppressWarnings("all")
 public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
-  private final String MWE2_VERSION = "[2.8.2,3.0)";
-  
   private final Ecore2XtextGrammarCreator grammarCreator = new Ecore2XtextGrammarCreator();
   
   private final RuntimeTestProjectDescriptor testProject;
@@ -689,7 +688,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("mwe2 \"org.eclipse.emf:org.eclipse.emf.mwe2.launch:");
-        _builder.append(RuntimeProjectDescriptor.this.MWE2_VERSION, "\t");
+        WizardConfiguration _config = RuntimeProjectDescriptor.this.getConfig();
+        XtextVersion _xtextVersion = _config.getXtextVersion();
+        String _mweVersion = _xtextVersion.getMweVersion();
+        _builder.append(_mweVersion, "\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -913,6 +915,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("</arguments>");
         _builder.newLine();
         _builder.append("\t\t\t\t");
+        _builder.append("<classpathScope>compile</classpathScope>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
         _builder.append("<includePluginDependencies>true</includePluginDependencies>");
         _builder.newLine();
         _builder.append("\t\t\t\t");
@@ -943,7 +948,10 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder.append("\t\t\t");
             _builder.append("\t\t");
             _builder.append("<version>");
-            _builder.append(RuntimeProjectDescriptor.this.MWE2_VERSION, "\t\t\t\t\t");
+            WizardConfiguration _config_2 = RuntimeProjectDescriptor.this.getConfig();
+            XtextVersion _xtextVersion = _config_2.getXtextVersion();
+            String _mweVersion = _xtextVersion.getMweVersion();
+            _builder.append(_mweVersion, "\t\t\t\t\t");
             _builder.append("</version>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t");
@@ -1027,12 +1035,12 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("<filesets combine.children=\"append\">");
         _builder.newLine();
         {
-          WizardConfiguration _config_2 = RuntimeProjectDescriptor.this.getConfig();
-          IdeProjectDescriptor _ideProject = _config_2.getIdeProject();
           WizardConfiguration _config_3 = RuntimeProjectDescriptor.this.getConfig();
-          UiProjectDescriptor _uiProject = _config_3.getUiProject();
+          IdeProjectDescriptor _ideProject = _config_3.getIdeProject();
           WizardConfiguration _config_4 = RuntimeProjectDescriptor.this.getConfig();
-          WebProjectDescriptor _webProject = _config_4.getWebProject();
+          UiProjectDescriptor _uiProject = _config_4.getUiProject();
+          WizardConfiguration _config_5 = RuntimeProjectDescriptor.this.getConfig();
+          WebProjectDescriptor _webProject = _config_5.getWebProject();
           for(final ProjectDescriptor p : Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(RuntimeProjectDescriptor.this, _ideProject, _uiProject, _webProject))) {
             {
               boolean _isEnabled = p.isEnabled();

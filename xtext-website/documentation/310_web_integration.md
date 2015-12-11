@@ -8,8 +8,6 @@ part: Reference Documentation
 
 Since version 2.9 Xtext offers an interface for integration of text editors in web applications. The text editors are implemented in JavaScript, and language-related services such as code completion are realized through HTTP requests to a server-side component.
 
-**Warning:** This documentation is not complete yet, hence some cross-references are broken.
-
 ## The Client {#client}
 
 Xtext supports three JavaScript text editor libraries:
@@ -192,7 +190,7 @@ Alternatively, if `createEditor` is used, options can be set as attributes of th
 
 See below for a [full list of available options](#options-reference).
 
-### Getting the Text Content
+### Getting the Text Content {#getting-text-content}
 
 The text content is either loaded from the Xtext server or provided through JavaScript. In either case, the Xtext server needs to identify the language you are using in order to process any requests. A language is usually identified using a file extension or a content type. The file extension can be specified with the `xtextLang` option, while the content type is given with the `contentType` option.
 
@@ -327,28 +325,42 @@ The following functions are available, provided that the respective services are
  * `xtextLang`
    The language name (usually the file extension configured for the language). This is used to set the `resourceId` and `syntaxDefinition` options if they have not been specified.
 
-<!--
 ## The Server {#server}
 
-TODO
+The language-specific resources are provided through HTTP requests which are processed by the [XtextServlet]({{site.src.xtext}}/web/org.eclipse.xtext.web.servlet/src/main/java/org/eclipse/xtext/web/servlet/XtextServlet.xtend). This class is also responsible for managing the lifecycle of the language [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) (see [Dependency Injection](302_configuration.html#dependency-injection)). The default approach is to create an injector when the servlet is started and to register it in the [IResourceServiceProvider.Registry]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java). In order to override default behavior, you can change or add bindings in the `<LanguageName>WebModule` of your language.
+
+The usual way to include the Xtext servlet in a server application is to create a subclass of [XtextServlet]({{site.src.xtext}}/web/org.eclipse.xtext.web.servlet/src/main/java/org/eclipse/xtext/web/servlet/XtextServlet.xtend), override `init()` and `destroy()` to manage the runtime resources, and add a [WebServlet]({{site.javadoc.javaee}}/javax/servlet/annotation/WebServlet.html) annotation with `urlPatterns = "/xtext-service/*"` as parameter. See [MyXtextServlet]({{site.src.xtext}}/web/org.eclipse.xtext.web.example.jetty/src/main/java/org/eclipse/xtext/web/example/jetty/MyXtextServlet.xtend) for an example.
+
+If you want to implement your own communication channel to provide the language-specific services without using XtextServlet, you can do so by injecting an instance of [XtextServiceDispatcher]({{site.src.xtext}}/web/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/XtextServiceDispatcher.xtend) and calling `getService(IServiceContext)`. The input to this method is an [IServiceContext]({{site.src.xtext}}/web/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/IServiceContext.xtend), which must be implemented to provide the request parameters and the client session. The return value is a descriptor that can be used to invoke the actual service. Furthermore, [XtextServiceDispatcher]({{site.src.xtext}}/web/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/XtextServiceDispatcher.xtend) can be subclassed in order to add custom services with access to the document AST and all related Xtext APIs.
+
+The following sections describe how to customize the standard services for web editors.
 
 ### Content Assist {#content-assist}
 
-TODO
+Content assist proposals for cross-references are created by [IdeCrossrefProposalProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/contentassist/IdeCrossrefProposalProvider.xtend), while for other grammar elements [IdeContentProposalProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/contentassist/IdeContentProposalProvider.xtend) is used. In order to customize the proposals, create subclasses of these providers and register them in your web Guice module.
+
+[IdeContentProposalProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/contentassist/IdeContentProposalProvider.xtend) has one `_createProposals(...)` dispatch method for each type of grammar element. In most cases the best choice is to override the method for [Assignments]({{site.src.xtext}}/plugins/org.eclipse.xtext/emf-gen/org/eclipse/xtext/Assignment.java) and to filter the correct assignments by comparing them with the instances in the generated GrammarAccess of your language. A proposal is submitted by creating and configuring an instance of [ContentAssistEntry]({{site.src.xtext}}/plugins/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/contentassist/ContentAssistEntry.xtend) and passing it to the given acceptor. This entry class contains all information required to display the proposal in the web browser and to apply it to the document. Usually it is sent to the client in JSON format.
+
+The typical customization point for [IdeCrossrefProposalProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/contentassist/IdeCrossrefProposalProvider.xtend) is the method `createProposal(...)`, which is called for each element found by the scope provider. Here you can fine-tune the information to put into the [ContentAssistEntry]({{site.src.xtext}}/plugins/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/contentassist/ContentAssistEntry.xtend).
 
 ### Semantic Highlighting {#semantic-highlighting}
 
-TODO
+The default behavior of Xtext editors is to have no semantic highlighting (syntactic highlighting, e.g. for keywords and strings, is done on the client side as described in [Syntax Highlighting](#syntax-highlighting)). In order to add styling to your text, create a subclass of [DefaultSemanticHighlightingCalculator]({{site.src.xtext}}/plugins/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/editor/syntaxcoloring/DefaultSemanticHighlightingCalculator.java) and override `highlightElement(...)`. Here you can mark text regions with CSS classes by submitting a text offset, a length, and the CSS class name to the given acceptor. You can specify the actual text style in a CSS file that is included by the web page containing the Xtext editor. 
 
 ### Mark Occurrences {#mark-occurrences}
 
-TODO
+The service for marking occurrences of a selected element is handled by [OccurrencesService]({{site.src.xtext}}/web/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/occurrences/OccurrencesService.xtend). Here you can override `filter(EObject)` to exclude some elements from this service. The actual text regions to be marked are computed automatically from the cross-references present in the model.
 
 ### Hover Information {#hover-info}
 
-TODO
+The information displayed for mouse hover popups is created in HTML format and consists of two parts: a title and a description.
+
+The title is composed of a text label and an image. The label is computed by [INameLabelProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/labels/INameLabelProvider.xtend), and the default is the value of the `name` property of an element, if it exists. The image is determined by an implementation of [IImageDescriptionProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext.ide/src/org/eclipse/xtext/ide/labels/IImageDescriptionProvider.xtend). The default behavior is to generate a `<div>` and annotate it with a CSS class of the form `<class>-icon`, where `<class>` is the name of the EClass of the corresponding element. The actual images can be assigned to these classes in a CSS file using the `background-image` CSS property.
+
+The description part of the hover popup is determined by the [IEObjectDocumentationProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/documentation/IEObjectDocumentationProvider.java). For this part the default content is fetched from the comments in the document: if the definition of the element is preceded by a multi-line comment (e.g. `/* ... */`), the content of that comment is used as description.
 
 ### Persistence {#persistence}
 
-TODO
--->
+Without further adaptation the Xtext server does not provide any persistence functionality. As described in [Getting the Text Content](#getting-text-content), there are multiple ways to fill the web editor with text. If you would like to use the persistence service included in the Xtext server, you need to implement [IServerResourceHandler]({{site.src.xtext}}/web/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/persistence/IServerResourceHandler.xtend). The `get` and `put` operations declared in that interface should delegate to the persistence layer you would like to connect. For a simple example see [FileResourceHandler]({{site.src.xtext}}/web/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/persistence/FileResourceHandler.xtend).
+
+**[Next Chapter: Continuous Integration](350_continuous_integration.html)**

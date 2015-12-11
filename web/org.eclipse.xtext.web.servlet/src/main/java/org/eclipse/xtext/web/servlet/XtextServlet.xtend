@@ -158,12 +158,12 @@ class XtextServlet extends HttpServlet {
 		if (contentType === null) {
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI)
 			if (resourceServiceProvider == null)
-				throw new UnknownLanguageException('''Unable to identify the Xtext language for resource Â«emfURIÂ».''')
+				throw new UnknownLanguageException('''Unable to identify the Xtext language for resource «emfURI».''')
 		}
 		else {
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType)
 			if (resourceServiceProvider == null)
-				throw new UnknownLanguageException('''Unable to identify the Xtext language for contentType Â«contentTypeÂ».''')
+				throw new UnknownLanguageException('''Unable to identify the Xtext language for contentType «contentType».''')
 		}
 		return resourceServiceProvider.get(Injector)
 	}
