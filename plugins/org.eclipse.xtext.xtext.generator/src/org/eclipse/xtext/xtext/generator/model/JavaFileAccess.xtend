@@ -8,13 +8,13 @@
 package org.eclipse.xtext.xtext.generator.model
 
 import java.util.Map
-import org.eclipse.emf.codegen.util.CodeGenUtil
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
+import org.eclipse.xtext.util.internal.CodeGenUtil2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 
 class JavaFileAccess extends TextFileAccess {
@@ -76,7 +76,7 @@ class JavaFileAccess extends TextFileAccess {
 					usableName = simpleName
 				else
 					usableName = simpleName + '.' + usableName
-				if (!CodeGenUtil.isJavaDefaultType(simpleName)
+				if (!CodeGenUtil2.isJavaDefaultType(simpleName)
 						&& !(i > 0 && simpleName.length <= importNestedTypeThreshold)) {
 					val importable = typeRef.packageName + '.' + simpleNames.subList(0, i + 1).join('.')
 					val imported = imports.get(usableName)
