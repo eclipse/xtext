@@ -46,6 +46,7 @@ import com.intellij.openapi.vfs.VirtualFileEvent
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.openapi.vfs.VirtualFileMoveEvent
 import com.intellij.openapi.vfs.VirtualFilePropertyEvent
+import com.intellij.openapi.vfs.VirtualFileVisitor
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.PsiModificationTrackerImpl
@@ -165,12 +166,13 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		VirtualFileManager.getInstance().addVirtualFileListener(new VirtualFileAdapter() {
 			override beforePropertyChange(VirtualFilePropertyEvent event) {
 				if (event.propertyName == VirtualFile.PROP_NAME) {
-					fileDeleted(event.file)
+					scheduleDeletion(event.file)
 				}
 			}
 			
 			override propertyChanged(VirtualFilePropertyEvent event) {
 				if (event.propertyName == VirtualFile.PROP_NAME) {
+					commitScheduledDeletion
 					fileAdded(event.file)
 				}
 			}
@@ -184,14 +186,19 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			}
 			
 			override fileDeleted(VirtualFileEvent event) {
-				fileDeleted(event.file)
+				commitScheduledDeletion
+			}
+			
+			override beforeFileDeletion(VirtualFileEvent event) {
+				scheduleDeletion(event.file)
 			}
 			
 			override beforeFileMovement(VirtualFileMoveEvent event) {
-				fileDeleted(event.file)
+				scheduleDeletion(event.file)
 			}
 			
 			override void fileMoved(VirtualFileMoveEvent event) {
+				commitScheduledDeletion
 				fileAdded(event.file)
 			}
 		}, project)
@@ -271,16 +278,29 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		enqueue(MODIFIED, file)
 	}
 
-	def void fileDeleted(VirtualFile root) {
+	def void scheduleDeletion(VirtualFile root) {
 		if (root.findModule(ProjectFileIndex.SERVICE.getInstance(project)) === null) {
 			return
 		}
 		val files = newArrayList
-		root.processFilesRecursively [ file |
-			if(!file.directory) files += file
-			true
-		]
-		enqueue(DELETED, files)
+		root.visitChildrenRecursively(new VirtualFileVisitor() {
+			override visitFile(VirtualFile file) {
+				if(!file.directory) files += file
+				true
+			}
+		})
+		if (!files.empty)
+			scheduledDeletions.addAll(new BuildEvent(BuildEvent.Type.DELETED,files))
+	}
+	
+	val scheduledDeletions = new LinkedBlockingQueue<BuildEvent>()
+	
+	def void commitScheduledDeletion() {
+		val scheduledEvents = newArrayList
+		scheduledDeletions.drainTo(scheduledEvents)
+		for (event : scheduledEvents) {
+			enqueue(event)
+		}
 	}
 
 	def void fileAdded(VirtualFile file) {
@@ -563,10 +583,12 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		val sourceRootUrls = moduleRootManager.sourceRootUrls
 		val result = new LinkedHashSet
 		for (event : events) {
-			val url = event.filesByURI.keySet.head.toString
-			if (excludeRootUrls.forall[!url.isUrlUnderRoot(it)] 
-				&& sourceRootUrls.exists[url.isUrlUnderRoot(it)]) {
-				result += event
+			if (!event.URIs.isEmpty) {
+				val url = event.URIs.head.toString
+				if (excludeRootUrls.forall[!url.isUrlUnderRoot(it)] 
+					&& sourceRootUrls.exists[url.isUrlUnderRoot(it)]) {
+					result += event
+				}
 			}
 		} 
 		return result
@@ -619,7 +641,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 							for (sourceUri : sourceUris) {
 								consistentAdd(sourceUri, changedUris, deletedUris)
 							}									
-						} else if (isJavaFile(event.getFile(uri))) {
+						} else if (isJavaFile(uri)) {
 							deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
 								return getJavaDeltas(event.getFile(uri), module)
 							]
@@ -635,7 +657,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 							for (sourceUri : sourceUris) {
 								consistentAdd(sourceUri, changedUris, deletedUris)
 							}									
-						} else if (isJavaFile(event.getFile(uri))) {
+						} else if (isJavaFile(uri)) {
 							deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
 								getJavaDeltas(event.getFile(uri), module)
 							]
@@ -653,8 +675,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		toBeRemoved -= uri
 	}
 	
-	def boolean isJavaFile(VirtualFile file) {
-		file.extension == 'java'
+	def boolean isJavaFile(URI file) {
+		file.fileExtension == 'java'
 	}
 	
 	def Set<IResourceDescription.Delta> getJavaDeltas(VirtualFile file, Module module) {
