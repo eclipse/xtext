@@ -531,4 +531,24 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     boolean _containsSuffix_13 = this.containsSuffix(this.deleted, "xtend-gen/A.java");
     Assert.assertTrue(_containsSuffix_13);
   }
+  
+  @Test
+  public void testPackageInfo() {
+    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
+      @Override
+      public void apply(final BuildRequest it) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("package foo;");
+        _builder.newLine();
+        URI _minus = XtendIncrementalBuilderTest.this.operator_minus(
+          "src/foo/package-info.java", _builder.toString());
+        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
+      }
+    };
+    final BuildRequest buildRequest = this.newBuildRequest(_function);
+    this.build(buildRequest);
+    String _string = this.issues.toString();
+    boolean _isEmpty = this.issues.isEmpty();
+    Assert.assertTrue(_string, _isEmpty);
+  }
 }
