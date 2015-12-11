@@ -1,0 +1,2 @@
+tasks = clean check uploadArchives
+buildFile = web/build.gradle

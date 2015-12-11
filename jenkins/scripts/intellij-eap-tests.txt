@@ -1,1 +1,1 @@
-clean -PideaEAP compileEclipsePlugins :intellij:check
+clean -PideaEAP :intellij:check

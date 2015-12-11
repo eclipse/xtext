@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+	<actions />
+	<description />
+	<logRotator class="hudson.tasks.LogRotator">
+		<daysToKeep>-1</daysToKeep>
+		<numToKeep>100</numToKeep>
+		<artifactDaysToKeep>-1</artifactDaysToKeep>
+		<artifactNumToKeep>-1</artifactNumToKeep>
+	</logRotator>
+	<keepDependencies>false</keepDependencies>
+	<properties>
+		<jenkins.advancedqueue.AdvancedQueueSorterJobProperty
+			plugin="PrioritySorter@2.9">
+			<useJobPriority>true</useJobPriority>
+			<priority>5</priority>
+		</jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
+		<hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.25" />
+	</properties>
+	<scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+		<configVersion>2</configVersion>
+		<userRemoteConfigs>
+			<hudson.plugins.git.UserRemoteConfig>
+				<refspec>+refs/heads/master:refs/remotes/origin/master</refspec>
+				<url>https://github.com/eclipse/xtext.git</url>
+			</hudson.plugins.git.UserRemoteConfig>
+		</userRemoteConfigs>
+		<branches>
+			<hudson.plugins.git.BranchSpec>
+				<name />
+			</hudson.plugins.git.BranchSpec>
+		</branches>
+		<doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+		<browser class="hudson.plugins.git.browser.GithubWeb">
+			<url>https://github.com/eclipse/xtext</url>
+		</browser>
+		<submoduleCfg class="list" />
+		<extensions>
+			<hudson.plugins.git.extensions.impl.CleanBeforeCheckout />
+			<hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+				<relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+			</hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+			<hudson.plugins.git.extensions.impl.CleanCheckout />
+			<hudson.plugins.git.extensions.impl.CloneOption>
+				<shallow>false</shallow>
+				<reference />
+				<timeout>60</timeout>
+			</hudson.plugins.git.extensions.impl.CloneOption>
+		</extensions>
+	</scm>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<jdk>(Default)</jdk>
+	<triggers>
+		<hudson.triggers.SCMTrigger>
+			<spec>H 5 * * *</spec>
+			<ignorePostCommitHooks>false</ignorePostCommitHooks>
+		</hudson.triggers.SCMTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<hudson.plugins.gradle.Gradle plugin="gradle@1.24">
+			<description />
+			<switches />
+			<tasks />
+			<rootBuildScriptDir>org.eclipse.xtext.git</rootBuildScriptDir>
+			<buildFile/>
+			<gradleName>(Default)</gradleName>
+			<useWrapper>true</useWrapper>
+			<makeExecutable>true</makeExecutable>
+			<fromRootBuildScriptDir>true</fromRootBuildScriptDir>
+			<useWorkspaceAsHome>true</useWorkspaceAsHome>
+		</hudson.plugins.gradle.Gradle>
+	</builders>
+	<publishers>
+		<hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
+			<testResults>
+				org.eclipse.xtext.git/web/**/build/test-results/*.xml
+			</testResults>
+			<keepLongStdio>false</keepLongStdio>
+			<testDataPublishers />
+			<healthScaleFactor>1.0</healthScaleFactor>
+		</hudson.tasks.junit.JUnitResultArchiver>
+		<hudson.tasks.Mailer plugin="mailer@1.15">
+			<recipients>alle-ki@itemis.de</recipients>
+			<dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+			<sendToIndividuals>true</sendToIndividuals>
+		</hudson.tasks.Mailer>
+		<hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
+			<patterns>
+				<hudson.plugins.ws__cleanup.Pattern>
+					<pattern>.repository/**/*.xtext/**/*</pattern>
+					<type>INCLUDE</type>
+				</hudson.plugins.ws__cleanup.Pattern>
+				<hudson.plugins.ws__cleanup.Pattern>
+					<pattern>.repository/**/*.xtend/**/*</pattern>
+					<type>INCLUDE</type>
+				</hudson.plugins.ws__cleanup.Pattern>
+			</patterns>
+			<deleteDirs>true</deleteDirs>
+			<skipWhenFailed>false</skipWhenFailed>
+			<cleanWhenSuccess>true</cleanWhenSuccess>
+			<cleanWhenUnstable>true</cleanWhenUnstable>
+			<cleanWhenFailure>false</cleanWhenFailure>
+			<cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+			<cleanWhenAborted>true</cleanWhenAborted>
+			<notFailBuild>true</notFailBuild>
+			<cleanupMatrixParent>false</cleanupMatrixParent>
+			<externalDelete />
+		</hudson.plugins.ws__cleanup.WsCleanup>
+	</publishers>
+	<buildWrappers />
+</project>

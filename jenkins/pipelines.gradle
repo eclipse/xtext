@@ -9,7 +9,10 @@ def smokeSuites = ['smoke-tests']
 def generatorSuites = ['generator-tests']
 def allSuites = onPushSuites + slowSuites + smokeSuites + generatorSuites
 
+
 def testScripts = allSuites.collectEntries{suite -> [(suite): project.file("scripts/${suite}.txt").text]}
+
+def gradleBuilds = ['web-deploy']
 
 branches.each { branch ->
 	def testJobs = [allSuites, branch.platforms.keySet()]
@@ -42,6 +45,22 @@ branches.each { branch ->
 					.'hudson.plugins.parameterizedtrigger.BuildTriggerConfig'
 					.projects	= testJobs.findAll{onPushSuites.contains(it.suite)}.collect{it.name}.join(',')
 				}
+		}
+		
+		gradleBuilds.each { job -> 
+			jobs.create("xtext-web-${branch.displayName}").definition {
+				xml templates.gradleBuild.override { config -> 
+					config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
+					config.description = "This job was generated"
+					def props = new Properties()
+					props.load(new FileInputStream(project.file("scripts/${job}.txt")))
+					
+					def builder = config.builders.'hudson.plugins.gradle.Gradle'
+					props.each { prop ->
+						builder.'*'.find { node-> node.name() == prop.key}.replaceBody(prop.value)
+					}
+				}
+			}
 		}
 		
 		jobs.create("target-platforms-${branch.displayName}").definition {
