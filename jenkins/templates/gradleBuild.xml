@@ -76,9 +76,7 @@
 	</builders>
 	<publishers>
 		<hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
-			<testResults>
-				org.eclipse.xtext.git/web/**/build/test-results/*.xml
-			</testResults>
+			<testResults>org.eclipse.xtext.git/**/build/test-results/*.xml</testResults>
 			<keepLongStdio>false</keepLongStdio>
 			<testDataPublishers />
 			<healthScaleFactor>1.0</healthScaleFactor>
