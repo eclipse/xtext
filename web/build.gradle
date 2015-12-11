@@ -1,0 +1,2 @@
+// we need this dummy file to be able to use the gradle Jenkins plugin
+// ATM it's not possible to define an execution subfolder
