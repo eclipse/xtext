@@ -59,6 +59,7 @@ import com.intellij.openapi.vfs.VirtualFileEvent;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.VirtualFileMoveEvent;
 import com.intellij.openapi.vfs.VirtualFilePropertyEvent;
+import com.intellij.openapi.vfs.VirtualFileVisitor;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
@@ -67,7 +68,6 @@ import com.intellij.psi.impl.PsiModificationTrackerImpl;
 import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.util.Alarm;
 import com.intellij.util.Function;
-import com.intellij.util.Processor;
 import com.intellij.util.graph.Graph;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.MessageBusConnection;
@@ -107,6 +107,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -256,7 +257,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         boolean _equals = Objects.equal(_propertyName, VirtualFile.PROP_NAME);
         if (_equals) {
           VirtualFile _file = event.getFile();
-          XtextAutoBuilderComponent.this.fileDeleted(_file);
+          XtextAutoBuilderComponent.this.scheduleDeletion(_file);
         }
       }
       
@@ -265,6 +266,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         String _propertyName = event.getPropertyName();
         boolean _equals = Objects.equal(_propertyName, VirtualFile.PROP_NAME);
         if (_equals) {
+          XtextAutoBuilderComponent.this.commitScheduledDeletion();
           VirtualFile _file = event.getFile();
           XtextAutoBuilderComponent.this.fileAdded(_file);
         }
@@ -284,18 +286,24 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       
       @Override
       public void fileDeleted(final VirtualFileEvent event) {
+        XtextAutoBuilderComponent.this.commitScheduledDeletion();
+      }
+      
+      @Override
+      public void beforeFileDeletion(final VirtualFileEvent event) {
         VirtualFile _file = event.getFile();
-        XtextAutoBuilderComponent.this.fileDeleted(_file);
+        XtextAutoBuilderComponent.this.scheduleDeletion(_file);
       }
       
       @Override
       public void beforeFileMovement(final VirtualFileMoveEvent event) {
         VirtualFile _file = event.getFile();
-        XtextAutoBuilderComponent.this.fileDeleted(_file);
+        XtextAutoBuilderComponent.this.scheduleDeletion(_file);
       }
       
       @Override
       public void fileMoved(final VirtualFileMoveEvent event) {
+        XtextAutoBuilderComponent.this.commitScheduledDeletion();
         VirtualFile _file = event.getFile();
         XtextAutoBuilderComponent.this.fileAdded(_file);
       }
@@ -405,7 +413,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     this.enqueue(BuildEvent.Type.MODIFIED, file);
   }
   
-  public void fileDeleted(final VirtualFile root) {
+  public void scheduleDeletion(final VirtualFile root) {
     ProjectFileIndex _instance = ProjectFileIndex.SERVICE.getInstance(this.project);
     Module _findModule = this.findModule(root, _instance);
     boolean _tripleEquals = (_findModule == null);
@@ -413,9 +421,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       return;
     }
     final ArrayList<VirtualFile> files = CollectionLiterals.<VirtualFile>newArrayList();
-    final Processor<VirtualFile> _function = new Processor<VirtualFile>() {
+    VfsUtilCore.visitChildrenRecursively(root, new VirtualFileVisitor() {
       @Override
-      public boolean process(final VirtualFile file) {
+      public boolean visitFile(final VirtualFile file) {
         boolean _xblockexpression = false;
         {
           boolean _isDirectory = file.isDirectory();
@@ -427,9 +435,23 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         }
         return _xblockexpression;
       }
-    };
-    VfsUtilCore.processFilesRecursively(root, _function);
-    this.enqueue(BuildEvent.Type.DELETED, ((VirtualFile[])Conversions.unwrapArray(files, VirtualFile.class)));
+    });
+    boolean _isEmpty = files.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      BuildEvent _buildEvent = new BuildEvent(BuildEvent.Type.DELETED, ((VirtualFile[])Conversions.unwrapArray(files, VirtualFile.class)));
+      CollectionExtensions.<BuildEvent>addAll(this.scheduledDeletions, _buildEvent);
+    }
+  }
+  
+  private final LinkedBlockingQueue<BuildEvent> scheduledDeletions = new LinkedBlockingQueue<BuildEvent>();
+  
+  public void commitScheduledDeletion() {
+    final ArrayList<BuildEvent> scheduledEvents = CollectionLiterals.<BuildEvent>newArrayList();
+    this.scheduledDeletions.drainTo(scheduledEvents);
+    for (final BuildEvent event : scheduledEvents) {
+      this.enqueue(event);
+    }
   }
   
   public void fileAdded(final VirtualFile file) {
@@ -986,10 +1008,12 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     final String[] sourceRootUrls = moduleRootManager.getSourceRootUrls();
     final LinkedHashSet<BuildEvent> result = new LinkedHashSet<BuildEvent>();
     for (final BuildEvent event : events) {
-      {
-        Map<URI, VirtualFile> _filesByURI = event.getFilesByURI();
-        Set<URI> _keySet = _filesByURI.keySet();
-        URI _head = IterableExtensions.<URI>head(_keySet);
+      Set<URI> _uRIs = event.getURIs();
+      boolean _isEmpty = _uRIs.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        Set<URI> _uRIs_1 = event.getURIs();
+        URI _head = IterableExtensions.<URI>head(_uRIs_1);
         final String url = _head.toString();
         boolean _and = false;
         final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
@@ -1112,8 +1136,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                     this.consistentAdd(sourceUri, changedUris, deletedUris);
                   }
                 } else {
-                  VirtualFile _file = event.getFile(uri);
-                  boolean _isJavaFile = this.isJavaFile(_file);
+                  boolean _isJavaFile = this.isJavaFile(uri);
                   if (_isJavaFile) {
                     final Computable<Set<IResourceDescription.Delta>> _function = new Computable<Set<IResourceDescription.Delta>>() {
                       @Override
@@ -1154,8 +1177,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                     this.consistentAdd(sourceUri, changedUris, deletedUris);
                   }
                 } else {
-                  VirtualFile _file = event.getFile(uri_1);
-                  boolean _isJavaFile = this.isJavaFile(_file);
+                  boolean _isJavaFile = this.isJavaFile(uri_1);
                   if (_isJavaFile) {
                     final Computable<Set<IResourceDescription.Delta>> _function = new Computable<Set<IResourceDescription.Delta>>() {
                       @Override
@@ -1185,9 +1207,9 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     toBeRemoved.remove(uri);
   }
   
-  public boolean isJavaFile(final VirtualFile file) {
-    String _extension = file.getExtension();
-    return Objects.equal(_extension, "java");
+  public boolean isJavaFile(final URI file) {
+    String _fileExtension = file.fileExtension();
+    return Objects.equal(_fileExtension, "java");
   }
   
   public Set<IResourceDescription.Delta> getJavaDeltas(final VirtualFile file, final Module module) {
