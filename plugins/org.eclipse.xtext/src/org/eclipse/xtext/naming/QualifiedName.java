@@ -19,18 +19,18 @@ import org.eclipse.xtext.util.Strings;
 import com.google.common.base.Function;
 
 /**
- * A datatype for dealing with qualified names. 
+ * A datatype for dealing with qualified names.
  * Instances are usually provided by a {@link IQualifiedNameProvider}.
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow
  */
 public class QualifiedName implements Comparable<QualifiedName> {
 
 	private final int hash;
-	
+
 	private final String[] segments;
-	
+
 	private QualifiedName lowerCase;
 
 	public static final QualifiedName EMPTY = new QualifiedName() {
@@ -62,8 +62,8 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
-	 * 
-	 * @param segments the segments of the to-be-created qualified name. 
+	 *
+	 * @param segments the segments of the to-be-created qualified name.
 	 * 	May be <code>null</code>, but may not contain <code>null</code> entries.
 	 * @return a {@link QualifiedName}. Never <code>null</code>.
 	 * @exception IllegalArgumentException
@@ -83,7 +83,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		}
 		return new QualifiedName(segments.clone());
 	}
-	
+
 	/**
 	 * Internal low level factory method.
 	 * @noreference This method is not intended to be referenced by clients.
@@ -94,7 +94,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		if (segmentCount == 0) {
 			return QualifiedName.EMPTY;
 		}
-		// lowercase QN serialize a 'null' value at index 0 and 
+		// lowercase QN serialize a 'null' value at index 0 and
 		String firstSegment = eObjectInputStream.readSegmentedString();
 		boolean lowerCase = false;
 		if (firstSegment == null) {
@@ -102,12 +102,12 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			// first was null, read another string which is the actual first segment
 			firstSegment = eObjectInputStream.readSegmentedString();
 		}
-		
+
 		String[] segments = readSegmentArray(eObjectInputStream, segmentCount, firstSegment);
 		if (lowerCase) {
 			return new QualifiedNameLowerCase(segments);
 		} else {
-			return new QualifiedName(segments);	
+			return new QualifiedName(segments);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		}
 		return segments;
 	}
-	
+
 	/**
 	 * Internal low level serialization of QualifiedNames.
 	 * @since 2.4
@@ -135,7 +135,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
-	 * 
+	 *
 	 * @param segments
 	 *            the segments of the to-be-created qualified name. May be <code>null</code>, but may not contain
 	 *            <code>null</code> entries.
@@ -162,7 +162,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
-	 * 
+	 *
 	 * @param singleSegment
 	 *            the single segment of the newly created qualified name
 	 * @exception IllegalArgumentException
@@ -177,7 +177,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	}
 
 	/**
-	 * Wraps a name function to return a qualified name. Returns null if the name function returns null. 
+	 * Wraps a name function to return a qualified name. Returns null if the name function returns null.
 	 */
 	public static <F> Function<F, QualifiedName> wrapper(final Function<F, String> nameFunction) {
 		return new Function<F, QualifiedName>() {
@@ -292,7 +292,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		}
 		return lowerCase;
 	}
-	
+
 	private static class QualifiedNameLowerCase extends QualifiedName {
 		public QualifiedNameLowerCase(String[] segments) {
 			super(segments);
@@ -306,7 +306,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		boolean hasLowerCase() {
 			return true;
 		}
-		
+
 		/**
 		 * We serialize a segmentCount + 1 and a dummy null value as the first entry.
 		 * This is used to retrieve the information about lowercase QN in {@link QualifiedName#createFromStream(EObjectInputStream)}
@@ -353,7 +353,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	/**
 	 * Returns <code>true</code> if this instance can provide a ready to use
 	 * lowercase representation.
-	 * 
+	 *
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	boolean hasLowerCase() {
@@ -410,7 +410,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			}
 		}
 		// with Java7 this should probably read
-		// return Integer.compare(getSegmentCount(), qualifiedName.getSegmentCount()) 
+		// return Integer.compare(getSegmentCount(), qualifiedName.getSegmentCount())
 		return getSegmentCount() - qualifiedName.getSegmentCount();
 	}
 
@@ -448,7 +448,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	public String toString() {
 		return toString(".");
 	}
-	
+
 	/**
 	 * Returns a String representation of this using {@code delimiter} as namespace delimiter.
 	 * @param delimiter the delimiter to use. <code>null</code> will be represented as the String "<code>null</code>".
