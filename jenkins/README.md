@@ -8,4 +8,6 @@ To compare them with the current server state run ```./gradlew dumpRemoteJenkins
 
 Use ```./gradlew validateJenkinsItems``` to compare remote and local configuration
 
-Once you are satisfied with your change, run ```./gradlew updateJenkinsItems --no-daemon```
+Once you are satisfied with your change, run ```./gradlew updateJenkinsItems```
+
+Always use the `--no-daemon` option so Gradle can prompt you for your Jenkins credentials.
