@@ -276,4 +276,16 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		assertEquals(2, deleted.size)
 		assertTrue(deleted.containsSuffix('xtend-gen/A.java'))
 	}
+	
+	@Test def void testPackageInfo() {
+		val buildRequest = newBuildRequest [
+			dirtyFiles = #[
+				'src/foo/package-info.java' - '''
+					package foo;
+				'''
+			]
+		]
+		build(buildRequest)
+		assertTrue(issues.toString, issues.isEmpty)
+	}
 }
