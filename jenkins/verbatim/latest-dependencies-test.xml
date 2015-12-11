@@ -124,14 +124,14 @@ build</commands>
     </hudson.plugins.buckminster.EclipseBuckminsterBuilder>
   </builders>
   <publishers>
-    <hudson.tasks.Mailer plugin="mailer@1.11">
+    <hudson.tasks.Mailer plugin="mailer@1.15">
       <recipients>alle-ki@itemis.de</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>60</timeoutMinutes>
       </strategy>

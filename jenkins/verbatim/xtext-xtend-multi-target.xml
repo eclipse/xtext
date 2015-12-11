@@ -162,7 +162,7 @@ junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast-quarantine
       <testDataPublishers/>
       <healthScaleFactor>1.0</healthScaleFactor>
     </hudson.tasks.junit.JUnitResultArchiver>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.26">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
       <deleteDirs>false</deleteDirs>
       <skipWhenFailed>false</skipWhenFailed>
       <cleanWhenSuccess>true</cleanWhenSuccess>

@@ -148,7 +148,7 @@ jarsLocation=${WORKSPACE}/jars/</properties>
     <com.cloudbees.jenkins.GitHubCommitNotifier plugin="github@1.11">
       <resultOnFailure>FAILURE</resultOnFailure>
     </com.cloudbees.jenkins.GitHubCommitNotifier>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.26">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
           <pattern>jars/**</pattern>

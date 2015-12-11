@@ -253,7 +253,7 @@ junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast (xtend).la
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>true</sendToIndividuals>
     </hudson.tasks.Mailer>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.26">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
           <pattern>org.eclipse.xtext.git/**</pattern>

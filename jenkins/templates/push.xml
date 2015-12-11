@@ -13,7 +13,7 @@
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
       <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
-    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.25"/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
@@ -192,7 +192,7 @@ build</commands>
     <hudson.tasks.test.AggregatedTestResultPublisher plugin="junit@1.1">
       <includeFailedBuilds>false</includeFailedBuilds>
     </hudson.tasks.test.AggregatedTestResultPublisher>
-    <hudson.tasks.Mailer plugin="mailer@1.11">
+    <hudson.tasks.Mailer plugin="mailer@1.15">
       <recipients>alle-ki@itemis.de</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>true</sendToIndividuals>
@@ -224,7 +224,7 @@ build</commands>
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>60</timeoutMinutes>
       </strategy>

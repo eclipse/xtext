@@ -77,7 +77,7 @@ mvn clean deploy to https://oss.sonatype.org/content/repositories/snapshots/</de
       <testDataPublishers/>
       <healthScaleFactor>1.0</healthScaleFactor>
     </hudson.tasks.junit.JUnitResultArchiver>
-    <hudson.tasks.Mailer plugin="mailer@1.11">
+    <hudson.tasks.Mailer plugin="mailer@1.15">
       <recipients>alle-ki@itemis.de</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>true</sendToIndividuals>

@@ -11,7 +11,16 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>
-      <parameterDefinitions>
+        <com.coravy.hudson.plugins.github.GithubProjectProperty
+             plugin='github@1.11'>
+             <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
+        </com.coravy.hudson.plugins.github.GithubProjectProperty>
+        <jenkins.advancedqueue.AdvancedQueueSorterJobProperty
+             plugin='PrioritySorter@2.9'>
+             <useJobPriority>false</useJobPriority>
+             <priority>-1</priority>
+        </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
+        <parameterDefinitions>
         <hudson.model.ChoiceParameterDefinition>
           <name>ECLIPSE_TARGET_ALIAS</name>
           <description></description>
@@ -23,12 +32,9 @@
         </hudson.model.ChoiceParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty>
-      <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
-    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.25"/>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.5">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -175,7 +181,7 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
       <testDataPublishers/>
       <healthScaleFactor>1.0</healthScaleFactor>
     </hudson.tasks.junit.JUnitResultArchiver>
-    <hudson.tasks.Mailer plugin="mailer@1.11">
+    <hudson.tasks.Mailer plugin="mailer@1.15">
       <recipients>Sebastian.Zarnekow@itemis.de  sven.efftinge@itemis.de</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>true</sendToIndividuals>
@@ -183,7 +189,7 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
 		<com.cloudbees.jenkins.GitHubCommitNotifier>
       <resultOnFailure>FAILURE</resultOnFailure>
     </com.cloudbees.jenkins.GitHubCommitNotifier>
-		<hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
+		<hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
           <pattern>org.eclipse.xtext.git/**</pattern>
@@ -203,7 +209,7 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>120</timeoutMinutes>
       </strategy>

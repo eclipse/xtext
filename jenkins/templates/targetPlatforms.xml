@@ -60,9 +60,10 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <jdk>(Default)</jdk>
   <triggers>
-    <hudson.triggers.TimerTrigger>
-      <spec>H 17 * * *</spec>
-    </hudson.triggers.TimerTrigger>
+    <hudson.triggers.SCMTrigger>
+		<spec>H 17 * * *</spec>
+		<ignorePostCommitHooks>false</ignorePostCommitHooks>
+	</hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
@@ -103,7 +104,7 @@
       <dontNotifyEveryUnstableBuild>true</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>true</sendToIndividuals>
     </hudson.tasks.Mailer>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.26">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
           <pattern>org.eclipse.xtext.git/**</pattern>
