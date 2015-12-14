@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.emf.common;bundle-version="2.10.1",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.eclipse.core.runtime;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib;visibility:=reexport,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
