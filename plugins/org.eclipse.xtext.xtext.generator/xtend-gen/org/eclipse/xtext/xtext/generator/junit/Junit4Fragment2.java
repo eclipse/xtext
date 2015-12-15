@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @SuppressWarnings("all")
-public class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
+public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
@@ -128,11 +128,14 @@ public class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
     IBundleProjectConfig _runtimeTest_3 = _projectConfig_8.getRuntimeTest();
     IXtextGeneratorFileSystemAccess _srcGen = _runtimeTest_3.getSrcGen();
     _generateInjectorProvider.writeTo(_srcGen);
-    JavaFileAccess _generateExampleRuntimeTest = this.generateExampleRuntimeTest();
-    IXtextProjectConfig _projectConfig_9 = this.getProjectConfig();
-    IBundleProjectConfig _runtimeTest_4 = _projectConfig_9.getRuntimeTest();
-    IXtextGeneratorFileSystemAccess _src = _runtimeTest_4.getSrc();
-    _generateExampleRuntimeTest.writeTo(_src);
+    boolean _isGenerateStub = this.isGenerateStub();
+    if (_isGenerateStub) {
+      JavaFileAccess _generateExampleRuntimeTest = this.generateExampleRuntimeTest();
+      IXtextProjectConfig _projectConfig_9 = this.getProjectConfig();
+      IBundleProjectConfig _runtimeTest_4 = _projectConfig_9.getRuntimeTest();
+      IXtextGeneratorFileSystemAccess _src = _runtimeTest_4.getSrc();
+      _generateExampleRuntimeTest.writeTo(_src);
+    }
     IXtextProjectConfig _projectConfig_10 = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_10.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin_2.getSrcGen();

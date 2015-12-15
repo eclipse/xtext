@@ -1,12 +1,21 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>15 Minutes Tutorial</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
 <h1 id="domain-model-walkthrough">15 Minutes Tutorial</h1>
 
@@ -209,7 +218,7 @@ Feature:
 
 <h2 id="add-imports">Second Iteration: Adding Packages and Imports</h2>
 
-<p>After you have created the your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The Domain Model language should support the notion of <em>Package</em>s in order to avoid name clashes and to better fit with the target environment (Java). A <em>Package</em> may contain <em>Types</em> and other packages. In order to allow fort names in references, we will also add a way to declare imports.</p>
+<p>After you have created the your first DSL and had a look at the editor, the language should be refined and incrementally enhanced. The Domain Model language should support the notion of <em>Package</em>s in order to avoid name clashes and to better fit with the target environment (Java). A <em>Package</em> may contain <em>Types</em> and other packages. In order to allow for names in references, we will also add a way to declare imports.</p>
 
 <p>In the end we want to be able to split the previously used model into to distinct files :</p>
 
@@ -284,7 +293,7 @@ QualifiedName:
 ;
 </code></pre>
 
-    <p>The <code>QualifiedName</code> is a little special. It does not contain any assignments. Therefore, it serves as a data type rule, which returns a String. So the feature <code>name</code> of a <em>Package</em> is still of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>. </p>
+    <p>The <code>QualifiedName</code> is a little special. It does not contain any assignments. Therefore, it serves as a data type rule, which returns a String. So the feature <code>name</code> of a <em>Package</em> is still of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a>. </p>
   </li>
   <li>
     <p>Imports can be defined in a very convenient way with Xtext. If you use the name <code>importedNamespace</code> in a parser rule, the framework will treat the value as an import. It even supports wildcard and handles them as expected:     </p>

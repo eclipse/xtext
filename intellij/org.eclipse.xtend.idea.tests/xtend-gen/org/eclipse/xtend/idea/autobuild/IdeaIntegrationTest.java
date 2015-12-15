@@ -1150,6 +1150,9 @@ public class IdeaIntegrationTest extends LightXtendTest {
   public void assertFileContents(final String path, final CharSequence sequence) {
     try {
       final VirtualFile file = this.myFixture.findFileInTempDir(path);
+      if ((file == null)) {
+        TestCase.fail(("Expected a file for " + path));
+      }
       String _string = sequence.toString();
       InputStream _inputStream = file.getInputStream();
       Charset _charset = file.getCharset();

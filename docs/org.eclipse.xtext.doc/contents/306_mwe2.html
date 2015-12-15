@@ -1,20 +1,29 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>MWE 2</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
-<h1 id="mwe2">MWE2</h1>
+<h1 id="mwe2">MWE 2</h1>
 
 <p>The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards compatible implementation of the Modeling Workflow Engine (MWE). It is a declarative, externally configurable generator engine. Users can describe arbitrary object compositions by means of a simple, concise syntax that allows to declare object instances, attribute values and references. One use case - that’s where the name had its origins - is the definition of workflows. Such a workflow consists usually of a number of components that interact with each other. There are components to read EMF resources, to perform operations (transformations) on them and to write them back or to generate any number of other artifacts out of the information. Workflows are typically executed in a single JVM. However there are no constraints the prevent implementors to provide components that spawn multiple threads or new processes.</p>
 
 <h2 id="mwe2-exampe">Examples</h2>
 
-<p>Let’s start with a couple of examples to demonstrate some usage scenarios for MWE2. The first example is a simple <code>HelloWorld</code> module that does nothing but print a message to standard out. The second module is assembled of three components that read an Ecore file, transform the contained classifier-names to upper-case and serialize the resource back to a new file. The last example uses the life-cycle methods of the <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a> to print the execution time of the workflow.</p>
+<p>Let’s start with a couple of examples to demonstrate some usage scenarios for MWE2. The first example is a simple <code>HelloWorld</code> module that does nothing but print a message to standard out. The second module is assembled of three components that read an Ecore file, transform the contained classifier-names to upper-case and serialize the resource back to a new file. The last example uses the life-cycle methods of the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java">IWorkflowComponent</a> to print the execution time of the workflow.</p>
 
 <h3 id="mwe2-hello-world">The Simplest Workflow</h3>
 
@@ -51,7 +60,7 @@ public class SayHello implements IWorkflowComponent {
 }
 </code></pre>
 
-<p>It looks like a simple POJO and that’s the philosophy behind MWE2. It is easily possible to assemble completely independent objects in a declarative manner. To make the workflow executable with the <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java">Mwe2Runner</a>, the component <code>SayHello</code> must be nested in a root workflow:</p>
+<p>It looks like a simple POJO and that’s the philosophy behind MWE2. It is easily possible to assemble completely independent objects in a declarative manner. To make the workflow executable with the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java">Mwe2Runner</a>, the component <code>SayHello</code> must be nested in a root workflow:</p>
 
 <pre><code class="language-mwe2">module HelloWorld 
 
@@ -62,7 +71,7 @@ Workflow {
 }
 </code></pre>
 
-<p>The package <code>org.eclipse.emf.mwe2.runtime.workflow</code> of the class <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a> is implicitly imported in MWE2 modules to make the the modules more concise. The execution result of this workflow will be revealed after a quick <em>Run As .. → MWE2 Workflow</em> in the console as </p>
+<p>The package <code>org.eclipse.emf.mwe2.runtime.workflow</code> of the class <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java">Workflow</a> is implicitly imported in MWE2 modules to make the the modules more concise. The execution result of this workflow will be revealed after a quick <em>Run As .. → MWE2 Workflow</em> in the console as </p>
 
 <p><code>Hello World!</code></p>
 
@@ -285,7 +294,7 @@ SampleClass {
 }
 </code></pre>
 
-<p>The type of the property will be derived from the default value similar to the mechanism that is already known from <code>set</code>- and <code>add</code>-methods. If no default value is given, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> will be assumed. However, properties are not limited to strings. The second built in type is boolean via the familiar literals <code>true</code> and <code>false</code>. More flexibility is available via actual component literals.</p>
+<p>The type of the property will be derived from the default value similar to the mechanism that is already known from <code>set</code>- and <code>add</code>-methods. If no default value is given, <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> will be assumed. However, properties are not limited to strings. The second built in type is boolean via the familiar literals <code>true</code> and <code>false</code>. More flexibility is available via actual component literals.</p>
 
 <pre><code class="language-mwe2">module com.mycompany.Example
 
@@ -301,7 +310,7 @@ SampleClass {
 <p>If one wants to define string properties that are actual reusable parts for other properties, she may use defined variables inside other literals like this: </p>
 
 <pre><code class="language-mwe2">var aString = "part"
-var anotherString = "reuse the ${aString} here"
+var anotherString = "reuse the ${part} here"
 </code></pre>
 
 <p>This is especially useful for file paths in workflows as one would usually want to define some common root directories only once in the workflow and reuse this fragment across certain other file locations.</p>
@@ -337,7 +346,7 @@ var newMandatory
 
 <p>Note that it is even possible to reuse another module as the root component of a new module. In this case we set the mandatory property of <code>Example</code> to a specific constant value while the previously optional value is now redefined as mandatory by means of a new property without a default value.</p>
 
-<p>It is not only possible to define mandatory properties for MWE2 modules but for classes as well. Therefore MWE2 ships with the <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a> annotation. If a <code>set</code>- or <code>add</code>-method is marked as <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a>, the module validation will fail if no value was assigned to that feature.</p>
+<p>It is not only possible to define mandatory properties for MWE2 modules but for classes as well. Therefore MWE2 ships with the <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a> annotation. If a <code>set</code>- or <code>add</code>-method is marked as <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java">Mandatory</a>, the module validation will fail if no value was assigned to that feature.</p>
 
 <h3 id="mwe2-named-components">Named Components</h3>
 
@@ -407,7 +416,7 @@ ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 <p><img src="images/mwe2/property.png" alt="" /></p>
 
-<p>Each declared property is locally visible in the module. It furthermore defines an assignable feature of the module in case one refers to it from another module. Properties may either have a default value or they are considered to be <em>mandatory</em>. If the type of property is omitted it will be inferred from the default value. The default type of a property is <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>. That is, if no default value is available, the property is <em>mandatory</em> and of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>.</p>
+<p>Each declared property is locally visible in the module. It furthermore defines an assignable feature of the module in case one refers to it from another module. Properties may either have a default value or they are considered to be <em>mandatory</em>. If the type of property is omitted it will be inferred from the default value. The default type of a property is <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a>. That is, if no default value is available, the property is <em>mandatory</em> and of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a>.</p>
 
 <p>There are four types of values available in MWE2. One may either define a string, boolean or component literal or a reference to a previously defined property. </p>
 

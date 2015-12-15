@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -75,6 +76,10 @@ public class JavaDerivedStateComputer {
   }
   
   public void installStubs(final Resource resource) {
+    boolean _isInfoFile = this.isInfoFile(resource);
+    if (_isInfoFile) {
+      return;
+    }
     final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions();
@@ -176,6 +181,10 @@ public class JavaDerivedStateComputer {
   }
   
   public void installFull(final Resource resource) {
+    boolean _isInfoFile = this.isInfoFile(resource);
+    if (_isInfoFile) {
+      return;
+    }
     final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     final ClassLoader classLoader = this.getClassLoader(resource);
     ResourceSet _resourceSet = resource.getResourceSet();
@@ -230,6 +239,25 @@ public class JavaDerivedStateComputer {
     DefaultProblemFactory _defaultProblemFactory = new DefaultProblemFactory();
     final org.eclipse.jdt.internal.compiler.Compiler compiler = new org.eclipse.jdt.internal.compiler.Compiler(nameEnv, _proceedWithAllProblems, _compilerOptions, _function, _defaultProblemFactory);
     compiler.compile(new ICompilationUnit[] { compilationUnit });
+  }
+  
+  protected boolean isInfoFile(final Resource resource) {
+    boolean _xblockexpression = false;
+    {
+      URI _uRI = resource.getURI();
+      URI _trimFileExtension = _uRI.trimFileExtension();
+      final String name = _trimFileExtension.lastSegment();
+      boolean _or = false;
+      boolean _equals = Objects.equal(name, "package-info");
+      if (_equals) {
+        _or = true;
+      } else {
+        boolean _equals_1 = Objects.equal(name, "module-info");
+        _or = _equals_1;
+      }
+      _xblockexpression = _or;
+    }
+    return _xblockexpression;
   }
   
   protected CompilerOptions getCompilerOptions() {

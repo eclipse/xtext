@@ -1,12 +1,21 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>Xtext and Java</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
 <h1 id="xbase">Xtext and Java</h1>
 
@@ -20,7 +29,7 @@
 
 <ul>
   <li>the Xbase models are registered in the standalone setup and</li>
-  <li>the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java">TypesGeneratorFragment</a> and the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java">XbaseGeneratorFragment</a> are enabled.</li>
+  <li>the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java">TypesGeneratorFragment</a> and the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java">XbaseGeneratorFragment</a> are enabled.</li>
 </ul>
 
 <pre><code class="language-mwe2">bean = StandaloneSetup {
@@ -58,7 +67,7 @@ DataType:
   'mapped-to' javaType=[jvmTypes::JvmType|QualifiedName];
 </code></pre>
 
-<p>After regenerating your language, it will be allowed to define a type <code>Date</code> that maps to the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Date.html">Date</a> like this:</p>
+<p>After regenerating your language, it will be allowed to define a type <code>Date</code> that maps to the <a href="http://docs.oracle.com/javase/8/docs/api//java/util/Date.html">Date</a> like this:</p>
 
 <pre><code class="language-javatypesexample">  datatype Date mapped-to java.util.Date
 </code></pre>
@@ -69,17 +78,17 @@ DataType:
 
 <p>There are several customization hooks in the runtime layer of the JVM types and on the editor side as well:</p>
 
-<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.java">AbstractTypeScopeProvider</a> can be used to create scopes for members with respect to the override semantics of the Java language. Of course it is possible to use this implementation to create scopes for types as well.</p>
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.java">AbstractTypeScopeProvider</a> can be used to create scopes for members with respect to the override semantics of the Java language. Of course it is possible to use this implementation to create scopes for types as well.</p>
 
 <p>As the Java VM types expose a lot of information about visibility, parameter types and return types, generics, available annotations or enumeration literals, it is very easy to define constraints for the referred types.</p>
 
-<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java">ITypesProposalProvider</a> can be used to provide optimized proposals based on various filter criteria. The most common selector can be used directly via <code>createSubTypeProposals(..)</code>. The implementation is optimized and uses the JDT Index directly to minimize the effort for object instantiation. The class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java">TypeMatchFilters</a> provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals to a smaller number of valid entries. </p>
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java">ITypesProposalProvider</a> can be used to provide optimized proposals based on various filter criteria. The most common selector can be used directly via <code>createSubTypeProposals(..)</code>. The implementation is optimized and uses the JDT Index directly to minimize the effort for object instantiation. The class <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java">TypeMatchFilters</a> provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals to a smaller number of valid entries. </p>
 
 <h2 id="xbase-java-references">Referring to Java Types Using Xbase</h2>
 
 <p>While the JVM types approach from the previous chapter allows to refer to any Java element, it is quite limited when it comes to generics. Usually, a type reference in Java can have type arguments which can also include wildcards, upper and lower bounds etc. A simple cross-reference using a qualified name is not enough to express neither the syntax nor the structure of such a type reference. </p>
 
-<p>Xbase offers a parser rule <em>JvmTypeReference</em> which supports the full syntax of a Java type reference and instantiates a JVM element of type <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java">JvmTypeReference</a>. So let us start by inheriting from Xbase:</p>
+<p>Xbase offers a parser rule <em>JvmTypeReference</em> which supports the full syntax of a Java type reference and instantiates a JVM element of type <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java">JvmTypeReference</a>. So let us start by inheriting from Xbase:</p>
 
 <pre><code class="language-xtext">grammar org.eclipse.xtext.example.Domainmodel 
    with org.eclipse.xtext.xbase.Xbase
@@ -122,9 +131,9 @@ Feature:
 
 <p>As we changed the grammar, we have to regenerate the language now.</p>
 
-<p>Being able to parse a Java type reference is already nice, but we also have to write them back to their string representation when we generate Java code. Unfortunately, a generic type reference with fully qualified class names can become a bit bulky. Therefore, the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java">ImportManager</a> shortens fully qualified names, keeps track of imported namespaces, avoids name collisions, and helps to serialize <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java">JvmTypeReferences</a> by means of the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java">TypeReferenceSerializer</a>. This utility encapsulates how type references may be serialized depending on the concrete context in the output.</p>
+<p>Being able to parse a Java type reference is already nice, but we also have to write them back to their string representation when we generate Java code. Unfortunately, a generic type reference with fully qualified class names can become a bit bulky. Therefore, the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java">ImportManager</a> shortens fully qualified names, keeps track of imported namespaces, avoids name collisions, and helps to serialize <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmTypeReference.java">JvmTypeReferences</a> by means of the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java">TypeReferenceSerializer</a>. This utility encapsulates how type references may be serialized depending on the concrete context in the output.</p>
 
-<p>The following snippet shows our code generator using an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java">ImportManager</a> in conjunction with as <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java">TypeReferenceSerializer</a>. We create a new instance and pass it through the generation functions, collecting types on the way. As the import section in a Java file precedes the class body, we create the body into a String variable and assemble the whole file’s content in a second step.</p>
+<p>The following snippet shows our code generator using an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java">ImportManager</a> in conjunction with as <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/TypeReferenceSerializer.java">TypeReferenceSerializer</a>. We create a new instance and pass it through the generation functions, collecting types on the way. As the import section in a Java file precedes the class body, we create the body into a String variable and assemble the whole file’s content in a second step.</p>
 
 <pre><code class="language-xtend">class DomainmodelGenerator implements IGenerator {
   
@@ -185,7 +194,7 @@ Feature:
 }
 </code></pre>
 
-<p>Please note that when <em>org.eclipse.xtext.xbase.Xbase</em> is used the default binding for the interface <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java">IGenerator</a> is <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend">JvmModelGenerator</a>. To use a custom one we have to bind our own implementation in <em>org.example.domainmodel.DomainmodelRuntimeModule</em> like this: </p>
+<p>Please note that when <em>org.eclipse.xtext.xbase.Xbase</em> is used the default binding for the interface <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java">IGenerator</a> is <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend">JvmModelGenerator</a>. To use a custom one we have to bind our own implementation in <em>org.example.domainmodel.DomainmodelRuntimeModule</em> like this: </p>
 
 <pre><code class="language-java">public class DomainmodelRuntimeModule extends org.example.domainmodel.AbstractDomainmodelRuntimeModule {
 	public Class&lt;? extends org.eclipse.xtext.generator.IGenerator&gt; bindIGenerator() {
@@ -207,11 +216,11 @@ entity Person {
 ...
 </code></pre>
 
-<p>You can use entities instead of Java types or even mix Java types as <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a> with entities such as <em>Person</em>. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let <em>Entity</em> inherit from <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">JvmGenericType</a>. But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This <em>inferred JVM model</em> is the representation of your concepts in the type system of Xbase. </p>
+<p>You can use entities instead of Java types or even mix Java types as <a href="http://docs.oracle.com/javase/8/docs/api//java/util/List.html">List</a> with entities such as <em>Person</em>. One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let <em>Entity</em> inherit from <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">JvmGenericType</a>. But this would result in a lot of accidentally inherited properties in your domain model. In Xbase there is an alternative: You can simply define how to derive a JVM model from your model. This <em>inferred JVM model</em> is the representation of your concepts in the type system of Xbase. </p>
 
-<p>The main component for the inferred JVM model is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a>. It has a single method that takes the root model element as an argument and produces a number of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java">JvmDeclaredTypes</a>. As Xbase cannot guess how you would like to map your concepts to JVM elements, you have to implement this component yourself. This usually boils down to using an injected <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a> to create a hierarchy of JVM elements. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">builder</a> helps to initialize the produced types with sensible defaults and encapsulates the logic that associates the source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented using polymorphic dispatch functions and extension methods, it is a good choice to write the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a> in Xtend. It becomes even simpler if you inherit from the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java">AbstractModelInferrer</a> which traverses the input model and dispatches to its contents until you decide which elements to handle. </p>
+<p>The main component for the inferred JVM model is the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a>. It has a single method that takes the root model element as an argument and produces a number of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmDeclaredType.java">JvmDeclaredTypes</a>. As Xbase cannot guess how you would like to map your concepts to JVM elements, you have to implement this component yourself. This usually boils down to using an injected <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a> to create a hierarchy of JVM elements. The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">builder</a> helps to initialize the produced types with sensible defaults and encapsulates the logic that associates the source elements with the derived JVM concepts. As this kind of transformation can be elegantly implemented using polymorphic dispatch functions and extension methods, it is a good choice to write the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a> in Xtend. It becomes even simpler if you inherit from the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/AbstractModelInferrer.java">AbstractModelInferrer</a> which traverses the input model and dispatches to its contents until you decide which elements to handle. </p>
 
-<p>The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you make sure all types exist when you might lookup types during initializing the members in the second phase. Use <code>acceptor.accept(JvmDeclaredType, Procedure1&lt;JvmDeclaredType&gt;)</code> and pass in the created Java type as the first argument and the initialization block as the second. For our domain model example, we implement a polymorphic dispatch function <em>infer</em> for <em>Entities</em> to transform them into a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">JvmGenericType</a> in the first phase. In the second phase, we add a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmField.java">JvmField</a> and corresponding accessors for each <em>Property</em>. The final <em>DomainmodelJvmModelInferrer</em> looks like this:</p>
+<p>The inference runs in two phases: In the first phase all the types are created with empty bodies. This way you make sure all types exist when you might lookup types during initializing the members in the second phase. Use <code>acceptor.accept(JvmDeclaredType, Procedure1&lt;JvmDeclaredType&gt;)</code> and pass in the created Java type as the first argument and the initialization block as the second. For our domain model example, we implement a polymorphic dispatch function <em>infer</em> for <em>Entities</em> to transform them into a <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">JvmGenericType</a> in the first phase. In the second phase, we add a <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmField.java">JvmField</a> and corresponding accessors for each <em>Property</em>. The final <em>DomainmodelJvmModelInferrer</em> looks like this:</p>
 
 <pre><code class="language-xtend">class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 
@@ -235,15 +244,15 @@ entity Person {
 }
 </code></pre>
 
-<p>Out of the inferred model the corresponding Java class gets generated. To ensure that this will work make sure that the binding in the rumtime module for <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java">IGenerator</a> is pointing to <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend">JvmModelGenerator</a>. This is the default case, but as we dealt with a custom implementation in the last section this may lead to problems.</p>
+<p>Out of the inferred model the corresponding Java class gets generated. To ensure that this will work make sure that the binding in the rumtime module for <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java">IGenerator</a> is pointing to <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend">JvmModelGenerator</a>. This is the default case, but as we dealt with a custom implementation in the last section this may lead to problems.</p>
 
 <h3 id="linking-and-indexing">Linking and Indexing</h3>
 
 <p>As Java elements and your concepts are now represented as JVM model elements, other models can now transparently link to Java or your DSL. In other words, you can use a mapped element of your DSL in the same places as the corresponding Java type.</p>
 
-<p>The Xbase framework will automatically switch between the JVM element or the DSL element when needed, e.g. when following hyperlinks. The component allowing to navigate between the source model and the JVM model is called <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">IJvmModelAssociations</a>, the read-only antagonist of the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.java">IJvmModelAssociator</a> that is used by the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>.</p>
+<p>The Xbase framework will automatically switch between the JVM element or the DSL element when needed, e.g. when following hyperlinks. The component allowing to navigate between the source model and the JVM model is called <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">IJvmModelAssociations</a>, the read-only antagonist of the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.java">IJvmModelAssociator</a> that is used by the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>.</p>
 
-<p>By default, the inferred model is <a href="#global-scopes">indexed</a>, so it can be cross referenced from other models. </p>
+<p>By default, the inferred model is <a href="303_runtime_concepts.html#global-scopes">indexed</a>, so it can be cross referenced from other models.</p>
 
 <h2 id="xbase-expressions">Using Xbase Expressions</h2>
 
@@ -280,24 +289,24 @@ Property:
 ;
 </code></pre>
 
-<p>Note: You will have to adapt the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a> to these changes, i.e. rename <em>Feature</em> to <em>Property</em> and create a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">JvmOperation</a> for each <em>Operation</em>. We leave that as an exercise :-) </p>
+<p>Note: You will have to adapt the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a> to these changes, i.e. rename <em>Feature</em> to <em>Property</em> and create a <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">JvmOperation</a> for each <em>Operation</em>. We leave that as an exercise :-) </p>
 
-<p>If you are done with that, everything will work out of the box. Since each expression is now logically contained in an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">operation</a>, all the scoping rules and visibility constraints are implied from that context. The framework will take care that the operation’s parameters are visible inside the operation’s body and that the declared return types are validated against the actual expression types.</p>
+<p>If you are done with that, everything will work out of the box. Since each expression is now logically contained in an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">operation</a>, all the scoping rules and visibility constraints are implied from that context. The framework will take care that the operation’s parameters are visible inside the operation’s body and that the declared return types are validated against the actual expression types.</p>
 
-<p>There is yet another aspect of the JVM model that can be explored. Since all the coarse grained concepts such as <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmType.java">types</a> and <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">operations</a> were already derived from the model, a generator can be used to serialize that information to Java code. There is no need to write a code generator on top of that. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend">JvmModelGenerator</a> knows how to generate operation bodies properly. </p>
+<p>There is yet another aspect of the JVM model that can be explored. Since all the coarse grained concepts such as <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmType.java">types</a> and <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">operations</a> were already derived from the model, a generator can be used to serialize that information to Java code. There is no need to write a code generator on top of that. The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend">JvmModelGenerator</a> knows how to generate operation bodies properly. </p>
 
 <h3 id="using-the-xbase-interpreter">Using the Xbase Interpreter</h3>
 
-<p>Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it. Xbase ships with the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a> which makes this rather easy.</p>
+<p>Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it. Xbase ships with the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a> which makes this rather easy.</p>
 
-<p>An interpreter is essentially an external visitor, that recursively processes a model based on the model element’s types. In the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a>, the method <em>doEvaluate(XExpression, IEvaluationContext, CancelIndicator)</em> delegates to more specialised implementations e.g.</p>
+<p>An interpreter is essentially an external visitor, that recursively processes a model based on the model element’s types. In the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a>, the method <em>doEvaluate(XExpression, IEvaluationContext, CancelIndicator)</em> delegates to more specialised implementations e.g.</p>
 
 <pre><code class="language-java">protected Object _doEvaluate(XBlockExpression literal,
 							IEvaluationContext context,
 							CancelIndicator indicator)
 </code></pre>
 
-<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/IEvaluationContext.java">IEvaluationContext</a> keeps the state of the running application, i.e. the local variables and their values. Additionally, it can be <em>fork</em>ed, thus allowing to shadow the elements of the original context. Here is an example code snippet how to call the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a>:</p>
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/IEvaluationContext.java">IEvaluationContext</a> keeps the state of the running application, i.e. the local variables and their values. Additionally, it can be <em>fork</em>ed, thus allowing to shadow the elements of the original context. Here is an example code snippet how to call the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a>:</p>
 
 <pre><code class="language-java">@Inject private XbaseInterpreter xbaseInterpreter;
 
@@ -461,11 +470,11 @@ public Object evaluate(XExpression expression, Object thisElement) {
 
 <p>Arrays cannot be instantiated arbitrarily, but there are a couple of useful library functions that allow to create arrays with a fixed length or an initial value set. Besides this restriction, they can be passed around and they are transparently converted to a List of the component type on demand.</p>
 
-<p>In other words, the return type of a Java method that returns an array of ints (<code>int[]</code>) can be directly assigned to a variable of type <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html">List&lt;Integer&gt;</a>. Due to type inference this conversion happens implicitly. The conversion is bi-directional: Any method that takes an array as argument can be invoked with an argument that has the type <code>List&lt;ComponentType&gt;</code> instead.</p>
+<p>In other words, the return type of a Java method that returns an array of ints (<code>int[]</code>) can be directly assigned to a variable of type <a href="http://docs.oracle.com/javase/8/docs/api//java/util/List.html">List&lt;Integer&gt;</a>. Due to type inference this conversion happens implicitly. The conversion is bi-directional: Any method that takes an array as argument can be invoked with an argument that has the type <code>List&lt;ComponentType&gt;</code> instead.</p>
 
 <h4 id="xbase-types-function-types">Function Types</h4>
 
-<p>Xbase introduces <em>lambda expressions</em>, and therefore an additional function type signature. On the JVM-Level a lambda expression (or more generally any function object) is just an instance of one of the types in <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Functions</a>, depending on the number of arguments. However, as lambda expressions are a very important language feature, a special sugared syntax for function types has been introduced. So instead of writing <code>Function1&lt;String, Boolean&gt;</code> one can write <code>(String)=&gt;boolean</code>.</p>
+<p>Xbase introduces <em>lambda expressions</em>, and therefore an additional function type signature. On the JVM-Level a lambda expression (or more generally any function object) is just an instance of one of the types in <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Functions</a>, depending on the number of arguments. However, as lambda expressions are a very important language feature, a special sugared syntax for function types has been introduced. So instead of writing <code>Function1&lt;String, Boolean&gt;</code> one can write <code>(String)=&gt;boolean</code>.</p>
 
 <p>For more information on lambda expressions see <a href="#xbase-expressions-lambda">the corresponding section</a>.</p>
 
@@ -528,7 +537,7 @@ jumps over the lazy dog."
 
 <h5 id="xbase-expressions-number-literal">Number Literals</h5>
 
-<p>Xbase supports roughly the same number literals as Java with a few notable differences. As in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal represents an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or even a <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal number literals.</p>
+<p>Xbase supports roughly the same number literals as Java with a few notable differences. As in Java 7, you can separate digits using <code>_</code> for better readability of large numbers. An integer literal represents an <code>int</code>, a <code>long</code> (suffix <code>L</code>) or even a <a href="http://docs.oracle.com/javase/8/docs/api//java/math/BigInteger.html">BigInteger</a> (suffix <code>BI</code>). There are no octal number literals.</p>
 
 <pre><code class="language-xbase">  42
   1_234_567_890 
@@ -539,7 +548,7 @@ jumps over the lazy dog."
   0xbeef_beef_beef_beef_beef#BI // BigInteger
 </code></pre>
 
-<p>A floating-point literal creates a <code>double</code> (suffix <code>D</code> or omitted), a <code>float</code> (suffix <code>F</code>) or a <a href="http://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html">BigDecimal</a> (suffix <code>BD</code>). If you use a <code>.</code> sign you have to specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point literals. </p>
+<p>A floating-point literal creates a <code>double</code> (suffix <code>D</code> or omitted), a <code>float</code> (suffix <code>F</code>) or a <a href="http://docs.oracle.com/javase/8/docs/api//java/math/BigDecimal.html">BigDecimal</a> (suffix <code>BD</code>). If you use a <code>.</code> sign you have to specify both, the integer and the fractional part of the mantissa. There are only decimal floating-point literals. </p>
 
 <pre><code class="language-xbase">  42d     // double
   0.42e2  // implicit double
@@ -1018,28 +1027,28 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 <p>An Xbase lambda expression is a Java object of one of the <em>Function</em> interfaces that are part of the runtime library of Xbase. There is an interface for each number of parameters (up to six parameters). The names of the interfaces are </p>
 
 <ul>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Function0&lt;ReturnType&gt;</a> for zero parameters, </li>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Function1&lt;Param1Type, ReturnType&gt;</a> for one parameters, </li>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Function2&lt;Param1Type, Param2Type, ReturnType&gt;</a> for two parameters, </li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Function0&lt;ReturnType&gt;</a> for zero parameters, </li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Function1&lt;Param1Type, ReturnType&gt;</a> for one parameters, </li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Function2&lt;Param1Type, Param2Type, ReturnType&gt;</a> for two parameters, </li>
   <li>… </li>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Function6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType&gt;</a> for six parameters, </li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java">Function6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType&gt;</a> for six parameters, </li>
 </ul>
 
 <p>or </p>
 
 <ul>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedure0</a> for zero parameters, </li>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedure1&lt;Param1Type&gt;</a> for one parameters, </li>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedure2&lt;Param1Type, Param2Type&gt;</a> for two parameters, </li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedure0</a> for zero parameters, </li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedure1&lt;Param1Type&gt;</a> for one parameters, </li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedure2&lt;Param1Type, Param2Type&gt;</a> for two parameters, </li>
   <li>… </li>
-  <li><a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedure6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type&gt;</a> for six parameters, </li>
+  <li><a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java">Procedure6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type&gt;</a> for six parameters, </li>
 </ul>
 
 <p>if the return type is <code>void</code>.</p>
 
 <p>In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) lambda expressions are auto coerced to expected types if those types declare only one abstract method (methods from <code>java.lang.Object</code> don’t count).</p>
 
-<p>As a result given the method <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Collections.html">Collections.sort(List&lt;T&gt;, Comparator&lt;? super T&gt;)</a> is available as an extension method, it can be invoked like this</p>
+<p>As a result given the method <a href="http://docs.oracle.com/javase/8/docs/api//java/util/Collections.html">Collections.sort(List&lt;T&gt;, Comparator&lt;? super T&gt;)</a> is available as an extension method, it can be invoked like this</p>
 
 <pre><code class="language-xbase">newArrayList( 'aaa', 'bb', 'c' ).sort [
   e1, e2 | if ( e1.length &gt; e2.length ) {
@@ -1118,7 +1127,7 @@ bd *= 12bd // equivalent to bd = bd * 12bd
 }
 </code></pre>
 
-<p>the main expression <code>e</code> is evaluated first and then each case sequentially. If the switch expression contains a variable declaration using the syntax known from <a href="#xbase-expressions-for-loop">for loops</a>, the value is bound to the given name. Expressions of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">Boolean</a> or <code>boolean</code> are not allowed in a switch expression.</p>
+<p>the main expression <code>e</code> is evaluated first and then each case sequentially. If the switch expression contains a variable declaration using the syntax known from <a href="#xbase-expressions-for-loop">for loops</a>, the value is bound to the given name. Expressions of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Boolean.html">Boolean</a> or <code>boolean</code> are not allowed in a switch expression.</p>
 
 <p>The guard of each case clause is evaluated until the switch value equals the result of the case’s guard expression or if the case’s guard expression evaluates to <code>true</code>. Then the right hand expression of the case evaluated and the result is returned.</p>
 
@@ -1247,9 +1256,9 @@ switch x {
 
 <h4 id="xbase-expressions-for-loop">For Loop</h4>
 
-<p>The for loop <code>for (T1 variable : iterableOfT1) expression</code> is used to execute a certain expression for each element of an array of an instance of <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a>. The local <code>variable</code> is final, hence cannot be updated. </p>
+<p>The for loop <code>for (T1 variable : iterableOfT1) expression</code> is used to execute a certain expression for each element of an array of an instance of <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Iterable.html">Iterable</a>. The local <code>variable</code> is final, hence cannot be updated. </p>
 
-<p>The type of a for loop is <code>void</code>. The type of the local variable can optionally be inferred from the type of the array or the element type of the <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html">Iterable</a> returned by the iterable expression.</p>
+<p>The type of a for loop is <code>void</code>. The type of the local variable can optionally be inferred from the type of the array or the element type of the <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Iterable.html">Iterable</a> returned by the iterable expression.</p>
 
 <ul>
   <li>
@@ -1339,7 +1348,7 @@ switch x {
 
 <h4 id="xbase-expressions-throw">Throwing Exceptions</h4>
 
-<p>It is possible to throw <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html">Throwable</a>. The syntax is exactly the same as in Java.</p>
+<p>It is possible to throw <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Throwable.html">Throwable</a>. The syntax is exactly the same as in Java.</p>
 
 <pre><code class="language-xbase">{
   ...
@@ -1382,7 +1391,7 @@ switch x {
 
 <p>Languages extending Xbase might want to contribute to the feature scope. Besides that, one can of course change the whole implementation as it seems fit. There is a special hook, which can be used to add so-called extension methods to existing types. </p>
 
-<p>Xbase itself comes with a standard library of such extension methods adding support for various operators for the common types, such as <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>, <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>, etc.</p>
+<p>Xbase itself comes with a standard library of such extension methods adding support for various operators for the common types, such as <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a>, <a href="http://docs.oracle.com/javase/8/docs/api//java/util/List.html">List</a>, etc.</p>
 
 <p>These extension methods are declared in separate Java classes. There are various ways how extension methods can be added. In the simplest case the language designer predefines which extension methods are available. Language users cannot add additional library functions using this mechanism.</p>
 
