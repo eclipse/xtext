@@ -699,6 +699,8 @@
         <requirement
             name="org.eclipse.xtext.example.homeautomation.tests"/>
         <requirement
+            name="org.eclipse.xtext.example.homeautomation.ui"/>
+        <requirement
             name="org.eclipse.xtext.example.fowlerdsl.ui"/>
         <requirement
             name="xbase.tutorial"/>
