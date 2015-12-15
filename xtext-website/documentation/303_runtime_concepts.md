@@ -158,13 +158,15 @@ The generator will provide you with two Java classes. An abstract class generate
 
 The purpose of the [AbstractDeclarativeValidator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java) is to allow you to write constraints in a declarative way - as the class name already suggests. That is instead of writing exhaustive if-else constructs or extending the generated EMF switch you just have to add the [Check]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java) annotation to any method and it will be invoked automatically when validation takes place. Moreover you can state for what type the respective constraint method is, just by declaring a typed parameter. This also lets you avoid any type casts. In addition to the reflective invocation of validation methods the [AbstractDeclarativeValidator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java) provides a couple of convenient assertions.
 
+The Check annotation has a parameter that can be used to declare when a check should be run, *FAST* will be run whenever a file is modified, *NORMAL* checks will run when saving the file, and *EXPENSIVE* checks are run when explicitly validating the file via the menu option.
+
 All in all this is very similar to how JUnit 4 works. Here is an example:
 
 ```java
 public class DomainmodelJavaValidator
   extends AbstractDomainmodelJavaValidator {
 
-  @Check
+  @Check(FAST)
   public void checkTypeNameStartsWithCapital(Type type) {
     if (!Character.isUpperCase(type.getName().charAt(0)))
       warning("Name should start with a capital",
