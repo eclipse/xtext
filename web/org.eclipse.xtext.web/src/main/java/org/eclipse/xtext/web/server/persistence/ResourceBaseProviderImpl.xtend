@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.persistence
 
+import java.io.File
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import java.io.File
+import org.eclipse.xtext.web.server.InvalidRequestException
 
 /**
  * Default resource base provider that assumes all resource identifiers are relative
@@ -22,6 +23,8 @@ class ResourceBaseProviderImpl implements IResourceBaseProvider {
 	val String resourceBase
 	
 	override getFileURI(String resourceId) {
+		if (resourceId.contains('..'))
+			throw new InvalidRequestException.InvalidParametersException('Invalid resource path.')
 		if (resourceBase.endsWith(File.separator))
 			URI.createFileURI(resourceBase + resourceId)
 		else
