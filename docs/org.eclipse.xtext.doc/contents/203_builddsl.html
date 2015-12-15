@@ -1,16 +1,25 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>Build Language</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
 <h1 id="builddsl">Build Language</h1>
 
-<p>Build tools like Ant or <a href="http://www.gradle.org/">Gradle</a> decompose the build process into a set of tasks. A task can stand for a compilation step, copying some files, bundling, running tests etc. The order of execution is calculated from the dependencies of the defined tasks.</p>
+<p>Build tools like Ant or <a href="http://gradle.org/">Gradle</a> decompose the build process into a set of tasks. A task can stand for a compilation step, copying some files, bundling, running tests etc. The order of execution is calculated from the dependencies of the defined tasks.</p>
 
 <p><img src="images/builddsl_screenshot.png" alt="" /></p>
 
@@ -53,7 +62,7 @@ Task:
 	action=XBlockExpression;
 </code></pre>
 
-<p>A <em>BuildFile</em> starts with a <em>package</em> declaration. The generated Java class will be located in this namespace. The next part is an <em>importSection</em>. Since version 2.4, Xbase includes extensive tooling to validate and organize import statements. To make this available in your language, you just have to include an <em>XImportSection</em> as in this example. The imports are followed by the <em>Declarations</em>. A <em>Declaration</em> can be a <em>Task</em> or a <em>Parameter</em>. A <em>Parameter</em> can declare a type and an initialization expression. <em>Tasks</em> define dependencies on other tasks by means of an Xtext cross-reference. They also contain an action, which is a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">XBlockExpression</a> from Xbase, thus everthing is possible within a task.</p>
+<p>A <em>BuildFile</em> starts with a <em>package</em> declaration. The generated Java class will be located in this namespace. The next part is an <em>importSection</em>. Since version 2.4, Xbase includes extensive tooling to validate and organize import statements. To make this available in your language, you just have to include an <em>XImportSection</em> as in this example. The imports are followed by the <em>Declarations</em>. A <em>Declaration</em> can be a <em>Task</em> or a <em>Parameter</em>. A <em>Parameter</em> can declare a type and an initialization expression. <em>Tasks</em> define dependencies on other tasks by means of an Xtext cross-reference. They also contain an action, which is a <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">XBlockExpression</a> from Xbase, thus everthing is possible within a task.</p>
 
 <h2 id="builddsl-inferrer">Translation to Java</h2>
 
@@ -150,7 +159,7 @@ members += file.tasks.map[ task | toMethod(task.methodName, typeRef(Void.TYPE)) 
 ]
 </code></pre>
 
-<p>Finally, we create a field with the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.java">Param</a> annotation from each <em>Parameter</em>. The superclass will make the so marked fields initializable from command line arguments. </p>
+<p>Finally, we create a field with the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/Param.xtend">Param</a> annotation from each <em>Parameter</em>. The superclass will make the so marked fields initializable from command line arguments. </p>
 
 <ul>
   <li>
@@ -168,7 +177,7 @@ public String name = "World";
   </li>
 </ul>
 
-<p>The type can be skipped. If there is an initialization expression, the parameter’s type is inferred from the initialization expression. If that one is missing, too, <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> is assumed. The Elvis-operator <code>?:</code> comes handy for this use case. The different sources are tried to find the best type for the field. In the inferrer, this looks like:</p>
+<p>The type can be skipped. If there is an initialization expression, the parameter’s type is inferred from the initialization expression. If that one is missing, too, <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> is assumed. The Elvis-operator <code>?:</code> comes handy for this use case. The different sources are tried to find the best type for the field. In the inferrer, this looks like:</p>
 
 <pre><code class="language-xtend">@Inject ITypeProvider typeProvider
 ...
@@ -203,7 +212,7 @@ val type = declaredParameter.type
 
 <p>By using the <em>XImportSection</em> form Xbase, the language automatically supports the notion of <em>plain imports</em>, <em>static imports</em> and <em>static extension imports</em>. While the first two work as in Java, a static extension import puts the static methods of the specified calls on the extension scope, such that it can be called as if it were a method on the first argument. See the <a href="201_sevenlang_introduction.html#xtend_extension">Xtend primer</a> for a more detailed description.</p>
 
-<p>We ship some predefined extension classes to enhance the Java classes <a href="http://docs.oracle.com/javase/8/docs/api/java/io/File.html">File</a> and <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html">Class</a>. These are always put onto the extension scope by a customized <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitlyImportedFeatures.xtend">BuildDSLImplicitlyImportedFeatures</a>:</p>
+<p>We ship some predefined extension classes to enhance the Java classes <a href="http://docs.oracle.com/javase/8/docs/api//java/io/File.html">File</a> and <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Class.html">Class</a>. These are always put onto the extension scope by a customized <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitlyImportedFeatures.xtend">BuildDSLImplicitlyImportedFeatures</a>:</p>
 
 <pre><code class="language-xtend">class BuildDSLImplicitlyImportedFeatures extends ImplicitlyImportedFeatures {
 	/**
@@ -230,7 +239,7 @@ val type = declaredParameter.type
 
 <h2 id="builddsl-library">Operator Overloading</h2>
 
-<p>As we expect a build language to deal with files and directories a lot, we have extended the syntax around these in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/FileExtensions.java">FileExtensions</a>. We leverage the fact that Xbase allows to overload operators by means of library extensions. The following examples show how to avoid the noisy constructor calls to <a href="http://docs.oracle.com/javase/8/docs/api/java/io/File.html">File</a>:</p>
+<p>As we expect a build language to deal with files and directories a lot, we have extended the syntax around these in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.builddsl.lib/src/org/xtext/builddsl/lib/FileExtensions.xtend">FileExtensions</a>. We leverage the fact that Xbase allows to overload operators by means of library extensions. The following examples show how to avoid the noisy constructor calls to <a href="http://docs.oracle.com/javase/8/docs/api//java/io/File.html">File</a>:</p>
 
 <ul>
   <li>
@@ -253,7 +262,7 @@ final File theSameFile = FileExtensions.operator_divide(
   </li>
 </ul>
 
-<p>The compiler replaces operators with method calls to methods named <code>operator_&lt;operatorName&gt;()</code>. These have to be callable on the left operand, i.e. be a method of the left operands type or be added as an extension to the left operand type. In this case, we use the latter approach, since <a href="http://docs.oracle.com/javase/8/docs/api/java/io/File.html">File</a> as well as <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> are sealed types. To learn more about operators and operator overloading please consult the <a href="305_xbase.html#xbase-expressions-operators">Xbase documentation</a>.</p>
+<p>The compiler replaces operators with method calls to methods named <code>operator_&lt;operatorName&gt;()</code>. These have to be callable on the left operand, i.e. be a method of the left operands type or be added as an extension to the left operand type. In this case, we use the latter approach, since <a href="http://docs.oracle.com/javase/8/docs/api//java/io/File.html">File</a> as well as <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> are sealed types. To learn more about operators and operator overloading please consult the <a href="305_xbase.html#xbase-expressions-operators">Xbase documentation</a>.</p>
 
 <h2 id="builddsl-launch">Run as… Integration</h2>
 

@@ -1,0 +1,329 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+	<title>Continuous Integration (with Maven)</title>
+	<link href="book.css" rel="stylesheet" type="text/css">
+	<link href="code.css" rel="stylesheet" type="text/css">
+	<link rel="home" href="index.html" title="">
+</head>
+<body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
+
+<h1 id="continuous-integration">Continuous Integration (with Maven)</h1>
+
+<p>There are two aspects to consider when it comes to continuous integration. Firstly you may want to have a continuous build of your language that runs all tests and creates an Eclipse update site and other needed artifacts, and secondly you may want to have your language and its corresponding code generator integrated in your application builds. We will discuss both cases in this section along with a set of example projects, which you can clone, inspect or download from <a href="https://github.com/xtext/maven-xtext-example">github.com/xtext/maven-xtext-example</a>.</p>
+
+<p>To follow this section you need a basic understanding of how Maven works. Please read a tutorial on Maven if you don’t know anything about it. </p>
+
+<h2 id="an-overview-of-the-example-projects">An overview of the example projects</h2>
+
+<p>If you have a look at the example, you’ll find seven different projects of which six are for the various aspects of the language and its build. First we have the language’s runtime project, UI project and test project. In addition we need a feature project, an update site project and a project where we put the parent pom. The seventh project is called <code>example-project</code> and is really a small application project that uses the built language and triggers the code generator through a dedicated maven plug-in. Let’s first have a look at how to build the language.</p>
+
+<h2 id="tycho-build">Building an Xtext language with Maven and Tycho</h2>
+
+<p>Although the runtime aspects of an Xtext language is not dependent on Eclipse or its OSGi container, an Xtext language is developed in the form of OSGi bundles. For this kind of builds most people rely on <a href="http://eclipse.org/tycho/">Tycho</a>, which is an OSGi/P2 adapter plug-in for Maven builds. Tycho obtains much information from the OSGi bundle’s manifest. Additionally needed information is configured through the pom.xml file which sits at the root of each project.</p>
+
+<h3 id="the-releng-project-mymavenizedherolanguagereleng">The releng project (my.mavenized.herolanguage.releng)</h3>
+
+<p>All of the projects are aggregated in a parent pom in <code>my.mavenized.herolanguage.releng</code>. Information defined in the parent pom is automatically inherited by the aggregated child projects, so you don’t need to reconfigure the same information over and over again. Here we have configured two additional plug-ins:</p>
+
+<ul>
+  <li>
+    <p>The Xtend compiler plug-in will generate the Java source code for any Xtend files during the ‘generate-sources’ phase     </p>
+
+    <pre><code class="language-xml">&lt;pluginManagement&gt;
+  &lt;plugins&gt;
+    &lt;!-- xtend-maven-plugin is in pluginManagement instead of in plugins
+       so that it doesn't run before the exec-maven-plugin's *.mwe2 gen;
+       this way we can list it after. 
+      --&gt;
+          
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
+      &lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;${xtext.version}&lt;/version&gt;
+      &lt;executions&gt;
+  &lt;execution&gt;
+    &lt;goals&gt;
+      &lt;goal&gt;compile&lt;/goal&gt;
+      &lt;goal&gt;xtend-install-debug-info&lt;/goal&gt;
+      &lt;goal&gt;testCompile&lt;/goal&gt;
+      &lt;goal&gt;xtend-test-install-debug-info&lt;/goal&gt;
+    &lt;/goals&gt;
+  &lt;/execution&gt;
+      &lt;/executions&gt;
+      &lt;configuration&gt;
+  &lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;
+      &lt;/configuration&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/pluginManagement&gt;
+</code></pre>
+  </li>
+  <li>
+    <p>The Tycho plug-in will pick up and use Eclipse plug-in specific configuration data from the projects in order to build Eclipse conformant OSGi bundles, features and an update site.     </p>
+
+    <pre><code class="language-xml">&lt;plugins&gt;
+  &lt;plugin&gt;
+    &lt;groupId&gt;org.eclipse.tycho&lt;/groupId&gt;
+    &lt;artifactId&gt;tycho-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;${tycho-version}&lt;/version&gt;
+    &lt;extensions&gt;true&lt;/extensions&gt;
+  &lt;/plugin&gt;
+&lt;/plugins&gt;
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="the-update-site-project-mymavenizedherolanguageupdatesite">The update site project (my.mavenized.herolanguage.updatesite)</h3>
+
+<p>The project <code>my.mavenized.herolanguage.updatesite</code> denotes the updatesite project and only contains a pom.xml and a file called category.xml. The latter includes information about which features are contained in the update site. As you can see, the <code>category.xml</code> file points to the single feature, which is defined in the project <code>my.mavenized.herolanguage.sdk</code>.</p>
+
+<h3 id="the-feature-project-mymavenizedherolanguagesdk">The feature project (my.mavenized.herolanguage.sdk)</h3>
+
+<p>This is another project made up on configuration data solely. It contains the <code>feature.xml</code> file which points to the Eclipse plug-ins (bundles) included in this feature.</p>
+
+<h3 id="the-core-language-project-mymavenizedherolanguage">The core language project (my.mavenized.herolanguage)</h3>
+
+<p>The <code>pom.xml</code> for the language project contains information about how Maven should run Xtext’s code generator. The first used plug-in cleans the directories containing generated resources during the clean phase: </p>
+
+<pre><code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-clean-plugin&lt;/artifactId&gt;
+  &lt;version&gt;2.5&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;filesets&gt;
+      &lt;fileset&gt;
+  &lt;directory&gt;${basedir}/src-gen&lt;/directory&gt;
+      &lt;/fileset&gt;
+      &lt;fileset&gt;
+  &lt;directory&gt;${basedir}/xtend-gen&lt;/directory&gt;
+      &lt;/fileset&gt;
+      &lt;!-- clean ui plugin as well --&gt;
+      &lt;fileset&gt;
+  &lt;directory&gt;${basedir}/../${project.artifactId}.ui/src-gen&lt;/directory&gt;
+      &lt;/fileset&gt;
+      &lt;fileset&gt;
+  &lt;directory&gt;${basedir}/../${project.artifactId}.ui/xtend-gen&lt;/directory&gt;
+      &lt;/fileset&gt;
+      &lt;!-- clean test fragment as well --&gt;
+      &lt;fileset&gt;
+  &lt;directory&gt;${basedir}/../${project.artifactId}.tests/src-gen&lt;/directory&gt;
+      &lt;/fileset&gt;
+      &lt;fileset&gt;
+  &lt;directory&gt;${basedir}/../${project.artifactId}.tests/xtend-gen&lt;/directory&gt;
+      &lt;/fileset&gt;
+    &lt;/filesets&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<p>The second plug-in invokes the MWE2 file through a standard Java process:</p>
+
+<pre><code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+  &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;1.2.1&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;phase&gt;generate-sources&lt;/phase&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;java&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+  &lt;configuration&gt;
+    &lt;includeProjectDependencies&gt;false&lt;/includeProjectDependencies&gt;
+    &lt;includePluginDependencies&gt;true&lt;/includePluginDependencies&gt;
+    &lt;mainClass&gt;org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher&lt;/mainClass&gt;
+    &lt;arguments&gt;
+      &lt;argument&gt;
+        file://${project.basedir}/src/my/mavenized/GenerateHeroLanguage.mwe2
+      &lt;/argument&gt;
+      &lt;argument&gt;
+          -p
+      &lt;/argument&gt;
+      &lt;argument&gt;
+          runtimeProject=/${project.basedir}
+      &lt;/argument&gt;
+    &lt;/arguments&gt;
+  &lt;/configuration&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
+      &lt;artifactId&gt;org.eclipse.xtext.xtext&lt;/artifactId&gt;
+      &lt;version&gt;2.7.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
+      &lt;artifactId&gt;org.eclipse.xtext.xbase&lt;/artifactId&gt;
+      &lt;version&gt;2.7.1&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<p>You need to adjust the mwe file as well to be able to run it this way. There are three important adjustments you need to make:</p>
+
+<p>First you need to use a <em>platform:resource</em> URI instead of a <em>classpath</em> URI to point to your Xtext grammar file. This is because we don’t have the source folder on the classpath of the exec plug-in. To do so open the mwe file and change the declaration of the grammarURI to a platform URI similar to how it is done in the example: </p>
+
+<pre><code class="language-mwe2">  // grammarURI has to be platform:/resource as it is not on the classpath
+  var grammarURI = "platform:/resource/${projectName}/src/my/mavenized/HeroLanguage.xtext"
+</code></pre>
+
+<p>Next we need to register some URI mappings and make sure we use an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResourceSet.java">XtextResourceSet</a> in the build process. This is only needed if you have ecore file references (also transitively) via platform URI. As we are using Xbase in the example it is needed to resolve the URIs to the Xbase related EPackages.</p>
+
+<pre><code class="language-mwe2">  // use an XtextResourceset throughout the process, which is able to resolve classpath:/ URIs.
+  resourceSet = org.eclipse.xtext.resource.XtextResourceSet:theResourceSet {}
+  
+  // add mappings from platform:/resource to classpath:/
+  uriMap = {
+    from = "platform:/resource/org.eclipse.xtext.xbase/"
+    to = "classpath:/"
+  }
+  uriMap = {
+    from = "platform:/resource/org.eclipse.xtext.common.types/"
+    to = "classpath:/"
+  }
+</code></pre>
+
+<p>Finally we need to tell the generator to use the created <code>XtextResourceSet</code> by adding this line :</p>
+
+<pre><code class="language-mwe2">  ....
+  language = auto-inject {
+    // make sure we use the resourceSet created during standalone setup.
+    forcedResourceSet = theResourceSet
+    ...
+</code></pre>
+
+<h2 id="standalone-build">Integration in Standard Maven Builds</h2>
+
+<p>Now that we can build our language we need to be able to integrate our language compiler in the integration build of application projects. For this purpose a dedicated maven-plugin is available in Maven central. We now refer to the project <code>example-project</code>, which is a standard Java-project that shouldn’t contain any Eclipse plug-in specific information, nor should it be built with Tycho. Let’s have a look at the pom.xml and therein the Xtext plug-in.</p>
+
+<pre><code class="language-xml">&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;
+  &lt;artifactId&gt;xtext-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;2.7.1&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;goals&gt;
+  &lt;goal&gt;generate&lt;/goal&gt;
+      &lt;/goals&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+  &lt;configuration&gt;
+    &lt;languages&gt;
+      &lt;!-- Add additional standalone setups if you have more than one language --&gt;
+      &lt;language&gt;
+  &lt;setup&gt;my.mavenized.HeroLanguageStandaloneSetup&lt;/setup&gt;
+  &lt;outputConfigurations&gt;
+    &lt;outputConfiguration&gt;
+      &lt;outputDirectory&gt;src/main/generated-sources/xtend/&lt;/outputDirectory&gt;
+    &lt;/outputConfiguration&gt;
+  &lt;/outputConfigurations&gt;
+      &lt;/language&gt;
+    &lt;/languages&gt;
+  &lt;/configuration&gt;
+  &lt;dependencies&gt;
+    &lt;!-- add a dependency to the language core bundle, this will only be needed during generation and will not pollute your project's classpath. --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;my.mavenized.herolanguage&lt;/groupId&gt;
+      &lt;artifactId&gt;my.mavenized.herolanguage&lt;/artifactId&gt;
+      &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<p>As the comments suggest, you may add multiple languages in the languages section. A language will use the default outputConfiguration, but you can override the different properties just as you can do within Eclipse preferences. </p>
+
+<h2 id="maven-tycho-hints">Maven Tycho Hints</h2>
+
+<p>Tycho allows you to resolve project dependencies against existing p2 repositories. There are two ways to define target p2 repositories in a Tycho build. The first way is to define the repository URLs directly in the <code>pom.xml</code> using maven <code>&lt;repositories&gt;</code> section. The p2 repositories need to be marked with layout=p2.<br />
+The second way is to use eclipse <a href="https://wiki.eclipse.org/Tycho/Target_Platform#Target_files">target platform files</a>. This approach is much faster, because the target platform resolution is performed only once, while the repository look-ups have to be done for every module. Using the target platform will drastically reduce the build time, especially in bigger projects with a lot of modules.</p>
+
+<p>To further speed up the p2 dependency resolution step, use the concrete build repository instead of a project’s repository or the huge <a href="http://download.eclipse.org/releases/mars/">eclipse common</a> composite repository. In the table below you can find p2 repository URLs for Xtext releases and their dependencies. Versions in parentheses represent the minimal required versions.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Xtext</th>
+      <th>EMF</th>
+      <th>MWE2/MWE</th>
+      <th>Xpand</th>
+      <th>Eclipse</th>
+      <th>All included in</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.4/">2.8.4</a></td>
+      <td><a href="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/core/">2.11.1</a> (2.10.2)</td>
+      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.1/">2.8.1</a> (2.7.1)</td>
+      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201505260349">2.1.0</a> (1.4)</td>
+      <td><a href="http://download.eclipse.org/eclipse/updates/4.5/R-4.5-201506032000/">4.5.1</a> (3.6)</td>
+      <td><a href="http://download.eclipse.org/releases/mars/">Mars SR1*</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.3/">2.8.3</a>, <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.2/">2.8.2</a>, <a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.1/">2.8.1</a></td>
+      <td><a href="http://download.eclipse.org/modeling/emf/emf/updates/2.11/core/R201506010402/">2.11.0</a> (2.10.2)</td>
+      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.0/">2.8.0</a> (2.7.1)</td>
+      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201505260349">2.1.0</a> (1.4)</td>
+      <td><a href="http://download.eclipse.org/eclipse/updates/4.5/R-4.5-201506032000/">4.5.0</a> (3.6)</td>
+      <td><a href="http://download.eclipse.org/releases/mars/201506241002/">Mars R</a></td>
+    </tr>
+    <tr>
+      <td><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/maintenance/R201411190455/">2.7.3</a></td>
+      <td><a href="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452/">2.10.2</a> (2.10)</td>
+      <td><a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201409021051/mwe2lang/">2.7.0</a> <a href="http://download.eclipse.org/modeling/emft/mwe/updates/releases/R201409021027/mwe">1.3.4</a> (2.7.0/1.2)</td>
+      <td><a href="http://download.eclipse.org/modeling/m2t/xpand/updates/releases/R201406030414">2.0.0</a> (1.4)</td>
+      <td><a href="http://download.eclipse.org/eclipse/updates/4.4/R-4.4.2-201502041700">4.4.2</a> (3.6)</td>
+      <td><a href="http://download.eclipse.org/releases/luna/201502271000/">Luna SR2</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The following is an example target platform definition for Xtext 2.8.4 and eclipse 4.5 alias Mars R.</p>
+
+<pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;
+&lt;?pde version="3.8"?&gt;
+&lt;target name="org.xtext.myxtextlanguage.target" sequenceNumber="1"&gt;
+&lt;locations&gt;
+&lt;location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit"&gt;
+&lt;unit id="org.eclipse.jdt.feature.group" version="0.0.0"/&gt;
+&lt;unit id="org.eclipse.platform.feature.group" version="0.0.0"/&gt;
+&lt;unit id="org.eclipse.pde.feature.group" version="0.0.0"/&gt;
+&lt;unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/&gt;
+&lt;unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/&gt;
+&lt;unit id="org.eclipse.xpand" version="0.0.0"/&gt;
+&lt;unit id="org.eclipse.xtend" version="0.0.0"/&gt;
+&lt;unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/&gt;
+&lt;repository location="http://download.eclipse.org/releases/mars/201506241002/"/&gt;
+&lt;/location&gt;
+&lt;location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit"&gt;
+&lt;unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/&gt;
+&lt;repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.1/"/&gt;
+&lt;/location&gt;
+&lt;location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit"&gt;
+&lt;unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/&gt;
+&lt;repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.4/"/&gt;
+&lt;/location&gt;
+&lt;/locations&gt;
+&lt;/target&gt;
+</code></pre>
+
+<hr />
+
+<p><strong><a href="401_migrating_from_1_0_x.html">Next Chapter: Migrating from Xtext 1.0.x to 2.0</a></strong></p>
+
+
+</body>
+</html>

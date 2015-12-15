@@ -210,6 +210,20 @@ th {
 	font-weight: bold
 }
 
-xxtd{
-	border-top:2px solid black;
+td {
+	background-color: #F0F0F0;
+}
+
+.supported {
+	background: url('images/bullet-checkmark.png');
+	background-size: 15px;
+	height:15px;
+    background-repeat: no-repeat;
+}
+
+.not-supported {
+	background: url('images/bullet-checkmark-not-supported.png');
+	background-size: 15px;
+	height:15px;
+    background-repeat: no-repeat;
 }

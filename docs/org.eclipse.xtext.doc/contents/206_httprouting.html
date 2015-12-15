@@ -1,14 +1,23 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>HTTP Routing Language</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
-<h1 id="http-routing">Http Routing Language</h1>
+<h1 id="http-routing">HTTP Routing Language</h1>
 
 <p>This is a little language that lets you dispatch incoming HTTP requests.</p>
 
@@ -89,7 +98,7 @@ Variable :
 
 <h2 id="routing-inferrer">Translation to Java</h2>
 
-<p>In <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend">RouteJvmModelInferrer</a> you can see that a Java class extending the class <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html">HttpServlet</a> is derived. First the <em>Dependencies</em> are translated to Java fields. This is almost a one-to-one mapping.</p>
+<p>In <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend">RouteJvmModelInferrer</a> you can see that a Java class extending the class <a href="https://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServlet.html">HttpServlet</a> is derived. First the <em>Dependencies</em> are translated to Java fields. This is almost a one-to-one mapping.</p>
 
 <pre><code class="language-xtend">// translate the dependencies to fields annotated with @Inject
 for (field : model.declarations.filter(Dependency)) {
@@ -114,7 +123,7 @@ for (route : model.routes.filter[ url != null ]) {
 
 <p>Note that the code in a model inferrer has to be very defensive, because it is called for any kind of broken models. You just cannot assume that the URL is set although it is mandatory in the grammar, because the user might have written syntactically incorrect code.</p>
 
-<p>Next up the handler methods from <a href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html">HttpServlet</a> are implemented such that they dispatch according the URL patterns and when-clauses. Here is a translated example:</p>
+<p>Next up the handler methods from <a href="https://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServlet.html">HttpServlet</a> are implemented such that they dispatch according the URL patterns and when-clauses. Here is a translated example:</p>
 
 <ul>
   <li>

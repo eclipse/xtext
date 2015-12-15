@@ -1,12 +1,21 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>15 Minutes Tutorial - Extended</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
 <h1 id="domainmodel-next-steps">15 Minutes Tutorial - Extended</h1>
 
@@ -136,7 +145,7 @@ class DomainmodelGenerator implements IGenerator {
 
 <ol>
   <li>
-    <p>First of all, you will have to filter the contents of the resource down to the defined entities. Therefore we need to iterate a resource with all its deeply nested elements. This can be achieved with the method <code>getAllContents()</code>. To use the resulting <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java">TreeIterator</a> in a for loop, we use the extension method <code>toIterable()</code> from the built-in library class <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java">IteratorExtensions</a>.     </p>
+    <p>First of all, you will have to filter the contents of the resource down to the defined entities. Therefore we need to iterate a resource with all its deeply nested elements. This can be achieved with the method <code>getAllContents()</code>. To use the resulting <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/TreeIterator.java">TreeIterator</a> in a for loop, we use the extension method <code>toIterable()</code> from the built-in library class <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IteratorExtensions.java">IteratorExtensions</a>.     </p>
 
     <pre><code class="language-xtend">class DomainmodelGenerator implements IGenerator {
   override void doGenerate(Resource resource, IFileSystemAccess fsa) {
@@ -148,7 +157,7 @@ class DomainmodelGenerator implements IGenerator {
 </code></pre>
   </li>
   <li>
-    <p>Now let’s answer the question, how we determine the file name of the Java class, that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> into the generator.     </p>
+    <p>Now let’s answer the question, how we determine the file name of the Java class, that each <em>Entity</em> should yield. This information should be derived from the qualified name of the <em>Entity</em> since Java enforces this pattern. The qualified name itself has to be obtained from a special service that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply inject the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> into the generator.     </p>
 
     <pre><code class="language-xtend">  @Inject extension IQualifiedNameProvider
 </code></pre>
@@ -297,7 +306,7 @@ class DomainmodelGenerator implements IGenerator {
 
 <ol>
   <li>
-    <p>First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test plugin, and select <em>New → Xtend Class</em> from the context menu. Provide a meaningful name and enter the package before you hit finish. The core of the test infrastructure is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java">XtextRunner</a> and the language specific <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java">IInjectorProvider</a>. Both have to be provided by means of class annotations:     </p>
+    <p>First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test plugin, and select <em>New → Xtend Class</em> from the context menu. Provide a meaningful name and enter the package before you hit finish. The core of the test infrastructure is the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/XtextRunner.java">XtextRunner</a> and the language specific <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.junit4/src/org/eclipse/xtext/junit4/IInjectorProvider.java">IInjectorProvider</a>. Both have to be provided by means of class annotations:     </p>
 
     <pre><code class="language-xtend">  import org.eclipse.xtext.junit4.XtextRunner
   import org.example.domainmodel.DomainmodelInjectorProvider
@@ -350,7 +359,7 @@ def void checkNameStartsWithCapital(Entity entity) {
 }
 </code></pre>
 
-<p>Any name for the method will do. The important thing is the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">Check</a> annotation that advises the framework to use the method as a validation rule. If the name starts with a lower case letter, a warning will be attached to the name of the <em>Entity</em>.</p>
+<p>Any name for the method will do. The important thing is the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java">Check</a> annotation that advises the framework to use the method as a validation rule. If the name starts with a lower case letter, a warning will be attached to the name of the <em>Entity</em>.</p>
 
 <p>The second validation rule is straight-forward, too. We traverse the inheritance hierarchy of the <em>Entity</em> and look for features with equal names.</p>
 

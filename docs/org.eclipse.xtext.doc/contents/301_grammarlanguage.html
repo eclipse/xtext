@@ -1,16 +1,25 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>The Grammar Language</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
 <h1 id="grammarLanguage">The Grammar Language</h1>
 
-<p>The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext">grammar language</a> is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages. The main idea is to describe the concrete syntax and how it is mapped to an in-memory representation - the semantic model. This model will be produced by the parser on-the-fly when it consumes an input file.</p>
+<p>The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext">grammar language</a> is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages. The main idea is to describe the concrete syntax and how it is mapped to an in-memory representation - the semantic model. This model will be produced by the parser on-the-fly when it consumes an input file.</p>
 
 <h2 id="statemachine">A First Example</h2>
 
@@ -138,7 +147,7 @@ Transition :
 
 <p><code>import "http://www.xtext.org/example/Domainmodel" as dmodel</code></p>
 
-<p>In order to be able to find the referenced package in the language generator, some configuration values have to be set. It is usually the easiest way to register the generated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> interface in the workflow. The <a href="https://github.com/eclipse/mwe/blob/v2.8.0/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> offers the respective methods to achieve this. Simply state something like this in the workflow:</p>
+<p>In order to be able to find the referenced package in the language generator, some configuration values have to be set. It is usually the easiest way to register the generated <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackage</a> interface in the workflow. The <a href="https://github.com/eclipse/mwe/blob/v2.7.1/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java">StandaloneSetup</a> offers the respective methods to achieve this. Simply state something like this in the workflow:</p>
 
 <pre><code class="language-mwe2">bean = StandaloneSetup {
   platformUri = "${runtimeProject}/../.."
@@ -202,7 +211,7 @@ Transition :
 
 <p><code>import 'platform:/resource/my.project/model/SecretCompartments.ecore'</code></p>
 
-<p>If you want to mix generated and imported Ecore models you’ll have to configure the generator fragment in your MWE file responsible for <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java">generating the Ecore classes</a> with resource URIs that point to the <a href="308_emf_integration.html#emf-codegen">generator models</a> of the referenced Ecore models.</p>
+<p>If you want to mix generated and imported Ecore models you’ll have to configure the generator fragment in your MWE file responsible for <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java">generating the Ecore classes</a> with resource URIs that point to the <a href="308_emf_integration.html#emf-codegen">generator models</a> of the referenced Ecore models.</p>
 
 <p>The <em>*.genmodel</em> provides all kind of generator configuration used by EMF’s code generator. Xtext will automatically create a generator model for derived <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">EPackages</a>, but if it references an existing, imported Ecore model, the code generator needs to know how that code was generated in order to generate valid Java code. </p>
 
@@ -230,7 +239,7 @@ Transition :
 }
 </code></pre>
 
-<p>See the section on <a href="#jvmtypes">Referring Java Types</a> for a full explanation of this useful feature.</p>
+<p>See the section on <a href="305_xbase.html#jvmtypes">Referring Java Types</a> for a full explanation of this useful feature.</p>
 
 <h4 id="ecore-model-aliases-for-epackages">Ecore Model Aliases for EPackages</h4>
 
@@ -271,7 +280,7 @@ import 'http://www.eclipse.org/anotherPackage' as another
 
 <p>It says that a token <em>ID</em> starts with an optional <code>'^'</code> character (caret), followed by a letter <code>('a'..'z'|'A'..'Z')</code> or underscore <code>'_'</code> followed by any number of letters, underscores and numbers <code>('0'..'9')</code>. </p>
 
-<p>The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the <em>ID</em> rule’s <a href="#value-converter">ValueConverter</a>. </p>
+<p>The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed by the <em>ID</em> rule’s <a href="303_runtime_concepts.html#value-converter">ValueConverter</a>. </p>
 
 <p>This is the simplified formal definition of terminal rules:</p>
 
@@ -293,7 +302,7 @@ import 'http://www.eclipse.org/anotherPackage' as another
   ('0'..'9')+;
 </code></pre>
 
-<p>This means that the terminal rule <em>INT</em> returns instances of <code>ecore::EInt</code>. It is possible to define any kind of data type here, which just needs to be an instance of <code>ecore::EDataType</code>. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java">IValueConverterService</a> (cf. <a href="#value-converter">value converters</a>). The value converter is also the service that allows to remove escape sequences or semantically unnecessary character like quotes from string literals or the caret <code>'^'</code> from identifiers. Its implementation needs to be registered as a service (cf. <a href="#dependency-injection">Service Framework</a>).</p>
+<p>This means that the terminal rule <em>INT</em> returns instances of <code>ecore::EInt</code>. It is possible to define any kind of data type here, which just needs to be an instance of <code>ecore::EDataType</code>. In order to tell the framework how to convert the parsed string to a value of the declared data type, you need to provide your own implementation of <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java">IValueConverterService</a> (cf. <a href="303_runtime_concepts.html#value-converter">value converters</a>). The value converter is also the service that allows to remove escape sequences or semantically unnecessary character like quotes from string literals or the caret <code>'^'</code> from identifiers. Its implementation needs to be registered as a service (cf. <a href="302_configuration.html#dependency-injection">Service Framework</a>).</p>
 
 <h4 id="extended-backus-naur-form-expressions">Extended Backus-Naur Form Expressions</h4>
 
@@ -434,14 +443,14 @@ terminal STRING  :
 
 <p><code>name=ID</code></p>
 
-<p>The left hand side refers to a feature <em>name</em> of the current object (which has the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> <em>State</em> in this case). The right hand side can be a rule call, a keyword, a <a href="301_grammarlanguage.html#cross-references">cross-reference</a> or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <em>EString</em> in this case, the feature <em>name</em> needs to be of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> as well.</p>
+<p>The left hand side refers to a feature <em>name</em> of the current object (which has the <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">EClass</a> <em>State</em> in this case). The right hand side can be a rule call, a keyword, a <a href="301_grammarlanguage.html#cross-references">cross-reference</a> or an alternative comprised by the former. The type of the feature needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <em>EString</em> in this case, the feature <em>name</em> needs to be of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">EString</a> as well.</p>
 
 <p><strong>Assignment operators.</strong> There are three different assignment operators, each with different semantics.</p>
 
 <ol>
   <li>The simple equal sign <code>=</code> is the straight forward assignment, and used for features which take only one element.</li>
   <li>The <code>+=</code> sign (the add operator) expects a multi-valued feature and adds the value on the right hand to that feature, which is a list feature.</li>
-  <li>The <code>?=</code> sign (boolean assignment operator) expects a feature of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">EBoolean</a> and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.</li>
+  <li>The <code>?=</code> sign (boolean assignment operator) expects a feature of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Boolean.html">EBoolean</a> and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.</li>
 </ol>
 
 <p>The used assignment operator does not influence the cardinality of the expected symbols on the right hand side. </p>
@@ -473,7 +482,7 @@ Event returns MyEvent : ....;
 
 <p>Looking at the syntax definition for cross-references, there is an optional part starting with a vertical bar (pipe) followed by <em>CrossReferenceableTerminal</em>. This is the part describing the concrete text, from which the cross-link later should be established. If the terminal is omitted, it is expected to be the rule with the name <em>ID</em> - if one can be found. The terminal is mandatory for languages that do not define a rule with the name <em>ID</em>.</p>
 
-<p>Have a look at the <a href="#linking">linking section</a> in order to understand how linking is done.</p>
+<p>Have a look at the <a href="303_runtime_concepts.html#linking">linking section</a> in order to understand how linking is done.</p>
 
 <h5 id="unordered-groups">Unordered Groups</h5>
 
@@ -704,9 +713,9 @@ Fullname:
 ;
 </code></pre>
 
-<p>Note that rules that do not call other parser rules and do neither contain any actions nor <a href="301_grammarlanguage.html#assignments">assignments</a> are considered to be data type rules, and the data type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> is implied if none has been explicitly declared.</p>
+<p>Note that rules that do not call other parser rules and do neither contain any actions nor <a href="301_grammarlanguage.html#assignments">assignments</a> are considered to be data type rules, and the data type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">EString</a> is implied if none has been explicitly declared.</p>
 
-<p><a href="#value-converter">Value converters</a> are used to transform the parsed string to the actually returned data type value.</p>
+<p><a href="303_runtime_concepts.html#value-converter">Value converters</a> are used to transform the parsed string to the actually returned data type value.</p>
 
 <h3 id="enum-rules">Enum Rules</h3>
 
@@ -846,7 +855,7 @@ else
     <p>an <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttribute</a> in each current return type     </p>
 
     <ul>
-      <li>of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html">EBoolean</a> for each feature assignment using the <code>?=</code> operator. No further <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReferences</a> or <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttributes</a> will be generated from this assignment.</li>
+      <li>of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Boolean.html">EBoolean</a> for each feature assignment using the <code>?=</code> operator. No further <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java">EReferences</a> or <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">EAttributes</a> will be generated from this assignment.</li>
       <li>for each assignment with the <code>=</code> or <code>+=</code> operator calling a terminal rule. Its type will be the return type of the called rule.</li>
     </ul>
   </li>
