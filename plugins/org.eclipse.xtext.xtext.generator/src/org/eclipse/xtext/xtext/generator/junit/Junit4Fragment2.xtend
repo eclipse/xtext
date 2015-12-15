@@ -2,7 +2,7 @@ package org.eclipse.xtext.xtext.generator.junit
 
 import com.google.inject.Inject
 import com.google.inject.Injector
-import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
+import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess
@@ -11,7 +11,7 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 
-class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
+class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
 
@@ -53,7 +53,8 @@ class Junit4Fragment2 extends AbstractXtextGeneratorFragment {
 			)
 		]
 		generateInjectorProvider.writeTo(projectConfig.runtimeTest.srcGen)
-		generateExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)
+		if (isGenerateStub)
+			generateExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)
 		if(projectConfig.eclipsePlugin.srcGen !== null)
 			generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginTest.srcGen)
 	}
