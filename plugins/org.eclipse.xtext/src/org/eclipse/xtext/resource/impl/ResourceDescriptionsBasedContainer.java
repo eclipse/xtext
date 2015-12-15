@@ -130,7 +130,7 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	
 	@Override
 	public boolean hasResourceDescription(URI uri) {
-		return true;
+		return descriptions.getResourceDescription(uri) != null;
 	}
 	
 	protected IResourceDescriptions getDescriptions() {
