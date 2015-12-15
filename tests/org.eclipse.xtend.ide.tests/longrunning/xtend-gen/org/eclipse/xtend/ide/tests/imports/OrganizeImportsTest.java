@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -1206,6 +1207,111 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("\t");
       _builder_2.append("Inner inner;");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.assertIsOrganizedTo(_builder_1, _builder_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  @Ignore
+  public void testBug482371_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package p");
+      _builder.newLine();
+      _builder.append("class Outer {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("annotation Inner {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._workbenchTestHelper.createFile("/p/Outer.xtend", _builder.toString());
+      IResourcesSetupUtil.waitForBuild();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package p");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import p.Outer.Inner");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@Inner");
+      _builder_1.newLine();
+      _builder_1.append("class Client extends Outer {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package p");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("import p.Outer.Inner");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("@Inner");
+      _builder_2.newLine();
+      _builder_2.append("class Client extends Outer {");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.assertIsOrganizedTo(_builder_1, _builder_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  @Ignore
+  public void testBug482371_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package p");
+      _builder.newLine();
+      _builder.append("class Outer {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("annotation Inner {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._workbenchTestHelper.createFile("/p/Outer.xtend", _builder.toString());
+      IResourcesSetupUtil.waitForBuild();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package p");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import p.Outer.Inner");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Client extends Outer {");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("@Inner");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void foo() {}");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package p");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("class Client extends Outer {");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("@Inner");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("def void foo() {}");
+      _builder_2.newLine();
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();

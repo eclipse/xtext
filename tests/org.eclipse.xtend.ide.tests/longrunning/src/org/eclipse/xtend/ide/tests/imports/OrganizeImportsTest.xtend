@@ -1,17 +1,18 @@
 package org.eclipse.xtend.ide.tests.imports
 
 import com.google.inject.Inject
+import org.eclipse.core.resources.IFile
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.xbase.imports.ImportOrganizer
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.core.resources.IFile
-import org.eclipse.xtend.core.xtend.XtendFile
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {
 	
@@ -645,6 +646,70 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			
 			public class Client {
 				Inner inner;
+			}
+		''')
+	}
+	
+	@Test
+	@Ignore
+	def void testBug482371_01() {
+		createFile('/p/Outer.xtend',
+			'''
+			package p
+			class Outer {
+				annotation Inner {}
+			}
+			''')
+		waitForBuild
+		'''		
+			package p
+
+			import p.Outer.Inner
+			
+			@Inner
+			class Client extends Outer {
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			import p.Outer.Inner
+			
+			@Inner
+			class Client extends Outer {
+			}
+		''')
+	}
+	
+	@Test
+	@Ignore
+	def void testBug482371_02() {
+		createFile('/p/Outer.xtend',
+			'''
+			package p
+			class Outer {
+				annotation Inner {}
+			}
+			''')
+		waitForBuild
+		'''		
+			package p
+
+			import p.Outer.Inner
+			
+			class Client extends Outer {
+
+				@Inner
+				def void foo() {}
+
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			class Client extends Outer {
+			
+				@Inner
+				def void foo() {}
+
 			}
 		''')
 	}
