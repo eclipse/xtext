@@ -21,11 +21,11 @@ ideaDevelopment {
 }
 
 if (file("src").exists()) {
-	apply plugin: org.xtext.gradle.idea.IdeaComponentPlugin
+	apply plugin: 'java'
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 
 	dependencies {
-		ideaProvided files(((URLClassLoader)javax.tools.ToolProvider.getSystemToolClassLoader()).getURLs()).filter({it.name == "tools.jar"})
+		ideaProvided ideaDevelopment.toolsJar()
 	}
 
 	def isTestProject = name.endsWith('tests')

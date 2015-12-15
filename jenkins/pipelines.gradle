@@ -16,7 +16,7 @@ def gradleBuilds = ['web-deploy']
 
 branches.each { branch ->
 	def testJobs = [allSuites, branch.platforms.keySet()]
-		.combinations{ suite, platformName -> 
+		.combinations{ suite, platformName ->
 			def platform = branch.platforms[platformName]
 			new TestJob(branch: branch.name, branchDisplayName: branch.displayName, suite: suite, platformName: platformName, target: platform.target, jdk: platform.jdk, buildSystem: 'buckminster')
 		}
@@ -34,9 +34,9 @@ branches.each { branch ->
 		}
 
 	jenkins {
-		
+
 		jobs.create("xtext-${branch.displayName}").definition {
-			xml templates.push.override { config -> 
+			xml templates.push.override { config ->
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 				config.description = "This job was generated"
 				config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
@@ -46,60 +46,54 @@ branches.each { branch ->
 					.projects	= testJobs.findAll{onPushSuites.contains(it.suite)}.collect{it.name}.join(',')
 				}
 		}
-		
-		gradleBuilds.each { job -> 
+
+		gradleBuilds.each { job ->
 			jobs.create("xtext-web-${branch.displayName}").definition {
-				xml templates.gradleBuild.override { config -> 
+				xml templates.gradleBuild.override { config ->
 					config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 					config.description = "This job was generated"
-					def props = new Properties()
-					props.load(new FileInputStream(project.file("scripts/${job}.txt")))
-					
-					def builder = config.builders.'hudson.plugins.gradle.Gradle'
-					props.each { prop ->
-						builder.'*'.find { node-> node.name() == prop.key}.replaceBody(prop.value)
-					}
+					applyGradleConfiguration(config, job)
 				}
 			}
 		}
-		
+
 		jobs.create("target-platforms-${branch.displayName}").definition {
-			xml templates.targetPlatforms.override { config -> 
+			xml templates.targetPlatforms.override { config ->
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 				config.description = "This job was generated"
 				def shellCmd = '''rm -f ${WORKSPACE}/*.b3agg*
 				b3home=/opt/jenkins/tools/b3-headless
 				b3FilesDir=${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring
 				'''.stripIndent()
-				
+
 				def platforms = ['Helios', 'Indigo', 'Juno', 'Kepler', 'Luna', 'Mars', 'Latest']
-				
+
 				platforms.each {
 					shellCmd = shellCmd + '${b3home}/b3 aggregate --buildModel ${b3FilesDir}/'+it+'.b3aggr --action ${B3_ACTION}\n'
 				}
-				
+
 				shellCmd = shellCmd + 'rm -rf ' + platforms.join(' ') + '\nmv $b3FilesDir/* .'
 
 				config.builders.'hudson.tasks.Shell'.command = shellCmd
 				config.publishers.'hudson.tasks.Fingerprinter'.targets = platforms.collect { it+'/final/*'}.join(',')
-				
+
 				config.publishers.'hudson.plugins.parameterizedtrigger.BuildTrigger'.configs
 					.'hudson.plugins.parameterizedtrigger.BuildTriggerConfig'
 					.projects	= testJobs.findAll{slowSuites.contains(it.suite) || generatorSuites.contains(it.suite)}.collect{it.name}.join(',')
 				}
 		}
-		
-		testJobs.each { job -> 
+
+		testJobs.each { job ->
 			jobs.create(job.name).definition {
 				def template = templates["${job.buildSystem}StyleTest"]
-				xml template.override { config -> 
+				xml template.override { config ->
 					config.properties.'hudson.model.ParametersDefinitionProperty'
 						.parameterDefinitions.'hudson.model.ChoiceParameterDefinition'
 						.choices.a.string = job.target
 					config.scm.branches.'hudson.plugins.git.BranchSpec'[1].name = job.branch
 					config.description = "This job was generated"
 					config.jdk = job.jdk
-					
+
 					def trigger = config.triggers.'org.jenkinsci.plugins.ghprb.GhprbTrigger'
 					trigger.triggerPhrase = "Jenkins ${job.name}"
 					trigger.commitStatusContext = "Jenkins/${job.name}"
@@ -118,7 +112,7 @@ branches.each { branch ->
 						config.buildWrappers.'hudson.plugins.build__timeout.BuildTimeoutWrapper'
 							.strategy.timeoutMinutes = 180
 					}
-					
+
 					if (smokeSuites.contains(job.suite)) {
 						config.triggers.appendNode {
 							'hudson.triggers.TimerTrigger'() {
@@ -128,7 +122,7 @@ branches.each { branch ->
 						config.buildWrappers.'hudson.plugins.build__timeout.BuildTimeoutWrapper'
 							.strategy.timeoutMinutes = 600
 					}
-					
+
 					if (job.buildSystem == 'buckminster') {
 						config.builders.'hudson.plugins.copyartifact.CopyArtifact'[0]
 							.project = "xtext-${branch.displayName}"
@@ -141,7 +135,7 @@ branches.each { branch ->
 							builder.installationName = 'buckminster-4.4'
 						}
 						if (generatorSuites.contains(job.suite)) {
-						
+
 							if(branch.name == 'master') {
 								params += '\n-DECLIPSE.TARGET.ALIAS=Stable\n-DWITH.MWE2=true\n-DEV.BUILD=false\n-Dforce.javadoc=false\n-Dantlr_gen.p2.repository=http://download.itemis.de/updates/nightly\n-Demf.target.platform=http://download.eclipse.org/modeling/emf/emf/updates/nightly/'
 							} else {
@@ -152,13 +146,23 @@ branches.each { branch ->
 						builder.commands = testScripts[job.suite]
 						builder.params = params
 					}
-					
+
 					if (job.buildSystem == 'gradle') {
-						config.builders.'hudson.plugins.gradle.Gradle'.tasks = testScripts[job.suite]
+						applyGradleConfiguration(config, job.suite)
 					}
 				}
 			}
 		}
+	}
+}
+
+def applyGradleConfiguration(config, scriptName) {
+	def props = new Properties()
+	props.load(new FileInputStream(project.file("scripts/${scriptName}.txt")))
+
+	def builder = config.builders.'hudson.plugins.gradle.Gradle'
+	props.each { prop ->
+		builder.'*'.find { node-> node.name() == prop.key}.replaceBody(prop.value)
 	}
 }
 
@@ -171,7 +175,7 @@ class TestJob {
 	String branch
 	String branchDisplayName
 	String buildSystem
-	
+
 	def getName() {
 		suite + "-" + branchDisplayName + "-" + platformName
 	}

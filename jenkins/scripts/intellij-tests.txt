@@ -1,1 +1,2 @@
-clean :intellij:check
+tasks = clean check
+buildFile = intellij/build.gradle

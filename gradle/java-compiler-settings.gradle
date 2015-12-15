@@ -25,9 +25,7 @@ if (!isBuildServer) {
 		    into 'build/classes/main'
 		}
 
-		classes {
-			dependsOn(copyFromBin)
-		}
+		classes.dependsOn(copyFromBin)
 	}
 }
 

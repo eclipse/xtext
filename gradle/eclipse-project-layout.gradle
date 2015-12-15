@@ -11,7 +11,7 @@ sourceSets {
 		java.srcDirs = ['src', 'xtend-gen', 'src-gen', 'src-gen2', 'tests']
 		resources {
 			srcDirs = ['src', 'src-gen', 'src-gen2', 'tests']
-			exclude '**/*._trace', '**/*.xtendbin', '**/*.xtend', '**/*.mwe2'
+			exclude '**/*._trace', '**/*.xtendbin', '**/*.xtend'
 		}
 	}
 	configure(isTestProject? main : test)  {

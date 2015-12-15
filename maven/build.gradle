@@ -5,7 +5,7 @@ task compileEclipsePlugins(type: MavenExec) {
 }
 
 task install(type: MavenExec) {
-	description = 'Installs all Maven projects (Eclipse plugins + Maven plugins) into the local repository' 
+	description = 'Installs all Maven projects (Eclipse plugins + Maven plugins) into the local repository'
 	args 'install', '-Dmaven.test.skip=true', '-Dmaven.javadoc.skip=true'
 	workingDir 'org.eclipse.xtext.parent'
 }
@@ -23,6 +23,9 @@ class MavenExec extends Exec {
 		}
 		if (project.gradle.startParameter.logLevel == LogLevel.DEBUG) {
 			args '-X'
+		}
+		if (project.isBuildServer) {
+			args '-Dmaven.repo.local=${project.gradle.gradleUserHomeDir}/.m2'
 		}
 		args '-T', '1C'
 	}

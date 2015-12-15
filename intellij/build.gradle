@@ -13,16 +13,17 @@ buildscript {
 }
 
 apply plugin: 'org.xtext.idea-repository'
-apply plugin: 'org.xtext.idea-aggregator'
+
+ideaDevelopment {
+	pluginDependencies {
+		project 'org.eclipse.xtext.idea'
+		project 'org.eclipse.xtend.idea'
+		project 'org.eclipse.xtext.xtext.idea'
+	}
+}
 
 if (version.endsWith("-SNAPSHOT")) {
 	ideaRepository.rootUrl = 'https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository'
 } else {
 	ideaRepository.rootUrl = "http://download.eclipse.org/modeling/tmf/xtext/idea/${version}"
-}
-
-ideaRepository.exclude '**/*entities*/**', '**/*sdomain*/**', '**/*purexbase*/**', '**/*testlanguages*/**'
-
-task check {
-	dependsOn subprojects*.check
 }
