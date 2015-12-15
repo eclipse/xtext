@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <toc topic="contents/index.html" label="Xtext Documentation">
-	<topic href="contents/101_five_minutes.html" label="Getting Started">
-		<topic href="contents/101_five_minutes.html" label="5 Minutes Tutorial">
-			<topic href="contents/101_five_minutes.html#new-project" label="Creating A New Xtext Project">
-			</topic>
-			<topic href="contents/101_five_minutes.html#run-workflow" label="Generating The Language Infrastructure">
-			</topic>
-			<topic href="contents/101_five_minutes.html#testing-the-editor" label="Try The Editor">
-			</topic>
-			<topic href="contents/101_five_minutes.html#five-minutes-conclusion" label="Conclusion">
-			</topic>
-		</topic>
+	<topic href="contents/102_domainmodelwalkthrough.html" label="Getting Started">
 		<topic href="contents/102_domainmodelwalkthrough.html" label="15 Minutes Tutorial">
 			<topic href="contents/102_domainmodelwalkthrough.html#create-a-new-xtext-project" label="Create A New Xtext Project">
 			</topic>
@@ -115,7 +105,7 @@
 			<topic href="contents/205_guice.html#guice-validation" label="Validation">
 			</topic>
 		</topic>
-		<topic href="contents/206_httprouting.html" label="Http Routing Language">
+		<topic href="contents/206_httprouting.html" label="HTTP Routing Language">
 			<topic href="contents/206_httprouting.html#routing-solution" label="Overview">
 			</topic>
 			<topic href="contents/206_httprouting.html#routing-running" label="Running the Example">
@@ -214,14 +204,6 @@
 				<topic href="contents/302_configuration.html#obtaining-an-injector" label="Obtaining an Injector">
 				</topic>
 			</topic>
-			<topic href="contents/302_configuration.html#continuous-integration" label="Continuous Integration (with Maven)">
-				<topic href="contents/302_configuration.html#an-overview-of-the-example-projects" label="An overview of the example projects">
-				</topic>
-				<topic href="contents/302_configuration.html#tycho-build" label="Building an Xtext language with Maven and Tycho">
-				</topic>
-				<topic href="contents/302_configuration.html#standalone-build" label="Integration in Standard Maven Builds">
-				</topic>
-			</topic>
 		</topic>
 		<topic href="contents/303_runtime_concepts.html" label="Runtime Concepts">
 			<topic href="contents/303_runtime_concepts.html#runtime-setup" label="Runtime Setup (ISetup)">
@@ -290,7 +272,7 @@
 				<topic href="contents/303_runtime_concepts.html#formatting-old" label="Before Xtext 2.8">
 				</topic>
 			</topic>
-			<topic href="contents/303_runtime_concepts.html#fragmentProvider" label="Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)">
+			<topic href="contents/303_runtime_concepts.html#fragment-provider" label="Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)">
 			</topic>
 			<topic href="contents/303_runtime_concepts.html#encoding" label="Encoding in Xtext">
 				<topic href="contents/303_runtime_concepts.html#encoding-at-language-design-time" label="Encoding at Language Design Time">
@@ -393,7 +375,7 @@
 				</topic>
 			</topic>
 		</topic>
-		<topic href="contents/306_mwe2.html" label="MWE2">
+		<topic href="contents/306_mwe2.html" label="MWE 2">
 			<topic href="contents/306_mwe2.html#mwe2-exampe" label="Examples">
 				<topic href="contents/306_mwe2.html#mwe2-hello-world" label="The Simplest Workflow">
 				</topic>
@@ -445,7 +427,7 @@
 				</topic>
 			</topic>
 		</topic>
-		<topic href="contents/308_emf_integration.html" label="Integration with EMF and Other EMF Editors">
+		<topic href="contents/308_emf_integration.html" label="Integration with EMF">
 			<topic href="contents/308_emf_integration.html#model-metamodel" label="Model, Ecore Model, and Ecore">
 			</topic>
 			<topic href="contents/308_emf_integration.html#emf-codegen" label="EMF Code Generation">
@@ -459,6 +441,54 @@
 				</topic>
 				<topic href="contents/308_emf_integration.html#gmf-integration-stage3" label="Stage 3: A Popup Xtext Editor (experimental)">
 				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/310_web_integration.html" label="Web Editor Support">
+			<topic href="contents/310_web_integration.html#client" label="The Client">
+				<topic href="contents/310_web_integration.html#javascript-api" label="JavaScript API">
+				</topic>
+				<topic href="contents/310_web_integration.html#options" label="Options">
+				</topic>
+				<topic href="contents/310_web_integration.html#getting-text-content" label="Getting the Text Content">
+				</topic>
+				<topic href="contents/310_web_integration.html#operation-modes" label="Operation Modes">
+				</topic>
+				<topic href="contents/310_web_integration.html#syntax-highlighting" label="Syntax Highlighting">
+				</topic>
+				<topic href="contents/310_web_integration.html#invoking-services" label="Invoking Services">
+				</topic>
+				<topic href="contents/310_web_integration.html#options-reference" label="Full List of Options">
+				</topic>
+			</topic>
+			<topic href="contents/310_web_integration.html#server" label="The Server">
+				<topic href="contents/310_web_integration.html#content-assist" label="Content Assist">
+				</topic>
+				<topic href="contents/310_web_integration.html#semantic-highlighting" label="Semantic Highlighting">
+				</topic>
+				<topic href="contents/310_web_integration.html#mark-occurrences" label="Mark Occurrences">
+				</topic>
+				<topic href="contents/310_web_integration.html#hover-info" label="Hover Information">
+				</topic>
+				<topic href="contents/310_web_integration.html#persistence" label="Persistence">
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/350_continuous_integration.html" label="Continuous Integration (with Maven)">
+			<topic href="contents/350_continuous_integration.html#an-overview-of-the-example-projects" label="An overview of the example projects">
+			</topic>
+			<topic href="contents/350_continuous_integration.html#tycho-build" label="Building an Xtext language with Maven and Tycho">
+				<topic href="contents/350_continuous_integration.html#the-releng-project-mymavenizedherolanguagereleng" label="The releng project (my.mavenized.herolanguage.releng)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-update-site-project-mymavenizedherolanguageupdatesite" label="The update site project (my.mavenized.herolanguage.updatesite)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-feature-project-mymavenizedherolanguagesdk" label="The feature project (my.mavenized.herolanguage.sdk)">
+				</topic>
+				<topic href="contents/350_continuous_integration.html#the-core-language-project-mymavenizedherolanguage" label="The core language project (my.mavenized.herolanguage)">
+				</topic>
+			</topic>
+			<topic href="contents/350_continuous_integration.html#standalone-build" label="Integration in Standard Maven Builds">
+			</topic>
+			<topic href="contents/350_continuous_integration.html#maven-tycho-hints" label="Maven Tycho Hints">
 			</topic>
 		</topic>
 	</topic>
@@ -497,6 +527,20 @@
 				</topic>
 				<topic href="contents/402_migrating_from_0_7.html#noteworthy-api-changes" label="Noteworthy API Changes">
 				</topic>
+			</topic>
+		</topic>
+	</topic>
+	<topic href="contents/faq.html" label="Frequently Asked Questions">
+		<topic href="contents/faq.html" label="Overview">
+			<topic href="contents/faq.html#what-is-xtext" label="What is Xtext?">
+			</topic>
+			<topic href="contents/faq.html#how-does-it-work" label="How Does It Work?">
+			</topic>
+			<topic href="contents/faq.html#who-uses-xtext" label="Who Uses Xtext?">
+			</topic>
+			<topic href="contents/faq.html#who-is-behind-xtext" label="Who is Behind Xtext?">
+			</topic>
+			<topic href="contents/faq.html#DSL" label="What is a Domain-Specific Language">
 			</topic>
 		</topic>
 	</topic>

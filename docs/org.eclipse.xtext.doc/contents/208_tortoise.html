@@ -1,12 +1,21 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>Little Tortoise</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
 <h1 id="tortoise">Little Tortoise</h1>
 
@@ -14,7 +23,7 @@
 
 <p><img src="images/tortoise_screenshot.png" alt="" /></p>
 
-<p>The goal is a language to control a turtle drawing an image. Technically, this example will teach you how to adapt and use the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a> for your own languages. </p>
+<p>The goal is a language to control a turtle drawing an image. Technically, this example will teach you how to adapt and use the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">XbaseInterpreter</a> for your own languages. </p>
 
 <h2 id="tortoise-solution">Overview</h2>
 
@@ -136,7 +145,7 @@ Executable:
 
 <h2 id="tortoise-interpreter">Interpreter</h2>
 
-<p>The Xbase language library does not only provide a compiler that generates Java code, but also an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">interpreter</a>. This has been adapted to execute our <em>Programs</em>. </p>
+<p>The Xbase language library does not only provide a compiler that generates Java code, but also an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">interpreter</a>. This has been adapted to execute our <em>Programs</em>. </p>
 
 <p>After all an interpreter is just a big visitor. For each expression type, it has an evaluation method, that recursively calls the evaluation methods for the subexpressions for its arguments. The methods also pass an execution context storing all temporary state such as local variables.</p>
 
@@ -164,7 +173,7 @@ Executable:
   }
 </code></pre>
 
-<p>One thing you have to know about the Java inferrence is that when creating Java elements using the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>, the infrastructure stores the information which elements have been inferred from which source elements. To navigate these traces, we use the Xbase service <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">IJvmModelAssociations</a>. So to detect whether a <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">JvmOperation</a> is inferred, we check whether it has a source element. If so, we have to setup an execution context binding <code>this</code> and the parameters as local variables and then execute the method’s body using the interpreter. </p>
+<p>One thing you have to know about the Java inferrence is that when creating Java elements using the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java">JvmTypesBuilder</a>, the infrastructure stores the information which elements have been inferred from which source elements. To navigate these traces, we use the Xbase service <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java">IJvmModelAssociations</a>. So to detect whether a <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java">JvmOperation</a> is inferred, we check whether it has a source element. If so, we have to setup an execution context binding <code>this</code> and the parameters as local variables and then execute the method’s body using the interpreter. </p>
 
 <p>To start the interpretation we have to do almost the same: Setup the execution context and then evaluate the <em>Program’s</em> body. The respective code is </p>
 
@@ -196,7 +205,7 @@ Executable:
 
 <h2 id="tortoise-additions">Literal Classes</h2>
 
-<p>To make the static methods and fields of <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Math.html">Math</a> and <a href="https://github.com/eclipse/gef/blob/master/org.eclipse.draw2d/src/org/eclipse/draw2d/ColorConstants.java">ColorConstants</a> callable directly, we provided the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/scoping/TortoiseShellImplicitlyImportedFeatures.xtend">TortoiseShellImplicitlyImportedFeatures</a>:</p>
+<p>To make the static methods and fields of <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/Math.html">Math</a> and <a href="https://github.com/eclipse/gef/blob/master/org.eclipse.draw2d/src/org/eclipse/draw2d/ColorConstants.java">ColorConstants</a> callable directly, we provided the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/scoping/TortoiseShellImplicitlyImportedFeatures.xtend">TortoiseShellImplicitlyImportedFeatures</a>:</p>
 
 <pre><code class="language-xtend">class TortoiseShellImplicitlyImportedFeatures extends ImplicitlyImportedFeatures {
   override protected getStaticImportClasses() {

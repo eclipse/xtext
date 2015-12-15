@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Continuous Integration
+title: Continuous Integration (with Maven)
 part: Reference Documentation
 upsite:
   eclipse: http://download.eclipse.org/
@@ -10,21 +10,21 @@ upsite:
   xpand: http://download.eclipse.org/modeling/m2t/xpand/updates/
 ---
 
-# Continuous Integration (with Maven)
+# {{page.title}} {#continuous-integration}
 
 There are two aspects to consider when it comes to continuous integration. Firstly you may want to have a continuous build of your language that runs all tests and creates an Eclipse update site and other needed artifacts, and secondly you may want to have your language and its corresponding code generator integrated in your application builds. We will discuss both cases in this section along with a set of example projects, which you can clone, inspect or download from [github.com/xtext/maven-xtext-example](https://github.com/xtext/maven-xtext-example).
 
 To follow this section you need a basic understanding of how Maven works. Please read a tutorial on Maven if you don't know anything about it. 
 
-### An overview of the example projects
+## An overview of the example projects
 
 If you have a look at the example, you'll find seven different projects of which six are for the various aspects of the language and its build. First we have the language's runtime project, UI project and test project. In addition we need a feature project, an update site project and a project where we put the parent pom. The seventh project is called `example-project` and is really a small application project that uses the built language and triggers the code generator through a dedicated maven plug-in. Let's first have a look at how to build the language.
 
-### Building an Xtext language with Maven and Tycho {#tycho-build}
+## Building an Xtext language with Maven and Tycho {#tycho-build}
 
 Although the runtime aspects of an Xtext language is not dependent on Eclipse or its OSGi container, an Xtext language is developed in the form of OSGi bundles. For this kind of builds most people rely on [Tycho](http://eclipse.org/tycho/), which is an OSGi/P2 adapter plug-in for Maven builds. Tycho obtains much information from the OSGi bundle's manifest. Additionally needed information is configured through the pom.xml file which sits at the root of each project.
 
-#### The releng project (my.mavenized.herolanguage.releng)
+### The releng project (my.mavenized.herolanguage.releng)
 
 All of the projects are aggregated in a parent pom in `my.mavenized.herolanguage.releng`. Information defined in the parent pom is automatically inherited by the aggregated child projects, so you don't need to reconfigure the same information over and over again. Here we have configured two additional plug-ins:
 
@@ -73,15 +73,15 @@ All of the projects are aggregated in a parent pom in `my.mavenized.herolanguage
     </plugins>
     ```
 
-#### The update site project (my.mavenized.herolanguage.updatesite)
+### The update site project (my.mavenized.herolanguage.updatesite)
 
 The project `my.mavenized.herolanguage.updatesite` denotes the updatesite project and only contains a pom.xml and a file called category.xml. The latter includes information about which features are contained in the update site. As you can see, the `category.xml` file points to the single feature, which is defined in the project `my.mavenized.herolanguage.sdk`.
 
-#### The feature project (my.mavenized.herolanguage.sdk)
+### The feature project (my.mavenized.herolanguage.sdk)
 
 This is another project made up on configuration data solely. It contains the `feature.xml` file which points to the Eclipse plug-ins (bundles) included in this feature.
 
-#### The core language project (my.mavenized.herolanguage)
+### The core language project (my.mavenized.herolanguage)
 
 The `pom.xml` for the language project contains information about how Maven should run Xtext's code generator. The first used plug-in cleans the directories containing generated resources during the clean phase: 
 
@@ -199,7 +199,7 @@ Finally we need to tell the generator to use the created `XtextResourceSet` by a
     ...
 ```
 
-### Integration in Standard Maven Builds {#standalone-build}
+## Integration in Standard Maven Builds {#standalone-build}
 
 Now that we can build our language we need to be able to integrate our language compiler in the integration build of application projects. For this purpose a dedicated maven-plugin is available in Maven central. We now refer to the project `example-project`, which is a standard Java-project that shouldn't contain any Eclipse plug-in specific information, nor should it be built with Tycho. Let's have a look at the pom.xml and therein the Xtext plug-in.
 
