@@ -80,6 +80,11 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 		helper.assertNoError(file, UNHANDLED_EXCEPTION);
 	}
 	
+	@Test public void testExceptionInConstructor_3() throws Exception {
+		XtendFile file = file("class foo { new() { throw new Error() }}");
+		helper.assertNoError(file, UNHANDLED_EXCEPTION);
+	}
+	
 	@Test public void testFeatureCall_01() throws Exception {
 		XtendFile file = file("class C { def void m() {} def void n() { m() } }");
 		helper.assertNoErrors(file);
@@ -121,6 +126,11 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 	@Test public void testFeatureCall_08() throws Exception {
 		XtendFile file = file("class C { def void m() throws java.io.IOException, java.net.URISyntaxException {} def void n() { try { m() } catch(java.net.URISyntaxException e) {} } }");
 		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL, UNHANDLED_EXCEPTION, "Unhandled exception type IOException");
+	}
+	
+	@Test public void testFeatureCall_09() throws Exception {
+		XtendFile file = file("class C { def void m() throws Error {} def void n() { m() } }");
+		helper.assertNoError(file, UNHANDLED_EXCEPTION);
 	}
 	
 	@Test public void testGenericFeatureCall_01() throws Exception {
@@ -194,6 +204,15 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 				"class C { " +
 				"  def <E extends Exception> void m(Class<? extends E> c1, Class<? extends E> c2) throws E {}" +
 				"  def void n() throws java.io.IOException { m(typeof(java.io.FileNotFoundException), typeof(java.io.CharConversionException)) } " +
+				"}");
+		helper.assertNoError(file, UNHANDLED_EXCEPTION);
+	}
+	
+	@Test public void testGenericFeatureCall_12() throws Exception {
+		XtendFile file = file(
+				"class C { " +
+				"  def <E extends Error> E m() throws E {}" +
+				"  def java.io.FileNotFoundException n() { m } " +
 				"}");
 		helper.assertNoError(file, UNHANDLED_EXCEPTION);
 	}

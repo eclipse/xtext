@@ -10,55 +10,25 @@ part: Reference Documentation
 
 In some cases, e.g. if your *SHIFT* key is broken, you might want to design a case insensitive language. Xtext offers options on some of its [generator fragments](302_configuration.html#generator-fragment) for this purpose. 
 
-For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments: 
+For case insensitive keywords, open your MWE workflow and enable the ignoreCase property: 
 
 ```mwe2
-// The antlr parser generator fragment.
-fragment = parser.antlr.XtextAntlrGeneratorFragment {
-//  options = {
-//    backtrack = true
-//  }
-}
-...
+ ... StandardLanguage {
+    ... other config
 
-// generates a more lightweight ANTLR parser and lexer tailored ...
-fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
-}
-```
-
-with
-
-```mwe2
-// The antlr parser generator fragment.
-fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
-    options = {
+    parserGenerator = {
+      options = {
         ignoreCase = true
+      }
     }
-}
-...
+ }
 
-// generates a more lightweight ANTLR parser and lexer tailored ...
-fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
-    options = {
-        ignoreCase = true
-    }
-}
-```
-
-For case insensitive element names, use the *ignoreCase* option in your scope fragment, i.e.
+For case insensitive element names, use the *ignoreCase* option in the scoping, too :
 
 ```mwe2
-fragment = scoping.ImportNamespacesScopingFragment {
-    ignoreCase = true
-}
-```
-
-or if you are using *importURI* based global scopes
-
-```mwe2
-fragment = scoping.ImportURIScopingFragment {
-    ignoreCase = true
-}
+    scopeProvider = {
+      ignoreCase = true
+    }
 ```
 
 ## Whitespace-Aware Languages {#whitespace-aware-languages}
@@ -87,7 +57,7 @@ Rule 'Report error' when Heater.error then
     println(report)
 ```
 
-The first step for including whitespace-aware blocks in your language is to use the `parser.antlr.ex.rt.AntlrGeneratorFragment` and `parser.antlr.ex.ca.ContentAssistParserGeneratorFragment` in the workflow as shown in the [previous section](307_special_languages.html#case-insensitive-languages) (with or without the `ignoreCase` option). Then define *synthetic tokens* in the grammar by writing terminals of the form `'synthetic:<terminal name>'`:
+The first step for including whitespace-aware blocks in your language is to use  *synthetic tokens* in the grammar by writing terminals of the form `'synthetic:<terminal name>'`:
 
 ```xtext
 terminal BEGIN: 'synthetic:BEGIN';
@@ -106,7 +76,7 @@ XBlockExpression returns xbase::XExpression:
 
 After running the workflow, a stub implementation of `AbstractIndentationTokenSource` is generated in the subpackage `parser.antlr`, e.g. `RuleEngineTokenSource`. Here you can specify which terminal rule should be applied to your synthetic tokens. For the Home Automation language the `WS` (whitespace) rule is selected, which brings the indentation awareness as seen above.
 
-In case of a whitespace-aware language, the [formatter](303_runtime_concepts.html#formatting) must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. 
+In case of a whitespace-aware language, the [formatter](303_runtime_concepts.html#formatting) must be either adapted to produce whitespace that correctly reflects the document structure, or it must be deactivated. Otherwise automatic formatting might produce code with different semantics or even syntax errors. See how we customized the formatter in the homeautomation example.
 
 ## Languages Independent of JDT {#java-independent-languages}
 

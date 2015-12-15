@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Frequently Asked Questions
-part: Xtext Documentation
+part: Frequently Asked Questions
 ---
 
 # Overview {#Overview}

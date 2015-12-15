@@ -1,12 +1,21 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>Template Language</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
 <h1 id="template">Template Language</h1>
 
@@ -180,7 +189,7 @@ public String getTitle() {
   </li>
 </ul>
 
-<p>In the inferrer, note that we derive the property’s type in three steps: Take the declared one, if there is none, derive it from the initializer and if even that fails, use <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a> as default. </p>
+<p>In the inferrer, note that we derive the property’s type in three steps: Take the declared one, if there is none, derive it from the initializer and if even that fails, use <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a> as default. </p>
 
 <pre><code class="language-xtend">for (param : element.params) {
   val type = param.type 
@@ -230,7 +239,7 @@ public String getTitle() {
 
 <h2 id="templates-compiler">Extending the Compiler</h2>
 
-<p>We have added additional expressions to Xbase, so we have to tell the compiler how to translate them to Java. The <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">XbaseCompiler</a> has a method <code>doInternalToJavaStatement</code> that dispatches the compilation with regard to the type of the current expression. This is where we have to hook in with our <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend">TemplateCompiler</a>:</p>
+<p>We have added additional expressions to Xbase, so we have to tell the compiler how to translate them to Java. The <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">XbaseCompiler</a> has a method <code>doInternalToJavaStatement</code> that dispatches the compilation with regard to the type of the current expression. This is where we have to hook in with our <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend">TemplateCompiler</a>:</p>
 
 <pre><code class="language-xtend">class TemplateCompiler extends XbaseCompiler {
   
@@ -249,7 +258,7 @@ public String getTitle() {
 ...
 </code></pre>
 
-<p>For a <em>RichString</em>, we declare a variable <code>_appendable</code> of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a> and append the results of all its evaluated expressions. Remember from the grammar that every second expression is a <em>RichStringPart</em> which can be <code>null</code>, so we use the ‘elvis operator’ <code>?:</code> to insert an empty string in this case. </p>
+<p>For a <em>RichString</em>, we declare a variable <code>_appendable</code> of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/StringBuilder.html">StringBuilder</a> and append the results of all its evaluated expressions. Remember from the grammar that every second expression is a <em>RichStringPart</em> which can be <code>null</code>, so we use the ‘elvis operator’ <code>?:</code> to insert an empty string in this case. </p>
 
 <pre><code class="language-xtend">RichString : {
   val name = declareVariable(expr, '_appendable')
@@ -267,7 +276,7 @@ public String getTitle() {
 }
 </code></pre>
 
-<p>As our <em>RichStringLiteral</em> inherits from <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java">XStringLiteral</a>, it does not need any special treatment. The same holds for <em>RichStringIf</em> and <em>RichStringElseIif</em>. The <em>RichStringForLoop</em> requires special treatment, because as opposed to the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">XForLoopExpression</a> that always returns <code>null</code>, we want it to return a concatenation of its results. This looks like</p>
+<p>As our <em>RichStringLiteral</em> inherits from <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java">XStringLiteral</a>, it does not need any special treatment. The same holds for <em>RichStringIf</em> and <em>RichStringElseIif</em>. The <em>RichStringForLoop</em> requires special treatment, because as opposed to the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">XForLoopExpression</a> that always returns <code>null</code>, we want it to return a concatenation of its results. This looks like</p>
 
 <pre><code class="language-xtend">RichStringForLoop : {
   expr.forExpression.internalToJavaStatement(it, true)
@@ -302,11 +311,11 @@ public String getTitle() {
 }
 </code></pre>
 
-<p>As usual, we have to bind our <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend">TemplateCompiler</a> in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java">TemplateRuntimeModule</a> in order to be picked up as the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">XbaseCompiler</a> in the context of our language.</p>
+<p>As usual, we have to bind our <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend">TemplateCompiler</a> in the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java">TemplateRuntimeModule</a> in order to be picked up as the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java">XbaseCompiler</a> in the context of our language.</p>
 
 <h2 id="templates-type-provider">Type Computation</h2>
 
-<p>The type system has to know how to determine the types of our new expressions. This is the job of the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend">TemplateTypeComputer</a>: <em>RichString</em> becomes a <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a>. As opposed to its super type <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">XForLoopExpression</a> a <em>RichStringForLoop</em> is of type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html">StringBuilder</a> as well. The for-loop’s body is expected to have a type, as the results must be concatenatable, which is different from Xbase’s for-loop.</p>
+<p>The type system has to know how to determine the types of our new expressions. This is the job of the <a href="https://github.com/xtext/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend">TemplateTypeComputer</a>: <em>RichString</em> becomes a <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/StringBuilder.html">StringBuilder</a>. As opposed to its super type <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java">XForLoopExpression</a> a <em>RichStringForLoop</em> is of type <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/StringBuilder.html">StringBuilder</a> as well. The for-loop’s body is expected to have a type, as the results must be concatenatable, which is different from Xbase’s for-loop.</p>
 
 <pre><code class="language-xtend">class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	

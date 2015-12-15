@@ -1,12 +1,21 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>Scripting Language</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
 <h1 id="scripting">Scripting Language</h1>
 
@@ -44,7 +53,7 @@ public class Application {
 
 <p>To build a language with Xtext, you first have to define a grammar. As opposed to other parser generators, an Xtext grammar defines both, the lexical structure of the language and an object model (the AST or semantic model) that is build during parsing. For a more detailed description of the Xtext grammar language, please see the respective <a href="301_grammarlanguage.html">documentation section</a>.</p>
 
-<p>The grammar for our DSL is rather simple. We inherit from <code>org.eclipse.xtext.xbase.Xbase</code> to get the syntax of the expressions. As we want to refer to the type <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">XBlockExpression</a>, we have to import Xbase’s Ecore model. The single type inferred from this grammar goes into the Ecore model <code>simpleExpressions</code>.</p>
+<p>The grammar for our DSL is rather simple. We inherit from <code>org.eclipse.xtext.xbase.Xbase</code> to get the syntax of the expressions. As we want to refer to the type <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java">XBlockExpression</a>, we have to import Xbase’s Ecore model. The single type inferred from this grammar goes into the Ecore model <code>simpleExpressions</code>.</p>
 
 <pre><code class="language-xtext">grammar org.xtext.scripting.Scripting with org.eclipse.xtext.xbase.Xbase
 
@@ -60,7 +69,7 @@ Script returns XBlockExpression:
 
 <h2 id="scripting-inferrer">Translation to Java</h2>
 
-<p>To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this is defined by the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a>. The language generator automatically generates an Xtend stub for it. Nevertheless, it is up to the language developer to implement the <code>infer()</code> method. </p>
+<p>To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this is defined by the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java">IJvmModelInferrer</a>. The language generator automatically generates an Xtend stub for it. Nevertheless, it is up to the language developer to implement the <code>infer()</code> method. </p>
 
 <p>This hook is not only used to explain how to generate Java code, but also to give expressions a proper scope and to make your DSL constructs visible by other JVM languages. The Java type system is used as a common hub to integrate arbitrary languages with each other.</p>
 
