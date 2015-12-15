@@ -397,7 +397,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		outer: for(JvmTypeReference typeReference: executable.getExceptions()) {
 			LightweightTypeReference exception = referenceOwner.toLightweightTypeReference(typeReference);
 			LightweightTypeReference resolvedException = substitutor.substitute(exception);
-			if (resolvedException.isSubtypeOf(Throwable.class) && !resolvedException.isSubtypeOf(RuntimeException.class)) {
+			if (resolvedException.isSubtypeOf(Throwable.class) && !resolvedException.isSubtypeOf(RuntimeException.class) && !resolvedException.isSubtypeOf(Error.class)) {
 				for (LightweightTypeReference expectedException : expectedExceptions) {
 					if (expectedException.isAssignableFrom(resolvedException)) {
 						continue outer;

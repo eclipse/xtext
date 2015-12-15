@@ -42,6 +42,8 @@ class JavaDerivedStateComputer {
 	}
 	
 	def void installStubs(Resource resource) {
+		if (resource.isInfoFile)
+			return;
 		val compilationUnit = getCompilationUnit(resource)
 		val parser = new Parser(new ProblemReporter(
 				DefaultErrorHandlingPolicies.proceedWithAllProblems(),
@@ -96,6 +98,8 @@ class JavaDerivedStateComputer {
 	}
 	
 	def void installFull(Resource resource) {
+		if (resource.isInfoFile)
+			return;
 		val compilationUnit = getCompilationUnit(resource)
 		val classLoader = getClassLoader(resource)
 		
@@ -123,6 +127,11 @@ class JavaDerivedStateComputer {
 			}
 		], new DefaultProblemFactory())
 		compiler.compile(#[compilationUnit])
+	}
+	
+	protected def isInfoFile(Resource resource) {
+		val name = resource.URI.trimFileExtension.lastSegment
+		name == "package-info" || name == "module-info"
 	}
 	
 	protected def CompilerOptions getCompilerOptions() {
