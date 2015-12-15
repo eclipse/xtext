@@ -87,7 +87,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		if (combinedGrammar.isSet)
 			combinedGrammar.get
 		else
-			!options.backtrackLexer && !options.ignoreCase
+			!options.backtrackLexer && !options.ignoreCase && !grammar.allTerminalRules.exists[isSyntheticTerminalRule]
 	}
 
 	override protected doGenerate() {
@@ -102,7 +102,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		generateProductionParser.writeTo(projectConfig.runtime.srcGen)
 		generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
 		generateContentAssistParser.writeTo(projectConfig.genericIde.srcGen)
-		if (!isCombinedGrammar && grammar.allTerminalRules().exists[ isSyntheticTerminalRule ]) {
+		if (grammar.allTerminalRules().exists[ isSyntheticTerminalRule ]) {
 			generateProductionTokenSource.writeTo(projectConfig.runtime.src)
 			generateContentAssistTokenSource.writeTo(projectConfig.genericIde.src)
 		}
@@ -377,7 +377,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				}
 			
 				@Override
-				protected boolean shouldSplitTokenImpl(Token token) {
+				protected boolean shouldSplitTokenImpl(«Token» token) {
 					«IF grammar.allTerminalRules.map[originalElement].exists[name.toUpperCase == "WS"]»
 						// TODO Review assumption
 						return token.getType() == «grammar.internalParserClass».RULE_WS;

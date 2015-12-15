@@ -141,16 +141,32 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       _xifexpression = this.combinedGrammar.get();
     } else {
       boolean _and = false;
+      boolean _and_1 = false;
       AntlrOptions _options = this.getOptions();
       boolean _isBacktrackLexer = _options.isBacktrackLexer();
       boolean _not = (!_isBacktrackLexer);
       if (!_not) {
-        _and = false;
+        _and_1 = false;
       } else {
         AntlrOptions _options_1 = this.getOptions();
         boolean _isIgnoreCase = _options_1.isIgnoreCase();
         boolean _not_1 = (!_isIgnoreCase);
-        _and = _not_1;
+        _and_1 = _not_1;
+      }
+      if (!_and_1) {
+        _and = false;
+      } else {
+        Grammar _grammar = this.getGrammar();
+        List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar);
+        final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+          @Override
+          public Boolean apply(final TerminalRule it) {
+            return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+          }
+        };
+        boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+        boolean _not_2 = (!_exists);
+        _and = _not_2;
       }
       _xifexpression = _and;
     }
@@ -193,24 +209,16 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     IBundleProjectConfig _genericIde_1 = _projectConfig_3.getGenericIde();
     IXtextGeneratorFileSystemAccess _srcGen_3 = _genericIde_1.getSrcGen();
     _generateContentAssistParser.writeTo(_srcGen_3);
-    boolean _and = false;
-    boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
-    boolean _not = (!_isCombinedGrammar_1);
-    if (!_not) {
-      _and = false;
-    } else {
-      Grammar _grammar_2 = this.getGrammar();
-      List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
-      final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-        }
-      };
-      boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
-      _and = _exists;
-    }
-    if (_and) {
+    Grammar _grammar_2 = this.getGrammar();
+    List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
+    final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+      @Override
+      public Boolean apply(final TerminalRule it) {
+        return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+      }
+    };
+    boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
+    if (_exists) {
       JavaFileAccess _generateProductionTokenSource = this.generateProductionTokenSource();
       IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
       IRuntimeProjectConfig _runtime_2 = _projectConfig_4.getRuntime();
@@ -1206,8 +1214,10 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append("@Override");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("protected boolean shouldSplitTokenImpl(Token token) {");
-          _builder.newLine();
+          _builder.append("protected boolean shouldSplitTokenImpl(");
+          _builder.append(Token.class, "\t");
+          _builder.append(" token) {");
+          _builder.newLineIfNotEmpty();
           {
             Grammar _grammar_2 = XtextAntlrGeneratorFragment2.this.getGrammar();
             List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);

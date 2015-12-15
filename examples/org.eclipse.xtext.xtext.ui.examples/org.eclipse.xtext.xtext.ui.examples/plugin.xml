@@ -131,6 +131,7 @@
 		<example wizardID="org.eclipse.xtext.examples.NewHomeAutomationExampleWizard" pageImage="icons/genproject.gif">
 			<projectDescriptor name="org.eclipse.xtext.example.homeautomation" contentURI="contents/org.eclipse.xtext.example.homeautomation.zip" description="Contains the parser, serializer, linker, etc."/>
 			<projectDescriptor name="org.eclipse.xtext.example.homeautomation.tests" contentURI="contents/org.eclipse.xtext.example.homeautomation.tests.zip" description="The test bundle for the language"/>
+			<projectDescriptor name="org.eclipse.xtext.example.homeautomation.ide" contentURI="contents/org.eclipse.xtext.example.homeautomation.ide.zip" description="Contains Generic IDE services"/>
 			<projectDescriptor name="org.eclipse.xtext.example.homeautomation.ui" contentURI="contents/org.eclipse.xtext.example.homeautomation.ui.zip" description="Contains Eclipse IDE integration (i.e. editor)"/>
 			<fileToOpen location="org.eclipse.xtext.example.homeautomation/src/org/eclipse/xtext/example/homeautomation/RuleEngine.xtext"/>
 			<fileToOpen location="org.eclipse.xtext.example.homeautomation/src/org/eclipse/xtext/example/homeautomation/formatting2/RuleEngineFormatter.xtend"/>
