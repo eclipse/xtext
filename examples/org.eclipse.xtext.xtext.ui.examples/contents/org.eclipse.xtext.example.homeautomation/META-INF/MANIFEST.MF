@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.example.homeautomation
-Bundle-Vendor: My Company
+Bundle-Name: Xtext Homeautomation Examples
+Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation; singleton:=true
 Bundle-ActivationPolicy: lazy
