@@ -60,6 +60,7 @@
 		<zip_example name="org.eclipse.xtext.example.fowlerdsl.ui" />
 		<zip_example name="org.eclipse.xtext.example.homeautomation" />
 		<zip_example name="org.eclipse.xtext.example.homeautomation.tests" />
+		<zip_example name="org.eclipse.xtext.example.homeautomation.ide" />
 		<zip_example name="org.eclipse.xtext.example.homeautomation.ui" />
 		<zip_example name="xbase.tutorial" />
 	</target>
