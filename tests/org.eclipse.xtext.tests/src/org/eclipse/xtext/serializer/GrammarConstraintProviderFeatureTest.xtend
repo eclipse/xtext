@@ -90,6 +90,19 @@ class GrammarConstraintProviderFeatureTest {
 		'''
 		Assert.assertEquals(expected, actual)
 	}
+	
+	@Test def void twoDoubleLoop() {
+		val actual = '''
+			Rule: {Rule} (val1+=ID val2+=ID)*; 
+		'''.toFeatureInfo
+		val expected = '''
+			Rule_Rule{
+			  val1[0,*]
+			  val2[0,*]
+			}
+		'''
+		Assert.assertEquals(expected, actual)
+	}
 
 	def String toFeatureInfo(CharSequence grammarString) {
 		val grammar = parser.parse('''
