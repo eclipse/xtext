@@ -25,7 +25,7 @@ class MavenExec extends Exec {
 			args '-X'
 		}
 		if (project.isBuildServer) {
-			args '-Dmaven.repo.local=${project.gradle.gradleUserHomeDir}/.m2'
+			args "-Dmaven.repo.local=${project.gradle.gradleUserHomeDir}/.m2"
 		}
 		args '-T', '1C'
 	}
