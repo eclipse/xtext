@@ -1,14 +1,23 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<title></title>
+	<title>Integration with EMF</title>
 	<link href="book.css" rel="stylesheet" type="text/css">
 	<link href="code.css" rel="stylesheet" type="text/css">
 	<link rel="home" href="index.html" title="">
 </head>
 <body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TGDS5S"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TGDS5S');</script>
+<!-- End Google Tag Manager -->
 
-<h1 id="emf-integration">Integration with EMF and Other EMF Editors</h1>
+<h1 id="emf-integration">Integration with EMF</h1>
 
 <p>Xtext relies heavily on EMF internally, but it can also be used as the serialization back-end of other EMF-based tools. In this section we introduce the basic concepts of the <a href="http://www.eclipse.org/modeling/emf/">Eclipse Modeling Framework (EMF)</a> in the context of Xtext. If you want to learn more about EMF, we recommend reading the <a href="http://www.eclipse.org/modeling/emf/">EMF book</a>.</p>
 
@@ -26,7 +35,7 @@
 
 <p>The meta model defines the types of the semantic nodes as Ecore <em>EClasses</em>. EClasses are shown as boxes in the meta mode diagram, so in our example, <em>Model</em>, <em>Type</em>, <em>SimpleType</em>, <em>Entity</em>, and <em>Property</em> are EClasses. An EClass can inherit from other EClasses. Multiple inheritance is allowed in Ecore, but of course cycles are forbidden. </p>
 
-<p>EClasses can have <em>EAttributes</em> for their simple properties. These are shown inside the EClasses nodes. The example contains two EAttributes <em>name</em> and one EAttribute <em>isMulti</em>. The domain of values for an EAttribute is defined by its <em>EDataType</em>. Ecore ships with some predefined <em>EDataTypes</em>, which essentially refer to Java primitive types and other immutable classes like <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">String</a>. To make a distinction from the Java types, the <em>EDataTypes</em> are prefixed with an <em>E</em>. In our example, that is <em>EString</em> and <em>EBoolean</em>. </p>
+<p>EClasses can have <em>EAttributes</em> for their simple properties. These are shown inside the EClasses nodes. The example contains two EAttributes <em>name</em> and one EAttribute <em>isMulti</em>. The domain of values for an EAttribute is defined by its <em>EDataType</em>. Ecore ships with some predefined <em>EDataTypes</em>, which essentially refer to Java primitive types and other immutable classes like <a href="http://docs.oracle.com/javase/8/docs/api//java/lang/String.html">String</a>. To make a distinction from the Java types, the <em>EDataTypes</em> are prefixed with an <em>E</em>. In our example, that is <em>EString</em> and <em>EBoolean</em>. </p>
 
 <p>In contrast to EAttributes, <em>EReferences</em> point to other EClasses. The <em>containment</em> flag indicates whether an EReference is a <em>containment reference</em> or a <em>cross-reference</em>. In the diagram, references are edges and containment references are marked with a diamond. At the model level, each element can have at most one container, i.e. another element referring to it with a containment reference. This infers a tree structure to the models, as can be seen in the sample model diagram. On the other hand, <em>cross-references</em> refer to elements that can be contained anywhere else. In the example, <em>elements</em> and <em>properties</em> are containment references, while <em>type</em> and <em>extends</em> are cross-references. For reasons of readability, we skipped the cross-references in the sample model diagram. Note that in contrast to other parser generators, Xtext creates ASTs with linked cross-references. </p>
 
@@ -58,11 +67,11 @@
 
 <h2 id="xtext-resource">XtextResource Implementation</h2>
 
-<p>Xtext provides an implementation of EMF’s resource, the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a>. This does not only encapsulate the parser that converts text to an EMF model but also the <a href="#serialization">serializer</a> working the opposite direction. That way, an Xtext model just looks like any other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. So in the ideal case, you can switch the serialization format of your models to your self-defined DSL by just replacing the resource implementation used by your other modeling tools. </p>
+<p>Xtext provides an implementation of EMF’s resource, the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a>. This does not only encapsulate the parser that converts text to an EMF model but also the <a href="303_runtime_concepts.html#serialization">serializer</a> working the opposite direction. That way, an Xtext model just looks like any other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. So in the ideal case, you can switch the serialization format of your models to your self-defined DSL by just replacing the resource implementation used by your other modeling tools. </p>
 
 <p><img src="images/emf-integration.png" alt="" /></p>
 
-<p>The generator fragment <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java">ResourceFactoryFragment</a> registers a factory for the <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> to EMF’s resource factory registry, such that all tools using the default mechanism to resolve a resource implementation will automatically get that resource implementation. </p>
+<p>The generator fragment <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java">ResourceFactoryFragment</a> registers a factory for the <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> to EMF’s resource factory registry, such that all tools using the default mechanism to resolve a resource implementation will automatically get that resource implementation. </p>
 
 <p>Using a self-defined textual syntax as the primary storage format has a number of advantages over the default XMI serialization, e.g. </p>
 
@@ -78,18 +87,18 @@
 <ul>
   <li>Prefer optional rule calls (cardinality <em>?</em> or <em>*</em>) to mandatory ones (cardinality <em>+</em> or default), such that missing references will not obstruct serialization.</li>
   <li>You should not use an Xtext-Editor on the same model instance as a self-synchronizing other editor, e.g. a canonical GMF editor (see the <a href="308_emf_integration.html#gmf-integration-stage1">EMF integration chapter</a> for details). The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so elements will become stale. As the Xtext editor continuously re-parses the model on changes, this will happen rather often. It is safer to synchronize editors more loosely, e.g. on file changes.</li>
-  <li>Implement an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java">IFragmentProvider</a> (<a href="#fragmentProvider">how-to</a>) to make the XtextResource return stable fragments for its contained elements, e.g. based on composite names rather than order of appearance.</li>
-  <li>Implement an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> and an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> (<a href="#scoping">how-to</a>) to make the names of all linkable elements in cross-references unique.</li>
-  <li>Provide an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java">IFormatter</a> (<a href="#formatting">how-to</a>) to improve the readability of the generated textual models.</li>
-  <li>Register an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/IReferableElementsUnloader.java">IReferableElementsUnloader</a> to turn deleted/replaced model elements into EMF proxies. Design the rest of your application such that it does never keep references to <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObjects</a> or to cope with proxies. That will improve the stability of your application drastically.</li>
-  <li>Xtext will register an EMF <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Factory</a>, so resources with the file extension you entered when generating the Xtext plug-ins will be automatically loaded in an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> when you use EMF’s <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/ResourceSet.java">ResourceSet</a> API to load it.</li>
+  <li>Implement an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java">IFragmentProvider</a> (<a href="303_runtime_concepts.html#fragment-provider">how-to</a>) to make the XtextResource return stable fragments for its contained elements, e.g. based on composite names rather than order of appearance.</li>
+  <li>Implement an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">IQualifiedNameProvider</a> and an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java">IScopeProvider</a> (<a href="303_runtime_concepts.html#scoping">how-to</a>) to make the names of all linkable elements in cross-references unique.</li>
+  <li>Provide an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java">IFormatter</a> (<a href="303_runtime_concepts.html#formatting">how-to</a>) to improve the readability of the generated textual models.</li>
+  <li>Register an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/IReferableElementsUnloader.java">IReferableElementsUnloader</a> to turn deleted/replaced model elements into EMF proxies. Design the rest of your application such that it does never keep references to <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">EObjects</a> or to cope with proxies. That will improve the stability of your application drastically.</li>
+  <li>Xtext will register an EMF <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java">Factory</a>, so resources with the file extension you entered when generating the Xtext plug-ins will be automatically loaded in an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> when you use EMF’s <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/ResourceSet.java">ResourceSet</a> API to load it.</li>
 </ul>
 
 <h2 id="gmf-integration">Integration with GMF Editors</h2>
 
 <p>We do no longer maintain the GMF example code and have removed it from our installation. You can still access the last version of the source code form our <a href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/examples/org.eclipse.xtext.xtext.ui.examples/contents">source code repository</a>.</p>
 
-<p>The <a href="http://www.eclipse.org/modeling/gmp/?project=gmf">Graphical Modeling Framework (GMF)</a> allows to create graphical diagram editors for Ecore models. To illustrate how to build a GMF on top of an <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. </p>
+<p>The <a href="http://www.eclipse.org/modeling/gmp/?project=gmf">Graphical Modeling Framework (GMF)</a> allows to create graphical diagram editors for Ecore models. To illustrate how to build a GMF on top of an <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> we have provided an example. You must have the Helios version 2.3 of GMF Notation, Runtime and Tooling and their dependencies installed in your workbench to run the example. With other versions of GMF it might work to regenerate the diagram code. </p>
 
 <p>The example consists of a number of plug-ins</p>
 
@@ -156,7 +165,7 @@
 
 <p>To keep the semantic model and the diagram model in sync, GMF uses a so called <em>CanonicalEditPolicy</em>. This component registers as a listener to the semantic model and automatically updates diagram elements when their semantic counterparts change, are added or are removed. Some notational information can be derived from the semantic model by some default mapping, but usually there is a lot of graphical stuff that the user wants to change to make the diagram look better. </p>
 
-<p>In an Xtext editor, changes in the text are transferred to the underlying <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> by a call to the method <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource.update(int, int, String)</a>, which will trigger a partial parsing of the dirty text region and a replacement of the corresponding subtree in the AST model (semantic model). </p>
+<p>In an Xtext editor, changes in the text are transferred to the underlying <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> by a call to the method <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource.update(int, int, String)</a>, which will trigger a partial parsing of the dirty text region and a replacement of the corresponding subtree in the AST model (semantic model). </p>
 
 <p>Having an Xtext editor and a canonical GMF editor on the same resource can therefore lead to loss of notational information, as a change in the Xtext editor will remove a subtree in the AST, causing the <em>CanonicalEditPolicy</em> to remove all notational elements, even though it was customized by the user. The Xtext rebuilds the AST and the notation model is restored using the default mapping. It is therefore not recommended to let an Xtext editor and a canonical GMF editor work on the same resource. </p>
 
@@ -172,7 +181,7 @@
 
 <p>GMF’s generated parser for the labels is a bit poor: It will work on attributes only, and will fail for cross-references, e.g. an attribute’s type. So why not use the Xtext parser to process the user’s input? </p>
 
-<p>An <a href="https://github.com/eclipse/xtext/blob/v2.8.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> keeps track of it’s concrete syntax representation by means of a so called node model (see <a href="301_grammarlanguage.html#parser-rules">parser rules section</a> for a more detailed description). The node model represents the parse tree and provides information on the offset, length and text that has been parsed to create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter. </p>
+<p>An <a href="https://github.com/eclipse/xtext/blob/v2.9.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">XtextResource</a> keeps track of it’s concrete syntax representation by means of a so called node model (see <a href="301_grammarlanguage.html#parser-rules">parser rules section</a> for a more detailed description). The node model represents the parse tree and provides information on the offset, length and text that has been parsed to create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter. </p>
 
 <p>We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in <em>org.eclipse.xtext.gmf.glue.edit.part.AntlrParserWrapper</em>. <em>SimplePropertyWrapperEditPartOverride</em> shows how this is integrated into the generated GMF editor. Use the <em>EntitiesEditPartFactoryOverride</em> to instantiate it and the <em>EntitiesEditPartProviderOverride</em> to create the overridden factory, and register the latter to the extension point. Note that this is a non-invasive way to extend generated GMF editors.</p>
 
@@ -202,7 +211,7 @@
 
 <hr />
 
-<p><strong><a href="401_migrating_from_1_0_x.html">Next Chapter: Migrating from Xtext 1.0.x to 2.0</a></strong></p>
+<p><strong><a href="310_web_integration.html">Next Chapter: Web Editor Support</a></strong></p>
 
 
 </body>

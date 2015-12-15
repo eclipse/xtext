@@ -1,7 +1,7 @@
 package org.eclipse.xtext.example.homeautomation.tests
 
 import com.google.inject.Inject
-import org.eclipse.xtext.example.homeautomation.RuleEngineInjectorProvider
+import org.eclipse.xtext.example.homeautomation.tests.RuleEngineInjectorProvider
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Device
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Model
 import org.eclipse.xtext.example.homeautomation.ruleEngine.Rule
