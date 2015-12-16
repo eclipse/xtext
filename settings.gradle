@@ -26,6 +26,7 @@ gradle.beforeProject {project ->
 		}
 
 		apply from: "$rootDir/gradle/versions.gradle"
+		apply from: "$rootDir/gradle/project-metadata.gradle"
 		apply from: "$rootDir/gradle/build-server-detection.gradle"
 		apply from: "$rootDir/gradle/eclipse-settings.gradle"
 		apply from: "$rootDir/gradle/java-compiler-settings.gradle"
