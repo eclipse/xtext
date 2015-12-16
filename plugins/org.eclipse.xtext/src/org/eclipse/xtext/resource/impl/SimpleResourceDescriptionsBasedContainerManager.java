@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.impl;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -30,7 +31,14 @@ public class SimpleResourceDescriptionsBasedContainerManager implements IContain
 		if (delegate.shouldUseProjectDescriptionBasedContainers(resourceDescriptions)) {
 			return delegate.getContainer(desc, resourceDescriptions);
 		}
-		ResourceDescriptionsBasedContainer result = new ResourceDescriptionsBasedContainer(resourceDescriptions);
+		ResourceDescriptionsBasedContainer result = new ResourceDescriptionsBasedContainer(resourceDescriptions) {
+			// this used to be the default implementation, which is wrong.
+			// we fixed the orginal and moved the wrong impl here since old clients might see much worse performance with the new impl. 
+			@Override
+			public boolean hasResourceDescription(URI uri) {
+				return true;
+			}
+		};
 		result.setUriToDescriptionCacheEnabled(false);
 		return result;
 	}
