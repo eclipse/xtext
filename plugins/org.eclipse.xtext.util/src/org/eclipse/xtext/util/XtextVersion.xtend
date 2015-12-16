@@ -64,7 +64,7 @@ class XtextVersion {
 	 * @noreference
 	 */
 	def getMweVersion() {
-		'2.8.2'
+		'2.8.3'
 	}
 	
 	override toString() {

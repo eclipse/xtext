@@ -108,7 +108,7 @@ public class XtextVersion {
    * @noreference
    */
   public String getMweVersion() {
-    return "2.8.2";
+    return "2.8.3";
   }
   
   @Override
