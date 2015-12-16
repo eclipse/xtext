@@ -33,24 +33,8 @@ abstract class AbstractTest {
 				fire(Heater.off)
 		'''.test
 	}
-
-	@Test def void test3() {
-		'''
-			Device Window can be open, closed
-			Device Heater can be on, off, error
-			Rule "Start heating" when Window.closed then
-				val t0 = Double.parseDouble(System.getProperty('temperature'))
-				fire(Heater.on)
-				Thread.sleep(10000)
-				val t1 = Double.parseDouble(System.getProperty('temperature'))
-				if (t1 - t0 < 4.0)
-					executeReport_error
-			Rule "Report error" when Heater.error then
-				println('Something went wrong.')
-		'''.test
-	}
 	
-	@Test def void test4() {
+	@Test def void test3() {
 		'''
 			Device Window can be open, closed
 			Device Heater can be on, off
