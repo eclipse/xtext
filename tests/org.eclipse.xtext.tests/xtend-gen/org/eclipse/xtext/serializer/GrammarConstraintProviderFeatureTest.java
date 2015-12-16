@@ -136,6 +136,27 @@ public class GrammarConstraintProviderFeatureTest {
     Assert.assertEquals(expected, actual);
   }
   
+  @Test
+  public void twoDoubleLoop() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Rule: {Rule} (val1+=ID val2+=ID)*; ");
+    _builder.newLine();
+    final String actual = this.toFeatureInfo(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Rule_Rule{");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val1[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val2[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
   public String toFeatureInfo(final CharSequence grammarString) {
     try {
       StringConcatenation _builder = new StringConcatenation();
