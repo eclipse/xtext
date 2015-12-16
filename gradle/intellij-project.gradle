@@ -24,6 +24,9 @@ if (file("src").exists()) {
 	apply plugin: 'java'
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 
+	//IntelliJ's test infrastructure is not compatible with ASM 5
+	configurations.testRuntime.exclude group: 'org.ow2.asm'
+
 	dependencies {
 		ideaProvided ideaDevelopment.toolsJar()
 	}
