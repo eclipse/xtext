@@ -97,11 +97,11 @@ public class XtextVersion {
   }
   
   public String getXtendGradlePluginVersion() {
-    return "0.4.12";
+    return this.getXtextGradlePluginVersion();
   }
   
   public String getXtextGradlePluginVersion() {
-    return "0.3.25";
+    return "1.0.0";
   }
   
   /**
