@@ -21,6 +21,7 @@ import org.eclipse.xtext.idea.util.IdeaWidgetFactory
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory.TwoColumnPanel
 
 import static java.awt.GridBagConstraints.*
+import com.intellij.facet.ui.FacetValidatorsManager
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -39,6 +40,10 @@ class XbaseFacetForm extends GeneratorFacetForm {
 
 	new(Module module) {
 		super(module)
+	}
+	
+	new(Module module, FacetValidatorsManager validatorsManager) {
+		super(module, validatorsManager)
 	}
 
 	override protected createComponent() {
