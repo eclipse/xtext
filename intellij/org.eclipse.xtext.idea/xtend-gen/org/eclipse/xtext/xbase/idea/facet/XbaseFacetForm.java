@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.idea.facet;
 
 import com.google.common.base.Objects;
+import com.intellij.facet.ui.FacetValidatorsManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.LanguageLevelModuleExtension;
@@ -55,6 +56,10 @@ public class XbaseFacetForm extends GeneratorFacetForm {
   
   public XbaseFacetForm(final Module module) {
     super(module);
+  }
+  
+  public XbaseFacetForm(final Module module, final FacetValidatorsManager validatorsManager) {
+    super(module, validatorsManager);
   }
   
   @Override
@@ -179,33 +184,29 @@ public class XbaseFacetForm extends GeneratorFacetForm {
   }
   
   @Override
-  public IdeaWidgetFactory.TwoColumnPanel createOutputSection(@Extension final IdeaWidgetFactory.TwoColumnPanel it) {
-    IdeaWidgetFactory.TwoColumnPanel _xblockexpression = null;
-    {
-      super.createOutputSection(it);
-      final Function1<GridBagConstraints, JComponent> _function = new Function1<GridBagConstraints, JComponent>() {
-        @Override
-        public JComponent apply(final GridBagConstraints it) {
-          JCheckBox _checkBox = XbaseFacetForm.this._ideaWidgetFactory.checkBox("Ignore generated Java source when debugging (Use for Android)");
-          return XbaseFacetForm.this.installDslAsPrimarySource = _checkBox;
+  public void createOutputSection(@Extension final IdeaWidgetFactory.TwoColumnPanel it) {
+    super.createOutputSection(it);
+    final Function1<GridBagConstraints, JComponent> _function = new Function1<GridBagConstraints, JComponent>() {
+      @Override
+      public JComponent apply(final GridBagConstraints it) {
+        JCheckBox _checkBox = XbaseFacetForm.this._ideaWidgetFactory.checkBox("Ignore generated Java source when debugging (Use for Android)");
+        return XbaseFacetForm.this.installDslAsPrimarySource = _checkBox;
+      }
+    };
+    it.row(it, _function);
+    final Function1<GridBagConstraints, JComponent> _function_1 = new Function1<GridBagConstraints, JComponent>() {
+      @Override
+      public JComponent apply(final GridBagConstraints it) {
+        JCheckBox _xblockexpression = null;
+        {
+          XbaseFacetForm.this._ideaWidgetFactory.indent(it);
+          JCheckBox _checkBox = XbaseFacetForm.this._ideaWidgetFactory.checkBox("Hide synthetic local variables in the debugger");
+          _xblockexpression = XbaseFacetForm.this.hideLocalSyntheticVariables = _checkBox;
         }
-      };
-      it.row(it, _function);
-      final Function1<GridBagConstraints, JComponent> _function_1 = new Function1<GridBagConstraints, JComponent>() {
-        @Override
-        public JComponent apply(final GridBagConstraints it) {
-          JCheckBox _xblockexpression = null;
-          {
-            XbaseFacetForm.this._ideaWidgetFactory.indent(it);
-            JCheckBox _checkBox = XbaseFacetForm.this._ideaWidgetFactory.checkBox("Hide synthetic local variables in the debugger");
-            _xblockexpression = XbaseFacetForm.this.hideLocalSyntheticVariables = _checkBox;
-          }
-          return _xblockexpression;
-        }
-      };
-      _xblockexpression = it.row(it, _function_1);
-    }
-    return _xblockexpression;
+        return _xblockexpression;
+      }
+    };
+    it.row(it, _function_1);
   }
   
   @Override
