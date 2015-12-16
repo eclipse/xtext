@@ -1,0 +1,5 @@
+if (name.startsWith('org.eclipse.xtend')) {
+	group = 'org.eclipse.xtend'
+} else {
+	group = 'org.eclipse.xtext'
+}
