@@ -96,7 +96,9 @@ class TypeReference {
 	}
 	
 	new(EClass clazz, ResourceSet resourceSet) {
-		this(getQualifiedName(clazz, resourceSet))
+		// the qualified name might be a nested type, e.g. jav.util.Map.Entry
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=483088
+		this(getQualifiedName(clazz, resourceSet), null, false)
 	}
 	
 	new(EPackage epackage, ResourceSet resourceSet) {
