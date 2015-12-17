@@ -128,18 +128,27 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 			ICompositeNode parent = node.getParent();
 			if (parent != null) {
 				if (!parent.hasDirectSemanticElement()) {
+					if (isContainedInFragmentRule(grammarElement)) {
+						return false;
+					}
 					Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-					return assignment == null;
+					if (assignment == null) {
+						return true;
+					}
 				}
 				if (grammarElement instanceof Action) {
-					ParserRule rule = (ParserRule) GrammarUtil.containingRule(grammarElement);
-					if (rule.isFragment()) {
+					if (isContainedInFragmentRule(grammarElement)) {
 						return parent.getGrammarElement() instanceof RuleCall;
 					}
 				}
 			}
 		}
 		return false;
+	}
+	
+	private boolean isContainedInFragmentRule(EObject grammarElement) {
+		ParserRule rule = (ParserRule) GrammarUtil.containingRule(grammarElement);
+		return rule.isFragment();
 	}
 
 }
