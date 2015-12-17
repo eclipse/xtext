@@ -1,12 +1,17 @@
 package org.eclipse.xtext.idea.facet
 
+import com.intellij.facet.ui.FacetValidatorsManager
+import com.intellij.facet.ui.ValidationResult
 import com.intellij.openapi.module.Module
+import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import java.awt.GridBagConstraints
 import javax.swing.JCheckBox
 import javax.swing.JComponent
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory.TwoColumnPanel
+
+import static extension com.intellij.openapi.util.io.FileUtil.*
 
 /** 
  * Created by dhuebner on 19.06.15.
@@ -22,10 +27,16 @@ class GeneratorFacetForm {
 	protected JCheckBox deleteGenerated
 
 	Module module
+	FacetValidatorsManager validatorsManager
 	JComponent rootPanel
 
 	new(Module module) {
+		this(module, null)
+	}
+	
+	new (Module module, FacetValidatorsManager validatorsManager) {
 		this.module = module
+		this.validatorsManager = validatorsManager
 	}
 
 	def protected JComponent createComponent() {
@@ -49,6 +60,28 @@ class GeneratorFacetForm {
 		row [createDirectory = checkBox("Create directory if it doesn't exist")]
 		row [overwriteFiles = checkBox("Overwrite existing files")]
 		row [deleteGenerated = checkBox("Delete generated files")]
+		
+		directory.registerDirectoryValidator('The output directory should belong to the module.')
+		testDirectory.registerDirectoryValidator('The output test directory should belong to the module.')
+	}
+	
+	protected def void registerDirectoryValidator(TextFieldWithBrowseButton directory, String errorMessage) {
+		if(validatorsManager === null) return;
+
+		validatorsManager.registerValidator([
+			if (!directory.underModule)
+				return new ValidationResult(errorMessage)
+
+			return ValidationResult.OK
+		], directory)
+	}
+	
+	protected def boolean isUnderModule(TextFieldWithBrowseButton directory) {
+		val path = directory.text
+		if (!path.absolute) return true
+		
+		val root = ModuleRootManager.getInstance(module).contentRoots.head
+		return root !== null && root.path.isAncestor(path, false)
 	}
 
 	def createGeneralSection(extension TwoColumnPanel it) {

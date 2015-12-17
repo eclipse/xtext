@@ -28,7 +28,7 @@ public class XbaseFacetConfiguration extends AbstractFacetConfiguration {
   public FacetEditorTab[] createEditorTabs(final FacetEditorContext editorContext, final FacetValidatorsManager validatorsManager) {
     Facet _facet = editorContext.getFacet();
     Module _module = _facet.getModule();
-    final XbaseFacetForm uiForm = new XbaseFacetForm(_module);
+    final XbaseFacetForm uiForm = new XbaseFacetForm(_module, validatorsManager);
     Facet _facet_1 = editorContext.getFacet();
     final GeneratorFacetEditorTab<XbaseFacetConfiguration> facetEditorTab = new GeneratorFacetEditorTab<XbaseFacetConfiguration>(_facet_1, uiForm);
     return new FacetEditorTab[] { facetEditorTab };

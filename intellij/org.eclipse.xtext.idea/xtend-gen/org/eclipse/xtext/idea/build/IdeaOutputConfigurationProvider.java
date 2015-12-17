@@ -17,9 +17,8 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.SourceFolder;
 import com.intellij.openapi.util.Computable;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileSystem;
 import java.io.File;
 import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -105,8 +104,7 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
   }
   
   public String toModuleRelativePath(final String path, final Module module) {
-    File _file = new File(path);
-    boolean _isAbsolute = _file.isAbsolute();
+    boolean _isAbsolute = FileUtil.isAbsolute(path);
     if (_isAbsolute) {
       Application _application = ApplicationManager.getApplication();
       final Computable<String> _function = new Computable<String>() {
@@ -115,9 +113,8 @@ public class IdeaOutputConfigurationProvider implements IContextualOutputConfigu
           ModuleRootManager _instance = ModuleRootManager.getInstance(module);
           VirtualFile[] _contentRoots = _instance.getContentRoots();
           final VirtualFile root = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
-          VirtualFileSystem _fileSystem = root.getFileSystem();
-          final VirtualFile file = _fileSystem.findFileByPath(path);
-          final String relativePath = VfsUtil.getRelativePath(file, root);
+          String _path = root.getPath();
+          final String relativePath = FileUtil.getRelativePath(_path, path, File.separatorChar);
           return relativePath;
         }
       };
