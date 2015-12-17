@@ -51,6 +51,10 @@ branches.each { branch ->
 			jobs.create("xtext-web-${branch.displayName}").definition {
 				xml templates.gradleBuild.override { config ->
 					config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
+					config.scm.userRemoteConfigs
+						.'hudson.plugins.git.UserRemoteConfig'
+						.refspec = "+refs/heads/${branch.name}:refs/remotes/origin/${branch.name}"
+			
 					config.description = "This job was generated"
 					applyGradleConfiguration(config, job)
 				}

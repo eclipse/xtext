@@ -21,7 +21,7 @@
 		<configVersion>2</configVersion>
 		<userRemoteConfigs>
 			<hudson.plugins.git.UserRemoteConfig>
-				<refspec>+refs/heads/master:refs/remotes/origin/master</refspec>
+				<refspec/>
 				<url>https://github.com/eclipse/xtext.git</url>
 			</hudson.plugins.git.UserRemoteConfig>
 		</userRemoteConfigs>
