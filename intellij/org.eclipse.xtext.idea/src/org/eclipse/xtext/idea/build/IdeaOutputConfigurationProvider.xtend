@@ -12,8 +12,7 @@ import com.google.inject.Inject
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModuleRootManager
-import com.intellij.openapi.vfs.VfsUtil
-import java.net.URL
+import java.io.File
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -26,8 +25,8 @@ import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping
 import org.eclipse.xtext.idea.facet.FacetProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 
+import static extension com.intellij.openapi.util.io.FileUtil.*
 import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
-import java.io.File
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -75,11 +74,10 @@ class IdeaOutputConfigurationProvider implements IContextualOutputConfigurationP
 	}
 	
 	def String toModuleRelativePath(String path, Module module) {
-		if (new File(path).absolute) {
+		if (path.absolute) {
 			return ApplicationManager.application.<String>runReadAction[
 				val root = ModuleRootManager.getInstance(module).contentRoots.head
-				val file = root.fileSystem.findFileByPath(path)
-				val relativePath = VfsUtil.getRelativePath(file, root)
+				val relativePath = root.path.getRelativePath(path, File.separatorChar)
 				return relativePath
 			]
 		}
