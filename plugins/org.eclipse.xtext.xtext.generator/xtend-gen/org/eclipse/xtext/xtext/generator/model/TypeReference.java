@@ -142,7 +142,7 @@ public class TypeReference {
   }
   
   public TypeReference(final EClass clazz, final ResourceSet resourceSet) {
-    this(TypeReference.getQualifiedName(clazz, resourceSet));
+    this(TypeReference.getQualifiedName(clazz, resourceSet), null, false);
   }
   
   public TypeReference(final EPackage epackage, final ResourceSet resourceSet) {

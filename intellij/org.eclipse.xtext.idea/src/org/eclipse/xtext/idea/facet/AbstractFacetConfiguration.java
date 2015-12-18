@@ -33,7 +33,7 @@ public abstract class AbstractFacetConfiguration implements FacetConfiguration {
 	@Override
 	@SuppressWarnings("unchecked")
 	public FacetEditorTab[] createEditorTabs(FacetEditorContext editorContext, FacetValidatorsManager validatorsManager) {
-		GeneratorFacetForm uiForm = new GeneratorFacetForm(editorContext.getFacet().getModule());
+		GeneratorFacetForm uiForm = new GeneratorFacetForm(editorContext.getFacet().getModule(), validatorsManager);
 		GeneratorFacetEditorTab<AbstractFacetConfiguration> facetEditorTab = new GeneratorFacetEditorTab<AbstractFacetConfiguration>(editorContext.getFacet(),
 				uiForm);
 		return new FacetEditorTab[] { facetEditorTab };

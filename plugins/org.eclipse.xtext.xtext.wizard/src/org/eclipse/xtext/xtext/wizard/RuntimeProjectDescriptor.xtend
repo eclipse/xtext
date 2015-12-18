@@ -267,7 +267,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					args += "rootPath=/${projectDir}/.."
 				}
 				
-				compileXtend.dependsOn(generateXtextLanguage)
+				generateXtext.dependsOn(generateXtextLanguage)
 				clean.dependsOn(cleanGenerateXtextLanguage)
 				eclipse.classpath.plusConfigurations += [configurations.mwe2]
 			'''
