@@ -3,8 +3,8 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath 'org.xtend:xtend-gradle-plugin:0.4.12'
-		classpath 'org.xtext:xtext-idea-gradle-plugin:0.3.25'
+		classpath 'org.xtext:xtext-gradle-plugin:1.0.1'
+		classpath 'org.xtext:xtext-idea-gradle-plugin:1.0.1'
 	}
 }
 
@@ -18,7 +18,7 @@ subprojects {
 	}
 	
 	apply plugin: 'java'
-	apply plugin: 'org.xtend.xtend'
+	apply plugin: 'org.xtext.xtend'
 	apply from: "${rootDir}/gradle/source-layout.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	apply plugin: 'eclipse'
