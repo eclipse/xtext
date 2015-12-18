@@ -184,11 +184,11 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("dependencies {");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
+        _builder.append("classpath \'org.xtext:xtext-gradle-plugin:");
         WizardConfiguration _config = ParentProjectDescriptor.this.getConfig();
         XtextVersion _xtextVersion = _config.getXtextVersion();
-        String _xtendGradlePluginVersion = _xtextVersion.getXtendGradlePluginVersion();
-        _builder.append(_xtendGradlePluginVersion, "\t\t");
+        String _xtextGradlePluginVersion = _xtextVersion.getXtextGradlePluginVersion();
+        _builder.append(_xtextGradlePluginVersion, "\t\t");
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
         {
@@ -200,8 +200,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
             _builder.append("classpath \'org.xtext:xtext-idea-gradle-plugin:");
             WizardConfiguration _config_2 = ParentProjectDescriptor.this.getConfig();
             XtextVersion _xtextVersion_1 = _config_2.getXtextVersion();
-            String _xtextGradlePluginVersion = _xtextVersion_1.getXtextGradlePluginVersion();
-            _builder.append(_xtextGradlePluginVersion, "\t\t");
+            String _xtextGradlePluginVersion_1 = _xtextVersion_1.getXtextGradlePluginVersion();
+            _builder.append(_xtextGradlePluginVersion_1, "\t\t");
             _builder.append("\'");
             _builder.newLineIfNotEmpty();
           }
@@ -253,7 +253,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("apply plugin: \'java\'");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("apply plugin: \'org.xtend.xtend\'");
+        _builder.append("apply plugin: \'org.xtext.xtend\'");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("apply from: \"${rootDir}/gradle/source-layout.gradle\"");

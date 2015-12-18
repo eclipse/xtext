@@ -744,7 +744,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.append("}");
         _builder.newLine();
         _builder.newLine();
-        _builder.append("compileXtend.dependsOn(generateXtextLanguage)");
+        _builder.append("generateXtext.dependsOn(generateXtextLanguage)");
         _builder.newLine();
         _builder.append("clean.dependsOn(cleanGenerateXtextLanguage)");
         _builder.newLine();

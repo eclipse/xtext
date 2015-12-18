@@ -97,18 +97,18 @@ public class XtextVersion {
   }
   
   public String getXtendGradlePluginVersion() {
-    return "0.4.12";
+    return this.getXtextGradlePluginVersion();
   }
   
   public String getXtextGradlePluginVersion() {
-    return "0.3.25";
+    return "1.0.1";
   }
   
   /**
    * @noreference
    */
   public String getMweVersion() {
-    return "2.8.2";
+    return "2.8.3";
   }
   
   @Override

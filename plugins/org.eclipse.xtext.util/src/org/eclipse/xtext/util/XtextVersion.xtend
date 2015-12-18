@@ -53,18 +53,18 @@ class XtextVersion {
 	}
 	
 	def getXtendGradlePluginVersion() {
-		'0.4.12'
+		xtextGradlePluginVersion
 	}
 	
 	def getXtextGradlePluginVersion() {
-		'0.3.25'
+		'1.0.1'
 	}
 
 	/**
 	 * @noreference
 	 */
 	def getMweVersion() {
-		'2.8.2'
+		'2.8.3'
 	}
 	
 	override toString() {

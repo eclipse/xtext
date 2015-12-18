@@ -80,7 +80,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						jcenter()
 					}
 					dependencies {
-						classpath 'org.xtend:xtend-gradle-plugin:«config.xtextVersion.xtendGradlePluginVersion»'
+						classpath 'org.xtext:xtext-gradle-plugin:«config.xtextVersion.xtextGradlePluginVersion»'
 						«IF config.intellijProject.isEnabled»
 							classpath 'org.xtext:xtext-idea-gradle-plugin:«config.xtextVersion.xtextGradlePluginVersion»'
 						«ENDIF»
@@ -99,7 +99,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					}
 					
 					apply plugin: 'java'
-					apply plugin: 'org.xtend.xtend'
+					apply plugin: 'org.xtext.xtend'
 					apply from: "${rootDir}/gradle/source-layout.gradle"
 					apply from: "${rootDir}/gradle/maven-deployment.gradle"
 					apply plugin: 'eclipse'

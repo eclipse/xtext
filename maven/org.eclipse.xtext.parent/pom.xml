@@ -34,8 +34,8 @@
 		<mavenVersion>3.2.1</mavenVersion>
 		<tycho-version>0.23.1</tycho-version>
 		<emf.version>(2.8,3.0)</emf.version>
-		<mwe2-version>2.8.2</mwe2-version>
-		<mwe-version>1.3.12</mwe-version>
+		<mwe2-version>2.8.3</mwe2-version>
+		<mwe-version>1.3.13</mwe-version>
 		<xpand-version>2.0.0</xpand-version>
 
 		<maven-install-version>2.5.1</maven-install-version>

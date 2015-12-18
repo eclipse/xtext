@@ -18,9 +18,11 @@ import org.eclipse.xtext.idea.facet.GeneratorFacetEditorTab
  */
 class XbaseFacetConfiguration extends AbstractFacetConfiguration {
 
-	override FacetEditorTab[] createEditorTabs(FacetEditorContext editorContext,
-		FacetValidatorsManager validatorsManager) {
-		val uiForm = new XbaseFacetForm(editorContext.getFacet().getModule());
+	override FacetEditorTab[] createEditorTabs(
+		FacetEditorContext editorContext,
+		FacetValidatorsManager validatorsManager
+	) {
+		val uiForm = new XbaseFacetForm(editorContext.getFacet().getModule(), validatorsManager);
 		val facetEditorTab = new GeneratorFacetEditorTab<XbaseFacetConfiguration>(editorContext.getFacet(),
 			uiForm);
 		return #[facetEditorTab];
