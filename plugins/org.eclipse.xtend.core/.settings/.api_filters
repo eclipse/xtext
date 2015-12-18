@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
-                <message_argument value="2.9.1"/>
+                <message_argument value="2.9.2"/>
                 <message_argument value="org.eclipse.xtext.common.types"/>
             </message_arguments>
         </filter>
