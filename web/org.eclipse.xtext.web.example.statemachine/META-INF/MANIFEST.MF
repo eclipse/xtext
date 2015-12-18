@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Statemachine Web Example - Runtime
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.9.1.qualifier
+Bundle-Version: 2.9.2.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.web.example.statemachine; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
