@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter id="927989779">
             <message_arguments>
-                <message_argument value="2.9.1"/>
+                <message_argument value="2.9.2"/>
                 <message_argument value="org.eclipse.xtext.xbase.lib"/>
             </message_arguments>
         </filter>

@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xbase Runtime Library
 Bundle-SymbolicName: org.eclipse.xtext.xbase.lib
-Bundle-Version: 2.9.1.qualifier
+Bundle-Version: 2.9.2.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xtend2.lib;version="2.9.1",
- org.eclipse.xtext.xbase.lib;version="2.9.1",
+Export-Package: org.eclipse.xtend2.lib;version="2.9.2",
+ org.eclipse.xtext.xbase.lib;version="2.9.2",
  org.eclipse.xtext.xbase.lib.internal;x-internal:="true",
- org.eclipse.xtext.xbase.lib.util;version="2.9.1"
+ org.eclipse.xtext.xbase.lib.util;version="2.9.2"
 Require-Bundle: com.google.guava;bundle-version="[10.0.1,19.0.0)";visibility:=reexport
 Bundle-Vendor: Eclipse Xtext

@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtend.gwt"
       label="%featureName"
-      version="2.9.1.qualifier"
+      version="2.9.2.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.xtend.lib.gwt"
       license-feature="org.eclipse.xtext.license"
@@ -26,9 +26,9 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"/>
 
    <requires>
-      <import plugin="org.eclipse.xtend.lib" version="2.9.1" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.macro.source" version="2.9.1" match="equivalent"/>
-      <import plugin="org.eclipse.xtend.lib.source" version="2.9.1" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib" version="2.9.2" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.macro.source" version="2.9.2" match="equivalent"/>
+      <import plugin="org.eclipse.xtend.lib.source" version="2.9.2" match="equivalent"/>
    </requires>
 
    <plugin

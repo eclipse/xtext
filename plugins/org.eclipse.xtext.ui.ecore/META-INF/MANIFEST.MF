@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.ui.ecore;singleton:=true
 Bundle-Localization: plugin
-Bundle-Version: 2.9.1.qualifier
+Bundle-Version: 2.9.2.qualifier
 Bundle-Activator: org.eclipse.xtext.ui.ecore.Activator
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.ui;bundle-version="3.6.0",

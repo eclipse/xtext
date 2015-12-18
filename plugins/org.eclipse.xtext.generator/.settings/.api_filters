@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
-                <message_argument value="2.9.1"/>
+                <message_argument value="2.9.2"/>
                 <message_argument value="org.eclipse.xtext.xbase.lib"/>
             </message_arguments>
         </filter>
@@ -12,7 +12,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.AbstractSimpleExpressionsRuntimeModule"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -20,7 +20,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -28,7 +28,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -36,7 +36,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -44,7 +44,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -52,7 +52,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.ConditionSimplifier"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -60,7 +60,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.PartialClassExtractor"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -68,7 +68,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsRuntimeModule"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -76,7 +76,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetup"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -84,7 +84,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetupGenerated"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -92,7 +92,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -100,7 +100,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.formatting.SimpleExpressionsFormatter"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -108,7 +108,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parseTreeConstruction.SimpleExpressionsParsetreeConstructor"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -116,7 +116,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsAntlrTokenFileProvider"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -124,7 +124,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsParser"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -132,7 +132,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsLexer"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -140,7 +140,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsParser"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -148,7 +148,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpressionsGrammarAccess"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -156,7 +156,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -164,7 +164,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -172,7 +172,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -180,7 +180,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -188,7 +188,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -196,7 +196,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -204,7 +204,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -212,7 +212,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -220,7 +220,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsFactory"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -228,7 +228,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -236,7 +236,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.AndExpressionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -244,7 +244,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ComparisonImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -252,7 +252,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ExpressionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -260,7 +260,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.IfConditionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -268,7 +268,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.MethodCallImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -276,7 +276,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NotExpressionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -284,7 +284,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NumberLiteralImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -292,7 +292,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.OrExpressionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -300,7 +300,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsFactoryImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -308,7 +308,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -316,7 +316,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsAdapterFactory"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -324,7 +324,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsSwitch"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -332,7 +332,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.validation.AbstractSimpleExpressionsJavaValidator"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -340,7 +340,7 @@
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.validation.SimpleExpressionsJavaValidator"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -348,7 +348,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.AbstractSimpleAntlrRuntimeModule"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -356,7 +356,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrStandaloneSetupGenerated"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -364,7 +364,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.parseTreeConstruction.SimpleAntlrParsetreeConstructor"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -372,7 +372,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.parser.antlr.SimpleAntlrAntlrTokenFileProvider"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -380,7 +380,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.parser.antlr.SimpleAntlrParser"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -388,7 +388,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.parser.antlr.internal.InternalSimpleAntlrLexer"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -396,7 +396,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.parser.antlr.internal.InternalSimpleAntlrParser"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -404,7 +404,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.services.SimpleAntlrGrammarAccess"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -412,7 +412,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Alternatives"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -420,7 +420,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AntlrGrammar"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -428,7 +428,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ElementWithCardinality"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -436,7 +436,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Group"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -444,7 +444,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Keyword"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -452,7 +452,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NegatedElement"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -460,7 +460,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OptionValue"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -468,7 +468,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Options"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -476,7 +476,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -484,7 +484,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -492,7 +492,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -500,7 +500,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -508,7 +508,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleOptions"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -516,7 +516,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrFactory"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -524,7 +524,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -532,7 +532,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -540,7 +540,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.UntilElement"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -548,7 +548,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Wildcard"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -556,7 +556,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.AlternativesImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -564,7 +564,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.AntlrGrammarImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -572,7 +572,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ElementWithCardinalityImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -580,7 +580,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.GroupImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -588,7 +588,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.KeywordImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -596,7 +596,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.NegatedElementImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -604,7 +604,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.OptionValueImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -612,7 +612,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.OptionsImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -620,7 +620,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.PredicatedImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -628,7 +628,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleCallImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -636,7 +636,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleElementImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -644,7 +644,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -652,7 +652,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleOptionsImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -660,7 +660,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrFactoryImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -668,7 +668,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -676,7 +676,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SkipImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -684,7 +684,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.UntilElementImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -692,7 +692,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.WildcardImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -700,7 +700,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.util.SimpleAntlrAdapterFactory"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -708,7 +708,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.util.SimpleAntlrSwitch"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -716,7 +716,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.validation.AbstractSimpleAntlrJavaValidator"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -740,7 +740,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrRuntimeModule"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -748,7 +748,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrStandaloneSetup"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -756,7 +756,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.formatting.SimpleAntlrFormatter"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -764,7 +764,7 @@
         <filter id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.validation.SimpleAntlrJavaValidator"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.1"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.2"/>
             </message_arguments>
         </filter>
     </resource>

@@ -3,7 +3,7 @@ Bundle-Localization: plugin
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtend2.lib
-Bundle-Version: 2.9.1.qualifier
+Bundle-Version: 2.9.2.qualifier
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.xtext.xbase.lib;visibility:=reexport,
  org.eclipse.xtend.lib;visibility:=reexport

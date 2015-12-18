@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.build"
       label="Xtext Update Site"
-      version="2.9.1.qualifier"
+      version="2.9.2.qualifier"
       provider-name="%providerName"
       image="eclipse_update_120.jpg"
       license-feature="org.eclipse.xtext.license"
