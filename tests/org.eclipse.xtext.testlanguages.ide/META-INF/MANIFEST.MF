@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Common Xtext Testlanguages For UI and Runtime - IDE
 Bundle-SymbolicName: org.eclipse.xtext.testlanguages.ide;singleton:=true
-Bundle-Version: 2.9.1.qualifier
+Bundle-Version: 2.9.2.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Eclipse Xtext
 Bundle-ActivationPolicy: lazy
