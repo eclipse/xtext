@@ -582,7 +582,8 @@ class JavaASTFlattener extends ASTVisitor {
 	
 	def hasDimensions(VariableDeclarationFragment fragment) {
 		if(java8orHigher) {
-			return !fragment.extraDimensions().empty
+			var dimensions = fragment.genericChildListProperty("extraDimensions2")
+			return !dimensions.nullOrEmpty
 		} else {
 			return fragment.getExtraDimensions() > 0
 		}

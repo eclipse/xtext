@@ -1019,12 +1019,12 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean hasDimensions(final VariableDeclarationFragment fragment) {
     boolean _java8orHigher = this.java8orHigher();
     if (_java8orHigher) {
-      List _extraDimensions = fragment.extraDimensions();
-      boolean _isEmpty = _extraDimensions.isEmpty();
-      return (!_isEmpty);
+      List<ASTNode> dimensions = this._aSTFlattenerUtils.genericChildListProperty(fragment, "extraDimensions2");
+      boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(dimensions);
+      return (!_isNullOrEmpty);
     } else {
-      int _extraDimensions_1 = fragment.getExtraDimensions();
-      return (_extraDimensions_1 > 0);
+      int _extraDimensions = fragment.getExtraDimensions();
+      return (_extraDimensions > 0);
     }
   }
   
