@@ -429,13 +429,21 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public StringBuffer handleRightHandSide(final Assignment a, final Type type) {
     StringBuffer _xifexpression = null;
+    boolean _and = false;
     boolean _needPrimitiveCast = this._aSTFlattenerUtils.needPrimitiveCast(type);
-    if (_needPrimitiveCast) {
+    if (!_needPrimitiveCast) {
+      _and = false;
+    } else {
+      Expression _rightHandSide = a.getRightHandSide();
+      boolean _not = (!(_rightHandSide instanceof ArrayCreation));
+      _and = _not;
+    }
+    if (_and) {
       StringBuffer _xblockexpression = null;
       {
         this.appendToBuffer("(");
-        Expression _rightHandSide = a.getRightHandSide();
-        _rightHandSide.accept(this);
+        Expression _rightHandSide_1 = a.getRightHandSide();
+        _rightHandSide_1.accept(this);
         StringConcatenation _builder = new StringConcatenation();
         _builder.append(") as ");
         _builder.append(type, "");
@@ -443,8 +451,8 @@ public class JavaASTFlattener extends ASTVisitor {
       }
       _xifexpression = _xblockexpression;
     } else {
-      Expression _rightHandSide = a.getRightHandSide();
-      _rightHandSide.accept(this);
+      Expression _rightHandSide_1 = a.getRightHandSide();
+      _rightHandSide_1.accept(this);
     }
     return _xifexpression;
   }
@@ -972,8 +980,16 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendToBuffer("=");
       SimpleName _name_1 = it.getName();
       final Type type = this._aSTFlattenerUtils.findDeclaredType(_name_1);
+      boolean _and = false;
       boolean _needPrimitiveCast = this._aSTFlattenerUtils.needPrimitiveCast(type);
-      if (_needPrimitiveCast) {
+      if (!_needPrimitiveCast) {
+        _and = false;
+      } else {
+        boolean _hasDimensions = this.hasDimensions(it);
+        boolean _not = (!_hasDimensions);
+        _and = _not;
+      }
+      if (_and) {
         this.appendToBuffer("(");
         Expression _initializer_1 = it.getInitializer();
         _initializer_1.accept(this);
@@ -998,6 +1014,18 @@ public class JavaASTFlattener extends ASTVisitor {
       }
     }
     return false;
+  }
+  
+  public boolean hasDimensions(final VariableDeclarationFragment fragment) {
+    boolean _java8orHigher = this.java8orHigher();
+    if (_java8orHigher) {
+      List _extraDimensions = fragment.extraDimensions();
+      boolean _isEmpty = _extraDimensions.isEmpty();
+      return (!_isEmpty);
+    } else {
+      int _extraDimensions_1 = fragment.getExtraDimensions();
+      return (_extraDimensions_1 > 0);
+    }
   }
   
   @Override
