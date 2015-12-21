@@ -863,12 +863,18 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			private int ar[] = new int[1];
 			public void arDim() {
 				int ar2[] = new int[2];
+				ar2  = new int[4];
+				byte bytes[] = new byte[1];
+				bytes = new byte[2];
 			}
 		'''
 		assertEquals('''
 		int[] ar=newIntArrayOfSize(1)
 		def void arDim() {
 			var int[] ar2=newIntArrayOfSize(2) 
+			ar2=newIntArrayOfSize(4) 
+			var byte[] bytes=newByteArrayOfSize(1) 
+			bytes=newByteArrayOfSize(2) 
 		}'''.toString, toXtendClassBodyDeclr(xtendCode))
 	}
 

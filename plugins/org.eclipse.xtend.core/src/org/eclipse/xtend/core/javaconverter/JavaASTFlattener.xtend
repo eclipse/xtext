@@ -281,7 +281,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 	
 	def handleRightHandSide(Assignment a, Type type) {
-		if (type.needPrimitiveCast) {
+		if (type.needPrimitiveCast && !(a.rightHandSide instanceof ArrayCreation)) {
 			appendToBuffer('(')
 			a.getRightHandSide().accept(this)
 			appendToBuffer(''') as «type»''')
@@ -564,7 +564,7 @@ class JavaASTFlattener extends ASTVisitor {
 		if (getInitializer() != null) {
 			appendToBuffer("=")
 			val type = findDeclaredType(name)
-			if (type.needPrimitiveCast) {
+			if (type.needPrimitiveCast && !hasDimensions(it)) {
 				appendToBuffer('(')
 				getInitializer.accept(this)
 				appendToBuffer(''') as «type»''')
@@ -578,6 +578,14 @@ class JavaASTFlattener extends ASTVisitor {
 			}
 		}
 		return false
+	}
+	
+	def hasDimensions(VariableDeclarationFragment fragment) {
+		if(java8orHigher) {
+			return !fragment.extraDimensions().empty
+		} else {
+			return fragment.getExtraDimensions() > 0
+		}
 	}
 
 	override boolean visit(ConditionalExpression node) {
