@@ -20,12 +20,15 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtend.core.xtend.impl.XtendFactoryImpl
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
+import org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsFactoryImpl
+import org.eclipse.xtext.xbase.impl.XbaseFactoryImpl
 import org.junit.Before
 import org.junit.Test
 
@@ -1678,7 +1681,18 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			}'''
 		assertEquals(expected, xtendCode)
 	}
-
+	
+	@Test
+	def testForceStatementForTargetObject() {
+		assertFalse("Not a statement before annotation",
+			j2x.shouldForceStatementMode(new XAnnotationsFactoryImpl().createXAnnotation))
+		val xc = new XtendFactoryImpl().createXtendConstructor()
+		assertFalse("Not a statement before constructor", j2x.shouldForceStatementMode(xc))
+		val block = new XbaseFactoryImpl().createXBlockExpression
+		xc.expression = block
+		assertTrue("Force statement when parent is executable", j2x.shouldForceStatementMode(block))
+	}
+	
 	def protected XtendClass toValidXtendClass(CharSequence javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}

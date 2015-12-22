@@ -9,12 +9,17 @@ package org.eclipse.xtend.core.javaconverter
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.jdt.core.ICompilationUnit
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.Block
 import org.eclipse.xtend.core.javaconverter.ASTParserFactory.ASTParserWrapper
+import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer.JavaParseResult
+import org.eclipse.xtend.core.xtend.XtendExecutable
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
 /**
  * Converts Java code or an ICompilationUnit to Xtend code<br>
@@ -22,6 +27,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
  *  @author Dennis Hübner - Initial contribution and API
  */
 class JavaConverter {
+	@Inject JavaCodeAnalyzer codeAnalyzer
 	@Inject ASTParserFactory astParserFactory
 	@Inject Provider<JavaASTFlattener> astFlattenerProvider
 
@@ -32,12 +38,12 @@ class JavaConverter {
 		val root = parser.createAST()
 		return executeAstFlattener(cu.source, root, parser.targetLevel, false)
 	}
+	
 
 	/**
 	 * @param unitName some CU name e.g. Clazz. UnitName may not be <code>null</code>.<br>
 	 * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
 	 * @param javaSrc Java source code as String
-	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject)
 	 * @throws IllegalArgumentException if unitName is <code>null</code> 
 	 */
 	def ConversionResult toXtend(String unitName, String javaSrc) {
@@ -59,6 +65,32 @@ class JavaConverter {
 		internalToXtend(unitName, javaSrc, null, astParserFactory.createJavaParser(classPathContext))
 	}
 
+	/**
+	 * @param javaSrc Java class source code as String
+	 * @param javaImports imports to use 
+	 * @param targetElement Used to determinate javaCode conversion type
+	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
+	 */
+	def String toXtend(String javaCode, String[] javaImports, EObject targetElement, Object classPathContext) {
+		var boolean forceStatement = shouldForceStatementMode(targetElement)
+		var JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaCode)
+		if (parseResult === null) {
+			return javaCode
+		}
+		var ConversionResult conversionResult
+		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
+			if (parseResult.getType() === ASTParser.K_EXPRESSION) {
+				conversionResult = expressionToXtend(javaCode, classPathContext)
+			} else {
+				conversionResult = statementToXtend(javaCode, classPathContext)
+			}
+		} else {
+			conversionResult = bodyDeclarationToXtend(javaCode, if(javaImports !== null) javaImports else null,
+				classPathContext)
+		}
+		return conversionResult.getXtendCode()
+	}
+	
 	/**
 	 * @param javaSrc Java class source code as String
 	 * @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
@@ -144,6 +176,12 @@ class JavaConverter {
 	def JavaConverter useRobustSyntax() {
 		this.fallbackConversionStartegy = true
 		return this
+	}
+
+	def boolean shouldForceStatementMode(EObject targetElement) {
+		return targetElement !== null &&
+			!((targetElement instanceof XAnnotation) || (targetElement instanceof XtendExecutable)) &&
+			EcoreUtil2.getContainerOfType(targetElement, XtendExecutable) !== null
 	}
 
 	@Accessors
