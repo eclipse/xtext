@@ -255,6 +255,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testFinalVariableEmptyInitializer();
   }
   
+  public void testForceStatementForTargetObject() {
+    delegate.testForceStatementForTargetObject();
+  }
+  
   public void testIfElseCase_01() throws Exception {
     delegate.testIfElseCase_01();
   }

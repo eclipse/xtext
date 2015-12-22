@@ -11,14 +11,19 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.Block;
 import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
 import org.eclipse.xtend.core.javaconverter.JavaASTFlattener;
+import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer;
+import org.eclipse.xtend.core.xtend.XtendExecutable;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -72,6 +77,9 @@ public class JavaConverter {
   }
   
   @Inject
+  private JavaCodeAnalyzer codeAnalyzer;
+  
+  @Inject
   private ASTParserFactory astParserFactory;
   
   @Inject
@@ -95,7 +103,6 @@ public class JavaConverter {
    * @param unitName some CU name e.g. Clazz. UnitName may not be <code>null</code>.<br>
    * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
    * @param javaSrc Java source code as String
-   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject)
    * @throws IllegalArgumentException if unitName is <code>null</code>
    */
   public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc) {
@@ -129,6 +136,50 @@ public class JavaConverter {
       _xblockexpression = this.internalToXtend(unitName, javaSrc, null, _createJavaParser);
     }
     return _xblockexpression;
+  }
+  
+  /**
+   * @param javaSrc Java class source code as String
+   * @param javaImports imports to use
+   * @param targetElement Used to determinate javaCode conversion type
+   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
+   */
+  public String toXtend(final String javaCode, final String[] javaImports, final EObject targetElement, final Object classPathContext) {
+    boolean forceStatement = this.shouldForceStatementMode(targetElement);
+    JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> parseResult = this.codeAnalyzer.determinateJavaType(javaCode);
+    if ((parseResult == null)) {
+      return javaCode;
+    }
+    JavaConverter.ConversionResult conversionResult = null;
+    boolean _or = false;
+    if (forceStatement) {
+      _or = true;
+    } else {
+      int _type = parseResult.getType();
+      boolean _lessThan = (_type < ASTParser.K_CLASS_BODY_DECLARATIONS);
+      _or = _lessThan;
+    }
+    if (_or) {
+      int _type_1 = parseResult.getType();
+      boolean _tripleEquals = (_type_1 == ASTParser.K_EXPRESSION);
+      if (_tripleEquals) {
+        JavaConverter.ConversionResult _expressionToXtend = this.expressionToXtend(javaCode, classPathContext);
+        conversionResult = _expressionToXtend;
+      } else {
+        JavaConverter.ConversionResult _statementToXtend = this.statementToXtend(javaCode, classPathContext);
+        conversionResult = _statementToXtend;
+      }
+    } else {
+      String[] _xifexpression = null;
+      if ((javaImports != null)) {
+        _xifexpression = javaImports;
+      } else {
+        _xifexpression = null;
+      }
+      JavaConverter.ConversionResult _bodyDeclarationToXtend = this.bodyDeclarationToXtend(javaCode, _xifexpression, classPathContext);
+      conversionResult = _bodyDeclarationToXtend;
+    }
+    return conversionResult.getXtendCode();
   }
   
   /**
@@ -240,5 +291,18 @@ public class JavaConverter {
   public JavaConverter useRobustSyntax() {
     this.fallbackConversionStartegy = true;
     return this;
+  }
+  
+  public boolean shouldForceStatementMode(final EObject targetElement) {
+    boolean _and = false;
+    if (!((targetElement != null) && 
+      (!((targetElement instanceof XAnnotation) || (targetElement instanceof XtendExecutable))))) {
+      _and = false;
+    } else {
+      XtendExecutable _containerOfType = EcoreUtil2.<XtendExecutable>getContainerOfType(targetElement, XtendExecutable.class);
+      boolean _tripleNotEquals = (_containerOfType != null);
+      _and = _tripleNotEquals;
+    }
+    return _and;
   }
 }

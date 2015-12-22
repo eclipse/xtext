@@ -20,18 +20,23 @@ import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.core.xtend.impl.XtendFactoryImpl;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsFactoryImpl;
+import org.eclipse.xtext.xbase.impl.XbaseFactoryImpl;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -3268,6 +3273,23 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_1.append("}");
     final String expected = _builder_1.toString();
     Assert.assertEquals(expected, xtendCode);
+  }
+  
+  @Test
+  public void testForceStatementForTargetObject() {
+    XAnnotationsFactoryImpl _xAnnotationsFactoryImpl = new XAnnotationsFactoryImpl();
+    XAnnotation _createXAnnotation = _xAnnotationsFactoryImpl.createXAnnotation();
+    boolean _shouldForceStatementMode = this.j2x.shouldForceStatementMode(_createXAnnotation);
+    Assert.assertFalse("Not a statement before annotation", _shouldForceStatementMode);
+    XtendFactoryImpl _xtendFactoryImpl = new XtendFactoryImpl();
+    final XtendConstructor xc = _xtendFactoryImpl.createXtendConstructor();
+    boolean _shouldForceStatementMode_1 = this.j2x.shouldForceStatementMode(xc);
+    Assert.assertFalse("Not a statement before constructor", _shouldForceStatementMode_1);
+    XbaseFactoryImpl _xbaseFactoryImpl = new XbaseFactoryImpl();
+    final XBlockExpression block = _xbaseFactoryImpl.createXBlockExpression();
+    xc.setExpression(block);
+    boolean _shouldForceStatementMode_2 = this.j2x.shouldForceStatementMode(block);
+    Assert.assertTrue("Force statement when parent is executable", _shouldForceStatementMode_2);
   }
   
   protected XtendClass toValidXtendClass(final CharSequence javaCode) throws Exception {
