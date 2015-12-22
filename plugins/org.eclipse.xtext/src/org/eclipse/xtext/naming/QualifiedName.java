@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.CommonUtil;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectInputStream;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream;
 import org.eclipse.xtext.util.Strings;
@@ -19,19 +20,21 @@ import org.eclipse.xtext.util.Strings;
 import com.google.common.base.Function;
 
 /**
- * A datatype for dealing with qualified names. 
+ * A datatype for dealing with qualified names.
  * Instances are usually provided by a {@link IQualifiedNameProvider}.
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow
  */
 public class QualifiedName implements Comparable<QualifiedName> {
 
 	private final int hash;
-	
+
 	private final String[] segments;
-	
+
 	private QualifiedName lowerCase;
+
+	private static final boolean USE_INTERNING = Boolean.getBoolean("xtext.qn.interning");
 
 	public static final QualifiedName EMPTY = new QualifiedName() {
 		@Override
@@ -62,8 +65,8 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
-	 * 
-	 * @param segments the segments of the to-be-created qualified name. 
+	 *
+	 * @param segments the segments of the to-be-created qualified name.
 	 * 	May be <code>null</code>, but may not contain <code>null</code> entries.
 	 * @return a {@link QualifiedName}. Never <code>null</code>.
 	 * @exception IllegalArgumentException
@@ -76,14 +79,32 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		if (segments.length == 1) {
 			return create(segments[0]);
 		}
+		String [] newArray = new String [segments.length];
 		for (int i = 0; i < segments.length; i++) {
-			if (segments[i] == null) {
+			String string = segments[i];
+			if (string == null) {
 				throw new IllegalArgumentException("Segment cannot be null");
 			}
+			newArray[i] = intern(string);
 		}
-		return new QualifiedName(segments.clone());
+		return new QualifiedName(newArray);
 	}
-	
+
+	/**
+	 * Returns string internal instance from string pool, if a system property {@code xtext.qn.interning} is set to {@code true}, or the
+	 * same object otherwise.
+	 * <p>
+	 * Implementation notes:
+	 * <ol>
+	 * <li>Interning {@link String} objects may affect performance, see bug 484215.
+	 * <li>Interning {@link String} objects is not recommended for older JVM's, because of possible perm gen memory explosion, see
+	 * http://java-performance.info/string-intern-in-java-6-7-8/.
+	 * </ol>
+	 */
+	private static String intern(String string) {
+		return USE_INTERNING? CommonUtil.intern(string) : string;
+	}
+
 	/**
 	 * Internal low level factory method.
 	 * @noreference This method is not intended to be referenced by clients.
@@ -94,33 +115,39 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		if (segmentCount == 0) {
 			return QualifiedName.EMPTY;
 		}
-		// lowercase QN serialize a 'null' value at index 0 and 
+		// lowercase QN serialize a 'null' value at index 0 and
 		String firstSegment = eObjectInputStream.readSegmentedString();
 		boolean lowerCase = false;
 		if (firstSegment == null) {
 			lowerCase = true;
 			// first was null, read another string which is the actual first segment
 			firstSegment = eObjectInputStream.readSegmentedString();
+			if(firstSegment == null){
+				throw new IllegalStateException("Read unexpected first segment from object stream");
+			}
 		}
-		
+
 		String[] segments = readSegmentArray(eObjectInputStream, segmentCount, firstSegment);
 		if (lowerCase) {
 			return new QualifiedNameLowerCase(segments);
 		} else {
-			return new QualifiedName(segments);	
+			return new QualifiedName(segments);
 		}
 	}
 
 	private static String[] readSegmentArray(EObjectInputStream from, int count, String first) throws IOException {
 		String[] segments = new String[count];
-		segments[0] = first;
+		segments[0] = intern(first);
 		for (int i = 1; i < count; i++) {
 			String segment = from.readSegmentedString();
-			segments[i] = segment;
+			if(segment == null){
+				throw new IllegalStateException("Read unexpected segment (#" + i + ") from object stream");
+			}
+			segments[i] = intern(segment);
 		}
 		return segments;
 	}
-	
+
 	/**
 	 * Internal low level serialization of QualifiedNames.
 	 * @since 2.4
@@ -135,7 +162,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
-	 * 
+	 *
 	 * @param segments
 	 *            the segments of the to-be-created qualified name. May be <code>null</code>, but may not contain
 	 *            <code>null</code> entries.
@@ -151,18 +178,20 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			String singleSegment = segments.get(0);
 			return QualifiedName.create(singleSegment);
 		}
-		String[] segmentArray = segments.toArray(new String[segments.size()]);
-		for (int i = 0; i < segmentArray.length; i++) {
-			if (segmentArray[i] == null) {
+		String[] segmentArray = new String[segments.size()];
+		for (int i = 0; i < segments.size(); i++) {
+			String string = segments.get(i);
+			if (string == null) {
 				throw new IllegalArgumentException("Segment cannot be null");
 			}
+			segmentArray[i] = intern(string);
 		}
 		return new QualifiedName(segmentArray);
 	}
 
 	/**
 	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
-	 * 
+	 *
 	 * @param singleSegment
 	 *            the single segment of the newly created qualified name
 	 * @exception IllegalArgumentException
@@ -173,11 +202,11 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		if (singleSegment == null) {
 			throw new IllegalArgumentException("Segment cannot be null");
 		}
-		return new QualifiedName(singleSegment);
+		return new QualifiedName(intern(singleSegment));
 	}
 
 	/**
-	 * Wraps a name function to return a qualified name. Returns null if the name function returns null. 
+	 * Wraps a name function to return a qualified name. Returns null if the name function returns null.
 	 */
 	public static <F> Function<F, QualifiedName> wrapper(final Function<F, String> nameFunction) {
 		return new Function<F, QualifiedName>() {
@@ -229,7 +258,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		}
 		String[] newSegments = new String[getSegmentCount() + 1];
 		System.arraycopy(segments, 0, newSegments, 0, segments.length);
-		newSegments[segments.length] = segment;
+		newSegments[segments.length] = intern(segment);
 		return new QualifiedName(newSegments);
 	}
 
@@ -283,7 +312,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			String segment = segments[i];
 			String lowerCaseSegment = segment.toLowerCase();
 			isLowerCase = isLowerCase && segment == lowerCaseSegment;
-			newSegments[i] = lowerCaseSegment;
+			newSegments[i] = intern(lowerCaseSegment);
 		}
 		if (isLowerCase) {
 			lowerCase = this;
@@ -292,7 +321,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		}
 		return lowerCase;
 	}
-	
+
 	private static class QualifiedNameLowerCase extends QualifiedName {
 		public QualifiedNameLowerCase(String[] segments) {
 			super(segments);
@@ -306,7 +335,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 		boolean hasLowerCase() {
 			return true;
 		}
-		
+
 		/**
 		 * We serialize a segmentCount + 1 and a dummy null value as the first entry.
 		 * This is used to retrieve the information about lowercase QN in {@link QualifiedName#createFromStream(EObjectInputStream)}
@@ -326,7 +355,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	public QualifiedName toUpperCase() {
 		String[] newSegments = new String[getSegmentCount()];
 		for (int i = 0; i < getSegmentCount(); ++i)
-			newSegments[i] = segments[i].toUpperCase();
+			newSegments[i] = intern(segments[i].toUpperCase());
 		QualifiedName result = new QualifiedName(newSegments);
 		result.lowerCase = this.lowerCase;
 		return result;
@@ -353,7 +382,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	/**
 	 * Returns <code>true</code> if this instance can provide a ready to use
 	 * lowercase representation.
-	 * 
+	 *
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	boolean hasLowerCase() {
@@ -410,7 +439,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			}
 		}
 		// with Java7 this should probably read
-		// return Integer.compare(getSegmentCount(), qualifiedName.getSegmentCount()) 
+		// return Integer.compare(getSegmentCount(), qualifiedName.getSegmentCount())
 		return getSegmentCount() - qualifiedName.getSegmentCount();
 	}
 
@@ -448,7 +477,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	public String toString() {
 		return toString(".");
 	}
-	
+
 	/**
 	 * Returns a String representation of this using {@code delimiter} as namespace delimiter.
 	 * @param delimiter the delimiter to use. <code>null</code> will be represented as the String "<code>null</code>".
