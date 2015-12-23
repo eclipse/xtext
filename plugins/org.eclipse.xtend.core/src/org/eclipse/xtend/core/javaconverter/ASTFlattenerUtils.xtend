@@ -31,6 +31,9 @@ import org.eclipse.jdt.core.dom.MethodInvocation
 import org.eclipse.jdt.core.dom.Modifier
 import org.eclipse.jdt.core.dom.Name
 import org.eclipse.jdt.core.dom.NumberLiteral
+import org.eclipse.jdt.core.dom.PostfixExpression
+import org.eclipse.jdt.core.dom.PrefixExpression
+import org.eclipse.jdt.core.dom.PrimitiveType
 import org.eclipse.jdt.core.dom.QualifiedName
 import org.eclipse.jdt.core.dom.ReturnStatement
 import org.eclipse.jdt.core.dom.SimpleName
@@ -40,12 +43,10 @@ import org.eclipse.jdt.core.dom.StringLiteral
 import org.eclipse.jdt.core.dom.Type
 import org.eclipse.jdt.core.dom.TypeDeclaration
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement
+import org.eclipse.jdt.core.dom.VariableDeclaration
 import org.eclipse.jdt.core.dom.VariableDeclarationExpression
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
-import org.eclipse.jdt.core.dom.PrefixExpression
-import org.eclipse.jdt.core.dom.PostfixExpression
-import org.eclipse.jdt.core.dom.PrimitiveType
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -298,7 +299,7 @@ class ASTFlattenerUtils {
 		return matchesFound.head
 	}
 
-	def private Iterable<Expression> findAssigmentsInBlock(Block scope, (Expression)=>Boolean constraint) {
+	def Iterable<Expression> findAssignmentsInBlock(Block scope, (Expression)=>Boolean constraint) {
 		val assigments = newHashSet()
 		if (scope != null) {
 			scope.accept(new ASTVisitor() {
@@ -328,7 +329,11 @@ class ASTFlattenerUtils {
 	}
 
 	def Boolean isAssignedInBody(Block scope, VariableDeclarationFragment fieldDeclFragment) {
-		return !scope.findAssigmentsInBlock(
+		return !scope.findAssignmentsInBlock(fieldDeclFragment).empty
+	}
+	
+	def Iterable<Expression> findAssignmentsInBlock(Block scope, VariableDeclaration varDecl) {
+		return scope.findAssignmentsInBlock(
 		[
 			var Expression name = null
 			switch it {
@@ -342,15 +347,16 @@ class ASTFlattenerUtils {
 			if (name instanceof Name) {
 				val binding = name.resolveBinding()
 				if (binding instanceof IVariableBinding) {
-					return binding.field && fieldDeclFragment.name.identifier.equals(name.toSimpleName)
+					val declBinding = varDecl.resolveBinding
+					return varDecl.name.identifier.equals(name.toSimpleName) &&  binding.equals(declBinding)
 				}
 			}
 			return false
-		]).empty
+		])
 	}
 
 	def Boolean isAssignedInBody(Block scope, SimpleName nameToLookFor) {
-		return !scope.findAssigmentsInBlock(
+		return !scope.findAssignmentsInBlock(
 		[
 			var Expression simpleName = null
 			switch it {
