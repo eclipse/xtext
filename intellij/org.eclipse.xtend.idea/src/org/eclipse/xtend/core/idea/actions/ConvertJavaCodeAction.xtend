@@ -8,6 +8,8 @@
 package org.eclipse.xtend.core.idea.actions
 
 import com.intellij.openapi.actionSystem.DataContext
+import com.intellij.openapi.module.ModuleUtil
+import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFileSystemItem
 import com.intellij.psi.PsiJavaFile
@@ -28,8 +30,13 @@ class ConvertJavaCodeAction extends BaseRefactoringAction {
 	}
 
 	override protected isEnabledOnElements(PsiElement[] elements) {
-		elements.map[if(it instanceof PsiFileSystemItem) it else it.containingFile].exists [
+		elements.map [
+			if(it instanceof PsiFileSystemItem) it else it.containingFile
+		].filter [
 			it instanceof PsiJavaFile || !it.processChildren[!(it instanceof PsiJavaFile)]
+		].exists [
+			val module = ModuleUtil.findModuleForPsiElement(it)
+			return  (module !== null && ModuleRootManager.getInstance(module).sdk !== null)
 		]
 	}
 

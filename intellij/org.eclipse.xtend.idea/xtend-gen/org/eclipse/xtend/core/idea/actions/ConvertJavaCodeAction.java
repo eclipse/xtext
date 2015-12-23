@@ -8,6 +8,10 @@
 package org.eclipse.xtend.core.idea.actions;
 
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFileSystemItem;
 import com.intellij.psi.PsiJavaFile;
@@ -71,6 +75,23 @@ public class ConvertJavaCodeAction extends BaseRefactoringAction {
         return Boolean.valueOf(_or);
       }
     };
-    return IterableExtensions.<PsiFileSystemItem>exists(_map, _function_1);
+    Iterable<PsiFileSystemItem> _filter = IterableExtensions.<PsiFileSystemItem>filter(_map, _function_1);
+    final Function1<PsiFileSystemItem, Boolean> _function_2 = new Function1<PsiFileSystemItem, Boolean>() {
+      @Override
+      public Boolean apply(final PsiFileSystemItem it) {
+        final Module module = ModuleUtil.findModuleForPsiElement(it);
+        boolean _and = false;
+        if (!(module != null)) {
+          _and = false;
+        } else {
+          ModuleRootManager _instance = ModuleRootManager.getInstance(module);
+          Sdk _sdk = _instance.getSdk();
+          boolean _tripleNotEquals = (_sdk != null);
+          _and = _tripleNotEquals;
+        }
+        return Boolean.valueOf(_and);
+      }
+    };
+    return IterableExtensions.<PsiFileSystemItem>exists(_filter, _function_2);
   }
 }
