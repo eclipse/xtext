@@ -211,6 +211,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testConstructorCase();
   }
   
+  public void testConstructorProblemCase() throws Exception {
+    delegate.testConstructorProblemCase();
+  }
+  
   public void testDoWhileStatement() throws Exception {
     delegate.testDoWhileStatement();
   }

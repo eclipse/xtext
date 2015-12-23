@@ -49,6 +49,7 @@ import org.eclipse.jdt.core.dom.StringLiteral;
 import org.eclipse.jdt.core.dom.Type;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclarationStatement;
+import org.eclipse.jdt.core.dom.VariableDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationExpression;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
@@ -586,7 +587,7 @@ public class ASTFlattenerUtils {
     return IterableExtensions.<Type>head(matchesFound);
   }
   
-  private Iterable<Expression> findAssigmentsInBlock(final Block scope, final Function1<? super Expression, ? extends Boolean> constraint) {
+  public Iterable<Expression> findAssignmentsInBlock(final Block scope, final Function1<? super Expression, ? extends Boolean> constraint) {
     final HashSet<Expression> assigments = CollectionLiterals.<Expression>newHashSet();
     boolean _notEquals = (!Objects.equal(scope, null));
     if (_notEquals) {
@@ -623,6 +624,12 @@ public class ASTFlattenerUtils {
   }
   
   public Boolean isAssignedInBody(final Block scope, final VariableDeclarationFragment fieldDeclFragment) {
+    Iterable<Expression> _findAssignmentsInBlock = this.findAssignmentsInBlock(scope, fieldDeclFragment);
+    boolean _isEmpty = IterableExtensions.isEmpty(_findAssignmentsInBlock);
+    return Boolean.valueOf((!_isEmpty));
+  }
+  
+  public Iterable<Expression> findAssignmentsInBlock(final Block scope, final VariableDeclaration varDecl) {
     final Function1<Expression, Boolean> _function = new Function1<Expression, Boolean>() {
       @Override
       public Boolean apply(final Expression it) {
@@ -652,16 +659,17 @@ public class ASTFlattenerUtils {
         if ((name instanceof Name)) {
           final IBinding binding = ((Name)name).resolveBinding();
           if ((binding instanceof IVariableBinding)) {
+            final IVariableBinding declBinding = varDecl.resolveBinding();
             boolean _and = false;
-            boolean _isField = ((IVariableBinding)binding).isField();
-            if (!_isField) {
+            SimpleName _name = varDecl.getName();
+            String _identifier = _name.getIdentifier();
+            String _simpleName = ASTFlattenerUtils.this.toSimpleName(((Name)name));
+            boolean _equals = _identifier.equals(_simpleName);
+            if (!_equals) {
               _and = false;
             } else {
-              SimpleName _name = fieldDeclFragment.getName();
-              String _identifier = _name.getIdentifier();
-              String _simpleName = ASTFlattenerUtils.this.toSimpleName(((Name)name));
-              boolean _equals = _identifier.equals(_simpleName);
-              _and = _equals;
+              boolean _equals_1 = ((IVariableBinding)binding).equals(declBinding);
+              _and = _equals_1;
             }
             return Boolean.valueOf(_and);
           }
@@ -669,9 +677,7 @@ public class ASTFlattenerUtils {
         return Boolean.valueOf(false);
       }
     };
-    Iterable<Expression> _findAssigmentsInBlock = this.findAssigmentsInBlock(scope, _function);
-    boolean _isEmpty = IterableExtensions.isEmpty(_findAssigmentsInBlock);
-    return Boolean.valueOf((!_isEmpty));
+    return this.findAssignmentsInBlock(scope, _function);
   }
   
   public Boolean isAssignedInBody(final Block scope, final SimpleName nameToLookFor) {
@@ -717,8 +723,8 @@ public class ASTFlattenerUtils {
         return Boolean.valueOf(false);
       }
     };
-    Iterable<Expression> _findAssigmentsInBlock = this.findAssigmentsInBlock(scope, _function);
-    boolean _isEmpty = IterableExtensions.isEmpty(_findAssigmentsInBlock);
+    Iterable<Expression> _findAssignmentsInBlock = this.findAssignmentsInBlock(scope, _function);
+    boolean _isEmpty = IterableExtensions.isEmpty(_findAssignmentsInBlock);
     return Boolean.valueOf((!_isEmpty));
   }
   

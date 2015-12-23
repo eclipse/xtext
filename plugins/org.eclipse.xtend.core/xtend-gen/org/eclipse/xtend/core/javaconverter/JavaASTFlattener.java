@@ -1247,6 +1247,35 @@ public class JavaASTFlattener extends ASTVisitor {
         SimpleName _name = p.getName();
         Boolean _isAssignedInBody = JavaASTFlattener.this._aSTFlattenerUtils.isAssignedInBody(_body, _name);
         if ((_isAssignedInBody).booleanValue()) {
+          boolean _and = false;
+          boolean _isConstructor = it.isConstructor();
+          if (!_isConstructor) {
+            _and = false;
+          } else {
+            Block _body_1 = it.getBody();
+            List _statements = _body_1.statements();
+            boolean _isEmpty = _statements.isEmpty();
+            boolean _not = (!_isEmpty);
+            _and = _not;
+          }
+          if (_and) {
+            Block _body_2 = it.getBody();
+            Iterable<Expression> _findAssignmentsInBlock = JavaASTFlattener.this._aSTFlattenerUtils.findAssignmentsInBlock(_body_2, p);
+            final Expression firstInBody = IterableExtensions.<Expression>head(_findAssignmentsInBlock);
+            if ((firstInBody != null)) {
+              ConstructorInvocation _findParentOfType = JavaASTFlattener.this._aSTFlattenerUtils.<ConstructorInvocation>findParentOfType(firstInBody, ConstructorInvocation.class);
+              boolean _tripleNotEquals = (_findParentOfType != null);
+              if (_tripleNotEquals) {
+                JavaASTFlattener.this.addProblem(p, "Final parameter modified in constructor call");
+              } else {
+                SuperConstructorInvocation _findParentOfType_1 = JavaASTFlattener.this._aSTFlattenerUtils.<SuperConstructorInvocation>findParentOfType(firstInBody, SuperConstructorInvocation.class);
+                boolean _tripleNotEquals_1 = (_findParentOfType_1 != null);
+                if (_tripleNotEquals_1) {
+                  JavaASTFlattener.this.addProblem(p, "Final parameter modified in super constructor call");
+                }
+              }
+            }
+          }
           AST _aST = p.getAST();
           final VariableDeclarationFragment varFrag = _aST.newVariableDeclarationFragment();
           AST _aST_1 = p.getAST();
@@ -1270,9 +1299,9 @@ public class JavaASTFlattener extends ASTVisitor {
           ASTNode _createInstance = _aST_5.createInstance(SimpleType.class);
           final Type typeCopy = ((Type) _createInstance);
           varDecl.setType(typeCopy);
-          Block _body_1 = it.getBody();
-          List _statements = _body_1.statements();
-          _statements.add(0, varDecl);
+          Block _body_3 = it.getBody();
+          List _statements_1 = _body_3.statements();
+          _statements_1.add(0, varDecl);
         }
       }
     };
