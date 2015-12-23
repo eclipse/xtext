@@ -123,6 +123,7 @@ branches.each { branch ->
 								spec("H 21 * * *")
 							}
 						}
+						config.logRotator.daysToKeep = 20
 						config.buildWrappers.'hudson.plugins.build__timeout.BuildTimeoutWrapper'
 							.strategy.timeoutMinutes = 600
 					}
