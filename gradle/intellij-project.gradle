@@ -42,8 +42,9 @@ if (file("src").exists()) {
 }
 
 tasks.withType(Test) {
-	minHeapSize = "1024m"
-	jvmArgs '-XX:MaxPermSize=256m', '-ea'
+	minHeapSize = "512m"
+	maxHeapSize = "1g"
+	jvmArgs '-XX:MaxPermSize=300m', '-ea'
 	/*
 	 * We have an active annotation that allows us to delegate
 	 * to existing tests and run them in an IntelliJ context.
