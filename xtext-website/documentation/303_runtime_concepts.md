@@ -1083,7 +1083,7 @@ public void configureRuntimeEncodingProvider(Binder binder) {
 }
 ```
 
-For the uniform encoding, bind the plain [IEncodingProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java) to the same implementation in both moduless; in the *RuntimeModule using, as above:
+For the uniform encoding, bind the plain [IEncodingProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java) to the same implementation in both modules; in the *RuntimeModule using, as above:
 
 ```java
 @Override
