@@ -1281,6 +1281,82 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def void testCapturedLocalVar_10() {
+		'''
+			class Foo {
+				def foo() {
+					val CharSequence x = new StringBuilder;
+					if (x instanceof Appendable)
+						new Runnable() {
+							override run() { x.append('hello') }
+						}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public Runnable foo() {
+			    Runnable _xblockexpression = null;
+			    {
+			      final CharSequence x = new StringBuilder();
+			      Runnable _xifexpression = null;
+			      if ((x instanceof Appendable)) {
+			        _xifexpression = new Runnable() {
+			          public void run() {
+			            try {
+			              ((Appendable)x).append("hello");
+			            } catch (Throwable _e) {
+			              throw Exceptions.sneakyThrow(_e);
+			            }
+			          }
+			        };
+			      }
+			      _xblockexpression = _xifexpression;
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def void testCapturedLocalVar_11() {
+		'''
+			class Foo {
+				def foo(CharSequence x) {
+					if (x instanceof Appendable)
+						new Runnable() {
+							override run() { x.append('hello') }
+						}
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public Runnable foo(final CharSequence x) {
+			    Runnable _xifexpression = null;
+			    if ((x instanceof Appendable)) {
+			      _xifexpression = new Runnable() {
+			        public void run() {
+			          try {
+			            ((Appendable)x).append("hello");
+			          } catch (Throwable _e) {
+			            throw Exceptions.sneakyThrow(_e);
+			          }
+			        }
+			      };
+			    }
+			    return _xifexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def void testLocalVar() {
 		'''
 			class Foo {
