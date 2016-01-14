@@ -332,6 +332,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		if (expression instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
+			if (isPrimitiveVoid(featureCall)) {
+				return false;
+			}
 			for (XExpression arg : featureCall.getActualArguments()) {
 				if (!this.internalCanCompileToJavaExpression(arg, appendable)) {
 					return false;
