@@ -11479,6 +11479,62 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   }
   
   /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=476534
+   */
+  @Test
+  public void testBug476534() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(notify;;notify) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void foo() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.notify();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("boolean _while = true;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("while (_while) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("this.notify();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_while = true;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=405142
    */
   @Test

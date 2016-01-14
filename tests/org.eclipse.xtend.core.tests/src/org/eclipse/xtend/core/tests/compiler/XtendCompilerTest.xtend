@@ -5188,7 +5188,32 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
-	 
+	
+	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=476534
+	 */
+	@Test def void testBug476534() {
+		'''
+			class Foo {
+				def foo() {
+					for(notify;;notify) {
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo() {
+			    this.notify();
+			    boolean _while = true;
+			    while (_while) {
+			      this.notify();
+			      _while = true;
+			    }
+			  }
+			}
+		''')
+	}
 	 
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=405142
