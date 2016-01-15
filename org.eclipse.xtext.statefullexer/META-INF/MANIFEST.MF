@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Statefullexer
-Bundle-SymbolicName: de.itemis.statefullexer
+Bundle-SymbolicName: org.eclipse.xtext.statefullexer
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtext;bundle-version="2.3.0",
@@ -9,5 +9,5 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.3.0",
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.generator;bundle-version="2.3.0"
-Export-Package: de.itemis.statefullexer
+Export-Package: org.eclipse.xtext.statefullexer
 

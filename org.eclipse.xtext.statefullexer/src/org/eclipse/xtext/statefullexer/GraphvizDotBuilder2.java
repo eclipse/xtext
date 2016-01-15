@@ -1,4 +1,4 @@
-package de.itemis.statefullexer;
+package org.eclipse.xtext.statefullexer;
 
 import java.io.PrintStream;
 import java.util.ArrayList;

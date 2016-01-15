@@ -1,13 +1,12 @@
-package de.itemis.statefullexer;
+package org.eclipse.xtext.statefullexer;
 
 import java.util.Collections;
 
+import org.eclipse.xtext.statefullexer.TokenNFA.TokenNfaState;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaFactory;
 
 import com.google.common.base.Function;
-
-import de.itemis.statefullexer.TokenNFA.TokenNfaState;
 
 @SuppressWarnings("restriction")
 public class TokenNFA<T> implements Nfa<TokenNfaState<T>> {

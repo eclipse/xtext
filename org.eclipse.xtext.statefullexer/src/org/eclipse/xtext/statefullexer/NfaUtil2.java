@@ -1,4 +1,4 @@
-package de.itemis.statefullexer;
+package org.eclipse.xtext.statefullexer;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.xtext.statefullexer.NfaWithGroups.NfaWithGroupsFactory;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -32,8 +33,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-
-import de.itemis.statefullexer.NfaWithGroups.NfaWithGroupsFactory;
 
 @SuppressWarnings("restriction")
 public class NfaUtil2 {

@@ -1,4 +1,4 @@
-package de.itemis.statefullexer;
+package org.eclipse.xtext.statefullexer;
 
 import java.lang.reflect.Method;
 import java.util.List;

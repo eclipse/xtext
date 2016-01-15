@@ -1,4 +1,4 @@
-package de.itemis.statefullexer
+package org.eclipse.xtext.statefullexer
 
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimap
@@ -22,7 +22,7 @@ import org.eclipse.xtext.util.formallang.Pda
 import org.eclipse.xtext.util.formallang.PdaFactory
 import org.eclipse.xtext.xbase.lib.Pair
 
-import static extension de.itemis.statefullexer.Util.*
+import static extension org.eclipse.xtext.statefullexer.Util.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch

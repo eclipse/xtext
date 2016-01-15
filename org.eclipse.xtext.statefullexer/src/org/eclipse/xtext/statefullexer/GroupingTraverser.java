@@ -1,4 +1,4 @@
-package de.itemis.statefullexer;
+package org.eclipse.xtext.statefullexer;
 
 import org.eclipse.xtext.util.formallang.DirectedGraph;
 import org.eclipse.xtext.util.formallang.Traverser;

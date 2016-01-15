@@ -1,4 +1,4 @@
-package de.itemis.statefullexer
+package org.eclipse.xtext.statefullexer
 
 import java.util.Set
 import org.eclipse.xpand2.XpandExecutionContext

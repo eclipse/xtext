@@ -1,4 +1,4 @@
-package de.itemis.statefullexer;
+package org.eclipse.xtext.statefullexer;
 
 public abstract class StateDescription {
 

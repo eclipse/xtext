@@ -1,14 +1,14 @@
-package de.itemis.statefullexer;
+package org.eclipse.xtext.statefullexer;
 
 import java.util.List;
 import java.util.Map;
+
+import org.eclipse.xtext.statefullexer.TokenNFA.TokenNfaState;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-
-import de.itemis.statefullexer.TokenNFA.TokenNfaState;
 
 public class TokenGroupNFA<G, T> extends TokenNFA<T> implements NfaWithGroups<G, TokenNfaState<T>> {
 
@@ -18,8 +18,8 @@ public class TokenGroupNFA<G, T> extends TokenNFA<T> implements NfaWithGroups<G,
 
 		@Override
 		public NfaWithGroups<G, TokenNfaState<T>> create(T start, T stop) {
-			de.itemis.statefullexer.TokenNFA.TokenNfaState<T> startStates = new TokenNfaState<T>(start, NFAStateType.START, stateFormatter);
-			de.itemis.statefullexer.TokenNFA.TokenNfaState<T> finalStates = new TokenNfaState<T>(stop, NFAStateType.STOP, stateFormatter);
+			org.eclipse.xtext.statefullexer.TokenNFA.TokenNfaState<T> startStates = new TokenNfaState<T>(start, NFAStateType.START, stateFormatter);
+			org.eclipse.xtext.statefullexer.TokenNFA.TokenNfaState<T> finalStates = new TokenNfaState<T>(stop, NFAStateType.STOP, stateFormatter);
 			return new TokenGroupNFA<G, T>(startStates, finalStates);
 		}
 

@@ -68,7 +68,7 @@ Workflow {
 			//  }
 			}
 
-			fragment = de.itemis.statefullexer.StatefulLexerFragment {
+			fragment = org.eclipse.xtext.statefullexer.StatefulLexerFragment {
 				runtime = true
 				lexerBaseClass = "org.xpect.services.Lexer"
 				antlrParam = "-lib"
@@ -109,13 +109,13 @@ Workflow {
 			// generates a more lightweight Antlr parser and lexer tailored for content assist
 			fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {}
 
-			fragment = de.itemis.statefullexer.StatefulLexerFragment {
+			fragment = org.eclipse.xtext.statefullexer.StatefulLexerFragment {
 				lexerBaseClass = "org.xpect.services.Lexer"
 				highlighting = true
 				antlrParam = "-lib"
 				antlrParam = "${runtimeProject}.ui/src-gen/org/xpect/ui/contentassist/antlr/lexer"
 			}
-			fragment = de.itemis.statefullexer.StatefulLexerFragment {
+			fragment = org.eclipse.xtext.statefullexer.StatefulLexerFragment {
 				lexerBaseClass = "org.xpect.ui.services.Lexer"
 				contentAssist = true
 				antlrParam = "-lib"

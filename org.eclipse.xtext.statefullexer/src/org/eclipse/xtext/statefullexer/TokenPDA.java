@@ -1,13 +1,12 @@
-package de.itemis.statefullexer;
+package org.eclipse.xtext.statefullexer;
 
 import java.util.Collections;
 
+import org.eclipse.xtext.statefullexer.TokenPDA.TokenPDAState;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaFactory;
 
 import com.google.common.base.Function;
-
-import de.itemis.statefullexer.TokenPDA.TokenPDAState;
 
 @SuppressWarnings("restriction")
 public class TokenPDA<T, S> implements Pda<TokenPDAState<T>, S> {
