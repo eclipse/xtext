@@ -1,0 +1,26 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.validation.DMValidationTest END_SETUP */
+
+package pkg1 {
+	entity MyEntity {
+		
+		op calc():String {
+			val x = 1
+			
+			// XPECT !errors --> "Assignment to final variable" at "x = 2"
+			// x = 2
+			
+			// XPECT errors --> "Type mismatch: cannot convert from int to String" at "x"
+			return x
+		}
+		
+		/* XPECT warnings ---
+			"Name should start with a lowercase" at "Prop1"
+			"Name should start with a lowercase" at "Prop2"
+		--- */
+		Prop1:String Prop2:int
+	}
+}
+
+// XPECT errors --> "extraneous input 'foobar' expecting EOF" at "foobar"
+foobar
+

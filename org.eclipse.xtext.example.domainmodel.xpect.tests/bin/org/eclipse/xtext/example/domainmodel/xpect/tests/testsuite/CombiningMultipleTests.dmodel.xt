@@ -1,0 +1,22 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.testsuite.DMXtextTest END_SETUP */
+
+package pkg1 {
+	entity MyEntity1 {
+		
+		// int should be the java primitive
+		// XPECT linkedName at int --> int
+		id:int
+		
+		// String should be from java.lang 
+		// XPECT linkedName at String --> java.lang.String
+		name:String
+		
+		// besides "int", we can reference... and we can not reference foooobar
+		// XPECT scope at int --> int, String, java.lang.String, boolean, !foooobar, !innnnteger, ...
+		id:int
+		
+		// the character % is not valid syntax
+		// XPECT errors --> "extraneous input '%' expecting '}'" at "%"
+		%
+	}
+}

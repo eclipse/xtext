@@ -1,0 +1,30 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.modify.DeleteUtilTest END_SETUP */
+
+/* XPECT astDiff delete 'entity MyEntity2' ---
+  (...)
+                Property {
+                  name = 'myEnt1'
+                  type = JvmParameterizedTypeReference {
+  |                type -> [JvmGenericType|JvmVoid java:] /[2|Primitives#void]
+                  }
+                }
+              ]
+  -         }
+  -         Entity {
+  -           name = 'MyEntity2'
+            }
+          ]
+        }
+  (...)
+--- */
+
+package modification_test {
+	
+	entity MyEntity1 {
+		myEnt1:MyEntity2
+	}
+	
+	entity MyEntity2 {
+	}
+	
+}

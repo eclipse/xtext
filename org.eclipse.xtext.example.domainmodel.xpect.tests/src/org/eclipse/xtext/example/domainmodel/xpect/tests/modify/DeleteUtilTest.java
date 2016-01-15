@@ -3,20 +3,20 @@ package org.eclipse.xtext.example.domainmodel.xpect.tests.modify;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xpect.expectation.IStringDiffExpectation;
+import org.eclipse.xpect.expectation.StringDiffExpectation;
+import org.eclipse.xpect.parameter.ParameterParser;
+import org.eclipse.xpect.runner.Xpect;
+import org.eclipse.xpect.runner.XpectRunner;
+import org.eclipse.xpect.setup.XpectSetup;
+import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.eclipse.xpect.xtext.lib.setup.XtextWorkspaceSetup;
+import org.eclipse.xpect.xtext.lib.util.EObjectFormatter;
+import org.eclipse.xpect.xtext.lib.util.TokenSerializer;
+import org.eclipse.xpect.xtext.lib.util.TokenSerializer.Token;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.junit.runner.RunWith;
-import org.xpect.expectation.IStringDiffExpectation;
-import org.xpect.expectation.StringDiffExpectation;
-import org.xpect.parameter.ParameterParser;
-import org.xpect.runner.Xpect;
-import org.xpect.runner.XpectRunner;
-import org.xpect.setup.XpectSetup;
-import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
-import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
-import org.xpect.xtext.lib.util.EObjectFormatter;
-import org.xpect.xtext.lib.util.TokenSerializer;
-import org.xpect.xtext.lib.util.TokenSerializer.Token;
 
 import com.google.inject.Inject;
 

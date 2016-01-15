@@ -2,19 +2,19 @@ package org.eclipse.xtext.example.arithmetics.xpect.tests.interpreter;
 
 import java.math.BigDecimal;
 
+import org.eclipse.xpect.expectation.IStringExpectation;
+import org.eclipse.xpect.expectation.StringExpectation;
+import org.eclipse.xpect.runner.Xpect;
+import org.eclipse.xpect.runner.XpectRunner;
+import org.eclipse.xpect.runner.XpectTestFiles;
+import org.eclipse.xpect.runner.XpectTestFiles.FileRoot;
+import org.eclipse.xpect.setup.XpectSetup;
+import org.eclipse.xpect.xtext.lib.setup.ThisOffset;
+import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.eclipse.xpect.xtext.lib.setup.XtextWorkspaceSetup;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
 import org.junit.runner.RunWith;
-import org.xpect.expectation.IStringExpectation;
-import org.xpect.expectation.StringExpectation;
-import org.xpect.runner.Xpect;
-import org.xpect.runner.XpectRunner;
-import org.xpect.runner.XpectTestFiles;
-import org.xpect.runner.XpectTestFiles.FileRoot;
-import org.xpect.setup.XpectSetup;
-import org.xpect.xtext.lib.setup.ThisOffset;
-import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
-import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
 
 @RunWith(XpectRunner.class)
 @XpectSetup({ XtextStandaloneSetup.class, XtextWorkspaceSetup.class })
