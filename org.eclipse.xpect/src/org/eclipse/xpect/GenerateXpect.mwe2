@@ -4,8 +4,8 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var projectName = "org.xpect"
-var grammarURI = "platform:/resource/${projectName}/src/org/xpect/Xpect.xtext"
+var projectName = "org.eclipse.xpect"
+var grammarURI = "platform:/resource/${projectName}/src/org/eclipse/xpect/Xpect.xtext"
 var genmodelURI = "platform:/resource/${projectName}/model/Xpect.genmodel"
 var xpectEcoreURI = "platform:/resource/${projectName}/model/Xpect.ecore"
 var xjmEcoreURI = "platform:/resource/${projectName}/model/XpectJavaModel.ecore"
@@ -70,9 +70,9 @@ Workflow {
 
 			fragment = org.eclipse.xtext.statefullexer.StatefulLexerFragment {
 				runtime = true
-				lexerBaseClass = "org.xpect.services.Lexer"
+				lexerBaseClass = "org.eclipse.xpect.services.Lexer"
 				antlrParam = "-lib"
-				antlrParam = "${runtimeProject}/src-gen/org/xpect/parser/antlr/lexer"
+				antlrParam = "${runtimeProject}/src-gen/org/eclipse/xpect/parser/antlr/lexer"
 			}
 
 			// java-based API for validation
@@ -110,16 +110,16 @@ Workflow {
 			fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {}
 
 			fragment = org.eclipse.xtext.statefullexer.StatefulLexerFragment {
-				lexerBaseClass = "org.xpect.services.Lexer"
+				lexerBaseClass = "org.eclipse.xpect.services.Lexer"
 				highlighting = true
 				antlrParam = "-lib"
-				antlrParam = "${runtimeProject}.ui/src-gen/org/xpect/ui/contentassist/antlr/lexer"
+				antlrParam = "${runtimeProject}.ui/src-gen/org/eclipse/xpect/ui/contentassist/antlr/lexer"
 			}
 			fragment = org.eclipse.xtext.statefullexer.StatefulLexerFragment {
-				lexerBaseClass = "org.xpect.ui.services.Lexer"
+				lexerBaseClass = "org.eclipse.xpect.ui.services.Lexer"
 				contentAssist = true
 				antlrParam = "-lib"
-				antlrParam = "${runtimeProject}.ui/src-gen/org/xpect/ui/contentassist/antlr/lexer"
+				antlrParam = "${runtimeProject}.ui/src-gen/org/eclipse/xpect/ui/contentassist/antlr/lexer"
 			}
 
 			// generates junit test support classes into Generator#pathTestProject

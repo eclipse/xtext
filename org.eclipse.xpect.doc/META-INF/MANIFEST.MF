@@ -21,5 +21,4 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.4.0",
  org.eclipse.jdt.junit.runners;bundle-version="0.1.0",
  org.eclipse.pde.ui;bundle-version="3.7.2",
  org.eclipse.debug.ui;bundle-version="3.7.0",
- org.xpect;bundle-version="0.1.0",
- org.xpect.ui;bundle-version="0.1.0"
+ org.eclipse.xpect.ui;bundle-version="0.1.0"

@@ -20,13 +20,5 @@
             class="org.eclipse.xpect.XpectJavaModelPackage"
             genModel="model/Xpect.genmodel"/>
    </extension>
-   <extension
-         point="org.xpect.fileExtensions">
-      <fileExtension
-            fileExtension="ecore"
-            xtextLanguageName="org.eclipse.emf.ecore.presentation.EcoreEditorID"
-            xtextRuntimeModule="org.eclipse.xtext.ecore.EcoreRuntimeModule">
-      </fileExtension>
-   </extension>
 
 </plugin>

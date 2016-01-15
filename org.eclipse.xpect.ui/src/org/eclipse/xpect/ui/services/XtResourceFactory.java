@@ -12,12 +12,12 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xpect.XpectJavaModel;
 import org.eclipse.xpect.ui.util.XpectUtil;
+import org.eclipse.xpect.util.IXtInjectorProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.Pair;
-import org.xpect.XpectJavaModel;
-import org.xpect.util.IXtInjectorProvider;
 
 import com.google.inject.Injector;
 

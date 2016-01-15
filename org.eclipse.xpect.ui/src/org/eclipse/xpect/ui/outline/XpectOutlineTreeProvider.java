@@ -8,13 +8,13 @@
 package org.eclipse.xpect.ui.outline;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xpect.XjmTest;
+import org.eclipse.xpect.XpectFile;
+import org.eclipse.xpect.XpectInvocation;
+import org.eclipse.xpect.XpectJavaModel;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-import org.xpect.XjmTest;
-import org.xpect.XpectFile;
-import org.xpect.XpectInvocation;
-import org.xpect.XpectJavaModel;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

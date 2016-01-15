@@ -31,9 +31,9 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.junit.model.ITestCaseElement;
 import org.eclipse.jdt.junit.model.ITestElement.FailureTrace;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xpect.text.IReplacement;
+import org.eclipse.xpect.text.Text;
 import org.eclipse.xtext.util.Exceptions;
-import org.xpect.text.IReplacement;
-import org.xpect.text.Text;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;

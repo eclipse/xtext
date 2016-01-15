@@ -10,11 +10,10 @@ package org.eclipse.xpect.ui.contentassist;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xpect.XpectJavaModelPackage;
+import org.eclipse.xpect.XpectPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.xpect.XpectJavaModelPackage;
-import org.xpect.XpectPackage;
-import org.xpect.ui.contentassist.AbstractXpectProposalProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

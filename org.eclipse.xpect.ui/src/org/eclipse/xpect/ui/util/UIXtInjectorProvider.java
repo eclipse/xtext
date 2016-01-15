@@ -2,11 +2,11 @@ package org.eclipse.xpect.ui.util;
 
 import java.util.List;
 
+import org.eclipse.xpect.XtRuntimeModule;
 import org.eclipse.xpect.ui.XtTestUIModule;
 import org.eclipse.xpect.ui.XtWorkbenchUIModule;
-import org.xpect.XtRuntimeModule;
-import org.xpect.util.EnvironmentUtil;
-import org.xpect.util.IXtInjectorProvider.RuntimeXtInjectorProvider;
+import org.eclipse.xpect.util.EnvironmentUtil;
+import org.eclipse.xpect.util.IXtInjectorProvider.RuntimeXtInjectorProvider;
 
 import com.google.inject.Module;
 

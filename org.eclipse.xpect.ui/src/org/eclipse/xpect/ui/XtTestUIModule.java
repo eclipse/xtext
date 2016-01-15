@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xpect.ui;
 
-import org.xpect.registry.AbstractDelegatingModule;
+import org.eclipse.xpect.registry.AbstractDelegatingModule;
 
 import com.google.inject.Binder;
 

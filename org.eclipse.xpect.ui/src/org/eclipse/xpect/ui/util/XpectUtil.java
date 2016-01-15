@@ -16,14 +16,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xpect.XpectFile;
+import org.eclipse.xpect.XpectJavaModel;
+import org.eclipse.xpect.runner.XpectRunner;
+import org.eclipse.xpect.ui.internal.XpectActivator;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
-import org.xpect.XpectFile;
-import org.xpect.XpectJavaModel;
-import org.xpect.runner.XpectRunner;
-import org.xpect.ui.internal.XpectActivator;
 
 import com.google.inject.Injector;
 
@@ -32,7 +32,7 @@ import com.google.inject.Injector;
  */
 public class XpectUtil {
 	public static XpectFile loadFile(IFile file) {
-		Injector injector = XpectActivator.getInstance().getInjector(XpectActivator.ORG_XPECT_XPECT);
+		Injector injector = XpectActivator.getInstance().getInjector(XpectActivator.ORG_ECLIPSE_XPECT_XPECT);
 		XtextResourceSet rs = new XtextResourceSet();
 		IJavaProject javaProject = JavaCore.create(file.getProject());
 		if (XpectRunner.testClassloader != null) {

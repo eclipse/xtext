@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xpect.ui.launching;
 
-import static org.xpect.runner.DescriptionFactory.createFileDescription;
-import static org.xpect.runner.DescriptionFactory.createTestDescription;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.emf.ecore.EObject;
@@ -18,10 +15,13 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.xpect.XpectFile;
+import org.eclipse.xpect.XpectInvocation;
+import org.eclipse.xpect.XpectJavaModel;
 import org.eclipse.xpect.ui.util.ContentTypeUtil;
+import org.eclipse.xpect.ui.util.ContentTypeUtil.XpectContentType;
 import org.eclipse.xpect.ui.util.XpectFileAccess;
 import org.eclipse.xpect.ui.util.XpectUtil;
-import org.eclipse.xpect.ui.util.ContentTypeUtil.XpectContentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.nodemodel.INode;
@@ -29,9 +29,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.xpect.XpectFile;
-import org.xpect.XpectInvocation;
-import org.xpect.XpectJavaModel;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

@@ -117,8 +117,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Literal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="StatementRelatedRegion" instanceClassName="org.xpect.parameter.IStatementRelatedRegion"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="ISetupInitializer" instanceClassName="org.xpect.setup.ISetupInitializer">
+  <eClassifiers xsi:type="ecore:EDataType" name="StatementRelatedRegion" instanceClassName="org.eclipse.xpect.parameter.IStatementRelatedRegion"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ISetupInitializer" instanceClassName="org.eclipse.xpect.setup.ISetupInitializer">
     <eTypeParameters name="T"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -1,5 +1,8 @@
 package org.eclipse.xpect.ui.contentassist;
 
+import org.eclipse.xpect.registry.DefaultBinding;
+import org.eclipse.xpect.services.XpectGrammarAccess;
+import org.eclipse.xpect.ui.internal.XpectActivator;
 import org.eclipse.xpect.ui.util.XpectFileAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -9,16 +12,13 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor.ModeAware;
-import org.xpect.registry.DefaultBinding;
-import org.xpect.services.XpectGrammarAccess;
-import org.xpect.ui.internal.XpectActivator;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 public class XtProposalProvider implements IContentProposalProvider, ModeAware {
 
-	private final Injector xpectInjector = XpectActivator.getInstance().getInjector(XpectActivator.ORG_XPECT_XPECT);
+	private final Injector xpectInjector = XpectActivator.getInstance().getInjector(XpectActivator.ORG_ECLIPSE_XPECT_XPECT);
 
 	@Inject
 	@DefaultBinding

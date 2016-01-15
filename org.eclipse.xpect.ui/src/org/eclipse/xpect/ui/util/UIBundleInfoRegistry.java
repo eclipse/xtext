@@ -11,10 +11,10 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xpect.ui.XpectPluginActivator;
+import org.eclipse.xpect.util.IBundleInfo;
+import org.eclipse.xpect.util.ResourceAccess;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-import org.xpect.util.IBundleInfo;
-import org.xpect.util.ResourceAccess;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;

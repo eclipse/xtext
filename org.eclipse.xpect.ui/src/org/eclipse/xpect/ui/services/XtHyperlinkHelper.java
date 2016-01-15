@@ -1,10 +1,10 @@
 package org.eclipse.xpect.ui.services;
 
 import org.eclipse.jface.text.hyperlink.IHyperlink;
+import org.eclipse.xpect.registry.DefaultBinding;
 import org.eclipse.xpect.ui.util.XpectFileAccess;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
-import org.xpect.registry.DefaultBinding;
 
 import com.google.inject.Inject;
 

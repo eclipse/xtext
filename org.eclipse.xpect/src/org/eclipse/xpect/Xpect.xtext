@@ -1,4 +1,4 @@
-grammar org.xpect.Xpect hidden()
+grammar org.eclipse.xpect.Xpect hidden()
 
 import "http://www.eclipse.org/xpect/Xpect"
 

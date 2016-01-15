@@ -2,9 +2,9 @@ package org.eclipse.xpect.ui.registry;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.xpect.registry.ITestSuiteInfo;
+import org.eclipse.xpect.registry.TestSuiteInfoRegistry;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.xpect.registry.ITestSuiteInfo;
-import org.xpect.registry.TestSuiteInfoRegistry;
 
 public class UITestSuiteInfoRegistry implements ITestSuiteInfo.Registry {
 

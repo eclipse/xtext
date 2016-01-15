@@ -16,10 +16,10 @@ import org.eclipse.pde.core.plugin.IPluginExtension;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.core.plugin.IPluginObject;
 import org.eclipse.pde.core.plugin.PluginRegistry;
-import org.xpect.registry.ITestSuiteInfo;
-import org.xpect.registry.LazyClass;
-import org.xpect.registry.TestSuiteInfoRegistry.TestSuiteInfo;
-import org.xpect.util.URIDelegationHandler;
+import org.eclipse.xpect.registry.ITestSuiteInfo;
+import org.eclipse.xpect.registry.LazyClass;
+import org.eclipse.xpect.registry.TestSuiteInfoRegistry.TestSuiteInfo;
+import org.eclipse.xpect.util.URIDelegationHandler;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;

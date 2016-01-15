@@ -1,11 +1,11 @@
 package org.eclipse.xpect.ui.services;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xpect.XjmMethod;
+import org.eclipse.xpect.XjmTest;
+import org.eclipse.xpect.XpectJavaModel;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
-import org.xpect.XjmMethod;
-import org.xpect.XjmTest;
-import org.xpect.XpectJavaModel;
 
 public class XpectEObjectAtOffsetHelper extends EObjectAtOffsetHelper {
 

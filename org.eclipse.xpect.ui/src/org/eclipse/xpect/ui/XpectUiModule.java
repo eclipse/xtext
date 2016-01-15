@@ -29,7 +29,7 @@ import com.google.inject.name.Names;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class XpectUiModule extends org.xpect.ui.AbstractXpectUiModule {
+public class XpectUiModule extends AbstractXpectUiModule {
 	public XpectUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}

@@ -8,8 +8,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.xpect.registry.IExtensionInfo;
 import org.osgi.framework.Bundle;
-import org.xpect.registry.IExtensionInfo;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;

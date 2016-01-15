@@ -11,6 +11,10 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xpect.XpectFile;
+import org.eclipse.xpect.XpectInvocation;
+import org.eclipse.xpect.parameter.IStatementRelatedRegion;
+import org.eclipse.xpect.registry.DefaultBinding;
 import org.eclipse.xpect.ui.util.XpectFileAccess;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -23,10 +27,6 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.xpect.XpectFile;
-import org.xpect.XpectInvocation;
-import org.xpect.parameter.IStatementRelatedRegion;
-import org.xpect.registry.DefaultBinding;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;

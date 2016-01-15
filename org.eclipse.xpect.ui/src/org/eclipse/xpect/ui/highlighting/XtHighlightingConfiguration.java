@@ -9,10 +9,10 @@ package org.eclipse.xpect.ui.highlighting;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.xpect.registry.DefaultBinding;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.xpect.registry.DefaultBinding;
 
 import com.google.inject.Inject;
 

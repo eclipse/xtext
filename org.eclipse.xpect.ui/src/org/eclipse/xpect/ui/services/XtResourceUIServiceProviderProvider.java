@@ -11,14 +11,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xpect.XpectJavaModel;
+import org.eclipse.xpect.ui.internal.XpectActivator;
 import org.eclipse.xpect.ui.util.XpectUtil;
+import org.eclipse.xpect.util.IXtInjectorProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.Pair;
-import org.xpect.XpectJavaModel;
-import org.xpect.ui.internal.XpectActivator;
-import org.xpect.util.IXtInjectorProvider;
 
 import com.google.inject.Injector;
 
@@ -35,6 +35,6 @@ public class XtResourceUIServiceProviderProvider implements IResourceServiceProv
 				if (injector != null)
 					return injector.getInstance(IResourceUIServiceProvider.class);
 			}
-		return XpectActivator.getInstance().getInjector(XpectActivator.ORG_XPECT_XPECT).getInstance(IResourceUIServiceProvider.class);
+		return XpectActivator.getInstance().getInjector(XpectActivator.ORG_ECLIPSE_XPECT_XPECT).getInstance(IResourceUIServiceProvider.class);
 	}
 }

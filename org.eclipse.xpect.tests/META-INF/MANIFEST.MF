@@ -5,8 +5,8 @@ Bundle-Vendor: itemis AG
 Bundle-Version: 0.1.0.qualifier
 Bundle-SymbolicName: org.eclipse.xpect.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.xpect,
- org.xpect.ui,
+Require-Bundle: org.eclipse.xpect,
+ org.eclipse.xpect.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext.junit4,
  org.eclipse.ui.workbench;resolution:=optional,
@@ -23,4 +23,4 @@ Import-Package: org.apache.log4j,
  org.junit.runners.model;version="4.5.0",
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: org.xpect
+Export-Package: org.eclipse.xpect

@@ -16,16 +16,16 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xpect.XpectJavaModel;
+import org.eclipse.xpect.registry.ILanguageInfo;
 import org.eclipse.xpect.ui.XpectPluginActivator;
 import org.eclipse.xpect.ui.util.XpectUtil;
+import org.eclipse.xpect.util.IXtInjectorProvider;
+import org.eclipse.xpect.util.ReflectionUtil;
+import org.eclipse.xpect.util.URIDelegationHandler;
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.ui.shared.Access;
 import org.osgi.framework.Bundle;
-import org.xpect.XpectJavaModel;
-import org.xpect.registry.ILanguageInfo;
-import org.xpect.util.IXtInjectorProvider;
-import org.xpect.util.ReflectionUtil;
-import org.xpect.util.URIDelegationHandler;
 
 import com.google.inject.Injector;
 

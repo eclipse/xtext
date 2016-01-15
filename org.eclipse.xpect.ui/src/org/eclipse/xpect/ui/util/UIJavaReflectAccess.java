@@ -14,6 +14,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.xpect.util.ClasspathUtil;
+import org.eclipse.xpect.util.IJavaReflectAccess;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -27,8 +29,6 @@ import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-import org.xpect.util.ClasspathUtil;
-import org.xpect.util.IJavaReflectAccess;
 
 import com.google.common.collect.Lists;
 

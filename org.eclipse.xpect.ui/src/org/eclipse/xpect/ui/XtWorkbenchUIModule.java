@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xpect.ui;
 
+import org.eclipse.xpect.registry.AbstractDelegatingModule;
 import org.eclipse.xpect.ui.contentassist.XtProposalProvider;
 import org.eclipse.xpect.ui.highlighting.XtHighlightingCalculator;
 import org.eclipse.xpect.ui.highlighting.XtHighlightingConfiguration;
@@ -22,7 +23,6 @@ import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.validation.IResourceValidator;
-import org.xpect.registry.AbstractDelegatingModule;
 
 import com.google.inject.Binder;
 

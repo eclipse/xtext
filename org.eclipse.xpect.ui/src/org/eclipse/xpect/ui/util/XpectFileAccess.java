@@ -14,15 +14,15 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xpect.XpectConstants;
+import org.eclipse.xpect.XpectFile;
+import org.eclipse.xpect.registry.ILanguageInfo;
+import org.eclipse.xpect.runner.XpectRunner;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
-import org.xpect.XpectConstants;
-import org.xpect.XpectFile;
-import org.xpect.registry.ILanguageInfo;
-import org.xpect.runner.XpectRunner;
 
 import com.google.inject.Injector;
 

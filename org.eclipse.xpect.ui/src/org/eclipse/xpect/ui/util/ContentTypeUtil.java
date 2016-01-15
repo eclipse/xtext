@@ -14,7 +14,7 @@ import java.io.Reader;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.xpect.XpectConstants;
+import org.eclipse.xpect.XpectConstants;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

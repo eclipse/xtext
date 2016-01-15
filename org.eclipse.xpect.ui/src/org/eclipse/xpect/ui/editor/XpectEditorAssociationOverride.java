@@ -20,11 +20,11 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
+import org.eclipse.xpect.registry.ILanguageInfo;
 import org.eclipse.xpect.ui.XpectPluginActivator;
 import org.eclipse.xpect.ui.util.ContentTypeUtil;
 import org.eclipse.xpect.ui.util.ContentTypeUtil.XpectContentType;
-import org.xpect.registry.ILanguageInfo;
-import org.xpect.util.URIDelegationHandler;
+import org.eclipse.xpect.util.URIDelegationHandler;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
