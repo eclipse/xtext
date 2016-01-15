@@ -12,10 +12,10 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0";visibility:=reex
  org.eclipse.xtext.ui;bundle-version="2.4.0";visibility:=reexport,
  org.eclipse.jdt.core;bundle-version="3.7.0";visibility:=reexport,
  org.eclipse.ui.ide;bundle-version="3.7.0";visibility:=reexport
-Export-Package: org.xpect.xtext.lib.setup,
- org.xpect.xtext.lib.setup.emf,
- org.xpect.xtext.lib.setup.generic,
- org.xpect.xtext.lib.setup.workspace,
- org.xpect.xtext.lib.tests,
- org.xpect.xtext.lib.util
+Export-Package: org.eclipse.xpect.xtext.lib.setup,
+ org.eclipse.xpect.xtext.lib.setup.emf,
+ org.eclipse.xpect.xtext.lib.setup.generic,
+ org.eclipse.xpect.xtext.lib.setup.workspace,
+ org.eclipse.xpect.xtext.lib.tests,
+ org.eclipse.xpect.xtext.lib.util
 Bundle-Vendor: itemis AG

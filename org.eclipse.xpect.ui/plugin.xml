@@ -384,13 +384,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.xpect.ui.services.XtResourceFactory"
+			class="org.eclipse.xpect.ui.services.XtResourceFactory"
 			type="xt">
 		</parser>
 	</extension>
   	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.xpect.ui.services.XtResourceUIServiceProviderProvider"
+            class="org.eclipse.xpect.ui.services.XtResourceUIServiceProviderProvider"
             uriExtension="xt">
         </resourceServiceProvider>
     </extension>
@@ -409,7 +409,7 @@
             label="JUnit Test"
             icon="$nl$/icons/julaunch.gif"
             helpContextId="org.eclipse.jdt.junit.launch_shortcut"
-            class="org.xpect.ui.launching.JUnitLaunchShortcut"
+            class="org.eclipse.xpect.ui.launching.JUnitLaunchShortcut"
             modes="run, debug"
             id="org.xpect.ui.launching.junitShortcut">
         <contextualLaunch>
@@ -419,7 +419,7 @@
                    <iterate>
                	     <and>
                	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
-                       <adapt type="org.xpect.ui.launching.JUnitJavaElementDelegate">
+                       <adapt type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate">
 	                     <adapt type="org.eclipse.jdt.core.IJavaElement">
 			                <test property="org.eclipse.jdt.core.isInJavaProject"/>
 			                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.xpect.runner.XpectRunner"/>
@@ -436,7 +436,7 @@
          <description description="Runs a set of JUnit tests" mode="run"/>
       </shortcut>
        <shortcut
-            class="org.xpect.ui.launching.JUnitPDELaunchShortcut"
+            class="org.eclipse.xpect.ui.launching.JUnitPDELaunchShortcut"
             icon="$nl$/icons/julaunchpgn.gif"
             id="org.xpect.ui.launching.junitPdeShortcut"
             label="JUnit Plug-in Test"
@@ -448,7 +448,7 @@
                    <iterate>
                	     <and>
                	       <not><adapt type="org.eclipse.jdt.core.IJavaElement"/></not>
-                       <adapt type="org.xpect.ui.launching.JUnitJavaElementDelegate">
+                       <adapt type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate">
 	                     <adapt type="org.eclipse.jdt.core.IJavaElement">
 			                <test property="org.eclipse.jdt.core.isInJavaProject"/>
 			                <test property="org.eclipse.jdt.core.hasTypeOnClasspath" value="org.xpect.runner.XpectRunner"/>
@@ -467,23 +467,23 @@
    </extension>
    <extension point="org.eclipse.core.runtime.adapters">
      <factory 
-        class="org.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
+        class="org.eclipse.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
         adaptableType="org.eclipse.ui.IFileEditorInput">
-        <adapter type="org.xpect.ui.launching.JUnitJavaElementDelegate"/>
+        <adapter type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate"/>
      </factory>
      <factory 
-        class="org.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
+        class="org.eclipse.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
         adaptableType="org.eclipse.ui.IEditorPart">
-        <adapter type="org.xpect.ui.launching.JUnitJavaElementDelegate"/>
+        <adapter type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate"/>
      </factory>
      <factory 
-        class="org.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory" 
+        class="org.eclipse.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory" 
         adaptableType="org.eclipse.core.resources.IResource">
-        <adapter type="org.xpect.ui.launching.JUnitJavaElementDelegate"/>
+        <adapter type="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate"/>
      </factory>
      <factory 
-        class="org.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
-        adaptableType="org.xpect.ui.launching.JUnitJavaElementDelegate">
+        class="org.eclipse.xpect.ui.launching.JunitJavaElementDelegateAdapterFactory"
+        adaptableType="org.eclipse.xpect.ui.launching.JUnitJavaElementDelegate">
         <adapter type="org.eclipse.jdt.core.IJavaElement"/>
      </factory>
    </extension>

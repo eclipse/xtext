@@ -26,9 +26,9 @@ Require-Bundle: org.xpect;bundle-version="0.1.0";visibility:=reexport,
  org.eclipse.pde.ui;bundle-version="3.6.0"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-Activator: org.xpect.ui.XpectPluginActivator
-Export-Package: org.xpect.ui.internal,
- org.xpect.ui.services,
- org.xpect.ui.util,
- org.xpect.ui.contentassist,
- org.xpect.ui.quickfix
+Bundle-Activator: org.eclipse.xpect.ui.XpectPluginActivator
+Export-Package: org.eclipse.xpect.ui.contentassist,
+ org.eclipse.xpect.ui.quickfix,
+ org.eclipse.xpect.ui.services,
+ org.eclipse.xpect.ui.util,
+ org.xpect.ui.internal

@@ -9,7 +9,7 @@
       <!-- @generated Xpect -->
       <package
             uri="http://www.eclipse.org/xpect/Xpect"
-            class="org.xpect.XpectPackage"
+            class="org.eclipse.xpect.XpectPackage"
             genModel="model/Xpect.genmodel"/>
    </extension>
 
@@ -17,7 +17,7 @@
       <!-- @generated Xpect -->
       <package
             uri="http://www.eclipse.org/xpect/XpectJavaModel"
-            class="org.xpect.XpectJavaModelPackage"
+            class="org.eclipse.xpect.XpectJavaModelPackage"
             genModel="model/Xpect.genmodel"/>
    </extension>
    <extension
