@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Runners
-Bundle-SymbolicName: org.eclipse.jdt.junit.runners;singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.jdt.junit.runners;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-Activator: org.eclipse.jdt.junit.runners.Activator
 Require-Bundle: org.eclipse.ui,

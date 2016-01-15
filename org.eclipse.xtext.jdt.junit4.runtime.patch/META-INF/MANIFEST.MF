@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Patch
-Bundle-SymbolicName: org.eclipse.jdt.junit4.runtime.patch
+Bundle-SymbolicName: org.eclipse.xtext.jdt.junit4.runtime.patch
 Bundle-Version: 0.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.jdt.junit4.runtime.patch

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.jdt.junit.runners.feature</name>
+	<name>org.eclipse.xtext.jdt.junit.runners.feature</name>
 	<comment></comment>
 	<projects>
 	</projects>

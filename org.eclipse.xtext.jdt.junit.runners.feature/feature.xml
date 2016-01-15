@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.jdt.junit.runners.feature"
+      id="org.eclipse.xtext.jdt.junit.runners.feature"
       label="JDT JUnit UI Runner Extension"
       version="0.1.0.qualifier">
 
@@ -19,7 +19,9 @@
       http://www.eclipse.org/legal/epl-v10.html
    </license>
 
-   <includes id="org.eclipse.jdt.junit.runners.feature.source" version="0.0.0"/>
+   <includes
+         id="org.eclipse.jdt.junit.runners.feature.source"
+         version="0.0.0"/>
 
    <requires>
       <import feature="org.eclipse.jdt" version="3.8.0.v20120525-1249-8-8nFqlFNOfwKDRGz-pXJdG0GW83"/>
