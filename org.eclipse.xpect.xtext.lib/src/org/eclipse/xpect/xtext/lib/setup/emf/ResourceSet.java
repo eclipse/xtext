@@ -9,8 +9,8 @@ package org.eclipse.xpect.xtext.lib.setup.emf;
 
 import java.util.List;
 
-import org.xpect.XpectImport;
-import org.xpect.setup.XpectSetupComponent;
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.setup.XpectSetupComponent;
 
 import com.google.common.collect.Lists;
 

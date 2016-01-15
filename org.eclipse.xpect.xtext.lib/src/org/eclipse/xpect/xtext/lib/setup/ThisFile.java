@@ -5,8 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.xpect.XpectImport;
-import org.xpect.state.XpectStateAnnotation;
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.state.XpectStateAnnotation;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

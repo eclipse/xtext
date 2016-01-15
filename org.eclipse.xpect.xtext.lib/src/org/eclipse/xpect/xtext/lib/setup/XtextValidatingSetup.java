@@ -11,6 +11,11 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xpect.XpectReplace;
+import org.eclipse.xpect.runner.ValidatingSetup;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.state.Creates;
+import org.eclipse.xpect.util.IssueVisualizer;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -20,11 +25,6 @@ import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.junit.ComparisonFailure;
-import org.xpect.XpectReplace;
-import org.xpect.runner.ValidatingSetup;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.state.Creates;
-import org.xpect.util.IssueVisualizer;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;

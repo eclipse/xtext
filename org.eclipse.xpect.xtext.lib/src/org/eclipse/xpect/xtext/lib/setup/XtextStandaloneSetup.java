@@ -4,17 +4,17 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xpect.Environment;
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.XpectRequiredEnvironment;
+import org.eclipse.xpect.setup.ThisRootTestClass;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.state.Creates;
 import org.eclipse.xpect.xtext.lib.setup.emf.ResourceFactory;
 import org.eclipse.xpect.xtext.lib.util.XtextOffsetAdapter;
 import org.eclipse.xpect.xtext.lib.util.XtextTargetSyntaxSupport;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.xpect.Environment;
-import org.xpect.XpectImport;
-import org.xpect.XpectRequiredEnvironment;
-import org.xpect.setup.ThisRootTestClass;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.state.Creates;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;

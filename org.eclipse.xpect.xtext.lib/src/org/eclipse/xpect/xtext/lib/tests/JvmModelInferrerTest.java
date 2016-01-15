@@ -7,6 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xpect.xtext.lib.tests;
 
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.expectation.IStringExpectation;
+import org.eclipse.xpect.expectation.StringExpectation;
+import org.eclipse.xpect.parameter.ParameterParser;
+import org.eclipse.xpect.runner.Xpect;
+import org.eclipse.xpect.runner.XpectRunner;
 import org.eclipse.xpect.xtext.lib.setup.ThisResource;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.eclipse.xpect.xtext.lib.setup.XtextWorkspaceSetup;
@@ -19,12 +25,6 @@ import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.junit.runner.RunWith;
-import org.xpect.XpectImport;
-import org.xpect.expectation.IStringExpectation;
-import org.xpect.expectation.StringExpectation;
-import org.xpect.parameter.ParameterParser;
-import org.xpect.runner.Xpect;
-import org.xpect.runner.XpectRunner;
 
 import com.google.inject.Inject;
 

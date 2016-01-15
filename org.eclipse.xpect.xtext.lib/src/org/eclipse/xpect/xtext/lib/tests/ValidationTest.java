@@ -14,6 +14,12 @@ import static com.google.common.collect.Lists.newArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.expectation.ILinesExpectation;
+import org.eclipse.xpect.runner.Xpect;
+import org.eclipse.xpect.runner.XpectRunner;
+import org.eclipse.xpect.text.IRegion;
+import org.eclipse.xpect.util.IssueVisualizer;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.eclipse.xpect.xtext.lib.setup.XtextWorkspaceSetup;
 import org.eclipse.xpect.xtext.lib.tests.ValidationTestModuleSetup.ConsumedIssues;
@@ -26,12 +32,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.junit.Assert;
 import org.junit.ComparisonFailure;
 import org.junit.runner.RunWith;
-import org.xpect.XpectImport;
-import org.xpect.expectation.ILinesExpectation;
-import org.xpect.runner.Xpect;
-import org.xpect.runner.XpectRunner;
-import org.xpect.text.IRegion;
-import org.xpect.util.IssueVisualizer;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;

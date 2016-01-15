@@ -2,6 +2,12 @@ package org.eclipse.xpect.xtext.lib.tests;
 
 import java.util.List;
 
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.setup.ISetupInitializer;
+import org.eclipse.xpect.setup.XpectSetupComponent;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.setup.XpectSetupRoot;
+import org.eclipse.xpect.state.Creates;
 import org.eclipse.xpect.xtext.lib.tests.ValidationTestConfig.IgnoredIssues;
 import org.eclipse.xpect.xtext.lib.tests.ValidationTestConfig.LinkingAndValidationIssues;
 import org.eclipse.xpect.xtext.lib.tests.ValidationTestConfig.SyntaxAndLinkingAndValidationIssues;
@@ -10,12 +16,6 @@ import org.eclipse.xpect.xtext.lib.tests.ValidationTestConfig.ValidationWarnings
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
-import org.xpect.XpectImport;
-import org.xpect.setup.ISetupInitializer;
-import org.xpect.setup.XpectSetupComponent;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.setup.XpectSetupRoot;
-import org.xpect.state.Creates;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;

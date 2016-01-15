@@ -7,8 +7,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.7.0";visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="2.4.0";visibility:=reexport,
- org.xpect;bundle-version="0.1.0";visibility:=reexport,
- org.xpect.ui;bundle-version="0.1.0";visibility:=reexport,
+ org.eclipse.xpect;bundle-version="0.1.0";visibility:=reexport,
+ org.eclipse.xpect.ui;bundle-version="0.1.0";visibility:=reexport,
  org.eclipse.xtext.ui;bundle-version="2.4.0";visibility:=reexport,
  org.eclipse.jdt.core;bundle-version="3.7.0";visibility:=reexport,
  org.eclipse.ui.ide;bundle-version="3.7.0";visibility:=reexport

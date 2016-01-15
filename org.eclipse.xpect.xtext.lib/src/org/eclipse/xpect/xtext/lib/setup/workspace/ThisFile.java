@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.xpect.setup.XpectSetupComponent;
 import org.eclipse.xpect.xtext.lib.setup.FileSetupContext;
-import org.xpect.setup.XpectSetupComponent;
 
 @XpectSetupComponent
 public class ThisFile extends File implements IResourceFactory<IFile, IContainer> {

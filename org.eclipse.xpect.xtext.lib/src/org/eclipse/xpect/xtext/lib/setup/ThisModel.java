@@ -14,12 +14,12 @@ import java.lang.annotation.Target;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.state.Creates;
+import org.eclipse.xpect.state.XpectStateAnnotation;
 import org.eclipse.xpect.xtext.lib.setup.ThisModel.ThisModelFactory;
 import org.eclipse.xtext.resource.XtextResource;
-import org.xpect.XpectImport;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.state.Creates;
-import org.xpect.state.XpectStateAnnotation;
 
 import com.google.common.base.Joiner;
 

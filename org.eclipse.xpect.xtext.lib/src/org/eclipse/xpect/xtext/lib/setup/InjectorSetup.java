@@ -1,10 +1,10 @@
 package org.eclipse.xpect.xtext.lib.setup;
 
-import org.xpect.XpectFile;
-import org.xpect.XpectJavaModel;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.state.Creates;
-import org.xpect.util.IXtInjectorProvider;
+import org.eclipse.xpect.XpectFile;
+import org.eclipse.xpect.XpectJavaModel;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.state.Creates;
+import org.eclipse.xpect.util.IXtInjectorProvider;
 
 import com.google.inject.Injector;
 

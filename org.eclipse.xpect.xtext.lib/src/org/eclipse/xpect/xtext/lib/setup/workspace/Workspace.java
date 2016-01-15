@@ -18,12 +18,12 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xpect.Environment;
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.XpectRequiredEnvironment;
+import org.eclipse.xpect.setup.XpectSetupComponent;
+import org.eclipse.xpect.util.EnvironmentUtil;
 import org.eclipse.xpect.xtext.lib.setup.FileSetupContext;
-import org.xpect.Environment;
-import org.xpect.XpectImport;
-import org.xpect.XpectRequiredEnvironment;
-import org.xpect.setup.XpectSetupComponent;
-import org.xpect.util.EnvironmentUtil;
 
 @XpectSetupComponent
 @XpectRequiredEnvironment(Environment.PLUGIN_TEST)

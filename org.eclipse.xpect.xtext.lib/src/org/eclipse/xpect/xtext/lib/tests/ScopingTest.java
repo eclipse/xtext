@@ -9,6 +9,12 @@ package org.eclipse.xpect.xtext.lib.tests;
 
 import java.util.Iterator;
 
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.expectation.CommaSeparatedValuesExpectation;
+import org.eclipse.xpect.expectation.ICommaSeparatedValuesExpectation;
+import org.eclipse.xpect.parameter.ParameterParser;
+import org.eclipse.xpect.runner.Xpect;
+import org.eclipse.xpect.runner.XpectRunner;
 import org.eclipse.xpect.xtext.lib.setup.ThisOffset;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.eclipse.xpect.xtext.lib.setup.XtextWorkspaceSetup;
@@ -19,12 +25,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.junit.runner.RunWith;
-import org.xpect.XpectImport;
-import org.xpect.expectation.CommaSeparatedValuesExpectation;
-import org.xpect.expectation.ICommaSeparatedValuesExpectation;
-import org.xpect.parameter.ParameterParser;
-import org.xpect.runner.Xpect;
-import org.xpect.runner.XpectRunner;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

@@ -3,6 +3,15 @@ package org.eclipse.xpect.xtext.lib.util;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.XpectInvocation;
+import org.eclipse.xpect.parameter.IStatementRelatedRegion;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.state.Creates;
+import org.eclipse.xpect.state.XpectStateAnnotation;
+import org.eclipse.xpect.text.IRegion;
+import org.eclipse.xpect.text.Region;
+import org.eclipse.xpect.text.Text;
 import org.eclipse.xpect.xtext.lib.setup.ThisResource;
 import org.eclipse.xpect.xtext.lib.util.NextLine.NextLineProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -11,15 +20,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
-import org.xpect.XpectImport;
-import org.xpect.XpectInvocation;
-import org.xpect.parameter.IStatementRelatedRegion;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.state.Creates;
-import org.xpect.state.XpectStateAnnotation;
-import org.xpect.text.IRegion;
-import org.xpect.text.Region;
-import org.xpect.text.Text;
 
 @Retention(RetentionPolicy.RUNTIME)
 @XpectStateAnnotation

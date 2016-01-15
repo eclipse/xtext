@@ -13,6 +13,13 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.XpectInvocation;
+import org.eclipse.xpect.parameter.OffsetRegion;
+import org.eclipse.xpect.setup.ThisArgumentType;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.state.Creates;
+import org.eclipse.xpect.text.OffsetToString;
 import org.eclipse.xpect.xtext.lib.setup.ThisResource;
 import org.eclipse.xpect.xtext.lib.util.XtextOffsetAdapter.EObjectProvider;
 import org.eclipse.xpect.xtext.lib.util.XtextOffsetAdapter.NodeProvider;
@@ -24,13 +31,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
-import org.xpect.XpectImport;
-import org.xpect.XpectInvocation;
-import org.xpect.parameter.OffsetRegion;
-import org.xpect.setup.ThisArgumentType;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.state.Creates;
-import org.xpect.text.OffsetToString;
 
 import com.google.common.collect.Sets;
 

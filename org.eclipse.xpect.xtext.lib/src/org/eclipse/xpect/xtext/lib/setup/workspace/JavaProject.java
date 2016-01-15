@@ -12,8 +12,8 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xpect.setup.XpectSetupComponent;
 import org.eclipse.xpect.xtext.lib.setup.FileSetupContext;
-import org.xpect.setup.XpectSetupComponent;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

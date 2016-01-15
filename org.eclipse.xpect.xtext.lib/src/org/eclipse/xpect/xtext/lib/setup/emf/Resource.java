@@ -11,8 +11,8 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xpect.setup.XpectSetupComponent;
 import org.eclipse.xpect.xtext.lib.setup.FileSetupContext;
-import org.xpect.setup.XpectSetupComponent;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

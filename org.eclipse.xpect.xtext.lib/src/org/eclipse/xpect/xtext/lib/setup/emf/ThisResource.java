@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xpect.xtext.lib.setup.emf;
 
-import org.xpect.setup.XpectSetupComponent;
+import org.eclipse.xpect.setup.XpectSetupComponent;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

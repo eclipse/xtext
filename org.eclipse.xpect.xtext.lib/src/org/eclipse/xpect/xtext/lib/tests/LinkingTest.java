@@ -12,6 +12,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.expectation.IStringExpectation;
+import org.eclipse.xpect.expectation.StringExpectation;
+import org.eclipse.xpect.parameter.ParameterParser;
+import org.eclipse.xpect.runner.Xpect;
+import org.eclipse.xpect.runner.XpectRunner;
 import org.eclipse.xpect.xtext.lib.setup.ThisOffset;
 import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup;
 import org.eclipse.xpect.xtext.lib.setup.XtextWorkspaceSetup;
@@ -22,12 +28,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
-import org.xpect.XpectImport;
-import org.xpect.expectation.IStringExpectation;
-import org.xpect.expectation.StringExpectation;
-import org.xpect.parameter.ParameterParser;
-import org.xpect.runner.Xpect;
-import org.xpect.runner.XpectRunner;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

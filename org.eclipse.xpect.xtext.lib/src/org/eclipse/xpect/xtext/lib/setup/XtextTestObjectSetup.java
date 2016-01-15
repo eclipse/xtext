@@ -1,12 +1,12 @@
 package org.eclipse.xpect.xtext.lib.setup;
 
-import org.xpect.XpectImport;
-import org.xpect.XpectReplace;
-import org.xpect.setup.ThisTestClass;
-import org.xpect.setup.ThisTestObject;
-import org.xpect.setup.ThisTestObject.TestObjectSetup;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.state.Creates;
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.XpectReplace;
+import org.eclipse.xpect.setup.ThisTestClass;
+import org.eclipse.xpect.setup.ThisTestObject;
+import org.eclipse.xpect.setup.ThisTestObject.TestObjectSetup;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.state.Creates;
 
 import com.google.inject.Injector;
 

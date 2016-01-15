@@ -8,9 +8,9 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.xpect.setup.XpectSetupComponent;
 import org.eclipse.xpect.xtext.lib.setup.FileSetupContext;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.xpect.setup.XpectSetupComponent;
 
 @XpectSetupComponent
 @SuppressWarnings("restriction")

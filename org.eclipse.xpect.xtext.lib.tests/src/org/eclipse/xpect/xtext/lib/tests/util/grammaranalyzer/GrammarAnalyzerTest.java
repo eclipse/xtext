@@ -3,17 +3,17 @@ package org.eclipse.xpect.xtext.lib.tests.util.grammaranalyzer;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xpect.expectation.ILinesExpectation;
+import org.eclipse.xpect.expectation.LinesExpectation;
+import org.eclipse.xpect.runner.Xpect;
+import org.eclipse.xpect.runner.XpectRunner;
+import org.eclipse.xpect.setup.XpectSetup;
+import org.eclipse.xpect.xtext.lib.setup.ThisModel;
+import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.eclipse.xpect.xtext.lib.util.GrammarAnalyzer;
+import org.eclipse.xpect.xtext.lib.util.GrammarAnalyzer.CommentRule;
 import org.eclipse.xtext.Grammar;
 import org.junit.runner.RunWith;
-import org.xpect.expectation.ILinesExpectation;
-import org.xpect.expectation.LinesExpectation;
-import org.xpect.runner.Xpect;
-import org.xpect.runner.XpectRunner;
-import org.xpect.setup.XpectSetup;
-import org.xpect.xtext.lib.setup.ThisModel;
-import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
-import org.xpect.xtext.lib.util.GrammarAnalyzer;
-import org.xpect.xtext.lib.util.GrammarAnalyzer.CommentRule;
 
 import com.google.common.collect.Lists;
 

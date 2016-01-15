@@ -1,16 +1,16 @@
 package org.eclipse.xpect.xtext.lib.tests.parameters;
 
+import org.eclipse.xpect.expectation.IStringExpectation;
+import org.eclipse.xpect.lib.XpectTestResultTest;
+import org.eclipse.xpect.parameter.OffsetRegion;
+import org.eclipse.xpect.parameter.ParameterParser;
+import org.eclipse.xpect.runner.Xpect;
+import org.eclipse.xpect.runner.XpectRunner;
+import org.eclipse.xpect.runner.XpectSuiteClasses;
+import org.eclipse.xpect.text.IRegion;
+import org.eclipse.xpect.xtext.lib.setup.XtextStandaloneSetup;
+import org.eclipse.xpect.xtext.lib.setup.XtextWorkspaceSetup;
 import org.junit.runner.RunWith;
-import org.xpect.expectation.IStringExpectation;
-import org.xpect.lib.XpectTestResultTest;
-import org.xpect.parameter.OffsetRegion;
-import org.xpect.parameter.ParameterParser;
-import org.xpect.runner.Xpect;
-import org.xpect.runner.XpectRunner;
-import org.xpect.runner.XpectSuiteClasses;
-import org.xpect.text.IRegion;
-import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
-import org.xpect.xtext.lib.setup.XtextWorkspaceSetup;
 
 @RunWith(XpectRunner.class)
 @XpectSuiteClasses({ XpectTestResultTest.class, XtextWorkspaceSetup.class, XtextStandaloneSetup.class })

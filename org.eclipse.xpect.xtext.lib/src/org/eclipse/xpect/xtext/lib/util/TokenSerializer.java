@@ -6,6 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.rules.IToken;
+import org.eclipse.xpect.text.StringEndsSimilarityFunction;
+import org.eclipse.xpect.text.WhitespaceTokenizer;
+import org.eclipse.xpect.util.IDifferencer.ISimilarityFunction;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.IFormatter;
@@ -23,10 +27,6 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
-import org.xpect.expectation.IStringDiffExpectation.IToken;
-import org.xpect.text.StringEndsSimilarityFunction;
-import org.xpect.text.WhitespaceTokenizer;
-import org.xpect.util.IDifferencer.ISimilarityFunction;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
@@ -67,7 +67,7 @@ public class TokenSerializer {
 		}
 	}
 
-	public static class Token implements IToken<Token> {
+	public static class Token implements org.eclipse.xpect.expectation.IStringDiffExpectation.IToken<Token> {
 		private final boolean hidden;
 		private final Object owner;
 		private final Iterable<String> segments;

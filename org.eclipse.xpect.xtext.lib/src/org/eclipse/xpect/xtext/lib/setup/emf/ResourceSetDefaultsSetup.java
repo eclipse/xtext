@@ -2,12 +2,12 @@ package org.eclipse.xpect.xtext.lib.setup.emf;
 
 import java.util.List;
 
+import org.eclipse.xpect.XpectImport;
+import org.eclipse.xpect.setup.ISetupInitializer;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.setup.XpectSetupRoot;
+import org.eclipse.xpect.state.Creates;
 import org.eclipse.xpect.xtext.lib.setup.generic.Resource;
-import org.xpect.XpectImport;
-import org.xpect.setup.ISetupInitializer;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.setup.XpectSetupRoot;
-import org.xpect.state.Creates;
 
 import com.google.common.collect.Lists;
 

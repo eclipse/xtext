@@ -1,5 +1,13 @@
 package org.eclipse.xpect.xtext.lib.util;
 
+import org.eclipse.xpect.XpectInvocation;
+import org.eclipse.xpect.expectation.impl.TargetSyntaxSupport;
+import org.eclipse.xpect.parameter.IStatementRelatedRegion;
+import org.eclipse.xpect.setup.XpectSetupFactory;
+import org.eclipse.xpect.state.Creates;
+import org.eclipse.xpect.text.IReplacement;
+import org.eclipse.xpect.text.Replacement;
+import org.eclipse.xpect.text.Text;
 import org.eclipse.xpect.xtext.lib.setup.ThisResource;
 import org.eclipse.xpect.xtext.lib.util.GrammarAnalyzer.CommentRule;
 import org.eclipse.xpect.xtext.lib.util.GrammarAnalyzer.MLCommentRule;
@@ -10,14 +18,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
-import org.xpect.XpectInvocation;
-import org.xpect.expectation.impl.TargetSyntaxSupport;
-import org.xpect.parameter.IStatementRelatedRegion;
-import org.xpect.setup.XpectSetupFactory;
-import org.xpect.state.Creates;
-import org.xpect.text.IReplacement;
-import org.xpect.text.Replacement;
-import org.xpect.text.Text;
 
 @XpectSetupFactory
 public class XtextTargetSyntaxSupport extends TargetSyntaxSupport {

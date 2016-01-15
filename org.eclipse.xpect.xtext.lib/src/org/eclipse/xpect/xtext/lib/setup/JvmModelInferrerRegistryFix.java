@@ -1,7 +1,7 @@
 package org.eclipse.xpect.xtext.lib.setup;
 
 import org.apache.log4j.Logger;
-import org.xpect.util.ReflectionUtil;
+import org.eclipse.xpect.util.ReflectionUtil;
 
 public class JvmModelInferrerRegistryFix {
 

@@ -1,8 +1,8 @@
 package org.eclipse.xpect.xtext.lib.tests;
 
+import org.eclipse.xpect.runner.XpectRunner;
+import org.eclipse.xpect.runner.XpectSuiteClasses;
 import org.junit.runner.RunWith;
-import org.xpect.runner.XpectRunner;
-import org.xpect.runner.XpectSuiteClasses;
 
 @XpectSuiteClasses({ JvmModelInferrerTest.class, //
 		LinkingTest.class,//

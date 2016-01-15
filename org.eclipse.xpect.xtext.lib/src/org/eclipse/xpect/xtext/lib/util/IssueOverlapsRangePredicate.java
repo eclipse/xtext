@@ -9,9 +9,9 @@ package org.eclipse.xpect.xtext.lib.util;
 
 import java.util.Set;
 
+import org.eclipse.xpect.text.IRegion;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
-import org.xpect.text.IRegion;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
