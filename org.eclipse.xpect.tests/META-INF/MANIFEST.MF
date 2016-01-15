@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.xpect.tests
+Bundle-Vendor: itemis AG
+Bundle-Version: 0.1.0.qualifier
+Bundle-SymbolicName: org.eclipse.xpect.tests;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.xpect,
+ org.xpect.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.junit4,
+ org.eclipse.ui.workbench;resolution:=optional,
+ org.eclipse.xtend.lib,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.objectweb.asm;bundle-version="[3.0.0,6.0.0)";resolution:=optional
+Import-Package: org.apache.log4j,
+ org.junit;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.hamcrest.core
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.xpect

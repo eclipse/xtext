@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Lib
+Bundle-SymbolicName: org.eclipse.xpect.xtext.lib
+Bundle-Version: 0.1.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0";visibility:=reexport,
+ org.eclipse.core.resources;bundle-version="3.7.0";visibility:=reexport,
+ org.eclipse.xtext.xbase;bundle-version="2.4.0";visibility:=reexport,
+ org.xpect;bundle-version="0.1.0";visibility:=reexport,
+ org.xpect.ui;bundle-version="0.1.0";visibility:=reexport,
+ org.eclipse.xtext.ui;bundle-version="2.4.0";visibility:=reexport,
+ org.eclipse.jdt.core;bundle-version="3.7.0";visibility:=reexport,
+ org.eclipse.ui.ide;bundle-version="3.7.0";visibility:=reexport
+Export-Package: org.xpect.xtext.lib.setup,
+ org.xpect.xtext.lib.setup.emf,
+ org.xpect.xtext.lib.setup.generic,
+ org.xpect.xtext.lib.setup.workspace,
+ org.xpect.xtext.lib.tests,
+ org.xpect.xtext.lib.util
+Bundle-Vendor: itemis AG
