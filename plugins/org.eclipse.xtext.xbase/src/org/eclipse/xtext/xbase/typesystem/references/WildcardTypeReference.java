@@ -336,8 +336,10 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		if (lowerBound != null) {
 			return "? super " + format.apply(lowerBound);
 		}
-		if (upperBounds != null && upperBounds.size() == 1 && upperBounds.get(0).isType(Object.class)) {
-			return "?";
+		if (format == SimpleNameFunction.INSTANCE) {
+			if (upperBounds != null && upperBounds.size() == 1 && upperBounds.get(0).isType(Object.class)) {
+				return "?";
+			}
 		}
 		return "?" + ( upperBounds != null ? " extends " + Joiner.on(" & ").join(Iterables.transform(upperBounds, format)) : "");
 	}
