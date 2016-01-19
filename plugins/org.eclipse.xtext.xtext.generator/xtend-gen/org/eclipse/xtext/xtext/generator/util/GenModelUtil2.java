@@ -148,7 +148,7 @@ public class GenModelUtil2 {
     Map<String, URI> _ePackageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false);
     final URI genModelURI = _ePackageNsURIToGenModelLocationMap.get(nsURI);
     if ((genModelURI == null)) {
-      boolean _equals = EcorePackage.eNS_URI.equals(nsURI);
+      boolean _equals = Objects.equal(EcorePackage.eNS_URI, nsURI);
       if (_equals) {
         return null;
       }
@@ -160,7 +160,7 @@ public class GenModelUtil2 {
             EList<GenPackage> _genPackages = ((GenModel)obj).getGenPackages();
             for (final GenPackage genPackage : _genPackages) {
               String _nSURI = genPackage.getNSURI();
-              boolean _equals_1 = _nSURI.equals(nsURI);
+              boolean _equals_1 = Objects.equal(_nSURI, nsURI);
               if (_equals_1) {
                 return genPackage.eResource();
               }
