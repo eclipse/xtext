@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui.editor.actions;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper.*;
 
 import java.io.ByteArrayInputStream;
@@ -16,6 +17,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -132,31 +135,35 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	private void doCutCopyWithImportsOperation() {
 		try {
 			final XbaseClipboardData cbData = createClipboardData();
-			if (cbData != null) {
+			if (cbData != null ) {
 				ClipboardUtil.clipboardOperation(new Function<Clipboard, Boolean>() {
 
 					@Override
 					public Boolean apply(Clipboard clipboard) {
+						Map<Object,Transfer> payload = newLinkedHashMap();
+						payload.put(cbData, TRANSFER_INSTANCE);
+						
 						TextTransfer textTransfer = TextTransfer.getInstance();
-						Object txtTransferContent = clipboard.getContents(textTransfer);
-						if (txtTransferContent == null) {
+						String textData = (String) clipboard.getContents(textTransfer);
+						if (textData == null || textData.isEmpty()) {
 							// StyledText copied any data to ClipBoard
 							return Boolean.FALSE;
 						}
-						String textData = (String) txtTransferContent;
-						List<Object> datas = newArrayList();
-						List<Transfer> transfers = newArrayList();
-						datas.add(textData);
-						transfers.add(textTransfer);
+						payload.put(textData, textTransfer);
+						
 						RTFTransfer rtfTransfer = RTFTransfer.getInstance();
 						String rtfData = (String) clipboard.getContents(rtfTransfer);
-						if (rtfData != null) {
-							datas.add(rtfData);
-							transfers.add(rtfTransfer);
+						if (rtfData != null && !rtfData.isEmpty()) {
+							payload.put(rtfData, rtfTransfer);
 						}
-						datas.add(cbData);
-						transfers.add(TRANSFER_INSTANCE);
-						clipboard.setContents(datas.toArray(), transfers.toArray(new Transfer[] {}));
+						
+						List<Object> datas = newArrayList();
+						List<Transfer> dataTypes = newArrayList();
+						for (Entry<Object, Transfer> entry : payload.entrySet()) {
+							datas.add(entry.getKey());
+							dataTypes.add(entry.getValue());
+						}
+						clipboard.setContents(datas.toArray(), dataTypes.toArray(new Transfer[] {}));
 						return Boolean.TRUE;
 					}
 				});
@@ -493,7 +500,6 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 			}
 			return null;
 		}
-
 	}
 
 }
