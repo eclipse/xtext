@@ -15,6 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -109,11 +110,19 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	 * @return the cache adapter for the given resource. Never <code>null</code>.
 	 */
 	public CacheAdapter getOrCreate(Resource resource) {
-		CacheAdapter adapter = (CacheAdapter) EcoreUtil.getAdapter(resource.eAdapters(), CacheAdapter.class);
-		if (adapter == null) {
-			adapter = new CacheAdapter();
-			resource.eAdapters().add(adapter);
-			adapter.setResource(resource);
+		// ask for the list of adapters twice in order to avoid the usage of a
+		//  potentially stale list because of a race of several involved threads
+		resource.eAdapters();
+		final List<Adapter> adapters = resource.eAdapters();
+		
+		CacheAdapter adapter;
+		synchronized (adapters) {			
+			adapter = (CacheAdapter) EcoreUtil.getAdapter(adapters, CacheAdapter.class);
+			if (adapter == null) {
+				adapter = new CacheAdapter();
+				adapters.add(adapter);
+				adapter.setResource(resource);
+			}
 		}
 		return adapter;
 	}
