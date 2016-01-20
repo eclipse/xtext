@@ -14,8 +14,8 @@
       <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
-      <useJobPriority>false</useJobPriority>
-      <priority>-1</priority>
+      <useJobPriority>true</useJobPriority>
+      <priority>5</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>

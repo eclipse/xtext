@@ -106,7 +106,7 @@ branches.each { branch ->
 						|| job.suite == 'xtext-runtime-tests' // these currently contain ui tests
 						) {
 						config.buildWrappers.appendNode {
-							'hudson.plugins.xvnc.Xvnc'() {
+							'hudson.plugins.xvnc.Xvnc'('plugin' : 'xvnc@1.21') {
 								takeScreenshot(false)
 								useXauthority(true)
 							}
