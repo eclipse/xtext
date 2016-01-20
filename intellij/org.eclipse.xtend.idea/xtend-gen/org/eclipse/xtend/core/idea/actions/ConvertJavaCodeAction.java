@@ -13,17 +13,12 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFileSystemItem;
 import com.intellij.psi.PsiJavaFile;
-import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.refactoring.RefactoringActionHandler;
 import com.intellij.refactoring.actions.BaseRefactoringAction;
-import java.util.List;
 import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -42,43 +37,10 @@ public class ConvertJavaCodeAction extends BaseRefactoringAction {
   
   @Override
   protected boolean isEnabledOnElements(final PsiElement[] elements) {
-    final Function1<PsiElement, PsiFileSystemItem> _function = new Function1<PsiElement, PsiFileSystemItem>() {
+    Iterable<PsiJavaFile> _collectJavaFiles = ConvertJavaCodeHandler.collectJavaFiles(elements);
+    final Function1<PsiJavaFile, Boolean> _function = new Function1<PsiJavaFile, Boolean>() {
       @Override
-      public PsiFileSystemItem apply(final PsiElement it) {
-        PsiFileSystemItem _xifexpression = null;
-        if ((it instanceof PsiFileSystemItem)) {
-          _xifexpression = ((PsiFileSystemItem)it);
-        } else {
-          _xifexpression = it.getContainingFile();
-        }
-        return _xifexpression;
-      }
-    };
-    List<PsiFileSystemItem> _map = ListExtensions.<PsiElement, PsiFileSystemItem>map(((List<PsiElement>)Conversions.doWrapArray(elements)), _function);
-    final Function1<PsiFileSystemItem, Boolean> _function_1 = new Function1<PsiFileSystemItem, Boolean>() {
-      @Override
-      public Boolean apply(final PsiFileSystemItem it) {
-        boolean _or = false;
-        if ((it instanceof PsiJavaFile)) {
-          _or = true;
-        } else {
-          final PsiElementProcessor<PsiFileSystemItem> _function = new PsiElementProcessor<PsiFileSystemItem>() {
-            @Override
-            public boolean execute(final PsiFileSystemItem it) {
-              return (!(it instanceof PsiJavaFile));
-            }
-          };
-          boolean _processChildren = it.processChildren(_function);
-          boolean _not = (!_processChildren);
-          _or = _not;
-        }
-        return Boolean.valueOf(_or);
-      }
-    };
-    Iterable<PsiFileSystemItem> _filter = IterableExtensions.<PsiFileSystemItem>filter(_map, _function_1);
-    final Function1<PsiFileSystemItem, Boolean> _function_2 = new Function1<PsiFileSystemItem, Boolean>() {
-      @Override
-      public Boolean apply(final PsiFileSystemItem it) {
+      public Boolean apply(final PsiJavaFile it) {
         final Module module = ModuleUtil.findModuleForPsiElement(it);
         boolean _and = false;
         if (!(module != null)) {
@@ -92,6 +54,6 @@ public class ConvertJavaCodeAction extends BaseRefactoringAction {
         return Boolean.valueOf(_and);
       }
     };
-    return IterableExtensions.<PsiFileSystemItem>exists(_filter, _function_2);
+    return IterableExtensions.<PsiJavaFile>exists(_collectJavaFiles, _function);
   }
 }

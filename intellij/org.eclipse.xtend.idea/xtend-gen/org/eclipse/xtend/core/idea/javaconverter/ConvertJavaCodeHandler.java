@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtend.core.idea.javaconverter;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.codeInsight.FileModificationService;
@@ -37,7 +39,6 @@ import com.intellij.refactoring.RefactoringActionHandler;
 import com.intellij.util.SequentialModalProgressTask;
 import com.intellij.util.SequentialTask;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.jetbrains.annotations.Nls;
@@ -180,35 +182,42 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
   
   @Override
   public void invoke(final Project project, final PsiElement[] elements, final DataContext dataContext) {
-    HashSet<PsiJavaFile> _newHashSet = CollectionLiterals.<PsiJavaFile>newHashSet();
-    Collection<PsiJavaFile> _collectJavaFiles = this.collectJavaFiles(elements, _newHashSet);
+    Iterable<PsiJavaFile> _collectJavaFiles = ConvertJavaCodeHandler.collectJavaFiles(elements);
+    List<PsiJavaFile> _list = IterableExtensions.<PsiJavaFile>toList(_collectJavaFiles);
     Project _data = CommonDataKeys.PROJECT.getData(dataContext);
-    this.runJavaConverter(_collectJavaFiles, _data);
+    this.runJavaConverter(_list, _data);
   }
   
-  public Collection<PsiJavaFile> collectJavaFiles(final PsiElement[] elements, final Set<PsiJavaFile> collector) {
-    final Procedure1<PsiElement> _function = new Procedure1<PsiElement>() {
+  public static Iterable<PsiJavaFile> collectJavaFiles(final PsiElement[] elements) {
+    final Function1<PsiElement, Iterable<PsiJavaFile>> _function = new Function1<PsiElement, Iterable<PsiJavaFile>>() {
       @Override
-      public void apply(final PsiElement it) {
+      public Iterable<PsiJavaFile> apply(final PsiElement it) {
+        Iterable<PsiJavaFile> _xifexpression = null;
         if ((it instanceof PsiJavaFile)) {
-          collector.add(((PsiJavaFile)it));
+          _xifexpression = ImmutableList.<PsiJavaFile>of(((PsiJavaFile)it));
         } else {
-          if ((it instanceof PsiDirectory)) {
-            PsiElement[] _children = ((PsiDirectory)it).getChildren();
-            Collection<PsiJavaFile> _collectJavaFiles = ConvertJavaCodeHandler.this.collectJavaFiles(_children, collector);
-            collector.addAll(_collectJavaFiles);
+          Iterable<PsiJavaFile> _xifexpression_1 = null;
+          PsiFile _containingFile = it.getContainingFile();
+          if ((_containingFile instanceof PsiJavaFile)) {
+            PsiFile _containingFile_1 = it.getContainingFile();
+            _xifexpression_1 = ImmutableList.<PsiJavaFile>of(((PsiJavaFile) _containingFile_1));
           } else {
-            PsiFile _containingFile = it.getContainingFile();
-            if ((_containingFile instanceof PsiJavaFile)) {
-              PsiFile _containingFile_1 = it.getContainingFile();
-              collector.add(((PsiJavaFile) _containingFile_1));
+            Iterable<PsiJavaFile> _xifexpression_2 = null;
+            if ((it instanceof PsiDirectory)) {
+              PsiElement[] _children = ((PsiDirectory)it).getChildren();
+              _xifexpression_2 = ConvertJavaCodeHandler.collectJavaFiles(_children);
             }
+            _xifexpression_1 = _xifexpression_2;
           }
+          _xifexpression = _xifexpression_1;
         }
+        return _xifexpression;
       }
     };
-    IterableExtensions.<PsiElement>forEach(((Iterable<PsiElement>)Conversions.doWrapArray(elements)), _function);
-    return collector;
+    List<Iterable<PsiJavaFile>> _map = ListExtensions.<PsiElement, Iterable<PsiJavaFile>>map(((List<PsiElement>)Conversions.doWrapArray(elements)), _function);
+    Iterable<Iterable<PsiJavaFile>> _filterNull = IterableExtensions.<Iterable<PsiJavaFile>>filterNull(_map);
+    final Iterable<PsiJavaFile> iterators = Iterables.<PsiJavaFile>concat(_filterNull);
+    return iterators;
   }
   
   public void runJavaConverter(final Collection<PsiJavaFile> files, final Project project) {
