@@ -10,8 +10,13 @@ package org.eclipse.xtend.idea.javaconverter;
 import com.google.inject.Inject;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiJavaFile;
+import java.util.Iterator;
 import junit.framework.TestCase;
+import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend.core.javaconverter.JavaConverter;
 import org.eclipse.xtend.core.tests.javaconverter.JavaConverterTest;
@@ -23,6 +28,7 @@ import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.junit.Test;
 
 /**
@@ -97,6 +103,35 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     Iterable<String> _problems = result.getProblems();
     boolean _isEmpty = IterableExtensions.isEmpty(_problems);
     TestCase.assertTrue(_isEmpty);
+  }
+  
+  @Test
+  public void testCollectJavaFilesInHandler() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package javaconverter.foo;");
+    _builder.newLine();
+    _builder.append("public class JavaConverterTest {}");
+    _builder.newLine();
+    final PsiFile javaCalzz = this.myFixture.addFileToProject("javaconverter/foo/JavaConverterTest.java", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package javaconverter.bar;");
+    _builder_1.newLine();
+    _builder_1.append("public class JavaConverterTest {}");
+    _builder_1.newLine();
+    this.myFixture.addFileToProject("javaconverter/bar/JavaConverterTest.java", _builder_1.toString());
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("public class JavaConverterTest {}");
+    _builder_2.newLine();
+    final PsiFile otherClazz = this.myFixture.addFileToProject("JavaConverterTest.java", _builder_2.toString());
+    PsiDirectory _parent = javaCalzz.getParent();
+    PsiDirectory _parent_1 = _parent.getParent();
+    final Iterable<PsiJavaFile> result = ConvertJavaCodeHandler.collectJavaFiles(new PsiElement[] { _parent_1, otherClazz });
+    Iterator<PsiJavaFile> _iterator = result.iterator();
+    boolean _hasNext = _iterator.hasNext();
+    TestCase.assertTrue(_hasNext);
+    Iterator<PsiJavaFile> _iterator_1 = result.iterator();
+    int _size = IteratorExtensions.size(_iterator_1);
+    TestCase.assertEquals(3, _size);
   }
   
   public void testAnnotationDeclaration() throws Exception {

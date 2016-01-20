@@ -8,9 +8,9 @@
 package org.eclipse.xtend.core.idea.actions
 
 import com.intellij.openapi.actionSystem.DataContext
+import com.intellij.openapi.module.ModuleUtil
+import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFileSystemItem
-import com.intellij.psi.PsiJavaFile
 import com.intellij.refactoring.actions.BaseRefactoringAction
 import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler
 
@@ -20,16 +20,17 @@ import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler
 class ConvertJavaCodeAction extends BaseRefactoringAction {
 
 	override protected getHandler(DataContext dataContext) {
-		new ConvertJavaCodeHandler()
+		new ConvertJavaCodeHandler
 	}
 
 	override protected isAvailableInEditorOnly() {
 		false
 	}
 
-	override protected isEnabledOnElements(PsiElement[] elements) {
-		elements.map[if(it instanceof PsiFileSystemItem) it else it.containingFile].exists [
-			it instanceof PsiJavaFile || !it.processChildren[!(it instanceof PsiJavaFile)]
+	override protected boolean isEnabledOnElements(PsiElement[] elements) {
+		return ConvertJavaCodeHandler.collectJavaFiles(elements).exists [
+			val module = ModuleUtil.findModuleForPsiElement(it)
+			return (module !== null && ModuleRootManager.getInstance(module).sdk !== null)
 		]
 	}
 
