@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.javaconverter
 
+import com.google.common.collect.ImmutableList
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.intellij.codeInsight.FileModificationService
@@ -35,7 +36,6 @@ import com.intellij.util.SequentialTask
 import java.util.Collection
 import java.util.Iterator
 import java.util.Map
-import java.util.Set
 import org.eclipse.xtend.core.formatting2.FormatterFacade
 import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler.ConvertJavaSequentialTask
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
@@ -58,21 +58,22 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 		invoke(project, newImmutableList(file), dataContext)
 	}
 
-	override invoke(Project project, PsiElement[] elements, DataContext dataContext) {
-		runJavaConverter(elements.collectJavaFiles(newHashSet()), CommonDataKeys.PROJECT.getData(dataContext))
+	override void invoke(Project project, PsiElement[] elements, DataContext dataContext) {
+		runJavaConverter(elements.collectJavaFiles.toList, CommonDataKeys.PROJECT.getData(dataContext))
 	}
 
-	def Collection<PsiJavaFile> collectJavaFiles(PsiElement[] elements, Set<PsiJavaFile> collector) {
-		elements.forEach [
+
+	def static Iterable<PsiJavaFile> collectJavaFiles(PsiElement[] elements) {
+		val iterators = elements.map [
 			if (it instanceof PsiJavaFile) {
-				collector.add(it)
-			} else if (it instanceof PsiDirectory) {
-				collector.addAll(it.children.collectJavaFiles(collector))
+				ImmutableList.of(it)
 			} else if (it.containingFile instanceof PsiJavaFile) {
-				collector.add(it.containingFile as PsiJavaFile)
+				ImmutableList.of(it.containingFile as PsiJavaFile)
+			} else if (it instanceof PsiDirectory) {
+				it.children.collectJavaFiles
 			}
-		]
-		return collector
+		].filterNull.flatten
+		return iterators
 	}
 	
 	def runJavaConverter(Collection<PsiJavaFile> files, Project project) {
