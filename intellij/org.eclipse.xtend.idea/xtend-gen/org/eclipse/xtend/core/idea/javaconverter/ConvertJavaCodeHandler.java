@@ -214,10 +214,9 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
         return _xifexpression;
       }
     };
-    List<Iterable<PsiJavaFile>> _map = ListExtensions.<PsiElement, Iterable<PsiJavaFile>>map(((List<PsiElement>)Conversions.doWrapArray(elements)), _function);
-    Iterable<Iterable<PsiJavaFile>> _filterNull = IterableExtensions.<Iterable<PsiJavaFile>>filterNull(_map);
-    final Iterable<PsiJavaFile> iterators = Iterables.<PsiJavaFile>concat(_filterNull);
-    return iterators;
+    final List<Iterable<PsiJavaFile>> iterables = ListExtensions.<PsiElement, Iterable<PsiJavaFile>>map(((List<PsiElement>)Conversions.doWrapArray(elements)), _function);
+    Iterable<Iterable<PsiJavaFile>> _filterNull = IterableExtensions.<Iterable<PsiJavaFile>>filterNull(iterables);
+    return Iterables.<PsiJavaFile>concat(_filterNull);
   }
   
   public void runJavaConverter(final Collection<PsiJavaFile> files, final Project project) {

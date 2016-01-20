@@ -64,7 +64,7 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 
 
 	def static Iterable<PsiJavaFile> collectJavaFiles(PsiElement[] elements) {
-		val iterators = elements.map [
+		val iterables = elements.map [
 			if (it instanceof PsiJavaFile) {
 				ImmutableList.of(it)
 			} else if (it.containingFile instanceof PsiJavaFile) {
@@ -72,8 +72,8 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 			} else if (it instanceof PsiDirectory) {
 				it.children.collectJavaFiles
 			}
-		].filterNull.flatten
-		return iterators
+		]
+		return iterables.filterNull.flatten
 	}
 	
 	def runJavaConverter(Collection<PsiJavaFile> files, Project project) {
