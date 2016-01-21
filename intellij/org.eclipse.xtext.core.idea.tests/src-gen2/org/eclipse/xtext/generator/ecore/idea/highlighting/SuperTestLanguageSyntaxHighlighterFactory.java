@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 public class SuperTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	
 	@Override
-    @NotNull
-    protected SyntaxHighlighter createHighlighter() {
-        return SuperTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);
-    }
+	@NotNull
+	protected SyntaxHighlighter createHighlighter() {
+		return SuperTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);
+	}
 }

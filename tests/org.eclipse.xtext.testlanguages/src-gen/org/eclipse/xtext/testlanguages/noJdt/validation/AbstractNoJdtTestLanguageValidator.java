@@ -12,8 +12,8 @@ public abstract class AbstractNoJdtTestLanguageValidator extends AbstractDeclara
 	
 	@Override
 	protected List<EPackage> getEPackages() {
-	    List<EPackage> result = new ArrayList<EPackage>();
-	    result.add(org.eclipse.xtext.testlanguages.noJdt.noJdt.NoJdtPackage.eINSTANCE);
+		List<EPackage> result = new ArrayList<EPackage>();
+		result.add(org.eclipse.xtext.testlanguages.noJdt.noJdt.NoJdtPackage.eINSTANCE);
 		return result;
 	}
 	

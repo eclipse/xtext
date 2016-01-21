@@ -29,14 +29,14 @@ public class SimpleBeeLangTestLanguageTokenTypeProvider implements TokenTypeProv
 	private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[PsiInternalSimpleBeeLangTestLanguageParser.RULE_STRING]);
 
 	@Override
-    public int getAntlrType(IElementType iElementType) {
-        return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex() : Token.INVALID_TOKEN_TYPE;
-    }
-    
-    @Override
-    public IElementType getIElementType(int antlrType) {
-    	return tokenTypes[antlrType];
-    }
+	public int getAntlrType(IElementType iElementType) {
+		return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex() : Token.INVALID_TOKEN_TYPE;
+	}
+
+	@Override
+	public IElementType getIElementType(int antlrType) {
+		return tokenTypes[antlrType];
+	}
 
 	@Override
 	public TokenSet getWhitespaceTokens() {

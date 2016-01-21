@@ -19,8 +19,8 @@ public abstract class AbstractStatemachineValidator extends AbstractDeclarativeV
 	
 	@Override
 	protected List<EPackage> getEPackages() {
-	    List<EPackage> result = new ArrayList<EPackage>();
-	    result.add(org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage.eINSTANCE);
+		List<EPackage> result = new ArrayList<EPackage>();
+		result.add(org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage.eINSTANCE);
 		return result;
 	}
 	

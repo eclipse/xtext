@@ -25,7 +25,7 @@ import org.eclipse.xtext.util.internal.Log
  * @noreference
  */
 @Log
-class XtextGeneratorResourceSetInitializer  {
+class XtextGeneratorResourceSetInitializer {
 	
 	public def void initialize(ResourceSet resourceSet, List<String> referencedResources) {
 		val delegate = new StandaloneSetup

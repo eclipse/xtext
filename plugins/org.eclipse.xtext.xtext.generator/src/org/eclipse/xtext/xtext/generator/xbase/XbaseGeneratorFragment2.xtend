@@ -194,9 +194,9 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 			 */
 			class «jvmModelInferrer.simpleName» extends «'org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer'.typeRef» {
 			
-			    /**
-			     * convenience API to build and initialize JVM types and their members.
-			     */
+				/**
+				 * convenience API to build and initialize JVM types and their members.
+				 */
 				@«Inject» extension «'org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder'.typeRef»
 			
 				/**
@@ -228,15 +228,15 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 					// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
 					
 					// An implementation for the initial hello world example could look like this:
-			//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings")) [
-			//   			for (greeting : element.greetings) {
-			//   				members += greeting.toMethod("hello" + greeting.name, typeRef(String)) [
-			//   					body = «"'''"»
-			//							return "Hello «'«'»greeting.name«'»'»";
-			//   					«"'''"»
-			//   				]
-			//   			}
-			//   		]
+			// 		acceptor.accept(element.toClass("my.company.greeting.MyGreetings")) [
+			// 			for (greeting : element.greetings) {
+			// 				members += greeting.toMethod("hello" + greeting.name, typeRef(String)) [
+			// 					body = «"'''"»
+			//						return "Hello «'«'»greeting.name«'»'»";
+			//					«"'''"»
+			//				]
+			//			}
+			//		]
 				}
 			}
 		''').writeTo(projectConfig.runtime.src)
@@ -291,7 +291,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 										definitionId="«name».Editor.opened">
 									</reference>
 								</visibleWhen>
-							</command>  
+							</command>
 						</menuContribution>
 					«ENDIF»
 					<menuContribution
@@ -412,7 +412,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 						</visibleWhen>
 					</command>
 				</menuContribution>
-			</extension>  
+			</extension>
 			<!-- Open implementation -->
 			<extension point="org.eclipse.ui.handlers">
 				<handler

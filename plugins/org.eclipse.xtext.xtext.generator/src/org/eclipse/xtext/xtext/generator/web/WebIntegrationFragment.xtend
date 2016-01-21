@@ -673,15 +673,15 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				/* For all elements of type Greeting or its subtypes */ 
 				/*
 					.Greeting-icon {
-				  		background-image: url('images/Greeting.gif');
-				  	}
+						background-image: url('images/Greeting.gif');
+					}
 				 */
 				
 				/* Only in hovers */ 
 				/*
 					.xtext-hover .Greeting-icon {
-				  		background-image: url('images/Greeting.gif');
-				  	}
+						background-image: url('images/Greeting.gif');
+					}
 				 */
 			«ENDIF»
 		'''

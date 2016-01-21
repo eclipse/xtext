@@ -2057,10 +2057,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             _builder.append("\t");
             _builder.append(".Greeting-icon {");
             _builder.newLine();
-            _builder.append("  \t\t");
+            _builder.append("\t\t");
             _builder.append("background-image: url(\'images/Greeting.gif\');");
             _builder.newLine();
-            _builder.append("  \t");
+            _builder.append("\t");
             _builder.append("}");
             _builder.newLine();
             _builder.append(" ");
@@ -2074,10 +2074,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             _builder.append("\t");
             _builder.append(".xtext-hover .Greeting-icon {");
             _builder.newLine();
-            _builder.append("  \t\t");
+            _builder.append("\t\t");
             _builder.append("background-image: url(\'images/Greeting.gif\');");
             _builder.newLine();
-            _builder.append("  \t");
+            _builder.append("\t");
             _builder.append("}");
             _builder.newLine();
             _builder.append(" ");

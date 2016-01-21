@@ -16,8 +16,8 @@ public abstract class AbstractArithmeticsValidator extends AbstractDeclarativeVa
 	
 	@Override
 	protected List<EPackage> getEPackages() {
-	    List<EPackage> result = new ArrayList<EPackage>();
-	    result.add(org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage.eINSTANCE);
+		List<EPackage> result = new ArrayList<EPackage>();
+		result.add(org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage.eINSTANCE);
 		return result;
 	}
 	

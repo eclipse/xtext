@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 public class BacktrackingLexerTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	
 	@Override
-    @NotNull
-    protected SyntaxHighlighter createHighlighter() {
-        return BacktrackingLexerTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);
-    }
+	@NotNull
+	protected SyntaxHighlighter createHighlighter() {
+		return BacktrackingLexerTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);
+	}
 }

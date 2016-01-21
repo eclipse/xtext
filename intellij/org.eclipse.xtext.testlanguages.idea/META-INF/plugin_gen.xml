@@ -67,11 +67,11 @@
 			implementationClass="com.intellij.lang.PsiStructureViewFactory"
 		/>
 		<facetType implementation="org.eclipse.xtext.testlanguages.backtracking.idea.facet.ExBeeLangTestLanguageFacetType"/>
-      	<lang.documentationProvider 
-      		language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
-      		factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
-      		implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
-      	/>
+		<lang.documentationProvider 
+			language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
+			factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
+		/>
 		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageSemanticHighlightVisitor"/>
 
