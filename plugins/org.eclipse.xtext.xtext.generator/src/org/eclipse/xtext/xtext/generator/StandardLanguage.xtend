@@ -73,7 +73,7 @@ import java.util.List
 	
 	OutlineTreeProviderFragment2 outline = new OutlineTreeProviderFragment2
 	
-	QuickfixProviderFragment2 quickFixProvider =  new QuickfixProviderFragment2
+	QuickfixProviderFragment2 quickFixProvider = new QuickfixProviderFragment2
 	
 	ContentAssistFragment2 contentAssist = new ContentAssistFragment2
 	
