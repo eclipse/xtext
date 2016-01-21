@@ -1083,14 +1083,29 @@ public void configureRuntimeEncodingProvider(Binder binder) {
 }
 ```
 
-For the uniform encoding, bind the plain [IEncodingProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java) to the same implementation in both modules:
+For the uniform encoding, bind the plain [IEncodingProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java) to the same implementation in both modules; in the *RuntimeModule using, as above:
 
 ```java
 @Override
-public Class<? extends IEncodingProvider> bindIEncodingProvider() {
-    return MyEncodingProvider.class;
+public void configureRuntimeEncodingProvider(Binder binder) {
+    binder.bind(IEncodingProvider.class)
+          .annotatedWith(DispatchingProvider.Runtime.class)
+          .to(MyEncodingProvider.class);
 }
 ```
+
+and similarly also in the *UiModule using:
+
+```java
+@Override
+public void configureRuntimeEncodingProvider(Binder binder) {
+    binder.bind(IEncodingProvider.class)
+          .annotatedWith(DispatchingProvider.Ui.class)
+          .to(MyEncodingProvider.class);
+}
+```
+
+Note the subtle difference of Ui vs. Runtime in the use of DispatchingProvider.
 
 ### Encoding of an XtextResource
 

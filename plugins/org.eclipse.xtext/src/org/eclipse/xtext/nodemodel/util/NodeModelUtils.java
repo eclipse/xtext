@@ -30,6 +30,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.InternalNodeModelUtils;
+import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.LineAndColumn;
@@ -123,7 +124,7 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	 */
 	public static LineAndColumn getLineAndColumn(INode anyNode, int documentOffset) {
 		// special treatment for inconsistent nodes such as SyntheticLinkingLeafNode
-		if (anyNode.getParent() == null) {
+		if (anyNode.getParent() == null && !(anyNode instanceof RootNode)) {
 			return LineAndColumn.from(1,1);
 		}
 		return InternalNodeModelUtils.getLineAndColumn(anyNode, documentOffset);

@@ -145,7 +145,7 @@ require(["xtext/xtext-codemirror"], function(xtext) {
 
 #### `xtext.createEditor(options)`
 
-Creates one or more editor instances and initializes Xtext services for them. If not specified other The available options are described below. The return value is the created editor if exactly one was created, or an array of editors otherwise:
+Creates one or more editor instances and initializes Xtext services for them. The available options are described below. The return value is the created editor if exactly one was created, or an array of editors otherwise:
 
 ```javascript
 var editor = xtext.createEditor();
