@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.persistence
 
+import com.google.inject.Inject
 import java.io.IOException
 import java.io.OutputStreamWriter
-import javax.inject.Inject
 import org.eclipse.emf.common.util.WrappedException
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResource
