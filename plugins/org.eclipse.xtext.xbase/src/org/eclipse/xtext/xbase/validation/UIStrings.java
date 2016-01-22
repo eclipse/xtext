@@ -13,33 +13,26 @@ import static com.google.common.collect.Lists.*;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 
@@ -52,10 +45,10 @@ import com.google.inject.Inject;
 public class UIStrings {
 
 	@Inject
-	private LazyURIEncoder lazyURIEncoder;
-
-	@Inject
 	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private CommonTypeComputationServices services;
 
 	public String signature(JvmExecutable executable) {
 		StringBuilder b = new StringBuilder(executable.getSimpleName());
@@ -153,40 +146,16 @@ public class UIStrings {
 	 * @since 2.4
 	 */
 	public String referenceToString(JvmTypeReference typeRef, String defaultLabel) {
-		if (typeRef != null) {
-			if (typeRef instanceof JvmAnyTypeReference)
-				return "Object";
-			else {
-				JvmType type = typeRef.getType();
-				if (type != null && type.eIsProxy() && typeRef.eResource() != null) {
-					URI proxyURI = EcoreUtil.getURI(type);
-					String fragment = proxyURI.fragment();
-					if (lazyURIEncoder.isCrossLinkFragment(typeRef.eResource(), fragment)) {
-						Triple<EObject, EReference, INode> decoded = lazyURIEncoder.decode(typeRef.eResource(), fragment);
-						INode node = decoded.getThird();
-						if (node != null) {
-							String text = node.getRootNode().getText();
-							ITextRegion textRegion = node.getTextRegion();
-							String result = text.substring(textRegion.getOffset(), textRegion.getLength() + textRegion.getOffset());
-							
-							if (result != null) {
-								int pointIndex = result.lastIndexOf('.');
-								if (pointIndex >= 0 && pointIndex < (result.length() - 1)) {
-									return result.substring(pointIndex + 1);
-								}
-							}
-							
-							return result;
-						} else {
-							return defaultLabel;
-						}
-					}
-				} else {
-					return typeRef.getSimpleName();
-				}
-			}
-		}
-		return defaultLabel;
+		if (typeRef == null)
+			return defaultLabel;
+		
+		if (typeRef.eResource() == null)
+			return typeRef.getSimpleName();
+		
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, typeRef);
+		LightweightTypeReferenceFactory factory = new LightweightTypeReferenceFactory(owner, false);
+		LightweightTypeReference reference = factory.toLightweightReference(typeRef);
+		return referenceToString(reference);
 	}
 
 	protected String expressionTypes(Iterable<XExpression> expressions) {
