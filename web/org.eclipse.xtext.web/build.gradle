@@ -1,5 +1,4 @@
 plugins {
-	id 'osgi'
 	id 'com.moowork.node' version "0.10"
 }
 
@@ -13,8 +12,12 @@ dependencies {
 }
 
 jar.manifest {
-	name 'Xtext Web Integration'
-	vendor 'Eclipse Xtext'
+	name = 'Xtext Web Integration'
+	vendor = 'Eclipse Xtext'
+	instruction 'Import-Package', '!org.eclipse.xtext.web.*'
+	instruction 'Import-Package', '*'
+	instruction 'Export-Package', '!org.eclipse.xtext.web.server.test.*'
+	instruction 'Export-Package', "org.eclipse.xtext.web.*;version=\"${version}\""
 }
 
 node {
