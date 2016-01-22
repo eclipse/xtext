@@ -25,6 +25,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -1896,4 +1897,97 @@ public class XbaseValidator extends AbstractXbaseValidator {
 					XbasePackage.Literals.XTYPE_LITERAL__TYPE);
 		}
 	}
+	
+	@Check
+	public void checkReferInvalidTypes(XAbstractFeatureCall featureCall) {
+		checkReferInvalidTypes(
+				featureCall.getFeature(),
+				featureCall,
+				XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+	}
+	
+	@Check
+	public void checkReferInvalidTypes(XConstructorCall constructorCall) {
+		checkReferInvalidTypes(
+				constructorCall.getConstructor(),
+				constructorCall,
+				XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
+	}
+	
+	@Inject
+	private RefereredInvalidTypeFinder refereredInvalidTypeFinder;
+
+	protected void checkReferInvalidTypes(JvmIdentifiableElement element, EObject source, EReference structuralFeature) {
+		LightweightTypeReference refereredInvalidType = refereredInvalidTypeFinder.findRefereredInvalidType(element);
+		String message = getReferInvalidTypeMessage(element, refereredInvalidType);
+		if (message != null)
+			error(message, source, structuralFeature, REFER_INVALID_TYPES);
+	}
+
+	protected String getReferInvalidTypeMessage(JvmIdentifiableElement element, LightweightTypeReference refereredInvalidType) {
+		if (refereredInvalidType == null) {
+			return null;
+		}
+		if (refereredInvalidType.isPrimitiveVoid()) {
+			if (element instanceof JvmField) {
+				JvmField field = (JvmField) element;
+				// "The field C.f has an illegal argument type"
+				return String.format("The %s %s.%s has an illegal argument type", 
+						FeatureKinds.getTypeName(field),
+						getQualifiedSimpleName(field.getDeclaringType()),
+						field.getSimpleName());	
+			}
+			if (element instanceof JvmOperation) {
+				JvmOperation operation = (JvmOperation) element;
+				// "The method m(void) from the type C has an illegal argument type"
+				return String.format("The %s %s%s from the %s %s has an illegal argument type", 
+						FeatureKinds.getTypeName(operation),
+						operation.getSimpleName(),
+						uiStrings.parameters(operation),
+						FeatureKinds.getTypeName(operation.getDeclaringType()),
+						getQualifiedSimpleName(operation.getDeclaringType()));
+			} 
+			if (element instanceof JvmConstructor) {
+				JvmConstructor constructor = (JvmConstructor) element;
+				// "The constructor C(void) has an argument of void type"
+				return String.format("The %s %s%s has an illegal argument type", 
+						FeatureKinds.getTypeName(constructor), 
+						getQualifiedSimpleName(constructor.getDeclaringType()), 
+						uiStrings.parameters(constructor));
+			}
+		}
+		if (refereredInvalidType.isUnknown()) {
+			if (element instanceof JvmField) {
+				JvmField field = (JvmField) element;
+				// "The field C.f refers to the missing type DoesNotExist"
+				return String.format("The %s %s.%s refers to the missing type %s", 
+						FeatureKinds.getTypeName(field),
+						getQualifiedSimpleName(field.getDeclaringType()),
+						field.getSimpleName(),
+						refereredInvalidType.getHumanReadableName());	
+			}
+			if (element instanceof JvmOperation) {
+				JvmOperation operation = (JvmOperation) element;
+				// "The method m(Arg, Arg2) from the type C refers to the missing type DoesNotExist"
+				return String.format("The %s %s%s from the %s %s refers to the missing type %s", 
+						FeatureKinds.getTypeName(operation),
+						operation.getSimpleName(),
+						uiStrings.parameters(operation),
+						FeatureKinds.getTypeName(operation.getDeclaringType()),
+						getQualifiedSimpleName(operation.getDeclaringType()),
+						refereredInvalidType.getHumanReadableName());
+			} 
+			if (element instanceof JvmConstructor) {
+				JvmConstructor constructor = (JvmConstructor) element;
+				// "The constructor C(Arg) refers to the missing type DoesNotExist"
+				return String.format("The %s %s%s refers to the missing type %s", 
+						FeatureKinds.getTypeName(constructor), 
+						getQualifiedSimpleName(constructor.getDeclaringType()), 
+						uiStrings.parameters(constructor),
+						refereredInvalidType.getHumanReadableName());
+			}
+		}
+		return null;
+	}
+	
 }

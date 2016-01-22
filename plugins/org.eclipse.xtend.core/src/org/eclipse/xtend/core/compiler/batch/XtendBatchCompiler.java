@@ -612,10 +612,11 @@ public class XtendBatchCompiler {
 		if (isVerbose()) {
 			commandLine.add("-verbose");
 		}
-		if (!isEmpty(bootClassPath)) {
-			commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, getBootClassPathEntries()) + "\"");
+		List<String> bootClassPathEntries = getBootClassPathEntries();
+		if (!isEmpty(bootClassPathEntries)) {
+			commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, bootClassPathEntries) + "\"");
 		}
-		if (!isEmpty(classPath)) {
+		if (!isEmpty(classPathEntries)) {
 			commandLine.add("-cp \"" + Joiner.on(File.pathSeparator).join(classPathEntries) + "\"");
 		}
 		commandLine.add("-d \"" + classDirectory.toString() + "\"");
