@@ -133,7 +133,7 @@ public class LightweightTypeReferenceFactory extends AbstractXtypeReferenceVisit
 		LightweightTypeReference lightweightComponentType = null;
 		if (originalComponentType != null) {
 			lightweightComponentType = visit(originalComponentType);
-			if (lightweightComponentType.isAny() || lightweightComponentType.isUnknown())
+			if (lightweightComponentType.isAny())
 				return lightweightComponentType;
 		} else {
 			lightweightComponentType = getObjectReference();
