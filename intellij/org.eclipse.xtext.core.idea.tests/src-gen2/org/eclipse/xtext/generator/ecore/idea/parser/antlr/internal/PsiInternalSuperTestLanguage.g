@@ -37,7 +37,7 @@ import com.intellij.lang.PsiBuilder;
 	public PsiInternalSuperTestLanguageParser(PsiBuilder builder, TokenStream input, SuperTestLanguageElementTypeProvider elementTypeProvider, SuperTestLanguageGrammarAccess grammarAccess) {
 		this(input);
 		setPsiBuilder(builder);
-    	this.grammarAccess = grammarAccess;
+		this.grammarAccess = grammarAccess;
 		this.elementTypeProvider = elementTypeProvider;
 	}
 

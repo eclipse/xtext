@@ -85,7 +85,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			 */
 			class «grammar.validatorClass.simpleName» extends «grammar.abstractValidatorClass» {
 				
-			//  public static val INVALID_NAME = 'invalidName'
+			//	public static val INVALID_NAME = 'invalidName'
 			//
 			//	@Check
 			//	def checkGreetingStartsWithCapital(Greeting greeting) {
@@ -109,7 +109,7 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 			 */
 			public class «grammar.validatorClass.simpleName» extends «grammar.abstractValidatorClass» {
 				
-			//  public static final INVALID_NAME = 'invalidName'
+			//	public static final INVALID_NAME = 'invalidName'
 			//
 			//	@Check
 			//	public void checkGreetingStartsWithCapital(Greeting greeting) {
@@ -140,13 +140,13 @@ class ValidatorFragment2 extends AbstractInheritingFragment {
 				
 				@Override
 				protected «List»<«EPackage»> getEPackages() {
-				    «List»<«EPackage»> result = new «ArrayList»<«EPackage»>(«IF inheritImplementation && grammar.nonTerminalsSuperGrammar !== null»super.getEPackages()«ENDIF»);
-				    «FOR e: generatedPackagesToValidate»
-				    	result.add(«e.generatedEPackageName».eINSTANCE);
-				    «ENDFOR»
-				    «FOR e: registryPackagesToValidate»
-				    	result.add(EPackage.Registry.INSTANCE.getEPackage("«e.nsURI»"));
-				   	«ENDFOR»
+					«List»<«EPackage»> result = new «ArrayList»<«EPackage»>(«IF inheritImplementation && grammar.nonTerminalsSuperGrammar !== null»super.getEPackages()«ENDIF»);
+					«FOR e: generatedPackagesToValidate»
+						result.add(«e.generatedEPackageName».eINSTANCE);
+					«ENDFOR»
+					«FOR e: registryPackagesToValidate»
+						result.add(EPackage.Registry.INSTANCE.getEPackage("«e.nsURI»"));
+				 	«ENDFOR»
 					return result;
 				}
 				

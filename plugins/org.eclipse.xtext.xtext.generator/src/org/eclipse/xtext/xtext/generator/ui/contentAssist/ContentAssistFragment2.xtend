@@ -147,7 +147,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		
 		// determine the (remaining) rules that are not excluded and not handled yet
 		val remainingRules = grammar.rules.fold(<AbstractRule>newArrayList()) [candidates, rule |
-  			val fqnFeatureName = rule.FQFeatureName
+			val fqnFeatureName = rule.FQFeatureName
 			if (!processedNames.contains(fqnFeatureName) && !excludedFqnFeatureNames.contains(fqnFeatureName)) {
 				processedNames += fqnFeatureName
 				candidates += rule
@@ -178,15 +178,15 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 					«IF !assignments.empty»
 						«FOR assignment : assignments»
 							«assignment.handleAssignment»
-					  	«ENDFOR»
+						«ENDFOR»
 
-				  	«ENDIF»
+					«ENDIF»
 					«FOR rule : remainingRules»
 						public void complete«rule.FQFeatureName»(«EObject» model, «RuleCall» ruleCall, «
 								contentAssistContextClass» context, «ICompletionProposalAcceptorClass» acceptor) {
 							// subclasses may override
 						}
-			    	«ENDFOR»
+					«ENDFOR»
 				}
 			'''
 			writeTo(projectConfig.eclipsePlugin.srcGen)	
@@ -243,7 +243,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 		// subclasses may override
 	'''
 
-	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, StringConcatenationClient accessor)  '''
+	private def dispatch StringConcatenationClient assignmentTerminal(CrossReference element, StringConcatenationClient accessor) '''
 		lookupCrossReference(((«CrossReference»)«accessor»), context, acceptor);
 	'''
 

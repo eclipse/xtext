@@ -10,6 +10,6 @@ public class SubTestLanguageAntlrTokenFileProvider implements IAntlrTokenFilePro
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSubTestLanguage.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSubTestLanguage.tokens");
 	}
 }

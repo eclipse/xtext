@@ -150,7 +150,7 @@
 					definitionId="org.eclipse.xtext.example.arithmetics.Arithmetics.Editor.opened">
 				</reference>
 			</visibleWhen>
-		</command>  
+		</command>
 		</menuContribution>
 		<!-- copy qualified name -->
 		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
@@ -159,7 +159,7 @@
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtext.example.arithmetics.Arithmetics.Editor.opened" />
 				</visibleWhen>
-			</command>  
+			</command>
 		</menuContribution>
 		<menuContribution locationURI="menu:edit?after=copy">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
@@ -167,7 +167,7 @@
 				<visibleWhen checkEnabled="false">
 					<reference definitionId="org.eclipse.xtext.example.arithmetics.Arithmetics.Editor.opened" />
 				</visibleWhen>
-			</command>  
+			</command>
 		</menuContribution>
 		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
@@ -205,19 +205,19 @@
 		</handler>
 	</extension>
 	<!-- adding resource factories -->
-		<extension
-			point="org.eclipse.emf.ecore.extension_parser">
-			<parser
-				class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-				type="calc">
-			</parser>
-		</extension>
-		<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-		    <resourceServiceProvider
-		        class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-		        uriExtension="calc">
-		    </resourceServiceProvider>
-		</extension>
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="calc">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+		<resourceServiceProvider
+			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="calc">
+		</resourceServiceProvider>
+	</extension>
 	<!-- marker definitions for org.eclipse.xtext.example.arithmetics.Arithmetics -->
 	<extension
 			id="arithmetics.check.fast"
@@ -323,31 +323,31 @@
 	</extension>
 	<!-- quickfix marker resolution generator for org.eclipse.xtext.example.arithmetics.Arithmetics -->
 	<extension
-	        point="org.eclipse.ui.ide.markerResolution">
-	    <markerResolutionGenerator
-	        class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.example.arithmetics.ui.arithmetics.check.fast">
-	        <attribute
-	            name="FIXABLE_KEY"
-	            value="true">
-	        </attribute>
-	    </markerResolutionGenerator>
-	    <markerResolutionGenerator
-	        class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.example.arithmetics.ui.arithmetics.check.normal">
-	        <attribute
-	            name="FIXABLE_KEY"
-	            value="true">
-	        </attribute>
-	    </markerResolutionGenerator>
-	    <markerResolutionGenerator
-	        class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-	        markerType="org.eclipse.xtext.example.arithmetics.ui.arithmetics.check.expensive">
-	        <attribute
-	            name="FIXABLE_KEY"
-	            value="true">
-	        </attribute>
-	    </markerResolutionGenerator>
+			point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator
+			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.eclipse.xtext.example.arithmetics.ui.arithmetics.check.fast">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.eclipse.xtext.example.arithmetics.ui.arithmetics.check.normal">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="org.eclipse.xtext.example.arithmetics.ui.ArithmeticsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="org.eclipse.xtext.example.arithmetics.ui.arithmetics.check.expensive">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
 	</extension>
 	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">

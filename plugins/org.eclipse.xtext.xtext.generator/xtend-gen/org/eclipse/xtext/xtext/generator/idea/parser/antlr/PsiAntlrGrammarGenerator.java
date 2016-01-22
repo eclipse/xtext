@@ -178,7 +178,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("\t\t");
     _builder.append("setPsiBuilder(builder);");
     _builder.newLine();
-    _builder.append("    \t");
+    _builder.append("\t\t");
     _builder.append("this.grammarAccess = grammarAccess;");
     _builder.newLine();
     _builder.append("\t\t");

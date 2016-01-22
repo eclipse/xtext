@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
-public class AbstractArithmeticsProposalProvider extends TerminalsProposalProvider {
+public abstract class AbstractArithmeticsProposalProvider extends TerminalsProposalProvider {
 
 	public void completeModule_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);

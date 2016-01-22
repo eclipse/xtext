@@ -51,10 +51,10 @@ class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
 						</parser>
 					</extension>
 					<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-					    <resourceServiceProvider
-					        class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-					        uriExtension="«fileExtension»">
-					    </resourceServiceProvider>
+						<resourceServiceProvider
+							class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+							uriExtension="«fileExtension»">
+						</resourceServiceProvider>
 					</extension>
 				«ENDFOR»
 			'''

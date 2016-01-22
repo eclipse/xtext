@@ -251,7 +251,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	}
 	
 	protected def String getEditDirectory() {
-		editDirectory ?:  '/' + getEditPluginID + '/src'
+		editDirectory ?: '/' + getEditPluginID + '/src'
 	}
 
 	protected def String getEditorPluginID() {

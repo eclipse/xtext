@@ -155,7 +155,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		val lexerOutputDir = lexerGrammarFile.substring(0, lexerGrammarFile.lastIndexOf('/'))
 		lexerAntlrParams += lexerOutputDir
 		if (!isCombinedGrammar) {
-			antlrTool.runWithEncodingAndParams(lexerGrammarFile, encoding,  lexerAntlrParams)
+			antlrTool.runWithEncodingAndParams(lexerGrammarFile, encoding, lexerAntlrParams)
 			cleanupLexerTokensFile(lexerGrammar, KeywordHelper.getHelper(grammar), fsa)
 		}
 		
@@ -167,7 +167,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			parserAntlrParams += "-lib"
 			parserAntlrParams += lexerOutputDir
 		}
-		antlrTool.runWithEncodingAndParams(parserGrammarFile, encoding,  parserAntlrParams)
+		antlrTool.runWithEncodingAndParams(parserGrammarFile, encoding, parserAntlrParams)
 		if (!isCombinedGrammar) {
 			cleanupParserTokensFile(lexerGrammar, parserGrammar, KeywordHelper.getHelper(grammar), fsa)
 		}

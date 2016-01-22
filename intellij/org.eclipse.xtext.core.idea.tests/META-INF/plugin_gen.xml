@@ -71,11 +71,11 @@
 			implementationClass="com.intellij.lang.PsiStructureViewFactory"
 		/>
 		<facetType implementation="org.eclipse.xtext.lexer.idea.facet.BacktrackingLexerTestLanguageFacetType"/>
-      	<lang.documentationProvider 
-      		language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
-      		factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
-      		implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
-      	/>
+		<lang.documentationProvider 
+			language="org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage"
+			factoryClass="org.eclipse.xtext.lexer.idea.BacktrackingLexerTestLanguageExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
+		/>
 		<colorSettingsPage implementation="org.eclipse.xtext.lexer.idea.highlighting.BacktrackingLexerTestLanguageColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.lexer.idea.highlighting.BacktrackingLexerTestLanguageSemanticHighlightVisitor"/>
 

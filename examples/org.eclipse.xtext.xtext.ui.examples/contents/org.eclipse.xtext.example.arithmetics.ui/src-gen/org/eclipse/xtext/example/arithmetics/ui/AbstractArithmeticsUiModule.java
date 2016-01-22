@@ -25,18 +25,19 @@ import org.eclipse.xtext.builder.nature.NatureAddingEditorCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.ArithmeticsParser;
 import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.PartialArithmeticsContentAssistParser;
-import org.eclipse.xtext.example.arithmetics.parser.antlr.internal.InternalArithmeticsLexer;
+import org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.internal.InternalArithmeticsLexer;
 import org.eclipse.xtext.example.arithmetics.ui.contentassist.ArithmeticsProposalProvider;
 import org.eclipse.xtext.example.arithmetics.ui.labeling.ArithmeticsDescriptionLabelProvider;
 import org.eclipse.xtext.example.arithmetics.ui.labeling.ArithmeticsLabelProvider;
 import org.eclipse.xtext.example.arithmetics.ui.outline.ArithmeticsOutlineTreeProvider;
 import org.eclipse.xtext.example.arithmetics.ui.quickfix.ArithmeticsQuickfixProvider;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
@@ -100,23 +101,23 @@ public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureHighlightingLexer(Binder binder) {
+	public void configureContentAssistLexer(Binder binder) {
 		binder.bind(Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST))
 			.to(InternalArithmeticsLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureContentAssistLexer(Binder binder) {
-		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST))
-			.to(org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.internal.InternalArithmeticsLexer.class);
+	public void configureHighlightingLexer(Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class)
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
+			.to(org.eclipse.xtext.example.arithmetics.parser.antlr.internal.InternalArithmeticsLexer.class);
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureHighlightingTokenDefProvider(Binder binder) {
 		binder.bind(ITokenDefProvider.class)
-			.annotatedWith(Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING))
+			.annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
 			.to(AntlrTokenDefProvider.class);
 	}
 	
@@ -132,8 +133,7 @@ public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexerProvider(Binder binder) {
-		binder.bind(org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.internal.InternalArithmeticsLexer.class)
-			.toProvider(LexerProvider.create(org.eclipse.xtext.example.arithmetics.ide.contentassist.antlr.internal.InternalArithmeticsLexer.class));
+		binder.bind(InternalArithmeticsLexer.class).toProvider(LexerProvider.create(InternalArithmeticsLexer.class));
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2

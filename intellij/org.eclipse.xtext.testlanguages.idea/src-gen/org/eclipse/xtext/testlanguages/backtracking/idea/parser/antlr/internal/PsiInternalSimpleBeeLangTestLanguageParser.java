@@ -21031,7 +21031,7 @@ public class PsiInternalSimpleBeeLangTestLanguageParser extends PsiInternalSimpl
     	public PsiInternalSimpleBeeLangTestLanguageParser(PsiBuilder builder, TokenStream input, SimpleBeeLangTestLanguageElementTypeProvider elementTypeProvider, SimpleBeeLangTestLanguageGrammarAccess grammarAccess) {
     		this(input);
     		setPsiBuilder(builder);
-        	this.grammarAccess = grammarAccess;
+    		this.grammarAccess = grammarAccess;
     		this.elementTypeProvider = elementTypeProvider;
     	}
 }

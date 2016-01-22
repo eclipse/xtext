@@ -413,7 +413,7 @@ class GrammarAccessExtensions {
 	}
 
 	dispatch def String grammarElementIdentifier(AbstractElement it) {
-		containingRule.grammarElementIdentifier + '_' +  gaElementIdentifier
+		containingRule.grammarElementIdentifier + '_' + gaElementIdentifier
 	}
 
 	dispatch def grammarElementAccess(EObject it) {
@@ -468,7 +468,7 @@ class GrammarAccessExtensions {
 	
 	dispatch def boolean predicated(RuleCall it) {
 		predicated || {
-			val group  = rule.alternatives
+			val group = rule.alternatives
 			if (group instanceof Group) {
 				group.elements.head.predicated()
 			} else {
