@@ -401,5 +401,13 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertEquals(model, serialize(resource.getContents().get(0)));
 	}
+	
+	@Test public void testBug486454() throws Exception {
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
+		String model = "tim";
+		XtextResource resource = getResourceFromString(model);
+		resource.update(1, 2, "");
+		assertEquals("t", resource.getParseResult().getRootNode().getText());
+	}
 
 }
