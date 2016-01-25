@@ -27,7 +27,7 @@ bean = StandaloneSetup {
 fragment = types.TypesGeneratorFragment {}
 fragment = xbase.XbaseGeneratorFragment {}
 ```
-
+Needs to be updated. we have changed the structure of the generator.
 To avoid running out of memory when regenerating, make sure to run the workflow with reasonably sized heap and PermGen space. We recommend at least 
 
 `-Xmx512m -XX:MaxPermSize=128m`
@@ -190,8 +190,8 @@ Please note that when *org.eclipse.xtext.xbase.Xbase* is used the default bindin
 
 ```java
 public class DomainmodelRuntimeModule extends org.example.domainmodel.AbstractDomainmodelRuntimeModule {
-	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
-		return org.example.domainmodel.generator.DomainmodelGenerator.class;
+ 	override Class<? extends IGenerator> bindIGenerator() {
+		return DomainmodelGenerator
 	}
 }
 ```
