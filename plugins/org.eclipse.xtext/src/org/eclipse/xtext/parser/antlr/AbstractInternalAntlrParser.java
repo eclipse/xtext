@@ -242,6 +242,13 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		return input;
 	}
 
+	/**
+	 * @since 2.10
+	 */
+	protected ICompositeNode getCurrentNode() {
+		return currentNode;
+	}
+
 	protected abstract IGrammarAccess getGrammarAccess();
 	
 	protected void associateNodeWithAstElement(ICompositeNode node, EObject astElement) {
