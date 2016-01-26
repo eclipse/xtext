@@ -254,6 +254,11 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				dependencies {
 					mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:«config.xtextVersion.mweVersion»"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
+					«IF fromExistingEcoreModels»
+						mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:${xtextVersion}"
+						mwe2 "org.eclipse.xpand:org.eclipse.xpand:2.0.0"
+						mwe2 "org.eclipse.xpand:org.eclipse.xtend:2.0.0"
+					«ENDIF»
 				}
 				
 				task generateXtextLanguage(type: JavaExec) {
