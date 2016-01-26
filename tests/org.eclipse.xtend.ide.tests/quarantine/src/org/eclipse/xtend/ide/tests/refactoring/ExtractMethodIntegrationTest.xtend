@@ -11,6 +11,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.junit.After
 import org.junit.Test
+import org.eclipse.xtext.common.types.JvmVisibility
 
 /**
  * @author Jan Koehnlein
@@ -1032,6 +1033,8 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				)
 				val refactoring = refactoringProvider.get()
 				refactoring.initialize(editor, selection, true)
+				refactoring.explicitlyDeclareReturnType = false
+				refactoring.visibility = JvmVisibility.PUBLIC
 				refactoring.setMethodName('bar')
 				var status = refactoring.checkInitialConditions(new NullProgressMonitor)
 				assertTrue(status.toString, status.OK)
