@@ -100,6 +100,10 @@ public class XtextVersion {
     return this.getXtextGradlePluginVersion();
   }
   
+  public String getXtendAndroidGradlePluginVersion() {
+    return "0.4.14";
+  }
+  
   public String getXtextGradlePluginVersion() {
     return "1.0.1";
   }

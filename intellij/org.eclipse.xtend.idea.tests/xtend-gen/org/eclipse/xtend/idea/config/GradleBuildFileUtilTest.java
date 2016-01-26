@@ -20,6 +20,7 @@ import org.eclipse.xtend.core.idea.config.MavenArtifact;
 import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.util.PlatformUtil;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -211,11 +212,13 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     TestCase.assertEquals(_string_1, _text);
   }
   
-  public void _testIsGradleModule() {
-    this.myFixture.addFileToProject("build.gradle", "");
+  public void testIsGradleModule() {
+    PlatformUtil _platformUtil = new PlatformUtil();
+    boolean _isGradleInstalled = _platformUtil.isGradleInstalled();
+    TestCase.assertTrue(_isGradleInstalled);
     Module _module = this.myFixture.getModule();
     boolean _isGradleedModule = this.util.isGradleedModule(_module);
-    TestCase.assertTrue(_isGradleedModule);
+    TestCase.assertFalse(_isGradleedModule);
   }
   
   public void assertTree(final GroovyFile buildFile) {

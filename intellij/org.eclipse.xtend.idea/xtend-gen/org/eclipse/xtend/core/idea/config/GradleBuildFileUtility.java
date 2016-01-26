@@ -132,28 +132,35 @@ public class GradleBuildFileUtility {
     final GrClosableBlock buildScript = this.createOrGetMethodCall(buildFile, "buildscript");
     GrClosableBlock _createOrGetMethodCall = this.createOrGetMethodCall(buildScript, "repositories");
     this.createStatementIfNotExists(_createOrGetMethodCall, "jcenter()");
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("classpath \'org.xtend:xtend");
     String _xifexpression = null;
     if (android) {
-      _xifexpression = "-android";
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("classpath \'org.xtend:xtend-android-gradle-plugin:");
+      XtextVersion _current = XtextVersion.getCurrent();
+      String _xtendAndroidGradlePluginVersion = _current.getXtendAndroidGradlePluginVersion();
+      _builder.append(_xtendAndroidGradlePluginVersion, "");
+      _builder.append("\' ");
+      _xifexpression = _builder.toString();
+    } else {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("classpath \'org.xtend:xtend-gradle-plugin:");
+      XtextVersion _current_1 = XtextVersion.getCurrent();
+      String _xtendGradlePluginVersion = _current_1.getXtendGradlePluginVersion();
+      _builder_1.append(_xtendGradlePluginVersion, "");
+      _builder_1.append("\' ");
+      _xifexpression = _builder_1.toString();
     }
-    _builder.append(_xifexpression, "");
-    _builder.append("-gradle-plugin:");
-    XtextVersion _current = XtextVersion.getCurrent();
-    String _xtendGradlePluginVersion = _current.getXtendGradlePluginVersion();
-    _builder.append(_xtendGradlePluginVersion, "");
-    _builder.append("\' ");
-    this.addDependency(buildScript, _builder.toString());
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("apply plugin: \'org.xtend.xtend");
+    final String pluginDef = _xifexpression;
+    this.addDependency(buildScript, pluginDef);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("apply plugin: \'org.xtend.xtend");
     String _xifexpression_1 = null;
     if (android) {
       _xifexpression_1 = "-android";
     }
-    _builder_1.append(_xifexpression_1, "");
-    _builder_1.append("\' ");
-    this.createStatementIfNotExists(buildFile, _builder_1.toString());
+    _builder_2.append(_xifexpression_1, "");
+    _builder_2.append("\' ");
+    this.createStatementIfNotExists(buildFile, _builder_2.toString());
   }
   
   public GroovyFile locateBuildFile(final Module module) {
