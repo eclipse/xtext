@@ -9,7 +9,7 @@
 	<vendor url="http://xtend-lang.org">Eclipse Xtend</vendor>
 	<idea-version since-build="131"/>
 	<depends>JUnit</depends>
-	<depends>org.jetbrains.idea.maven</depends>
+	<depends optional="true">org.jetbrains.idea.maven</depends>
 	<depends>org.jetbrains.plugins.gradle</depends>
 	<depends>org.eclipse.xtext.idea</depends>
 
