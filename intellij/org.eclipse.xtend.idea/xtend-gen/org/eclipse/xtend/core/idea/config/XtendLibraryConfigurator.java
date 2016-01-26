@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -77,7 +78,7 @@ public class XtendLibraryConfigurator {
     this.ensureXtendLibAvailable(rootModel, null);
   }
   
-  public void ensureXtendLibAvailable(final ModifiableRootModel rootModel, final PsiFile context) {
+  public void ensureXtendLibAvailable(final ModifiableRootModel rootModel, @Nullable final PsiFile context) {
     Project _project = rootModel.getProject();
     final Runnable _function = new Runnable() {
       @Override
@@ -88,7 +89,7 @@ public class XtendLibraryConfigurator {
     this._projectLifecycleUtil.executeWhenProjectReady(_project, _function);
   }
   
-  protected void doEnsureXtendLibAvailable(final ModifiableRootModel rootModel, final PsiFile context) {
+  protected void doEnsureXtendLibAvailable(final ModifiableRootModel rootModel, @Nullable final PsiFile context) {
     final Module module = rootModel.getModule();
     final GlobalSearchScope scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module);
     Project _project = rootModel.getProject();
@@ -97,6 +98,7 @@ public class XtendLibraryConfigurator {
     final PsiClass psiClass = _instance.findClass(_name, scope);
     boolean _equals = Objects.equal(psiClass, null);
     if (_equals) {
+      final boolean testScope = this.isTestScope(context);
       boolean _and = false;
       boolean _isMavenInstalled = this._platformUtil.isMavenInstalled();
       if (!_isMavenInstalled) {
@@ -106,8 +108,7 @@ public class XtendLibraryConfigurator {
         _and = _isMavenizedModule;
       }
       if (_and) {
-        boolean _isTestScope = this.isTestScope(context);
-        this._mavenUtility.addXtendLibMavenDependency(module, _isTestScope);
+        this._mavenUtility.addXtendLibMavenDependency(module, testScope);
       } else {
         boolean _and_1 = false;
         boolean _isGradleInstalled = this._platformUtil.isGradleInstalled();
@@ -118,8 +119,7 @@ public class XtendLibraryConfigurator {
           _and_1 = _isGradleedModule;
         }
         if (_and_1) {
-          boolean _isTestScope_1 = this.isTestScope(context);
-          this._gradleBuildFileUtility.addXtendLibGradleDependency(module, _isTestScope_1);
+          this._gradleBuildFileUtility.addXtendLibGradleDependency(module, testScope);
         } else {
           this.addJavaRuntimeLibrary(module, rootModel);
         }
@@ -228,7 +228,10 @@ public class XtendLibraryConfigurator {
     }
   }
   
-  protected boolean isTestScope(final PsiFile context) {
+  protected boolean isTestScope(@Nullable final PsiFile context) {
+    if ((context == null)) {
+      return false;
+    }
     PsiFile _originalFile = context.getOriginalFile();
     VirtualFile virtualFile = _originalFile.getVirtualFile();
     if ((virtualFile != null)) {

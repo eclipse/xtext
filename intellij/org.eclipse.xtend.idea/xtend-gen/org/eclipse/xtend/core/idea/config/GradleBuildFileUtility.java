@@ -114,13 +114,13 @@ public class GradleBuildFileUtility {
         String _text = it.getText();
         String _trim = _text.trim();
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("apply plugin:.*org\\\\.xtend\\\\.xtend");
+        _builder.append("apply plugin:.*org\\\\.xtext");
         String _xifexpression = null;
         if (android) {
-          _xifexpression = "-android";
+          _xifexpression = "\\.android";
         }
         _builder.append(_xifexpression, "");
-        _builder.append(".*");
+        _builder.append("\\\\.xtend.*");
         return Boolean.valueOf(_trim.matches(_builder.toString()));
       }
     };
@@ -135,7 +135,7 @@ public class GradleBuildFileUtility {
     String _xifexpression = null;
     if (android) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("classpath \'org.xtend:xtend-android-gradle-plugin:");
+      _builder.append("classpath \'org.xtext:xtext-android-gradle-plugin:");
       XtextVersion _current = XtextVersion.getCurrent();
       String _xtendAndroidGradlePluginVersion = _current.getXtendAndroidGradlePluginVersion();
       _builder.append(_xtendAndroidGradlePluginVersion, "");
@@ -143,7 +143,7 @@ public class GradleBuildFileUtility {
       _xifexpression = _builder.toString();
     } else {
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("classpath \'org.xtend:xtend-gradle-plugin:");
+      _builder_1.append("classpath \'org.xtext:xtext-gradle-plugin:");
       XtextVersion _current_1 = XtextVersion.getCurrent();
       String _xtendGradlePluginVersion = _current_1.getXtendGradlePluginVersion();
       _builder_1.append(_xtendGradlePluginVersion, "");
@@ -153,13 +153,13 @@ public class GradleBuildFileUtility {
     final String pluginDef = _xifexpression;
     this.addDependency(buildScript, pluginDef);
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("apply plugin: \'org.xtend.xtend");
+    _builder_2.append("apply plugin: \'org.xtext");
     String _xifexpression_1 = null;
     if (android) {
-      _xifexpression_1 = "-android";
+      _xifexpression_1 = ".android";
     }
     _builder_2.append(_xifexpression_1, "");
-    _builder_2.append("\' ");
+    _builder_2.append(".xtend\' ");
     this.createStatementIfNotExists(buildFile, _builder_2.toString());
   }
   
