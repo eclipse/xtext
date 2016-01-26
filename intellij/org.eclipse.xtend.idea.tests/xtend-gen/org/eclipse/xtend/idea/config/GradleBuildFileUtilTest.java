@@ -77,7 +77,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.append("dependencies {");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
+    _builder.append("classpath \'org.xtext:xtext-gradle-plugin:");
     XtextVersion _current = XtextVersion.getCurrent();
     String _xtendGradlePluginVersion = _current.getXtendGradlePluginVersion();
     _builder.append(_xtendGradlePluginVersion, "        ");
@@ -88,7 +88,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    _builder.append("apply plugin: \'org.xtend.xtend\' ");
+    _builder.append("apply plugin: \'org.xtext.xtend\' ");
     String _string = _builder.toString();
     String _trim = _string.trim();
     String _text = buildFile.getText();
@@ -120,7 +120,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.append("buildscript{dependencies{");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
+    _builder.append("classpath \'org.xtext:xtext-gradle-plugin:");
     XtextVersion _current = XtextVersion.getCurrent();
     String _xtendGradlePluginVersion = _current.getXtendGradlePluginVersion();
     _builder.append(_xtendGradlePluginVersion, "    ");
@@ -139,7 +139,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    _builder.append("apply plugin: \'org.xtend.xtend\' ");
+    _builder.append("apply plugin: \'org.xtext.xtend\' ");
     String _string = _builder.toString();
     String _trim = _string.trim();
     String _text = buildFile.getText();
@@ -276,7 +276,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     TestCase.assertEquals("classpath", _text_1);
     GrCommandArgumentList _argumentList = clEntry.getArgumentList();
     String _text_2 = _argumentList.getText();
-    boolean _startsWith = _text_2.startsWith("\'org.xtend:xtend-gradle-plugin:");
+    boolean _startsWith = _text_2.startsWith("\'org.xtext:xtext-gradle-plugin:");
     TestCase.assertTrue(_startsWith);
     final Function1<GrMethodCallExpression, Boolean> _function_2 = new Function1<GrMethodCallExpression, Boolean>() {
       @Override

@@ -31,6 +31,8 @@ public class XtextVersion {
     }
   }
   
+  private final String version;
+  
   public static XtextVersion getCurrent() {
     String _elvis = null;
     String _readVersionFromManifest = XtextVersion.readVersionFromManifest();
@@ -40,6 +42,60 @@ public class XtextVersion {
       _elvis = "unknown";
     }
     return new XtextVersion(_elvis);
+  }
+  
+  public String getXtextGradlePluginVersion() {
+    return "1.0.2";
+  }
+  
+  /**
+   * @noreference
+   */
+  public String getMweVersion() {
+    return "2.8.3";
+  }
+  
+  public String getXtendGradlePluginVersion() {
+    return this.getXtextGradlePluginVersion();
+  }
+  
+  /**
+   * @noreference
+   */
+  public String getXtendAndroidGradlePluginVersion() {
+    return this.getXtendGradlePluginVersion();
+  }
+  
+  /**
+   * @return <code>true</code> if the current version ends with '-SNAPSHOT'
+   */
+  public boolean isSnapshot() {
+    return this.version.endsWith("-SNAPSHOT");
+  }
+  
+  /**
+   * @return <code>true</code> if the current version is not a snapshot and not a release<br>
+   * 				Release builds must match a following pattern: N.N(.N)+<br>
+   *  			(N is a digit)<br>
+   * 				For example 2.9.2 is a release, 2.9.2.beta3 is stable.
+   */
+  public boolean isStable() {
+    boolean _and = false;
+    boolean _isSnapshot = this.isSnapshot();
+    boolean _not = (!_isSnapshot);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _matches = this.version.matches("\\d+\\.\\d+(\\.\\d+)+");
+      boolean _not_1 = (!_matches);
+      _and = _not_1;
+    }
+    return _and;
+  }
+  
+  @Override
+  public String toString() {
+    return this.version;
   }
   
   private static String readVersionFromManifest() {
@@ -74,50 +130,6 @@ public class XtextVersion {
         }
       }
     }
-  }
-  
-  private final String version;
-  
-  public boolean isSnapshot() {
-    return this.version.endsWith("-SNAPSHOT");
-  }
-  
-  public boolean isStable() {
-    boolean _and = false;
-    boolean _isSnapshot = this.isSnapshot();
-    boolean _not = (!_isSnapshot);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _matches = this.version.matches("\\d+\\.\\d+(\\.\\d+)+");
-      boolean _not_1 = (!_matches);
-      _and = _not_1;
-    }
-    return _and;
-  }
-  
-  public String getXtendGradlePluginVersion() {
-    return this.getXtextGradlePluginVersion();
-  }
-  
-  public String getXtendAndroidGradlePluginVersion() {
-    return "0.4.14";
-  }
-  
-  public String getXtextGradlePluginVersion() {
-    return "1.0.1";
-  }
-  
-  /**
-   * @noreference
-   */
-  public String getMweVersion() {
-    return "2.8.3";
-  }
-  
-  @Override
-  public String toString() {
-    return this.version;
   }
   
   public XtextVersion(final String version) {

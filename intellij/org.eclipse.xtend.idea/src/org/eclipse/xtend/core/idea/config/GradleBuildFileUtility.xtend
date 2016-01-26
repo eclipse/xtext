@@ -67,7 +67,7 @@ class GradleBuildFileUtility {
 		}
 		val android = module.isAndroidGradleModule
 		if (buildFile.statements.findFirst [
-			text.trim.matches('''apply plugin:.*org\\.xtend\\.xtend«if(android)'-android'».*''')
+			text.trim.matches('''apply plugin:.*org\\.xtext«if(android)'\\.android'»\\.xtend.*''')
 		] !== null) {
 			return
 		}
@@ -75,12 +75,12 @@ class GradleBuildFileUtility {
 		buildScript.createOrGetMethodCall('repositories').createStatementIfNotExists('jcenter()')
 		val pluginDef = 
 			if (android) 
-				'''classpath 'org.xtend:xtend-android-gradle-plugin:«XtextVersion.current.xtendAndroidGradlePluginVersion»' '''
+				'''classpath 'org.xtext:xtext-android-gradle-plugin:«XtextVersion.current.xtendAndroidGradlePluginVersion»' '''
 			else 
-				'''classpath 'org.xtend:xtend-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»' '''
+				'''classpath 'org.xtext:xtext-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»' '''
 								
 		buildScript.addDependency(pluginDef)
-		createStatementIfNotExists(buildFile, '''apply plugin: 'org.xtend.xtend«if(android)'-android'»' ''')
+		createStatementIfNotExists(buildFile, '''apply plugin: 'org.xtext«if(android)'.android'».xtend' ''')
 	}
 
 	def GroovyFile locateBuildFile(Module module) {
