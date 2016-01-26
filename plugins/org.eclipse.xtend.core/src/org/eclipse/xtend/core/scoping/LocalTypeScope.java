@@ -10,7 +10,7 @@ package org.eclipse.xtend.core.scoping;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
@@ -19,7 +19,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  */
 public class LocalTypeScope extends KnownTypesScope {
 
-	public LocalTypeScope(List<? extends JvmType> localTypes, AbstractScope parent) {
+	public LocalTypeScope(List<? extends JvmDeclaredType> localTypes, AbstractScope parent) {
 		super(localTypes, parent);
 	}
 

@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.scoping;
 
 import static java.util.Collections.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -52,7 +51,6 @@ import org.eclipse.xtext.scoping.impl.MultimapBasedSelectable;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.AbstractNestedTypeAwareImportNormalizer;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorTypeScopeWrapper;
@@ -96,9 +94,6 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	
 	@Inject
 	private IResourceDescriptionsProvider resourceDescriptionsProvider;
-	
-	@Inject
-	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
@@ -148,20 +143,8 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 			}
 			XtendMember syntacticContainer = EcoreUtil2.getContainerOfType(context, XtendMember.class);
 			if (syntacticContainer != null) {
-				result = getContainerScope(syntacticContainer, result);
-			}
-			EObject logicalContainer = logicalContainerProvider.getNearestLogicalContainer(context);
-			if (logicalContainer != null) {
-				List<List<JvmTypeParameter>> typeParameters = new ArrayList<List<JvmTypeParameter>>();
-				while (logicalContainer instanceof JvmTypeParameterDeclarator) {
-					JvmTypeParameterDeclarator typeParamProvider = (JvmTypeParameterDeclarator) logicalContainer;
-					if (!typeParamProvider.getTypeParameters().isEmpty()) {
-						typeParameters.add(typeParamProvider.getTypeParameters());
-					}
-					logicalContainer = logicalContainer.eContainer();
-				}
-				if (!typeParameters.isEmpty())
-					result = new TypeParameterScope(typeParameters, result);
+				IScope containerScope = getContainerScope(syntacticContainer, result);
+				return containerScope;
 			}
 			return result;
 		} else if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(referenceType)) {
