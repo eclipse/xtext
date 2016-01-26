@@ -23,6 +23,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.idea.util.PlatformUtil
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil
 import org.eclipse.xtext.util.XtextVersion
+import org.jetbrains.annotations.Nullable
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -43,19 +44,20 @@ class XtendLibraryConfigurator {
 		ensureXtendLibAvailable(rootModel, null)
 	}
 
-	def ensureXtendLibAvailable(ModifiableRootModel rootModel, PsiFile context) {
+	def ensureXtendLibAvailable(ModifiableRootModel rootModel, @Nullable PsiFile context) {
 		rootModel.project.executeWhenProjectReady[doEnsureXtendLibAvailable(rootModel, context)]
 	}
 
-	protected def void doEnsureXtendLibAvailable(ModifiableRootModel rootModel, PsiFile context) {
+	protected def void doEnsureXtendLibAvailable(ModifiableRootModel rootModel, @Nullable PsiFile context) {
 		val module = rootModel.module
 		val scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module)
 		val psiClass = JavaPsiFacade.getInstance(rootModel.project).findClass(Data.name, scope)
 		if (psiClass == null) {
+			val testScope = isTestScope(context)
 			if (isMavenInstalled && module.isMavenizedModule) {
-				module.addXtendLibMavenDependency(isTestScope(context))
+				module.addXtendLibMavenDependency(testScope)
 			} else if (isGradleInstalled && module.isGradleedModule) {
-				module.addXtendLibGradleDependency(isTestScope(context))
+				module.addXtendLibGradleDependency(testScope)
 			} else {
 				module.addJavaRuntimeLibrary(rootModel)
 			}
@@ -108,7 +110,10 @@ class XtendLibraryConfigurator {
 		}
 	}
 
-	protected def boolean isTestScope(PsiFile context) {
+	protected def boolean isTestScope(@Nullable PsiFile context) {
+		if(context === null) {
+			return false
+		}
 		var VirtualFile virtualFile = context.getOriginalFile().getVirtualFile()
 		if (virtualFile !== null) {
 			return ProjectRootManager.getInstance(context.project).getFileIndex().isInTestSourceContent(virtualFile)
