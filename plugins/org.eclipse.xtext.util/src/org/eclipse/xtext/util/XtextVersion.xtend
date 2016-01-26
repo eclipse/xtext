@@ -56,6 +56,10 @@ class XtextVersion {
 		xtextGradlePluginVersion
 	}
 	
+	def getXtendAndroidGradlePluginVersion() {
+		'0.4.14'
+	}
+	
 	def getXtextGradlePluginVersion() {
 		'1.0.1'
 	}
