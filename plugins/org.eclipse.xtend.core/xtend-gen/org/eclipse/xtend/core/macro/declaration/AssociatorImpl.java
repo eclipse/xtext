@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro.declaration;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmElementImpl;
 import org.eclipse.xtend.core.macro.declaration.TracabilityImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.Element;
@@ -46,7 +45,7 @@ public class AssociatorImpl implements Associator {
     }
     final EObject delegate = _switchResult;
     IJvmModelAssociator _jvmModelAssociator = this.unit.getJvmModelAssociator();
-    EObject _delegate = ((JvmElementImpl<?>) javaElement).getDelegate();
+    EObject _delegate = ((AbstractElementImpl<?>) javaElement).getDelegate();
     _jvmModelAssociator.associate(delegate, _delegate);
   }
 }
