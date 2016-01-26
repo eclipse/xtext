@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
-import org.eclipse.xtend.lib.macro.services.Associator
-import org.eclipse.xtend.lib.macro.declaration.MutableElement
 import org.eclipse.xtend.lib.macro.declaration.Element
+import org.eclipse.xtend.lib.macro.declaration.MutableElement
+import org.eclipse.xtend.lib.macro.services.Associator
 
 class AssociatorImpl implements Associator {
 	
@@ -25,7 +25,7 @@ class AssociatorImpl implements Associator {
 			TypeReferenceImpl: primarySourceElement.source
 			AbstractElementImpl<?>: primarySourceElement.delegate
 		}
-		unit.jvmModelAssociator.associate(delegate, (javaElement as JvmElementImpl<?>).delegate)
+		unit.jvmModelAssociator.associate(delegate, (javaElement as AbstractElementImpl<?>).delegate)
 	}
 	
 }
