@@ -9,6 +9,7 @@ import javax.swing.JCheckBox
 import javax.swing.JPanel
 import javax.swing.JTextField
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory
+import org.eclipse.xtext.idea.util.PlatformUtil
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions
 import org.eclipse.xtext.xtext.wizard.ProjectLayout
@@ -21,6 +22,7 @@ import static org.eclipse.xtext.xtext.wizard.BuildSystem.*
 class XtextWizardStep extends ModuleWizardStep {
 	static final Logger LOG = Logger.getInstance(XtextWizardStep.name)
 	extension IdeaWidgetFactory = new IdeaWidgetFactory
+	extension PlatformUtil = new PlatformUtil
 
 	JPanel mainPanel
 
@@ -70,7 +72,10 @@ class XtextWizardStep extends ModuleWizardStep {
 			row [label(" ")]
 
 			row [separator("Project Settings")]
-			row([label("Build System:")], [indentRight(400) buildSystem = comboBox(GRADLE, MAVEN)])
+			row([label("Build System:")], [
+				indentRight(400)
+				buildSystem = if(isMavenInstalled()) comboBox(GRADLE, MAVEN) else comboBox(GRADLE)
+			])
 			row([label("Source Layout:")], [indentRight(400) layout = comboBox(SourceLayout.MAVEN, SourceLayout.PLAIN)])
 
 			row [expand(VERTICAL) label("")]

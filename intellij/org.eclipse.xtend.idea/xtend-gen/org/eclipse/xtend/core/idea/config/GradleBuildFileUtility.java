@@ -11,6 +11,8 @@ import com.google.common.base.Objects;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetTypeId;
+import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -21,8 +23,12 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import java.util.List;
+import org.eclipse.xtend.core.idea.config.MavenArtifact;
+import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.util.PlatformUtil;
 import org.eclipse.xtext.util.XtextVersion;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -44,17 +50,56 @@ import org.jetbrains.plugins.groovy.lang.psi.api.util.GrStatementOwner;
  */
 @SuppressWarnings("all")
 public class GradleBuildFileUtility {
+  private final static Logger LOG = Logger.getInstance(GradleBuildFileUtility.class.getName());
+  
   public boolean isGradleedModule(final Module module) {
-    boolean _or = false;
-    boolean _isExternalSystemAwareModule = ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module);
-    if (_isExternalSystemAwareModule) {
-      _or = true;
-    } else {
-      BuildScriptDataBuilder _buildScriptData = GradleModuleBuilder.getBuildScriptData(module);
-      boolean _tripleNotEquals = (_buildScriptData != null);
-      _or = _tripleNotEquals;
+    PlatformUtil _platformUtil = new PlatformUtil();
+    boolean _isGradleInstalled = _platformUtil.isGradleInstalled();
+    if (_isGradleInstalled) {
+      boolean _or = false;
+      boolean _isExternalSystemAwareModule = ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module);
+      if (_isExternalSystemAwareModule) {
+        _or = true;
+      } else {
+        BuildScriptDataBuilder _buildScriptData = GradleModuleBuilder.getBuildScriptData(module);
+        boolean _tripleNotEquals = (_buildScriptData != null);
+        _or = _tripleNotEquals;
+      }
+      return _or;
     }
-    return _or;
+    return false;
+  }
+  
+  public void addXtendLibGradleDependency(final Module module, final boolean isTestScope) {
+    final GroovyFile buildFile = this.locateBuildFile(module);
+    if ((buildFile == null)) {
+      String _name = module.getName();
+      String _plus = ("Gradle build file not found in module " + _name);
+      GradleBuildFileUtility.LOG.error(_plus);
+      return;
+    }
+    Project _project = module.getProject();
+    List<PsiFile> _newImmutableList = CollectionLiterals.<PsiFile>newImmutableList(buildFile);
+    new WriteCommandAction.Simple(_project, "Gradle: Add Xtend Runtime Library", ((PsiFile[])Conversions.unwrapArray(_newImmutableList, PsiFile.class))) {
+      @Override
+      protected void run() throws Throwable {
+        String _xifexpression = null;
+        if (isTestScope) {
+          _xifexpression = "testCompile";
+        } else {
+          _xifexpression = "compile";
+        }
+        final String scope = _xifexpression;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append(scope, "");
+        _builder.append(" \'");
+        MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
+        String _key = _xtendLibMavenId.getKey();
+        _builder.append(_key, "");
+        _builder.append("\' ");
+        GradleBuildFileUtility.this.addDependency(buildFile, _builder.toString());
+      }
+    }.execute();
   }
   
   public void setupGradleBuild(final Module module, final GroovyFile buildFile) {

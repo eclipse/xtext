@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.idea.config
 
 import com.google.inject.Inject
-import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableRootModel
@@ -19,27 +18,26 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiFile
 import com.intellij.psi.search.GlobalSearchScope
-import com.intellij.util.xml.DomUtil
 import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.idea.util.PlatformUtil
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil
 import org.eclipse.xtext.util.XtextVersion
-import org.jetbrains.idea.maven.dom.MavenDomUtil
-import org.jetbrains.idea.maven.dom.model.MavenDomProjectModel
-import org.jetbrains.idea.maven.model.MavenId
-import org.jetbrains.idea.maven.project.MavenProject
-import org.jetbrains.idea.maven.project.MavenProjectsManager
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 class XtendLibraryConfigurator {
 	
-	protected static final Logger LOG = Logger.getInstance(XtendLibraryConfigurator.name)
-	@Inject extension GradleBuildFileUtility gradleUtils
+	static final Logger LOG = Logger.getInstance(XtendLibraryConfigurator.name)
+	static MavenArtifact XTEND_LIB_MAVEN_ID
+
+	@Inject extension GradleBuildFileUtility
+	@Inject extension ProjectLifecycleUtil
+	@Inject extension PlatformUtil
+	@Inject extension MavenUtility
+
 	@Inject XtendLibraryDescription xtendLibDescr
-	static MavenId XTEND_LIB_MAVEN_ID
-	@Inject extension  ProjectLifecycleUtil
 
 	def ensureXtendLibAvailable(ModifiableRootModel rootModel) {
 		ensureXtendLibAvailable(rootModel, null)
@@ -54,39 +52,21 @@ class XtendLibraryConfigurator {
 		val scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module)
 		val psiClass = JavaPsiFacade.getInstance(rootModel.project).findClass(Data.name, scope)
 		if (psiClass == null) {
-			if (module.isMavenizedModule) {
-				module.addMavenDependency(context)
-			} else if (module.isGradleedModule) {
-				module.addGradleDependency(context)
+			if (isMavenInstalled && module.isMavenizedModule) {
+				module.addXtendLibMavenDependency(isTestScope(context))
+			} else if (isGradleInstalled && module.isGradleedModule) {
+				module.addXtendLibGradleDependency(isTestScope(context))
 			} else {
 				module.addJavaRuntimeLibrary(rootModel)
 			}
 		}
 	}
 
-	def void addGradleDependency(Module module, PsiFile context) {
-		val buildFile = module.locateBuildFile
-		if (buildFile === null) {
-			LOG.error("Gradle build file not found in module " + module.name)
-			return
-		}
-
-		new WriteCommandAction.Simple(module.project, "Gradle: Add Xtend Runtime Library",
-			newImmutableList(buildFile)) {
-			override protected run() throws Throwable {
-				val scope = if(context?.isTestScope) "testCompile" else "compile"
-				gradleUtils.addDependency(buildFile, '''«scope» '«xtendLibMavenId.key»' ''')
-			}
-
-		}.execute
-
-	}
-
-	def static xtendLibMavenId() {
+	def static MavenArtifact xtendLibMavenId() {
 		if (XTEND_LIB_MAVEN_ID === null) {
 			val version = XtextVersion.current.version
 			LOG.info("The current Xtend plugin version is " + version)
-			XTEND_LIB_MAVEN_ID = new MavenId("org.eclipse.xtend", "org.eclipse.xtend.lib", version)
+			XTEND_LIB_MAVEN_ID = new MavenArtifact("org.eclipse.xtend", "org.eclipse.xtend.lib", version)
 		}
 		return XTEND_LIB_MAVEN_ID
 	}
@@ -97,28 +77,6 @@ class XtendLibraryConfigurator {
 			if (rootModel.isWritable)
 				rootModel.addLibraryEntry(library)
 		}
-	}
-
-	def void addMavenDependency(Module module, PsiFile context) {
-		val project = module.getProject()
-		val mavenProjectsManager = MavenProjectsManager.getInstance(project)
-		val MavenProject mavenProject = mavenProjectsManager.findProject(module)
-		if(mavenProject === null) return;
-
-		val MavenDomProjectModel model = MavenDomUtil.getMavenDomProjectModel(project, mavenProject.getFile())
-		if(model === null) return;
-
-		new WriteCommandAction.Simple(project, "Add Xtend lib Maven Dependency",
-			newImmutableList(DomUtil.getFile(model))) {
-
-			override protected run() throws Throwable {
-				var dependency = MavenDomUtil.createDomDependency(model, null, xtendLibMavenId)
-				if (context?.isTestScope) {
-					dependency.getScope().setStringValue("test")
-				}
-			}
-
-		}.execute()
 	}
 
 	def Library createOrGetXtendJavaLibrary(ModifiableRootModel rootModel, Module module) {
@@ -155,11 +113,6 @@ class XtendLibraryConfigurator {
 		if (virtualFile !== null) {
 			return ProjectRootManager.getInstance(context.project).getFileIndex().isInTestSourceContent(virtualFile)
 		}
-	}
-
-	def boolean isMavenizedModule(Module module) {
-		var mavenProjectsManager = MavenProjectsManager.getInstance(module.getProject())
-		return if(mavenProjectsManager !== null) mavenProjectsManager.isMavenizedModule(module) else false
 	}
 
 }
