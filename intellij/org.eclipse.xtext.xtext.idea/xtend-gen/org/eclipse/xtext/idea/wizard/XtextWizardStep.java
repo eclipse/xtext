@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import org.eclipse.xtext.idea.util.IdeaWidgetFactory;
+import org.eclipse.xtext.idea.util.PlatformUtil;
 import org.eclipse.xtext.idea.wizard.XtextModuleBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -41,6 +42,9 @@ public class XtextWizardStep extends ModuleWizardStep {
   
   @Extension
   private IdeaWidgetFactory _ideaWidgetFactory = new IdeaWidgetFactory();
+  
+  @Extension
+  private PlatformUtil _platformUtil = new PlatformUtil();
   
   private JPanel mainPanel;
   
@@ -194,8 +198,14 @@ public class XtextWizardStep extends ModuleWizardStep {
               ComboBox _xblockexpression = null;
               {
                 XtextWizardStep.this._ideaWidgetFactory.indentRight(it, 400);
-                ComboBox _comboBox = XtextWizardStep.this._ideaWidgetFactory.comboBox(BuildSystem.GRADLE, BuildSystem.MAVEN);
-                _xblockexpression = XtextWizardStep.this.buildSystem = _comboBox;
+                ComboBox _xifexpression = null;
+                boolean _isMavenInstalled = XtextWizardStep.this._platformUtil.isMavenInstalled();
+                if (_isMavenInstalled) {
+                  _xifexpression = XtextWizardStep.this._ideaWidgetFactory.comboBox(BuildSystem.GRADLE, BuildSystem.MAVEN);
+                } else {
+                  _xifexpression = XtextWizardStep.this._ideaWidgetFactory.comboBox(BuildSystem.GRADLE);
+                }
+                _xblockexpression = XtextWizardStep.this.buildSystem = _xifexpression;
               }
               return _xblockexpression;
             }

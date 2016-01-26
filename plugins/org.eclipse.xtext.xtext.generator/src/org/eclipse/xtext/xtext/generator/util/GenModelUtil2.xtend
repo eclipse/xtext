@@ -85,7 +85,7 @@ class GenModelUtil2 {
 	def static Resource getGenModelResource(String locationInfo, String nsURI, ResourceSet resourceSet) {
 		val genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap(false).get(nsURI)
 		if (genModelURI === null) {
-			if (EcorePackage.eNS_URI.equals(nsURI)) // If we really want to use the registered ecore ...
+			if (EcorePackage.eNS_URI == nsURI) // If we really want to use the registered ecore ...
 				return null // look into the resource set to find a genpackage for the given URI
 			for (res : resourceSet.resources) {
 				// We only look into the first level, as genmodels are usually among the top level elements.
@@ -93,7 +93,7 @@ class GenModelUtil2 {
 				for (obj : res.contents) {
 					if (obj instanceof GenModel) {
 						for (genPackage : obj.genPackages) {
-							if (genPackage.NSURI.equals(nsURI)) {
+							if (genPackage.NSURI == nsURI) {
 								return genPackage.eResource
 							}
 						}

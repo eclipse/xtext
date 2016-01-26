@@ -12,6 +12,7 @@ import com.intellij.framework.FrameworkTypeEx;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModifiableModelsProvider;
 import com.intellij.openapi.roots.ModifiableRootModel;
+import org.eclipse.xtend.core.idea.config.MavenArtifact;
 import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend.core.idea.config.XtendProjectConfigurator;
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
@@ -20,7 +21,6 @@ import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
-import org.jetbrains.idea.maven.model.MavenId;
 import org.jetbrains.plugins.gradle.frameworkSupport.BuildScriptDataBuilder;
 import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvider;
 
@@ -93,7 +93,7 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     BuildScriptDataBuilder _addRepositoriesDefinition = _addPropertyDefinition.addRepositoriesDefinition("jcenter()");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("compile \'");
-    MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
+    MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
     String _key = _xtendLibMavenId.getKey();
     _builder_1.append(_key, "");
     _builder_1.append("\' ");

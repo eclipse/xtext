@@ -37,7 +37,7 @@ public class XtextPlatformResourceURIHandler extends URIHandlerImpl {
 
 	@Override
 	public URI resolve(URI uri) {
-		if (resolve && uri.isRelative() && uri.hasRelativePath() && !resourceSet.getPackageRegistry().containsKey(uri.trimFragment().toString())) {
+		if (resolve && baseURI != null && uri.isRelative() && uri.hasRelativePath() && !resourceSet.getPackageRegistry().containsKey(uri.trimFragment().toString())) {
 			URI result = uri.resolve(baseURI);
 			if (baseURI.isPlatform()) {
 				if (result.isPlatform() && !(result.isPlatformPlugin() || result.isPlatformResource())) {
