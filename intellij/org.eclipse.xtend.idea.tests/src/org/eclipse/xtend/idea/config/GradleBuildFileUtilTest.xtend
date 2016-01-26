@@ -40,10 +40,10 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 		        jcenter()
 		    }
 		    dependencies {
-		        classpath 'org.xtend:xtend-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»'
+		        classpath 'org.xtext:xtext-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»'
 		    }
 		}
-		apply plugin: 'org.xtend.xtend' '''.toString.trim, buildFile.text)
+		apply plugin: 'org.xtext.xtend' '''.toString.trim, buildFile.text)
 	}
 
 	def void testSetupGradleBuildFileWithContent() {
@@ -59,13 +59,13 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 
 		assertEquals('''
 		buildscript{dependencies{
-		    classpath 'org.xtend:xtend-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»'
+		    classpath 'org.xtext:xtext-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»'
 		}
 		    repositories {
 		        jcenter()
 		    }
 		}
-		apply plugin: 'org.xtend.xtend' '''.toString.trim, buildFile.text)
+		apply plugin: 'org.xtext.xtend' '''.toString.trim, buildFile.text)
 
 	}
 
@@ -118,7 +118,7 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 		val clEntry = closureBlock.statements.filter(GrApplicationStatement).head
 		assertNotNull(clEntry)
 		assertEquals('classpath', clEntry.invokedExpression.text)
-		assertTrue(clEntry.argumentList.text.startsWith("'org.xtend:xtend-gradle-plugin:"))
+		assertTrue(clEntry.argumentList.text.startsWith("'org.xtext:xtext-gradle-plugin:"))
 		
 		val repos = children.filter[invokedExpression.text == 'repositories'].head
 		assertNotNull(repos)
