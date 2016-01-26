@@ -16,14 +16,15 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility;
+import org.eclipse.xtend.core.idea.config.MavenArtifact;
 import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.util.PlatformUtil;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.jetbrains.idea.maven.model.MavenId;
 import org.jetbrains.plugins.groovy.lang.psi.GroovyFile;
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.GrStatement;
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.blocks.GrClosableBlock;
@@ -153,7 +154,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     final Runnable _function = new Runnable() {
       @Override
       public void run() {
-        MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
+        MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
         String _string = _xtendLibMavenId.toString();
         String _plus = ("compile \'" + _string);
         String _plus_1 = (_plus + "\'");
@@ -166,7 +167,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("compile \'");
-    MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
+    MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
     String _string = _xtendLibMavenId.toString();
     _builder.append(_string, "    ");
     _builder.append("\'");
@@ -187,7 +188,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     final Runnable _function = new Runnable() {
       @Override
       public void run() {
-        MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
+        MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
         String _string = _xtendLibMavenId.toString();
         String _plus = ("compile \'" + _string);
         String _plus_1 = (_plus + "\'");
@@ -200,7 +201,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("compile \'");
-    MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
+    MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
     String _string = _xtendLibMavenId.toString();
     _builder_1.append(_string, "    ");
     _builder_1.append("\'");
@@ -211,11 +212,13 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     TestCase.assertEquals(_string_1, _text);
   }
   
-  public void _testIsGradleModule() {
-    this.myFixture.addFileToProject("build.gradle", "");
+  public void testIsGradleModule() {
+    PlatformUtil _platformUtil = new PlatformUtil();
+    boolean _isGradleInstalled = _platformUtil.isGradleInstalled();
+    TestCase.assertTrue(_isGradleInstalled);
     Module _module = this.myFixture.getModule();
     boolean _isGradleedModule = this.util.isGradleedModule(_module);
-    TestCase.assertTrue(_isGradleedModule);
+    TestCase.assertFalse(_isGradleedModule);
   }
   
   public void assertTree(final GroovyFile buildFile) {

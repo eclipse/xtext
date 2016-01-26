@@ -15,6 +15,7 @@ import org.jetbrains.plugins.groovy.lang.psi.GroovyFile
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrApplicationStatement
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.path.GrMethodCallExpression
 import org.eclipse.xtext.util.XtextVersion
+import org.eclipse.xtext.idea.util.PlatformUtil
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -93,10 +94,9 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 		}'''.toString, buildFile.text)
 	}
 
-	def void _testIsGradleModule() {
-		//TODO 
-		myFixture.addFileToProject('build.gradle', '')
-		assertTrue(util.isGradleedModule(myFixture.module))
+	def void testIsGradleModule() {
+		assertTrue(new PlatformUtil().isGradleInstalled)
+		assertFalse(util.isGradleedModule(myFixture.module))
 	}
 
 	def assertTree(GroovyFile buildFile) {

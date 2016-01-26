@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.idea.config;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -28,18 +27,16 @@ import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.xml.XmlFile;
-import com.intellij.util.xml.DomUtil;
-import com.intellij.util.xml.GenericDomValue;
 import java.util.HashMap;
 import java.util.List;
 import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility;
+import org.eclipse.xtend.core.idea.config.MavenArtifact;
+import org.eclipse.xtend.core.idea.config.MavenUtility;
 import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.util.PlatformUtil;
 import org.eclipse.xtext.idea.util.ProjectLifecycleUtil;
 import org.eclipse.xtext.util.XtextVersion;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -47,33 +44,34 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
-import org.jetbrains.idea.maven.dom.MavenDomUtil;
-import org.jetbrains.idea.maven.dom.model.MavenDomDependency;
-import org.jetbrains.idea.maven.dom.model.MavenDomProjectModel;
-import org.jetbrains.idea.maven.model.MavenId;
-import org.jetbrains.idea.maven.project.MavenProject;
-import org.jetbrains.idea.maven.project.MavenProjectsManager;
-import org.jetbrains.plugins.groovy.lang.psi.GroovyFile;
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class XtendLibraryConfigurator {
-  protected final static Logger LOG = Logger.getInstance(XtendLibraryConfigurator.class.getName());
+  private final static Logger LOG = Logger.getInstance(XtendLibraryConfigurator.class.getName());
+  
+  private static MavenArtifact XTEND_LIB_MAVEN_ID;
   
   @Inject
   @Extension
-  private GradleBuildFileUtility gradleUtils;
-  
-  @Inject
-  private XtendLibraryDescription xtendLibDescr;
-  
-  private static MavenId XTEND_LIB_MAVEN_ID;
+  private GradleBuildFileUtility _gradleBuildFileUtility;
   
   @Inject
   @Extension
   private ProjectLifecycleUtil _projectLifecycleUtil;
+  
+  @Inject
+  @Extension
+  private PlatformUtil _platformUtil;
+  
+  @Inject
+  @Extension
+  private MavenUtility _mavenUtility;
+  
+  @Inject
+  private XtendLibraryDescription xtendLibDescr;
   
   public void ensureXtendLibAvailable(final ModifiableRootModel rootModel) {
     this.ensureXtendLibAvailable(rootModel, null);
@@ -99,13 +97,29 @@ public class XtendLibraryConfigurator {
     final PsiClass psiClass = _instance.findClass(_name, scope);
     boolean _equals = Objects.equal(psiClass, null);
     if (_equals) {
-      boolean _isMavenizedModule = this.isMavenizedModule(module);
-      if (_isMavenizedModule) {
-        this.addMavenDependency(module, context);
+      boolean _and = false;
+      boolean _isMavenInstalled = this._platformUtil.isMavenInstalled();
+      if (!_isMavenInstalled) {
+        _and = false;
       } else {
-        boolean _isGradleedModule = this.gradleUtils.isGradleedModule(module);
-        if (_isGradleedModule) {
-          this.addGradleDependency(module, context);
+        boolean _isMavenizedModule = this._mavenUtility.isMavenizedModule(module);
+        _and = _isMavenizedModule;
+      }
+      if (_and) {
+        boolean _isTestScope = this.isTestScope(context);
+        this._mavenUtility.addXtendLibMavenDependency(module, _isTestScope);
+      } else {
+        boolean _and_1 = false;
+        boolean _isGradleInstalled = this._platformUtil.isGradleInstalled();
+        if (!_isGradleInstalled) {
+          _and_1 = false;
+        } else {
+          boolean _isGradleedModule = this._gradleBuildFileUtility.isGradleedModule(module);
+          _and_1 = _isGradleedModule;
+        }
+        if (_and_1) {
+          boolean _isTestScope_1 = this.isTestScope(context);
+          this._gradleBuildFileUtility.addXtendLibGradleDependency(module, _isTestScope_1);
         } else {
           this.addJavaRuntimeLibrary(module, rootModel);
         }
@@ -113,49 +127,13 @@ public class XtendLibraryConfigurator {
     }
   }
   
-  public void addGradleDependency(final Module module, final PsiFile context) {
-    final GroovyFile buildFile = this.gradleUtils.locateBuildFile(module);
-    if ((buildFile == null)) {
-      String _name = module.getName();
-      String _plus = ("Gradle build file not found in module " + _name);
-      XtendLibraryConfigurator.LOG.error(_plus);
-      return;
-    }
-    Project _project = module.getProject();
-    List<PsiFile> _newImmutableList = CollectionLiterals.<PsiFile>newImmutableList(buildFile);
-    new WriteCommandAction.Simple(_project, "Gradle: Add Xtend Runtime Library", ((PsiFile[])Conversions.unwrapArray(_newImmutableList, PsiFile.class))) {
-      @Override
-      protected void run() throws Throwable {
-        String _xifexpression = null;
-        boolean _isTestScope = false;
-        if (context!=null) {
-          _isTestScope=XtendLibraryConfigurator.this.isTestScope(context);
-        }
-        if (_isTestScope) {
-          _xifexpression = "testCompile";
-        } else {
-          _xifexpression = "compile";
-        }
-        final String scope = _xifexpression;
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append(scope, "");
-        _builder.append(" \'");
-        MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
-        String _key = _xtendLibMavenId.getKey();
-        _builder.append(_key, "");
-        _builder.append("\' ");
-        XtendLibraryConfigurator.this.gradleUtils.addDependency(buildFile, _builder.toString());
-      }
-    }.execute();
-  }
-  
-  public static MavenId xtendLibMavenId() {
+  public static MavenArtifact xtendLibMavenId() {
     if ((XtendLibraryConfigurator.XTEND_LIB_MAVEN_ID == null)) {
       XtextVersion _current = XtextVersion.getCurrent();
       final String version = _current.getVersion();
       XtendLibraryConfigurator.LOG.info(("The current Xtend plugin version is " + version));
-      MavenId _mavenId = new MavenId("org.eclipse.xtend", "org.eclipse.xtend.lib", version);
-      XtendLibraryConfigurator.XTEND_LIB_MAVEN_ID = _mavenId;
+      MavenArtifact _mavenArtifact = new MavenArtifact("org.eclipse.xtend", "org.eclipse.xtend.lib", version);
+      XtendLibraryConfigurator.XTEND_LIB_MAVEN_ID = _mavenArtifact;
     }
     return XtendLibraryConfigurator.XTEND_LIB_MAVEN_ID;
   }
@@ -177,37 +155,6 @@ public class XtendLibraryConfigurator {
         rootModel.addLibraryEntry(library);
       }
     }
-  }
-  
-  public void addMavenDependency(final Module module, final PsiFile context) {
-    final Project project = module.getProject();
-    final MavenProjectsManager mavenProjectsManager = MavenProjectsManager.getInstance(project);
-    final MavenProject mavenProject = mavenProjectsManager.findProject(module);
-    if ((mavenProject == null)) {
-      return;
-    }
-    VirtualFile _file = mavenProject.getFile();
-    final MavenDomProjectModel model = MavenDomUtil.getMavenDomProjectModel(project, _file);
-    if ((model == null)) {
-      return;
-    }
-    XmlFile _file_1 = DomUtil.getFile(model);
-    List<PsiFile> _newImmutableList = CollectionLiterals.<PsiFile>newImmutableList(_file_1);
-    new WriteCommandAction.Simple(project, "Add Xtend lib Maven Dependency", ((PsiFile[])Conversions.unwrapArray(_newImmutableList, PsiFile.class))) {
-      @Override
-      protected void run() throws Throwable {
-        MavenId _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
-        MavenDomDependency dependency = MavenDomUtil.createDomDependency(model, null, _xtendLibMavenId);
-        boolean _isTestScope = false;
-        if (context!=null) {
-          _isTestScope=XtendLibraryConfigurator.this.isTestScope(context);
-        }
-        if (_isTestScope) {
-          GenericDomValue<String> _scope = dependency.getScope();
-          _scope.setStringValue("test");
-        }
-      }
-    }.execute();
   }
   
   public Library createOrGetXtendJavaLibrary(final ModifiableRootModel rootModel, final Module module) {
@@ -291,17 +238,5 @@ public class XtendLibraryConfigurator {
       return _fileIndex.isInTestSourceContent(virtualFile);
     }
     return false;
-  }
-  
-  public boolean isMavenizedModule(final Module module) {
-    Project _project = module.getProject();
-    MavenProjectsManager mavenProjectsManager = MavenProjectsManager.getInstance(_project);
-    boolean _xifexpression = false;
-    if ((mavenProjectsManager != null)) {
-      _xifexpression = mavenProjectsManager.isMavenizedModule(module);
-    } else {
-      _xifexpression = false;
-    }
-    return _xifexpression;
   }
 }

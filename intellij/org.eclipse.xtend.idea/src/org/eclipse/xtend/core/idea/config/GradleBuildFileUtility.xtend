@@ -9,6 +9,8 @@ package org.eclipse.xtend.core.idea.config
 
 import com.intellij.facet.Facet
 import com.intellij.facet.FacetManager
+import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.util.io.FileUtil
@@ -17,6 +19,8 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.util.PsiTreeUtil
+import org.eclipse.xtext.idea.util.PlatformUtil
+import org.eclipse.xtext.util.XtextVersion
 import org.jetbrains.plugins.gradle.service.project.wizard.GradleModuleBuilder
 import org.jetbrains.plugins.gradle.util.GradleConstants
 import org.jetbrains.plugins.groovy.lang.psi.GroovyFile
@@ -25,17 +29,36 @@ import org.jetbrains.plugins.groovy.lang.psi.api.statements.blocks.GrClosableBlo
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrCall
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrMethodCall
 import org.jetbrains.plugins.groovy.lang.psi.api.util.GrStatementOwner
-import org.eclipse.xtext.util.XtextVersion
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 class GradleBuildFileUtility {
-
-
+	static final Logger LOG = Logger.getInstance(GradleBuildFileUtility.name)
+	
 	def boolean isGradleedModule(Module module) {
-		ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module) ||
-			GradleModuleBuilder.getBuildScriptData(module) !== null
+		if (new PlatformUtil().isGradleInstalled) {
+			return ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module) ||
+				GradleModuleBuilder.getBuildScriptData(module) !== null
+		}
+		return false
+	}
+
+	def void addXtendLibGradleDependency(Module module, boolean isTestScope) {
+		val buildFile = module.locateBuildFile
+		if (buildFile === null) {
+			LOG.error("Gradle build file not found in module " + module.name)
+			return
+		}
+
+		new WriteCommandAction.Simple(module.project, "Gradle: Add Xtend Runtime Library",
+			newImmutableList(buildFile)) {
+			override protected run() throws Throwable {
+				val scope = if(isTestScope) "testCompile" else "compile"
+				buildFile.addDependency('''«scope» '«XtendLibraryConfigurator.xtendLibMavenId.key»' ''')
+			}
+		}.execute
+
 	}
 
 	def void setupGradleBuild(Module module, GroovyFile buildFile) {
@@ -43,12 +66,20 @@ class GradleBuildFileUtility {
 			return
 		}
 		val android = module.isAndroidGradleModule
-		if(buildFile.statements.findFirst[text.trim.matches('''apply plugin:.*org\\.xtend\\.xtend«if(android)'-android'».*''')] !== null) {
+		if (buildFile.statements.findFirst [
+			text.trim.matches('''apply plugin:.*org\\.xtend\\.xtend«if(android)'-android'».*''')
+		] !== null) {
 			return
 		}
 		val buildScript = buildFile.createOrGetMethodCall("buildscript")
 		buildScript.createOrGetMethodCall('repositories').createStatementIfNotExists('jcenter()')
-		buildScript.addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»' ''')
+		val pluginDef = 
+			if (android) 
+				'''classpath 'org.xtend:xtend-android-gradle-plugin:«XtextVersion.current.xtendAndroidGradlePluginVersion»' '''
+			else 
+				'''classpath 'org.xtend:xtend-gradle-plugin:«XtextVersion.current.xtendGradlePluginVersion»' '''
+								
+		buildScript.addDependency(pluginDef)
 		createStatementIfNotExists(buildFile, '''apply plugin: 'org.xtend.xtend«if(android)'-android'»' ''')
 	}
 
