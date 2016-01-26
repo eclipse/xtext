@@ -91,6 +91,14 @@ public class TokenRegionProviderTest extends AbstractXtextTests {
 		assertEquals(3, tokenRegion.getLength());
 	}
 	
+	@Test 
+	public void testBug486454() throws Exception {
+		String model = "t";
+		ITextRegion tokenRegion = tokenRegionProvider.getTokenRegion(model, new TextRegion(1, 0));
+		assertEquals(0, tokenRegion.getOffset());
+		assertEquals(1, tokenRegion.getLength());
+	}
+	
 	protected CommonToken findTokenStartingAt(final int offset, List<CommonToken> tokens) {
 		return find(tokens, new Predicate<CommonToken>() {
 			@Override
