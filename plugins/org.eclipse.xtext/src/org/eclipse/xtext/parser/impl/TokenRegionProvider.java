@@ -37,29 +37,20 @@ public class TokenRegionProvider {
 		lexer.setCharStream(new ANTLRStringStream(text));
 		int currentStart = 0;
 		int currentEnd = 0;
-		CommonToken currentToken = (CommonToken) lexer.nextToken();
-		int regionStartOffset = region.getOffset();
-		int regionEnd = regionStartOffset + region.getLength();
-		while (currentToken != Token.EOF_TOKEN) {
-			currentStart = currentToken.getStartIndex();
-			currentEnd = currentToken.getStopIndex() + 1;
-			if (currentToken.getStopIndex() >= regionStartOffset) 
-				break;
-			currentToken = (CommonToken) lexer.nextToken();
+		CommonToken nextToken = (CommonToken) lexer.nextToken();
+		int regionStart = region.getOffset();
+		int regionEnd = regionStart + region.getLength();
+		while (nextToken != Token.EOF_TOKEN && currentEnd <= regionStart) {
+			currentStart = nextToken.getStartIndex();
+			currentEnd = nextToken.getStopIndex() + 1;
+			nextToken = (CommonToken) lexer.nextToken();
 		}
-		if (region.getLength() == 0 && regionStartOffset == currentToken.getStopIndex() + 1) {
-			currentEnd = currentStart;
-		} else {
-			// currentToken is first token overlapping with the region or EOF
-			while (currentToken != Token.EOF_TOKEN) {
-				currentEnd = currentToken.getStopIndex() + 1;
-				if (currentEnd >= regionEnd) {
-					break;
-				}
-				currentToken = (CommonToken) lexer.nextToken();
-			}
+		// nextToken is either EOF or the first token that follows the start of the given region
+		while (nextToken != Token.EOF_TOKEN && currentEnd < regionEnd) {
+			currentEnd = nextToken.getStopIndex() + 1;
+			nextToken = (CommonToken) lexer.nextToken();
 		}
-		if (currentStart != regionStartOffset || currentEnd != regionEnd) 
+		if (currentStart != regionStart || currentEnd != regionEnd) 
 			return new TextRegion(currentStart, currentEnd - currentStart);
 		else 
 			return region;
