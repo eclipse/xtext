@@ -1915,20 +1915,20 @@ public class XbaseValidator extends AbstractXbaseValidator {
 	}
 	
 	@Inject
-	private RefereredInvalidTypeFinder refereredInvalidTypeFinder;
+	private ReferencedInvalidTypeFinder referencedInvalidTypeFinder;
 
 	protected void checkReferInvalidTypes(JvmIdentifiableElement element, EObject source, EReference structuralFeature) {
-		LightweightTypeReference refereredInvalidType = refereredInvalidTypeFinder.findRefereredInvalidType(element);
-		String message = getReferInvalidTypeMessage(element, refereredInvalidType);
+		LightweightTypeReference referencedInvalidType = referencedInvalidTypeFinder.findReferencedInvalidType(element);
+		String message = getReferInvalidTypeMessage(element, referencedInvalidType);
 		if (message != null)
 			error(message, source, structuralFeature, REFER_INVALID_TYPES);
 	}
 
-	protected String getReferInvalidTypeMessage(JvmIdentifiableElement element, LightweightTypeReference refereredInvalidType) {
-		if (refereredInvalidType == null) {
+	protected String getReferInvalidTypeMessage(JvmIdentifiableElement element, LightweightTypeReference referencedInvalidType) {
+		if (referencedInvalidType == null) {
 			return null;
 		}
-		if (refereredInvalidType.isPrimitiveVoid()) {
+		if (referencedInvalidType.isPrimitiveVoid()) {
 			if (element instanceof JvmField) {
 				JvmField field = (JvmField) element;
 				// "The field C.f has an illegal argument type"
@@ -1956,7 +1956,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 						uiStrings.parameters(constructor));
 			}
 		}
-		if (refereredInvalidType.isUnknown()) {
+		if (referencedInvalidType.isUnknown()) {
 			if (element instanceof JvmField) {
 				JvmField field = (JvmField) element;
 				// "The field C.f refers to the missing type DoesNotExist"
@@ -1964,7 +1964,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 						FeatureKinds.getTypeName(field),
 						getQualifiedSimpleName(field.getDeclaringType()),
 						field.getSimpleName(),
-						refereredInvalidType.getHumanReadableName());	
+						referencedInvalidType.getHumanReadableName());	
 			}
 			if (element instanceof JvmOperation) {
 				JvmOperation operation = (JvmOperation) element;
@@ -1975,7 +1975,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 						uiStrings.parameters(operation),
 						FeatureKinds.getTypeName(operation.getDeclaringType()),
 						getQualifiedSimpleName(operation.getDeclaringType()),
-						refereredInvalidType.getHumanReadableName());
+						referencedInvalidType.getHumanReadableName());
 			} 
 			if (element instanceof JvmConstructor) {
 				JvmConstructor constructor = (JvmConstructor) element;
@@ -1984,7 +1984,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 						FeatureKinds.getTypeName(constructor), 
 						getQualifiedSimpleName(constructor.getDeclaringType()), 
 						uiStrings.parameters(constructor),
-						refereredInvalidType.getHumanReadableName());
+						referencedInvalidType.getHumanReadableName());
 			}
 		}
 		return null;

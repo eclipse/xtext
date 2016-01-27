@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithResult
@@ -29,19 +28,19 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
  * @author kosyakov - Initial contribution and API
  */
 @Singleton
-class RefereredInvalidTypeFinder extends TypeReferenceVisitorWithResult<LightweightTypeReference> {
+class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<LightweightTypeReference> {
 
 	@Inject CommonTypeComputationServices services
 
-	def LightweightTypeReference findRefereredInvalidType(JvmIdentifiableElement element) {
-		return element.internalFindRefereredInvalidType
+	def LightweightTypeReference findReferencedInvalidType(JvmIdentifiableElement element) {
+		return element.internalFindReferencedInvalidType
 	}
 
-	def protected dispatch LightweightTypeReference internalFindRefereredInvalidType(JvmIdentifiableElement field) {
+	def protected dispatch LightweightTypeReference internalFindReferencedInvalidType(JvmIdentifiableElement field) {
 		return null
 	}
 
-	def protected dispatch LightweightTypeReference internalFindRefereredInvalidType(JvmField field) {
+	def protected dispatch LightweightTypeReference internalFindReferencedInvalidType(JvmField field) {
 		val type = field.type.toLightweightTypeReference
 		if (type.primitiveVoid)
 			return type
@@ -49,15 +48,15 @@ class RefereredInvalidTypeFinder extends TypeReferenceVisitorWithResult<Lightwei
 		return type.findUnknownType
 	}
 
-	def protected dispatch LightweightTypeReference internalFindRefereredInvalidType(JvmOperation operation) {
+	def protected dispatch LightweightTypeReference internalFindReferencedInvalidType(JvmOperation operation) {
 		val unknownType = operation.returnType.findUnknownType 
 		if(unknownType !== null)
 			return unknownType
 		
-		return _internalFindRefereredInvalidType(operation as JvmExecutable)
+		return _internalFindReferencedInvalidType(operation as JvmExecutable)
 	}
 
-	def protected dispatch LightweightTypeReference internalFindRefereredInvalidType(JvmExecutable executable) {
+	def protected dispatch LightweightTypeReference internalFindReferencedInvalidType(JvmExecutable executable) {
 		for (typeReference : executable.typeParameters.map[constraints].flatten.map[typeReference]) {
 			val unknownType = typeReference.findUnknownType
 			if(unknownType !== null)
@@ -123,8 +122,6 @@ class RefereredInvalidTypeFinder extends TypeReferenceVisitorWithResult<Lightwei
 	}
 
 	def protected LightweightTypeReference toLightweightTypeReference(JvmTypeReference typeRef) {
-		val owner = new StandardTypeReferenceOwner(services, typeRef)
-		val factory = new LightweightTypeReferenceFactory(owner, false)
-		return factory.toLightweightReference(typeRef)
+		return new StandardTypeReferenceOwner(services, typeRef).toLightweightTypeReference(typeRef)
 	}
 }
