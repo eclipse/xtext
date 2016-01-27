@@ -70,4 +70,11 @@ public class UIStringsTest extends AbstractXbaseTestCase {
 		assertEquals("String", this.uiStrings.referenceToString(reference, "the-default-value"));
 	}
 	
+	@Test
+	public void testReferenceToString_4() throws Exception {
+		XExpression expr = expression("null", true);
+		JvmTypeReference reference = this.typeReferences.createAnyTypeReference(expr);
+		assertEquals("Object", this.uiStrings.referenceToString(reference, "the-default-value"));
+	}
+	
 }

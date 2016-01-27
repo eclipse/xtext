@@ -13,6 +13,7 @@ import static com.google.common.collect.Lists.*;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
@@ -149,12 +150,15 @@ public class UIStrings {
 		if (typeRef == null)
 			return defaultLabel;
 		
-		if (typeRef.eResource() == null)
+		if (typeRef.eResource() == null) {
+			if (typeRef instanceof JvmAnyTypeReference) {
+				return "Object";
+			}
 			return typeRef.getSimpleName();
+		}
 		
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, typeRef);
-		LightweightTypeReferenceFactory factory = new LightweightTypeReferenceFactory(owner, false);
-		LightweightTypeReference reference = factory.toLightweightReference(typeRef);
+		LightweightTypeReference reference = owner.toLightweightTypeReference(typeRef);
 		return referenceToString(reference);
 	}
 
