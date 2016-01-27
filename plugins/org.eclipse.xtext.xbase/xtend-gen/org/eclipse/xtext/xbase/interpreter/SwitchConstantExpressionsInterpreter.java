@@ -11,12 +11,17 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -42,6 +47,15 @@ import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
  */
 @SuppressWarnings("all")
 public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpreter {
+  @FinalFieldsConstructor
+  private static class SwitchContext extends Context {
+    private boolean validationMode;
+    
+    public SwitchContext(final JvmTypeReference expectedType, final ClassFinder classFinder, final Map<String, JvmIdentifiableElement> visibleFeatures, final Set<XExpression> alreadyEvaluating) {
+      super(expectedType, classFinder, visibleFeatures, alreadyEvaluating);
+    }
+  }
+  
   @Inject
   @Extension
   private ILogicalContainerProvider _iLogicalContainerProvider;
@@ -54,6 +68,17 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     HashSet<XExpression> _newHashSet = CollectionLiterals.<XExpression>newHashSet();
     Context _context = new Context(null, null, null, _newHashSet);
     return this.evaluate(it, _context);
+  }
+  
+  public Object evaluate(final XExpression it, final boolean validationMode) {
+    Object _xblockexpression = null;
+    {
+      HashSet<XExpression> _newHashSet = CollectionLiterals.<XExpression>newHashSet();
+      final SwitchConstantExpressionsInterpreter.SwitchContext ctx = new SwitchConstantExpressionsInterpreter.SwitchContext(null, null, null, _newHashSet);
+      ctx.validationMode = validationMode;
+      _xblockexpression = this.evaluate(it, ctx);
+    }
+    return _xblockexpression;
   }
   
   protected Object _internalEvaluate(final XNumberLiteral it, final Context ctx) {
@@ -87,8 +112,21 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
             return ((JvmField)feature).getConstantValue();
           }
         } else {
+          boolean _and = false;
           boolean _isFinal = ((JvmField)feature).isFinal();
-          if (_isFinal) {
+          if (!_isFinal) {
+            _and = false;
+          } else {
+            boolean _or = false;
+            boolean _isStatic = ((JvmField)feature).isStatic();
+            if (_isStatic) {
+              _or = true;
+            } else {
+              _or = ((ctx instanceof SwitchConstantExpressionsInterpreter.SwitchContext) && ((SwitchConstantExpressionsInterpreter.SwitchContext) ctx).validationMode);
+            }
+            _and = _or;
+          }
+          if (_and) {
             final XExpression associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
             boolean _notEquals = (!Objects.equal(associatedExpression, null));
             if (_notEquals) {

@@ -1478,7 +1478,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 				typeGuardName = typeGuard.getQualifiedName();
 			}
 			try {
-				Object result = switchConstantExpressionsInterpreter.evaluate(caseExpression);
+				Object result = switchConstantExpressionsInterpreter.evaluate(caseExpression, true);
 				if (result instanceof JvmTypeReference) {
 					JvmTypeReference jvmTypeReference = (JvmTypeReference) result;
 					result = jvmTypeReference.getType();
