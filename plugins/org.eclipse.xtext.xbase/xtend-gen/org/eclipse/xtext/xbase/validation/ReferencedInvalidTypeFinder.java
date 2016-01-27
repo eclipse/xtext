@@ -27,7 +27,6 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithResult;
@@ -39,19 +38,19 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
  */
 @Singleton
 @SuppressWarnings("all")
-public class RefereredInvalidTypeFinder extends TypeReferenceVisitorWithResult<LightweightTypeReference> {
+public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<LightweightTypeReference> {
   @Inject
   private CommonTypeComputationServices services;
   
-  public LightweightTypeReference findRefereredInvalidType(final JvmIdentifiableElement element) {
-    return this.internalFindRefereredInvalidType(element);
+  public LightweightTypeReference findReferencedInvalidType(final JvmIdentifiableElement element) {
+    return this.internalFindReferencedInvalidType(element);
   }
   
-  protected LightweightTypeReference _internalFindRefereredInvalidType(final JvmIdentifiableElement field) {
+  protected LightweightTypeReference _internalFindReferencedInvalidType(final JvmIdentifiableElement field) {
     return null;
   }
   
-  protected LightweightTypeReference _internalFindRefereredInvalidType(final JvmField field) {
+  protected LightweightTypeReference _internalFindReferencedInvalidType(final JvmField field) {
     JvmTypeReference _type = field.getType();
     final LightweightTypeReference type = this.toLightweightTypeReference(_type);
     boolean _isPrimitiveVoid = type.isPrimitiveVoid();
@@ -61,16 +60,16 @@ public class RefereredInvalidTypeFinder extends TypeReferenceVisitorWithResult<L
     return this.findUnknownType(type);
   }
   
-  protected LightweightTypeReference _internalFindRefereredInvalidType(final JvmOperation operation) {
+  protected LightweightTypeReference _internalFindReferencedInvalidType(final JvmOperation operation) {
     JvmTypeReference _returnType = operation.getReturnType();
     final LightweightTypeReference unknownType = this.findUnknownType(_returnType);
     if ((unknownType != null)) {
       return unknownType;
     }
-    return this._internalFindRefereredInvalidType(((JvmExecutable) operation));
+    return this._internalFindReferencedInvalidType(((JvmExecutable) operation));
   }
   
-  protected LightweightTypeReference _internalFindRefereredInvalidType(final JvmExecutable executable) {
+  protected LightweightTypeReference _internalFindReferencedInvalidType(final JvmExecutable executable) {
     EList<JvmTypeParameter> _typeParameters = executable.getTypeParameters();
     final Function1<JvmTypeParameter, EList<JvmTypeConstraint>> _function = new Function1<JvmTypeParameter, EList<JvmTypeConstraint>>() {
       @Override
@@ -100,7 +99,7 @@ public class RefereredInvalidTypeFinder extends TypeReferenceVisitorWithResult<L
       @Override
       public LightweightTypeReference apply(final JvmFormalParameter it) {
         JvmTypeReference _parameterType = it.getParameterType();
-        return RefereredInvalidTypeFinder.this.toLightweightTypeReference(_parameterType);
+        return ReferencedInvalidTypeFinder.this.toLightweightTypeReference(_parameterType);
       }
     };
     List<LightweightTypeReference> _map_2 = ListExtensions.<JvmFormalParameter, LightweightTypeReference>map(_parameters, _function_2);
@@ -182,7 +181,7 @@ public class RefereredInvalidTypeFinder extends TypeReferenceVisitorWithResult<L
     final Function1<LightweightTypeReference, LightweightTypeReference> _function = new Function1<LightweightTypeReference, LightweightTypeReference>() {
       @Override
       public LightweightTypeReference apply(final LightweightTypeReference it) {
-        return it.<LightweightTypeReference>accept(RefereredInvalidTypeFinder.this);
+        return it.<LightweightTypeReference>accept(ReferencedInvalidTypeFinder.this);
       }
     };
     List<LightweightTypeReference> _map = ListExtensions.<LightweightTypeReference, LightweightTypeReference>map(references, _function);
@@ -191,20 +190,19 @@ public class RefereredInvalidTypeFinder extends TypeReferenceVisitorWithResult<L
   }
   
   protected LightweightTypeReference toLightweightTypeReference(final JvmTypeReference typeRef) {
-    final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, typeRef);
-    final LightweightTypeReferenceFactory factory = new LightweightTypeReferenceFactory(owner, false);
-    return factory.toLightweightReference(typeRef);
+    StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.services, typeRef);
+    return _standardTypeReferenceOwner.toLightweightTypeReference(typeRef);
   }
   
-  protected LightweightTypeReference internalFindRefereredInvalidType(final JvmIdentifiableElement operation) {
+  protected LightweightTypeReference internalFindReferencedInvalidType(final JvmIdentifiableElement operation) {
     if (operation instanceof JvmOperation) {
-      return _internalFindRefereredInvalidType((JvmOperation)operation);
+      return _internalFindReferencedInvalidType((JvmOperation)operation);
     } else if (operation instanceof JvmExecutable) {
-      return _internalFindRefereredInvalidType((JvmExecutable)operation);
+      return _internalFindReferencedInvalidType((JvmExecutable)operation);
     } else if (operation instanceof JvmField) {
-      return _internalFindRefereredInvalidType((JvmField)operation);
+      return _internalFindReferencedInvalidType((JvmField)operation);
     } else if (operation != null) {
-      return _internalFindRefereredInvalidType(operation);
+      return _internalFindReferencedInvalidType(operation);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(operation).toString());
