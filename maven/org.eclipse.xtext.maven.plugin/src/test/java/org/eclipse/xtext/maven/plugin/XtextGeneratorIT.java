@@ -34,7 +34,7 @@ public class XtextGeneratorIT {
 						+ CommandLineUtils.getSystemEnvVars().getProperty("M2_HOME"));
 			}
 		}
-		new XtextGeneratorIT().verifyErrorFreeLog(ROOT, "clean", "install");
+		new XtextGeneratorIT().verifyErrorFreeLog(ROOT, false, "clean", "install");
 	}
 
 	private static String findMaven() {
@@ -107,29 +107,33 @@ public class XtextGeneratorIT {
 
 	@Test
 	public void xcore() throws Exception {
-		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang");
-		verifier.addCliOption("-U");
+		Verifier verifier = verifyErrorFreeLog(ROOT + "/xcore-lang",true, "clean", "verify");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyClass2.java");
 		verifier.assertFilePresent(
 				verifier.getBasedir() + "/target/xtext-temp/classes/org/eclipse/xcoretest/MyClass2.class");
 		verifier.assertFileMatches(verifier.getBasedir() + "/src-gen/org/eclipse/xcoretest/MyEnum.java",
-				"(?s).*MY_FIRST_LITERAL = -7.*MY_SECOND_LITERAL = 137.*");
+				"(?s).*MY_FIRST_LITERAL\\(-7.*MY_SECOND_LITERAL\\(137.*");
 	}
 
 	@Test
 	public void bug463946() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/bug463946");
-		verifier.addCliOption("-U");
 		verifier.assertFilePresent(verifier.getBasedir() + "/src-gen/xcore/bug463946/pack/MyModel.java");
 	}
 
 	private Verifier verifyErrorFreeLog(String pathToTestProject) throws IOException, VerificationException {
-		return verifyErrorFreeLog(pathToTestProject, "clean", "verify");
+		return verifyErrorFreeLog(pathToTestProject, false, "clean", "verify");
 	}
 
-	private Verifier verifyErrorFreeLog(String pathToTestProject, String... goals)
+	private Verifier verifyErrorFreeLog(String pathToTestProject, boolean updateSnapshots, String... goals)
 			throws IOException, VerificationException {
+		if(goals == null || goals.length < 1) {
+			throw new IllegalArgumentException("You need to pass at least one goal to verify log");
+		}
 		Verifier verifier = newVerifier(pathToTestProject);
+		if(updateSnapshots) {
+			verifier.addCliOption("-U");
+		}
 		for (String goal : goals) {
 			verifier.executeGoal(goal);
 		}
@@ -155,7 +159,7 @@ public class XtextGeneratorIT {
 	@AfterClass
 	static public void tearDownOnce() throws IOException, VerificationException {
 		if (!debug)
-			new XtextGeneratorIT().verifyErrorFreeLog(ROOT, "clean");
+			new XtextGeneratorIT().verifyErrorFreeLog(ROOT, false, "clean");
 	}
 
 }

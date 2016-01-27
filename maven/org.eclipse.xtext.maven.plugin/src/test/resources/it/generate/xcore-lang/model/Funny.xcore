@@ -1,4 +1,4 @@
-@GenModel(modelDirectory="./src-gen")
+@GenModel(complianceLevel="5.0", modelDirectory="./src-gen")
 
 package org.eclipse.xcoretest
 
@@ -17,6 +17,18 @@ class MyClass2 {
 	op void doSomething() {
 		MyClass1.log
 		MyClass3.log
+	}
+	
+	op EObject dummy(String theName) {
+		EObjs.findFirst[it.eClass.name == theName]
+	}
+	
+	op void checkFeature() {
+		EObjs.head.eClass.name
+	}
+
+	op void checkParameter(EObject[] collection) {
+		collection.head.eClass.name
 	}
 }
 
