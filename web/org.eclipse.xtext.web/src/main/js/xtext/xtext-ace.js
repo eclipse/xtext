@@ -264,11 +264,12 @@ define([
 					end: document.positionToIndex(range.end)
 				};
 				services.contentAssistService.invoke(editorContext, params).done(function(entries) {
-					callback(null, entries.map(function(entry) {
+					callback(null, entries.map(function(entry, index, array) {
 		    			return {
 		    				value: entry.proposal,
 		    				caption: (entry.label ? entry.label: entry.proposal),
-		    				meta: entry.description
+		    				meta: entry.description,
+		    				score: array.length - index
 		    			};
 					}));
 				});
