@@ -64,7 +64,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.jdt.launching"/>
       <import plugin="org.eclipse.xtext.ide"/>
       <import plugin="org.eclipse.emf.ecore" version="2.10.2" match="greaterOrEqual"/>
-      <import plugin="com.google.guava" version="10.0.1"/>
+      <import plugin="com.google.guava" version="14.0.0"/>
    </requires>
 
    <plugin

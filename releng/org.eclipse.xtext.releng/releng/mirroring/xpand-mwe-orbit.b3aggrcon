@@ -10,8 +10,8 @@
     <features name="org.eclipse.emf.mwe2.runtime.sdk.feature.group"/>
   </repositories>
   <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit">
-    <bundles name="com.google.guava" versionRange="[12.0.0,13.0.0)"/>
-    <bundles name="com.google.guava.source" versionRange="[12.0.0,13.0.0)"/>
+    <bundles name="com.google.guava" versionRange="[14.0.0,15.0.0)"/>
+    <bundles name="com.google.guava.source" versionRange="[14.0.0,15.0.0)"/>
     <bundles name="com.google.inject"/>
     <bundles name="com.google.inject.source"/>
     <bundles name="org.apache.ant" versionRange="[1.8.4.v201404171501]"/>
