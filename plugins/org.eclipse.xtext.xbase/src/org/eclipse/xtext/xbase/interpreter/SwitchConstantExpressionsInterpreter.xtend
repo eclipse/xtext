@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.interpreter
 
 import com.google.inject.Inject
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
@@ -33,6 +35,12 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 		evaluate(new Context(null, null, null, newHashSet))
 	}
 
+	def Object evaluate(XExpression it, boolean validationMode) {
+		val ctx = new SwitchContext(null, null, null, newHashSet)
+		ctx.validationMode = validationMode
+		evaluate(ctx)
+	}
+
 	def dispatch Object internalEvaluate(XNumberLiteral it, Context ctx) {
 		numberValue(javaType)
 	}
@@ -50,7 +58,10 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 					if (feature.constant) {
 						return feature.constantValue
 					}
-				} else if (feature.final) {
+				} else if (feature.final
+						// Java requires fields referenced in switch cases to be static, but we still want to be able
+						// to evaluate non-static final fields when checking for duplicate cases.
+						&& (feature.static || ctx instanceof SwitchContext && (ctx as SwitchContext).validationMode)) {
 					val associatedExpression = feature.associatedExpression
 					if (associatedExpression != null) {
 						return associatedExpression.evaluateAssociatedExpression(ctx)
@@ -78,6 +89,11 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 			}
 			default: evaluate(ctx)
 		}
+	}
+	
+	@FinalFieldsConstructor
+	private static class SwitchContext extends Context {
+		boolean validationMode
 	}
 
 }
