@@ -5606,6 +5606,47 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def void testBug485556() {
+		'''
+			class Foo {
+				val X = 42
+				static val Y = -7
+				def void foo(int x) {
+					switch x {
+						case X: foo(x)
+					}
+					switch x {
+						case Y: foo(x)
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import com.google.common.base.Objects;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final int X = 42;
+			  
+			  private final static int Y = (-7);
+			  
+			  public void foo(final int x) {
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (Objects.equal(x, this.X)) {
+			        _matched=true;
+			        this.foo(x);
+			      }
+			    }
+			    switch (x) {
+			      case Foo.Y:
+			        this.foo(x);
+			        break;
+			    }
+			  }
+			}
+		''')
+	}
+	
 }
 
 //class XtendCompilerTest extends AbstractXtendCompilerTest {
