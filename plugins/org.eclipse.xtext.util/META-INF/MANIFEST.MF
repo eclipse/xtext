@@ -21,7 +21,7 @@ Export-Package: org.eclipse.xtext.util;
  org.eclipse.xtext.util.formallang;x-friends:="org.eclipse.xtext.xtext.generator",
  org.eclipse.xtext.util.internal;x-friends:="org.eclipse.xtext.xtext.generator,org.eclipse.xtend.ide"
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.10.2",
- com.google.guava;bundle-version="[10.0.1,19.0.0)";visibility:=reexport,
+ com.google.guava;bundle-version="[14.0.0,19.0.0)";visibility:=reexport,
  com.google.inject;bundle-version="3.0.0";visibility:=reexport,
  javax.inject;bundle-version="1.0.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.xtend.lib

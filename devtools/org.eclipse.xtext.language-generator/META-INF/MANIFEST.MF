@@ -16,6 +16,6 @@ Require-Bundle: org.eclipse.xtext.tests,
  org.eclipse.xtext.xtext.ui.tests,
  org.eclipse.emf.codegen;bundle-version="2.10.0",
  org.eclipse.emf.codegen.ecore;bundle-version="2.10.2",
- com.google.guava;bundle-version="[10.0.1,19.0.0)",
+ com.google.guava;bundle-version="[14.0.0,19.0.0)",
  org.eclipse.emf.mwe2.launch;bundle-version="2.4.0";x-installation:=greedy
 Import-Package: org.apache.log4j;version="1.2.15"

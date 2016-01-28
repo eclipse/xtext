@@ -11,8 +11,8 @@
     <!--  Production Hudson xtext-xtend Job-->
     <cq:advisorNode namePattern="^org\.eclipse\.emf\.common$" filter="(!(ECLIPSE.TARGET.ALIAS=Helios))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="2.10.1"/>
    	
-    <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(ECLIPSE.TARGET.ALIAS=Helios)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[12.0.0,13.0.0)"/>
-    <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(!(ECLIPSE.TARGET.ALIAS=Helios))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[12.0.0,19.0.0)"/>
+    <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(ECLIPSE.TARGET.ALIAS=Helios)" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[14.0.0,15.0.0)"/>
+    <cq:advisorNode namePattern="^com\.google\.guava(?:\..+)?$" filter="(!(ECLIPSE.TARGET.ALIAS=Helios))" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[14.0.0,19.0.0)"/>
     <cq:advisorNode namePattern="^" useTargetPlatform="false">
     </cq:advisorNode>
 </cq:componentQuery>
