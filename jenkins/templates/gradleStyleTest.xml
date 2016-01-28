@@ -117,7 +117,7 @@
       <healthScaleFactor>1.0</healthScaleFactor>
     </hudson.tasks.junit.JUnitResultArchiver>
     <hudson.tasks.Mailer plugin="mailer@1.15">
-      <recipients>Sebastian.Zarnekow@itemis.de  sven.efftinge@itemis.de</recipients>
+      <recipients>dennis.huebner@itemis.de</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>true</sendToIndividuals>
     </hudson.tasks.Mailer>
