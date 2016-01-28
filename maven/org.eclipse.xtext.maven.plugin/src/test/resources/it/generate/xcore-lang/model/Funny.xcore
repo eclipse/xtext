@@ -1,4 +1,4 @@
-@GenModel(modelDirectory="./src-gen")
+@GenModel(complianceLevel="1.4", modelDirectory="./src-gen")
 
 package org.eclipse.xcoretest
 
