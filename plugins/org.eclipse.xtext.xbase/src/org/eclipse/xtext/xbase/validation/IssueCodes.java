@@ -165,6 +165,8 @@ public class IssueCodes {
 	 */
 	public static final String ABSTRACT_METHOD_INVOCATION = ISSUE_CODE_PREFIX + "abstract_method_invocation";
 	
+	public static final String REFER_INVALID_TYPES = ISSUE_CODE_PREFIX + "refer_invalid_types";
+	
 	private IssueCodes() {
 	}
 
