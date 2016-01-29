@@ -125,7 +125,7 @@ build</commands>
   </builders>
   <publishers>
     <hudson.tasks.Mailer plugin="mailer@1.15">
-      <recipients>alle-ki@itemis.de</recipients>
+      <recipients>dennis.huebner@itemis.de</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>

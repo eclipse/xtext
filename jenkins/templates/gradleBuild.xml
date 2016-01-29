@@ -82,9 +82,9 @@
 			<healthScaleFactor>1.0</healthScaleFactor>
 		</hudson.tasks.junit.JUnitResultArchiver>
 		<hudson.tasks.Mailer plugin="mailer@1.15">
-			<recipients>alle-ki@itemis.de</recipients>
+			<recipients>dennis.huebner@itemis.de</recipients>
 			<dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
-			<sendToIndividuals>true</sendToIndividuals>
+			<sendToIndividuals>false</sendToIndividuals>
 		</hudson.tasks.Mailer>
 		<hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
 			<patterns>

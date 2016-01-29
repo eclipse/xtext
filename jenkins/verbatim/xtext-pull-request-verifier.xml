@@ -251,7 +251,7 @@ junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast (xtend).la
     <hudson.tasks.Mailer plugin="mailer@1.15">
       <recipients>dennis.huebner@itemis.de</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
-      <sendToIndividuals>true</sendToIndividuals>
+      <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
     <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
       <patterns>

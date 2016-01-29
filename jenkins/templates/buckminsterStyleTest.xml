@@ -184,7 +184,7 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
 		<hudson.tasks.Mailer plugin="mailer@1.15">
 			<recipients>dennis.huebner@itemis.de</recipients>
 			<dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
-			<sendToIndividuals>true</sendToIndividuals>
+			<sendToIndividuals>false</sendToIndividuals>
 		</hudson.tasks.Mailer>
 		<com.cloudbees.jenkins.GitHubCommitNotifier plugin='github@1.11'>
 			<resultOnFailure>FAILURE</resultOnFailure>
