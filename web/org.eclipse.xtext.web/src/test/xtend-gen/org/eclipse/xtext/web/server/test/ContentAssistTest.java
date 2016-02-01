@@ -75,7 +75,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("prefix = \"\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("proposal = \"input\"");
+    _builder.append("proposal = \"end\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -93,7 +93,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("prefix = \"\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("proposal = \"output\"");
+    _builder.append("proposal = \"if\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -111,7 +111,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("prefix = \"\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("proposal = \"state\"");
+    _builder.append("proposal = \"set\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -126,7 +126,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("", _builder);
+    this.assertContentAssistResult("state foo | end", _builder);
   }
   
   @Test
@@ -144,10 +144,10 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("ContentAssistEntry [");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("prefix = \"sta\"");
+    _builder.append("prefix = \"inp\"");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("proposal = \"state\"");
+    _builder.append("proposal = \"input\"");
     _builder.newLine();
     _builder.append("      ");
     _builder.append("textReplacements = ArrayList ()");
@@ -162,7 +162,115 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append(")");
     _builder.newLine();
     _builder.append("]");
-    this.assertContentAssistResult("sta|", _builder);
+    this.assertContentAssistResult("inp|", _builder);
+  }
+  
+  @Test
+  public void testTemplate() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("ContentAssistResult [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("stateId = \"-80000000\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("entries = ArrayList (");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("ContentAssistEntry [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("prefix = \"\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("proposal = \"state name\\n\t\\nend\\n\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("label = \"state\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("description = \"Create a new state\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("escapePosition = 26");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("textReplacements = ArrayList ()");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("editPositions = ArrayList (");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("[20:4]");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("]");
+    this.assertContentAssistResult("state foo end |", _builder);
+  }
+  
+  @Test
+  public void testIndentedTemplate() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("state foo end");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("|");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("ContentAssistResult [");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("stateId = \"-80000000\"");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("entries = ArrayList (");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("ContentAssistEntry [");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("prefix = \"\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("proposal = \"state name\\n\t\t\\n\tend\\n\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("label = \"state\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("description = \"Create a new state\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("escapePosition = 28");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("textReplacements = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("editPositions = ArrayList (");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("[21:4]");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append(")");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append(")");
+    _builder_1.newLine();
+    _builder_1.append("]");
+    this.assertContentAssistResult(_builder, _builder_1);
   }
   
   @Test
