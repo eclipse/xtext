@@ -17,6 +17,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineTemplateProposalProvider;
 import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
 import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -41,6 +43,9 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
   @Inject
   @Extension
   private StatemachineGrammarAccess _statemachineGrammarAccess;
+  
+  @Inject
+  private StatemachineTemplateProposalProvider templateProvider;
   
   @Override
   protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
@@ -84,6 +89,13 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
           int _defaultPriority_1 = _proposalPriorities_1.getDefaultPriority(falseEntry);
           acceptor.accept(falseEntry, _defaultPriority_1);
         }
+      }
+    }
+    if (!_matched) {
+      ParserRule _stateRule = this._statemachineGrammarAccess.getStateRule();
+      if (Objects.equal(_rule, _stateRule)) {
+        _matched=true;
+        this.templateProvider.createStateProposal(context, acceptor);
       }
     }
     if (!_matched) {
@@ -193,6 +205,24 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
     if (!_matched) {
       super._createProposals(assignment, context, acceptor);
     }
+  }
+  
+  @Override
+  protected boolean filterKeyword(final Keyword keyword, final ContentAssistContext context) {
+    boolean _switchResult = false;
+    boolean _matched = false;
+    if (!_matched) {
+      StatemachineGrammarAccess.StateElements _stateAccess = this._statemachineGrammarAccess.getStateAccess();
+      Keyword _stateKeyword_0 = _stateAccess.getStateKeyword_0();
+      if (Objects.equal(keyword, _stateKeyword_0)) {
+        _matched=true;
+        _switchResult = false;
+      }
+    }
+    if (!_matched) {
+      _switchResult = super.filterKeyword(keyword, context);
+    }
+    return _switchResult;
   }
   
   public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {

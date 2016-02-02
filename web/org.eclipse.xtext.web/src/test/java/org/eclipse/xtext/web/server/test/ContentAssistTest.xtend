@@ -37,25 +37,25 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testKeywords() {
-		''.assertContentAssistResult('''
+		'state foo | end'.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
 			    ContentAssistEntry [
 			      prefix = ""
-			      proposal = "input"
+			      proposal = "end"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
-			      proposal = "output"
+			      proposal = "if"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
-			      proposal = "state"
+			      proposal = "set"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]
@@ -64,15 +64,58 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testKeywordWithPrefix() {
-		'sta|'.assertContentAssistResult('''
+		'inp|'.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
 			    ContentAssistEntry [
-			      prefix = "sta"
-			      proposal = "state"
+			      prefix = "inp"
+			      proposal = "input"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testTemplate() {
+		'state foo end |'.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "state name\n	\nend\n"
+			      label = "state"
+			      description = "Create a new state"
+			      escapePosition = 26
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList (
+			        [20:4]
+			      )
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testIndentedTemplate() {
+		'''
+			state foo end
+				|
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "state name\n		\n	end\n"
+			      label = "state"
+			      description = "Create a new state"
+			      escapePosition = 28
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList (
+			        [21:4]
+			      )
 			    ]
 			  )
 			]''')
