@@ -182,6 +182,116 @@ In the following table the most important standard generator fragments are liste
 |[JavaBasedContentAssistFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java)|Java-based content assist|[Content assist](304_ide_concepts.html#content-assist)|
 |[XtextAntlrUiGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java)|Content assist helper based on ANTLR|[Content assist](304_ide_concepts.html#content-assist)|
 
+### Importing Existing Metamodels {#importing-metamodels}
+
+#### Using Namespace URIs
+
+You can use namespace URI in order to import existing EPackages. This is generally preferable. The package will be read from the Xtext index and therefore your grammar is independent from the concrete location of the respective ecore file. You have to make sure though that the ecore file is contained in a project that is managed by Xtext. Therefore the project has to have the Xtext project nature attached. Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if the referencing project itself is an Xtext project.
+
+To import an EPackage, you have to state its namespace URI like this:
+
+`import "http://www.xtext.org/example/Domainmodel" as dmodel`
+
+In order to be able to find the referenced package in the language generator, some configuration values have to be set. It is usually the easiest way to register the generated EPackage interface in the workflow. The [StandaloneSetup]({{site.src.mwe}}/plugins/org.eclipse.emf.mwe.utils/src/org/eclipse/emf/mwe/utils/StandaloneSetup.java) offers the respective methods to achieve this. Simply state something like this in the workflow:
+
+```mwe2
+bean = StandaloneSetup {
+  platformUri = "${runtimeProject}/../.."
+  scanClassPath = true
+  registerGeneratedEPackage = 
+   "org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage"
+  registerGenModelFile = 
+   "platform:/resource/.../path/to/Domainmodel.genmodel"
+}
+```
+
+The registered genmodel is necessary to tell the code generator how the referenced Java classes are named. Please see below for alternatives that allow to register the genmodel, too. They may be handy if you create the genmodel in the workflow itself. 
+
+If the generated EPackage interface is not available when the language workflow is executed, you can use another approach to register the reference packages. This may happen if your want to generate EMF classes and the language infrastructure in one and the same workflow. The section in the workflow that refers the your grammar allows to set additional resources that should be loaded prior to loading the grammar file. The ecore files that contain the referenced EPackages are a good candidate for preloaded resources.
+
+```mwe2
+language = {
+  loadedResource = 
+   "platform:/resource/.../path/to/Domainmodel.ecore"
+  uri = grammarURI
+}
+```
+
+You can use either platform URIs or class path URIs to list the required ecore files (see below for details on both URI schemes).
+
+Important note: EPackages have to refer to each other by means of platform-resource or platform-plugin URIs. Otherwise you'll get validation errors in the grammar editor. However, it'll provide quick fixes to update the ecore files accordingly. There is only one exception to the rule: If you refer to data types from the ecore package or directly to [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java), the namespace URI is valid, too. This is due to special assignability rules for these types. If you craft the EPackage manually, you'll usually face no problems due to these constraints since the reflective Ecore editor inserts platform URIs by default. The other cases and legacy packages (those that were tailored to match the restrictions of older Xtext versions) can be converted with the quick fixes in the grammar editor.
+
+If you used platform-plugin URIs in the ecore files and cannot use the generated EPackage in the workflow, you'll have to register URI mappings from platform-plugin to platform-resource.
+
+```mwe2
+bean = StandaloneSetup {
+  platformUri = "${runtimeProject}/../.."
+  scanClassPath = true
+  uriMap = {
+    from = "platform:/plugin/some.plugin/model/File.ecore"
+    to = "platform:/resource/some.plugin/model/File.ecore"
+  }
+  // assuming that Domainmodel.ecore uses 
+  // platform:/plugin/some.plugin/model/File.ecore
+  registerEcoreFile = 
+   "platform:/resource/.../path/to/Domainmodel.ecore"
+  registerGenModelFile = 
+   "platform:/resource/.../path/to/Domainmodel.genmodel"
+}
+```
+
+If you face problems with that approach, it may be necessary to explicitly load the referenced packages in the language configuration of the workflow. You may run into this as soon as you refer to elements from *Ecore.ecore* and want to generate the EMF classes from within the same workflow.
+
+```mwe2
+language = {
+  loadedResource = "platform:/resource/.../path/to/Domainmodel.ecore"
+  loadedResource = "platform:/plugin/some.plugin/model/File.ecore"
+  
+  uri = "classpath:/.../path/to/Domainmodel.xtext"
+  ..
+}
+```
+
+#### Using Resource URIs - Deprecated
+
+In order to import an existing Ecore model, you'll have to have the \*.ecore file describing the EPackage you want to use somewhere in your workspace. To refer to that file you make use of the *platform:/resource* scheme. Platform URIs are a special EMF concept which allow to reference elements in the workspace independent of the physical location of the workspace. It is an abstraction that uses the Eclipse workspace concept as the logical root of each project. 
+
+An import statement referring to an Ecore file by a *platform:/resource/*-URI looks like this: 
+
+`import 'platform:/resource/my.project/model/SecretCompartments.ecore'`
+
+If you want to mix generated and imported Ecore models you'll have to configure the generator fragment in your MWE file responsible for [generating the Ecore classes]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java) with resource URIs that point to the [generator models](308_emf_integration.html#emf-codegen) of the referenced Ecore models.
+
+The *\*.genmodel* provides all kind of generator configuration used by EMF's code generator. Xtext will automatically create a generator model for derived [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java), but if it references an existing, imported Ecore model, the code generator needs to know how that code was generated in order to generate valid Java code. 
+
+Example:
+
+```mwe2
+fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
+  referencedGenModels =
+    "platform:/resource/my.project/model/SecretCompartments.genmodel"
+}
+```
+
+#### Using Class Path URIs - Deprecated
+
+We usually like to leverage Java's class path mechanism, because is is well understood and can be configured easily with Eclipse. Furthermore it allows us to package libraries as jars. If you want to reference an existing *\*.ecore* file which is contained in a jar, you can make use of the *'classpath:'* URI scheme we've introduced. For instance if you want to reference Java elements, you can use the JvmType Ecore model which is shipped as part of Xtext. 
+
+Example:
+
+`import 'classpath:/model/JvmTypes.ecore' as types`
+
+As with platform resource URIs you'll also have to tell the generator where the corresponding *\*.genmodel* can be found:
+
+```mwe2
+fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
+  referencedGenModels =
+    "classpath:/model/JvmTypes.genmodel"
+}
+```
+
+See the section on [Referring Java Types](305_xbase.html#jvmtypes) for a full explanation of this useful feature.
+
 ## Dependency Injection in Xtext with Google Guice {#dependency-injection}
 
 All Xtext components are assembled by means of Dependency Injection (DI). This means basically that whenever some code is in need for functionality (or state) from another component, one just declares the dependency rather then stating how to resolve it, i.e. obtaining that component.

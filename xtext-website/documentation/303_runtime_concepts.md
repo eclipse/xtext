@@ -56,7 +56,7 @@ If you go with the default MWE workflow for your language and you haven't used X
 
 The [IFileSystemAccess]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java) API abstracts over the different file systems the code generator my run over. These are typically Eclipse's file system, when the code generator is triggered from within the incremental build infrastructure in Eclipse, and `java.io.File` when the code generator is executed outside Eclipse, say in a headless build.
 
-A very simple implementation of a code generator for the [example statemachine language](301_grammarlanguage.html#statemachine) introduced earlier could be the following:
+A very simple implementation of a code generator for the [state machine example]({{site.src.xtext}}/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) could be the following:
 
 ```xtend
 class StatemachineGenerator implements IGenerator {
