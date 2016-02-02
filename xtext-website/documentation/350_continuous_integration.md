@@ -152,12 +152,12 @@ The second plug-in invokes the MWE2 file through a standard Java process:
     <dependency>
       <groupId>org.eclipse.xtext</groupId>
       <artifactId>org.eclipse.xtext.xtext</artifactId>
-      <version>2.7.1</version>
+      <version>2.9.1</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.xtext</groupId>
       <artifactId>org.eclipse.xtext.xbase</artifactId>
-      <version>2.7.1</version>
+      <version>2.9.1</version>
     </dependency>
   </dependencies>
 </plugin>
@@ -207,7 +207,7 @@ Now that we can build our language we need to be able to integrate our language 
 <plugin>
   <groupId>org.eclipse.xtext</groupId>
   <artifactId>xtext-maven-plugin</artifactId>
-  <version>2.7.1</version>
+  <version>2.9.1</version>
   <executions>
     <execution>
       <goals>
@@ -250,7 +250,8 @@ To further speed up the p2 dependency resolution step, use the concrete build re
 
 | Xtext 													|				EMF  								| MWE2/MWE | Xpand   | Eclipse  | All included in |
 | ------------- | ------------- | ----------- | ----------- | ----------- | ----------- |
-| [2.8.4]({{page.upsite.xtext}}releases/2.8.4/) 					| [2.11.1]({{page.upsite.emf}}2.11.x/core/) (2.10.2)  	 | [2.8.1]({{page.upsite.mwe}}releases/2.8.1/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.1]({{page.upsite.eclipse}}eclipse/updates/4.5/R-4.5-201506032000/) (3.6) | [Mars SR1*]({{page.upsite.eclipse}}releases/mars/)|
+| [2.9.1]({{page.upsite.xtext}}releases/2.9.1/) 					| [2.11.1]({{page.upsite.emf}}2.11.x/core/) (2.10.2)  	 | [2.8.3]({{page.upsite.mwe}}releases/2.8.3/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.2]({{page.upsite.eclipse}}eclipse/updates/4.5-M-builds/) (3.6) | [Mars SR2*]({{page.upsite.eclipse}}releases/mars/)|
+| [2.8.4]({{page.upsite.xtext}}releases/2.8.4/) 					| [2.11.1]({{page.upsite.emf}}2.11.x/core/) (2.10.2)  	 | [2.8.1]({{page.upsite.mwe}}releases/2.8.1/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.1]({{page.upsite.eclipse}}eclipse/updates/4.5/R-4.5-201506032000/) (3.6) | [Mars SR1]({{page.upsite.eclipse}}releases/mars/)|
 | [2.8.3]({{page.upsite.xtext}}releases/2.8.3/), [2.8.2]({{page.upsite.xtext}}releases/2.8.2/), [2.8.1]({{page.upsite.xtext}}releases/2.8.1/) | [2.11.0]({{page.upsite.emf}}2.11/core/R201506010402/) (2.10.2)  	 | [2.8.0]({{page.upsite.mwe}}releases/2.8.0/) (2.7.1) | [2.1.0]({{page.upsite.xpand}}releases/R201505260349) (1.4)  | [4.5.0]({{page.upsite.eclipse}}eclipse/updates/4.5/R-4.5-201506032000/) (3.6) | [Mars R]({{page.upsite.eclipse}}releases/mars/201506241002/)|
 | [2.7.3]({{page.upsite.xtext}}releases/maintenance/R201411190455/) | [2.10.2]({{page.upsite.emf}}2.10.x/core/S201501230452/) (2.10) | [2.7.0]({{page.upsite.mwe}}releases/R201409021051/mwe2lang/) [1.3.4]({{page.upsite.mwe}}releases/R201409021027/mwe) (2.7.0/1.2)  | [2.0.0]({{page.upsite.xpand}}releases/R201406030414) (1.4) | [4.4.2]({{page.upsite.eclipse}}eclipse/updates/4.4/R-4.4.2-201502041700) (3.6) |[Luna SR2]({{page.upsite.eclipse}}releases/luna/201502271000/)|
 
@@ -286,4 +287,3 @@ The following is an example target platform definition for Xtext 2.8.4 and eclip
 
 ---
 
-**[Next Chapter: Migrating from Xtext 1.0.x to 2.0](401_migrating_from_1_0_x.html)**
