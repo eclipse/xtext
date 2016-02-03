@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Xtext and Java
+title: Integration with Java
 part: Reference Documentation
 ---
 
@@ -1313,4 +1313,4 @@ html [
 
 ---
 
-**[Next Chapter: MWE2](306_mwe2.html)**
+**[Next Chapter: Integration with EMF](308_emf_integration.html)**

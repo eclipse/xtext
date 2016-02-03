@@ -150,4 +150,4 @@ Note that there still are synchronization issues, that's why we keep this one ma
 
 ---
 
-**[Next Chapter: Web Editor Support](310_web_integration.html)**
+**[Next Chapter: Eclipse Support](310_eclipse_support.html)**

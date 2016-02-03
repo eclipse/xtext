@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Runtime Concepts
+title: Basic Language Features
 part: Reference Documentation
 ---
 
@@ -1218,4 +1218,4 @@ This only applies to referencing dependencies to 'import'-ed Ecore models and la
 
 ---
 
-**[Next Chapter: IDE Concepts](304_ide_concepts.html)**
+**[Next Chapter: Integration with Java](305_xbase.html)**

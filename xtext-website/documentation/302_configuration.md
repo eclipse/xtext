@@ -208,7 +208,7 @@ The configuration block of our generator workflow example above contains a [Code
 
 The container for the [StandardProjectConfig]({{site.src.xtext}}/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/model/project/StandardProjectConfig.xtend) and [CodeConfig]({{site.src.xtext}}/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/CodeConfig.xtend) is of type [DefaultGeneratorModule]({{site.src.xtext}}/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/DefaultGeneratorModule.xtend) and is assigned to the property `configuration` of the [XtextGenerator]({{site.src.xtext}}/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGenerator.xtend). The DefaultGeneratorModule is actually a [Guice](https://github.com/google/guice) module, which can be subclassed in a similar way as explained in [Dependency Injection](#dependency-injection) for overriding default configurations. This allows to alter the configuration in places that are not accessible through MWE2. For instance, you could bind your own subclass of [XtextGeneratorNaming]({{site.src.xtext}}/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGeneratorNaming.xtend) in order to influence the names of generated classes.
 
-### Language Configuration
+### Language Configuration {#language-configuration}
 
 The base class for describing a language configuration is [XtextGeneratorLanguage]({{site.src.xtext}}/plugins/org.eclipse.xtext.xtext.generator/src/org/eclipse/xtext/xtext/generator/XtextGeneratorLanguage.xtend), whose most important parameters are
 
@@ -299,6 +299,8 @@ bean = StandaloneSetup {
     registerGenModelFile = "platform:/resource/my.project/model/Domainmodel.genmodel"
 }
 ```
+
+---
 
 ## Dependency Injection {#dependency-injection}
 
@@ -397,8 +399,8 @@ public static void main(String[] args) {
 
 In Xtext, you should never instantiate the injector of your language yourself. The sections [Runtime Setup](303_runtime_concepts.html#runtime-setup) and [Equinox Setup](303_runtime_concepts.html#equinox-setup) explain how to access it in different scenarios. 
 
-These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we strongly encourage you to read through the documentation on [the website of Google Guice](https://github.com/google/guice). 
+These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we strongly encourage you to read through the documentation on [the website of Google Guice](https://github.com/google/guice).
 
 ---
 
-**[Next Chapter: Runtime Concepts](303_runtime_concepts.html)**
+**[Next Chapter: Basic Language Features](303_runtime_concepts.html)**

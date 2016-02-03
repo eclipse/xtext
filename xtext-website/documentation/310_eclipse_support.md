@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: IDE Concepts
+title: Eclipse Support
 part: Reference Documentation
 ---
 
@@ -620,4 +620,4 @@ One refactoring can trigger another: When renaming a rule in an Xtext grammar, t
 
 ---
 
-**[Next Chapter: Xtext and Java](305_xbase.html)**
+**[Next Chapter: Web Editor Support](330_web_support.html)**
