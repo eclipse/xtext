@@ -6,84 +6,49 @@ part: Reference Documentation
 
 # {{page.title}} {#runtime-concepts}
 
-Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using [dependency injection](302_configuration.html#dependency-injection). Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of [ISetup]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java)-implementations in normal mode and uses Eclipse's extension mechanism when it should be configured in an OSGi environment.
+This chapter describes the platform-independent language features that are not covered by the [grammar language](301_grammarlanguage.html).
 
-## Runtime Setup (ISetup) {#runtime-setup}
-
-For each language there is an implementation of [ISetup]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java) generated. It implements a method called `createInjectorAndDoEMFRegistration()`, which can be called to do the initialization of the language infrastructure.
-
-**Caveat:** The [ISetup]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java) class is intended to be used for runtime and for unit testing, only. if you use it in a Equinox scenario, you will very likely break the running application because entries to the global registries will be overwritten.
-
-The setup method returns an [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html), which can further be used to obtain a parser, etc. It also registers the [Factory]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) and generated [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) to the respective global registries provided by EMF. So basically after having run the setup and you can start using EMF API to load and store models of your language.
-
-## Setup within Eclipse-Equinox (OSGi) {#equinox-setup}
-
-Within Eclipse we have a generated *Activator*, which creates a Guice [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) using the [modules](302_configuration.html#guicemodules). In addition an [IExecutableExtensionFactory]({{site.javadoc.eclipse-platform}}/org/eclipse/core/runtime/IExecutableExtensionFactory.html) is generated for each language, which is used to create [IExecutableExtensions]({{site.javadoc.eclipse-platform}}/org/eclipse/core/runtime/IExecutableExtension.html). This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation.
-
-The only thing you have to do in order to use this factory is to prefix the class with the factory *MyDslExecutableExtensionFactory* name followed by a colon.
-
-```xml
-<extension point="org.eclipse.ui.editors">
-  <editor
-    class="<MyDsl>ExecutableExtensionFactory:
-      org.eclipse.xtext.ui.editor.XtextEditor"
-    contributorClass=
-      "org.eclipse.ui.editors.text.TextEditorActionContributor"
-    default="true"
-    extensions="mydsl"
-    id="org.eclipse.xtext.example.MyDsl"
-    name="MyDsl Editor">
-  </editor>
-</extension>
-```
-
-## Logging
-
-Xtext uses Apache's log4j for logging. It is configured using files named *log4j.properties*, which are looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGi), all you have to do is putting such a *log4j.properties* in place and make sure that it is not overridden by other *log4j.properties* in previous class path entries.
-
-In OSGi you provide configuration by creating a fragment for *org.apache.log4j*. In this case you need to make sure that there is not any second fragment contributing a *log4j.properties* file.
-
-## Code Generation / Compilation {#code-generation}
+## Code Generation {#code-generation}
 
 Once you have a language you probably want to do something with it. There are two options, you can either write an interpreter that inspects the AST and does something based on that or you translate your language to another programming language or configuration files. In this section we're going to show how to implement a code generator for an Xtext-based language.
 
 ### IGenerator
 
-If you go with the default MWE workflow for your language and you haven't used Xbase, than you'll be provided with a callback stub that implements [IGenerator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java). It has one method that is called from the builder infrastructure whenever a DSL file has changed or should be translated otherwise. The two parameters passed in to this method are:
+If you go with the default MWE workflow for your language and you haven't used Xbase, you are provided with a callback stub that implements [IGenerator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IGenerator.java). It has one method that is called from the builder infrastructure whenever a DSL file has changed or should be translated otherwise. The two parameters passed in to this method are:
 
 *   The resource to be processed
 *   An instance of [IFileSystemAccess]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java)
 
-The [IFileSystemAccess]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java) API abstracts over the different file systems the code generator my run over. These are typically Eclipse's file system, when the code generator is triggered from within the incremental build infrastructure in Eclipse, and `java.io.File` when the code generator is executed outside Eclipse, say in a headless build.
+The [IFileSystemAccess]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java) API abstracts over the different file systems the code generator may run over. When the code generator is triggered within the incremental build infrastructure in Eclipse the underlying file system is the one provided by Eclipse, and when the code generator is executed outside Eclipse, say in a headless build, it is `java.io.File`.
 
 A very simple implementation of a code generator for the [state machine example]({{site.src.xtext}}/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) could be the following:
 
 ```xtend
 class StatemachineGenerator implements IGenerator {
 
-  override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-    fsa.generateFile("relative/path/AllTheStates.txt", '''
-      «FOR state : resource.allContents.filter(State).toIterable»
-        State «state.name»
-      «ENDFOR»
-    ''')
-  }
+    override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+        fsa.generateFile("relative/path/AllTheStates.txt", '''
+            «FOR state : resource.allContents.filter(State).toIterable»
+                State «state.name»
+            «ENDFOR»
+        ''')
+    }
 }
 ```
 
-We use Xtend for implementing code generators as it is much better suited for that task then Java (or any other language on the planet :-)). Please refer to the [Xtend documentation](http://www.xtend-lang.org) for further details. For Java developers it's extremely easy to learn, as the basics are similar and you only need to learn the additional powerful concepts.
+We use Xtend for implementing code generators as it is much better suited for that task than Java (or any other language on the planet :-)). Please refer to the [Xtend documentation](http://www.xtend-lang.org) for further details. For Java developers it's extremely easy to learn, as the basics are similar and you only need to learn the additional powerful concepts.
 
 ### Output Configurations
 
 You don't want to deal with platform or even installation dependent paths in your code generator, rather you want to be able to configure the code generator with some basic outlet roots where the different generated files should be placed under. This is what output configurations are made for.
 
-By default every language will have a single outlet, which points to `<project-root>/src-gen/`. The files that go here are treated as fully derived and will be erased by the compiler automatically when a new file should be generated. If you need additional outlets or want to have a different default configuration, you need to implement the interface [IOutputConfigurationProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IOutputConfigurationProvider.java). It's straight forward to understand and the default implementation gives you a good idea about how to implement it.
+By default every language will have a single outlet, which points to `<project-root>/src-gen/`. The files that go here are treated as fully derived and will be erased by the compiler automatically when a new file should be generated. If you need additional outlets or want to have a different default configuration, you need to implement the interface [IOutputConfigurationProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IOutputConfigurationProvider.java). It's straightforward to understand and the default implementation gives you a good idea about how to implement it.
 
 With this implementation you lay out the basic defaults which can be changed by users on a workspace or per project level using the preferences.
 
 ## Validation {#validation}
 
-Static analysis or validation is one of the most interesting aspects when developing a programming language. The users of your languages will be grateful if they get informative feedback as they type. In Xtext there are basically three different kinds of validation.
+Static analysis is one of the most interesting aspects when developing a programming language. The users of your languages will be grateful if they get informative feedback as they type. In Xtext there are basically three different kinds of validation.
 
 ### Automatic Validation
 
@@ -91,29 +56,23 @@ Some implementation aspects (e.g. the grammar, scoping) of a language have an im
 
 #### Lexer/Parser: Syntactical Validation {#syntactical-validation}
 
-The syntactical correctness of any textual input is validated automatically by the parser. The error messages are generated by the underlying parser technology. One can use the [ISyntaxErrorMessageProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java)-API to customize this messages. Any syntax errors can be retrieved from the Resource using the common EMF API:
+The syntactical correctness of any textual input is validated automatically by the parser. The error messages are generated by the underlying parser technology. One can use the [ISyntaxErrorMessageProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java) API to customize these messages. Any syntax errors can be retrieved from the Resource using the common EMF API: [`Resource.getErrors()`]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) and [`Resource.getWarnings()`]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java)
 
-*   [`Resource.getErrors()`]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java)
-*   [`Resource.getWarnings()`]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java)
+#### Linker: Cross-reference Validation {#linking-validation}
 
-#### Linker: Cross-link Validation {#linking-validation}
+Any broken cross-references can be checked generically. As cross-reference resolution is done lazily (see [linking](#linking)), any broken links are resolved lazily as well. If you want to validate whether all links are valid, you will have to navigate through the model so that all installed EMF proxies get resolved. This is done automatically in the editor.
 
-Any broken cross-links can be checked generically. As cross-link resolution is done lazily (see [linking](#linking)), any broken links are resolved lazily as well. If you want to validate whether all links are valid, you will have to navigate through the model so that all installed EMF proxies get resolved. This is done automatically in the editor.
-
-Similar to syntax errors, any unresolvable cross-links will be reported and can be obtained through:
-
-*   [`Resource.getErrors()`]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java)
-*   [`Resource.getWarnings()`]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java)
+Similarly to syntax errors, any unresolvable cross-links will be reported and can be obtained through [`Resource.getErrors()`]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) and [`Resource.getWarnings()`]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java)
 
 #### Serializer: Concrete Syntax Validation {#concrete-syntax-validation}
 
-The [IConcreteSyntaxValidator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java) validates all constraints that are implied by a grammar. Meeting these constraints for a model is mandatory to be serialized.
+The [IConcreteSyntaxValidator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java) validates all constraints that are implied by a grammar. Meeting these constraints is mandatory for a model to be serialized.
 
 Example:
 
 ```xtext
 MyRule:
-  ({MySubRule} "sub")? (strVal+=ID intVal+=INT)*;
+    ({MySubRule} "sub")? (strVal+=ID intVal+=INT)*;
 ```
 
 This implies several constraints:
@@ -121,15 +80,15 @@ This implies several constraints:
 1.  Types: only instances of *MyRule* and *MySubRule* are allowed for this rule. Subtypes are prohibited, since the parser never instantiates unknown subtypes.
 1.  Features: In case the *MyRule* and *MySubRule* have [EStructuralFeatures]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EStructuralFeature.java) besides *strVal* and *intVal*, only *strVal* and *intVal* may have [non-transient values](#transient-values).
 1.  Quantities: The following condition must be true: `strVal.size() == intVal.size()`.
-1.  Values: It must be possible to [convert all values](#value-converter) to valid tokens for terminal rule *STRING*. The same is true for *intVal* and *INT*.
+1.  Values: It must be possible to [convert all values](#value-converter) to valid tokens for the used terminal rules *ID* and *INT*.
 
-The typical use case for the concrete syntax validator is validation in non-Xtext-editors that, however, use an [XtextResource]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java). This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified "manually" (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide [meaningful error messages](#parse-tree-constructor), the concrete syntax validator is executed by default before serialization. A textual Xtext editor itself is *not* a valid use case. Here, the parser ensures that all syntactical constraints are met. Therefore, there is no value in additionally running the concrete syntax validator.
+The typical use case for the concrete syntax validator is validation in non-Xtext-editors that use an [XtextResource]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java). This is the case when combining GMF and Xtext, for example. Another use case is when the semantic model is modified "manually" (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide meaningful error messages, the concrete syntax validator is executed by default before serialization. A textual Xtext editor itself is *not* a valid use case. Here, the parser ensures that all syntactical constraints are met. Therefore there is no value in additionally running the concrete syntax validator.
 
 There are some limitations to the concrete syntax validator which result from the fact that it treats the grammar as declarative, which is something the parser doesn't always do.
 
 *   Grammar rules containing assigned actions (e.g. `{MyType.myFeature=current}` are ignored. Unassigned actions (e.g. `{MyType}`), however, are supported.
 *   Grammar rules that delegate to one or more rules containing assigned actions via unassigned rule calls are ignored.
-*   Orders within list-features can not be validated. e.g. `Rule: (foo+=R1 foo+=R2)*` implies that *foo* is expected to contain instances of *R1* and *R2* in an alternating order.
+*   Orders within list-features cannot be validated. e.g. `Rule: (foo+=R1 foo+=R2)*` implies that *foo* is expected to contain instances of *R1* and *R2* in an alternating order.
 
 To use concrete syntax validation you can let Guice inject an instance of [IConcreteSyntaxValidator]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java) and use it directly. Furthermore, there is an [adapter]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.java) which allows to use the concrete syntax validator as an [EValidator]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EValidator.java). You can, for example, enable it in your runtime module, by adding:
 

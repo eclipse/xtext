@@ -385,21 +385,58 @@ public void configureIScopeProvider(Binder binder) {
 } 
 ```
 
+These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we strongly encourage you to read through the documentation on [the website of Google Guice](https://github.com/google/guice).
+
 ### Obtaining an Injector
 
-In every application wired up with Guice there is usually one point where you initialize an [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) using the modules declared. That injector is used to create the root instance of the whole application. In plain Java environments this is something that's done in the main method. It could look like this:
+In every application wired up with Guice there is usually one point where you initialize an [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) using the modules declared. Usually this is done with the static methods of [Guice]({{site.javadoc.guice}}/com/google/inject/Guice.html). In Xtext, however, you should never instantiate the injector of your language yourself.
+
+Xtext may be used in different environments which introduce different constraints. Especially important is the difference between OSGi managed containers and plain vanilla Java programs. To honor these differences Xtext uses the concept of [ISetup]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java) implementations in normal mode and uses the extension mechanism of Eclipse when it should be configured in an OSGi environment.
+
+#### Runtime Setup {#runtime-setup}
+
+For each language there is an implementation of [ISetup]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java) generated. It implements a method called `createInjectorAndDoEMFRegistration()`, which can be called to do the initialization of the language infrastructure.
 
 ```java
 public static void main(String[] args) {
-    Injector injector = Guice.createInjector(new MyDslRuntimeModule());
+    Injector injector = new MyDslStandaloneSetup().createInjectorAndDoEMFRegistration();
     MyApplication application = injector.getInstance(MyApplication.class);
     application.run();
 }
 ```
 
-In Xtext, you should never instantiate the injector of your language yourself. The sections [Runtime Setup](303_runtime_concepts.html#runtime-setup) and [Equinox Setup](303_runtime_concepts.html#equinox-setup) explain how to access it in different scenarios. 
+The setup method returns an [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html), which can further be used to obtain a parser, etc. It also registers the [Resource.Factory]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java) and generated [EPackages]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) to the respective global registries provided by EMF. So basically after having run the setup and you can start using EMF API to load and store models of your language.
 
-These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we strongly encourage you to read through the documentation on [the website of Google Guice](https://github.com/google/guice).
+**Caveat:** The [ISetup]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java) class is intended to be used for runtime and for unit testing, only. if you use it in an Equinox scenario, you will very likely break the running application because entries to the global registries will be overwritten.
+
+#### Setup within Eclipse-Equinox (OSGi) {#equinox-setup}
+
+Within Eclipse we have a generated *Activator*, which creates a Guice [Injector]({{site.javadoc.guice}}/com/google/inject/Injector.html) using the [modules](#guicemodules). In addition an [IExecutableExtensionFactory]({{site.javadoc.eclipse-platform}}/org/eclipse/core/runtime/IExecutableExtensionFactory.html) is generated for each language, which is used to create [IExecutableExtensions]({{site.javadoc.eclipse-platform}}/org/eclipse/core/runtime/IExecutableExtension.html). This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation.
+
+The only thing you have to do in order to use this factory is to prefix the class with the generated *ExecutableExtensionFactory* name followed by a colon.
+
+```xml
+<extension point="org.eclipse.ui.editors">
+  <editor
+    class=
+      "example.MyDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+    contributorClass=
+      "org.eclipse.ui.editors.text.TextEditorActionContributor"
+    default="true"
+    extensions="mydsl"
+    id="org.eclipse.xtext.example.MyDsl"
+    name="MyDsl Editor">
+  </editor>
+</extension>
+```
+
+---
+
+## Logging
+
+Xtext uses [Apache Log4j](http://logging.apache.org/log4j/) for logging. It is configured using files named *log4j.properties*, which are looked up in the root of the Java class path. If you want to change or provide configuration at runtime (i.e. non-OSGi), all you have to do is putting such a *log4j.properties* in place and make sure that it is not overridden by other *log4j.properties* in previous class path entries.
+
+In OSGi you provide configuration by creating a fragment for *org.apache.log4j*. In this case you need to make sure that there is not any second fragment contributing a *log4j.properties* file.
 
 ---
 
