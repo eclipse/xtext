@@ -36,8 +36,8 @@
 	</li>
 	<li><a href="305_xbase.html">Xtext and Java</a>
 	</li>
-	<li><a href="306_mwe2.html">MWE2</a>
-	</li>
+	<!--li><a href="306_mwe2.html">MWE2</a>
+	</li-->
 	<li><a href="307_special_languages.html">Typical Language Configurations</a>
 	</li>
 	<li><a href="308_emf_integration.html">Integration with EMF and Other EMF Editors</a>

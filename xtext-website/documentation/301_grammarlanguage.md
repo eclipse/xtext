@@ -19,8 +19,8 @@ In the following the different concepts and syntactical constructs of the gramma
 Each Xtext grammar starts with a header that defines some properties of the grammar.
 
 ```xtext
-grammar org.xtext.example.SecretCompartments
-   with org.eclipse.xtext.common.Terminals
+grammar org.example.domainmodel.Domainmodel
+        with org.eclipse.xtext.common.Terminals
 ```
 
 The first line declares the name of the language. Xtext leverages Java's class path mechanism. This means that the name can be any valid Java qualifier. The file name needs to correspond to the language name and have the file extension `.xtext`. This means that the name has to be *SecretCompartments.xtext* and must be placed in a package *org.xtext.example* on your project's class path. In other words, your `.xtext` file has to reside in a Java source folder to be valid.
@@ -39,7 +39,7 @@ The easiest way to get started is to let Xtext infer the Ecore model from your g
 generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 ```
 
-That statement could actually be read as: generate an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) with the *name* `domainmodel` and the *nsURI* `"http://www.example.org/domainmodel/Domainmodel"`. Xtext will then add [EClasses]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) with [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) and [EReferences]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) for the different parser rules in your grammar, as described in [Ecore model inference](301_grammarlanguage.html#metamodel-inference). 
+That statement could actually be read as: generate an [EPackage]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java) with the *name* `domainmodel` and the *nsURI* `"http://www.example.org/domainmodel/Domainmodel"`. Xtext will then add [EClasses]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) with [EAttributes]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java) and [EReferences]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EReference.java) for the different parser rules in your grammar, as described in [Ecore model inference](301_grammarlanguage.html#metamodel-inference).
 
 #### EPackage Import {#epackage-import}
 
@@ -49,7 +49,9 @@ If you already have an existing EPackage, you can import it using its namespace 
 import "http://www.xtext.org/example/Domainmodel"
 ```
 
-A [URI](http://www.ietf.org/rfc/rfc2396.txt) (Uniform Resource Identifier) provides a simple and extensible means for identifying an abstract or physical resource. It is also possible to import EPackages using resource URIs, but it is strongly recommended to use the namespace URI instead because it is independent from the concrete location in the file system, much more portable across different machines, easier to configure in the workflow, and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated and is only supported for backwards compatibility.
+A [URI]({{site.src.emf}}/plugins/org.eclipse.emf.common/src/org/eclipse/emf/common/util/URI.java) (Uniform Resource Identifier) provides a simple and extensible means for identifying an abstract or physical resource. It is also possible to import EPackages using resource URIs, but it is strongly recommended to use the namespace URI instead because it is independent from the concrete location in the file system, much more portable across different machines, easier to configure in the workflow, and works better with language mixins. The import via platform URIs or file URIs can be considered deprecated and is only supported for backwards compatibility.
+
+Using package imports usually requires some [adaptations in the generator workflow](302_configuration.html#importing-metamodels).
 
 #### Ecore Model Aliases for EPackages
 

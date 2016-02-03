@@ -61,7 +61,7 @@ After you have successfully finished the wizard, you will find five new projects
 
 ![](images/30min_initialprojectlayout.png)
 
-## Write Your Own Grammar
+## Write The Grammar
 
 The wizard will automatically open the grammar file *Domainmodel.xtext* in the editor. As you can see it already contains a simple *Hello World* grammar:
 
