@@ -30,21 +30,21 @@
 	</li>
 	<li><a href="302_configuration.html">Configuration</a>
 	</li>
-	<li><a href="303_runtime_concepts.html">Runtime Concepts</a>
+	<li><a href="303_runtime_concepts.html">Language Implementation</a>
 	</li>
-	<li><a href="304_ide_concepts.html">IDE Concepts</a>
+	<li><a href="305_xbase.html">Integration with Java</a>
 	</li>
-	<li><a href="305_xbase.html">Xtext and Java</a>
+	<!--li><a href="306_mwe2.html">MWE2</a>
+	</li-->
+	<!--li><a href="307_special_languages.html">Typical Language Configurations</a>
+	</li-->
+	<li><a href="308_emf_integration.html">Integration with EMF</a>
 	</li>
-	<li><a href="306_mwe2.html">MWE2</a>
+	<li><a href="310_eclipse_support.html">Eclipse Support</a>
 	</li>
-	<li><a href="307_special_languages.html">Typical Language Configurations</a>
-	</li>
-	<li><a href="308_emf_integration.html">Integration with EMF and Other EMF Editors</a>
-	</li>
-	<!--li><a href="309_idea_integration.html">IntelliJ IDEA Support</a-->
-	</li>
-	<li><a href="310_web_integration.html">Web Editor Support</a>
+	<!--li><a href="320_idea_support.html">IntelliJ IDEA Support</a>
+	</li-->
+	<li><a href="330_web_support.html">Web Editor Support</a>
 	</li>
 	<li><a href="350_continuous_integration.html">Continuous Integration</a>
 	</li>

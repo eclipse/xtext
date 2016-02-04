@@ -284,6 +284,3 @@ The following is an example target platform definition for Xtext 2.8.4 and eclip
 </locations>
 </target>
 ```
-
----
-
