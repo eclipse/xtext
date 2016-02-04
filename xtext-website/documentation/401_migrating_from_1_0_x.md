@@ -34,7 +34,7 @@ With Xtext 2.0 an object for dealing with qualified names has been introduced: [
 
 The [IQualifiedNameConverter]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java) converts qualified names from/to their [String]({{site.javadoc.java}}/java/lang/String.html) representation. This is also where you specify the separator and wildcard strings. If you already know the segments of a qualified name, you can also create it using `QualifiedName.create(String ...)`. 
 
-[QualifiedName]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) is the new type of the *name* properties in the [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java). So if you have customized indexing, e.g. implemented your own [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java), you will have to create [qualified names]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) instead of [strings]({{site.javadoc.java}}/java/lang/String.html). [IEObjectDescriptions]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) are also used in other places such as [scoping](303_runtime_concepts.html#scoping), [linking](303_runtime_concepts.html#linking), [serialization](303_runtime_concepts.html#serialization), [content assist](304_ide_concepts.html#content-assist)...
+[QualifiedName]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) is the new type of the *name* properties in the [IEObjectDescription]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java). So if you have customized indexing, e.g. implemented your own [Manager]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java), you will have to create [qualified names]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java) instead of [strings]({{site.javadoc.java}}/java/lang/String.html). [IEObjectDescriptions]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java) are also used in other places such as [scoping](303_runtime_concepts.html#scoping), [linking](303_runtime_concepts.html#linking), [serialization](303_runtime_concepts.html#serialization), [content assist](310_eclipse_support.html#content-assist)...
 
 Furthermore, the method [IQualifiedNameProvider.getQualifiedName(EObject)]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) has been renamed to `getFullyQualifiedName(EObject)`.
 
@@ -71,7 +71,7 @@ and add
 fragment = outline.OutlineTreeProviderFragment {}
 ```
 
-After generating a new class named *MyDslOutlineTreeProvider* is generated. The API changed completely. For that reason you should take a closer look at the [chapter on the outline](304_ide_concepts.html#outline). The old classes named *MyDslTransformer* and *MyDslOutlineNodeAdapterFactory* have become obsolete and should be removed after having migrated your code to the new API.
+After generating a new class named *MyDslOutlineTreeProvider* is generated. The API changed completely. For that reason you should take a closer look at the [chapter on the outline](310_eclipse_support.html#outline). The old classes named *MyDslTransformer* and *MyDslOutlineNodeAdapterFactory* have become obsolete and should be removed after having migrated your code to the new API.
 
 ### AutoEditStrategy
 
@@ -137,8 +137,8 @@ After migrating, some of the new features in Xtext 2.0 will be automatically ava
 *   the generated debug grammar,
 *   [terminal fragments](301_grammarlanguage.html#terminal-fragment),
 *   document partitions and auto edit
-*   the redesigned [outline view](304_ide_concepts.html#outline),
-*   and the [quick fixes for the Xtext grammar language](304_ide_concepts.html#quick-fixes).
+*   the redesigned [outline view](310_eclipse_support.html#outline),
+*   and the [quick fixes for the Xtext grammar language](310_eclipse_support.html#quick-fixes).
 
 ---
 

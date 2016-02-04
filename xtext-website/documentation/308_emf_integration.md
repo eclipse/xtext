@@ -69,11 +69,61 @@ Xtext targets easy to use and naturally feeling languages. It focuses on the lex
 
 *   Prefer optional rule calls (cardinality *?* or *\**) to mandatory ones (cardinality *+* or default), such that missing references will not obstruct serialization.
 *   You should not use an Xtext-Editor on the same model instance as a self-synchronizing other editor, e.g. a canonical GMF editor (see the [EMF integration chapter](308_emf_integration.html#gmf-integration-stage1) for details). The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so elements will become stale. As the Xtext editor continuously re-parses the model on changes, this will happen rather often. It is safer to synchronize editors more loosely, e.g. on file changes.
-*   Implement an [IFragmentProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java) ([how-to](303_runtime_concepts.html#fragment-provider)) to make the XtextResource return stable fragments for its contained elements, e.g. based on composite names rather than order of appearance.
+*   Implement an [IFragmentProvider](#fragment-provider) to make the XtextResource return stable fragments for its contained elements, e.g. based on composite names rather than order of appearance.
 *   Implement an [IQualifiedNameProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java) and an [IScopeProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java) ([how-to](303_runtime_concepts.html#scoping)) to make the names of all linkable elements in cross-references unique.
 *   Provide an [IFormatter]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java) ([how-to](303_runtime_concepts.html#formatting)) to improve the readability of the generated textual models.
 *   Register an [IReferableElementsUnloader]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/IReferableElementsUnloader.java) to turn deleted/replaced model elements into EMF proxies. Design the rest of your application such that it does never keep references to [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) or to cope with proxies. That will improve the stability of your application drastically.
 *   Xtext will register an EMF [Factory]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/Resource.java), so resources with the file extension you entered when generating the Xtext plug-ins will be automatically loaded in an [XtextResource]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java) when you use EMF's [ResourceSet]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/resource/ResourceSet.java) API to load it.
+
+## Referencing From EMF {#fragment-provider}
+
+In some cases you may want to be able to reference an [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) of an Xtext model from another EMF artifact that is not managed by Xtext. In those cases URIs are used, which are made up of a part identifying the resource and a second part that points to an object. Each [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) contained in a resource can be identified by a so called *fragment*.
+
+A fragment is a part of an EMF URI and needs to be unique per resource.
+
+The generic resource shipped with EMF provides a generic path-like computation of fragments. These fragment paths are unique by default and do not have to be serialized. On the other hand, they can be easily broken by reordering the elements in a resource.
+
+With an XMI or other binary-like serialization it is also common and possible to use UUIDs. UUIDs are usually binary and technical, so you don't want to deal with them in human readable representations.
+
+However with a textual concrete syntax we want to be able to compute fragments out of the human readable information. We don't want to force people to use UUIDs (i.e. synthetic identifiers) or fragile, relative, generic paths in order to refer to [EObjects]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java).
+
+Therefore one can contribute an [IFragmentProvider]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java) per language. It has two methods: `getFragment(EObject, Fallback)` to calculate the fragment of an [EObject]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java) and `getEObject(Resource, String, Fallback)` to go the opposite direction. The [Fallback]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java) interface allows to delegate to the default strategy - which usually uses the fragment paths described above.
+
+The following snippet shows how to use qualified names as fragments:
+
+```java
+public QualifiedNameFragmentProvider implements IFragmentProvider {
+
+  @Inject
+  private IQualifiedNameProvider qualifiedNameProvider;
+
+  public String getFragment(EObject obj, Fallback fallback) {
+    String qName = qualifiedNameProvider.getQualifiedName(obj);
+    return qName != null ? qName : fallback.getFragment(obj);
+  }
+
+  public EObject getEObject(Resource resource,
+                            String fragment,
+                            Fallback fallback) {
+    if (fragment != null) {
+      Iterator<EObject> i = EcoreUtil.getAllContents(resource, false);
+      while(i.hasNext()) {
+        EObject eObject = i.next();
+        String candidateFragment = (eObject.eIsProxy())
+            ? ((InternalEObject) eObject).eProxyURI().fragment()
+            : getFragment(eObject, fallback);
+        if (fragment.equals(candidateFragment))
+          return eObject;
+      }
+    }
+    return fallback.getEObject(fragment);
+  }
+}
+```
+
+For performance reasons it is usually a good idea to navigate the resource based on the fragment information instead of traversing it completely. If you know that your fragment is computed from qualified names and your model contains something like *NamedElements*, you should split your fragment into those parts and query the root elements, the children of the best match and so on.
+
+Furthermore it's a good idea to have some kind of conflict resolution strategy to be able to distinguish between equally named elements that actually are different, e.g. properties may have the very same qualified name as entities.
 
 ## Integration with GMF Editors {#gmf-integration}
 

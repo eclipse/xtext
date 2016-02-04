@@ -30,7 +30,7 @@
 	</li>
 	<li><a href="302_configuration.html">Configuration</a>
 	</li>
-	<li><a href="303_runtime_concepts.html">Basic Language Features</a>
+	<li><a href="303_runtime_concepts.html">Language Implementation</a>
 	</li>
 	<li><a href="305_xbase.html">Integration with Java</a>
 	</li>

@@ -440,4 +440,4 @@ In OSGi you provide configuration by creating a fragment for *org.apache.log4j*.
 
 ---
 
-**[Next Chapter: Basic Language Features](303_runtime_concepts.html)**
+**[Next Chapter: Language Implementation](303_runtime_concepts.html)**

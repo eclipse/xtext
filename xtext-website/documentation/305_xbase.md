@@ -10,30 +10,6 @@ The following chapter demonstrates how to integrate your own DSL with Java. We w
 
 Throughout this chapter, we will step by step improve the [domain model example from the tutorial](103_domainmodelnextsteps.html). 
 
-## Plug-in Setup
-
-In the following, we are going to use the JVM types model and the Xbase language library. Have a look at your MWE2 workflow and make sure that 
-
-*   the Xbase models are registered in the standalone setup and
-*   the [TypesGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java) and the [XbaseGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java) are enabled.
-
-```mwe2
-bean = StandaloneSetup {
-  ...
-  registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-  registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-}
-...
-fragment = types.TypesGeneratorFragment {}
-fragment = xbase.XbaseGeneratorFragment {}
-```
-
-To avoid running out of memory when regenerating, make sure to run the workflow with reasonably sized heap and PermGen space. We recommend at least 
-
-`-Xmx512m -XX:MaxPermSize=128m`
-
-in the *VM Arguments* section of the *Arguments* tab of the run configuration. If you are experiencing ambiguity warnings from Antlr, the [usual countermeasures](301_grammarlanguage.html#syntactic-predicates) apply. The launch configuration that you get with a new Xtext project is already configured properly.
-
 ## Referring to Java Elements using JVM Types {#jvmtypes}
 
 A common case when developing languages is the requirement to refer to existing concepts of other languages. Xtext makes this very easy for other self defined DSLs. However, it is often very useful to have access to the available types of the Java Virtual Machine as well. The JVM types Ecore model enables clients to do exactly this. It is possible to create cross-references to classes, interfaces, and their fields and methods. Basically every information about the structural concepts of the Java type system is available via the JVM types. This includes annotations and their specific values and enumeration literals, too.
