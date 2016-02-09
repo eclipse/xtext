@@ -718,7 +718,7 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 		}
 		val classifier = type?.classifier
 		val feature = if(classifier instanceof EClass) classifier.getEStructuralFeature('name')
-		feature instanceof EAttribute && !feature.many && String.isAssignableFrom(feature.EType.instanceClass)
+		feature instanceof EAttribute && !feature.many && feature?.EType?.instanceClass != null && String.isAssignableFrom(feature.EType.instanceClass)
 	}
 	
 	def compileAbstractCompletionContributor(Grammar grammar) {

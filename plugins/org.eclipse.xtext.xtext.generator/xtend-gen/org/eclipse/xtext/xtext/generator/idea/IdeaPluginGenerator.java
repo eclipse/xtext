@@ -2491,19 +2491,34 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       final EStructuralFeature feature = _xifexpression;
       boolean _and = false;
       boolean _and_1 = false;
+      boolean _and_2 = false;
       if (!(feature instanceof EAttribute)) {
-        _and_1 = false;
+        _and_2 = false;
       } else {
         boolean _isMany = feature.isMany();
         boolean _not = (!_isMany);
-        _and_1 = _not;
+        _and_2 = _not;
+      }
+      if (!_and_2) {
+        _and_1 = false;
+      } else {
+        EClassifier _eType = null;
+        if (feature!=null) {
+          _eType=feature.getEType();
+        }
+        Class<?> _instanceClass = null;
+        if (_eType!=null) {
+          _instanceClass=_eType.getInstanceClass();
+        }
+        boolean _notEquals = (!Objects.equal(_instanceClass, null));
+        _and_1 = _notEquals;
       }
       if (!_and_1) {
         _and = false;
       } else {
-        EClassifier _eType = feature.getEType();
-        Class<?> _instanceClass = _eType.getInstanceClass();
-        boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
+        EClassifier _eType_1 = feature.getEType();
+        Class<?> _instanceClass_1 = _eType_1.getInstanceClass();
+        boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass_1);
         _and = _isAssignableFrom;
       }
       _xblockexpression = _and;
