@@ -79,7 +79,9 @@ public class LanguageAccess {
 				if (getOutputConfigurationProvider().getOutputConfigurations().contains(pomConfig)) {
 					confsForFsa.add(pomConfig);
 				} else {
-					LOG.warn("Output '" + pomConfig.getName() + "' is not configured in OutputConfigurationProvider.");
+					LOG.warn("Output '" + pomConfig.getName() 
+								+ "' is not configured in OutputConfigurationProvider. Used provider "
+								+ getOutputConfigurationProvider().getClass().getName());
 				}
 			}
 		}
