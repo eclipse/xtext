@@ -81,6 +81,7 @@ If you already have a project, you need to add the Xtend library:
   <groupId>org.eclipse.xtend</groupId>
   <artifactId>org.eclipse.xtend.lib</artifactId>
   <version>2.9.0</version>
+  <scope>provided</scope>
 </dependency>
 ```
 
