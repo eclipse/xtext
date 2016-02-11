@@ -19,6 +19,7 @@ import org.eclipse.emf.mwe.utils.StandaloneSetup
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.internal.Log
+import org.eclipse.emf.ecore.EcorePackage
 
 /**
  * @noextend
@@ -30,6 +31,7 @@ class XtextGeneratorResourceSetInitializer  {
 	public def void initialize(ResourceSet resourceSet, List<String> referencedResources) {
 		val delegate = new StandaloneSetup
 		delegate.resourceSet = resourceSet
+		resourceSet.packageRegistry.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE)
 		referencedResources.forEach[
 			loadResource(resourceSet)
 		]
