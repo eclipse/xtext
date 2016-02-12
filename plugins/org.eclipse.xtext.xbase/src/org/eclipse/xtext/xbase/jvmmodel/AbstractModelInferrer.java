@@ -34,9 +34,8 @@ public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 	
 	/**
 	 * @noreference This method is called by the framework
-	 * @nooverride
 	 */
-	void setContext(Resource resource) {
+	protected void setContext(Resource resource) {
 		_annotationTypesBuilder = annotationRefBuilderFactory.create(resource.getResourceSet());
 		_typeReferenceBuilder = typeRefBuilderFactory.create(resource.getResourceSet());
 	}
