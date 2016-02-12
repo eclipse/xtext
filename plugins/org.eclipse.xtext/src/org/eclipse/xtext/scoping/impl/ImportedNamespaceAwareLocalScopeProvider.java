@@ -79,6 +79,10 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		return qualifiedNameProvider;
 	}
 
+	public IQualifiedNameProvider getQualifiedNameConverter() {
+		return qualifiedNameConverter;
+	}
+
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null)
