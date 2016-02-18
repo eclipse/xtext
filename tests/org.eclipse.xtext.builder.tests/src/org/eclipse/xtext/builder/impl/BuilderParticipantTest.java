@@ -31,6 +31,9 @@ import org.eclipse.xtext.generator.OutputConfigurationProvider;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
 /**
@@ -263,26 +266,31 @@ public class BuilderParticipantTest extends AbstractBuilderParticipantTest {
 
 	@Test
 	public void testNoOutputFolderCreation() throws Exception {
-		OutputConfigurationProvider outputConfigurationProvider = new OutputConfigurationProvider() {
-			@Override
-			public Set<OutputConfiguration> getOutputConfigurations() {
-				final Set<OutputConfiguration> result = super.getOutputConfigurations();
-				OutputConfiguration configuration = result.iterator().next();
-				configuration.setCreateOutputDirectory(false);
-				return result;
-			}
-		};
-		BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
-		initializer.setOutputConfigurationProvider(outputConfigurationProvider);
-		initializer.initialize(preferenceStoreAccess);
+		withOutputConfiguration(new Procedure1<OutputConfiguration>() {
 
-		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = project.getProject().getFolder("src");
-		IFile file = folder.getFile("Foo" + F_EXT);
-		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForBuild();
-		final IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
-		assertFalse(generatedFile.exists());
+			@Override
+			public void apply(OutputConfiguration p) {
+				p.setCreateOutputDirectory(false);
+
+			}
+		}, new Procedure0() {
+
+			@Override
+			public void apply() {
+				try {
+					IJavaProject project = createJavaProject("foo");
+					addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+					IFolder folder = project.getProject().getFolder("src");
+					IFile file = folder.getFile("Foo" + F_EXT);
+					file.create(new StringInputStream("object Foo"), true, monitor());
+					waitForBuild();
+					final IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+					assertFalse(generatedFile.exists());
+				} catch (Exception e) {
+					Exceptions.sneakyThrow(e);
+				}
+
+			}
+		});
 	}
 }
