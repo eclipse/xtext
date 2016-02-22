@@ -39,6 +39,10 @@ class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<Lightwe
 	def protected dispatch LightweightTypeReference internalFindReferencedInvalidType(JvmIdentifiableElement field) {
 		return null
 	}
+	
+	def protected dispatch LightweightTypeReference internalFindReferencedInvalidType(Void field) {
+		return null
+	}
 
 	def protected dispatch LightweightTypeReference internalFindReferencedInvalidType(JvmField field) {
 		val type = field.type.toLightweightTypeReference
