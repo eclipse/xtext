@@ -113,7 +113,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference,
 			final int indexInList, final boolean select) {
 		final XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
-		if (xtextEditor != null) {
+		if (xtextEditor != null && select) {
 			boolean success = false;
 			int tries = 0;
 			while (!success || tries >= 5) {
@@ -127,14 +127,12 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 									final ITextRegion location = (crossReference != null) ? locationProvider
 											.getSignificantTextRegion(object, crossReference, indexInList)
 											: locationProvider.getSignificantTextRegion(object);
-									if (select) {
-										workbench.getDisplay().asyncExec(new Runnable() {
-											@Override
-											public void run() {
-												xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
-											}
-										});
-									}
+									workbench.getDisplay().asyncExec(new Runnable() {
+										@Override
+										public void run() {
+											xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
+										}
+									});
 								}
 							}
 						}
@@ -158,6 +156,9 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 			try {
 				EObject result = resource.getEObject(uri.fragment());
 				return result;
+			} catch (IllegalArgumentException e) {
+				// thrown if the fragment is outdated, which could possibly happen if a modification has happened in the meantime.
+				logger.warn("Couldn't resolve EObject with URI '"+uri+"'. - " + e.getMessage());
 			} catch (WrappedException e){
 				logger.error("Error while resolving EObject with URI '" + uri + "'" , e.getCause());
 			}
