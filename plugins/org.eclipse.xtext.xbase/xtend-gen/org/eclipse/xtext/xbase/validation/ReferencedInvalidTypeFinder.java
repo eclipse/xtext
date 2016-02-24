@@ -50,6 +50,10 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
     return null;
   }
   
+  protected LightweightTypeReference _internalFindReferencedInvalidType(final Void field) {
+    return null;
+  }
+  
   protected LightweightTypeReference _internalFindReferencedInvalidType(final JvmField field) {
     JvmTypeReference _type = field.getType();
     final LightweightTypeReference type = this.toLightweightTypeReference(_type);
@@ -203,6 +207,8 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
       return _internalFindReferencedInvalidType((JvmField)operation);
     } else if (operation != null) {
       return _internalFindReferencedInvalidType(operation);
+    } else if (operation == null) {
+      return _internalFindReferencedInvalidType((Void)null);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(operation).toString());
