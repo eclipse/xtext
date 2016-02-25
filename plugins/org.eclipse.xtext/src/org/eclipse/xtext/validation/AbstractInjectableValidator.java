@@ -73,6 +73,10 @@ public abstract class AbstractInjectableValidator implements EValidator {
 
 	protected abstract boolean internalValidate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context);
 	
+	/**
+	 * If this validator is for an EPackage you want to use in multiple languages, 
+	 * this method should return false. Otherwise issues will be reported twice.
+	 */
 	public boolean isLanguageSpecific() {
 		return languageName != null;
 	}

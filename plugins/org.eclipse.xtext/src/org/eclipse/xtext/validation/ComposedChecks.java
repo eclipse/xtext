@@ -13,6 +13,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Annotation that allows to modularize the validator into multiple classes.
+ * 
+ * The listed validators should override the method {@link AbstractDeclarativeValidator#register(EValidatorRegistrar)}
+ * with an empty implementation otherwise all issues will be reported twice.
+ *  
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Retention(RetentionPolicy.RUNTIME)

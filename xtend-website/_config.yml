@@ -1,6 +1,6 @@
 # Site settings
 title: Xtend - Modernized Java
-email: xtext@itemis.com
+email: sven.efftinge@typefox.io
 description: > # this means to ignore newlines until "baseurl:"
   Xtend is a flexible and expressive dialect of Java, which compiles into readable
   Java 5 compatible source code. You can use any existing Java library seamlessly.

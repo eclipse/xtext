@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.validation;
 
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -27,6 +31,12 @@ public class UIStringsTest extends AbstractXtendTestCase {
 	
 	@Inject
 	protected UIStrings uiStrings;
+	
+	@Inject
+	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private ValidationTestHelper validationTestHelper;
 	
 	/** Only the simple name of the type is specified.
 	 * The JvmTypeReference is not a proxy.
@@ -144,6 +154,21 @@ public class UIStringsTest extends AbstractXtendTestCase {
 		assertTrue(reference.getType().eIsProxy());
 		assertNotNull(reference.eResource());
 		assertEquals("ClassC", this.uiStrings.referenceToString(reference, "the-default-label"));
+	}
+	
+	@Test
+	public void testReferenceToString_4() throws Exception {
+		XtendFile file = file("class Foo { var test }");
+		assertFalse(validationTestHelper.validate(file).isEmpty());
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendField field = (XtendField) clazz.getMembers().get(0);
+		JvmField jvmField = associations.getJvmField(field);
+		JvmTypeReference reference = jvmField.getType();
+		assertNotNull(reference);
+		assertNotNull(reference.getType());
+		assertFalse(reference.getType().eIsProxy());
+		assertNotNull(reference.eResource());
+		assertEquals("Object", this.uiStrings.referenceToString(reference, "the-default-label"));
 	}
 
 }

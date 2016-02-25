@@ -363,4 +363,6 @@ The description part of the hover popup is determined by the [IEObjectDocumentat
 
 Without further adaptation the Xtext server does not provide any persistence functionality. As described in [Getting the Text Content](#getting-text-content), there are multiple ways to fill the web editor with text. If you would like to use the persistence service included in the Xtext server, you need to implement [IServerResourceHandler]({{site.src.xtext}}/web/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/persistence/IServerResourceHandler.xtend). The `get` and `put` operations declared in that interface should delegate to the persistence layer you would like to connect. For a simple example see [FileResourceHandler]({{site.src.xtext}}/web/org.eclipse.xtext.web/src/main/java/org/eclipse/xtext/web/server/persistence/FileResourceHandler.xtend).
 
+---
+
 **[Next Chapter: Continuous Integration](350_continuous_integration.html)**
