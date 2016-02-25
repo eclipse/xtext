@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -27,10 +28,13 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -48,6 +52,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -163,6 +168,42 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 						enumLiteralDeclaration.setLiteral(keyword);
 					}
 				});
+	}
+	@Fix(SPACES_IN_KEYWORD)
+	public void fixSpacesInKeyword(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if (issue.getData().length > 0 && Boolean.valueOf(issue.getData()[0]))
+		acceptor.accept(issue, "Replace Keyword with multiple Keywords", "Splits a Keyword that contains spaces or tabs into multiple Keywords", NULL_QUICKFIX_IMAGE,
+				new ISemanticModification() {
+			@Override
+			public void apply(final EObject element, IModificationContext context) {
+				Keyword keyword = (Keyword) element;
+				EStructuralFeature eContainingFeature = keyword.eContainingFeature();
+				EObject eContainer = keyword.eContainer();
+				String[] parts = keyword.getValue().split("[\\t ]");
+		
+				Object place = eContainer.eGet(eContainingFeature);
+				
+				List<Keyword> keywords = new ArrayList<Keyword>();
+				keyword.setValue(parts[0]);
+				keywords.add(keyword);
+				for (int i = 1; i < parts.length; i++) {
+					Keyword newKW = XtextFactory.eINSTANCE.createKeyword();
+					newKW.setValue(parts[i]);
+					keywords.add(newKW);
+				}
+				if (eContainingFeature.isMany()) {
+					@SuppressWarnings("unchecked")
+					List<EObject> list = (List<EObject>) place;
+					int index = list.indexOf(keyword);
+					list.remove(keyword);
+					list.addAll(index, keywords);
+				} else {
+					Group group = XtextFactory.eINSTANCE.createGroup();
+					group.getElements().addAll(keywords);
+					eContainer.eSet(eContainingFeature, group);
+				}
+			}
+		});
 	}
 
 	@Fix(INVALID_ACTION_USAGE)
