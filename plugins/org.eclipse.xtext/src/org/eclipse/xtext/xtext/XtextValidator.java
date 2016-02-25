@@ -1078,14 +1078,27 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkKeywordNoSpaces(final Keyword keyword) {
+		boolean isFixable = isFixable(keyword);
 		if (keyword.getValue() != null && !(keyword.eContainer() instanceof EnumLiteralDeclaration)) {
 			if (keyword.getValue().contains(" ") || keyword.getValue().contains("\t")) {
 				addIssue("A keyword should non contain spaces.", 
 						keyword, 
 						null,
-						SPACES_IN_KEYWORD);
+						SPACES_IN_KEYWORD, Boolean.toString(isFixable));
 			}
 		}
+	}
+
+	public boolean isFixable(final Keyword keyword) {
+		EObject c = keyword;
+		boolean isFixable = (c.eContainer() instanceof Group) || (c.eContainer() instanceof ParserRule);
+		while (isFixable && c.eContainer() != null) {
+			if (c.eContainingFeature() == XtextPackage.Literals.ASSIGNMENT__TERMINAL) {
+				isFixable = false;
+			}
+			c = c.eContainer();
+		}
+		return isFixable;
 	}
 	
 	@Check
