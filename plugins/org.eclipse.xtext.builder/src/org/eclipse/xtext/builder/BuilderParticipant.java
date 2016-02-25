@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.internal.resources.ResourceException;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -461,12 +462,16 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			}
 			if (canClean(container, config)) {
 				for (IResource resource : container.members()) {
-					if (!config.isKeepLocalHistory()) {
-						resource.delete(IResource.FORCE, monitor);
-					} else if (access == null) {
-						resource.delete(IResource.FORCE | IResource.KEEP_HISTORY, monitor);
-					} else {
-						delete(resource, config, access, monitor);
+					try {
+						if (!config.isKeepLocalHistory()) {
+							resource.delete(IResource.FORCE, monitor);
+						} else if (access == null) {
+							resource.delete(IResource.FORCE | IResource.KEEP_HISTORY, monitor);
+						} else {
+							delete(resource, config, access, monitor);
+						}
+					} catch (ResourceException e) {
+						logger.warn("Couldn't delete "+resource.getLocation()+". "+e.getMessage());
 					}
 				}
 			} else if (config.isCleanUpDerivedResources()) {
@@ -475,10 +480,14 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 					if (monitor.isCanceled()) {
 						throw new OperationCanceledException();
 					}
-					if (access != null) {
-						access.deleteFile(iFile, config.getName(), monitor);
-					} else {
-						iFile.delete(true, config.isKeepLocalHistory(), monitor);
+					try {
+						if (access != null) {
+							access.deleteFile(iFile, config.getName(), monitor);
+						} else {
+							iFile.delete(true, config.isKeepLocalHistory(), monitor);
+						}
+					} catch (ResourceException e) {
+						logger.warn("Couldn't delete "+iFile.getLocation()+". "+e.getMessage());
 					}
 				}
 			}
