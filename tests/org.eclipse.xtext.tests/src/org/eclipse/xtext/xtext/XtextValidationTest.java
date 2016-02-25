@@ -1842,6 +1842,33 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.validate();
 	}
 	
+	@Test public void testKeywordWithSpaces() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"A: foo='a b c'; B: bar='x\ty';";
+		
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, true);
+		Assignment valueAssignment = (Assignment) grammar.getRules().get(0).getAlternatives();
+		Assignment valueAssignment2 = (Assignment) grammar.getRules().get(1).getAlternatives();
+		messageAcceptor.expectedContext(
+				valueAssignment.getTerminal()
+		);
+		configureValidator(validator, messageAcceptor, valueAssignment);
+		validator.checkKeywordNoSpaces((Keyword) valueAssignment.getTerminal());
+		messageAcceptor.validate();
+		
+		messageAcceptor = new ValidatingMessageAcceptor(null, false, true);
+		messageAcceptor.expectedContext(
+				valueAssignment2.getTerminal()
+		);
+		configureValidator(validator, messageAcceptor, valueAssignment2);
+		validator.checkKeywordNoSpaces((Keyword) valueAssignment2.getTerminal());
+		messageAcceptor.validate();
+	}
+	
 	public class ValidatingMessageAcceptor extends AbstractValidationMessageAcceptor {
 
 		private final Set<EObject> contexts;
