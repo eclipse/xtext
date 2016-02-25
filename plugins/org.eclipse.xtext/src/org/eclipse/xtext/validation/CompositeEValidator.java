@@ -215,6 +215,7 @@ public class CompositeEValidator implements EValidator {
 		CompositeEValidator result = new CompositeEValidator();
 		result.equalitySupportProvider = this.equalitySupportProvider;
 		result.useEObjectValidator = this.useEObjectValidator;
+		result.operationCanceledManager = this.operationCanceledManager;
 		if (this.contents != null) {
 			result.contents = Lists.newArrayList(this.contents);
 			this.contents = null;

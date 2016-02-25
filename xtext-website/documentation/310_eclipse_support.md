@@ -1,12 +1,12 @@
 ---
 layout: documentation
-title: IDE Concepts
+title: Eclipse Support
 part: Reference Documentation
 ---
 
 # {{page.title}} {#ide-concepts}
 
-For the following part we will refer to the [state machine example](301_grammarlanguage.html#statemachine) to describe the different aspects of Xtext's UI features.
+For the following part we will refer to the [state machine example]({{site.src.xtext}}/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.fowlerdsl/src/org/eclipse/xtext/example/fowlerdsl/Statemachine.xtext) to describe the different aspects of Xtext's UI features.
 
 ## Label Provider {#label-provider}
 
@@ -620,4 +620,4 @@ One refactoring can trigger another: When renaming a rule in an Xtext grammar, t
 
 ---
 
-**[Next Chapter: Xtext and Java](305_xbase.html)**
+**[Next Chapter: Web Editor Support](330_web_support.html)**

@@ -20,14 +20,8 @@ title: Download
 		<div class="row">
 			<div class="span6">
 				<h2>Eclipse Users</h2>
-				<h3>Download Eclipse</h3>
-				<p>itemis offers tested and ready to use Eclipse distributions on <a href="https://itemis.com">itemis.com</a>.</p>
-				<p><a href="http://cta-redirect.hubspot.com/cta/redirect/761475/5f19e385-5578-4a5b-96b2-81413c6e6d20" target="_blank" class="has-popover btn btn-success btn-large pull_right">Get Eclipse from itemis.com</a>
-			      <script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script>
-			      <script type="text/javascript">
-			          hbspt.cta.load(761475, '5f19e385-5578-4a5b-96b2-81413c6e6d20');
-			      </script>
-			    </p>
+				<a href="https://www.eclipse.org/downloads/" target="_blank" class="has-popover btn btn-success btn-large pull_left">Download Eclipse</a>
+
 				<h3>Eclipse Updatesites</h3>
 				<p> To install the Xtend plug-in into a running Eclipse.</p>
 				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" class="has-popover btn btn-primary btn-medium">Releases (right click &amp; copy)</a></p>
@@ -43,12 +37,9 @@ title: Download
 			</div>
 			<div class="span6">
 				<h2>IntelliJ IDEA 15 / Android Studio 2.0 Users</h2>
-				<h3>Download IDEA</h3>
-				<p>You can download the Community Edition at jetbrains.com.</p>
-				<p>
-					<a href="http://www.jetbrains.com/idea/download/index.html" target="_blank" class="has-popover btn btn-success btn-large pull_left">Get IDEA from jetbrains.com</a>
-			    </p>
-				<h3>Plug-In Repositories</h3>
+				<a href="http://www.jetbrains.com/idea/download/index.html" target="_blank" class="has-popover btn btn-success btn-large pull_left">Download IDEA</a>
+			    
+			    <h3>Plug-In Repositories</h3>
 				<p>Choose one of the following repository URLs for IDEA :</p>
 				<p><a href="http://download.eclipse.org/modeling/tmf/xtext/idea/2.9.0/updatePlugins.xml" class="has-popover btn btn-primary btn-medium">Releases (right click &amp; copy)</a></p>
 				<!--p><a href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" class="has-popover btn btn-primary btn-medium">Milestones (right click &amp; copy)</a></p-->

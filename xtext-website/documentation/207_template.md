@@ -340,7 +340,7 @@ public class TemplateProposalProvider
 
 ## Syntax Highlighting {#templates-highlighting}
 
-Sometimes it is hard to see whether you are in text mode or in expression mode. To give the user better feedback, we have changed the way the text is highlighted. This customization consists of two parts: Add new highlighting styles in the [TemplateHighlightingConfiguration]({{site.src.sevenlang}}/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingConfiguration.xtend) and apply them to the text in the [TemplateHighlightingCalculator]({{site.src.sevenlang}}/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingCalculator.xtend). As this is rather extensively covered in the [Xtext documentation](304_ide_concepts.html#highlighting), we skip a deeper explanation here. 
+Sometimes it is hard to see whether you are in text mode or in expression mode. To give the user better feedback, we have changed the way the text is highlighted. This customization consists of two parts: Add new highlighting styles in the [TemplateHighlightingConfiguration]({{site.src.sevenlang}}/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingConfiguration.xtend) and apply them to the text in the [TemplateHighlightingCalculator]({{site.src.sevenlang}}/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingCalculator.xtend). As this is rather extensively covered in the [Xtext documentation](310_eclipse_support.html#highlighting), we skip a deeper explanation here. 
 
 ---
 

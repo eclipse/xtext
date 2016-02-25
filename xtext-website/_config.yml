@@ -1,6 +1,6 @@
 # Site settings
 title: Xtext - Language Engineering Framework
-email: xtext@itemis.com
+email: sven.efftinge@typefox.io
 description: > # this means to ignore newlines until "baseurl:"
   Xtext is a framework for development of programming languages and domain specific languages. It covers all 
   aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown 
@@ -43,7 +43,7 @@ src:
   sevenlang: "https://github.com/xtext/seven-languages-xtext/blob/master"
 
 javadoc:
-  xtext: "http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.8"
+  xtext: "http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.9"
   eclipse-platform: "http://help.eclipse.org/luna/topic/org.eclipse.platform.doc.isv/reference/api"
   eclipse-jdt: "http://help.eclipse.org/luna/topic/org.eclipse.jdt.doc.isv/reference/api"
   java: "http://docs.oracle.com/javase/8/docs/api/"

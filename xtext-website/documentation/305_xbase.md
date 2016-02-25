@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Xtext and Java
+title: Integration with Java
 part: Reference Documentation
 ---
 
@@ -9,30 +9,6 @@ part: Reference Documentation
 The following chapter demonstrates how to integrate your own DSL with Java. We will do this in four stages: First, you will learn how to refer to existing Java elements from within your language. Then you will use Xbase to refer to generic types. In the third step, you will map your own DSL's concepts to Java concepts. Last but not least, you will use both Java types and your concepts within Xbase expressions and execute it. 
 
 Throughout this chapter, we will step by step improve the [domain model example from the tutorial](103_domainmodelnextsteps.html). 
-
-## Plug-in Setup
-
-In the following, we are going to use the JVM types model and the Xbase language library. Have a look at your MWE2 workflow and make sure that 
-
-*   the Xbase models are registered in the standalone setup and
-*   the [TypesGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java) and the [XbaseGeneratorFragment]({{site.src.xtext}}/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java) are enabled.
-
-```mwe2
-bean = StandaloneSetup {
-  ...
-  registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-  registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-}
-...
-fragment = types.TypesGeneratorFragment {}
-fragment = xbase.XbaseGeneratorFragment {}
-```
-
-To avoid running out of memory when regenerating, make sure to run the workflow with reasonably sized heap and PermGen space. We recommend at least 
-
-`-Xmx512m -XX:MaxPermSize=128m`
-
-in the *VM Arguments* section of the *Arguments* tab of the run configuration. If you are experiencing ambiguity warnings from Antlr, the [usual countermeasures](301_grammarlanguage.html#syntactic-predicates) apply. The launch configuration that you get with a new Xtext project is already configured properly.
 
 ## Referring to Java Elements using JVM Types {#jvmtypes}
 
@@ -1313,4 +1289,4 @@ html [
 
 ---
 
-**[Next Chapter: MWE2](306_mwe2.html)**
+**[Next Chapter: Integration with EMF](308_emf_integration.html)**

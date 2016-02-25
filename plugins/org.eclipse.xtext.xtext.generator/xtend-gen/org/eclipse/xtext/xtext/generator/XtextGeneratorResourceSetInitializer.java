@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.utils.GenModelHelper;
@@ -40,6 +41,8 @@ public class XtextGeneratorResourceSetInitializer {
   public void initialize(final ResourceSet resourceSet, final List<String> referencedResources) {
     final StandaloneSetup delegate = new StandaloneSetup();
     delegate.setResourceSet(resourceSet);
+    EPackage.Registry _packageRegistry = resourceSet.getPackageRegistry();
+    _packageRegistry.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
     final Procedure1<String> _function = new Procedure1<String>() {
       @Override
       public void apply(final String it) {
