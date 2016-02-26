@@ -336,6 +336,10 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		
 	}
 	
+	private static enum State {
+		CLEAN, DIRTY, SHOULD_UPDATE
+	}
+	
 	@Inject
 	private IDirtyStateManager dirtyStateManager;
 
@@ -372,13 +376,13 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	
 	private volatile IDirtyStateEditorSupportClient currentClient;
 	
-	private volatile boolean isDirty;
+	private volatile State state;
 	
 	public void initializeDirtyStateSupport(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient != null)
 			throw new IllegalStateException("editor was already assigned"); //$NON-NLS-1$
 		this.currentClient = client;
-		this.isDirty = false;
+		this.state = State.CLEAN;
 		IXtextDocument document = client.getDocument();
 		initDirtyResource(document);
 		stateChangeEventBroker.addListener(this);
@@ -394,11 +398,11 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 
 	@Override
 	public void verifyText(VerifyEvent e) {
-		if (isDirty || !e.doit)
+		if (state == State.DIRTY || !e.doit)
 			return;
 		e.doit = doVerify();
 		if (e.doit)
-			isDirty = true;
+			state = State.DIRTY;
 	}
 	
 	public boolean doVerify() {
@@ -424,12 +428,12 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	public boolean isEditingPossible(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient == null || this.currentClient != client)
 			throw new IllegalStateException("Was configured with another client or not configured at all."); //$NON-NLS-1$
-		if (isDirty)
+		if (state == State.DIRTY)
 			return true;
 	
 		if (!doVerify())
 			return false;
-		isDirty = true;
+		state = State.DIRTY;
 		return true;
 	}
 
@@ -467,10 +471,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		if (this.currentClient == null || this.currentClient != client)
 			throw new IllegalStateException("Was configured with another client or not configured at all."); //$NON-NLS-1$
 		dirtyStateManager.discardDirtyState(delegatingClientAwareResource);
-		isDirty = false;
-		IResourceDescription cleanDescription = resourceDescriptions.getResourceDescription(delegatingClientAwareResource.getURI());
-		if (cleanDescription != null)
-			dirtyResource.copyState(cleanDescription);
+		state = State.SHOULD_UPDATE;
 	}
 	
 	@Override
@@ -524,12 +525,18 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		if (resource == null || !dirtyResource.isInitialized())
 			return;
 		ClientAwareDirtyResource clientAwareResource = delegatingClientAwareResource;
-		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && clientAwareResource.isDirty() && dirtyStateManager.manageDirtyState(clientAwareResource))) {
+		if (state != State.CLEAN || ((!resource.isTrackingModification() || resource.isModified()) && clientAwareResource.isDirty() && dirtyStateManager.manageDirtyState(clientAwareResource))) {
 			synchronized (dirtyStateManager) {
 				Manager resourceDescriptionManager = getResourceDescriptionManagerIfOwnLanguage(resource);
 				if (resourceDescriptionManager != null) {
 					final IResourceDescription newDescription = resourceDescriptionManager.getResourceDescription(resource);
-					if (haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
+					if (state == State.SHOULD_UPDATE || haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
+						if(state == State.SHOULD_UPDATE) {
+							if(clientAwareResource.isDirty())
+								state = State.DIRTY;
+							else 
+								state = State.CLEAN;
+						}
 						dirtyResource.copyState(newDescription);
 						if (resoureStorageFacade != null && (resource instanceof StorageAwareResource)) {
 							try {
@@ -656,7 +663,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	}
 	
 	protected boolean isDirty() {
-		return isDirty;
+		return state == State.DIRTY;
 	}
 		
 	protected ChangedResourceDescriptionDelta createDelta(IResourceDescription.Delta delta,
