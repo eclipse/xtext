@@ -590,13 +590,15 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	protected String getCurrentSourceFolder(IBuildContext context, Delta delta) {
 		Iterable<org.eclipse.xtext.util.Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(delta.getUri());
 		for (org.eclipse.xtext.util.Pair<IStorage, IProject> pair : storages) {
-			final IResource resource = (IResource) pair.getFirst();
-			IProject project = pair.getSecond();
-			for (OutputConfiguration output : getOutputConfigurations(context).values()) {
-				for (SourceMapping sourceMapping : output.getSourceMappings()) {
-					IContainer folder = ResourceUtil.getContainer(project, sourceMapping.getSourceFolder());
-					if (folder.contains(resource)) {
-						return sourceMapping.getSourceFolder();
+			if (pair.getFirst() instanceof IResource) {
+				final IResource resource = (IResource) pair.getFirst();
+				IProject project = pair.getSecond();
+				for (OutputConfiguration output : getOutputConfigurations(context).values()) {
+					for (SourceMapping sourceMapping : output.getSourceMappings()) {
+						IContainer folder = ResourceUtil.getContainer(project, sourceMapping.getSourceFolder());
+						if (folder.contains(resource)) {
+							return sourceMapping.getSourceFolder();
+						}
 					}
 				}
 			}
