@@ -53,6 +53,7 @@
 		<antlr.version>[3.2, 3.3)</antlr.version>
 		<antlr-generator-version>[2.1.1, 3.0)</antlr-generator-version>
 		<junit-version>4.8.1</junit-version>
+		<cbi-plugins.version>1.1.3</cbi-plugins.version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
@@ -159,7 +160,8 @@
 					<additionalparam>${javadoc.opts}</additionalparam>
 				</configuration>
 			</plugin>
-			<!-- add install and deploy here, otherwise deploying (deployAtEnd) may be skipped -->
+			<!-- add install and deploy here, otherwise deploying (deployAtEnd) may 
+				be skipped -->
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
 				<version>${maven-install-version}</version>
@@ -175,8 +177,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on 
-					the Maven build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -353,8 +355,43 @@
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
+		<profile>
+			<id>eclipse-sign</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<version>${cbi-plugins.version}</version>
+						<executions>
+							<execution>
+								<id>sign</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<phase>verify</phase>
+							</execution>
+						</executions>
+						<configuration>
+							<excludeInnerJars>${defaultSigning-excludeInnerJars}</excludeInnerJars>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
-
+	<pluginRepositories>
+		<pluginRepository>
+			<id>eclipse</id>
+			<url>https://repo.eclipse.org/content/repositories/cbi/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 	<url>http://www.eclipse.org/xtend/</url>
 	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
 	<developers>
@@ -373,8 +410,8 @@
 		<developer>
 			<id>jan.koehnlein</id>
 			<name>Jan</name>
-			<email>jan.koehnlein@itemis.de</email>
-			<organization>itemis AG</organization>
+			<email>jan.koehnlein@typefox.io</email>
+			<organization>TypeFox GmbH</organization>
 		</developer>
 		<developer>
 			<id>knut.wannheden</id>
@@ -391,20 +428,19 @@
 		<developer>
 			<id>moritz.eysholdt</id>
 			<name>Moritz</name>
-			<email>moritz.eysholdt@itemis.de</email>
-			<organization>itemis AG</organization>
+			<email>moritz.eysholdt@typefox.io</email>
+			<organization>TypeFox GmbH</organization>
 		</developer>
 		<developer>
 			<id>sebastian.zarnekow</id>
 			<name>Sebastian</name>
-			<email>sebastian.Zarnekow@itemis.de</email>
-			<organization>itemis AG</organization>
+			<email>sebastian.Zarnekow@gmail.com</email>
 		</developer>
 		<developer>
 			<id>sven.efftinge</id>
 			<name>Sven</name>
-			<email>sven.efftinge@itemis.de</email>
-			<organization>itemis AG</organization>
+			<email>sven.efftinge@typefox.io</email>
+			<organization>TypeFox GmbH</organization>
 			<roles>
 				<role>project lead</role>
 			</roles>
