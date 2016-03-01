@@ -44,7 +44,7 @@ public class XtextResourcesServlet extends HttpServlet {
   public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
     try {
       String _servletPath = request.getServletPath();
-      String _plus = ("/META-INF/resources" + _servletPath);
+      String _plus = ("META-INF/resources" + _servletPath);
       String _pathInfo = request.getPathInfo();
       final String resourceURI = (_plus + _pathInfo);
       final InputStream inputStream = this.getResourceAsStream(resourceURI);
@@ -69,7 +69,7 @@ public class XtextResourcesServlet extends HttpServlet {
           response.setDateHeader("Expires", _plus_1);
           response.addHeader("Cache-Control", ("private, max-age=" + Long.valueOf(XtextResourcesServlet.DEFAULT_EXPIRE_TIME_S)));
         }
-        ServletContext _servletContext = request.getServletContext();
+        ServletContext _servletContext = this.getServletContext();
         final String mimeType = _servletContext.getMimeType(fileName);
         String _elvis = null;
         if (mimeType != null) {
