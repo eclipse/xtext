@@ -373,25 +373,25 @@
 							</execution>
 						</executions>
 						<configuration>
-							<excludeInnerJars>${defaultSigning-excludeInnerJars}</excludeInnerJars>
+							<excludeInnerJars>true</excludeInnerJars>
 						</configuration>
 					</plugin>
 				</plugins>
 			</build>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>eclipse</id>
+					<url>https://repo.eclipse.org/content/repositories/cbi/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
 		</profile>
 	</profiles>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>eclipse</id>
-			<url>https://repo.eclipse.org/content/repositories/cbi/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 	<url>http://www.eclipse.org/xtend/</url>
 	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
 	<developers>
@@ -435,6 +435,7 @@
 			<id>sebastian.zarnekow</id>
 			<name>Sebastian</name>
 			<email>sebastian.Zarnekow@gmail.com</email>
+			<organization>SMACC GmbH</organization>
 		</developer>
 		<developer>
 			<id>sven.efftinge</id>
