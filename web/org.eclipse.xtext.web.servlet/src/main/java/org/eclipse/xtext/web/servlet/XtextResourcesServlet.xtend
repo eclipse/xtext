@@ -35,7 +35,7 @@ class XtextResourcesServlet extends HttpServlet {
 	}
 
 	override doGet(HttpServletRequest request, HttpServletResponse response) {
-		val resourceURI = '/META-INF/resources' + request.servletPath + request.pathInfo
+		val resourceURI = 'META-INF/resources' + request.servletPath + request.pathInfo
 		val inputStream = getResourceAsStream(resourceURI)
 		if (inputStream !== null) {
 			val tokens = resourceURI.split('/')
@@ -46,7 +46,7 @@ class XtextResourcesServlet extends HttpServlet {
 				response.setDateHeader('Expires', System.currentTimeMillis + DEFAULT_EXPIRE_TIME_MS)
 				response.addHeader('Cache-Control', 'private, max-age=' + DEFAULT_EXPIRE_TIME_S)
 			}
-			val mimeType = request.servletContext.getMimeType(fileName)
+			val mimeType = servletContext.getMimeType(fileName)
 			response.setContentType(mimeType ?: 'application/octet-stream')
 			ByteStreams.copy(inputStream, response.outputStream)
 		} else {
