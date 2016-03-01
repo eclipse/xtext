@@ -11,6 +11,7 @@ import com.google.inject.Binder;
 import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.util.concurrent.ExecutorService;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider;
@@ -29,13 +30,10 @@ import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 /**
  * Use this class to register components to be used within the web application.
  */
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class StatemachineWebModule extends AbstractStatemachineWebModule {
-  private IResourceBaseProvider resourceBaseProvider;
-  
-  public StatemachineWebModule(final Provider<ExecutorService> executorServiceProvider) {
-    super(executorServiceProvider);
-  }
+  private final IResourceBaseProvider resourceBaseProvider;
   
   @Override
   public Class<? extends IContentTypeProvider> bindIContentTypeProvider() {
@@ -44,10 +42,6 @@ public class StatemachineWebModule extends AbstractStatemachineWebModule {
   
   public Class<? extends IWebResourceSetProvider> bindIWebResourceSetProvider() {
     return StatemachineResourceSetProvider.class;
-  }
-  
-  public void setResourceBaseProvider(final IResourceBaseProvider resourceBaseProvider) {
-    this.resourceBaseProvider = resourceBaseProvider;
   }
   
   public void configureResourceBaseProvider(final Binder binder) {
@@ -71,5 +65,10 @@ public class StatemachineWebModule extends AbstractStatemachineWebModule {
   
   public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
     return StatemachineSemanticHighlightingCalculator.class;
+  }
+  
+  public StatemachineWebModule(final Provider<ExecutorService> executorServiceProvider, final IResourceBaseProvider resourceBaseProvider) {
+    super(executorServiceProvider);
+    this.resourceBaseProvider = resourceBaseProvider;
   }
 }

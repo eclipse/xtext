@@ -15,7 +15,7 @@ import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
-import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
@@ -24,17 +24,12 @@ import org.eclipse.xtext.idea.example.entities.ide.contentassist.antlr.internal.
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule;
 
-@Accessors
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class EntitiesWebModule extends DefaultXbaseWebModule {
-  private IResourceBaseProvider resourceBaseProvider;
-  
-  public EntitiesWebModule(final Provider<ExecutorService> executorServiceProvider) {
-    super(executorServiceProvider);
-  }
+  private final IResourceBaseProvider resourceBaseProvider;
   
   public ScopedBindingBuilder configureContentAssistLexer(final Binder binder) {
     AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
@@ -58,12 +53,8 @@ public class EntitiesWebModule extends DefaultXbaseWebModule {
     }
   }
   
-  @Pure
-  public IResourceBaseProvider getResourceBaseProvider() {
-    return this.resourceBaseProvider;
-  }
-  
-  public void setResourceBaseProvider(final IResourceBaseProvider resourceBaseProvider) {
+  public EntitiesWebModule(final Provider<ExecutorService> executorServiceProvider, final IResourceBaseProvider resourceBaseProvider) {
+    super(executorServiceProvider);
     this.resourceBaseProvider = resourceBaseProvider;
   }
 }
