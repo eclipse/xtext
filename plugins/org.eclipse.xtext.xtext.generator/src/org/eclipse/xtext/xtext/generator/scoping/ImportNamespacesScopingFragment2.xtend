@@ -29,6 +29,7 @@ import static org.eclipse.xtext.GrammarUtil.*
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
+import org.eclipse.xtext.resource.IBatchLinkableResource
 
 class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	
@@ -97,7 +98,12 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	
 	protected def contributeRuntimeGuiceBindings() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory
-		bindingFactory.addTypeToType(IScopeProvider.typeRef, grammar.scopeProviderClass)
+		val targetType = if (language.grammar.inheritsXbase) {
+			"org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider".typeRef
+		} else {
+			IScopeProvider.typeRef
+		}
+		bindingFactory.addTypeToType(targetType, grammar.scopeProviderClass)
 		
 		bindingFactory.addConfiguredBinding(IScopeProvider.simpleName + 'Delegate', 
 				'''binder.bind(«IScopeProvider».class).annotatedWith(«Names».named(«AbstractDeclarativeScopeProvider».NAMED_DELEGATE)).to(«getDelegateScopeProvider».class);''')
