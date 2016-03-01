@@ -85,10 +85,14 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected void collectBounds(ISemState state, int[] current, Set<ISemState> visited, int[] min, int[] max) {
 			int featureID = state.getFeatureID();
+			int previousValue = -1;
+			boolean newVisit = false;
 			if (featureID >= 0) {
 				if (current[featureID] == IGrammarConstraintProvider.MAX)
 					return;
-				if (visited.add(state))
+				previousValue = current[featureID];
+				newVisit = visited.add(state);
+				if (newVisit)
 					current[featureID]++;
 				else
 					current[featureID] = IGrammarConstraintProvider.MAX;
@@ -99,8 +103,13 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				}
 				return;
 			}
-			for (ISemState follower : state.getFollowers())
-				collectBounds(follower, current.clone(), Sets.newHashSet(visited), min, max);
+			for (ISemState follower : state.getFollowers()) {
+				collectBounds(follower, current, visited, min, max);
+			}
+			if (previousValue >= 0)
+				current[featureID] = previousValue;
+			if (newVisit)
+				visited.remove(state);
 		}
 
 		@Override
