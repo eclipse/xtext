@@ -251,10 +251,10 @@ define([
 	 * Content assist service.
 	 */
 	AceServiceBuilder.prototype.setupContentAssistService = function() {
-		var services = this.services;
-		var editorContext = services.editorContext;
 		var completer = {
 			getCompletions: function(editor, session, pos, prefix, callback) {
+				// See https://bugs.eclipse.org/bugs/show_bug.cgi?id=486615
+				var services = editor.xtextServices;
 				var params = ServiceBuilder.copy(services.options);
 				var document = session.getDocument();
 				params.offset = document.positionToIndex(pos);
@@ -263,14 +263,14 @@ define([
 					start: document.positionToIndex(range.start),
 					end: document.positionToIndex(range.end)
 				};
-				services.contentAssistService.invoke(editorContext, params).done(function(entries) {
-					callback(null, entries.map(function(entry, index, array) {
-		    			return {
-		    				value: entry.proposal,
-		    				caption: (entry.label ? entry.label: entry.proposal),
-		    				meta: entry.description,
-		    				score: array.length - index
-		    			};
+				services.contentAssistService.invoke(services.editorContext, params).done(function(entries) {
+					callback(null, entries.map(function(entry, index, a) {
+						return {
+							value: entry.proposal,
+							caption: (entry.label ? entry.label : entry.proposal),
+							meta: entry.description,
+							score: a.length - index
+						};
 					}));
 				});
 			}
