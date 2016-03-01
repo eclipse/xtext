@@ -8,8 +8,7 @@
 package org.eclipse.xtext.web.example.jetty
 
 import com.google.inject.Binder
-import com.google.inject.Provider
-import java.util.concurrent.ExecutorService
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
@@ -26,24 +25,17 @@ import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 /** 
  * Use this class to register components to be used within the web application.
  */
+@FinalFieldsConstructor
 class StatemachineWebModule extends AbstractStatemachineWebModule {
 
-	IResourceBaseProvider resourceBaseProvider
+	val IResourceBaseProvider resourceBaseProvider
 
-	new(Provider<ExecutorService> executorServiceProvider) {
-		super(executorServiceProvider)
-	}
-	
 	override bindIContentTypeProvider() {
 		return StatemachineContentTypeProvider
 	}
 	
 	def Class<? extends IWebResourceSetProvider> bindIWebResourceSetProvider() {
 		return StatemachineResourceSetProvider
-	}
-
-	def void setResourceBaseProvider(IResourceBaseProvider resourceBaseProvider) {
-		this.resourceBaseProvider = resourceBaseProvider
 	}
 
 	def void configureResourceBaseProvider(Binder binder) {
