@@ -14,7 +14,6 @@ import com.google.inject.Provider;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 import javax.servlet.annotation.WebServlet;
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup;
@@ -25,6 +24,7 @@ import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -70,13 +70,13 @@ public class MyXtextServlet extends XtextServlet {
   
   @Override
   public void destroy() {
-    final Consumer<ExecutorService> _function = new Consumer<ExecutorService>() {
+    final Procedure1<ExecutorService> _function = new Procedure1<ExecutorService>() {
       @Override
-      public void accept(final ExecutorService it) {
+      public void apply(final ExecutorService it) {
         it.shutdown();
       }
     };
-    this.executorServices.forEach(_function);
+    IterableExtensions.<ExecutorService>forEach(this.executorServices, _function);
     this.executorServices.clear();
     super.destroy();
   }
