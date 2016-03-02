@@ -223,6 +223,19 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	/**
 	 * Returns the image for the label of the given element.
 	 * 
+	 * @param description
+	 *            the {@link IEObjectDescription} for which to provide the label image
+	 * @return the image used to label the element, or <code>null</code> if there is no image for the given object
+	 * 
+	 * @since 2.9 .2
+	 */
+	protected Image getImage(IEObjectDescription description) {
+		return getImage(description.getEObjectOrProxy());
+	}
+
+	/**
+	 * Returns the image for the label of the given element.
+	 * 
 	 * @param eObject
 	 *            the element for which to provide the label image
 	 * @return the image used to label the element, or <code>null</code> if there is no image for the given object
