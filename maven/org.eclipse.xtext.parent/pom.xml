@@ -99,9 +99,8 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.4</version>
+				<version>1.6</version>
 				<configuration>
-					<executable>/usr/local/bin/gpg</executable>
 					<skip>${pgp.sign.skip}</skip>
 				</configuration>
 				<executions>
