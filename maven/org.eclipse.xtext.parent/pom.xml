@@ -268,9 +268,9 @@
 	</build>
 
 	<scm>
-		<connection>scm:git:git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git</connection>
-		<developerConnection>scm:git:ssh://git.eclipse.org:29418/tmf/org.eclipse.xtext.git</developerConnection>
-		<url>http://git.eclipse.org/c/tmf/org.eclipse.xtext.git</url>
+		<connection>scm:git:git://github.com/eclipse/xtext.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext.git</developerConnection>
+		<url>https://github.com/eclipse/xtext.git</url>
 	</scm>
 
 	<profiles>
@@ -403,8 +403,10 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
-	<url>http://www.eclipse.org/xtend/</url>
-	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
+	<url>https://www.eclipse.org/Xtext/</url>
+	<description>Xtext is a framework for development of programming languages and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure, including parser, linker, typechecker, compiler as well as editing support for Eclipse, IntelliJ IDEA and your favorite web browser. 
+
+Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
 	<developers>
 		<developer>
 			<id>dennis.huebner</id>
