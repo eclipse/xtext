@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl.javasupport;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -17,11 +15,8 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
-import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaElementDelta;
-import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.builder.impl.BuildScheduler;
 import org.eclipse.xtext.builder.impl.IBuildFlag;
 import org.eclipse.xtext.resource.impl.CoarseGrainedChangeEvent;
