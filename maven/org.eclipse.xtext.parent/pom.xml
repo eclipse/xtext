@@ -53,6 +53,7 @@
 		<antlr.version>[3.2, 3.3)</antlr.version>
 		<antlr-generator-version>[2.1.1, 3.0)</antlr-generator-version>
 		<junit-version>4.8.1</junit-version>
+		<cbi-plugins.version>1.1.3</cbi-plugins.version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
@@ -98,9 +99,8 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.4</version>
+				<version>1.6</version>
 				<configuration>
-					<executable>/usr/local/bin/gpg</executable>
 					<skip>${pgp.sign.skip}</skip>
 				</configuration>
 				<executions>
@@ -159,7 +159,8 @@
 					<additionalparam>${javadoc.opts}</additionalparam>
 				</configuration>
 			</plugin>
-			<!-- add install and deploy here, otherwise deploying (deployAtEnd) may be skipped -->
+			<!-- add install and deploy here, otherwise deploying (deployAtEnd) may 
+				be skipped -->
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
 				<version>${maven-install-version}</version>
@@ -175,8 +176,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on 
-					the Maven build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -267,9 +268,9 @@
 	</build>
 
 	<scm>
-		<connection>scm:git:git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git</connection>
-		<developerConnection>scm:git:ssh://git.eclipse.org:29418/tmf/org.eclipse.xtext.git</developerConnection>
-		<url>http://git.eclipse.org/c/tmf/org.eclipse.xtext.git</url>
+		<connection>scm:git:git://github.com/eclipse/xtext.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext.git</developerConnection>
+		<url>https://github.com/eclipse/xtext.git</url>
 	</scm>
 
 	<profiles>
@@ -353,10 +354,59 @@
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
+		<profile>
+			<id>eclipse-sign</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<version>${cbi-plugins.version}</version>
+						<executions>
+							<execution>
+								<id>sign</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<phase>verify</phase>
+							</execution>
+						</executions>
+						<configuration>
+							<excludeInnerJars>true</excludeInnerJars>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>eclipse</id>
+					<url>https://repo.eclipse.org/content/repositories/cbi/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
 	</profiles>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+	<url>https://www.eclipse.org/Xtext/</url>
+	<description>Xtext is a framework for development of programming languages and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure, including parser, linker, typechecker, compiler as well as editing support for Eclipse, IntelliJ IDEA and your favorite web browser. 
 
-	<url>http://www.eclipse.org/xtend/</url>
-	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
+Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
 	<developers>
 		<developer>
 			<id>dennis.huebner</id>
@@ -373,8 +423,8 @@
 		<developer>
 			<id>jan.koehnlein</id>
 			<name>Jan</name>
-			<email>jan.koehnlein@itemis.de</email>
-			<organization>itemis AG</organization>
+			<email>jan.koehnlein@typefox.io</email>
+			<organization>TypeFox GmbH</organization>
 		</developer>
 		<developer>
 			<id>knut.wannheden</id>
@@ -391,20 +441,20 @@
 		<developer>
 			<id>moritz.eysholdt</id>
 			<name>Moritz</name>
-			<email>moritz.eysholdt@itemis.de</email>
-			<organization>itemis AG</organization>
+			<email>moritz.eysholdt@typefox.io</email>
+			<organization>TypeFox GmbH</organization>
 		</developer>
 		<developer>
 			<id>sebastian.zarnekow</id>
 			<name>Sebastian</name>
-			<email>sebastian.Zarnekow@itemis.de</email>
-			<organization>itemis AG</organization>
+			<email>sebastian.Zarnekow@gmail.com</email>
+			<organization>SMACC GmbH</organization>
 		</developer>
 		<developer>
 			<id>sven.efftinge</id>
 			<name>Sven</name>
-			<email>sven.efftinge@itemis.de</email>
-			<organization>itemis AG</organization>
+			<email>sven.efftinge@typefox.io</email>
+			<organization>TypeFox GmbH</organization>
 			<roles>
 				<role>project lead</role>
 			</roles>
