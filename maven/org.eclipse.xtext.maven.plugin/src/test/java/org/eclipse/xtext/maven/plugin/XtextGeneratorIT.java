@@ -47,8 +47,8 @@ public class XtextGeneratorIT {
 		}
 		return null;
 	}
-	
-	private final static boolean debug = false;
+
+	private final static boolean debug = Boolean.getBoolean("xtext.it.tests.debug");
 
 	@Test
 	public void simpleLang() throws Exception {
@@ -145,12 +145,16 @@ public class XtextGeneratorIT {
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debug);
-		verifier.setMavenDebug(debug);
 		// verifier.setForkJvm(!debug);
-		verifier.setEnvironmentVariable("MAVEN_OPTS", "-Xmx2048m -XX:MaxPermSize=256m");
+		String mvnOpts = CommandLineUtils.getSystemEnvVars().getProperty("MAVEN_OPTS");
+		String modMvnOpts = mvnOpts != null ? mvnOpts : "" + "-Xmx2048m -XX:MaxPermSize=256m";
+		verifier.setEnvironmentVariable("MAVEN_OPTS", modMvnOpts);
+		if (debug) {
+			verifier.setMavenDebug(debug);
+			System.out.println("Modified Maven Opts: " + modMvnOpts);
+		}
 		return verifier;
 	}
-
 
 	@AfterClass
 	static public void tearDownOnce() throws IOException, VerificationException {
