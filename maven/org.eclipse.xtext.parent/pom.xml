@@ -60,7 +60,7 @@
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
-		<pgp.sign.skip>true</pgp.sign.skip>
+		<sign.skip>true</sign.skip>
 	</properties>
 	<licenses>
 		<license>
@@ -101,7 +101,7 @@
 				<artifactId>maven-gpg-plugin</artifactId>
 				<version>1.6</version>
 				<configuration>
-					<skip>${pgp.sign.skip}</skip>
+					<skip>${sign.skip}</skip>
 				</configuration>
 				<executions>
 					<execution>
@@ -356,6 +356,12 @@
 		</profile>
 		<profile>
 			<id>eclipse-sign</id>
+			<activation>
+				<property>
+					<name>sign.skip</name>
+					<value>false</value>
+				</property>
+			</activation>
 			<build>
 				<plugins>
 					<plugin>
@@ -372,6 +378,11 @@
 							</execution>
 						</executions>
 						<configuration>
+							<skip>${sign.skip}</skip>
+							<resigningStrategy>DO_NOT_RESIGN</resigningStrategy>
+							<!-- Indigo compatibility: only supports SHA1 RSA/DSA -->
+							<digestAlgorithm>SHA1</digestAlgorithm>
+							<signatureAlgorithm>SHA1withRSA</signatureAlgorithm>
 							<excludeInnerJars>true</excludeInnerJars>
 						</configuration>
 					</plugin>
@@ -385,7 +396,7 @@
 						<enabled>true</enabled>
 					</releases>
 					<snapshots>
-						<enabled>true</enabled>
+						<enabled>false</enabled>
 					</snapshots>
 				</pluginRepository>
 			</pluginRepositories>
