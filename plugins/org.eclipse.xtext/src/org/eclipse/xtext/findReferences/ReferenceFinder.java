@@ -178,12 +178,12 @@ public class ReferenceFinder implements IReferenceFinder {
 		URI sourceURI = null;
 		if (doProcess(sourceCandidate, targetURIs)) {
 			for(EReference ref: sourceCandidate.eClass().getEAllReferences()) {
-				if(sourceCandidate.eIsSet(ref)) {
+				Object value = sourceCandidate.eGet(ref, false);
+				if(sourceCandidate.eIsSet(ref) && value != null) {
 					if(ref.isContainment()) {
-						Object content = sourceCandidate.eGet(ref, false);
 						if(ref.isMany()) {
 							@SuppressWarnings("unchecked")
-							InternalEList<EObject> contentList = (InternalEList<EObject>) content;
+							InternalEList<EObject> contentList = (InternalEList<EObject>) value;
 							for(int i=0; i<contentList.size(); ++i) {
 								EObject childElement = contentList.basicGet(i);
 								if(!childElement.eIsProxy()) {
@@ -191,14 +191,13 @@ public class ReferenceFinder implements IReferenceFinder {
 								}
 							}
 						} else {
-							EObject childElement = (EObject) content;
+							EObject childElement = (EObject) value;
 							if(!childElement.eIsProxy()) {
 								findLocalReferencesFromElement(targetURIs, childElement, localResource, acceptor);
 							}
 						}
 					} else if (!ref.isContainer()) {
 						if (doProcess(ref, targetURIs)) {
-							Object value = sourceCandidate.eGet(ref, false);
 							if(ref.isMany()) {
 								@SuppressWarnings("unchecked")
 								InternalEList<EObject> values = (InternalEList<EObject>) value;
