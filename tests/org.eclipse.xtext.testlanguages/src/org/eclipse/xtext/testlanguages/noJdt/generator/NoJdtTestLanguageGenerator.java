@@ -32,6 +32,8 @@ public class NoJdtTestLanguageGenerator extends AbstractGenerator {
 				return greeting.getName();
 			}
 		});
-		fsa.generateFile("greetings.txt", "People to greet: " + IteratorExtensions.join(names, ", "));
+		String fileName = resource.getURI().lastSegment();
+		if(fileName == null) fileName = "greetings";
+		fsa.generateFile(fileName+".txt", "People to greet: " + IteratorExtensions.join(names, ", "));
 	}
 }
