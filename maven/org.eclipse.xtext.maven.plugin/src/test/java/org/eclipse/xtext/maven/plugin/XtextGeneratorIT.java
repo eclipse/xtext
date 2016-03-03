@@ -47,19 +47,19 @@ public class XtextGeneratorIT {
 		}
 		return null;
 	}
-	
-	private final static boolean debug = false;
+
+	private final static boolean debug = Boolean.getBoolean("xtext.it.tests.debug");
 
 	@Test
 	public void simpleLang() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/simple-lang");
-		verifier.assertFileMatches(verifier.getBasedir() + "/src-gen/greetings.txt", "People to greet\\: Test");
+		verifier.assertFileMatches(verifier.getBasedir() + "/src-gen/RefModel.nojdt.txt", "People to greet\\: Test");
 	}
 
 	@Test
 	public void mavenConfiguration() throws Exception {
 		Verifier verifier = verifyErrorFreeLog(ROOT + "/maven-config");
-		verifier.assertFileMatches(verifier.getBasedir() + "/model2-output/greetings.txt", "People to greet\\: maven2");
+		verifier.assertFileMatches(verifier.getBasedir() + "/model2-output/Model.nojdt.txt", "People to greet\\: maven2");
 		verifier.assertFilePresent(verifier.getBasedir() + "/model-output/IntegrationTestXbase.java");
 	}
 
@@ -149,12 +149,16 @@ public class XtextGeneratorIT {
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debug);
-		verifier.setMavenDebug(debug);
 		// verifier.setForkJvm(!debug);
-		verifier.setEnvironmentVariable("MAVEN_OPTS", "-Xmx2048m -XX:MaxPermSize=256m");
+		String mvnOpts = CommandLineUtils.getSystemEnvVars().getProperty("MAVEN_OPTS");
+		String modMvnOpts = (mvnOpts != null ? mvnOpts + " " : "") + "-Xmx1g -XX:MaxPermSize=256m";
+		verifier.setEnvironmentVariable("MAVEN_OPTS", modMvnOpts);
+		if (debug) {
+			verifier.setMavenDebug(debug);
+			System.out.println("Modified Maven Opts: " + modMvnOpts);
+		}
 		return verifier;
 	}
-
 
 	@AfterClass
 	static public void tearDownOnce() throws IOException, VerificationException {
