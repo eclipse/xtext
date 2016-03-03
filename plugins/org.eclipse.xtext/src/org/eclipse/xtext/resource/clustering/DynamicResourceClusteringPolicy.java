@@ -51,16 +51,17 @@ public class DynamicResourceClusteringPolicy implements IResourceClusteringPolic
 		if (alreadyProcessed == 0)
 			return true;
 		final long maxMemory = Runtime.getRuntime().maxMemory();
-		if (maxMemory > Runtime.getRuntime().totalMemory() + minimumFreeMemory)
+		final long totalMemory = Runtime.getRuntime().totalMemory();
+		if (maxMemory > totalMemory + minimumFreeMemory)
 			return true;
 		final long freeMemory = Runtime.getRuntime().freeMemory();
 		if (freeMemory < minimumFreeMemory) {
-			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, maxMemory);
+			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, totalMemory);
 			return false;
 		} else if (alreadyProcessed < minimumClusterSize) {
 			return true;
 		} else if (freeMemory < maxMemory / 100 * minimumPercentFreeMemory) {
-			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, maxMemory);
+			logClusterCapped(resourceSet, alreadyProcessed, freeMemory, totalMemory);
 			return false;
 		}
 
@@ -78,7 +79,8 @@ public class DynamicResourceClusteringPolicy implements IResourceClusteringPolic
 		}
 		if (!hasLoggedAboutIncreasingHeap) {
 			hasLoggedAboutIncreasingHeap = true;
-			LOGGER.error("Your total heap size ("+(totalMemory >> 20)+"m) is too small. Please increase the maximum heap for your running JVM!");
+			LOGGER.warn("Your total heap size (" + (totalMemory >> 20) + "m) is too small (free: " + (freeMemory >> 20) + "m, max: "
+					+ (Runtime.getRuntime().maxMemory() >> 20) + "m). Please increase the maximum heap for your running JVM!");
 		}
 	}
 	

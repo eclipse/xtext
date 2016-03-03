@@ -166,10 +166,19 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   
   protected void contributeRuntimeGuiceBindings() {
     final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
-    TypeReference _typeRef = TypeReference.typeRef(IScopeProvider.class);
-    Grammar _grammar = this.getGrammar();
-    TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar);
-    bindingFactory.addTypeToType(_typeRef, _scopeProviderClass);
+    TypeReference _xifexpression = null;
+    IXtextGeneratorLanguage _language = this.getLanguage();
+    Grammar _grammar = _language.getGrammar();
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
+    if (_inheritsXbase) {
+      _xifexpression = TypeReference.typeRef("org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider");
+    } else {
+      _xifexpression = TypeReference.typeRef(IScopeProvider.class);
+    }
+    final TypeReference targetType = _xifexpression;
+    Grammar _grammar_1 = this.getGrammar();
+    TypeReference _scopeProviderClass = this.getScopeProviderClass(_grammar_1);
+    bindingFactory.addTypeToType(targetType, _scopeProviderClass);
     String _simpleName = IScopeProvider.class.getSimpleName();
     String _plus = (_simpleName + "Delegate");
     StringConcatenationClient _client = new StringConcatenationClient() {
@@ -188,9 +197,9 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       }
     };
     bindingFactory.addConfiguredBinding(_plus, _client);
-    TypeReference _typeRef_1 = TypeReference.typeRef(IGlobalScopeProvider.class);
-    TypeReference _typeRef_2 = TypeReference.typeRef(DefaultGlobalScopeProvider.class);
-    bindingFactory.addTypeToType(_typeRef_1, _typeRef_2);
+    TypeReference _typeRef = TypeReference.typeRef(IGlobalScopeProvider.class);
+    TypeReference _typeRef_1 = TypeReference.typeRef(DefaultGlobalScopeProvider.class);
+    bindingFactory.addTypeToType(_typeRef, _typeRef_1);
     String _simpleName_1 = IgnoreCaseLinking.class.getSimpleName();
     StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
@@ -203,8 +212,8 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       }
     };
     bindingFactory.addConfiguredBinding(_simpleName_1, _client_1);
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
+    GuiceModuleAccess _runtimeGenModule = _language_1.getRuntimeGenModule();
     bindingFactory.contributeTo(_runtimeGenModule);
   }
   
