@@ -25,6 +25,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.eclipse.swt.custom.StyledText
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -37,7 +38,9 @@ class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 	
 	List<IResourceDescription.Event> events
 	
-	Display display
+	Display myDisplay
+	
+	StyledText styledText
 	
 	@Before
 	def void setUpEditor() {
@@ -46,12 +49,16 @@ class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 		val file = createFile('test/foo.testlanguage', 'stuff foo')
 		editor = openEditor(file)
 		yieldToQueuedDisplayJobs(new NullProgressMonitor)
+		editor.site.page.activate(editor)
+		yieldToQueuedDisplayJobs(new NullProgressMonitor)
 		events = <IResourceDescription.Event>newArrayList
 		editor.dirtyStateEditorSupport.dirtyStateManager.addListener [
 			events += it
 		]
-		display = editor.site.shell.display
-		val styledText = editor.internalSourceViewer.textWidget
+		myDisplay = editor.site.shell.display
+		myDisplay.shells.head.forceActive
+		yieldToQueuedDisplayJobs(new NullProgressMonitor)
+		styledText = editor.internalSourceViewer.textWidget
 		styledText.caretOffset = 9
 		styledText.setFocus
 		waitForReconciler(editor)
@@ -64,25 +71,15 @@ class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 	 */	
 	@Test
 	def testSaveAndEdit() {
-		display.post(new Event => [
-			character = 'b'.toCharArray.head
-			type = SWT.KeyDown
-		])
-		yieldToQueuedDisplayJobs(new NullProgressMonitor)	
-		waitForReconciler(editor)
+		pushKey('a'.toCharArray.head, 0)
 		assertEquals(1, events.size)
-		assertEquals('foob', events.last.deltas.head.^new.exportedObjects.head.qualifiedName.segments.last)
+		assertEquals('fooa', events.last.deltas.head.^new.exportedObjects.head.qualifiedName.segments.last)
 		
 		editor.doSave(new NullProgressMonitor)
 		yieldToQueuedDisplayJobs(new NullProgressMonitor)
 		assertEquals(2, events.size)
 		assertNull(events.last.deltas.head.^new)
-		display.post(new Event => [
-			keyCode = SWT.BS
-			type = SWT.KeyDown
-		])	
-		yieldToQueuedDisplayJobs(new NullProgressMonitor)
-		waitForReconciler(editor)
+		pushKey(0 as char, SWT.BS)
 		assertEquals(3, events.size)
 		assertEquals('foo', events.last.deltas.head.^new.exportedObjects.head.qualifiedName.segments.last)
 	}
@@ -92,14 +89,9 @@ class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 	 */
 	@Test
 	def testUndoRedo() {
-		display.post(new Event => [
-			character = 'b'.toCharArray.head
-			type = SWT.KeyDown
-		])
-		yieldToQueuedDisplayJobs(new NullProgressMonitor)	
-		waitForReconciler(editor)
+		pushKey('a'.toCharArray.head, 0)
 		assertEquals(1, events.size)
-		assertEquals('foob', events.last.deltas.head.^new.exportedObjects.head.qualifiedName.segments.last)
+		assertEquals('fooa', events.last.deltas.head.^new.exportedObjects.head.qualifiedName.segments.last)
 	
 		val undoManager = (editor.internalSourceViewer as XtextSourceViewer).undoManager
 		undoManager.undo
@@ -112,11 +104,30 @@ class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 		yieldToQueuedDisplayJobs(new NullProgressMonitor)
 		waitForReconciler(editor)
 		assertEquals(3, events.size)
-		assertEquals('foob', events.last.deltas.head.^new.exportedObjects.head.qualifiedName.segments.last)
+		assertEquals('fooa', events.last.deltas.head.^new.exportedObjects.head.qualifiedName.segments.last)
+	}
+	
+	protected def pushKey(char c, int k) {
+		val textBefore = editor.document.get
+		val event = new Event => [
+			type = SWT.KeyDown
+			character = c
+			keyCode = k
+		]
+		myDisplay.post(event)
+		var maxTries = 10
+		while(maxTries-- > 0) {
+			if(editor.document.get != textBefore) {
+				waitForReconciler(editor)
+				return;
+			}
+			Thread.sleep(10)
+			yieldToQueuedDisplayJobs(new NullProgressMonitor)
+		}	
+		fail('Document didn\'t change on keystroke')
 	}
 	
 	override protected getEditorId() {
 		'org.eclipse.xtext.ui.tests.TestLanguage'
 	}
-	
 }
