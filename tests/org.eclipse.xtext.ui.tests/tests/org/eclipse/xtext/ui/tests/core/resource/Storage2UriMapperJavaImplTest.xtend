@@ -25,6 +25,7 @@ import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
+import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -57,6 +58,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 			}
 			locator = new JarEntryLocator()
 			workspace = ResourcesPlugin.workspace
+			javaProjectClasspathChangeAnalyzer = new JavaProjectClasspathChangeAnalyzer
 		]
 	}
 

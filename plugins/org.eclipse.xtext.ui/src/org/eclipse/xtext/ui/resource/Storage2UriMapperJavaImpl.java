@@ -49,6 +49,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.ui.util.IJdtHelper;
+import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -121,7 +122,8 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	@Inject private JarEntryLocator locator;
 	@Inject private IJdtHelper jdtHelper;
 	@Inject private UriValidator uriValidator;
-	
+	@Inject private JavaProjectClasspathChangeAnalyzer javaProjectClasspathChangeAnalyzer;
+
 	@Inject private IStorage2UriMapper host;
 	
 	/**
@@ -143,6 +145,16 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 */
 	public void setLocator(JarEntryLocator locator) {
 		this.locator = locator;
+	}
+	
+	/**
+	 * Public for testing purpose
+	 * 
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setJavaProjectClasspathChangeAnalyzer(JavaProjectClasspathChangeAnalyzer javaProjectClasspathChangeAnalyzer) {
+		this.javaProjectClasspathChangeAnalyzer = javaProjectClasspathChangeAnalyzer;
 	}
 	
 	/**
@@ -408,7 +420,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	@Override
 	public void elementChanged(ElementChangedEvent event) {
 		initializeCache(true);
-		Set<IJavaProject> javaProjectsWithClasspathChange = getJavaProjectsWithClasspathChange(event.getDelta());
+		Set<IJavaProject> javaProjectsWithClasspathChange = javaProjectClasspathChangeAnalyzer.getJavaProjectsWithClasspathChange(event.getDelta());
 		if(!javaProjectsWithClasspathChange.isEmpty()) {
 			for(IJavaProject project: javaProjectsWithClasspathChange) {
 				updateCache(project);
@@ -679,36 +691,6 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		return result == null ? Collections.<IJavaElementDelta>emptySet() : result;
 	}
 	
-	private Set<IJavaProject> getJavaProjectsWithClasspathChange(IJavaElementDelta delta) {
-		IJavaElement element = delta.getElement();
-		if (element instanceof IPackageFragmentRoot) {
-			IPackageFragmentRoot root = (IPackageFragmentRoot) element;
-			if (delta.getKind() == IJavaElementDelta.REMOVED || delta.getKind() == IJavaElementDelta.ADDED
-					|| (delta.getFlags() & IJavaElementDelta.F_REORDER) != 0
-					|| (delta.getFlags() & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0
-					|| (delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0
-					|| (root.isExternal() && (delta.getFlags() & // external folders change
-					(IJavaElementDelta.F_CONTENT | IJavaElementDelta.F_SOURCEATTACHED | IJavaElementDelta.F_SOURCEDETACHED)) == delta
-							.getFlags())) {
-				return Collections.singleton(root.getJavaProject());
-			}
-		} else if (element instanceof IJavaModel) {
-			return getPackageFragmentRootDeltas(delta.getAffectedChildren());
-		} else if (element instanceof IJavaProject) {
-			if ((delta.getFlags() & IJavaElementDelta.F_CLASSPATH_CHANGED) != 0
-					|| (delta.getFlags() & IJavaElementDelta.F_RESOLVED_CLASSPATH_CHANGED) != 0)
-				return Collections.singleton((IJavaProject) element);
-			return getPackageFragmentRootDeltas(delta.getAffectedChildren());
-		}
-		return Collections.emptySet();
-	}
-
-	private Set<IJavaProject> getPackageFragmentRootDeltas(IJavaElementDelta[] affectedChildren) {
-		LinkedHashSet<IJavaProject> set = Sets.newLinkedHashSet();
-		for (IJavaElementDelta delta : affectedChildren) {
-			set.addAll(getJavaProjectsWithClasspathChange(delta));
-		}
-		return set;
-	}
+	
 
 }
