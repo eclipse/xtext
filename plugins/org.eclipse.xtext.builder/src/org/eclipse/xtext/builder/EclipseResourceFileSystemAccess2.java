@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
+import static org.eclipse.xtext.ui.util.ResourceUtil.*;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -49,8 +51,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
-
-import static org.eclipse.xtext.ui.util.ResourceUtil.*;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
