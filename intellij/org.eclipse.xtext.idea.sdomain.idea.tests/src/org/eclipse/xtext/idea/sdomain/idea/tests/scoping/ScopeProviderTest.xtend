@@ -8,10 +8,10 @@
 package org.eclipse.xtext.idea.sdomain.idea.tests.scoping
 
 import org.eclipse.xtext.idea.lang.IXtextLanguage
+import org.eclipse.xtext.idea.linking.lazy.CrossReferenceDescription.CrossReferenceDescriptionProvider
 import org.eclipse.xtext.idea.sdomain.idea.tests.containers.LightSdomainTestCase
 import org.eclipse.xtext.idea.sdomain.sDomain.Entity
 import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage
-import org.eclipse.xtext.linking.lazy.CrossReferenceDescription.CrossReferenceDescriptionProvider
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.psi.PsiEObject
 
