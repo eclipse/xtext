@@ -17,7 +17,7 @@ import com.intellij.psi.impl.source.tree.CompositeElement
 import com.intellij.util.IncorrectOperationException
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.idea.lang.IXtextLanguage
-import org.eclipse.xtext.linking.lazy.CrossReferenceDescription
+import org.eclipse.xtext.idea.linking.lazy.CrossReferenceDescription
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.PsiEObjectFactory
