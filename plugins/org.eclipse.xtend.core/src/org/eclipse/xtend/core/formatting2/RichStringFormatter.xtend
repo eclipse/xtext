@@ -266,7 +266,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 		// println("announceNextLiteral()")
 		if (lastLiteralEndOffset > 0 && contentStartOffset < 0)
 			contentStartOffset = lastLiteralEndOffset
-		val node = nodeModelAccess.regionForEObject(object).regionFor.feature(XbasePackage.Literals.XSTRING_LITERAL__VALUE)
+		val node = nodeModelAccess.regionForEObject(object)?.regionFor?.feature(XbasePackage.Literals.XSTRING_LITERAL__VALUE)
 		if (node != null) {
 			offset = node.offset + node.literalPrefixLenght
 			lastLiteralEndOffset = node.endOffset - node.literalPostfixLenght

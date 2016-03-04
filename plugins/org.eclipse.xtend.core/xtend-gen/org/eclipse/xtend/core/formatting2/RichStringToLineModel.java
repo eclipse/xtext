@@ -156,8 +156,15 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
       this.contentStartOffset = this.lastLiteralEndOffset;
     }
     IEObjectRegion _regionForEObject = this.nodeModelAccess.regionForEObject(object);
-    ISemanticRegionsFinder _regionFor = _regionForEObject.getRegionFor();
-    final ISemanticRegion node = _regionFor.feature(XbasePackage.Literals.XSTRING_LITERAL__VALUE);
+    ISemanticRegionsFinder _regionFor = null;
+    if (_regionForEObject!=null) {
+      _regionFor=_regionForEObject.getRegionFor();
+    }
+    ISemanticRegion _feature = null;
+    if (_regionFor!=null) {
+      _feature=_regionFor.feature(XbasePackage.Literals.XSTRING_LITERAL__VALUE);
+    }
+    final ISemanticRegion node = _feature;
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       int _offset = node.getOffset();
