@@ -189,7 +189,8 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	@Override
 	public void formatConditionally(EObject owner, ISubFormatter... formatters) {
 		IEObjectRegion region = getTextRegionAccess().regionForEObject(owner);
-		formatConditionally(region.getOffset(), region.getLength(), formatters);
+		if (region != null)
+			formatConditionally(region.getOffset(), region.getLength(), formatters);
 	}
 
 	@Override
@@ -325,6 +326,8 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	public <T extends EObject> T surround(T owner, Procedure1<? super IHiddenRegionFormatter> beforeAndAfter) {
 		if (owner != null && !owner.eIsProxy()) {
 			IEObjectRegion region = getTextRegionAccess().regionForEObject(owner);
+			if (region == null) 
+				return owner;
 			IHiddenRegion previous = region.getPreviousHiddenRegion();
 			IHiddenRegion next = region.getNextHiddenRegion();
 			set(previous, next, beforeAndAfter);
