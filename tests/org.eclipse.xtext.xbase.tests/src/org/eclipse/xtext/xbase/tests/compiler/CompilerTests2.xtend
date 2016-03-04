@@ -1685,4 +1685,77 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
+	@Test def void testBug489037_NestedAssignment_1() {
+		// this does not require argument preparation
+		'''
+			{
+				var i = 0
+				var j = 0
+				j=i=0;
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int j = 0;
+			  _xblockexpression = j = (i = 0);
+			}
+			return _xblockexpression;
+		''')
+	}
+
+	@Test def void testBug489037_NestedAssignment_2() {
+		// this requires argument preparation
+		'''
+			{
+				var i = 0
+				var n = 1
+				n=i=(if (i==0) 1 else 2)
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int n = 1;
+			  int _xifexpression = (int) 0;
+			  if ((i == 0)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  int _i = (i = _xifexpression);
+			  _xblockexpression = n = _i;
+			}
+			return _xblockexpression;
+		''')
+	}
+
+	@Test def void testBug489037_NestedAssignment_3() {
+		// this requires argument preparation
+		'''
+			{
+				var i = 0
+				var n = 1
+				n=i=switch(i) {
+					default: 2
+				}
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int n = 1;
+			  int _switchResult = (int) 0;
+			  switch (i) {
+			    default:
+			      _switchResult = 2;
+			      break;
+			  }
+			  int _i = (i = _switchResult);
+			  _xblockexpression = n = _i;
+			}
+			return _xblockexpression;
+		''')
+	}
+
 }
