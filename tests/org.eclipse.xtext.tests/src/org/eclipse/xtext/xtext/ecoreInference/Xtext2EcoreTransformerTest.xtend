@@ -377,6 +377,32 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		var EPackage result = getEPackageFromGrammar(grammar, 1)
 		assertEquals(2, result.EClassifiers.size)
 	}
+	
+	@Test def void testParserRuleFragment_10() throws Exception {
+		val grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate test 'http://test'
+			RuleA: feature+=Fragment;
+			fragment Fragment returns Fragment: name=ID;
+		'''
+		errorAcceptorMock.acceptError(TransformationErrorCode.InvalidFragmentCall,
+			TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT)
+		var EPackage result = getEPackageFromGrammar(grammar, 1)
+		assertEquals(2, result.EClassifiers.size)
+	}
+	
+	@Test def void testParserRuleFragment_11() throws Exception {
+		val grammar = '''
+			grammar test with org.eclipse.xtext.common.Terminals
+			generate test 'http://test'
+			RuleA: feature?=Fragment;
+			fragment Fragment returns Fragment: name=ID;
+		'''
+		errorAcceptorMock.acceptError(TransformationErrorCode.InvalidFragmentCall,
+			TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT)
+		var EPackage result = getEPackageFromGrammar(grammar, 1)
+		assertEquals(2, result.EClassifiers.size)
+	}
 
 	@Test def void testTypesOfImplicitSuperGrammar() throws Exception {
 		val xtextGrammar = '''
