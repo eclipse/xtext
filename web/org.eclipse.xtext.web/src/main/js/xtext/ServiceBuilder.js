@@ -242,7 +242,7 @@ define([
 			}
 			return options;
 		} else {
-			return defaultOptions;
+			return ServiceBuilder.copy(defaultOptions);
 		}
 	}
 	
