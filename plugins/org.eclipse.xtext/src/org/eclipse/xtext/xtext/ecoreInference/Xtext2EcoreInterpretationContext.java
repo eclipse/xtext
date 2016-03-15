@@ -78,6 +78,7 @@ public class Xtext2EcoreInterpretationContext {
 		EClassifierInfo featureTypeInfo;
 
 		if (GrammarUtil.isBooleanAssignment(assignment)) {
+			checkNoFragmentRuleCall(assignment.getTerminal());
 			EDataType eBoolean = GrammarUtil.findEBoolean(GrammarUtil.getGrammar(assignment));
 			featureTypeInfo = getEClassifierInfoOrThrowException(eBoolean, assignment);
 			isMultivalue = false;
