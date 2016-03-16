@@ -16,13 +16,14 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.ToString
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
+import org.eclipse.xtext.formatting2.FormatterPreferences
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException
@@ -93,6 +94,11 @@ class XtextServiceDispatcher {
 		 */
 		boolean hasConflict
 	}
+	
+	
+	@Inject
+	@FormatterPreferences
+	IPreferenceValuesProvider formatterPreferencesProvider
 	
 	@Inject ResourcePersistenceService resourcePersistenceService
 	@Inject UpdateDocumentService updateDocumentService
@@ -397,12 +403,13 @@ class XtextServiceDispatcher {
 		val document = getDocumentAccess(context)
 		val selectionStart = context.getInt('selectionStart', Optional.of(0))
 		val selectionEnd = context.getInt('selectionEnd', Optional.of(selectionStart))
-		val lineSeparator = context.getString('lineSeparator', Optional.of(Strings.newLine()))
-		val indentation = context.getString('indentation', Optional.of('\t'))
+		val lineSeparator = context.getParameter('lineSeparator')
+		val indentation = context.getParameter('indentation')
 		val indentationLength = context.getInt('indentationLength', Optional.of(4))
 		val maxLineWidth = context.getInt('maxLineWidth', Optional.of(120))
-
-		val preferences = new MapBasedPreferenceValues(newLinkedHashMap())
+		
+		val formatterPreferences = document.readOnly [ formatterPreferencesProvider.getPreferenceValues($0.resource) ]
+		val preferences = new MapBasedPreferenceValues(formatterPreferences, newLinkedHashMap)
 		preferences.put(FormatterPreferenceKeys.lineSeparator, lineSeparator)
 		preferences.put(FormatterPreferenceKeys.indentation, indentation)
 		preferences.put(FormatterPreferenceKeys.indentationLength, indentationLength)
