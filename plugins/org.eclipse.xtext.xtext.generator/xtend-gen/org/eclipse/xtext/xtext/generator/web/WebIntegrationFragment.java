@@ -2198,6 +2198,9 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.append(_replace_1, "\t\t\t");
         _builder.append("/.*,.*\\\\.jar\')");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("setInitParameter(\"org.mortbay.jetty.servlet.Default.useFileMappedBuffer\", \"false\")");
+        _builder.newLine();
         _builder.append("\t\t");
         _builder.append("]");
         _builder.newLine();

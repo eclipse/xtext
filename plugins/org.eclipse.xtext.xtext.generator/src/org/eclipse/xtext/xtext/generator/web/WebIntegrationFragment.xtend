@@ -708,6 +708,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 							new «'org.eclipse.jetty.webapp.MetaInfConfiguration'.typeRef»
 						]
 						setAttribute(«'org.eclipse.jetty.webapp.WebInfConfiguration'.typeRef».CONTAINER_JAR_PATTERN, '.*/«projectConfig.web.name.replace('.', '\\\\.')»/.*,.*\\.jar')
+						setInitParameter("org.mortbay.jetty.servlet.Default.useFileMappedBuffer", "false")
 					]
 					val log = new «'org.eclipse.jetty.util.log.Slf4jLog'.typeRef»(«grammar.serverLauncherClass.simpleName».name)
 					try {
