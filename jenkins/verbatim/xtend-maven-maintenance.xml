@@ -38,7 +38,7 @@ mvn clean deploy to https://oss.sonatype.org/content/repositories/snapshots/</de
     <extensions>
       <hudson.plugins.git.extensions.impl.CleanBeforeCheckout/>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
       <hudson.plugins.git.extensions.impl.CleanCheckout/>
       <hudson.plugins.git.extensions.impl.CloneOption>
@@ -64,7 +64,7 @@ mvn clean deploy to https://oss.sonatype.org/content/repositories/snapshots/</de
     <hudson.tasks.Maven>
       <targets>-T 1C -U clean deploy</targets>
       <mavenName>Maven 3.0.4</mavenName>
-      <pom>org.eclipse.xtext.git/maven/org.eclipse.xtext.parent/pom.xml</pom>
+      <pom>git-repo/maven/org.eclipse.xtext.parent/pom.xml</pom>
       <usePrivateRepository>true</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
@@ -72,7 +72,7 @@ mvn clean deploy to https://oss.sonatype.org/content/repositories/snapshots/</de
   </builders>
   <publishers>
     <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
-      <testResults>org.eclipse.xtext.git/maven/*/target/surefire-reports/*.xml</testResults>
+      <testResults>git-repo/maven/*/target/surefire-reports/*.xml</testResults>
       <keepLongStdio>false</keepLongStdio>
       <testDataPublishers/>
       <healthScaleFactor>1.0</healthScaleFactor>

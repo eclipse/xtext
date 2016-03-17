@@ -13,10 +13,10 @@ ext.branches = [
 		name: 'master',
 		displayName: 'master',
 		platforms: [
-			oldest: [
+			/* FIXME oldest: [
 				target: 'Helios',
 				jdk: jdks['1.6']
-			],
+			],*/
 			latest: [
 				target: 'Mars',
 				jdk: jdks['1.7']
@@ -27,10 +27,10 @@ ext.branches = [
 		name: 'maintenance',
 		displayName: 'maintenance',
 		platforms: [
-			oldest: [
+			/* FIXME oldest: [
 				target: 'Helios',
 				jdk: jdks['1.6']
-			],
+			],*/
 			latest: [
 				target: 'Mars',
 				jdk: jdks['1.7']

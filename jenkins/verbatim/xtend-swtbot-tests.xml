@@ -35,7 +35,7 @@
     <submoduleCfg class="list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
       <hudson.plugins.git.extensions.impl.PruneStaleBranch/>
       <hudson.plugins.git.extensions.impl.CleanCheckout/>
@@ -89,11 +89,11 @@ screen -d -m metacity --sm-disable --replace</command>
     <hudson.tasks.Ant plugin="ant@1.2">
       <targets>resolve.variables</targets>
       <antName>(Default)</antName>
-      <buildFile>${WORKSPACE}/org.eclipse.xtext.git/features/org.eclipse.xtext.build.feature/packaging.ant</buildFile>
+      <buildFile>${WORKSPACE}/git-repo/features/org.eclipse.xtext.build.feature/packaging.ant</buildFile>
       <properties>xtext.p2.repository=file:${WORKSPACE}/repositories/xtext.p2.repository
 eclipse.tp=&quot;file:${WORKSPACE}/repositories/eclipse/Kepler/final&quot;
-src.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/tests/swtbot-tests-buildserver.target&quot;
-dest.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/tests/swtbot-tests-buildserver.target&quot;</properties>
+src.file=&quot;${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/tests/swtbot-tests-buildserver.target&quot;
+dest.file=&quot;${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/tests/swtbot-tests-buildserver.target&quot;</properties>
     </hudson.tasks.Ant>
     <hudson.plugins.buckminster.EclipseBuckminsterBuilder plugin="buckminster@1.1.1">
       <installationName>buckminster-headless</installationName>
@@ -106,7 +106,7 @@ build
 junit --launch &quot;org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SWTBot).launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.ide.swtbot.tests.slow.xml&quot;</commands>
       <logLevel>debug</logLevel>
       <params>-Declipse.p2.mirrors=false
--Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/
+-Dcheckout.location=${WORKSPACE}/git-repo/
 -Dxtext.checkout.location=${checkout.location}
 -Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository
 -DSWTBOT=true</params>
@@ -121,7 +121,7 @@ junit --launch &quot;org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SW
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>xtend.test.results/**,org.eclipse.xtext.git/tests/org.eclipse.xtend.ide.swtbot.tests/screenshots/**</artifacts>
+      <artifacts>xtend.test.results/**,git-repo/tests/org.eclipse.xtend.ide.swtbot.tests/screenshots/**</artifacts>
       <allowEmptyArchive>false</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
@@ -141,7 +141,7 @@ junit --launch &quot;org.eclipse.xtend.ide.swtbot.tests/xtend.ide.tests.slow (SW
     <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
-          <pattern>org.eclipse.xtext.git/**</pattern>
+          <pattern>git-repo/**</pattern>
           <type>EXCLUDE</type>
         </hudson.plugins.ws__cleanup.Pattern>
         <hudson.plugins.ws__cleanup.Pattern>

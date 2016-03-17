@@ -36,7 +36,7 @@
     <submoduleCfg class="list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
       <hudson.plugins.git.extensions.impl.CleanBeforeCheckout/>
       <hudson.plugins.git.extensions.impl.CloneOption>
@@ -102,11 +102,11 @@ mkdir output
     <hudson.tasks.Ant plugin="ant@1.2">
       <targets>resolve.variables</targets>
       <antName>(Default)</antName>
-      <buildFile>${WORKSPACE}/org.eclipse.xtext.git/features/org.eclipse.xtext.build.feature/packaging.ant</buildFile>
+      <buildFile>${WORKSPACE}/git-repo/features/org.eclipse.xtext.build.feature/packaging.ant</buildFile>
       <properties>xtext.p2.repository=file:${WORKSPACE}/repositories/xtext.p2.repository
 eclipse.tp=&quot;file:${WORKSPACE}/repositories/eclipse/${ECLIPSE_TARGET_ALIAS}/final&quot;
-src.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target&quot;
-dest.file=&quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target&quot;</properties>
+src.file=&quot;${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target&quot;
+dest.file=&quot;${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/tests/tests-buildserver.target&quot;</properties>
     </hudson.tasks.Ant>
     <hudson.plugins.buckminster.EclipseBuckminsterBuilder plugin="buckminster@1.1.1">
       <installationName>buckminster-headless</installationName>
@@ -143,7 +143,7 @@ junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast (xtend).la
 junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast-quarantine.launch&quot; --flatXML --output &quot;${WORKSPACE}/xtend.test.results/xtend.ide.tests.quarantain-${ECLIPSE_TARGET_ALIAS}.xml&quot;</commands>
       <logLevel>info</logLevel>
       <params>-Declipse.p2.mirrors=false
--Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/
+-Dcheckout.location=${WORKSPACE}/git-repo/
 -Dxtext.checkout.location=${checkout.location}
 -Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository</params>
       <targetPlatformName>None</targetPlatformName>

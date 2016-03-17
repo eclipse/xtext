@@ -38,7 +38,7 @@
     <extensions>
       <hudson.plugins.git.extensions.impl.CleanBeforeCheckout/>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
       <hudson.plugins.git.extensions.impl.CloneOption>
         <shallow>false</shallow>
@@ -94,9 +94,9 @@ fi
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant plugin="ant@1.2">
-      <targets>-lib ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/findbugs/findbugs-ant.jar findbugs</targets>
+      <targets>-lib ${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/findbugs/findbugs-ant.jar findbugs</targets>
       <antName>(Default)</antName>
-      <buildFile>org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/findbugs/findbugs.ant</buildFile>
+      <buildFile>git-repo/releng/org.eclipse.xtext.releng/findbugs/findbugs.ant</buildFile>
       <properties>findbugs.home=${WORKSPACE}/findbugs/lib
 jarsLocation=${WORKSPACE}/jars/</properties>
     </hudson.tasks.Ant>
@@ -133,7 +133,7 @@ jarsLocation=${WORKSPACE}/jars/</properties>
       <shouldDetectModules>false</shouldDetectModules>
       <dontComputeNew>false</dontComputeNew>
       <doNotResolveRelativePaths>true</doNotResolveRelativePaths>
-      <pattern>org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/findbugs/findbugs.xml</pattern>
+      <pattern>git-repo/releng/org.eclipse.xtext.releng/findbugs/findbugs.xml</pattern>
       <isRankActivated>false</isRankActivated>
       <excludePattern></excludePattern>
       <includePattern></includePattern>

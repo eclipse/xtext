@@ -38,7 +38,7 @@
 		<extensions>
 			<hudson.plugins.git.extensions.impl.CleanBeforeCheckout />
 			<hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-				<relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+				<relativeTargetDir>git-repo</relativeTargetDir>
 			</hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
 			<hudson.plugins.git.extensions.impl.CleanCheckout />
 			<hudson.plugins.git.extensions.impl.CloneOption>
@@ -65,7 +65,7 @@
 			<description />
 			<switches />
 			<tasks />
-			<rootBuildScriptDir>org.eclipse.xtext.git</rootBuildScriptDir>
+			<rootBuildScriptDir>git-repo</rootBuildScriptDir>
 			<buildFile/>
 			<gradleName>(Default)</gradleName>
 			<useWrapper>true</useWrapper>
@@ -76,7 +76,7 @@
 	</builders>
 	<publishers>
 		<hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
-			<testResults>org.eclipse.xtext.git/**/build/test-results/*.xml</testResults>
+			<testResults>git-repo/**/build/test-results/*.xml</testResults>
 			<keepLongStdio>false</keepLongStdio>
 			<testDataPublishers />
 			<healthScaleFactor>1.0</healthScaleFactor>

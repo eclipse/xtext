@@ -40,7 +40,7 @@
     <submoduleCfg class="list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
       <hudson.plugins.git.extensions.impl.CleanBeforeCheckout/>
       <hudson.plugins.git.extensions.impl.CloneOption>
@@ -106,7 +106,7 @@ COMPACT_BUILD_ID=&quot;${BUILD_ID//[-_]}&quot;
 COMPACT_BUILD_ID=&quot;${COMPACT_BUILD_ID:0:12}&quot;
 :
 {
-	cat &quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/xtext-build.properties&quot;
+	cat &quot;${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/xtext-build.properties&quot;
 	echo
 	echo &quot;# Define the Build ID (added by Hudson job definition)&quot;
 	echo &quot;build.id=N${COMPACT_BUILD_ID}&quot;
@@ -144,8 +144,8 @@ import &quot;${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-p
       <params>-DECLIPSE.TARGET.ALIAS=Helios
 -Dforce.javadoc=false
 -Declipse.p2.mirrors=false
--Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git
--Dxtext.checkout.location=${WORKSPACE}/org.eclipse.xtext.git
+-Dcheckout.location=${WORKSPACE}/git-repo
+-Dxtext.checkout.location=${WORKSPACE}/git-repo
 -Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
 -Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
 -Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/Helios/final
@@ -181,8 +181,8 @@ junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast (xtend).la
       <params>-DECLIPSE.TARGET.ALIAS=Helios
 -Dforce.javadoc=false
 -Declipse.p2.mirrors=false
--Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git
--Dxtext.checkout.location=${WORKSPACE}/org.eclipse.xtext.git
+-Dcheckout.location=${WORKSPACE}/git-repo
+-Dxtext.checkout.location=${WORKSPACE}/git-repo
 -Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
 -Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
 -Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/Helios/final
@@ -256,7 +256,7 @@ junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast (xtend).la
     <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
-          <pattern>org.eclipse.xtext.git/**</pattern>
+          <pattern>git-repo/**</pattern>
           <type>EXCLUDE</type>
         </hudson.plugins.ws__cleanup.Pattern>
       </patterns>

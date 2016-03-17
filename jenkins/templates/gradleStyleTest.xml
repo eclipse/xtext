@@ -52,7 +52,7 @@
     <submoduleCfg class="list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
       <hudson.plugins.git.extensions.impl.CleanCheckout/>
       <hudson.plugins.git.extensions.impl.CloneOption>
@@ -100,7 +100,7 @@
       <description></description>
       <switches>--profile --stacktrace -PtargetPlatform=${ECLIPSE_TARGET_ALIAS}</switches>
       <tasks/>
-      <rootBuildScriptDir>org.eclipse.xtext.git</rootBuildScriptDir>
+      <rootBuildScriptDir>git-repo</rootBuildScriptDir>
       <buildFile></buildFile>
       <gradleName>(Default)</gradleName>
       <useWrapper>true</useWrapper>

@@ -32,7 +32,7 @@
     <submoduleCfg class="list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
       <hudson.plugins.git.extensions.impl.CleanCheckout/>
     </extensions>
@@ -46,7 +46,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#git clone git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git org.eclipse.xtext.git
+      <command>#git clone git://git.eclipse.org/gitroot/tmf/git-repo git-repo
 cd ${WORKSPACE}
 rm -rf buildroot xtext.* javadoc output deployment
 mkdir buildroot
@@ -56,7 +56,7 @@ COMPACT_BUILD_ID=&quot;${BUILD_ID//[-_]}&quot;
 COMPACT_BUILD_ID=&quot;${COMPACT_BUILD_ID:0:12}&quot;
 :
 {
-	cat &quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/xtext-build.properties&quot;
+	cat &quot;${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/xtext-build.properties&quot;
 	echo
 	echo &quot;# Define the Build ID (added by Hudson job definition)&quot;
 	echo &quot;build.id=N${COMPACT_BUILD_ID}&quot;
@@ -111,7 +111,7 @@ build</commands>
       <logLevel>info</logLevel>
       <params>-DECLIPSE.TARGET.ALIAS=Latest
 -Dforce.javadoc=false
--Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git
+-Dcheckout.location=${WORKSPACE}/git-repo
 -Dmaven.repository.uri=file://${user.home}/.m2/repository
 -Demf.target.platform=https://hudson.eclipse.org/xtext/job/emf-core/lastSuccessfulBuild/artifact/build-result/p2.repository/</params>
       <targetPlatformName>None</targetPlatformName>

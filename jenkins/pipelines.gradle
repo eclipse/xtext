@@ -1,13 +1,13 @@
 def runtimeSuites = ['xtext', 'xtend'].collect{it + '-runtime-tests'}
 def ideSuites = ['xtext', 'xtend'].collect{it + '-ide-tests'}
 def java8Suites= ['xtend-runtime-tests-java8']
-def intellijSuites = ['intellij-tests','intellij-eap-tests']
-def onPushSuites = runtimeSuites + ideSuites + java8Suites + intellijSuites
+def intellijSuites = ['intellij-tests'] //FIXME ['intellij-tests','intellij-eap-tests']
+def onPushSuites = runtimeSuites + ideSuites + intellijSuites + java8Suites
 
 def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
 def smokeSuites = ['smoke-tests']
 def generatorSuites = ['generator-tests']
-def allSuites = onPushSuites + slowSuites + smokeSuites + generatorSuites
+def allSuites = onPushSuites //FIXME + slowSuites + smokeSuites + generatorSuites
 
 
 def testScripts = allSuites.collectEntries{suite -> [(suite): project.file("scripts/${suite}.txt").text]}
@@ -67,7 +67,7 @@ branches.each { branch ->
 				config.description = "This job was generated"
 				def shellCmd = '''rm -f ${WORKSPACE}/*.b3agg*
 				b3home=/opt/jenkins/tools/b3-headless
-				b3FilesDir=${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring
+				b3FilesDir=${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/mirroring
 				'''.stripIndent()
 
 				def platforms = ['Helios', 'Indigo', 'Juno', 'Kepler', 'Luna', 'Mars', 'Latest']
@@ -134,7 +134,7 @@ branches.each { branch ->
 						config.builders.'hudson.plugins.copyartifact.CopyArtifact'[1]
 							.project = "target-platforms-${branch.displayName}"
 						def builder = config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'
-						def params = '-Declipse.p2.mirrors=false\n-Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git/\n-Dxtext.checkout.location=${checkout.location}\n-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository'
+						def params = '-Declipse.p2.mirrors=false\n-Dcheckout.location=${WORKSPACE}/git-repo/\n-Dxtext.checkout.location=${checkout.location}\n-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository'
 						if (job.jdk == jdks['1.8']) {
 							params += '\n-DJAVA8=true'
 							builder.installationName = 'buckminster-4.4'

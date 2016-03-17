@@ -1,4 +1,4 @@
-file('verbatim').listFiles().each { jobXml -> 
+file('verbatim').listFiles().findAll{it.name.startsWith('xtext-pull')}.each { jobXml -> 
 	jenkins.jobs.create(jobXml.name.replace('.xml', '')).definition {
 		xml jobXml
 	}

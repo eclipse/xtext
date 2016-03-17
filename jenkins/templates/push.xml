@@ -31,7 +31,7 @@
     <submoduleCfg class="list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
     </extensions>
   </scm>
@@ -59,7 +59,7 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>#git clone git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git org.eclipse.xtext.git
+      <command>#git clone git://git.eclipse.org/gitroot/tmf/git-repo git-repo
 cd ${WORKSPACE}
 rm -rf ${WORKSPACE}/repositories/eclipse/final/
 mv -f ${WORKSPACE}/repositories/eclipse/Juno/final/ ${WORKSPACE}/repositories/eclipse/final/
@@ -72,7 +72,7 @@ COMPACT_BUILD_ID=&quot;${BUILD_ID//[-_]}&quot;
 COMPACT_BUILD_ID=&quot;${COMPACT_BUILD_ID:0:12}&quot;
 :
 {
-	cat &quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/xtext-build.properties&quot;
+	cat &quot;${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/xtext-build.properties&quot;
 	echo
 	echo &quot;# Define the Build ID (added by Hudson job definition)&quot;
 	echo &quot;build.id=N${COMPACT_BUILD_ID}&quot;
@@ -122,7 +122,7 @@ build</commands>
       <logLevel>info</logLevel>
       <params>-DECLIPSE.TARGET.ALIAS=Stable
 -Dforce.javadoc=false
--Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git
+-Dcheckout.location=${WORKSPACE}/git-repo
 -Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/final
@@ -145,7 +145,7 @@ build</commands>
       <logLevel>info</logLevel>
       <params>-DECLIPSE.TARGET.ALIAS=Stable
 -Dforce.javadoc=false
--Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git
+-Dcheckout.location=${WORKSPACE}/git-repo
 -Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/final
@@ -164,7 +164,7 @@ build</commands>
     </hudson.plugins.buckminster.EclipseBuckminsterBuilder>
     <hudson.tasks.Shell>
       <command>mv buildroot/buckminster.build/org.eclipse.xtext.build_*-eclipse.feature/site.p2.tweaked xtext.p2.repository
-#cp -R org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/deployment .</command>
+#cp -R git-repo/releng/org.eclipse.xtext.releng/releng/deployment .</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -203,7 +203,7 @@ build</commands>
     <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
-          <pattern>org.eclipse.xtext.git/**</pattern>
+          <pattern>git-repo/**</pattern>
           <type>EXCLUDE</type>
         </hudson.plugins.ws__cleanup.Pattern>
         <hudson.plugins.ws__cleanup.Pattern>
