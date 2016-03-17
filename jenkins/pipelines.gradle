@@ -66,11 +66,12 @@ branches.each { branch ->
 				config.scm.branches.'hudson.plugins.git.BranchSpec'.name = branch.name
 				config.description = "This job was generated"
 				def shellCmd = '''rm -f ${WORKSPACE}/*.b3agg*
-				b3home=/opt/jenkins/tools/b3-headless
+				b3home=$JENKINS_HOME/tools/b3-headless
 				b3FilesDir=${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/mirroring
 				'''.stripIndent()
 
-				def platforms = ['Helios', 'Indigo', 'Juno', 'Kepler', 'Luna', 'Mars', 'Latest']
+				// FIXME def platforms = ['Helios', 'Indigo', 'Juno', 'Kepler', 'Luna', 'Mars', 'Latest']
+				def platforms = ['Juno', 'Latest']
 
 				platforms.each {
 					shellCmd = shellCmd + '${b3home}/b3 aggregate --buildModel ${b3FilesDir}/'+it+'.b3aggr --action ${B3_ACTION}\n'

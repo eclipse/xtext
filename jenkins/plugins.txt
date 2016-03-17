@@ -1,0 +1,14 @@
+workflow-step-api:1.13
+ssh-agent:1.9 
+plain-credentials:1.1
+git:2.4.2
+token-macro:1.12.1 
+github:1.17.0
+github-api:1.72
+scm-api:1.0
+git-client:1.19.5 
+ghprb:1.30.3
+xvnc:1.23
+git-parameter:0.4.0 
+credentials:1.25
+icon-shim:2.0.2

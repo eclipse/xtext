@@ -15,7 +15,7 @@
         <hudson.model.StringParameterDefinition>
           <name>BUCKY_MWE2_HOME</name>
           <description></description>
-          <defaultValue>/opt/jenkins/tools/buckminster-mwe2-headless/</defaultValue>
+          <defaultValue>$JENKINS_HOME/tools/buckminster-mwe2-headless/</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
