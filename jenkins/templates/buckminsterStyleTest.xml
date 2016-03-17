@@ -176,9 +176,9 @@ importprefs -F &quot;${releng.project}/releng/buckminster.workspace.epf&quot;</c
       <healthScaleFactor>1.0</healthScaleFactor>
     </hudson.tasks.junit.JUnitResultArchiver>
     <hudson.tasks.Mailer plugin="mailer@1.11">
-      <recipients>dennis.huebner@gmail.com</recipients>
-      <dontNotifyEveryUnstableBuild>true</dontNotifyEveryUnstableBuild>
-      <sendToIndividuals>false</sendToIndividuals>
+      <recipients>Sebastian.Zarnekow@itemis.de  sven.efftinge@itemis.de</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>true</sendToIndividuals>
     </hudson.tasks.Mailer>
 		<com.cloudbees.jenkins.GitHubCommitNotifier>
       <resultOnFailure>FAILURE</resultOnFailure>
