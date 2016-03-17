@@ -41,6 +41,16 @@ ext.branches = [
 
 jenkins {
 	servers {
+		typefox {
+			url 'https://xtext-builds.itemis.de/jenkins'
+			secure true
+			if (project.hasProperty('jenkinsUserName')) {
+				username jenkinsUserName
+			}
+			if (project.hasProperty('jenkinsPassword')) {
+				password jenkinsPassword
+			}
+		}
 		xtext {
 			url 'https://xtext-builds.itemis.de/jenkins'
 			secure true
@@ -53,7 +63,7 @@ jenkins {
 		}
 	}
 	
-	defaultServer servers.xtext
+	defaultServer servers.typefox
 	
 	project.file('templates').listFiles().each {templateFile ->
 		templates.create(templateFile.name.split('\\.')[0]) {

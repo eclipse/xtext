@@ -193,7 +193,7 @@ build</commands>
       <includeFailedBuilds>false</includeFailedBuilds>
     </hudson.tasks.test.AggregatedTestResultPublisher>
     <hudson.tasks.Mailer plugin="mailer@1.15">
-      <recipients>dennis.huebner@itemis.de</recipients>
+      <recipients>dennis.huebner@gmail.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
