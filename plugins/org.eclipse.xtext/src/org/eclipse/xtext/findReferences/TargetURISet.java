@@ -26,7 +26,7 @@ import com.google.common.collect.Sets;
  * the old APIs.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
+ * @since 2.10
  */
 public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
 
