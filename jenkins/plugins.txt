@@ -26,4 +26,6 @@ gradle:1.24
 warnings:4.52
 timestamper:1.7.4
 slack:2.0
-openJDK-native-plugin:1.1
+run-condition:1.0
+git-server:1.6
+analysis-core:1.75
