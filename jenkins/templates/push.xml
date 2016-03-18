@@ -30,10 +30,16 @@
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <submoduleCfg class="list"/>
     <extensions>
-      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>git-repo</relativeTargetDir>
-      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-    </extensions>
+       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+          <relativeTargetDir>git-repo</relativeTargetDir>
+       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+       <hudson.plugins.git.extensions.impl.CleanCheckout />
+       <hudson.plugins.git.extensions.impl.CloneOption>
+         <shallow>false</shallow>
+         <reference></reference>
+         <timeout>60</timeout>
+       </hudson.plugins.git.extensions.impl.CloneOption>
+     </extensions>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>

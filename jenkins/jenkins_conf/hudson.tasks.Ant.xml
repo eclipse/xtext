@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.tasks.Ant_-DescriptorImpl plugin="ant@1.2">
+  <installations>
+    <hudson.tasks.Ant_-AntInstallation>
+      <name>ant 1.8.4</name>
+      <home></home>
+      <properties>
+        <hudson.tools.InstallSourceProperty>
+          <installers>
+            <hudson.tasks.Ant_-AntInstaller>
+              <id>1.8.4</id>
+            </hudson.tasks.Ant_-AntInstaller>
+          </installers>
+        </hudson.tools.InstallSourceProperty>
+      </properties>
+    </hudson.tasks.Ant_-AntInstallation>
+  </installations>
+</hudson.tasks.Ant_-DescriptorImpl>
