@@ -1,4 +1,4 @@
-tasks = clean check uploadArchives
+tasks = clean check //uploadArchives
 buildFile = web/build.gradle
 
 // must use jenkins user home because of authentication data
