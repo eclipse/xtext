@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y install vim vnc4server fluxbox gradle
 
 # USER jenkins # we're "using su -c 'whoami' jenkins" instead
 
-COPY jenkins_conf/* /usr/share/jenkins/ref/
+COPY jenkins_conf/ /usr/share/jenkins/ref/
 #COPY ssh/ /usr/share/jenkins/ref/.ssh/
 
 RUN chown -R jenkins:jenkins /usr/share/jenkins/ref/
