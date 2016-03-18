@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <actions/>
+  <description/>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>BUCKY_HOME</name>
+          <description/>
+          <defaultValue>${JENKINS_HOME}/tools/buckminster-headless/</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>B3_HOME</name>
+          <description/>
+          <defaultValue>${JENKINS_HOME}/tools/b3-headless/</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>UPDATE</name>
+          <description/>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+    <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
+      <useJobPriority>true</useJobPriority>
+      <priority>-2147483647</priority>
+    </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(Default)</jdk>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>rm -rf ${B3_HOME}
+mkdir -p ${B3_HOME}
+cd ${B3_HOME}/../
+if [ ! -f director/director ];
+then
+  wget http://download.eclipse.org/tools/buckminster/products/director_latest.zip
+  unzip director_latest.zip
+fi
+if [[ ! -f ${B3_HOME}/b3 ||  ${UPDATE} == 'true' ]];
+then
+  director/director -vm $JAVA_HOME/bin/java -d ${B3_HOME} -p b3 -r "http://download.eclipse.org/modeling/emft/b3/headless-4.2/" -installIU "org.eclipse.b3.cli.product, org.eclipse.b3.aggregator.engine.feature.feature.group"
+fi</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>rm -fr ${BUCKY_HOME}
+mkdir -p ${BUCKY_HOME}
+cd ${BUCKY_HOME}/../
+if [ ! -f director/director ];
+then
+  wget http://download.eclipse.org/tools/buckminster/products/director_latest.zip
+  unzip director_latest.zip
+fi
+if [[ ! -f ${BUCKY_HOME}/buckminster ||  ${UPDATE} == 'true' ]];
+then
+  director/director -vm $JAVA_HOME/bin/java -d ${BUCKY_HOME} -p Buckminster -r "http://download.eclipse.org/tools/buckminster/headless-4.4/, http://download.eclipse.org/eclipse/updates/4.4" -installIU "org.eclipse.equinox.p2.director.feature.feature.group, org.eclipse.buckminster.pde.headless.feature.feature.group, org.eclipse.buckminster.maven.headless.feature.feature.group, org.eclipse.buckminster.cmdline.product, org.eclipse.buckminster.core.headless.feature.feature.group, org.eclipse.buckminster.git.headless.feature.feature.group, org.eclipse.buckminster.cvs.headless.feature.feature.group, org.eclipse.pde.api.tools.ee.feature.feature.group"
+fi</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

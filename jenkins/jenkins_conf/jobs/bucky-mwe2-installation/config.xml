@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <actions/>
+  <description/>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>10</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>BUCKY_MWE2_HOME</name>
+          <description/>
+          <defaultValue>$JENKINS_HOME/tools/buckminster-mwe2-headless/</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+    <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
+      <useJobPriority>true</useJobPriority>
+      <priority>2</priority>
+    </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(Default)</jdk>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>rm -rf ${BUCKY_MWE2_HOME}
+mkdir -p ${BUCKY_MWE2_HOME}
+cd ${BUCKY_MWE2_HOME}/../
+if [ ! -f director/director ];
+then
+  wget http://download.eclipse.org/tools/buckminster/products/director_latest.zip
+  unzip director_latest.zip
+fi
+if [[ ! -f ${BUCKY_MWE2_HOME}/buckminster ]];
+then
+  director/director -vm $JAVA_HOME/bin/java -d ${BUCKY_MWE2_HOME} -p Buckminster -r "http://download.eclipse.org/tools/buckminster/headless-4.4/, http://download.eclipse.org/eclipse/updates/4.4,http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest" -installIU "org.eclipse.equinox.p2.director.feature.feature.group, org.eclipse.buckminster.pde.headless.feature.feature.group, org.eclipse.buckminster.maven.headless.feature.feature.group, org.eclipse.buckminster.cmdline.product, org.eclipse.buckminster.core.headless.feature.feature.group, org.eclipse.buckminster.git.headless.feature.feature.group, org.eclipse.buckminster.cvs.headless.feature.feature.group, org.eclipse.pde.api.tools.ee.feature.feature.group, org.eclipse.emf.mwe2.launcher.feature.group"
+fi</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

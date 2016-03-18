@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?><project>
+  <actions/>
+  <description/>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>30</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>10</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
+      <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
+      <useJobPriority>true</useJobPriority>
+      <priority>2</priority>
+    </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.25"/>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name>upstream</name>
+        <refspec>+refs/pull/*:refs/remotes/origin/pr/*</refspec>
+        <url>https://github.com/eclipse/xtext.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>${sha1}</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <browser class="hudson.plugins.git.browser.GithubWeb">
+      <url>https://github.com/eclipse/xtext/</url>
+    </browser>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+        <relativeTargetDir>git-repo</relativeTargetDir>
+      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+      <hudson.plugins.git.extensions.impl.CleanBeforeCheckout/>
+      <hudson.plugins.git.extensions.impl.CloneOption>
+        <shallow>false</shallow>
+        <reference/>
+        <timeout>90</timeout>
+      </hudson.plugins.git.extensions.impl.CloneOption>
+    </extensions>
+  </scm>
+  <quietPeriod>10</quietPeriod>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
+  <jdk>(Default)</jdk>
+  <triggers>
+    <org.jenkinsci.plugins.ghprb.GhprbTrigger plugin="ghprb@1.16-8">
+      <spec>H/5 * * * *</spec>
+      <adminlist>dhuebner</adminlist>
+      <allowMembersOfWhitelistedOrgsAsAdmin>true</allowMembersOfWhitelistedOrgsAsAdmin>
+      <orgslist>xtext</orgslist>
+      <cron>H/5 * * * *</cron>
+      <triggerPhrase>Jenkins test</triggerPhrase>
+      <onlyTriggerPhrase>false</onlyTriggerPhrase>
+      <useGitHubHooks>true</useGitHubHooks>
+      <permitAll>false</permitAll>
+      <commentFilePath/>
+      <whitelist/>
+      <autoCloseFailedPullRequests>false</autoCloseFailedPullRequests>
+      <displayBuildErrorsOnDownstreamBuilds>false</displayBuildErrorsOnDownstreamBuilds>
+      <whiteListTargetBranches>
+        <org.jenkinsci.plugins.ghprb.GhprbBranch>
+          <branch/>
+        </org.jenkinsci.plugins.ghprb.GhprbBranch>
+      </whiteListTargetBranches>
+      <msgSuccess/>
+      <msgFailure/>
+      <commitStatusContext>Jenkins/test</commitStatusContext>
+      <project>xtext-pull-request-verifier</project>
+    </org.jenkinsci.plugins.ghprb.GhprbTrigger>
+  </triggers>
+  <concurrentBuild>true</concurrentBuild>
+  <builders>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.31">
+      <project>target-platforms-master</project>
+      <filter>Helios/final/**</filter>
+      <target>repositories/eclipse/</target>
+      <excludes/>
+      <selector class="hudson.plugins.copyartifact.TriggeredBuildSelector">
+        <fallbackToLastSuccessful>true</fallbackToLastSuccessful>
+        <upstreamFilterStrategy>UseGlobalSetting</upstreamFilterStrategy>
+      </selector>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>java -version
+cd ${WORKSPACE}
+rm -rf buildroot xte*test.results output deployment
+mkdir buildroot
+mkdir output
+:
+COMPACT_BUILD_ID="${BUILD_ID//[-_]}"
+COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
+:
+{
+	cat "${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/xtext-build.properties"
+	echo
+	echo "# Define the Build ID (added by Hudson job definition)"
+	echo "build.id=N${COMPACT_BUILD_ID}"
+
+	echo
+	echo "# Define the timestamp to use for changed components (added by Hudson job definition)"
+	echo "buckminster.build.timestamp=${BUILD_ID}"
+
+	echo
+	echo "# Define Hudson Build ID (added by Hudson job definition)"
+	echo "hudson.build.id=${BUILD_ID}"
+	echo
+	echo "# Sign the jars (added by Hudson job definition)"
+	echo "site.signing=false"
+} &gt; buildroot/build.properties
+:
+{
+	echo "# Define the Build ID to use for tagging (added by Hudson job definition)"
+	echo "build.id=${COMPACT_BUILD_ID}"
+
+} &gt; buildroot/tagging.properties
+:</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.buckminster.EclipseBuckminsterBuilder plugin="buckminster@1.1.1">
+      <installationName>buckminster-4.4</installationName>
+      <commands>setpref targetPlatformPath="${WORKSPACE}/buildroot/target.platform"
+importprefs -F ${checkout.location}/releng/org.eclipse.xtext.releng/releng/buckminster.workspace.epf
+
+importtargetdefinition "${checkout.location}/releng/org.eclipse.xtext.releng/api-baseline/api-baseline.target"
+addbaseline -A "api-baseline"
+
+import "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext-platform.mspec"
+</commands>
+      <logLevel>info</logLevel>
+      <params>-DECLIPSE.TARGET.ALIAS=Helios
+-Dforce.javadoc=false
+-Declipse.p2.mirrors=false
+-Dcheckout.location=${WORKSPACE}/git-repo
+-Dxtext.checkout.location=${WORKSPACE}/git-repo
+-Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Demf.target.platform=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Dgef.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Dmaven.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Dorbit.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Djdt_annotation.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final</params>
+      <targetPlatformName>None</targetPlatformName>
+      <userTemp>${WORKSPACE}/buildroot/buckminster.temp</userTemp>
+      <userOutput>${WORKSPACE}/buildroot/buckminster.build</userOutput>
+      <userCommand/>
+      <userWorkspace>${WORKSPACE}/buildroot/buckminster.workspace</userWorkspace>
+      <globalPropertiesFile/>
+      <equinoxLauncherArgs/>
+    </hudson.plugins.buckminster.EclipseBuckminsterBuilder>
+    <hudson.plugins.buckminster.EclipseBuckminsterBuilder plugin="buckminster@1.1.1">
+      <installationName>buckminster-4.4</installationName>
+      <commands>resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/xtext.cquery"
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
+resolve "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests-xtend/xtend-test.mspec"
+build
+
+junit --launch "org.eclipse.xtend.core.tests/xtend.core.tests.fast.launch" --flatXML --output "${WORKSPACE}/xtend.test.results/xtend.core.tests.fast.xml"
+junit --launch "org.eclipse.xtend.core.tests/xtend.core.tests.fast (xtend).launch" --flatXML --output "${WORKSPACE}/xtend.test.results/xtend.core.tests.fast.xtend.xml"
+
+junit --launch "org.eclipse.xtext.xbase.tests/xtext.xbase.tests.fast.launch" --flatXML --output "${WORKSPACE}/xtend.test.results/xtext.xbase.tests.fast.xml"
+junit --launch "org.eclipse.xtext.xbase.tests/xtext.xbase.tests.fast (xtend).launch" --flatXML --output "${WORKSPACE}/xtend.test.results/xtext.xbase.tests.fast.xtend.xml"
+
+junit --launch "org.eclipse.xtend.ide.tests/xtend.ide.tests.fast.launch" --flatXML --output "${WORKSPACE}/xtend.test.results/xtend.ide.tests.fast.xml"
+junit --launch "org.eclipse.xtend.ide.tests/xtend.ide.tests.fast (xtend).launch" --flatXML --output "${WORKSPACE}/xtend.test.results/xtend.ide.tests.fast.xtend.xml"</commands>
+      <logLevel>info</logLevel>
+      <params>-DECLIPSE.TARGET.ALIAS=Helios
+-Dforce.javadoc=false
+-Declipse.p2.mirrors=false
+-Dcheckout.location=${WORKSPACE}/git-repo
+-Dxtext.checkout.location=${WORKSPACE}/git-repo
+-Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Demf.target.platform=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Dgef.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Dmaven.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Dorbit.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final
+-Djdt_annotation.p2.repository=file:${WORKSPACE}/repositories/eclipse/Helios/final</params>
+      <targetPlatformName>None</targetPlatformName>
+      <userTemp>${WORKSPACE}/buildroot/buckminster.temp</userTemp>
+      <userOutput>${WORKSPACE}/buildroot/buckminster.build</userOutput>
+      <userCommand/>
+      <userWorkspace>${WORKSPACE}/buildroot/buckminster.workspace</userWorkspace>
+      <globalPropertiesFile/>
+      <equinoxLauncherArgs/>
+    </hudson.plugins.buckminster.EclipseBuckminsterBuilder>
+  </builders>
+  <publishers>
+    <hudson.plugins.warnings.WarningsPublisher plugin="warnings@4.48">
+      <healthy/>
+      <unHealthy/>
+      <thresholdLimit>low</thresholdLimit>
+      <pluginName>[WARNINGS] </pluginName>
+      <defaultEncoding/>
+      <canRunOnFailed>false</canRunOnFailed>
+      <usePreviousBuildAsReference>false</usePreviousBuildAsReference>
+      <useStableBuildAsReference>false</useStableBuildAsReference>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds plugin="analysis-core@1.72">
+        <unstableTotalAll>54</unstableTotalAll>
+        <unstableTotalHigh/>
+        <unstableTotalNormal/>
+        <unstableTotalLow/>
+        <failedTotalAll>60</failedTotalAll>
+        <failedTotalHigh/>
+        <failedTotalNormal/>
+        <failedTotalLow/>
+      </thresholds>
+      <shouldDetectModules>false</shouldDetectModules>
+      <dontComputeNew>true</dontComputeNew>
+      <doNotResolveRelativePaths>true</doNotResolveRelativePaths>
+      <includePattern>.*\.java</includePattern>
+      <parserConfigurations/>
+      <consoleParsers>
+        <hudson.plugins.warnings.ConsoleParser>
+          <parserName>Buckminster</parserName>
+        </hudson.plugins.warnings.ConsoleParser>
+      </consoleParsers>
+    </hudson.plugins.warnings.WarningsPublisher>
+    <com.cloudbees.jenkins.GitHubCommitNotifier plugin="github@1.11">
+      <resultOnFailure>FAILURE</resultOnFailure>
+    </com.cloudbees.jenkins.GitHubCommitNotifier>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>*.test.results/*.xml</artifacts>
+      <allowEmptyArchive>true</allowEmptyArchive>
+      <onlyIfSuccessful>false</onlyIfSuccessful>
+      <fingerprint>false</fingerprint>
+      <defaultExcludes>true</defaultExcludes>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.1">
+      <testResults>*.test.results/*.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
+      <healthScaleFactor>1.0</healthScaleFactor>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.tasks.Mailer plugin="mailer@1.15">
+      <recipients>dennis.huebner@gmail.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
+      <patterns>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>git-repo/**</pattern>
+          <type>EXCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
+      </patterns>
+      <deleteDirs>true</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>true</cleanWhenUnstable>
+      <cleanWhenFailure>true</cleanWhenFailure>
+      <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+      <cleanWhenAborted>true</cleanWhenAborted>
+      <notFailBuild>true</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+      <externalDelete/>
+    </hudson.plugins.ws__cleanup.WsCleanup>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
+      <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
+        <timeoutMinutes>120</timeoutMinutes>
+      </strategy>
+      <operationList>
+        <hudson.plugins.build__timeout.operations.FailOperation/>
+      </operationList>
+    </hudson.plugins.build__timeout.BuildTimeoutWrapper>
+    <hudson.plugins.xvnc.Xvnc plugin="xvnc@1.21">
+      <takeScreenshot>false</takeScreenshot>
+      <useXauthority>true</useXauthority>
+    </hudson.plugins.xvnc.Xvnc>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.6.2"/>
+  </buildWrappers>
+</project>
