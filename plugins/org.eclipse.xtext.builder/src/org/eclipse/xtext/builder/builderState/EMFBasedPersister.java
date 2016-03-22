@@ -89,9 +89,8 @@ public class EMFBasedPersister implements PersistedStateProvider {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error while loading persistable builder state from '"+location+"'. Triggering a full build.", e);
+			log.warn("Error while loading persistable builder state from '"+location+"'. This could happen after an upgrade or if the persisted index state got corrupted. Triggering a full build. Problem was : "+e.getMessage()+" ("+e.getClass().getSimpleName()+")");
 			scheduleRecoveryBuild();
-			throw new WrappedException(e);
 		} finally {
 			try {
 				if (workspace != null) {
