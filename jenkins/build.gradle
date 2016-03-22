@@ -42,6 +42,16 @@ ext.branches = [
 jenkins {
 	servers {
 		typefox {
+			url 'http://ec2-52-29-251-2.eu-central-1.compute.amazonaws.com:8080'
+			secure true
+			if (project.hasProperty('jenkinsUserName')) {
+				username jenkinsUserName
+			}
+			if (project.hasProperty('jenkinsPassword')) {
+				password jenkinsPassword
+			}
+		}
+		local {
 			url 'http://192.168.99.100:8080'
 			secure false
 			if (project.hasProperty('jenkinsUserName')) {
@@ -53,7 +63,7 @@ jenkins {
 		}
 	}
 	
-	defaultServer servers.typefox
+	defaultServer servers.local
 	
 	project.file('templates').listFiles().each {templateFile ->
 		templates.create(templateFile.name.split('\\.')[0]) {

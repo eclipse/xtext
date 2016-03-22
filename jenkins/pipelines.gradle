@@ -71,7 +71,7 @@ branches.each { branch ->
 				'''.stripIndent()
 
 				// FIXME def platforms = ['Helios', 'Indigo', 'Juno', 'Kepler', 'Luna', 'Mars', 'Latest']
-				def platforms = ['Juno', 'Latest']
+				def platforms = ['Juno', 'Mars', 'Latest']
 
 				platforms.each {
 					shellCmd = shellCmd + '${b3home}/b3 aggregate --buildModel ${b3FilesDir}/'+it+'.b3aggr --action ${B3_ACTION}\n'
@@ -104,7 +104,7 @@ branches.each { branch ->
 					trigger.commitStatusContext = "Jenkins/${job.name}"
 					trigger.project = job.name
 					if ((slowSuites + ideSuites + generatorSuites).contains(job.suite)
-						|| job.suite == 'xtext-runtime-tests' // these currently contain ui tests
+						|| job.suite == 'xtext-runtime-tests' // FIXME these currently contain ui tests
 						) {
 						config.buildWrappers.appendNode {
 							'hudson.plugins.xvnc.Xvnc'('plugin' : 'xvnc@1.21') {
