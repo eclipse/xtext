@@ -12,11 +12,7 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -81,18 +77,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 				IEditorInput editorInput = EditorUtils.createEditorInput(storage);
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 				final IEditorPart editor = IDE.openEditor(activePage, editorInput, getEditorId());
-				
-				Job selectAndRevealJob = new Job("Select and reveal referenced object") {
-					@Override
-					protected IStatus run(IProgressMonitor monitor) {
-						selectAndReveal(editor, uri, crossReference, indexInList, select);
-						return Status.OK_STATUS;
-					}
-				};
-				selectAndRevealJob.setSystem(true);
-				selectAndRevealJob.setPriority(Job.SHORT);
-				selectAndRevealJob.schedule();
-				
+				selectAndReveal(editor, uri, crossReference, indexInList, select);
 				return EditorUtils.getXtextEditor(editor);
 			} catch (WrappedException e) {
 				logger.error("Error while opening editor part for EMF URI '" + uri + "'", e.getCause());
@@ -110,8 +95,8 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 		return editorInfo.getEditorId();
 	}
 
-	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference,
-			final int indexInList, final boolean select) {
+	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference, final int indexInList,
+			final boolean select) {
 		final XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null && select) {
 			boolean success = false;
@@ -124,15 +109,10 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 							if (resource != null) {
 								EObject object = findEObjectByURI(uri, resource);
 								if (object != null) {
-									final ITextRegion location = (crossReference != null) ? locationProvider
-											.getSignificantTextRegion(object, crossReference, indexInList)
+									final ITextRegion location = (crossReference != null)
+											? locationProvider.getSignificantTextRegion(object, crossReference, indexInList)
 											: locationProvider.getSignificantTextRegion(object);
-									workbench.getDisplay().asyncExec(new Runnable() {
-										@Override
-										public void run() {
-											xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
-										}
-									});
+									xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
 								}
 							}
 						}
