@@ -119,5 +119,6 @@
     <genClasses ecoreClass="Xtext.ecore#//LiteralCondition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//LiteralCondition/true"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="Xtext.ecore#//AbstractGrammarElement"/>
   </genPackages>
 </genmodel:GenModel>

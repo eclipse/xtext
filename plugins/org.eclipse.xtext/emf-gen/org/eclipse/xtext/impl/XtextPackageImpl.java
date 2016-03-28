@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractNegatedToken;
 import org.eclipse.xtext.AbstractRule;
@@ -301,6 +302,13 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * @generated
 	 */
 	private EClass literalConditionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractGrammarElementEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1153,6 +1161,16 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @since 2.10
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractGrammarElement() {
+		return abstractGrammarElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -1299,6 +1317,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 		literalConditionEClass = createEClass(LITERAL_CONDITION);
 		createEAttribute(literalConditionEClass, LITERAL_CONDITION__TRUE);
+
+		abstractGrammarElementEClass = createEClass(ABSTRACT_GRAMMAR_ELEMENT);
 	}
 
 	/**
@@ -1332,9 +1352,11 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		abstractRuleEClass.getESuperTypes().add(this.getAbstractGrammarElement());
 		generatedMetamodelEClass.getESuperTypes().add(this.getAbstractMetamodelDeclaration());
 		referencedMetamodelEClass.getESuperTypes().add(this.getAbstractMetamodelDeclaration());
 		parserRuleEClass.getESuperTypes().add(this.getAbstractRule());
+		abstractElementEClass.getESuperTypes().add(this.getAbstractGrammarElement());
 		actionEClass.getESuperTypes().add(this.getAbstractElement());
 		keywordEClass.getESuperTypes().add(this.getAbstractElement());
 		ruleCallEClass.getESuperTypes().add(this.getAbstractElement());
@@ -1481,6 +1503,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 		initEClass(literalConditionEClass, LiteralCondition.class, "LiteralCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLiteralCondition_True(), theEcorePackage.getEBoolean(), "true", null, 0, 1, LiteralCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(abstractGrammarElementEClass, AbstractGrammarElement.class, "AbstractGrammarElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

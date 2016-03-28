@@ -76,6 +76,7 @@ public class XtextSwitch<T> extends Switch<T> {
 			case XtextPackage.ABSTRACT_RULE: {
 				AbstractRule abstractRule = (AbstractRule)theEObject;
 				T result = caseAbstractRule(abstractRule);
+				if (result == null) result = caseAbstractGrammarElement(abstractRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -103,6 +104,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				ParserRule parserRule = (ParserRule)theEObject;
 				T result = caseParserRule(parserRule);
 				if (result == null) result = caseAbstractRule(parserRule);
+				if (result == null) result = caseAbstractGrammarElement(parserRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -115,6 +117,7 @@ public class XtextSwitch<T> extends Switch<T> {
 			case XtextPackage.ABSTRACT_ELEMENT: {
 				AbstractElement abstractElement = (AbstractElement)theEObject;
 				T result = caseAbstractElement(abstractElement);
+				if (result == null) result = caseAbstractGrammarElement(abstractElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -122,6 +125,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				Action action = (Action)theEObject;
 				T result = caseAction(action);
 				if (result == null) result = caseAbstractElement(action);
+				if (result == null) result = caseAbstractGrammarElement(action);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -129,6 +133,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				Keyword keyword = (Keyword)theEObject;
 				T result = caseKeyword(keyword);
 				if (result == null) result = caseAbstractElement(keyword);
+				if (result == null) result = caseAbstractGrammarElement(keyword);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -136,6 +141,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				RuleCall ruleCall = (RuleCall)theEObject;
 				T result = caseRuleCall(ruleCall);
 				if (result == null) result = caseAbstractElement(ruleCall);
+				if (result == null) result = caseAbstractGrammarElement(ruleCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -143,6 +149,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				Assignment assignment = (Assignment)theEObject;
 				T result = caseAssignment(assignment);
 				if (result == null) result = caseAbstractElement(assignment);
+				if (result == null) result = caseAbstractGrammarElement(assignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -150,6 +157,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				CrossReference crossReference = (CrossReference)theEObject;
 				T result = caseCrossReference(crossReference);
 				if (result == null) result = caseAbstractElement(crossReference);
+				if (result == null) result = caseAbstractGrammarElement(crossReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -157,6 +165,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				TerminalRule terminalRule = (TerminalRule)theEObject;
 				T result = caseTerminalRule(terminalRule);
 				if (result == null) result = caseAbstractRule(terminalRule);
+				if (result == null) result = caseAbstractGrammarElement(terminalRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -164,6 +173,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				AbstractNegatedToken abstractNegatedToken = (AbstractNegatedToken)theEObject;
 				T result = caseAbstractNegatedToken(abstractNegatedToken);
 				if (result == null) result = caseAbstractElement(abstractNegatedToken);
+				if (result == null) result = caseAbstractGrammarElement(abstractNegatedToken);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -172,6 +182,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				T result = caseNegatedToken(negatedToken);
 				if (result == null) result = caseAbstractNegatedToken(negatedToken);
 				if (result == null) result = caseAbstractElement(negatedToken);
+				if (result == null) result = caseAbstractGrammarElement(negatedToken);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -180,6 +191,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				T result = caseUntilToken(untilToken);
 				if (result == null) result = caseAbstractNegatedToken(untilToken);
 				if (result == null) result = caseAbstractElement(untilToken);
+				if (result == null) result = caseAbstractGrammarElement(untilToken);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -187,6 +199,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				Wildcard wildcard = (Wildcard)theEObject;
 				T result = caseWildcard(wildcard);
 				if (result == null) result = caseAbstractElement(wildcard);
+				if (result == null) result = caseAbstractGrammarElement(wildcard);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -194,6 +207,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				EnumRule enumRule = (EnumRule)theEObject;
 				T result = caseEnumRule(enumRule);
 				if (result == null) result = caseAbstractRule(enumRule);
+				if (result == null) result = caseAbstractGrammarElement(enumRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -201,6 +215,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				EnumLiteralDeclaration enumLiteralDeclaration = (EnumLiteralDeclaration)theEObject;
 				T result = caseEnumLiteralDeclaration(enumLiteralDeclaration);
 				if (result == null) result = caseAbstractElement(enumLiteralDeclaration);
+				if (result == null) result = caseAbstractGrammarElement(enumLiteralDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -209,6 +224,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				T result = caseAlternatives(alternatives);
 				if (result == null) result = caseCompoundElement(alternatives);
 				if (result == null) result = caseAbstractElement(alternatives);
+				if (result == null) result = caseAbstractGrammarElement(alternatives);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -217,6 +233,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				T result = caseUnorderedGroup(unorderedGroup);
 				if (result == null) result = caseCompoundElement(unorderedGroup);
 				if (result == null) result = caseAbstractElement(unorderedGroup);
+				if (result == null) result = caseAbstractGrammarElement(unorderedGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -225,6 +242,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				T result = caseGroup(group);
 				if (result == null) result = caseCompoundElement(group);
 				if (result == null) result = caseAbstractElement(group);
+				if (result == null) result = caseAbstractGrammarElement(group);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -232,6 +250,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				CharacterRange characterRange = (CharacterRange)theEObject;
 				T result = caseCharacterRange(characterRange);
 				if (result == null) result = caseAbstractElement(characterRange);
+				if (result == null) result = caseAbstractGrammarElement(characterRange);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -239,6 +258,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				CompoundElement compoundElement = (CompoundElement)theEObject;
 				T result = caseCompoundElement(compoundElement);
 				if (result == null) result = caseAbstractElement(compoundElement);
+				if (result == null) result = caseAbstractGrammarElement(compoundElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -246,6 +266,7 @@ public class XtextSwitch<T> extends Switch<T> {
 				EOF eof = (EOF)theEObject;
 				T result = caseEOF(eof);
 				if (result == null) result = caseAbstractElement(eof);
+				if (result == null) result = caseAbstractGrammarElement(eof);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -308,6 +329,12 @@ public class XtextSwitch<T> extends Switch<T> {
 				LiteralCondition literalCondition = (LiteralCondition)theEObject;
 				T result = caseLiteralCondition(literalCondition);
 				if (result == null) result = caseCondition(literalCondition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.ABSTRACT_GRAMMAR_ELEMENT: {
+				AbstractGrammarElement abstractGrammarElement = (AbstractGrammarElement)theEObject;
+				T result = caseAbstractGrammarElement(abstractGrammarElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -846,6 +873,22 @@ public class XtextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLiteralCondition(LiteralCondition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Grammar Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * @since 2.10
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Grammar Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractGrammarElement(AbstractGrammarElement object) {
 		return null;
 	}
 

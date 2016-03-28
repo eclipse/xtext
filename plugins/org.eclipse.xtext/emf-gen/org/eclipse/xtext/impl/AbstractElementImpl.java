@@ -27,7 +27,7 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public class AbstractElementImpl extends MinimalEObjectImpl.Container implements AbstractElement {
+public class AbstractElementImpl extends AbstractGrammarElementImpl implements AbstractElement {
 	/**
 	 * The default value of the '{@link #getCardinality() <em>Cardinality</em>}' attribute.
 	 * <!-- begin-user-doc -->

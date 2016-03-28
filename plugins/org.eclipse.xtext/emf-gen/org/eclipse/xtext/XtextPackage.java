@@ -131,6 +131,27 @@ public interface XtextPackage extends EPackage {
 	int GRAMMAR_FEATURE_COUNT = 6;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractGrammarElementImpl <em>Abstract Grammar Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * @since 2.10
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.impl.AbstractGrammarElementImpl
+	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAbstractGrammarElement()
+	 * @generated
+	 */
+	int ABSTRACT_GRAMMAR_ELEMENT = 35;
+
+	/**
+	 * The number of structural features of the '<em>Abstract Grammar Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * @since 2.10
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_GRAMMAR_ELEMENT_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractRuleImpl <em>Abstract Rule</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -147,7 +168,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_RULE__NAME = 0;
+	int ABSTRACT_RULE__NAME = ABSTRACT_GRAMMAR_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -156,7 +177,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_RULE__TYPE = 1;
+	int ABSTRACT_RULE__TYPE = ABSTRACT_GRAMMAR_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
@@ -165,7 +186,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_RULE__ALTERNATIVES = 2;
+	int ABSTRACT_RULE__ALTERNATIVES = ABSTRACT_GRAMMAR_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Rule</em>' class.
@@ -174,7 +195,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_RULE_FEATURE_COUNT = 3;
+	int ABSTRACT_RULE_FEATURE_COUNT = ABSTRACT_GRAMMAR_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractMetamodelDeclarationImpl <em>Abstract Metamodel Declaration</em>}' class.
@@ -445,7 +466,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ELEMENT__CARDINALITY = 0;
+	int ABSTRACT_ELEMENT__CARDINALITY = ABSTRACT_GRAMMAR_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
@@ -454,7 +475,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ELEMENT__PREDICATED = 1;
+	int ABSTRACT_ELEMENT__PREDICATED = ABSTRACT_GRAMMAR_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
@@ -464,7 +485,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ELEMENT__FIRST_SET_PREDICATED = 2;
+	int ABSTRACT_ELEMENT__FIRST_SET_PREDICATED = ABSTRACT_GRAMMAR_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Element</em>' class.
@@ -473,7 +494,7 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ELEMENT_FEATURE_COUNT = 3;
+	int ABSTRACT_ELEMENT_FEATURE_COUNT = ABSTRACT_GRAMMAR_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.ActionImpl <em>Action</em>}' class.
@@ -2806,6 +2827,17 @@ public interface XtextPackage extends EPackage {
 	EAttribute getLiteralCondition_True();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.AbstractGrammarElement <em>Abstract Grammar Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.10
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstract Grammar Element</em>'.
+	 * @see org.eclipse.xtext.AbstractGrammarElement
+	 * @generated
+	 */
+	EClass getAbstractGrammarElement();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3611,6 +3643,17 @@ public interface XtextPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LITERAL_CONDITION__TRUE = eINSTANCE.getLiteralCondition_True();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.impl.AbstractGrammarElementImpl <em>Abstract Grammar Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * @since 2.10
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.impl.AbstractGrammarElementImpl
+		 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAbstractGrammarElement()
+		 * @generated
+		 */
+		EClass ABSTRACT_GRAMMAR_ELEMENT = eINSTANCE.getAbstractGrammarElement();
 
 	}
 

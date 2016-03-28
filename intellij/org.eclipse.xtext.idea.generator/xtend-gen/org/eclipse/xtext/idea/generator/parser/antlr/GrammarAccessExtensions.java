@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
@@ -478,7 +479,7 @@ public class GrammarAccessExtensions {
     }
   }
   
-  public List<AbstractElement> contentsAsList(final EObject it) {
+  public List<AbstractElement> contentsAsList(final AbstractGrammarElement it) {
     if (it instanceof UnorderedGroup) {
       return _contentsAsList((UnorderedGroup)it);
     } else if (it instanceof CompoundElement) {
