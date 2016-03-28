@@ -33,7 +33,7 @@ package «getQuickfixProviderName().toJavaPackage()»;
 /**
  * Custom quickfixes.
  *
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#quick-fixes
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 public class «getQuickfixProviderName().toSimpleName()» extends «superClassName» {
 
@@ -65,7 +65,7 @@ package «getQuickfixProviderName().toJavaPackage()»
 /**
  * Custom quickfixes.
  *
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#quick-fixes
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 class «getQuickfixProviderName().toSimpleName()» extends «superClassName» {
 
