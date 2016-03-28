@@ -382,8 +382,8 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 
 	@SuppressWarnings("unchecked")
 	private IBinding resolveBindings(IType jdtType, IJavaProject javaProject) {
-		ThreadLocal<Object> abortOnMissingSource = JavaModelManager.getJavaModelManager().abortOnMissingSource;
-		Object wasAbortOnMissingSource = abortOnMissingSource.get();
+		ThreadLocal<Boolean> abortOnMissingSource = JavaModelManager.getJavaModelManager().abortOnMissingSource;
+		Boolean wasAbortOnMissingSource = abortOnMissingSource.get();
 		try {
 			abortOnMissingSource.set(Boolean.TRUE);
 			resolveBinding.start();
