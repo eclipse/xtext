@@ -56,6 +56,7 @@ public class TypeChooser {
 	
 	public JvmDeclaredType choose(final List<JvmDeclaredType> candidateTypes, Iterable<TypeUsage> usages, final XtextResource resource) {
 		XtextEditor activeXtextEditor = EditorUtils.getActiveXtextEditor();
+		if (activeXtextEditor==null) return null;
 		revealInEditor(activeXtextEditor, usages, resource);
 		Shell shell = Display.getDefault().getActiveShell();
 		IStructuredContentProvider contentProvider = new ContentProvider();
