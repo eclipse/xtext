@@ -10,6 +10,7 @@ package org.eclipse.xtext.linking.lazy;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -49,14 +50,14 @@ public class SyntheticLinkingSupport {
 	 */
 	protected INode createCrossReferenceNode(EObject obj, EReference eRef, String crossRefString, int offset, int length) {
 		CompositeNode parent = getParent(obj, eRef, crossRefString, offset, length);
-		EObject grammarElement = getGrammarElement(obj, eRef, crossRefString, offset, length);
+		AbstractGrammarElement grammarElement = getGrammarElement(obj, eRef, crossRefString, offset, length);
 		return new SyntheticLinkingLeafNode(obj, crossRefString, offset, length, grammarElement, parent);
 	}
 
 	/**
 	 * @since 2.10
 	 */
-	protected EObject getGrammarElement(EObject obj, EReference eRef, String crossRefString, int offset, int length) {
+	protected AbstractGrammarElement getGrammarElement(EObject obj, EReference eRef, String crossRefString, int offset, int length) {
 		return XtextFactory.eINSTANCE.createKeyword();
 	}
 
@@ -89,7 +90,7 @@ class SyntheticLinkingLeafNode extends LeafNode {
 	private final String text;
 	private final EObject semanticElement;
 
-	public SyntheticLinkingLeafNode(EObject semanticElement, String text, int offset, int length, EObject grammarElement, CompositeNode parent) {
+	public SyntheticLinkingLeafNode(EObject semanticElement, String text, int offset, int length, AbstractGrammarElement grammarElement, CompositeNode parent) {
 		this.text = text;
 		this.semanticElement = semanticElement;
 

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
@@ -84,7 +85,7 @@ public class NodeModelPrinter {
     _builder.append(_totalTextRegion, "");
     _builder.newLineIfNotEmpty();
     _builder.append("grammarElements: ");
-    EObject _grammarElement = it.getGrammarElement();
+    AbstractGrammarElement _grammarElement = it.getGrammarElement();
     String _printGrammarElement = this.printGrammarElement(_grammarElement);
     _builder.append(_printGrammarElement, "");
     _builder.newLineIfNotEmpty();

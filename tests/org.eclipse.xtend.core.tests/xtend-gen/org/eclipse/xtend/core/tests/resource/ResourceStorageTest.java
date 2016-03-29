@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -191,8 +192,8 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
           int _totalLength = orig.getTotalLength();
           int _totalLength_1 = rest.getTotalLength();
           Assert.assertEquals(_totalLength, _totalLength_1);
-          EObject _grammarElement = orig.getGrammarElement();
-          EObject _grammarElement_1 = rest.getGrammarElement();
+          AbstractGrammarElement _grammarElement = orig.getGrammarElement();
+          AbstractGrammarElement _grammarElement_1 = rest.getGrammarElement();
           Assert.assertSame(_grammarElement, _grammarElement_1);
           Resource _eResource_3 = file.eResource();
           EObject _semanticElement = orig.getSemanticElement();

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
@@ -165,7 +166,7 @@ public interface INode {
 	 * errors. This happens usually when a keyword occurred at an unexpected offset.
 	 * @return the grammar element that created this node. May return <code>null</code>.
 	 */
-	EObject getGrammarElement();
+	AbstractGrammarElement getGrammarElement();
 	
 	/**
 	 * Returns the nearest semantic object that is associated with the subtree of this node. May return <code>null</code> whenever

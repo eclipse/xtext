@@ -273,6 +273,59 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/nodemodel/INode.java" type="org.eclipse.xtext.nodemodel.INode">
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.INode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.INode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="1211105284">
+            <message_arguments>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/nodemodel/impl/AbstractNode.java" type="org.eclipse.xtext.nodemodel.impl.AbstractNode">
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.impl.AbstractNode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="1143996420">
+            <message_arguments>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/nodemodel/impl/CompositeNode.java" type="org.eclipse.xtext.nodemodel.impl.CompositeNode">
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.impl.CompositeNode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/nodemodel/impl/SyntheticCompositeNode.java" type="org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode">
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="1143996420">
+            <message_arguments>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/parsetree/reconstr/impl/TreeConstState.java" type="org.eclipse.xtext.parsetree.reconstr.impl.TreeConstState">
         <filter id="576720909">
             <message_arguments>

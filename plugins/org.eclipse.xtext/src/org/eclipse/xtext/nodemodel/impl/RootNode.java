@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.serialization.DeserializationConversionContext;
@@ -203,7 +203,7 @@ public class RootNode extends CompositeNodeWithSemanticElementAndSyntaxError {
 	 * @since 2.3
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	public void fillGrammarElementToIdMap(Map<EObject, Integer> grammarElementToIdMap,
+	public void fillGrammarElementToIdMap(Map<AbstractGrammarElement, Integer> grammarElementToIdMap,
 			List<String> grammarIdToURIMap) {
 		fillGrammarElementToIdMap(0, grammarElementToIdMap, grammarIdToURIMap);
 	}

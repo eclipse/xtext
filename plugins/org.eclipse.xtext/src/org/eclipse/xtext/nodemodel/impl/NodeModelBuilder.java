@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.RandomAccess;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -200,13 +201,13 @@ public class NodeModelBuilder {
 				// it is our only child and has no direct semantic element
 				// so we can fold its grammar element into our own grammar elements
 				// if it refers not to a syntax error or a semantic object
-				EObject myGrammarElement = casted.getGrammarElement();
+				AbstractGrammarElement myGrammarElement = casted.getGrammarElement();
 				Object childGrammarElement = firstChild.basicGetGrammarElement();
-				EObject[] list = null;
-				if (childGrammarElement instanceof EObject) {
-					list = new EObject[] {myGrammarElement, (EObject) childGrammarElement};
+				AbstractGrammarElement[] list = null;
+				if (childGrammarElement instanceof AbstractGrammarElement) {
+					list = new AbstractGrammarElement[] {myGrammarElement, (AbstractGrammarElement) childGrammarElement};
 				} else {
-					list = newEObjectArray(myGrammarElement, (EObject[]) childGrammarElement);
+					list = newGrammarElementArray(myGrammarElement, (AbstractGrammarElement[]) childGrammarElement);
 				}
 				casted.basicSetGrammarElement(cachedFoldedGrammarElements.intern(list));
 				replaceChildren(firstChild, casted);
@@ -267,8 +268,8 @@ public class NodeModelBuilder {
 		}
 	}
 	
-	private /* @Nullable */ EObject[] newEObjectArray(/* @Nullable */ EObject first, EObject[] rest) {
-		EObject[] array = new EObject[rest.length + 1];
+	private /* @Nullable */ AbstractGrammarElement[] newGrammarElementArray(/* @Nullable */ AbstractGrammarElement first, AbstractGrammarElement[] rest) {
+		AbstractGrammarElement[] array = new AbstractGrammarElement[rest.length + 1];
 		array[0] = first;
 		System.arraycopy(rest, 0, array, 1, rest.length);
 		return array;
