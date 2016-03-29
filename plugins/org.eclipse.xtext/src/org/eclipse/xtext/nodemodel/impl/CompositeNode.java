@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -151,23 +151,23 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	}
 
 	protected boolean isFolded(Object grammarElementOrArray) {
-		return !(grammarElementOrArray == null || grammarElementOrArray instanceof EObject);
+		return !(grammarElementOrArray == null || grammarElementOrArray instanceof AbstractGrammarElement);
 	}
 	
 	public ICompositeNode resolveAsParent() {
 		Object grammarElementOrArray = basicGetGrammarElement();
 		if (!isFolded())
 			return this;
-		EObject[] grammarElements = (EObject[]) grammarElementOrArray;
+		AbstractGrammarElement[] grammarElements = (AbstractGrammarElement[]) grammarElementOrArray;
 		return new SyntheticCompositeNode(this, grammarElements.length - 1);
 	}	
 	
 	@Override
-	public EObject getGrammarElement() {
+	public AbstractGrammarElement getGrammarElement() {
 		Object grammarElementOrArray = basicGetGrammarElement();
 		if (!isFolded())
-			return (EObject) grammarElementOrArray;
-		EObject[] grammarElements = (EObject[]) grammarElementOrArray;
+			return (AbstractGrammarElement) grammarElementOrArray;
+		AbstractGrammarElement[] grammarElements = (AbstractGrammarElement[]) grammarElementOrArray;
 		return grammarElements[0];
 	}
 
@@ -277,7 +277,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	}
 
 	@Override
-	int fillGrammarElementToIdMap(int currentId, Map<EObject, Integer> grammarElementToIdMap,
+	int fillGrammarElementToIdMap(int currentId, Map<AbstractGrammarElement, Integer> grammarElementToIdMap,
 			List<String> grammarIdToURIMap) {
 		currentId = super.fillGrammarElementToIdMap(currentId, grammarElementToIdMap, grammarIdToURIMap);
 

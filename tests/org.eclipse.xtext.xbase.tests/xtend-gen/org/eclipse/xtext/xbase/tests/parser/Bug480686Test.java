@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -152,16 +153,16 @@ public class Bug480686Test {
       final ICompositeNode root = _parseResult.getRootNode();
       InvariantChecker _invariantChecker = new InvariantChecker();
       _invariantChecker.checkInvariant(root);
-      final HashSet<EObject> set = CollectionLiterals.<EObject>newHashSet();
+      final HashSet<AbstractGrammarElement> set = CollectionLiterals.<AbstractGrammarElement>newHashSet();
       BidiTreeIterable<INode> _asTreeIterable = root.getAsTreeIterable();
       for (final INode node : _asTreeIterable) {
         if ((node instanceof ICompositeNode)) {
-          EObject _grammarElement = ((ICompositeNode)node).getGrammarElement();
+          AbstractGrammarElement _grammarElement = ((ICompositeNode)node).getGrammarElement();
           boolean _tripleNotEquals = (_grammarElement != null);
           if (_tripleNotEquals) {
-            EObject _grammarElement_1 = ((ICompositeNode)node).getGrammarElement();
+            AbstractGrammarElement _grammarElement_1 = ((ICompositeNode)node).getGrammarElement();
             String _string = _grammarElement_1.toString();
-            EObject _grammarElement_2 = ((ICompositeNode)node).getGrammarElement();
+            AbstractGrammarElement _grammarElement_2 = ((ICompositeNode)node).getGrammarElement();
             boolean _add = set.add(_grammarElement_2);
             Assert.assertTrue(_string, _add);
           } else {
@@ -183,16 +184,16 @@ public class Bug480686Test {
       res.update(0, 0, "newArrayList()");
       IParseResult _parseResult = res.getParseResult();
       final ICompositeNode root = _parseResult.getRootNode();
-      final HashSet<EObject> set = CollectionLiterals.<EObject>newHashSet();
+      final HashSet<AbstractGrammarElement> set = CollectionLiterals.<AbstractGrammarElement>newHashSet();
       BidiTreeIterable<INode> _asTreeIterable = root.getAsTreeIterable();
       for (final INode node : _asTreeIterable) {
         if ((node instanceof ICompositeNode)) {
-          EObject _grammarElement = ((ICompositeNode)node).getGrammarElement();
+          AbstractGrammarElement _grammarElement = ((ICompositeNode)node).getGrammarElement();
           boolean _tripleNotEquals = (_grammarElement != null);
           if (_tripleNotEquals) {
-            EObject _grammarElement_1 = ((ICompositeNode)node).getGrammarElement();
+            AbstractGrammarElement _grammarElement_1 = ((ICompositeNode)node).getGrammarElement();
             String _string = _grammarElement_1.toString();
-            EObject _grammarElement_2 = ((ICompositeNode)node).getGrammarElement();
+            AbstractGrammarElement _grammarElement_2 = ((ICompositeNode)node).getGrammarElement();
             boolean _add = set.add(_grammarElement_2);
             Assert.assertTrue(_string, _add);
           } else {
@@ -336,8 +337,8 @@ public class Bug480686Test {
       int _totalLength_1 = other.getTotalLength();
       Assert.assertEquals(_totalLength, _totalLength_1);
     }
-    EObject _grammarElement = node.getGrammarElement();
-    EObject _grammarElement_1 = other.getGrammarElement();
+    AbstractGrammarElement _grammarElement = node.getGrammarElement();
+    AbstractGrammarElement _grammarElement_1 = other.getGrammarElement();
     Assert.assertEquals(_grammarElement, _grammarElement_1);
     boolean _hasDirectSemanticElement = node.hasDirectSemanticElement();
     boolean _hasDirectSemanticElement_1 = other.hasDirectSemanticElement();

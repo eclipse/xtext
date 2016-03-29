@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -682,7 +683,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
           _and = _greaterEqualsThan;
         }
         if (_and) {
-          EObject _grammarElement = currentNode.getGrammarElement();
+          AbstractGrammarElement _grammarElement = currentNode.getGrammarElement();
           if ((_grammarElement instanceof CrossReference)) {
             return;
           }

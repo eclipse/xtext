@@ -9,6 +9,8 @@ package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.XtextFactory;
 import org.junit.Test;
 
 /**
@@ -59,7 +61,7 @@ public class LeafNodeTest extends AbstractNodeTest {
 	@Override
 	@Test public void testGetGrammarElement() {
 		LeafNode leafNode = createNode();
-		EObject grammarElement = EcoreFactory.eINSTANCE.createEObject();
+		Keyword grammarElement = XtextFactory.eINSTANCE.createKeyword();
 		leafNode.basicSetGrammarElement(grammarElement);
 		assertSame(grammarElement, leafNode.getGrammarElement());
 	}

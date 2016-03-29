@@ -14,9 +14,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
@@ -251,22 +251,22 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       List<EnumRule> _allEnumRules = GrammarUtil.allEnumRules(g);
       Iterable<AbstractRule> _plus = Iterables.<AbstractRule>concat(_allParserRules, _allEnumRules);
       Collection<? extends AbstractElement> _allAlternatives = GrammarUtil.getAllAlternatives(g);
-      Iterable<EObject> _plus_1 = Iterables.<EObject>concat(_plus, _allAlternatives);
+      Iterable<AbstractGrammarElement> _plus_1 = Iterables.<AbstractGrammarElement>concat(_plus, _allAlternatives);
       Collection<? extends AbstractElement> _allGroups = GrammarUtil.getAllGroups(g);
-      Iterable<EObject> _plus_2 = Iterables.<EObject>concat(_plus_1, _allGroups);
+      Iterable<AbstractGrammarElement> _plus_2 = Iterables.<AbstractGrammarElement>concat(_plus_1, _allGroups);
       Collection<? extends AbstractElement> _allUnorderedGroups = GrammarUtil.getAllUnorderedGroups(g);
-      Iterable<EObject> _plus_3 = Iterables.<EObject>concat(_plus_2, _allUnorderedGroups);
+      Iterable<AbstractGrammarElement> _plus_3 = Iterables.<AbstractGrammarElement>concat(_plus_2, _allUnorderedGroups);
       Collection<? extends AbstractElement> _allAssignments = GrammarUtil.getAllAssignments(g);
-      Iterable<EObject> _plus_4 = Iterables.<EObject>concat(_plus_3, _allAssignments);
-      final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+      Iterable<AbstractGrammarElement> _plus_4 = Iterables.<AbstractGrammarElement>concat(_plus_3, _allAssignments);
+      final Function1<AbstractGrammarElement, Boolean> _function = new Function1<AbstractGrammarElement, Boolean>() {
         @Override
-        public Boolean apply(final EObject it) {
+        public Boolean apply(final AbstractGrammarElement it) {
           AbstractRule _containingRule = GrammarUtil.containingRule(it);
           return Boolean.valueOf(AntlrContentAssistGrammarGenerator.this._grammarAccessExtensions.isCalled(_containingRule, g));
         }
       };
-      Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_plus_4, _function);
-      for(final EObject rule : _filter) {
+      Iterable<AbstractGrammarElement> _filter = IterableExtensions.<AbstractGrammarElement>filter(_plus_4, _function);
+      for(final AbstractGrammarElement rule : _filter) {
         _builder.newLine();
         CharSequence _compileRule = this.compileRule(rule, g, options);
         _builder.append(_compileRule, "");

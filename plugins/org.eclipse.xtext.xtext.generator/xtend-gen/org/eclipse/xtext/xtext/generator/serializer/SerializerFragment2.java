@@ -31,6 +31,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
@@ -1054,7 +1055,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   }
   
   private EObject getContextObject(final ISerializationContext context) {
-    EObject _elvis = null;
+    AbstractGrammarElement _elvis = null;
     Action _assignedAction = context.getAssignedAction();
     if (_assignedAction != null) {
       _elvis = _assignedAction;

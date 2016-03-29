@@ -8,6 +8,7 @@
 package org.eclipse.xtext.nodemodel.impl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
@@ -127,8 +128,8 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 	}
 
 	@Override
-	public EObject getGrammarElement() {
-		EObject[] array = (EObject[]) delegate.basicGetGrammarElement();
+	public AbstractGrammarElement getGrammarElement() {
+		AbstractGrammarElement[] array = (AbstractGrammarElement[]) delegate.basicGetGrammarElement();
 		return array[grammarElementIdx];
 	}
 

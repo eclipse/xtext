@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -75,7 +76,7 @@ public class ImportsCollector {
           _and = false;
         } else {
           TerminalRule _mL_COMMENTRule = this.grammarAccess.getML_COMMENTRule();
-          EObject _grammarElement = node.getGrammarElement();
+          AbstractGrammarElement _grammarElement = node.getGrammarElement();
           boolean _equals = _mL_COMMENTRule.equals(_grammarElement);
           _and = _equals;
         }

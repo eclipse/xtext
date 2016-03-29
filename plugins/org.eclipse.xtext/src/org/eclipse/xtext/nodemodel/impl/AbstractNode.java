@@ -17,6 +17,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
@@ -281,8 +282,8 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	}
 	
 	@Override
-	public EObject getGrammarElement() {
-		return (EObject) grammarElementOrArray;
+	public AbstractGrammarElement getGrammarElement() {
+		return (AbstractGrammarElement) grammarElementOrArray;
 	}
 	
 	protected Object basicGetGrammarElement() {
@@ -421,17 +422,17 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 		SerializationUtil.writeInt(out, grammarId.intValue(), true);
 	}
 
-	int fillGrammarElementToIdMap(int currentId, Map<EObject, Integer> grammarElementToIdMap,
+	int fillGrammarElementToIdMap(int currentId, Map<AbstractGrammarElement, Integer> grammarElementToIdMap,
 			List<String> grammarIdToURIMap) {
 		if (grammarElementOrArray != null) {
-			if (grammarElementOrArray instanceof EObject) {
-				EObject grammarElement = (EObject) grammarElementOrArray;
+			if (grammarElementOrArray instanceof AbstractGrammarElement) {
+				AbstractGrammarElement grammarElement = (AbstractGrammarElement) grammarElementOrArray;
 				currentId = updateMapping(currentId, grammarElementToIdMap, grammarIdToURIMap, grammarElement);
 			}
 
-			if (grammarElementOrArray instanceof EObject[]) {
-				EObject[] grammarElements = (EObject[]) grammarElementOrArray;
-				for (EObject grammarElement : grammarElements) {
+			if (grammarElementOrArray instanceof AbstractGrammarElement[]) {
+				AbstractGrammarElement[] grammarElements = (AbstractGrammarElement[]) grammarElementOrArray;
+				for (AbstractGrammarElement grammarElement : grammarElements) {
 					currentId = updateMapping(currentId, grammarElementToIdMap, grammarIdToURIMap, grammarElement);
 				}
 			}
@@ -440,8 +441,8 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 		return currentId;
 	}
 
-	private int updateMapping(int currentId, Map<EObject, Integer> grammarElementToIdMap,
-			List<String> grammarIdToURIMap, EObject grammarElement) {
+	private int updateMapping(int currentId, Map<AbstractGrammarElement, Integer> grammarElementToIdMap,
+			List<String> grammarIdToURIMap, AbstractGrammarElement grammarElement) {
 		if (!grammarElementToIdMap.containsKey(grammarElement)) {
 			URI uri = EcoreUtil.getURI(grammarElement);
 			if (uri == null) {

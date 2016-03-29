@@ -9,6 +9,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
@@ -714,7 +715,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
       final Iterable<ILeafNode> leafs = ((ICompositeNode)node).getLeafNodes();
       for (final ILeafNode n : leafs) {
         boolean _and = false;
-        EObject _grammarElement = n.getGrammarElement();
+        AbstractGrammarElement _grammarElement = n.getGrammarElement();
         if (!(_grammarElement instanceof Keyword)) {
           _and = false;
         } else {
@@ -956,7 +957,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
         XExpression _last_1 = IterableExtensions.<XExpression>last(params);
         INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_last_1);
         INode _firstChild = ((ICompositeNode) _nodeForEObject).getFirstChild();
-        final EObject grammarElement = _firstChild.getGrammarElement();
+        final AbstractGrammarElement grammarElement = _firstChild.getGrammarElement();
         XClosure _xifexpression_1 = null;
         boolean _or = false;
         boolean _or_1 = false;
@@ -1627,11 +1628,11 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if (!_notEquals) {
       _and = false;
     } else {
-      EObject _grammarElement = node.getGrammarElement();
+      AbstractGrammarElement _grammarElement = node.getGrammarElement();
       _and = (_grammarElement instanceof CrossReference);
     }
     if (_and) {
-      EObject _grammarElement_1 = node.getGrammarElement();
+      AbstractGrammarElement _grammarElement_1 = node.getGrammarElement();
       final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
       if ((terminal instanceof RuleCall)) {
         return ((RuleCall)terminal).getRule();

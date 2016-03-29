@@ -8,6 +8,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="emf-gen/org/eclipse/xtext/XtextPackage.java" type="org.eclipse.xtext.XtextPackage$Literals">
+        <filter comment="bug325658 Introduce common base class for AbstractElement and AbstractRule" id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="ABSTRACT_GRAMMAR_ELEMENT"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src-gen/org/eclipse/xtext/parser/antlr/XtextParser.java" type="org.eclipse.xtext.parser.antlr.XtextParser">
         <filter id="643842064">
             <message_arguments>
@@ -262,6 +270,59 @@
                 <message_argument value="TraceRegionSerializer"/>
                 <message_argument value="JavaIoFileSystemAccess"/>
                 <message_argument value="JavaIoFileSystemAccess(IResourceServiceProviderRegistry, IEncodingProvider, TraceFileNameProvider, TraceRegionSerializer)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/nodemodel/INode.java" type="org.eclipse.xtext.nodemodel.INode">
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.INode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.INode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="1211105284">
+            <message_arguments>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/nodemodel/impl/AbstractNode.java" type="org.eclipse.xtext.nodemodel.impl.AbstractNode">
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.impl.AbstractNode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="1143996420">
+            <message_arguments>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/nodemodel/impl/CompositeNode.java" type="org.eclipse.xtext.nodemodel.impl.CompositeNode">
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.impl.CompositeNode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/nodemodel/impl/SyntheticCompositeNode.java" type="org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode">
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode"/>
+                <message_argument value="getGrammarElement()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Bug#325658: Introduced common base class AbstractGrammarElement for AbstractElement and AbstractRule. Use this base class instead of the generic EObject class." id="1143996420">
+            <message_arguments>
+                <message_argument value="getGrammarElement()"/>
             </message_arguments>
         </filter>
     </resource>

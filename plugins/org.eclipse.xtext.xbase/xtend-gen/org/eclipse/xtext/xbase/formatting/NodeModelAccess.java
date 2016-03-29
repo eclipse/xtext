@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
@@ -41,7 +42,7 @@ public class NodeModelAccess {
           if (!_equals) {
             _and_1 = false;
           } else {
-            EObject _grammarElement = it.getGrammarElement();
+            AbstractGrammarElement _grammarElement = it.getGrammarElement();
             _and_1 = (_grammarElement instanceof Keyword);
           }
           if (!_and_1) {
@@ -76,7 +77,7 @@ public class NodeModelAccess {
           if (!_equals) {
             _and_1 = false;
           } else {
-            EObject _grammarElement = it.getGrammarElement();
+            AbstractGrammarElement _grammarElement = it.getGrammarElement();
             _and_1 = (_grammarElement instanceof Keyword);
           }
           if (!_and_1) {
@@ -125,7 +126,7 @@ public class NodeModelAccess {
           if (!_notEquals) {
             _and = false;
           } else {
-            EObject _grammarElement = it.getGrammarElement();
+            AbstractGrammarElement _grammarElement = it.getGrammarElement();
             _and = (_grammarElement instanceof Keyword);
           }
           return Boolean.valueOf(_and);

@@ -31,7 +31,7 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements AbstractRule {
+public class AbstractRuleImpl extends AbstractGrammarElementImpl implements AbstractRule {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

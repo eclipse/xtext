@@ -208,6 +208,10 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 				return createLiteralConditionAdapter();
 			}
 			@Override
+			public Adapter caseAbstractGrammarElement(AbstractGrammarElement object) {
+				return createAbstractGrammarElementAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -723,6 +727,21 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLiteralConditionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.AbstractGrammarElement <em>Abstract Grammar Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.10
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.AbstractGrammarElement
+	 * @generated
+	 */
+	public Adapter createAbstractGrammarElementAdapter() {
 		return null;
 	}
 

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
@@ -46,7 +47,7 @@ public class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
         for (final ILeafNode leafNode : _leafNodes) {
           {
             boolean break_ = true;
-            final EObject grammarElement = leafNode.getGrammarElement();
+            final AbstractGrammarElement grammarElement = leafNode.getGrammarElement();
             if ((grammarElement instanceof TerminalRule)) {
               final String terminalRuleName = ((TerminalRule)grammarElement).getName();
               boolean _equalsIgnoreCase = this.ruleName.equalsIgnoreCase(terminalRuleName);

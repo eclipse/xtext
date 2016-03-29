@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface AbstractElement extends EObject {
+public interface AbstractElement extends AbstractGrammarElement {
 	/**
 	 * Returns the value of the '<em><b>Cardinality</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -11,8 +11,8 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.AbstractGrammarElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -118,7 +118,7 @@ public class DefaultTaskFinder implements ITaskFinder {
   }
   
   protected boolean canContainTaskTags(final ILeafNode node) {
-    final EObject rule = node.getGrammarElement();
+    final AbstractGrammarElement rule = node.getGrammarElement();
     if ((rule instanceof AbstractRule)) {
       return this.hiddenTokenHelper.isComment(((AbstractRule)rule));
     }
