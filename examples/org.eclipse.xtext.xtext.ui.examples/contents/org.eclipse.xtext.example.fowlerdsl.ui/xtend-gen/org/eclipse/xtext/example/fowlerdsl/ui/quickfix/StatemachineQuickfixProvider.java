@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 /**
  * Custom quickfixes.
  * 
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#quick-fixes
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 @SuppressWarnings("all")
 public class StatemachineQuickfixProvider extends DefaultQuickfixProvider {
