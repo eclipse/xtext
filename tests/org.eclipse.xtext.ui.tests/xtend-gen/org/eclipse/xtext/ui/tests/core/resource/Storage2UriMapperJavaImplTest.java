@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.core.resource;
 import com.google.common.base.Objects;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.core.resources.IFile;
@@ -17,11 +18,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
@@ -362,6 +365,34 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       IProject _project_5 = project2.getProject();
       IProgressMonitor _monitor_5 = IResourcesSetupUtil.monitor();
       _project_5.delete(true, _monitor_5);
+      this.assertNonProjects();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testOnRemoveTwoProjects() {
+    try {
+      final IJavaProject project = JavaProjectSetupUtil.createJavaProject("testProject");
+      final IJavaProject project2 = JavaProjectSetupUtil.createJavaProject("testProject2");
+      Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData = this.getCachedPackageFragmentRootData();
+      final int sizeBefore = _cachedPackageFragmentRootData.size();
+      final IFile file = this.createJar(project);
+      JavaProjectSetupUtil.addJarToClasspath(project, file);
+      JavaProjectSetupUtil.addJarToClasspath(project2, file);
+      this.assertBothProjects(sizeBefore);
+      final WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
+        @Override
+        protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+          IProject _project = project.getProject();
+          _project.delete(true, monitor);
+          IProject _project_1 = project2.getProject();
+          _project_1.delete(true, monitor);
+        }
+      };
+      IProgressMonitor _monitor = IResourcesSetupUtil.monitor();
+      op.run(_monitor);
       this.assertNonProjects();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
