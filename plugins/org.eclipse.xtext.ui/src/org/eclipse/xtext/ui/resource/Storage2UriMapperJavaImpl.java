@@ -430,7 +430,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			IJavaProject project = (IJavaProject) projectDelta.getElement();
 			if((projectDelta.getKind() & IJavaElementDelta.REMOVED) != 0) {
 				clearCache(project, Collections.<PackageFragmentRootData>emptySet());
-				return;
+				//return;
 			} 
 			switch(projectDelta.getFlags()) {
 				case IJavaElementDelta.F_OPENED: 
