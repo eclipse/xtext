@@ -90,6 +90,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
@@ -494,6 +495,39 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
           genModel.reconcile();
           this.doGenerate(genModel);
           this.addProjectContributions(clonedGrammar, generatedPackages, workingResourceSet);
+          for (final EPackage pkg : generatedPackages) {
+            {
+              Resource _eResource_1 = genModel.eResource();
+              ResourceSet _resourceSet = _eResource_1.getResourceSet();
+              final GenPackage genPkg = GenModelUtil2.getGenPackage(pkg, _resourceSet);
+              GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
+              String _qualifiedPackageInterfaceName = genPkg.getQualifiedPackageInterfaceName();
+              TypeReference _typeRef = TypeReference.typeRef(_qualifiedPackageInterfaceName);
+              StringConcatenationClient _client = new StringConcatenationClient() {
+                @Override
+                protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                  String _packageInterfaceName = genPkg.getPackageInterfaceName();
+                  _builder.append(_packageInterfaceName, "");
+                  _builder.append(".eINSTANCE");
+                }
+              };
+              GuiceModuleAccess.BindingFactory _addTypeToInstance = _bindingFactory.addTypeToInstance(_typeRef, _client);
+              String _qualifiedFactoryInterfaceName = genPkg.getQualifiedFactoryInterfaceName();
+              TypeReference _typeRef_1 = TypeReference.typeRef(_qualifiedFactoryInterfaceName);
+              StringConcatenationClient _client_1 = new StringConcatenationClient() {
+                @Override
+                protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                  String _factoryInterfaceName = genPkg.getFactoryInterfaceName();
+                  _builder.append(_factoryInterfaceName, "");
+                  _builder.append(".eINSTANCE");
+                }
+              };
+              GuiceModuleAccess.BindingFactory _addTypeToInstance_1 = _addTypeToInstance.addTypeToInstance(_typeRef_1, _client_1);
+              IXtextGeneratorLanguage _language = this.getLanguage();
+              GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
+              _addTypeToInstance_1.contributeTo(_runtimeGenModule);
+            }
+          }
         }
         this.saveResource(ePackageResource);
       }

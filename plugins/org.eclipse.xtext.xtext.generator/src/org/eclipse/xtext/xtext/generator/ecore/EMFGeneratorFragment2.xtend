@@ -70,7 +70,9 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static org.eclipse.xtext.GrammarUtil.*
 
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 
 @Log
 class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
@@ -320,6 +322,17 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 					doGenerate(genModel)
 					
 					addProjectContributions(clonedGrammar, generatedPackages, workingResourceSet)
+					
+					// Register generated EPackage and EFactory instances in the runtime module
+					for (pkg: generatedPackages) {
+						val genPkg = getGenPackage(pkg, genModel.eResource.resourceSet)
+						
+						new GuiceModuleAccess.BindingFactory()
+							.addTypeToInstance(genPkg.qualifiedPackageInterfaceName.typeRef, '''«genPkg.packageInterfaceName».eINSTANCE''')
+							.addTypeToInstance(genPkg.qualifiedFactoryInterfaceName.typeRef, '''«genPkg.factoryInterfaceName».eINSTANCE''')
+							.contributeTo(language.runtimeGenModule)
+					}
+					
 				}
 				
 				// Finally save the ecore packages to the file system
