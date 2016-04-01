@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.build.BuildContext;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -111,17 +112,19 @@ public class ClusteringStorageAwareResourceLoader {
   }
   
   protected void clearResourceSet() {
-    XtextResourceSet _resourceSet = this.context.getResourceSet();
-    final boolean wasDeliver = _resourceSet.eDeliver();
     try {
+      XtextResourceSet _resourceSet = this.context.getResourceSet();
+      DeliverNotificationAdapter _get = DeliverNotificationAdapter.get(_resourceSet);
       XtextResourceSet _resourceSet_1 = this.context.getResourceSet();
-      _resourceSet_1.eSetDeliver(false);
+      _get.setDeliver(_resourceSet_1);
       XtextResourceSet _resourceSet_2 = this.context.getResourceSet();
       EList<Resource> _resources = _resourceSet_2.getResources();
       _resources.clear();
     } finally {
       XtextResourceSet _resourceSet_3 = this.context.getResourceSet();
-      _resourceSet_3.eSetDeliver(wasDeliver);
+      DeliverNotificationAdapter _get_1 = DeliverNotificationAdapter.get(_resourceSet_3);
+      XtextResourceSet _resourceSet_4 = this.context.getResourceSet();
+      _get_1.resetDeliver(_resourceSet_4);
     }
   }
   

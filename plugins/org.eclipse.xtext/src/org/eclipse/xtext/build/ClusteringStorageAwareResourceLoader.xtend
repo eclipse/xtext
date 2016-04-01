@@ -13,6 +13,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.resource.IResourceServiceProviderExtension
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
+import org.eclipse.xtext.resource.DeliverNotificationAdapter
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -59,12 +60,11 @@ class ClusteringStorageAwareResourceLoader {
 	}
 
 	protected def void clearResourceSet() {
-		val wasDeliver = resourceSet.eDeliver();
 		try {
-			resourceSet.eSetDeliver(false);
+			DeliverNotificationAdapter.get(resourceSet).setDeliver(resourceSet);
 			resourceSet.getResources().clear();
 		} finally {
-			resourceSet.eSetDeliver(wasDeliver);
+			DeliverNotificationAdapter.get(resourceSet).resetDeliver(resourceSet);
 		}
 	}
 }

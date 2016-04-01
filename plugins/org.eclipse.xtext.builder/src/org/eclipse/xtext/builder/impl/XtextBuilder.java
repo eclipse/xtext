@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.debug.IBuildLogger;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
@@ -298,7 +299,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		} else {
 			progress.worked(1);
 		}
-		resourceSet.eSetDeliver(false);
+		DeliverNotificationAdapter.get(resourceSet).setDeliver(resourceSet);
 		resourceSet.getResources().clear();
 		resourceSet.eAdapters().clear();
 	}

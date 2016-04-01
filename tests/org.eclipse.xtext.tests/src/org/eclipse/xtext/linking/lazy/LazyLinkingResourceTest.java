@@ -46,6 +46,7 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
@@ -54,6 +55,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -66,6 +68,29 @@ import com.google.inject.Injector;
  * @author Knut Wannheden - Initial contribution and API
  */
 public class LazyLinkingResourceTest extends AbstractXtextTests {
+	static class NotificationAlertAdapter extends EContentAdapter {
+		private boolean failOnNotify = true;
+		private boolean notified;
+
+		@Override
+		public void notifyChanged(Notification notification) {
+			if (notification.getFeature() != null) {
+				notified = true;
+				if (failOnNotify) {
+					fail("Unexpected notification " + notification.toString());
+				}
+			}
+		}
+
+	}
+
+	NotificationAlertAdapter notificationAlert;
+
+	@Before
+	public void init() {
+		notificationAlert = new NotificationAlertAdapter();
+		DeliverNotificationAdapter.DEFAULT.disable();
+	}
 
     @Test public void testEObjectReference() throws Exception {
         final EAnnotation source = EcoreFactory.eINSTANCE.createEAnnotation();
@@ -154,13 +179,6 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     	}
     }
     
-    final EContentAdapter notificationAlert = new EContentAdapter(){
-    	@Override
-    	public void notifyChanged(Notification notification) {
-    		if (notification.getFeature()!=null)
-    			fail("Unexpected notification "+notification.toString());
-    	}
-    };
     
     @Test public void testResolveLazyCrossReferences() throws Exception {
     	with(testLangaugeSetup());
@@ -280,6 +298,22 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     	EcoreUtil.resolveAll(res1);
 		assertFalse(types.basicGet(0).eIsProxy());
 		assertFalse(types.basicGet(1).eIsProxy());
+	}
+
+	@Test public void testResolveLazyCrossReferences_03() throws Exception {
+		with(lazyLinkingTestLangaugeSetup());
+		ResourceSetImpl rs = new ResourceSetImpl();
+		final Resource res1 = rs.createResource(URI.createURI("file1.lazylinkingtestlanguage"));
+		Resource res2 = rs.createResource(URI.createURI("file2.lazylinkingtestlanguage"));
+		res1.load(new StringInputStream("type Foo { } type Baz { Foo Bar prop; } }"), null);
+		res2.load(new StringInputStream("type Bar { }"), null);
+		notificationAlert.failOnNotify = false;
+		res1.eAdapters().add(notificationAlert);
+		
+		DeliverNotificationAdapter.get(res1).enable();
+		((LazyLinkingResource) res1).resolveLazyCrossReferences(CancelIndicator.NullImpl);
+		assertTrue(res1.eDeliver());
+		assertTrue(notificationAlert.notified);
 	}
 
 	protected ISetup lazyLinkingTestLangaugeSetup() {

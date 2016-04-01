@@ -50,7 +50,7 @@ public class DerivedStateAwareResourceDescriptionManager extends StorageAwareRes
 			boolean isInitialized = res.fullyInitialized || res.isInitializing;
 			try {
 				if (!isInitialized) {
-					res.eSetDeliver(false);
+					DeliverNotificationAdapter.get(res).setDeliver(res);
 					res.installDerivedState(true);
 				}
 				IResourceDescription description = createResourceDescription(resource, strategy);

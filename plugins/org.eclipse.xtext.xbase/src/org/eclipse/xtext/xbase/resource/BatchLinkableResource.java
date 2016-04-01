@@ -29,6 +29,7 @@ import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.ISynchronizable;
@@ -144,7 +145,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		synchronized (getLock()) {
 			if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized && !isLoadedFromStorage()) {
 				try {
-					eSetDeliver(false);
+					DeliverNotificationAdapter.get(this).setDeliver(this);
 					installDerivedState(false);
 				} finally {
 					eSetDeliver(true);
@@ -218,7 +219,8 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		boolean wasDeliver = eDeliver();
 		LinkedHashSet<Triple<EObject, EReference, INode>> before = resolving;
 		try {
-			eSetDeliver(false);
+			
+			DeliverNotificationAdapter.get(this).setDeliver(this);
 			if (!before.isEmpty()) {
 				resolving = new LinkedHashSet<Triple<EObject, EReference, INode>>();
 			}

@@ -40,6 +40,7 @@ import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperation;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperationException;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadResult;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -442,12 +443,11 @@ public class ClusteringBuilderState extends AbstractBuilderState {
      * This avoids unnecessary, explicit unloads.
      */
     protected void clearResourceSet(ResourceSet resourceSet) {
-        boolean wasDeliver = resourceSet.eDeliver();
         try {
-            resourceSet.eSetDeliver(false);
+        	DeliverNotificationAdapter.get(resourceSet).setDeliver(resourceSet);
             resourceSet.getResources().clear();
         } finally {
-            resourceSet.eSetDeliver(wasDeliver);
+        	DeliverNotificationAdapter.get(resourceSet).resetDeliver(resourceSet);
         }
     }
 

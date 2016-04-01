@@ -20,8 +20,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
-import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException;
+import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.service.OperationCanceledManager;
@@ -75,10 +76,14 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 			if (oldResourceSet != null && !oldResourceSet.eDeliver()) {
 				oldResourceSet.eAdapters().remove(mirror);
 				mirror = null;
-				eSetDeliver(false);
-				if (contents != null)
-					contents.clear();
-				unload();
+				try {
+					DeliverNotificationAdapter.get(this).setDeliver(this);
+					if (contents != null)
+						contents.clear();
+					unload();
+				} finally {
+					DeliverNotificationAdapter.get(this).resetDeliver(this);
+				}
 			}
 		}
 		return super.basicSetResourceSet(resourceSet, notifications);

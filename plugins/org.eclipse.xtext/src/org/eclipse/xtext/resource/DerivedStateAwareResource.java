@@ -93,7 +93,7 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	public synchronized EList<EObject> getContents() {
 		if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized && !isLoadedFromStorage()) {
 			try {
-				eSetDeliver(false);
+				DeliverNotificationAdapter.get(this).setDeliver(this);
 				installDerivedState(false);
 			} finally {
 				eSetDeliver(true);
@@ -113,6 +113,7 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	/**
 	 * @since 2.8
 	 */
+	@Override
 	/*@Override only for emf 2.11. We build with 2.10.2 add Override for 2.9*/
 	@SuppressWarnings("all")
 	protected List<EObject> getUnloadingContents() {
