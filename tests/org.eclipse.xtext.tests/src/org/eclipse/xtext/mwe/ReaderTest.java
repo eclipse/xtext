@@ -94,9 +94,11 @@ public class ReaderTest extends AbstractReaderTest {
 	@SuppressWarnings("unchecked")
 	@Test public void testShadowingPathes() throws Exception {
 		Reader reader = getReader();
-		reader.addPath(pathTo("shadowingtest/folder 1"));
-		reader.addPath(pathTo("shadowingtest/folder 2"));
-		reader.addPath(pathTo("shadowingtest/folder 3"));
+		// also test adding multiple paths as comma-separated list, see bug#356750
+		reader.addPath(
+			       pathTo("shadowingtest/folder 1")
+			+","  +pathTo("shadowingtest/folder 2")
+			+" , "+pathTo("shadowingtest/folder 3"));
 		reader.addRegister(new IndexTestLanguageStandaloneSetup());
 		SlotEntry entry = createSlotEntry();
 		entry.setType("Entity");

@@ -70,16 +70,25 @@ public class Reader extends AbstractReader {
 
 	/**
 	 * <p>
-	 * A path pointing to a folder, jar or zip which contains EMF resources.
-	 * </p><p>
-	 * Example use:
+	 * A comma-separated list of paths pointing to a folder, jar or zip which contains EMF resources.
+	 * </p>
+	 * <p>
+	 * Example use (MWE2):
 	 * </p> 
 	 * <code>
-	 * &lt;path value="./foo/bar.jar"/&gt;
+	 * path = "./foo/bar.jar,./src/main/model"
+	 * </code>
+	 * <p>
+	 * Example use (MWE1):
+	 * </p> 
+	 * <code>
+	 * &lt;path value="./foo/bar.jar,./src/main/model"/&gt;
 	 * </code>
 	 */
 	public void addPath(String path) {
-		this.pathes.add(path);
+		for (String p : path.split(",")) {
+			this.pathes.add(p.trim());
+		}
 	}
 
 	public List<String> getPathes() {
@@ -89,8 +98,15 @@ public class Reader extends AbstractReader {
 	/**
 	 * <p>
 	 * Automatically adds all class path entries of the current process (more specifically uses 'java.class.path' system property).
-	 * </p><p>
-	 * Example use:
+	 * </p>
+	 * <p>
+	 * Example use (MWE2):
+	 * </p> 
+	 * <code>
+	 * useJavaClassPath = true
+	 * </code>
+	 * <p>
+	 * Example use (MWE1):
 	 * </p> 
 	 * <code>
 	 * &lt;useJavaClassPath value="true"/&gt;
