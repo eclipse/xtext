@@ -37,6 +37,7 @@ import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 import java.util.List
+import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -97,6 +98,8 @@ import java.util.List
 	
 	WebIntegrationFragment webSupport = new WebIntegrationFragment
 	
+	SimpleProjectWizardFragment2 projectWizard = new SimpleProjectWizardFragment2
+	
 	new() {
 		try {
 			class.classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule")
@@ -151,6 +154,7 @@ import java.util.List
 		fragments += ideaParser
 		fragments += ideaPlugin
 		fragments += webSupport
+		fragments += projectWizard
 		fragments
 	}
 	
