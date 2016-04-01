@@ -90,7 +90,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 		Iterable<String> foldersTrailingSlash = Iterables.transform(folders, new Function<String, String>() {
 			@Override
 			public String apply(String input) {
-				return input + "/";
+				return input.replaceFirst("\\./", "") + "/";
 			}
 		});
 
