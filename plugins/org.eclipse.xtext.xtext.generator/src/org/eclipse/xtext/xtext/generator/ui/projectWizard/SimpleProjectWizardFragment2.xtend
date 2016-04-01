@@ -133,6 +133,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 		import org.eclipse.xtext.generator.IFileSystemAccess;
 		import org.eclipse.xtext.generator.OutputConfiguration;
+		import org.eclipse.xtext.ui.util.PluginProjectFactory;
 		import com.google.common.collect.ImmutableList;
 		import com.google.common.collect.Lists;
 		import com.google.inject.Inject;
@@ -150,6 +151,13 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 			protected static final String SRC_ROOT = "src";
 			protected static final String SRC_GEN_ROOT = "src-gen";
 			protected final List<String> SRC_FOLDER_LIST = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT);
+
+			@Override
+			protected PluginProjectFactory createProjectFactory() {
+				PluginProjectFactory projectFactory = super.createProjectFactory();
+				projectFactory.setWithPluginXml(false);
+				return projectFactory;
+			}
 
 			@Override
 			protected «projectInfoClass.simpleName» getProjectInfo() {
