@@ -125,6 +125,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		file.content = '''
 		import java.util.HashMap;
 		import java.util.List;
+		import java.util.Set;
 
 		import org.eclipse.core.resources.IProject;
 		import org.eclipse.core.resources.IResource;
@@ -132,6 +133,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		import org.eclipse.core.runtime.IProgressMonitor;
 		import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 		import org.eclipse.xtext.generator.IFileSystemAccess;
+		import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 		import org.eclipse.xtext.generator.OutputConfiguration;
 		import org.eclipse.xtext.ui.util.PluginProjectFactory;
 		import com.google.common.collect.ImmutableList;
@@ -146,11 +148,10 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 			@Inject
 			private Provider<EclipseResourceFileSystemAccess2> fileSystemAccessProvider;
 
-			protected static final String DSL_GENERATOR_PROJECT_NAME = "«grammar.namespace»";
+			@Inject
+			private IOutputConfigurationProvider outputConfigurationProvider;
 
-			protected static final String SRC_ROOT = "src";
-			protected static final String SRC_GEN_ROOT = "src-gen";
-			protected final List<String> SRC_FOLDER_LIST = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT);
+			protected static final String DSL_GENERATOR_PROJECT_NAME = "«grammar.namespace»";
 
 			@Override
 			protected PluginProjectFactory createProjectFactory() {
@@ -166,12 +167,20 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 
 			@Override
 			protected String getModelFolderName() {
-				return SRC_ROOT;
+				return "src";
 			}
 
 			@Override
 			protected List<String> getAllFolders() {
-				return SRC_FOLDER_LIST;
+				Set<OutputConfiguration> outputConfigurations = outputConfigurationProvider.getOutputConfigurations();
+				String outputFolder = "src-gen";
+				for (OutputConfiguration outputConfiguration : outputConfigurations) {
+					if (IFileSystemAccess.DEFAULT_OUTPUT.equals(outputConfiguration.getName())) {
+						outputFolder = outputConfiguration.getOutputDirectory();
+						break;
+					}
+				}
+				return ImmutableList.of(getModelFolderName(), outputFolder);
 			}
 		
 			@Override
