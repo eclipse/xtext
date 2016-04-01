@@ -28,6 +28,8 @@ import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -44,6 +46,9 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 	
 	private TypeResourceServices typeResourceServices;
 	
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
 	public void setTypeResourceServices(TypeResourceServices typeResourceServices) {
 		this.typeResourceServices = typeResourceServices;
 	}
@@ -77,12 +82,12 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 				oldResourceSet.eAdapters().remove(mirror);
 				mirror = null;
 				try {
-					DeliverNotificationAdapter.get(this).setDeliver(this);
+					notificationAdapterProvider.get(this).setDeliver(this);
 					if (contents != null)
 						contents.clear();
 					unload();
 				} finally {
-					DeliverNotificationAdapter.get(this).resetDeliver(this);
+					notificationAdapterProvider.get(this).resetDeliver(this);
 				}
 			}
 		}

@@ -16,11 +16,16 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.xbase.XExpression;
 
+import com.google.inject.Inject;
+
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 public class PendingLinkingCandidateResolver<Expression extends XExpression> {
 	
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
 	private final Expression expression;
 	
 	public PendingLinkingCandidateResolver(Expression expression) {
@@ -38,10 +43,10 @@ public class PendingLinkingCandidateResolver<Expression extends XExpression> {
 		}
 		if (owner.eNotificationRequired()) {
 			try {
-				DeliverNotificationAdapter.get(owner.eResource()).setDeliver(owner);
+				notificationAdapterProvider.get(owner.eResource()).setDeliver(owner);
 				internalSetValue(owner, structuralFeature, newValue);
 			} finally {
-				DeliverNotificationAdapter.get(owner.eResource()).resetDeliver(owner);
+				notificationAdapterProvider.get(owner.eResource()).resetDeliver(owner);
 			}
 			if (newValue != oldFeature) {
 				owner.eNotify(new ENotificationImpl(owner, Notification.RESOLVE, featureId, oldFeature, newValue));

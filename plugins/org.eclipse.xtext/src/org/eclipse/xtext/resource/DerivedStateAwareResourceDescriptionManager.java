@@ -35,6 +35,9 @@ public class DerivedStateAwareResourceDescriptionManager extends StorageAwareRes
 	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
 
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
 	@Override
 	protected IResourceDescription internalGetResourceDescription(final Resource resource,
 			IDefaultResourceDescriptionStrategy strategy) {
@@ -50,7 +53,7 @@ public class DerivedStateAwareResourceDescriptionManager extends StorageAwareRes
 			boolean isInitialized = res.fullyInitialized || res.isInitializing;
 			try {
 				if (!isInitialized) {
-					DeliverNotificationAdapter.get(res).setDeliver(res);
+					notificationAdapterProvider.get(res).setDeliver(res);
 					res.installDerivedState(true);
 				}
 				IResourceDescription description = createResourceDescription(resource, strategy);

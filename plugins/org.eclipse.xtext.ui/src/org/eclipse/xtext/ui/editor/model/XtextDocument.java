@@ -74,6 +74,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 	@Inject(optional=true)
 	private ReconcilingUnitOfWorkProvider reconcilingUnitOfWorkProvider = new ReconcilingUnitOfWorkProvider();
 	
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
 	/**
 	 * @since 2.8
 	 * @noreference This constructor is not intended to be referenced by clients. Only for testing
@@ -113,7 +116,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 				// storage / stream - NPE guard here
 				if (state != null) {
 					// clean up resource set and resource to release resources
-					DeliverNotificationAdapter adapter = DeliverNotificationAdapter.get(state);
+					DeliverNotificationAdapter adapter = notificationAdapterProvider.get(state);
 					adapter.setDeliver(state.getResourceSet());
 					state.getResourceSet().eAdapters().clear();
 					adapter.setDeliver(state);

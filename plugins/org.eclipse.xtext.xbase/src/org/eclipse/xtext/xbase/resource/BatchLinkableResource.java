@@ -56,6 +56,9 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	@Inject
 	private CompilerPhases compilerPhases;
 	
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
 	private Set<Runnable> jvmMemberInitializers = null;
 	
 	private boolean hasJvmMemberInitializers = false;
@@ -145,7 +148,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		synchronized (getLock()) {
 			if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized && !isLoadedFromStorage()) {
 				try {
-					DeliverNotificationAdapter.get(this).setDeliver(this);
+					notificationAdapterProvider.get(this).setDeliver(this);
 					installDerivedState(false);
 				} finally {
 					eSetDeliver(true);
@@ -220,7 +223,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		LinkedHashSet<Triple<EObject, EReference, INode>> before = resolving;
 		try {
 			
-			DeliverNotificationAdapter.get(this).setDeliver(this);
+			notificationAdapterProvider.get(this).setDeliver(this);
 			if (!before.isEmpty()) {
 				resolving = new LinkedHashSet<Triple<EObject, EReference, INode>>();
 			}

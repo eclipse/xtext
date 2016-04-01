@@ -41,6 +41,9 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	public void setDerivedStateComputer(IDerivedStateComputer lateInitialization) {
 		this.derivedStateComputer = lateInitialization;
 	}
+
+	@Inject(optional=true)
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
 	
 	/**
 	 * If <code>true</code>, the contents list of the resource is complete.
@@ -93,7 +96,11 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	public synchronized EList<EObject> getContents() {
 		if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized && !isLoadedFromStorage()) {
 			try {
-				DeliverNotificationAdapter.get(this).setDeliver(this);
+				if (notificationAdapterProvider!=null) {
+					notificationAdapterProvider.get(this).setDeliver(this); // is null in Unit Test
+				} else {
+					eSetDeliver(false);
+				}
 				installDerivedState(false);
 			} finally {
 				eSetDeliver(true);

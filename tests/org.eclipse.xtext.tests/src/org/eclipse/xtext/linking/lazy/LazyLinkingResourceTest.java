@@ -89,7 +89,6 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
 	@Before
 	public void init() {
 		notificationAlert = new NotificationAlertAdapter();
-		DeliverNotificationAdapter.DEFAULT.disable();
 	}
 
     @Test public void testEObjectReference() throws Exception {
@@ -310,10 +309,15 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
 		notificationAlert.failOnNotify = false;
 		res1.eAdapters().add(notificationAlert);
 		
-		DeliverNotificationAdapter.get(res1).enable();
-		((LazyLinkingResource) res1).resolveLazyCrossReferences(CancelIndicator.NullImpl);
-		assertTrue(res1.eDeliver());
-		assertTrue(notificationAlert.notified);
+		DeliverNotificationAdapter.Provider notificationAdapterProvider = getInjector().getInstance(DeliverNotificationAdapter.Provider.class);
+		notificationAdapterProvider.get(res1).enable();
+		try {
+			((LazyLinkingResource) res1).resolveLazyCrossReferences(CancelIndicator.NullImpl);
+			assertTrue(res1.eDeliver());
+			assertTrue(notificationAlert.notified);
+		} finally {
+			notificationAdapterProvider.get(res1).disable();
+		}
 	}
 
 	protected ISetup lazyLinkingTestLangaugeSetup() {

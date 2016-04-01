@@ -100,7 +100,10 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     @Inject 
     private IBuildLogger buildLogger;
 
-    private static final int MONITOR_DO_UPDATE_CHUNK = 10;
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
+	private static final int MONITOR_DO_UPDATE_CHUNK = 10;
     
     /**
      * Actually do the build.
@@ -444,10 +447,10 @@ public class ClusteringBuilderState extends AbstractBuilderState {
      */
     protected void clearResourceSet(ResourceSet resourceSet) {
         try {
-        	DeliverNotificationAdapter.get(resourceSet).setDeliver(resourceSet);
+        	notificationAdapterProvider.get(resourceSet).setDeliver(resourceSet);
             resourceSet.getResources().clear();
         } finally {
-        	DeliverNotificationAdapter.get(resourceSet).resetDeliver(resourceSet);
+        	notificationAdapterProvider.get(resourceSet).resetDeliver(resourceSet);
         }
     }
 

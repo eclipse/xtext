@@ -100,6 +100,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	
 	@Inject
 	private IShouldGenerate shouldGenerate;
+	
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
 
 	private EclipseOutputConfigurationProvider outputConfigurationProvider;
 	private BuilderPreferenceAccess builderPreferenceAccess;
@@ -294,10 +297,10 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	 */
 	protected void clearResourceSet(ResourceSet resourceSet) {
 		try {
-			DeliverNotificationAdapter.get(resourceSet).setDeliver(resourceSet);
+			notificationAdapterProvider.get(resourceSet).setDeliver(resourceSet);
 			resourceSet.getResources().clear();
 		} finally {
-			DeliverNotificationAdapter.get(resourceSet).resetDeliver(resourceSet);
+			notificationAdapterProvider.get(resourceSet).resetDeliver(resourceSet);
 		}
 	}
 	

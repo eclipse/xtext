@@ -94,6 +94,9 @@ public class LazyLinkingResource extends XtextResource {
 	@Inject
 	private LinkingHelper linkingHelper;
 
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
 	private boolean eagerLinking = false;
 
 	@Override
@@ -170,7 +173,7 @@ public class LazyLinkingResource extends XtextResource {
 							EObject target = getEObject(fragment);
 							if (target != null) {
 								try {
-									DeliverNotificationAdapter.get(this).setDeliver(source);
+									notificationAdapterProvider.get(this).setDeliver(source);
 									list.setUnique(i, target);
 								} finally {
 									source.eSetDeliver(true);
@@ -190,10 +193,10 @@ public class LazyLinkingResource extends XtextResource {
 						EObject target = getEObject(fragment);
 						if (target != null) {
 							try {
-								DeliverNotificationAdapter.get(this).setDeliver(source);
+								notificationAdapterProvider.get(this).setDeliver(source);
 								source.eSet(crossRef, target);
 							} finally {
-								DeliverNotificationAdapter.get(this).resetDeliver(source);
+								notificationAdapterProvider.get(this).resetDeliver(source);
 							}
 						}
 					}

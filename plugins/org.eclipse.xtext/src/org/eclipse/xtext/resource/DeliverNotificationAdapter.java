@@ -9,11 +9,15 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter.Provider.SingletonProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * <p>
@@ -40,40 +44,62 @@ import org.eclipse.xtext.util.Tuples;
  * @author thoms - Initial contribution and API
  * @since 2.10
  */
-public class DeliverNotificationAdapter extends EContentAdapter {
+public class DeliverNotificationAdapter extends AdapterImpl {
 	private boolean deliver = false;
-	private Pair<Notifier, Boolean> memento;
+	private ThreadLocal<Pair<Notifier, Boolean>> memento = new ThreadLocal<Pair<Notifier,Boolean>>();
 	
-	public static DeliverNotificationAdapter DEFAULT = new DeliverNotificationAdapter();
-	
-	/**
-	 * Gets an instance for a Resource. Searches the Resource's and the ResourceSet's adapters for
-	 * an instance in their adapters lists. When not found, the {@link #DEFAULT} singleton is returned.
-	 * @return The active instance for the Resource. Will not return <code>null</code>.
-	 */
-	public static DeliverNotificationAdapter get (Resource resource) {
-		if (resource != null) {
-			for (Adapter adapter : resource.eAdapters()) {
-				if (adapter instanceof DeliverNotificationAdapter) {
-					return (DeliverNotificationAdapter) adapter;
-				}
-			}
-			return get(resource.getResourceSet());
-		} else {
-			return DEFAULT;
-		}
-	}
-	public static DeliverNotificationAdapter get (ResourceSet resourceSet) {
-		if (resourceSet != null) {
-			for (Adapter adapter : resourceSet.eAdapters()) {
-				if (adapter instanceof DeliverNotificationAdapter) {
-					return (DeliverNotificationAdapter) adapter;
-				}
-			}
-		}
-		return DEFAULT;
-	}
+	private static DeliverNotificationAdapter DEFAULT = new DeliverNotificationAdapter();
 
+	@ImplementedBy(SingletonProvider.class)
+	public static interface Provider {
+		/**
+		 * Gets an instance for a Notifier.
+		 * @param notifier A Notifier. Might be <code>null</code>.
+		 * @return The active instance for the Notifier. Must not return <code>null</code>.
+		 */
+		public DeliverNotificationAdapter get (Notifier notifier);
+
+		/**
+		 * Provides the DEFAULT instance
+		 * @author thoms - Initial contribution and API
+		 */
+		public static class SingletonProvider implements Provider {
+			@Override
+			public DeliverNotificationAdapter get(Notifier notifier) {
+				return DEFAULT;
+			}
+		}
+		
+		/**
+		 * Searches the Resource's and the ResourceSet's adapters for
+		 * an instance in their adapters lists. When not found, the {@link #DEFAULT} singleton is returned.
+		 */
+		public static class HierarchicalProvider implements Provider {
+			@Override
+			public DeliverNotificationAdapter get(Notifier notifier) {
+				DeliverNotificationAdapter adapter = notifier != null ? get(notifier.eAdapters()) : null;
+				if (adapter == null) {
+					if (notifier instanceof EObject) {
+						adapter = get(((EObject)notifier).eResource());
+					} else if (notifier instanceof Resource) {
+						adapter = get(((Resource)notifier).getResourceSet());
+					} else {
+						adapter = DEFAULT;
+					}
+				}
+				return DEFAULT;
+			}
+			private DeliverNotificationAdapter get(EList<Adapter> eAdapters) {
+				for (Adapter adapter : eAdapters) {
+					if (adapter instanceof DeliverNotificationAdapter) {
+						return (DeliverNotificationAdapter) adapter;
+					}
+				}
+				return null;
+			}
+		}
+	}
+	
 	/**
 	 * Enable notifications.
 	 */
@@ -102,7 +128,7 @@ public class DeliverNotificationAdapter extends EContentAdapter {
 	 * is called.
 	 */
 	public void setDeliver (Notifier notifier) {
-		memento = Tuples.pair(notifier, notifier.eDeliver());
+		memento.set(Tuples.pair(notifier, notifier.eDeliver()));
 		notifier.eSetDeliver(isDeliver());
 	}
 	
@@ -112,8 +138,8 @@ public class DeliverNotificationAdapter extends EContentAdapter {
 	 * the same <code>Notifier</code>.
 	 */
 	public void resetDeliver (Notifier notifier) {
-		if (memento != null && memento.getFirst()==notifier) {
-			notifier.eSetDeliver(memento.getSecond());
+		if (memento.get() != null && memento.get().getFirst()==notifier) {
+			notifier.eSetDeliver(memento.get().getSecond());
 		}
 	}
 }

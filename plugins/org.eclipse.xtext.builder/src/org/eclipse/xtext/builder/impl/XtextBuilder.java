@@ -82,6 +82,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@Inject 
 	private OperationCanceledManager operationCanceledManager;
 	
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
 	}
@@ -299,7 +302,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		} else {
 			progress.worked(1);
 		}
-		DeliverNotificationAdapter.get(resourceSet).setDeliver(resourceSet);
+		notificationAdapterProvider.get(resourceSet).setDeliver(resourceSet);
 		resourceSet.getResources().clear();
 		resourceSet.eAdapters().clear();
 	}
