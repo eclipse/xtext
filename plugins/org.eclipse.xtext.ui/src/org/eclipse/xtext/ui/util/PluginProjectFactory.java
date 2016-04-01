@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.util;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class PluginProjectFactory extends JavaProjectFactory {
 	 */
 	protected List<String> developmentTimeBundles;
 	private String breeToUse;
+	private boolean withPluginXml = true;
 
 	public PluginProjectFactory addRequiredBundles(List<String> requiredBundles) {
 		if (this.requiredBundles == null)
@@ -94,7 +96,11 @@ public class PluginProjectFactory extends JavaProjectFactory {
 
 		addToBuildProperties(content, foldersTrailingSlash, "source..");
 		content.append("\n");
-		addToBuildProperties(content, Lists.newArrayList("META-INF/", ".", "plugin.xml"), "bin.includes");
+		ArrayList<String> binIncludes = Lists.newArrayList("META-INF/", ".");
+		if (isWithPluginXml()) {
+			binIncludes.add("plugin.xml");
+		}
+		addToBuildProperties(content, binIncludes, "bin.includes");
 		content.append("\n");
 		addToBuildProperties(content, developmentTimeBundles, "additional.bundles");
 
@@ -222,5 +228,19 @@ public class PluginProjectFactory extends JavaProjectFactory {
 			this.developmentTimeBundles = Lists.newArrayList();
 		this.developmentTimeBundles.addAll(devTimeBundles);
 		return this;
+	}
+
+	/**
+	 * @since 2.10
+	 */
+	public boolean isWithPluginXml() {
+		return withPluginXml;
+	}
+
+	/**
+	 * @since 2.10
+	 */
+	public void setWithPluginXml(boolean withPluginXml) {
+		this.withPluginXml = withPluginXml;
 	}
 }
