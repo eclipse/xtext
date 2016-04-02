@@ -123,6 +123,10 @@ public abstract class AbstractProjectCreator extends WorkspaceModifyOperation im
 
 	protected ProjectFactory configureProjectFactory(ProjectFactory factory) {
 		factory.setProjectName(getProjectInfo().getProjectName());
+		if (projectInfo instanceof IExtendedProjectInfo) {
+			IExtendedProjectInfo extendedProjectInfo = (IExtendedProjectInfo) projectInfo;
+			factory.setLocation(extendedProjectInfo.getLocationPath());
+		}
 		factory.addFolders(getAllFolders());
 		factory.addReferencedProjects(getReferencedProjects());
 		factory.addProjectNatures(getProjectNatures());
