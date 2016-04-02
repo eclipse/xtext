@@ -258,7 +258,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 			@Inject
 			public «genClass.simpleName»(IProjectCreator projectCreator) {
 				super(projectCreator);
-				setWindowTitle("New «grammar.getName()» Project");
+				setWindowTitle("New «grammar.simpleName» Project");
 			}
 		
 			/**
@@ -268,8 +268,8 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 			@Override
 			public void addPages() {
 				mainPage = new WizardNewProjectCreationPage("basicNewProjectPage");
-				mainPage.setTitle("«grammar.getName()» Project");
-				mainPage.setDescription("Create a new «grammar.getName()» project.");
+				mainPage.setTitle("«grammar.simpleName» Project");
+				mainPage.setDescription("Create a new «grammar.simpleName» project.");
 				addPage(mainPage);
 			}
 		
