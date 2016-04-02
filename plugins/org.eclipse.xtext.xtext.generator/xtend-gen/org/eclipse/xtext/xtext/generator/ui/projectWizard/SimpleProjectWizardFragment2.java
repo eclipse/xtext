@@ -562,7 +562,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;");
         _builder.newLine();
-        _builder.append("import org.eclipse.xtext.ui.wizard.IProjectInfo;");
+        _builder.append("import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;");
         _builder.newLine();
         _builder.append("import org.eclipse.xtext.ui.wizard.IProjectCreator;");
         _builder.newLine();
@@ -660,7 +660,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append("@Override");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("protected IProjectInfo getProjectInfo() {");
+        _builder.append("protected IExtendedProjectInfo getProjectInfo() {");
         _builder.newLine();
         _builder.append("\t\t");
         String _simpleName_5 = projectInfoClass.getSimpleName();
@@ -672,6 +672,15 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("projectInfo.setProjectName(mainPage.getProjectName());");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("if (!mainPage.useDefaults()) {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("projectInfo.setLocationPath(mainPage.getLocationPath());");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("}");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("return projectInfo;");
