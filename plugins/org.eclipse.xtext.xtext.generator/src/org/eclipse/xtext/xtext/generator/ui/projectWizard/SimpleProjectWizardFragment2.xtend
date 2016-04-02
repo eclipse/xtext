@@ -33,6 +33,8 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 
 	@Accessors
 	private boolean generate = false;
+	@Accessors
+	private boolean pluginProject = true;
 
 	override generate() {
 		if (!generate)
@@ -119,6 +121,12 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 	def generateProjectCreator() {
 		val genClass = getProjectCreatorClassName.typeRef
 		val projectInfoClass = projectInfoClassName.typeRef
+		val baseClass = {
+			if (pluginProject)
+				"org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator"
+			else
+				"org.eclipse.xtext.ui.wizard.AbstractProjectCreator"
+		}.typeRef
 
 		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
 		
@@ -135,13 +143,19 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		import org.eclipse.xtext.generator.IFileSystemAccess;
 		import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 		import org.eclipse.xtext.generator.OutputConfiguration;
+		«IF pluginProject»
 		import org.eclipse.xtext.ui.util.PluginProjectFactory;
+		«ELSE»
+		import org.eclipse.xtext.ui.util.ProjectFactory;
+		«ENDIF»
 		import com.google.common.collect.ImmutableList;
+		«IF pluginProject»
 		import com.google.common.collect.Lists;
+		«ENDIF»
 		import com.google.inject.Inject;
 		import com.google.inject.Provider;
 		
-		public class «genClass.simpleName» extends «"org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator".typeRef» {
+		public class «genClass.simpleName» extends «baseClass» {
 			protected static final String DSL_PROJECT_NAME = "«grammar.namespace»";
 
 			@Inject
@@ -152,6 +166,16 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 
 			@Inject
 			private IOutputConfigurationProvider outputConfigurationProvider;
+			«IF !pluginProject»
+
+			@Inject
+			private Provider<ProjectFactory> projectFactoryProvider;
+			
+			@Override
+			protected ProjectFactory createProjectFactory() {
+				return projectFactoryProvider.get();
+			}
+			«ELSE»
 
 			@Override
 			protected PluginProjectFactory createProjectFactory() {
@@ -159,6 +183,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 				projectFactory.setWithPluginXml(false);
 				return projectFactory;
 			}
+			«ENDIF»
 
 			@Override
 			protected «projectInfoClass.simpleName» getProjectInfo() {
@@ -182,11 +207,13 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 				}
 				return ImmutableList.of(getModelFolderName(), outputFolder);
 			}
-		
+			«IF pluginProject»
+
 			@Override
 			protected List<String> getRequiredBundles() {
 				return Lists.newArrayList(DSL_PROJECT_NAME);
 			}
+			«ENDIF»
 		
 			@Override
 			protected void enhanceProject(final IProject project, final IProgressMonitor monitor) throws CoreException {

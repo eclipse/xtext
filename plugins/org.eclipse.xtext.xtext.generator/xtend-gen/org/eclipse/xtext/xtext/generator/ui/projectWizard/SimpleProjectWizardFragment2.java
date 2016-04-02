@@ -53,6 +53,9 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
   @Accessors
   private boolean generate = false;
   
+  @Accessors
+  private boolean pluginProject = true;
+  
   @Override
   public void generate() {
     if ((!this.generate)) {
@@ -247,6 +250,13 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
     final TypeReference genClass = TypeReference.typeRef(_projectCreatorClassName);
     String _projectInfoClassName = this.getProjectInfoClassName();
     final TypeReference projectInfoClass = TypeReference.typeRef(_projectInfoClassName);
+    String _xifexpression = null;
+    if (this.pluginProject) {
+      _xifexpression = "org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator";
+    } else {
+      _xifexpression = "org.eclipse.xtext.ui.wizard.AbstractProjectCreator";
+    }
+    final TypeReference baseClass = TypeReference.typeRef(_xifexpression);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(genClass);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -274,12 +284,23 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.newLine();
         _builder.append("import org.eclipse.xtext.generator.OutputConfiguration;");
         _builder.newLine();
-        _builder.append("import org.eclipse.xtext.ui.util.PluginProjectFactory;");
-        _builder.newLine();
+        {
+          if (SimpleProjectWizardFragment2.this.pluginProject) {
+            _builder.append("import org.eclipse.xtext.ui.util.PluginProjectFactory;");
+            _builder.newLine();
+          } else {
+            _builder.append("import org.eclipse.xtext.ui.util.ProjectFactory;");
+            _builder.newLine();
+          }
+        }
         _builder.append("import com.google.common.collect.ImmutableList;");
         _builder.newLine();
-        _builder.append("import com.google.common.collect.Lists;");
-        _builder.newLine();
+        {
+          if (SimpleProjectWizardFragment2.this.pluginProject) {
+            _builder.append("import com.google.common.collect.Lists;");
+            _builder.newLine();
+          }
+        }
         _builder.append("import com.google.inject.Inject;");
         _builder.newLine();
         _builder.append("import com.google.inject.Provider;");
@@ -289,8 +310,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         String _simpleName = genClass.getSimpleName();
         _builder.append(_simpleName, "");
         _builder.append(" extends ");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator");
-        _builder.append(_typeRef, "");
+        _builder.append(baseClass, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -307,8 +327,8 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append("\t");
         _builder.append("private ");
         String _projectWizardInitialContentsClassName = SimpleProjectWizardFragment2.this.getProjectWizardInitialContentsClassName();
-        TypeReference _typeRef_1 = TypeReference.typeRef(_projectWizardInitialContentsClassName);
-        String _simpleName_1 = _typeRef_1.getSimpleName();
+        TypeReference _typeRef = TypeReference.typeRef(_projectWizardInitialContentsClassName);
+        String _simpleName_1 = _typeRef.getSimpleName();
         _builder.append(_simpleName_1, "\t");
         _builder.append(" initialContents;");
         _builder.newLineIfNotEmpty();
@@ -326,25 +346,55 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append("\t");
         _builder.append("private IOutputConfigurationProvider outputConfigurationProvider;");
         _builder.newLine();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("protected PluginProjectFactory createProjectFactory() {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("PluginProjectFactory projectFactory = super.createProjectFactory();");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("projectFactory.setWithPluginXml(false);");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("return projectFactory;");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
+        {
+          if ((!SimpleProjectWizardFragment2.this.pluginProject)) {
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@Inject");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("private Provider<ProjectFactory> projectFactoryProvider;");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@Override");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("protected ProjectFactory createProjectFactory() {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("return projectFactoryProvider.get();");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          } else {
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@Override");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("protected PluginProjectFactory createProjectFactory() {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("PluginProjectFactory projectFactory = super.createProjectFactory();");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("projectFactory.setWithPluginXml(false);");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("return projectFactory;");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@Override");
@@ -414,19 +464,24 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("protected List<String> getRequiredBundles() {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("return Lists.newArrayList(DSL_PROJECT_NAME);");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
+        {
+          if (SimpleProjectWizardFragment2.this.pluginProject) {
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("@Override");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("protected List<String> getRequiredBundles() {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("return Lists.newArrayList(DSL_PROJECT_NAME);");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@Override");
@@ -678,5 +733,14 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
   
   public void setGenerate(final boolean generate) {
     this.generate = generate;
+  }
+  
+  @Pure
+  public boolean isPluginProject() {
+    return this.pluginProject;
+  }
+  
+  public void setPluginProject(final boolean pluginProject) {
+    this.pluginProject = pluginProject;
   }
 }
