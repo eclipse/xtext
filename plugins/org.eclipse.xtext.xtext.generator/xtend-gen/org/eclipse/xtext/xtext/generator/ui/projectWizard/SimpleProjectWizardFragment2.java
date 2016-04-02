@@ -294,6 +294,14 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
+        _builder.append("protected static final String DSL_PROJECT_NAME = \"");
+        Grammar _grammar = SimpleProjectWizardFragment2.this.getGrammar();
+        String _namespace = GrammarUtil.getNamespace(_grammar);
+        _builder.append(_namespace, "\t");
+        _builder.append("\";");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
         _builder.append("@Inject");
         _builder.newLine();
         _builder.append("\t");
@@ -318,14 +326,6 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append("\t");
         _builder.append("private IOutputConfigurationProvider outputConfigurationProvider;");
         _builder.newLine();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("protected static final String DSL_GENERATOR_PROJECT_NAME = \"");
-        Grammar _grammar = SimpleProjectWizardFragment2.this.getGrammar();
-        String _namespace = GrammarUtil.getNamespace(_grammar);
-        _builder.append(_namespace, "\t");
-        _builder.append("\";");
-        _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@Override");
@@ -422,7 +422,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append("protected List<String> getRequiredBundles() {");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("return Lists.newArrayList(DSL_GENERATOR_PROJECT_NAME);");
+        _builder.append("return Lists.newArrayList(DSL_PROJECT_NAME);");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");

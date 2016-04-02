@@ -142,6 +142,8 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		import com.google.inject.Provider;
 		
 		public class «genClass.simpleName» extends «"org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator".typeRef» {
+			protected static final String DSL_PROJECT_NAME = "«grammar.namespace»";
+
 			@Inject
 			private «getProjectWizardInitialContentsClassName.typeRef.simpleName» initialContents;
 
@@ -150,8 +152,6 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 
 			@Inject
 			private IOutputConfigurationProvider outputConfigurationProvider;
-
-			protected static final String DSL_GENERATOR_PROJECT_NAME = "«grammar.namespace»";
 
 			@Override
 			protected PluginProjectFactory createProjectFactory() {
@@ -185,7 +185,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		
 			@Override
 			protected List<String> getRequiredBundles() {
-				return Lists.newArrayList(DSL_GENERATOR_PROJECT_NAME);
+				return Lists.newArrayList(DSL_PROJECT_NAME);
 			}
 		
 			@Override
