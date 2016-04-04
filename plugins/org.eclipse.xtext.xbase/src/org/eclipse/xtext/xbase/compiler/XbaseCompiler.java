@@ -39,6 +39,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -1875,6 +1876,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (container instanceof XClosure) {
 			if (((XClosure) container).getExpression() == expr) {
 				return false;
+			}
+		}
+		if (expr instanceof XAssignment) {
+			XAssignment a = (XAssignment) expr;
+			for (XExpression arg : getActualArguments(a)) {
+				if (isVariableDeclarationRequired(arg, b)) {
+					return true;
+				}
 			}
 		}
 		return super.isVariableDeclarationRequired(expr, b);
