@@ -249,7 +249,7 @@ class XtextGeneratorTemplates {
 				 */
 				public class «eclipsePluginModule.simpleName» extends «eclipsePluginGenModule» {
 
-					public «eclipsePluginGenModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
+					public «eclipsePluginModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
 						super(plugin);
 					}
 				}

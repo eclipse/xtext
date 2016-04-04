@@ -862,8 +862,8 @@ public class XtextGeneratorTemplates {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public ");
-          TypeReference _eclipsePluginGenModule_1 = XtextGeneratorTemplates.this.naming.getEclipsePluginGenModule(it);
-          String _simpleName_1 = _eclipsePluginGenModule_1.getSimpleName();
+          TypeReference _eclipsePluginModule_1 = XtextGeneratorTemplates.this.naming.getEclipsePluginModule(it);
+          String _simpleName_1 = _eclipsePluginModule_1.getSimpleName();
           _builder.append(_simpleName_1, "\t");
           _builder.append("(");
           TypeReference _typeRef = TypeReference.typeRef("org.eclipse.ui.plugin.AbstractUIPlugin");
