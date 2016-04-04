@@ -110,7 +110,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private WebIntegrationFragment webSupport = new WebIntegrationFragment();
   
-  private SimpleProjectWizardFragment2 projectWizard = new SimpleProjectWizardFragment2();
+  private SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2();
   
   public StandardLanguage() {
     try {
@@ -202,7 +202,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.operator_add(fragments, this.ideaParser);
       this.operator_add(fragments, this.ideaPlugin);
       this.operator_add(fragments, this.webSupport);
-      this.operator_add(fragments, this.projectWizard);
+      this.operator_add(fragments, this.newProjectWizardForEclipse);
       _xblockexpression = fragments;
     }
     return _xblockexpression;
@@ -451,12 +451,12 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   }
   
   @Pure
-  protected SimpleProjectWizardFragment2 getProjectWizard() {
-    return this.projectWizard;
+  protected SimpleProjectWizardFragment2 getNewProjectWizardForEclipse() {
+    return this.newProjectWizardForEclipse;
   }
   
-  public void setProjectWizard(final SimpleProjectWizardFragment2 projectWizard) {
-    this.projectWizard = projectWizard;
+  public void setNewProjectWizardForEclipse(final SimpleProjectWizardFragment2 newProjectWizardForEclipse) {
+    this.newProjectWizardForEclipse = newProjectWizardForEclipse;
   }
   
   private final static Logger LOG = Logger.getLogger(StandardLanguage.class);

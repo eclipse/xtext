@@ -98,7 +98,7 @@ import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFra
 	
 	WebIntegrationFragment webSupport = new WebIntegrationFragment
 	
-	SimpleProjectWizardFragment2 projectWizard = new SimpleProjectWizardFragment2
+	SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2
 	
 	new() {
 		try {
@@ -154,7 +154,7 @@ import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFra
 		fragments += ideaParser
 		fragments += ideaPlugin
 		fragments += webSupport
-		fragments += projectWizard
+		fragments += newProjectWizardForEclipse
 		fragments
 	}
 	
