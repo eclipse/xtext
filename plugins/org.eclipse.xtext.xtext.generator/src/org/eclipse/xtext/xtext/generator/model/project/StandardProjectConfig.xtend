@@ -43,7 +43,7 @@ class StandardProjectConfig extends XtextProjectConfig {
 
 	override setDefaults() {
 		super.setDefaults
-		enabledProjects.forEach [
+		for (it : enabledProjects) {
 			if (name === null)
 				name = computeName
 			if (it.rootPath === null)
@@ -70,7 +70,7 @@ class StandardProjectConfig extends XtextProjectConfig {
 				if (assetsPath === null)
 					assets = computeAssets
 			}
-		]
+		}
 	}
 
 	protected def computeName(SubProjectConfig project) {

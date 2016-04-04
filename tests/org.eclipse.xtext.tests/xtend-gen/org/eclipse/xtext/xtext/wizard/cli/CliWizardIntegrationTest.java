@@ -123,11 +123,10 @@ public class CliWizardIntegrationTest {
    * Use this main method to update the expectations to whatever the wizard currently generates
    */
   public static void main(final String[] args) {
-    final CliProjectsCreator creator = CliWizardIntegrationTest.newProjectCreator();
-    final Procedure1<WizardConfiguration> _function = new Procedure1<WizardConfiguration>() {
-      @Override
-      public void apply(final WizardConfiguration config) {
-        try {
+    try {
+      final CliProjectsCreator creator = CliWizardIntegrationTest.newProjectCreator();
+      for (final WizardConfiguration config : CliWizardIntegrationTest.projectConfigs) {
+        {
           String _baseName = config.getBaseName();
           final File targetLocation = new File("testdata/wizard-expectations", _baseName);
           targetLocation.mkdirs();
@@ -138,12 +137,11 @@ public class CliWizardIntegrationTest {
           String _baseName_1 = config.getBaseName();
           String _plus = ("Updating expectations for " + _baseName_1);
           InputOutput.<String>println(_plus);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
         }
       }
-    };
-    IterableExtensions.<WizardConfiguration>forEach(CliWizardIntegrationTest.projectConfigs, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   private final static List<WizardConfiguration> projectConfigs = Collections.<WizardConfiguration>unmodifiableList(CollectionLiterals.<WizardConfiguration>newArrayList(ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
@@ -290,14 +288,12 @@ public class CliWizardIntegrationTest {
   public void testProjectCreation() {
     CliProjectsCreator _newProjectCreator = CliWizardIntegrationTest.newProjectCreator();
     this.creator = _newProjectCreator;
-    final Procedure1<WizardConfiguration> _function = new Procedure1<WizardConfiguration>() {
-      @Override
-      public void apply(final WizardConfiguration config) {
-        CliWizardIntegrationTest.this.config = config;
-        CliWizardIntegrationTest.this.validateCreatedProjects();
+    for (final WizardConfiguration config : CliWizardIntegrationTest.projectConfigs) {
+      {
+        this.config = config;
+        this.validateCreatedProjects();
       }
-    };
-    IterableExtensions.<WizardConfiguration>forEach(CliWizardIntegrationTest.projectConfigs, _function);
+    }
   }
   
   private void validateCreatedProjects() {
@@ -349,13 +345,9 @@ public class CliWizardIntegrationTest {
     boolean _isDirectory = root.isDirectory();
     if (_isDirectory) {
       File[] _listFiles = root.listFiles();
-      final Procedure1<File> _function = new Procedure1<File>() {
-        @Override
-        public void apply(final File it) {
-          CliWizardIntegrationTest.this.collectAllFiles(it, children);
-        }
-      };
-      IterableExtensions.<File>forEach(((Iterable<File>)Conversions.doWrapArray(_listFiles)), _function);
+      for (final File it : _listFiles) {
+        this.collectAllFiles(it, children);
+      }
     } else {
       children.add(root);
     }
@@ -395,36 +387,26 @@ public class CliWizardIntegrationTest {
     final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> missingFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>difference(expectedFiles, actualFiles);
     final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> unexpectedFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>difference(actualFiles, expectedFiles);
     final Sets.SetView<CliWizardIntegrationTest.GeneratedFile> comparableFiles = Sets.<CliWizardIntegrationTest.GeneratedFile>intersection(expectedFiles, actualFiles);
-    final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_2 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
-      @Override
-      public void apply(final CliWizardIntegrationTest.GeneratedFile it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Missing file: ");
-        _builder.append(it.relativePath, "");
-        throw new ComparisonFailure(_builder.toString(), it.content, "");
-      }
-    };
-    IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>forEach(missingFiles, _function_2);
-    final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_3 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
-      @Override
-      public void apply(final CliWizardIntegrationTest.GeneratedFile it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Unexpected file: ");
-        _builder.append(it.relativePath, "");
-        throw new ComparisonFailure(_builder.toString(), "", it.content);
-      }
-    };
-    IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>forEach(unexpectedFiles, _function_3);
-    final Procedure1<CliWizardIntegrationTest.GeneratedFile> _function_4 = new Procedure1<CliWizardIntegrationTest.GeneratedFile>() {
-      @Override
-      public void apply(final CliWizardIntegrationTest.GeneratedFile it) {
-        CliWizardIntegrationTest.GeneratedFile _get = expectedFilesByPath.get(it.relativePath);
+    for (final CliWizardIntegrationTest.GeneratedFile it : missingFiles) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Missing file: ");
+      _builder.append(it.relativePath, "");
+      throw new ComparisonFailure(_builder.toString(), it.content, "");
+    }
+    for (final CliWizardIntegrationTest.GeneratedFile it_1 : unexpectedFiles) {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Unexpected file: ");
+      _builder_1.append(it_1.relativePath, "");
+      throw new ComparisonFailure(_builder_1.toString(), "", it_1.content);
+    }
+    for (final CliWizardIntegrationTest.GeneratedFile it_2 : comparableFiles) {
+      {
+        CliWizardIntegrationTest.GeneratedFile _get = expectedFilesByPath.get(it_2.relativePath);
         final String expectedContent = LineDelimiters.toUnix(_get.content);
-        CliWizardIntegrationTest.GeneratedFile _get_1 = actualFilesByPath.get(it.relativePath);
+        CliWizardIntegrationTest.GeneratedFile _get_1 = actualFilesByPath.get(it_2.relativePath);
         final String actualContent = LineDelimiters.toUnix(_get_1.content);
-        Assert.assertEquals(it.relativePath, expectedContent, actualContent);
+        Assert.assertEquals(it_2.relativePath, expectedContent, actualContent);
       }
-    };
-    IterableExtensions.<CliWizardIntegrationTest.GeneratedFile>forEach(comparableFiles, _function_4);
+    }
   }
 }

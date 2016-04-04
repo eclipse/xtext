@@ -89,15 +89,15 @@ class FlattenedGrammarAccess {
 	}
 
 	def private void markAsFragment(Multimap<TerminalRule, AbstractRule> calledFrom) {
-		calledFrom.keySet.filter [
+		val terminals = calledFrom.keySet.filter [
 			!isFragment
 		].filter [
 			allAreTerminalRules(calledFrom.get(it))
 		].filter [
 			!(it.eContainer as Grammar).hiddenTokens.contains(it)
-		].forEach [
-			fragment = true
 		]
+		for (it : terminals)
+			fragment = true
 	}
 
 	def private Multimap<TerminalRule, AbstractRule> copyRuleBodies(

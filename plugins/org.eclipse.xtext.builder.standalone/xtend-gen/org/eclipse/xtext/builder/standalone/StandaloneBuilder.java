@@ -419,16 +419,12 @@ public class StandaloneBuilder {
       }
     };
     final Iterable<URI> generateStubs = IterableExtensions.<URI>filter(sourceResourceURIs, _function);
-    final Procedure1<URI> _function_1 = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI it) {
-        LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
-        IStubGenerator _stubGenerator = _languageAccess.getStubGenerator();
-        IResourceDescription _resourceDescription = data.getResourceDescription(it);
-        _stubGenerator.doGenerateStubs(StandaloneBuilder.this.commonFileAccess, _resourceDescription);
-      }
-    };
-    IterableExtensions.<URI>forEach(generateStubs, _function_1);
+    for (final URI it : generateStubs) {
+      LanguageAccess _languageAccess = this.languageAccess(it);
+      IStubGenerator _stubGenerator = _languageAccess.getStubGenerator();
+      IResourceDescription _resourceDescription = data.getResourceDescription(it);
+      _stubGenerator.doGenerateStubs(this.commonFileAccess, _resourceDescription);
+    }
     return stubsDir;
   }
   

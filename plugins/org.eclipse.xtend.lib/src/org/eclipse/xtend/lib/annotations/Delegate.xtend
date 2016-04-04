@@ -84,11 +84,12 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 
 	override doTransform(List<? extends MutableMemberDeclaration> elements, extension TransformationContext context) {
 		val extension util = new DelegateProcessor.Util(context)
-		elements.forEach [
+		for (it : elements) {
 			if (validDelegate) {
-				methodsToImplement.forEach[method|implementMethod(method)]
+				for (method : methodsToImplement)
+					implementMethod(method)
 			}
-		]
+		}
 	}
 
 	/**
@@ -201,7 +202,8 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			val cycle = !seen.add(it)
 			if (cycle)
 				return;
-			declaredSuperTypes.forEach[collectAllSuperTypes(seen)]
+			for (it : declaredSuperTypes)
+				collectAllSuperTypes(seen)
 		}
 
 		def getDelegatedInterfaces(MemberDeclaration delegate) {
@@ -239,15 +241,16 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 			delegate.declaringType.addMethod(declaration.simpleName) [ impl |
 				impl.primarySourceElement = delegate.primarySourceElement
 				val typeParameterMappings = newHashMap
-				resolvedMethod.resolvedTypeParameters.forEach[param|
+				for (param : resolvedMethod.resolvedTypeParameters) {
 					val copy = impl.addTypeParameter(param.declaration.simpleName, param.resolvedUpperBounds)
 					typeParameterMappings.put(param.declaration.newTypeReference, copy.newTypeReference)
 					copy.upperBounds = copy.upperBounds.map[replace(typeParameterMappings)]
-				]
+				}
 				impl.exceptions = resolvedMethod.resolvedExceptionTypes.map[replace(typeParameterMappings)]
 				impl.varArgs = declaration.varArgs
 				impl.returnType = resolvedMethod.resolvedReturnType.replace(typeParameterMappings)
-				resolvedMethod.resolvedParameters.forEach[p|impl.addParameter(p.declaration.simpleName, p.resolvedType.replace(typeParameterMappings))]
+				for (p : resolvedMethod.resolvedParameters)
+					impl.addParameter(p.declaration.simpleName, p.resolvedType.replace(typeParameterMappings))
 				impl.body = '''
 					«resolvedMethod.returnIfNeeded»«delegate.delegateAccess(declaration)».«declaration.simpleName»(«declaration.parameters.join(", ")[simpleName]»);
 				'''

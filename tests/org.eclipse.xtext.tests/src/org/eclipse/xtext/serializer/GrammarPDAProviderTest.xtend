@@ -489,7 +489,8 @@ class GrammarPDAProviderTest {
 		''')
 		validator.assertNoErrors(grammar)
 		val pdas = pdaProvider.getGrammarPDAs(grammar)
-		pdas.values.forEach[assertNoLeakedGrammarElements(grammar, it)]
+		for (it : pdas.values)
+			assertNoLeakedGrammarElements(grammar, it)
 
 //		pdas.forEach[p1, p2|p2.toDot(p1.name)]
 		return pdas.keySet.sort.map [

@@ -1147,28 +1147,24 @@ public class JvmModelGenerator implements IGenerator {
   public void generateThrowsClause(final JvmExecutable it, final ITreeAppendable appendable, final GeneratorConfig config) {
     final LinkedHashMap<JvmType, JvmTypeReference> toBeGenerated = CollectionLiterals.<JvmType, JvmTypeReference>newLinkedHashMap();
     EList<JvmTypeReference> _exceptions = it.getExceptions();
-    final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
-      @Override
-      public void apply(final JvmTypeReference it) {
-        JvmType _type = it.getType();
-        boolean _containsKey = toBeGenerated.containsKey(_type);
-        boolean _not = (!_containsKey);
-        if (_not) {
-          JvmType _type_1 = it.getType();
-          toBeGenerated.put(_type_1, it);
-        }
+    for (final JvmTypeReference it_1 : _exceptions) {
+      JvmType _type = it_1.getType();
+      boolean _containsKey = toBeGenerated.containsKey(_type);
+      boolean _not = (!_containsKey);
+      if (_not) {
+        JvmType _type_1 = it_1.getType();
+        toBeGenerated.put(_type_1, it_1);
       }
-    };
-    IterableExtensions.<JvmTypeReference>forEach(_exceptions, _function);
+    }
     Collection<JvmTypeReference> _values = toBeGenerated.values();
-    final Procedure1<LoopParams> _function_1 = new Procedure1<LoopParams>() {
+    final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
       @Override
       public void apply(final LoopParams it) {
         it.setPrefix(" throws ");
         it.setSeparator(", ");
       }
     };
-    final Procedure2<JvmTypeReference, ITreeAppendable> _function_2 = new Procedure2<JvmTypeReference, ITreeAppendable>() {
+    final Procedure2<JvmTypeReference, ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference, ITreeAppendable>() {
       @Override
       public void apply(final JvmTypeReference it, final ITreeAppendable app) {
         ITreeAppendable _trace = app.trace(it);
@@ -1176,7 +1172,7 @@ public class JvmModelGenerator implements IGenerator {
         _trace.append(_type);
       }
     };
-    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, _values, _function_1, _function_2);
+    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, _values, _function, _function_1);
   }
   
   public void generateParameters(final JvmExecutable it, final ITreeAppendable appendable, final GeneratorConfig config) {
@@ -1483,23 +1479,19 @@ public class JvmModelGenerator implements IGenerator {
       ITreeAppendable _newLine = _increaseIndentation.newLine();
       _newLine.append("throw new Error(\"Unresolved compilation problems:\"");
       appendable.increaseIndentation();
-      final Procedure1<Issue> _function = new Procedure1<Issue>() {
-        @Override
-        public void apply(final Issue it) {
-          ITreeAppendable _newLine = appendable.newLine();
-          ITreeAppendable _append = _newLine.append("+ \"\\n");
-          String _message = it.getMessage();
-          String _doConvertToJavaString = JvmModelGenerator.this.doConvertToJavaString(_message);
-          ITreeAppendable _append_1 = _append.append(_doConvertToJavaString);
-          _append_1.append("\"");
-        }
-      };
-      IterableExtensions.<Issue>forEach(errors, _function);
-      ITreeAppendable _append_1 = appendable.append(");");
-      ITreeAppendable _decreaseIndentation = _append_1.decreaseIndentation();
+      for (final Issue it : errors) {
+        ITreeAppendable _newLine_1 = appendable.newLine();
+        ITreeAppendable _append_1 = _newLine_1.append("+ \"\\n");
+        String _message = it.getMessage();
+        String _doConvertToJavaString = this.doConvertToJavaString(_message);
+        ITreeAppendable _append_2 = _append_1.append(_doConvertToJavaString);
+        _append_2.append("\"");
+      }
+      ITreeAppendable _append_3 = appendable.append(");");
+      ITreeAppendable _decreaseIndentation = _append_3.decreaseIndentation();
       ITreeAppendable _decreaseIndentation_1 = _decreaseIndentation.decreaseIndentation();
-      ITreeAppendable _newLine_1 = _decreaseIndentation_1.newLine();
-      _xblockexpression = _newLine_1.append("}");
+      ITreeAppendable _newLine_2 = _decreaseIndentation_1.newLine();
+      _xblockexpression = _newLine_2.append("}");
     }
     return _xblockexpression;
   }

@@ -55,7 +55,8 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 
 	override doTransform(List<? extends MutableTypeParameterDeclarator> elements,
 		extension TransformationContext context) {
-		elements.forEach[transform(context)]
+		for (it : elements)
+			transform(context)
 	}
 
 	def dispatch void transform(MutableClassDeclaration it, extension TransformationContext context) {
@@ -151,15 +152,15 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 				addError("Body must be empty")
 			}
 			val superParameters = declaringType.superConstructor?.resolvedParameters ?: #[]
-			superParameters.forEach [ p |
+			for (p : superParameters) {
 				addParameter(p.declaration.simpleName, p.resolvedType)
-			]
+			}
 			val fieldToParameter = newHashMap
-			declaringType.finalFields.forEach [ p |
+			for (p : declaringType.finalFields) {
 				p.markAsInitializedBy(it)
 				val param = addParameter(p.simpleName, p.type.orObject)
 				fieldToParameter.put(p, param)
-			]
+			}
 			body = '''
 				super(«superParameters.join(", ")[declaration.simpleName]»);
 				«FOR arg : declaringType.finalFields»

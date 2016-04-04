@@ -108,21 +108,17 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     IBundleProjectConfig _eclipsePluginTest_2 = _projectConfig_7.getEclipsePluginTest();
     ManifestAccess _manifest_7 = _eclipsePluginTest_2.getManifest();
     Iterable<ManifestAccess> _filterNull = IterableExtensions.<ManifestAccess>filterNull(Collections.<ManifestAccess>unmodifiableList(CollectionLiterals.<ManifestAccess>newArrayList(_manifest_6, _manifest_7)));
-    final Procedure1<ManifestAccess> _function_2 = new Procedure1<ManifestAccess>() {
-      @Override
-      public void apply(final ManifestAccess it) {
-        Set<String> _importedPackages = it.getImportedPackages();
-        CollectionExtensions.<String>addAll(_importedPackages, 
-          "org.junit;version=\"4.5.0\"", 
-          "org.junit.runner;version=\"4.5.0\"", 
-          "org.junit.runner.manipulation;version=\"4.5.0\"", 
-          "org.junit.runner.notification;version=\"4.5.0\"", 
-          "org.junit.runners;version=\"4.5.0\"", 
-          "org.junit.runners.model;version=\"4.5.0\"", 
-          "org.hamcrest.core");
-      }
-    };
-    IterableExtensions.<ManifestAccess>forEach(_filterNull, _function_2);
+    for (final ManifestAccess it : _filterNull) {
+      Set<String> _importedPackages = it.getImportedPackages();
+      CollectionExtensions.<String>addAll(_importedPackages, 
+        "org.junit;version=\"4.5.0\"", 
+        "org.junit.runner;version=\"4.5.0\"", 
+        "org.junit.runner.manipulation;version=\"4.5.0\"", 
+        "org.junit.runner.notification;version=\"4.5.0\"", 
+        "org.junit.runners;version=\"4.5.0\"", 
+        "org.junit.runners.model;version=\"4.5.0\"", 
+        "org.hamcrest.core");
+    }
     JavaFileAccess _generateInjectorProvider = this.generateInjectorProvider();
     IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
     IBundleProjectConfig _runtimeTest_3 = _projectConfig_8.getRuntimeTest();

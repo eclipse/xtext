@@ -234,9 +234,8 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		
 		val context = createExecutionContext() as XpandExecutionContextImpl;
 		
-		advices.forEach[
+		for (it : advices)
 			context.registerAdvices(it);
-		];
 
 		val combined = grammar.isCombinedGrammar		
 		val helper = if (!combined) new AntlrFragmentHelperEx(naming, productionNaming, contentAssistNaming)

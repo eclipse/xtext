@@ -31,9 +31,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.ui.notification.TypeNames;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -276,15 +274,13 @@ public class JavaBuilderState {
         };
         return ObjectExtensions.<TypeNames>operator_doubleArrow(_typeNames, _function);
       }
-      final Procedure1<char[]> _function_1 = new Procedure1<char[]>() {
-        @Override
-        public void apply(final char[] it) {
+      for (final char[] it : typeNames) {
+        {
           String _string = new String(it);
-          final String typeName = JavaBuilderState.this.getQualifedTypeName(packageName, _string);
+          final String typeName = this.getQualifedTypeName(packageName, _string);
           qualifiedTypeNames.addTypeName(typeName, primaryTypeFqn);
         }
-      };
-      IterableExtensions.<char[]>forEach(((Iterable<char[]>)Conversions.doWrapArray(typeNames)), _function_1);
+      }
       _xblockexpression = qualifiedTypeNames;
     }
     return _xblockexpression;

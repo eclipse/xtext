@@ -28,7 +28,6 @@ import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -43,13 +42,9 @@ public class XtextGeneratorResourceSetInitializer {
     delegate.setResourceSet(resourceSet);
     EPackage.Registry _packageRegistry = resourceSet.getPackageRegistry();
     _packageRegistry.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
-    final Procedure1<String> _function = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        XtextGeneratorResourceSetInitializer.this.loadResource(it, resourceSet);
-      }
-    };
-    IterableExtensions.<String>forEach(referencedResources, _function);
+    for (final String it : referencedResources) {
+      this.loadResource(it, resourceSet);
+    }
     this.registerGenModels(resourceSet);
     this.registerEPackages(resourceSet);
   }
@@ -183,13 +178,9 @@ public class XtextGeneratorResourceSetInitializer {
         final Resource resource = _resources.get(i);
         EList<EObject> _contents = resource.getContents();
         Iterable<Type> _filter = Iterables.<Type>filter(_contents, type);
-        final Procedure1<Type> _function = new Procedure1<Type>() {
-          @Override
-          public void apply(final Type it) {
-            strategy.apply(it);
-          }
-        };
-        IterableExtensions.<Type>forEach(_filter, _function);
+        for (final Type it : _filter) {
+          strategy.apply(it);
+        }
       }
     }
   }

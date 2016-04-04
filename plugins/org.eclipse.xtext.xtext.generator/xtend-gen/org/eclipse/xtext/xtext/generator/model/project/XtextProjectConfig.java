@@ -16,7 +16,6 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
@@ -50,13 +49,9 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   
   public void checkConfiguration(final Issues issues) {
     List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
-    final Procedure1<SubProjectConfig> _function = new Procedure1<SubProjectConfig>() {
-      @Override
-      public void apply(final SubProjectConfig it) {
-        it.checkConfiguration(issues);
-      }
-    };
-    IterableExtensions.forEach(_enabledProjects, _function);
+    for (final SubProjectConfig it : _enabledProjects) {
+      it.checkConfiguration(issues);
+    }
   }
   
   public List<? extends SubProjectConfig> getAllProjects() {
@@ -104,13 +99,9 @@ public class XtextProjectConfig implements IXtextProjectConfig {
     this.setDefaults();
     injector.injectMembers(this);
     List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
-    final Procedure1<SubProjectConfig> _function = new Procedure1<SubProjectConfig>() {
-      @Override
-      public void apply(final SubProjectConfig it) {
-        it.initialize(injector);
-      }
-    };
-    IterableExtensions.forEach(_enabledProjects, _function);
+    for (final SubProjectConfig it : _enabledProjects) {
+      it.initialize(injector);
+    }
   }
   
   public void setDefaults() {

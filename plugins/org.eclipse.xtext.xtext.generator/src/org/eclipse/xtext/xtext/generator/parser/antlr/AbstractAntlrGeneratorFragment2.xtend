@@ -134,7 +134,8 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGeneratorFra
 		fsa.generateFile(type.javaPath, newContent)
 	}
 	def protected void suppressWarnings(IXtextGeneratorFileSystemAccess fsa, TypeReference... types) {
-		types.forEach[suppressWarnings(fsa, it)]
+		for (it : types)
+			suppressWarnings(fsa, it)
 	}
 
 	def protected void normalizeLineDelimiters(IXtextGeneratorFileSystemAccess fsa, TypeReference type) {
@@ -149,7 +150,8 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGeneratorFra
 	}
 	
 	def protected void normalizeLineDelimiters(IXtextGeneratorFileSystemAccess fsa, TypeReference... types) {
-		types.forEach[normalizeLineDelimiters(fsa, it)]
+		for (it : types)
+			normalizeLineDelimiters(fsa, it)
 	}
 
 	def protected void normalizeTokens(IXtextGeneratorFileSystemAccess fsa, String tokenFile) {

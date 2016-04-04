@@ -38,10 +38,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 			projectConfig.eclipsePlugin.manifest.exportedPackages.add(eclipsePluginActivator.packageName)
 		}
 		
-		#[
-			projectConfig.runtimeTest.manifest,
-			projectConfig.eclipsePluginTest.manifest
-		].filterNull.forEach [
+		for (it : #[projectConfig.runtimeTest.manifest, projectConfig.eclipsePluginTest.manifest].filterNull) {
 			importedPackages.addAll(
 				"org.junit;version=\"4.5.0\"",
 				"org.junit.runner;version=\"4.5.0\"",
@@ -51,7 +48,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 				"org.junit.runners.model;version=\"4.5.0\"",
 				"org.hamcrest.core"
 			)
-		]
+		}
 		generateInjectorProvider.writeTo(projectConfig.runtimeTest.srcGen)
 		if (isGenerateStub)
 			generateExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)

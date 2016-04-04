@@ -36,7 +36,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -942,16 +941,12 @@ public class GrammarPDAProviderTest {
       this.validator.assertNoErrors(grammar);
       final Map<ISerializationContext, Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
       Collection<Pda<ISerState, RuleCall>> _values = pdas.values();
-      final Procedure1<Pda<ISerState, RuleCall>> _function = new Procedure1<Pda<ISerState, RuleCall>>() {
-        @Override
-        public void apply(final Pda<ISerState, RuleCall> it) {
-          GrammarPDAProviderTest.this.assertNoLeakedGrammarElements(grammar, it);
-        }
-      };
-      IterableExtensions.<Pda<ISerState, RuleCall>>forEach(_values, _function);
+      for (final Pda<ISerState, RuleCall> it : _values) {
+        this.assertNoLeakedGrammarElements(grammar, it);
+      }
       Set<ISerializationContext> _keySet = pdas.keySet();
       List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_keySet);
-      final Function1<ISerializationContext, String> _function_1 = new Function1<ISerializationContext, String>() {
+      final Function1<ISerializationContext, String> _function = new Function1<ISerializationContext, String>() {
         @Override
         public String apply(final ISerializationContext it) {
           StringConcatenation _builder = new StringConcatenation();
@@ -966,7 +961,7 @@ public class GrammarPDAProviderTest {
           return _builder.toString();
         }
       };
-      List<String> _map = ListExtensions.<ISerializationContext, String>map(_sort, _function_1);
+      List<String> _map = ListExtensions.<ISerializationContext, String>map(_sort, _function);
       return IterableExtensions.join(_map);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

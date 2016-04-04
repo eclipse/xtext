@@ -32,7 +32,8 @@ class JavaResourceDescriptionManager implements IResourceDescription.Manager {
 				}
 				val result = new DefaultResourceDescription(resource, descriptionStrategy, cache)
 				if (!initialized) {
-					result.exportedObjects.forEach[EObjectURI]
+					for (it : result.exportedObjects)
+						EObjectURI
 				}
 				return result
 			} finally {

@@ -146,7 +146,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	private def void handleException(Exception ex, Issues issues) {
 		if (ex instanceof CompositeGeneratorException) {
-			ex.exceptions.forEach[handleException(issues)]
+			for (it : ex.exceptions)
+				handleException(issues)
 		} else {
 			issues.addError(this, "GeneratorException: ", null, ex, null)
 		}

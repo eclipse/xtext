@@ -129,21 +129,17 @@ public class WizardConfigurationTest {
     RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
     IdeProjectDescriptor _ideProject_1 = this.config.getIdeProject();
     UiProjectDescriptor _uiProject_1 = this.config.getUiProject();
-    final Procedure1<ProjectDescriptor> _function = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
-        PomFile _pom = it.pom();
-        String _content = _pom.getContent();
-        boolean _contains = _content.contains("eclipse-plugin");
-        Assert.assertTrue(_contains);
-      }
-    };
-    IterableExtensions.forEach(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _ideProject_1, _uiProject_1)), _function);
+    for (final ProjectDescriptor it : Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _ideProject_1, _uiProject_1))) {
+      PomFile _pom = it.pom();
+      String _content = _pom.getContent();
+      boolean _contains = _content.contains("eclipse-plugin");
+      Assert.assertTrue(_contains);
+    }
     ParentProjectDescriptor _parentProject = this.config.getParentProject();
-    PomFile _pom = _parentProject.pom();
-    String _content = _pom.getContent();
-    boolean _contains = _content.contains("tycho");
-    Assert.assertTrue(_contains);
+    PomFile _pom_1 = _parentProject.pom();
+    String _content_1 = _pom_1.getContent();
+    boolean _contains_1 = _content_1.contains("tycho");
+    Assert.assertTrue(_contains_1);
   }
   
   @Test
@@ -243,49 +239,45 @@ public class WizardConfigurationTest {
     RuntimeProjectDescriptor _runtimeProject_1 = this.config.getRuntimeProject();
     TestProjectDescriptor _testProject_1 = _runtimeProject_1.getTestProject();
     Set<ExternalDependency> _externalDependencies = _testProject_1.getExternalDependencies();
-    final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
-      @Override
-      public void apply(final ExternalDependency testDependency) {
-        RuntimeProjectDescriptor _runtimeProject = WizardConfigurationTest.this.config.getRuntimeProject();
-        Set<ExternalDependency> _externalDependencies = _runtimeProject.getExternalDependencies();
-        final Function1<ExternalDependency, Boolean> _function = new Function1<ExternalDependency, Boolean>() {
-          @Override
-          public Boolean apply(final ExternalDependency it) {
-            boolean _and = false;
-            boolean _and_1 = false;
-            ExternalDependency.MavenCoordinates _maven = it.getMaven();
-            String _artifactId = _maven.getArtifactId();
-            ExternalDependency.MavenCoordinates _maven_1 = testDependency.getMaven();
-            String _artifactId_1 = _maven_1.getArtifactId();
-            boolean _equals = Objects.equal(_artifactId, _artifactId_1);
-            if (!_equals) {
-              _and_1 = false;
-            } else {
-              ExternalDependency.P2Coordinates _p2 = it.getP2();
-              String _bundleId = _p2.getBundleId();
-              ExternalDependency.P2Coordinates _p2_1 = testDependency.getP2();
-              String _bundleId_1 = _p2_1.getBundleId();
-              boolean _equals_1 = Objects.equal(_bundleId, _bundleId_1);
-              _and_1 = _equals_1;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              ExternalDependency.P2Coordinates _p2_2 = it.getP2();
-              Set<String> _packages = _p2_2.getPackages();
-              ExternalDependency.P2Coordinates _p2_3 = testDependency.getP2();
-              Set<String> _packages_1 = _p2_3.getPackages();
-              boolean _equals_2 = Objects.equal(_packages, _packages_1);
-              _and = _equals_2;
-            }
-            return Boolean.valueOf(_and);
+    for (final ExternalDependency testDependency : _externalDependencies) {
+      RuntimeProjectDescriptor _runtimeProject_2 = this.config.getRuntimeProject();
+      Set<ExternalDependency> _externalDependencies_1 = _runtimeProject_2.getExternalDependencies();
+      final Function1<ExternalDependency, Boolean> _function = new Function1<ExternalDependency, Boolean>() {
+        @Override
+        public Boolean apply(final ExternalDependency it) {
+          boolean _and = false;
+          boolean _and_1 = false;
+          ExternalDependency.MavenCoordinates _maven = it.getMaven();
+          String _artifactId = _maven.getArtifactId();
+          ExternalDependency.MavenCoordinates _maven_1 = testDependency.getMaven();
+          String _artifactId_1 = _maven_1.getArtifactId();
+          boolean _equals = Objects.equal(_artifactId, _artifactId_1);
+          if (!_equals) {
+            _and_1 = false;
+          } else {
+            ExternalDependency.P2Coordinates _p2 = it.getP2();
+            String _bundleId = _p2.getBundleId();
+            ExternalDependency.P2Coordinates _p2_1 = testDependency.getP2();
+            String _bundleId_1 = _p2_1.getBundleId();
+            boolean _equals_1 = Objects.equal(_bundleId, _bundleId_1);
+            _and_1 = _equals_1;
           }
-        };
-        boolean _exists = IterableExtensions.<ExternalDependency>exists(_externalDependencies, _function);
-        Assert.assertTrue(_exists);
-      }
-    };
-    IterableExtensions.<ExternalDependency>forEach(_externalDependencies, _function);
+          if (!_and_1) {
+            _and = false;
+          } else {
+            ExternalDependency.P2Coordinates _p2_2 = it.getP2();
+            Set<String> _packages = _p2_2.getPackages();
+            ExternalDependency.P2Coordinates _p2_3 = testDependency.getP2();
+            Set<String> _packages_1 = _p2_3.getPackages();
+            boolean _equals_2 = Objects.equal(_packages, _packages_1);
+            _and = _equals_2;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      boolean _exists = IterableExtensions.<ExternalDependency>exists(_externalDependencies_1, _function);
+      Assert.assertTrue(_exists);
+    }
   }
   
   @Test
@@ -297,16 +289,12 @@ public class WizardConfigurationTest {
     RuntimeProjectDescriptor _runtimeProject_1 = this.config.getRuntimeProject();
     TestProjectDescriptor _testProject_1 = _runtimeProject_1.getTestProject();
     Set<String> _sourceFolders = _testProject_1.getSourceFolders();
-    final Procedure1<String> _function = new Procedure1<String>() {
-      @Override
-      public void apply(final String testFolder) {
-        RuntimeProjectDescriptor _runtimeProject = WizardConfigurationTest.this.config.getRuntimeProject();
-        Set<String> _sourceFolders = _runtimeProject.getSourceFolders();
-        boolean _contains = _sourceFolders.contains(testFolder);
-        Assert.assertTrue(_contains);
-      }
-    };
-    IterableExtensions.<String>forEach(_sourceFolders, _function);
+    for (final String testFolder : _sourceFolders) {
+      RuntimeProjectDescriptor _runtimeProject_2 = this.config.getRuntimeProject();
+      Set<String> _sourceFolders_1 = _runtimeProject_2.getSourceFolders();
+      boolean _contains = _sourceFolders_1.contains(testFolder);
+      Assert.assertTrue(_contains);
+    }
   }
   
   @Test
@@ -320,23 +308,21 @@ public class WizardConfigurationTest {
       }
     };
     Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(_allJavaProjects, _function);
-    final Procedure1<ProjectDescriptor> _function_1 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
+    for (final ProjectDescriptor it : _filter) {
+      {
         it.setEnabled(true);
         Iterable<? extends AbstractFile> _files = it.getFiles();
-        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
+        final Function1<AbstractFile, Boolean> _function_1 = new Function1<AbstractFile, Boolean>() {
           @Override
           public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "pom.xml"));
           }
         };
-        boolean _exists = IterableExtensions.exists(_files, _function);
+        boolean _exists = IterableExtensions.exists(_files, _function_1);
         Assert.assertTrue(_exists);
       }
-    };
-    IterableExtensions.forEach(_filter, _function_1);
+    }
   }
   
   @Test
@@ -350,23 +336,21 @@ public class WizardConfigurationTest {
       }
     };
     Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(_allJavaProjects, _function);
-    final Procedure1<ProjectDescriptor> _function_1 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
+    for (final ProjectDescriptor it : _filter) {
+      {
         it.setEnabled(true);
         Iterable<? extends AbstractFile> _files = it.getFiles();
-        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
+        final Function1<AbstractFile, Boolean> _function_1 = new Function1<AbstractFile, Boolean>() {
           @Override
           public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "build.gradle"));
           }
         };
-        boolean _exists = IterableExtensions.exists(_files, _function);
+        boolean _exists = IterableExtensions.exists(_files, _function_1);
         Assert.assertTrue(_exists);
       }
-    };
-    IterableExtensions.forEach(_filter, _function_1);
+    }
   }
   
   @Test
@@ -379,33 +363,31 @@ public class WizardConfigurationTest {
       }
     };
     Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(_allJavaProjects, _function);
-    final Procedure1<ProjectDescriptor> _function_1 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
+    for (final ProjectDescriptor it : _filter) {
+      {
         it.setEnabled(true);
         Iterable<? extends AbstractFile> _files = it.getFiles();
-        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
+        final Function1<AbstractFile, Boolean> _function_1 = new Function1<AbstractFile, Boolean>() {
           @Override
           public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "MANIFEST.MF"));
           }
         };
-        boolean _exists = IterableExtensions.exists(_files, _function);
+        boolean _exists = IterableExtensions.exists(_files, _function_1);
         Assert.assertTrue(_exists);
         Iterable<? extends AbstractFile> _files_1 = it.getFiles();
-        final Function1<AbstractFile, Boolean> _function_1 = new Function1<AbstractFile, Boolean>() {
+        final Function1<AbstractFile, Boolean> _function_2 = new Function1<AbstractFile, Boolean>() {
           @Override
           public Boolean apply(final AbstractFile it) {
             String _relativePath = it.getRelativePath();
             return Boolean.valueOf(Objects.equal(_relativePath, "build.properties"));
           }
         };
-        boolean _exists_1 = IterableExtensions.exists(_files_1, _function_1);
+        boolean _exists_1 = IterableExtensions.exists(_files_1, _function_2);
         Assert.assertTrue(_exists_1);
       }
-    };
-    IterableExtensions.forEach(_filter, _function_1);
+    }
   }
   
   @Test
@@ -491,34 +473,26 @@ public class WizardConfigurationTest {
       }
     };
     Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
-    final Procedure1<ProjectDescriptor> _function_1 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
-        GradleBuildFile _buildGradle = it.buildGradle();
-        String _content = _buildGradle.getContent();
-        boolean _contains = _content.contains("eclipseClasspath.enabled=false");
-        Assert.assertTrue(_contains);
-      }
-    };
-    IterableExtensions.<ProjectDescriptor>forEach(_filter, _function_1);
+    for (final ProjectDescriptor it : _filter) {
+      GradleBuildFile _buildGradle = it.buildGradle();
+      String _content = _buildGradle.getContent();
+      boolean _contains = _content.contains("eclipseClasspath.enabled=false");
+      Assert.assertTrue(_contains);
+    }
   }
   
   @Test
   public void parentContainsOtherProjectsInHierarchicallayout() {
     this.config.setProjectLayout(ProjectLayout.HIERARCHICAL);
     List<? extends ProjectDescriptor> _allJavaProjects = this.allJavaProjects();
-    final Procedure1<ProjectDescriptor> _function = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
-        String _location = it.getLocation();
-        ParentProjectDescriptor _parentProject = WizardConfigurationTest.this.config.getParentProject();
-        String _location_1 = _parentProject.getLocation();
-        String _plus = (_location_1 + "/");
-        boolean _startsWith = _location.startsWith(_plus);
-        Assert.assertTrue(_startsWith);
-      }
-    };
-    IterableExtensions.forEach(_allJavaProjects, _function);
+    for (final ProjectDescriptor it : _allJavaProjects) {
+      String _location = it.getLocation();
+      ParentProjectDescriptor _parentProject = this.config.getParentProject();
+      String _location_1 = _parentProject.getLocation();
+      String _plus = (_location_1 + "/");
+      boolean _startsWith = _location.startsWith(_plus);
+      Assert.assertTrue(_startsWith);
+    }
   }
   
   @Test
@@ -542,9 +516,8 @@ public class WizardConfigurationTest {
       }
     };
     final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(_allJavaProjects, _function);
-    final Procedure1<ProjectDescriptor> _function_1 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
+    for (final ProjectDescriptor it : plainMavenProjects) {
+      {
         PomFile _pom = it.pom();
         String _content = _pom.getContent();
         boolean _contains = _content.contains("<directory>src</directory>");
@@ -558,68 +531,63 @@ public class WizardConfigurationTest {
         boolean _contains_2 = _content_2.contains("<directory>src-gen</directory>");
         Assert.assertTrue(_contains_2);
       }
-    };
-    IterableExtensions.forEach(plainMavenProjects, _function_1);
-    final Function1<ProjectDescriptor, Boolean> _function_2 = new Function1<ProjectDescriptor, Boolean>() {
+    }
+    final Function1<ProjectDescriptor, Boolean> _function_1 = new Function1<ProjectDescriptor, Boolean>() {
       @Override
       public Boolean apply(final ProjectDescriptor it) {
         return Boolean.valueOf((!(it instanceof TestProjectDescriptor)));
       }
     };
-    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(plainMavenProjects, _function_2);
-    final Procedure1<ProjectDescriptor> _function_3 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
-        PomFile _pom = it.pom();
+    Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(plainMavenProjects, _function_1);
+    for (final ProjectDescriptor it_1 : _filter) {
+      {
+        PomFile _pom = it_1.pom();
         String _content = _pom.getContent();
         boolean _contains = _content.contains("<sourceDirectory>src</sourceDirectory>");
         Assert.assertTrue(_contains);
-        PomFile _pom_1 = it.pom();
+        PomFile _pom_1 = it_1.pom();
         String _content_1 = _pom_1.getContent();
         boolean _contains_1 = _content_1.contains("add-source");
         Assert.assertTrue(_contains_1);
-        PomFile _pom_2 = it.pom();
+        PomFile _pom_2 = it_1.pom();
         String _content_2 = _pom_2.getContent();
         boolean _contains_2 = _content_2.contains("add-resource");
         Assert.assertTrue(_contains_2);
-        PomFile _pom_3 = it.pom();
+        PomFile _pom_3 = it_1.pom();
         String _content_3 = _pom_3.getContent();
         boolean _contains_3 = _content_3.contains("add-test-source");
         Assert.assertFalse(_contains_3);
-        PomFile _pom_4 = it.pom();
+        PomFile _pom_4 = it_1.pom();
         String _content_4 = _pom_4.getContent();
         boolean _contains_4 = _content_4.contains("add-test-resource");
         Assert.assertFalse(_contains_4);
       }
-    };
-    IterableExtensions.forEach(_filter, _function_3);
+    }
     Iterable<TestProjectDescriptor> _filter_1 = Iterables.<TestProjectDescriptor>filter(plainMavenProjects, TestProjectDescriptor.class);
-    final Procedure1<TestProjectDescriptor> _function_4 = new Procedure1<TestProjectDescriptor>() {
-      @Override
-      public void apply(final TestProjectDescriptor it) {
-        PomFile _pom = it.pom();
+    for (final TestProjectDescriptor it_2 : _filter_1) {
+      {
+        PomFile _pom = it_2.pom();
         String _content = _pom.getContent();
         boolean _contains = _content.contains("<testSourceDirectory>src</testSourceDirectory>");
         Assert.assertTrue(_contains);
-        PomFile _pom_1 = it.pom();
+        PomFile _pom_1 = it_2.pom();
         String _content_1 = _pom_1.getContent();
         boolean _contains_1 = _content_1.contains("add-test-source");
         Assert.assertTrue(_contains_1);
-        PomFile _pom_2 = it.pom();
+        PomFile _pom_2 = it_2.pom();
         String _content_2 = _pom_2.getContent();
         boolean _contains_2 = _content_2.contains("add-test-resource");
         Assert.assertTrue(_contains_2);
-        PomFile _pom_3 = it.pom();
+        PomFile _pom_3 = it_2.pom();
         String _content_3 = _pom_3.getContent();
         boolean _contains_3 = _content_3.contains("add-source");
         Assert.assertFalse(_contains_3);
-        PomFile _pom_4 = it.pom();
+        PomFile _pom_4 = it_2.pom();
         String _content_4 = _pom_4.getContent();
         boolean _contains_4 = _content_4.contains("add-resource");
         Assert.assertFalse(_contains_4);
       }
-    };
-    IterableExtensions.<TestProjectDescriptor>forEach(_filter_1, _function_4);
+    }
   }
   
   @Test
@@ -650,67 +618,59 @@ public class WizardConfigurationTest {
       }
     };
     final Iterable<? extends ProjectDescriptor> mainProjects = IterableExtensions.filter(plainMavenProjects, _function_1);
-    final Procedure1<ProjectDescriptor> _function_2 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
-        it.setEnabled(true);
-      }
-    };
-    IterableExtensions.forEach(plainMavenProjects, _function_2);
+    for (final ProjectDescriptor it : plainMavenProjects) {
+      it.setEnabled(true);
+    }
     Iterable<TestProjectDescriptor> _filter = Iterables.<TestProjectDescriptor>filter(plainMavenProjects, TestProjectDescriptor.class);
-    final Function1<TestProjectDescriptor, Boolean> _function_3 = new Function1<TestProjectDescriptor, Boolean>() {
+    final Function1<TestProjectDescriptor, Boolean> _function_2 = new Function1<TestProjectDescriptor, Boolean>() {
       @Override
       public Boolean apply(final TestProjectDescriptor it) {
         return Boolean.valueOf(it.isInlined());
       }
     };
-    boolean _forall = IterableExtensions.<TestProjectDescriptor>forall(_filter, _function_3);
+    boolean _forall = IterableExtensions.<TestProjectDescriptor>forall(_filter, _function_2);
     Assert.assertTrue(_forall);
-    final Procedure1<ProjectDescriptor> _function_4 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
-        PomFile _pom = it.pom();
+    for (final ProjectDescriptor it_1 : mainProjects) {
+      {
+        PomFile _pom = it_1.pom();
         String _content = _pom.getContent();
         boolean _contains = _content.contains("add-source");
         Assert.assertTrue(_contains);
-        PomFile _pom_1 = it.pom();
+        PomFile _pom_1 = it_1.pom();
         String _content_1 = _pom_1.getContent();
         boolean _contains_1 = _content_1.contains("add-resource");
         Assert.assertTrue(_contains_1);
-        PomFile _pom_2 = it.pom();
+        PomFile _pom_2 = it_1.pom();
         String _content_2 = _pom_2.getContent();
         boolean _contains_2 = _content_2.contains("<source>src/main/xtext-gen</source>");
         Assert.assertTrue(_contains_2);
-        PomFile _pom_3 = it.pom();
+        PomFile _pom_3 = it_1.pom();
         String _content_3 = _pom_3.getContent();
         boolean _contains_3 = _content_3.contains("<directory>src/main/xtext-gen</directory>");
         Assert.assertTrue(_contains_3);
       }
-    };
-    IterableExtensions.forEach(mainProjects, _function_4);
+    }
     Iterable<TestedProjectDescriptor> _filter_1 = Iterables.<TestedProjectDescriptor>filter(mainProjects, TestedProjectDescriptor.class);
-    final Procedure1<TestedProjectDescriptor> _function_5 = new Procedure1<TestedProjectDescriptor>() {
-      @Override
-      public void apply(final TestedProjectDescriptor it) {
-        PomFile _pom = it.pom();
+    for (final TestedProjectDescriptor it_2 : _filter_1) {
+      {
+        PomFile _pom = it_2.pom();
         String _content = _pom.getContent();
         boolean _contains = _content.contains("add-test-source");
         Assert.assertTrue(_contains);
-        PomFile _pom_1 = it.pom();
+        PomFile _pom_1 = it_2.pom();
         String _content_1 = _pom_1.getContent();
         boolean _contains_1 = _content_1.contains("add-test-resource");
         Assert.assertTrue(_contains_1);
-        PomFile _pom_2 = it.pom();
+        PomFile _pom_2 = it_2.pom();
         String _content_2 = _pom_2.getContent();
         boolean _contains_2 = _content_2.contains("<source>src/test/xtext-gen</source>");
         Assert.assertTrue(_contains_2);
-        PomFile _pom_3 = it.pom();
+        PomFile _pom_3 = it_2.pom();
         String _content_3 = _pom_3.getContent();
         boolean _contains_3 = _content_3.contains("<directory>src/test/xtext-gen</directory>");
         Assert.assertTrue(_contains_3);
       }
-    };
-    IterableExtensions.<TestedProjectDescriptor>forEach(_filter_1, _function_5);
+    }
   }
   
   @Test
@@ -741,35 +701,29 @@ public class WizardConfigurationTest {
       }
     };
     final Iterable<? extends ProjectDescriptor> mainProjects = IterableExtensions.filter(plainMavenProjects, _function_1);
-    final Procedure1<ProjectDescriptor> _function_2 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
-        it.setEnabled(true);
-      }
-    };
-    IterableExtensions.forEach(plainMavenProjects, _function_2);
-    final Procedure1<ProjectDescriptor> _function_3 = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
-        PomFile _pom = it.pom();
+    for (final ProjectDescriptor it : plainMavenProjects) {
+      it.setEnabled(true);
+    }
+    for (final ProjectDescriptor it_1 : mainProjects) {
+      {
+        PomFile _pom = it_1.pom();
         String _content = _pom.getContent();
         boolean _contains = _content.contains("<sourceDirectory>");
         Assert.assertFalse(_contains);
-        PomFile _pom_1 = it.pom();
+        PomFile _pom_1 = it_1.pom();
         String _content_1 = _pom_1.getContent();
         boolean _contains_1 = _content_1.contains("<directory>src/main/resources</directory>");
         Assert.assertFalse(_contains_1);
-        PomFile _pom_2 = it.pom();
+        PomFile _pom_2 = it_1.pom();
         String _content_2 = _pom_2.getContent();
         boolean _contains_2 = _content_2.contains("<testSourceDirectory>");
         Assert.assertFalse(_contains_2);
-        PomFile _pom_3 = it.pom();
+        PomFile _pom_3 = it_1.pom();
         String _content_3 = _pom_3.getContent();
         boolean _contains_3 = _content_3.contains("<directory>src/test/resources</directory>");
         Assert.assertFalse(_contains_3);
       }
-    };
-    IterableExtensions.forEach(mainProjects, _function_3);
+    }
   }
   
   @Test
@@ -819,15 +773,11 @@ public class WizardConfigurationTest {
       }
     };
     final Iterable<PomFile> poms = IterableExtensions.<TestProjectDescriptor, PomFile>map(_filter_1, _function_1);
-    final Procedure1<PomFile> _function_2 = new Procedure1<PomFile>() {
-      @Override
-      public void apply(final PomFile it) {
-        String _content = it.getContent();
-        boolean _contains = _content.contains("failIfNoTests");
-        Assert.assertTrue(_contains);
-      }
-    };
-    IterableExtensions.<PomFile>forEach(poms, _function_2);
+    for (final PomFile it : poms) {
+      String _content = it.getContent();
+      boolean _contains = _content.contains("failIfNoTests");
+      Assert.assertTrue(_contains);
+    }
   }
   
   @Test
@@ -854,14 +804,10 @@ public class WizardConfigurationTest {
       }
     };
     List<String> _map = ListExtensions.map(_allJavaProjects, _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        boolean _contains = it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
-        Assert.assertTrue(_contains);
-      }
-    };
-    IterableExtensions.<String>forEach(_map, _function_1);
+    for (final String it : _map) {
+      boolean _contains_4 = it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
+      Assert.assertTrue(_contains_4);
+    }
   }
   
   @Test
@@ -889,14 +835,10 @@ public class WizardConfigurationTest {
       }
     };
     List<String> _map = ListExtensions.map(_allJavaProjects, _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        boolean _contains = it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8");
-        Assert.assertTrue(_contains);
-      }
-    };
-    IterableExtensions.<String>forEach(_map, _function_1);
+    for (final String it : _map) {
+      boolean _contains_4 = it.contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8");
+      Assert.assertTrue(_contains_4);
+    }
   }
   
   public List<? extends ProjectDescriptor> allJavaProjects() {

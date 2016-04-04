@@ -29,7 +29,8 @@ class XtextProjectConfig implements IXtextProjectConfig {
 	WebProjectConfig web = new WebProjectConfig
 	
 	def void checkConfiguration(Issues issues) {
-		enabledProjects.forEach[checkConfiguration(issues)]
+		for (it : enabledProjects)
+			checkConfiguration(issues)
 	}
 
 	def List<? extends SubProjectConfig> getAllProjects() {
@@ -64,7 +65,8 @@ class XtextProjectConfig implements IXtextProjectConfig {
 	override initialize(Injector injector) {
 		setDefaults
 		injector.injectMembers(this)
-		enabledProjects.forEach[initialize(injector)]
+		for (it : enabledProjects)
+			initialize(injector)
 	}
 	
 	def setDefaults() {

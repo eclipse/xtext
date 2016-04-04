@@ -47,9 +47,11 @@ class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
 		
 		val delegate = new DirectoryCleaner
 		delegate.useDefaultExcludes = useDefaultExcludes
-		excludes.forEach[delegate.addExclude(it)]
+		for (it : excludes)
+			delegate.addExclude(it)
 
-		directories.forEach[delegate.cleanFolder(it)]
+		for (it : directories)
+			delegate.cleanFolder(it)
 	}
 	
 	override initialize(Injector injector) {

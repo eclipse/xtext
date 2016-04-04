@@ -311,9 +311,8 @@ import org.eclipse.xtext.util.internal.Log
 	private def StringConcatenationClient genCondition(List<ISerializationContext> contexts, IConstraint constraint, Multimap<EObject, IConstraint> ctx2ctr) {
 		val sorted = contexts.sort
 		val index = LinkedHashMultimap.create
-		sorted.forEach [
+		for (it : sorted)
 			index.put(contextObject, it)
-		]
 		'''«FOR obj : index.keySet SEPARATOR "\n\t\t|| "»«obj.genObjectSelector»«IF ctx2ctr.get(obj).size > 1»«obj.genParameterSelector(index.get(obj), constraint)»«ENDIF»«ENDFOR»'''
 	}
 	

@@ -566,7 +566,9 @@ class JvmModelGenerator implements IGenerator {
 	
 	def void generateThrowsClause(JvmExecutable it, ITreeAppendable appendable, GeneratorConfig config) {
 		val toBeGenerated = <JvmType, JvmTypeReference> newLinkedHashMap
-		exceptions.forEach[if(!toBeGenerated.containsKey(type)) toBeGenerated.put(type, it)]
+		for (it : exceptions)
+			if (!toBeGenerated.containsKey(type))
+				toBeGenerated.put(type, it)
 		appendable.forEachSafely(toBeGenerated.values, [
 				prefix = ' throws ' separator = ', '
 			], [
@@ -740,7 +742,9 @@ class JvmModelGenerator implements IGenerator {
 		appendable.append('{').increaseIndentation.newLine
 			.append('throw new Error("Unresolved compilation problems:"')
 		appendable.increaseIndentation
-		errors.forEach[appendable.newLine.append('+ "\\n').append(doConvertToJavaString(message)).append('"')]
+		for (it : errors) {
+			appendable.newLine.append('+ "\\n').append(doConvertToJavaString(message)).append('"')
+		}
 		appendable.append(');').decreaseIndentation.decreaseIndentation.newLine
 		    .append('}')
 	}

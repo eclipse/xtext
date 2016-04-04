@@ -238,9 +238,8 @@ class StandaloneBuilder {
 			encodingProvider.setDefaultEncoding(encoding)
 		commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, stubsDir.absolutePath)
 		val generateStubs = sourceResourceURIs.filter[languageAccess.linksAgainstJava]
-		generateStubs.forEach [
+		for (it : generateStubs)
 			languageAccess.stubGenerator.doGenerateStubs(commonFileAccess, data.getResourceDescription(it))
-		]
 		return stubsDir
 	}
 

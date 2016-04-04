@@ -115,59 +115,47 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
       Object _readObject = objIn.readObject();
       final Map<String, String> logicalMap = ((Map<String, String>) _readObject);
       Set<Map.Entry<String, String>> _entrySet = logicalMap.entrySet();
-      final Procedure1<Map.Entry<String, String>> _function_1 = new Procedure1<Map.Entry<String, String>>() {
-        @Override
-        public void apply(final Map.Entry<String, String> it) {
-          String _key = it.getKey();
-          EObject _eObject = resource.getEObject(_key);
-          String _value = it.getValue();
-          EObject _eObject_1 = resource.getEObject(_value);
-          adapter.logicalContainerMap.put(_eObject, ((JvmIdentifiableElement) _eObject_1));
-        }
-      };
-      IterableExtensions.<Map.Entry<String, String>>forEach(_entrySet, _function_1);
+      for (final Map.Entry<String, String> it : _entrySet) {
+        String _key = it.getKey();
+        EObject _eObject = resource.getEObject(_key);
+        String _value = it.getValue();
+        EObject _eObject_1 = resource.getEObject(_value);
+        adapter.logicalContainerMap.put(_eObject, ((JvmIdentifiableElement) _eObject_1));
+      }
       Object _readObject_1 = objIn.readObject();
       final Map<String, Set<String>> sourceToTargetMap = ((Map<String, Set<String>>) _readObject_1);
       Set<Map.Entry<String, Set<String>>> _entrySet_1 = sourceToTargetMap.entrySet();
-      final Procedure1<Map.Entry<String, Set<String>>> _function_2 = new Procedure1<Map.Entry<String, Set<String>>>() {
-        @Override
-        public void apply(final Map.Entry<String, Set<String>> it) {
-          String _key = it.getKey();
-          EObject _eObject = resource.getEObject(_key);
-          Set<String> _value = it.getValue();
-          final Function1<String, EObject> _function = new Function1<String, EObject>() {
-            @Override
-            public EObject apply(final String it) {
-              return resource.getEObject(it);
-            }
-          };
-          Iterable<EObject> _map = IterableExtensions.<String, EObject>map(_value, _function);
-          HashSet<EObject> _newHashSet = Sets.<EObject>newHashSet(_map);
-          adapter.sourceToTargetMap.put(_eObject, _newHashSet);
-        }
-      };
-      IterableExtensions.<Map.Entry<String, Set<String>>>forEach(_entrySet_1, _function_2);
+      for (final Map.Entry<String, Set<String>> it_1 : _entrySet_1) {
+        String _key_1 = it_1.getKey();
+        EObject _eObject_2 = resource.getEObject(_key_1);
+        Set<String> _value_1 = it_1.getValue();
+        final Function1<String, EObject> _function_1 = new Function1<String, EObject>() {
+          @Override
+          public EObject apply(final String it) {
+            return resource.getEObject(it);
+          }
+        };
+        Iterable<EObject> _map = IterableExtensions.<String, EObject>map(_value_1, _function_1);
+        HashSet<EObject> _newHashSet = Sets.<EObject>newHashSet(_map);
+        adapter.sourceToTargetMap.put(_eObject_2, _newHashSet);
+      }
       Object _readObject_2 = objIn.readObject();
       final Map<String, Set<String>> targetToSourceMap = ((Map<String, Set<String>>) _readObject_2);
       Set<Map.Entry<String, Set<String>>> _entrySet_2 = targetToSourceMap.entrySet();
-      final Procedure1<Map.Entry<String, Set<String>>> _function_3 = new Procedure1<Map.Entry<String, Set<String>>>() {
-        @Override
-        public void apply(final Map.Entry<String, Set<String>> it) {
-          String _key = it.getKey();
-          EObject _eObject = resource.getEObject(_key);
-          Set<String> _value = it.getValue();
-          final Function1<String, EObject> _function = new Function1<String, EObject>() {
-            @Override
-            public EObject apply(final String it) {
-              return resource.getEObject(it);
-            }
-          };
-          Iterable<EObject> _map = IterableExtensions.<String, EObject>map(_value, _function);
-          HashSet<EObject> _newHashSet = Sets.<EObject>newHashSet(_map);
-          adapter.targetToSourceMap.put(_eObject, _newHashSet);
-        }
-      };
-      IterableExtensions.<Map.Entry<String, Set<String>>>forEach(_entrySet_2, _function_3);
+      for (final Map.Entry<String, Set<String>> it_2 : _entrySet_2) {
+        String _key_2 = it_2.getKey();
+        EObject _eObject_3 = resource.getEObject(_key_2);
+        Set<String> _value_2 = it_2.getValue();
+        final Function1<String, EObject> _function_2 = new Function1<String, EObject>() {
+          @Override
+          public EObject apply(final String it) {
+            return resource.getEObject(it);
+          }
+        };
+        Iterable<EObject> _map_1 = IterableExtensions.<String, EObject>map(_value_2, _function_2);
+        HashSet<EObject> _newHashSet_1 = Sets.<EObject>newHashSet(_map_1);
+        adapter.targetToSourceMap.put(_eObject_3, _newHashSet_1);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

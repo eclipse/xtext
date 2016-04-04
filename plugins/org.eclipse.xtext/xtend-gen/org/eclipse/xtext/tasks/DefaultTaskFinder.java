@@ -27,7 +27,6 @@ import org.eclipse.xtext.tasks.TaskTags;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -97,9 +96,8 @@ public class DefaultTaskFinder implements ITaskFinder {
     if (_canContainTaskTags) {
       String _text = node.getText();
       final List<Task> tasks = this.parser.parseTasks(_text, taskTags);
-      final Procedure1<Task> _function = new Procedure1<Task>() {
-        @Override
-        public void apply(final Task it) {
+      for (final Task it : tasks) {
+        {
           int _offset = it.getOffset();
           int _offset_1 = node.getOffset();
           int _plus = (_offset + _offset_1);
@@ -110,8 +108,7 @@ public class DefaultTaskFinder implements ITaskFinder {
           int _minus = (_plus_1 - 1);
           it.setLineNumber(_minus);
         }
-      };
-      IterableExtensions.<Task>forEach(tasks, _function);
+      }
       return tasks;
     }
     return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());

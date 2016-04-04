@@ -341,13 +341,9 @@ public class FormattableDocument {
   public void operator_add(final Iterable<FormattingData> data) {
     boolean _notEquals = (!Objects.equal(data, null));
     if (_notEquals) {
-      final Procedure1<FormattingData> _function = new Procedure1<FormattingData>() {
-        @Override
-        public void apply(final FormattingData it) {
-          FormattableDocument.this.addFormatting(it);
-        }
-      };
-      IterableExtensions.<FormattingData>forEach(data, _function);
+      for (final FormattingData it : data) {
+        this.addFormatting(it);
+      }
     }
   }
   

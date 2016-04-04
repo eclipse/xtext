@@ -88,14 +88,14 @@ import org.eclipse.xtext.service.OperationCanceledManager
 	protected def List<Delta> getDeltasForDeletedResources(BuildRequest request, ResourceDescriptionsData oldIndex,
 		extension BuildContext context) {
 		val deltas = <Delta>newArrayList()
-		request.deletedFiles.filter[context.getResourceServiceProvider(it) != null].forEach [
+		for (it : request.deletedFiles.filter[context.getResourceServiceProvider(it) != null]) {
 			context.cancelIndicator.checkCanceled
 			val IResourceDescription oldDescription = oldIndex?.getResourceDescription(it)
 			if (oldDescription != null) {
 				val delta = new DefaultResourceDescriptionDelta(oldDescription, null)
 				deltas += delta
 			}
-		]
+		}
 		return deltas
 	}
 

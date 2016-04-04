@@ -267,12 +267,12 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 		val nonWordKeywords = newArrayList
 		val keywordsFilterPattern = Pattern.compile(keywordsFilter)
 		val wordKeywordPattern = Pattern.compile('\\w(.*\\w)?')
-		allKeywords.filter[keywordsFilterPattern.matcher(it).matches].forEach[
+		for (it : allKeywords.filter[keywordsFilterPattern.matcher(it).matches]) {
 			if (wordKeywordPattern.matcher(it).matches)
 				wordKeywords += it
 			else
 				nonWordKeywords += it
-		]
+		}
 		Collections.sort(wordKeywords)
 		Collections.sort(nonWordKeywords)
 		val jsFile = fileAccessFactory.createTextFile()

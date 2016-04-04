@@ -49,24 +49,20 @@ public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorCompon
     final StandaloneSetup delegate = new StandaloneSetup();
     delegate.setScanClassPath(this.scanClasspath);
     Iterable<Pair<String, String>> _projectMappings = this.getProjectMappings();
-    final Procedure1<Pair<String, String>> _function = new Procedure1<Pair<String, String>>() {
-      @Override
-      public void apply(final Pair<String, String> mapping) {
-        ProjectMapping _projectMapping = new ProjectMapping();
-        final Procedure1<ProjectMapping> _function = new Procedure1<ProjectMapping>() {
-          @Override
-          public void apply(final ProjectMapping it) {
-            String _key = mapping.getKey();
-            it.setProjectName(_key);
-            String _value = mapping.getValue();
-            it.setPath(_value);
-          }
-        };
-        ProjectMapping _doubleArrow = ObjectExtensions.<ProjectMapping>operator_doubleArrow(_projectMapping, _function);
-        delegate.addProjectMapping(_doubleArrow);
-      }
-    };
-    IterableExtensions.<Pair<String, String>>forEach(_projectMappings, _function);
+    for (final Pair<String, String> mapping : _projectMappings) {
+      ProjectMapping _projectMapping = new ProjectMapping();
+      final Procedure1<ProjectMapping> _function = new Procedure1<ProjectMapping>() {
+        @Override
+        public void apply(final ProjectMapping it) {
+          String _key = mapping.getKey();
+          it.setProjectName(_key);
+          String _value = mapping.getValue();
+          it.setPath(_value);
+        }
+      };
+      ProjectMapping _doubleArrow = ObjectExtensions.<ProjectMapping>operator_doubleArrow(_projectMapping, _function);
+      delegate.addProjectMapping(_doubleArrow);
+    }
   }
   
   private Iterable<Pair<String, String>> getProjectMappings() {

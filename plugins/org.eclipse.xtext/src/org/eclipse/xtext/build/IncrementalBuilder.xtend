@@ -58,8 +58,8 @@ import org.eclipse.xtext.generator.GeneratorContext
 		
 		def Result launch() {
 			val newSource2GeneratedMapping = request.state.fileMappings
-			request.deletedFiles.forEach [ source |
-				newSource2GeneratedMapping.deleteSource(source).forEach [ generated |
+			for (source : request.deletedFiles) {
+				for (generated : newSource2GeneratedMapping.deleteSource(source)) {
 					if (LOG.isInfoEnabled)
 						LOG.info("Deleting " + generated)
 					val serviceProvider = context.getResourceServiceProvider(source)
@@ -70,8 +70,8 @@ import org.eclipse.xtext.generator.GeneratorContext
 						context.resourceSet.getURIConverter.delete(generated, emptyMap)
 						request.afterDeleteFile.apply(generated)
 					}
-				]
-			]
+				}
+			}
 			val result = indexer.computeAndIndexAffected(request, context)
 			request.cancelIndicator.checkCanceled
 			val resolvedDeltas = newArrayList
@@ -146,11 +146,11 @@ import org.eclipse.xtext.generator.GeneratorContext
 			generatorContext.cancelIndicator = request.cancelIndicator
 			generator.generate(resource, fileSystemAccess, generatorContext)
 			// delete everything that was previously generated, but not this time
-			previous.forEach[
+			for (it : previous) {
 				LOG.info('Deleting stale generated file ' + it)
 				context.resourceSet.getURIConverter.delete(it, emptyMap)
 				request.getAfterDeleteFile.apply(it)
-			]
+			}
 		}
 	
 		protected def createFileSystemAccess(IResourceServiceProvider serviceProvider, Resource resource) {

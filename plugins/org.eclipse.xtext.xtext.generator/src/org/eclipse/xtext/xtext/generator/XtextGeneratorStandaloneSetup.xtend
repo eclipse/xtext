@@ -32,12 +32,12 @@ class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {
 	private def void setup() {
 		val delegate = new StandaloneSetup
 		delegate.scanClassPath = scanClasspath
-		projectMappings.forEach [ mapping |
+		for (mapping : projectMappings) {
 			delegate.addProjectMapping(new ProjectMapping => [
 				projectName = mapping.key
 				path = mapping.value
 			])
-		]
+		}
 	}
 
 	private def getProjectMappings() {

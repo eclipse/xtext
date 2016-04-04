@@ -59,17 +59,14 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 		stream.nextEntry
 		val objIn = new ObjectInputStream(stream)
 		val logicalMap = objIn.readObject as Map<String,String>
-		logicalMap.entrySet.forEach [
+		for (it : logicalMap.entrySet)
 			adapter.logicalContainerMap.put(resource.getEObject(key), resource.getEObject(value) as JvmIdentifiableElement)
-		]
 		val sourceToTargetMap = objIn.readObject as Map<String,Set<String>>
-		sourceToTargetMap.entrySet.forEach [
+		for (it : sourceToTargetMap.entrySet)
 			adapter.sourceToTargetMap.put(resource.getEObject(key), Sets.newHashSet(value.map[resource.getEObject(it)]))
-		]
 		val targetToSourceMap = objIn.readObject as Map<String,Set<String>>
-		targetToSourceMap.entrySet.forEach [
+		for (it : targetToSourceMap.entrySet)
 			adapter.targetToSourceMap.put(resource.getEObject(key), Sets.newHashSet(value.map[resource.getEObject(it)]))
-		]
 	}
 	
 }

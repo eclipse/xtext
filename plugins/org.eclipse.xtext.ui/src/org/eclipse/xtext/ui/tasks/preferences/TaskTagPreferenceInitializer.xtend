@@ -17,8 +17,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer
 class TaskTagPreferenceInitializer implements IPreferenceStoreInitializer {
 	override initialize(IPreferenceStoreAccess access) {
 		val store = access.writablePreferenceStore
-		PreferenceTaskTagProvider.KEYS.forEach [
+		for (it : PreferenceTaskTagProvider.KEYS)
 			store.setDefault(id, defaultValue)
-		]
 	}
 }

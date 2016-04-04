@@ -5,10 +5,10 @@ import java.util.TreeMap
 import org.apache.log4j.Logger
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
-
-import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
+
+import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 
 /**
  * @deprecated use {@link IFormattableDocument}
@@ -137,7 +137,8 @@ class FormattableDocument {
 	
 	def operator_add(Iterable<FormattingData> data) {
 		if(data != null)
-			data.forEach[addFormatting]
+			for (it : data)
+				addFormatting
 	}
 	
 	def operator_add((FormattableDocument) => Iterable<FormattingData> data) {

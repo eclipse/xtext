@@ -163,10 +163,10 @@ class JavaBuilderState {
 			return new TypeNames(project) => [addTypeName(primaryTypeFqn, primaryTypeFqn)]
 		}
 		
-		typeNames.forEach [
-			val typeName =  getQualifedTypeName(packageName, new String(it))
+		for (it : typeNames) {
+			val typeName = getQualifedTypeName(packageName, new String(it))
 			qualifiedTypeNames.addTypeName(typeName, primaryTypeFqn)
-		]
+		}
 		qualifiedTypeNames
 	}
 

@@ -97,11 +97,13 @@ class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
 
 	def dispatch void findImplicitReturns(XTryCatchFinallyExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
 		findImplicitReturns(expression.expression, acceptor)
-		expression.catchClauses.forEach[findImplicitReturns(it.expression, acceptor)]
+		for (it : expression.catchClauses)
+			findImplicitReturns(it.expression, acceptor)
 	}
 
 	def dispatch void findImplicitReturns(XSwitchExpression expression, ImplicitReturnFinder.Acceptor acceptor) {
-		expression.cases.forEach[findImplicitReturns(it.then, acceptor)]
+		for (it : expression.cases)
+			findImplicitReturns(it.then, acceptor)
 		findImplicitReturns(expression.^default, acceptor)
 	}
 }

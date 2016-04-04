@@ -130,19 +130,18 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
 	override writeExternal(ObjectOutput out) throws IOException {
 		val copy = new HashMap(chunk2resourceDescriptions)
 		out.writeInt(copy.entrySet.size)
-		copy.entrySet.forEach[
+		for (it : copy.entrySet) {
 			out.writeUTF(key)
-			val descriptions = value.allResourceDescriptions.map[
-				if(it instanceof Serializable)
+			val descriptions = value.allResourceDescriptions.map [
+				if (it instanceof Serializable)
 					it
-				else 
+				else
 					SerializableResourceDescription.createCopy(it)
-			] 
-			out.writeInt(descriptions.size)
-			descriptions.forEach[
-				out.writeObject(it)
 			]
-		]
+			out.writeInt(descriptions.size)
+			for (it : descriptions)
+				out.writeObject(it)
+		}
 	}
 }
 	

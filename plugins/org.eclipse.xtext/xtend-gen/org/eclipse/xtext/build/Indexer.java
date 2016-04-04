@@ -52,7 +52,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -308,11 +307,10 @@ public class Indexer {
       }
     };
     Iterable<URI> _filter = IterableExtensions.<URI>filter(_deletedFiles, _function);
-    final Procedure1<URI> _function_1 = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI it) {
+    for (final URI it : _filter) {
+      {
         CancelIndicator _cancelIndicator = context.getCancelIndicator();
-        Indexer.this._operationCanceledManager.checkCanceled(_cancelIndicator);
+        this._operationCanceledManager.checkCanceled(_cancelIndicator);
         IResourceDescription _resourceDescription = null;
         if (oldIndex!=null) {
           _resourceDescription=oldIndex.getResourceDescription(it);
@@ -324,8 +322,7 @@ public class Indexer {
           deltas.add(delta);
         }
       }
-    };
-    IterableExtensions.<URI>forEach(_filter, _function_1);
+    }
     return deltas;
   }
   

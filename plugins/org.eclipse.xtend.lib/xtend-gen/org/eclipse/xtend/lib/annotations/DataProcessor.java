@@ -23,7 +23,6 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @since 2.7
@@ -89,19 +88,17 @@ public class DataProcessor extends AbstractClassProcessor {
     @Extension
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
     Iterable<? extends MutableFieldDeclaration> _dataFields = util.getDataFields(it);
-    final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        Element _primarySourceElement = context.getPrimarySourceElement(it);
+    for (final MutableFieldDeclaration it_1 : _dataFields) {
+      {
+        Element _primarySourceElement = context.getPrimarySourceElement(it_1);
         Set<Modifier> _modifiers = ((FieldDeclaration) _primarySourceElement).getModifiers();
         boolean _contains = _modifiers.contains(Modifier.VAR);
         if (_contains) {
-          context.addError(it, "Cannot use the \'var\' keyword on a data field");
+          context.addError(it_1, "Cannot use the \'var\' keyword on a data field");
         }
-        it.setFinal(true);
+        it_1.setFinal(true);
       }
-    };
-    IterableExtensions.forEach(_dataFields, _function);
+    }
     boolean _or = false;
     boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
     if (_needsFinalFieldConstructor) {
@@ -158,26 +155,22 @@ public class DataProcessor extends AbstractClassProcessor {
       }
     }
     Iterable<? extends MutableFieldDeclaration> _dataFields_4 = util.getDataFields(it);
-    final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        boolean _shouldAddGetter = getterUtil.shouldAddGetter(it);
-        if (_shouldAddGetter) {
-          Visibility _elvis = null;
-          AccessorType _getterType = getterUtil.getGetterType(it);
-          Visibility _visibility = null;
-          if (_getterType!=null) {
-            _visibility=getterUtil.toVisibility(_getterType);
-          }
-          if (_visibility != null) {
-            _elvis = _visibility;
-          } else {
-            _elvis = Visibility.PUBLIC;
-          }
-          getterUtil.addGetter(it, _elvis);
+    for (final MutableFieldDeclaration it_2 : _dataFields_4) {
+      boolean _shouldAddGetter = getterUtil.shouldAddGetter(it_2);
+      if (_shouldAddGetter) {
+        Visibility _elvis_2 = null;
+        AccessorType _getterType = getterUtil.getGetterType(it_2);
+        Visibility _visibility = null;
+        if (_getterType!=null) {
+          _visibility=getterUtil.toVisibility(_getterType);
         }
+        if (_visibility != null) {
+          _elvis_2 = _visibility;
+        } else {
+          _elvis_2 = Visibility.PUBLIC;
+        }
+        getterUtil.addGetter(it_2, _elvis_2);
       }
-    };
-    IterableExtensions.forEach(_dataFields_4, _function_1);
+    }
   }
 }

@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.ecore2xtext.UniqueNameUtil;
@@ -233,13 +232,9 @@ public class Ecore2XtextExtensions {
     } else {
       Iterables.<EClassifier>addAll(acceptor, classifiers);
       Iterable<EClass> _filter_1 = Iterables.<EClass>filter(classifiers, EClass.class);
-      final Procedure1<EClass> _function_2 = new Procedure1<EClass>() {
-        @Override
-        public void apply(final EClass c) {
-          Ecore2XtextExtensions.allAssignedClassifiers(c, acceptor);
-        }
-      };
-      IterableExtensions.<EClass>forEach(_filter_1, _function_2);
+      for (final EClass c : _filter_1) {
+        Ecore2XtextExtensions.allAssignedClassifiers(c, acceptor);
+      }
     }
   }
   

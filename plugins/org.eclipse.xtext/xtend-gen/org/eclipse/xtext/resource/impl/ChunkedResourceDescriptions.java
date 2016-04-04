@@ -35,11 +35,9 @@ import org.eclipse.xtext.resource.impl.AbstractCompoundSelectable;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * A IResourceDescriptions implementation that holds its resource description in chunks, each identified by a string.
@@ -209,46 +207,32 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
     int _size = _entrySet.size();
     out.writeInt(_size);
     Set<Map.Entry<String, ResourceDescriptionsData>> _entrySet_1 = copy.entrySet();
-    final Procedure1<Map.Entry<String, ResourceDescriptionsData>> _function = new Procedure1<Map.Entry<String, ResourceDescriptionsData>>() {
-      @Override
-      public void apply(final Map.Entry<String, ResourceDescriptionsData> it) {
-        try {
-          String _key = it.getKey();
-          out.writeUTF(_key);
-          ResourceDescriptionsData _value = it.getValue();
-          Iterable<IResourceDescription> _allResourceDescriptions = _value.getAllResourceDescriptions();
-          final Function1<IResourceDescription, Object> _function = new Function1<IResourceDescription, Object>() {
-            @Override
-            public Object apply(final IResourceDescription it) {
-              Object _xifexpression = null;
-              if ((it instanceof Serializable)) {
-                _xifexpression = ((Object)it);
-              } else {
-                _xifexpression = SerializableResourceDescription.createCopy(it);
-              }
-              return ((Object)_xifexpression);
+    for (final Map.Entry<String, ResourceDescriptionsData> it : _entrySet_1) {
+      {
+        String _key = it.getKey();
+        out.writeUTF(_key);
+        ResourceDescriptionsData _value = it.getValue();
+        Iterable<IResourceDescription> _allResourceDescriptions = _value.getAllResourceDescriptions();
+        final Function1<IResourceDescription, Object> _function = new Function1<IResourceDescription, Object>() {
+          @Override
+          public Object apply(final IResourceDescription it) {
+            Object _xifexpression = null;
+            if ((it instanceof Serializable)) {
+              _xifexpression = ((Object)it);
+            } else {
+              _xifexpression = SerializableResourceDescription.createCopy(it);
             }
-          };
-          final Iterable<Object> descriptions = IterableExtensions.<IResourceDescription, Object>map(_allResourceDescriptions, _function);
-          int _size = IterableExtensions.size(descriptions);
-          out.writeInt(_size);
-          final Procedure1<Object> _function_1 = new Procedure1<Object>() {
-            @Override
-            public void apply(final Object it) {
-              try {
-                out.writeObject(it);
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
-              }
-            }
-          };
-          IterableExtensions.<Object>forEach(descriptions, _function_1);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
+            return ((Object)_xifexpression);
+          }
+        };
+        final Iterable<Object> descriptions = IterableExtensions.<IResourceDescription, Object>map(_allResourceDescriptions, _function);
+        int _size_1 = IterableExtensions.size(descriptions);
+        out.writeInt(_size_1);
+        for (final Object it_1 : descriptions) {
+          out.writeObject(it_1);
         }
       }
-    };
-    IterableExtensions.<Map.Entry<String, ResourceDescriptionsData>>forEach(_entrySet_1, _function);
+    }
   }
   
   public static ChunkedResourceDescriptions findInEmfObject(final Notifier emfObject) {

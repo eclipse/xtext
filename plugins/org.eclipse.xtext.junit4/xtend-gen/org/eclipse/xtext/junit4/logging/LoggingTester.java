@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.junit.Assert;
@@ -379,13 +378,9 @@ public class LoggingTester {
     final ArrayList<Appender> allAppenders = LoggingTester.appenderHierarchy(logger);
     final LoggingTester.SourceFilter filter = new LoggingTester.SourceFilter(logger);
     try {
-      final Procedure1<Appender> _function = new Procedure1<Appender>() {
-        @Override
-        public void apply(final Appender it) {
-          it.addFilter(filter);
-        }
-      };
-      IterableExtensions.<Appender>forEach(allAppenders, _function);
+      for (final Appender it : allAppenders) {
+        it.addFilter(filter);
+      }
       logger.addAppender(appender);
       logger.setLevel(level);
       action.run();
@@ -394,13 +389,9 @@ public class LoggingTester {
       return new LoggingTester.LogCapture(events);
     } finally {
       logger.removeAppender(appender);
-      final Procedure1<Appender> _function_1 = new Procedure1<Appender>() {
-        @Override
-        public void apply(final Appender it) {
-          LoggingTester.removeFilter(it, filter);
-        }
-      };
-      IterableExtensions.<Appender>forEach(allAppenders, _function_1);
+      for (final Appender it_1 : allAppenders) {
+        LoggingTester.removeFilter(it_1, filter);
+      }
       logger.setLevel(oldLevel);
     }
   }
