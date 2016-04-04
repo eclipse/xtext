@@ -9,16 +9,24 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.xbase.imports.ImportOrganizer
+import org.junit.After
 import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import org.eclipse.jdt.ui.PreferenceConstants
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {
 	
 	@Inject ImportOrganizer importOrganizer
 	
 	@Inject extension WorkbenchTestHelper
+	
+	@After def void close() {
+		_workbenchTestHelper.tearDown
+		PreferenceConstants.initializeDefaultValues(PreferenceConstants.preferenceStore)
+	}
+	
 	
 	def protected assertIsOrganizedTo(CharSequence model, CharSequence expected) {
 		assertIsOrganizedTo(model, "Foo", expected)
@@ -710,6 +718,53 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 				@Inner
 				def void foo() {}
 
+			}
+		''')
+	}
+	
+	/**
+	 * Tests organization of imports for a field of type List. This will be ambigious, since java.util.List and
+	 * java.awt.List both match. As a result, nothing is organized.
+	 * @see Bug#421967
+	 */
+	@Test
+	def void testTypeFilter_ambiguous() {
+		'''
+			package p
+			
+			class Foo {
+				List l
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			class Foo {
+				List l
+			}
+		''')
+	}
+
+	/**
+	 * Tests organization of imports for a field of type List. The JDT Type Filter preference is set to resolve
+	 * 'List' uniquely to 'java.util.List'.
+	 * @see Bug#421967
+	 */
+	@Test
+	def void testTypeFilter_unique() {
+		PreferenceConstants.preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, "*.awt.*;*.sun.*;antlr.*");
+		'''
+			package p
+			
+			class Foo {
+				List l
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+			
+			import java.util.List
+
+			class Foo {
+				List l
 			}
 		''')
 	}
