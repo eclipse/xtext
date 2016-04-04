@@ -39,6 +39,7 @@ import org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
 import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.outline.QuickOutlineFragment2;
+import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2;
 import org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2;
 import org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2;
 import org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2;
@@ -108,6 +109,8 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   private IdeaPluginGenerator ideaPlugin = new IdeaPluginGenerator();
   
   private WebIntegrationFragment webSupport = new WebIntegrationFragment();
+  
+  private SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2();
   
   public StandardLanguage() {
     try {
@@ -199,6 +202,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
       this.operator_add(fragments, this.ideaParser);
       this.operator_add(fragments, this.ideaPlugin);
       this.operator_add(fragments, this.webSupport);
+      this.operator_add(fragments, this.newProjectWizardForEclipse);
       _xblockexpression = fragments;
     }
     return _xblockexpression;
@@ -444,6 +448,15 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   public void setWebSupport(final WebIntegrationFragment webSupport) {
     this.webSupport = webSupport;
+  }
+  
+  @Pure
+  protected SimpleProjectWizardFragment2 getNewProjectWizardForEclipse() {
+    return this.newProjectWizardForEclipse;
+  }
+  
+  public void setNewProjectWizardForEclipse(final SimpleProjectWizardFragment2 newProjectWizardForEclipse) {
+    this.newProjectWizardForEclipse = newProjectWizardForEclipse;
   }
   
   private final static Logger LOG = Logger.getLogger(StandardLanguage.class);
