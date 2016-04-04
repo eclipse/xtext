@@ -78,6 +78,16 @@ public abstract class AbstractLiveContainerBuilderIntegerationTestLanguageRuntim
 		return org.eclipse.xtext.resource.services.LiveContainerBuilderIntegerationTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.LiveContainerBuilderIntegerationTestLanguagePackage bindLiveContainerBuilderIntegerationTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.LiveContainerBuilderIntegerationTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.LiveContainerBuilderIntegerationTestLanguageFactory bindLiveContainerBuilderIntegerationTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.LiveContainerBuilderIntegerationTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.resource.serializer.LiveContainerBuilderIntegerationTestLanguageSemanticSequencer.class;

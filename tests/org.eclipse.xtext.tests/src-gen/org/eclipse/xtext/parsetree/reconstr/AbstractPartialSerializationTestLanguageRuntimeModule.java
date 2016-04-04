@@ -78,6 +78,16 @@ public abstract class AbstractPartialSerializationTestLanguageRuntimeModule exte
 		return org.eclipse.xtext.parsetree.reconstr.services.PartialSerializationTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.reconstr.partialserializationtest.PartialserializationtestPackage bindPartialserializationtestPackageToInstance() {
+		return org.eclipse.xtext.parsetree.reconstr.partialserializationtest.PartialserializationtestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.reconstr.partialserializationtest.PartialserializationtestFactory bindPartialserializationtestFactoryToInstance() {
+		return org.eclipse.xtext.parsetree.reconstr.partialserializationtest.PartialserializationtestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.PartialSerializationTestLanguageParsetreeConstructor.class;

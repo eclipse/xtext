@@ -78,6 +78,16 @@ public abstract class AbstractFowlerDslTestLanguageRuntimeModule extends org.ecl
 		return org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage bindFowlerdslPackageToInstance() {
+		return org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslFactory bindFowlerdslFactoryToInstance() {
+		return org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.testlanguages.serializer.FowlerDslTestLanguageSemanticSequencer.class;

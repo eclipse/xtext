@@ -78,6 +78,16 @@ public abstract class AbstractLookaheadTestLanguageRuntimeModule extends org.ecl
 		return org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage bindLookaheadLangPackageToInstance() {
+		return org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangFactory bindLookaheadLangFactoryToInstance() {
+		return org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.testlanguages.serializer.LookaheadTestLanguageSemanticSequencer.class;

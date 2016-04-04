@@ -78,6 +78,16 @@ public abstract class AbstractEncodingTestLanguageRuntimeModule extends org.ecli
 		return org.eclipse.xtext.parser.encoding.services.EncodingTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.encoding.encodingTest.EncodingTestPackage bindEncodingTestPackageToInstance() {
+		return org.eclipse.xtext.parser.encoding.encodingTest.EncodingTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.encoding.encodingTest.EncodingTestFactory bindEncodingTestFactoryToInstance() {
+		return org.eclipse.xtext.parser.encoding.encodingTest.EncodingTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.encoding.serializer.EncodingTestLanguageSemanticSequencer.class;

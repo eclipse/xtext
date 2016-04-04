@@ -78,6 +78,16 @@ public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends org.
 		return org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.xtextTest.XtextTestPackage bindXtextTestPackageToInstance() {
+		return org.eclipse.xtext.xtextTest.XtextTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.xtextTest.XtextTestFactory bindXtextTestFactoryToInstance() {
+		return org.eclipse.xtext.xtextTest.XtextTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.serializer.XtextGrammarTestLanguageSemanticSequencer.class;

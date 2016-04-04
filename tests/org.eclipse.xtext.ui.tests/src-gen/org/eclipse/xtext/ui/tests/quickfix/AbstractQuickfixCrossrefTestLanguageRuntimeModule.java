@@ -33,6 +33,16 @@ public abstract class AbstractQuickfixCrossrefTestLanguageRuntimeModule extends 
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("quickfixcrossreftestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage bindQuickfixCrossrefPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefFactory bindQuickfixCrossrefFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

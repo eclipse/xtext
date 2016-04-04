@@ -78,6 +78,16 @@ public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends
 		return org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackage bindSimpleExpressionsPackageToInstance() {
+		return org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsFactory bindSimpleExpressionsFactoryToInstance() {
+		return org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.testlanguages.serializer.SimpleExpressionsTestLanguageSemanticSequencer.class;

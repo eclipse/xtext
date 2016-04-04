@@ -88,6 +88,16 @@ public abstract class AbstractIgnoreCaseLexerTestLanguageRuntimeModule extends o
 		return org.eclipse.xtext.lexer.services.IgnoreCaseLexerTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.lexer.ignoreCaseTestLanguage.IgnoreCaseTestLanguagePackage bindIgnoreCaseTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.lexer.ignoreCaseTestLanguage.IgnoreCaseTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.lexer.ignoreCaseTestLanguage.IgnoreCaseTestLanguageFactory bindIgnoreCaseTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.lexer.ignoreCaseTestLanguage.IgnoreCaseTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.lexer.serializer.IgnoreCaseLexerTestLanguageSemanticSequencer.class;

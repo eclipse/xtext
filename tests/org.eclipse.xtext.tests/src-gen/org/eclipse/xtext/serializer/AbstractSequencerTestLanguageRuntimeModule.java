@@ -83,6 +83,16 @@ public abstract class AbstractSequencerTestLanguageRuntimeModule extends org.ecl
 		return org.eclipse.xtext.serializer.services.SequencerTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.serializer.sequencertest.SequencertestPackage bindSequencertestPackageToInstance() {
+		return org.eclipse.xtext.serializer.sequencertest.SequencertestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.serializer.sequencertest.SequencertestFactory bindSequencertestFactoryToInstance() {
+		return org.eclipse.xtext.serializer.sequencertest.SequencertestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer.class;

@@ -78,6 +78,16 @@ public abstract class AbstractPartialParserTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage bindPartialParserTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguageFactory bindPartialParserTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.testlanguages.serializer.PartialParserTestLanguageSemanticSequencer.class;

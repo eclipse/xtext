@@ -78,6 +78,16 @@ public abstract class AbstractEpatchTestLanguageRuntimeModule extends org.eclips
 		return org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage bindEpatchTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguageFactory bindEpatchTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.epatch.serializer.EpatchTestLanguageSemanticSequencer.class;

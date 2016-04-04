@@ -33,6 +33,16 @@ public abstract class AbstractTwoContextsTestLanguageRuntimeModule extends org.e
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("twocontextstestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.TwoContextsPackage bindTwoContextsPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.TwoContextsPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.TwoContextsFactory bindTwoContextsFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.TwoContextsFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

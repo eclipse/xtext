@@ -78,6 +78,16 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeModule extends o
 		return org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage bindComplexrewritetestPackageToInstance() {
+		return org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestFactory bindComplexrewritetestFactoryToInstance() {
+		return org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.ComplexReconstrTestLanguageParsetreeConstructor.class;

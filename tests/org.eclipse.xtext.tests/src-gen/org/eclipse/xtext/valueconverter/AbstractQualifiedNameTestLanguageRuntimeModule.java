@@ -78,6 +78,16 @@ public abstract class AbstractQualifiedNameTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.valueconverter.services.QualifiedNameTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNamePackage bindQualifiedNamePackageToInstance() {
+		return org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNamePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNameFactory bindQualifiedNameFactoryToInstance() {
+		return org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNameFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.valueconverter.serializer.QualifiedNameTestLanguageSemanticSequencer.class;

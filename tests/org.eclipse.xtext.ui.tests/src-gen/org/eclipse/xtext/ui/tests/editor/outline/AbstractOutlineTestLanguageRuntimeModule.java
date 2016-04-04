@@ -33,6 +33,16 @@ public abstract class AbstractOutlineTestLanguageRuntimeModule extends org.eclip
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("outlinetestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestPackage bindOutlineTestPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestFactory bindOutlineTestFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

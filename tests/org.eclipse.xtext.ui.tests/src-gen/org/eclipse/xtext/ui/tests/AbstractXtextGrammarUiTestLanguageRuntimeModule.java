@@ -33,6 +33,16 @@ public abstract class AbstractXtextGrammarUiTestLanguageRuntimeModule extends or
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("xtextgrammaruitestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage bindXtextUiTestPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestFactory bindXtextUiTestFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

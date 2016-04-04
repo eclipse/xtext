@@ -33,6 +33,16 @@ public abstract class AbstractImportUriUiTestLanguageRuntimeModule extends org.e
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("importuriuitestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.linking.importUriUi.ImportUriUiPackage bindImportUriUiPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.linking.importUriUi.ImportUriUiPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.linking.importUriUi.ImportUriUiFactory bindImportUriUiFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.linking.importUriUi.ImportUriUiFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

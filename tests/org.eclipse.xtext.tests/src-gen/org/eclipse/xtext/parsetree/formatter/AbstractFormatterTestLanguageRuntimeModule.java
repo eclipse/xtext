@@ -78,6 +78,16 @@ public abstract class AbstractFormatterTestLanguageRuntimeModule extends org.ecl
 		return org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage bindFormattertestlanguagePackageToInstance() {
+		return org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguageFactory bindFormattertestlanguageFactoryToInstance() {
+		return org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parsetree.formatter.serializer.FormatterTestLanguageSemanticSequencer.class;

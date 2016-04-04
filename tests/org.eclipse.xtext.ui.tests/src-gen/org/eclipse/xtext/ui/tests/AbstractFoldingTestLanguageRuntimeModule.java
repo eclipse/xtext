@@ -33,6 +33,16 @@ public abstract class AbstractFoldingTestLanguageRuntimeModule extends org.eclip
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("foldingtestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.folding.FoldingPackage bindFoldingPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.folding.FoldingPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.folding.FoldingFactory bindFoldingFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.folding.FoldingFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

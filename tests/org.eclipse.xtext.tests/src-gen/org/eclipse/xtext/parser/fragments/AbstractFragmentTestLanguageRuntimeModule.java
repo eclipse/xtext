@@ -78,6 +78,16 @@ public abstract class AbstractFragmentTestLanguageRuntimeModule extends org.ecli
 		return org.eclipse.xtext.parser.fragments.services.FragmentTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.fragments.fragmentTestLanguage.FragmentTestLanguagePackage bindFragmentTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.parser.fragments.fragmentTestLanguage.FragmentTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.fragments.fragmentTestLanguage.FragmentTestLanguageFactory bindFragmentTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.parser.fragments.fragmentTestLanguage.FragmentTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.fragments.serializer.FragmentTestLanguageSemanticSequencer.class;

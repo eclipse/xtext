@@ -78,6 +78,16 @@ public abstract class AbstractSerializationErrorTestLanguageRuntimeModule extend
 		return org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage bindSerializationerrorPackageToInstance() {
+		return org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorFactory bindSerializationerrorFactoryToInstance() {
+		return org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parsetree.reconstr.parseTreeConstruction.SerializationErrorTestLanguageParsetreeConstructor.class;

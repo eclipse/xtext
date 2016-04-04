@@ -78,6 +78,16 @@ public abstract class AbstractImportUriTestLanguageRuntimeModule extends org.ecl
 		return org.eclipse.xtext.linking.services.ImportUriTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.importedURI.ImportedURIPackage bindImportedURIPackageToInstance() {
+		return org.eclipse.xtext.linking.importedURI.ImportedURIPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.importedURI.ImportedURIFactory bindImportedURIFactoryToInstance() {
+		return org.eclipse.xtext.linking.importedURI.ImportedURIFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.linking.serializer.ImportUriTestLanguageSemanticSequencer.class;

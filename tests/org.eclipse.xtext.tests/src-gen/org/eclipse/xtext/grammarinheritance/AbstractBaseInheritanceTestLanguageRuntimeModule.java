@@ -78,6 +78,16 @@ public abstract class AbstractBaseInheritanceTestLanguageRuntimeModule extends o
 		return org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage bindBaseInheritanceTestPackageToInstance() {
+		return org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestFactory bindBaseInheritanceTestFactoryToInstance() {
+		return org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.grammarinheritance.serializer.BaseInheritanceTestLanguageSemanticSequencer.class;
