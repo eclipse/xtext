@@ -29,7 +29,7 @@ public class XSwitchExpressionCompilationStateTest {
 		state.startProcessingCase();
 		assertNeedsIfCheck(false);
 		state.finishProcessingCase();
-		assertNeedsIfCheck(false);
+		assertNeedsIfCheck(true);
 	}
 
 	@Test
@@ -37,11 +37,11 @@ public class XSwitchExpressionCompilationStateTest {
 		state.startProcessingCase();
 		assertNeedsIfCheck(false);
 		state.startProcessingCase();
+		assertNeedsIfCheck(false);
+		state.finishProcessingCase();
 		assertNeedsIfCheck(true);
 		state.finishProcessingCase();
-		assertNeedsIfCheck(false);
-		state.finishProcessingCase();
-		assertNeedsIfCheck(false);
+		assertNeedsIfCheck(true);
 	}
 
 	private void assertNeedsIfCheck(boolean expected) {
