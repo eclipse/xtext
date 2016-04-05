@@ -476,10 +476,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append(variable);
 				b.append(");");
 			}
-			b.decreaseIndentation();
-			b.newLine().append("}");
-			b.decreaseIndentation();
-			b.newLine().append("}");
+			closeBlock(b);
+			closeBlock(b);
 		}
 		final XExpression finallyExp = expr.getFinallyExpression();
 		if (finallyExp != null) {
@@ -511,8 +509,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToConvertedExpression(catchClause.getExpression(), appendable, getLightweightType((XExpression) catchClause.eContainer()));
 			appendable.append(";");
 		}
-		appendable.decreaseIndentation();
-		appendable.newLine().append("}");
+		closeBlock(appendable);
 	}
 
 	protected void appendCatchClauseParameter(XCatchClause catchClause, JvmTypeReference parameterType, final String parameterName, ITreeAppendable appendable) {
@@ -1297,8 +1294,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			executeThenPart(expr, switchResultName, then, defaultAppendable, isReferenced);
 			if(needsMatcherIf) {
-				defaultAppendable.decreaseIndentation();
-				defaultAppendable.newLine().append("}");
+				closeBlock(defaultAppendable);
 			}
 		}
 	}
@@ -1325,35 +1321,35 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				if (first) {
 					first = false;
 					if (!caseNeedsIfNotMatchedCheck) {
-						caseAppendable.decreaseIndentation();
-						caseAppendable.newLine().append("}");
+						closeBlock(caseAppendable);
 					}
 				} else {
-					caseAppendable.decreaseIndentation();
-					caseAppendable.newLine().append("}");
+					closeBlock(caseAppendable);
 				}
 				appendCloseIfStatement(fallThroughCase, caseAppendable, state);
 				i.remove();
 			}
 			caseAppendable = appendOpenIfStatement(casePart, caseAppendable, matchedVariable, variableName, state);
 			appendCloseIfStatement(casePart, caseAppendable, state);
-			caseAppendable.decreaseIndentation();
-			caseAppendable.newLine().append("}");
+			closeBlock(caseAppendable);
 			
 			caseAppendable.newLine().append("if (").append(matchedVariable).append(") {").increaseIndentation();
 			executeThenPart(expr, switchResultName, then, caseAppendable, isReferenced);
-			caseAppendable.decreaseIndentation().newLine().append("}");
+			closeBlock(caseAppendable);
 			if (caseNeedsIfNotMatchedCheck) {
-				caseAppendable.decreaseIndentation();
-				caseAppendable.newLine().append("}");
+				closeBlock(caseAppendable);
 			}
 		} else {
 			caseAppendable = appendOpenIfStatement(casePart, caseAppendable, matchedVariable, variableName, state);
 			executeThenPart(expr, switchResultName, then, caseAppendable, isReferenced);
 			appendCloseIfStatement(casePart, caseAppendable, state);
-			caseAppendable.decreaseIndentation();
-			caseAppendable.newLine().append("}");
+			closeBlock(caseAppendable);
 		}
+	}
+
+	private void closeBlock(ITreeAppendable caseAppendable) {
+		caseAppendable.decreaseIndentation();
+		caseAppendable.newLine().append("}");
 	}
 
 	protected ITreeAppendable appendOpenIfStatement(XCasePart casePart, ITreeAppendable b, String matchedVariable, String variableName, XSwitchExpressionCompilationState state) {
@@ -1622,8 +1618,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				reassignThisInClosure(b, null);
 			}
 			compile(closure.getExpression(), b, returnType, newHashSet(operation.getExceptions()));
-			b.decreaseIndentation();
-			b.newLine().append("}");
+			closeBlock(b);
 		} finally {
 			b.closeScope();
 		}
@@ -1726,8 +1721,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.increaseIndentation();
 			LightweightTypeReference returnType = getClosureOperationReturnType(type, operation);
 			compile(closure.getExpression(), b, returnType, newHashSet(operation.getExceptions()));
-			b.decreaseIndentation();
-			b.newLine().append("}");
+			closeBlock(b);
 		} finally {
 			b.closeScope();
 		}
