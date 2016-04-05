@@ -1341,7 +1341,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		} else {
 			caseAppendable = appendOpenIfStatement(casePart, caseAppendable, matchedVariable, variableName);
 			executeThenPart(expr, switchResultName, then, caseAppendable, isReferenced);
-			appendCloseIfStatement(casePart, caseAppendable);
+			if (!isFirstCase(casePart))
+				appendCloseIfStatement(casePart, caseAppendable);
 		}
 		caseAppendable.decreaseIndentation();
 		caseAppendable.newLine().append("}");
@@ -1349,8 +1350,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected ITreeAppendable appendOpenIfStatement(XCasePart casePart, ITreeAppendable b, String matchedVariable, String variableName) {
 		ITreeAppendable caseAppendable = b.trace(casePart, true);
-		caseAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
-		caseAppendable.increaseIndentation();
+		if (!isFirstCase(casePart)) {
+			caseAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
+			caseAppendable.increaseIndentation();
+		}
 		if (casePart.getTypeGuard() != null) {
 			ITreeAppendable typeGuardAppendable = caseAppendable.trace(casePart.getTypeGuard(), true);
 			typeGuardAppendable.newLine().append("if (");
@@ -1403,6 +1406,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			caseAppendable.closeScope();
 		}
 		return caseAppendable;
+	}
+	
+	private boolean isFirstCase(XCasePart casePart) {
+		return ((XSwitchExpression) casePart.eContainer()).getCases().get(0) ==
+				casePart;
 	}
 	
 	/**
