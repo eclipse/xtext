@@ -87,11 +87,9 @@ class CompilerBug419050Test extends AbstractXtendCompilerTest {
 			public class C {
 			  public boolean m(final Object o) {
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof String) {
-			        _matched=true;
-			        return true;
-			      }
+			    if (o instanceof String) {
+			      _matched=true;
+			      return true;
 			    }
 			    return false;
 			  }
