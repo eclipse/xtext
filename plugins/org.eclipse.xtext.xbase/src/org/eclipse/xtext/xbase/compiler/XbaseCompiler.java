@@ -1318,13 +1318,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (!fallThroughCases.isEmpty()) {
 			boolean first = true;
 			Iterator<XCasePart> i = fallThroughCases.iterator();
-			boolean caseNeedsIfCheck = state.caseNeedsIfCheck();
+			boolean caseNeedsIfNotMatchedCheck = state.caseNeedsIfNotMatchedCheck();
 			while(i.hasNext()) {
 				XCasePart fallThroughCase = i.next();
 				caseAppendable = appendOpenIfStatement(fallThroughCase, caseAppendable, matchedVariable, variableName, state);
 				if (first) {
 					first = false;
-					if (!caseNeedsIfCheck) {
+					if (!caseNeedsIfNotMatchedCheck) {
 						caseAppendable.decreaseIndentation();
 						caseAppendable.newLine().append("}");
 					}
@@ -1343,7 +1343,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			caseAppendable.newLine().append("if (").append(matchedVariable).append(") {").increaseIndentation();
 			executeThenPart(expr, switchResultName, then, caseAppendable, isReferenced);
 			caseAppendable.decreaseIndentation().newLine().append("}");
-			if (caseNeedsIfCheck) {
+			if (caseNeedsIfNotMatchedCheck) {
 				caseAppendable.decreaseIndentation();
 				caseAppendable.newLine().append("}");
 			}
@@ -1358,8 +1358,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected ITreeAppendable appendOpenIfStatement(XCasePart casePart, ITreeAppendable b, String matchedVariable, String variableName, XSwitchExpressionCompilationState state) {
 		ITreeAppendable caseAppendable = b.trace(casePart, true);
-		state.startProcessingCase();
-		if (state.caseNeedsIfCheck()) {
+		if (state.caseNeedsIfNotMatchedCheck()) {
 			caseAppendable.newLine().append("if (!").append(matchedVariable).append(") {");
 			caseAppendable.increaseIndentation();
 		}
@@ -1406,7 +1405,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	protected ITreeAppendable appendCloseIfStatement(XCasePart casePart, ITreeAppendable caseAppendable, XSwitchExpressionCompilationState state) {
 		// close surrounding if statements
-		if (state.caseNeedsIfCheck()) {
+		if (state.caseNeedsIfNotMatchedCheck()) {
 			if (casePart.getCase() != null) {
 				caseAppendable.decreaseIndentation().newLine().append("}");
 			}

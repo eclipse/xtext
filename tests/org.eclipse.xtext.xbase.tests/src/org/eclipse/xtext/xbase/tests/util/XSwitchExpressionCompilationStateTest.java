@@ -26,17 +26,6 @@ public class XSwitchExpressionCompilationStateTest {
 
 	@Test
 	public void testStateWithSingleCase() {
-		state.startProcessingCase();
-		assertNeedsIfCheck(false);
-		state.finishProcessingCase();
-		assertNeedsIfCheck(true);
-	}
-
-	@Test
-	public void testStateWithSeveralCases() {
-		state.startProcessingCase();
-		assertNeedsIfCheck(false);
-		state.startProcessingCase();
 		assertNeedsIfCheck(false);
 		state.finishProcessingCase();
 		assertNeedsIfCheck(true);
@@ -45,6 +34,6 @@ public class XSwitchExpressionCompilationStateTest {
 	}
 
 	private void assertNeedsIfCheck(boolean expected) {
-		Assert.assertEquals(expected, state.caseNeedsIfCheck());
+		Assert.assertEquals(expected, state.caseNeedsIfNotMatchedCheck());
 	}
 }
