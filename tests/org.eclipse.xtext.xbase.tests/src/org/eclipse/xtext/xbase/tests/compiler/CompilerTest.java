@@ -47,11 +47,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"final java.util.List<String> list = null;\n" + 
 				"Object _switchResult = null;\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (list instanceof java.util.ArrayList) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = ((java.util.ArrayList)list).get(1);\n" + 
-				"  }\n" + 
+				"if (list instanceof java.util.ArrayList) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = ((java.util.ArrayList)list).get(1);\n" + 
 				"}\n" + 
 				"final Object it = _switchResult;\n" + 
 				"it.toString();", 
@@ -95,11 +93,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"final java.util.List<String> list = null;\n" + 
 				"String _switchResult = null;\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (list instanceof java.util.ArrayList) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = ((java.util.ArrayList<String>)list).get(1);\n" + 
-				"  }\n" + 
+				"if (list instanceof java.util.ArrayList) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = ((java.util.ArrayList<String>)list).get(1);\n" + 
 				"}\n" + 
 				"final String it = _switchResult;\n" + 
 				"it.substring(1);", 
@@ -521,19 +517,15 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"{\n" + 
 				"  final Object o = \"foo\";\n" + 
 				"  boolean _matched = false;\n" + 
-				"  if (!_matched) {\n" + 
-				"    if (o instanceof String) {\n" + 
-				"      _matched=true;\n" + 
-				"      \"\".toString();\n" + 
-				"    }\n" + 
+				"  if (o instanceof String) {\n" + 
+				"    _matched=true;\n" + 
+				"    \"\".toString();\n" + 
 				"  }\n" + 
 				"  String _switchResult_1 = null;\n" + 
 				"  boolean _matched_1 = false;\n" + 
-				"  if (!_matched_1) {\n" + 
-				"    if (o instanceof String) {\n" + 
-				"      _matched_1=true;\n" + 
-				"      _switchResult_1 = \"\";\n" + 
-				"    }\n" + 
+				"  if (o instanceof String) {\n" + 
+				"    _matched_1=true;\n" + 
+				"    _switchResult_1 = \"\";\n" + 
 				"  }\n" + 
 				"  _xblockexpression = _switchResult_1;\n" + 
 				"}\n" + 
@@ -555,12 +547,10 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"String _switchResult = null;\n" + 
 				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (x instanceof String) {\n" + 
-				"    _matched=true;\n" + 
-				"    String _substring = ((String)x).substring(3);\n" + 
-				"    _switchResult = (_substring + ((String)x));\n" + 
-				"  }\n" + 
+				"if (x instanceof String) {\n" + 
+				"  _matched=true;\n" + 
+				"  String _substring = ((String)x).substring(3);\n" + 
+				"  _switchResult = (_substring + ((String)x));\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (x instanceof Comparable) {\n" + 
@@ -584,12 +574,10 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"String _switchResult = null;\n" + 
 				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (x instanceof String) {\n" + 
-				"    _matched=true;\n" + 
-				"    String _substring = ((String)x).substring(3);\n" + 
-				"    _switchResult = (_substring + ((String)x));\n" + 
-				"  }\n" + 
+				"if (x instanceof String) {\n" + 
+				"  _matched=true;\n" + 
+				"  String _substring = ((String)x).substring(3);\n" + 
+				"  _switchResult = (_substring + ((String)x));\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (x instanceof Comparable) {\n" + 
@@ -615,11 +603,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"final boolean _switchValue = true;\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (true) {\n" + 
-				"    _matched=true;\n" + 
-				"    return 1;\n" + 
-				"  }\n" + 
+				"if (true) {\n" + 
+				"  _matched=true;\n" + 
+				"  return 1;\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (false) {\n" + 
@@ -644,11 +630,9 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"int _switchResult = (int) 0;\n" + 
 				"final boolean _switchValue = true;\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (true) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = 1;\n" + 
-				"  }\n" + 
+				"if (true) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = 1;\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (false) {\n" + 
