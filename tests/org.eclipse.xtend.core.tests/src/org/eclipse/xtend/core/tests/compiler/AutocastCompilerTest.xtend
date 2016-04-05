@@ -31,11 +31,9 @@ class AutocastCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m(final Object o) {
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof String) {
-			        _matched=true;
-			        this.n(((CharSequence)o));
-			      }
+			    if (o instanceof String) {
+			      _matched=true;
+			      this.n(((CharSequence)o));
 			    }
 			  }
 			  
@@ -64,11 +62,9 @@ class AutocastCompilerTest extends AbstractXtendCompilerTest {
 			    Object _object = new Object();
 			    final Object o = _object;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof String) {
-			        _matched=true;
-			        this.n(((CharSequence)o));
-			      }
+			    if (o instanceof String) {
+			      _matched=true;
+			      this.n(((CharSequence)o));
 			    }
 			  }
 			  

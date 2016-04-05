@@ -40,11 +40,9 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			    final Procedure1<String> _function = new Procedure1<String>() {
 			      public void apply(final String it) {
 			        boolean _matched = false;
-			        if (!_matched) {
-			          if (it instanceof String) {
-			            _matched=true;
-			            list.add(it);
-			          }
+			        if (it instanceof String) {
+			          _matched=true;
+			          list.add(it);
 			        }
 			      }
 			    };
@@ -82,11 +80,9 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			    final Procedure1<Serializable> _function = new Procedure1<Serializable>() {
 			      public void apply(final Serializable it) {
 			        boolean _matched = false;
-			        if (!_matched) {
-			          if (it instanceof String) {
-			            _matched=true;
-			            list.add(it);
-			          }
+			        if (it instanceof String) {
+			          _matched=true;
+			          list.add(it);
 			        }
 			        if (!_matched) {
 			          if (it instanceof Number) {
@@ -129,12 +125,10 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			    final Procedure1<Serializable> _function = new Procedure1<Serializable>() {
 			      public void apply(final Serializable it) {
 			        boolean _matched = false;
-			        if (!_matched) {
-			          if (it instanceof Number) {
-			            _matched=true;
-			            String _string = ((Number)it).toString();
-			            list.add(_string);
-			          }
+			        if (it instanceof Number) {
+			          _matched=true;
+			          String _string = ((Number)it).toString();
+			          list.add(_string);
 			        }
 			      }
 			    };

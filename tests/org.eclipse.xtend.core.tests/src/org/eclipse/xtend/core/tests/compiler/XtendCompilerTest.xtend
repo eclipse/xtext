@@ -686,11 +686,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    {
 			      Object _switchResult = null;
 			      boolean _matched = false;
-			      if (!_matched) {
-			        if (x instanceof String) {
-			          _matched=true;
-			          return "";
-			        }
+			      if (x instanceof String) {
+			        _matched=true;
+			        return "";
 			      }
 			      final Object r = _switchResult;
 			      _xblockexpression = r;
@@ -715,11 +713,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public void m(final Object o) {
 			    Object _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof String) {
-			        _matched=true;
-			        return;
-			      }
+			    if (o instanceof String) {
+			      _matched=true;
+			      return;
 			    }
 			    final Object x = _switchResult;
 			    x.toString();
@@ -743,11 +739,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public void m(final Object o) {
 			    Object _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof String) {
-			        _matched=true;
-			        return;
-			      }
+			    if (o instanceof String) {
+			      _matched=true;
+			      return;
 			    }
 			    final Object x = _switchResult;
 			    this.voidFunction(x);
@@ -1402,12 +1396,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public void m(final Object a) {
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (Objects.equal(a, "b")) {
-			        _matched=true;
-			        while (true) {
-			          "".toString();
-			        }
+			    if (Objects.equal(a, "b")) {
+			      _matched=true;
+			      while (true) {
+			        "".toString();
 			      }
 			    }
 			    if (!_matched) {
@@ -1451,12 +1443,10 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class C {
 			  public String m(final Object a) {
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (Objects.equal(a, "b")) {
-			        _matched=true;
-			        while (true) {
-			          "".toString();
-			        }
+			    if (Objects.equal(a, "b")) {
+			      _matched=true;
+			      while (true) {
+			        "".toString();
 			      }
 			    }
 			    if (!_matched) {
@@ -1500,18 +1490,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public String m(final Object a, final boolean b) {
 			    String _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (Objects.equal(a, "a")) {
-			        _matched=true;
-			        String _xblockexpression = null;
-			        {
-			          while (b) {
-			            "".toString();
-			          }
-			          _xblockexpression = "";
+			    if (Objects.equal(a, "a")) {
+			      _matched=true;
+			      String _xblockexpression = null;
+			      {
+			        while (b) {
+			          "".toString();
 			        }
-			        _switchResult = _xblockexpression;
+			        _xblockexpression = "";
 			      }
+			      _switchResult = _xblockexpression;
 			    }
 			    if (!_matched) {
 			      if (Objects.equal(a, "b")) {
@@ -1546,11 +1534,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		  public boolean foo(final int x) {
 		    boolean _switchResult = false;
 		    boolean _matched = false;
-		    if (!_matched) {
-		      if ((((x == 1) || (x == 2)) || (x == 3))) {
-		        _matched=true;
-		        _switchResult = true;
-		      }
+		    if ((((x == 1) || (x == 2)) || (x == 3))) {
+		      _matched=true;
+		      _switchResult = true;
 		    }
 		    if (!_matched) {
 		      _switchResult = false;
@@ -1579,22 +1565,20 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		  public boolean foo(final int x) {
 		    boolean _switchResult = false;
 		    boolean _matched = false;
-		    if (!_matched) {
-		      boolean _or = false;
-		      if ((x == 1)) {
-		        _or = true;
-		      } else {
-		        boolean _xtrycatchfinallyexpression = false;
-		        try {
-		          _xtrycatchfinallyexpression = (x == 2);
-		        } finally {
-		        }
-		        _or = _xtrycatchfinallyexpression;
+		    boolean _or = false;
+		    if ((x == 1)) {
+		      _or = true;
+		    } else {
+		      boolean _xtrycatchfinallyexpression = false;
+		      try {
+		        _xtrycatchfinallyexpression = (x == 2);
+		      } finally {
 		      }
-		      if (_or) {
-		        _matched=true;
-		        _switchResult = true;
-		      }
+		      _or = _xtrycatchfinallyexpression;
+		    }
+		    if (_or) {
+		      _matched=true;
+		      _switchResult = true;
 		    }
 		    if (!_matched) {
 		      _switchResult = false;
@@ -1625,23 +1609,21 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		  public boolean foo(final int x) {
 		    boolean _switchResult = false;
 		    boolean _matched = false;
-		    if (!_matched) {
-		      boolean _or = false;
-		      final Function0<Boolean> _function = new Function0<Boolean>() {
-		        public Boolean apply() {
-		          return Boolean.valueOf((1 == x));
-		        }
-		      };
-		      Boolean _apply = _function.apply();
-		      if ((_apply).booleanValue()) {
-		        _or = true;
-		      } else {
-		        _or = (x == 2);
+		    boolean _or = false;
+		    final Function0<Boolean> _function = new Function0<Boolean>() {
+		      public Boolean apply() {
+		        return Boolean.valueOf((1 == x));
 		      }
-		      if (_or) {
-		        _matched=true;
-		        _switchResult = true;
-		      }
+		    };
+		    Boolean _apply = _function.apply();
+		    if ((_apply).booleanValue()) {
+		      _or = true;
+		    } else {
+		      _or = (x == 2);
+		    }
+		    if (_or) {
+		      _matched=true;
+		      _switchResult = true;
 		    }
 		    if (!_matched) {
 		      _switchResult = false;
@@ -1673,16 +1655,14 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    Function1<? super Integer, ?> _switchResult = null;
 			    final Object _switchValue = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (Objects.equal(_switchValue, null)) {
-			        _matched=true;
-			        final Function1<Object, Object> _function = new Function1<Object, Object>() {
-			          public Object apply(final Object it) {
-			            return it;
-			          }
-			        };
-			        _switchResult = _function;
-			      }
+			    if (Objects.equal(_switchValue, null)) {
+			      _matched=true;
+			      final Function1<Object, Object> _function = new Function1<Object, Object>() {
+			        public Object apply(final Object it) {
+			          return it;
+			        }
+			      };
+			      _switchResult = _function;
 			    }
 			    if (!_matched) {
 			      if (Objects.equal(_switchValue, null)) {
@@ -1762,11 +1742,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    int _switchResult = (int) 0;
 		    final double x = (1d + 2);
 		    boolean _matched = false;
-		    if (!_matched) {
-		      if (Objects.equal(x, 1)) {
-		        _matched=true;
-		        _switchResult = 1;
-		      }
+		    if (Objects.equal(x, 1)) {
+		      _matched=true;
+		      _switchResult = 1;
 		    }
 		    if (!_matched) {
 		      _switchResult = 2;
@@ -1798,11 +1776,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    int _switchResult = (int) 0;
 		    final int x = 1;
 		    boolean _matched = false;
-		    if (!_matched) {
-		      if (Objects.equal(x, 1d)) {
-		        _matched=true;
-		        _switchResult = 1;
-		      }
+		    if (Objects.equal(x, 1d)) {
+		      _matched=true;
+		      _switchResult = 1;
 		    }
 		    if (!_matched) {
 		      _switchResult = 2;
@@ -1939,17 +1915,15 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		    boolean _switchResult = false;
 		    final int x = 1;
 		    boolean _matched = false;
-		    if (!_matched) {
-		      final Function0<Integer> _function = new Function0<Integer>() {
-		        public Integer apply() {
-		          return Integer.valueOf(1);
-		        }
-		      };
-		      Integer _apply = _function.apply();
-		      if (Objects.equal(x, _apply)) {
-		        _matched=true;
-		        _switchResult = true;
+		    final Function0<Integer> _function = new Function0<Integer>() {
+		      public Integer apply() {
+		        return Integer.valueOf(1);
 		      }
+		    };
+		    Integer _apply = _function.apply();
+		    if (Objects.equal(x, _apply)) {
+		      _matched=true;
+		      _switchResult = true;
 		    }
 		    return _switchResult;
 		  }
@@ -2114,11 +2088,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      boolean _switchResult = false;
 		      final int x = 1;
 		      boolean _matched = false;
-		      if (!_matched) {
-		        if (Objects.equal(x, z)) {
-		          _matched=true;
-		          _switchResult = true;
-		        }
+		      if (Objects.equal(x, z)) {
+		        _matched=true;
+		        _switchResult = true;
 		      }
 		      _xblockexpression = _switchResult;
 		    }
@@ -2152,11 +2124,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		      boolean _switchResult = false;
 		      final Thread.State x = Thread.State.NEW;
 		      boolean _matched = false;
-		      if (!_matched) {
-		        if (Objects.equal(x, state)) {
-		          _matched=true;
-		          _switchResult = true;
-		        }
+		      if (Objects.equal(x, state)) {
+		        _matched=true;
+		        _switchResult = true;
 		      }
 		      _xblockexpression = _switchResult;
 		    }
@@ -3846,11 +3816,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public Object foo(final Object o) {
 			    Object _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof Long) {
-			        _matched=true;
-			        _switchResult = this.bar(((Long) o).longValue());
-			      }
+			    if (o instanceof Long) {
+			      _matched=true;
+			      _switchResult = this.bar(((Long) o).longValue());
 			    }
 			    return _switchResult;
 			  }
@@ -4015,18 +3983,16 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    for (final String volatile_ : synchronized_) {
 			      final String continue_ = volatile_;
 			      boolean _matched = false;
-			      if (!_matched) {
-			        int _length = continue_.length();
-			        boolean _greaterThan = (_length > 2);
-			        if (_greaterThan) {
-			          _matched=true;
-			          final Procedure1<String> _function = new Procedure1<String>() {
-			            public void apply(final String break_) {
-			              (break_ + continue_).toString();
-			            }
-			          };
-			          IterableExtensions.<String>forEach(synchronized_, _function);
-			        }
+			      int _length = continue_.length();
+			      boolean _greaterThan = (_length > 2);
+			      if (_greaterThan) {
+			        _matched=true;
+			        final Procedure1<String> _function = new Procedure1<String>() {
+			          public void apply(final String break_) {
+			            (break_ + continue_).toString();
+			          }
+			        };
+			        IterableExtensions.<String>forEach(synchronized_, _function);
 			      }
 			    }
 			  }
@@ -5537,23 +5503,21 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo {
 			  public String foo(final Collection input) {
 			    boolean _matched = false;
+			    if (input instanceof ArrayList) {
+			      _matched=true;
+			    }
 			    if (!_matched) {
-			      if (input instanceof ArrayList) {
+			      if (input instanceof LinkedList) {
 			        _matched=true;
 			      }
-			      if (!_matched) {
-			        if (input instanceof LinkedList) {
-			          _matched=true;
-			        }
+			    }
+			    if (!_matched) {
+			      if (input instanceof Vector) {
+			        _matched=true;
 			      }
-			      if (!_matched) {
-			        if (input instanceof Vector) {
-			          _matched=true;
-			        }
-			      }
-			      if (_matched) {
-			        return "list";
-			      }
+			    }
+			    if (_matched) {
+			      return "list";
 			    }
 			    if (!_matched) {
 			      if (input instanceof Map) {
@@ -5631,11 +5595,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  
 			  public void foo(final int x) {
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (Objects.equal(x, this.X)) {
-			        _matched=true;
-			        this.foo(x);
-			      }
+			    if (Objects.equal(x, this.X)) {
+			      _matched=true;
+			      this.foo(x);
 			    }
 			    switch (x) {
 			      case Foo.Y:
