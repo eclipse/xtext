@@ -16,17 +16,16 @@ package org.eclipse.xtext.xbase.util;
  */
 public class XSwitchExpressionCompilationState {
 
-	private int caseProcessedCount = 0;
+	private boolean firstCase = true;
 
 	public void startProcessingCase() {
-		caseProcessedCount++;
 	}
 
 	public void finishProcessingCase() {
-		caseProcessedCount--;
+		firstCase = false;
 	}
 
 	public boolean caseNeedsIfCheck() {
-		return caseProcessedCount > 1;
+		return !firstCase;
 	}
 }
