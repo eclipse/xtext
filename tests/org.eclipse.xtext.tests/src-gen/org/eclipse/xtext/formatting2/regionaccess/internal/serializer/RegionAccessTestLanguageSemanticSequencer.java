@@ -41,7 +41,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 		if (epackage == RegionaccesstestlanguagePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case RegionaccesstestlanguagePackage.ACTION:
-				sequence_Mixed(context, (org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action) semanticObject); 
+				sequence_Fragment_Mixed(context, (org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action) semanticObject); 
 				return; 
 			case RegionaccesstestlanguagePackage.ADD:
 				sequence_Expression(context, (Add) semanticObject); 
@@ -147,9 +147,9 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     Mixed.AssignedAction_4_0 returns Action
 	 *
 	 * Constraint:
-	 *     {Action}
+	 *     (fragName=ID | mixed=Mixed)?
 	 */
-	protected void sequence_Mixed(ISerializationContext context, org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action semanticObject) {
+	protected void sequence_Fragment_Mixed(ISerializationContext context, org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

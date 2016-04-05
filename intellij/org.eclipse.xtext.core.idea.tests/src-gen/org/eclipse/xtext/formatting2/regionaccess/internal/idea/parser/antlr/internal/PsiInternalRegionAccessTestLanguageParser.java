@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'5'", "'6'", "'7'", "'1'", "'2'", "'3'", "'4'", "'prefix'", "'+'", "'('", "')'", "'unassigned'", "'child'", "'ref'", "'action'", "'end'", "'datatype'", "'lit1'", "'lit2'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'5'", "'6'", "'7'", "'1'", "'2'", "'3'", "'4'", "'prefix'", "'+'", "'('", "')'", "'unassigned'", "'fragment'", "'child'", "'ref'", "'action'", "'end'", "'datatype'", "'recursion'", "'lit1'", "'lit2'"
     };
     public static final int RULE_ID=4;
     public static final int T__29=29;
@@ -35,7 +35,9 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
     public static final int RULE_SL_COMMENT=8;
     public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__30=30;
     public static final int T__19=19;
+    public static final int T__31=31;
     public static final int RULE_STRING=6;
     public static final int T__16=16;
     public static final int T__15=15;
@@ -1392,37 +1394,40 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleMixed"
-    // PsiInternalRegionAccessTestLanguage.g:504:1: ruleMixed returns [Boolean current=false] : (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( () | this_Mixed_5= ruleMixed | ( ( (lv_name_6_0= RULE_ID ) ) | (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) ) | ( (lv_datatype_9_0= ruleDatatype ) ) | (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) ) | ( (lv_lit_12_0= ruleEnum ) ) ) ) otherlv_13= ')' ( () otherlv_15= 'action' ( ( (lv_body_16_0= ruleMixed ) ) otherlv_17= 'end' )? )* ) ;
+    // PsiInternalRegionAccessTestLanguage.g:504:1: ruleMixed returns [Boolean current=false] : (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* ) ;
     public final Boolean ruleMixed() throws RecognitionException {
         Boolean current = false;
 
         Token otherlv_0=null;
         Token otherlv_1=null;
         Token this_ID_2=null;
-        Token lv_name_6_0=null;
-        Token otherlv_7=null;
-        Token otherlv_10=null;
-        Token otherlv_11=null;
+        Token otherlv_5=null;
+        Token lv_name_8_0=null;
+        Token otherlv_9=null;
+        Token otherlv_12=null;
         Token otherlv_13=null;
         Token otherlv_15=null;
         Token otherlv_17=null;
-        Boolean this_Mixed_5 = null;
+        Token otherlv_19=null;
+        Boolean this_Fragment_6 = null;
 
-        Boolean lv_eobj_8_0 = null;
+        Boolean this_Mixed_7 = null;
 
-        Boolean lv_datatype_9_0 = null;
+        Boolean lv_eobj_10_0 = null;
 
-        Boolean lv_lit_12_0 = null;
+        Boolean lv_datatype_11_0 = null;
 
-        Boolean lv_body_16_0 = null;
+        Boolean lv_lit_14_0 = null;
+
+        Boolean lv_body_18_0 = null;
 
 
         try {
-            // PsiInternalRegionAccessTestLanguage.g:505:1: ( (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( () | this_Mixed_5= ruleMixed | ( ( (lv_name_6_0= RULE_ID ) ) | (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) ) | ( (lv_datatype_9_0= ruleDatatype ) ) | (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) ) | ( (lv_lit_12_0= ruleEnum ) ) ) ) otherlv_13= ')' ( () otherlv_15= 'action' ( ( (lv_body_16_0= ruleMixed ) ) otherlv_17= 'end' )? )* ) )
-            // PsiInternalRegionAccessTestLanguage.g:506:2: (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( () | this_Mixed_5= ruleMixed | ( ( (lv_name_6_0= RULE_ID ) ) | (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) ) | ( (lv_datatype_9_0= ruleDatatype ) ) | (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) ) | ( (lv_lit_12_0= ruleEnum ) ) ) ) otherlv_13= ')' ( () otherlv_15= 'action' ( ( (lv_body_16_0= ruleMixed ) ) otherlv_17= 'end' )? )* )
+            // PsiInternalRegionAccessTestLanguage.g:505:1: ( (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* ) )
+            // PsiInternalRegionAccessTestLanguage.g:506:2: (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* )
             {
-            // PsiInternalRegionAccessTestLanguage.g:506:2: (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( () | this_Mixed_5= ruleMixed | ( ( (lv_name_6_0= RULE_ID ) ) | (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) ) | ( (lv_datatype_9_0= ruleDatatype ) ) | (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) ) | ( (lv_lit_12_0= ruleEnum ) ) ) ) otherlv_13= ')' ( () otherlv_15= 'action' ( ( (lv_body_16_0= ruleMixed ) ) otherlv_17= 'end' )? )* )
-            // PsiInternalRegionAccessTestLanguage.g:507:3: otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( () | this_Mixed_5= ruleMixed | ( ( (lv_name_6_0= RULE_ID ) ) | (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) ) | ( (lv_datatype_9_0= ruleDatatype ) ) | (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) ) | ( (lv_lit_12_0= ruleEnum ) ) ) ) otherlv_13= ')' ( () otherlv_15= 'action' ( ( (lv_body_16_0= ruleMixed ) ) otherlv_17= 'end' )? )*
+            // PsiInternalRegionAccessTestLanguage.g:506:2: (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* )
+            // PsiInternalRegionAccessTestLanguage.g:507:3: otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )*
             {
 
             			markLeaf(elementTypeProvider.getMixed_LeftParenthesisKeyword_0ElementType());
@@ -1456,7 +1461,7 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                     if ( (LA4_0==RULE_ID) ) {
                         alt4=1;
                     }
-                    else if ( (LA4_0==27) ) {
+                    else if ( (LA4_0==28) ) {
                         alt4=2;
                     }
                     else {
@@ -1505,48 +1510,95 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // PsiInternalRegionAccessTestLanguage.g:540:3: ( () | this_Mixed_5= ruleMixed | ( ( (lv_name_6_0= RULE_ID ) ) | (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) ) | ( (lv_datatype_9_0= ruleDatatype ) ) | (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) ) | ( (lv_lit_12_0= ruleEnum ) ) ) )
-            int alt7=3;
+            // PsiInternalRegionAccessTestLanguage.g:540:3: ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) )
+            int alt8=3;
             switch ( input.LA(1) ) {
             case 21:
+            case 23:
                 {
-                alt7=1;
+                alt8=1;
                 }
                 break;
             case 20:
                 {
-                alt7=2;
+                alt8=2;
                 }
                 break;
             case RULE_ID:
-            case 23:
             case 24:
-            case 27:
+            case 25:
             case 28:
-            case 29:
+            case 30:
+            case 31:
                 {
-                alt7=3;
+                alt8=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 7, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt7) {
+            switch (alt8) {
                 case 1 :
-                    // PsiInternalRegionAccessTestLanguage.g:541:4: ()
+                    // PsiInternalRegionAccessTestLanguage.g:541:4: ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? )
                     {
-                    // PsiInternalRegionAccessTestLanguage.g:541:4: ()
-                    // PsiInternalRegionAccessTestLanguage.g:542:5: 
+                    // PsiInternalRegionAccessTestLanguage.g:541:4: ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? )
+                    // PsiInternalRegionAccessTestLanguage.g:542:5: () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )?
+                    {
+                    // PsiInternalRegionAccessTestLanguage.g:542:5: ()
+                    // PsiInternalRegionAccessTestLanguage.g:543:6: 
                     {
 
-                    					precedeComposite(elementTypeProvider.getMixed_ActionAction_2_0ElementType());
-                    					doneComposite();
-                    					associateWithSemanticElement();
-                    				
+                    						precedeComposite(elementTypeProvider.getMixed_ActionAction_2_0_0ElementType());
+                    						doneComposite();
+                    						associateWithSemanticElement();
+                    					
+
+                    }
+
+                    // PsiInternalRegionAccessTestLanguage.g:549:5: (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )?
+                    int alt6=2;
+                    int LA6_0 = input.LA(1);
+
+                    if ( (LA6_0==23) ) {
+                        alt6=1;
+                    }
+                    switch (alt6) {
+                        case 1 :
+                            // PsiInternalRegionAccessTestLanguage.g:550:6: otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current]
+                            {
+
+                            						markLeaf(elementTypeProvider.getMixed_FragmentKeyword_2_0_1_0ElementType());
+                            					
+                            otherlv_5=(Token)match(input,23,FollowSets000.FOLLOW_11); 
+
+                            						doneLeaf(otherlv_5);
+                            					
+
+                            						if (!current) {
+                            							associateWithSemanticElement();
+                            							current = true;
+                            						}
+                            						markComposite(elementTypeProvider.getMixed_FragmentParserRuleCall_2_0_1_1ElementType());
+                            					
+                            pushFollow(FollowSets000.FOLLOW_8);
+                            this_Fragment_6=ruleFragment(current);
+
+                            state._fsp--;
+
+
+                            						current = this_Fragment_6;
+                            						doneComposite();
+                            					
+
+                            }
+                            break;
+
+                    }
+
 
                     }
 
@@ -1554,76 +1606,76 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalRegionAccessTestLanguage.g:549:4: this_Mixed_5= ruleMixed
+                    // PsiInternalRegionAccessTestLanguage.g:572:4: this_Mixed_7= ruleMixed
                     {
 
                     				markComposite(elementTypeProvider.getMixed_MixedParserRuleCall_2_1ElementType());
                     			
                     pushFollow(FollowSets000.FOLLOW_8);
-                    this_Mixed_5=ruleMixed();
+                    this_Mixed_7=ruleMixed();
 
                     state._fsp--;
 
 
-                    				current = this_Mixed_5;
+                    				current = this_Mixed_7;
                     				doneComposite();
                     			
 
                     }
                     break;
                 case 3 :
-                    // PsiInternalRegionAccessTestLanguage.g:558:4: ( ( (lv_name_6_0= RULE_ID ) ) | (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) ) | ( (lv_datatype_9_0= ruleDatatype ) ) | (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) ) | ( (lv_lit_12_0= ruleEnum ) ) )
+                    // PsiInternalRegionAccessTestLanguage.g:581:4: ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) )
                     {
-                    // PsiInternalRegionAccessTestLanguage.g:558:4: ( ( (lv_name_6_0= RULE_ID ) ) | (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) ) | ( (lv_datatype_9_0= ruleDatatype ) ) | (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) ) | ( (lv_lit_12_0= ruleEnum ) ) )
-                    int alt6=5;
+                    // PsiInternalRegionAccessTestLanguage.g:581:4: ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) )
+                    int alt7=5;
                     switch ( input.LA(1) ) {
                     case RULE_ID:
                         {
-                        alt6=1;
-                        }
-                        break;
-                    case 23:
-                        {
-                        alt6=2;
-                        }
-                        break;
-                    case 27:
-                        {
-                        alt6=3;
+                        alt7=1;
                         }
                         break;
                     case 24:
                         {
-                        alt6=4;
+                        alt7=2;
                         }
                         break;
                     case 28:
-                    case 29:
                         {
-                        alt6=5;
+                        alt7=3;
+                        }
+                        break;
+                    case 25:
+                        {
+                        alt7=4;
+                        }
+                        break;
+                    case 30:
+                    case 31:
+                        {
+                        alt7=5;
                         }
                         break;
                     default:
                         NoViableAltException nvae =
-                            new NoViableAltException("", 6, 0, input);
+                            new NoViableAltException("", 7, 0, input);
 
                         throw nvae;
                     }
 
-                    switch (alt6) {
+                    switch (alt7) {
                         case 1 :
-                            // PsiInternalRegionAccessTestLanguage.g:559:5: ( (lv_name_6_0= RULE_ID ) )
+                            // PsiInternalRegionAccessTestLanguage.g:582:5: ( (lv_name_8_0= RULE_ID ) )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:559:5: ( (lv_name_6_0= RULE_ID ) )
-                            // PsiInternalRegionAccessTestLanguage.g:560:6: (lv_name_6_0= RULE_ID )
+                            // PsiInternalRegionAccessTestLanguage.g:582:5: ( (lv_name_8_0= RULE_ID ) )
+                            // PsiInternalRegionAccessTestLanguage.g:583:6: (lv_name_8_0= RULE_ID )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:560:6: (lv_name_6_0= RULE_ID )
-                            // PsiInternalRegionAccessTestLanguage.g:561:7: lv_name_6_0= RULE_ID
+                            // PsiInternalRegionAccessTestLanguage.g:583:6: (lv_name_8_0= RULE_ID )
+                            // PsiInternalRegionAccessTestLanguage.g:584:7: lv_name_8_0= RULE_ID
                             {
 
                             							markLeaf(elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType());
                             						
-                            lv_name_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
+                            lv_name_8_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
                             							if(!current) {
                             								associateWithSemanticElement();
@@ -1631,7 +1683,7 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                             							}
                             						
 
-                            							doneLeaf(lv_name_6_0);
+                            							doneLeaf(lv_name_8_0);
                             						
 
                             }
@@ -1643,29 +1695,29 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                             }
                             break;
                         case 2 :
-                            // PsiInternalRegionAccessTestLanguage.g:577:5: (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) )
+                            // PsiInternalRegionAccessTestLanguage.g:600:5: (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:577:5: (otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) ) )
-                            // PsiInternalRegionAccessTestLanguage.g:578:6: otherlv_7= 'child' ( (lv_eobj_8_0= ruleMixed ) )
+                            // PsiInternalRegionAccessTestLanguage.g:600:5: (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) )
+                            // PsiInternalRegionAccessTestLanguage.g:601:6: otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) )
                             {
 
                             						markLeaf(elementTypeProvider.getMixed_ChildKeyword_2_2_1_0ElementType());
                             					
-                            otherlv_7=(Token)match(input,23,FollowSets000.FOLLOW_4); 
+                            otherlv_9=(Token)match(input,24,FollowSets000.FOLLOW_4); 
 
-                            						doneLeaf(otherlv_7);
+                            						doneLeaf(otherlv_9);
                             					
-                            // PsiInternalRegionAccessTestLanguage.g:585:6: ( (lv_eobj_8_0= ruleMixed ) )
-                            // PsiInternalRegionAccessTestLanguage.g:586:7: (lv_eobj_8_0= ruleMixed )
+                            // PsiInternalRegionAccessTestLanguage.g:608:6: ( (lv_eobj_10_0= ruleMixed ) )
+                            // PsiInternalRegionAccessTestLanguage.g:609:7: (lv_eobj_10_0= ruleMixed )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:586:7: (lv_eobj_8_0= ruleMixed )
-                            // PsiInternalRegionAccessTestLanguage.g:587:8: lv_eobj_8_0= ruleMixed
+                            // PsiInternalRegionAccessTestLanguage.g:609:7: (lv_eobj_10_0= ruleMixed )
+                            // PsiInternalRegionAccessTestLanguage.g:610:8: lv_eobj_10_0= ruleMixed
                             {
 
                             								markComposite(elementTypeProvider.getMixed_EobjMixedParserRuleCall_2_2_1_1_0ElementType());
                             							
                             pushFollow(FollowSets000.FOLLOW_8);
-                            lv_eobj_8_0=ruleMixed();
+                            lv_eobj_10_0=ruleMixed();
 
                             state._fsp--;
 
@@ -1689,19 +1741,19 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                             }
                             break;
                         case 3 :
-                            // PsiInternalRegionAccessTestLanguage.g:602:5: ( (lv_datatype_9_0= ruleDatatype ) )
+                            // PsiInternalRegionAccessTestLanguage.g:625:5: ( (lv_datatype_11_0= ruleDatatype ) )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:602:5: ( (lv_datatype_9_0= ruleDatatype ) )
-                            // PsiInternalRegionAccessTestLanguage.g:603:6: (lv_datatype_9_0= ruleDatatype )
+                            // PsiInternalRegionAccessTestLanguage.g:625:5: ( (lv_datatype_11_0= ruleDatatype ) )
+                            // PsiInternalRegionAccessTestLanguage.g:626:6: (lv_datatype_11_0= ruleDatatype )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:603:6: (lv_datatype_9_0= ruleDatatype )
-                            // PsiInternalRegionAccessTestLanguage.g:604:7: lv_datatype_9_0= ruleDatatype
+                            // PsiInternalRegionAccessTestLanguage.g:626:6: (lv_datatype_11_0= ruleDatatype )
+                            // PsiInternalRegionAccessTestLanguage.g:627:7: lv_datatype_11_0= ruleDatatype
                             {
 
                             							markComposite(elementTypeProvider.getMixed_DatatypeDatatypeParserRuleCall_2_2_2_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_8);
-                            lv_datatype_9_0=ruleDatatype();
+                            lv_datatype_11_0=ruleDatatype();
 
                             state._fsp--;
 
@@ -1722,23 +1774,23 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                             }
                             break;
                         case 4 :
-                            // PsiInternalRegionAccessTestLanguage.g:618:5: (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) )
+                            // PsiInternalRegionAccessTestLanguage.g:641:5: (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:618:5: (otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) ) )
-                            // PsiInternalRegionAccessTestLanguage.g:619:6: otherlv_10= 'ref' ( (otherlv_11= RULE_ID ) )
+                            // PsiInternalRegionAccessTestLanguage.g:641:5: (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) )
+                            // PsiInternalRegionAccessTestLanguage.g:642:6: otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) )
                             {
 
                             						markLeaf(elementTypeProvider.getMixed_RefKeyword_2_2_3_0ElementType());
                             					
-                            otherlv_10=(Token)match(input,24,FollowSets000.FOLLOW_5); 
+                            otherlv_12=(Token)match(input,25,FollowSets000.FOLLOW_5); 
 
-                            						doneLeaf(otherlv_10);
+                            						doneLeaf(otherlv_12);
                             					
-                            // PsiInternalRegionAccessTestLanguage.g:626:6: ( (otherlv_11= RULE_ID ) )
-                            // PsiInternalRegionAccessTestLanguage.g:627:7: (otherlv_11= RULE_ID )
+                            // PsiInternalRegionAccessTestLanguage.g:649:6: ( (otherlv_13= RULE_ID ) )
+                            // PsiInternalRegionAccessTestLanguage.g:650:7: (otherlv_13= RULE_ID )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:627:7: (otherlv_11= RULE_ID )
-                            // PsiInternalRegionAccessTestLanguage.g:628:8: otherlv_11= RULE_ID
+                            // PsiInternalRegionAccessTestLanguage.g:650:7: (otherlv_13= RULE_ID )
+                            // PsiInternalRegionAccessTestLanguage.g:651:8: otherlv_13= RULE_ID
                             {
 
                             								if (!current) {
@@ -1749,9 +1801,9 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
                             								markLeaf(elementTypeProvider.getMixed_RefMixedCrossReference_2_2_3_1_0ElementType());
                             							
-                            otherlv_11=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
+                            otherlv_13=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
-                            								doneLeaf(otherlv_11);
+                            								doneLeaf(otherlv_13);
                             							
 
                             }
@@ -1766,19 +1818,19 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                             }
                             break;
                         case 5 :
-                            // PsiInternalRegionAccessTestLanguage.g:645:5: ( (lv_lit_12_0= ruleEnum ) )
+                            // PsiInternalRegionAccessTestLanguage.g:668:5: ( (lv_lit_14_0= ruleEnum ) )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:645:5: ( (lv_lit_12_0= ruleEnum ) )
-                            // PsiInternalRegionAccessTestLanguage.g:646:6: (lv_lit_12_0= ruleEnum )
+                            // PsiInternalRegionAccessTestLanguage.g:668:5: ( (lv_lit_14_0= ruleEnum ) )
+                            // PsiInternalRegionAccessTestLanguage.g:669:6: (lv_lit_14_0= ruleEnum )
                             {
-                            // PsiInternalRegionAccessTestLanguage.g:646:6: (lv_lit_12_0= ruleEnum )
-                            // PsiInternalRegionAccessTestLanguage.g:647:7: lv_lit_12_0= ruleEnum
+                            // PsiInternalRegionAccessTestLanguage.g:669:6: (lv_lit_14_0= ruleEnum )
+                            // PsiInternalRegionAccessTestLanguage.g:670:7: lv_lit_14_0= ruleEnum
                             {
 
                             							markComposite(elementTypeProvider.getMixed_LitEnumEnumRuleCall_2_2_4_0ElementType());
                             						
                             pushFollow(FollowSets000.FOLLOW_8);
-                            lv_lit_12_0=ruleEnum();
+                            lv_lit_14_0=ruleEnum();
 
                             state._fsp--;
 
@@ -1810,27 +1862,27 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             			markLeaf(elementTypeProvider.getMixed_RightParenthesisKeyword_3ElementType());
             		
-            otherlv_13=(Token)match(input,21,FollowSets000.FOLLOW_11); 
+            otherlv_15=(Token)match(input,21,FollowSets000.FOLLOW_12); 
 
-            			doneLeaf(otherlv_13);
+            			doneLeaf(otherlv_15);
             		
-            // PsiInternalRegionAccessTestLanguage.g:669:3: ( () otherlv_15= 'action' ( ( (lv_body_16_0= ruleMixed ) ) otherlv_17= 'end' )? )*
-            loop9:
+            // PsiInternalRegionAccessTestLanguage.g:692:3: ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )*
+            loop10:
             do {
-                int alt9=2;
-                int LA9_0 = input.LA(1);
+                int alt10=2;
+                int LA10_0 = input.LA(1);
 
-                if ( (LA9_0==25) ) {
-                    alt9=1;
+                if ( (LA10_0==26) ) {
+                    alt10=1;
                 }
 
 
-                switch (alt9) {
+                switch (alt10) {
             	case 1 :
-            	    // PsiInternalRegionAccessTestLanguage.g:670:4: () otherlv_15= 'action' ( ( (lv_body_16_0= ruleMixed ) ) otherlv_17= 'end' )?
+            	    // PsiInternalRegionAccessTestLanguage.g:693:4: () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )?
             	    {
-            	    // PsiInternalRegionAccessTestLanguage.g:670:4: ()
-            	    // PsiInternalRegionAccessTestLanguage.g:671:5: 
+            	    // PsiInternalRegionAccessTestLanguage.g:693:4: ()
+            	    // PsiInternalRegionAccessTestLanguage.g:694:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getMixed_AssignedActionChildAction_4_0ElementType());
@@ -1843,32 +1895,32 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             	    				markLeaf(elementTypeProvider.getMixed_ActionKeyword_4_1ElementType());
             	    			
-            	    otherlv_15=(Token)match(input,25,FollowSets000.FOLLOW_12); 
+            	    otherlv_17=(Token)match(input,26,FollowSets000.FOLLOW_13); 
 
-            	    				doneLeaf(otherlv_15);
+            	    				doneLeaf(otherlv_17);
             	    			
-            	    // PsiInternalRegionAccessTestLanguage.g:684:4: ( ( (lv_body_16_0= ruleMixed ) ) otherlv_17= 'end' )?
-            	    int alt8=2;
-            	    int LA8_0 = input.LA(1);
+            	    // PsiInternalRegionAccessTestLanguage.g:707:4: ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )?
+            	    int alt9=2;
+            	    int LA9_0 = input.LA(1);
 
-            	    if ( (LA8_0==20) ) {
-            	        alt8=1;
+            	    if ( (LA9_0==20) ) {
+            	        alt9=1;
             	    }
-            	    switch (alt8) {
+            	    switch (alt9) {
             	        case 1 :
-            	            // PsiInternalRegionAccessTestLanguage.g:685:5: ( (lv_body_16_0= ruleMixed ) ) otherlv_17= 'end'
+            	            // PsiInternalRegionAccessTestLanguage.g:708:5: ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end'
             	            {
-            	            // PsiInternalRegionAccessTestLanguage.g:685:5: ( (lv_body_16_0= ruleMixed ) )
-            	            // PsiInternalRegionAccessTestLanguage.g:686:6: (lv_body_16_0= ruleMixed )
+            	            // PsiInternalRegionAccessTestLanguage.g:708:5: ( (lv_body_18_0= ruleMixed ) )
+            	            // PsiInternalRegionAccessTestLanguage.g:709:6: (lv_body_18_0= ruleMixed )
             	            {
-            	            // PsiInternalRegionAccessTestLanguage.g:686:6: (lv_body_16_0= ruleMixed )
-            	            // PsiInternalRegionAccessTestLanguage.g:687:7: lv_body_16_0= ruleMixed
+            	            // PsiInternalRegionAccessTestLanguage.g:709:6: (lv_body_18_0= ruleMixed )
+            	            // PsiInternalRegionAccessTestLanguage.g:710:7: lv_body_18_0= ruleMixed
             	            {
 
             	            							markComposite(elementTypeProvider.getMixed_BodyMixedParserRuleCall_4_2_0_0ElementType());
             	            						
-            	            pushFollow(FollowSets000.FOLLOW_13);
-            	            lv_body_16_0=ruleMixed();
+            	            pushFollow(FollowSets000.FOLLOW_14);
+            	            lv_body_18_0=ruleMixed();
 
             	            state._fsp--;
 
@@ -1888,9 +1940,9 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
             	            					markLeaf(elementTypeProvider.getMixed_EndKeyword_4_2_1ElementType());
             	            				
-            	            otherlv_17=(Token)match(input,26,FollowSets000.FOLLOW_11); 
+            	            otherlv_19=(Token)match(input,27,FollowSets000.FOLLOW_12); 
 
-            	            					doneLeaf(otherlv_17);
+            	            					doneLeaf(otherlv_19);
             	            				
 
             	            }
@@ -1903,7 +1955,7 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
             	    break;
 
             	default :
-            	    break loop9;
+            	    break loop10;
                 }
             } while (true);
 
@@ -1926,7 +1978,7 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleDatatype"
-    // PsiInternalRegionAccessTestLanguage.g:713:1: entryRuleDatatype returns [Boolean current=false] : iv_ruleDatatype= ruleDatatype EOF ;
+    // PsiInternalRegionAccessTestLanguage.g:736:1: entryRuleDatatype returns [Boolean current=false] : iv_ruleDatatype= ruleDatatype EOF ;
     public final Boolean entryRuleDatatype() throws RecognitionException {
         Boolean current = false;
 
@@ -1934,8 +1986,8 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
         try {
-            // PsiInternalRegionAccessTestLanguage.g:713:50: (iv_ruleDatatype= ruleDatatype EOF )
-            // PsiInternalRegionAccessTestLanguage.g:714:2: iv_ruleDatatype= ruleDatatype EOF
+            // PsiInternalRegionAccessTestLanguage.g:736:50: (iv_ruleDatatype= ruleDatatype EOF )
+            // PsiInternalRegionAccessTestLanguage.g:737:2: iv_ruleDatatype= ruleDatatype EOF
             {
              markComposite(elementTypeProvider.getDatatypeElementType()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1961,7 +2013,7 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleDatatype"
-    // PsiInternalRegionAccessTestLanguage.g:720:1: ruleDatatype returns [Boolean current=false] : (kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID ) ) ;
+    // PsiInternalRegionAccessTestLanguage.g:743:1: ruleDatatype returns [Boolean current=false] : (kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID ) ) ;
     public final Boolean ruleDatatype() throws RecognitionException {
         Boolean current = false;
 
@@ -1969,38 +2021,38 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
         Token this_ID_2=null;
 
         try {
-            // PsiInternalRegionAccessTestLanguage.g:721:1: ( (kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID ) ) )
-            // PsiInternalRegionAccessTestLanguage.g:722:2: (kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID ) )
+            // PsiInternalRegionAccessTestLanguage.g:744:1: ( (kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID ) ) )
+            // PsiInternalRegionAccessTestLanguage.g:745:2: (kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID ) )
             {
-            // PsiInternalRegionAccessTestLanguage.g:722:2: (kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID ) )
-            // PsiInternalRegionAccessTestLanguage.g:723:3: kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID )
+            // PsiInternalRegionAccessTestLanguage.g:745:2: (kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID ) )
+            // PsiInternalRegionAccessTestLanguage.g:746:3: kw= 'datatype' ( ruleDatatype | this_ID_2= RULE_ID )
             {
 
             			markLeaf(elementTypeProvider.getDatatype_DatatypeKeyword_0ElementType());
             		
-            kw=(Token)match(input,27,FollowSets000.FOLLOW_10); 
+            kw=(Token)match(input,28,FollowSets000.FOLLOW_10); 
 
             			doneLeaf(kw);
             		
-            // PsiInternalRegionAccessTestLanguage.g:730:3: ( ruleDatatype | this_ID_2= RULE_ID )
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            // PsiInternalRegionAccessTestLanguage.g:753:3: ( ruleDatatype | this_ID_2= RULE_ID )
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0==27) ) {
-                alt10=1;
+            if ( (LA11_0==28) ) {
+                alt11=1;
             }
-            else if ( (LA10_0==RULE_ID) ) {
-                alt10=2;
+            else if ( (LA11_0==RULE_ID) ) {
+                alt11=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 10, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
             }
-            switch (alt10) {
+            switch (alt11) {
                 case 1 :
-                    // PsiInternalRegionAccessTestLanguage.g:731:4: ruleDatatype
+                    // PsiInternalRegionAccessTestLanguage.g:754:4: ruleDatatype
                     {
 
                     				markComposite(elementTypeProvider.getDatatype_DatatypeParserRuleCall_1_0ElementType());
@@ -2017,7 +2069,7 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalRegionAccessTestLanguage.g:739:4: this_ID_2= RULE_ID
+                    // PsiInternalRegionAccessTestLanguage.g:762:4: this_ID_2= RULE_ID
                     {
 
                     				markLeaf(elementTypeProvider.getDatatype_IDTerminalRuleCall_1_1ElementType());
@@ -2050,8 +2102,181 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
     // $ANTLR end "ruleDatatype"
 
 
+    // $ANTLR start "ruleFragment"
+    // PsiInternalRegionAccessTestLanguage.g:775:1: ruleFragment[Boolean in_current] returns [Boolean current=in_current] : ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) ) ;
+    public final Boolean ruleFragment(Boolean in_current) throws RecognitionException {
+        Boolean current = in_current;
+
+        Token lv_fragName_0_0=null;
+        Token otherlv_1=null;
+        Token otherlv_3=null;
+        Boolean lv_mixed_2_0 = null;
+
+        Boolean this_Fragment_4 = null;
+
+
+        try {
+            // PsiInternalRegionAccessTestLanguage.g:776:1: ( ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) ) )
+            // PsiInternalRegionAccessTestLanguage.g:777:2: ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) )
+            {
+            // PsiInternalRegionAccessTestLanguage.g:777:2: ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) )
+            int alt12=3;
+            switch ( input.LA(1) ) {
+            case RULE_ID:
+                {
+                alt12=1;
+                }
+                break;
+            case 24:
+                {
+                alt12=2;
+                }
+                break;
+            case 29:
+                {
+                alt12=3;
+                }
+                break;
+            default:
+                NoViableAltException nvae =
+                    new NoViableAltException("", 12, 0, input);
+
+                throw nvae;
+            }
+
+            switch (alt12) {
+                case 1 :
+                    // PsiInternalRegionAccessTestLanguage.g:778:3: ( (lv_fragName_0_0= RULE_ID ) )
+                    {
+                    // PsiInternalRegionAccessTestLanguage.g:778:3: ( (lv_fragName_0_0= RULE_ID ) )
+                    // PsiInternalRegionAccessTestLanguage.g:779:4: (lv_fragName_0_0= RULE_ID )
+                    {
+                    // PsiInternalRegionAccessTestLanguage.g:779:4: (lv_fragName_0_0= RULE_ID )
+                    // PsiInternalRegionAccessTestLanguage.g:780:5: lv_fragName_0_0= RULE_ID
+                    {
+
+                    					markLeaf(elementTypeProvider.getFragment_FragNameIDTerminalRuleCall_0_0ElementType());
+                    				
+                    lv_fragName_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
+
+                    					if(!current) {
+                    						associateWithSemanticElement();
+                    						current = true;
+                    					}
+                    				
+
+                    					doneLeaf(lv_fragName_0_0);
+                    				
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // PsiInternalRegionAccessTestLanguage.g:796:3: (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) )
+                    {
+                    // PsiInternalRegionAccessTestLanguage.g:796:3: (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) )
+                    // PsiInternalRegionAccessTestLanguage.g:797:4: otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) )
+                    {
+
+                    				markLeaf(elementTypeProvider.getFragment_ChildKeyword_1_0ElementType());
+                    			
+                    otherlv_1=(Token)match(input,24,FollowSets000.FOLLOW_4); 
+
+                    				doneLeaf(otherlv_1);
+                    			
+                    // PsiInternalRegionAccessTestLanguage.g:804:4: ( (lv_mixed_2_0= ruleMixed ) )
+                    // PsiInternalRegionAccessTestLanguage.g:805:5: (lv_mixed_2_0= ruleMixed )
+                    {
+                    // PsiInternalRegionAccessTestLanguage.g:805:5: (lv_mixed_2_0= ruleMixed )
+                    // PsiInternalRegionAccessTestLanguage.g:806:6: lv_mixed_2_0= ruleMixed
+                    {
+
+                    						markComposite(elementTypeProvider.getFragment_MixedMixedParserRuleCall_1_1_0ElementType());
+                    					
+                    pushFollow(FollowSets000.FOLLOW_2);
+                    lv_mixed_2_0=ruleMixed();
+
+                    state._fsp--;
+
+
+                    						doneComposite();
+                    						if(!current) {
+                    							associateWithSemanticElement();
+                    							current = true;
+                    						}
+                    					
+
+                    }
+
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // PsiInternalRegionAccessTestLanguage.g:821:3: (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] )
+                    {
+                    // PsiInternalRegionAccessTestLanguage.g:821:3: (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] )
+                    // PsiInternalRegionAccessTestLanguage.g:822:4: otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current]
+                    {
+
+                    				markLeaf(elementTypeProvider.getFragment_RecursionKeyword_2_0ElementType());
+                    			
+                    otherlv_3=(Token)match(input,29,FollowSets000.FOLLOW_11); 
+
+                    				doneLeaf(otherlv_3);
+                    			
+
+                    				if (!current) {
+                    					associateWithSemanticElement();
+                    					current = true;
+                    				}
+                    				markComposite(elementTypeProvider.getFragment_FragmentParserRuleCall_2_1ElementType());
+                    			
+                    pushFollow(FollowSets000.FOLLOW_2);
+                    this_Fragment_4=ruleFragment(current);
+
+                    state._fsp--;
+
+
+                    				current = this_Fragment_4;
+                    				doneComposite();
+                    			
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleFragment"
+
+
     // $ANTLR start "ruleEnum"
-    // PsiInternalRegionAccessTestLanguage.g:751:1: ruleEnum returns [Boolean current=false] : ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) ) ;
+    // PsiInternalRegionAccessTestLanguage.g:846:1: ruleEnum returns [Boolean current=false] : ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) ) ;
     public final Boolean ruleEnum() throws RecognitionException {
         Boolean current = false;
 
@@ -2059,36 +2284,36 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
         Token enumLiteral_1=null;
 
         try {
-            // PsiInternalRegionAccessTestLanguage.g:752:1: ( ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) ) )
-            // PsiInternalRegionAccessTestLanguage.g:753:2: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) )
+            // PsiInternalRegionAccessTestLanguage.g:847:1: ( ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) ) )
+            // PsiInternalRegionAccessTestLanguage.g:848:2: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) )
             {
-            // PsiInternalRegionAccessTestLanguage.g:753:2: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) )
-            int alt11=2;
-            int LA11_0 = input.LA(1);
+            // PsiInternalRegionAccessTestLanguage.g:848:2: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) )
+            int alt13=2;
+            int LA13_0 = input.LA(1);
 
-            if ( (LA11_0==28) ) {
-                alt11=1;
+            if ( (LA13_0==30) ) {
+                alt13=1;
             }
-            else if ( (LA11_0==29) ) {
-                alt11=2;
+            else if ( (LA13_0==31) ) {
+                alt13=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 11, 0, input);
+                    new NoViableAltException("", 13, 0, input);
 
                 throw nvae;
             }
-            switch (alt11) {
+            switch (alt13) {
                 case 1 :
-                    // PsiInternalRegionAccessTestLanguage.g:754:3: (enumLiteral_0= 'lit1' )
+                    // PsiInternalRegionAccessTestLanguage.g:849:3: (enumLiteral_0= 'lit1' )
                     {
-                    // PsiInternalRegionAccessTestLanguage.g:754:3: (enumLiteral_0= 'lit1' )
-                    // PsiInternalRegionAccessTestLanguage.g:755:4: enumLiteral_0= 'lit1'
+                    // PsiInternalRegionAccessTestLanguage.g:849:3: (enumLiteral_0= 'lit1' )
+                    // PsiInternalRegionAccessTestLanguage.g:850:4: enumLiteral_0= 'lit1'
                     {
 
                     				markLeaf(elementTypeProvider.getEnum_Lit1EnumLiteralDeclaration_0ElementType());
                     			
-                    enumLiteral_0=(Token)match(input,28,FollowSets000.FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,30,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(enumLiteral_0);
                     			
@@ -2099,15 +2324,15 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
                     }
                     break;
                 case 2 :
-                    // PsiInternalRegionAccessTestLanguage.g:764:3: (enumLiteral_1= 'lit2' )
+                    // PsiInternalRegionAccessTestLanguage.g:859:3: (enumLiteral_1= 'lit2' )
                     {
-                    // PsiInternalRegionAccessTestLanguage.g:764:3: (enumLiteral_1= 'lit2' )
-                    // PsiInternalRegionAccessTestLanguage.g:765:4: enumLiteral_1= 'lit2'
+                    // PsiInternalRegionAccessTestLanguage.g:859:3: (enumLiteral_1= 'lit2' )
+                    // PsiInternalRegionAccessTestLanguage.g:860:4: enumLiteral_1= 'lit2'
                     {
 
                     				markLeaf(elementTypeProvider.getEnum_Lit2EnumLiteralDeclaration_1ElementType());
                     			
-                    enumLiteral_1=(Token)match(input,29,FollowSets000.FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,31,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(enumLiteral_1);
                     			
@@ -2149,11 +2374,12 @@ public class PsiInternalRegionAccessTestLanguageParser extends AbstractPsiAntlrP
         public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000040000L});
         public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000080002L});
         public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000200000L});
-        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000039F00010L});
-        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000008000010L});
-        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000002000002L});
-        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000002100002L});
-        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x00000000D3F00010L});
+        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000010000010L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000021000010L});
+        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000004000002L});
+        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000004100002L});
+        public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000008000000L});
     }
 
 

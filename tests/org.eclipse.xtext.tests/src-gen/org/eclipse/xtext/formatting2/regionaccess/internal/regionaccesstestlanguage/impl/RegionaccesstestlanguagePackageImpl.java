@@ -394,6 +394,16 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getMixed_FragName()
+  {
+    return (EAttribute)mixedEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAdd()
   {
     return addEClass;
@@ -546,6 +556,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     createEAttribute(mixedEClass, MIXED__DATATYPE);
     createEReference(mixedEClass, MIXED__REF);
     createEAttribute(mixedEClass, MIXED__LIT);
+    createEAttribute(mixedEClass, MIXED__FRAG_NAME);
 
     addEClass = createEClass(ADD);
     createEReference(addEClass, ADD__LEFT);
@@ -637,6 +648,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     initEAttribute(getMixed_Datatype(), theEcorePackage.getEString(), "datatype", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMixed_Ref(), this.getMixed(), null, "ref", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMixed_Lit(), this.getEnum(), "lit", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMixed_FragName(), theEcorePackage.getEString(), "fragName", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(addEClass, Add.class, "Add", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd_Left(), this.getExpression(), null, "left", null, 0, 1, Add.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

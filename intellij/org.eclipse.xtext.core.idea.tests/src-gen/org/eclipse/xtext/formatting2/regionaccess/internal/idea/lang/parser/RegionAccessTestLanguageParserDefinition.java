@@ -114,7 +114,10 @@ public class RegionAccessTestLanguageParserDefinition extends AbstractXtextParse
 			if (elementType == elementTypeProvider.getMixedElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getMixed_ActionAction_2_0ElementType()) {
+			if (elementType == elementTypeProvider.getMixed_ActionAction_2_0_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getMixed_FragmentParserRuleCall_2_0_1_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMixed_MixedParserRuleCall_2_1ElementType()) {
@@ -127,6 +130,15 @@ public class RegionAccessTestLanguageParserDefinition extends AbstractXtextParse
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getMixed_BodyMixedParserRuleCall_4_2_0_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getFragmentElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getFragment_MixedMixedParserRuleCall_1_1_0ElementType()) {
+				return new PsiNamedEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getFragment_FragmentParserRuleCall_2_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			throw new IllegalStateException("Unexpected element type: " + elementType);

@@ -26,6 +26,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
  *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.MixedImpl#getDatatype <em>Datatype</em>}</li>
  *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.MixedImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.MixedImpl#getLit <em>Lit</em>}</li>
+ *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.MixedImpl#getFragName <em>Frag Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -111,6 +112,26 @@ public class MixedImpl extends RootImpl implements Mixed
    * @ordered
    */
   protected org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum lit = LIT_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getFragName() <em>Frag Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFragName()
+   * @generated
+   * @ordered
+   */
+  protected static final String FRAG_NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getFragName() <em>Frag Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFragName()
+   * @generated
+   * @ordered
+   */
+  protected String fragName = FRAG_NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -298,6 +319,29 @@ public class MixedImpl extends RootImpl implements Mixed
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getFragName()
+  {
+    return fragName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setFragName(String newFragName)
+  {
+    String oldFragName = fragName;
+    fragName = newFragName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RegionaccesstestlanguagePackage.MIXED__FRAG_NAME, oldFragName, fragName));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -330,6 +374,8 @@ public class MixedImpl extends RootImpl implements Mixed
         return basicGetRef();
       case RegionaccesstestlanguagePackage.MIXED__LIT:
         return getLit();
+      case RegionaccesstestlanguagePackage.MIXED__FRAG_NAME:
+        return getFragName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -358,6 +404,9 @@ public class MixedImpl extends RootImpl implements Mixed
         return;
       case RegionaccesstestlanguagePackage.MIXED__LIT:
         setLit((org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum)newValue);
+        return;
+      case RegionaccesstestlanguagePackage.MIXED__FRAG_NAME:
+        setFragName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -388,6 +437,9 @@ public class MixedImpl extends RootImpl implements Mixed
       case RegionaccesstestlanguagePackage.MIXED__LIT:
         setLit(LIT_EDEFAULT);
         return;
+      case RegionaccesstestlanguagePackage.MIXED__FRAG_NAME:
+        setFragName(FRAG_NAME_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -412,6 +464,8 @@ public class MixedImpl extends RootImpl implements Mixed
         return ref != null;
       case RegionaccesstestlanguagePackage.MIXED__LIT:
         return lit != LIT_EDEFAULT;
+      case RegionaccesstestlanguagePackage.MIXED__FRAG_NAME:
+        return FRAG_NAME_EDEFAULT == null ? fragName != null : !FRAG_NAME_EDEFAULT.equals(fragName);
     }
     return super.eIsSet(featureID);
   }
@@ -433,6 +487,8 @@ public class MixedImpl extends RootImpl implements Mixed
     result.append(datatype);
     result.append(", lit: ");
     result.append(lit);
+    result.append(", fragName: ");
+    result.append(fragName);
     result.append(')');
     return result.toString();
   }
