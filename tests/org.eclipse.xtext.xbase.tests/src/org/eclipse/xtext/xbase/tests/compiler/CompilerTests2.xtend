@@ -336,11 +336,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			  String _switchResult = null;
 			  String _name = it.getName();
 			  boolean _matched = false;
-			  if (!_matched) {
-			    if (_name instanceof CharSequence) {
-			      _matched=true;
-			      _switchResult = it.getName();
-			    }
+			  if (_name instanceof CharSequence) {
+			    _matched=true;
+			    _switchResult = it.getName();
 			  }
 			  if (!_matched) {
 			    _switchResult = "noname";
@@ -522,12 +520,10 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			Object _object = new Object();
 			final Object x = _object;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (x instanceof String) {
-			    if (com.google.common.base.Objects.equal(x, "a")) {
-			      _matched=true;
-			      _switchResult = "blabla";
-			    }
+			if (x instanceof String) {
+			  if (com.google.common.base.Objects.equal(x, "a")) {
+			    _matched=true;
+			    _switchResult = "blabla";
 			  }
 			}
 			if (!_matched) {
@@ -1311,11 +1307,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			Object _object = new Object();
 			final Object bar = _object;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (bar instanceof Byte) {
-			    _matched=true;
-			    _switchResult = ((char) ((Byte) bar).byteValue());
-			  }
+			if (bar instanceof Byte) {
+			  _matched=true;
+			  _switchResult = ((char) ((Byte) bar).byteValue());
 			}
 			return _switchResult;
 		''')
@@ -1350,11 +1344,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Number element = null;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (element instanceof Double) {
-			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(element));
-			  }
+			if (element instanceof Double) {
+			  _matched=true;
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(element));
 			}
 		''')
 	}
@@ -1388,11 +1380,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Number element = null;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (element instanceof Double) {
-			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(element));
-			  }
+			if (element instanceof Double) {
+			  _matched=true;
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(element));
 			}
 		''')
 	}
@@ -1426,11 +1416,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Object element = null;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (element instanceof Double) {
-			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(((Number)element)));
-			  }
+			if (element instanceof Double) {
+			  _matched=true;
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(((Number)element)));
 			}
 		''')
 	}
@@ -1464,11 +1452,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Object element = null;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (element instanceof Double) {
-			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(((Number)element)));
-			  }
+			if (element instanceof Double) {
+			  _matched=true;
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(((Number)element)));
 			}
 		''')
 	}
