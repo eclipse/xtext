@@ -42,7 +42,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -477,17 +476,9 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
         return ByteStreams.toByteArray(jarin);
       } finally {
         Collection<InputStream> _values = listOfContents.values();
-        final Procedure1<InputStream> _function_2 = new Procedure1<InputStream>() {
-          @Override
-          public void apply(final InputStream it) {
-            try {
-              it.close();
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
-          }
-        };
-        IterableExtensions.<InputStream>forEach(_values, _function_2);
+        for (final InputStream it : _values) {
+          it.close();
+        }
         project.delete(true, true, null);
       }
     } catch (Throwable _e) {

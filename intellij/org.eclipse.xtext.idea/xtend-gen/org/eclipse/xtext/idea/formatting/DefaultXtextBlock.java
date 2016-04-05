@@ -41,7 +41,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -187,13 +186,9 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
     Block _parentBlock = _head.getParentBlock();
     groupBlock.setParentBlock(_parentBlock);
     Iterable<ModifiableBlock> _filter_1 = Iterables.<ModifiableBlock>filter(children, ModifiableBlock.class);
-    final Procedure1<ModifiableBlock> _function = new Procedure1<ModifiableBlock>() {
-      @Override
-      public void apply(final ModifiableBlock child) {
-        child.setParentBlock(groupBlock);
-      }
-    };
-    IterableExtensions.<ModifiableBlock>forEach(_filter_1, _function);
+    for (final ModifiableBlock child : _filter_1) {
+      child.setParentBlock(groupBlock);
+    }
     stack.addLast(groupBlock);
   }
   

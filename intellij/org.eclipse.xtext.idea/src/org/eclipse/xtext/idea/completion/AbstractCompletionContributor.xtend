@@ -209,7 +209,11 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 		if (delegate == null)
 			return;
 		val contexts = delegate.create(parameters.text, parameters.selection, parameters.offset, parameters.resource)
-		contexts.forEach[c|c.firstSetGrammarElements.forEach[e|createProposal(e, c, parameters, result)]]
+		for (c : contexts) {
+			for (e : c.firstSetGrammarElements) {
+				createProposal(e, c, parameters, result)
+			}
+		}
 	}
 	
 	protected def supportParserBasedProposals(TokenSet tokenSet) {

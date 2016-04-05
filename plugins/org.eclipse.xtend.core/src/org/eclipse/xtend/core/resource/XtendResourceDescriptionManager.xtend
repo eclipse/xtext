@@ -149,9 +149,9 @@ class XtendResourceDescription extends DefaultResourceDescription {
 				JvmGenericType : {
 					registerAllTypes(type.declaringType, acceptor)
 					registerAllTypes(type?.extendedClass?.type, acceptor)
-					type.extendedInterfaces.forEach[
+					for (it : type.extendedInterfaces) {
 						registerAllTypes(it?.type, acceptor)
-					]
+					}
 				}
 			}
 		}

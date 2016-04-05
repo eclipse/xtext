@@ -39,7 +39,9 @@ class MyXtextServlet extends XtextServlet {
 	}
 	
 	override destroy() {
-		executorServices.forEach[shutdown()]
+		for (it : executorServices) {
+			shutdown()
+		}
 		executorServices.clear()
 		super.destroy()
 	}

@@ -32,8 +32,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -71,15 +69,11 @@ public class EmfModelsTest {
     String _plus_1 = (_plus + "\'");
     EmfModelsTest.LOGGER.info(_plus_1);
     EList<EClassifier> _eClassifiers = ePack.getEClassifiers();
-    final Procedure1<EClassifier> _function = new Procedure1<EClassifier>() {
-      @Override
-      public void apply(final EClassifier it) {
-        if ((it instanceof EClass)) {
-          EmfModelsTest.this.check(((EClass)it));
-        }
+    for (final EClassifier it : _eClassifiers) {
+      if ((it instanceof EClass)) {
+        this.check(((EClass)it));
       }
-    };
-    IterableExtensions.<EClassifier>forEach(_eClassifiers, _function);
+    }
     String _name_1 = ePack.getName();
     String _plus_2 = ("EPackage \'" + _name_1);
     String _plus_3 = (_plus_2 + "\' passed.");

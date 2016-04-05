@@ -31,10 +31,8 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -75,9 +73,8 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
         public void addPosition(final int offset, final int length, final String[] styles) {
           ProgressIndicatorProvider.checkCanceled();
           if ((length > 0)) {
-            final Procedure1<String> _function = new Procedure1<String>() {
-              @Override
-              public void apply(final String it) {
+            for (final String it : styles) {
+              {
                 HighlightInfoType _highlightInfoType = SemanticHighlightVisitor.this._ideaHighlightingAttributesProvider.getHighlightInfoType(it);
                 HighlightInfo.Builder _newHighlightInfo = HighlightInfo.newHighlightInfo(_highlightInfoType);
                 HighlightInfo.Builder _range = _newHighlightInfo.range(offset, (offset + length));
@@ -85,8 +82,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
                 final HighlightInfo info = _description.create();
                 holder.add(info);
               }
-            };
-            IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(styles)), _function);
+            }
           }
         }
       };

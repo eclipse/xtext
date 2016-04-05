@@ -366,27 +366,39 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def dispatch void setValue(JvmDoubleAnnotationValue it, float[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as double]
+		for (v : value) {
+			values += v as double
+		}
 	}
 	
 	protected def dispatch void setValue(JvmDoubleAnnotationValue it, long[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as double]
+		for (v : value) {
+			values += v as double
+		}
 	}
 	
 	protected def dispatch void setValue(JvmDoubleAnnotationValue it, int[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as double]
+		for (v : value) {
+			values += v as double
+		}
 	}
 	
 	protected def dispatch void setValue(JvmDoubleAnnotationValue it, short[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as double]
+		for (v : value) {
+			values += v as double
+		}
 	}
 	
 	protected def dispatch void setValue(JvmDoubleAnnotationValue it, byte[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as double]
+		for (v : value) {
+			values += v as double
+		}
 	}
 	
 	protected def dispatch void setValue(JvmDoubleAnnotationValue it, char[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as double]
+		for (v : value) {
+			values += v as double
+		}
 	}
 	
 	protected def dispatch void setValue(JvmFloatAnnotationValue it, float[] value, String componentType, boolean mustBeArray) {
@@ -394,23 +406,33 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def dispatch void setValue(JvmFloatAnnotationValue it, long[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as float]
+		for (v : value) {
+			values += v as float
+		}
 	}
 	
 	protected def dispatch void setValue(JvmFloatAnnotationValue it, int[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as float]
+		for (v : value) {
+			values += v as float
+		}
 	}
 	
 	protected def dispatch void setValue(JvmFloatAnnotationValue it, short[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as float]
+		for (v : value) {
+			values += v as float
+		}
 	}
 	
 	protected def dispatch void setValue(JvmFloatAnnotationValue it, byte[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as float]
+		for (v : value) {
+			values += v as float
+		}
 	}
 	
 	protected def dispatch void setValue(JvmFloatAnnotationValue it, char[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as float]
+		for (v : value) {
+			values += v as float
+		}
 	}
 	
 	protected def dispatch void setValue(JvmLongAnnotationValue it, long[] value, String componentType, boolean mustBeArray) {
@@ -418,19 +440,27 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def dispatch void setValue(JvmLongAnnotationValue it, int[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as long]
+		for (v : value) {
+			values += v as long
+		}
 	}
 	
 	protected def dispatch void setValue(JvmLongAnnotationValue it, short[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as long]
+		for (v : value) {
+			values += v as long
+		}
 	}
 	
 	protected def dispatch void setValue(JvmLongAnnotationValue it, byte[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as long]
+		for (v : value) {
+			values += v as long
+		}
 	}
 	
 	protected def dispatch void setValue(JvmLongAnnotationValue it, char[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as long]
+		for (v : value) {
+			values += v as long
+		}
 	}
 	
 	protected def dispatch void setValue(JvmIntAnnotationValue it, int[] value, String componentType, boolean mustBeArray) {
@@ -438,15 +468,21 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def dispatch void setValue(JvmIntAnnotationValue it, short[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as int]
+		for (v : value) {
+			values += v as int
+		}
 	}
 	
 	protected def dispatch void setValue(JvmIntAnnotationValue it, byte[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as int]
+		for (v : value) {
+			values += v as int
+		}
 	}
 	
 	protected def dispatch void setValue(JvmIntAnnotationValue it, char[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as int]
+		for (v : value) {
+			values += v as int
+		}
 	}
 	
 	protected def dispatch void setValue(JvmShortAnnotationValue it, short[] value, String componentType, boolean mustBeArray) {
@@ -454,7 +490,9 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def dispatch void setValue(JvmShortAnnotationValue it, byte[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as short]
+		for (v : value) {
+			values += v as short
+		}
 	}
 	
 	protected def dispatch void setValue(JvmCharAnnotationValue it, char[] value, String componentType, boolean mustBeArray) {
@@ -462,7 +500,9 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def dispatch void setValue(JvmCharAnnotationValue it, byte[] value, String componentType, boolean mustBeArray) {
-		value.forEach[v | values += v as char]
+		for (v : value) {
+			values += v as char
+		}
 	}
 	
 	protected def dispatch void setValue(JvmByteAnnotationValue it, byte[] value, String componentType, boolean mustBeArray) {

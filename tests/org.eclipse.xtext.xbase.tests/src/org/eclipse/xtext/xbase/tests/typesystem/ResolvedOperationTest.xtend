@@ -158,19 +158,19 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	}
 	
 	def protected withDetails(IResolvedOperation operation, IOverrideCheckResult$OverrideCheckDetails... details) {
-		operation.overriddenAndImplementedMethodCandidates.forEach [
+		for (it : operation.overriddenAndImplementedMethodCandidates) {
 			val checkResult = operation.isOverridingOrImplementing(it)
 			val actual = checkResult.details
 			assertTrue('''Failed: «actual».containsAll(«details.toList»)''', actual.containsAll(details))
-		]
+		}
 	}
 	
 	def protected withDetail(IResolvedOperation operation, IOverrideCheckResult$OverrideCheckDetails detail) {
-		operation.overriddenAndImplementedMethodCandidates.forEach [
+		for (it : operation.overriddenAndImplementedMethodCandidates) {
 			val checkResult = operation.isOverridingOrImplementing(it)
 			val actual = checkResult.details
 			assertTrue('''Failed: «actual».contains(«detail»)''', actual.contains(detail))
-		]
+		}
 	}
 	
 	@Test
@@ -380,9 +380,9 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	def void testVarArgsMismatch_01() {
 		val operation = '(null as testdata.MethodOverrides4).withVarArgs(null)'.toOperation
 		operation.declaration.visibility = JvmVisibility::PROTECTED
-		operation.overriddenAndImplementedMethodCandidates.forEach [
+		for (it : operation.overriddenAndImplementedMethodCandidates) {
 			visibility = JvmVisibility::PUBLIC
-		]
+		}
 		operation.has(1).candidatesAndOverrides(1).withDetails(REDUCED_VISIBILITY, VAR_ARG_MISMATCH)
 	}
 	
@@ -390,9 +390,9 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	def void testVarArgsMismatch_02() {
 		val operation = '(null as testdata.MethodOverrides4).withArray(null)'.toOperation
 		operation.declaration.visibility = JvmVisibility::PROTECTED
-		operation.overriddenAndImplementedMethodCandidates.forEach [
+		for (it : operation.overriddenAndImplementedMethodCandidates) {
 			visibility = JvmVisibility::DEFAULT
-		]
+		}
 		operation.has(1).candidatesAndOverrides(1).withDetails(VAR_ARG_MISMATCH)
 	}
 	
@@ -403,10 +403,10 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 			visibility = JvmVisibility::PUBLIC
 			setStatic(true)
 		]
-		operation.overriddenAndImplementedMethodCandidates.forEach [
+		for (it : operation.overriddenAndImplementedMethodCandidates) {
 			visibility = JvmVisibility::PROTECTED
 			setStatic(true)
-		]
+		}
 		operation.has(1).candidatesAndOverrides(1).withExactDetails(SHADOWED, VAR_ARG_MISMATCH)
 	}
 	
@@ -417,9 +417,9 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 			visibility = JvmVisibility::PROTECTED
 			setStatic(true)
 		]
-		operation.overriddenAndImplementedMethodCandidates.forEach [
+		for (it : operation.overriddenAndImplementedMethodCandidates) {
 			visibility = JvmVisibility::PROTECTED
-		]
+		}
 		operation.has(1).candidatesAndOverrides(0).withDetails(STATIC_MISMATCH, VAR_ARG_MISMATCH)
 	}
 	
@@ -429,9 +429,9 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 		operation.declaration => [
 			visibility = JvmVisibility::PROTECTED
 		]
-		operation.overriddenAndImplementedMethodCandidates.forEach [
+		for (it : operation.overriddenAndImplementedMethodCandidates) {
 			visibility = JvmVisibility::PROTECTED
-		]
+		}
 		operation.has(1).candidatesAndOverrides(0).withExactDetails(PARAMETER_TYPE_MISMATCH, SAME_ERASURE)
 	}
 	
@@ -441,9 +441,9 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 		operation.declaration => [
 			visibility = JvmVisibility::PROTECTED
 		]
-		operation.overriddenAndImplementedMethodCandidates.forEach [
+		for (it : operation.overriddenAndImplementedMethodCandidates) {
 			visibility = JvmVisibility::PROTECTED
-		]
+		}
 		operation.has(1).candidatesAndOverrides(0).withExactDetails(TYPE_PARAMETER_MISMATCH, SAME_ERASURE)
 	}
 	
@@ -453,9 +453,9 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 		operation.declaration => [
 			visibility = JvmVisibility::PROTECTED
 		]
-		operation.overriddenAndImplementedMethodCandidates.forEach [
+		for (it : operation.overriddenAndImplementedMethodCandidates) {
 			visibility = JvmVisibility::PROTECTED
-		]
+		}
 		operation.has(1).candidatesAndOverrides(0).withExactDetails(TYPE_PARAMETER_MISMATCH, SAME_ERASURE)
 	}
 }

@@ -94,7 +94,9 @@ class XtextWizardStep extends ModuleWizardStep {
 		config.intellijProject.enabled = idea.selected
 		// config.uiProject.enabled = eclipse.selected
 		config.webProject.enabled = web.selected
-		config.enabledProjects.filter(TestedProjectDescriptor).forEach[testProject.enabled = test.selected]
+		for (it : config.enabledProjects.filter(TestedProjectDescriptor)) {
+			testProject.enabled = test.selected
+		}
 
 		config.preferredBuildSystem = buildSystem.selectedItem as BuildSystem
 		config.sourceLayout = layout.selectedItem as SourceLayout

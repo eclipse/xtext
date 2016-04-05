@@ -733,19 +733,15 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     ParserRule _methodModifierRule = this._xtendGrammarAccess.getMethodModifierRule();
     ParserRule _fieldModifierRule = this._xtendGrammarAccess.getFieldModifierRule();
     List<ISemanticRegion> _ruleCallsTo = _regionFor.ruleCallsTo(_commonModifierRule, _methodModifierRule, _fieldModifierRule);
-    final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
-      @Override
-      public void apply(final ISemanticRegion it) {
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        document.append(it, _function);
-      }
-    };
-    IterableExtensions.<ISemanticRegion>forEach(_ruleCallsTo, _function);
+    for (final ISemanticRegion it : _ruleCallsTo) {
+      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.oneSpace();
+        }
+      };
+      document.append(it, _function);
+    }
   }
   
   @Override

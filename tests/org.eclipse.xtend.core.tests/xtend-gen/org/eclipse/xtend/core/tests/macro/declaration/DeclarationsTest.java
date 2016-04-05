@@ -386,13 +386,9 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         String _qualifiedName = c.getQualifiedName();
         final MutableClassDeclaration mutable = _typeLookup.findClass(_qualifiedName);
         Iterable<? extends MutableMemberDeclaration> _declaredMembers = mutable.getDeclaredMembers();
-        final Procedure1<MutableMemberDeclaration> _function = new Procedure1<MutableMemberDeclaration>() {
-          @Override
-          public void apply(final MutableMemberDeclaration it) {
-            it.remove();
-          }
-        };
-        IterableExtensions.forEach(_declaredMembers, _function);
+        for (final MutableMemberDeclaration it_1 : _declaredMembers) {
+          it_1.remove();
+        }
         Iterable<? extends MutableMemberDeclaration> _declaredMembers_1 = mutable.getDeclaredMembers();
         boolean _isEmpty = IterableExtensions.isEmpty(_declaredMembers_1);
         Assert.assertTrue(_isEmpty);

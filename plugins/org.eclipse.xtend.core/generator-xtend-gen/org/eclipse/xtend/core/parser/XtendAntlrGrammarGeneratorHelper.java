@@ -25,8 +25,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
@@ -92,13 +90,9 @@ public class XtendAntlrGrammarGeneratorHelper {
   
   protected void _collectTokens(final EObject it, final Set<String> tokens) {
     EList<EObject> _eContents = it.eContents();
-    final Procedure1<EObject> _function = new Procedure1<EObject>() {
-      @Override
-      public void apply(final EObject it) {
-        XtendAntlrGrammarGeneratorHelper.this.collectTokens(it, tokens);
-      }
-    };
-    IterableExtensions.<EObject>forEach(_eContents, _function);
+    for (final EObject it_1 : _eContents) {
+      this.collectTokens(it_1, tokens);
+    }
   }
   
   public void collectTokens(final EObject it, final Set<String> tokens) {

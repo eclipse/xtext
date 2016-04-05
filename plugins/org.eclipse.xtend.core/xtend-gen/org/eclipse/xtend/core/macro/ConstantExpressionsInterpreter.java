@@ -78,7 +78,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.util.PendingLinkingCandidateResolver;
 import org.eclipse.xtext.xbase.typesystem.util.TypeLiteralLinkingCandidateResolver;
@@ -528,14 +527,10 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         Map<String, JvmIdentifiableElement> _visibleFeatures = ctx.getVisibleFeatures();
         final HashMap<String, JvmIdentifiableElement> copy = new HashMap<String, JvmIdentifiableElement>(_visibleFeatures);
         EList<JvmEnumerationLiteral> _literals = enumType.getLiterals();
-        final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
-          @Override
-          public void apply(final JvmEnumerationLiteral it) {
-            String _simpleName = it.getSimpleName();
-            copy.put(_simpleName, it);
-          }
-        };
-        IterableExtensions.<JvmEnumerationLiteral>forEach(_literals, _function);
+        for (final JvmEnumerationLiteral it_2 : _literals) {
+          String _simpleName = it_2.getSimpleName();
+          copy.put(_simpleName, it_2);
+        }
         _xblockexpression = copy;
       }
       _xifexpression = _xblockexpression;

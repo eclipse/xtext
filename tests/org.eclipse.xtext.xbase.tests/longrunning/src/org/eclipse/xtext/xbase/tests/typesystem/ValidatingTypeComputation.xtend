@@ -92,10 +92,10 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	
 	override protected getHints(Object handle) {
 		val result = super.getHints(handle)
-		result.forEach[ 
+		for (it : result) { 
 			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
 				throw new IllegalArgumentException("reference is not owned by this resolved types")
-		]
+		}
 		return result
 	}
 	
@@ -109,10 +109,10 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	
 	override getAllHints(Object handle) {
 		val result = super.getAllHints(handle)
-		result.forEach [
+		for (it : result) {
 			if (typeReference != null &&!typeReference.isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("hint is not owned by this resolved types")
-		]
+		}
 		return result
 	}
 	
@@ -145,10 +145,10 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	}
 	
 	override getMergedType(List<LightweightTypeReference> types) {
-		types.forEach [
+		for (it : types) {
 			if (!isOwnedBy(getOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
-		]
+		}
 		val result = super.getMergedType(types)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -156,10 +156,10 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	}
 	
 	override mergeTypeData(XExpression expression, List<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
-		allValues.forEach [
+		for (it : allValues) {
 			if (!isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
-		]
+		}
 		val result = super.mergeTypeData(expression, allValues, returnType, nullIfEmpty)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -182,10 +182,10 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	
 	override doGetTypeData(XExpression expression) {
 		val result = super.doGetTypeData(expression)
-		result?.forEach [
+		for (it : result) {
 			if (!isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
-		]
+		}
 		return result
 	}
 
@@ -229,10 +229,10 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 	
 	override protected getHints(Object handle) {
 		val result = super.getHints(handle)
-		result.forEach[ 
+		for (it : result) {
 			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
 				throw new IllegalArgumentException("reference is not owned by this resolved types")
-		]
+		}
 		return result
 	}
 	
@@ -246,10 +246,10 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 	
 	override getAllHints(Object handle) {
 		val result = super.getAllHints(handle)
-		result.forEach [
+		for (it : result) {
 			if (typeReference != null && !typeReference.isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("hint is not owned by this resolved types")
-		]
+		}
 		return result
 	}
 	
@@ -282,10 +282,10 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 	}
 	
 	override getMergedType(List<LightweightTypeReference> types) {
-		types.forEach [
+		for (it : types) {
 			if (!isOwnedBy(getOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
-		]
+		}
 		val result = super.getMergedType(types)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -293,10 +293,10 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 	}
 	
 	override mergeTypeData(XExpression expression, List<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
-		allValues.forEach [
+		for (it : allValues) {
 			if (!isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
-		]
+		}
 		val result = super.mergeTypeData(expression, allValues, returnType, nullIfEmpty)
 		if (result != null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -343,10 +343,10 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 	
 	override protected getHints(Object handle) {
 		val result = super.getHints(handle)
-		result.forEach[ 
+		for (it : result) { 
 			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
 				throw new IllegalArgumentException("reference is not owned by this resolved types")
-		]
+		}
 		return result
 	}
 	
@@ -360,10 +360,10 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 	
 	override getAllHints(Object handle) {
 		val result = super.getAllHints(handle)
-		result.forEach [
+		for (it : result) {
 			if (typeReference != null && !typeReference.isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("hint is not owned by this resolved types")
-		]
+		}
 		return result
 	}
 	
@@ -396,10 +396,10 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	override getMergedType(List<LightweightTypeReference> types) {
-		types.forEach [
+		for(it:types) {
 			if (!isOwnedBy(getOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
-		]
+		}
 		val result = super.getMergedType(types)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -407,10 +407,10 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	override mergeTypeData(XExpression expression, List<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
-		allValues.forEach [
+		for (it : allValues) {
 			if (!isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
-		]
+		}
 		val result = super.mergeTypeData(expression, allValues, returnType, nullIfEmpty)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -456,10 +456,10 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 	
 	override protected getHints(Object handle) {
 		val result = super.getHints(handle)
-		result.forEach[ 
+		for (it : result) { 
 			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
 				throw new IllegalArgumentException("reference is not owned by this resolved types")
-		]
+		}
 		return result
 	}
 	
@@ -473,10 +473,10 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 	
 	override getAllHints(Object handle) {
 		val result = super.getAllHints(handle)
-		result.forEach [
+		for (it : result) {
 			if (typeReference != null &&!typeReference.isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("hint is not owned by this resolved types")
-		]
+		}
 		return result
 	}
 	
@@ -509,10 +509,10 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 	}
 	
 	override getMergedType(List<LightweightTypeReference> types) {
-		types.forEach [
+		for (it : types) {
 			if (!isOwnedBy(getOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
-		]
+		}
 		val result = super.getMergedType(types)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
@@ -520,10 +520,10 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 	}
 	
 	override mergeTypeData(XExpression expression, List<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
-		allValues.forEach [
+		for (it : allValues) {
 			if (!isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("result is not owned by this resolved types")
-		]
+		}
 		val result = super.mergeTypeData(expression, allValues, returnType, nullIfEmpty)
 		if (!result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")

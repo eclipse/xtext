@@ -54,7 +54,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -237,9 +236,8 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
       }
       @Override
       public void run(final ProgressIndicator indicator) {
-        final Procedure1<PsiJavaFile> _function = new Procedure1<PsiJavaFile>() {
-          @Override
-          public void apply(final PsiJavaFile javaFile) {
+        for (final PsiJavaFile javaFile : files) {
+          {
             boolean _isCanceled = indicator.isCanceled();
             if (_isCanceled) {
               return;
@@ -260,7 +258,7 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
                   return _function.apply(null);
                 }
             }));
-            Project _project = _this__ConvertJavaCodeHandler_1.getProject();
+            Project _project = this.getProject();
             ProjectRootManager _instance = ProjectRootManager.getInstance(_project);
             ProjectFileIndex _fileIndex = _instance.getFileIndex();
             VirtualFile _virtualFile = javaFile.getVirtualFile();
@@ -272,13 +270,12 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
             String _format = ConvertJavaCodeHandler.this.formatter.format(_xtendCode);
             result.setXtendCode(_format);
             coversionResult.put(javaFile, result);
-            _this__ConvertJavaCodeHandler_1.done++;
+            this.done++;
             int _size = files.size();
-            double _divide = (((double) _this__ConvertJavaCodeHandler_1.done) / _size);
+            double _divide = (((double) this.done) / _size);
             indicator.setFraction(_divide);
           }
-        };
-        IterableExtensions.<PsiJavaFile>forEach(files, _function);
+        }
       }
       
       @Override

@@ -106,12 +106,12 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 				if (!haveEObjectDescriptionsChanged) {
 					return names
 				}
-				getNew?.exportedObjects?.forEach [
+				for (it : getNew?.exportedObjects) {
 					names += name.toString
-				]
-				old?.exportedObjects?.forEach [
+				}
+				for (it : old?.exportedObjects) {
 					names += name.toString
-				]
+				}
 				names
 			}].reduce[t, t2|
 			{

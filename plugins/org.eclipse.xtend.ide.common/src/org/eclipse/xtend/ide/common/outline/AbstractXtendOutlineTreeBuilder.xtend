@@ -42,7 +42,9 @@ abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTreeBuild
 	}
 
 	def dispatch build(EObject modelElement, IXtendOutlineContext context) {
-		modelElement.eContents.forEach[buildEObjectNode(context)]
+		for (it : modelElement.eContents) {
+			buildEObjectNode(context)
+		}
 	}
 
 	protected def void buildPackageAndImportSection(XtendFile xtendFile, IXtendOutlineContext context) {
@@ -80,7 +82,9 @@ abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTreeBuild
 			val declaredType = superTypeRef.type
 			if (declaredType instanceof JvmDeclaredType) {
 				val nestedTypeContext = superTypeContext.hideInherited
-				declaredType.members.filter(JvmDeclaredType).forEach[buildJvmType(nestedTypeContext)]
+				for (it : declaredType.members.filter(JvmDeclaredType)) {
+					buildJvmType(nestedTypeContext)
+				}
 			}
 		}
 	}
@@ -120,7 +124,9 @@ abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTreeBuild
 				} else if (member instanceof JvmFeature) {
 					if (!member.skipFeature) {
 						val featureContext = baseType.buildFeature(member, member, context)
-						member.localClasses.forEach[buildJvmType(featureContext.newContext)]
+						for (it : member.localClasses) {
+							buildJvmType(featureContext.newContext)
+						}
 					}
 				}
 				member.markAsProcessed

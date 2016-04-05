@@ -83,30 +83,26 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
       }
     };
     List<MethodDeclaration> _sortBy = IterableExtensions.<MethodDeclaration, String>sortBy(_filter_1, _function_3);
-    final Procedure1<MethodDeclaration> _function_4 = new Procedure1<MethodDeclaration>() {
-      @Override
-      public void apply(final MethodDeclaration declaredMethod) {
-        String _simpleName = declaredMethod.getSimpleName();
-        final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-          @Override
-          public void apply(final MutableMethodDeclaration it) {
-            StringConcatenationClient _client = new StringConcatenationClient() {
-              @Override
-              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-                _builder.append("delegate.");
-                String _simpleName = declaredMethod.getSimpleName();
-                _builder.append(_simpleName, "");
-                _builder.append("();");
-              }
-            };
-            it.setBody(_client);
-            Iterable<? extends TypeReference> _exceptions = declaredMethod.getExceptions();
-            it.setExceptions(((TypeReference[])Conversions.unwrapArray(_exceptions, TypeReference.class)));
-          }
-        };
-        cls.addMethod(_simpleName, _function);
-      }
-    };
-    IterableExtensions.<MethodDeclaration>forEach(_sortBy, _function_4);
+    for (final MethodDeclaration declaredMethod : _sortBy) {
+      String _simpleName = declaredMethod.getSimpleName();
+      final Procedure1<MutableMethodDeclaration> _function_4 = new Procedure1<MutableMethodDeclaration>() {
+        @Override
+        public void apply(final MutableMethodDeclaration it) {
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("delegate.");
+              String _simpleName = declaredMethod.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append("();");
+            }
+          };
+          it.setBody(_client);
+          Iterable<? extends TypeReference> _exceptions = declaredMethod.getExceptions();
+          it.setExceptions(((TypeReference[])Conversions.unwrapArray(_exceptions, TypeReference.class)));
+        }
+      };
+      cls.addMethod(_simpleName, _function_4);
+    }
   }
 }

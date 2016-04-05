@@ -41,12 +41,12 @@ class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
 		assertEquals(errors.toString, 1, errors.size)
 		val singleError = errors.head as AbstractDiagnostic
 		assertEquals(singleError.message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, singleError.code)
-		messageParts.map[LineDelimiters.toUnix(it)].forEach [
+		for (it : messageParts.map[LineDelimiters.toUnix(it)]) {
 			val message = singleError.message
 			if (!message.contains(it)) {
 				assertEquals(it, message)
 			}
-		]
+		}
 		val firstType = file.xtendTypes.head
 		val firstMember = firstType.members.head as XtendFunction
 		val block = firstMember.expression as XBlockExpression
@@ -64,12 +64,12 @@ class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
 		assertEquals(errors.toString, 1, errors.size)
 		val singleError = errors.head as AbstractDiagnostic
 		assertEquals(singleError.message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, singleError.code)
-		messageParts.map[LineDelimiters.toUnix(it)].forEach [
+		for (it : messageParts.map[LineDelimiters.toUnix(it)]) {
 			val message = singleError.message
 			if (!message.contains(it)) {
 				assertEquals(it, message)
 			}
-		]
+		}
 		val firstType = file.xtendTypes.head
 		val innerType = firstType.members.head as XtendClass
 		val firstMember = innerType.members.head as XtendFunction

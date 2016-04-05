@@ -26,10 +26,10 @@ class FileAsserts {
 	def assertFileContains(IFile file, String... expectedContents) throws Exception {
 		file.refreshLocal(IResource::DEPTH_ZERO, null);
 		val fileContents = getContentsAsString(file);
-		expectedContents.forEach [ expectation |
+		for (expectation : expectedContents) {
 			if (!fileContents.contains(expectation)) {
 				assertEquals(expectation, fileContents)
 			}
-		]
+		}
 	}
 }

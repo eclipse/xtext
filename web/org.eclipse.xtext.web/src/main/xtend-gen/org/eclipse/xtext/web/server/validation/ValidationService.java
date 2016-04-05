@@ -23,7 +23,6 @@ import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.validation.ValidationResult;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * Service class for model validation.
@@ -53,22 +52,18 @@ public class ValidationService extends AbstractCachedService<ValidationResult> {
       }
     };
     Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
-    final Procedure1<Issue> _function_1 = new Procedure1<Issue>() {
-      @Override
-      public void apply(final Issue issue) {
-        List<ValidationResult.Issue> _issues = result.getIssues();
-        String _message = issue.getMessage();
-        Severity _severity = issue.getSeverity();
-        String _translate = ValidationService.this.translate(_severity);
-        Integer _lineNumber = issue.getLineNumber();
-        Integer _column = issue.getColumn();
-        Integer _offset = issue.getOffset();
-        Integer _length = issue.getLength();
-        ValidationResult.Issue _issue = new ValidationResult.Issue(_message, _translate, _lineNumber, _column, _offset, _length);
-        _issues.add(_issue);
-      }
-    };
-    IterableExtensions.<Issue>forEach(_filter, _function_1);
+    for (final Issue issue : _filter) {
+      List<ValidationResult.Issue> _issues = result.getIssues();
+      String _message = issue.getMessage();
+      Severity _severity = issue.getSeverity();
+      String _translate = this.translate(_severity);
+      Integer _lineNumber = issue.getLineNumber();
+      Integer _column = issue.getColumn();
+      Integer _offset = issue.getOffset();
+      Integer _length = issue.getLength();
+      ValidationResult.Issue _issue = new ValidationResult.Issue(_message, _translate, _lineNumber, _column, _offset, _length);
+      _issues.add(_issue);
+    }
     return result;
   }
   

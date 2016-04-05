@@ -24,7 +24,6 @@ import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -70,13 +69,9 @@ public class MyXtextServlet extends XtextServlet {
   
   @Override
   public void destroy() {
-    final Procedure1<ExecutorService> _function = new Procedure1<ExecutorService>() {
-      @Override
-      public void apply(final ExecutorService it) {
-        it.shutdown();
-      }
-    };
-    IterableExtensions.<ExecutorService>forEach(this.executorServices, _function);
+    for (final ExecutorService it : this.executorServices) {
+      it.shutdown();
+    }
     this.executorServices.clear();
     super.destroy();
   }

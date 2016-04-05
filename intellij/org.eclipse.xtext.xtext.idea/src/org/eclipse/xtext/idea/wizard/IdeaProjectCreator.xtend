@@ -41,16 +41,16 @@ class IdeaProjectCreator implements ProjectsCreator {
 	}
 
 	override createProjects(WizardConfiguration config) {
-		config.enabledProjects.forEach [
+		for (it : config.enabledProjects) {
 			createProject
-		]
+		}
 	}
 
 	def Module createProject(ProjectDescriptor project) {
 		val projectRoot = VfsUtil.createDirectories(project.location)
 		val fileSystem = LocalFileSystem.getInstance()
 
-		project.files.forEach [
+		for (it : project.files) {
 			val projectRelativePath = project.config.sourceLayout.getPathFor(outlet) + "/" + relativePath
 			val ioFile = new File(new File(projectRoot.path), projectRelativePath)
 			ioFile.parentFile.mkdirs
@@ -65,7 +65,7 @@ class IdeaProjectCreator implements ProjectsCreator {
 				BinaryFile:
 					virtualFile.binaryContent = Resources.toByteArray(content)
 			}
-		]
+		}
 
 		val module = model.newModule(project.moduleFilePath, StdModuleTypes.JAVA.id)
 		val rootModel = ModuleRootManager.getInstance(module).modifiableModel
@@ -75,7 +75,7 @@ class IdeaProjectCreator implements ProjectsCreator {
 		val genFolders = Outlet.generateOutlets.map [
 			project.sourceFolder(it)
 		]
-		project.sourceFolders.forEach [
+		for (it : project.sourceFolders) {
 			val VirtualFile sourceRoot = VfsUtil.createDirectoryIfMissing(modelContentRootDir, it)
 			var rootType = JavaSourceRootType.SOURCE
 			// val testFolders = Outlet.testOutlets.map [
@@ -88,7 +88,7 @@ class IdeaProjectCreator implements ProjectsCreator {
 			val isGen = genFolders.contains(it)
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", isGen)
 			contentEntry.addSourceFolder(sourceRoot, rootType, properties)
-		]
+		}
 		// TODO re-enable when xtext.xtext is ready to use
 		// if (project instanceof RuntimeProjectDescriptor) {
 		// val conf = projectConfigrator.createOrGetFacetConf(module, XtextLanguage.INSTANCE.ID)

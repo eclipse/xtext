@@ -83,7 +83,7 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 
 			override void run(ProgressIndicator indicator) {
 
-				files.forEach [ javaFile |
+				for (javaFile : files) {
 					if (indicator.isCanceled()) {
 						return;
 					}
@@ -97,7 +97,7 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 					coversionResult.put(javaFile, result)
 					done++
 					indicator.fraction = done as double / files.size
-				]
+				}
 			}
 
 			override void onSuccess() {

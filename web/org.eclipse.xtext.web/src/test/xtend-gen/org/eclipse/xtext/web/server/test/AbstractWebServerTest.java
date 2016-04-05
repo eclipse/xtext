@@ -33,7 +33,6 @@ import org.eclipse.xtext.web.server.test.MockServiceContext;
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -101,13 +100,9 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   @Override
   public void tearDown() {
     try {
-      final Procedure1<ExecutorService> _function = new Procedure1<ExecutorService>() {
-        @Override
-        public void apply(final ExecutorService it) {
-          it.shutdown();
-        }
-      };
-      IterableExtensions.<ExecutorService>forEach(this.executorServices, _function);
+      for (final ExecutorService it : this.executorServices) {
+        it.shutdown();
+      }
       this.executorServices.clear();
       super.tearDown();
     } catch (Throwable _e) {

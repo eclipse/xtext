@@ -154,9 +154,9 @@ class JdtBasedProcessorProviderTest {
 		val result = createJavaProject(name)
 		result.project.addNature(XtextProjectHelper.NATURE_ID)
 		xtendLibs.addLibsToClasspath(result, null)
-		upstreamProjects.forEach [
+		for (it : upstreamProjects) {
 			addToClasspath(result, JavaCore.newProjectEntry(getPath(), true));
-		]
+		}
 		return result
 	}
 	

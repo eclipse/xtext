@@ -43,7 +43,6 @@ import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -185,13 +184,9 @@ public class XtendReferenceFinder extends ReferenceFinder {
   
   protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration importDeclaration, final TargetURIs targetURISet, final IReferenceFinder.Acceptor acceptor) {
     Iterable<JvmFeature> _allFeatures = this._staticallyImportedMemberProvider.getAllFeatures(importDeclaration);
-    final Procedure1<JvmFeature> _function = new Procedure1<JvmFeature>() {
-      @Override
-      public void apply(final JvmFeature it) {
-        XtendReferenceFinder.this.addReferenceIfTarget(it, targetURISet, importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor);
-      }
-    };
-    IterableExtensions.<JvmFeature>forEach(_allFeatures, _function);
+    for (final JvmFeature it : _allFeatures) {
+      this.addReferenceIfTarget(it, targetURISet, importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor);
+    }
   }
   
   protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final TargetURIs targetURISet, final IReferenceFinder.Acceptor acceptor) {

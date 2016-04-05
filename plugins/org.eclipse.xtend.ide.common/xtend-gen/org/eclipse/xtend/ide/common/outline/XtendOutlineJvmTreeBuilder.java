@@ -17,8 +17,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.common.outline.AbstractXtendOutlineTreeBuilder;
 import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -30,13 +28,9 @@ public class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder 
     Resource _eResource = xtendFile.eResource();
     EList<EObject> _contents = _eResource.getContents();
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-    final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
-      @Override
-      public void apply(final JvmDeclaredType it) {
-        XtendOutlineJvmTreeBuilder.this.buildType(it, context);
-      }
-    };
-    IterableExtensions.<JvmDeclaredType>forEach(_filter, _function);
+    for (final JvmDeclaredType it : _filter) {
+      this.buildType(it, context);
+    }
   }
   
   protected void _build(final JvmDeclaredType jvmDeclaredType, final IXtendOutlineContext context) {

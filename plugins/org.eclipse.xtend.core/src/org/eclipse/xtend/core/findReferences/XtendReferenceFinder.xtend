@@ -92,9 +92,9 @@ class XtendReferenceFinder extends ReferenceFinder {
 	}
 	
 	protected def addReferenceToFeatureFromStaticImport(XImportDeclaration importDeclaration, TargetURIs targetURISet, Acceptor acceptor) {
-		importDeclaration.allFeatures.forEach [
+		for (it : importDeclaration.allFeatures) {
 			addReferenceIfTarget(targetURISet, importDeclaration, XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor)
-		] 
+		} 
 	}
 	
 	protected def addReferenceToTypeFromStaticImport(XAbstractFeatureCall sourceCandidate, TargetURIs targetURISet, Acceptor acceptor) {

@@ -171,37 +171,33 @@ public class SwtBotProjectHelper {
         if (_t instanceof WidgetNotFoundException) {
           final WidgetNotFoundException e = (WidgetNotFoundException)_t;
           SWTBotShell[] _shells = it.shells();
-          final Procedure1<SWTBotShell> _function = new Procedure1<SWTBotShell>() {
-            @Override
-            public void apply(final SWTBotShell it) {
-              StringConcatenation _builder = new StringConcatenation();
-              _builder.append("Shell: \'");
-              String _text = it.getText();
-              _builder.append(_text, "");
-              _builder.append("\', active: ");
-              boolean _isActive = it.isActive();
-              _builder.append(_isActive, "");
-              InputOutput.<String>println(_builder.toString());
-            }
-          };
-          IterableExtensions.<SWTBotShell>forEach(((Iterable<SWTBotShell>)Conversions.doWrapArray(_shells)), _function);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append(SWTBotPreferences.SCREENSHOTS_DIR, "");
-          _builder.append("/MenuFileNotFound");
+          for (final SWTBotShell it_1 : _shells) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Shell: \'");
+            String _text = it_1.getText();
+            _builder.append(_text, "");
+            _builder.append("\', active: ");
+            boolean _isActive = it_1.isActive();
+            _builder.append(_isActive, "");
+            InputOutput.<String>println(_builder.toString());
+          }
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append(SWTBotPreferences.SCREENSHOTS_DIR, "");
+          _builder_1.append("/MenuFileNotFound");
           long _currentTimeMillis = System.currentTimeMillis();
-          _builder.append(_currentTimeMillis, "");
-          _builder.append(".");
-          _builder.append(SWTBotPreferences.SCREENSHOT_FORMAT, "");
+          _builder_1.append(_currentTimeMillis, "");
+          _builder_1.append(".");
+          _builder_1.append(SWTBotPreferences.SCREENSHOT_FORMAT, "");
           SWTBotShell[] _shells_1 = it.shells();
-          final Function1<SWTBotShell, Boolean> _function_1 = new Function1<SWTBotShell, Boolean>() {
+          final Function1<SWTBotShell, Boolean> _function = new Function1<SWTBotShell, Boolean>() {
             @Override
             public Boolean apply(final SWTBotShell it) {
               return Boolean.valueOf(it.isActive());
             }
           };
-          Iterable<SWTBotShell> _filter = IterableExtensions.<SWTBotShell>filter(((Iterable<SWTBotShell>)Conversions.doWrapArray(_shells_1)), _function_1);
+          Iterable<SWTBotShell> _filter = IterableExtensions.<SWTBotShell>filter(((Iterable<SWTBotShell>)Conversions.doWrapArray(_shells_1)), _function);
           SWTBotShell _head = IterableExtensions.<SWTBotShell>head(_filter);
-          SWTUtils.captureScreenshot(_builder.toString(), 
+          SWTUtils.captureScreenshot(_builder_1.toString(), 
             _head.widget);
           throw e;
         } else {
@@ -226,13 +222,9 @@ public class SwtBotProjectHelper {
   
   public static void closeAllEditors(final SWTWorkbenchBot it) {
     List<? extends SWTBotEditor> _editors = it.editors();
-    final Procedure1<SWTBotEditor> _function = new Procedure1<SWTBotEditor>() {
-      @Override
-      public void apply(final SWTBotEditor it) {
-        it.close();
-      }
-    };
-    IterableExtensions.forEach(_editors, _function);
+    for (final SWTBotEditor it_1 : _editors) {
+      it_1.close();
+    }
   }
   
   public static void setContent(final SWTBotEclipseEditor it, final CharSequence content) {
@@ -345,17 +337,9 @@ public class SwtBotProjectHelper {
           IProject _project = _root.getProject(project);
           IFolder _folder = _project.getFolder("src");
           IResource[] _members = _folder.members();
-          final Procedure1<IResource> _function = new Procedure1<IResource>() {
-            @Override
-            public void apply(final IResource it) {
-              try {
-                it.delete(true, null);
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
-              }
-            }
-          };
-          IterableExtensions.<IResource>forEach(((Iterable<IResource>)Conversions.doWrapArray(_members)), _function);
+          for (final IResource it_1 : _members) {
+            it_1.delete(true, null);
+          }
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

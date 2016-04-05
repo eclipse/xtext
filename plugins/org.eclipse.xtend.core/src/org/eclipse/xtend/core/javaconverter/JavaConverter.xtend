@@ -140,7 +140,9 @@ class JavaConverter {
 		ASTParserWrapper parser) {
 		val javaSrcBuilder = new StringBuilder()
 		if (imports != null) {
-			imports.forEach[javaSrcBuilder.append("import " + it + ";")]
+			for (it : imports) {
+				javaSrcBuilder.append("import " + it + ";")
+			}
 		}
 		if (unitName == null) {
 			parser.unitName = "MISSING"

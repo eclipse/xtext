@@ -44,8 +44,6 @@ import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Ignore;
 
 /**
@@ -187,16 +185,12 @@ public class IdeaTraceTest extends LightXtendTest {
     final IIdeaTrace traceToSource = this.traceProvider.getTraceToSource(_virtualFileInProject);
     TestCase.assertNotNull(traceToSource);
     Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = traceToSource.getAllAssociatedLocations();
-    final Procedure1<ILocationInVirtualFile> _function = new Procedure1<ILocationInVirtualFile>() {
-      @Override
-      public void apply(final ILocationInVirtualFile it) {
-        AbsoluteURI _absoluteResourceURI = it.getAbsoluteResourceURI();
-        String _string = _absoluteResourceURI.toString();
-        boolean _endsWith = _string.endsWith("smap-sources.jar!/de/itemis/HelloXtend.xtend");
-        TestCase.assertTrue(_endsWith);
-      }
-    };
-    IterableExtensions.forEach(_allAssociatedLocations, _function);
+    for (final ILocationInVirtualFile it : _allAssociatedLocations) {
+      AbsoluteURI _absoluteResourceURI = it.getAbsoluteResourceURI();
+      String _string = _absoluteResourceURI.toString();
+      boolean _endsWith = _string.endsWith("smap-sources.jar!/de/itemis/HelloXtend.xtend");
+      TestCase.assertTrue(_endsWith);
+    }
   }
   
   public void testTraceForJar_02() {

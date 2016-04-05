@@ -248,7 +248,9 @@ public class JavaASTFlattener extends ASTVisitor {
       }
     };
     Iterable<IExtendedModifier> _filter = IterableExtensions.<IExtendedModifier>filter(ext, _function_1);
-    IterableExtensions.<IExtendedModifier>forEach(_filter, appender);
+    for (final IExtendedModifier it : _filter) {
+      appender.apply(it);
+    }
     boolean _notEquals = (!Objects.equal(callBack, null));
     if (_notEquals) {
       callBack.apply(node);
@@ -270,7 +272,9 @@ public class JavaASTFlattener extends ASTVisitor {
       }
     };
     Iterable<IExtendedModifier> _filter_1 = IterableExtensions.<IExtendedModifier>filter(ext, _function_2);
-    IterableExtensions.<IExtendedModifier>forEach(_filter_1, appender);
+    for (final IExtendedModifier it_1 : _filter_1) {
+      appender.apply(it_1);
+    }
   }
   
   private StringBuffer appendSpaceToBuffer() {
@@ -729,14 +733,12 @@ public class JavaASTFlattener extends ASTVisitor {
       ASTNode _root_1 = it.getRoot();
       final CompilationUnit cu = ((CompilationUnit) _root_1);
       Iterable<Comment> _unAssignedComments = this.unAssignedComments(cu);
-      final Procedure1<Comment> _function = new Procedure1<Comment>() {
-        @Override
-        public void apply(final Comment it) {
-          it.accept(JavaASTFlattener.this);
-          JavaASTFlattener.this.assignedComments.add(it);
+      for (final Comment it_1 : _unAssignedComments) {
+        {
+          it_1.accept(this);
+          this.assignedComments.add(it_1);
         }
-      };
-      IterableExtensions.<Comment>forEach(_unAssignedComments, _function);
+      }
     }
     this.decreaseIndent();
     this.appendLineWrapToBuffer();
@@ -909,14 +911,14 @@ public class JavaASTFlattener extends ASTVisitor {
       _javadoc_1.accept(this);
     }
     List _fragments = it.fragments();
-    final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
-      @Override
-      public void apply(final VariableDeclarationFragment frag) {
+    Iterable<VariableDeclarationFragment> _filter = Iterables.<VariableDeclarationFragment>filter(_fragments, VariableDeclarationFragment.class);
+    for (final VariableDeclarationFragment frag : _filter) {
+      {
         List _modifiers = it.modifiers();
-        JavaASTFlattener.this.appendModifiers(it, _modifiers);
+        this.appendModifiers(it, _modifiers);
         List _modifiers_1 = it.modifiers();
-        Iterable<Modifier> _filter = Iterables.<Modifier>filter(_modifiers_1, Modifier.class);
-        boolean _isPackageVisibility = JavaASTFlattener.this._aSTFlattenerUtils.isPackageVisibility(_filter);
+        Iterable<Modifier> _filter_1 = Iterables.<Modifier>filter(_modifiers_1, Modifier.class);
+        boolean _isPackageVisibility = this._aSTFlattenerUtils.isPackageVisibility(_filter_1);
         if (_isPackageVisibility) {
           ASTNode _parent = it.getParent();
           if ((_parent instanceof TypeDeclaration)) {
@@ -924,19 +926,18 @@ public class JavaASTFlattener extends ASTVisitor {
             boolean _isInterface = ((TypeDeclaration) _parent_1).isInterface();
             boolean _not = (!_isInterface);
             if (_not) {
-              JavaASTFlattener.this.appendToBuffer("package ");
+              this.appendToBuffer("package ");
             }
           }
         }
         Type _type = it.getType();
-        _type.accept(JavaASTFlattener.this);
+        _type.accept(this);
         int _extraDimensions = frag.getExtraDimensions();
-        JavaASTFlattener.this.appendExtraDimensions(_extraDimensions);
-        JavaASTFlattener.this.appendSpaceToBuffer();
-        frag.accept(JavaASTFlattener.this);
+        this.appendExtraDimensions(_extraDimensions);
+        this.appendSpaceToBuffer();
+        frag.accept(this);
       }
-    };
-    IterableExtensions.<VariableDeclarationFragment>forEach(_fragments, _function);
+    }
     return false;
   }
   
@@ -1055,13 +1056,13 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isEmpty = IterableExtensions.isEmpty(_filter);
     final boolean hasAnnotations = (!_isEmpty);
     List _fragments = it.fragments();
-    final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
-      @Override
-      public void apply(final VariableDeclarationFragment frag) {
+    Iterable<VariableDeclarationFragment> _filter_1 = Iterables.<VariableDeclarationFragment>filter(_fragments, VariableDeclarationFragment.class);
+    for (final VariableDeclarationFragment frag : _filter_1) {
+      {
         if (hasAnnotations) {
-          JavaASTFlattener.this.appendToBuffer("/*FIXME Cannot add Annotation to Variable declaration. Java code: ");
+          this.appendToBuffer("/*FIXME Cannot add Annotation to Variable declaration. Java code: ");
         }
-        List _modifiers = it.modifiers();
+        List _modifiers_1 = it.modifiers();
         final Function1<ASTNode, StringBuffer> _function = new Function1<ASTNode, StringBuffer>() {
           @Override
           public StringBuffer apply(final ASTNode it) {
@@ -1077,26 +1078,25 @@ public class JavaASTFlattener extends ASTVisitor {
             return _xifexpression;
           }
         };
-        JavaASTFlattener.this.appendModifiers(it, _modifiers, _function);
-        List _modifiers_1 = it.modifiers();
-        String _handleVariableDeclaration = JavaASTFlattener.this._aSTFlattenerUtils.handleVariableDeclaration(_modifiers_1);
-        JavaASTFlattener.this.appendToBuffer(_handleVariableDeclaration);
-        JavaASTFlattener.this.appendSpaceToBuffer();
+        this.appendModifiers(it, _modifiers_1, _function);
+        List _modifiers_2 = it.modifiers();
+        String _handleVariableDeclaration = this._aSTFlattenerUtils.handleVariableDeclaration(_modifiers_2);
+        this.appendToBuffer(_handleVariableDeclaration);
+        this.appendSpaceToBuffer();
         Type _type = it.getType();
-        boolean _isMissingType = JavaASTFlattener.this.isMissingType(_type);
+        boolean _isMissingType = this.isMissingType(_type);
         boolean _not = (!_isMissingType);
         if (_not) {
           Type _type_1 = it.getType();
-          _type_1.accept(JavaASTFlattener.this);
+          _type_1.accept(this);
         }
         int _extraDimensions = frag.getExtraDimensions();
-        JavaASTFlattener.this.appendExtraDimensions(_extraDimensions);
-        JavaASTFlattener.this.appendSpaceToBuffer();
-        frag.accept(JavaASTFlattener.this);
-        JavaASTFlattener.this.appendSpaceToBuffer();
+        this.appendExtraDimensions(_extraDimensions);
+        this.appendSpaceToBuffer();
+        frag.accept(this);
+        this.appendSpaceToBuffer();
       }
-    };
-    IterableExtensions.<VariableDeclarationFragment>forEach(_fragments, _function);
+    }
     return false;
   }
   
@@ -1239,73 +1239,70 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     this.appendToBuffer("(");
     List _parameters = it.parameters();
-    List<SingleVariableDeclaration> _reverseView = ListExtensions.<SingleVariableDeclaration>reverseView(_parameters);
-    final Procedure1<SingleVariableDeclaration> _function_1 = new Procedure1<SingleVariableDeclaration>() {
-      @Override
-      public void apply(final SingleVariableDeclaration p) {
-        Block _body = it.getBody();
-        SimpleName _name = p.getName();
-        Boolean _isAssignedInBody = JavaASTFlattener.this._aSTFlattenerUtils.isAssignedInBody(_body, _name);
-        if ((_isAssignedInBody).booleanValue()) {
-          boolean _and = false;
-          boolean _isConstructor = it.isConstructor();
-          if (!_isConstructor) {
-            _and = false;
-          } else {
-            Block _body_1 = it.getBody();
-            List _statements = _body_1.statements();
-            boolean _isEmpty = _statements.isEmpty();
-            boolean _not = (!_isEmpty);
-            _and = _not;
-          }
-          if (_and) {
-            Block _body_2 = it.getBody();
-            Iterable<Expression> _findAssignmentsInBlock = JavaASTFlattener.this._aSTFlattenerUtils.findAssignmentsInBlock(_body_2, p);
-            final Expression firstInBody = IterableExtensions.<Expression>head(_findAssignmentsInBlock);
-            if ((firstInBody != null)) {
-              ConstructorInvocation _findParentOfType = JavaASTFlattener.this._aSTFlattenerUtils.<ConstructorInvocation>findParentOfType(firstInBody, ConstructorInvocation.class);
-              boolean _tripleNotEquals = (_findParentOfType != null);
-              if (_tripleNotEquals) {
-                JavaASTFlattener.this.addProblem(p, "Final parameter modified in constructor call");
-              } else {
-                SuperConstructorInvocation _findParentOfType_1 = JavaASTFlattener.this._aSTFlattenerUtils.<SuperConstructorInvocation>findParentOfType(firstInBody, SuperConstructorInvocation.class);
-                boolean _tripleNotEquals_1 = (_findParentOfType_1 != null);
-                if (_tripleNotEquals_1) {
-                  JavaASTFlattener.this.addProblem(p, "Final parameter modified in super constructor call");
-                }
+    List<Object> _reverseView = ListExtensions.<Object>reverseView(_parameters);
+    Iterable<SingleVariableDeclaration> _filter_1 = Iterables.<SingleVariableDeclaration>filter(_reverseView, SingleVariableDeclaration.class);
+    for (final SingleVariableDeclaration p : _filter_1) {
+      Block _body = it.getBody();
+      SimpleName _name_1 = p.getName();
+      Boolean _isAssignedInBody = this._aSTFlattenerUtils.isAssignedInBody(_body, _name_1);
+      if ((_isAssignedInBody).booleanValue()) {
+        boolean _and = false;
+        boolean _isConstructor_3 = it.isConstructor();
+        if (!_isConstructor_3) {
+          _and = false;
+        } else {
+          Block _body_1 = it.getBody();
+          List _statements = _body_1.statements();
+          boolean _isEmpty_1 = _statements.isEmpty();
+          boolean _not_3 = (!_isEmpty_1);
+          _and = _not_3;
+        }
+        if (_and) {
+          Block _body_2 = it.getBody();
+          Iterable<Expression> _findAssignmentsInBlock = this._aSTFlattenerUtils.findAssignmentsInBlock(_body_2, p);
+          final Expression firstInBody = IterableExtensions.<Expression>head(_findAssignmentsInBlock);
+          if ((firstInBody != null)) {
+            ConstructorInvocation _findParentOfType = this._aSTFlattenerUtils.<ConstructorInvocation>findParentOfType(firstInBody, ConstructorInvocation.class);
+            boolean _tripleNotEquals = (_findParentOfType != null);
+            if (_tripleNotEquals) {
+              this.addProblem(p, "Final parameter modified in constructor call");
+            } else {
+              SuperConstructorInvocation _findParentOfType_1 = this._aSTFlattenerUtils.<SuperConstructorInvocation>findParentOfType(firstInBody, SuperConstructorInvocation.class);
+              boolean _tripleNotEquals_1 = (_findParentOfType_1 != null);
+              if (_tripleNotEquals_1) {
+                this.addProblem(p, "Final parameter modified in super constructor call");
               }
             }
           }
-          AST _aST = p.getAST();
-          final VariableDeclarationFragment varFrag = _aST.newVariableDeclarationFragment();
-          AST _aST_1 = p.getAST();
-          SimpleName _name_1 = p.getName();
-          String _string = _name_1.toString();
-          SimpleName _newSimpleName = _aST_1.newSimpleName(_string);
-          varFrag.setName(_newSimpleName);
-          AST _aST_2 = p.getAST();
-          SimpleName _name_2 = p.getName();
-          String _plus = (_name_2 + "_finalParam_");
-          SimpleName _newSimpleName_1 = _aST_2.newSimpleName(_plus);
-          p.setName(_newSimpleName_1);
-          AST _aST_3 = p.getAST();
-          SimpleName _name_3 = p.getName();
-          String _string_1 = _name_3.toString();
-          SimpleName _newSimpleName_2 = _aST_3.newSimpleName(_string_1);
-          varFrag.setInitializer(_newSimpleName_2);
-          AST _aST_4 = p.getAST();
-          final VariableDeclarationStatement varDecl = _aST_4.newVariableDeclarationStatement(varFrag);
-          AST _aST_5 = p.getAST();
-          ASTNode _createInstance = _aST_5.createInstance(SimpleType.class);
-          final Type typeCopy = ((Type) _createInstance);
-          varDecl.setType(typeCopy);
-          Block _body_3 = it.getBody();
-          List _statements_1 = _body_3.statements();
-          _statements_1.add(0, varDecl);
         }
+        AST _aST = p.getAST();
+        final VariableDeclarationFragment varFrag = _aST.newVariableDeclarationFragment();
+        AST _aST_1 = p.getAST();
+        SimpleName _name_2 = p.getName();
+        String _string = _name_2.toString();
+        SimpleName _newSimpleName = _aST_1.newSimpleName(_string);
+        varFrag.setName(_newSimpleName);
+        AST _aST_2 = p.getAST();
+        SimpleName _name_3 = p.getName();
+        String _plus = (_name_3 + "_finalParam_");
+        SimpleName _newSimpleName_1 = _aST_2.newSimpleName(_plus);
+        p.setName(_newSimpleName_1);
+        AST _aST_3 = p.getAST();
+        SimpleName _name_4 = p.getName();
+        String _string_1 = _name_4.toString();
+        SimpleName _newSimpleName_2 = _aST_3.newSimpleName(_string_1);
+        varFrag.setInitializer(_newSimpleName_2);
+        AST _aST_4 = p.getAST();
+        final VariableDeclarationStatement varDecl = _aST_4.newVariableDeclarationStatement(varFrag);
+        AST _aST_5 = p.getAST();
+        ASTNode _createInstance = _aST_5.createInstance(SimpleType.class);
+        final Type typeCopy = ((Type) _createInstance);
+        varDecl.setType(typeCopy);
+        Block _body_3 = it.getBody();
+        List _statements_1 = _body_3.statements();
+        _statements_1.add(0, varDecl);
       }
-    };
-    IterableExtensions.<SingleVariableDeclaration>forEach(_reverseView, _function_1);
+    }
     List _parameters_1 = it.parameters();
     this.visitAllSeparatedByComma(_parameters_1);
     this.appendToBuffer(")");
@@ -1313,26 +1310,26 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendExtraDimensions(_extraDimensions);
     List<? extends ASTNode> throwsTypes = CollectionLiterals.<ASTNode>newArrayList();
     boolean _java8orHigher = this.java8orHigher();
-    boolean _not_3 = (!_java8orHigher);
-    if (_not_3) {
+    boolean _not_4 = (!_java8orHigher);
+    if (_not_4) {
       List _thrownExceptions = it.thrownExceptions();
       throwsTypes = _thrownExceptions;
     } else {
       List<ASTNode> _genericChildListProperty = this._aSTFlattenerUtils.genericChildListProperty(it, "thrownExceptionTypes");
       throwsTypes = _genericChildListProperty;
     }
-    boolean _isEmpty_1 = throwsTypes.isEmpty();
-    boolean _not_4 = (!_isEmpty_1);
-    if (_not_4) {
+    boolean _isEmpty_2 = throwsTypes.isEmpty();
+    boolean _not_5 = (!_isEmpty_2);
+    if (_not_5) {
       this.appendToBuffer(" throws ");
       this.visitAllSeparatedByComma(throwsTypes);
     }
     this.appendSpaceToBuffer();
-    Block _body = it.getBody();
-    boolean _notEquals_2 = (!Objects.equal(_body, null));
+    Block _body_4 = it.getBody();
+    boolean _notEquals_2 = (!Objects.equal(_body_4, null));
     if (_notEquals_2) {
-      Block _body_1 = it.getBody();
-      _body_1.accept(this);
+      Block _body_5 = it.getBody();
+      _body_5.accept(this);
     } else {
       this.appendLineWrapToBuffer();
     }
@@ -1507,17 +1504,15 @@ public class JavaASTFlattener extends ASTVisitor {
         }
       };
       Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_unAssignedComments, _function_1);
-      final Procedure1<Comment> _function_2 = new Procedure1<Comment>() {
-        @Override
-        public void apply(final Comment it) {
+      for (final Comment it : _filter) {
+        {
           if ((!(it instanceof LineComment))) {
-            JavaASTFlattener.this.appendLineWrapToBuffer();
+            this.appendLineWrapToBuffer();
           }
-          it.accept(JavaASTFlattener.this);
-          JavaASTFlattener.this.assignedComments.add(it);
+          it.accept(this);
+          this.assignedComments.add(it);
         }
-      };
-      IterableExtensions.<Comment>forEach(_filter, _function_2);
+      }
     }
     this.decreaseIndent();
     this.appendLineWrapToBuffer();
@@ -1705,13 +1700,10 @@ public class JavaASTFlattener extends ASTVisitor {
       int _size = extendedOperands.size();
       boolean _notEquals = (_size != 0);
       if (_notEquals) {
-        final Procedure1<Expression> _function_1 = new Procedure1<Expression>() {
-          @Override
-          public void apply(final Expression e) {
-            JavaASTFlattener.this.handleInfixRightSide(node, operator, e);
-          }
-        };
-        IterableExtensions.<Expression>forEach(extendedOperands, _function_1);
+        Iterable<Expression> _filter = Iterables.<Expression>filter(extendedOperands, Expression.class);
+        for (final Expression e : _filter) {
+          this.handleInfixRightSide(node, operator, e);
+        }
       }
     }
     return false;
@@ -2354,13 +2346,9 @@ public class JavaASTFlattener extends ASTVisitor {
     Block _body = node.getBody();
     _body.accept(this);
     List _catchClauses = node.catchClauses();
-    final Procedure1<Object> _function = new Procedure1<Object>() {
-      @Override
-      public void apply(final Object it) {
-        ((ASTNode) it).accept(JavaASTFlattener.this);
-      }
-    };
-    IterableExtensions.<Object>forEach(_catchClauses, _function);
+    for (final Object it : _catchClauses) {
+      ((ASTNode) it).accept(this);
+    }
     Block _finally = node.getFinally();
     boolean _notEquals = (!Objects.equal(_finally, null));
     if (_notEquals) {
@@ -2703,17 +2691,15 @@ public class JavaASTFlattener extends ASTVisitor {
       boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(dimensions);
       boolean _not_1 = (!_isNullOrEmpty);
       if (_not_1) {
-        final Procedure1<ASTNode> _function = new Procedure1<ASTNode>() {
-          @Override
-          public void apply(final ASTNode dim) {
-            List<ASTNode> _genericChildListProperty = JavaASTFlattener.this._aSTFlattenerUtils.genericChildListProperty(dim, "annotations");
+        for (final ASTNode dim : dimensions) {
+          {
+            List<ASTNode> _genericChildListProperty = this._aSTFlattenerUtils.genericChildListProperty(dim, "annotations");
             if (_genericChildListProperty!=null) {
-              JavaASTFlattener.this.visitAll(_genericChildListProperty);
+              this.visitAll(_genericChildListProperty);
             }
-            JavaASTFlattener.this.appendToBuffer("[]");
+            this.appendToBuffer("[]");
           }
-        };
-        IterableExtensions.<ASTNode>forEach(dimensions, _function);
+        }
       }
     }
     return false;
@@ -3187,14 +3173,12 @@ public class JavaASTFlattener extends ASTVisitor {
         }
       };
       Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_unAssignedComments, _function);
-      final Procedure1<Comment> _function_1 = new Procedure1<Comment>() {
-        @Override
-        public void apply(final Comment it) {
-          it.accept(JavaASTFlattener.this);
-          JavaASTFlattener.this.assignedComments.add(it);
+      for (final Comment it : _filter) {
+        {
+          it.accept(this);
+          this.assignedComments.add(it);
         }
-      };
-      IterableExtensions.<Comment>forEach(_filter, _function_1);
+      }
     }
   }
   

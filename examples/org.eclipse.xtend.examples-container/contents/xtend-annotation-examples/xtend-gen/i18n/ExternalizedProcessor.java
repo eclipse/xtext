@@ -162,14 +162,10 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
       }
     }
     Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = annotatedClass.getDeclaredFields();
+    for (final MutableFieldDeclaration it : _declaredFields_1) {
+      it.remove();
+    }
     final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        it.remove();
-      }
-    };
-    IterableExtensions.forEach(_declaredFields_1, _function);
-    final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
       @Override
       public void apply(final MutableFieldDeclaration it) {
         it.setStatic(true);
@@ -189,7 +185,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
         context.setPrimarySourceElement(it, annotatedClass);
       }
     };
-    annotatedClass.addField("RESOURCE_BUNDLE", _function_1);
+    annotatedClass.addField("RESOURCE_BUNDLE", _function);
   }
   
   @Override

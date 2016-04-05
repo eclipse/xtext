@@ -83,7 +83,11 @@ class TestBatchCompiler {
 	@AfterClass
 	def static void afterClass() {
 		try {
-			abfalleimer.forEach[if(exists) delete]
+			for (it : abfalleimer) {
+				if (exists) {
+					delete
+				}
+			}
 		} catch (Exception e) {
 		} finally {
 			abfalleimer.clear

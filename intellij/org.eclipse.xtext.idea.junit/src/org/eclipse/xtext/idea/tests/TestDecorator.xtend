@@ -29,17 +29,16 @@ class TestDecoratorProcessor extends AbstractClassProcessor {
 		val atTest = context.findTypeGlobally(Test)
 		val atIgnore = context.findTypeGlobally(Ignore)
 		delegate.markAsRead
-		delegate.type.allResolvedMethods
+		for (declaredMethod: delegate.type.allResolvedMethods
 			.map[declaration]
 			.filter [findAnnotation(atTest) !== null && findAnnotation(atIgnore) === null]
 			.filter[cls.findDeclaredMethod(simpleName) == null]
-			.sortBy[simpleName]
-			.forEach[declaredMethod|
+			.sortBy[simpleName]) {
 				cls.addMethod(declaredMethod.simpleName) [
 					body = '''delegate.«declaredMethod.simpleName»();'''
 					exceptions = declaredMethod.exceptions
 				]
-			]
+		}
 	}
 
 }

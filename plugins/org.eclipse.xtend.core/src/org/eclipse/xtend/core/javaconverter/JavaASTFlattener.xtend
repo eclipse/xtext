@@ -189,11 +189,15 @@ class JavaASTFlattener extends ASTVisitor {
 
 	def appendModifiers(ASTNode node, Iterable<IExtendedModifier> ext, (ASTNode)=>StringBuffer callBack) {
 		val appender = [IExtendedModifier p|(p as ASTNode).accept(this)]
-		ext.filter[isAnnotation && (it as Annotation).typeName.toString != "Override"].forEach(appender)
+		for (it : ext.filter[isAnnotation && (it as Annotation).typeName.toString != "Override"]) {
+			appender.apply(it)
+		}
 		if (callBack != null) {
 			callBack.apply(node)
 		}
-		ext.filter[isModifier && (it as Modifier).keyword.toString != "default"].forEach(appender)
+		for (it : ext.filter[isModifier && (it as Modifier).keyword.toString != "default"]) {
+			appender.apply(it)
+		}
 	}
 
 	def private appendSpaceToBuffer() {
@@ -443,10 +447,10 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (it.root instanceof CompilationUnit) {
 			val cu = it.root as CompilationUnit
-			cu.unAssignedComments.forEach [
+			for (it : cu.unAssignedComments) {
 				accept(this)
 				assignedComments.add(it)
-			]
+			}
 		}
 		decreaseIndent
 		appendLineWrapToBuffer
@@ -525,7 +529,7 @@ class JavaASTFlattener extends ASTVisitor {
 		if (javadoc != null) {
 			javadoc.accept(this)
 		}
-		fragments.forEach [ VariableDeclarationFragment frag |
+		for (frag : fragments.filter(VariableDeclarationFragment)) {
 			appendModifiers(modifiers())
 			if (modifiers().filter(Modifier).isPackageVisibility()) {
 				if (parent instanceof TypeDeclaration) {
@@ -538,7 +542,7 @@ class JavaASTFlattener extends ASTVisitor {
 			appendExtraDimensions(frag.getExtraDimensions())
 			appendSpaceToBuffer
 			frag.accept(this)
-		]
+		}
 		return false
 	}
 
@@ -606,7 +610,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(VariableDeclarationStatement it) {
 		val hasAnnotations = !modifiers().filter(Annotation).empty
-		fragments.forEach [ VariableDeclarationFragment frag |
+		for (frag : fragments.filter(VariableDeclarationFragment)) {
 			if (hasAnnotations) {
 				appendToBuffer("/*FIXME Cannot add Annotation to Variable declaration. Java code: ")
 			}
@@ -625,7 +629,7 @@ class JavaASTFlattener extends ASTVisitor {
 			appendSpaceToBuffer
 			frag.accept(this)
 			appendSpaceToBuffer
-		]
+		}
 		return false
 	}
 
@@ -708,7 +712,7 @@ class JavaASTFlattener extends ASTVisitor {
 			name.accept(this)
 		}
 		appendToBuffer("(")
-		parameters.reverseView.forEach [ SingleVariableDeclaration p |
+		for (p : parameters.reverseView.filter(SingleVariableDeclaration)) {
 			if (body.isAssignedInBody(p.name)) {
 				if (isConstructor && !body.statements.empty) {
 					val firstInBody = body.findAssignmentsInBlock(p).head
@@ -730,7 +734,7 @@ class JavaASTFlattener extends ASTVisitor {
 				body.statements.add(0, varDecl)
 
 			}
-		]
+		}
 		parameters.visitAllSeparatedByComma
 		appendToBuffer(")")
 		appendExtraDimensions(getExtraDimensions())
@@ -835,15 +839,13 @@ class JavaASTFlattener extends ASTVisitor {
 		// collect orphaned comments
 		if (node.root instanceof CompilationUnit) {
 			val cu = node.root as CompilationUnit
-			cu.unAssignedComments.filter [
-				startPosition < node.startPosition + node.length
-			].forEach [
+			for (it : cu.unAssignedComments.filter[startPosition < node.startPosition + node.length]) {
 				if (!(it instanceof LineComment)) {
 					appendLineWrapToBuffer
 				}
 				accept(this)
 				assignedComments.add(it)
-			]
+			}
 		}
 		decreaseIndent
 		appendLineWrapToBuffer
@@ -966,9 +968,9 @@ class JavaASTFlattener extends ASTVisitor {
 			node.handleInfixRightSide(operator, node.getRightOperand())
 			val extendedOperands = node.extendedOperands()
 			if (extendedOperands.size() != 0) {
-				extendedOperands.forEach [ Expression e |
+				for (e : extendedOperands.filter(Expression)) {
 					node.handleInfixRightSide(operator, e)
-				]
+				}
 			}
 		}
 		return false
@@ -1342,7 +1344,9 @@ class JavaASTFlattener extends ASTVisitor {
 			node.addProblem("Try with resource is not yet supported.")
 		}
 		node.getBody().accept(this)
-		node.catchClauses.forEach[(it as ASTNode).accept(this)]
+		for (it : node.catchClauses) {
+			(it as ASTNode).accept(this)
+		}
 
 		if (node.getFinally() != null) {
 			appendToBuffer(" finally ")
@@ -1547,10 +1551,10 @@ class JavaASTFlattener extends ASTVisitor {
 			node.genericChildProperty("elementType")?.accept(this)
 			var dimensions = node.genericChildListProperty("dimensions")
 			if (!dimensions.nullOrEmpty) {
-				dimensions.forEach [ dim |
+				for (dim : dimensions) {
 					dim.genericChildListProperty("annotations")?.visitAll
 					appendToBuffer("[]")
-				]
+				}
 			}
 		}
 		return false
@@ -1834,12 +1838,10 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (node.root instanceof CompilationUnit) {
 			val cu = node.root as CompilationUnit
-			cu.unAssignedComments.filter [
-				startPosition < node.startPosition
-			].forEach [
+			for (it : cu.unAssignedComments.filter[startPosition < node.startPosition]) {
 				accept(this)
 				assignedComments.add(it)
-			]
+			}
 		}
 	}
 

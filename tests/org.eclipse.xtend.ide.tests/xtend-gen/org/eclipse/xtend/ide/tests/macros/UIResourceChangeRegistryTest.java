@@ -45,7 +45,6 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -174,33 +173,27 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
   public void testConcurrentDiscard() throws Exception {
     try {
       IntegerRange _upTo = new IntegerRange(1, 10000);
-      final Procedure1<Integer> _function = new Procedure1<Integer>() {
-        @Override
-        public void apply(final Integer it) {
-          String _string = it.toString();
-          URI _appendSegment = UIResourceChangeRegistryTest.this.uri.appendSegment(_string);
-          UIResourceChangeRegistryTest.this.resourceChangeRegistry.registerCreateOrModify("/foo", _appendSegment);
-        }
-      };
-      IterableExtensions.<Integer>forEach(_upTo, _function);
-      final Runnable _function_1 = new Runnable() {
+      for (final Integer it : _upTo) {
+        String _string = it.toString();
+        URI _appendSegment = this.uri.appendSegment(_string);
+        this.resourceChangeRegistry.registerCreateOrModify("/foo", _appendSegment);
+      }
+      final Runnable _function = new Runnable() {
         @Override
         public void run() {
           final SecureRandom random = new SecureRandom(new byte[] { ((byte) 1) });
           IntegerRange _upTo = new IntegerRange(1, 1000);
-          final Procedure1<Integer> _function = new Procedure1<Integer>() {
-            @Override
-            public void apply(final Integer it) {
+          for (final Integer it : _upTo) {
+            {
               int _nextInt = random.nextInt(10000);
               String _string = Integer.valueOf(_nextInt).toString();
               final URI removedURI = UIResourceChangeRegistryTest.this.uri.appendSegment(_string);
               UIResourceChangeRegistryTest.this.resourceChangeRegistry.discardCreateOrModifyInformation(removedURI);
             }
-          };
-          IterableExtensions.<Integer>forEach(_upTo, _function);
+          }
         }
       };
-      final Runnable r = _function_1;
+      final Runnable r = _function;
       final ExecutorService executorService = Executors.newCachedThreadPool();
       try {
         final Future<?> future1 = executorService.submit(r);

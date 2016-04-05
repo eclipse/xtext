@@ -23,10 +23,7 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -240,19 +237,11 @@ public class JdtBasedProcessorProviderTest {
       IProject _project = result.getProject();
       IResourcesSetupUtil.addNature(_project, XtextProjectHelper.NATURE_ID);
       this.xtendLibs.addLibsToClasspath(result, null);
-      final Procedure1<IJavaProject> _function = new Procedure1<IJavaProject>() {
-        @Override
-        public void apply(final IJavaProject it) {
-          try {
-            IPath _path = it.getPath();
-            IClasspathEntry _newProjectEntry = JavaCore.newProjectEntry(_path, true);
-            JavaProjectSetupUtil.addToClasspath(result, _newProjectEntry);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      IterableExtensions.<IJavaProject>forEach(((Iterable<IJavaProject>)Conversions.doWrapArray(upstreamProjects)), _function);
+      for (final IJavaProject it : upstreamProjects) {
+        IPath _path = it.getPath();
+        IClasspathEntry _newProjectEntry = JavaCore.newProjectEntry(_path, true);
+        JavaProjectSetupUtil.addToClasspath(result, _newProjectEntry);
+      }
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

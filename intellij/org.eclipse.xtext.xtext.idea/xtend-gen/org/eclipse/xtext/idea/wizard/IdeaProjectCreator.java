@@ -23,9 +23,7 @@ import org.eclipse.xtext.idea.lang.XtextLanguage;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.Outlet;
@@ -61,13 +59,9 @@ public class IdeaProjectCreator implements ProjectsCreator {
   @Override
   public void createProjects(final WizardConfiguration config) {
     Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
-    final Procedure1<ProjectDescriptor> _function = new Procedure1<ProjectDescriptor>() {
-      @Override
-      public void apply(final ProjectDescriptor it) {
-        IdeaProjectCreator.this.createProject(it);
-      }
-    };
-    IterableExtensions.<ProjectDescriptor>forEach(_enabledProjects, _function);
+    for (final ProjectDescriptor it : _enabledProjects) {
+      this.createProject(it);
+    }
   }
   
   public Module createProject(final ProjectDescriptor project) {
@@ -76,50 +70,44 @@ public class IdeaProjectCreator implements ProjectsCreator {
       final VirtualFile projectRoot = VfsUtil.createDirectories(_location);
       final LocalFileSystem fileSystem = LocalFileSystem.getInstance();
       Iterable<? extends AbstractFile> _files = project.getFiles();
-      final Procedure1<AbstractFile> _function = new Procedure1<AbstractFile>() {
-        @Override
-        public void apply(final AbstractFile it) {
-          try {
-            WizardConfiguration _config = project.getConfig();
-            SourceLayout _sourceLayout = _config.getSourceLayout();
-            Outlet _outlet = it.getOutlet();
-            String _pathFor = _sourceLayout.getPathFor(_outlet);
-            String _plus = (_pathFor + "/");
-            String _relativePath = it.getRelativePath();
-            final String projectRelativePath = (_plus + _relativePath);
-            String _path = projectRoot.getPath();
-            File _file = new File(_path);
-            final File ioFile = new File(_file, projectRelativePath);
-            File _parentFile = ioFile.getParentFile();
-            _parentFile.mkdirs();
-            ioFile.createNewFile();
-            boolean _isExecutable = it.isExecutable();
-            if (_isExecutable) {
-              ioFile.setExecutable(true);
+      for (final AbstractFile it : _files) {
+        {
+          WizardConfiguration _config = project.getConfig();
+          SourceLayout _sourceLayout = _config.getSourceLayout();
+          Outlet _outlet = it.getOutlet();
+          String _pathFor = _sourceLayout.getPathFor(_outlet);
+          String _plus = (_pathFor + "/");
+          String _relativePath = it.getRelativePath();
+          final String projectRelativePath = (_plus + _relativePath);
+          String _path = projectRoot.getPath();
+          File _file = new File(_path);
+          final File ioFile = new File(_file, projectRelativePath);
+          File _parentFile = ioFile.getParentFile();
+          _parentFile.mkdirs();
+          ioFile.createNewFile();
+          boolean _isExecutable = it.isExecutable();
+          if (_isExecutable) {
+            ioFile.setExecutable(true);
+          }
+          final VirtualFile virtualFile = fileSystem.refreshAndFindFileByIoFile(ioFile);
+          boolean _matched = false;
+          if (!_matched) {
+            if (it instanceof TextFile) {
+              _matched=true;
+              String _content = ((TextFile)it).getContent();
+              VfsUtil.saveText(virtualFile, _content);
             }
-            final VirtualFile virtualFile = fileSystem.refreshAndFindFileByIoFile(ioFile);
-            boolean _matched = false;
-            if (!_matched) {
-              if (it instanceof TextFile) {
-                _matched=true;
-                String _content = ((TextFile)it).getContent();
-                VfsUtil.saveText(virtualFile, _content);
-              }
+          }
+          if (!_matched) {
+            if (it instanceof BinaryFile) {
+              _matched=true;
+              URL _content = ((BinaryFile)it).getContent();
+              byte[] _byteArray = Resources.toByteArray(_content);
+              virtualFile.setBinaryContent(_byteArray);
             }
-            if (!_matched) {
-              if (it instanceof BinaryFile) {
-                _matched=true;
-                URL _content = ((BinaryFile)it).getContent();
-                byte[] _byteArray = Resources.toByteArray(_content);
-                virtualFile.setBinaryContent(_byteArray);
-              }
-            }
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
           }
         }
-      };
-      IterableExtensions.forEach(_files, _function);
+      }
       String _moduleFilePath = this.moduleFilePath(project);
       String _id = StdModuleTypes.JAVA.getId();
       final Module module = this.model.newModule(_moduleFilePath, _id);
@@ -130,30 +118,24 @@ public class IdeaProjectCreator implements ProjectsCreator {
       final VirtualFile modelContentRootDir = fileSystem.refreshAndFindFileByPath(_location_1);
       final ContentEntry contentEntry = rootModel.addContentEntry(modelContentRootDir);
       Outlet[] _generateOutlets = Outlet.generateOutlets();
-      final Function1<Outlet, String> _function_1 = new Function1<Outlet, String>() {
+      final Function1<Outlet, String> _function = new Function1<Outlet, String>() {
         @Override
         public String apply(final Outlet it) {
           return project.sourceFolder(it);
         }
       };
-      final List<String> genFolders = ListExtensions.<Outlet, String>map(((List<Outlet>)Conversions.doWrapArray(_generateOutlets)), _function_1);
+      final List<String> genFolders = ListExtensions.<Outlet, String>map(((List<Outlet>)Conversions.doWrapArray(_generateOutlets)), _function);
       Set<String> _sourceFolders = project.getSourceFolders();
-      final Procedure1<String> _function_2 = new Procedure1<String>() {
-        @Override
-        public void apply(final String it) {
-          try {
-            final VirtualFile sourceRoot = VfsUtil.createDirectoryIfMissing(modelContentRootDir, it);
-            JavaSourceRootType rootType = JavaSourceRootType.SOURCE;
-            final boolean isGen = genFolders.contains(it);
-            JpsJavaExtensionService _instance = JpsJavaExtensionService.getInstance();
-            final JavaSourceRootProperties properties = _instance.createSourceRootProperties("", isGen);
-            contentEntry.<JavaSourceRootProperties>addSourceFolder(sourceRoot, rootType, properties);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      for (final String it_1 : _sourceFolders) {
+        {
+          final VirtualFile sourceRoot = VfsUtil.createDirectoryIfMissing(modelContentRootDir, it_1);
+          JavaSourceRootType rootType = JavaSourceRootType.SOURCE;
+          final boolean isGen = genFolders.contains(it_1);
+          JpsJavaExtensionService _instance_1 = JpsJavaExtensionService.getInstance();
+          final JavaSourceRootProperties properties = _instance_1.createSourceRootProperties("", isGen);
+          contentEntry.<JavaSourceRootProperties>addSourceFolder(sourceRoot, rootType, properties);
         }
-      };
-      IterableExtensions.<String>forEach(_sourceFolders, _function_2);
+      }
       if ((!(project instanceof ParentProjectDescriptor))) {
         final AbstractFacetConfiguration conf = this.projectConfigrator.createOrGetFacetConf(module, "org.eclipse.xtend.core.Xtend");
         if ((conf != null)) {

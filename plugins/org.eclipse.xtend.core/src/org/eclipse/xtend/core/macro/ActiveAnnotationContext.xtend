@@ -164,45 +164,45 @@ class ActiveAnnotationContextProvider {
 	def private void searchAnnotatedElements(EObject element, IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
 		switch element {
 			XtendFile : {
-				element.xtendTypes.forEach [
+				for (it : element.xtendTypes) {
 					searchAnnotatedElements(acceptor)
-				]
+				}
 			}
 			XtendClass : {
 				element.registerMacroAnnotations(acceptor)
-				element.members.forEach [
+				for (it : element.members) {
 					searchAnnotatedElements(acceptor)
-				]
+				}
 			}
 			XtendInterface : {
 				element.registerMacroAnnotations(acceptor)
-				element.members.forEach [
+				for (it : element.members) {
 					searchAnnotatedElements(acceptor)
-				]
+				}
 			}
 			XtendEnum : {
 				element.registerMacroAnnotations(acceptor)
-				element.members.forEach [
+				for (it : element.members) {
 					searchAnnotatedElements(acceptor)
-				]
+				}
 			}
 			XtendAnnotationType : {
 				element.registerMacroAnnotations(acceptor)
-				element.members.forEach [
+				for (it : element.members) {
 					searchAnnotatedElements(acceptor)
-				]
+				}
 			}
 			XtendFunction : {
 				element.registerMacroAnnotations(acceptor)
-				element.parameters.forEach [
+				for (it : element.parameters) {
 					searchAnnotatedElements(acceptor)
-				]
+				}
 			}
 			XtendConstructor : {
 				element.registerMacroAnnotations(acceptor)
-				element.parameters.forEach [
+				for (it : element.parameters) {
 					searchAnnotatedElements(acceptor)
-				]
+				}
 			}
 			XtendAnnotationTarget : {
 				element.registerMacroAnnotations(acceptor)

@@ -20,24 +20,24 @@ class EcoreGlobalRegistries {
 
 	new() {
 		val packageRegistry = EPackage.Registry.INSTANCE
-		Extensions.getExtensions(EPackageEP.EP_NAME).forEach [
+		for (it : Extensions.getExtensions(EPackageEP.EP_NAME)) {
 			packageRegistry.put(nsURI, createDescriptor)
-		]
+		}
 
 		val extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.extensionToFactoryMap
-		Extensions.getExtensions(ResourceFactoryEP.EP_NAME).forEach [
+		for (it : Extensions.getExtensions(ResourceFactoryEP.EP_NAME)) {
 			extensionToFactoryMap.put(type, createDescriptor)
-		]
+		}
 
 		val registry = IResourceServiceProvider.Registry.INSTANCE
-		Extensions.getExtensions(ResourceServiceProviderEP.EP_NAME).forEach [
+		for (it : Extensions.getExtensions(ResourceServiceProviderEP.EP_NAME)) {
 			if (uriExtension != null)
 				registry.extensionToFactoryMap.put(uriExtension, createDescriptor)
 			if (protocolName != null)
 				registry.protocolToFactoryMap.put(protocolName, createDescriptor)
 			if (contentTypeIdentifier != null)
 				registry.contentTypeToFactoryMap.put(contentTypeIdentifier, createDescriptor)
-		]
+		}
 	}
 
 	static def ensureInitialized() {

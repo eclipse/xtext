@@ -293,16 +293,15 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
       }
     };
     Iterable<JvmGenericType> _filter = IterableExtensions.<JvmGenericType>filter(_localClasses, _function);
-    final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
-      @Override
-      public void apply(final JvmGenericType it) {
+    for (final JvmGenericType it : _filter) {
+      {
         appendable.newLine();
-        Set<EObject> _sourceElements = XtendGenerator.this.getSourceElements(it);
+        Set<EObject> _sourceElements = this.getSourceElements(it);
         EObject _head = IterableExtensions.<EObject>head(_sourceElements);
         final AnonymousClass anonymousClass = ((AnonymousClass) _head);
         final ITreeAppendable childAppendable = appendable.trace(anonymousClass);
         childAppendable.append("abstract class ");
-        ITreeAppendable _traceSignificant = XtendGenerator.this._treeAppendableUtil.traceSignificant(childAppendable, anonymousClass);
+        ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, anonymousClass);
         String _simpleName = it.getSimpleName();
         _traceSignificant.append(_simpleName);
         EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
@@ -310,10 +309,10 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
         if (_isEmpty) {
           childAppendable.append(" ");
         }
-        XtendGenerator.this.generateExtendsClause(it, childAppendable, null);
+        this.generateExtendsClause(it, childAppendable, null);
         ITreeAppendable _append = childAppendable.append("{");
         _append.increaseIndentation();
-        boolean _needSyntheticThisVariable = XtendGenerator.this.needSyntheticThisVariable(anonymousClass, it);
+        boolean _needSyntheticThisVariable = this.needSyntheticThisVariable(anonymousClass, it);
         if (_needSyntheticThisVariable) {
           Pair<String, JvmGenericType> _mappedTo = Pair.<String, JvmGenericType>of("this", it);
           String _simpleName_1 = it.getSimpleName();
@@ -328,8 +327,8 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
           ITreeAppendable _append_5 = _append_4.append(" = this;");
           _append_5.newLine();
         }
-        ArrayList<JvmMember> _addedDeclarations = XtendGenerator.this.getAddedDeclarations(it, anonymousClass);
-        final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+        ArrayList<JvmMember> _addedDeclarations = this.getAddedDeclarations(it, anonymousClass);
+        final Procedure1<LoopParams> _function_1 = new Procedure1<LoopParams>() {
           @Override
           public void apply(final LoopParams it) {
             final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
@@ -341,7 +340,7 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
             it.setSeparator(_function);
           }
         };
-        final Procedure1<JvmMember> _function_1 = new Procedure1<JvmMember>() {
+        final Procedure1<JvmMember> _function_2 = new Procedure1<JvmMember>() {
           @Override
           public void apply(final JvmMember it) {
             final ITreeAppendable memberAppendable = XtendGenerator.this._treeAppendableUtil.traceWithComments(childAppendable, it);
@@ -433,14 +432,13 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
             memberAppendable.closeScope();
           }
         };
-        XtendGenerator.this._loopExtensions.<JvmMember>forEach(childAppendable, _addedDeclarations, _function, _function_1);
+        this._loopExtensions.<JvmMember>forEach(childAppendable, _addedDeclarations, _function_1, _function_2);
         ITreeAppendable _decreaseIndentation = childAppendable.decreaseIndentation();
         ITreeAppendable _newLine_1 = _decreaseIndentation.newLine();
         _newLine_1.append("}");
         appendable.newLine();
       }
-    };
-    IterableExtensions.<JvmGenericType>forEach(_filter, _function_1);
+    }
   }
   
   private ITreeAppendable generateJavaConstant(final Object value, final ITreeAppendable appendable) {

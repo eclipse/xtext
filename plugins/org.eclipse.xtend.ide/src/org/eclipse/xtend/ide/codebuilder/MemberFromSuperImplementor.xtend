@@ -46,11 +46,11 @@ class MemberFromSuperImplementor {
 			overriddenOperation.resolvedTypeParameters.forEach [ typeParam, idx |
 				val newTypeParam = createJvmTypeParameter
 				newTypeParam.name = typeParam.name
-				overriddenOperation.getResolvedTypeParameterConstraints(idx).forEach[
+				for (it : overriddenOperation.getResolvedTypeParameterConstraints(idx)) {
 					val upperBound = createJvmUpperBound
 					upperBound.typeReference = it.toJavaCompliantTypeReference
 					newTypeParam.constraints += upperBound
-				]
+				}
 				typeParameters.add(newTypeParam)
 			]
 			methodBuilder.typeParameters = typeParameters

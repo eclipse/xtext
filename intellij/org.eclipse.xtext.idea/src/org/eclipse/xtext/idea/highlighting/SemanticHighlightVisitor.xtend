@@ -48,11 +48,11 @@ abstract class SemanticHighlightVisitor implements HighlightVisitor {
 			acceptor = [ offset, length, styles |
 				ProgressIndicatorProvider.checkCanceled
 				if (length > 0) {
-					styles.forEach [
+					for (it : styles) {
 						val info = HighlightInfo.newHighlightInfo(highlightInfoType).range(offset, offset + length).
 							description(it).create
 						holder.add(info)
-					]
+					}
 				}
 			]
 			ProgressIndicatorProvider.checkCanceled

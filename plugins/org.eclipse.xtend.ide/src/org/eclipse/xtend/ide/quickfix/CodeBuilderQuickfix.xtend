@@ -94,9 +94,9 @@ class CodeBuilderQuickfix {
 			val importManager = new ImportManager(true, ".".charAt(0))
 			val content = new StringBuilderBasedAppendable(importManager)
 			builder.build(content)
-			importManager.imports.forEach [
+			for (it : importManager.imports) {
 				type.compilationUnit.createImport(it, null, new NullProgressMonitor)
-			]
+			}
 			val element = 
 				switch(builder) {
 					JavaFieldBuilder:  type.createField(content.toString, null, true, new NullProgressMonitor)

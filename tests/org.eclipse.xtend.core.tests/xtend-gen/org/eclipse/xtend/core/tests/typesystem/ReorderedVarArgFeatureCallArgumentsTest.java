@@ -25,11 +25,9 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedVarArgFeatureCallArguments;
@@ -287,9 +285,8 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
   }
   
   protected void withIndizes(final IFeatureCallArguments arguments, final int... indexes) {
-    final Procedure1<Integer> _function = new Procedure1<Integer>() {
-      @Override
-      public void apply(final Integer it) {
+    for (final int it : indexes) {
+      {
         boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
         Assert.assertTrue(_hasUnprocessedArguments);
         final IFeatureCallArgumentSlot slot = arguments.getNextUnprocessedArgumentSlot();
@@ -299,19 +296,17 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
         final XFeatureCall featureCall = ((XFeatureCall) _eContainer);
         EList<XExpression> _featureCallArguments = featureCall.getFeatureCallArguments();
         int _indexOf = _featureCallArguments.indexOf(expression);
-        Assert.assertEquals((it).intValue(), _indexOf);
+        Assert.assertEquals(it, _indexOf);
         slot.markProcessed();
       }
-    };
-    IterableExtensions.<Integer>forEach(((Iterable<Integer>)Conversions.doWrapArray(indexes)), _function);
+    }
     boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
     Assert.assertFalse(_hasUnprocessedArguments);
   }
   
   protected void withTypes(final IFeatureCallArguments arguments, final String... types) {
-    final Procedure1<String> _function = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
+    for (final String it : types) {
+      {
         boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
         Assert.assertTrue(_hasUnprocessedArguments);
         final IFeatureCallArgumentSlot slot = arguments.getNextUnprocessedArgumentSlot();
@@ -324,8 +319,7 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
         }
         slot.markProcessed();
       }
-    };
-    IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(types)), _function);
+    }
     boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
     Assert.assertFalse(_hasUnprocessedArguments);
   }

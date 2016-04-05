@@ -1686,16 +1686,14 @@ public abstract class AbstractReusableActiveAnnotationTests {
         Assert.assertNotNull(annotationsValue);
         int _size = ((List<AnnotationReference>)Conversions.doWrapArray(annotationsValue)).size();
         Assert.assertEquals(2, _size);
-        final Procedure1<AnnotationReference> _function = new Procedure1<AnnotationReference>() {
-          @Override
-          public void apply(final AnnotationReference it) {
-            AnnotationTypeDeclaration _annotationTypeDeclaration = annotationValue.getAnnotationTypeDeclaration();
-            Assert.assertEquals(someAnnotationType, _annotationTypeDeclaration);
-            boolean _booleanValue = annotationValue.getBooleanValue("value");
-            Assert.assertFalse(_booleanValue);
+        for (final AnnotationReference it_1 : annotationsValue) {
+          {
+            AnnotationTypeDeclaration _annotationTypeDeclaration_1 = annotationValue.getAnnotationTypeDeclaration();
+            Assert.assertEquals(someAnnotationType, _annotationTypeDeclaration_1);
+            boolean _booleanValue_1 = annotationValue.getBooleanValue("value");
+            Assert.assertFalse(_booleanValue_1);
           }
-        };
-        IterableExtensions.<AnnotationReference>forEach(((Iterable<AnnotationReference>)Conversions.doWrapArray(annotationsValue)), _function);
+        }
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
@@ -6256,33 +6254,29 @@ public abstract class AbstractReusableActiveAnnotationTests {
         final Resource resource = _xtendFile.eResource();
         EList<EObject> _contents = resource.getContents();
         final Iterable<EObject> jvmTypes = IterableExtensions.<EObject>tail(_contents);
-        final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
-          @Override
-          public void apply(final EObject it) {
-            if ((it instanceof JvmDeclaredType)) {
-              GeneratorConfig _get = AbstractReusableActiveAnnotationTests.this.generatorConfigProvider.get(it);
-              CharSequence _generateType = AbstractReusableActiveAnnotationTests.this.generator.generateType(((JvmDeclaredType)it), _get);
-              final String generated = String.valueOf(_generateType);
-              boolean _remove = clientFilesAsSet.remove(generated);
-              boolean _not = (!_remove);
-              if (_not) {
-                String _join = IterableExtensions.join(clientFilesAsSet, "\n");
-                String _plus = ((("Unexpected compiled code:\n" + generated) + "\nExpected :\n") + _join);
-                Assert.assertEquals("", _plus);
-              }
-            } else {
-              String _valueOf = String.valueOf(it);
-              throw new IllegalArgumentException(_valueOf);
+        for (final EObject it_1 : jvmTypes) {
+          if ((it_1 instanceof JvmDeclaredType)) {
+            GeneratorConfig _get = AbstractReusableActiveAnnotationTests.this.generatorConfigProvider.get(it_1);
+            CharSequence _generateType = AbstractReusableActiveAnnotationTests.this.generator.generateType(((JvmDeclaredType)it_1), _get);
+            final String generated = String.valueOf(_generateType);
+            boolean _remove = clientFilesAsSet.remove(generated);
+            boolean _not = (!_remove);
+            if (_not) {
+              String _join = IterableExtensions.join(clientFilesAsSet, "\n");
+              String _plus = ((("Unexpected compiled code:\n" + generated) + "\nExpected :\n") + _join);
+              Assert.assertEquals("", _plus);
             }
+          } else {
+            String _valueOf = String.valueOf(it_1);
+            throw new IllegalArgumentException(_valueOf);
           }
-        };
-        IterableExtensions.<EObject>forEach(jvmTypes, _function_1);
+        }
         boolean _isEmpty = clientFilesAsSet.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          String _join = IterableExtensions.join(clientFilesAsSet, "\n");
-          String _plus = ("Missing compiled code. Expected :\n" + _join);
-          Assert.fail(_plus);
+        boolean _not_1 = (!_isEmpty);
+        if (_not_1) {
+          String _join_1 = IterableExtensions.join(clientFilesAsSet, "\n");
+          String _plus_1 = ("Missing compiled code. Expected :\n" + _join_1);
+          Assert.fail(_plus_1);
         }
       }
     };

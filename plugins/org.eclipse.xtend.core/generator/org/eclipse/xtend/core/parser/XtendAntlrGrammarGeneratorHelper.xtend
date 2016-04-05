@@ -56,9 +56,9 @@ class XtendAntlrGrammarGeneratorHelper {
 	}
 
 	def dispatch void collectTokens(EObject it, Set<String> tokens) {
-		eContents.forEach [
+		for (it : eContents) {
 			collectTokens(tokens)
-		]
+		}
 	}
 
 }

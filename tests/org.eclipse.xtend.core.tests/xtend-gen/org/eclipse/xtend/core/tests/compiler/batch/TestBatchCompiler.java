@@ -130,16 +130,12 @@ public class TestBatchCompiler {
   @AfterClass
   public static void afterClass() {
     try {
-      final Procedure1<File> _function = new Procedure1<File>() {
-        @Override
-        public void apply(final File it) {
-          boolean _exists = it.exists();
-          if (_exists) {
-            it.delete();
-          }
+      for (final File it : TestBatchCompiler.abfalleimer) {
+        boolean _exists = it.exists();
+        if (_exists) {
+          it.delete();
         }
-      };
-      IterableExtensions.<File>forEach(TestBatchCompiler.abfalleimer, _function);
+      }
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;

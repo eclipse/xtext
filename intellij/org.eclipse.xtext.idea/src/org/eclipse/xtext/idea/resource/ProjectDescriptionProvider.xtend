@@ -24,7 +24,7 @@ class ProjectDescriptionProvider {
 				name = module.name
 				val enumerator = ModuleRootManager.getInstance(module).getOrderEntries;
 				val dependencyNames = newArrayList
-				enumerator.forEach[
+				for (it : enumerator) {
 					switch it {
 						LibraryOrderEntry : {
 							dependencyNames += libraryName
@@ -33,7 +33,7 @@ class ProjectDescriptionProvider {
 							dependencyNames += moduleName
 						}
 					}
-				]
+				}
 				dependencies = dependencyNames
 			]
 		}

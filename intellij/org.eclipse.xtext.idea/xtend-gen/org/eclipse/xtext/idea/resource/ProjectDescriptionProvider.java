@@ -15,8 +15,6 @@ import com.intellij.openapi.roots.OrderEntry;
 import java.util.ArrayList;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -36,27 +34,23 @@ public class ProjectDescriptionProvider {
           ModuleRootManager _instance = ModuleRootManager.getInstance(((Module)module));
           final OrderEntry[] enumerator = _instance.getOrderEntries();
           final ArrayList<String> dependencyNames = CollectionLiterals.<String>newArrayList();
-          final Procedure1<OrderEntry> _function = new Procedure1<OrderEntry>() {
-            @Override
-            public void apply(final OrderEntry it) {
-              boolean _matched = false;
-              if (!_matched) {
-                if (it instanceof LibraryOrderEntry) {
-                  _matched=true;
-                  String _libraryName = ((LibraryOrderEntry)it).getLibraryName();
-                  dependencyNames.add(_libraryName);
-                }
-              }
-              if (!_matched) {
-                if (it instanceof ModuleOrderEntry) {
-                  _matched=true;
-                  String _moduleName = ((ModuleOrderEntry)it).getModuleName();
-                  dependencyNames.add(_moduleName);
-                }
+          for (final OrderEntry it_1 : enumerator) {
+            boolean _matched = false;
+            if (!_matched) {
+              if (it_1 instanceof LibraryOrderEntry) {
+                _matched=true;
+                String _libraryName = ((LibraryOrderEntry)it_1).getLibraryName();
+                dependencyNames.add(_libraryName);
               }
             }
-          };
-          IterableExtensions.<OrderEntry>forEach(((Iterable<OrderEntry>)Conversions.doWrapArray(enumerator)), _function);
+            if (!_matched) {
+              if (it_1 instanceof ModuleOrderEntry) {
+                _matched=true;
+                String _moduleName = ((ModuleOrderEntry)it_1).getModuleName();
+                dependencyNames.add(_moduleName);
+              }
+            }
+          }
           it.setDependencies(dependencyNames);
         }
       };

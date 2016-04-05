@@ -23,8 +23,6 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.Event;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Signal;
 import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class StatemachineSemanticHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
@@ -61,16 +59,12 @@ public class StatemachineSemanticHighlightingCalculator extends DefaultSemanticH
   protected void highlightSignal(final EObject owner, final Signal signal, final EStructuralFeature feature, final IHighlightedPositionAcceptor acceptor, final CancelIndicator cancelIndicator) {
     this._operationCanceledManager.checkCanceled(cancelIndicator);
     List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(owner, feature);
-    final Procedure1<INode> _function = new Procedure1<INode>() {
-      @Override
-      public void apply(final INode it) {
-        int _offset = it.getOffset();
-        int _length = it.getLength();
-        EClass _eClass = signal.eClass();
-        String _name = _eClass.getName();
-        acceptor.addPosition(_offset, _length, _name);
-      }
-    };
-    IterableExtensions.<INode>forEach(_findNodesForFeature, _function);
+    for (final INode it : _findNodesForFeature) {
+      int _offset = it.getOffset();
+      int _length = it.getLength();
+      EClass _eClass = signal.eClass();
+      String _name = _eClass.getName();
+      acceptor.addPosition(_offset, _length, _name);
+    }
   }
 }

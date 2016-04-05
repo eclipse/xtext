@@ -11,8 +11,6 @@ import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingExpressionAwareResolvedTypes;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingReassigningResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractTypeExpectation;
@@ -98,27 +96,23 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   @Override
   protected List<LightweightBoundTypeArgument> getHints(final Object handle) {
     final List<LightweightBoundTypeArgument> result = super.getHints(handle);
-    final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
-      @Override
-      public void apply(final LightweightBoundTypeArgument it) {
-        boolean _and = false;
-        LightweightTypeReference _typeReference = it.getTypeReference();
-        boolean _notEquals = (!Objects.equal(_typeReference, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          LightweightTypeReference _typeReference_1 = it.getTypeReference();
-          ITypeReferenceOwner _referenceOwner = ValidatingStackedResolvedTypes.this.getReferenceOwner();
-          boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
-          boolean _not = (!_isOwnedBy);
-          _and = _not;
-        }
-        if (_and) {
-          throw new IllegalArgumentException("reference is not owned by this resolved types");
-        }
+    for (final LightweightBoundTypeArgument it : result) {
+      boolean _and = false;
+      LightweightTypeReference _typeReference = it.getTypeReference();
+      boolean _notEquals = (!Objects.equal(_typeReference, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        LightweightTypeReference _typeReference_1 = it.getTypeReference();
+        ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+        boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
+        boolean _not = (!_isOwnedBy);
+        _and = _not;
       }
-    };
-    IterableExtensions.<LightweightBoundTypeArgument>forEach(result, _function);
+      if (_and) {
+        throw new IllegalArgumentException("reference is not owned by this resolved types");
+      }
+    }
     return result;
   }
   
@@ -146,27 +140,23 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   @Override
   public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
     final List<LightweightBoundTypeArgument> result = super.getAllHints(handle);
-    final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
-      @Override
-      public void apply(final LightweightBoundTypeArgument it) {
-        boolean _and = false;
-        LightweightTypeReference _typeReference = it.getTypeReference();
-        boolean _notEquals = (!Objects.equal(_typeReference, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          LightweightTypeReference _typeReference_1 = it.getTypeReference();
-          ITypeReferenceOwner _referenceOwner = ValidatingStackedResolvedTypes.this.getReferenceOwner();
-          boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
-          boolean _not = (!_isOwnedBy);
-          _and = _not;
-        }
-        if (_and) {
-          throw new IllegalArgumentException("hint is not owned by this resolved types");
-        }
+    for (final LightweightBoundTypeArgument it : result) {
+      boolean _and = false;
+      LightweightTypeReference _typeReference = it.getTypeReference();
+      boolean _notEquals = (!Objects.equal(_typeReference, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        LightweightTypeReference _typeReference_1 = it.getTypeReference();
+        ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+        boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
+        boolean _not = (!_isOwnedBy);
+        _and = _not;
       }
-    };
-    IterableExtensions.<LightweightBoundTypeArgument>forEach(result, _function);
+      if (_and) {
+        throw new IllegalArgumentException("hint is not owned by this resolved types");
+      }
+    }
     return result;
   }
   
@@ -227,23 +217,19 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   
   @Override
   public LightweightTypeReference getMergedType(final List<LightweightTypeReference> types) {
-    final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
-      @Override
-      public void apply(final LightweightTypeReference it) {
-        ITypeReferenceOwner _owner = it.getOwner();
-        boolean _isOwnedBy = it.isOwnedBy(_owner);
-        boolean _not = (!_isOwnedBy);
-        if (_not) {
-          throw new IllegalArgumentException("result is not owned by this resolved types");
-        }
+    for (final LightweightTypeReference it : types) {
+      ITypeReferenceOwner _owner = it.getOwner();
+      boolean _isOwnedBy = it.isOwnedBy(_owner);
+      boolean _not = (!_isOwnedBy);
+      if (_not) {
+        throw new IllegalArgumentException("result is not owned by this resolved types");
       }
-    };
-    IterableExtensions.<LightweightTypeReference>forEach(types, _function);
+    }
     final LightweightTypeReference result = super.getMergedType(types);
     ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
-    boolean _not = (!_isOwnedBy);
-    if (_not) {
+    boolean _isOwnedBy_1 = result.isOwnedBy(_referenceOwner);
+    boolean _not_1 = (!_isOwnedBy_1);
+    if (_not_1) {
       throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;
@@ -251,23 +237,19 @@ public class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
   
   @Override
   public TypeData mergeTypeData(final XExpression expression, final List<TypeData> allValues, final boolean returnType, final boolean nullIfEmpty) {
-    final Procedure1<TypeData> _function = new Procedure1<TypeData>() {
-      @Override
-      public void apply(final TypeData it) {
-        ITypeReferenceOwner _referenceOwner = ValidatingStackedResolvedTypes.this.getReferenceOwner();
-        boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
-        boolean _not = (!_isOwnedBy);
-        if (_not) {
-          throw new IllegalArgumentException("result is not owned by this resolved types");
-        }
+    for (final TypeData it : allValues) {
+      ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
+      boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);
+      boolean _not = (!_isOwnedBy);
+      if (_not) {
+        throw new IllegalArgumentException("result is not owned by this resolved types");
       }
-    };
-    IterableExtensions.<TypeData>forEach(allValues, _function);
+    }
     final TypeData result = super.mergeTypeData(expression, allValues, returnType, nullIfEmpty);
-    ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
-    boolean _isOwnedBy = result.isOwnedBy(_referenceOwner);
-    boolean _not = (!_isOwnedBy);
-    if (_not) {
+    ITypeReferenceOwner _referenceOwner_1 = this.getReferenceOwner();
+    boolean _isOwnedBy_1 = result.isOwnedBy(_referenceOwner_1);
+    boolean _not_1 = (!_isOwnedBy_1);
+    if (_not_1) {
       throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;

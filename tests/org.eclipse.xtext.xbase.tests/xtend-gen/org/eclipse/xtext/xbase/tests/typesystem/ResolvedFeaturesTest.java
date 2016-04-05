@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
@@ -167,15 +166,11 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
-    final Procedure1<IResolvedOperation> _function = new Procedure1<IResolvedOperation>() {
-      @Override
-      public void apply(final IResolvedOperation it) {
-        JvmOperation _declaration = it.getDeclaration();
-        boolean _isAbstract = _declaration.isAbstract();
-        Assert.assertFalse(_isAbstract);
-      }
-    };
-    IterableExtensions.<IResolvedOperation>forEach(all, _function);
+    for (final IResolvedOperation it : all) {
+      JvmOperation _declaration = it.getDeclaration();
+      boolean _isAbstract = _declaration.isAbstract();
+      Assert.assertFalse(_isAbstract);
+    }
   }
   
   @Test
@@ -271,32 +266,28 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     int _size_1 = _declaredConstructors.size();
     Assert.assertEquals(2, _size_1);
     List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
-    final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
-      @Override
-      public void apply(final IResolvedConstructor it) {
-        JvmConstructor _declaration = it.getDeclaration();
-        EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-        int _size = _parameters.size();
-        switch (_size) {
-          case 1:
-            String _resolvedSignature = it.getResolvedSignature();
-            Assert.assertEquals("SoftReference(T)", _resolvedSignature);
-            String _resolvedErasureSignature = it.getResolvedErasureSignature();
-            Assert.assertEquals("SoftReference(java.lang.Object)", _resolvedErasureSignature);
-            break;
-          case 2:
-            String _resolvedSignature_1 = it.getResolvedSignature();
-            Assert.assertEquals("SoftReference(T,java.lang.ref.ReferenceQueue<? super T>)", _resolvedSignature_1);
-            String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
-            Assert.assertEquals("SoftReference(java.lang.Object,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
-            break;
-          default:
-            Assert.fail(("Unexpected constructor: " + it));
-            break;
-        }
+    for (final IResolvedConstructor it : _declaredConstructors_1) {
+      JvmConstructor _declaration = it.getDeclaration();
+      EList<JvmFormalParameter> _parameters = _declaration.getParameters();
+      int _size_2 = _parameters.size();
+      switch (_size_2) {
+        case 1:
+          String _resolvedSignature = it.getResolvedSignature();
+          Assert.assertEquals("SoftReference(T)", _resolvedSignature);
+          String _resolvedErasureSignature = it.getResolvedErasureSignature();
+          Assert.assertEquals("SoftReference(java.lang.Object)", _resolvedErasureSignature);
+          break;
+        case 2:
+          String _resolvedSignature_1 = it.getResolvedSignature();
+          Assert.assertEquals("SoftReference(T,java.lang.ref.ReferenceQueue<? super T>)", _resolvedSignature_1);
+          String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
+          Assert.assertEquals("SoftReference(java.lang.Object,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
+          break;
+        default:
+          Assert.fail(("Unexpected constructor: " + it));
+          break;
       }
-    };
-    IterableExtensions.<IResolvedConstructor>forEach(_declaredConstructors_1, _function);
+    }
   }
   
   @Test
@@ -309,32 +300,28 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     int _size_1 = _declaredConstructors.size();
     Assert.assertEquals(2, _size_1);
     List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
-    final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
-      @Override
-      public void apply(final IResolvedConstructor it) {
-        JvmConstructor _declaration = it.getDeclaration();
-        EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-        int _size = _parameters.size();
-        switch (_size) {
-          case 1:
-            String _resolvedSignature = it.getResolvedSignature();
-            Assert.assertEquals("SoftReference(java.lang.String)", _resolvedSignature);
-            String _resolvedErasureSignature = it.getResolvedErasureSignature();
-            Assert.assertEquals("SoftReference(java.lang.String)", _resolvedErasureSignature);
-            break;
-          case 2:
-            String _resolvedSignature_1 = it.getResolvedSignature();
-            Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue<? super java.lang.String>)", _resolvedSignature_1);
-            String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
-            Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
-            break;
-          default:
-            Assert.fail(("Unexpected constructor: " + it));
-            break;
-        }
+    for (final IResolvedConstructor it : _declaredConstructors_1) {
+      JvmConstructor _declaration = it.getDeclaration();
+      EList<JvmFormalParameter> _parameters = _declaration.getParameters();
+      int _size_2 = _parameters.size();
+      switch (_size_2) {
+        case 1:
+          String _resolvedSignature = it.getResolvedSignature();
+          Assert.assertEquals("SoftReference(java.lang.String)", _resolvedSignature);
+          String _resolvedErasureSignature = it.getResolvedErasureSignature();
+          Assert.assertEquals("SoftReference(java.lang.String)", _resolvedErasureSignature);
+          break;
+        case 2:
+          String _resolvedSignature_1 = it.getResolvedSignature();
+          Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue<? super java.lang.String>)", _resolvedSignature_1);
+          String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
+          Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
+          break;
+        default:
+          Assert.fail(("Unexpected constructor: " + it));
+          break;
       }
-    };
-    IterableExtensions.<IResolvedConstructor>forEach(_declaredConstructors_1, _function);
+    }
   }
   
   @Test

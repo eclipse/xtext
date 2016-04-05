@@ -195,26 +195,26 @@ class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingTypeReferen
 	}
 	
 	protected def void withIndizes(IFeatureCallArguments arguments, int... indexes) {
-		indexes.forEach [
+		for (it : indexes) {
 			assertTrue(arguments.hasUnprocessedArguments)
 			val slot = arguments.nextUnprocessedArgumentSlot
 			val expression = slot.argumentExpressions.head
 			val featureCall = expression.eContainer as XFeatureCall
 			assertEquals(it, featureCall.featureCallArguments.indexOf(expression))
 			slot.markProcessed
-		]
+		}
 		assertFalse(arguments.hasUnprocessedArguments)
 	}
 	
 	protected def void withTypes(IFeatureCallArguments arguments, String... types) {
-		types.forEach [
+		for (it : types) {
 			assertTrue(arguments.hasUnprocessedArguments)
 			val slot = arguments.nextUnprocessedArgumentSlot
 			assertEquals(it === null, slot.superfluous)
 			if (it !== null)
 				assertEquals(it, slot.declaredType.simpleName)
 			slot.markProcessed
-		]
+		}
 		assertFalse(arguments.hasUnprocessedArguments)
 	}
 	

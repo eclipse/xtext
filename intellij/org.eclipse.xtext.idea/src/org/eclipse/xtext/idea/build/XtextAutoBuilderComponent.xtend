@@ -419,7 +419,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			}
 		} else {
 			alarm.cancelAllRequests
-			cancelIndicators.forEach[canceled = true]
+			for (it : cancelIndicators) {
+				canceled = true
+			}
 			alarm.addRequest([build], 200, ApplicationManager.application.defaultModalityState)
 		}
 	}

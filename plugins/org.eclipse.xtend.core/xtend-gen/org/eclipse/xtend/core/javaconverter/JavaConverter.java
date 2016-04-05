@@ -25,10 +25,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -237,13 +234,9 @@ public class JavaConverter {
     final StringBuilder javaSrcBuilder = new StringBuilder();
     boolean _notEquals = (!Objects.equal(imports, null));
     if (_notEquals) {
-      final Procedure1<String> _function = new Procedure1<String>() {
-        @Override
-        public void apply(final String it) {
-          javaSrcBuilder.append((("import " + it) + ";"));
-        }
-      };
-      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(imports)), _function);
+      for (final String it : imports) {
+        javaSrcBuilder.append((("import " + it) + ";"));
+      }
     }
     boolean _equals = Objects.equal(unitName, null);
     if (_equals) {
