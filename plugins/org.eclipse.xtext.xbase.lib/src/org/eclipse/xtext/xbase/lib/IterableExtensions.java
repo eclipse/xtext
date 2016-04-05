@@ -324,12 +324,37 @@ public class IterableExtensions {
 	/**
 	 * Applies {@code procedure} for each element of the given iterable.
 	 * 
+	 * This method has been deprecated because calls such as myIterable.forEach[] will call
+	 * org.eclipse.xtext.xbase.lib.IterableExtensions.forEach(Iterable<T>, Procedure1<? super T>) when using Java 7 (or older) and
+	 * java.lang.Iterable.forEach(Consumer<? super T>) when using Java 8 or newer.
+	 * 
+	 * Since this "magic" change in the Xtend-compilers output (the transpiled Java code) is undesirable, it is reommended to use
+	 * 
+	 * myIterable.forEach[] for java.lang.Iterable.forEach(Consumer<? super T>) and
+	 * 
+	 * myIterable.forach[] for org.eclipse.xtext.xbase.lib.IterableExtensions.foreach(Iterable<T>, Procedure1<? super T>)
+	 * 
+	 * @param iterable
+	 *            the iterable. May not be <code>null</code>.
+	 * @param procedure
+	 *            the procedure. May not be <code>null</code>.
+	 * 
+	 * @deprecated use java.lang.Iterable.forEach(Consumer<? super T>) from Java 8 or {@link #foreach(Iterable, Procedure1)} from this file.
+	 */
+	@Deprecated
+	public static <T> void forEach(Iterable<T> iterable, Procedure1<? super T> procedure) {
+		IteratorExtensions.forEach(iterable.iterator(), procedure);
+	}
+	
+	/**
+	 * Applies {@code procedure} for each element of the given iterable.
+	 * 
 	 * @param iterable
 	 *            the iterable. May not be <code>null</code>.
 	 * @param procedure
 	 *            the procedure. May not be <code>null</code>.
 	 */
-	public static <T> void forEach(Iterable<T> iterable, Procedure1<? super T> procedure) {
+	public static <T> void foreach(Iterable<T> iterable, Procedure1<? super T> procedure) {
 		IteratorExtensions.forEach(iterable.iterator(), procedure);
 	}
 	
