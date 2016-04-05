@@ -18,14 +18,11 @@ public class XSwitchExpressionCompilationState {
 
 	private boolean firstCase = true;
 
-	public void startProcessingCase() {
-	}
-
 	public void finishProcessingCase() {
 		firstCase = false;
 	}
 
-	public boolean caseNeedsIfCheck() {
+	public boolean caseNeedsIfNotMatchedCheck() {
 		return !firstCase;
 	}
 }
