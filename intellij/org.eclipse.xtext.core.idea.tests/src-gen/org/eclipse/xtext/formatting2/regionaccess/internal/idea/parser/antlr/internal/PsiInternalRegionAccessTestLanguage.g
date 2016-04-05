@@ -539,19 +539,42 @@ ruleMixed returns [Boolean current=false]
 		)?
 		(
 			(
-				{
-					precedeComposite(elementTypeProvider.getMixed_ActionAction_2_0ElementType());
-					doneComposite();
-					associateWithSemanticElement();
-				}
+				(
+					{
+						precedeComposite(elementTypeProvider.getMixed_ActionAction_2_0_0ElementType());
+						doneComposite();
+						associateWithSemanticElement();
+					}
+				)
+				(
+					{
+						markLeaf(elementTypeProvider.getMixed_FragmentKeyword_2_0_1_0ElementType());
+					}
+					otherlv_5='fragment'
+					{
+						doneLeaf(otherlv_5);
+					}
+					{
+						if (!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+						markComposite(elementTypeProvider.getMixed_FragmentParserRuleCall_2_0_1_1ElementType());
+					}
+					this_Fragment_6=ruleFragment[$current]
+					{
+						$current = $this_Fragment_6.current;
+						doneComposite();
+					}
+				)?
 			)
 			    |
 			{
 				markComposite(elementTypeProvider.getMixed_MixedParserRuleCall_2_1ElementType());
 			}
-			this_Mixed_5=ruleMixed
+			this_Mixed_7=ruleMixed
 			{
-				$current = $this_Mixed_5.current;
+				$current = $this_Mixed_7.current;
 				doneComposite();
 			}
 			    |
@@ -561,7 +584,7 @@ ruleMixed returns [Boolean current=false]
 						{
 							markLeaf(elementTypeProvider.getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType());
 						}
-						lv_name_6_0=RULE_ID
+						lv_name_8_0=RULE_ID
 						{
 							if(!$current) {
 								associateWithSemanticElement();
@@ -569,7 +592,7 @@ ruleMixed returns [Boolean current=false]
 							}
 						}
 						{
-							doneLeaf(lv_name_6_0);
+							doneLeaf(lv_name_8_0);
 						}
 					)
 				)
@@ -578,16 +601,16 @@ ruleMixed returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getMixed_ChildKeyword_2_2_1_0ElementType());
 					}
-					otherlv_7='child'
+					otherlv_9='child'
 					{
-						doneLeaf(otherlv_7);
+						doneLeaf(otherlv_9);
 					}
 					(
 						(
 							{
 								markComposite(elementTypeProvider.getMixed_EobjMixedParserRuleCall_2_2_1_1_0ElementType());
 							}
-							lv_eobj_8_0=ruleMixed
+							lv_eobj_10_0=ruleMixed
 							{
 								doneComposite();
 								if(!$current) {
@@ -604,7 +627,7 @@ ruleMixed returns [Boolean current=false]
 						{
 							markComposite(elementTypeProvider.getMixed_DatatypeDatatypeParserRuleCall_2_2_2_0ElementType());
 						}
-						lv_datatype_9_0=ruleDatatype
+						lv_datatype_11_0=ruleDatatype
 						{
 							doneComposite();
 							if(!$current) {
@@ -619,9 +642,9 @@ ruleMixed returns [Boolean current=false]
 					{
 						markLeaf(elementTypeProvider.getMixed_RefKeyword_2_2_3_0ElementType());
 					}
-					otherlv_10='ref'
+					otherlv_12='ref'
 					{
-						doneLeaf(otherlv_10);
+						doneLeaf(otherlv_12);
 					}
 					(
 						(
@@ -634,9 +657,9 @@ ruleMixed returns [Boolean current=false]
 							{
 								markLeaf(elementTypeProvider.getMixed_RefMixedCrossReference_2_2_3_1_0ElementType());
 							}
-							otherlv_11=RULE_ID
+							otherlv_13=RULE_ID
 							{
-								doneLeaf(otherlv_11);
+								doneLeaf(otherlv_13);
 							}
 						)
 					)
@@ -647,7 +670,7 @@ ruleMixed returns [Boolean current=false]
 						{
 							markComposite(elementTypeProvider.getMixed_LitEnumEnumRuleCall_2_2_4_0ElementType());
 						}
-						lv_lit_12_0=ruleEnum
+						lv_lit_14_0=ruleEnum
 						{
 							doneComposite();
 							if(!$current) {
@@ -662,9 +685,9 @@ ruleMixed returns [Boolean current=false]
 		{
 			markLeaf(elementTypeProvider.getMixed_RightParenthesisKeyword_3ElementType());
 		}
-		otherlv_13=')'
+		otherlv_15=')'
 		{
-			doneLeaf(otherlv_13);
+			doneLeaf(otherlv_15);
 		}
 		(
 			(
@@ -677,9 +700,9 @@ ruleMixed returns [Boolean current=false]
 			{
 				markLeaf(elementTypeProvider.getMixed_ActionKeyword_4_1ElementType());
 			}
-			otherlv_15='action'
+			otherlv_17='action'
 			{
-				doneLeaf(otherlv_15);
+				doneLeaf(otherlv_17);
 			}
 			(
 				(
@@ -687,7 +710,7 @@ ruleMixed returns [Boolean current=false]
 						{
 							markComposite(elementTypeProvider.getMixed_BodyMixedParserRuleCall_4_2_0_0ElementType());
 						}
-						lv_body_16_0=ruleMixed
+						lv_body_18_0=ruleMixed
 						{
 							doneComposite();
 							if(!$current) {
@@ -700,9 +723,9 @@ ruleMixed returns [Boolean current=false]
 				{
 					markLeaf(elementTypeProvider.getMixed_EndKeyword_4_2_1ElementType());
 				}
-				otherlv_17='end'
+				otherlv_19='end'
 				{
-					doneLeaf(otherlv_17);
+					doneLeaf(otherlv_19);
 				}
 			)?
 		)*
@@ -742,6 +765,78 @@ ruleDatatype returns [Boolean current=false]
 			this_ID_2=RULE_ID
 			{
 				doneLeaf(this_ID_2);
+			}
+		)
+	)
+;
+
+
+// Rule Fragment
+ruleFragment[Boolean in_current]  returns [Boolean current=in_current]
+:
+	(
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getFragment_FragNameIDTerminalRuleCall_0_0ElementType());
+				}
+				lv_fragName_0_0=RULE_ID
+				{
+					if(!$current) {
+						associateWithSemanticElement();
+						$current = true;
+					}
+				}
+				{
+					doneLeaf(lv_fragName_0_0);
+				}
+			)
+		)
+		    |
+		(
+			{
+				markLeaf(elementTypeProvider.getFragment_ChildKeyword_1_0ElementType());
+			}
+			otherlv_1='child'
+			{
+				doneLeaf(otherlv_1);
+			}
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getFragment_MixedMixedParserRuleCall_1_1_0ElementType());
+					}
+					lv_mixed_2_0=ruleMixed
+					{
+						doneComposite();
+						if(!$current) {
+							associateWithSemanticElement();
+							$current = true;
+						}
+					}
+				)
+			)
+		)
+		    |
+		(
+			{
+				markLeaf(elementTypeProvider.getFragment_RecursionKeyword_2_0ElementType());
+			}
+			otherlv_3='recursion'
+			{
+				doneLeaf(otherlv_3);
+			}
+			{
+				if (!$current) {
+					associateWithSemanticElement();
+					$current = true;
+				}
+				markComposite(elementTypeProvider.getFragment_FragmentParserRuleCall_2_1ElementType());
+			}
+			this_Fragment_4=ruleFragment[$current]
+			{
+				$current = $this_Fragment_4.current;
+				doneComposite();
 			}
 		)
 	)

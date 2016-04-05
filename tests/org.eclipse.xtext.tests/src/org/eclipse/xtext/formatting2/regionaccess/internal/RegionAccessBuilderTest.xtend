@@ -491,6 +491,130 @@ class RegionAccessBuilderTest {
 			18 0 H
 		'''
 	}
+	
+	@Test def void testFragmentID() {
+		'''
+			6 (fragment foo)
+		'''.toString.trim === '''
+			 0 0 H
+			     B Action     Root
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 8 S "fragment" Mixed:'fragment'
+			11 1 H " "        Whitespace:TerminalRule'WS'
+			12 3 S "foo"      Fragment:fragName=ID
+			15 0 H
+			15 1 S ")"        Mixed:')'
+			     E Action     Root
+			16 0 H
+		'''
+	}
+	
+	@Test def void testFragmentRecursionID() {
+		'''
+			6 (fragment recursion foo)
+		'''.toString.trim === '''
+			 0 0 H
+			     B Action     Root
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 8 S "fragment" Mixed:'fragment'
+			11 1 H " "        Whitespace:TerminalRule'WS'
+			12 9 S "recur..." Fragment:'recursion'
+			21 1 H " "        Whitespace:TerminalRule'WS'
+			22 3 S "foo"      Fragment:fragName=ID
+			25 0 H
+			25 1 S ")"        Mixed:')'
+			     E Action     Root
+			26 0 H
+		'''
+	}
+	
+	@Test def void testFragmentChildAction() {
+		'''
+			6 (fragment child ())
+		'''.toString.trim === '''
+			 0 0 H
+			     B Action     Root
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 8 S "fragment" Mixed:'fragment'
+			11 1 H " "        Whitespace:TerminalRule'WS'
+			12 5 S "child"    Fragment:'child'
+			17 1 H " "        Whitespace:TerminalRule'WS'
+			     B Action     Fragment:mixed=Mixed path:Action/mixed
+			18 1 S "("        Mixed:'('
+			19 0 H
+			19 1 S ")"        Mixed:')'
+			     E Action     Fragment:mixed=Mixed path:Action/mixed
+			20 0 H
+			20 1 S ")"        Mixed:')'
+			     E Action     Root
+			21 0 H
+		'''
+	}
+	
+	@Test def void testFragmentChildID() {
+		'''
+			6 (fragment child (foo))
+		'''.toString.trim === '''
+			 0 0 H
+			     B Action     Root
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 8 S "fragment" Mixed:'fragment'
+			11 1 H " "        Whitespace:TerminalRule'WS'
+			12 5 S "child"    Fragment:'child'
+			17 1 H " "        Whitespace:TerminalRule'WS'
+			     B Mixed'foo' Fragment:mixed=Mixed path:Action/mixed
+			18 1 S "("        Mixed:'('
+			19 0 H
+			19 3 S "foo"      Mixed:name=ID
+			22 0 H
+			22 1 S ")"        Mixed:')'
+			     E Mixed'foo' Fragment:mixed=Mixed path:Action/mixed
+			23 0 H
+			23 1 S ")"        Mixed:')'
+			     E Action     Root
+			24 0 H
+		'''
+	}
+	
+	@Test def void testFragmentRecursionChild() {
+		'''
+			6 (fragment recursion child ())
+		'''.toString.trim === '''
+			 0 0 H
+			     B Action     Root
+			 0 1 S "6"        Root:'6'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			 2 1 S "("        Mixed:'('
+			 3 0 H
+			 3 8 S "fragment" Mixed:'fragment'
+			11 1 H " "        Whitespace:TerminalRule'WS'
+			12 9 S "recur..." Fragment:'recursion'
+			21 1 H " "        Whitespace:TerminalRule'WS'
+			22 5 S "child"    Fragment:'child'
+			27 1 H " "        Whitespace:TerminalRule'WS'
+			     B Action     Fragment:mixed=Mixed path:Action/mixed
+			28 1 S "("        Mixed:'('
+			29 0 H
+			29 1 S ")"        Mixed:')'
+			     E Action     Fragment:mixed=Mixed path:Action/mixed
+			30 0 H
+			30 1 S ")"        Mixed:')'
+			     E Action     Root
+			31 0 H
+		'''
+	}
 
 	private def ===(CharSequence file, CharSequence expectation) {
 		val exp = expectation.toString
