@@ -8,14 +8,16 @@
 package org.eclipse.xtext.serializer.tokens;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.serializer.diagnostic.ITokenDiagnosticProvider;
+import org.eclipse.xtext.xtext.RuleNames;
 
 import com.google.inject.Inject;
 
@@ -26,9 +28,12 @@ public class ValueSerializer implements IValueSerializer {
 
 	@Inject
 	private IValueConverterService converter;
-	
+
 	@Inject
 	private RuleNames ruleNames;
+
+	@Inject
+	private LinkingHelper linkingHelper;
 
 	@Inject
 	protected ITokenDiagnosticProvider diagnostics;
@@ -54,13 +59,18 @@ public class ValueSerializer implements IValueSerializer {
 
 	@Override
 	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node, Acceptor errors) {
+		AbstractRule rule = ruleCall.getRule();
+		String ruleName = ruleNames.getQualifiedName(rule);
 		if (node != null) {
-			Object converted = converter.toValue(NodeModelUtils.getTokenText(node), ruleNames.getQualifiedName(ruleCall.getRule()), node);
-			if (converted != null && converted.equals(value))
-				return tokenUtil.serializeNode(node);
+			AbstractRule nodeRule = linkingHelper.getRuleFrom(node.getGrammarElement());
+			if (rule == nodeRule) {
+				Object converted = converter.toValue(NodeModelUtils.getTokenText(node), ruleName, node);
+				if (converted != null && converted.equals(value))
+					return tokenUtil.serializeNode(node);
+			}
 		}
 		try {
-			String str = converter.toString(value, ruleNames.getQualifiedName(ruleCall.getRule()));
+			String str = converter.toString(value, ruleName);
 			if (str != null)
 				return str;
 			if (errors != null)
