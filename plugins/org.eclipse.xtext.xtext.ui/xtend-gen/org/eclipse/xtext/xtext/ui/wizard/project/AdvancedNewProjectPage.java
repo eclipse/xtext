@@ -311,21 +311,34 @@ public class AdvancedNewProjectPage extends WizardPage {
         this.<Control>reportIssue(IMessageProvider.INFORMATION, 
           Messages.AdvancedNewProjectPage_ideaReqGradleInfo);
       }
+      boolean _and_5 = false;
+      boolean _selection_3 = this.createP2Project.getSelection();
+      if (!_selection_3) {
+        _and_5 = false;
+      } else {
+        boolean _selection_4 = this.createSDKProject.getSelection();
+        boolean _not_2 = (!_selection_4);
+        _and_5 = _not_2;
+      }
+      if (_and_5) {
+        this.<Control>reportIssue(IMessageProvider.INFORMATION, 
+          Messages.AdvancedNewProjectPage_p2AndSdkInfo);
+      }
       Object _source = null;
       if (e!=null) {
         _source=e.getSource();
       }
       final Object source = _source;
-      boolean _and_5 = false;
-      boolean _selection_3 = this.createUiProject.getSelection();
-      if (!_selection_3) {
-        _and_5 = false;
+      boolean _and_6 = false;
+      boolean _selection_5 = this.createUiProject.getSelection();
+      if (!_selection_5) {
+        _and_6 = false;
       } else {
         boolean _isSelected_5 = this.isSelected(this.sourceLayout, SourceLayout.PLAIN);
-        boolean _not_2 = (!_isSelected_5);
-        _and_5 = _not_2;
+        boolean _not_3 = (!_isSelected_5);
+        _and_6 = _not_3;
       }
-      if (_and_5) {
+      if (_and_6) {
         if ((this.createUiProject == source)) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("\'");
@@ -366,15 +379,15 @@ public class AdvancedNewProjectPage extends WizardPage {
           this.<Control>reportIssue(IMessageProvider.ERROR, _builder_1.toString(), _function_1);
         }
       }
-      boolean _and_6 = false;
+      boolean _and_7 = false;
       boolean _isSelected_6 = this.isSelected(this.preferredBuildSystem, BuildSystem.NONE);
       if (!_isSelected_6) {
-        _and_6 = false;
+        _and_7 = false;
       } else {
         boolean _isSelected_7 = this.isSelected(this.sourceLayout, SourceLayout.MAVEN);
-        _and_6 = _isSelected_7;
+        _and_7 = _isSelected_7;
       }
-      if (_and_6) {
+      if (_and_7) {
         if ((this.preferredBuildSystem == source)) {
           StringConcatenation _builder_2 = new StringConcatenation();
           _builder_2.append("Maven/Gradle source layout is not supported without a build system.");
@@ -405,15 +418,15 @@ public class AdvancedNewProjectPage extends WizardPage {
           this.<Control>reportIssue(IMessageProvider.ERROR, _builder_3.toString(), _function_3);
         }
       }
-      boolean _and_7 = false;
-      boolean _selection_4 = this.createWebProject.getSelection();
-      if (!_selection_4) {
-        _and_7 = false;
+      boolean _and_8 = false;
+      boolean _selection_6 = this.createWebProject.getSelection();
+      if (!_selection_6) {
+        _and_8 = false;
       } else {
         boolean _isSelected_8 = this.isSelected(this.preferredBuildSystem, BuildSystem.NONE);
-        _and_7 = _isSelected_8;
+        _and_8 = _isSelected_8;
       }
-      if (_and_7) {
+      if (_and_8) {
         if ((this.preferredBuildSystem == source)) {
           StringConcatenation _builder_4 = new StringConcatenation();
           _builder_4.append("The \'");
@@ -451,11 +464,11 @@ public class AdvancedNewProjectPage extends WizardPage {
       }
       final List<Button> dependend = Collections.<Button>unmodifiableList(CollectionLiterals.<Button>newArrayList(this.createUiProject, this.createIdeaProject, this.createWebProject));
       Procedure0 _xifexpression = null;
-      boolean _and_8 = false;
-      boolean _selection_5 = this.createIdeProject.getSelection();
-      boolean _not_3 = (!_selection_5);
-      if (!_not_3) {
-        _and_8 = false;
+      boolean _and_9 = false;
+      boolean _selection_7 = this.createIdeProject.getSelection();
+      boolean _not_4 = (!_selection_7);
+      if (!_not_4) {
+        _and_9 = false;
       } else {
         final Function1<Button, Boolean> _function_6 = new Function1<Button, Boolean>() {
           @Override
@@ -464,9 +477,9 @@ public class AdvancedNewProjectPage extends WizardPage {
           }
         };
         boolean _exists = IterableExtensions.<Button>exists(dependend, _function_6);
-        _and_8 = _exists;
+        _and_9 = _exists;
       }
-      if (_and_8) {
+      if (_and_9) {
         Procedure0 _xblockexpression_1 = null;
         {
           final Function1<Button, Boolean> _function_7 = new Function1<Button, Boolean>() {
