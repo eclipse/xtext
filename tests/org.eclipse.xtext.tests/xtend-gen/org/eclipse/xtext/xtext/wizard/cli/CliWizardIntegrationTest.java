@@ -38,6 +38,7 @@ import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
@@ -224,6 +225,50 @@ public class CliWizardIntegrationTest {
     CliWizardIntegrationTest.newProjectConfig(), new Procedure1<WizardConfiguration>() {
     @Override
     public void apply(final WizardConfiguration it) {
+      it.setBaseName("org.xtext.example.eclipsePluginP2");
+      it.setPreferredBuildSystem(BuildSystem.NONE);
+      it.setSourceLayout(SourceLayout.PLAIN);
+      it.setProjectLayout(ProjectLayout.FLAT);
+      RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
+      TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+      _testProject.setEnabled(true);
+      IdeProjectDescriptor _ideProject = it.getIdeProject();
+      _ideProject.setEnabled(true);
+      UiProjectDescriptor _uiProject = it.getUiProject();
+      _uiProject.setEnabled(true);
+      UiProjectDescriptor _uiProject_1 = it.getUiProject();
+      TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+      _testProject_1.setEnabled(true);
+      P2RepositoryProject _p2Project = it.getP2Project();
+      _p2Project.setEnabled(true);
+    }
+  }), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), new Procedure1<WizardConfiguration>() {
+    @Override
+    public void apply(final WizardConfiguration it) {
+      it.setBaseName("org.xtext.example.mavenTychoP2");
+      it.setPreferredBuildSystem(BuildSystem.MAVEN);
+      it.setSourceLayout(SourceLayout.PLAIN);
+      it.setProjectLayout(ProjectLayout.HIERARCHICAL);
+      RuntimeProjectDescriptor _runtimeProject = it.getRuntimeProject();
+      TestProjectDescriptor _testProject = _runtimeProject.getTestProject();
+      _testProject.setEnabled(true);
+      UiProjectDescriptor _uiProject = it.getUiProject();
+      _uiProject.setEnabled(true);
+      UiProjectDescriptor _uiProject_1 = it.getUiProject();
+      TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+      _testProject_1.setEnabled(true);
+      IdeProjectDescriptor _ideProject = it.getIdeProject();
+      _ideProject.setEnabled(true);
+      WebProjectDescriptor _webProject = it.getWebProject();
+      _webProject.setEnabled(true);
+      P2RepositoryProject _p2Project = it.getP2Project();
+      _p2Project.setEnabled(true);
+    }
+  }), ObjectExtensions.<WizardConfiguration>operator_doubleArrow(
+    CliWizardIntegrationTest.newProjectConfig(), new Procedure1<WizardConfiguration>() {
+    @Override
+    public void apply(final WizardConfiguration it) {
       it.setBaseName("org.xtext.example.full");
       it.setPreferredBuildSystem(BuildSystem.GRADLE);
       it.setSourceLayout(SourceLayout.PLAIN);
@@ -242,6 +287,8 @@ public class CliWizardIntegrationTest {
       _webProject.setEnabled(true);
       IntellijProjectDescriptor _intellijProject = it.getIntellijProject();
       _intellijProject.setEnabled(true);
+      P2RepositoryProject _p2Project = it.getP2Project();
+      _p2Project.setEnabled(true);
     }
   })));
   

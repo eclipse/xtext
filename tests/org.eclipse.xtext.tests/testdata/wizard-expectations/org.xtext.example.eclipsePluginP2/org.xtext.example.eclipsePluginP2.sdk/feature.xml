@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature id="org.xtext.example.eclipsePluginP2.sdk"
+	label="MyDsl SDK Feature "
+	version="1.0.0.qualifier">
+	<plugin
+			id="org.xtext.example.eclipsePluginP2"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+	<plugin
+			id="org.xtext.example.eclipsePluginP2.ide"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+	<plugin
+			id="org.xtext.example.eclipsePluginP2.ui"
+			download-size="0"
+			install-size="0"
+			version="0.0.0"
+			unpack="false"/>
+</feature>
