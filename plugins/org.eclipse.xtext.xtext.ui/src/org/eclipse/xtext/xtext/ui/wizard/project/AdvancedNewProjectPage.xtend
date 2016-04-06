@@ -113,6 +113,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		createIdeaProject.addSelectionListener(selectionControl)
 		createWebProject.addSelectionListener(selectionControl)
 		createIdeProject.addSelectionListener(selectionControl)
+		createSDKProject.addSelectionListener(selectionControl)
 		setDefaults
 
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced")
@@ -290,6 +291,10 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def boolean isCreateWebProject() {
 		createWebProject.selection
+	}
+
+	def boolean isCreateSdkProject() {
+		createSDKProject.selection
 	}
 
 	def BuildSystem getPreferredBuildSystem() {

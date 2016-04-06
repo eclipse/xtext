@@ -29,6 +29,7 @@ import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.SdkFeatureProject;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
@@ -75,6 +76,8 @@ public class WizardConfiguration {
   
   private final TargetPlatformProject targetPlatformProject = new TargetPlatformProject(this);
   
+  private final SdkFeatureProject sdkProject = new SdkFeatureProject(this);
+  
   public Set<ProjectDescriptor> getEnabledProjects() {
     ImmutableSet<ProjectDescriptor> _xblockexpression = null;
     {
@@ -84,7 +87,7 @@ public class WizardConfiguration {
           return Boolean.valueOf(it.isEnabled());
         }
       };
-      final Iterable<? extends ProjectDescriptor> productionProjects = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.parentProject, this.runtimeProject, this.ideProject, this.uiProject, this.intellijProject, this.webProject, this.targetPlatformProject)), _function);
+      final Iterable<? extends ProjectDescriptor> productionProjects = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.parentProject, this.runtimeProject, this.ideProject, this.uiProject, this.intellijProject, this.webProject, this.targetPlatformProject, this.sdkProject)), _function);
       Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(productionProjects, TestedProjectDescriptor.class);
       final Function1<TestedProjectDescriptor, TestProjectDescriptor> _function_1 = new Function1<TestedProjectDescriptor, TestProjectDescriptor>() {
         @Override
@@ -287,5 +290,10 @@ public class WizardConfiguration {
   @Pure
   public TargetPlatformProject getTargetPlatformProject() {
     return this.targetPlatformProject;
+  }
+  
+  @Pure
+  public SdkFeatureProject getSdkProject() {
+    return this.sdkProject;
   }
 }
