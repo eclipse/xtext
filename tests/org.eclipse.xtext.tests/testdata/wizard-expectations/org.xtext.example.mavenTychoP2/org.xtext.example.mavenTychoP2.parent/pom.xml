@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.xtext.example.full</groupId>
+	<groupId>org.xtext.example.mavenTychoP2</groupId>
 	<version>1.0.0-SNAPSHOT</version>
-	<artifactId>org.xtext.example.full.parent</artifactId>
+	<artifactId>org.xtext.example.mavenTychoP2.parent</artifactId>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -14,13 +14,15 @@
 		<maven.compiler.target>1.6</maven.compiler.target>
 	</properties>
 	<modules>
-		<module>org.xtext.example.full</module>
-		<module>org.xtext.example.full.ide</module>
-		<module>org.xtext.example.full.ui</module>
-		<module>org.xtext.example.full.target</module>
-		<module>org.xtext.example.full.sdk</module>
-		<module>org.xtext.example.full.repository</module>
-		<module>org.xtext.example.full.ui.tests</module>
+		<module>org.xtext.example.mavenTychoP2</module>
+		<module>org.xtext.example.mavenTychoP2.ide</module>
+		<module>org.xtext.example.mavenTychoP2.ui</module>
+		<module>org.xtext.example.mavenTychoP2.web</module>
+		<module>org.xtext.example.mavenTychoP2.target</module>
+		<module>org.xtext.example.mavenTychoP2.sdk</module>
+		<module>org.xtext.example.mavenTychoP2.repository</module>
+		<module>org.xtext.example.mavenTychoP2.tests</module>
+		<module>org.xtext.example.mavenTychoP2.ui.tests</module>
 	</modules>
 	<build>
 		<plugins>
@@ -78,8 +80,8 @@
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>org.xtext.example.full</groupId>
-							<artifactId>org.xtext.example.full.target</artifactId>
+							<groupId>org.xtext.example.mavenTychoP2</groupId>
+							<artifactId>org.xtext.example.mavenTychoP2.target</artifactId>
 							<version>${project.version}</version>
 						</artifact>
 					</target>
