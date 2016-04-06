@@ -618,6 +618,22 @@ The second component you might want to customize is the [IDependentElementsCalcu
 
 One refactoring can trigger another: When renaming a rule in an Xtext grammar, the returned [EClass]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java) should be renamed, too. For these cases, you can register a [RenameParticipant]({{site.javadoc.eclipse-platform}}/org/eclipse/ltk/core/refactoring/participants/RenameParticipant.html) by the common means of LTK. If the target of the participant is Xtext based, you can use a [AbstractProcessorBasedRenameParticipant]({{site.src.xtext}}/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/refactoring/impl/AbstractProcessorBasedRenameParticipant.java).
 
+## Project Wizard
+
+The `newProjectWizardForEclipse` fragment generates a wizard that clients of your language can use to create model projects.  This will be generated in the `.ui` project, and the `plugin.xml` will have to be manually merged with the `plugin.xml_gen`.
+
+This fragment must be explicitly enabled in the MWE2 file in the `language` section as follows
+
+```mwe2
+newProjectWizardForEclipse = {
+	generate = true
+}
+```
+
+By default, the generated wizard will create a Plug-in project. If you want a General project you need to set the following fragment's property to false: `pluginProject=false`.
+
+This fragment will also generate in the `src` folder of the `ui` project a `MyDslNewProjectWizardInitialContents` Xtend file, where you can specify the initial contents that your language wizard will generate.
+
 ---
 
 **[Next Chapter: Web Editor Support](330_web_support.html)**
