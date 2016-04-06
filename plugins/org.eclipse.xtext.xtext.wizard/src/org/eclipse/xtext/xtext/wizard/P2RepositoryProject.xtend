@@ -13,18 +13,14 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
  * @author Lorenzo Bettini - Initial contribution and API
  */
 @FinalFieldsConstructor
-class SdkFeatureProject extends ProjectDescriptor {
+class P2RepositoryProject extends ProjectDescriptor {
 
 	override getNameQualifier() {
-		".sdk"
+		".repository"
 	}
 	
 	override isEclipsePluginProject() {
 		false
-	}
-	
-	override isEclipseFeatureProject() {
-		true
 	}
 	
 	override isPartOfGradleBuild() {
@@ -36,57 +32,41 @@ class SdkFeatureProject extends ProjectDescriptor {
 	}
 	
 	override isEnabled() {
-		(super.enabled && config.runtimeProject.isEclipsePluginProject)
-		||
-		config.p2Project.enabled
+		super.enabled && config.runtimeProject.isEclipsePluginProject
 	}
 	
 	override getFiles() {
 		val files = newArrayList
 		files += super.files
-		files += file(Outlet.ROOT, "feature.xml", featureXml)
+		files += file(Outlet.ROOT, "category.xml", categoryXml)
 		files
 	}
 	
 	override getSourceFolders() {
 		#{}
 	}
-	
-	override getBinIncludes() {
-		#{"feature.xml"}
-	}
 
-	def featureXml() '''
+	def categoryXml() '''
 		<?xml version="1.0" encoding="UTF-8"?>
-		<feature id="«name»"
-			label="«config.language.simpleName» SDK Feature "
-			version="1.0.0.qualifier">
-			«includedPlugin("")»
-			«IF config.ideProject.enabled»
-			«includedPlugin(config.ideProject.nameQualifier)»
-			«ENDIF»
-			«IF config.uiProject.enabled»
-			«includedPlugin(config.uiProject.nameQualifier)»
-			«ENDIF»
-		</feature>
-	'''
-
-	def includedPlugin(String qualifier) '''
-		<plugin
-				id="«config.baseName + qualifier»"
-				download-size="0"
-				install-size="0"
-				version="0.0.0"
-				unpack="false"/>
+		<site>
+			<feature id="«config.sdkProject.name»" version="0.0.0">
+				<category name="main"/>
+			</feature>
+			<feature id="«config.sdkProject.name».source" version="0.0.0">
+				<category name="main.source"/>
+			</feature>
+			<category-def name="main" label="«config.language.simpleName»"/>
+			<category-def name="main.source" label="«config.language.simpleName» (Sources)"/>
+		</site>
 	'''
 
 	override buildGradle() {
-		throw new UnsupportedOperationException("Eclipse features are not yet supported in Gradle")
+		throw new UnsupportedOperationException("Eclipse repositories are not yet supported in Gradle")
 	}
 
 	override pom() {
 		super.pom => [
-			packaging = "eclipse-feature"
+			packaging = "eclipse-repository"
 		]
 	}
 

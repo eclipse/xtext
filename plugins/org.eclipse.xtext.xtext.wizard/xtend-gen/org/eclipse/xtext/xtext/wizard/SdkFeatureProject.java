@@ -21,6 +21,7 @@ import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
+import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -61,6 +62,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
   
   @Override
   public boolean isEnabled() {
+    boolean _or = false;
     boolean _and = false;
     boolean _isEnabled = super.isEnabled();
     if (!_isEnabled) {
@@ -71,7 +73,15 @@ public class SdkFeatureProject extends ProjectDescriptor {
       boolean _isEclipsePluginProject = _runtimeProject.isEclipsePluginProject();
       _and = _isEclipsePluginProject;
     }
-    return _and;
+    if (_and) {
+      _or = true;
+    } else {
+      WizardConfiguration _config_1 = this.getConfig();
+      P2RepositoryProject _p2Project = _config_1.getP2Project();
+      boolean _isEnabled_1 = _p2Project.isEnabled();
+      _or = _isEnabled_1;
+    }
+    return _or;
   }
   
   @Override

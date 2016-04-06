@@ -40,6 +40,7 @@ class WizardConfiguration {
 	val parentProject = new ParentProjectDescriptor(this)
 	val targetPlatformProject = new TargetPlatformProject(this)
 	val sdkProject = new SdkFeatureProject(this)
+	val p2Project = new P2RepositoryProject(this)
 
 	def Set<ProjectDescriptor> getEnabledProjects() {
 		val productionProjects = #[
@@ -50,7 +51,8 @@ class WizardConfiguration {
 			intellijProject,
 			webProject,
 			targetPlatformProject,
-			sdkProject
+			sdkProject,
+			p2Project
 		].filter[enabled]
 		
 		val testProjects = productionProjects

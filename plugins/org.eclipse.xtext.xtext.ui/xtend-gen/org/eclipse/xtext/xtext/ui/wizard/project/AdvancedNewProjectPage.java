@@ -232,6 +232,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createWebProject.addSelectionListener(selectionControl);
     this.createIdeProject.addSelectionListener(selectionControl);
     this.createSDKProject.addSelectionListener(selectionControl);
+    this.createP2Project.addSelectionListener(selectionControl);
     this.setDefaults();
     IWorkbench _workbench = PlatformUI.getWorkbench();
     IWorkbenchHelpSystem _helpSystem = _workbench.getHelpSystem();
@@ -687,6 +688,10 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   public boolean isCreateSdkProject() {
     return this.createSDKProject.getSelection();
+  }
+  
+  public boolean isCreateP2Project() {
+    return this.createP2Project.getSelection();
   }
   
   public BuildSystem getPreferredBuildSystem() {
