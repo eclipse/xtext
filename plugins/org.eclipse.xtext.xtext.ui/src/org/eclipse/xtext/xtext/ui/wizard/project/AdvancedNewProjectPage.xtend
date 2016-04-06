@@ -28,6 +28,8 @@ import static org.osgi.framework.Bundle.*
 class AdvancedNewProjectPage extends WizardPage {
 
 	Button createUiProject
+	Button createSDKProject
+	Button createP2Project
 	Button createIdeaProject
 	Button createWebProject
 	Button createIdeProject
@@ -52,6 +54,14 @@ class AdvancedNewProjectPage extends WizardPage {
 				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
 				createUiProject = CheckBox [
 					text = AdvancedNewProjectPage_projEclipse
+				]
+				Group [
+					createSDKProject = CheckBox [
+						text = AdvancedNewProjectPage_projEclipseSDKFeature
+					]
+					createP2Project = CheckBox [
+						text = AdvancedNewProjectPage_projEclipseP2
+					]
 				]
 				createIdeaProject = CheckBox [
 					text = AdvancedNewProjectPage_projIdea
