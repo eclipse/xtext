@@ -331,7 +331,7 @@ public class AdvancedNewProjectPage extends WizardPage {
           _builder.append("\'");
           String _text = this.createUiProject.getText();
           _builder.append(_text, "");
-          _builder.append("\' requiers ");
+          _builder.append("\' requires ");
           _builder.append(SourceLayout.PLAIN, "");
           _builder.append(" source layout.");
           _builder.newLineIfNotEmpty();
