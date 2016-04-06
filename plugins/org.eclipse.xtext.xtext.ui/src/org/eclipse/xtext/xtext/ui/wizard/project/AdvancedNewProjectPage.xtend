@@ -151,7 +151,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		if (createUiProject.selection && !sourceLayout.isSelected(SourceLayout.PLAIN)) {
 			if (createUiProject === source) {
 				reportIssue(ERROR, '''
-				'«createUiProject.text»' requiers «SourceLayout.PLAIN» source layout.
+				'«createUiProject.text»' requires «SourceLayout.PLAIN» source layout.
 				Please <a>select '«SourceLayout.PLAIN»'</a> source layout.''', [
 					sourceLayout.select(SourceLayout.PLAIN)
 				])
