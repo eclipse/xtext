@@ -57,17 +57,48 @@ class WizardConfigurationTest {
 		]
 		assertTrue(config.parentProject.pom.content.contains("tycho"))
 	}
-	
+
+	@Test
+	def void p2AndSdkProjectsAreBuiltWithTychoWhenMavenBuiltIsEnabled() {
+		config.uiProject.enabled = true
+		config.p2Project.enabled = true
+		config.preferredBuildSystem = BuildSystem.MAVEN
+		assertTrue(config.needsTychoBuild)
+		assertTrue(config.sdkProject.pom.content.contains("eclipse-feature"))
+		assertTrue(config.p2Project.pom.content.contains("eclipse-repository"))
+		assertTrue(config.parentProject.pom.content.contains("tycho"))
+	}
+
+	@Test
+	def void p2ProjectsEnablesSourceGenerationWithTychoWhenMavenBuiltIsEnabled() {
+		config.uiProject.enabled = true
+		config.p2Project.enabled = true
+		config.preferredBuildSystem = BuildSystem.MAVEN
+		assertTrue(config.needsTychoBuild)
+		config.parentProject.pom.content => [
+			assertTrue(contains("tycho-source-plugin"))
+			assertTrue(contains("tycho-source-feature-plugin"))
+		]
+	}
+
 	@Test
 	def void aTychoBuildIncludesATargetPlatform() {
 		config.uiProject.enabled = true
 		config.preferredBuildSystem = BuildSystem.MAVEN
 		assertTrue(config.targetPlatformProject.enabled)
 	}
+
 	@Test
 	def void testProjectIsPluginProjectWhenRuntimeProjectIsPluginProject() {
 		config.runtimeProject.testProject.enabled = true
 		assertTrue(config.runtimeProject.testProject.isEclipsePluginProject)
+	}
+
+	@Test
+	def void p2ProjectEnablesSdkProject() {
+		config.p2Project.enabled = true
+		config.sdkProject.enabled = false
+		assertTrue(config.sdkProject.enabled)
 	}
 
 	@Test
@@ -159,6 +190,11 @@ class WizardConfigurationTest {
 			assertTrue(files.exists[relativePath == "MANIFEST.MF"])
 			assertTrue(files.exists[relativePath == "build.properties"])
 		]
+	}
+
+	@Test
+	def void featureProjectsHaveEclipseBuildProperties() {
+		assertTrue(config.sdkProject.files.exists[relativePath == "build.properties"])
 	}
 	
 	@Test
