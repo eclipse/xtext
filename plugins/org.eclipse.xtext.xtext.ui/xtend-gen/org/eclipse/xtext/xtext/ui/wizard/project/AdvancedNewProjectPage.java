@@ -656,6 +656,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createTestProject.setSelection(true);
     this.createIdeaProject.setSelection(false);
     this.createWebProject.setSelection(false);
+    this.createSDKProject.setSelection(false);
     BuildSystem[] _values = BuildSystem.values();
     Enum<?> _head = IterableExtensions.<Enum<?>>head(((Iterable<Enum<?>>)Conversions.doWrapArray(_values)));
     this.select(this.preferredBuildSystem, _head);

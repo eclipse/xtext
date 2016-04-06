@@ -61,9 +61,17 @@ public class SdkFeatureProject extends ProjectDescriptor {
   
   @Override
   public boolean isEnabled() {
-    WizardConfiguration _config = this.getConfig();
-    RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
-    return _runtimeProject.isEclipsePluginProject();
+    boolean _and = false;
+    boolean _isEnabled = super.isEnabled();
+    if (!_isEnabled) {
+      _and = false;
+    } else {
+      WizardConfiguration _config = this.getConfig();
+      RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
+      boolean _isEclipsePluginProject = _runtimeProject.isEclipsePluginProject();
+      _and = _isEclipsePluginProject;
+    }
+    return _and;
   }
   
   @Override
