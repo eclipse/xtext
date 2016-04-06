@@ -269,6 +269,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		createTestProject.selection = true
 		createIdeaProject.selection = false
 		createWebProject.selection = false
+		createSDKProject.selection = false
 		preferredBuildSystem.select(BuildSystem.values.head)
 		sourceLayout.select(SourceLayout.values.head)
 	}
