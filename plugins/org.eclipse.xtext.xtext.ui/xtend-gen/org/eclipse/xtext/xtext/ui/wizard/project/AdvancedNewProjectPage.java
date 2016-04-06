@@ -49,6 +49,10 @@ import org.osgi.framework.BundleContext;
 public class AdvancedNewProjectPage extends WizardPage {
   private Button createUiProject;
   
+  private Button createSDKProject;
+  
+  private Button createP2Project;
+  
   private Button createIdeaProject;
   
   private Button createWebProject;
@@ -91,40 +95,62 @@ public class AdvancedNewProjectPage extends WizardPage {
             };
             Button _CheckBox = AdvancedNewProjectPage.this.CheckBox(it, _function);
             AdvancedNewProjectPage.this.createUiProject = _CheckBox;
-            final Procedure1<Button> _function_1 = new Procedure1<Button>() {
+            final Procedure1<Group> _function_1 = new Procedure1<Group>() {
+              @Override
+              public void apply(final Group it) {
+                final Procedure1<Button> _function = new Procedure1<Button>() {
+                  @Override
+                  public void apply(final Button it) {
+                    it.setText(Messages.AdvancedNewProjectPage_projEclipseSDKFeature);
+                  }
+                };
+                Button _CheckBox = AdvancedNewProjectPage.this.CheckBox(it, _function);
+                AdvancedNewProjectPage.this.createSDKProject = _CheckBox;
+                final Procedure1<Button> _function_1 = new Procedure1<Button>() {
+                  @Override
+                  public void apply(final Button it) {
+                    it.setText(Messages.AdvancedNewProjectPage_projEclipseP2);
+                  }
+                };
+                Button _CheckBox_1 = AdvancedNewProjectPage.this.CheckBox(it, _function_1);
+                AdvancedNewProjectPage.this.createP2Project = _CheckBox_1;
+              }
+            };
+            AdvancedNewProjectPage.this.Group(it, _function_1);
+            final Procedure1<Button> _function_2 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
                 it.setText(Messages.AdvancedNewProjectPage_projIdea);
                 it.setEnabled(true);
               }
             };
-            Button _CheckBox_1 = AdvancedNewProjectPage.this.CheckBox(it, _function_1);
+            Button _CheckBox_1 = AdvancedNewProjectPage.this.CheckBox(it, _function_2);
             AdvancedNewProjectPage.this.createIdeaProject = _CheckBox_1;
-            final Procedure1<Button> _function_2 = new Procedure1<Button>() {
+            final Procedure1<Button> _function_3 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
                 it.setText(Messages.AdvancedNewProjectPage_projWeb);
                 it.setEnabled(true);
               }
             };
-            Button _CheckBox_2 = AdvancedNewProjectPage.this.CheckBox(it, _function_2);
+            Button _CheckBox_2 = AdvancedNewProjectPage.this.CheckBox(it, _function_3);
             AdvancedNewProjectPage.this.createWebProject = _CheckBox_2;
-            final Procedure1<Button> _function_3 = new Procedure1<Button>() {
+            final Procedure1<Button> _function_4 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
                 it.setText(Messages.AdvancedNewProjectPage_projIde);
                 it.setEnabled(true);
               }
             };
-            Button _CheckBox_3 = AdvancedNewProjectPage.this.CheckBox(it, _function_3);
+            Button _CheckBox_3 = AdvancedNewProjectPage.this.CheckBox(it, _function_4);
             AdvancedNewProjectPage.this.createIdeProject = _CheckBox_3;
-            final Procedure1<Button> _function_4 = new Procedure1<Button>() {
+            final Procedure1<Button> _function_5 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
                 it.setText(Messages.WizardNewXtextProjectCreationPage_TestingSupport);
               }
             };
-            Button _CheckBox_4 = AdvancedNewProjectPage.this.CheckBox(it, _function_4);
+            Button _CheckBox_4 = AdvancedNewProjectPage.this.CheckBox(it, _function_5);
             AdvancedNewProjectPage.this.createTestProject = _CheckBox_4;
           }
         };
