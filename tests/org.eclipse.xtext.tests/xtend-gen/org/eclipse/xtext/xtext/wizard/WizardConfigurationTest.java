@@ -27,11 +27,13 @@ import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.SdkFeatureProject;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
@@ -147,6 +149,56 @@ public class WizardConfigurationTest {
   }
   
   @Test
+  public void p2AndSdkProjectsAreBuiltWithTychoWhenMavenBuiltIsEnabled() {
+    UiProjectDescriptor _uiProject = this.config.getUiProject();
+    _uiProject.setEnabled(true);
+    P2RepositoryProject _p2Project = this.config.getP2Project();
+    _p2Project.setEnabled(true);
+    this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
+    boolean _needsTychoBuild = this.config.needsTychoBuild();
+    Assert.assertTrue(_needsTychoBuild);
+    SdkFeatureProject _sdkProject = this.config.getSdkProject();
+    PomFile _pom = _sdkProject.pom();
+    String _content = _pom.getContent();
+    boolean _contains = _content.contains("eclipse-feature");
+    Assert.assertTrue(_contains);
+    P2RepositoryProject _p2Project_1 = this.config.getP2Project();
+    PomFile _pom_1 = _p2Project_1.pom();
+    String _content_1 = _pom_1.getContent();
+    boolean _contains_1 = _content_1.contains("eclipse-repository");
+    Assert.assertTrue(_contains_1);
+    ParentProjectDescriptor _parentProject = this.config.getParentProject();
+    PomFile _pom_2 = _parentProject.pom();
+    String _content_2 = _pom_2.getContent();
+    boolean _contains_2 = _content_2.contains("tycho");
+    Assert.assertTrue(_contains_2);
+  }
+  
+  @Test
+  public void p2ProjectsEnablesSourceGenerationWithTychoWhenMavenBuiltIsEnabled() {
+    UiProjectDescriptor _uiProject = this.config.getUiProject();
+    _uiProject.setEnabled(true);
+    P2RepositoryProject _p2Project = this.config.getP2Project();
+    _p2Project.setEnabled(true);
+    this.config.setPreferredBuildSystem(BuildSystem.MAVEN);
+    boolean _needsTychoBuild = this.config.needsTychoBuild();
+    Assert.assertTrue(_needsTychoBuild);
+    ParentProjectDescriptor _parentProject = this.config.getParentProject();
+    PomFile _pom = _parentProject.pom();
+    String _content = _pom.getContent();
+    final Procedure1<String> _function = new Procedure1<String>() {
+      @Override
+      public void apply(final String it) {
+        boolean _contains = it.contains("tycho-source-plugin");
+        Assert.assertTrue(_contains);
+        boolean _contains_1 = it.contains("tycho-source-feature-plugin");
+        Assert.assertTrue(_contains_1);
+      }
+    };
+    ObjectExtensions.<String>operator_doubleArrow(_content, _function);
+  }
+  
+  @Test
   public void aTychoBuildIncludesATargetPlatform() {
     UiProjectDescriptor _uiProject = this.config.getUiProject();
     _uiProject.setEnabled(true);
@@ -165,6 +217,17 @@ public class WizardConfigurationTest {
     TestProjectDescriptor _testProject_1 = _runtimeProject_1.getTestProject();
     boolean _isEclipsePluginProject = _testProject_1.isEclipsePluginProject();
     Assert.assertTrue(_isEclipsePluginProject);
+  }
+  
+  @Test
+  public void p2ProjectEnablesSdkProject() {
+    P2RepositoryProject _p2Project = this.config.getP2Project();
+    _p2Project.setEnabled(true);
+    SdkFeatureProject _sdkProject = this.config.getSdkProject();
+    _sdkProject.setEnabled(false);
+    SdkFeatureProject _sdkProject_1 = this.config.getSdkProject();
+    boolean _isEnabled = _sdkProject_1.isEnabled();
+    Assert.assertTrue(_isEnabled);
   }
   
   @Test
@@ -406,6 +469,21 @@ public class WizardConfigurationTest {
       }
     };
     IterableExtensions.forEach(_filter, _function_1);
+  }
+  
+  @Test
+  public void featureProjectsHaveEclipseBuildProperties() {
+    SdkFeatureProject _sdkProject = this.config.getSdkProject();
+    Iterable<? extends AbstractFile> _files = _sdkProject.getFiles();
+    final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractFile it) {
+        String _relativePath = it.getRelativePath();
+        return Boolean.valueOf(Objects.equal(_relativePath, "build.properties"));
+      }
+    };
+    boolean _exists = IterableExtensions.exists(_files, _function);
+    Assert.assertTrue(_exists);
   }
   
   @Test
