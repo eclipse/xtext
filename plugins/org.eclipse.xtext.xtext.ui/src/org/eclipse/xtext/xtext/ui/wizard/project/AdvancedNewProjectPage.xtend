@@ -146,6 +146,10 @@ class AdvancedNewProjectPage extends WizardPage {
 			reportIssue(INFORMATION,
 				AdvancedNewProjectPage_ideaReqGradleInfo)
 		}
+		if (createP2Project.selection && !createSDKProject.selection) {
+			reportIssue(INFORMATION,
+				AdvancedNewProjectPage_p2AndSdkInfo)
+		}
 
 		val source = e?.source
 		if (createUiProject.selection && !sourceLayout.isSelected(SourceLayout.PLAIN)) {
