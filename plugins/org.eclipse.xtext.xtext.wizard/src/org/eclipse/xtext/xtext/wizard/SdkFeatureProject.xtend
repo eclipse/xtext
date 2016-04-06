@@ -36,7 +36,7 @@ class SdkFeatureProject extends ProjectDescriptor {
 	}
 	
 	override isEnabled() {
-		config.runtimeProject.isEclipsePluginProject
+		super.enabled && config.runtimeProject.isEclipsePluginProject
 	}
 	
 	override getFiles() {
