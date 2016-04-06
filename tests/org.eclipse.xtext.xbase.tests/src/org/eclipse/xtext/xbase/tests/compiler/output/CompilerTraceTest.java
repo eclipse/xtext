@@ -839,12 +839,10 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_m#a#tched) {\n" + 
-				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
-				"}\n" + 
+				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
+				"#}#\n" + 
 				"if (!_matched) {\n" + 
 				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
 				"    _matched=true;\n" + 
@@ -862,11 +860,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, #\"\"#)) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
+				"if (Objects.equal(_switchValue, #\"\"#)) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
@@ -885,11 +881,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = #\"\"#;\n" + 
-				"  }\n" + 
+				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = #\"\"#;\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
@@ -908,11 +902,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = #\"\"#;\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
+				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
@@ -931,11 +923,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _swi#tc#hResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
+				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (Objects.equal(_switchValue, \" \")) {\n" + 
@@ -954,11 +944,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String _switchValue = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (Objects.equal(_switchValue, \"\")) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
+				"if (Objects.equal(_switchValue, \"\")) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  _switch#R#esult = \"\";\n" + 
@@ -974,14 +962,12 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String it = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_#mat#ched) {\n" + 
-				"  int _length = it.length();\n" + 
-				"  boolean _equals = (_length == 0);\n" + 
-				"  if (_equals) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
-				"}\n" + 
+				"int _length = it.length();\n" + 
+				"boolean _equals = (_length == 0);\n" + 
+				"if (_equals) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
+				"#}#\n" + 
 				"if (!_matched) {\n" + 
 				"  if (Objects.equal(it, \"\")) {\n" + 
 				"    _matched=true;\n" + 
@@ -999,13 +985,11 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String #it# = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  int _length = it.length();\n" + 
-				"  boolean _equals = (_length == 0);\n" + 
-				"  if (_equals) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
+				"int _length = it.length();\n" + 
+				"boolean _equals = (_length == 0);\n" + 
+				"if (_equals) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"if (!_matched) {\n" + 
 				"  if (Objects.equal(it, \"\")) {\n" + 
@@ -1024,12 +1008,10 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final Object it = null;\n" + 
 				"boolean _matched = false;\n" + 
-				"if (#!#_matched) {\n" + 
-				"  if (it instanceof String) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
-				"}\n" + 
+				"if (it instanceof String) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
+				"#}#\n" + 
 				"return _switchResult;", 
 				"switch it:null { #String : ''# }");
 	}
@@ -1041,11 +1023,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final Object it = null;\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (it instanceof St#ri#ng) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
+				"if (it instanceof St#ri#ng) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"return _switchResult;", 
 				"switch it:null { #String# : '' }");
@@ -1058,11 +1038,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final Object it = null;\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (it in#s#tanceof String) {\n" + 
-				"    _matched=true;\n" + 
-				"    _switchResult = \"\";\n" + 
-				"  }\n" + 
+				"if (it in#s#tanceof String) {\n" + 
+				"  _matched=true;\n" + 
+				"  _switchResult = \"\";\n" + 
 				"}\n" + 
 				"return _switchResult;", 
 				"switch it:null { #String# : '' }");
@@ -1075,14 +1053,12 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final Object it = null;\n" + 
 				"boolean _matched = false;\n" + 
-				"i#f (!_matched) {\n" + 
-				"  if (it instanceof String) {\n" + 
-				"    if (Objects.equal(it, \"\")) {\n" + 
-				"      _matched=true;\n" + 
-				"      _switchResult = \"\";\n" + 
-				"    }\n" + 
-				"  }#\n" + 
-				"}\n" + 
+				"if (it instanceof String) {\n" + 
+				"  if (Objects.equal(it, \"\")) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
+				"  }\n" + 
+				"#}#\n" + 
 				"return _switchResult;", 
 				"switch it:null { #String case '': ''# }");
 	}
@@ -1094,14 +1070,12 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				"String _switchResult = null;\n" + 
 				"final String s = \"\";\n" + 
 				"boolean _matched = false;\n" + 
-				"if (!_matched) {\n" + 
-				"  if (s instanceof String) {\n" + 
-				"    int _length = s.length();\n" + 
-				"    boolean _equals = (_length == 0);\n" + 
-				"    if (_equals) {\n" + 
-				"      _matched=true;\n" + 
-				"      _switchResult = \"\";\n" + 
-				"    }\n" + 
+				"if (s instanceof String) {\n" + 
+				"  int _length = s.length();\n" + 
+				"  boolean _equals = (_length == 0);\n" + 
+				"  if (_equals) {\n" + 
+				"    _matched=true;\n" + 
+				"    _switchResult = \"\";\n" + 
 				"  }\n" + 
 				"#}#\n" + 
 				"return _switchResult;", 
