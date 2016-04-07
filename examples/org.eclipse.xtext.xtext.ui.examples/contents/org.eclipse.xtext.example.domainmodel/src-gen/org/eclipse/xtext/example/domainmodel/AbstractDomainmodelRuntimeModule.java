@@ -43,6 +43,16 @@ public abstract class AbstractDomainmodelRuntimeModule extends org.eclipse.xtext
 		return org.eclipse.xtext.example.domainmodel.services.DomainmodelGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage bindDomainmodelPackageToInstance() {
+		return org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelFactory bindDomainmodelFactoryToInstance() {
+		return org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.example.domainmodel.serializer.DomainmodelSemanticSequencer.class;

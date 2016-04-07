@@ -50,6 +50,8 @@ import org.eclipse.xtext.web.example.statemachine.scoping.StatemachineScopeProvi
 import org.eclipse.xtext.web.example.statemachine.serializer.StatemachineSemanticSequencer;
 import org.eclipse.xtext.web.example.statemachine.serializer.StatemachineSyntacticSequencer;
 import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
+import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachineFactory;
+import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage;
 import org.eclipse.xtext.web.example.statemachine.validation.StatemachineValidator;
 
 /**
@@ -83,6 +85,16 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
 		return StatemachineGrammarAccess.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
+	public StatemachinePackage bindStatemachinePackageToInstance() {
+		return StatemachinePackage.eINSTANCE;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
+	public StatemachineFactory bindStatemachineFactoryToInstance() {
+		return StatemachineFactory.eINSTANCE;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2

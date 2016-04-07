@@ -14,6 +14,8 @@ import org.eclipse.xtext.example.homeautomation.jvmmodel.RuleEngineJvmModelInfer
 import org.eclipse.xtext.example.homeautomation.parser.antlr.RuleEngineAntlrTokenFileProvider;
 import org.eclipse.xtext.example.homeautomation.parser.antlr.RuleEngineParser;
 import org.eclipse.xtext.example.homeautomation.parser.antlr.lexer.InternalRuleEngineLexer;
+import org.eclipse.xtext.example.homeautomation.ruleEngine.RuleEngineFactory;
+import org.eclipse.xtext.example.homeautomation.ruleEngine.RuleEnginePackage;
 import org.eclipse.xtext.example.homeautomation.scoping.RuleEngineScopeProvider;
 import org.eclipse.xtext.example.homeautomation.serializer.RuleEngineSemanticSequencer;
 import org.eclipse.xtext.example.homeautomation.serializer.RuleEngineSyntacticSequencer;
@@ -96,6 +98,16 @@ public abstract class AbstractRuleEngineRuntimeModule extends DefaultXbaseRuntim
 	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
 		return RuleEngineGrammarAccess.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
+	public RuleEnginePackage bindRuleEnginePackageToInstance() {
+		return RuleEnginePackage.eINSTANCE;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
+	public RuleEngineFactory bindRuleEngineFactoryToInstance() {
+		return RuleEngineFactory.eINSTANCE;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
