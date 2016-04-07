@@ -1413,6 +1413,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		} else if (casePart.getCase() != null && casePart.getTypeGuard() != null) {
 			caseAppendable.decreaseIndentation().newLine().append("}");
 			caseAppendable.closeScope();
+		} else if (casePart.getTypeGuard() != null) {
+			caseAppendable.closeScope();
 		}
 		state.finishProcessingCase();
 		return caseAppendable;

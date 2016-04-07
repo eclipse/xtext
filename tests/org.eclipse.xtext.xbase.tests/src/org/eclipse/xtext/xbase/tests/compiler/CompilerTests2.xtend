@@ -349,6 +349,132 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 	
+	@Test def void testSwitchScopes_Bug470586_01() {
+		// make sure that scopes are closed correctly during the compilation
+		// so that the variables created for lambdas do not have the same name
+		// see https://github.com/eclipse/xtext/pull/987#issuecomment-206718312
+		'''
+			{
+				val list = #["1", "2"]
+				list.forEach[
+					val res = switch it {
+						CharSequence : it
+					}
+				]
+				list.forEach[
+					println(it)
+				]
+			}
+		'''.compilesTo('''
+			final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("1", "2"));
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    String _switchResult = null;
+			    boolean _matched = false;
+			    if (it instanceof CharSequence) {
+			      _matched=true;
+			      _switchResult = it;
+			    }
+			    final String res = _switchResult;
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);
+		''')
+	}
+
+	@Test def void testSwitchScopes_Bug470586_02() {
+		'''
+			{
+				val list = #["1", "2"]
+				list.forEach[
+					val res = switch it {
+						CharSequence : it
+						default : ''
+					}
+				]
+				list.forEach[
+					println(it)
+				]
+			}
+		'''.compilesTo('''
+			final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("1", "2"));
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    String _switchResult = null;
+			    boolean _matched = false;
+			    if (it instanceof CharSequence) {
+			      _matched=true;
+			      _switchResult = it;
+			    }
+			    if (!_matched) {
+			      _switchResult = "";
+			    }
+			    final String res = _switchResult;
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);
+		''')
+	}
+	
+		@Test def void testSwitchScopes_Bug470586_03() {
+		'''
+			{
+				val list = #["1", "2"]
+				list.forEach[
+					val res = switch it {
+						String, CharSequence : it
+						default : ''
+					}
+				]
+				list.forEach[
+					println(it)
+				]
+			}
+		'''.compilesTo('''
+			final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("1", "2"));
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    String _switchResult = null;
+			    boolean _matched = false;
+			    if (it instanceof String) {
+			      _matched=true;
+			    }
+			    if (!_matched) {
+			      if (it instanceof CharSequence) {
+			        _matched=true;
+			      }
+			    }
+			    if (_matched) {
+			      _switchResult = it;
+			    }
+			    if (!_matched) {
+			      _switchResult = "";
+			    }
+			    final String res = _switchResult;
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);
+		''')
+	}
+	
 	@Test def void testFallThroughSwitch() {
 		'''
 			{
