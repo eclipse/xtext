@@ -377,12 +377,10 @@ public class GrammarAccessExtensions {
   private List<String> getSingleElementDescription(final AbstractElement ele) {
     final ArrayList<String> r = new ArrayList<String>(2);
     boolean _matched = false;
-    if (!_matched) {
-      if (ele instanceof Keyword) {
-        _matched=true;
-        String _value = ((Keyword)ele).getValue();
-        r.add(_value);
-      }
+    if (ele instanceof Keyword) {
+      _matched=true;
+      String _value = ((Keyword)ele).getValue();
+      r.add(_value);
     }
     if (!_matched) {
       if (ele instanceof Assignment) {
@@ -624,12 +622,10 @@ public class GrammarAccessExtensions {
     EObject _eContainer = ele.eContainer();
     final EObject cnt = _eContainer;
     boolean _matched = false;
-    if (!_matched) {
-      if (cnt instanceof AbstractElement) {
-        _matched=true;
-        String _gaRuleElementAccessor = this.gaRuleElementAccessor(((AbstractElement)cnt));
-        _switchResult = (_gaRuleElementAccessor + ".getType()");
-      }
+    if (cnt instanceof AbstractElement) {
+      _matched=true;
+      String _gaRuleElementAccessor = this.gaRuleElementAccessor(((AbstractElement)cnt));
+      _switchResult = (_gaRuleElementAccessor + ".getType()");
     }
     if (!_matched) {
       if (cnt instanceof AbstractRule) {
@@ -656,11 +652,9 @@ public class GrammarAccessExtensions {
   public String gaAccessor(final EObject ele) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (ele instanceof AbstractElement) {
-        _matched=true;
-        _switchResult = this.gaRuleElementAccessor(((AbstractElement)ele));
-      }
+    if (ele instanceof AbstractElement) {
+      _matched=true;
+      _switchResult = this.gaRuleElementAccessor(((AbstractElement)ele));
     }
     if (!_matched) {
       if (ele instanceof AbstractRule) {
@@ -1004,14 +998,12 @@ public class GrammarAccessExtensions {
   public CharSequence toStringLiteral(final AbstractElement it) {
     CharSequence _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof RuleCall) {
-        AbstractRule _rule = ((RuleCall)it).getRule();
-        boolean _notEquals = (!Objects.equal(_rule, null));
-        if (_notEquals) {
-          _matched=true;
-          _switchResult = AntlrGrammarGenUtil.getQualifiedNameAsString(((RuleCall)it));
-        }
+    if (it instanceof RuleCall) {
+      AbstractRule _rule = ((RuleCall)it).getRule();
+      boolean _notEquals = (!Objects.equal(_rule, null));
+      if (_notEquals) {
+        _matched=true;
+        _switchResult = AntlrGrammarGenUtil.getQualifiedNameAsString(((RuleCall)it));
       }
     }
     if (!_matched) {

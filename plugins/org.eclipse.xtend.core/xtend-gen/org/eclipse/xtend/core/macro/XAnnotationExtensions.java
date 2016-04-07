@@ -63,53 +63,51 @@ public class XAnnotationExtensions {
     EObject _eContainer = annotation.eContainer();
     final EObject container = _eContainer;
     boolean _matched = false;
+    if (container instanceof XtendAnnotationType) {
+      _matched=true;
+    }
     if (!_matched) {
-      if (container instanceof XtendAnnotationType) {
+      if (container instanceof XtendClass) {
         _matched=true;
       }
-      if (!_matched) {
-        if (container instanceof XtendClass) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (container instanceof XtendInterface) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (container instanceof XtendInterface) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (container instanceof XtendEnum) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (container instanceof XtendEnum) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (container instanceof XtendField) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (container instanceof XtendField) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (container instanceof XtendFunction) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (container instanceof XtendFunction) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (container instanceof XtendConstructor) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (container instanceof XtendConstructor) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (container instanceof XtendEnumLiteral) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (container instanceof XtendEnumLiteral) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (container instanceof XtendParameter) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (container instanceof XtendParameter) {
-          _matched=true;
-        }
-      }
-      if (_matched) {
-        _switchResult = ((XtendAnnotationTarget)container);
-      }
+    }
+    if (_matched) {
+      _switchResult = ((XtendAnnotationTarget)container);
     }
     if (!_matched) {
       if (container instanceof XtendAnnotationTarget) {
@@ -147,30 +145,28 @@ public class XAnnotationExtensions {
     Object _eGet = it.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
     final Object proxy = _eGet;
     boolean _matched = false;
-    if (!_matched) {
-      if (proxy instanceof EObject) {
-        boolean _eIsProxy = ((EObject)proxy).eIsProxy();
-        if (_eIsProxy) {
-          _matched=true;
-          final URI uri = ((InternalEObject) proxy).eProxyURI();
-          Resource _eResource = it.eResource();
-          String _fragment = uri.fragment();
-          boolean _isCrossLinkFragment = this.encoder.isCrossLinkFragment(_eResource, _fragment);
-          if (_isCrossLinkFragment) {
-            Resource _eResource_1 = it.eResource();
-            String _fragment_1 = uri.fragment();
-            final Triple<EObject, EReference, INode> triple = this.encoder.decode(_eResource_1, _fragment_1);
-            EObject _first = triple.getFirst();
-            EReference _second = triple.getSecond();
-            INode _third = triple.getThird();
-            final List<EObject> candidates = this.linkingService.getLinkedObjects(_first, _second, _third);
-            boolean _isEmpty = candidates.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              final EObject head = IterableExtensions.<EObject>head(candidates);
-              if ((head instanceof JvmAnnotationType)) {
-                return this.isActiveAnnotation(((JvmAnnotationType)head));
-              }
+    if (proxy instanceof EObject) {
+      boolean _eIsProxy = ((EObject)proxy).eIsProxy();
+      if (_eIsProxy) {
+        _matched=true;
+        final URI uri = ((InternalEObject) proxy).eProxyURI();
+        Resource _eResource = it.eResource();
+        String _fragment = uri.fragment();
+        boolean _isCrossLinkFragment = this.encoder.isCrossLinkFragment(_eResource, _fragment);
+        if (_isCrossLinkFragment) {
+          Resource _eResource_1 = it.eResource();
+          String _fragment_1 = uri.fragment();
+          final Triple<EObject, EReference, INode> triple = this.encoder.decode(_eResource_1, _fragment_1);
+          EObject _first = triple.getFirst();
+          EReference _second = triple.getSecond();
+          INode _third = triple.getThird();
+          final List<EObject> candidates = this.linkingService.getLinkedObjects(_first, _second, _third);
+          boolean _isEmpty = candidates.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            final EObject head = IterableExtensions.<EObject>head(candidates);
+            if ((head instanceof JvmAnnotationType)) {
+              return this.isActiveAnnotation(((JvmAnnotationType)head));
             }
           }
         }
@@ -220,17 +216,15 @@ public class XAnnotationExtensions {
     };
     final JvmAnnotationValue annoVal = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_1);
     boolean _matched = false;
-    if (!_matched) {
-      if (annoVal instanceof JvmTypeAnnotationValue) {
-        _matched=true;
-        EList<JvmTypeReference> _values_1 = ((JvmTypeAnnotationValue)annoVal).getValues();
-        JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
-        JvmType _type = null;
-        if (_head!=null) {
-          _type=_head.getType();
-        }
-        return _type;
+    if (annoVal instanceof JvmTypeAnnotationValue) {
+      _matched=true;
+      EList<JvmTypeReference> _values_1 = ((JvmTypeAnnotationValue)annoVal).getValues();
+      JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
+      JvmType _type = null;
+      if (_head!=null) {
+        _type=_head.getType();
       }
+      return _type;
     }
     if (!_matched) {
       if (annoVal instanceof JvmCustomAnnotationValue) {
@@ -260,17 +254,15 @@ public class XAnnotationExtensions {
     Object _eGet = it.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
     final Object proxy = _eGet;
     boolean _matched = false;
-    if (!_matched) {
-      if (proxy instanceof EObject) {
-        boolean _eIsProxy = ((EObject)proxy).eIsProxy();
-        if (_eIsProxy) {
-          _matched=true;
-          final URI uri = ((InternalEObject) proxy).eProxyURI();
-          Resource _eResource = it.eResource();
-          ResourceSet _resourceSet = _eResource.getResourceSet();
-          EObject _eObject = _resourceSet.getEObject(uri, true);
-          return ((JvmAnnotationType) _eObject);
-        }
+    if (proxy instanceof EObject) {
+      boolean _eIsProxy = ((EObject)proxy).eIsProxy();
+      if (_eIsProxy) {
+        _matched=true;
+        final URI uri = ((InternalEObject) proxy).eProxyURI();
+        Resource _eResource = it.eResource();
+        ResourceSet _resourceSet = _eResource.getResourceSet();
+        EObject _eObject = _resourceSet.getEObject(uri, true);
+        return ((JvmAnnotationType) _eObject);
       }
     }
     if (!_matched) {

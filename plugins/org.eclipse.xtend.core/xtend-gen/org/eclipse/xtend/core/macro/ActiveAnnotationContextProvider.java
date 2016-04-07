@@ -111,12 +111,10 @@ public class ActiveAnnotationContextProvider {
                 ActiveAnnotationContextProvider.this.operationCanceledManager.propagateAsErrorIfCancelException(e_1);
                 String _switchResult = null;
                 boolean _matched = false;
-                if (!_matched) {
-                  if (e_1 instanceof ExceptionInInitializerError) {
-                    _matched=true;
-                    Throwable _exception = ((ExceptionInInitializerError)e_1).getException();
-                    _switchResult = _exception.getMessage();
-                  }
+                if (e_1 instanceof ExceptionInInitializerError) {
+                  _matched=true;
+                  Throwable _exception = ((ExceptionInInitializerError)e_1).getException();
+                  _switchResult = _exception.getMessage();
                 }
                 if (!_matched) {
                   _switchResult = e_1.getMessage();
@@ -156,11 +154,9 @@ public class ActiveAnnotationContextProvider {
         final Throwable e = (Throwable)_t;
         this.operationCanceledManager.propagateAsErrorIfCancelException(e);
         boolean _matched = false;
-        if (!_matched) {
-          if (e instanceof VirtualMachineError) {
-            _matched=true;
-            throw ((VirtualMachineError)e);
-          }
+        if (e instanceof VirtualMachineError) {
+          _matched=true;
+          throw ((VirtualMachineError)e);
         }
         if (!_matched) {
           if (e instanceof LinkageError) {
@@ -184,18 +180,16 @@ public class ActiveAnnotationContextProvider {
    */
   private void searchAnnotatedElements(final EObject element, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof XtendFile) {
-        _matched=true;
-        EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile)element).getXtendTypes();
-        final Procedure1<XtendTypeDeclaration> _function = new Procedure1<XtendTypeDeclaration>() {
-          @Override
-          public void apply(final XtendTypeDeclaration it) {
-            ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
-          }
-        };
-        IterableExtensions.<XtendTypeDeclaration>forEach(_xtendTypes, _function);
-      }
+    if (element instanceof XtendFile) {
+      _matched=true;
+      EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile)element).getXtendTypes();
+      final Procedure1<XtendTypeDeclaration> _function = new Procedure1<XtendTypeDeclaration>() {
+        @Override
+        public void apply(final XtendTypeDeclaration it) {
+          ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+        }
+      };
+      IterableExtensions.<XtendTypeDeclaration>forEach(_xtendTypes, _function);
     }
     if (!_matched) {
       if (element instanceof XtendClass) {

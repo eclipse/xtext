@@ -541,12 +541,10 @@ public class ASTFlattenerUtils {
         if (_equals) {
           final ASTNode parentNode = node.getParent();
           boolean _matched = false;
-          if (!_matched) {
-            if (parentNode instanceof VariableDeclarationStatement) {
-              _matched=true;
-              Type _type = ((VariableDeclarationStatement)parentNode).getType();
-              matchesFound.add(_type);
-            }
+          if (parentNode instanceof VariableDeclarationStatement) {
+            _matched=true;
+            Type _type = ((VariableDeclarationStatement)parentNode).getType();
+            matchesFound.add(_type);
           }
           if (!_matched) {
             if (parentNode instanceof FieldDeclaration) {
@@ -635,12 +633,10 @@ public class ASTFlattenerUtils {
       public Boolean apply(final Expression it) {
         Expression name = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (it instanceof Assignment) {
-            _matched=true;
-            Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
-            name = _leftHandSide;
-          }
+        if (it instanceof Assignment) {
+          _matched=true;
+          Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
+          name = _leftHandSide;
         }
         if (!_matched) {
           if (it instanceof PrefixExpression) {
@@ -686,12 +682,10 @@ public class ASTFlattenerUtils {
       public Boolean apply(final Expression it) {
         Expression simpleName = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (it instanceof Assignment) {
-            _matched=true;
-            Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
-            simpleName = _leftHandSide;
-          }
+        if (it instanceof Assignment) {
+          _matched=true;
+          Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
+          simpleName = _leftHandSide;
         }
         if (!_matched) {
           if (it instanceof PrefixExpression) {

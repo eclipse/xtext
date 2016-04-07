@@ -101,32 +101,28 @@ public class XtendReferenceFinder extends ReferenceFinder {
   @Override
   protected void findLocalReferencesFromElement(final TargetURIs targetURIs, final EObject sourceCandidate, final Resource localResource, final IReferenceFinder.Acceptor acceptor) {
     boolean _matched = false;
-    if (!_matched) {
-      if (sourceCandidate instanceof XAbstractFeatureCall) {
-        boolean _isPackageFragment = ((XAbstractFeatureCall)sourceCandidate).isPackageFragment();
-        if (_isPackageFragment) {
-          _matched=true;
-          return;
-        }
+    if (sourceCandidate instanceof XAbstractFeatureCall) {
+      boolean _isPackageFragment = ((XAbstractFeatureCall)sourceCandidate).isPackageFragment();
+      if (_isPackageFragment) {
+        _matched=true;
+        return;
       }
     }
     super.findLocalReferencesFromElement(targetURIs, sourceCandidate, localResource, acceptor);
     boolean _matched_1 = false;
-    if (!_matched_1) {
-      if (sourceCandidate instanceof XImportDeclaration) {
-        boolean _and = false;
-        boolean _isStatic = ((XImportDeclaration)sourceCandidate).isStatic();
-        if (!_isStatic) {
-          _and = false;
-        } else {
-          boolean _isWildcard = ((XImportDeclaration)sourceCandidate).isWildcard();
-          boolean _not = (!_isWildcard);
-          _and = _not;
-        }
-        if (_and) {
-          _matched_1=true;
-          this.addReferenceToFeatureFromStaticImport(((XImportDeclaration)sourceCandidate), targetURIs, acceptor);
-        }
+    if (sourceCandidate instanceof XImportDeclaration) {
+      boolean _and = false;
+      boolean _isStatic = ((XImportDeclaration)sourceCandidate).isStatic();
+      if (!_isStatic) {
+        _and = false;
+      } else {
+        boolean _isWildcard = ((XImportDeclaration)sourceCandidate).isWildcard();
+        boolean _not = (!_isWildcard);
+        _and = _not;
+      }
+      if (_and) {
+        _matched_1=true;
+        this.addReferenceToFeatureFromStaticImport(((XImportDeclaration)sourceCandidate), targetURIs, acceptor);
       }
     }
     if (!_matched_1) {

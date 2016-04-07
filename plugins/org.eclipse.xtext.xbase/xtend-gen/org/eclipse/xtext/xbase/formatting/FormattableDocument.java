@@ -183,15 +183,13 @@ public class FormattableDocument {
           }
           FormattingData _switchResult = null;
           boolean _matched = false;
-          if (!_matched) {
-            if (old instanceof NewLineData) {
-              _matched=true;
-              int _offset = ((NewLineData)old).getOffset();
-              int _length = ((NewLineData)old).getLength();
-              Throwable _trace = ((NewLineData)old).getTrace();
-              Integer _newLines = ((NewLineData)old).getNewLines();
-              _switchResult = new NewLineData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _newLines);
-            }
+          if (old instanceof NewLineData) {
+            _matched=true;
+            int _offset = ((NewLineData)old).getOffset();
+            int _length = ((NewLineData)old).getLength();
+            Throwable _trace = ((NewLineData)old).getTrace();
+            Integer _newLines = ((NewLineData)old).getNewLines();
+            _switchResult = new NewLineData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _newLines);
           }
           if (!_matched) {
             if (old instanceof WhitespaceData) {
@@ -392,18 +390,16 @@ public class FormattableDocument {
             int _offset_2 = f.getOffset();
             final int textlength = (_offset_2 - oldOffset);
             boolean _matched = false;
-            if (!_matched) {
-              if (f instanceof WhitespaceData) {
-                _matched=true;
-                String _space = ((WhitespaceData)f).getSpace();
-                boolean _notEquals = (!Objects.equal(_space, null));
-                if (_notEquals) {
-                  final String replacement = ((WhitespaceData)f).getSpace();
-                  int _offset_3 = ((WhitespaceData)f).getOffset();
-                  int _length_1 = ((WhitespaceData)f).getLength();
-                  TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
-                  replacements.add(_textReplacement);
-                }
+            if (f instanceof WhitespaceData) {
+              _matched=true;
+              String _space = ((WhitespaceData)f).getSpace();
+              boolean _notEquals = (!Objects.equal(_space, null));
+              if (_notEquals) {
+                final String replacement = ((WhitespaceData)f).getSpace();
+                int _offset_3 = ((WhitespaceData)f).getOffset();
+                int _length_1 = ((WhitespaceData)f).getLength();
+                TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
+                replacements.add(_textReplacement);
               }
             }
             if (!_matched) {

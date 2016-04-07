@@ -64,11 +64,9 @@ public class TreeAppendableUtil {
         ITextRegion _switchResult = null;
         final ILocationInFileProvider locationProvider = this.locationProvider;
         boolean _matched = false;
-        if (!_matched) {
-          if (locationProvider instanceof ILocationInFileProviderExtension) {
-            _matched=true;
-            _switchResult = ((ILocationInFileProviderExtension)this.locationProvider).getTextRegion(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS);
-          }
+        if (locationProvider instanceof ILocationInFileProviderExtension) {
+          _matched=true;
+          _switchResult = ((ILocationInFileProviderExtension)this.locationProvider).getTextRegion(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS);
         }
         if (!_matched) {
           _switchResult = this.locationProvider.getFullTextRegion(source);

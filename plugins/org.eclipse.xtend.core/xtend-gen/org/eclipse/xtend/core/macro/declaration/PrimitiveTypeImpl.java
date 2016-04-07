@@ -23,11 +23,9 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
     PrimitiveType.Kind _switchResult = null;
     String _simpleName = this.getSimpleName();
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_simpleName, "boolean")) {
-        _matched=true;
-        _switchResult = PrimitiveType.Kind.BOOLEAN;
-      }
+    if (Objects.equal(_simpleName, "boolean")) {
+      _matched=true;
+      _switchResult = PrimitiveType.Kind.BOOLEAN;
     }
     if (!_matched) {
       if (Objects.equal(_simpleName, "int")) {

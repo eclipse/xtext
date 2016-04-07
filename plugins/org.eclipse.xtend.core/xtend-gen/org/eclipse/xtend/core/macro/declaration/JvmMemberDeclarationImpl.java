@@ -111,11 +111,9 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     T _delegate = this.getDelegate();
     final T it = _delegate;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof JvmMemberImplCustom) {
-        _matched=true;
-        ((JvmMemberImplCustom)it).clearIdentifierCache();
-      }
+    if (it instanceof JvmMemberImplCustom) {
+      _matched=true;
+      ((JvmMemberImplCustom)it).clearIdentifierCache();
     }
     T _delegate_1 = this.getDelegate();
     _delegate_1.setSimpleName(name);

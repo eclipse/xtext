@@ -1120,22 +1120,20 @@ public class XbaseFormatter2 extends AbstractFormatter {
     XExpression _expression = closure.getExpression();
     final XExpression block = _expression;
     boolean _matched = false;
-    if (!_matched) {
-      if (block instanceof XBlockExpression) {
-        _matched=true;
-        boolean _and = false;
-        EList<XExpression> _expressions = ((XBlockExpression)block).getExpressions();
-        int _size = _expressions.size();
-        boolean _greaterThan = (_size > 1);
-        if (!_greaterThan) {
-          _and = false;
-        } else {
-          EList<XExpression> _expressions_1 = ((XBlockExpression)block).getExpressions();
-          boolean _isEachExpressionInOwnLine = this.isEachExpressionInOwnLine(_expressions_1);
-          _and = _isEachExpressionInOwnLine;
-        }
-        _switchResult = _and;
+    if (block instanceof XBlockExpression) {
+      _matched=true;
+      boolean _and = false;
+      EList<XExpression> _expressions = ((XBlockExpression)block).getExpressions();
+      int _size = _expressions.size();
+      boolean _greaterThan = (_size > 1);
+      if (!_greaterThan) {
+        _and = false;
+      } else {
+        EList<XExpression> _expressions_1 = ((XBlockExpression)block).getExpressions();
+        boolean _isEachExpressionInOwnLine = this.isEachExpressionInOwnLine(_expressions_1);
+        _and = _isEachExpressionInOwnLine;
       }
+      _switchResult = _and;
     }
     if (!_matched) {
       _switchResult = false;
@@ -1412,12 +1410,10 @@ public class XbaseFormatter2 extends AbstractFormatter {
           String _switchResult = null;
           final XMemberFeatureCall it = call;
           boolean _matched = false;
-          if (!_matched) {
-            boolean _isNullSafe = it.isNullSafe();
-            if (_isNullSafe) {
-              _matched=true;
-              _switchResult = "?.";
-            }
+          boolean _isNullSafe = it.isNullSafe();
+          if (_isNullSafe) {
+            _matched=true;
+            _switchResult = "?.";
           }
           if (!_matched) {
             boolean _isExplicitStatic = it.isExplicitStatic();
@@ -3061,11 +3057,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
     EList<EObject> _eContents = expr.eContents();
     for (final EObject obj : _eContents) {
       boolean _matched = false;
-      if (!_matched) {
-        if (obj instanceof XExpression) {
-          _matched=true;
-          this.format(obj, format);
-        }
+      if (obj instanceof XExpression) {
+        _matched=true;
+        this.format(obj, format);
       }
     }
   }
@@ -3633,11 +3627,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
     XExpression _expression = expr.getExpression();
     final XExpression x = _expression;
     boolean _matched = false;
-    if (!_matched) {
-      if (x instanceof XBlockExpression) {
-        _matched=true;
-        _switchResult = ((XBlockExpression)x).getExpressions();
-      }
+    if (x instanceof XBlockExpression) {
+      _matched=true;
+      _switchResult = ((XBlockExpression)x).getExpressions();
     }
     if (!_matched) {
       _switchResult = CollectionLiterals.<XExpression>newArrayList(x);

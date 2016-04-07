@@ -158,30 +158,28 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
       boolean _matched = false;
+      if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
+        _matched=true;
+      }
       if (!_matched) {
-        if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
+        TypeReference _string = this.context.getString();
+        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
           _matched=true;
         }
-        if (!_matched) {
-          TypeReference _string = this.context.getString();
-          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
-            _matched=true;
-          }
+      }
+      if (!_matched) {
+        TypeReference _string_1 = this.context.getString();
+        TypeReference _newWildcardTypeReference = this.context.newWildcardTypeReference();
+        TypeReference _newTypeReference = this.context.newTypeReference(Class.class, _newWildcardTypeReference);
+        TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
+        TypeReference _object = this.context.getObject();
+        TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
+        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
+          _matched=true;
         }
-        if (!_matched) {
-          TypeReference _string_1 = this.context.getString();
-          TypeReference _newWildcardTypeReference = this.context.newWildcardTypeReference();
-          TypeReference _newTypeReference = this.context.newTypeReference(Class.class, _newWildcardTypeReference);
-          TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
-          TypeReference _object = this.context.getObject();
-          TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
-          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
-            _matched=true;
-          }
-        }
-        if (_matched) {
-          _switchResult = true;
-        }
+      }
+      if (_matched) {
+        _switchResult = true;
       }
       if (!_matched) {
         boolean _xblockexpression = false;
@@ -729,16 +727,14 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
       boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
-          _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("this.");
-          String _simpleName = it.getSimpleName();
-          _builder.append(_simpleName, "");
-          _builder.append("()");
-          _switchResult = _builder;
-        }
+      if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("this.");
+        String _simpleName = it.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append("()");
+        _switchResult = _builder;
       }
       if (!_matched) {
         TypeReference _string = this.context.getString();

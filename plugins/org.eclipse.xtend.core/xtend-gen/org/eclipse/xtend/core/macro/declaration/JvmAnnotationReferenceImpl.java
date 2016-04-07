@@ -76,24 +76,22 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     };
     final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
     boolean _matched = false;
-    if (!_matched) {
-      if (annotationValue instanceof JvmCustomAnnotationValue) {
-        _matched=true;
-        EList<EObject> _values_1 = ((JvmCustomAnnotationValue)annotationValue).getValues();
-        EObject _head = IterableExtensions.<EObject>head(_values_1);
-        final XExpression expression = ((XExpression) _head);
-        boolean _and = false;
-        if (!(expression != null)) {
-          _and = false;
-        } else {
-          CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-          boolean _isBelongedToCompilationUnit = _compilationUnit.isBelongedToCompilationUnit(expression);
-          _and = _isBelongedToCompilationUnit;
-        }
-        if (_and) {
-          CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-          return _compilationUnit_1.toExpression(expression);
-        }
+    if (annotationValue instanceof JvmCustomAnnotationValue) {
+      _matched=true;
+      EList<EObject> _values_1 = ((JvmCustomAnnotationValue)annotationValue).getValues();
+      EObject _head = IterableExtensions.<EObject>head(_values_1);
+      final XExpression expression = ((XExpression) _head);
+      boolean _and = false;
+      if (!(expression != null)) {
+        _and = false;
+      } else {
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        boolean _isBelongedToCompilationUnit = _compilationUnit.isBelongedToCompilationUnit(expression);
+        _and = _isBelongedToCompilationUnit;
+      }
+      if (_and) {
+        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+        return _compilationUnit_1.toExpression(expression);
       }
     }
     return null;
@@ -253,11 +251,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       }
       Character _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Byte) {
-          _matched=true;
-          _switchResult = Character.valueOf(((char) ((Byte) value).byteValue()));
-        }
+      if (value instanceof Byte) {
+        _matched=true;
+        _switchResult = Character.valueOf(((char) ((Byte) value).byteValue()));
       }
       if (!_matched) {
         _switchResult = ((Character) value);
@@ -296,11 +292,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       }
       Double _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Character) {
-          _matched=true;
-          _switchResult = Double.valueOf(((double) ((Character) value).charValue()));
-        }
+      if (value instanceof Character) {
+        _matched=true;
+        _switchResult = Double.valueOf(((double) ((Character) value).charValue()));
       }
       if (!_matched) {
         if (value instanceof Byte) {
@@ -369,11 +363,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       }
       Float _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Character) {
-          _matched=true;
-          _switchResult = Float.valueOf(((float) ((Character) value).charValue()));
-        }
+      if (value instanceof Character) {
+        _matched=true;
+        _switchResult = Float.valueOf(((float) ((Character) value).charValue()));
       }
       if (!_matched) {
         if (value instanceof Byte) {
@@ -424,11 +416,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       }
       Integer _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Character) {
-          _matched=true;
-          _switchResult = Integer.valueOf(((int) ((Character) value).charValue()));
-        }
+      if (value instanceof Character) {
+        _matched=true;
+        _switchResult = Integer.valueOf(((int) ((Character) value).charValue()));
       }
       if (!_matched) {
         if (value instanceof Byte) {
@@ -467,11 +457,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       }
       Long _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Character) {
-          _matched=true;
-          _switchResult = Long.valueOf(((long) ((Character) value).charValue()));
-        }
+      if (value instanceof Character) {
+        _matched=true;
+        _switchResult = Long.valueOf(((long) ((Character) value).charValue()));
       }
       if (!_matched) {
         if (value instanceof Byte) {
@@ -516,11 +504,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       }
       Short _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Byte) {
-          _matched=true;
-          _switchResult = Short.valueOf(((short) ((Byte) value).byteValue()));
-        }
+      if (value instanceof Byte) {
+        _matched=true;
+        _switchResult = Short.valueOf(((short) ((Byte) value).byteValue()));
       }
       if (!_matched) {
         _switchResult = ((Short) value);

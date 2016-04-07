@@ -439,65 +439,61 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       }
       final JvmType type = _xifexpression;
       boolean _matched = false;
-      if (!_matched) {
-        if (type instanceof JvmPrimitiveType) {
-          _matched=true;
-          JvmAnnotationValue _switchResult_1 = null;
-          String _simpleName = ((JvmPrimitiveType)type).getSimpleName();
-          boolean _matched_1 = false;
-          if (!_matched_1) {
-            if (Objects.equal(_simpleName, "boolean")) {
-              _matched_1=true;
-              _switchResult_1 = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_simpleName, "double")) {
-              _matched_1=true;
-              _switchResult_1 = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_simpleName, "float")) {
-              _matched_1=true;
-              _switchResult_1 = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_simpleName, "long")) {
-              _matched_1=true;
-              _switchResult_1 = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_simpleName, "int")) {
-              _matched_1=true;
-              _switchResult_1 = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_simpleName, "short")) {
-              _matched_1=true;
-              _switchResult_1 = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_simpleName, "char")) {
-              _matched_1=true;
-              _switchResult_1 = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_simpleName, "byte")) {
-              _matched_1=true;
-              _switchResult_1 = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
-            }
-          }
-          if (!_matched_1) {
-            throw new IllegalStateException(("Unknown type: " + type));
-          }
-          _switchResult = _switchResult_1;
+      if (type instanceof JvmPrimitiveType) {
+        _matched=true;
+        JvmAnnotationValue _switchResult_1 = null;
+        String _simpleName = ((JvmPrimitiveType)type).getSimpleName();
+        boolean _matched_1 = false;
+        if (Objects.equal(_simpleName, "boolean")) {
+          _matched_1=true;
+          _switchResult_1 = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
         }
+        if (!_matched_1) {
+          if (Objects.equal(_simpleName, "double")) {
+            _matched_1=true;
+            _switchResult_1 = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
+          }
+        }
+        if (!_matched_1) {
+          if (Objects.equal(_simpleName, "float")) {
+            _matched_1=true;
+            _switchResult_1 = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
+          }
+        }
+        if (!_matched_1) {
+          if (Objects.equal(_simpleName, "long")) {
+            _matched_1=true;
+            _switchResult_1 = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
+          }
+        }
+        if (!_matched_1) {
+          if (Objects.equal(_simpleName, "int")) {
+            _matched_1=true;
+            _switchResult_1 = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
+          }
+        }
+        if (!_matched_1) {
+          if (Objects.equal(_simpleName, "short")) {
+            _matched_1=true;
+            _switchResult_1 = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
+          }
+        }
+        if (!_matched_1) {
+          if (Objects.equal(_simpleName, "char")) {
+            _matched_1=true;
+            _switchResult_1 = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
+          }
+        }
+        if (!_matched_1) {
+          if (Objects.equal(_simpleName, "byte")) {
+            _matched_1=true;
+            _switchResult_1 = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
+          }
+        }
+        if (!_matched_1) {
+          throw new IllegalStateException(("Unknown type: " + type));
+        }
+        _switchResult = _switchResult_1;
       }
       if (!_matched) {
         if (type instanceof JvmGenericType) {
@@ -505,12 +501,10 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
           JvmAnnotationValue _switchResult_1 = null;
           String _identifier = ((JvmGenericType)type).getIdentifier();
           boolean _matched_1 = false;
-          if (!_matched_1) {
-            String _name = String.class.getName();
-            if (Objects.equal(_identifier, _name)) {
-              _matched_1=true;
-              _switchResult_1 = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
-            }
+          String _name = String.class.getName();
+          if (Objects.equal(_identifier, _name)) {
+            _matched_1=true;
+            _switchResult_1 = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
           }
           if (!_matched_1) {
             String _name_1 = Class.class.getName();
@@ -598,13 +592,11 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     this.checkType(it, componentType, mustBeArray);
     for (final EnumerationValueDeclaration enumValue : value) {
       boolean _matched = false;
-      if (!_matched) {
-        if (enumValue instanceof JvmEnumerationValueDeclarationImpl) {
-          _matched=true;
-          EList<JvmEnumerationLiteral> _values = it.getValues();
-          JvmEnumerationLiteral _delegate = ((JvmEnumerationValueDeclarationImpl)enumValue).getDelegate();
-          _values.add(_delegate);
-        }
+      if (enumValue instanceof JvmEnumerationValueDeclarationImpl) {
+        _matched=true;
+        EList<JvmEnumerationLiteral> _values = it.getValues();
+        JvmEnumerationLiteral _delegate = ((JvmEnumerationValueDeclarationImpl)enumValue).getDelegate();
+        _values.add(_delegate);
       }
       if (!_matched) {
         if (enumValue instanceof XtendEnumerationValueDeclarationImpl) {
@@ -619,14 +611,12 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     this.checkType(it, componentType, mustBeArray);
     for (final AnnotationReference annotationValue : value) {
       boolean _matched = false;
-      if (!_matched) {
-        if (annotationValue instanceof JvmAnnotationReferenceImpl) {
-          _matched=true;
-          EList<JvmAnnotationReference> _values = it.getValues();
-          JvmAnnotationReference _delegate = ((JvmAnnotationReferenceImpl)annotationValue).getDelegate();
-          JvmAnnotationReference _cloneWithProxies = EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(_delegate);
-          _values.add(_cloneWithProxies);
-        }
+      if (annotationValue instanceof JvmAnnotationReferenceImpl) {
+        _matched=true;
+        EList<JvmAnnotationReference> _values = it.getValues();
+        JvmAnnotationReference _delegate = ((JvmAnnotationReferenceImpl)annotationValue).getDelegate();
+        JvmAnnotationReference _cloneWithProxies = EcoreUtil2.<JvmAnnotationReference>cloneWithProxies(_delegate);
+        _values.add(_cloneWithProxies);
       }
       if (!_matched) {
         if (annotationValue instanceof XtendAnnotationReferenceImpl) {
@@ -960,11 +950,9 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     }
     final String result = _identifier;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(result, "java.lang.Class")) {
-        _matched=true;
-        _switchResult = TypeReference.class.getName();
-      }
+    if (Objects.equal(result, "java.lang.Class")) {
+      _matched=true;
+      _switchResult = TypeReference.class.getName();
     }
     if (!_matched) {
       if (Objects.equal(result, "java.lang.Class[]")) {

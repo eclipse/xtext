@@ -144,11 +144,9 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
       Preconditions.checkArgument(_notEquals_1, _builder_1);
       JvmDeclaredType _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (annotationTypeDelcaration instanceof JvmAnnotationTypeDeclarationImpl) {
-          _matched=true;
-          _switchResult = ((JvmAnnotationTypeDeclarationImpl)annotationTypeDelcaration).getDelegate();
-        }
+      if (annotationTypeDelcaration instanceof JvmAnnotationTypeDeclarationImpl) {
+        _matched=true;
+        _switchResult = ((JvmAnnotationTypeDeclarationImpl)annotationTypeDelcaration).getDelegate();
       }
       if (!_matched) {
         if (annotationTypeDelcaration instanceof XtendAnnotationTypeDeclarationImpl) {
@@ -265,18 +263,16 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
   protected JvmAnnotationReference createJvmAnnotationReference(final JvmType type) {
     JvmAnnotationReference _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof JvmAnnotationType) {
-        _matched=true;
-        JvmAnnotationReference _createJvmAnnotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-        final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
-          @Override
-          public void apply(final JvmAnnotationReference it) {
-            it.setAnnotation(((JvmAnnotationType)type));
-          }
-        };
-        _switchResult = ObjectExtensions.<JvmAnnotationReference>operator_doubleArrow(_createJvmAnnotationReference, _function);
-      }
+    if (type instanceof JvmAnnotationType) {
+      _matched=true;
+      JvmAnnotationReference _createJvmAnnotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
+      final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
+        @Override
+        public void apply(final JvmAnnotationReference it) {
+          it.setAnnotation(((JvmAnnotationType)type));
+        }
+      };
+      _switchResult = ObjectExtensions.<JvmAnnotationReference>operator_doubleArrow(_createJvmAnnotationReference, _function);
     }
     if (!_matched) {
       _switchResult = null;

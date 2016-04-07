@@ -24,14 +24,12 @@ public class StorageAwareResourceDescriptionManager extends DefaultResourceDescr
   public IResourceDescription getResourceDescription(final Resource resource) {
     IResourceDescription _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (resource instanceof StorageAwareResource) {
-        IResourceDescription _resourceDescription = ((StorageAwareResource)resource).getResourceDescription();
-        boolean _notEquals = (!Objects.equal(_resourceDescription, null));
-        if (_notEquals) {
-          _matched=true;
-          _switchResult = ((StorageAwareResource)resource).getResourceDescription();
-        }
+    if (resource instanceof StorageAwareResource) {
+      IResourceDescription _resourceDescription = ((StorageAwareResource)resource).getResourceDescription();
+      boolean _notEquals = (!Objects.equal(_resourceDescription, null));
+      if (_notEquals) {
+        _matched=true;
+        _switchResult = ((StorageAwareResource)resource).getResourceDescription();
       }
     }
     if (!_matched) {

@@ -134,29 +134,27 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
           Object _processorInstance = context.getProcessorInstance();
           final Object processor = _processorInstance;
           boolean _matched = false;
-          if (!_matched) {
-            if (processor instanceof CodeGenerationParticipant) {
-              _matched=true;
-              CodeGenerationContextImpl _codeGenerationContextImpl = new CodeGenerationContextImpl();
-              final Procedure1<CodeGenerationContextImpl> _function = new Procedure1<CodeGenerationContextImpl>() {
-                @Override
-                public void apply(final CodeGenerationContextImpl it) {
-                  CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
-                  it.setUnit(_compilationUnit);
-                }
-              };
-              final CodeGenerationContextImpl codeGenServices = ObjectExtensions.<CodeGenerationContextImpl>operator_doubleArrow(_codeGenerationContextImpl, _function);
-              List<XtendAnnotationTarget> _annotatedSourceElements = context.getAnnotatedSourceElements();
-              final Function1<XtendAnnotationTarget, MemberDeclaration> _function_1 = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
-                @Override
-                public MemberDeclaration apply(final XtendAnnotationTarget it) {
-                  CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
-                  return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-                }
-              };
-              final List<MemberDeclaration> elements = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function_1);
-              ((CodeGenerationParticipant<NamedElement>)processor).doGenerateCode(elements, codeGenServices);
-            }
+          if (processor instanceof CodeGenerationParticipant) {
+            _matched=true;
+            CodeGenerationContextImpl _codeGenerationContextImpl = new CodeGenerationContextImpl();
+            final Procedure1<CodeGenerationContextImpl> _function = new Procedure1<CodeGenerationContextImpl>() {
+              @Override
+              public void apply(final CodeGenerationContextImpl it) {
+                CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
+                it.setUnit(_compilationUnit);
+              }
+            };
+            final CodeGenerationContextImpl codeGenServices = ObjectExtensions.<CodeGenerationContextImpl>operator_doubleArrow(_codeGenerationContextImpl, _function);
+            List<XtendAnnotationTarget> _annotatedSourceElements = context.getAnnotatedSourceElements();
+            final Function1<XtendAnnotationTarget, MemberDeclaration> _function_1 = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
+              @Override
+              public MemberDeclaration apply(final XtendAnnotationTarget it) {
+                CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
+                return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+              }
+            };
+            final List<MemberDeclaration> elements = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function_1);
+            ((CodeGenerationParticipant<NamedElement>)processor).doGenerateCode(elements, codeGenServices);
           }
         } catch (final Throwable _t) {
           if (_t instanceof Throwable) {

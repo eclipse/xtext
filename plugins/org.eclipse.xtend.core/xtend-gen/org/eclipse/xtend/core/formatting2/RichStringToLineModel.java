@@ -90,12 +90,10 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     String _text = node.getText();
     final String t = _text;
     boolean _matched = false;
-    if (!_matched) {
-      boolean _startsWith = t.startsWith("\'\'\'");
-      if (_startsWith) {
-        _matched=true;
-        _switchResult = 3;
-      }
+    boolean _startsWith = t.startsWith("\'\'\'");
+    if (_startsWith) {
+      _matched=true;
+      _switchResult = 3;
     }
     if (!_matched) {
       boolean _startsWith_1 = t.startsWith("»»");
@@ -122,12 +120,10 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     String _text = node.getText();
     final String t = _text;
     boolean _matched = false;
-    if (!_matched) {
-      boolean _endsWith = t.endsWith("\'\'\'");
-      if (_endsWith) {
-        _matched=true;
-        _switchResult = 3;
-      }
+    boolean _endsWith = t.endsWith("\'\'\'");
+    if (_endsWith) {
+      _matched=true;
+      _switchResult = 3;
     }
     if (!_matched) {
       boolean _endsWith_1 = t.endsWith("««");

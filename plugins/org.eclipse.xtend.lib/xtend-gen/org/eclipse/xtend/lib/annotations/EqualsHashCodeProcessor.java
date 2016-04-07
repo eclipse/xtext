@@ -225,32 +225,30 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       TypeReference _orObject = this.orObject(_type);
       String _name = _orObject.getName();
       boolean _matched = false;
-      if (!_matched) {
-        String _name_1 = Double.TYPE.getName();
-        if (Objects.equal(_name, _name_1)) {
-          _matched=true;
-          StringConcatenationClient _client = new StringConcatenationClient() {
-            @Override
-            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("if (");
-              _builder.append(Double.class, "");
-              _builder.append(".doubleToLongBits(other.");
-              String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
-              _builder.append(") != ");
-              _builder.append(Double.class, "");
-              _builder.append(".doubleToLongBits(this.");
-              String _simpleName_1 = it.getSimpleName();
-              _builder.append(_simpleName_1, "");
-              _builder.append("))");
-              _builder.newLineIfNotEmpty();
-              _builder.append("  ");
-              _builder.append("return false; ");
-              _builder.newLine();
-            }
-          };
-          _switchResult = _client;
-        }
+      String _name_1 = Double.TYPE.getName();
+      if (Objects.equal(_name, _name_1)) {
+        _matched=true;
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("if (");
+            _builder.append(Double.class, "");
+            _builder.append(".doubleToLongBits(other.");
+            String _simpleName = it.getSimpleName();
+            _builder.append(_simpleName, "");
+            _builder.append(") != ");
+            _builder.append(Double.class, "");
+            _builder.append(".doubleToLongBits(this.");
+            String _simpleName_1 = it.getSimpleName();
+            _builder.append(_simpleName_1, "");
+            _builder.append("))");
+            _builder.newLineIfNotEmpty();
+            _builder.append("  ");
+            _builder.append("return false; ");
+            _builder.newLine();
+          }
+        };
+        _switchResult = _client;
       }
       if (!_matched) {
         String _name_2 = Float.TYPE.getName();
@@ -476,28 +474,26 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       TypeReference _orObject = this.orObject(_type);
       String _name = _orObject.getName();
       boolean _matched = false;
-      if (!_matched) {
-        String _name_1 = Double.TYPE.getName();
-        if (Objects.equal(_name, _name_1)) {
-          _matched=true;
-          StringConcatenationClient _client = new StringConcatenationClient() {
-            @Override
-            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("result = prime * result + (int) (");
-              _builder.append(Double.class, "");
-              _builder.append(".doubleToLongBits(this.");
-              String _simpleName = it.getSimpleName();
-              _builder.append(_simpleName, "");
-              _builder.append(") ^ (");
-              _builder.append(Double.class, "");
-              _builder.append(".doubleToLongBits(this.");
-              String _simpleName_1 = it.getSimpleName();
-              _builder.append(_simpleName_1, "");
-              _builder.append(") >>> 32));");
-            }
-          };
-          _switchResult = _client;
-        }
+      String _name_1 = Double.TYPE.getName();
+      if (Objects.equal(_name, _name_1)) {
+        _matched=true;
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("result = prime * result + (int) (");
+            _builder.append(Double.class, "");
+            _builder.append(".doubleToLongBits(this.");
+            String _simpleName = it.getSimpleName();
+            _builder.append(_simpleName, "");
+            _builder.append(") ^ (");
+            _builder.append(Double.class, "");
+            _builder.append(".doubleToLongBits(this.");
+            String _simpleName_1 = it.getSimpleName();
+            _builder.append(_simpleName_1, "");
+            _builder.append(") >>> 32));");
+          }
+        };
+        _switchResult = _client;
       }
       if (!_matched) {
         String _name_2 = Float.TYPE.getName();

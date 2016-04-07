@@ -65,26 +65,26 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
   public boolean queueChange(final IResourceDescription.Delta delta) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (delta instanceof UnconfirmedStructuralChangesDelta) {
-        _matched=true;
-        boolean _xblockexpression = false;
-        {
-          final IProject project = ((UnconfirmedStructuralChangesDelta)delta).getProject();
-          String _name = project.getName();
-          JavaBuilderState state = this.javaBuildState.get(_name);
-          boolean _equals = Objects.equal(state, null);
-          if (_equals) {
-            String _name_1 = project.getName();
-            this.javaBuildState.put(_name_1, state = JavaBuilderState.getLastBuiltState(project));
-          }
-          Integer _buildNumber = state.getBuildNumber();
-          ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((_buildNumber).intValue());
-          this.unconfirmedDeltas.add(((UnconfirmedStructuralChangesDelta)delta));
-          _xblockexpression = true;
+    if (delta instanceof UnconfirmedStructuralChangesDelta) {
+      _matched=true;
+      boolean _xblockexpression = false;
+      {
+        final IProject project = ((UnconfirmedStructuralChangesDelta)delta).getProject();
+        String _name = project.getName();
+        JavaBuilderState state = this.javaBuildState.get(_name);
+        boolean _equals = Objects.equal(state, null);
+        if (_equals) {
+          String _name_1 = project.getName();
+          JavaBuilderState _lastBuiltState = JavaBuilderState.getLastBuiltState(project);
+          JavaBuilderState _state = state = _lastBuiltState;
+          this.javaBuildState.put(_name_1, _state);
         }
-        _switchResult = _xblockexpression;
+        Integer _buildNumber = state.getBuildNumber();
+        ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((_buildNumber).intValue());
+        this.unconfirmedDeltas.add(((UnconfirmedStructuralChangesDelta)delta));
+        _xblockexpression = true;
       }
+      _switchResult = _xblockexpression;
     }
     if (!_matched) {
       _switchResult = false;

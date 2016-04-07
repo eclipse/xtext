@@ -82,11 +82,9 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
   public boolean isValidAnnotationValueType(final JvmTypeReference reference) {
     JvmTypeReference _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (reference instanceof JvmGenericArrayTypeReference) {
-        _matched=true;
-        _switchResult = ((JvmGenericArrayTypeReference)reference).getComponentType();
-      }
+    if (reference instanceof JvmGenericArrayTypeReference) {
+      _matched=true;
+      _switchResult = ((JvmGenericArrayTypeReference)reference).getComponentType();
     }
     if (!_matched) {
       _switchResult = reference;

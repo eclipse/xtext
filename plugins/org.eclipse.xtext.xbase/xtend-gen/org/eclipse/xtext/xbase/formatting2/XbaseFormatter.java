@@ -641,12 +641,10 @@ public class XbaseFormatter extends XtypeFormatter {
         String _switchResult = null;
         final XMemberFeatureCall it = ((XMemberFeatureCall)top);
         boolean _matched = false;
-        if (!_matched) {
-          boolean _isNullSafe = it.isNullSafe();
-          if (_isNullSafe) {
-            _matched=true;
-            _switchResult = "?.";
-          }
+        boolean _isNullSafe = it.isNullSafe();
+        if (_isNullSafe) {
+          _matched=true;
+          _switchResult = "?.";
         }
         if (!_matched) {
           boolean _isExplicitStatic = it.isExplicitStatic();
@@ -813,13 +811,11 @@ public class XbaseFormatter extends XtypeFormatter {
   protected boolean prependNewLineIfMultiline(final EObject obj) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (obj instanceof XMemberFeatureCall) {
-        _matched=true;
-        EList<XExpression> _memberCallArguments = ((XMemberFeatureCall)obj).getMemberCallArguments();
-        XClosure _builder = this.builder(_memberCallArguments);
-        _switchResult = this.prependNewLineIfMultiline(_builder);
-      }
+    if (obj instanceof XMemberFeatureCall) {
+      _matched=true;
+      EList<XExpression> _memberCallArguments = ((XMemberFeatureCall)obj).getMemberCallArguments();
+      XClosure _builder = this.builder(_memberCallArguments);
+      _switchResult = this.prependNewLineIfMultiline(_builder);
     }
     if (!_matched) {
       if (obj instanceof XClosure) {
@@ -1370,11 +1366,9 @@ public class XbaseFormatter extends XtypeFormatter {
     EList<EObject> _eContents = expr.eContents();
     for (final EObject obj : _eContents) {
       boolean _matched = false;
-      if (!_matched) {
-        if (obj instanceof XExpression) {
-          _matched=true;
-          format.<XExpression>format(((XExpression)obj));
-        }
+      if (obj instanceof XExpression) {
+        _matched=true;
+        format.<XExpression>format(((XExpression)obj));
       }
     }
   }
@@ -1835,11 +1829,9 @@ public class XbaseFormatter extends XtypeFormatter {
     XExpression _expression = expr.getExpression();
     final XExpression x = _expression;
     boolean _matched = false;
-    if (!_matched) {
-      if (x instanceof XBlockExpression) {
-        _matched=true;
-        _switchResult = ((XBlockExpression)x).getExpressions();
-      }
+    if (x instanceof XBlockExpression) {
+      _matched=true;
+      _switchResult = ((XBlockExpression)x).getExpressions();
     }
     if (!_matched) {
       _switchResult = CollectionLiterals.<XExpression>newArrayList(x);

@@ -89,45 +89,41 @@ public class XtendResourceDescription extends DefaultResourceDescription {
       for (final XExpression expression : _filter) {
         {
           boolean _matched = false;
-          if (!_matched) {
-            if (expression instanceof XMemberFeatureCall) {
-              boolean _and = false;
-              boolean _and_1 = false;
-              JvmIdentifiableElement _feature = ((XMemberFeatureCall)expression).getFeature();
-              boolean _notEquals_2 = (!Objects.equal(_feature, null));
-              if (!_notEquals_2) {
-                _and_1 = false;
-              } else {
-                JvmIdentifiableElement _feature_1 = ((XMemberFeatureCall)expression).getFeature();
-                boolean _eIsProxy = _feature_1.eIsProxy();
-                _and_1 = _eIsProxy;
-              }
-              if (!_and_1) {
-                _and = false;
-              } else {
-                boolean _isExplicitOperationCallOrBuilderSyntax = ((XMemberFeatureCall)expression).isExplicitOperationCallOrBuilderSyntax();
-                boolean _not = (!_isExplicitOperationCallOrBuilderSyntax);
-                _and = _not;
-              }
-              if (_and) {
-                _matched=true;
-                final XExpression receiver = ((XMemberFeatureCall)expression).getActualReceiver();
-                boolean _matched_1 = false;
-                if (!_matched_1) {
-                  if (receiver instanceof XAbstractFeatureCall) {
-                    boolean _isTypeLiteral = ((XAbstractFeatureCall)receiver).isTypeLiteral();
-                    if (_isTypeLiteral) {
-                      _matched_1=true;
-                      final JvmIdentifiableElement type = ((XAbstractFeatureCall)receiver).getFeature();
-                      String _identifier = type.getIdentifier();
-                      String _plus = (_identifier + "$");
-                      String _concreteSyntaxFeatureName = ((XMemberFeatureCall)expression).getConcreteSyntaxFeatureName();
-                      String _plus_1 = (_plus + _concreteSyntaxFeatureName);
-                      QualifiedName _qualifiedName = this.nameConverter.toQualifiedName(_plus_1);
-                      QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                      result.add(_lowerCase);
-                    }
-                  }
+          if (expression instanceof XMemberFeatureCall) {
+            boolean _and = false;
+            boolean _and_1 = false;
+            JvmIdentifiableElement _feature = ((XMemberFeatureCall)expression).getFeature();
+            boolean _notEquals_2 = (!Objects.equal(_feature, null));
+            if (!_notEquals_2) {
+              _and_1 = false;
+            } else {
+              JvmIdentifiableElement _feature_1 = ((XMemberFeatureCall)expression).getFeature();
+              boolean _eIsProxy = _feature_1.eIsProxy();
+              _and_1 = _eIsProxy;
+            }
+            if (!_and_1) {
+              _and = false;
+            } else {
+              boolean _isExplicitOperationCallOrBuilderSyntax = ((XMemberFeatureCall)expression).isExplicitOperationCallOrBuilderSyntax();
+              boolean _not = (!_isExplicitOperationCallOrBuilderSyntax);
+              _and = _not;
+            }
+            if (_and) {
+              _matched=true;
+              final XExpression receiver = ((XMemberFeatureCall)expression).getActualReceiver();
+              boolean _matched_1 = false;
+              if (receiver instanceof XAbstractFeatureCall) {
+                boolean _isTypeLiteral = ((XAbstractFeatureCall)receiver).isTypeLiteral();
+                if (_isTypeLiteral) {
+                  _matched_1=true;
+                  final JvmIdentifiableElement type = ((XAbstractFeatureCall)receiver).getFeature();
+                  String _identifier = type.getIdentifier();
+                  String _plus = (_identifier + "$");
+                  String _concreteSyntaxFeatureName = ((XMemberFeatureCall)expression).getConcreteSyntaxFeatureName();
+                  String _plus_1 = (_plus + _concreteSyntaxFeatureName);
+                  QualifiedName _qualifiedName = this.nameConverter.toQualifiedName(_plus_1);
+                  QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                  result.add(_lowerCase);
                 }
               }
             }
@@ -250,33 +246,31 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     }
     if (_and) {
       boolean _matched = false;
-      if (!_matched) {
-        if (type instanceof JvmGenericType) {
-          _matched=true;
-          JvmDeclaredType _declaringType = ((JvmGenericType)type).getDeclaringType();
-          this.registerAllTypes(_declaringType, acceptor);
-          JvmTypeReference _extendedClass = null;
-          if (((JvmGenericType)type)!=null) {
-            _extendedClass=((JvmGenericType)type).getExtendedClass();
-          }
-          JvmType _type = null;
-          if (_extendedClass!=null) {
-            _type=_extendedClass.getType();
-          }
-          this.registerAllTypes(_type, acceptor);
-          Iterable<JvmTypeReference> _extendedInterfaces = ((JvmGenericType)type).getExtendedInterfaces();
-          final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
-            @Override
-            public void apply(final JvmTypeReference it) {
-              JvmType _type = null;
-              if (it!=null) {
-                _type=it.getType();
-              }
-              XtendResourceDescription.this.registerAllTypes(_type, acceptor);
-            }
-          };
-          IterableExtensions.<JvmTypeReference>forEach(_extendedInterfaces, _function);
+      if (type instanceof JvmGenericType) {
+        _matched=true;
+        JvmDeclaredType _declaringType = ((JvmGenericType)type).getDeclaringType();
+        this.registerAllTypes(_declaringType, acceptor);
+        JvmTypeReference _extendedClass = null;
+        if (((JvmGenericType)type)!=null) {
+          _extendedClass=((JvmGenericType)type).getExtendedClass();
         }
+        JvmType _type = null;
+        if (_extendedClass!=null) {
+          _type=_extendedClass.getType();
+        }
+        this.registerAllTypes(_type, acceptor);
+        Iterable<JvmTypeReference> _extendedInterfaces = ((JvmGenericType)type).getExtendedInterfaces();
+        final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
+          @Override
+          public void apply(final JvmTypeReference it) {
+            JvmType _type = null;
+            if (it!=null) {
+              _type=it.getType();
+            }
+            XtendResourceDescription.this.registerAllTypes(_type, acceptor);
+          }
+        };
+        IterableExtensions.<JvmTypeReference>forEach(_extendedInterfaces, _function);
       }
     }
   }
@@ -284,11 +278,9 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   public boolean isLocal(final JvmType type) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof JvmGenericType) {
-        _matched=true;
-        _switchResult = ((JvmGenericType)type).isLocal();
-      }
+    if (type instanceof JvmGenericType) {
+      _matched=true;
+      _switchResult = ((JvmGenericType)type).isLocal();
     }
     if (!_matched) {
       _switchResult = false;

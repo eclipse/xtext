@@ -195,12 +195,10 @@ public class ErrorSafeExtensions {
     }
     if (_or) {
       boolean _matched = false;
-      if (!_matched) {
-        if (typeRef instanceof JvmSpecializedTypeReference) {
-          _matched=true;
-          JvmTypeReference _equivalent = ((JvmSpecializedTypeReference)typeRef).getEquivalent();
-          this.serializeSafely(_equivalent, surrogateType, appendable);
-        }
+      if (typeRef instanceof JvmSpecializedTypeReference) {
+        _matched=true;
+        JvmTypeReference _equivalent = ((JvmSpecializedTypeReference)typeRef).getEquivalent();
+        this.serializeSafely(_equivalent, surrogateType, appendable);
       }
       if (!_matched) {
         if (typeRef instanceof JvmUnknownTypeReference) {

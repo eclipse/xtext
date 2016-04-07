@@ -338,11 +338,9 @@ public class StandaloneBuilder {
       IEncodingProvider _encodingProvider = lang.getEncodingProvider();
       final IEncodingProvider provider = _encodingProvider;
       boolean _matched = false;
-      if (!_matched) {
-        if (provider instanceof IEncodingProvider.Runtime) {
-          _matched=true;
-          ((IEncodingProvider.Runtime)provider).setDefaultEncoding(encoding);
-        }
+      if (provider instanceof IEncodingProvider.Runtime) {
+        _matched=true;
+        ((IEncodingProvider.Runtime)provider).setDefaultEncoding(encoding);
       }
       if (!_matched) {
         this.forceDebugLog((((("Couldn\'t set encoding \'" + encoding) + "\' for provider \'") + provider) + 
@@ -463,15 +461,13 @@ public class StandaloneBuilder {
         boolean _isWriteStorageResources = this.isWriteStorageResources();
         if (_isWriteStorageResources) {
           boolean _matched = false;
-          if (!_matched) {
-            if (it instanceof StorageAwareResource) {
-              IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)it).getResourceStorageFacade();
-              boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
-              if (_notEquals) {
-                _matched=true;
-                IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)it).getResourceStorageFacade();
-                _resourceStorageFacade_1.saveResource(((StorageAwareResource)it), fileSystemAccess);
-              }
+          if (it instanceof StorageAwareResource) {
+            IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)it).getResourceStorageFacade();
+            boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
+            if (_notEquals) {
+              _matched=true;
+              IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)it).getResourceStorageFacade();
+              _resourceStorageFacade_1.saveResource(((StorageAwareResource)it), fileSystemAccess);
             }
           }
         }

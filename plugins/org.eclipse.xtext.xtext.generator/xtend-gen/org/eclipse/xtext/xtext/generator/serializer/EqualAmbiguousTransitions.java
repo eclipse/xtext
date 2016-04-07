@@ -51,12 +51,10 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
         public String format(final Production<GrammarAlias.AbstractElementAlias, AbstractElement> adapter, final GrammarAlias.AbstractElementAlias grammarElement, final boolean needParenthesis) {
           String _switchResult = null;
           boolean _matched = false;
-          if (!_matched) {
-            boolean _equals = Objects.equal(grammarElement, EqualAmbiguousTransitions.this.elementAlias);
-            if (_equals) {
-              _matched=true;
-              return "(ambiguity)";
-            }
+          boolean _equals = Objects.equal(grammarElement, EqualAmbiguousTransitions.this.elementAlias);
+          if (_equals) {
+            _matched=true;
+            return "(ambiguity)";
           }
           if (!_matched) {
             if (grammarElement instanceof GrammarAlias.TokenAlias) {

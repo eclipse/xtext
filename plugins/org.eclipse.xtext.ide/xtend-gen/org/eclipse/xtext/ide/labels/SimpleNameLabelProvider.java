@@ -19,11 +19,9 @@ public class SimpleNameLabelProvider implements INameLabelProvider {
   public String getNameLabel(final Object element) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof EObject) {
-        _matched=true;
-        _switchResult = SimpleAttributeResolver.NAME_RESOLVER.apply(((EObject)element));
-      }
+    if (element instanceof EObject) {
+      _matched=true;
+      _switchResult = SimpleAttributeResolver.NAME_RESOLVER.apply(((EObject)element));
     }
     if (!_matched) {
       if (element instanceof IEObjectDescription) {

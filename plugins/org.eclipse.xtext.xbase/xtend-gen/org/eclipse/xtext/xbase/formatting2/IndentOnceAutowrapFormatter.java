@@ -33,11 +33,9 @@ public class IndentOnceAutowrapFormatter implements IAutowrapFormatter {
     if ((!this.hasWrapped)) {
       IHiddenRegion _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (region instanceof IHiddenRegion) {
-          _matched=true;
-          _switchResult = ((IHiddenRegion)region);
-        }
+      if (region instanceof IHiddenRegion) {
+        _matched=true;
+        _switchResult = ((IHiddenRegion)region);
       }
       if (!_matched) {
         if (region instanceof IHiddenRegionPart) {

@@ -102,11 +102,9 @@ public class ConstantExpressionValidator {
     JvmIdentifiableElement _feature = expression.getFeature();
     final JvmIdentifiableElement feature = _feature;
     boolean _matched = false;
-    if (!_matched) {
-      if (feature instanceof JvmEnumerationLiteral) {
-        _matched=true;
-        return true;
-      }
+    if (feature instanceof JvmEnumerationLiteral) {
+      _matched=true;
+      return true;
     }
     if (!_matched) {
       if (feature instanceof JvmField) {
@@ -240,11 +238,9 @@ public class ConstantExpressionValidator {
     boolean _switchResult = false;
     JvmIdentifiableElement _feature = it.getFeature();
     boolean _matched = false;
-    if (!_matched) {
-      if (_feature instanceof JvmEnumerationLiteral) {
-        _matched=true;
-        _switchResult = false;
-      }
+    if (_feature instanceof JvmEnumerationLiteral) {
+      _matched=true;
+      _switchResult = false;
     }
     if (!_matched) {
       _switchResult = this.isConstant(it);

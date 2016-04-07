@@ -172,11 +172,9 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       final StringBuilder uiString = new StringBuilder();
       String _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (member instanceof JvmConstructor) {
-          _matched=true;
-          _switchResult = "constructor";
-        }
+      if (member instanceof JvmConstructor) {
+        _matched=true;
+        _switchResult = "constructor";
       }
       if (!_matched) {
         if (member instanceof JvmField) {

@@ -24,11 +24,9 @@ public class OperationCanceledManager {
   protected RuntimeException getPlatformOperationCanceledException(final Throwable t) {
     RuntimeException _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (t instanceof OperationCanceledException) {
-        _matched=true;
-        _switchResult = ((RuntimeException)t);
-      }
+    if (t instanceof OperationCanceledException) {
+      _matched=true;
+      _switchResult = ((RuntimeException)t);
     }
     if (!_matched) {
       if (t instanceof RuntimeException) {

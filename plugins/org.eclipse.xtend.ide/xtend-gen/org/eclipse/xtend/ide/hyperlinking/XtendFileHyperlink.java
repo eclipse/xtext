@@ -52,29 +52,23 @@ public class XtendFileHyperlink implements IHyperlink {
         ISourceLocator _sourceLocator = _launch.getSourceLocator();
         final ISourceLocator l = _sourceLocator;
         boolean _matched = false;
-        if (!_matched) {
-          if (l instanceof AbstractSourceLookupDirector) {
-            _matched=true;
-            final Object result = ((AbstractSourceLookupDirector)l).getSourceElement(this.fileName);
-            boolean _matched_1 = false;
-            if (!_matched_1) {
-              if (result instanceof IFile) {
-                _matched_1=true;
-                IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
-                IWorkbenchPage _activePage = _activeWorkbenchWindow.getActivePage();
-                final IEditorPart editor = IDE.openEditor(_activePage, ((IFile)result));
-                boolean _matched_2 = false;
-                if (!_matched_2) {
-                  if (editor instanceof XtextEditor) {
-                    _matched_2=true;
-                    IXtextDocument _document = ((XtextEditor)editor).getDocument();
-                    final IRegion region = _document.getLineInformation((this.lineNumber - 1));
-                    int _offset = region.getOffset();
-                    int _length = region.getLength();
-                    ((XtextEditor)editor).selectAndReveal(_offset, _length);
-                  }
-                }
-              }
+        if (l instanceof AbstractSourceLookupDirector) {
+          _matched=true;
+          final Object result = ((AbstractSourceLookupDirector)l).getSourceElement(this.fileName);
+          boolean _matched_1 = false;
+          if (result instanceof IFile) {
+            _matched_1=true;
+            IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
+            IWorkbenchPage _activePage = _activeWorkbenchWindow.getActivePage();
+            final IEditorPart editor = IDE.openEditor(_activePage, ((IFile)result));
+            boolean _matched_2 = false;
+            if (editor instanceof XtextEditor) {
+              _matched_2=true;
+              IXtextDocument _document = ((XtextEditor)editor).getDocument();
+              final IRegion region = _document.getLineInformation((this.lineNumber - 1));
+              int _offset = region.getOffset();
+              int _length = region.getLength();
+              ((XtextEditor)editor).selectAndReveal(_offset, _length);
             }
           }
         }

@@ -202,24 +202,20 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       Resource _eResource = expression.eResource();
       final Resource res = _eResource;
       boolean _matched = false;
-      if (!_matched) {
-        if (res instanceof StorageAwareResource) {
-          boolean _isLoadedFromStorage = ((StorageAwareResource)res).isLoadedFromStorage();
-          if (_isLoadedFromStorage) {
-            _matched=true;
-            return CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
-          }
+      if (res instanceof StorageAwareResource) {
+        boolean _isLoadedFromStorage = ((StorageAwareResource)res).isLoadedFromStorage();
+        if (_isLoadedFromStorage) {
+          _matched=true;
+          return CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
         }
       }
       JvmDeclaredType _switchResult_1 = null;
       JvmIdentifiableElement _nearestLogicalContainer = this.containerProvider.getNearestLogicalContainer(expression);
       final JvmIdentifiableElement cont = _nearestLogicalContainer;
       boolean _matched_1 = false;
-      if (!_matched_1) {
-        if (cont instanceof JvmGenericType) {
-          _matched_1=true;
-          _switchResult_1 = ((JvmGenericType)cont);
-        }
+      if (cont instanceof JvmGenericType) {
+        _matched_1=true;
+        _switchResult_1 = ((JvmGenericType)cont);
       }
       if (!_matched_1) {
         if (cont instanceof JvmMember) {
@@ -247,11 +243,9 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
                 if (_notEquals_1) {
                   final JvmType type = ConstantExpressionsInterpreter.this.findTypeByName(imp, importedTypeName);
                   boolean _matched = false;
-                  if (!_matched) {
-                    if (type instanceof JvmGenericType) {
-                      _matched=true;
-                      ConstantExpressionsInterpreter.this.collectAllVisibleFields(((JvmDeclaredType)type), result);
-                    }
+                  if (type instanceof JvmGenericType) {
+                    _matched=true;
+                    ConstantExpressionsInterpreter.this.collectAllVisibleFields(((JvmDeclaredType)type), result);
                   }
                   if (!_matched) {
                     if (type instanceof JvmEnumerationType) {
@@ -336,11 +330,9 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       JvmTypeReference _expectedType = ctx.getExpectedType();
       final JvmTypeReference exp = _expectedType;
       boolean _matched = false;
-      if (!_matched) {
-        if (exp instanceof JvmGenericArrayTypeReference) {
-          _matched=true;
-          _switchResult = ((JvmGenericArrayTypeReference)exp).getComponentType();
-        }
+      if (exp instanceof JvmGenericArrayTypeReference) {
+        _matched=true;
+        _switchResult = ((JvmGenericArrayTypeReference)exp).getComponentType();
       }
       final JvmTypeReference expectedComponentType = _switchResult;
       EList<XExpression> _elements = it.getElements();
@@ -368,11 +360,9 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
           Class<?> _class = _head.getClass();
           final Class<?> cl = _class;
           boolean _matched_1 = false;
-          if (!_matched_1) {
-            if (Objects.equal(cl, Integer.class)) {
-              _matched_1=true;
-              _switchResult_1 = Integer.TYPE;
-            }
+          if (Objects.equal(cl, Integer.class)) {
+            _matched_1=true;
+            _switchResult_1 = Integer.TYPE;
           }
           if (!_matched_1) {
             if (Objects.equal(cl, Long.class)) {
@@ -431,11 +421,9 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     Resource _eResource = ctx.eResource();
     final Resource res = _eResource;
     boolean _matched = false;
-    if (!_matched) {
-      if (res instanceof StorageAwareResource) {
-        _matched=true;
-        _switchResult = ((StorageAwareResource)res).isLoadedFromStorage();
-      }
+    if (res instanceof StorageAwareResource) {
+      _matched=true;
+      _switchResult = ((StorageAwareResource)res).isLoadedFromStorage();
     }
     if (!_matched) {
       _switchResult = false;
@@ -452,11 +440,9 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     if (_not) {
       Object _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (feature instanceof JvmEnumerationLiteral) {
-          _matched=true;
-          _switchResult = feature;
-        }
+      if (feature instanceof JvmEnumerationLiteral) {
+        _matched=true;
+        _switchResult = feature;
       }
       if (!_matched) {
         if (feature instanceof JvmField) {
@@ -477,13 +463,11 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     JvmTypeReference _expectedType = ctx.getExpectedType();
     final JvmTypeReference it_1 = _expectedType;
     boolean _matched_1 = false;
-    if (!_matched_1) {
-      if (it_1 instanceof XComputedTypeReferenceImplCustom) {
-        boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)it_1).isEquivalentComputed();
-        if (_isEquivalentComputed) {
-          _matched_1=true;
-          _switchResult_1 = ((XComputedTypeReferenceImplCustom)it_1).getType();
-        }
+    if (it_1 instanceof XComputedTypeReferenceImplCustom) {
+      boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)it_1).isEquivalentComputed();
+      if (_isEquivalentComputed) {
+        _matched_1=true;
+        _switchResult_1 = ((XComputedTypeReferenceImplCustom)it_1).getType();
       }
     }
     if (!_matched_1) {
@@ -511,11 +495,9 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       {
         JvmEnumerationType _switchResult_2 = null;
         boolean _matched_2 = false;
-        if (!_matched_2) {
-          if (expectedRawType instanceof JvmEnumerationType) {
-            _matched_2=true;
-            _switchResult_2 = ((JvmEnumerationType)expectedRawType);
-          }
+        if (expectedRawType instanceof JvmEnumerationType) {
+          _matched_2=true;
+          _switchResult_2 = ((JvmEnumerationType)expectedRawType);
         }
         if (!_matched_2) {
           if (expectedRawType instanceof JvmArrayType) {
@@ -549,16 +531,14 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       JvmIdentifiableElement _get = visibleFeatures.get(featureName);
       final JvmIdentifiableElement visibleFeature = _get;
       boolean _matched_2 = false;
-      if (!_matched_2) {
-        if (visibleFeature instanceof JvmEnumerationLiteral) {
-          _matched_2=true;
-          JvmEnumerationLiteral _xblockexpression_1 = null;
-          {
-            this.resolveFeature(it, visibleFeature);
-            _xblockexpression_1 = ((JvmEnumerationLiteral)visibleFeature);
-          }
-          _switchResult_2 = _xblockexpression_1;
+      if (visibleFeature instanceof JvmEnumerationLiteral) {
+        _matched_2=true;
+        JvmEnumerationLiteral _xblockexpression_1 = null;
+        {
+          this.resolveFeature(it, visibleFeature);
+          _xblockexpression_1 = ((JvmEnumerationLiteral)visibleFeature);
         }
+        _switchResult_2 = _xblockexpression_1;
       }
       if (!_matched_2) {
         if (visibleFeature instanceof JvmField) {
@@ -627,11 +607,9 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     if (_not) {
       Object _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (feature instanceof JvmEnumerationLiteral) {
-          _matched=true;
-          _switchResult = feature;
-        }
+      if (feature instanceof JvmEnumerationLiteral) {
+        _matched=true;
+        _switchResult = feature;
       }
       if (!_matched) {
         if (feature instanceof JvmField) {
@@ -652,56 +630,52 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       XExpression _memberCallTarget = it.getMemberCallTarget();
       final Object receiver = this.evaluate(_memberCallTarget, ctx);
       boolean _matched_1 = false;
-      if (!_matched_1) {
-        if (receiver instanceof JvmTypeReference) {
-          _matched_1=true;
-          JvmType _type = ((JvmTypeReference)receiver).getType();
-          final JvmType type = _type;
-          boolean _matched_2 = false;
-          if (!_matched_2) {
-            if (type instanceof JvmEnumerationType) {
-              _matched_2=true;
-              EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
-              final Function1<JvmEnumerationLiteral, Boolean> _function = new Function1<JvmEnumerationLiteral, Boolean>() {
-                @Override
-                public Boolean apply(final JvmEnumerationLiteral it) {
-                  String _simpleName = it.getSimpleName();
-                  return Boolean.valueOf(Objects.equal(_simpleName, featureName));
-                }
-              };
-              final JvmEnumerationLiteral enumValue = IterableExtensions.<JvmEnumerationLiteral>findFirst(_literals, _function);
-              boolean _equals = Objects.equal(enumValue, null);
-              if (_equals) {
-                String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
-                String _plus = ((("Couldn\'t find enum value " + featureName) + " on enum ") + _simpleName);
-                throw new ConstantExpressionEvaluationException(_plus, it);
-              }
-              this.resolveFeature(it, enumValue);
-              return enumValue;
+      if (receiver instanceof JvmTypeReference) {
+        _matched_1=true;
+        JvmType _type = ((JvmTypeReference)receiver).getType();
+        final JvmType type = _type;
+        boolean _matched_2 = false;
+        if (type instanceof JvmEnumerationType) {
+          _matched_2=true;
+          EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
+          final Function1<JvmEnumerationLiteral, Boolean> _function = new Function1<JvmEnumerationLiteral, Boolean>() {
+            @Override
+            public Boolean apply(final JvmEnumerationLiteral it) {
+              String _simpleName = it.getSimpleName();
+              return Boolean.valueOf(Objects.equal(_simpleName, featureName));
             }
+          };
+          final JvmEnumerationLiteral enumValue = IterableExtensions.<JvmEnumerationLiteral>findFirst(_literals, _function);
+          boolean _equals = Objects.equal(enumValue, null);
+          if (_equals) {
+            String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
+            String _plus = ((("Couldn\'t find enum value " + featureName) + " on enum ") + _simpleName);
+            throw new ConstantExpressionEvaluationException(_plus, it);
           }
-          if (!_matched_2) {
-            if (type instanceof JvmGenericType) {
-              _matched_2=true;
-              Iterable<JvmFeature> _allFeatures = ((JvmGenericType)type).getAllFeatures();
-              Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
-              final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
-                @Override
-                public Boolean apply(final JvmField it) {
-                  String _simpleName = it.getSimpleName();
-                  return Boolean.valueOf(Objects.equal(_simpleName, featureName));
-                }
-              };
-              final JvmField field = IterableExtensions.<JvmField>findFirst(_filter, _function);
-              boolean _equals = Objects.equal(field, null);
-              if (_equals) {
-                String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
-                String _plus = ((("Couldn\'t find field " + featureName) + " on type ") + _simpleName);
-                throw new ConstantExpressionEvaluationException(_plus, it);
+          this.resolveFeature(it, enumValue);
+          return enumValue;
+        }
+        if (!_matched_2) {
+          if (type instanceof JvmGenericType) {
+            _matched_2=true;
+            Iterable<JvmFeature> _allFeatures = ((JvmGenericType)type).getAllFeatures();
+            Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
+            final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
+              @Override
+              public Boolean apply(final JvmField it) {
+                String _simpleName = it.getSimpleName();
+                return Boolean.valueOf(Objects.equal(_simpleName, featureName));
               }
-              this.resolveFeature(it, field);
-              return this.evaluateField(it, field, ctx);
+            };
+            final JvmField field = IterableExtensions.<JvmField>findFirst(_filter, _function);
+            boolean _equals = Objects.equal(field, null);
+            if (_equals) {
+              String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
+              String _plus = ((("Couldn\'t find field " + featureName) + " on type ") + _simpleName);
+              throw new ConstantExpressionEvaluationException(_plus, it);
             }
+            this.resolveFeature(it, field);
+            return this.evaluateField(it, field, ctx);
           }
         }
       }

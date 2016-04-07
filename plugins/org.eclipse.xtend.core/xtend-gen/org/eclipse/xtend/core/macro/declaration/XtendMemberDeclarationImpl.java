@@ -46,12 +46,10 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     EObject _eContainer = _delegate.eContainer();
     final EObject container = _eContainer;
     boolean _matched = false;
-    if (!_matched) {
-      if (container instanceof XtendTypeDeclaration) {
-        _matched=true;
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        _switchResult = _compilationUnit.toXtendTypeDeclaration(((XtendTypeDeclaration)container));
-      }
+    if (container instanceof XtendTypeDeclaration) {
+      _matched=true;
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      _switchResult = _compilationUnit.toXtendTypeDeclaration(((XtendTypeDeclaration)container));
     }
     if (!_matched) {
       _switchResult = null;

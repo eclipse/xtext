@@ -143,52 +143,48 @@ public class ProcessorInstanceForJvmTypeProvider {
       return adapter.getClassLoader();
     }
     boolean _matched = false;
-    if (!_matched) {
-      if (resourceSet instanceof XtextResourceSet) {
-        _matched=true;
-        final Object classLoaderCtx = ((XtextResourceSet)resourceSet).getClasspathURIContext();
-        ClassLoader _switchResult_1 = null;
-        boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (classLoaderCtx instanceof ClassLoader) {
-            _matched_1=true;
-            _switchResult_1 = ((ClassLoader)classLoaderCtx);
+    if (resourceSet instanceof XtextResourceSet) {
+      _matched=true;
+      final Object classLoaderCtx = ((XtextResourceSet)resourceSet).getClasspathURIContext();
+      ClassLoader _switchResult_1 = null;
+      boolean _matched_1 = false;
+      if (classLoaderCtx instanceof ClassLoader) {
+        _matched_1=true;
+        _switchResult_1 = ((ClassLoader)classLoaderCtx);
+      }
+      if (!_matched_1) {
+        if (classLoaderCtx instanceof Class) {
+          _matched_1=true;
+          _switchResult_1 = ((Class<?>)classLoaderCtx).getClassLoader();
+        }
+      }
+      final ClassLoader jvmTypeLoader = _switchResult_1;
+      ClassLoader _xifexpression = null;
+      if ((jvmTypeLoader instanceof URLClassLoader)) {
+        URLClassLoader _xblockexpression = null;
+        {
+          final ArrayList<URL> urls = CollectionLiterals.<URL>newArrayList();
+          URL[] _uRLs = ((URLClassLoader)jvmTypeLoader).getURLs();
+          Iterables.<URL>addAll(urls, ((Iterable<? extends URL>)Conversions.doWrapArray(_uRLs)));
+          final ClassLoader bootClassloader = ((URLClassLoader)jvmTypeLoader).getParent();
+          if ((bootClassloader instanceof AlternateJdkLoader)) {
+            URL[] _uRLs_1 = ((AlternateJdkLoader)bootClassloader).getURLs();
+            Iterables.<URL>addAll(urls, ((Iterable<? extends URL>)Conversions.doWrapArray(_uRLs_1)));
           }
+          ClassLoader _classLoader = TransformationContext.class.getClassLoader();
+          _xblockexpression = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
         }
-        if (!_matched_1) {
-          if (classLoaderCtx instanceof Class) {
-            _matched_1=true;
-            _switchResult_1 = ((Class<?>)classLoaderCtx).getClassLoader();
-          }
-        }
-        final ClassLoader jvmTypeLoader = _switchResult_1;
-        ClassLoader _xifexpression = null;
-        if ((jvmTypeLoader instanceof URLClassLoader)) {
-          URLClassLoader _xblockexpression = null;
-          {
-            final ArrayList<URL> urls = CollectionLiterals.<URL>newArrayList();
-            URL[] _uRLs = ((URLClassLoader)jvmTypeLoader).getURLs();
-            Iterables.<URL>addAll(urls, ((Iterable<? extends URL>)Conversions.doWrapArray(_uRLs)));
-            final ClassLoader bootClassloader = ((URLClassLoader)jvmTypeLoader).getParent();
-            if ((bootClassloader instanceof AlternateJdkLoader)) {
-              URL[] _uRLs_1 = ((AlternateJdkLoader)bootClassloader).getURLs();
-              Iterables.<URL>addAll(urls, ((Iterable<? extends URL>)Conversions.doWrapArray(_uRLs_1)));
-            }
-            ClassLoader _classLoader = TransformationContext.class.getClassLoader();
-            _xblockexpression = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
-          }
-          _xifexpression = _xblockexpression;
-        } else {
-          _xifexpression = jvmTypeLoader;
-        }
-        final ClassLoader processorClassLoader = _xifexpression;
-        boolean _notEquals_1 = (!Objects.equal(processorClassLoader, null));
-        if (_notEquals_1) {
-          EList<Adapter> _eAdapters_1 = ((XtextResourceSet)resourceSet).eAdapters();
-          ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(processorClassLoader);
-          _eAdapters_1.add(_processorClassloaderAdapter);
-          return processorClassLoader;
-        }
+        _xifexpression = _xblockexpression;
+      } else {
+        _xifexpression = jvmTypeLoader;
+      }
+      final ClassLoader processorClassLoader = _xifexpression;
+      boolean _notEquals_1 = (!Objects.equal(processorClassLoader, null));
+      if (_notEquals_1) {
+        EList<Adapter> _eAdapters_1 = ((XtextResourceSet)resourceSet).eAdapters();
+        ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(processorClassLoader);
+        _eAdapters_1.add(_processorClassloaderAdapter);
+        return processorClassLoader;
       }
     }
     ProcessorInstanceForJvmTypeProvider.logger.info("No class loader configured. Trying with this class classloader.");

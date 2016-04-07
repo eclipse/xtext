@@ -29,13 +29,11 @@ public class DefaultAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToAt
   protected String calculateId(final String tokenName, final int tokenType) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      Matcher _matcher = DefaultAntlrTokenToAttributeIdMapper.PUNCTUATION.matcher(tokenName);
-      boolean _matches = _matcher.matches();
-      if (_matches) {
-        _matched=true;
-        _switchResult = HighlightingStyles.PUNCTUATION_ID;
-      }
+    Matcher _matcher = DefaultAntlrTokenToAttributeIdMapper.PUNCTUATION.matcher(tokenName);
+    boolean _matches = _matcher.matches();
+    if (_matches) {
+      _matched=true;
+      _switchResult = HighlightingStyles.PUNCTUATION_ID;
     }
     if (!_matched) {
       Matcher _matcher_1 = DefaultAntlrTokenToAttributeIdMapper.QUOTED.matcher(tokenName);

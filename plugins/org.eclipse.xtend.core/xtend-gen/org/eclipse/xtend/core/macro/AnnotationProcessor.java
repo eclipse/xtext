@@ -138,34 +138,32 @@ public class AnnotationProcessor {
         Object _processorInstance = ctx.getProcessorInstance();
         final Object processor = _processorInstance;
         boolean _matched = false;
-        if (!_matched) {
-          if (processor instanceof RegisterGlobalsParticipant) {
-            _matched=true;
-            Object _xblockexpression_1 = null;
-            {
-              final RegisterGlobalsContextImpl registerGlobalsCtx = this.registerGlobalsContextProvider.get();
-              registerGlobalsCtx.setAcceptor(acceptor);
-              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-              registerGlobalsCtx.setCompilationUnit(_compilationUnit);
-              final Runnable _function = new Runnable() {
-                @Override
-                public void run() {
-                  List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-                  final Function1<XtendAnnotationTarget, MemberDeclaration> _function = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
-                    @Override
-                    public MemberDeclaration apply(final XtendAnnotationTarget it) {
-                      CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                      return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-                    }
-                  };
-                  List<MemberDeclaration> _map = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function);
-                  ((RegisterGlobalsParticipant<NamedElement>)processor).doRegisterGlobals(_map, registerGlobalsCtx);
-                }
-              };
-              _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
-            }
-            _switchResult = _xblockexpression_1;
+        if (processor instanceof RegisterGlobalsParticipant) {
+          _matched=true;
+          Object _xblockexpression_1 = null;
+          {
+            final RegisterGlobalsContextImpl registerGlobalsCtx = this.registerGlobalsContextProvider.get();
+            registerGlobalsCtx.setAcceptor(acceptor);
+            CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+            registerGlobalsCtx.setCompilationUnit(_compilationUnit);
+            final Runnable _function = new Runnable() {
+              @Override
+              public void run() {
+                List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+                final Function1<XtendAnnotationTarget, MemberDeclaration> _function = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
+                  @Override
+                  public MemberDeclaration apply(final XtendAnnotationTarget it) {
+                    CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                    return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+                  }
+                };
+                List<MemberDeclaration> _map = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function);
+                ((RegisterGlobalsParticipant<NamedElement>)processor).doRegisterGlobals(_map, registerGlobalsCtx);
+              }
+            };
+            _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
           }
+          _switchResult = _xblockexpression_1;
         }
         _xtrycatchfinallyexpression = _switchResult;
       } finally {
@@ -187,50 +185,46 @@ public class AnnotationProcessor {
         Object _processorInstance = ctx.getProcessorInstance();
         final Object processor = _processorInstance;
         boolean _matched = false;
-        if (!_matched) {
-          if (processor instanceof TransformationParticipant) {
-            _matched=true;
-            Object _xblockexpression_1 = null;
-            {
-              final TransformationContextImpl modifyCtx = this.modifyContextProvider.get();
-              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-              modifyCtx.setUnit(_compilationUnit);
-              final Runnable _function = new Runnable() {
-                @Override
-                public void run() {
-                  List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-                  final Function1<XtendAnnotationTarget, MutableNamedElement> _function = new Function1<XtendAnnotationTarget, MutableNamedElement>() {
-                    @Override
-                    public MutableNamedElement apply(final XtendAnnotationTarget it) {
-                      Declaration _switchResult = null;
-                      boolean _matched = false;
-                      if (!_matched) {
-                        if (it instanceof XtendMember) {
-                          _matched=true;
-                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          _switchResult = _compilationUnit.toXtendMemberDeclaration(((XtendMember)it));
-                        }
-                      }
-                      if (!_matched) {
-                        if (it instanceof XtendParameter) {
-                          _matched=true;
-                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          _switchResult = _compilationUnit.toXtendParameterDeclaration(((XtendParameter)it));
-                        }
-                      }
-                      final Declaration xtendMember = _switchResult;
-                      Element _primaryGeneratedJavaElement = modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
-                      return ((MutableNamedElement) _primaryGeneratedJavaElement);
+        if (processor instanceof TransformationParticipant) {
+          _matched=true;
+          Object _xblockexpression_1 = null;
+          {
+            final TransformationContextImpl modifyCtx = this.modifyContextProvider.get();
+            CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+            modifyCtx.setUnit(_compilationUnit);
+            final Runnable _function = new Runnable() {
+              @Override
+              public void run() {
+                List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+                final Function1<XtendAnnotationTarget, MutableNamedElement> _function = new Function1<XtendAnnotationTarget, MutableNamedElement>() {
+                  @Override
+                  public MutableNamedElement apply(final XtendAnnotationTarget it) {
+                    Declaration _switchResult = null;
+                    boolean _matched = false;
+                    if (it instanceof XtendMember) {
+                      _matched=true;
+                      CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                      _switchResult = _compilationUnit.toXtendMemberDeclaration(((XtendMember)it));
                     }
-                  };
-                  final List<MutableNamedElement> map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
-                  ((TransformationParticipant<MutableNamedElement>)processor).doTransform(map, modifyCtx);
-                }
-              };
-              _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
-            }
-            _switchResult = _xblockexpression_1;
+                    if (!_matched) {
+                      if (it instanceof XtendParameter) {
+                        _matched=true;
+                        CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                        _switchResult = _compilationUnit.toXtendParameterDeclaration(((XtendParameter)it));
+                      }
+                    }
+                    final Declaration xtendMember = _switchResult;
+                    Element _primaryGeneratedJavaElement = modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
+                    return ((MutableNamedElement) _primaryGeneratedJavaElement);
+                  }
+                };
+                final List<MutableNamedElement> map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
+                ((TransformationParticipant<MutableNamedElement>)processor).doTransform(map, modifyCtx);
+              }
+            };
+            _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
           }
+          _switchResult = _xblockexpression_1;
         }
         _xtrycatchfinallyexpression = _switchResult;
       } finally {
@@ -252,50 +246,46 @@ public class AnnotationProcessor {
         Object _processorInstance = ctx.getProcessorInstance();
         final Object processor = _processorInstance;
         boolean _matched = false;
-        if (!_matched) {
-          if (processor instanceof ValidationParticipant) {
-            _matched=true;
-            Object _xblockexpression_1 = null;
-            {
-              final ValidationContextImpl validationContext = this.validationContextProvider.get();
-              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-              validationContext.setUnit(_compilationUnit);
-              final Runnable _function = new Runnable() {
-                @Override
-                public void run() {
-                  List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-                  final Function1<XtendAnnotationTarget, NamedElement> _function = new Function1<XtendAnnotationTarget, NamedElement>() {
-                    @Override
-                    public NamedElement apply(final XtendAnnotationTarget it) {
-                      Declaration _switchResult = null;
-                      boolean _matched = false;
-                      if (!_matched) {
-                        if (it instanceof XtendMember) {
-                          _matched=true;
-                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          _switchResult = _compilationUnit.toXtendMemberDeclaration(((XtendMember)it));
-                        }
-                      }
-                      if (!_matched) {
-                        if (it instanceof XtendParameter) {
-                          _matched=true;
-                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          _switchResult = _compilationUnit.toXtendParameterDeclaration(((XtendParameter)it));
-                        }
-                      }
-                      final Declaration xtendMember = _switchResult;
-                      Element _primaryGeneratedJavaElement = validationContext.getPrimaryGeneratedJavaElement(xtendMember);
-                      return ((NamedElement) _primaryGeneratedJavaElement);
+        if (processor instanceof ValidationParticipant) {
+          _matched=true;
+          Object _xblockexpression_1 = null;
+          {
+            final ValidationContextImpl validationContext = this.validationContextProvider.get();
+            CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+            validationContext.setUnit(_compilationUnit);
+            final Runnable _function = new Runnable() {
+              @Override
+              public void run() {
+                List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+                final Function1<XtendAnnotationTarget, NamedElement> _function = new Function1<XtendAnnotationTarget, NamedElement>() {
+                  @Override
+                  public NamedElement apply(final XtendAnnotationTarget it) {
+                    Declaration _switchResult = null;
+                    boolean _matched = false;
+                    if (it instanceof XtendMember) {
+                      _matched=true;
+                      CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                      _switchResult = _compilationUnit.toXtendMemberDeclaration(((XtendMember)it));
                     }
-                  };
-                  final List<NamedElement> map = ListExtensions.<XtendAnnotationTarget, NamedElement>map(_annotatedSourceElements, _function);
-                  ((ValidationParticipant<NamedElement>)processor).doValidate(map, validationContext);
-                }
-              };
-              _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
-            }
-            _switchResult = _xblockexpression_1;
+                    if (!_matched) {
+                      if (it instanceof XtendParameter) {
+                        _matched=true;
+                        CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                        _switchResult = _compilationUnit.toXtendParameterDeclaration(((XtendParameter)it));
+                      }
+                    }
+                    final Declaration xtendMember = _switchResult;
+                    Element _primaryGeneratedJavaElement = validationContext.getPrimaryGeneratedJavaElement(xtendMember);
+                    return ((NamedElement) _primaryGeneratedJavaElement);
+                  }
+                };
+                final List<NamedElement> map = ListExtensions.<XtendAnnotationTarget, NamedElement>map(_annotatedSourceElements, _function);
+                ((ValidationParticipant<NamedElement>)processor).doValidate(map, validationContext);
+              }
+            };
+            _xblockexpression_1 = this.runWithCancelIndiciator(ctx, monitor, _function);
           }
+          _switchResult = _xblockexpression_1;
         }
         _xtrycatchfinallyexpression = _switchResult;
       } finally {

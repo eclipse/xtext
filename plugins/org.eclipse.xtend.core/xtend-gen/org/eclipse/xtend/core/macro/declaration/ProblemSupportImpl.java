@@ -165,11 +165,9 @@ public class ProblemSupportImpl implements ProblemSupport {
   public EStructuralFeature getSignificantFeature(final EObject obj) {
     EStructuralFeature _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (obj instanceof XtendTypeDeclaration) {
-        _matched=true;
-        _switchResult = XtendPackage.eINSTANCE.getXtendTypeDeclaration_Name();
-      }
+    if (obj instanceof XtendTypeDeclaration) {
+      _matched=true;
+      _switchResult = XtendPackage.eINSTANCE.getXtendTypeDeclaration_Name();
     }
     if (!_matched) {
       if (obj instanceof XtendField) {
@@ -201,16 +199,14 @@ public class ProblemSupportImpl implements ProblemSupport {
   private Pair<Resource, EObject> getResourceAndEObject(final Element element) {
     this.checkCanceled();
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof CompilationUnitImpl) {
-        boolean _equals = Objects.equal(element, this.compilationUnit);
-        if (_equals) {
-          _matched=true;
-          XtendFile _xtendFile = this.compilationUnit.getXtendFile();
-          Resource _eResource = _xtendFile.eResource();
-          XtendFile _xtendFile_1 = this.compilationUnit.getXtendFile();
-          return Pair.<Resource, EObject>of(_eResource, _xtendFile_1);
-        }
+    if (element instanceof CompilationUnitImpl) {
+      boolean _equals = Objects.equal(element, this.compilationUnit);
+      if (_equals) {
+        _matched=true;
+        XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+        Resource _eResource = _xtendFile.eResource();
+        XtendFile _xtendFile_1 = this.compilationUnit.getXtendFile();
+        return Pair.<Resource, EObject>of(_eResource, _xtendFile_1);
       }
     }
     if (!_matched) {

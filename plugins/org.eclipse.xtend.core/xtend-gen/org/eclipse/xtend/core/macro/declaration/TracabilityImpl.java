@@ -95,15 +95,13 @@ public class TracabilityImpl implements Tracability {
   public boolean isGenerated(final Element element) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof JvmElementImpl) {
-        _matched=true;
-        EObject _delegate = ((JvmElementImpl<?>)element).getDelegate();
-        Resource _eResource = _delegate.eResource();
-        XtendFile _xtendFile = this.unit.getXtendFile();
-        Resource _eResource_1 = _xtendFile.eResource();
-        return Objects.equal(_eResource, _eResource_1);
-      }
+    if (element instanceof JvmElementImpl) {
+      _matched=true;
+      EObject _delegate = ((JvmElementImpl<?>)element).getDelegate();
+      Resource _eResource = _delegate.eResource();
+      XtendFile _xtendFile = this.unit.getXtendFile();
+      Resource _eResource_1 = _xtendFile.eResource();
+      return Objects.equal(_eResource, _eResource_1);
     }
     if (!_matched) {
       if (element instanceof JvmTypeParameterDeclarationImpl) {
@@ -125,11 +123,9 @@ public class TracabilityImpl implements Tracability {
   public boolean isSource(final Element element) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof XtendNamedElementImpl) {
-        _matched=true;
-        _switchResult = true;
-      }
+    if (element instanceof XtendNamedElementImpl) {
+      _matched=true;
+      _switchResult = true;
     }
     if (!_matched) {
       if (element instanceof XtendAnnotationReferenceImpl) {

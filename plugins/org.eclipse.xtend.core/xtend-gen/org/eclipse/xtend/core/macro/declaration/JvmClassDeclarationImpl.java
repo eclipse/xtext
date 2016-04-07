@@ -71,14 +71,12 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
         JvmType _type = it.getType();
         final JvmType it_1 = _type;
         boolean _matched = false;
-        if (!_matched) {
-          if (it_1 instanceof JvmGenericType) {
-            boolean _isInterface = ((JvmGenericType)it_1).isInterface();
-            boolean _not = (!_isInterface);
-            if (_not) {
-              _matched=true;
-              _switchResult = true;
-            }
+        if (it_1 instanceof JvmGenericType) {
+          boolean _isInterface = ((JvmGenericType)it_1).isInterface();
+          boolean _not = (!_isInterface);
+          if (_not) {
+            _matched=true;
+            _switchResult = true;
           }
         }
         if (!_matched) {

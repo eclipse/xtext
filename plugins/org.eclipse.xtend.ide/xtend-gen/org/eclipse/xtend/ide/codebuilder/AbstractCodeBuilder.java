@@ -118,11 +118,9 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   protected ISourceAppender appendVisibility(final ISourceAppender appendable, final JvmVisibility visibility, final JvmVisibility skippableDefault) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(visibility, skippableDefault)) {
-        _matched=true;
-        _switchResult = "";
-      }
+    if (Objects.equal(visibility, skippableDefault)) {
+      _matched=true;
+      _switchResult = "";
     }
     if (!_matched) {
       if (Objects.equal(visibility, JvmVisibility.PRIVATE)) {
@@ -231,11 +229,9 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   protected String getIdentifierOrObject(final JvmTypeReference typeReference) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (typeReference instanceof JvmUnknownTypeReference) {
-        _matched=true;
-        _switchResult = "java.lang.Object";
-      }
+    if (typeReference instanceof JvmUnknownTypeReference) {
+      _matched=true;
+      _switchResult = "java.lang.Object";
     }
     if (!_matched) {
       _switchResult = typeReference.getIdentifier();
@@ -246,11 +242,9 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   protected boolean isInterface(final JvmType t) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (t instanceof JvmGenericType) {
-        _matched=true;
-        _switchResult = ((JvmGenericType)t).isInterface();
-      }
+    if (t instanceof JvmGenericType) {
+      _matched=true;
+      _switchResult = ((JvmGenericType)t).isInterface();
     }
     if (!_matched) {
       _switchResult = false;

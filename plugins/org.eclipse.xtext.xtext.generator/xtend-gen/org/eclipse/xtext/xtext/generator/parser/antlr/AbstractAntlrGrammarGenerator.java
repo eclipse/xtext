@@ -1147,23 +1147,21 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _switchResult = null;
     boolean _matched = false;
+    if (it instanceof EnumRule) {
+      _matched=true;
+    }
     if (!_matched) {
-      if (it instanceof EnumRule) {
+      if (it instanceof ParserRule) {
         _matched=true;
       }
-      if (!_matched) {
-        if (it instanceof ParserRule) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (it instanceof TerminalRule) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (it instanceof TerminalRule) {
-          _matched=true;
-        }
-      }
-      if (_matched) {
-        _switchResult = this._grammarAccessExtensions.ruleName(it);
-      }
+    }
+    if (_matched) {
+      _switchResult = this._grammarAccessExtensions.ruleName(it);
     }
     if (!_matched) {
       throw new IllegalStateException(("crossrefEbnf is not supported for " + it));
@@ -1207,23 +1205,21 @@ public abstract class AbstractAntlrGrammarGenerator {
     AbstractRule _rule = it.getRule();
     final AbstractRule rule = _rule;
     boolean _matched = false;
+    if (rule instanceof EnumRule) {
+      _matched=true;
+    }
     if (!_matched) {
-      if (rule instanceof EnumRule) {
+      if (rule instanceof ParserRule) {
         _matched=true;
       }
-      if (!_matched) {
-        if (rule instanceof ParserRule) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (rule instanceof TerminalRule) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (rule instanceof TerminalRule) {
-          _matched=true;
-        }
-      }
-      if (_matched) {
-        _switchResult = this._grammarAccessExtensions.ruleName(rule);
-      }
+    }
+    if (_matched) {
+      _switchResult = this._grammarAccessExtensions.ruleName(rule);
     }
     if (!_matched) {
       throw new IllegalStateException(("assignmentEbnf is not supported for " + rule));

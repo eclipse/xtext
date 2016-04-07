@@ -24,24 +24,22 @@ public class XbaseIdeContentProposalPriorities extends IdeContentProposalPriorit
   @Override
   public int getCrossRefPriority(final IEObjectDescription objectDesc, final ContentAssistEntry entry) {
     boolean _matched = false;
-    if (!_matched) {
-      if (objectDesc instanceof SimpleIdentifiableElementDescription) {
-        boolean _and = false;
-        String _proposal = entry.getProposal();
-        boolean _notEquals = (!Objects.equal(_proposal, "this"));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          String _proposal_1 = entry.getProposal();
-          boolean _notEquals_1 = (!Objects.equal(_proposal_1, "super"));
-          _and = _notEquals_1;
-        }
-        if (_and) {
-          _matched=true;
-          int _crossRefPriority = this.getCrossRefPriority();
-          int _plus = (_crossRefPriority + 70);
-          return this.adjustPriority(entry, _plus);
-        }
+    if (objectDesc instanceof SimpleIdentifiableElementDescription) {
+      boolean _and = false;
+      String _proposal = entry.getProposal();
+      boolean _notEquals = (!Objects.equal(_proposal, "this"));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        String _proposal_1 = entry.getProposal();
+        boolean _notEquals_1 = (!Objects.equal(_proposal_1, "super"));
+        _and = _notEquals_1;
+      }
+      if (_and) {
+        _matched=true;
+        int _crossRefPriority = this.getCrossRefPriority();
+        int _plus = (_crossRefPriority + 70);
+        return this.adjustPriority(entry, _plus);
       }
     }
     if (!_matched) {
@@ -57,13 +55,11 @@ public class XbaseIdeContentProposalPriorities extends IdeContentProposalPriorit
         _matched=true;
         JvmIdentifiableElement _elementOrProxy = ((IIdentifiableElementDescription)objectDesc).getElementOrProxy();
         boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (_elementOrProxy instanceof JvmField) {
-            _matched_1=true;
-            int _crossRefPriority = this.getCrossRefPriority();
-            int _plus = (_crossRefPriority + 50);
-            return this.adjustPriority(entry, _plus);
-          }
+        if (_elementOrProxy instanceof JvmField) {
+          _matched_1=true;
+          int _crossRefPriority = this.getCrossRefPriority();
+          int _plus = (_crossRefPriority + 50);
+          return this.adjustPriority(entry, _plus);
         }
         if (!_matched_1) {
           if (_elementOrProxy instanceof JvmExecutable) {

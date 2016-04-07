@@ -349,11 +349,9 @@ public class Ecore2XtextExtensions {
     String _switchResult = null;
     String _name = it.getName();
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_name, "EBigDecimal")) {
-        _matched=true;
-        _switchResult = "INT? \'.\' INT";
-      }
+    if (Objects.equal(_name, "EBigDecimal")) {
+      _matched=true;
+      _switchResult = "INT? \'.\' INT";
     }
     if (!_matched) {
       if (Objects.equal(_name, "EBigInteger")) {
@@ -724,21 +722,19 @@ public class Ecore2XtextExtensions {
   public static boolean needsConcreteRule(final EClassifier eClassifier) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (eClassifier instanceof EClass) {
-        _matched=true;
-        boolean _and = false;
-        boolean _isAbstract = ((EClass)eClassifier).isAbstract();
-        boolean _not = (!_isAbstract);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _isInterface = ((EClass)eClassifier).isInterface();
-          boolean _not_1 = (!_isInterface);
-          _and = _not_1;
-        }
-        _switchResult = _and;
+    if (eClassifier instanceof EClass) {
+      _matched=true;
+      boolean _and = false;
+      boolean _isAbstract = ((EClass)eClassifier).isAbstract();
+      boolean _not = (!_isAbstract);
+      if (!_not) {
+        _and = false;
+      } else {
+        boolean _isInterface = ((EClass)eClassifier).isInterface();
+        boolean _not_1 = (!_isInterface);
+        _and = _not_1;
       }
+      _switchResult = _and;
     }
     if (!_matched) {
       _switchResult = true;
@@ -749,20 +745,18 @@ public class Ecore2XtextExtensions {
   public static boolean needsDispatcherRule(final EClassifier eClassifier) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (eClassifier instanceof EClass) {
-        _matched=true;
-        Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(((EClass)eClassifier));
-        final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
-          @Override
-          public Boolean apply(final EClass c) {
-            return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(c));
-          }
-        };
-        Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_subClasses, _function);
-        boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-        _switchResult = (!_isEmpty);
-      }
+    if (eClassifier instanceof EClass) {
+      _matched=true;
+      Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(((EClass)eClassifier));
+      final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
+        @Override
+        public Boolean apply(final EClass c) {
+          return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(c));
+        }
+      };
+      Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_subClasses, _function);
+      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+      _switchResult = (!_isEmpty);
     }
     if (!_matched) {
       _switchResult = false;
@@ -773,11 +767,9 @@ public class Ecore2XtextExtensions {
   public static boolean isContainment(final EStructuralFeature eStrFeat) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (eStrFeat instanceof EAttribute) {
-        _matched=true;
-        _switchResult = true;
-      }
+    if (eStrFeat instanceof EAttribute) {
+      _matched=true;
+      _switchResult = true;
     }
     if (!_matched) {
       if (eStrFeat instanceof EReference) {

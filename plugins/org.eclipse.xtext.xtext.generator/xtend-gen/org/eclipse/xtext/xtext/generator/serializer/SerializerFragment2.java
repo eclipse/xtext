@@ -998,19 +998,17 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   private StringConcatenationClient genObjectSelector(final EObject obj) {
     StringConcatenationClient _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (obj instanceof Action) {
-        _matched=true;
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("action == grammarAccess.");
-            String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(obj);
-            _builder.append(_gaAccessor, "");
-          }
-        };
-        _switchResult = _client;
-      }
+    if (obj instanceof Action) {
+      _matched=true;
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("action == grammarAccess.");
+          String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(obj);
+          _builder.append(_gaAccessor, "");
+        }
+      };
+      _switchResult = _client;
     }
     if (!_matched) {
       if (obj instanceof ParserRule) {
@@ -1622,13 +1620,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   private String defaultValue(final AbstractElement ele, final Set<AbstractElement> visited) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      boolean _add = visited.add(ele);
-      boolean _not = (!_add);
-      if (_not) {
-        _matched=true;
-        _switchResult = "";
-      }
+    boolean _add = visited.add(ele);
+    boolean _not = (!_add);
+    if (_not) {
+      _matched=true;
+      _switchResult = "";
     }
     if (!_matched) {
       boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(ele);
@@ -1734,24 +1730,22 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   private String textWithoutComments(final INode node) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (node instanceof ILeafNode) {
-        boolean _or = false;
-        boolean _isHidden = ((ILeafNode)node).isHidden();
-        boolean _not = (!_isHidden);
-        if (_not) {
-          _or = true;
-        } else {
-          String _text = ((ILeafNode)node).getText();
-          String _trim = _text.trim();
-          int _length = _trim.length();
-          boolean _equals = (_length == 0);
-          _or = _equals;
-        }
-        if (_or) {
-          _matched=true;
-          _switchResult = ((ILeafNode)node).getText();
-        }
+    if (node instanceof ILeafNode) {
+      boolean _or = false;
+      boolean _isHidden = ((ILeafNode)node).isHidden();
+      boolean _not = (!_isHidden);
+      if (_not) {
+        _or = true;
+      } else {
+        String _text = ((ILeafNode)node).getText();
+        String _trim = _text.trim();
+        int _length = _trim.length();
+        boolean _equals = (_length == 0);
+        _or = _equals;
+      }
+      if (_or) {
+        _matched=true;
+        _switchResult = ((ILeafNode)node).getText();
       }
     }
     if (!_matched) {
