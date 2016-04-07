@@ -14,8 +14,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * Customization of the default outline structure.
@@ -27,13 +25,9 @@ public class ArithmeticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
   public void _createChildren(final IOutlineNode parentNode, final Module module) {
     EList<EObject> _eContents = module.eContents();
     Iterable<Definition> _filter = Iterables.<Definition>filter(_eContents, Definition.class);
-    final Procedure1<Definition> _function = new Procedure1<Definition>() {
-      @Override
-      public void apply(final Definition it) {
-        ArithmeticsOutlineTreeProvider.this.createNode(parentNode, it);
-      }
-    };
-    IterableExtensions.<Definition>forEach(_filter, _function);
+    for (final Definition it : _filter) {
+      this.createNode(parentNode, it);
+    }
   }
   
   public boolean _isLeaf(final Definition definition) {

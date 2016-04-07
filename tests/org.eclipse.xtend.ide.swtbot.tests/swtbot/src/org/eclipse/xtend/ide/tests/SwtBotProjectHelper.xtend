@@ -81,7 +81,9 @@ class SwtBotProjectHelper {
 		try {
 			menu('File').menu('New').menu('Xtend Class').click
 		} catch (WidgetNotFoundException e) {
-			it.shells.forEach[println('''Shell: '«text»', active: «active»''')]
+			for (it : it.shells) {
+				println('''Shell: '«text»', active: «active»''')
+			}
 			SWTUtils.captureScreenshot('''«SWTBotPreferences.SCREENSHOTS_DIR»/MenuFileNotFound«System.currentTimeMillis».«SWTBotPreferences.SCREENSHOT_FORMAT»''',
 				it.shells.filter[active].head.widget)
 			throw e
@@ -95,7 +97,9 @@ class SwtBotProjectHelper {
 	}
 	
 	static def closeAllEditors(SWTWorkbenchBot it) {
-		editors.forEach[close]
+		for (it : editors) {
+			close
+		}
 	}
 	
 	static def setContent(SWTBotEclipseEditor it, CharSequence content) {
@@ -160,7 +164,9 @@ class SwtBotProjectHelper {
 				}
 			}
 		} catch(WidgetNotFoundException exc) {
-			ResourcesPlugin.workspace.root.getProject(project).getFolder('src').members.forEach[delete(true,null)]
+			for (it : ResourcesPlugin.workspace.root.getProject(project).getFolder('src').members) {
+				delete(true, null)
+			}
 		}
 	}
 	

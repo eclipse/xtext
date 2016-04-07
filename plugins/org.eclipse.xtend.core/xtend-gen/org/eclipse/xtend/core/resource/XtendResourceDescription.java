@@ -33,7 +33,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -265,17 +264,13 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           }
           this.registerAllTypes(_type, acceptor);
           Iterable<JvmTypeReference> _extendedInterfaces = ((JvmGenericType)type).getExtendedInterfaces();
-          final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
-            @Override
-            public void apply(final JvmTypeReference it) {
-              JvmType _type = null;
-              if (it!=null) {
-                _type=it.getType();
-              }
-              XtendResourceDescription.this.registerAllTypes(_type, acceptor);
+          for (final JvmTypeReference it : _extendedInterfaces) {
+            JvmType _type_1 = null;
+            if (it!=null) {
+              _type_1=it.getType();
             }
-          };
-          IterableExtensions.<JvmTypeReference>forEach(_extendedInterfaces, _function);
+            this.registerAllTypes(_type_1, acceptor);
+          }
         }
       }
     }

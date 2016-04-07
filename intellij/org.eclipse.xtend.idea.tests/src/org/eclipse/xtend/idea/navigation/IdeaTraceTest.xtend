@@ -120,9 +120,9 @@ class IdeaTraceTest extends LightXtendTest {
 		val generated = jarRoot.findFileByRelativePath("de/itemis/HelloXtend.java")
 		val traceToSource = traceProvider.getTraceToSource(new VirtualFileInProject(generated, project))
 		assertNotNull(traceToSource)
-		traceToSource.allAssociatedLocations.forEach [
+		for (it : traceToSource.allAssociatedLocations) {
 			assertTrue(it.absoluteResourceURI.toString.endsWith("smap-sources.jar!/de/itemis/HelloXtend.xtend"))
-		]
+		}
 	}
 	
 	def void testTraceForJar_02() {

@@ -1039,93 +1039,77 @@ public class XbaseFormatter extends XtypeFormatter {
     format.append(_keyword_1, _function_1);
     ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(expr);
     List<ISemanticRegion> _keywords = _regionFor_2.keywords(";");
-    final Procedure1<ISemanticRegion> _function_2 = new Procedure1<ISemanticRegion>() {
-      @Override
-      public void apply(final ISemanticRegion it) {
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-          }
-        };
-        ISemanticRegion _prepend = format.prepend(it, _function);
-        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-            it.lowPriority();
-          }
-        };
-        format.append(_prepend, _function_1);
-      }
-    };
-    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function_2);
+    for (final ISemanticRegion it : _keywords) {
+      final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.noSpace();
+        }
+      };
+      ISemanticRegion _prepend = format.prepend(it, _function_2);
+      final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.noSpace();
+          it.lowPriority();
+        }
+      };
+      format.append(_prepend, _function_3);
+    }
     ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(expr);
     List<ISemanticRegion> _keywords_1 = _regionFor_3.keywords(",");
-    final Procedure1<ISemanticRegion> _function_3 = new Procedure1<ISemanticRegion>() {
-      @Override
-      public void apply(final ISemanticRegion it) {
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-          }
-        };
-        ISemanticRegion _prepend = format.prepend(it, _function);
-        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        format.append(_prepend, _function_1);
-      }
-    };
-    IterableExtensions.<ISemanticRegion>forEach(_keywords_1, _function_3);
+    for (final ISemanticRegion it_1 : _keywords_1) {
+      final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.noSpace();
+        }
+      };
+      ISemanticRegion _prepend_1 = format.prepend(it_1, _function_4);
+      final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.oneSpace();
+        }
+      };
+      format.append(_prepend_1, _function_5);
+    }
     ISemanticRegionsFinder _regionFor_4 = this.textRegionExtensions.regionFor(expr);
     ISemanticRegion _keyword_2 = _regionFor_4.keyword(")");
-    final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+    final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
     };
-    format.prepend(_keyword_2, _function_4);
+    format.prepend(_keyword_2, _function_6);
     EList<XExpression> _initExpressions = expr.getInitExpressions();
-    final Procedure1<XExpression> _function_5 = new Procedure1<XExpression>() {
-      @Override
-      public void apply(final XExpression it) {
-        format.<XExpression>format(it);
-      }
-    };
-    IterableExtensions.<XExpression>forEach(_initExpressions, _function_5);
+    for (final XExpression it_2 : _initExpressions) {
+      format.<XExpression>format(it_2);
+    }
     XExpression _expression = expr.getExpression();
-    final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
-    };
-    format.<XExpression>prepend(_expression, _function_6);
-    XExpression _expression_1 = expr.getExpression();
-    format.<XExpression>format(_expression_1);
-    EList<XExpression> _updateExpressions = expr.getUpdateExpressions();
-    XExpression _head = IterableExtensions.<XExpression>head(_updateExpressions);
     final Procedure1<IHiddenRegionFormatter> _function_7 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
-    format.<XExpression>prepend(_head, _function_7);
-    EList<XExpression> _updateExpressions_1 = expr.getUpdateExpressions();
-    final Procedure1<XExpression> _function_8 = new Procedure1<XExpression>() {
+    format.<XExpression>prepend(_expression, _function_7);
+    XExpression _expression_1 = expr.getExpression();
+    format.<XExpression>format(_expression_1);
+    EList<XExpression> _updateExpressions = expr.getUpdateExpressions();
+    XExpression _head = IterableExtensions.<XExpression>head(_updateExpressions);
+    final Procedure1<IHiddenRegionFormatter> _function_8 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
-      public void apply(final XExpression it) {
-        format.<XExpression>format(it);
+      public void apply(final IHiddenRegionFormatter it) {
+        it.oneSpace();
       }
     };
-    IterableExtensions.<XExpression>forEach(_updateExpressions_1, _function_8);
+    format.<XExpression>prepend(_head, _function_8);
+    EList<XExpression> _updateExpressions_1 = expr.getUpdateExpressions();
+    for (final XExpression it_3 : _updateExpressions_1) {
+      format.<XExpression>format(it_3);
+    }
     XExpression _eachExpression = expr.getEachExpression();
     this.formatBody(_eachExpression, true, format);
   }

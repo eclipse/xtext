@@ -117,14 +117,14 @@ class Bug446364Processor extends AbstractClassProcessor {
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
 		switch (annotatedClass.annotations.head.getStringValue('value')) {
 			case 'rename': {
-				annotatedClass.declaredMethods.forEach[
+				for (it : annotatedClass.declaredMethods) {
 					simpleName = 'prefix_' + simpleName
-				]
+				}
 			}
 			case 'changeBody': {
-				annotatedClass.declaredMethods.forEach[
+				for (it : annotatedClass.declaredMethods) {
 					body = '''return null;'''
-				]
+				}
 			}
 		}
 	}

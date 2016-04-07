@@ -28,7 +28,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -62,35 +61,31 @@ public class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTe
       _extensionToFactoryMap.put("xmi", nullFactory);
       final ArrayList<Thread> threads = CollectionLiterals.<Thread>newArrayList();
       IntegerRange _upTo = new IntegerRange(1, 10);
-      final Procedure1<Integer> _function_1 = new Procedure1<Integer>() {
-        @Override
-        public void apply(final Integer i) {
-          final Runnable _function = new Runnable() {
-            @Override
-            public void run() {
-              final ArrayList<Resource> resources = CollectionLiterals.<Resource>newArrayList();
-              for (int j = 0; (j < 5000); j++) {
-                {
-                  String _plus = (i + " ");
-                  String _plus_1 = (_plus + Integer.valueOf(j));
-                  String _plus_2 = (_plus_1 + ".xmi");
-                  URI _createURI = URI.createURI(_plus_2);
-                  final Resource resource = resourceSet.createResource(_createURI);
-                  Assert.assertNotNull(resource);
-                  resources.add(resource);
-                  URI _uRI = resource.getURI();
-                  String _plus_3 = (_uRI + "b");
-                  URI _createURI_1 = URI.createURI(_plus_3);
-                  resource.setURI(_createURI_1);
-                }
+      for (final Integer i : _upTo) {
+        final Runnable _function_1 = new Runnable() {
+          @Override
+          public void run() {
+            final ArrayList<Resource> resources = CollectionLiterals.<Resource>newArrayList();
+            for (int j = 0; (j < 5000); j++) {
+              {
+                String _plus = (i + " ");
+                String _plus_1 = (_plus + Integer.valueOf(j));
+                String _plus_2 = (_plus_1 + ".xmi");
+                URI _createURI = URI.createURI(_plus_2);
+                final Resource resource = resourceSet.createResource(_createURI);
+                Assert.assertNotNull(resource);
+                resources.add(resource);
+                URI _uRI = resource.getURI();
+                String _plus_3 = (_uRI + "b");
+                URI _createURI_1 = URI.createURI(_plus_3);
+                resource.setURI(_createURI_1);
               }
             }
-          };
-          Thread _thread = new Thread(_function);
-          threads.add(_thread);
-        }
-      };
-      IterableExtensions.<Integer>forEach(_upTo, _function_1);
+          }
+        };
+        Thread _thread = new Thread(_function_1);
+        threads.add(_thread);
+      }
       for (final Thread thread : threads) {
         thread.start();
       }

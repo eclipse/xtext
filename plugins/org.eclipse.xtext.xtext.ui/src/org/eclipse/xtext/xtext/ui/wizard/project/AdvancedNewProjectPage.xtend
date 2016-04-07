@@ -192,7 +192,8 @@ class AdvancedNewProjectPage extends WizardPage {
 				reportIssue(ERROR, '''
 				Frontend projects like '«affectedProjects»' depends on '«createIdeProject.text»' project.
 				Please <a>deselect</a> these.''', [
-					dependend.forEach[selection = false]
+					for (it : dependend)
+						selection = false
 				])
 			} else {
 				reportIssue(ERROR, '''

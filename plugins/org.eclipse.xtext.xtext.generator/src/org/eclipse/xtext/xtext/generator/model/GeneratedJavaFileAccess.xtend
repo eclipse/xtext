@@ -39,9 +39,8 @@ class GeneratedJavaFileAccess extends JavaFileAccess {
 	 * any optionally required imports are already processed and tracked in {@link #imports}.
 	 */
 	override getContent() {
-		classAnnotations.forEach[
+		for (it : classAnnotations)
 			importType(annotationImport)
-		]
 		super.getContent()
 	}
 	

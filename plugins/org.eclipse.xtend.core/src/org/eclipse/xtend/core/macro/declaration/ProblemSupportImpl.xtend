@@ -69,7 +69,9 @@ class ProblemSupportImpl implements ProblemSupport {
 	
 	def validationPhaseStarted() {
 		try {
-			delayedTasks.forEach[apply]
+			for (it : delayedTasks) {
+				apply
+			}
 		} catch (Throwable t) {
 			compilationUnit.handleProcessingError(Collections.singleton(compilationUnit.xtendFile) , compilationUnit.xtendFile.eResource, t)
 		} finally {

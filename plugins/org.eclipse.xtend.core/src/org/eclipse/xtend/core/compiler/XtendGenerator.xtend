@@ -163,7 +163,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 	}
 	
 	def compileLocalTypeStubs(JvmFeature feature, ITreeAppendable appendable, GeneratorConfig config) {
-		feature.localClasses.filter[ !anonymous ].forEach[
+		for (it : feature.localClasses.filter[!anonymous]) {
 			appendable.newLine
 			val anonymousClass = sourceElements.head as AnonymousClass
 			val childAppendable = appendable.trace(anonymousClass)
@@ -235,7 +235,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 				])
 			childAppendable.decreaseIndentation.newLine.append('}')
 			appendable.newLine
-		]
+		}
 	}
 	
 	private def generateJavaConstant(Object value, ITreeAppendable appendable) {

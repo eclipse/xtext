@@ -34,10 +34,10 @@ class ValidationService extends AbstractCachedService<ValidationResult> {
 	override compute(IXtextWebDocument it, CancelIndicator cancelIndicator) {
 		val issues = resourceValidator.validate(resource, CheckMode.ALL, cancelIndicator)
 		val result = new ValidationResult
-		issues.filter[severity != Severity.IGNORE].forEach[ issue |
+		for (issue : issues.filter[severity != Severity.IGNORE]) {
 			result.issues += new ValidationResult.Issue(issue.message, issue.severity.translate,
 				issue.lineNumber, issue.column, issue.offset, issue.length)
-		]
+		}
 		return result
 	}
 	

@@ -41,7 +41,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class ProblemSupportImpl implements ProblemSupport {
@@ -106,13 +105,9 @@ public class ProblemSupportImpl implements ProblemSupport {
   
   public void validationPhaseStarted() {
     try {
-      final Procedure1<Procedure0> _function = new Procedure1<Procedure0>() {
-        @Override
-        public void apply(final Procedure0 it) {
-          it.apply();
-        }
-      };
-      IterableExtensions.<Procedure0>forEach(this.delayedTasks, _function);
+      for (final Procedure0 it : this.delayedTasks) {
+        it.apply();
+      }
     } catch (final Throwable _t) {
       if (_t instanceof Throwable) {
         final Throwable t = (Throwable)_t;

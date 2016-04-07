@@ -138,21 +138,19 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Assert.assertNotNull(_findFirst_1);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_7 = this.getCachedPackageFragmentRootData();
       Set<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _entrySet = _cachedPackageFragmentRootData_7.entrySet();
-      final Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_2 = new Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>() {
-        @Override
-        public void apply(final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) {
+      for (final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it : _entrySet) {
+        {
           String _key = it.getKey();
           Storage2UriMapperJavaImpl.PackageFragmentRootData _value = it.getValue();
-          int _size = _value.associatedRoots.size();
-          Assert.assertEquals(_key, 1, _size);
+          int _size_2 = _value.associatedRoots.size();
+          Assert.assertEquals(_key, 1, _size_2);
           Storage2UriMapperJavaImpl.PackageFragmentRootData _value_1 = it.getValue();
-          Set<String> _keySet = _value_1.associatedRoots.keySet();
-          final String head = IterableExtensions.<String>head(_keySet);
+          Set<String> _keySet_2 = _value_1.associatedRoots.keySet();
+          final String head = IterableExtensions.<String>head(_keySet_2);
           boolean _startsWith = head.startsWith("=testProject/");
           Assert.assertTrue(head, _startsWith);
         }
-      };
-      IterableExtensions.<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>forEach(_entrySet, _function_2);
+      }
       final IJavaProject project2 = JavaProjectSetupUtil.createJavaProject("testProject2");
       JavaProjectSetupUtil.addJarToClasspath(project2, file);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_8 = this.getCachedPackageFragmentRootData();
@@ -162,26 +160,25 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Assert.assertEquals(_plus_2, (sizeBefore + 1), _size_2);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_10 = this.getCachedPackageFragmentRootData();
       Set<String> _keySet_2 = _cachedPackageFragmentRootData_10.keySet();
-      final Function1<String, Boolean> _function_3 = new Function1<String, Boolean>() {
+      final Function1<String, Boolean> _function_2 = new Function1<String, Boolean>() {
         @Override
         public Boolean apply(final String it) {
           return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
-      String _findFirst_2 = IterableExtensions.<String>findFirst(_keySet_2, _function_3);
+      String _findFirst_2 = IterableExtensions.<String>findFirst(_keySet_2, _function_2);
       Assert.assertNotNull(_findFirst_2);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_11 = this.getCachedPackageFragmentRootData();
       Set<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _entrySet_1 = _cachedPackageFragmentRootData_11.entrySet();
-      final Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_4 = new Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>() {
-        @Override
-        public void apply(final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) {
-          String _key = it.getKey();
-          Storage2UriMapperJavaImpl.PackageFragmentRootData _value = it.getValue();
-          int _size = _value.associatedRoots.size();
-          Assert.assertEquals(_key, 2, _size);
-          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_1 = it.getValue();
-          Set<String> _keySet = _value_1.associatedRoots.keySet();
-          final String head = IterableExtensions.<String>head(_keySet);
+      for (final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it_1 : _entrySet_1) {
+        {
+          String _key = it_1.getKey();
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value = it_1.getValue();
+          int _size_3 = _value.associatedRoots.size();
+          Assert.assertEquals(_key, 2, _size_3);
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_1 = it_1.getValue();
+          Set<String> _keySet_3 = _value_1.associatedRoots.keySet();
+          final String head = IterableExtensions.<String>head(_keySet_3);
           boolean _or = false;
           boolean _startsWith = head.startsWith("=testProject/");
           if (_startsWith) {
@@ -191,9 +188,9 @@ public class Storage2UriMapperJavaImplTest extends Assert {
             _or = _startsWith_1;
           }
           Assert.assertTrue(head, _or);
-          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it.getValue();
-          Set<String> _keySet_1 = _value_2.associatedRoots.keySet();
-          Iterable<String> _tail = IterableExtensions.<String>tail(_keySet_1);
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it_1.getValue();
+          Set<String> _keySet_4 = _value_2.associatedRoots.keySet();
+          Iterable<String> _tail = IterableExtensions.<String>tail(_keySet_4);
           final String head2 = IterableExtensions.<String>head(_tail);
           boolean _or_1 = false;
           boolean _startsWith_2 = head.startsWith("=testProject/");
@@ -205,8 +202,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
           }
           Assert.assertTrue(head2, _or_1);
         }
-      };
-      IterableExtensions.<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>forEach(_entrySet_1, _function_4);
+      }
       JavaProjectSetupUtil.removeJarFromClasspath(project, file);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_12 = this.getCachedPackageFragmentRootData();
       String _plus_3 = ("" + _cachedPackageFragmentRootData_12);
@@ -215,118 +211,112 @@ public class Storage2UriMapperJavaImplTest extends Assert {
       Assert.assertEquals(_plus_3, (sizeBefore + 1), _size_3);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_14 = this.getCachedPackageFragmentRootData();
       Set<String> _keySet_3 = _cachedPackageFragmentRootData_14.keySet();
-      final Function1<String, Boolean> _function_5 = new Function1<String, Boolean>() {
+      final Function1<String, Boolean> _function_3 = new Function1<String, Boolean>() {
         @Override
         public Boolean apply(final String it) {
           return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
-      String _findFirst_3 = IterableExtensions.<String>findFirst(_keySet_3, _function_5);
+      String _findFirst_3 = IterableExtensions.<String>findFirst(_keySet_3, _function_3);
       Assert.assertNotNull(_findFirst_3);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_15 = this.getCachedPackageFragmentRootData();
       Set<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _entrySet_2 = _cachedPackageFragmentRootData_15.entrySet();
-      final Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_6 = new Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>() {
-        @Override
-        public void apply(final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) {
-          String _key = it.getKey();
-          boolean _contains = _key.contains("foo.jar");
-          if (_contains) {
-            String _key_1 = it.getKey();
-            Storage2UriMapperJavaImpl.PackageFragmentRootData _value = it.getValue();
-            int _size = _value.associatedRoots.size();
-            Assert.assertEquals(_key_1, 1, _size);
-            Storage2UriMapperJavaImpl.PackageFragmentRootData _value_1 = it.getValue();
-            Set<String> _keySet = _value_1.associatedRoots.keySet();
-            final String head = IterableExtensions.<String>head(_keySet);
-            boolean _startsWith = head.startsWith("=testProject2/");
-            Assert.assertTrue(head, _startsWith);
+      for (final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it_2 : _entrySet_2) {
+        String _key = it_2.getKey();
+        boolean _contains = _key.contains("foo.jar");
+        if (_contains) {
+          String _key_1 = it_2.getKey();
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value = it_2.getValue();
+          int _size_4 = _value.associatedRoots.size();
+          Assert.assertEquals(_key_1, 1, _size_4);
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_1 = it_2.getValue();
+          Set<String> _keySet_4 = _value_1.associatedRoots.keySet();
+          final String head = IterableExtensions.<String>head(_keySet_4);
+          boolean _startsWith = head.startsWith("=testProject2/");
+          Assert.assertTrue(head, _startsWith);
+        } else {
+          String _key_2 = it_2.getKey();
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it_2.getValue();
+          int _size_5 = _value_2.associatedRoots.size();
+          Assert.assertEquals(_key_2, 2, _size_5);
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_3 = it_2.getValue();
+          Set<String> _keySet_5 = _value_3.associatedRoots.keySet();
+          final String head_1 = IterableExtensions.<String>head(_keySet_5);
+          boolean _or = false;
+          boolean _startsWith_1 = head_1.startsWith("=testProject/");
+          if (_startsWith_1) {
+            _or = true;
           } else {
-            String _key_2 = it.getKey();
-            Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it.getValue();
-            int _size_1 = _value_2.associatedRoots.size();
-            Assert.assertEquals(_key_2, 2, _size_1);
-            Storage2UriMapperJavaImpl.PackageFragmentRootData _value_3 = it.getValue();
-            Set<String> _keySet_1 = _value_3.associatedRoots.keySet();
-            final String head_1 = IterableExtensions.<String>head(_keySet_1);
-            boolean _or = false;
-            boolean _startsWith_1 = head_1.startsWith("=testProject/");
-            if (_startsWith_1) {
-              _or = true;
-            } else {
-              boolean _startsWith_2 = head_1.startsWith("=testProject2/");
-              _or = _startsWith_2;
-            }
-            Assert.assertTrue(head_1, _or);
-            Storage2UriMapperJavaImpl.PackageFragmentRootData _value_4 = it.getValue();
-            Set<String> _keySet_2 = _value_4.associatedRoots.keySet();
-            Iterable<String> _tail = IterableExtensions.<String>tail(_keySet_2);
-            final String head2 = IterableExtensions.<String>head(_tail);
-            boolean _or_1 = false;
-            boolean _startsWith_3 = head_1.startsWith("=testProject/");
-            if (_startsWith_3) {
-              _or_1 = true;
-            } else {
-              boolean _startsWith_4 = head_1.startsWith("=testProject2/");
-              _or_1 = _startsWith_4;
-            }
-            Assert.assertTrue(head2, _or_1);
+            boolean _startsWith_2 = head_1.startsWith("=testProject2/");
+            _or = _startsWith_2;
           }
+          Assert.assertTrue(head_1, _or);
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_4 = it_2.getValue();
+          Set<String> _keySet_6 = _value_4.associatedRoots.keySet();
+          Iterable<String> _tail = IterableExtensions.<String>tail(_keySet_6);
+          final String head2 = IterableExtensions.<String>head(_tail);
+          boolean _or_1 = false;
+          boolean _startsWith_3 = head_1.startsWith("=testProject/");
+          if (_startsWith_3) {
+            _or_1 = true;
+          } else {
+            boolean _startsWith_4 = head_1.startsWith("=testProject2/");
+            _or_1 = _startsWith_4;
+          }
+          Assert.assertTrue(head2, _or_1);
         }
-      };
-      IterableExtensions.<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>forEach(_entrySet_2, _function_6);
+      }
       JavaProjectSetupUtil.removeJarFromClasspath(project2, file);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_16 = this.getCachedPackageFragmentRootData();
       String _plus_4 = ("" + _cachedPackageFragmentRootData_16);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_17 = this.getCachedPackageFragmentRootData();
-      int _size_4 = _cachedPackageFragmentRootData_17.size();
-      Assert.assertEquals(_plus_4, sizeBefore, _size_4);
+      int _size_6 = _cachedPackageFragmentRootData_17.size();
+      Assert.assertEquals(_plus_4, sizeBefore, _size_6);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_18 = this.getCachedPackageFragmentRootData();
-      Set<String> _keySet_4 = _cachedPackageFragmentRootData_18.keySet();
-      final Function1<String, Boolean> _function_7 = new Function1<String, Boolean>() {
+      Set<String> _keySet_7 = _cachedPackageFragmentRootData_18.keySet();
+      final Function1<String, Boolean> _function_4 = new Function1<String, Boolean>() {
         @Override
         public Boolean apply(final String it) {
           return Boolean.valueOf(it.contains("foo.jar"));
         }
       };
-      String _findFirst_4 = IterableExtensions.<String>findFirst(_keySet_4, _function_7);
+      String _findFirst_4 = IterableExtensions.<String>findFirst(_keySet_7, _function_4);
       Assert.assertNull(_findFirst_4);
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_19 = this.getCachedPackageFragmentRootData();
       Set<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _entrySet_3 = _cachedPackageFragmentRootData_19.entrySet();
-      final Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_8 = new Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>() {
-        @Override
-        public void apply(final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) {
-          String _key = it.getKey();
-          Storage2UriMapperJavaImpl.PackageFragmentRootData _value = it.getValue();
-          int _size = _value.associatedRoots.size();
-          Assert.assertEquals(_key, 2, _size);
-          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_1 = it.getValue();
-          Set<String> _keySet = _value_1.associatedRoots.keySet();
-          final String head = IterableExtensions.<String>head(_keySet);
-          boolean _or = false;
-          boolean _startsWith = head.startsWith("=testProject/");
-          if (_startsWith) {
-            _or = true;
+      for (final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it_3 : _entrySet_3) {
+        {
+          String _key_3 = it_3.getKey();
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_5 = it_3.getValue();
+          int _size_7 = _value_5.associatedRoots.size();
+          Assert.assertEquals(_key_3, 2, _size_7);
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_6 = it_3.getValue();
+          Set<String> _keySet_8 = _value_6.associatedRoots.keySet();
+          final String head_2 = IterableExtensions.<String>head(_keySet_8);
+          boolean _or_2 = false;
+          boolean _startsWith_5 = head_2.startsWith("=testProject/");
+          if (_startsWith_5) {
+            _or_2 = true;
           } else {
-            boolean _startsWith_1 = head.startsWith("=testProject2/");
-            _or = _startsWith_1;
+            boolean _startsWith_6 = head_2.startsWith("=testProject2/");
+            _or_2 = _startsWith_6;
           }
-          Assert.assertTrue(head, _or);
-          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it.getValue();
-          Set<String> _keySet_1 = _value_2.associatedRoots.keySet();
-          Iterable<String> _tail = IterableExtensions.<String>tail(_keySet_1);
-          final String head2 = IterableExtensions.<String>head(_tail);
-          boolean _or_1 = false;
-          boolean _startsWith_2 = head.startsWith("=testProject/");
-          if (_startsWith_2) {
-            _or_1 = true;
+          Assert.assertTrue(head_2, _or_2);
+          Storage2UriMapperJavaImpl.PackageFragmentRootData _value_7 = it_3.getValue();
+          Set<String> _keySet_9 = _value_7.associatedRoots.keySet();
+          Iterable<String> _tail_1 = IterableExtensions.<String>tail(_keySet_9);
+          final String head2_1 = IterableExtensions.<String>head(_tail_1);
+          boolean _or_3 = false;
+          boolean _startsWith_7 = head_2.startsWith("=testProject/");
+          if (_startsWith_7) {
+            _or_3 = true;
           } else {
-            boolean _startsWith_3 = head.startsWith("=testProject2/");
-            _or_1 = _startsWith_3;
+            boolean _startsWith_8 = head_2.startsWith("=testProject2/");
+            _or_3 = _startsWith_8;
           }
-          Assert.assertTrue(head2, _or_1);
+          Assert.assertTrue(head2_1, _or_3);
         }
-      };
-      IterableExtensions.<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>forEach(_entrySet_3, _function_8);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -425,21 +415,19 @@ public class Storage2UriMapperJavaImplTest extends Assert {
     Assert.assertNotNull(_findFirst);
     Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_3 = this.getCachedPackageFragmentRootData();
     Set<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _entrySet = _cachedPackageFragmentRootData_3.entrySet();
-    final Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_1 = new Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>() {
-      @Override
-      public void apply(final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) {
+    for (final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it : _entrySet) {
+      {
         String _key = it.getKey();
         Storage2UriMapperJavaImpl.PackageFragmentRootData _value = it.getValue();
-        int _size = _value.associatedRoots.size();
-        Assert.assertEquals(_key, 1, _size);
+        int _size_1 = _value.associatedRoots.size();
+        Assert.assertEquals(_key, 1, _size_1);
         Storage2UriMapperJavaImpl.PackageFragmentRootData _value_1 = it.getValue();
-        Set<String> _keySet = _value_1.associatedRoots.keySet();
-        final String head = IterableExtensions.<String>head(_keySet);
+        Set<String> _keySet_1 = _value_1.associatedRoots.keySet();
+        final String head = IterableExtensions.<String>head(_keySet_1);
         boolean _startsWith = head.startsWith("=testProject/");
         Assert.assertTrue(head, _startsWith);
       }
-    };
-    IterableExtensions.<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>forEach(_entrySet, _function_1);
+    }
   }
   
   public void assertBothProjects(final int sizeBefore) {
@@ -460,16 +448,15 @@ public class Storage2UriMapperJavaImplTest extends Assert {
     Assert.assertNotNull(_findFirst);
     Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_3 = this.getCachedPackageFragmentRootData();
     Set<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _entrySet = _cachedPackageFragmentRootData_3.entrySet();
-    final Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_1 = new Procedure1<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>() {
-      @Override
-      public void apply(final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) {
+    for (final Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it : _entrySet) {
+      {
         String _key = it.getKey();
         Storage2UriMapperJavaImpl.PackageFragmentRootData _value = it.getValue();
-        int _size = _value.associatedRoots.size();
-        Assert.assertEquals(_key, 2, _size);
+        int _size_1 = _value.associatedRoots.size();
+        Assert.assertEquals(_key, 2, _size_1);
         Storage2UriMapperJavaImpl.PackageFragmentRootData _value_1 = it.getValue();
-        Set<String> _keySet = _value_1.associatedRoots.keySet();
-        final String head = IterableExtensions.<String>head(_keySet);
+        Set<String> _keySet_1 = _value_1.associatedRoots.keySet();
+        final String head = IterableExtensions.<String>head(_keySet_1);
         boolean _or = false;
         boolean _startsWith = head.startsWith("=testProject/");
         if (_startsWith) {
@@ -480,8 +467,8 @@ public class Storage2UriMapperJavaImplTest extends Assert {
         }
         Assert.assertTrue(head, _or);
         Storage2UriMapperJavaImpl.PackageFragmentRootData _value_2 = it.getValue();
-        Set<String> _keySet_1 = _value_2.associatedRoots.keySet();
-        final String head2 = IterableExtensions.<String>last(_keySet_1);
+        Set<String> _keySet_2 = _value_2.associatedRoots.keySet();
+        final String head2 = IterableExtensions.<String>last(_keySet_2);
         boolean _or_1 = false;
         boolean _startsWith_2 = head.startsWith("=testProject/");
         if (_startsWith_2) {
@@ -492,8 +479,7 @@ public class Storage2UriMapperJavaImplTest extends Assert {
         }
         Assert.assertTrue(head2, _or_1);
       }
-    };
-    IterableExtensions.<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>>forEach(_entrySet, _function_1);
+    }
   }
   
   public IFile createJar(final IJavaProject project) {

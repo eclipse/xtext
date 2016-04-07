@@ -661,14 +661,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       }
     } else {
       this.alarm.cancelAllRequests();
-      final Procedure1<XtextAutoBuilderComponent.MutableCancelIndicator> _function = new Procedure1<XtextAutoBuilderComponent.MutableCancelIndicator>() {
-        @Override
-        public void apply(final XtextAutoBuilderComponent.MutableCancelIndicator it) {
-          it.canceled = true;
-        }
-      };
-      IterableExtensions.<XtextAutoBuilderComponent.MutableCancelIndicator>forEach(this.cancelIndicators, _function);
-      final Runnable _function_1 = new Runnable() {
+      for (final XtextAutoBuilderComponent.MutableCancelIndicator it : this.cancelIndicators) {
+        it.canceled = true;
+      }
+      final Runnable _function = new Runnable() {
         @Override
         public void run() {
           XtextAutoBuilderComponent.this.build();
@@ -676,7 +672,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       };
       Application _application = ApplicationManager.getApplication();
       ModalityState _defaultModalityState = _application.getDefaultModalityState();
-      this.alarm.addRequest(_function_1, 200, _defaultModalityState);
+      this.alarm.addRequest(_function, 200, _defaultModalityState);
     }
   }
   

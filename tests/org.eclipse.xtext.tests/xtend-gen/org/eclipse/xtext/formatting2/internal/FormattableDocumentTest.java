@@ -35,7 +35,6 @@ import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -110,20 +109,16 @@ public class FormattableDocumentTest {
             ISemanticRegionsFinder _regionFor = regions.regionFor(model);
             TerminalRule _iDRule = FormattableDocumentTest.this._formatterTestLanguageGrammarAccess.getIDRule();
             List<ISemanticRegion> _ruleCallsTo = _regionFor.ruleCallsTo(_iDRule);
-            final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
-              @Override
-              public void apply(final ISemanticRegion it) {
-                final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-                  @Override
-                  public void apply(final IHiddenRegionFormatter it) {
-                    it.autowrap();
-                    it.oneSpace();
-                  }
-                };
-                document.prepend(it, _function);
-              }
-            };
-            IterableExtensions.<ISemanticRegion>forEach(_ruleCallsTo, _function);
+            for (final ISemanticRegion it : _ruleCallsTo) {
+              final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+                @Override
+                public void apply(final IHiddenRegionFormatter it) {
+                  it.autowrap();
+                  it.oneSpace();
+                }
+              };
+              document.prepend(it, _function);
+            }
           }
         };
         it.setFormatter(_function_1);

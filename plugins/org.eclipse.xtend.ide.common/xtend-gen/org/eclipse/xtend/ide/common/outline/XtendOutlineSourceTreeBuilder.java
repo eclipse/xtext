@@ -31,7 +31,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -45,13 +44,9 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   protected void _build(final XtendFile xtendFile, final IXtendOutlineContext context) {
     this.buildPackageAndImportSection(xtendFile, context);
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    final Procedure1<XtendTypeDeclaration> _function = new Procedure1<XtendTypeDeclaration>() {
-      @Override
-      public void apply(final XtendTypeDeclaration it) {
-        XtendOutlineSourceTreeBuilder.this.buildXtendType(it, context);
-      }
-    };
-    IterableExtensions.<XtendTypeDeclaration>forEach(_xtendTypes, _function);
+    for (final XtendTypeDeclaration it : _xtendTypes) {
+      this.buildXtendType(it, context);
+    }
   }
   
   protected void _build(final XtendTypeDeclaration xtendType, final IXtendOutlineContext context) {
@@ -73,13 +68,9 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
       this.buildMembers(xtendType, inferredType, inferredType, membersContext);
     } else {
       EList<XtendMember> _members = xtendType.getMembers();
-      final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
-        @Override
-        public void apply(final XtendMember it) {
-          XtendOutlineSourceTreeBuilder.this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
-        }
-      };
-      IterableExtensions.<XtendMember>forEach(_members, _function);
+      for (final XtendMember it : _members) {
+        this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
+      }
     }
   }
   

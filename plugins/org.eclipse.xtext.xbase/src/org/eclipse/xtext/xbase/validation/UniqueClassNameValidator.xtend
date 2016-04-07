@@ -50,7 +50,8 @@ class UniqueClassNameValidator extends AbstractDeclarativeValidator {
 		if (root.eContainer == null) {
 			val resource = root.eResource
 			if (resource.contents.head == root) {
-				resource.contents.filter(JvmDeclaredType).forEach[ doCheckUniqueName ]
+				for (it : resource.contents.filter(JvmDeclaredType))
+					doCheckUniqueName 
 			}
 		}
 	}

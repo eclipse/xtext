@@ -323,10 +323,15 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 			events += it 
 			if(it instanceof MatchEvent) {
 				val matches = matches.filter[m|filters.forall[!filters(m)]]
-				if(kind == MatchEvent::ADDED)
-					matches.forEach[elements += element]
-				else 
-				 	matches.forEach[elements.remove(element)]
+				if (kind == MatchEvent::ADDED) {
+					for (it : matches) {
+						elements += element
+					}
+				} else {
+					for (it : matches) {
+						elements.remove(element)
+					}
+				}
 			}
 		]
 		SearchUtil::runQueryInForeground(workbench.activeWorkbenchWindow, query)

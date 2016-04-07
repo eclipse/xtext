@@ -469,13 +469,9 @@ public class AdvancedNewProjectPage extends WizardPage {
             final Procedure0 _function_9 = new Procedure0() {
               @Override
               public void apply() {
-                final Procedure1<Button> _function = new Procedure1<Button>() {
-                  @Override
-                  public void apply(final Button it) {
-                    it.setSelection(false);
-                  }
-                };
-                IterableExtensions.<Button>forEach(dependend, _function);
+                for (final Button it : dependend) {
+                  it.setSelection(false);
+                }
               }
             };
             _xifexpression_1 = this.<Control>reportIssue(IMessageProvider.ERROR, _builder_6.toString(), _function_9);

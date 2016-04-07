@@ -92,7 +92,8 @@ import org.junit.Assert
 		val allAppenders = logger.appenderHierarchy
 		val filter = new SourceFilter(logger)
 		try {
-			allAppenders.forEach[addFilter(filter)]
+			for (it : allAppenders)
+				addFilter(filter)
 			logger.addAppender(appender)
 			logger.level = level
 			action.run
@@ -100,7 +101,8 @@ import org.junit.Assert
 			return new LogCapture(events)
 		} finally {
 			logger.removeAppender(appender)
-			allAppenders.forEach[removeFilter(filter)]
+			for (it : allAppenders)
+				removeFilter(filter)
 			logger.level = oldLevel
 		}
 	}

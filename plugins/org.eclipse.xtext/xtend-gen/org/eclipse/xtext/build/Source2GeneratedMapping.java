@@ -24,10 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -70,25 +67,17 @@ public class Source2GeneratedMapping implements Externalizable {
   public Set<URI> deleteSource(final URI source) {
     Collection<URI> _removeAll = this.source2generated.removeAll(source);
     final HashSet<URI> generated = new HashSet<URI>(_removeAll);
-    final Procedure1<URI> _function = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI it) {
-        Source2GeneratedMapping.this.generated2source.remove(it, source);
-      }
-    };
-    IterableExtensions.<URI>forEach(generated, _function);
+    for (final URI it : generated) {
+      this.generated2source.remove(it, source);
+    }
     return generated;
   }
   
   public void deleteGenerated(final URI generated) {
     Collection<URI> _removeAll = this.generated2source.removeAll(generated);
-    final Procedure1<URI> _function = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI it) {
-        Source2GeneratedMapping.this.source2generated.remove(it, generated);
-      }
-    };
-    IterableExtensions.<URI>forEach(_removeAll, _function);
+    for (final URI it : _removeAll) {
+      this.source2generated.remove(it, generated);
+    }
     this.generated2OutputConfigName.remove(generated);
   }
   
@@ -139,43 +128,31 @@ public class Source2GeneratedMapping implements Externalizable {
     final Set<Map.Entry<URI, Collection<URI>>> entries = _asMap.entrySet();
     int _size = entries.size();
     out.writeInt(_size);
-    final Procedure1<Map.Entry<URI, Collection<URI>>> _function = new Procedure1<Map.Entry<URI, Collection<URI>>>() {
-      @Override
-      public void apply(final Map.Entry<URI, Collection<URI>> it) {
-        try {
-          URI _key = it.getKey();
-          String _string = _key.toString();
-          out.writeUTF(_string);
-          Collection<URI> _value = it.getValue();
-          int _size = _value.size();
-          out.writeInt(_size);
-          Collection<URI> _value_1 = it.getValue();
-          final Procedure1<URI> _function = new Procedure1<URI>() {
-            @Override
-            public void apply(final URI it) {
-              try {
-                String _string = it.toString();
-                out.writeUTF(_string);
-                String _elvis = null;
-                String _get = Source2GeneratedMapping.this.generated2OutputConfigName.get(it);
-                if (_get != null) {
-                  _elvis = _get;
-                } else {
-                  _elvis = IFileSystemAccess.DEFAULT_OUTPUT;
-                }
-                out.writeUTF(_elvis);
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
-              }
+    for (final Map.Entry<URI, Collection<URI>> it : entries) {
+      {
+        URI _key = it.getKey();
+        String _string = _key.toString();
+        out.writeUTF(_string);
+        Collection<URI> _value = it.getValue();
+        int _size_1 = _value.size();
+        out.writeInt(_size_1);
+        Collection<URI> _value_1 = it.getValue();
+        for (final URI it_1 : _value_1) {
+          {
+            String _string_1 = it_1.toString();
+            out.writeUTF(_string_1);
+            String _elvis = null;
+            String _get = this.generated2OutputConfigName.get(it_1);
+            if (_get != null) {
+              _elvis = _get;
+            } else {
+              _elvis = IFileSystemAccess.DEFAULT_OUTPUT;
             }
-          };
-          IterableExtensions.<URI>forEach(_value_1, _function);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
+            out.writeUTF(_elvis);
+          }
         }
       }
-    };
-    IterableExtensions.<Map.Entry<URI, Collection<URI>>>forEach(entries, _function);
+    }
   }
   
   public Source2GeneratedMapping(final Multimap<URI, URI> source2generated, final Multimap<URI, URI> generated2source, final Map<URI, String> generated2OutputConfigName) {

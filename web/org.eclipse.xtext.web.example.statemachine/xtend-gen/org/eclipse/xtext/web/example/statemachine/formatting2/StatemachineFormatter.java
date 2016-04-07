@@ -29,7 +29,6 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.State;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Transition;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -225,26 +224,22 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     StatemachineGrammarAccess.ConditionElements _conditionAccess = this._statemachineGrammarAccess.getConditionAccess();
     Keyword _andKeyword_1_0 = _conditionAccess.getAndKeyword_1_0();
     List<ISemanticRegion> _keywords = _regionFor.keywords(_andKeyword_1_0);
-    final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
-      @Override
-      public void apply(final ISemanticRegion it) {
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        ISemanticRegion _prepend = document.prepend(it, _function);
-        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        document.append(_prepend, _function_1);
-      }
-    };
-    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function);
+    for (final ISemanticRegion it : _keywords) {
+      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.oneSpace();
+        }
+      };
+      ISemanticRegion _prepend = document.prepend(it, _function);
+      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.oneSpace();
+        }
+      };
+      document.append(_prepend, _function_1);
+    }
     EList<Event> _events = condition.getEvents();
     for (final Event event : _events) {
       this.format(event, document);

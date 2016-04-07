@@ -51,7 +51,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.ConditionEvaluator;
@@ -175,14 +174,10 @@ public class FlattenedGrammarAccess {
         return Boolean.valueOf((!_contains));
       }
     };
-    Iterable<TerminalRule> _filter_2 = IterableExtensions.<TerminalRule>filter(_filter_1, _function_2);
-    final Procedure1<TerminalRule> _function_3 = new Procedure1<TerminalRule>() {
-      @Override
-      public void apply(final TerminalRule it) {
-        it.setFragment(true);
-      }
-    };
-    IterableExtensions.<TerminalRule>forEach(_filter_2, _function_3);
+    final Iterable<TerminalRule> terminals = IterableExtensions.<TerminalRule>filter(_filter_1, _function_2);
+    for (final TerminalRule it : terminals) {
+      it.setFragment(true);
+    }
   }
   
   private Multimap<TerminalRule, AbstractRule> copyRuleBodies(final List<AbstractRule> copies, final Map<RuleWithParameterValues, AbstractRule> origToCopy) {

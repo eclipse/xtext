@@ -62,7 +62,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -659,69 +658,45 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final float[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Float> _function = new Procedure1<Float>() {
-      @Override
-      public void apply(final Float v) {
-        EList<Double> _values = it.getValues();
-        _values.add(Double.valueOf(((double) (v).floatValue())));
-      }
-    };
-    IterableExtensions.<Float>forEach(((Iterable<Float>)Conversions.doWrapArray(value)), _function);
+    for (final float v : value) {
+      EList<Double> _values = it.getValues();
+      _values.add(Double.valueOf(((double) v)));
+    }
   }
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final long[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Long> _function = new Procedure1<Long>() {
-      @Override
-      public void apply(final Long v) {
-        EList<Double> _values = it.getValues();
-        _values.add(Double.valueOf(((double) (v).longValue())));
-      }
-    };
-    IterableExtensions.<Long>forEach(((Iterable<Long>)Conversions.doWrapArray(value)), _function);
+    for (final long v : value) {
+      EList<Double> _values = it.getValues();
+      _values.add(Double.valueOf(((double) v)));
+    }
   }
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Integer> _function = new Procedure1<Integer>() {
-      @Override
-      public void apply(final Integer v) {
-        EList<Double> _values = it.getValues();
-        _values.add(Double.valueOf(((double) (v).intValue())));
-      }
-    };
-    IterableExtensions.<Integer>forEach(((Iterable<Integer>)Conversions.doWrapArray(value)), _function);
+    for (final int v : value) {
+      EList<Double> _values = it.getValues();
+      _values.add(Double.valueOf(((double) v)));
+    }
   }
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Short> _function = new Procedure1<Short>() {
-      @Override
-      public void apply(final Short v) {
-        EList<Double> _values = it.getValues();
-        _values.add(Double.valueOf(((double) (v).shortValue())));
-      }
-    };
-    IterableExtensions.<Short>forEach(((Iterable<Short>)Conversions.doWrapArray(value)), _function);
+    for (final short v : value) {
+      EList<Double> _values = it.getValues();
+      _values.add(Double.valueOf(((double) v)));
+    }
   }
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Byte> _function = new Procedure1<Byte>() {
-      @Override
-      public void apply(final Byte v) {
-        EList<Double> _values = it.getValues();
-        _values.add(Double.valueOf(((double) (v).byteValue())));
-      }
-    };
-    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+    for (final byte v : value) {
+      EList<Double> _values = it.getValues();
+      _values.add(Double.valueOf(((double) v)));
+    }
   }
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Character> _function = new Procedure1<Character>() {
-      @Override
-      public void apply(final Character v) {
-        EList<Double> _values = it.getValues();
-        _values.add(Double.valueOf(((double) (v).charValue())));
-      }
-    };
-    IterableExtensions.<Character>forEach(((Iterable<Character>)Conversions.doWrapArray(value)), _function);
+    for (final char v : value) {
+      EList<Double> _values = it.getValues();
+      _values.add(Double.valueOf(((double) v)));
+    }
   }
   
   protected void _setValue(final JvmFloatAnnotationValue it, final float[] value, final String componentType, final boolean mustBeArray) {
@@ -730,58 +705,38 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmFloatAnnotationValue it, final long[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Long> _function = new Procedure1<Long>() {
-      @Override
-      public void apply(final Long v) {
-        EList<Float> _values = it.getValues();
-        _values.add(Float.valueOf(((float) (v).longValue())));
-      }
-    };
-    IterableExtensions.<Long>forEach(((Iterable<Long>)Conversions.doWrapArray(value)), _function);
+    for (final long v : value) {
+      EList<Float> _values = it.getValues();
+      _values.add(Float.valueOf(((float) v)));
+    }
   }
   
   protected void _setValue(final JvmFloatAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Integer> _function = new Procedure1<Integer>() {
-      @Override
-      public void apply(final Integer v) {
-        EList<Float> _values = it.getValues();
-        _values.add(Float.valueOf(((float) (v).intValue())));
-      }
-    };
-    IterableExtensions.<Integer>forEach(((Iterable<Integer>)Conversions.doWrapArray(value)), _function);
+    for (final int v : value) {
+      EList<Float> _values = it.getValues();
+      _values.add(Float.valueOf(((float) v)));
+    }
   }
   
   protected void _setValue(final JvmFloatAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Short> _function = new Procedure1<Short>() {
-      @Override
-      public void apply(final Short v) {
-        EList<Float> _values = it.getValues();
-        _values.add(Float.valueOf(((float) (v).shortValue())));
-      }
-    };
-    IterableExtensions.<Short>forEach(((Iterable<Short>)Conversions.doWrapArray(value)), _function);
+    for (final short v : value) {
+      EList<Float> _values = it.getValues();
+      _values.add(Float.valueOf(((float) v)));
+    }
   }
   
   protected void _setValue(final JvmFloatAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Byte> _function = new Procedure1<Byte>() {
-      @Override
-      public void apply(final Byte v) {
-        EList<Float> _values = it.getValues();
-        _values.add(Float.valueOf(((float) (v).byteValue())));
-      }
-    };
-    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+    for (final byte v : value) {
+      EList<Float> _values = it.getValues();
+      _values.add(Float.valueOf(((float) v)));
+    }
   }
   
   protected void _setValue(final JvmFloatAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Character> _function = new Procedure1<Character>() {
-      @Override
-      public void apply(final Character v) {
-        EList<Float> _values = it.getValues();
-        _values.add(Float.valueOf(((float) (v).charValue())));
-      }
-    };
-    IterableExtensions.<Character>forEach(((Iterable<Character>)Conversions.doWrapArray(value)), _function);
+    for (final char v : value) {
+      EList<Float> _values = it.getValues();
+      _values.add(Float.valueOf(((float) v)));
+    }
   }
   
   protected void _setValue(final JvmLongAnnotationValue it, final long[] value, final String componentType, final boolean mustBeArray) {
@@ -790,47 +745,31 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmLongAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Integer> _function = new Procedure1<Integer>() {
-      @Override
-      public void apply(final Integer v) {
-        EList<Long> _values = it.getValues();
-        _values.add(Long.valueOf(((long) (v).intValue())));
-      }
-    };
-    IterableExtensions.<Integer>forEach(((Iterable<Integer>)Conversions.doWrapArray(value)), _function);
+    for (final int v : value) {
+      EList<Long> _values = it.getValues();
+      _values.add(Long.valueOf(((long) v)));
+    }
   }
   
   protected void _setValue(final JvmLongAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Short> _function = new Procedure1<Short>() {
-      @Override
-      public void apply(final Short v) {
-        EList<Long> _values = it.getValues();
-        _values.add(Long.valueOf(((long) (v).shortValue())));
-      }
-    };
-    IterableExtensions.<Short>forEach(((Iterable<Short>)Conversions.doWrapArray(value)), _function);
+    for (final short v : value) {
+      EList<Long> _values = it.getValues();
+      _values.add(Long.valueOf(((long) v)));
+    }
   }
   
   protected void _setValue(final JvmLongAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Byte> _function = new Procedure1<Byte>() {
-      @Override
-      public void apply(final Byte v) {
-        EList<Long> _values = it.getValues();
-        _values.add(Long.valueOf(((long) (v).byteValue())));
-      }
-    };
-    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+    for (final byte v : value) {
+      EList<Long> _values = it.getValues();
+      _values.add(Long.valueOf(((long) v)));
+    }
   }
   
   protected void _setValue(final JvmLongAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Character> _function = new Procedure1<Character>() {
-      @Override
-      public void apply(final Character v) {
-        EList<Long> _values = it.getValues();
-        _values.add(Long.valueOf(((long) (v).charValue())));
-      }
-    };
-    IterableExtensions.<Character>forEach(((Iterable<Character>)Conversions.doWrapArray(value)), _function);
+    for (final char v : value) {
+      EList<Long> _values = it.getValues();
+      _values.add(Long.valueOf(((long) v)));
+    }
   }
   
   protected void _setValue(final JvmIntAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
@@ -839,36 +778,24 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmIntAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Short> _function = new Procedure1<Short>() {
-      @Override
-      public void apply(final Short v) {
-        EList<Integer> _values = it.getValues();
-        _values.add(Integer.valueOf(((int) (v).shortValue())));
-      }
-    };
-    IterableExtensions.<Short>forEach(((Iterable<Short>)Conversions.doWrapArray(value)), _function);
+    for (final short v : value) {
+      EList<Integer> _values = it.getValues();
+      _values.add(Integer.valueOf(((int) v)));
+    }
   }
   
   protected void _setValue(final JvmIntAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Byte> _function = new Procedure1<Byte>() {
-      @Override
-      public void apply(final Byte v) {
-        EList<Integer> _values = it.getValues();
-        _values.add(Integer.valueOf(((int) (v).byteValue())));
-      }
-    };
-    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+    for (final byte v : value) {
+      EList<Integer> _values = it.getValues();
+      _values.add(Integer.valueOf(((int) v)));
+    }
   }
   
   protected void _setValue(final JvmIntAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Character> _function = new Procedure1<Character>() {
-      @Override
-      public void apply(final Character v) {
-        EList<Integer> _values = it.getValues();
-        _values.add(Integer.valueOf(((int) (v).charValue())));
-      }
-    };
-    IterableExtensions.<Character>forEach(((Iterable<Character>)Conversions.doWrapArray(value)), _function);
+    for (final char v : value) {
+      EList<Integer> _values = it.getValues();
+      _values.add(Integer.valueOf(((int) v)));
+    }
   }
   
   protected void _setValue(final JvmShortAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
@@ -877,14 +804,10 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmShortAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Byte> _function = new Procedure1<Byte>() {
-      @Override
-      public void apply(final Byte v) {
-        EList<Short> _values = it.getValues();
-        _values.add(Short.valueOf(((short) (v).byteValue())));
-      }
-    };
-    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+    for (final byte v : value) {
+      EList<Short> _values = it.getValues();
+      _values.add(Short.valueOf(((short) v)));
+    }
   }
   
   protected void _setValue(final JvmCharAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
@@ -893,14 +816,10 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmCharAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
-    final Procedure1<Byte> _function = new Procedure1<Byte>() {
-      @Override
-      public void apply(final Byte v) {
-        EList<Character> _values = it.getValues();
-        _values.add(Character.valueOf(((char) (v).byteValue())));
-      }
-    };
-    IterableExtensions.<Byte>forEach(((Iterable<Byte>)Conversions.doWrapArray(value)), _function);
+    for (final byte v : value) {
+      EList<Character> _values = it.getValues();
+      _values.add(Character.valueOf(((char) v)));
+    }
   }
   
   protected void _setValue(final JvmByteAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {

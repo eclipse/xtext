@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
@@ -74,9 +73,8 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
       }
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
+    for (final String it : _map) {
+      {
         final String message = singleError.getMessage();
         boolean _contains = message.contains(it);
         boolean _not = (!_contains);
@@ -84,8 +82,7 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
           Assert.assertEquals(it, message);
         }
       }
-    };
-    IterableExtensions.<String>forEach(_map, _function_1);
+    }
     EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
     final XtendTypeDeclaration firstType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
     EList<XtendMember> _members = firstType.getMembers();

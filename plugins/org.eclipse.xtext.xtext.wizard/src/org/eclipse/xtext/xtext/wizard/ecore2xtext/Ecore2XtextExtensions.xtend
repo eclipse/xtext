@@ -71,7 +71,8 @@ class Ecore2XtextExtensions {
 			return
 		else {
 			acceptor += classifiers
-			classifiers.filter(EClass).forEach([c|allAssignedClassifiers(c, acceptor)])
+			for (c : classifiers.filter(EClass))
+				allAssignedClassifiers(c, acceptor)
 		}
 	}
 

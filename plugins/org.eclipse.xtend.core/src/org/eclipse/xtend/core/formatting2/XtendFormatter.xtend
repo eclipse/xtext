@@ -249,9 +249,9 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	 * Always put existing modifiers into this fixed order
 	 */
 	def protected formatModifiers(XtendMember member, extension IFormattableDocument document) {
-		member.regionFor.ruleCallsTo(commonModifierRule, methodModifierRule, fieldModifierRule).forEach [
+		for (it : member.regionFor.ruleCallsTo(commonModifierRule, methodModifierRule, fieldModifierRule)) {
 			append[oneSpace]
-		]
+		}
 	}
 
 	override protected isSingleLineBlock(XBlockExpression expr) {

@@ -110,7 +110,9 @@ class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock {
 		groupBlock.indent = bracePair.getIndent(enforceIndentToChildren)
 
 		groupBlock.parentBlock = children.filter(ModifiableBlock).head.parentBlock
-		children.filter(ModifiableBlock).forEach[child|child.parentBlock = groupBlock]
+		for (child : children.filter(ModifiableBlock)) {
+			child.parentBlock = groupBlock
+		}
 
 		stack.addLast(groupBlock)
 	}

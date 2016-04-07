@@ -129,13 +129,9 @@ public class DataProcessor extends AbstractClassProcessor {
     @Extension
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
     Iterable<? extends MutableFieldDeclaration> _dataFields = util.getDataFields(it);
-    final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        it.setFinal(true);
-      }
-    };
-    IterableExtensions.forEach(_dataFields, _function);
+    for (final MutableFieldDeclaration it_1 : _dataFields) {
+      it_1.setFinal(true);
+    }
     boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
     if (_needsFinalFieldConstructor) {
       requiredArgsUtil.addFinalFieldsConstructor(it);
@@ -160,19 +156,17 @@ public class DataProcessor extends AbstractClassProcessor {
       util.addDataToString(it);
     }
     Iterable<? extends MutableFieldDeclaration> _dataFields_3 = util.getDataFields(it);
-    final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        boolean _shouldAddGetter = getterUtil.shouldAddGetter(it);
+    for (final MutableFieldDeclaration it_2 : _dataFields_3) {
+      {
+        boolean _shouldAddGetter = getterUtil.shouldAddGetter(it_2);
         if (_shouldAddGetter) {
-          getterUtil.addGetter(it, Visibility.PUBLIC);
+          getterUtil.addGetter(it_2, Visibility.PUBLIC);
         }
-        String _simpleName = it.getSimpleName();
+        String _simpleName = it_2.getSimpleName();
         String _firstLower = StringExtensions.toFirstLower(_simpleName);
         String _plus = ("_" + _firstLower);
-        it.setSimpleName(_plus);
+        it_2.setSimpleName(_plus);
       }
-    };
-    IterableExtensions.forEach(_dataFields_3, _function_1);
+    }
   }
 }

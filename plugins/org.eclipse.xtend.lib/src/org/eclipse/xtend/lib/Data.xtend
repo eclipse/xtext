@@ -49,9 +49,8 @@ class DataProcessor extends AbstractClassProcessor {
 		extension val toStringUtil = new ToStringProcessor.Util(context)
 		extension val requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context)
 
-		dataFields.forEach [
+		for (it : dataFields)
 			final = true
-		]
 		if (needsFinalFieldConstructor) {
 			addFinalFieldsConstructor
 		}
@@ -64,12 +63,12 @@ class DataProcessor extends AbstractClassProcessor {
 		if (!hasToString) {
 			addDataToString
 		}
-		dataFields.forEach [
+		for (it : dataFields) {
 			if (shouldAddGetter) {
 				addGetter(Visibility.PUBLIC)
 			}
 			simpleName = "_" + simpleName.toFirstLower
-		]
+		}
 	}
 
 	/**

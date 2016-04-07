@@ -67,9 +67,7 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -406,20 +404,12 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     int _offset_1 = parameters.getOffset();
     XtextResource _resource = this.getResource(parameters);
     final ContentAssistContext[] contexts = delegate.create(_text, _selection, _offset_1, _resource);
-    final Procedure1<ContentAssistContext> _function = new Procedure1<ContentAssistContext>() {
-      @Override
-      public void apply(final ContentAssistContext c) {
-        ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
-        final Procedure1<AbstractElement> _function = new Procedure1<AbstractElement>() {
-          @Override
-          public void apply(final AbstractElement e) {
-            AbstractCompletionContributor.this.createProposal(e, c, parameters, result);
-          }
-        };
-        IterableExtensions.<AbstractElement>forEach(_firstSetGrammarElements, _function);
+    for (final ContentAssistContext c : contexts) {
+      ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
+      for (final AbstractElement e : _firstSetGrammarElements) {
+        this.createProposal(e, c, parameters, result);
       }
-    };
-    IterableExtensions.<ContentAssistContext>forEach(((Iterable<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function);
+    }
   }
   
   protected boolean supportParserBasedProposals(final TokenSet tokenSet) {

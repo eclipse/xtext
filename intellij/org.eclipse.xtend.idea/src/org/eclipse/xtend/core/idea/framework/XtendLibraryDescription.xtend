@@ -48,7 +48,9 @@ class XtendLibraryDescription extends CustomLibraryDescription {
 
 			override addRoots(LibraryEditor editor) {
 				roots.forEach [ k, v |
-					v.forEach[editor.addRoot(it, k)]
+					for (it : v) {
+						editor.addRoot(it, k)
+					}
 				]
 			}
 

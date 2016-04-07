@@ -14,7 +14,6 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class JavaResourceDescriptionManager implements IResourceDescription.Manager {
@@ -49,13 +48,9 @@ public class JavaResourceDescriptionManager implements IResourceDescription.Mana
         final DefaultResourceDescription result = new DefaultResourceDescription(resource, this.descriptionStrategy, this.cache);
         if ((!initialized)) {
           Iterable<IEObjectDescription> _exportedObjects = result.getExportedObjects();
-          final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
-            @Override
-            public void apply(final IEObjectDescription it) {
-              it.getEObjectURI();
-            }
-          };
-          IterableExtensions.<IEObjectDescription>forEach(_exportedObjects, _function);
+          for (final IEObjectDescription it : _exportedObjects) {
+            it.getEObjectURI();
+          }
         }
         return result;
       } finally {

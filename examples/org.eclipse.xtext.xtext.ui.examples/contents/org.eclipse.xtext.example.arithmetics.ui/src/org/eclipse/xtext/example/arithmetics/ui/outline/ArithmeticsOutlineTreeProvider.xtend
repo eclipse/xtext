@@ -19,9 +19,9 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
  */
 class ArithmeticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	def _createChildren(IOutlineNode parentNode, Module module) {
-		module.eContents().filter(Definition).forEach [
+		for (it : module.eContents().filter(Definition)) {
 			createNode(parentNode, it);
-		]
+		}
 	}
 
 	def _isLeaf(Definition definition) {

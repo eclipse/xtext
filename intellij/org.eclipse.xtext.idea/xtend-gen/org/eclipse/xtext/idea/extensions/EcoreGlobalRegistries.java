@@ -20,9 +20,6 @@ import org.eclipse.xtext.idea.extensions.ResourceFactoryEP;
 import org.eclipse.xtext.idea.extensions.ResourceServiceProviderDescriptor;
 import org.eclipse.xtext.idea.extensions.ResourceServiceProviderEP;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -32,58 +29,48 @@ public class EcoreGlobalRegistries {
   public EcoreGlobalRegistries() {
     final EPackage.Registry packageRegistry = EPackage.Registry.INSTANCE;
     EPackageEP[] _extensions = Extensions.<EPackageEP>getExtensions(EPackageEP.EP_NAME);
-    final Procedure1<EPackageEP> _function = new Procedure1<EPackageEP>() {
-      @Override
-      public void apply(final EPackageEP it) {
-        String _nsURI = it.getNsURI();
-        EPackageEP _createDescriptor = it.createDescriptor();
-        packageRegistry.put(_nsURI, _createDescriptor);
-      }
-    };
-    IterableExtensions.<EPackageEP>forEach(((Iterable<EPackageEP>)Conversions.doWrapArray(_extensions)), _function);
+    for (final EPackageEP it : _extensions) {
+      String _nsURI = it.getNsURI();
+      EPackageEP _createDescriptor = it.createDescriptor();
+      packageRegistry.put(_nsURI, _createDescriptor);
+    }
     final Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
     ResourceFactoryEP[] _extensions_1 = Extensions.<ResourceFactoryEP>getExtensions(ResourceFactoryEP.EP_NAME);
-    final Procedure1<ResourceFactoryEP> _function_1 = new Procedure1<ResourceFactoryEP>() {
-      @Override
-      public void apply(final ResourceFactoryEP it) {
-        String _type = it.getType();
-        ResourceFactoryDescriptor _createDescriptor = it.createDescriptor();
-        extensionToFactoryMap.put(_type, _createDescriptor);
-      }
-    };
-    IterableExtensions.<ResourceFactoryEP>forEach(((Iterable<ResourceFactoryEP>)Conversions.doWrapArray(_extensions_1)), _function_1);
+    for (final ResourceFactoryEP it_1 : _extensions_1) {
+      String _type = it_1.getType();
+      ResourceFactoryDescriptor _createDescriptor_1 = it_1.createDescriptor();
+      extensionToFactoryMap.put(_type, _createDescriptor_1);
+    }
     final IResourceServiceProvider.Registry registry = IResourceServiceProvider.Registry.INSTANCE;
     ResourceServiceProviderEP[] _extensions_2 = Extensions.<ResourceServiceProviderEP>getExtensions(ResourceServiceProviderEP.EP_NAME);
-    final Procedure1<ResourceServiceProviderEP> _function_2 = new Procedure1<ResourceServiceProviderEP>() {
-      @Override
-      public void apply(final ResourceServiceProviderEP it) {
-        String _uriExtension = it.getUriExtension();
+    for (final ResourceServiceProviderEP it_2 : _extensions_2) {
+      {
+        String _uriExtension = it_2.getUriExtension();
         boolean _notEquals = (!Objects.equal(_uriExtension, null));
         if (_notEquals) {
           Map<String, Object> _extensionToFactoryMap = registry.getExtensionToFactoryMap();
-          String _uriExtension_1 = it.getUriExtension();
-          ResourceServiceProviderDescriptor _createDescriptor = it.createDescriptor();
-          _extensionToFactoryMap.put(_uriExtension_1, _createDescriptor);
+          String _uriExtension_1 = it_2.getUriExtension();
+          ResourceServiceProviderDescriptor _createDescriptor_2 = it_2.createDescriptor();
+          _extensionToFactoryMap.put(_uriExtension_1, _createDescriptor_2);
         }
-        String _protocolName = it.getProtocolName();
+        String _protocolName = it_2.getProtocolName();
         boolean _notEquals_1 = (!Objects.equal(_protocolName, null));
         if (_notEquals_1) {
           Map<String, Object> _protocolToFactoryMap = registry.getProtocolToFactoryMap();
-          String _protocolName_1 = it.getProtocolName();
-          ResourceServiceProviderDescriptor _createDescriptor_1 = it.createDescriptor();
-          _protocolToFactoryMap.put(_protocolName_1, _createDescriptor_1);
+          String _protocolName_1 = it_2.getProtocolName();
+          ResourceServiceProviderDescriptor _createDescriptor_3 = it_2.createDescriptor();
+          _protocolToFactoryMap.put(_protocolName_1, _createDescriptor_3);
         }
-        String _contentTypeIdentifier = it.getContentTypeIdentifier();
+        String _contentTypeIdentifier = it_2.getContentTypeIdentifier();
         boolean _notEquals_2 = (!Objects.equal(_contentTypeIdentifier, null));
         if (_notEquals_2) {
           Map<String, Object> _contentTypeToFactoryMap = registry.getContentTypeToFactoryMap();
-          String _contentTypeIdentifier_1 = it.getContentTypeIdentifier();
-          ResourceServiceProviderDescriptor _createDescriptor_2 = it.createDescriptor();
-          _contentTypeToFactoryMap.put(_contentTypeIdentifier_1, _createDescriptor_2);
+          String _contentTypeIdentifier_1 = it_2.getContentTypeIdentifier();
+          ResourceServiceProviderDescriptor _createDescriptor_4 = it_2.createDescriptor();
+          _contentTypeToFactoryMap.put(_contentTypeIdentifier_1, _createDescriptor_4);
         }
       }
-    };
-    IterableExtensions.<ResourceServiceProviderEP>forEach(((Iterable<ResourceServiceProviderEP>)Conversions.doWrapArray(_extensions_2)), _function_2);
+    }
   }
   
   public static EcoreGlobalRegistries ensureInitialized() {

@@ -19,7 +19,9 @@ class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder {
 
 	def dispatch void build(XtendFile xtendFile, IXtendOutlineContext context) {
 		xtendFile.buildPackageAndImportSection(context)
-		xtendFile.eResource.contents.filter(JvmDeclaredType).forEach[buildType(context)]
+		for (it : xtendFile.eResource.contents.filter(JvmDeclaredType)) {
+			buildType(context)
+		}
 	}
 
 	def dispatch void build(JvmDeclaredType jvmDeclaredType, IXtendOutlineContext context) {

@@ -100,9 +100,9 @@ class XtendLibraryConfigurator {
 			val createdLib = model.createLibrary(libDescr.defaultLibraryName)
 			val libModel = createdLib.modifiableModel
 			xtendLibDescr.libraryRoots.forEach [ type, roots |
-				roots.forEach [
+				for (it : roots) {
 					libModel.addRoot(it, type)
-				]
+				}
 			]
 			libModel.commit
 			model.commit

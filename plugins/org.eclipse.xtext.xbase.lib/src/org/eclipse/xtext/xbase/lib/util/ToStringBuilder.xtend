@@ -96,7 +96,8 @@ final class ToStringBuilder {
 	 */
 	@GwtIncompatible("Class.getDeclaredFields")
 	def addDeclaredFields() {
-		instance.class.declaredFields.forEach[addField]
+		for (it : instance.class.declaredFields)
+			addField
 		return this
 	}
 
@@ -106,7 +107,8 @@ final class ToStringBuilder {
 	 */
 	@GwtIncompatible("Class.getDeclaredFields")
 	def addAllFields() {
-		instance.class.allDeclaredFields.forEach[addField]
+		for (it : instance.class.allDeclaredFields)
+			addField
 		return this
 	}
 

@@ -75,13 +75,13 @@ class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
 	protected def IHyperlink[] makeNullsafe(IHyperlink[] arr) {
 		if (arr.exists[it === null || it.hyperlinkRegion === null]) {
 			val list = newArrayList
-			arr.forEach[
+			for (it : arr) {
 				if (it !== null && it.hyperlinkRegion !== null) {
 					list.add(it)
 				} else {
 					log.warn('Filtered invalid hyperlink: '+ it.getClass.name)
 				}
-			]
+			}
 			return list.toArray(newArrayOfSize(list.size))
 		}
 		return arr

@@ -330,7 +330,7 @@ class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTest {
 		]
 		resourceSet.resourceFactoryRegistry.extensionToFactoryMap.put('xmi', nullFactory)
 		val threads = newArrayList()
-		(1..10).forEach [ i |
+		for (i : 1 .. 10) {
 			threads.add(new Thread [
 				val resources = newArrayList
 				for(var int j = 0; j < 5000; j++) {
@@ -340,7 +340,7 @@ class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTest {
 					resource.URI = URI.createURI(resource.getURI + 'b')
 				}	
 			])
-		]
+		}
 		for (Thread thread : threads) {
 			thread.start();
 		}

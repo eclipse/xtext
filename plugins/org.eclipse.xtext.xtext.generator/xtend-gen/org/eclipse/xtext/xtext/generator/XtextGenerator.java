@@ -229,13 +229,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   private void handleException(final Exception ex, final Issues issues) {
     if ((ex instanceof CompositeGeneratorException)) {
       List<Exception> _exceptions = ((CompositeGeneratorException)ex).getExceptions();
-      final Procedure1<Exception> _function = new Procedure1<Exception>() {
-        @Override
-        public void apply(final Exception it) {
-          XtextGenerator.this.handleException(it, issues);
-        }
-      };
-      IterableExtensions.<Exception>forEach(_exceptions, _function);
+      for (final Exception it : _exceptions) {
+        this.handleException(it, issues);
+      }
     } else {
       issues.addError(this, "GeneratorException: ", null, ex, null);
     }

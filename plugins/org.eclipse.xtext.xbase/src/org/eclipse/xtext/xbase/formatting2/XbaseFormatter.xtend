@@ -340,14 +340,18 @@ class XbaseFormatter extends XtypeFormatter {
 	def dispatch void format(XBasicForLoopExpression expr, extension IFormattableDocument format) {
 		expr.regionFor.keyword("for").append[oneSpace]
 		expr.regionFor.keyword("(").append[noSpace]
-		expr.regionFor.keywords(";").forEach[prepend[noSpace].append[noSpace lowPriority]]
-		expr.regionFor.keywords(",").forEach[prepend[noSpace].append[oneSpace]]
+		for (it : expr.regionFor.keywords(";"))
+			prepend[noSpace].append[noSpace lowPriority]
+		for (it : expr.regionFor.keywords(","))
+			prepend[noSpace].append[oneSpace]
 		expr.regionFor.keyword(")").prepend[noSpace]
-		expr.initExpressions.forEach[it.format]
+		for (it : expr.initExpressions)
+			it.format
 		expr.expression.prepend[oneSpace]
 		expr.expression.format
 		expr.updateExpressions.head.prepend[oneSpace]
-		expr.updateExpressions.forEach[it.format]
+		for (it : expr.updateExpressions)
+			it.format
 		expr.eachExpression.formatBody(true, format)
 	}
 

@@ -21,8 +21,6 @@ import org.eclipse.xtext.idea.wizard.XtextModuleBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
@@ -281,15 +279,11 @@ public class XtextWizardStep extends ModuleWizardStep {
     _webProject.setEnabled(_isSelected_3);
     Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
     Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(_enabledProjects, TestedProjectDescriptor.class);
-    final Procedure1<TestedProjectDescriptor> _function = new Procedure1<TestedProjectDescriptor>() {
-      @Override
-      public void apply(final TestedProjectDescriptor it) {
-        TestProjectDescriptor _testProject = it.getTestProject();
-        boolean _isSelected = XtextWizardStep.this.test.isSelected();
-        _testProject.setEnabled(_isSelected);
-      }
-    };
-    IterableExtensions.<TestedProjectDescriptor>forEach(_filter, _function);
+    for (final TestedProjectDescriptor it : _filter) {
+      TestProjectDescriptor _testProject = it.getTestProject();
+      boolean _isSelected_4 = this.test.isSelected();
+      _testProject.setEnabled(_isSelected_4);
+    }
     Object _selectedItem = this.buildSystem.getSelectedItem();
     config.setPreferredBuildSystem(((BuildSystem) _selectedItem));
     Object _selectedItem_1 = this.layout.getSelectedItem();

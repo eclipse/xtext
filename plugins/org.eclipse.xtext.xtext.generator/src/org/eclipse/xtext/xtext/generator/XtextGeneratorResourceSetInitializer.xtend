@@ -32,9 +32,8 @@ class XtextGeneratorResourceSetInitializer {
 		val delegate = new StandaloneSetup
 		delegate.resourceSet = resourceSet
 		resourceSet.packageRegistry.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE)
-		referencedResources.forEach[
+		for (it : referencedResources)
 			loadResource(resourceSet)
-		]
 		registerGenModels(resourceSet)
 		registerEPackages(resourceSet)
 	}
@@ -116,7 +115,8 @@ class XtextGeneratorResourceSetInitializer {
 		// don't use forEach loop since the given strategy may trigger additional resource loading
 		for(var i = 0; i < resourceSet.resources.size; i++) {
 			val resource = resourceSet.resources.get(i)
-			resource.contents.filter(type).forEach[ strategy.apply(it) ]
+			for (it : resource.contents.filter(type))
+				strategy.apply(it) 
 		}
 	}
 }

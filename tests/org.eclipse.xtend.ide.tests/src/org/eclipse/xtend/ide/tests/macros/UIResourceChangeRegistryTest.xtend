@@ -47,16 +47,16 @@ class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
 	val URI uri = URI.createURI("synthetic://testing/uri")
 	
 	@Test def void testConcurrentDiscard() throws Exception {
-		(1..10000).forEach[ 
+		for (it : 1 .. 10000) { 
 			resourceChangeRegistry.registerCreateOrModify('/foo', uri.appendSegment(it.toString))
-		]
+		}
 		
 		val Runnable r = [
 			val random = new SecureRandom(#[1 as byte])
-			(1..1000).forEach[
+			for (it : 1 .. 1000) {
 				val removedURI = uri.appendSegment(random.nextInt(10000).toString)
 				resourceChangeRegistry.discardCreateOrModifyInformation(removedURI)
-			]
+			}
 		]  
 		val executorService = Executors.newCachedThreadPool
 		try {

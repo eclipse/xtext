@@ -52,7 +52,9 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 
 	override setContext(EObject ctx) {
 		super.setContext(ctx)
-		parameterBuilders.forEach[context = ctx]
+		for (it : parameterBuilders) {
+			context = ctx
+		}
 	}
 
 	def newParameterBuilder() {

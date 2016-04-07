@@ -51,7 +51,8 @@ class FormattableDocumentTest {
 				idlist  aaa  bbb  ccc  ddd  eee  fff
 			'''
 			formatter = [ IDList model, extension regions, extension document |
-				model.regionFor.ruleCallsTo(IDRule).forEach[prepend[autowrap; oneSpace]]
+				for (it : model.regionFor.ruleCallsTo(IDRule))
+					prepend[autowrap; oneSpace]
 			]
 			expectation = '''
 				idlist aaa

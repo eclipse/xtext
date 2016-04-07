@@ -56,11 +56,11 @@ class EmfModelsTest {
 
 	def void check(EPackage ePack) {
 		info("Checking EPackage '" + ePack.getName() + "'");
-		ePack.getEClassifiers().forEach [
+		for (it : ePack.getEClassifiers()) {
 			if (it instanceof EClass) {
 				check(it)
 			}
-		]
+		}
 		info("EPackage '" + ePack.getName() + "' passed.");
 	}
 

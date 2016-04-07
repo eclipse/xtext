@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ToStringContext;
 
 /**
@@ -168,13 +167,9 @@ public final class ToStringBuilder {
   public ToStringBuilder addDeclaredFields() {
     Class<?> _class = this.instance.getClass();
     Field[] _declaredFields = _class.getDeclaredFields();
-    final Procedure1<Field> _function = new Procedure1<Field>() {
-      @Override
-      public void apply(final Field it) {
-        ToStringBuilder.this.addField(it);
-      }
-    };
-    IterableExtensions.<Field>forEach(((Iterable<Field>)Conversions.doWrapArray(_declaredFields)), _function);
+    for (final Field it : _declaredFields) {
+      this.addField(it);
+    }
     return this;
   }
   
@@ -186,13 +181,9 @@ public final class ToStringBuilder {
   public ToStringBuilder addAllFields() {
     Class<?> _class = this.instance.getClass();
     ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
-    final Procedure1<Field> _function = new Procedure1<Field>() {
-      @Override
-      public void apply(final Field it) {
-        ToStringBuilder.this.addField(it);
-      }
-    };
-    IterableExtensions.<Field>forEach(_allDeclaredFields, _function);
+    for (final Field it : _allDeclaredFields) {
+      this.addField(it);
+    }
     return this;
   }
   

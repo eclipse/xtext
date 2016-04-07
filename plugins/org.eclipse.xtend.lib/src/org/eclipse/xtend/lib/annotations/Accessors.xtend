@@ -84,7 +84,8 @@ enum AccessorType {
 class AccessorsProcessor implements TransformationParticipant<MutableMemberDeclaration> {
 
 	override doTransform(List<? extends MutableMemberDeclaration> elements, extension TransformationContext context) {
-		elements.forEach[transform(context)]
+		for (it : elements)
+			transform(context)
 	}
 
 	def dispatch void transform(MutableFieldDeclaration it, extension TransformationContext context) {
@@ -105,7 +106,8 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 		if (needsFinalFieldConstructor || findAnnotation(FinalFieldsConstructor.findTypeGlobally) !== null) {
 			addFinalFieldsConstructor
 		}
-		declaredFields.filter[!static && thePrimaryGeneratedJavaElement].forEach[_transform(context)]
+		for (it : declaredFields.filter[!static && thePrimaryGeneratedJavaElement])
+			_transform(context)
 	}
 
 	/**

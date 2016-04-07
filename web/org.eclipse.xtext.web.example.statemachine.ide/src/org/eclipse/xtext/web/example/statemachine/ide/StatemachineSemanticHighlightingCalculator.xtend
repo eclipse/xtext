@@ -41,8 +41,8 @@ class StatemachineSemanticHighlightingCalculator extends DefaultSemanticHighligh
 	protected def highlightSignal(EObject owner, Signal signal, EStructuralFeature feature,
 			IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
 		cancelIndicator.checkCanceled
-		owner.findNodesForFeature(feature).forEach[
+		for (it : owner.findNodesForFeature(feature)) {
 			acceptor.addPosition(offset, length, signal.eClass.name)
-		]
+		}
 	}
 }

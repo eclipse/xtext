@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 
 /**
@@ -109,26 +108,18 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
     XExpression _expression = expression.getExpression();
     this.findImplicitReturns(_expression, acceptor);
     EList<XCatchClause> _catchClauses = expression.getCatchClauses();
-    final Procedure1<XCatchClause> _function = new Procedure1<XCatchClause>() {
-      @Override
-      public void apply(final XCatchClause it) {
-        XExpression _expression = it.getExpression();
-        XbaseImplicitReturnFinder.this.findImplicitReturns(_expression, acceptor);
-      }
-    };
-    IterableExtensions.<XCatchClause>forEach(_catchClauses, _function);
+    for (final XCatchClause it : _catchClauses) {
+      XExpression _expression_1 = it.getExpression();
+      this.findImplicitReturns(_expression_1, acceptor);
+    }
   }
   
   protected void _findImplicitReturns(final XSwitchExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
     EList<XCasePart> _cases = expression.getCases();
-    final Procedure1<XCasePart> _function = new Procedure1<XCasePart>() {
-      @Override
-      public void apply(final XCasePart it) {
-        XExpression _then = it.getThen();
-        XbaseImplicitReturnFinder.this.findImplicitReturns(_then, acceptor);
-      }
-    };
-    IterableExtensions.<XCasePart>forEach(_cases, _function);
+    for (final XCasePart it : _cases) {
+      XExpression _then = it.getThen();
+      this.findImplicitReturns(_then, acceptor);
+    }
     XExpression _default = expression.getDefault();
     this.findImplicitReturns(_default, acceptor);
   }

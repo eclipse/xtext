@@ -36,7 +36,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -84,13 +83,9 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
         final Procedure2<OrderRootType, List<String>> _function = new Procedure2<OrderRootType, List<String>>() {
           @Override
           public void apply(final OrderRootType k, final List<String> v) {
-            final Procedure1<String> _function = new Procedure1<String>() {
-              @Override
-              public void apply(final String it) {
-                editor.addRoot(it, k);
-              }
-            };
-            IterableExtensions.<String>forEach(v, _function);
+            for (final String it : v) {
+              editor.addRoot(it, k);
+            }
           }
         };
         MapExtensions.<OrderRootType, List<String>>forEach(this.roots, _function);

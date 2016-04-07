@@ -455,13 +455,9 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
   
   @Override
   public void doTransform(final List<? extends MutableMemberDeclaration> elements, @Extension final TransformationContext context) {
-    final Procedure1<MutableMemberDeclaration> _function = new Procedure1<MutableMemberDeclaration>() {
-      @Override
-      public void apply(final MutableMemberDeclaration it) {
-        AccessorsProcessor.this.transform(it, context);
-      }
-    };
-    IterableExtensions.forEach(elements, _function);
+    for (final MutableMemberDeclaration it : elements) {
+      this.transform(it, context);
+    }
   }
   
   protected void _transform(final MutableFieldDeclaration it, @Extension final TransformationContext context) {
@@ -520,13 +516,9 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       }
     };
     Iterable<? extends MutableFieldDeclaration> _filter = IterableExtensions.filter(_declaredFields, _function);
-    final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        AccessorsProcessor.this._transform(it, context);
-      }
-    };
-    IterableExtensions.forEach(_filter, _function_1);
+    for (final MutableFieldDeclaration it_1 : _filter) {
+      this._transform(it_1, context);
+    }
   }
   
   public void transform(final MutableMemberDeclaration it, final TransformationContext context) {

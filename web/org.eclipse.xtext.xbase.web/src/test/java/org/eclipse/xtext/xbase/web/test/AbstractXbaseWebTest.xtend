@@ -61,7 +61,9 @@ class AbstractXbaseWebTest extends AbstractXtextTests {
 	}
 	
 	override tearDown() {
-		executorServices.forEach[shutdown()]
+		for (it : executorServices) {
+			shutdown()
+		}
 		executorServices.clear()
 		super.tearDown()
 	}

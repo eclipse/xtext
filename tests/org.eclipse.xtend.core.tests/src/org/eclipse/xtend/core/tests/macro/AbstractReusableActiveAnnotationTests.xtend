@@ -794,10 +794,10 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val annotationsValue = annotation.getAnnotationArrayValue('annotations')
 			assertNotNull(annotationsValue)
 			assertEquals(2, annotationsValue.size)
-			annotationsValue.forEach[
+			for (it : annotationsValue) {
 				assertEquals(someAnnotationType, annotationValue.annotationTypeDeclaration)
 				assertFalse(annotationValue.getBooleanValue('value'))
-			]
+			}
 		]
 	}
 	
@@ -3140,7 +3140,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			val resource = it.xtendFile.eResource
 			val jvmTypes = resource.contents.tail
 			
-			jvmTypes.forEach [
+			for (it : jvmTypes) {
 				if (it instanceof JvmDeclaredType) {
 					val generated = String.valueOf(generator.generateType(it, generatorConfigProvider.get(it)))
 					if (!clientFilesAsSet.remove(generated)) {
@@ -3149,7 +3149,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				} else {
 					throw new IllegalArgumentException(String.valueOf(it))
 				}
-			]
+			}
 			if (!clientFilesAsSet.empty) {
 				fail('Missing compiled code. Expected :\n' + clientFilesAsSet.join('\n'))
 			}

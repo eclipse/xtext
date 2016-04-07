@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 
 /**
@@ -133,28 +132,24 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
     boolean _exists = IterableExtensions.<IHyperlink>exists(((Iterable<IHyperlink>)Conversions.doWrapArray(arr)), _function);
     if (_exists) {
       final ArrayList<IHyperlink> list = CollectionLiterals.<IHyperlink>newArrayList();
-      final Procedure1<IHyperlink> _function_1 = new Procedure1<IHyperlink>() {
-        @Override
-        public void apply(final IHyperlink it) {
-          boolean _and = false;
-          if (!(it != null)) {
-            _and = false;
-          } else {
-            IRegion _hyperlinkRegion = it.getHyperlinkRegion();
-            boolean _tripleNotEquals = (_hyperlinkRegion != null);
-            _and = _tripleNotEquals;
-          }
-          if (_and) {
-            list.add(it);
-          } else {
-            Class<? extends IHyperlink> _class = it.getClass();
-            String _name = _class.getName();
-            String _plus = ("Filtered invalid hyperlink: " + _name);
-            SingleHoverShowingHyperlinkPresenter.log.warn(_plus);
-          }
+      for (final IHyperlink it : arr) {
+        boolean _and = false;
+        if (!(it != null)) {
+          _and = false;
+        } else {
+          IRegion _hyperlinkRegion = it.getHyperlinkRegion();
+          boolean _tripleNotEquals = (_hyperlinkRegion != null);
+          _and = _tripleNotEquals;
         }
-      };
-      IterableExtensions.<IHyperlink>forEach(((Iterable<IHyperlink>)Conversions.doWrapArray(arr)), _function_1);
+        if (_and) {
+          list.add(it);
+        } else {
+          Class<? extends IHyperlink> _class = it.getClass();
+          String _name = _class.getName();
+          String _plus = ("Filtered invalid hyperlink: " + _name);
+          SingleHoverShowingHyperlinkPresenter.log.warn(_plus);
+        }
+      }
       int _size = list.size();
       IHyperlink[] _newArrayOfSize = new IHyperlink[_size];
       return list.<IHyperlink>toArray(_newArrayOfSize);

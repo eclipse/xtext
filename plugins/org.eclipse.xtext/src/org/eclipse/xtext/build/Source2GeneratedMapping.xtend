@@ -57,16 +57,14 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 	
 	def Set<URI> deleteSource(URI source) {
 		val generated = new HashSet<URI>(source2generated.removeAll(source))
-		generated.forEach[
+		for (it : generated)
 			generated2source.remove(it, source)
-		]
 		return generated
 	}
 
 	def void deleteGenerated(URI generated) {
-		generated2source.removeAll(generated).forEach[
+		for (it : generated2source.removeAll(generated))
 			source2generated.remove(it, generated)
-		]
 		generated2OutputConfigName.remove(generated)
 	}
 	
@@ -102,13 +100,13 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 	override writeExternal(ObjectOutput out) throws IOException {
 		val entries = source2generated.asMap.entrySet
 		out.writeInt(entries.size)
-		entries.forEach [
+		for (it : entries) {
 			out.writeUTF(key.toString)
 			out.writeInt(value.size)
-			value.forEach[
+			for (it : value) {
 				out.writeUTF(toString)
-				out.writeUTF(generated2OutputConfigName.get(it)?:IFileSystemAccess.DEFAULT_OUTPUT)
-			]
-		]		
+				out.writeUTF(generated2OutputConfigName.get(it) ?: IFileSystemAccess.DEFAULT_OUTPUT)
+			}
+		}
 	}
 }

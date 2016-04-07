@@ -52,9 +52,8 @@ class WizardConfigurationTest {
 		config.ideProject.enabled = true
 		config.preferredBuildSystem = BuildSystem.MAVEN
 		assertTrue(config.needsTychoBuild)
-		#[config.runtimeProject, config.ideProject, config.uiProject].forEach[
+		for (it : #[config.runtimeProject, config.ideProject, config.uiProject])
 			assertTrue(pom.content.contains("eclipse-plugin"))
-		]
 		assertTrue(config.parentProject.pom.content.contains("tycho"))
 	}
 	
@@ -116,49 +115,48 @@ class WizardConfigurationTest {
 	def void inlinedTestProjectsAddTheirDependenciesToTheMainProject() {
 		config.runtimeProject.testProject.enabled = true
 		config.sourceLayout = SourceLayout.MAVEN
-		config.runtimeProject.testProject.externalDependencies.forEach[testDependency|
+		for (testDependency : config.runtimeProject.testProject.externalDependencies) {
 			assertTrue(config.runtimeProject.externalDependencies.exists[
 				maven.artifactId == testDependency.maven.artifactId
 				&& p2.bundleId == testDependency.p2.bundleId
 				&& p2.packages == testDependency.p2.packages
 			])
-		]
+		}
 	}
 	
 	@Test
 	def void inlinedTestProjectsAddTheirSourceFoldersToTheMainProject() {
 		config.runtimeProject.testProject.enabled = true
 		config.sourceLayout = SourceLayout.MAVEN
-		config.runtimeProject.testProject.sourceFolders.forEach[testFolder|
+		for (testFolder : config.runtimeProject.testProject.sourceFolders)
 			assertTrue(config.runtimeProject.sourceFolders.contains(testFolder))
-		]
 	}
 	
 	@Test
 	def void mavenProjectsHaveAPom() {
 		config.preferredBuildSystem = BuildSystem.MAVEN
-		allJavaProjects.filter[isPartOfMavenBuild].forEach[
+		for (it : allJavaProjects.filter[isPartOfMavenBuild]) {
 			enabled = true
 			assertTrue(files.exists[relativePath == "pom.xml"])
-		]
+		}
 	}
 	
 	@Test
 	def void gradleProjectsHaveABuildFile() {
 		config.preferredBuildSystem = BuildSystem.GRADLE
-		allJavaProjects.filter[isPartOfGradleBuild].forEach[
+		for (it : allJavaProjects.filter[isPartOfGradleBuild]) {
 			enabled = true
 			assertTrue(files.exists[relativePath == "build.gradle"])
-		]
+		}
 	}
 	
 	@Test
 	def void pluginProjectsHaveEclipseMetaData() {
-		allJavaProjects.filter[isEclipsePluginProject].forEach[
+		for (it : allJavaProjects.filter[isEclipsePluginProject]) {
 			enabled = true
 			assertTrue(files.exists[relativePath == "MANIFEST.MF"])
 			assertTrue(files.exists[relativePath == "build.properties"])
-		]
+		}
 	}
 	
 	@Test
@@ -198,17 +196,15 @@ class WizardConfigurationTest {
 		config.preferredBuildSystem = BuildSystem.GRADLE
 		config.uiProject.enabled = true
 		config.ideProject.enabled = true
-		config.enabledProjects.filter[eclipsePluginProject].forEach[
+		for (it : config.enabledProjects.filter[eclipsePluginProject])
 			assertTrue(buildGradle.content.contains("eclipseClasspath.enabled=false"))
-		]
 	}
 	
 	@Test
 	def parentContainsOtherProjectsInHierarchicallayout() {
 		config.projectLayout = ProjectLayout.HIERARCHICAL
-		allJavaProjects.forEach[
+		for (it : allJavaProjects) 
 			assertTrue(location.startsWith(config.parentProject.location + "/"))
-		]
 	}
 	
 	@Test
@@ -216,25 +212,25 @@ class WizardConfigurationTest {
 		config.preferredBuildSystem = BuildSystem.MAVEN
 		config.sourceLayout = SourceLayout.PLAIN
 		val plainMavenProjects = allJavaProjects.filter[!isEclipsePluginProject && isPartOfMavenBuild]
-		plainMavenProjects.forEach[
+		for (it : plainMavenProjects) {
 			assertTrue(pom.content.contains("<directory>src</directory>"))
 			assertTrue(pom.content.contains("<source>src-gen</source>"))
 			assertTrue(pom.content.contains("<directory>src-gen</directory>"))
-		]
-		plainMavenProjects.filter[!(it instanceof TestProjectDescriptor)].forEach[
+		}
+		for (it : plainMavenProjects.filter[!(it instanceof TestProjectDescriptor)]) {
 			assertTrue(pom.content.contains("<sourceDirectory>src</sourceDirectory>"))
 			assertTrue(pom.content.contains("add-source"))
 			assertTrue(pom.content.contains("add-resource"))
 			assertFalse(pom.content.contains("add-test-source"))
 			assertFalse(pom.content.contains("add-test-resource"))
-		]
-		plainMavenProjects.filter(TestProjectDescriptor).forEach[
+		}
+		for (it : plainMavenProjects.filter(TestProjectDescriptor)) {
 			assertTrue(pom.content.contains("<testSourceDirectory>src</testSourceDirectory>"))
 			assertTrue(pom.content.contains("add-test-source"))
 			assertTrue(pom.content.contains("add-test-resource"))
 			assertFalse(pom.content.contains("add-source"))
 			assertFalse(pom.content.contains("add-resource"))
-		]
+		}
 	}
 	
 	@Test
@@ -244,21 +240,22 @@ class WizardConfigurationTest {
 		val plainMavenProjects = allJavaProjects.filter[!isEclipsePluginProject && isPartOfMavenBuild]
 		val mainProjects = plainMavenProjects.filter[!(it instanceof TestProjectDescriptor)]
 		
-		plainMavenProjects.forEach[enabled = true]
-		
+		for (it : plainMavenProjects)
+			enabled = true
+				
 		assertTrue(plainMavenProjects.filter(TestProjectDescriptor).forall[isInlined])
-		mainProjects.forEach[
+		for (it : mainProjects) {
 			assertTrue(pom.content.contains("add-source"))
 			assertTrue(pom.content.contains("add-resource"))
 			assertTrue(pom.content.contains("<source>src/main/xtext-gen</source>"))
 			assertTrue(pom.content.contains("<directory>src/main/xtext-gen</directory>"))
-		]
-		mainProjects.filter(TestedProjectDescriptor).forEach[
+		}
+		for (it : mainProjects.filter(TestedProjectDescriptor)) {
 			assertTrue(pom.content.contains("add-test-source"))
 			assertTrue(pom.content.contains("add-test-resource"))
 			assertTrue(pom.content.contains("<source>src/test/xtext-gen</source>"))
 			assertTrue(pom.content.contains("<directory>src/test/xtext-gen</directory>"))
-		]
+		}
 	}
 	
 	@Test
@@ -268,14 +265,15 @@ class WizardConfigurationTest {
 		val plainMavenProjects = allJavaProjects.filter[!isEclipsePluginProject && isPartOfMavenBuild]
 		val mainProjects = plainMavenProjects.filter[!(it instanceof TestProjectDescriptor)]
 		
-		plainMavenProjects.forEach[enabled = true]
+		for (it : plainMavenProjects)
+			enabled = true
 		
-		mainProjects.forEach[
+		for (it : mainProjects) {
 			assertFalse(pom.content.contains("<sourceDirectory>"))
 			assertFalse(pom.content.contains("<directory>src/main/resources</directory>"))
 			assertFalse(pom.content.contains("<testSourceDirectory>"))
 			assertFalse(pom.content.contains("<directory>src/test/resources</directory>"))
-		]
+		}
 	}
 	
 	@Test
@@ -299,9 +297,8 @@ class WizardConfigurationTest {
 		config.preferredBuildSystem = BuildSystem.MAVEN
 		config.uiProject.enabled = true
 		val poms = allJavaProjects.filter(TestProjectDescriptor).filter[isEclipsePluginProject].map[pom]
-		poms.forEach[
+		for (it : poms)
 			assertTrue(content.contains("failIfNoTests"))
-		]
 	}
 	
 	@Test
@@ -312,9 +309,8 @@ class WizardConfigurationTest {
 		val parentGradle = config.parentProject.buildGradle.content
 		assertTrue(parentGradle.contains("sourceCompatibility = '1.6'"))
 		assertTrue(parentGradle.contains("targetCompatibility = '1.6'"))
-		allJavaProjects.map[manifest].forEach[
+		for (it : allJavaProjects.map[manifest])
 			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.6"))
-		]
 	}
 	
 	@Test
@@ -326,9 +322,8 @@ class WizardConfigurationTest {
 		val parentGradle = config.parentProject.buildGradle.content
 		assertTrue(parentGradle.contains("sourceCompatibility = '1.8'"))
 		assertTrue(parentGradle.contains("targetCompatibility = '1.8'"))
-		allJavaProjects.map[manifest].forEach[
+		for (it : allJavaProjects.map[manifest])
 			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8"))
-		]
 	}
 	
 	def allJavaProjects() {

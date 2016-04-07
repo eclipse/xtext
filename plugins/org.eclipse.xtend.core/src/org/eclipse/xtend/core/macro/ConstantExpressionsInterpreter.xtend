@@ -254,9 +254,9 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 				JvmArrayType: expectedRawType.componentType as JvmEnumerationType
 			}
 			val copy = new HashMap(ctx.visibleFeatures)
-			enumType.literals.forEach [
-				copy.put(simpleName, it)
-			]
+			for (it : enumType.literals) {
+					copy.put(simpleName, it)
+				}
 			copy
 		} else {
 			ctx.visibleFeatures

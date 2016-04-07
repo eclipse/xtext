@@ -27,7 +27,9 @@ class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuilder impl
 
 	def dispatch void build(XtendFile xtendFile, IXtendOutlineContext context) {
 		xtendFile.buildPackageAndImportSection(context)
-		xtendFile.xtendTypes.forEach[buildXtendType(context)]
+		for (it : xtendFile.xtendTypes) {
+			buildXtendType(context)
+		}
 	}
 
 	def dispatch void build(XtendTypeDeclaration xtendType, IXtendOutlineContext context) {
@@ -49,7 +51,9 @@ class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuilder impl
 			val membersContext = context.newContext
 			xtendType.buildMembers(inferredType, inferredType, membersContext)
 		} else {
-			xtendType.members.forEach[buildEObjectNode(context)]
+			for (it : xtendType.members) {
+				buildEObjectNode(context)
+			}
 		}
 	}
 

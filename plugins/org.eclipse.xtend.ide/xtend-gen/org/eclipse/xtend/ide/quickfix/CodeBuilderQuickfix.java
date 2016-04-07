@@ -37,8 +37,6 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
@@ -167,43 +165,35 @@ public class CodeBuilderQuickfix {
         final StringBuilderBasedAppendable content = new StringBuilderBasedAppendable(importManager);
         builder.build(content);
         List<String> _imports = importManager.getImports();
-        final Procedure1<String> _function = new Procedure1<String>() {
-          @Override
-          public void apply(final String it) {
-            try {
-              ICompilationUnit _compilationUnit = type.getCompilationUnit();
-              NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-              _compilationUnit.createImport(it, null, _nullProgressMonitor);
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
-          }
-        };
-        IterableExtensions.<String>forEach(_imports, _function);
+        for (final String it_1 : _imports) {
+          ICompilationUnit _compilationUnit = type.getCompilationUnit();
+          NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+          _compilationUnit.createImport(it_1, null, _nullProgressMonitor);
+        }
         Object _switchResult = null;
         boolean _matched = false;
         if (!_matched) {
           if (builder instanceof JavaFieldBuilder) {
             _matched=true;
             String _string = content.toString();
-            NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-            _switchResult = type.createField(_string, null, true, _nullProgressMonitor);
+            NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+            _switchResult = type.createField(_string, null, true, _nullProgressMonitor_1);
           }
         }
         if (!_matched) {
           if (builder instanceof JavaConstructorBuilder) {
             _matched=true;
             String _string = content.toString();
-            NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-            _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor);
+            NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+            _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor_1);
           }
         }
         if (!_matched) {
           if (builder instanceof JavaMethodBuilder) {
             _matched=true;
             String _string = content.toString();
-            NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-            _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor);
+            NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+            _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor_1);
           }
         }
         if (!_matched) {
@@ -213,14 +203,14 @@ public class CodeBuilderQuickfix {
         boolean _notEquals = (!Objects.equal(element, null));
         if (_notEquals) {
           JdtHyperlink _jdtHyperlink = new JdtHyperlink();
-          final Procedure1<JdtHyperlink> _function_1 = new Procedure1<JdtHyperlink>() {
+          final Procedure1<JdtHyperlink> _function = new Procedure1<JdtHyperlink>() {
             @Override
             public void apply(final JdtHyperlink it) {
               it.setJavaElement(((IMember)element));
               it.open();
             }
           };
-          ObjectExtensions.<JdtHyperlink>operator_doubleArrow(_jdtHyperlink, _function_1);
+          ObjectExtensions.<JdtHyperlink>operator_doubleArrow(_jdtHyperlink, _function);
         }
       }
     };

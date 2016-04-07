@@ -68,7 +68,9 @@ class StatemachineFormatter extends AbstractFormatter2 {
 	}
 
 	def dispatch void format(Condition condition, extension IFormattableDocument document) {
-		condition.regionFor.keywords(conditionAccess.andKeyword_1_0).forEach[prepend[oneSpace].append[oneSpace]]
+		for (it : condition.regionFor.keywords(conditionAccess.andKeyword_1_0)) {
+			prepend[oneSpace].append[oneSpace]
+		}
 		for (event : condition.events) {
 			format(event, document);
 		}

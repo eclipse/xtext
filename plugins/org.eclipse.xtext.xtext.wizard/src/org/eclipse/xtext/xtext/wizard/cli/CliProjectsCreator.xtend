@@ -23,15 +23,14 @@ class CliProjectsCreator implements ProjectsCreator {
 	@Accessors String lineDelimiter
 
 	override createProjects(WizardConfiguration config) {
-		config.enabledProjects.forEach [
+		for (it : config.enabledProjects)
 			createProject
-		]
 	}
 
 	def createProject(ProjectDescriptor project) {
 		val projectRoot = new File(project.location)
 		projectRoot.mkdirs
-		project.files.forEach [
+		for (it : project.files) {
 			val projectRelativePath = project.config.sourceLayout.getPathFor(outlet) + "/" + relativePath
 			val file = new File(projectRoot, projectRelativePath)
 			file.parentFile.mkdirs
@@ -47,10 +46,9 @@ class CliProjectsCreator implements ProjectsCreator {
 			if(executable) {
 				file.executable = true
 			}
-		]
-		project.sourceFolders.forEach [
+		}
+		for (it : project.sourceFolders)
 			new File(projectRoot, it).mkdirs
-		]
 	}
 
 }

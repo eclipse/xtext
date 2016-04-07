@@ -48,9 +48,9 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 		}
 		if (computedSuperType != null) {
 			computedSuperType => [ superType |
-				typeReferences.forEach [
+				for (it : typeReferences) {
 					assertEquals(superTypeAndParam.key, conformanceComputer.getCommonSuperType(#[it, superType], superType.owner)?.simpleName)
-				]
+				}
 			]
 		}
 		if (computedSuperType != null) {

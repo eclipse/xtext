@@ -162,20 +162,16 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         final Procedure1<LightweightTypeReference> _function_1 = new Procedure1<LightweightTypeReference>() {
           @Override
           public void apply(final LightweightTypeReference superType) {
-            final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
-              @Override
-              public void apply(final LightweightTypeReference it) {
-                String _key = superTypeAndParam.getKey();
-                ITypeReferenceOwner _owner = superType.getOwner();
-                LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(it, superType)), _owner);
-                String _simpleName = null;
-                if (_commonSuperType!=null) {
-                  _simpleName=_commonSuperType.getSimpleName();
-                }
-                Assert.assertEquals(_key, _simpleName);
+            for (final LightweightTypeReference it : typeReferences) {
+              String _key = superTypeAndParam.getKey();
+              ITypeReferenceOwner _owner = superType.getOwner();
+              LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(it, superType)), _owner);
+              String _simpleName = null;
+              if (_commonSuperType!=null) {
+                _simpleName=_commonSuperType.getSimpleName();
               }
-            };
-            IterableExtensions.<LightweightTypeReference>forEach(typeReferences, _function);
+              Assert.assertEquals(_key, _simpleName);
+            }
           }
         };
         ObjectExtensions.<LightweightTypeReference>operator_doubleArrow(computedSuperType, _function_1);

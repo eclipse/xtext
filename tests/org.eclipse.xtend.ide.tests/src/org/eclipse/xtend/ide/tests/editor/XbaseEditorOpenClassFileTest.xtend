@@ -271,7 +271,9 @@ import org.junit.Before
 			val jarin = jarInputStream(listOfContents.entrySet.map[key->value].toList)
 			return ByteStreams.toByteArray(jarin)
 		} finally {
-			listOfContents.values.forEach[close]
+			for (it : listOfContents.values) {
+				close
+			}
 			project.delete(true, true, null)
 		}
 	}

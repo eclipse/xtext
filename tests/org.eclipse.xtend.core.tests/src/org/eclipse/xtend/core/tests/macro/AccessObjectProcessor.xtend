@@ -60,15 +60,15 @@ class AccessObjectProcessor implements TransformationParticipant<MutableClassDec
 	override doTransform(List<? extends MutableClassDeclaration> annotatedSourceClasses, 
 		extension TransformationContext ctx
 	) {
-		annotatedSourceClasses.forEach [
-			it.declaredFields.forEach [field |
+		for (it : annotatedSourceClasses) {
+			for (field : it.declaredFields) {
 				field.declaringType.addMethod('get'+field.simpleName.toFirstUpper) [
 					returnType = field.type 
 					body = ['''
 						return this.«field.simpleName»;
 					''']
 				]
-			]
+			}
 			
 			val pkg = it.qualifiedName.substring(0, it.qualifiedName.length-it.simpleName.length)
 			
@@ -95,18 +95,18 @@ class AccessObjectProcessor implements TransformationParticipant<MutableClassDec
 				gIfcs.add(ser)
 				g.setImplementedInterfaces(gIfcs)
 			}
-		]
+		}
 	}
 	
 	override doRegisterGlobals(List<? extends ClassDeclaration> annotatedSourceElements, 
 		extension RegisterGlobalsContext ctx
 	) {
-		annotatedSourceElements.forEach [
+		for (it : annotatedSourceElements) {
 			val pkg = it.qualifiedName.substring(0, it.qualifiedName.length-it.simpleName.length)
 			val PVersionName = pkg+"P"+it.simpleName;
 			val GVersionName = pkg+"G"+it.simpleName;
 			ctx.registerClass(PVersionName)
 			ctx.registerClass(GVersionName)
-		]
+		}
 	}
 }

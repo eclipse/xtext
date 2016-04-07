@@ -120,18 +120,18 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 
 		bindFactory.contributeTo(language.ideaGenModule)
 
-		#[
+		val toSrc = #[
 			grammar.compileStandaloneSetup,
 			grammar.compileIdeaSetup,
 			grammar.compileCompletionContributor,
 			grammar.compileFileType,
 			grammar.compileFacetConfiguration,
 			grammar.compileColorSettingsPage
-		].forEach[
-			writeTo(projectConfig.ideaPlugin.src)
 		]
+		for (it : toSrc)
+			writeTo(projectConfig.ideaPlugin.src)
 
-		#[
+		val toSrcGen = #[
 			grammar.compileServicesISetup,
 			grammar.compileAbstractCompletionContributor,
 			grammar.compileLanguage,
@@ -150,9 +150,9 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 			grammar.compilePomDeclarationSearcher,
 			grammar.compileFacetType,
 			grammar.compileBaseColorSettingsPage
-		].forEach[
-			writeTo(projectConfig.ideaPlugin.srcGen)
 		]
+		for (it : toSrcGen)
+			writeTo(projectConfig.ideaPlugin.srcGen)
 
 		if (deployable) {
 			val pluginXml = grammar.compilePluginXml

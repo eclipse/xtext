@@ -37,8 +37,9 @@ class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
 		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooClass, new NullProgressMonitor)
 		assertEquals(3, dependentElementURIs.size);
 		val fooFunction = fooClass.members.get(0) as XtendFunction
-		newArrayList(fooFunction, fooClass.inferredType, fooClass.inferredConstructor)
-			.forEach[assertTrue(it.toString, dependentElementURIs.exists[ element | element == it.URI])]
+		for (it : newArrayList(fooFunction, fooClass.inferredType, fooClass.inferredConstructor)) {
+			assertTrue(it.toString, dependentElementURIs.exists[element|element == it.URI])
+		}
 	}
 	
 	@Test def testPolymorphicDispatch() {
@@ -55,7 +56,8 @@ class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
 		val fooMethod1 = fooClass.members.get(1)
 		val dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(fooMethod1, new NullProgressMonitor)
 		assertEquals(5, dependentElementURIs.size);
-		(fooClass.members + fooClass.inferredType.members).filter[!(it instanceof JvmConstructor)].toList
-			.forEach[assertTrue(it.toString, dependentElementURIs.exists[ element | element == it.URI])]
+		for (it : (fooClass.members + fooClass.inferredType.members).filter[!(it instanceof JvmConstructor)].toList) {
+			assertTrue(it.toString, dependentElementURIs.exists[element|element == it.URI])
+		}
 	}
 }

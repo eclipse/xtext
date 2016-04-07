@@ -74,7 +74,9 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {
 				val unbound = mapping.get(key).typeReference as UnboundTypeReference
-				unbound.getAllHints.forEach [ assertEquals( BoundTypeArgumentSource::INFERRED_LATER, source ) ]
+				for (it : unbound.getAllHints) {
+					assertEquals(BoundTypeArgumentSource::INFERRED_LATER, source)
+				}
 				return unbound.getAllHints
 			}
 		}

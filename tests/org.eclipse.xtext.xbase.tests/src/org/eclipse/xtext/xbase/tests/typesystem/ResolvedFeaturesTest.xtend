@@ -118,9 +118,9 @@ class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 		val resolvedOperations = typeof(ArrayList).toResolvedOperations
 		val all = resolvedOperations.getAllOperations
 		assertFalse(all.empty)
-		all.forEach [
+		for (it : all) {
 			assertFalse(declaration.isAbstract)
-		]
+		}
 	}
 	
 	@Test
@@ -158,7 +158,7 @@ class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 		val resolvedOperations = typeof(SoftReference).toResolvedOperations
 		assertEquals(1, resolvedOperations.getDeclaredOperations.size)
 		assertEquals(2, resolvedOperations.getDeclaredConstructors.size)
-		resolvedOperations.getDeclaredConstructors.forEach [
+		for (it : resolvedOperations.getDeclaredConstructors) {
 			switch(declaration.parameters.size) {
 				case 1: {
 					assertEquals("SoftReference(T)", resolvedSignature)
@@ -170,7 +170,7 @@ class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 				}
 				default: fail("Unexpected constructor: " + it)
 			}
-		]
+		}
 	}
 	
 	
@@ -179,7 +179,7 @@ class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 		val resolvedOperations = "null as java.lang.ref.SoftReference<String>".toResolvedOperations
 		assertEquals(1, resolvedOperations.getDeclaredOperations.size)
 		assertEquals(2, resolvedOperations.getDeclaredConstructors.size)
-		resolvedOperations.getDeclaredConstructors.forEach [
+		for (it : resolvedOperations.getDeclaredConstructors) {
 			switch(declaration.parameters.size) {
 				case 1: {
 					assertEquals("SoftReference(java.lang.String)", resolvedSignature)
@@ -191,7 +191,7 @@ class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 				}
 				default: fail("Unexpected constructor: " + it)
 			}
-		]
+		}
 	}
 	
 	@Test

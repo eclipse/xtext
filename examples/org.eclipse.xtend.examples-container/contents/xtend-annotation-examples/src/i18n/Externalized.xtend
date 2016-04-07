@@ -64,7 +64,9 @@ class ExternalizedProcessor extends AbstractClassProcessor implements CodeGenera
 				primarySourceElement = field
 			]
 		}
-		annotatedClass.declaredFields.forEach[remove]
+		for (it : annotatedClass.declaredFields) {
+			remove
+		}
 
 		//private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 		annotatedClass.addField("RESOURCE_BUNDLE") [

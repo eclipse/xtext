@@ -59,7 +59,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
@@ -267,16 +266,13 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     JavaFileAccess _compileFileType = this.compileFileType(grammar);
     JavaFileAccess _compileFacetConfiguration = this.compileFacetConfiguration(grammar);
     JavaFileAccess _compileColorSettingsPage = this.compileColorSettingsPage(grammar);
-    final Procedure1<JavaFileAccess> _function = new Procedure1<JavaFileAccess>() {
-      @Override
-      public void apply(final JavaFileAccess it) {
-        IXtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
-        ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
-        IXtextGeneratorFileSystemAccess _src = _ideaPlugin.getSrc();
-        it.writeTo(_src);
-      }
-    };
-    IterableExtensions.<JavaFileAccess>forEach(Collections.<JavaFileAccess>unmodifiableList(CollectionLiterals.<JavaFileAccess>newArrayList(_compileStandaloneSetup, _compileIdeaSetup, _compileCompletionContributor, _compileFileType, _compileFacetConfiguration, _compileColorSettingsPage)), _function);
+    final List<JavaFileAccess> toSrc = Collections.<JavaFileAccess>unmodifiableList(CollectionLiterals.<JavaFileAccess>newArrayList(_compileStandaloneSetup, _compileIdeaSetup, _compileCompletionContributor, _compileFileType, _compileFacetConfiguration, _compileColorSettingsPage));
+    for (final JavaFileAccess it : toSrc) {
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      ISubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
+      IXtextGeneratorFileSystemAccess _src = _ideaPlugin_1.getSrc();
+      it.writeTo(_src);
+    }
     TextFileAccess _compileServicesISetup = this.compileServicesISetup(grammar);
     JavaFileAccess _compileAbstractCompletionContributor = this.compileAbstractCompletionContributor(grammar);
     JavaFileAccess _compileLanguage = this.compileLanguage(grammar);
@@ -295,34 +291,31 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     JavaFileAccess _compilePomDeclarationSearcher = this.compilePomDeclarationSearcher(grammar);
     JavaFileAccess _compileFacetType = this.compileFacetType(grammar);
     JavaFileAccess _compileBaseColorSettingsPage = this.compileBaseColorSettingsPage(grammar);
-    final Procedure1<TextFileAccess> _function_1 = new Procedure1<TextFileAccess>() {
-      @Override
-      public void apply(final TextFileAccess it) {
-        IXtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
-        ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
-        IXtextGeneratorFileSystemAccess _srcGen = _ideaPlugin.getSrcGen();
-        it.writeTo(_srcGen);
-      }
-    };
-    IterableExtensions.forEach(Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)), _function_1);
+    final List<? extends TextFileAccess> toSrcGen = Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage));
+    for (final TextFileAccess it_1 : toSrcGen) {
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      ISubProjectConfig _ideaPlugin_2 = _projectConfig_2.getIdeaPlugin();
+      IXtextGeneratorFileSystemAccess _srcGen = _ideaPlugin_2.getSrcGen();
+      it_1.writeTo(_srcGen);
+    }
     if (this.deployable) {
       final TextFileAccess pluginXml = this.compilePluginXml(grammar);
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ISubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
-      IXtextGeneratorFileSystemAccess _metaInf = _ideaPlugin_1.getMetaInf();
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      ISubProjectConfig _ideaPlugin_3 = _projectConfig_3.getIdeaPlugin();
+      IXtextGeneratorFileSystemAccess _metaInf = _ideaPlugin_3.getMetaInf();
       String _path = pluginXml.getPath();
       boolean _isFile = _metaInf.isFile(_path);
       boolean _not_1 = (!_isFile);
       if (_not_1) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        ISubProjectConfig _ideaPlugin_2 = _projectConfig_2.getIdeaPlugin();
-        IXtextGeneratorFileSystemAccess _metaInf_1 = _ideaPlugin_2.getMetaInf();
+        IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+        ISubProjectConfig _ideaPlugin_4 = _projectConfig_4.getIdeaPlugin();
+        IXtextGeneratorFileSystemAccess _metaInf_1 = _ideaPlugin_4.getMetaInf();
         pluginXml.writeTo(_metaInf_1);
       }
       TextFileAccess _compilePluginGenXml = this.compilePluginGenXml(grammar);
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      ISubProjectConfig _ideaPlugin_3 = _projectConfig_3.getIdeaPlugin();
-      IXtextGeneratorFileSystemAccess _metaInf_2 = _ideaPlugin_3.getMetaInf();
+      IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+      ISubProjectConfig _ideaPlugin_5 = _projectConfig_5.getIdeaPlugin();
+      IXtextGeneratorFileSystemAccess _metaInf_2 = _ideaPlugin_5.getMetaInf();
       _compilePluginGenXml.writeTo(_metaInf_2);
     }
   }

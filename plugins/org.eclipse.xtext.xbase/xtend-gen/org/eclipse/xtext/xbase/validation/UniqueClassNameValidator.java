@@ -38,7 +38,6 @@ import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
@@ -84,13 +83,9 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
       if (_equals_1) {
         EList<EObject> _contents_1 = resource.getContents();
         Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents_1, JvmDeclaredType.class);
-        final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
-          @Override
-          public void apply(final JvmDeclaredType it) {
-            UniqueClassNameValidator.this.doCheckUniqueName(it);
-          }
-        };
-        IterableExtensions.<JvmDeclaredType>forEach(_filter, _function);
+        for (final JvmDeclaredType it : _filter) {
+          this.doCheckUniqueName(it);
+        }
       }
     }
   }

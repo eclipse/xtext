@@ -37,7 +37,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -120,14 +119,10 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
         LightweightTypeReference _typeReference = _get.getTypeReference();
         final UnboundTypeReference unbound = ((UnboundTypeReference) _typeReference);
         List<LightweightBoundTypeArgument> _allHints = unbound.getAllHints();
-        final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
-          @Override
-          public void apply(final LightweightBoundTypeArgument it) {
-            BoundTypeArgumentSource _source = it.getSource();
-            Assert.assertEquals(BoundTypeArgumentSource.INFERRED_LATER, _source);
-          }
-        };
-        IterableExtensions.<LightweightBoundTypeArgument>forEach(_allHints, _function);
+        for (final LightweightBoundTypeArgument it : _allHints) {
+          BoundTypeArgumentSource _source = it.getSource();
+          Assert.assertEquals(BoundTypeArgumentSource.INFERRED_LATER, _source);
+        }
         return unbound.getAllHints();
       }
     }
@@ -136,13 +131,13 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     _builder.append(typeParamName, "");
     _builder.append(" in ");
     Set<JvmTypeParameter> _keySet = mapping.keySet();
-    final Function1<JvmTypeParameter, String> _function_1 = new Function1<JvmTypeParameter, String>() {
+    final Function1<JvmTypeParameter, String> _function = new Function1<JvmTypeParameter, String>() {
       @Override
       public String apply(final JvmTypeParameter it) {
         return it.getSimpleName();
       }
     };
-    Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function_1);
+    Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function);
     _builder.append(_map, "");
     String _string = _builder.toString();
     Assert.fail(_string);

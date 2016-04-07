@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 
 /**
@@ -177,32 +176,20 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
           if (_new!=null) {
             _exportedObjects=_new.getExportedObjects();
           }
-          if (_exportedObjects!=null) {
-            final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
-              @Override
-              public void apply(final IEObjectDescription it) {
-                QualifiedName _name = it.getName();
-                String _string = _name.toString();
-                names.add(_string);
-              }
-            };
-            IterableExtensions.<IEObjectDescription>forEach(_exportedObjects, _function);
+          for (final IEObjectDescription it_1 : _exportedObjects) {
+            QualifiedName _name = it_1.getName();
+            String _string = _name.toString();
+            names.add(_string);
           }
           IResourceDescription _old = it.getOld();
           Iterable<IEObjectDescription> _exportedObjects_1 = null;
           if (_old!=null) {
             _exportedObjects_1=_old.getExportedObjects();
           }
-          if (_exportedObjects_1!=null) {
-            final Procedure1<IEObjectDescription> _function_1 = new Procedure1<IEObjectDescription>() {
-              @Override
-              public void apply(final IEObjectDescription it) {
-                QualifiedName _name = it.getName();
-                String _string = _name.toString();
-                names.add(_string);
-              }
-            };
-            IterableExtensions.<IEObjectDescription>forEach(_exportedObjects_1, _function_1);
+          for (final IEObjectDescription it_2 : _exportedObjects_1) {
+            QualifiedName _name_1 = it_2.getName();
+            String _string_1 = _name_1.toString();
+            names.add(_string_1);
           }
           _xblockexpression = names;
         }

@@ -23,9 +23,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -96,13 +94,9 @@ public class Oven extends Assert {
               _matched=true;
               this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
               EList<JvmFormalParameter> _implicitFormalParameters = ((XClosure)content).getImplicitFormalParameters();
-              final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
-                @Override
-                public void apply(final JvmFormalParameter it) {
-                  Oven.this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
-                }
-              };
-              IterableExtensions.<JvmFormalParameter>forEach(_implicitFormalParameters, _function);
+              for (final JvmFormalParameter it : _implicitFormalParameters) {
+                this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
+              }
             }
           }
           if (!_matched) {

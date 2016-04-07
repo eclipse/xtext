@@ -84,11 +84,11 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
-		cachedPackageFragmentRootData.entrySet.forEach [
+		for (it : cachedPackageFragmentRootData.entrySet) {
 			assertEquals(key, 1, value.associatedRoots.size)
 			val head = value.associatedRoots.keySet.head
 			assertTrue(head, head.startsWith('=testProject/'))
-		]
+		}
 
 		val project2 = createJavaProject('testProject2')
 		addJarToClasspath(project2, file)
@@ -96,20 +96,20 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
-		cachedPackageFragmentRootData.entrySet.forEach [
+		for (it : cachedPackageFragmentRootData.entrySet) {
 			assertEquals(key, 2, value.associatedRoots.size)
 			val head = value.associatedRoots.keySet.head
 			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
 			val head2 = value.associatedRoots.keySet.tail.head
 			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
-		]
+		}
 
 		removeJarFromClasspath(project, file);
 		
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
-		cachedPackageFragmentRootData.entrySet.forEach [
+		for (it : cachedPackageFragmentRootData.entrySet) {
 			if (key.contains("foo.jar")) {
 				assertEquals(key, 1, value.associatedRoots.size)
 				val head = value.associatedRoots.keySet.head
@@ -121,7 +121,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 				val head2 = value.associatedRoots.keySet.tail.head
 				assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
 			}
-		]
+		}
 
 		removeJarFromClasspath(project2, file);
 		
@@ -129,13 +129,13 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore, cachedPackageFragmentRootData.size)
 		assertNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
-		cachedPackageFragmentRootData.entrySet.forEach [
+		for (it : cachedPackageFragmentRootData.entrySet) {
 			assertEquals(key, 2, value.associatedRoots.size)
 			val head = value.associatedRoots.keySet.head
 			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
 			val head2 = value.associatedRoots.keySet.tail.head
 			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
-		]
+		}
 	}
 
 	@Test
@@ -198,24 +198,24 @@ class Storage2UriMapperJavaImplTest extends Assert {
 	def assertFirstProject(int sizeBefore) {
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
-		cachedPackageFragmentRootData.entrySet.forEach [
+		for (it : cachedPackageFragmentRootData.entrySet) {
 			assertEquals(key, 1, value.associatedRoots.size)
 			val head = value.associatedRoots.keySet.head
 			assertTrue(head, head.startsWith('=testProject/'))
-		]
+		}
 	}
 
 	def assertBothProjects(int sizeBefore) {
 		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
-		cachedPackageFragmentRootData.entrySet.forEach [
+		for (it : cachedPackageFragmentRootData.entrySet) {
 			assertEquals(key, 2, value.associatedRoots.size)
 			val head = value.associatedRoots.keySet.head
 			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
 			val head2 = value.associatedRoots.keySet.last
 			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
-		]
+		}
 	}
 
 	def createJar(IJavaProject project) {

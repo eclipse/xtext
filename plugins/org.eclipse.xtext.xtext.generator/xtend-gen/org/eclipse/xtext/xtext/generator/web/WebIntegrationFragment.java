@@ -36,7 +36,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
@@ -451,19 +450,15 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       }
     };
     Iterable<String> _filter = IterableExtensions.<String>filter(allKeywords, _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Matcher _matcher = wordKeywordPattern.matcher(it);
-        boolean _matches = _matcher.matches();
-        if (_matches) {
-          wordKeywords.add(it);
-        } else {
-          nonWordKeywords.add(it);
-        }
+    for (final String it : _filter) {
+      Matcher _matcher = wordKeywordPattern.matcher(it);
+      boolean _matches = _matcher.matches();
+      if (_matches) {
+        wordKeywords.add(it);
+      } else {
+        nonWordKeywords.add(it);
       }
-    };
-    IterableExtensions.<String>forEach(_filter, _function_1);
+    }
     Collections.<String>sort(wordKeywords);
     Collections.<String>sort(nonWordKeywords);
     final TextFileAccess jsFile = this.fileAccessFactory.createTextFile();

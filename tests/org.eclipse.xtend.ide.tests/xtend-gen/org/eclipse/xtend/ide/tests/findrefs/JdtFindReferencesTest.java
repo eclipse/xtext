@@ -1143,23 +1143,15 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               int _kind = ((MatchEvent)it).getKind();
               boolean _equals = (_kind == MatchEvent.ADDED);
               if (_equals) {
-                final Procedure1<Match> _function_1 = new Procedure1<Match>() {
-                  @Override
-                  public void apply(final Match it) {
-                    Object _element = it.getElement();
-                    elements.add(_element);
-                  }
-                };
-                IterableExtensions.<Match>forEach(matches, _function_1);
+                for (final Match it_1 : matches) {
+                  Object _element = it_1.getElement();
+                  elements.add(_element);
+                }
               } else {
-                final Procedure1<Match> _function_2 = new Procedure1<Match>() {
-                  @Override
-                  public void apply(final Match it) {
-                    Object _element = it.getElement();
-                    elements.remove(_element);
-                  }
-                };
-                IterableExtensions.<Match>forEach(matches, _function_2);
+                for (final Match it_2 : matches) {
+                  Object _element_1 = it_2.getElement();
+                  elements.remove(_element_1);
+                }
               }
             }
           }

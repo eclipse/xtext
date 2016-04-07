@@ -90,17 +90,15 @@ public class MemberFromSuperImplementor {
           String _name = typeParam.getName();
           newTypeParam.setName(_name);
           List<LightweightTypeReference> _resolvedTypeParameterConstraints = overriddenOperation.getResolvedTypeParameterConstraints((idx).intValue());
-          final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
-            @Override
-            public void apply(final LightweightTypeReference it) {
+          for (final LightweightTypeReference it : _resolvedTypeParameterConstraints) {
+            {
               final JvmUpperBound upperBound = MemberFromSuperImplementor.this.typesFactory.createJvmUpperBound();
               JvmTypeReference _javaCompliantTypeReference = it.toJavaCompliantTypeReference();
               upperBound.setTypeReference(_javaCompliantTypeReference);
               EList<JvmTypeConstraint> _constraints = newTypeParam.getConstraints();
               _constraints.add(upperBound);
             }
-          };
-          IterableExtensions.<LightweightTypeReference>forEach(_resolvedTypeParameterConstraints, _function);
+          }
           typeParameters.add(newTypeParam);
         }
       };

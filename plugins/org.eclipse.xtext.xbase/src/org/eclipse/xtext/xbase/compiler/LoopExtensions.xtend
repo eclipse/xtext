@@ -24,10 +24,10 @@ class LoopExtensions {
 		val params = new LoopParams => loopInitializer
 		params.appendPrefix(appendable)
 		elements.head => procedure
-		elements.tail.forEach[
+		for (it : elements.tail) {
 			params.appendSeparator(appendable)
 			it => procedure
-		]
+		}
 		params.appendSuffix(appendable)
 	}
 

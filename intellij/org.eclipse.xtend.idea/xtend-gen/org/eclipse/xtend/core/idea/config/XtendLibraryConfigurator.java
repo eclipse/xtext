@@ -42,7 +42,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.MapExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.jetbrains.annotations.Nullable;
 
@@ -212,13 +211,9 @@ public class XtendLibraryConfigurator {
       final Procedure2<OrderRootType, List<String>> _function_3 = new Procedure2<OrderRootType, List<String>>() {
         @Override
         public void apply(final OrderRootType type, final List<String> roots) {
-          final Procedure1<String> _function = new Procedure1<String>() {
-            @Override
-            public void apply(final String it) {
-              libModel.addRoot(it, type);
-            }
-          };
-          IterableExtensions.<String>forEach(roots, _function);
+          for (final String it : roots) {
+            libModel.addRoot(it, type);
+          }
         }
       };
       MapExtensions.<OrderRootType, List<String>>forEach(_libraryRoots, _function_3);

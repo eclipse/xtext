@@ -36,14 +36,14 @@ class CliWizardIntegrationTest {
 	 */
 	static def void main(String[] args) {
 		val creator = newProjectCreator
-		projectConfigs.forEach [ config |
+		for (config : projectConfigs) {
 			val targetLocation = new File("testdata/wizard-expectations", config.baseName)
 			targetLocation.mkdirs
 			org.eclipse.xtext.util.Files.sweepFolder(targetLocation)
 			config.rootLocation = targetLocation.path
 			creator.createProjects(config)
 			println("Updating expectations for " + config.baseName)
-		]
+		}
 	}
 
 	static val projectConfigs = #[
@@ -126,10 +126,10 @@ class CliWizardIntegrationTest {
 	@Test
 	def testProjectCreation() {
 		creator = newProjectCreator
-		projectConfigs.forEach[config|
+		for (config : projectConfigs) {
 			this.config = config
 			validateCreatedProjects
-		]
+		}
 	}
 
 	private def void validateCreatedProjects() {
@@ -157,7 +157,8 @@ class CliWizardIntegrationTest {
 
 	private def void collectAllFiles(File root, List<File> children) {
 		if (root.isDirectory) {
-			root.listFiles.forEach[collectAllFiles(children)]
+			for (it : root.listFiles)
+				collectAllFiles(children)
 		} else {
 			children.add(root)
 		}
@@ -175,17 +176,15 @@ class CliWizardIntegrationTest {
 		val unexpectedFiles = Sets.difference(actualFiles, expectedFiles)
 		val comparableFiles = Sets.intersection(expectedFiles, actualFiles)
 
-		missingFiles.forEach [
+		for (it : missingFiles)
 			throw new ComparisonFailure('''Missing file: «relativePath»''', content, "")
-		]
-		unexpectedFiles.forEach [
+		for (it : unexpectedFiles)
 			throw new ComparisonFailure('''Unexpected file: «relativePath»''', "", content)
-		]
-		comparableFiles.forEach [
+		for (it : comparableFiles) {
 			val expectedContent = LineDelimiters.toUnix(expectedFilesByPath.get(relativePath).content)
 			val actualContent = LineDelimiters.toUnix(actualFilesByPath.get(relativePath).content)
 			assertEquals(relativePath, expectedContent, actualContent)
-		]
+		}
 	}
 
 	@Data

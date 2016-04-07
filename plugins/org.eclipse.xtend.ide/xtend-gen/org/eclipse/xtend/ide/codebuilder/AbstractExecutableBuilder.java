@@ -91,13 +91,9 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   @Override
   public void setContext(final EObject ctx) {
     super.setContext(ctx);
-    final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
-      @Override
-      public void apply(final AbstractParameterBuilder it) {
-        it.setContext(ctx);
-      }
-    };
-    IterableExtensions.<AbstractParameterBuilder>forEach(this.parameterBuilders, _function);
+    for (final AbstractParameterBuilder it : this.parameterBuilders) {
+      it.setContext(ctx);
+    }
   }
   
   public AbstractParameterBuilder newParameterBuilder() {

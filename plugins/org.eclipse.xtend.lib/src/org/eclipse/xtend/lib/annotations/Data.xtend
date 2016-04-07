@@ -49,12 +49,12 @@ class DataProcessor extends AbstractClassProcessor {
 		extension val toStringUtil = new ToStringProcessor.Util(context)
 		extension val requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context)
 
-		dataFields.forEach [
-			if ((primarySourceElement as FieldDeclaration).modifiers.contains(Modifier.VAR)){
+		for (it : dataFields) {
+			if ((primarySourceElement as FieldDeclaration).modifiers.contains(Modifier.VAR)) {
 				addError("Cannot use the 'var' keyword on a data field")
 			}
 			final = true
-		]
+		}
 		if (needsFinalFieldConstructor || findAnnotation(FinalFieldsConstructor.findTypeGlobally) !== null) {
 			addFinalFieldsConstructor
 		}
@@ -71,11 +71,11 @@ class DataProcessor extends AbstractClassProcessor {
 				addReflectiveToString(toStringConfig ?: new ToStringConfiguration)
 			}
 		}
-		dataFields.forEach [
+		for (it : dataFields) {
 			if (shouldAddGetter) {
 				addGetter(getterType?.toVisibility ?: Visibility.PUBLIC)
 			}
-		]
+		}
 	}
 
 	/**

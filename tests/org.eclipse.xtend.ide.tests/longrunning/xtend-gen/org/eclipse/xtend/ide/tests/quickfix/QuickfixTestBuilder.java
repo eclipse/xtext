@@ -253,16 +253,12 @@ public class QuickfixTestBuilder {
       };
       Iterable<String> _map_1 = IterableExtensions.<IssueResolution, String>map(_flatten, _function_1);
       final Set<String> actualLabels = IterableExtensions.<String>toSet(_map_1);
-      final Procedure1<String> _function_2 = new Procedure1<String>() {
-        @Override
-        public void apply(final String it) {
-          String _join = IterableExtensions.join(actualLabels, ", ");
-          String _plus = ((("Label \'" + it) + "\' missing. Got ") + _join);
-          boolean _contains = actualLabels.contains(it);
-          Assert.assertTrue(_plus, _contains);
-        }
-      };
-      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedLabels)), _function_2);
+      for (final String it : expectedLabels) {
+        String _join = IterableExtensions.join(actualLabels, ", ");
+        String _plus = ((("Label \'" + it) + "\' missing. Got ") + _join);
+        boolean _contains = actualLabels.contains(it);
+        Assert.assertTrue(_plus, _contains);
+      }
       _xblockexpression = this;
     }
     return _xblockexpression;
@@ -288,16 +284,12 @@ public class QuickfixTestBuilder {
       };
       Iterable<String> _map_1 = IterableExtensions.<IssueResolution, String>map(_flatten, _function_1);
       final Set<String> actualLabels = IterableExtensions.<String>toSet(_map_1);
-      final Procedure1<String> _function_2 = new Procedure1<String>() {
-        @Override
-        public void apply(final String it) {
-          String _join = IterableExtensions.join(actualLabels, ", ");
-          String _plus = ((("Label \'" + it) + "\' should not appear. Got ") + _join);
-          boolean _contains = actualLabels.contains(it);
-          Assert.assertFalse(_plus, _contains);
-        }
-      };
-      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(unExpectedLabels)), _function_2);
+      for (final String it : unExpectedLabels) {
+        String _join = IterableExtensions.join(actualLabels, ", ");
+        String _plus = ((("Label \'" + it) + "\' should not appear. Got ") + _join);
+        boolean _contains = actualLabels.contains(it);
+        Assert.assertFalse(_plus, _contains);
+      }
       _xblockexpression = this;
     }
     return _xblockexpression;
@@ -449,45 +441,37 @@ public class QuickfixTestBuilder {
   }
   
   public void tearDown() {
-    this.editor = null;
-    this._workbenchTestHelper.closeAllEditors(false);
-    Set<IFile> _files = this._workbenchTestHelper.getFiles();
-    final Procedure1<IFile> _function = new Procedure1<IFile>() {
-      @Override
-      public void apply(final IFile it) {
-        try {
-          NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-          it.delete(true, _nullProgressMonitor);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    try {
+      this.editor = null;
+      this._workbenchTestHelper.closeAllEditors(false);
+      Set<IFile> _files = this._workbenchTestHelper.getFiles();
+      for (final IFile it : _files) {
+        NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+        it.delete(true, _nullProgressMonitor);
       }
-    };
-    IterableExtensions.<IFile>forEach(_files, _function);
-    Set<IFile> _files_1 = this._workbenchTestHelper.getFiles();
-    _files_1.clear();
-    boolean _notEquals = (!Objects.equal(this.modifiedIssueCodes, null));
-    if (_notEquals) {
-      IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
-      final Procedure1<IPersistentPreferenceStore> _function_1 = new Procedure1<IPersistentPreferenceStore>() {
-        @Override
-        public void apply(final IPersistentPreferenceStore it) {
-          final Procedure1<String> _function = new Procedure1<String>() {
-            @Override
-            public void apply(final String code) {
+      Set<IFile> _files_1 = this._workbenchTestHelper.getFiles();
+      _files_1.clear();
+      boolean _notEquals = (!Objects.equal(this.modifiedIssueCodes, null));
+      if (_notEquals) {
+        IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
+        final Procedure1<IPersistentPreferenceStore> _function = new Procedure1<IPersistentPreferenceStore>() {
+          @Override
+          public void apply(final IPersistentPreferenceStore it) {
+            for (final String code : QuickfixTestBuilder.this.modifiedIssueCodes) {
               it.setToDefault(code);
             }
-          };
-          IterableExtensions.<String>forEach(QuickfixTestBuilder.this.modifiedIssueCodes, _function);
-          it.setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_SOURCE);
-          it.setToDefault(XbaseBuilderPreferenceAccess.PREF_JAVA_VERSION);
-        }
-      };
-      ObjectExtensions.<IPersistentPreferenceStore>operator_doubleArrow(_preferenceStore, _function_1);
-      this.modifiedIssueCodes = null;
+            it.setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_SOURCE);
+            it.setToDefault(XbaseBuilderPreferenceAccess.PREF_JAVA_VERSION);
+          }
+        };
+        ObjectExtensions.<IPersistentPreferenceStore>operator_doubleArrow(_preferenceStore, _function);
+        this.modifiedIssueCodes = null;
+      }
+      NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+      this._syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-    this._syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor);
   }
   
   public QuickfixTestBuilder removeFile(final String fileName) {

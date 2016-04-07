@@ -38,12 +38,12 @@ abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
 		assertEquals(errors.toString, 1, errors.size)
 		val singleError = errors.head as AbstractDiagnostic
 		assertEquals(singleError.message, IssueCodes.AMBIGUOUS_FEATURE_CALL, singleError.code)
-		messageParts.map[LineDelimiters.toUnix(it)].forEach [
+		for (it : messageParts.map[LineDelimiters.toUnix(it)]) {
 			val message = singleError.message
 			if (!message.contains(it)) {
 				assertEquals(it, message)
 			}
-		]
+		}
 		val firstType = file.xtendTypes.head
 		val firstMember = firstType.members.head as XtendFunction
 		val block = firstMember.expression as XBlockExpression

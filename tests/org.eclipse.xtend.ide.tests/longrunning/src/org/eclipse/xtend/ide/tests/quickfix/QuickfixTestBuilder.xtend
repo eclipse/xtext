@@ -106,17 +106,17 @@ class QuickfixTestBuilder {
 
 	def assertResolutionLabelsSubset(String... expectedLabels) {
 		val actualLabels = issuesAtCaret.map[resolutions].flatten.map[label].toSet
-		expectedLabels.forEach[
+		for (it : expectedLabels) {
 			assertTrue('Label \'' + it + '\' missing. Got ' + actualLabels.join(', '), actualLabels.contains(it))
-		]
+		}
 		this
 	}
 
 	def assertNoResolutionLabels(String... unExpectedLabels) {
 		val actualLabels = issuesAtCaret.map[resolutions].flatten.map[label].toSet
-		unExpectedLabels.forEach[
+		for (it : unExpectedLabels) {
 			assertFalse('Label \'' + it + '\' should not appear. Got ' + actualLabels.join(', '), actualLabels.contains(it))
-		]
+		}
 		this
 	}
 
@@ -178,13 +178,15 @@ class QuickfixTestBuilder {
 	def tearDown() {
 		editor = null
 		closeAllEditors(false)
-		files.forEach[ delete(true, new NullProgressMonitor) ]
+		for (it : files) {
+			delete(true, new NullProgressMonitor)
+		}
 		files.clear
 		if (modifiedIssueCodes != null) {
 			preferenceStore => [
-				modifiedIssueCodes.forEach [ code |
+				for (code : modifiedIssueCodes) {
 					setToDefault(code)
-				]
+				}
 				setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_SOURCE)
 				setToDefault(XbaseBuilderPreferenceAccess.PREF_JAVA_VERSION)
 			]

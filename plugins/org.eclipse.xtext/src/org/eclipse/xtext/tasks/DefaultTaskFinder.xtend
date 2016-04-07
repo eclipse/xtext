@@ -46,10 +46,10 @@ class DefaultTaskFinder implements ITaskFinder {
 		if (node.canContainTaskTags) {
 			//TODO strip comment characters before parsing, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=380449#c13
 			val tasks = parser.parseTasks(node.text, taskTags)
-			tasks.forEach [
+			for (it : tasks) {
 				offset = offset + node.offset
 				lineNumber = lineNumber + node.startLine - 1
-			]
+			}
 			return tasks
 		}
 		return #[]

@@ -164,7 +164,9 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		''').asCompilationUnit [ 
 			val c = sourceTypeDeclarations.head as ClassDeclaration
 			val mutable = typeLookup.findClass(c.qualifiedName)
-			mutable.declaredMembers.forEach[ remove ]
+			for (it : mutable.declaredMembers) {
+				remove
+			}
 			assertTrue(mutable.declaredMembers.empty)
 		]
 	}
