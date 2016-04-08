@@ -511,21 +511,19 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public boolean foo(final int x) {
 			    boolean _switchResult = false;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      boolean _or = false;
-			      final Function0<Boolean> _function = () -> {
-			        return Boolean.valueOf((1 == x));
-			      };
-			      Boolean _apply = _function.apply();
-			      if ((_apply).booleanValue()) {
-			        _or = true;
-			      } else {
-			        _or = (x == 2);
-			      }
-			      if (_or) {
-			        _matched=true;
-			        _switchResult = true;
-			      }
+			    boolean _or = false;
+			    final Function0<Boolean> _function = () -> {
+			      return Boolean.valueOf((1 == x));
+			    };
+			    Boolean _apply = _function.apply();
+			    if ((_apply).booleanValue()) {
+			      _or = true;
+			    } else {
+			      _or = (x == 2);
+			    }
+			    if (_or) {
+			      _matched=true;
+			      _switchResult = true;
 			    }
 			    if (!_matched) {
 			      _switchResult = false;
@@ -556,14 +554,12 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			    Function1<? super Integer, ?> _switchResult = null;
 			    final Object _switchValue = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (Objects.equal(_switchValue, null)) {
-			        _matched=true;
-			        final Function1<Object, Object> _function = (Object it) -> {
-			          return it;
-			        };
-			        _switchResult = _function;
-			      }
+			    if (Objects.equal(_switchValue, null)) {
+			      _matched=true;
+			      final Function1<Object, Object> _function = (Object it) -> {
+			        return it;
+			      };
+			      _switchResult = _function;
 			    }
 			    if (!_matched) {
 			      if (Objects.equal(_switchValue, null)) {
@@ -633,15 +629,13 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			    boolean _switchResult = false;
 			    final int x = 1;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      final Function0<Integer> _function = () -> {
-			        return Integer.valueOf(1);
-			      };
-			      Integer _apply = _function.apply();
-			      if (Objects.equal(x, _apply)) {
-			        _matched=true;
-			        _switchResult = true;
-			      }
+			    final Function0<Integer> _function = () -> {
+			      return Integer.valueOf(1);
+			    };
+			    Integer _apply = _function.apply();
+			    if (Objects.equal(x, _apply)) {
+			      _matched=true;
+			      _switchResult = true;
 			    }
 			    return _switchResult;
 			  }
@@ -1427,16 +1421,14 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			    for (final String volatile_ : synchronized_) {
 			      final String continue_ = volatile_;
 			      boolean _matched = false;
-			      if (!_matched) {
-			        int _length = continue_.length();
-			        boolean _greaterThan = (_length > 2);
-			        if (_greaterThan) {
-			          _matched=true;
-			          final Consumer<String> _function = (String break_) -> {
-			            (break_ + continue_).toString();
-			          };
-			          synchronized_.forEach(_function);
-			        }
+			      int _length = continue_.length();
+			      boolean _greaterThan = (_length > 2);
+			      if (_greaterThan) {
+			        _matched=true;
+			        final Consumer<String> _function = (String break_) -> {
+			          (break_ + continue_).toString();
+			        };
+			        synchronized_.forEach(_function);
 			      }
 			    }
 			  }
