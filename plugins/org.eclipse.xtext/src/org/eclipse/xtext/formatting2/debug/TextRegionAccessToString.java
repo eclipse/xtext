@@ -79,10 +79,12 @@ public class TextRegionAccessToString {
 	private static final String HIDDEN_PADDED = Strings.padEnd(HIDDEN, TITLE_WIDTH, ' ');
 	private static final String SEMANTIC_PADDED = Strings.padEnd("S", TITLE_WIDTH, ' ');
 
-	private Function<AbstractElement, String> grammarToString = new GrammarElementTitleSwitch().showRule()
-			.showAssignments().showQualified();
+	private Function<AbstractElement, String> grammarToString = new GrammarElementTitleSwitch().showRule().showAssignments()
+			.showQualified();
 
 	private boolean hideColumnExplanation = false;
+
+	private boolean hideIndentation = false;
 
 	private boolean hightlightOrigin = false;
 
@@ -99,6 +101,11 @@ public class TextRegionAccessToString {
 		return this;
 	}
 
+	public TextRegionAccessToString hideIndentation() {
+		this.hideIndentation = true;
+		return this;
+	}
+
 	public TextRegionAccessToString hightlightOrigin() {
 		this.hightlightOrigin = true;
 		return this;
@@ -106,6 +113,10 @@ public class TextRegionAccessToString {
 
 	public boolean isHideColumnExplanation() {
 		return hideColumnExplanation;
+	}
+
+	public boolean isHideIndentation() {
+		return hideIndentation;
 	}
 
 	public boolean isHightlightOrigin() {
@@ -169,6 +180,7 @@ public class TextRegionAccessToString {
 		}
 		for (String error : errors)
 			result.add(error, false);
+		int indentation = 0;
 		for (ITextSegment region : list) {
 			List<IEObjectRegion> previous = Lists.newArrayList();
 			List<IEObjectRegion> next = Lists.newArrayList();
@@ -188,13 +200,24 @@ public class TextRegionAccessToString {
 				Collections.sort(previous, AstRegionComparator.CHILDREN_FIRST);
 				Collections.sort(next, AstRegionComparator.CONTAINER_FIRST);
 			}
-			for (IEObjectRegion obj : previous)
-				result.add(EOBJECT_END_PADDED + toString(obj));
-			result.add(region, Joiner.on("\n").join(middle));
-			for (IEObjectRegion obj : next)
-				result.add(EOBJECT_BEGIN_PADDED + toString(obj));
+			for (IEObjectRegion obj : previous) {
+				indentation--;
+				result.add(indent(indentation) + EOBJECT_END_PADDED + toString(obj));
+			}
+			String indent = indent(indentation);
+			result.add(region, indent + Joiner.on("\n").join(middle).replace("\n", "\n" + indent));
+			for (IEObjectRegion obj : next) {
+				result.add(indent(indentation) + EOBJECT_BEGIN_PADDED + toString(obj));
+				indentation++;
+			}
 		}
 		return result.toString();
+	}
+
+	protected String indent(int indentation) {
+		if (hideIndentation)
+			return "";
+		return Strings.repeat(" ", indentation);
 	}
 
 	protected String toString(AbstractRule rule) {
