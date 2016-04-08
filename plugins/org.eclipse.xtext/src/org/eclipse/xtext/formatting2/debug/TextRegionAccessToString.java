@@ -217,7 +217,7 @@ public class TextRegionAccessToString {
 
 	protected String toString(IEObjectRegion region) {
 		EObject obj = region.getSemanticElement();
-		StringBuilder builder = new StringBuilder(Strings.padEnd(toClassWithName(obj), textWidth + 1, ' '));
+		StringBuilder builder = new StringBuilder(Strings.padEnd(toClassWithName(obj), textWidth, ' ') + " ");
 		EObject element = region.getGrammarElement();
 		if (element instanceof AbstractElement)
 			builder.append(grammarToString.apply((AbstractElement) element));
