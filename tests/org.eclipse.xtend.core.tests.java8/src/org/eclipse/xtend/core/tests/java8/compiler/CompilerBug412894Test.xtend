@@ -41,11 +41,9 @@ class CompilerBug412894Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    final ArrayList<String> list = CollectionLiterals.<String>newArrayList();
 			    final Consumer<String> _function = (String it) -> {
 			      boolean _matched = false;
-			      if (!_matched) {
-			        if (it instanceof String) {
-			          _matched=true;
-			          list.add(it);
-			        }
+			      if (it instanceof String) {
+			        _matched=true;
+			        list.add(it);
 			      }
 			    };
 			    list.forEach(_function);
@@ -79,11 +77,9 @@ class CompilerBug412894Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    final ArrayList<Serializable> list = CollectionLiterals.<Serializable>newArrayList();
 			    final Consumer<Serializable> _function = (Serializable it) -> {
 			      boolean _matched = false;
-			      if (!_matched) {
-			        if (it instanceof String) {
-			          _matched=true;
-			          list.add(it);
-			        }
+			      if (it instanceof String) {
+			        _matched=true;
+			        list.add(it);
 			      }
 			      if (!_matched) {
 			        if (it instanceof Number) {
@@ -122,12 +118,10 @@ class CompilerBug412894Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			    final ArrayList<Serializable> list = CollectionLiterals.<Serializable>newArrayList();
 			    final Consumer<Serializable> _function = (Serializable it) -> {
 			      boolean _matched = false;
-			      if (!_matched) {
-			        if (it instanceof Number) {
-			          _matched=true;
-			          String _string = ((Number)it).toString();
-			          list.add(_string);
-			        }
+			      if (it instanceof Number) {
+			        _matched=true;
+			        String _string = ((Number)it).toString();
+			        list.add(_string);
 			      }
 			    };
 			    list.forEach(_function);

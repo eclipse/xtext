@@ -646,15 +646,13 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m(final Object o) {
 			    Iterable<Object> _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof Boolean) {
-			        _matched=true;
-			        final Iterable<Object> _function = () -> {
-			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			          return _newArrayList.iterator();
-			        };
-			        _switchResult = _function;
-			      }
+			    if (o instanceof Boolean) {
+			      _matched=true;
+			      final Iterable<Object> _function = () -> {
+			        ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
+			        return _newArrayList.iterator();
+			      };
+			      _switchResult = _function;
 			    }
 			    if (!_matched) {
 			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
@@ -686,15 +684,13 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m(final Object o) {
 			    Iterable<Object> _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof Boolean) {
-			        _matched=true;
-			        final Iterable<Object> _function = () -> {
-			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			          return _newArrayList.iterator();
-			        };
-			        _switchResult = _function;
-			      }
+			    if (o instanceof Boolean) {
+			      _matched=true;
+			      final Iterable<Object> _function = () -> {
+			        ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
+			        return _newArrayList.iterator();
+			      };
+			      _switchResult = _function;
 			    }
 			    if (!_matched) {
 			      if (o instanceof String) {
@@ -730,15 +726,13 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m(final Object o) {
 			    Iterable<Object> _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof Boolean) {
-			        _matched=true;
-			        final Iterable<Object> _function = () -> {
-			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			          return _newArrayList.iterator();
-			        };
-			        _switchResult = _function;
-			      }
+			    if (o instanceof Boolean) {
+			      _matched=true;
+			      final Iterable<Object> _function = () -> {
+			        ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
+			        return _newArrayList.iterator();
+			      };
+			      _switchResult = _function;
 			    }
 			    if (!_matched) {
 			      if (o instanceof String) {
@@ -777,15 +771,13 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m(final Object o) {
 			    Iterable<Object> _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof Boolean) {
-			        _matched=true;
-			        final Iterable<Object> _function = () -> {
-			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			          return _newArrayList.iterator();
-			        };
-			        return _function;
-			      }
+			    if (o instanceof Boolean) {
+			      _matched=true;
+			      final Iterable<Object> _function = () -> {
+			        ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
+			        return _newArrayList.iterator();
+			      };
+			      return _function;
 			    }
 			    if (!_matched) {
 			      if (o instanceof String) {
@@ -871,15 +863,13 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			  public Iterable<Object> m(final Object o, final boolean b) {
 			    Iterable<Object> _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (o instanceof Boolean) {
-			        _matched=true;
-			        final Iterable<Object> _function = () -> {
-			          ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			          return _newArrayList.iterator();
-			        };
-			        _switchResult = _function;
-			      }
+			    if (o instanceof Boolean) {
+			      _matched=true;
+			      final Iterable<Object> _function = () -> {
+			        ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
+			        return _newArrayList.iterator();
+			      };
+			      _switchResult = _function;
 			    }
 			    if (!_matched) {
 			      if (b) {
