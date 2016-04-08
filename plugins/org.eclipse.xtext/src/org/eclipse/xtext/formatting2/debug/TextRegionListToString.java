@@ -76,7 +76,7 @@ public class TextRegionListToString {
 					result.add(offset + " " + length + " " + lines[0]);
 				} else {
 					String offsetSpace = Strings.repeat(" ", offsetDigits);
-					String lengthSpace = Strings.repeat(" ", offsetDigits);
+					String lengthSpace = Strings.repeat(" ", lengthDigits);
 					for (int i = 0; i < lines.length; i++) {
 						String first = i == 0 ? offset : offsetSpace;
 						String second = i == lines.length - 1 ? length : lengthSpace;
