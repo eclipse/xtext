@@ -191,7 +191,10 @@ public class NodeModelBasedRegionAccessBuilder {
 		if (tokens.getSemanticElement() == null) {
 			if (node.getParent() == null) {
 				tokens.setSemantcElement(resource.getContents().get(0));
-				tokens.setGrammarElement(node.getGrammarElement());
+				EObject element = node.getGrammarElement();
+				if (element instanceof Action)
+					element = ((ICompositeNode) node).getFirstChild().getGrammarElement();
+				tokens.setGrammarElement(element);
 			} else if (node.hasDirectSemanticElement()) {
 				tokens.setSemantcElement(node.getSemanticElement());
 				tokens.setGrammarElement(findGrammarElement(node, tokens.getSemanticElement()));
