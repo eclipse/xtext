@@ -150,19 +150,29 @@ ruleRoot returns [EObject current=null]
     {
     	newLeafNode(otherlv_8, grammarAccess.getRootAccess().getDigitSevenKeyword_6_0());
     }
-(
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getRootAccess().getRootActionAction_6_1_0(),
+            $current);
+    }
+)	otherlv_10='action' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getRootAccess().getActionKeyword_6_1_1());
+    }
+)?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRootAccess().getMixedMixedParserRuleCall_6_1_0()); 
+	        newCompositeNode(grammarAccess.getRootAccess().getMixedMixedParserRuleCall_6_2_0()); 
 	    }
-		lv_mixed_9_0=ruleMixed		{
+		lv_mixed_11_0=ruleMixed		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRootRule());
 	        }
        		set(
        			$current, 
        			"mixed",
-        		lv_mixed_9_0, 
+        		lv_mixed_11_0, 
         		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Mixed");
 	        afterParserOrEnumRuleCall();
 	    }

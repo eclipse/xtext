@@ -142,9 +142,25 @@ ruleRoot returns [Boolean current=false]
 			(
 				(
 					{
-						markComposite(elementTypeProvider.getRoot_MixedMixedParserRuleCall_6_1_0ElementType());
+						precedeComposite(elementTypeProvider.getRoot_RootActionAction_6_1_0ElementType());
+						doneComposite();
+						associateWithSemanticElement();
 					}
-					lv_mixed_9_0=ruleMixed
+				)
+				{
+					markLeaf(elementTypeProvider.getRoot_ActionKeyword_6_1_1ElementType());
+				}
+				otherlv_10='action'
+				{
+					doneLeaf(otherlv_10);
+				}
+			)?
+			(
+				(
+					{
+						markComposite(elementTypeProvider.getRoot_MixedMixedParserRuleCall_6_2_0ElementType());
+					}
+					lv_mixed_11_0=ruleMixed
 					{
 						doneComposite();
 						if(!$current) {

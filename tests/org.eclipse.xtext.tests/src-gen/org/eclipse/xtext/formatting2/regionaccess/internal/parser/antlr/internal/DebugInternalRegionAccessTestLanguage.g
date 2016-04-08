@@ -11,7 +11,7 @@ ruleRoot :
 	rulePrefixedUnassigned |
 	'5' ruleExpression |
 	'6' ruleMixed |
-	'7' ruleMixed
+	'7' 'action'? ruleMixed
 ;
 
 // Rule Simple

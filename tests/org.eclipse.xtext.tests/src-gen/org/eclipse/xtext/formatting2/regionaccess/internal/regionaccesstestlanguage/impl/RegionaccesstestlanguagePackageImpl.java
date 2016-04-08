@@ -24,6 +24,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguageFactory;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Unassigned;
 
@@ -97,6 +98,13 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * @generated
    */
   private EClass mixedEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass rootActionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -404,6 +412,16 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getRootAction()
+  {
+    return rootActionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAdd()
   {
     return addEClass;
@@ -558,6 +576,8 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     createEAttribute(mixedEClass, MIXED__LIT);
     createEAttribute(mixedEClass, MIXED__FRAG_NAME);
 
+    rootActionEClass = createEClass(ROOT_ACTION);
+
     addEClass = createEClass(ADD);
     createEReference(addEClass, ADD__LEFT);
     createEReference(addEClass, ADD__RIGHT);
@@ -615,6 +635,7 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     delegateEClass.getESuperTypes().add(this.getPrefixedDelegate());
     expressionEClass.getESuperTypes().add(this.getRoot());
     mixedEClass.getESuperTypes().add(this.getRoot());
+    rootActionEClass.getESuperTypes().add(this.getRoot());
     addEClass.getESuperTypes().add(this.getExpression());
     namedEClass.getESuperTypes().add(this.getExpression());
     actionEClass.getESuperTypes().add(this.getMixed());
@@ -649,6 +670,8 @@ public class RegionaccesstestlanguagePackageImpl extends EPackageImpl implements
     initEReference(getMixed_Ref(), this.getMixed(), null, "ref", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMixed_Lit(), this.getEnum(), "lit", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getMixed_FragName(), theEcorePackage.getEString(), "fragName", null, 0, 1, Mixed.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(rootActionEClass, RootAction.class, "RootAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(addEClass, Add.class, "Add", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd_Left(), this.getExpression(), null, "left", null, 0, 1, Add.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

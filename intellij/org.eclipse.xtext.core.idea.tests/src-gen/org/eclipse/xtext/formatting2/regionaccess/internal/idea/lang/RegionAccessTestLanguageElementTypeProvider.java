@@ -69,11 +69,20 @@ public class RegionAccessTestLanguageElementTypeProvider implements IElementType
 		public static IGrammarAwareElementType createRoot_DigitSevenKeyword_6_0ElementType() {
 			return new IGrammarAwareElementType("Root_DigitSevenKeyword_6_0_ELEMENT_TYPE", RegionAccessTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRootAccess().getDigitSevenKeyword_6_0());
 		}
-		public static IGrammarAwareElementType createRoot_MixedAssignment_6_1ElementType() {
-			return new IGrammarAwareElementType("Root_MixedAssignment_6_1_ELEMENT_TYPE", RegionAccessTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRootAccess().getMixedAssignment_6_1());
+		public static IGrammarAwareElementType createRoot_Group_6_1ElementType() {
+			return new IGrammarAwareElementType("Root_Group_6_1_ELEMENT_TYPE", RegionAccessTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRootAccess().getGroup_6_1());
 		}
-		public static IGrammarAwareElementType createRoot_MixedMixedParserRuleCall_6_1_0ElementType() {
-			return new IGrammarAwareElementType("Root_MixedMixedParserRuleCall_6_1_0_ELEMENT_TYPE", RegionAccessTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRootAccess().getMixedMixedParserRuleCall_6_1_0());
+		public static IGrammarAwareElementType createRoot_RootActionAction_6_1_0ElementType() {
+			return new IGrammarAwareElementType("Root_RootActionAction_6_1_0_ELEMENT_TYPE", RegionAccessTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRootAccess().getRootActionAction_6_1_0());
+		}
+		public static IGrammarAwareElementType createRoot_ActionKeyword_6_1_1ElementType() {
+			return new IGrammarAwareElementType("Root_ActionKeyword_6_1_1_ELEMENT_TYPE", RegionAccessTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRootAccess().getActionKeyword_6_1_1());
+		}
+		public static IGrammarAwareElementType createRoot_MixedAssignment_6_2ElementType() {
+			return new IGrammarAwareElementType("Root_MixedAssignment_6_2_ELEMENT_TYPE", RegionAccessTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRootAccess().getMixedAssignment_6_2());
+		}
+		public static IGrammarAwareElementType createRoot_MixedMixedParserRuleCall_6_2_0ElementType() {
+			return new IGrammarAwareElementType("Root_MixedMixedParserRuleCall_6_2_0_ELEMENT_TYPE", RegionAccessTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getRootAccess().getMixedMixedParserRuleCall_6_2_0());
 		}
 	}
 
@@ -105,9 +114,15 @@ public class RegionAccessTestLanguageElementTypeProvider implements IElementType
 
 	public static final IGrammarAwareElementType Root_DigitSevenKeyword_6_0_ELEMENT_TYPE = associate(RootFactory.createRoot_DigitSevenKeyword_6_0ElementType());
 
-	public static final IGrammarAwareElementType Root_MixedAssignment_6_1_ELEMENT_TYPE = associate(RootFactory.createRoot_MixedAssignment_6_1ElementType());
+	public static final IGrammarAwareElementType Root_Group_6_1_ELEMENT_TYPE = associate(RootFactory.createRoot_Group_6_1ElementType());
 
-	public static final IGrammarAwareElementType Root_MixedMixedParserRuleCall_6_1_0_ELEMENT_TYPE = associate(RootFactory.createRoot_MixedMixedParserRuleCall_6_1_0ElementType());
+	public static final IGrammarAwareElementType Root_RootActionAction_6_1_0_ELEMENT_TYPE = associate(RootFactory.createRoot_RootActionAction_6_1_0ElementType());
+
+	public static final IGrammarAwareElementType Root_ActionKeyword_6_1_1_ELEMENT_TYPE = associate(RootFactory.createRoot_ActionKeyword_6_1_1ElementType());
+
+	public static final IGrammarAwareElementType Root_MixedAssignment_6_2_ELEMENT_TYPE = associate(RootFactory.createRoot_MixedAssignment_6_2ElementType());
+
+	public static final IGrammarAwareElementType Root_MixedMixedParserRuleCall_6_2_0_ELEMENT_TYPE = associate(RootFactory.createRoot_MixedMixedParserRuleCall_6_2_0ElementType());
 
 	private static class SimpleFactory {
 		public static IGrammarAwareElementType createSimpleElementType() {
@@ -754,12 +769,24 @@ public class RegionAccessTestLanguageElementTypeProvider implements IElementType
 		return Root_DigitSevenKeyword_6_0_ELEMENT_TYPE;
 	}
 
-	public IGrammarAwareElementType getRoot_MixedAssignment_6_1ElementType() {
-		return Root_MixedAssignment_6_1_ELEMENT_TYPE;
+	public IGrammarAwareElementType getRoot_Group_6_1ElementType() {
+		return Root_Group_6_1_ELEMENT_TYPE;
 	}
 
-	public IGrammarAwareElementType getRoot_MixedMixedParserRuleCall_6_1_0ElementType() {
-		return Root_MixedMixedParserRuleCall_6_1_0_ELEMENT_TYPE;
+	public IGrammarAwareElementType getRoot_RootActionAction_6_1_0ElementType() {
+		return Root_RootActionAction_6_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRoot_ActionKeyword_6_1_1ElementType() {
+		return Root_ActionKeyword_6_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRoot_MixedAssignment_6_2ElementType() {
+		return Root_MixedAssignment_6_2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getRoot_MixedMixedParserRuleCall_6_2_0ElementType() {
+		return Root_MixedMixedParserRuleCall_6_2_0_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getSimpleElementType() {

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'5'", "'6'", "'7'", "'1'", "'2'", "'3'", "'4'", "'prefix'", "'+'", "'('", "')'", "'unassigned'", "'fragment'", "'child'", "'ref'", "'action'", "'end'", "'datatype'", "'recursion'", "'lit1'", "'lit2'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'5'", "'6'", "'7'", "'action'", "'1'", "'2'", "'3'", "'4'", "'prefix'", "'+'", "'('", "')'", "'unassigned'", "'fragment'", "'child'", "'ref'", "'end'", "'datatype'", "'recursion'", "'lit1'", "'lit2'"
     };
     public static final int RULE_ID=4;
     public static final int T__29=29;
@@ -129,13 +129,14 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleRoot"
-    // InternalRegionAccessTestLanguage.g:77:1: ruleRoot returns [EObject current=null] : (this_Simple_0= ruleSimple | this_Delegation_1= ruleDelegation | this_Unassigned_2= ruleUnassigned | this_PrefixedUnassigned_3= rulePrefixedUnassigned | (otherlv_4= '5' this_Expression_5= ruleExpression ) | (otherlv_6= '6' this_Mixed_7= ruleMixed ) | (otherlv_8= '7' ( (lv_mixed_9_0= ruleMixed ) ) ) ) ;
+    // InternalRegionAccessTestLanguage.g:77:1: ruleRoot returns [EObject current=null] : (this_Simple_0= ruleSimple | this_Delegation_1= ruleDelegation | this_Unassigned_2= ruleUnassigned | this_PrefixedUnassigned_3= rulePrefixedUnassigned | (otherlv_4= '5' this_Expression_5= ruleExpression ) | (otherlv_6= '6' this_Mixed_7= ruleMixed ) | (otherlv_8= '7' ( () otherlv_10= 'action' )? ( (lv_mixed_11_0= ruleMixed ) ) ) ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_4=null;
         Token otherlv_6=null;
         Token otherlv_8=null;
+        Token otherlv_10=null;
         EObject this_Simple_0 = null;
 
         EObject this_Delegation_1 = null;
@@ -148,61 +149,61 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
         EObject this_Mixed_7 = null;
 
-        EObject lv_mixed_9_0 = null;
+        EObject lv_mixed_11_0 = null;
 
 
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:80:28: ( (this_Simple_0= ruleSimple | this_Delegation_1= ruleDelegation | this_Unassigned_2= ruleUnassigned | this_PrefixedUnassigned_3= rulePrefixedUnassigned | (otherlv_4= '5' this_Expression_5= ruleExpression ) | (otherlv_6= '6' this_Mixed_7= ruleMixed ) | (otherlv_8= '7' ( (lv_mixed_9_0= ruleMixed ) ) ) ) )
-            // InternalRegionAccessTestLanguage.g:81:1: (this_Simple_0= ruleSimple | this_Delegation_1= ruleDelegation | this_Unassigned_2= ruleUnassigned | this_PrefixedUnassigned_3= rulePrefixedUnassigned | (otherlv_4= '5' this_Expression_5= ruleExpression ) | (otherlv_6= '6' this_Mixed_7= ruleMixed ) | (otherlv_8= '7' ( (lv_mixed_9_0= ruleMixed ) ) ) )
+            // InternalRegionAccessTestLanguage.g:80:28: ( (this_Simple_0= ruleSimple | this_Delegation_1= ruleDelegation | this_Unassigned_2= ruleUnassigned | this_PrefixedUnassigned_3= rulePrefixedUnassigned | (otherlv_4= '5' this_Expression_5= ruleExpression ) | (otherlv_6= '6' this_Mixed_7= ruleMixed ) | (otherlv_8= '7' ( () otherlv_10= 'action' )? ( (lv_mixed_11_0= ruleMixed ) ) ) ) )
+            // InternalRegionAccessTestLanguage.g:81:1: (this_Simple_0= ruleSimple | this_Delegation_1= ruleDelegation | this_Unassigned_2= ruleUnassigned | this_PrefixedUnassigned_3= rulePrefixedUnassigned | (otherlv_4= '5' this_Expression_5= ruleExpression ) | (otherlv_6= '6' this_Mixed_7= ruleMixed ) | (otherlv_8= '7' ( () otherlv_10= 'action' )? ( (lv_mixed_11_0= ruleMixed ) ) ) )
             {
-            // InternalRegionAccessTestLanguage.g:81:1: (this_Simple_0= ruleSimple | this_Delegation_1= ruleDelegation | this_Unassigned_2= ruleUnassigned | this_PrefixedUnassigned_3= rulePrefixedUnassigned | (otherlv_4= '5' this_Expression_5= ruleExpression ) | (otherlv_6= '6' this_Mixed_7= ruleMixed ) | (otherlv_8= '7' ( (lv_mixed_9_0= ruleMixed ) ) ) )
-            int alt1=7;
+            // InternalRegionAccessTestLanguage.g:81:1: (this_Simple_0= ruleSimple | this_Delegation_1= ruleDelegation | this_Unassigned_2= ruleUnassigned | this_PrefixedUnassigned_3= rulePrefixedUnassigned | (otherlv_4= '5' this_Expression_5= ruleExpression ) | (otherlv_6= '6' this_Mixed_7= ruleMixed ) | (otherlv_8= '7' ( () otherlv_10= 'action' )? ( (lv_mixed_11_0= ruleMixed ) ) ) )
+            int alt2=7;
             switch ( input.LA(1) ) {
-            case 14:
-                {
-                alt1=1;
-                }
-                break;
             case 15:
                 {
-                alt1=2;
+                alt2=1;
                 }
                 break;
             case 16:
                 {
-                alt1=3;
+                alt2=2;
                 }
                 break;
             case 17:
                 {
-                alt1=4;
+                alt2=3;
+                }
+                break;
+            case 18:
+                {
+                alt2=4;
                 }
                 break;
             case 11:
                 {
-                alt1=5;
+                alt2=5;
                 }
                 break;
             case 12:
                 {
-                alt1=6;
+                alt2=6;
                 }
                 break;
             case 13:
                 {
-                alt1=7;
+                alt2=7;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 1, 0, input);
+                    new NoViableAltException("", 2, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt1) {
+            switch (alt2) {
                 case 1 :
                     // InternalRegionAccessTestLanguage.g:82:5: this_Simple_0= ruleSimple
                     {
@@ -332,26 +333,58 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 7 :
-                    // InternalRegionAccessTestLanguage.g:149:6: (otherlv_8= '7' ( (lv_mixed_9_0= ruleMixed ) ) )
+                    // InternalRegionAccessTestLanguage.g:149:6: (otherlv_8= '7' ( () otherlv_10= 'action' )? ( (lv_mixed_11_0= ruleMixed ) ) )
                     {
-                    // InternalRegionAccessTestLanguage.g:149:6: (otherlv_8= '7' ( (lv_mixed_9_0= ruleMixed ) ) )
-                    // InternalRegionAccessTestLanguage.g:149:8: otherlv_8= '7' ( (lv_mixed_9_0= ruleMixed ) )
+                    // InternalRegionAccessTestLanguage.g:149:6: (otherlv_8= '7' ( () otherlv_10= 'action' )? ( (lv_mixed_11_0= ruleMixed ) ) )
+                    // InternalRegionAccessTestLanguage.g:149:8: otherlv_8= '7' ( () otherlv_10= 'action' )? ( (lv_mixed_11_0= ruleMixed ) )
                     {
-                    otherlv_8=(Token)match(input,13,FollowSets000.FOLLOW_4); 
+                    otherlv_8=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getRootAccess().getDigitSevenKeyword_6_0());
                         
-                    // InternalRegionAccessTestLanguage.g:153:1: ( (lv_mixed_9_0= ruleMixed ) )
-                    // InternalRegionAccessTestLanguage.g:154:1: (lv_mixed_9_0= ruleMixed )
+                    // InternalRegionAccessTestLanguage.g:153:1: ( () otherlv_10= 'action' )?
+                    int alt1=2;
+                    int LA1_0 = input.LA(1);
+
+                    if ( (LA1_0==14) ) {
+                        alt1=1;
+                    }
+                    switch (alt1) {
+                        case 1 :
+                            // InternalRegionAccessTestLanguage.g:153:2: () otherlv_10= 'action'
+                            {
+                            // InternalRegionAccessTestLanguage.g:153:2: ()
+                            // InternalRegionAccessTestLanguage.g:154:5: 
+                            {
+
+                                    current = forceCreateModelElement(
+                                        grammarAccess.getRootAccess().getRootActionAction_6_1_0(),
+                                        current);
+                                
+
+                            }
+
+                            otherlv_10=(Token)match(input,14,FollowSets000.FOLLOW_4); 
+
+                                	newLeafNode(otherlv_10, grammarAccess.getRootAccess().getActionKeyword_6_1_1());
+                                
+
+                            }
+                            break;
+
+                    }
+
+                    // InternalRegionAccessTestLanguage.g:163:3: ( (lv_mixed_11_0= ruleMixed ) )
+                    // InternalRegionAccessTestLanguage.g:164:1: (lv_mixed_11_0= ruleMixed )
                     {
-                    // InternalRegionAccessTestLanguage.g:154:1: (lv_mixed_9_0= ruleMixed )
-                    // InternalRegionAccessTestLanguage.g:155:3: lv_mixed_9_0= ruleMixed
+                    // InternalRegionAccessTestLanguage.g:164:1: (lv_mixed_11_0= ruleMixed )
+                    // InternalRegionAccessTestLanguage.g:165:3: lv_mixed_11_0= ruleMixed
                     {
                      
-                    	        newCompositeNode(grammarAccess.getRootAccess().getMixedMixedParserRuleCall_6_1_0()); 
+                    	        newCompositeNode(grammarAccess.getRootAccess().getMixedMixedParserRuleCall_6_2_0()); 
                     	    
                     pushFollow(FollowSets000.FOLLOW_2);
-                    lv_mixed_9_0=ruleMixed();
+                    lv_mixed_11_0=ruleMixed();
 
                     state._fsp--;
 
@@ -362,7 +395,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                            		set(
                            			current, 
                            			"mixed",
-                            		lv_mixed_9_0, 
+                            		lv_mixed_11_0, 
                             		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Mixed");
                     	        afterParserOrEnumRuleCall();
                     	    
@@ -399,7 +432,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleSimple"
-    // InternalRegionAccessTestLanguage.g:179:1: entryRuleSimple returns [EObject current=null] : iv_ruleSimple= ruleSimple EOF ;
+    // InternalRegionAccessTestLanguage.g:189:1: entryRuleSimple returns [EObject current=null] : iv_ruleSimple= ruleSimple EOF ;
     public final EObject entryRuleSimple() throws RecognitionException {
         EObject current = null;
 
@@ -407,8 +440,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:180:2: (iv_ruleSimple= ruleSimple EOF )
-            // InternalRegionAccessTestLanguage.g:181:2: iv_ruleSimple= ruleSimple EOF
+            // InternalRegionAccessTestLanguage.g:190:2: (iv_ruleSimple= ruleSimple EOF )
+            // InternalRegionAccessTestLanguage.g:191:2: iv_ruleSimple= ruleSimple EOF
             {
              newCompositeNode(grammarAccess.getSimpleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -435,7 +468,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleSimple"
-    // InternalRegionAccessTestLanguage.g:188:1: ruleSimple returns [EObject current=null] : (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalRegionAccessTestLanguage.g:198:1: ruleSimple returns [EObject current=null] : (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleSimple() throws RecognitionException {
         EObject current = null;
 
@@ -445,21 +478,21 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:191:28: ( (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalRegionAccessTestLanguage.g:192:1: (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalRegionAccessTestLanguage.g:201:28: ( (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalRegionAccessTestLanguage.g:202:1: (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalRegionAccessTestLanguage.g:192:1: (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalRegionAccessTestLanguage.g:192:3: otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) )
+            // InternalRegionAccessTestLanguage.g:202:1: (otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalRegionAccessTestLanguage.g:202:3: otherlv_0= '1' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_5); 
+            otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSimpleAccess().getDigitOneKeyword_0());
                 
-            // InternalRegionAccessTestLanguage.g:196:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalRegionAccessTestLanguage.g:197:1: (lv_name_1_0= RULE_ID )
+            // InternalRegionAccessTestLanguage.g:206:1: ( (lv_name_1_0= RULE_ID ) )
+            // InternalRegionAccessTestLanguage.g:207:1: (lv_name_1_0= RULE_ID )
             {
-            // InternalRegionAccessTestLanguage.g:197:1: (lv_name_1_0= RULE_ID )
-            // InternalRegionAccessTestLanguage.g:198:3: lv_name_1_0= RULE_ID
+            // InternalRegionAccessTestLanguage.g:207:1: (lv_name_1_0= RULE_ID )
+            // InternalRegionAccessTestLanguage.g:208:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -502,7 +535,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleDelegation"
-    // InternalRegionAccessTestLanguage.g:222:1: entryRuleDelegation returns [EObject current=null] : iv_ruleDelegation= ruleDelegation EOF ;
+    // InternalRegionAccessTestLanguage.g:232:1: entryRuleDelegation returns [EObject current=null] : iv_ruleDelegation= ruleDelegation EOF ;
     public final EObject entryRuleDelegation() throws RecognitionException {
         EObject current = null;
 
@@ -510,8 +543,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:223:2: (iv_ruleDelegation= ruleDelegation EOF )
-            // InternalRegionAccessTestLanguage.g:224:2: iv_ruleDelegation= ruleDelegation EOF
+            // InternalRegionAccessTestLanguage.g:233:2: (iv_ruleDelegation= ruleDelegation EOF )
+            // InternalRegionAccessTestLanguage.g:234:2: iv_ruleDelegation= ruleDelegation EOF
             {
              newCompositeNode(grammarAccess.getDelegationRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -538,7 +571,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleDelegation"
-    // InternalRegionAccessTestLanguage.g:231:1: ruleDelegation returns [EObject current=null] : (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) ) ;
+    // InternalRegionAccessTestLanguage.g:241:1: ruleDelegation returns [EObject current=null] : (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) ) ;
     public final EObject ruleDelegation() throws RecognitionException {
         EObject current = null;
 
@@ -549,21 +582,21 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:234:28: ( (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) ) )
-            // InternalRegionAccessTestLanguage.g:235:1: (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) )
+            // InternalRegionAccessTestLanguage.g:244:28: ( (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) ) )
+            // InternalRegionAccessTestLanguage.g:245:1: (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) )
             {
-            // InternalRegionAccessTestLanguage.g:235:1: (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) )
-            // InternalRegionAccessTestLanguage.g:235:3: otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) )
+            // InternalRegionAccessTestLanguage.g:245:1: (otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) ) )
+            // InternalRegionAccessTestLanguage.g:245:3: otherlv_0= '2' ( (lv_delegate_1_0= ruleDelegate ) )
             {
-            otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_5); 
+            otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_6); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getDelegationAccess().getDigitTwoKeyword_0());
                 
-            // InternalRegionAccessTestLanguage.g:239:1: ( (lv_delegate_1_0= ruleDelegate ) )
-            // InternalRegionAccessTestLanguage.g:240:1: (lv_delegate_1_0= ruleDelegate )
+            // InternalRegionAccessTestLanguage.g:249:1: ( (lv_delegate_1_0= ruleDelegate ) )
+            // InternalRegionAccessTestLanguage.g:250:1: (lv_delegate_1_0= ruleDelegate )
             {
-            // InternalRegionAccessTestLanguage.g:240:1: (lv_delegate_1_0= ruleDelegate )
-            // InternalRegionAccessTestLanguage.g:241:3: lv_delegate_1_0= ruleDelegate
+            // InternalRegionAccessTestLanguage.g:250:1: (lv_delegate_1_0= ruleDelegate )
+            // InternalRegionAccessTestLanguage.g:251:3: lv_delegate_1_0= ruleDelegate
             {
              
             	        newCompositeNode(grammarAccess.getDelegationAccess().getDelegateDelegateParserRuleCall_1_0()); 
@@ -611,7 +644,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleUnassigned"
-    // InternalRegionAccessTestLanguage.g:265:1: entryRuleUnassigned returns [EObject current=null] : iv_ruleUnassigned= ruleUnassigned EOF ;
+    // InternalRegionAccessTestLanguage.g:275:1: entryRuleUnassigned returns [EObject current=null] : iv_ruleUnassigned= ruleUnassigned EOF ;
     public final EObject entryRuleUnassigned() throws RecognitionException {
         EObject current = null;
 
@@ -619,8 +652,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:266:2: (iv_ruleUnassigned= ruleUnassigned EOF )
-            // InternalRegionAccessTestLanguage.g:267:2: iv_ruleUnassigned= ruleUnassigned EOF
+            // InternalRegionAccessTestLanguage.g:276:2: (iv_ruleUnassigned= ruleUnassigned EOF )
+            // InternalRegionAccessTestLanguage.g:277:2: iv_ruleUnassigned= ruleUnassigned EOF
             {
              newCompositeNode(grammarAccess.getUnassignedRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -647,7 +680,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleUnassigned"
-    // InternalRegionAccessTestLanguage.g:274:1: ruleUnassigned returns [EObject current=null] : (otherlv_0= '3' this_Delegate_1= ruleDelegate ) ;
+    // InternalRegionAccessTestLanguage.g:284:1: ruleUnassigned returns [EObject current=null] : (otherlv_0= '3' this_Delegate_1= ruleDelegate ) ;
     public final EObject ruleUnassigned() throws RecognitionException {
         EObject current = null;
 
@@ -658,13 +691,13 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:277:28: ( (otherlv_0= '3' this_Delegate_1= ruleDelegate ) )
-            // InternalRegionAccessTestLanguage.g:278:1: (otherlv_0= '3' this_Delegate_1= ruleDelegate )
+            // InternalRegionAccessTestLanguage.g:287:28: ( (otherlv_0= '3' this_Delegate_1= ruleDelegate ) )
+            // InternalRegionAccessTestLanguage.g:288:1: (otherlv_0= '3' this_Delegate_1= ruleDelegate )
             {
-            // InternalRegionAccessTestLanguage.g:278:1: (otherlv_0= '3' this_Delegate_1= ruleDelegate )
-            // InternalRegionAccessTestLanguage.g:278:3: otherlv_0= '3' this_Delegate_1= ruleDelegate
+            // InternalRegionAccessTestLanguage.g:288:1: (otherlv_0= '3' this_Delegate_1= ruleDelegate )
+            // InternalRegionAccessTestLanguage.g:288:3: otherlv_0= '3' this_Delegate_1= ruleDelegate
             {
-            otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_5); 
+            otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_6); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getUnassignedAccess().getDigitThreeKeyword_0());
                 
@@ -701,7 +734,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRulePrefixedUnassigned"
-    // InternalRegionAccessTestLanguage.g:299:1: entryRulePrefixedUnassigned returns [EObject current=null] : iv_rulePrefixedUnassigned= rulePrefixedUnassigned EOF ;
+    // InternalRegionAccessTestLanguage.g:309:1: entryRulePrefixedUnassigned returns [EObject current=null] : iv_rulePrefixedUnassigned= rulePrefixedUnassigned EOF ;
     public final EObject entryRulePrefixedUnassigned() throws RecognitionException {
         EObject current = null;
 
@@ -709,8 +742,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:300:2: (iv_rulePrefixedUnassigned= rulePrefixedUnassigned EOF )
-            // InternalRegionAccessTestLanguage.g:301:2: iv_rulePrefixedUnassigned= rulePrefixedUnassigned EOF
+            // InternalRegionAccessTestLanguage.g:310:2: (iv_rulePrefixedUnassigned= rulePrefixedUnassigned EOF )
+            // InternalRegionAccessTestLanguage.g:311:2: iv_rulePrefixedUnassigned= rulePrefixedUnassigned EOF
             {
              newCompositeNode(grammarAccess.getPrefixedUnassignedRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -737,7 +770,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "rulePrefixedUnassigned"
-    // InternalRegionAccessTestLanguage.g:308:1: rulePrefixedUnassigned returns [EObject current=null] : (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) ) ;
+    // InternalRegionAccessTestLanguage.g:318:1: rulePrefixedUnassigned returns [EObject current=null] : (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) ) ;
     public final EObject rulePrefixedUnassigned() throws RecognitionException {
         EObject current = null;
 
@@ -748,21 +781,21 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:311:28: ( (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) ) )
-            // InternalRegionAccessTestLanguage.g:312:1: (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) )
+            // InternalRegionAccessTestLanguage.g:321:28: ( (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) ) )
+            // InternalRegionAccessTestLanguage.g:322:1: (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) )
             {
-            // InternalRegionAccessTestLanguage.g:312:1: (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) )
-            // InternalRegionAccessTestLanguage.g:312:3: otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) )
+            // InternalRegionAccessTestLanguage.g:322:1: (otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) ) )
+            // InternalRegionAccessTestLanguage.g:322:3: otherlv_0= '4' ( (lv_delegate_1_0= rulePrefixedDelegate ) )
             {
-            otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_6); 
+            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_7); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getPrefixedUnassignedAccess().getDigitFourKeyword_0());
                 
-            // InternalRegionAccessTestLanguage.g:316:1: ( (lv_delegate_1_0= rulePrefixedDelegate ) )
-            // InternalRegionAccessTestLanguage.g:317:1: (lv_delegate_1_0= rulePrefixedDelegate )
+            // InternalRegionAccessTestLanguage.g:326:1: ( (lv_delegate_1_0= rulePrefixedDelegate ) )
+            // InternalRegionAccessTestLanguage.g:327:1: (lv_delegate_1_0= rulePrefixedDelegate )
             {
-            // InternalRegionAccessTestLanguage.g:317:1: (lv_delegate_1_0= rulePrefixedDelegate )
-            // InternalRegionAccessTestLanguage.g:318:3: lv_delegate_1_0= rulePrefixedDelegate
+            // InternalRegionAccessTestLanguage.g:327:1: (lv_delegate_1_0= rulePrefixedDelegate )
+            // InternalRegionAccessTestLanguage.g:328:3: lv_delegate_1_0= rulePrefixedDelegate
             {
              
             	        newCompositeNode(grammarAccess.getPrefixedUnassignedAccess().getDelegatePrefixedDelegateParserRuleCall_1_0()); 
@@ -810,7 +843,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRulePrefixedDelegate"
-    // InternalRegionAccessTestLanguage.g:342:1: entryRulePrefixedDelegate returns [EObject current=null] : iv_rulePrefixedDelegate= rulePrefixedDelegate EOF ;
+    // InternalRegionAccessTestLanguage.g:352:1: entryRulePrefixedDelegate returns [EObject current=null] : iv_rulePrefixedDelegate= rulePrefixedDelegate EOF ;
     public final EObject entryRulePrefixedDelegate() throws RecognitionException {
         EObject current = null;
 
@@ -818,8 +851,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:343:2: (iv_rulePrefixedDelegate= rulePrefixedDelegate EOF )
-            // InternalRegionAccessTestLanguage.g:344:2: iv_rulePrefixedDelegate= rulePrefixedDelegate EOF
+            // InternalRegionAccessTestLanguage.g:353:2: (iv_rulePrefixedDelegate= rulePrefixedDelegate EOF )
+            // InternalRegionAccessTestLanguage.g:354:2: iv_rulePrefixedDelegate= rulePrefixedDelegate EOF
             {
              newCompositeNode(grammarAccess.getPrefixedDelegateRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -846,7 +879,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "rulePrefixedDelegate"
-    // InternalRegionAccessTestLanguage.g:351:1: rulePrefixedDelegate returns [EObject current=null] : (otherlv_0= 'prefix' this_Delegate_1= ruleDelegate ) ;
+    // InternalRegionAccessTestLanguage.g:361:1: rulePrefixedDelegate returns [EObject current=null] : (otherlv_0= 'prefix' this_Delegate_1= ruleDelegate ) ;
     public final EObject rulePrefixedDelegate() throws RecognitionException {
         EObject current = null;
 
@@ -857,13 +890,13 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:354:28: ( (otherlv_0= 'prefix' this_Delegate_1= ruleDelegate ) )
-            // InternalRegionAccessTestLanguage.g:355:1: (otherlv_0= 'prefix' this_Delegate_1= ruleDelegate )
+            // InternalRegionAccessTestLanguage.g:364:28: ( (otherlv_0= 'prefix' this_Delegate_1= ruleDelegate ) )
+            // InternalRegionAccessTestLanguage.g:365:1: (otherlv_0= 'prefix' this_Delegate_1= ruleDelegate )
             {
-            // InternalRegionAccessTestLanguage.g:355:1: (otherlv_0= 'prefix' this_Delegate_1= ruleDelegate )
-            // InternalRegionAccessTestLanguage.g:355:3: otherlv_0= 'prefix' this_Delegate_1= ruleDelegate
+            // InternalRegionAccessTestLanguage.g:365:1: (otherlv_0= 'prefix' this_Delegate_1= ruleDelegate )
+            // InternalRegionAccessTestLanguage.g:365:3: otherlv_0= 'prefix' this_Delegate_1= ruleDelegate
             {
-            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_5); 
+            otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_6); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getPrefixedDelegateAccess().getPrefixKeyword_0());
                 
@@ -900,7 +933,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleDelegate"
-    // InternalRegionAccessTestLanguage.g:376:1: entryRuleDelegate returns [EObject current=null] : iv_ruleDelegate= ruleDelegate EOF ;
+    // InternalRegionAccessTestLanguage.g:386:1: entryRuleDelegate returns [EObject current=null] : iv_ruleDelegate= ruleDelegate EOF ;
     public final EObject entryRuleDelegate() throws RecognitionException {
         EObject current = null;
 
@@ -908,8 +941,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:377:2: (iv_ruleDelegate= ruleDelegate EOF )
-            // InternalRegionAccessTestLanguage.g:378:2: iv_ruleDelegate= ruleDelegate EOF
+            // InternalRegionAccessTestLanguage.g:387:2: (iv_ruleDelegate= ruleDelegate EOF )
+            // InternalRegionAccessTestLanguage.g:388:2: iv_ruleDelegate= ruleDelegate EOF
             {
              newCompositeNode(grammarAccess.getDelegateRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -936,7 +969,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleDelegate"
-    // InternalRegionAccessTestLanguage.g:385:1: ruleDelegate returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalRegionAccessTestLanguage.g:395:1: ruleDelegate returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleDelegate() throws RecognitionException {
         EObject current = null;
 
@@ -945,14 +978,14 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:388:28: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalRegionAccessTestLanguage.g:389:1: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRegionAccessTestLanguage.g:398:28: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalRegionAccessTestLanguage.g:399:1: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalRegionAccessTestLanguage.g:389:1: ( (lv_name_0_0= RULE_ID ) )
-            // InternalRegionAccessTestLanguage.g:390:1: (lv_name_0_0= RULE_ID )
+            // InternalRegionAccessTestLanguage.g:399:1: ( (lv_name_0_0= RULE_ID ) )
+            // InternalRegionAccessTestLanguage.g:400:1: (lv_name_0_0= RULE_ID )
             {
-            // InternalRegionAccessTestLanguage.g:390:1: (lv_name_0_0= RULE_ID )
-            // InternalRegionAccessTestLanguage.g:391:3: lv_name_0_0= RULE_ID
+            // InternalRegionAccessTestLanguage.g:400:1: (lv_name_0_0= RULE_ID )
+            // InternalRegionAccessTestLanguage.g:401:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -992,7 +1025,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleExpression"
-    // InternalRegionAccessTestLanguage.g:415:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    // InternalRegionAccessTestLanguage.g:425:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
     public final EObject entryRuleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1000,8 +1033,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:416:2: (iv_ruleExpression= ruleExpression EOF )
-            // InternalRegionAccessTestLanguage.g:417:2: iv_ruleExpression= ruleExpression EOF
+            // InternalRegionAccessTestLanguage.g:426:2: (iv_ruleExpression= ruleExpression EOF )
+            // InternalRegionAccessTestLanguage.g:427:2: iv_ruleExpression= ruleExpression EOF
             {
              newCompositeNode(grammarAccess.getExpressionRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1028,7 +1061,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleExpression"
-    // InternalRegionAccessTestLanguage.g:424:1: ruleExpression returns [EObject current=null] : (this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )* ) ;
+    // InternalRegionAccessTestLanguage.g:434:1: ruleExpression returns [EObject current=null] : (this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )* ) ;
     public final EObject ruleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1041,16 +1074,16 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:427:28: ( (this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )* ) )
-            // InternalRegionAccessTestLanguage.g:428:1: (this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )* )
+            // InternalRegionAccessTestLanguage.g:437:28: ( (this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )* ) )
+            // InternalRegionAccessTestLanguage.g:438:1: (this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )* )
             {
-            // InternalRegionAccessTestLanguage.g:428:1: (this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )* )
-            // InternalRegionAccessTestLanguage.g:429:5: this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )*
+            // InternalRegionAccessTestLanguage.g:438:1: (this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )* )
+            // InternalRegionAccessTestLanguage.g:439:5: this_Primary_0= rulePrimary ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )*
             {
              
                     newCompositeNode(grammarAccess.getExpressionAccess().getPrimaryParserRuleCall_0()); 
                 
-            pushFollow(FollowSets000.FOLLOW_7);
+            pushFollow(FollowSets000.FOLLOW_8);
             this_Primary_0=rulePrimary();
 
             state._fsp--;
@@ -1059,23 +1092,23 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     current = this_Primary_0; 
                     afterParserOrEnumRuleCall();
                 
-            // InternalRegionAccessTestLanguage.g:437:1: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )*
-            loop2:
+            // InternalRegionAccessTestLanguage.g:447:1: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) ) )*
+            loop3:
             do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
+                int alt3=2;
+                int LA3_0 = input.LA(1);
 
-                if ( (LA2_0==19) ) {
-                    alt2=1;
+                if ( (LA3_0==20) ) {
+                    alt3=1;
                 }
 
 
-                switch (alt2) {
+                switch (alt3) {
             	case 1 :
-            	    // InternalRegionAccessTestLanguage.g:437:2: () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) )
+            	    // InternalRegionAccessTestLanguage.g:447:2: () otherlv_2= '+' ( (lv_right_3_0= rulePrimary ) )
             	    {
-            	    // InternalRegionAccessTestLanguage.g:437:2: ()
-            	    // InternalRegionAccessTestLanguage.g:438:5: 
+            	    // InternalRegionAccessTestLanguage.g:447:2: ()
+            	    // InternalRegionAccessTestLanguage.g:448:5: 
             	    {
 
             	            current = forceCreateModelElementAndSet(
@@ -1085,20 +1118,20 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
             	    }
 
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_3); 
+            	    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_3); 
 
             	        	newLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getPlusSignKeyword_1_1());
             	        
-            	    // InternalRegionAccessTestLanguage.g:447:1: ( (lv_right_3_0= rulePrimary ) )
-            	    // InternalRegionAccessTestLanguage.g:448:1: (lv_right_3_0= rulePrimary )
+            	    // InternalRegionAccessTestLanguage.g:457:1: ( (lv_right_3_0= rulePrimary ) )
+            	    // InternalRegionAccessTestLanguage.g:458:1: (lv_right_3_0= rulePrimary )
             	    {
-            	    // InternalRegionAccessTestLanguage.g:448:1: (lv_right_3_0= rulePrimary )
-            	    // InternalRegionAccessTestLanguage.g:449:3: lv_right_3_0= rulePrimary
+            	    // InternalRegionAccessTestLanguage.g:458:1: (lv_right_3_0= rulePrimary )
+            	    // InternalRegionAccessTestLanguage.g:459:3: lv_right_3_0= rulePrimary
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getExpressionAccess().getRightPrimaryParserRuleCall_1_2_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_7);
+            	    pushFollow(FollowSets000.FOLLOW_8);
             	    lv_right_3_0=rulePrimary();
 
             	    state._fsp--;
@@ -1125,7 +1158,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
             	    break;
 
             	default :
-            	    break loop2;
+            	    break loop3;
                 }
             } while (true);
 
@@ -1150,7 +1183,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRulePrimary"
-    // InternalRegionAccessTestLanguage.g:473:1: entryRulePrimary returns [EObject current=null] : iv_rulePrimary= rulePrimary EOF ;
+    // InternalRegionAccessTestLanguage.g:483:1: entryRulePrimary returns [EObject current=null] : iv_rulePrimary= rulePrimary EOF ;
     public final EObject entryRulePrimary() throws RecognitionException {
         EObject current = null;
 
@@ -1158,8 +1191,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:474:2: (iv_rulePrimary= rulePrimary EOF )
-            // InternalRegionAccessTestLanguage.g:475:2: iv_rulePrimary= rulePrimary EOF
+            // InternalRegionAccessTestLanguage.g:484:2: (iv_rulePrimary= rulePrimary EOF )
+            // InternalRegionAccessTestLanguage.g:485:2: iv_rulePrimary= rulePrimary EOF
             {
              newCompositeNode(grammarAccess.getPrimaryRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1186,7 +1219,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "rulePrimary"
-    // InternalRegionAccessTestLanguage.g:482:1: rulePrimary returns [EObject current=null] : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | this_Parenthesized_2= ruleParenthesized ) ;
+    // InternalRegionAccessTestLanguage.g:492:1: rulePrimary returns [EObject current=null] : ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | this_Parenthesized_2= ruleParenthesized ) ;
     public final EObject rulePrimary() throws RecognitionException {
         EObject current = null;
 
@@ -1197,34 +1230,34 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:485:28: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | this_Parenthesized_2= ruleParenthesized ) )
-            // InternalRegionAccessTestLanguage.g:486:1: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | this_Parenthesized_2= ruleParenthesized )
+            // InternalRegionAccessTestLanguage.g:495:28: ( ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | this_Parenthesized_2= ruleParenthesized ) )
+            // InternalRegionAccessTestLanguage.g:496:1: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | this_Parenthesized_2= ruleParenthesized )
             {
-            // InternalRegionAccessTestLanguage.g:486:1: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | this_Parenthesized_2= ruleParenthesized )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
+            // InternalRegionAccessTestLanguage.g:496:1: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) | this_Parenthesized_2= ruleParenthesized )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            if ( (LA3_0==RULE_ID) ) {
-                alt3=1;
+            if ( (LA4_0==RULE_ID) ) {
+                alt4=1;
             }
-            else if ( (LA3_0==20) ) {
-                alt3=2;
+            else if ( (LA4_0==21) ) {
+                alt4=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 3, 0, input);
+                    new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
             }
-            switch (alt3) {
+            switch (alt4) {
                 case 1 :
-                    // InternalRegionAccessTestLanguage.g:486:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // InternalRegionAccessTestLanguage.g:496:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
                     {
-                    // InternalRegionAccessTestLanguage.g:486:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
-                    // InternalRegionAccessTestLanguage.g:486:3: () ( (lv_name_1_0= RULE_ID ) )
+                    // InternalRegionAccessTestLanguage.g:496:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
+                    // InternalRegionAccessTestLanguage.g:496:3: () ( (lv_name_1_0= RULE_ID ) )
                     {
-                    // InternalRegionAccessTestLanguage.g:486:3: ()
-                    // InternalRegionAccessTestLanguage.g:487:5: 
+                    // InternalRegionAccessTestLanguage.g:496:3: ()
+                    // InternalRegionAccessTestLanguage.g:497:5: 
                     {
 
                             current = forceCreateModelElement(
@@ -1234,11 +1267,11 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
                     }
 
-                    // InternalRegionAccessTestLanguage.g:492:2: ( (lv_name_1_0= RULE_ID ) )
-                    // InternalRegionAccessTestLanguage.g:493:1: (lv_name_1_0= RULE_ID )
+                    // InternalRegionAccessTestLanguage.g:502:2: ( (lv_name_1_0= RULE_ID ) )
+                    // InternalRegionAccessTestLanguage.g:503:1: (lv_name_1_0= RULE_ID )
                     {
-                    // InternalRegionAccessTestLanguage.g:493:1: (lv_name_1_0= RULE_ID )
-                    // InternalRegionAccessTestLanguage.g:494:3: lv_name_1_0= RULE_ID
+                    // InternalRegionAccessTestLanguage.g:503:1: (lv_name_1_0= RULE_ID )
+                    // InternalRegionAccessTestLanguage.g:504:3: lv_name_1_0= RULE_ID
                     {
                     lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -1267,7 +1300,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 2 :
-                    // InternalRegionAccessTestLanguage.g:512:5: this_Parenthesized_2= ruleParenthesized
+                    // InternalRegionAccessTestLanguage.g:522:5: this_Parenthesized_2= ruleParenthesized
                     {
                      
                             newCompositeNode(grammarAccess.getPrimaryAccess().getParenthesizedParserRuleCall_1()); 
@@ -1305,7 +1338,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleParenthesized"
-    // InternalRegionAccessTestLanguage.g:528:1: entryRuleParenthesized returns [EObject current=null] : iv_ruleParenthesized= ruleParenthesized EOF ;
+    // InternalRegionAccessTestLanguage.g:538:1: entryRuleParenthesized returns [EObject current=null] : iv_ruleParenthesized= ruleParenthesized EOF ;
     public final EObject entryRuleParenthesized() throws RecognitionException {
         EObject current = null;
 
@@ -1313,8 +1346,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:529:2: (iv_ruleParenthesized= ruleParenthesized EOF )
-            // InternalRegionAccessTestLanguage.g:530:2: iv_ruleParenthesized= ruleParenthesized EOF
+            // InternalRegionAccessTestLanguage.g:539:2: (iv_ruleParenthesized= ruleParenthesized EOF )
+            // InternalRegionAccessTestLanguage.g:540:2: iv_ruleParenthesized= ruleParenthesized EOF
             {
              newCompositeNode(grammarAccess.getParenthesizedRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1341,7 +1374,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleParenthesized"
-    // InternalRegionAccessTestLanguage.g:537:1: ruleParenthesized returns [EObject current=null] : (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) ;
+    // InternalRegionAccessTestLanguage.g:547:1: ruleParenthesized returns [EObject current=null] : (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) ;
     public final EObject ruleParenthesized() throws RecognitionException {
         EObject current = null;
 
@@ -1353,20 +1386,20 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:540:28: ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) )
-            // InternalRegionAccessTestLanguage.g:541:1: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
+            // InternalRegionAccessTestLanguage.g:550:28: ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) )
+            // InternalRegionAccessTestLanguage.g:551:1: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
             {
-            // InternalRegionAccessTestLanguage.g:541:1: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
-            // InternalRegionAccessTestLanguage.g:541:3: otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')'
+            // InternalRegionAccessTestLanguage.g:551:1: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
+            // InternalRegionAccessTestLanguage.g:551:3: otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')'
             {
-            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_3); 
+            otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_3); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getParenthesizedAccess().getLeftParenthesisKeyword_0());
                 
              
                     newCompositeNode(grammarAccess.getParenthesizedAccess().getExpressionParserRuleCall_1()); 
                 
-            pushFollow(FollowSets000.FOLLOW_8);
+            pushFollow(FollowSets000.FOLLOW_9);
             this_Expression_1=ruleExpression();
 
             state._fsp--;
@@ -1375,7 +1408,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     current = this_Expression_1; 
                     afterParserOrEnumRuleCall();
                 
-            otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_2); 
+            otherlv_2=(Token)match(input,22,FollowSets000.FOLLOW_2); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getParenthesizedAccess().getRightParenthesisKeyword_2());
                 
@@ -1400,7 +1433,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleMixed"
-    // InternalRegionAccessTestLanguage.g:566:1: entryRuleMixed returns [EObject current=null] : iv_ruleMixed= ruleMixed EOF ;
+    // InternalRegionAccessTestLanguage.g:576:1: entryRuleMixed returns [EObject current=null] : iv_ruleMixed= ruleMixed EOF ;
     public final EObject entryRuleMixed() throws RecognitionException {
         EObject current = null;
 
@@ -1408,8 +1441,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:567:2: (iv_ruleMixed= ruleMixed EOF )
-            // InternalRegionAccessTestLanguage.g:568:2: iv_ruleMixed= ruleMixed EOF
+            // InternalRegionAccessTestLanguage.g:577:2: (iv_ruleMixed= ruleMixed EOF )
+            // InternalRegionAccessTestLanguage.g:578:2: iv_ruleMixed= ruleMixed EOF
             {
              newCompositeNode(grammarAccess.getMixedRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1436,7 +1469,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleMixed"
-    // InternalRegionAccessTestLanguage.g:575:1: ruleMixed returns [EObject current=null] : (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* ) ;
+    // InternalRegionAccessTestLanguage.g:585:1: ruleMixed returns [EObject current=null] : (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* ) ;
     public final EObject ruleMixed() throws RecognitionException {
         EObject current = null;
 
@@ -1467,52 +1500,52 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:578:28: ( (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* ) )
-            // InternalRegionAccessTestLanguage.g:579:1: (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* )
+            // InternalRegionAccessTestLanguage.g:588:28: ( (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* ) )
+            // InternalRegionAccessTestLanguage.g:589:1: (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* )
             {
-            // InternalRegionAccessTestLanguage.g:579:1: (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* )
-            // InternalRegionAccessTestLanguage.g:579:3: otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )*
+            // InternalRegionAccessTestLanguage.g:589:1: (otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )* )
+            // InternalRegionAccessTestLanguage.g:589:3: otherlv_0= '(' (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )? ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) ) otherlv_15= ')' ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )*
             {
-            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_9); 
+            otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_10); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getMixedAccess().getLeftParenthesisKeyword_0());
                 
-            // InternalRegionAccessTestLanguage.g:583:1: (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // InternalRegionAccessTestLanguage.g:593:1: (otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype ) )?
+            int alt6=2;
+            int LA6_0 = input.LA(1);
 
-            if ( (LA5_0==22) ) {
-                alt5=1;
+            if ( (LA6_0==23) ) {
+                alt6=1;
             }
-            switch (alt5) {
+            switch (alt6) {
                 case 1 :
-                    // InternalRegionAccessTestLanguage.g:583:3: otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype )
+                    // InternalRegionAccessTestLanguage.g:593:3: otherlv_1= 'unassigned' (this_ID_2= RULE_ID | ruleDatatype )
                     {
-                    otherlv_1=(Token)match(input,22,FollowSets000.FOLLOW_10); 
+                    otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_11); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getMixedAccess().getUnassignedKeyword_1_0());
                         
-                    // InternalRegionAccessTestLanguage.g:587:1: (this_ID_2= RULE_ID | ruleDatatype )
-                    int alt4=2;
-                    int LA4_0 = input.LA(1);
+                    // InternalRegionAccessTestLanguage.g:597:1: (this_ID_2= RULE_ID | ruleDatatype )
+                    int alt5=2;
+                    int LA5_0 = input.LA(1);
 
-                    if ( (LA4_0==RULE_ID) ) {
-                        alt4=1;
+                    if ( (LA5_0==RULE_ID) ) {
+                        alt5=1;
                     }
-                    else if ( (LA4_0==28) ) {
-                        alt4=2;
+                    else if ( (LA5_0==28) ) {
+                        alt5=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 4, 0, input);
+                            new NoViableAltException("", 5, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt4) {
+                    switch (alt5) {
                         case 1 :
-                            // InternalRegionAccessTestLanguage.g:587:2: this_ID_2= RULE_ID
+                            // InternalRegionAccessTestLanguage.g:597:2: this_ID_2= RULE_ID
                             {
-                            this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
+                            this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_10); 
                              
                                 newLeafNode(this_ID_2, grammarAccess.getMixedAccess().getIDTerminalRuleCall_1_1_0()); 
                                 
@@ -1520,12 +1553,12 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                             }
                             break;
                         case 2 :
-                            // InternalRegionAccessTestLanguage.g:593:5: ruleDatatype
+                            // InternalRegionAccessTestLanguage.g:603:5: ruleDatatype
                             {
                              
                                     newCompositeNode(grammarAccess.getMixedAccess().getDatatypeParserRuleCall_1_1_1()); 
                                 
-                            pushFollow(FollowSets000.FOLLOW_9);
+                            pushFollow(FollowSets000.FOLLOW_10);
                             ruleDatatype();
 
                             state._fsp--;
@@ -1545,46 +1578,46 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
             }
 
-            // InternalRegionAccessTestLanguage.g:600:4: ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) )
-            int alt8=3;
+            // InternalRegionAccessTestLanguage.g:610:4: ( ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? ) | this_Mixed_7= ruleMixed | ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) ) )
+            int alt9=3;
             switch ( input.LA(1) ) {
-            case 21:
-            case 23:
+            case 22:
+            case 24:
                 {
-                alt8=1;
+                alt9=1;
                 }
                 break;
-            case 20:
+            case 21:
                 {
-                alt8=2;
+                alt9=2;
                 }
                 break;
             case RULE_ID:
-            case 24:
             case 25:
+            case 26:
             case 28:
             case 30:
             case 31:
                 {
-                alt8=3;
+                alt9=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 8, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt8) {
+            switch (alt9) {
                 case 1 :
-                    // InternalRegionAccessTestLanguage.g:600:5: ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? )
+                    // InternalRegionAccessTestLanguage.g:610:5: ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? )
                     {
-                    // InternalRegionAccessTestLanguage.g:600:5: ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? )
-                    // InternalRegionAccessTestLanguage.g:600:6: () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )?
+                    // InternalRegionAccessTestLanguage.g:610:5: ( () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )? )
+                    // InternalRegionAccessTestLanguage.g:610:6: () (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )?
                     {
-                    // InternalRegionAccessTestLanguage.g:600:6: ()
-                    // InternalRegionAccessTestLanguage.g:601:5: 
+                    // InternalRegionAccessTestLanguage.g:610:6: ()
+                    // InternalRegionAccessTestLanguage.g:611:5: 
                     {
 
                             current = forceCreateModelElement(
@@ -1594,18 +1627,18 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
                     }
 
-                    // InternalRegionAccessTestLanguage.g:606:2: (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )?
-                    int alt6=2;
-                    int LA6_0 = input.LA(1);
+                    // InternalRegionAccessTestLanguage.g:616:2: (otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current] )?
+                    int alt7=2;
+                    int LA7_0 = input.LA(1);
 
-                    if ( (LA6_0==23) ) {
-                        alt6=1;
+                    if ( (LA7_0==24) ) {
+                        alt7=1;
                     }
-                    switch (alt6) {
+                    switch (alt7) {
                         case 1 :
-                            // InternalRegionAccessTestLanguage.g:606:4: otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current]
+                            // InternalRegionAccessTestLanguage.g:616:4: otherlv_5= 'fragment' this_Fragment_6= ruleFragment[$current]
                             {
-                            otherlv_5=(Token)match(input,23,FollowSets000.FOLLOW_11); 
+                            otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_12); 
 
                                 	newLeafNode(otherlv_5, grammarAccess.getMixedAccess().getFragmentKeyword_2_0_1_0());
                                 
@@ -1615,7 +1648,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                             		}
                                     newCompositeNode(grammarAccess.getMixedAccess().getFragmentParserRuleCall_2_0_1_1()); 
                                 
-                            pushFollow(FollowSets000.FOLLOW_8);
+                            pushFollow(FollowSets000.FOLLOW_9);
                             this_Fragment_6=ruleFragment(current);
 
                             state._fsp--;
@@ -1637,12 +1670,12 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 2 :
-                    // InternalRegionAccessTestLanguage.g:624:5: this_Mixed_7= ruleMixed
+                    // InternalRegionAccessTestLanguage.g:634:5: this_Mixed_7= ruleMixed
                     {
                      
                             newCompositeNode(grammarAccess.getMixedAccess().getMixedParserRuleCall_2_1()); 
                         
-                    pushFollow(FollowSets000.FOLLOW_8);
+                    pushFollow(FollowSets000.FOLLOW_9);
                     this_Mixed_7=ruleMixed();
 
                     state._fsp--;
@@ -1655,55 +1688,55 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 3 :
-                    // InternalRegionAccessTestLanguage.g:633:6: ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) )
+                    // InternalRegionAccessTestLanguage.g:643:6: ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) )
                     {
-                    // InternalRegionAccessTestLanguage.g:633:6: ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) )
-                    int alt7=5;
+                    // InternalRegionAccessTestLanguage.g:643:6: ( ( (lv_name_8_0= RULE_ID ) ) | (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) ) | ( (lv_datatype_11_0= ruleDatatype ) ) | (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) ) | ( (lv_lit_14_0= ruleEnum ) ) )
+                    int alt8=5;
                     switch ( input.LA(1) ) {
                     case RULE_ID:
                         {
-                        alt7=1;
-                        }
-                        break;
-                    case 24:
-                        {
-                        alt7=2;
-                        }
-                        break;
-                    case 28:
-                        {
-                        alt7=3;
+                        alt8=1;
                         }
                         break;
                     case 25:
                         {
-                        alt7=4;
+                        alt8=2;
+                        }
+                        break;
+                    case 28:
+                        {
+                        alt8=3;
+                        }
+                        break;
+                    case 26:
+                        {
+                        alt8=4;
                         }
                         break;
                     case 30:
                     case 31:
                         {
-                        alt7=5;
+                        alt8=5;
                         }
                         break;
                     default:
                         NoViableAltException nvae =
-                            new NoViableAltException("", 7, 0, input);
+                            new NoViableAltException("", 8, 0, input);
 
                         throw nvae;
                     }
 
-                    switch (alt7) {
+                    switch (alt8) {
                         case 1 :
-                            // InternalRegionAccessTestLanguage.g:633:7: ( (lv_name_8_0= RULE_ID ) )
+                            // InternalRegionAccessTestLanguage.g:643:7: ( (lv_name_8_0= RULE_ID ) )
                             {
-                            // InternalRegionAccessTestLanguage.g:633:7: ( (lv_name_8_0= RULE_ID ) )
-                            // InternalRegionAccessTestLanguage.g:634:1: (lv_name_8_0= RULE_ID )
+                            // InternalRegionAccessTestLanguage.g:643:7: ( (lv_name_8_0= RULE_ID ) )
+                            // InternalRegionAccessTestLanguage.g:644:1: (lv_name_8_0= RULE_ID )
                             {
-                            // InternalRegionAccessTestLanguage.g:634:1: (lv_name_8_0= RULE_ID )
-                            // InternalRegionAccessTestLanguage.g:635:3: lv_name_8_0= RULE_ID
+                            // InternalRegionAccessTestLanguage.g:644:1: (lv_name_8_0= RULE_ID )
+                            // InternalRegionAccessTestLanguage.g:645:3: lv_name_8_0= RULE_ID
                             {
-                            lv_name_8_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
+                            lv_name_8_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
                             			newLeafNode(lv_name_8_0, grammarAccess.getMixedAccess().getNameIDTerminalRuleCall_2_2_0_0()); 
                             		
@@ -1727,25 +1760,25 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                             }
                             break;
                         case 2 :
-                            // InternalRegionAccessTestLanguage.g:652:6: (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) )
+                            // InternalRegionAccessTestLanguage.g:662:6: (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) )
                             {
-                            // InternalRegionAccessTestLanguage.g:652:6: (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) )
-                            // InternalRegionAccessTestLanguage.g:652:8: otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) )
+                            // InternalRegionAccessTestLanguage.g:662:6: (otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) ) )
+                            // InternalRegionAccessTestLanguage.g:662:8: otherlv_9= 'child' ( (lv_eobj_10_0= ruleMixed ) )
                             {
-                            otherlv_9=(Token)match(input,24,FollowSets000.FOLLOW_4); 
+                            otherlv_9=(Token)match(input,25,FollowSets000.FOLLOW_4); 
 
                                 	newLeafNode(otherlv_9, grammarAccess.getMixedAccess().getChildKeyword_2_2_1_0());
                                 
-                            // InternalRegionAccessTestLanguage.g:656:1: ( (lv_eobj_10_0= ruleMixed ) )
-                            // InternalRegionAccessTestLanguage.g:657:1: (lv_eobj_10_0= ruleMixed )
+                            // InternalRegionAccessTestLanguage.g:666:1: ( (lv_eobj_10_0= ruleMixed ) )
+                            // InternalRegionAccessTestLanguage.g:667:1: (lv_eobj_10_0= ruleMixed )
                             {
-                            // InternalRegionAccessTestLanguage.g:657:1: (lv_eobj_10_0= ruleMixed )
-                            // InternalRegionAccessTestLanguage.g:658:3: lv_eobj_10_0= ruleMixed
+                            // InternalRegionAccessTestLanguage.g:667:1: (lv_eobj_10_0= ruleMixed )
+                            // InternalRegionAccessTestLanguage.g:668:3: lv_eobj_10_0= ruleMixed
                             {
                              
                             	        newCompositeNode(grammarAccess.getMixedAccess().getEobjMixedParserRuleCall_2_2_1_1_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_8);
+                            pushFollow(FollowSets000.FOLLOW_9);
                             lv_eobj_10_0=ruleMixed();
 
                             state._fsp--;
@@ -1774,18 +1807,18 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                             }
                             break;
                         case 3 :
-                            // InternalRegionAccessTestLanguage.g:675:6: ( (lv_datatype_11_0= ruleDatatype ) )
+                            // InternalRegionAccessTestLanguage.g:685:6: ( (lv_datatype_11_0= ruleDatatype ) )
                             {
-                            // InternalRegionAccessTestLanguage.g:675:6: ( (lv_datatype_11_0= ruleDatatype ) )
-                            // InternalRegionAccessTestLanguage.g:676:1: (lv_datatype_11_0= ruleDatatype )
+                            // InternalRegionAccessTestLanguage.g:685:6: ( (lv_datatype_11_0= ruleDatatype ) )
+                            // InternalRegionAccessTestLanguage.g:686:1: (lv_datatype_11_0= ruleDatatype )
                             {
-                            // InternalRegionAccessTestLanguage.g:676:1: (lv_datatype_11_0= ruleDatatype )
-                            // InternalRegionAccessTestLanguage.g:677:3: lv_datatype_11_0= ruleDatatype
+                            // InternalRegionAccessTestLanguage.g:686:1: (lv_datatype_11_0= ruleDatatype )
+                            // InternalRegionAccessTestLanguage.g:687:3: lv_datatype_11_0= ruleDatatype
                             {
                              
                             	        newCompositeNode(grammarAccess.getMixedAccess().getDatatypeDatatypeParserRuleCall_2_2_2_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_8);
+                            pushFollow(FollowSets000.FOLLOW_9);
                             lv_datatype_11_0=ruleDatatype();
 
                             state._fsp--;
@@ -1811,27 +1844,27 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                             }
                             break;
                         case 4 :
-                            // InternalRegionAccessTestLanguage.g:694:6: (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) )
+                            // InternalRegionAccessTestLanguage.g:704:6: (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) )
                             {
-                            // InternalRegionAccessTestLanguage.g:694:6: (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) )
-                            // InternalRegionAccessTestLanguage.g:694:8: otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) )
+                            // InternalRegionAccessTestLanguage.g:704:6: (otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) ) )
+                            // InternalRegionAccessTestLanguage.g:704:8: otherlv_12= 'ref' ( (otherlv_13= RULE_ID ) )
                             {
-                            otherlv_12=(Token)match(input,25,FollowSets000.FOLLOW_5); 
+                            otherlv_12=(Token)match(input,26,FollowSets000.FOLLOW_6); 
 
                                 	newLeafNode(otherlv_12, grammarAccess.getMixedAccess().getRefKeyword_2_2_3_0());
                                 
-                            // InternalRegionAccessTestLanguage.g:698:1: ( (otherlv_13= RULE_ID ) )
-                            // InternalRegionAccessTestLanguage.g:699:1: (otherlv_13= RULE_ID )
+                            // InternalRegionAccessTestLanguage.g:708:1: ( (otherlv_13= RULE_ID ) )
+                            // InternalRegionAccessTestLanguage.g:709:1: (otherlv_13= RULE_ID )
                             {
-                            // InternalRegionAccessTestLanguage.g:699:1: (otherlv_13= RULE_ID )
-                            // InternalRegionAccessTestLanguage.g:700:3: otherlv_13= RULE_ID
+                            // InternalRegionAccessTestLanguage.g:709:1: (otherlv_13= RULE_ID )
+                            // InternalRegionAccessTestLanguage.g:710:3: otherlv_13= RULE_ID
                             {
 
                             			if (current==null) {
                             	            current = createModelElement(grammarAccess.getMixedRule());
                             	        }
                                     
-                            otherlv_13=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
+                            otherlv_13=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
                             		newLeafNode(otherlv_13, grammarAccess.getMixedAccess().getRefMixedCrossReference_2_2_3_1_0()); 
                             	
@@ -1848,18 +1881,18 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                             }
                             break;
                         case 5 :
-                            // InternalRegionAccessTestLanguage.g:712:6: ( (lv_lit_14_0= ruleEnum ) )
+                            // InternalRegionAccessTestLanguage.g:722:6: ( (lv_lit_14_0= ruleEnum ) )
                             {
-                            // InternalRegionAccessTestLanguage.g:712:6: ( (lv_lit_14_0= ruleEnum ) )
-                            // InternalRegionAccessTestLanguage.g:713:1: (lv_lit_14_0= ruleEnum )
+                            // InternalRegionAccessTestLanguage.g:722:6: ( (lv_lit_14_0= ruleEnum ) )
+                            // InternalRegionAccessTestLanguage.g:723:1: (lv_lit_14_0= ruleEnum )
                             {
-                            // InternalRegionAccessTestLanguage.g:713:1: (lv_lit_14_0= ruleEnum )
-                            // InternalRegionAccessTestLanguage.g:714:3: lv_lit_14_0= ruleEnum
+                            // InternalRegionAccessTestLanguage.g:723:1: (lv_lit_14_0= ruleEnum )
+                            // InternalRegionAccessTestLanguage.g:724:3: lv_lit_14_0= ruleEnum
                             {
                              
                             	        newCompositeNode(grammarAccess.getMixedAccess().getLitEnumEnumRuleCall_2_2_4_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_8);
+                            pushFollow(FollowSets000.FOLLOW_9);
                             lv_lit_14_0=ruleEnum();
 
                             state._fsp--;
@@ -1893,27 +1926,27 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
             }
 
-            otherlv_15=(Token)match(input,21,FollowSets000.FOLLOW_12); 
+            otherlv_15=(Token)match(input,22,FollowSets000.FOLLOW_13); 
 
                 	newLeafNode(otherlv_15, grammarAccess.getMixedAccess().getRightParenthesisKeyword_3());
                 
-            // InternalRegionAccessTestLanguage.g:734:1: ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )*
-            loop10:
+            // InternalRegionAccessTestLanguage.g:744:1: ( () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )? )*
+            loop11:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-                if ( (LA10_0==26) ) {
-                    alt10=1;
+                if ( (LA11_0==14) ) {
+                    alt11=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt11) {
             	case 1 :
-            	    // InternalRegionAccessTestLanguage.g:734:2: () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )?
+            	    // InternalRegionAccessTestLanguage.g:744:2: () otherlv_17= 'action' ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )?
             	    {
-            	    // InternalRegionAccessTestLanguage.g:734:2: ()
-            	    // InternalRegionAccessTestLanguage.g:735:5: 
+            	    // InternalRegionAccessTestLanguage.g:744:2: ()
+            	    // InternalRegionAccessTestLanguage.g:745:5: 
             	    {
 
             	            current = forceCreateModelElementAndSet(
@@ -1923,31 +1956,31 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
             	    }
 
-            	    otherlv_17=(Token)match(input,26,FollowSets000.FOLLOW_13); 
+            	    otherlv_17=(Token)match(input,14,FollowSets000.FOLLOW_14); 
 
             	        	newLeafNode(otherlv_17, grammarAccess.getMixedAccess().getActionKeyword_4_1());
             	        
-            	    // InternalRegionAccessTestLanguage.g:744:1: ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )?
-            	    int alt9=2;
-            	    int LA9_0 = input.LA(1);
+            	    // InternalRegionAccessTestLanguage.g:754:1: ( ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end' )?
+            	    int alt10=2;
+            	    int LA10_0 = input.LA(1);
 
-            	    if ( (LA9_0==20) ) {
-            	        alt9=1;
+            	    if ( (LA10_0==21) ) {
+            	        alt10=1;
             	    }
-            	    switch (alt9) {
+            	    switch (alt10) {
             	        case 1 :
-            	            // InternalRegionAccessTestLanguage.g:744:2: ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end'
+            	            // InternalRegionAccessTestLanguage.g:754:2: ( (lv_body_18_0= ruleMixed ) ) otherlv_19= 'end'
             	            {
-            	            // InternalRegionAccessTestLanguage.g:744:2: ( (lv_body_18_0= ruleMixed ) )
-            	            // InternalRegionAccessTestLanguage.g:745:1: (lv_body_18_0= ruleMixed )
+            	            // InternalRegionAccessTestLanguage.g:754:2: ( (lv_body_18_0= ruleMixed ) )
+            	            // InternalRegionAccessTestLanguage.g:755:1: (lv_body_18_0= ruleMixed )
             	            {
-            	            // InternalRegionAccessTestLanguage.g:745:1: (lv_body_18_0= ruleMixed )
-            	            // InternalRegionAccessTestLanguage.g:746:3: lv_body_18_0= ruleMixed
+            	            // InternalRegionAccessTestLanguage.g:755:1: (lv_body_18_0= ruleMixed )
+            	            // InternalRegionAccessTestLanguage.g:756:3: lv_body_18_0= ruleMixed
             	            {
             	             
             	            	        newCompositeNode(grammarAccess.getMixedAccess().getBodyMixedParserRuleCall_4_2_0_0()); 
             	            	    
-            	            pushFollow(FollowSets000.FOLLOW_14);
+            	            pushFollow(FollowSets000.FOLLOW_15);
             	            lv_body_18_0=ruleMixed();
 
             	            state._fsp--;
@@ -1969,7 +2002,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
             	            }
 
-            	            otherlv_19=(Token)match(input,27,FollowSets000.FOLLOW_12); 
+            	            otherlv_19=(Token)match(input,27,FollowSets000.FOLLOW_13); 
 
             	                	newLeafNode(otherlv_19, grammarAccess.getMixedAccess().getEndKeyword_4_2_1());
             	                
@@ -1984,7 +2017,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
             	    break;
 
             	default :
-            	    break loop10;
+            	    break loop11;
                 }
             } while (true);
 
@@ -2009,7 +2042,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleDatatype"
-    // InternalRegionAccessTestLanguage.g:774:1: entryRuleDatatype returns [String current=null] : iv_ruleDatatype= ruleDatatype EOF ;
+    // InternalRegionAccessTestLanguage.g:784:1: entryRuleDatatype returns [String current=null] : iv_ruleDatatype= ruleDatatype EOF ;
     public final String entryRuleDatatype() throws RecognitionException {
         String current = null;
 
@@ -2017,8 +2050,8 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalRegionAccessTestLanguage.g:775:2: (iv_ruleDatatype= ruleDatatype EOF )
-            // InternalRegionAccessTestLanguage.g:776:2: iv_ruleDatatype= ruleDatatype EOF
+            // InternalRegionAccessTestLanguage.g:785:2: (iv_ruleDatatype= ruleDatatype EOF )
+            // InternalRegionAccessTestLanguage.g:786:2: iv_ruleDatatype= ruleDatatype EOF
             {
              newCompositeNode(grammarAccess.getDatatypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2045,7 +2078,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleDatatype"
-    // InternalRegionAccessTestLanguage.g:783:1: ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID ) ) ;
+    // InternalRegionAccessTestLanguage.g:793:1: ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID ) ) ;
     public final AntlrDatatypeRuleToken ruleDatatype() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2057,36 +2090,36 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:786:28: ( (kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID ) ) )
-            // InternalRegionAccessTestLanguage.g:787:1: (kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID ) )
+            // InternalRegionAccessTestLanguage.g:796:28: ( (kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID ) ) )
+            // InternalRegionAccessTestLanguage.g:797:1: (kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID ) )
             {
-            // InternalRegionAccessTestLanguage.g:787:1: (kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID ) )
-            // InternalRegionAccessTestLanguage.g:788:2: kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID )
+            // InternalRegionAccessTestLanguage.g:797:1: (kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID ) )
+            // InternalRegionAccessTestLanguage.g:798:2: kw= 'datatype' (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID )
             {
-            kw=(Token)match(input,28,FollowSets000.FOLLOW_10); 
+            kw=(Token)match(input,28,FollowSets000.FOLLOW_11); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDatatypeAccess().getDatatypeKeyword_0()); 
                 
-            // InternalRegionAccessTestLanguage.g:793:1: (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID )
-            int alt11=2;
-            int LA11_0 = input.LA(1);
+            // InternalRegionAccessTestLanguage.g:803:1: (this_Datatype_1= ruleDatatype | this_ID_2= RULE_ID )
+            int alt12=2;
+            int LA12_0 = input.LA(1);
 
-            if ( (LA11_0==28) ) {
-                alt11=1;
+            if ( (LA12_0==28) ) {
+                alt12=1;
             }
-            else if ( (LA11_0==RULE_ID) ) {
-                alt11=2;
+            else if ( (LA12_0==RULE_ID) ) {
+                alt12=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 11, 0, input);
+                    new NoViableAltException("", 12, 0, input);
 
                 throw nvae;
             }
-            switch (alt11) {
+            switch (alt12) {
                 case 1 :
-                    // InternalRegionAccessTestLanguage.g:794:5: this_Datatype_1= ruleDatatype
+                    // InternalRegionAccessTestLanguage.g:804:5: this_Datatype_1= ruleDatatype
                     {
                      
                             newCompositeNode(grammarAccess.getDatatypeAccess().getDatatypeParserRuleCall_1_0()); 
@@ -2106,7 +2139,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 2 :
-                    // InternalRegionAccessTestLanguage.g:805:10: this_ID_2= RULE_ID
+                    // InternalRegionAccessTestLanguage.g:815:10: this_ID_2= RULE_ID
                     {
                     this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -2142,7 +2175,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleFragment"
-    // InternalRegionAccessTestLanguage.g:821:1: ruleFragment[EObject in_current] returns [EObject current=in_current] : ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) ) ;
+    // InternalRegionAccessTestLanguage.g:831:1: ruleFragment[EObject in_current] returns [EObject current=in_current] : ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) ) ;
     public final EObject ruleFragment(EObject in_current) throws RecognitionException {
         EObject current = in_current;
 
@@ -2157,43 +2190,43 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalRegionAccessTestLanguage.g:824:28: ( ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) ) )
-            // InternalRegionAccessTestLanguage.g:825:1: ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) )
+            // InternalRegionAccessTestLanguage.g:834:28: ( ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) ) )
+            // InternalRegionAccessTestLanguage.g:835:1: ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) )
             {
-            // InternalRegionAccessTestLanguage.g:825:1: ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) )
-            int alt12=3;
+            // InternalRegionAccessTestLanguage.g:835:1: ( ( (lv_fragName_0_0= RULE_ID ) ) | (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) ) | (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] ) )
+            int alt13=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
-                alt12=1;
+                alt13=1;
                 }
                 break;
-            case 24:
+            case 25:
                 {
-                alt12=2;
+                alt13=2;
                 }
                 break;
             case 29:
                 {
-                alt12=3;
+                alt13=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 12, 0, input);
+                    new NoViableAltException("", 13, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt12) {
+            switch (alt13) {
                 case 1 :
-                    // InternalRegionAccessTestLanguage.g:825:2: ( (lv_fragName_0_0= RULE_ID ) )
+                    // InternalRegionAccessTestLanguage.g:835:2: ( (lv_fragName_0_0= RULE_ID ) )
                     {
-                    // InternalRegionAccessTestLanguage.g:825:2: ( (lv_fragName_0_0= RULE_ID ) )
-                    // InternalRegionAccessTestLanguage.g:826:1: (lv_fragName_0_0= RULE_ID )
+                    // InternalRegionAccessTestLanguage.g:835:2: ( (lv_fragName_0_0= RULE_ID ) )
+                    // InternalRegionAccessTestLanguage.g:836:1: (lv_fragName_0_0= RULE_ID )
                     {
-                    // InternalRegionAccessTestLanguage.g:826:1: (lv_fragName_0_0= RULE_ID )
-                    // InternalRegionAccessTestLanguage.g:827:3: lv_fragName_0_0= RULE_ID
+                    // InternalRegionAccessTestLanguage.g:836:1: (lv_fragName_0_0= RULE_ID )
+                    // InternalRegionAccessTestLanguage.g:837:3: lv_fragName_0_0= RULE_ID
                     {
                     lv_fragName_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
@@ -2219,20 +2252,20 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 2 :
-                    // InternalRegionAccessTestLanguage.g:844:6: (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) )
+                    // InternalRegionAccessTestLanguage.g:854:6: (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) )
                     {
-                    // InternalRegionAccessTestLanguage.g:844:6: (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) )
-                    // InternalRegionAccessTestLanguage.g:844:8: otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) )
+                    // InternalRegionAccessTestLanguage.g:854:6: (otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) ) )
+                    // InternalRegionAccessTestLanguage.g:854:8: otherlv_1= 'child' ( (lv_mixed_2_0= ruleMixed ) )
                     {
-                    otherlv_1=(Token)match(input,24,FollowSets000.FOLLOW_4); 
+                    otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_4); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getFragmentAccess().getChildKeyword_1_0());
                         
-                    // InternalRegionAccessTestLanguage.g:848:1: ( (lv_mixed_2_0= ruleMixed ) )
-                    // InternalRegionAccessTestLanguage.g:849:1: (lv_mixed_2_0= ruleMixed )
+                    // InternalRegionAccessTestLanguage.g:858:1: ( (lv_mixed_2_0= ruleMixed ) )
+                    // InternalRegionAccessTestLanguage.g:859:1: (lv_mixed_2_0= ruleMixed )
                     {
-                    // InternalRegionAccessTestLanguage.g:849:1: (lv_mixed_2_0= ruleMixed )
-                    // InternalRegionAccessTestLanguage.g:850:3: lv_mixed_2_0= ruleMixed
+                    // InternalRegionAccessTestLanguage.g:859:1: (lv_mixed_2_0= ruleMixed )
+                    // InternalRegionAccessTestLanguage.g:860:3: lv_mixed_2_0= ruleMixed
                     {
                      
                     	        newCompositeNode(grammarAccess.getFragmentAccess().getMixedMixedParserRuleCall_1_1_0()); 
@@ -2266,12 +2299,12 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 3 :
-                    // InternalRegionAccessTestLanguage.g:867:6: (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] )
+                    // InternalRegionAccessTestLanguage.g:877:6: (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] )
                     {
-                    // InternalRegionAccessTestLanguage.g:867:6: (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] )
-                    // InternalRegionAccessTestLanguage.g:867:8: otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current]
+                    // InternalRegionAccessTestLanguage.g:877:6: (otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current] )
+                    // InternalRegionAccessTestLanguage.g:877:8: otherlv_3= 'recursion' this_Fragment_4= ruleFragment[$current]
                     {
-                    otherlv_3=(Token)match(input,29,FollowSets000.FOLLOW_11); 
+                    otherlv_3=(Token)match(input,29,FollowSets000.FOLLOW_12); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getFragmentAccess().getRecursionKeyword_2_0());
                         
@@ -2317,7 +2350,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleEnum"
-    // InternalRegionAccessTestLanguage.g:891:1: ruleEnum returns [Enumerator current=null] : ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) ) ;
+    // InternalRegionAccessTestLanguage.g:901:1: ruleEnum returns [Enumerator current=null] : ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) ) ;
     public final Enumerator ruleEnum() throws RecognitionException {
         Enumerator current = null;
 
@@ -2326,31 +2359,31 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
 
          enterRule(); 
         try {
-            // InternalRegionAccessTestLanguage.g:893:28: ( ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) ) )
-            // InternalRegionAccessTestLanguage.g:894:1: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) )
+            // InternalRegionAccessTestLanguage.g:903:28: ( ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) ) )
+            // InternalRegionAccessTestLanguage.g:904:1: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) )
             {
-            // InternalRegionAccessTestLanguage.g:894:1: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) )
-            int alt13=2;
-            int LA13_0 = input.LA(1);
+            // InternalRegionAccessTestLanguage.g:904:1: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) )
+            int alt14=2;
+            int LA14_0 = input.LA(1);
 
-            if ( (LA13_0==30) ) {
-                alt13=1;
+            if ( (LA14_0==30) ) {
+                alt14=1;
             }
-            else if ( (LA13_0==31) ) {
-                alt13=2;
+            else if ( (LA14_0==31) ) {
+                alt14=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 13, 0, input);
+                    new NoViableAltException("", 14, 0, input);
 
                 throw nvae;
             }
-            switch (alt13) {
+            switch (alt14) {
                 case 1 :
-                    // InternalRegionAccessTestLanguage.g:894:2: (enumLiteral_0= 'lit1' )
+                    // InternalRegionAccessTestLanguage.g:904:2: (enumLiteral_0= 'lit1' )
                     {
-                    // InternalRegionAccessTestLanguage.g:894:2: (enumLiteral_0= 'lit1' )
-                    // InternalRegionAccessTestLanguage.g:894:4: enumLiteral_0= 'lit1'
+                    // InternalRegionAccessTestLanguage.g:904:2: (enumLiteral_0= 'lit1' )
+                    // InternalRegionAccessTestLanguage.g:904:4: enumLiteral_0= 'lit1'
                     {
                     enumLiteral_0=(Token)match(input,30,FollowSets000.FOLLOW_2); 
 
@@ -2364,10 +2397,10 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                     }
                     break;
                 case 2 :
-                    // InternalRegionAccessTestLanguage.g:900:6: (enumLiteral_1= 'lit2' )
+                    // InternalRegionAccessTestLanguage.g:910:6: (enumLiteral_1= 'lit2' )
                     {
-                    // InternalRegionAccessTestLanguage.g:900:6: (enumLiteral_1= 'lit2' )
-                    // InternalRegionAccessTestLanguage.g:900:8: enumLiteral_1= 'lit2'
+                    // InternalRegionAccessTestLanguage.g:910:6: (enumLiteral_1= 'lit2' )
+                    // InternalRegionAccessTestLanguage.g:910:8: enumLiteral_1= 'lit2'
                     {
                     enumLiteral_1=(Token)match(input,31,FollowSets000.FOLLOW_2); 
 
@@ -2408,18 +2441,19 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
     private static class FollowSets000 {
         public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000080002L});
-        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000200000L});
-        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x00000000D3F00010L});
-        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000010000010L});
-        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000021000010L});
-        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000004000002L});
-        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000004100002L});
-        public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000204000L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000100002L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x00000000D7E00010L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000010000010L});
+        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000022000010L});
+        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000204002L});
+        public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000008000000L});
     }
 
 
