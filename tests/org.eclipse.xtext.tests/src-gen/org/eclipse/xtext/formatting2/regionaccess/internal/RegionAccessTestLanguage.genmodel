@@ -38,6 +38,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RegionAccessTestLanguage.ecore#//Mixed/lit"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RegionAccessTestLanguage.ecore#//Mixed/fragName"/>
     </genClasses>
+    <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//RootAction"/>
     <genClasses ecoreClass="RegionAccessTestLanguage.ecore#//Add">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RegionAccessTestLanguage.ecore#//Add/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RegionAccessTestLanguage.ecore#//Add/right"/>

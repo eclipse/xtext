@@ -1366,6 +1366,57 @@ public class RegionAccessBuilderTest {
     this.operator_tripleEquals(_trim, _builder_1);
   }
   
+  @Test
+  public void testMixedRootAction() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("7 action (foo)");
+    _builder.newLine();
+    String _string = _builder.toString();
+    String _trim = _string.trim();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(" ");
+    _builder_1.append("0 0 H");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("B RootAction Root");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("0 1 S \"7\"        Root:\'7\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("1 1 H \" \"        Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("2 6 S \"action\"   Root:\'action\'");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("8 1 H \" \"        Whitespace:TerminalRule\'WS\'");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("B Mixed\'foo\' Root:mixed=Mixed path:RootAction/mixed");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("9 1 S \"(\"        Mixed:\'(\'");
+    _builder_1.newLine();
+    _builder_1.append("10 0 H");
+    _builder_1.newLine();
+    _builder_1.append("10 3 S \"foo\"      Mixed:name=ID");
+    _builder_1.newLine();
+    _builder_1.append("13 0 H");
+    _builder_1.newLine();
+    _builder_1.append("13 1 S \")\"        Mixed:\')\'");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("E Mixed\'foo\' Root:mixed=Mixed path:RootAction/mixed");
+    _builder_1.newLine();
+    _builder_1.append("     ");
+    _builder_1.append("E RootAction Root");
+    _builder_1.newLine();
+    _builder_1.append("14 0 H");
+    _builder_1.newLine();
+    this.operator_tripleEquals(_trim, _builder_1);
+  }
+  
   private void operator_tripleEquals(final CharSequence file, final CharSequence expectation) {
     try {
       final String exp = expectation.toString();

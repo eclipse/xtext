@@ -21,6 +21,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedUnassigned;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Unassigned;
 
@@ -131,6 +132,11 @@ public class RegionaccesstestlanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseMixed(Mixed object)
       {
         return createMixedAdapter();
+      }
+      @Override
+      public Adapter caseRootAction(RootAction object)
+      {
+        return createRootActionAdapter();
       }
       @Override
       public Adapter caseAdd(Add object)
@@ -305,6 +311,21 @@ public class RegionaccesstestlanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMixedAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction <em>Root Action</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction
+   * @generated
+   */
+  public Adapter createRootActionAdapter()
   {
     return null;
   }

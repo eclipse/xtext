@@ -615,6 +615,28 @@ class RegionAccessBuilderTest {
 			31 0 H
 		'''
 	}
+	
+	@Test def void testMixedRootAction() {
+		'''
+			7 action (foo)
+		'''.toString.trim === '''
+			 0 0 H
+			     B RootAction Root
+			 0 1 S "7"        Root:'7'
+			 1 1 H " "        Whitespace:TerminalRule'WS'
+			 2 6 S "action"   Root:'action'
+			 8 1 H " "        Whitespace:TerminalRule'WS'
+			     B Mixed'foo' Root:mixed=Mixed path:RootAction/mixed
+			 9 1 S "("        Mixed:'('
+			10 0 H
+			10 3 S "foo"      Mixed:name=ID
+			13 0 H
+			13 1 S ")"        Mixed:')'
+			     E Mixed'foo' Root:mixed=Mixed path:RootAction/mixed
+			     E RootAction Root
+			14 0 H
+		'''
+	}
 
 	private def ===(CharSequence file, CharSequence expectation) {
 		val exp = expectation.toString

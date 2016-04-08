@@ -51,7 +51,10 @@ public class RegionAccessTestLanguageParserDefinition extends AbstractXtextParse
 			if (elementType == elementTypeProvider.getRoot_MixedParserRuleCall_5_1ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
-			if (elementType == elementTypeProvider.getRoot_MixedMixedParserRuleCall_6_1_0ElementType()) {
+			if (elementType == elementTypeProvider.getRoot_RootActionAction_6_1_0ElementType()) {
+				return new PsiEObjectImpl(node) {};
+			}
+			if (elementType == elementTypeProvider.getRoot_MixedMixedParserRuleCall_6_2_0ElementType()) {
 				return new PsiNamedEObjectImpl(node) {};
 			}
 			if (elementType == elementTypeProvider.getSimpleElementType()) {

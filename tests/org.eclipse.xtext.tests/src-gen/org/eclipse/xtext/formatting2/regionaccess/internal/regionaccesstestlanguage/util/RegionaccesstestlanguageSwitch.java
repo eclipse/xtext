@@ -19,6 +19,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedUnassigned;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Unassigned;
 
@@ -154,6 +155,14 @@ public class RegionaccesstestlanguageSwitch<T> extends Switch<T>
         Mixed mixed = (Mixed)theEObject;
         T result = caseMixed(mixed);
         if (result == null) result = caseRoot(mixed);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RegionaccesstestlanguagePackage.ROOT_ACTION:
+      {
+        RootAction rootAction = (RootAction)theEObject;
+        T result = caseRootAction(rootAction);
+        if (result == null) result = caseRoot(rootAction);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -337,6 +346,22 @@ public class RegionaccesstestlanguageSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMixed(Mixed object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Root Action</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Root Action</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRootAction(RootAction object)
   {
     return null;
   }

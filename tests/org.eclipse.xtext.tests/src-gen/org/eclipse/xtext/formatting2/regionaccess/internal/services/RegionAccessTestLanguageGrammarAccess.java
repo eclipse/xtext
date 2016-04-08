@@ -33,14 +33,19 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cMixedParserRuleCall_5_1 = (RuleCall)cGroup_5.eContents().get(1);
 		private final Group cGroup_6 = (Group)cAlternatives.eContents().get(6);
 		private final Keyword cDigitSevenKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
-		private final Assignment cMixedAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
-		private final RuleCall cMixedMixedParserRuleCall_6_1_0 = (RuleCall)cMixedAssignment_6_1.eContents().get(0);
+		private final Group cGroup_6_1 = (Group)cGroup_6.eContents().get(1);
+		private final Action cRootActionAction_6_1_0 = (Action)cGroup_6_1.eContents().get(0);
+		private final Keyword cActionKeyword_6_1_1 = (Keyword)cGroup_6_1.eContents().get(1);
+		private final Assignment cMixedAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
+		private final RuleCall cMixedMixedParserRuleCall_6_2_0 = (RuleCall)cMixedAssignment_6_2.eContents().get(0);
 		
 		//Root:
-		//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" mixed=Mixed;
+		//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
+		//	mixed=Mixed;
 		@Override public ParserRule getRule() { return rule; }
 
-		//Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" mixed=Mixed
+		//Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
+		//mixed=Mixed
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Simple
@@ -73,17 +78,26 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Mixed
 		public RuleCall getMixedParserRuleCall_5_1() { return cMixedParserRuleCall_5_1; }
 
-		//"7" mixed=Mixed
+		//"7" ({RootAction} "action")? mixed=Mixed
 		public Group getGroup_6() { return cGroup_6; }
 
 		//"7"
 		public Keyword getDigitSevenKeyword_6_0() { return cDigitSevenKeyword_6_0; }
 
+		//({RootAction} "action")?
+		public Group getGroup_6_1() { return cGroup_6_1; }
+
+		//{RootAction}
+		public Action getRootActionAction_6_1_0() { return cRootActionAction_6_1_0; }
+
+		//"action"
+		public Keyword getActionKeyword_6_1_1() { return cActionKeyword_6_1_1; }
+
 		//mixed=Mixed
-		public Assignment getMixedAssignment_6_1() { return cMixedAssignment_6_1; }
+		public Assignment getMixedAssignment_6_2() { return cMixedAssignment_6_2; }
 
 		//Mixed
-		public RuleCall getMixedMixedParserRuleCall_6_1_0() { return cMixedMixedParserRuleCall_6_1_0; }
+		public RuleCall getMixedMixedParserRuleCall_6_2_0() { return cMixedMixedParserRuleCall_6_2_0; }
 	}
 
 	public class SimpleElements extends AbstractParserRuleElementFinder {
@@ -643,7 +657,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 
 	
 	//Root:
-	//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" mixed=Mixed;
+	//	Simple | Delegation | Unassigned | PrefixedUnassigned | "5" Expression | "6" Mixed | "7" ({RootAction} "action")?
+	//	mixed=Mixed;
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
