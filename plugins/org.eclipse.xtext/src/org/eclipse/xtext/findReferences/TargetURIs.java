@@ -23,7 +23,7 @@ import com.google.inject.ImplementedBy;
  * a given {@link Key key}.  
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
+ * @since 2.10
  */
 @ImplementedBy(TargetURISet.class)
 public interface TargetURIs extends Iterable<URI> {

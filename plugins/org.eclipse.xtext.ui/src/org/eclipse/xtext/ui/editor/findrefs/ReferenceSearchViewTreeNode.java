@@ -10,12 +10,14 @@ package org.eclipse.xtext.ui.editor.findrefs;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.xtext.ide.editor.navigation.Navigatable;
+
 import com.google.common.collect.Lists;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ReferenceSearchViewTreeNode {
+public class ReferenceSearchViewTreeNode implements Navigatable {
 
 	private ReferenceSearchViewTreeNode parent;
 
@@ -65,6 +67,11 @@ public class ReferenceSearchViewTreeNode {
 	
 	public Object getLabelDescription() {
 		return labelDescription;
+	}
+
+	@Override
+	public Object getNavigationElement() {
+		return getDescription();
 	}
 
 }

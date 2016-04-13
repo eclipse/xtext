@@ -37,7 +37,7 @@ import com.google.inject.ImplementedBy;
  * @author Jan Koehnlein - Initial contribution and API in xtext.ui
  * @author Sebastian Zarnekow - Extracted headless API
  * 
- * @since 2.7
+ * @since 2.10
  */
 @ImplementedBy(ReferenceFinder.class)
 public interface IReferenceFinder {
@@ -47,7 +47,7 @@ public interface IReferenceFinder {
 	 * shared resource set.
 	 */
 	interface IResourceAccess {
-		<R> R readOnly(URI resourceURI, IUnitOfWork<R, ResourceSet> work);
+		<R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work);
 	}
 	
 	/**

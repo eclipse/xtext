@@ -88,6 +88,7 @@ public class XtextPluginImages {
 	 */
 	public static final ImageDescriptor DESC_OVR_ERROR = create(PATH_OVR, "error_co.gif"); //$NON-NLS-1$
 	public static final ImageDescriptor DESC_OVR_WARNING =create(PATH_OVR, "warning_co.gif"); //$NON-NLS-1$
+	public static final ImageDescriptor DESC_OVR_RECURSIVE =create(PATH_OVR, "recursive_co.png"); //$NON-NLS-1$
 
 	/**
 	 * TOOL16
