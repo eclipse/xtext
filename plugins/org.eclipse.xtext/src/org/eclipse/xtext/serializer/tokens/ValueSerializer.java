@@ -63,7 +63,8 @@ public class ValueSerializer implements IValueSerializer {
 		String ruleName = ruleNames.getQualifiedName(rule);
 		if (node != null) {
 			AbstractRule nodeRule = linkingHelper.getRuleFrom(node.getGrammarElement());
-			if (rule == nodeRule) {
+			// TODO: analyze why grammar element identity is broken here during generation of Xtext languages using MWE2  
+			if (nodeRule != null && ruleNames.getQualifiedName(nodeRule).equals(ruleName)) {
 				Object converted = converter.toValue(NodeModelUtils.getTokenText(node), ruleName, node);
 				if (converted != null && converted.equals(value))
 					return tokenUtil.serializeNode(node);
