@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="org.xtext.example.mavenTychoP2.sdk"
-	label="MyDsl SDK Feature "
+<feature id="org.xtext.example.mavenTychoP2.feature"
+	label="MyDsl Feature "
 	version="1.0.0.qualifier">
 	<plugin
 			id="org.xtext.example.mavenTychoP2"
