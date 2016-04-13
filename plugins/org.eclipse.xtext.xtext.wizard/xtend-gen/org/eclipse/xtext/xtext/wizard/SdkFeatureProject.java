@@ -37,7 +37,7 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 public class SdkFeatureProject extends ProjectDescriptor {
   @Override
   public String getNameQualifier() {
-    return ".sdk";
+    return ".feature";
   }
   
   @Override
@@ -124,7 +124,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
     LanguageDescriptor _language = _config.getLanguage();
     String _simpleName = _language.getSimpleName();
     _builder.append(_simpleName, "\t");
-    _builder.append(" SDK Feature \"");
+    _builder.append(" Feature \"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("version=\"1.0.0.qualifier\">");

@@ -16,7 +16,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 class SdkFeatureProject extends ProjectDescriptor {
 
 	override getNameQualifier() {
-		".sdk"
+		".feature"
 	}
 	
 	override isEclipsePluginProject() {
@@ -59,7 +59,7 @@ class SdkFeatureProject extends ProjectDescriptor {
 	def featureXml() '''
 		<?xml version="1.0" encoding="UTF-8"?>
 		<feature id="«name»"
-			label="«config.language.simpleName» SDK Feature "
+			label="«config.language.simpleName» Feature "
 			version="1.0.0.qualifier">
 			«includedPlugin("")»
 			«IF config.ideProject.enabled»
