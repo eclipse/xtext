@@ -19,7 +19,7 @@
 		<module>org.xtext.example.mavenTychoP2.ui</module>
 		<module>org.xtext.example.mavenTychoP2.web</module>
 		<module>org.xtext.example.mavenTychoP2.target</module>
-		<module>org.xtext.example.mavenTychoP2.sdk</module>
+		<module>org.xtext.example.mavenTychoP2.feature</module>
 		<module>org.xtext.example.mavenTychoP2.repository</module>
 		<module>org.xtext.example.mavenTychoP2.tests</module>
 		<module>org.xtext.example.mavenTychoP2.ui.tests</module>
