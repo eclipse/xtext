@@ -537,11 +537,9 @@ public class CompilationUnitImpl implements CompilationUnit {
       public Type apply(final JvmType it) {
         Type _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (delegate instanceof JvmDeclaredType) {
-            _matched=true;
-            _switchResult = CompilationUnitImpl.this.toTypeDeclaration(((JvmDeclaredType)delegate));
-          }
+        if (delegate instanceof JvmDeclaredType) {
+          _matched=true;
+          _switchResult = CompilationUnitImpl.this.toTypeDeclaration(((JvmDeclaredType)delegate));
         }
         if (!_matched) {
           if (delegate instanceof JvmTypeParameter) {
@@ -589,36 +587,34 @@ public class CompilationUnitImpl implements CompilationUnit {
       public TypeDeclaration apply(final JvmDeclaredType it) {
         JvmTypeDeclarationImpl<? extends JvmDeclaredType> _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (delegate instanceof JvmGenericType) {
-            boolean _isInterface = ((JvmGenericType)delegate).isInterface();
-            if (_isInterface) {
-              _matched=true;
-              JvmInterfaceDeclarationImpl _xifexpression = null;
-              boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
-              if (_isBelongedToCompilationUnit) {
-                MutableJvmInterfaceDeclarationImpl _mutableJvmInterfaceDeclarationImpl = new MutableJvmInterfaceDeclarationImpl();
-                final Procedure1<MutableJvmInterfaceDeclarationImpl> _function = new Procedure1<MutableJvmInterfaceDeclarationImpl>() {
-                  @Override
-                  public void apply(final MutableJvmInterfaceDeclarationImpl it) {
-                    it.setDelegate(((JvmGenericType)delegate));
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                  }
-                };
-                _xifexpression = ObjectExtensions.<MutableJvmInterfaceDeclarationImpl>operator_doubleArrow(_mutableJvmInterfaceDeclarationImpl, _function);
-              } else {
-                JvmInterfaceDeclarationImpl _jvmInterfaceDeclarationImpl = new JvmInterfaceDeclarationImpl();
-                final Procedure1<JvmInterfaceDeclarationImpl> _function_1 = new Procedure1<JvmInterfaceDeclarationImpl>() {
-                  @Override
-                  public void apply(final JvmInterfaceDeclarationImpl it) {
-                    it.setDelegate(((JvmGenericType)delegate));
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                  }
-                };
-                _xifexpression = ObjectExtensions.<JvmInterfaceDeclarationImpl>operator_doubleArrow(_jvmInterfaceDeclarationImpl, _function_1);
-              }
-              _switchResult = _xifexpression;
+        if (delegate instanceof JvmGenericType) {
+          boolean _isInterface = ((JvmGenericType)delegate).isInterface();
+          if (_isInterface) {
+            _matched=true;
+            JvmInterfaceDeclarationImpl _xifexpression = null;
+            boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
+            if (_isBelongedToCompilationUnit) {
+              MutableJvmInterfaceDeclarationImpl _mutableJvmInterfaceDeclarationImpl = new MutableJvmInterfaceDeclarationImpl();
+              final Procedure1<MutableJvmInterfaceDeclarationImpl> _function = new Procedure1<MutableJvmInterfaceDeclarationImpl>() {
+                @Override
+                public void apply(final MutableJvmInterfaceDeclarationImpl it) {
+                  it.setDelegate(((JvmGenericType)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<MutableJvmInterfaceDeclarationImpl>operator_doubleArrow(_mutableJvmInterfaceDeclarationImpl, _function);
+            } else {
+              JvmInterfaceDeclarationImpl _jvmInterfaceDeclarationImpl = new JvmInterfaceDeclarationImpl();
+              final Procedure1<JvmInterfaceDeclarationImpl> _function_1 = new Procedure1<JvmInterfaceDeclarationImpl>() {
+                @Override
+                public void apply(final JvmInterfaceDeclarationImpl it) {
+                  it.setDelegate(((JvmGenericType)delegate));
+                  it.setCompilationUnit(CompilationUnitImpl.this);
+                }
+              };
+              _xifexpression = ObjectExtensions.<JvmInterfaceDeclarationImpl>operator_doubleArrow(_jvmInterfaceDeclarationImpl, _function_1);
             }
+            _switchResult = _xifexpression;
           }
         }
         if (!_matched) {
@@ -786,11 +782,9 @@ public class CompilationUnitImpl implements CompilationUnit {
       public MemberDeclaration apply(final JvmMember it) {
         MemberDeclaration _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (delegate instanceof JvmDeclaredType) {
-            _matched=true;
-            _switchResult = CompilationUnitImpl.this.toTypeDeclaration(((JvmDeclaredType)delegate));
-          }
+        if (delegate instanceof JvmDeclaredType) {
+          _matched=true;
+          _switchResult = CompilationUnitImpl.this.toTypeDeclaration(((JvmDeclaredType)delegate));
         }
         if (!_matched) {
           if (delegate instanceof JvmOperation) {
@@ -956,11 +950,9 @@ public class CompilationUnitImpl implements CompilationUnit {
       public Declaration apply(final JvmIdentifiableElement it) {
         Declaration _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (delegate instanceof JvmMember) {
-            _matched=true;
-            _switchResult = CompilationUnitImpl.this.toMemberDeclaration(((JvmMember)delegate));
-          }
+        if (delegate instanceof JvmMember) {
+          _matched=true;
+          _switchResult = CompilationUnitImpl.this.toMemberDeclaration(((JvmMember)delegate));
         }
         if (!_matched) {
           if (delegate instanceof JvmTypeParameter) {
@@ -989,11 +981,9 @@ public class CompilationUnitImpl implements CompilationUnit {
       public Element apply(final EObject it) {
         Element _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (delegate instanceof JvmIdentifiableElement) {
-            _matched=true;
-            _switchResult = CompilationUnitImpl.this.toNamedElement(((JvmIdentifiableElement)delegate));
-          }
+        if (delegate instanceof JvmIdentifiableElement) {
+          _matched=true;
+          _switchResult = CompilationUnitImpl.this.toNamedElement(((JvmIdentifiableElement)delegate));
         }
         if (!_matched) {
           if (delegate instanceof JvmTypeReference) {
@@ -1031,22 +1021,20 @@ public class CompilationUnitImpl implements CompilationUnit {
       }
       TypeReference _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (delegate instanceof XComputedTypeReferenceImplCustom) {
-          boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)delegate).isEquivalentComputed();
-          boolean _not = (!_isEquivalentComputed);
-          if (_not) {
-            _matched=true;
-            InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
-            final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
-              @Override
-              public void apply(final InferredTypeReferenceImpl it) {
-                it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-            _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
-          }
+      if (delegate instanceof XComputedTypeReferenceImplCustom) {
+        boolean _isEquivalentComputed = ((XComputedTypeReferenceImplCustom)delegate).isEquivalentComputed();
+        boolean _not = (!_isEquivalentComputed);
+        if (_not) {
+          _matched=true;
+          InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
+          final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
+            @Override
+            public void apply(final InferredTypeReferenceImpl it) {
+              it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
+              it.setCompilationUnit(CompilationUnitImpl.this);
+            }
+          };
+          _switchResult = ObjectExtensions.<InferredTypeReferenceImpl>operator_doubleArrow(_inferredTypeReferenceImpl, _function);
         }
       }
       if (!_matched) {
@@ -1090,19 +1078,17 @@ public class CompilationUnitImpl implements CompilationUnit {
       public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration it) {
         XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (delegate instanceof XtendClass) {
-            _matched=true;
-            XtendClassDeclarationImpl _xtendClassDeclarationImpl = new XtendClassDeclarationImpl();
-            final Procedure1<XtendClassDeclarationImpl> _function = new Procedure1<XtendClassDeclarationImpl>() {
-              @Override
-              public void apply(final XtendClassDeclarationImpl it) {
-                it.setDelegate(((XtendClass)delegate));
-                it.setCompilationUnit(CompilationUnitImpl.this);
-              }
-            };
-            _switchResult = ObjectExtensions.<XtendClassDeclarationImpl>operator_doubleArrow(_xtendClassDeclarationImpl, _function);
-          }
+        if (delegate instanceof XtendClass) {
+          _matched=true;
+          XtendClassDeclarationImpl _xtendClassDeclarationImpl = new XtendClassDeclarationImpl();
+          final Procedure1<XtendClassDeclarationImpl> _function = new Procedure1<XtendClassDeclarationImpl>() {
+            @Override
+            public void apply(final XtendClassDeclarationImpl it) {
+              it.setDelegate(((XtendClass)delegate));
+              it.setCompilationUnit(CompilationUnitImpl.this);
+            }
+          };
+          _switchResult = ObjectExtensions.<XtendClassDeclarationImpl>operator_doubleArrow(_xtendClassDeclarationImpl, _function);
         }
         if (!_matched) {
           if (delegate instanceof XtendInterface) {
@@ -1158,11 +1144,9 @@ public class CompilationUnitImpl implements CompilationUnit {
       public XtendMemberDeclarationImpl<? extends XtendMember> apply(final XtendMember it) {
         XtendMemberDeclarationImpl<? extends XtendMember> _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (delegate instanceof XtendTypeDeclaration) {
-            _matched=true;
-            _switchResult = CompilationUnitImpl.this.toXtendTypeDeclaration(((XtendTypeDeclaration)delegate));
-          }
+        if (delegate instanceof XtendTypeDeclaration) {
+          _matched=true;
+          _switchResult = CompilationUnitImpl.this.toXtendTypeDeclaration(((XtendTypeDeclaration)delegate));
         }
         if (!_matched) {
           if (delegate instanceof XtendFunction) {
@@ -1283,11 +1267,9 @@ public class CompilationUnitImpl implements CompilationUnit {
       public Element apply(final EObject it) {
         Element _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (delegate instanceof XtendMember) {
-            _matched=true;
-            _switchResult = CompilationUnitImpl.this.toXtendMemberDeclaration(((XtendMember)delegate));
-          }
+        if (delegate instanceof XtendMember) {
+          _matched=true;
+          _switchResult = CompilationUnitImpl.this.toXtendMemberDeclaration(((XtendMember)delegate));
         }
         if (!_matched) {
           if (delegate instanceof XtendParameter) {
@@ -1332,12 +1314,10 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.checkCanceled();
     JvmTypeReference _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (typeRef instanceof TypeReferenceImpl) {
-        _matched=true;
-        LightweightTypeReference _lightweightTypeReference = ((TypeReferenceImpl)typeRef).getLightweightTypeReference();
-        _switchResult = _lightweightTypeReference.toJavaCompliantTypeReference();
-      }
+    if (typeRef instanceof TypeReferenceImpl) {
+      _matched=true;
+      LightweightTypeReference _lightweightTypeReference = ((TypeReferenceImpl)typeRef).getLightweightTypeReference();
+      _switchResult = _lightweightTypeReference.toJavaCompliantTypeReference();
     }
     if (!_matched) {
       if (typeRef instanceof InferredTypeReferenceImpl) {
@@ -1353,11 +1333,9 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.checkCanceled();
     LightweightTypeReference _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (typeRef instanceof TypeReferenceImpl) {
-        _matched=true;
-        _switchResult = ((TypeReferenceImpl)typeRef).getLightweightTypeReference();
-      }
+    if (typeRef instanceof TypeReferenceImpl) {
+      _matched=true;
+      _switchResult = ((TypeReferenceImpl)typeRef).getLightweightTypeReference();
     }
     if (!_matched) {
       if (typeRef instanceof InferredTypeReferenceImpl) {
@@ -1475,23 +1453,21 @@ public class CompilationUnitImpl implements CompilationUnit {
   public Object translateAnnotationValue(final JvmAnnotationValue value, final boolean isArray) {
     Pair<List<?>, Class<?>> _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof JvmCustomAnnotationValue) {
-        boolean _and = false;
-        EList<EObject> _values = ((JvmCustomAnnotationValue)value).getValues();
-        boolean _isEmpty = _values.isEmpty();
-        if (!_isEmpty) {
-          _and = false;
-        } else {
-          _and = isArray;
-        }
-        if (_and) {
-          _matched=true;
-          List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
-          JvmTypeReference _findExpectedType = this.findExpectedType(value);
-          Class<?> _arrayComponentType = this.toArrayComponentType(_findExpectedType);
-          _switchResult = Pair.<List<?>, Class<?>>of(_emptyList, _arrayComponentType);
-        }
+    if (value instanceof JvmCustomAnnotationValue) {
+      boolean _and = false;
+      EList<EObject> _values = ((JvmCustomAnnotationValue)value).getValues();
+      boolean _isEmpty = _values.isEmpty();
+      if (!_isEmpty) {
+        _and = false;
+      } else {
+        _and = isArray;
+      }
+      if (_and) {
+        _matched=true;
+        List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
+        JvmTypeReference _findExpectedType = this.findExpectedType(value);
+        Class<?> _arrayComponentType = this.toArrayComponentType(_findExpectedType);
+        _switchResult = Pair.<List<?>, Class<?>>of(_emptyList, _arrayComponentType);
       }
     }
     if (!_matched) {
@@ -1665,11 +1641,9 @@ public class CompilationUnitImpl implements CompilationUnit {
       final String componentTypeName = componentType.getIdentifier();
       Class<?> _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(componentTypeName, "java.lang.Class")) {
-          _matched=true;
-          _switchResult = TypeReference.class;
-        }
+      if (Objects.equal(componentTypeName, "java.lang.Class")) {
+        _matched=true;
+        _switchResult = TypeReference.class;
       }
       if (!_matched) {
         if (Objects.equal(componentTypeName, "java.lang.String")) {
@@ -1728,11 +1702,9 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (!_matched) {
         Class<?> _switchResult_1 = null;
         boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (componentType instanceof JvmEnumerationType) {
-            _matched_1=true;
-            _switchResult_1 = EnumerationValueDeclaration.class;
-          }
+        if (componentType instanceof JvmEnumerationType) {
+          _matched_1=true;
+          _switchResult_1 = EnumerationValueDeclaration.class;
         }
         if (!_matched_1) {
           if (componentType instanceof JvmAnnotationType) {
@@ -1761,11 +1733,9 @@ public class CompilationUnitImpl implements CompilationUnit {
     EObject _eContainer = value.eContainer();
     final EObject container = _eContainer;
     boolean _matched = false;
-    if (!_matched) {
-      if (container instanceof JvmOperation) {
-        _matched=true;
-        _switchResult = ((JvmOperation)container).getReturnType();
-      }
+    if (container instanceof JvmOperation) {
+      _matched=true;
+      _switchResult = ((JvmOperation)container).getReturnType();
     }
     if (!_matched) {
       if (container instanceof JvmAnnotationReference) {
@@ -1799,11 +1769,9 @@ public class CompilationUnitImpl implements CompilationUnit {
     final Collection<?> collection = _xifexpression;
     Object _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(componentType, int.class)) {
-        _matched=true;
-        _switchResult = Ints.toArray(((List<Integer>) collection));
-      }
+    if (Objects.equal(componentType, int.class)) {
+      _matched=true;
+      _switchResult = Ints.toArray(((List<Integer>) collection));
     }
     if (!_matched) {
       if (Objects.equal(componentType, long.class)) {
@@ -2011,20 +1979,18 @@ public class CompilationUnitImpl implements CompilationUnit {
     final EList<Resource.Diagnostic> errors = resource.getErrors();
     for (final EObject target : sourceElements) {
       boolean _matched = false;
-      if (!_matched) {
-        if (target instanceof XtendAnnotationTarget) {
-          _matched=true;
-          final EList<XAnnotation> annotations = ((XtendAnnotationTarget)target).getAnnotations();
-          EObject _xifexpression = null;
-          boolean _isEmpty = annotations.isEmpty();
-          if (_isEmpty) {
-            _xifexpression = target;
-          } else {
-            _xifexpression = IterableExtensions.<XAnnotation>head(annotations);
-          }
-          EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, _xifexpression, null, (-1), null);
-          errors.add(_eObjectDiagnosticImpl);
+      if (target instanceof XtendAnnotationTarget) {
+        _matched=true;
+        final EList<XAnnotation> annotations = ((XtendAnnotationTarget)target).getAnnotations();
+        EObject _xifexpression = null;
+        boolean _isEmpty = annotations.isEmpty();
+        if (_isEmpty) {
+          _xifexpression = target;
+        } else {
+          _xifexpression = IterableExtensions.<XAnnotation>head(annotations);
         }
+        EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, _xifexpression, null, (-1), null);
+        errors.add(_eObjectDiagnosticImpl);
       }
       if (!_matched) {
         EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, (-1), null);

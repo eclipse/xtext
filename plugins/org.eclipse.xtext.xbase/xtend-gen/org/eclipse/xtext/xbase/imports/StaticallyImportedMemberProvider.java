@@ -143,23 +143,21 @@ public class StaticallyImportedMemberProvider {
   public IVisibilityHelper getVisibilityHelper(final Resource resource) {
     IVisibilityHelper _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (resource instanceof XtextResource) {
-        _matched=true;
-        IVisibilityHelper _xblockexpression = null;
-        {
-          final String packageName = this._iImportsConfiguration.getPackageName(((XtextResource)resource));
-          IVisibilityHelper _xifexpression = null;
-          boolean _equals = Objects.equal(packageName, null);
-          if (_equals) {
-            _xifexpression = this.visibilityHelper;
-          } else {
-            _xifexpression = new ContextualVisibilityHelper(this.visibilityHelper, packageName);
-          }
-          _xblockexpression = _xifexpression;
+    if (resource instanceof XtextResource) {
+      _matched=true;
+      IVisibilityHelper _xblockexpression = null;
+      {
+        final String packageName = this._iImportsConfiguration.getPackageName(((XtextResource)resource));
+        IVisibilityHelper _xifexpression = null;
+        boolean _equals = Objects.equal(packageName, null);
+        if (_equals) {
+          _xifexpression = this.visibilityHelper;
+        } else {
+          _xifexpression = new ContextualVisibilityHelper(this.visibilityHelper, packageName);
         }
-        _switchResult = _xblockexpression;
+        _xblockexpression = _xifexpression;
       }
+      _switchResult = _xblockexpression;
     }
     if (!_matched) {
       _switchResult = this.visibilityHelper;

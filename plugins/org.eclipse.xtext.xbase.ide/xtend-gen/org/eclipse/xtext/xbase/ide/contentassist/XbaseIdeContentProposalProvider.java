@@ -171,24 +171,22 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     AbstractRule _rule = ruleCall.getRule();
     boolean _matched = false;
-    if (!_matched) {
-      ParserRule _xExpressionRule = this._xbaseGrammarAccess.getXExpressionRule();
-      if (Objects.equal(_rule, _xExpressionRule)) {
-        _matched=true;
-        boolean _and = false;
-        EObject _eContainer = ruleCall.eContainer();
-        if (!(_eContainer instanceof Group)) {
-          _and = false;
-        } else {
-          AbstractRule _containingRule = GrammarUtil.containingRule(ruleCall);
-          String _name = _containingRule.getName();
-          boolean _equals = Objects.equal(_name, "XParenthesizedExpression");
-          _and = _equals;
-        }
-        if (_and) {
-          EObject _currentModel = context.getCurrentModel();
-          this.createLocalVariableAndImplicitProposals(_currentModel, IExpressionScope.Anchor.WITHIN, context, acceptor);
-        }
+    ParserRule _xExpressionRule = this._xbaseGrammarAccess.getXExpressionRule();
+    if (Objects.equal(_rule, _xExpressionRule)) {
+      _matched=true;
+      boolean _and = false;
+      EObject _eContainer = ruleCall.eContainer();
+      if (!(_eContainer instanceof Group)) {
+        _and = false;
+      } else {
+        AbstractRule _containingRule = GrammarUtil.containingRule(ruleCall);
+        String _name = _containingRule.getName();
+        boolean _equals = Objects.equal(_name, "XParenthesizedExpression");
+        _and = _equals;
+      }
+      if (_and) {
+        EObject _currentModel = context.getCurrentModel();
+        this.createLocalVariableAndImplicitProposals(_currentModel, IExpressionScope.Anchor.WITHIN, context, acceptor);
       }
     }
     if (!_matched) {
@@ -200,13 +198,11 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     final EObject model = context.getCurrentModel();
     boolean _matched = false;
-    if (!_matched) {
-      XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
-      Assignment _featureAssignment_2 = _xFeatureCallAccess.getFeatureAssignment_2();
-      if (Objects.equal(assignment, _featureAssignment_2)) {
-        _matched=true;
-        this.completeXFeatureCall(model, context, acceptor);
-      }
+    XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
+    Assignment _featureAssignment_2 = _xFeatureCallAccess.getFeatureAssignment_2();
+    if (Objects.equal(assignment, _featureAssignment_2)) {
+      _matched=true;
+      this.completeXFeatureCall(model, context, acceptor);
     }
     if (!_matched) {
       XbaseGrammarAccess.XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();

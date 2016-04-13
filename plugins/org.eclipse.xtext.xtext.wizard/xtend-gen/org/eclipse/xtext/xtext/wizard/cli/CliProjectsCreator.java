@@ -65,16 +65,14 @@ public class CliProjectsCreator implements ProjectsCreator {
           File _parentFile = file.getParentFile();
           _parentFile.mkdirs();
           boolean _matched = false;
-          if (!_matched) {
-            if (it instanceof TextFile) {
-              _matched=true;
-              String _content = ((TextFile)it).getContent();
-              String _newLine = Strings.newLine();
-              final String normalizedContent = _content.replace(_newLine, CliProjectsCreator.this.lineDelimiter);
-              WizardConfiguration _config_1 = project.getConfig();
-              Charset _encoding = _config_1.getEncoding();
-              Files.write(normalizedContent, file, _encoding);
-            }
+          if (it instanceof TextFile) {
+            _matched=true;
+            String _content = ((TextFile)it).getContent();
+            String _newLine = Strings.newLine();
+            final String normalizedContent = _content.replace(_newLine, CliProjectsCreator.this.lineDelimiter);
+            WizardConfiguration _config_1 = project.getConfig();
+            Charset _encoding = _config_1.getEncoding();
+            Files.write(normalizedContent, file, _encoding);
           }
           if (!_matched) {
             if (it instanceof BinaryFile) {

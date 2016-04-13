@@ -52,11 +52,9 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final Type type = this.findType(qualifiedName);
     MutableAnnotationTypeDeclaration _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof MutableAnnotationTypeDeclaration) {
-        _matched=true;
-        _switchResult = ((MutableAnnotationTypeDeclaration)type);
-      }
+    if (type instanceof MutableAnnotationTypeDeclaration) {
+      _matched=true;
+      _switchResult = ((MutableAnnotationTypeDeclaration)type);
     }
     return _switchResult;
   }
@@ -66,11 +64,9 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final Type type = this.findType(qualifiedName);
     MutableClassDeclaration _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof MutableClassDeclaration) {
-        _matched=true;
-        _switchResult = ((MutableClassDeclaration)type);
-      }
+    if (type instanceof MutableClassDeclaration) {
+      _matched=true;
+      _switchResult = ((MutableClassDeclaration)type);
     }
     return _switchResult;
   }
@@ -80,11 +76,9 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final Type type = this.findType(qualifiedName);
     MutableEnumerationTypeDeclaration _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof MutableEnumerationTypeDeclaration) {
-        _matched=true;
-        _switchResult = ((MutableEnumerationTypeDeclaration)type);
-      }
+    if (type instanceof MutableEnumerationTypeDeclaration) {
+      _matched=true;
+      _switchResult = ((MutableEnumerationTypeDeclaration)type);
     }
     return _switchResult;
   }
@@ -94,11 +88,9 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final Type type = this.findType(qualifiedName);
     MutableInterfaceDeclaration _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof MutableInterfaceDeclaration) {
-        _matched=true;
-        _switchResult = ((MutableInterfaceDeclaration)type);
-      }
+    if (type instanceof MutableInterfaceDeclaration) {
+      _matched=true;
+      _switchResult = ((MutableInterfaceDeclaration)type);
     }
     return _switchResult;
   }
@@ -135,11 +127,9 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof ClassDeclaration) {
-        _matched=true;
-        _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
-      }
+    if (type instanceof ClassDeclaration) {
+      _matched=true;
+      _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
     }
     return ((ClassDeclaration)_switchResult);
   }
@@ -149,11 +139,9 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof InterfaceDeclaration) {
-        _matched=true;
-        _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
-      }
+    if (type instanceof InterfaceDeclaration) {
+      _matched=true;
+      _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
     }
     return ((InterfaceDeclaration)_switchResult);
   }
@@ -163,11 +151,9 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof EnumerationTypeDeclaration) {
-        _matched=true;
-        _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
-      }
+    if (type instanceof EnumerationTypeDeclaration) {
+      _matched=true;
+      _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
     }
     return ((EnumerationTypeDeclaration)_switchResult);
   }
@@ -177,11 +163,9 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> type = this.findSourceType(qualifiedName);
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof AnnotationTypeDeclaration) {
-        _matched=true;
-        _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
-      }
+    if (type instanceof AnnotationTypeDeclaration) {
+      _matched=true;
+      _switchResult = ((XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)type);
     }
     return ((AnnotationTypeDeclaration)_switchResult);
   }

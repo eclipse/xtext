@@ -586,16 +586,14 @@ public class JvmModelGenerator implements IGenerator {
   
   private void appendCompilationTemplate(final ITreeAppendable appendable, final JvmIdentifiableElement it) {
     boolean _matched = false;
-    if (!_matched) {
-      if (appendable instanceof TreeAppendable) {
-        _matched=true;
-        SharedAppendableState _state = ((TreeAppendable)appendable).getState();
-        StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.commonServices, it);
-        final ImportingStringConcatenation target = this.createImportingStringConcatenation(_state, _standardTypeReferenceOwner);
-        StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
-        target.append(_compilationTemplate);
-        ((TreeAppendable)appendable).append(target);
-      }
+    if (appendable instanceof TreeAppendable) {
+      _matched=true;
+      SharedAppendableState _state = ((TreeAppendable)appendable).getState();
+      StandardTypeReferenceOwner _standardTypeReferenceOwner = new StandardTypeReferenceOwner(this.commonServices, it);
+      final ImportingStringConcatenation target = this.createImportingStringConcatenation(_state, _standardTypeReferenceOwner);
+      StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
+      target.append(_compilationTemplate);
+      ((TreeAppendable)appendable).append(target);
     }
     if (!_matched) {
       Class<? extends ITreeAppendable> _class = appendable.getClass();
@@ -783,11 +781,9 @@ public class JvmModelGenerator implements IGenerator {
   public void generateExtendsClause(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof JvmAnnotationType) {
-        _matched=true;
-        _switchResult = "java.lang.Annotation";
-      }
+    if (it instanceof JvmAnnotationType) {
+      _matched=true;
+      _switchResult = "java.lang.Annotation";
     }
     if (!_matched) {
       if (it instanceof JvmEnumerationType) {
@@ -1331,11 +1327,9 @@ public class JvmModelGenerator implements IGenerator {
           if (_isEmpty_2) {
             JvmTypeReference _switchResult = null;
             boolean _matched = false;
-            if (!_matched) {
-              if (op instanceof JvmOperation) {
-                _matched=true;
-                _switchResult = ((JvmOperation)op).getReturnType();
-              }
+            if (op instanceof JvmOperation) {
+              _matched=true;
+              _switchResult = ((JvmOperation)op).getReturnType();
             }
             if (!_matched) {
               if (op instanceof JvmConstructor) {
@@ -1837,12 +1831,10 @@ public class JvmModelGenerator implements IGenerator {
       public void apply(final Double it) {
         String _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          boolean _isNaN = Double.isNaN((it).doubleValue());
-          if (_isNaN) {
-            _matched=true;
-            _switchResult = "Double.NaN";
-          }
+        boolean _isNaN = Double.isNaN((it).doubleValue());
+        if (_isNaN) {
+          _matched=true;
+          _switchResult = "Double.NaN";
         }
         if (!_matched) {
           if (Objects.equal(it, Double.POSITIVE_INFINITY)) {
@@ -1873,12 +1865,10 @@ public class JvmModelGenerator implements IGenerator {
       public void apply(final Float it) {
         String _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          boolean _isNaN = Float.isNaN((it).floatValue());
-          if (_isNaN) {
-            _matched=true;
-            _switchResult = "Float.NaN";
-          }
+        boolean _isNaN = Float.isNaN((it).floatValue());
+        if (_isNaN) {
+          _matched=true;
+          _switchResult = "Float.NaN";
         }
         if (!_matched) {
           if (Objects.equal(it, Float.POSITIVE_INFINITY)) {

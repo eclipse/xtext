@@ -763,33 +763,31 @@ public class ArithmeticExtensionGenerator {
     String _lowerCase = it.toLowerCase();
     String _substring = _lowerCase.substring(0, 1);
     boolean _matched = false;
+    if (Objects.equal(_substring, "a")) {
+      _matched=true;
+    }
     if (!_matched) {
-      if (Objects.equal(_substring, "a")) {
+      if (Objects.equal(_substring, "e")) {
         _matched=true;
       }
-      if (!_matched) {
-        if (Objects.equal(_substring, "e")) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (Objects.equal(_substring, "i")) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (Objects.equal(_substring, "i")) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (Objects.equal(_substring, "o")) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (Objects.equal(_substring, "o")) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (Objects.equal(_substring, "u")) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (Objects.equal(_substring, "u")) {
-          _matched=true;
-        }
-      }
-      if (_matched) {
-        _switchResult = "an";
-      }
+    }
+    if (_matched) {
+      _switchResult = "an";
     }
     if (!_matched) {
       _switchResult = "a";
@@ -800,11 +798,9 @@ public class ArithmeticExtensionGenerator {
   public String wrapperType(final String it) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(it, "int")) {
-        _matched=true;
-        _switchResult = "Integer";
-      }
+    if (Objects.equal(it, "int")) {
+      _matched=true;
+      _switchResult = "Integer";
     }
     if (!_matched) {
       if (Objects.equal(it, "char")) {

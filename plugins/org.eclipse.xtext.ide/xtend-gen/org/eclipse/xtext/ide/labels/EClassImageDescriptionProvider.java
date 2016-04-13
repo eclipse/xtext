@@ -27,23 +27,21 @@ public class EClassImageDescriptionProvider implements IImageDescriptionProvider
   public IImageDescription getImageDescription(final Object element) {
     IImageDescription _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof EClass) {
-        _matched=true;
-        String _name = ((EClass)element).getName();
-        EList<EClass> _eAllSuperTypes = ((EClass)element).getEAllSuperTypes();
-        final Function1<EClass, String> _function = new Function1<EClass, String>() {
-          @Override
-          public String apply(final EClass it) {
-            return it.getName();
-          }
-        };
-        List<String> _map = ListExtensions.<EClass, String>map(_eAllSuperTypes, _function);
-        Iterable<String> _plus = Iterables.<String>concat(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_name)), _map);
-        String _imageID = IImageDescription.DEFAULT.getImageID();
-        Iterable<String> _plus_1 = Iterables.<String>concat(_plus, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_imageID)));
-        _switchResult = new AlternativeImageDescription(_plus_1);
-      }
+    if (element instanceof EClass) {
+      _matched=true;
+      String _name = ((EClass)element).getName();
+      EList<EClass> _eAllSuperTypes = ((EClass)element).getEAllSuperTypes();
+      final Function1<EClass, String> _function = new Function1<EClass, String>() {
+        @Override
+        public String apply(final EClass it) {
+          return it.getName();
+        }
+      };
+      List<String> _map = ListExtensions.<EClass, String>map(_eAllSuperTypes, _function);
+      Iterable<String> _plus = Iterables.<String>concat(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_name)), _map);
+      String _imageID = IImageDescription.DEFAULT.getImageID();
+      Iterable<String> _plus_1 = Iterables.<String>concat(_plus, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_imageID)));
+      _switchResult = new AlternativeImageDescription(_plus_1);
     }
     if (!_matched) {
       if (element instanceof EObject) {

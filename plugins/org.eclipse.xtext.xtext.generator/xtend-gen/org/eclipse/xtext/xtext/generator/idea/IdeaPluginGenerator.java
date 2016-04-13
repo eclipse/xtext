@@ -2424,21 +2424,19 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       public Boolean apply(final AbstractElement element) {
         boolean _switchResult = false;
         boolean _matched = false;
+        if (element instanceof Action) {
+          _matched=true;
+        }
         if (!_matched) {
-          if (element instanceof Action) {
-            _matched=true;
-          }
-          if (!_matched) {
-            if (element instanceof RuleCall) {
-              boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
-              if (_isEObjectRuleCall) {
-                _matched=true;
-              }
+          if (element instanceof RuleCall) {
+            boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+            if (_isEObjectRuleCall) {
+              _matched=true;
             }
           }
-          if (_matched) {
-            _switchResult = true;
-          }
+        }
+        if (_matched) {
+          _switchResult = true;
         }
         if (!_matched) {
           _switchResult = false;
@@ -2454,11 +2452,9 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     {
       TypeRef _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (element instanceof AbstractRule) {
-          _matched=true;
-          _switchResult = ((AbstractRule)element).getType();
-        }
+      if (element instanceof AbstractRule) {
+        _matched=true;
+        _switchResult = ((AbstractRule)element).getType();
       }
       if (!_matched) {
         if (element instanceof RuleCall) {

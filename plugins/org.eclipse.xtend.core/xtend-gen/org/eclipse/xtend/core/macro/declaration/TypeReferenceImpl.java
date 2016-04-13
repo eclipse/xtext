@@ -51,18 +51,16 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     LightweightTypeReference _delegate = this.getDelegate();
     final LightweightTypeReference it = _delegate;
     boolean _matched = false;
-    if (!_matched) {
-      boolean _isUnknown = it.isUnknown();
-      if (_isUnknown) {
-        _matched=true;
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-        String _packageName = _compilationUnit_1.getPackageName();
-        String _plus = (_packageName + ".");
-        String _simpleName = it.getSimpleName();
-        String _plus_1 = (_plus + _simpleName);
-        _switchResult = new UnknownType(_compilationUnit, _plus_1);
-      }
+    boolean _isUnknown = it.isUnknown();
+    if (_isUnknown) {
+      _matched=true;
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+      String _packageName = _compilationUnit_1.getPackageName();
+      String _plus = (_packageName + ".");
+      String _simpleName = it.getSimpleName();
+      String _plus_1 = (_plus + _simpleName);
+      _switchResult = new UnknownType(_compilationUnit, _plus_1);
     }
     if (!_matched) {
       CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();

@@ -198,11 +198,9 @@ public class RichStringFormatter {
             public CharSequence apply(final Chunk chunk) {
               CharSequence _switchResult = null;
               boolean _matched = false;
-              if (!_matched) {
-                if (chunk instanceof SemanticWhitespace) {
-                  _matched=true;
-                  _switchResult = ((SemanticWhitespace)chunk).getText();
-                }
+              if (chunk instanceof SemanticWhitespace) {
+                _matched=true;
+                _switchResult = ((SemanticWhitespace)chunk).getText();
               }
               if (!_matched) {
                 if (chunk instanceof TemplateWhitespace) {

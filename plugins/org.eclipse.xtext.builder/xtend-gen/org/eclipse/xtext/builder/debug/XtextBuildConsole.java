@@ -60,11 +60,9 @@ public class XtextBuildConsole extends IOConsole {
         String _plus_1 = (_plus + "] ");
         String _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (it instanceof Throwable) {
-            _matched=true;
-            _switchResult = Throwables.getStackTraceAsString(((Throwable)it));
-          }
+        if (it instanceof Throwable) {
+          _matched=true;
+          _switchResult = Throwables.getStackTraceAsString(((Throwable)it));
         }
         if (!_matched) {
           _switchResult = it.toString();

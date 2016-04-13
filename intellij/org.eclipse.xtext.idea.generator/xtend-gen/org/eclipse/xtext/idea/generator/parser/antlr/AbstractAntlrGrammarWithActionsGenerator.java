@@ -30,12 +30,10 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   protected String compileInit(final AbstractRule it, final AntlrOptions options) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof ParserRule) {
-        _matched=true;
-        CharSequence _compileEntryInit = this.compileEntryInit(((ParserRule)it), options);
-        _switchResult = _compileEntryInit.toString();
-      }
+    if (it instanceof ParserRule) {
+      _matched=true;
+      CharSequence _compileEntryInit = this.compileEntryInit(((ParserRule)it), options);
+      _switchResult = _compileEntryInit.toString();
     }
     if (!_matched) {
       _switchResult = super.compileInit(it, options);
@@ -141,12 +139,10 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   protected String compileFinally(final AbstractRule it, final AntlrOptions options) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof ParserRule) {
-        _matched=true;
-        CharSequence _compileEntryFinally = this.compileEntryFinally(((ParserRule)it), options);
-        _switchResult = _compileEntryFinally.toString();
-      }
+    if (it instanceof ParserRule) {
+      _matched=true;
+      CharSequence _compileEntryFinally = this.compileEntryFinally(((ParserRule)it), options);
+      _switchResult = _compileEntryFinally.toString();
     }
     if (!_matched) {
       _switchResult = super.compileFinally(it, options);

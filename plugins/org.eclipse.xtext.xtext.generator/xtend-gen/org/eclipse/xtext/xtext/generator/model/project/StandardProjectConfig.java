@@ -138,12 +138,10 @@ public class StandardProjectConfig extends XtextProjectConfig {
   protected String computeName(final SubProjectConfig project) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      RuntimeProjectConfig _runtime = this.getRuntime();
-      if (Objects.equal(project, _runtime)) {
-        _matched=true;
-        _switchResult = this.baseName;
-      }
+    RuntimeProjectConfig _runtime = this.getRuntime();
+    if (Objects.equal(project, _runtime)) {
+      _matched=true;
+      _switchResult = this.baseName;
     }
     if (!_matched) {
       BundleProjectConfig _runtimeTest = this.getRuntimeTest();

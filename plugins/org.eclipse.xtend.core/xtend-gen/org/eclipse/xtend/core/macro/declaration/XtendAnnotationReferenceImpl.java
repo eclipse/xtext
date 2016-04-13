@@ -46,13 +46,11 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     JvmType _annotationType = this.getAnnotationType();
     final JvmType type = _annotationType;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof JvmAnnotationType) {
-        _matched=true;
-        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        TypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(((JvmDeclaredType)type));
-        _switchResult = ((AnnotationTypeDeclaration) _typeDeclaration);
-      }
+    if (type instanceof JvmAnnotationType) {
+      _matched=true;
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      TypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(((JvmDeclaredType)type));
+      _switchResult = ((AnnotationTypeDeclaration) _typeDeclaration);
     }
     if (!_matched) {
       _switchResult = null;
@@ -75,18 +73,16 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       Object _eGet = _delegate_1.eGet(XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
       final Object proxy = _eGet;
       boolean _matched = false;
-      if (!_matched) {
-        if (proxy instanceof EObject) {
-          boolean _eIsProxy = ((EObject)proxy).eIsProxy();
-          if (_eIsProxy) {
-            _matched=true;
-            final URI uri = ((InternalEObject) proxy).eProxyURI();
-            XAnnotation _delegate_2 = this.getDelegate();
-            Resource _eResource = _delegate_2.eResource();
-            ResourceSet _resourceSet = _eResource.getResourceSet();
-            EObject _eObject = _resourceSet.getEObject(uri, true);
-            return ((JvmType) _eObject);
-          }
+      if (proxy instanceof EObject) {
+        boolean _eIsProxy = ((EObject)proxy).eIsProxy();
+        if (_eIsProxy) {
+          _matched=true;
+          final URI uri = ((InternalEObject) proxy).eProxyURI();
+          XAnnotation _delegate_2 = this.getDelegate();
+          Resource _eResource = _delegate_2.eResource();
+          ResourceSet _resourceSet = _eResource.getResourceSet();
+          EObject _eObject = _resourceSet.getEObject(uri, true);
+          return ((JvmType) _eObject);
         }
       }
       if (!_matched) {
@@ -258,11 +254,9 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       }
       Character _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Byte) {
-          _matched=true;
-          _switchResult = Character.valueOf(((char) ((Byte) value).byteValue()));
-        }
+      if (value instanceof Byte) {
+        _matched=true;
+        _switchResult = Character.valueOf(((char) ((Byte) value).byteValue()));
       }
       if (!_matched) {
         _switchResult = ((Character) value);
@@ -301,11 +295,9 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       }
       Double _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Character) {
-          _matched=true;
-          _switchResult = Double.valueOf(((double) ((Character) value).charValue()));
-        }
+      if (value instanceof Character) {
+        _matched=true;
+        _switchResult = Double.valueOf(((double) ((Character) value).charValue()));
       }
       if (!_matched) {
         if (value instanceof Byte) {
@@ -374,11 +366,9 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       }
       Float _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Character) {
-          _matched=true;
-          _switchResult = Float.valueOf(((float) ((Character) value).charValue()));
-        }
+      if (value instanceof Character) {
+        _matched=true;
+        _switchResult = Float.valueOf(((float) ((Character) value).charValue()));
       }
       if (!_matched) {
         if (value instanceof Byte) {
@@ -429,11 +419,9 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       }
       Integer _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Character) {
-          _matched=true;
-          _switchResult = Integer.valueOf(((int) ((Character) value).charValue()));
-        }
+      if (value instanceof Character) {
+        _matched=true;
+        _switchResult = Integer.valueOf(((int) ((Character) value).charValue()));
       }
       if (!_matched) {
         if (value instanceof Byte) {
@@ -472,11 +460,9 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       }
       Long _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Character) {
-          _matched=true;
-          _switchResult = Long.valueOf(((long) ((Character) value).charValue()));
-        }
+      if (value instanceof Character) {
+        _matched=true;
+        _switchResult = Long.valueOf(((long) ((Character) value).charValue()));
       }
       if (!_matched) {
         if (value instanceof Byte) {
@@ -521,11 +507,9 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       }
       Short _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (value instanceof Byte) {
-          _matched=true;
-          _switchResult = Short.valueOf(((short) ((Byte) value).byteValue()));
-        }
+      if (value instanceof Byte) {
+        _matched=true;
+        _switchResult = Short.valueOf(((short) ((Byte) value).byteValue()));
       }
       if (!_matched) {
         _switchResult = ((Short) value);

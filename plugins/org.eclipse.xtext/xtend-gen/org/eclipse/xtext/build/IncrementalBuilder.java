@@ -359,15 +359,13 @@ public class IncrementalBuilder {
       boolean _isWriteStorageResources = request.isWriteStorageResources();
       if (_isWriteStorageResources) {
         boolean _matched = false;
-        if (!_matched) {
-          if (resource instanceof StorageAwareResource) {
-            IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)resource).getResourceStorageFacade();
-            boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
-            if (_notEquals) {
-              _matched=true;
-              IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)resource).getResourceStorageFacade();
-              _resourceStorageFacade_1.saveResource(((StorageAwareResource)resource), fileSystemAccess);
-            }
+        if (resource instanceof StorageAwareResource) {
+          IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)resource).getResourceStorageFacade();
+          boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
+          if (_notEquals) {
+            _matched=true;
+            IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)resource).getResourceStorageFacade();
+            _resourceStorageFacade_1.saveResource(((StorageAwareResource)resource), fileSystemAccess);
           }
         }
       }

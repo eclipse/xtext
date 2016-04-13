@@ -251,18 +251,16 @@ public class FlattenedGrammarAccess {
           @Override
           protected void copyContainment(final EReference eReference, final EObject eObject, final EObject copyEObject) {
             boolean _matched = false;
+            if (Objects.equal(eReference, XtextPackage.Literals.RULE_CALL__ARGUMENTS)) {
+              _matched=true;
+            }
             if (!_matched) {
-              if (Objects.equal(eReference, XtextPackage.Literals.RULE_CALL__ARGUMENTS)) {
+              if (Objects.equal(eReference, XtextPackage.Literals.GROUP__GUARD_CONDITION)) {
                 _matched=true;
               }
-              if (!_matched) {
-                if (Objects.equal(eReference, XtextPackage.Literals.GROUP__GUARD_CONDITION)) {
-                  _matched=true;
-                }
-              }
-              if (_matched) {
-                return;
-              }
+            }
+            if (_matched) {
+              return;
             }
             super.copyContainment(eReference, eObject, copyEObject);
           }
@@ -358,47 +356,45 @@ public class FlattenedGrammarAccess {
             String c2 = from.getCardinality();
             String _switchResult = null;
             boolean _matched = false;
+            boolean _or = false;
+            boolean _equals = Objects.equal(c1, "*");
+            if (_equals) {
+              _or = true;
+            } else {
+              boolean _equals_1 = Objects.equal(c2, "*");
+              _or = _equals_1;
+            }
+            if (_or) {
+              _matched=true;
+            }
             if (!_matched) {
-              boolean _or = false;
-              boolean _equals = Objects.equal(c1, "*");
-              if (_equals) {
-                _or = true;
+              boolean _and = false;
+              boolean _equals_2 = Objects.equal(c1, "+");
+              if (!_equals_2) {
+                _and = false;
               } else {
-                boolean _equals_1 = Objects.equal(c2, "*");
-                _or = _equals_1;
+                boolean _equals_3 = Objects.equal(c2, "?");
+                _and = _equals_3;
               }
-              if (_or) {
+              if (_and) {
                 _matched=true;
               }
-              if (!_matched) {
-                boolean _and = false;
-                boolean _equals_2 = Objects.equal(c1, "+");
-                if (!_equals_2) {
-                  _and = false;
-                } else {
-                  boolean _equals_3 = Objects.equal(c2, "?");
-                  _and = _equals_3;
-                }
-                if (_and) {
-                  _matched=true;
-                }
+            }
+            if (!_matched) {
+              boolean _and_1 = false;
+              boolean _equals_4 = Objects.equal(c1, "?");
+              if (!_equals_4) {
+                _and_1 = false;
+              } else {
+                boolean _equals_5 = Objects.equal(c2, "+");
+                _and_1 = _equals_5;
               }
-              if (!_matched) {
-                boolean _and_1 = false;
-                boolean _equals_4 = Objects.equal(c1, "?");
-                if (!_equals_4) {
-                  _and_1 = false;
-                } else {
-                  boolean _equals_5 = Objects.equal(c2, "+");
-                  _and_1 = _equals_5;
-                }
-                if (_and_1) {
-                  _matched=true;
-                }
+              if (_and_1) {
+                _matched=true;
               }
-              if (_matched) {
-                _switchResult = "*";
-              }
+            }
+            if (_matched) {
+              _switchResult = "*";
             }
             if (!_matched) {
               if (Objects.equal(c1, null)) {
@@ -461,51 +457,49 @@ public class FlattenedGrammarAccess {
       {
         String ruleName = names.getAntlrRuleName(rule);
         boolean _matched = false;
-        if (!_matched) {
-          if (rule instanceof ParserRule) {
-            _matched=true;
-            List<Parameter> params = ((ParserRule)rule).getParameters();
-            boolean _isEmpty = params.isEmpty();
-            if (_isEmpty) {
-              ParserRule copy = this.<ParserRule>copy(((ParserRule)rule));
-              copy.setName(ruleName);
-              boolean _isFragment = ((ParserRule)rule).isFragment();
-              copy.setFragment(_isFragment);
-              boolean _isWildcard = ((ParserRule)rule).isWildcard();
-              copy.setWildcard(_isWildcard);
-              if ((!discardTypeRef)) {
-                TypeRef _type = ((ParserRule)rule).getType();
-                TypeRef _copyTypeRef = this.copyTypeRef(_type);
-                copy.setType(_copyTypeRef);
-              }
-              this.attachTo(copy, rule, origToCopy);
-              result.add(copy);
-            } else {
-              ImmutableSet<Parameter> _copyOf = ImmutableSet.<Parameter>copyOf(params);
-              Set<Set<Parameter>> _powerSet = Sets.<Parameter>powerSet(_copyOf);
-              final Procedure2<Set<Parameter>, Integer> _function = new Procedure2<Set<Parameter>, Integer>() {
-                @Override
-                public void apply(final Set<Parameter> parameterConfig, final Integer i) {
-                  RuleWithParameterValues parameterValues = new RuleWithParameterValues(rule, parameterConfig);
-                  ParserRule copy = FlattenedGrammarAccess.this.<ParserRule>copy(((ParserRule)rule));
-                  String _antlrRuleName = names.getAntlrRuleName(rule, (i).intValue());
-                  copy.setName(_antlrRuleName);
-                  boolean _isFragment = ((ParserRule)rule).isFragment();
-                  copy.setFragment(_isFragment);
-                  boolean _isWildcard = ((ParserRule)rule).isWildcard();
-                  copy.setWildcard(_isWildcard);
-                  if ((!discardTypeRef)) {
-                    TypeRef _type = ((ParserRule)rule).getType();
-                    TypeRef _copyTypeRef = FlattenedGrammarAccess.this.copyTypeRef(_type);
-                    copy.setType(_copyTypeRef);
-                  }
-                  origToCopy.put(parameterValues, copy);
-                  parameterValues.attachToEmfObject(copy);
-                  result.add(copy);
-                }
-              };
-              IterableExtensions.<Set<Parameter>>forEach(_powerSet, _function);
+        if (rule instanceof ParserRule) {
+          _matched=true;
+          List<Parameter> params = ((ParserRule)rule).getParameters();
+          boolean _isEmpty = params.isEmpty();
+          if (_isEmpty) {
+            ParserRule copy = this.<ParserRule>copy(((ParserRule)rule));
+            copy.setName(ruleName);
+            boolean _isFragment = ((ParserRule)rule).isFragment();
+            copy.setFragment(_isFragment);
+            boolean _isWildcard = ((ParserRule)rule).isWildcard();
+            copy.setWildcard(_isWildcard);
+            if ((!discardTypeRef)) {
+              TypeRef _type = ((ParserRule)rule).getType();
+              TypeRef _copyTypeRef = this.copyTypeRef(_type);
+              copy.setType(_copyTypeRef);
             }
+            this.attachTo(copy, rule, origToCopy);
+            result.add(copy);
+          } else {
+            ImmutableSet<Parameter> _copyOf = ImmutableSet.<Parameter>copyOf(params);
+            Set<Set<Parameter>> _powerSet = Sets.<Parameter>powerSet(_copyOf);
+            final Procedure2<Set<Parameter>, Integer> _function = new Procedure2<Set<Parameter>, Integer>() {
+              @Override
+              public void apply(final Set<Parameter> parameterConfig, final Integer i) {
+                RuleWithParameterValues parameterValues = new RuleWithParameterValues(rule, parameterConfig);
+                ParserRule copy = FlattenedGrammarAccess.this.<ParserRule>copy(((ParserRule)rule));
+                String _antlrRuleName = names.getAntlrRuleName(rule, (i).intValue());
+                copy.setName(_antlrRuleName);
+                boolean _isFragment = ((ParserRule)rule).isFragment();
+                copy.setFragment(_isFragment);
+                boolean _isWildcard = ((ParserRule)rule).isWildcard();
+                copy.setWildcard(_isWildcard);
+                if ((!discardTypeRef)) {
+                  TypeRef _type = ((ParserRule)rule).getType();
+                  TypeRef _copyTypeRef = FlattenedGrammarAccess.this.copyTypeRef(_type);
+                  copy.setType(_copyTypeRef);
+                }
+                origToCopy.put(parameterValues, copy);
+                parameterValues.attachToEmfObject(copy);
+                result.add(copy);
+              }
+            };
+            IterableExtensions.<Set<Parameter>>forEach(_powerSet, _function);
           }
         }
         if (!_matched) {

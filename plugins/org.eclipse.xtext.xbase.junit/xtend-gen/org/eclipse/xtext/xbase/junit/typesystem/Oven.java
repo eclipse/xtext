@@ -73,22 +73,20 @@ public class Oven extends Assert {
         Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
         for (final EObject content : _iterable) {
           boolean _matched = false;
-          if (!_matched) {
-            if (content instanceof XAbstractFeatureCall) {
-              _matched=true;
-              this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-              XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
-              boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
-              if (_notEquals_1) {
-                XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
-                this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
-              }
-              XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
-              boolean _notEquals_2 = (!Objects.equal(_implicitFirstArgument, null));
-              if (_notEquals_2) {
-                XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
-                this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
-              }
+          if (content instanceof XAbstractFeatureCall) {
+            _matched=true;
+            this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+            XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
+            boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
+            if (_notEquals_1) {
+              XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
+              this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
+            }
+            XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
+            boolean _notEquals_2 = (!Objects.equal(_implicitFirstArgument, null));
+            if (_notEquals_2) {
+              XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
+              this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
             }
           }
           if (!_matched) {
@@ -138,23 +136,21 @@ public class Oven extends Assert {
       final Object internalTypes = this._reflectExtensions.invoke(types, "delegate");
       TypeData _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (internalTypes instanceof CompoundReentrantTypeResolver) {
-          _matched=true;
-          TypeData _xblockexpression = null;
-          {
-            final Method method = CompoundReentrantTypeResolver.class.getDeclaredMethod("getDelegate", XExpression.class);
-            method.setAccessible(true);
-            final Object delegate = method.invoke(internalTypes, expression);
-            TypeData _xifexpression = null;
-            if ((delegate instanceof RootResolvedTypes)) {
-              Object _invoke = this._reflectExtensions.invoke(delegate, "getTypeData", expression, Boolean.FALSE);
-              _xifexpression = ((TypeData) _invoke);
-            }
-            _xblockexpression = _xifexpression;
+      if (internalTypes instanceof CompoundReentrantTypeResolver) {
+        _matched=true;
+        TypeData _xblockexpression = null;
+        {
+          final Method method = CompoundReentrantTypeResolver.class.getDeclaredMethod("getDelegate", XExpression.class);
+          method.setAccessible(true);
+          final Object delegate = method.invoke(internalTypes, expression);
+          TypeData _xifexpression = null;
+          if ((delegate instanceof RootResolvedTypes)) {
+            Object _invoke = this._reflectExtensions.invoke(delegate, "getTypeData", expression, Boolean.FALSE);
+            _xifexpression = ((TypeData) _invoke);
           }
-          _switchResult = _xblockexpression;
+          _xblockexpression = _xifexpression;
         }
+        _switchResult = _xblockexpression;
       }
       if (!_matched) {
         Object _invoke = this._reflectExtensions.invoke(internalTypes, "getTypeData", expression, Boolean.FALSE);

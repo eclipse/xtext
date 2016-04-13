@@ -379,20 +379,18 @@ public class GrammarAccessExtensions {
   public CharSequence toStringLiteral(final AbstractElement it) {
     CharSequence _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof RuleCall) {
-        AbstractRule _rule = ((RuleCall)it).getRule();
-        boolean _notEquals = (!Objects.equal(_rule, null));
-        if (_notEquals) {
-          _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("\"");
-          AbstractRule _rule_1 = ((RuleCall)it).getRule();
-          String _name = _rule_1.getName();
-          _builder.append(_name, "");
-          _builder.append("\"");
-          _switchResult = _builder;
-        }
+    if (it instanceof RuleCall) {
+      AbstractRule _rule = ((RuleCall)it).getRule();
+      boolean _notEquals = (!Objects.equal(_rule, null));
+      if (_notEquals) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("\"");
+        AbstractRule _rule_1 = ((RuleCall)it).getRule();
+        String _name = _rule_1.getName();
+        _builder.append(_name, "");
+        _builder.append("\"");
+        _switchResult = _builder;
       }
     }
     if (!_matched) {

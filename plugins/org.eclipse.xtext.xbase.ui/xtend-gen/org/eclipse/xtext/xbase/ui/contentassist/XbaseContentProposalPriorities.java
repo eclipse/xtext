@@ -30,23 +30,21 @@ public class XbaseContentProposalPriorities extends ContentProposalPriorities {
       Object _additionalData = ((ConfigurableCompletionProposal)proposal).getAdditionalData(XbaseProposalProvider.DESCRIPTION_KEY);
       final Object desc = _additionalData;
       boolean _matched = false;
-      if (!_matched) {
-        if (desc instanceof SimpleIdentifiableElementDescription) {
-          boolean _and = false;
-          String _replacementString = ((ConfigurableCompletionProposal)proposal).getReplacementString();
-          boolean _notEquals = (!Objects.equal(_replacementString, "this"));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            String _replacementString_1 = ((ConfigurableCompletionProposal)proposal).getReplacementString();
-            boolean _notEquals_1 = (!Objects.equal(_replacementString_1, "super"));
-            _and = _notEquals_1;
-          }
-          if (_and) {
-            _matched=true;
-            this.adjustPriority(proposal, prefix, 570);
-            return;
-          }
+      if (desc instanceof SimpleIdentifiableElementDescription) {
+        boolean _and = false;
+        String _replacementString = ((ConfigurableCompletionProposal)proposal).getReplacementString();
+        boolean _notEquals = (!Objects.equal(_replacementString, "this"));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          String _replacementString_1 = ((ConfigurableCompletionProposal)proposal).getReplacementString();
+          boolean _notEquals_1 = (!Objects.equal(_replacementString_1, "super"));
+          _and = _notEquals_1;
+        }
+        if (_and) {
+          _matched=true;
+          this.adjustPriority(proposal, prefix, 570);
+          return;
         }
       }
       if (!_matched) {
@@ -60,12 +58,10 @@ public class XbaseContentProposalPriorities extends ContentProposalPriorities {
           _matched=true;
           JvmIdentifiableElement _elementOrProxy = ((IIdentifiableElementDescription)desc).getElementOrProxy();
           boolean _matched_1 = false;
-          if (!_matched_1) {
-            if (_elementOrProxy instanceof JvmField) {
-              _matched_1=true;
-              this.adjustPriority(proposal, prefix, 550);
-              return;
-            }
+          if (_elementOrProxy instanceof JvmField) {
+            _matched_1=true;
+            this.adjustPriority(proposal, prefix, 550);
+            return;
           }
           if (!_matched_1) {
             if (_elementOrProxy instanceof JvmExecutable) {

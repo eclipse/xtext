@@ -209,11 +209,9 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       this.compilationUnit.checkCanceled();
       JvmComponentType _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (typeDeclaration instanceof JvmTypeDeclarationImpl) {
-          _matched=true;
-          _switchResult = ((JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration).getDelegate();
-        }
+      if (typeDeclaration instanceof JvmTypeDeclarationImpl) {
+        _matched=true;
+        _switchResult = ((JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration).getDelegate();
       }
       if (!_matched) {
         if (typeDeclaration instanceof XtendTypeDeclarationImpl) {

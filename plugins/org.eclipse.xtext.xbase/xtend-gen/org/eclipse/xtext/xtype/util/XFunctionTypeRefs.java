@@ -69,30 +69,28 @@ public class XFunctionTypeRefs {
   public static JvmTypeReference wrapIfNecessary(final JvmTypeReference reference, final JvmType type) {
     JvmTypeReference _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof JvmPrimitiveType) {
-        _matched=true;
-        JvmTypeReference _xblockexpression = null;
-        {
-          final JvmType wrappedType = XFunctionTypeRefs.getWrappedType(type);
-          JvmTypeReference _xifexpression = null;
-          boolean _equals = Objects.equal(wrappedType, null);
-          if (_equals) {
-            _xifexpression = reference;
-          } else {
-            JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-            final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
-              @Override
-              public void apply(final JvmParameterizedTypeReference it) {
-                it.setType(wrappedType);
-              }
-            };
-            _xifexpression = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
-          }
-          _xblockexpression = _xifexpression;
+    if (type instanceof JvmPrimitiveType) {
+      _matched=true;
+      JvmTypeReference _xblockexpression = null;
+      {
+        final JvmType wrappedType = XFunctionTypeRefs.getWrappedType(type);
+        JvmTypeReference _xifexpression = null;
+        boolean _equals = Objects.equal(wrappedType, null);
+        if (_equals) {
+          _xifexpression = reference;
+        } else {
+          JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+          final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
+            @Override
+            public void apply(final JvmParameterizedTypeReference it) {
+              it.setType(wrappedType);
+            }
+          };
+          _xifexpression = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
         }
-        _switchResult = _xblockexpression;
+        _xblockexpression = _xifexpression;
       }
+      _switchResult = _xblockexpression;
     }
     if (!_matched) {
       if (type instanceof JvmVoid) {
@@ -124,12 +122,10 @@ public class XFunctionTypeRefs {
       final String name = type.getIdentifier();
       JvmType _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        boolean _equals = "int".equals(name);
-        if (_equals) {
-          _matched=true;
-          _switchResult = XFunctionTypeRefs.getType(Integer.class, type);
-        }
+      boolean _equals = "int".equals(name);
+      if (_equals) {
+        _matched=true;
+        _switchResult = XFunctionTypeRefs.getType(Integer.class, type);
       }
       if (!_matched) {
         boolean _equals_1 = "boolean".equals(name);

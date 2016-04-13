@@ -63,27 +63,25 @@ public class XtextGeneratorResourceSetInitializer {
   private void ensureResourceCanBeLoaded(final URI loadedResource, final ResourceSet resourceSet) {
     String _fileExtension = loadedResource.fileExtension();
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_fileExtension, "genmodel")) {
-        _matched=true;
-        GenModelPackage.eINSTANCE.getEFactoryInstance();
-        final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
-        if ((resourceServiceProvider == null)) {
-          try {
-            final Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
-            final Object instance = genModelSupport.newInstance();
-            Method _declaredMethod = genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration");
-            _declaredMethod.invoke(instance);
-          } catch (final Throwable _t) {
-            if (_t instanceof ClassNotFoundException) {
-              final ClassNotFoundException e = (ClassNotFoundException)_t;
-              XtextGeneratorResourceSetInitializer.LOG.debug("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport not found, GenModels will not be indexed");
-            } else if (_t instanceof Exception) {
-              final Exception e_1 = (Exception)_t;
-              XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize GenModel support.", e_1);
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
+    if (Objects.equal(_fileExtension, "genmodel")) {
+      _matched=true;
+      GenModelPackage.eINSTANCE.getEFactoryInstance();
+      final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
+      if ((resourceServiceProvider == null)) {
+        try {
+          final Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
+          final Object instance = genModelSupport.newInstance();
+          Method _declaredMethod = genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration");
+          _declaredMethod.invoke(instance);
+        } catch (final Throwable _t) {
+          if (_t instanceof ClassNotFoundException) {
+            final ClassNotFoundException e = (ClassNotFoundException)_t;
+            XtextGeneratorResourceSetInitializer.LOG.debug("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport not found, GenModels will not be indexed");
+          } else if (_t instanceof Exception) {
+            final Exception e_1 = (Exception)_t;
+            XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize GenModel support.", e_1);
+          } else {
+            throw Exceptions.sneakyThrow(_t);
           }
         }
       }

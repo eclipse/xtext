@@ -89,11 +89,9 @@ public class FormatterTester {
       final String oldDocument = _text;
       final IBasicFormatter formatter = this.formatter;
       boolean _matched = false;
-      if (!_matched) {
-        if (formatter instanceof AbstractFormatter) {
-          _matched=true;
-          ((AbstractFormatter)this.formatter).setAllowIdentityEdits(true);
-        }
+      if (formatter instanceof AbstractFormatter) {
+        _matched=true;
+        ((AbstractFormatter)this.formatter).setAllowIdentityEdits(true);
       }
       String _prefix_1 = it.getPrefix();
       final int start = _prefix_1.length();
@@ -106,13 +104,11 @@ public class FormatterTester {
       Iterables.<TextReplacement>addAll(edits, _format);
       final IBasicFormatter formatter_1 = this.formatter;
       boolean _matched_1 = false;
-      if (!_matched_1) {
-        if (formatter_1 instanceof AbstractFormatter) {
-          _matched_1=true;
-          boolean _isConflictOccurred = ((AbstractFormatter)this.formatter).isConflictOccurred();
-          if (_isConflictOccurred) {
-            throw new RuntimeException("There are conflicting text edits, see console for details.");
-          }
+      if (formatter_1 instanceof AbstractFormatter) {
+        _matched_1=true;
+        boolean _isConflictOccurred = ((AbstractFormatter)this.formatter).isConflictOccurred();
+        if (_isConflictOccurred) {
+          throw new RuntimeException("There are conflicting text edits, see console for details.");
         }
       }
       boolean _isAllowErrors_1 = it.isAllowErrors();
