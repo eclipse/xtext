@@ -65,6 +65,8 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private Combo sourceLayout;
   
+  private Group createUiProjectSubGroup;
+  
   private StatusWidget statusWidget;
   
   public AdvancedNewProjectPage(final String pageName) {
@@ -116,7 +118,8 @@ public class AdvancedNewProjectPage extends WizardPage {
                 AdvancedNewProjectPage.this.createP2Project = _CheckBox_1;
               }
             };
-            AdvancedNewProjectPage.this.Group(it, _function_1);
+            Group _Group = AdvancedNewProjectPage.this.Group(it, _function_1);
+            AdvancedNewProjectPage.this.createUiProjectSubGroup = _Group;
             final Procedure1<Button> _function_2 = new Procedure1<Button>() {
               @Override
               public void apply(final Button it) {
@@ -223,7 +226,20 @@ public class AdvancedNewProjectPage extends WizardPage {
         AdvancedNewProjectPage.this.validate(e);
       }
     };
-    this.createUiProject.addSelectionListener(selectionControl);
+    this.createUiProject.addSelectionListener(new SelectionAdapter() {
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        AdvancedNewProjectPage.this.validate(e);
+        final boolean uiProjectSelected = AdvancedNewProjectPage.this.createUiProject.getSelection();
+        AdvancedNewProjectPage.this.createUiProjectSubGroup.setEnabled(uiProjectSelected);
+        AdvancedNewProjectPage.this.createSDKProject.setEnabled(uiProjectSelected);
+        AdvancedNewProjectPage.this.createP2Project.setEnabled(uiProjectSelected);
+        if ((!uiProjectSelected)) {
+          AdvancedNewProjectPage.this.createSDKProject.setSelection(false);
+          AdvancedNewProjectPage.this.createP2Project.setSelection(false);
+        }
+      }
+    });
     this.sourceLayout.addSelectionListener(selectionControl);
     this.createWebProject.addSelectionListener(selectionControl);
     this.preferredBuildSystem.addSelectionListener(selectionControl);
@@ -321,7 +337,7 @@ public class AdvancedNewProjectPage extends WizardPage {
         _and_5 = _not_2;
       }
       if (_and_5) {
-        this.<Control>reportIssue(IMessageProvider.INFORMATION, 
+        this.<Control>addIssue(IMessageProvider.INFORMATION, 
           Messages.AdvancedNewProjectPage_p2AndSdkInfo);
       }
       Object _source = null;
@@ -589,6 +605,10 @@ public class AdvancedNewProjectPage extends WizardPage {
       }
     };
     return this.statusWidget.setStatus(severity, text, fix, _function);
+  }
+  
+  protected <T extends Control> Procedure0 addIssue(final int severity, final String text) {
+    return this.statusWidget.addStatus(severity, text);
   }
   
   protected boolean isBundleResolved(final String bundleId) {

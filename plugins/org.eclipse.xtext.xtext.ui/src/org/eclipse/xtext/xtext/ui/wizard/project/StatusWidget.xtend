@@ -68,6 +68,19 @@ class StatusWidget extends Composite {
 		this.quickFix = [quickFix.apply callback.apply]
 	}
 
+	def addStatus(int severity, String text) {
+		if (link.text.trim.empty) {
+			setStatus(severity, text, [], [])
+		} else {
+			this.severity = severity
+			this.visible = severity !== NONE
+			imageLabel.image = imageFor(severity)
+			link.text = link.text + "\n" + text
+			val matcher = Pattern.compile('<a>(.*)</a>').matcher(text.trim)
+			link.toolTipText = matcher.replaceAll('$1')
+		}
+	}
+
 	def getSevertity() {
 		severity
 	}
