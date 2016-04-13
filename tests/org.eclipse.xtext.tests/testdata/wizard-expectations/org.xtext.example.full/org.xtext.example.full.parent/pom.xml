@@ -18,7 +18,7 @@
 		<module>org.xtext.example.full.ide</module>
 		<module>org.xtext.example.full.ui</module>
 		<module>org.xtext.example.full.target</module>
-		<module>org.xtext.example.full.sdk</module>
+		<module>org.xtext.example.full.feature</module>
 		<module>org.xtext.example.full.repository</module>
 		<module>org.xtext.example.full.ui.tests</module>
 	</modules>
