@@ -22,6 +22,7 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.xtext.xtext.ui.internal.Activator
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.SourceLayout
+
 import static org.eclipse.xtext.xtext.ui.wizard.project.Messages.*
 import static org.osgi.framework.Bundle.*
 
@@ -36,6 +37,7 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createTestProject
 	Combo preferredBuildSystem
 	Combo sourceLayout
+	Group createUiProjectSubGroup
 
 	StatusWidget statusWidget
 
@@ -55,7 +57,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				createUiProject = CheckBox [
 					text = AdvancedNewProjectPage_projEclipse
 				]
-				Group [
+				createUiProjectSubGroup = Group [
 					createSDKProject = CheckBox [
 						text = AdvancedNewProjectPage_projEclipseSDKFeature
 					]
@@ -105,7 +107,19 @@ class AdvancedNewProjectPage extends WizardPage {
 			}
 		}
 
-		createUiProject.addSelectionListener(selectionControl)
+		createUiProject.addSelectionListener(new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				validate(e)
+				val uiProjectSelected = createUiProject.selection
+				createUiProjectSubGroup.enabled = uiProjectSelected
+				createSDKProject.enabled = uiProjectSelected
+				createP2Project.enabled = uiProjectSelected
+				if (!uiProjectSelected) {
+					createSDKProject.selection = false
+					createP2Project.selection = false
+				}
+			}
+		})
 		sourceLayout.addSelectionListener(selectionControl)
 		createWebProject.addSelectionListener(selectionControl)
 		preferredBuildSystem.addSelectionListener(selectionControl)
@@ -147,7 +161,7 @@ class AdvancedNewProjectPage extends WizardPage {
 				AdvancedNewProjectPage_ideaReqGradleInfo)
 		}
 		if (createP2Project.selection && !createSDKProject.selection) {
-			reportIssue(INFORMATION,
+			addIssue(INFORMATION,
 				AdvancedNewProjectPage_p2AndSdkInfo)
 		}
 
@@ -236,6 +250,10 @@ class AdvancedNewProjectPage extends WizardPage {
 		statusWidget.setStatus(severity, text, fix, [
 			validate(null)
 		])
+	}
+
+	def protected <T extends Control> addIssue(int severity, String text) {
+		statusWidget.addStatus(severity, text)
 	}
 
 	def protected boolean isBundleResolved(String bundleId) {
