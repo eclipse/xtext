@@ -319,7 +319,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 									<argument>-p</argument>
 									<argument>rootPath=/${project.basedir}/..</argument>
 								</arguments>
-								<classpathScope>compile</classpathScope>
+								<classpathScope>runtime</classpathScope>
 								<includePluginDependencies>true</includePluginDependencies>
 								<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
 							</configuration>
