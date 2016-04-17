@@ -122,6 +122,53 @@ public interface IReferenceFinder {
 			Acceptor acceptor,
 			IProgressMonitor monitor);
 	
+	/**
+	 * Finds all references from the given source resource.
+	 * 
+	 * @param scope
+	 *            the search scope for the resources containing the sources of the references.
+	 * @param acceptor
+	 *            accepts the matches.
+	 * @param monitor
+	 *            the progress monitor. Can be null.
+	 */
+	void findAllReferences(
+			Resource scope,
+			Acceptor acceptor,
+			IProgressMonitor monitor);
+	
+	/**
+	 * Finds the references from the given source object to the given <code>targetURIs</code>.
+	 * 
+	 * @param targetURIs
+	 *            the URIs of the target elements of the references. Should be normalized.
+	 * @param scope
+	 *            the search scope for the object containing the sources of the references.
+	 * @param acceptor
+	 *            accepts the matches.
+	 * @param monitor
+	 *            the progress monitor. Can be null.
+	 */
+	void findReferences(
+			TargetURIs targetURIs,
+			EObject scope,
+			Acceptor acceptor,
+			IProgressMonitor monitor);
+	
+	/**
+	 * Finds all references from the given source object.
+	 * 
+	 * @param scope
+	 *            the search scope for the object containing the sources of the references.
+	 * @param acceptor
+	 *            accepts the matches.
+	 * @param monitor
+	 *            the progress monitor. Can be null.
+	 */
+	void findAllReferences(
+			EObject scope,
+			Acceptor acceptor,
+			IProgressMonitor monitor);
 
 	/**
 	 * Finds all references to the given <code>targetURIs</code>.
