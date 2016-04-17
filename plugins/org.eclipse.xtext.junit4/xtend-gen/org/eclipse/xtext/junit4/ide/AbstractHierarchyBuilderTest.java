@@ -20,7 +20,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ide.editor.hierarchy.AbstractHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocation;
+import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -200,8 +200,8 @@ public abstract class AbstractHierarchyBuilderTest {
   protected String internalToExpectation(final HierarchyNode node, final HierarchyBuilder builder) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      Collection<HierarchyNodeLocation> _locations = node.getLocations();
-      for(final HierarchyNodeLocation location : _locations) {
+      Collection<HierarchyNodeReference> _references = node.getReferences();
+      for(final HierarchyNodeReference location : _references) {
         String _expectation = this.toExpectation(location);
         _builder.append(_expectation, "");
         _builder.newLineIfNotEmpty();
@@ -223,7 +223,7 @@ public abstract class AbstractHierarchyBuilderTest {
     return _builder.toString();
   }
   
-  protected String toExpectation(final HierarchyNodeLocation location) {
+  protected String toExpectation(final HierarchyNodeReference location) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\'");
     String _text = location.getText();

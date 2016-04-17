@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocation;
+import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -37,14 +37,14 @@ public class DefaultHierarchyNode implements HierarchyNode {
   private IEObjectDescription element;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private final ArrayList<HierarchyNodeLocation> locations = CollectionLiterals.<HierarchyNodeLocation>newArrayList();
+  private final ArrayList<HierarchyNodeReference> references = CollectionLiterals.<HierarchyNodeReference>newArrayList();
   
   private Wrapper<Boolean> recursive;
   
   @Override
   public Object getNavigationElement() {
     Object _elvis = null;
-    HierarchyNodeLocation _head = IterableExtensions.<HierarchyNodeLocation>head(this.locations);
+    HierarchyNodeReference _head = IterableExtensions.<HierarchyNodeReference>head(this.references);
     if (_head != null) {
       _elvis = _head;
     } else {
@@ -109,7 +109,7 @@ public class DefaultHierarchyNode implements HierarchyNode {
   }
   
   @Pure
-  public Collection<HierarchyNodeLocation> getLocations() {
-    return this.locations;
+  public Collection<HierarchyNodeReference> getReferences() {
+    return this.references;
   }
 }

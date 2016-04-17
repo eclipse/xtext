@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ide.editor.hierarchy;
 
 import java.util.Collection;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocation;
+import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference;
 import org.eclipse.xtext.ide.editor.navigation.Navigatable;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
@@ -31,9 +31,9 @@ public interface HierarchyNode extends Navigatable {
   public abstract HierarchyNode getParent();
   
   /**
-   * @returns locations used to reach the node from a parent; empty if the node is a root
+   * @returns references used to reach the node from a parent; empty if the node is a root
    */
-  public abstract Collection<HierarchyNodeLocation> getLocations();
+  public abstract Collection<HierarchyNodeReference> getReferences();
   
   /**
    * @returns whether there is a parent (can be transitive) containing the same element as the node

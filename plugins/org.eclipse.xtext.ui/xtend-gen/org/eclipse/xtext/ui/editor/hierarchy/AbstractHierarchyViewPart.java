@@ -20,6 +20,7 @@ import org.eclipse.xtext.ide.editor.hierarchy.DefaultHierarchyRoot;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot;
+import org.eclipse.xtext.ui.editor.hierarchy.DeferredHierarchyBuilder;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -66,6 +67,21 @@ public abstract class AbstractHierarchyViewPart extends ViewPart {
         if ((selectedElement instanceof HierarchyNode)) {
           return ((HierarchyNode)selectedElement);
         }
+      }
+    }
+    return null;
+  }
+  
+  protected <T extends HierarchyBuilder> T getBuilder(final Class<T> clazz) {
+    boolean _isInstance = clazz.isInstance(this.builder);
+    if (_isInstance) {
+      return ((T) this.builder);
+    }
+    if ((this.builder instanceof DeferredHierarchyBuilder)) {
+      final HierarchyBuilder wrappedBuilder = ((DeferredHierarchyBuilder)this.builder).getHierarchyBuilder();
+      boolean _isInstance_1 = clazz.isInstance(wrappedBuilder);
+      if (_isInstance_1) {
+        return ((T) wrappedBuilder);
       }
     }
     return null;

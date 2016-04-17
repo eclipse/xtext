@@ -12,24 +12,19 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.example.domainmodel.ui.editor.hierarchy.AssociationHierarchyNodeLocationProvider;
-import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocationProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -49,91 +44,78 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
   }
   
   @Override
-  protected IEObjectDescription getRootDeclaration(final IEObjectDescription declaration) {
+  protected IEObjectDescription findDeclaration(final URI objectURI) {
+    final IEObjectDescription description = this.getDescription(objectURI);
     EClass _eClass = null;
-    if (declaration!=null) {
-      _eClass=declaration.getEClass();
+    if (description!=null) {
+      _eClass=description.getEClass();
     }
-    boolean _isEntity = this.isEntity(_eClass);
-    if (_isEntity) {
-      return declaration;
-    }
-    EClass _eClass_1 = null;
-    if (declaration!=null) {
-      _eClass_1=declaration.getEClass();
-    }
-    boolean _isJvmType = this.isJvmType(_eClass_1);
+    boolean _isJvmType = this.isJvmType(_eClass);
     if (_isJvmType) {
-      IReferenceFinder.IResourceAccess _resourceAccess = this.getResourceAccess();
-      URI _eObjectURI = declaration.getEObjectURI();
-      final IUnitOfWork<IEObjectDescription, ResourceSet> _function = new IUnitOfWork<IEObjectDescription, ResourceSet>() {
+      URI _eObjectURI = description.getEObjectURI();
+      final IUnitOfWork<IEObjectDescription, EObject> _function = new IUnitOfWork<IEObjectDescription, EObject>() {
         @Override
-        public IEObjectDescription exec(final ResourceSet it) throws Exception {
-          URI _eObjectURI = declaration.getEObjectURI();
-          EObject _eObject = it.getEObject(_eObjectURI, true);
-          final EObject sourceElement = AssociationHierarchyBuilder.this._iJvmModelAssociations.getPrimarySourceElement(_eObject);
+        public IEObjectDescription exec(final EObject targetElement) throws Exception {
+          final EObject sourceElement = AssociationHierarchyBuilder.this._iJvmModelAssociations.getPrimarySourceElement(targetElement);
           EClass _eClass = null;
           if (sourceElement!=null) {
             _eClass=sourceElement.eClass();
           }
           boolean _isEntity = AssociationHierarchyBuilder.this.isEntity(_eClass);
           if (_isEntity) {
-            IResourceDescriptions _indexData = AssociationHierarchyBuilder.this.getIndexData();
-            Iterable<IEObjectDescription> _exportedObjectsByObject = _indexData.getExportedObjectsByObject(sourceElement);
-            return IterableExtensions.<IEObjectDescription>head(_exportedObjectsByObject);
+            return AssociationHierarchyBuilder.this.getDescription(sourceElement);
           }
           return null;
         }
       };
-      return _resourceAccess.<IEObjectDescription>readOnly(_eObjectURI, _function);
+      return this.<IEObjectDescription>readOnly(_eObjectURI, _function);
     }
-    return null;
+    EClass _eClass_1 = null;
+    if (description!=null) {
+      _eClass_1=description.getEClass();
+    }
+    boolean _isEntity = this.isEntity(_eClass_1);
+    if (_isEntity) {
+      return description;
+    }
+    final IUnitOfWork<IEObjectDescription, EObject> _function_1 = new IUnitOfWork<IEObjectDescription, EObject>() {
+      @Override
+      public IEObjectDescription exec(final EObject object) throws Exception {
+        Entity _containerOfType = EcoreUtil2.<Entity>getContainerOfType(object, Entity.class);
+        return AssociationHierarchyBuilder.this.getDescription(_containerOfType);
+      }
+    };
+    return this.<IEObjectDescription>readOnly(objectURI, _function_1);
   }
   
   @Override
-  protected IEObjectDescription getDeclaration(final IReferenceDescription reference) {
-    EReference _eReference = null;
-    if (reference!=null) {
-      _eReference=reference.getEReference();
+  protected boolean filterReference(final IReferenceDescription reference) {
+    if (((reference == null) || (!this.isJvmType(reference.getEReference().getEType())))) {
+      return false;
     }
-    EClassifier _eType = null;
-    if (_eReference!=null) {
-      _eType=_eReference.getEType();
-    }
-    final EClassifier type = _eType;
-    boolean _matched = false;
-    if (type instanceof EClass) {
-      boolean _isJvmType = this.isJvmType(((EClass)type));
-      if (_isJvmType) {
-        _matched=true;
-        IReferenceFinder.IResourceAccess _resourceAccess = this.getResourceAccess();
-        URI _containerEObjectURI = reference.getContainerEObjectURI();
-        final IUnitOfWork<IEObjectDescription, ResourceSet> _function = new IUnitOfWork<IEObjectDescription, ResourceSet>() {
-          @Override
-          public IEObjectDescription exec(final ResourceSet it) throws Exception {
-            URI _containerEObjectURI = reference.getContainerEObjectURI();
-            final EObject referenceOwner = it.getEObject(_containerEObjectURI, true);
-            Property _containerOfType = EcoreUtil2.<Property>getContainerOfType(referenceOwner, Property.class);
-            final Entity entity = EcoreUtil2.<Entity>getContainerOfType(_containerOfType, Entity.class);
-            if ((entity != null)) {
-              IResourceDescriptions _indexData = AssociationHierarchyBuilder.this.getIndexData();
-              Iterable<IEObjectDescription> _exportedObjectsByObject = _indexData.getExportedObjectsByObject(entity);
-              return IterableExtensions.<IEObjectDescription>head(_exportedObjectsByObject);
-            }
-            return null;
-          }
-        };
-        return _resourceAccess.<IEObjectDescription>readOnly(_containerEObjectURI, _function);
+    URI _sourceEObjectUri = reference.getSourceEObjectUri();
+    final IUnitOfWork<Boolean, EObject> _function = new IUnitOfWork<Boolean, EObject>() {
+      @Override
+      public Boolean exec(final EObject referenceOwner) throws Exception {
+        Property _containerOfType = null;
+        if (referenceOwner!=null) {
+          _containerOfType=EcoreUtil2.<Property>getContainerOfType(referenceOwner, Property.class);
+        }
+        Entity _containerOfType_1 = null;
+        if (_containerOfType!=null) {
+          _containerOfType_1=EcoreUtil2.<Entity>getContainerOfType(_containerOfType, Entity.class);
+        }
+        return Boolean.valueOf((_containerOfType_1 != null));
       }
-    }
-    return null;
+    };
+    return (this.<Boolean>readOnly(_sourceEObjectUri, _function)).booleanValue();
   }
   
-  protected boolean isJvmType(final EClass type) {
-    return EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_TYPE, type);
+  protected boolean isJvmType(final EClassifier type) {
+    return this.isAssignable(TypesPackage.Literals.JVM_TYPE, type);
   }
   
-  protected boolean isEntity(final EClass type) {
-    return EcoreUtil2.isAssignableFrom(DomainmodelPackage.Literals.ENTITY, type);
+  protected boolean isEntity(final EClassifier type) {
+    return this.isAssignable(DomainmodelPackage.Literals.ENTITY, type);
   }
 }

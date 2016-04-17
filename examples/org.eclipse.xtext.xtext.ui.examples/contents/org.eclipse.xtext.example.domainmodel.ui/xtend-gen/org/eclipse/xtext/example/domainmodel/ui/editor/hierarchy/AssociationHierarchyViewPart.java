@@ -7,11 +7,10 @@
  */
 package org.eclipse.xtext.example.domainmodel.ui.editor.hierarchy;
 
-import org.eclipse.jface.viewers.IBaseLabelProvider;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.xtext.example.domainmodel.ui.editor.hierarchy.AssociationLocationTableViewer;
+import org.eclipse.jface.viewers.ColumnLayoutData;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.xtext.ui.editor.hierarchy.DefaultCallHierarchyViewPart;
+import org.eclipse.xtext.xbase.lib.Pair;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -19,10 +18,11 @@ import org.eclipse.xtext.ui.editor.hierarchy.DefaultCallHierarchyViewPart;
 @SuppressWarnings("all")
 public class AssociationHierarchyViewPart extends DefaultCallHierarchyViewPart {
   @Override
-  protected TableViewer createLocationViewer(final Composite parent) {
-    final AssociationLocationTableViewer locationViewer = new AssociationLocationTableViewer(parent);
-    IBaseLabelProvider _createLocationLabelProvider = this.createLocationLabelProvider();
-    locationViewer.setLabelProvider(_createLocationLabelProvider);
-    return locationViewer;
+  protected Pair<String, ColumnLayoutData>[] getLocationColumnDescriptions() {
+    ColumnWeightData _columnWeightData = new ColumnWeightData(60);
+    Pair<String, ColumnLayoutData> _mappedTo = Pair.<String, ColumnLayoutData>of("Line", _columnWeightData);
+    ColumnWeightData _columnWeightData_1 = new ColumnWeightData(300);
+    Pair<String, ColumnLayoutData> _mappedTo_1 = Pair.<String, ColumnLayoutData>of("Property", _columnWeightData_1);
+    return new Pair[] { _mappedTo, _mappedTo_1 };
   }
 }

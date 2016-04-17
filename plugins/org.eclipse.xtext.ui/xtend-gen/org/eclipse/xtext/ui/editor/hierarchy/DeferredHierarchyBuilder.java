@@ -20,7 +20,7 @@ import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocation;
+import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -108,8 +108,8 @@ public class DeferredHierarchyBuilder implements HierarchyBuilder {
       return this.delegate.getParent();
     }
     
-    public Collection<HierarchyNodeLocation> getLocations() {
-      return this.delegate.getLocations();
+    public Collection<HierarchyNodeReference> getReferences() {
+      return this.delegate.getReferences();
     }
     
     public boolean isRecursive() {

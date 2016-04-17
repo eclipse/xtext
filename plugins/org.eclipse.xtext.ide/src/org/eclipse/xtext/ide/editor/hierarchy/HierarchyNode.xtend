@@ -30,9 +30,9 @@ interface HierarchyNode extends Navigatable {
 	def HierarchyNode getParent()
 
 	/**
-	 * @returns locations used to reach the node from a parent; empty if the node is a root 
+	 * @returns references used to reach the node from a parent; empty if the node is a root 
 	 */
-	def Collection<HierarchyNodeLocation> getLocations()
+	def Collection<HierarchyNodeReference> getReferences()
 
 	/**
 	 * @returns whether there is a parent (can be transitive) containing the same element as the node

@@ -8,13 +8,13 @@
 package org.eclipse.xtext.example.domainmodel.ui.editor.hierarchy
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EClassifier
 import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder
-import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.IReferenceDescription
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
@@ -35,39 +35,38 @@ class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
 		associationHierarchyNodeLocationProvider
 	}
 
-	override protected getRootDeclaration(IEObjectDescription declaration) {
-		if (declaration?.EClass.entity)
-			return declaration
-
-		if (declaration?.EClass.jvmType) {
-			return resourceAccess.readOnly(declaration.EObjectURI) [
-				val sourceElement = getEObject(declaration.EObjectURI, true).primarySourceElement
+	override protected findDeclaration(URI objectURI) {
+		val description = objectURI.description
+		if (description?.EClass.jvmType) {
+			return readOnly(description.EObjectURI) [ targetElement |
+				val sourceElement = targetElement.primarySourceElement
 				if (sourceElement?.eClass.entity)
-					return indexData.getExportedObjectsByObject(sourceElement).head
+					return sourceElement.description
 			]
 		}
-		return null
+		if (description?.EClass.entity)
+			return description
+
+		return readOnly(objectURI) [ object |
+			object.getContainerOfType(Entity).description
+		]
 	}
 
-	override protected getDeclaration(IReferenceDescription reference) {
-		switch type : reference?.EReference?.EType {
-			EClass case type.jvmType: {
-				return resourceAccess.readOnly(reference.containerEObjectURI) [
-					val referenceOwner = getEObject(reference.containerEObjectURI, true)
-					val entity = referenceOwner.getContainerOfType(Property).getContainerOfType(Entity)
-					if (entity !== null)
-						return indexData.getExportedObjectsByObject(entity).head
-				]
-			}
-		}
+	override protected filterReference(IReferenceDescription reference) {
+		if (reference === null || !reference.EReference.EType.jvmType)
+			return false
+
+		return readOnly(reference.sourceEObjectUri) [ referenceOwner |
+			referenceOwner?.getContainerOfType(Property)?.getContainerOfType(Entity) !== null
+		]
 	}
 
-	protected def isJvmType(EClass type) {
-		TypesPackage.Literals.JVM_TYPE.isAssignableFrom(type)
+	protected def isJvmType(EClassifier type) {
+		TypesPackage.Literals.JVM_TYPE.isAssignable(type)
 	}
 
-	protected def isEntity(EClass type) {
-		DomainmodelPackage.Literals.ENTITY.isAssignableFrom(type)
+	protected def isEntity(EClassifier type) {
+		DomainmodelPackage.Literals.ENTITY.isAssignable(type)
 	}
 
 }

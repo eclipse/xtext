@@ -9,13 +9,21 @@ package org.eclipse.xtext.ui.editor.hierarchy;
 
 import com.google.inject.Inject;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ColumnLayoutData;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -23,14 +31,24 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IViewSite;
+import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocation;
+import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot;
 import org.eclipse.xtext.ui.editor.hierarchy.AbstractHierarchyViewPart;
 import org.eclipse.xtext.ui.editor.hierarchy.HierarchyTreeContentProvider;
-import org.eclipse.xtext.ui.editor.hierarchy.LocationTableViewer;
+import org.eclipse.xtext.ui.editor.hierarchy.RefreshHierarchyAction;
+import org.eclipse.xtext.ui.editor.hierarchy.SetHierarchyTypeAction;
 import org.eclipse.xtext.ui.editor.navigation.NavigationService;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -44,6 +62,39 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
   private TableViewer locationViewer;
   
   private TreeViewer callHierarchyViewer;
+  
+  private final RefreshHierarchyAction refreshAction = new RefreshHierarchyAction(this);
+  
+  private final List<SetHierarchyTypeAction> setHierarchyTypeActions = Collections.<SetHierarchyTypeAction>unmodifiableList(CollectionLiterals.<SetHierarchyTypeAction>newArrayList(new SetHierarchyTypeAction(CallHierarchyBuilder.CallHierarchyType.CALLER, this), new SetHierarchyTypeAction(CallHierarchyBuilder.CallHierarchyType.CALLEE, this)));
+  
+  protected CallHierarchyBuilder getCallHierarchyBuilder() {
+    return this.<CallHierarchyBuilder>getBuilder(CallHierarchyBuilder.class);
+  }
+  
+  public void setCallHierarchyType(final CallHierarchyBuilder.CallHierarchyType hierarchyType) {
+    CallHierarchyBuilder _callHierarchyBuilder = this.getCallHierarchyBuilder();
+    if (_callHierarchyBuilder!=null) {
+      _callHierarchyBuilder.setHierarchyType(hierarchyType);
+    }
+    NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+    this.refresh(_nullProgressMonitor);
+  }
+  
+  @Override
+  public void refresh(final IProgressMonitor monitor) {
+    CallHierarchyBuilder _callHierarchyBuilder = this.getCallHierarchyBuilder();
+    CallHierarchyBuilder.CallHierarchyType _hierarchyType = null;
+    if (_callHierarchyBuilder!=null) {
+      _hierarchyType=_callHierarchyBuilder.getHierarchyType();
+    }
+    final CallHierarchyBuilder.CallHierarchyType hierarchyType = _hierarchyType;
+    for (final SetHierarchyTypeAction setHierarchyTypeAction : this.setHierarchyTypeActions) {
+      CallHierarchyBuilder.CallHierarchyType _hierarchyType_1 = setHierarchyTypeAction.getHierarchyType();
+      boolean _tripleEquals = (hierarchyType == _hierarchyType_1);
+      setHierarchyTypeAction.setChecked(_tripleEquals);
+    }
+    super.refresh(monitor);
+  }
   
   @Override
   public void setRoot(final HierarchyRoot root) {
@@ -61,6 +112,17 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
     this.navigationService.installNavigationSupport(this.locationViewer);
     this.navigationService.installNavigationSupport(this.callHierarchyViewer);
     this.callHierarchyViewer.addSelectionChangedListener(this);
+    IViewSite _viewSite = this.getViewSite();
+    IActionBars _actionBars = _viewSite.getActionBars();
+    IToolBarManager _toolBarManager = _actionBars.getToolBarManager();
+    this.addActions(_toolBarManager);
+  }
+  
+  protected void addActions(final IToolBarManager toolBarManager) {
+    toolBarManager.add(this.refreshAction);
+    for (final SetHierarchyTypeAction setHierarchyTypeAction : this.setHierarchyTypeActions) {
+      toolBarManager.add(setHierarchyTypeAction);
+    }
   }
   
   protected Composite createLayout(final Composite parent) {
@@ -88,10 +150,48 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
   protected abstract IBaseLabelProvider createHierarchyLabelProvider();
   
   protected TableViewer createLocationViewer(final Composite parent) {
-    final LocationTableViewer locationViewer = new LocationTableViewer(parent);
+    final TableViewer locationViewer = new TableViewer(parent);
+    ArrayContentProvider _arrayContentProvider = new ArrayContentProvider();
+    locationViewer.setContentProvider(_arrayContentProvider);
     IBaseLabelProvider _createLocationLabelProvider = this.createLocationLabelProvider();
     locationViewer.setLabelProvider(_createLocationLabelProvider);
+    final TableLayout layout = new TableLayout();
+    Table _table = locationViewer.getTable();
+    _table.setLayout(layout);
+    Table _table_1 = locationViewer.getTable();
+    _table_1.setHeaderVisible(true);
+    Pair<String, ColumnLayoutData>[] _locationColumnDescriptions = this.getLocationColumnDescriptions();
+    Iterable<Pair<Integer, Pair<String, ColumnLayoutData>>> _indexed = IterableExtensions.<Pair<String, ColumnLayoutData>>indexed(((Iterable<? extends Pair<String, ColumnLayoutData>>)Conversions.doWrapArray(_locationColumnDescriptions)));
+    final Procedure1<Pair<Integer, Pair<String, ColumnLayoutData>>> _function = new Procedure1<Pair<Integer, Pair<String, ColumnLayoutData>>>() {
+      @Override
+      public void apply(final Pair<Integer, Pair<String, ColumnLayoutData>> it) {
+        Pair<String, ColumnLayoutData> _value = it.getValue();
+        ColumnLayoutData _value_1 = _value.getValue();
+        layout.addColumnData(_value_1);
+        Table _table = locationViewer.getTable();
+        Pair<String, ColumnLayoutData> _value_2 = it.getValue();
+        Integer _key = it.getKey();
+        AbstractCallHierarchyViewPart.this.createColumn(_table, _value_2, (_key).intValue());
+      }
+    };
+    IterableExtensions.<Pair<Integer, Pair<String, ColumnLayoutData>>>forEach(_indexed, _function);
     return locationViewer;
+  }
+  
+  protected Pair<String, ColumnLayoutData>[] getLocationColumnDescriptions() {
+    ColumnWeightData _columnWeightData = new ColumnWeightData(60);
+    Pair<String, ColumnLayoutData> _mappedTo = Pair.<String, ColumnLayoutData>of("Line", _columnWeightData);
+    ColumnWeightData _columnWeightData_1 = new ColumnWeightData(300);
+    Pair<String, ColumnLayoutData> _mappedTo_1 = Pair.<String, ColumnLayoutData>of("Call", _columnWeightData_1);
+    return new Pair[] { _mappedTo, _mappedTo_1 };
+  }
+  
+  protected void createColumn(final Table table, final Pair<String, ColumnLayoutData> columnDescription, final int index) {
+    final TableColumn column = new TableColumn(table, SWT.NONE, index);
+    ColumnLayoutData _value = columnDescription.getValue();
+    column.setResizable(_value.resizable);
+    String _key = columnDescription.getKey();
+    column.setText(_key);
   }
   
   protected abstract IBaseLabelProvider createLocationLabelProvider();
@@ -114,15 +214,15 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
   }
   
   protected void onCallHierarchyNodeChanged(final HierarchyNode node) {
-    Collection<HierarchyNodeLocation> _elvis = null;
-    Collection<HierarchyNodeLocation> _locations = null;
+    Collection<HierarchyNodeReference> _elvis = null;
+    Collection<HierarchyNodeReference> _references = null;
     if (node!=null) {
-      _locations=node.getLocations();
+      _references=node.getReferences();
     }
-    if (_locations != null) {
-      _elvis = _locations;
+    if (_references != null) {
+      _elvis = _references;
     } else {
-      List<HierarchyNodeLocation> _emptyList = CollectionLiterals.<HierarchyNodeLocation>emptyList();
+      List<HierarchyNodeReference> _emptyList = CollectionLiterals.<HierarchyNodeReference>emptyList();
       _elvis = _emptyList;
     }
     this.locationViewer.setInput(_elvis);

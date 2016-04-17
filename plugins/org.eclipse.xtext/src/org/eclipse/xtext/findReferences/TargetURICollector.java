@@ -27,7 +27,6 @@ import com.google.inject.Singleton;
  * targets.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * 
  * @since 2.10
  */
 @Singleton

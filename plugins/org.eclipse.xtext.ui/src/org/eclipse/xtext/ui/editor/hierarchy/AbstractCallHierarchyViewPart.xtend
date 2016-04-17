@@ -8,16 +8,27 @@
 package org.eclipse.xtext.ui.editor.hierarchy
 
 import com.google.inject.Inject
+import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.jface.action.IToolBarManager
+import org.eclipse.jface.viewers.ArrayContentProvider
+import org.eclipse.jface.viewers.ColumnLayoutData
+import org.eclipse.jface.viewers.ColumnWeightData
 import org.eclipse.jface.viewers.IBaseLabelProvider
 import org.eclipse.jface.viewers.IContentProvider
 import org.eclipse.jface.viewers.ISelectionChangedListener
 import org.eclipse.jface.viewers.SelectionChangedEvent
+import org.eclipse.jface.viewers.TableLayout
 import org.eclipse.jface.viewers.TableViewer
 import org.eclipse.jface.viewers.TreeViewer
 import org.eclipse.swt.SWT
 import org.eclipse.swt.custom.SashForm
 import org.eclipse.swt.layout.GridData
 import org.eclipse.swt.widgets.Composite
+import org.eclipse.swt.widgets.Table
+import org.eclipse.swt.widgets.TableColumn
+import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder
+import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder.CallHierarchyType
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot
 import org.eclipse.xtext.ui.editor.navigation.NavigationService
@@ -34,6 +45,29 @@ abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyViewPart i
 	TableViewer locationViewer
 	TreeViewer callHierarchyViewer
 
+	val refreshAction = new RefreshHierarchyAction(this)
+	val setHierarchyTypeActions = #[
+		new SetHierarchyTypeAction(CallHierarchyType.CALLER, this),
+		new SetHierarchyTypeAction(CallHierarchyType.CALLEE, this)
+	]
+
+	protected def getCallHierarchyBuilder() {
+		getBuilder(CallHierarchyBuilder)
+	}
+
+	def void setCallHierarchyType(CallHierarchyType hierarchyType) {
+		callHierarchyBuilder?.setHierarchyType(hierarchyType)
+		refresh(new NullProgressMonitor)
+	}
+
+	override refresh(IProgressMonitor monitor) {
+		val hierarchyType = callHierarchyBuilder?.hierarchyType
+		for (setHierarchyTypeAction : setHierarchyTypeActions) {
+			setHierarchyTypeAction.checked = hierarchyType === setHierarchyTypeAction.hierarchyType
+		}
+		super.refresh(monitor)
+	}
+
 	override void setRoot(HierarchyRoot root) {
 		callHierarchyViewer.input = root
 		setFocus
@@ -47,6 +81,14 @@ abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyViewPart i
 		navigationService.installNavigationSupport(locationViewer)
 		navigationService.installNavigationSupport(callHierarchyViewer)
 		callHierarchyViewer.addSelectionChangedListener(this)
+
+		viewSite.actionBars.toolBarManager.addActions
+	}
+
+	protected def void addActions(IToolBarManager toolBarManager) {
+		toolBarManager.add(refreshAction)
+		for (setHierarchyTypeAction : setHierarchyTypeActions)
+			toolBarManager.add(setHierarchyTypeAction)
 	}
 
 	protected def Composite createLayout(Composite parent) {
@@ -70,9 +112,35 @@ abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyViewPart i
 	protected def IBaseLabelProvider createHierarchyLabelProvider()
 
 	protected def TableViewer createLocationViewer(Composite parent) {
-		val locationViewer = new LocationTableViewer(parent)
+		val locationViewer = new TableViewer(parent)
+		locationViewer.contentProvider = new ArrayContentProvider
 		locationViewer.labelProvider = createLocationLabelProvider
+
+		val layout = new TableLayout
+		locationViewer.table.layout = layout
+		locationViewer.table.headerVisible = true
+		locationColumnDescriptions.indexed.forEach [
+			layout.addColumnData(value.value)
+			locationViewer.table.createColumn(value, key)
+		]
 		return locationViewer
+	}
+
+	protected def Pair<String, ColumnLayoutData>[] getLocationColumnDescriptions() {
+		#[
+			'Line' -> new ColumnWeightData(60),
+			'Call' -> new ColumnWeightData(300)
+		]
+	}
+
+	protected def void createColumn(
+		Table table,
+		Pair<String, ColumnLayoutData> columnDescription,
+		int index
+	) {
+		val column = new TableColumn(table, SWT.NONE, index)
+		column.resizable = columnDescription.value.resizable
+		column.text = columnDescription.key
 	}
 
 	protected def IBaseLabelProvider createLocationLabelProvider()
@@ -89,7 +157,7 @@ abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyViewPart i
 	}
 
 	protected def onCallHierarchyNodeChanged(HierarchyNode node) {
-		locationViewer.input = node?.locations ?: emptyList
+		locationViewer.input = node?.references ?: emptyList
 		navigationService.open(node)
 		setFocus
 	}

@@ -7,16 +7,23 @@
  */
 package org.eclipse.xtext.ide.editor.hierarchy;
 
-import org.eclipse.xtext.ide.editor.navigation.Navigatable;
-import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
 
 /**
- * Represents a reference between parent and child nodes. Each location is backed up with a region and a text.
+ * It is used to build a call hierarchy structure.
  * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
 @SuppressWarnings("all")
-public interface HierarchyNodeLocation extends Navigatable, ITextRegionWithLineInformation {
-  public abstract String getText();
+public interface CallHierarchyBuilder extends HierarchyBuilder {
+  public enum CallHierarchyType {
+    CALLER,
+    
+    CALLEE;
+  }
+  
+  public abstract CallHierarchyBuilder.CallHierarchyType getHierarchyType();
+  
+  public abstract void setHierarchyType(final CallHierarchyBuilder.CallHierarchyType hierarchyType);
 }

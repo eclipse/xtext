@@ -1,16 +1,19 @@
 package org.eclipse.xtext.example.arithmetics.ui.editor.hierarchy;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.example.arithmetics.arithmetics.AbstractDefinition;
 import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
 import org.eclipse.xtext.example.arithmetics.ui.editor.hierarchy.ArithmeticsCallHierarchyNodeLocationProvider;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocationProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 @SuppressWarnings("all")
 public class ArithmeticsCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
@@ -23,41 +26,32 @@ public class ArithmeticsCallHierarchyBuilder extends DefaultCallHierarchyBuilder
   }
   
   @Override
-  protected IEObjectDescription getRootDeclaration(final IEObjectDescription declaration) {
+  protected IEObjectDescription findDeclaration(final URI objectURI) {
+    final IEObjectDescription description = this.getDescription(objectURI);
     EClass _eClass = null;
-    if (declaration!=null) {
-      _eClass=declaration.getEClass();
+    if (description!=null) {
+      _eClass=description.getEClass();
     }
     boolean _isDefinition = this.isDefinition(_eClass);
     if (_isDefinition) {
-      return declaration;
+      return description;
     }
-    return null;
+    final IUnitOfWork<IEObjectDescription, EObject> _function = new IUnitOfWork<IEObjectDescription, EObject>() {
+      @Override
+      public IEObjectDescription exec(final EObject object) throws Exception {
+        AbstractDefinition _containerOfType = EcoreUtil2.<AbstractDefinition>getContainerOfType(object, AbstractDefinition.class);
+        return ArithmeticsCallHierarchyBuilder.this.getDescription(_containerOfType);
+      }
+    };
+    return this.<IEObjectDescription>readOnly(objectURI, _function);
   }
   
   @Override
-  protected IEObjectDescription getDeclaration(final IReferenceDescription reference) {
-    EReference _eReference = null;
-    if (reference!=null) {
-      _eReference=reference.getEReference();
-    }
-    EClassifier _eType = null;
-    if (_eReference!=null) {
-      _eType=_eReference.getEType();
-    }
-    final EClassifier type = _eType;
-    boolean _matched = false;
-    if (type instanceof EClass) {
-      boolean _isDefinition = this.isDefinition(((EClass)type));
-      if (_isDefinition) {
-        _matched=true;
-        return super.getDeclaration(reference);
-      }
-    }
-    return null;
+  protected boolean filterReference(final IReferenceDescription reference) {
+    return ((reference != null) && this.isDefinition(reference.getEReference().getEType()));
   }
   
-  protected boolean isDefinition(final EClass type) {
-    return EcoreUtil2.isAssignableFrom(ArithmeticsPackage.Literals.ABSTRACT_DEFINITION, type);
+  protected boolean isDefinition(final EClassifier type) {
+    return this.isAssignable(ArithmeticsPackage.Literals.ABSTRACT_DEFINITION, type);
   }
 }

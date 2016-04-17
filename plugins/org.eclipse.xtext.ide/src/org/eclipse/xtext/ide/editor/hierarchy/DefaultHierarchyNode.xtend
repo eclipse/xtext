@@ -27,12 +27,12 @@ class DefaultHierarchyNode implements HierarchyNode {
 	IEObjectDescription element
 
 	@Accessors(PUBLIC_GETTER)
-	val locations = <HierarchyNodeLocation>newArrayList
+	val references = <HierarchyNodeReference>newArrayList
 
 	Wrapper<Boolean> recursive
 
 	override getNavigationElement() {
-		return locations.head ?: element
+		return references.head ?: element
 	}
 
 	override boolean isRecursive() {

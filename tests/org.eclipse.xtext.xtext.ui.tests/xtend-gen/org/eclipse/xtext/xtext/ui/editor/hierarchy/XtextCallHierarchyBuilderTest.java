@@ -12,6 +12,7 @@ import com.google.inject.Provider;
 import java.util.Collection;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -47,7 +48,29 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
           @Override
           public HierarchyBuilder apply(final ResourceSet resourceSet) {
             XtextCallHierarchyBuilder _get = XtextCallHierarchyBuilderTest.this.callHierarchyBuilderProvider.get();
-            return XtextCallHierarchyBuilderTest.this.<XtextCallHierarchyBuilder>configureBuilderWith(_get, resourceSet);
+            final XtextCallHierarchyBuilder callHierarchyBuilder = XtextCallHierarchyBuilderTest.this.<XtextCallHierarchyBuilder>configureBuilderWith(_get, resourceSet);
+            callHierarchyBuilder.setHierarchyType(CallHierarchyBuilder.CallHierarchyType.CALLER);
+            return callHierarchyBuilder;
+          }
+        };
+        it.setHierarchyBuilderProvider(_function);
+        configurator.apply(it);
+      }
+    };
+    super.testBuildHierarchy(_function);
+  }
+  
+  protected void testBuildCalleeHierarchy(final Procedure1<? super AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration> configurator) {
+    final Procedure1<AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration> _function = new Procedure1<AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration>() {
+      @Override
+      public void apply(final AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration it) {
+        final Function1<ResourceSet, HierarchyBuilder> _function = new Function1<ResourceSet, HierarchyBuilder>() {
+          @Override
+          public HierarchyBuilder apply(final ResourceSet resourceSet) {
+            XtextCallHierarchyBuilder _get = XtextCallHierarchyBuilderTest.this.callHierarchyBuilderProvider.get();
+            final XtextCallHierarchyBuilder callHierarchyBuilder = XtextCallHierarchyBuilderTest.this.<XtextCallHierarchyBuilder>configureBuilderWith(_get, resourceSet);
+            callHierarchyBuilder.setHierarchyType(CallHierarchyBuilder.CallHierarchyType.CALLEE);
+            return callHierarchyBuilder;
           }
         };
         it.setHierarchyBuilderProvider(_function);
@@ -116,6 +139,79 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       }
     };
     this.testBuildHierarchy(_function);
+  }
+  
+  @Test
+  public void testBuildCalleeHierarchy_01() {
+    final Procedure1<AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration> _function = new Procedure1<AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration>() {
+      @Override
+      public void apply(final AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration it) {
+        Collection<Pair<String, String>> _models = it.getModels();
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("generate callHierarchyBuilderTestLanguage \"http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage\"");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("Model:");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("element+=Element*");
+        _builder.newLine();
+        _builder.append(";");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("Element:");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("name=ID");
+        _builder.newLine();
+        _builder.append(";");
+        _builder.newLine();
+        Pair<String, String> _mappedTo = Pair.<String, String>of("callHierarchyBuilderTestLanguage.xtext", _builder.toString());
+        _models.add(_mappedTo);
+        Collection<Pair<String, String>> _models_1 = it.getModels();
+        Pair<String, String> _head = IterableExtensions.<Pair<String, String>>head(_models_1);
+        String _value = _head.getValue();
+        int _indexOf = _value.indexOf("Model");
+        it.setIndex(_indexOf);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("Model {");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("grammar: org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("Element {");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.append("grammar: org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.append("\'element+=Element*\' [250, 17]");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.append("ID {");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t");
+        _builder_1.append("grammar: org.eclipse.xtext.common.Terminals");
+        _builder_1.newLine();
+        _builder_1.append("\t\t\t");
+        _builder_1.append("\'name=ID\' [281, 7]");
+        _builder_1.newLine();
+        _builder_1.append("\t\t");
+        _builder_1.append("}");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("}");
+        _builder_1.newLine();
+        _builder_1.append("}");
+        _builder_1.newLine();
+        it.setExpectedHierarchy(_builder_1.toString());
+      }
+    };
+    this.testBuildCalleeHierarchy(_function);
   }
   
   @Test
