@@ -7,7 +7,12 @@ dependencies {
 	compile project(':plugins:org.eclipse.xtend.ide.common')
 	compile project(":web:org.eclipse.xtext.xbase.web")
 	compile project(":web:org.eclipse.xtext.web.servlet")
-	
+
+// To try out just this project, without workspace dependencies to other bleeding edge modules from core Xtext: 
+//	compile "org.eclipse.xtend:org.eclipse.xtend.ide.common:2.9.2"
+//	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.web:2.9.2"
+//	compile "org.eclipse.xtext:org.eclipse.xtext.web.servlet:2.9.2"
+
 	compile "org.webjars:requirejs:2.1.20"
 	compile "org.webjars:jquery:2.1.4"
 	compile "org.webjars:ace:1.2.0"

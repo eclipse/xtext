@@ -9,6 +9,7 @@ import org.eclipse.xtext.web.server.model.IWebResourceSetProvider
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
+import org.eclipse.xtext.web.server.IServiceContext
 
 class ExampleResourceHandler implements IServerResourceHandler {
 
@@ -773,17 +774,18 @@ class ExampleResourceHandler implements IServerResourceHandler {
 		'''	
 	}
 
-	override get(String resourceId) throws IOException {
+   override get(String resourceId, IServiceContext serviceContext) throws IOException {
 		val result = documentProvider.get
-		val resourceSet = resourceSetProvider.get(resourceId)
+		val resourceSet = resourceSetProvider.get(resourceId, serviceContext)
 		val resource = resourceSet.createResource(URI.createURI(resourceId)) as XtextResource
-		result.setInput(resource,resourceId)
+		result.setInput(resource)
 		result.text = examples.get(resourceId) ?: ''
 		return result
 	}
 	
-	override put(IXtextWebDocument document) throws IOException {
-	/* 	try {
+   override put(IXtextWebDocument document, IServiceContext serviceContext) throws IOException {
+    	/* 	
+	   try {
 			val uri = document.resource.URI//URI.getFileURI(document.resourceId)
 			if (uri.fileExtension.equals("xtend")){
 				return
@@ -795,10 +797,7 @@ class ExampleResourceHandler implements IServerResourceHandler {
 		} catch (WrappedException exception) {
 			throw exception.cause
 		}
-		* 
 		*/
 	}
-
-	
 
 }

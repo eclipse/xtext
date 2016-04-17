@@ -4,33 +4,29 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.xtend.web.server.java2xtend.Java2XtendService
 import org.eclipse.xtext.util.internal.Log
-import org.eclipse.xtext.web.server.IRequestData
-import org.eclipse.xtext.web.server.ISessionStore
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
+import org.eclipse.xtext.web.server.IServiceContext
 
-@Singleton
 @Log
+@Singleton
 class XtendServiceDispatcher extends XtextServiceDispatcher {
-	
 	
 	@Inject Java2XtendService java2xtendService
 	
-	
-	override protected createServiceDescriptor(String serviceType, IRequestData request, ISessionStore sessionStore) {
+	override protected createServiceDescriptor(String serviceType, IServiceContext context) {
 		switch serviceType {
 			case 'java2xtend':
-				getJava2XtendService(request, sessionStore)
-			default :
-				super.createServiceDescriptor(serviceType, request, sessionStore)	
+				getJava2XtendService(context)
+			default:
+				super.createServiceDescriptor(serviceType, context)	
 		}
 		
 	}
 	
-	def getJava2XtendService(IRequestData request, ISessionStore sessionStore) throws InvalidRequestException {
-		
-		val document = getDocumentAccess(request, sessionStore)
-		val srcJava = request.getParameter("srcJava")
+	def getJava2XtendService(IServiceContext context) throws InvalidRequestException {
+		val document = getDocumentAccess(context)
+		val srcJava = context.getParameter("srcJava")
 		new ServiceDescriptor => [
 			service = [
 				try {
@@ -39,7 +35,7 @@ class XtendServiceDispatcher extends XtextServiceDispatcher {
 					handleError(throwable)
 				}
 			]
-			hasTextInput = request.parameterKeys.contains('fullText')
+			// hasTextInput = context.parameterKeys.contains('fullText')
 		]
 	}
 	
