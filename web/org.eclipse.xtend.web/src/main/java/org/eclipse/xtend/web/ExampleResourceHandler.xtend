@@ -10,13 +10,14 @@ import org.eclipse.xtext.web.server.model.IXtextWebDocument
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.web.server.IServiceContext
+import org.eclipse.xtext.web.server.model.DocumentSynchronizer
 
 class ExampleResourceHandler implements IServerResourceHandler {
 
 	@Inject IWebResourceSetProvider resourceSetProvider
 	
-	@Inject Provider<XtextWebDocument> documentProvider
-	
+	// @Inject Provider<XtextWebDocument> documentProvider
+	@Inject Provider<DocumentSynchronizer> documentSynchronizerProvider 
 	
 	val examples = #{
 		'helloWorld.xtend' -> '''
@@ -775,12 +776,12 @@ class ExampleResourceHandler implements IServerResourceHandler {
 	}
 
    override get(String resourceId, IServiceContext serviceContext) throws IOException {
-		val result = documentProvider.get
+		val textWebDocument = new XtextWebDocument(resourceId, documentSynchronizerProvider.get) // documentProvider.get
 		val resourceSet = resourceSetProvider.get(resourceId, serviceContext)
 		val resource = resourceSet.createResource(URI.createURI(resourceId)) as XtextResource
-		result.setInput(resource)
-		result.text = examples.get(resourceId) ?: ''
-		return result
+		textWebDocument.setInput(resource)
+		textWebDocument.text = examples.get(resourceId) ?: ''
+		return textWebDocument
 	}
 	
    override put(IXtextWebDocument document, IServiceContext serviceContext) throws IOException {
