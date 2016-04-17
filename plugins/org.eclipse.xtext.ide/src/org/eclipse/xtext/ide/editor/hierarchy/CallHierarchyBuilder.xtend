@@ -7,20 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.hierarchy
 
-import com.google.inject.ImplementedBy
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.EStructuralFeature
-import org.eclipse.xtext.util.ITextRegionWithLineInformation
-
 /**
- * This class is used to identify a region for {@link HierarchyNode} and {@link HierarchyNodeReference}.
+ * It is used to build a call hierarchy structure.
  * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-@ImplementedBy(DefaultHierarchyNodeLocationProvider)
-interface HierarchyNodeLocationProvider {
-	def ITextRegionWithLineInformation getTextRegion(EObject obj)
+interface CallHierarchyBuilder extends HierarchyBuilder {
 
-	def ITextRegionWithLineInformation getTextRegion(EObject owner, EStructuralFeature feature, int indexInList)
+	static enum CallHierarchyType {
+		CALLER,
+		CALLEE
+	}
+
+	def CallHierarchyType getHierarchyType();
+
+	def void setHierarchyType(CallHierarchyType hierarchyType);
+
 }

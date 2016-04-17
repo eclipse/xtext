@@ -11,11 +11,11 @@ import org.eclipse.xtext.ide.editor.navigation.Navigatable
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 
 /**
- * Represents a reference between parent and child nodes. Each location is backed up with a region and a text. 
+ * Represents a reference between parent and child nodes. Each reference is backed up with a region and a text. 
  * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-interface HierarchyNodeLocation extends Navigatable, ITextRegionWithLineInformation {
+interface HierarchyNodeReference extends Navigatable, ITextRegionWithLineInformation {
 	def String getText()
 }
