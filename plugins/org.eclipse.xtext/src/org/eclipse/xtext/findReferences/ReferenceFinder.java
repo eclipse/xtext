@@ -38,6 +38,9 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ReferenceFinder implements IReferenceFinder {
+	
+	@Inject
+	private AnyTargetURISet anyTargetURISet;
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
@@ -114,13 +117,28 @@ public class ReferenceFinder implements IReferenceFinder {
 	}
 	
 	@Override
+	public void findAllReferences(Resource scope, Acceptor acceptor, IProgressMonitor monitor) {
+		findReferences(anyTargetURISet, scope, acceptor, monitor);
+	}
+	
+	@Override
 	public void findReferences(TargetURIs targetURIs, Resource resource, Acceptor acceptor, IProgressMonitor monitor) {
 		for (EObject content : resource.getContents()) {
-			if (monitor.isCanceled()) {
-				throw new OperationCanceledException();
-			}
-			findLocalReferencesFromElement(targetURIs, content, resource, acceptor);
+			findReferences(targetURIs, content, acceptor, monitor);
 		}
+	}
+	
+	@Override
+	public void findAllReferences(EObject scope, Acceptor acceptor, IProgressMonitor monitor) {
+		findReferences(anyTargetURISet, scope, acceptor, monitor);
+	}
+	
+	@Override
+	public void findReferences(TargetURIs targetURIs, EObject scope, Acceptor acceptor, IProgressMonitor monitor) {
+		if (monitor != null && monitor.isCanceled()) {
+			throw new OperationCanceledException();
+		}
+		findLocalReferencesFromElement(targetURIs, scope, scope.eResource(), acceptor);
 	}
 	
 	@Override
