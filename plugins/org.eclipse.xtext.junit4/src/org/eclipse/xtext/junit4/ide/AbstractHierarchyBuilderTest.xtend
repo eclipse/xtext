@@ -16,7 +16,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.hierarchy.AbstractHierarchyBuilder
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocation
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider
@@ -28,6 +27,7 @@ import org.eclipse.xtext.util.LazyStringInputStream
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -93,7 +93,7 @@ abstract class AbstractHierarchyBuilderTest {
 	'''
 
 	protected def String internalToExpectation(HierarchyNode node, HierarchyBuilder builder) '''
-		«FOR location : node.locations»
+		«FOR location : node.references»
 			«location.toExpectation»
 		«ENDFOR»
 		«IF node.mayHaveChildren»
@@ -103,7 +103,7 @@ abstract class AbstractHierarchyBuilderTest {
 		«ENDIF»
 	'''
 
-	protected def String toExpectation(HierarchyNodeLocation location) {
+	protected def String toExpectation(HierarchyNodeReference location) {
 		''''«location.text»' [«location.offset», «location.length»]'''
 	}
 

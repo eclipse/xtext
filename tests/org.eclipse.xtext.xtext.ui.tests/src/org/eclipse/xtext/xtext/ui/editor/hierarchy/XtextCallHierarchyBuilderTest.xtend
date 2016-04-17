@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.ui.editor.hierarchy
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder.CallHierarchyType
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
 import org.eclipse.xtext.junit4.InjectWith
@@ -33,7 +34,20 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 	override protected testBuildHierarchy((HierarchyBuilderTestConfiguration)=>void configurator) {
 		super.testBuildHierarchy [
 			hierarchyBuilderProvider = [ resourceSet |
-				callHierarchyBuilderProvider.get.configureBuilderWith(resourceSet)
+				val callHierarchyBuilder = callHierarchyBuilderProvider.get.configureBuilderWith(resourceSet)
+				callHierarchyBuilder.hierarchyType = CallHierarchyType.CALLER
+				return callHierarchyBuilder
+			]
+			configurator.apply(it)
+		]
+	}
+
+	protected def void testBuildCalleeHierarchy((HierarchyBuilderTestConfiguration)=>void configurator) {
+		super.testBuildHierarchy [
+			hierarchyBuilderProvider = [ resourceSet |
+				val callHierarchyBuilder = callHierarchyBuilderProvider.get.configureBuilderWith(resourceSet)
+				callHierarchyBuilder.hierarchyType = CallHierarchyType.CALLEE
+				return callHierarchyBuilder
 			]
 			configurator.apply(it)
 		]
@@ -63,6 +77,40 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 					Model {
 						grammar: org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage
 						'element+=Element*' [250, 17]
+					}
+				}
+			'''
+		]
+	}
+
+	@Test
+	def void testBuildCalleeHierarchy_01() {
+		testBuildCalleeHierarchy[
+			models += ('callHierarchyBuilderTestLanguage.xtext' -> '''
+				grammar org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage with org.eclipse.xtext.common.Terminals
+				
+				generate callHierarchyBuilderTestLanguage "http://www.eclipse.org/2010/tmf/xtext/CallHierarchyBuilderTestLanguage"
+				
+				Model:
+					element+=Element*
+				;
+				
+				Element:
+					name=ID
+				;
+			''')
+
+			index = models.head.value.indexOf('Model')
+			expectedHierarchy = '''
+				Model {
+					grammar: org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage
+					Element {
+						grammar: org.eclipse.xtext.ui.tests.editor.hierarchy.CallHierarchyBuilderTestLanguage
+						'element+=Element*' [250, 17]
+						ID {
+							grammar: org.eclipse.xtext.common.Terminals
+							'name=ID' [281, 7]
+						}
 					}
 				}
 			'''

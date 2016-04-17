@@ -57,5 +57,16 @@ abstract class AbstractHierarchyViewPart extends ViewPart {
 		}
 		return null
 	}
+	
+	protected def <T extends HierarchyBuilder> T getBuilder(Class<T> clazz) {
+		if (clazz.isInstance(builder))
+			return builder as T
+			
+		if (builder instanceof DeferredHierarchyBuilder) {
+			val wrappedBuilder = builder.hierarchyBuilder
+			if (clazz.isInstance(wrappedBuilder))
+				return wrappedBuilder as T
+		}
+	}
 
 }

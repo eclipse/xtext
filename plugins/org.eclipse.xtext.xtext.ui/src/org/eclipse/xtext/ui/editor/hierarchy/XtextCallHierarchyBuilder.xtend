@@ -8,7 +8,9 @@
 package org.eclipse.xtext.ui.editor.hierarchy
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EClassifier
+import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.XtextPackage
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder
 import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
@@ -30,20 +32,26 @@ class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
 		callHierarchyNodeLocationProvider
 	}
 
-	override protected getRootDeclaration(IEObjectDescription declaration) {
-		if (declaration?.getEClass.rule)
-			return declaration
+	override protected findDeclaration(URI objectURI) {
+		val description = objectURI.description
+		if (description?.EClass.rule)
+			return description
+
+		return readOnly(objectURI) [ object |
+			object.getContainerOfType(AbstractRule).description
+		]
 	}
 
-	override protected getDeclaration(IReferenceDescription reference) {
-		switch type : reference?.getEReference?.getEType {
-			EClass case type.rule:
-				return super.getDeclaration(reference)
-		}
+	override protected filterReference(IReferenceDescription reference) {
+		reference !== null && reference.EReference.EType.rule
+	}
+	
+	override protected findSourceDeclaration(IReferenceDescription reference) {
+		reference.containerEObjectURI.description
 	}
 
-	protected def boolean isRule(EClass type) {
-		XtextPackage.Literals.ABSTRACT_RULE.isAssignableFrom(type)
+	protected def boolean isRule(EClassifier type) {
+		XtextPackage.Literals.ABSTRACT_RULE.isAssignable(type)
 	}
 
 	override protected createRoot(IEObjectDescription declaration) {
@@ -59,7 +67,7 @@ class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
 		node.parent = parent
 		node.element = declaration
 		node.grammarDescription = declaration.grammarDescription
-		node.mayHaveChildren = !node.recursive
+		node.mayHaveChildren = declaration.EClass.rule && !node.recursive
 		return node
 	}
 
