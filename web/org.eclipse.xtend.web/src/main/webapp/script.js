@@ -168,7 +168,7 @@ function generateJava() {
 			option.value=simpleName;
 			option.innerHTML=simpleName;
 			comboBox.appendChild(option);
-			aceEditor.getSession().setValue(generateResult);
+			aceEditor.getSession().setValue(generateResult.artifacts[0].content);
 			return;
 		}
 		//when xtend file contains more than one class.
