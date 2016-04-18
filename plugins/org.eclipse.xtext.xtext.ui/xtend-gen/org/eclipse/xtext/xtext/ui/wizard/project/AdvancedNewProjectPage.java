@@ -234,10 +234,6 @@ public class AdvancedNewProjectPage extends WizardPage {
         AdvancedNewProjectPage.this.createUiProjectSubGroup.setEnabled(uiProjectSelected);
         AdvancedNewProjectPage.this.createSDKProject.setEnabled(uiProjectSelected);
         AdvancedNewProjectPage.this.createP2Project.setEnabled(uiProjectSelected);
-        if ((!uiProjectSelected)) {
-          AdvancedNewProjectPage.this.createSDKProject.setSelection(false);
-          AdvancedNewProjectPage.this.createP2Project.setSelection(false);
-        }
       }
     });
     this.sourceLayout.addSelectionListener(selectionControl);
