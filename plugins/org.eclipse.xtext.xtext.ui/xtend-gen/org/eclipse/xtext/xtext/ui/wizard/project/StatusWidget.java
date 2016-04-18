@@ -127,10 +127,6 @@ public class StatusWidget extends Composite {
       };
       _xifexpression = this.setStatus(severity, text, _function, _function_1);
     } else {
-      this.severity = severity;
-      this.setVisible((severity != IMessageProvider.NONE));
-      Image _imageFor = this.imageFor(severity);
-      this.imageLabel.setImage(_imageFor);
       String _text_1 = this.link.getText();
       String _plus = (_text_1 + "\n");
       String _plus_1 = (_plus + text);
@@ -140,6 +136,12 @@ public class StatusWidget extends Composite {
       final Matcher matcher = _compile.matcher(_trim_1);
       String _replaceAll = matcher.replaceAll("$1");
       this.link.setToolTipText(_replaceAll);
+      if ((severity > this.severity)) {
+        this.severity = severity;
+        this.setVisible((severity != IMessageProvider.NONE));
+        Image _imageFor = this.imageFor(severity);
+        this.imageLabel.setImage(_imageFor);
+      }
     }
     return _xifexpression;
   }
