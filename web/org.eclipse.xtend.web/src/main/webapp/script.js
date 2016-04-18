@@ -8,7 +8,7 @@ require.config({
 	paths : {
 		"jquery" : "webjars/jquery/2.1.4/jquery.min",
 		"ace/ext/language_tools" : "webjars/ace/1.2.0/src/ext-language_tools",
-		"xtext/xtext-ace" : "xtext/2.9.0-SNAPSHOT/xtext-ace"
+		"xtext/xtext-ace" : "xtext/2.10.0-SNAPSHOT/xtext-ace"
 	}
 });
 require([ "webjars/ace/1.2.0/src/ace" ], function() {
