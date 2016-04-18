@@ -1,6 +1,4 @@
 
-- [ ] fix FileResourceHandler.xtend merge markers from conflicts
-
 - [ ] Make this a LIB which allows me to CUSTOMIZE the UI!
  
 - [ ] add Gradle Xtend build to gen. xtend-gen? or does Xtext core project commit xtend-gen/** ? 

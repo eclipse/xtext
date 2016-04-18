@@ -10,14 +10,6 @@ package org.eclipse.xtext.web.server.persistence
 import com.google.inject.Inject
 import java.io.IOException
 import java.io.OutputStreamWriter
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import java.util.List
-import javax.inject.Inject
->>>>>>> 2483c62... First commit for xtend web editor project.
-=======
->>>>>>> fded047... git checkout master ... FileResourceHandler.xtend
 import org.eclipse.emf.common.util.WrappedException
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResource
@@ -47,19 +39,8 @@ class FileResourceHandler implements IServerResourceHandler {
 				throw new IOException('The requested resource does not exist.')
 			val resourceSet = resourceSetProvider.get(resourceId, serviceContext)
 			val resource = resourceSet.getResource(uri, true) as XtextResource
-<<<<<<< HEAD
-<<<<<<< HEAD
 			return documentProvider.get(resourceId, serviceContext) => [
 				setInput(resource)
-=======
-			
-			return documentProvider.get() => [
-				setInput(resource, resourceId)
->>>>>>> 2483c62... First commit for xtend web editor project.
-=======
-			return documentProvider.get(resourceId, serviceContext) => [
-				setInput(resource)
->>>>>>> fded047... git checkout master ... FileResourceHandler.xtend
 			]
 		} catch (WrappedException exception) {
 			throw exception.cause
