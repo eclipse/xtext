@@ -233,13 +233,17 @@ public class XExpressionHelper {
 
 	public boolean isShortCircuitOperation(XAbstractFeatureCall featureCall) {
 		if (featureCall instanceof XBinaryOperation) {
-			if(isOperatorFromExtension(featureCall, OperatorMapping.ELVIS, ObjectExtensions.class))
+			if (isOperatorFromExtension(featureCall, OperatorMapping.ELVIS, ObjectExtensions.class))
 				return true;
 			else 
-				return (isOperatorFromExtension(featureCall, OperatorMapping.AND, BooleanExtensions.class) 
-					|| isOperatorFromExtension(featureCall, OperatorMapping.OR, BooleanExtensions.class));
+				return isBooleanAndOrOr(featureCall);
 		}
 		return false;
+	}
+
+	public boolean isBooleanAndOrOr(XAbstractFeatureCall featureCall) {
+		return isOperatorFromExtension(featureCall, OperatorMapping.AND, BooleanExtensions.class) 
+			|| isOperatorFromExtension(featureCall, OperatorMapping.OR, BooleanExtensions.class);
 	}
 
 	public boolean isOperatorFromExtension(XExpression expression, QualifiedName operatorSymbol, Class<?> definingExtensionClass) {

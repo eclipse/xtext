@@ -1609,19 +1609,11 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		  public boolean foo(final int x) {
 		    boolean _switchResult = false;
 		    boolean _matched = false;
-		    boolean _or = false;
-		    final Function0<Boolean> _function = new Function0<Boolean>() {
+		    if (((new Function0<Boolean>() {
 		      public Boolean apply() {
 		        return Boolean.valueOf((1 == x));
 		      }
-		    };
-		    Boolean _apply = _function.apply();
-		    if ((_apply).booleanValue()) {
-		      _or = true;
-		    } else {
-		      _or = (x == 2);
-		    }
-		    if (_or) {
+		    }.apply()).booleanValue() || (x == 2))) {
 		      _matched=true;
 		      _switchResult = true;
 		    }
