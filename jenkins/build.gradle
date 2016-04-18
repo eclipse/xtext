@@ -13,10 +13,10 @@ ext.branches = [
 		name: 'master',
 		displayName: 'master',
 		platforms: [
-			/* FIXME oldest: [
+			oldest: [
 				target: 'Helios',
 				jdk: jdks['1.6']
-			],*/
+			],
 			latest: [
 				target: 'Mars',
 				jdk: jdks['1.7']
@@ -27,10 +27,10 @@ ext.branches = [
 		name: 'maintenance',
 		displayName: 'maintenance',
 		platforms: [
-			/* FIXME oldest: [
+			oldest: [
 				target: 'Helios',
 				jdk: jdks['1.6']
-			],*/
+			],
 			latest: [
 				target: 'Mars',
 				jdk: jdks['1.7']
@@ -41,6 +41,16 @@ ext.branches = [
 
 jenkins {
 	servers {
+		xtext {
+			url 'https://xtext-builds.itemis.de/jenkins'
+			secure true
+			if (project.hasProperty('jenkinsUserName')) {
+				username jenkinsUserName
+			}
+			if (project.hasProperty('jenkinsPassword')) {
+				password jenkinsPassword
+			}
+		}
 		typefox {
 			url 'http://ec2-52-29-251-2.eu-central-1.compute.amazonaws.com:8080'
 			secure true
@@ -63,7 +73,7 @@ jenkins {
 		}
 	}
 	
-	defaultServer servers.local
+	defaultServer servers.xtext
 	
 	project.file('templates').listFiles().each {templateFile ->
 		templates.create(templateFile.name.split('\\.')[0]) {

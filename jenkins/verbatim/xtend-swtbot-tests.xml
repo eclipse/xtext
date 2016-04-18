@@ -50,7 +50,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <jdk>Java 6 Oracle</jdk>
+  <jdk>(Default)</jdk>
   <triggers>
     <hudson.triggers.TimerTrigger>
       <spec>@weekly</spec>

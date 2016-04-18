@@ -1,13 +1,15 @@
 def runtimeSuites = ['xtext', 'xtend'].collect{it + '-runtime-tests'}
 def ideSuites = ['xtext', 'xtend'].collect{it + '-ide-tests'}
 def java8Suites= ['xtend-runtime-tests-java8']
-def intellijSuites = ['intellij-tests'] //FIXME ['intellij-tests','intellij-eap-tests']
+def intellijSuites = ['intellij-tests','intellij-eap-tests']
+// TODO for smaller server: def intellijSuites = ['intellij-tests']
 def onPushSuites = runtimeSuites + ideSuites + intellijSuites + java8Suites
 
 def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
 def smokeSuites = ['smoke-tests']
 def generatorSuites = ['generator-tests']
-def allSuites = onPushSuites //FIXME + slowSuites + smokeSuites + generatorSuites
+def allSuites = onPushSuites + slowSuites + smokeSuites + generatorSuites
+// TODO for smaller server: def allSuites = onPushSuites 
 
 
 def testScripts = allSuites.collectEntries{suite -> [(suite): project.file("scripts/${suite}.txt").text]}
@@ -70,9 +72,9 @@ branches.each { branch ->
 				b3FilesDir=${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/mirroring
 				'''.stripIndent()
 
-				// FIXME def platforms = ['Helios', 'Indigo', 'Juno', 'Kepler', 'Luna', 'Mars', 'Latest']
-				def platforms = ['Juno', 'Mars', 'Latest']
-
+				def platforms = ['Helios', 'Indigo', 'Juno', 'Kepler', 'Luna', 'Mars', 'Latest']
+				// TODO for smaller server:  def platforms = ['Juno', 'Mars', 'Latest']
+								
 				platforms.each {
 					shellCmd = shellCmd + '${b3home}/b3 aggregate --buildModel ${b3FilesDir}/'+it+'.b3aggr --action ${B3_ACTION}\n'
 				}
