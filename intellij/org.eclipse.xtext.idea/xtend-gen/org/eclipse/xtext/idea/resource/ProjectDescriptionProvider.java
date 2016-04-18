@@ -40,12 +40,10 @@ public class ProjectDescriptionProvider {
             @Override
             public void apply(final OrderEntry it) {
               boolean _matched = false;
-              if (!_matched) {
-                if (it instanceof LibraryOrderEntry) {
-                  _matched=true;
-                  String _libraryName = ((LibraryOrderEntry)it).getLibraryName();
-                  dependencyNames.add(_libraryName);
-                }
+              if (it instanceof LibraryOrderEntry) {
+                _matched=true;
+                String _libraryName = ((LibraryOrderEntry)it).getLibraryName();
+                dependencyNames.add(_libraryName);
               }
               if (!_matched) {
                 if (it instanceof ModuleOrderEntry) {

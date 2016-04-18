@@ -365,7 +365,9 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
             int _parseInt_1 = Integer.parseInt(_substring_2);
             expTargetEnd = _parseInt_1;
           } else {
-            expTargetStart = (expTargetEnd = Integer.parseInt(expectation));
+            int _parseInt_2 = Integer.parseInt(expectation);
+            int _expTargetEnd = (expTargetEnd = _parseInt_2);
+            expTargetStart = _expTargetEnd;
           }
           Assert.assertEquals(line, expTargetStart, mapping.targetStartLine);
           Assert.assertEquals(("unexpected end in line : " + line), expTargetEnd, mapping.targetEndLine);

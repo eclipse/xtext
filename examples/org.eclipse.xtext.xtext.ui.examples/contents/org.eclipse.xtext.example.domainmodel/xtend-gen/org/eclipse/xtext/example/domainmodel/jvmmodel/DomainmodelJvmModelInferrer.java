@@ -85,25 +85,23 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
         EList<Feature> _features = entity.getFeatures();
         for (final Feature f : _features) {
           boolean _matched = false;
-          if (!_matched) {
-            if (f instanceof Property) {
-              _matched=true;
-              String _name = ((Property)f).getName();
-              JvmTypeReference _type = ((Property)f).getType();
-              final JvmField field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toField(f, _name, _type);
-              EList<JvmMember> _members_2 = it.getMembers();
-              DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_2, field);
-              EList<JvmMember> _members_3 = it.getMembers();
-              String _name_1 = ((Property)f).getName();
-              JvmTypeReference _type_1 = ((Property)f).getType();
-              JvmOperation _getter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toGetter(f, _name_1, _type_1);
-              DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_3, _getter);
-              EList<JvmMember> _members_4 = it.getMembers();
-              String _name_2 = ((Property)f).getName();
-              JvmTypeReference _type_2 = ((Property)f).getType();
-              JvmOperation _setter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toSetter(f, _name_2, _type_2);
-              DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_4, _setter);
-            }
+          if (f instanceof Property) {
+            _matched=true;
+            String _name = ((Property)f).getName();
+            JvmTypeReference _type = ((Property)f).getType();
+            final JvmField field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toField(f, _name, _type);
+            EList<JvmMember> _members_2 = it.getMembers();
+            DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_2, field);
+            EList<JvmMember> _members_3 = it.getMembers();
+            String _name_1 = ((Property)f).getName();
+            JvmTypeReference _type_1 = ((Property)f).getType();
+            JvmOperation _getter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toGetter(f, _name_1, _type_1);
+            DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_3, _getter);
+            EList<JvmMember> _members_4 = it.getMembers();
+            String _name_2 = ((Property)f).getName();
+            JvmTypeReference _type_2 = ((Property)f).getType();
+            JvmOperation _setter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toSetter(f, _name_2, _type_2);
+            DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_4, _setter);
           }
           if (!_matched) {
             if (f instanceof Operation) {

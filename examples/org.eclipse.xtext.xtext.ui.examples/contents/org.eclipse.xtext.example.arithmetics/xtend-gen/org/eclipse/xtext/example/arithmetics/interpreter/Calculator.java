@@ -58,25 +58,23 @@ public class Calculator {
     AbstractDefinition _func_2 = e.getFunc();
     final AbstractDefinition d = _func_2;
     boolean _matched = false;
-    if (!_matched) {
-      if (d instanceof Definition) {
-        _matched=true;
-        HashMap<String, BigDecimal> params = Maps.<String, BigDecimal>newHashMap();
-        for (int i = 0; (i < e.getArgs().size()); i++) {
-          {
-            EList<DeclaredParameter> _args = ((Definition)d).getArgs();
-            DeclaredParameter declaredParameter = _args.get(i);
-            EList<Expression> _args_1 = e.getArgs();
-            Expression _get = _args_1.get(i);
-            BigDecimal evaluate = this.evaluate(_get, values);
-            String _name_1 = declaredParameter.getName();
-            params.put(_name_1, evaluate);
-          }
+    if (d instanceof Definition) {
+      _matched=true;
+      HashMap<String, BigDecimal> params = Maps.<String, BigDecimal>newHashMap();
+      for (int i = 0; (i < e.getArgs().size()); i++) {
+        {
+          EList<DeclaredParameter> _args = ((Definition)d).getArgs();
+          DeclaredParameter declaredParameter = _args.get(i);
+          EList<Expression> _args_1 = e.getArgs();
+          Expression _get = _args_1.get(i);
+          BigDecimal evaluate = this.evaluate(_get, values);
+          String _name_1 = declaredParameter.getName();
+          params.put(_name_1, evaluate);
         }
-        Expression _expr = ((Definition)d).getExpr();
-        ImmutableMap<String, BigDecimal> _copyOf = ImmutableMap.<String, BigDecimal>copyOf(params);
-        return this.evaluate(_expr, _copyOf);
       }
+      Expression _expr = ((Definition)d).getExpr();
+      ImmutableMap<String, BigDecimal> _copyOf = ImmutableMap.<String, BigDecimal>copyOf(params);
+      return this.evaluate(_expr, _copyOf);
     }
     return null;
   }

@@ -272,11 +272,9 @@ public class EmfModelsTest {
     boolean _isPrimitive = clazz.isPrimitive();
     if (_isPrimitive) {
       boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(clazz, Boolean.TYPE)) {
-          _matched=true;
-          return Boolean.valueOf(false);
-        }
+      if (Objects.equal(clazz, Boolean.TYPE)) {
+        _matched=true;
+        return Boolean.valueOf(false);
       }
       if (!_matched) {
         if (Objects.equal(clazz, Long.TYPE)) {

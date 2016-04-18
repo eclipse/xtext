@@ -267,11 +267,9 @@ public class SwtBotProjectHelper {
       for (final Integer i : _doubleDotLessThan) {
         String _substring = content.substring((i).intValue(), ((i).intValue() + 1));
         boolean _matched = false;
-        if (!_matched) {
-          if (Objects.equal(_substring, ignoreNext)) {
-            _matched=true;
-            ignoreNext = null;
-          }
+        if (Objects.equal(_substring, ignoreNext)) {
+          _matched=true;
+          ignoreNext = null;
         }
         if (!_matched) {
           if (Objects.equal(_substring, "\n")) {

@@ -33,11 +33,9 @@ public class XbaseLookupElementWeigher extends LookupElementWeigher {
   public XbaseLookupElementWeigher.LookupElementKind weigh(final LookupElement element) {
     XbaseLookupElementWeigher.LookupElementKind _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof AbstractCompletionContributor.KeywordLookupElement) {
-        _matched=true;
-        _switchResult = XbaseLookupElementWeigher.LookupElementKind.KEYWORD;
-      }
+    if (element instanceof AbstractCompletionContributor.KeywordLookupElement) {
+      _matched=true;
+      _switchResult = XbaseLookupElementWeigher.LookupElementKind.KEYWORD;
     }
     if (!_matched) {
       if (element instanceof JavaPsiClassReferenceElement) {

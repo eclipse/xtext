@@ -102,30 +102,28 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
     }
     final EClassifier type = _eType;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof EClass) {
-        boolean _isJvmType = this.isJvmType(((EClass)type));
-        if (_isJvmType) {
-          _matched=true;
-          IReferenceFinder.IResourceAccess _resourceAccess = this.getResourceAccess();
-          URI _containerEObjectURI = reference.getContainerEObjectURI();
-          final IUnitOfWork<IEObjectDescription, ResourceSet> _function = new IUnitOfWork<IEObjectDescription, ResourceSet>() {
-            @Override
-            public IEObjectDescription exec(final ResourceSet it) throws Exception {
-              URI _containerEObjectURI = reference.getContainerEObjectURI();
-              final EObject referenceOwner = it.getEObject(_containerEObjectURI, true);
-              Property _containerOfType = EcoreUtil2.<Property>getContainerOfType(referenceOwner, Property.class);
-              final Entity entity = EcoreUtil2.<Entity>getContainerOfType(_containerOfType, Entity.class);
-              if ((entity != null)) {
-                IResourceDescriptions _indexData = AssociationHierarchyBuilder.this.getIndexData();
-                Iterable<IEObjectDescription> _exportedObjectsByObject = _indexData.getExportedObjectsByObject(entity);
-                return IterableExtensions.<IEObjectDescription>head(_exportedObjectsByObject);
-              }
-              return null;
+    if (type instanceof EClass) {
+      boolean _isJvmType = this.isJvmType(((EClass)type));
+      if (_isJvmType) {
+        _matched=true;
+        IReferenceFinder.IResourceAccess _resourceAccess = this.getResourceAccess();
+        URI _containerEObjectURI = reference.getContainerEObjectURI();
+        final IUnitOfWork<IEObjectDescription, ResourceSet> _function = new IUnitOfWork<IEObjectDescription, ResourceSet>() {
+          @Override
+          public IEObjectDescription exec(final ResourceSet it) throws Exception {
+            URI _containerEObjectURI = reference.getContainerEObjectURI();
+            final EObject referenceOwner = it.getEObject(_containerEObjectURI, true);
+            Property _containerOfType = EcoreUtil2.<Property>getContainerOfType(referenceOwner, Property.class);
+            final Entity entity = EcoreUtil2.<Entity>getContainerOfType(_containerOfType, Entity.class);
+            if ((entity != null)) {
+              IResourceDescriptions _indexData = AssociationHierarchyBuilder.this.getIndexData();
+              Iterable<IEObjectDescription> _exportedObjectsByObject = _indexData.getExportedObjectsByObject(entity);
+              return IterableExtensions.<IEObjectDescription>head(_exportedObjectsByObject);
             }
-          };
-          return _resourceAccess.<IEObjectDescription>readOnly(_containerEObjectURI, _function);
-        }
+            return null;
+          }
+        };
+        return _resourceAccess.<IEObjectDescription>readOnly(_containerEObjectURI, _function);
       }
     }
     return null;

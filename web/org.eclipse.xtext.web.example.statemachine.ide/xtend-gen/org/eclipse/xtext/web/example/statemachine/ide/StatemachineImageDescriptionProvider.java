@@ -22,12 +22,10 @@ public class StatemachineImageDescriptionProvider extends EClassImageDescription
       final IImageDescription baseImage = super.getImageDescription(element);
       IImageDescription _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (element instanceof OutputSignal) {
-          _matched=true;
-          SimpleImageDescription _simpleImageDescription = new SimpleImageDescription("output");
-          _switchResult = new DecoratedImageDescription(baseImage, _simpleImageDescription);
-        }
+      if (element instanceof OutputSignal) {
+        _matched=true;
+        SimpleImageDescription _simpleImageDescription = new SimpleImageDescription("output");
+        _switchResult = new DecoratedImageDescription(baseImage, _simpleImageDescription);
       }
       if (!_matched) {
         _switchResult = baseImage;

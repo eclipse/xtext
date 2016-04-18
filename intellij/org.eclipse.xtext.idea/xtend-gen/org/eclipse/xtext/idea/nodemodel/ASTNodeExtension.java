@@ -124,11 +124,9 @@ public class ASTNodeExtension {
     }
     TypeRef _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (grammarElement instanceof Action) {
-        _matched=true;
-        _switchResult = ((Action)grammarElement).getType();
-      }
+    if (grammarElement instanceof Action) {
+      _matched=true;
+      _switchResult = ((Action)grammarElement).getType();
     }
     if (!_matched) {
       if (grammarElement instanceof RuleCall) {

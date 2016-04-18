@@ -58,26 +58,24 @@ public class XtendTreeElementComparator extends DefaultComparator {
         EClass _eClass = _object.eClass();
         final EClass eClass = _eClass;
         boolean _matched = false;
+        boolean _isSuperTypeOf = XtendPackage.Literals.XTEND_TYPE_DECLARATION.isSuperTypeOf(eClass);
+        if (_isSuperTypeOf) {
+          _matched=true;
+        }
         if (!_matched) {
-          boolean _isSuperTypeOf = XtendPackage.Literals.XTEND_TYPE_DECLARATION.isSuperTypeOf(eClass);
-          if (_isSuperTypeOf) {
+          boolean _isSuperTypeOf_1 = TypesPackage.Literals.JVM_DECLARED_TYPE.isSuperTypeOf(eClass);
+          if (_isSuperTypeOf_1) {
             _matched=true;
           }
-          if (!_matched) {
-            boolean _isSuperTypeOf_1 = TypesPackage.Literals.JVM_DECLARED_TYPE.isSuperTypeOf(eClass);
-            if (_isSuperTypeOf_1) {
-              _matched=true;
-            }
+        }
+        if (!_matched) {
+          boolean _isSuperTypeOf_2 = TypesPackage.Literals.JVM_ENUMERATION_LITERAL.isSuperTypeOf(eClass);
+          if (_isSuperTypeOf_2) {
+            _matched=true;
           }
-          if (!_matched) {
-            boolean _isSuperTypeOf_2 = TypesPackage.Literals.JVM_ENUMERATION_LITERAL.isSuperTypeOf(eClass);
-            if (_isSuperTypeOf_2) {
-              _matched=true;
-            }
-          }
-          if (_matched) {
-            return 20;
-          }
+        }
+        if (_matched) {
+          return 20;
         }
         if (!_matched) {
           if (Objects.equal(eClass, XtendPackage.Literals.XTEND_FIELD)) {
