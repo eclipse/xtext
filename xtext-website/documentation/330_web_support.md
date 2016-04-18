@@ -256,7 +256,7 @@ The following functions are available, provided that the respective services are
  * `format()`
    Formats the current selection (or the whole document if the selection has zero length) and returns the formatted text.
  * `generate()`
-   Returns the document generated from the associated resource. If more than one document has been generated, an object with a property `documents` is returned, which is an array of objects with the properties `name`, `contentType`, and `content`.
+   Returns the document generated from the associated resource. If more than one document has been generated, an object with a property `artifacts` is returned, which is an array of objects with the properties `name`, `contentType`, and `content`.
  * `loadResource()`
    Loads the associated resource and returns an object with properties `fullText` and `dirty`. If the resource has been modified during the current session, the modified version is returned even if the page is reloaded.
  * `saveResource()`
