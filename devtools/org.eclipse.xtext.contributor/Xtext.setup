@@ -42,6 +42,14 @@
       value="${git.clone.xtext.location}"/>
   <setupTask
       xsi:type="setup:VariableTask"
+      name="eclipse.target.platform"
+      defaultValue="Luna"
+      storageURI="scope://Workspace"
+      label="Target Platform">
+    <description>Choose the compatibility level of the target platform</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
       name="xtext.nightly.composite"
       value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/"/>
   <setupTask
@@ -57,11 +65,6 @@
       type="URI"
       name="draw2d.p2.repository"
       value="http://download.eclipse.org/tools/gef/updates/releases"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="eclipse.target.platform"
-      defaultValue="Luna"
-      storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Workspace Preferences">
@@ -454,6 +457,8 @@
             url="${draw2d.p2.repository}"/>
         <repository
             url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/3.6/"/>
       </repositoryList>
     </targlet>
     <description>Target platform</description>
