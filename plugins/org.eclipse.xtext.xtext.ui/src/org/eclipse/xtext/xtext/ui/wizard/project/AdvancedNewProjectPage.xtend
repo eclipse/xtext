@@ -114,10 +114,6 @@ class AdvancedNewProjectPage extends WizardPage {
 				createUiProjectSubGroup.enabled = uiProjectSelected
 				createSDKProject.enabled = uiProjectSelected
 				createP2Project.enabled = uiProjectSelected
-				if (!uiProjectSelected) {
-					createSDKProject.selection = false
-					createP2Project.selection = false
-				}
 			}
 		})
 		sourceLayout.addSelectionListener(selectionControl)
