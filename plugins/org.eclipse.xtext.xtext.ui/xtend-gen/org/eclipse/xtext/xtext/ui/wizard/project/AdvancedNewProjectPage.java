@@ -724,11 +724,27 @@ public class AdvancedNewProjectPage extends WizardPage {
   }
   
   public boolean isCreateSdkProject() {
-    return this.createSDKProject.getSelection();
+    boolean _and = false;
+    boolean _selection = this.createUiProject.getSelection();
+    if (!_selection) {
+      _and = false;
+    } else {
+      boolean _selection_1 = this.createSDKProject.getSelection();
+      _and = _selection_1;
+    }
+    return _and;
   }
   
   public boolean isCreateP2Project() {
-    return this.createP2Project.getSelection();
+    boolean _and = false;
+    boolean _selection = this.createUiProject.getSelection();
+    if (!_selection) {
+      _and = false;
+    } else {
+      boolean _selection_1 = this.createP2Project.getSelection();
+      _and = _selection_1;
+    }
+    return _and;
   }
   
   public BuildSystem getPreferredBuildSystem() {
