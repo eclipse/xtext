@@ -26,20 +26,18 @@ public class Bug446364Processor extends AbstractClassProcessor {
     AnnotationReference _head = IterableExtensions.head(_annotations);
     String _stringValue = _head.getStringValue("value");
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_stringValue, "rename")) {
-        _matched=true;
-        Iterable<? extends MutableMethodDeclaration> _declaredMethods = annotatedClass.getDeclaredMethods();
-        final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-          @Override
-          public void apply(final MutableMethodDeclaration it) {
-            String _simpleName = it.getSimpleName();
-            String _plus = ("prefix_" + _simpleName);
-            it.setSimpleName(_plus);
-          }
-        };
-        IterableExtensions.forEach(_declaredMethods, _function);
-      }
+    if (Objects.equal(_stringValue, "rename")) {
+      _matched=true;
+      Iterable<? extends MutableMethodDeclaration> _declaredMethods = annotatedClass.getDeclaredMethods();
+      final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
+        public void apply(final MutableMethodDeclaration it) {
+          String _simpleName = it.getSimpleName();
+          String _plus = ("prefix_" + _simpleName);
+          it.setSimpleName(_plus);
+        }
+      };
+      IterableExtensions.forEach(_declaredMethods, _function);
     }
     if (!_matched) {
       if (Objects.equal(_stringValue, "changeBody")) {

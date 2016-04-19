@@ -65,14 +65,12 @@ public class NavigationService {
     }
     final Object navigatableElement = _navigationElement;
     boolean _matched = false;
-    if (!_matched) {
-      if (navigatableElement instanceof IReferenceDescription) {
-        _matched=true;
-        URI _sourceEObjectUri = ((IReferenceDescription)navigatableElement).getSourceEObjectUri();
-        EReference _eReference = ((IReferenceDescription)navigatableElement).getEReference();
-        int _indexInList = ((IReferenceDescription)navigatableElement).getIndexInList();
-        this.uriEditorOpener.open(_sourceEObjectUri, _eReference, _indexInList, select);
-      }
+    if (navigatableElement instanceof IReferenceDescription) {
+      _matched=true;
+      URI _sourceEObjectUri = ((IReferenceDescription)navigatableElement).getSourceEObjectUri();
+      EReference _eReference = ((IReferenceDescription)navigatableElement).getEReference();
+      int _indexInList = ((IReferenceDescription)navigatableElement).getIndexInList();
+      this.uriEditorOpener.open(_sourceEObjectUri, _eReference, _indexInList, select);
     }
     if (!_matched) {
       if (navigatableElement instanceof IEObjectDescription) {

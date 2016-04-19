@@ -244,7 +244,9 @@ public abstract class AbstractTraceRegionToString {
   protected void add(final Map<SourceRelativeURI, AbstractTraceRegionToString.File> files, final SourceRelativeURI uri, final ITextRegion it, final AbstractTraceRegionToString.RegionHandle region, final AbstractTraceRegionToString.LocationHandle location) {
     AbstractTraceRegionToString.File file = files.get(uri);
     if ((file == null)) {
-      files.put(uri, file = new AbstractTraceRegionToString.File(uri));
+      AbstractTraceRegionToString.File _file = new AbstractTraceRegionToString.File(uri);
+      AbstractTraceRegionToString.File _file_1 = file = _file;
+      files.put(uri, _file_1);
     }
     this.add(file, it, region, location);
   }

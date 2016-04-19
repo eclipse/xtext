@@ -42,13 +42,11 @@ public class HierarchyLabelProvider extends LabelProvider implements DelegatingS
       return null;
     }
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof HierarchyNode) {
-        boolean _isRecursive = ((HierarchyNode)element).isRecursive();
-        if (_isRecursive) {
-          _matched=true;
-          return this.decorateRecursive(image);
-        }
+    if (element instanceof HierarchyNode) {
+      boolean _isRecursive = ((HierarchyNode)element).isRecursive();
+      if (_isRecursive) {
+        _matched=true;
+        return this.decorateRecursive(image);
       }
     }
     return image;

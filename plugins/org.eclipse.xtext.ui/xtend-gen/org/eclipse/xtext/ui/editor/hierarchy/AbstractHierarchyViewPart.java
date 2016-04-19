@@ -57,16 +57,14 @@ public abstract class AbstractHierarchyViewPart extends ViewPart {
   
   protected HierarchyNode getSelectedNode(final ISelection selection) {
     boolean _matched = false;
-    if (!_matched) {
-      if (selection instanceof IStructuredSelection) {
-        int _size = ((IStructuredSelection)selection).size();
-        boolean _equals = (_size == 1);
-        if (_equals) {
-          _matched=true;
-          final Object selectedElement = ((IStructuredSelection)selection).getFirstElement();
-          if ((selectedElement instanceof HierarchyNode)) {
-            return ((HierarchyNode)selectedElement);
-          }
+    if (selection instanceof IStructuredSelection) {
+      int _size = ((IStructuredSelection)selection).size();
+      boolean _equals = (_size == 1);
+      if (_equals) {
+        _matched=true;
+        final Object selectedElement = ((IStructuredSelection)selection).getFirstElement();
+        if ((selectedElement instanceof HierarchyNode)) {
+          return ((HierarchyNode)selectedElement);
         }
       }
     }

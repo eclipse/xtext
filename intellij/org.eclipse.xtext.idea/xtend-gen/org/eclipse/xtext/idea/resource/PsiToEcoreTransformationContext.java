@@ -316,20 +316,18 @@ public class PsiToEcoreTransformationContext {
       this.current = _create_2;
       ICompositeNode _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (this.createModelInParentNode) {
-          _matched=true;
-          ICompositeNode _xblockexpression_1 = null;
-          {
-            ICompositeNode node_1 = currentNode.getParent();
-            while ((node_1.getGrammarElement() instanceof Action)) {
-              ICompositeNode _parent_1 = node_1.getParent();
-              node_1 = _parent_1;
-            }
-            _xblockexpression_1 = node_1;
+      if (this.createModelInParentNode) {
+        _matched=true;
+        ICompositeNode _xblockexpression_1 = null;
+        {
+          ICompositeNode node_1 = currentNode.getParent();
+          while ((node_1.getGrammarElement() instanceof Action)) {
+            ICompositeNode _parent_1 = node_1.getParent();
+            node_1 = _parent_1;
           }
-          _switchResult = _xblockexpression_1;
+          _xblockexpression_1 = node_1;
         }
+        _switchResult = _xblockexpression_1;
       }
       if (!_matched) {
         boolean _isTerminalRuleCall = GrammarUtil.isTerminalRuleCall(grammarElement);
@@ -414,20 +412,18 @@ public class PsiToEcoreTransformationContext {
     if (_isAssigned) {
       INode _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (grammarElement instanceof RuleCall) {
-          boolean _or = false;
-          AbstractRule _rule = ((RuleCall)grammarElement).getRule();
-          if ((_rule instanceof EnumRule)) {
-            _or = true;
-          } else {
-            AbstractRule _rule_1 = ((RuleCall)grammarElement).getRule();
-            _or = (_rule_1 instanceof ParserRule);
-          }
-          if (_or) {
-            _matched=true;
-            _switchResult = this.currentNode;
-          }
+      if (grammarElement instanceof RuleCall) {
+        boolean _or = false;
+        AbstractRule _rule = ((RuleCall)grammarElement).getRule();
+        if ((_rule instanceof EnumRule)) {
+          _or = true;
+        } else {
+          AbstractRule _rule_1 = ((RuleCall)grammarElement).getRule();
+          _or = (_rule_1 instanceof ParserRule);
+        }
+        if (_or) {
+          _matched=true;
+          _switchResult = this.currentNode;
         }
       }
       if (!_matched) {

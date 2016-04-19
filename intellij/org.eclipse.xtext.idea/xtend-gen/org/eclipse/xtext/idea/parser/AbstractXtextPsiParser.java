@@ -98,11 +98,9 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
       EObject _grammarElement = ((IGrammarAwareElementType)type).getGrammarElement();
       final EObject grammarElement = _grammarElement;
       boolean _matched = false;
-      if (!_matched) {
-        if (grammarElement instanceof AbstractRule) {
-          _matched=true;
-          _switchResult = ((AbstractRule)grammarElement).getName();
-        }
+      if (grammarElement instanceof AbstractRule) {
+        _matched=true;
+        _switchResult = ((AbstractRule)grammarElement).getName();
       }
       if (!_matched) {
         if (grammarElement instanceof RuleCall) {

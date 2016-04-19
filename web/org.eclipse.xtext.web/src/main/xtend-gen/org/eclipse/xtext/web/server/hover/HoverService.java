@@ -164,11 +164,9 @@ public class HoverService {
       this._operationCanceledManager.checkCanceled(cancelIndicator);
       EObject _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (element instanceof EObject) {
-          _matched=true;
-          _switchResult = ((EObject)element);
-        }
+      if (element instanceof EObject) {
+        _matched=true;
+        _switchResult = ((EObject)element);
       }
       if (!_matched) {
         if (element instanceof IEObjectDescription) {
@@ -201,13 +199,11 @@ public class HoverService {
   protected String addIconDivs(final IImageDescription it, final String nameHtml) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof SimpleImageDescription) {
-        _matched=true;
-        String _imageID = ((SimpleImageDescription)it).getImageID();
-        String _plus = (_imageID + "-icon");
-        _switchResult = this.surroundWithDiv(nameHtml, _plus);
-      }
+    if (it instanceof SimpleImageDescription) {
+      _matched=true;
+      String _imageID = ((SimpleImageDescription)it).getImageID();
+      String _plus = (_imageID + "-icon");
+      _switchResult = this.surroundWithDiv(nameHtml, _plus);
     }
     if (!_matched) {
       if (it instanceof AlternativeImageDescription) {

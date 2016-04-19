@@ -64,13 +64,11 @@ public class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
     }
     final EClassifier type = _eType;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof EClass) {
-        boolean _isRule = this.isRule(((EClass)type));
-        if (_isRule) {
-          _matched=true;
-          return super.getDeclaration(reference);
-        }
+    if (type instanceof EClass) {
+      boolean _isRule = this.isRule(((EClass)type));
+      if (_isRule) {
+        _matched=true;
+        return super.getDeclaration(reference);
       }
     }
     return null;

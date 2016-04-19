@@ -131,6 +131,16 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				}
 			}, b, isReferenced);
 		} else if (expressionHelper.isShortCircuitOperation(expr)) {
+			final XBinaryOperation binaryOperation = (XBinaryOperation) expr;
+			final XExpression leftOperand = binaryOperation.getLeftOperand();
+			final XExpression rightOperand = binaryOperation.getRightOperand();
+			// we can inline boolean operations where both operands can be generated as expressions
+			if (isReferenced
+				&& expressionHelper.isBooleanAndOrOr(expr) 
+				&& canCompileToJavaExpression(leftOperand, b) 
+				&& canCompileToJavaExpression(rightOperand, b)) {
+				return;
+			}
 			generateShortCircuitInvocation(expr, b);
 		} else {
 			if (expr instanceof XMemberFeatureCall && ((XMemberFeatureCall) expr).isNullSafe()) {
@@ -288,9 +298,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		final XBinaryOperation binaryOperation = (XBinaryOperation) featureCall;
 		final XExpression leftOperand = binaryOperation.getLeftOperand();
 		final XExpression rightOperand = binaryOperation.getRightOperand();
-		if (!isPreparationRequired(leftOperand, b) && !isPreparationRequired(rightOperand, b)) {
-			return;
-		}
 		declareSyntheticVariable(binaryOperation, b);
 		boolean isElvis = binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getElvisOperator());
 		prepareExpression(leftOperand, b);
@@ -536,30 +543,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 	
-	protected boolean isPreparationRequired(XExpression arg, ITreeAppendable b) {
-		if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall) arg).getFeature() instanceof JvmField)
-				&& !isVariableDeclarationRequired(arg, b)) {
-			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) arg;
-			if (featureCall.getFeature() instanceof XVariableDeclaration) {
-				XVariableDeclaration variableDeclaration = (XVariableDeclaration) featureCall.getFeature();
-				if (!variableDeclaration.isWriteable()) {
-					return true;
-				}
-			} else if (featureCall.getFeature() instanceof JvmFormalParameter) {
-				return true;
-			}
-			LightweightTypeReference expectedType = getLightweightExpectedType(arg);
-			LightweightTypeReference type = getLightweightType(arg);
-			// TODO check for demand conversion flag?
-			if (expectedType != null && !isJavaConformant(expectedType, type)) {
-				return true;
-			}
-		} else {
-			return true;
-		}
-		return false;
-	}
-
 	protected void _toJavaExpression(XAbstractFeatureCall call, ITreeAppendable b) {
 		if (call.isTypeLiteral()) {
 			b.append((JvmType) call.getFeature()).append(".class");

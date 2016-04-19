@@ -129,17 +129,15 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         ResourceSet _resourceSet = this.getResourceSet();
         final ResourceSet resourceSet = _resourceSet;
         boolean _matched = false;
-        if (!_matched) {
-          if (resourceSet instanceof ISynchronizable) {
-            _matched=true;
-            final IUnitOfWork<JvmType, ResourceSet> _function = new IUnitOfWork<JvmType, ResourceSet>() {
-              @Override
-              public JvmType exec(final ResourceSet it) throws Exception {
-                return StubJvmTypeProvider.this.findType(resourceURI, fragment, traverseNestedTypes);
-              }
-            };
-            _switchResult = ((ISynchronizable<ResourceSet>)resourceSet).<JvmType>execute(_function);
-          }
+        if (resourceSet instanceof ISynchronizable) {
+          _matched=true;
+          final IUnitOfWork<JvmType, ResourceSet> _function = new IUnitOfWork<JvmType, ResourceSet>() {
+            @Override
+            public JvmType exec(final ResourceSet it) throws Exception {
+              return StubJvmTypeProvider.this.findType(resourceURI, fragment, traverseNestedTypes);
+            }
+          };
+          _switchResult = ((ISynchronizable<ResourceSet>)resourceSet).<JvmType>execute(_function);
         }
         if (!_matched) {
           _switchResult = this.findType(resourceURI, fragment, traverseNestedTypes);

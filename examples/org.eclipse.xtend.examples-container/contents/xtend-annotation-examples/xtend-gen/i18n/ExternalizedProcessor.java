@@ -79,11 +79,9 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
               public void apply(final Format format, final Integer idx) {
                 TypeReference _switchResult = null;
                 boolean _matched = false;
-                if (!_matched) {
-                  if (format instanceof NumberFormat) {
-                    _matched=true;
-                    _switchResult = context.getPrimitiveInt();
-                  }
+                if (format instanceof NumberFormat) {
+                  _matched=true;
+                  _switchResult = context.getPrimitiveInt();
                 }
                 if (!_matched) {
                   if (format instanceof DateFormat) {

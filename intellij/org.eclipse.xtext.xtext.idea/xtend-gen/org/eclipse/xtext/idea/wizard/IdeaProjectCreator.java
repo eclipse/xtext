@@ -99,12 +99,10 @@ public class IdeaProjectCreator implements ProjectsCreator {
             }
             final VirtualFile virtualFile = fileSystem.refreshAndFindFileByIoFile(ioFile);
             boolean _matched = false;
-            if (!_matched) {
-              if (it instanceof TextFile) {
-                _matched=true;
-                String _content = ((TextFile)it).getContent();
-                VfsUtil.saveText(virtualFile, _content);
-              }
+            if (it instanceof TextFile) {
+              _matched=true;
+              String _content = ((TextFile)it).getContent();
+              VfsUtil.saveText(virtualFile, _content);
             }
             if (!_matched) {
               if (it instanceof BinaryFile) {

@@ -146,12 +146,10 @@ public class StubURIHelper implements URIHelperConstants {
   protected StringBuilder appendTypeResourceURI(final StringBuilder builder, final PsiType type) throws UnresolvedPsiClassType {
     StringBuilder _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof PsiArrayType) {
-        _matched=true;
-        PsiType _componentType = ((PsiArrayType)type).getComponentType();
-        _switchResult = this.appendTypeResourceURI(builder, _componentType);
-      }
+    if (type instanceof PsiArrayType) {
+      _matched=true;
+      PsiType _componentType = ((PsiArrayType)type).getComponentType();
+      _switchResult = this.appendTypeResourceURI(builder, _componentType);
     }
     if (!_matched) {
       if (type instanceof PsiPrimitiveType) {
@@ -208,11 +206,9 @@ public class StubURIHelper implements URIHelperConstants {
     PsiTypeParameterListOwner _owner = typeParameter.getOwner();
     final PsiTypeParameterListOwner owner = _owner;
     boolean _matched = false;
-    if (!_matched) {
-      if (owner instanceof PsiClass) {
-        _matched=true;
-        _switchResult = this.appendClassResourceURI(builder, ((PsiClass)owner));
-      }
+    if (owner instanceof PsiClass) {
+      _matched=true;
+      _switchResult = this.appendClassResourceURI(builder, ((PsiClass)owner));
     }
     if (!_matched) {
       if (owner instanceof PsiMethod) {
@@ -227,12 +223,10 @@ public class StubURIHelper implements URIHelperConstants {
   protected StringBuilder appendTypeFragment(final StringBuilder builder, final PsiType type) throws UnresolvedPsiClassType {
     StringBuilder _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof PsiPrimitiveType) {
-        _matched=true;
-        String _canonicalText = ((PsiPrimitiveType)type).getCanonicalText(false);
-        _switchResult = builder.append(_canonicalText);
-      }
+    if (type instanceof PsiPrimitiveType) {
+      _matched=true;
+      String _canonicalText = ((PsiPrimitiveType)type).getCanonicalText(false);
+      _switchResult = builder.append(_canonicalText);
     }
     if (!_matched) {
       if (type instanceof PsiClassType) {
@@ -286,11 +280,9 @@ public class StubURIHelper implements URIHelperConstants {
     PsiTypeParameterListOwner _owner = typeParameter.getOwner();
     final PsiTypeParameterListOwner owner = _owner;
     boolean _matched = false;
-    if (!_matched) {
-      if (owner instanceof PsiClass) {
-        _matched=true;
-        this.appendClassFragment(builder, ((PsiClass)owner));
-      }
+    if (owner instanceof PsiClass) {
+      _matched=true;
+      this.appendClassFragment(builder, ((PsiClass)owner));
     }
     if (!_matched) {
       if (owner instanceof PsiMethod) {
@@ -331,12 +323,10 @@ public class StubURIHelper implements URIHelperConstants {
   public StringBuilder appendTypeName(final StringBuilder builder, final PsiType type) {
     StringBuilder _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof PsiPrimitiveType) {
-        _matched=true;
-        String _canonicalText = ((PsiPrimitiveType)type).getCanonicalText();
-        _switchResult = builder.append(_canonicalText);
-      }
+    if (type instanceof PsiPrimitiveType) {
+      _matched=true;
+      String _canonicalText = ((PsiPrimitiveType)type).getCanonicalText();
+      _switchResult = builder.append(_canonicalText);
     }
     if (!_matched) {
       if (type instanceof PsiClassType) {
@@ -346,12 +336,10 @@ public class StubURIHelper implements URIHelperConstants {
           final PsiClass resolved = ((PsiClassType)type).resolve();
           StringBuilder _switchResult_1 = null;
           boolean _matched_1 = false;
-          if (!_matched_1) {
-            if (resolved instanceof PsiTypeParameter) {
-              _matched_1=true;
-              String _name = ((PsiTypeParameter)resolved).getName();
-              _switchResult_1 = builder.append(_name);
-            }
+          if (resolved instanceof PsiTypeParameter) {
+            _matched_1=true;
+            String _name = ((PsiTypeParameter)resolved).getName();
+            _switchResult_1 = builder.append(_name);
           }
           if (!_matched_1) {
             boolean _notEquals = (!Objects.equal(resolved, null));

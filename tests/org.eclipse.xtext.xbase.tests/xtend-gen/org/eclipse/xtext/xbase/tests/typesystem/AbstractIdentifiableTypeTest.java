@@ -62,11 +62,9 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       public List<? extends EObject> apply(final EObject it) {
         List<? extends EObject> _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (it instanceof XClosure) {
-            _matched=true;
-            _switchResult = ((XClosure)it).getImplicitFormalParameters();
-          }
+        if (it instanceof XClosure) {
+          _matched=true;
+          _switchResult = ((XClosure)it).getImplicitFormalParameters();
         }
         if (!_matched) {
           _switchResult = Collections.<EObject>unmodifiableList(CollectionLiterals.<EObject>newArrayList(it));
@@ -88,11 +86,9 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
         } else {
           boolean _switchResult = false;
           boolean _matched = false;
-          if (!_matched) {
-            if (it instanceof XVariableDeclaration) {
-              _matched=true;
-              _switchResult = true;
-            }
+          if (it instanceof XVariableDeclaration) {
+            _matched=true;
+            _switchResult = true;
           }
           if (!_matched) {
             if (it instanceof JvmFormalParameter) {

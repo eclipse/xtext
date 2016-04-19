@@ -317,11 +317,9 @@ public class XtextServiceDispatcher {
   protected XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String serviceType, final IServiceContext context) {
     XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(serviceType, "load")) {
-        _matched=true;
-        _switchResult = this.getLoadResourceService(false, context);
-      }
+    if (Objects.equal(serviceType, "load")) {
+      _matched=true;
+      _switchResult = this.getLoadResourceService(false, context);
     }
     if (!_matched) {
       if (Objects.equal(serviceType, "revert")) {
@@ -1101,11 +1099,9 @@ public class XtextServiceDispatcher {
     }
     String _lowerCase = stringValue.toLowerCase();
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_lowerCase, "true")) {
-        _matched=true;
-        return true;
-      }
+    if (Objects.equal(_lowerCase, "true")) {
+      _matched=true;
+      return true;
     }
     if (!_matched) {
       if (Objects.equal(_lowerCase, "false")) {

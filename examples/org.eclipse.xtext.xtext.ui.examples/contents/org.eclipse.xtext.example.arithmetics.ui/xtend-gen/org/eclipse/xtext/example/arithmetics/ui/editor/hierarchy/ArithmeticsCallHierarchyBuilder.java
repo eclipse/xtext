@@ -47,13 +47,11 @@ public class ArithmeticsCallHierarchyBuilder extends DefaultCallHierarchyBuilder
     }
     final EClassifier type = _eType;
     boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof EClass) {
-        boolean _isDefinition = this.isDefinition(((EClass)type));
-        if (_isDefinition) {
-          _matched=true;
-          return super.getDeclaration(reference);
-        }
+    if (type instanceof EClass) {
+      boolean _isDefinition = this.isDefinition(((EClass)type));
+      if (_isDefinition) {
+        _matched=true;
+        return super.getDeclaration(reference);
       }
     }
     return null;

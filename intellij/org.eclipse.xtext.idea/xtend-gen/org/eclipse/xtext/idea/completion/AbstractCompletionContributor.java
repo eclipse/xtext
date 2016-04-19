@@ -498,11 +498,9 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   protected void createProposal(final AbstractElement grammarElement, final ContentAssistContext context, final CompletionParameters parameters, final CompletionResultSet result) {
     boolean _matched = false;
-    if (!_matched) {
-      if (grammarElement instanceof Keyword) {
-        _matched=true;
-        this.createKeyWordProposal(((Keyword)grammarElement), context, parameters, result);
-      }
+    if (grammarElement instanceof Keyword) {
+      _matched=true;
+      this.createKeyWordProposal(((Keyword)grammarElement), context, parameters, result);
     }
   }
   

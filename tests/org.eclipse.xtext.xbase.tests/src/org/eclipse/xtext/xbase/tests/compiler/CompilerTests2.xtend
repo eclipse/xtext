@@ -1378,13 +1378,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean> _function = new org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean>() {
 			  public Boolean apply(final Boolean a, final Boolean b) {
-			    boolean _and = false;
-			    if (!(a).booleanValue()) {
-			      _and = false;
-			    } else {
-			      _and = (b).booleanValue();
-			    }
-			    return Boolean.valueOf(_and);
+			    return Boolean.valueOf(((a).booleanValue() && (b).booleanValue()));
 			  }
 			};
 			final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);

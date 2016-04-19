@@ -17,11 +17,9 @@ public class Xbase10_Switch {
       final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
       String _head = IterableExtensions.<String>head(list);
       boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(_head, "foo")) {
-          _matched=true;
-          /* "it\'s foo" */
-        }
+      if (Objects.equal(_head, "foo")) {
+        _matched=true;
+        /* "it\'s foo" */
       }
       if (!_matched) {
         if (Objects.equal(_head, "bar")) {
@@ -41,11 +39,9 @@ public class Xbase10_Switch {
         public String apply(final Shape shape) {
           String _switchResult = null;
           boolean _matched = false;
-          if (!_matched) {
-            if (shape instanceof Circle) {
-              _matched=true;
-              _switchResult = ("a circle : diameter=" + Integer.valueOf(((Circle)shape).diameter));
-            }
+          if (shape instanceof Circle) {
+            _matched=true;
+            _switchResult = ("a circle : diameter=" + Integer.valueOf(((Circle)shape).diameter));
           }
           if (!_matched) {
             if (shape instanceof Rectangle) {
