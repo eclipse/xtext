@@ -315,11 +315,11 @@ class AdvancedNewProjectPage extends WizardPage {
 	}
 
 	def boolean isCreateSdkProject() {
-		createSDKProject.selection
+		createUiProject.selection && createSDKProject.selection
 	}
 
 	def boolean isCreateP2Project() {
-		createP2Project.selection
+		createUiProject.selection && createP2Project.selection
 	}
 
 	def BuildSystem getPreferredBuildSystem() {
