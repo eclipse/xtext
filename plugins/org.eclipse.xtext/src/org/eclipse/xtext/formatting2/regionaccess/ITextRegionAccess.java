@@ -13,8 +13,8 @@ import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * <p>
- * This class provides access to {@link ITextSegment text regions } based on the semantic model. A text region describes
- * the offset and length in characters of a semantic elements within a text document.
+ * This class provides access to {@link ITextSegment text regions } based on the semantic model. A text region describes the offset and
+ * length in characters of a semantic elements within a text document.
  * </p>
  * 
  * <p>
@@ -22,15 +22,14 @@ import org.eclipse.xtext.resource.XtextResource;
  * </p>
  * 
  * <p>
- * The text regions are arranged as a linked list of strictly alternating {@link ISemanticRegion semantic regions} and
- * {@link IHiddenRegion hidden region}. HiddenRegions group all hidden tokens (typically whitespace, newlines, tabs and
- * comments) between two semantic tokens. HiddenRegions are empty, but do exist, if there are no hidden tokens between
- * two semantic elements.
+ * The text regions are arranged as a linked list of strictly alternating {@link ISemanticRegion semantic regions} and {@link IHiddenRegion
+ * hidden region}. HiddenRegions group all hidden tokens (typically whitespace, newlines, tabs and comments) between two semantic tokens.
+ * HiddenRegions are empty, but do exist, if there are no hidden tokens between two semantic elements.
  * </p>
  * 
  * <p>
- * Tokens are considered to be hidden, when they have been parsed via terminal rule referenced in "hidden(...)" in the
- * Xtext grammar. In the node model, hidden tokens are usually marked as {@link ILeafNode#isHidden() hidden == true}.
+ * Tokens are considered to be hidden, when they have been parsed via terminal rule referenced in "hidden(...)" in the Xtext grammar. In the
+ * node model, hidden tokens are usually marked as {@link ILeafNode#isHidden() hidden == true}.
  * </p>
  * 
  * <p>
@@ -38,8 +37,8 @@ import org.eclipse.xtext.resource.XtextResource;
  * </p>
  * 
  * <p>
- * A {@link IHiddenRegion} contains a list of {@link IHiddenRegionPart parts}, which are either {@link IWhitespace white
- * space} or {@link IComment comments}. A HiddenRegion can be empty.
+ * A {@link IHiddenRegion} contains a list of {@link IHiddenRegionPart parts}, which are either {@link IWhitespace white space} or
+ * {@link IComment comments}. A HiddenRegion can be empty.
  * </p>
  * 
  * The purpose of this class is:
@@ -71,7 +70,10 @@ public interface ITextRegionAccess {
 
 	ILineRegion regionForLineAtOffset(int offset);
 
-	IEObjectRegion regionForEObject(EObject object);
+	/**
+	 * Returns a the text region for a semantic element (i.e. and EObject from the AST).
+	 */
+	IEObjectRegion regionForEObject(EObject semanticElement);
 
 	ITextSegment regionForDocument();
 
