@@ -34,15 +34,7 @@ class CompilerBug451814Test extends AbstractXtendCompilerTest {
 			    try {
 			      int counter = 0;
 			      LineReader reader = null;
-			      boolean _and = false;
-			      if (!(counter == 0)) {
-			        _and = false;
-			      } else {
-			        String _readLine = reader.readLine();
-			        boolean _tripleNotEquals = (_readLine != null);
-			        _and = _tripleNotEquals;
-			      }
-			      return _and;
+			      return ((counter == 0) && (reader.readLine() != null));
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
@@ -74,15 +66,7 @@ class CompilerBug451814Test extends AbstractXtendCompilerTest {
 			    try {
 			      int counter = 0;
 			      LineReader reader = null;
-			      boolean _and = false;
-			      if (!(counter == 0)) {
-			        _and = false;
-			      } else {
-			        String _readLine = reader.readLine();
-			        boolean _notEquals = (!Objects.equal(_readLine, null));
-			        _and = _notEquals;
-			      }
-			      if (_and) {
+			      if (((counter == 0) && (!Objects.equal(reader.readLine(), null)))) {
 			      }
 			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
