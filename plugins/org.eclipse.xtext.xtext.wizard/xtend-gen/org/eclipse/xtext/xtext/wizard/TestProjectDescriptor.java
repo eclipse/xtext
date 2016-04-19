@@ -216,6 +216,81 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
             _builder.append("\t\t");
             _builder.append("</plugin>");
             _builder.newLine();
+            {
+              boolean _needsUiHarness_1 = TestProjectDescriptor.this.needsUiHarness();
+              if (_needsUiHarness_1) {
+                _builder.append("\t\t");
+                _builder.append("<plugin>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<groupId>org.eclipse.tycho</groupId>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<artifactId>target-platform-configuration</artifactId>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("<configuration>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("<dependency-resolution>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("<extraRequirements>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("<!-- to get the org.eclipse.osgi.compatibility.state plugin");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("if the target platform is Luna or later.");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("(backward compatible with kepler and previous versions) -->");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("<requirement>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t\t");
+                _builder.append("<type>eclipse-feature</type>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t\t");
+                _builder.append("<id>org.eclipse.rcp</id>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t\t");
+                _builder.append("<versionRange>0.0.0</versionRange>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("</requirement>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t");
+                _builder.append("</extraRequirements>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t");
+                _builder.append("</dependency-resolution>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t");
+                _builder.append("</configuration>");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("</plugin>");
+                _builder.newLine();
+              }
+            }
           }
         }
         {

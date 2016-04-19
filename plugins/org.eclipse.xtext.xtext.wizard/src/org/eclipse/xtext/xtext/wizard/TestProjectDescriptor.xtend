@@ -85,6 +85,26 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 									«ENDIF»
 								</configuration>
 							</plugin>
+							«IF needsUiHarness»
+							<plugin>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>target-platform-configuration</artifactId>
+								<configuration>
+									<dependency-resolution>
+										<extraRequirements>
+											<!-- to get the org.eclipse.osgi.compatibility.state plugin
+											if the target platform is Luna or later.
+											(backward compatible with kepler and previous versions) -->
+											<requirement>
+												<type>eclipse-feature</type>
+												<id>org.eclipse.rcp</id>
+												<versionRange>0.0.0</versionRange>
+											</requirement>
+										</extraRequirements>
+									</dependency-resolution>
+								</configuration>
+							</plugin>
+							«ENDIF»
 						«ENDIF»
 						«IF !isEclipsePluginProject»
 							<plugin>
