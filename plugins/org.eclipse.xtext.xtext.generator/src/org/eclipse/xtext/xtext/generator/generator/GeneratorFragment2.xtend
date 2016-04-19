@@ -214,7 +214,7 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 				protected void runGenerator(String string) {
 					// Load the resource
 					«ResourceSet» set = resourceSetProvider.get();
-					«Resource» resource = set.getResource(«URI».createURI(string), true);
+					«Resource» resource = set.getResource(«URI».createFileURI(string), true);
 			
 					// Validate the resource
 					«List»<«Issue»> list = validator.validate(resource, «CheckMode».ALL, «CancelIndicator».NullImpl);
@@ -262,7 +262,7 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 				def protected runGenerator(String string) {
 					// Load the resource
 					val set = resourceSetProvider.get
-					val resource = set.getResource(«URI».createURI(string), true)
+					val resource = set.getResource(«URI».createFileURI(string), true)
 			
 					// Validate the resource
 					val issues = validator.validate(resource, «CheckMode».ALL, «CancelIndicator».NullImpl)
