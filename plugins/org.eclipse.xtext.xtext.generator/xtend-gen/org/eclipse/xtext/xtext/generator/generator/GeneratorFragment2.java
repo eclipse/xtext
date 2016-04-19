@@ -537,7 +537,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         _builder.append(Resource.class, "\t\t");
         _builder.append(" resource = set.getResource(");
         _builder.append(URI.class, "\t\t");
-        _builder.append(".createURI(string), true);");
+        _builder.append(".createFileURI(string), true);");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t\t");
@@ -699,7 +699,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("\t\t");
         _builder.append("val resource = set.getResource(");
         _builder.append(URI.class, "\t\t");
-        _builder.append(".createURI(string), true)");
+        _builder.append(".createFileURI(string), true)");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t\t");
