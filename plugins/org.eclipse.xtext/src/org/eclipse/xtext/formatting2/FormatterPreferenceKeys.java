@@ -17,14 +17,21 @@ import org.eclipse.xtext.preferences.TypedPreferenceKey;
 import org.eclipse.xtext.preferences.TypedPreferenceValues;
 
 /**
- * <p>General preference keys used by this formatting infrastructure. Formatters based on this infrastructure should honor
- * these keys as well.</p>
+ * <p>
+ * General preference keys used by this formatting infrastructure. Formatters based on this infrastructure should honor these keys as well.
+ * </p>
  * 
- * <p>To set a values for one of these keys, use {@link FormatterRequest#setPreferences(ITypedPreferenceValues)}.</p>
+ * <p>
+ * To set a values for one of these keys, use {@link FormatterRequest#setPreferences(ITypedPreferenceValues)}.
+ * </p>
  * 
- * <p>To access a value for one of these keys, use {@link AbstractFormatter2#getPreference(TypedPreferenceKey)}.</p>
+ * <p>
+ * To access a value for one of these keys, use {@link AbstractFormatter2#getPreference(TypedPreferenceKey)}.
+ * </p>
  * 
- * <p>To introduce new keys, subclass this class (see also {@link PreferenceKeysProvider#allConstantKeys(Class...)}.</p>
+ * <p>
+ * To introduce new keys, subclass this class (see also {@link PreferenceKeysProvider#allConstantKeys(Class...)}.
+ * </p>
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.8
@@ -43,11 +50,18 @@ public class FormatterPreferenceKeys {
 	public static StringKey indentation = new StringKey("indentation", "\t");
 
 	/**
-	 * The width of one level of indentation counted in characters. If {@link #indentation} is {@code \t} and the
-	 * display-width of one tab is fours, then this values should be four. The formatter uses this value to compute when
-	 * {@link #maxLineWidth} has been exceeded.
+	 * @deprecated use {@link #tabWidth}
 	 */
-	public static IntegerKey indentationLength = new IntegerKey("indentation.length", 4);
+	@Deprecated
+	public static IntegerKey indentationLength = new IntegerKey("indentation.length", -1);
+
+	/**
+	 * The display-width of one tab character.
+	 * 
+	 * If {@link #indentation} is {@code \t} and the display-width of one tab is fours, then this values should be four. The formatter uses
+	 * this value to compute when {@link #maxLineWidth} has been exceeded.
+	 */
+	public static IntegerKey tabWidth = new IntegerKey("tab.width", 4);
 
 	/**
 	 * The maximum of characters that may fit into one line.
