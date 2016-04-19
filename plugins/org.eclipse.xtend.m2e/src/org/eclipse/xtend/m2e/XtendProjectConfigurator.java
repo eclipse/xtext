@@ -84,32 +84,22 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 		}
 	}
 
-	private void readCompileConfig(OutputConfiguration config,
-			ProjectConfigurationRequest request, MojoExecution execution)
-			throws CoreException {
+	private void readCompileConfig(OutputConfiguration config, ProjectConfigurationRequest request,
+			MojoExecution execution) throws CoreException {
 		for (String source : request.getMavenProject().getCompileSourceRoots()) {
-			SourceMapping mapping = new SourceMapping(makeProjectRelative(
-					source, request));
-			String outputDirectory = getParameterValue("outputDirectory",
-					String.class, request.getMavenSession(), execution);
-			mapping.setOutputDirectory(makeProjectRelative(outputDirectory,
-					request));
+			SourceMapping mapping = new SourceMapping(makeProjectRelative(source, request));
+			String outputDirectory = mojoParameterValue("outputDirectory", String.class, request, execution);
+			mapping.setOutputDirectory(makeProjectRelative(outputDirectory, request));
 			config.getSourceMappings().add(mapping);
 		}
 	}
 
-	private void readTestCompileConfig(OutputConfiguration config,
-			ProjectConfigurationRequest request, MojoExecution execution)
-			throws CoreException {
-		for (String source : request.getMavenProject()
-				.getTestCompileSourceRoots()) {
-			SourceMapping mapping = new SourceMapping(makeProjectRelative(
-					source, request));
-			String testOutputDirectory = getParameterValue(
-					"testOutputDirectory", String.class,
-					request.getMavenSession(), execution);
-			mapping.setOutputDirectory(makeProjectRelative(testOutputDirectory,
-					request));
+	private void readTestCompileConfig(OutputConfiguration config, ProjectConfigurationRequest request,
+			MojoExecution execution) throws CoreException {
+		for (String source : request.getMavenProject().getTestCompileSourceRoots()) {
+			SourceMapping mapping = new SourceMapping(makeProjectRelative(source, request));
+			String testOutputDirectory = mojoParameterValue("testOutputDirectory", String.class, request, execution);
+			mapping.setOutputDirectory(makeProjectRelative(testOutputDirectory, request));
 			config.getSourceMappings().add(mapping);
 		}
 	}
@@ -127,25 +117,28 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 		return CharMatcher.is('/').trimFrom(unixDelimited);
 	}
 
-	private void readDebugInfoConfig(OutputConfiguration config,
-			ProjectConfigurationRequest request, MojoExecution execution)
-			throws CoreException {
-		config.setHideSyntheticLocalVariables(getParameterValue(
-				"hideSyntheticVariables", Boolean.class,
-				request.getMavenSession(), execution));
-		config.setInstallDslAsPrimarySource(getParameterValue(
-				"xtendAsPrimaryDebugSource", Boolean.class,
-				request.getMavenSession(), execution));
+	private void readDebugInfoConfig(OutputConfiguration config, ProjectConfigurationRequest request,
+			MojoExecution execution) throws CoreException {
+		config.setHideSyntheticLocalVariables(
+				mojoParameterValue("hideSyntheticVariables", Boolean.class, request, execution));
+		config.setInstallDslAsPrimarySource(
+				mojoParameterValue("xtendAsPrimaryDebugSource", Boolean.class, request, execution));
 	}
 
-	private void readTestDebugInfoConfig(OutputConfiguration config,
-			ProjectConfigurationRequest request, MojoExecution execution)
-			throws CoreException {
-		config.setHideSyntheticLocalVariables(getParameterValue(
-				"hideSyntheticVariables", Boolean.class,
-				request.getMavenSession(), execution));
-		config.setInstallDslAsPrimarySource(getParameterValue(
-				"xtendAsPrimaryDebugSource", Boolean.class,
-				request.getMavenSession(), execution));
+	private void readTestDebugInfoConfig(OutputConfiguration config, ProjectConfigurationRequest request,
+			MojoExecution execution) throws CoreException {
+		config.setHideSyntheticLocalVariables(
+				mojoParameterValue("hideSyntheticVariables", Boolean.class, request, execution));
+		config.setInstallDslAsPrimarySource(
+				mojoParameterValue("xtendAsPrimaryDebugSource", Boolean.class, request, execution));
+	}
+	
+	private <T> T mojoParameterValue(String paramName, Class<T> paramType, ProjectConfigurationRequest request,
+			MojoExecution execution) throws CoreException {
+		/*TODO maven.getMojoParameterValue(request.getMavenProject(), execution, paramName, paramType,
+				new NullProgressMonitor());*/
+		return getParameterValue(
+				paramName, paramType,
+				request.getMavenSession(), execution);
 	}
 }
