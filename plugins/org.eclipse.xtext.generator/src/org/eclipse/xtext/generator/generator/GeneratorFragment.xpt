@@ -188,7 +188,7 @@ public class Main {
 	protected void runGenerator(String string) {
 		// load the resource
 		ResourceSet set = resourceSetProvider.get();
-		Resource resource = set.getResource(URI.createURI(string), true);
+		Resource resource = set.getResource(URI.createFileURI(string), true);
 		
 		// validate the resource
 		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
@@ -248,7 +248,7 @@ class Main {
 	def protected runGenerator(String string) {
 		// load the resource
 		val set = resourceSetProvider.get
-		val resource = set.getResource(URI::createURI(string), true)
+		val resource = set.getResource(URI.createFileURI(string), true)
 		
 		// validate the resource
 		val issues = validator.validate(resource, CheckMode::ALL, CancelIndicator::NullImpl)
