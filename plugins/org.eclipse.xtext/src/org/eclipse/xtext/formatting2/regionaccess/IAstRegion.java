@@ -18,14 +18,13 @@ import org.eclipse.xtext.RuleCall;
 public interface IAstRegion {
 
 	/**
-	 * @return The grammar element used to parse this semantic region. Can be an {@link RuleCall},
-	 *         {@link CrossReference}, or {@link Keyword}.
+	 * @return The grammar element used to parse this semantic region. Can be an {@link RuleCall}, {@link CrossReference}, or
+	 *         {@link Keyword}.
 	 */
 	EObject getGrammarElement();
 
 	/**
-	 * The EObject this semantic region belongs to.
+	 * The AST-Element represented by this IEObjectRegion.
 	 */
 	EObject getSemanticElement();
-
 }

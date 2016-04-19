@@ -8,6 +8,7 @@
 package org.eclipse.xtext.formatting2.regionaccess;
 
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 
@@ -23,4 +24,8 @@ import org.eclipse.xtext.Keyword;
  */
 public interface ISemanticRegion extends ISequentialRegion, IAstRegion {
 
+	/**
+	 * Same as calling {@link ITextRegionAccess#regionForEObject(EObject)} for {@link #getSemanticElement()}, but faster.
+	 */
+	IEObjectRegion getEObjectRegion();
 }

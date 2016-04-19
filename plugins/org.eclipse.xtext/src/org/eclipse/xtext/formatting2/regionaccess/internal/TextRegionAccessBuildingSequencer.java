@@ -113,9 +113,8 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		if (token == null || token.length() == 0)
 			return;
 		AbstractEObjectRegion tokens = stack.peek();
-		EObject obj = tokens == null ? null : tokens.getSemanticElement();
 		int offset = regionAccess.append(token);
-		StringSemanticRegion semantic = createSemanticRegion(element, token, obj, offset);
+		StringSemanticRegion semantic = createSemanticRegion(element, token, tokens, offset);
 		last.setNext(semantic);
 		semantic.setLeadingHiddenRegion(last);
 		last = createHiddenRegion();
@@ -135,7 +134,7 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 		return new StringHiddenRegion(regionAccess);
 	}
 
-	protected StringSemanticRegion createSemanticRegion(AbstractElement element, String token, EObject obj, int offset) {
+	protected StringSemanticRegion createSemanticRegion(AbstractElement element, String token, AbstractEObjectRegion obj, int offset) {
 		return new StringSemanticRegion(regionAccess, obj, element, offset, token.length());
 	}
 

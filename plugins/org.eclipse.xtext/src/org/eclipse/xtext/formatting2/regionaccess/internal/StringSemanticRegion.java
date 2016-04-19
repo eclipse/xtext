@@ -9,6 +9,7 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
@@ -18,16 +19,21 @@ import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
  */
 public class StringSemanticRegion extends StringRegion implements ISemanticRegion {
 
+	private final AbstractEObjectRegion eObjectRegion;
 	private final AbstractElement grammarElement;
 	private IHiddenRegion leading;
-	private final EObject semanticElement;
 	private IHiddenRegion trailing;
 
-	protected StringSemanticRegion(StringBasedRegionAccess regionAccess, EObject semanticElement,
+	protected StringSemanticRegion(StringBasedRegionAccess regionAccess, AbstractEObjectRegion semanticElement,
 			AbstractElement grammarElement, int offset, int length) {
 		super(regionAccess, offset, length);
-		this.semanticElement = semanticElement;
+		this.eObjectRegion = semanticElement;
 		this.grammarElement = grammarElement;
+	}
+
+	@Override
+	public IEObjectRegion getEObjectRegion() {
+		return eObjectRegion;
 	}
 
 	@Override
@@ -57,7 +63,7 @@ public class StringSemanticRegion extends StringRegion implements ISemanticRegio
 
 	@Override
 	public EObject getSemanticElement() {
-		return semanticElement;
+		return eObjectRegion.getSemanticElement();
 	}
 
 	@Override
