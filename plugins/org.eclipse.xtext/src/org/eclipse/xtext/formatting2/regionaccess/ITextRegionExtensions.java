@@ -13,55 +13,58 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 
 /**
+ * This class is a facade on top of an {@link ITextRegionAccess}.
+ * 
+ * It provides convenience methods to be used by formatters that are implemented in the Xtend programming language.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface ITextRegionExtensions {
 
-	ISemanticRegionsFinder allRegionsFor(EObject object);
+	ISemanticRegionsFinder allRegionsFor(EObject semanticElement);
 
-	Iterable<ISemanticRegion> allSemanticRegions(EObject object);
+	Iterable<ISemanticRegion> allSemanticRegions(EObject semanticElement);
 
 	ITextRegionAccess getTextRegionAccess();
 
 	/**
-	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject. For the
-	 *         model's root element, the {@link ParserRule} is returned.
+	 * @return the {@link RuleCall} or the assigned {@link Action} that led to the construction of this EObject. For the model's root
+	 *         element, the {@link ParserRule} is returned.
 	 */
-	EObject grammarElement(EObject obj);
+	EObject grammarElement(EObject semanticElement);
 
-	ISemanticRegionFinder immediatelyFollowing(EObject owner);
+	ISemanticRegionFinder immediatelyFollowing(EObject semanticElement);
 
-	ISemanticRegionFinder immediatelyPreceding(EObject owner);
+	ISemanticRegionFinder immediatelyPreceding(EObject semanticElement);
 
 	/**
-	 * @return true, if the EObject's text range contains a line-wrap ("\n"). The EObject's text range reaches from the
-	 *         beginning of its first semantic region to the end of its last semantic region.
+	 * @return true, if the EObject's text range contains a line-wrap ("\n"). The EObject's text range reaches from the beginning of its
+	 *         first semantic region to the end of its last semantic region.
 	 */
-	boolean isMultiline(EObject object);
+	boolean isMultiline(EObject semanticElement);
 
 	/**
 	 * @return the {@link IHiddenRegion} that follows after the EObject's last {@link ISemanticRegion}.
 	 * 
 	 * @see #previousHiddenRegion(EObject)
 	 */
-	IHiddenRegion nextHiddenRegion(EObject owner);
+	IHiddenRegion nextHiddenRegion(EObject semanticElement);
 
 	/**
 	 * @return the {@link IHiddenRegion} that precedes the EObject's first {@link ISemanticRegion}.
 	 * 
 	 * @see #nextHiddenRegion(EObject)
 	 */
-	IHiddenRegion previousHiddenRegion(EObject owner);
+	IHiddenRegion previousHiddenRegion(EObject semanticElement);
 
-	ISemanticRegionsFinder regionFor(EObject object);
+	ISemanticRegionsFinder regionFor(EObject semanticElement);
 
 	/**
-	 * @return a text region that reaches from the beginning of its first semantic region to the end of its last
-	 *         semantic region.
+	 * @return a text region that reaches from the beginning of its first semantic region to the end of its last semantic region.
 	 */
 
-	IEObjectRegion regionForEObject(EObject object);
+	IEObjectRegion regionForEObject(EObject semanticElement);
 
-	Iterable<ISemanticRegion> semanticRegions(EObject object);
+	Iterable<ISemanticRegion> semanticRegions(EObject semanticElement);
 
 }
