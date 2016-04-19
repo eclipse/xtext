@@ -156,7 +156,7 @@ class AdvancedNewProjectPage extends WizardPage {
 			reportIssue(INFORMATION,
 				AdvancedNewProjectPage_ideaReqGradleInfo)
 		}
-		if (createP2Project.selection && !createSDKProject.selection) {
+		if (createUiProject.selection && createP2Project.selection && !createSDKProject.selection) {
 			addIssue(INFORMATION,
 				AdvancedNewProjectPage_p2AndSdkInfo)
 		}
