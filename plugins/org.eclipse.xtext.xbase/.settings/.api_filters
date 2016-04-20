@@ -8,14 +8,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/xbase/jvmmodel/JvmModelTargetURICollector.java" type="org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector">
-        <filter id="576720909">
-            <message_arguments>
-                <message_argument value="TargetURICollector"/>
-                <message_argument value="JvmModelTargetURICollector"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/xbase/parser/LookAheadPreservingNodeModelBuilder.java" type="org.eclipse.xtext.xbase.parser.LookAheadPreservingNodeModelBuilder">
         <filter id="571473929">
             <message_arguments>
