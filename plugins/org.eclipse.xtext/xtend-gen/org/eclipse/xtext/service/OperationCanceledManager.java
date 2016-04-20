@@ -101,15 +101,7 @@ public class OperationCanceledManager {
   }
   
   public void checkCanceled(final CancelIndicator indicator) {
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(indicator, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _isCanceled = indicator.isCanceled();
-      _and = _isCanceled;
-    }
-    if (_and) {
+    if (((!Objects.equal(indicator, null)) && indicator.isCanceled())) {
       this.throwOperationCanceledException();
     }
   }

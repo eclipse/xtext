@@ -286,17 +286,7 @@ public class FlattenedGrammarAccess {
               int _size = elements.size();
               boolean _tripleEquals = (_size == 1);
               if (_tripleEquals) {
-                boolean _and = false;
-                boolean _isFirstSetPredicated = ((CompoundElement)result).isFirstSetPredicated();
-                boolean _not_1 = (!_isFirstSetPredicated);
-                if (!_not_1) {
-                  _and = false;
-                } else {
-                  boolean _isPredicated = ((CompoundElement)result).isPredicated();
-                  boolean _not_2 = (!_isPredicated);
-                  _and = _not_2;
-                }
-                if (_and) {
+                if (((!((CompoundElement)result).isFirstSetPredicated()) && (!((CompoundElement)result).isPredicated()))) {
                   AbstractElement element = elements.get(0);
                   this.mergeCardinalities(element, ((AbstractElement)result));
                   this.mergePredicates(element, ((AbstractElement)result));
@@ -336,16 +326,7 @@ public class FlattenedGrammarAccess {
               into.setPredicated(true);
               into.setFirstSetPredicated(false);
             } else {
-              boolean _and = false;
-              boolean _isPredicated_1 = into.isPredicated();
-              boolean _not = (!_isPredicated_1);
-              if (!_not) {
-                _and = false;
-              } else {
-                boolean _isFirstSetPredicated = from.isFirstSetPredicated();
-                _and = _isFirstSetPredicated;
-              }
-              if (_and) {
+              if (((!into.isPredicated()) && from.isFirstSetPredicated())) {
                 into.setFirstSetPredicated(true);
               }
             }
@@ -356,40 +337,16 @@ public class FlattenedGrammarAccess {
             String c2 = from.getCardinality();
             String _switchResult = null;
             boolean _matched = false;
-            boolean _or = false;
-            boolean _equals = Objects.equal(c1, "*");
-            if (_equals) {
-              _or = true;
-            } else {
-              boolean _equals_1 = Objects.equal(c2, "*");
-              _or = _equals_1;
-            }
-            if (_or) {
+            if ((Objects.equal(c1, "*") || Objects.equal(c2, "*"))) {
               _matched=true;
             }
             if (!_matched) {
-              boolean _and = false;
-              boolean _equals_2 = Objects.equal(c1, "+");
-              if (!_equals_2) {
-                _and = false;
-              } else {
-                boolean _equals_3 = Objects.equal(c2, "?");
-                _and = _equals_3;
-              }
-              if (_and) {
+              if ((Objects.equal(c1, "+") && Objects.equal(c2, "?"))) {
                 _matched=true;
               }
             }
             if (!_matched) {
-              boolean _and_1 = false;
-              boolean _equals_4 = Objects.equal(c1, "?");
-              if (!_equals_4) {
-                _and_1 = false;
-              } else {
-                boolean _equals_5 = Objects.equal(c2, "+");
-                _and_1 = _equals_5;
-              }
-              if (_and_1) {
+              if ((Objects.equal(c1, "?") && Objects.equal(c2, "+"))) {
                 _matched=true;
               }
             }

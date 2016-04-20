@@ -163,16 +163,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     _builder.append("\t    ");
     _builder.append("List<EPackage> result = new ArrayList<EPackage>(");
     {
-      boolean _and = false;
-      boolean _isInheritImplementation_1 = this.isInheritImplementation();
-      if (!_isInheritImplementation_1) {
-        _and = false;
-      } else {
-        Grammar _nonTerminalsSuperGrammar = IInheriting.Util.getNonTerminalsSuperGrammar(this.grammar);
-        boolean _tripleNotEquals = (_nonTerminalsSuperGrammar != null);
-        _and = _tripleNotEquals;
-      }
-      if (_and) {
+      if ((this.isInheritImplementation() && (IInheriting.Util.getNonTerminalsSuperGrammar(this.grammar) != null))) {
         _builder.append("super.getEPackages()");
       }
     }

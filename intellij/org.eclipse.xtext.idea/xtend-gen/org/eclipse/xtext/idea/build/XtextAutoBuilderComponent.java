@@ -350,17 +350,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     _instance_2.registerListener(new ProjectWideFacetAdapter<Facet>() {
       @Override
       public void facetAdded(final Facet facet) {
-        boolean _or = false;
-        boolean _isXtextFacet = XtextAutoBuilderComponent.this.isXtextFacet(facet);
-        boolean _not = (!_isXtextFacet);
-        if (_not) {
-          _or = true;
-        } else {
-          boolean _isInitialized = project.isInitialized();
-          boolean _not_1 = (!_isInitialized);
-          _or = _not_1;
-        }
-        if (_or) {
+        if (((!XtextAutoBuilderComponent.this.isXtextFacet(facet)) || (!project.isInitialized()))) {
           return;
         }
         Module _module = facet.getModule();
@@ -455,17 +445,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   public void fileAdded(final VirtualFile file) {
-    boolean _and = false;
-    boolean _isDirectory = file.isDirectory();
-    boolean _not = (!_isDirectory);
-    if (!_not) {
-      _and = false;
-    } else {
-      long _length = file.getLength();
-      boolean _greaterThan = (_length > 0);
-      _and = _greaterThan;
-    }
-    if (_and) {
+    if (((!file.isDirectory()) && (file.getLength() > 0))) {
       this.enqueue(BuildEvent.Type.ADDED, file);
     } else {
       boolean _isInfoEnabled = XtextAutoBuilderComponent.LOG.isInfoEnabled();
@@ -502,15 +482,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   protected void enqueue(final BuildEvent buildEvent) {
     try {
-      boolean _and = false;
-      if (!(!this.disposed)) {
-        _and = false;
-      } else {
-        boolean _isLoaded = this.isLoaded();
-        boolean _not = (!_isLoaded);
-        _and = _not;
-      }
-      if (_and) {
+      if (((!this.disposed) && (!this.isLoaded()))) {
         this.queueAllResources();
       }
       boolean _isInfoEnabled = XtextAutoBuilderComponent.LOG.isInfoEnabled();
@@ -590,14 +562,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
               for (final URI uri : uris) {
                 {
                   final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
-                  boolean _and = false;
-                  if (!(file != null)) {
-                    _and = false;
-                  } else {
-                    boolean _exists = file.exists();
-                    _and = _exists;
-                  }
-                  if (_and) {
+                  if (((file != null) && file.exists())) {
                     file.delete(XtextAutoBuilderComponent.this);
                   }
                 }
@@ -690,29 +655,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       }
       return true;
     }
-    boolean _or = false;
-    boolean _equals = Objects.equal(file, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _isDirectory = file.isDirectory();
-      _or = _isDirectory;
-    }
-    return _or;
+    return (Objects.equal(file, null) || file.isDirectory());
   }
   
   protected boolean isLoaded() {
-    boolean _or = false;
-    boolean _isEmpty = this.chunkedResourceDescriptions.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      _or = true;
-    } else {
-      boolean _isEmpty_1 = this.queue.isEmpty();
-      boolean _not_1 = (!_isEmpty_1);
-      _or = _not_1;
-    }
-    return _or;
+    return ((!this.chunkedResourceDescriptions.isEmpty()) || (!this.queue.isEmpty()));
   }
   
   protected void queueAllResources(final Module module) {
@@ -732,16 +679,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         @Override
         public void apply(final VirtualFile file) {
           try {
-            boolean _and = false;
-            boolean _isDirectory = file.isDirectory();
-            boolean _not = (!_isDirectory);
-            if (!_not) {
-              _and = false;
-            } else {
-              boolean _exists = file.exists();
-              _and = _exists;
-            }
-            if (_and) {
+            if (((!file.isDirectory()) && file.exists())) {
               BuildEvent _buildEvent = new BuildEvent(BuildEvent.Type.ADDED, file);
               XtextAutoBuilderComponent.this.queue.put(_buildEvent);
             }
@@ -818,23 +756,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   private boolean isReadyToBeBuilt() {
-    boolean _or = false;
-    if (XtextAutoBuilderComponent.TEST_MODE) {
-      _or = true;
-    } else {
-      boolean _and = false;
-      boolean _isInitialized = this.project.isInitialized();
-      if (!_isInitialized) {
-        _and = false;
-      } else {
-        DumbService _instance = DumbService.getInstance(this.project);
-        boolean _isDumb = _instance.isDumb();
-        boolean _not = (!_isDumb);
-        _and = _not;
-      }
-      _or = _and;
-    }
-    return _or;
+    return (XtextAutoBuilderComponent.TEST_MODE || (this.project.isInitialized() && (!DumbService.getInstance(this.project).isDumb())));
   }
   
   private List<BuildEvent> unProcessedEvents = CollectionLiterals.<BuildEvent>newArrayList();
@@ -894,22 +816,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           ModuleRootManager _instance = ModuleRootManager.getInstance(module);
           final VirtualFile[] contentRoots = _instance.getContentRoots();
           final LinkedHashSet<BuildEvent> events = this.getEventsForModule(this.unProcessedEvents, module);
-          boolean _or = false;
-          boolean _isEmpty_1 = ((List<VirtualFile>)Conversions.doWrapArray(contentRoots)).isEmpty();
-          if (_isEmpty_1) {
-            _or = true;
-          } else {
-            boolean _and = false;
-            boolean _isEmpty_2 = events.isEmpty();
-            if (!_isEmpty_2) {
-              _and = false;
-            } else {
-              boolean _isEmpty_3 = deltas.isEmpty();
-              _and = _isEmpty_3;
-            }
-            _or = _and;
-          }
-          if (_or) {
+          if ((((List<VirtualFile>)Conversions.doWrapArray(contentRoots)).isEmpty() || (events.isEmpty() && deltas.isEmpty()))) {
             String _name_2 = module.getName();
             String _plus = ("Skipping module \'" + _name_2);
             String _plus_1 = (_plus + "\'. Nothing to do here.");
@@ -1015,28 +922,18 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
         Set<URI> _uRIs_1 = event.getURIs();
         URI _head = IterableExtensions.<URI>head(_uRIs_1);
         final String url = _head.toString();
-        boolean _and = false;
-        final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+        if ((IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(excludeRootUrls)), new Function1<String, Boolean>() {
           @Override
           public Boolean apply(final String it) {
             boolean _isUrlUnderRoot = XtextAutoBuilderComponent.this.isUrlUnderRoot(url, it);
             return Boolean.valueOf((!_isUrlUnderRoot));
           }
-        };
-        boolean _forall = IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(excludeRootUrls)), _function);
-        if (!_forall) {
-          _and = false;
-        } else {
-          final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
-            @Override
-            public Boolean apply(final String it) {
-              return Boolean.valueOf(XtextAutoBuilderComponent.this.isUrlUnderRoot(url, it));
-            }
-          };
-          boolean _exists = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(sourceRootUrls)), _function_1);
-          _and = _exists;
-        }
-        if (_and) {
+        }) && IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(sourceRootUrls)), new Function1<String, Boolean>() {
+          @Override
+          public Boolean apply(final String it) {
+            return Boolean.valueOf(XtextAutoBuilderComponent.this.isUrlUnderRoot(url, it));
+          }
+        }))) {
           result.add(event);
         }
       }
@@ -1047,26 +944,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   private final static char SEGMENT_SEPARATOR = '/';
   
   protected boolean isUrlUnderRoot(final String url, final String rootUrl) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    int _length = url.length();
-    int _length_1 = rootUrl.length();
-    boolean _greaterThan = (_length > _length_1);
-    if (!_greaterThan) {
-      _and_1 = false;
-    } else {
-      int _length_2 = rootUrl.length();
-      char _charAt = url.charAt(_length_2);
-      boolean _equals = (_charAt == XtextAutoBuilderComponent.SEGMENT_SEPARATOR);
-      _and_1 = _equals;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _startsWith = FileUtil.startsWith(url, rootUrl);
-      _and = _startsWith;
-    }
-    return _and;
+    return (((url.length() > rootUrl.length()) && (url.charAt(rootUrl.length()) == XtextAutoBuilderComponent.SEGMENT_SEPARATOR)) && 
+      FileUtil.startsWith(url, rootUrl));
   }
   
   public Function1<URI, IResourceServiceProvider> getServiceProviderProvider(final Module module) {
@@ -1122,16 +1001,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   _source=fileMappings.getSource(uri);
                 }
                 final List<URI> sourceUris = _source;
-                boolean _and = false;
-                boolean _notEquals = (!Objects.equal(sourceUris, null));
-                if (!_notEquals) {
-                  _and = false;
-                } else {
-                  boolean _isEmpty = sourceUris.isEmpty();
-                  boolean _not = (!_isEmpty);
-                  _and = _not;
-                }
-                if (_and) {
+                if (((!Objects.equal(sourceUris, null)) && (!sourceUris.isEmpty()))) {
                   for (final URI sourceUri : sourceUris) {
                     this.consistentAdd(sourceUri, changedUris, deletedUris);
                   }
@@ -1163,16 +1033,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   _source=fileMappings.getSource(uri_1);
                 }
                 final List<URI> sourceUris = _source;
-                boolean _and = false;
-                boolean _notEquals = (!Objects.equal(sourceUris, null));
-                if (!_notEquals) {
-                  _and = false;
-                } else {
-                  boolean _isEmpty = sourceUris.isEmpty();
-                  boolean _not = (!_isEmpty);
-                  _and = _not;
-                }
-                if (_and) {
+                if (((!Objects.equal(sourceUris, null)) && (!sourceUris.isEmpty()))) {
                   for (final URI sourceUri : sourceUris) {
                     this.consistentAdd(sourceUri, changedUris, deletedUris);
                   }

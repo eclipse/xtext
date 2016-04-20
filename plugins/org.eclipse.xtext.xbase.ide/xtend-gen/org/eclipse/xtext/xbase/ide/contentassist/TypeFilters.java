@@ -16,19 +16,7 @@ final class TypeFilters {
   public final static Predicate<ITypeDescriptor> NON_ABSTRACT = new Predicate<ITypeDescriptor>() {
     @Override
     public boolean apply(final ITypeDescriptor typeDesc) {
-      boolean _and = false;
-      int _accessFlags = typeDesc.getAccessFlags();
-      boolean _contains = TypeFilters.contains(_accessFlags, Opcodes.ACC_ABSTRACT);
-      boolean _not = (!_contains);
-      if (!_not) {
-        _and = false;
-      } else {
-        int _accessFlags_1 = typeDesc.getAccessFlags();
-        boolean _contains_1 = TypeFilters.contains(_accessFlags_1, Opcodes.ACC_INTERFACE);
-        boolean _not_1 = (!_contains_1);
-        _and = _not_1;
-      }
-      return _and;
+      return ((!TypeFilters.contains(typeDesc.getAccessFlags(), Opcodes.ACC_ABSTRACT)) && (!TypeFilters.contains(typeDesc.getAccessFlags(), Opcodes.ACC_INTERFACE)));
     }
   };
   

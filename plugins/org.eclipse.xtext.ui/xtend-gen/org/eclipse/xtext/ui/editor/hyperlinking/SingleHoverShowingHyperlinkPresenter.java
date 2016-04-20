@@ -58,34 +58,17 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
   
   @Override
   public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
-    boolean _and = false;
-    boolean _and_1 = false;
-    String _name = method.getName();
-    boolean _startsWith = _name.startsWith("showHyperlinks");
-    if (!_startsWith) {
-      _and_1 = false;
-    } else {
-      int _length = args.length;
-      boolean _greaterEqualsThan = (_length >= 1);
-      _and_1 = _greaterEqualsThan;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
+    if (((method.getName().startsWith("showHyperlinks") && (args.length >= 1)) && (args[0] instanceof IHyperlink[]))) {
       Object _get = args[0];
-      _and = (_get instanceof IHyperlink[]);
-    }
-    if (_and) {
-      Object _get_1 = args[0];
-      final IHyperlink[] nullsafe = this.makeNullsafe(((IHyperlink[]) _get_1));
-      int _length_1 = nullsafe.length;
-      boolean _greaterThan = (_length_1 > 0);
+      final IHyperlink[] nullsafe = this.makeNullsafe(((IHyperlink[]) _get));
+      int _length = nullsafe.length;
+      boolean _greaterThan = (_length > 0);
       if (_greaterThan) {
         args[0] = nullsafe;
         final Object result = method.invoke(this.delegate, args);
         final IHyperlink[] activeHyperlinks = nullsafe;
-        int _length_2 = activeHyperlinks.length;
-        boolean _equals = (_length_2 == 1);
+        int _length_1 = activeHyperlinks.length;
+        boolean _equals = (_length_1 == 1);
         if (_equals) {
           final IHyperlink singleHyperlink = activeHyperlinks[0];
           String _typeLabel = singleHyperlink.getTypeLabel();
@@ -94,15 +77,15 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
             IRegion _hyperlinkRegion = singleHyperlink.getHyperlinkRegion();
             final int start = _hyperlinkRegion.getOffset();
             IRegion _hyperlinkRegion_1 = singleHyperlink.getHyperlinkRegion();
-            int _length_3 = _hyperlinkRegion_1.getLength();
-            final int end = (start + _length_3);
+            int _length_2 = _hyperlinkRegion_1.getLength();
+            final int end = (start + _length_2);
             Region _region = new Region(start, (end - start));
             this.reflect.set(this.delegate, "fSubjectRegion", _region);
-            ITextViewer _get_2 = this.reflect.<ITextViewer>get(this.delegate, "fTextViewer");
-            int _offsetForCursorLocation = JFaceTextUtil.getOffsetForCursorLocation(_get_2);
+            ITextViewer _get_1 = this.reflect.<ITextViewer>get(this.delegate, "fTextViewer");
+            int _offsetForCursorLocation = JFaceTextUtil.getOffsetForCursorLocation(_get_1);
             this.reflect.set(this.delegate, "fCursorOffset", Integer.valueOf(_offsetForCursorLocation));
-            Object _get_3 = this.reflect.<Object>get(this.delegate, "fManager");
-            ((AbstractInformationControlManager) _get_3).showInformation();
+            Object _get_2 = this.reflect.<Object>get(this.delegate, "fManager");
+            ((AbstractInformationControlManager) _get_2).showInformation();
           }
         }
         return result;
@@ -119,15 +102,7 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
     final Function1<IHyperlink, Boolean> _function = new Function1<IHyperlink, Boolean>() {
       @Override
       public Boolean apply(final IHyperlink it) {
-        boolean _or = false;
-        if ((it == null)) {
-          _or = true;
-        } else {
-          IRegion _hyperlinkRegion = it.getHyperlinkRegion();
-          boolean _tripleEquals = (_hyperlinkRegion == null);
-          _or = _tripleEquals;
-        }
-        return Boolean.valueOf(_or);
+        return Boolean.valueOf(((it == null) || (it.getHyperlinkRegion() == null)));
       }
     };
     boolean _exists = IterableExtensions.<IHyperlink>exists(((Iterable<IHyperlink>)Conversions.doWrapArray(arr)), _function);
@@ -136,15 +111,7 @@ public class SingleHoverShowingHyperlinkPresenter implements InvocationHandler {
       final Procedure1<IHyperlink> _function_1 = new Procedure1<IHyperlink>() {
         @Override
         public void apply(final IHyperlink it) {
-          boolean _and = false;
-          if (!(it != null)) {
-            _and = false;
-          } else {
-            IRegion _hyperlinkRegion = it.getHyperlinkRegion();
-            boolean _tripleNotEquals = (_hyperlinkRegion != null);
-            _and = _tripleNotEquals;
-          }
-          if (_and) {
+          if (((it != null) && (it.getHyperlinkRegion() != null))) {
             list.add(it);
           } else {
             Class<? extends IHyperlink> _class = it.getClass();

@@ -1918,31 +1918,19 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           }
         }
         {
-          boolean _and = false;
-          List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
-          final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
+          if ((IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
             @Override
             public Boolean apply(final TerminalRule it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
             }
-          };
-          boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
-          if (!_exists_1) {
-            _and = false;
-          } else {
-            List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
-            final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
-              @Override
-              public Boolean apply(final TerminalRule it) {
-                String _name = it.getName();
-                return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
-              }
-            };
-            boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
-            _and = _exists_2;
-          }
-          if (_and) {
+          }) && IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
+            @Override
+            public Boolean apply(final TerminalRule it) {
+              String _name = it.getName();
+              return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
+            }
+          }))) {
             _builder.append("\t");
             _builder.append("private static final ");
             _builder.append(tokenSet, "\t");
@@ -1957,16 +1945,16 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.append(".RULE_ML_COMMENT]);");
             _builder.newLineIfNotEmpty();
           } else {
-            List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
-            final Function1<TerminalRule, Boolean> _function_3 = new Function1<TerminalRule, Boolean>() {
+            List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
+            final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
               @Override
               public Boolean apply(final TerminalRule it) {
                 String _name = it.getName();
                 return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
               }
             };
-            boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
-            if (_exists_3) {
+            boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
+            if (_exists_1) {
               _builder.append("\t");
               _builder.append("private static final ");
               _builder.append(tokenSet, "\t");
@@ -1978,16 +1966,16 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
               _builder.append(".RULE_SL_COMMENT]);");
               _builder.newLineIfNotEmpty();
             } else {
-              List<TerminalRule> _allTerminalRules_4 = GrammarUtil.allTerminalRules(grammar);
-              final Function1<TerminalRule, Boolean> _function_4 = new Function1<TerminalRule, Boolean>() {
+              List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
+              final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
                 @Override
                 public Boolean apply(final TerminalRule it) {
                   String _name = it.getName();
                   return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
                 }
               };
-              boolean _exists_4 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_4, _function_4);
-              if (_exists_4) {
+              boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
+              if (_exists_2) {
                 _builder.append("\t");
                 _builder.append("private static final ");
                 _builder.append(tokenSet, "\t");
@@ -2011,16 +1999,16 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           }
         }
         {
-          List<TerminalRule> _allTerminalRules_5 = GrammarUtil.allTerminalRules(grammar);
-          final Function1<TerminalRule, Boolean> _function_5 = new Function1<TerminalRule, Boolean>() {
+          List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
+          final Function1<TerminalRule, Boolean> _function_3 = new Function1<TerminalRule, Boolean>() {
             @Override
             public Boolean apply(final TerminalRule it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "STRING"));
             }
           };
-          boolean _exists_5 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_5, _function_5);
-          if (_exists_5) {
+          boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
+          if (_exists_3) {
             _builder.append("\t");
             _builder.append("private static final ");
             _builder.append(tokenSet, "\t");
@@ -2486,15 +2474,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       final EStructuralFeature feature = _xifexpression;
       boolean _and = false;
       boolean _and_1 = false;
-      boolean _and_2 = false;
-      if (!(feature instanceof EAttribute)) {
-        _and_2 = false;
-      } else {
-        boolean _isMany = feature.isMany();
-        boolean _not = (!_isMany);
-        _and_2 = _not;
-      }
-      if (!_and_2) {
+      if (!((feature instanceof EAttribute) && (!feature.isMany()))) {
         _and_1 = false;
       } else {
         EClassifier _eType = null;

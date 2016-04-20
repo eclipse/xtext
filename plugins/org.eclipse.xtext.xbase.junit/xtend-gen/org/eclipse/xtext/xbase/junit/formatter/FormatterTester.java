@@ -284,45 +284,17 @@ public class FormatterTester {
         _elvis = _emptyList;
       }
       for (final ILeafNode leaf : _elvis) {
-        boolean _or = false;
-        boolean _isHidden = leaf.isHidden();
-        boolean _not = (!_isHidden);
-        if (_not) {
-          _or = true;
-        } else {
-          String _text = leaf.getText();
-          String _trim = _text.trim();
-          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_trim);
-          boolean _not_1 = (!_isNullOrEmpty);
-          _or = _not_1;
-        }
-        if (_or) {
+        if (((!leaf.isHidden()) || (!StringExtensions.isNullOrEmpty(leaf.getText().trim())))) {
           final ITextRegion leafRegion = leaf.getTextRegion();
-          boolean _and = false;
-          boolean _and_1 = false;
-          if (!(lastOffset >= offset)) {
-            _and_1 = false;
-          } else {
+          if ((((lastOffset >= offset) && (leafRegion.getOffset() <= (offset + length))) && (!offsets.contains(Integer.valueOf(lastOffset))))) {
             int _offset = leafRegion.getOffset();
-            boolean _lessEqualsThan = (_offset <= (offset + length));
-            _and_1 = _lessEqualsThan;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            boolean _contains = offsets.contains(Integer.valueOf(lastOffset));
-            boolean _not_2 = (!_contains);
-            _and = _not_2;
-          }
-          if (_and) {
-            int _offset_1 = leafRegion.getOffset();
-            int _minus = (_offset_1 - lastOffset);
+            int _minus = (_offset - lastOffset);
             TextReplacement _textReplacement = new TextReplacement(lastOffset, _minus, "!!");
             result.add(_textReplacement);
           }
-          int _offset_2 = leafRegion.getOffset();
+          int _offset_1 = leafRegion.getOffset();
           int _length = leafRegion.getLength();
-          int _plus = (_offset_2 + _length);
+          int _plus = (_offset_1 + _length);
           lastOffset = _plus;
         }
       }

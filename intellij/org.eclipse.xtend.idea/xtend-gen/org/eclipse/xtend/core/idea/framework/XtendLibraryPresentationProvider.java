@@ -34,24 +34,13 @@ public class XtendLibraryPresentationProvider extends LibraryPresentationProvide
   @Override
   public XtendLibraryProperties detect(final List<VirtualFile> classesRoots) {
     final List<? extends Class<?>> detectorClasses = XtendLibraryDescription.getDetectorClasses();
-    boolean _and = false;
-    int _size = detectorClasses.size();
-    int _size_1 = classesRoots.size();
-    boolean _tripleEquals = (_size == _size_1);
-    if (!_tripleEquals) {
-      _and = false;
-    } else {
-      final Function1<Class<?>, Boolean> _function = new Function1<Class<?>, Boolean>() {
-        @Override
-        public Boolean apply(final Class<?> it) {
-          String _name = it.getName();
-          return Boolean.valueOf(LibraryUtil.isClassAvailableInLibrary(classesRoots, _name));
-        }
-      };
-      boolean _forall = IterableExtensions.forall(detectorClasses, _function);
-      _and = _forall;
-    }
-    if (_and) {
+    if (((detectorClasses.size() == classesRoots.size()) && IterableExtensions.forall(detectorClasses, new Function1<Class<?>, Boolean>() {
+      @Override
+      public Boolean apply(final Class<?> it) {
+        String _name = it.getName();
+        return Boolean.valueOf(LibraryUtil.isClassAvailableInLibrary(classesRoots, _name));
+      }
+    }))) {
       return new XtendLibraryProperties();
     }
     return null;

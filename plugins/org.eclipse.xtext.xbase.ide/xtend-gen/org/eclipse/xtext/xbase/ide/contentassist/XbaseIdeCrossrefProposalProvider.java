@@ -144,22 +144,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       AbstractElement _terminal_1 = crossRef.getTerminal();
       AbstractRule _rule = ((RuleCall) _terminal_1).getRule();
       final String ruleName = _rule.getName();
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _equals = Objects.equal(ruleName, "IdOrSuper");
-      if (_equals) {
-        _or_1 = true;
-      } else {
-        boolean _equals_1 = Objects.equal(ruleName, "ValidID");
-        _or_1 = _equals_1;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        boolean _equals_2 = Objects.equal(ruleName, "FeatureCallID");
-        _or = _equals_2;
-      }
-      return _or;
+      return ((Objects.equal(ruleName, "IdOrSuper") || Objects.equal(ruleName, "ValidID")) || Objects.equal(ruleName, "FeatureCallID"));
     }
     return false;
   }
@@ -173,19 +158,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         int _numberOfParameters = ((IIdentifiableElementDescription)proposedDescription).getNumberOfParameters();
         boolean _equals = (_numberOfParameters == 1);
         if (_equals) {
-          boolean _and = false;
-          String _simpleName = ((JvmExecutable)jvmFeature).getSimpleName();
-          boolean _startsWith = _simpleName.startsWith("set");
-          if (!_startsWith) {
-            _and = false;
-          } else {
-            QualifiedName _name = ((IIdentifiableElementDescription)proposedDescription).getName();
-            String _firstSegment = _name.getFirstSegment();
-            boolean _startsWith_1 = _firstSegment.startsWith("set");
-            boolean _not = (!_startsWith_1);
-            _and = _not;
-          }
-          if (_and) {
+          if ((((JvmExecutable)jvmFeature).getSimpleName().startsWith("set") && (!((IIdentifiableElementDescription)proposedDescription).getName().getFirstSegment().startsWith("set")))) {
             info.brackets = " = value";
             int _length = "value".length();
             int _minus = (-_length);
@@ -274,16 +247,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         labelBuilder.append(")");
       }
       final JvmTypeReference returnType = ((JvmOperation)feature).getReturnType();
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(returnType, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        String _simpleName = returnType.getSimpleName();
-        boolean _notEquals_1 = (!Objects.equal(_simpleName, null));
-        _and = _notEquals_1;
-      }
-      if (_and) {
+      if (((!Objects.equal(returnType, null)) && (!Objects.equal(returnType.getSimpleName(), null)))) {
         labelBuilder.append(" : ");
         LightweightTypeReference _lightweightReference = converter.toLightweightReference(returnType);
         String _humanReadableName = _lightweightReference.getHumanReadableName();
@@ -295,21 +259,21 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       descriptionBuilder.append(_humanReadableName_1);
       if ((!withParents)) {
         descriptionBuilder.append(".");
-        String _simpleName_1 = ((JvmOperation)feature).getSimpleName();
-        descriptionBuilder.append(_simpleName_1);
+        String _simpleName = ((JvmOperation)feature).getSimpleName();
+        descriptionBuilder.append(_simpleName);
         descriptionBuilder.append("()");
       }
     } else {
       if ((feature instanceof JvmField)) {
         labelBuilder.append(" : ");
         JvmTypeReference _type = ((JvmField)feature).getType();
-        boolean _notEquals_2 = (!Objects.equal(_type, null));
-        if (_notEquals_2) {
+        boolean _notEquals = (!Objects.equal(_type, null));
+        if (_notEquals) {
           JvmTypeReference _type_1 = ((JvmField)feature).getType();
           LightweightTypeReference _lightweightReference_1 = converter.toLightweightReference(_type_1);
           final String fieldType = _lightweightReference_1.getHumanReadableName();
-          boolean _notEquals_3 = (!Objects.equal(fieldType, null));
-          if (_notEquals_3) {
+          boolean _notEquals_1 = (!Objects.equal(fieldType, null));
+          if (_notEquals_1) {
             labelBuilder.append(fieldType);
           }
         }
@@ -359,37 +323,20 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         if ((i != 0)) {
           result.append(", ");
         }
-        boolean _and = false;
-        boolean _and_1 = false;
-        int _size_2 = relevantParameters.size();
-        int _minus = (_size_2 - 1);
-        boolean _equals = (i == _minus);
-        if (!_equals) {
-          _and_1 = false;
-        } else {
-          boolean _isVarArgs = executable.isVarArgs();
-          _and_1 = _isVarArgs;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
+        if ((((i == (relevantParameters.size() - 1)) && executable.isVarArgs()) && (parameter.getParameterType() instanceof JvmGenericArrayTypeReference))) {
           JvmTypeReference _parameterType = parameter.getParameterType();
-          _and = (_parameterType instanceof JvmGenericArrayTypeReference);
-        }
-        if (_and) {
-          JvmTypeReference _parameterType_1 = parameter.getParameterType();
-          final JvmGenericArrayTypeReference parameterType = ((JvmGenericArrayTypeReference) _parameterType_1);
+          final JvmGenericArrayTypeReference parameterType = ((JvmGenericArrayTypeReference) _parameterType);
           JvmTypeReference _componentType = parameterType.getComponentType();
           LightweightTypeReference _lightweightReference = ownedConverter.toLightweightReference(_componentType);
           String _humanReadableName = _lightweightReference.getHumanReadableName();
           result.append(_humanReadableName);
           result.append("...");
         } else {
-          JvmTypeReference _parameterType_2 = parameter.getParameterType();
-          boolean _notEquals = (!Objects.equal(_parameterType_2, null));
+          JvmTypeReference _parameterType_1 = parameter.getParameterType();
+          boolean _notEquals = (!Objects.equal(_parameterType_1, null));
           if (_notEquals) {
-            JvmTypeReference _parameterType_3 = parameter.getParameterType();
-            LightweightTypeReference _lightweightReference_1 = ownedConverter.toLightweightReference(_parameterType_3);
+            JvmTypeReference _parameterType_2 = parameter.getParameterType();
+            LightweightTypeReference _lightweightReference_1 = ownedConverter.toLightweightReference(_parameterType_2);
             final String simpleName = _lightweightReference_1.getHumanReadableName();
             boolean _notEquals_1 = (!Objects.equal(simpleName, null));
             if (_notEquals_1) {

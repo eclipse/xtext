@@ -88,15 +88,7 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
     } else {
       boolean _xifexpression_1 = false;
       if ((obj instanceof EStructuralFeatureTreeElement)) {
-        boolean _and = false;
-        boolean _equals = Objects.equal(this.uri, ((EStructuralFeatureTreeElement)obj).uri);
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _equals_1 = Objects.equal(this.feature, ((EStructuralFeatureTreeElement)obj).feature);
-          _and = _equals_1;
-        }
-        _xifexpression_1 = _and;
+        _xifexpression_1 = (Objects.equal(this.uri, ((EStructuralFeatureTreeElement)obj).uri) && Objects.equal(this.feature, ((EStructuralFeatureTreeElement)obj).feature));
       } else {
         _xifexpression_1 = false;
       }

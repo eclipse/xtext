@@ -31,17 +31,7 @@ public class SourceRelativeURI extends AbstractURIWrapper {
   
   public SourceRelativeURI(final URI sourceRelativeURI) {
     super(sourceRelativeURI);
-    boolean _or = false;
-    boolean _isRelative = sourceRelativeURI.isRelative();
-    boolean _not = (!_isRelative);
-    if (_not) {
-      _or = true;
-    } else {
-      String _path = sourceRelativeURI.path();
-      boolean _startsWith = _path.startsWith("/");
-      _or = _startsWith;
-    }
-    if (_or) {
+    if (((!sourceRelativeURI.isRelative()) || sourceRelativeURI.path().startsWith("/"))) {
       String _valueOf = String.valueOf(sourceRelativeURI);
       throw new IllegalArgumentException(_valueOf);
     }
@@ -53,24 +43,16 @@ public class SourceRelativeURI extends AbstractURIWrapper {
   
   @Override
   public boolean equals(final Object obj) {
-    boolean _and = false;
-    if (!(obj != null)) {
-      _and = false;
-    } else {
-      Class<?> _class = obj.getClass();
-      boolean _notEquals = (!Objects.equal(_class, SourceRelativeURI.class));
-      _and = _notEquals;
-    }
-    if (_and) {
+    if (((obj != null) && (!Objects.equal(obj.getClass(), SourceRelativeURI.class)))) {
       String _valueOf = String.valueOf(obj);
       String _plus = (_valueOf + " instanceof ");
-      Class<?> _class_1 = null;
+      Class<?> _class = null;
       if (obj!=null) {
-        _class_1=obj.getClass();
+        _class=obj.getClass();
       }
       String _name = null;
-      if (_class_1!=null) {
-        _name=_class_1.getName();
+      if (_class!=null) {
+        _name=_class.getName();
       }
       String _plus_1 = (_plus + _name);
       throw new IllegalArgumentException(_plus_1);

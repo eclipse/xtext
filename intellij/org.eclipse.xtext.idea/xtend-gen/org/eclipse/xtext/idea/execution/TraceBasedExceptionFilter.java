@@ -75,15 +75,7 @@ public class TraceBasedExceptionFilter extends ExceptionFilter {
         if (_isGenerated) {
           final IIdeaTrace trace = this.traceProvider.getTraceToSource(fileInProject);
           final RangeMarker rangeMarker = descriptor.getRangeMarker();
-          boolean _and = false;
-          boolean _notEquals_1 = (!Objects.equal(trace, null));
-          if (!_notEquals_1) {
-            _and = false;
-          } else {
-            boolean _notEquals_2 = (!Objects.equal(rangeMarker, null));
-            _and = _notEquals_2;
-          }
-          if (_and) {
+          if (((!Objects.equal(trace, null)) && (!Objects.equal(rangeMarker, null)))) {
             Application _application = ApplicationManager.getApplication();
             final Computable<Integer> _function_1 = new Computable<Integer>() {
               @Override
@@ -103,8 +95,8 @@ public class TraceBasedExceptionFilter extends ExceptionFilter {
             final Integer nonSpaceCharOffset = _application.<Integer>runReadAction(_function_1);
             TextRegion _textRegion = new TextRegion((nonSpaceCharOffset).intValue(), 0);
             final ILocationInVirtualFile location = trace.getBestAssociatedLocation(_textRegion);
-            boolean _notEquals_3 = (!Objects.equal(location, null));
-            if (_notEquals_3) {
+            boolean _notEquals_1 = (!Objects.equal(location, null));
+            if (_notEquals_1) {
               VirtualFileInProject _platformResource = location.getPlatformResource();
               Project _project_1 = _platformResource.getProject();
               VirtualFileInProject _platformResource_1 = location.getPlatformResource();

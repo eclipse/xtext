@@ -314,34 +314,7 @@ public class WizardConfigurationTest {
         final Function1<ExternalDependency, Boolean> _function = new Function1<ExternalDependency, Boolean>() {
           @Override
           public Boolean apply(final ExternalDependency it) {
-            boolean _and = false;
-            boolean _and_1 = false;
-            ExternalDependency.MavenCoordinates _maven = it.getMaven();
-            String _artifactId = _maven.getArtifactId();
-            ExternalDependency.MavenCoordinates _maven_1 = testDependency.getMaven();
-            String _artifactId_1 = _maven_1.getArtifactId();
-            boolean _equals = Objects.equal(_artifactId, _artifactId_1);
-            if (!_equals) {
-              _and_1 = false;
-            } else {
-              ExternalDependency.P2Coordinates _p2 = it.getP2();
-              String _bundleId = _p2.getBundleId();
-              ExternalDependency.P2Coordinates _p2_1 = testDependency.getP2();
-              String _bundleId_1 = _p2_1.getBundleId();
-              boolean _equals_1 = Objects.equal(_bundleId, _bundleId_1);
-              _and_1 = _equals_1;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              ExternalDependency.P2Coordinates _p2_2 = it.getP2();
-              Set<String> _packages = _p2_2.getPackages();
-              ExternalDependency.P2Coordinates _p2_3 = testDependency.getP2();
-              Set<String> _packages_1 = _p2_3.getPackages();
-              boolean _equals_2 = Objects.equal(_packages, _packages_1);
-              _and = _equals_2;
-            }
-            return Boolean.valueOf(_and);
+            return Boolean.valueOf(((Objects.equal(it.getMaven().getArtifactId(), testDependency.getMaven().getArtifactId()) && Objects.equal(it.getP2().getBundleId(), testDependency.getP2().getBundleId())) && Objects.equal(it.getP2().getPackages(), testDependency.getP2().getPackages())));
           }
         };
         boolean _exists = IterableExtensions.<ExternalDependency>exists(_externalDependencies, _function);
@@ -607,16 +580,7 @@ public class WizardConfigurationTest {
     final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
       @Override
       public Boolean apply(final ProjectDescriptor it) {
-        boolean _and = false;
-        boolean _isEclipsePluginProject = it.isEclipsePluginProject();
-        boolean _not = (!_isEclipsePluginProject);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _isPartOfMavenBuild = it.isPartOfMavenBuild();
-          _and = _isPartOfMavenBuild;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((!it.isEclipsePluginProject()) && it.isPartOfMavenBuild()));
       }
     };
     final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(_allJavaProjects, _function);
@@ -708,16 +672,7 @@ public class WizardConfigurationTest {
     final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
       @Override
       public Boolean apply(final ProjectDescriptor it) {
-        boolean _and = false;
-        boolean _isEclipsePluginProject = it.isEclipsePluginProject();
-        boolean _not = (!_isEclipsePluginProject);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _isPartOfMavenBuild = it.isPartOfMavenBuild();
-          _and = _isPartOfMavenBuild;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((!it.isEclipsePluginProject()) && it.isPartOfMavenBuild()));
       }
     };
     final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(_allJavaProjects, _function);
@@ -799,16 +754,7 @@ public class WizardConfigurationTest {
     final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
       @Override
       public Boolean apply(final ProjectDescriptor it) {
-        boolean _and = false;
-        boolean _isEclipsePluginProject = it.isEclipsePluginProject();
-        boolean _not = (!_isEclipsePluginProject);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _isPartOfMavenBuild = it.isPartOfMavenBuild();
-          _and = _isPartOfMavenBuild;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((!it.isEclipsePluginProject()) && it.isPartOfMavenBuild()));
       }
     };
     final Iterable<? extends ProjectDescriptor> plainMavenProjects = IterableExtensions.filter(_allJavaProjects, _function);

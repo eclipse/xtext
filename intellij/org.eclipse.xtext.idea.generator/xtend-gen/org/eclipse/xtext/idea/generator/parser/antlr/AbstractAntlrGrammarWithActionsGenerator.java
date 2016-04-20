@@ -44,15 +44,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   protected CharSequence compileEntryInit(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _or = false;
-      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
-      if (_isDefinesHiddenTokens) {
-        _or = true;
-      } else {
-        boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
-        _or = _definesUnorderedGroups;
-      }
-      if (_or) {
+      if ((it.isDefinesHiddenTokens() || this._grammarAccessExtensions.definesUnorderedGroups(it, options))) {
         _builder.append("@init {");
         _builder.newLine();
         _builder.append("\t");
@@ -153,15 +145,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   protected CharSequence compileEntryFinally(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _or = false;
-      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
-      if (_isDefinesHiddenTokens) {
-        _or = true;
-      } else {
-        boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
-        _or = _definesUnorderedGroups;
-      }
-      if (_or) {
+      if ((it.isDefinesHiddenTokens() || this._grammarAccessExtensions.definesUnorderedGroups(it, options))) {
         _builder.append("finally {");
         _builder.newLine();
         _builder.append("\t");

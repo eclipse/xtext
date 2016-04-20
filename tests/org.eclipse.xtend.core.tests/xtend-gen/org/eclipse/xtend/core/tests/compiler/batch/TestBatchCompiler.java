@@ -887,15 +887,7 @@ public class TestBatchCompiler {
     try {
       File linkFile = new File(link);
       TestBatchCompiler.abfalleimer.add(linkFile);
-      boolean _and = false;
-      boolean _exists = linkFile.exists();
-      if (!_exists) {
-        _and = false;
-      } else {
-        boolean _isSymlink = this.isSymlink(linkFile);
-        _and = _isSymlink;
-      }
-      if (_and) {
+      if ((linkFile.exists() && this.isSymlink(linkFile))) {
         return true;
       }
       String[] cmd = { "ln", "-s", linkTarget, link };

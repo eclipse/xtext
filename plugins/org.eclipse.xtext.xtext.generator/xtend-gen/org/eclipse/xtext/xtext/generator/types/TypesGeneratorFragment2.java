@@ -11,7 +11,6 @@ import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -40,40 +39,29 @@ public class TypesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   
   @Override
   public void generate() {
-    boolean _and = false;
-    boolean _get = this.onlyEnabledIfGrammarIsUsed.get();
-    if (!_get) {
-      _and = false;
-    } else {
-      IXtextGeneratorLanguage _language = this.getLanguage();
-      Grammar _grammar = _language.getGrammar();
-      boolean _inheritsXtype = this.xbaseUsageDetector.inheritsXtype(_grammar);
-      boolean _not = (!_inheritsXtype);
-      _and = _not;
-    }
-    if (_and) {
+    if ((this.onlyEnabledIfGrammarIsUsed.get() && (!this.xbaseUsageDetector.inheritsXtype(this.getLanguage().getGrammar())))) {
       return;
     }
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef(IGlobalScopeProvider.class);
     TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider");
     GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _typeRef_1);
-    IXtextGeneratorLanguage _language_1 = this.getLanguage();
-    GuiceModuleAccess _runtimeGenModule = _language_1.getRuntimeGenModule();
+    IXtextGeneratorLanguage _language = this.getLanguage();
+    GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     _addTypeToType.contributeTo(_runtimeGenModule);
-    IXtextGeneratorLanguage _language_2 = this.getLanguage();
-    GuiceModuleAccess _runtimeGenModule_1 = _language_2.getRuntimeGenModule();
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
+    GuiceModuleAccess _runtimeGenModule_1 = _language_1.getRuntimeGenModule();
     TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.common.types.DefaultCommonTypesRuntimeModule");
     _runtimeGenModule_1.setSuperClass(_typeRef_2);
     GuiceModuleAccess.BindingFactory _bindingFactory_1 = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef_3 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher");
     TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher");
     GuiceModuleAccess.BindingFactory _addTypeToType_1 = _bindingFactory_1.addTypeToType(_typeRef_3, _typeRef_4);
-    IXtextGeneratorLanguage _language_3 = this.getLanguage();
-    GuiceModuleAccess _eclipsePluginGenModule = _language_3.getEclipsePluginGenModule();
+    IXtextGeneratorLanguage _language_2 = this.getLanguage();
+    GuiceModuleAccess _eclipsePluginGenModule = _language_2.getEclipsePluginGenModule();
     _addTypeToType_1.contributeTo(_eclipsePluginGenModule);
-    IXtextGeneratorLanguage _language_4 = this.getLanguage();
-    GuiceModuleAccess _eclipsePluginGenModule_1 = _language_4.getEclipsePluginGenModule();
+    IXtextGeneratorLanguage _language_3 = this.getLanguage();
+    GuiceModuleAccess _eclipsePluginGenModule_1 = _language_3.getEclipsePluginGenModule();
     TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.common.types.ui.DefaultCommonTypesUiModule");
     _eclipsePluginGenModule_1.setSuperClass(_typeRef_5);
     IXtextProjectConfig _projectConfig = this.getProjectConfig();

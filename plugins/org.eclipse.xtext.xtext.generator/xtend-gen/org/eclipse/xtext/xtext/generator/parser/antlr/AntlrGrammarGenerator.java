@@ -88,26 +88,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append("import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;");
     _builder.newLine();
     {
-      boolean _and = false;
-      List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
-      final Function1<ParserRule, List<EObject>> _function = new Function1<ParserRule, List<EObject>>() {
+      if (((!IterableExtensions.isEmpty(Iterables.<UnorderedGroup>filter(Iterables.<EObject>concat(ListExtensions.<ParserRule, List<EObject>>map(GrammarUtil.allParserRules(it), new Function1<ParserRule, List<EObject>>() {
         @Override
         public List<EObject> apply(final ParserRule it) {
           return EcoreUtil2.eAllContentsAsList(it);
         }
-      };
-      List<List<EObject>> _map = ListExtensions.<ParserRule, List<EObject>>map(_allParserRules, _function);
-      Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
-      Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_flatten, UnorderedGroup.class);
-      boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
-      boolean _not_1 = (!_isEmpty_1);
-      if (!_not_1) {
-        _and = false;
-      } else {
-        boolean _isBacktrack = options.isBacktrack();
-        _and = _isBacktrack;
-      }
-      if (_and) {
+      })), UnorderedGroup.class))) && options.isBacktrack())) {
         _builder.append("import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;");
         _builder.newLine();
       }

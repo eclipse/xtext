@@ -20,7 +20,6 @@ import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
-import org.eclipse.xpand2.output.Output;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
@@ -238,22 +237,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
   @Override
   protected Outlet createOutlet(final boolean append, final String encoding, final String name, final boolean overwrite, final String path) {
     Outlet _xifexpression = null;
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _equals = Objects.equal(name, Generator.SRC_GEN);
-    if (_equals) {
-      _or_1 = true;
-    } else {
-      boolean _equals_1 = Objects.equal(name, Generator.SRC_GEN_IDE);
-      _or_1 = _equals_1;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      boolean _equals_2 = Objects.equal(name, Generator.SRC_GEN_UI);
-      _or = _equals_2;
-    }
-    if (_or) {
+    if (((Objects.equal(name, Generator.SRC_GEN) || Objects.equal(name, Generator.SRC_GEN_IDE)) || Objects.equal(name, Generator.SRC_GEN_UI))) {
       File _tmpFolder = this.getTmpFolder();
       String _absolutePath = _tmpFolder.getAbsolutePath();
       _xifexpression = super.createOutlet(append, encoding, name, overwrite, _absolutePath);
@@ -459,17 +443,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     Object[] params = null;
     CombinedGrammarMarker _combinedGrammarMarker = new CombinedGrammarMarker(combined);
     _combinedGrammarMarker.attachToEmfObject(flattened);
-    boolean _and = false;
-    boolean _equals = Objects.equal(outlet, Generator.SRC_GEN);
-    if (!_equals) {
-      _and = false;
-    } else {
-      Output _output = context.getOutput();
-      Outlet _outlet = _output.getOutlet(Generator.SRC_GEN);
-      boolean _notEquals = (!Objects.equal(_outlet, null));
-      _and = _notEquals;
-    }
-    if (_and) {
+    if ((Objects.equal(outlet, Generator.SRC_GEN) && (!Objects.equal(context.getOutput().getOutlet(Generator.SRC_GEN), null)))) {
       if (combined) {
         String _name = XtextAntlrGeneratorFragment.class.getName();
         template = _name;
@@ -485,17 +459,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       final Object[] _converted_params = (Object[])params;
       _create.evaluate2(_plus, flattened, ((List<Object>)Conversions.doWrapArray(_converted_params)));
     } else {
-      boolean _and_1 = false;
-      boolean _equals_1 = Objects.equal(outlet, Generator.SRC_GEN_IDE);
-      if (!_equals_1) {
-        _and_1 = false;
-      } else {
-        Output _output_1 = context.getOutput();
-        Outlet _outlet_1 = _output_1.getOutlet(Generator.SRC_GEN_IDE);
-        boolean _notEquals_1 = (!Objects.equal(_outlet_1, null));
-        _and_1 = _notEquals_1;
-      }
-      if (_and_1) {
+      if ((Objects.equal(outlet, Generator.SRC_GEN_IDE) && (!Objects.equal(context.getOutput().getOutlet(Generator.SRC_GEN_IDE), null)))) {
         if (combined) {
           String _name_2 = XtextAntlrUiGeneratorFragment.class.getName();
           template = _name_2;

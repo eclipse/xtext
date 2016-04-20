@@ -36,15 +36,7 @@ public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDe
   
   @Override
   public boolean hasChanges(final IResourceDescription.Delta delta, final IResourceDescription candidate) {
-    boolean _or = false;
-    boolean _hasChanges = super.hasChanges(delta, candidate);
-    if (_hasChanges) {
-      _or = true;
-    } else {
-      boolean _containsActiveAnnotation = this.containsActiveAnnotation(candidate);
-      _or = _containsActiveAnnotation;
-    }
-    return _or;
+    return (super.hasChanges(delta, candidate) || this.containsActiveAnnotation(candidate));
   }
   
   private boolean containsActiveAnnotation(final IResourceDescription description) {

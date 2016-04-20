@@ -110,19 +110,11 @@ public class XtendIdeaValidator extends AbstractDeclarativeValidator {
       return;
     }
     String declaredPackage = xtendFile.getPackage();
-    boolean _and = false;
-    boolean _isEmpty = expectedPackage.isEmpty();
-    if (!_isEmpty) {
-      _and = false;
-    } else {
-      boolean _equals_1 = Objects.equal(declaredPackage, null);
-      _and = _equals_1;
-    }
-    if (_and) {
+    if ((expectedPackage.isEmpty() && Objects.equal(declaredPackage, null))) {
       return;
     }
-    boolean _equals_2 = Objects.equal(expectedPackage, declaredPackage);
-    if (_equals_2) {
+    boolean _equals_1 = Objects.equal(expectedPackage, declaredPackage);
+    if (_equals_1) {
       return;
     }
     StringConcatenation _builder = new StringConcatenation();

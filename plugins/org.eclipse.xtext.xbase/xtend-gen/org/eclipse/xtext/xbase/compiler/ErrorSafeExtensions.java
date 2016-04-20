@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -164,14 +163,7 @@ public class ErrorSafeExtensions {
   protected ITreeAppendable closeErrorAppendable(final ITreeAppendable parent, final ITreeAppendable child) {
     ITreeAppendable _xblockexpression = null;
     {
-      boolean _and = false;
-      if (!(child instanceof ErrorTreeAppendable)) {
-        _and = false;
-      } else {
-        boolean _notEquals = (!Objects.equal(child, parent));
-        _and = _notEquals;
-      }
-      if (_and) {
+      if (((child instanceof ErrorTreeAppendable) && (!Objects.equal(child, parent)))) {
         child.append(" */");
       }
       _xblockexpression = parent;
@@ -184,16 +176,7 @@ public class ErrorSafeExtensions {
   }
   
   public void serializeSafely(final JvmTypeReference typeRef, final String surrogateType, final ITreeAppendable appendable) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(typeRef, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      JvmType _type = typeRef.getType();
-      boolean _equals_1 = Objects.equal(_type, null);
-      _or = _equals_1;
-    }
-    if (_or) {
+    if ((Objects.equal(typeRef, null) || Objects.equal(typeRef.getType(), null))) {
       boolean _matched = false;
       if (typeRef instanceof JvmSpecializedTypeReference) {
         _matched=true;
@@ -243,32 +226,23 @@ public class ErrorSafeExtensions {
   }
   
   public void serializeSafely(final JvmAnnotationReference annotationRef, final ITreeAppendable appendable, final Procedure1<? super ITreeAppendable> onSuccess) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(annotationRef, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      JvmAnnotationType _annotation = annotationRef.getAnnotation();
-      boolean _equals_1 = Objects.equal(_annotation, null);
-      _or = _equals_1;
-    }
-    if (_or) {
+    if ((Objects.equal(annotationRef, null) || Objects.equal(annotationRef.getAnnotation(), null))) {
       final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable);
       errorChild.append("annotation is \'null\'");
       this.closeErrorAppendable(appendable, errorChild);
     } else {
-      JvmAnnotationType _annotation_1 = annotationRef.getAnnotation();
-      boolean _eIsProxy = _annotation_1.eIsProxy();
+      JvmAnnotationType _annotation = annotationRef.getAnnotation();
+      boolean _eIsProxy = _annotation.eIsProxy();
       if (_eIsProxy) {
         final ITreeAppendable errorChild_1 = this.openErrorAppendable(appendable, appendable);
         appendable.append("@");
-        JvmAnnotationType _annotation_2 = annotationRef.getAnnotation();
-        appendable.append(_annotation_2);
+        JvmAnnotationType _annotation_1 = annotationRef.getAnnotation();
+        appendable.append(_annotation_1);
         this.closeErrorAppendable(appendable, errorChild_1);
       } else {
         appendable.append("@");
-        JvmAnnotationType _annotation_3 = annotationRef.getAnnotation();
-        appendable.append(_annotation_3);
+        JvmAnnotationType _annotation_2 = annotationRef.getAnnotation();
+        appendable.append(_annotation_2);
         onSuccess.apply(appendable);
       }
     }

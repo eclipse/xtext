@@ -17,10 +17,7 @@ import com.intellij.debugger.engine.SuspendContext;
 import com.intellij.debugger.engine.jdi.StackFrameProxy;
 import com.sun.jdi.Location;
 import com.sun.jdi.Method;
-import com.sun.jdi.ReferenceType;
-import com.sun.jdi.Type;
 import com.sun.jdi.request.StepRequest;
-import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.idea.debug.DebugProcessExtensions;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
@@ -52,16 +49,7 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
   @Override
   public boolean isApplicable(final SuspendContext context) {
     try {
-      boolean _or = false;
-      boolean _equals = Objects.equal(context, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        boolean _isXtextSourced = this.isXtextSourced(context);
-        boolean _not = (!_isXtextSourced);
-        _or = _not;
-      }
-      if (_or) {
+      if ((Objects.equal(context, null) || (!this.isXtextSourced(context)))) {
         return false;
       }
       final DebugProcess debugProcess = context.getDebugProcess();
@@ -102,33 +90,7 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
       boolean _notEquals = (!Objects.equal(location, null));
       if (_notEquals) {
         final Method method = location.method();
-        boolean _and = false;
-        boolean _and_1 = false;
-        boolean _and_2 = false;
-        boolean _notEquals_1 = (!Objects.equal(method, null));
-        if (!_notEquals_1) {
-          _and_2 = false;
-        } else {
-          boolean _isConstructor = method.isConstructor();
-          _and_2 = _isConstructor;
-        }
-        if (!_and_2) {
-          _and_1 = false;
-        } else {
-          List<Type> _argumentTypes = method.argumentTypes();
-          boolean _isEmpty = _argumentTypes.isEmpty();
-          _and_1 = _isEmpty;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          ReferenceType _declaringType = method.declaringType();
-          String _name = _declaringType.name();
-          int _indexOf = _name.indexOf("$");
-          boolean _greaterThan = (_indexOf > 0);
-          _and = _greaterThan;
-        }
-        if (_and) {
+        if (((((!Objects.equal(method, null)) && method.isConstructor()) && method.argumentTypes().isEmpty()) && (method.declaringType().name().indexOf("$") > 0))) {
           return true;
         }
       }

@@ -107,48 +107,21 @@ public class RichStringFormatter {
     }
     LineModel _model = impl.getModel();
     final List<Line> lines = _model.getLines();
-    boolean _and = false;
-    boolean _isEmpty = lines.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (!_not) {
-      _and = false;
-    } else {
-      Line _last = IterableExtensions.<Line>last(lines);
-      String _content = _last.getContent();
-      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_content);
-      _and = _isNullOrEmpty;
-    }
-    final boolean canIndent = _and;
+    final boolean canIndent = ((!lines.isEmpty()) && StringExtensions.isNullOrEmpty(IterableExtensions.<Line>last(lines).getContent()));
     for (final Line line : lines) {
       LineModel _model_1 = impl.getModel();
       int _rootIndentLenght = _model_1.getRootIndentLenght();
       boolean _greaterThan = (_rootIndentLenght > 0);
       if (_greaterThan) {
         int _xifexpression = (int) 0;
-        boolean _and_1 = false;
-        if (!canIndent) {
-          _and_1 = false;
-        } else {
-          Line _head = IterableExtensions.<Line>head(lines);
-          boolean _equals = Objects.equal(line, _head);
-          _and_1 = _equals;
-        }
-        if (_and_1) {
+        if ((canIndent && Objects.equal(line, IterableExtensions.<Line>head(lines)))) {
           _xifexpression = 1;
         } else {
           _xifexpression = 0;
         }
         final int increaseIndentationChange = _xifexpression;
         int _xifexpression_1 = (int) 0;
-        boolean _and_2 = false;
-        if (!canIndent) {
-          _and_2 = false;
-        } else {
-          Line _last_1 = IterableExtensions.<Line>last(lines);
-          boolean _equals_1 = Objects.equal(line, _last_1);
-          _and_2 = _equals_1;
-        }
-        if (_and_2) {
+        if ((canIndent && Objects.equal(line, IterableExtensions.<Line>last(lines)))) {
           _xifexpression_1 = 1;
         } else {
           _xifexpression_1 = 0;
@@ -184,9 +157,9 @@ public class RichStringFormatter {
           this.setNewLines(doc, nloffset, nllength, increaseIndentationChange, decraseIndentationChange, 1);
         }
         List<Chunk> _chunks = line.getChunks();
-        boolean _isEmpty_1 = _chunks.isEmpty();
-        boolean _not_1 = (!_isEmpty_1);
-        if (_not_1) {
+        boolean _isEmpty = _chunks.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
           final int offset = (nloffset + nllength);
           int _indentLength_1 = line.getIndentLength();
           LineModel _model_3 = impl.getModel();

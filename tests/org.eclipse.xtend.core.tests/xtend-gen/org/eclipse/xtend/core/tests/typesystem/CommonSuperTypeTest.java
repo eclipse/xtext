@@ -199,15 +199,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       if ((computedSuperType == null)) {
         return false;
       }
-      boolean _or = false;
-      boolean _isPrimitiveVoid = computedSuperType.isPrimitiveVoid();
-      if (_isPrimitiveVoid) {
-        _or = true;
-      } else {
-        boolean _isPrimitive = computedSuperType.isPrimitive();
-        _or = _isPrimitive;
-      }
-      _xblockexpression = _or;
+      _xblockexpression = (computedSuperType.isPrimitiveVoid() || computedSuperType.isPrimitive());
     }
     return _xblockexpression;
   }

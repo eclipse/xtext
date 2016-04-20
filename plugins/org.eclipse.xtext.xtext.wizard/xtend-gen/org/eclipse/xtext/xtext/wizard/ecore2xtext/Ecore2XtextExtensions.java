@@ -169,21 +169,7 @@ public class Ecore2XtextExtensions {
         final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
           @Override
           public Boolean apply(final EStructuralFeature f) {
-            boolean _and = false;
-            boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(f);
-            if (!_needsAssignment) {
-              _and = false;
-            } else {
-              boolean _or = false;
-              if (includeCrossRefs) {
-                _or = true;
-              } else {
-                boolean _isContainment = Ecore2XtextExtensions.isContainment(f);
-                _or = _isContainment;
-              }
-              _and = _or;
-            }
-            return Boolean.valueOf(_and);
+            return Boolean.valueOf((Ecore2XtextExtensions.needsAssignment(f) && (includeCrossRefs || Ecore2XtextExtensions.isContainment(f))));
           }
         };
         return IterableExtensions.<EStructuralFeature>filter(_eAllStructuralFeatures, _function);
@@ -270,15 +256,7 @@ public class Ecore2XtextExtensions {
     final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
       @Override
       public Boolean apply(final EStructuralFeature f) {
-        boolean _and = false;
-        boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(f);
-        if (!_needsAssignment) {
-          _and = false;
-        } else {
-          boolean _isPrefixBooleanFeature = Ecore2XtextExtensions.isPrefixBooleanFeature(f);
-          _and = _isPrefixBooleanFeature;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((Ecore2XtextExtensions.needsAssignment(f) && Ecore2XtextExtensions.isPrefixBooleanFeature(f)));
       }
     };
     return IterableExtensions.<EStructuralFeature>filter(_eAllStructuralFeatures, _function);
@@ -535,33 +513,7 @@ public class Ecore2XtextExtensions {
         final Function1<EAttribute, Boolean> _function = new Function1<EAttribute, Boolean>() {
           @Override
           public Boolean apply(final EAttribute a) {
-            boolean _and = false;
-            boolean _and_1 = false;
-            boolean _and_2 = false;
-            boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(a);
-            if (!_needsAssignment) {
-              _and_2 = false;
-            } else {
-              String _name = a.getName();
-              boolean _equals = Objects.equal(_name, "name");
-              _and_2 = _equals;
-            }
-            if (!_and_2) {
-              _and_1 = false;
-            } else {
-              EClassifier _eType = a.getEType();
-              String _name_1 = _eType.getName();
-              boolean _equals_1 = Objects.equal(_name_1, "EString");
-              _and_1 = _equals_1;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              boolean _isMany = a.isMany();
-              boolean _not = (!_isMany);
-              _and = _not;
-            }
-            return Boolean.valueOf(_and);
+            return Boolean.valueOf((((Ecore2XtextExtensions.needsAssignment(a) && Objects.equal(a.getName(), "name")) && Objects.equal(a.getEType().getName(), "EString")) && (!a.isMany())));
           }
         };
         _xifexpression = IterableExtensions.<EAttribute>findFirst(_eAllAttributes, _function);
@@ -576,79 +528,22 @@ public class Ecore2XtextExtensions {
     final Function1<EAttribute, Boolean> _function = new Function1<EAttribute, Boolean>() {
       @Override
       public Boolean apply(final EAttribute a) {
-        boolean _and = false;
-        boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(a);
-        if (!_needsAssignment) {
-          _and = false;
-        } else {
-          boolean _isID = a.isID();
-          _and = _isID;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((Ecore2XtextExtensions.needsAssignment(a) && a.isID()));
       }
     };
     return IterableExtensions.<EAttribute>findFirst(_eAllAttributes, _function);
   }
   
   public static boolean isBoolean(final EClassifier it) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    if (!(it instanceof EDataType)) {
-      _and_1 = false;
-    } else {
-      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("EBoolean", "EBooleanObject");
-      String _name = it.getName();
-      boolean _contains = _newArrayList.contains(_name);
-      _and_1 = _contains;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _isEcoreType = Ecore2XtextExtensions.isEcoreType(it);
-      _and = _isEcoreType;
-    }
-    return _and;
+    return (((it instanceof EDataType) && CollectionLiterals.<String>newArrayList("EBoolean", "EBooleanObject").contains(it.getName())) && Ecore2XtextExtensions.isEcoreType(it));
   }
   
   public static boolean isPrefixBooleanFeature(final EStructuralFeature it) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    EClassifier _eType = it.getEType();
-    boolean _isBoolean = Ecore2XtextExtensions.isBoolean(_eType);
-    if (!_isBoolean) {
-      _and_1 = false;
-    } else {
-      boolean _isMany = it.isMany();
-      boolean _not = (!_isMany);
-      _and_1 = _not;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      String _defaultValueLiteral = it.getDefaultValueLiteral();
-      boolean _notEquals = (!Objects.equal(_defaultValueLiteral, "true"));
-      _and = _notEquals;
-    }
-    return _and;
+    return ((Ecore2XtextExtensions.isBoolean(it.getEType()) && (!it.isMany())) && (!Objects.equal(it.getDefaultValueLiteral(), "true")));
   }
   
   public static boolean isString(final EClassifier it) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    if (!(it instanceof EDataType)) {
-      _and_1 = false;
-    } else {
-      String _name = it.getName();
-      boolean _equals = Objects.equal(_name, "EString");
-      _and_1 = _equals;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _isEcoreType = Ecore2XtextExtensions.isEcoreType(it);
-      _and = _isEcoreType;
-    }
-    return _and;
+    return (((it instanceof EDataType) && Objects.equal(it.getName(), "EString")) && Ecore2XtextExtensions.isEcoreType(it));
   }
   
   public static boolean isEcoreType(final EClassifier it) {
@@ -661,62 +556,12 @@ public class Ecore2XtextExtensions {
   }
   
   public static boolean isID(final EStructuralFeature it) {
-    boolean _and = false;
-    if (!(it instanceof EAttribute)) {
-      _and = false;
-    } else {
-      EAttribute _cast = EAttribute.class.cast(it);
-      boolean _isID = _cast.isID();
-      _and = _isID;
-    }
-    return _and;
+    return ((it instanceof EAttribute) && EAttribute.class.cast(it).isID());
   }
   
   public static boolean needsAssignment(final EStructuralFeature it) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _and_2 = false;
-    boolean _isDerived = it.isDerived();
-    boolean _not = (!_isDerived);
-    if (!_not) {
-      _and_2 = false;
-    } else {
-      boolean _isTransient = it.isTransient();
-      boolean _not_1 = (!_isTransient);
-      _and_2 = _not_1;
-    }
-    if (!_and_2) {
-      _and_1 = false;
-    } else {
-      boolean _and_3 = false;
-      if (!(it instanceof EReference)) {
-        _and_3 = false;
-      } else {
-        EReference _cast = EReference.class.cast(it);
-        boolean _isContainer = _cast.isContainer();
-        _and_3 = _isContainer;
-      }
-      boolean _not_2 = (!_and_3);
-      _and_1 = _not_2;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _and_4 = false;
-      EClassifier _eType = it.getEType();
-      if (!(_eType instanceof EDataType)) {
-        _and_4 = false;
-      } else {
-        EClassifier _eType_1 = it.getEType();
-        EDataType _cast_1 = EDataType.class.cast(_eType_1);
-        boolean _isSerializable = _cast_1.isSerializable();
-        boolean _not_3 = (!_isSerializable);
-        _and_4 = _not_3;
-      }
-      boolean _not_4 = (!_and_4);
-      _and = _not_4;
-    }
-    return _and;
+    return ((((!it.isDerived()) && (!it.isTransient())) && (!((it instanceof EReference) && EReference.class.cast(it).isContainer()))) && 
+      (!((it.getEType() instanceof EDataType) && (!EDataType.class.cast(it.getEType()).isSerializable()))));
   }
   
   public static boolean needsConcreteRule(final EClassifier eClassifier) {
@@ -724,17 +569,7 @@ public class Ecore2XtextExtensions {
     boolean _matched = false;
     if (eClassifier instanceof EClass) {
       _matched=true;
-      boolean _and = false;
-      boolean _isAbstract = ((EClass)eClassifier).isAbstract();
-      boolean _not = (!_isAbstract);
-      if (!_not) {
-        _and = false;
-      } else {
-        boolean _isInterface = ((EClass)eClassifier).isInterface();
-        boolean _not_1 = (!_isInterface);
-        _and = _not_1;
-      }
-      _switchResult = _and;
+      _switchResult = ((!((EClass)eClassifier).isAbstract()) && (!((EClass)eClassifier).isInterface()));
     }
     if (!_matched) {
       _switchResult = true;

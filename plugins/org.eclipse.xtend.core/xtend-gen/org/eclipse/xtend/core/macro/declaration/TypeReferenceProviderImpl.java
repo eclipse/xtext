@@ -172,29 +172,16 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     }
     if ((type instanceof JvmGenericType)) {
       final EList<JvmTypeParameter> list = ((JvmGenericType)type).getTypeParameters();
-      boolean _and = false;
-      EList<JvmTypeReference> _arguments_1 = reference.getArguments();
-      boolean _isEmpty = _arguments_1.isEmpty();
-      boolean _not = (!_isEmpty);
-      if (!_not) {
-        _and = false;
-      } else {
-        int _size = list.size();
-        EList<JvmTypeReference> _arguments_2 = reference.getArguments();
-        int _size_1 = _arguments_2.size();
-        boolean _notEquals = (_size != _size_1);
-        _and = _notEquals;
-      }
-      if (_and) {
+      if (((!reference.getArguments().isEmpty()) && (list.size() != reference.getArguments().size()))) {
         String _identifier = ((JvmGenericType)type).getIdentifier();
         String _plus = ("The type " + _identifier);
         String _plus_1 = (_plus + " expects ");
-        int _size_2 = list.size();
-        String _plus_2 = (_plus_1 + Integer.valueOf(_size_2));
+        int _size = list.size();
+        String _plus_2 = (_plus_1 + Integer.valueOf(_size));
         String _plus_3 = (_plus_2 + " type arguments, but was ");
-        EList<JvmTypeReference> _arguments_3 = reference.getArguments();
-        int _size_3 = _arguments_3.size();
-        String _plus_4 = (_plus_3 + Integer.valueOf(_size_3));
+        EList<JvmTypeReference> _arguments_1 = reference.getArguments();
+        int _size_1 = _arguments_1.size();
+        String _plus_4 = (_plus_3 + Integer.valueOf(_size_1));
         String _plus_5 = (_plus_4 + ". Either pass zero arguments (raw type) or the correct number.");
         throw new IllegalArgumentException(_plus_5);
       }

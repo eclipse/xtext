@@ -28,38 +28,14 @@ public class LanguageSpecificBetweenBracesHandler extends EnterBetweenBracesHand
     final Function1<BracePair, Boolean> _function = new Function1<BracePair, Boolean>() {
       @Override
       public Boolean apply(final BracePair it) {
-        boolean _and = false;
-        String _leftBrace = it.getLeftBrace();
-        int _length = _leftBrace.length();
-        boolean _equals = (_length == 1);
-        if (!_equals) {
-          _and = false;
-        } else {
-          String _rightBrace = it.getRightBrace();
-          int _length_1 = _rightBrace.length();
-          boolean _equals_1 = (_length_1 == 1);
-          _and = _equals_1;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((it.getLeftBrace().length() == 1) && (it.getRightBrace().length() == 1)));
       }
     };
     Iterable<BracePair> _filter = IterableExtensions.<BracePair>filter(_pairs, _function);
     final Function1<BracePair, Boolean> _function_1 = new Function1<BracePair, Boolean>() {
       @Override
       public Boolean apply(final BracePair it) {
-        boolean _and = false;
-        String _leftBrace = it.getLeftBrace();
-        char _charAt = _leftBrace.charAt(0);
-        boolean _equals = (_charAt == c1);
-        if (!_equals) {
-          _and = false;
-        } else {
-          String _rightBrace = it.getRightBrace();
-          char _charAt_1 = _rightBrace.charAt(0);
-          boolean _equals_1 = (_charAt_1 == c2);
-          _and = _equals_1;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((it.getLeftBrace().charAt(0) == c1) && (it.getRightBrace().charAt(0) == c2)));
       }
     };
     return IterableExtensions.<BracePair>exists(_filter, _function_1);

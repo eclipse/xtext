@@ -599,13 +599,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("import static ");
       {
-        boolean _or = false;
-        if (extension) {
-          _or = true;
-        } else {
-          _or = extension2;
-        }
-        if (_or) {
+        if ((extension || extension2)) {
           _builder_2.append("extension ");
         }
       }

@@ -65,26 +65,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class ASTFlattenerUtils {
   public boolean isDummyType(final AbstractTypeDeclaration it) {
     if ((it instanceof TypeDeclaration)) {
-      boolean _and = false;
-      boolean _and_1 = false;
-      SimpleName _name = ((TypeDeclaration)it).getName();
-      String _identifier = _name.getIdentifier();
-      boolean _equals = "MISSING".equals(_identifier);
-      if (!_equals) {
-        _and_1 = false;
-      } else {
-        boolean _isInterface = ((TypeDeclaration)it).isInterface();
-        boolean _not = (!_isInterface);
-        _and_1 = _not;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        int _modifiers = ((TypeDeclaration)it).getModifiers();
-        boolean _equals_1 = (_modifiers == 0);
-        _and = _equals_1;
-      }
-      return _and;
+      return (("MISSING".equals(((TypeDeclaration)it).getName().getIdentifier()) && (!((TypeDeclaration)it).isInterface())) && (((TypeDeclaration)it).getModifiers() == 0));
     }
     return false;
   }
@@ -176,39 +157,13 @@ public class ASTFlattenerUtils {
   }
   
   public boolean isNotSupportedInnerType(final TypeDeclaration it) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _isInterface = it.isInterface();
-    boolean _not = (!_isInterface);
-    if (!_not) {
-      _and_1 = false;
-    } else {
-      boolean _or = false;
-      ASTNode _parent = it.getParent();
-      if ((_parent instanceof TypeDeclaration)) {
-        _or = true;
-      } else {
-        ASTNode _parent_1 = it.getParent();
-        _or = (_parent_1 instanceof Block);
-      }
-      _and_1 = _or;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      List _modifiers = it.modifiers();
-      Iterable<Modifier> _filter = Iterables.<Modifier>filter(_modifiers, Modifier.class);
-      final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
+    return (((!it.isInterface()) && ((it.getParent() instanceof TypeDeclaration) || (it.getParent() instanceof Block))) && 
+      (!IterableExtensions.<Modifier>exists(Iterables.<Modifier>filter(it.modifiers(), Modifier.class), new Function1<Modifier, Boolean>() {
         @Override
         public Boolean apply(final Modifier it) {
           return Boolean.valueOf(it.isStatic());
         }
-      };
-      boolean _exists = IterableExtensions.<Modifier>exists(_filter, _function);
-      boolean _not_1 = (!_exists);
-      _and = _not_1;
-    }
-    return _and;
+      })));
   }
   
   public boolean isNotSupportedInnerType(final TypeDeclarationStatement it) {
@@ -266,22 +221,7 @@ public class ASTFlattenerUtils {
     final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
       @Override
       public Boolean apply(final Modifier it) {
-        boolean _or = false;
-        boolean _or_1 = false;
-        boolean _isPublic = it.isPublic();
-        if (_isPublic) {
-          _or_1 = true;
-        } else {
-          boolean _isPrivate = it.isPrivate();
-          _or_1 = _isPrivate;
-        }
-        if (_or_1) {
-          _or = true;
-        } else {
-          boolean _isProtected = it.isProtected();
-          _or = _isProtected;
-        }
-        return Boolean.valueOf(_or);
+        return Boolean.valueOf(((it.isPublic() || it.isPrivate()) || it.isProtected()));
       }
     };
     Iterable<Modifier> _filter = IterableExtensions.<Modifier>filter(modifier, _function);
@@ -296,65 +236,21 @@ public class ASTFlattenerUtils {
   }
   
   public boolean shouldConvertName(final SimpleName it) {
-    boolean _or = false;
-    ASTNode _parent = it.getParent();
-    if ((_parent instanceof FieldAccess)) {
-      _or = true;
-    } else {
-      boolean _and = false;
-      ASTNode _parent_1 = it.getParent();
-      if (!(_parent_1 instanceof VariableDeclarationFragment)) {
-        _and = false;
-      } else {
-        ASTNode _parent_2 = it.getParent();
-        ASTNode _parent_3 = _parent_2.getParent();
-        _and = (_parent_3 instanceof FieldDeclaration);
-      }
-      _or = _and;
-    }
-    return _or;
+    return ((it.getParent() instanceof FieldAccess) || ((it.getParent() instanceof VariableDeclarationFragment) && (it.getParent().getParent() instanceof FieldDeclaration)));
   }
   
   public boolean isLambdaCase(final ClassInstanceCreation creation) {
     final AnonymousClassDeclaration anonymousClazz = creation.getAnonymousClassDeclaration();
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(anonymousClazz, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
+    if (((!Objects.equal(anonymousClazz, null)) && (anonymousClazz.bodyDeclarations().size() == 1))) {
       List _bodyDeclarations = anonymousClazz.bodyDeclarations();
-      int _size = _bodyDeclarations.size();
-      boolean _equals = (_size == 1);
-      _and = _equals;
-    }
-    if (_and) {
-      List _bodyDeclarations_1 = anonymousClazz.bodyDeclarations();
-      final Object declaredMethod = _bodyDeclarations_1.get(0);
-      boolean _and_1 = false;
-      if (!(declaredMethod instanceof MethodDeclaration)) {
-        _and_1 = false;
-      } else {
-        Type _type = creation.getType();
-        ITypeBinding _resolveBinding = _type.resolveBinding();
-        boolean _notEquals_1 = (!Objects.equal(_resolveBinding, null));
-        _and_1 = _notEquals_1;
-      }
-      if (_and_1) {
+      final Object declaredMethod = _bodyDeclarations.get(0);
+      if (((declaredMethod instanceof MethodDeclaration) && (!Objects.equal(creation.getType().resolveBinding(), null)))) {
         final IMethodBinding methodBinding = ((MethodDeclaration) declaredMethod).resolveBinding();
-        boolean _notEquals_2 = (!Objects.equal(methodBinding, null));
-        if (_notEquals_2) {
+        boolean _notEquals = (!Objects.equal(methodBinding, null));
+        if (_notEquals) {
           ITypeBinding _declaringClass = methodBinding.getDeclaringClass();
           final IMethodBinding overrides = this.findOverride(methodBinding, _declaringClass, true);
-          boolean _and_2 = false;
-          boolean _notEquals_3 = (!Objects.equal(overrides, null));
-          if (!_notEquals_3) {
-            _and_2 = false;
-          } else {
-            int _modifiers = overrides.getModifiers();
-            boolean _isAbstract = Modifier.isAbstract(_modifiers);
-            _and_2 = _isAbstract;
-          }
-          return _and_2;
+          return ((!Objects.equal(overrides, null)) && Modifier.isAbstract(overrides.getModifiers()));
         }
       }
     }
@@ -362,24 +258,7 @@ public class ASTFlattenerUtils {
   }
   
   public boolean needsReturnValue(final ASTNode node) {
-    boolean _and = false;
-    ASTNode _parent = node.getParent();
-    boolean _notEquals = (!Objects.equal(_parent, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      ASTNode _parent_1 = node.getParent();
-      boolean _not = (!(_parent_1 instanceof Statement));
-      if (_not) {
-        _or = true;
-      } else {
-        ASTNode _parent_2 = node.getParent();
-        _or = (_parent_2 instanceof ReturnStatement);
-      }
-      _and = _or;
-    }
-    return _and;
+    return ((!Objects.equal(node.getParent(), null)) && ((!(node.getParent() instanceof Statement)) || (node.getParent() instanceof ReturnStatement)));
   }
   
   public boolean isConstantArrayIndex(final Expression node) {
@@ -391,44 +270,17 @@ public class ASTFlattenerUtils {
     boolean _notEquals = (!Objects.equal(parentFieldDecl, null));
     if (_notEquals) {
       final TypeDeclaration typeDeclr = this.<TypeDeclaration>findParentOfType(parentFieldDecl, TypeDeclaration.class);
-      boolean _or = false;
-      boolean _isInterface = typeDeclr.isInterface();
-      if (_isInterface) {
-        _or = true;
-      } else {
-        boolean _and = false;
-        List _modifiers = parentFieldDecl.modifiers();
-        boolean _isFinal = this.isFinal(_modifiers);
-        if (!_isFinal) {
-          _and = false;
-        } else {
-          List _modifiers_1 = parentFieldDecl.modifiers();
-          boolean _isStatic = this.isStatic(_modifiers_1);
-          _and = _isStatic;
-        }
-        _or = _and;
-      }
-      if (_or) {
+      if ((typeDeclr.isInterface() || (this.isFinal(parentFieldDecl.modifiers()) && this.isStatic(parentFieldDecl.modifiers())))) {
         return false;
       }
     }
     final Iterable<StringLiteral> nodes = this.collectCompatibleNodes(node);
-    boolean _and_1 = false;
-    boolean _isEmpty = IterableExtensions.isEmpty(nodes);
-    boolean _not = (!_isEmpty);
-    if (!_not) {
-      _and_1 = false;
-    } else {
-      final Function1<StringLiteral, Boolean> _function = new Function1<StringLiteral, Boolean>() {
-        @Override
-        public Boolean apply(final StringLiteral it) {
-          return Boolean.valueOf(ASTFlattenerUtils.this.canTranslate(it));
-        }
-      };
-      boolean _forall = IterableExtensions.<StringLiteral>forall(nodes, _function);
-      _and_1 = _forall;
-    }
-    return _and_1;
+    return ((!IterableExtensions.isEmpty(nodes)) && IterableExtensions.<StringLiteral>forall(nodes, new Function1<StringLiteral, Boolean>() {
+      @Override
+      public Boolean apply(final StringLiteral it) {
+        return Boolean.valueOf(ASTFlattenerUtils.this.canTranslate(it));
+      }
+    }));
   }
   
   public <T extends ASTNode> T findParentOfType(final ASTNode someNode, final Class<T> parentType) {
@@ -482,22 +334,7 @@ public class ASTFlattenerUtils {
   
   private boolean canTranslate(final StringLiteral literal) {
     final String value = literal.getEscapedValue();
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _contains = value.contains("«");
-    if (_contains) {
-      _or_1 = true;
-    } else {
-      boolean _contains_1 = value.contains("»");
-      _or_1 = _contains_1;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      boolean _contains_2 = value.contains("\'\'\'");
-      _or = _contains_2;
-    }
-    return (!_or);
+    return (!((value.contains("«") || value.contains("»")) || value.contains("\'\'\'")));
   }
   
   public Type findDeclaredType(final SimpleName simpleName) {
@@ -656,18 +493,7 @@ public class ASTFlattenerUtils {
           final IBinding binding = ((Name)name).resolveBinding();
           if ((binding instanceof IVariableBinding)) {
             final IVariableBinding declBinding = varDecl.resolveBinding();
-            boolean _and = false;
-            SimpleName _name = varDecl.getName();
-            String _identifier = _name.getIdentifier();
-            String _simpleName = ASTFlattenerUtils.this.toSimpleName(((Name)name));
-            boolean _equals = _identifier.equals(_simpleName);
-            if (!_equals) {
-              _and = false;
-            } else {
-              boolean _equals_1 = ((IVariableBinding)binding).equals(declBinding);
-              _and = _equals_1;
-            }
-            return Boolean.valueOf(_and);
+            return Boolean.valueOf((varDecl.getName().getIdentifier().equals(ASTFlattenerUtils.this.toSimpleName(((Name)name))) && ((IVariableBinding)binding).equals(declBinding)));
           }
         }
         return Boolean.valueOf(false);
@@ -702,17 +528,7 @@ public class ASTFlattenerUtils {
           }
         }
         if ((simpleName instanceof SimpleName)) {
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(simpleName, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            String _identifier = nameToLookFor.getIdentifier();
-            String _identifier_1 = ((SimpleName)simpleName).getIdentifier();
-            boolean _equals = _identifier.equals(_identifier_1);
-            _and = _equals;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((!Objects.equal(simpleName, null)) && nameToLookFor.getIdentifier().equals(((SimpleName)simpleName).getIdentifier())));
         }
         return Boolean.valueOf(false);
       }
@@ -753,25 +569,8 @@ public class ASTFlattenerUtils {
   
   public boolean needPrimitiveCast(final Type type) {
     if ((type instanceof PrimitiveType)) {
-      boolean _or = false;
-      boolean _or_1 = false;
-      PrimitiveType.Code _primitiveTypeCode = ((PrimitiveType)type).getPrimitiveTypeCode();
-      boolean _equals = Objects.equal(_primitiveTypeCode, PrimitiveType.CHAR);
-      if (_equals) {
-        _or_1 = true;
-      } else {
-        PrimitiveType.Code _primitiveTypeCode_1 = ((PrimitiveType)type).getPrimitiveTypeCode();
-        boolean _equals_1 = Objects.equal(_primitiveTypeCode_1, PrimitiveType.BYTE);
-        _or_1 = _equals_1;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        PrimitiveType.Code _primitiveTypeCode_2 = ((PrimitiveType)type).getPrimitiveTypeCode();
-        boolean _equals_2 = Objects.equal(_primitiveTypeCode_2, PrimitiveType.SHORT);
-        _or = _equals_2;
-      }
-      return _or;
+      return ((Objects.equal(((PrimitiveType)type).getPrimitiveTypeCode(), PrimitiveType.CHAR) || Objects.equal(((PrimitiveType)type).getPrimitiveTypeCode(), PrimitiveType.BYTE)) || 
+        Objects.equal(((PrimitiveType)type).getPrimitiveTypeCode(), PrimitiveType.SHORT));
     }
     return false;
   }

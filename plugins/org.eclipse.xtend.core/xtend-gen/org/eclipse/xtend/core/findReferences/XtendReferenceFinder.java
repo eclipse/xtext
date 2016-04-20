@@ -35,7 +35,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -111,32 +110,14 @@ public class XtendReferenceFinder extends ReferenceFinder {
     super.findLocalReferencesFromElement(targetURIs, sourceCandidate, localResource, acceptor);
     boolean _matched_1 = false;
     if (sourceCandidate instanceof XImportDeclaration) {
-      boolean _and = false;
-      boolean _isStatic = ((XImportDeclaration)sourceCandidate).isStatic();
-      if (!_isStatic) {
-        _and = false;
-      } else {
-        boolean _isWildcard = ((XImportDeclaration)sourceCandidate).isWildcard();
-        boolean _not = (!_isWildcard);
-        _and = _not;
-      }
-      if (_and) {
+      if ((((XImportDeclaration)sourceCandidate).isStatic() && (!((XImportDeclaration)sourceCandidate).isWildcard()))) {
         _matched_1=true;
         this.addReferenceToFeatureFromStaticImport(((XImportDeclaration)sourceCandidate), targetURIs, acceptor);
       }
     }
     if (!_matched_1) {
       if (sourceCandidate instanceof XFeatureCall) {
-        boolean _and = false;
-        XExpression _actualReceiver = ((XFeatureCall)sourceCandidate).getActualReceiver();
-        boolean _equals = Objects.equal(_actualReceiver, null);
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _isStatic = ((XFeatureCall)sourceCandidate).isStatic();
-          _and = _isStatic;
-        }
-        if (_and) {
+        if ((Objects.equal(((XFeatureCall)sourceCandidate).getActualReceiver(), null) && ((XFeatureCall)sourceCandidate).isStatic())) {
           _matched_1=true;
           this.addReferenceToTypeFromStaticImport(((XAbstractFeatureCall)sourceCandidate), targetURIs, acceptor);
         }
@@ -145,16 +126,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     if (!_matched_1) {
       if (sourceCandidate instanceof XMemberFeatureCall) {
         _matched_1=true;
-        boolean _and = false;
-        boolean _isStatic = ((XMemberFeatureCall)sourceCandidate).isStatic();
-        if (!_isStatic) {
-          _and = false;
-        } else {
-          boolean _isStaticWithDeclaringType = ((XMemberFeatureCall)sourceCandidate).isStaticWithDeclaringType();
-          boolean _not = (!_isStaticWithDeclaringType);
-          _and = _not;
-        }
-        if (_and) {
+        if ((((XMemberFeatureCall)sourceCandidate).isStatic() && (!((XMemberFeatureCall)sourceCandidate).isStaticWithDeclaringType()))) {
           this.addReferenceToTypeFromStaticImport(((XAbstractFeatureCall)sourceCandidate), targetURIs, acceptor);
         }
       }

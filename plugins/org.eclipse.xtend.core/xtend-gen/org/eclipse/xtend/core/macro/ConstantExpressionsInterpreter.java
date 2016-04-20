@@ -110,15 +110,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         EList<JvmMember> _members = type.getMembers();
         for (final JvmMember member : _members) {
           if ((member instanceof JvmField)) {
-            boolean _and = false;
-            boolean _isFinal = ((JvmField)member).isFinal();
-            if (!_isFinal) {
-              _and = false;
-            } else {
-              boolean _isStatic = ((JvmField)member).isStatic();
-              _and = _isStatic;
-            }
-            if (_and) {
+            if ((((JvmField)member).isFinal() && ((JvmField)member).isStatic())) {
               String _simpleName = ((JvmField)member).getSimpleName();
               final JvmIdentifiableElement existing = result.put(_simpleName, member);
               boolean _notEquals = (!Objects.equal(existing, null));
@@ -137,15 +129,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
               _type=superType.getType();
             }
             final JvmType rawSuperType = _type;
-            boolean _and_1 = false;
-            if (!(rawSuperType instanceof JvmDeclaredType)) {
-              _and_1 = false;
-            } else {
-              boolean _eIsProxy = rawSuperType.eIsProxy();
-              boolean _not = (!_eIsProxy);
-              _and_1 = _not;
-            }
-            if (_and_1) {
+            if (((rawSuperType instanceof JvmDeclaredType) && (!rawSuperType.eIsProxy()))) {
               this.collect(((JvmDeclaredType) rawSuperType), seen, result);
             }
           }
@@ -563,20 +547,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   }
   
   private boolean isEnumExpectationInAnnotationValue(final XFeatureCall it, final JvmType expectedRawType) {
-    boolean _or = false;
-    if ((expectedRawType instanceof JvmEnumerationType)) {
-      _or = true;
-    } else {
-      boolean _and = false;
-      if (!(expectedRawType instanceof JvmArrayType)) {
-        _and = false;
-      } else {
-        JvmComponentType _componentType = ((JvmArrayType) expectedRawType).getComponentType();
-        _and = (_componentType instanceof JvmEnumerationType);
-      }
-      _or = _and;
-    }
-    if (_or) {
+    if (((expectedRawType instanceof JvmEnumerationType) || ((expectedRawType instanceof JvmArrayType) && (((JvmArrayType) expectedRawType).getComponentType() instanceof JvmEnumerationType)))) {
       EObject container = it.eContainer();
       if ((container instanceof XAnnotationElementValuePair)) {
         return true;
@@ -717,15 +688,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   }
   
   protected Object evaluateField(final XAbstractFeatureCall call, final JvmField field, final Context context) {
-    boolean _or = false;
-    boolean _isSetConstant = field.isSetConstant();
-    if (_isSetConstant) {
-      _or = true;
-    } else {
-      Resource _eResource = field.eResource();
-      _or = (_eResource instanceof TypeResource);
-    }
-    if (_or) {
+    if ((field.isSetConstant() || (field.eResource() instanceof TypeResource))) {
       boolean _isConstant = field.isConstant();
       if (_isConstant) {
         return field.getConstantValue();

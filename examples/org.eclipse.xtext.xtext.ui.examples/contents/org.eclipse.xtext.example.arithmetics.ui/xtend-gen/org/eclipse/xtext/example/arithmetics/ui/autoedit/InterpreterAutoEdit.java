@@ -95,19 +95,7 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
       for (final Evaluation evaluation : _filter_1) {
         {
           ICompositeNode node = NodeModelUtils.getNode(evaluation);
-          boolean _and = false;
-          int _offset = node.getOffset();
-          boolean _lessEqualsThan = (_offset <= command.offset);
-          if (!_lessEqualsThan) {
-            _and = false;
-          } else {
-            int _offset_1 = node.getOffset();
-            int _length = node.getLength();
-            int _plus = (_offset_1 + _length);
-            boolean _greaterEqualsThan = (_plus >= command.offset);
-            _and = _greaterEqualsThan;
-          }
-          if (_and) {
+          if (((node.getOffset() <= command.offset) && ((node.getOffset() + node.getLength()) >= command.offset))) {
             return evaluation;
           }
         }

@@ -26,8 +26,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -53,25 +51,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     final Function1<JvmAnnotationValue, Boolean> _function = new Function1<JvmAnnotationValue, Boolean>() {
       @Override
       public Boolean apply(final JvmAnnotationValue it) {
-        boolean _or = false;
-        JvmOperation _operation = it.getOperation();
-        boolean _equals = Objects.equal(_operation, op);
-        if (_equals) {
-          _or = true;
-        } else {
-          boolean _and = false;
-          JvmOperation _operation_1 = it.getOperation();
-          boolean _equals_1 = Objects.equal(_operation_1, null);
-          if (!_equals_1) {
-            _and = false;
-          } else {
-            String _simpleName = op.getSimpleName();
-            boolean _equals_2 = Objects.equal(_simpleName, "value");
-            _and = _equals_2;
-          }
-          _or = _and;
-        }
-        return Boolean.valueOf(_or);
+        return Boolean.valueOf((Objects.equal(it.getOperation(), op) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value"))));
       }
     };
     final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
@@ -81,17 +61,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       EList<EObject> _values_1 = ((JvmCustomAnnotationValue)annotationValue).getValues();
       EObject _head = IterableExtensions.<EObject>head(_values_1);
       final XExpression expression = ((XExpression) _head);
-      boolean _and = false;
-      if (!(expression != null)) {
-        _and = false;
-      } else {
+      if (((expression != null) && this.getCompilationUnit().isBelongedToCompilationUnit(expression))) {
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        boolean _isBelongedToCompilationUnit = _compilationUnit.isBelongedToCompilationUnit(expression);
-        _and = _isBelongedToCompilationUnit;
-      }
-      if (_and) {
-        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-        return _compilationUnit_1.toExpression(expression);
+        return _compilationUnit.toExpression(expression);
       }
     }
     return null;
@@ -106,50 +78,21 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       final Function1<JvmAnnotationValue, Boolean> _function = new Function1<JvmAnnotationValue, Boolean>() {
         @Override
         public Boolean apply(final JvmAnnotationValue it) {
-          boolean _or = false;
-          JvmOperation _operation = it.getOperation();
-          boolean _equals = Objects.equal(_operation, op);
-          if (_equals) {
-            _or = true;
-          } else {
-            boolean _and = false;
-            JvmOperation _operation_1 = it.getOperation();
-            boolean _equals_1 = Objects.equal(_operation_1, null);
-            if (!_equals_1) {
-              _and = false;
-            } else {
-              String _simpleName = op.getSimpleName();
-              boolean _equals_2 = Objects.equal(_simpleName, "value");
-              _and = _equals_2;
-            }
-            _or = _and;
-          }
-          return Boolean.valueOf(_or);
+          return Boolean.valueOf((Objects.equal(it.getOperation(), op) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value"))));
         }
       };
       final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(op, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
+      final boolean isArrayType = ((!Objects.equal(op, null)) && this.getCompilationUnit().getTypeReferences().isArray(op.getReturnType()));
+      boolean _notEquals = (!Objects.equal(annotationValue, null));
+      if (_notEquals) {
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
-        JvmTypeReference _returnType = op.getReturnType();
-        boolean _isArray = _typeReferences.isArray(_returnType);
-        _and = _isArray;
-      }
-      final boolean isArrayType = _and;
-      boolean _notEquals_1 = (!Objects.equal(annotationValue, null));
-      if (_notEquals_1) {
-        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-        return _compilationUnit_1.translateAnnotationValue(annotationValue, isArrayType);
+        return _compilationUnit.translateAnnotationValue(annotationValue, isArrayType);
       }
     } catch (final Throwable _t) {
       if (_t instanceof ConstantExpressionEvaluationException) {
         final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;
-        CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
-        ProblemSupportImpl _problemSupport = _compilationUnit_2.getProblemSupport();
+        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+        ProblemSupportImpl _problemSupport = _compilationUnit_1.getProblemSupport();
         String _message = e.getMessage();
         _problemSupport.addError(this, _message);
       } else {

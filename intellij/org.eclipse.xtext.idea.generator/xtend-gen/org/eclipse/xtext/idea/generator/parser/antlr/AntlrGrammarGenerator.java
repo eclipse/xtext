@@ -54,47 +54,31 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append("superClass=AbstractInternalAntlrParser;");
     _builder.newLine();
     {
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _isBacktrack = options.isBacktrack();
-      if (_isBacktrack) {
-        _or_1 = true;
-      } else {
-        boolean _isMemoize = options.isMemoize();
-        _or_1 = _isMemoize;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        int _k = options.getK();
-        boolean _greaterEqualsThan = (_k >= 0);
-        _or = _greaterEqualsThan;
-      }
-      if (_or) {
+      if (((options.isBacktrack() || options.isMemoize()) || (options.getK() >= 0))) {
         {
-          boolean _isBacktrack_1 = options.isBacktrack();
-          if (_isBacktrack_1) {
+          boolean _isBacktrack = options.isBacktrack();
+          if (_isBacktrack) {
             _builder.append("\t");
             _builder.append("backtrack=true;");
             _builder.newLine();
           }
         }
         {
-          boolean _isMemoize_1 = options.isMemoize();
-          if (_isMemoize_1) {
+          boolean _isMemoize = options.isMemoize();
+          if (_isMemoize) {
             _builder.append("\t");
             _builder.append("memoize=true;");
             _builder.newLine();
           }
         }
         {
-          int _k_1 = options.getK();
-          boolean _greaterEqualsThan_1 = (_k_1 >= 0);
-          if (_greaterEqualsThan_1) {
+          int _k = options.getK();
+          boolean _greaterEqualsThan = (_k >= 0);
+          if (_greaterEqualsThan) {
             _builder.append("\t");
             _builder.append("memoize=");
-            int _k_2 = options.getK();
-            _builder.append(_k_2, "\t");
+            int _k_1 = options.getK();
+            _builder.append(_k_1, "\t");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           }
@@ -136,26 +120,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append("import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;");
     _builder.newLine();
     {
-      boolean _and = false;
-      List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
-      final Function1<ParserRule, List<EObject>> _function = new Function1<ParserRule, List<EObject>>() {
+      if (((!IterableExtensions.isEmpty(Iterables.<UnorderedGroup>filter(Iterables.<EObject>concat(ListExtensions.<ParserRule, List<EObject>>map(GrammarUtil.allParserRules(it), new Function1<ParserRule, List<EObject>>() {
         @Override
         public List<EObject> apply(final ParserRule it) {
           return EcoreUtil2.eAllContentsAsList(it);
         }
-      };
-      List<List<EObject>> _map = ListExtensions.<ParserRule, List<EObject>>map(_allParserRules, _function);
-      Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
-      Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_flatten, UnorderedGroup.class);
-      boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
-      boolean _not_1 = (!_isEmpty_1);
-      if (!_not_1) {
-        _and = false;
-      } else {
-        boolean _isBacktrack = options.isBacktrack();
-        _and = _isBacktrack;
-      }
-      if (_and) {
+      })), UnorderedGroup.class))) && options.isBacktrack())) {
         _builder.append("import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;");
         _builder.newLine();
       }

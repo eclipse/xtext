@@ -107,29 +107,7 @@ public class IdeCrossrefProposalProvider {
       {
         final String nameSegment = name.getSegment(i);
         final String prefixSegment = prefix.getSegment(i);
-        boolean _or = false;
-        boolean _and = false;
-        if (!(i < (count - 1))) {
-          _and = false;
-        } else {
-          boolean _notEquals = (!Objects.equal(nameSegment, prefixSegment));
-          _and = _notEquals;
-        }
-        if (_and) {
-          _or = true;
-        } else {
-          boolean _and_1 = false;
-          if (!(i == (count - 1))) {
-            _and_1 = false;
-          } else {
-            int _length = prefixSegment.length();
-            boolean _regionMatches = nameSegment.regionMatches(true, 0, prefixSegment, 0, _length);
-            boolean _not = (!_regionMatches);
-            _and_1 = _not;
-          }
-          _or = _and_1;
-        }
-        if (_or) {
+        if ((((i < (count - 1)) && (!Objects.equal(nameSegment, prefixSegment))) || ((i == (count - 1)) && (!nameSegment.regionMatches(true, 0, prefixSegment, 0, prefixSegment.length()))))) {
           return false;
         }
       }

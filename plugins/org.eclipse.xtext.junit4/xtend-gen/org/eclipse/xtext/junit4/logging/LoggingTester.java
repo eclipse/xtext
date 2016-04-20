@@ -68,28 +68,12 @@ public class LoggingTester {
       final Function1<LoggingTester.LogEntry, Boolean> _function = new Function1<LoggingTester.LogEntry, Boolean>() {
         @Override
         public Boolean apply(final LoggingTester.LogEntry log) {
-          boolean _and = false;
-          boolean _or = false;
-          boolean _equals = Objects.equal(level, null);
-          if (_equals) {
-            _or = true;
-          } else {
-            boolean _equals_1 = Objects.equal(log.level, level);
-            _or = _equals_1;
-          }
-          if (!_or) {
-            _and = false;
-          } else {
-            final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-              @Override
-              public Boolean apply(final String it) {
-                return Boolean.valueOf(log.message.contains(it));
-              }
-            };
-            boolean _forall = IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(messageParts)), _function);
-            _and = _forall;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((Objects.equal(level, null) || Objects.equal(log.level, level)) && IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(messageParts)), new Function1<String, Boolean>() {
+            @Override
+            public Boolean apply(final String it) {
+              return Boolean.valueOf(log.message.contains(it));
+            }
+          })));
         }
       };
       final Iterable<LoggingTester.LogEntry> passed = IterableExtensions.<LoggingTester.LogEntry>filter(this.logEntries, _function);

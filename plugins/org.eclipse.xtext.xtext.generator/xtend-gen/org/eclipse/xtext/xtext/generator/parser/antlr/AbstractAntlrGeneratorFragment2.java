@@ -131,15 +131,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
   protected boolean hasProductionRules(final Grammar grammar) {
     EList<AbstractRule> _rules = grammar.getRules();
     AbstractRule firstRule = _rules.get(0);
-    boolean _and = false;
-    if (!(firstRule instanceof ParserRule)) {
-      _and = false;
-    } else {
-      boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((ParserRule) firstRule));
-      boolean _not = (!_isDatatypeRule);
-      _and = _not;
-    }
-    return _and;
+    return ((firstRule instanceof ParserRule) && (!GrammarUtil.isDatatypeRule(((ParserRule) firstRule))));
   }
   
   protected void splitLexerClassFile(final IXtextGeneratorFileSystemAccess fsa, final TypeReference lexer) {
@@ -171,15 +163,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
   }
   
   protected void simplifyUnorderedGroupPredicatesIfRequired(final Grammar grammar, final IXtextGeneratorFileSystemAccess fsa, final TypeReference parser) {
-    boolean _or = false;
-    boolean _containsUnorderedGroup = this.containsUnorderedGroup(grammar);
-    if (_containsUnorderedGroup) {
-      _or = true;
-    } else {
-      boolean _hasParameterizedRules = this.hasParameterizedRules(grammar);
-      _or = _hasParameterizedRules;
-    }
-    if (_or) {
+    if ((this.containsUnorderedGroup(grammar) || this.hasParameterizedRules(grammar))) {
       this.simplifyUnorderedGroupPredicates(fsa, parser);
     }
   }
@@ -318,25 +302,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
           {
             Map.Entry<Integer, String> _next = entries.next();
             final String value = _next.getValue();
-            boolean _and = false;
-            boolean _and_1 = false;
-            boolean _isKeywordRule = helper.isKeywordRule(value);
-            boolean _not = (!_isKeywordRule);
-            if (!_not) {
-              _and_1 = false;
-            } else {
-              boolean _startsWith = value.startsWith("RULE_");
-              boolean _not_1 = (!_startsWith);
-              _and_1 = _not_1;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              boolean _startsWith_1 = value.startsWith("SUPER_");
-              boolean _not_2 = (!_startsWith_1);
-              _and = _not_2;
-            }
-            if (_and) {
+            if ((((!helper.isKeywordRule(value)) && (!value.startsWith("RULE_"))) && (!value.startsWith("SUPER_")))) {
               entries.remove();
             }
           }

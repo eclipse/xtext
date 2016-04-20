@@ -31,17 +31,7 @@ public class XbaseContentProposalPriorities extends ContentProposalPriorities {
       final Object desc = _additionalData;
       boolean _matched = false;
       if (desc instanceof SimpleIdentifiableElementDescription) {
-        boolean _and = false;
-        String _replacementString = ((ConfigurableCompletionProposal)proposal).getReplacementString();
-        boolean _notEquals = (!Objects.equal(_replacementString, "this"));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          String _replacementString_1 = ((ConfigurableCompletionProposal)proposal).getReplacementString();
-          boolean _notEquals_1 = (!Objects.equal(_replacementString_1, "super"));
-          _and = _notEquals_1;
-        }
-        if (_and) {
+        if (((!Objects.equal(((ConfigurableCompletionProposal)proposal).getReplacementString(), "this")) && (!Objects.equal(((ConfigurableCompletionProposal)proposal).getReplacementString(), "super")))) {
           _matched=true;
           this.adjustPriority(proposal, prefix, 570);
           return;

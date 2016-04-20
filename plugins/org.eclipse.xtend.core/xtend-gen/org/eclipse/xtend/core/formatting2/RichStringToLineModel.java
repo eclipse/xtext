@@ -290,39 +290,17 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   public void acceptSemanticText(final CharSequence text, final RichStringLiteral origin) {
     super.acceptSemanticText(text, origin);
     if ((!this.content)) {
-      boolean _and = false;
-      int _length = text.length();
-      boolean _greaterThan = (_length > 0);
-      if (!_greaterThan) {
-        _and = false;
-      } else {
-        int _length_1 = text.length();
-        int _minus = (_length_1 - 1);
-        IntegerRange _upTo = new IntegerRange(0, _minus);
-        final Function2<Boolean, Integer, Boolean> _function = new Function2<Boolean, Integer, Boolean>() {
-          @Override
-          public Boolean apply(final Boolean v, final Integer i) {
-            boolean _or = false;
-            if ((v).booleanValue()) {
-              _or = true;
-            } else {
-              char _charAt = text.charAt((i).intValue());
-              boolean _isWhitespace = Character.isWhitespace(_charAt);
-              boolean _not = (!_isWhitespace);
-              _or = _not;
-            }
-            return Boolean.valueOf(_or);
-          }
-        };
-        Boolean _fold = IterableExtensions.<Integer, Boolean>fold(_upTo, Boolean.valueOf(false), _function);
-        _and = (_fold).booleanValue();
-      }
-      if (_and) {
+      if (((text.length() > 0) && (IterableExtensions.<Integer, Boolean>fold(new IntegerRange(0, (text.length() - 1)), Boolean.valueOf(false), new Function2<Boolean, Integer, Boolean>() {
+        @Override
+        public Boolean apply(final Boolean v, final Integer i) {
+          return Boolean.valueOf(((v).booleanValue() || (!Character.isWhitespace(text.charAt((i).intValue())))));
+        }
+      })).booleanValue())) {
         this.startContent();
       }
     }
-    int _length_2 = text.length();
-    int _plus = (this.offset + _length_2);
+    int _length = text.length();
+    int _plus = (this.offset + _length);
     this.offset = _plus;
   }
   

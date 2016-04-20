@@ -98,49 +98,11 @@ public class EqualAmbiguousTransitions implements Comparable<EqualAmbiguousTrans
   }
   
   private boolean isStart(final GrammarAlias.TokenAlias it) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    AbstractElement _token = it.getToken();
-    boolean _tripleEquals = (_token == null);
-    if (!_tripleEquals) {
-      _and_1 = false;
-    } else {
-      GrammarAlias.AbstractElementAlias _parent = it.getParent();
-      _and_1 = (_parent instanceof GrammarAlias.GroupAlias);
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      GrammarAlias.AbstractElementAlias _parent_1 = it.getParent();
-      List<GrammarAlias.AbstractElementAlias> _children = ((GrammarAlias.GroupAlias) _parent_1).getChildren();
-      GrammarAlias.AbstractElementAlias _head = IterableExtensions.<GrammarAlias.AbstractElementAlias>head(_children);
-      boolean _equals = Objects.equal(it, _head);
-      _and = _equals;
-    }
-    return _and;
+    return (((it.getToken() == null) && (it.getParent() instanceof GrammarAlias.GroupAlias)) && Objects.equal(it, IterableExtensions.<GrammarAlias.AbstractElementAlias>head(((GrammarAlias.GroupAlias) it.getParent()).getChildren())));
   }
   
   private boolean isStop(final GrammarAlias.TokenAlias it) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    AbstractElement _token = it.getToken();
-    boolean _tripleEquals = (_token == null);
-    if (!_tripleEquals) {
-      _and_1 = false;
-    } else {
-      GrammarAlias.AbstractElementAlias _parent = it.getParent();
-      _and_1 = (_parent instanceof GrammarAlias.GroupAlias);
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      GrammarAlias.AbstractElementAlias _parent_1 = it.getParent();
-      List<GrammarAlias.AbstractElementAlias> _children = ((GrammarAlias.GroupAlias) _parent_1).getChildren();
-      GrammarAlias.AbstractElementAlias _last = IterableExtensions.<GrammarAlias.AbstractElementAlias>last(_children);
-      boolean _equals = Objects.equal(it, _last);
-      _and = _equals;
-    }
-    return _and;
+    return (((it.getToken() == null) && (it.getParent() instanceof GrammarAlias.GroupAlias)) && Objects.equal(it, IterableExtensions.<GrammarAlias.AbstractElementAlias>last(((GrammarAlias.GroupAlias) it.getParent()).getChildren())));
   }
   
   public EqualAmbiguousTransitions(final String identifier, final GrammarAlias.AbstractElementAlias elementAlias) {

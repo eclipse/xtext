@@ -3,7 +3,6 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -210,17 +209,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
         if (_equals) {
           return type;
         }
-        boolean _and = false;
-        boolean _startsWith = qualifiedName.startsWith(name);
-        if (!_startsWith) {
-          _and = false;
-        } else {
-          int _length = name.length();
-          char _charAt = qualifiedName.charAt(_length);
-          boolean _equals_1 = (_charAt == dot);
-          _and = _equals_1;
-        }
-        if (_and) {
+        if ((qualifiedName.startsWith(name) && (qualifiedName.charAt(name.length()) == dot))) {
           Iterable<? extends T> _apply = subTypeProvider.apply(type);
           return this.<T>recursiveFindType(qualifiedName, _apply, qualifiedNameProvider, subTypeProvider);
         }
@@ -282,22 +271,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     XtendFile _xtendFile = this.compilationUnit.getXtendFile();
     IScope _scope = _scopeProvider.getScope(_xtendFile, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
     final IEObjectDescription result = _scope.getSingleElement(qualifiedName);
-    boolean _and = false;
-    boolean _and_1 = false;
-    if (!(result != null)) {
-      _and_1 = false;
-    } else {
-      EClass _eClass = result.getEClass();
-      boolean _isSuperTypeOf = TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(_eClass);
-      _and_1 = _isSuperTypeOf;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      Boolean _apply = filter.apply(result);
-      _and = (_apply).booleanValue();
-    }
-    if (_and) {
+    if ((((result != null) && TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(result.getEClass())) && (filter.apply(result)).booleanValue())) {
       EObject _eObjectOrProxy = result.getEObjectOrProxy();
       return this.compilationUnit.toType(((JvmType) _eObjectOrProxy));
     }

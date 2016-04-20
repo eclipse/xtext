@@ -25,17 +25,7 @@ public class XbaseIdeContentProposalPriorities extends IdeContentProposalPriorit
   public int getCrossRefPriority(final IEObjectDescription objectDesc, final ContentAssistEntry entry) {
     boolean _matched = false;
     if (objectDesc instanceof SimpleIdentifiableElementDescription) {
-      boolean _and = false;
-      String _proposal = entry.getProposal();
-      boolean _notEquals = (!Objects.equal(_proposal, "this"));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        String _proposal_1 = entry.getProposal();
-        boolean _notEquals_1 = (!Objects.equal(_proposal_1, "super"));
-        _and = _notEquals_1;
-      }
-      if (_and) {
+      if (((!Objects.equal(entry.getProposal(), "this")) && (!Objects.equal(entry.getProposal(), "super")))) {
         _matched=true;
         int _crossRefPriority = this.getCrossRefPriority();
         int _plus = (_crossRefPriority + 70);

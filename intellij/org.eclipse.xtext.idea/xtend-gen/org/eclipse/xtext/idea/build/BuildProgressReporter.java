@@ -55,15 +55,7 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   }
   
   public void clearProgress() {
-    boolean _or = false;
-    boolean _isUnitTestMode = this.isUnitTestMode();
-    if (_isUnitTestMode) {
-      _or = true;
-    } else {
-      boolean _isDisposed = this.project.isDisposed();
-      _or = _isDisposed;
-    }
-    if (_or) {
+    if ((this.isUnitTestMode() || this.project.isDisposed())) {
       return;
     }
     ProblemsView _problemsView = this.getProblemsView();
@@ -102,17 +94,7 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     final Function1<BuildEvent, Boolean> _function = new Function1<BuildEvent, Boolean>() {
       @Override
       public Boolean apply(final BuildEvent it) {
-        boolean _or = false;
-        BuildEvent.Type _type = it.getType();
-        boolean _equals = Objects.equal(_type, BuildEvent.Type.MODIFIED);
-        if (_equals) {
-          _or = true;
-        } else {
-          BuildEvent.Type _type_1 = it.getType();
-          boolean _equals_1 = Objects.equal(_type_1, BuildEvent.Type.DELETED);
-          _or = _equals_1;
-        }
-        return Boolean.valueOf(_or);
+        return Boolean.valueOf((Objects.equal(it.getType(), BuildEvent.Type.MODIFIED) || Objects.equal(it.getType(), BuildEvent.Type.DELETED)));
       }
     };
     Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(this.events, _function);
@@ -143,15 +125,7 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   }
   
   protected void reportIssue(final URI validated, final Issue issue) {
-    boolean _or = false;
-    boolean _isUnitTestMode = this.isUnitTestMode();
-    if (_isUnitTestMode) {
-      _or = true;
-    } else {
-      boolean _isDisposed = this.project.isDisposed();
-      _or = _isDisposed;
-    }
-    if (_or) {
+    if ((this.isUnitTestMode() || this.project.isDisposed())) {
       return;
     }
     final CompilerMessage compilerMessage = this.getCompilerMessage(validated, issue);
@@ -167,15 +141,7 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     boolean _xblockexpression = false;
     {
       final Application application = ApplicationManager.getApplication();
-      boolean _or = false;
-      boolean _equals = Objects.equal(application, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        boolean _isUnitTestMode = application.isUnitTestMode();
-        _or = _isUnitTestMode;
-      }
-      _xblockexpression = _or;
+      _xblockexpression = (Objects.equal(application, null) || application.isUnitTestMode());
     }
     return _xblockexpression;
   }

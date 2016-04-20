@@ -160,16 +160,7 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
   protected String _text(final XtendField element) {
     String _xblockexpression = null;
     {
-      boolean _and = false;
-      String _name = element.getName();
-      boolean _equals = Objects.equal(_name, null);
-      if (!_equals) {
-        _and = false;
-      } else {
-        boolean _isExtension = element.isExtension();
-        _and = _isExtension;
-      }
-      if (_and) {
+      if ((Objects.equal(element.getName(), null) && element.isExtension())) {
         JvmTypeReference _type = element.getType();
         return this.uiStrings.referenceToString(_type, "extension");
       }
@@ -180,8 +171,8 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
         int _length = type.length();
         boolean _notEquals_1 = (_length != 0);
         if (_notEquals_1) {
-          String _name_1 = element.getName();
-          String _plus = (_name_1 + " : ");
+          String _name = element.getName();
+          String _plus = (_name + " : ");
           return (_plus + type);
         }
       }

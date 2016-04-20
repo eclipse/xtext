@@ -15,7 +15,6 @@ import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -59,29 +58,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
         @Override
         public Boolean apply(final MethodDeclaration it) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          String _simpleName = it.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, "equals");
-          if (!_equals) {
-            _and_1 = false;
-          } else {
-            Iterable<? extends ParameterDeclaration> _parameters = it.getParameters();
-            int _size = IterableExtensions.size(_parameters);
-            boolean _equals_1 = (_size == 1);
-            _and_1 = _equals_1;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            Iterable<? extends ParameterDeclaration> _parameters_1 = it.getParameters();
-            ParameterDeclaration _head = IterableExtensions.head(_parameters_1);
-            TypeReference _type = _head.getType();
-            TypeReference _object = Util.this.context.getObject();
-            boolean _equals_2 = Objects.equal(_type, _object);
-            _and = _equals_2;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((Objects.equal(it.getSimpleName(), "equals") && (IterableExtensions.size(it.getParameters()) == 1)) && Objects.equal(IterableExtensions.head(it.getParameters()).getType(), Util.this.context.getObject())));
         }
       };
       return IterableExtensions.exists(_declaredMethods, _function);
@@ -692,24 +669,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
         final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
           @Override
           public Boolean apply(final MutableFieldDeclaration it) {
-            boolean _and = false;
-            boolean _and_1 = false;
-            boolean _isStatic = it.isStatic();
-            boolean _not = (!_isStatic);
-            if (!_not) {
-              _and_1 = false;
-            } else {
-              boolean _isTransient = it.isTransient();
-              boolean _not_1 = (!_isTransient);
-              _and_1 = _not_1;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              boolean _isThePrimaryGeneratedJavaElement = context.isThePrimaryGeneratedJavaElement(it);
-              _and = _isThePrimaryGeneratedJavaElement;
-            }
-            return Boolean.valueOf(_and);
+            return Boolean.valueOf((((!it.isStatic()) && (!it.isTransient())) && context.isThePrimaryGeneratedJavaElement(it)));
           }
         };
         final Iterable<? extends MutableFieldDeclaration> fields = IterableExtensions.filter(_declaredFields, _function);

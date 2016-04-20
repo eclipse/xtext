@@ -277,16 +277,7 @@ public class Indexer {
     };
     Iterable<URI> _filter = IterableExtensions.<URI>filter(remainingURIs, _function_2);
     final List<URI> allAffected = IterableExtensions.<URI>toList(_filter);
-    boolean _and = false;
-    boolean _isInfoEnabled_1 = Indexer.LOG.isInfoEnabled();
-    if (!_isInfoEnabled_1) {
-      _and = false;
-    } else {
-      boolean _isEmpty_1 = allAffected.isEmpty();
-      boolean _not_1 = (!_isEmpty_1);
-      _and = _not_1;
-    }
-    if (_and) {
+    if ((Indexer.LOG.isInfoEnabled() && (!allAffected.isEmpty()))) {
       Set<URI> _set_2 = IterableExtensions.<URI>toSet(allAffected);
       String _plus_4 = ("Creating Deltas for affected resources : " + _set_2);
       String _plus_5 = (_plus_4 + ".");

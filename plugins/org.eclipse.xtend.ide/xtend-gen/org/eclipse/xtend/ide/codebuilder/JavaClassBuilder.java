@@ -21,16 +21,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 public class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Java {
   @Override
   public boolean isValid() {
-    boolean _and = false;
-    boolean _isValid = super.isValid();
-    if (!_isValid) {
-      _and = false;
-    } else {
-      String _className = this.getClassName();
-      boolean _notEquals = (!Objects.equal(_className, null));
-      _and = _notEquals;
-    }
-    return _and;
+    return (super.isValid() && (!Objects.equal(this.getClassName(), null)));
   }
   
   @Override

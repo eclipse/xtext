@@ -116,15 +116,7 @@ public class GeneratedSourceAwareFindUsagesHandler extends FindUsagesHandler {
   }
   
   protected FindUsagesHandler getFindUsagesHandler(final PsiElement element) {
-    boolean _or = false;
-    boolean _contains = this.primaryElements.contains(element);
-    if (_contains) {
-      _or = true;
-    } else {
-      boolean _contains_1 = this.secondaryElements.contains(element);
-      _or = _contains_1;
-    }
-    if (_or) {
+    if ((this.primaryElements.contains(element) || this.secondaryElements.contains(element))) {
       return this.primaryHandler;
     }
     return this.secondaryHandlers.get(element);

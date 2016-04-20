@@ -193,17 +193,7 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
         boolean _xblockexpression = false;
         {
           final PsiClass type = it.getObject();
-          boolean _and = false;
-          boolean _hasModifierProperty = type.hasModifierProperty(PsiModifier.ABSTRACT);
-          boolean _not = (!_hasModifierProperty);
-          if (!_not) {
-            _and = false;
-          } else {
-            boolean _isInterface = type.isInterface();
-            boolean _not_1 = (!_isInterface);
-            _and = _not_1;
-          }
-          _xblockexpression = _and;
+          _xblockexpression = ((!type.hasModifierProperty(PsiModifier.ABSTRACT)) && (!type.isInterface()));
         }
         return Boolean.valueOf(_xblockexpression);
       }
@@ -263,18 +253,6 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
   
   @Override
   protected boolean isKeywordWorthyToPropose(final Keyword keyword) {
-    boolean _and = false;
-    String _value = keyword.getValue();
-    int _length = _value.length();
-    boolean _greaterThan = (_length > 1);
-    if (!_greaterThan) {
-      _and = false;
-    } else {
-      String _value_1 = keyword.getValue();
-      char _charAt = _value_1.charAt(0);
-      boolean _isLetter = Character.isLetter(_charAt);
-      _and = _isLetter;
-    }
-    return _and;
+    return ((keyword.getValue().length() > 1) && Character.isLetter(keyword.getValue().charAt(0)));
   }
 }

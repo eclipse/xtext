@@ -56,26 +56,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public boolean isEnabled() {
-    boolean _or = false;
-    boolean _or_1 = false;
-    WizardConfiguration _config = this.getConfig();
-    boolean _needsGradleBuild = _config.needsGradleBuild();
-    if (_needsGradleBuild) {
-      _or_1 = true;
-    } else {
-      WizardConfiguration _config_1 = this.getConfig();
-      boolean _needsMavenBuild = _config_1.needsMavenBuild();
-      _or_1 = _needsMavenBuild;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      WizardConfiguration _config_2 = this.getConfig();
-      ProjectLayout _projectLayout = _config_2.getProjectLayout();
-      boolean _equals = Objects.equal(_projectLayout, ProjectLayout.HIERARCHICAL);
-      _or = _equals;
-    }
-    return _or;
+    return ((this.getConfig().needsGradleBuild() || this.getConfig().needsMavenBuild()) || Objects.equal(this.getConfig().getProjectLayout(), ProjectLayout.HIERARCHICAL));
   }
   
   @Override
@@ -321,15 +302,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
         @Override
         public Boolean apply(final ProjectDescriptor it) {
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, ParentProjectDescriptor.this));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            boolean _isPartOfGradleBuild = it.isPartOfGradleBuild();
-            _and = _isPartOfGradleBuild;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((!Objects.equal(it, ParentProjectDescriptor.this)) && it.isPartOfGradleBuild()));
         }
       };
       Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
@@ -673,15 +646,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
             @Override
             public Boolean apply(final ProjectDescriptor it) {
-              boolean _and = false;
-              boolean _notEquals = (!Objects.equal(it, ParentProjectDescriptor.this));
-              if (!_notEquals) {
-                _and = false;
-              } else {
-                boolean _isPartOfMavenBuild = it.isPartOfMavenBuild();
-                _and = _isPartOfMavenBuild;
-              }
-              return Boolean.valueOf(_and);
+              return Boolean.valueOf(((!Objects.equal(it, ParentProjectDescriptor.this)) && it.isPartOfMavenBuild()));
             }
           };
           Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);

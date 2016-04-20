@@ -157,19 +157,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       if (expectation) {
         List<LightweightTypeReference> _allSuperTypes = lhsType.getAllSuperTypes();
         for (final LightweightTypeReference superType : _allSuperTypes) {
-          boolean _or = false;
-          boolean _isArray = superType.isArray();
-          boolean _isArray_1 = lhsType.isArray();
-          boolean _equals = (_isArray == _isArray_1);
-          if (_equals) {
-            _or = true;
-          } else {
-            boolean _isArray_2 = lhsType.isArray();
-            boolean _isArray_3 = rhsType.isArray();
-            boolean _equals_1 = (_isArray_2 == _isArray_3);
-            _or = _equals_1;
-          }
-          if (_or) {
+          if (((superType.isArray() == lhsType.isArray()) || (lhsType.isArray() == rhsType.isArray()))) {
             String _string_1 = superType.toString();
             boolean _testIsAssignable_1 = this.testIsAssignable(superType, rhsType);
             Assert.assertEquals(_string_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));

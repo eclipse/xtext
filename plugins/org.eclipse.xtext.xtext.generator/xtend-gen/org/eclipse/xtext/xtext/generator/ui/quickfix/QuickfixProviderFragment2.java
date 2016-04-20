@@ -65,15 +65,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
     {
       final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
       TypeReference _xifexpression = null;
-      boolean _and = false;
-      boolean _isInheritImplementation = this.isInheritImplementation();
-      if (!_isInheritImplementation) {
-        _and = false;
-      } else {
-        boolean _notEquals = (!Objects.equal(superGrammar, null));
-        _and = _notEquals;
-      }
-      if (_and) {
+      if ((this.isInheritImplementation() && (!Objects.equal(superGrammar, null)))) {
         _xifexpression = this.getQuickfixProviderClass(superGrammar);
       } else {
         _xifexpression = this.getDefaultQuickfixProviderSuperClass();

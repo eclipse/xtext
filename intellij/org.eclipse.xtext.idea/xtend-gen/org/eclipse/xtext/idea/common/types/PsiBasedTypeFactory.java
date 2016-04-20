@@ -180,15 +180,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
     JvmDeclaredType _xblockexpression = null;
     {
       ProgressIndicatorProvider.checkCanceled();
-      boolean _or = false;
-      boolean _isAnonymous = this.isAnonymous(psiClass);
-      if (_isAnonymous) {
-        _or = true;
-      } else {
-        boolean _isSynthetic = this.isSynthetic(psiClass);
-        _or = _isSynthetic;
-      }
-      if (_or) {
+      if ((this.isAnonymous(psiClass) || this.isSynthetic(psiClass))) {
         throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
       }
       JvmDeclaredType _switchResult = null;
@@ -402,13 +394,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
           @Override
           public void apply(final JvmField it) {
             final PsiExpression initializer = field.getInitializer();
-            boolean _and = false;
-            if (!(initializer instanceof PsiCompiledElement)) {
-              _and = false;
-            } else {
-              _and = (initializer instanceof PsiBinaryExpression);
-            }
-            if (_and) {
+            if (((initializer instanceof PsiCompiledElement) && (initializer instanceof PsiBinaryExpression))) {
               PsiType _type = field.getType();
               final String fieldType = _type.getCanonicalText();
               final PsiBinaryExpression binary = ((PsiBinaryExpression) initializer);
@@ -539,16 +525,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected StringBuilder createMethods(final JvmDeclaredType it, final PsiClass psiClass, final StringBuilder fqn) {
     StringBuilder _xblockexpression = null;
     {
-      boolean _and = false;
-      boolean _isInterface = psiClass.isInterface();
-      if (!_isInterface) {
-        _and = false;
-      } else {
-        boolean _isAnnotationType = psiClass.isAnnotationType();
-        boolean _not = (!_isAnnotationType);
-        _and = _not;
-      }
-      final boolean intf = _and;
+      final boolean intf = (psiClass.isInterface() && (!psiClass.isAnnotationType()));
       PsiMethod[] _methods = psiClass.getMethods();
       for (final PsiMethod method : _methods) {
         final Procedure0 _function = new Procedure0() {
@@ -565,23 +542,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
                   @Override
                   public void apply(final JvmOperation it) {
                     PsiBasedTypeFactory.this.setDefaultValue(it, method);
-                    boolean _and = false;
-                    boolean _and_1 = false;
-                    if (!intf) {
-                      _and_1 = false;
-                    } else {
-                      boolean _isAbstract = it.isAbstract();
-                      boolean _not = (!_isAbstract);
-                      _and_1 = _not;
-                    }
-                    if (!_and_1) {
-                      _and = false;
-                    } else {
-                      boolean _isStatic = it.isStatic();
-                      boolean _not_1 = (!_isStatic);
-                      _and = _not_1;
-                    }
-                    if (_and) {
+                    if (((intf && (!it.isAbstract())) && (!it.isStatic()))) {
                       it.setDefault(true);
                     }
                   }
@@ -646,32 +607,12 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   }
   
   protected boolean hasDefaultConstructor(final PsiClass psiClass) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _isInterface = psiClass.isInterface();
-    boolean _not = (!_isInterface);
-    if (!_not) {
-      _and_1 = false;
-    } else {
-      boolean _isAnnotationType = psiClass.isAnnotationType();
-      boolean _not_1 = (!_isAnnotationType);
-      _and_1 = _not_1;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      PsiMethod[] _methods = psiClass.getMethods();
-      final Function1<PsiMethod, Boolean> _function = new Function1<PsiMethod, Boolean>() {
-        @Override
-        public Boolean apply(final PsiMethod it) {
-          return Boolean.valueOf(it.isConstructor());
-        }
-      };
-      boolean _exists = IterableExtensions.<PsiMethod>exists(((Iterable<PsiMethod>)Conversions.doWrapArray(_methods)), _function);
-      boolean _not_2 = (!_exists);
-      _and = _not_2;
-    }
-    return _and;
+    return (((!psiClass.isInterface()) && (!psiClass.isAnnotationType())) && (!IterableExtensions.<PsiMethod>exists(((Iterable<PsiMethod>)Conversions.doWrapArray(psiClass.getMethods())), new Function1<PsiMethod, Boolean>() {
+      @Override
+      public Boolean apply(final PsiMethod it) {
+        return Boolean.valueOf(it.isConstructor());
+      }
+    })));
   }
   
   protected void setDefaultValue(final JvmOperation operation, final PsiMethod method) {
@@ -1511,17 +1452,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   }
   
   protected boolean isInnerTypeReference(final PsiClass psiClass) {
-    boolean _and = false;
-    PsiClass _containingClass = psiClass.getContainingClass();
-    boolean _notEquals = (!Objects.equal(_containingClass, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _hasModifierProperty = psiClass.hasModifierProperty(PsiModifier.STATIC);
-      boolean _not = (!_hasModifierProperty);
-      _and = _not;
-    }
-    return _and;
+    return ((!Objects.equal(psiClass.getContainingClass(), null)) && (!psiClass.hasModifierProperty(PsiModifier.STATIC)));
   }
   
   protected JvmTypeReference _createTypeArgument(final PsiType type) {
@@ -1607,17 +1538,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected void createNestedTypes(final JvmDeclaredType it, final PsiClass psiClass, final StringBuilder fqn) {
     PsiClass[] _innerClasses = psiClass.getInnerClasses();
     for (final PsiClass innerClass : _innerClasses) {
-      boolean _and = false;
-      boolean _isAnonymous = this.isAnonymous(innerClass);
-      boolean _not = (!_isAnonymous);
-      if (!_not) {
-        _and = false;
-      } else {
-        boolean _isSynthetic = this.isSynthetic(innerClass);
-        boolean _not_1 = (!_isSynthetic);
-        _and = _not_1;
-      }
-      if (_and) {
+      if (((!this.isAnonymous(innerClass)) && (!this.isSynthetic(innerClass)))) {
         final Procedure0 _function = new Procedure0() {
           @Override
           public void apply() {

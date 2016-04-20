@@ -1454,15 +1454,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     Pair<List<?>, Class<?>> _switchResult = null;
     boolean _matched = false;
     if (value instanceof JvmCustomAnnotationValue) {
-      boolean _and = false;
-      EList<EObject> _values = ((JvmCustomAnnotationValue)value).getValues();
-      boolean _isEmpty = _values.isEmpty();
-      if (!_isEmpty) {
-        _and = false;
-      } else {
-        _and = isArray;
-      }
-      if (_and) {
+      if ((((JvmCustomAnnotationValue)value).getValues().isEmpty() && isArray)) {
         _matched=true;
         List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
         JvmTypeReference _findExpectedType = this.findExpectedType(value);
@@ -1614,15 +1606,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (_equals) {
         return null;
       }
-      boolean _or = false;
-      if ((!isArray)) {
-        _or = true;
-      } else {
-        Class<?> _class = value.getClass();
-        boolean _isArray = _class.isArray();
-        _or = _isArray;
-      }
-      if (_or) {
+      if (((!isArray) || value.getClass().isArray())) {
         return value;
       }
       ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList(value);
@@ -2033,15 +2017,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   protected String getMessageWithoutStackTrace(final Throwable t) {
     String _xifexpression = null;
-    boolean _and = false;
-    if (!(t instanceof IncompatibleClassChangeError)) {
-      _and = false;
-    } else {
-      String _message = t.getMessage();
-      boolean _contains = _message.contains("org.eclipse.xtend.lib.macro");
-      _and = _contains;
-    }
-    if (_and) {
+    if (((t instanceof IncompatibleClassChangeError) && t.getMessage().contains("org.eclipse.xtend.lib.macro"))) {
       _xifexpression = "An active annotation used in this file was compiled against a different version of Xtend than the one that is currently installed.";
     } else {
       _xifexpression = "Error during annotation processing:";
@@ -2054,19 +2030,8 @@ public class CompilationUnitImpl implements CompilationUnit {
     final ArrayList<StackTraceElement> reducedStackTrace = CollectionLiterals.<StackTraceElement>newArrayList();
     for (final StackTraceElement it : stackTrace) {
       {
-        boolean _or = false;
-        String _className = it.getClassName();
-        String _name = AnnotationProcessor.class.getName();
-        boolean _contains = _className.contains(_name);
-        if (_contains) {
-          _or = true;
-        } else {
-          String _className_1 = it.getClassName();
-          String _name_1 = ProblemSupportImpl.class.getName();
-          boolean _contains_1 = _className_1.contains(_name_1);
-          _or = _contains_1;
-        }
-        if (_or) {
+        if ((it.getClassName().contains(AnnotationProcessor.class.getName()) || 
+          it.getClassName().contains(ProblemSupportImpl.class.getName()))) {
           try {
             t.setStackTrace(((StackTraceElement[])Conversions.unwrapArray(reducedStackTrace, StackTraceElement.class)));
             return getMessage.apply(t);

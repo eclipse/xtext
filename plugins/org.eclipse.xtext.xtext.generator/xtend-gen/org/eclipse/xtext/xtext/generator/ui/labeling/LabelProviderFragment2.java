@@ -106,16 +106,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
   
   @Override
   public void generate() {
-    boolean _or = false;
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (_isGenerateStub) {
-      _or = true;
-    } else {
-      Grammar _grammar = this.getGrammar();
-      boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
-      _or = _inheritsXbase;
-    }
-    if (_or) {
+    if ((this.isGenerateStub() || this._xbaseUsageDetector.inheritsXbase(this.getGrammar()))) {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
       ManifestAccess _manifest = _eclipsePlugin.getManifest();
@@ -128,19 +119,19 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         _requiredBundles.add("org.eclipse.xtext.ui");
       }
       TypeReference _xifexpression = null;
-      boolean _isGenerateStub_1 = this.isGenerateStub();
-      if (_isGenerateStub_1) {
-        Grammar _grammar_1 = this.getGrammar();
-        _xifexpression = this.getEObjectLabelProviderClass(_grammar_1);
+      boolean _isGenerateStub = this.isGenerateStub();
+      if (_isGenerateStub) {
+        Grammar _grammar = this.getGrammar();
+        _xifexpression = this.getEObjectLabelProviderClass(_grammar);
       } else {
         _xifexpression = new TypeReference(LabelProviderFragment2.XBASE_LABEL_PROVIDER);
       }
       final TypeReference labelProviderClass = _xifexpression;
       TypeReference _xifexpression_1 = null;
-      boolean _isGenerateStub_2 = this.isGenerateStub();
-      if (_isGenerateStub_2) {
-        Grammar _grammar_2 = this.getGrammar();
-        _xifexpression_1 = this.getDescriptionLabelProviderClass(_grammar_2);
+      boolean _isGenerateStub_1 = this.isGenerateStub();
+      if (_isGenerateStub_1) {
+        Grammar _grammar_1 = this.getGrammar();
+        _xifexpression_1 = this.getDescriptionLabelProviderClass(_grammar_1);
       } else {
         _xifexpression_1 = new TypeReference(LabelProviderFragment2.XBASE_DESCRIPTION_LABEL_PROVIDER);
       }
@@ -167,18 +158,7 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
       GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
       _addConfiguredBinding.contributeTo(_eclipsePluginGenModule);
     }
-    boolean _and = false;
-    boolean _isGenerateStub_3 = this.isGenerateStub();
-    if (!_isGenerateStub_3) {
-      _and = false;
-    } else {
-      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
-      IXtextGeneratorFileSystemAccess _src = _eclipsePlugin_2.getSrc();
-      boolean _tripleNotEquals = (_src != null);
-      _and = _tripleNotEquals;
-    }
-    if (_and) {
+    if ((this.isGenerateStub() && (this.getProjectConfig().getEclipsePlugin().getSrc() != null))) {
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {
         this.generateXtendEObjectLabelProvider();

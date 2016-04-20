@@ -43,24 +43,12 @@ public class BracePairMatcher implements ICharacterPairMatcher {
       final ArrayList<Character> chars = CollectionLiterals.<Character>newArrayList();
       Set<BracePair> _pairs = bracePairProvider.getPairs();
       for (final BracePair pair : _pairs) {
-        boolean _and = false;
-        String _leftBrace = pair.getLeftBrace();
-        int _length = _leftBrace.length();
-        boolean _equals = (_length == 1);
-        if (!_equals) {
-          _and = false;
-        } else {
-          String _rightBrace = pair.getRightBrace();
-          int _length_1 = _rightBrace.length();
-          boolean _equals_1 = (_length_1 == 1);
-          _and = _equals_1;
-        }
-        if (_and) {
-          String _leftBrace_1 = pair.getLeftBrace();
-          char _charAt = _leftBrace_1.charAt(0);
+        if (((pair.getLeftBrace().length() == 1) && (pair.getRightBrace().length() == 1))) {
+          String _leftBrace = pair.getLeftBrace();
+          char _charAt = _leftBrace.charAt(0);
           chars.add(Character.valueOf(_charAt));
-          String _rightBrace_1 = pair.getRightBrace();
-          char _charAt_1 = _rightBrace_1.charAt(0);
+          String _rightBrace = pair.getRightBrace();
+          char _charAt_1 = _rightBrace.charAt(0);
           chars.add(Character.valueOf(_charAt_1));
         } else {
           throw new IllegalStateException((("Brace pair is invalid: " + pair) + "; left and right braces should have length of one character."));

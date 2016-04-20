@@ -40,15 +40,7 @@ public class GuiceModuleAccess {
     public boolean equals(final Object other) {
       boolean _xifexpression = false;
       if ((other instanceof GuiceModuleAccess.BindKey)) {
-        boolean _and = false;
-        boolean _equals = Objects.equal(this.name, ((GuiceModuleAccess.BindKey)other).name);
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _equals_1 = Objects.equal(this.type, ((GuiceModuleAccess.BindKey)other).type);
-          _and = _equals_1;
-        }
-        _xifexpression = _and;
+        _xifexpression = (Objects.equal(this.name, ((GuiceModuleAccess.BindKey)other).name) && Objects.equal(this.type, ((GuiceModuleAccess.BindKey)other).type));
       } else {
         _xifexpression = false;
       }

@@ -16,7 +16,6 @@ import com.intellij.debugger.ui.tree.NodeDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -59,22 +58,11 @@ public class XtendSourcePositionProvider extends SourcePositionProvider {
       final IScope scope = this.scopeProvider.getScope(eobj, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
       QualifiedName _create = QualifiedName.create(name);
       final IEObjectDescription element = scope.getSingleElement(_create);
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(element, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
+      if (((!Objects.equal(element, null)) && Objects.equal(element.getEObjectOrProxy().eResource(), eobj.eResource()))) {
         EObject _eObjectOrProxy = element.getEObjectOrProxy();
-        Resource _eResource = _eObjectOrProxy.eResource();
-        Resource _eResource_1 = eobj.eResource();
-        boolean _equals_1 = Objects.equal(_eResource, _eResource_1);
-        _and = _equals_1;
-      }
-      if (_and) {
-        EObject _eObjectOrProxy_1 = element.getEObjectOrProxy();
-        final ICompositeNode node = NodeModelUtils.getNode(_eObjectOrProxy_1);
-        boolean _notEquals_1 = (!Objects.equal(node, null));
-        if (_notEquals_1) {
+        final ICompositeNode node = NodeModelUtils.getNode(_eObjectOrProxy);
+        boolean _notEquals = (!Objects.equal(node, null));
+        if (_notEquals) {
           final int offset = node.getOffset();
           BaseXtextFile _xtextFile = ((LeafXtextPsiElement)ele).getXtextFile();
           return SourcePosition.createFromOffset(_xtextFile, offset);

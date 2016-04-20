@@ -60,20 +60,10 @@ public class Ecore2XtextGrammarCreator {
           _builder.append(_nsURI, "");
           _builder.append("\" ");
           {
-            boolean _and = false;
-            String _uniqueName = UniqueNameUtil.uniqueName(it_1);
-            boolean _notEquals = (!Objects.equal(_uniqueName, null));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              String _uniqueName_1 = UniqueNameUtil.uniqueName(it_1);
-              boolean _notEquals_1 = (!Objects.equal(_uniqueName_1, ""));
-              _and = _notEquals_1;
-            }
-            if (_and) {
+            if (((!Objects.equal(UniqueNameUtil.uniqueName(it_1), null)) && (!Objects.equal(UniqueNameUtil.uniqueName(it_1), "")))) {
               _builder.append("as ");
-              String _uniqueName_2 = UniqueNameUtil.uniqueName(it_1);
-              _builder.append(_uniqueName_2, "");
+              String _uniqueName = UniqueNameUtil.uniqueName(it_1);
+              _builder.append(_uniqueName, "");
             }
           }
           _builder.newLineIfNotEmpty();
@@ -290,16 +280,7 @@ public class Ecore2XtextGrammarCreator {
       if (_isMany) {
         _builder.append("+=");
       } else {
-        boolean _and = false;
-        EClassifier _eType = it.getEType();
-        boolean _isBoolean = Ecore2XtextExtensions.isBoolean(_eType);
-        if (!_isBoolean) {
-          _and = false;
-        } else {
-          boolean _isPrefixBooleanFeature = Ecore2XtextExtensions.isPrefixBooleanFeature(it);
-          _and = _isPrefixBooleanFeature;
-        }
-        if (_and) {
+        if ((Ecore2XtextExtensions.isBoolean(it.getEType()) && Ecore2XtextExtensions.isPrefixBooleanFeature(it))) {
           _builder.append("?=");
         } else {
           _builder.append("=");
@@ -311,15 +292,7 @@ public class Ecore2XtextGrammarCreator {
   
   public CharSequence rules(final EClassifier it) {
     CharSequence _xifexpression = null;
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(it, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _needsConcreteRule = Ecore2XtextExtensions.needsConcreteRule(it);
-      _and = _needsConcreteRule;
-    }
-    if (_and) {
+    if (((!Objects.equal(it, null)) && Ecore2XtextExtensions.needsConcreteRule(it))) {
       _xifexpression = this.rule(it);
     }
     return _xifexpression;

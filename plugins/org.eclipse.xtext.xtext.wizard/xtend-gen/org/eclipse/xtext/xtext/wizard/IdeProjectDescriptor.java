@@ -24,7 +24,6 @@ import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
-import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -44,19 +43,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public boolean isEclipsePluginProject() {
-    boolean _or = false;
-    WizardConfiguration _config = this.getConfig();
-    BuildSystem _preferredBuildSystem = _config.getPreferredBuildSystem();
-    boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.NONE);
-    if (_equals) {
-      _or = true;
-    } else {
-      WizardConfiguration _config_1 = this.getConfig();
-      UiProjectDescriptor _uiProject = _config_1.getUiProject();
-      boolean _isEnabled = _uiProject.isEnabled();
-      _or = _isEnabled;
-    }
-    return _or;
+    return (Objects.equal(this.getConfig().getPreferredBuildSystem(), BuildSystem.NONE) || this.getConfig().getUiProject().isEnabled());
   }
   
   @Override
@@ -95,18 +82,7 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
         _builder.append("<build>");
         _builder.newLine();
         {
-          boolean _and = false;
-          boolean _isEclipsePluginProject = IdeProjectDescriptor.this.isEclipsePluginProject();
-          boolean _not = (!_isEclipsePluginProject);
-          if (!_not) {
-            _and = false;
-          } else {
-            WizardConfiguration _config = IdeProjectDescriptor.this.getConfig();
-            SourceLayout _sourceLayout = _config.getSourceLayout();
-            boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
-            _and = _equals;
-          }
-          if (_and) {
+          if (((!IdeProjectDescriptor.this.isEclipsePluginProject()) && Objects.equal(IdeProjectDescriptor.this.getConfig().getSourceLayout(), SourceLayout.PLAIN))) {
             _builder.append("\t");
             _builder.append("<sourceDirectory>");
             String _sourceFolder = IdeProjectDescriptor.this.sourceFolder(Outlet.MAIN_JAVA);
@@ -168,9 +144,9 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
         _builder.append("</plugin>");
         _builder.newLine();
         {
-          boolean _isEclipsePluginProject_1 = IdeProjectDescriptor.this.isEclipsePluginProject();
-          boolean _not_1 = (!_isEclipsePluginProject_1);
-          if (_not_1) {
+          boolean _isEclipsePluginProject = IdeProjectDescriptor.this.isEclipsePluginProject();
+          boolean _not = (!_isEclipsePluginProject);
+          if (_not) {
             _builder.append("\t\t");
             _builder.append("<plugin>");
             _builder.newLine();
@@ -300,8 +276,8 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         it.setBuildSection(_builder.toString());
         String _xifexpression = null;
-        boolean _isEclipsePluginProject_2 = IdeProjectDescriptor.this.isEclipsePluginProject();
-        if (_isEclipsePluginProject_2) {
+        boolean _isEclipsePluginProject_1 = IdeProjectDescriptor.this.isEclipsePluginProject();
+        if (_isEclipsePluginProject_1) {
           _xifexpression = "eclipse-plugin";
         } else {
           _xifexpression = "jar";

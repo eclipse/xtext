@@ -209,14 +209,7 @@ public class HiddenLeafAccess {
       INode _lastChild = ((ICompositeNode)current).getLastChild();
       current = _lastChild;
     }
-    boolean _and = false;
-    if (!(current instanceof ILeafNode)) {
-      _and = false;
-    } else {
-      Boolean _apply = matches.apply(((ILeafNode) current));
-      _and = (_apply).booleanValue();
-    }
-    if (_and) {
+    if (((current instanceof ILeafNode) && (matches.apply(((ILeafNode) current))).booleanValue())) {
       return ((ILeafNode) current);
     }
     boolean _notEquals = (!Objects.equal(current, null));
@@ -225,14 +218,7 @@ public class HiddenLeafAccess {
       while (ni.hasPrevious()) {
         {
           final INode previous = ni.previous();
-          boolean _and_1 = false;
-          if (!(previous instanceof ILeafNode)) {
-            _and_1 = false;
-          } else {
-            Boolean _apply_1 = matches.apply(((ILeafNode) previous));
-            _and_1 = (_apply_1).booleanValue();
-          }
-          if (_and_1) {
+          if (((previous instanceof ILeafNode) && (matches.apply(((ILeafNode) previous))).booleanValue())) {
             return ((ILeafNode) previous);
           }
         }
@@ -256,14 +242,7 @@ public class HiddenLeafAccess {
         while (ni.hasPrevious()) {
           {
             final INode previous = ni.previous();
-            boolean _and = false;
-            boolean _notEquals_1 = (!Objects.equal(previous, current));
-            if (!_notEquals_1) {
-              _and = false;
-            } else {
-              _and = (previous instanceof ILeafNode);
-            }
-            if (_and) {
+            if (((!Objects.equal(previous, current)) && (previous instanceof ILeafNode))) {
               boolean _isHidden = ((ILeafNode) previous).isHidden();
               if (_isHidden) {
                 result.add(((ILeafNode) previous));

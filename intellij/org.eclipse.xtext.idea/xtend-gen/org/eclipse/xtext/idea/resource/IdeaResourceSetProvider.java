@@ -125,15 +125,7 @@ public class IdeaResourceSetProvider {
       final Set<URI> localDeleted = this.deleted;
       HashSet<URI> _newHashSet = CollectionLiterals.<URI>newHashSet();
       this.deleted = _newHashSet;
-      boolean _and = false;
-      boolean _isEmpty = localDeleted.isEmpty();
-      if (!_isEmpty) {
-        _and = false;
-      } else {
-        boolean _isEmpty_1 = localWritten.isEmpty();
-        _and = _isEmpty_1;
-      }
-      if (_and) {
+      if ((localDeleted.isEmpty() && localWritten.isEmpty())) {
         return;
       }
       Application _application = ApplicationManager.getApplication();
@@ -163,15 +155,7 @@ public class IdeaResourceSetProvider {
             for (final URI uri_1 : localDeleted) {
               {
                 final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri_1);
-                boolean _and = false;
-                boolean _notEquals = (!Objects.equal(file, null));
-                if (!_notEquals) {
-                  _and = false;
-                } else {
-                  boolean _exists = file.exists();
-                  _and = _exists;
-                }
-                if (_and) {
+                if (((!Objects.equal(file, null)) && file.exists())) {
                   Object _requestor = VirtualFileBasedUriHandler.this.getRequestor();
                   file.delete(_requestor);
                 }
@@ -287,15 +271,7 @@ public class IdeaResourceSetProvider {
       }
       Object _get = options.get(URIConverter.OPTION_REQUESTED_ATTRIBUTES);
       final Set<String> requestedAttributes = ((Set<String>) _get);
-      boolean _or = false;
-      boolean _equals = Objects.equal(requestedAttributes, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        boolean _isEmpty = requestedAttributes.isEmpty();
-        _or = _isEmpty;
-      }
-      if (_or) {
+      if ((Objects.equal(requestedAttributes, null) || requestedAttributes.isEmpty())) {
         return CollectionLiterals.<String, Object>emptyMap();
       }
       final IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor fileDescriptor = this.writtenContents.get(uri);
@@ -401,16 +377,7 @@ public class IdeaResourceSetProvider {
             {
               final URI relativeURI = uriToWrite.deresolve(uri);
               URI _xifexpression = null;
-              boolean _and = false;
-              boolean _isEmpty = relativeURI.isEmpty();
-              boolean _not = (!_isEmpty);
-              if (!_not) {
-                _and = false;
-              } else {
-                boolean _notEquals = (!Objects.equal(relativeURI, uriToWrite));
-                _and = _notEquals;
-              }
-              if (_and) {
+              if (((!relativeURI.isEmpty()) && (!Objects.equal(relativeURI, uriToWrite)))) {
                 int _segmentCount = relativeURI.segmentCount();
                 int _minus = (_segmentCount - 1);
                 URI _trimSegments = relativeURI.trimSegments(_minus);

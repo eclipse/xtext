@@ -247,15 +247,7 @@ public class JavaDerivedStateComputer {
       URI _uRI = resource.getURI();
       URI _trimFileExtension = _uRI.trimFileExtension();
       final String name = _trimFileExtension.lastSegment();
-      boolean _or = false;
-      boolean _equals = Objects.equal(name, "package-info");
-      if (_equals) {
-        _or = true;
-      } else {
-        boolean _equals_1 = Objects.equal(name, "module-info");
-        _or = _equals_1;
-      }
-      _xblockexpression = _or;
+      _xblockexpression = (Objects.equal(name, "package-info") || Objects.equal(name, "module-info"));
     }
     return _xblockexpression;
   }

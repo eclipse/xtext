@@ -28,7 +28,6 @@ import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @SuppressWarnings("all")
 public abstract class TestProjectDescriptor extends ProjectDescriptor {
@@ -53,31 +52,11 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
   }
   
   public boolean isInlined() {
-    boolean _and = false;
-    boolean _isEnabled = this.isEnabled();
-    if (!_isEnabled) {
-      _and = false;
-    } else {
-      WizardConfiguration _config = this.getConfig();
-      SourceLayout _sourceLayout = _config.getSourceLayout();
-      boolean _notEquals = (!Objects.equal(_sourceLayout, SourceLayout.PLAIN));
-      _and = _notEquals;
-    }
-    return _and;
+    return (this.isEnabled() && (!Objects.equal(this.getConfig().getSourceLayout(), SourceLayout.PLAIN)));
   }
   
   public boolean isSeparate() {
-    boolean _and = false;
-    boolean _isEnabled = this.isEnabled();
-    if (!_isEnabled) {
-      _and = false;
-    } else {
-      WizardConfiguration _config = this.getConfig();
-      SourceLayout _sourceLayout = _config.getSourceLayout();
-      boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
-      _and = _equals;
-    }
-    return _and;
+    return (this.isEnabled() && Objects.equal(this.getConfig().getSourceLayout(), SourceLayout.PLAIN));
   }
   
   @Override
@@ -134,18 +113,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         _builder.append("<build>");
         _builder.newLine();
         {
-          boolean _and = false;
-          boolean _isEclipsePluginProject_1 = TestProjectDescriptor.this.isEclipsePluginProject();
-          boolean _not = (!_isEclipsePluginProject_1);
-          if (!_not) {
-            _and = false;
-          } else {
-            WizardConfiguration _config = TestProjectDescriptor.this.getConfig();
-            SourceLayout _sourceLayout = _config.getSourceLayout();
-            boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
-            _and = _equals;
-          }
-          if (_and) {
+          if (((!TestProjectDescriptor.this.isEclipsePluginProject()) && Objects.equal(TestProjectDescriptor.this.getConfig().getSourceLayout(), SourceLayout.PLAIN))) {
             _builder.append("\t");
             _builder.append("<testSourceDirectory>");
             String _sourceFolder = TestProjectDescriptor.this.sourceFolder(Outlet.TEST_JAVA);
@@ -207,8 +175,8 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         _builder.append("</plugin>");
         _builder.newLine();
         {
-          boolean _isEclipsePluginProject_2 = TestProjectDescriptor.this.isEclipsePluginProject();
-          if (_isEclipsePluginProject_2) {
+          boolean _isEclipsePluginProject_1 = TestProjectDescriptor.this.isEclipsePluginProject();
+          if (_isEclipsePluginProject_1) {
             _builder.append("\t\t");
             _builder.append("<plugin>");
             _builder.newLine();
@@ -251,9 +219,9 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
           }
         }
         {
-          boolean _isEclipsePluginProject_3 = TestProjectDescriptor.this.isEclipsePluginProject();
-          boolean _not_1 = (!_isEclipsePluginProject_3);
-          if (_not_1) {
+          boolean _isEclipsePluginProject_2 = TestProjectDescriptor.this.isEclipsePluginProject();
+          boolean _not = (!_isEclipsePluginProject_2);
+          if (_not) {
             _builder.append("\t\t");
             _builder.append("<plugin>");
             _builder.newLine();
@@ -378,15 +346,7 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
         _builder.append("</build>");
         _builder.newLine();
         it.setBuildSection(_builder.toString());
-        boolean _and_1 = false;
-        boolean _isEclipsePluginProject_4 = TestProjectDescriptor.this.isEclipsePluginProject();
-        if (!_isEclipsePluginProject_4) {
-          _and_1 = false;
-        } else {
-          boolean _needsUiHarness_1 = TestProjectDescriptor.this.needsUiHarness();
-          _and_1 = _needsUiHarness_1;
-        }
-        if (_and_1) {
+        if ((TestProjectDescriptor.this.isEclipsePluginProject() && TestProjectDescriptor.this.needsUiHarness())) {
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("<profiles>");
           _builder_1.newLine();

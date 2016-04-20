@@ -110,21 +110,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
             return ((JvmField)feature).getConstantValue();
           }
         } else {
-          boolean _and = false;
-          boolean _isFinal = ((JvmField)feature).isFinal();
-          if (!_isFinal) {
-            _and = false;
-          } else {
-            boolean _or = false;
-            boolean _isStatic = ((JvmField)feature).isStatic();
-            if (_isStatic) {
-              _or = true;
-            } else {
-              _or = ((ctx instanceof SwitchConstantExpressionsInterpreter.SwitchContext) && ((SwitchConstantExpressionsInterpreter.SwitchContext) ctx).validationMode);
-            }
-            _and = _or;
-          }
-          if (_and) {
+          if ((((JvmField)feature).isFinal() && (((JvmField)feature).isStatic() || ((ctx instanceof SwitchConstantExpressionsInterpreter.SwitchContext) && ((SwitchConstantExpressionsInterpreter.SwitchContext) ctx).validationMode)))) {
             final XExpression associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
             boolean _notEquals = (!Objects.equal(associatedExpression, null));
             if (_notEquals) {
@@ -136,20 +122,10 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     }
     if (!_matched) {
       if (feature instanceof XVariableDeclaration) {
-        boolean _and = false;
-        boolean _isWriteable = ((XVariableDeclaration)feature).isWriteable();
-        boolean _not = (!_isWriteable);
-        if (!_not) {
-          _and = false;
-        } else {
-          XExpression _right = ((XVariableDeclaration)feature).getRight();
-          boolean _notEquals = (!Objects.equal(_right, null));
-          _and = _notEquals;
-        }
-        if (_and) {
+        if (((!((XVariableDeclaration)feature).isWriteable()) && (!Objects.equal(((XVariableDeclaration)feature).getRight(), null)))) {
           _matched=true;
-          XExpression _right_1 = ((XVariableDeclaration)feature).getRight();
-          return this.evaluateAssociatedExpression(_right_1, ctx);
+          XExpression _right = ((XVariableDeclaration)feature).getRight();
+          return this.evaluateAssociatedExpression(_right, ctx);
         }
       }
     }

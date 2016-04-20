@@ -113,25 +113,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     final Predicate<JvmAnnotationValue> _function = new Predicate<JvmAnnotationValue>() {
       @Override
       public boolean apply(final JvmAnnotationValue it) {
-        boolean _or = false;
-        JvmOperation _operation = it.getOperation();
-        boolean _equals = Objects.equal(op, _operation);
-        if (_equals) {
-          _or = true;
-        } else {
-          boolean _and = false;
-          JvmOperation _operation_1 = it.getOperation();
-          boolean _equals_1 = Objects.equal(_operation_1, null);
-          if (!_equals_1) {
-            _and = false;
-          } else {
-            String _simpleName = op.getSimpleName();
-            boolean _equals_2 = Objects.equal(_simpleName, "value");
-            _and = _equals_2;
-          }
-          _or = _and;
-        }
-        return _or;
+        return (Objects.equal(op, it.getOperation()) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value")));
       }
     };
     return Iterators.<JvmAnnotationValue>removeIf(_iterator, _function);

@@ -72,17 +72,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     @Override
     public boolean apply(final IEObjectDescription input) {
       if ((input instanceof IIdentifiableElementDescription)) {
-        boolean _or = false;
-        boolean _isVisible = ((IIdentifiableElementDescription)input).isVisible();
-        boolean _not = (!_isVisible);
-        if (_not) {
-          _or = true;
-        } else {
-          boolean _isValidStaticState = ((IIdentifiableElementDescription)input).isValidStaticState();
-          boolean _not_1 = (!_isValidStaticState);
-          _or = _not_1;
-        }
-        if (_or) {
+        if (((!((IIdentifiableElementDescription)input).isVisible()) || (!((IIdentifiableElementDescription)input).isValidStaticState()))) {
           return false;
         }
         QualifiedName _name = ((IIdentifiableElementDescription)input).getName();
@@ -121,45 +111,15 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     if (_not) {
       return false;
     }
-    boolean _or = false;
-    String _value = keyword.getValue();
-    boolean _equals = Objects.equal(_value, "as");
-    if (_equals) {
-      _or = true;
-    } else {
-      String _value_1 = keyword.getValue();
-      boolean _equals_1 = Objects.equal(_value_1, "instanceof");
-      _or = _equals_1;
-    }
-    if (_or) {
+    if ((Objects.equal(keyword.getValue(), "as") || Objects.equal(keyword.getValue(), "instanceof"))) {
       final EObject previousModel = context.getPreviousModel();
       if ((previousModel instanceof XExpression)) {
-        boolean _and = false;
-        String _prefix = context.getPrefix();
-        int _length = _prefix.length();
-        boolean _equals_2 = (_length == 0);
-        if (!_equals_2) {
-          _and = false;
-        } else {
-          ICompositeNode _node = NodeModelUtils.getNode(previousModel);
-          int _endOffset = _node.getEndOffset();
-          int _offset = context.getOffset();
-          boolean _greaterThan = (_endOffset > _offset);
-          _and = _greaterThan;
-        }
-        if (_and) {
+        if (((context.getPrefix().length() == 0) && (NodeModelUtils.getNode(previousModel).getEndOffset() > context.getOffset()))) {
           return false;
         }
         IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(previousModel);
         LightweightTypeReference type = _resolveTypes.getActualType(((XExpression)previousModel));
-        boolean _or_1 = false;
-        if ((type == null)) {
-          _or_1 = true;
-        } else {
-          boolean _isPrimitiveVoid = type.isPrimitiveVoid();
-          _or_1 = _isPrimitiveVoid;
-        }
-        if (_or_1) {
+        if (((type == null) || type.isPrimitiveVoid())) {
           return false;
         }
       }
@@ -174,17 +134,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     ParserRule _xExpressionRule = this._xbaseGrammarAccess.getXExpressionRule();
     if (Objects.equal(_rule, _xExpressionRule)) {
       _matched=true;
-      boolean _and = false;
-      EObject _eContainer = ruleCall.eContainer();
-      if (!(_eContainer instanceof Group)) {
-        _and = false;
-      } else {
-        AbstractRule _containingRule = GrammarUtil.containingRule(ruleCall);
-        String _name = _containingRule.getName();
-        boolean _equals = Objects.equal(_name, "XParenthesizedExpression");
-        _and = _equals;
-      }
-      if (_and) {
+      if (((ruleCall.eContainer() instanceof Group) && Objects.equal(GrammarUtil.containingRule(ruleCall).getName(), "XParenthesizedExpression"))) {
         EObject _currentModel = context.getCurrentModel();
         this.createLocalVariableAndImplicitProposals(_currentModel, IExpressionScope.Anchor.WITHIN, context, acceptor);
       }
@@ -557,31 +507,8 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     int _offset_2 = context.getOffset();
     boolean _lessEqualsThan = (endOffset <= _offset_2);
     if (_lessEqualsThan) {
-      boolean _or = false;
-      boolean _and = false;
-      if (!(model instanceof XFeatureCall)) {
-        _and = false;
-      } else {
-        EObject _eContainer = model.eContainer();
-        _and = (_eContainer instanceof XClosure);
-      }
-      if (_and) {
-        _or = true;
-      } else {
-        boolean _and_1 = false;
-        int _offset_3 = context.getOffset();
-        boolean _equals = (endOffset == _offset_3);
-        if (!_equals) {
-          _and_1 = false;
-        } else {
-          String _prefix = context.getPrefix();
-          int _length = _prefix.length();
-          boolean _equals_1 = (_length == 0);
-          _and_1 = _equals_1;
-        }
-        _or = _and_1;
-      }
-      if (_or) {
+      if ((((model instanceof XFeatureCall) && (model.eContainer() instanceof XClosure)) || 
+        ((endOffset == context.getOffset()) && (context.getPrefix().length() == 0)))) {
         return;
       }
       boolean _isInMemberFeatureCall = this.isInMemberFeatureCall(model, endOffset, context);
@@ -591,47 +518,21 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.AFTER, context, acceptor);
       return;
     }
-    boolean _or_1 = false;
-    boolean _isInMemberFeatureCall_1 = this.isInMemberFeatureCall(model, endOffset, context);
-    if (_isInMemberFeatureCall_1) {
-      _or_1 = true;
-    } else {
-      _or_1 = (model instanceof XClosure);
-    }
-    if (_or_1) {
+    if ((this.isInMemberFeatureCall(model, endOffset, context) || (model instanceof XClosure))) {
       return;
     }
     this.createLocalVariableAndImplicitProposals(model, IExpressionScope.Anchor.BEFORE, context, acceptor);
   }
   
   protected boolean isInMemberFeatureCall(final EObject model, final int endOffset, final ContentAssistContext context) {
-    boolean _and = false;
-    if (!(model instanceof XMemberFeatureCall)) {
-      _and = false;
-    } else {
-      int _offset = context.getOffset();
-      boolean _greaterEqualsThan = (endOffset >= _offset);
-      _and = _greaterEqualsThan;
-    }
-    if (_and) {
+    if (((model instanceof XMemberFeatureCall) && (endOffset >= context.getOffset()))) {
       final List<INode> featureNodes = NodeModelUtils.findNodesForFeature(model, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
       boolean _isEmpty = featureNodes.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
         final INode featureNode = IterableExtensions.<INode>head(featureNodes);
-        boolean _and_1 = false;
-        int _totalOffset = featureNode.getTotalOffset();
-        int _offset_1 = context.getOffset();
-        boolean _lessThan = (_totalOffset < _offset_1);
-        if (!_lessThan) {
-          _and_1 = false;
-        } else {
-          int _totalEndOffset = featureNode.getTotalEndOffset();
-          int _offset_2 = context.getOffset();
-          boolean _greaterEqualsThan_1 = (_totalEndOffset >= _offset_2);
-          _and_1 = _greaterEqualsThan_1;
-        }
-        if (_and_1) {
+        if (((featureNode.getTotalOffset() < context.getOffset()) && 
+          (featureNode.getTotalEndOffset() >= context.getOffset()))) {
           return true;
         }
       }
@@ -648,14 +549,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   }
   
   protected boolean isOperatorRule(final String ruleName) {
-    boolean _and = false;
-    if (!(ruleName != null)) {
-      _and = false;
-    } else {
-      boolean _startsWith = ruleName.startsWith("Op");
-      _and = _startsWith;
-    }
-    return _and;
+    return ((ruleName != null) && ruleName.startsWith("Op"));
   }
   
   protected void completeBinaryOperation(final EObject model, final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
@@ -667,17 +561,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
         final INode currentNode = context.getCurrentNode();
         final int offset = currentNode.getOffset();
         final int endOffset = currentNode.getEndOffset();
-        boolean _and = false;
-        int _offset = context.getOffset();
-        boolean _lessThan = (offset < _offset);
-        if (!_lessThan) {
-          _and = false;
-        } else {
-          int _offset_1 = context.getOffset();
-          boolean _greaterEqualsThan = (endOffset >= _offset_1);
-          _and = _greaterEqualsThan;
-        }
-        if (_and) {
+        if (((offset < context.getOffset()) && (endOffset >= context.getOffset()))) {
           EObject _grammarElement = currentNode.getGrammarElement();
           if ((_grammarElement instanceof CrossReference)) {
             return;
@@ -686,8 +570,8 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
       }
       ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(model);
       int _endOffset = _findActualNodeFor.getEndOffset();
-      int _offset_2 = context.getOffset();
-      boolean _lessEqualsThan = (_endOffset <= _offset_2);
+      int _offset = context.getOffset();
+      boolean _lessEqualsThan = (_endOffset <= _offset);
       if (_lessEqualsThan) {
         AbstractElement _terminal = assignment.getTerminal();
         this.createReceiverProposals(((XExpression) model), ((CrossReference) _terminal), context, acceptor);
@@ -706,8 +590,8 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
         if (_tripleEquals_1) {
           ICompositeNode _node = NodeModelUtils.getNode(previousModel);
           int _endOffset_1 = _node.getEndOffset();
-          int _offset_3 = context.getOffset();
-          boolean _greaterThan = (_endOffset_1 > _offset_3);
+          int _offset_1 = context.getOffset();
+          boolean _greaterThan = (_endOffset_1 > _offset_1);
           if (_greaterThan) {
             return;
           }
@@ -765,18 +649,7 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   
   protected void createLocalVariableAndImplicitProposals(final EObject model, final IExpressionScope.Anchor anchor, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     String prefix = context.getPrefix();
-    boolean _and = false;
-    int _length = prefix.length();
-    boolean _greaterThan = (_length > 0);
-    if (!_greaterThan) {
-      _and = false;
-    } else {
-      char _charAt = prefix.charAt(0);
-      boolean _isJavaIdentifierStart = Character.isJavaIdentifierStart(_charAt);
-      boolean _not = (!_isJavaIdentifierStart);
-      _and = _not;
-    }
-    if (_and) {
+    if (((prefix.length() > 0) && (!Character.isJavaIdentifierStart(prefix.charAt(0))))) {
       return;
     }
     IResolvedTypes _xifexpression = null;
@@ -798,29 +671,15 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   protected void createReceiverProposals(final XExpression receiver, final CrossReference crossReference, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(receiver);
     final LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
-    boolean _or = false;
-    if ((receiverType == null)) {
-      _or = true;
-    } else {
-      boolean _isPrimitiveVoid = receiverType.isPrimitiveVoid();
-      _or = _isPrimitiveVoid;
-    }
-    if (_or) {
+    if (((receiverType == null) || receiverType.isPrimitiveVoid())) {
       return;
     }
     final IExpressionScope expressionScope = resolvedTypes.getExpressionScope(receiver, IExpressionScope.Anchor.RECEIVER);
     IScope scope = null;
     final EObject currentModel = context.getCurrentModel();
     if ((currentModel != receiver)) {
-      boolean _and = false;
-      if (!(currentModel instanceof XMemberFeatureCall)) {
-        _and = false;
-      } else {
-        XExpression _memberCallTarget = ((XMemberFeatureCall) currentModel).getMemberCallTarget();
-        boolean _tripleEquals = (_memberCallTarget == receiver);
-        _and = _tripleEquals;
-      }
-      if (_and) {
+      if (((currentModel instanceof XMemberFeatureCall) && 
+        (((XMemberFeatureCall) currentModel).getMemberCallTarget() == receiver))) {
         IScope _featureScope = expressionScope.getFeatureScope(((XAbstractFeatureCall) currentModel));
         IScope _create = this.syntaxFilteredScopes.create(_featureScope, crossReference);
         scope = _create;

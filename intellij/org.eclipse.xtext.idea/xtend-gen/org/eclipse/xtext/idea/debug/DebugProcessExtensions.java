@@ -77,16 +77,7 @@ public class DebugProcessExtensions {
       URI _trimSegments = uri.trimSegments(1);
       URI _appendSegment = _trimSegments.appendSegment(lastSegmentOfTrace);
       final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(_appendSegment);
-      boolean _or = false;
-      boolean _equals = Objects.equal(virtualFile, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        boolean _exists = virtualFile.exists();
-        boolean _not = (!_exists);
-        _or = _not;
-      }
-      if (_or) {
+      if ((Objects.equal(virtualFile, null) || (!virtualFile.exists()))) {
         return null;
       }
       InputStream _inputStream = virtualFile.getInputStream();
@@ -135,15 +126,7 @@ public class DebugProcessExtensions {
           URI _trimSegments = uri.trimSegments(1);
           URI _appendSegment = _trimSegments.appendSegment(lastSegmentOfTrace);
           final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(_appendSegment);
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(virtualFile, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            boolean _exists = virtualFile.exists();
-            _and = _exists;
-          }
-          if (_and) {
+          if (((!Objects.equal(virtualFile, null)) && virtualFile.exists())) {
             InputStream _inputStream = virtualFile.getInputStream();
             final AbstractTraceRegion trace = this.traceRegionSerializer.readTraceRegionFrom(_inputStream);
             result.put(uri, trace);

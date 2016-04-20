@@ -34,24 +34,7 @@ public class NodeModelAccess {
       final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
         @Override
         public Boolean apply(final INode it) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          EObject _semanticElement = it.getSemanticElement();
-          boolean _equals = Objects.equal(_semanticElement, obj);
-          if (!_equals) {
-            _and_1 = false;
-          } else {
-            EObject _grammarElement = it.getGrammarElement();
-            _and_1 = (_grammarElement instanceof Keyword);
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            String _text = it.getText();
-            boolean _equals_1 = Objects.equal(_text, kw);
-            _and = _equals_1;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((Objects.equal(it.getSemanticElement(), obj) && (it.getGrammarElement() instanceof Keyword)) && Objects.equal(it.getText(), kw)));
         }
       };
       INode _findFirst = IterableExtensions.<INode>findFirst(_asTreeIterable, _function);
@@ -69,24 +52,7 @@ public class NodeModelAccess {
       final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
         @Override
         public Boolean apply(final ILeafNode it) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          EObject _semanticElement = it.getSemanticElement();
-          boolean _equals = Objects.equal(_semanticElement, obj);
-          if (!_equals) {
-            _and_1 = false;
-          } else {
-            EObject _grammarElement = it.getGrammarElement();
-            _and_1 = (_grammarElement instanceof Keyword);
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            String _text = it.getText();
-            boolean _equals_1 = Objects.equal(_text, kw);
-            _and = _equals_1;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((Objects.equal(it.getSemanticElement(), obj) && (it.getGrammarElement() instanceof Keyword)) && Objects.equal(it.getText(), kw)));
         }
       };
       _xblockexpression = IterableExtensions.<ILeafNode>filter(_filter, _function);
@@ -120,29 +86,12 @@ public class NodeModelAccess {
       final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
         @Override
         public Boolean apply(final ILeafNode it) {
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(current1, it));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            EObject _grammarElement = it.getGrammarElement();
-            _and = (_grammarElement instanceof Keyword);
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((!Objects.equal(current1, it)) && (it.getGrammarElement() instanceof Keyword)));
         }
       };
       final ILeafNode result = this.findNextLeaf(current1, _function);
       ILeafNode _xifexpression = null;
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(result, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        String _text = result.getText();
-        boolean _equals = Objects.equal(_text, kw);
-        _and = _equals;
-      }
-      if (_and) {
+      if (((!Objects.equal(result, null)) && Objects.equal(result.getText(), kw))) {
         _xifexpression = result;
       }
       _xblockexpression = _xifexpression;
@@ -154,28 +103,14 @@ public class NodeModelAccess {
     Object _xifexpression = null;
     boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
-      boolean _and = false;
-      if (!(node instanceof ILeafNode)) {
-        _and = false;
-      } else {
-        Boolean _apply = matches.apply(((ILeafNode) node));
-        _and = (_apply).booleanValue();
-      }
-      if (_and) {
+      if (((node instanceof ILeafNode) && (matches.apply(((ILeafNode) node))).booleanValue())) {
         return ((ILeafNode) node);
       }
       final NodeIterator ni = new NodeIterator(node);
       while (ni.hasNext()) {
         {
           final INode next = ni.next();
-          boolean _and_1 = false;
-          if (!(next instanceof ILeafNode)) {
-            _and_1 = false;
-          } else {
-            Boolean _apply_1 = matches.apply(((ILeafNode) next));
-            _and_1 = (_apply_1).booleanValue();
-          }
-          if (_and_1) {
+          if (((next instanceof ILeafNode) && (matches.apply(((ILeafNode) next))).booleanValue())) {
             return ((ILeafNode) next);
           }
         }

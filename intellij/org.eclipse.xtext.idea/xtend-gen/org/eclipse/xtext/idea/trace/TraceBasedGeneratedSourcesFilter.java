@@ -50,18 +50,7 @@ public class TraceBasedGeneratedSourcesFilter extends GeneratedSourcesFilter {
       Project _project = element.getProject();
       IdeFocusManager _instance = IdeFocusManager.getInstance(_project);
       final Component focusOwner = _instance.getFocusOwner();
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(focusOwner, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        Class<? extends Component> _class = focusOwner.getClass();
-        String _name = _class.getName();
-        String _name_1 = ProjectViewPane.class.getName();
-        boolean _startsWith = _name.startsWith(_name_1);
-        _and = _startsWith;
-      }
-      if (_and) {
+      if (((!Objects.equal(focusOwner, null)) && focusOwner.getClass().getName().startsWith(ProjectViewPane.class.getName()))) {
         return CollectionLiterals.<PsiElement>emptyList();
       }
     }

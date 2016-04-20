@@ -32,7 +32,6 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -43,12 +42,10 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
-import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
@@ -81,7 +78,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -321,22 +317,10 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
             if (_lessThan) {
               EList<XtendMember> _members_4 = type.getMembers();
               final XtendMember next = _members_4.get(((i).intValue() + 1));
-              boolean _and = false;
-              if (!(current instanceof XtendField)) {
-                _and = false;
-              } else {
-                _and = (next instanceof XtendField);
-              }
-              if (_and) {
+              if (((current instanceof XtendField) && (next instanceof XtendField))) {
                 format.<XtendMember>append(current, XtendFormatterPreferenceKeys.blankLinesBetweenFields);
               } else {
-                boolean _and_1 = false;
-                if (!(current instanceof XtendFunction)) {
-                  _and_1 = false;
-                } else {
-                  _and_1 = (next instanceof XtendFunction);
-                }
-                if (_and_1) {
+                if (((current instanceof XtendFunction) && (next instanceof XtendFunction))) {
                   format.<XtendMember>append(current, XtendFormatterPreferenceKeys.blankLinesBetweenMethods);
                 } else {
                   format.<XtendMember>append(current, XtendFormatterPreferenceKeys.blankLinesBetweenFieldsAndMethods);
@@ -750,37 +734,9 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   
   @Override
   protected boolean isSingleLineBlock(final XBlockExpression expr) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _and_2 = false;
-    EList<XExpression> _expressions = expr.getExpressions();
-    int _size = _expressions.size();
-    boolean _lessEqualsThan = (_size <= 1);
-    if (!_lessEqualsThan) {
-      _and_2 = false;
-    } else {
-      ITypedPreferenceValues _preferences = this.getPreferences();
-      Boolean _preference = _preferences.<Boolean>getPreference(XtendFormatterPreferenceKeys.keepOneLineMethods);
-      _and_2 = (_preference).booleanValue();
-    }
-    if (!_and_2) {
-      _and_1 = false;
-    } else {
-      EObject _eContainer = expr.eContainer();
-      _and_1 = (_eContainer instanceof XtendFunction);
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      IHiddenRegion _nextHiddenRegion = this.textRegionExtensions.nextHiddenRegion(expr);
-      ISemanticRegionFinder _immediatelyPreceding = _nextHiddenRegion.immediatelyPreceding();
-      ISemanticRegion _keyword = _immediatelyPreceding.keyword("}");
-      IHiddenRegion _previousHiddenRegion = _keyword.getPreviousHiddenRegion();
-      boolean _isMultiline = _previousHiddenRegion.isMultiline();
-      boolean _not = (!_isMultiline);
-      _and = _not;
-    }
-    return _and;
+    return ((((expr.getExpressions().size() <= 1) && (this.getPreferences().<Boolean>getPreference(XtendFormatterPreferenceKeys.keepOneLineMethods)).booleanValue()) && 
+      (expr.eContainer() instanceof XtendFunction)) && 
+      (!this.textRegionExtensions.nextHiddenRegion(expr).immediatelyPreceding().keyword("}").getPreviousHiddenRegion().isMultiline()));
   }
   
   @Override
@@ -794,28 +750,9 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
         XExpression _last_1 = IterableExtensions.<XExpression>last(params);
         final EObject grammarElement = this.textRegionExtensions.grammarElement(_last_1);
         XClosure _xifexpression_1 = null;
-        boolean _or = false;
-        boolean _or_1 = false;
-        XbaseGrammarAccess.XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xtendGrammarAccess.getXMemberFeatureCallAccess();
-        RuleCall _memberCallArgumentsXClosureParserRuleCall_1_1_4_0 = _xMemberFeatureCallAccess.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0();
-        boolean _equals = Objects.equal(grammarElement, _memberCallArgumentsXClosureParserRuleCall_1_1_4_0);
-        if (_equals) {
-          _or_1 = true;
-        } else {
-          XbaseGrammarAccess.XFeatureCallElements _xFeatureCallAccess = this._xtendGrammarAccess.getXFeatureCallAccess();
-          RuleCall _featureCallArgumentsXClosureParserRuleCall_4_0 = _xFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_4_0();
-          boolean _equals_1 = Objects.equal(grammarElement, _featureCallArgumentsXClosureParserRuleCall_4_0);
-          _or_1 = _equals_1;
-        }
-        if (_or_1) {
-          _or = true;
-        } else {
-          XtendGrammarAccess.XbaseConstructorCallElements _xbaseConstructorCallAccess = this._xtendGrammarAccess.getXbaseConstructorCallAccess();
-          RuleCall _argumentsXClosureParserRuleCall_5_0 = _xbaseConstructorCallAccess.getArgumentsXClosureParserRuleCall_5_0();
-          boolean _equals_2 = Objects.equal(grammarElement, _argumentsXClosureParserRuleCall_5_0);
-          _or = _equals_2;
-        }
-        if (_or) {
+        if (((Objects.equal(grammarElement, this._xtendGrammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0()) || 
+          Objects.equal(grammarElement, this._xtendGrammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXClosureParserRuleCall_4_0())) || 
+          Objects.equal(grammarElement, this._xtendGrammarAccess.getXbaseConstructorCallAccess().getArgumentsXClosureParserRuleCall_5_0()))) {
           XExpression _last_2 = IterableExtensions.<XExpression>last(params);
           _xifexpression_1 = ((XClosure) _last_2);
         }

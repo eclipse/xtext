@@ -54,25 +54,16 @@ public class InsertionOffsets {
   
   public int getNewMethodInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     final XtendMember callingMember = EcoreUtil2.<XtendMember>getContainerOfType(call, XtendMember.class);
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(callingMember, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      EList<XtendMember> _members = ownerType.getMembers();
-      boolean _contains = _members.contains(callingMember);
-      _and = _contains;
-    }
-    if (_and) {
+    if (((!Objects.equal(callingMember, null)) && ownerType.getMembers().contains(callingMember))) {
       return this.after(callingMember);
     } else {
-      EList<XtendMember> _members_1 = ownerType.getMembers();
-      boolean _isEmpty = _members_1.isEmpty();
+      EList<XtendMember> _members = ownerType.getMembers();
+      boolean _isEmpty = _members.isEmpty();
       if (_isEmpty) {
         return this.inEmpty(ownerType);
       } else {
-        EList<XtendMember> _members_2 = ownerType.getMembers();
-        XtendMember _last = IterableExtensions.<XtendMember>last(_members_2);
+        EList<XtendMember> _members_1 = ownerType.getMembers();
+        XtendMember _last = IterableExtensions.<XtendMember>last(_members_1);
         return this.after(_last);
       }
     }

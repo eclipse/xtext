@@ -122,22 +122,12 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   protected XExpression findValue(final String property) {
     XExpression _xblockexpression = null;
     {
-      boolean _and = false;
-      boolean _equals = Objects.equal(property, "value");
-      if (!_equals) {
-        _and = false;
-      } else {
+      if ((Objects.equal(property, "value") && (!Objects.equal(this.getDelegate().getValue(), null)))) {
         XAnnotation _delegate = this.getDelegate();
-        XExpression _value = _delegate.getValue();
-        boolean _notEquals = (!Objects.equal(_value, null));
-        _and = _notEquals;
+        return _delegate.getValue();
       }
-      if (_and) {
-        XAnnotation _delegate_1 = this.getDelegate();
-        return _delegate_1.getValue();
-      }
-      XAnnotation _delegate_2 = this.getDelegate();
-      EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
+      XAnnotation _delegate_1 = this.getDelegate();
+      EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_1.getElementValuePairs();
       final Function1<XAnnotationElementValuePair, Boolean> _function = new Function1<XAnnotationElementValuePair, Boolean>() {
         @Override
         public Boolean apply(final XAnnotationElementValuePair it) {
@@ -147,11 +137,11 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
         }
       };
       XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
-      XExpression _value_1 = null;
+      XExpression _value = null;
       if (_findFirst!=null) {
-        _value_1=_findFirst.getValue();
+        _value=_findFirst.getValue();
       }
-      _xblockexpression = _value_1;
+      _xblockexpression = _value;
     }
     return _xblockexpression;
   }

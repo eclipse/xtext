@@ -114,19 +114,9 @@ public class HoverService {
             @Override
             public void accept(final ContentAssistEntry entry, final int priority) {
               HoverService.this._operationCanceledManager.checkCanceled(cancelIndicator);
-              boolean _and = false;
-              Object _source = entry.getSource();
-              boolean _tripleNotEquals = (_source != null);
-              if (!_tripleNotEquals) {
-                _and = false;
-              } else {
-                String _proposal = entry.getProposal();
-                boolean _equals = Objects.equal(_proposal, proposal);
-                _and = _equals;
-              }
-              if (_and) {
-                Object _source_1 = entry.getSource();
-                proposedElement.set(_source_1);
+              if (((entry.getSource() != null) && Objects.equal(entry.getProposal(), proposal))) {
+                Object _source = entry.getSource();
+                proposedElement.set(_source);
               }
             }
             
@@ -176,15 +166,7 @@ public class HoverService {
       }
       final EObject eobject = _switchResult;
       String bodyHtml = "";
-      boolean _and = false;
-      if (!(eobject != null)) {
-        _and = false;
-      } else {
-        boolean _eIsProxy = eobject.eIsProxy();
-        boolean _not = (!_eIsProxy);
-        _and = _not;
-      }
-      if (_and) {
+      if (((eobject != null) && (!eobject.eIsProxy()))) {
         final String documentation = this._iEObjectDocumentationProvider.getDocumentation(eobject);
         if ((documentation != null)) {
           String _surroundWithDiv_1 = this.surroundWithDiv(documentation, "xtext-hover");

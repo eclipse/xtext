@@ -143,15 +143,7 @@ public class ConstantConditionsInterpreter {
   
   protected EvaluationResult _internalEvaluate(final XAbstractFeatureCall it, final EvaluationContext context) {
     final JvmIdentifiableElement feature = this.getFeature(it, context);
-    boolean _or = false;
-    boolean _equals = Objects.equal(feature, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _eIsProxy = feature.eIsProxy();
-      _or = _eIsProxy;
-    }
-    if (_or) {
+    if ((Objects.equal(feature, null) || feature.eIsProxy())) {
       return EvaluationResult.NOT_A_CONSTANT;
     }
     boolean _matched = false;
@@ -253,20 +245,10 @@ public class ConstantConditionsInterpreter {
     }
     if (!_matched) {
       if (feature instanceof XVariableDeclaration) {
-        boolean _and = false;
-        boolean _isWriteable = ((XVariableDeclaration)feature).isWriteable();
-        boolean _not = (!_isWriteable);
-        if (!_not) {
-          _and = false;
-        } else {
-          XExpression _right = ((XVariableDeclaration)feature).getRight();
-          boolean _notEquals = (!Objects.equal(_right, null));
-          _and = _notEquals;
-        }
-        if (_and) {
+        if (((!((XVariableDeclaration)feature).isWriteable()) && (!Objects.equal(((XVariableDeclaration)feature).getRight(), null)))) {
           _matched=true;
-          XExpression _right_1 = ((XVariableDeclaration)feature).getRight();
-          return this.evaluateAssociatedExpression(_right_1, context);
+          XExpression _right = ((XVariableDeclaration)feature).getRight();
+          return this.evaluateAssociatedExpression(_right, context);
         }
       }
     }
@@ -294,15 +276,7 @@ public class ConstantConditionsInterpreter {
   public JvmIdentifiableElement getFeature(final XAbstractFeatureCall call, final EvaluationContext context) {
     Object _eGet = call.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
     JvmIdentifiableElement feature = ((JvmIdentifiableElement) _eGet);
-    boolean _or = false;
-    boolean _equals = Objects.equal(feature, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _eIsProxy = feature.eIsProxy();
-      _or = _eIsProxy;
-    }
-    if (_or) {
+    if ((Objects.equal(feature, null) || feature.eIsProxy())) {
       IResolvedTypes _resolvedTypes = context.getResolvedTypes();
       JvmIdentifiableElement _linkedFeature = _resolvedTypes.getLinkedFeature(call);
       feature = _linkedFeature;
@@ -398,32 +372,16 @@ public class ConstantConditionsInterpreter {
           }
         }
         if (!_matched) {
-          boolean _and = false;
-          boolean _equals = Objects.equal(op, "!");
-          if (!_equals) {
-            _and = false;
-          } else {
-            Object _rawValue_1 = arg.getRawValue();
-            _and = (_rawValue_1 instanceof Boolean);
-          }
-          if (_and) {
+          if ((Objects.equal(op, "!") && (arg.getRawValue() instanceof Boolean))) {
             _matched=true;
-            Object _rawValue_2 = arg.getRawValue();
-            boolean _not = (!(((Boolean) _rawValue_2)).booleanValue());
+            Object _rawValue_1 = arg.getRawValue();
+            boolean _not = (!(((Boolean) _rawValue_1)).booleanValue());
             boolean _isCompileTimeConstant_1 = arg.isCompileTimeConstant();
             _switchResult = new EvaluationResult(Boolean.valueOf(_not), _isCompileTimeConstant_1);
           }
         }
         if (!_matched) {
-          boolean _and_1 = false;
-          boolean _equals_1 = Objects.equal(op, "+");
-          if (!_equals_1) {
-            _and_1 = false;
-          } else {
-            Object _rawValue_3 = arg.getRawValue();
-            _and_1 = (_rawValue_3 instanceof Number);
-          }
-          if (_and_1) {
+          if ((Objects.equal(op, "+") && (arg.getRawValue() instanceof Number))) {
             _matched=true;
             _switchResult = arg;
           }
@@ -441,20 +399,11 @@ public class ConstantConditionsInterpreter {
   }
   
   protected EvaluationResult _internalEvaluate(final XBinaryOperation it, final EvaluationContext context) {
-    boolean _and = false;
-    boolean _isFromXbaseLibrary = this.isFromXbaseLibrary(it, context);
-    if (!_isFromXbaseLibrary) {
-      _and = false;
-    } else {
-      XExpression _rightOperand = it.getRightOperand();
-      boolean _notEquals = (!Objects.equal(_rightOperand, null));
-      _and = _notEquals;
-    }
-    if (_and) {
+    if ((this.isFromXbaseLibrary(it, context) && (!Objects.equal(it.getRightOperand(), null)))) {
       XExpression _leftOperand = it.getLeftOperand();
       final EvaluationResult left = this.doEvaluate(_leftOperand, context);
-      XExpression _rightOperand_1 = it.getRightOperand();
-      final EvaluationResult right = this.doEvaluate(_rightOperand_1, context);
+      XExpression _rightOperand = it.getRightOperand();
+      final EvaluationResult right = this.doEvaluate(_rightOperand, context);
       try {
         final String op = it.getConcreteSyntaxFeatureName();
         Object _switchResult = null;
@@ -558,15 +507,7 @@ public class ConstantConditionsInterpreter {
             _matched=true;
             Object _rawValue_24 = left.getRawValue();
             Object _rawValue_25 = right.getRawValue();
-            boolean _and_1 = false;
-            boolean _isCompileTimeConstant = left.isCompileTimeConstant();
-            if (!_isCompileTimeConstant) {
-              _and_1 = false;
-            } else {
-              boolean _isCompileTimeConstant_1 = right.isCompileTimeConstant();
-              _and_1 = _isCompileTimeConstant_1;
-            }
-            return this.internalLogicalAnd(_rawValue_24, _rawValue_25, _and_1);
+            return this.internalLogicalAnd(_rawValue_24, _rawValue_25, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
           }
         }
         if (!_matched) {
@@ -574,15 +515,7 @@ public class ConstantConditionsInterpreter {
             _matched=true;
             Object _rawValue_26 = left.getRawValue();
             Object _rawValue_27 = right.getRawValue();
-            boolean _and_2 = false;
-            boolean _isCompileTimeConstant_2 = left.isCompileTimeConstant();
-            if (!_isCompileTimeConstant_2) {
-              _and_2 = false;
-            } else {
-              boolean _isCompileTimeConstant_3 = right.isCompileTimeConstant();
-              _and_2 = _isCompileTimeConstant_3;
-            }
-            return this.internalLogicalOr(_rawValue_26, _rawValue_27, _and_2);
+            return this.internalLogicalOr(_rawValue_26, _rawValue_27, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
           }
         }
         if (!_matched) {
@@ -595,27 +528,11 @@ public class ConstantConditionsInterpreter {
             }
           }
           if (_matched) {
-            boolean _or = false;
-            boolean _isNotAConstant = left.isNotAConstant();
-            if (_isNotAConstant) {
-              _or = true;
-            } else {
-              boolean _isNotAConstant_1 = right.isNotAConstant();
-              _or = _isNotAConstant_1;
-            }
-            if (_or) {
+            if ((left.isNotAConstant() || right.isNotAConstant())) {
               return EvaluationResult.NOT_A_CONSTANT;
             }
             Object _equalValue = left.equalValue(right);
-            boolean _and_3 = false;
-            boolean _isCompileTimeConstant_4 = left.isCompileTimeConstant();
-            if (!_isCompileTimeConstant_4) {
-              _and_3 = false;
-            } else {
-              boolean _isCompileTimeConstant_5 = right.isCompileTimeConstant();
-              _and_3 = _isCompileTimeConstant_5;
-            }
-            return new EvaluationResult(_equalValue, _and_3);
+            return new EvaluationResult(_equalValue, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
           }
         }
         if (!_matched) {
@@ -628,55 +545,23 @@ public class ConstantConditionsInterpreter {
             }
           }
           if (_matched) {
-            boolean _or_1 = false;
-            boolean _isNotAConstant_2 = left.isNotAConstant();
-            if (_isNotAConstant_2) {
-              _or_1 = true;
-            } else {
-              boolean _isNotAConstant_3 = right.isNotAConstant();
-              _or_1 = _isNotAConstant_3;
-            }
-            if (_or_1) {
+            if ((left.isNotAConstant() || right.isNotAConstant())) {
               return EvaluationResult.NOT_A_CONSTANT;
             }
             final Object result = left.equalValue(right);
             boolean _matched_1 = false;
             if (result instanceof Boolean) {
               _matched_1=true;
-              boolean _and_4 = false;
-              boolean _isCompileTimeConstant_6 = left.isCompileTimeConstant();
-              if (!_isCompileTimeConstant_6) {
-                _and_4 = false;
-              } else {
-                boolean _isCompileTimeConstant_7 = right.isCompileTimeConstant();
-                _and_4 = _isCompileTimeConstant_7;
-              }
-              return new EvaluationResult(Boolean.valueOf((!((Boolean) result).booleanValue())), _and_4);
+              return new EvaluationResult(Boolean.valueOf((!((Boolean) result).booleanValue())), (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
             }
-            boolean _and_4 = false;
-            boolean _isCompileTimeConstant_6 = left.isCompileTimeConstant();
-            if (!_isCompileTimeConstant_6) {
-              _and_4 = false;
-            } else {
-              boolean _isCompileTimeConstant_7 = right.isCompileTimeConstant();
-              _and_4 = _isCompileTimeConstant_7;
-            }
-            return new EvaluationResult(result, _and_4);
+            return new EvaluationResult(result, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
           }
         }
         if (!_matched) {
           return EvaluationResult.NOT_A_CONSTANT;
         }
         final Object value = _switchResult;
-        boolean _and_5 = false;
-        boolean _isCompileTimeConstant_8 = left.isCompileTimeConstant();
-        if (!_isCompileTimeConstant_8) {
-          _and_5 = false;
-        } else {
-          boolean _isCompileTimeConstant_9 = right.isCompileTimeConstant();
-          _and_5 = _isCompileTimeConstant_9;
-        }
-        return new EvaluationResult(value, _and_5);
+        return new EvaluationResult(value, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
       } catch (final Throwable _t) {
         if (_t instanceof ConstantExpressionEvaluationException) {
           final ConstantExpressionEvaluationException e = (ConstantExpressionEvaluationException)_t;

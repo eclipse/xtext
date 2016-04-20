@@ -131,48 +131,24 @@ public class GrammarAccessExtensions {
     boolean _xblockexpression = false;
     {
       final List<AbstractRule> allRules = GrammarUtil.allRules(grammar);
-      boolean _or = false;
-      int _indexOf = allRules.indexOf(rule);
-      boolean _equals = (_indexOf == 0);
-      if (_equals) {
-        _or = true;
-      } else {
-        final Function1<AbstractRule, List<RuleCall>> _function = new Function1<AbstractRule, List<RuleCall>>() {
-          @Override
-          public List<RuleCall> apply(final AbstractRule it) {
-            return GrammarUtil.containedRuleCalls(it);
-          }
-        };
-        List<List<RuleCall>> _map = ListExtensions.<AbstractRule, List<RuleCall>>map(allRules, _function);
-        Iterable<RuleCall> _flatten = Iterables.<RuleCall>concat(_map);
-        final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
-          @Override
-          public Boolean apply(final RuleCall ruleCall) {
-            AbstractRule _rule = ruleCall.getRule();
-            return Boolean.valueOf(Objects.equal(_rule, rule));
-          }
-        };
-        boolean _exists = IterableExtensions.<RuleCall>exists(_flatten, _function_1);
-        _or = _exists;
-      }
-      _xblockexpression = _or;
+      _xblockexpression = ((allRules.indexOf(rule) == 0) || IterableExtensions.<RuleCall>exists(Iterables.<RuleCall>concat(ListExtensions.<AbstractRule, List<RuleCall>>map(allRules, new Function1<AbstractRule, List<RuleCall>>() {
+        @Override
+        public List<RuleCall> apply(final AbstractRule it) {
+          return GrammarUtil.containedRuleCalls(it);
+        }
+      })), new Function1<RuleCall, Boolean>() {
+        @Override
+        public Boolean apply(final RuleCall ruleCall) {
+          AbstractRule _rule = ruleCall.getRule();
+          return Boolean.valueOf(Objects.equal(_rule, rule));
+        }
+      }));
     }
     return _xblockexpression;
   }
   
   public boolean definesUnorderedGroups(final ParserRule it, final AntlrOptions options) {
-    boolean _and = false;
-    boolean _isBacktrack = options.isBacktrack();
-    if (!_isBacktrack) {
-      _and = false;
-    } else {
-      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(it);
-      List<UnorderedGroup> _typeSelect = EcoreUtil2.<UnorderedGroup>typeSelect(_eAllContentsAsList, UnorderedGroup.class);
-      boolean _isEmpty = _typeSelect.isEmpty();
-      boolean _not = (!_isEmpty);
-      _and = _not;
-    }
-    return _and;
+    return (options.isBacktrack() && (!EcoreUtil2.<UnorderedGroup>typeSelect(EcoreUtil2.eAllContentsAsList(it), UnorderedGroup.class).isEmpty()));
   }
   
   protected boolean _mustBeParenthesized(final AbstractElement it) {
@@ -180,43 +156,11 @@ public class GrammarAccessExtensions {
   }
   
   protected boolean _mustBeParenthesized(final Keyword it) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _predicated = this.predicated(it);
-    if (_predicated) {
-      _or_1 = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or_1 = _isFirstSetPredicated;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      String _cardinality = it.getCardinality();
-      boolean _notEquals = (!Objects.equal(_cardinality, null));
-      _or = _notEquals;
-    }
-    return _or;
+    return ((this.predicated(it) || it.isFirstSetPredicated()) || (!Objects.equal(it.getCardinality(), null)));
   }
   
   protected boolean _mustBeParenthesized(final RuleCall it) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _predicated = this.predicated(it);
-    if (_predicated) {
-      _or_1 = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or_1 = _isFirstSetPredicated;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      String _cardinality = it.getCardinality();
-      boolean _notEquals = (!Objects.equal(_cardinality, null));
-      _or = _notEquals;
-    }
-    return _or;
+    return ((this.predicated(it) || it.isFirstSetPredicated()) || (!Objects.equal(it.getCardinality(), null)));
   }
   
   protected boolean _predicated(final AbstractElement it) {
@@ -224,16 +168,7 @@ public class GrammarAccessExtensions {
   }
   
   protected boolean _predicated(final Assignment it) {
-    boolean _or = false;
-    boolean _isPredicated = it.isPredicated();
-    if (_isPredicated) {
-      _or = true;
-    } else {
-      AbstractElement _terminal = it.getTerminal();
-      boolean _predicated = this.predicated(_terminal);
-      _or = _predicated;
-    }
-    return _or;
+    return (it.isPredicated() || this.predicated(it.getTerminal()));
   }
   
   protected boolean _predicated(final RuleCall it) {

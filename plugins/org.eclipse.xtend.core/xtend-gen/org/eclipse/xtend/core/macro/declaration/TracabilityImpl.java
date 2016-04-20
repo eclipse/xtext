@@ -78,17 +78,7 @@ public class TracabilityImpl implements Tracability {
   
   @Override
   public boolean isExternal(final Element element) {
-    boolean _and = false;
-    boolean _isSource = this.isSource(element);
-    boolean _not = (!_isSource);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _isGenerated = this.isGenerated(element);
-      boolean _not_1 = (!_isGenerated);
-      _and = _not_1;
-    }
-    return _and;
+    return ((!this.isSource(element)) && (!this.isGenerated(element)));
   }
   
   @Override

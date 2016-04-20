@@ -501,17 +501,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
       @Override
       public Boolean apply(final IGrammarConstraintProvider.IConstraint it) {
-        boolean _and = false;
-        EClass _type = it.getType();
-        boolean _tripleNotEquals = (_type != null);
-        if (!_tripleNotEquals) {
-          _and = false;
-        } else {
-          boolean _contains = superConstraints.contains(it);
-          boolean _not = (!_contains);
-          _and = _not;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((it.getType() != null) && (!superConstraints.contains(it))));
       }
     };
     Iterable<IGrammarConstraintProvider.IConstraint> _filter = IterableExtensions.<IGrammarConstraintProvider.IConstraint>filter(localConstraints, _function);
@@ -670,15 +660,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     final Function1<EClass, Boolean> _function_1 = new Function1<EClass, Boolean>() {
       @Override
       public Boolean apply(final EClass it) {
-        boolean _and = false;
-        if (!(it != null)) {
-          _and = false;
-        } else {
-          EPackage _ePackage = it.getEPackage();
-          boolean _equals = Objects.equal(_ePackage, pkg);
-          _and = _equals;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((it != null) && Objects.equal(it.getEPackage(), pkg)));
       }
     };
     Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_map, _function_1);
@@ -1606,15 +1588,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       return false;
     }
     final Assignment ass = GrammarUtil.containingAssignment(c);
-    boolean _or = false;
-    boolean _equals = Objects.equal(ass, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(ass);
-      _or = _isBooleanAssignment;
-    }
-    return _or;
+    return (Objects.equal(ass, null) || GrammarUtil.isBooleanAssignment(ass));
   }
   
   private String defaultValue(final AbstractElement ele, final Set<AbstractElement> visited) {
@@ -1731,19 +1705,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     String _switchResult = null;
     boolean _matched = false;
     if (node instanceof ILeafNode) {
-      boolean _or = false;
-      boolean _isHidden = ((ILeafNode)node).isHidden();
-      boolean _not = (!_isHidden);
-      if (_not) {
-        _or = true;
-      } else {
-        String _text = ((ILeafNode)node).getText();
-        String _trim = _text.trim();
-        int _length = _trim.length();
-        boolean _equals = (_length == 0);
-        _or = _equals;
-      }
-      if (_or) {
+      if (((!((ILeafNode)node).isHidden()) || (((ILeafNode)node).getText().trim().length() == 0))) {
         _matched=true;
         _switchResult = ((ILeafNode)node).getText();
       }
@@ -1770,14 +1732,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   
   private StringConcatenationClient genGetUnassignedRuleCallToken(final AbstractRule rule) {
     if ((rule instanceof TerminalRule)) {
-      boolean _and = false;
-      if (!this.detectSyntheticTerminals) {
-        _and = false;
-      } else {
-        boolean _isSyntheticTerminalRule = this.syntheticTerminalDetector.isSyntheticTerminalRule(((TerminalRule)rule));
-        _and = _isSyntheticTerminalRule;
-      }
-      if (_and) {
+      if ((this.detectSyntheticTerminals && this.syntheticTerminalDetector.isSyntheticTerminalRule(((TerminalRule)rule)))) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {

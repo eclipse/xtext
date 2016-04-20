@@ -17,11 +17,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.CompilationTemplateAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -66,44 +62,11 @@ public class JvmTypeExtensions {
   }
   
   public boolean isSingleSyntheticDefaultConstructor(final JvmConstructor it) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _and_2 = false;
-    boolean _and_3 = false;
-    EList<JvmFormalParameter> _parameters = it.getParameters();
-    boolean _isEmpty = _parameters.isEmpty();
-    if (!_isEmpty) {
-      _and_3 = false;
-    } else {
-      XExpression _associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(it);
-      boolean _equals = Objects.equal(_associatedExpression, null);
-      _and_3 = _equals;
-    }
-    if (!_and_3) {
-      _and_2 = false;
-    } else {
-      Procedure1<? super ITreeAppendable> _compilationStrategy = this.getCompilationStrategy(it);
-      boolean _equals_1 = Objects.equal(_compilationStrategy, null);
-      _and_2 = _equals_1;
-    }
-    if (!_and_2) {
-      _and_1 = false;
-    } else {
-      StringConcatenationClient _compilationTemplate = this.getCompilationTemplate(it);
-      boolean _equals_2 = Objects.equal(_compilationTemplate, null);
-      _and_1 = _equals_2;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      JvmDeclaredType _declaringType = it.getDeclaringType();
-      EList<JvmMember> _members = _declaringType.getMembers();
-      Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
-      int _size = IterableExtensions.size(_filter);
-      boolean _equals_3 = (_size == 1);
-      _and = _equals_3;
-    }
-    return _and;
+    return ((((it.getParameters().isEmpty() && 
+      Objects.equal(this._iLogicalContainerProvider.getAssociatedExpression(it), null)) && 
+      Objects.equal(this.getCompilationStrategy(it), null)) && 
+      Objects.equal(this.getCompilationTemplate(it), null)) && 
+      (IterableExtensions.size(Iterables.<JvmConstructor>filter(it.getDeclaringType().getMembers(), JvmConstructor.class)) == 1));
   }
   
   public boolean isSynthetic(final JvmIdentifiableElement element) {

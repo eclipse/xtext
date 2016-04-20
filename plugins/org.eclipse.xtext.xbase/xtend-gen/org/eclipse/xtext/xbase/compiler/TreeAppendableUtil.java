@@ -73,14 +73,7 @@ public class TreeAppendableUtil {
         }
         final ITextRegionWithLineInformation it = ((ITextRegionWithLineInformation) _switchResult);
         ITreeAppendable _xifexpression_1 = null;
-        boolean _and = false;
-        boolean _notEquals = (!Objects.equal(it, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          _and = (it != ITextRegion.EMPTY_REGION);
-        }
-        if (_and) {
+        if (((!Objects.equal(it, null)) && (it != ITextRegion.EMPTY_REGION))) {
           int _offset = it.getOffset();
           int _length = it.getLength();
           int _lineNumber = it.getLineNumber();

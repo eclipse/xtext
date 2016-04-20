@@ -66,14 +66,7 @@ public class OccurrencesService {
         final EObject element = OccurrencesService.this._elementAtOffsetUtil.getElementAt(_resource, offset);
         String _stateId = it.getStateId();
         final OccurrencesResult occurrencesResult = new OccurrencesResult(_stateId);
-        boolean _and = false;
-        if (!(element != null)) {
-          _and = false;
-        } else {
-          boolean _filter = OccurrencesService.this.filter(element);
-          _and = _filter;
-        }
-        if (_and) {
+        if (((element != null) && OccurrencesService.this.filter(element))) {
           final URI elementURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(element);
           final TargetURIs targetURIs = OccurrencesService.this.targetURIsProvider.get();
           targetURIs.addURI(elementURI);

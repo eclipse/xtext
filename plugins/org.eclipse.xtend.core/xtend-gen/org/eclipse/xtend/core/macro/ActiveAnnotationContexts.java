@@ -70,23 +70,7 @@ public class ActiveAnnotationContexts extends AdapterImpl {
   
   @Override
   public void notifyChanged(final Notification msg) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    if (!(!this.running)) {
-      _and_1 = false;
-    } else {
-      boolean _isTouch = msg.isTouch();
-      boolean _not = (!_isTouch);
-      _and_1 = _not;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      int _featureID = msg.getFeatureID(Resource.class);
-      boolean _equals = (Resource.RESOURCE__CONTENTS == _featureID);
-      _and = _equals;
-    }
-    if (_and) {
+    if ((((!this.running) && (!msg.isTouch())) && (Resource.RESOURCE__CONTENTS == msg.getFeatureID(Resource.class)))) {
       Object _notifier = msg.getNotifier();
       final Resource resource = ((Resource) _notifier);
       EList<Adapter> _eAdapters = resource.eAdapters();

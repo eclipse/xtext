@@ -76,17 +76,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
     final Function1<XAbstractFeatureCall, Boolean> _function = new Function1<XAbstractFeatureCall, Boolean>() {
       @Override
       public Boolean apply(final XAbstractFeatureCall it) {
-        boolean _and = false;
-        boolean _isPackageFragment = it.isPackageFragment();
-        boolean _not = (!_isPackageFragment);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _isTypeLiteral = it.isTypeLiteral();
-          boolean _not_1 = (!_isTypeLiteral);
-          _and = _not_1;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((!it.isPackageFragment()) && (!it.isTypeLiteral())));
       }
     };
     return IterableExtensions.<XAbstractFeatureCall>filter(featureCalls, _function);

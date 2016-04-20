@@ -58,14 +58,7 @@ public class ValidatorNaming {
     {
       final Grammar superGrammar = IInheriting.Util.getNonTerminalsSuperGrammar(this.grammar);
       String _xifexpression = null;
-      boolean _and = false;
-      if (!isInheritImplementation) {
-        _and = false;
-      } else {
-        boolean _notEquals = (!Objects.equal(superGrammar, null));
-        _and = _notEquals;
-      }
-      if (_and) {
+      if ((isInheritImplementation && (!Objects.equal(superGrammar, null)))) {
         _xifexpression = this.getValidatorName(superGrammar);
       } else {
         _xifexpression = "org.eclipse.xtext.validation.AbstractDeclarativeValidator";

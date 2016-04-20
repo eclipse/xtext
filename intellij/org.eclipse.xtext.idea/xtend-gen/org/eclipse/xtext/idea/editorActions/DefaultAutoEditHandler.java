@@ -92,24 +92,8 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
   }
   
   protected boolean shouldIndentBlock(final AutoEditBlockRegion region, final String previousLineIndentation, final AutoEditContext context) {
-    boolean _or = false;
-    boolean _and = false;
-    CodeInsightSettings _instance = CodeInsightSettings.getInstance();
-    if (!_instance.INSERT_BRACE_ON_ENTER) {
-      _and = false;
-    } else {
-      AbstractIndentableAutoEditBlock _block = region.getBlock();
-      String _closingTerminal = _block.getClosingTerminal();
-      boolean _equals = Objects.equal(_closingTerminal, "}");
-      _and = _equals;
-    }
-    if (_and) {
-      _or = true;
-    } else {
-      CodeInsightSettings _instance_1 = CodeInsightSettings.getInstance();
-      _or = _instance_1.AUTOINSERT_PAIR_BRACKET;
-    }
-    return _or;
+    return ((CodeInsightSettings.getInstance().INSERT_BRACE_ON_ENTER && Objects.equal(region.getBlock().getClosingTerminal(), "}")) || 
+      CodeInsightSettings.getInstance().AUTOINSERT_PAIR_BRACKET);
   }
   
   protected String getPreviousLineIndentaiton(@Extension final AutoEditContext context) {
@@ -193,15 +177,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
       };
       Iterable<IdeaAutoEditHandler.Result> _map = IterableExtensions.<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result>map(_blocks, _function);
       for (final IdeaAutoEditHandler.Result result : _map) {
-        boolean _or = false;
-        boolean _equals = Objects.equal(result, IdeaAutoEditHandler.Result.DEFAULT);
-        if (_equals) {
-          _or = true;
-        } else {
-          boolean _equals_1 = Objects.equal(result, IdeaAutoEditHandler.Result.STOP);
-          _or = _equals_1;
-        }
-        if (_or) {
+        if ((Objects.equal(result, IdeaAutoEditHandler.Result.DEFAULT) || Objects.equal(result, IdeaAutoEditHandler.Result.STOP))) {
           return result;
         }
       }
@@ -217,15 +193,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
       };
       Iterable<IdeaAutoEditHandler.Result> _map_1 = IterableExtensions.<AbstractAutoEditBlock, IdeaAutoEditHandler.Result>map(_quotes, _function_1);
       for (final IdeaAutoEditHandler.Result result_1 : _map_1) {
-        boolean _or_1 = false;
-        boolean _equals_2 = Objects.equal(result_1, IdeaAutoEditHandler.Result.DEFAULT);
-        if (_equals_2) {
-          _or_1 = true;
-        } else {
-          boolean _equals_3 = Objects.equal(result_1, IdeaAutoEditHandler.Result.STOP);
-          _or_1 = _equals_3;
-        }
-        if (_or_1) {
+        if ((Objects.equal(result_1, IdeaAutoEditHandler.Result.DEFAULT) || Objects.equal(result_1, IdeaAutoEditHandler.Result.STOP))) {
           return result_1;
         }
       }
@@ -241,15 +209,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
       };
       Iterable<IdeaAutoEditHandler.Result> _map_2 = IterableExtensions.<AbstractIndentableAutoEditBlock, IdeaAutoEditHandler.Result>map(_blocks_1, _function_2);
       for (final IdeaAutoEditHandler.Result result_2 : _map_2) {
-        boolean _or_2 = false;
-        boolean _equals_4 = Objects.equal(result_2, IdeaAutoEditHandler.Result.DEFAULT);
-        if (_equals_4) {
-          _or_2 = true;
-        } else {
-          boolean _equals_5 = Objects.equal(result_2, IdeaAutoEditHandler.Result.STOP);
-          _or_2 = _equals_5;
-        }
-        if (_or_2) {
+        if ((Objects.equal(result_2, IdeaAutoEditHandler.Result.DEFAULT) || Objects.equal(result_2, IdeaAutoEditHandler.Result.STOP))) {
           return result_2;
         }
       }
@@ -265,15 +225,7 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
       };
       Iterable<IdeaAutoEditHandler.Result> _map_3 = IterableExtensions.<AbstractAutoEditBlock, IdeaAutoEditHandler.Result>map(_quotes_1, _function_3);
       for (final IdeaAutoEditHandler.Result result_3 : _map_3) {
-        boolean _or_3 = false;
-        boolean _equals_6 = Objects.equal(result_3, IdeaAutoEditHandler.Result.DEFAULT);
-        if (_equals_6) {
-          _or_3 = true;
-        } else {
-          boolean _equals_7 = Objects.equal(result_3, IdeaAutoEditHandler.Result.STOP);
-          _or_3 = _equals_7;
-        }
-        if (_or_3) {
+        if ((Objects.equal(result_3, IdeaAutoEditHandler.Result.DEFAULT) || Objects.equal(result_3, IdeaAutoEditHandler.Result.STOP))) {
           return result_3;
         }
       }
@@ -284,40 +236,20 @@ public class DefaultAutoEditHandler extends IdeaAutoEditHandler {
   @Override
   public boolean charDeleted(final char c, final PsiFile file, final EditorEx editor) {
     final AutoEditContext context = new AutoEditContext(editor, this.tokenSetProvider);
-    boolean _and = false;
-    CodeInsightSettings _instance = CodeInsightSettings.getInstance();
-    if (!_instance.AUTOINSERT_PAIR_BRACKET) {
-      _and = false;
-    } else {
-      Iterable<AbstractIndentableAutoEditBlock> _blocks = this.getBlocks(editor);
-      final Function1<AbstractIndentableAutoEditBlock, Boolean> _function = new Function1<AbstractIndentableAutoEditBlock, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractIndentableAutoEditBlock it) {
-          return Boolean.valueOf(it.delete(c, context));
-        }
-      };
-      boolean _exists = IterableExtensions.<AbstractIndentableAutoEditBlock>exists(_blocks, _function);
-      _and = _exists;
-    }
-    if (_and) {
+    if ((CodeInsightSettings.getInstance().AUTOINSERT_PAIR_BRACKET && IterableExtensions.<AbstractIndentableAutoEditBlock>exists(this.getBlocks(editor), new Function1<AbstractIndentableAutoEditBlock, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractIndentableAutoEditBlock it) {
+        return Boolean.valueOf(it.delete(c, context));
+      }
+    }))) {
       return true;
     }
-    boolean _and_1 = false;
-    CodeInsightSettings _instance_1 = CodeInsightSettings.getInstance();
-    if (!_instance_1.AUTOINSERT_PAIR_QUOTE) {
-      _and_1 = false;
-    } else {
-      Iterable<AbstractAutoEditBlock> _quotes = this.blockProvider.getQuotes();
-      final Function1<AbstractAutoEditBlock, Boolean> _function_1 = new Function1<AbstractAutoEditBlock, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractAutoEditBlock it) {
-          return Boolean.valueOf(it.delete(c, context));
-        }
-      };
-      boolean _exists_1 = IterableExtensions.<AbstractAutoEditBlock>exists(_quotes, _function_1);
-      _and_1 = _exists_1;
-    }
-    if (_and_1) {
+    if ((CodeInsightSettings.getInstance().AUTOINSERT_PAIR_QUOTE && IterableExtensions.<AbstractAutoEditBlock>exists(this.blockProvider.getQuotes(), new Function1<AbstractAutoEditBlock, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractAutoEditBlock it) {
+        return Boolean.valueOf(it.delete(c, context));
+      }
+    }))) {
       return true;
     }
     return super.charDeleted(c, file, editor);

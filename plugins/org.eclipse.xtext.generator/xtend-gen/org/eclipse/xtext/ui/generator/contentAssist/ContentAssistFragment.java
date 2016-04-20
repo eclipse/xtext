@@ -114,14 +114,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
       final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
       String _xifexpression = null;
-      boolean _and = false;
-      if (!this.inheritImplementation) {
-        _and = false;
-      } else {
-        boolean _notEquals = (!Objects.equal(superGrammar, null));
-        _and = _notEquals;
-      }
-      if (_and) {
+      if ((this.inheritImplementation && (!Objects.equal(superGrammar, null)))) {
         _xifexpression = this.getProposalProviderName(superGrammar);
       } else {
         _xifexpression = "org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider";

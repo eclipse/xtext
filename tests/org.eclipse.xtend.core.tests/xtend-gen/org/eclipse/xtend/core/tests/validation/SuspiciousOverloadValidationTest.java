@@ -15,7 +15,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -25,7 +24,6 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
@@ -111,16 +109,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final Function1<XAbstractFeatureCall, Boolean> _function_2 = new Function1<XAbstractFeatureCall, Boolean>() {
       @Override
       public Boolean apply(final XAbstractFeatureCall it) {
-        boolean _and = false;
-        EStructuralFeature _eContainingFeature = it.eContainingFeature();
-        boolean _notEquals = (!Objects.equal(_eContainingFeature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          JvmIdentifiableElement _feature = it.getFeature();
-          _and = (_feature instanceof JvmOperation);
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((!Objects.equal(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
       }
     };
     final XAbstractFeatureCall featureCall = IteratorExtensions.<XAbstractFeatureCall>findLast(_filter, _function_2);
@@ -175,16 +164,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final Function1<XAbstractFeatureCall, Boolean> _function_2 = new Function1<XAbstractFeatureCall, Boolean>() {
       @Override
       public Boolean apply(final XAbstractFeatureCall it) {
-        boolean _and = false;
-        EStructuralFeature _eContainingFeature = it.eContainingFeature();
-        boolean _notEquals = (!Objects.equal(_eContainingFeature, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          JvmIdentifiableElement _feature = it.getFeature();
-          _and = (_feature instanceof JvmOperation);
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((!Objects.equal(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
       }
     };
     final XAbstractFeatureCall featureCall = IteratorExtensions.<XAbstractFeatureCall>findLast(_filter, _function_2);

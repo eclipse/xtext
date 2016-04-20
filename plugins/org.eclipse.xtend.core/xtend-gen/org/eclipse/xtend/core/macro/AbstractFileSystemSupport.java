@@ -140,15 +140,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       throw new IllegalArgumentException(("The file cannot be found: " + path));
     }
     try {
-      boolean _and = false;
-      boolean _exists = this.exists(uri);
-      if (!_exists) {
-        _and = false;
-      } else {
-        boolean _isFile = this.isFile(uri);
-        _and = _isFile;
-      }
-      if (_and) {
+      if ((this.exists(uri) && this.isFile(uri))) {
         boolean _markSupported = source.markSupported();
         if (_markSupported) {
           InputStream _contentsAsStream = this.getContentsAsStream(path);
@@ -225,23 +217,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
       return Collections.<Path>unmodifiableList(CollectionLiterals.<Path>newArrayList(_absolutePath));
     }
     final URI uri = this.getURI(path);
-    boolean _or = false;
-    boolean _or_1 = false;
-    if ((uri == null)) {
-      _or_1 = true;
-    } else {
-      boolean _exists = this.exists(uri);
-      boolean _not = (!_exists);
-      _or_1 = _not;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      Boolean _isFolder = this.isFolder(uri);
-      boolean _not_1 = (!(_isFolder).booleanValue());
-      _or = _not_1;
-    }
-    if (_or) {
+    if ((((uri == null) || (!this.exists(uri))) || (!(this.isFolder(uri)).booleanValue()))) {
       return CollectionLiterals.<Path>emptyList();
     }
     return this.getChildren(uri, path);
@@ -256,23 +232,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   @Override
   public InputStream getContentsAsStream(final Path path) {
     final URI uri = this.getURI(path);
-    boolean _or = false;
-    boolean _or_1 = false;
-    if ((uri == null)) {
-      _or_1 = true;
-    } else {
-      boolean _exists = this.exists(uri);
-      boolean _not = (!_exists);
-      _or_1 = _not;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      boolean _isFile = this.isFile(uri);
-      boolean _not_1 = (!_isFile);
-      _or = _not_1;
-    }
-    if (_or) {
+    if ((((uri == null) || (!this.exists(uri))) || (!this.isFile(uri)))) {
       throw new IllegalArgumentException(("The file cannot be found: " + path));
     }
     try {
@@ -295,17 +255,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     if ((uri == null)) {
       return;
     }
-    boolean _and = false;
-    Boolean _isFolder = this.isFolder(uri);
-    if (!(_isFolder).booleanValue()) {
-      _and = false;
-    } else {
-      Iterable<? extends Path> _children = this.getChildren(uri, path);
-      boolean _isEmpty = IterableExtensions.isEmpty(_children);
-      boolean _not = (!_isEmpty);
-      _and = _not;
-    }
-    if (_and) {
+    if (((this.isFolder(uri)).booleanValue() && (!IterableExtensions.isEmpty(this.getChildren(uri, path))))) {
       return;
     }
     try {
@@ -468,14 +418,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   }
   
   protected URI getURI(final Path path) {
-    boolean _or = false;
-    if ((path == null)) {
-      _or = true;
-    } else {
-      boolean _equals = Objects.equal(path, Path.ROOT);
-      _or = _equals;
-    }
-    if (_or) {
+    if (((path == null) || Objects.equal(path, Path.ROOT))) {
       return null;
     }
     final IProjectConfig projectConfig = this.projectConfigProvider.getProjectConfig(this.context);
@@ -548,15 +491,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     Path _xblockexpression = null;
     {
       final URI relativeURI = absoluteURI.deresolve(baseURI);
-      boolean _or = false;
-      boolean _isEmpty = relativeURI.isEmpty();
-      if (_isEmpty) {
-        _or = true;
-      } else {
-        boolean _equals = Objects.equal(relativeURI, absoluteURI);
-        _or = _equals;
-      }
-      if (_or) {
+      if ((relativeURI.isEmpty() || Objects.equal(relativeURI, absoluteURI))) {
         return null;
       }
       String _string = relativeURI.toString();

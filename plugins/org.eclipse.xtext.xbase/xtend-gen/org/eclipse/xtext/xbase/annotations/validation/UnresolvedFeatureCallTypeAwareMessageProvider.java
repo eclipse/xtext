@@ -132,14 +132,7 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
         @Override
         public CharSequence apply(final LightweightTypeReference it) {
           String _xifexpression = null;
-          boolean _or = false;
-          if ((it == null)) {
-            _or = true;
-          } else {
-            boolean _isAny = it.isAny();
-            _or = _isAny;
-          }
-          if (_or) {
+          if (((it == null) || it.isAny())) {
             _xifexpression = "Object";
           } else {
             _xifexpression = it.getHumanReadableName();
@@ -177,46 +170,16 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
       _builder_1.append(_humanReadableName, " ");
       msg = (_msg + _builder_1);
     }
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _and_2 = false;
-    if (!(featureCall instanceof XFeatureCall)) {
-      _and_2 = false;
-    } else {
-      int _length = linkText.length();
-      boolean _greaterThan = (_length > 0);
-      _and_2 = _greaterThan;
-    }
-    if (!_and_2) {
-      _and_1 = false;
-    } else {
-      char _charAt = linkText.charAt(0);
-      boolean _isUpperCase = Character.isUpperCase(_charAt);
-      _and_1 = _isUpperCase;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _isPotentialTypeLiteral = this.typeLiteralHelper.isPotentialTypeLiteral(featureCall, null);
-      _and = _isPotentialTypeLiteral;
-    }
-    if (_and) {
+    if (((((featureCall instanceof XFeatureCall) && (linkText.length() > 0)) && Character.isUpperCase(linkText.charAt(0))) && 
+      this.typeLiteralHelper.isPotentialTypeLiteral(featureCall, null))) {
       return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText, UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL);
     }
     return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText, UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
   }
   
   protected boolean isStaticMemberCallTarget(final EObject contextObject) {
-    boolean _and = false;
-    if (!(contextObject instanceof XFeatureCall)) {
-      _and = false;
-    } else {
-      EStructuralFeature _eContainingFeature = contextObject.eContainingFeature();
-      boolean _tripleEquals = (_eContainingFeature == 
-        XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET);
-      _and = _tripleEquals;
-    }
-    boolean candidate = _and;
+    boolean candidate = ((contextObject instanceof XFeatureCall) && (contextObject.eContainingFeature() == 
+      XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET));
     if (candidate) {
       EObject _eContainer = contextObject.eContainer();
       XMemberFeatureCall memberFeatureCall = ((XMemberFeatureCall) _eContainer);

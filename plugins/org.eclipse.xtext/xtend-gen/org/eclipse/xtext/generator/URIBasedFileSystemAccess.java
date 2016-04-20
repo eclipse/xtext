@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.IFilePostProcessor;
-import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
@@ -127,18 +126,7 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   public void generateFile(final String fileName, final String outputCfgName, final CharSequence contents) {
     try {
       final URI uri = this.getURI(fileName, outputCfgName);
-      boolean _and = false;
-      OutputConfiguration _outputConfig = this.getOutputConfig(outputCfgName);
-      boolean _isOverrideExistingResources = _outputConfig.isOverrideExistingResources();
-      boolean _not = (!_isOverrideExistingResources);
-      if (!_not) {
-        _and = false;
-      } else {
-        Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-        boolean _exists = this.converter.exists(uri, _emptyMap);
-        _and = _exists;
-      }
-      if (_and) {
+      if (((!this.getOutputConfig(outputCfgName).isOverrideExistingResources()) && this.converter.exists(uri, CollectionLiterals.<Object, Object>emptyMap()))) {
         return;
       }
       final String encoding = this.getEncoding(uri);
@@ -155,14 +143,7 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   
   protected void generateTrace(final String generatedFile, final String outputConfigName, final CharSequence contents) {
     try {
-      boolean _and = false;
-      boolean _isGenerateTraces = this.isGenerateTraces();
-      if (!_isGenerateTraces) {
-        _and = false;
-      } else {
-        _and = (contents instanceof ITraceRegionProvider);
-      }
-      if (_and) {
+      if ((this.isGenerateTraces() && (contents instanceof ITraceRegionProvider))) {
         String traceFileName = this.traceFileNameProvider.getTraceFromJava(generatedFile);
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         AbstractTraceRegion traceRegion = ((ITraceRegionProvider) contents).getTraceRegion();

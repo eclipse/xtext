@@ -291,15 +291,7 @@ public class DefaultAntlrGrammarGenerator {
     _builder.append(":");
     _builder.newLineIfNotEmpty();
     {
-      boolean _and = false;
-      if (!(it instanceof ParserRule)) {
-        _and = false;
-      } else {
-        AbstractRule _originalElement_1 = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it);
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement_1);
-        _and = _isDatatypeRule;
-      }
-      if (_and) {
+      if (((it instanceof ParserRule) && GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it)))) {
         _builder.append("\t");
         AbstractElement _alternatives = it.getAlternatives();
         String _dataTypeEbnf = this.dataTypeEbnf(_alternatives, true);
@@ -357,19 +349,11 @@ public class DefaultAntlrGrammarGenerator {
   protected String ebnfPredicate(final AbstractElement it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _or = false;
-      boolean _predicated = this._grammarAccessExtensions.predicated(it);
-      if (_predicated) {
-        _or = true;
-      } else {
-        boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-        _or = _isFirstSetPredicated;
-      }
-      if (_or) {
+      if ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated())) {
         _builder.append("(");
         {
-          boolean _predicated_1 = this._grammarAccessExtensions.predicated(it);
-          if (_predicated_1) {
+          boolean _predicated = this._grammarAccessExtensions.predicated(it);
+          if (_predicated) {
             AbstractElement _predicatedElement = this._grammarAccessExtensions.predicatedElement(it);
             String _ebnf2 = this.ebnf2(_predicatedElement, options, false);
             _builder.append(_ebnf2, "");
@@ -424,19 +408,11 @@ public class DefaultAntlrGrammarGenerator {
   protected String dataTypeEbnfPredicate(final AbstractElement it) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _or = false;
-      boolean _predicated = this._grammarAccessExtensions.predicated(it);
-      if (_predicated) {
-        _or = true;
-      } else {
-        boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-        _or = _isFirstSetPredicated;
-      }
-      if (_or) {
+      if ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated())) {
         _builder.append("(");
         {
-          boolean _predicated_1 = this._grammarAccessExtensions.predicated(it);
-          if (_predicated_1) {
+          boolean _predicated = this._grammarAccessExtensions.predicated(it);
+          if (_predicated) {
             AbstractElement _predicatedElement = this._grammarAccessExtensions.predicatedElement(it);
             String _dataTypeEbnf2 = this.dataTypeEbnf2(_predicatedElement, false);
             _builder.append(_dataTypeEbnf2, "");

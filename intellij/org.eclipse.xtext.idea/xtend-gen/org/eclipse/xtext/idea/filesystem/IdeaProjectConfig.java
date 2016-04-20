@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.intellij.ide.projectView.impl.ProjectRootsUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -67,17 +66,7 @@ public class IdeaProjectConfig implements IProjectConfig {
       return null;
     }
     final SourceFolder sourceFolder = ProjectRootsUtil.findSourceFolder(this.module, sourceRoot);
-    boolean _or = false;
-    boolean _equals_2 = Objects.equal(sourceFolder, null);
-    if (_equals_2) {
-      _or = true;
-    } else {
-      ContentEntry _contentEntry = sourceFolder.getContentEntry();
-      VirtualFile _file = _contentEntry.getFile();
-      boolean _notEquals = (!Objects.equal(_file, this.contentRoot));
-      _or = _notEquals;
-    }
-    if (_or) {
+    if ((Objects.equal(sourceFolder, null) || (!Objects.equal(sourceFolder.getContentEntry().getFile(), this.contentRoot)))) {
       return null;
     }
     return new IdeaSourceFolder(sourceFolder);
@@ -101,17 +90,7 @@ public class IdeaProjectConfig implements IProjectConfig {
     final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
-        boolean _or = false;
-        VirtualFile _file = it.getFile();
-        boolean _equals = Objects.equal(_file, IdeaProjectConfig.this.contentRoot);
-        if (_equals) {
-          _or = true;
-        } else {
-          VirtualFile _file_1 = it.getFile();
-          boolean _isAncestor = VfsUtil.isAncestor(IdeaProjectConfig.this.contentRoot, _file_1, false);
-          _or = _isAncestor;
-        }
-        return Boolean.valueOf(_or);
+        return Boolean.valueOf((Objects.equal(it.getFile(), IdeaProjectConfig.this.contentRoot) || VfsUtil.isAncestor(IdeaProjectConfig.this.contentRoot, it.getFile(), false)));
       }
     };
     Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(_existingSourceFolders, _function);

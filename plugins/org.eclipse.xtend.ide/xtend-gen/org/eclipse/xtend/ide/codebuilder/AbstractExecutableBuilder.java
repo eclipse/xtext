@@ -213,37 +213,12 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   
   @Override
   public boolean isValid() {
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _and_2 = false;
-    final Function1<AbstractParameterBuilder, Boolean> _function = new Function1<AbstractParameterBuilder, Boolean>() {
+    return (((IterableExtensions.<AbstractParameterBuilder>forall(this.parameterBuilders, new Function1<AbstractParameterBuilder, Boolean>() {
       @Override
       public Boolean apply(final AbstractParameterBuilder it) {
         return Boolean.valueOf(it.isValid());
       }
-    };
-    boolean _forall = IterableExtensions.<AbstractParameterBuilder>forall(this.parameterBuilders, _function);
-    if (!_forall) {
-      _and_2 = false;
-    } else {
-      boolean _contains = this.exceptions.contains(null);
-      boolean _not = (!_contains);
-      _and_2 = _not;
-    }
-    if (!_and_2) {
-      _and_1 = false;
-    } else {
-      boolean _contains_1 = this.typeParameters.contains(null);
-      boolean _not_1 = (!_contains_1);
-      _and_1 = _not_1;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _isValid = super.isValid();
-      _and = _isValid;
-    }
-    return _and;
+    }) && (!this.exceptions.contains(null))) && (!this.typeParameters.contains(null))) && super.isValid());
   }
   
   @Pure

@@ -239,18 +239,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
               EPackage _eSuperPackage = topMost.getESuperPackage();
               topMost = _eSuperPackage;
             }
-            boolean _and = false;
-            EList<EObject> _contents_1 = packResource.getContents();
-            boolean _contains = _contents_1.contains(topMost);
-            if (!_contains) {
-              _and = false;
-            } else {
-              EList<EObject> _contents_2 = packResource.getContents();
-              int _size = _contents_2.size();
-              boolean _equals = (_size == 1);
-              _and = _equals;
-            }
-            if (_and) {
+            if ((packResource.getContents().contains(topMost) && (packResource.getContents().size() == 1))) {
               EList<EClassifier> _eClassifiers = topMost.getEClassifiers();
               boolean _isEmpty = _eClassifiers.isEmpty();
               boolean _not_1 = (!_isEmpty);
@@ -267,8 +256,8 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             URI _uRI_1 = _eResource.getURI();
             String _string_1 = _uRI_1.toString();
             String _nsURI_2 = topMost.getNsURI();
-            boolean _equals_1 = _string_1.equals(_nsURI_2);
-            boolean _not_2 = (!_equals_1);
+            boolean _equals = _string_1.equals(_nsURI_2);
+            boolean _not_2 = (!_equals);
             if (_not_2) {
               ResourceSet _resourceSet_1 = resource.getResourceSet();
               this.movePackageToNewResource(topMost, _resourceSet_1);

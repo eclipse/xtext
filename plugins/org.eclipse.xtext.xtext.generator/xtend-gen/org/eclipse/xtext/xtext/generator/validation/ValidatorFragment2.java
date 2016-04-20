@@ -76,14 +76,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     {
       final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(grammar);
       TypeReference _xifexpression = null;
-      boolean _and = false;
-      boolean _isInheritImplementation = this.isInheritImplementation();
-      if (!_isInheritImplementation) {
-        _and = false;
-      } else {
-        _and = (superGrammar != null);
-      }
-      if (_and) {
+      if ((this.isInheritImplementation() && (superGrammar != null))) {
         _xifexpression = this._validatorNaming.getValidatorClass(superGrammar);
       } else {
         _xifexpression = this.getDefaultValidatorSuperClass();
@@ -358,17 +351,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.append(EPackage.class, "\t\t");
         _builder.append(">(");
         {
-          boolean _and = false;
-          boolean _isInheritImplementation = ValidatorFragment2.this.isInheritImplementation();
-          if (!_isInheritImplementation) {
-            _and = false;
-          } else {
-            Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
-            Grammar _nonTerminalsSuperGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(_grammar_1);
-            boolean _tripleNotEquals = (_nonTerminalsSuperGrammar != null);
-            _and = _tripleNotEquals;
-          }
-          if (_and) {
+          if ((ValidatorFragment2.this.isInheritImplementation() && (GrammarUtil2.getNonTerminalsSuperGrammar(ValidatorFragment2.this.getGrammar()) != null))) {
             _builder.append("super.getEPackages()");
           }
         }

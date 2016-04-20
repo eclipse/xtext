@@ -51,16 +51,7 @@ public class DataProcessor extends AbstractClassProcessor {
       final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
         @Override
         public Boolean apply(final FieldDeclaration it) {
-          boolean _and = false;
-          boolean _isStatic = it.isStatic();
-          boolean _not = (!_isStatic);
-          if (!_not) {
-            _and = false;
-          } else {
-            boolean _isThePrimaryGeneratedJavaElement = Util.this.context.isThePrimaryGeneratedJavaElement(it);
-            _and = _isThePrimaryGeneratedJavaElement;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((!it.isStatic()) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
         }
       };
       return IterableExtensions.filter(_declaredFields, _function);
@@ -71,16 +62,7 @@ public class DataProcessor extends AbstractClassProcessor {
       final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
         @Override
         public Boolean apply(final MutableFieldDeclaration it) {
-          boolean _and = false;
-          boolean _isStatic = it.isStatic();
-          boolean _not = (!_isStatic);
-          if (!_not) {
-            _and = false;
-          } else {
-            boolean _isThePrimaryGeneratedJavaElement = Util.this.context.isThePrimaryGeneratedJavaElement(it);
-            _and = _isThePrimaryGeneratedJavaElement;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((!it.isStatic()) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
         }
       };
       return IterableExtensions.filter(_declaredFields, _function);

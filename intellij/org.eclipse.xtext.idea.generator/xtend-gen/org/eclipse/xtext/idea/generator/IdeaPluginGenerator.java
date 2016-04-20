@@ -330,19 +330,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     {
       for(final Binding it : bindings) {
         {
-          boolean _and = false;
-          BindValue _value = it.getValue();
-          boolean _isProvider = _value.isProvider();
-          boolean _not = (!_isProvider);
-          if (!_not) {
-            _and = false;
-          } else {
-            BindValue _value_1 = it.getValue();
-            String[] _statements = _value_1.getStatements();
-            boolean _isEmpty = ((List<String>)Conversions.doWrapArray(_statements)).isEmpty();
-            _and = _isEmpty;
-          }
-          if (_and) {
+          if (((!it.getValue().isProvider()) && ((List<String>)Conversions.doWrapArray(it.getValue().getStatements())).isEmpty())) {
             _builder.append("\t");
             _builder.append("// contributed by ");
             String _contributedBy = it.getContributedBy();
@@ -367,8 +355,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.append("\t");
             _builder.append("public ");
             {
-              BindValue _value_2 = it.getValue();
-              String _expression = _value_2.getExpression();
+              BindValue _value = it.getValue();
+              String _expression = _value.getExpression();
               boolean _equals = Objects.equal(_expression, null);
               if (_equals) {
                 _builder.append("Class<? extends ");
@@ -391,16 +379,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.append("\t");
             _builder.append("return ");
             {
-              BindValue _value_3 = it.getValue();
-              String _expression_1 = _value_3.getExpression();
+              BindValue _value_1 = it.getValue();
+              String _expression_1 = _value_1.getExpression();
               boolean _notEquals = (!Objects.equal(_expression_1, null));
               if (_notEquals) {
-                BindValue _value_4 = it.getValue();
-                String _expression_2 = _value_4.getExpression();
+                BindValue _value_2 = it.getValue();
+                String _expression_2 = _value_2.getExpression();
                 _builder.append(_expression_2, "\t\t");
               } else {
-                BindValue _value_5 = it.getValue();
-                String _typeName = _value_5.getTypeName();
+                BindValue _value_3 = it.getValue();
+                String _typeName = _value_3.getTypeName();
                 _builder.append(_typeName, "\t\t");
                 _builder.append(".class");
               }
@@ -411,10 +399,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.append("}");
             _builder.newLine();
           } else {
-            BindValue _value_6 = it.getValue();
-            String[] _statements_1 = _value_6.getStatements();
-            boolean _isEmpty_1 = ((List<String>)Conversions.doWrapArray(_statements_1)).isEmpty();
-            if (_isEmpty_1) {
+            BindValue _value_4 = it.getValue();
+            String[] _statements = _value_4.getStatements();
+            boolean _isEmpty = ((List<String>)Conversions.doWrapArray(_statements)).isEmpty();
+            if (_isEmpty) {
               _builder.append("\t");
               _builder.append("// contributed by ");
               String _contributedBy_1 = it.getContributedBy();
@@ -439,8 +427,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("\t");
               _builder.append("public ");
               {
-                BindValue _value_7 = it.getValue();
-                String _expression_3 = _value_7.getExpression();
+                BindValue _value_5 = it.getValue();
+                String _expression_3 = _value_5.getExpression();
                 boolean _equals_1 = Objects.equal(_expression_3, null);
                 if (_equals_1) {
                   _builder.append("Class<? extends com.google.inject.Provider<");
@@ -465,16 +453,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("\t");
               _builder.append("return ");
               {
-                BindValue _value_8 = it.getValue();
-                String _expression_4 = _value_8.getExpression();
+                BindValue _value_6 = it.getValue();
+                String _expression_4 = _value_6.getExpression();
                 boolean _notEquals_1 = (!Objects.equal(_expression_4, null));
                 if (_notEquals_1) {
-                  BindValue _value_9 = it.getValue();
-                  String _expression_5 = _value_9.getExpression();
+                  BindValue _value_7 = it.getValue();
+                  String _expression_5 = _value_7.getExpression();
                   _builder.append(_expression_5, "\t\t");
                 } else {
-                  BindValue _value_10 = it.getValue();
-                  String _typeName_1 = _value_10.getTypeName();
+                  BindValue _value_8 = it.getValue();
+                  String _typeName_1 = _value_8.getTypeName();
                   _builder.append(_typeName_1, "\t\t");
                   _builder.append(".class");
                 }
@@ -497,16 +485,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
               _builder.append("(com.google.inject.Binder binder) {");
               _builder.newLineIfNotEmpty();
               {
-                BindValue _value_11 = it.getValue();
-                String[] _statements_2 = _value_11.getStatements();
-                for(final String statement : _statements_2) {
+                BindValue _value_9 = it.getValue();
+                String[] _statements_1 = _value_9.getStatements();
+                for(final String statement : _statements_1) {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append(statement, "\t\t");
                   {
                     boolean _endsWith = statement.endsWith(";");
-                    boolean _not_1 = (!_endsWith);
-                    if (_not_1) {
+                    boolean _not = (!_endsWith);
+                    if (_not) {
                       _builder.append(";");
                     }
                   }
@@ -532,26 +520,14 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   
   public String bindMethodName(final Binding it) {
     String _xifexpression = null;
-    boolean _and = false;
-    BindValue _value = it.getValue();
-    boolean _isProvider = _value.isProvider();
-    boolean _not = (!_isProvider);
-    if (!_not) {
-      _and = false;
-    } else {
-      BindValue _value_1 = it.getValue();
-      String[] _statements = _value_1.getStatements();
-      boolean _isEmpty = ((List<String>)Conversions.doWrapArray(_statements)).isEmpty();
-      _and = _isEmpty;
-    }
-    if (_and) {
+    if (((!it.getValue().isProvider()) && ((List<String>)Conversions.doWrapArray(it.getValue().getStatements())).isEmpty())) {
       _xifexpression = "bind";
     } else {
       String _xifexpression_1 = null;
-      BindValue _value_2 = it.getValue();
-      String[] _statements_1 = _value_2.getStatements();
-      boolean _isEmpty_1 = ((List<String>)Conversions.doWrapArray(_statements_1)).isEmpty();
-      if (_isEmpty_1) {
+      BindValue _value = it.getValue();
+      String[] _statements = _value.getStatements();
+      boolean _isEmpty = ((List<String>)Conversions.doWrapArray(_statements)).isEmpty();
+      if (_isEmpty) {
         _xifexpression_1 = "provide";
       } else {
         _xifexpression_1 = "configure";
@@ -560,19 +536,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     }
     final String prefix = _xifexpression;
     String _xifexpression_2 = null;
-    boolean _and_1 = false;
-    BindValue _value_3 = it.getValue();
-    String _expression = _value_3.getExpression();
-    boolean _notEquals = (!Objects.equal(_expression, null));
-    if (!_notEquals) {
-      _and_1 = false;
-    } else {
-      BindValue _value_4 = it.getValue();
-      boolean _isProvider_1 = _value_4.isProvider();
-      boolean _not_1 = (!_isProvider_1);
-      _and_1 = _not_1;
-    }
-    if (_and_1) {
+    if (((!Objects.equal(it.getValue().getExpression(), null)) && (!it.getValue().isProvider()))) {
       _xifexpression_2 = "ToInstance";
     } else {
       _xifexpression_2 = "";
@@ -2132,59 +2096,47 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       }
     }
     {
-      boolean _and = false;
-      List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
-      final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
+      if ((IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
         @Override
         public Boolean apply(final TerminalRule it) {
           String _name = it.getName();
           return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
         }
-      };
-      boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
-      if (!_exists_1) {
-        _and = false;
-      } else {
-        List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
-        final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
-          @Override
-          public Boolean apply(final TerminalRule it) {
-            String _name = it.getName();
-            return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
-          }
-        };
-        boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
-        _and = _exists_2;
-      }
-      if (_and) {
+      }) && IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          String _name = it.getName();
+          return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
+        }
+      }))) {
         _builder.append("\t");
         _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT], tokenTypes[RULE_ML_COMMENT]);");
         _builder.newLine();
       } else {
-        List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
-        final Function1<TerminalRule, Boolean> _function_3 = new Function1<TerminalRule, Boolean>() {
+        List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
+        final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
           @Override
           public Boolean apply(final TerminalRule it) {
             String _name = it.getName();
             return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
           }
         };
-        boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
-        if (_exists_3) {
+        boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
+        if (_exists_1) {
           _builder.append("\t");
           _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT]);");
           _builder.newLine();
         } else {
-          List<TerminalRule> _allTerminalRules_4 = GrammarUtil.allTerminalRules(grammar);
-          final Function1<TerminalRule, Boolean> _function_4 = new Function1<TerminalRule, Boolean>() {
+          List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
+          final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
             @Override
             public Boolean apply(final TerminalRule it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
             }
           };
-          boolean _exists_4 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_4, _function_4);
-          if (_exists_4) {
+          boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
+          if (_exists_2) {
             _builder.append("\t");
             _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_ML_COMMENT]);");
             _builder.newLine();
@@ -2197,16 +2149,16 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       }
     }
     {
-      List<TerminalRule> _allTerminalRules_5 = GrammarUtil.allTerminalRules(grammar);
-      final Function1<TerminalRule, Boolean> _function_5 = new Function1<TerminalRule, Boolean>() {
+      List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
+      final Function1<TerminalRule, Boolean> _function_3 = new Function1<TerminalRule, Boolean>() {
         @Override
         public Boolean apply(final TerminalRule it) {
           String _name = it.getName();
           return Boolean.valueOf(Objects.equal(_name, "STRING"));
         }
       };
-      boolean _exists_5 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_5, _function_5);
-      if (_exists_5) {
+      boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
+      if (_exists_3) {
         _builder.append("\t");
         _builder.append("private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[RULE_STRING]);");
         _builder.newLine();
@@ -2404,46 +2356,25 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       final Function1<AbstractRule, Boolean> _function_1 = new Function1<AbstractRule, Boolean>() {
         @Override
         public Boolean apply(final AbstractRule it) {
-          boolean _or = false;
-          boolean _isNamed = IdeaPluginGenerator.this.isNamed(it);
-          if (_isNamed) {
-            _or = true;
-          } else {
-            Iterable<AbstractElement> _eObjectElements = IdeaPluginGenerator.this.getEObjectElements(it);
-            final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-              @Override
-              public Boolean apply(final AbstractElement it) {
-                return Boolean.valueOf(IdeaPluginGenerator.this.isNamed(it));
-              }
-            };
-            boolean _exists = IterableExtensions.<AbstractElement>exists(_eObjectElements, _function);
-            _or = _exists;
-          }
-          return Boolean.valueOf(_or);
+          return Boolean.valueOf((IdeaPluginGenerator.this.isNamed(it) || IterableExtensions.<AbstractElement>exists(IdeaPluginGenerator.this.getEObjectElements(it), new Function1<AbstractElement, Boolean>() {
+            @Override
+            public Boolean apply(final AbstractElement it) {
+              return Boolean.valueOf(IdeaPluginGenerator.this.isNamed(it));
+            }
+          })));
         }
       };
       final boolean hasNamed = IterableExtensions.<AbstractRule>exists(EObjectRules, _function_1);
       final Function1<AbstractRule, Boolean> _function_2 = new Function1<AbstractRule, Boolean>() {
         @Override
         public Boolean apply(final AbstractRule it) {
-          boolean _or = false;
-          boolean _isNamed = IdeaPluginGenerator.this.isNamed(it);
-          boolean _not = (!_isNamed);
-          if (_not) {
-            _or = true;
-          } else {
-            Iterable<AbstractElement> _eObjectElements = IdeaPluginGenerator.this.getEObjectElements(it);
-            final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-              @Override
-              public Boolean apply(final AbstractElement it) {
-                boolean _isNamed = IdeaPluginGenerator.this.isNamed(it);
-                return Boolean.valueOf((!_isNamed));
-              }
-            };
-            boolean _exists = IterableExtensions.<AbstractElement>exists(_eObjectElements, _function);
-            _or = _exists;
-          }
-          return Boolean.valueOf(_or);
+          return Boolean.valueOf(((!IdeaPluginGenerator.this.isNamed(it)) || IterableExtensions.<AbstractElement>exists(IdeaPluginGenerator.this.getEObjectElements(it), new Function1<AbstractElement, Boolean>() {
+            @Override
+            public Boolean apply(final AbstractElement it) {
+              boolean _isNamed = IdeaPluginGenerator.this.isNamed(it);
+              return Boolean.valueOf((!_isNamed));
+            }
+          })));
         }
       };
       final boolean hasNotNamed = IterableExtensions.<AbstractRule>exists(EObjectRules, _function_2);
@@ -2732,24 +2663,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         _xifexpression = ((EClass)classifier).getEStructuralFeature("name");
       }
       final EStructuralFeature feature = _xifexpression;
-      boolean _and = false;
-      boolean _and_1 = false;
-      if (!(feature instanceof EAttribute)) {
-        _and_1 = false;
-      } else {
-        boolean _isMany = feature.isMany();
-        boolean _not = (!_isMany);
-        _and_1 = _not;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        EClassifier _eType = feature.getEType();
-        Class<?> _instanceClass = _eType.getInstanceClass();
-        boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
-        _and = _isAssignableFrom;
-      }
-      _xblockexpression = _and;
+      _xblockexpression = (((feature instanceof EAttribute) && (!feature.isMany())) && String.class.isAssignableFrom(feature.getEType().getInstanceClass()));
     }
     return _xblockexpression;
   }

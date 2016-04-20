@@ -40,23 +40,7 @@ public class DocumentUtils {
     @Override
     public ISourceAppender append(final JvmType object) {
       if ((object instanceof JvmGenericType)) {
-        boolean _or = false;
-        boolean _or_1 = false;
-        boolean _addImport = this.importSection.addImport(((JvmDeclaredType)object));
-        if (_addImport) {
-          _or_1 = true;
-        } else {
-          boolean _hasImportedType = this.importSection.hasImportedType(((JvmDeclaredType)object));
-          _or_1 = _hasImportedType;
-        }
-        if (_or_1) {
-          _or = true;
-        } else {
-          boolean _needsImport = this.importSection.needsImport(((JvmDeclaredType)object));
-          boolean _not = (!_needsImport);
-          _or = _not;
-        }
-        if (_or) {
+        if (((this.importSection.addImport(((JvmDeclaredType)object)) || this.importSection.hasImportedType(((JvmDeclaredType)object))) || (!this.importSection.needsImport(((JvmDeclaredType)object))))) {
           String _simpleName = ((JvmGenericType)object).getSimpleName();
           this.result.append(_simpleName);
           return this;

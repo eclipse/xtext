@@ -168,14 +168,7 @@ public class MemberFromSuperImplementor {
   }
   
   private Procedure1<? super ISourceAppender> getImplementedInterface(final JvmDeclaredType subType, final JvmDeclaredType superInterface) {
-    boolean _and = false;
-    if (!(superInterface instanceof JvmGenericType)) {
-      _and = false;
-    } else {
-      boolean _isInterface = ((JvmGenericType) superInterface).isInterface();
-      _and = _isInterface;
-    }
-    if (_and) {
+    if (((superInterface instanceof JvmGenericType) && ((JvmGenericType) superInterface).isInterface())) {
       EList<JvmTypeReference> _superTypes = subType.getSuperTypes();
       final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
         @Override
@@ -236,14 +229,7 @@ public class MemberFromSuperImplementor {
   }
   
   private boolean isInterface(final JvmType type) {
-    boolean _and = false;
-    if (!(type instanceof JvmGenericType)) {
-      _and = false;
-    } else {
-      boolean _isInterface = ((JvmGenericType) type).isInterface();
-      _and = _isInterface;
-    }
-    return _and;
+    return ((type instanceof JvmGenericType) && ((JvmGenericType) type).isInterface());
   }
   
   public void appendConstructorFromSuper(final XtendClass overrider, final IResolvedConstructor superConstructor, final ISourceAppender appendable) {

@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
@@ -53,17 +52,7 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
     final Function1<MethodDeclaration, Boolean> _function_1 = new Function1<MethodDeclaration, Boolean>() {
       @Override
       public Boolean apply(final MethodDeclaration it) {
-        boolean _and = false;
-        AnnotationReference _findAnnotation = it.findAnnotation(atTest);
-        boolean _tripleNotEquals = (_findAnnotation != null);
-        if (!_tripleNotEquals) {
-          _and = false;
-        } else {
-          AnnotationReference _findAnnotation_1 = it.findAnnotation(atIgnore);
-          boolean _tripleEquals = (_findAnnotation_1 == null);
-          _and = _tripleEquals;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((it.findAnnotation(atTest) != null) && (it.findAnnotation(atIgnore) == null)));
       }
     };
     Iterable<MethodDeclaration> _filter = IterableExtensions.<MethodDeclaration>filter(_map, _function_1);

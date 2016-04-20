@@ -79,14 +79,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     AnnotatedBindingBuilder<Boolean> _bind = binder.<Boolean>bind(Boolean.class);
     Named _named = Names.named("generateXtendStub");
     LinkedBindingBuilder<Boolean> _annotatedWith = _bind.annotatedWith(_named);
-    boolean _and = false;
-    if (!this.generateXtendStub) {
-      _and = false;
-    } else {
-      boolean _isGenerateStub = this.isGenerateStub();
-      _and = _isGenerateStub;
-    }
-    _annotatedWith.toInstance(Boolean.valueOf(_and));
+    _annotatedWith.toInstance(Boolean.valueOf((this.generateXtendStub && this.isGenerateStub())));
   }
   
   public boolean setGenerateDebugData(final boolean doGenerate) {

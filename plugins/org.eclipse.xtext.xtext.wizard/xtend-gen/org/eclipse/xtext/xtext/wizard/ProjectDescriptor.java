@@ -106,27 +106,11 @@ public abstract class ProjectDescriptor {
       PlainTextFile _file_2 = this.file(Outlet.ROOT, "build.properties", _buildProperties_1);
       files.add(_file_2);
     }
-    boolean _and = false;
-    boolean _needsGradleBuild = this.config.needsGradleBuild();
-    if (!_needsGradleBuild) {
-      _and = false;
-    } else {
-      boolean _isPartOfGradleBuild = this.isPartOfGradleBuild();
-      _and = _isPartOfGradleBuild;
-    }
-    if (_and) {
+    if ((this.config.needsGradleBuild() && this.isPartOfGradleBuild())) {
       GradleBuildFile _buildGradle = this.buildGradle();
       files.add(_buildGradle);
     }
-    boolean _and_1 = false;
-    boolean _needsMavenBuild = this.config.needsMavenBuild();
-    if (!_needsMavenBuild) {
-      _and_1 = false;
-    } else {
-      boolean _isPartOfMavenBuild = this.isPartOfMavenBuild();
-      _and_1 = _isPartOfMavenBuild;
-    }
-    if (_and_1) {
+    if ((this.config.needsMavenBuild() && this.isPartOfMavenBuild())) {
       PomFile _pom = this.pom();
       files.add(_pom);
     }

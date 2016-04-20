@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.annotations.validation;
 
 import java.util.Arrays;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -52,23 +51,12 @@ public class AnnotationValueValidator extends ConstantExpressionValidator {
   }
   
   protected boolean _isValidAnnotationValue(final XListLiteral expression) {
-    boolean _or = false;
-    EList<XExpression> _elements = expression.getElements();
-    boolean _isEmpty = _elements.isEmpty();
-    if (_isEmpty) {
-      _or = true;
-    } else {
-      EList<XExpression> _elements_1 = expression.getElements();
-      final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
-        @Override
-        public Boolean apply(final XExpression it) {
-          return Boolean.valueOf(AnnotationValueValidator.this.isValidAnnotationValue(it));
-        }
-      };
-      boolean _forall = IterableExtensions.<XExpression>forall(_elements_1, _function);
-      _or = _forall;
-    }
-    return _or;
+    return (expression.getElements().isEmpty() || IterableExtensions.<XExpression>forall(expression.getElements(), new Function1<XExpression, Boolean>() {
+      @Override
+      public Boolean apply(final XExpression it) {
+        return Boolean.valueOf(AnnotationValueValidator.this.isValidAnnotationValue(it));
+      }
+    }));
   }
   
   protected boolean _isValidAnnotationValue(final XAnnotation expression) {

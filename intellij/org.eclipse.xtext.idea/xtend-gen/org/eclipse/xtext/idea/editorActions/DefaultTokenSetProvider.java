@@ -77,16 +77,7 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
   protected IElementType getTokenType(final EditorEx editor, final int offset) {
     IElementType _xblockexpression = null;
     {
-      boolean _or = false;
-      if ((offset < 0)) {
-        _or = true;
-      } else {
-        DocumentEx _document = editor.getDocument();
-        int _textLength = _document.getTextLength();
-        boolean _greaterThan = (offset > _textLength);
-        _or = _greaterThan;
-      }
-      if (_or) {
+      if (((offset < 0) || (offset > editor.getDocument().getTextLength()))) {
         return null;
       }
       EditorHighlighter _highlighter = editor.getHighlighter();

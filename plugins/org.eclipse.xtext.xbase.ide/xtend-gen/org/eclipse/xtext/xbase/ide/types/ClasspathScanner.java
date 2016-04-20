@@ -227,17 +227,9 @@ public class ClasspathScanner {
         JarFile _jarFile = new JarFile(file, false);
         jarFile = _jarFile;
         List<Iterable<ITypeDescriptor>> descriptorCollections = null;
-        boolean _and = false;
-        if (!includeManifestEntries) {
-          _and = false;
-        } else {
+        if ((includeManifestEntries && (jarFile.getManifest() != null))) {
           Manifest _manifest = jarFile.getManifest();
-          boolean _tripleNotEquals = (_manifest != null);
-          _and = _tripleNotEquals;
-        }
-        if (_and) {
-          Manifest _manifest_1 = jarFile.getManifest();
-          Attributes _mainAttributes = _manifest_1.getMainAttributes();
+          Attributes _mainAttributes = _manifest.getMainAttributes();
           final String classpath = _mainAttributes.getValue("Class-Path");
           if ((classpath != null)) {
             ArrayList<Iterable<ITypeDescriptor>> _arrayList = new ArrayList<Iterable<ITypeDescriptor>>();
@@ -272,18 +264,7 @@ public class ClasspathScanner {
         while (entries.hasMoreElements()) {
           {
             final JarEntry entry = entries.nextElement();
-            boolean _and_1 = false;
-            boolean _isDirectory = entry.isDirectory();
-            boolean _not_1 = (!_isDirectory);
-            if (!_not_1) {
-              _and_1 = false;
-            } else {
-              String _name = entry.getName();
-              boolean _startsWith = _name.startsWith("META-INF");
-              boolean _not_2 = (!_startsWith);
-              _and_1 = _not_2;
-            }
-            if (_and_1) {
+            if (((!entry.isDirectory()) && (!entry.getName().startsWith("META-INF")))) {
               final ClasspathTypeDescriptor typeDesc = ClasspathTypeDescriptor.forJarEntry(entry, jarFile, packagePrefixes);
               if ((typeDesc != null)) {
                 descriptors.add(typeDesc);

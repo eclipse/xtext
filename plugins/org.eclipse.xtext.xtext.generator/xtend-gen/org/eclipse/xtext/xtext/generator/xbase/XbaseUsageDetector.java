@@ -32,18 +32,7 @@ public class XbaseUsageDetector {
     final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
       @Override
       public Boolean apply(final AbstractRule it) {
-        boolean _and = false;
-        String _name = it.getName();
-        boolean _equals = Objects.equal(_name, "XImportSection");
-        if (!_equals) {
-          _and = false;
-        } else {
-          Grammar _grammar = GrammarUtil.getGrammar(it);
-          String _name_1 = _grammar.getName();
-          boolean _equals_1 = Objects.equal(_name_1, "org.eclipse.xtext.xbase.Xtype");
-          _and = _equals_1;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((Objects.equal(it.getName(), "XImportSection") && Objects.equal(GrammarUtil.getGrammar(it).getName(), "org.eclipse.xtext.xbase.Xtype")));
       }
     };
     return IterableExtensions.<AbstractRule>exists(usedRules, _function);

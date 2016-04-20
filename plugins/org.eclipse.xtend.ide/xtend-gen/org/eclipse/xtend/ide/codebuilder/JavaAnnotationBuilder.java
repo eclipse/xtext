@@ -21,16 +21,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 public class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBuilder.Java {
   @Override
   public boolean isValid() {
-    boolean _and = false;
-    boolean _isValid = super.isValid();
-    if (!_isValid) {
-      _and = false;
-    } else {
-      String _annotationName = this.getAnnotationName();
-      boolean _notEquals = (!Objects.equal(_annotationName, null));
-      _and = _notEquals;
-    }
-    return _and;
+    return (super.isValid() && (!Objects.equal(this.getAnnotationName(), null)));
   }
   
   @Override

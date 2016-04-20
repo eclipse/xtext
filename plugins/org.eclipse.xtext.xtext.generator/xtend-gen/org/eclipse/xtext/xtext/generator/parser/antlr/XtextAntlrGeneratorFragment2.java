@@ -140,35 +140,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     if (_isSet) {
       _xifexpression = this.combinedGrammar.get();
     } else {
-      boolean _and = false;
-      boolean _and_1 = false;
-      AntlrOptions _options = this.getOptions();
-      boolean _isBacktrackLexer = _options.isBacktrackLexer();
-      boolean _not = (!_isBacktrackLexer);
-      if (!_not) {
-        _and_1 = false;
-      } else {
-        AntlrOptions _options_1 = this.getOptions();
-        boolean _isIgnoreCase = _options_1.isIgnoreCase();
-        boolean _not_1 = (!_isIgnoreCase);
-        _and_1 = _not_1;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        Grammar _grammar = this.getGrammar();
-        List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar);
-        final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-          @Override
-          public Boolean apply(final TerminalRule it) {
-            return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-          }
-        };
-        boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
-        boolean _not_2 = (!_exists);
-        _and = _not_2;
-      }
-      _xifexpression = _and;
+      _xifexpression = (((!this.getOptions().isBacktrackLexer()) && (!this.getOptions().isIgnoreCase())) && (!IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(this.getGrammar()), new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+        }
+      })));
     }
     return _xifexpression;
   }
@@ -1360,41 +1337,13 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
-    boolean _and = false;
-    AntlrOptions _options = this.getOptions();
-    boolean _isBacktrackLexer = _options.isBacktrackLexer();
-    if (!_isBacktrackLexer) {
-      _and = false;
-    } else {
-      boolean _isCombinedGrammar = this.isCombinedGrammar();
-      _and = _isCombinedGrammar;
-    }
-    if (_and) {
+    if ((this.getOptions().isBacktrackLexer() && this.isCombinedGrammar())) {
       issues.addError("A combined grammar cannot have a backtracking lexer");
     }
-    boolean _and_1 = false;
-    AntlrOptions _options_1 = this.getOptions();
-    boolean _isIgnoreCase = _options_1.isIgnoreCase();
-    if (!_isIgnoreCase) {
-      _and_1 = false;
-    } else {
-      boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
-      _and_1 = _isCombinedGrammar_1;
-    }
-    if (_and_1) {
+    if ((this.getOptions().isIgnoreCase() && this.isCombinedGrammar())) {
       issues.addError("A combined grammar cannot have an ignorecase lexer");
     }
-    boolean _and_2 = false;
-    AntlrOptions _options_2 = this.getOptions();
-    boolean _isBacktrackLexer_1 = _options_2.isBacktrackLexer();
-    if (!_isBacktrackLexer_1) {
-      _and_2 = false;
-    } else {
-      AntlrOptions _options_3 = this.getOptions();
-      boolean _isIgnoreCase_1 = _options_3.isIgnoreCase();
-      _and_2 = _isIgnoreCase_1;
-    }
-    if (_and_2) {
+    if ((this.getOptions().isBacktrackLexer() && this.getOptions().isIgnoreCase())) {
       issues.addError("Backtracking lexer and ignorecase cannot be combined for now.");
     }
   }

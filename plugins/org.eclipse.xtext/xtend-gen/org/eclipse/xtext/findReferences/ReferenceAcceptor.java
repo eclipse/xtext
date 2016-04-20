@@ -44,18 +44,10 @@ public class ReferenceAcceptor implements IReferenceFinder.Acceptor {
   
   @Override
   public void accept(final EObject source, final URI sourceURI, final EReference eReference, final int index, final EObject targetOrProxy, final URI targetURI) {
-    boolean _or = false;
-    if ((this.currentResource == null)) {
-      _or = true;
-    } else {
-      Resource _eResource = source.eResource();
-      boolean _tripleNotEquals = (_eResource != this.currentResource);
-      _or = _tripleNotEquals;
-    }
-    if (_or) {
+    if (((this.currentResource == null) || (source.eResource() != this.currentResource))) {
       this.computeExportedObjectsMap(source);
-      Resource _eResource_1 = source.eResource();
-      this.currentResource = _eResource_1;
+      Resource _eResource = source.eResource();
+      this.currentResource = _eResource;
     }
     URI _findExportedContainer = this.findExportedContainer(source);
     IReferenceDescription _createReferenceDescription = this.createReferenceDescription(sourceURI, targetURI, eReference, index, _findExportedContainer);

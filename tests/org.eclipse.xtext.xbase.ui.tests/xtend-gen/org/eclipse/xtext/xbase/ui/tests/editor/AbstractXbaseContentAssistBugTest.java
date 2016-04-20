@@ -65,16 +65,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   public IJavaProject getJavaProject(final ResourceSet resourceSet) {
     final String projectName = this.getProjectName();
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
-    boolean _or = false;
-    boolean _equals = Objects.equal(javaProject, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _exists = javaProject.exists();
-      boolean _not = (!_exists);
-      _or = _not;
-    }
-    if (_or) {
+    if ((Objects.equal(javaProject, null) || (!javaProject.exists()))) {
       try {
         IProject _createPluginProject = AbstractXbaseUITestCase.createPluginProject(projectName);
         this.demandCreateProject = _createPluginProject;

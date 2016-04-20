@@ -106,19 +106,7 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
     if ((_type_2 instanceof JvmAnnotationType)) {
       return true;
     }
-    boolean _or = false;
-    JvmType _type_3 = toCheck.getType();
-    String _qualifiedName = _type_3.getQualifiedName();
-    boolean _equals_1 = Objects.equal(_qualifiedName, "java.lang.String");
-    if (_equals_1) {
-      _or = true;
-    } else {
-      JvmType _type_4 = toCheck.getType();
-      String _qualifiedName_1 = _type_4.getQualifiedName();
-      boolean _equals_2 = Objects.equal(_qualifiedName_1, "java.lang.Class");
-      _or = _equals_2;
-    }
-    if (_or) {
+    if ((Objects.equal(toCheck.getType().getQualifiedName(), "java.lang.String") || Objects.equal(toCheck.getType().getQualifiedName(), "java.lang.Class"))) {
       return true;
     }
     return false;

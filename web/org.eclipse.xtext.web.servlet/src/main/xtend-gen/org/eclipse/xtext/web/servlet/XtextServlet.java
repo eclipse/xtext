@@ -109,23 +109,7 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    boolean _and = false;
-    boolean _isHasConflict = service.isHasConflict();
-    boolean _not = (!_isHasConflict);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      boolean _isHasSideEffects = service.isHasSideEffects();
-      if (_isHasSideEffects) {
-        _or = true;
-      } else {
-        boolean _hasTextInput = this.hasTextInput(service);
-        _or = _hasTextInput;
-      }
-      _and = _or;
-    }
-    if (_and) {
+    if (((!service.isHasConflict()) && (service.isHasSideEffects() || this.hasTextInput(service)))) {
       super.doGet(req, resp);
     } else {
       this.doService(service, resp);
@@ -137,16 +121,7 @@ public class XtextServlet extends HttpServlet {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
     IServiceContext _context = service.getContext();
     final String type = _context.getParameter(IServiceContext.SERVICE_TYPE);
-    boolean _and = false;
-    boolean _isHasConflict = service.isHasConflict();
-    boolean _not = (!_isHasConflict);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _notEquals = (!Objects.equal(type, "update"));
-      _and = _notEquals;
-    }
-    if (_and) {
+    if (((!service.isHasConflict()) && (!Objects.equal(type, "update")))) {
       super.doPut(req, resp);
     } else {
       this.doService(service, resp);
@@ -158,32 +133,7 @@ public class XtextServlet extends HttpServlet {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
     IServiceContext _context = service.getContext();
     final String type = _context.getParameter(IServiceContext.SERVICE_TYPE);
-    boolean _and = false;
-    boolean _isHasConflict = service.isHasConflict();
-    boolean _not = (!_isHasConflict);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      boolean _and_1 = false;
-      boolean _isHasSideEffects = service.isHasSideEffects();
-      boolean _not_1 = (!_isHasSideEffects);
-      if (!_not_1) {
-        _and_1 = false;
-      } else {
-        boolean _hasTextInput = this.hasTextInput(service);
-        boolean _not_2 = (!_hasTextInput);
-        _and_1 = _not_2;
-      }
-      if (_and_1) {
-        _or = true;
-      } else {
-        boolean _equals = Objects.equal(type, "update");
-        _or = _equals;
-      }
-      _and = _or;
-    }
-    if (_and) {
+    if (((!service.isHasConflict()) && (((!service.isHasSideEffects()) && (!this.hasTextInput(service))) || Objects.equal(type, "update")))) {
       super.doPost(req, resp);
     } else {
       this.doService(service, resp);
@@ -195,15 +145,7 @@ public class XtextServlet extends HttpServlet {
     {
       IServiceContext _context = service.getContext();
       final Set<String> parameterKeys = _context.getParameterKeys();
-      boolean _or = false;
-      boolean _contains = parameterKeys.contains("fullText");
-      if (_contains) {
-        _or = true;
-      } else {
-        boolean _contains_1 = parameterKeys.contains("deltaText");
-        _or = _contains_1;
-      }
-      _xblockexpression = _or;
+      _xblockexpression = (parameterKeys.contains("fullText") || parameterKeys.contains("deltaText"));
     }
     return _xblockexpression;
   }

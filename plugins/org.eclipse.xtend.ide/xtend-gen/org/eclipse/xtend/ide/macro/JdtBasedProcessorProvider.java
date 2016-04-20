@@ -160,18 +160,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
   
   protected void collectClasspathURLs(final IJavaProject projectToUse, final LinkedHashSet<URL> result, final boolean includeOutputFolder, final Set<IJavaProject> visited) throws JavaModelException {
     try {
-      boolean _or = false;
-      IProject _project = projectToUse.getProject();
-      boolean _isAccessible = _project.isAccessible();
-      boolean _not = (!_isAccessible);
-      if (_not) {
-        _or = true;
-      } else {
-        boolean _add = visited.add(projectToUse);
-        boolean _not_1 = (!_add);
-        _or = _not_1;
-      }
-      if (_or) {
+      if (((!projectToUse.getProject().isAccessible()) || (!visited.add(projectToUse)))) {
         return;
       }
       if (includeOutputFolder) {
@@ -207,8 +196,8 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               IPath path_2 = entry.getPath();
               IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot(projectToUse);
               final IResource project = _workspaceRoot.findMember(path_2);
-              IProject _project_1 = project.getProject();
-              final IJavaProject referencedProject = JavaCore.create(_project_1);
+              IProject _project = project.getProject();
+              final IJavaProject referencedProject = JavaCore.create(_project);
               this.collectClasspathURLs(referencedProject, result, true, visited);
               break;
             case IClasspathEntry.CPE_LIBRARY:

@@ -244,16 +244,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   protected StyledString text(final XtendField element) {
     StyledString _xblockexpression = null;
     {
-      boolean _and = false;
-      String _name = element.getName();
-      boolean _equals = Objects.equal(_name, null);
-      if (!_equals) {
-        _and = false;
-      } else {
-        boolean _isExtension = element.isExtension();
-        _and = _isExtension;
-      }
-      if (_and) {
+      if ((Objects.equal(element.getName(), null) && element.isExtension())) {
         JvmTypeReference _type = element.getType();
         String _referenceToString = this.uiStrings.referenceToString(_type, "extension");
         return new StyledString(_referenceToString, 
@@ -266,14 +257,14 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
         int _length = type.length();
         boolean _notEquals_1 = (_length != 0);
         if (_notEquals_1) {
-          String _name_1 = element.getName();
-          StyledString _styledString = new StyledString(_name_1);
+          String _name = element.getName();
+          StyledString _styledString = new StyledString(_name);
           StyledString _styledString_1 = new StyledString((" : " + type), StyledString.DECORATIONS_STYLER);
           return _styledString.append(_styledString_1);
         }
       }
-      String _name_2 = element.getName();
-      _xblockexpression = new StyledString(_name_2);
+      String _name_1 = element.getName();
+      _xblockexpression = new StyledString(_name_1);
     }
     return _xblockexpression;
   }

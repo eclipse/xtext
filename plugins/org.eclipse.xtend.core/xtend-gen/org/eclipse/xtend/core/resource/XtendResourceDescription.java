@@ -90,25 +90,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
         {
           boolean _matched = false;
           if (expression instanceof XMemberFeatureCall) {
-            boolean _and = false;
-            boolean _and_1 = false;
-            JvmIdentifiableElement _feature = ((XMemberFeatureCall)expression).getFeature();
-            boolean _notEquals_2 = (!Objects.equal(_feature, null));
-            if (!_notEquals_2) {
-              _and_1 = false;
-            } else {
-              JvmIdentifiableElement _feature_1 = ((XMemberFeatureCall)expression).getFeature();
-              boolean _eIsProxy = _feature_1.eIsProxy();
-              _and_1 = _eIsProxy;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              boolean _isExplicitOperationCallOrBuilderSyntax = ((XMemberFeatureCall)expression).isExplicitOperationCallOrBuilderSyntax();
-              boolean _not = (!_isExplicitOperationCallOrBuilderSyntax);
-              _and = _not;
-            }
-            if (_and) {
+            if ((((!Objects.equal(((XMemberFeatureCall)expression).getFeature(), null)) && ((XMemberFeatureCall)expression).getFeature().eIsProxy()) && (!((XMemberFeatureCall)expression).isExplicitOperationCallOrBuilderSyntax()))) {
               _matched=true;
               final XExpression receiver = ((XMemberFeatureCall)expression).getActualReceiver();
               boolean _matched_1 = false;
@@ -174,13 +156,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
             @Override
             public LightweightTypeReference apply(final JvmIdentifiableElement it) {
               LightweightTypeReference _xifexpression = null;
-              boolean _or = false;
-              if ((!(it instanceof JvmType))) {
-                _or = true;
-              } else {
-                _or = (it instanceof JvmDeclaredType);
-              }
-              if (_or) {
+              if (((!(it instanceof JvmType)) || (it instanceof JvmDeclaredType))) {
                 _xifexpression = types.getActualType(it);
               }
               return _xifexpression;
@@ -223,28 +199,10 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   }
   
   public void registerAllTypes(final JvmType type, final Function1<? super String, ? extends Boolean> acceptor) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(type, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _eIsProxy = type.eIsProxy();
-      _or = _eIsProxy;
-    }
-    if (_or) {
+    if ((Objects.equal(type, null) || type.eIsProxy())) {
       return;
     }
-    boolean _and = false;
-    boolean _isLocal = this.isLocal(type);
-    boolean _not = (!_isLocal);
-    if (!_not) {
-      _and = false;
-    } else {
-      String _identifier = type.getIdentifier();
-      Boolean _apply = acceptor.apply(_identifier);
-      _and = (_apply).booleanValue();
-    }
-    if (_and) {
+    if (((!this.isLocal(type)) && (acceptor.apply(type.getIdentifier())).booleanValue())) {
       boolean _matched = false;
       if (type instanceof JvmGenericType) {
         _matched=true;

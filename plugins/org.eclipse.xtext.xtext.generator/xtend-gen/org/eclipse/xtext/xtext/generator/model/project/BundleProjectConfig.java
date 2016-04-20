@@ -11,7 +11,6 @@ import com.google.inject.Injector;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
@@ -41,26 +40,10 @@ public class BundleProjectConfig extends SubProjectConfig implements IBundleProj
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
-    boolean _and = false;
-    if (!(this.manifest != null)) {
-      _and = false;
-    } else {
-      IXtextGeneratorFileSystemAccess _metaInf = this.getMetaInf();
-      boolean _tripleEquals = (_metaInf == null);
-      _and = _tripleEquals;
-    }
-    if (_and) {
+    if (((this.manifest != null) && (this.getMetaInf() == null))) {
       issues.addError("The \'metaInf\' outlet must be configured for projects with a manifest", this);
     }
-    boolean _and_1 = false;
-    if (!(this.pluginXml != null)) {
-      _and_1 = false;
-    } else {
-      IXtextGeneratorFileSystemAccess _root = this.getRoot();
-      boolean _tripleEquals_1 = (_root == null);
-      _and_1 = _tripleEquals_1;
-    }
-    if (_and_1) {
+    if (((this.pluginXml != null) && (this.getRoot() == null))) {
       issues.addError("The \'root\' outlet must be configured for projects with a plugin.xml", this);
     }
   }

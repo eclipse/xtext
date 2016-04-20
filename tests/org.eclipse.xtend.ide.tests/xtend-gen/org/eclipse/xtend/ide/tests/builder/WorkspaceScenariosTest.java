@@ -94,15 +94,7 @@ public class WorkspaceScenariosTest {
       final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
         @Override
         public Boolean apply(final String it) {
-          boolean _or = false;
-          boolean _endsWith = it.endsWith("java");
-          if (_endsWith) {
-            _or = true;
-          } else {
-            boolean _endsWith_1 = it.endsWith("class");
-            _or = _endsWith_1;
-          }
-          return Boolean.valueOf(_or);
+          return Boolean.valueOf((it.endsWith("java") || it.endsWith("class")));
         }
       };
       final IProject project = this.createProjectWithJarDependency(_function);

@@ -51,15 +51,7 @@ public class IdeaClasspathURIResolver implements IClasspathUriResolver {
         for (final PsiFile file : files) {
           {
             final VirtualFile vf = XtextPsiUtils.findVirtualFile(file);
-            boolean _and = false;
-            boolean _notEquals = (!Objects.equal(vf, null));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              boolean _exists = vf.exists();
-              _and = _exists;
-            }
-            if (_and) {
+            if (((!Objects.equal(vf, null)) && vf.exists())) {
               final URI uri = VirtualFileURIUtil.getURI(vf);
               String _string = uri.toString();
               String _path = classpathUri.path();

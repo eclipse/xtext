@@ -243,57 +243,47 @@ public class RuleEngineFormatter extends XbaseFormatter {
     EList<XCasePart> _cases = expr.getCases();
     for (final XCasePart c : _cases) {
       {
-        boolean _and = false;
-        JvmTypeReference _typeGuard = c.getTypeGuard();
-        boolean _notEquals = (!Objects.equal(_typeGuard, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          XExpression _case = c.getCase();
-          boolean _notEquals_1 = (!Objects.equal(_case, null));
-          _and = _notEquals_1;
-        }
-        if (_and) {
-          JvmTypeReference _typeGuard_1 = c.getTypeGuard();
+        if (((!Objects.equal(c.getTypeGuard(), null)) && (!Objects.equal(c.getCase(), null)))) {
+          JvmTypeReference _typeGuard = c.getTypeGuard();
           final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.oneSpace();
             }
           };
-          document.<JvmTypeReference>append(_typeGuard_1, _function_3);
-          XExpression _case_1 = c.getCase();
+          document.<JvmTypeReference>append(_typeGuard, _function_3);
+          XExpression _case = c.getCase();
           final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
             @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          document.<XExpression>append(_case_1, _function_4);
+          document.<XExpression>append(_case, _function_4);
         } else {
-          JvmTypeReference _typeGuard_2 = c.getTypeGuard();
-          boolean _notEquals_2 = (!Objects.equal(_typeGuard_2, null));
-          if (_notEquals_2) {
-            JvmTypeReference _typeGuard_3 = c.getTypeGuard();
+          JvmTypeReference _typeGuard_1 = c.getTypeGuard();
+          boolean _notEquals = (!Objects.equal(_typeGuard_1, null));
+          if (_notEquals) {
+            JvmTypeReference _typeGuard_2 = c.getTypeGuard();
             final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
               @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.noSpace();
               }
             };
-            document.<JvmTypeReference>append(_typeGuard_3, _function_5);
+            document.<JvmTypeReference>append(_typeGuard_2, _function_5);
           } else {
-            XExpression _case_2 = c.getCase();
-            boolean _notEquals_3 = (!Objects.equal(_case_2, null));
-            if (_notEquals_3) {
-              XExpression _case_3 = c.getCase();
+            XExpression _case_1 = c.getCase();
+            boolean _notEquals_1 = (!Objects.equal(_case_1, null));
+            if (_notEquals_1) {
+              XExpression _case_2 = c.getCase();
               final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
                 @Override
                 public void apply(final IHiddenRegionFormatter it) {
                   it.oneSpace();
                 }
               };
-              XExpression _prepend = document.<XExpression>prepend(_case_3, _function_6);
+              XExpression _prepend = document.<XExpression>prepend(_case_2, _function_6);
               final Procedure1<IHiddenRegionFormatter> _function_7 = new Procedure1<IHiddenRegionFormatter>() {
                 @Override
                 public void apply(final IHiddenRegionFormatter it) {
@@ -320,20 +310,9 @@ public class RuleEngineFormatter extends XbaseFormatter {
           }
         };
         document.append(_prepend_1, _function_9);
-        XExpression _case_4 = c.getCase();
-        document.<XExpression>format(_case_4);
-        boolean _and_1 = false;
-        EList<XCasePart> _cases_1 = expr.getCases();
-        XCasePart _last = IterableExtensions.<XCasePart>last(_cases_1);
-        boolean _equals = Objects.equal(c, _last);
-        if (!_equals) {
-          _and_1 = false;
-        } else {
-          XExpression _default = expr.getDefault();
-          boolean _equals_1 = Objects.equal(_default, null);
-          _and_1 = _equals_1;
-        }
-        if (_and_1) {
+        XExpression _case_3 = c.getCase();
+        document.<XExpression>format(_case_3);
+        if ((Objects.equal(c, IterableExtensions.<XCasePart>last(expr.getCases())) && Objects.equal(expr.getDefault(), null))) {
           XExpression _then = c.getThen();
           this.formatBody(_then, true, document);
         } else {
@@ -374,15 +353,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       };
       doc.<XBlockExpression>prepend(((XBlockExpression)expr), _function);
     } else {
-      boolean _or = false;
-      if (forceMultiline) {
-        _or = true;
-      } else {
-        IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(expr);
-        boolean _isMultiline = _previousHiddenRegion.isMultiline();
-        _or = _isMultiline;
-      }
-      if (_or) {
+      if ((forceMultiline || this.textRegionExtensions.previousHiddenRegion(expr).isMultiline())) {
         final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {
@@ -425,15 +396,7 @@ public class RuleEngineFormatter extends XbaseFormatter {
       };
       doc.<XBlockExpression>surround(((XBlockExpression)expr), _function);
     } else {
-      boolean _or = false;
-      if (forceMultiline) {
-        _or = true;
-      } else {
-        IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(expr);
-        boolean _isMultiline = _previousHiddenRegion.isMultiline();
-        _or = _isMultiline;
-      }
-      if (_or) {
+      if ((forceMultiline || this.textRegionExtensions.previousHiddenRegion(expr).isMultiline())) {
         final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
           @Override
           public void apply(final IHiddenRegionFormatter it) {

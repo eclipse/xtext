@@ -200,18 +200,7 @@ public class XAnnotationExtensions {
     final Function1<JvmAnnotationValue, Boolean> _function_1 = new Function1<JvmAnnotationValue, Boolean>() {
       @Override
       public Boolean apply(final JvmAnnotationValue it) {
-        boolean _or = false;
-        JvmOperation _operation = it.getOperation();
-        boolean _equals = Objects.equal(_operation, null);
-        if (_equals) {
-          _or = true;
-        } else {
-          JvmOperation _operation_1 = it.getOperation();
-          String _simpleName = _operation_1.getSimpleName();
-          boolean _equals_1 = Objects.equal(_simpleName, "value");
-          _or = _equals_1;
-        }
-        return Boolean.valueOf(_or);
+        return Boolean.valueOf((Objects.equal(it.getOperation(), null) || Objects.equal(it.getOperation().getSimpleName(), "value")));
       }
     };
     final JvmAnnotationValue annoVal = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_1);

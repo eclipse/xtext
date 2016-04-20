@@ -28,14 +28,7 @@ public class StatemachineResourceSetProvider implements IWebResourceSetProvider 
   
   @Override
   public ResourceSet get(final String resourceId, final IServiceContext serviceContext) {
-    boolean _and = false;
-    if (!(resourceId != null)) {
-      _and = false;
-    } else {
-      boolean _startsWith = resourceId.startsWith(StatemachineResourceSetProvider.MULTI_RESOURCE_PREFIX);
-      _and = _startsWith;
-    }
-    if (_and) {
+    if (((resourceId != null) && resourceId.startsWith(StatemachineResourceSetProvider.MULTI_RESOURCE_PREFIX))) {
       int _indexOf = resourceId.indexOf("/");
       int _length = StatemachineResourceSetProvider.MULTI_RESOURCE_PREFIX.length();
       final int pathEnd = Math.max(_indexOf, _length);

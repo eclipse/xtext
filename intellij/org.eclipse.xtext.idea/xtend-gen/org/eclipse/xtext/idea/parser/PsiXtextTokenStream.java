@@ -137,16 +137,7 @@ public class PsiXtextTokenStream extends XtextTokenStream implements PsiTokenStr
   }
   
   protected String getErrorMessage(final Token token) {
-    boolean _and = false;
-    int _channel = token.getChannel();
-    boolean _notEquals = (_channel != BaseRecognizer.HIDDEN);
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _notEquals_1 = (!Objects.equal(this.errorMessage, null));
-      _and = _notEquals_1;
-    }
-    if (_and) {
+    if (((token.getChannel() != BaseRecognizer.HIDDEN) && (!Objects.equal(this.errorMessage, null)))) {
       final String result = this.errorMessage;
       this.errorMessage = null;
       return result;

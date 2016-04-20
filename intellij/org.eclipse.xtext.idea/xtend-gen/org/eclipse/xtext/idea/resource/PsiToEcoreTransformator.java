@@ -186,25 +186,14 @@ public class PsiToEcoreTransformator implements IParser {
       final RuleCall actionRuleCall = actionTransformationContext.getActionRuleCall();
       boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(actionRuleCall);
       if (_ensureModelElementCreated) {
-        boolean _and = false;
-        EObject _current = transformationContext.getCurrent();
-        boolean _tripleNotEquals = (_current != null);
-        if (!_tripleNotEquals) {
-          _and = false;
+        if (((transformationContext.getCurrent() != null) && (transformationContext.getCurrent().eContainer() == null))) {
+          EObject _current = transformationContext.getCurrent();
+          actionTransformationContext.assign(_current, action);
         } else {
-          EObject _current_1 = transformationContext.getCurrent();
-          EObject _eContainer = _current_1.eContainer();
-          boolean _tripleEquals = (_eContainer == null);
-          _and = _tripleEquals;
-        }
-        if (_and) {
-          EObject _current_2 = transformationContext.getCurrent();
-          actionTransformationContext.assign(_current_2, action);
-        } else {
-          EObject _current_3 = actionTransformationContext.getCurrent();
+          EObject _current_1 = actionTransformationContext.getCurrent();
           AbstractRule _rule = actionRuleCall.getRule();
           String _qualifiedName = this.ruleNames.getQualifiedName(_rule);
-          transformationContext.assign(_current_3, actionRuleCall, _qualifiedName);
+          transformationContext.assign(_current_1, actionRuleCall, _qualifiedName);
         }
       }
       transformationContext.merge(actionTransformationContext, true);
@@ -217,10 +206,10 @@ public class PsiToEcoreTransformator implements IParser {
       final RuleCall actionRuleCall_1 = actionTransformationContext_1.getActionRuleCall();
       boolean _ensureModelElementCreated_1 = transformationContext.ensureModelElementCreated(actionRuleCall_1);
       if (_ensureModelElementCreated_1) {
-        EObject _current_4 = actionTransformationContext_1.getCurrent();
+        EObject _current_2 = actionTransformationContext_1.getCurrent();
         AbstractRule _rule_1 = actionRuleCall_1.getRule();
         String _qualifiedName_1 = this.ruleNames.getQualifiedName(_rule_1);
-        transformationContext.assign(_current_4, actionRuleCall_1, _qualifiedName_1);
+        transformationContext.assign(_current_2, actionRuleCall_1, _qualifiedName_1);
       }
       transformationContext.merge(actionTransformationContext_1);
       transformationContext.compress();

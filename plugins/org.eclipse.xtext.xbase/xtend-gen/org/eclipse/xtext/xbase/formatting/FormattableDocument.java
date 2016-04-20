@@ -374,21 +374,9 @@ public class FormattableDocument {
           int _indentationChange = f.getIndentationChange();
           int _plus = (indentation + _indentationChange);
           indentation = _plus;
-          boolean _and = false;
-          int _offset = f.getOffset();
-          boolean _greaterEqualsThan = (_offset >= offset);
-          if (!_greaterEqualsThan) {
-            _and = false;
-          } else {
-            int _offset_1 = f.getOffset();
-            int _length = f.getLength();
-            int _plus_1 = (_offset_1 + _length);
-            boolean _lessEqualsThan = (_plus_1 <= (offset + length));
-            _and = _lessEqualsThan;
-          }
-          if (_and) {
-            int _offset_2 = f.getOffset();
-            final int textlength = (_offset_2 - oldOffset);
+          if (((f.getOffset() >= offset) && ((f.getOffset() + f.getLength()) <= (offset + length)))) {
+            int _offset = f.getOffset();
+            final int textlength = (_offset - oldOffset);
             boolean _matched = false;
             if (f instanceof WhitespaceData) {
               _matched=true;
@@ -396,9 +384,9 @@ public class FormattableDocument {
               boolean _notEquals = (!Objects.equal(_space, null));
               if (_notEquals) {
                 final String replacement = ((WhitespaceData)f).getSpace();
-                int _offset_3 = ((WhitespaceData)f).getOffset();
-                int _length_1 = ((WhitespaceData)f).getLength();
-                TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
+                int _offset_1 = ((WhitespaceData)f).getOffset();
+                int _length = ((WhitespaceData)f).getLength();
+                TextReplacement _textReplacement = new TextReplacement(_offset_1, _length, replacement);
                 replacements.add(_textReplacement);
               }
             }
@@ -421,15 +409,15 @@ public class FormattableDocument {
                 String _wrap = this.getWrap((_newLines).intValue());
                 String _indentation = this.getIndentation(computedIndentation);
                 final String replacement = (_wrap + _indentation);
-                int _offset_3 = ((NewLineData)f).getOffset();
-                int _length_1 = ((NewLineData)f).getLength();
-                TextReplacement _textReplacement = new TextReplacement(_offset_3, _length_1, replacement);
+                int _offset_1 = ((NewLineData)f).getOffset();
+                int _length = ((NewLineData)f).getLength();
+                TextReplacement _textReplacement = new TextReplacement(_offset_1, _length, replacement);
                 replacements.add(_textReplacement);
               }
             }
-            int _length_1 = f.getLength();
-            int _plus_2 = (textlength + _length_1);
-            oldOffset = _plus_2;
+            int _length = f.getLength();
+            int _plus_1 = (textlength + _length);
+            oldOffset = _plus_1;
           }
         }
       }

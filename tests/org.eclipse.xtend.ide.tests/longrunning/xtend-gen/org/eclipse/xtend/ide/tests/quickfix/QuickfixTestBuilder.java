@@ -161,17 +161,8 @@ public class QuickfixTestBuilder {
       final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
         @Override
         public Boolean apply(final Issue it) {
-          boolean _and = false;
-          String _code = it.getCode();
-          boolean _equals = Objects.equal(_code, Diagnostic.LINKING_DIAGNOSTIC);
-          if (!_equals) {
-            _and = false;
-          } else {
-            String[] _data = it.getData();
-            boolean _contains = ((List<String>)Conversions.doWrapArray(_data)).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
-            _and = _contains;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && 
+            ((List<String>)Conversions.doWrapArray(it.getData())).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL)));
         }
       };
       boolean _exists = IterableExtensions.<Issue>exists(_issuesAtCaret, _function);
@@ -188,17 +179,8 @@ public class QuickfixTestBuilder {
       final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
         @Override
         public Boolean apply(final Issue it) {
-          boolean _and = false;
-          String _code = it.getCode();
-          boolean _equals = Objects.equal(_code, Diagnostic.LINKING_DIAGNOSTIC);
-          if (!_equals) {
-            _and = false;
-          } else {
-            String[] _data = it.getData();
-            boolean _contains = ((List<String>)Conversions.doWrapArray(_data)).contains(UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL);
-            _and = _contains;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && 
+            ((List<String>)Conversions.doWrapArray(it.getData())).contains(UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL)));
         }
       };
       boolean _exists = IterableExtensions.<Issue>exists(_issuesAtCaret, _function);
@@ -387,19 +369,7 @@ public class QuickfixTestBuilder {
     final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
       @Override
       public Boolean apply(final Issue it) {
-        boolean _and = false;
-        Integer _offset = it.getOffset();
-        boolean _lessEqualsThan = ((_offset).intValue() <= QuickfixTestBuilder.this.caretOffset);
-        if (!_lessEqualsThan) {
-          _and = false;
-        } else {
-          Integer _offset_1 = it.getOffset();
-          Integer _length = it.getLength();
-          int _plus = ((_offset_1).intValue() + (_length).intValue());
-          boolean _greaterEqualsThan = (_plus >= QuickfixTestBuilder.this.caretOffset);
-          _and = _greaterEqualsThan;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((((it.getOffset()).intValue() <= QuickfixTestBuilder.this.caretOffset) && (((it.getOffset()).intValue() + (it.getLength()).intValue()) >= QuickfixTestBuilder.this.caretOffset)));
       }
     };
     return IterableExtensions.<Issue>filter(this.issues, _function);

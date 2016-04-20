@@ -116,18 +116,9 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
       final URI uri = VirtualFileURIUtil.getURI(child);
       return new AbsoluteURI(uri);
     } else {
-      boolean _and = false;
-      boolean _isTraceToTarget = this.isTraceToTarget();
-      if (!_isTraceToTarget) {
-        _and = false;
-      } else {
+      if ((this.isTraceToTarget() && (this.getModule() != null))) {
         Module _module = this.getModule();
-        boolean _tripleNotEquals = (_module != null);
-        _and = _tripleNotEquals;
-      }
-      if (_and) {
-        Module _module_1 = this.getModule();
-        final Set<OutputConfiguration> outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(_module_1);
+        final Set<OutputConfiguration> outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(_module);
         final Set<? extends IdeaSourceFolder> sourceFolders = this.localProjectConfig.getSourceFolders();
         for (final IdeaSourceFolder sourceFolder : sourceFolders) {
           {

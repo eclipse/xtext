@@ -46,22 +46,7 @@ public class OutdatedStateManager {
       final CancelIndicator _function = new CancelIndicator() {
         @Override
         public boolean isCanceled() {
-          boolean _and = false;
-          if (!cancelationAllowed) {
-            _and = false;
-          } else {
-            boolean _or = false;
-            boolean _isOutdated = ((XtextResourceSet)rs).isOutdated();
-            if (_isOutdated) {
-              _or = true;
-            } else {
-              int _modificationStamp = ((XtextResourceSet)rs).getModificationStamp();
-              boolean _notEquals = (current != _modificationStamp);
-              _or = _notEquals;
-            }
-            _and = _or;
-          }
-          return _and;
+          return (cancelationAllowed && (((XtextResourceSet)rs).isOutdated() || (current != ((XtextResourceSet)rs).getModificationStamp())));
         }
       };
       return _function;
@@ -77,15 +62,7 @@ public class OutdatedStateManager {
    */
   public void checkCanceled(final ResourceSet rs) {
     if ((rs instanceof XtextResourceSet)) {
-      boolean _and = false;
-      boolean _isOutdated = ((XtextResourceSet)rs).isOutdated();
-      if (!_isOutdated) {
-        _and = false;
-      } else {
-        Boolean _get = this.cancelationAllowed.get();
-        _and = (_get).booleanValue();
-      }
-      if (_and) {
+      if ((((XtextResourceSet)rs).isOutdated() && (this.cancelationAllowed.get()).booleanValue())) {
         this.canceledManager.throwOperationCanceledException();
       }
     }

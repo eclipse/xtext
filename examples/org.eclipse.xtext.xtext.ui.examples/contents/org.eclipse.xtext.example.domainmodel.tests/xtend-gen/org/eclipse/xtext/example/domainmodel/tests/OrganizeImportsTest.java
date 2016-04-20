@@ -53,17 +53,7 @@ public class OrganizeImportsTest {
       ReplaceRegion lastChange = null;
       for (final ReplaceRegion it : sortedChanges) {
         {
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(lastChange, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            int _endOffset = lastChange.getEndOffset();
-            int _offset = it.getOffset();
-            boolean _greaterThan = (_endOffset > _offset);
-            _and = _greaterThan;
-          }
-          if (_and) {
+          if (((!Objects.equal(lastChange, null)) && (lastChange.getEndOffset() > it.getOffset()))) {
             Assert.fail(((("Overlapping text edits: " + lastChange) + " and ") + it));
           }
           lastChange = it;

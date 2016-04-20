@@ -98,33 +98,7 @@ public class IdeContentProposalProvider {
   protected Iterable<ContentAssistContext> getFilteredContexts(final Collection<ContentAssistContext> contexts) {
     ContentAssistContext selectedContext = null;
     for (final ContentAssistContext context : contexts) {
-      boolean _or = false;
-      if ((selectedContext == null)) {
-        _or = true;
-      } else {
-        boolean _and = false;
-        boolean _isAcceptable = this.isAcceptable(context);
-        if (!_isAcceptable) {
-          _and = false;
-        } else {
-          boolean _or_1 = false;
-          String _prefix = context.getPrefix();
-          int _length = _prefix.length();
-          String _prefix_1 = selectedContext.getPrefix();
-          int _length_1 = _prefix_1.length();
-          boolean _greaterThan = (_length > _length_1);
-          if (_greaterThan) {
-            _or_1 = true;
-          } else {
-            boolean _isAcceptable_1 = this.isAcceptable(selectedContext);
-            boolean _not = (!_isAcceptable_1);
-            _or_1 = _not;
-          }
-          _and = _or_1;
-        }
-        _or = _and;
-      }
-      if (_or) {
+      if (((selectedContext == null) || (this.isAcceptable(context) && ((context.getPrefix().length() > selectedContext.getPrefix().length()) || (!this.isAcceptable(selectedContext)))))) {
         selectedContext = context;
       }
     }
@@ -132,23 +106,7 @@ public class IdeContentProposalProvider {
     final Function1<ContentAssistContext, Boolean> _function = new Function1<ContentAssistContext, Boolean>() {
       @Override
       public Boolean apply(final ContentAssistContext context) {
-        boolean _or = false;
-        if ((context == finalSelectedContext)) {
-          _or = true;
-        } else {
-          boolean _and = false;
-          String _prefix = context.getPrefix();
-          String _prefix_1 = finalSelectedContext.getPrefix();
-          boolean _equals = Objects.equal(_prefix, _prefix_1);
-          if (!_equals) {
-            _and = false;
-          } else {
-            boolean _isAcceptable = IdeContentProposalProvider.this.isAcceptable(context);
-            _and = _isAcceptable;
-          }
-          _or = _and;
-        }
-        return Boolean.valueOf(_or);
+        return Boolean.valueOf(((context == finalSelectedContext) || (Objects.equal(context.getPrefix(), finalSelectedContext.getPrefix()) && IdeContentProposalProvider.this.isAcceptable(context))));
       }
     };
     return IterableExtensions.<ContentAssistContext>filter(contexts, _function);
@@ -156,18 +114,7 @@ public class IdeContentProposalProvider {
   
   protected boolean isAcceptable(final ContentAssistContext context) {
     final String prefix = context.getPrefix();
-    boolean _or = false;
-    boolean _isEmpty = prefix.isEmpty();
-    if (_isEmpty) {
-      _or = true;
-    } else {
-      int _length = prefix.length();
-      int _minus = (_length - 1);
-      char _charAt = prefix.charAt(_minus);
-      boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart(_charAt);
-      _or = _isJavaIdentifierPart;
-    }
-    return _or;
+    return (prefix.isEmpty() || Character.isJavaIdentifierPart(prefix.charAt((prefix.length() - 1))));
   }
   
   protected void _createProposals(final AbstractElement element, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
@@ -180,15 +127,7 @@ public class IdeContentProposalProvider {
     } else {
       if ((terminal instanceof RuleCall)) {
         final AbstractRule rule = ((RuleCall)terminal).getRule();
-        boolean _and = false;
-        if (!(rule instanceof TerminalRule)) {
-          _and = false;
-        } else {
-          String _prefix = context.getPrefix();
-          boolean _isEmpty = _prefix.isEmpty();
-          _and = _isEmpty;
-        }
-        if (_and) {
+        if (((rule instanceof TerminalRule) && context.getPrefix().isEmpty())) {
           ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
           final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
             @Override
@@ -253,23 +192,7 @@ public class IdeContentProposalProvider {
   }
   
   protected boolean filterKeyword(final Keyword keyword, final ContentAssistContext context) {
-    boolean _and = false;
-    String _value = keyword.getValue();
-    String _prefix = context.getPrefix();
-    String _prefix_1 = context.getPrefix();
-    int _length = _prefix_1.length();
-    boolean _regionMatches = _value.regionMatches(true, 0, _prefix, 0, _length);
-    if (!_regionMatches) {
-      _and = false;
-    } else {
-      String _value_1 = keyword.getValue();
-      int _length_1 = _value_1.length();
-      String _prefix_2 = context.getPrefix();
-      int _length_2 = _prefix_2.length();
-      boolean _greaterThan = (_length_1 > _length_2);
-      _and = _greaterThan;
-    }
-    return _and;
+    return (keyword.getValue().regionMatches(true, 0, context.getPrefix(), 0, context.getPrefix().length()) && (keyword.getValue().length() > context.getPrefix().length()));
   }
   
   protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {

@@ -21,11 +21,9 @@ import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
-import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -62,26 +60,8 @@ public class SdkFeatureProject extends ProjectDescriptor {
   
   @Override
   public boolean isEnabled() {
-    boolean _or = false;
-    boolean _and = false;
-    boolean _isEnabled = super.isEnabled();
-    if (!_isEnabled) {
-      _and = false;
-    } else {
-      WizardConfiguration _config = this.getConfig();
-      RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
-      boolean _isEclipsePluginProject = _runtimeProject.isEclipsePluginProject();
-      _and = _isEclipsePluginProject;
-    }
-    if (_and) {
-      _or = true;
-    } else {
-      WizardConfiguration _config_1 = this.getConfig();
-      P2RepositoryProject _p2Project = _config_1.getP2Project();
-      boolean _isEnabled_1 = _p2Project.isEnabled();
-      _or = _isEnabled_1;
-    }
-    return _or;
+    return ((super.isEnabled() && this.getConfig().getRuntimeProject().isEclipsePluginProject()) || 
+      this.getConfig().getP2Project().isEnabled());
   }
   
   @Override

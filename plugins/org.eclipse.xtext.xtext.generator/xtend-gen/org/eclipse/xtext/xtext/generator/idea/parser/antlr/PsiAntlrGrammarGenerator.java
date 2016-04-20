@@ -79,26 +79,12 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;");
     _builder.newLine();
     {
-      boolean _and = false;
-      List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
-      final Function1<ParserRule, List<EObject>> _function = new Function1<ParserRule, List<EObject>>() {
+      if (((!IterableExtensions.isEmpty(Iterables.<UnorderedGroup>filter(Iterables.<EObject>concat(ListExtensions.<ParserRule, List<EObject>>map(GrammarUtil.allParserRules(it), new Function1<ParserRule, List<EObject>>() {
         @Override
         public List<EObject> apply(final ParserRule it) {
           return EcoreUtil2.eAllContentsAsList(it);
         }
-      };
-      List<List<EObject>> _map = ListExtensions.<ParserRule, List<EObject>>map(_allParserRules, _function);
-      Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
-      Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_flatten, UnorderedGroup.class);
-      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-      boolean _not = (!_isEmpty);
-      if (!_not) {
-        _and = false;
-      } else {
-        boolean _isBacktrack = options.isBacktrack();
-        _and = _isBacktrack;
-      }
-      if (_and) {
+      })), UnorderedGroup.class))) && options.isBacktrack())) {
         _builder.append("import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;");
         _builder.newLine();
       }
@@ -302,18 +288,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     CharSequence _switchResult = null;
     boolean _matched = false;
     if (it instanceof ParserRule) {
-      boolean _and = false;
-      ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it));
-      boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement);
-      boolean _not = (!_isDatatypeRule);
-      if (!_not) {
-        _and = false;
-      } else {
-        ParserRule _originalElement_1 = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it));
-        boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(_originalElement_1);
-        _and = _isEObjectFragmentRule;
-      }
-      if (_and) {
+      if (((!GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it)))) && GrammarUtil.isEObjectFragmentRule(AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it))))) {
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("[");

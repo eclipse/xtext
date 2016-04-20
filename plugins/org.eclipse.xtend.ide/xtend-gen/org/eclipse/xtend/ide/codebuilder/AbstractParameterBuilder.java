@@ -57,21 +57,7 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
   
   @Override
   public boolean isValid() {
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _notEquals = (!Objects.equal(this.type, null));
-    if (!_notEquals) {
-      _and_1 = false;
-    } else {
-      _and_1 = ((!this.varArgsFlag) || (this.type instanceof ArrayTypeReference));
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _isValid = super.isValid();
-      _and = _isValid;
-    }
-    return _and;
+    return (((!Objects.equal(this.type, null)) && ((!this.varArgsFlag) || (this.type instanceof ArrayTypeReference))) && super.isValid());
   }
   
   @Override

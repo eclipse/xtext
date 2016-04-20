@@ -11,14 +11,12 @@ import org.eclipse.xtend.lib.annotations.ToStringConfiguration;
 import org.eclipse.xtend.lib.annotations.ToStringProcessor;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Modifier;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ResolvedConstructor;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -52,24 +50,7 @@ public class DataProcessor extends AbstractClassProcessor {
       final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
         @Override
         public Boolean apply(final MutableFieldDeclaration it) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          boolean _isStatic = it.isStatic();
-          boolean _not = (!_isStatic);
-          if (!_not) {
-            _and_1 = false;
-          } else {
-            boolean _isTransient = it.isTransient();
-            boolean _not_1 = (!_isTransient);
-            _and_1 = _not_1;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            boolean _isThePrimaryGeneratedJavaElement = Util.this.context.isThePrimaryGeneratedJavaElement(it);
-            _and = _isThePrimaryGeneratedJavaElement;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((((!it.isStatic()) && (!it.isTransient())) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
         }
       };
       return IterableExtensions.filter(_declaredFields, _function);
@@ -102,17 +83,7 @@ public class DataProcessor extends AbstractClassProcessor {
       }
     };
     IterableExtensions.forEach(_dataFields, _function);
-    boolean _or = false;
-    boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
-    if (_needsFinalFieldConstructor) {
-      _or = true;
-    } else {
-      Type _findTypeGlobally = context.findTypeGlobally(FinalFieldsConstructor.class);
-      AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
-      boolean _tripleNotEquals = (_findAnnotation != null);
-      _or = _tripleNotEquals;
-    }
-    if (_or) {
+    if ((requiredArgsUtil.needsFinalFieldConstructor(it) || (it.findAnnotation(context.findTypeGlobally(FinalFieldsConstructor.class)) != null))) {
       requiredArgsUtil.addFinalFieldsConstructor(it);
     }
     boolean _hasHashCode = ehUtil.hasHashCode(it);

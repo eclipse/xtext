@@ -291,30 +291,16 @@ public class StandaloneBuilder {
             resources.add(resource);
             resource.getContents();
             EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
-            boolean _or = false;
-            boolean _validate = this.validate(resource);
-            boolean _not = (!_validate);
-            if (_not) {
-              _or = true;
-            } else {
-              _or = hasValidationErrors;
-            }
-            hasValidationErrors = _or;
+            hasValidationErrors = ((!this.validate(resource)) || hasValidationErrors);
             clusterIndex++;
             boolean _continueProcessing = strategy.continueProcessing(resourceSet, null, clusterIndex);
-            boolean _not_1 = (!_continueProcessing);
-            if (_not_1) {
+            boolean _not = (!_continueProcessing);
+            if (_not) {
               continue_ = false;
             }
           }
         }
-        boolean _and = false;
-        if (!this.failOnValidationError) {
-          _and = false;
-        } else {
-          _and = hasValidationErrors;
-        }
-        if (_and) {
+        if ((this.failOnValidationError && hasValidationErrors)) {
           return (!hasValidationErrors);
         }
         this.generate(resources);
@@ -556,17 +542,7 @@ public class StandaloneBuilder {
   protected File createTempDir(final String subDir) {
     try {
       final File file = new File(this.tempDir, subDir);
-      boolean _and = false;
-      boolean _mkdirs = file.mkdirs();
-      boolean _not = (!_mkdirs);
-      if (!_not) {
-        _and = false;
-      } else {
-        boolean _exists = file.exists();
-        boolean _not_1 = (!_exists);
-        _and = _not_1;
-      }
-      if (_and) {
+      if (((!file.mkdirs()) && (!file.exists()))) {
         String _absolutePath = file.getAbsolutePath();
         String _plus = ("Failed to create directory \'" + _absolutePath);
         String _plus_1 = (_plus + "\'");
@@ -626,24 +602,7 @@ public class StandaloneBuilder {
       @Override
       public void apply(final String uri, final Collection<URI> resource) {
         final File file = new File(uri);
-        boolean _and = false;
-        boolean _and_1 = false;
-        boolean _notEquals = (!Objects.equal(resource, null));
-        if (!_notEquals) {
-          _and_1 = false;
-        } else {
-          boolean _isDirectory = file.isDirectory();
-          boolean _not = (!_isDirectory);
-          _and_1 = _not;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          String _name = file.getName();
-          boolean _endsWith = _name.endsWith(".jar");
-          _and = _endsWith;
-        }
-        if (_and) {
+        if ((((!Objects.equal(resource, null)) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
           StandaloneBuilder.this.registerBundle(file);
         }
       }

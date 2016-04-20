@@ -20,18 +20,7 @@ public class CommentInfo extends LeafInfo {
   }
   
   public boolean isMultiline() {
-    boolean _and = false;
-    boolean _endsWithNewLine = this.endsWithNewLine();
-    boolean _not = (!_endsWithNewLine);
-    if (!_not) {
-      _and = false;
-    } else {
-      ILeafNode _node = this.getNode();
-      String _text = _node.getText();
-      boolean _contains = _text.contains("\n");
-      _and = _contains;
-    }
-    return _and;
+    return ((!this.endsWithNewLine()) && this.getNode().getText().contains("\n"));
   }
   
   @Override

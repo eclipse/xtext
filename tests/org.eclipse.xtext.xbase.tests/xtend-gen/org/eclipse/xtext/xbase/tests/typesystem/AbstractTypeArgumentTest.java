@@ -17,8 +17,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -128,24 +126,14 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
           if (it instanceof XAbstractFeatureCall) {
             _matched=true;
             boolean _and = false;
-            boolean _and_1 = false;
-            boolean _isTypeLiteral = ((XAbstractFeatureCall)it).isTypeLiteral();
-            boolean _not = (!_isTypeLiteral);
-            if (!_not) {
-              _and_1 = false;
-            } else {
-              boolean _isPackageFragment = ((XAbstractFeatureCall)it).isPackageFragment();
-              boolean _not_1 = (!_isPackageFragment);
-              _and_1 = _not_1;
-            }
-            if (!_and_1) {
+            if (!((!((XAbstractFeatureCall)it).isTypeLiteral()) && (!((XAbstractFeatureCall)it).isPackageFragment()))) {
               _and = false;
             } else {
               boolean _or = false;
               EList<JvmTypeReference> _typeArguments = ((XAbstractFeatureCall)it).getTypeArguments();
               boolean _isEmpty = _typeArguments.isEmpty();
-              boolean _not_2 = (!_isEmpty);
-              if (_not_2) {
+              boolean _not = (!_isEmpty);
+              if (_not) {
                 _or = true;
               } else {
                 boolean _switchResult_1 = false;
@@ -170,21 +158,8 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
           if (!_matched) {
             if (it instanceof XConstructorCall) {
               _matched=true;
-              boolean _or = false;
-              EList<JvmTypeReference> _typeArguments = ((XConstructorCall)it).getTypeArguments();
-              boolean _isEmpty = _typeArguments.isEmpty();
-              boolean _not = (!_isEmpty);
-              if (_not) {
-                _or = true;
-              } else {
-                JvmConstructor _constructor = ((XConstructorCall)it).getConstructor();
-                JvmDeclaredType _declaringType = _constructor.getDeclaringType();
-                EList<JvmTypeParameter> _typeParameters = ((JvmGenericType) _declaringType).getTypeParameters();
-                boolean _isEmpty_1 = _typeParameters.isEmpty();
-                boolean _not_1 = (!_isEmpty_1);
-                _or = _not_1;
-              }
-              _switchResult = _or;
+              _switchResult = ((!((XConstructorCall)it).getTypeArguments().isEmpty()) || 
+                (!((JvmGenericType) ((XConstructorCall)it).getConstructor().getDeclaringType()).getTypeParameters().isEmpty()));
             }
           }
           if (!_matched) {

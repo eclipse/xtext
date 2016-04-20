@@ -23,7 +23,6 @@ import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
-import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.SdkFeatureProject;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
@@ -55,17 +54,7 @@ public class P2RepositoryProject extends ProjectDescriptor {
   
   @Override
   public boolean isEnabled() {
-    boolean _and = false;
-    boolean _isEnabled = super.isEnabled();
-    if (!_isEnabled) {
-      _and = false;
-    } else {
-      WizardConfiguration _config = this.getConfig();
-      RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
-      boolean _isEclipsePluginProject = _runtimeProject.isEclipsePluginProject();
-      _and = _isEclipsePluginProject;
-    }
-    return _and;
+    return (super.isEnabled() && this.getConfig().getRuntimeProject().isEclipsePluginProject());
   }
   
   @Override

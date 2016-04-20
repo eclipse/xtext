@@ -164,15 +164,7 @@ public class GeneratorService extends AbstractCachedService<GeneratorService.Gen
       }
     };
     GeneratorResult result = IterableExtensions.<GeneratorResult>findFirst(artifacts, _function);
-    boolean _and = false;
-    if (!(result == null)) {
-      _and = false;
-    } else {
-      boolean _startsWith = searchString.startsWith(IFileSystemAccess.DEFAULT_OUTPUT);
-      boolean _not = (!_startsWith);
-      _and = _not;
-    }
-    if (_and) {
+    if (((result == null) && (!searchString.startsWith(IFileSystemAccess.DEFAULT_OUTPUT)))) {
       final String defaultSearchString = (IFileSystemAccess.DEFAULT_OUTPUT + searchString);
       final Function1<GeneratorResult, Boolean> _function_1 = new Function1<GeneratorResult, Boolean>() {
         @Override

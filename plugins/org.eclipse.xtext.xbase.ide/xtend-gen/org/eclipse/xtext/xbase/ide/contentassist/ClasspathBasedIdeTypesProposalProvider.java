@@ -14,7 +14,6 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -128,24 +127,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
     boolean _xblockexpression = false;
     {
       final String prefix = context.getPrefix();
-      boolean _and = false;
-      boolean _and_1 = false;
-      String _simpleName = typeDesc.getSimpleName();
-      int _length = prefix.length();
-      boolean _regionMatches = _simpleName.regionMatches(true, 0, prefix, 0, _length);
-      if (!_regionMatches) {
-        _and_1 = false;
-      } else {
-        boolean _isVisible = this.isVisible(typeDesc, context);
-        _and_1 = _isVisible;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        boolean _apply = filter.apply(typeDesc);
-        _and = _apply;
-      }
-      _xblockexpression = _and;
+      _xblockexpression = ((typeDesc.getSimpleName().regionMatches(true, 0, prefix, 0, prefix.length()) && this.isVisible(typeDesc, context)) && filter.apply(typeDesc));
     }
     return _xblockexpression;
   }
@@ -176,14 +158,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
           String _simpleName_1 = typeDesc.getSimpleName();
           it.setProposal(_simpleName_1);
           it.setDescription(qualifiedName);
-          boolean _and = false;
-          if (!(importSectionRegion != null)) {
-            _and = false;
-          } else {
-            boolean _isImportDeclarationRequired = ClasspathBasedIdeTypesProposalProvider.this.isImportDeclarationRequired(typeDesc, qualifiedName, context, importSection);
-            _and = _isImportDeclarationRequired;
-          }
-          if (_and) {
+          if (((importSectionRegion != null) && ClasspathBasedIdeTypesProposalProvider.this.isImportDeclarationRequired(typeDesc, qualifiedName, context, importSection))) {
             ClasspathBasedIdeTypesProposalProvider.this.addImportDeclaration(it, importSectionRegion, typeDesc, qualifiedName, context);
           }
         }
@@ -197,45 +172,17 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
   }
   
   protected boolean isImportDeclarationRequired(final ITypeDescriptor typeDesc, final String qualifiedName, final ContentAssistContext context, final XImportSection importSection) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    String _name = typeDesc.getName();
-    boolean _startsWith = _name.startsWith("java.lang");
-    if (!_startsWith) {
-      _and_1 = false;
-    } else {
-      String _name_1 = typeDesc.getName();
-      int _lastIndexOf = _name_1.lastIndexOf(".");
-      boolean _equals = (_lastIndexOf == 9);
-      _and_1 = _equals;
-    }
-    boolean _not = (!_and_1);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      if ((importSection == null)) {
-        _or = true;
-      } else {
-        EList<XImportDeclaration> _importDeclarations = importSection.getImportDeclarations();
-        final Function1<XImportDeclaration, Boolean> _function = new Function1<XImportDeclaration, Boolean>() {
-          @Override
-          public Boolean apply(final XImportDeclaration it) {
-            JvmDeclaredType _importedType = it.getImportedType();
-            String _qualifiedName = null;
-            if (_importedType!=null) {
-              _qualifiedName=_importedType.getQualifiedName();
-            }
-            return Boolean.valueOf(Objects.equal(_qualifiedName, qualifiedName));
-          }
-        };
-        boolean _exists = IterableExtensions.<XImportDeclaration>exists(_importDeclarations, _function);
-        boolean _not_1 = (!_exists);
-        _or = _not_1;
+    return ((!(typeDesc.getName().startsWith("java.lang") && (typeDesc.getName().lastIndexOf(".") == 9))) && ((importSection == null) || (!IterableExtensions.<XImportDeclaration>exists(importSection.getImportDeclarations(), new Function1<XImportDeclaration, Boolean>() {
+      @Override
+      public Boolean apply(final XImportDeclaration it) {
+        JvmDeclaredType _importedType = it.getImportedType();
+        String _qualifiedName = null;
+        if (_importedType!=null) {
+          _qualifiedName=_importedType.getQualifiedName();
+        }
+        return Boolean.valueOf(Objects.equal(_qualifiedName, qualifiedName));
       }
-      _and = _or;
-    }
-    return _and;
+    }))));
   }
   
   protected boolean addImportDeclaration(final ContentAssistEntry entry, final ITextRegion importSectionRegion, final ITypeDescriptor typeDesc, final String qualifiedName, final ContentAssistContext context) {

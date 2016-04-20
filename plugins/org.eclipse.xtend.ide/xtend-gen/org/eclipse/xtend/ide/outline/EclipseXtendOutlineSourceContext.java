@@ -66,17 +66,8 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
         final Function1<JvmFeature, Boolean> _function_1 = new Function1<JvmFeature, Boolean>() {
           @Override
           public Boolean apply(final JvmFeature it) {
-            boolean _or = false;
-            String _simpleName = it.getSimpleName();
-            boolean _startsWith = _simpleName.startsWith(XtendJvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX);
-            if (_startsWith) {
-              _or = true;
-            } else {
-              String _simpleName_1 = it.getSimpleName();
-              boolean _startsWith_1 = _simpleName_1.startsWith(XtendJvmModelInferrer.CREATE_INITIALIZER_PREFIX);
-              _or = _startsWith_1;
-            }
-            return Boolean.valueOf(_or);
+            return Boolean.valueOf((it.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX) || 
+              it.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_INITIALIZER_PREFIX)));
           }
         };
         Iterable<JvmFeature> _filter_2 = IterableExtensions.<JvmFeature>filter(_filter_1, _function_1);

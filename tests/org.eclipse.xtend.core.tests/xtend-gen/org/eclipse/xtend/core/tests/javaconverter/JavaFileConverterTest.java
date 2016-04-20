@@ -89,25 +89,8 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
           @Override
           public boolean apply(final URI input) {
             final String fileName = input.toFileString();
-            boolean _and = false;
-            boolean _and_1 = false;
-            String _fileExtension = input.fileExtension();
-            boolean _equals = "java".equals(_fileExtension);
-            if (!_equals) {
-              _and_1 = false;
-            } else {
-              boolean _contains = fileName.contains("xtend-gen");
-              boolean _not = (!_contains);
-              _and_1 = _not;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              boolean _contains_1 = fileName.contains("batch-compiler-data");
-              boolean _not_1 = (!_contains_1);
-              _and = _not_1;
-            }
-            return _and;
+            return (("java".equals(input.fileExtension()) && (!fileName.contains("xtend-gen"))) && 
+              (!fileName.contains("batch-compiler-data")));
           }
         });
       int errors = 0;

@@ -151,17 +151,9 @@ public class JavaConverter {
       return javaCode;
     }
     JavaConverter.ConversionResult conversionResult = null;
-    boolean _or = false;
-    if (forceStatement) {
-      _or = true;
-    } else {
+    if ((forceStatement || (parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS))) {
       int _type = parseResult.getType();
-      boolean _lessThan = (_type < ASTParser.K_CLASS_BODY_DECLARATIONS);
-      _or = _lessThan;
-    }
-    if (_or) {
-      int _type_1 = parseResult.getType();
-      boolean _tripleEquals = (_type_1 == ASTParser.K_EXPRESSION);
+      boolean _tripleEquals = (_type == ASTParser.K_EXPRESSION);
       if (_tripleEquals) {
         JavaConverter.ConversionResult _expressionToXtend = this.expressionToXtend(javaCode, classPathContext);
         conversionResult = _expressionToXtend;
@@ -274,13 +266,7 @@ public class JavaConverter {
     astFlattener.setTargetlevel(targetLevel);
     astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
     astFlattener.setJavaSources(preparedJavaSource);
-    boolean _and = false;
-    if (!synteticBlock) {
-      _and = false;
-    } else {
-      _and = (parseResult instanceof Block);
-    }
-    if (_and) {
+    if ((synteticBlock && (parseResult instanceof Block))) {
       astFlattener.acceptSyntaticBlock(((Block) parseResult));
     } else {
       parseResult.accept(astFlattener);
@@ -294,15 +280,8 @@ public class JavaConverter {
   }
   
   public boolean shouldForceStatementMode(final EObject targetElement) {
-    boolean _and = false;
-    if (!((targetElement != null) && 
-      (!((targetElement instanceof XAnnotation) || (targetElement instanceof XtendExecutable))))) {
-      _and = false;
-    } else {
-      XtendExecutable _containerOfType = EcoreUtil2.<XtendExecutable>getContainerOfType(targetElement, XtendExecutable.class);
-      boolean _tripleNotEquals = (_containerOfType != null);
-      _and = _tripleNotEquals;
-    }
-    return _and;
+    return (((targetElement != null) && 
+      (!((targetElement instanceof XAnnotation) || (targetElement instanceof XtendExecutable)))) && 
+      (EcoreUtil2.<XtendExecutable>getContainerOfType(targetElement, XtendExecutable.class) != null));
   }
 }

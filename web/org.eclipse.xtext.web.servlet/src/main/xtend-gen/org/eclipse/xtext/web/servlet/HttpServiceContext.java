@@ -53,36 +53,12 @@ public class HttpServiceContext implements IServiceContext {
           _split=_contentType.split(";(\\s*)");
         }
         final String[] contentType = _split;
-        boolean _and = false;
-        if (!(contentType != null)) {
-          _and = false;
-        } else {
-          String _get = contentType[0];
-          boolean _equals = Objects.equal(_get, "application/x-www-form-urlencoded");
-          _and = _equals;
-        }
-        if (_and) {
+        if (((contentType != null) && Objects.equal(contentType[0], "application/x-www-form-urlencoded"))) {
           String _xifexpression = null;
-          boolean _and_1 = false;
-          boolean _and_2 = false;
-          if (!(contentType != null)) {
-            _and_2 = false;
-          } else {
-            int _length = contentType.length;
-            boolean _greaterEqualsThan = (_length >= 2);
-            _and_2 = _greaterEqualsThan;
-          }
-          if (!_and_2) {
-            _and_1 = false;
-          } else {
-            String _get_1 = contentType[1];
-            boolean _startsWith = _get_1.startsWith("charset=");
-            _and_1 = _startsWith;
-          }
-          if (_and_1) {
-            String _get_2 = contentType[1];
-            int _length_1 = "charset=".length();
-            _xifexpression = _get_2.substring(_length_1);
+          if ((((contentType != null) && (contentType.length >= 2)) && contentType[1].startsWith("charset="))) {
+            String _get = contentType[1];
+            int _length = "charset=".length();
+            _xifexpression = _get.substring(_length);
           } else {
             Charset _defaultCharset = Charset.defaultCharset();
             _xifexpression = _defaultCharset.toString();

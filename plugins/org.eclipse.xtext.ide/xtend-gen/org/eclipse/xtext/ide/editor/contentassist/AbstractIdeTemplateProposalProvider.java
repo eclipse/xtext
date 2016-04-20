@@ -220,16 +220,7 @@ public abstract class AbstractIdeTemplateProposalProvider {
       _text=_rootNode.getText();
     }
     final String text = _text;
-    boolean _and = false;
-    if (!(text != null)) {
-      _and = false;
-    } else {
-      int _length = text.length();
-      int _offset = context.getOffset();
-      boolean _greaterEqualsThan = (_length >= _offset);
-      _and = _greaterEqualsThan;
-    }
-    if (_and) {
+    if (((text != null) && (text.length() >= context.getOffset()))) {
       ITextRegion _replaceRegion = context.getReplaceRegion();
       int lineStart = _replaceRegion.getOffset();
       int indentEnd = lineStart;

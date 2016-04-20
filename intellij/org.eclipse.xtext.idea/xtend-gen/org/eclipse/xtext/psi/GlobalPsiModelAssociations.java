@@ -74,15 +74,7 @@ public class GlobalPsiModelAssociations implements IPsiModelAssociations {
   public PsiElement getPsiElement(final IEObjectDescription objectDescription, final Resource context) {
     PsiElement _xblockexpression = null;
     {
-      boolean _or = false;
-      boolean _equals = Objects.equal(objectDescription, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        boolean _equals_1 = Objects.equal(context, null);
-        _or = _equals_1;
-      }
-      if (_or) {
+      if ((Objects.equal(objectDescription, null) || Objects.equal(context, null))) {
         return null;
       }
       final URI resourceURI = context.getURI();

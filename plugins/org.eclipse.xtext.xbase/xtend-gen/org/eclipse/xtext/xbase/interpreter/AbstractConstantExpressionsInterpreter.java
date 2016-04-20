@@ -288,27 +288,13 @@ public class AbstractConstantExpressionsInterpreter {
         _switchResult = this.constantOperators.minus(value);
       }
       if (!_matched) {
-        boolean _and = false;
-        boolean _equals = Objects.equal(op, "!");
-        if (!_equals) {
-          _and = false;
-        } else {
-          _and = (value instanceof Boolean);
-        }
-        if (_and) {
+        if ((Objects.equal(op, "!") && (value instanceof Boolean))) {
           _matched=true;
           _switchResult = Boolean.valueOf((!(((Boolean) value)).booleanValue()));
         }
       }
       if (!_matched) {
-        boolean _and_1 = false;
-        boolean _equals_1 = Objects.equal(op, "+");
-        if (!_equals_1) {
-          _and_1 = false;
-        } else {
-          _and_1 = (value instanceof Number);
-        }
-        if (_and_1) {
+        if ((Objects.equal(op, "+") && (value instanceof Number))) {
           _matched=true;
           _switchResult = value;
         }

@@ -84,24 +84,7 @@ public class ResourceURICollector {
       @Override
       public void apply(final String path, final Collection<URI> resource) {
         final File file = new File(path);
-        boolean _and = false;
-        boolean _and_1 = false;
-        boolean _notEquals = (!Objects.equal(resource, null));
-        if (!_notEquals) {
-          _and_1 = false;
-        } else {
-          boolean _isDirectory = file.isDirectory();
-          boolean _not = (!_isDirectory);
-          _and_1 = _not;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          String _name = file.getName();
-          boolean _endsWith = _name.endsWith(".jar");
-          _and = _endsWith;
-        }
-        if (_and) {
+        if ((((!Objects.equal(resource, null)) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
           ResourceURICollector.this.registerBundle(file);
         }
       }

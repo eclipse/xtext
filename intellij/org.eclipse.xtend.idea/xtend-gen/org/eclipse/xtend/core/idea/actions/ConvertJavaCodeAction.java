@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.idea.actions;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiJavaFile;
@@ -42,16 +41,7 @@ public class ConvertJavaCodeAction extends BaseRefactoringAction {
       @Override
       public Boolean apply(final PsiJavaFile it) {
         final Module module = ModuleUtil.findModuleForPsiElement(it);
-        boolean _and = false;
-        if (!(module != null)) {
-          _and = false;
-        } else {
-          ModuleRootManager _instance = ModuleRootManager.getInstance(module);
-          Sdk _sdk = _instance.getSdk();
-          boolean _tripleNotEquals = (_sdk != null);
-          _and = _tripleNotEquals;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((module != null) && (ModuleRootManager.getInstance(module).getSdk() != null)));
       }
     };
     return IterableExtensions.<PsiJavaFile>exists(_collectJavaFiles, _function);

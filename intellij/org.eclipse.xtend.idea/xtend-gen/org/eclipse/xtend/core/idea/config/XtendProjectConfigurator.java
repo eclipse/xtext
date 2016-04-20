@@ -53,14 +53,7 @@ public class XtendProjectConfigurator extends XtextProjectConfigurator {
   public void setupOutputConfiguration(final ModifiableRootModel rootModel, final XtendFacetConfiguration conf) {
     final Module module = rootModel.getModule();
     final GroovyFile buildFile = this._gradleBuildFileUtility.locateBuildFile(module);
-    boolean _and = false;
-    boolean _isGradleedModule = this._gradleBuildFileUtility.isGradleedModule(module);
-    if (!_isGradleedModule) {
-      _and = false;
-    } else {
-      _and = (buildFile != null);
-    }
-    if (_and) {
+    if ((this._gradleBuildFileUtility.isGradleedModule(module) && (buildFile != null))) {
       XbaseGeneratorConfigurationState _state = conf.getState();
       this.presetGradleOutputDirectories(_state, rootModel);
     } else {
@@ -79,33 +72,14 @@ public class XtendProjectConfigurator extends XtextProjectConfigurator {
     final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
-        boolean _and = false;
-        boolean _isTestSource = it.isTestSource();
-        boolean _not = (!_isTestSource);
-        if (!_not) {
-          _and = false;
-        } else {
-          String _url = it.getUrl();
-          boolean _endsWith = _url.endsWith("xtend-gen");
-          _and = _endsWith;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((!it.isTestSource()) && it.getUrl().endsWith("xtend-gen")));
       }
     };
     final VirtualFile existingXtendGen = this.findSourceFolder(rootModel, _function);
     final Function1<SourceFolder, Boolean> _function_1 = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
-        boolean _and = false;
-        boolean _isTestSource = it.isTestSource();
-        if (!_isTestSource) {
-          _and = false;
-        } else {
-          String _url = it.getUrl();
-          boolean _endsWith = _url.endsWith("xtend-gen");
-          _and = _endsWith;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((it.isTestSource() && it.getUrl().endsWith("xtend-gen")));
       }
     };
     final VirtualFile existingXtendTestGen = this.findSourceFolder(rootModel, _function_1);
@@ -326,17 +300,7 @@ public class XtendProjectConfigurator extends XtextProjectConfigurator {
       final Function1<ExcludeFolder, Boolean> _function_1 = new Function1<ExcludeFolder, Boolean>() {
         @Override
         public Boolean apply(final ExcludeFolder it) {
-          boolean _and = false;
-          VirtualFile _file = it.getFile();
-          boolean _tripleNotEquals = (_file != null);
-          if (!_tripleNotEquals) {
-            _and = false;
-          } else {
-            VirtualFile _file_1 = it.getFile();
-            boolean _isAncestor = VfsUtil.isAncestor(_file_1, xtendGenMain, true);
-            _and = _isAncestor;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((it.getFile() != null) && VfsUtil.isAncestor(it.getFile(), xtendGenMain, true)));
         }
       };
       final ExcludeFolder excludedParent = IterableExtensions.<ExcludeFolder>findFirst(((Iterable<ExcludeFolder>)Conversions.doWrapArray(_excludeFolders)), _function_1);

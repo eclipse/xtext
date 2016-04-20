@@ -233,24 +233,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
         final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
           @Override
           public Boolean apply(final MutableFieldDeclaration it) {
-            boolean _and = false;
-            boolean _and_1 = false;
-            boolean _isThePrimaryGeneratedJavaElement = context.isThePrimaryGeneratedJavaElement(it);
-            if (!_isThePrimaryGeneratedJavaElement) {
-              _and_1 = false;
-            } else {
-              boolean _isStatic = it.isStatic();
-              boolean _not = (!_isStatic);
-              _and_1 = _not;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              boolean _isTransient = it.isTransient();
-              boolean _not_1 = (!_isTransient);
-              _and = _not_1;
-            }
-            return Boolean.valueOf(_and);
+            return Boolean.valueOf(((context.isThePrimaryGeneratedJavaElement(it) && (!it.isStatic())) && (!it.isTransient())));
           }
         };
         Iterable<? extends MutableFieldDeclaration> _filter = IterableExtensions.filter(_declaredFields, _function);

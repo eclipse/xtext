@@ -49,13 +49,7 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
   
   @Check
   public void checkNormalizable(final Expression expr) {
-    boolean _or = false;
-    if ((expr instanceof NumberLiteral)) {
-      _or = true;
-    } else {
-      _or = (expr instanceof FunctionCall);
-    }
-    if (_or) {
+    if (((expr instanceof NumberLiteral) || (expr instanceof FunctionCall))) {
       return;
     }
     Evaluation _containerOfType = EcoreUtil2.<Evaluation>getContainerOfType(expr, Evaluation.class);

@@ -74,17 +74,7 @@ public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorCompon
     final Function1<ISubProjectConfig, Boolean> _function = new Function1<ISubProjectConfig, Boolean>() {
       @Override
       public Boolean apply(final ISubProjectConfig it) {
-        boolean _and = false;
-        String _name = it.getName();
-        boolean _notEquals = (!Objects.equal(_name, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          IXtextGeneratorFileSystemAccess _root = it.getRoot();
-          boolean _notEquals_1 = (!Objects.equal(_root, null));
-          _and = _notEquals_1;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((!Objects.equal(it.getName(), null)) && (!Objects.equal(it.getRoot(), null))));
       }
     };
     Iterable<? extends ISubProjectConfig> _filter = IterableExtensions.filter(_enabledProjects, _function);

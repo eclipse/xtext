@@ -75,20 +75,9 @@ public class ImportingStringConcatenation extends StringConcatenation {
   @Override
   protected List<String> getSignificantContent() {
     final List<String> result = super.getSignificantContent();
-    boolean _and = false;
-    int _size = result.size();
-    boolean _greaterEqualsThan = (_size >= 1);
-    if (!_greaterEqualsThan) {
-      _and = false;
-    } else {
-      String _lineDelimiter = this.getLineDelimiter();
-      String _last = IterableExtensions.<String>last(result);
-      boolean _equals = Objects.equal(_lineDelimiter, _last);
-      _and = _equals;
-    }
-    if (_and) {
-      int _size_1 = result.size();
-      int _minus = (_size_1 - 1);
+    if (((result.size() >= 1) && Objects.equal(this.getLineDelimiter(), IterableExtensions.<String>last(result)))) {
+      int _size = result.size();
+      int _minus = (_size - 1);
       return result.subList(0, _minus);
     }
     return result;
