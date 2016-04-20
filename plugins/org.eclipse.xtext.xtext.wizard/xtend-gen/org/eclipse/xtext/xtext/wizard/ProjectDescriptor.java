@@ -100,6 +100,12 @@ public abstract class ProjectDescriptor {
       PlainTextFile _file_1 = this.file(Outlet.ROOT, "build.properties", _buildProperties);
       files.add(_file_1);
     }
+    boolean _isEclipseFeatureProject = this.isEclipseFeatureProject();
+    if (_isEclipseFeatureProject) {
+      CharSequence _buildProperties_1 = this.buildProperties();
+      PlainTextFile _file_2 = this.file(Outlet.ROOT, "build.properties", _buildProperties_1);
+      files.add(_file_2);
+    }
     boolean _and = false;
     boolean _needsGradleBuild = this.config.needsGradleBuild();
     if (!_needsGradleBuild) {
@@ -132,6 +138,10 @@ public abstract class ProjectDescriptor {
   public abstract boolean isPartOfMavenBuild();
   
   public abstract boolean isEclipsePluginProject();
+  
+  public boolean isEclipseFeatureProject() {
+    return false;
+  }
   
   public CharSequence buildProperties() {
     StringConcatenation _builder = new StringConcatenation();

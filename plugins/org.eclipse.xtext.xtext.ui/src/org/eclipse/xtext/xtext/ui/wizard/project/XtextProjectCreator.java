@@ -80,6 +80,8 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 	private IProject createProject(ProjectDescriptor descriptor, SubMonitor monitor) {
 		if (isPluginProject(descriptor)) {
 			return createPluginProject(descriptor, monitor);
+		} else if (isFeatureProject(descriptor)) {
+			return createFeatureProject(descriptor, monitor);
 		} else if (isJavaProject(descriptor)) {
 			return createJavaProject(descriptor, monitor);
 		} else {
@@ -122,6 +124,14 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		if (needsBuildshipIntegration(descriptor) && !descriptor.isEclipsePluginProject()) {
 			factory.addClasspathEntries(JavaCore.newContainerEntry(new Path("org.eclipse.buildship.core.gradleclasspathcontainer")));
 		}
+	}
+
+	private IProject createFeatureProject(ProjectDescriptor descriptor, SubMonitor monitor) {
+		ProjectFactory factory = plainProjectProvider.get();
+		configurePlainProject(descriptor, factory);
+		factory.addProjectNatures("org.eclipse.pde.FeatureNature");
+		factory.addBuilderIds("org.eclipse.pde.FeatureBuilder");
+		return factory.createProject(monitor, null);
 	}
 
 	private IProject createPlainProject(ProjectDescriptor descriptor, SubMonitor monitor) {
@@ -247,6 +257,10 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 
 	private boolean isPluginProject(ProjectDescriptor descriptor) {
 		return descriptor.isEclipsePluginProject();
+	}
+
+	private boolean isFeatureProject(ProjectDescriptor descriptor) {
+		return descriptor.isEclipseFeatureProject();
 	}
 
 	private boolean isJavaProject(ProjectDescriptor descriptor) {

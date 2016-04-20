@@ -88,6 +88,29 @@ class CliWizardIntegrationTest {
 			uiProject.testProject.enabled = true
 		],
 		newProjectConfig => [
+			baseName = "org.xtext.example.eclipsePluginP2"
+			preferredBuildSystem = BuildSystem.NONE
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.FLAT
+			runtimeProject.testProject.enabled = true
+			ideProject.enabled = true
+			uiProject.enabled = true
+			uiProject.testProject.enabled = true
+			p2Project.enabled = true
+		],
+		newProjectConfig => [
+			baseName = "org.xtext.example.mavenTychoP2"
+			preferredBuildSystem = BuildSystem.MAVEN
+			sourceLayout = SourceLayout.PLAIN
+			projectLayout = ProjectLayout.HIERARCHICAL
+			runtimeProject.testProject.enabled = true
+			uiProject.enabled = true
+			uiProject.testProject.enabled = true
+			ideProject.enabled = true
+			webProject.enabled = true
+			p2Project.enabled = true
+		],
+		newProjectConfig => [
 			baseName = "org.xtext.example.full"
 			preferredBuildSystem = BuildSystem.GRADLE
 			sourceLayout = SourceLayout.PLAIN
@@ -98,6 +121,7 @@ class CliWizardIntegrationTest {
 			ideProject.enabled = true
 			webProject.enabled = true
 			intellijProject.enabled = true
+			p2Project.enabled = true
 		]
 	]
 

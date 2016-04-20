@@ -109,6 +109,43 @@ public class StatusWidget extends Composite {
     return _xblockexpression;
   }
   
+  public Procedure0 addStatus(final int severity, final String text) {
+    Procedure0 _xifexpression = null;
+    String _text = this.link.getText();
+    String _trim = _text.trim();
+    boolean _isEmpty = _trim.isEmpty();
+    if (_isEmpty) {
+      final Procedure0 _function = new Procedure0() {
+        @Override
+        public void apply() {
+        }
+      };
+      final Procedure0 _function_1 = new Procedure0() {
+        @Override
+        public void apply() {
+        }
+      };
+      _xifexpression = this.setStatus(severity, text, _function, _function_1);
+    } else {
+      String _text_1 = this.link.getText();
+      String _plus = (_text_1 + "\n");
+      String _plus_1 = (_plus + text);
+      this.link.setText(_plus_1);
+      Pattern _compile = Pattern.compile("<a>(.*)</a>");
+      String _trim_1 = text.trim();
+      final Matcher matcher = _compile.matcher(_trim_1);
+      String _replaceAll = matcher.replaceAll("$1");
+      this.link.setToolTipText(_replaceAll);
+      if ((severity > this.severity)) {
+        this.severity = severity;
+        this.setVisible((severity != IMessageProvider.NONE));
+        Image _imageFor = this.imageFor(severity);
+        this.imageLabel.setImage(_imageFor);
+      }
+    }
+    return _xifexpression;
+  }
+  
   public int getSevertity() {
     return this.severity;
   }
