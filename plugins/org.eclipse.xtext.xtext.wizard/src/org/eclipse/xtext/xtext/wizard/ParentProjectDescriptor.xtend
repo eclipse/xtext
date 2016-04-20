@@ -230,6 +230,49 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<version>${tycho-version}</version>
 								<extensions>true</extensions>
 							</plugin>
+							«IF config.p2Project.enabled»
+							<plugin>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>tycho-source-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<executions>
+									<execution>
+										<id>plugin-source</id>
+										<goals>
+											<goal>plugin-source</goal>
+										</goals>
+									</execution>
+								</executions>
+							</plugin>
+							<plugin>
+								<groupId>org.eclipse.tycho.extras</groupId>
+								<artifactId>tycho-source-feature-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<executions>
+									<execution>
+										<id>source-feature</id>
+										<phase>package</phase>
+										<goals>
+											<goal>source-feature</goal>
+										</goals>
+									</execution>
+								</executions>
+							</plugin>
+							<plugin>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>tycho-p2-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<executions>
+									<execution>
+										<id>attach-p2-metadata</id>
+										<phase>package</phase>
+										<goals>
+											<goal>p2-metadata</goal>
+										</goals>
+									</execution>
+								</executions>
+							</plugin>
+							«ENDIF»
 							<plugin>
 								<groupId>org.eclipse.tycho</groupId>
 								<artifactId>target-platform-configuration</artifactId>
