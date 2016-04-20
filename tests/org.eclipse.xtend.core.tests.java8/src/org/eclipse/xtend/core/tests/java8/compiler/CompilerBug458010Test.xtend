@@ -137,24 +137,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
-			      boolean _and = false;
-			      boolean _and_1 = false;
-			      boolean _equals = Objects.equal(it.gender, Demo.Person.Sex.MALE);
-			      if (!_equals) {
-			        _and_1 = false;
-			      } else {
-			        int _age = it.getAge();
-			        boolean _greaterEqualsThan = (_age >= 18);
-			        _and_1 = _greaterEqualsThan;
-			      }
-			      if (!_and_1) {
-			        _and = false;
-			      } else {
-			        int _age_1 = it.getAge();
-			        boolean _lessEqualsThan = (_age_1 <= 25);
-			        _and = _lessEqualsThan;
-			      }
-			      return _and;
+			      return ((Objects.equal(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25));
 			    };
 			    final Function<Demo.Person, String> _function_1 = (Demo.Person it) -> {
 			      return it.emailAddress;
@@ -281,24 +264,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    Stream<Demo.Person> _stream = roster.stream();
 			    final Predicate<Demo.Person> _function = (Demo.Person it) -> {
-			      boolean _and = false;
-			      boolean _and_1 = false;
-			      boolean _equals = Objects.equal(it.gender, Demo.Person.Sex.MALE);
-			      if (!_equals) {
-			        _and_1 = false;
-			      } else {
-			        int _age = it.getAge();
-			        boolean _greaterEqualsThan = (_age >= 18);
-			        _and_1 = _greaterEqualsThan;
-			      }
-			      if (!_and_1) {
-			        _and = false;
-			      } else {
-			        int _age_1 = it.getAge();
-			        boolean _lessEqualsThan = (_age_1 <= 25);
-			        _and = _lessEqualsThan;
-			      }
-			      return _and;
+			      return ((Objects.equal(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25));
 			    };
 			    Stream<Demo.Person> _filter = _stream.filter(_function);
 			    final Function<Demo.Person, String> _function_1 = (Demo.Person it) -> {
@@ -422,24 +388,7 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			  public static void main(final String[] args) {
 			    final ArrayList<Demo.Person> roster = CollectionLiterals.<Demo.Person>newArrayList();
 			    final Function1<Demo.Person, Boolean> _function = (Demo.Person it) -> {
-			      boolean _and = false;
-			      boolean _and_1 = false;
-			      boolean _equals = Objects.equal(it.gender, Demo.Person.Sex.MALE);
-			      if (!_equals) {
-			        _and_1 = false;
-			      } else {
-			        int _age = it.getAge();
-			        boolean _greaterEqualsThan = (_age >= 18);
-			        _and_1 = _greaterEqualsThan;
-			      }
-			      if (!_and_1) {
-			        _and = false;
-			      } else {
-			        int _age_1 = it.getAge();
-			        boolean _lessEqualsThan = (_age_1 <= 25);
-			        _and = _lessEqualsThan;
-			      }
-			      return Boolean.valueOf(_and);
+			      return Boolean.valueOf(((Objects.equal(it.gender, Demo.Person.Sex.MALE) && (it.getAge() >= 18)) && (it.getAge() <= 25)));
 			    };
 			    Iterable<Demo.Person> _filter = IterableExtensions.<Demo.Person>filter(roster, _function);
 			    final Function1<Demo.Person, String> _function_1 = (Demo.Person it) -> {

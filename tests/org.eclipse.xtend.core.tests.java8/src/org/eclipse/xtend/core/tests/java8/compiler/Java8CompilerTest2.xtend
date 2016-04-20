@@ -134,13 +134,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public Optional<Boolean> test(final List<Boolean> list) {
 			    Stream<Boolean> _stream = list.stream();
 			    final BinaryOperator<Boolean> _function = (Boolean a, Boolean b) -> {
-			      boolean _and = false;
-			      if (!(a).booleanValue()) {
-			        _and = false;
-			      } else {
-			        _and = (b).booleanValue();
-			      }
-			      return Boolean.valueOf(_and);
+			      return Boolean.valueOf(((a).booleanValue() && (b).booleanValue()));
 			    };
 			    return _stream.reduce(_function);
 			  }
@@ -511,17 +505,9 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			  public boolean foo(final int x) {
 			    boolean _switchResult = false;
 			    boolean _matched = false;
-			    boolean _or = false;
-			    final Function0<Boolean> _function = () -> {
+			    if (((((Function0<Boolean>) () -> {
 			      return Boolean.valueOf((1 == x));
-			    };
-			    Boolean _apply = _function.apply();
-			    if ((_apply).booleanValue()) {
-			      _or = true;
-			    } else {
-			      _or = (x == 2);
-			    }
-			    if (_or) {
+			    }).apply()).booleanValue() || (x == 2))) {
 			      _matched=true;
 			      _switchResult = true;
 			    }
