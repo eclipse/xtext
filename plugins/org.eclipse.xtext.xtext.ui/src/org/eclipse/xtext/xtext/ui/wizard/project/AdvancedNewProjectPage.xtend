@@ -22,18 +22,22 @@ import org.eclipse.ui.PlatformUI
 import org.eclipse.xtext.xtext.ui.internal.Activator
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.SourceLayout
+
 import static org.eclipse.xtext.xtext.ui.wizard.project.Messages.*
 import static org.osgi.framework.Bundle.*
 
 class AdvancedNewProjectPage extends WizardPage {
 
 	Button createUiProject
+	Button createSDKProject
+	Button createP2Project
 	Button createIdeaProject
 	Button createWebProject
 	Button createIdeProject
 	Button createTestProject
 	Combo preferredBuildSystem
 	Combo sourceLayout
+	Group createUiProjectSubGroup
 
 	StatusWidget statusWidget
 
@@ -52,6 +56,14 @@ class AdvancedNewProjectPage extends WizardPage {
 				text = Messages.WizardNewXtextProjectCreationPage_LabelFacets
 				createUiProject = CheckBox [
 					text = AdvancedNewProjectPage_projEclipse
+				]
+				createUiProjectSubGroup = Group [
+					createSDKProject = CheckBox [
+						text = AdvancedNewProjectPage_projEclipseSDKFeature
+					]
+					createP2Project = CheckBox [
+						text = AdvancedNewProjectPage_projEclipseP2
+					]
 				]
 				createIdeaProject = CheckBox [
 					text = AdvancedNewProjectPage_projIdea
@@ -95,7 +107,15 @@ class AdvancedNewProjectPage extends WizardPage {
 			}
 		}
 
-		createUiProject.addSelectionListener(selectionControl)
+		createUiProject.addSelectionListener(new SelectionAdapter() {
+			override widgetSelected(SelectionEvent e) {
+				validate(e)
+				val uiProjectSelected = createUiProject.selection
+				createUiProjectSubGroup.enabled = uiProjectSelected
+				createSDKProject.enabled = uiProjectSelected
+				createP2Project.enabled = uiProjectSelected
+			}
+		})
 		sourceLayout.addSelectionListener(selectionControl)
 		createWebProject.addSelectionListener(selectionControl)
 		preferredBuildSystem.addSelectionListener(selectionControl)
@@ -103,6 +123,8 @@ class AdvancedNewProjectPage extends WizardPage {
 		createIdeaProject.addSelectionListener(selectionControl)
 		createWebProject.addSelectionListener(selectionControl)
 		createIdeProject.addSelectionListener(selectionControl)
+		createSDKProject.addSelectionListener(selectionControl)
+		createP2Project.addSelectionListener(selectionControl)
 		setDefaults
 
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(shell, "org.eclipse.xtext.xtext.ui.newProject_Advanced")
@@ -134,12 +156,16 @@ class AdvancedNewProjectPage extends WizardPage {
 			reportIssue(INFORMATION,
 				AdvancedNewProjectPage_ideaReqGradleInfo)
 		}
+		if (createUiProject.selection && createP2Project.selection && !createSDKProject.selection) {
+			addIssue(INFORMATION,
+				AdvancedNewProjectPage_p2AndSdkInfo)
+		}
 
 		val source = e?.source
 		if (createUiProject.selection && !sourceLayout.isSelected(SourceLayout.PLAIN)) {
 			if (createUiProject === source) {
 				reportIssue(ERROR, '''
-				'«createUiProject.text»' requiers «SourceLayout.PLAIN» source layout.
+				'«createUiProject.text»' requires «SourceLayout.PLAIN» source layout.
 				Please <a>select '«SourceLayout.PLAIN»'</a> source layout.''', [
 					sourceLayout.select(SourceLayout.PLAIN)
 				])
@@ -222,6 +248,10 @@ class AdvancedNewProjectPage extends WizardPage {
 		])
 	}
 
+	def protected <T extends Control> addIssue(int severity, String text) {
+		statusWidget.addStatus(severity, text)
+	}
+
 	def protected boolean isBundleResolved(String bundleId) {
 		val bundle = Activator.instance.bundle.bundleContext.bundles.findFirst[bundleId == it.symbolicName]
 		return bundle !== null && (bundle.state.bitwiseAnd(RESOLVED.bitwiseOr(STARTING).bitwiseOr(ACTIVE)) !== 0)
@@ -258,6 +288,8 @@ class AdvancedNewProjectPage extends WizardPage {
 		createTestProject.selection = true
 		createIdeaProject.selection = false
 		createWebProject.selection = false
+		createSDKProject.selection = false
+		createP2Project.selection = false
 		preferredBuildSystem.select(BuildSystem.values.head)
 		sourceLayout.select(SourceLayout.values.head)
 	}
@@ -280,6 +312,14 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def boolean isCreateWebProject() {
 		createWebProject.selection
+	}
+
+	def boolean isCreateSdkProject() {
+		createUiProject.selection && createSDKProject.selection
+	}
+
+	def boolean isCreateP2Project() {
+		createUiProject.selection && createP2Project.selection
 	}
 
 	def BuildSystem getPreferredBuildSystem() {
