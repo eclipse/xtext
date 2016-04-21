@@ -252,7 +252,11 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
                 _builder.newLine();
                 _builder.append("\t\t");
                 _builder.append("\t\t\t\t");
-                _builder.append("(backward compatible with kepler and previous versions) -->");
+                _builder.append("(backward compatible with kepler and previous versions)");
+                _builder.newLine();
+                _builder.append("\t\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492149 -->");
                 _builder.newLine();
                 _builder.append("\t\t");
                 _builder.append("\t\t\t\t");
