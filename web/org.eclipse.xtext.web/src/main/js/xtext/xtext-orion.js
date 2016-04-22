@@ -106,7 +106,7 @@ define([
 		} else if (options.parent) {
 			query = jQuery(options.parent);
 		} else if (jQuery.type(options.parentClass) === 'string') {
-			query = jQuery('.' + options.parent, options.document);
+			query = jQuery('.' + options.parentClass, options.document);
 		} else {
 			query = jQuery('#xtext-editor', options.document);
 			if (query.length == 0)
