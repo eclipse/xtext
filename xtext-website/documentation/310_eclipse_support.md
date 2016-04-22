@@ -620,9 +620,9 @@ One refactoring can trigger another: When renaming a rule in an Xtext grammar, t
 
 ## Project Wizard
 
-The `newProjectWizardForEclipse` fragment generates a wizard that clients of your language can use to create model projects.  This will be generated in the `.ui` project, and the `plugin.xml` will have to be manually merged with the `plugin.xml_gen`.
+The MWE2 workflow can generate a wizard that clients of your language can use to create model projects.  This will be generated in the `.ui` project, and the `plugin.xml` will have to be manually merged with the `plugin.xml_gen`.
 
-This fragment must be explicitly enabled in the MWE2 file in the `language` section as follows
+This must be explicitly specified in the MWE2 file in the `language` section as follows
 
 ```mwe2
 newProjectWizardForEclipse = {
@@ -630,9 +630,16 @@ newProjectWizardForEclipse = {
 }
 ```
 
-By default, the generated wizard will create a Plug-in project. If you want a General project you need to set the following fragment's property to false: `pluginProject=false`.
+By default, the generated wizard will create a Plug-in project. If you want a General project you need to set the following property to false: `pluginProject=false`, for example
 
-This fragment will also generate in the `src` folder of the `ui` project a `MyDslNewProjectWizardInitialContents` Xtend file, where you can specify the initial contents that your language wizard will generate.
+```mwe2
+newProjectWizardForEclipse = {
+	generate = true
+	pluginProject=false
+}
+```
+
+In the `src` folder of the `ui` project a `MyDslNewProjectWizardInitialContents` Xtend file will also be generated, where you can specify the initial contents that your language wizard will generate.
 
 ---
 
