@@ -16,9 +16,9 @@ import org.eclipse.jface.viewers.LabelProvider
 import org.eclipse.jface.viewers.StyledString
 import org.eclipse.swt.graphics.Image
 import org.eclipse.ui.progress.PendingUpdateAdapter
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
 import org.eclipse.xtext.ui.internal.XtextPluginImages
 import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -37,7 +37,7 @@ class HierarchyLabelProvider extends LabelProvider implements IStyledLabelProvid
 		val image = globalDescriptionProvider.getImage(element.description)
 		if(image === null) return null
 		switch element {
-			HierarchyNode case element.recursive:
+			IHierarchyNode case element.recursive:
 				return image.decorateRecursive
 			default:
 				return image
@@ -63,7 +63,7 @@ class HierarchyLabelProvider extends LabelProvider implements IStyledLabelProvid
 	}
 
 	protected def getDescription(Object element) {
-		if (element instanceof HierarchyNode)
+		if (element instanceof IHierarchyNode)
 			return element.element
 	}
 

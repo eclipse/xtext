@@ -10,14 +10,14 @@ package org.eclipse.xtext.ui.editor.findrefs;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.xtext.ide.editor.navigation.Navigatable;
+import org.eclipse.xtext.ide.editor.navigation.INavigatable;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ReferenceSearchViewTreeNode implements Navigatable {
+public class ReferenceSearchViewTreeNode implements INavigatable {
 
 	private ReferenceSearchViewTreeNode parent;
 

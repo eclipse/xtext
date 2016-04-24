@@ -14,8 +14,6 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.hierarchy.AbstractHierarchyBuilder
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider
@@ -27,7 +25,9 @@ import org.eclipse.xtext.util.LazyStringInputStream
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -80,19 +80,19 @@ abstract class AbstractHierarchyBuilderTest {
 		return hierarchyBuilder
 	}
 
-	protected def String toExpectation(URI rootURI, HierarchyBuilder builder) '''
+	protected def String toExpectation(URI rootURI, IHierarchyBuilder builder) '''
 		«FOR root : builder.buildRoots(rootURI, null)»
 			«root.toExpectation(builder)»
 		«ENDFOR»
 	'''
 
-	protected def String toExpectation(HierarchyNode node, HierarchyBuilder builder) '''
+	protected def String toExpectation(IHierarchyNode node, IHierarchyBuilder builder) '''
 		«node.element» {
 			«node.internalToExpectation(builder)»
 		}
 	'''
 
-	protected def String internalToExpectation(HierarchyNode node, HierarchyBuilder builder) '''
+	protected def String internalToExpectation(IHierarchyNode node, IHierarchyBuilder builder) '''
 		«FOR location : node.references»
 			«location.toExpectation»
 		«ENDFOR»
@@ -103,13 +103,13 @@ abstract class AbstractHierarchyBuilderTest {
 		«ENDIF»
 	'''
 
-	protected def String toExpectation(HierarchyNodeReference location) {
+	protected def String toExpectation(IHierarchyNodeReference location) {
 		''''«location.text»' [«location.offset», «location.length»]'''
 	}
 
 	@Accessors
 	protected static class HierarchyBuilderTestConfiguration {
-		(ResourceSet)=>HierarchyBuilder hierarchyBuilderProvider
+		(ResourceSet)=>IHierarchyBuilder hierarchyBuilderProvider
 		Collection<Pair<String, String>> models = newArrayList
 		int index
 		String resourceURI

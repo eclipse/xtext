@@ -13,8 +13,8 @@ import org.eclipse.jface.viewers.Viewer
 import org.eclipse.ui.part.ViewPart
 import org.eclipse.ui.progress.DeferredTreeContentManager
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyRoot
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -35,14 +35,14 @@ class HierarchyTreeContentProvider implements ITreeContentProvider {
 	}
 
 	override getElements(Object inputElement) {
-		if (inputElement instanceof HierarchyRoot) {
+		if (inputElement instanceof IHierarchyRoot) {
 			return inputElement.roots.filterNull
 		}
 		return EMPTY_ARRAY
 	}
 
 	override getParent(Object element) {
-		if (element instanceof HierarchyNode)
+		if (element instanceof IHierarchyNode)
 			element.parent
 	}
 

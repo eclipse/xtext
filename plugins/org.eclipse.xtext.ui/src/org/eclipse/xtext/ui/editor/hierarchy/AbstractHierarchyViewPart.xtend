@@ -14,9 +14,9 @@ import org.eclipse.jface.viewers.IStructuredSelection
 import org.eclipse.ui.part.ViewPart
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultHierarchyRoot
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyRoot
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -25,40 +25,40 @@ import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot
 @Accessors(PUBLIC_SETTER, PROTECTED_GETTER)
 abstract class AbstractHierarchyViewPart extends ViewPart {
 
-	HierarchyBuilder builder
+	IHierarchyBuilder builder
 	URI rootURI
 
 	def void refresh(IProgressMonitor monitor) {
 		root = createRoot(monitor)
 	}
 
-	protected def HierarchyRoot createRoot(IProgressMonitor monitor) {
+	protected def IHierarchyRoot createRoot(IProgressMonitor monitor) {
 		if (builder === null || rootURI === null)
-			return HierarchyRoot.EMPTY
+			return IHierarchyRoot.EMPTY
 
 		val roots = builder.buildRoots(rootURI, monitor)
 		if (roots.empty)
-			return HierarchyRoot.EMPTY
+			return org.eclipse.xtext.ide.editor.hierarchy.IHierarchyRoot.EMPTY
 
 		val root = new DefaultHierarchyRoot
 		root.roots += roots
 		return root
 	}
 
-	protected def void setRoot(HierarchyRoot root)
+	protected def void setRoot(IHierarchyRoot root)
 
-	protected def HierarchyNode getSelectedNode(ISelection selection) {
+	protected def IHierarchyNode getSelectedNode(ISelection selection) {
 		switch selection {
 			IStructuredSelection case selection.size == 1: {
 				val selectedElement = selection.firstElement
-				if (selectedElement instanceof HierarchyNode)
+				if (selectedElement instanceof IHierarchyNode)
 					return selectedElement
 			}
 		}
 		return null
 	}
 	
-	protected def <T extends HierarchyBuilder> T getBuilder(Class<T> clazz) {
+	protected def <T extends IHierarchyBuilder> T getBuilder(Class<T> clazz) {
 		if (clazz.isInstance(builder))
 			return builder as T
 			

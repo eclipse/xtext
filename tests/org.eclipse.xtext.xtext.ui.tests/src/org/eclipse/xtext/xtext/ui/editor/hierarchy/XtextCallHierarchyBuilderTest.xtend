@@ -10,8 +10,6 @@ package org.eclipse.xtext.xtext.ui.editor.hierarchy
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder.CallHierarchyType
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.ide.AbstractHierarchyBuilderTest
@@ -20,6 +18,8 @@ import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyBuilder
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyNode
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -376,7 +376,7 @@ class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest {
 		]
 	}
 
-	override protected internalToExpectation(HierarchyNode node, HierarchyBuilder builder) {
+	override protected internalToExpectation(IHierarchyNode node, IHierarchyBuilder builder) {
 		val superExpectation = super.internalToExpectation(node, builder)
 		if (node instanceof XtextCallHierarchyNode)
 			return '''
