@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.ide.editor.hierarchy;
 
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
 
 /**
  * It is used to build a call hierarchy structure.
@@ -16,14 +16,14 @@ import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
  * @since 2.10
  */
 @SuppressWarnings("all")
-public interface CallHierarchyBuilder extends HierarchyBuilder {
+public interface ICallHierarchyBuilder extends IHierarchyBuilder {
   public enum CallHierarchyType {
     CALLER,
     
     CALLEE;
   }
   
-  public abstract CallHierarchyBuilder.CallHierarchyType getHierarchyType();
+  public abstract ICallHierarchyBuilder.CallHierarchyType getHierarchyType();
   
-  public abstract void setHierarchyType(final CallHierarchyBuilder.CallHierarchyType hierarchyType);
+  public abstract void setHierarchyType(final ICallHierarchyBuilder.CallHierarchyType hierarchyType);
 }

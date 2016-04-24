@@ -18,9 +18,9 @@ import org.eclipse.ui.progress.IElementCollector;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -33,15 +33,15 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @since 2.10
  */
 @SuppressWarnings("all")
-public class DeferredHierarchyBuilder implements HierarchyBuilder {
+public class DeferredHierarchyBuilder implements IHierarchyBuilder {
   @FinalFieldsConstructor
-  public static class DeferredHierarchyNode implements IAdaptable, IDeferredWorkbenchAdapter, HierarchyNode {
+  public static class DeferredHierarchyNode implements IAdaptable, IDeferredWorkbenchAdapter, IHierarchyNode {
     @Delegate
     @Accessors
-    private final HierarchyNode delegate;
+    private final IHierarchyNode delegate;
     
     @Extension
-    private final HierarchyBuilder hierarchyBuilder;
+    private final IHierarchyBuilder hierarchyBuilder;
     
     @Override
     public Object getAdapter(final Class adapterType) {
@@ -54,7 +54,7 @@ public class DeferredHierarchyBuilder implements HierarchyBuilder {
     
     @Override
     public void fetchDeferredChildren(final Object object, final IElementCollector collector, final IProgressMonitor monitor) {
-      final HierarchyNode[] children = ((HierarchyNode[])Conversions.unwrapArray(this.hierarchyBuilder.buildChildren(this.delegate, monitor), HierarchyNode.class));
+      final IHierarchyNode[] children = ((IHierarchyNode[])Conversions.unwrapArray(this.hierarchyBuilder.buildChildren(this.delegate, monitor), IHierarchyNode.class));
       collector.add(children, monitor);
       collector.done();
     }
@@ -90,11 +90,11 @@ public class DeferredHierarchyBuilder implements HierarchyBuilder {
     }
     
     @Pure
-    public HierarchyNode getDelegate() {
+    public IHierarchyNode getDelegate() {
       return this.delegate;
     }
     
-    public DeferredHierarchyNode(final HierarchyNode delegate, final HierarchyBuilder hierarchyBuilder) {
+    public DeferredHierarchyNode(final IHierarchyNode delegate, final IHierarchyBuilder hierarchyBuilder) {
       super();
       this.delegate = delegate;
       this.hierarchyBuilder = hierarchyBuilder;
@@ -104,11 +104,11 @@ public class DeferredHierarchyBuilder implements HierarchyBuilder {
       return this.delegate.getElement();
     }
     
-    public HierarchyNode getParent() {
+    public IHierarchyNode getParent() {
       return this.delegate.getParent();
     }
     
-    public Collection<HierarchyNodeReference> getReferences() {
+    public Collection<IHierarchyNodeReference> getReferences() {
       return this.delegate.getReferences();
     }
     
@@ -126,37 +126,37 @@ public class DeferredHierarchyBuilder implements HierarchyBuilder {
   }
   
   @Accessors
-  private HierarchyBuilder hierarchyBuilder;
+  private IHierarchyBuilder hierarchyBuilder;
   
   @Override
-  public Collection<HierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor) {
-    Collection<HierarchyNode> _buildRoots = this.hierarchyBuilder.buildRoots(rootURI, monitor);
-    final Function1<HierarchyNode, HierarchyNode> _function = new Function1<HierarchyNode, HierarchyNode>() {
+  public Collection<IHierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor) {
+    Collection<IHierarchyNode> _buildRoots = this.hierarchyBuilder.buildRoots(rootURI, monitor);
+    final Function1<IHierarchyNode, IHierarchyNode> _function = new Function1<IHierarchyNode, IHierarchyNode>() {
       @Override
-      public HierarchyNode apply(final HierarchyNode it) {
+      public IHierarchyNode apply(final IHierarchyNode it) {
         return DeferredHierarchyBuilder.this.defer(it);
       }
     };
-    Iterable<HierarchyNode> _map = IterableExtensions.<HierarchyNode, HierarchyNode>map(_buildRoots, _function);
-    Iterable<HierarchyNode> _filterNull = IterableExtensions.<HierarchyNode>filterNull(_map);
-    return IterableExtensions.<HierarchyNode>toList(_filterNull);
+    Iterable<IHierarchyNode> _map = IterableExtensions.<IHierarchyNode, IHierarchyNode>map(_buildRoots, _function);
+    Iterable<IHierarchyNode> _filterNull = IterableExtensions.<IHierarchyNode>filterNull(_map);
+    return IterableExtensions.<IHierarchyNode>toList(_filterNull);
   }
   
   @Override
-  public Collection<HierarchyNode> buildChildren(final HierarchyNode node, final IProgressMonitor monitor) {
-    Collection<HierarchyNode> _buildChildren = this.hierarchyBuilder.buildChildren(node, monitor);
-    final Function1<HierarchyNode, HierarchyNode> _function = new Function1<HierarchyNode, HierarchyNode>() {
+  public Collection<IHierarchyNode> buildChildren(final IHierarchyNode node, final IProgressMonitor monitor) {
+    Collection<IHierarchyNode> _buildChildren = this.hierarchyBuilder.buildChildren(node, monitor);
+    final Function1<IHierarchyNode, IHierarchyNode> _function = new Function1<IHierarchyNode, IHierarchyNode>() {
       @Override
-      public HierarchyNode apply(final HierarchyNode it) {
+      public IHierarchyNode apply(final IHierarchyNode it) {
         return DeferredHierarchyBuilder.this.defer(it);
       }
     };
-    Iterable<HierarchyNode> _map = IterableExtensions.<HierarchyNode, HierarchyNode>map(_buildChildren, _function);
-    Iterable<HierarchyNode> _filterNull = IterableExtensions.<HierarchyNode>filterNull(_map);
-    return IterableExtensions.<HierarchyNode>toList(_filterNull);
+    Iterable<IHierarchyNode> _map = IterableExtensions.<IHierarchyNode, IHierarchyNode>map(_buildChildren, _function);
+    Iterable<IHierarchyNode> _filterNull = IterableExtensions.<IHierarchyNode>filterNull(_map);
+    return IterableExtensions.<IHierarchyNode>toList(_filterNull);
   }
   
-  protected HierarchyNode defer(final HierarchyNode node) {
+  protected IHierarchyNode defer(final IHierarchyNode node) {
     DeferredHierarchyBuilder.DeferredHierarchyNode _xifexpression = null;
     if ((node != null)) {
       _xifexpression = new DeferredHierarchyBuilder.DeferredHierarchyNode(node, this);
@@ -165,11 +165,11 @@ public class DeferredHierarchyBuilder implements HierarchyBuilder {
   }
   
   @Pure
-  public HierarchyBuilder getHierarchyBuilder() {
+  public IHierarchyBuilder getHierarchyBuilder() {
     return this.hierarchyBuilder;
   }
   
-  public void setHierarchyBuilder(final HierarchyBuilder hierarchyBuilder) {
+  public void setHierarchyBuilder(final IHierarchyBuilder hierarchyBuilder) {
     this.hierarchyBuilder = hierarchyBuilder;
   }
 }

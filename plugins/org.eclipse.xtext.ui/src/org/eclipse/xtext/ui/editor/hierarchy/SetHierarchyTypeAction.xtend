@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.editor.hierarchy
 
 import org.eclipse.jface.action.Action
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder.CallHierarchyType
+import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder.CallHierarchyType
 import org.eclipse.xtext.ui.internal.XtextPluginImages
 
 /**

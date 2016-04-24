@@ -14,7 +14,7 @@ import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.hierarchy.DeferredHierarchyBuilder;
@@ -42,7 +42,7 @@ public class XtextCallHierarchyLabelProvider extends LabelProvider implements De
   }
   
   protected String _getText(final DeferredHierarchyBuilder.DeferredHierarchyNode it) {
-    HierarchyNode _delegate = it.getDelegate();
+    IHierarchyNode _delegate = it.getDelegate();
     return this.getText(_delegate);
   }
   
@@ -68,7 +68,7 @@ public class XtextCallHierarchyLabelProvider extends LabelProvider implements De
   }
   
   protected StyledString _getStyledText(final DeferredHierarchyBuilder.DeferredHierarchyNode it) {
-    HierarchyNode _delegate = it.getDelegate();
+    IHierarchyNode _delegate = it.getDelegate();
     return this.getStyledText(_delegate);
   }
   

@@ -16,8 +16,8 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocationProvider;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeLocationProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -37,7 +37,7 @@ public class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
   private XtextCallHierarchyNodeLocationProvider callHierarchyNodeLocationProvider;
   
   @Override
-  protected HierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
+  protected IHierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
     return this.callHierarchyNodeLocationProvider;
   }
   
@@ -78,7 +78,7 @@ public class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
   }
   
   @Override
-  protected HierarchyNode createRoot(final IEObjectDescription declaration) {
+  protected IHierarchyNode createRoot(final IEObjectDescription declaration) {
     final XtextCallHierarchyNode node = new XtextCallHierarchyNode();
     node.setElement(declaration);
     IEObjectDescription _grammarDescription = this.getGrammarDescription(declaration);
@@ -88,7 +88,7 @@ public class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
   }
   
   @Override
-  protected HierarchyNode createChild(final IEObjectDescription declaration, final HierarchyNode parent) {
+  protected IHierarchyNode createChild(final IEObjectDescription declaration, final IHierarchyNode parent) {
     final XtextCallHierarchyNode node = new XtextCallHierarchyNode();
     node.setParent(parent);
     node.setElement(declaration);

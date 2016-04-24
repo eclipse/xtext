@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.findReferences
 
+import com.google.common.base.Predicate
 import com.google.inject.Inject
 import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.core.runtime.OperationCanceledException
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.Resource
@@ -27,7 +30,6 @@ import org.eclipse.xtext.xtype.XImportDeclaration
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
-import org.eclipse.core.runtime.OperationCanceledException
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -60,7 +62,7 @@ class XtendReferenceFinder extends ReferenceFinder {
 		}
 	}
 	
-	override protected findLocalReferencesFromElement(TargetURIs targetURIs, EObject sourceCandidate, Resource localResource, Acceptor acceptor) {
+	override protected findLocalReferencesFromElement(Predicate<URI> targetURIs, EObject sourceCandidate, Resource localResource, Acceptor acceptor) {
 		switch sourceCandidate {
 			// ignore type references in package fragments
 			XAbstractFeatureCall case sourceCandidate.packageFragment: return
@@ -83,7 +85,7 @@ class XtendReferenceFinder extends ReferenceFinder {
 		}
 	}
 	
-	protected def addReferencesToSuper(AnonymousClass anonymousClass, TargetURIs targetURISet, Acceptor acceptor) {
+	protected def addReferencesToSuper(AnonymousClass anonymousClass, Predicate<URI> targetURISet, Acceptor acceptor) {
 		val constructorCall = anonymousClass.constructorCall
 		val superType = anonymousClass.superType
 		superType?.addReferenceIfTarget(targetURISet, constructorCall, XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor)
@@ -91,13 +93,13 @@ class XtendReferenceFinder extends ReferenceFinder {
 		superConstructor?.addReferenceIfTarget(targetURISet, constructorCall, XCONSTRUCTOR_CALL__CONSTRUCTOR, acceptor)
 	}
 	
-	protected def addReferenceToFeatureFromStaticImport(XImportDeclaration importDeclaration, TargetURIs targetURISet, Acceptor acceptor) {
+	protected def addReferenceToFeatureFromStaticImport(XImportDeclaration importDeclaration, Predicate<URI> targetURISet, Acceptor acceptor) {
 		importDeclaration.allFeatures.forEach [
 			addReferenceIfTarget(targetURISet, importDeclaration, XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor)
 		] 
 	}
 	
-	protected def addReferenceToTypeFromStaticImport(XAbstractFeatureCall sourceCandidate, TargetURIs targetURISet, Acceptor acceptor) {
+	protected def addReferenceToTypeFromStaticImport(XAbstractFeatureCall sourceCandidate, Predicate<URI> targetURISet, Acceptor acceptor) {
 		val feature = sourceCandidate.feature
 		if(feature instanceof JvmMember) {
 			val type = feature.declaringType
@@ -105,9 +107,9 @@ class XtendReferenceFinder extends ReferenceFinder {
 		}
 	}
 
-	protected def addReferenceIfTarget(EObject candidate, TargetURIs targetURISet, EObject sourceElement, EReference reference, Acceptor acceptor) {
+	protected def addReferenceIfTarget(EObject candidate, Predicate<URI> targetURISet, EObject sourceElement, EReference reference, Acceptor acceptor) {
 		val candidateURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(candidate)
-		if (targetURISet.contains(candidateURI)) {
+		if (targetURISet.apply(candidateURI)) {
 			val sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceElement)
 			acceptor.accept(sourceElement, sourceURI, reference, -1, candidate, candidateURI)
 		}

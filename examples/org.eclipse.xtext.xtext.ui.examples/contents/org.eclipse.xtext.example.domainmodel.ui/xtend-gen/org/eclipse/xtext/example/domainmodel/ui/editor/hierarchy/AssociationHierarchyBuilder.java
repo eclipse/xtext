@@ -19,7 +19,7 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.example.domainmodel.ui.editor.hierarchy.AssociationHierarchyNodeLocationProvider;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocationProvider;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeLocationProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -39,7 +39,7 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
   private AssociationHierarchyNodeLocationProvider associationHierarchyNodeLocationProvider;
   
   @Override
-  protected HierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
+  protected IHierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
     return this.associationHierarchyNodeLocationProvider;
   }
   

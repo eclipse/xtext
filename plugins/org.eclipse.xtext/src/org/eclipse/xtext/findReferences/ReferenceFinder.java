@@ -29,6 +29,8 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -38,9 +40,6 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ReferenceFinder implements IReferenceFinder {
-	
-	@Inject
-	private AnyTargetURISet anyTargetURISet;
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
@@ -118,11 +117,11 @@ public class ReferenceFinder implements IReferenceFinder {
 	
 	@Override
 	public void findAllReferences(Resource scope, Acceptor acceptor, IProgressMonitor monitor) {
-		findReferences(anyTargetURISet, scope, acceptor, monitor);
+		findReferences(Predicates.<URI>alwaysTrue(), scope, acceptor, monitor);
 	}
 	
 	@Override
-	public void findReferences(TargetURIs targetURIs, Resource resource, Acceptor acceptor, IProgressMonitor monitor) {
+	public void findReferences(Predicate<URI> targetURIs, Resource resource, Acceptor acceptor, IProgressMonitor monitor) {
 		for (EObject content : resource.getContents()) {
 			findReferences(targetURIs, content, acceptor, monitor);
 		}
@@ -130,11 +129,11 @@ public class ReferenceFinder implements IReferenceFinder {
 	
 	@Override
 	public void findAllReferences(EObject scope, Acceptor acceptor, IProgressMonitor monitor) {
-		findReferences(anyTargetURISet, scope, acceptor, monitor);
+		findReferences(Predicates.<URI>alwaysTrue(), scope, acceptor, monitor);
 	}
 	
 	@Override
-	public void findReferences(TargetURIs targetURIs, EObject scope, Acceptor acceptor, IProgressMonitor monitor) {
+	public void findReferences(Predicate<URI> targetURIs, EObject scope, Acceptor acceptor, IProgressMonitor monitor) {
 		if (monitor != null && monitor.isCanceled()) {
 			throw new OperationCanceledException();
 		}
@@ -189,7 +188,7 @@ public class ReferenceFinder implements IReferenceFinder {
 	}
 
 	protected void findLocalReferencesFromElement(
-			TargetURIs targetURIs, 
+			Predicate<URI> targetURIs, 
 			EObject sourceCandidate,
 			Resource localResource,
 			Acceptor acceptor) {
@@ -223,7 +222,7 @@ public class ReferenceFinder implements IReferenceFinder {
 									EObject instanceOrProxy = toValidInstanceOrNull(localResource, targetURIs, values.basicGet(i));
 									if (instanceOrProxy != null) {
 										URI refURI= EcoreUtil2.getPlatformResourceOrNormalizedURI(instanceOrProxy);
-										if(targetURIs.contains(refURI)) {
+										if(targetURIs.apply(refURI)) {
 											sourceURI = (sourceURI == null) ? EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceCandidate) : sourceURI;
 											acceptor.accept(sourceCandidate, sourceURI, ref, i, instanceOrProxy, refURI);
 										}
@@ -233,7 +232,7 @@ public class ReferenceFinder implements IReferenceFinder {
 								EObject instanceOrProxy = toValidInstanceOrNull(localResource, targetURIs, (EObject) value);
 								if (instanceOrProxy != null) {
 									URI refURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(instanceOrProxy);
-									if (targetURIs.contains(refURI)) {
+									if (targetURIs.apply(refURI)) {
 										sourceURI = (sourceURI == null) ? EcoreUtil2
 												.getPlatformResourceOrNormalizedURI(sourceCandidate) : sourceURI;
 										acceptor.accept(sourceCandidate, sourceURI, ref, -1, instanceOrProxy, refURI);
@@ -247,7 +246,7 @@ public class ReferenceFinder implements IReferenceFinder {
 		}
 	}
 	
-	protected EObject toValidInstanceOrNull(Resource resource, TargetURIs targetURIs, EObject value) {
+	protected EObject toValidInstanceOrNull(Resource resource, Predicate<URI> targetURIs, EObject value) {
 		EObject result = resolveInternalProxy(value, resource);
 		return result;
 	}
@@ -259,11 +258,11 @@ public class ReferenceFinder implements IReferenceFinder {
 			return elementOrProxy;
 	}
 
-	protected boolean doProcess(EObject sourceCandidate, TargetURIs targetURISet) {
+	protected boolean doProcess(EObject sourceCandidate, Predicate<URI> targetURIs) {
 		return true;
 	}
 	
-	protected boolean doProcess(EReference reference, TargetURIs targetURISet) {
+	protected boolean doProcess(EReference reference, Predicate<URI> targetURIs) {
 		return true;
 	}
 	

@@ -13,11 +13,11 @@ import org.eclipse.emf.ecore.EClassifier
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.XtextPackage
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.IReferenceDescription
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -62,7 +62,7 @@ class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
 		return node
 	}
 
-	override protected createChild(IEObjectDescription declaration, HierarchyNode parent) {
+	override protected createChild(IEObjectDescription declaration, IHierarchyNode parent) {
 		val node = new XtextCallHierarchyNode
 		node.parent = parent
 		node.element = declaration

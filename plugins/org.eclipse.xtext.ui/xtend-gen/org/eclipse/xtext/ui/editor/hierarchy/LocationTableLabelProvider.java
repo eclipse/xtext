@@ -11,7 +11,7 @@ import com.google.inject.Singleton;
 import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -27,14 +27,14 @@ public class LocationTableLabelProvider extends BaseLabelProvider implements ITa
   
   @Override
   public String getColumnText(final Object reference, final int columnIndex) {
-    if ((reference instanceof HierarchyNodeReference)) {
+    if ((reference instanceof IHierarchyNodeReference)) {
       switch (columnIndex) {
         case 0:
-          int _lineNumber = ((HierarchyNodeReference)reference).getLineNumber();
+          int _lineNumber = ((IHierarchyNodeReference)reference).getLineNumber();
           int _plus = (_lineNumber + 1);
-          return ("" + Integer.valueOf(_plus));
+          return String.valueOf(_plus);
         case 1:
-          return ((HierarchyNodeReference)reference).getText();
+          return ((IHierarchyNodeReference)reference).getText();
       }
     }
     return "";

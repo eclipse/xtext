@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.editor.hierarchy;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder;
 import org.eclipse.xtext.ui.editor.hierarchy.AbstractCallHierarchyViewPart;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -21,11 +21,11 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class SetHierarchyTypeAction extends Action {
   @Accessors
-  private final CallHierarchyBuilder.CallHierarchyType hierarchyType;
+  private final ICallHierarchyBuilder.CallHierarchyType hierarchyType;
   
   private final AbstractCallHierarchyViewPart callHierarchyViewPart;
   
-  public SetHierarchyTypeAction(final CallHierarchyBuilder.CallHierarchyType hierarchyType, final AbstractCallHierarchyViewPart callHierarchyViewPart) {
+  public SetHierarchyTypeAction(final ICallHierarchyBuilder.CallHierarchyType hierarchyType, final AbstractCallHierarchyViewPart callHierarchyViewPart) {
     super("", IAction.AS_RADIO_BUTTON);
     this.hierarchyType = hierarchyType;
     this.callHierarchyViewPart = callHierarchyViewPart;
@@ -62,7 +62,7 @@ public class SetHierarchyTypeAction extends Action {
   }
   
   @Pure
-  public CallHierarchyBuilder.CallHierarchyType getHierarchyType() {
+  public ICallHierarchyBuilder.CallHierarchyType getHierarchyType() {
     return this.hierarchyType;
   }
 }

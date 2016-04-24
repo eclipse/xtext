@@ -7,16 +7,24 @@
  */
 package org.eclipse.xtext.ide.editor.hierarchy;
 
-import org.eclipse.xtext.ide.editor.navigation.Navigatable;
-import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import java.util.Collection;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 /**
- * Represents a reference between parent and child nodes. Each reference is backed up with a region and a text.
+ * Represents a hierarchy root.
  * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
 @SuppressWarnings("all")
-public interface HierarchyNodeReference extends Navigatable, ITextRegionWithLineInformation {
-  public abstract String getText();
+public interface IHierarchyRoot {
+  public abstract Collection<IHierarchyNode> getRoots();
+  
+  public final static IHierarchyRoot EMPTY = new IHierarchyRoot() {
+    @Override
+    public Collection<IHierarchyNode> getRoots() {
+      return CollectionLiterals.<IHierarchyNode>emptyList();
+    }
+  };
 }

@@ -21,7 +21,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -92,7 +92,7 @@ public abstract class AbstractOpenHierarchyHandler extends AbstractHandler {
       String _hierarchyViewPartID = this.getHierarchyViewPartID();
       final IViewPart viewPart = _activePage.showView(_hierarchyViewPartID);
       if ((viewPart instanceof AbstractHierarchyViewPart)) {
-        HierarchyBuilder _createHierarchyBuilder = this.createHierarchyBuilder(target);
+        IHierarchyBuilder _createHierarchyBuilder = this.createHierarchyBuilder(target);
         ((AbstractHierarchyViewPart)viewPart).setBuilder(_createHierarchyBuilder);
         URI _platformResourceOrNormalizedURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(target);
         ((AbstractHierarchyViewPart)viewPart).setRootURI(_platformResourceOrNormalizedURI);
@@ -105,5 +105,5 @@ public abstract class AbstractOpenHierarchyHandler extends AbstractHandler {
   
   protected abstract String getHierarchyViewPartID();
   
-  protected abstract HierarchyBuilder createHierarchyBuilder(final EObject target);
+  protected abstract IHierarchyBuilder createHierarchyBuilder(final EObject target);
 }

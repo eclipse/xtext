@@ -21,8 +21,8 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.findReferences.TargetURIs;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocationProvider;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeLocationProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @Accessors({ AccessorType.PUBLIC_SETTER, AccessorType.PROTECTED_GETTER })
 @SuppressWarnings("all")
-public abstract class AbstractHierarchyBuilder implements HierarchyBuilder {
+public abstract class AbstractHierarchyBuilder implements IHierarchyBuilder {
   private IReferenceFinder.IResourceAccess resourceAccess;
   
   private IResourceDescriptions indexData;
@@ -53,7 +53,7 @@ public abstract class AbstractHierarchyBuilder implements HierarchyBuilder {
   private Provider<TargetURIs> targetURIProvider;
   
   @Inject
-  private HierarchyNodeLocationProvider hierarchyNodeLocationProvider;
+  private IHierarchyNodeLocationProvider hierarchyNodeLocationProvider;
   
   @Inject
   private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
@@ -150,11 +150,11 @@ public abstract class AbstractHierarchyBuilder implements HierarchyBuilder {
   }
   
   @Pure
-  protected HierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
+  protected IHierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
     return this.hierarchyNodeLocationProvider;
   }
   
-  public void setHierarchyNodeLocationProvider(final HierarchyNodeLocationProvider hierarchyNodeLocationProvider) {
+  public void setHierarchyNodeLocationProvider(final IHierarchyNodeLocationProvider hierarchyNodeLocationProvider) {
     this.hierarchyNodeLocationProvider = hierarchyNodeLocationProvider;
   }
   

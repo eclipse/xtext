@@ -7,11 +7,10 @@
  */
 package org.eclipse.xtext.ide.editor.hierarchy;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyRoot;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -21,11 +20,11 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @Accessors
 @SuppressWarnings("all")
-public class DefaultHierarchyRoot implements HierarchyRoot {
-  private final ArrayList<HierarchyNode> roots = CollectionLiterals.<HierarchyNode>newArrayList();
+public class DefaultHierarchyRoot implements IHierarchyRoot {
+  private final List<IHierarchyNode> roots = CollectionLiterals.<IHierarchyNode>newArrayList();
   
   @Pure
-  public Collection<HierarchyNode> getRoots() {
+  public List<IHierarchyNode> getRoots() {
     return this.roots;
   }
 }

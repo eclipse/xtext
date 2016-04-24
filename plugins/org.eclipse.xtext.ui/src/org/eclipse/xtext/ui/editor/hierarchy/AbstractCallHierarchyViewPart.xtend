@@ -27,10 +27,10 @@ import org.eclipse.swt.layout.GridData
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Table
 import org.eclipse.swt.widgets.TableColumn
-import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder
-import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder.CallHierarchyType
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot
+import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder
+import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder.CallHierarchyType
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyRoot
 import org.eclipse.xtext.ui.editor.navigation.NavigationService
 
 /**
@@ -52,7 +52,7 @@ abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyViewPart i
 	]
 
 	protected def getCallHierarchyBuilder() {
-		getBuilder(CallHierarchyBuilder)
+		getBuilder(ICallHierarchyBuilder)
 	}
 
 	def void setCallHierarchyType(CallHierarchyType hierarchyType) {
@@ -68,7 +68,7 @@ abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyViewPart i
 		super.refresh(monitor)
 	}
 
-	override void setRoot(HierarchyRoot root) {
+	override void setRoot(IHierarchyRoot root) {
 		callHierarchyViewer.input = root
 		setFocus
 	}
@@ -156,7 +156,7 @@ abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyViewPart i
 		}
 	}
 
-	protected def onCallHierarchyNodeChanged(HierarchyNode node) {
+	protected def onCallHierarchyNodeChanged(IHierarchyNode node) {
 		locationViewer.input = node?.references ?: emptyList
 		navigationService.open(node)
 		setFocus

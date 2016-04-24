@@ -13,7 +13,7 @@ package org.eclipse.xtext.ide.editor.hierarchy
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-interface CallHierarchyBuilder extends HierarchyBuilder {
+interface ICallHierarchyBuilder extends IHierarchyBuilder {
 
 	static enum CallHierarchyType {
 		CALLER,

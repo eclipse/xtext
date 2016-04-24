@@ -12,9 +12,9 @@ import com.google.inject.Provider;
 import java.util.Collection;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.ide.AbstractHierarchyBuilderTest;
@@ -44,12 +44,12 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
     final Procedure1<AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration> _function = new Procedure1<AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration>() {
       @Override
       public void apply(final AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration it) {
-        final Function1<ResourceSet, HierarchyBuilder> _function = new Function1<ResourceSet, HierarchyBuilder>() {
+        final Function1<ResourceSet, IHierarchyBuilder> _function = new Function1<ResourceSet, IHierarchyBuilder>() {
           @Override
-          public HierarchyBuilder apply(final ResourceSet resourceSet) {
+          public IHierarchyBuilder apply(final ResourceSet resourceSet) {
             XtextCallHierarchyBuilder _get = XtextCallHierarchyBuilderTest.this.callHierarchyBuilderProvider.get();
             final XtextCallHierarchyBuilder callHierarchyBuilder = XtextCallHierarchyBuilderTest.this.<XtextCallHierarchyBuilder>configureBuilderWith(_get, resourceSet);
-            callHierarchyBuilder.setHierarchyType(CallHierarchyBuilder.CallHierarchyType.CALLER);
+            callHierarchyBuilder.setHierarchyType(ICallHierarchyBuilder.CallHierarchyType.CALLER);
             return callHierarchyBuilder;
           }
         };
@@ -64,12 +64,12 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
     final Procedure1<AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration> _function = new Procedure1<AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration>() {
       @Override
       public void apply(final AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration it) {
-        final Function1<ResourceSet, HierarchyBuilder> _function = new Function1<ResourceSet, HierarchyBuilder>() {
+        final Function1<ResourceSet, IHierarchyBuilder> _function = new Function1<ResourceSet, IHierarchyBuilder>() {
           @Override
-          public HierarchyBuilder apply(final ResourceSet resourceSet) {
+          public IHierarchyBuilder apply(final ResourceSet resourceSet) {
             XtextCallHierarchyBuilder _get = XtextCallHierarchyBuilderTest.this.callHierarchyBuilderProvider.get();
             final XtextCallHierarchyBuilder callHierarchyBuilder = XtextCallHierarchyBuilderTest.this.<XtextCallHierarchyBuilder>configureBuilderWith(_get, resourceSet);
-            callHierarchyBuilder.setHierarchyType(CallHierarchyBuilder.CallHierarchyType.CALLEE);
+            callHierarchyBuilder.setHierarchyType(ICallHierarchyBuilder.CallHierarchyType.CALLEE);
             return callHierarchyBuilder;
           }
         };
@@ -765,7 +765,7 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
   }
   
   @Override
-  protected String internalToExpectation(final HierarchyNode node, final HierarchyBuilder builder) {
+  protected String internalToExpectation(final IHierarchyNode node, final IHierarchyBuilder builder) {
     final String superExpectation = super.internalToExpectation(node, builder);
     if ((node instanceof XtextCallHierarchyNode)) {
       StringConcatenation _builder = new StringConcatenation();

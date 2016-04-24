@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.findReferences;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -98,7 +99,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
   }
   
   @Override
-  protected void findLocalReferencesFromElement(final TargetURIs targetURIs, final EObject sourceCandidate, final Resource localResource, final IReferenceFinder.Acceptor acceptor) {
+  protected void findLocalReferencesFromElement(final Predicate<URI> targetURIs, final EObject sourceCandidate, final Resource localResource, final IReferenceFinder.Acceptor acceptor) {
     boolean _matched = false;
     if (sourceCandidate instanceof XAbstractFeatureCall) {
       boolean _isPackageFragment = ((XAbstractFeatureCall)sourceCandidate).isPackageFragment();
@@ -139,7 +140,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     }
   }
   
-  protected void addReferencesToSuper(final AnonymousClass anonymousClass, final TargetURIs targetURISet, final IReferenceFinder.Acceptor acceptor) {
+  protected void addReferencesToSuper(final AnonymousClass anonymousClass, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {
     final XConstructorCall constructorCall = anonymousClass.getConstructorCall();
     final JvmGenericType superType = this._anonymousClassUtil.getSuperType(anonymousClass);
     if (superType!=null) {
@@ -151,7 +152,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     }
   }
   
-  protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration importDeclaration, final TargetURIs targetURISet, final IReferenceFinder.Acceptor acceptor) {
+  protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration importDeclaration, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {
     Iterable<JvmFeature> _allFeatures = this._staticallyImportedMemberProvider.getAllFeatures(importDeclaration);
     final Procedure1<JvmFeature> _function = new Procedure1<JvmFeature>() {
       @Override
@@ -162,7 +163,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     IterableExtensions.<JvmFeature>forEach(_allFeatures, _function);
   }
   
-  protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final TargetURIs targetURISet, final IReferenceFinder.Acceptor acceptor) {
+  protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {
     final JvmIdentifiableElement feature = sourceCandidate.getFeature();
     if ((feature instanceof JvmMember)) {
       final JvmDeclaredType type = ((JvmMember)feature).getDeclaringType();
@@ -170,10 +171,10 @@ public class XtendReferenceFinder extends ReferenceFinder {
     }
   }
   
-  protected void addReferenceIfTarget(final EObject candidate, final TargetURIs targetURISet, final EObject sourceElement, final EReference reference, final IReferenceFinder.Acceptor acceptor) {
+  protected void addReferenceIfTarget(final EObject candidate, final Predicate<URI> targetURISet, final EObject sourceElement, final EReference reference, final IReferenceFinder.Acceptor acceptor) {
     final URI candidateURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(candidate);
-    boolean _contains = targetURISet.contains(candidateURI);
-    if (_contains) {
+    boolean _apply = targetURISet.apply(candidateURI);
+    if (_apply) {
       final URI sourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(sourceElement);
       acceptor.accept(sourceElement, sourceURI, reference, (-1), candidate, candidateURI);
     }

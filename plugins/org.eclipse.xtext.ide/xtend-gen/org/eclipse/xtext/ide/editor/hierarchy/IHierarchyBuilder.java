@@ -10,7 +10,7 @@ package org.eclipse.xtext.ide.editor.hierarchy;
 import java.util.Collection;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
 
 /**
  * This class is used to build a hierarchy structure.
@@ -19,14 +19,14 @@ import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
  * @since 2.10
  */
 @SuppressWarnings("all")
-public interface HierarchyBuilder {
+public interface IHierarchyBuilder {
   /**
    * @returns root hierarchy nodes for the given URI; empty if the hierarchy cannot be built for the given URI
    */
-  public abstract Collection<HierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor);
+  public abstract Collection<IHierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor);
   
   /**
-   * @returns child nodes for the given parent node; empty if {@link HierarchyNode#mayHaveChildren} returns <code>false</code> for the parent
+   * @returns child nodes for the given parent node; empty if {@link IHierarchyNode#mayHaveChildren} returns <code>false</code> for the parent
    */
-  public abstract Collection<HierarchyNode> buildChildren(final HierarchyNode parent, final IProgressMonitor monitor);
+  public abstract Collection<IHierarchyNode> buildChildren(final IHierarchyNode parent, final IProgressMonitor monitor);
 }

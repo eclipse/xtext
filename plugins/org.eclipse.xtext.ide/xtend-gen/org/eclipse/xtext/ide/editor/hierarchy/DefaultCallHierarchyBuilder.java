@@ -23,12 +23,12 @@ import org.eclipse.xtext.findReferences.ReferenceAcceptor;
 import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.findReferences.TargetURIs;
 import org.eclipse.xtext.ide.editor.hierarchy.AbstractHierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultHierarchyNode;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultHierarchyNodeReference;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocationProvider;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference;
+import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeLocationProvider;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -51,35 +51,35 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @since 2.10
  */
 @SuppressWarnings("all")
-public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements CallHierarchyBuilder {
+public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements ICallHierarchyBuilder {
   @Accessors
-  private CallHierarchyBuilder.CallHierarchyType hierarchyType = CallHierarchyBuilder.CallHierarchyType.CALLER;
+  private ICallHierarchyBuilder.CallHierarchyType hierarchyType = ICallHierarchyBuilder.CallHierarchyType.CALLER;
   
   @Override
-  public Collection<HierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor) {
+  public Collection<IHierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor) {
     final IEObjectDescription rootDeclaration = this.findDeclaration(rootURI);
     if ((rootDeclaration == null)) {
-      return CollectionLiterals.<HierarchyNode>emptyList();
+      return CollectionLiterals.<IHierarchyNode>emptyList();
     }
-    HierarchyNode _createRoot = this.createRoot(rootDeclaration);
-    return Collections.<HierarchyNode>unmodifiableList(CollectionLiterals.<HierarchyNode>newArrayList(_createRoot));
+    IHierarchyNode _createRoot = this.createRoot(rootDeclaration);
+    return Collections.<IHierarchyNode>unmodifiableList(CollectionLiterals.<IHierarchyNode>newArrayList(_createRoot));
   }
   
   @Override
-  public Collection<HierarchyNode> buildChildren(final HierarchyNode parent, final IProgressMonitor monitor) {
+  public Collection<IHierarchyNode> buildChildren(final IHierarchyNode parent, final IProgressMonitor monitor) {
     boolean _mayHaveChildren = parent.mayHaveChildren();
     boolean _not = (!_mayHaveChildren);
     if (_not) {
-      return CollectionLiterals.<HierarchyNode>emptyList();
+      return CollectionLiterals.<IHierarchyNode>emptyList();
     }
-    final LinkedHashMap<URI, HierarchyNode> children = CollectionLiterals.<URI, HierarchyNode>newLinkedHashMap();
+    final LinkedHashMap<URI, IHierarchyNode> children = CollectionLiterals.<URI, IHierarchyNode>newLinkedHashMap();
     final Procedure2<IEObjectDescription, IReferenceDescription> _function = new Procedure2<IEObjectDescription, IReferenceDescription>() {
       @Override
       public void apply(final IEObjectDescription declaration, final IReferenceDescription reference) {
-        final HierarchyNode childNode = DefaultCallHierarchyBuilder.this.createChild(children, declaration, parent);
+        final IHierarchyNode childNode = DefaultCallHierarchyBuilder.this.createChild(children, declaration, parent);
         if ((childNode != null)) {
-          Collection<HierarchyNodeReference> _references = childNode.getReferences();
-          HierarchyNodeReference _createNodeReference = DefaultCallHierarchyBuilder.this.createNodeReference(reference);
+          Collection<IHierarchyNodeReference> _references = childNode.getReferences();
+          IHierarchyNodeReference _createNodeReference = DefaultCallHierarchyBuilder.this.createNodeReference(reference);
           _references.add(_createNodeReference);
         }
       }
@@ -88,8 +88,8 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     return children.values();
   }
   
-  protected void findDeclarations(final HierarchyNode parent, final IProgressMonitor monitor, final Procedure2<? super IEObjectDescription, ? super IReferenceDescription> acceptor) {
-    final CallHierarchyBuilder.CallHierarchyType hierarchyType = this.hierarchyType;
+  protected void findDeclarations(final IHierarchyNode parent, final IProgressMonitor monitor, final Procedure2<? super IEObjectDescription, ? super IReferenceDescription> acceptor) {
+    final ICallHierarchyBuilder.CallHierarchyType hierarchyType = this.hierarchyType;
     if (hierarchyType != null) {
       switch (hierarchyType) {
         case CALLEE:
@@ -207,7 +207,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   /**
    * @returns a root hierarchy node for the given declaration; cannot be <code>null</code>
    */
-  protected HierarchyNode createRoot(final IEObjectDescription declaration) {
+  protected IHierarchyNode createRoot(final IEObjectDescription declaration) {
     final DefaultHierarchyNode node = new DefaultHierarchyNode();
     node.setElement(declaration);
     node.setMayHaveChildren(true);
@@ -217,7 +217,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   /**
    * @returns a child node for the given declaration and the parent node; cannot be <code>null</code>
    */
-  protected HierarchyNode createChild(final IEObjectDescription declaration, final HierarchyNode parent) {
+  protected IHierarchyNode createChild(final IEObjectDescription declaration, final IHierarchyNode parent) {
     final DefaultHierarchyNode node = new DefaultHierarchyNode();
     node.setParent(parent);
     node.setElement(declaration);
@@ -227,14 +227,14 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     return node;
   }
   
-  protected HierarchyNode createChild(final Map<URI, HierarchyNode> children, final IEObjectDescription declaration, final HierarchyNode parent) {
+  protected IHierarchyNode createChild(final Map<URI, IHierarchyNode> children, final IEObjectDescription declaration, final IHierarchyNode parent) {
     if ((declaration == null)) {
       return null;
     }
     URI _eObjectURI = declaration.getEObjectURI();
-    HierarchyNode childNode = children.get(_eObjectURI);
+    IHierarchyNode childNode = children.get(_eObjectURI);
     if ((childNode == null)) {
-      HierarchyNode _createChild = this.createChild(declaration, parent);
+      IHierarchyNode _createChild = this.createChild(declaration, parent);
       childNode = _createChild;
       URI _eObjectURI_1 = declaration.getEObjectURI();
       children.put(_eObjectURI_1, childNode);
@@ -245,7 +245,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   /**
    * @returns a hierarchy node reference for the given reference; cannot be <code>null</code>
    */
-  protected HierarchyNodeReference createNodeReference(final IReferenceDescription reference) {
+  protected IHierarchyNodeReference createNodeReference(final IReferenceDescription reference) {
     URI _sourceEObjectUri = reference.getSourceEObjectUri();
     final IUnitOfWork<DefaultHierarchyNodeReference, EObject> _function = new IUnitOfWork<DefaultHierarchyNodeReference, EObject>() {
       @Override
@@ -261,7 +261,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   }
   
   protected ITextRegionWithLineInformation getTextRegion(final EObject obj, final EReference reference, final int indexInList) {
-    HierarchyNodeLocationProvider _hierarchyNodeLocationProvider = this.getHierarchyNodeLocationProvider();
+    IHierarchyNodeLocationProvider _hierarchyNodeLocationProvider = this.getHierarchyNodeLocationProvider();
     return _hierarchyNodeLocationProvider.getTextRegion(obj, reference, indexInList);
   }
   
@@ -284,11 +284,11 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   }
   
   @Pure
-  public CallHierarchyBuilder.CallHierarchyType getHierarchyType() {
+  public ICallHierarchyBuilder.CallHierarchyType getHierarchyType() {
     return this.hierarchyType;
   }
   
-  public void setHierarchyType(final CallHierarchyBuilder.CallHierarchyType hierarchyType) {
+  public void setHierarchyType(final ICallHierarchyBuilder.CallHierarchyType hierarchyType) {
     this.hierarchyType = hierarchyType;
   }
 }

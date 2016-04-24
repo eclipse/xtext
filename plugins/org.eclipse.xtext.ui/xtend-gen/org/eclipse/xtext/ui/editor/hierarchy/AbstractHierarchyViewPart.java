@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.hierarchy;
 
 import com.google.common.collect.Iterables;
 import java.util.Collection;
+import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ISelection;
@@ -17,9 +18,9 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultHierarchyRoot;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyRoot;
 import org.eclipse.xtext.ui.editor.hierarchy.DeferredHierarchyBuilder;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -30,33 +31,33 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors({ AccessorType.PUBLIC_SETTER, AccessorType.PROTECTED_GETTER })
 @SuppressWarnings("all")
 public abstract class AbstractHierarchyViewPart extends ViewPart {
-  private HierarchyBuilder builder;
+  private IHierarchyBuilder builder;
   
   private URI rootURI;
   
   public void refresh(final IProgressMonitor monitor) {
-    HierarchyRoot _createRoot = this.createRoot(monitor);
+    IHierarchyRoot _createRoot = this.createRoot(monitor);
     this.setRoot(_createRoot);
   }
   
-  protected HierarchyRoot createRoot(final IProgressMonitor monitor) {
+  protected IHierarchyRoot createRoot(final IProgressMonitor monitor) {
     if (((this.builder == null) || (this.rootURI == null))) {
-      return HierarchyRoot.EMPTY;
+      return IHierarchyRoot.EMPTY;
     }
-    final Collection<HierarchyNode> roots = this.builder.buildRoots(this.rootURI, monitor);
+    final Collection<IHierarchyNode> roots = this.builder.buildRoots(this.rootURI, monitor);
     boolean _isEmpty = roots.isEmpty();
     if (_isEmpty) {
-      return HierarchyRoot.EMPTY;
+      return IHierarchyRoot.EMPTY;
     }
     final DefaultHierarchyRoot root = new DefaultHierarchyRoot();
-    Collection<HierarchyNode> _roots = root.getRoots();
-    Iterables.<HierarchyNode>addAll(_roots, roots);
+    List<IHierarchyNode> _roots = root.getRoots();
+    Iterables.<IHierarchyNode>addAll(_roots, roots);
     return root;
   }
   
-  protected abstract void setRoot(final HierarchyRoot root);
+  protected abstract void setRoot(final IHierarchyRoot root);
   
-  protected HierarchyNode getSelectedNode(final ISelection selection) {
+  protected IHierarchyNode getSelectedNode(final ISelection selection) {
     boolean _matched = false;
     if (selection instanceof IStructuredSelection) {
       int _size = ((IStructuredSelection)selection).size();
@@ -64,21 +65,21 @@ public abstract class AbstractHierarchyViewPart extends ViewPart {
       if (_equals) {
         _matched=true;
         final Object selectedElement = ((IStructuredSelection)selection).getFirstElement();
-        if ((selectedElement instanceof HierarchyNode)) {
-          return ((HierarchyNode)selectedElement);
+        if ((selectedElement instanceof IHierarchyNode)) {
+          return ((IHierarchyNode)selectedElement);
         }
       }
     }
     return null;
   }
   
-  protected <T extends HierarchyBuilder> T getBuilder(final Class<T> clazz) {
+  protected <T extends IHierarchyBuilder> T getBuilder(final Class<T> clazz) {
     boolean _isInstance = clazz.isInstance(this.builder);
     if (_isInstance) {
       return ((T) this.builder);
     }
     if ((this.builder instanceof DeferredHierarchyBuilder)) {
-      final HierarchyBuilder wrappedBuilder = ((DeferredHierarchyBuilder)this.builder).getHierarchyBuilder();
+      final IHierarchyBuilder wrappedBuilder = ((DeferredHierarchyBuilder)this.builder).getHierarchyBuilder();
       boolean _isInstance_1 = clazz.isInstance(wrappedBuilder);
       if (_isInstance_1) {
         return ((T) wrappedBuilder);
@@ -88,11 +89,11 @@ public abstract class AbstractHierarchyViewPart extends ViewPart {
   }
   
   @Pure
-  protected HierarchyBuilder getBuilder() {
+  protected IHierarchyBuilder getBuilder() {
     return this.builder;
   }
   
-  public void setBuilder(final HierarchyBuilder builder) {
+  public void setBuilder(final IHierarchyBuilder builder) {
     this.builder = builder;
   }
   

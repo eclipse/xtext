@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.editor.hierarchy
 import com.google.inject.Singleton
 import org.eclipse.jface.viewers.BaseLabelProvider
 import org.eclipse.jface.viewers.ITableLabelProvider
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -24,10 +24,10 @@ class LocationTableLabelProvider extends BaseLabelProvider implements ITableLabe
 	}
 
 	override getColumnText(Object reference, int columnIndex) {
-		if (reference instanceof HierarchyNodeReference) {
+		if (reference instanceof IHierarchyNodeReference) {
 			switch columnIndex {
 				case 0:
-					return '' + (reference.lineNumber + 1)
+					return String.valueOf(reference.lineNumber + 1)
 				case 1:
 					return reference.text
 			}

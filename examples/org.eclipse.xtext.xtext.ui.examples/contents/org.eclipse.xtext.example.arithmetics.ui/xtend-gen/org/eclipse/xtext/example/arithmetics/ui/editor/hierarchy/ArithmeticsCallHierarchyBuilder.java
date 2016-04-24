@@ -10,7 +10,7 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.AbstractDefinition;
 import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
 import org.eclipse.xtext.example.arithmetics.ui.editor.hierarchy.ArithmeticsCallHierarchyNodeLocationProvider;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocationProvider;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeLocationProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -21,7 +21,7 @@ public class ArithmeticsCallHierarchyBuilder extends DefaultCallHierarchyBuilder
   private ArithmeticsCallHierarchyNodeLocationProvider arithmeticsCallHierarchyNodeLocationProvider;
   
   @Override
-  protected HierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
+  protected IHierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
     return this.arithmeticsCallHierarchyNodeLocationProvider;
   }
   

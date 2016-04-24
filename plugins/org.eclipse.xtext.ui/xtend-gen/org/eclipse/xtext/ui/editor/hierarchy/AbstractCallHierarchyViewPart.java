@@ -35,10 +35,10 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IViewSite;
-import org.eclipse.xtext.ide.editor.hierarchy.CallHierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeReference;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot;
+import org.eclipse.xtext.ide.editor.hierarchy.ICallHierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyRoot;
 import org.eclipse.xtext.ui.editor.hierarchy.AbstractHierarchyViewPart;
 import org.eclipse.xtext.ui.editor.hierarchy.HierarchyTreeContentProvider;
 import org.eclipse.xtext.ui.editor.hierarchy.RefreshHierarchyAction;
@@ -65,14 +65,14 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
   
   private final RefreshHierarchyAction refreshAction = new RefreshHierarchyAction(this);
   
-  private final List<SetHierarchyTypeAction> setHierarchyTypeActions = Collections.<SetHierarchyTypeAction>unmodifiableList(CollectionLiterals.<SetHierarchyTypeAction>newArrayList(new SetHierarchyTypeAction(CallHierarchyBuilder.CallHierarchyType.CALLER, this), new SetHierarchyTypeAction(CallHierarchyBuilder.CallHierarchyType.CALLEE, this)));
+  private final List<SetHierarchyTypeAction> setHierarchyTypeActions = Collections.<SetHierarchyTypeAction>unmodifiableList(CollectionLiterals.<SetHierarchyTypeAction>newArrayList(new SetHierarchyTypeAction(ICallHierarchyBuilder.CallHierarchyType.CALLER, this), new SetHierarchyTypeAction(ICallHierarchyBuilder.CallHierarchyType.CALLEE, this)));
   
-  protected CallHierarchyBuilder getCallHierarchyBuilder() {
-    return this.<CallHierarchyBuilder>getBuilder(CallHierarchyBuilder.class);
+  protected ICallHierarchyBuilder getCallHierarchyBuilder() {
+    return this.<ICallHierarchyBuilder>getBuilder(ICallHierarchyBuilder.class);
   }
   
-  public void setCallHierarchyType(final CallHierarchyBuilder.CallHierarchyType hierarchyType) {
-    CallHierarchyBuilder _callHierarchyBuilder = this.getCallHierarchyBuilder();
+  public void setCallHierarchyType(final ICallHierarchyBuilder.CallHierarchyType hierarchyType) {
+    ICallHierarchyBuilder _callHierarchyBuilder = this.getCallHierarchyBuilder();
     if (_callHierarchyBuilder!=null) {
       _callHierarchyBuilder.setHierarchyType(hierarchyType);
     }
@@ -82,14 +82,14 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
   
   @Override
   public void refresh(final IProgressMonitor monitor) {
-    CallHierarchyBuilder _callHierarchyBuilder = this.getCallHierarchyBuilder();
-    CallHierarchyBuilder.CallHierarchyType _hierarchyType = null;
+    ICallHierarchyBuilder _callHierarchyBuilder = this.getCallHierarchyBuilder();
+    ICallHierarchyBuilder.CallHierarchyType _hierarchyType = null;
     if (_callHierarchyBuilder!=null) {
       _hierarchyType=_callHierarchyBuilder.getHierarchyType();
     }
-    final CallHierarchyBuilder.CallHierarchyType hierarchyType = _hierarchyType;
+    final ICallHierarchyBuilder.CallHierarchyType hierarchyType = _hierarchyType;
     for (final SetHierarchyTypeAction setHierarchyTypeAction : this.setHierarchyTypeActions) {
-      CallHierarchyBuilder.CallHierarchyType _hierarchyType_1 = setHierarchyTypeAction.getHierarchyType();
+      ICallHierarchyBuilder.CallHierarchyType _hierarchyType_1 = setHierarchyTypeAction.getHierarchyType();
       boolean _tripleEquals = (hierarchyType == _hierarchyType_1);
       setHierarchyTypeAction.setChecked(_tripleEquals);
     }
@@ -97,7 +97,7 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
   }
   
   @Override
-  public void setRoot(final HierarchyRoot root) {
+  public void setRoot(final IHierarchyRoot root) {
     this.callHierarchyViewer.setInput(root);
     this.setFocus();
   }
@@ -208,21 +208,21 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
     boolean _tripleEquals = (_selectionProvider == this.callHierarchyViewer);
     if (_tripleEquals) {
       ISelection _selection = event.getSelection();
-      final HierarchyNode callHierarchyNode = this.getSelectedNode(_selection);
+      final IHierarchyNode callHierarchyNode = this.getSelectedNode(_selection);
       this.onCallHierarchyNodeChanged(callHierarchyNode);
     }
   }
   
-  protected void onCallHierarchyNodeChanged(final HierarchyNode node) {
-    Collection<HierarchyNodeReference> _elvis = null;
-    Collection<HierarchyNodeReference> _references = null;
+  protected void onCallHierarchyNodeChanged(final IHierarchyNode node) {
+    Collection<IHierarchyNodeReference> _elvis = null;
+    Collection<IHierarchyNodeReference> _references = null;
     if (node!=null) {
       _references=node.getReferences();
     }
     if (_references != null) {
       _elvis = _references;
     } else {
-      List<HierarchyNodeReference> _emptyList = CollectionLiterals.<HierarchyNodeReference>emptyList();
+      List<IHierarchyNodeReference> _emptyList = CollectionLiterals.<IHierarchyNodeReference>emptyList();
       _elvis = _emptyList;
     }
     this.locationViewer.setInput(_elvis);

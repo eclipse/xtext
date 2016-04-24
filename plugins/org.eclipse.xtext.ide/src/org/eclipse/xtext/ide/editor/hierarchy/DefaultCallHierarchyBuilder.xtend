@@ -30,7 +30,7 @@ import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements CallHierarchyBuilder {
+class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements ICallHierarchyBuilder {
 
 	@Accessors
 	CallHierarchyType hierarchyType = CallHierarchyType.CALLER
@@ -41,7 +41,7 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements Ca
 		return #[rootDeclaration.createRoot]
 	}
 
-	override buildChildren(HierarchyNode parent, IProgressMonitor monitor) {
+	override buildChildren(IHierarchyNode parent, IProgressMonitor monitor) {
 		if (!parent.mayHaveChildren)
 			return emptyList
 
@@ -55,7 +55,7 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements Ca
 	}
 
 	protected def void findDeclarations(
-		HierarchyNode parent,
+		IHierarchyNode parent,
 		IProgressMonitor monitor,
 		(IEObjectDescription, IReferenceDescription)=>void acceptor
 	) {
@@ -137,7 +137,7 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements Ca
 	/**
 	 * @returns a root hierarchy node for the given declaration; cannot be <code>null</code>
 	 */
-	protected def HierarchyNode createRoot(IEObjectDescription declaration) {
+	protected def IHierarchyNode createRoot(IEObjectDescription declaration) {
 		val node = new DefaultHierarchyNode
 		node.element = declaration
 		node.mayHaveChildren = true
@@ -147,7 +147,7 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements Ca
 	/**
 	 * @returns a child node for the given declaration and the parent node; cannot be <code>null</code> 
 	 */
-	protected def HierarchyNode createChild(IEObjectDescription declaration, HierarchyNode parent) {
+	protected def IHierarchyNode createChild(IEObjectDescription declaration, IHierarchyNode parent) {
 		val node = new DefaultHierarchyNode
 		node.parent = parent
 		node.element = declaration
@@ -155,10 +155,10 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements Ca
 		return node
 	}
 
-	protected def HierarchyNode createChild(
-		Map<URI, HierarchyNode> children,
+	protected def IHierarchyNode createChild(
+		Map<URI, IHierarchyNode> children,
 		IEObjectDescription declaration,
-		HierarchyNode parent
+		IHierarchyNode parent
 	) {
 		if(declaration === null) return null;
 
@@ -173,7 +173,7 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements Ca
 	/**
 	 * @returns a hierarchy node reference for the given reference; cannot be <code>null</code>
 	 */
-	protected def HierarchyNodeReference createNodeReference(IReferenceDescription reference) {
+	protected def IHierarchyNodeReference createNodeReference(IReferenceDescription reference) {
 		return readOnly(reference.sourceEObjectUri) [ sourceObject |
 			val textRegion = sourceObject.getTextRegion(reference.EReference, reference.indexInList)
 			val text = sourceObject.getText(textRegion)

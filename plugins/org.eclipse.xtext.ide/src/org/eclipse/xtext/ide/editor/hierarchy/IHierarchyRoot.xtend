@@ -8,25 +8,23 @@
 package org.eclipse.xtext.ide.editor.hierarchy
 
 import java.util.Collection
-import org.eclipse.core.runtime.IProgressMonitor
-import org.eclipse.emf.common.util.URI
 
 /**
- * This class is used to build a hierarchy structure.
+ * Represents a hierarchy root.
  * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-interface HierarchyBuilder {
+interface IHierarchyRoot {
 
-	/**
-	 * @returns root hierarchy nodes for the given URI; empty if the hierarchy cannot be built for the given URI
-	 */
-	def Collection<HierarchyNode> buildRoots(URI rootURI, IProgressMonitor monitor)
+	def Collection<IHierarchyNode> getRoots()
 
-	/**
-	 * @returns child nodes for the given parent node; empty if {@link HierarchyNode#mayHaveChildren} returns <code>false</code> for the parent 
-	 */
-	def Collection<HierarchyNode> buildChildren(HierarchyNode parent, IProgressMonitor monitor)
+	val EMPTY = new IHierarchyRoot() {
+
+		override getRoots() {
+			emptyList
+		}
+
+	}
 
 }

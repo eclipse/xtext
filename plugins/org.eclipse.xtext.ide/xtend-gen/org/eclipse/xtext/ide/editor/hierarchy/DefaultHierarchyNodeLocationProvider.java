@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocationProvider;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeLocationProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -26,7 +26,7 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
  */
 @Singleton
 @SuppressWarnings("all")
-public class DefaultHierarchyNodeLocationProvider implements HierarchyNodeLocationProvider {
+public class DefaultHierarchyNodeLocationProvider implements IHierarchyNodeLocationProvider {
   @Inject
   protected ILocationInFileProvider locationInFileProvider;
   
