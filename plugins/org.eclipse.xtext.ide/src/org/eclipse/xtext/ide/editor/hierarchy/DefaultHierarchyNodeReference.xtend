@@ -18,7 +18,7 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation
  */
 @Accessors
 @FinalFieldsConstructor
-class DefaultHierarchyNodeReference implements HierarchyNodeReference {
+class DefaultHierarchyNodeReference implements IHierarchyNodeReference {
 	val String text
 	@Delegate
 	val ITextRegionWithLineInformation textRegion

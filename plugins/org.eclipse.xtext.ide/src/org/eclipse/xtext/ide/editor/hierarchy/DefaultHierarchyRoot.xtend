@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.hierarchy
 
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
@@ -14,6 +15,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
  * @since 2.10
  */
 @Accessors
-class DefaultHierarchyRoot implements HierarchyRoot {
-	val roots = <HierarchyNode>newArrayList
+class DefaultHierarchyRoot implements IHierarchyRoot {
+	val List<IHierarchyNode> roots = <IHierarchyNode>newArrayList
 }

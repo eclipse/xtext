@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.hierarchy
 
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.util.Wrapper
@@ -15,10 +16,10 @@ import org.eclipse.xtext.util.Wrapper
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-class DefaultHierarchyNode implements HierarchyNode {
+class DefaultHierarchyNode implements IHierarchyNode {
 
 	@Accessors
-	HierarchyNode parent
+	IHierarchyNode parent
 
 	@Accessors(PUBLIC_SETTER)
 	boolean mayHaveChildren
@@ -27,7 +28,7 @@ class DefaultHierarchyNode implements HierarchyNode {
 	IEObjectDescription element
 
 	@Accessors(PUBLIC_GETTER)
-	val references = <HierarchyNodeReference>newArrayList
+	val List<IHierarchyNodeReference> references = <IHierarchyNodeReference>newArrayList
 
 	Wrapper<Boolean> recursive
 

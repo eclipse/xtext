@@ -30,7 +30,7 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
  * @since 2.10
  */
 @Accessors(PUBLIC_SETTER, PROTECTED_GETTER)
-abstract class AbstractHierarchyBuilder implements HierarchyBuilder {
+abstract class AbstractHierarchyBuilder implements IHierarchyBuilder {
 
 	IResourceAccess resourceAccess
 
@@ -46,7 +46,7 @@ abstract class AbstractHierarchyBuilder implements HierarchyBuilder {
 	Provider<TargetURIs> targetURIProvider
 
 	@Inject
-	HierarchyNodeLocationProvider hierarchyNodeLocationProvider
+	IHierarchyNodeLocationProvider hierarchyNodeLocationProvider
 
 	@Inject
 	IResourceServiceProvider.Registry resourceServiceProviderRegistry

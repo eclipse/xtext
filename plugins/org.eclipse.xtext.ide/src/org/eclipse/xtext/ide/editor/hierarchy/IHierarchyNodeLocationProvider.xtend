@@ -7,15 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.hierarchy
 
-import org.eclipse.xtext.ide.editor.navigation.Navigatable
+import com.google.inject.ImplementedBy
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 
 /**
- * Represents a reference between parent and child nodes. Each reference is backed up with a region and a text. 
+ * This class is used to identify a region for {@link IHierarchyNode} and {@link IHierarchyNodeReference}.
  * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-interface HierarchyNodeReference extends Navigatable, ITextRegionWithLineInformation {
-	def String getText()
+@ImplementedBy(DefaultHierarchyNodeLocationProvider)
+interface IHierarchyNodeLocationProvider {
+	def ITextRegionWithLineInformation getTextRegion(EObject obj)
+
+	def ITextRegionWithLineInformation getTextRegion(EObject owner, EStructuralFeature feature, int indexInList)
 }

@@ -7,24 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.hierarchy
 
-import java.util.Collection
+import org.eclipse.xtext.ide.editor.navigation.INavigatable
+import org.eclipse.xtext.util.ITextRegionWithLineInformation
 
 /**
- * Represents a hierarchy root.
+ * Represents a reference between parent and child nodes. Each reference is backed up with a region and a text. 
  * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-interface HierarchyRoot {
-
-	def Collection<HierarchyNode> getRoots()
-
-	val EMPTY = new HierarchyRoot() {
-
-		override getRoots() {
-			emptyList
-		}
-
-	}
-
+interface IHierarchyNodeReference extends INavigatable, ITextRegionWithLineInformation {
+	def String getText()
 }
