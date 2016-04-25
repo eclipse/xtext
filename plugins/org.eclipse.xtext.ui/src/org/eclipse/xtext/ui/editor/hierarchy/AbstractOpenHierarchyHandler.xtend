@@ -14,11 +14,11 @@ import org.eclipse.core.commands.ExecutionException
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.jface.text.ITextSelection
 import org.eclipse.ui.IWorkbenchWindow
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.ui.editor.utils.EditorUtils.*
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -54,6 +54,6 @@ abstract class AbstractOpenHierarchyHandler extends AbstractHandler {
 
 	protected def String getHierarchyViewPartID();
 
-	protected def HierarchyBuilder createHierarchyBuilder(EObject target)
+	protected def IHierarchyBuilder createHierarchyBuilder(EObject target)
 
 }

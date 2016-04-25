@@ -15,38 +15,38 @@ import org.eclipse.ui.progress.IElementCollector
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Delegate
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode
 
 /**
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-class DeferredHierarchyBuilder implements HierarchyBuilder {
+class DeferredHierarchyBuilder implements IHierarchyBuilder {
 
 	@Accessors
-	HierarchyBuilder hierarchyBuilder
+	IHierarchyBuilder hierarchyBuilder
 
 	override buildRoots(URI rootURI, IProgressMonitor monitor) {
 		hierarchyBuilder.buildRoots(rootURI, monitor).map[defer].filterNull.toList
 	}
 
-	override buildChildren(HierarchyNode node, IProgressMonitor monitor) {
+	override buildChildren(IHierarchyNode node, IProgressMonitor monitor) {
 		hierarchyBuilder.buildChildren(node, monitor).map[defer].filterNull.toList
 	}
 
-	protected def HierarchyNode defer(HierarchyNode node) {
+	protected def IHierarchyNode defer(IHierarchyNode node) {
 		if (node !== null)
 			new DeferredHierarchyNode(node, this)
 	}
 
 	@FinalFieldsConstructor
-	static class DeferredHierarchyNode implements IAdaptable, IDeferredWorkbenchAdapter, HierarchyNode {
+	static class DeferredHierarchyNode implements IAdaptable, IDeferredWorkbenchAdapter, IHierarchyNode {
 
 		@Delegate
 		@Accessors
-		val HierarchyNode delegate
-		extension val HierarchyBuilder hierarchyBuilder
+		val IHierarchyNode delegate
+		extension val IHierarchyBuilder hierarchyBuilder
 
 		override getAdapter(Class adapterType) {
 			if (adapterType.isInstance(this))
@@ -54,7 +54,7 @@ class DeferredHierarchyBuilder implements HierarchyBuilder {
 		}
 
 		override fetchDeferredChildren(Object object, IElementCollector collector, IProgressMonitor monitor) {
-			val HierarchyNode[] children = delegate.buildChildren(monitor)
+			val IHierarchyNode[] children = delegate.buildChildren(monitor)
 			collector.add(children, monitor)
 			collector.done
 		}
