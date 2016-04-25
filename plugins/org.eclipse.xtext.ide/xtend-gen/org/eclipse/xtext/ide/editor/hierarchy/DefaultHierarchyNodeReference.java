@@ -10,7 +10,7 @@ package org.eclipse.xtext.ide.editor.hierarchy;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocation;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class DefaultHierarchyNodeLocation implements HierarchyNodeLocation {
+public class DefaultHierarchyNodeReference implements IHierarchyNodeReference {
   private final String text;
   
   @Delegate
@@ -30,7 +30,7 @@ public class DefaultHierarchyNodeLocation implements HierarchyNodeLocation {
   
   private final Object navigationElement;
   
-  public DefaultHierarchyNodeLocation(final String text, final ITextRegionWithLineInformation textRegion, final Object navigationElement) {
+  public DefaultHierarchyNodeReference(final String text, final ITextRegionWithLineInformation textRegion, final Object navigationElement) {
     super();
     this.text = text;
     this.textRegion = textRegion;

@@ -13,7 +13,7 @@ package org.eclipse.xtext.ide.editor.navigation
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-interface Navigatable {
+interface INavigatable {
 
 	/**
 	 * <p>

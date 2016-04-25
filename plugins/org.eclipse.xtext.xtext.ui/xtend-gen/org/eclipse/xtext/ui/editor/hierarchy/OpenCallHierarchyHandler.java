@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.editor.hierarchy;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.editor.findrefs.EditorResourceAccess;
@@ -39,7 +39,7 @@ public class OpenCallHierarchyHandler extends AbstractOpenHierarchyHandler {
   }
   
   @Override
-  protected HierarchyBuilder createHierarchyBuilder(final EObject target) {
+  protected IHierarchyBuilder createHierarchyBuilder(final EObject target) {
     final XtextCallHierarchyBuilder xtextCallHierarchyBuilder = this._iGlobalServiceProvider.<XtextCallHierarchyBuilder>findService(target, XtextCallHierarchyBuilder.class);
     xtextCallHierarchyBuilder.setResourceAccess(this.resourceAccess);
     IResourceDescriptions _findService = this._iGlobalServiceProvider.<IResourceDescriptions>findService(target, IResourceDescriptions.class);

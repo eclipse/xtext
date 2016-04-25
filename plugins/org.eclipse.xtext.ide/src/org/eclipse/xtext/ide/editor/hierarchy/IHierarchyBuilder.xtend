@@ -17,16 +17,16 @@ import org.eclipse.emf.common.util.URI
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-interface HierarchyBuilder {
+interface IHierarchyBuilder {
 
 	/**
 	 * @returns root hierarchy nodes for the given URI; empty if the hierarchy cannot be built for the given URI
 	 */
-	def Collection<HierarchyNode> buildRoots(URI rootURI, IProgressMonitor monitor)
+	def Collection<IHierarchyNode> buildRoots(URI rootURI, IProgressMonitor monitor)
 
 	/**
-	 * @returns child nodes for the given parent node; empty if {@link HierarchyNode#mayHaveChildren} returns <code>false</code> for the parent 
+	 * @returns child nodes for the given parent node; empty if {@link IHierarchyNode#mayHaveChildren} returns <code>false</code> for the parent 
 	 */
-	def Collection<HierarchyNode> buildChildren(HierarchyNode parent, IProgressMonitor monitor)
+	def Collection<IHierarchyNode> buildChildren(IHierarchyNode parent, IProgressMonitor monitor)
 
 }

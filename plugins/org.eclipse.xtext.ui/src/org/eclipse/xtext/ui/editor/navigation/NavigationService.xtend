@@ -15,11 +15,11 @@ import org.eclipse.jface.viewers.IStructuredSelection
 import org.eclipse.jface.viewers.OpenEvent
 import org.eclipse.jface.viewers.StructuredViewer
 import org.eclipse.ui.OpenAndLinkWithEditorHelper
-import org.eclipse.xtext.ide.editor.navigation.Navigatable
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.IReferenceDescription
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.ui.editor.IURIEditorOpener
+import org.eclipse.xtext.ide.editor.navigation.INavigatable
 
 /**
  * @since 2.10
@@ -39,17 +39,17 @@ class NavigationService {
 	def void open(OpenEvent openEvent, boolean select) {
 		val selection = openEvent.selection
 		if (selection instanceof IStructuredSelection) {
-			for (navigatable : selection.iterator.toIterable.filter(Navigatable)) {
+			for (navigatable : selection.iterator.toIterable.filter(INavigatable)) {
 				open(navigatable, select)
 			}
 		}
 	}
 
-	def void open(Navigatable navigatable) {
+	def void open(INavigatable navigatable) {
 		open(navigatable, true)
 	}
 
-	def void open(Navigatable navigatable, boolean select) {
+	def void open(INavigatable navigatable, boolean select) {
 		switch navigatableElement : navigatable?.navigationElement {
 			IReferenceDescription:
 				uriEditorOpener.open(
@@ -62,7 +62,7 @@ class NavigationService {
 				uriEditorOpener.open(navigatableElement.EObjectURI, select)
 			IResourceDescription:
 				uriEditorOpener.open(navigatableElement.URI, select)
-			Navigatable:
+			INavigatable:
 				open(navigatableElement, select)
 		}
 	}

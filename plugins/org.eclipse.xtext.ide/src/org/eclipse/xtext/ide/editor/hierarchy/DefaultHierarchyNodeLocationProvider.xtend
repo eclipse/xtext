@@ -23,7 +23,7 @@ import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
  * @since 2.10
  */
 @Singleton
-class DefaultHierarchyNodeLocationProvider implements HierarchyNodeLocationProvider {
+class DefaultHierarchyNodeLocationProvider implements IHierarchyNodeLocationProvider {
 
 	@Inject
 	protected ILocationInFileProvider locationInFileProvider

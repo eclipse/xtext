@@ -14,13 +14,14 @@ import org.eclipse.xtext.ide.editor.hierarchy.DefaultHierarchyNodeLocationProvid
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 
 /**
- * This class is used to identify a region for {@link HierarchyNode} and {@link HierarchyNodeLocation}.
+ * This class is used to identify a region for {@link IHierarchyNode} and {@link IHierarchyNodeReference}.
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
 @ImplementedBy(DefaultHierarchyNodeLocationProvider.class)
 @SuppressWarnings("all")
-public interface HierarchyNodeLocationProvider {
+public interface IHierarchyNodeLocationProvider {
   public abstract ITextRegionWithLineInformation getTextRegion(final EObject obj);
   
   public abstract ITextRegionWithLineInformation getTextRegion(final EObject owner, final EStructuralFeature feature, final int indexInList);

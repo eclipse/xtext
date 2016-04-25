@@ -19,7 +19,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.OpenEvent;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.ui.OpenAndLinkWithEditorHelper;
-import org.eclipse.xtext.ide.editor.navigation.Navigatable;
+import org.eclipse.xtext.ide.editor.navigation.INavigatable;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -47,18 +47,18 @@ public class NavigationService {
     if ((selection instanceof IStructuredSelection)) {
       Iterator _iterator = ((IStructuredSelection)selection).iterator();
       Iterable<Object> _iterable = IteratorExtensions.<Object>toIterable(_iterator);
-      Iterable<Navigatable> _filter = Iterables.<Navigatable>filter(_iterable, Navigatable.class);
-      for (final Navigatable navigatable : _filter) {
+      Iterable<INavigatable> _filter = Iterables.<INavigatable>filter(_iterable, INavigatable.class);
+      for (final INavigatable navigatable : _filter) {
         this.open(navigatable, select);
       }
     }
   }
   
-  public void open(final Navigatable navigatable) {
+  public void open(final INavigatable navigatable) {
     this.open(navigatable, true);
   }
   
-  public void open(final Navigatable navigatable, final boolean select) {
+  public void open(final INavigatable navigatable, final boolean select) {
     Object _navigationElement = null;
     if (navigatable!=null) {
       _navigationElement=navigatable.getNavigationElement();
@@ -87,9 +87,9 @@ public class NavigationService {
       }
     }
     if (!_matched) {
-      if (navigatableElement instanceof Navigatable) {
+      if (navigatableElement instanceof INavigatable) {
         _matched=true;
-        this.open(((Navigatable)navigatableElement), select);
+        this.open(((INavigatable)navigatableElement), select);
       }
     }
   }

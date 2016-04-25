@@ -15,8 +15,8 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.DeferredTreeContentManager;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyRoot;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyRoot;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -47,18 +47,18 @@ public class HierarchyTreeContentProvider implements ITreeContentProvider {
   
   @Override
   public Object[] getElements(final Object inputElement) {
-    if ((inputElement instanceof HierarchyRoot)) {
-      Collection<HierarchyNode> _roots = ((HierarchyRoot)inputElement).getRoots();
-      return ((Object[])Conversions.unwrapArray(IterableExtensions.<HierarchyNode>filterNull(_roots), Object.class));
+    if ((inputElement instanceof IHierarchyRoot)) {
+      Collection<IHierarchyNode> _roots = ((IHierarchyRoot)inputElement).getRoots();
+      return ((Object[])Conversions.unwrapArray(IterableExtensions.<IHierarchyNode>filterNull(_roots), Object.class));
     }
     return HierarchyTreeContentProvider.EMPTY_ARRAY;
   }
   
   @Override
   public Object getParent(final Object element) {
-    HierarchyNode _xifexpression = null;
-    if ((element instanceof HierarchyNode)) {
-      _xifexpression = ((HierarchyNode)element).getParent();
+    IHierarchyNode _xifexpression = null;
+    if ((element instanceof IHierarchyNode)) {
+      _xifexpression = ((IHierarchyNode)element).getParent();
     }
     return _xifexpression;
   }

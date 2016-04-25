@@ -7,24 +7,24 @@
  */
 package org.eclipse.xtext.ide.editor.hierarchy;
 
-import java.util.List;
-import org.eclipse.xtend.lib.annotations.Accessors;
+import java.util.Collection;
 import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyRoot;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
+ * Represents a hierarchy root.
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-@Accessors
 @SuppressWarnings("all")
-public class DefaultHierarchyRoot implements IHierarchyRoot {
-  private final List<IHierarchyNode> roots = CollectionLiterals.<IHierarchyNode>newArrayList();
+public interface IHierarchyRoot {
+  public abstract Collection<IHierarchyNode> getRoots();
   
-  @Pure
-  public List<IHierarchyNode> getRoots() {
-    return this.roots;
-  }
+  public final static IHierarchyRoot EMPTY = new IHierarchyRoot() {
+    @Override
+    public Collection<IHierarchyNode> getRoots() {
+      return CollectionLiterals.<IHierarchyNode>emptyList();
+    }
+  };
 }

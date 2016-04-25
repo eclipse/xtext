@@ -14,7 +14,7 @@ package org.eclipse.xtext.ide.editor.navigation;
  * @since 2.10
  */
 @SuppressWarnings("all")
-public interface Navigatable {
+public interface INavigatable {
   /**
    * <p>
    * Returns an instance containing enough information to identify an editor that should be opened and a region that should be revealed.

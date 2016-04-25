@@ -11,18 +11,20 @@ import com.google.inject.Inject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.ide.editor.hierarchy.DefaultCallHierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocationProvider;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeLocationProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyNode;
 import org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyNodeLocationProvider;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
@@ -35,51 +37,48 @@ public class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
   private XtextCallHierarchyNodeLocationProvider callHierarchyNodeLocationProvider;
   
   @Override
-  protected HierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
+  protected IHierarchyNodeLocationProvider getHierarchyNodeLocationProvider() {
     return this.callHierarchyNodeLocationProvider;
   }
   
   @Override
-  protected IEObjectDescription getRootDeclaration(final IEObjectDescription declaration) {
+  protected IEObjectDescription findDeclaration(final URI objectURI) {
+    final IEObjectDescription description = this.getDescription(objectURI);
     EClass _eClass = null;
-    if (declaration!=null) {
-      _eClass=declaration.getEClass();
+    if (description!=null) {
+      _eClass=description.getEClass();
     }
     boolean _isRule = this.isRule(_eClass);
     if (_isRule) {
-      return declaration;
+      return description;
     }
-    return null;
-  }
-  
-  @Override
-  protected IEObjectDescription getDeclaration(final IReferenceDescription reference) {
-    EReference _eReference = null;
-    if (reference!=null) {
-      _eReference=reference.getEReference();
-    }
-    EClassifier _eType = null;
-    if (_eReference!=null) {
-      _eType=_eReference.getEType();
-    }
-    final EClassifier type = _eType;
-    boolean _matched = false;
-    if (type instanceof EClass) {
-      boolean _isRule = this.isRule(((EClass)type));
-      if (_isRule) {
-        _matched=true;
-        return super.getDeclaration(reference);
+    final IUnitOfWork<IEObjectDescription, EObject> _function = new IUnitOfWork<IEObjectDescription, EObject>() {
+      @Override
+      public IEObjectDescription exec(final EObject object) throws Exception {
+        AbstractRule _containerOfType = EcoreUtil2.<AbstractRule>getContainerOfType(object, AbstractRule.class);
+        return XtextCallHierarchyBuilder.this.getDescription(_containerOfType);
       }
-    }
-    return null;
-  }
-  
-  protected boolean isRule(final EClass type) {
-    return EcoreUtil2.isAssignableFrom(XtextPackage.Literals.ABSTRACT_RULE, type);
+    };
+    return this.<IEObjectDescription>readOnly(objectURI, _function);
   }
   
   @Override
-  protected HierarchyNode createRoot(final IEObjectDescription declaration) {
+  protected boolean filterReference(final IReferenceDescription reference) {
+    return ((reference != null) && this.isRule(reference.getEReference().getEType()));
+  }
+  
+  @Override
+  protected IEObjectDescription findSourceDeclaration(final IReferenceDescription reference) {
+    URI _containerEObjectURI = reference.getContainerEObjectURI();
+    return this.getDescription(_containerEObjectURI);
+  }
+  
+  protected boolean isRule(final EClassifier type) {
+    return this.isAssignable(XtextPackage.Literals.ABSTRACT_RULE, type);
+  }
+  
+  @Override
+  protected IHierarchyNode createRoot(final IEObjectDescription declaration) {
     final XtextCallHierarchyNode node = new XtextCallHierarchyNode();
     node.setElement(declaration);
     IEObjectDescription _grammarDescription = this.getGrammarDescription(declaration);
@@ -89,15 +88,13 @@ public class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
   }
   
   @Override
-  protected HierarchyNode createChild(final IEObjectDescription declaration, final HierarchyNode parent) {
+  protected IHierarchyNode createChild(final IEObjectDescription declaration, final IHierarchyNode parent) {
     final XtextCallHierarchyNode node = new XtextCallHierarchyNode();
     node.setParent(parent);
     node.setElement(declaration);
     IEObjectDescription _grammarDescription = this.getGrammarDescription(declaration);
     node.setGrammarDescription(_grammarDescription);
-    boolean _isRecursive = node.isRecursive();
-    boolean _not = (!_isRecursive);
-    node.setMayHaveChildren(_not);
+    node.setMayHaveChildren((this.isRule(declaration.getEClass()) && (!node.isRecursive())));
     return node;
   }
   

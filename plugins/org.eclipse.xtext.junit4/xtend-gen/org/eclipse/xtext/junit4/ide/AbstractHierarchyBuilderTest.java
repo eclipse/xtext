@@ -18,9 +18,9 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ide.editor.hierarchy.AbstractHierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyBuilder;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocation;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyBuilder;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -48,7 +48,7 @@ import org.junit.Assert;
 public abstract class AbstractHierarchyBuilderTest {
   @Accessors
   protected static class HierarchyBuilderTestConfiguration {
-    private Function1<? super ResourceSet, ? extends HierarchyBuilder> hierarchyBuilderProvider;
+    private Function1<? super ResourceSet, ? extends IHierarchyBuilder> hierarchyBuilderProvider;
     
     private Collection<Pair<String, String>> models = CollectionLiterals.<Pair<String, String>>newArrayList();
     
@@ -59,11 +59,11 @@ public abstract class AbstractHierarchyBuilderTest {
     private String expectedHierarchy;
     
     @Pure
-    public Function1<? super ResourceSet, ? extends HierarchyBuilder> getHierarchyBuilderProvider() {
+    public Function1<? super ResourceSet, ? extends IHierarchyBuilder> getHierarchyBuilderProvider() {
       return this.hierarchyBuilderProvider;
     }
     
-    public void setHierarchyBuilderProvider(final Function1<? super ResourceSet, ? extends HierarchyBuilder> hierarchyBuilderProvider) {
+    public void setHierarchyBuilderProvider(final Function1<? super ResourceSet, ? extends IHierarchyBuilder> hierarchyBuilderProvider) {
       this.hierarchyBuilderProvider = hierarchyBuilderProvider;
     }
     
@@ -123,7 +123,7 @@ public abstract class AbstractHierarchyBuilderTest {
     final AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration configuration = new AbstractHierarchyBuilderTest.HierarchyBuilderTestConfiguration();
     configurator.apply(configuration);
     final ResourceSet resourceSet = this.createResourceSet(configuration);
-    final HierarchyBuilder hierarchyBuilder = configuration.hierarchyBuilderProvider.apply(resourceSet);
+    final IHierarchyBuilder hierarchyBuilder = configuration.hierarchyBuilderProvider.apply(resourceSet);
     String _xifexpression = null;
     if ((configuration.resourceURI == null)) {
       Pair<String, String> _last = IterableExtensions.<Pair<String, String>>last(configuration.models);
@@ -169,11 +169,11 @@ public abstract class AbstractHierarchyBuilderTest {
     return hierarchyBuilder;
   }
   
-  protected String toExpectation(final URI rootURI, final HierarchyBuilder builder) {
+  protected String toExpectation(final URI rootURI, final IHierarchyBuilder builder) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      Collection<HierarchyNode> _buildRoots = builder.buildRoots(rootURI, null);
-      for(final HierarchyNode root : _buildRoots) {
+      Collection<IHierarchyNode> _buildRoots = builder.buildRoots(rootURI, null);
+      for(final IHierarchyNode root : _buildRoots) {
         String _expectation = this.toExpectation(root, builder);
         _builder.append(_expectation, "");
         _builder.newLineIfNotEmpty();
@@ -182,7 +182,7 @@ public abstract class AbstractHierarchyBuilderTest {
     return _builder.toString();
   }
   
-  protected String toExpectation(final HierarchyNode node, final HierarchyBuilder builder) {
+  protected String toExpectation(final IHierarchyNode node, final IHierarchyBuilder builder) {
     StringConcatenation _builder = new StringConcatenation();
     IEObjectDescription _element = node.getElement();
     _builder.append(_element, "");
@@ -197,11 +197,11 @@ public abstract class AbstractHierarchyBuilderTest {
     return _builder.toString();
   }
   
-  protected String internalToExpectation(final HierarchyNode node, final HierarchyBuilder builder) {
+  protected String internalToExpectation(final IHierarchyNode node, final IHierarchyBuilder builder) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      Collection<HierarchyNodeLocation> _locations = node.getLocations();
-      for(final HierarchyNodeLocation location : _locations) {
+      Collection<IHierarchyNodeReference> _references = node.getReferences();
+      for(final IHierarchyNodeReference location : _references) {
         String _expectation = this.toExpectation(location);
         _builder.append(_expectation, "");
         _builder.newLineIfNotEmpty();
@@ -211,8 +211,8 @@ public abstract class AbstractHierarchyBuilderTest {
       boolean _mayHaveChildren = node.mayHaveChildren();
       if (_mayHaveChildren) {
         {
-          Collection<HierarchyNode> _buildChildren = builder.buildChildren(node, null);
-          for(final HierarchyNode childNode : _buildChildren) {
+          Collection<IHierarchyNode> _buildChildren = builder.buildChildren(node, null);
+          for(final IHierarchyNode childNode : _buildChildren) {
             String _expectation_1 = this.toExpectation(childNode, builder);
             _builder.append(_expectation_1, "");
             _builder.newLineIfNotEmpty();
@@ -223,7 +223,7 @@ public abstract class AbstractHierarchyBuilderTest {
     return _builder.toString();
   }
   
-  protected String toExpectation(final HierarchyNodeLocation location) {
+  protected String toExpectation(final IHierarchyNodeReference location) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\'");
     String _text = location.getText();

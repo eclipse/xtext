@@ -8,13 +8,12 @@
 package org.eclipse.xtext.ide.editor.hierarchy;
 
 import com.google.common.base.Objects;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNodeLocation;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNodeReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -26,9 +25,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @since 2.10
  */
 @SuppressWarnings("all")
-public class DefaultHierarchyNode implements HierarchyNode {
+public class DefaultHierarchyNode implements IHierarchyNode {
   @Accessors
-  private HierarchyNode parent;
+  private IHierarchyNode parent;
   
   @Accessors(AccessorType.PUBLIC_SETTER)
   private boolean mayHaveChildren;
@@ -37,14 +36,14 @@ public class DefaultHierarchyNode implements HierarchyNode {
   private IEObjectDescription element;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private final ArrayList<HierarchyNodeLocation> locations = CollectionLiterals.<HierarchyNodeLocation>newArrayList();
+  private final List<IHierarchyNodeReference> references = CollectionLiterals.<IHierarchyNodeReference>newArrayList();
   
   private Wrapper<Boolean> recursive;
   
   @Override
   public Object getNavigationElement() {
     Object _elvis = null;
-    HierarchyNodeLocation _head = IterableExtensions.<HierarchyNodeLocation>head(this.locations);
+    IHierarchyNodeReference _head = IterableExtensions.<IHierarchyNodeReference>head(this.references);
     if (_head != null) {
       _elvis = _head;
     } else {
@@ -64,7 +63,7 @@ public class DefaultHierarchyNode implements HierarchyNode {
   }
   
   protected boolean internalIsRecursive() {
-    HierarchyNode node = this.parent;
+    IHierarchyNode node = this.parent;
     while ((node != null)) {
       {
         IEObjectDescription _element = node.getElement();
@@ -74,7 +73,7 @@ public class DefaultHierarchyNode implements HierarchyNode {
         if (_equals) {
           return true;
         }
-        HierarchyNode _parent = node.getParent();
+        IHierarchyNode _parent = node.getParent();
         node = _parent;
       }
     }
@@ -87,11 +86,11 @@ public class DefaultHierarchyNode implements HierarchyNode {
   }
   
   @Pure
-  public HierarchyNode getParent() {
+  public IHierarchyNode getParent() {
     return this.parent;
   }
   
-  public void setParent(final HierarchyNode parent) {
+  public void setParent(final IHierarchyNode parent) {
     this.parent = parent;
   }
   
@@ -109,7 +108,7 @@ public class DefaultHierarchyNode implements HierarchyNode {
   }
   
   @Pure
-  public Collection<HierarchyNodeLocation> getLocations() {
-    return this.locations;
+  public List<IHierarchyNodeReference> getReferences() {
+    return this.references;
   }
 }

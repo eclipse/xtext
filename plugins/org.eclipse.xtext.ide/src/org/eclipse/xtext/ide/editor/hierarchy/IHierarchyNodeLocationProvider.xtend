@@ -13,12 +13,13 @@ import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 
 /**
- * This class is used to identify a region for {@link HierarchyNode} and {@link HierarchyNodeLocation}.
+ * This class is used to identify a region for {@link IHierarchyNode} and {@link IHierarchyNodeReference}.
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
 @ImplementedBy(DefaultHierarchyNodeLocationProvider)
-interface HierarchyNodeLocationProvider {
+interface IHierarchyNodeLocationProvider {
 	def ITextRegionWithLineInformation getTextRegion(EObject obj)
 
 	def ITextRegionWithLineInformation getTextRegion(EObject owner, EStructuralFeature feature, int indexInList)

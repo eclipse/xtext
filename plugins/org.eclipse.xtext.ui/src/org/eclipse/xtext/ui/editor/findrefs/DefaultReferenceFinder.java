@@ -35,6 +35,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -99,8 +100,8 @@ public class DefaultReferenceFinder extends ReferenceFinder implements org.eclip
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void findReferences(TargetURIs targetURIs, Resource resource, Acceptor acceptor, IProgressMonitor monitor) {
-		findLocalReferencesInResource(targetURIs.asSet(), resource, (IAcceptor<IReferenceDescription>) acceptor);
+	public void findReferences(Predicate<URI> targetURIs, Resource resource, Acceptor acceptor, IProgressMonitor monitor) {
+		findLocalReferencesInResource(targetURIs, resource, (IAcceptor<IReferenceDescription>) acceptor);
 	}
 	
 	@Override
@@ -213,23 +214,22 @@ public class DefaultReferenceFinder extends ReferenceFinder implements org.eclip
 		}
 	}
 
-	protected void findLocalReferencesInResource(final Iterable<URI> targetURIs, Resource resource,
+	protected void findLocalReferencesInResource(final Predicate<URI> targetURIs, Resource resource,
 			final IAcceptor<IReferenceDescription> acceptor) {
 		Map<EObject, URI> exportedElementsMap = createExportedElementsMap(resource);
-		Set<URI> converted = converter.fromIterable(targetURIs).asSet();
 		for(EObject content: resource.getContents()) {
-			findLocalReferencesFromElement(converted, content, resource, acceptor, null, exportedElementsMap);
+			findLocalReferencesFromElement(targetURIs, content, resource, acceptor, null, exportedElementsMap);
 		}
 	}
 	
 	protected void findLocalReferencesFromElement(
-			final Set<URI> targetURISet, 
+			final Predicate<URI> targetURIs, 
 			EObject sourceCandidate,
 			Resource localResource,
 			final IAcceptor<IReferenceDescription> acceptor, 
 			URI currentExportedContainerURI, 
 			Map<EObject, URI> exportedElementsMap) {
-		super.findLocalReferencesFromElement(converter.fromIterable(targetURISet), sourceCandidate, localResource, toAcceptor(acceptor));
+		super.findLocalReferencesFromElement(targetURIs, sourceCandidate, localResource, toAcceptor(acceptor));
 	}
 	
 	@Deprecated

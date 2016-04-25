@@ -7,20 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.hierarchy
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Delegate
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.ide.editor.navigation.INavigatable
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 
 /**
+ * Represents a reference between parent and child nodes. Each reference is backed up with a region and a text. 
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-@Accessors
-@FinalFieldsConstructor
-class DefaultHierarchyNodeLocation implements HierarchyNodeLocation {
-	val String text
-	@Delegate
-	val ITextRegionWithLineInformation textRegion
-	val Object navigationElement
+interface IHierarchyNodeReference extends INavigatable, ITextRegionWithLineInformation {
+	def String getText()
 }

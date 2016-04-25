@@ -90,6 +90,11 @@ public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
 	}
 
 	@Override
+	public boolean apply(URI uri) {
+		return contains(uri);
+	}
+
+	@Override
 	public boolean contains(URI uri) {
 		return uris.contains(uri);
 	}

@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.hierarchy
 
+import java.util.Map
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.findReferences.ReferenceAcceptor
 import org.eclipse.xtext.findReferences.TargetURIs
 import org.eclipse.xtext.resource.IEObjectDescription
@@ -27,47 +30,80 @@ import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder {
+class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements ICallHierarchyBuilder {
 
-	override buildRoots(URI rootURI, IProgressMonitor progressMonitor) {
-		val rootDeclaration = rootURI.rootDeclaration
+	@Accessors
+	CallHierarchyType hierarchyType = CallHierarchyType.CALLER
+
+	override buildRoots(URI rootURI, IProgressMonitor monitor) {
+		val rootDeclaration = rootURI.findDeclaration
 		if(rootDeclaration === null) return emptyList
 		return #[rootDeclaration.createRoot]
 	}
 
-	override buildChildren(HierarchyNode parent, IProgressMonitor progressMonitor) {
+	override buildChildren(IHierarchyNode parent, IProgressMonitor monitor) {
 		if (!parent.mayHaveChildren)
 			return emptyList
 
 		val children = newLinkedHashMap
-		parent.element.EObjectURI.findDeclarations(progressMonitor) [ declaration, reference |
-			var childNode = children.get(declaration.EObjectURI)
-			if (childNode === null) {
-				childNode = createChild(declaration, parent)
-				children.put(declaration.EObjectURI, childNode)
-			}
-			childNode.locations += reference.createLocation
+		findDeclarations(parent, monitor) [ declaration, reference |
+			val childNode = children.createChild(declaration, parent)
+			if (childNode !== null)
+				childNode.references += reference.createNodeReference
 		]
 		return children.values
 	}
 
 	protected def void findDeclarations(
-		URI targetURI,
-		IProgressMonitor progressMonitor,
+		IHierarchyNode parent,
+		IProgressMonitor monitor,
 		(IEObjectDescription, IReferenceDescription)=>void acceptor
 	) {
-		val targetURIs = targetURI.collectTargetURIs
+		switch hierarchyType {
+			case CALLEE:
+				findTargetDeclarations(parent.element.EObjectURI, monitor, acceptor)
+			default:
+				findSourceDeclarations(parent.element.EObjectURI, monitor, acceptor)
+		}
+	}
 
+	protected def void findTargetDeclarations(
+		URI sourceDeclarationURI,
+		IProgressMonitor monitor,
+		(IEObjectDescription, IReferenceDescription)=>void acceptor
+	) {
+		readOnly(sourceDeclarationURI) [ sourceDeclaration |
+			referenceFinder.findAllReferences(
+				sourceDeclaration,
+				new ReferenceAcceptor(resourceServiceProviderRegistry) [ reference |
+					if (reference.filterReference) {
+						val targetDeclaration = reference?.findTargetDeclaration
+						acceptor.apply(targetDeclaration, reference)
+					}
+				],
+				monitor
+			)
+			null
+		]
+	}
+
+	protected def void findSourceDeclarations(
+		URI targetDeclarationURI,
+		IProgressMonitor monitor,
+		(IEObjectDescription, IReferenceDescription)=>void acceptor
+	) {
+		val targetURIs = targetDeclarationURI.collectTargetURIs
 		referenceFinder.findAllReferences(
 			targetURIs,
 			resourceAccess,
 			indexData,
 			new ReferenceAcceptor(resourceServiceProviderRegistry) [ reference |
-				val declaration = reference.declaration
-				if (declaration !== null)
-					acceptor.apply(declaration, reference)
+				if (reference.filterReference) {
+					val sourceDeclaration = reference?.findSourceDeclaration
+					acceptor.apply(sourceDeclaration, reference)	
+				}
 			],
-			progressMonitor
+			monitor
 		)
 	}
 
@@ -75,47 +111,33 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder {
 		val targetURIs = targetURIProvider.get
 		if(targetURI === null) return targetURIs
 
-		return resourceAccess.readOnly(targetURI) [ resourceSet |
-			val targetObject = resourceSet.getEObject(targetURI, true)
+		return readOnly(targetURI) [ targetObject |
 			if(targetObject === null) return targetURIs
-
 			targetURICollector.add(targetObject, targetURIs)
 			return targetURIs
 		]
 	}
 
-	protected def IEObjectDescription getRootDeclaration(URI rootURI) {
-		return rootURI.declaration.rootDeclaration
+	protected def boolean filterReference(IReferenceDescription reference) {
+		reference !== null
 	}
 
-	/**
-	 * @returns a declaration representing a root hierarchy node for the given element; can return <code>null<code> if the hierarchy does not support such kind of declarations 
-	 */
-	protected def IEObjectDescription getRootDeclaration(IEObjectDescription declaration) {
-		return declaration
+	protected def IEObjectDescription findDeclaration(URI objectURI) {
+		return objectURI.description
 	}
 
-	/**
-	 * @returns a declaration representing a child node that can be reached with the given reference; can return <code>null</code> if the hierarchy does not support such kind of references
-	 */
-	protected def IEObjectDescription getDeclaration(IReferenceDescription reference) {
-		if(reference === null) return null
-
-		val declarationURI = reference.containerEObjectURI ?: reference.sourceEObjectUri
-		return declarationURI.declaration
+	protected def IEObjectDescription findTargetDeclaration(IReferenceDescription reference) {
+		return reference.targetEObjectUri.findDeclaration
 	}
 
-	protected def IEObjectDescription getDeclaration(URI declarationURI) {
-		val resourceDescription = indexData.getResourceDescription(declarationURI.trimFragment)
-		if(resourceDescription === null) return null
-
-		return resourceDescription.exportedObjects.findFirst[EObjectURI == declarationURI]
+	protected def IEObjectDescription findSourceDeclaration(IReferenceDescription reference) {
+		return reference.containerEObjectURI.findDeclaration
 	}
 
 	/**
 	 * @returns a root hierarchy node for the given declaration; cannot be <code>null</code>
 	 */
-	protected def HierarchyNode createRoot(IEObjectDescription declaration) {
+	protected def IHierarchyNode createRoot(IEObjectDescription declaration) {
 		val node = new DefaultHierarchyNode
 		node.element = declaration
 		node.mayHaveChildren = true
@@ -125,7 +147,7 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder {
 	/**
 	 * @returns a child node for the given declaration and the parent node; cannot be <code>null</code> 
 	 */
-	protected def HierarchyNode createChild(IEObjectDescription declaration, HierarchyNode parent) {
+	protected def IHierarchyNode createChild(IEObjectDescription declaration, IHierarchyNode parent) {
 		val node = new DefaultHierarchyNode
 		node.parent = parent
 		node.element = declaration
@@ -133,20 +155,34 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder {
 		return node
 	}
 
+	protected def IHierarchyNode createChild(
+		Map<URI, IHierarchyNode> children,
+		IEObjectDescription declaration,
+		IHierarchyNode parent
+	) {
+		if(declaration === null) return null;
+
+		var childNode = children.get(declaration.EObjectURI)
+		if (childNode === null) {
+			childNode = createChild(declaration, parent)
+			children.put(declaration.EObjectURI, childNode)
+		}
+		return childNode
+	}
+
 	/**
-	 * @returns a location for the given reference; cannot be <code>null</code>
+	 * @returns a hierarchy node reference for the given reference; cannot be <code>null</code>
 	 */
-	protected def HierarchyNodeLocation createLocation(IReferenceDescription reference) {
-		return resourceAccess.readOnly(reference.sourceEObjectUri) [ resourceSet |
-			val obj = resourceSet.getEObject(reference.sourceEObjectUri, true)
-			val textRegion = obj.getTextRegion(reference)
-			val text = obj.getText(textRegion)
-			return new DefaultHierarchyNodeLocation(text, textRegion, reference)
+	protected def IHierarchyNodeReference createNodeReference(IReferenceDescription reference) {
+		return readOnly(reference.sourceEObjectUri) [ sourceObject |
+			val textRegion = sourceObject.getTextRegion(reference.EReference, reference.indexInList)
+			val text = sourceObject.getText(textRegion)
+			return new DefaultHierarchyNodeReference(text, textRegion, reference)
 		]
 	}
 
-	protected def ITextRegionWithLineInformation getTextRegion(EObject obj, IReferenceDescription reference) {
-		return hierarchyNodeLocationProvider.getTextRegion(obj, reference.EReference, reference.indexInList)
+	protected def ITextRegionWithLineInformation getTextRegion(EObject obj, EReference reference, int indexInList) {
+		return hierarchyNodeLocationProvider.getTextRegion(obj, reference, indexInList)
 	}
 
 	protected def String getText(EObject obj, ITextRegionWithLineInformation textRegion) {

@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.ui.editor.hierarchy
 
-import org.eclipse.swt.widgets.Composite
+import org.eclipse.jface.viewers.ColumnWeightData
 import org.eclipse.xtext.ui.editor.hierarchy.DefaultCallHierarchyViewPart
 
 /**
@@ -15,10 +15,11 @@ import org.eclipse.xtext.ui.editor.hierarchy.DefaultCallHierarchyViewPart
  */
 class AssociationHierarchyViewPart extends DefaultCallHierarchyViewPart {
 
-	override protected createLocationViewer(Composite parent) {
-		val locationViewer = new AssociationLocationTableViewer(parent)
-		locationViewer.labelProvider = createLocationLabelProvider
-		return locationViewer
+	override protected getLocationColumnDescriptions() {
+		#[
+			'Line' -> new ColumnWeightData(60),
+			'Property' -> new ColumnWeightData(300)
+		]
 	}
 
 }

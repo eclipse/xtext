@@ -16,7 +16,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.progress.PendingUpdateAdapter;
-import org.eclipse.xtext.ide.editor.hierarchy.HierarchyNode;
+import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
 import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider;
@@ -42,8 +42,8 @@ public class HierarchyLabelProvider extends LabelProvider implements DelegatingS
       return null;
     }
     boolean _matched = false;
-    if (element instanceof HierarchyNode) {
-      boolean _isRecursive = ((HierarchyNode)element).isRecursive();
+    if (element instanceof IHierarchyNode) {
+      boolean _isRecursive = ((IHierarchyNode)element).isRecursive();
       if (_isRecursive) {
         _matched=true;
         return this.decorateRecursive(image);
@@ -77,8 +77,8 @@ public class HierarchyLabelProvider extends LabelProvider implements DelegatingS
   }
   
   protected IEObjectDescription getDescription(final Object element) {
-    if ((element instanceof HierarchyNode)) {
-      return ((HierarchyNode)element).getElement();
+    if ((element instanceof IHierarchyNode)) {
+      return ((IHierarchyNode)element).getElement();
     }
     return null;
   }
