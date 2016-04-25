@@ -7,14 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.hierarchy
 
-import java.util.List
-import org.eclipse.xtend.lib.annotations.Accessors
-
 /**
+ * It is used to build a call hierarchy structure.
+ * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-@Accessors
-class DefaultHierarchyRoot implements IHierarchyRoot {
-	val List<IHierarchyNode> roots = <IHierarchyNode>newArrayList
+interface ICallHierarchyBuilder extends IHierarchyBuilder {
+
+	static enum CallHierarchyType {
+		CALLER,
+		CALLEE
+	}
+
+	def CallHierarchyType getHierarchyType();
+
+	def void setHierarchyType(CallHierarchyType hierarchyType);
+
 }

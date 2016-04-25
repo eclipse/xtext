@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 
+import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -26,7 +27,7 @@ import com.google.inject.ImplementedBy;
  * @since 2.10
  */
 @ImplementedBy(TargetURISet.class)
-public interface TargetURIs extends Iterable<URI> {
+public interface TargetURIs extends Iterable<URI>, Predicate<URI> {
 
 	/**
 	 * A user data key with equalitiy semantics on the type of the value and the

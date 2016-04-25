@@ -7,24 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.hierarchy
 
-import java.util.Collection
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.Delegate
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.ITextRegionWithLineInformation
 
 /**
- * Represents a hierarchy root.
- * 
  * @author kosyakov - Initial contribution and API
  * @since 2.10
  */
-interface HierarchyRoot {
-
-	def Collection<HierarchyNode> getRoots()
-
-	val EMPTY = new HierarchyRoot() {
-
-		override getRoots() {
-			emptyList
-		}
-
-	}
-
+@Accessors
+@FinalFieldsConstructor
+class DefaultHierarchyNodeReference implements IHierarchyNodeReference {
+	val String text
+	@Delegate
+	val ITextRegionWithLineInformation textRegion
+	val Object navigationElement
 }
