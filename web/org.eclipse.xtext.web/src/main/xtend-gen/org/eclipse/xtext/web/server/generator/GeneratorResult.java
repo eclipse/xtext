@@ -9,7 +9,7 @@ package org.eclipse.xtext.web.server.generator;
 
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.annotations.ToString;
-import org.eclipse.xtext.web.server.IServiceResult;
+import org.eclipse.xtext.web.server.IUnwrappableServiceResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @Data
 @ToString(skipNulls = true)
 @SuppressWarnings("all")
-public class GeneratorResult implements IServiceResult {
+public class GeneratorResult implements IUnwrappableServiceResult {
   private final String name;
   
   private final String contentType;
