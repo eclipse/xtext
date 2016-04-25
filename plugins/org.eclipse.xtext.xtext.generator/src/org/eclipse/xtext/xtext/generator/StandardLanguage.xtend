@@ -84,9 +84,9 @@ import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFra
 	
 	TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2
 	
-	XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2
-	
 	XbaseGeneratorFragment2 xbaseSupport = new XbaseGeneratorFragment2
+	
+	XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2
 	
 	CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2
 	
