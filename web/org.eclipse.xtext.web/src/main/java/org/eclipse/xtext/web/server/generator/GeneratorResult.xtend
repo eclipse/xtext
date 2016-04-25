@@ -9,7 +9,7 @@ package org.eclipse.xtext.web.server.generator
 
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.ToString
-import org.eclipse.xtext.web.server.IServiceResult
+import org.eclipse.xtext.web.server.IUnwrappableServiceResult
 
 /**
  * Result object returned by the generator service. This object is usually not sent in
@@ -17,7 +17,7 @@ import org.eclipse.xtext.web.server.IServiceResult
  */
 @Data
 @ToString(skipNulls = true)
-class GeneratorResult implements IServiceResult {
+class GeneratorResult implements IUnwrappableServiceResult {
 	
 	String name
 	String contentType

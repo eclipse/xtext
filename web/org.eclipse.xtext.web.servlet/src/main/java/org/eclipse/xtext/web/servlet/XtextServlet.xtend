@@ -19,13 +19,13 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.web.server.IServiceContext
 import org.eclipse.xtext.web.server.IServiceResult
+import org.eclipse.xtext.web.server.IUnwrappableServiceResult
 import org.eclipse.xtext.web.server.InvalidRequestException
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException
 import org.eclipse.xtext.web.server.InvalidRequestException.PermissionDeniedException
 import org.eclipse.xtext.web.server.InvalidRequestException.ResourceNotFoundException
 import org.eclipse.xtext.web.server.InvalidRequestException.UnknownLanguageException
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
-import org.eclipse.xtext.web.server.generator.GeneratorResult
 
 /**
  * An HTTP servlet for publishing the Xtext services. Include this into your web server by creating
@@ -122,8 +122,8 @@ class XtextServlet extends HttpServlet {
 	
 	/**
 	 * Invoke the service function of the given service descriptor and write its result to the
-	 * servlet response in Json format. An exception is made for code generation: here the document
-	 * itself is written into the response instead of wrapping it into a Json object.
+	 * servlet response in Json format. An exception is made for {@link IUnwrappableServiceResult}:
+	 * here the document itself is written into the response instead of wrapping it into a Json object.
 	 */
 	protected def void doService(XtextServiceDispatcher.ServiceDescriptor service, HttpServletResponse response) {
 		val result = service.service.apply()
@@ -131,9 +131,10 @@ class XtextServlet extends HttpServlet {
 		response.characterEncoding = getEncoding(service, result)
 		response.setHeader('Cache-Control', 'no-cache')
 		
-		if (result instanceof GeneratorResult) {
-			response.contentType = result.contentType ?: 'text/plain'
-			response.writer.write(result.content)
+		if (result instanceof IUnwrappableServiceResult && (result as IUnwrappableServiceResult).content !== null) {
+			val unwrapResult = result as IUnwrappableServiceResult
+			response.contentType = unwrapResult.contentType ?: 'text/plain'
+			response.writer.write(unwrapResult.content)
 		} else {
 			response.contentType = 'text/x-json'
 			gson.toJson(result, response.writer)
@@ -155,14 +156,18 @@ class XtextServlet extends HttpServlet {
 		
 		val emfURI = URI.createURI(serviceContext.getParameter('resource') ?: '')
 		val contentType = serviceContext.getParameter('contentType')
-		if (contentType === null) {
+		if (contentType.nullOrEmpty) {
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI)
-			if (resourceServiceProvider == null)
-				throw new UnknownLanguageException('''Unable to identify the Xtext language for resource «emfURI».''')
+			if (resourceServiceProvider === null) {
+				if (emfURI.toString.empty)
+					throw new UnknownLanguageException('''Unable to identify the Xtext language: missing parameter 'resource' or 'contentType'.''')
+				else
+					throw new UnknownLanguageException('''Unable to identify the Xtext language for resource «emfURI».''')
+			}
 		}
 		else {
 			resourceServiceProvider = serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType)
-			if (resourceServiceProvider == null)
+			if (resourceServiceProvider === null)
 				throw new UnknownLanguageException('''Unable to identify the Xtext language for contentType «contentType».''')
 		}
 		return resourceServiceProvider.get(Injector)
