@@ -60,7 +60,6 @@
 				<module>../../intellij/org.eclipse.xtext.idea.example.entities</module>
 				<module>../../intellij/org.eclipse.xtext.idea.example.entities.ide</module>
 				<module>../../intellij/org.eclipse.xtext.idea.example.entities.ui</module>
-				<module>../../intellij/org.eclipse.xtext.idea.example.entities.tests</module>
 				<module>../../intellij/org.eclipse.xtext.idea.sdomain</module>
 				<module>../../intellij/org.eclipse.xtext.idea.sdomain.ui</module>
 				<module>../../intellij/org.eclipse.xtext.idea.sdomain.tests</module>

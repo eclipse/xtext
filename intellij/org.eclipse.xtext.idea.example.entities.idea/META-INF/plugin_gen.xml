@@ -1,16 +1,24 @@
 <idea-plugin version="2">
 	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
-		<package uri="http://www.xtext.org/example/Entities"
-				 class="org.eclipse.xtext.idea.example.entities.domainmodel.DomainmodelPackage"/>
-		<resourceFactory type="entities"
-						 class="org.eclipse.xtext.resource.IResourceFactory"
-						 factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"/>
-		<resourceServiceProvider uriExtension="entities"
-								 class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
-								 factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"/>
+		<package
+			uri="http://www.xtext.org/example/Entities"
+			class="org.eclipse.xtext.idea.example.entities.domainmodel.DomainmodelPackage"
+		/>
+		<resourceFactory 
+			type="entities"
+			class="org.eclipse.xtext.resource.IResourceFactory"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+		/>
+		<resourceServiceProvider
+			uriExtension="entities"
+			class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+		/>
 
-		<lang.setup language="org.eclipse.xtext.idea.example.entities.Entities"
-					implementationClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesIdeaSetup"/>
+		<lang.setup
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			implementationClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesIdeaSetup"
+		/>
 	</extensions>
 
 	<extensions defaultExtensionNs="com.intellij">
@@ -18,46 +26,68 @@
 
 		<fileTypeFactory implementation="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider"/>
-		<lang.ast.factory language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
-		<lang.parserDefinition language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.example.entities.idea.lang.parser.EntitiesParserDefinition"/>
-		<lang.findUsagesProvider language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
-		<lang.refactoringSupport language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
-		<lang.namesValidator language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
-      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.highlighting.EntitiesSyntaxHighlighterFactory" />
-		<lang.braceMatcher language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
-      	<annotator language="org.eclipse.xtext.idea.example.entities.Entities"
-      							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
-      	<completion.contributor language="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.completion.EntitiesCompletionContributor"/>
-      	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.example.entities.idea.lang.pom.EntitiesPomDeclarationSearcher"/>
+		<lang.ast.factory 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"
+		/>
+		<lang.parserDefinition 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.example.entities.idea.lang.parser.EntitiesParserDefinition"
+		/>
+		<lang.findUsagesProvider 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"
+		/>
+		<lang.refactoringSupport 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"
+		/>
+		<lang.namesValidator 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="com.intellij.lang.refactoring.NamesValidator"
+		/>
+		<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.highlighting.EntitiesSyntaxHighlighterFactory" />
+		<lang.braceMatcher 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="com.intellij.lang.PairedBraceMatcher"
+		/>
+		<annotator 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"
+		/>
+		<completion.contributor language="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.completion.EntitiesCompletionContributor"/>
+		<pom.declarationSearcher implementation="org.eclipse.xtext.idea.example.entities.idea.lang.pom.EntitiesPomDeclarationSearcher"/>
 
-      	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.example.entities.Entities"
-      							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
-      	<lang.documentationProvider language="org.eclipse.xtext.idea.example.entities.Entities"
-      							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-      							implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"/>
+		<lang.psiStructureViewFactory 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="com.intellij.lang.PsiStructureViewFactory"
+		/>
 		<facetType implementation="org.eclipse.xtext.idea.example.entities.idea.facet.EntitiesFacetType"/>
+		<lang.documentationProvider 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
+		/>
 		<colorSettingsPage implementation="org.eclipse.xtext.idea.example.entities.idea.highlighting.EntitiesColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.idea.example.entities.idea.highlighting.EntitiesSemanticHighlightVisitor"/>
 
-		<lang.formatter language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="com.intellij.formatting.FormattingModelBuilder"/>
-		<lang.commenter language="org.eclipse.xtext.idea.example.entities.Entities"
-								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
-								implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"/>
+		<lang.formatter 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="com.intellij.formatting.FormattingModelBuilder"
+		/>
+		<lang.commenter 
+			language="org.eclipse.xtext.idea.example.entities.Entities"
+			factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+			implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"
+		/>
 	</extensions>
 </idea-plugin>

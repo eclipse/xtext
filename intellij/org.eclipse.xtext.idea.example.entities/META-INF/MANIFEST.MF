@@ -30,6 +30,5 @@ Export-Package: org.eclipse.xtext.idea.example.entities,
  org.eclipse.xtext.idea.example.entities.parser.antlr,
  org.eclipse.xtext.idea.example.entities.parser.antlr.internal,
  org.eclipse.xtext.idea.example.entities.validation,
- org.eclipse.xtext.idea.example.entities.formatting,
+ org.eclipse.xtext.idea.example.entities.formatting2,
  org.eclipse.xtext.idea.example.entities.jvmmodel
-
