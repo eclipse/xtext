@@ -52,6 +52,7 @@ import org.eclipse.xtext.parser.antlr.UnorderedGroupHelper;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.IgnoreCaseKeywordSerializer;
+import org.eclipse.xtext.serializer.tokens.IKeywordSerializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -1450,9 +1451,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       TypeReference _typeRef_8 = TypeReference.typeRef(ITokenSerializer.IKeywordSerializer.class);
       TypeReference _typeRef_9 = TypeReference.typeRef(IgnoreCaseKeywordSerializer.class);
       GuiceModuleAccess.BindingFactory _addTypeToType_5 = rtBindings.addTypeToType(_typeRef_8, _typeRef_9);
-      TypeReference _typeRef_10 = TypeReference.typeRef(AbstractIDValueConverter.class);
-      TypeReference _typeRef_11 = TypeReference.typeRef(IgnoreCaseIDValueConverter.class);
-      _addTypeToType_5.addTypeToType(_typeRef_10, _typeRef_11);
+      TypeReference _typeRef_10 = TypeReference.typeRef(IKeywordSerializer.class);
+      TypeReference _typeRef_11 = TypeReference.typeRef(org.eclipse.xtext.serializer.tokens.IgnoreCaseKeywordSerializer.class);
+      GuiceModuleAccess.BindingFactory _addTypeToType_6 = _addTypeToType_5.addTypeToType(_typeRef_10, _typeRef_11);
+      TypeReference _typeRef_12 = TypeReference.typeRef(AbstractIDValueConverter.class);
+      TypeReference _typeRef_13 = TypeReference.typeRef(IgnoreCaseIDValueConverter.class);
+      _addTypeToType_6.addTypeToType(_typeRef_12, _typeRef_13);
     }
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
