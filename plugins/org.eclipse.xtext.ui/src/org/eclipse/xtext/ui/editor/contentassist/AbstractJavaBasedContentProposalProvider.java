@@ -241,7 +241,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
 		if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
 			EReference ref = GrammarUtil.getReference(crossReference);
-			lookupCrossReference(crossReference, ref, acceptor, filter, proposalFactory);
+			lookupCrossReference(contentAssistContext.getCurrentModel(), ref, acceptor, filter, proposalFactory);
 		}
 	}
 
