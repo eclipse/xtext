@@ -94,7 +94,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLineIfNotEmpty();
     _builder.append("<locations>");
     _builder.newLine();
-    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"false\" type=\"InstallableUnit\">");
+    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.jdt.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
@@ -116,7 +116,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
-    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"false\" type=\"InstallableUnit\">");
+    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.emf.mwe2.launcher.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
@@ -124,7 +124,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("</location>");
     _builder.newLine();
-    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"false\" type=\"InstallableUnit\">");
+    _builder.append("<location includeAllPlatforms=\"false\" includeConfigurePhase=\"false\" includeMode=\"planner\" includeSource=\"true\" type=\"InstallableUnit\">");
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.xtext.sdk.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
