@@ -51,6 +51,7 @@ import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.serializer.tokens.IKeywordSerializer
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
@@ -458,6 +459,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		if (getOptions().isIgnoreCase()) {
 			rtBindings
 				.addTypeToType(ITokenSerializer.IKeywordSerializer.typeRef, IgnoreCaseKeywordSerializer.typeRef)
+				.addTypeToType(IKeywordSerializer.typeRef, org.eclipse.xtext.serializer.tokens.IgnoreCaseKeywordSerializer.typeRef)
 				.addTypeToType(AbstractIDValueConverter.typeRef, IgnoreCaseIDValueConverter.typeRef)
 		}
 		rtBindings.contributeTo(language.runtimeGenModule)
