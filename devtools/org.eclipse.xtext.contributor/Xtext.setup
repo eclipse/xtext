@@ -353,6 +353,8 @@
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
         <repository
             url="${emf.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.6/"/>
       </repositoryList>
       <repositoryList
           name="Mars">
@@ -370,6 +372,8 @@
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
         <repository
             url="${emf.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.5/"/>
       </repositoryList>
       <repositoryList
           name="Luna">
@@ -387,6 +391,8 @@
             url="${emf.update.site}"/>
         <repository
             url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.4/"/>
       </repositoryList>
       <repositoryList
           name="Kepler">
@@ -423,6 +429,8 @@
             url="${draw2d.p2.repository}"/>
         <repository
             url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.2/"/>
       </repositoryList>
       <repositoryList
           name="Indigo">
@@ -440,6 +448,8 @@
             url="${draw2d.p2.repository}"/>
         <repository
             url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/3.7/"/>
       </repositoryList>
       <repositoryList
           name="Helios">
