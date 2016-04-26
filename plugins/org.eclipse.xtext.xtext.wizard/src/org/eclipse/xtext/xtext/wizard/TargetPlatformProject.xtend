@@ -52,7 +52,7 @@ class TargetPlatformProject extends ProjectDescriptor {
 		<?pde version="3.8"?>
 		<target name="«name»" sequenceNumber="1">
 		<locations>
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.platform.feature.group" version="0.0.0"/>
 		<unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
@@ -63,11 +63,11 @@ class TargetPlatformProject extends ProjectDescriptor {
 		<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
 		<repository location="http://download.eclipse.org/releases/mars/201506241002/"/>
 		</location>
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
 		<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.1/"/>
 		</location>
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 		«IF config.xtextVersion.isSnapshot»
 			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/"/>
