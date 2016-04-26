@@ -1,16 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.idea.example.entities.idea.lang.parser;
-
-import static org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser.*;
-
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
-import org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.antlr.runtime.Token;
+import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
+import org.eclipse.xtext.idea.example.entities.idea.parser.antlr.internal.PsiInternalEntitiesParser;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 
-@Singleton public class EntitiesTokenTypeProvider implements TokenTypeProvider {
+@Singleton
+public class EntitiesTokenTypeProvider implements TokenTypeProvider {
 
 	private static final String[] TOKEN_NAMES = new PsiInternalEntitiesParser(null).getTokenNames();
 
@@ -22,20 +28,19 @@ import com.intellij.psi.tree.TokenSet;
 		}
 	}
 
-	private static final TokenSet WHITESPACE_TOKENS = TokenSet.create(tokenTypes[RULE_WS]);
-	private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT], tokenTypes[RULE_ML_COMMENT]);
-	private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[RULE_STRING]);
+	private static final TokenSet WHITESPACE_TOKENS = TokenSet.create(tokenTypes[PsiInternalEntitiesParser.RULE_WS]);
+	private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[PsiInternalEntitiesParser.RULE_SL_COMMENT], tokenTypes[PsiInternalEntitiesParser.RULE_ML_COMMENT]);
+	private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[PsiInternalEntitiesParser.RULE_STRING]);
 
 	@Override
-    public int getAntlrType(IElementType iElementType) {
-        return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex()
-        				: org.antlr.runtime.Token.INVALID_TOKEN_TYPE;
-    }
-    
-    @Override
-    public IElementType getIElementType(int antlrType) {
-    	return tokenTypes[antlrType];
-    }
+	public int getAntlrType(IElementType iElementType) {
+		return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex() : Token.INVALID_TOKEN_TYPE;
+	}
+
+	@Override
+	public IElementType getIElementType(int antlrType) {
+		return tokenTypes[antlrType];
+	}
 
 	@Override
 	public TokenSet getWhitespaceTokens() {

@@ -96,9 +96,9 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   
   private TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2();
   
-  private XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2();
-  
   private XbaseGeneratorFragment2 xbaseSupport = new XbaseGeneratorFragment2();
+  
+  private XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2();
   
   private CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2();
   
@@ -388,21 +388,21 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   }
   
   @Pure
-  protected XtypeGeneratorFragment2 getXtypeSupport() {
-    return this.xtypeSupport;
-  }
-  
-  public void setXtypeSupport(final XtypeGeneratorFragment2 xtypeSupport) {
-    this.xtypeSupport = xtypeSupport;
-  }
-  
-  @Pure
   protected XbaseGeneratorFragment2 getXbaseSupport() {
     return this.xbaseSupport;
   }
   
   public void setXbaseSupport(final XbaseGeneratorFragment2 xbaseSupport) {
     this.xbaseSupport = xbaseSupport;
+  }
+  
+  @Pure
+  protected XtypeGeneratorFragment2 getXtypeSupport() {
+    return this.xtypeSupport;
+  }
+  
+  public void setXtypeSupport(final XtypeGeneratorFragment2 xtypeSupport) {
+    this.xtypeSupport = xtypeSupport;
   }
   
   @Pure

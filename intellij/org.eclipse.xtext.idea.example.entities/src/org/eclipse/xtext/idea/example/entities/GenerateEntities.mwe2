@@ -1,147 +1,122 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 module org.eclipse.xtext.idea.example.entities.GenerateEntities
 
-import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.model.project.*
 
-var grammarURI = "classpath:/org/eclipse/xtext/idea/example/entities/Entities.xtext"
-var fileExtensions = "entities"
-var projectName = "org.eclipse.xtext.idea.example.entities"
-var runtimeProject = "../${projectName}"
-var generateXtendStub = true
-var lineDelimiter = "\n"
-
-var ideaProjectName = "${projectName}.idea"
-var ideaProjectPath = "../${ideaProjectName}"
+var rootPath = ".."
+var baseName = "org.eclipse.xtext.idea.example.entities"
 
 Workflow {
-    bean = StandaloneSetup {
-    	scanClassPath = true
-    	platformUri = "${runtimeProject}/.."
-    	// The following two lines can be removed, if Xbase is not used.
-    	registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-    	registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-    }
     
-    component = DirectoryCleaner {
-    	directory = "${runtimeProject}/src-gen"
-    }
-    
-    component = DirectoryCleaner {
-    	directory = "${runtimeProject}/model/generated"
-    }
-    
-    component = DirectoryCleaner {
-    	directory = "${runtimeProject}.ui/src-gen"
-    }
-    
-    component = DirectoryCleaner {
-    	directory = "${runtimeProject}.tests/src-gen"
-    }
-    
-    component = DirectoryCleaner {
-    	directory = "${ideaProjectPath}/src-gen"
-    }
-    
-    component = Generator auto-inject {
-    	pathRtProject = runtimeProject
-    	pathUiProject = "${runtimeProject}.ui"
-    	pathTestProject = "${runtimeProject}.tests"
-    	pathIdeProject = "${runtimeProject}.ide"
-    	projectNameRt = projectName
-    	projectNameUi = "${projectName}.ui"
-    	projectNameIde = "${projectName}.ide"
-    	language = auto-inject {
-    		uri = grammarURI
+    component = XtextGenerator {
+		configuration = {
+			project = StandardProjectConfig {
+				rootPath = rootPath
+				baseName = baseName
+				genericIde = {
+					enabled = true
+				}
+				eclipsePlugin = {
+					enabled = true
+				}
+				ideaPlugin = {
+					enabled = true
+				}
+			}
+			code = {
+				encoding = "ISO-8859-1"
+				fileHeader = 
+"/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/"
+			}
+		}
+    	language = {
+    		grammarUri = "classpath:/org/eclipse/xtext/idea/example/entities/Entities.xtext"
+    		fileExtensions = "entities"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
     
     		// Java API to access grammar elements (required by several other fragments)
-    		fragment = grammarAccess.GrammarAccessFragment auto-inject {}
+    		fragment = grammarAccess.GrammarAccessFragment2 {}
     
     		// generates Java API for the generated EPackages
-    		fragment = ecore.EMFGeneratorFragment auto-inject {}
-    
-    		// the old serialization component
-    		// fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}    
+    		fragment = ecore.EMFGeneratorFragment2 {}
     
     		// serializer 2.0
-    		fragment = serializer.SerializerFragment auto-inject {
+    		fragment = serializer.SerializerFragment2 {
     			generateStub = false
     		}
     
     		// a custom ResourceFactory for use with EMF
-    		fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
+    		fragment = resourceFactory.ResourceFactoryFragment2 {}
     
     		// The antlr parser generator fragment.
-    		fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
-    		//  options = {
-    		//      backtrack = true
-    		//  }
+    		fragment = parser.antlr.XtextAntlrGeneratorFragment2 {
     		}
     
     		// Xtend-based API for validation
-    		fragment = validation.ValidatorFragment auto-inject {
-    		//    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
-    		//    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+    		fragment = validation.ValidatorFragment2 {
     		}
     
-    		// old scoping and exporting API
-    		// fragment = scoping.ImportURIScopingFragment auto-inject {}
-    		// fragment = exporting.SimpleNamesFragment auto-inject {}
-    
     		// scoping and exporting API
-    		fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
-    		fragment = exporting.QualifiedNamesFragment auto-inject {}
-    		fragment = builder.BuilderIntegrationFragment auto-inject {}
+    		fragment = scoping.ImportNamespacesScopingFragment2 {}
+    		fragment = exporting.QualifiedNamesFragment2 {}
+    		fragment = builder.BuilderIntegrationFragment2 {}
     
     		// generator API
-    		fragment = generator.GeneratorFragment auto-inject {}
+    		fragment = generator.GeneratorFragment2 {}
     
     		// formatter API
-    		fragment = formatting.FormatterFragment auto-inject {}
+    		fragment = formatting.Formatter2Fragment2 {}
     
     		// labeling API
-    		fragment = labeling.LabelProviderFragment auto-inject {}
+    		fragment = ui.labeling.LabelProviderFragment2 {}
     
     		// outline API
-    		fragment = outline.OutlineTreeProviderFragment auto-inject {}
-    		fragment = outline.QuickOutlineFragment auto-inject {}
+    		fragment = ui.outline.OutlineTreeProviderFragment2 {}
+    		fragment = ui.outline.QuickOutlineFragment2 {}
     
     		// quickfix API
-    		fragment = quickfix.QuickfixProviderFragment auto-inject {}
+    		fragment = ui.quickfix.QuickfixProviderFragment2 {}
     
     		// content assist API
-    		fragment = contentAssist.ContentAssistFragment auto-inject {}
-    
-    		// generates a more lightweight Antlr parser and lexer tailored for content assist
-    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+    		fragment = ui.contentAssist.ContentAssistFragment2 {}
     
     		// generates junit test support classes into Generator#pathTestProject
-    		fragment = junit.Junit4Fragment auto-inject {}
+    		fragment = junit.Junit4Fragment2 {}
     
     		// rename refactoring
-    		fragment = refactoring.RefactorElementNameFragment auto-inject {}
+    		fragment = ui.refactoring.RefactorElementNameFragment2 {}
     
     		// provides the necessary bindings for java types integration
-    		fragment = types.TypesGeneratorFragment auto-inject {}
+    		fragment = types.TypesGeneratorFragment2 {}
     
     		// generates the required bindings only if the grammar inherits from Xbase
-    		fragment = xbase.XbaseGeneratorFragment auto-inject {}
+    		fragment = xbase.XbaseGeneratorFragment2 {}
     		
     		// generates the required bindings only if the grammar inherits from Xtype
-    		fragment = xbase.XtypeGeneratorFragment auto-inject {}
+    		fragment = xbase.XtypeGeneratorFragment2 {}
     
     		// provides a preference page for template proposals
-    		fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
+    		fragment = ui.templates.CodetemplatesGeneratorFragment2 {}
     
     		// provides a compare view
-    		fragment = compare.CompareFragment auto-inject {}
-    		
-    		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
-    			runtimeProjectName = projectName
-    			runtimeProjectPath = runtimeProject
-	        }
+    		fragment = ui.compare.CompareFragment2 {}
 	        
-	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
+	        fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment {}
+    		
+    		fragment = idea.IdeaPluginGenerator {}
     	}
     }
 }
