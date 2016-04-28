@@ -297,9 +297,19 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 											<arch>x86_64</arch>
 										</environment>
 										<environment>
+											<os>win32</os>
+											<ws>win32</ws>
+											<arch>x86</arch>
+										</environment>
+										<environment>
 											<os>linux</os>
 											<ws>gtk</ws>
 											<arch>x86_64</arch>
+										</environment>
+										<environment>
+											<os>linux</os>
+											<ws>gtk</ws>
+											<arch>x86</arch>
 										</environment>
 									</environments>
 								</configuration>
