@@ -8,7 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,6 +46,8 @@ import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -240,7 +244,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 				"connection.java.home=null\n" +
 				"connection.jvm.arguments=\n" +
 				"connection.project.dir=" + getConnectionLogicalPath() +"\n" +
-				"derived.resources=.gradle,build\n" +
+				"derived.resources=" + getDerivedResources() + "\n" +
 				"eclipse.preferences.version=1\n" +
 				"project.path=\\" + getLogicalPath() + "\n",
 			".settings/org.eclipse.buildship.core.prefs");
@@ -260,6 +264,30 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 			} else {
 				return "..";
 			}
+		}
+
+		private String getDerivedResources() {
+			String derived = ".gradle,build";
+			if (descriptor instanceof ParentProjectDescriptor) {
+				return derived + "," + 
+					join(
+						transform(
+							filter(descriptor.getConfig().getEnabledProjects(),
+								new Predicate<ProjectDescriptor>() {
+									@Override
+									public boolean apply(ProjectDescriptor p) {
+										return p != descriptor && p.isPartOfGradleBuild();
+									}
+								}),
+							new Function<ProjectDescriptor, String>() {
+								@Override
+								public String apply(ProjectDescriptor p) {
+									return p.getName();
+								}
+							}),
+						",");
+			}
+			return derived;
 		}
 	}
 
