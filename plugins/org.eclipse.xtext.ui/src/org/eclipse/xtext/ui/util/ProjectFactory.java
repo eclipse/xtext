@@ -141,8 +141,8 @@ public class ProjectFactory {
 			project.setDescription(description, subMonitor.newChild(1));
 			project.setDefaultCharset(defaultCharset, subMonitor.newChild(1));
 			createFolders(project, subMonitor, shell);
-			enhanceProject(project, subMonitor, shell);
 
+			// first run contributors...
 			if (contributors != null) {
 				IFileCreator fileCreator = new IFileCreator() {
 
@@ -155,6 +155,12 @@ public class ProjectFactory {
 					contributor.contributeFiles(project, fileCreator);
 				}
 			}
+
+			// then enhance project; in some cases it is crucial to enhance the project
+			// only after contributions, like in the case of gradle projects
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492728
+			enhanceProject(project, subMonitor, shell);
+
 			return project;
 		} catch (final CoreException exception) {
 			logger.error(exception.getMessage(), exception);
