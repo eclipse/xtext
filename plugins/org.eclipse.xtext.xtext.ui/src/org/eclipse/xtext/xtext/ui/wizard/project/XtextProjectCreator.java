@@ -234,23 +234,31 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		@Override
 		public void contributeFiles(IProject project, IFileCreator fileWriter) {
 			fileWriter.writeToFile(
-				"{\n" +
-				"	\"1.0\": {\n" +
-				"		\"project_path\": \""+ getLogicalPath() + "\",\n" +
-				"		\"project_dir\": \""+ descriptor.getLocation() + "\",\n" +
-				"		\"connection_project_dir\": \""+ descriptor.getConfig().getParentProject().getLocation() + "\",\n" +
-				"		\"connection_gradle_distribution\": \"GRADLE_DISTRIBUTION(WRAPPER)\"\n" +
-				"	}\n" +
-				"}\n",
-			".settings/gradle.prefs");
+				"connection.arguments=\n" +
+				"connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\n" +
+				"connection.gradle.user.home=null\n" +
+				"connection.java.home=null\n" +
+				"connection.jvm.arguments=\n" +
+				"connection.project.dir=" + getConnectionLogicalPath() +"\n" +
+				"derived.resources=.gradle,build\n" +
+				"eclipse.preferences.version=1\n" +
+				"project.path=\\" + getLogicalPath() + "\n",
+			".settings/org.eclipse.buildship.core.prefs");
 		}
-
 
 		private String getLogicalPath() {
 			if (descriptor instanceof ParentProjectDescriptor) {
 				return ":";
 			} else {
 				return ":" + descriptor.getName();
+			}
+		}
+
+		private String getConnectionLogicalPath() {
+			if (descriptor instanceof ParentProjectDescriptor) {
+				return "";
+			} else {
+				return "..";
 			}
 		}
 	}
