@@ -8,4 +8,20 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/ide/editor/contentassist/IdeContentProposalProvider.java" type="org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider"/>
+                <message_argument value="isAcceptable(ContentAssistContext)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/ide/editor/contentassist/IdeCrossrefProposalProvider.java" type="org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider"/>
+                <message_argument value="matchesPrefix(IEObjectDescription, QualifiedName)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

@@ -11,7 +11,6 @@ import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
 import com.google.inject.Provider
-import com.google.inject.name.Names
 import java.util.ArrayList
 import java.util.Collection
 import java.util.Collections
@@ -23,7 +22,6 @@ import java.util.concurrent.Executors
 import java.util.regex.Pattern
 import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
@@ -31,9 +29,7 @@ import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
-import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming
 import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption
 import org.eclipse.xtext.xtext.generator.util.GeneratorOption
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
@@ -61,7 +57,6 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
 	@Inject extension XtextGeneratorNaming
-	@Inject ContentAssistGrammarNaming caNaming
 	@Inject extension XbaseUsageDetector
 	
 	val enabledPatterns = new HashSet<String>
@@ -249,14 +244,6 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 		if (generateWebXml.get && projectConfig.web.assets !== null) {
 			generateWebXml()
 		}
-		
-		val StringConcatenationClient lexerStatement =
-			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«caNaming.getLexerClass(grammar)».class);'''
-		new GuiceModuleAccess.BindingFactory()
-			.addConfiguredBinding('ContentAssistLexer', lexerStatement)
-			.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef,
-				caNaming.getParserClass(grammar))
-			.contributeTo(language.webGenModule)
 	}
 	
 	static val DELIMITERS_PATTERN = '''[\\s.:;,!?+\\-*/&|<>()[\\]{}]'''

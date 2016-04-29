@@ -14,6 +14,9 @@ import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
  */
 interface IIdeContentProposalAcceptor {
 	
+	/**
+	 * Handle the given content assist entry. The entry may be {@code null}.
+	 */
 	def void accept(ContentAssistEntry entry, int priority)
 	
 	def boolean canAcceptMoreProposals()

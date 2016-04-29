@@ -44,6 +44,9 @@ class IdeContentProposalProvider {
 	@Inject IdeCrossrefProposalProvider crossrefProposalProvider
 	
 	@Accessors(PROTECTED_GETTER)
+	@Inject IdeContentProposalCreator proposalCreator
+	
+	@Accessors(PROTECTED_GETTER)
 	@Inject IdeContentProposalPriorities proposalPriorities
 	
 	@Inject extension CurrentTypeFinder
@@ -63,23 +66,7 @@ class IdeContentProposalProvider {
 	}
 	
 	protected def Iterable<ContentAssistContext> getFilteredContexts(Collection<ContentAssistContext> contexts) {
-		var ContentAssistContext selectedContext
-		for (context : contexts) {
-			if (selectedContext === null || context.acceptable
-					&& (context.prefix.length > selectedContext.prefix.length || !selectedContext.acceptable)) {
-				selectedContext = context
-			}
-		}
-		val finalSelectedContext = selectedContext
-		return contexts.filter[ context |
-			context === finalSelectedContext
-			|| context.prefix == finalSelectedContext.prefix && context.acceptable
-		]
-	}
-	
-	protected def isAcceptable(ContentAssistContext context) {
-		val prefix = context.prefix
-		return prefix.empty || Character.isJavaIdentifierPart(prefix.charAt(prefix.length - 1))
+		return contexts
 	}
 	
 	protected def dispatch void createProposals(AbstractElement element, ContentAssistContext context,
@@ -95,15 +82,16 @@ class IdeContentProposalProvider {
 		} else if (terminal instanceof RuleCall) {
 			val rule = terminal.rule
 			if (rule instanceof TerminalRule && context.prefix.empty) {
-				val entry = new ContentAssistEntry => [
-					prefix = context.prefix
-					if (rule.name == 'STRING') {
-						proposal = '"' + assignment.feature + '"'
+				val proposal =
+					if (rule.name == 'STRING')
+						'"' + assignment.feature + '"'
+					else
+						assignment.feature
+				val entry = proposalCreator.createProposal(proposal, context) [
+					if (rule.name == 'STRING')
 						editPositions += new TextRegion(context.offset + 1, proposal.length - 2)
-					} else {
-						proposal = assignment.feature
+					else
 						editPositions += new TextRegion(context.offset, proposal.length)
-					}
 					description = rule.name
 				]
 				acceptor.accept(entry, proposalPriorities.getDefaultPriority(entry))
@@ -114,17 +102,13 @@ class IdeContentProposalProvider {
 	protected def dispatch void createProposals(Keyword keyword, ContentAssistContext context,
 			IIdeContentProposalAcceptor acceptor) {
 		if (filterKeyword(keyword, context)) {
-			val entry = new ContentAssistEntry => [
-				prefix = context.prefix
-				proposal = keyword.value
-			]
+			val entry = proposalCreator.createProposal(keyword.value, context)
 			acceptor.accept(entry, proposalPriorities.getKeywordPriority(keyword.value, entry))
 		}
 	}
 	
 	protected def boolean filterKeyword(Keyword keyword, ContentAssistContext context) {
-		keyword.value.regionMatches(true, 0, context.prefix, 0, context.prefix.length)
-			&& keyword.value.length > context.prefix.length
+		return true
 	}
 	
 	protected def dispatch void createProposals(RuleCall ruleCall, ContentAssistContext context,
