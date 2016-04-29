@@ -35,7 +35,7 @@ class StatemachineFormatter extends AbstractDeclarativeFormatter {
 		c.setIndentationIncrement.after(stateAccess.nameAssignment_1)
 		c.setLinewrap.before(commandAccess.setKeyword_0)
 		c.setLinewrap.before(transitionAccess.ifKeyword_0)
-		c.setLinewrap.before(stateAccess.endKeyword_4)
-		c.setIndentationDecrement.before(stateAccess.endKeyword_4)
+		c.setLinewrap.before(stateAccess.endKeyword_5)
+		c.setIndentationDecrement.before(stateAccess.endKeyword_5)
 	}
 }

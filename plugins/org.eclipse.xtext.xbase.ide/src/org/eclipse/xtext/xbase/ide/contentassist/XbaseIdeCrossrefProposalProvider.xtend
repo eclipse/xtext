@@ -37,44 +37,42 @@ class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvider {
 		if (crossRef.hasIdRule) {
 			val bracketInfo = getProposalBracketInfo(candidate, context)
 			val proposalString = qualifiedNameConverter.toString(candidate.name) + bracketInfo.brackets
-			var int insignificantParameters = 0
-			if (candidate instanceof IIdentifiableElementDescription) {
-				insignificantParameters = candidate.numberOfIrrelevantParameters
-			}
+			val insignificantParameters =
+				if (candidate instanceof IIdentifiableElementDescription)
+					candidate.numberOfIrrelevantParameters
+				else
+					0
 			val converter = getTypeConverter(context.resource)
 			val objectOrProxy = candidate.getEObjectOrProxy
-			val result = new ContentAssistEntry => [
-				prefix = context.prefix
-				proposal = proposalString
-			]
-			if (objectOrProxy instanceof JvmFeature) {
-				if (bracketInfo.brackets.startsWith(" =")) {
-					addNameAndDescription(result, objectOrProxy,
-						false, insignificantParameters,
-						qualifiedNameConverter.toString(candidate.name) + bracketInfo.brackets,
-						converter)
+			return proposalCreator.createProposal(proposalString, context) [ result |
+				if (objectOrProxy instanceof JvmFeature) {
+					if (bracketInfo.brackets.startsWith(" =")) {
+						addNameAndDescription(result, objectOrProxy,
+							false, insignificantParameters,
+							qualifiedNameConverter.toString(candidate.name) + bracketInfo.brackets,
+							converter)
+					} else {
+						addNameAndDescription(result, objectOrProxy,
+							!bracketInfo.brackets.nullOrEmpty, insignificantParameters,
+							qualifiedNameConverter.toString(candidate.name),
+							converter);
+					}
 				} else {
 					addNameAndDescription(result, objectOrProxy,
-						!bracketInfo.brackets.nullOrEmpty, insignificantParameters,
-						qualifiedNameConverter.toString(candidate.name),
-						converter);
+						qualifiedNameConverter.toString(candidate.qualifiedName),
+						qualifiedNameConverter.toString(candidate.name))
 				}
-			} else {
-				addNameAndDescription(result, objectOrProxy,
-					qualifiedNameConverter.toString(candidate.qualifiedName),
-					qualifiedNameConverter.toString(candidate.name))
-			}
-			var offset = context.offset - context.prefix.length + proposalString.length
-			result.escapePosition = offset + bracketInfo.caretOffset
-			if (bracketInfo.selectionOffset != 0) {
-				offset += bracketInfo.selectionOffset
-				result.editPositions += new TextRegion(offset, bracketInfo.selectionLength)
-			}
-			if (objectOrProxy instanceof JvmExecutable) {
-				val parameterList = new StringBuilder
-				appendParameters(parameterList, objectOrProxy, insignificantParameters, converter)
-			}
-			return result
+				var offset = context.offset - context.prefix.length + proposalString.length
+				result.escapePosition = offset + bracketInfo.caretOffset
+				if (bracketInfo.selectionOffset != 0) {
+					offset += bracketInfo.selectionOffset
+					result.editPositions += new TextRegion(offset, bracketInfo.selectionLength)
+				}
+				if (objectOrProxy instanceof JvmExecutable) {
+					val parameterList = new StringBuilder
+					appendParameters(parameterList, objectOrProxy, insignificantParameters, converter)
+				}
+			]
 		}
 		return super.createProposal(candidate, crossRef, context)
 	}

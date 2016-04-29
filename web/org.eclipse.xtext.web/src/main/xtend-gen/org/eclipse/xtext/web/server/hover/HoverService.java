@@ -114,7 +114,7 @@ public class HoverService {
             @Override
             public void accept(final ContentAssistEntry entry, final int priority) {
               HoverService.this._operationCanceledManager.checkCanceled(cancelIndicator);
-              if (((entry.getSource() != null) && Objects.equal(entry.getProposal(), proposal))) {
+              if ((((entry != null) && (entry.getSource() != null)) && Objects.equal(entry.getProposal(), proposal))) {
                 Object _source = entry.getSource();
                 proposedElement.set(_source);
               }

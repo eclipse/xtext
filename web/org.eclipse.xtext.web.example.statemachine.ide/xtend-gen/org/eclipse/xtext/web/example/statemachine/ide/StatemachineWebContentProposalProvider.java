@@ -23,6 +23,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -35,7 +36,6 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePacka
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -57,16 +57,8 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
       String _prefix = context.getPrefix();
       boolean _startsWith = "true".startsWith(_prefix);
       if (_startsWith) {
-        ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
-        final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
-          @Override
-          public void apply(final ContentAssistEntry it) {
-            String _prefix = context.getPrefix();
-            it.setPrefix(_prefix);
-            it.setProposal("true");
-          }
-        };
-        final ContentAssistEntry trueEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
+        IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
+        final ContentAssistEntry trueEntry = _proposalCreator.createProposal("true", context);
         IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
         int _defaultPriority = _proposalPriorities.getDefaultPriority(trueEntry);
         acceptor.accept(trueEntry, _defaultPriority);
@@ -74,16 +66,8 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
       String _prefix_1 = context.getPrefix();
       boolean _startsWith_1 = "false".startsWith(_prefix_1);
       if (_startsWith_1) {
-        ContentAssistEntry _contentAssistEntry_1 = new ContentAssistEntry();
-        final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
-          @Override
-          public void apply(final ContentAssistEntry it) {
-            String _prefix = context.getPrefix();
-            it.setPrefix(_prefix);
-            it.setProposal("false");
-          }
-        };
-        final ContentAssistEntry falseEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry_1, _function_1);
+        IdeContentProposalCreator _proposalCreator_1 = this.getProposalCreator();
+        final ContentAssistEntry falseEntry = _proposalCreator_1.createProposal("false", context);
         IdeContentProposalPriorities _proposalPriorities_1 = this.getProposalPriorities();
         int _defaultPriority_1 = _proposalPriorities_1.getDefaultPriority(falseEntry);
         acceptor.accept(falseEntry, _defaultPriority_1);
@@ -122,20 +106,17 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
       Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_allElements, _function);
       for (final IEObjectDescription description : _filter) {
         {
-          ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+          IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
+          QualifiedName _name = description.getName();
+          String _string = _name.toString();
           final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
             @Override
             public void apply(final ContentAssistEntry it) {
               it.setSource(description);
-              String _prefix = context.getPrefix();
-              it.setPrefix(_prefix);
-              QualifiedName _name = description.getName();
-              String _string = _name.toString();
-              it.setProposal(_string);
               it.setDescription("input signal");
             }
           };
-          final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function_1);
+          final ContentAssistEntry entry = _proposalCreator.createProposal(_string, context, _function_1);
           IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
           int _crossRefPriority = _proposalPriorities.getCrossRefPriority(description, entry);
           acceptor.accept(entry, _crossRefPriority);
@@ -161,20 +142,17 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
         Iterable<IEObjectDescription> _filter_1 = IterableExtensions.<IEObjectDescription>filter(_allElements_1, _function_1);
         for (final IEObjectDescription description_1 : _filter_1) {
           {
-            ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+            IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
+            QualifiedName _name = description_1.getName();
+            String _string = _name.toString();
             final Procedure1<ContentAssistEntry> _function_2 = new Procedure1<ContentAssistEntry>() {
               @Override
               public void apply(final ContentAssistEntry it) {
                 it.setSource(description_1);
-                String _prefix = context.getPrefix();
-                it.setPrefix(_prefix);
-                QualifiedName _name = description_1.getName();
-                String _string = _name.toString();
-                it.setProposal(_string);
                 it.setDescription("output signal");
               }
             };
-            final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function_2);
+            final ContentAssistEntry entry = _proposalCreator.createProposal(_string, context, _function_2);
             IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
             int _crossRefPriority = _proposalPriorities.getCrossRefPriority(description_1, entry);
             acceptor.accept(entry, _crossRefPriority);

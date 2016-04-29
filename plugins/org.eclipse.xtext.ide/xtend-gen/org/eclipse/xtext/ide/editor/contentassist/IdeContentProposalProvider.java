@@ -32,6 +32,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -40,9 +41,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.CurrentTypeFinder;
@@ -66,6 +64,10 @@ public class IdeContentProposalProvider {
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private IdeCrossrefProposalProvider crossrefProposalProvider;
+  
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Inject
+  private IdeContentProposalCreator proposalCreator;
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
@@ -96,25 +98,7 @@ public class IdeContentProposalProvider {
   }
   
   protected Iterable<ContentAssistContext> getFilteredContexts(final Collection<ContentAssistContext> contexts) {
-    ContentAssistContext selectedContext = null;
-    for (final ContentAssistContext context : contexts) {
-      if (((selectedContext == null) || (this.isAcceptable(context) && ((context.getPrefix().length() > selectedContext.getPrefix().length()) || (!this.isAcceptable(selectedContext)))))) {
-        selectedContext = context;
-      }
-    }
-    final ContentAssistContext finalSelectedContext = selectedContext;
-    final Function1<ContentAssistContext, Boolean> _function = new Function1<ContentAssistContext, Boolean>() {
-      @Override
-      public Boolean apply(final ContentAssistContext context) {
-        return Boolean.valueOf(((context == finalSelectedContext) || (Objects.equal(context.getPrefix(), finalSelectedContext.getPrefix()) && IdeContentProposalProvider.this.isAcceptable(context))));
-      }
-    };
-    return IterableExtensions.<ContentAssistContext>filter(contexts, _function);
-  }
-  
-  protected boolean isAcceptable(final ContentAssistContext context) {
-    final String prefix = context.getPrefix();
-    return (prefix.isEmpty() || Character.isJavaIdentifierPart(prefix.charAt((prefix.length() - 1))));
+    return contexts;
   }
   
   protected void _createProposals(final AbstractElement element, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
@@ -128,34 +112,34 @@ public class IdeContentProposalProvider {
       if ((terminal instanceof RuleCall)) {
         final AbstractRule rule = ((RuleCall)terminal).getRule();
         if (((rule instanceof TerminalRule) && context.getPrefix().isEmpty())) {
-          ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+          String _xifexpression = null;
+          String _name = rule.getName();
+          boolean _equals = Objects.equal(_name, "STRING");
+          if (_equals) {
+            String _feature = assignment.getFeature();
+            String _plus = ("\"" + _feature);
+            _xifexpression = (_plus + "\"");
+          } else {
+            _xifexpression = assignment.getFeature();
+          }
+          final String proposal = _xifexpression;
           final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
             @Override
             public void apply(final ContentAssistEntry it) {
-              String _prefix = context.getPrefix();
-              it.setPrefix(_prefix);
               String _name = rule.getName();
               boolean _equals = Objects.equal(_name, "STRING");
               if (_equals) {
-                String _feature = assignment.getFeature();
-                String _plus = ("\"" + _feature);
-                String _plus_1 = (_plus + "\"");
-                it.setProposal(_plus_1);
                 ArrayList<TextRegion> _editPositions = it.getEditPositions();
                 int _offset = context.getOffset();
-                int _plus_2 = (_offset + 1);
-                String _proposal = it.getProposal();
-                int _length = _proposal.length();
+                int _plus = (_offset + 1);
+                int _length = proposal.length();
                 int _minus = (_length - 2);
-                TextRegion _textRegion = new TextRegion(_plus_2, _minus);
+                TextRegion _textRegion = new TextRegion(_plus, _minus);
                 _editPositions.add(_textRegion);
               } else {
-                String _feature_1 = assignment.getFeature();
-                it.setProposal(_feature_1);
                 ArrayList<TextRegion> _editPositions_1 = it.getEditPositions();
                 int _offset_1 = context.getOffset();
-                String _proposal_1 = it.getProposal();
-                int _length_1 = _proposal_1.length();
+                int _length_1 = proposal.length();
                 TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
                 _editPositions_1.add(_textRegion_1);
               }
@@ -163,7 +147,7 @@ public class IdeContentProposalProvider {
               it.setDescription(_name_1);
             }
           };
-          final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
+          final ContentAssistEntry entry = this.proposalCreator.createProposal(proposal, context, _function);
           int _defaultPriority = this.proposalPriorities.getDefaultPriority(entry);
           acceptor.accept(entry, _defaultPriority);
         }
@@ -174,25 +158,16 @@ public class IdeContentProposalProvider {
   protected void _createProposals(final Keyword keyword, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     boolean _filterKeyword = this.filterKeyword(keyword, context);
     if (_filterKeyword) {
-      ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
-      final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
-        @Override
-        public void apply(final ContentAssistEntry it) {
-          String _prefix = context.getPrefix();
-          it.setPrefix(_prefix);
-          String _value = keyword.getValue();
-          it.setProposal(_value);
-        }
-      };
-      final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
       String _value = keyword.getValue();
-      int _keywordPriority = this.proposalPriorities.getKeywordPriority(_value, entry);
+      final ContentAssistEntry entry = this.proposalCreator.createProposal(_value, context);
+      String _value_1 = keyword.getValue();
+      int _keywordPriority = this.proposalPriorities.getKeywordPriority(_value_1, entry);
       acceptor.accept(entry, _keywordPriority);
     }
   }
   
   protected boolean filterKeyword(final Keyword keyword, final ContentAssistContext context) {
-    return (keyword.getValue().regionMatches(true, 0, context.getPrefix(), 0, context.getPrefix().length()) && (keyword.getValue().length() > context.getPrefix().length()));
+    return true;
   }
   
   protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
@@ -250,6 +225,11 @@ public class IdeContentProposalProvider {
   @Pure
   protected IdeCrossrefProposalProvider getCrossrefProposalProvider() {
     return this.crossrefProposalProvider;
+  }
+  
+  @Pure
+  protected IdeContentProposalCreator getProposalCreator() {
+    return this.proposalCreator;
   }
   
   @Pure

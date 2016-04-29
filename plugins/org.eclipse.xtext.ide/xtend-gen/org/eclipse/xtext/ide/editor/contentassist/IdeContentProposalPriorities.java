@@ -31,6 +31,9 @@ public class IdeContentProposalPriorities {
   private int keywordPriority = 300;
   
   protected int adjustPriority(final ContentAssistEntry entry, final int priority) {
+    if ((entry == null)) {
+      return priority;
+    }
     int adjustedPriority = priority;
     String _proposal = entry.getProposal();
     char _charAt = _proposal.charAt(0);

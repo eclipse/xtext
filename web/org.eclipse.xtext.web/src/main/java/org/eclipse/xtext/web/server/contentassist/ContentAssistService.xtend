@@ -89,9 +89,11 @@ class ContentAssistService {
 			val proposals = new HashSet<Pair<Integer, ContentAssistEntry>>
 			val acceptor = new IIdeContentProposalAcceptor {
 				override accept(ContentAssistEntry entry, int priority) {
-					if (entry.proposal === null)
-						throw new IllegalArgumentException('proposal must not be null.')
-					proposals.add(priority -> entry)
+					if (entry !== null) {
+						if (entry.proposal === null)
+							throw new IllegalArgumentException('proposal must not be null.')
+						proposals.add(priority -> entry)
+					}
 				}
 				override canAcceptMoreProposals() {
 					proposals.size < proposalsLimit

@@ -30,6 +30,8 @@ import org.eclipse.xtext.util.TextRegion
  */
 abstract class AbstractIdeTemplateProposalProvider {
 	
+	@Inject IdeContentProposalCreator proposalCreator
+	
 	@Inject IdeContentProposalPriorities proposalPriorities
 	
 	/** Placeholder for a variable (edit position) in a template. */
@@ -66,7 +68,7 @@ abstract class AbstractIdeTemplateProposalProvider {
 	}
 	
 	protected def boolean canAcceptProposal(ContentAssistEntry entry, ContentAssistContext context) {
-		entry.proposal.startsWith(context.prefix)
+		proposalCreator.isValidProposal(entry.proposal, entry.prefix, context)
 	}
 	
 	protected def ContentAssistEntry createProposal(StringConcatenationClient template,

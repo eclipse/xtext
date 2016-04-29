@@ -16,6 +16,7 @@ import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.util.ITextRegion;
@@ -155,6 +156,9 @@ public abstract class AbstractIdeTemplateProposalProvider {
   }
   
   @Inject
+  private IdeContentProposalCreator proposalCreator;
+  
+  @Inject
   private IdeContentProposalPriorities proposalPriorities;
   
   protected AbstractIdeTemplateProposalProvider.Variable variable(final String name) {
@@ -182,8 +186,8 @@ public abstract class AbstractIdeTemplateProposalProvider {
   
   protected boolean canAcceptProposal(final ContentAssistEntry entry, final ContentAssistContext context) {
     String _proposal = entry.getProposal();
-    String _prefix = context.getPrefix();
-    return _proposal.startsWith(_prefix);
+    String _prefix = entry.getPrefix();
+    return this.proposalCreator.isValidProposal(_proposal, _prefix, context);
   }
   
   protected ContentAssistEntry createProposal(final StringConcatenationClient template, final ContentAssistContext context, final boolean adaptIndentation) {

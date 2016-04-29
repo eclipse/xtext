@@ -210,6 +210,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     this.addRuntimeBindingsAndImports();
     this.addUiBindingsAndImports();
+    this.addWebBindings();
   }
   
   public void setLookaheadThreshold(final String lookaheadThreshold) {
@@ -1349,7 +1350,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
   }
   
-  public void addRuntimeBindingsAndImports() {
+  protected void addRuntimeBindingsAndImports() {
     @Extension
     final GrammarNaming naming = this.productionNaming;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
@@ -1463,7 +1464,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     rtBindings.contributeTo(_runtimeGenModule);
   }
   
-  public void addUiBindingsAndImports() {
+  protected void addUiBindingsAndImports() {
     @Extension
     final ContentAssistGrammarNaming naming = this.contentAssistNaming;
     Grammar _grammar = this.getGrammar();
@@ -1598,6 +1599,49 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     uiBindings.contributeTo(_eclipsePluginGenModule);
+  }
+  
+  protected void addWebBindings() {
+    @Extension
+    final ContentAssistGrammarNaming naming = this.contentAssistNaming;
+    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
+    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper");
+    TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper");
+    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _typeRef_1);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("binder.bind(");
+        Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
+        TypeReference _lexerSuperClass = naming.getLexerSuperClass(_grammar);
+        _builder.append(_lexerSuperClass, "");
+        _builder.append(".class)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".annotatedWith(");
+        _builder.append(Names.class, "\t");
+        _builder.append(".named(");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.LexerIdeBindings");
+        _builder.append(_typeRef, "\t");
+        _builder.append(".CONTENT_ASSIST))");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".to(");
+        Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
+        TypeReference _lexerClass = naming.getLexerClass(_grammar_1);
+        _builder.append(_lexerClass, "\t");
+        _builder.append(".class);");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType.addConfiguredBinding("ContentAssistLexer", _client);
+    TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
+    Grammar _grammar = this.getGrammar();
+    TypeReference _parserClass = naming.getParserClass(_grammar);
+    final GuiceModuleAccess.BindingFactory webBindings = _addConfiguredBinding.addTypeToType(_typeRef_2, _parserClass);
+    IXtextGeneratorLanguage _language = this.getLanguage();
+    GuiceModuleAccess _webGenModule = _language.getWebGenModule();
+    webBindings.contributeTo(_webGenModule);
   }
   
   public void setDebugGrammar(final boolean debugGrammar) {

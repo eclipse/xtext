@@ -20,20 +20,22 @@ import org.eclipse.xtext.xbase.scoping.batch.StaticFeatureDescriptionWithTypeLit
 class XbaseIdeContentProposalPriorities extends IdeContentProposalPriorities {
 	
 	override getCrossRefPriority(IEObjectDescription objectDesc, ContentAssistEntry entry) {
-		switch objectDesc {
-			SimpleIdentifiableElementDescription case entry.proposal != 'this' && entry.proposal != 'super':
-				return adjustPriority(entry, crossRefPriority + 70)
-			
-			StaticFeatureDescriptionWithTypeLiteralReceiver:
-				return adjustPriority(entry, crossRefPriority + 60)
-
-			IIdentifiableElementDescription : {
-				switch objectDesc.elementOrProxy {
-					JvmField : {
-						return adjustPriority(entry, crossRefPriority + 50)
-					}
-					JvmExecutable : {
-						return adjustPriority(entry, crossRefPriority + 20)
+		if (entry !== null) {
+			switch objectDesc {
+				SimpleIdentifiableElementDescription case entry.proposal != 'this' && entry.proposal != 'super':
+					return adjustPriority(entry, crossRefPriority + 70)
+				
+				StaticFeatureDescriptionWithTypeLiteralReceiver:
+					return adjustPriority(entry, crossRefPriority + 60)
+	
+				IIdentifiableElementDescription : {
+					switch objectDesc.elementOrProxy {
+						JvmField : {
+							return adjustPriority(entry, crossRefPriority + 50)
+						}
+						JvmExecutable : {
+							return adjustPriority(entry, crossRefPriority + 20)
+						}
 					}
 				}
 			}

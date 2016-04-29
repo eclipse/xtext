@@ -11,6 +11,10 @@ import com.google.inject.Binder
 import com.google.inject.name.Names
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.LexerIdeBindings
+import org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher
+import org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher
+import org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper
+import org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
 import org.eclipse.xtext.idea.example.entities.ide.contentassist.antlr.EntitiesParser
@@ -31,6 +35,14 @@ class EntitiesWebModule extends DefaultXbaseWebModule {
 
 	def Class<? extends IContentAssistParser> bindIContentAssistParser() {
 		EntitiesParser
+	}
+	
+	def Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
+		return AntlrProposalConflictHelper
+	}
+	
+	def Class<? extends IPrefixMatcher> bindIPrefixMatcher() {
+		return FQNPrefixMatcher
 	}
 	
 	def Class<? extends IServerResourceHandler> bindIServerResourceHandler() {

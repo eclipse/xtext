@@ -41,6 +41,7 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.Transition;
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.StateImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.StateImpl#getCommands <em>Commands</em>}</li>
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.StateImpl#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.StateImpl#getNestedStates <em>Nested States</em>}</li>
  * </ul>
  *
  * @generated
@@ -86,6 +87,16 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * @ordered
    */
   protected EList<Transition> transitions;
+
+  /**
+   * The cached value of the '{@link #getNestedStates() <em>Nested States</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNestedStates()
+   * @generated
+   * @ordered
+   */
+  protected EList<State> nestedStates;
 
   /**
    * <!-- begin-user-doc -->
@@ -164,6 +175,20 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<State> getNestedStates()
+  {
+    if (nestedStates == null)
+    {
+      nestedStates = new EObjectContainmentEList<State>(State.class, this, StatemachinePackage.STATE__NESTED_STATES);
+    }
+    return nestedStates;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -173,6 +198,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
         return ((InternalEList<?>)getCommands()).basicRemove(otherEnd, msgs);
       case StatemachinePackage.STATE__TRANSITIONS:
         return ((InternalEList<?>)getTransitions()).basicRemove(otherEnd, msgs);
+      case StatemachinePackage.STATE__NESTED_STATES:
+        return ((InternalEList<?>)getNestedStates()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -193,6 +220,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
         return getCommands();
       case StatemachinePackage.STATE__TRANSITIONS:
         return getTransitions();
+      case StatemachinePackage.STATE__NESTED_STATES:
+        return getNestedStates();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -219,6 +248,10 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
         getTransitions().clear();
         getTransitions().addAll((Collection<? extends Transition>)newValue);
         return;
+      case StatemachinePackage.STATE__NESTED_STATES:
+        getNestedStates().clear();
+        getNestedStates().addAll((Collection<? extends State>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -242,6 +275,9 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
       case StatemachinePackage.STATE__TRANSITIONS:
         getTransitions().clear();
         return;
+      case StatemachinePackage.STATE__NESTED_STATES:
+        getNestedStates().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -262,6 +298,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
         return commands != null && !commands.isEmpty();
       case StatemachinePackage.STATE__TRANSITIONS:
         return transitions != null && !transitions.isEmpty();
+      case StatemachinePackage.STATE__NESTED_STATES:
+        return nestedStates != null && !nestedStates.isEmpty();
     }
     return super.eIsSet(featureID);
   }

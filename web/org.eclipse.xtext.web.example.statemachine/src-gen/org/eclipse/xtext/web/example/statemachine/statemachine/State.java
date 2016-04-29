@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.State#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.State#getCommands <em>Commands</em>}</li>
  *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.State#getTransitions <em>Transitions</em>}</li>
+ *   <li>{@link org.eclipse.xtext.web.example.statemachine.statemachine.State#getNestedStates <em>Nested States</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getState()
@@ -90,5 +91,21 @@ public interface State extends EObject
    * @generated
    */
   EList<Transition> getTransitions();
+
+  /**
+   * Returns the value of the '<em><b>Nested States</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.web.example.statemachine.statemachine.State}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Nested States</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Nested States</em>' containment reference list.
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage#getState_NestedStates()
+   * @model containment="true"
+   * @generated
+   */
+  EList<State> getNestedStates();
 
 } // State

@@ -222,13 +222,22 @@ public interface StatemachinePackage extends EPackage
   int STATE__TRANSITIONS = 2;
 
   /**
+   * The feature id for the '<em><b>Nested States</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__NESTED_STATES = 3;
+
+  /**
    * The number of structural features of the '<em>State</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATE_FEATURE_COUNT = 3;
+  int STATE_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.TransitionImpl <em>Transition</em>}' class.
@@ -487,6 +496,17 @@ public interface StatemachinePackage extends EPackage
   EReference getState_Transitions();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.web.example.statemachine.statemachine.State#getNestedStates <em>Nested States</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Nested States</em>'.
+   * @see org.eclipse.xtext.web.example.statemachine.statemachine.State#getNestedStates()
+   * @see #getState()
+   * @generated
+   */
+  EReference getState_NestedStates();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.web.example.statemachine.statemachine.Transition <em>Transition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -723,6 +743,14 @@ public interface StatemachinePackage extends EPackage
      * @generated
      */
     EReference STATE__TRANSITIONS = eINSTANCE.getState_Transitions();
+
+    /**
+     * The meta object literal for the '<em><b>Nested States</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE__NESTED_STATES = eINSTANCE.getState_NestedStates();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.web.example.statemachine.statemachine.impl.TransitionImpl <em>Transition</em>}' class.
