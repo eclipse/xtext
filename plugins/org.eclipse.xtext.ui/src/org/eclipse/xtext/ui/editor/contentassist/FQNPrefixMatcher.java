@@ -73,10 +73,10 @@ public class FQNPrefixMatcher extends PrefixMatcher {
 				if (lastSegment != null && delegate.isCandidateMatchingPrefix(lastSegment, prefix))
 					return true;
 			} else {
-				List<String> splitPrefix = Strings.split(prefix, '.');
+				List<String> splitPrefix = Strings.split(prefix, delimiter);
 				if (splitPrefix.isEmpty())
 					return false;
-				List<String> splitName = Strings.split(name, '.');
+				List<String> splitName = Strings.split(name, delimiter);
 				if (splitName.size() < splitPrefix.size()) {
 					return false;
 				}
