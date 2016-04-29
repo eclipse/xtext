@@ -30,10 +30,11 @@ State:
 	'state' name=ID
 		commands+=Command*
 		transitions+=Transition*
+		nestedStates+=State*
 	'end';
 
 Transition:
-	'if' condition=Condition 'goto' state=[State];
+	'if' condition=Condition 'goto' state=[State|QualifiedName];
 
 Condition:
 	events+=Event ('and' events+=Event)*;
@@ -43,6 +44,9 @@ Event:
 
 Command:
 	'set' signal=[Signal] '=' newValue=BOOLEAN;
+
+QualifiedName:
+	ID ('.' ID)*;
 
 terminal BOOLEAN returns ecore::EBoolean:
 	'true' | 'false';

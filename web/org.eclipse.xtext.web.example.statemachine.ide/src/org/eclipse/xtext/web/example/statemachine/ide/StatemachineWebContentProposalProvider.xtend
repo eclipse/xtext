@@ -31,17 +31,11 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 			
 			case BOOLEANRule: {
 				if ('true'.startsWith(context.prefix)) {
-					val trueEntry = new ContentAssistEntry => [
-						prefix = context.prefix
-						proposal = 'true'
-					]
+					val trueEntry = proposalCreator.createProposal('true', context)
 					acceptor.accept(trueEntry, proposalPriorities.getDefaultPriority(trueEntry))
 				}
 				if ('false'.startsWith(context.prefix)) {
-					val falseEntry = new ContentAssistEntry => [
-						prefix = context.prefix
-						proposal = 'false'
-					]
+					val falseEntry = proposalCreator.createProposal('false', context)
 					acceptor.accept(falseEntry, proposalPriorities.getDefaultPriority(falseEntry))
 				}
 			}
@@ -60,10 +54,8 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 			case eventAccess.signalAssignment_0: {
 				val scope = scopeProvider.getScope(context.currentModel, EVENT__SIGNAL)
 				for (description : scope.allElements.filter[getEClass == INPUT_SIGNAL]) {
-					val entry = new ContentAssistEntry => [
+					val entry = proposalCreator.createProposal(description.name.toString, context) [
 						source = description
-						prefix = context.prefix
-						proposal = description.name.toString
 						description = 'input signal'
 					]
 					acceptor.accept(entry, proposalPriorities.getCrossRefPriority(description, entry))
@@ -73,10 +65,8 @@ class StatemachineWebContentProposalProvider extends IdeContentProposalProvider 
 			case commandAccess.signalAssignment_1: {
 				val scope = scopeProvider.getScope(context.currentModel, COMMAND__SIGNAL)
 				for (description : scope.allElements.filter[getEClass == OUTPUT_SIGNAL]) {
-					val entry = new ContentAssistEntry => [
+					val entry = proposalCreator.createProposal(description.name.toString, context) [
 						source = description
-						prefix = context.prefix
-						proposal = description.name.toString
 						description = 'output signal'
 					]
 					acceptor.accept(entry, proposalPriorities.getCrossRefPriority(description, entry))

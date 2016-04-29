@@ -180,7 +180,8 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      editPositions = ArrayList (
 			        [47:0]
 			      )
-			    ]
+			    ],
+			    «operators»
 			  )
 			]''')
 	}
@@ -230,5 +231,122 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			  )
 			]''')
 	}
+	
+	def private operators() '''
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "!="
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "!=="
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "&&"
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "+"
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "->"
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "<"
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "<="
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "<=>"
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "=="
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "==="
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "=>"
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = ">"
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = ">="
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "?:"
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = "||"
+	      description = "JvmOperation"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList ()
+	    ],
+	    ContentAssistEntry [
+	      prefix = ""
+	      proposal = ""value""
+	      description = "STRING"
+	      textReplacements = ArrayList ()
+	      editPositions = ArrayList (
+	        [44:5]
+	      )
+	    ]
+	'''
 	
 }
