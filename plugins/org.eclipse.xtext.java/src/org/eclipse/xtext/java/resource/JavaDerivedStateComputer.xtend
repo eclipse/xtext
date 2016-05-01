@@ -51,10 +51,12 @@ class JavaDerivedStateComputer {
 				new DefaultProblemFactory()), true)
 		val compilationResult = new CompilationResult(compilationUnit, 0, 1, -1)
 		val result = parser.dietParse(compilationUnit, compilationResult)
-		for (type : result.types) {
-			val packageName = result.currentPackage?.importName?.map[String.valueOf(it)]?.join('.')
-			val jvmType = createType(type, packageName)
-			resource.contents.add(jvmType)
+		if (result.types != null) {
+			for (type : result.types) {
+				val packageName = result.currentPackage?.importName?.map[String.valueOf(it)]?.join('.')
+				val jvmType = createType(type, packageName)
+				resource.contents.add(jvmType)
+			}
 		}
 	}
 	
