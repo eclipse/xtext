@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -183,5 +184,12 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
   @Override
   public void testParameterNames_03() {
     this.doTestParameterName(ClassWithVarArgs.class, "method(java.lang.String[])", "arg0");
+  }
+  
+  @Ignore
+  @Test
+  @Override
+  public void testFindTypeByName_NestedTypeQualifiedWithSubType_02() {
+    super.testFindTypeByName_NestedTypeQualifiedWithSubType_02();
   }
 }

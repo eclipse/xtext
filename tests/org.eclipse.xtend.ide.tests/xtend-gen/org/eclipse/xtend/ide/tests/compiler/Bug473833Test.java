@@ -89,6 +89,52 @@ public class Bug473833Test extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testInheritedNestedTypes_java_decl_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package somePackage;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("public class Outer {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("public static class Inner {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.workbenchTestHelper.createFile("somePackage/Outer.java", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package somePackage;");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("public class Outer2 extends Outer {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.workbenchTestHelper.createFile("somePackage/Outer2.java", _builder_1.toString());
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package myPackage");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("import somePackage.Outer2.Inner");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("class AnonymousClassTest extends Inner {");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("Inner inner");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      final IFile file = this.workbenchTestHelper.createFile("myPackage/MyClass.xtend", _builder_2.toString());
+      IResourcesSetupUtil.waitForBuild();
+      this.assertNoErrors(file);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testInheritedNestedTypes_02() {
     try {
       StringConcatenation _builder = new StringConcatenation();

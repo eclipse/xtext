@@ -13,16 +13,17 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy;
 import org.eclipse.xtext.java.tests.JavaInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.InMemoryURIHandler;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -57,19 +58,25 @@ public class ResourceDescriptionProviderTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+    final Procedure1<IResourceDescription> _function = new Procedure1<IResourceDescription>() {
       @Override
-      public void apply(final JvmGenericType it) {
-        String _qualifiedName = it.getQualifiedName();
-        Assert.assertEquals("MyTest", _qualifiedName);
-        boolean _isInterface = it.isInterface();
+      public void apply(final IResourceDescription it) {
+        Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
+        IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
+        QualifiedName _qualifiedName = _head.getQualifiedName();
+        String _string = _qualifiedName.toString();
+        Assert.assertEquals("MyTest", _string);
+        Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
+        IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
+        EObject _eObjectOrProxy = _head_1.getEObjectOrProxy();
+        boolean _isInterface = ((JvmGenericType) _eObjectOrProxy).isInterface();
         Assert.assertFalse(_isInterface);
-        EList<JvmMember> _members = it.getMembers();
-        int _size = _members.size();
-        Assert.assertEquals(0, _size);
+        Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
+        int _size = IterableExtensions.size(_exportedObjects_2);
+        Assert.assertEquals(1, _size);
       }
     };
-    this.<JvmGenericType>resultsIn(_builder, _function);
+    this.resultsIn(_builder, _function);
   }
   
   @Test
@@ -82,19 +89,25 @@ public class ResourceDescriptionProviderTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+    final Procedure1<IResourceDescription> _function = new Procedure1<IResourceDescription>() {
       @Override
-      public void apply(final JvmGenericType it) {
-        String _qualifiedName = it.getQualifiedName();
-        Assert.assertEquals("MyTest", _qualifiedName);
-        boolean _isInterface = it.isInterface();
+      public void apply(final IResourceDescription it) {
+        Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
+        IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
+        QualifiedName _qualifiedName = _head.getQualifiedName();
+        String _string = _qualifiedName.toString();
+        Assert.assertEquals("MyTest", _string);
+        Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
+        IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
+        EObject _eObjectOrProxy = _head_1.getEObjectOrProxy();
+        boolean _isInterface = ((JvmGenericType) _eObjectOrProxy).isInterface();
         Assert.assertTrue(_isInterface);
-        EList<JvmMember> _members = it.getMembers();
-        int _size = _members.size();
-        Assert.assertEquals(0, _size);
+        Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
+        int _size = IterableExtensions.size(_exportedObjects_2);
+        Assert.assertEquals(1, _size);
       }
     };
-    this.<JvmGenericType>resultsIn(_builder, _function);
+    this.resultsIn(_builder, _function);
   }
   
   @Test
@@ -107,18 +120,24 @@ public class ResourceDescriptionProviderTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
+    final Procedure1<IResourceDescription> _function = new Procedure1<IResourceDescription>() {
       @Override
-      public void apply(final JvmDeclaredType it) {
-        String _qualifiedName = it.getQualifiedName();
-        Assert.assertEquals("MyTest", _qualifiedName);
-        Assert.assertTrue((it instanceof JvmEnumerationType));
-        EList<JvmMember> _members = it.getMembers();
-        int _size = _members.size();
-        Assert.assertEquals(0, _size);
+      public void apply(final IResourceDescription it) {
+        Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
+        IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
+        QualifiedName _qualifiedName = _head.getQualifiedName();
+        String _string = _qualifiedName.toString();
+        Assert.assertEquals("MyTest", _string);
+        Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
+        IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
+        EObject _eObjectOrProxy = _head_1.getEObjectOrProxy();
+        Assert.assertTrue((_eObjectOrProxy instanceof JvmEnumerationType));
+        Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
+        int _size = IterableExtensions.size(_exportedObjects_2);
+        Assert.assertEquals(1, _size);
       }
     };
-    this.<JvmDeclaredType>resultsIn(_builder, _function);
+    this.resultsIn(_builder, _function);
   }
   
   @Test
@@ -131,18 +150,24 @@ public class ResourceDescriptionProviderTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
+    final Procedure1<IResourceDescription> _function = new Procedure1<IResourceDescription>() {
       @Override
-      public void apply(final JvmDeclaredType it) {
-        String _qualifiedName = it.getQualifiedName();
-        Assert.assertEquals("MyTest", _qualifiedName);
-        Assert.assertTrue((it instanceof JvmAnnotationType));
-        EList<JvmMember> _members = it.getMembers();
-        int _size = _members.size();
-        Assert.assertEquals(0, _size);
+      public void apply(final IResourceDescription it) {
+        Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
+        IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
+        QualifiedName _qualifiedName = _head.getQualifiedName();
+        String _string = _qualifiedName.toString();
+        Assert.assertEquals("MyTest", _string);
+        Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
+        IEObjectDescription _head_1 = IterableExtensions.<IEObjectDescription>head(_exportedObjects_1);
+        EObject _eObjectOrProxy = _head_1.getEObjectOrProxy();
+        Assert.assertTrue((_eObjectOrProxy instanceof JvmAnnotationType));
+        Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
+        int _size = IterableExtensions.size(_exportedObjects_2);
+        Assert.assertEquals(1, _size);
       }
     };
-    this.<JvmDeclaredType>resultsIn(_builder, _function);
+    this.resultsIn(_builder, _function);
   }
   
   @Test
@@ -158,17 +183,20 @@ public class ResourceDescriptionProviderTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
+    final Procedure1<IResourceDescription> _function = new Procedure1<IResourceDescription>() {
       @Override
-      public void apply(final JvmDeclaredType it) {
-        String _qualifiedName = it.getQualifiedName();
-        Assert.assertEquals("my.pack.MyTest", _qualifiedName);
-        EList<JvmMember> _members = it.getMembers();
-        int _size = _members.size();
-        Assert.assertEquals(0, _size);
+      public void apply(final IResourceDescription it) {
+        Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
+        IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
+        QualifiedName _qualifiedName = _head.getQualifiedName();
+        String _string = _qualifiedName.toString();
+        Assert.assertEquals("my.pack.MyTest", _string);
+        Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
+        int _size = IterableExtensions.size(_exportedObjects_1);
+        Assert.assertEquals(1, _size);
       }
     };
-    this.<JvmDeclaredType>resultsIn(_builder, _function);
+    this.resultsIn(_builder, _function);
   }
   
   @Test
@@ -193,61 +221,72 @@ public class ResourceDescriptionProviderTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
+    final Procedure1<IResourceDescription> _function = new Procedure1<IResourceDescription>() {
       @Override
-      public void apply(final JvmDeclaredType it) {
-        String _qualifiedName = it.getQualifiedName();
-        Assert.assertEquals("my.pack.MyTest", _qualifiedName);
-        EList<JvmMember> _members = it.getMembers();
-        int _size = _members.size();
-        Assert.assertEquals(4, _size);
-        EList<JvmMember> _members_1 = it.getMembers();
-        JvmMember _get = _members_1.get(0);
-        final Procedure1<JvmMember> _function = new Procedure1<JvmMember>() {
+      public void apply(final IResourceDescription it) {
+        Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
+        IEObjectDescription _head = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
+        QualifiedName _qualifiedName = _head.getQualifiedName();
+        String _string = _qualifiedName.toString();
+        Assert.assertEquals("my.pack.MyTest", _string);
+        Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
+        int _size = IterableExtensions.size(_exportedObjects_1);
+        Assert.assertEquals(5, _size);
+        Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
+        IEObjectDescription _get = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_2, IEObjectDescription.class))[1];
+        final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
           @Override
-          public void apply(final JvmMember it) {
-            String _qualifiedName = it.getQualifiedName();
-            Assert.assertEquals("my.pack.MyTest$InnerClass", _qualifiedName);
-            Assert.assertTrue((it instanceof JvmGenericType));
+          public void apply(final IEObjectDescription it) {
+            QualifiedName _qualifiedName = it.getQualifiedName();
+            String _string = _qualifiedName.toString();
+            Assert.assertEquals("my.pack.MyTest.InnerClass", _string);
+            EObject _eObjectOrProxy = it.getEObjectOrProxy();
+            Assert.assertTrue((_eObjectOrProxy instanceof JvmGenericType));
           }
         };
-        ObjectExtensions.<JvmMember>operator_doubleArrow(_get, _function);
-        EList<JvmMember> _members_2 = it.getMembers();
-        JvmMember _get_1 = _members_2.get(1);
-        final Procedure1<JvmMember> _function_1 = new Procedure1<JvmMember>() {
+        ObjectExtensions.<IEObjectDescription>operator_doubleArrow(_get, _function);
+        Iterable<IEObjectDescription> _exportedObjects_3 = it.getExportedObjects();
+        IEObjectDescription _get_1 = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_3, IEObjectDescription.class))[2];
+        final Procedure1<IEObjectDescription> _function_1 = new Procedure1<IEObjectDescription>() {
           @Override
-          public void apply(final JvmMember it) {
-            String _qualifiedName = it.getQualifiedName();
-            Assert.assertEquals("my.pack.MyTest$InnerInterface", _qualifiedName);
-            Assert.assertTrue((it instanceof JvmGenericType));
+          public void apply(final IEObjectDescription it) {
+            QualifiedName _qualifiedName = it.getQualifiedName();
+            String _string = _qualifiedName.toString();
+            Assert.assertEquals("my.pack.MyTest.InnerInterface", _string);
+            EObject _eObjectOrProxy = it.getEObjectOrProxy();
+            Assert.assertTrue((_eObjectOrProxy instanceof JvmGenericType));
           }
         };
-        ObjectExtensions.<JvmMember>operator_doubleArrow(_get_1, _function_1);
-        EList<JvmMember> _members_3 = it.getMembers();
-        JvmMember _get_2 = _members_3.get(2);
-        final Procedure1<JvmMember> _function_2 = new Procedure1<JvmMember>() {
+        ObjectExtensions.<IEObjectDescription>operator_doubleArrow(_get_1, _function_1);
+        Iterable<IEObjectDescription> _exportedObjects_4 = it.getExportedObjects();
+        IEObjectDescription _get_2 = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_4, IEObjectDescription.class))[3];
+        final Procedure1<IEObjectDescription> _function_2 = new Procedure1<IEObjectDescription>() {
           @Override
-          public void apply(final JvmMember it) {
-            String _qualifiedName = it.getQualifiedName();
-            Assert.assertEquals("my.pack.MyTest$InnerEnum", _qualifiedName);
-            Assert.assertTrue((it instanceof JvmEnumerationType));
+          public void apply(final IEObjectDescription it) {
+            QualifiedName _qualifiedName = it.getQualifiedName();
+            String _string = _qualifiedName.toString();
+            Assert.assertEquals("my.pack.MyTest.InnerEnum", _string);
+            EObject _eObjectOrProxy = it.getEObjectOrProxy();
+            Assert.assertTrue((_eObjectOrProxy instanceof JvmEnumerationType));
           }
         };
-        ObjectExtensions.<JvmMember>operator_doubleArrow(_get_2, _function_2);
-        EList<JvmMember> _members_4 = it.getMembers();
-        JvmMember _get_3 = _members_4.get(3);
-        final Procedure1<JvmMember> _function_3 = new Procedure1<JvmMember>() {
+        ObjectExtensions.<IEObjectDescription>operator_doubleArrow(_get_2, _function_2);
+        Iterable<IEObjectDescription> _exportedObjects_5 = it.getExportedObjects();
+        IEObjectDescription _get_3 = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_5, IEObjectDescription.class))[4];
+        final Procedure1<IEObjectDescription> _function_3 = new Procedure1<IEObjectDescription>() {
           @Override
-          public void apply(final JvmMember it) {
-            String _qualifiedName = it.getQualifiedName();
-            Assert.assertEquals("my.pack.MyTest$InnerAnnotation", _qualifiedName);
-            Assert.assertTrue((it instanceof JvmAnnotationType));
+          public void apply(final IEObjectDescription it) {
+            QualifiedName _qualifiedName = it.getQualifiedName();
+            String _string = _qualifiedName.toString();
+            Assert.assertEquals("my.pack.MyTest.InnerAnnotation", _string);
+            EObject _eObjectOrProxy = it.getEObjectOrProxy();
+            Assert.assertTrue((_eObjectOrProxy instanceof JvmAnnotationType));
           }
         };
-        ObjectExtensions.<JvmMember>operator_doubleArrow(_get_3, _function_3);
+        ObjectExtensions.<IEObjectDescription>operator_doubleArrow(_get_3, _function_3);
       }
     };
-    this.<JvmDeclaredType>resultsIn(_builder, _function);
+    this.resultsIn(_builder, _function);
   }
   
   @Test
@@ -269,70 +308,63 @@ public class ResourceDescriptionProviderTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+    final Procedure1<IResourceDescription> _function = new Procedure1<IResourceDescription>() {
       @Override
-      public void apply(final JvmGenericType it) {
-        String _qualifiedName = it.getQualifiedName();
-        Assert.assertEquals("my.pack.MyTest", _qualifiedName);
-        EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
-        int _size = _typeParameters.size();
-        Assert.assertEquals(1, _size);
-        EList<JvmTypeParameter> _typeParameters_1 = it.getTypeParameters();
-        JvmTypeParameter _head = IterableExtensions.<JvmTypeParameter>head(_typeParameters_1);
-        String _name = _head.getName();
-        Assert.assertEquals("T", _name);
-        EList<JvmMember> _members = it.getMembers();
-        JvmMember _head_1 = IterableExtensions.<JvmMember>head(_members);
-        final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-          @Override
-          public void apply(final JvmGenericType it) {
-            String _qualifiedName = it.getQualifiedName();
-            Assert.assertEquals("my.pack.MyTest$InnerInterface", _qualifiedName);
-            EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
-            int _size = _typeParameters.size();
-            Assert.assertEquals(2, _size);
-            EList<JvmTypeParameter> _typeParameters_1 = it.getTypeParameters();
-            JvmTypeParameter _head = IterableExtensions.<JvmTypeParameter>head(_typeParameters_1);
-            String _name = _head.getName();
-            Assert.assertEquals("A", _name);
-            EList<JvmMember> _members = it.getMembers();
-            JvmMember _head_1 = IterableExtensions.<JvmMember>head(_members);
-            final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-              @Override
-              public void apply(final JvmGenericType it) {
-                String _qualifiedName = it.getQualifiedName();
-                Assert.assertEquals("my.pack.MyTest$InnerInterface$DeepNested", _qualifiedName);
-                EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
-                int _size = _typeParameters.size();
-                Assert.assertEquals(1, _size);
-                EList<JvmTypeParameter> _typeParameters_1 = it.getTypeParameters();
-                JvmTypeParameter _head = IterableExtensions.<JvmTypeParameter>head(_typeParameters_1);
-                String _name = _head.getName();
-                Assert.assertEquals("X", _name);
-              }
-            };
-            ObjectExtensions.<JvmGenericType>operator_doubleArrow(
-              ((JvmGenericType) _head_1), _function);
-          }
-        };
-        ObjectExtensions.<JvmGenericType>operator_doubleArrow(
-          ((JvmGenericType) _head_1), _function);
+      public void apply(final IResourceDescription it) {
+        Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
+        final IEObjectDescription mytest = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
+        QualifiedName _qualifiedName = mytest.getQualifiedName();
+        String _string = _qualifiedName.toString();
+        Assert.assertEquals("my.pack.MyTest", _string);
+        String _userData = mytest.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS);
+        Assert.assertEquals("<T>", _userData);
+        Iterable<IEObjectDescription> _exportedObjects_1 = it.getExportedObjects();
+        final IEObjectDescription innerinterface = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_1, IEObjectDescription.class))[1];
+        QualifiedName _qualifiedName_1 = innerinterface.getQualifiedName();
+        String _string_1 = _qualifiedName_1.toString();
+        Assert.assertEquals("my.pack.MyTest.InnerInterface", _string_1);
+        String _userData_1 = innerinterface.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS);
+        Assert.assertEquals("<A,B>", _userData_1);
+        String _string_2 = Boolean.TRUE.toString();
+        String _userData_2 = innerinterface.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE);
+        Assert.assertEquals(_string_2, _userData_2);
+        Iterable<IEObjectDescription> _exportedObjects_2 = it.getExportedObjects();
+        final IEObjectDescription deepNested = ((IEObjectDescription[])Conversions.unwrapArray(_exportedObjects_2, IEObjectDescription.class))[2];
+        QualifiedName _qualifiedName_2 = deepNested.getQualifiedName();
+        String _string_3 = _qualifiedName_2.toString();
+        Assert.assertEquals("my.pack.MyTest.InnerInterface.DeepNested", _string_3);
+        String _userData_3 = deepNested.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS);
+        Assert.assertEquals("<X>", _userData_3);
       }
     };
-    this.<JvmGenericType>resultsIn(_builder, _function);
+    this.resultsIn(_builder, _function);
   }
   
-  protected <T extends JvmDeclaredType> void resultsIn(final CharSequence javaCode, final Procedure1<? super T> assertion) {
+  @Test
+  public void testEmptyFile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("//package my.pack;");
+    _builder.newLine();
+    final Procedure1<IResourceDescription> _function = new Procedure1<IResourceDescription>() {
+      @Override
+      public void apply(final IResourceDescription it) {
+        Iterable<IEObjectDescription> _exportedObjects = it.getExportedObjects();
+        boolean _isEmpty = IterableExtensions.isEmpty(_exportedObjects);
+        Assert.assertTrue(_isEmpty);
+      }
+    };
+    this.resultsIn(_builder, _function);
+  }
+  
+  protected void resultsIn(final CharSequence javaCode, final Procedure1<? super IResourceDescription> assertion) {
     String _string = javaCode.toString();
     Pair<String, String> _mappedTo = Pair.<String, String>of("SomeJava.java", _string);
     final XtextResourceSet resourceSet = this.resourceSet(_mappedTo);
     this.compilerPhases.setIndexing(resourceSet, true);
     EList<Resource> _resources = resourceSet.getResources();
     final Resource resource = IterableExtensions.<Resource>head(_resources);
-    EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
-    final T type = ((T) _head);
-    assertion.apply(type);
+    final IResourceDescription description = this.resourceDesriptionManager.getResourceDescription(resource);
+    assertion.apply(description);
   }
   
   @Inject
@@ -340,6 +372,9 @@ public class ResourceDescriptionProviderTest {
   
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
+  
+  @Inject
+  private IResourceDescription.Manager resourceDesriptionManager;
   
   protected XtextResourceSet resourceSet(final Pair<String, String>... files) {
     final XtextResourceSet result = this.resourceSetProvider.get();

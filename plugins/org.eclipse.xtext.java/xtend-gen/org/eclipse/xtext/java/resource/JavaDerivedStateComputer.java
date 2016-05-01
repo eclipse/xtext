@@ -88,31 +88,34 @@ public class JavaDerivedStateComputer {
     final Parser parser = new Parser(_problemReporter, true);
     final CompilationResult compilationResult = new CompilationResult(compilationUnit, 0, 1, (-1));
     final CompilationUnitDeclaration result = parser.dietParse(compilationUnit, compilationResult);
-    for (final TypeDeclaration type : result.types) {
-      {
-        ImportReference _currentPackage = result.currentPackage;
-        char[][] _importName = null;
-        if (_currentPackage!=null) {
-          _importName=_currentPackage.getImportName();
+    boolean _notEquals = (!Objects.equal(result.types, null));
+    if (_notEquals) {
+      for (final TypeDeclaration type : result.types) {
+        {
+          ImportReference _currentPackage = result.currentPackage;
+          char[][] _importName = null;
+          if (_currentPackage!=null) {
+            _importName=_currentPackage.getImportName();
+          }
+          List<String> _map = null;
+          if (((List<char[]>)Conversions.doWrapArray(_importName))!=null) {
+            final Function1<char[], String> _function = new Function1<char[], String>() {
+              @Override
+              public String apply(final char[] it) {
+                return String.valueOf(it);
+              }
+            };
+            _map=ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_importName)), _function);
+          }
+          String _join = null;
+          if (_map!=null) {
+            _join=IterableExtensions.join(_map, ".");
+          }
+          final String packageName = _join;
+          final JvmDeclaredType jvmType = this.createType(type, packageName);
+          EList<EObject> _contents = resource.getContents();
+          _contents.add(jvmType);
         }
-        List<String> _map = null;
-        if (((List<char[]>)Conversions.doWrapArray(_importName))!=null) {
-          final Function1<char[], String> _function = new Function1<char[], String>() {
-            @Override
-            public String apply(final char[] it) {
-              return String.valueOf(it);
-            }
-          };
-          _map=ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_importName)), _function);
-        }
-        String _join = null;
-        if (_map!=null) {
-          _join=IterableExtensions.join(_map, ".");
-        }
-        final String packageName = _join;
-        final JvmDeclaredType jvmType = this.createType(type, packageName);
-        EList<EObject> _contents = resource.getContents();
-        _contents.add(jvmType);
       }
     }
   }
