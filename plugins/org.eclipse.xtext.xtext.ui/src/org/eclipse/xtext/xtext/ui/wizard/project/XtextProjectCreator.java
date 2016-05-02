@@ -42,6 +42,7 @@ import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 
 import com.google.common.collect.Lists;
@@ -256,6 +257,8 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		private String getConnectionLogicalPath() {
 			if (descriptor instanceof ParentProjectDescriptor) {
 				return "";
+			} else if (descriptor.getConfig().getProjectLayout() == ProjectLayout.FLAT) {
+				return "../" + descriptor.getConfig().getParentProject().getName();
 			} else {
 				return "..";
 			}
