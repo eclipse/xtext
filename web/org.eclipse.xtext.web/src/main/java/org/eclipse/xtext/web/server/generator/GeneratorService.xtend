@@ -34,7 +34,10 @@ import org.eclipse.xtext.web.server.model.XtextWebDocumentAccess
 @Singleton
 class GeneratorService extends AbstractCachedService<GeneratorService.GeneratedArtifacts> {
 	
-	/** The default artifact name that is accessed when no specific artifact is requested. */
+	/**
+	 * The default artifact name that is accessed when no specific artifact is requested.
+	 * Value: "DEFAULT_OUTPUT/DEFAULT_ARTIFACT"
+	 */
 	public static val DEFAULT_ARTIFACT = IFileSystemAccess.DEFAULT_OUTPUT + '/DEFAULT_ARTIFACT'
 	
 	/**
@@ -52,7 +55,7 @@ class GeneratorService extends AbstractCachedService<GeneratorService.GeneratedA
 	@Inject Provider<InMemoryFileSystemAccess> fileSystemAccessProvider
 	
 	/**
-	 * Generate artifacts for the given document.
+	 * Generate artifacts for the given document. The result can be fetched with {@link #getResult(XtextWebDocumentAccess)}.
 	 */
 	override compute(IXtextWebDocument it, CancelIndicator cancelIndicator) {
 		val fileSystemAccess = fileSystemAccessProvider.get
@@ -65,7 +68,14 @@ class GeneratorService extends AbstractCachedService<GeneratorService.GeneratedA
 		return result
 	}
 	
-	def getArtifact(XtextWebDocumentAccess document, String artifactId) {
+	/**
+	 * Retrieve the generated artifact with given identifier. The identifier must match the name of one of
+	 * the generator results; each name is created by concatenating the output configuration name and the file
+	 * name (see {@link InMemoryFileSystemAccess#getFileName(String,String)}). If artifactId is null,
+	 * {@link #DEFAULT_ARTIFACT} is used as identifier. If the requested artifact is in {@link IFileSystemAccess#DEFAULT_OUTPUT},
+	 * the output configuration prefix may be omitted.
+	 */
+	def GeneratorResult getArtifact(XtextWebDocumentAccess document, String artifactId) {
 		val artifacts = getResult(document).artifacts
 		val searchString = artifactId ?: DEFAULT_ARTIFACT
 		var result = artifacts.findFirst[name == searchString]
@@ -76,6 +86,33 @@ class GeneratorService extends AbstractCachedService<GeneratorService.GeneratedA
 		if (result === null)
 			throw new ResourceNotFoundException('The requested generator artifact was not found.')
 		return result
+	}
+	
+	/**
+	 * Retrieve the generated artifact with given identifier. If {@code includeContent} is false,
+	 * only the metadata is included in the service result.
+	 */
+	def GeneratorResult getArtifact(XtextWebDocumentAccess document, String artifactId, boolean includeContent) {
+		val result = getArtifact(document, artifactId)
+		if (includeContent)
+			return result
+		else
+			return new GeneratorResult(result.name, result.contentType, null)
+	}
+	
+	/**
+	 * Returns a {@link GeneratedArtifacts} result with or without content. If {@code includeContent} is false,
+	 * only the metadata is included in the service result, which is useful to explore the generated artifacts.
+	 */
+	def GeneratedArtifacts getResult(XtextWebDocumentAccess document, boolean includeContent) {
+		if (includeContent)
+			return getResult(document)
+		else {
+			val artifacts = getResult(document).artifacts
+			val result = new GeneratedArtifacts
+			result.artifacts.addAll(artifacts.map[new GeneratorResult(name, contentType, null)])
+			return result
+		}
 	}
 	
 }
