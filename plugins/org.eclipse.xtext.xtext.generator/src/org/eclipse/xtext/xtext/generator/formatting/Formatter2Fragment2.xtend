@@ -62,7 +62,9 @@ import org.eclipse.xtext.util.internal.Log
 			.addTypeToType('org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory'.typeRef,
 					'org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory'.typeRef)
 			.contributeTo(language.eclipsePluginGenModule)
-		
+		if (projectConfig.runtime.manifest !== null) {
+			projectConfig.runtime.manifest.exportedPackages += grammar.runtimeBasePackage + '.formatting2'
+		}
 		doGenerateStubFile()
 	}
 
