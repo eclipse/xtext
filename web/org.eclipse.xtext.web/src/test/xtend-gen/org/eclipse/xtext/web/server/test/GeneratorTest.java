@@ -25,6 +25,7 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine;
 import org.eclipse.xtext.web.server.IServiceResult;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.generator.GeneratorResult;
+import org.eclipse.xtext.web.server.generator.GeneratorService;
 import org.eclipse.xtext.web.server.test.AbstractWebServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -156,5 +157,133 @@ public class GeneratorTest extends AbstractWebServerTest {
     Function0<? extends IServiceResult> _service_1 = generate.getService();
     _service_1.apply();
     Assert.assertEquals(1, GeneratorTest.generatorInstance.invocationCount);
+  }
+  
+  @Test
+  public void testGetResultWithoutContent() {
+    final File file = this.createFile("state foo end state bar end");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "generate");
+    String _name = file.getName();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("artifact", "DEFAULT_OUTPUT/test.txt");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("includeContent", "false");
+    final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
+    Function0<? extends IServiceResult> _service = generate.getService();
+    IServiceResult _apply = _service.apply();
+    final GeneratorResult result = ((GeneratorResult) _apply);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("GeneratorResult [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("name = \"DEFAULT_OUTPUT/test.txt\"");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("contentType = \"text/plain\"");
+    _builder.newLine();
+    _builder.append("]");
+    final String expectedResult = _builder.toString();
+    String _string = result.toString();
+    Assert.assertEquals(expectedResult, _string);
+  }
+  
+  @Test
+  public void testGetAllResults() {
+    final File file = this.createFile("state foo end state bar end");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "generate");
+    String _name = file.getName();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("allArtifacts", "true");
+    final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
+    Function0<? extends IServiceResult> _service = generate.getService();
+    IServiceResult _apply = _service.apply();
+    final GeneratorService.GeneratedArtifacts result = ((GeneratorService.GeneratedArtifacts) _apply);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("GeneratedArtifacts [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("artifacts = ArrayList (");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("GeneratorResult [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("name = \"DEFAULT_OUTPUT/DEFAULT_ARTIFACT\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("content = \"foo,bar\\n\"");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("],");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("GeneratorResult [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("name = \"DEFAULT_OUTPUT/test.txt\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("contentType = \"text/plain\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("content = \"hello, world!\"");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("]");
+    final String expectedResult = _builder.toString();
+    String _string = result.toString();
+    Assert.assertEquals(expectedResult, _string);
+  }
+  
+  @Test
+  public void testGetAllResultsWithoutContent() {
+    final File file = this.createFile("state foo end state bar end");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "generate");
+    String _name = file.getName();
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
+    Pair<String, String> _mappedTo_2 = Pair.<String, String>of("allArtifacts", "true");
+    Pair<String, String> _mappedTo_3 = Pair.<String, String>of("includeContent", "false");
+    final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
+    Function0<? extends IServiceResult> _service = generate.getService();
+    IServiceResult _apply = _service.apply();
+    final GeneratorService.GeneratedArtifacts result = ((GeneratorService.GeneratedArtifacts) _apply);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("GeneratedArtifacts [");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("artifacts = ArrayList (");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("GeneratorResult [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("name = \"DEFAULT_OUTPUT/DEFAULT_ARTIFACT\"");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("],");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("GeneratorResult [");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("name = \"DEFAULT_OUTPUT/test.txt\"");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("contentType = \"text/plain\"");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("]");
+    final String expectedResult = _builder.toString();
+    String _string = result.toString();
+    Assert.assertEquals(expectedResult, _string);
   }
 }

@@ -884,29 +884,54 @@ public class XtextServiceDispatcher {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       final XtextWebDocumentAccess document = this.getDocumentAccess(context);
-      final String artifactId = context.getParameter("artifact");
+      Optional<Boolean> _of = Optional.<Boolean>of(Boolean.valueOf(false));
+      final boolean allArtifacts = this.getBoolean(context, "allArtifacts", _of);
+      Optional<Boolean> _of_1 = Optional.<Boolean>of(Boolean.valueOf(true));
+      final boolean includeContent = this.getBoolean(context, "includeContent", _of_1);
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
         public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
-          final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
-            @Override
-            public IServiceResult apply() {
-              IServiceResult _xtrycatchfinallyexpression = null;
-              try {
-                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.getArtifact(document, artifactId);
-              } catch (final Throwable _t) {
-                if (_t instanceof Throwable) {
-                  final Throwable throwable = (Throwable)_t;
-                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
-                } else {
-                  throw Exceptions.sneakyThrow(_t);
+          if (allArtifacts) {
+            final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
+              @Override
+              public IServiceResult apply() {
+                IServiceResult _xtrycatchfinallyexpression = null;
+                try {
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.getResult(document, includeContent);
+                } catch (final Throwable _t) {
+                  if (_t instanceof Throwable) {
+                    final Throwable throwable = (Throwable)_t;
+                    _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                  } else {
+                    throw Exceptions.sneakyThrow(_t);
+                  }
                 }
+                return _xtrycatchfinallyexpression;
               }
-              return _xtrycatchfinallyexpression;
-            }
-          };
-          it.service = _function;
+            };
+            it.service = _function;
+          } else {
+            final String artifactId = context.getParameter("artifact");
+            final Function0<IServiceResult> _function_1 = new Function0<IServiceResult>() {
+              @Override
+              public IServiceResult apply() {
+                IServiceResult _xtrycatchfinallyexpression = null;
+                try {
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.getArtifact(document, artifactId, includeContent);
+                } catch (final Throwable _t) {
+                  if (_t instanceof Throwable) {
+                    final Throwable throwable = (Throwable)_t;
+                    _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                  } else {
+                    throw Exceptions.sneakyThrow(_t);
+                  }
+                }
+                return _xtrycatchfinallyexpression;
+              }
+            };
+            it.service = _function_1;
+          }
         }
       };
       _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
