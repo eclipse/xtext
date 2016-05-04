@@ -12,7 +12,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.name.Names;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -45,14 +44,12 @@ import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
-import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
-import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
 import org.eclipse.xtext.xtext.generator.util.GeneratorOption;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
@@ -91,9 +88,6 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
-  @Inject
-  private ContentAssistGrammarNaming caNaming;
   
   @Inject
   @Extension
@@ -336,34 +330,6 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     if ((this.generateWebXml.get() && (this.getProjectConfig().getWeb().getAssets() != null))) {
       this.generateWebXml();
     }
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("binder.bind(");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer");
-        _builder.append(_typeRef, "");
-        _builder.append(".class).annotatedWith(");
-        _builder.append(Names.class, "");
-        _builder.append(".named(");
-        TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ide.LexerIdeBindings");
-        _builder.append(_typeRef_1, "");
-        _builder.append(".CONTENT_ASSIST)).to(");
-        Grammar _grammar = WebIntegrationFragment.this.getGrammar();
-        TypeReference _lexerClass = WebIntegrationFragment.this.caNaming.getLexerClass(_grammar);
-        _builder.append(_lexerClass, "");
-        _builder.append(".class);");
-      }
-    };
-    final StringConcatenationClient lexerStatement = _client;
-    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
-    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _bindingFactory.addConfiguredBinding("ContentAssistLexer", lexerStatement);
-    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
-    Grammar _grammar = this.getGrammar();
-    TypeReference _parserClass = this.caNaming.getParserClass(_grammar);
-    GuiceModuleAccess.BindingFactory _addTypeToType = _addConfiguredBinding.addTypeToType(_typeRef, _parserClass);
-    IXtextGeneratorLanguage _language_1 = this.getLanguage();
-    GuiceModuleAccess _webGenModule = _language_1.getWebGenModule();
-    _addTypeToType.contributeTo(_webGenModule);
   }
   
   private final static String DELIMITERS_PATTERN = new Function0<String>() {

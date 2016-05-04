@@ -67,11 +67,11 @@ public class StatemachineFormatter extends AbstractDeclarativeFormatter {
     _setLinewrap_7.before(_ifKeyword_0);
     FormattingConfig.LinewrapLocator _setLinewrap_8 = c.setLinewrap();
     StatemachineGrammarAccess.StateElements _stateAccess_2 = this._statemachineGrammarAccess.getStateAccess();
-    Keyword _endKeyword_4 = _stateAccess_2.getEndKeyword_4();
-    _setLinewrap_8.before(_endKeyword_4);
+    Keyword _endKeyword_5 = _stateAccess_2.getEndKeyword_5();
+    _setLinewrap_8.before(_endKeyword_5);
     FormattingConfig.IndentationLocatorEnd _setIndentationDecrement = c.setIndentationDecrement();
     StatemachineGrammarAccess.StateElements _stateAccess_3 = this._statemachineGrammarAccess.getStateAccess();
-    Keyword _endKeyword_4_1 = _stateAccess_3.getEndKeyword_4();
-    _setIndentationDecrement.before(_endKeyword_4_1);
+    Keyword _endKeyword_5_1 = _stateAccess_3.getEndKeyword_5();
+    _setIndentationDecrement.before(_endKeyword_5_1);
   }
 }

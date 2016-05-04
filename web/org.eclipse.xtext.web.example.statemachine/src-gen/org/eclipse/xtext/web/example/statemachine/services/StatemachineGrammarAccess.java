@@ -145,16 +145,19 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCommandsCommandParserRuleCall_2_0 = (RuleCall)cCommandsAssignment_2.eContents().get(0);
 		private final Assignment cTransitionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cTransitionsTransitionParserRuleCall_3_0 = (RuleCall)cTransitionsAssignment_3.eContents().get(0);
-		private final Keyword cEndKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cNestedStatesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cNestedStatesStateParserRuleCall_4_0 = (RuleCall)cNestedStatesAssignment_4.eContents().get(0);
+		private final Keyword cEndKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//State:
 		//	'state' name=ID
 		//	commands+=Command*
 		//	transitions+=Transition*
+		//	nestedStates+=State*
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'state' name=ID commands+=Command* transitions+=Transition* 'end'
+		//'state' name=ID commands+=Command* transitions+=Transition* nestedStates+=State* 'end'
 		public Group getGroup() { return cGroup; }
 		
 		//'state'
@@ -178,8 +181,14 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//Transition
 		public RuleCall getTransitionsTransitionParserRuleCall_3_0() { return cTransitionsTransitionParserRuleCall_3_0; }
 		
+		//nestedStates+=State*
+		public Assignment getNestedStatesAssignment_4() { return cNestedStatesAssignment_4; }
+		
+		//State
+		public RuleCall getNestedStatesStateParserRuleCall_4_0() { return cNestedStatesStateParserRuleCall_4_0; }
+		
 		//'end'
-		public Keyword getEndKeyword_4() { return cEndKeyword_4; }
+		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
 	}
 	public class TransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.web.example.statemachine.Statemachine.Transition");
@@ -190,13 +199,13 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGotoKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cStateAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cStateStateCrossReference_3_0 = (CrossReference)cStateAssignment_3.eContents().get(0);
-		private final RuleCall cStateStateIDTerminalRuleCall_3_0_1 = (RuleCall)cStateStateCrossReference_3_0.eContents().get(1);
+		private final RuleCall cStateStateQualifiedNameParserRuleCall_3_0_1 = (RuleCall)cStateStateCrossReference_3_0.eContents().get(1);
 		
 		//Transition:
-		//	'if' condition=Condition 'goto' state=[State];
+		//	'if' condition=Condition 'goto' state=[State|QualifiedName];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'if' condition=Condition 'goto' state=[State]
+		//'if' condition=Condition 'goto' state=[State|QualifiedName]
 		public Group getGroup() { return cGroup; }
 		
 		//'if'
@@ -211,14 +220,14 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//'goto'
 		public Keyword getGotoKeyword_2() { return cGotoKeyword_2; }
 		
-		//state=[State]
+		//state=[State|QualifiedName]
 		public Assignment getStateAssignment_3() { return cStateAssignment_3; }
 		
-		//[State]
+		//[State|QualifiedName]
 		public CrossReference getStateStateCrossReference_3_0() { return cStateStateCrossReference_3_0; }
 		
-		//ID
-		public RuleCall getStateStateIDTerminalRuleCall_3_0_1() { return cStateStateIDTerminalRuleCall_3_0_1; }
+		//QualifiedName
+		public RuleCall getStateStateQualifiedNameParserRuleCall_3_0_1() { return cStateStateQualifiedNameParserRuleCall_3_0_1; }
 	}
 	public class ConditionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.web.example.statemachine.Statemachine.Condition");
@@ -329,6 +338,33 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//BOOLEAN
 		public RuleCall getNewValueBOOLEANTerminalRuleCall_3_0() { return cNewValueBOOLEANTerminalRuleCall_3_0; }
 	}
+	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.web.example.statemachine.Statemachine.QualifiedName");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		
+		//QualifiedName:
+		//	ID ('.' ID)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ID ('.' ID)*
+		public Group getGroup() { return cGroup; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+		
+		//('.' ID)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'.'
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
+	}
 	
 	
 	private final StatemachineElements pStatemachine;
@@ -340,6 +376,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	private final ConditionElements pCondition;
 	private final EventElements pEvent;
 	private final CommandElements pCommand;
+	private final QualifiedNameElements pQualifiedName;
 	private final TerminalRule tBOOLEAN;
 	
 	private final Grammar grammar;
@@ -360,6 +397,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		this.pCondition = new ConditionElements();
 		this.pEvent = new EventElements();
 		this.pCommand = new CommandElements();
+		this.pQualifiedName = new QualifiedNameElements();
 		this.tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.web.example.statemachine.Statemachine.BOOLEAN");
 	}
 	
@@ -437,6 +475,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	//	'state' name=ID
 	//	commands+=Command*
 	//	transitions+=Transition*
+	//	nestedStates+=State*
 	//	'end';
 	public StateElements getStateAccess() {
 		return pState;
@@ -447,7 +486,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Transition:
-	//	'if' condition=Condition 'goto' state=[State];
+	//	'if' condition=Condition 'goto' state=[State|QualifiedName];
 	public TransitionElements getTransitionAccess() {
 		return pTransition;
 	}
@@ -484,6 +523,16 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getCommandRule() {
 		return getCommandAccess().getRule();
+	}
+	
+	//QualifiedName:
+	//	ID ('.' ID)*;
+	public QualifiedNameElements getQualifiedNameAccess() {
+		return pQualifiedName;
+	}
+	
+	public ParserRule getQualifiedNameRule() {
+		return getQualifiedNameAccess().getRule();
 	}
 	
 	//terminal BOOLEAN returns ecore::EBoolean:

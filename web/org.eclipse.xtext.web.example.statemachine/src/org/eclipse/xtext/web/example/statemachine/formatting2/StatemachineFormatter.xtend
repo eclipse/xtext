@@ -42,7 +42,7 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		state.regionFor.keyword(stateAccess.stateKeyword_0).append[oneSpace]
 		interior(
 			state.regionFor.assignment(stateAccess.nameAssignment_1).append[newLine],
-			state.regionFor.keyword(stateAccess.endKeyword_4),
+			state.regionFor.keyword(stateAccess.endKeyword_5),
 			[indent]
 		)
 		for (command : state.commands) {
@@ -52,6 +52,10 @@ class StatemachineFormatter extends AbstractFormatter2 {
 		for (transition : state.transitions) {
 			format(transition, document)
 			transition.append[newLine]
+		}
+		for (nestedState : state.nestedStates) {
+			format(nestedState, document)
+			nestedState.append[newLine]
 		}
 	}
 

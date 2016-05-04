@@ -23,40 +23,42 @@ import org.eclipse.xtext.xbase.scoping.batch.StaticFeatureDescriptionWithTypeLit
 public class XbaseIdeContentProposalPriorities extends IdeContentProposalPriorities {
   @Override
   public int getCrossRefPriority(final IEObjectDescription objectDesc, final ContentAssistEntry entry) {
-    boolean _matched = false;
-    if (objectDesc instanceof SimpleIdentifiableElementDescription) {
-      if (((!Objects.equal(entry.getProposal(), "this")) && (!Objects.equal(entry.getProposal(), "super")))) {
-        _matched=true;
-        int _crossRefPriority = this.getCrossRefPriority();
-        int _plus = (_crossRefPriority + 70);
-        return this.adjustPriority(entry, _plus);
-      }
-    }
-    if (!_matched) {
-      if (objectDesc instanceof StaticFeatureDescriptionWithTypeLiteralReceiver) {
-        _matched=true;
-        int _crossRefPriority = this.getCrossRefPriority();
-        int _plus = (_crossRefPriority + 60);
-        return this.adjustPriority(entry, _plus);
-      }
-    }
-    if (!_matched) {
-      if (objectDesc instanceof IIdentifiableElementDescription) {
-        _matched=true;
-        JvmIdentifiableElement _elementOrProxy = ((IIdentifiableElementDescription)objectDesc).getElementOrProxy();
-        boolean _matched_1 = false;
-        if (_elementOrProxy instanceof JvmField) {
-          _matched_1=true;
+    if ((entry != null)) {
+      boolean _matched = false;
+      if (objectDesc instanceof SimpleIdentifiableElementDescription) {
+        if (((!Objects.equal(entry.getProposal(), "this")) && (!Objects.equal(entry.getProposal(), "super")))) {
+          _matched=true;
           int _crossRefPriority = this.getCrossRefPriority();
-          int _plus = (_crossRefPriority + 50);
+          int _plus = (_crossRefPriority + 70);
           return this.adjustPriority(entry, _plus);
         }
-        if (!_matched_1) {
-          if (_elementOrProxy instanceof JvmExecutable) {
+      }
+      if (!_matched) {
+        if (objectDesc instanceof StaticFeatureDescriptionWithTypeLiteralReceiver) {
+          _matched=true;
+          int _crossRefPriority = this.getCrossRefPriority();
+          int _plus = (_crossRefPriority + 60);
+          return this.adjustPriority(entry, _plus);
+        }
+      }
+      if (!_matched) {
+        if (objectDesc instanceof IIdentifiableElementDescription) {
+          _matched=true;
+          JvmIdentifiableElement _elementOrProxy = ((IIdentifiableElementDescription)objectDesc).getElementOrProxy();
+          boolean _matched_1 = false;
+          if (_elementOrProxy instanceof JvmField) {
             _matched_1=true;
             int _crossRefPriority = this.getCrossRefPriority();
-            int _plus = (_crossRefPriority + 20);
+            int _plus = (_crossRefPriority + 50);
             return this.adjustPriority(entry, _plus);
+          }
+          if (!_matched_1) {
+            if (_elementOrProxy instanceof JvmExecutable) {
+              _matched_1=true;
+              int _crossRefPriority = this.getCrossRefPriority();
+              int _plus = (_crossRefPriority + 20);
+              return this.adjustPriority(entry, _plus);
+            }
           }
         }
       }

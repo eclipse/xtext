@@ -106,25 +106,24 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
   
   @Override
   public boolean filterKeyword(final Keyword keyword, final ContentAssistContext context) {
-    boolean _filterKeyword = super.filterKeyword(keyword, context);
-    boolean _not = (!_filterKeyword);
-    if (_not) {
-      return false;
-    }
-    if ((Objects.equal(keyword.getValue(), "as") || Objects.equal(keyword.getValue(), "instanceof"))) {
-      final EObject previousModel = context.getPreviousModel();
-      if ((previousModel instanceof XExpression)) {
-        if (((context.getPrefix().length() == 0) && (NodeModelUtils.getNode(previousModel).getEndOffset() > context.getOffset()))) {
-          return false;
-        }
-        IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(previousModel);
-        LightweightTypeReference type = _resolveTypes.getActualType(((XExpression)previousModel));
-        if (((type == null) || type.isPrimitiveVoid())) {
-          return false;
+    final String value = keyword.getValue();
+    if (((value.length() > 1) && Character.isLetter(value.charAt(0)))) {
+      if ((Objects.equal(value, "as") || Objects.equal(value, "instanceof"))) {
+        final EObject previousModel = context.getPreviousModel();
+        if ((previousModel instanceof XExpression)) {
+          if (((context.getPrefix().length() == 0) && (NodeModelUtils.getNode(previousModel).getEndOffset() > context.getOffset()))) {
+            return false;
+          }
+          IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(previousModel);
+          final LightweightTypeReference type = _resolveTypes.getActualType(((XExpression)previousModel));
+          if (((type == null) || type.isPrimitiveVoid())) {
+            return false;
+          }
         }
       }
+      return true;
     }
-    return true;
+    return false;
   }
   
   @Override
@@ -561,11 +560,8 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
         final INode currentNode = context.getCurrentNode();
         final int offset = currentNode.getOffset();
         final int endOffset = currentNode.getEndOffset();
-        if (((offset < context.getOffset()) && (endOffset >= context.getOffset()))) {
-          EObject _grammarElement = currentNode.getGrammarElement();
-          if ((_grammarElement instanceof CrossReference)) {
-            return;
-          }
+        if ((((offset < context.getOffset()) && (endOffset >= context.getOffset())) && (currentNode.getGrammarElement() instanceof CrossReference))) {
+          return;
         }
       }
       ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(model);
@@ -584,17 +580,8 @@ public class XbaseIdeContentProposalProvider extends IdeContentProposalProvider 
     } else {
       final EObject previousModel = context.getPreviousModel();
       if ((previousModel instanceof XExpression)) {
-        String _prefix_1 = context.getPrefix();
-        int _length_1 = _prefix_1.length();
-        boolean _tripleEquals_1 = (_length_1 == 0);
-        if (_tripleEquals_1) {
-          ICompositeNode _node = NodeModelUtils.getNode(previousModel);
-          int _endOffset_1 = _node.getEndOffset();
-          int _offset_1 = context.getOffset();
-          boolean _greaterThan = (_endOffset_1 > _offset_1);
-          if (_greaterThan) {
-            return;
-          }
+        if (((context.getPrefix().length() == 0) && (NodeModelUtils.getNode(previousModel).getEndOffset() > context.getOffset()))) {
+          return;
         }
         AbstractElement _terminal_2 = assignment.getTerminal();
         this.createReceiverProposals(((XExpression)previousModel), 

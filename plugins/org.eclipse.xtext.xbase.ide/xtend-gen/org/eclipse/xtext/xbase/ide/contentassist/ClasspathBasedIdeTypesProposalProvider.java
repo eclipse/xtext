@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -36,7 +37,6 @@ import org.eclipse.xtext.xbase.imports.ImportSectionRegionUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -50,6 +50,9 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
   
   @Inject
   private ClasspathScanner classpathScanner;
+  
+  @Inject
+  private IdeContentProposalCreator proposalCreator;
   
   @Inject
   private IdeContentProposalPriorities proposalPriorities;
@@ -124,12 +127,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
   }
   
   protected boolean canPropose(final ITypeDescriptor typeDesc, final ContentAssistContext context, final Predicate<ITypeDescriptor> filter) {
-    boolean _xblockexpression = false;
-    {
-      final String prefix = context.getPrefix();
-      _xblockexpression = ((typeDesc.getSimpleName().regionMatches(true, 0, prefix, 0, prefix.length()) && this.isVisible(typeDesc, context)) && filter.apply(typeDesc));
-    }
-    return _xblockexpression;
+    return (this.isVisible(typeDesc, context) && filter.apply(typeDesc));
   }
   
   protected boolean isVisible(final ITypeDescriptor typeDesc, final ContentAssistContext context) {
@@ -139,32 +137,36 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
   }
   
   protected ContentAssistEntry createProposal(final EReference reference, final ITypeDescriptor typeDesc, final ContentAssistContext context, final XImportSection importSection, final ITextRegion importSectionRegion) {
-    ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
-    final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
-      @Override
-      public void apply(final ContentAssistEntry it) {
-        String _prefix = context.getPrefix();
-        it.setPrefix(_prefix);
-        QualifiedName _qualifiedName = typeDesc.getQualifiedName();
-        final String qualifiedName = ClasspathBasedIdeTypesProposalProvider.this.qualifiedNameConverter.toString(_qualifiedName);
-        boolean _isImportDeclaration = ClasspathBasedIdeTypesProposalProvider.this.isImportDeclaration(reference, context);
-        if (_isImportDeclaration) {
-          it.setProposal(qualifiedName);
-          String _simpleName = typeDesc.getSimpleName();
-          it.setLabel(_simpleName);
-          String _proposal = it.getProposal();
-          it.setDescription(_proposal);
-        } else {
-          String _simpleName_1 = typeDesc.getSimpleName();
-          it.setProposal(_simpleName_1);
-          it.setDescription(qualifiedName);
-          if (((importSectionRegion != null) && ClasspathBasedIdeTypesProposalProvider.this.isImportDeclarationRequired(typeDesc, qualifiedName, context, importSection))) {
-            ClasspathBasedIdeTypesProposalProvider.this.addImportDeclaration(it, importSectionRegion, typeDesc, qualifiedName, context);
+    ContentAssistEntry _xblockexpression = null;
+    {
+      final boolean importDecl = this.isImportDeclaration(reference, context);
+      QualifiedName _qualifiedName = typeDesc.getQualifiedName();
+      final String qualifiedName = this.qualifiedNameConverter.toString(_qualifiedName);
+      String _xifexpression = null;
+      if (importDecl) {
+        _xifexpression = qualifiedName;
+      } else {
+        _xifexpression = typeDesc.getSimpleName();
+      }
+      final String proposal = _xifexpression;
+      final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
+        @Override
+        public void apply(final ContentAssistEntry it) {
+          if (importDecl) {
+            String _simpleName = typeDesc.getSimpleName();
+            it.setLabel(_simpleName);
+            it.setDescription(proposal);
+          } else {
+            it.setDescription(qualifiedName);
+            if (((importSectionRegion != null) && ClasspathBasedIdeTypesProposalProvider.this.isImportDeclarationRequired(typeDesc, qualifiedName, context, importSection))) {
+              ClasspathBasedIdeTypesProposalProvider.this.addImportDeclaration(it, importSectionRegion, typeDesc, qualifiedName, context);
+            }
           }
         }
-      }
-    };
-    return ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
+      };
+      _xblockexpression = this.proposalCreator.createProposal(proposal, context, _function);
+    }
+    return _xblockexpression;
   }
   
   protected boolean isImportDeclaration(final EReference reference, final ContentAssistContext context) {

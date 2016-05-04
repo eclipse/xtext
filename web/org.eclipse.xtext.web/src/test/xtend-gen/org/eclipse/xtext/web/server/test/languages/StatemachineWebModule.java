@@ -11,13 +11,16 @@ import com.google.inject.Binder;
 import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.binder.ScopedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher;
+import org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher;
+import org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -42,15 +45,23 @@ public class StatemachineWebModule extends DefaultWebModule {
     super(executorServiceProvider);
   }
   
-  public ScopedBindingBuilder configureContentAssistLexer(final Binder binder) {
+  public void configureContentAssistLexer(final Binder binder) {
     AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
     Named _named = Names.named(LexerIdeBindings.CONTENT_ASSIST);
     LinkedBindingBuilder<Lexer> _annotatedWith = _bind.annotatedWith(_named);
-    return _annotatedWith.to(InternalStatemachineLexer.class);
+    _annotatedWith.to(InternalStatemachineLexer.class);
   }
   
   public Class<? extends IContentAssistParser> bindIContentAssistParser() {
     return StatemachineParser.class;
+  }
+  
+  public Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
+    return AntlrProposalConflictHelper.class;
+  }
+  
+  public Class<? extends IPrefixMatcher> bindIPrefixMatcher() {
+    return FQNPrefixMatcher.class;
   }
   
   public Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {

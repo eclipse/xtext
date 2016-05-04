@@ -19,6 +19,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Statemachine.ecore#//State/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Statemachine.ecore#//State/commands"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Statemachine.ecore#//State/transitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Statemachine.ecore#//State/nestedStates"/>
     </genClasses>
     <genClasses ecoreClass="Statemachine.ecore#//Transition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Statemachine.ecore#//Transition/condition"/>

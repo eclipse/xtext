@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ide.editor.contentassist;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import org.apache.log4j.Logger;
@@ -18,15 +17,13 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -41,6 +38,10 @@ public class IdeCrossrefProposalProvider {
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
+  
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Inject
+  private IdeContentProposalCreator proposalCreator;
   
   @Inject
   private IdeContentProposalPriorities proposalPriorities;
@@ -74,71 +75,34 @@ public class IdeCrossrefProposalProvider {
   }
   
   protected Iterable<IEObjectDescription> queryScope(final IScope scope, final CrossReference crossReference, final ContentAssistContext context) {
-    Iterable<IEObjectDescription> _xblockexpression = null;
-    {
-      String _prefix = context.getPrefix();
-      boolean _isEmpty = _prefix.isEmpty();
-      if (_isEmpty) {
-        return scope.getAllElements();
-      }
-      String _prefix_1 = context.getPrefix();
-      final QualifiedName prefix = this.qualifiedNameConverter.toQualifiedName(_prefix_1);
-      Iterable<IEObjectDescription> _allElements = scope.getAllElements();
-      final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
-        @Override
-        public Boolean apply(final IEObjectDescription it) {
-          return Boolean.valueOf(IdeCrossrefProposalProvider.this.matchesPrefix(it, prefix));
-        }
-      };
-      _xblockexpression = IterableExtensions.<IEObjectDescription>filter(_allElements, _function);
-    }
-    return _xblockexpression;
-  }
-  
-  protected boolean matchesPrefix(final IEObjectDescription candidate, final QualifiedName prefix) {
-    final QualifiedName name = candidate.getName();
-    final int count = prefix.getSegmentCount();
-    int _segmentCount = name.getSegmentCount();
-    boolean _greaterThan = (count > _segmentCount);
-    if (_greaterThan) {
-      return false;
-    }
-    for (int i = 0; (i < count); i++) {
-      {
-        final String nameSegment = name.getSegment(i);
-        final String prefixSegment = prefix.getSegment(i);
-        if ((((i < (count - 1)) && (!Objects.equal(nameSegment, prefixSegment))) || ((i == (count - 1)) && (!nameSegment.regionMatches(true, 0, prefixSegment, 0, prefixSegment.length()))))) {
-          return false;
-        }
-      }
-    }
-    return true;
+    return scope.getAllElements();
   }
   
   protected ContentAssistEntry createProposal(final IEObjectDescription candidate, final CrossReference crossRef, final ContentAssistContext context) {
-    ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+    QualifiedName _name = candidate.getName();
+    String _string = this.qualifiedNameConverter.toString(_name);
     final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
       @Override
       public void apply(final ContentAssistEntry it) {
         it.setSource(candidate);
-        String _prefix = context.getPrefix();
-        it.setPrefix(_prefix);
-        QualifiedName _name = candidate.getName();
-        String _string = IdeCrossrefProposalProvider.this.qualifiedNameConverter.toString(_name);
-        it.setProposal(_string);
         EClass _eClass = candidate.getEClass();
-        String _name_1 = null;
+        String _name = null;
         if (_eClass!=null) {
-          _name_1=_eClass.getName();
+          _name=_eClass.getName();
         }
-        it.setDescription(_name_1);
+        it.setDescription(_name);
       }
     };
-    return ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
+    return this.proposalCreator.createProposal(_string, context, _function);
   }
   
   @Pure
   protected IQualifiedNameConverter getQualifiedNameConverter() {
     return this.qualifiedNameConverter;
+  }
+  
+  @Pure
+  protected IdeContentProposalCreator getProposalCreator() {
+    return this.proposalCreator;
   }
 }

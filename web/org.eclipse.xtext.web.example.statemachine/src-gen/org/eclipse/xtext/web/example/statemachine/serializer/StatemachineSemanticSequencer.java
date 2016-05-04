@@ -205,7 +205,7 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     State returns State
 	 *
 	 * Constraint:
-	 *     (name=ID commands+=Command* transitions+=Transition*)
+	 *     (name=ID commands+=Command* transitions+=Transition* nestedStates+=State*)
 	 */
 	protected void sequence_State(ISerializationContext context, State semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -229,7 +229,7 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     Transition returns Transition
 	 *
 	 * Constraint:
-	 *     (condition=Condition state=[State|ID])
+	 *     (condition=Condition state=[State|QualifiedName])
 	 */
 	protected void sequence_Transition(ISerializationContext context, Transition semanticObject) {
 		if (errorAcceptor != null) {
@@ -240,7 +240,7 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTransitionAccess().getConditionConditionParserRuleCall_1_0(), semanticObject.getCondition());
-		feeder.accept(grammarAccess.getTransitionAccess().getStateStateIDTerminalRuleCall_3_0_1(), semanticObject.getState());
+		feeder.accept(grammarAccess.getTransitionAccess().getStateStateQualifiedNameParserRuleCall_3_0_1(), semanticObject.getState());
 		feeder.finish();
 	}
 	

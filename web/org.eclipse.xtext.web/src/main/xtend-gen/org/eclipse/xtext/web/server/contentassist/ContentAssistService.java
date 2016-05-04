@@ -143,13 +143,15 @@ public class ContentAssistService {
       final IIdeContentProposalAcceptor acceptor = new IIdeContentProposalAcceptor() {
         @Override
         public void accept(final ContentAssistEntry entry, final int priority) {
-          String _proposal = entry.getProposal();
-          boolean _tripleEquals = (_proposal == null);
-          if (_tripleEquals) {
-            throw new IllegalArgumentException("proposal must not be null.");
+          if ((entry != null)) {
+            String _proposal = entry.getProposal();
+            boolean _tripleEquals = (_proposal == null);
+            if (_tripleEquals) {
+              throw new IllegalArgumentException("proposal must not be null.");
+            }
+            Pair<Integer, ContentAssistEntry> _mappedTo = Pair.<Integer, ContentAssistEntry>of(Integer.valueOf(priority), entry);
+            proposals.add(_mappedTo);
           }
-          Pair<Integer, ContentAssistEntry> _mappedTo = Pair.<Integer, ContentAssistEntry>of(Integer.valueOf(priority), entry);
-          proposals.add(_mappedTo);
         }
         
         @Override
