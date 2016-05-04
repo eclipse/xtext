@@ -1846,7 +1846,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		String grammarAsText =
 				"grammar test with org.eclipse.xtext.common.Terminals\n" +
 				"generate test 'http://test'\n" +
-				"A: foo='a b c'; B: bar='x\ty';";
+				"A: foo='a b c'; B: bar='x\ty'; terminal C: ' ';";
 		
 		Grammar grammar = (Grammar) getModel(grammarAsText);
 		XtextValidator validator = get(XtextValidator.class);
@@ -1867,6 +1867,12 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		configureValidator(validator, messageAcceptor, valueAssignment2);
 		validator.checkKeywordNoSpaces((Keyword) valueAssignment2.getTerminal());
 		messageAcceptor.validate();
+		
+		messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
+		configureValidator(validator, messageAcceptor, valueAssignment2);
+		validator.checkKeywordNoSpaces((Keyword) grammar.getRules().get(2).getAlternatives());
+		messageAcceptor.validate();
+
 	}
 	
 	public class ValidatingMessageAcceptor extends AbstractValidationMessageAcceptor {
