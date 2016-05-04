@@ -14,11 +14,27 @@ class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoEditStra
 			try {
 				val lineIndentation = getLineIndentation(d, c.offset)
 				val legalLineDelimiters = d.legalLineDelimiters.sortBy[s|s.length].reverseView
-				val regex = legalLineDelimiters.join('(', ')|(', ')')[delimiter|Pattern.quote(delimiter)]
-				val lines = c.text.split(regex)
 				val defaultLineDelimiter = d.defaultLineDelimiter
-				val convertedText = '''«lines.head»«FOR line : lines.tail»«defaultLineDelimiter»«lineIndentation»«line»«ENDFOR»'''
-				c.text = convertedText
+				val regex = legalLineDelimiters.join('(', ')|(', ')')[delimiter|Pattern.quote(delimiter)]
+				val pattern = Pattern.compile(regex)
+				val matcher = pattern.matcher(c.text)
+				val convertedText = new StringBuilder
+				var currentStart = 0 
+				var currentEnd = 0
+				while(matcher.find) {
+					currentEnd = matcher.start
+					if(currentStart != 0) 
+						convertedText.append(lineIndentation)
+					convertedText.append(c.text.substring(currentStart, currentEnd))
+					convertedText.append(defaultLineDelimiter)
+					currentStart = matcher.end
+				}
+				if(currentStart < c.text.length) {
+					if(currentStart != 0) 
+						convertedText.append(lineIndentation)
+					convertedText.append(c.text.substring(currentStart))
+				}
+				c.text = convertedText.toString
 			} catch (BadLocationException e) {
 				super.customizeDocumentCommand(d, c)
 			}
@@ -33,5 +49,4 @@ class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoEditStra
 		var end = findEndOfWhiteSpace(document, start, offset)
 		document.get(start, end - start)
 	}
-
 }
