@@ -1078,7 +1078,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkKeywordNoSpaces(final Keyword keyword) {
-		if (keyword.getValue() != null && !(keyword.eContainer() instanceof EnumLiteralDeclaration)) {
+		if (keyword.getValue() != null && !(keyword.eContainer() instanceof EnumLiteralDeclaration) 
+				&& !(GrammarUtil.containingRule(keyword) instanceof TerminalRule)) {
 			if (keyword.getValue().contains(" ") || keyword.getValue().contains("\t")) {
 				addIssue("A keyword should non contain spaces.", 
 						keyword, 
