@@ -95,20 +95,21 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		new KeywordHelper(grammar, options.ignoreCase, grammarUtil)
 		new CombinedGrammarMarker(isCombinedGrammar).attachToEmfObject(grammar)
 		if (debugGrammar)
-			generateDebugGrammar
-		generateProductionGrammar
+			generateDebugGrammar()
+		generateProductionGrammar()
 		if (projectConfig.genericIde.srcGen != null)
-			generateContentAssistGrammar
+			generateContentAssistGrammar()
 		
-		generateProductionParser.writeTo(projectConfig.runtime.srcGen)
-		generateAntlrTokenFileProvider.writeTo(projectConfig.runtime.srcGen)
-		generateContentAssistParser.writeTo(projectConfig.genericIde.srcGen)
-		if (grammar.allTerminalRules().exists[ isSyntheticTerminalRule ]) {
-			generateProductionTokenSource.writeTo(projectConfig.runtime.src)
-			generateContentAssistTokenSource.writeTo(projectConfig.genericIde.src)
+		generateProductionParser().writeTo(projectConfig.runtime.srcGen)
+		generateAntlrTokenFileProvider().writeTo(projectConfig.runtime.srcGen)
+		generateContentAssistParser().writeTo(projectConfig.genericIde.srcGen)
+		if (grammar.allTerminalRules.exists[ isSyntheticTerminalRule ]) {
+			generateProductionTokenSource().writeTo(projectConfig.runtime.src)
+			generateContentAssistTokenSource().writeTo(projectConfig.genericIde.src)
 		}
-		addRuntimeBindingsAndImports
-		addUiBindingsAndImports
+		addRuntimeBindingsAndImports()
+		addUiBindingsAndImports()
+		addWebBindings()
 	}
 	
 	def void setLookaheadThreshold(String lookaheadThreshold) {
@@ -429,7 +430,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			issues.addError("Backtracking lexer and ignorecase cannot be combined for now.")
 	}
 	
-	def addRuntimeBindingsAndImports() {
+	def protected addRuntimeBindingsAndImports() {
 		val extension naming = productionNaming
 		if (projectConfig.runtime.manifest !== null) {
 			projectConfig.runtime.manifest=>[
@@ -466,7 +467,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
 	}
 	
-	def addUiBindingsAndImports() {
+	def protected addUiBindingsAndImports() {
 		val extension naming = contentAssistNaming
 		val caLexerClass = grammar.lexerClass
 		
@@ -520,6 +521,25 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			)
 		}
 		uiBindings.contributeTo(language.eclipsePluginGenModule)
+	}
+	
+	def protected addWebBindings() {
+		val extension naming = contentAssistNaming
+		val webBindings = new GuiceModuleAccess.BindingFactory()
+			.addTypeToType(
+				"org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper".typeRef,
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper".typeRef
+			)
+			.addConfiguredBinding("ContentAssistLexer", '''
+				binder.bind(«grammar.lexerSuperClass».class)
+					.annotatedWith(«Names».named(«"org.eclipse.xtext.ide.LexerIdeBindings".typeRef».CONTENT_ASSIST))
+					.to(«grammar.lexerClass».class);
+			''')
+			.addTypeToType(
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser".typeRef,
+				grammar.parserClass
+			)
+		webBindings.contributeTo(language.webGenModule)
 	}
 
 }

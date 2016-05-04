@@ -28,6 +28,8 @@ class IdeContentProposalPriorities {
 	int keywordPriority = 300
 	
 	protected def adjustPriority(ContentAssistEntry entry, int priority) {
+		if (entry === null)
+			return priority
 		var adjustedPriority = priority
 		if (!Character.isLetter(entry.proposal.charAt(0)))
 			adjustedPriority -= 30
