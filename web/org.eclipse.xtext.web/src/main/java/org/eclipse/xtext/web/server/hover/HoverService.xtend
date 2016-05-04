@@ -64,7 +64,7 @@ class HoverService {
 			contentAssistService.proposalProvider.createProposals(contexts, new IIdeContentProposalAcceptor {
 				override accept(ContentAssistEntry entry, int priority) {
 					cancelIndicator.checkCanceled
-					if (entry.source !== null && entry.proposal == proposal)
+					if (entry !== null && entry.source !== null && entry.proposal == proposal)
 						proposedElement.set(entry.source)
 				}
 				override canAcceptMoreProposals() {
