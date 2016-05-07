@@ -352,6 +352,26 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 											<pluginExecution>
 												<pluginExecutionFilter>
 													<groupId>
+														org.apache.maven.plugins
+													</groupId>
+													<artifactId>
+														maven-resources-plugin
+													</artifactId>
+													<versionRange>
+														[2.4.3,)
+													</versionRange>
+													<goals>
+														<goal>resources</goal>
+														<goal>testResources</goal>
+													</goals>
+												</pluginExecutionFilter>
+												<action>
+													<ignore></ignore>
+												</action>
+											</pluginExecution>
+											<pluginExecution>
+												<pluginExecutionFilter>
+													<groupId>
 														org.codehaus.mojo
 													</groupId>
 													<artifactId>
@@ -404,6 +424,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 														</versionRange>
 														<goals>
 															<goal>build-qualifier</goal>
+															<goal>build-qualifier-aggregator</goal>
 															<goal>validate-id</goal>
 															<goal>validate-version</goal>
 														</goals>
