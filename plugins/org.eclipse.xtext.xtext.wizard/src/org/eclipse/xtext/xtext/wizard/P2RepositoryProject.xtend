@@ -67,6 +67,44 @@ class P2RepositoryProject extends ProjectDescriptor {
 	override pom() {
 		super.pom => [
 			packaging = "eclipse-repository"
+			buildSection = '''
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.apache.maven.plugins
+												</groupId>
+												<artifactId>
+													maven-clean-plugin
+												</artifactId>
+												<versionRange>
+													[2.5,)
+												</versionRange>
+												<goals>
+													<goal>clean</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+			'''
 		]
 	}
 
