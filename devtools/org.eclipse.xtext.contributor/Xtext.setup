@@ -321,8 +321,6 @@
       <requirement
           name="org.eclipse.pde.feature.group"/>
       <requirement
-          name="org.eclipse.m2e.core"/>
-      <requirement
           name="org.eclipse.emf.sdk.feature.group"/>
       <requirement
           name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
@@ -456,8 +454,6 @@
         <repository
             url="${xtext.nightly.composite}"/>
         <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
-        <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
@@ -469,6 +465,23 @@
             url="${antlr-gen.update.site}"/>
         <repository
             url="http://download.eclipse.org/eclipse/updates/3.6/"/>
+        <repository
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
+      </repositoryList>
+    </targlet>
+    <targlet
+        name="Xtext Tools"
+        activeRepositoryList="Oldest Helios">
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.jem.util"/>
+      <repositoryList
+          name="Oldest Helios">
+        <repository
+            url="http://download.eclipse.org/webtools/downloads/drops/R3.2.3/R-3.2.3-20110217214612/repository"/>
+        <repository
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
       </repositoryList>
     </targlet>
     <description>Target platform</description>
