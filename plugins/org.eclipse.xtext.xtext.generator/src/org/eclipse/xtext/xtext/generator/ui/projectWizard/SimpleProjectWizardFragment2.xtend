@@ -70,6 +70,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		}
 		
 		generateProjectInfo
+		generateWizardNewProjectCreationPage
 		generateNewProjectWizardInitialContents
 		generateProjectCreator
 		generateNewProjectWizard
@@ -82,6 +83,23 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		
 		file.content = '''
 		public class «projectInfoClass.simpleName» extends «"org.eclipse.xtext.ui.wizard.DefaultProjectInfo".typeRef» {
+
+		}
+		'''
+		file.writeTo(projectConfig.eclipsePlugin.src)
+	}
+
+	def generateWizardNewProjectCreationPage() {
+		val mainPageClass = projectWizardCreationPageClassName.typeRef
+
+		val file = fileAccessFactory.createJavaFile(mainPageClass)
+		
+		file.content = '''
+		public class «mainPageClass.simpleName» extends «"org.eclipse.ui.dialogs.WizardNewProjectCreationPage".typeRef» {
+
+			public «mainPageClass.simpleName»(String pageName) {
+				super(pageName);
+			}
 
 		}
 		'''
@@ -242,23 +260,27 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 	def generateNewProjectWizard() {
 		val genClass = getProjectWizardClassName.typeRef
 		val projectInfoClass = projectInfoClassName.typeRef
-			
+		val creationPageClassName = projectWizardCreationPageClassName.typeRef
+
 		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
 		file.content =
 		'''
-		import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 		import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;
 		import org.eclipse.xtext.ui.wizard.IProjectCreator;
 		import com.google.inject.Inject;
 		
 		public class «genClass.simpleName» extends «"org.eclipse.xtext.ui.wizard.XtextNewProjectWizard".typeRef» {
 		
-			private WizardNewProjectCreationPage mainPage;
+			private «creationPageClassName» mainPage;
 		
 			@Inject
 			public «genClass.simpleName»(IProjectCreator projectCreator) {
 				super(projectCreator);
 				setWindowTitle("New «grammar.simpleName» Project");
+			}
+		
+			protected «creationPageClassName» getMainPage() {
+				return mainPage;
 			}
 		
 			/**
@@ -267,10 +289,14 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 			 */
 			@Override
 			public void addPages() {
-				mainPage = new WizardNewProjectCreationPage("basicNewProjectPage");
+				mainPage = createMainPage("basicNewProjectPage");
 				mainPage.setTitle("«grammar.simpleName» Project");
 				mainPage.setDescription("Create a new «grammar.simpleName» project.");
 				addPage(mainPage);
+			}
+		
+			protected «creationPageClassName» createMainPage(String pageName) {
+				return new «creationPageClassName»(pageName);
 			}
 		
 			/**
@@ -297,6 +323,10 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 
 	protected def String getProjectWizardClassName() {
 		getProjectWizardPackage() + grammar.simpleName + "NewProjectWizard"
+	}
+
+	protected def String getProjectWizardCreationPageClassName() {
+		getProjectWizardPackage() + grammar.simpleName + "WizardNewProjectCreationPage"
 	}
 
 	protected def String getProjectCreatorClassName() {
