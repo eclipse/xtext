@@ -141,6 +141,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
       _entries.add(_builder.toString());
     }
     this.generateProjectInfo();
+    this.generateWizardNewProjectCreationPage();
     this.generateNewProjectWizardInitialContents();
     this.generateProjectCreator();
     this.generateNewProjectWizard();
@@ -161,6 +162,46 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append(_typeRef, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    file.setContent(_client);
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+    IXtextGeneratorFileSystemAccess _src = _eclipsePlugin.getSrc();
+    file.writeTo(_src);
+  }
+  
+  public void generateWizardNewProjectCreationPage() {
+    String _projectWizardCreationPageClassName = this.getProjectWizardCreationPageClassName();
+    final TypeReference mainPageClass = TypeReference.typeRef(_projectWizardCreationPageClassName);
+    final JavaFileAccess file = this.fileAccessFactory.createJavaFile(mainPageClass);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("public class ");
+        String _simpleName = mainPageClass.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append(" extends ");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.ui.dialogs.WizardNewProjectCreationPage");
+        _builder.append(_typeRef, "");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public ");
+        String _simpleName_1 = mainPageClass.getSimpleName();
+        _builder.append(_simpleName_1, "\t");
+        _builder.append("(String pageName) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("super(pageName);");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
@@ -556,12 +597,12 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
     final TypeReference genClass = TypeReference.typeRef(_projectWizardClassName);
     String _projectInfoClassName = this.getProjectInfoClassName();
     final TypeReference projectInfoClass = TypeReference.typeRef(_projectInfoClassName);
+    String _projectWizardCreationPageClassName = this.getProjectWizardCreationPageClassName();
+    final TypeReference creationPageClassName = TypeReference.typeRef(_projectWizardCreationPageClassName);
     final GeneratedJavaFileAccess file = this.fileAccessFactory.createGeneratedJavaFile(genClass);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;");
-        _builder.newLine();
         _builder.append("import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;");
         _builder.newLine();
         _builder.append("import org.eclipse.xtext.ui.wizard.IProjectCreator;");
@@ -579,8 +620,10 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("private WizardNewProjectCreationPage mainPage;");
-        _builder.newLine();
+        _builder.append("private ");
+        _builder.append(creationPageClassName, "\t");
+        _builder.append(" mainPage;");
+        _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@Inject");
@@ -606,6 +649,18 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.newLine();
         _builder.newLine();
         _builder.append("\t");
+        _builder.append("protected ");
+        _builder.append(creationPageClassName, "\t");
+        _builder.append(" getMainPage() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return mainPage;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
         _builder.append("/**");
         _builder.newLine();
         _builder.append("\t ");
@@ -624,7 +679,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append("public void addPages() {");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("mainPage = new WizardNewProjectCreationPage(\"basicNewProjectPage\");");
+        _builder.append("mainPage = createMainPage(\"basicNewProjectPage\");");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("mainPage.setTitle(\"");
@@ -643,6 +698,20 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.append("\t\t");
         _builder.append("addPage(mainPage);");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("protected ");
+        _builder.append(creationPageClassName, "\t");
+        _builder.append(" createMainPage(String pageName) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return new ");
+        _builder.append(creationPageClassName, "\t\t");
+        _builder.append("(pageName);");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
@@ -711,6 +780,14 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
     String _simpleName = GrammarUtil.getSimpleName(_grammar);
     String _plus = (_projectWizardPackage + _simpleName);
     return (_plus + "NewProjectWizard");
+  }
+  
+  protected String getProjectWizardCreationPageClassName() {
+    String _projectWizardPackage = this.getProjectWizardPackage();
+    Grammar _grammar = this.getGrammar();
+    String _simpleName = GrammarUtil.getSimpleName(_grammar);
+    String _plus = (_projectWizardPackage + _simpleName);
+    return (_plus + "WizardNewProjectCreationPage");
   }
   
   protected String getProjectCreatorClassName() {
