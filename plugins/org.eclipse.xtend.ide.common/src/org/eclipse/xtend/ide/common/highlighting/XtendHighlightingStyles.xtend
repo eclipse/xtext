@@ -19,4 +19,7 @@ interface XtendHighlightingStyles extends XbaseHighlightingStyles {
 	String POTENTIAL_LINE_BREAK = "xtend.potential.line.break";
 	String SEMANTIC_LINE_BREAK = "xtend.template.line.break";
 	String ACTIVE_ANNOTATION = "xtend.active.annotation";
+	
+	String SINGLE_LINE_COMMENT = "xtend.single.line.comment";
+	String MULTI_LINE_COMMENT = "xtend.multi.line.comment"
 }
