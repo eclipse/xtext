@@ -451,7 +451,8 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 						"			  \n" + 
 						"			  bbb\n" + 
 						"			 \n" + 
-						"			 ccc|\n" + 
+						"			 ccc\n" + 
+						"			|\n" + 
 						"		'''" + 
 						"", editor);
 	}
@@ -473,7 +474,8 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 						"		  \n" + 
 						"		  bbb\n" + 
 						"		 \n" + 
-						"		 ccc|'''" + 
+						"		 ccc\n" + 
+						"		|'''" + 
 						"", editor);
 	}
 	
