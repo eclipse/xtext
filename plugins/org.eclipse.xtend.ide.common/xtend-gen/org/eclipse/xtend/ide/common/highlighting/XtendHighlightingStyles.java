@@ -25,4 +25,8 @@ public interface XtendHighlightingStyles extends XbaseHighlightingStyles {
   public final static String SEMANTIC_LINE_BREAK = "xtend.template.line.break";
   
   public final static String ACTIVE_ANNOTATION = "xtend.active.annotation";
+  
+  public final static String SINGLE_LINE_COMMENT = "xtend.single.line.comment";
+  
+  public final static String MULTI_LINE_COMMENT = "xtend.multi.line.comment";
 }

@@ -54,6 +54,4 @@ public interface XbaseHighlightingStyles extends HighlightingStyles {
   public final static String TYPE_VARIABLE = "xbase.type.variable";
   
   public final static String TYPE_ARGUMENT = "xbase.type.argument";
-  
-  public final static String AUTOBOXING = "xbase.autoboxing";
 }

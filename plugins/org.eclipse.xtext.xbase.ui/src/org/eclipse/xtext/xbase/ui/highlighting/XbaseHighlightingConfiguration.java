@@ -63,8 +63,6 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 		
 		acceptor.acceptDefaultHighlighting(XbaseHighlightingStyles.TYPE_ARGUMENT, "Type arguments", typeArgument());
 		
-		acceptor.acceptDefaultHighlighting(XbaseHighlightingStyles.AUTOBOXING, "Auto(un)boxed expressions", autoboxing());
-		
 		super.configure(acceptor);
 	}
 	
@@ -167,10 +165,6 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
 	}
 	
 	public TextStyle typeArgument() {
-		return defaultTextStyle().copy();
-	}
-	
-	public TextStyle autoboxing() {
 		return defaultTextStyle().copy();
 	}
 }
