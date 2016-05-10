@@ -63,6 +63,7 @@ import org.eclipse.xtend.ide.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtend.ide.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtend.ide.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
+import org.eclipse.xtend.ide.highlighting.XtendSyntaxColoringPreferencePage;
 import org.eclipse.xtend.ide.hover.XtendAnnotationHover;
 import org.eclipse.xtend.ide.hover.XtendHoverDocumentationProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverProvider;
@@ -151,6 +152,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
@@ -612,5 +614,9 @@ public class XtendUiModule extends AbstractXtendUiModule {
   
   public Class<? extends ASTParserFactory> bindASTParserFactory() {
     return EclipseASTParserFactory.class;
+  }
+  
+  public Class<? extends SyntaxColoringPreferencePage> bindSyntaxColoringPreferencePage() {
+    return XtendSyntaxColoringPreferencePage.class;
   }
 }
