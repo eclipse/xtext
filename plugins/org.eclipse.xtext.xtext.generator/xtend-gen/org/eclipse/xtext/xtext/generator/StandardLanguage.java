@@ -113,6 +113,7 @@ public class StandardLanguage extends XtextGeneratorLanguage {
   private SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2();
   
   public StandardLanguage() {
+    this.addReferencedResource("platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel");
     try {
       Class<? extends StandardLanguage> _class = this.getClass();
       ClassLoader _classLoader = _class.getClassLoader();
