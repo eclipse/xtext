@@ -8,6 +8,7 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.util.Map
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -17,13 +18,17 @@ import org.eclipse.jdt.internal.compiler.batch.CompilationUnit
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver
+import org.eclipse.xtext.common.types.access.TypeResource
+import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants
 import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.resource.IFragmentProvider
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.util.concurrent.IUnitOfWork
+import org.eclipse.xtext.common.types.JvmType
 
 class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISynchronizable<JavaResource> {
 	
@@ -158,6 +163,45 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 		synchronized (getLock()) {
 			return unit.exec(this) 
 		}
+	}
+	
+	val fallback = new IFragmentProvider.Fallback() {
+		
+		override getEObject(String fragment) {
+			JavaResource.super.getEObjectByID(fragment)
+		}
+		
+		override getFragment(EObject obj) {
+			JavaResource.super.getURIFragment(obj)
+		}
+		
+	}
+	
+	val m = new AbstractClassMirror() {
+		
+		override protected getTypeName() {
+			throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		}
+		
+		override protected getTypeName(JvmType type) {
+			type.identifier
+		}
+		
+		override initialize(TypeResource typeResource) {
+			throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		}
+		
+		override isSealed() {
+			throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		}
+	}
+	
+	override protected getEObjectByID(String id) {
+		m.getEObject(this, id, fallback)
+	}
+	
+	override getURIFragment(EObject eObject) {
+		m.getFragment(eObject, fallback)
 	}
 	
 }
