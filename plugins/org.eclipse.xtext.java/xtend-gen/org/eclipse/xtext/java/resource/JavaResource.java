@@ -19,13 +19,17 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.IJavaSchemeUriResolver;
+import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.java.resource.JavaDerivedStateComputer;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -219,6 +223,50 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     synchronized (this.getLock()) {
       return unit.exec(this);
     }
+  }
+  
+  private final IFragmentProvider.Fallback fallback = new IFragmentProvider.Fallback() {
+    @Override
+    public EObject getEObject(final String fragment) {
+      return JavaResource.super.getEObjectByID(fragment);
+    }
+    
+    @Override
+    public String getFragment(final EObject obj) {
+      return JavaResource.super.getURIFragment(obj);
+    }
+  };
+  
+  private final AbstractClassMirror m = new AbstractClassMirror() {
+    @Override
+    protected String getTypeName() {
+      throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    }
+    
+    @Override
+    protected String getTypeName(final JvmType type) {
+      return type.getIdentifier();
+    }
+    
+    @Override
+    public void initialize(final TypeResource typeResource) {
+      throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    }
+    
+    @Override
+    public boolean isSealed() {
+      throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    }
+  };
+  
+  @Override
+  protected EObject getEObjectByID(final String id) {
+    return this.m.getEObject(this, id, this.fallback);
+  }
+  
+  @Override
+  public String getURIFragment(final EObject eObject) {
+    return this.m.getFragment(eObject, this.fallback);
   }
   
   @Pure

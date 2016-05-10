@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -98,18 +99,25 @@ public abstract class AbstractClassMirror implements IClassMirror {
 				return null;
 			}
 			final EObject type = resource.getContents().get(0);
-			if (getTypeName().equals(fragment)) {
-				return type;
-			}
-			if(fragment.startsWith(getTypeName())) {
-				EObject member = findMember(type, fragment);
-				if(member != null)
-					return member;
+			if (type instanceof JvmType) {
+				String typeName = getTypeName((JvmType) type);
+				if (typeName.equals(fragment)) {
+					return type;
+				}
+				if(fragment.startsWith(typeName)) {
+					EObject member = findMember(type, fragment);
+					if(member != null)
+						return member;
+				}
 			}
 		}
 		return fallback.getEObject(fragment);	
 	}
 	
+	protected String getTypeName(JvmType type) {
+		return getTypeName();
+	}
+
 	protected EObject findMember(EObject container, String fragment) {
 		if (container instanceof JvmDeclaredType) {
 			EList<JvmMember> members = ((JvmDeclaredType) container).getMembers();

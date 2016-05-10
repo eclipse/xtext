@@ -61,6 +61,33 @@ class Bug473833Test extends AbstractXtendUITestCase {
 		file.assertNoErrors
 	}
 	
+	@Test def void testInheritedNestedTypes_java_decl_01() {
+		workbenchTestHelper.createFile('somePackage/Outer.java', '''
+			package somePackage;
+			
+			public class Outer {
+			  public static class Inner {}
+			}
+		''')
+		workbenchTestHelper.createFile('somePackage/Outer2.java', '''
+			package somePackage;
+			
+			public class Outer2 extends Outer {
+			}
+		''')
+		val file = workbenchTestHelper.createFile('myPackage/MyClass.xtend', '''
+			package myPackage
+			
+			import somePackage.Outer2.Inner
+			
+			class AnonymousClassTest extends Inner {
+			  Inner inner
+			}
+		''')
+		waitForBuild()
+		file.assertNoErrors
+	}
+	
 	@Test def void testInheritedNestedTypes_02() {
 		workbenchTestHelper.createFile('somePackage/Outer.xtend', '''
 			package somePackage
