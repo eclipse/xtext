@@ -3,19 +3,20 @@ package org.eclipse.xtext.java.tests
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.common.types.JvmAnnotationType
+import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.InMemoryURIHandler
 import org.eclipse.xtext.resource.CompilerPhases
+import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.common.types.JvmEnumerationType
-import org.eclipse.xtext.common.types.JvmAnnotationType
 
 @RunWith(XtextRunner)
 @InjectWith(JavaInjectorProvider)
@@ -28,10 +29,10 @@ class ResourceDescriptionProviderTest {
 					return "Hello";
 				}
 			}
-		'''.resultsIn [ JvmGenericType it |
-			assertEquals("MyTest", qualifiedName)
-			assertFalse(isInterface)
-			assertEquals(0, members.size)
+		'''.resultsIn [
+			assertEquals("MyTest", exportedObjects.head.qualifiedName.toString)
+			assertFalse((exportedObjects.head.EObjectOrProxy as JvmGenericType).isInterface)
+			assertEquals(1, exportedObjects.size)
 		]
 	}
 	
@@ -40,10 +41,10 @@ class ResourceDescriptionProviderTest {
 			public interface MyTest {
 				public String helloWorld();
 			}
-		'''.resultsIn [ JvmGenericType it |
-			assertEquals("MyTest", qualifiedName)
-			assertTrue(isInterface)
-			assertEquals(0, members.size)
+		'''.resultsIn [
+			assertEquals("MyTest", exportedObjects.head.qualifiedName.toString)
+			assertTrue((exportedObjects.head.EObjectOrProxy as JvmGenericType).isInterface)
+			assertEquals(1, exportedObjects.size)
 		]
 	}
 	
@@ -53,9 +54,9 @@ class ResourceDescriptionProviderTest {
 				FOO, BAR
 			}
 		'''.resultsIn [
-			assertEquals("MyTest", qualifiedName)
-			assertTrue(it instanceof JvmEnumerationType)
-			assertEquals(0, members.size)
+			assertEquals("MyTest", exportedObjects.head.qualifiedName.toString)
+			assertTrue(exportedObjects.head.EObjectOrProxy instanceof JvmEnumerationType)
+			assertEquals(1, exportedObjects.size)
 		]
 	}
 	
@@ -65,9 +66,9 @@ class ResourceDescriptionProviderTest {
 				String value();
 			}
 		'''.resultsIn [
-			assertEquals("MyTest", qualifiedName)
-			assertTrue(it instanceof JvmAnnotationType)
-			assertEquals(0, members.size)
+			assertEquals("MyTest", exportedObjects.head.qualifiedName.toString)
+			assertTrue(exportedObjects.head.EObjectOrProxy instanceof JvmAnnotationType)
+			assertEquals(1, exportedObjects.size)
 		]
 	}
 	
@@ -79,8 +80,8 @@ class ResourceDescriptionProviderTest {
 				abstract String value();
 			}
 		'''.resultsIn [
-			assertEquals("my.pack.MyTest", qualifiedName)
-			assertEquals(0, members.size)
+			assertEquals("my.pack.MyTest", exportedObjects.head.qualifiedName.toString)
+			assertEquals(1, exportedObjects.size)
 		]
 	}
 	
@@ -95,23 +96,23 @@ class ResourceDescriptionProviderTest {
 				@interface InnerAnnotation {}
 			}
 		'''.resultsIn [
-			assertEquals("my.pack.MyTest", qualifiedName)
-			assertEquals(4, members.size)
-			members.get(0) => [
-				assertEquals("my.pack.MyTest$InnerClass", qualifiedName)
-				assertTrue(it instanceof JvmGenericType)
+			assertEquals("my.pack.MyTest", exportedObjects.head.qualifiedName.toString)
+			assertEquals(5, exportedObjects.size)
+			exportedObjects.get(1) => [
+				assertEquals("my.pack.MyTest.InnerClass", qualifiedName.toString)
+				assertTrue(EObjectOrProxy instanceof JvmGenericType)
 			]
-			members.get(1) => [
-				assertEquals("my.pack.MyTest$InnerInterface", qualifiedName)
-				assertTrue(it instanceof JvmGenericType)
+			exportedObjects.get(2) => [
+				assertEquals("my.pack.MyTest.InnerInterface", qualifiedName.toString)
+				assertTrue(EObjectOrProxy instanceof JvmGenericType)
 			]
-			members.get(2) => [
-				assertEquals("my.pack.MyTest$InnerEnum", qualifiedName)
-				assertTrue(it instanceof JvmEnumerationType)
+			exportedObjects.get(3) => [
+				assertEquals("my.pack.MyTest.InnerEnum", qualifiedName.toString)
+				assertTrue(EObjectOrProxy instanceof JvmEnumerationType)
 			]
-			members.get(3) => [
-				assertEquals("my.pack.MyTest$InnerAnnotation", qualifiedName)
-				assertTrue(it instanceof JvmAnnotationType)
+			exportedObjects.get(4) => [
+				assertEquals("my.pack.MyTest.InnerAnnotation", qualifiedName.toString)
+				assertTrue(EObjectOrProxy instanceof JvmAnnotationType)
 			]
 		]
 	}
@@ -125,37 +126,47 @@ class ResourceDescriptionProviderTest {
 					static class DeepNested<X> {}
 				}
 			}
-		'''.resultsIn [ JvmGenericType it |
-			assertEquals("my.pack.MyTest", qualifiedName)
-			assertEquals(1, typeParameters.size)
-			assertEquals("T", typeParameters.head.name)
-			members.head as JvmGenericType => [
-				assertEquals("my.pack.MyTest$InnerInterface", qualifiedName)
-				assertEquals(2, typeParameters.size)
-				assertEquals("A", typeParameters.head.name)
-				members.head as JvmGenericType => [
-					assertEquals("my.pack.MyTest$InnerInterface$DeepNested", qualifiedName)
-					assertEquals(1, typeParameters.size)
-					assertEquals("X", typeParameters.head.name)
-				]
-			]
+		'''.resultsIn [
+			val mytest = exportedObjects.head
+			assertEquals("my.pack.MyTest", mytest.qualifiedName.toString)
+			assertEquals("<T>", mytest.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS))
+			
+			val innerinterface = exportedObjects.get(1)
+			assertEquals("my.pack.MyTest.InnerInterface", innerinterface.qualifiedName.toString)
+			assertEquals("<A,B>", innerinterface.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS))
+			assertEquals(Boolean.TRUE.toString(),innerinterface.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE))
+			
+			val deepNested = exportedObjects.get(2)
+			assertEquals("my.pack.MyTest.InnerInterface.DeepNested", deepNested.qualifiedName.toString)
+			assertEquals("<X>", deepNested.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS))
+		]
+	}
+	
+	@Test def void testEmptyFile() {
+		'''
+			//package my.pack;
+		'''.resultsIn [
+			assertTrue(exportedObjects.isEmpty)
 		]
 	}
 	
 	
-	protected def <T extends JvmDeclaredType> resultsIn(CharSequence javaCode, (T)=>void assertion) {
+	protected def void resultsIn(CharSequence javaCode, (IResourceDescription)=>void assertion) {
 		val resourceSet = resourceSet('SomeJava.java' -> javaCode.toString)
 		compilerPhases.setIndexing(resourceSet, true)
 		val resource = resourceSet.resources.head
-		val type = resource.contents.head as T
-		assertion.apply(type)
+		val description = resourceDesriptionManager.getResourceDescription(resource)
+		assertion.apply(description)
 	}
 	
 	@Inject CompilerPhases compilerPhases
 	@Inject Provider<XtextResourceSet> resourceSetProvider
+	@Inject IResourceDescription.Manager resourceDesriptionManager
 	
 	def protected resourceSet(Pair<String,String> ... files) {
 		val result = resourceSetProvider.get
+//		new ChunkedResourceDescriptions().attachToEmfObject(result)
+//		result.classpathURIContext = class.classLoader
 		result.URIConverter.URIHandlers.clear
 		val uriHandler = new InMemoryURIHandler
 		val uris = files.map[
