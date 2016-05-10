@@ -42,6 +42,7 @@ import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.TextFile;
 
 import com.google.common.collect.Lists;
@@ -234,17 +235,16 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		@Override
 		public void contributeFiles(IProject project, IFileCreator fileWriter) {
 			fileWriter.writeToFile(
-				"{\n" +
-				"	\"1.0\": {\n" +
-				"		\"project_path\": \""+ getLogicalPath() + "\",\n" +
-				"		\"project_dir\": \""+ descriptor.getLocation() + "\",\n" +
-				"		\"connection_project_dir\": \""+ descriptor.getConfig().getParentProject().getLocation() + "\",\n" +
-				"		\"connection_gradle_distribution\": \"GRADLE_DISTRIBUTION(WRAPPER)\"\n" +
-				"	}\n" +
-				"}\n",
-			".settings/gradle.prefs");
+				"connection.arguments=\n" +
+				"connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\n" +
+				"connection.gradle.user.home=null\n" +
+				"connection.java.home=null\n" +
+				"connection.jvm.arguments=\n" +
+				"connection.project.dir=" + getConnectionLogicalPath() +"\n" +
+				"eclipse.preferences.version=1\n" +
+				"project.path=\\" + getLogicalPath() + "\n",
+			".settings/org.eclipse.buildship.core.prefs");
 		}
-
 
 		private String getLogicalPath() {
 			if (descriptor instanceof ParentProjectDescriptor) {
@@ -253,6 +253,17 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 				return ":" + descriptor.getName();
 			}
 		}
+
+		private String getConnectionLogicalPath() {
+			if (descriptor instanceof ParentProjectDescriptor) {
+				return "";
+			} else if (descriptor.getConfig().getProjectLayout() == ProjectLayout.FLAT) {
+				return "../" + descriptor.getConfig().getParentProject().getName();
+			} else {
+				return "..";
+			}
+		}
+
 	}
 
 	private boolean isPluginProject(ProjectDescriptor descriptor) {
