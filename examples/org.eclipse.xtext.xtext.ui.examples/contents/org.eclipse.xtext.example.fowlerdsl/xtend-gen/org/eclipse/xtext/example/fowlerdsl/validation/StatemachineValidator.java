@@ -17,7 +17,7 @@ public class StatemachineValidator extends AbstractStatemachineValidator {
   public final static String INVALID_NAME = "invalidName";
   
   @Check
-  public void checkGreetingStartsWithCapital(final org.eclipse.xtext.example.fowlerdsl.statemachine.State state) {
+  public void checkStateNameStartsWithLowerCase(final org.eclipse.xtext.example.fowlerdsl.statemachine.State state) {
     String _name = state.getName();
     char _charAt = _name.charAt(0);
     boolean _isUpperCase = Character.isUpperCase(_charAt);

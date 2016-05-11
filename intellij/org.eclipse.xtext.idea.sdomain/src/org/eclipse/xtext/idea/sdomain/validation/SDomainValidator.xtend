@@ -19,7 +19,7 @@ class SDomainValidator extends AbstractSDomainValidator {
   public static val INVALID_NAME = 'invalidName'
 
 	@Check
-	def checkGreetingStartsWithCapital(Entity entity) {
+	def checkEntityNameStartsWithCapital(Entity entity) {
 		if (!Character.isUpperCase(entity.name.charAt(0))) {
 			warning('Name should start with a capital', 
 					SDomainPackage.Literals.TYPE__NAME,
