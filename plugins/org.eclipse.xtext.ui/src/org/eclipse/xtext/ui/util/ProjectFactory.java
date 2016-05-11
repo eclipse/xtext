@@ -122,7 +122,7 @@ public class ProjectFactory {
 	}
 
 	/**
-	 * This contributors will be executed before enhancing the project.
+	 * These contributors will be executed before enhancing the project.
 	 * 
 	 * @since 2.10
 	 */
