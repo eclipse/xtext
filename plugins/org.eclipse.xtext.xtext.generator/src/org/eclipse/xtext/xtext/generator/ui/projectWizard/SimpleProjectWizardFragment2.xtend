@@ -159,6 +159,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		import org.eclipse.core.runtime.IProgressMonitor;
 		import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 		import org.eclipse.xtext.generator.IFileSystemAccess;
+		import org.eclipse.xtext.generator.IFileSystemAccess2;
 		import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 		import org.eclipse.xtext.generator.OutputConfiguration;
 		«IF pluginProject»
@@ -235,6 +236,12 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 		
 			@Override
 			protected void enhanceProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
+				IFileSystemAccess2 access = getFileSystemAccess(project, monitor);
+				initialContents.generateInitialContents(access);
+				project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+			}
+		
+			protected IFileSystemAccess2 getFileSystemAccess(final IProject project, final IProgressMonitor monitor) {
 				EclipseResourceFileSystemAccess2 access = fileSystemAccessProvider.get();
 				access.setContext(project);
 				access.setMonitor(monitor);
@@ -249,8 +256,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 				HashMap<String, OutputConfiguration> outputConfigurations = new HashMap<String, OutputConfiguration>();
 				outputConfigurations.put(IFileSystemAccess.DEFAULT_OUTPUT, defaultOutput);
 				access.setOutputConfigurations(outputConfigurations);
-				initialContents.generateInitialContents(access);
-				project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+				return access;
 			}
 		}
 		'''
