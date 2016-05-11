@@ -30,12 +30,10 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   protected String compileInit(final AbstractRule it, final AntlrOptions options) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof ParserRule) {
-        _matched=true;
-        CharSequence _compileEntryInit = this.compileEntryInit(((ParserRule)it), options);
-        _switchResult = _compileEntryInit.toString();
-      }
+    if (it instanceof ParserRule) {
+      _matched=true;
+      CharSequence _compileEntryInit = this.compileEntryInit(((ParserRule)it), options);
+      _switchResult = _compileEntryInit.toString();
     }
     if (!_matched) {
       _switchResult = super.compileInit(it, options);
@@ -46,15 +44,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   protected CharSequence compileEntryInit(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _or = false;
-      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
-      if (_isDefinesHiddenTokens) {
-        _or = true;
-      } else {
-        boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
-        _or = _definesUnorderedGroups;
-      }
-      if (_or) {
+      if ((it.isDefinesHiddenTokens() || this._grammarAccessExtensions.definesUnorderedGroups(it, options))) {
         _builder.append("@init {");
         _builder.newLine();
         _builder.append("\t");
@@ -141,12 +131,10 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   protected String compileFinally(final AbstractRule it, final AntlrOptions options) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof ParserRule) {
-        _matched=true;
-        CharSequence _compileEntryFinally = this.compileEntryFinally(((ParserRule)it), options);
-        _switchResult = _compileEntryFinally.toString();
-      }
+    if (it instanceof ParserRule) {
+      _matched=true;
+      CharSequence _compileEntryFinally = this.compileEntryFinally(((ParserRule)it), options);
+      _switchResult = _compileEntryFinally.toString();
     }
     if (!_matched) {
       _switchResult = super.compileFinally(it, options);
@@ -157,15 +145,7 @@ public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGramma
   protected CharSequence compileEntryFinally(final ParserRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _or = false;
-      boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
-      if (_isDefinesHiddenTokens) {
-        _or = true;
-      } else {
-        boolean _definesUnorderedGroups = this._grammarAccessExtensions.definesUnorderedGroups(it, options);
-        _or = _definesUnorderedGroups;
-      }
-      if (_or) {
+      if ((it.isDefinesHiddenTokens() || this._grammarAccessExtensions.definesUnorderedGroups(it, options))) {
         _builder.append("finally {");
         _builder.newLine();
         _builder.append("\t");

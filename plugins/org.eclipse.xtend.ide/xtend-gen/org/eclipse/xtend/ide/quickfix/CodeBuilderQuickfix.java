@@ -63,11 +63,9 @@ public class CodeBuilderQuickfix {
     if (_isValid) {
       IModification _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (builder instanceof ICodeBuilder.Xtend) {
-          _matched=true;
-          _switchResult = this.getXtendModification(((ICodeBuilder.Xtend)builder));
-        }
+      if (builder instanceof ICodeBuilder.Xtend) {
+        _matched=true;
+        _switchResult = this.getXtendModification(((ICodeBuilder.Xtend)builder));
       }
       if (!_matched) {
         if (builder instanceof ICodeBuilder.Java) {
@@ -182,13 +180,11 @@ public class CodeBuilderQuickfix {
         IterableExtensions.<String>forEach(_imports, _function);
         Object _switchResult = null;
         boolean _matched = false;
-        if (!_matched) {
-          if (builder instanceof JavaFieldBuilder) {
-            _matched=true;
-            String _string = content.toString();
-            NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-            _switchResult = type.createField(_string, null, true, _nullProgressMonitor);
-          }
+        if (builder instanceof JavaFieldBuilder) {
+          _matched=true;
+          String _string = content.toString();
+          NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+          _switchResult = type.createField(_string, null, true, _nullProgressMonitor);
         }
         if (!_matched) {
           if (builder instanceof JavaConstructorBuilder) {

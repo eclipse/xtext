@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine
 import org.eclipse.xtext.web.server.generator.GeneratorResult
+import org.eclipse.xtext.web.server.generator.GeneratorService
 import org.eclipse.xtext.web.server.test.GeneratorTest.Generator
 import org.junit.Test
 
@@ -84,6 +85,60 @@ class GeneratorTest extends AbstractWebServerTest {
 		assertEquals(1, generatorInstance.invocationCount)
 		generate.service.apply()
 		assertEquals(1, generatorInstance.invocationCount)
+	}
+	
+	@Test def testGetResultWithoutContent() {
+		val file = createFile('state foo end state bar end')
+		val generate = getService(#{'serviceType' -> 'generate', 'resource' -> file.name, 'artifact' -> 'DEFAULT_OUTPUT/test.txt',
+				'includeContent' -> 'false'})
+		val result = generate.service.apply() as GeneratorResult
+		val String expectedResult = '''
+			GeneratorResult [
+			  name = "DEFAULT_OUTPUT/test.txt"
+			  contentType = "text/plain"
+			]'''
+		assertEquals(expectedResult, result.toString)
+	}
+	
+	@Test def testGetAllResults() {
+		val file = createFile('state foo end state bar end')
+		val generate = getService(#{'serviceType' -> 'generate', 'resource' -> file.name, 'allArtifacts' -> 'true'})
+		val result = generate.service.apply() as GeneratorService.GeneratedArtifacts
+		val String expectedResult = '''
+			GeneratedArtifacts [
+			  artifacts = ArrayList (
+			    GeneratorResult [
+			      name = "DEFAULT_OUTPUT/DEFAULT_ARTIFACT"
+			      content = "foo,bar\n"
+			    ],
+			    GeneratorResult [
+			      name = "DEFAULT_OUTPUT/test.txt"
+			      contentType = "text/plain"
+			      content = "hello, world!"
+			    ]
+			  )
+			]'''
+		assertEquals(expectedResult, result.toString)
+	}
+	
+	@Test def testGetAllResultsWithoutContent() {
+		val file = createFile('state foo end state bar end')
+		val generate = getService(#{'serviceType' -> 'generate', 'resource' -> file.name, 'allArtifacts' -> 'true',
+				'includeContent' -> 'false'})
+		val result = generate.service.apply() as GeneratorService.GeneratedArtifacts
+		val String expectedResult = '''
+			GeneratedArtifacts [
+			  artifacts = ArrayList (
+			    GeneratorResult [
+			      name = "DEFAULT_OUTPUT/DEFAULT_ARTIFACT"
+			    ],
+			    GeneratorResult [
+			      name = "DEFAULT_OUTPUT/test.txt"
+			      contentType = "text/plain"
+			    ]
+			  )
+			]'''
+		assertEquals(expectedResult, result.toString)
 	}
 	
 }

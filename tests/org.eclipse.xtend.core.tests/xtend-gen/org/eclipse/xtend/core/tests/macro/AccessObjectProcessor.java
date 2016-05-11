@@ -78,15 +78,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
         if (_equals) {
           ctx.addError(it, (("Class " + PVersionName) + " not found"));
         }
-        boolean _and = false;
-        boolean _notEquals = (!Objects.equal(p, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          boolean _notEquals_1 = (!Objects.equal(ser, null));
-          _and = _notEquals_1;
-        }
-        if (_and) {
+        if (((!Objects.equal(p, null)) && (!Objects.equal(ser, null)))) {
           final LinkedList<TypeReference> pIfcs = new LinkedList<TypeReference>();
           pIfcs.add(ser);
           p.setImplementedInterfaces(pIfcs);
@@ -98,15 +90,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
         if (_equals_1) {
           ctx.addError(it, (("Class " + GVersionName) + " not found"));
         }
-        boolean _and_1 = false;
-        boolean _notEquals_2 = (!Objects.equal(g, null));
-        if (!_notEquals_2) {
-          _and_1 = false;
-        } else {
-          boolean _notEquals_3 = (!Objects.equal(ser, null));
-          _and_1 = _notEquals_3;
-        }
-        if (_and_1) {
+        if (((!Objects.equal(g, null)) && (!Objects.equal(ser, null)))) {
           final LinkedList<TypeReference> gIfcs = new LinkedList<TypeReference>();
           gIfcs.add(ser);
           g.setImplementedInterfaces(gIfcs);

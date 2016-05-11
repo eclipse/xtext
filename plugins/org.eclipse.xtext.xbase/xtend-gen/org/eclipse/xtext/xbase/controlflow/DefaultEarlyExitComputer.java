@@ -55,16 +55,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
   }
   
   protected boolean isNotEmpty(final Collection<IEarlyExitComputer.ExitPoint> exitPoints) {
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(exitPoints, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _isEmpty = exitPoints.isEmpty();
-      boolean _not = (!_isEmpty);
-      _and = _not;
-    }
-    return _and;
+    return ((!Objects.equal(exitPoints, null)) && (!exitPoints.isEmpty()));
   }
   
   @Override
@@ -124,15 +115,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     if (_isNotEmpty) {
       return exitPoints;
     }
-    boolean _or = false;
-    boolean _equals = Objects.equal(predicate, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _isBooleanConstant = this.isBooleanConstant(predicate, true);
-      _or = _isBooleanConstant;
-    }
-    if (_or) {
+    if ((Objects.equal(predicate, null) || this.isBooleanConstant(predicate, true))) {
       XExpression _eachExpression = expression.getEachExpression();
       Collection<IEarlyExitComputer.ExitPoint> _exitPoints = this.getExitPoints(_eachExpression);
       exitPoints = _exitPoints;
@@ -233,15 +216,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     Collection<IEarlyExitComputer.ExitPoint> thenExitPoints = this.getExitPoints(_then);
     XExpression _else = expression.getElse();
     Collection<IEarlyExitComputer.ExitPoint> elseExitPoints = this.getExitPoints(_else);
-    boolean _and = false;
-    boolean _isNotEmpty_1 = this.isNotEmpty(thenExitPoints);
-    if (!_isNotEmpty_1) {
-      _and = false;
-    } else {
-      boolean _isNotEmpty_2 = this.isNotEmpty(elseExitPoints);
-      _and = _isNotEmpty_2;
-    }
-    if (_and) {
+    if ((this.isNotEmpty(thenExitPoints) && this.isNotEmpty(elseExitPoints))) {
       Collection<IEarlyExitComputer.ExitPoint> result = Lists.<IEarlyExitComputer.ExitPoint>newArrayList(thenExitPoints);
       result.addAll(elseExitPoints);
       return result;

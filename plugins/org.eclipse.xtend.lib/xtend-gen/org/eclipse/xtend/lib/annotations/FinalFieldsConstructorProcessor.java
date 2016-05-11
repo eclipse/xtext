@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
@@ -17,7 +16,6 @@ import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
@@ -31,7 +29,6 @@ import org.eclipse.xtend.lib.macro.declaration.ResolvedParameter;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -67,50 +64,14 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
         @Override
         public Boolean apply(final MutableFieldDeclaration it) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          boolean _and_2 = false;
-          boolean _isStatic = it.isStatic();
-          boolean _not = (!_isStatic);
-          if (!_not) {
-            _and_2 = false;
-          } else {
-            boolean _isFinal = it.isFinal();
-            boolean _equals = (_isFinal == true);
-            _and_2 = _equals;
-          }
-          if (!_and_2) {
-            _and_1 = false;
-          } else {
-            Expression _initializer = it.getInitializer();
-            boolean _equals_1 = Objects.equal(_initializer, null);
-            _and_1 = _equals_1;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            boolean _isThePrimaryGeneratedJavaElement = Util.this.context.isThePrimaryGeneratedJavaElement(it);
-            _and = _isThePrimaryGeneratedJavaElement;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((((!it.isStatic()) && (it.isFinal() == true)) && Objects.equal(it.getInitializer(), null)) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
         }
       };
       return IterableExtensions.filter(_declaredFields, _function);
     }
     
     public boolean needsFinalFieldConstructor(final MutableClassDeclaration it) {
-      boolean _and = false;
-      boolean _hasFinalFieldsConstructor = this.hasFinalFieldsConstructor(it);
-      boolean _not = (!_hasFinalFieldsConstructor);
-      if (!_not) {
-        _and = false;
-      } else {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(it);
-        Iterable<? extends ConstructorDeclaration> _declaredConstructors = ((ClassDeclaration) _primarySourceElement).getDeclaredConstructors();
-        boolean _isEmpty = IterableExtensions.isEmpty(_declaredConstructors);
-        _and = _isEmpty;
-      }
-      return _and;
+      return ((!this.hasFinalFieldsConstructor(it)) && IterableExtensions.isEmpty(((ClassDeclaration) this.context.getPrimarySourceElement(it)).getDeclaredConstructors()));
     }
     
     public boolean hasFinalFieldsConstructor(final MutableTypeDeclaration cls) {
@@ -237,20 +198,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       if (_not) {
         this.context.addError(it, "Parameter list must be empty");
       }
-      boolean _and = false;
-      Expression _body = it.getBody();
-      boolean _tripleNotEquals = (_body != null);
-      if (!_tripleNotEquals) {
-        _and = false;
-      } else {
-        Expression _body_1 = it.getBody();
-        String _string = _body_1.toString();
-        Matcher _matcher = FinalFieldsConstructorProcessor.Util.EMPTY_BODY.matcher(_string);
-        boolean _matches = _matcher.matches();
-        boolean _not_1 = (!_matches);
-        _and = _not_1;
-      }
-      if (_and) {
+      if (((it.getBody() != null) && (!FinalFieldsConstructorProcessor.Util.EMPTY_BODY.matcher(it.getBody().toString()).matches()))) {
         this.context.addError(it, "Body must be empty");
       }
       Iterable<? extends ResolvedParameter> _elvis = null;
@@ -328,22 +276,11 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     
     public ResolvedConstructor getSuperConstructor(final TypeDeclaration it) {
       if ((it instanceof ClassDeclaration)) {
-        boolean _or = false;
-        TypeReference _extendedClass = ((ClassDeclaration)it).getExtendedClass();
-        TypeReference _object = this.context.getObject();
-        boolean _equals = Objects.equal(_extendedClass, _object);
-        if (_equals) {
-          _or = true;
-        } else {
-          TypeReference _extendedClass_1 = ((ClassDeclaration)it).getExtendedClass();
-          boolean _equals_1 = Objects.equal(_extendedClass_1, null);
-          _or = _equals_1;
-        }
-        if (_or) {
+        if ((Objects.equal(((ClassDeclaration)it).getExtendedClass(), this.context.getObject()) || Objects.equal(((ClassDeclaration)it).getExtendedClass(), null))) {
           return null;
         }
-        TypeReference _extendedClass_2 = ((ClassDeclaration)it).getExtendedClass();
-        Iterable<? extends ResolvedConstructor> _declaredResolvedConstructors = _extendedClass_2.getDeclaredResolvedConstructors();
+        TypeReference _extendedClass = ((ClassDeclaration)it).getExtendedClass();
+        Iterable<? extends ResolvedConstructor> _declaredResolvedConstructors = _extendedClass.getDeclaredResolvedConstructors();
         return IterableExtensions.head(_declaredResolvedConstructors);
       } else {
         return null;

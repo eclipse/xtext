@@ -17,6 +17,7 @@ package org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlang
  *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getDatatype <em>Datatype</em>}</li>
  *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getRef <em>Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getLit <em>Lit</em>}</li>
+ *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getFragName <em>Frag Name</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage#getMixed()
@@ -157,5 +158,31 @@ public interface Mixed extends Root
    * @generated
    */
   void setLit(org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Enum value);
+
+  /**
+   * Returns the value of the '<em><b>Frag Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Frag Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Frag Name</em>' attribute.
+   * @see #setFragName(String)
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage#getMixed_FragName()
+   * @model
+   * @generated
+   */
+  String getFragName();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getFragName <em>Frag Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Frag Name</em>' attribute.
+   * @see #getFragName()
+   * @generated
+   */
+  void setFragName(String value);
 
 } // Mixed

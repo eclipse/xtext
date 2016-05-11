@@ -20,21 +20,25 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtend.core.xtend.impl.XtendFactoryImpl
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
+import org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsFactoryImpl
+import org.eclipse.xtext.xbase.impl.XbaseFactoryImpl
 import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import org.eclipse.xtend2.lib.StringConcatenation
 
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
 	protected JavaConverter j2x
-	static protected boolean DUMP = true;
+	static protected boolean DUMP = false;
 
 	@Before def void setUp() {
 		j2x = javaConverterProvider.get()
@@ -730,6 +734,41 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals(PUBLIC, (clazz.getMembers().get(0) as XtendConstructor).getVisibility())
 		assertEquals(PUBLIC, (clazz.getMembers().get(1) as XtendConstructor).getVisibility())
 	}
+	
+	@Test def void testConstructorProblemCase() throws Exception {
+			
+		var conversionResult = j2x.toXtend("Foo", '''
+		public class Foo {
+			Foo() {
+			}
+			Foo(int i) {
+				this();
+			}
+			Foo(int i, int j) {
+				this(i++, j);
+			}
+		}''')
+
+		var String xtendCode = conversionResult.getXtendCode()
+		assertFalse(xtendCode.isEmpty())
+		dump(xtendCode)
+		assertEquals(
+			'''
+			class Foo {
+				package  new() {
+				}
+				package  new(int i) {
+					this()
+				}
+				package  new(int i_finalParam_, int j) {
+					var  i=i_finalParam_ 
+					this(i++, j)
+				}
+			}'''.toString
+		,xtendCode)
+		assertEquals(1, Iterables.size(conversionResult.getProblems()))
+		assertEquals("Final parameter modified in constructor call (start: 63, length: 5)",conversionResult.getProblems().get(0))
+	}
 
 	@Test def void testSuperCalls() throws Exception {
 
@@ -863,12 +902,18 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			private int ar[] = new int[1];
 			public void arDim() {
 				int ar2[] = new int[2];
+				ar2  = new int[4];
+				byte bytes[] = new byte[1];
+				bytes = new byte[2];
 			}
 		'''
 		assertEquals('''
 		int[] ar=newIntArrayOfSize(1)
 		def void arDim() {
 			var int[] ar2=newIntArrayOfSize(2) 
+			ar2=newIntArrayOfSize(4) 
+			var byte[] bytes=newByteArrayOfSize(1) 
+			bytes=newByteArrayOfSize(2) 
 		}'''.toString, toXtendClassBodyDeclr(xtendCode))
 	}
 
@@ -1276,7 +1321,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 	
 	@Test def void testSwitchCase3() throws Exception {
-		var clazz = toValidXtendClass(
+		var clazz = j2x.toXtend("Foo",
 			'''
 			public class Foo {
 				public void doStuff() {
@@ -1307,7 +1352,47 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 					}
 				}
 			}''')
-		assertNotNull(clazz)
+			
+		assertGeneratedXtend('''
+		class Foo {
+			def void doStuff() {
+				
+				switch (1) {
+					case 1,
+					case 2:/* FIXME unsupported fall-through */{
+						System.out.println() 
+					}
+					case 3:{
+					}
+				}
+			}
+			def void doStuff2() {
+				
+				switch (1) {
+					case 1,
+					case 2:/* FIXME unsupported fall-through */{
+						System.out.println() 
+					}
+					case 3:{
+						System.out.println() 
+					}
+				}
+			}
+			def void doStuff3() {
+				
+				switch (1) {
+					case 1,
+					case 2:/* FIXME unsupported fall-through */{
+						System.out.println() 
+					}
+					case 3,
+					default :{
+						
+					}
+				}
+			}
+		}''',clazz.xtendCode)
+		assertEquals(3,clazz.problems.size)
 	}
 
 	@Test def void testThrowExpressionCase() throws Exception {
@@ -1322,14 +1407,14 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		var clazz = toValidXtendClass(java)
 		assertNotNull(clazz)
 		
-		assertEquals(
+		assertGeneratedXtend(
 		'''
 		package class Foo {
 			def package void foo(byte[] bytes) {
 				if (true) throw new RuntimeException();
 				{ val _wrVal_bytes=bytes _wrVal_bytes.set(1,2 as byte)} 
 			}
-		}'''.toString, java.toXtendCode)
+		}''', java.toXtendCode)
 	}
 	
 	@Test def void testXORExpressionCase() throws Exception {
@@ -1672,7 +1757,18 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			}'''
 		assertEquals(expected, xtendCode)
 	}
-
+	
+	@Test
+	def testForceStatementForTargetObject() {
+		assertFalse("Not a statement before annotation",
+			j2x.shouldForceStatementMode(new XAnnotationsFactoryImpl().createXAnnotation))
+		val xc = new XtendFactoryImpl().createXtendConstructor()
+		assertFalse("Not a statement before constructor", j2x.shouldForceStatementMode(xc))
+		val block = new XbaseFactoryImpl().createXBlockExpression
+		xc.expression = block
+		assertTrue("Force statement when parent is executable", j2x.shouldForceStatementMode(block))
+	}
+	
 	def protected XtendClass toValidXtendClass(CharSequence javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}
@@ -1715,6 +1811,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		for (String problem : conversionResult.getProblems()) {
 			dump('''ERROR: «problem»''')
 		}
+		assertEquals(0,conversionResult.problems.size)
 		return file(xtendCode, true)
 	}
 
@@ -1735,5 +1832,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			println(text)
 		}
 	}
-	
+	def assertGeneratedXtend(StringConcatenation expected, String actual) {
+		assertEquals(expected.toString, actual)
+	}
 }

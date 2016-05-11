@@ -103,14 +103,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
         final IResourceDescription.Event.Listener _function = new IResourceDescription.Event.Listener() {
           @Override
           public void descriptionsChanged(final IResourceDescription.Event e) {
-            boolean _and = false;
-            Boolean _head = IterableExtensions.<Boolean>head(listenToEvent);
-            if (!(_head).booleanValue()) {
-              _and = false;
-            } else {
-              _and = (e instanceof IResourceDescription.CoarseGrainedEvent);
-            }
-            if (_and) {
+            if (((IterableExtensions.<Boolean>head(listenToEvent)).booleanValue() && (e instanceof IResourceDescription.CoarseGrainedEvent))) {
               listenToEvent.set(0, Boolean.valueOf(false));
               event.add(e);
               XtendEditorChangingClasspathTest.this.stateChangeEventBroker.removeListener(this);

@@ -70,13 +70,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
       @Override
       public Boolean apply(final Resource.Diagnostic it) {
-        boolean _or = false;
-        if ((it instanceof XtextSyntaxDiagnostic)) {
-          _or = true;
-        } else {
-          _or = (it instanceof XtextLinkingDiagnostic);
-        }
-        return Boolean.valueOf(_or);
+        return Boolean.valueOf(((it instanceof XtextSyntaxDiagnostic) || (it instanceof XtextLinkingDiagnostic)));
       }
     };
     return IterableExtensions.<Resource.Diagnostic>filter(_errors, _function);

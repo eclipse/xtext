@@ -8,9 +8,7 @@
 package org.eclipse.xtext.xbase.util;
 
 import java.beans.Introspector;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 
 /**
@@ -59,17 +57,7 @@ public class PropertyUtil {
     {
       final int prefixLength = prefix.length();
       String _xifexpression = null;
-      boolean _and = false;
-      boolean _startsWithPrefix = PropertyUtil.startsWithPrefix(methodName, prefix, prefixLength);
-      if (!_startsWithPrefix) {
-        _and = false;
-      } else {
-        EList<JvmFormalParameter> _parameters = operation.getParameters();
-        int _size = _parameters.size();
-        boolean _tripleEquals = (_size == params);
-        _and = _tripleEquals;
-      }
-      if (_and) {
+      if ((PropertyUtil.startsWithPrefix(methodName, prefix, prefixLength) && (operation.getParameters().size() == params))) {
         String _substring = methodName.substring(prefixLength);
         _xifexpression = Introspector.decapitalize(_substring);
       }
@@ -79,23 +67,6 @@ public class PropertyUtil {
   }
   
   protected static boolean startsWithPrefix(final String methodName, final String prefix, final int prefixLength) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    int _length = methodName.length();
-    boolean _greaterThan = (_length > prefixLength);
-    if (!_greaterThan) {
-      _and_1 = false;
-    } else {
-      boolean _startsWith = methodName.startsWith(prefix);
-      _and_1 = _startsWith;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      char _charAt = methodName.charAt(prefixLength);
-      boolean _isUpperCase = Character.isUpperCase(_charAt);
-      _and = _isUpperCase;
-    }
-    return _and;
+    return (((methodName.length() > prefixLength) && methodName.startsWith(prefix)) && Character.isUpperCase(methodName.charAt(prefixLength)));
   }
 }

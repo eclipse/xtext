@@ -656,30 +656,8 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
         EObject object = _resourceSet.getEObject(_uriToProblem, true);
         String[] _data = it.getData();
         final boolean featureCall = ((List<String>)Conversions.doWrapArray(_data)).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
-        boolean _and = false;
-        boolean _and_1 = false;
-        boolean _and_2 = false;
-        String _code = it.getCode();
-        boolean _equals = Objects.equal(_code, Diagnostic.LINKING_DIAGNOSTIC);
-        if (!_equals) {
-          _and_2 = false;
-        } else {
-          Severity _severity = it.getSeverity();
-          boolean _tripleEquals = (_severity == Severity.ERROR);
-          _and_2 = _tripleEquals;
-        }
-        if (!_and_2) {
-          _and_1 = false;
-        } else {
-          boolean _isInstance = objectType.isInstance(object);
-          _and_1 = _isInstance;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          _and = featureCall;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && (it.getSeverity() == Severity.ERROR)) && 
+          objectType.isInstance(object)) && featureCall));
       }
     };
     final Iterable<Issue> match = IterableExtensions.<Issue>filter(allIssues, _function);

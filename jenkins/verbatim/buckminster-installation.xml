@@ -15,12 +15,12 @@
         <hudson.model.StringParameterDefinition>
           <name>BUCKY_HOME</name>
           <description></description>
-          <defaultValue>/opt/jenkins/tools/buckminster-headless/</defaultValue>
+          <defaultValue>${JENKINS_HOME}/tools/buckminster-headless/</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>B3_HOME</name>
           <description></description>
-          <defaultValue>/opt/jenkins/tools/b3-headless/</defaultValue>
+          <defaultValue>${JENKINS_HOME}/tools/b3-headless/</defaultValue>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>UPDATE</name>
@@ -45,7 +45,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>rm -r ${B3_HOME}
+      <command>rm -rf ${B3_HOME}
 mkdir -p ${B3_HOME}
 cd ${B3_HOME}/../
 if [ ! -f director/director ];

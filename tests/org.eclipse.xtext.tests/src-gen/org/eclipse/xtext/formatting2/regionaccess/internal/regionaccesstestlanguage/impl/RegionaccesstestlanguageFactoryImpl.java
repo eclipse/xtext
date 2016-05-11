@@ -24,6 +24,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguageFactory;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Unassigned;
 
@@ -88,6 +89,7 @@ public class RegionaccesstestlanguageFactoryImpl extends EFactoryImpl implements
       case RegionaccesstestlanguagePackage.DELEGATE: return createDelegate();
       case RegionaccesstestlanguagePackage.EXPRESSION: return createExpression();
       case RegionaccesstestlanguagePackage.MIXED: return createMixed();
+      case RegionaccesstestlanguagePackage.ROOT_ACTION: return createRootAction();
       case RegionaccesstestlanguagePackage.ADD: return createAdd();
       case RegionaccesstestlanguagePackage.NAMED: return createNamed();
       case RegionaccesstestlanguagePackage.ACTION: return createAction();
@@ -228,6 +230,17 @@ public class RegionaccesstestlanguageFactoryImpl extends EFactoryImpl implements
   {
     MixedImpl mixed = new MixedImpl();
     return mixed;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RootAction createRootAction()
+  {
+    RootActionImpl rootAction = new RootActionImpl();
+    return rootAction;
   }
 
   /**

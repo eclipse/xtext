@@ -171,17 +171,7 @@ public class EmfModelsTest {
     for (final EStructuralFeature eStructuralFeature : _eAllStructuralFeatures) {
       try {
         String prefix = "get";
-        boolean _and = false;
-        EClassifier _eType = eStructuralFeature.getEType();
-        boolean _equals = Objects.equal(_eType, EcorePackage.Literals.EBOOLEAN);
-        if (!_equals) {
-          _and = false;
-        } else {
-          int _upperBound = eStructuralFeature.getUpperBound();
-          boolean _equals_1 = (_upperBound == 1);
-          _and = _equals_1;
-        }
-        if (_and) {
+        if ((Objects.equal(eStructuralFeature.getEType(), EcorePackage.Literals.EBOOLEAN) && (eStructuralFeature.getUpperBound() == 1))) {
           prefix = "is";
         }
         String _name = eStructuralFeature.getName();
@@ -205,8 +195,8 @@ public class EmfModelsTest {
             String _firstUpper_1 = Strings.toFirstUpper(_name_2);
             final String setterName = ("set" + _firstUpper_1);
             Class<? extends EObject> _class_1 = obj.getClass();
-            EClassifier _eType_1 = eStructuralFeature.getEType();
-            Class<?> _javaClass = this.toJavaClass(_eType_1);
+            EClassifier _eType = eStructuralFeature.getEType();
+            Class<?> _javaClass = this.toJavaClass(_eType);
             final Method setter = _class_1.getMethod(setterName, _javaClass);
             boolean _isCustom_1 = this.isCustom(setter);
             if (_isCustom_1) {
@@ -217,23 +207,8 @@ public class EmfModelsTest {
               EmfModelsTest.LOGGER.debug(_plus_3);
             }
           }
-          boolean _and_1 = false;
-          boolean _and_2 = false;
-          if (!(eStructuralFeature instanceof EReference)) {
-            _and_2 = false;
-          } else {
-            boolean _isContainment = ((EReference) eStructuralFeature).isContainment();
-            boolean _not_1 = (!_isContainment);
-            _and_2 = _not_1;
-          }
-          if (!_and_2) {
-            _and_1 = false;
-          } else {
-            EReference _eOpposite = ((EReference) eStructuralFeature).getEOpposite();
-            boolean _equals_2 = Objects.equal(_eOpposite, null);
-            _and_1 = _equals_2;
-          }
-          if (_and_1) {
+          if ((((eStructuralFeature instanceof EReference) && (!((EReference) eStructuralFeature).isContainment())) && 
+            Objects.equal(((EReference) eStructuralFeature).getEOpposite(), null))) {
             String _firstUpper_2 = Strings.toFirstUpper(getterName);
             final String basicGetterName = ("basic" + _firstUpper_2);
             Class<? extends EObject> _class_2 = obj.getClass();
@@ -272,11 +247,9 @@ public class EmfModelsTest {
     boolean _isPrimitive = clazz.isPrimitive();
     if (_isPrimitive) {
       boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(clazz, Boolean.TYPE)) {
-          _matched=true;
-          return Boolean.valueOf(false);
-        }
+      if (Objects.equal(clazz, Boolean.TYPE)) {
+        _matched=true;
+        return Boolean.valueOf(false);
       }
       if (!_matched) {
         if (Objects.equal(clazz, Long.TYPE)) {

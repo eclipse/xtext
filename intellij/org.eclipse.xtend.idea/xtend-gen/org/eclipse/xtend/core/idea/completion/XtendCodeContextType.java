@@ -140,19 +140,11 @@ public abstract class XtendCodeContextType extends TemplateContextType {
   }
   
   public boolean internalIsInContext(final PsiFile file, final int offset) {
-    boolean _and = false;
-    boolean _isEmpty = this.tokenSets.isEmpty();
-    if (!_isEmpty) {
-      _and = false;
-    } else {
-      boolean _isEmpty_1 = this.followElements.isEmpty();
-      _and = _isEmpty_1;
-    }
-    if (_and) {
+    if ((this.tokenSets.isEmpty() && this.followElements.isEmpty())) {
       return true;
     }
-    boolean _isEmpty_2 = this.tokenSets.isEmpty();
-    boolean _not = (!_isEmpty_2);
+    boolean _isEmpty = this.tokenSets.isEmpty();
+    boolean _not = (!_isEmpty);
     if (_not) {
       final Object tokenSet = this.getTokenSet(file, offset);
       boolean _contains = this.tokenSets.contains(tokenSet);
@@ -160,13 +152,13 @@ public abstract class XtendCodeContextType extends TemplateContextType {
       if (_not_1) {
         return false;
       }
-      boolean _isEmpty_3 = this.followElements.isEmpty();
-      if (_isEmpty_3) {
+      boolean _isEmpty_1 = this.followElements.isEmpty();
+      if (_isEmpty_1) {
         return true;
       }
     }
-    boolean _isEmpty_4 = this.followElements.isEmpty();
-    if (_isEmpty_4) {
+    boolean _isEmpty_2 = this.followElements.isEmpty();
+    if (_isEmpty_2) {
       return false;
     }
     final PsiElement element = file.findElementAt(offset);
@@ -187,16 +179,7 @@ public abstract class XtendCodeContextType extends TemplateContextType {
     final IFollowElementAcceptor _function = new IFollowElementAcceptor() {
       @Override
       public void accept(final AbstractElement it) {
-        boolean _and = false;
-        boolean _get = hasFollowElement.get();
-        boolean _not = (!_get);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _contains = XtendCodeContextType.this.followElements.contains(it);
-          _and = _contains;
-        }
-        if (_and) {
+        if (((!hasFollowElement.get()) && XtendCodeContextType.this.followElements.contains(it))) {
           hasFollowElement.set(true);
         }
       }

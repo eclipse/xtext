@@ -35,11 +35,9 @@ public class StatemachineSemanticHighlightingCalculator extends DefaultSemanticH
   @Override
   protected boolean highlightElement(final EObject it, final IHighlightedPositionAcceptor acceptor, final CancelIndicator cancelIndicator) {
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof Signal) {
-        _matched=true;
-        this.highlightSignal(it, ((Signal)it), StatemachinePackage.Literals.SIGNAL__NAME, acceptor, cancelIndicator);
-      }
+    if (it instanceof Signal) {
+      _matched=true;
+      this.highlightSignal(it, ((Signal)it), StatemachinePackage.Literals.SIGNAL__NAME, acceptor, cancelIndicator);
     }
     if (!_matched) {
       if (it instanceof Command) {

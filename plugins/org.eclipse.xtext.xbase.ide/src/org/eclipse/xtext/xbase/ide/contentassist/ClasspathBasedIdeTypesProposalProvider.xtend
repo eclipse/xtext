@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -33,6 +34,8 @@ class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposalProvide
 	@Inject ClassLoader classLoader
 	
 	@Inject ClasspathScanner classpathScanner
+	
+	@Inject IdeContentProposalCreator proposalCreator
 	
 	@Inject IdeContentProposalPriorities proposalPriorities
 	
@@ -85,9 +88,7 @@ class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposalProvide
 	}
 	
 	protected def canPropose(ITypeDescriptor typeDesc, ContentAssistContext context, Predicate<ITypeDescriptor> filter) {
-		val prefix = context.prefix
-		typeDesc.simpleName.regionMatches(true, 0, prefix, 0, prefix.length)
-				&& isVisible(typeDesc, context) && filter.apply(typeDesc)
+		isVisible(typeDesc, context) && filter.apply(typeDesc)
 	}
 	
 	protected def isVisible(ITypeDescriptor typeDesc, ContentAssistContext context) {
@@ -96,15 +97,14 @@ class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposalProvide
 	
 	protected def ContentAssistEntry createProposal(EReference reference, ITypeDescriptor typeDesc,
 			ContentAssistContext context, XImportSection importSection, ITextRegion importSectionRegion) {
-		return new ContentAssistEntry => [
-			prefix = context.prefix
-			val qualifiedName = qualifiedNameConverter.toString(typeDesc.qualifiedName)
-			if (isImportDeclaration(reference, context)) {
-				proposal = qualifiedName
+		val importDecl = isImportDeclaration(reference, context)
+		val qualifiedName = qualifiedNameConverter.toString(typeDesc.qualifiedName)
+		val proposal = if (importDecl) qualifiedName else typeDesc.simpleName
+		proposalCreator.createProposal(proposal, context) [
+			if (importDecl) {
 				label = typeDesc.simpleName
 				description = proposal
 			} else {
-				proposal = typeDesc.simpleName
 				description = qualifiedName
 				if (importSectionRegion !== null
 						&& isImportDeclarationRequired(typeDesc, qualifiedName, context, importSection)) {

@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.wizard;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.util.ProjectFactory;
 
@@ -79,4 +81,24 @@ public abstract class AbstractPluginProjectCreator extends AbstractProjectCreato
 			"de.itemis.xtext.antlr;resolution:=optional",
 			"org.eclipse.emf.mwe2.launch;resolution:=optional");
 	}
+
+	@Override
+	protected String[] getProjectNatures() {
+		return new String[] {
+			JavaCore.NATURE_ID,
+			"org.eclipse.pde.PluginNature", //$NON-NLS-1$
+			XtextProjectHelper.NATURE_ID
+		};
+	}
+
+	@Override
+	protected String[] getBuilders() {
+		return new String[]{
+			JavaCore.BUILDER_ID,
+			"org.eclipse.pde.ManifestBuilder",  //$NON-NLS-1$
+			"org.eclipse.pde.SchemaBuilder", //$NON-NLS-1$
+			XtextProjectHelper.BUILDER_ID
+		};
+	}
+
 }

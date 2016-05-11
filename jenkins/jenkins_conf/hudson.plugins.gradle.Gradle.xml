@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.gradle.Gradle_-DescriptorImpl plugin="gradle@1.24">
+  <installations>
+    <hudson.plugins.gradle.GradleInstallation>
+      <name>gradle 2</name>
+      <home></home>
+      <properties>
+        <hudson.tools.InstallSourceProperty>
+          <installers>
+            <hudson.plugins.gradle.GradleInstaller>
+              <id>2.12</id>
+            </hudson.plugins.gradle.GradleInstaller>
+          </installers>
+        </hudson.tools.InstallSourceProperty>
+      </properties>
+      <gradleHome></gradleHome>
+    </hudson.plugins.gradle.GradleInstallation>
+  </installations>
+</hudson.plugins.gradle.Gradle_-DescriptorImpl>

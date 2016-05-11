@@ -50,16 +50,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
   protected <T extends Object> CharSequence toQualifiedNames(final List<T> it, final Function1<? super T, ? extends String> toQualifiedNameFunction) {
     CharSequence _xblockexpression = null;
     {
-      boolean _or = false;
-      boolean _equals = Objects.equal(it, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        int _size = it.size();
-        boolean _equals_1 = (_size == 0);
-        _or = _equals_1;
-      }
-      if (_or) {
+      if ((Objects.equal(it, null) || (it.size() == 0))) {
         return "";
       }
       StringConcatenation _builder = new StringConcatenation();

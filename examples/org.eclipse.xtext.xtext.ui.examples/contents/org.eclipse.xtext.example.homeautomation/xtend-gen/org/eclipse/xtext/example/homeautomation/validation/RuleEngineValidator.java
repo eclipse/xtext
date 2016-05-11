@@ -107,40 +107,15 @@ public class RuleEngineValidator extends AbstractRuleEngineValidator {
   @Check
   public void checkRuleRecursion(final XFeatureCall featureCall) {
     final Rule containingRule = EcoreUtil2.<Rule>getContainerOfType(featureCall, Rule.class);
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _and_2 = false;
-    boolean _notEquals = (!Objects.equal(containingRule, null));
-    if (!_notEquals) {
-      _and_2 = false;
-    } else {
-      JvmIdentifiableElement _feature = featureCall.getFeature();
-      _and_2 = (_feature instanceof JvmOperation);
-    }
-    if (!_and_2) {
-      _and_1 = false;
-    } else {
-      String _concreteSyntaxFeatureName = featureCall.getConcreteSyntaxFeatureName();
-      boolean _equals = Objects.equal(_concreteSyntaxFeatureName, "fire");
-      _and_1 = _equals;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
+    if (((((!Objects.equal(containingRule, null)) && (featureCall.getFeature() instanceof JvmOperation)) && Objects.equal(featureCall.getConcreteSyntaxFeatureName(), "fire")) && (featureCall.getFeatureCallArguments().size() == 1))) {
       EList<XExpression> _featureCallArguments = featureCall.getFeatureCallArguments();
-      int _size = _featureCallArguments.size();
-      boolean _equals_1 = (_size == 1);
-      _and = _equals_1;
-    }
-    if (_and) {
-      EList<XExpression> _featureCallArguments_1 = featureCall.getFeatureCallArguments();
-      final XExpression argument = IterableExtensions.<XExpression>head(_featureCallArguments_1);
+      final XExpression argument = IterableExtensions.<XExpression>head(_featureCallArguments);
       if ((argument instanceof XAbstractFeatureCall)) {
-        JvmIdentifiableElement _feature_1 = ((XAbstractFeatureCall)argument).getFeature();
-        final EObject sourceElem = this._iJvmModelAssociations.getPrimarySourceElement(_feature_1);
+        JvmIdentifiableElement _feature = ((XAbstractFeatureCall)argument).getFeature();
+        final EObject sourceElem = this._iJvmModelAssociations.getPrimarySourceElement(_feature);
         org.eclipse.xtext.example.homeautomation.ruleEngine.State _deviceState = containingRule.getDeviceState();
-        boolean _equals_2 = Objects.equal(sourceElem, _deviceState);
-        if (_equals_2) {
+        boolean _equals = Objects.equal(sourceElem, _deviceState);
+        if (_equals) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Firing the same device state that triggers the rule \"");
           String _description = containingRule.getDescription();

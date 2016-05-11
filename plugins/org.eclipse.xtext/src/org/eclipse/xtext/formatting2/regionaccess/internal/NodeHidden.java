@@ -51,7 +51,7 @@ public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 	public IHiddenRegionPart getPreviousHiddenPart() {
 		List<IHiddenRegionPart> parts = hiddenRegion.getParts();
 		int i = parts.indexOf(this) - 1;
-		if (i > 0)
+		if (i >= 0)
 			return parts.get(i);
 		return null;
 	}

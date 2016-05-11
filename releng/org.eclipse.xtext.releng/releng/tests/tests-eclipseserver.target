@@ -20,12 +20,12 @@
 <unit id="org.eclipse.xpand" version="0.0.0"/>
 <unit id="org.eclipse.xtend" version="0.0.0"/>
 <unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
-<repository location="http://download.eclipse.org/releases/luna"/>
+<repository location="http://download.eclipse.org/releases/luna/201502271000/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.swtbot.eclipse.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.swtbot.eclipse.test.junit.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/technology/swtbot/snapshots/"/>
+<repository location="http://download.eclipse.org/technology/swtbot/releases/2.4.0/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.emf.feature.group" version="0.0.0"/>
@@ -38,7 +38,7 @@
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xtend.sdk.feature.group" version="0.0.0"/>
-<repository location="https://hudson.eclipse.org/xtext/job/xtext-xtend-maintenance/lastSuccessfulBuild/artifact/build-result/p2.repository/"/>
+<repository location="https://hudson.eclipse.org/xtext/job/xtext-xtend/lastSuccessfulBuild/artifact/build-result/p2.repository/"/>
 </location>
 </locations>
 </target>

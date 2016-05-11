@@ -52,24 +52,12 @@ public class JavaFileAccess extends TextFileAccess {
           _xifexpression_1 = this.access.importType(_typeReference);
         } else {
           String _xifexpression_2 = null;
-          boolean _and = false;
-          if (!(object instanceof EClass)) {
-            _and = false;
-          } else {
-            _and = (this.access.resourceSet != null);
-          }
-          if (_and) {
+          if (((object instanceof EClass) && (this.access.resourceSet != null))) {
             TypeReference _typeReference_1 = new TypeReference(((EClass) object), this.access.resourceSet);
             _xifexpression_2 = this.access.importType(_typeReference_1);
           } else {
             String _xifexpression_3 = null;
-            boolean _and_1 = false;
-            if (!(object instanceof EPackage)) {
-              _and_1 = false;
-            } else {
-              _and_1 = (this.access.resourceSet != null);
-            }
-            if (_and_1) {
+            if (((object instanceof EPackage) && (this.access.resourceSet != null))) {
               TypeReference _typeReference_2 = new TypeReference(((EPackage) object), this.access.resourceSet);
               _xifexpression_3 = this.access.importType(_typeReference_2);
             } else {
@@ -133,18 +121,7 @@ public class JavaFileAccess extends TextFileAccess {
   public String importType(final TypeReference typeRef) {
     final List<String> simpleNames = typeRef.getSimpleNames();
     String usableName = null;
-    boolean _or = false;
-    String _packageName = typeRef.getPackageName();
-    boolean _equals = Objects.equal(_packageName, "java.lang");
-    if (_equals) {
-      _or = true;
-    } else {
-      String _packageName_1 = typeRef.getPackageName();
-      String _packageName_2 = this.javaType.getPackageName();
-      boolean _equals_1 = Objects.equal(_packageName_1, _packageName_2);
-      _or = _equals_1;
-    }
-    if (_or) {
+    if ((Objects.equal(typeRef.getPackageName(), "java.lang") || Objects.equal(typeRef.getPackageName(), this.javaType.getPackageName()))) {
       String _join = IterableExtensions.join(simpleNames, ".");
       usableName = _join;
     } else {
@@ -157,26 +134,9 @@ public class JavaFileAccess extends TextFileAccess {
           } else {
             usableName = ((simpleName + ".") + usableName);
           }
-          boolean _and = false;
-          boolean _isJavaDefaultType = CodeGenUtil2.isJavaDefaultType(simpleName);
-          boolean _not = (!_isJavaDefaultType);
-          if (!_not) {
-            _and = false;
-          } else {
-            boolean _and_1 = false;
-            if (!(i > 0)) {
-              _and_1 = false;
-            } else {
-              int _length = simpleName.length();
-              boolean _lessEqualsThan = (_length <= this.importNestedTypeThreshold);
-              _and_1 = _lessEqualsThan;
-            }
-            boolean _not_1 = (!_and_1);
-            _and = _not_1;
-          }
-          if (_and) {
-            String _packageName_3 = typeRef.getPackageName();
-            String _plus = (_packageName_3 + ".");
+          if (((!CodeGenUtil2.isJavaDefaultType(simpleName)) && (!((i > 0) && (simpleName.length() <= this.importNestedTypeThreshold))))) {
+            String _packageName = typeRef.getPackageName();
+            String _plus = (_packageName + ".");
             List<String> _subList = simpleNames.subList(0, (i + 1));
             String _join_1 = IterableExtensions.join(_subList, ".");
             final String importable = (_plus + _join_1);
@@ -185,8 +145,8 @@ public class JavaFileAccess extends TextFileAccess {
               this.imports.put(usableName, importable);
               found = true;
             } else {
-              boolean _equals_2 = Objects.equal(imported, importable);
-              if (_equals_2) {
+              boolean _equals = Objects.equal(imported, importable);
+              if (_equals) {
                 found = true;
               }
             }

@@ -79,41 +79,39 @@ public class XbaseWithAnnotationsCompletionContributor extends XbaseCompletionCo
         }
         final JvmType annotationType = _annotationType;
         boolean _matched = false;
-        if (!_matched) {
-          if (annotationType instanceof JvmAnnotationType) {
-            boolean _eIsProxy = ((JvmAnnotationType)annotationType).eIsProxy();
-            boolean _not = (!_eIsProxy);
-            if (_not) {
-              _matched=true;
-              Iterable<JvmOperation> _declaredOperations = ((JvmAnnotationType)annotationType).getDeclaredOperations();
-              final List<JvmOperation> operations = IterableExtensions.<JvmOperation>toList(_declaredOperations);
-              Iterable<JvmOperation> _tail = IterableExtensions.<JvmOperation>tail(operations);
-              boolean _isEmpty = IterableExtensions.isEmpty(_tail);
-              if (_isEmpty) {
-                final JvmOperation singleOperation = IterableExtensions.<JvmOperation>head(operations);
-                String _simpleName = singleOperation.getSimpleName();
-                boolean _equals = Objects.equal("value", _simpleName);
-                if (_equals) {
-                  String _name = Class.class.getName();
-                  JvmTypeReference _returnType = singleOperation.getReturnType();
-                  JvmType _type = null;
-                  if (_returnType!=null) {
-                    _type=_returnType.getType();
-                  }
-                  String _qualifiedName = null;
-                  if (_type!=null) {
-                    _qualifiedName=_type.getQualifiedName();
-                  }
-                  boolean _equals_1 = Objects.equal(_name, _qualifiedName);
-                  if (_equals_1) {
-                    final Function1<JavaPsiClassReferenceElement, Boolean> _function_1 = new Function1<JavaPsiClassReferenceElement, Boolean>() {
-                      @Override
-                      public Boolean apply(final JavaPsiClassReferenceElement it) {
-                        return Boolean.valueOf(true);
-                      }
-                    };
-                    XbaseWithAnnotationsCompletionContributor.this.completeJavaTypes($0, $2, true, _function_1);
-                  }
+        if (annotationType instanceof JvmAnnotationType) {
+          boolean _eIsProxy = ((JvmAnnotationType)annotationType).eIsProxy();
+          boolean _not = (!_eIsProxy);
+          if (_not) {
+            _matched=true;
+            Iterable<JvmOperation> _declaredOperations = ((JvmAnnotationType)annotationType).getDeclaredOperations();
+            final List<JvmOperation> operations = IterableExtensions.<JvmOperation>toList(_declaredOperations);
+            Iterable<JvmOperation> _tail = IterableExtensions.<JvmOperation>tail(operations);
+            boolean _isEmpty = IterableExtensions.isEmpty(_tail);
+            if (_isEmpty) {
+              final JvmOperation singleOperation = IterableExtensions.<JvmOperation>head(operations);
+              String _simpleName = singleOperation.getSimpleName();
+              boolean _equals = Objects.equal("value", _simpleName);
+              if (_equals) {
+                String _name = Class.class.getName();
+                JvmTypeReference _returnType = singleOperation.getReturnType();
+                JvmType _type = null;
+                if (_returnType!=null) {
+                  _type=_returnType.getType();
+                }
+                String _qualifiedName = null;
+                if (_type!=null) {
+                  _qualifiedName=_type.getQualifiedName();
+                }
+                boolean _equals_1 = Objects.equal(_name, _qualifiedName);
+                if (_equals_1) {
+                  final Function1<JavaPsiClassReferenceElement, Boolean> _function_1 = new Function1<JavaPsiClassReferenceElement, Boolean>() {
+                    @Override
+                    public Boolean apply(final JavaPsiClassReferenceElement it) {
+                      return Boolean.valueOf(true);
+                    }
+                  };
+                  XbaseWithAnnotationsCompletionContributor.this.completeJavaTypes($0, $2, true, _function_1);
                 }
               }
             }

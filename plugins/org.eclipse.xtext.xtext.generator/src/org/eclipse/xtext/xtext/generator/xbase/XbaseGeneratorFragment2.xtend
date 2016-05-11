@@ -194,9 +194,9 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 			 */
 			class «jvmModelInferrer.simpleName» extends «'org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer'.typeRef» {
 			
-			    /**
-			     * convenience API to build and initialize JVM types and their members.
-			     */
+				/**
+				 * convenience API to build and initialize JVM types and their members.
+				 */
 				@«Inject» extension «'org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder'.typeRef»
 			
 				/**
@@ -215,9 +215,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 				 *            {@link IJvmDeclaredTypeAcceptor#accept(org.eclipse.xtext.common.types.JvmDeclaredType)
 				 *            accept(..)} method takes the constructed empty type for the
 				 *            pre-indexing phase. This one is further initialized in the
-				 *            indexing phase using the closure you pass to the returned
-				 *            {@link org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing#initializeLater(org.eclipse.xtext.xbase.lib.Procedures.Procedure1)
-				 *            initializeLater(..)}.
+				 *            indexing phase using the lambda you pass as the last argument.
 				 * @param isPreIndexingPhase
 				 *            whether the method is called in a pre-indexing phase, i.e.
 				 *            when the global index is not yet fully updated. You must not
@@ -228,15 +226,15 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 					// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
 					
 					// An implementation for the initial hello world example could look like this:
-			//   		acceptor.accept(element.toClass("my.company.greeting.MyGreetings")) [
-			//   			for (greeting : element.greetings) {
-			//   				members += greeting.toMethod("hello" + greeting.name, typeRef(String)) [
-			//   					body = «"'''"»
-			//							return "Hello «'«'»greeting.name«'»'»";
-			//   					«"'''"»
-			//   				]
-			//   			}
-			//   		]
+			// 		acceptor.accept(element.toClass("my.company.greeting.MyGreetings")) [
+			// 			for (greeting : element.greetings) {
+			// 				members += greeting.toMethod("hello" + greeting.name, typeRef(String)) [
+			// 					body = «"'''"»
+			//						return "Hello «'«'»greeting.name«'»'»";
+			//					«"'''"»
+			//				]
+			//			}
+			//		]
 				}
 			}
 		''').writeTo(projectConfig.runtime.src)
@@ -291,7 +289,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 										definitionId="«name».Editor.opened">
 									</reference>
 								</visibleWhen>
-							</command>  
+							</command>
 						</menuContribution>
 					«ENDIF»
 					<menuContribution
@@ -412,7 +410,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 						</visibleWhen>
 					</command>
 				</menuContribution>
-			</extension>  
+			</extension>
 			<!-- Open implementation -->
 			<extension point="org.eclipse.ui.handlers">
 				<handler

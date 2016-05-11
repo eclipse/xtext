@@ -93,15 +93,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       EList<Grammar> _usedGrammars = g.getUsedGrammars();
       final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
       TypeReference _xifexpression = null;
-      boolean _and = false;
-      boolean _isInheritImplementation = this.isInheritImplementation();
-      if (!_isInheritImplementation) {
-        _and = false;
-      } else {
-        boolean _notEquals = (!Objects.equal(superGrammar, null));
-        _and = _notEquals;
-      }
-      if (_and) {
+      if ((this.isInheritImplementation() && (!Objects.equal(superGrammar, null)))) {
         _xifexpression = this.getProposalProviderClass(superGrammar);
       } else {
         _xifexpression = this.getDefaultGenProposalProviderSuperClass();
@@ -146,34 +138,23 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     if (_tripleNotEquals) {
       this.generateGenJavaProposalProvider();
     }
-    boolean _and = false;
-    boolean _isGenerateStub = this.isGenerateStub();
-    if (!_isGenerateStub) {
-      _and = false;
-    } else {
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
-      IXtextGeneratorFileSystemAccess _src = _eclipsePlugin_3.getSrc();
-      boolean _notEquals_1 = (!Objects.equal(_src, null));
-      _and = _notEquals_1;
-    }
-    if (_and) {
+    if ((this.isGenerateStub() && (!Objects.equal(this.getProjectConfig().getEclipsePlugin().getSrc(), null)))) {
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {
         this.generateXtendProposalProviderStub();
-        IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_4.getEclipsePlugin();
-        ManifestAccess _manifest_2 = _eclipsePlugin_4.getManifest();
-        boolean _notEquals_2 = (!Objects.equal(_manifest_2, null));
-        if (_notEquals_2) {
-          IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-          IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_5.getEclipsePlugin();
-          ManifestAccess _manifest_3 = _eclipsePlugin_5.getManifest();
+        IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+        IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
+        ManifestAccess _manifest_2 = _eclipsePlugin_3.getManifest();
+        boolean _notEquals_1 = (!Objects.equal(_manifest_2, null));
+        if (_notEquals_1) {
+          IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+          IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_4.getEclipsePlugin();
+          ManifestAccess _manifest_3 = _eclipsePlugin_4.getManifest();
           Set<String> _requiredBundles_1 = _manifest_3.getRequiredBundles();
           _requiredBundles_1.add("org.eclipse.xtext.xbase.lib");
-          IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
-          IBundleProjectConfig _eclipsePlugin_6 = _projectConfig_6.getEclipsePlugin();
-          ManifestAccess _manifest_4 = _eclipsePlugin_6.getManifest();
+          IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+          IBundleProjectConfig _eclipsePlugin_5 = _projectConfig_5.getEclipsePlugin();
+          ManifestAccess _manifest_4 = _eclipsePlugin_5.getManifest();
           Set<String> _requiredBundles_2 = _manifest_4.getRequiredBundles();
           _requiredBundles_2.add("org.eclipse.xtend.lib;resolution:=optional");
         }
@@ -181,14 +162,14 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         this.generateJavaProposalProviderStub();
       }
     }
-    IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
-    IBundleProjectConfig _eclipsePlugin_7 = _projectConfig_7.getEclipsePlugin();
-    ManifestAccess _manifest_5 = _eclipsePlugin_7.getManifest();
-    boolean _notEquals_3 = (!Objects.equal(_manifest_5, null));
-    if (_notEquals_3) {
-      IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
-      IBundleProjectConfig _eclipsePlugin_8 = _projectConfig_8.getEclipsePlugin();
-      ManifestAccess _manifest_6 = _eclipsePlugin_8.getManifest();
+    IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
+    IBundleProjectConfig _eclipsePlugin_6 = _projectConfig_6.getEclipsePlugin();
+    ManifestAccess _manifest_5 = _eclipsePlugin_6.getManifest();
+    boolean _notEquals_2 = (!Objects.equal(_manifest_5, null));
+    if (_notEquals_2) {
+      IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin_7 = _projectConfig_7.getEclipsePlugin();
+      ManifestAccess _manifest_6 = _eclipsePlugin_7.getManifest();
       Set<String> _exportedPackages = _manifest_6.getExportedPackages();
       Grammar _grammar_1 = this.getGrammar();
       TypeReference _proposalProviderClass_1 = this.getProposalProviderClass(_grammar_1);
@@ -290,17 +271,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
           ArrayList<Assignment> _xblockexpression = null;
           {
             final String fqFeatureName = ContentAssistFragment2.this.getFQFeatureName(assignment);
-            boolean _and = false;
-            boolean _contains = processedNames.contains(fqFeatureName);
-            boolean _not = (!_contains);
-            if (!_not) {
-              _and = false;
-            } else {
-              boolean _contains_1 = excludedFqnFeatureNames.contains(fqFeatureName);
-              boolean _not_1 = (!_contains_1);
-              _and = _not_1;
-            }
-            if (_and) {
+            if (((!processedNames.contains(fqFeatureName)) && (!excludedFqnFeatureNames.contains(fqFeatureName)))) {
               processedNames.add(fqFeatureName);
               candidates.add(assignment);
             }
@@ -319,17 +290,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
           ArrayList<AbstractRule> _xblockexpression = null;
           {
             final String fqnFeatureName = ContentAssistFragment2.this.getFQFeatureName(rule);
-            boolean _and = false;
-            boolean _contains = processedNames.contains(fqnFeatureName);
-            boolean _not = (!_contains);
-            if (!_not) {
-              _and = false;
-            } else {
-              boolean _contains_1 = excludedFqnFeatureNames.contains(fqnFeatureName);
-              boolean _not_1 = (!_contains_1);
-              _and = _not_1;
-            }
-            if (_and) {
+            if (((!processedNames.contains(fqnFeatureName)) && (!excludedFqnFeatureNames.contains(fqnFeatureName)))) {
               processedNames.add(fqnFeatureName);
               candidates.add(rule);
             }

@@ -52,14 +52,7 @@ public class InMemoryURIHandler implements URIHandler {
     
     public InputStream createInputStream() {
       try {
-        boolean _or = false;
-        boolean _equals = Objects.equal(this.contents, null);
-        if (_equals) {
-          _or = true;
-        } else {
-          _or = (!this.exists);
-        }
-        if (_or) {
+        if ((Objects.equal(this.contents, null) || (!this.exists))) {
           throw new IOException((("File " + this.uri) + " does not exist."));
         }
         return new ByteArrayInputStream(this.contents);

@@ -43,14 +43,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       EList<EObject> _contents = res.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents);
       this.format(_head, format);
-      boolean _and = false;
-      if (!this.diagnoseConflicts) {
-        _and = false;
-      } else {
-        boolean _isConflictOccurred = format.isConflictOccurred();
-        _and = _isConflictOccurred;
-      }
-      if (_and) {
+      if ((this.diagnoseConflicts && format.isConflictOccurred())) {
         final FormattableDocument debug = new FormattableDocument(cfg, doc);
         RuntimeException _runtimeException = new RuntimeException();
         debug.setRootTrace(_runtimeException);
@@ -58,8 +51,8 @@ public abstract class AbstractFormatter implements IBasicFormatter {
         EObject _head_1 = IterableExtensions.<EObject>head(_contents_1);
         this.format(_head_1, debug);
       }
-      boolean _isConflictOccurred_1 = format.isConflictOccurred();
-      this.conflictOccurred = _isConflictOccurred_1;
+      boolean _isConflictOccurred = format.isConflictOccurred();
+      this.conflictOccurred = _isConflictOccurred;
       final List<TextReplacement> edits = format.renderToEdits(offset, length);
       List<TextReplacement> _xifexpression = null;
       if (this.allowIdentityEdits) {

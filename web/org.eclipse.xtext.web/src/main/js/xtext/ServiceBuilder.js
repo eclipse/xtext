@@ -147,8 +147,12 @@ define([
 			services.generatorService = new XtextService();
 			services.generatorService.initialize(options.serviceUrl, 'generate', options.resourceId, services.updateService);
 			services.generatorService._initServerData = function(serverData, editorContext, params) {
-				if (params.artifactId)
+				if (params.allArtifacts)
+					serverData.allArtifacts = params.allArtifacts;
+				else if (params.artifactId)
 					serverData.artifact = params.artifactId;
+				if (params.includeContent !== undefined)
+					serverData.includeContent = params.includeContent;
 			}
 			services.generate = function(addParams) {
 				return services.generatorService.invoke(editorContext, ServiceBuilder.mergeOptions(addParams, options));
@@ -242,7 +246,7 @@ define([
 			}
 			return options;
 		} else {
-			return defaultOptions;
+			return ServiceBuilder.copy(defaultOptions);
 		}
 	}
 	

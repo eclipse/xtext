@@ -26,7 +26,7 @@ import com.google.common.collect.Sets;
  * the old APIs.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
+ * @since 2.10
  */
 public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
 
@@ -87,6 +87,11 @@ public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
 	@Override
 	public Collection<URI> getEObjectURIs(URI resourceURI) {
 		return Collections.unmodifiableCollection(index.get(resourceURI));
+	}
+
+	@Override
+	public boolean apply(URI uri) {
+		return contains(uri);
 	}
 
 	@Override

@@ -30,11 +30,9 @@ public class XtendFindUsageProvider extends BaseXtextFindUsageProvider {
   protected String getType(final EObject object) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (object instanceof XtendEnum) {
-        _matched=true;
-        _switchResult = "enum";
-      }
+    if (object instanceof XtendEnum) {
+      _matched=true;
+      _switchResult = "enum";
     }
     if (!_matched) {
       if (object instanceof XtendInterface) {

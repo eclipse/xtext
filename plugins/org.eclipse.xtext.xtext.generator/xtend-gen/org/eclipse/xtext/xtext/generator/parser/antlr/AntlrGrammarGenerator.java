@@ -88,26 +88,12 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.append("import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;");
     _builder.newLine();
     {
-      boolean _and = false;
-      List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
-      final Function1<ParserRule, List<EObject>> _function = new Function1<ParserRule, List<EObject>>() {
+      if (((!IterableExtensions.isEmpty(Iterables.<UnorderedGroup>filter(Iterables.<EObject>concat(ListExtensions.<ParserRule, List<EObject>>map(GrammarUtil.allParserRules(it), new Function1<ParserRule, List<EObject>>() {
         @Override
         public List<EObject> apply(final ParserRule it) {
           return EcoreUtil2.eAllContentsAsList(it);
         }
-      };
-      List<List<EObject>> _map = ListExtensions.<ParserRule, List<EObject>>map(_allParserRules, _function);
-      Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
-      Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_flatten, UnorderedGroup.class);
-      boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
-      boolean _not_1 = (!_isEmpty_1);
-      if (!_not_1) {
-        _and = false;
-      } else {
-        boolean _isBacktrack = options.isBacktrack();
-        _and = _isBacktrack;
-      }
-      if (_and) {
+      })), UnorderedGroup.class))) && options.isBacktrack())) {
         _builder.append("import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;");
         _builder.newLine();
       }
@@ -388,11 +374,9 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
   protected CharSequence compileReturns(final AbstractRule it, final AntlrOptions options) {
     CharSequence _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof EnumRule) {
-        _matched=true;
-        _switchResult = "[Enumerator current=null]";
-      }
+    if (it instanceof EnumRule) {
+      _matched=true;
+      _switchResult = "[Enumerator current=null]";
     }
     if (!_matched) {
       if (it instanceof ParserRule) {
@@ -470,24 +454,22 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
       boolean _matched = false;
+      if (_rule instanceof EnumRule) {
+        boolean _isAssigned = GrammarUtil.isAssigned(it);
+        if (_isAssigned) {
+          _matched=true;
+        }
+      }
       if (!_matched) {
-        if (_rule instanceof EnumRule) {
+        if (_rule instanceof ParserRule) {
           boolean _isAssigned = GrammarUtil.isAssigned(it);
           if (_isAssigned) {
             _matched=true;
           }
         }
-        if (!_matched) {
-          if (_rule instanceof ParserRule) {
-            boolean _isAssigned = GrammarUtil.isAssigned(it);
-            if (_isAssigned) {
-              _matched=true;
-            }
-          }
-        }
-        if (_matched) {
-          _switchResult = super._dataTypeEbnf2(it, supportActions);
-        }
+      }
+      if (_matched) {
+        _switchResult = super._dataTypeEbnf2(it, supportActions);
       }
       if (!_matched) {
         if (_rule instanceof EnumRule) {
@@ -723,24 +705,22 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       AbstractRule _rule = it.getRule();
       final AbstractRule rule = _rule;
       boolean _matched = false;
+      if (rule instanceof EnumRule) {
+        boolean _isAssigned = GrammarUtil.isAssigned(it);
+        if (_isAssigned) {
+          _matched=true;
+        }
+      }
       if (!_matched) {
-        if (rule instanceof EnumRule) {
+        if (rule instanceof ParserRule) {
           boolean _isAssigned = GrammarUtil.isAssigned(it);
           if (_isAssigned) {
             _matched=true;
           }
         }
-        if (!_matched) {
-          if (rule instanceof ParserRule) {
-            boolean _isAssigned = GrammarUtil.isAssigned(it);
-            if (_isAssigned) {
-              _matched=true;
-            }
-          }
-        }
-        if (_matched) {
-          _switchResult = super._ebnf2(it, options, supportActions);
-        }
+      }
+      if (_matched) {
+        _switchResult = super._ebnf2(it, options, supportActions);
       }
       if (!_matched) {
         if (rule instanceof EnumRule) {
@@ -890,40 +870,38 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     if (supportActions) {
       String _switchResult = null;
       boolean _matched = false;
+      if (it instanceof EnumRule) {
+        _matched=true;
+      }
       if (!_matched) {
-        if (it instanceof EnumRule) {
+        if (it instanceof ParserRule) {
           _matched=true;
         }
-        if (!_matched) {
-          if (it instanceof ParserRule) {
-            _matched=true;
-          }
-        }
-        if (_matched) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t");
-          CharSequence _newCompositeNode = this.newCompositeNode(ref);
-          _builder.append(_newCompositeNode, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
-          String _ruleName = this._grammarAccessExtensions.ruleName(it);
-          _builder.append(_ruleName, "");
-          boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
-          String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, _isPassCurrentIntoFragment, (!supportActions));
-          _builder.append(_argumentList, "");
-          _builder.newLineIfNotEmpty();
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("afterParserOrEnumRuleCall();");
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
-          _switchResult = _builder.toString();
-        }
+      }
+      if (_matched) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _newCompositeNode = this.newCompositeNode(ref);
+        _builder.append(_newCompositeNode, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+        String _ruleName = this._grammarAccessExtensions.ruleName(it);
+        _builder.append(_ruleName, "");
+        boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
+        String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, _isPassCurrentIntoFragment, (!supportActions));
+        _builder.append(_argumentList, "");
+        _builder.newLineIfNotEmpty();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("afterParserOrEnumRuleCall();");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _switchResult = _builder.toString();
       }
       if (!_matched) {
         if (it instanceof TerminalRule) {
@@ -1064,83 +1042,81 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
       boolean _matched = false;
+      if (_rule instanceof EnumRule) {
+        _matched=true;
+      }
       if (!_matched) {
-        if (_rule instanceof EnumRule) {
+        if (_rule instanceof ParserRule) {
           _matched=true;
         }
-        if (!_matched) {
-          if (_rule instanceof ParserRule) {
-            _matched=true;
+      }
+      if (_matched) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _newCompositeNode = this.newCompositeNode(it);
+        _builder.append(_newCompositeNode, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+        String _localVar = this._grammarAccessExtensions.localVar(assignment, it);
+        _builder.append(_localVar, "");
+        _builder.append("=");
+        String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
+        _builder.append(__assignmentEbnf, "");
+        _builder.newLineIfNotEmpty();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("if ($current==null) {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("$current = ");
+        CharSequence _createModelElementForParent = this.createModelElementForParent(assignment);
+        _builder.append(_createModelElementForParent, "\t\t");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        String _setOrAdd = this._grammarAccessExtensions.setOrAdd(assignment);
+        _builder.append(_setOrAdd, "\t");
+        _builder.append("(");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("$current,");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\"");
+        String _feature = assignment.getFeature();
+        _builder.append(_feature, "\t\t");
+        _builder.append("\",");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        {
+          boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(assignment);
+          if (_isBooleanAssignment) {
+            _builder.append("true");
+          } else {
+            String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
+            _builder.append(_localVar_1, "\t\t");
           }
         }
-        if (_matched) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t");
-          CharSequence _newCompositeNode = this.newCompositeNode(it);
-          _builder.append(_newCompositeNode, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
-          String _localVar = this._grammarAccessExtensions.localVar(assignment, it);
-          _builder.append(_localVar, "");
-          _builder.append("=");
-          String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
-          _builder.append(__assignmentEbnf, "");
-          _builder.newLineIfNotEmpty();
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("if ($current==null) {");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("$current = ");
-          CharSequence _createModelElementForParent = this.createModelElementForParent(assignment);
-          _builder.append(_createModelElementForParent, "\t\t");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("\t");
-          String _setOrAdd = this._grammarAccessExtensions.setOrAdd(assignment);
-          _builder.append(_setOrAdd, "\t");
-          _builder.append("(");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("$current,");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\"");
-          String _feature = assignment.getFeature();
-          _builder.append(_feature, "\t\t");
-          _builder.append("\",");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          {
-            boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(assignment);
-            if (_isBooleanAssignment) {
-              _builder.append("true");
-            } else {
-              String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
-              _builder.append(_localVar_1, "\t\t");
-            }
-          }
-          _builder.append(",");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          CharSequence _stringLiteral = this._grammarAccessExtensions.toStringLiteral(it);
-          _builder.append(_stringLiteral, "\t\t");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("afterParserOrEnumRuleCall();");
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
-          _switchResult = _builder.toString();
-        }
+        _builder.append(",");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        CharSequence _stringLiteral = this._grammarAccessExtensions.toStringLiteral(it);
+        _builder.append(_stringLiteral, "\t\t");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("afterParserOrEnumRuleCall();");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _switchResult = _builder.toString();
       }
       if (!_matched) {
         if (_rule instanceof TerminalRule) {

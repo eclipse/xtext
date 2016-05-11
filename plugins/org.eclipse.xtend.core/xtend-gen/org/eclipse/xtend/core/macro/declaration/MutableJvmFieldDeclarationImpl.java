@@ -49,11 +49,9 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     this.checkMutable();
     JvmConstructor _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (constructorDeclaration instanceof JvmConstructorDeclarationImpl) {
-        _matched=true;
-        _switchResult = ((JvmConstructorDeclarationImpl)constructorDeclaration).getDelegate();
-      }
+    if (constructorDeclaration instanceof JvmConstructorDeclarationImpl) {
+      _matched=true;
+      _switchResult = ((JvmConstructorDeclarationImpl)constructorDeclaration).getDelegate();
     }
     if (!_matched) {
       if (constructorDeclaration instanceof XtendConstructorDeclarationImpl) {

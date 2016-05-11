@@ -330,18 +330,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           if (((manifest == null) || (metaInf == null))) {
             manifestIter.remove();
           } else {
-            boolean _and = false;
-            TypeReference _activator = manifest.getActivator();
-            boolean _tripleEquals = (_activator == null);
-            if (!_tripleEquals) {
-              _and = false;
-            } else {
-              IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
-              ManifestAccess _manifest = _eclipsePlugin.getManifest();
-              boolean _tripleEquals_1 = (manifest == _manifest);
-              _and = _tripleEquals_1;
-            }
-            if (_and) {
+            if (((manifest.getActivator() == null) && (manifest == this.projectConfig.getEclipsePlugin().getManifest()))) {
               TypeReference _eclipsePluginActivator = this.naming.getEclipsePluginActivator();
               manifest.setActivator(_eclipsePluginActivator);
             }
@@ -408,19 +397,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       merge.addRequiredBundles(_requiredBundles);
       Set<String> _importedPackages = manifest.getImportedPackages();
       merge.addImportedPackages(_importedPackages);
-      boolean _and = false;
-      TypeReference _activator = manifest.getActivator();
-      boolean _tripleNotEquals = (_activator != null);
-      if (!_tripleNotEquals) {
-        _and = false;
-      } else {
-        String _bundleActivator = merge.getBundleActivator();
-        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_bundleActivator);
-        _and = _isNullOrEmpty;
-      }
-      if (_and) {
-        TypeReference _activator_1 = manifest.getActivator();
-        String _name = _activator_1.getName();
+      if (((manifest.getActivator() != null) && StringExtensions.isNullOrEmpty(merge.getBundleActivator()))) {
+        TypeReference _activator = manifest.getActivator();
+        String _name = _activator.getName();
         merge.setBundleActivator(_name);
       }
       boolean _isModified = merge.isModified();
@@ -440,22 +419,11 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   }
   
   protected void generateActivator() {
-    boolean _and = false;
-    IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
-    boolean _tripleNotEquals = (_srcGen != null);
-    if (!_tripleNotEquals) {
-      _and = false;
-    } else {
-      boolean _isEmpty = this.languageConfigs.isEmpty();
-      boolean _not = (!_isEmpty);
-      _and = _not;
-    }
-    if (_and) {
+    if (((this.projectConfig.getEclipsePlugin().getSrcGen() != null) && (!this.languageConfigs.isEmpty()))) {
       JavaFileAccess _createEclipsePluginActivator = this.templates.createEclipsePluginActivator(this.languageConfigs);
-      IBundleProjectConfig _eclipsePlugin_1 = this.projectConfig.getEclipsePlugin();
-      IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin_1.getSrcGen();
-      _createEclipsePluginActivator.writeTo(_srcGen_1);
+      IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
+      IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
+      _createEclipsePluginActivator.writeTo(_srcGen);
     }
   }
   
@@ -503,30 +471,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
         String _path = pluginXml.getPath();
         boolean _isFile = root.isFile(_path);
         if (_isFile) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          List<CharSequence> _entries = pluginXml.getEntries();
-          boolean _isEmpty = _entries.isEmpty();
-          boolean _not = (!_isEmpty);
-          if (!_not) {
-            _and_1 = false;
-          } else {
+          if ((((!pluginXml.getEntries().isEmpty()) && (!Objects.equal(root.readTextFile(pluginXml.getPath()), pluginXml.getContent()))) && pluginXml.getPath().endsWith(".xml"))) {
             String _path_1 = pluginXml.getPath();
-            CharSequence _readTextFile = root.readTextFile(_path_1);
-            CharSequence _content = pluginXml.getContent();
-            boolean _notEquals = (!Objects.equal(_readTextFile, _content));
-            _and_1 = _notEquals;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            String _path_2 = pluginXml.getPath();
-            boolean _endsWith = _path_2.endsWith(".xml");
-            _and = _endsWith;
-          }
-          if (_and) {
-            String _path_3 = pluginXml.getPath();
-            String _plus = (_path_3 + "_gen");
+            String _plus = (_path_1 + "_gen");
             pluginXml.setPath(_plus);
             pluginXml.writeTo(root);
           }

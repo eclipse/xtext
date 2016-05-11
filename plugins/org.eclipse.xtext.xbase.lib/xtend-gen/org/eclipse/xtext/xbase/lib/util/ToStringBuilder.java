@@ -301,13 +301,7 @@ public final class ToStringBuilder {
             builder.append(nextSeparator);
             nextSeparator = ", ";
           }
-          boolean _and = false;
-          if (!(part.fieldName != null)) {
-            _and = false;
-          } else {
-            _and = this.showFieldNames;
-          }
-          if (_and) {
+          if (((part.fieldName != null) && this.showFieldNames)) {
             IndentationAwareStringBuilder _append_1 = builder.append(part.fieldName);
             _append_1.append(" = ");
           }
@@ -420,13 +414,7 @@ public final class ToStringBuilder {
     if (this.multiLine) {
       sb.decreaseIndent();
     }
-    boolean _and = false;
-    if (!(!wasEmpty)) {
-      _and = false;
-    } else {
-      _and = this.multiLine;
-    }
-    if (_and) {
+    if (((!wasEmpty) && this.multiLine)) {
       sb.newLine();
     }
     sb.append(")");

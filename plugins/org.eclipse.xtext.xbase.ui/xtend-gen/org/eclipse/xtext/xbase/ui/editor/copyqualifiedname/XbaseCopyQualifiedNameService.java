@@ -128,24 +128,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
   
   protected String toQualifiedName(final XExpression it, final IResolvedExecutable resolvedExecutable, final JvmExecutable executable, @Extension final IResolvedTypes resolvedTypes, final List<XExpression> arguments) {
     final LightweightTypeReference actualType = resolvedTypes.getActualType(it);
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _notEquals = (!Objects.equal(actualType, null));
-    if (!_notEquals) {
-      _and_1 = false;
-    } else {
-      boolean _isAny = actualType.isAny();
-      boolean _not = (!_isAny);
-      _and_1 = _not;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _isUnknown = actualType.isUnknown();
-      boolean _not_1 = (!_isUnknown);
-      _and = _not_1;
-    }
-    if (_and) {
+    if ((((!Objects.equal(actualType, null)) && (!actualType.isAny())) && (!actualType.isUnknown()))) {
       return actualType.getHumanReadableName();
     }
     final int index = arguments.indexOf(it);

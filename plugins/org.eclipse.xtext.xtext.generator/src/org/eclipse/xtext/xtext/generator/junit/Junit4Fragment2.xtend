@@ -55,7 +55,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 		generateInjectorProvider.writeTo(projectConfig.runtimeTest.srcGen)
 		if (isGenerateStub)
 			generateExampleRuntimeTest.writeTo(projectConfig.runtimeTest.src)
-		if(projectConfig.eclipsePlugin.srcGen !== null)
+		if (projectConfig.eclipsePlugin.srcGen !== null)
 			generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginTest.srcGen)
 	}
 	
@@ -73,7 +73,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 			class «exampleRuntimeTest»{
 			
 				@«Inject»
-				«parseHelper»<«rootType»> parseHelper;
+				«parseHelper»<«rootType»> parseHelper
 			
 				@«test» 
 				def void loadModel() {

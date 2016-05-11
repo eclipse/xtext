@@ -104,6 +104,15 @@ public interface RegionaccesstestlanguageFactory extends EFactory
   Mixed createMixed();
 
   /**
+   * Returns a new object of class '<em>Root Action</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Root Action</em>'.
+   * @generated
+   */
+  RootAction createRootAction();
+
+  /**
    * Returns a new object of class '<em>Add</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

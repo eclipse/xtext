@@ -197,7 +197,7 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
         _builder.append(parseHelper, "\t");
         _builder.append("<");
         _builder.append(rootType, "\t");
-        _builder.append("> parseHelper;");
+        _builder.append("> parseHelper");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t");

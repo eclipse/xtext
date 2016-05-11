@@ -78,32 +78,20 @@ public class TracabilityImpl implements Tracability {
   
   @Override
   public boolean isExternal(final Element element) {
-    boolean _and = false;
-    boolean _isSource = this.isSource(element);
-    boolean _not = (!_isSource);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _isGenerated = this.isGenerated(element);
-      boolean _not_1 = (!_isGenerated);
-      _and = _not_1;
-    }
-    return _and;
+    return ((!this.isSource(element)) && (!this.isGenerated(element)));
   }
   
   @Override
   public boolean isGenerated(final Element element) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof JvmElementImpl) {
-        _matched=true;
-        EObject _delegate = ((JvmElementImpl<?>)element).getDelegate();
-        Resource _eResource = _delegate.eResource();
-        XtendFile _xtendFile = this.unit.getXtendFile();
-        Resource _eResource_1 = _xtendFile.eResource();
-        return Objects.equal(_eResource, _eResource_1);
-      }
+    if (element instanceof JvmElementImpl) {
+      _matched=true;
+      EObject _delegate = ((JvmElementImpl<?>)element).getDelegate();
+      Resource _eResource = _delegate.eResource();
+      XtendFile _xtendFile = this.unit.getXtendFile();
+      Resource _eResource_1 = _xtendFile.eResource();
+      return Objects.equal(_eResource, _eResource_1);
     }
     if (!_matched) {
       if (element instanceof JvmTypeParameterDeclarationImpl) {
@@ -125,11 +113,9 @@ public class TracabilityImpl implements Tracability {
   public boolean isSource(final Element element) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof XtendNamedElementImpl) {
-        _matched=true;
-        _switchResult = true;
-      }
+    if (element instanceof XtendNamedElementImpl) {
+      _matched=true;
+      _switchResult = true;
     }
     if (!_matched) {
       if (element instanceof XtendAnnotationReferenceImpl) {

@@ -45,7 +45,7 @@ import com.intellij.lang.PsiBuilder;
 	public PsiInternalBeeLangTestLanguageParser(PsiBuilder builder, TokenStream input, BeeLangTestLanguageElementTypeProvider elementTypeProvider, BeeLangTestLanguageGrammarAccess grammarAccess) {
 		this(input);
 		setPsiBuilder(builder);
-    	this.grammarAccess = grammarAccess;
+		this.grammarAccess = grammarAccess;
 		this.elementTypeProvider = elementTypeProvider;
 	}
 

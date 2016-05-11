@@ -22,24 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java {
   @Override
   public boolean isValid() {
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _isValid = super.isValid();
-    if (!_isValid) {
-      _and_1 = false;
-    } else {
-      String _fieldName = this.getFieldName();
-      boolean _notEquals = (!Objects.equal(_fieldName, null));
-      _and_1 = _notEquals;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      LightweightTypeReference _fieldType = this.getFieldType();
-      boolean _notEquals_1 = (!Objects.equal(_fieldType, null));
-      _and = _notEquals_1;
-    }
-    return _and;
+    return ((super.isValid() && (!Objects.equal(this.getFieldName(), null))) && (!Objects.equal(this.getFieldType(), null)));
   }
   
   @Override

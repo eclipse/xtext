@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
@@ -198,21 +197,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
       final Function1<Pair<Integer, INode>, Boolean> _function = new Function1<Pair<Integer, INode>, Boolean>() {
         @Override
         public Boolean apply(final Pair<Integer, INode> it) {
-          boolean _and = false;
-          INode _value = it.getValue();
-          int _totalOffset = _value.getTotalOffset();
-          int _totalOffset_1 = node.getTotalOffset();
-          boolean _lessEqualsThan = (_totalOffset <= _totalOffset_1);
-          if (!_lessEqualsThan) {
-            _and = false;
-          } else {
-            INode _value_1 = it.getValue();
-            int _totalEndOffset = _value_1.getTotalEndOffset();
-            int _totalEndOffset_1 = node.getTotalEndOffset();
-            boolean _greaterEqualsThan = (_totalEndOffset >= _totalEndOffset_1);
-            _and = _greaterEqualsThan;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((it.getValue().getTotalOffset() <= node.getTotalOffset()) && (it.getValue().getTotalEndOffset() >= node.getTotalEndOffset())));
         }
       };
       Pair<Integer, INode> _findFirst = IterableExtensions.<Pair<Integer, INode>>findFirst(_indexed, _function);
@@ -243,18 +228,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
           ProgressIndicatorProvider.checkCanceled();
           QualifiedName _name = objectDescription.getName();
           String name = this.qualifiedNameConverter.toString(_name);
-          boolean _or = false;
-          EObject _eObjectOrProxy = objectDescription.getEObjectOrProxy();
-          boolean _eIsProxy = _eObjectOrProxy.eIsProxy();
-          if (_eIsProxy) {
-            _or = true;
-          } else {
-            EObject _eObjectOrProxy_1 = objectDescription.getEObjectOrProxy();
-            Resource _eResource = _eObjectOrProxy_1.eResource();
-            boolean _tripleNotEquals = (_eResource != null);
-            _or = _tripleNotEquals;
-          }
-          if (_or) {
+          if ((objectDescription.getEObjectOrProxy().eIsProxy() || (objectDescription.getEObjectOrProxy().eResource() != null))) {
             BaseXtextFile _xtextFile = this.myElement.getXtextFile();
             XtextResource _resource = _xtextFile.getResource();
             PsiElement element = this.psiModelAssociations.getPsiElement(objectDescription, _resource);

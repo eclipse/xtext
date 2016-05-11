@@ -33,7 +33,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.jetbrains.plugins.gradle.frameworkSupport.BuildScriptDataBuilder;
 import org.jetbrains.plugins.gradle.service.project.wizard.GradleModuleBuilder;
 import org.jetbrains.plugins.gradle.util.GradleConstants;
 import org.jetbrains.plugins.groovy.lang.psi.GroovyFile;
@@ -56,16 +55,8 @@ public class GradleBuildFileUtility {
     PlatformUtil _platformUtil = new PlatformUtil();
     boolean _isGradleInstalled = _platformUtil.isGradleInstalled();
     if (_isGradleInstalled) {
-      boolean _or = false;
-      boolean _isExternalSystemAwareModule = ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module);
-      if (_isExternalSystemAwareModule) {
-        _or = true;
-      } else {
-        BuildScriptDataBuilder _buildScriptData = GradleModuleBuilder.getBuildScriptData(module);
-        boolean _tripleNotEquals = (_buildScriptData != null);
-        _or = _tripleNotEquals;
-      }
-      return _or;
+      return (ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module) || 
+        (GradleModuleBuilder.getBuildScriptData(module) != null));
     }
     return false;
   }
@@ -176,14 +167,7 @@ public class GradleBuildFileUtility {
           Project _project = module.getProject();
           PsiManager _instance_1 = PsiManager.getInstance(_project);
           final PsiFile psiFile = _instance_1.findFile(virtualFile);
-          boolean _and = false;
-          if (!(psiFile instanceof GroovyFile)) {
-            _and = false;
-          } else {
-            boolean _isValid = psiFile.isValid();
-            _and = _isValid;
-          }
-          if (_and) {
+          if (((psiFile instanceof GroovyFile) && psiFile.isValid())) {
             return ((GroovyFile) psiFile);
           }
         }
@@ -227,15 +211,7 @@ public class GradleBuildFileUtility {
         boolean _xblockexpression = false;
         {
           GrExpression expression = it.getInvokedExpression();
-          boolean _and = false;
-          if (!(expression != null)) {
-            _and = false;
-          } else {
-            String _text = expression.getText();
-            boolean _equals = methodName.equals(_text);
-            _and = _equals;
-          }
-          _xblockexpression = _and;
+          _xblockexpression = ((expression != null) && methodName.equals(expression.getText()));
         }
         return Boolean.valueOf(_xblockexpression);
       }

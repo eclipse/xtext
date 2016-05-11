@@ -74,7 +74,7 @@ public class PsiInternalBacktrackingLexerTestLanguageParser extends AbstractPsiA
     	public PsiInternalBacktrackingLexerTestLanguageParser(PsiBuilder builder, TokenStream input, BacktrackingLexerTestLanguageElementTypeProvider elementTypeProvider, BacktrackingLexerTestLanguageGrammarAccess grammarAccess) {
     		this(input);
     		setPsiBuilder(builder);
-        	this.grammarAccess = grammarAccess;
+    		this.grammarAccess = grammarAccess;
     		this.elementTypeProvider = elementTypeProvider;
     	}
 

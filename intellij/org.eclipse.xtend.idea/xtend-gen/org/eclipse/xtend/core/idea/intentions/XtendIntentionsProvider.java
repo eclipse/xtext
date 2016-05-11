@@ -362,17 +362,8 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
       XtendIntentionsProvider.InsertSuperConstructorsIntentionAction _doubleArrow = ObjectExtensions.<XtendIntentionsProvider.InsertSuperConstructorsIntentionAction>operator_doubleArrow(_get, _function);
       anno.registerFix(_doubleArrow);
     } else {
-      boolean _or = false;
-      String _code_1 = issue.getCode();
-      boolean _equals_1 = Objects.equal(_code_1, IssueCodes.CLASS_MUST_BE_ABSTRACT);
-      if (_equals_1) {
-        _or = true;
-      } else {
-        String _code_2 = issue.getCode();
-        boolean _equals_2 = Objects.equal(_code_2, IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS);
-        _or = _equals_2;
-      }
-      if (_or) {
+      if ((Objects.equal(issue.getCode(), IssueCodes.CLASS_MUST_BE_ABSTRACT) || 
+        Objects.equal(issue.getCode(), IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS))) {
         XtendIntentionsProvider.InsertXtendMethodsIntentionAction _get_1 = this.insertXtendMethodsIntentionActionProvider.get();
         final Procedure1<XtendIntentionsProvider.InsertXtendMethodsIntentionAction> _function_1 = new Procedure1<XtendIntentionsProvider.InsertXtendMethodsIntentionAction>() {
           @Override
@@ -383,9 +374,9 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
         XtendIntentionsProvider.InsertXtendMethodsIntentionAction _doubleArrow_1 = ObjectExtensions.<XtendIntentionsProvider.InsertXtendMethodsIntentionAction>operator_doubleArrow(_get_1, _function_1);
         anno.registerFix(_doubleArrow_1);
       } else {
-        String _code_3 = issue.getCode();
-        boolean _equals_3 = Objects.equal(_code_3, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
-        if (_equals_3) {
+        String _code_1 = issue.getCode();
+        boolean _equals_1 = Objects.equal(_code_1, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
+        if (_equals_1) {
           XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction _get_2 = this.addXtendLibToClassPathIntentionAction.get();
           final Procedure1<XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction> _function_2 = new Procedure1<XtendIntentionsProvider.AddXtendLibToClassPathIntentionAction>() {
             @Override

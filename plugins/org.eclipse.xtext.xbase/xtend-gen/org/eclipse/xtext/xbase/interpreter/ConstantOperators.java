@@ -108,13 +108,7 @@ public class ConstantOperators {
   }
   
   protected boolean _and(final Boolean left, final Boolean right) {
-    boolean _and = false;
-    if (!(left).booleanValue()) {
-      _and = false;
-    } else {
-      _and = (right).booleanValue();
-    }
-    return _and;
+    return ((left).booleanValue() && (right).booleanValue());
   }
   
   protected boolean _or(final Object left, final Object right) {
@@ -122,13 +116,7 @@ public class ConstantOperators {
   }
   
   protected boolean _or(final Boolean left, final Boolean right) {
-    boolean _or = false;
-    if ((left).booleanValue()) {
-      _or = true;
-    } else {
-      _or = (right).booleanValue();
-    }
-    return _or;
+    return ((left).booleanValue() || (right).booleanValue());
   }
   
   public static void main(final String[] args) {

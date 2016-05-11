@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -85,28 +84,16 @@ public class ConstantExpressionValidator {
   }
   
   protected boolean _isConstant(final XCastedExpression expression) {
-    boolean _or = false;
-    JvmTypeReference _type = expression.getType();
-    boolean _isPrimitive = this._primitives.isPrimitive(_type);
-    if (_isPrimitive) {
-      _or = true;
-    } else {
-      JvmTypeReference _type_1 = expression.getType();
-      boolean _is = this._typeReferences.is(_type_1, String.class);
-      _or = _is;
-    }
-    return _or;
+    return (this._primitives.isPrimitive(expression.getType()) || this._typeReferences.is(expression.getType(), String.class));
   }
   
   protected boolean _isConstant(final XAbstractFeatureCall expression) {
     JvmIdentifiableElement _feature = expression.getFeature();
     final JvmIdentifiableElement feature = _feature;
     boolean _matched = false;
-    if (!_matched) {
-      if (feature instanceof JvmEnumerationLiteral) {
-        _matched=true;
-        return true;
-      }
+    if (feature instanceof JvmEnumerationLiteral) {
+      _matched=true;
+      return true;
     }
     if (!_matched) {
       if (feature instanceof JvmField) {
@@ -115,15 +102,7 @@ public class ConstantExpressionValidator {
         if (_isSetConstant) {
           return ((JvmField)feature).isConstant();
         }
-        boolean _and = false;
-        boolean _isStatic = ((JvmField)feature).isStatic();
-        if (!_isStatic) {
-          _and = false;
-        } else {
-          boolean _isFinal = ((JvmField)feature).isFinal();
-          _and = _isFinal;
-        }
-        final boolean potentiallyConstant = _and;
+        final boolean potentiallyConstant = (((JvmField)feature).isStatic() && ((JvmField)feature).isFinal());
         if (potentiallyConstant) {
           Resource _eResource = ((JvmField)feature).eResource();
           if ((_eResource instanceof TypeResource)) {
@@ -149,18 +128,7 @@ public class ConstantExpressionValidator {
         final Function1<JvmBooleanAnnotationValue, Boolean> _function = new Function1<JvmBooleanAnnotationValue, Boolean>() {
           @Override
           public Boolean apply(final JvmBooleanAnnotationValue it) {
-            boolean _and = false;
-            String _valueName = it.getValueName();
-            boolean _equals = Objects.equal(_valueName, "constantExpression");
-            if (!_equals) {
-              _and = false;
-            } else {
-              EList<Boolean> _values = it.getValues();
-              Boolean _head = IterableExtensions.<Boolean>head(_values);
-              boolean _booleanValue = _head.booleanValue();
-              _and = _booleanValue;
-            }
-            return Boolean.valueOf(_and);
+            return Boolean.valueOf((Objects.equal(it.getValueName(), "constantExpression") && IterableExtensions.<Boolean>head(it.getValues()).booleanValue()));
           }
         };
         boolean _exists = IterableExtensions.<JvmBooleanAnnotationValue>exists(_filter, _function);
@@ -175,38 +143,19 @@ public class ConstantExpressionValidator {
             _xifexpression = this.isConstant(_actualReceiver_1);
           }
           final boolean receiverConstant = _xifexpression;
-          boolean _and = false;
-          if (!receiverConstant) {
-            _and = false;
-          } else {
-            EList<XExpression> _actualArguments = expression.getActualArguments();
-            final Function1<XExpression, Boolean> _function_1 = new Function1<XExpression, Boolean>() {
-              @Override
-              public Boolean apply(final XExpression it) {
-                return Boolean.valueOf(ConstantExpressionValidator.this.isConstant(it));
-              }
-            };
-            boolean _forall = IterableExtensions.<XExpression>forall(_actualArguments, _function_1);
-            _and = _forall;
-          }
-          return _and;
+          return (receiverConstant && IterableExtensions.<XExpression>forall(expression.getActualArguments(), new Function1<XExpression, Boolean>() {
+            @Override
+            public Boolean apply(final XExpression it) {
+              return Boolean.valueOf(ConstantExpressionValidator.this.isConstant(it));
+            }
+          }));
         }
       }
     }
     if (!_matched) {
       if (feature instanceof XVariableDeclaration) {
         _matched=true;
-        boolean _and = false;
-        boolean _isWriteable = ((XVariableDeclaration)feature).isWriteable();
-        boolean _not = (!_isWriteable);
-        if (!_not) {
-          _and = false;
-        } else {
-          XExpression _right = ((XVariableDeclaration)feature).getRight();
-          boolean _isConstantExpression = this.isConstantExpression(_right);
-          _and = _isConstantExpression;
-        }
-        return _and;
+        return ((!((XVariableDeclaration)feature).isWriteable()) && this.isConstantExpression(((XVariableDeclaration)feature).getRight()));
       }
     }
     if (!_matched) {
@@ -240,11 +189,9 @@ public class ConstantExpressionValidator {
     boolean _switchResult = false;
     JvmIdentifiableElement _feature = it.getFeature();
     boolean _matched = false;
-    if (!_matched) {
-      if (_feature instanceof JvmEnumerationLiteral) {
-        _matched=true;
-        _switchResult = false;
-      }
+    if (_feature instanceof JvmEnumerationLiteral) {
+      _matched=true;
+      _switchResult = false;
     }
     if (!_matched) {
       _switchResult = this.isConstant(it);

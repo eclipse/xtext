@@ -236,15 +236,7 @@ public class PortableURIs {
    * @return a portable URI or <code>null</code>
    */
   public URI toPortableURI(final StorageAwareResource sourceResource, final EObject targetObject) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(targetObject, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _eIsProxy = targetObject.eIsProxy();
-      _or = _eIsProxy;
-    }
-    if (_or) {
+    if ((Objects.equal(targetObject, null) || targetObject.eIsProxy())) {
       URI _uRI = sourceResource.getURI();
       return _uRI.appendFragment(StorageAwareResource.UNRESOLVABLE_FRAGMENT);
     }
@@ -279,15 +271,7 @@ public class PortableURIs {
           EObject _eObjectOrProxy = it.getEObjectOrProxy();
           Resource _eResource = obj.eResource();
           final EObject possibleContainer = EcoreUtil.resolve(_eObjectOrProxy, _eResource);
-          boolean _or = false;
-          boolean _equals = Objects.equal(obj, possibleContainer);
-          if (_equals) {
-            _or = true;
-          } else {
-            boolean _isAncestor = EcoreUtil.isAncestor(obj, possibleContainer);
-            _or = _isAncestor;
-          }
-          _xblockexpression = _or;
+          _xblockexpression = (Objects.equal(obj, possibleContainer) || EcoreUtil.isAncestor(obj, possibleContainer));
         }
         return Boolean.valueOf(_xblockexpression);
       }

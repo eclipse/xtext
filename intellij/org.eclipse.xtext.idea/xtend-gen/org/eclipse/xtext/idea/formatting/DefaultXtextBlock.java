@@ -23,7 +23,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.formatter.common.AbstractBlock;
-import com.intellij.psi.tree.IElementType;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -169,16 +168,7 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
       return;
     }
     final SyntheticXtextBlock groupBlock = this.createGroup(children);
-    boolean _or = false;
-    boolean _equals = Objects.equal(closingBlock, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      IElementType _elementType = this._blockExtension.getElementType(closingBlock);
-      boolean _equals_1 = Objects.equal(_elementType, TokenType.ERROR_ELEMENT);
-      _or = _equals_1;
-    }
-    groupBlock.setIncomplete(Boolean.valueOf(_or));
+    groupBlock.setIncomplete(Boolean.valueOf((Objects.equal(closingBlock, null) || Objects.equal(this._blockExtension.getElementType(closingBlock), TokenType.ERROR_ELEMENT))));
     final boolean enforceIndentToChildren = this.shouldEnforceIndentToChildren(children);
     Indent _indent = this._blockExtension.getIndent(bracePair, enforceIndentToChildren);
     groupBlock.setIndent(_indent);
@@ -220,16 +210,7 @@ public class DefaultXtextBlock extends AbstractBlock implements ModifiableBlock 
     }
     Block _head = IterableExtensions.<Block>head(children);
     final BracePair bracePair = this._blockExtension.getBracePairForOpeningBrace(_head);
-    boolean _or = false;
-    boolean _equals = Objects.equal(bracePair, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _isStructural = bracePair.isStructural();
-      boolean _not = (!_isStructural);
-      _or = _not;
-    }
-    if (_or) {
+    if ((Objects.equal(bracePair, null) || (!bracePair.isStructural()))) {
       return true;
     }
     Block _last = IterableExtensions.<Block>last(children);

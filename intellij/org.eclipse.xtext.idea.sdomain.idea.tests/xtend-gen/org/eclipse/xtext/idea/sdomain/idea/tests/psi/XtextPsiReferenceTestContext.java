@@ -38,11 +38,9 @@ public class XtextPsiReferenceTestContext {
         final int endIndex = this.text.indexOf(">");
         final String name = this.text.substring((startIndex + 1), endIndex);
         boolean _matched = false;
-        if (!_matched) {
-          if (Objects.equal(name, "caret")) {
-            _matched=true;
-            this.caretOffset = startIndex;
-          }
+        if (Objects.equal(name, "caret")) {
+          _matched=true;
+          this.caretOffset = startIndex;
         }
         if (!_matched) {
           if (Objects.equal(name, "crossReference")) {

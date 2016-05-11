@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.JavaProjectResourceSetInitializer;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
+import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -49,6 +50,7 @@ public class SharedContributionWithJDT implements Module {
 		public void configure(Binder binder) {
 			binder.bind(JarEntryLocator.class);
 			
+			binder.bind(JavaProjectClasspathChangeAnalyzer.class);
 			binder.bind(ProjectClasspathChangeListener.class);
 			
 			binder.bind(JavaProjectsStateHelper.class);

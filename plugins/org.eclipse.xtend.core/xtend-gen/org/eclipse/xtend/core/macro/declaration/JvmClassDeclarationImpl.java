@@ -71,14 +71,12 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
         JvmType _type = it.getType();
         final JvmType it_1 = _type;
         boolean _matched = false;
-        if (!_matched) {
-          if (it_1 instanceof JvmGenericType) {
-            boolean _isInterface = ((JvmGenericType)it_1).isInterface();
-            boolean _not = (!_isInterface);
-            if (_not) {
-              _matched=true;
-              _switchResult = true;
-            }
+        if (it_1 instanceof JvmGenericType) {
+          boolean _isInterface = ((JvmGenericType)it_1).isInterface();
+          boolean _not = (!_isInterface);
+          if (_not) {
+            _matched=true;
+            _switchResult = true;
           }
         }
         if (!_matched) {
@@ -153,26 +151,12 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
       final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
         @Override
         public Boolean apply(final MethodDeclaration it) {
-          boolean _and = false;
-          String _simpleName = it.getSimpleName();
-          boolean _equals = Objects.equal(_simpleName, name);
-          if (!_equals) {
-            _and = false;
-          } else {
-            Iterable<? extends ParameterDeclaration> _parameters = it.getParameters();
-            final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
-              @Override
-              public TypeReference apply(final ParameterDeclaration it) {
-                return it.getType();
-              }
-            };
-            Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
-            List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
-            List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-            boolean _equals_1 = Objects.equal(_list, _list_1);
-            _and = _equals_1;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((Objects.equal(it.getSimpleName(), name) && Objects.equal(IterableExtensions.<TypeReference>toList(IterableExtensions.map(it.getParameters(), new Function1<ParameterDeclaration, TypeReference>() {
+            @Override
+            public TypeReference apply(final ParameterDeclaration it) {
+              return it.getType();
+            }
+          })), IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes))))));
         }
       };
       _xblockexpression = IterableExtensions.<MethodDeclaration>findFirst(_filter, _function);

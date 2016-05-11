@@ -10,6 +10,6 @@ public class BacktrackingLexerTestLanguageAntlrTokenFileProvider implements IAnt
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.tokens");
 	}
 }

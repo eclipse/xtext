@@ -277,29 +277,19 @@ public class AntlrGrammarComparator {
         if (_matches) {
           state.lineNumber++;
         } else {
-          boolean _or = false;
-          Matcher _matcher_1 = this.p_slComment.matcher(match);
-          boolean _matches_1 = _matcher_1.matches();
-          if (_matches_1) {
-            _or = true;
+          if ((this.p_slComment.matcher(match).matches() || this.p_ws.matcher(match).matches())) {
           } else {
-            Matcher _matcher_2 = this.p_ws.matcher(match);
-            boolean _matches_2 = _matcher_2.matches();
-            _or = _matches_2;
-          }
-          if (_or) {
-          } else {
-            Matcher _matcher_3 = this.p_mlComment.matcher(match);
-            boolean _matches_3 = _matcher_3.matches();
-            if (_matches_3) {
+            Matcher _matcher_1 = this.p_mlComment.matcher(match);
+            boolean _matches_1 = _matcher_1.matches();
+            if (_matches_1) {
               final Matcher newlines = this.p_newline.matcher(match);
               while (newlines.find()) {
                 state.lineNumber++;
               }
             } else {
-              Matcher _matcher_4 = this.p_token.matcher(match);
-              boolean _matches_4 = _matcher_4.matches();
-              if (_matches_4) {
+              Matcher _matcher_2 = this.p_token.matcher(match);
+              boolean _matches_2 = _matcher_2.matches();
+              if (_matches_2) {
                 return true;
               }
             }

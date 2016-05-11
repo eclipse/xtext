@@ -31,11 +31,9 @@ public class AssociatorImpl implements Associator {
     final Element primarySourceElement = _tracability.getPrimarySourceElement(sourceElement);
     EObject _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (primarySourceElement instanceof TypeReferenceImpl) {
-        _matched=true;
-        _switchResult = ((TypeReferenceImpl)primarySourceElement).getSource();
-      }
+    if (primarySourceElement instanceof TypeReferenceImpl) {
+      _matched=true;
+      _switchResult = ((TypeReferenceImpl)primarySourceElement).getSource();
     }
     if (!_matched) {
       if (primarySourceElement instanceof AbstractElementImpl) {

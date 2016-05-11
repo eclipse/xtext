@@ -227,13 +227,11 @@ public class XtendHighlightingLexer extends LexerBase {
     };
     final XtendHighlightingLexer.RichTextToken result = ObjectExtensions.<XtendHighlightingLexer.RichTextToken>operator_doubleArrow(_richTextToken, _function);
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(id, "RULE_RICH_TEXT_START")) {
-        _matched=true;
-        result.delimiter = false;
-        result.offsets = new int[] { tokenOffset, ((tokenOffset + tokenLength) - 1) };
-        result.lengths = new int[] { (tokenLength - 1), 1 };
-      }
+    if (Objects.equal(id, "RULE_RICH_TEXT_START")) {
+      _matched=true;
+      result.delimiter = false;
+      result.offsets = new int[] { tokenOffset, ((tokenOffset + tokenLength) - 1) };
+      result.lengths = new int[] { (tokenLength - 1), 1 };
     }
     if (!_matched) {
       if (Objects.equal(id, "RULE_RICH_TEXT_INBETWEEN")) {

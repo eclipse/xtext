@@ -336,11 +336,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			  String _switchResult = null;
 			  String _name = it.getName();
 			  boolean _matched = false;
-			  if (!_matched) {
-			    if (_name instanceof CharSequence) {
-			      _matched=true;
-			      _switchResult = it.getName();
-			    }
+			  if (_name instanceof CharSequence) {
+			    _matched=true;
+			    _switchResult = it.getName();
 			  }
 			  if (!_matched) {
 			    _switchResult = "noname";
@@ -348,6 +346,132 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			  _xblockexpression = _switchResult;
 			}
 			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testSwitchScopes_Bug470586_01() {
+		// make sure that scopes are closed correctly during the compilation
+		// so that the variables created for lambdas do not have the same name
+		// see https://github.com/eclipse/xtext/pull/987#issuecomment-206718312
+		'''
+			{
+				val list = #["1", "2"]
+				list.forEach[
+					val res = switch it {
+						CharSequence : it
+					}
+				]
+				list.forEach[
+					println(it)
+				]
+			}
+		'''.compilesTo('''
+			final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("1", "2"));
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    String _switchResult = null;
+			    boolean _matched = false;
+			    if (it instanceof CharSequence) {
+			      _matched=true;
+			      _switchResult = it;
+			    }
+			    final String res = _switchResult;
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);
+		''')
+	}
+
+	@Test def void testSwitchScopes_Bug470586_02() {
+		'''
+			{
+				val list = #["1", "2"]
+				list.forEach[
+					val res = switch it {
+						CharSequence : it
+						default : ''
+					}
+				]
+				list.forEach[
+					println(it)
+				]
+			}
+		'''.compilesTo('''
+			final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("1", "2"));
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    String _switchResult = null;
+			    boolean _matched = false;
+			    if (it instanceof CharSequence) {
+			      _matched=true;
+			      _switchResult = it;
+			    }
+			    if (!_matched) {
+			      _switchResult = "";
+			    }
+			    final String res = _switchResult;
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);
+		''')
+	}
+	
+		@Test def void testSwitchScopes_Bug470586_03() {
+		'''
+			{
+				val list = #["1", "2"]
+				list.forEach[
+					val res = switch it {
+						String, CharSequence : it
+						default : ''
+					}
+				]
+				list.forEach[
+					println(it)
+				]
+			}
+		'''.compilesTo('''
+			final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("1", "2"));
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    String _switchResult = null;
+			    boolean _matched = false;
+			    if (it instanceof String) {
+			      _matched=true;
+			    }
+			    if (!_matched) {
+			      if (it instanceof CharSequence) {
+			        _matched=true;
+			      }
+			    }
+			    if (_matched) {
+			      _switchResult = it;
+			    }
+			    if (!_matched) {
+			      _switchResult = "";
+			    }
+			    final String res = _switchResult;
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
+			  public void apply(final String it) {
+			    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);
+			  }
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);
 		''')
 	}
 	
@@ -390,23 +514,21 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			String _switchResult = null;
 			final String x = "lalala";
 			boolean _matched = false;
+			if (com.google.common.base.Objects.equal(x, "a")) {
+			  _matched=true;
+			}
 			if (!_matched) {
-			  if (com.google.common.base.Objects.equal(x, "a")) {
+			  if (com.google.common.base.Objects.equal(x, "b")) {
 			    _matched=true;
 			  }
-			  if (!_matched) {
-			    if (com.google.common.base.Objects.equal(x, "b")) {
-			      _matched=true;
-			    }
+			}
+			if (!_matched) {
+			  if (com.google.common.base.Objects.equal(x, "c")) {
+			    _matched=true;
 			  }
-			  if (!_matched) {
-			    if (com.google.common.base.Objects.equal(x, "c")) {
-			      _matched=true;
-			    }
-			  }
-			  if (_matched) {
-			    _switchResult = "lalala";
-			  }
+			}
+			if (_matched) {
+			  _switchResult = "lalala";
 			}
 			return _switchResult;
 		'''
@@ -454,18 +576,16 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			String _switchResult = null;
 			final String x = "lalala";
 			boolean _matched = false;
+			if (com.google.common.base.Objects.equal(x, "a")) {
+			  _matched=true;
+			}
 			if (!_matched) {
-			  if (com.google.common.base.Objects.equal(x, "a")) {
+			  if (com.google.common.base.Objects.equal(x, "b")) {
 			    _matched=true;
 			  }
-			  if (!_matched) {
-			    if (com.google.common.base.Objects.equal(x, "b")) {
-			      _matched=true;
-			    }
-			  }
-			  if (_matched) {
-			    _switchResult = "lalala";
-			  }
+			}
+			if (_matched) {
+			  _switchResult = "lalala";
 			}
 			if (!_matched) {
 			  _switchResult = "lalala";
@@ -522,12 +642,10 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			Object _object = new Object();
 			final Object x = _object;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (x instanceof String) {
-			    if (com.google.common.base.Objects.equal(x, "a")) {
-			      _matched=true;
-			      _switchResult = "blabla";
-			    }
+			if (x instanceof String) {
+			  if (com.google.common.base.Objects.equal(x, "a")) {
+			    _matched=true;
+			    _switchResult = "blabla";
 			  }
 			}
 			if (!_matched) {
@@ -566,20 +684,18 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			int _switchResult = (int) 0;
 			final Object x = ((Object) "lalala");
 			boolean _matched = false;
+			if (x instanceof String) {
+			  _matched=true;
+			}
 			if (!_matched) {
-			  if (x instanceof String) {
-			    _matched=true;
-			  }
-			  if (!_matched) {
-			    if (x instanceof Integer) {
-			      if (com.google.common.base.Objects.equal(x, 1)) {
-			        _matched=true;
-			      }
+			  if (x instanceof Integer) {
+			    if (com.google.common.base.Objects.equal(x, 1)) {
+			      _matched=true;
 			    }
 			  }
-			  if (_matched) {
-			    _switchResult = 0;
-			  }
+			}
+			if (_matched) {
+			  _switchResult = 0;
 			}
 			if (!_matched) {
 			  if (x instanceof Integer) {
@@ -608,18 +724,16 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			Number _switchResult = null;
 			final Object x = ((Object) Integer.valueOf(1));
 			boolean _matched = false;
+			if (x instanceof Integer) {
+			  _matched=true;
+			}
 			if (!_matched) {
-			  if (x instanceof Integer) {
+			  if (x instanceof Double) {
 			    _matched=true;
 			  }
-			  if (!_matched) {
-			    if (x instanceof Double) {
-			      _matched=true;
-			    }
-			  }
-			  if (_matched) {
-			    _switchResult = ((Number)x);
-			  }
+			}
+			if (_matched) {
+			  _switchResult = ((Number)x);
 			}
 			return ((Number)_switchResult);
 		'''
@@ -1264,13 +1378,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean> _function = new org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean>() {
 			  public Boolean apply(final Boolean a, final Boolean b) {
-			    boolean _and = false;
-			    if (!(a).booleanValue()) {
-			      _and = false;
-			    } else {
-			      _and = (b).booleanValue();
-			    }
-			    return Boolean.valueOf(_and);
+			    return Boolean.valueOf(((a).booleanValue() && (b).booleanValue()));
 			  }
 			};
 			final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);
@@ -1311,11 +1419,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			Object _object = new Object();
 			final Object bar = _object;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (bar instanceof Byte) {
-			    _matched=true;
-			    _switchResult = ((char) ((Byte) bar).byteValue());
-			  }
+			if (bar instanceof Byte) {
+			  _matched=true;
+			  _switchResult = ((char) ((Byte) bar).byteValue());
 			}
 			return _switchResult;
 		''')
@@ -1350,11 +1456,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Number element = null;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (element instanceof Double) {
-			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(element));
-			  }
+			if (element instanceof Double) {
+			  _matched=true;
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(element));
 			}
 		''')
 	}
@@ -1388,11 +1492,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Number element = null;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (element instanceof Double) {
-			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(element));
-			  }
+			if (element instanceof Double) {
+			  _matched=true;
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(element));
 			}
 		''')
 	}
@@ -1426,11 +1528,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Object element = null;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (element instanceof Double) {
-			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(((Number)element)));
-			  }
+			if (element instanceof Double) {
+			  _matched=true;
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(((Number)element)));
 			}
 		''')
 	}
@@ -1464,11 +1564,9 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Object element = null;
 			boolean _matched = false;
-			if (!_matched) {
-			  if (element instanceof Double) {
-			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(((Number)element)));
-			  }
+			if (element instanceof Double) {
+			  _matched=true;
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(((Number)element)));
 			}
 		''')
 	}
@@ -1680,6 +1778,79 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			{
 			  int i = 0;
 			  _xblockexpression = Integer.valueOf(i = (i + 1)).compareTo(Integer.valueOf(2));
+			}
+			return _xblockexpression;
+		''')
+	}
+
+	@Test def void testBug489037_NestedAssignment_1() {
+		// this does not require argument preparation
+		'''
+			{
+				var i = 0
+				var j = 0
+				j=i=0;
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int j = 0;
+			  _xblockexpression = j = (i = 0);
+			}
+			return _xblockexpression;
+		''')
+	}
+
+	@Test def void testBug489037_NestedAssignment_2() {
+		// this requires argument preparation
+		'''
+			{
+				var i = 0
+				var n = 1
+				n=i=(if (i==0) 1 else 2)
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int n = 1;
+			  int _xifexpression = (int) 0;
+			  if ((i == 0)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  int _i = (i = _xifexpression);
+			  _xblockexpression = n = _i;
+			}
+			return _xblockexpression;
+		''')
+	}
+
+	@Test def void testBug489037_NestedAssignment_3() {
+		// this requires argument preparation
+		'''
+			{
+				var i = 0
+				var n = 1
+				n=i=switch(i) {
+					default: 2
+				}
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int n = 1;
+			  int _switchResult = (int) 0;
+			  switch (i) {
+			    default:
+			      _switchResult = 2;
+			      break;
+			  }
+			  int _i = (i = _switchResult);
+			  _xblockexpression = n = _i;
 			}
 			return _xblockexpression;
 		''')

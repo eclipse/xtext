@@ -96,8 +96,7 @@ public class NodeModelBasedRegionAccessBuilder {
 			return true;
 		} else if (node instanceof ICompositeNode) {
 			EObject element = node.getGrammarElement();
-			return GrammarUtil.isDatatypeRuleCall(element) || element instanceof CrossReference
-					|| GrammarUtil.isEnumRuleCall(element);
+			return GrammarUtil.isDatatypeRuleCall(element) || element instanceof CrossReference || GrammarUtil.isEnumRuleCall(element);
 		}
 		return false;
 	}
@@ -113,6 +112,8 @@ public class NodeModelBasedRegionAccessBuilder {
 	protected boolean isEObjectRoot(INode node) {
 		if (node instanceof ICompositeNode) {
 			ICompositeNode parent = node.getParent();
+			while (parent != null && GrammarUtil.isEObjectFragmentRuleCall(parent.getGrammarElement()))
+				parent = parent.getParent();
 			if (parent == null)
 				return true;
 			INode root = parent;
@@ -121,7 +122,7 @@ public class NodeModelBasedRegionAccessBuilder {
 			if (root == null)
 				return false;
 			EObject element = node.getGrammarElement();
-			if (GrammarUtil.isEObjectRuleCall(element)) {
+			if (GrammarUtil.isEObjectRuleCall(element) && !GrammarUtil.isEObjectFragmentRuleCall(element)) {
 				if (!parent.hasDirectSemanticElement())
 					return false;
 				BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
@@ -190,7 +191,10 @@ public class NodeModelBasedRegionAccessBuilder {
 		if (tokens.getSemanticElement() == null) {
 			if (node.getParent() == null) {
 				tokens.setSemantcElement(resource.getContents().get(0));
-				tokens.setGrammarElement(node.getGrammarElement());
+				EObject element = node.getGrammarElement();
+				if (element instanceof Action)
+					element = ((ICompositeNode) node).getFirstChild().getGrammarElement();
+				tokens.setGrammarElement(element);
 			} else if (node.hasDirectSemanticElement()) {
 				tokens.setSemantcElement(node.getSemanticElement());
 				tokens.setGrammarElement(findGrammarElement(node, tokens.getSemanticElement()));

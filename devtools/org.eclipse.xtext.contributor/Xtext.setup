@@ -42,6 +42,14 @@
       value="${git.clone.xtext.location}"/>
   <setupTask
       xsi:type="setup:VariableTask"
+      name="eclipse.target.platform"
+      defaultValue="Luna"
+      storageURI="scope://Workspace"
+      label="Target Platform">
+    <description>Choose the compatibility level of the target platform</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
       name="xtext.nightly.composite"
       value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/"/>
   <setupTask
@@ -57,11 +65,6 @@
       type="URI"
       name="draw2d.p2.repository"
       value="http://download.eclipse.org/tools/gef/updates/releases"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="eclipse.target.platform"
-      defaultValue="Luna"
-      storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Workspace Preferences">
@@ -318,8 +321,6 @@
       <requirement
           name="org.eclipse.pde.feature.group"/>
       <requirement
-          name="org.eclipse.m2e.core"/>
-      <requirement
           name="org.eclipse.emf.sdk.feature.group"/>
       <requirement
           name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
@@ -350,6 +351,8 @@
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
         <repository
             url="${emf.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.6/"/>
       </repositoryList>
       <repositoryList
           name="Mars">
@@ -367,6 +370,8 @@
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
         <repository
             url="${emf.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.5/"/>
       </repositoryList>
       <repositoryList
           name="Luna">
@@ -384,6 +389,8 @@
             url="${emf.update.site}"/>
         <repository
             url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.4/"/>
       </repositoryList>
       <repositoryList
           name="Kepler">
@@ -420,6 +427,8 @@
             url="${draw2d.p2.repository}"/>
         <repository
             url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/4.2/"/>
       </repositoryList>
       <repositoryList
           name="Indigo">
@@ -437,13 +446,13 @@
             url="${draw2d.p2.repository}"/>
         <repository
             url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/3.7/"/>
       </repositoryList>
       <repositoryList
           name="Helios">
         <repository
             url="${xtext.nightly.composite}"/>
-        <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
@@ -454,6 +463,25 @@
             url="${draw2d.p2.repository}"/>
         <repository
             url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/eclipse/updates/3.6/"/>
+        <repository
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
+      </repositoryList>
+    </targlet>
+    <targlet
+        name="Xtext Tools"
+        activeRepositoryList="Oldest Helios">
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.jem.util"/>
+      <repositoryList
+          name="Oldest Helios">
+        <repository
+            url="http://download.eclipse.org/webtools/downloads/drops/R3.2.3/R-3.2.3-20110217214612/repository"/>
+        <repository
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
       </repositoryList>
     </targlet>
     <description>Target platform</description>
@@ -699,6 +727,8 @@
         <requirement
             name="org.eclipse.xtext.example.homeautomation.tests"/>
         <requirement
+            name="org.eclipse.xtext.example.homeautomation.ui"/>
+        <requirement
             name="org.eclipse.xtext.example.fowlerdsl.ui"/>
         <requirement
             name="xbase.tutorial"/>
@@ -722,44 +752,40 @@
           rootFolder="${git.clone.xtext.location/xtext-website}"/>
       <sourceLocator
           rootFolder="${git.clone.xtext.location/xtend-website}"/>
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/intellij}"
+          locateNestedProjects="true"/>
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/web}"
+          locateNestedProjects="true"/>
       <description>Maven Dependencies</description>
+    </setupTask>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="refresh-gradle-dependencies"
+        launcher="/intellij/refresh-gradle-dependencies-idea.launch">
+      <description>
+        Refreshes the .classpath files for the Gradle projects
+        Downloads Intellij IDEA if needed
+      </description>
+    </setupTask>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="refresh-gradle-dependencies-web"
+        launcher="/web/refresh-gradle-dependencies-web.launch">
+      <description>
+        Refreshes the .classpath files for the Gradle projects
+        Downloads Intellij IDEA if needed
+      </description>
     </setupTask>
     <stream
         name="master">
       <setupTask
           xsi:type="pde:APIBaselineTask"
           name="xtext"
-          version="2.8"
-          location="${installation.location}/api/v2.8/"
-          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.8.0/R201503090534/tmf-xtext-Update-2.8.0.zip&amp;r=1"/>
-      <setupTask
-          xsi:type="projects:ProjectsImportTask">
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/intellij}"
-            locateNestedProjects="true"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/web}"
-            locateNestedProjects="true"/>
-        <description>Maven Dependencies</description>
-      </setupTask>
-      <setupTask
-          xsi:type="launching:LaunchTask"
-          id="refresh-gradle-dependencies"
-          launcher="/intellij/refresh-gradle-dependencies-idea.launch">
-        <description>
-          Refreshes the .classpath files for the Gradle projects
-          Downloads Intellij IDEA if needed
-        </description>
-      </setupTask>
-      <setupTask
-          xsi:type="launching:LaunchTask"
-          id="refresh-gradle-dependencies-web"
-          launcher="/web/refresh-gradle-dependencies-web.launch">
-        <description>
-          Refreshes the .classpath files for the Gradle projects
-          Downloads Intellij IDEA if needed
-        </description>
-      </setupTask>
+          version="2.9"
+          location="${installation.location}/api/v2.9/"
+          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.9.0/R201512010527/tmf-xtext-Update-2.9.0.zip&amp;r=1"/>
     </stream>
     <stream
         name="maintenance">
@@ -774,34 +800,13 @@
       <setupTask
           xsi:type="setup:VariableTask"
           name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/"/>
+          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
       <setupTask
           xsi:type="pde:APIBaselineTask"
           name="xtext"
-          version="2.7"
-          location="${installation.location}/api/v2.7/"
-          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.7.0/R201409021032/tmf-xtext-Update-2.7.0.zip&amp;r=1"/>
-      <setupTask
-          xsi:type="launching:LaunchTask"
-          id="Maven Install"
-          excludedTriggers="MANUAL"
-          launcher="/org.eclipse.xtext.parent/org.eclipse.xtext.parent.launch"/>
-      <setupTask
-          xsi:type="setup.targlets:TargletTask">
-        <targlet
-            name="JUnit 3"
-            activeRepositoryList="OrbitLunaSR2">
-          <requirement
-              name="org.junit"
-              versionRange="[3.8.0,4.0.0)"
-              filter=""/>
-          <repositoryList
-              name="OrbitLunaSR2">
-            <repository
-                url="http://download.eclipse.org/tools/orbit/downloads/drops/R20150124073747/repository/"/>
-          </repositoryList>
-        </targlet>
-      </setupTask>
+          version="2.8"
+          location="${installation.location}/api/v2.8/"
+          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.8.0/R201503090534/tmf-xtext-Update-2.8.0.zip&amp;r=1"/>
     </stream>
     <description>Provide the core grammar infrastructure</description>
   </project>

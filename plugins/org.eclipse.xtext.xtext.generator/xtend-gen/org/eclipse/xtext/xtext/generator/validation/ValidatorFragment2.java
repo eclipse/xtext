@@ -76,14 +76,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     {
       final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(grammar);
       TypeReference _xifexpression = null;
-      boolean _and = false;
-      boolean _isInheritImplementation = this.isInheritImplementation();
-      if (!_isInheritImplementation) {
-        _and = false;
-      } else {
-        _and = (superGrammar != null);
-      }
-      if (_and) {
+      if ((this.isInheritImplementation() && (superGrammar != null))) {
         _xifexpression = this._validatorNaming.getValidatorClass(superGrammar);
       } else {
         _xifexpression = this.getDefaultValidatorSuperClass();
@@ -174,7 +167,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
-        _builder.append("//  public static val INVALID_NAME = \'invalidName\'");
+        _builder.append("//\tpublic static val INVALID_NAME = \'invalidName\'");
         _builder.newLine();
         _builder.append("//");
         _builder.newLine();
@@ -244,7 +237,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
-        _builder.append("//  public static final INVALID_NAME = \'invalidName\'");
+        _builder.append("//\tpublic static final INVALID_NAME = \'invalidName\'");
         _builder.newLine();
         _builder.append("//");
         _builder.newLine();
@@ -348,27 +341,17 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.append(EPackage.class, "\t");
         _builder.append("> getEPackages() {");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t    ");
-        _builder.append(List.class, "\t    ");
+        _builder.append("\t\t");
+        _builder.append(List.class, "\t\t");
         _builder.append("<");
-        _builder.append(EPackage.class, "\t    ");
+        _builder.append(EPackage.class, "\t\t");
         _builder.append("> result = new ");
-        _builder.append(ArrayList.class, "\t    ");
+        _builder.append(ArrayList.class, "\t\t");
         _builder.append("<");
-        _builder.append(EPackage.class, "\t    ");
+        _builder.append(EPackage.class, "\t\t");
         _builder.append(">(");
         {
-          boolean _and = false;
-          boolean _isInheritImplementation = ValidatorFragment2.this.isInheritImplementation();
-          if (!_isInheritImplementation) {
-            _and = false;
-          } else {
-            Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
-            Grammar _nonTerminalsSuperGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(_grammar_1);
-            boolean _tripleNotEquals = (_nonTerminalsSuperGrammar != null);
-            _and = _tripleNotEquals;
-          }
-          if (_and) {
+          if ((ValidatorFragment2.this.isInheritImplementation() && (GrammarUtil2.getNonTerminalsSuperGrammar(ValidatorFragment2.this.getGrammar()) != null))) {
             _builder.append("super.getEPackages()");
           }
         }
@@ -377,10 +360,10 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         {
           Iterable<EPackage> _generatedPackagesToValidate = ValidatorFragment2.this.getGeneratedPackagesToValidate();
           for(final EPackage e : _generatedPackagesToValidate) {
-            _builder.append("\t    ");
+            _builder.append("\t\t");
             _builder.append("result.add(");
             String _generatedEPackageName = ValidatorFragment2.this.getGeneratedEPackageName(e);
-            _builder.append(_generatedEPackageName, "\t    ");
+            _builder.append(_generatedEPackageName, "\t\t");
             _builder.append(".eINSTANCE);");
             _builder.newLineIfNotEmpty();
           }
@@ -388,10 +371,10 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         {
           Collection<EPackage> _registryPackagesToValidate = ValidatorFragment2.this.getRegistryPackagesToValidate();
           for(final EPackage e_1 : _registryPackagesToValidate) {
-            _builder.append("\t    ");
+            _builder.append("\t\t");
             _builder.append("result.add(EPackage.Registry.INSTANCE.getEPackage(\"");
             String _nsURI = e_1.getNsURI();
-            _builder.append(_nsURI, "\t    ");
+            _builder.append(_nsURI, "\t\t");
             _builder.append("\"));");
             _builder.newLineIfNotEmpty();
           }

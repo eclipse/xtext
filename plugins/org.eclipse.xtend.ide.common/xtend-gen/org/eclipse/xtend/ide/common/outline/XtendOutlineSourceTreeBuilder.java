@@ -202,15 +202,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   protected boolean isDispatchRelated(final JvmFeature feature) {
     boolean _xifexpression = false;
     if ((feature instanceof JvmOperation)) {
-      boolean _or = false;
-      boolean _isDispatcherFunction = this.dispatchHelper.isDispatcherFunction(((JvmOperation)feature));
-      if (_isDispatcherFunction) {
-        _or = true;
-      } else {
-        boolean _isDispatchFunction = this.dispatchHelper.isDispatchFunction(((JvmOperation)feature));
-        _or = _isDispatchFunction;
-      }
-      _xifexpression = _or;
+      _xifexpression = (this.dispatchHelper.isDispatcherFunction(((JvmOperation)feature)) || this.dispatchHelper.isDispatchFunction(((JvmOperation)feature)));
     }
     return _xifexpression;
   }

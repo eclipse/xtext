@@ -12,7 +12,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.name.Names;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -45,14 +44,12 @@ import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
-import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig;
-import org.eclipse.xtext.xtext.generator.parser.antlr.ContentAssistGrammarNaming;
 import org.eclipse.xtext.xtext.generator.util.BooleanGeneratorOption;
 import org.eclipse.xtext.xtext.generator.util.GeneratorOption;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
@@ -72,15 +69,15 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     CODEMIRROR;
   }
   
-  private final static String REQUIREJS_VERSION = "2.1.20";
+  private final static String REQUIREJS_VERSION = "2.2.0";
   
-  private final static String REQUIREJS_TEXT_VERSION = "2.0.14";
+  private final static String REQUIREJS_TEXT_VERSION = "2.0.15";
   
-  private final static String JQUERY_VERSION = "2.1.4";
+  private final static String JQUERY_VERSION = "2.2.3";
   
-  private final static String ACE_VERSION = "1.2.0";
+  private final static String ACE_VERSION = "1.2.2";
   
-  private final static String CODEMIRROR_VERSION = "5.7";
+  private final static String CODEMIRROR_VERSION = "5.13.2";
   
   @Inject
   private FileAccessFactory fileAccessFactory;
@@ -91,9 +88,6 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   @Inject
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
-  
-  @Inject
-  private ContentAssistGrammarNaming caNaming;
   
   @Inject
   @Extension
@@ -285,14 +279,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   
   @Override
   public void generate() {
-    boolean _and = false;
-    if (!(this.highlightingModuleName != null)) {
-      _and = false;
-    } else {
-      boolean _endsWith = this.highlightingModuleName.endsWith(".js");
-      _and = _endsWith;
-    }
-    if (_and) {
+    if (((this.highlightingModuleName != null) && this.highlightingModuleName.endsWith(".js"))) {
       int _length = this.highlightingModuleName.length();
       int _minus = (_length - 3);
       String _substring = this.highlightingModuleName.substring(0, _minus);
@@ -323,109 +310,26 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       _elvis = _switchResult;
     }
     final String hlModName = _elvis;
-    boolean _and_1 = false;
-    boolean _get_1 = this.generateJsHighlighting.get();
-    if (!_get_1) {
-      _and_1 = false;
-    } else {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IWebProjectConfig _web = _projectConfig.getWeb();
-      IXtextGeneratorFileSystemAccess _assets = _web.getAssets();
-      boolean _tripleNotEquals = (_assets != null);
-      _and_1 = _tripleNotEquals;
-    }
-    if (_and_1) {
+    if ((this.generateJsHighlighting.get() && (this.getProjectConfig().getWeb().getAssets() != null))) {
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.highlightingPath);
       if (_isNullOrEmpty) {
         this.highlightingPath = (hlModName + ".js");
       }
       this.generateJsHighlighting(langId);
     }
-    boolean _and_2 = false;
-    boolean _get_2 = this.generateServlet.get();
-    if (!_get_2) {
-      _and_2 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IWebProjectConfig _web_1 = _projectConfig_1.getWeb();
-      IXtextGeneratorFileSystemAccess _src = _web_1.getSrc();
-      boolean _tripleNotEquals_1 = (_src != null);
-      _and_2 = _tripleNotEquals_1;
-    }
-    if (_and_2) {
+    if ((this.generateServlet.get() && (this.getProjectConfig().getWeb().getSrc() != null))) {
       this.generateServlet();
     }
-    boolean _and_3 = false;
-    boolean _get_3 = this.generateJettyLauncher.get();
-    if (!_get_3) {
-      _and_3 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      IWebProjectConfig _web_2 = _projectConfig_2.getWeb();
-      IXtextGeneratorFileSystemAccess _src_1 = _web_2.getSrc();
-      boolean _tripleNotEquals_2 = (_src_1 != null);
-      _and_3 = _tripleNotEquals_2;
-    }
-    if (_and_3) {
+    if ((this.generateJettyLauncher.get() && (this.getProjectConfig().getWeb().getSrc() != null))) {
       this.generateServerLauncher();
     }
-    boolean _and_4 = false;
-    boolean _get_4 = this.generateHtmlExample.get();
-    if (!_get_4) {
-      _and_4 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IWebProjectConfig _web_3 = _projectConfig_3.getWeb();
-      IXtextGeneratorFileSystemAccess _assets_1 = _web_3.getAssets();
-      boolean _tripleNotEquals_3 = (_assets_1 != null);
-      _and_4 = _tripleNotEquals_3;
-    }
-    if (_and_4) {
+    if ((this.generateHtmlExample.get() && (this.getProjectConfig().getWeb().getAssets() != null))) {
       this.generateIndexDoc(hlModName);
       this.generateStyleSheet();
     }
-    boolean _and_5 = false;
-    boolean _get_5 = this.generateWebXml.get();
-    if (!_get_5) {
-      _and_5 = false;
-    } else {
-      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-      IWebProjectConfig _web_4 = _projectConfig_4.getWeb();
-      IXtextGeneratorFileSystemAccess _assets_2 = _web_4.getAssets();
-      boolean _tripleNotEquals_4 = (_assets_2 != null);
-      _and_5 = _tripleNotEquals_4;
-    }
-    if (_and_5) {
+    if ((this.generateWebXml.get() && (this.getProjectConfig().getWeb().getAssets() != null))) {
       this.generateWebXml();
     }
-    StringConcatenationClient _client = new StringConcatenationClient() {
-      @Override
-      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append("binder.bind(");
-        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer");
-        _builder.append(_typeRef, "");
-        _builder.append(".class).annotatedWith(");
-        _builder.append(Names.class, "");
-        _builder.append(".named(");
-        TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ide.LexerIdeBindings");
-        _builder.append(_typeRef_1, "");
-        _builder.append(".CONTENT_ASSIST)).to(");
-        Grammar _grammar = WebIntegrationFragment.this.getGrammar();
-        TypeReference _lexerClass = WebIntegrationFragment.this.caNaming.getLexerClass(_grammar);
-        _builder.append(_lexerClass, "");
-        _builder.append(".class);");
-      }
-    };
-    final StringConcatenationClient lexerStatement = _client;
-    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
-    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _bindingFactory.addConfiguredBinding("ContentAssistLexer", lexerStatement);
-    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
-    Grammar _grammar = this.getGrammar();
-    TypeReference _parserClass = this.caNaming.getParserClass(_grammar);
-    GuiceModuleAccess.BindingFactory _addTypeToType = _addConfiguredBinding.addTypeToType(_typeRef, _parserClass);
-    IXtextGeneratorLanguage _language_1 = this.getLanguage();
-    GuiceModuleAccess _webGenModule = _language_1.getWebGenModule();
-    _addTypeToType.contributeTo(_webGenModule);
   }
   
   private final static String DELIMITERS_PATTERN = new Function0<String>() {
@@ -820,15 +724,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             } else {
               _builder.appendImmediate("|", "");
             }
-            boolean _and = false;
-            WebIntegrationFragment.Framework _get = this.framework.get();
-            boolean _notEquals = (!Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              _and = this.ignoreCase;
-            }
-            String _regexpString = RegexpExtensions.toRegexpString(kw, _and);
+            String _regexpString = RegexpExtensions.toRegexpString(kw, ((!Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR)) && this.ignoreCase));
             _builder.append(_regexpString, "");
           }
         }
@@ -849,15 +745,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             } else {
               _builder.appendImmediate("|", "");
             }
-            boolean _and_1 = false;
-            WebIntegrationFragment.Framework _get_1 = this.framework.get();
-            boolean _notEquals_1 = (!Objects.equal(_get_1, WebIntegrationFragment.Framework.CODEMIRROR));
-            if (!_notEquals_1) {
-              _and_1 = false;
-            } else {
-              _and_1 = this.ignoreCase;
-            }
-            String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1, _and_1);
+            String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1, ((!Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR)) && this.ignoreCase));
             _builder.append(_regexpString_1, "");
           }
         }
@@ -870,15 +758,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   
   protected CharSequence generateKeywordsRegExp() {
     CharSequence _xifexpression = null;
-    boolean _and = false;
-    WebIntegrationFragment.Framework _get = this.framework.get();
-    boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR);
-    if (!_equals) {
-      _and = false;
-    } else {
-      _and = this.ignoreCase;
-    }
-    if (_and) {
+    if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && this.ignoreCase)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("new RegExp(\"\\\\b(?:\" + keywords + \")\\\\b\", \"gi\")");
       _xifexpression = _builder;
@@ -892,15 +772,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   
   protected CharSequence generateExtraKeywordsRegExp() {
     CharSequence _xifexpression = null;
-    boolean _and = false;
-    WebIntegrationFragment.Framework _get = this.framework.get();
-    boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR);
-    if (!_equals) {
-      _and = false;
-    } else {
-      _and = this.ignoreCase;
-    }
-    if (_and) {
+    if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && this.ignoreCase)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("new RegExp(\"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
       _builder.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
@@ -922,230 +794,44 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     Grammar _grammar_1 = this.getGrammar();
     final boolean inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar_1);
     final ArrayList<String> patterns = new ArrayList<String>();
-    boolean _or = false;
-    boolean _contains = this.enabledPatterns.contains("comment_singleLine");
-    if (_contains) {
-      _or = true;
-    } else {
-      boolean _and = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and = false;
-      } else {
-        boolean _contains_1 = this.suppressedPatterns.contains("comment_singleLine");
-        boolean _not = (!_contains_1);
-        _and = _not;
-      }
-      _or = _and;
-    }
-    if (_or) {
+    if ((this.enabledPatterns.contains("comment_singleLine") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("comment_singleLine"))))) {
       patterns.add("{include: \"orion.c-like#comment_singleLine\"}");
     }
-    boolean _or_1 = false;
-    boolean _contains_2 = this.enabledPatterns.contains("comment_block");
-    if (_contains_2) {
-      _or_1 = true;
-    } else {
-      boolean _and_1 = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and_1 = false;
-      } else {
-        boolean _contains_3 = this.suppressedPatterns.contains("comment_block");
-        boolean _not_1 = (!_contains_3);
-        _and_1 = _not_1;
-      }
-      _or_1 = _and_1;
-    }
-    if (_or_1) {
+    if ((this.enabledPatterns.contains("comment_block") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("comment_block"))))) {
       patterns.add("{include: \"orion.c-like#comment_block\"}");
     }
-    boolean _or_2 = false;
-    boolean _contains_4 = this.enabledPatterns.contains("string_doubleQuote");
-    if (_contains_4) {
-      _or_2 = true;
-    } else {
-      boolean _and_2 = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and_2 = false;
-      } else {
-        boolean _contains_5 = this.suppressedPatterns.contains("string_doubleQuote");
-        boolean _not_2 = (!_contains_5);
-        _and_2 = _not_2;
-      }
-      _or_2 = _and_2;
-    }
-    if (_or_2) {
+    if ((this.enabledPatterns.contains("string_doubleQuote") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("string_doubleQuote"))))) {
       patterns.add("{include: \"orion.lib#string_doubleQuote\"}");
     }
-    boolean _or_3 = false;
-    boolean _contains_6 = this.enabledPatterns.contains("string_singleQuote");
-    if (_contains_6) {
-      _or_3 = true;
-    } else {
-      boolean _and_3 = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and_3 = false;
-      } else {
-        boolean _contains_7 = this.suppressedPatterns.contains("string_singleQuote");
-        boolean _not_3 = (!_contains_7);
-        _and_3 = _not_3;
-      }
-      _or_3 = _and_3;
-    }
-    if (_or_3) {
+    if ((this.enabledPatterns.contains("string_singleQuote") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("string_singleQuote"))))) {
       patterns.add("{include: \"orion.lib#string_singleQuote\"}");
     }
-    boolean _or_4 = false;
-    boolean _contains_8 = this.enabledPatterns.contains("number_decimal");
-    if (_contains_8) {
-      _or_4 = true;
-    } else {
-      boolean _and_4 = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and_4 = false;
-      } else {
-        boolean _contains_9 = this.suppressedPatterns.contains("number_decimal");
-        boolean _not_4 = (!_contains_9);
-        _and_4 = _not_4;
-      }
-      _or_4 = _and_4;
-    }
-    if (_or_4) {
+    if ((this.enabledPatterns.contains("number_decimal") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("number_decimal"))))) {
       patterns.add("{include: \"orion.lib#number_decimal\"}");
     }
-    boolean _or_5 = false;
-    boolean _contains_10 = this.enabledPatterns.contains("number_hex");
-    if (_contains_10) {
-      _or_5 = true;
-    } else {
-      boolean _and_5 = false;
-      if (!inheritsXbase) {
-        _and_5 = false;
-      } else {
-        boolean _contains_11 = this.suppressedPatterns.contains("number_hex");
-        boolean _not_5 = (!_contains_11);
-        _and_5 = _not_5;
-      }
-      _or_5 = _and_5;
-    }
-    if (_or_5) {
+    if ((this.enabledPatterns.contains("number_hex") || (inheritsXbase && (!this.suppressedPatterns.contains("number_hex"))))) {
       patterns.add("{include: \"orion.lib#number_hex\"}");
     }
-    boolean _or_6 = false;
-    boolean _contains_12 = this.enabledPatterns.contains("brace_open");
-    if (_contains_12) {
-      _or_6 = true;
-    } else {
-      boolean _and_6 = false;
-      boolean _contains_13 = keywords.contains("{");
-      if (!_contains_13) {
-        _and_6 = false;
-      } else {
-        boolean _contains_14 = this.suppressedPatterns.contains("brace_open");
-        boolean _not_6 = (!_contains_14);
-        _and_6 = _not_6;
-      }
-      _or_6 = _and_6;
-    }
-    if (_or_6) {
+    if ((this.enabledPatterns.contains("brace_open") || (keywords.contains("{") && (!this.suppressedPatterns.contains("brace_open"))))) {
       patterns.add("{include: \"orion.lib#brace_open\"}");
     }
-    boolean _or_7 = false;
-    boolean _contains_15 = this.enabledPatterns.contains("brace_close");
-    if (_contains_15) {
-      _or_7 = true;
-    } else {
-      boolean _and_7 = false;
-      boolean _contains_16 = keywords.contains("}");
-      if (!_contains_16) {
-        _and_7 = false;
-      } else {
-        boolean _contains_17 = this.suppressedPatterns.contains("brace_close");
-        boolean _not_7 = (!_contains_17);
-        _and_7 = _not_7;
-      }
-      _or_7 = _and_7;
-    }
-    if (_or_7) {
+    if ((this.enabledPatterns.contains("brace_close") || (keywords.contains("}") && (!this.suppressedPatterns.contains("brace_close"))))) {
       patterns.add("{include: \"orion.lib#brace_close\"}");
     }
-    boolean _or_8 = false;
-    boolean _contains_18 = this.enabledPatterns.contains("bracket_open");
-    if (_contains_18) {
-      _or_8 = true;
-    } else {
-      boolean _and_8 = false;
-      boolean _contains_19 = keywords.contains("[");
-      if (!_contains_19) {
-        _and_8 = false;
-      } else {
-        boolean _contains_20 = this.suppressedPatterns.contains("bracket_open");
-        boolean _not_8 = (!_contains_20);
-        _and_8 = _not_8;
-      }
-      _or_8 = _and_8;
-    }
-    if (_or_8) {
+    if ((this.enabledPatterns.contains("bracket_open") || (keywords.contains("[") && (!this.suppressedPatterns.contains("bracket_open"))))) {
       patterns.add("{include: \"orion.lib#bracket_open\"}");
     }
-    boolean _or_9 = false;
-    boolean _contains_21 = this.enabledPatterns.contains("bracket_close");
-    if (_contains_21) {
-      _or_9 = true;
-    } else {
-      boolean _and_9 = false;
-      boolean _contains_22 = keywords.contains("]");
-      if (!_contains_22) {
-        _and_9 = false;
-      } else {
-        boolean _contains_23 = this.suppressedPatterns.contains("bracket_close");
-        boolean _not_9 = (!_contains_23);
-        _and_9 = _not_9;
-      }
-      _or_9 = _and_9;
-    }
-    if (_or_9) {
+    if ((this.enabledPatterns.contains("bracket_close") || (keywords.contains("]") && (!this.suppressedPatterns.contains("bracket_close"))))) {
       patterns.add("{include: \"orion.lib#bracket_close\"}");
     }
-    boolean _or_10 = false;
-    boolean _contains_24 = this.enabledPatterns.contains("parenthesis_open");
-    if (_contains_24) {
-      _or_10 = true;
-    } else {
-      boolean _and_10 = false;
-      boolean _contains_25 = keywords.contains("(");
-      if (!_contains_25) {
-        _and_10 = false;
-      } else {
-        boolean _contains_26 = this.suppressedPatterns.contains("parenthesis_open");
-        boolean _not_10 = (!_contains_26);
-        _and_10 = _not_10;
-      }
-      _or_10 = _and_10;
-    }
-    if (_or_10) {
+    if ((this.enabledPatterns.contains("parenthesis_open") || (keywords.contains("(") && (!this.suppressedPatterns.contains("parenthesis_open"))))) {
       patterns.add("{include: \"orion.lib#parenthesis_open\"}");
     }
-    boolean _or_11 = false;
-    boolean _contains_27 = this.enabledPatterns.contains("parenthesis_close");
-    if (_contains_27) {
-      _or_11 = true;
-    } else {
-      boolean _and_11 = false;
-      boolean _contains_28 = keywords.contains(")");
-      if (!_contains_28) {
-        _and_11 = false;
-      } else {
-        boolean _contains_29 = this.suppressedPatterns.contains("parenthesis_close");
-        boolean _not_11 = (!_contains_29);
-        _and_11 = _not_11;
-      }
-      _or_11 = _and_11;
-    }
-    if (_or_11) {
+    if ((this.enabledPatterns.contains("parenthesis_close") || (keywords.contains(")") && (!this.suppressedPatterns.contains("parenthesis_close"))))) {
       patterns.add("{include: \"orion.lib#parenthesis_close\"}");
     }
-    boolean _contains_30 = this.enabledPatterns.contains("doc_block");
-    if (_contains_30) {
+    boolean _contains = this.enabledPatterns.contains("doc_block");
+    if (_contains) {
       patterns.add("{include: \"orion.lib#doc_block\"}");
     }
     return patterns;
@@ -1157,43 +843,13 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     Grammar _grammar_1 = this.getGrammar();
     final boolean inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar_1);
     final LinkedHashMultimap<String, String> patterns = LinkedHashMultimap.<String, String>create();
-    boolean _or = false;
-    boolean _contains = this.enabledPatterns.contains("comment_singleLine");
-    if (_contains) {
-      _or = true;
-    } else {
-      boolean _and = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and = false;
-      } else {
-        boolean _contains_1 = this.suppressedPatterns.contains("comment_singleLine");
-        boolean _not = (!_contains_1);
-        _and = _not;
-      }
-      _or = _and;
-    }
-    final boolean hasSingleLineComment = _or;
+    final boolean hasSingleLineComment = (this.enabledPatterns.contains("comment_singleLine") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("comment_singleLine"))));
     if (hasSingleLineComment) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{token: \"comment\", regex: \"\\\\/\\\\/.*$\"}");
       patterns.put("start", _builder.toString());
     }
-    boolean _or_1 = false;
-    boolean _contains_2 = this.enabledPatterns.contains("comment_block");
-    if (_contains_2) {
-      _or_1 = true;
-    } else {
-      boolean _and_1 = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and_1 = false;
-      } else {
-        boolean _contains_3 = this.suppressedPatterns.contains("comment_block");
-        boolean _not_1 = (!_contains_3);
-        _and_1 = _not_1;
-      }
-      _or_1 = _and_1;
-    }
-    if (_or_1) {
+    if ((this.enabledPatterns.contains("comment_block") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("comment_block"))))) {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("{token: \"comment\", regex: \"\\\\/\\\\*\", next : \"comment\"}");
       patterns.put("start", _builder_1.toString());
@@ -1204,144 +860,30 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       _builder_3.append("{token: \"comment\", regex: \".+\"}");
       patterns.put("comment", _builder_3.toString());
     }
-    boolean _or_2 = false;
-    boolean _contains_4 = this.enabledPatterns.contains("string_doubleQuote");
-    if (_contains_4) {
-      _or_2 = true;
-    } else {
-      boolean _and_2 = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and_2 = false;
-      } else {
-        boolean _contains_5 = this.suppressedPatterns.contains("string_doubleQuote");
-        boolean _not_2 = (!_contains_5);
-        _and_2 = _not_2;
-      }
-      _or_2 = _and_2;
-    }
-    if (_or_2) {
+    if ((this.enabledPatterns.contains("string_doubleQuote") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("string_doubleQuote"))))) {
       StringConcatenation _builder_4 = new StringConcatenation();
       _builder_4.append("{token: \"string\", regex: \'[\"](?:(?:\\\\\\\\.)|(?:[^\"\\\\\\\\]))*?[\"]\'}");
       patterns.put("start", _builder_4.toString());
     }
-    boolean _or_3 = false;
-    boolean _contains_6 = this.enabledPatterns.contains("string_singleQuote");
-    if (_contains_6) {
-      _or_3 = true;
-    } else {
-      boolean _and_3 = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and_3 = false;
-      } else {
-        boolean _contains_7 = this.suppressedPatterns.contains("string_singleQuote");
-        boolean _not_3 = (!_contains_7);
-        _and_3 = _not_3;
-      }
-      _or_3 = _and_3;
-    }
-    if (_or_3) {
+    if ((this.enabledPatterns.contains("string_singleQuote") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("string_singleQuote"))))) {
       StringConcatenation _builder_5 = new StringConcatenation();
       _builder_5.append("{token: \"string\", regex: \"[\'](?:(?:\\\\\\\\.)|(?:[^\'\\\\\\\\]))*?[\']\"}");
       patterns.put("start", _builder_5.toString());
     }
-    boolean _or_4 = false;
-    boolean _contains_8 = this.enabledPatterns.contains("number_decimal");
-    if (_contains_8) {
-      _or_4 = true;
-    } else {
-      boolean _and_4 = false;
-      if (!(inheritsTerminals || inheritsXbase)) {
-        _and_4 = false;
-      } else {
-        boolean _contains_9 = this.suppressedPatterns.contains("number_decimal");
-        boolean _not_4 = (!_contains_9);
-        _and_4 = _not_4;
-      }
-      _or_4 = _and_4;
-    }
-    if (_or_4) {
+    if ((this.enabledPatterns.contains("number_decimal") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("number_decimal"))))) {
       StringConcatenation _builder_6 = new StringConcatenation();
       _builder_6.append("{token: \"constant.numeric\", regex: \"[+-]?\\\\d+(?:(?:\\\\.\\\\d*)?(?:[eE][+-]?\\\\d+)?)?\\\\b\"}");
       patterns.put("start", _builder_6.toString());
     }
-    boolean _or_5 = false;
-    boolean _contains_10 = this.enabledPatterns.contains("number_hex");
-    if (_contains_10) {
-      _or_5 = true;
-    } else {
-      boolean _and_5 = false;
-      if (!inheritsXbase) {
-        _and_5 = false;
-      } else {
-        boolean _contains_11 = this.suppressedPatterns.contains("number_hex");
-        boolean _not_5 = (!_contains_11);
-        _and_5 = _not_5;
-      }
-      _or_5 = _and_5;
-    }
-    if (_or_5) {
+    if ((this.enabledPatterns.contains("number_hex") || (inheritsXbase && (!this.suppressedPatterns.contains("number_hex"))))) {
       StringConcatenation _builder_7 = new StringConcatenation();
       _builder_7.append("{token: \"constant.numeric\", regex: \"0[xX][0-9a-fA-F]+\\\\b\"}");
       patterns.put("start", _builder_7.toString());
     }
-    boolean _or_6 = false;
-    boolean _contains_12 = this.enabledPatterns.contains("bracket_open");
-    if (_contains_12) {
-      _or_6 = true;
-    } else {
-      boolean _and_6 = false;
-      boolean _contains_13 = keywords.contains("[");
-      if (!_contains_13) {
-        _and_6 = false;
-      } else {
-        boolean _contains_14 = this.suppressedPatterns.contains("bracket_open");
-        boolean _not_6 = (!_contains_14);
-        _and_6 = _not_6;
-      }
-      _or_6 = _and_6;
-    }
-    final boolean bracketOpen = _or_6;
-    boolean _or_7 = false;
-    boolean _contains_15 = this.enabledPatterns.contains("parenthesis_open");
-    if (_contains_15) {
-      _or_7 = true;
-    } else {
-      boolean _and_7 = false;
-      boolean _contains_16 = keywords.contains("(");
-      if (!_contains_16) {
-        _and_7 = false;
-      } else {
-        boolean _contains_17 = this.suppressedPatterns.contains("parenthesis_open");
-        boolean _not_7 = (!_contains_17);
-        _and_7 = _not_7;
-      }
-      _or_7 = _and_7;
-    }
-    final boolean parenOpen = _or_7;
-    boolean _or_8 = false;
-    boolean _contains_18 = this.enabledPatterns.contains("brace_open");
-    if (_contains_18) {
-      _or_8 = true;
-    } else {
-      boolean _and_8 = false;
-      boolean _contains_19 = keywords.contains("{");
-      if (!_contains_19) {
-        _and_8 = false;
-      } else {
-        boolean _contains_20 = this.suppressedPatterns.contains("brace_open");
-        boolean _not_8 = (!_contains_20);
-        _and_8 = _not_8;
-      }
-      _or_8 = _and_8;
-    }
-    final boolean braceOpen = _or_8;
-    boolean _or_9 = false;
-    if ((bracketOpen || parenOpen)) {
-      _or_9 = true;
-    } else {
-      _or_9 = braceOpen;
-    }
-    if (_or_9) {
+    final boolean bracketOpen = (this.enabledPatterns.contains("bracket_open") || (keywords.contains("[") && (!this.suppressedPatterns.contains("bracket_open"))));
+    final boolean parenOpen = (this.enabledPatterns.contains("parenthesis_open") || (keywords.contains("(") && (!this.suppressedPatterns.contains("parenthesis_open"))));
+    final boolean braceOpen = (this.enabledPatterns.contains("brace_open") || (keywords.contains("{") && (!this.suppressedPatterns.contains("brace_open"))));
+    if (((bracketOpen || parenOpen) || braceOpen)) {
       StringConcatenation _builder_8 = new StringConcatenation();
       _builder_8.append("{token: \"lparen\", regex: \"[");
       {
@@ -1362,64 +904,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       _builder_8.append("]\"}");
       patterns.put("start", _builder_8.toString());
     }
-    boolean _or_10 = false;
-    boolean _contains_21 = this.enabledPatterns.contains("bracket_close");
-    if (_contains_21) {
-      _or_10 = true;
-    } else {
-      boolean _and_9 = false;
-      boolean _contains_22 = keywords.contains("]");
-      if (!_contains_22) {
-        _and_9 = false;
-      } else {
-        boolean _contains_23 = this.suppressedPatterns.contains("bracket_close");
-        boolean _not_9 = (!_contains_23);
-        _and_9 = _not_9;
-      }
-      _or_10 = _and_9;
-    }
-    final boolean bracketClose = _or_10;
-    boolean _or_11 = false;
-    boolean _contains_24 = this.enabledPatterns.contains("parenthesis_close");
-    if (_contains_24) {
-      _or_11 = true;
-    } else {
-      boolean _and_10 = false;
-      boolean _contains_25 = keywords.contains(")");
-      if (!_contains_25) {
-        _and_10 = false;
-      } else {
-        boolean _contains_26 = this.suppressedPatterns.contains("parenthesis_close");
-        boolean _not_10 = (!_contains_26);
-        _and_10 = _not_10;
-      }
-      _or_11 = _and_10;
-    }
-    final boolean parenClose = _or_11;
-    boolean _or_12 = false;
-    boolean _contains_27 = this.enabledPatterns.contains("brace_close");
-    if (_contains_27) {
-      _or_12 = true;
-    } else {
-      boolean _and_11 = false;
-      boolean _contains_28 = keywords.contains("}");
-      if (!_contains_28) {
-        _and_11 = false;
-      } else {
-        boolean _contains_29 = this.suppressedPatterns.contains("brace_close");
-        boolean _not_11 = (!_contains_29);
-        _and_11 = _not_11;
-      }
-      _or_12 = _and_11;
-    }
-    final boolean braceClose = _or_12;
-    boolean _or_13 = false;
-    if ((bracketClose || parenClose)) {
-      _or_13 = true;
-    } else {
-      _or_13 = braceClose;
-    }
-    if (_or_13) {
+    final boolean bracketClose = (this.enabledPatterns.contains("bracket_close") || (keywords.contains("]") && (!this.suppressedPatterns.contains("bracket_close"))));
+    final boolean parenClose = (this.enabledPatterns.contains("parenthesis_close") || (keywords.contains(")") && (!this.suppressedPatterns.contains("parenthesis_close"))));
+    final boolean braceClose = (this.enabledPatterns.contains("brace_close") || (keywords.contains("}") && (!this.suppressedPatterns.contains("brace_close"))));
+    if (((bracketClose || parenClose) || braceClose)) {
       StringConcatenation _builder_9 = new StringConcatenation();
       _builder_9.append("{token: \"rparen\", regex: \"[");
       {
@@ -1440,29 +928,12 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       _builder_9.append("]\"}");
       patterns.put("start", _builder_9.toString());
     }
-    boolean _and_12 = false;
-    WebIntegrationFragment.Framework _get = this.framework.get();
-    boolean _equals = Objects.equal(_get, WebIntegrationFragment.Framework.CODEMIRROR);
-    if (!_equals) {
-      _and_12 = false;
-    } else {
-      boolean _containsKey = patterns.containsKey("comment");
-      _and_12 = _containsKey;
-    }
-    if (_and_12) {
+    if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && patterns.containsKey("comment"))) {
       StringConcatenation _builder_10 = new StringConcatenation();
       _builder_10.append("dontIndentStates: [\"comment\"]");
       patterns.put("meta", _builder_10.toString());
     }
-    boolean _and_13 = false;
-    WebIntegrationFragment.Framework _get_1 = this.framework.get();
-    boolean _equals_1 = Objects.equal(_get_1, WebIntegrationFragment.Framework.CODEMIRROR);
-    if (!_equals_1) {
-      _and_13 = false;
-    } else {
-      _and_13 = hasSingleLineComment;
-    }
-    if (_and_13) {
+    if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && hasSingleLineComment)) {
       StringConcatenation _builder_11 = new StringConcatenation();
       _builder_11.append("lineComment: \"//\"");
       patterns.put("meta", _builder_11.toString());
@@ -2057,10 +1528,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             _builder.append("\t");
             _builder.append(".Greeting-icon {");
             _builder.newLine();
-            _builder.append("  \t\t");
+            _builder.append("\t\t");
             _builder.append("background-image: url(\'images/Greeting.gif\');");
             _builder.newLine();
-            _builder.append("  \t");
+            _builder.append("\t");
             _builder.append("}");
             _builder.newLine();
             _builder.append(" ");
@@ -2074,10 +1545,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             _builder.append("\t");
             _builder.append(".xtext-hover .Greeting-icon {");
             _builder.newLine();
-            _builder.append("  \t\t");
+            _builder.append("\t\t");
             _builder.append("background-image: url(\'images/Greeting.gif\');");
             _builder.newLine();
-            _builder.append("  \t");
+            _builder.append("\t");
             _builder.append("}");
             _builder.newLine();
             _builder.append(" ");
@@ -2198,6 +1669,9 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.append(_replace_1, "\t\t\t");
         _builder.append("/.*,.*\\\\.jar\')");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("setInitParameter(\"org.mortbay.jetty.servlet.Default.useFileMappedBuffer\", \"false\")");
+        _builder.newLine();
         _builder.append("\t\t");
         _builder.append("]");
         _builder.newLine();

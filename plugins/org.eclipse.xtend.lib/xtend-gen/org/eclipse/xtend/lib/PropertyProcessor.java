@@ -25,17 +25,7 @@ public class PropertyProcessor extends AbstractFieldProcessor {
     if (_not) {
       util.addGetter(it, Visibility.PUBLIC);
     }
-    boolean _and = false;
-    boolean _isFinal = it.isFinal();
-    boolean _not_1 = (!_isFinal);
-    if (!_not_1) {
-      _and = false;
-    } else {
-      boolean _hasSetter = util.hasSetter(it);
-      boolean _not_2 = (!_hasSetter);
-      _and = _not_2;
-    }
-    if (_and) {
+    if (((!it.isFinal()) && (!util.hasSetter(it)))) {
       util.addSetter(it, Visibility.PUBLIC);
     }
     String _simpleName = it.getSimpleName();

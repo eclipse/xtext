@@ -137,7 +137,6 @@ public class ExtractMethodRefactoring extends Refactoring {
 	private Map<ParameterInfo, LightweightTypeReference> parameter2type = newHashMap(); 
 	
 	private boolean isExplicitlyDeclareReturnType;
-
 	
 	private XExpression firstExpression;
 	
@@ -181,8 +180,9 @@ public class ExtractMethodRefactoring extends Refactoring {
 		this.xtendClass = EcoreUtil2.getContainerOfType(firstExpression, XtendClass.class);
 		if (xtendClass == null || originalMethod == null)
 			return false;
-		this.visibility = originalMethod.getVisibility();
+		this.visibility = JvmVisibility.PROTECTED;
 		this.isStatic = originalMethod.isStatic();
+		this.isExplicitlyDeclareReturnType = true;
 		XExpression successorExpression = expressionUtil
 				.findSuccessorExpressionForVariableDeclaration(lastExpression);
 		nameUtil.setFeatureScopeContext(successorExpression);

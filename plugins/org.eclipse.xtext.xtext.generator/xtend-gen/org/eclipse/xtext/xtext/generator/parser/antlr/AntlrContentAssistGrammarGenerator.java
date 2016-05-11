@@ -28,7 +28,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
@@ -57,17 +56,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
   
   @Override
   protected boolean isParserBackTracking(final Grammar it, final AntlrOptions options) {
-    boolean _or = false;
-    boolean _isParserBackTracking = super.isParserBackTracking(it, options);
-    if (_isParserBackTracking) {
-      _or = true;
-    } else {
-      Collection<? extends AbstractElement> _allPredicatedElements = GrammarUtil.getAllPredicatedElements(it);
-      boolean _isEmpty = _allPredicatedElements.isEmpty();
-      boolean _not = (!_isEmpty);
-      _or = _not;
-    }
-    return _or;
+    return (super.isParserBackTracking(it, options) || (!GrammarUtil.getAllPredicatedElements(it).isEmpty()));
   }
   
   @Override
@@ -1049,16 +1038,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
   protected String ebnf(final AbstractElement it, final AntlrOptions options, final boolean supportsActions) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _and = false;
-      boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it);
-      boolean _not = (!_isOptionalCardinality);
-      if (!_not) {
-        _and = false;
-      } else {
-        boolean _isMultipleCardinality = GrammarUtil.isMultipleCardinality(it);
-        _and = _isMultipleCardinality;
-      }
-      if (_and) {
+      if (((!GrammarUtil.isOptionalCardinality(it)) && GrammarUtil.isMultipleCardinality(it))) {
         _builder.append("(");
         _builder.newLine();
         _builder.append("\t");
@@ -1170,32 +1150,10 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
   protected CharSequence paramConfig(final AbstractElement it) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _and = false;
-      boolean _and_1 = false;
-      AbstractRule _containingRule = GrammarUtil.containingRule(it);
-      AbstractElement _alternatives = _containingRule.getAlternatives();
-      boolean _tripleEquals = (_alternatives == it);
-      if (!_tripleEquals) {
-        _and_1 = false;
-      } else {
-        AbstractRule _containingRule_1 = GrammarUtil.containingRule(it);
-        boolean _isInstance = ParserRule.class.isInstance(_containingRule_1);
-        _and_1 = _isInstance;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        AbstractRule _containingRule_2 = GrammarUtil.containingRule(it);
-        AbstractRule _originalElement = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(_containingRule_2);
-        EList<Parameter> _parameters = ((ParserRule) _originalElement).getParameters();
-        boolean _isEmpty = _parameters.isEmpty();
-        boolean _not = (!_isEmpty);
-        _and = _not;
-      }
-      if (_and) {
+      if ((((GrammarUtil.containingRule(it).getAlternatives() == it) && ParserRule.class.isInstance(GrammarUtil.containingRule(it))) && (!((ParserRule) AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(GrammarUtil.containingRule(it))).getParameters().isEmpty()))) {
         _builder.append(", ");
-        AbstractRule _containingRule_3 = GrammarUtil.containingRule(it);
-        int _parameterConfig = AntlrGrammarGenUtil.getParameterConfig(((ParserRule) _containingRule_3));
+        AbstractRule _containingRule = GrammarUtil.containingRule(it);
+        int _parameterConfig = AntlrGrammarGenUtil.getParameterConfig(((ParserRule) _containingRule));
         _builder.append(_parameterConfig, "");
         _builder.newLineIfNotEmpty();
       }

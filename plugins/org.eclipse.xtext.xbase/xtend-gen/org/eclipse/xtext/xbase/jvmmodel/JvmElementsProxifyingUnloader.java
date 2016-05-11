@@ -35,32 +35,26 @@ public class JvmElementsProxifyingUnloader implements IReferableElementsUnloader
   @Override
   public void unloadRoot(final EObject root) {
     boolean _matched = false;
-    if (!_matched) {
-      if (root instanceof JvmMember) {
-        _matched=true;
-        this.unloadRecursively(((JvmIdentifiableElement)root));
-      }
+    if (root instanceof JvmMember) {
+      _matched=true;
+      this.unloadRecursively(((JvmIdentifiableElement)root));
     }
   }
   
   protected void unloadRecursively(final JvmIdentifiableElement element) {
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof JvmDeclaredType) {
-        _matched=true;
-        EList<JvmMember> _members = ((JvmDeclaredType)element).getMembers();
-        for (final JvmMember child : _members) {
-          this.unloadRecursively(child);
-        }
-        boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (element instanceof JvmGenericType) {
-            _matched_1=true;
-            EList<JvmTypeParameter> _typeParameters = ((JvmGenericType)element).getTypeParameters();
-            for (final JvmTypeParameter child_1 : _typeParameters) {
-              this.unloadRecursively(child_1);
-            }
-          }
+    if (element instanceof JvmDeclaredType) {
+      _matched=true;
+      EList<JvmMember> _members = ((JvmDeclaredType)element).getMembers();
+      for (final JvmMember child : _members) {
+        this.unloadRecursively(child);
+      }
+      boolean _matched_1 = false;
+      if (element instanceof JvmGenericType) {
+        _matched_1=true;
+        EList<JvmTypeParameter> _typeParameters = ((JvmGenericType)element).getTypeParameters();
+        for (final JvmTypeParameter child_1 : _typeParameters) {
+          this.unloadRecursively(child_1);
         }
       }
     }

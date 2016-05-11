@@ -37,13 +37,7 @@ public class NewLineOrPreserveKey extends BooleanKey implements Procedure1<IHidd
     }
     final int min = _xifexpression;
     int _xifexpression_1 = (int) 0;
-    boolean _or = false;
-    if ((preserve).booleanValue()) {
-      _or = true;
-    } else {
-      _or = (newLine).booleanValue();
-    }
-    if (_or) {
+    if (((preserve).booleanValue() || (newLine).booleanValue())) {
       _xifexpression_1 = 1;
     } else {
       _xifexpression_1 = 0;

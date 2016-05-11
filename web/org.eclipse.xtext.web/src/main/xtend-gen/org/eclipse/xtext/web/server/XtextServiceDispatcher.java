@@ -26,14 +26,18 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
+import org.eclipse.xtext.formatting2.FormatterPreferences;
+import org.eclipse.xtext.preferences.IPreferenceValues;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.web.server.IServiceContext;
 import org.eclipse.xtext.web.server.IServiceResult;
@@ -48,6 +52,7 @@ import org.eclipse.xtext.web.server.hover.HoverService;
 import org.eclipse.xtext.web.server.model.DocumentStateResult;
 import org.eclipse.xtext.web.server.model.IWebDocumentProvider;
 import org.eclipse.xtext.web.server.model.IWebResourceSetProvider;
+import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.model.PrecomputedServiceRegistry;
 import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.model.XtextWebDocument;
@@ -165,6 +170,10 @@ public class XtextServiceDispatcher {
       return b.toString();
     }
   }
+  
+  @Inject
+  @FormatterPreferences
+  private IPreferenceValuesProvider formatterPreferencesProvider;
   
   @Inject
   private ResourcePersistenceService resourcePersistenceService;
@@ -308,11 +317,9 @@ public class XtextServiceDispatcher {
   protected XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String serviceType, final IServiceContext context) {
     XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(serviceType, "load")) {
-        _matched=true;
-        _switchResult = this.getLoadResourceService(false, context);
-      }
+    if (Objects.equal(serviceType, "load")) {
+      _matched=true;
+      _switchResult = this.getLoadResourceService(false, context);
     }
     if (!_matched) {
       if (Objects.equal(serviceType, "revert")) {
@@ -816,17 +823,22 @@ public class XtextServiceDispatcher {
       final int selectionStart = this.getInt(context, "selectionStart", _of);
       Optional<Integer> _of_1 = Optional.<Integer>of(Integer.valueOf(selectionStart));
       final int selectionEnd = this.getInt(context, "selectionEnd", _of_1);
-      String _newLine = Strings.newLine();
-      Optional<String> _of_2 = Optional.<String>of(_newLine);
-      final String lineSeparator = this.getString(context, "lineSeparator", _of_2);
-      Optional<String> _of_3 = Optional.<String>of("\t");
-      final String indentation = this.getString(context, "indentation", _of_3);
-      Optional<Integer> _of_4 = Optional.<Integer>of(Integer.valueOf(4));
-      final int indentationLength = this.getInt(context, "indentationLength", _of_4);
-      Optional<Integer> _of_5 = Optional.<Integer>of(Integer.valueOf(120));
-      final int maxLineWidth = this.getInt(context, "maxLineWidth", _of_5);
+      final String lineSeparator = context.getParameter("lineSeparator");
+      final String indentation = context.getParameter("indentation");
+      Optional<Integer> _of_2 = Optional.<Integer>of(Integer.valueOf(4));
+      final int indentationLength = this.getInt(context, "indentationLength", _of_2);
+      Optional<Integer> _of_3 = Optional.<Integer>of(Integer.valueOf(120));
+      final int maxLineWidth = this.getInt(context, "maxLineWidth", _of_3);
+      final CancelableUnitOfWork<IPreferenceValues, IXtextWebDocument> _function = new CancelableUnitOfWork<IPreferenceValues, IXtextWebDocument>() {
+        @Override
+        public IPreferenceValues exec(final IXtextWebDocument $0, final CancelIndicator $1) throws Exception {
+          XtextResource _resource = $0.getResource();
+          return XtextServiceDispatcher.this.formatterPreferencesProvider.getPreferenceValues(_resource);
+        }
+      };
+      final IPreferenceValues formatterPreferences = document.<IPreferenceValues>readOnly(_function);
       LinkedHashMap<String, String> _newLinkedHashMap = CollectionLiterals.<String, String>newLinkedHashMap();
-      final MapBasedPreferenceValues preferences = new MapBasedPreferenceValues(_newLinkedHashMap);
+      final MapBasedPreferenceValues preferences = new MapBasedPreferenceValues(formatterPreferences, _newLinkedHashMap);
       preferences.<String>put(FormatterPreferenceKeys.lineSeparator, lineSeparator);
       preferences.<String>put(FormatterPreferenceKeys.indentation, indentation);
       preferences.<Integer>put(FormatterPreferenceKeys.indentationLength, Integer.valueOf(indentationLength));
@@ -839,7 +851,7 @@ public class XtextServiceDispatcher {
       }
       final TextRegion selection = _xifexpression;
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
-      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
+      final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_1 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
         public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
           final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
@@ -863,7 +875,7 @@ public class XtextServiceDispatcher {
           it.hasSideEffects = true;
         }
       };
-      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
+      _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function_1);
     }
     return _xblockexpression;
   }
@@ -872,29 +884,54 @@ public class XtextServiceDispatcher {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
       final XtextWebDocumentAccess document = this.getDocumentAccess(context);
-      final String artifactId = context.getParameter("artifact");
+      Optional<Boolean> _of = Optional.<Boolean>of(Boolean.valueOf(false));
+      final boolean allArtifacts = this.getBoolean(context, "allArtifacts", _of);
+      Optional<Boolean> _of_1 = Optional.<Boolean>of(Boolean.valueOf(true));
+      final boolean includeContent = this.getBoolean(context, "includeContent", _of_1);
       XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
         public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
-          final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
-            @Override
-            public IServiceResult apply() {
-              IServiceResult _xtrycatchfinallyexpression = null;
-              try {
-                _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.getArtifact(document, artifactId);
-              } catch (final Throwable _t) {
-                if (_t instanceof Throwable) {
-                  final Throwable throwable = (Throwable)_t;
-                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
-                } else {
-                  throw Exceptions.sneakyThrow(_t);
+          if (allArtifacts) {
+            final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
+              @Override
+              public IServiceResult apply() {
+                IServiceResult _xtrycatchfinallyexpression = null;
+                try {
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.getResult(document, includeContent);
+                } catch (final Throwable _t) {
+                  if (_t instanceof Throwable) {
+                    final Throwable throwable = (Throwable)_t;
+                    _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                  } else {
+                    throw Exceptions.sneakyThrow(_t);
+                  }
                 }
+                return _xtrycatchfinallyexpression;
               }
-              return _xtrycatchfinallyexpression;
-            }
-          };
-          it.service = _function;
+            };
+            it.service = _function;
+          } else {
+            final String artifactId = context.getParameter("artifact");
+            final Function0<IServiceResult> _function_1 = new Function0<IServiceResult>() {
+              @Override
+              public IServiceResult apply() {
+                IServiceResult _xtrycatchfinallyexpression = null;
+                try {
+                  _xtrycatchfinallyexpression = XtextServiceDispatcher.this.generatorService.getArtifact(document, artifactId, includeContent);
+                } catch (final Throwable _t) {
+                  if (_t instanceof Throwable) {
+                    final Throwable throwable = (Throwable)_t;
+                    _xtrycatchfinallyexpression = XtextServiceDispatcher.this.handleError(it, throwable);
+                  } else {
+                    throw Exceptions.sneakyThrow(_t);
+                  }
+                }
+                return _xtrycatchfinallyexpression;
+              }
+            };
+            it.service = _function_1;
+          }
         }
       };
       _xblockexpression = ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_serviceDescriptor, _function);
@@ -1087,11 +1124,9 @@ public class XtextServiceDispatcher {
     }
     String _lowerCase = stringValue.toLowerCase();
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_lowerCase, "true")) {
-        _matched=true;
-        return true;
-      }
+    if (Objects.equal(_lowerCase, "true")) {
+      _matched=true;
+      return true;
     }
     if (!_matched) {
       if (Objects.equal(_lowerCase, "false")) {

@@ -62,14 +62,7 @@ public class SyntacticSequencerExtensions {
     if (_not) {
       return;
     }
-    boolean _and = false;
-    if (!(state instanceof ISyntacticSequencerPDAProvider.ISynTransition)) {
-      _and = false;
-    } else {
-      boolean _isSyntacticallyAmbiguous = ((ISyntacticSequencerPDAProvider.ISynTransition) state).isSyntacticallyAmbiguous();
-      _and = _isSyntacticallyAmbiguous;
-    }
-    if (_and) {
+    if (((state instanceof ISyntacticSequencerPDAProvider.ISynTransition) && ((ISyntacticSequencerPDAProvider.ISynTransition) state).isSyntacticallyAmbiguous())) {
       result.add(((ISyntacticSequencerPDAProvider.ISynTransition) state));
     }
     if ((state instanceof ISyntacticSequencerPDAProvider.ISynAbsorberState)) {
@@ -126,25 +119,17 @@ public class SyntacticSequencerExtensions {
   
   protected String elementAliasToIdentifier(final GrammarAlias.AbstractElementAlias alias, final Set<String> rules, final boolean isNested) {
     String _xifexpression = null;
-    boolean _and = false;
-    boolean _isMany = alias.isMany();
-    if (!_isMany) {
-      _and = false;
-    } else {
-      boolean _isOptional = alias.isOptional();
-      _and = _isOptional;
-    }
-    if (_and) {
+    if ((alias.isMany() && alias.isOptional())) {
       _xifexpression = "a";
     } else {
       String _xifexpression_1 = null;
-      boolean _isMany_1 = alias.isMany();
-      if (_isMany_1) {
+      boolean _isMany = alias.isMany();
+      if (_isMany) {
         _xifexpression_1 = "p";
       } else {
         String _xifexpression_2 = null;
-        boolean _isOptional_1 = alias.isOptional();
-        if (_isOptional_1) {
+        boolean _isOptional = alias.isOptional();
+        if (_isOptional) {
           _xifexpression_2 = "q";
         }
         _xifexpression_1 = _xifexpression_2;
@@ -176,13 +161,7 @@ public class SyntacticSequencerExtensions {
           children.add(_elementAliasToIdentifier);
         }
         final String body = IterableExtensions.join(children, "_");
-        boolean _or = false;
-        if (isNested) {
-          _or = true;
-        } else {
-          _or = (card != null);
-        }
-        if (_or) {
+        if ((isNested || (card != null))) {
           String _elvis = null;
           if (card != null) {
             _elvis = card;
@@ -204,13 +183,7 @@ public class SyntacticSequencerExtensions {
           }
           ListExtensions.<String>sortInplace(children_1);
           final String body_1 = IterableExtensions.join(children_1, "_or_");
-          boolean _or_1 = false;
-          if (isNested) {
-            _or_1 = true;
-          } else {
-            _or_1 = (card != null);
-          }
-          if (_or_1) {
+          if ((isNested || (card != null))) {
             String _elvis_1 = null;
             if (card != null) {
               _elvis_1 = card;

@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 public class SimpleBeeLangTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	
 	@Override
-    @NotNull
-    protected SyntaxHighlighter createHighlighter() {
-        return SimpleBeeLangTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);
-    }
+	@NotNull
+	protected SyntaxHighlighter createHighlighter() {
+		return SimpleBeeLangTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);
+	}
 }

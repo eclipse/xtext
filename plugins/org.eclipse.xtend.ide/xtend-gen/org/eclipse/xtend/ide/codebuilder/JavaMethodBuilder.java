@@ -24,16 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Java {
   @Override
   public boolean isValid() {
-    boolean _and = false;
-    boolean _isValid = super.isValid();
-    if (!_isValid) {
-      _and = false;
-    } else {
-      String _methodName = this.getMethodName();
-      boolean _notEquals = (!Objects.equal(_methodName, null));
-      _and = _notEquals;
-    }
-    return _and;
+    return (super.isValid() && (!Objects.equal(this.getMethodName(), null)));
   }
   
   @Override

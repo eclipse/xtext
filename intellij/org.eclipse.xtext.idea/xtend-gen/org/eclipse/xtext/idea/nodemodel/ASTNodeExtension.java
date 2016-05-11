@@ -87,15 +87,7 @@ public class ASTNodeExtension {
           }
           EObject _grammarElement = ASTNodeExtension.this.getGrammarElement(firstChild);
           final Assignment assignment = GrammarUtil.containingAssignment(_grammarElement);
-          boolean _and = false;
-          if (!(assignment != null)) {
-            _and = false;
-          } else {
-            String _feature = assignment.getFeature();
-            boolean _equals = Objects.equal(featureName, _feature);
-            _and = _equals;
-          }
-          if (_and) {
+          if (((assignment != null) && Objects.equal(featureName, assignment.getFeature()))) {
             result.add(element);
           }
           return;
@@ -103,9 +95,9 @@ public class ASTNodeExtension {
         if ((grammarElement != null)) {
           final Assignment assignment_1 = GrammarUtil.containingAssignment(grammarElement);
           if ((assignment_1 != null)) {
-            String _feature_1 = assignment_1.getFeature();
-            boolean _equals_1 = Objects.equal(featureName, _feature_1);
-            if (_equals_1) {
+            String _feature = assignment_1.getFeature();
+            boolean _equals = Objects.equal(featureName, _feature);
+            if (_equals) {
               result.add(element);
             }
             return;
@@ -124,11 +116,9 @@ public class ASTNodeExtension {
     }
     TypeRef _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (grammarElement instanceof Action) {
-        _matched=true;
-        _switchResult = ((Action)grammarElement).getType();
-      }
+    if (grammarElement instanceof Action) {
+      _matched=true;
+      _switchResult = ((Action)grammarElement).getType();
     }
     if (!_matched) {
       if (grammarElement instanceof RuleCall) {

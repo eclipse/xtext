@@ -9,6 +9,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * @author Jan Koehnlein - copied and adapted form Xtend
+ */
 @RunWith(XtextRunner.class)
 @InjectWith(DomainmodelUiInjectorProvider.class)
 @SuppressWarnings("all")

@@ -37,25 +37,36 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testKeywords() {
-		''.assertContentAssistResult('''
+		'state foo | end'.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
 			    ContentAssistEntry [
 			      prefix = ""
-			      proposal = "input"
+			      proposal = "state name\n	\nend\n"
+			      label = "state"
+			      description = "Create a new state"
+			      escapePosition = 22
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList (
+			        [16:4]
+			      )
+			    ],
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "end"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
-			      proposal = "output"
+			      proposal = "if"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
-			      proposal = "state"
+			      proposal = "set"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]
@@ -64,15 +75,58 @@ class ContentAssistTest extends AbstractWebServerTest {
 	}
 	
 	@Test def testKeywordWithPrefix() {
-		'sta|'.assertContentAssistResult('''
+		'inp|'.assertContentAssistResult('''
 			ContentAssistResult [
 			  stateId = "-80000000"
 			  entries = ArrayList (
 			    ContentAssistEntry [
-			      prefix = "sta"
-			      proposal = "state"
+			      prefix = "inp"
+			      proposal = "input"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testTemplate() {
+		'state foo end |'.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "state name\n	\nend\n"
+			      label = "state"
+			      description = "Create a new state"
+			      escapePosition = 26
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList (
+			        [20:4]
+			      )
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testIndentedTemplate() {
+		'''
+			state foo end
+				|
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "state name\n		\n	end\n"
+			      label = "state"
+			      description = "Create a new state"
+			      escapePosition = 28
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList (
+			        [21:4]
+			      )
 			    ]
 			  )
 			]''')
@@ -126,6 +180,52 @@ class ContentAssistTest extends AbstractWebServerTest {
 			]''')
 	}
 	
+	@Test def testFqnCrossref() {
+		'''
+			input signal x
+			state foo
+				state inner1 end
+				state inner2 end
+			end
+			state bar
+				if x == true goto |
+			end
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "bar"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "foo"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "foo.inner1"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    ContentAssistEntry [
+			      prefix = ""
+			      proposal = "foo.inner2"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
 	@Test def testCustomTerminal() {
 		'''
 			output signal x
@@ -155,6 +255,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 	@Test def testCustomCrossref() {
 		'''
 			input signal x
+			output signal z
 			state foo
 				if | == true goto foo
 			end
@@ -166,6 +267,180 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      prefix = ""
 			      proposal = "x"
 			      description = "input signal"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testCrossrefWithPrefix1() {
+		'''
+			input signal x
+			state foo
+				if x == true goto fo|
+			end
+			state bar
+			end
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = "fo"
+			      proposal = "foo"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testCrossrefWithPrefix2() {
+		'''
+			input signal x
+			state Foooo
+				if x == true goto fOoO|
+			end
+			state Baaar
+			end
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = "fOoO"
+			      proposal = "Foooo"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testFqnCrossrefWithPrefix1() {
+		'''
+			input signal x
+			state foo
+				state inner1 end
+				state inner2 end
+			end
+			state bar
+				if x == true goto foo.|
+			end
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = "foo."
+			      proposal = "foo.inner1"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    ContentAssistEntry [
+			      prefix = "foo."
+			      proposal = "foo.inner2"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testFqnCrossrefWithPrefix2() {
+		'''
+			input signal x
+			state foo
+				state inner1 end
+				state inner2 end
+			end
+			state bar
+				if x == true goto inner|
+			end
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = "inner"
+			      proposal = "foo.inner1"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    ContentAssistEntry [
+			      prefix = "inner"
+			      proposal = "foo.inner2"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testFqnCrossrefWithPrefix3() {
+		'''
+			input signal x
+			state foo
+				state inner1
+					state inner2 end
+					state inner3 end
+				end
+			end
+			state bar
+				if x == true goto f.i.i|
+			end
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = "f.i.i"
+			      proposal = "foo.inner1.inner2"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ],
+			    ContentAssistEntry [
+			      prefix = "f.i.i"
+			      proposal = "foo.inner1.inner3"
+			      description = "State"
+			      textReplacements = ArrayList ()
+			      editPositions = ArrayList ()
+			    ]
+			  )
+			]''')
+	}
+	
+	@Test def testTerminalWithPrefix() {
+		'''
+			state foo|
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList ()
+			]''')
+	}
+	
+	@Test def testCustomTerminalWithPrefix() {
+		'''
+			output signal x
+			state foo
+				set x = f|
+			end
+		'''.assertContentAssistResult('''
+			ContentAssistResult [
+			  stateId = "-80000000"
+			  entries = ArrayList (
+			    ContentAssistEntry [
+			      prefix = "f"
+			      proposal = "false"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
 			    ]

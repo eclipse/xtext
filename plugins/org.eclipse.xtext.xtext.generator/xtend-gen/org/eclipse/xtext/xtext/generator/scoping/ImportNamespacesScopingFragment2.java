@@ -87,14 +87,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   
   protected TypeReference getScopeProviderSuperClass(final Grammar grammar) {
     final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(grammar);
-    boolean _and = false;
-    boolean _isInheritImplementation = this.isInheritImplementation();
-    if (!_isInheritImplementation) {
-      _and = false;
-    } else {
-      _and = (superGrammar != null);
-    }
-    if (_and) {
+    if ((this.isInheritImplementation() && (superGrammar != null))) {
       return this.getScopeProviderClass(superGrammar);
     } else {
       return this.getDefaultScopeProviderSuperClass();

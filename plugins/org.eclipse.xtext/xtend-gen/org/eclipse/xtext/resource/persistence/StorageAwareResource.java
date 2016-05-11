@@ -55,21 +55,7 @@ public class StorageAwareResource extends LazyLinkingResource {
   
   @Override
   public void load(final Map<?, ?> options) throws IOException {
-    boolean _and = false;
-    boolean _and_1 = false;
-    if (!((!this.isLoaded) && (!this.isLoading))) {
-      _and_1 = false;
-    } else {
-      boolean _notEquals = (!Objects.equal(this.resourceStorageFacade, null));
-      _and_1 = _notEquals;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _shouldLoadFromStorage = this.resourceStorageFacade.shouldLoadFromStorage(this);
-      _and = _shouldLoadFromStorage;
-    }
-    if (_and) {
+    if (((((!this.isLoaded) && (!this.isLoading)) && (!Objects.equal(this.resourceStorageFacade, null))) && this.resourceStorageFacade.shouldLoadFromStorage(this))) {
       boolean _isDebugEnabled = StorageAwareResource.LOG.isDebugEnabled();
       if (_isDebugEnabled) {
         URI _uRI = this.getURI();

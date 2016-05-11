@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -37,7 +38,7 @@ import com.google.inject.ImplementedBy;
  * @author Jan Koehnlein - Initial contribution and API in xtext.ui
  * @author Sebastian Zarnekow - Extracted headless API
  * 
- * @since 2.7
+ * @since 2.10
  */
 @ImplementedBy(ReferenceFinder.class)
 public interface IReferenceFinder {
@@ -47,7 +48,7 @@ public interface IReferenceFinder {
 	 * shared resource set.
 	 */
 	interface IResourceAccess {
-		<R> R readOnly(URI resourceURI, IUnitOfWork<R, ResourceSet> work);
+		<R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work);
 	}
 	
 	/**
@@ -108,7 +109,7 @@ public interface IReferenceFinder {
 	 * Finds the references from the given source resource to the given <code>targetURIs</code>.
 	 * 
 	 * @param targetURIs
-	 *            the URIs of the target elements of the references. Should be normalized.
+	 * 			  a predicate that returns true if an URI belongs to target URIs; otherwise false.
 	 * @param resource
 	 *            the search scope for the resources containing the sources of the references.
 	 * @param acceptor
@@ -117,11 +118,58 @@ public interface IReferenceFinder {
 	 *            the progress monitor. Can be null.
 	 */
 	void findReferences(
-			TargetURIs targetURIs,
+			Predicate<URI> targetURIs,
 			Resource resource,
 			Acceptor acceptor,
 			IProgressMonitor monitor);
 	
+	/**
+	 * Finds all references from the given source resource.
+	 * 
+	 * @param scope
+	 *            the search scope for the resources containing the sources of the references.
+	 * @param acceptor
+	 *            accepts the matches.
+	 * @param monitor
+	 *            the progress monitor. Can be null.
+	 */
+	void findAllReferences(
+			Resource scope,
+			Acceptor acceptor,
+			IProgressMonitor monitor);
+	
+	/**
+	 * Finds the references from the given source object to the given <code>targetURIs</code>.
+	 * 
+	 * @param targetURIs
+	 * 			  a predicate that returns true if an URI belongs to target URIs; otherwise false.
+	 * @param scope
+	 *            the search scope for the object containing the sources of the references.
+	 * @param acceptor
+	 *            accepts the matches.
+	 * @param monitor
+	 *            the progress monitor. Can be null.
+	 */
+	void findReferences(
+			Predicate<URI> targetURIs,
+			EObject scope,
+			Acceptor acceptor,
+			IProgressMonitor monitor);
+	
+	/**
+	 * Finds all references from the given source object.
+	 * 
+	 * @param scope
+	 *            the search scope for the object containing the sources of the references.
+	 * @param acceptor
+	 *            accepts the matches.
+	 * @param monitor
+	 *            the progress monitor. Can be null.
+	 */
+	void findAllReferences(
+			EObject scope,
+			Acceptor acceptor,
+			IProgressMonitor monitor);
 
 	/**
 	 * Finds all references to the given <code>targetURIs</code>.

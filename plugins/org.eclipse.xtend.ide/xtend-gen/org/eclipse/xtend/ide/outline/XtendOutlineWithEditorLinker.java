@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.swt.widgets.Tree;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.actions.OutlineWithEditorLinker;
 import org.eclipse.xtext.util.ITextRegion;
@@ -29,16 +28,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
   @Override
   public void selectInTreeView(final ISelection selection) {
-    boolean _and = false;
-    if (!(selection instanceof ITextSelection)) {
-      _and = false;
-    } else {
-      Tree _tree = this.treeViewer.getTree();
-      boolean _isDisposed = _tree.isDisposed();
-      boolean _not = (!_isDisposed);
-      _and = _not;
-    }
-    if (_and) {
+    if (((selection instanceof ITextSelection) && (!this.treeViewer.getTree().isDisposed()))) {
       final ITextSelection textSelection = ((ITextSelection) selection);
       int _offset = textSelection.getOffset();
       int _length = textSelection.getLength();
@@ -48,8 +38,8 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
         final List<IOutlineNode> matchingNodes = CollectionLiterals.<IOutlineNode>newArrayList();
         this.findNodesInRange(((IOutlineNode)input), selectedTextRegion, matchingNodes);
         boolean _isEmpty = matchingNodes.isEmpty();
-        boolean _not_1 = (!_isEmpty);
-        if (_not_1) {
+        boolean _not = (!_isEmpty);
+        if (_not) {
           final Function1<IOutlineNode, Integer> _function = new Function1<IOutlineNode, Integer>() {
             @Override
             public Integer apply(final IOutlineNode it) {
@@ -69,8 +59,8 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
           };
           final Iterable<IOutlineNode> nodesToBeSelected = IterableExtensions.<IOutlineNode>filter(matchingNodes, _function_1);
           boolean _isEmpty_1 = IterableExtensions.isEmpty(nodesToBeSelected);
-          boolean _not_2 = (!_isEmpty_1);
-          if (_not_2) {
+          boolean _not_1 = (!_isEmpty_1);
+          if (_not_1) {
             List<IOutlineNode> _list = IterableExtensions.<IOutlineNode>toList(nodesToBeSelected);
             Object[] _array = _list.toArray();
             StructuredSelection _structuredSelection = new StructuredSelection(_array);
@@ -83,15 +73,7 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
   
   protected void findNodesInRange(final IOutlineNode input, final ITextRegion selectedTextRegion, final List<IOutlineNode> nodes) {
     final ITextRegion textRegion = input.getFullTextRegion();
-    boolean _or = false;
-    boolean _equals = Objects.equal(textRegion, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _contains = textRegion.contains(selectedTextRegion);
-      _or = _contains;
-    }
-    if (_or) {
+    if ((Objects.equal(textRegion, null) || textRegion.contains(selectedTextRegion))) {
       nodes.add(input);
     }
     List<IOutlineNode> _children = input.getChildren();

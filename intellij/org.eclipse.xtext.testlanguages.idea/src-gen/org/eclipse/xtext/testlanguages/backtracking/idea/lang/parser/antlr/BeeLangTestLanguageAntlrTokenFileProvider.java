@@ -10,6 +10,6 @@ public class BeeLangTestLanguageAntlrTokenFileProvider implements IAntlrTokenFil
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalBeeLangTestLanguage.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/backtracking/idea/parser/antlr/internal/PsiInternalBeeLangTestLanguage.tokens");
 	}
 }

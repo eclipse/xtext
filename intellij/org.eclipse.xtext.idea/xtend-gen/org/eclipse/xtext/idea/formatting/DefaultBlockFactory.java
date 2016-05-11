@@ -74,24 +74,7 @@ public class DefaultBlockFactory implements BlockFactory {
         return null;
       }
       final TextRange blockTextRange = this.createTextRange(node);
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _equals = Objects.equal(blockTextRange, null);
-      if (_equals) {
-        _or_1 = true;
-      } else {
-        boolean _isEmpty = blockTextRange.isEmpty();
-        _or_1 = _isEmpty;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        TextRange _textRange = parentBlock.getTextRange();
-        boolean _contains = _textRange.contains(blockTextRange);
-        boolean _not = (!_contains);
-        _or = _not;
-      }
-      if (_or) {
+      if (((Objects.equal(blockTextRange, null) || blockTextRange.isEmpty()) || (!parentBlock.getTextRange().contains(blockTextRange)))) {
         return null;
       }
       SpacingBuilder _xifexpression = null;
@@ -112,15 +95,7 @@ public class DefaultBlockFactory implements BlockFactory {
   }
   
   protected Indent getChildIndent(final Block parentBlock, final DefaultXtextBlock childBlock) {
-    boolean _or = false;
-    boolean _isOpening = this._blockExtension.isOpening(childBlock);
-    if (_isOpening) {
-      _or = true;
-    } else {
-      boolean _isClosing = this._blockExtension.isClosing(childBlock);
-      _or = _isClosing;
-    }
-    if (_or) {
+    if ((this._blockExtension.isOpening(childBlock) || this._blockExtension.isClosing(childBlock))) {
       return Indent.getNoneIndent();
     }
     final EObject grammarElement = this._blockExtension.getGrammarElement(parentBlock);
@@ -181,32 +156,11 @@ public class DefaultBlockFactory implements BlockFactory {
       final Function1<ASTNode, Boolean> _function_1 = new Function1<ASTNode, Boolean>() {
         @Override
         public Boolean apply(final ASTNode it) {
-          boolean _or = false;
-          boolean _isWhitespaceOrEmpty = FormatterUtil.isWhitespaceOrEmpty(it);
-          boolean _not = (!_isWhitespaceOrEmpty);
-          if (_not) {
-            _or = true;
-          } else {
-            TextRange _textRange = it.getTextRange();
-            boolean _contains = textRange.contains(_textRange);
-            boolean _not_1 = (!_contains);
-            _or = _not_1;
-          }
-          return Boolean.valueOf(_or);
+          return Boolean.valueOf(((!FormatterUtil.isWhitespaceOrEmpty(it)) || (!textRange.contains(it.getTextRange()))));
         }
       };
       final ASTNode firstNonHiddenLeafNode = this.findNode(_findFirstLeaf, _function, _function_1);
-      boolean _or = false;
-      boolean _equals_2 = Objects.equal(firstNonHiddenLeafNode, null);
-      if (_equals_2) {
-        _or = true;
-      } else {
-        TextRange _textRange = firstNonHiddenLeafNode.getTextRange();
-        boolean _contains = textRange.contains(_textRange);
-        boolean _not = (!_contains);
-        _or = _not;
-      }
-      if (_or) {
+      if ((Objects.equal(firstNonHiddenLeafNode, null) || (!textRange.contains(firstNonHiddenLeafNode.getTextRange())))) {
         return null;
       }
       final int startOffset = firstNonHiddenLeafNode.getStartOffset();
@@ -225,8 +179,8 @@ public class DefaultBlockFactory implements BlockFactory {
         }
       };
       ASTNode _findNode = this.findNode(_findLastLeaf, _function_2, _function_3);
-      TextRange _textRange_1 = _findNode.getTextRange();
-      final int endOffset = _textRange_1.getEndOffset();
+      TextRange _textRange = _findNode.getTextRange();
+      final int endOffset = _textRange.getEndOffset();
       _xblockexpression = new TextRange(startOffset, endOffset);
     }
     return _xblockexpression;

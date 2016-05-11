@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<xtextVersion>2.9.0-SNAPSHOT</xtextVersion>
+		<xtextVersion>2.10.0-SNAPSHOT</xtextVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -63,6 +63,26 @@
 					<configuration>
 						<lifecycleMappingMetadata>
 							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-resources-plugin
+										</artifactId>
+										<versionRange>
+											[2.4.3,)
+										</versionRange>
+										<goals>
+											<goal>resources</goal>
+											<goal>testResources</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>

@@ -48,6 +48,9 @@ abstract class ProjectDescriptor {
 			files += file(Outlet.META_INF, "MANIFEST.MF", manifest)
 			files += file(Outlet.ROOT, "build.properties", buildProperties)
 		}
+		if (eclipseFeatureProject) {
+			files += file(Outlet.ROOT, "build.properties", buildProperties)
+		}
 		if (config.needsGradleBuild && isPartOfGradleBuild) {
 			files += buildGradle
 		}
@@ -62,6 +65,10 @@ abstract class ProjectDescriptor {
 	def boolean isPartOfMavenBuild()
 	
 	def boolean isEclipsePluginProject()
+
+	def boolean isEclipseFeatureProject() {
+		false
+	}
 	
 	def CharSequence buildProperties() '''
 		«buildPropertiesEntry("source..", sourceFolders.map[it + "/"])»

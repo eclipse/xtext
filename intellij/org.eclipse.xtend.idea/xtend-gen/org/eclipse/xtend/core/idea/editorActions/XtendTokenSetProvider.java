@@ -73,15 +73,7 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
       {
         String _beginningOfLine = this.getBeginningOfLine(editor, offset);
         final String text = _beginningOfLine.trim();
-        boolean _or = false;
-        boolean _isEmpty = text.isEmpty();
-        if (_isEmpty) {
-          _or = true;
-        } else {
-          boolean _equals_1 = text.equals("\'\'\'");
-          _or = _equals_1;
-        }
-        _xblockexpression = _or;
+        _xblockexpression = (text.isEmpty() || text.equals("\'\'\'"));
       }
       _xifexpression = _xblockexpression;
     } else {
@@ -99,15 +91,7 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
       {
         String _endOfLine = this.getEndOfLine(editor, offset);
         final String text = _endOfLine.trim();
-        boolean _or = false;
-        boolean _isEmpty = text.isEmpty();
-        if (_isEmpty) {
-          _or = true;
-        } else {
-          boolean _equals_1 = text.equals("\'\'\'");
-          _or = _equals_1;
-        }
-        _xblockexpression = _or;
+        _xblockexpression = (text.isEmpty() || text.equals("\'\'\'"));
       }
       _xifexpression = _xblockexpression;
     } else {

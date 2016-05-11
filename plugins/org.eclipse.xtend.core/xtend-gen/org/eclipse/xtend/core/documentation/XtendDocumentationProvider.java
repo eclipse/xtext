@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.documentation;
 import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.documentation.impl.MultiLineCommentDocumentationProvider;
@@ -54,14 +53,6 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
    * The Xtend parser constructs a synthetic nested AST element to hold annotations which should be ignored as a documentation provider
    */
   public boolean shouldBeHandled(final EObject o) {
-    boolean _and = false;
-    if (!(o instanceof XtendAnnotationTarget)) {
-      _and = false;
-    } else {
-      EStructuralFeature _eContainingFeature = o.eContainingFeature();
-      boolean _equals = Objects.equal(_eContainingFeature, XtendPackage.Literals.XTEND_MEMBER__ANNOTATION_INFO);
-      _and = _equals;
-    }
-    return (!_and);
+    return (!((o instanceof XtendAnnotationTarget) && Objects.equal(o.eContainingFeature(), XtendPackage.Literals.XTEND_MEMBER__ANNOTATION_INFO)));
   }
 }

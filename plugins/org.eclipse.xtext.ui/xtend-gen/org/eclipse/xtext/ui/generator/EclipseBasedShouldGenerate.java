@@ -33,15 +33,7 @@ public class EclipseBasedShouldGenerate implements IShouldGenerate {
   public boolean shouldGenerate(final Resource resource, final CancelIndicator cancelIndicator) {
     try {
       final URI uri = resource.getURI();
-      boolean _or = false;
-      if ((uri == null)) {
-        _or = true;
-      } else {
-        boolean _isPlatformResource = uri.isPlatformResource();
-        boolean _not = (!_isPlatformResource);
-        _or = _not;
-      }
-      if (_or) {
+      if (((uri == null) || (!uri.isPlatformResource()))) {
         return false;
       }
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();
@@ -49,15 +41,7 @@ public class EclipseBasedShouldGenerate implements IShouldGenerate {
       String _platformString = uri.toPlatformString(true);
       Path _path = new Path(_platformString);
       final IResource member = _root.findMember(_path);
-      boolean _and = false;
-      if (!(member != null)) {
-        _and = false;
-      } else {
-        int _type = member.getType();
-        boolean _tripleEquals = (_type == IResource.FILE);
-        _and = _tripleEquals;
-      }
-      if (_and) {
+      if (((member != null) && (member.getType() == IResource.FILE))) {
         ResourceSet _resourceSet = resource.getResourceSet();
         ProjectConfigAdapter _findInEmfObject = ProjectConfigAdapter.findInEmfObject(_resourceSet);
         IProjectConfig _projectConfig = null;

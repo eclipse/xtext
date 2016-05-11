@@ -100,14 +100,8 @@ public class ClusteringStorageAwareResourceLoader {
   
   protected boolean isSource(final URI uri) {
     final IResourceServiceProvider provider = this.context.getResourceServiceProvider(uri);
-    boolean _and = false;
-    if (!(provider instanceof IResourceServiceProviderExtension)) {
-      _and = false;
-    } else {
-      boolean _isSource = ((IResourceServiceProviderExtension) provider).isSource(uri);
-      _and = _isSource;
-    }
-    return _and;
+    return ((provider instanceof IResourceServiceProviderExtension) && 
+      ((IResourceServiceProviderExtension) provider).isSource(uri));
   }
   
   protected void clearResourceSet() {

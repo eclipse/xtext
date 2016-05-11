@@ -20,14 +20,7 @@ public class CancelIndicatorProgressMonitor implements IProgressMonitor {
   
   @Override
   public boolean isCanceled() {
-    boolean _or = false;
-    if (this.isCanceled) {
-      _or = true;
-    } else {
-      boolean _isCanceled = this.delegate.isCanceled();
-      _or = _isCanceled;
-    }
-    return _or;
+    return (this.isCanceled || this.delegate.isCanceled());
   }
   
   @Override

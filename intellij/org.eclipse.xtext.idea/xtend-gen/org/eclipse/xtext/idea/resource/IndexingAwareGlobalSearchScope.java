@@ -67,15 +67,7 @@ public class IndexingAwareGlobalSearchScope extends GlobalSearchScope {
   public boolean contains(final VirtualFile file) {
     boolean _xblockexpression = false;
     {
-      boolean _and = false;
-      boolean _isIndexing = this.compilerPhases.isIndexing(this.resourceSet);
-      if (!_isIndexing) {
-        _and = false;
-      } else {
-        boolean _contains = this.filterScope.contains(file);
-        _and = _contains;
-      }
-      if (_and) {
+      if ((this.compilerPhases.isIndexing(this.resourceSet) && this.filterScope.contains(file))) {
         return false;
       }
       _xblockexpression = this.searchScope.contains(file);
@@ -92,15 +84,7 @@ public class IndexingAwareGlobalSearchScope extends GlobalSearchScope {
   public boolean isSearchInModuleContent(final Module aModule) {
     boolean _xblockexpression = false;
     {
-      boolean _and = false;
-      boolean _isIndexing = this.compilerPhases.isIndexing(this.resourceSet);
-      if (!_isIndexing) {
-        _and = false;
-      } else {
-        boolean _isSearchInModuleContent = this.filterScope.isSearchInModuleContent(aModule);
-        _and = _isSearchInModuleContent;
-      }
-      if (_and) {
+      if ((this.compilerPhases.isIndexing(this.resourceSet) && this.filterScope.isSearchInModuleContent(aModule))) {
         return false;
       }
       _xblockexpression = this.searchScope.isSearchInModuleContent(aModule);

@@ -13,7 +13,11 @@ import com.google.inject.name.Names
 import java.util.concurrent.ExecutorService
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.LexerIdeBindings
+import org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher
+import org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher
+import org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
+import org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
@@ -37,12 +41,20 @@ class StatemachineWebModule extends DefaultWebModule {
 		super(executorServiceProvider)
 	}
 	
-	def configureContentAssistLexer(Binder binder) {
+	def void configureContentAssistLexer(Binder binder) {
 		binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(InternalStatemachineLexer)
 	}
 	
 	def Class<? extends IContentAssistParser> bindIContentAssistParser() {
 		StatemachineParser
+	}
+	
+	def Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
+		return AntlrProposalConflictHelper
+	}
+	
+	def Class<? extends IPrefixMatcher> bindIPrefixMatcher() {
+		return FQNPrefixMatcher
 	}
 	
 	def Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
@@ -53,7 +65,7 @@ class StatemachineWebModule extends DefaultWebModule {
 		FileResourceHandler
 	}
 	
-	def configureResourceBaseProvider(Binder binder) {
+	def void configureResourceBaseProvider(Binder binder) {
 		if (resourceBaseProvider !== null)
 			binder.bind(IResourceBaseProvider).toInstance(resourceBaseProvider)
 	}

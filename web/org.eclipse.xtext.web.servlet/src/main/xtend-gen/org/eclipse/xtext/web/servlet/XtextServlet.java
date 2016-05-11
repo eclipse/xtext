@@ -23,12 +23,13 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.web.server.IServiceContext;
 import org.eclipse.xtext.web.server.IServiceResult;
+import org.eclipse.xtext.web.server.IUnwrappableServiceResult;
 import org.eclipse.xtext.web.server.InvalidRequestException;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
-import org.eclipse.xtext.web.server.generator.GeneratorResult;
 import org.eclipse.xtext.web.servlet.HttpServiceContext;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * An HTTP servlet for publishing the Xtext services. Include this into your web server by creating
@@ -109,23 +110,7 @@ public class XtextServlet extends HttpServlet {
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
-    boolean _and = false;
-    boolean _isHasConflict = service.isHasConflict();
-    boolean _not = (!_isHasConflict);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      boolean _isHasSideEffects = service.isHasSideEffects();
-      if (_isHasSideEffects) {
-        _or = true;
-      } else {
-        boolean _hasTextInput = this.hasTextInput(service);
-        _or = _hasTextInput;
-      }
-      _and = _or;
-    }
-    if (_and) {
+    if (((!service.isHasConflict()) && (service.isHasSideEffects() || this.hasTextInput(service)))) {
       super.doGet(req, resp);
     } else {
       this.doService(service, resp);
@@ -137,16 +122,7 @@ public class XtextServlet extends HttpServlet {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
     IServiceContext _context = service.getContext();
     final String type = _context.getParameter(IServiceContext.SERVICE_TYPE);
-    boolean _and = false;
-    boolean _isHasConflict = service.isHasConflict();
-    boolean _not = (!_isHasConflict);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _notEquals = (!Objects.equal(type, "update"));
-      _and = _notEquals;
-    }
-    if (_and) {
+    if (((!service.isHasConflict()) && (!Objects.equal(type, "update")))) {
       super.doPut(req, resp);
     } else {
       this.doService(service, resp);
@@ -158,32 +134,7 @@ public class XtextServlet extends HttpServlet {
     final XtextServiceDispatcher.ServiceDescriptor service = this.getService(req);
     IServiceContext _context = service.getContext();
     final String type = _context.getParameter(IServiceContext.SERVICE_TYPE);
-    boolean _and = false;
-    boolean _isHasConflict = service.isHasConflict();
-    boolean _not = (!_isHasConflict);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      boolean _and_1 = false;
-      boolean _isHasSideEffects = service.isHasSideEffects();
-      boolean _not_1 = (!_isHasSideEffects);
-      if (!_not_1) {
-        _and_1 = false;
-      } else {
-        boolean _hasTextInput = this.hasTextInput(service);
-        boolean _not_2 = (!_hasTextInput);
-        _and_1 = _not_2;
-      }
-      if (_and_1) {
-        _or = true;
-      } else {
-        boolean _equals = Objects.equal(type, "update");
-        _or = _equals;
-      }
-      _and = _or;
-    }
-    if (_and) {
+    if (((!service.isHasConflict()) && (((!service.isHasSideEffects()) && (!this.hasTextInput(service))) || Objects.equal(type, "update")))) {
       super.doPost(req, resp);
     } else {
       this.doService(service, resp);
@@ -195,15 +146,7 @@ public class XtextServlet extends HttpServlet {
     {
       IServiceContext _context = service.getContext();
       final Set<String> parameterKeys = _context.getParameterKeys();
-      boolean _or = false;
-      boolean _contains = parameterKeys.contains("fullText");
-      if (_contains) {
-        _or = true;
-      } else {
-        boolean _contains_1 = parameterKeys.contains("deltaText");
-        _or = _contains_1;
-      }
-      _xblockexpression = _or;
+      _xblockexpression = (parameterKeys.contains("fullText") || parameterKeys.contains("deltaText"));
     }
     return _xblockexpression;
   }
@@ -223,8 +166,8 @@ public class XtextServlet extends HttpServlet {
   
   /**
    * Invoke the service function of the given service descriptor and write its result to the
-   * servlet response in Json format. An exception is made for code generation: here the document
-   * itself is written into the response instead of wrapping it into a Json object.
+   * servlet response in Json format. An exception is made for {@link IUnwrappableServiceResult}:
+   * here the document itself is written into the response instead of wrapping it into a Json object.
    */
   protected void doService(final XtextServiceDispatcher.ServiceDescriptor service, final HttpServletResponse response) {
     try {
@@ -234,9 +177,10 @@ public class XtextServlet extends HttpServlet {
       String _encoding = this.getEncoding(service, result);
       response.setCharacterEncoding(_encoding);
       response.setHeader("Cache-Control", "no-cache");
-      if ((result instanceof GeneratorResult)) {
+      if (((result instanceof IUnwrappableServiceResult) && (((IUnwrappableServiceResult) result).getContent() != null))) {
+        final IUnwrappableServiceResult unwrapResult = ((IUnwrappableServiceResult) result);
         String _elvis = null;
-        String _contentType = ((GeneratorResult)result).getContentType();
+        String _contentType = unwrapResult.getContentType();
         if (_contentType != null) {
           _elvis = _contentType;
         } else {
@@ -244,7 +188,7 @@ public class XtextServlet extends HttpServlet {
         }
         response.setContentType(_elvis);
         PrintWriter _writer = response.getWriter();
-        String _content = ((GeneratorResult)result).getContent();
+        String _content = unwrapResult.getContent();
         _writer.write(_content);
       } else {
         response.setContentType("text/x-json");
@@ -277,27 +221,34 @@ public class XtextServlet extends HttpServlet {
     }
     final URI emfURI = URI.createURI(_elvis);
     final String contentType = serviceContext.getParameter("contentType");
-    if ((contentType == null)) {
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(contentType);
+    if (_isNullOrEmpty) {
       IResourceServiceProvider _resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
       resourceServiceProvider = _resourceServiceProvider;
-      boolean _equals = Objects.equal(resourceServiceProvider, null);
-      if (_equals) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Unable to identify the Xtext language for resource ");
-        _builder.append(emfURI, "");
-        _builder.append(".");
-        throw new InvalidRequestException.UnknownLanguageException(_builder.toString());
+      if ((resourceServiceProvider == null)) {
+        String _string = emfURI.toString();
+        boolean _isEmpty = _string.isEmpty();
+        if (_isEmpty) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Unable to identify the Xtext language: missing parameter \'resource\' or \'contentType\'.");
+          throw new InvalidRequestException.UnknownLanguageException(_builder.toString());
+        } else {
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("Unable to identify the Xtext language for resource ");
+          _builder_1.append(emfURI, "");
+          _builder_1.append(".");
+          throw new InvalidRequestException.UnknownLanguageException(_builder_1.toString());
+        }
       }
     } else {
       IResourceServiceProvider _resourceServiceProvider_1 = this.serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType);
       resourceServiceProvider = _resourceServiceProvider_1;
-      boolean _equals_1 = Objects.equal(resourceServiceProvider, null);
-      if (_equals_1) {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("Unable to identify the Xtext language for contentType ");
-        _builder_1.append(contentType, "");
-        _builder_1.append(".");
-        throw new InvalidRequestException.UnknownLanguageException(_builder_1.toString());
+      if ((resourceServiceProvider == null)) {
+        StringConcatenation _builder_2 = new StringConcatenation();
+        _builder_2.append("Unable to identify the Xtext language for contentType ");
+        _builder_2.append(contentType, "");
+        _builder_2.append(".");
+        throw new InvalidRequestException.UnknownLanguageException(_builder_2.toString());
       }
     }
     return resourceServiceProvider.<Injector>get(Injector.class);

@@ -33,6 +33,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String INVALID_ACTION_USAGE = ISSUE_CODE_PREFIX + "InvalidActionUsage";
 	public static final String EMPTY_ENUM_LITERAL = ISSUE_CODE_PREFIX + "EmptyEnumLiteral";
 	public static final String EMPTY_KEYWORD = ISSUE_CODE_PREFIX + "EmptyKeyword";
+	public static final String SPACES_IN_KEYWORD = ISSUE_CODE_PREFIX + "SpacesInKeyword";
 	public static final String INVALID_HIDDEN_TOKEN = ISSUE_CODE_PREFIX + "InvalidHiddenToken";
 	public static final String INVALID_HIDDEN_TOKEN_FRAGMENT = ISSUE_CODE_PREFIX + "InvalidHiddenTokenFragment";
 	public static final String INVALID_PACKAGE_REFERENCE_INHERITED = ISSUE_CODE_PREFIX + "InvalidPackageReference.inherited";
@@ -60,6 +61,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		acceptor.accept(create(INVALID_ACTION_USAGE, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(EMPTY_ENUM_LITERAL, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(EMPTY_KEYWORD, SeverityConverter.SEVERITY_ERROR));
+		acceptor.accept(create(SPACES_IN_KEYWORD, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(INVALID_HIDDEN_TOKEN, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(INVALID_HIDDEN_TOKEN_FRAGMENT, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(INVALID_PACKAGE_REFERENCE_INHERITED, SeverityConverter.SEVERITY_ERROR));

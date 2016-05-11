@@ -56,6 +56,8 @@ public class Main {
 				compiler.setGeneratedAnnotationComment(arguments.next().trim());
 			} else if ("-useCurrentClassLoader".equals(argument)) {
 				compiler.setUseCurrentClassLoaderAsParent(true);
+			} else if ("-writeTraceFiles".equals(argument)) {
+				compiler.setWriteTraceFiles(true);
 			} else {
 				List<String> existingDirs = new ArrayList<String>(compiler.getSourcePathDirectories());
 				existingDirs.add(argument);
@@ -82,6 +84,7 @@ public class Main {
 		out.println("-includeDateInGeneratedAnnnotation  If -generateGeneratedAnnotation is used, add the current date/time.");
 		out.println("-generateAnnotationComment <string> If -generateGeneratedAnnotation is used, add a comment.");
 		out.println("-useCurrentClassLoader              Use current classloader as parent classloader");
+		out.println("-writeTraceFiles                    Write Trace-Files");
 	}
 
 }

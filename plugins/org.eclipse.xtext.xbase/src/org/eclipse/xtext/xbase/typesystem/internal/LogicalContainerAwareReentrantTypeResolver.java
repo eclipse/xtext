@@ -119,7 +119,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		protected void capture(ITypeComputationState state) {
 			this.capturedState = ((AbstractTypeComputationState) state).getFeatureScopeSession();
 			IFeatureScopeSession nestedSession = typeResolver.addThisAndSuper(capturedState, state.getReferenceOwner(), localClass, getEquivalent(), true);
-			typeResolver.doPrepare(resolvedTypes, nestedSession, localClass, resolvedTypesByContext);
+			
+			ResolvedTypes capturedResolvedTypes = captureResolvedTypes(state);
+			typeResolver.doPrepare(capturedResolvedTypes, nestedSession, localClass, resolvedTypesByContext);
+		}
+
+		protected ResolvedTypes captureResolvedTypes(ITypeComputationState state) {
+			ResolvedTypes capturedResolvedTypes = ((AbstractTypeComputationState) state).getResolvedTypes();
+			return new CapturedLocalElementsAwareStackedResolvedTypes(capturedResolvedTypes, resolvedTypes);
 		}
 		
 		protected static IFeatureScopeSession findCapturedState(JvmDeclaredType type) {

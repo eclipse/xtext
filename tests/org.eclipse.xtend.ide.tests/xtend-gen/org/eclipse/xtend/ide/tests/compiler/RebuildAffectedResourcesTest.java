@@ -636,17 +636,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
     try {
       final IMarker[] findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
       for (final IMarker iMarker : findMarkers) {
-        boolean _and = false;
-        int _severity = MarkerUtilities.getSeverity(iMarker);
-        boolean _equals = (_severity == IMarker.SEVERITY_ERROR);
-        if (!_equals) {
-          _and = false;
-        } else {
-          String _message = MarkerUtilities.getMessage(iMarker);
-          boolean _contains = _message.contains(msgPart);
-          _and = _contains;
-        }
-        if (_and) {
+        if (((MarkerUtilities.getSeverity(iMarker) == IMarker.SEVERITY_ERROR) && MarkerUtilities.getMessage(iMarker).contains(msgPart))) {
           return;
         }
       }

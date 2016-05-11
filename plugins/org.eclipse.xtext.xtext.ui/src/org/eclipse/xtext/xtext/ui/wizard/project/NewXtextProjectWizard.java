@@ -91,6 +91,8 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		projectInfo.getIdeProject().setEnabled(advancedPage.isCreateIdeProject());
 		projectInfo.getIntellijProject().setEnabled(advancedPage.isCreateIntellijProject());
 		projectInfo.getWebProject().setEnabled(advancedPage.isCreateWebProject());
+		projectInfo.getSdkProject().setEnabled(advancedPage.isCreateSdkProject());
+		projectInfo.getP2Project().setEnabled(advancedPage.isCreateP2Project());
 		if (advancedPage.isCreateTestProject()) {
 			for (ProjectDescriptor project : projectInfo.getEnabledProjects()) {
 				if (project instanceof TestedProjectDescriptor) {

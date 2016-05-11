@@ -20,12 +20,18 @@ class QualifiedNamesFragment2 extends AbstractXtextGeneratorFragment {
 		new GuiceModuleAccess.BindingFactory()
 			.addTypeToType(IQualifiedNameProvider.typeRef, DefaultDeclarativeQualifiedNameProvider.typeRef)
 			.contributeTo(language.runtimeGenModule)
+		
 		new GuiceModuleAccess.BindingFactory()
 			.addTypeToType('org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher'.typeRef,
 					'org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher'.typeRef)
 			.addTypeToType('org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator'.typeRef,
 					'org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator'.typeRef)
 			.contributeTo(language.eclipsePluginGenModule)
+		
+		new GuiceModuleAccess.BindingFactory()
+			.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher'.typeRef,
+					'org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher'.typeRef)
+			.contributeTo(language.webGenModule)
 	}
 	
 }

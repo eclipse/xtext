@@ -18,7 +18,6 @@ import com.intellij.util.IncorrectOperationException;
 import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -134,24 +133,7 @@ public class PsiNamedEObjectImpl<PsiE extends PsiNamedEObject, T extends PsiName
       _eStructuralFeature=_eClass.getEStructuralFeature("name");
     }
     final EStructuralFeature feature = _eStructuralFeature;
-    boolean _and = false;
-    boolean _and_1 = false;
-    if (!(feature instanceof EAttribute)) {
-      _and_1 = false;
-    } else {
-      boolean _isMany = feature.isMany();
-      boolean _not = (!_isMany);
-      _and_1 = _not;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      EClassifier _eType = feature.getEType();
-      Class<?> _instanceClass = _eType.getInstanceClass();
-      boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
-      _and = _isAssignableFrom;
-    }
-    if (_and) {
+    if ((((feature instanceof EAttribute) && (!feature.isMany())) && String.class.isAssignableFrom(feature.getEType().getInstanceClass()))) {
       return feature;
     }
     return null;

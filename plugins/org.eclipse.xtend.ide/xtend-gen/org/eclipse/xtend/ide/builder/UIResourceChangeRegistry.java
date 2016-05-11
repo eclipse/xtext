@@ -148,104 +148,47 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   
   @Override
   public boolean visit(final IResourceDelta delta) throws CoreException {
-    boolean _and = false;
-    boolean _isEmpty = this.existsListeners.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _hasExistsChanged = this.hasExistsChanged(delta);
-      _and = _hasExistsChanged;
-    }
-    if (_and) {
+    if (((!this.existsListeners.isEmpty()) && this.hasExistsChanged(delta))) {
       IResource _resource = delta.getResource();
       IPath _fullPath = _resource.getFullPath();
       String _string = _fullPath.toString();
       final Set<URI> interestedFiles = this.existsListeners.removeAll(_string);
-      boolean _isEmpty_1 = interestedFiles.isEmpty();
-      boolean _not_1 = (!_isEmpty_1);
-      if (_not_1) {
+      boolean _isEmpty = interestedFiles.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
         this.queueURIs(interestedFiles);
       }
     }
-    boolean _and_1 = false;
-    boolean _isEmpty_2 = this.childrenListeners.isEmpty();
-    boolean _not_2 = (!_isEmpty_2);
-    if (!_not_2) {
-      _and_1 = false;
-    } else {
-      boolean _or = false;
-      boolean _hasExistsChanged_1 = this.hasExistsChanged(delta);
-      if (_hasExistsChanged_1) {
-        _or = true;
-      } else {
-        boolean _hasChildrenChanged = this.hasChildrenChanged(delta);
-        _or = _hasChildrenChanged;
-      }
-      _and_1 = _or;
-    }
-    if (_and_1) {
+    if (((!this.childrenListeners.isEmpty()) && (this.hasExistsChanged(delta) || this.hasChildrenChanged(delta)))) {
       IResource _resource_1 = delta.getResource();
       IPath _fullPath_1 = _resource_1.getFullPath();
       String _string_1 = _fullPath_1.toString();
       final Set<URI> interestedFiles_1 = this.childrenListeners.removeAll(_string_1);
-      boolean _isEmpty_3 = interestedFiles_1.isEmpty();
-      boolean _not_3 = (!_isEmpty_3);
-      if (_not_3) {
+      boolean _isEmpty_1 = interestedFiles_1.isEmpty();
+      boolean _not_1 = (!_isEmpty_1);
+      if (_not_1) {
         this.queueURIs(interestedFiles_1);
       }
     }
-    boolean _and_2 = false;
-    boolean _isEmpty_4 = this.charsetListeners.isEmpty();
-    boolean _not_4 = (!_isEmpty_4);
-    if (!_not_4) {
-      _and_2 = false;
-    } else {
-      boolean _or_1 = false;
-      boolean _hasExistsChanged_2 = this.hasExistsChanged(delta);
-      if (_hasExistsChanged_2) {
-        _or_1 = true;
-      } else {
-        boolean _hasCharsetChanged = this.hasCharsetChanged(delta);
-        _or_1 = _hasCharsetChanged;
-      }
-      _and_2 = _or_1;
-    }
-    if (_and_2) {
+    if (((!this.charsetListeners.isEmpty()) && (this.hasExistsChanged(delta) || this.hasCharsetChanged(delta)))) {
       IResource _resource_2 = delta.getResource();
       IPath _fullPath_2 = _resource_2.getFullPath();
       String _string_2 = _fullPath_2.toString();
       final Set<URI> interestedFiles_2 = this.charsetListeners.removeAll(_string_2);
-      boolean _isEmpty_5 = interestedFiles_2.isEmpty();
-      boolean _not_5 = (!_isEmpty_5);
-      if (_not_5) {
+      boolean _isEmpty_2 = interestedFiles_2.isEmpty();
+      boolean _not_2 = (!_isEmpty_2);
+      if (_not_2) {
         this.queueURIs(interestedFiles_2);
       }
     }
-    boolean _and_3 = false;
-    boolean _isEmpty_6 = this.contentsListeners.isEmpty();
-    boolean _not_6 = (!_isEmpty_6);
-    if (!_not_6) {
-      _and_3 = false;
-    } else {
-      boolean _or_2 = false;
-      boolean _hasExistsChanged_3 = this.hasExistsChanged(delta);
-      if (_hasExistsChanged_3) {
-        _or_2 = true;
-      } else {
-        boolean _hasContentsChanged = this.hasContentsChanged(delta);
-        _or_2 = _hasContentsChanged;
-      }
-      _and_3 = _or_2;
-    }
-    if (_and_3) {
+    if (((!this.contentsListeners.isEmpty()) && (this.hasExistsChanged(delta) || this.hasContentsChanged(delta)))) {
       IResource _resource_3 = delta.getResource();
       IPath _fullPath_3 = _resource_3.getFullPath();
       String _string_3 = _fullPath_3.toString();
       final Set<URI> interestedFiles_3 = this.contentsListeners.removeAll(_string_3);
-      boolean _isEmpty_7 = interestedFiles_3.isEmpty();
-      boolean _not_7 = (!_isEmpty_7);
-      if (_not_7) {
+      boolean _isEmpty_3 = interestedFiles_3.isEmpty();
+      boolean _not_3 = (!_isEmpty_3);
+      if (_not_3) {
         this.queueURIs(interestedFiles_3);
       }
     }
@@ -257,17 +200,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   }
   
   private boolean hasExistsChanged(final IResourceDelta delta) {
-    boolean _or = false;
-    int _kind = delta.getKind();
-    boolean _equals = (_kind == IResourceDelta.ADDED);
-    if (_equals) {
-      _or = true;
-    } else {
-      int _kind_1 = delta.getKind();
-      boolean _equals_1 = (_kind_1 == IResourceDelta.REMOVED);
-      _or = _equals_1;
-    }
-    return _or;
+    return ((delta.getKind() == IResourceDelta.ADDED) || (delta.getKind() == IResourceDelta.REMOVED));
   }
   
   private boolean hasChildrenChanged(final IResourceDelta delta) {
@@ -285,18 +218,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   }
   
   private boolean hasCharsetChanged(final IResourceDelta delta) {
-    boolean _and = false;
-    int _kind = delta.getKind();
-    boolean _equals = (_kind == IResourceDelta.CHANGED);
-    if (!_equals) {
-      _and = false;
-    } else {
-      int _flags = delta.getFlags();
-      int _bitwiseAnd = (_flags & IResourceDelta.ENCODING);
-      boolean _notEquals = (_bitwiseAnd != 0);
-      _and = _notEquals;
-    }
-    return _and;
+    return ((delta.getKind() == IResourceDelta.CHANGED) && ((delta.getFlags() & IResourceDelta.ENCODING) != 0));
   }
   
   private static int HAS_CONTENTS_CHANGED_FLAGS = (((IResourceDelta.CONTENT | IResourceDelta.ENCODING) | IResourceDelta.REPLACED) | IResourceDelta.LOCAL_CHANGED);
@@ -447,22 +369,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       @Override
       public Boolean apply(final IProject it) {
         try {
-          boolean _and = false;
-          boolean _and_1 = false;
-          boolean _isAccessible = it.isAccessible();
-          if (!_isAccessible) {
-            _and_1 = false;
-          } else {
-            boolean _hasNature = it.hasNature(XtextProjectHelper.NATURE_ID);
-            _and_1 = _hasNature;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            boolean _hasNature_1 = it.hasNature(JavaCore.NATURE_ID);
-            _and = _hasNature_1;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((it.isAccessible() && it.hasNature(XtextProjectHelper.NATURE_ID)) && it.hasNature(JavaCore.NATURE_ID)));
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }

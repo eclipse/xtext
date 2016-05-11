@@ -3,7 +3,7 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
-                <message_argument value="2.9.2"/>
+                <message_argument value="2.10.0"/>
                 <message_argument value="org.eclipse.xtext.common.types"/>
             </message_arguments>
         </filter>
@@ -57,12 +57,6 @@
         </filter>
     </resource>
     <resource path="src/org/eclipse/xtend/core/compiler/batch/XtendBatchCompiler.java" type="org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler"/>
-                <message_argument value="configureWorkspace()"/>
-            </message_arguments>
-        </filter>
         <filter id="640708718">
             <message_arguments>
                 <message_argument value="OutputConfigurationAdapter(Map&lt;String,Set&lt;OutputConfiguration&gt;&gt;)"/>

@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 public class ExBeeLangTestLanguageSyntaxHighlighterFactory extends SingleLazyInstanceSyntaxHighlighterFactory {
 	
 	@Override
-    @NotNull
-    protected SyntaxHighlighter createHighlighter() {
-        return ExBeeLangTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);
-    }
+	@NotNull
+	protected SyntaxHighlighter createHighlighter() {
+		return ExBeeLangTestLanguageLanguage.INSTANCE.getInstance(SyntaxHighlighter.class);
+	}
 }

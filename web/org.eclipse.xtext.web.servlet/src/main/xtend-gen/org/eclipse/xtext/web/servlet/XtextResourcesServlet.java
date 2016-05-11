@@ -53,15 +53,7 @@ public class XtextResourcesServlet extends HttpServlet {
         int _length = tokens.length;
         int _minus = (_length - 1);
         final String fileName = tokens[_minus];
-        boolean _and = false;
-        if (!(!this.disableCache)) {
-          _and = false;
-        } else {
-          int _length_1 = tokens.length;
-          boolean _greaterThan = (_length_1 > 4);
-          _and = _greaterThan;
-        }
-        if (_and) {
+        if (((!this.disableCache) && (tokens.length > 4))) {
           final String version = tokens[3];
           response.setHeader("ETag", ((fileName + "_") + version));
           long _currentTimeMillis = System.currentTimeMillis();

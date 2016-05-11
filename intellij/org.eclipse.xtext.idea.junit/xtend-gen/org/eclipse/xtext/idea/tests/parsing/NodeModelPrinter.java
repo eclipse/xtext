@@ -108,18 +108,10 @@ public class NodeModelPrinter {
     }
     _builder.newLineIfNotEmpty();
     {
-      boolean _and = false;
-      if (!(!this.ignoreSyntaxErrors)) {
-        _and = false;
-      } else {
-        SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
-        boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
-        _and = _notEquals;
-      }
-      if (_and) {
+      if (((!this.ignoreSyntaxErrors) && (!Objects.equal(it.getSyntaxErrorMessage(), null)))) {
         _builder.append("syntaxErrorMessage: ");
-        SyntaxErrorMessage _syntaxErrorMessage_1 = it.getSyntaxErrorMessage();
-        _builder.append(_syntaxErrorMessage_1, "");
+        SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
+        _builder.append(_syntaxErrorMessage, "");
       }
     }
     return _builder.toString();

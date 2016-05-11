@@ -79,26 +79,12 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;");
     _builder.newLine();
     {
-      boolean _and = false;
-      List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
-      final Function1<ParserRule, List<EObject>> _function = new Function1<ParserRule, List<EObject>>() {
+      if (((!IterableExtensions.isEmpty(Iterables.<UnorderedGroup>filter(Iterables.<EObject>concat(ListExtensions.<ParserRule, List<EObject>>map(GrammarUtil.allParserRules(it), new Function1<ParserRule, List<EObject>>() {
         @Override
         public List<EObject> apply(final ParserRule it) {
           return EcoreUtil2.eAllContentsAsList(it);
         }
-      };
-      List<List<EObject>> _map = ListExtensions.<ParserRule, List<EObject>>map(_allParserRules, _function);
-      Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
-      Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_flatten, UnorderedGroup.class);
-      boolean _isEmpty = IterableExtensions.isEmpty(_filter);
-      boolean _not = (!_isEmpty);
-      if (!_not) {
-        _and = false;
-      } else {
-        boolean _isBacktrack = options.isBacktrack();
-        _and = _isBacktrack;
-      }
-      if (_and) {
+      })), UnorderedGroup.class))) && options.isBacktrack())) {
         _builder.append("import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;");
         _builder.newLine();
       }
@@ -178,7 +164,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("\t\t");
     _builder.append("setPsiBuilder(builder);");
     _builder.newLine();
-    _builder.append("    \t");
+    _builder.append("\t\t");
     _builder.append("this.grammarAccess = grammarAccess;");
     _builder.newLine();
     _builder.append("\t\t");
@@ -301,28 +287,15 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   protected CharSequence compileReturns(final AbstractRule it, final AntlrOptions options) {
     CharSequence _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof ParserRule) {
-        boolean _and = false;
-        ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it));
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement);
-        boolean _not = (!_isDatatypeRule);
-        if (!_not) {
-          _and = false;
-        } else {
-          ParserRule _originalElement_1 = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it));
-          boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(_originalElement_1);
-          _and = _isEObjectFragmentRule;
-        }
-        if (_and) {
-          _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("[");
-          String _currentType = this.getCurrentType();
-          _builder.append(_currentType, "");
-          _builder.append(" current=in_current]");
-          _switchResult = _builder;
-        }
+    if (it instanceof ParserRule) {
+      if (((!GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it)))) && GrammarUtil.isEObjectFragmentRule(AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)it))))) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("[");
+        String _currentType = this.getCurrentType();
+        _builder.append(_currentType, "");
+        _builder.append(" current=in_current]");
+        _switchResult = _builder;
       }
     }
     if (!_matched) {
@@ -375,24 +348,22 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
       boolean _matched = false;
+      if (_rule instanceof EnumRule) {
+        boolean _isAssigned = GrammarUtil.isAssigned(it);
+        if (_isAssigned) {
+          _matched=true;
+        }
+      }
       if (!_matched) {
-        if (_rule instanceof EnumRule) {
+        if (_rule instanceof ParserRule) {
           boolean _isAssigned = GrammarUtil.isAssigned(it);
           if (_isAssigned) {
             _matched=true;
           }
         }
-        if (!_matched) {
-          if (_rule instanceof ParserRule) {
-            boolean _isAssigned = GrammarUtil.isAssigned(it);
-            if (_isAssigned) {
-              _matched=true;
-            }
-          }
-        }
-        if (_matched) {
-          _switchResult = super._dataTypeEbnf2(it, supportActions);
-        }
+      }
+      if (_matched) {
+        _switchResult = super._dataTypeEbnf2(it, supportActions);
       }
       if (!_matched) {
         if (_rule instanceof EnumRule) {
@@ -617,24 +588,22 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
       boolean _matched = false;
+      if (_rule instanceof EnumRule) {
+        boolean _isAssigned = GrammarUtil.isAssigned(it);
+        if (_isAssigned) {
+          _matched=true;
+        }
+      }
       if (!_matched) {
-        if (_rule instanceof EnumRule) {
+        if (_rule instanceof ParserRule) {
           boolean _isAssigned = GrammarUtil.isAssigned(it);
           if (_isAssigned) {
             _matched=true;
           }
         }
-        if (!_matched) {
-          if (_rule instanceof ParserRule) {
-            boolean _isAssigned = GrammarUtil.isAssigned(it);
-            if (_isAssigned) {
-              _matched=true;
-            }
-          }
-        }
-        if (_matched) {
-          _switchResult = super._ebnf2(it, options, supportActions);
-        }
+      }
+      if (_matched) {
+        _switchResult = super._ebnf2(it, options, supportActions);
       }
       if (!_matched) {
         if (_rule instanceof EnumRule) {
@@ -799,38 +768,36 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     if (supportActions) {
       String _switchResult = null;
       boolean _matched = false;
+      if (it instanceof EnumRule) {
+        _matched=true;
+      }
       if (!_matched) {
-        if (it instanceof EnumRule) {
+        if (it instanceof ParserRule) {
           _matched=true;
         }
-        if (!_matched) {
-          if (it instanceof ParserRule) {
-            _matched=true;
-          }
-        }
-        if (_matched) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t");
-          CharSequence _markComposite = this.markComposite(ref);
-          _builder.append(_markComposite, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
-          String _crossrefEbnf = super.crossrefEbnf(it, call, ref, supportActions);
-          _builder.append(_crossrefEbnf, "");
-          _builder.newLineIfNotEmpty();
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t");
-          CharSequence _doneComposite = this.doneComposite(ref);
-          _builder.append(_doneComposite, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
-          _switchResult = _builder.toString();
-        }
+      }
+      if (_matched) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _markComposite = this.markComposite(ref);
+        _builder.append(_markComposite, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+        String _crossrefEbnf = super.crossrefEbnf(it, call, ref, supportActions);
+        _builder.append(_crossrefEbnf, "");
+        _builder.newLineIfNotEmpty();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _doneComposite = this.doneComposite(ref);
+        _builder.append(_doneComposite, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+        _switchResult = _builder.toString();
       }
       if (!_matched) {
         if (it instanceof TerminalRule) {
@@ -956,54 +923,52 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       String _switchResult = null;
       AbstractRule _rule = it.getRule();
       boolean _matched = false;
+      if (_rule instanceof EnumRule) {
+        _matched=true;
+      }
       if (!_matched) {
-        if (_rule instanceof EnumRule) {
+        if (_rule instanceof ParserRule) {
           _matched=true;
         }
-        if (!_matched) {
-          if (_rule instanceof ParserRule) {
-            _matched=true;
-          }
-        }
-        if (_matched) {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t");
-          CharSequence _markComposite = this.markComposite(it);
-          _builder.append(_markComposite, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
-          String _localVar = this._grammarAccessExtensions.localVar(assignment, it);
-          _builder.append(_localVar, "");
-          _builder.append("=");
-          String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
-          _builder.append(__assignmentEbnf, "");
-          _builder.newLineIfNotEmpty();
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t");
-          CharSequence _doneComposite = this.doneComposite(it);
-          _builder.append(_doneComposite, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("if(!$current) {");
-          _builder.newLine();
-          _builder.append("\t\t");
-          CharSequence _associateWithSemanticElement = this.associateWithSemanticElement();
-          _builder.append(_associateWithSemanticElement, "\t\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("$current = true;");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
-          _switchResult = _builder.toString();
-        }
+      }
+      if (_matched) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _markComposite = this.markComposite(it);
+        _builder.append(_markComposite, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+        String _localVar = this._grammarAccessExtensions.localVar(assignment, it);
+        _builder.append(_localVar, "");
+        _builder.append("=");
+        String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
+        _builder.append(__assignmentEbnf, "");
+        _builder.newLineIfNotEmpty();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t");
+        CharSequence _doneComposite = this.doneComposite(it);
+        _builder.append(_doneComposite, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("if(!$current) {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        CharSequence _associateWithSemanticElement = this.associateWithSemanticElement();
+        _builder.append(_associateWithSemanticElement, "\t\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("$current = true;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _switchResult = _builder.toString();
       }
       if (!_matched) {
         if (_rule instanceof TerminalRule) {

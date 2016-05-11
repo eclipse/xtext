@@ -93,15 +93,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     JvmType _xblockexpression = null;
     {
       JvmType result = this.doFindTypeByName(name, false);
-      boolean _or = false;
-      boolean _notEquals = (!Objects.equal(result, null));
-      if (_notEquals) {
-        _or = true;
-      } else {
-        boolean _isBinaryNestedTypeDelimiter = this.isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter);
-        _or = _isBinaryNestedTypeDelimiter;
-      }
-      if (_or) {
+      if (((!Objects.equal(result, null)) || this.isBinaryNestedTypeDelimiter(name, binaryNestedTypeDelimiter))) {
         return result;
       }
       final AbstractJvmTypeProvider.ClassNameVariants nameVariants = new AbstractJvmTypeProvider.ClassNameVariants(name);
@@ -129,17 +121,15 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
         ResourceSet _resourceSet = this.getResourceSet();
         final ResourceSet resourceSet = _resourceSet;
         boolean _matched = false;
-        if (!_matched) {
-          if (resourceSet instanceof ISynchronizable) {
-            _matched=true;
-            final IUnitOfWork<JvmType, ResourceSet> _function = new IUnitOfWork<JvmType, ResourceSet>() {
-              @Override
-              public JvmType exec(final ResourceSet it) throws Exception {
-                return StubJvmTypeProvider.this.findType(resourceURI, fragment, traverseNestedTypes);
-              }
-            };
-            _switchResult = ((ISynchronizable<ResourceSet>)resourceSet).<JvmType>execute(_function);
-          }
+        if (resourceSet instanceof ISynchronizable) {
+          _matched=true;
+          final IUnitOfWork<JvmType, ResourceSet> _function = new IUnitOfWork<JvmType, ResourceSet>() {
+            @Override
+            public JvmType exec(final ResourceSet it) throws Exception {
+              return StubJvmTypeProvider.this.findType(resourceURI, fragment, traverseNestedTypes);
+            }
+          };
+          _switchResult = ((ISynchronizable<ResourceSet>)resourceSet).<JvmType>execute(_function);
         }
         if (!_matched) {
           _switchResult = this.findType(resourceURI, fragment, traverseNestedTypes);
@@ -228,14 +218,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       public JvmType compute() {
         EObject _eObject = resource.getEObject(fragment);
         final JvmType result = ((JvmType) _eObject);
-        boolean _or = false;
-        boolean _notEquals = (!Objects.equal(result, null));
-        if (_notEquals) {
-          _or = true;
-        } else {
-          _or = (!traverseNestedTypes);
-        }
-        if (_or) {
+        if (((!Objects.equal(result, null)) || (!traverseNestedTypes))) {
           return result;
         }
         EList<EObject> _contents = resource.getContents();
@@ -268,16 +251,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
             Project _project = StubJvmTypeProvider.this.module.getProject();
             JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
             final PsiClass psiClass = _instance.findClass(name, StubJvmTypeProvider.this.searchScope);
-            boolean _or = false;
-            boolean _equals = Objects.equal(psiClass, null);
-            if (_equals) {
-              _or = true;
-            } else {
-              PsiClass _containingClass = psiClass.getContainingClass();
-              boolean _notEquals = (!Objects.equal(_containingClass, null));
-              _or = _notEquals;
-            }
-            if (_or) {
+            if ((Objects.equal(psiClass, null) || (!Objects.equal(psiClass.getContainingClass(), null)))) {
               return null;
             }
             _xblockexpression = new PsiClassMirror(psiClass, StubJvmTypeProvider.this.psiClassFactory);

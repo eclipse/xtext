@@ -49,6 +49,7 @@ import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.XtendFileAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
@@ -117,6 +118,20 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     IXtextGeneratorLanguage _language_2 = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language_2.getEclipsePluginGenModule();
     _addTypeToType_1.contributeTo(_eclipsePluginGenModule);
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+    ManifestAccess _manifest = _runtime.getManifest();
+    boolean _tripleNotEquals = (_manifest != null);
+    if (_tripleNotEquals) {
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      ManifestAccess _manifest_1 = _runtime_1.getManifest();
+      Set<String> _exportedPackages = _manifest_1.getExportedPackages();
+      Grammar _grammar_1 = this.getGrammar();
+      String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(_grammar_1);
+      String _plus = (_runtimeBasePackage + ".formatting2");
+      _exportedPackages.add(_plus);
+    }
     this.doGenerateStubFile();
   }
   
@@ -291,14 +306,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
         if ((type instanceof EClass)) {
           String _feature = assignment.getFeature();
           final EStructuralFeature feature = ((EClass)type).getEStructuralFeature(_feature);
-          boolean _and = false;
-          if (!(feature instanceof EReference)) {
-            _and = false;
-          } else {
-            boolean _isContainment = ((EReference) feature).isContainment();
-            _and = _isContainment;
-          }
-          if (_and) {
+          if (((feature instanceof EReference) && ((EReference) feature).isContainment())) {
             type2ref.put(((EClass)type), ((EReference) feature));
           }
         }
@@ -314,14 +322,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
           final EClassifier type = _type.getClassifier();
           if ((type instanceof EClass)) {
             final EStructuralFeature feature = ((EClass)type).getEStructuralFeature(featureName);
-            boolean _and = false;
-            if (!(feature instanceof EReference)) {
-              _and = false;
-            } else {
-              boolean _isContainment = ((EReference) feature).isContainment();
-              _and = _isContainment;
-            }
-            if (_and) {
+            if (((feature instanceof EReference) && ((EReference) feature).isContainment())) {
               type2ref.put(((EClass)type), ((EReference) feature));
             }
           }

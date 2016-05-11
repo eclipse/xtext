@@ -22,11 +22,9 @@ public class DomSerializer {
   public CharSequence toText(final Node n) {
     CharSequence _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (n instanceof Contents) {
-        _matched=true;
-        _switchResult = ((Contents)n).getText();
-      }
+    if (n instanceof Contents) {
+      _matched=true;
+      _switchResult = ((Contents)n).getText();
     }
     if (!_matched) {
       if (n instanceof A) {

@@ -228,47 +228,31 @@ public abstract class AbstractAntlrGrammarGenerator {
       }
     }
     {
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _isParserBackTracking = this.isParserBackTracking(it, options);
-      if (_isParserBackTracking) {
-        _or_1 = true;
-      } else {
-        boolean _isMemoize = options.isMemoize();
-        _or_1 = _isMemoize;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        int _k = options.getK();
-        boolean _greaterEqualsThan = (_k >= 0);
-        _or = _greaterEqualsThan;
-      }
-      if (_or) {
+      if (((this.isParserBackTracking(it, options) || options.isMemoize()) || (options.getK() >= 0))) {
         {
-          boolean _isParserBackTracking_1 = this.isParserBackTracking(it, options);
-          if (_isParserBackTracking_1) {
+          boolean _isParserBackTracking = this.isParserBackTracking(it, options);
+          if (_isParserBackTracking) {
             _builder.append("\t");
             _builder.append("backtrack=true;");
             _builder.newLine();
           }
         }
         {
-          boolean _isMemoize_1 = options.isMemoize();
-          if (_isMemoize_1) {
+          boolean _isMemoize = options.isMemoize();
+          if (_isMemoize) {
             _builder.append("\t");
             _builder.append("memoize=true;");
             _builder.newLine();
           }
         }
         {
-          int _k_1 = options.getK();
-          boolean _greaterEqualsThan_1 = (_k_1 >= 0);
-          if (_greaterEqualsThan_1) {
+          int _k = options.getK();
+          boolean _greaterEqualsThan = (_k >= 0);
+          if (_greaterEqualsThan) {
             _builder.append("\t");
             _builder.append("memoize=");
-            int _k_2 = options.getK();
-            _builder.append(_k_2, "\t");
+            int _k_1 = options.getK();
+            _builder.append(_k_1, "\t");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           }
@@ -499,31 +483,19 @@ public abstract class AbstractAntlrGrammarGenerator {
       final Function1<Pair<Integer, TerminalRule>, String> _function_2 = new Function1<Pair<Integer, TerminalRule>, String>() {
         @Override
         public String apply(final Pair<Integer, TerminalRule> it) {
-          boolean _and = false;
-          TerminalRule _value = it.getValue();
-          boolean _isSyntheticTerminalRule = AbstractAntlrGrammarGenerator.this._syntheticTerminalDetector.isSyntheticTerminalRule(_value);
-          boolean _not = (!_isSyntheticTerminalRule);
-          if (!_not) {
-            _and = false;
-          } else {
-            TerminalRule _value_1 = it.getValue();
-            boolean _isFragment = _value_1.isFragment();
-            boolean _not_1 = (!_isFragment);
-            _and = _not_1;
-          }
-          if (_and) {
+          if (((!AbstractAntlrGrammarGenerator.this._syntheticTerminalDetector.isSyntheticTerminalRule(it.getValue())) && (!it.getValue().isFragment()))) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("(FRAGMENT_");
-            TerminalRule _value_2 = it.getValue();
-            String _ruleName = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_2);
+            TerminalRule _value = it.getValue();
+            String _ruleName = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value);
             _builder.append(_ruleName, "");
             _builder.append(")=> FRAGMENT_");
-            TerminalRule _value_3 = it.getValue();
-            String _ruleName_1 = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_3);
+            TerminalRule _value_1 = it.getValue();
+            String _ruleName_1 = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_1);
             _builder.append(_ruleName_1, "");
             _builder.append(" {$type = ");
-            TerminalRule _value_4 = it.getValue();
-            String _ruleName_2 = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_4);
+            TerminalRule _value_2 = it.getValue();
+            String _ruleName_2 = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_2);
             _builder.append(_ruleName_2, "");
             _builder.append("; }");
             return _builder.toString();
@@ -709,17 +681,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   }
   
   protected boolean shouldBeSkipped(final TerminalRule it, final Grammar grammar) {
-    boolean _and = false;
-    List<String> _initialHiddenTokens = this._grammarAccessExtensions.initialHiddenTokens(grammar);
-    String _ruleName = this._grammarAccessExtensions.ruleName(it);
-    boolean _contains = _initialHiddenTokens.contains(_ruleName);
-    if (!_contains) {
-      _and = false;
-    } else {
-      boolean _isCombinedGrammar = this.isCombinedGrammar();
-      _and = _isCombinedGrammar;
-    }
-    return _and;
+    return (this._grammarAccessExtensions.initialHiddenTokens(grammar).contains(this._grammarAccessExtensions.ruleName(it)) && this.isCombinedGrammar());
   }
   
   protected String compileEBNF(final AbstractRule it, final AntlrOptions options) {
@@ -736,15 +698,7 @@ public abstract class AbstractAntlrGrammarGenerator {
     _builder.append(":");
     _builder.newLineIfNotEmpty();
     {
-      boolean _and = false;
-      if (!(it instanceof ParserRule)) {
-        _and = false;
-      } else {
-        AbstractRule _originalElement_1 = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it);
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement_1);
-        _and = _isDatatypeRule;
-      }
-      if (_and) {
+      if (((it instanceof ParserRule) && GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it)))) {
         _builder.append("\t");
         AbstractElement _alternatives = it.getAlternatives();
         String _dataTypeEbnf = this.dataTypeEbnf(_alternatives, true);
@@ -802,19 +756,11 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String ebnfPredicate(final AbstractElement it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _or = false;
-      boolean _predicated = this._grammarAccessExtensions.predicated(it);
-      if (_predicated) {
-        _or = true;
-      } else {
-        boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-        _or = _isFirstSetPredicated;
-      }
-      if (_or) {
+      if ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated())) {
         _builder.append("(");
         {
-          boolean _predicated_1 = this._grammarAccessExtensions.predicated(it);
-          if (_predicated_1) {
+          boolean _predicated = this._grammarAccessExtensions.predicated(it);
+          if (_predicated) {
             AbstractElement _predicatedElement = this._grammarAccessExtensions.predicatedElement(it);
             String _ebnf2 = this.ebnf2(_predicatedElement, options, false);
             _builder.append(_ebnf2, "");
@@ -869,19 +815,11 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String dataTypeEbnfPredicate(final AbstractElement it) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _or = false;
-      boolean _predicated = this._grammarAccessExtensions.predicated(it);
-      if (_predicated) {
-        _or = true;
-      } else {
-        boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-        _or = _isFirstSetPredicated;
-      }
-      if (_or) {
+      if ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated())) {
         _builder.append("(");
         {
-          boolean _predicated_1 = this._grammarAccessExtensions.predicated(it);
-          if (_predicated_1) {
+          boolean _predicated = this._grammarAccessExtensions.predicated(it);
+          if (_predicated) {
             AbstractElement _predicatedElement = this._grammarAccessExtensions.predicatedElement(it);
             String _dataTypeEbnf2 = this.dataTypeEbnf2(_predicatedElement, false);
             _builder.append(_dataTypeEbnf2, "");
@@ -1147,23 +1085,21 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _switchResult = null;
     boolean _matched = false;
+    if (it instanceof EnumRule) {
+      _matched=true;
+    }
     if (!_matched) {
-      if (it instanceof EnumRule) {
+      if (it instanceof ParserRule) {
         _matched=true;
       }
-      if (!_matched) {
-        if (it instanceof ParserRule) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (it instanceof TerminalRule) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (it instanceof TerminalRule) {
-          _matched=true;
-        }
-      }
-      if (_matched) {
-        _switchResult = this._grammarAccessExtensions.ruleName(it);
-      }
+    }
+    if (_matched) {
+      _switchResult = this._grammarAccessExtensions.ruleName(it);
     }
     if (!_matched) {
       throw new IllegalStateException(("crossrefEbnf is not supported for " + it));
@@ -1207,23 +1143,21 @@ public abstract class AbstractAntlrGrammarGenerator {
     AbstractRule _rule = it.getRule();
     final AbstractRule rule = _rule;
     boolean _matched = false;
+    if (rule instanceof EnumRule) {
+      _matched=true;
+    }
     if (!_matched) {
-      if (rule instanceof EnumRule) {
+      if (rule instanceof ParserRule) {
         _matched=true;
       }
-      if (!_matched) {
-        if (rule instanceof ParserRule) {
-          _matched=true;
-        }
+    }
+    if (!_matched) {
+      if (rule instanceof TerminalRule) {
+        _matched=true;
       }
-      if (!_matched) {
-        if (rule instanceof TerminalRule) {
-          _matched=true;
-        }
-      }
-      if (_matched) {
-        _switchResult = this._grammarAccessExtensions.ruleName(rule);
-      }
+    }
+    if (_matched) {
+      _switchResult = this._grammarAccessExtensions.ruleName(rule);
     }
     if (!_matched) {
       throw new IllegalStateException(("assignmentEbnf is not supported for " + rule));
@@ -1241,55 +1175,15 @@ public abstract class AbstractAntlrGrammarGenerator {
   }
   
   protected boolean _mustBeParenthesized(final AbstractElement it) {
-    boolean _or = false;
-    boolean _predicated = this._grammarAccessExtensions.predicated(it);
-    if (_predicated) {
-      _or = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or = _isFirstSetPredicated;
-    }
-    return _or;
+    return (this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated());
   }
   
   protected boolean _mustBeParenthesized(final Group it) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _predicated = this._grammarAccessExtensions.predicated(it);
-    if (_predicated) {
-      _or_1 = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or_1 = _isFirstSetPredicated;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      String _cardinality = it.getCardinality();
-      boolean _notEquals = (!Objects.equal(_cardinality, null));
-      _or = _notEquals;
-    }
-    return _or;
+    return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (!Objects.equal(it.getCardinality(), null)));
   }
   
   protected boolean _mustBeParenthesized(final Assignment it) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _predicated = this._grammarAccessExtensions.predicated(it);
-    if (_predicated) {
-      _or_1 = true;
-    } else {
-      boolean _isFirstSetPredicated = it.isFirstSetPredicated();
-      _or_1 = _isFirstSetPredicated;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      AbstractElement _terminal = it.getTerminal();
-      boolean _mustBeParenthesized = this.mustBeParenthesized(_terminal);
-      _or = _mustBeParenthesized;
-    }
-    return _or;
+    return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || this.mustBeParenthesized(it.getTerminal()));
   }
   
   protected boolean _mustBeParenthesized(final Alternatives it) {

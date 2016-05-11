@@ -88,6 +88,7 @@ public class XtextPluginImages {
 	 */
 	public static final ImageDescriptor DESC_OVR_ERROR = create(PATH_OVR, "error_co.gif"); //$NON-NLS-1$
 	public static final ImageDescriptor DESC_OVR_WARNING =create(PATH_OVR, "warning_co.gif"); //$NON-NLS-1$
+	public static final ImageDescriptor DESC_OVR_RECURSIVE =create(PATH_OVR, "recursive_co.png"); //$NON-NLS-1$
 
 	/**
 	 * TOOL16
@@ -113,6 +114,11 @@ public class XtextPluginImages {
 	
 	public static final ImageDescriptor DESC_MARK_OCCURRENCES = create(PATH_LCL, "mark_occurrences.gif");
 	public static final ImageDescriptor DESC_MARK_OCCURRENCES_DISABLED = create(PATH_LCL_DISABLED, "mark_occurrences.gif");
+	
+	public static final ImageDescriptor DESC_REFRESH = create(PATH_LCL, "refresh.png");
+	
+	public static final ImageDescriptor DESC_CH_CALLEES = create(PATH_LCL, "ch_callees.png");
+	public static final ImageDescriptor DESC_CH_CALLERS = create(PATH_LCL, "ch_callers.png");
 	
 	/**
 	 * WIZ

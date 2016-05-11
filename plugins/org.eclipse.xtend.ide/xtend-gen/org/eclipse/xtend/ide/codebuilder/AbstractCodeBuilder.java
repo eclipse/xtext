@@ -67,37 +67,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   @Override
   public boolean isValid() {
     final IJavaElement javaElement = this._iJavaElementFinder.findElementFor(this.owner);
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _and_2 = false;
-    boolean _or = false;
-    boolean _equals = Objects.equal(javaElement, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _isReadOnly = javaElement.isReadOnly();
-      boolean _not = (!_isReadOnly);
-      _or = _not;
-    }
-    if (!_or) {
-      _and_2 = false;
-    } else {
-      boolean _notEquals = (!Objects.equal(this.ownerSource, null));
-      _and_2 = _notEquals;
-    }
-    if (!_and_2) {
-      _and_1 = false;
-    } else {
-      boolean _notEquals_1 = (!Objects.equal(this.owner, null));
-      _and_1 = _notEquals_1;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      boolean _notEquals_2 = (!Objects.equal(this.context, null));
-      _and = _notEquals_2;
-    }
-    return _and;
+    return ((((Objects.equal(javaElement, null) || (!javaElement.isReadOnly())) && (!Objects.equal(this.ownerSource, null))) && (!Objects.equal(this.owner, null))) && (!Objects.equal(this.context, null)));
   }
   
   @Override
@@ -118,11 +88,9 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   protected ISourceAppender appendVisibility(final ISourceAppender appendable, final JvmVisibility visibility, final JvmVisibility skippableDefault) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(visibility, skippableDefault)) {
-        _matched=true;
-        _switchResult = "";
-      }
+    if (Objects.equal(visibility, skippableDefault)) {
+      _matched=true;
+      _switchResult = "";
     }
     if (!_matched) {
       if (Objects.equal(visibility, JvmVisibility.PRIVATE)) {
@@ -231,11 +199,9 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   protected String getIdentifierOrObject(final JvmTypeReference typeReference) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (typeReference instanceof JvmUnknownTypeReference) {
-        _matched=true;
-        _switchResult = "java.lang.Object";
-      }
+    if (typeReference instanceof JvmUnknownTypeReference) {
+      _matched=true;
+      _switchResult = "java.lang.Object";
     }
     if (!_matched) {
       _switchResult = typeReference.getIdentifier();
@@ -246,11 +212,9 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   protected boolean isInterface(final JvmType t) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (t instanceof JvmGenericType) {
-        _matched=true;
-        _switchResult = ((JvmGenericType)t).isInterface();
-      }
+    if (t instanceof JvmGenericType) {
+      _matched=true;
+      _switchResult = ((JvmGenericType)t).isInterface();
     }
     if (!_matched) {
       _switchResult = false;

@@ -30,7 +30,6 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -43,8 +42,6 @@ import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xtype.XImportDeclaration;
-import org.eclipse.xtext.xtype.XImportSection;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -86,19 +83,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
     if (_notEquals) {
       this.xtendOutlineNodeBuilder.buildPackageNode(xtendFile, context);
     }
-    boolean _and = false;
-    XImportSection _importSection = xtendFile.getImportSection();
-    boolean _notEquals_1 = (!Objects.equal(_importSection, null));
-    if (!_notEquals_1) {
-      _and = false;
-    } else {
-      XImportSection _importSection_1 = xtendFile.getImportSection();
-      EList<XImportDeclaration> _importDeclarations = _importSection_1.getImportDeclarations();
-      boolean _isEmpty = _importDeclarations.isEmpty();
-      boolean _not = (!_isEmpty);
-      _and = _not;
-    }
-    if (_and) {
+    if (((!Objects.equal(xtendFile.getImportSection(), null)) && (!xtendFile.getImportSection().getImportDeclarations().isEmpty()))) {
       this.xtendOutlineNodeBuilder.buildImportSectionNode(xtendFile, context);
     }
   }
@@ -135,19 +120,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
         }
         List<IResolvedOperation> _declaredOperations = resolvedFeatures.getDeclaredOperations();
         for (final IResolvedOperation operation : _declaredOperations) {
-          boolean _and = false;
-          JvmOperation _declaration_2 = operation.getDeclaration();
-          boolean _skipFeature_2 = this.skipFeature(_declaration_2);
-          boolean _not_2 = (!_skipFeature_2);
-          if (!_not_2) {
-            _and = false;
-          } else {
-            JvmOperation _declaration_3 = operation.getDeclaration();
-            boolean _isProcessed = superTypeContext.isProcessed(_declaration_3);
-            boolean _not_3 = (!_isProcessed);
-            _and = _not_3;
-          }
-          if (_and) {
+          if (((!this.skipFeature(operation.getDeclaration())) && (!superTypeContext.isProcessed(operation.getDeclaration())))) {
             this.xtendOutlineNodeBuilder.buildResolvedFeatureNode(inferredType, operation, superTypeContext);
           }
         }
@@ -171,16 +144,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   protected boolean skipFeature(final JvmFeature feature) {
     boolean _xifexpression = false;
     if ((feature instanceof JvmConstructor)) {
-      boolean _or = false;
-      JvmDeclaredType _declaringType = ((JvmConstructor)feature).getDeclaringType();
-      boolean _isLocal = _declaringType.isLocal();
-      if (_isLocal) {
-        _or = true;
-      } else {
-        boolean _isSingleSyntheticDefaultConstructor = this._jvmTypeExtensions.isSingleSyntheticDefaultConstructor(((JvmConstructor)feature));
-        _or = _isSingleSyntheticDefaultConstructor;
-      }
-      _xifexpression = _or;
+      _xifexpression = (((JvmConstructor)feature).getDeclaringType().isLocal() || this._jvmTypeExtensions.isSingleSyntheticDefaultConstructor(((JvmConstructor)feature)));
     }
     return _xifexpression;
   }

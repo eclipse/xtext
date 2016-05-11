@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.xtext.example.mavenTychoP2.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.xtext.example.mavenTychoP2.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.xtext.example.mavenTychoP2,
+ org.junit;bundle-version="4.7.0",
+ org.eclipse.xtext.junit4,
+ org.eclipse.xtext.xbase.junit
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

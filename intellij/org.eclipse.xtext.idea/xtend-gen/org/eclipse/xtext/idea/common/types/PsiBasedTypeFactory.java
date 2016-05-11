@@ -180,25 +180,15 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
     JvmDeclaredType _xblockexpression = null;
     {
       ProgressIndicatorProvider.checkCanceled();
-      boolean _or = false;
-      boolean _isAnonymous = this.isAnonymous(psiClass);
-      if (_isAnonymous) {
-        _or = true;
-      } else {
-        boolean _isSynthetic = this.isSynthetic(psiClass);
-        _or = _isSynthetic;
-      }
-      if (_or) {
+      if ((this.isAnonymous(psiClass) || this.isSynthetic(psiClass))) {
         throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
       }
       JvmDeclaredType _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        boolean _isAnnotationType = psiClass.isAnnotationType();
-        if (_isAnnotationType) {
-          _matched=true;
-          _switchResult = this._typesFactory.createJvmAnnotationType();
-        }
+      boolean _isAnnotationType = psiClass.isAnnotationType();
+      if (_isAnnotationType) {
+        _matched=true;
+        _switchResult = this._typesFactory.createJvmAnnotationType();
       }
       if (!_matched) {
         boolean _isEnum = psiClass.isEnum();
@@ -394,11 +384,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       ProgressIndicatorProvider.checkCanceled();
       JvmField _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (field instanceof PsiEnumConstant) {
-          _matched=true;
-          _switchResult = this._typesFactory.createJvmEnumerationLiteral();
-        }
+      if (field instanceof PsiEnumConstant) {
+        _matched=true;
+        _switchResult = this._typesFactory.createJvmEnumerationLiteral();
       }
       if (!_matched) {
         JvmField _createJvmField = this._typesFactory.createJvmField();
@@ -406,13 +394,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
           @Override
           public void apply(final JvmField it) {
             final PsiExpression initializer = field.getInitializer();
-            boolean _and = false;
-            if (!(initializer instanceof PsiCompiledElement)) {
-              _and = false;
-            } else {
-              _and = (initializer instanceof PsiBinaryExpression);
-            }
-            if (_and) {
+            if (((initializer instanceof PsiCompiledElement) && (initializer instanceof PsiBinaryExpression))) {
               PsiType _type = field.getType();
               final String fieldType = _type.getCanonicalText();
               final PsiBinaryExpression binary = ((PsiBinaryExpression) initializer);
@@ -421,35 +403,31 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
               boolean _equals = Objects.equal(_tokenType, JavaTokenType.DIV);
               if (_equals) {
                 boolean _matched = false;
-                if (!_matched) {
-                  String _simpleName = Double.TYPE.getSimpleName();
-                  if (Objects.equal(fieldType, _simpleName)) {
-                    _matched=true;
-                    String _text = binary.getText();
-                    boolean _matched_1 = false;
-                    if (!_matched_1) {
-                      if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_NAN)) {
-                        _matched_1=true;
-                        it.setConstant(true);
-                        it.setConstantValue(Double.valueOf(Double.NaN));
-                        return;
-                      }
+                String _simpleName = Double.TYPE.getSimpleName();
+                if (Objects.equal(fieldType, _simpleName)) {
+                  _matched=true;
+                  String _text = binary.getText();
+                  boolean _matched_1 = false;
+                  if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_NAN)) {
+                    _matched_1=true;
+                    it.setConstant(true);
+                    it.setConstantValue(Double.valueOf(Double.NaN));
+                    return;
+                  }
+                  if (!_matched_1) {
+                    if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_POSITIVE_INF)) {
+                      _matched_1=true;
+                      it.setConstant(true);
+                      it.setConstantValue(Double.valueOf(Double.POSITIVE_INFINITY));
+                      return;
                     }
-                    if (!_matched_1) {
-                      if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_POSITIVE_INF)) {
-                        _matched_1=true;
-                        it.setConstant(true);
-                        it.setConstantValue(Double.valueOf(Double.POSITIVE_INFINITY));
-                        return;
-                      }
-                    }
-                    if (!_matched_1) {
-                      if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_NEGATIVE_INF)) {
-                        _matched_1=true;
-                        it.setConstant(true);
-                        it.setConstantValue(Double.valueOf(Double.NEGATIVE_INFINITY));
-                        return;
-                      }
+                  }
+                  if (!_matched_1) {
+                    if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_NEGATIVE_INF)) {
+                      _matched_1=true;
+                      it.setConstant(true);
+                      it.setConstantValue(Double.valueOf(Double.NEGATIVE_INFINITY));
+                      return;
                     }
                   }
                 }
@@ -459,13 +437,11 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
                     _matched=true;
                     String _text_1 = binary.getText();
                     boolean _matched_2 = false;
-                    if (!_matched_2) {
-                      if (Objects.equal(_text_1, StubBuildingVisitor.FLOAT_NAN)) {
-                        _matched_2=true;
-                        it.setConstant(true);
-                        it.setConstantValue(Float.valueOf(Float.NaN));
-                        return;
-                      }
+                    if (Objects.equal(_text_1, StubBuildingVisitor.FLOAT_NAN)) {
+                      _matched_2=true;
+                      it.setConstant(true);
+                      it.setConstantValue(Float.valueOf(Float.NaN));
+                      return;
                     }
                     if (!_matched_2) {
                       if (Objects.equal(_text_1, StubBuildingVisitor.FLOAT_POSITIVE_INF)) {
@@ -549,16 +525,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected StringBuilder createMethods(final JvmDeclaredType it, final PsiClass psiClass, final StringBuilder fqn) {
     StringBuilder _xblockexpression = null;
     {
-      boolean _and = false;
-      boolean _isInterface = psiClass.isInterface();
-      if (!_isInterface) {
-        _and = false;
-      } else {
-        boolean _isAnnotationType = psiClass.isAnnotationType();
-        boolean _not = (!_isAnnotationType);
-        _and = _not;
-      }
-      final boolean intf = _and;
+      final boolean intf = (psiClass.isInterface() && (!psiClass.isAnnotationType()));
       PsiMethod[] _methods = psiClass.getMethods();
       for (final PsiMethod method : _methods) {
         final Procedure0 _function = new Procedure0() {
@@ -575,23 +542,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
                   @Override
                   public void apply(final JvmOperation it) {
                     PsiBasedTypeFactory.this.setDefaultValue(it, method);
-                    boolean _and = false;
-                    boolean _and_1 = false;
-                    if (!intf) {
-                      _and_1 = false;
-                    } else {
-                      boolean _isAbstract = it.isAbstract();
-                      boolean _not = (!_isAbstract);
-                      _and_1 = _not;
-                    }
-                    if (!_and_1) {
-                      _and = false;
-                    } else {
-                      boolean _isStatic = it.isStatic();
-                      boolean _not_1 = (!_isStatic);
-                      _and = _not_1;
-                    }
-                    if (_and) {
+                    if (((intf && (!it.isAbstract())) && (!it.isStatic()))) {
                       it.setDefault(true);
                     }
                   }
@@ -656,32 +607,12 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   }
   
   protected boolean hasDefaultConstructor(final PsiClass psiClass) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    boolean _isInterface = psiClass.isInterface();
-    boolean _not = (!_isInterface);
-    if (!_not) {
-      _and_1 = false;
-    } else {
-      boolean _isAnnotationType = psiClass.isAnnotationType();
-      boolean _not_1 = (!_isAnnotationType);
-      _and_1 = _not_1;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      PsiMethod[] _methods = psiClass.getMethods();
-      final Function1<PsiMethod, Boolean> _function = new Function1<PsiMethod, Boolean>() {
-        @Override
-        public Boolean apply(final PsiMethod it) {
-          return Boolean.valueOf(it.isConstructor());
-        }
-      };
-      boolean _exists = IterableExtensions.<PsiMethod>exists(((Iterable<PsiMethod>)Conversions.doWrapArray(_methods)), _function);
-      boolean _not_2 = (!_exists);
-      _and = _not_2;
-    }
-    return _and;
+    return (((!psiClass.isInterface()) && (!psiClass.isAnnotationType())) && (!IterableExtensions.<PsiMethod>exists(((Iterable<PsiMethod>)Conversions.doWrapArray(psiClass.getMethods())), new Function1<PsiMethod, Boolean>() {
+      @Override
+      public Boolean apply(final PsiMethod it) {
+        return Boolean.valueOf(it.isConstructor());
+      }
+    })));
   }
   
   protected void setDefaultValue(final JvmOperation operation, final PsiMethod method) {
@@ -750,12 +681,10 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   
   protected void addValue(final JvmAnnotationValue it, final Object value) {
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof JvmBooleanAnnotationValue) {
-        _matched=true;
-        EList<Boolean> _values = ((JvmBooleanAnnotationValue)it).getValues();
-        this.<Boolean>addUnique(_values, ((Boolean) value));
-      }
+    if (it instanceof JvmBooleanAnnotationValue) {
+      _matched=true;
+      EList<Boolean> _values = ((JvmBooleanAnnotationValue)it).getValues();
+      this.<Boolean>addUnique(_values, ((Boolean) value));
     }
     if (!_matched) {
       if (it instanceof JvmIntAnnotationValue) {
@@ -852,11 +781,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected Integer asInteger(final Object value) {
     Integer _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Integer) {
-        _matched=true;
-        _switchResult = ((Integer)value);
-      }
+    if (value instanceof Integer) {
+      _matched=true;
+      _switchResult = ((Integer)value);
     }
     if (!_matched) {
       if (value instanceof Number) {
@@ -873,11 +800,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected Long asLong(final Object value) {
     Long _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Long) {
-        _matched=true;
-        _switchResult = ((Long)value);
-      }
+    if (value instanceof Long) {
+      _matched=true;
+      _switchResult = ((Long)value);
     }
     if (!_matched) {
       if (value instanceof Number) {
@@ -894,11 +819,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected Short asShort(final Object value) {
     Short _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Short) {
-        _matched=true;
-        _switchResult = ((Short)value);
-      }
+    if (value instanceof Short) {
+      _matched=true;
+      _switchResult = ((Short)value);
     }
     if (!_matched) {
       if (value instanceof Number) {
@@ -915,11 +838,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected Float asFloat(final Object value) {
     Float _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Float) {
-        _matched=true;
-        _switchResult = ((Float)value);
-      }
+    if (value instanceof Float) {
+      _matched=true;
+      _switchResult = ((Float)value);
     }
     if (!_matched) {
       if (value instanceof Number) {
@@ -936,11 +857,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected Double asDouble(final Object value) {
     Double _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Double) {
-        _matched=true;
-        _switchResult = ((Double)value);
-      }
+    if (value instanceof Double) {
+      _matched=true;
+      _switchResult = ((Double)value);
     }
     if (!_matched) {
       if (value instanceof Number) {
@@ -957,11 +876,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected Character asCharacter(final Object value) {
     Character _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Character) {
-        _matched=true;
-        _switchResult = ((Character)value);
-      }
+    if (value instanceof Character) {
+      _matched=true;
+      _switchResult = ((Character)value);
     }
     if (!_matched) {
       if (value instanceof Number) {
@@ -979,11 +896,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected Byte asByte(final Object value) {
     Byte _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof Byte) {
-        _matched=true;
-        _switchResult = ((Byte)value);
-      }
+    if (value instanceof Byte) {
+      _matched=true;
+      _switchResult = ((Byte)value);
     }
     if (!_matched) {
       if (value instanceof Number) {
@@ -1000,11 +915,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected JvmAnnotationValue createAnnotationValue(final PsiType type) {
     JvmAnnotationValue _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(type, PsiType.BOOLEAN)) {
-        _matched=true;
-        _switchResult = this._typesFactory.createJvmBooleanAnnotationValue();
-      }
+    if (Objects.equal(type, PsiType.BOOLEAN)) {
+      _matched=true;
+      _switchResult = this._typesFactory.createJvmBooleanAnnotationValue();
     }
     if (!_matched) {
       if (Objects.equal(type, PsiType.INT)) {
@@ -1093,11 +1006,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected Object computeAnnotationValue(final PsiAnnotationMemberValue value, @Extension final PsiConstantEvaluationHelper helper) {
     Object _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (value instanceof PsiAnnotation) {
-        _matched=true;
-        _switchResult = value;
-      }
+    if (value instanceof PsiAnnotation) {
+      _matched=true;
+      _switchResult = value;
     }
     if (!_matched) {
       if (value instanceof PsiReferenceExpression) {
@@ -1106,11 +1017,9 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
         PsiElement _resolve = ((PsiReferenceExpression)value).resolve();
         final PsiElement r = _resolve;
         boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (r instanceof PsiEnumConstant) {
-            _matched_1=true;
-            _switchResult_1 = r;
-          }
+        if (r instanceof PsiEnumConstant) {
+          _matched_1=true;
+          _switchResult_1 = r;
         }
         if (!_matched_1) {
           _switchResult_1 = helper.computeConstantExpression(value);
@@ -1444,12 +1353,10 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
     JvmUnknownTypeReference _xtrycatchfinallyexpression = null;
     try {
       boolean _matched = false;
-      if (!_matched) {
-        if (psiType instanceof PsiArrayType) {
-          _matched=true;
-          PsiType _componentType = ((PsiArrayType)psiType).getComponentType();
-          return this.createArrayTypeReference(_componentType);
-        }
+      if (psiType instanceof PsiArrayType) {
+        _matched=true;
+        PsiType _componentType = ((PsiArrayType)psiType).getComponentType();
+        return this.createArrayTypeReference(_componentType);
       }
       if (!_matched) {
         if (psiType instanceof PsiClassType) {
@@ -1545,17 +1452,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   }
   
   protected boolean isInnerTypeReference(final PsiClass psiClass) {
-    boolean _and = false;
-    PsiClass _containingClass = psiClass.getContainingClass();
-    boolean _notEquals = (!Objects.equal(_containingClass, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _hasModifierProperty = psiClass.hasModifierProperty(PsiModifier.STATIC);
-      boolean _not = (!_hasModifierProperty);
-      _and = _not;
-    }
-    return _and;
+    return ((!Objects.equal(psiClass.getContainingClass(), null)) && (!psiClass.hasModifierProperty(PsiModifier.STATIC)));
   }
   
   protected JvmTypeReference _createTypeArgument(final PsiType type) {
@@ -1641,17 +1538,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected void createNestedTypes(final JvmDeclaredType it, final PsiClass psiClass, final StringBuilder fqn) {
     PsiClass[] _innerClasses = psiClass.getInnerClasses();
     for (final PsiClass innerClass : _innerClasses) {
-      boolean _and = false;
-      boolean _isAnonymous = this.isAnonymous(innerClass);
-      boolean _not = (!_isAnonymous);
-      if (!_not) {
-        _and = false;
-      } else {
-        boolean _isSynthetic = this.isSynthetic(innerClass);
-        boolean _not_1 = (!_isSynthetic);
-        _and = _not_1;
-      }
-      if (_and) {
+      if (((!this.isAnonymous(innerClass)) && (!this.isSynthetic(innerClass)))) {
         final Procedure0 _function = new Procedure0() {
           @Override
           public void apply() {
@@ -1676,12 +1563,10 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
   protected void setVisibility(final JvmMember it, final PsiModifierListOwner modifierListOwner) {
     JvmVisibility _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      boolean _hasModifierProperty = modifierListOwner.hasModifierProperty(PsiModifier.PRIVATE);
-      if (_hasModifierProperty) {
-        _matched=true;
-        _switchResult = JvmVisibility.PRIVATE;
-      }
+    boolean _hasModifierProperty = modifierListOwner.hasModifierProperty(PsiModifier.PRIVATE);
+    if (_hasModifierProperty) {
+      _matched=true;
+      _switchResult = JvmVisibility.PRIVATE;
     }
     if (!_matched) {
       boolean _hasModifierProperty_1 = modifierListOwner.hasModifierProperty(PsiModifier.PACKAGE_LOCAL);

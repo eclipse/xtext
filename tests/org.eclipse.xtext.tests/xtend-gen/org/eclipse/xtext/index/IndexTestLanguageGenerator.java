@@ -18,19 +18,17 @@ public class IndexTestLanguageGenerator extends AbstractGenerator {
       EObject _next = iter.next();
       final EObject e = _next;
       boolean _matched = false;
-      if (!_matched) {
-        if (e instanceof Entity) {
-          _matched=true;
-          String _name = ((Entity)e).getName();
-          String _plus = (_name + ".txt");
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("Hello ");
-          String _name_1 = ((Entity)e).getName();
-          _builder.append(_name_1, "");
-          _builder.append("!");
-          _builder.newLineIfNotEmpty();
-          fsa.generateFile(_plus, _builder);
-        }
+      if (e instanceof Entity) {
+        _matched=true;
+        String _name = ((Entity)e).getName();
+        String _plus = (_name + ".txt");
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Hello ");
+        String _name_1 = ((Entity)e).getName();
+        _builder.append(_name_1, "");
+        _builder.append("!");
+        _builder.newLineIfNotEmpty();
+        fsa.generateFile(_plus, _builder);
       }
     }
   }

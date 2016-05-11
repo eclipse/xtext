@@ -186,16 +186,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     EList<Adapter> _eAdapters = _resourceSet.eAdapters();
     Iterable<ResourceStorageProviderAdapter> _filter = Iterables.<ResourceStorageProviderAdapter>filter(_eAdapters, ResourceStorageProviderAdapter.class);
     final ResourceStorageProviderAdapter stateProvider = IterableExtensions.<ResourceStorageProviderAdapter>head(_filter);
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(stateProvider, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      ResourceStorageLoadable _resourceStorageLoadable = stateProvider.getResourceStorageLoadable(resource);
-      boolean _notEquals_1 = (!Objects.equal(_resourceStorageLoadable, null));
-      _and = _notEquals_1;
-    }
-    if (_and) {
+    if (((!Objects.equal(stateProvider, null)) && (!Objects.equal(stateProvider.getResourceStorageLoadable(resource), null)))) {
       return true;
     }
     ResourceSet _resourceSet_1 = resource.getResourceSet();
@@ -215,16 +206,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     final AbstractFileSystemAccess2 fsa = this.getFileSystemAccess(resource);
     final String outputRelativePath = this.computeOutputPath(resource);
     final URI uri = fsa.getURI(outputRelativePath);
-    boolean _and_1 = false;
-    if (!(uri != null)) {
-      _and_1 = false;
-    } else {
-      ResourceSet _resourceSet_2 = resource.getResourceSet();
-      URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
-      boolean _exists_1 = _uRIConverter_1.exists(uri, null);
-      _and_1 = _exists_1;
-    }
-    return _and_1;
+    return ((uri != null) && resource.getResourceSet().getURIConverter().exists(uri, null));
   }
   
   protected AbstractFileSystemAccess2 getFileSystemAccess(final StorageAwareResource resource) {

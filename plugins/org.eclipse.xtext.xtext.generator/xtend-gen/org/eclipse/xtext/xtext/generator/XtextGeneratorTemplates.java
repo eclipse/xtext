@@ -340,25 +340,13 @@ public class XtextGeneratorTemplates {
   private CharSequence getBindMethodName(final GuiceModuleAccess.Binding it) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _and = false;
-      GuiceModuleAccess.BindValue _value = it.getValue();
-      boolean _isProvider = _value.isProvider();
-      boolean _not = (!_isProvider);
-      if (!_not) {
-        _and = false;
-      } else {
-        GuiceModuleAccess.BindValue _value_1 = it.getValue();
-        List<Object> _statements = _value_1.getStatements();
-        boolean _isEmpty = _statements.isEmpty();
-        _and = _isEmpty;
-      }
-      if (_and) {
+      if (((!it.getValue().isProvider()) && it.getValue().getStatements().isEmpty())) {
         _builder.append("bind");
       } else {
-        GuiceModuleAccess.BindValue _value_2 = it.getValue();
-        List<Object> _statements_1 = _value_2.getStatements();
-        boolean _isEmpty_1 = _statements_1.isEmpty();
-        if (_isEmpty_1) {
+        GuiceModuleAccess.BindValue _value = it.getValue();
+        List<Object> _statements = _value.getStatements();
+        boolean _isEmpty = _statements.isEmpty();
+        if (_isEmpty) {
           _builder.append("provide");
         } else {
           _builder.append("configure");
@@ -382,19 +370,7 @@ public class XtextGeneratorTemplates {
     }
     _builder.append(_elvis, "");
     {
-      boolean _and_1 = false;
-      GuiceModuleAccess.BindValue _value_3 = it.getValue();
-      Object _expression = _value_3.getExpression();
-      boolean _tripleNotEquals = (_expression != null);
-      if (!_tripleNotEquals) {
-        _and_1 = false;
-      } else {
-        GuiceModuleAccess.BindValue _value_4 = it.getValue();
-        boolean _isProvider_1 = _value_4.isProvider();
-        boolean _not_1 = (!_isProvider_1);
-        _and_1 = _not_1;
-      }
-      if (_and_1) {
+      if (((it.getValue().getExpression() != null) && (!it.getValue().isProvider()))) {
         _builder.append("ToInstance");
       }
     }
@@ -420,19 +396,7 @@ public class XtextGeneratorTemplates {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         {
-          boolean _and = false;
-          GuiceModuleAccess.BindValue _value = it.getValue();
-          boolean _isProvider = _value.isProvider();
-          boolean _not = (!_isProvider);
-          if (!_not) {
-            _and = false;
-          } else {
-            GuiceModuleAccess.BindValue _value_1 = it.getValue();
-            List<Object> _statements = _value_1.getStatements();
-            boolean _isEmpty = _statements.isEmpty();
-            _and = _isEmpty;
-          }
-          if (_and) {
+          if (((!it.getValue().isProvider()) && it.getValue().getStatements().isEmpty())) {
             _builder.append("// contributed by ");
             String _contributedBy = it.getContributedBy();
             _builder.append(_contributedBy, "");
@@ -455,8 +419,8 @@ public class XtextGeneratorTemplates {
             _builder.newLineIfNotEmpty();
             _builder.append("public ");
             {
-              GuiceModuleAccess.BindValue _value_2 = it.getValue();
-              Object _expression = _value_2.getExpression();
+              GuiceModuleAccess.BindValue _value = it.getValue();
+              Object _expression = _value.getExpression();
               boolean _tripleEquals = (_expression == null);
               if (_tripleEquals) {
                 _builder.append("Class<? extends ");
@@ -478,16 +442,16 @@ public class XtextGeneratorTemplates {
             _builder.append("\t");
             _builder.append("return ");
             {
-              GuiceModuleAccess.BindValue _value_3 = it.getValue();
-              Object _expression_1 = _value_3.getExpression();
+              GuiceModuleAccess.BindValue _value_1 = it.getValue();
+              Object _expression_1 = _value_1.getExpression();
               boolean _tripleNotEquals = (_expression_1 != null);
               if (_tripleNotEquals) {
-                GuiceModuleAccess.BindValue _value_4 = it.getValue();
-                Object _expression_2 = _value_4.getExpression();
+                GuiceModuleAccess.BindValue _value_2 = it.getValue();
+                Object _expression_2 = _value_2.getExpression();
                 _builder.append(_expression_2, "\t");
               } else {
-                GuiceModuleAccess.BindValue _value_5 = it.getValue();
-                TypeReference _type_2 = _value_5.getType();
+                GuiceModuleAccess.BindValue _value_3 = it.getValue();
+                TypeReference _type_2 = _value_3.getType();
                 _builder.append(_type_2, "\t");
                 _builder.append(".class");
               }
@@ -497,10 +461,10 @@ public class XtextGeneratorTemplates {
             _builder.append("}");
             _builder.newLine();
           } else {
-            GuiceModuleAccess.BindValue _value_6 = it.getValue();
-            List<Object> _statements_1 = _value_6.getStatements();
-            boolean _isEmpty_1 = _statements_1.isEmpty();
-            if (_isEmpty_1) {
+            GuiceModuleAccess.BindValue _value_4 = it.getValue();
+            List<Object> _statements = _value_4.getStatements();
+            boolean _isEmpty = _statements.isEmpty();
+            if (_isEmpty) {
               _builder.append("// contributed by ");
               String _contributedBy_1 = it.getContributedBy();
               _builder.append(_contributedBy_1, "");
@@ -523,8 +487,8 @@ public class XtextGeneratorTemplates {
               _builder.newLineIfNotEmpty();
               _builder.append("public ");
               {
-                GuiceModuleAccess.BindValue _value_7 = it.getValue();
-                Object _expression_3 = _value_7.getExpression();
+                GuiceModuleAccess.BindValue _value_5 = it.getValue();
+                Object _expression_3 = _value_5.getExpression();
                 boolean _equals = Objects.equal(_expression_3, null);
                 if (_equals) {
                   _builder.append("Class<? extends ");
@@ -551,16 +515,16 @@ public class XtextGeneratorTemplates {
               _builder.append("\t");
               _builder.append("return ");
               {
-                GuiceModuleAccess.BindValue _value_8 = it.getValue();
-                Object _expression_4 = _value_8.getExpression();
+                GuiceModuleAccess.BindValue _value_6 = it.getValue();
+                Object _expression_4 = _value_6.getExpression();
                 boolean _notEquals = (!Objects.equal(_expression_4, null));
                 if (_notEquals) {
-                  GuiceModuleAccess.BindValue _value_9 = it.getValue();
-                  Object _expression_5 = _value_9.getExpression();
+                  GuiceModuleAccess.BindValue _value_7 = it.getValue();
+                  Object _expression_5 = _value_7.getExpression();
                   _builder.append(_expression_5, "\t");
                 } else {
-                  GuiceModuleAccess.BindValue _value_10 = it.getValue();
-                  TypeReference _type_5 = _value_10.getType();
+                  GuiceModuleAccess.BindValue _value_8 = it.getValue();
+                  TypeReference _type_5 = _value_8.getType();
                   _builder.append(_type_5, "\t");
                   _builder.append(".class");
                 }
@@ -582,9 +546,9 @@ public class XtextGeneratorTemplates {
               _builder.append(" binder) {");
               _builder.newLineIfNotEmpty();
               {
-                GuiceModuleAccess.BindValue _value_11 = it.getValue();
-                List<Object> _statements_2 = _value_11.getStatements();
-                for(final Object statement : _statements_2) {
+                GuiceModuleAccess.BindValue _value_9 = it.getValue();
+                List<Object> _statements_1 = _value_9.getStatements();
+                for(final Object statement : _statements_1) {
                   _builder.append("\t");
                   _builder.append(statement, "\t");
                   _builder.newLineIfNotEmpty();
@@ -862,8 +826,8 @@ public class XtextGeneratorTemplates {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public ");
-          TypeReference _eclipsePluginGenModule_1 = XtextGeneratorTemplates.this.naming.getEclipsePluginGenModule(it);
-          String _simpleName_1 = _eclipsePluginGenModule_1.getSimpleName();
+          TypeReference _eclipsePluginModule_1 = XtextGeneratorTemplates.this.naming.getEclipsePluginModule(it);
+          String _simpleName_1 = _eclipsePluginModule_1.getSimpleName();
           _builder.append(_simpleName_1, "\t");
           _builder.append("(");
           TypeReference _typeRef = TypeReference.typeRef("org.eclipse.ui.plugin.AbstractUIPlugin");

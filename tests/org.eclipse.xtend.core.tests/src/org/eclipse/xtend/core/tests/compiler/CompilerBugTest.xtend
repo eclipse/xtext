@@ -412,12 +412,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    Number _switchResult = null;
 			    final Number n = this.n;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (n instanceof Integer) {
-			        _matched=true;
-			        Double _double = new Double(5);
-			        _switchResult = this.n = _double;
-			      }
+			    if (n instanceof Integer) {
+			      _matched=true;
+			      Double _double = new Double(5);
+			      _switchResult = this.n = _double;
 			    }
 			    return _switchResult;
 			  }
@@ -456,19 +454,17 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      A tmp = null;
 			      A _switchResult = null;
 			      boolean _matched = false;
-			      if (!_matched) {
-			        if (tmp instanceof B) {
-			          _matched=true;
-			          A _elvis = null;
-			          B _bar = this.bar(tmp);
-			          if (_bar != null) {
-			            _elvis = _bar;
-			          } else {
-			            C _baz = this.baz(tmp);
-			            _elvis = _baz;
-			          }
-			          _switchResult = tmp = _elvis;
+			      if (tmp instanceof B) {
+			        _matched=true;
+			        A _elvis = null;
+			        B _bar = this.bar(tmp);
+			        if (_bar != null) {
+			          _elvis = _bar;
+			        } else {
+			          C _baz = this.baz(tmp);
+			          _elvis = _baz;
 			        }
+			        _switchResult = tmp = _elvis;
 			      }
 			      _xblockexpression = _switchResult;
 			    }
@@ -2144,11 +2140,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    String _switchResult = null;
 			    final String _switchValue = "a";
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (Objects.equal(_switchValue, "b")) {
-			        _matched=true;
-			        _switchResult = "a";
-			      }
+			    if (Objects.equal(_switchValue, "b")) {
+			      _matched=true;
+			      _switchResult = "a";
 			    }
 			    if (!_matched) {
 			      if (Objects.equal(_switchValue, "c")) {
@@ -2191,11 +2185,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    String _switchResult = null;
 			    final String _switchValue = "a";
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (Objects.equal(_switchValue, "b")) {
-			        _matched=true;
-			        _switchResult = "a";
-			      }
+			    if (Objects.equal(_switchValue, "b")) {
+			      _matched=true;
+			      _switchResult = "a";
 			    }
 			    if (!_matched) {
 			      if (Objects.equal(_switchValue, "c")) {
@@ -2235,12 +2227,10 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public void m(final ITreeAppendable appendable, final Double it) {
 			    String _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      boolean _isNaN = Double.isNaN((it).doubleValue());
-			      if (_isNaN) {
-			        _matched=true;
-			        _switchResult = "Double.NaN";
-			      }
+			    boolean _isNaN = Double.isNaN((it).doubleValue());
+			    if (_isNaN) {
+			      _matched=true;
+			      _switchResult = "Double.NaN";
 			    }
 			    if (!_matched) {
 			      if (Objects.equal(it, Double.POSITIVE_INFINITY)) {
@@ -2403,11 +2393,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <X extends Object> Option<X> map(final Function1<? super T, ? extends X> f) {
 			    Option<X> _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (this instanceof Some) {
-			        _matched=true;
-			        _switchResult = new Some<X>();
-			      }
+			    if (this instanceof Some) {
+			      _matched=true;
+			      _switchResult = new Some<X>();
 			    }
 			    if (!_matched) {
 			      if (this instanceof None) {
@@ -2437,11 +2425,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public <X extends Object> C<X> m() {
 			    E<X> _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (this instanceof E) {
-			        _matched=true;
-			        _switchResult = new E<X>();
-			      }
+			    if (this instanceof E) {
+			      _matched=true;
+			      _switchResult = new E<X>();
 			    }
 			    return _switchResult;
 			  }
@@ -2620,11 +2606,9 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  protected String testSwitch(final Object e) {
 			    Object _switchResult = null;
 			    boolean _matched = false;
-			    if (!_matched) {
-			      if (e instanceof String) {
-			        _matched=true;
-			        return "";
-			      }
+			    if (e instanceof String) {
+			      _matched=true;
+			      return "";
 			    }
 			    if (!_matched) {
 			      _switchResult = null;

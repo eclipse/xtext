@@ -143,11 +143,9 @@ public class ASTParserFactory {
   public static int asJLS(final String javaVersion) {
     int _switchResult = (int) 0;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(javaVersion, "1.7")) {
-        _matched=true;
-        _switchResult = 4;
-      }
+    if (Objects.equal(javaVersion, "1.7")) {
+      _matched=true;
+      _switchResult = 4;
     }
     if (!_matched) {
       if (Objects.equal(javaVersion, "1.8")) {

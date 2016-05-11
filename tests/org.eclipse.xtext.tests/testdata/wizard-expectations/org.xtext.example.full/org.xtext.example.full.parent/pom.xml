@@ -8,7 +8,7 @@
 
 	<properties>
 		<tycho-version>0.23.1</tycho-version>
-		<xtextVersion>2.9.0-SNAPSHOT</xtextVersion>
+		<xtextVersion>2.10.0-SNAPSHOT</xtextVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -18,6 +18,8 @@
 		<module>org.xtext.example.full.ide</module>
 		<module>org.xtext.example.full.ui</module>
 		<module>org.xtext.example.full.target</module>
+		<module>org.xtext.example.full.feature</module>
+		<module>org.xtext.example.full.repository</module>
 		<module>org.xtext.example.full.ui.tests</module>
 	</modules>
 	<build>
@@ -27,6 +29,47 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>attach-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -108,6 +151,26 @@
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-resources-plugin
+										</artifactId>
+										<versionRange>
+											[2.4.3,)
+										</versionRange>
+										<goals>
+											<goal>resources</goal>
+											<goal>testResources</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
 											org.codehaus.mojo
 										</groupId>
 										<artifactId>
@@ -159,6 +222,7 @@
 										</versionRange>
 										<goals>
 											<goal>build-qualifier</goal>
+											<goal>build-qualifier-aggregator</goal>
 											<goal>validate-id</goal>
 											<goal>validate-version</goal>
 										</goals>

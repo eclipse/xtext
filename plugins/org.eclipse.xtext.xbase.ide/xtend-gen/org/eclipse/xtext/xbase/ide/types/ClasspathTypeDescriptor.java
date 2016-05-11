@@ -57,23 +57,12 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
     try {
       ClasspathTypeDescriptor _xblockexpression = null;
       {
-        boolean _and = false;
-        boolean _isEmpty = packagePrefixes.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (!_not) {
-          _and = false;
-        } else {
-          final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-            @Override
-            public Boolean apply(final String it) {
-              return Boolean.valueOf(packageName.startsWith(it));
-            }
-          };
-          boolean _exists = IterableExtensions.<String>exists(packagePrefixes, _function);
-          boolean _not_1 = (!_exists);
-          _and = _not_1;
-        }
-        if (_and) {
+        if (((!packagePrefixes.isEmpty()) && (!IterableExtensions.<String>exists(packagePrefixes, new Function1<String, Boolean>() {
+          @Override
+          public Boolean apply(final String it) {
+            return Boolean.valueOf(packageName.startsWith(it));
+          }
+        })))) {
           return null;
         }
         final String fileName = file.getName();
@@ -97,8 +86,8 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
                 }
               }
               String _xifexpression_1 = null;
-              boolean _isEmpty_1 = packageName.isEmpty();
-              if (_isEmpty_1) {
+              boolean _isEmpty = packageName.isEmpty();
+              if (_isEmpty) {
                 _xifexpression_1 = simpleNames;
               } else {
                 _xifexpression_1 = ((packageName + ".") + simpleNames);
@@ -150,23 +139,12 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
               int _minus = (_length - 6);
               String _substring = filePath.substring(0, _minus);
               final String name = _substring.replace("/", ".");
-              boolean _and = false;
-              boolean _isEmpty = packagePrefixes.isEmpty();
-              boolean _not = (!_isEmpty);
-              if (!_not) {
-                _and = false;
-              } else {
-                final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-                  @Override
-                  public Boolean apply(final String it) {
-                    return Boolean.valueOf(name.startsWith(it));
-                  }
-                };
-                boolean _exists = IterableExtensions.<String>exists(packagePrefixes, _function);
-                boolean _not_1 = (!_exists);
-                _and = _not_1;
-              }
-              if (_and) {
+              if (((!packagePrefixes.isEmpty()) && (!IterableExtensions.<String>exists(packagePrefixes, new Function1<String, Boolean>() {
+                @Override
+                public Boolean apply(final String it) {
+                  return Boolean.valueOf(name.startsWith(it));
+                }
+              })))) {
                 return null;
               }
               int _lastIndexOf = name.lastIndexOf(".");

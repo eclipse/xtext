@@ -26,7 +26,9 @@ abstract class AbstractCachedService<T extends IServiceResult> {
 	}
 
 	/**
-	 * Perform the actual computations to obtain a result.
+	 * Perform the actual computations to obtain a result. This method should not be called
+	 * directly from the service dispatcher; use {@link #getResult(XtextWebDocumentAccess)} instead
+	 * in order to avoid duplicate computations.
 	 */
 	def T compute(IXtextWebDocument it, CancelIndicator cancelIndicator)
 	

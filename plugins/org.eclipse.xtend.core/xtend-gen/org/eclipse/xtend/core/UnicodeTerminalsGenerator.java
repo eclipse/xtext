@@ -55,16 +55,7 @@ class UnicodeTerminalsGenerator {
     final Function1<Integer, Boolean> _function_1 = new Function1<Integer, Boolean>() {
       @Override
       public Boolean apply(final Integer it) {
-        boolean _and = false;
-        boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart((it).intValue());
-        if (!_isJavaIdentifierPart) {
-          _and = false;
-        } else {
-          boolean _isJavaIdentifierStart = Character.isJavaIdentifierStart((it).intValue());
-          boolean _not = (!_isJavaIdentifierStart);
-          _and = _not;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((Character.isJavaIdentifierPart((it).intValue()) && (!Character.isJavaIdentifierStart((it).intValue()))));
       }
     };
     StringWriter _generateUnicodeRules_1 = UnicodeTerminalsGenerator.generateUnicodeRules(_function_1);

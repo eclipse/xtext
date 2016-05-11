@@ -707,7 +707,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append("</visibleWhen>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("</command>  ");
+    _builder.append("</command>");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("</menuContribution>");
@@ -737,7 +737,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append("</visibleWhen>");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("</command>  ");
+    _builder.append("</command>");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("</menuContribution>");
@@ -764,7 +764,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
     _builder.append("</visibleWhen>");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("</command>  ");
+    _builder.append("</command>");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("</menuContribution>");

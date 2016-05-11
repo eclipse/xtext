@@ -93,17 +93,7 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
           VirtualFile _file = it.getFile();
           String _path = _file.getPath();
           final String urlToCheck = _path.replace("file://", "");
-          boolean _and = false;
-          String _outputDirectory = xtendConfig.getOutputDirectory();
-          boolean _equals = Objects.equal(_outputDirectory, urlToCheck);
-          if (!_equals) {
-            _and = false;
-          } else {
-            boolean _isTestSource = it.isTestSource();
-            boolean _not = (!_isTestSource);
-            _and = _not;
-          }
-          _xblockexpression = _and;
+          _xblockexpression = (Objects.equal(xtendConfig.getOutputDirectory(), urlToCheck) && (!it.isTestSource()));
         }
         return Boolean.valueOf(_xblockexpression);
       }
@@ -217,17 +207,7 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
           VirtualFile _file = it.getFile();
           String _path = _file.getPath();
           final String urlToCheck = _path.replace("file://", "");
-          boolean _and = false;
-          String _outputDirectory = xtendConfig.getOutputDirectory();
-          boolean _equals = Objects.equal(_outputDirectory, urlToCheck);
-          if (!_equals) {
-            _and = false;
-          } else {
-            boolean _isTestSource = it.isTestSource();
-            boolean _not = (!_isTestSource);
-            _and = _not;
-          }
-          _xblockexpression = _and;
+          _xblockexpression = (Objects.equal(xtendConfig.getOutputDirectory(), urlToCheck) && (!it.isTestSource()));
         }
         return Boolean.valueOf(_xblockexpression);
       }

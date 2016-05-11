@@ -281,7 +281,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 	
 	def handleRightHandSide(Assignment a, Type type) {
-		if (type.needPrimitiveCast) {
+		if (type.needPrimitiveCast && !(a.rightHandSide instanceof ArrayCreation)) {
 			appendToBuffer('(')
 			a.getRightHandSide().accept(this)
 			appendToBuffer(''') as «type»''')
@@ -564,7 +564,7 @@ class JavaASTFlattener extends ASTVisitor {
 		if (getInitializer() != null) {
 			appendToBuffer("=")
 			val type = findDeclaredType(name)
-			if (type.needPrimitiveCast) {
+			if (type.needPrimitiveCast && !hasDimensions(it)) {
 				appendToBuffer('(')
 				getInitializer.accept(this)
 				appendToBuffer(''') as «type»''')
@@ -578,6 +578,15 @@ class JavaASTFlattener extends ASTVisitor {
 			}
 		}
 		return false
+	}
+	
+	def hasDimensions(VariableDeclarationFragment fragment) {
+		if(java8orHigher) {
+			var dimensions = fragment.genericChildListProperty("extraDimensions2")
+			return !dimensions.nullOrEmpty
+		} else {
+			return fragment.getExtraDimensions() > 0
+		}
 	}
 
 	override boolean visit(ConditionalExpression node) {
@@ -701,6 +710,16 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer("(")
 		parameters.reverseView.forEach [ SingleVariableDeclaration p |
 			if (body.isAssignedInBody(p.name)) {
+				if (isConstructor && !body.statements.empty) {
+					val firstInBody = body.findAssignmentsInBlock(p).head
+					if (firstInBody !== null) {
+						if (firstInBody.findParentOfType(ConstructorInvocation) !== null) {
+							p.addProblem("Final parameter modified in constructor call")
+						} else if (firstInBody.findParentOfType(SuperConstructorInvocation) !== null) {
+							p.addProblem("Final parameter modified in super constructor call")
+						}
+					}
+				}
 				val varFrag = p.getAST().newVariableDeclarationFragment
 				varFrag.name = p.getAST().newSimpleName(p.name.toString)
 				p.name = p.getAST().newSimpleName(p.name + "_finalParam_")
@@ -709,6 +728,7 @@ class JavaASTFlattener extends ASTVisitor {
 				val typeCopy = p.getAST().createInstance(SimpleType) as Type
 				varDecl.type = typeCopy
 				body.statements.add(0, varDecl)
+
 			}
 		]
 		parameters.visitAllSeparatedByComma

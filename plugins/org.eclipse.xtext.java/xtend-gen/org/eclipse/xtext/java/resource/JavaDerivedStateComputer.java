@@ -88,31 +88,34 @@ public class JavaDerivedStateComputer {
     final Parser parser = new Parser(_problemReporter, true);
     final CompilationResult compilationResult = new CompilationResult(compilationUnit, 0, 1, (-1));
     final CompilationUnitDeclaration result = parser.dietParse(compilationUnit, compilationResult);
-    for (final TypeDeclaration type : result.types) {
-      {
-        ImportReference _currentPackage = result.currentPackage;
-        char[][] _importName = null;
-        if (_currentPackage!=null) {
-          _importName=_currentPackage.getImportName();
+    boolean _notEquals = (!Objects.equal(result.types, null));
+    if (_notEquals) {
+      for (final TypeDeclaration type : result.types) {
+        {
+          ImportReference _currentPackage = result.currentPackage;
+          char[][] _importName = null;
+          if (_currentPackage!=null) {
+            _importName=_currentPackage.getImportName();
+          }
+          List<String> _map = null;
+          if (((List<char[]>)Conversions.doWrapArray(_importName))!=null) {
+            final Function1<char[], String> _function = new Function1<char[], String>() {
+              @Override
+              public String apply(final char[] it) {
+                return String.valueOf(it);
+              }
+            };
+            _map=ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_importName)), _function);
+          }
+          String _join = null;
+          if (_map!=null) {
+            _join=IterableExtensions.join(_map, ".");
+          }
+          final String packageName = _join;
+          final JvmDeclaredType jvmType = this.createType(type, packageName);
+          EList<EObject> _contents = resource.getContents();
+          _contents.add(jvmType);
         }
-        List<String> _map = null;
-        if (((List<char[]>)Conversions.doWrapArray(_importName))!=null) {
-          final Function1<char[], String> _function = new Function1<char[], String>() {
-            @Override
-            public String apply(final char[] it) {
-              return String.valueOf(it);
-            }
-          };
-          _map=ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_importName)), _function);
-        }
-        String _join = null;
-        if (_map!=null) {
-          _join=IterableExtensions.join(_map, ".");
-        }
-        final String packageName = _join;
-        final JvmDeclaredType jvmType = this.createType(type, packageName);
-        EList<EObject> _contents = resource.getContents();
-        _contents.add(jvmType);
       }
     }
   }
@@ -247,15 +250,7 @@ public class JavaDerivedStateComputer {
       URI _uRI = resource.getURI();
       URI _trimFileExtension = _uRI.trimFileExtension();
       final String name = _trimFileExtension.lastSegment();
-      boolean _or = false;
-      boolean _equals = Objects.equal(name, "package-info");
-      if (_equals) {
-        _or = true;
-      } else {
-        boolean _equals_1 = Objects.equal(name, "module-info");
-        _or = _equals_1;
-      }
-      _xblockexpression = _or;
+      _xblockexpression = (Objects.equal(name, "package-info") || Objects.equal(name, "module-info"));
     }
     return _xblockexpression;
   }

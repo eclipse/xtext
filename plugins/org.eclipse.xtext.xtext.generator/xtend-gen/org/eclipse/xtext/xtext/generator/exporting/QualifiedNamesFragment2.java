@@ -35,5 +35,12 @@ public class QualifiedNamesFragment2 extends AbstractXtextGeneratorFragment {
     IXtextGeneratorLanguage _language_1 = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language_1.getEclipsePluginGenModule();
     _addTypeToType_2.contributeTo(_eclipsePluginGenModule);
+    GuiceModuleAccess.BindingFactory _bindingFactory_2 = new GuiceModuleAccess.BindingFactory();
+    TypeReference _typeRef_6 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher");
+    TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher");
+    GuiceModuleAccess.BindingFactory _addTypeToType_3 = _bindingFactory_2.addTypeToType(_typeRef_6, _typeRef_7);
+    IXtextGeneratorLanguage _language_2 = this.getLanguage();
+    GuiceModuleAccess _webGenModule = _language_2.getWebGenModule();
+    _addTypeToType_3.contributeTo(_webGenModule);
   }
 }

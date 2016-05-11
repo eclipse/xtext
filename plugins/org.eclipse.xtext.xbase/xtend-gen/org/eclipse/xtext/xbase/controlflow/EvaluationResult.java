@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import java.util.Arrays;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -159,47 +158,15 @@ class EvaluationResult implements IConstantEvaluationResult<Object> {
   }
   
   private Object _equalValue(final XTypeLiteral myValue, final XTypeLiteral otherTypeLiteral) {
-    boolean _and = false;
-    JvmType _type = myValue.getType();
-    JvmType _type_1 = otherTypeLiteral.getType();
-    boolean _equals = Objects.equal(_type, _type_1);
-    if (!_equals) {
-      _and = false;
-    } else {
-      EList<String> _arrayDimensions = myValue.getArrayDimensions();
-      EList<String> _arrayDimensions_1 = otherTypeLiteral.getArrayDimensions();
-      boolean _equals_1 = Objects.equal(_arrayDimensions, _arrayDimensions_1);
-      _and = _equals_1;
-    }
-    return Boolean.valueOf(_and);
+    return Boolean.valueOf((Objects.equal(myValue.getType(), otherTypeLiteral.getType()) && Objects.equal(myValue.getArrayDimensions(), otherTypeLiteral.getArrayDimensions())));
   }
   
   private Object _equalValue(final JvmType myValue, final XTypeLiteral otherTypeLiteral) {
-    boolean _and = false;
-    JvmType _type = otherTypeLiteral.getType();
-    boolean _equals = Objects.equal(myValue, _type);
-    if (!_equals) {
-      _and = false;
-    } else {
-      EList<String> _arrayDimensions = otherTypeLiteral.getArrayDimensions();
-      boolean _isEmpty = _arrayDimensions.isEmpty();
-      _and = _isEmpty;
-    }
-    return Boolean.valueOf(_and);
+    return Boolean.valueOf((Objects.equal(myValue, otherTypeLiteral.getType()) && otherTypeLiteral.getArrayDimensions().isEmpty()));
   }
   
   private Object _equalValue(final XTypeLiteral myValue, final JvmType otherType) {
-    boolean _and = false;
-    JvmType _type = myValue.getType();
-    boolean _equals = Objects.equal(_type, otherType);
-    if (!_equals) {
-      _and = false;
-    } else {
-      EList<String> _arrayDimensions = myValue.getArrayDimensions();
-      boolean _isEmpty = _arrayDimensions.isEmpty();
-      _and = _isEmpty;
-    }
-    return Boolean.valueOf(_and);
+    return Boolean.valueOf((Objects.equal(myValue.getType(), otherType) && myValue.getArrayDimensions().isEmpty()));
   }
   
   private Object _equalValue(final JvmType myValue, final ThisReference otherValue) {

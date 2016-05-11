@@ -69,11 +69,9 @@ public class TraceRegionToStringTester extends AbstractTraceRegionToString {
   protected String getRemoteText(final SourceRelativeURI uri) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(uri, this.uri1)) {
-        _matched=true;
-        _switchResult = this.remote1;
-      }
+    if (Objects.equal(uri, this.uri1)) {
+      _matched=true;
+      _switchResult = this.remote1;
     }
     if (!_matched) {
       if (Objects.equal(uri, this.uri2)) {

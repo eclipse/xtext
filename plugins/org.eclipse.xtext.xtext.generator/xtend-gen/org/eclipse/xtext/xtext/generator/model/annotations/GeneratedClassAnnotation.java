@@ -30,15 +30,7 @@ public class GeneratedClassAnnotation implements IClassAnnotation {
   @Override
   public CharSequence generate() {
     final StringBuilder stringBuilder = new StringBuilder("@Generated(");
-    boolean _or = false;
-    if (this.includeDate) {
-      _or = true;
-    } else {
-      boolean _isEmpty = Strings.isEmpty(this.comment);
-      boolean _not = (!_isEmpty);
-      _or = _not;
-    }
-    if (_or) {
+    if ((this.includeDate || (!Strings.isEmpty(this.comment)))) {
       this.operator_add(stringBuilder, "value = ");
     }
     this.operator_add(stringBuilder, "\"");
@@ -53,9 +45,9 @@ public class GeneratedClassAnnotation implements IClassAnnotation {
       this.operator_add(stringBuilder, date);
       this.operator_add(stringBuilder, "\"");
     }
-    boolean _isEmpty_1 = Strings.isEmpty(this.comment);
-    boolean _not_1 = (!_isEmpty_1);
-    if (_not_1) {
+    boolean _isEmpty = Strings.isEmpty(this.comment);
+    boolean _not = (!_isEmpty);
+    if (_not) {
       final String convertedComment = Strings.convertToJavaString(this.comment);
       this.operator_add(stringBuilder, ", comments = \"");
       this.operator_add(stringBuilder, convertedComment);

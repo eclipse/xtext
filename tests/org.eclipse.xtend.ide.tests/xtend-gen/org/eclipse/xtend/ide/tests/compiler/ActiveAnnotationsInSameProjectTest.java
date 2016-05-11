@@ -528,16 +528,7 @@ public class ActiveAnnotationsInSameProjectTest extends AbstractXtendUITestCase 
       for (final IMarker iMarker : findMarkers) {
         {
           final String message = MarkerUtilities.getMessage(iMarker);
-          boolean _and = false;
-          int _severity = MarkerUtilities.getSeverity(iMarker);
-          boolean _equals = (_severity == IMarker.SEVERITY_ERROR);
-          if (!_equals) {
-            _and = false;
-          } else {
-            boolean _contains = message.contains(msgPart);
-            _and = _contains;
-          }
-          if (_and) {
+          if (((MarkerUtilities.getSeverity(iMarker) == IMarker.SEVERITY_ERROR) && message.contains(msgPart))) {
             return;
           }
         }

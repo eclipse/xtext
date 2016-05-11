@@ -29,14 +29,14 @@ public class BacktrackingLexerTestLanguageTokenTypeProvider implements TokenType
 	private static final TokenSet STRING_TOKENS = TokenSet.EMPTY;
 
 	@Override
-    public int getAntlrType(IElementType iElementType) {
-        return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex() : Token.INVALID_TOKEN_TYPE;
-    }
-    
-    @Override
-    public IElementType getIElementType(int antlrType) {
-    	return tokenTypes[antlrType];
-    }
+	public int getAntlrType(IElementType iElementType) {
+		return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex() : Token.INVALID_TOKEN_TYPE;
+	}
+
+	@Override
+	public IElementType getIElementType(int antlrType) {
+		return tokenTypes[antlrType];
+	}
 
 	@Override
 	public TokenSet getWhitespaceTokens() {

@@ -36,7 +36,6 @@ import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -200,17 +199,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
       @Override
       public Boolean apply(final JvmTypeReference it) {
-        boolean _and = false;
-        JvmType _type = it.getType();
-        if (!(_type instanceof JvmGenericType)) {
-          _and = false;
-        } else {
-          JvmType _type_1 = it.getType();
-          boolean _isInterface = ((JvmGenericType) _type_1).isInterface();
-          boolean _not = (!_isInterface);
-          _and = _not;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((it.getType() instanceof JvmGenericType) && (!((JvmGenericType) it.getType()).isInterface())));
       }
     };
     final JvmTypeReference oldType = IterableExtensions.<JvmTypeReference>findFirst(_superTypes, _function);
@@ -235,16 +224,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
       @Override
       public Boolean apply(final JvmTypeReference it) {
-        boolean _and = false;
-        JvmType _type = it.getType();
-        if (!(_type instanceof JvmGenericType)) {
-          _and = false;
-        } else {
-          JvmType _type_1 = it.getType();
-          boolean _isInterface = ((JvmGenericType) _type_1).isInterface();
-          _and = _isInterface;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((it.getType() instanceof JvmGenericType) && ((JvmGenericType) it.getType()).isInterface()));
       }
     };
     final Iterable<JvmTypeReference> oldInterfaces = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);

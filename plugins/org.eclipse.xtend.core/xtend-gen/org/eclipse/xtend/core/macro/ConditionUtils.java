@@ -37,15 +37,7 @@ public class ConditionUtils {
   
   public static void checkInferredTypeReferences(final String typeName, final TypeReference... types) {
     for (final TypeReference type : types) {
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(type, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _isInferred = type.isInferred();
-        _and = _isInferred;
-      }
-      if (_and) {
+      if (((!Objects.equal(type, null)) && type.isInferred())) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Cannot use inferred type as ");
         _builder.append(typeName, "");
@@ -103,16 +95,7 @@ public class ConditionUtils {
   public static boolean isValidQualifiedName(final String string) {
     boolean _xblockexpression = false;
     {
-      boolean _or = false;
-      boolean _equals = Objects.equal(string, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        int _length = string.length();
-        boolean _equals_1 = (_length == 0);
-        _or = _equals_1;
-      }
-      if (_or) {
+      if ((Objects.equal(string, null) || (string.length() == 0))) {
         return false;
       }
       String[] _split = string.split("\\.");
@@ -131,16 +114,7 @@ public class ConditionUtils {
   public static boolean isValidJavaIdentifier(final String string) {
     boolean _xblockexpression = false;
     {
-      boolean _or = false;
-      boolean _equals = Objects.equal(string, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        int _length = string.length();
-        boolean _equals_1 = (_length == 0);
-        _or = _equals_1;
-      }
-      if (_or) {
+      if ((Objects.equal(string, null) || (string.length() == 0))) {
         return false;
       }
       final char[] charArray = string.toCharArray();

@@ -159,11 +159,9 @@ public class AbstractConstantExpressionsInterpreter {
       final String op = this.getOperator(binaryOperation);
       Object _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(op, "+")) {
-          _matched=true;
-          _switchResult = this.constantOperators.plus(left, right);
-        }
+      if (Objects.equal(op, "+")) {
+        _matched=true;
+        _switchResult = this.constantOperators.plus(left, right);
       }
       if (!_matched) {
         if (Objects.equal(op, "-")) {
@@ -285,34 +283,18 @@ public class AbstractConstantExpressionsInterpreter {
       final String op = this.getOperator(it);
       Object _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(op, "-")) {
-          _matched=true;
-          _switchResult = this.constantOperators.minus(value);
-        }
+      if (Objects.equal(op, "-")) {
+        _matched=true;
+        _switchResult = this.constantOperators.minus(value);
       }
       if (!_matched) {
-        boolean _and = false;
-        boolean _equals = Objects.equal(op, "!");
-        if (!_equals) {
-          _and = false;
-        } else {
-          _and = (value instanceof Boolean);
-        }
-        if (_and) {
+        if ((Objects.equal(op, "!") && (value instanceof Boolean))) {
           _matched=true;
           _switchResult = Boolean.valueOf((!(((Boolean) value)).booleanValue()));
         }
       }
       if (!_matched) {
-        boolean _and_1 = false;
-        boolean _equals_1 = Objects.equal(op, "+");
-        if (!_equals_1) {
-          _and_1 = false;
-        } else {
-          _and_1 = (value instanceof Number);
-        }
-        if (_and_1) {
+        if ((Objects.equal(op, "+") && (value instanceof Number))) {
           _matched=true;
           _switchResult = value;
         }
@@ -330,21 +312,19 @@ public class AbstractConstantExpressionsInterpreter {
     Resource _eResource = call.eResource();
     final Resource res = _eResource;
     boolean _matched = false;
-    if (!_matched) {
-      if (res instanceof StorageAwareResource) {
-        boolean _isLoadedFromStorage = ((StorageAwareResource)res).isLoadedFromStorage();
-        if (_isLoadedFromStorage) {
-          _matched=true;
-          JvmIdentifiableElement _feature = call.getFeature();
-          String _simpleName = _feature.getSimpleName();
-          QualifiedName _create = QualifiedName.create(_simpleName);
-          QualifiedName _operator = this.operatorMapping.getOperator(_create);
-          String _string = null;
-          if (_operator!=null) {
-            _string=_operator.toString();
-          }
-          return _string;
+    if (res instanceof StorageAwareResource) {
+      boolean _isLoadedFromStorage = ((StorageAwareResource)res).isLoadedFromStorage();
+      if (_isLoadedFromStorage) {
+        _matched=true;
+        JvmIdentifiableElement _feature = call.getFeature();
+        String _simpleName = _feature.getSimpleName();
+        QualifiedName _create = QualifiedName.create(_simpleName);
+        QualifiedName _operator = this.operatorMapping.getOperator(_create);
+        String _string = null;
+        if (_operator!=null) {
+          _string=_operator.toString();
         }
+        return _string;
       }
     }
     if (!_matched) {

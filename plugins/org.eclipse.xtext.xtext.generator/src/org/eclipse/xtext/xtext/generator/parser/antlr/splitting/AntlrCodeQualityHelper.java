@@ -138,12 +138,12 @@ public class AntlrCodeQualityHelper {
 	}
 
 	private static <K, V> V putIfAbsent(Map<K, V> map, K key, V value) {
-        V v = map.get(key);
-        if (v == null) {
-            v = map.put(key, value);
-        }
-        return v;
-    }
+		V v = map.get(key);
+		if (v == null) {
+			v = map.put(key, value);
+		}
+		return v;
+	}
 
 	private static final Pattern dfaPattern = Pattern.compile(
 			"static final short\\[]\\[] (DFA\\d+_transition);\\s+static \\{[^{]*\\{[^}]*\\}[^}]*\\}", Pattern.DOTALL);

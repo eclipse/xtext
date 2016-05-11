@@ -17,6 +17,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.ui.util.IJdtHelper;
+import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 
 import com.google.inject.Inject;
 
@@ -27,6 +28,9 @@ public abstract class AbstractJavaProjectsState extends AbstractAllContainersSta
 
 	@Inject
 	private IJdtHelper jdtHelper;
+	
+	@Inject
+	private JavaProjectClasspathChangeAnalyzer javaProjectClasspathChangeAnalyzer;
 	
 	@Override
 	protected void registerAsListener() {
@@ -52,28 +56,24 @@ public abstract class AbstractJavaProjectsState extends AbstractAllContainersSta
 	private boolean isAffectingPackageFragmentRoots(IJavaElementDelta delta) {
 		IJavaElement element = delta.getElement();
 		if (element instanceof IPackageFragmentRoot) {
-			if (delta.getKind() == IJavaElementDelta.REMOVED
-				|| delta.getKind() == IJavaElementDelta.ADDED
-				|| (delta.getFlags() & IJavaElementDelta.F_REORDER) != 0
-				|| (delta.getFlags() & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0
-				|| (delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0
-				|| (((IPackageFragmentRoot) element).isExternal() && (delta.getFlags() & // external folders change
-						(IJavaElementDelta.F_CONTENT 
-								| IJavaElementDelta.F_SOURCEATTACHED 
-								| IJavaElementDelta.F_SOURCEDETACHED)) == delta.getFlags())) {
+			if (javaProjectClasspathChangeAnalyzer.isRelevantPackageFragmentRootChange(delta)) {
 				return true;
 			}
 		} else if (element instanceof IJavaModel) {
 			return isAffectingPackageFragmentRoots(delta.getAffectedChildren());
 		} else if (element instanceof IJavaProject) {
-			if ((delta.getFlags() & IJavaElementDelta.F_CLASSPATH_CHANGED) != 0 ||
-					(delta.getFlags() & IJavaElementDelta.F_RESOLVED_CLASSPATH_CHANGED) != 0)
+			if (javaProjectClasspathChangeAnalyzer.isClasspathChangeOnProject(delta)) {
+				// filter out IJavaElementDelta.F_SOURCEATTACHED | IJavaElementDelta.F_SOURCEDETACHED only
+				if (javaProjectClasspathChangeAnalyzer.isAttachmentChangeOnly(delta)) {
+					return  false;
+				}
 				return true;
+			}
 			return isAffectingPackageFragmentRoots(delta.getAffectedChildren());
 		}
 		return false;
 	}
-	
+
 	private boolean isAffectingPackageFragmentRoots(IJavaElementDelta[] affectedChildren) {
 		for (IJavaElementDelta delta : affectedChildren) {
 			if (isAffectingPackageFragmentRoots(delta))

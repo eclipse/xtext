@@ -8,6 +8,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.ui.PreferenceConstants;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -22,7 +24,9 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -33,6 +37,17 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
+  
+  @After
+  public void close() {
+    try {
+      this._workbenchTestHelper.tearDown();
+      IPreferenceStore _preferenceStore = PreferenceConstants.getPreferenceStore();
+      PreferenceConstants.initializeDefaultValues(_preferenceStore);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
   
   protected void assertIsOrganizedTo(final CharSequence model, final CharSequence expected) {
     this.assertIsOrganizedTo(model, "Foo", expected);
@@ -1213,5 +1228,179 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  @Ignore
+  public void testBug482371_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package p");
+      _builder.newLine();
+      _builder.append("class Outer {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("annotation Inner {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._workbenchTestHelper.createFile("/p/Outer.xtend", _builder.toString());
+      IResourcesSetupUtil.waitForBuild();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package p");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import p.Outer.Inner");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@Inner");
+      _builder_1.newLine();
+      _builder_1.append("class Client extends Outer {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package p");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("import p.Outer.Inner");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("@Inner");
+      _builder_2.newLine();
+      _builder_2.append("class Client extends Outer {");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.assertIsOrganizedTo(_builder_1, _builder_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  @Ignore
+  public void testBug482371_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package p");
+      _builder.newLine();
+      _builder.append("class Outer {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("annotation Inner {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._workbenchTestHelper.createFile("/p/Outer.xtend", _builder.toString());
+      IResourcesSetupUtil.waitForBuild();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package p");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import p.Outer.Inner");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Client extends Outer {");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("@Inner");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void foo() {}");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package p");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("class Client extends Outer {");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("@Inner");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("def void foo() {}");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.assertIsOrganizedTo(_builder_1, _builder_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  /**
+   * Tests organization of imports for a field of type List. This will be ambigious, since java.util.List and
+   * java.awt.List both match. As a result, nothing is organized.
+   * @see Bug#421967
+   */
+  @Test
+  public void testTypeFilter_ambiguous() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("List l");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package p");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("List l");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  /**
+   * Tests organization of imports for a field of type List. The JDT Type Filter preference is set to resolve
+   * 'List' uniquely to 'java.util.List'.
+   * @see Bug#421967
+   */
+  @Test
+  public void testTypeFilter_unique() {
+    IPreferenceStore _preferenceStore = PreferenceConstants.getPreferenceStore();
+    _preferenceStore.setValue(PreferenceConstants.TYPEFILTER_ENABLED, "*.awt.*;*.sun.*;antlr.*");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package p");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("List l");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package p");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.List");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("List l");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
   }
 }

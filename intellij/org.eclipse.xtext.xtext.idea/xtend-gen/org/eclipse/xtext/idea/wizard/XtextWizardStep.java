@@ -264,21 +264,13 @@ public class XtextWizardStep extends ModuleWizardStep {
     RuntimeProjectDescriptor _runtimeProject = config.getRuntimeProject();
     _runtimeProject.setEnabled(true);
     IdeProjectDescriptor _ideProject = config.getIdeProject();
-    boolean _or = false;
-    boolean _isSelected = this.idea.isSelected();
-    if (_isSelected) {
-      _or = true;
-    } else {
-      boolean _isSelected_1 = this.web.isSelected();
-      _or = _isSelected_1;
-    }
-    _ideProject.setEnabled(_or);
+    _ideProject.setEnabled((this.idea.isSelected() || this.web.isSelected()));
     IntellijProjectDescriptor _intellijProject = config.getIntellijProject();
-    boolean _isSelected_2 = this.idea.isSelected();
-    _intellijProject.setEnabled(_isSelected_2);
+    boolean _isSelected = this.idea.isSelected();
+    _intellijProject.setEnabled(_isSelected);
     WebProjectDescriptor _webProject = config.getWebProject();
-    boolean _isSelected_3 = this.web.isSelected();
-    _webProject.setEnabled(_isSelected_3);
+    boolean _isSelected_1 = this.web.isSelected();
+    _webProject.setEnabled(_isSelected_1);
     Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
     Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(_enabledProjects, TestedProjectDescriptor.class);
     final Procedure1<TestedProjectDescriptor> _function = new Procedure1<TestedProjectDescriptor>() {

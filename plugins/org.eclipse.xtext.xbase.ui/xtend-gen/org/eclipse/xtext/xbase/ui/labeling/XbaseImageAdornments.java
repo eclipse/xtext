@@ -88,18 +88,16 @@ public class XbaseImageAdornments {
   public int getOverrideAdornment(final JvmExecutable overriddenOperation) {
     int _switchResult = (int) 0;
     boolean _matched = false;
-    if (!_matched) {
-      if (overriddenOperation instanceof JvmOperation) {
-        _matched=true;
-        int _xifexpression = (int) 0;
-        boolean _isAbstract = ((JvmOperation)overriddenOperation).isAbstract();
-        if (_isAbstract) {
-          _xifexpression = JavaElementImageDescriptor.IMPLEMENTS;
-        } else {
-          _xifexpression = JavaElementImageDescriptor.OVERRIDES;
-        }
-        _switchResult = _xifexpression;
+    if (overriddenOperation instanceof JvmOperation) {
+      _matched=true;
+      int _xifexpression = (int) 0;
+      boolean _isAbstract = ((JvmOperation)overriddenOperation).isAbstract();
+      if (_isAbstract) {
+        _xifexpression = JavaElementImageDescriptor.IMPLEMENTS;
+      } else {
+        _xifexpression = JavaElementImageDescriptor.OVERRIDES;
       }
+      _switchResult = _xifexpression;
     }
     if (!_matched) {
       _switchResult = 0;

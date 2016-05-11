@@ -12,7 +12,6 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.Command;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Event;
 import org.eclipse.xtext.web.example.statemachine.statemachine.InputSignal;
 import org.eclipse.xtext.web.example.statemachine.statemachine.OutputSignal;
-import org.eclipse.xtext.web.example.statemachine.statemachine.Signal;
 import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage;
 import org.eclipse.xtext.web.example.statemachine.validation.AbstractStatemachineValidator;
 
@@ -25,52 +24,14 @@ import org.eclipse.xtext.web.example.statemachine.validation.AbstractStatemachin
 public class StatemachineValidator extends AbstractStatemachineValidator {
   @Check
   public void checkEventUsesInputSignal(final Event event) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    Signal _signal = event.getSignal();
-    boolean _tripleNotEquals = (_signal != null);
-    if (!_tripleNotEquals) {
-      _and_1 = false;
-    } else {
-      Signal _signal_1 = event.getSignal();
-      boolean _eIsProxy = _signal_1.eIsProxy();
-      boolean _not = (!_eIsProxy);
-      _and_1 = _not;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      Signal _signal_2 = event.getSignal();
-      boolean _not_1 = (!(_signal_2 instanceof InputSignal));
-      _and = _not_1;
-    }
-    if (_and) {
+    if ((((event.getSignal() != null) && (!event.getSignal().eIsProxy())) && (!(event.getSignal() instanceof InputSignal)))) {
       this.error("Only input signals are allowed for read access.", event, StatemachinePackage.Literals.EVENT__SIGNAL);
     }
   }
   
   @Check
   public void checkCommandUsesOutputSignal(final Command command) {
-    boolean _and = false;
-    boolean _and_1 = false;
-    Signal _signal = command.getSignal();
-    boolean _tripleNotEquals = (_signal != null);
-    if (!_tripleNotEquals) {
-      _and_1 = false;
-    } else {
-      Signal _signal_1 = command.getSignal();
-      boolean _eIsProxy = _signal_1.eIsProxy();
-      boolean _not = (!_eIsProxy);
-      _and_1 = _not;
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      Signal _signal_2 = command.getSignal();
-      boolean _not_1 = (!(_signal_2 instanceof OutputSignal));
-      _and = _not_1;
-    }
-    if (_and) {
+    if ((((command.getSignal() != null) && (!command.getSignal().eIsProxy())) && (!(command.getSignal() instanceof OutputSignal)))) {
       this.error("Only output signals are allowed for write access.", command, StatemachinePackage.Literals.COMMAND__SIGNAL);
     }
   }

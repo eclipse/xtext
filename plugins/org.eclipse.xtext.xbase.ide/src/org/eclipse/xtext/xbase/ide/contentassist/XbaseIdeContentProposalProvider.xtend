@@ -42,7 +42,6 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xtype.XtypePackage
 
 class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
@@ -74,21 +73,21 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 	@Inject SyntaxFilteredScopes syntaxFilteredScopes
 	
 	override filterKeyword(Keyword keyword, ContentAssistContext context) {
-		if (!super.filterKeyword(keyword, context))
-			return false
-		if (keyword.value == 'as' || keyword.value == 'instanceof') {
-			val previousModel = context.previousModel
-			if (previousModel instanceof XExpression) {
-				if (context.prefix.length == 0 && NodeModelUtils.getNode(previousModel).endOffset > context.offset) {
-					return false
-				}
-				var LightweightTypeReference type = typeResolver.resolveTypes(previousModel).getActualType(previousModel)
-				if (type === null || type.isPrimitiveVoid) {
-					return false
+		val value = keyword.value
+		if (value.length > 1 && Character.isLetter(value.charAt(0))) {
+			if (value == 'as' || value == 'instanceof') {
+				val previousModel = context.previousModel
+				if (previousModel instanceof XExpression) {
+					if (context.prefix.length == 0 && NodeModelUtils.getNode(previousModel).endOffset > context.offset)
+						return false
+					val type = typeResolver.resolveTypes(previousModel).getActualType(previousModel)
+					if (type === null || type.isPrimitiveVoid)
+						return false
 				}
 			}
+			return true
 		}
-		return true
+		return false
 	}
 	
 	override dispatch createProposals(RuleCall ruleCall, ContentAssistContext context,
@@ -276,10 +275,10 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 				val currentNode = context.currentNode
 				val offset = currentNode.offset
 				val endOffset = currentNode.endOffset
-				if (offset < context.offset && endOffset >= context.offset) {
-					if (currentNode.grammarElement instanceof CrossReference) {
-						return
-					}
+				if (offset < context.offset && endOffset >= context.offset
+						&& currentNode.grammarElement instanceof CrossReference) {
+					// Don't propose another binary operator
+					return
 				}
 			}
 			if (NodeModelUtils.findActualNodeFor(model).endOffset <= context.offset) {
@@ -292,10 +291,9 @@ class XbaseIdeContentProposalProvider extends IdeContentProposalProvider {
 		} else {
 			val previousModel = context.previousModel
 			if (previousModel instanceof XExpression) {
-				if (context.prefix.length === 0) {
-					if (NodeModelUtils.getNode(previousModel).endOffset > context.offset) {
-						return
-					}
+				if (context.prefix.length === 0
+						&& NodeModelUtils.getNode(previousModel).endOffset > context.offset) {
+					return
 				}
 				createReceiverProposals(previousModel,
 					assignment.terminal as CrossReference, context, acceptor)

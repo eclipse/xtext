@@ -19,6 +19,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.PrefixedUnassigned;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
+import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Simple;
 import org.eclipse.xtext.formatting2.regionaccess.internal.services.RegionAccessTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.ISerializationContext;
@@ -41,7 +42,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 		if (epackage == RegionaccesstestlanguagePackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case RegionaccesstestlanguagePackage.ACTION:
-				sequence_Mixed(context, (org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action) semanticObject); 
+				sequence_Fragment_Mixed(context, (org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action) semanticObject); 
 				return; 
 			case RegionaccesstestlanguagePackage.ADD:
 				sequence_Expression(context, (Add) semanticObject); 
@@ -66,6 +67,9 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 				return; 
 			case RegionaccesstestlanguagePackage.ROOT:
 				sequence_Root(context, (Root) semanticObject); 
+				return; 
+			case RegionaccesstestlanguagePackage.ROOT_ACTION:
+				sequence_Root(context, (RootAction) semanticObject); 
 				return; 
 			case RegionaccesstestlanguagePackage.SIMPLE:
 				sequence_Simple(context, (Simple) semanticObject); 
@@ -147,9 +151,9 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     Mixed.AssignedAction_4_0 returns Action
 	 *
 	 * Constraint:
-	 *     {Action}
+	 *     (fragName=ID | mixed=Mixed)?
 	 */
-	protected void sequence_Mixed(ISerializationContext context, org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action semanticObject) {
+	protected void sequence_Fragment_Mixed(ISerializationContext context, org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -236,7 +240,25 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.ROOT__MIXED));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRootAccess().getMixedMixedParserRuleCall_6_1_0(), semanticObject.getMixed());
+		feeder.accept(grammarAccess.getRootAccess().getMixedMixedParserRuleCall_6_2_0(), semanticObject.getMixed());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Root returns RootAction
+	 *
+	 * Constraint:
+	 *     mixed=Mixed
+	 */
+	protected void sequence_Root(ISerializationContext context, RootAction semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RegionaccesstestlanguagePackage.Literals.ROOT__MIXED) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RegionaccesstestlanguagePackage.Literals.ROOT__MIXED));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRootAccess().getMixedMixedParserRuleCall_6_2_0(), semanticObject.getMixed());
 		feeder.finish();
 	}
 	

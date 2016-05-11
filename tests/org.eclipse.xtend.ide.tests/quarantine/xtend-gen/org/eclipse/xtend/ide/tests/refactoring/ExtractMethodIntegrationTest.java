@@ -13,6 +13,7 @@ import org.eclipse.xtend.ide.refactoring.ExtractMethodRefactoring;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -2925,6 +2926,8 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
               final List<XExpression> selection = ExtractMethodIntegrationTest.this.util.findSelectedSiblingExpressions(it, _textSelection);
               final ExtractMethodRefactoring refactoring = ExtractMethodIntegrationTest.this.refactoringProvider.get();
               refactoring.initialize(editor, selection, true);
+              refactoring.setExplicitlyDeclareReturnType(false);
+              refactoring.setVisibility(JvmVisibility.PUBLIC);
               refactoring.setMethodName("bar");
               NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
               RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);

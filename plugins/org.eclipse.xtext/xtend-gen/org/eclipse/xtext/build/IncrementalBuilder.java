@@ -187,15 +187,7 @@ public class IncrementalBuilder {
                   }
                 };
                 final OutputConfiguration config = IterableExtensions.<OutputConfiguration>findFirst(configs, _function);
-                boolean _and = false;
-                boolean _notEquals = (!Objects.equal(config, null));
-                if (!_notEquals) {
-                  _and = false;
-                } else {
-                  boolean _isCleanUpDerivedResources = config.isCleanUpDerivedResources();
-                  _and = _isCleanUpDerivedResources;
-                }
-                if (_and) {
+                if (((!Objects.equal(config, null)) && config.isCleanUpDerivedResources())) {
                   XtextResourceSet _resourceSet_1 = InternalStatefulIncrementalBuilder.this.context.getResourceSet();
                   URIConverter _uRIConverter = _resourceSet_1.getURIConverter();
                   Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
@@ -261,24 +253,7 @@ public class IncrementalBuilder {
           _newIndex.addDescription(_uRI_1, copiedDescription);
           CancelIndicator _cancelIndicator_2 = InternalStatefulIncrementalBuilder.this.request.getCancelIndicator();
           InternalStatefulIncrementalBuilder.this._operationCanceledManager.checkCanceled(_cancelIndicator_2);
-          boolean _and = false;
-          boolean _and_1 = false;
-          boolean _isIndexOnly = InternalStatefulIncrementalBuilder.this.request.isIndexOnly();
-          boolean _not = (!_isIndexOnly);
-          if (!_not) {
-            _and_1 = false;
-          } else {
-            boolean _validate = InternalStatefulIncrementalBuilder.this.validate(resource);
-            _and_1 = _validate;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            IShouldGenerate _get = serviceProvider.<IShouldGenerate>get(IShouldGenerate.class);
-            boolean _shouldGenerate = _get.shouldGenerate(resource, CancelIndicator.NullImpl);
-            _and = _shouldGenerate;
-          }
-          if (_and) {
+          if ((((!InternalStatefulIncrementalBuilder.this.request.isIndexOnly()) && InternalStatefulIncrementalBuilder.this.validate(resource)) && serviceProvider.<IShouldGenerate>get(IShouldGenerate.class).shouldGenerate(resource, CancelIndicator.NullImpl))) {
             CancelIndicator _cancelIndicator_3 = InternalStatefulIncrementalBuilder.this.request.getCancelIndicator();
             InternalStatefulIncrementalBuilder.this._operationCanceledManager.checkCanceled(_cancelIndicator_3);
             InternalStatefulIncrementalBuilder.this.generate(resource, InternalStatefulIncrementalBuilder.this.request, newSource2GeneratedMapping);
@@ -359,15 +334,13 @@ public class IncrementalBuilder {
       boolean _isWriteStorageResources = request.isWriteStorageResources();
       if (_isWriteStorageResources) {
         boolean _matched = false;
-        if (!_matched) {
-          if (resource instanceof StorageAwareResource) {
-            IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)resource).getResourceStorageFacade();
-            boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
-            if (_notEquals) {
-              _matched=true;
-              IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)resource).getResourceStorageFacade();
-              _resourceStorageFacade_1.saveResource(((StorageAwareResource)resource), fileSystemAccess);
-            }
+        if (resource instanceof StorageAwareResource) {
+          IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)resource).getResourceStorageFacade();
+          boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
+          if (_notEquals) {
+            _matched=true;
+            IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)resource).getResourceStorageFacade();
+            _resourceStorageFacade_1.saveResource(((StorageAwareResource)resource), fileSystemAccess);
           }
         }
       }

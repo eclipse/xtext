@@ -32,6 +32,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -40,9 +41,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.CurrentTypeFinder;
@@ -66,6 +64,10 @@ public class IdeContentProposalProvider {
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
   private IdeCrossrefProposalProvider crossrefProposalProvider;
+  
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Inject
+  private IdeContentProposalCreator proposalCreator;
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
@@ -96,78 +98,7 @@ public class IdeContentProposalProvider {
   }
   
   protected Iterable<ContentAssistContext> getFilteredContexts(final Collection<ContentAssistContext> contexts) {
-    ContentAssistContext selectedContext = null;
-    for (final ContentAssistContext context : contexts) {
-      boolean _or = false;
-      if ((selectedContext == null)) {
-        _or = true;
-      } else {
-        boolean _and = false;
-        boolean _isAcceptable = this.isAcceptable(context);
-        if (!_isAcceptable) {
-          _and = false;
-        } else {
-          boolean _or_1 = false;
-          String _prefix = context.getPrefix();
-          int _length = _prefix.length();
-          String _prefix_1 = selectedContext.getPrefix();
-          int _length_1 = _prefix_1.length();
-          boolean _greaterThan = (_length > _length_1);
-          if (_greaterThan) {
-            _or_1 = true;
-          } else {
-            boolean _isAcceptable_1 = this.isAcceptable(selectedContext);
-            boolean _not = (!_isAcceptable_1);
-            _or_1 = _not;
-          }
-          _and = _or_1;
-        }
-        _or = _and;
-      }
-      if (_or) {
-        selectedContext = context;
-      }
-    }
-    final ContentAssistContext finalSelectedContext = selectedContext;
-    final Function1<ContentAssistContext, Boolean> _function = new Function1<ContentAssistContext, Boolean>() {
-      @Override
-      public Boolean apply(final ContentAssistContext context) {
-        boolean _or = false;
-        if ((context == finalSelectedContext)) {
-          _or = true;
-        } else {
-          boolean _and = false;
-          String _prefix = context.getPrefix();
-          String _prefix_1 = finalSelectedContext.getPrefix();
-          boolean _equals = Objects.equal(_prefix, _prefix_1);
-          if (!_equals) {
-            _and = false;
-          } else {
-            boolean _isAcceptable = IdeContentProposalProvider.this.isAcceptable(context);
-            _and = _isAcceptable;
-          }
-          _or = _and;
-        }
-        return Boolean.valueOf(_or);
-      }
-    };
-    return IterableExtensions.<ContentAssistContext>filter(contexts, _function);
-  }
-  
-  protected boolean isAcceptable(final ContentAssistContext context) {
-    final String prefix = context.getPrefix();
-    boolean _or = false;
-    boolean _isEmpty = prefix.isEmpty();
-    if (_isEmpty) {
-      _or = true;
-    } else {
-      int _length = prefix.length();
-      int _minus = (_length - 1);
-      char _charAt = prefix.charAt(_minus);
-      boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart(_charAt);
-      _or = _isJavaIdentifierPart;
-    }
-    return _or;
+    return contexts;
   }
   
   protected void _createProposals(final AbstractElement element, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
@@ -180,43 +111,35 @@ public class IdeContentProposalProvider {
     } else {
       if ((terminal instanceof RuleCall)) {
         final AbstractRule rule = ((RuleCall)terminal).getRule();
-        boolean _and = false;
-        if (!(rule instanceof TerminalRule)) {
-          _and = false;
-        } else {
-          String _prefix = context.getPrefix();
-          boolean _isEmpty = _prefix.isEmpty();
-          _and = _isEmpty;
-        }
-        if (_and) {
-          ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+        if (((rule instanceof TerminalRule) && context.getPrefix().isEmpty())) {
+          String _xifexpression = null;
+          String _name = rule.getName();
+          boolean _equals = Objects.equal(_name, "STRING");
+          if (_equals) {
+            String _feature = assignment.getFeature();
+            String _plus = ("\"" + _feature);
+            _xifexpression = (_plus + "\"");
+          } else {
+            _xifexpression = assignment.getFeature();
+          }
+          final String proposal = _xifexpression;
           final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
             @Override
             public void apply(final ContentAssistEntry it) {
-              String _prefix = context.getPrefix();
-              it.setPrefix(_prefix);
               String _name = rule.getName();
               boolean _equals = Objects.equal(_name, "STRING");
               if (_equals) {
-                String _feature = assignment.getFeature();
-                String _plus = ("\"" + _feature);
-                String _plus_1 = (_plus + "\"");
-                it.setProposal(_plus_1);
                 ArrayList<TextRegion> _editPositions = it.getEditPositions();
                 int _offset = context.getOffset();
-                int _plus_2 = (_offset + 1);
-                String _proposal = it.getProposal();
-                int _length = _proposal.length();
+                int _plus = (_offset + 1);
+                int _length = proposal.length();
                 int _minus = (_length - 2);
-                TextRegion _textRegion = new TextRegion(_plus_2, _minus);
+                TextRegion _textRegion = new TextRegion(_plus, _minus);
                 _editPositions.add(_textRegion);
               } else {
-                String _feature_1 = assignment.getFeature();
-                it.setProposal(_feature_1);
                 ArrayList<TextRegion> _editPositions_1 = it.getEditPositions();
                 int _offset_1 = context.getOffset();
-                String _proposal_1 = it.getProposal();
-                int _length_1 = _proposal_1.length();
+                int _length_1 = proposal.length();
                 TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
                 _editPositions_1.add(_textRegion_1);
               }
@@ -224,7 +147,7 @@ public class IdeContentProposalProvider {
               it.setDescription(_name_1);
             }
           };
-          final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
+          final ContentAssistEntry entry = this.proposalCreator.createProposal(proposal, context, _function);
           int _defaultPriority = this.proposalPriorities.getDefaultPriority(entry);
           acceptor.accept(entry, _defaultPriority);
         }
@@ -235,41 +158,16 @@ public class IdeContentProposalProvider {
   protected void _createProposals(final Keyword keyword, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     boolean _filterKeyword = this.filterKeyword(keyword, context);
     if (_filterKeyword) {
-      ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
-      final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
-        @Override
-        public void apply(final ContentAssistEntry it) {
-          String _prefix = context.getPrefix();
-          it.setPrefix(_prefix);
-          String _value = keyword.getValue();
-          it.setProposal(_value);
-        }
-      };
-      final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
       String _value = keyword.getValue();
-      int _keywordPriority = this.proposalPriorities.getKeywordPriority(_value, entry);
+      final ContentAssistEntry entry = this.proposalCreator.createProposal(_value, context);
+      String _value_1 = keyword.getValue();
+      int _keywordPriority = this.proposalPriorities.getKeywordPriority(_value_1, entry);
       acceptor.accept(entry, _keywordPriority);
     }
   }
   
   protected boolean filterKeyword(final Keyword keyword, final ContentAssistContext context) {
-    boolean _and = false;
-    String _value = keyword.getValue();
-    String _prefix = context.getPrefix();
-    String _prefix_1 = context.getPrefix();
-    int _length = _prefix_1.length();
-    boolean _regionMatches = _value.regionMatches(true, 0, _prefix, 0, _length);
-    if (!_regionMatches) {
-      _and = false;
-    } else {
-      String _value_1 = keyword.getValue();
-      int _length_1 = _value_1.length();
-      String _prefix_2 = context.getPrefix();
-      int _length_2 = _prefix_2.length();
-      boolean _greaterThan = (_length_1 > _length_2);
-      _and = _greaterThan;
-    }
-    return _and;
+    return true;
   }
   
   protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
@@ -327,6 +225,11 @@ public class IdeContentProposalProvider {
   @Pure
   protected IdeCrossrefProposalProvider getCrossrefProposalProvider() {
     return this.crossrefProposalProvider;
+  }
+  
+  @Pure
+  protected IdeContentProposalCreator getProposalCreator() {
+    return this.proposalCreator;
   }
   
   @Pure

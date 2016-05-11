@@ -14,19 +14,17 @@ import com.google.inject.Provider;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 import javax.servlet.annotation.WebServlet;
 import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.jetty.EntitiesWebModule;
-import org.eclipse.xtext.web.example.jetty.StatemachineWebModule;
-import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
-import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
+import org.eclipse.xtext.web.example.jetty.StatemachineWebSetup;
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -54,22 +52,13 @@ public class MyXtextServlet extends XtextServlet {
       };
       final Provider<ExecutorService> executorServiceProvider = _function;
       final ResourceBaseProviderImpl resourceBaseProvider = new ResourceBaseProviderImpl("./test-files");
-      new StatemachineStandaloneSetup() {
-        @Override
-        public Injector createInjector() {
-          final StatemachineRuntimeModule runtimeModule = new StatemachineRuntimeModule();
-          final StatemachineWebModule webModule = new StatemachineWebModule(executorServiceProvider);
-          webModule.setResourceBaseProvider(resourceBaseProvider);
-          Module _mixin = Modules2.mixin(runtimeModule, webModule);
-          return Guice.createInjector(_mixin);
-        }
-      }.createInjectorAndDoEMFRegistration();
+      StatemachineWebSetup _statemachineWebSetup = new StatemachineWebSetup(executorServiceProvider, resourceBaseProvider);
+      _statemachineWebSetup.createInjectorAndDoEMFRegistration();
       new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
           final EntitiesRuntimeModule runtimeModule = new EntitiesRuntimeModule();
-          final EntitiesWebModule webModule = new EntitiesWebModule(executorServiceProvider);
-          webModule.setResourceBaseProvider(resourceBaseProvider);
+          final EntitiesWebModule webModule = new EntitiesWebModule(executorServiceProvider, resourceBaseProvider);
           Module _mixin = Modules2.mixin(runtimeModule, webModule);
           return Guice.createInjector(_mixin);
         }
@@ -81,13 +70,13 @@ public class MyXtextServlet extends XtextServlet {
   
   @Override
   public void destroy() {
-    final Procedure1<ExecutorService> _function = new Procedure1<ExecutorService>() {
+    final Consumer<ExecutorService> _function = new Consumer<ExecutorService>() {
       @Override
-      public void apply(final ExecutorService it) {
+      public void accept(final ExecutorService it) {
         it.shutdown();
       }
     };
-    IterableExtensions.<ExecutorService>forEach(this.executorServices, _function);
+    this.executorServices.forEach(_function);
     this.executorServices.clear();
     super.destroy();
   }

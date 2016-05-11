@@ -55,7 +55,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -218,25 +217,7 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
           boolean _tripleEquals = (_myLineNumber == line);
           if (_tripleEquals) {
             final ILocationData mergedAssociatedLocation = n.getMergedAssociatedLocation();
-            boolean _and = false;
-            boolean _and_1 = false;
-            boolean _isUseForDebugging = n.isUseForDebugging();
-            if (!_isUseForDebugging) {
-              _and_1 = false;
-            } else {
-              int _myEndLineNumber = n.getMyEndLineNumber();
-              boolean _tripleEquals_1 = (_myEndLineNumber == line);
-              _and_1 = _tripleEquals_1;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              int _lineNumber_1 = mergedAssociatedLocation.getLineNumber();
-              int _endLineNumber = mergedAssociatedLocation.getEndLineNumber();
-              boolean _equals_2 = (_lineNumber_1 == _endLineNumber);
-              _and = _equals_2;
-            }
-            if (_and) {
+            if (((n.isUseForDebugging() && (n.getMyEndLineNumber() == line)) && (mergedAssociatedLocation.getLineNumber() == mergedAssociatedLocation.getEndLineNumber()))) {
               final PsiFile psi = this._debugProcessExtensions.getPsiFile(this.process, sourceURI);
               int _offset = mergedAssociatedLocation.getOffset();
               return SourcePosition.createFromOffset(psi, _offset);
@@ -247,18 +228,24 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
               fallBack = _createFromOffset;
             }
           }
-          int _myEndLineNumber_1 = n.getMyEndLineNumber();
-          boolean _tripleEquals_2 = (_myEndLineNumber_1 == line);
-          if (_tripleEquals_2) {
+          int _myEndLineNumber = n.getMyEndLineNumber();
+          boolean _tripleEquals_1 = (_myEndLineNumber == line);
+          if (_tripleEquals_1) {
             final ILocationData mergedAssociatedLocation_1 = n.getMergedAssociatedLocation();
             final PsiFile psi_2 = this._debugProcessExtensions.getPsiFile(this.process, sourceURI);
-            int _endLineNumber_1 = mergedAssociatedLocation_1.getEndLineNumber();
-            SourcePosition _createFromLine_1 = SourcePosition.createFromLine(psi_2, _endLineNumber_1);
+            int _endLineNumber = mergedAssociatedLocation_1.getEndLineNumber();
+            SourcePosition _createFromLine_1 = SourcePosition.createFromLine(psi_2, _endLineNumber);
             secondaryFallBack = _createFromLine_1;
           }
         }
       }
-      return ObjectExtensions.<SourcePosition>operator_elvis(fallBack, secondaryFallBack);
+      SourcePosition _elvis = null;
+      if (fallBack != null) {
+        _elvis = fallBack;
+      } else {
+        _elvis = secondaryFallBack;
+      }
+      return _elvis;
     }
     
     @Override
@@ -303,27 +290,10 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
             };
             List<? extends ILocationInVirtualFile> _sortBy = IterableExtensions.sortBy(_allAssociatedLocations, _function);
             for (final ILocationInVirtualFile location : _sortBy) {
-              boolean _and = false;
-              String _sourceName = type.sourceName();
-              SourceRelativeURI _srcRelativeResourceURI = location.getSrcRelativeResourceURI();
-              URI _uRI = _srcRelativeResourceURI.getURI();
-              String _lastSegment = _uRI.lastSegment();
-              String _string = _lastSegment.toString();
-              boolean _equals = Objects.equal(_sourceName, _string);
-              if (!_equals) {
-                _and = false;
-              } else {
+              if ((Objects.equal(type.sourceName(), location.getSrcRelativeResourceURI().getURI().lastSegment().toString()) && (location.getTextRegion().getLineNumber() == location.getTextRegion().getEndLineNumber()))) {
                 ITextRegionWithLineInformation _textRegion_1 = location.getTextRegion();
                 int _lineNumber = _textRegion_1.getLineNumber();
-                ITextRegionWithLineInformation _textRegion_2 = location.getTextRegion();
-                int _endLineNumber = _textRegion_2.getEndLineNumber();
-                boolean _equals_1 = (_lineNumber == _endLineNumber);
-                _and = _equals_1;
-              }
-              if (_and) {
-                ITextRegionWithLineInformation _textRegion_3 = location.getTextRegion();
-                int _lineNumber_1 = _textRegion_3.getLineNumber();
-                int _plus = (_lineNumber_1 + 1);
+                int _plus = (_lineNumber + 1);
                 final List<Location> locationsOfLine = type.locationsOfLine(_plus);
                 boolean _isEmpty = locationsOfLine.isEmpty();
                 boolean _not = (!_isEmpty);

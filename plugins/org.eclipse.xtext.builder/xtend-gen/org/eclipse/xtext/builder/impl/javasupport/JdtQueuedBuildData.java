@@ -65,26 +65,26 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
   public boolean queueChange(final IResourceDescription.Delta delta) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (delta instanceof UnconfirmedStructuralChangesDelta) {
-        _matched=true;
-        boolean _xblockexpression = false;
-        {
-          final IProject project = ((UnconfirmedStructuralChangesDelta)delta).getProject();
-          String _name = project.getName();
-          JavaBuilderState state = this.javaBuildState.get(_name);
-          boolean _equals = Objects.equal(state, null);
-          if (_equals) {
-            String _name_1 = project.getName();
-            this.javaBuildState.put(_name_1, state = JavaBuilderState.getLastBuiltState(project));
-          }
-          Integer _buildNumber = state.getBuildNumber();
-          ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((_buildNumber).intValue());
-          this.unconfirmedDeltas.add(((UnconfirmedStructuralChangesDelta)delta));
-          _xblockexpression = true;
+    if (delta instanceof UnconfirmedStructuralChangesDelta) {
+      _matched=true;
+      boolean _xblockexpression = false;
+      {
+        final IProject project = ((UnconfirmedStructuralChangesDelta)delta).getProject();
+        String _name = project.getName();
+        JavaBuilderState state = this.javaBuildState.get(_name);
+        boolean _equals = Objects.equal(state, null);
+        if (_equals) {
+          String _name_1 = project.getName();
+          JavaBuilderState _lastBuiltState = JavaBuilderState.getLastBuiltState(project);
+          JavaBuilderState _state = state = _lastBuiltState;
+          this.javaBuildState.put(_name_1, _state);
         }
-        _switchResult = _xblockexpression;
+        Integer _buildNumber = state.getBuildNumber();
+        ((UnconfirmedStructuralChangesDelta)delta).setBuildNumber((_buildNumber).intValue());
+        this.unconfirmedDeltas.add(((UnconfirmedStructuralChangesDelta)delta));
+        _xblockexpression = true;
       }
+      _switchResult = _xblockexpression;
     }
     if (!_matched) {
       _switchResult = false;
@@ -100,32 +100,12 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       final JavaBuilderState oldState = this.javaBuildState.get(_name);
       final JavaBuilderState newState = JavaBuilderState.getLastBuiltState(it);
       Procedure1<UnconfirmedStructuralChangesDelta> _xifexpression = null;
-      boolean _or = false;
-      boolean _equals = Objects.equal(oldState, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        Long _lastStructuralBuildTime = oldState.getLastStructuralBuildTime();
-        Long _lastStructuralBuildTime_1 = newState.getLastStructuralBuildTime();
-        boolean _notEquals = (!Objects.equal(_lastStructuralBuildTime, _lastStructuralBuildTime_1));
-        _or = _notEquals;
-      }
-      if (_or) {
+      if ((Objects.equal(oldState, null) || (!Objects.equal(oldState.getLastStructuralBuildTime(), newState.getLastStructuralBuildTime())))) {
         final Procedure1<UnconfirmedStructuralChangesDelta> _function = new Procedure1<UnconfirmedStructuralChangesDelta>() {
           @Override
           public void apply(final UnconfirmedStructuralChangesDelta it) {
             final Set<QualifiedName> structurallyChangedTypes = newState.getStructurallyChangedTypes();
-            boolean _or = false;
-            IResourceDescription _new = it.getNew();
-            boolean _namesIntersect = JdtQueuedBuildData.this.namesIntersect(_new, structurallyChangedTypes);
-            if (_namesIntersect) {
-              _or = true;
-            } else {
-              IResourceDescription _old = it.getOld();
-              boolean _namesIntersect_1 = JdtQueuedBuildData.this.namesIntersect(_old, structurallyChangedTypes);
-              _or = _namesIntersect_1;
-            }
-            if (_or) {
+            if ((JdtQueuedBuildData.this.namesIntersect(it.getNew(), structurallyChangedTypes) || JdtQueuedBuildData.this.namesIntersect(it.getOld(), structurallyChangedTypes))) {
               deltas.add(it);
             }
           }
@@ -146,19 +126,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       while (i.hasNext()) {
         {
           final UnconfirmedStructuralChangesDelta unconfirmed = i.next();
-          boolean _and = false;
-          int _buildNumber = unconfirmed.getBuildNumber();
-          Integer _buildNumber_1 = it.getBuildNumber();
-          boolean _lessThan = (_buildNumber < (_buildNumber_1).intValue());
-          if (!_lessThan) {
-            _and = false;
-          } else {
-            IProject _project = unconfirmed.getProject();
-            IProject _project_1 = it.getProject();
-            boolean _equals = _project.equals(_project_1);
-            _and = _equals;
-          }
-          if (_and) {
+          if (((unconfirmed.getBuildNumber() < (it.getBuildNumber()).intValue()) && unconfirmed.getProject().equals(it.getProject()))) {
             i.remove();
             boolean _notEquals = (!Objects.equal(processor, null));
             if (_notEquals) {

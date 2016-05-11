@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting2.regionaccess.internal;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.formatting2.regionaccess.IEObjectRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionFinder;
@@ -26,6 +27,11 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 
 	protected NodeSemanticRegion(NodeModelBasedRegionAccess access, INode node) {
 		super(access, node);
+	}
+
+	@Override
+	public IEObjectRegion getEObjectRegion() {
+		return eObjectTokens;
 	}
 
 	@Override

@@ -195,4 +195,91 @@ public class OverrideHelperTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void checkFindOverriddenOperation_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import java.util.Map");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo implements Bar {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override bar(Map<?, ?> map) {}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("interface Bar {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void bar(Map<?, ?> map)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.file(_builder.toString());
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = _head.getMembers();
+      Iterable<XtendFunction> _filter = Iterables.<XtendFunction>filter(_members, XtendFunction.class);
+      XtendFunction _head_1 = IterableExtensions.<XtendFunction>head(_filter);
+      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(_head_1);
+      final JvmOperation operation = ((JvmOperation) _primaryJvmElement);
+      JvmOperation _findOverriddenOperation = this.overrideHelper.findOverriddenOperation(operation);
+      Assert.assertNotNull(_findOverriddenOperation);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void checkFindOverriddenOperation_04() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo implements Bar {");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override bar(T<?> map) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("interface Bar {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void bar(T<?> map)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class T<E extends CharSequence> {}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.file(_builder.toString());
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = _head.getMembers();
+      Iterable<XtendFunction> _filter = Iterables.<XtendFunction>filter(_members, XtendFunction.class);
+      XtendFunction _head_1 = IterableExtensions.<XtendFunction>head(_filter);
+      EObject _primaryJvmElement = this._iJvmModelAssociations.getPrimaryJvmElement(_head_1);
+      final JvmOperation operation = ((JvmOperation) _primaryJvmElement);
+      JvmOperation _findOverriddenOperation = this.overrideHelper.findOverriddenOperation(operation);
+      Assert.assertNotNull(_findOverriddenOperation);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

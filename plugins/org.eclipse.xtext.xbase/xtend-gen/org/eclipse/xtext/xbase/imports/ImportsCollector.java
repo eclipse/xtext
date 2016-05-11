@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -69,17 +68,7 @@ public class ImportsCollector {
             this.visit(semanticElement, _findActualNodeFor_1, acceptor);
           }
         }
-        boolean _and = false;
-        boolean _isHidden = node.isHidden();
-        if (!_isHidden) {
-          _and = false;
-        } else {
-          TerminalRule _mL_COMMENTRule = this.grammarAccess.getML_COMMENTRule();
-          EObject _grammarElement = node.getGrammarElement();
-          boolean _equals = _mL_COMMENTRule.equals(_grammarElement);
-          _and = _equals;
-        }
-        if (_and) {
+        if ((node.isHidden() && this.grammarAccess.getML_COMMENTRule().equals(node.getGrammarElement()))) {
           this.addJavaDocReferences(node, selectedRegion, acceptor);
         }
       }
@@ -115,25 +104,17 @@ public class ImportsCollector {
   }
   
   protected void _visit(final XMemberFeatureCall semanticObj, final INode originNode, final ImportsAcceptor acceptor) {
-    boolean _and = false;
-    JvmIdentifiableElement _feature = semanticObj.getFeature();
-    if (!(_feature instanceof JvmType)) {
-      _and = false;
-    } else {
-      boolean _isTypeLiteral = semanticObj.isTypeLiteral();
-      _and = _isTypeLiteral;
-    }
-    if (_and) {
-      JvmIdentifiableElement _feature_1 = semanticObj.getFeature();
-      this.visit(((JvmType) _feature_1), originNode, acceptor);
+    if (((semanticObj.getFeature() instanceof JvmType) && semanticObj.isTypeLiteral())) {
+      JvmIdentifiableElement _feature = semanticObj.getFeature();
+      this.visit(((JvmType) _feature), originNode, acceptor);
     }
     boolean _isExplicitStatic = semanticObj.isExplicitStatic();
     boolean _not = (!_isExplicitStatic);
     if (_not) {
       final XExpression target = semanticObj.getMemberCallTarget();
       if ((target instanceof XAbstractFeatureCall)) {
-        boolean _isTypeLiteral_1 = ((XAbstractFeatureCall)target).isTypeLiteral();
-        if (_isTypeLiteral_1) {
+        boolean _isTypeLiteral = ((XAbstractFeatureCall)target).isTypeLiteral();
+        if (_isTypeLiteral) {
           return;
         }
       }
@@ -142,17 +123,9 @@ public class ImportsCollector {
   }
   
   protected void _visit(final XFeatureCall semanticObj, final INode originNode, final ImportsAcceptor acceptor) {
-    boolean _and = false;
-    JvmIdentifiableElement _feature = semanticObj.getFeature();
-    if (!(_feature instanceof JvmType)) {
-      _and = false;
-    } else {
-      boolean _isTypeLiteral = semanticObj.isTypeLiteral();
-      _and = _isTypeLiteral;
-    }
-    if (_and) {
-      JvmIdentifiableElement _feature_1 = semanticObj.getFeature();
-      this.visit(((JvmType) _feature_1), originNode, acceptor);
+    if (((semanticObj.getFeature() instanceof JvmType) && semanticObj.isTypeLiteral())) {
+      JvmIdentifiableElement _feature = semanticObj.getFeature();
+      this.visit(((JvmType) _feature), originNode, acceptor);
     } else {
       this.collectStaticImportsFrom(semanticObj, acceptor);
     }
@@ -187,21 +160,11 @@ public class ImportsCollector {
   }
   
   private JvmDeclaredType findDeclaringTypeBySimpleName(final JvmDeclaredType referencedType, final String outerSegment) {
-    boolean _or = false;
-    JvmDeclaredType _declaringType = referencedType.getDeclaringType();
-    boolean _equals = Objects.equal(_declaringType, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      String _simpleName = referencedType.getSimpleName();
-      boolean _equals_1 = outerSegment.equals(_simpleName);
-      _or = _equals_1;
-    }
-    if (_or) {
+    if ((Objects.equal(referencedType.getDeclaringType(), null) || outerSegment.equals(referencedType.getSimpleName()))) {
       return referencedType;
     }
-    JvmDeclaredType _declaringType_1 = referencedType.getDeclaringType();
-    return this.findDeclaringTypeBySimpleName(_declaringType_1, outerSegment);
+    JvmDeclaredType _declaringType = referencedType.getDeclaringType();
+    return this.findDeclaringTypeBySimpleName(_declaringType, outerSegment);
   }
   
   protected void _visit(final XConstructorCall semanticElement, final INode originNode, final ImportsAcceptor acceptor) {
@@ -263,32 +226,14 @@ public class ImportsCollector {
     if ((firstDelimiter == (-1))) {
       int _indexOf_1 = text.indexOf("::");
       firstDelimiter = _indexOf_1;
-      boolean _and = false;
-      int _length = text.length();
-      int _minus = (_length - 2);
-      boolean _equals = (firstDelimiter == _minus);
-      if (!_equals) {
-        _and = false;
-      } else {
-        _and = (firstDelimiter >= 0);
-      }
-      if (_and) {
+      if (((firstDelimiter == (text.length() - 2)) && (firstDelimiter >= 0))) {
         String _substring = text.substring(0, firstDelimiter);
         text = _substring;
         firstDelimiter = (-1);
       }
     } else {
       int colon = text.indexOf("::");
-      boolean _and_1 = false;
-      int _length_1 = text.length();
-      int _minus_1 = (_length_1 - 2);
-      boolean _notEquals = (colon != _minus_1);
-      if (!_notEquals) {
-        _and_1 = false;
-      } else {
-        _and_1 = (colon != (-1));
-      }
-      if (_and_1) {
+      if (((colon != (text.length() - 2)) && (colon != (-1)))) {
         int _min_1 = Math.min(firstDelimiter, colon);
         firstDelimiter = _min_1;
       }
@@ -326,20 +271,12 @@ public class ImportsCollector {
             EObject _eObjectOrProxy = singleElement.getEObjectOrProxy();
             referencedType = ((JvmType) _eObjectOrProxy);
           }
-          boolean _and = false;
-          if (!(referencedType instanceof JvmDeclaredType)) {
-            _and = false;
-          } else {
-            boolean _eIsProxy = referencedType.eIsProxy();
-            boolean _not = (!_eIsProxy);
-            _and = _not;
-          }
-          if (_and) {
+          if (((referencedType instanceof JvmDeclaredType) && (!referencedType.eIsProxy()))) {
             JvmDeclaredType casted = ((JvmDeclaredType) referencedType);
             String _qualifiedName = casted.getQualifiedName();
             boolean _equals = _qualifiedName.equals(docTypeText);
-            boolean _not_1 = (!_equals);
-            if (_not_1) {
+            boolean _not = (!_equals);
+            if (_not) {
               acceptor.acceptTypeImport(casted);
             }
           }

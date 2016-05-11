@@ -67,65 +67,16 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     }
     
     protected boolean _isValidDelegate(final FieldDeclaration it) {
-      boolean _and = false;
-      boolean _and_1 = false;
-      boolean _hasValidType = this.hasValidType(it);
-      if (!_hasValidType) {
-        _and_1 = false;
-      } else {
-        boolean _hasDelegationConflicts = this.hasDelegationConflicts(it);
-        boolean _not = (!_hasDelegationConflicts);
-        _and_1 = _not;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        boolean _areListedInterfacesValid = this.areListedInterfacesValid(it);
-        _and = _areListedInterfacesValid;
-      }
-      return _and;
+      return ((this.hasValidType(it) && (!this.hasDelegationConflicts(it))) && this.areListedInterfacesValid(it));
     }
     
     protected boolean _isValidDelegate(final MethodDeclaration it) {
-      boolean _and = false;
-      boolean _and_1 = false;
-      boolean _and_2 = false;
-      boolean _hasValidType = this.hasValidType(it);
-      if (!_hasValidType) {
-        _and_2 = false;
-      } else {
-        boolean _hasValidSignature = this.hasValidSignature(it);
-        _and_2 = _hasValidSignature;
-      }
-      if (!_and_2) {
-        _and_1 = false;
-      } else {
-        boolean _hasDelegationConflicts = this.hasDelegationConflicts(it);
-        boolean _not = (!_hasDelegationConflicts);
-        _and_1 = _not;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        boolean _areListedInterfacesValid = this.areListedInterfacesValid(it);
-        _and = _areListedInterfacesValid;
-      }
-      return _and;
+      return (((this.hasValidType(it) && this.hasValidSignature(it)) && (!this.hasDelegationConflicts(it))) && this.areListedInterfacesValid(it));
     }
     
     public boolean hasValidType(final MemberDeclaration it) {
       boolean _xifexpression = false;
-      boolean _or = false;
-      TypeReference _type = this.getType(it);
-      boolean _equals = Objects.equal(_type, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        TypeReference _type_1 = this.getType(it);
-        boolean _isInferred = _type_1.isInferred();
-        _or = _isInferred;
-      }
-      if (_or) {
+      if ((Objects.equal(this.getType(it), null) || this.getType(it).isInferred())) {
         boolean _xblockexpression = false;
         {
           this.context.addError(it, "Cannot use inferred types on delegates");
@@ -158,30 +109,28 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
       boolean _matched = false;
+      if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
+        _matched=true;
+      }
       if (!_matched) {
-        if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
+        TypeReference _string = this.context.getString();
+        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
           _matched=true;
         }
-        if (!_matched) {
-          TypeReference _string = this.context.getString();
-          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string)))) {
-            _matched=true;
-          }
+      }
+      if (!_matched) {
+        TypeReference _string_1 = this.context.getString();
+        TypeReference _newWildcardTypeReference = this.context.newWildcardTypeReference();
+        TypeReference _newTypeReference = this.context.newTypeReference(Class.class, _newWildcardTypeReference);
+        TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
+        TypeReference _object = this.context.getObject();
+        TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
+        if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
+          _matched=true;
         }
-        if (!_matched) {
-          TypeReference _string_1 = this.context.getString();
-          TypeReference _newWildcardTypeReference = this.context.newWildcardTypeReference();
-          TypeReference _newTypeReference = this.context.newTypeReference(Class.class, _newWildcardTypeReference);
-          TypeReference _newArrayTypeReference = this.context.newArrayTypeReference(_newTypeReference);
-          TypeReference _object = this.context.getObject();
-          TypeReference _newArrayTypeReference_1 = this.context.newArrayTypeReference(_object);
-          if (Objects.equal(_list, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_string_1, _newArrayTypeReference, _newArrayTypeReference_1)))) {
-            _matched=true;
-          }
-        }
-        if (_matched) {
-          _switchResult = true;
-        }
+      }
+      if (_matched) {
+        _switchResult = true;
       }
       if (!_matched) {
         boolean _xblockexpression = false;
@@ -291,16 +240,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             }
           }
         }
-        boolean _and = false;
-        boolean _isEmpty = listedInterfaces.isEmpty();
-        if (!_isEmpty) {
-          _and = false;
-        } else {
-          Sets.SetView<TypeReference> _intersection = Sets.<TypeReference>intersection(interfacesOfDeclaringType, availableInterfaces);
-          boolean _isEmpty_1 = _intersection.isEmpty();
-          _and = _isEmpty_1;
-        }
-        if (_and) {
+        if ((listedInterfaces.isEmpty() && Sets.<TypeReference>intersection(interfacesOfDeclaringType, availableInterfaces).isEmpty())) {
           StringConcatenation _builder = new StringConcatenation();
           TypeReference _type_1 = this.getType(delegate);
           String _simpleName = _type_1.getSimpleName();
@@ -383,28 +323,12 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
           @Override
           public Boolean apply(final TypeReference iface) {
-            boolean _and = false;
-            boolean _contains = interfacesOfDeclaringType.contains(iface);
-            if (!_contains) {
-              _and = false;
-            } else {
-              boolean _or = false;
-              boolean _isEmpty = listedInterfaces.isEmpty();
-              if (_isEmpty) {
-                _or = true;
-              } else {
-                final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
-                  @Override
-                  public Boolean apply(final TypeReference it) {
-                    return Boolean.valueOf(iface.isAssignableFrom(it));
-                  }
-                };
-                boolean _exists = IterableExtensions.<TypeReference>exists(listedInterfaces, _function);
-                _or = _exists;
+            return Boolean.valueOf((interfacesOfDeclaringType.contains(iface) && (listedInterfaces.isEmpty() || IterableExtensions.<TypeReference>exists(listedInterfaces, new Function1<TypeReference, Boolean>() {
+              @Override
+              public Boolean apply(final TypeReference it) {
+                return Boolean.valueOf(iface.isAssignableFrom(it));
               }
-              _and = _or;
-            }
-            return Boolean.valueOf(_and);
+            }))));
           }
         };
         Iterable<TypeReference> _filter = IterableExtensions.<TypeReference>filter(availableInterfaces, _function);
@@ -482,72 +406,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         };
         Iterable<TypeReference> _map = IterableExtensions.map(_resolvedParameters, _function);
         final List<TypeReference> parameterTypes = IterableExtensions.<TypeReference>toList(_map);
-        boolean _or = false;
-        boolean _or_1 = false;
-        boolean _or_2 = false;
-        boolean _or_3 = false;
-        boolean _and = false;
-        boolean _equals = Objects.equal(name, "hashCode");
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _isEmpty = parameterTypes.isEmpty();
-          _and = _isEmpty;
-        }
-        if (_and) {
-          _or_3 = true;
-        } else {
-          boolean _and_1 = false;
-          boolean _equals_1 = Objects.equal(name, "toString");
-          if (!_equals_1) {
-            _and_1 = false;
-          } else {
-            boolean _isEmpty_1 = parameterTypes.isEmpty();
-            _and_1 = _isEmpty_1;
-          }
-          _or_3 = _and_1;
-        }
-        if (_or_3) {
-          _or_2 = true;
-        } else {
-          boolean _and_2 = false;
-          boolean _equals_2 = Objects.equal(name, "equals");
-          if (!_equals_2) {
-            _and_2 = false;
-          } else {
-            TypeReference _object = this.context.getObject();
-            boolean _equals_3 = Objects.equal(parameterTypes, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(_object)));
-            _and_2 = _equals_3;
-          }
-          _or_2 = _and_2;
-        }
-        if (_or_2) {
-          _or_1 = true;
-        } else {
-          boolean _and_3 = false;
-          boolean _equals_4 = Objects.equal(name, "finalize");
-          if (!_equals_4) {
-            _and_3 = false;
-          } else {
-            boolean _isEmpty_2 = parameterTypes.isEmpty();
-            _and_3 = _isEmpty_2;
-          }
-          _or_1 = _and_3;
-        }
-        if (_or_1) {
-          _or = true;
-        } else {
-          boolean _and_4 = false;
-          boolean _equals_5 = Objects.equal(name, "clone");
-          if (!_equals_5) {
-            _and_4 = false;
-          } else {
-            boolean _isEmpty_3 = parameterTypes.isEmpty();
-            _and_4 = _isEmpty_3;
-          }
-          _or = _and_4;
-        }
-        _xblockexpression = _or;
+        _xblockexpression = (((((Objects.equal(name, "hashCode") && parameterTypes.isEmpty()) || (Objects.equal(name, "toString") && parameterTypes.isEmpty())) || (Objects.equal(name, "equals") && Objects.equal(parameterTypes, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(this.context.getObject()))))) || (Objects.equal(name, "finalize") && parameterTypes.isEmpty())) || (Objects.equal(name, "clone") && parameterTypes.isEmpty()));
       }
       return _xblockexpression;
     }
@@ -729,16 +588,14 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
       List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
       boolean _matched = false;
-      if (!_matched) {
-        if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
-          _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("this.");
-          String _simpleName = it.getSimpleName();
-          _builder.append(_simpleName, "");
-          _builder.append("()");
-          _switchResult = _builder;
-        }
+      if (Objects.equal(_list, Collections.<Object>unmodifiableList(CollectionLiterals.<Object>newArrayList()))) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("this.");
+        String _simpleName = it.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append("()");
+        _switchResult = _builder;
       }
       if (!_matched) {
         TypeReference _string = this.context.getString();

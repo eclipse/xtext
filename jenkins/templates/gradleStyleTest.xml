@@ -14,8 +14,8 @@
       <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
-      <useJobPriority>false</useJobPriority>
-      <priority>-1</priority>
+      <useJobPriority>true</useJobPriority>
+      <priority>5</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -52,7 +52,7 @@
     <submoduleCfg class="list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
       <hudson.plugins.git.extensions.impl.CleanCheckout/>
       <hudson.plugins.git.extensions.impl.CloneOption>
@@ -100,7 +100,7 @@
       <description></description>
       <switches>--profile --stacktrace -PtargetPlatform=${ECLIPSE_TARGET_ALIAS}</switches>
       <tasks/>
-      <rootBuildScriptDir>org.eclipse.xtext.git</rootBuildScriptDir>
+      <rootBuildScriptDir>git-repo</rootBuildScriptDir>
       <buildFile></buildFile>
       <gradleName>(Default)</gradleName>
       <useWrapper>true</useWrapper>
@@ -117,9 +117,9 @@
       <healthScaleFactor>1.0</healthScaleFactor>
     </hudson.tasks.junit.JUnitResultArchiver>
     <hudson.tasks.Mailer plugin="mailer@1.15">
-      <recipients>Sebastian.Zarnekow@itemis.de  sven.efftinge@itemis.de</recipients>
+      <recipients>dennis.huebner@gmail.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
-      <sendToIndividuals>true</sendToIndividuals>
+      <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
     <com.cloudbees.jenkins.GitHubCommitNotifier plugin="github@1.11">
       <resultOnFailure>FAILURE</resultOnFailure>
@@ -128,7 +128,7 @@
   <buildWrappers>
     <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
-        <timeoutMinutes>60</timeoutMinutes>
+        <timeoutMinutes>120</timeoutMinutes>
       </strategy>
       <operationList>
         <hudson.plugins.build__timeout.operations.WriteDescriptionOperation>

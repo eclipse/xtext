@@ -99,14 +99,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     
     @Override
     public boolean exists() {
-      boolean _and = false;
-      if (!(this.file != null)) {
-        _and = false;
-      } else {
-        boolean _exists = this.file.exists();
-        _and = _exists;
-      }
-      return _and;
+      return ((this.file != null) && this.file.exists());
     }
     
     public VirtualFilePersistedTrace(final VirtualFile file, final TraceForVirtualFileProvider traceProvider) {
@@ -167,24 +160,16 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
             _findElementAt=_findFile.findElementAt(_offset);
           }
           PsiElement result = _findElementAt;
-          boolean _or = false;
-          if ((result == null)) {
-            _or = true;
-          } else {
-            int _textLength = result.getTextLength();
-            boolean _equals = (_textLength == 0);
-            _or = _equals;
-          }
-          if (_or) {
+          if (((result == null) || (result.getTextLength() == 0))) {
             return null;
           }
           while ((!result.getTextRange().containsRange(textRegion.getOffset(), (textRegion.getOffset() + textRegion.getLength())))) {
             PsiElement _parent = result.getParent();
             result = _parent;
           }
-          int _textLength_1 = result.getTextLength();
-          boolean _equals_1 = (_textLength_1 == 0);
-          if (_equals_1) {
+          int _textLength = result.getTextLength();
+          boolean _equals = (_textLength == 0);
+          if (_equals) {
             return null;
           }
           _xblockexpression = result;
@@ -295,15 +280,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
       }
     };
     final VirtualFile outputSourceFolder = _application.<VirtualFile>runReadAction(_function);
-    boolean _or = false;
-    if ((outputSourceFolder == null)) {
-      _or = true;
-    } else {
-      boolean _exists = outputSourceFolder.exists();
-      boolean _not = (!_exists);
-      _or = _not;
-    }
-    if (_or) {
+    if (((outputSourceFolder == null) || (!outputSourceFolder.exists()))) {
       final SourceRelativeURI result = super.getGeneratedUriForTrace(projectConfig, absoluteSourceResource, generatedFileURI, traceURIConverter);
       return result;
     }

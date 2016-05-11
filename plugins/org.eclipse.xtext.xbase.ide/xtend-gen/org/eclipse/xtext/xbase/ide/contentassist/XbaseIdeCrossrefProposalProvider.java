@@ -30,6 +30,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -37,7 +38,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
@@ -71,69 +71,67 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       QualifiedName _name = candidate.getName();
       String _string = _qualifiedNameConverter.toString(_name);
       final String proposalString = (_string + bracketInfo.brackets);
-      int insignificantParameters = 0;
+      int _xifexpression = (int) 0;
       if ((candidate instanceof IIdentifiableElementDescription)) {
-        int _numberOfIrrelevantParameters = ((IIdentifiableElementDescription)candidate).getNumberOfIrrelevantParameters();
-        insignificantParameters = _numberOfIrrelevantParameters;
+        _xifexpression = ((IIdentifiableElementDescription)candidate).getNumberOfIrrelevantParameters();
+      } else {
+        _xifexpression = 0;
       }
+      final int insignificantParameters = _xifexpression;
       XtextResource _resource = context.getResource();
       final LightweightTypeReferenceFactory converter = this.getTypeConverter(_resource);
       final EObject objectOrProxy = candidate.getEObjectOrProxy();
-      ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+      IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
       final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
         @Override
-        public void apply(final ContentAssistEntry it) {
+        public void apply(final ContentAssistEntry result) {
+          if ((objectOrProxy instanceof JvmFeature)) {
+            boolean _startsWith = bracketInfo.brackets.startsWith(" =");
+            if (_startsWith) {
+              IQualifiedNameConverter _qualifiedNameConverter = XbaseIdeCrossrefProposalProvider.this.getQualifiedNameConverter();
+              QualifiedName _name = candidate.getName();
+              String _string = _qualifiedNameConverter.toString(_name);
+              String _plus = (_string + bracketInfo.brackets);
+              XbaseIdeCrossrefProposalProvider.this.addNameAndDescription(result, ((JvmFeature)objectOrProxy), 
+                false, insignificantParameters, _plus, converter);
+            } else {
+              boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(bracketInfo.brackets);
+              boolean _not = (!_isNullOrEmpty);
+              IQualifiedNameConverter _qualifiedNameConverter_1 = XbaseIdeCrossrefProposalProvider.this.getQualifiedNameConverter();
+              QualifiedName _name_1 = candidate.getName();
+              String _string_1 = _qualifiedNameConverter_1.toString(_name_1);
+              XbaseIdeCrossrefProposalProvider.this.addNameAndDescription(result, ((JvmFeature)objectOrProxy), _not, insignificantParameters, _string_1, converter);
+            }
+          } else {
+            IQualifiedNameConverter _qualifiedNameConverter_2 = XbaseIdeCrossrefProposalProvider.this.getQualifiedNameConverter();
+            QualifiedName _qualifiedName = candidate.getQualifiedName();
+            String _string_2 = _qualifiedNameConverter_2.toString(_qualifiedName);
+            IQualifiedNameConverter _qualifiedNameConverter_3 = XbaseIdeCrossrefProposalProvider.this.getQualifiedNameConverter();
+            QualifiedName _name_2 = candidate.getName();
+            String _string_3 = _qualifiedNameConverter_3.toString(_name_2);
+            XbaseIdeCrossrefProposalProvider.this.addNameAndDescription(result, objectOrProxy, _string_2, _string_3);
+          }
+          int _offset = context.getOffset();
           String _prefix = context.getPrefix();
-          it.setPrefix(_prefix);
-          it.setProposal(proposalString);
+          int _length = _prefix.length();
+          int _minus = (_offset - _length);
+          int _length_1 = proposalString.length();
+          int offset = (_minus + _length_1);
+          result.setEscapePosition(Integer.valueOf((offset + bracketInfo.caretOffset)));
+          if ((bracketInfo.selectionOffset != 0)) {
+            int _offset_1 = offset;
+            offset = (_offset_1 + bracketInfo.selectionOffset);
+            ArrayList<TextRegion> _editPositions = result.getEditPositions();
+            TextRegion _textRegion = new TextRegion(offset, bracketInfo.selectionLength);
+            _editPositions.add(_textRegion);
+          }
+          if ((objectOrProxy instanceof JvmExecutable)) {
+            final StringBuilder parameterList = new StringBuilder();
+            XbaseIdeCrossrefProposalProvider.this.appendParameters(parameterList, ((JvmExecutable)objectOrProxy), insignificantParameters, converter);
+          }
         }
       };
-      final ContentAssistEntry result = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
-      if ((objectOrProxy instanceof JvmFeature)) {
-        boolean _startsWith = bracketInfo.brackets.startsWith(" =");
-        if (_startsWith) {
-          IQualifiedNameConverter _qualifiedNameConverter_1 = this.getQualifiedNameConverter();
-          QualifiedName _name_1 = candidate.getName();
-          String _string_1 = _qualifiedNameConverter_1.toString(_name_1);
-          String _plus = (_string_1 + bracketInfo.brackets);
-          this.addNameAndDescription(result, ((JvmFeature)objectOrProxy), 
-            false, insignificantParameters, _plus, converter);
-        } else {
-          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(bracketInfo.brackets);
-          boolean _not = (!_isNullOrEmpty);
-          IQualifiedNameConverter _qualifiedNameConverter_2 = this.getQualifiedNameConverter();
-          QualifiedName _name_2 = candidate.getName();
-          String _string_2 = _qualifiedNameConverter_2.toString(_name_2);
-          this.addNameAndDescription(result, ((JvmFeature)objectOrProxy), _not, insignificantParameters, _string_2, converter);
-        }
-      } else {
-        IQualifiedNameConverter _qualifiedNameConverter_3 = this.getQualifiedNameConverter();
-        QualifiedName _qualifiedName = candidate.getQualifiedName();
-        String _string_3 = _qualifiedNameConverter_3.toString(_qualifiedName);
-        IQualifiedNameConverter _qualifiedNameConverter_4 = this.getQualifiedNameConverter();
-        QualifiedName _name_3 = candidate.getName();
-        String _string_4 = _qualifiedNameConverter_4.toString(_name_3);
-        this.addNameAndDescription(result, objectOrProxy, _string_3, _string_4);
-      }
-      int _offset = context.getOffset();
-      String _prefix = context.getPrefix();
-      int _length = _prefix.length();
-      int _minus = (_offset - _length);
-      int _length_1 = proposalString.length();
-      int offset = (_minus + _length_1);
-      result.setEscapePosition(Integer.valueOf((offset + bracketInfo.caretOffset)));
-      if ((bracketInfo.selectionOffset != 0)) {
-        int _offset_1 = offset;
-        offset = (_offset_1 + bracketInfo.selectionOffset);
-        ArrayList<TextRegion> _editPositions = result.getEditPositions();
-        TextRegion _textRegion = new TextRegion(offset, bracketInfo.selectionLength);
-        _editPositions.add(_textRegion);
-      }
-      if ((objectOrProxy instanceof JvmExecutable)) {
-        final StringBuilder parameterList = new StringBuilder();
-        this.appendParameters(parameterList, ((JvmExecutable)objectOrProxy), insignificantParameters, converter);
-      }
-      return result;
+      return _proposalCreator.createProposal(proposalString, context, _function);
     }
     return super.createProposal(candidate, crossRef, context);
   }
@@ -144,22 +142,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       AbstractElement _terminal_1 = crossRef.getTerminal();
       AbstractRule _rule = ((RuleCall) _terminal_1).getRule();
       final String ruleName = _rule.getName();
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _equals = Objects.equal(ruleName, "IdOrSuper");
-      if (_equals) {
-        _or_1 = true;
-      } else {
-        boolean _equals_1 = Objects.equal(ruleName, "ValidID");
-        _or_1 = _equals_1;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        boolean _equals_2 = Objects.equal(ruleName, "FeatureCallID");
-        _or = _equals_2;
-      }
-      return _or;
+      return ((Objects.equal(ruleName, "IdOrSuper") || Objects.equal(ruleName, "ValidID")) || Objects.equal(ruleName, "FeatureCallID"));
     }
     return false;
   }
@@ -173,19 +156,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         int _numberOfParameters = ((IIdentifiableElementDescription)proposedDescription).getNumberOfParameters();
         boolean _equals = (_numberOfParameters == 1);
         if (_equals) {
-          boolean _and = false;
-          String _simpleName = ((JvmExecutable)jvmFeature).getSimpleName();
-          boolean _startsWith = _simpleName.startsWith("set");
-          if (!_startsWith) {
-            _and = false;
-          } else {
-            QualifiedName _name = ((IIdentifiableElementDescription)proposedDescription).getName();
-            String _firstSegment = _name.getFirstSegment();
-            boolean _startsWith_1 = _firstSegment.startsWith("set");
-            boolean _not = (!_startsWith_1);
-            _and = _not;
-          }
-          if (_and) {
+          if ((((JvmExecutable)jvmFeature).getSimpleName().startsWith("set") && (!((IIdentifiableElementDescription)proposedDescription).getName().getFirstSegment().startsWith("set")))) {
             info.brackets = " = value";
             int _length = "value".length();
             int _minus = (-_length);
@@ -274,16 +245,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         labelBuilder.append(")");
       }
       final JvmTypeReference returnType = ((JvmOperation)feature).getReturnType();
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(returnType, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        String _simpleName = returnType.getSimpleName();
-        boolean _notEquals_1 = (!Objects.equal(_simpleName, null));
-        _and = _notEquals_1;
-      }
-      if (_and) {
+      if (((!Objects.equal(returnType, null)) && (!Objects.equal(returnType.getSimpleName(), null)))) {
         labelBuilder.append(" : ");
         LightweightTypeReference _lightweightReference = converter.toLightweightReference(returnType);
         String _humanReadableName = _lightweightReference.getHumanReadableName();
@@ -295,21 +257,21 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       descriptionBuilder.append(_humanReadableName_1);
       if ((!withParents)) {
         descriptionBuilder.append(".");
-        String _simpleName_1 = ((JvmOperation)feature).getSimpleName();
-        descriptionBuilder.append(_simpleName_1);
+        String _simpleName = ((JvmOperation)feature).getSimpleName();
+        descriptionBuilder.append(_simpleName);
         descriptionBuilder.append("()");
       }
     } else {
       if ((feature instanceof JvmField)) {
         labelBuilder.append(" : ");
         JvmTypeReference _type = ((JvmField)feature).getType();
-        boolean _notEquals_2 = (!Objects.equal(_type, null));
-        if (_notEquals_2) {
+        boolean _notEquals = (!Objects.equal(_type, null));
+        if (_notEquals) {
           JvmTypeReference _type_1 = ((JvmField)feature).getType();
           LightweightTypeReference _lightweightReference_1 = converter.toLightweightReference(_type_1);
           final String fieldType = _lightweightReference_1.getHumanReadableName();
-          boolean _notEquals_3 = (!Objects.equal(fieldType, null));
-          if (_notEquals_3) {
+          boolean _notEquals_1 = (!Objects.equal(fieldType, null));
+          if (_notEquals_1) {
             labelBuilder.append(fieldType);
           }
         }
@@ -359,37 +321,20 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         if ((i != 0)) {
           result.append(", ");
         }
-        boolean _and = false;
-        boolean _and_1 = false;
-        int _size_2 = relevantParameters.size();
-        int _minus = (_size_2 - 1);
-        boolean _equals = (i == _minus);
-        if (!_equals) {
-          _and_1 = false;
-        } else {
-          boolean _isVarArgs = executable.isVarArgs();
-          _and_1 = _isVarArgs;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
+        if ((((i == (relevantParameters.size() - 1)) && executable.isVarArgs()) && (parameter.getParameterType() instanceof JvmGenericArrayTypeReference))) {
           JvmTypeReference _parameterType = parameter.getParameterType();
-          _and = (_parameterType instanceof JvmGenericArrayTypeReference);
-        }
-        if (_and) {
-          JvmTypeReference _parameterType_1 = parameter.getParameterType();
-          final JvmGenericArrayTypeReference parameterType = ((JvmGenericArrayTypeReference) _parameterType_1);
+          final JvmGenericArrayTypeReference parameterType = ((JvmGenericArrayTypeReference) _parameterType);
           JvmTypeReference _componentType = parameterType.getComponentType();
           LightweightTypeReference _lightweightReference = ownedConverter.toLightweightReference(_componentType);
           String _humanReadableName = _lightweightReference.getHumanReadableName();
           result.append(_humanReadableName);
           result.append("...");
         } else {
-          JvmTypeReference _parameterType_2 = parameter.getParameterType();
-          boolean _notEquals = (!Objects.equal(_parameterType_2, null));
+          JvmTypeReference _parameterType_1 = parameter.getParameterType();
+          boolean _notEquals = (!Objects.equal(_parameterType_1, null));
           if (_notEquals) {
-            JvmTypeReference _parameterType_3 = parameter.getParameterType();
-            LightweightTypeReference _lightweightReference_1 = ownedConverter.toLightweightReference(_parameterType_3);
+            JvmTypeReference _parameterType_2 = parameter.getParameterType();
+            LightweightTypeReference _lightweightReference_1 = ownedConverter.toLightweightReference(_parameterType_2);
             final String simpleName = _lightweightReference_1.getHumanReadableName();
             boolean _notEquals_1 = (!Objects.equal(simpleName, null));
             if (_notEquals_1) {

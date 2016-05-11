@@ -10,7 +10,7 @@
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
     <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
       <useJobPriority>true</useJobPriority>
-      <priority>-2147483647</priority>
+      <priority>9</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.5">
@@ -77,10 +77,10 @@
       <fingerprint>false</fingerprint>
       <defaultExcludes>true</defaultExcludes>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.Mailer plugin="mailer@1.11">
+    <hudson.tasks.Mailer plugin="mailer@1.15">
       <recipients></recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
-      <sendToIndividuals>true</sendToIndividuals>
+      <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers/>

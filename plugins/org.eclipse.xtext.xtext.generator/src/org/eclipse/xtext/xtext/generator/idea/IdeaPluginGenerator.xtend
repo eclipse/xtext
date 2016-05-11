@@ -246,7 +246,7 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 				@«Override»
 				public «InputStream» getAntlrTokenFile() {
 					«ClassLoader» classLoader = getClass().getClassLoader();
-			    	return classLoader.getResourceAsStream("«grammar.tokens»");
+					return classLoader.getResourceAsStream("«grammar.tokens»");
 				}
 			}
 		''')
@@ -257,7 +257,7 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 				<id>«grammar.ideaBasePackage»</id>
 				<name>«grammar.simpleName» Support</name>
 				<description>
-			      This plugin enables smart editing of «grammar.simpleName» files.
+					This plugin enables smart editing of «grammar.simpleName» files.
 				</description>
 				<version>1.0.0</version>
 				<vendor>My Company</vendor>
@@ -279,7 +279,7 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 							uri="«generatedMetamodel.EPackage.nsURI»"
 							class="«grammar.namespace».«generatedMetamodel.name».«generatedMetamodel.name.toFirstUpper»Package"
 						/>
-				    «ENDFOR»
+					«ENDFOR»
 					<resourceFactory 
 						type="«language.fileExtensions.head»"
 						class="org.eclipse.xtext.resource.IResourceFactory"
@@ -315,7 +315,7 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 
 					«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory'.typeRef)»
 					<facetType implementation="«grammar.facetType»"/>
-			      	«grammar.compileExtension('lang.documentationProvider', 'org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider'.typeRef)»
+					«grammar.compileExtension('lang.documentationProvider', 'org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider'.typeRef)»
 					<colorSettingsPage implementation="«grammar.colorSettingsPage»"/>
 					<highlightVisitor implementation="«grammar.semanticHighlightVisitor»"/>
 
@@ -597,14 +597,14 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 				«ENDIF»
 			
 				@Override
-			    public int getAntlrType(«iElementType» iElementType) {
-			        return (iElementType instanceof «indexedElementType») ? ((«indexedElementType») iElementType).getLocalIndex() : «Token».INVALID_TOKEN_TYPE;
-			    }
-			    
-			    @Override
-			    public «iElementType» getIElementType(int antlrType) {
-			    	return tokenTypes[antlrType];
-			    }
+				public int getAntlrType(«iElementType» iElementType) {
+					return (iElementType instanceof «indexedElementType») ? ((«indexedElementType») iElementType).getLocalIndex() : «Token».INVALID_TOKEN_TYPE;
+				}
+			
+				@Override
+				public «iElementType» getIElementType(int antlrType) {
+					return tokenTypes[antlrType];
+				}
 			
 				@Override
 				public «tokenSet» getWhitespaceTokens() {
@@ -632,10 +632,10 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 			public class «grammar.syntaxHighlighterFactory.simpleName» extends «lazySyntaxHighlighter» {
 				
 				@Override
-			    @«"org.jetbrains.annotations.NotNull".typeRef»
-			    protected «syntaxHighlighter» createHighlighter() {
-			        return «grammar.ideaLanguage».INSTANCE.getInstance(«syntaxHighlighter».class);
-			    }
+				@«"org.jetbrains.annotations.NotNull".typeRef»
+				protected «syntaxHighlighter» createHighlighter() {
+					return «grammar.ideaLanguage».INSTANCE.getInstance(«syntaxHighlighter».class);
+				}
 			}
 		''')
 	}

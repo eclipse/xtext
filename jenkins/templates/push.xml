@@ -13,7 +13,7 @@
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
       <projectUrl>https://github.com/eclipse/xtext/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
-    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.25"/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
@@ -30,10 +30,16 @@
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <submoduleCfg class="list"/>
     <extensions>
-      <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
-      </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-    </extensions>
+       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+          <relativeTargetDir>git-repo</relativeTargetDir>
+       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+       <hudson.plugins.git.extensions.impl.CleanCheckout />
+       <hudson.plugins.git.extensions.impl.CloneOption>
+         <shallow>false</shallow>
+         <reference></reference>
+         <timeout>60</timeout>
+       </hudson.plugins.git.extensions.impl.CloneOption>
+     </extensions>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
@@ -59,7 +65,7 @@
       <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
-      <command>#git clone git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git org.eclipse.xtext.git
+      <command>#git clone git://git.eclipse.org/gitroot/tmf/git-repo git-repo
 cd ${WORKSPACE}
 rm -rf ${WORKSPACE}/repositories/eclipse/final/
 mv -f ${WORKSPACE}/repositories/eclipse/Juno/final/ ${WORKSPACE}/repositories/eclipse/final/
@@ -72,7 +78,7 @@ COMPACT_BUILD_ID=&quot;${BUILD_ID//[-_]}&quot;
 COMPACT_BUILD_ID=&quot;${COMPACT_BUILD_ID:0:12}&quot;
 :
 {
-	cat &quot;${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/xtext-build.properties&quot;
+	cat &quot;${WORKSPACE}/git-repo/releng/org.eclipse.xtext.releng/releng/xtext-build.properties&quot;
 	echo
 	echo &quot;# Define the Build ID (added by Hudson job definition)&quot;
 	echo &quot;build.id=N${COMPACT_BUILD_ID}&quot;
@@ -122,7 +128,7 @@ build</commands>
       <logLevel>info</logLevel>
       <params>-DECLIPSE.TARGET.ALIAS=Stable
 -Dforce.javadoc=false
--Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git
+-Dcheckout.location=${WORKSPACE}/git-repo
 -Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/final
@@ -145,7 +151,7 @@ build</commands>
       <logLevel>info</logLevel>
       <params>-DECLIPSE.TARGET.ALIAS=Stable
 -Dforce.javadoc=false
--Dcheckout.location=${WORKSPACE}/org.eclipse.xtext.git
+-Dcheckout.location=${WORKSPACE}/git-repo
 -Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/final
@@ -164,7 +170,7 @@ build</commands>
     </hudson.plugins.buckminster.EclipseBuckminsterBuilder>
     <hudson.tasks.Shell>
       <command>mv buildroot/buckminster.build/org.eclipse.xtext.build_*-eclipse.feature/site.p2.tweaked xtext.p2.repository
-#cp -R org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/deployment .</command>
+#cp -R git-repo/releng/org.eclipse.xtext.releng/releng/deployment .</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -192,10 +198,10 @@ build</commands>
     <hudson.tasks.test.AggregatedTestResultPublisher plugin="junit@1.1">
       <includeFailedBuilds>false</includeFailedBuilds>
     </hudson.tasks.test.AggregatedTestResultPublisher>
-    <hudson.tasks.Mailer plugin="mailer@1.11">
-      <recipients>alle-ki@itemis.de</recipients>
+    <hudson.tasks.Mailer plugin="mailer@1.15">
+      <recipients>dennis.huebner@gmail.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
-      <sendToIndividuals>true</sendToIndividuals>
+      <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
     <com.cloudbees.jenkins.GitHubCommitNotifier plugin="github@1.11">
       <resultOnFailure>FAILURE</resultOnFailure>
@@ -203,7 +209,7 @@ build</commands>
     <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
-          <pattern>org.eclipse.xtext.git/**</pattern>
+          <pattern>git-repo/**</pattern>
           <type>EXCLUDE</type>
         </hudson.plugins.ws__cleanup.Pattern>
         <hudson.plugins.ws__cleanup.Pattern>
@@ -224,7 +230,7 @@ build</commands>
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>60</timeoutMinutes>
       </strategy>

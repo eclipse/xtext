@@ -11,7 +11,6 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -63,6 +62,7 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -208,19 +208,10 @@ public class ConvertJavaCode {
 
 	private IFile xtendFileToCreate(ICompilationUnit iCompilationUnit) {
 		IContainer parent = iCompilationUnit.getResource().getParent();
-		String xtendFileName = getNameWithoutExtension(iCompilationUnit.getElementName()) + "."
+		String xtendFileName = Files.getNameWithoutExtension(iCompilationUnit.getElementName()) + "."
 				+ fileExtensionProvider.getPrimaryFileExtension();
 		IFile file = parent.getFile(new Path(xtendFileName));
 		return file;
-	}
-
-	/*
-	 * Available in com.google.guava 14
-	 */
-	private String getNameWithoutExtension(String file) {
-		String fileName = new File(file).getName();
-		int dotIndex = fileName.lastIndexOf('.');
-		return (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
 	}
 
 	private void writeToFile(IFile file, String content) throws ExecutionException {

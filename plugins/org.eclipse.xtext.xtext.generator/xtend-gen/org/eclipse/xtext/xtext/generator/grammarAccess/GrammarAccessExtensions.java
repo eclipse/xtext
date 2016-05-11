@@ -245,57 +245,8 @@ public class GrammarAccessExtensions {
   public boolean isValidJavaLatinIdentifier(final char c, final boolean start) {
     boolean valid = ((c >= 'A') && (c <= 'Z'));
     valid = (valid || ((c >= 'a') && (c <= 'z')));
-    boolean _or = false;
-    boolean _or_1 = false;
-    boolean _or_2 = false;
-    boolean _or_3 = false;
-    boolean _or_4 = false;
-    boolean _or_5 = false;
-    if (valid) {
-      _or_5 = true;
-    } else {
-      boolean _eq = GrammarAccessExtensions.eq(c, 'ä');
-      _or_5 = _eq;
-    }
-    if (_or_5) {
-      _or_4 = true;
-    } else {
-      boolean _eq_1 = GrammarAccessExtensions.eq(c, 'ö');
-      _or_4 = _eq_1;
-    }
-    if (_or_4) {
-      _or_3 = true;
-    } else {
-      boolean _eq_2 = GrammarAccessExtensions.eq(c, 'ü');
-      _or_3 = _eq_2;
-    }
-    if (_or_3) {
-      _or_2 = true;
-    } else {
-      boolean _eq_3 = GrammarAccessExtensions.eq(c, 'Ä');
-      _or_2 = _eq_3;
-    }
-    if (_or_2) {
-      _or_1 = true;
-    } else {
-      boolean _eq_4 = GrammarAccessExtensions.eq(c, 'Ö');
-      _or_1 = _eq_4;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      boolean _eq_5 = GrammarAccessExtensions.eq(c, 'Ü');
-      _or = _eq_5;
-    }
-    valid = _or;
-    boolean _or_6 = false;
-    if (valid) {
-      _or_6 = true;
-    } else {
-      boolean _eq_6 = GrammarAccessExtensions.eq(c, '_');
-      _or_6 = _eq_6;
-    }
-    valid = _or_6;
+    valid = ((((((valid || GrammarAccessExtensions.eq(c, 'ä')) || GrammarAccessExtensions.eq(c, 'ö')) || GrammarAccessExtensions.eq(c, 'ü')) || GrammarAccessExtensions.eq(c, 'Ä')) || GrammarAccessExtensions.eq(c, 'Ö')) || GrammarAccessExtensions.eq(c, 'Ü'));
+    valid = (valid || GrammarAccessExtensions.eq(c, '_'));
     if ((!start)) {
       valid = (valid || ((c >= '0') && (c <= '9')));
     }
@@ -377,12 +328,10 @@ public class GrammarAccessExtensions {
   private List<String> getSingleElementDescription(final AbstractElement ele) {
     final ArrayList<String> r = new ArrayList<String>(2);
     boolean _matched = false;
-    if (!_matched) {
-      if (ele instanceof Keyword) {
-        _matched=true;
-        String _value = ((Keyword)ele).getValue();
-        r.add(_value);
-      }
+    if (ele instanceof Keyword) {
+      _matched=true;
+      String _value = ((Keyword)ele).getValue();
+      r.add(_value);
     }
     if (!_matched) {
       if (ele instanceof Assignment) {
@@ -624,12 +573,10 @@ public class GrammarAccessExtensions {
     EObject _eContainer = ele.eContainer();
     final EObject cnt = _eContainer;
     boolean _matched = false;
-    if (!_matched) {
-      if (cnt instanceof AbstractElement) {
-        _matched=true;
-        String _gaRuleElementAccessor = this.gaRuleElementAccessor(((AbstractElement)cnt));
-        _switchResult = (_gaRuleElementAccessor + ".getType()");
-      }
+    if (cnt instanceof AbstractElement) {
+      _matched=true;
+      String _gaRuleElementAccessor = this.gaRuleElementAccessor(((AbstractElement)cnt));
+      _switchResult = (_gaRuleElementAccessor + ".getType()");
     }
     if (!_matched) {
       if (cnt instanceof AbstractRule) {
@@ -656,11 +603,9 @@ public class GrammarAccessExtensions {
   public String gaAccessor(final EObject ele) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (ele instanceof AbstractElement) {
-        _matched=true;
-        _switchResult = this.gaRuleElementAccessor(((AbstractElement)ele));
-      }
+    if (ele instanceof AbstractElement) {
+      _matched=true;
+      _switchResult = this.gaRuleElementAccessor(((AbstractElement)ele));
     }
     if (!_matched) {
       if (ele instanceof AbstractRule) {
@@ -800,48 +745,24 @@ public class GrammarAccessExtensions {
     boolean _xblockexpression = false;
     {
       final List<AbstractRule> allRules = GrammarUtil.allRules(grammar);
-      boolean _or = false;
-      int _indexOf = allRules.indexOf(rule);
-      boolean _equals = (_indexOf == 0);
-      if (_equals) {
-        _or = true;
-      } else {
-        final Function1<AbstractRule, List<RuleCall>> _function = new Function1<AbstractRule, List<RuleCall>>() {
-          @Override
-          public List<RuleCall> apply(final AbstractRule it) {
-            return GrammarUtil.containedRuleCalls(it);
-          }
-        };
-        List<List<RuleCall>> _map = ListExtensions.<AbstractRule, List<RuleCall>>map(allRules, _function);
-        Iterable<RuleCall> _flatten = Iterables.<RuleCall>concat(_map);
-        final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
-          @Override
-          public Boolean apply(final RuleCall ruleCall) {
-            AbstractRule _rule = ruleCall.getRule();
-            return Boolean.valueOf(Objects.equal(_rule, rule));
-          }
-        };
-        boolean _exists = IterableExtensions.<RuleCall>exists(_flatten, _function_1);
-        _or = _exists;
-      }
-      _xblockexpression = _or;
+      _xblockexpression = ((allRules.indexOf(rule) == 0) || IterableExtensions.<RuleCall>exists(Iterables.<RuleCall>concat(ListExtensions.<AbstractRule, List<RuleCall>>map(allRules, new Function1<AbstractRule, List<RuleCall>>() {
+        @Override
+        public List<RuleCall> apply(final AbstractRule it) {
+          return GrammarUtil.containedRuleCalls(it);
+        }
+      })), new Function1<RuleCall, Boolean>() {
+        @Override
+        public Boolean apply(final RuleCall ruleCall) {
+          AbstractRule _rule = ruleCall.getRule();
+          return Boolean.valueOf(Objects.equal(_rule, rule));
+        }
+      }));
     }
     return _xblockexpression;
   }
   
   public boolean definesUnorderedGroups(final ParserRule it, final AntlrOptions options) {
-    boolean _and = false;
-    boolean _isBacktrack = options.isBacktrack();
-    if (!_isBacktrack) {
-      _and = false;
-    } else {
-      List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(it);
-      List<UnorderedGroup> _typeSelect = EcoreUtil2.<UnorderedGroup>typeSelect(_eAllContentsAsList, UnorderedGroup.class);
-      boolean _isEmpty = _typeSelect.isEmpty();
-      boolean _not = (!_isEmpty);
-      _and = _not;
-    }
-    return _and;
+    return (options.isBacktrack() && (!EcoreUtil2.<UnorderedGroup>typeSelect(EcoreUtil2.eAllContentsAsList(it), UnorderedGroup.class).isEmpty()));
   }
   
   protected boolean _predicated(final AbstractElement it) {
@@ -849,16 +770,7 @@ public class GrammarAccessExtensions {
   }
   
   protected boolean _predicated(final Assignment it) {
-    boolean _or = false;
-    boolean _isPredicated = it.isPredicated();
-    if (_isPredicated) {
-      _or = true;
-    } else {
-      AbstractElement _terminal = it.getTerminal();
-      boolean _predicated = this.predicated(_terminal);
-      _or = _predicated;
-    }
-    return _or;
+    return (it.isPredicated() || this.predicated(it.getTerminal()));
   }
   
   protected boolean _predicated(final RuleCall it) {
@@ -1004,14 +916,12 @@ public class GrammarAccessExtensions {
   public CharSequence toStringLiteral(final AbstractElement it) {
     CharSequence _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof RuleCall) {
-        AbstractRule _rule = ((RuleCall)it).getRule();
-        boolean _notEquals = (!Objects.equal(_rule, null));
-        if (_notEquals) {
-          _matched=true;
-          _switchResult = AntlrGrammarGenUtil.getQualifiedNameAsString(((RuleCall)it));
-        }
+    if (it instanceof RuleCall) {
+      AbstractRule _rule = ((RuleCall)it).getRule();
+      boolean _notEquals = (!Objects.equal(_rule, null));
+      if (_notEquals) {
+        _matched=true;
+        _switchResult = AntlrGrammarGenUtil.getQualifiedNameAsString(((RuleCall)it));
       }
     }
     if (!_matched) {

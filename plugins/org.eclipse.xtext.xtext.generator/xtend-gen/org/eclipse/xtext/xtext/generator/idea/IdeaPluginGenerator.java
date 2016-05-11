@@ -656,10 +656,10 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append(ClassLoader.class, "\t\t");
         _builder.append(" classLoader = getClass().getClassLoader();");
         _builder.newLineIfNotEmpty();
-        _builder.append("    \t");
+        _builder.append("\t\t");
         _builder.append("return classLoader.getResourceAsStream(\"");
         String _tokens = IdeaPluginGenerator.this._ideaPluginClassNames.getTokens(grammar);
-        _builder.append(_tokens, "    \t");
+        _builder.append(_tokens, "\t\t");
         _builder.append("\");");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -693,10 +693,10 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append("\t");
         _builder.append("<description>");
         _builder.newLine();
-        _builder.append("      ");
+        _builder.append("\t\t");
         _builder.append("This plugin enables smart editing of ");
         String _simpleName_1 = IdeaPluginGenerator.this._ideaPluginExtension.getSimpleName(grammar);
-        _builder.append(_simpleName_1, "      ");
+        _builder.append(_simpleName_1, "\t\t");
         _builder.append(" files.");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -931,10 +931,10 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append(_facetType, "\t\t");
         _builder.append("\"/>");
         _builder.newLineIfNotEmpty();
-        _builder.append("      \t");
+        _builder.append("\t\t");
         TypeReference _typeRef_7 = TypeReference.typeRef("org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider");
         CharSequence _compileExtension_8 = IdeaPluginGenerator.this.compileExtension(grammar, "lang.documentationProvider", _typeRef_7);
-        _builder.append(_compileExtension_8, "      \t");
+        _builder.append(_compileExtension_8, "\t\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("<colorSettingsPage implementation=\"");
@@ -1918,31 +1918,19 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           }
         }
         {
-          boolean _and = false;
-          List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
-          final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
+          if ((IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
             @Override
             public Boolean apply(final TerminalRule it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
             }
-          };
-          boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
-          if (!_exists_1) {
-            _and = false;
-          } else {
-            List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
-            final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
-              @Override
-              public Boolean apply(final TerminalRule it) {
-                String _name = it.getName();
-                return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
-              }
-            };
-            boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
-            _and = _exists_2;
-          }
-          if (_and) {
+          }) && IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
+            @Override
+            public Boolean apply(final TerminalRule it) {
+              String _name = it.getName();
+              return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
+            }
+          }))) {
             _builder.append("\t");
             _builder.append("private static final ");
             _builder.append(tokenSet, "\t");
@@ -1957,16 +1945,16 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.append(".RULE_ML_COMMENT]);");
             _builder.newLineIfNotEmpty();
           } else {
-            List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
-            final Function1<TerminalRule, Boolean> _function_3 = new Function1<TerminalRule, Boolean>() {
+            List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
+            final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
               @Override
               public Boolean apply(final TerminalRule it) {
                 String _name = it.getName();
                 return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
               }
             };
-            boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
-            if (_exists_3) {
+            boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
+            if (_exists_1) {
               _builder.append("\t");
               _builder.append("private static final ");
               _builder.append(tokenSet, "\t");
@@ -1978,16 +1966,16 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
               _builder.append(".RULE_SL_COMMENT]);");
               _builder.newLineIfNotEmpty();
             } else {
-              List<TerminalRule> _allTerminalRules_4 = GrammarUtil.allTerminalRules(grammar);
-              final Function1<TerminalRule, Boolean> _function_4 = new Function1<TerminalRule, Boolean>() {
+              List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
+              final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
                 @Override
                 public Boolean apply(final TerminalRule it) {
                   String _name = it.getName();
                   return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
                 }
               };
-              boolean _exists_4 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_4, _function_4);
-              if (_exists_4) {
+              boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
+              if (_exists_2) {
                 _builder.append("\t");
                 _builder.append("private static final ");
                 _builder.append(tokenSet, "\t");
@@ -2011,16 +1999,16 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           }
         }
         {
-          List<TerminalRule> _allTerminalRules_5 = GrammarUtil.allTerminalRules(grammar);
-          final Function1<TerminalRule, Boolean> _function_5 = new Function1<TerminalRule, Boolean>() {
+          List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
+          final Function1<TerminalRule, Boolean> _function_3 = new Function1<TerminalRule, Boolean>() {
             @Override
             public Boolean apply(final TerminalRule it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "STRING"));
             }
           };
-          boolean _exists_5 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_5, _function_5);
-          if (_exists_5) {
+          boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
+          if (_exists_3) {
             _builder.append("\t");
             _builder.append("private static final ");
             _builder.append(tokenSet, "\t");
@@ -2045,37 +2033,36 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append("\t");
         _builder.append("@Override");
         _builder.newLine();
-        _builder.append("    ");
+        _builder.append("\t");
         _builder.append("public int getAntlrType(");
-        _builder.append(iElementType, "    ");
+        _builder.append(iElementType, "\t");
         _builder.append(" iElementType) {");
         _builder.newLineIfNotEmpty();
-        _builder.append("        ");
+        _builder.append("\t\t");
         _builder.append("return (iElementType instanceof ");
-        _builder.append(indexedElementType, "        ");
+        _builder.append(indexedElementType, "\t\t");
         _builder.append(") ? ((");
-        _builder.append(indexedElementType, "        ");
+        _builder.append(indexedElementType, "\t\t");
         _builder.append(") iElementType).getLocalIndex() : ");
-        _builder.append(Token.class, "        ");
+        _builder.append(Token.class, "\t\t");
         _builder.append(".INVALID_TOKEN_TYPE;");
         _builder.newLineIfNotEmpty();
-        _builder.append("    ");
+        _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("    ");
         _builder.newLine();
-        _builder.append("    ");
+        _builder.append("\t");
         _builder.append("@Override");
         _builder.newLine();
-        _builder.append("    ");
+        _builder.append("\t");
         _builder.append("public ");
-        _builder.append(iElementType, "    ");
+        _builder.append(iElementType, "\t");
         _builder.append(" getIElementType(int antlrType) {");
         _builder.newLineIfNotEmpty();
-        _builder.append("    \t");
+        _builder.append("\t\t");
         _builder.append("return tokenTypes[antlrType];");
         _builder.newLine();
-        _builder.append("    ");
+        _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
         _builder.newLine();
@@ -2151,25 +2138,25 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.append("\t");
         _builder.append("@Override");
         _builder.newLine();
-        _builder.append("    ");
+        _builder.append("\t");
         _builder.append("@");
         TypeReference _typeRef = TypeReference.typeRef("org.jetbrains.annotations.NotNull");
-        _builder.append(_typeRef, "    ");
+        _builder.append(_typeRef, "\t");
         _builder.newLineIfNotEmpty();
-        _builder.append("    ");
+        _builder.append("\t");
         _builder.append("protected ");
-        _builder.append(syntaxHighlighter, "    ");
+        _builder.append(syntaxHighlighter, "\t");
         _builder.append(" createHighlighter() {");
         _builder.newLineIfNotEmpty();
-        _builder.append("        ");
+        _builder.append("\t\t");
         _builder.append("return ");
         TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
-        _builder.append(_ideaLanguage, "        ");
+        _builder.append(_ideaLanguage, "\t\t");
         _builder.append(".INSTANCE.getInstance(");
-        _builder.append(syntaxHighlighter, "        ");
+        _builder.append(syntaxHighlighter, "\t\t");
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
-        _builder.append("    ");
+        _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
         _builder.append("}");
@@ -2425,21 +2412,19 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       public Boolean apply(final AbstractElement element) {
         boolean _switchResult = false;
         boolean _matched = false;
+        if (element instanceof Action) {
+          _matched=true;
+        }
         if (!_matched) {
-          if (element instanceof Action) {
-            _matched=true;
-          }
-          if (!_matched) {
-            if (element instanceof RuleCall) {
-              boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
-              if (_isEObjectRuleCall) {
-                _matched=true;
-              }
+          if (element instanceof RuleCall) {
+            boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+            if (_isEObjectRuleCall) {
+              _matched=true;
             }
           }
-          if (_matched) {
-            _switchResult = true;
-          }
+        }
+        if (_matched) {
+          _switchResult = true;
         }
         if (!_matched) {
           _switchResult = false;
@@ -2455,11 +2440,9 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     {
       TypeRef _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (element instanceof AbstractRule) {
-          _matched=true;
-          _switchResult = ((AbstractRule)element).getType();
-        }
+      if (element instanceof AbstractRule) {
+        _matched=true;
+        _switchResult = ((AbstractRule)element).getType();
       }
       if (!_matched) {
         if (element instanceof RuleCall) {
@@ -2491,15 +2474,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
       final EStructuralFeature feature = _xifexpression;
       boolean _and = false;
       boolean _and_1 = false;
-      boolean _and_2 = false;
-      if (!(feature instanceof EAttribute)) {
-        _and_2 = false;
-      } else {
-        boolean _isMany = feature.isMany();
-        boolean _not = (!_isMany);
-        _and_2 = _not;
-      }
-      if (!_and_2) {
+      if (!((feature instanceof EAttribute) && (!feature.isMany()))) {
         _and_1 = false;
       } else {
         EClassifier _eType = null;

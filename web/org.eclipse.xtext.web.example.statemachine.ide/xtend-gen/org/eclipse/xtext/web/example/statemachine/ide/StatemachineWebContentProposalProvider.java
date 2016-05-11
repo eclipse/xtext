@@ -17,23 +17,25 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalCreator;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineTemplateProposalProvider;
 import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
 import org.eclipse.xtext.web.example.statemachine.statemachine.StatemachinePackage;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -42,48 +44,40 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
   @Extension
   private StatemachineGrammarAccess _statemachineGrammarAccess;
   
+  @Inject
+  private StatemachineTemplateProposalProvider templateProvider;
+  
   @Override
   protected void _createProposals(final RuleCall ruleCall, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     AbstractRule _rule = ruleCall.getRule();
     boolean _matched = false;
+    TerminalRule _bOOLEANRule = this._statemachineGrammarAccess.getBOOLEANRule();
+    if (Objects.equal(_rule, _bOOLEANRule)) {
+      _matched=true;
+      String _prefix = context.getPrefix();
+      boolean _startsWith = "true".startsWith(_prefix);
+      if (_startsWith) {
+        IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
+        final ContentAssistEntry trueEntry = _proposalCreator.createProposal("true", context);
+        IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
+        int _defaultPriority = _proposalPriorities.getDefaultPriority(trueEntry);
+        acceptor.accept(trueEntry, _defaultPriority);
+      }
+      String _prefix_1 = context.getPrefix();
+      boolean _startsWith_1 = "false".startsWith(_prefix_1);
+      if (_startsWith_1) {
+        IdeContentProposalCreator _proposalCreator_1 = this.getProposalCreator();
+        final ContentAssistEntry falseEntry = _proposalCreator_1.createProposal("false", context);
+        IdeContentProposalPriorities _proposalPriorities_1 = this.getProposalPriorities();
+        int _defaultPriority_1 = _proposalPriorities_1.getDefaultPriority(falseEntry);
+        acceptor.accept(falseEntry, _defaultPriority_1);
+      }
+    }
     if (!_matched) {
-      TerminalRule _bOOLEANRule = this._statemachineGrammarAccess.getBOOLEANRule();
-      if (Objects.equal(_rule, _bOOLEANRule)) {
+      ParserRule _stateRule = this._statemachineGrammarAccess.getStateRule();
+      if (Objects.equal(_rule, _stateRule)) {
         _matched=true;
-        String _prefix = context.getPrefix();
-        boolean _startsWith = "true".startsWith(_prefix);
-        if (_startsWith) {
-          ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
-          final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
-            @Override
-            public void apply(final ContentAssistEntry it) {
-              String _prefix = context.getPrefix();
-              it.setPrefix(_prefix);
-              it.setProposal("true");
-            }
-          };
-          final ContentAssistEntry trueEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function);
-          IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
-          int _defaultPriority = _proposalPriorities.getDefaultPriority(trueEntry);
-          acceptor.accept(trueEntry, _defaultPriority);
-        }
-        String _prefix_1 = context.getPrefix();
-        boolean _startsWith_1 = "false".startsWith(_prefix_1);
-        if (_startsWith_1) {
-          ContentAssistEntry _contentAssistEntry_1 = new ContentAssistEntry();
-          final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
-            @Override
-            public void apply(final ContentAssistEntry it) {
-              String _prefix = context.getPrefix();
-              it.setPrefix(_prefix);
-              it.setProposal("false");
-            }
-          };
-          final ContentAssistEntry falseEntry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry_1, _function_1);
-          IdeContentProposalPriorities _proposalPriorities_1 = this.getProposalPriorities();
-          int _defaultPriority_1 = _proposalPriorities_1.getDefaultPriority(falseEntry);
-          acceptor.accept(falseEntry, _defaultPriority_1);
-        }
+        this.templateProvider.createStateProposal(context, acceptor);
       }
     }
     if (!_matched) {
@@ -94,43 +88,38 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
   @Override
   protected void _createProposals(final Assignment assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {
     boolean _matched = false;
-    if (!_matched) {
-      StatemachineGrammarAccess.EventElements _eventAccess = this._statemachineGrammarAccess.getEventAccess();
-      Assignment _signalAssignment_0 = _eventAccess.getSignalAssignment_0();
-      if (Objects.equal(assignment, _signalAssignment_0)) {
-        _matched=true;
-        IScopeProvider _scopeProvider = this.getScopeProvider();
-        EObject _currentModel = context.getCurrentModel();
-        final IScope scope = _scopeProvider.getScope(_currentModel, StatemachinePackage.Literals.EVENT__SIGNAL);
-        Iterable<IEObjectDescription> _allElements = scope.getAllElements();
-        final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
-          @Override
-          public Boolean apply(final IEObjectDescription it) {
-            EClass _eClass = it.getEClass();
-            return Boolean.valueOf(Objects.equal(_eClass, StatemachinePackage.Literals.INPUT_SIGNAL));
-          }
-        };
-        Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_allElements, _function);
-        for (final IEObjectDescription description : _filter) {
-          {
-            ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
-            final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
-              @Override
-              public void apply(final ContentAssistEntry it) {
-                it.setSource(description);
-                String _prefix = context.getPrefix();
-                it.setPrefix(_prefix);
-                QualifiedName _name = description.getName();
-                String _string = _name.toString();
-                it.setProposal(_string);
-                it.setDescription("input signal");
-              }
-            };
-            final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function_1);
-            IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
-            int _crossRefPriority = _proposalPriorities.getCrossRefPriority(description, entry);
-            acceptor.accept(entry, _crossRefPriority);
-          }
+    StatemachineGrammarAccess.EventElements _eventAccess = this._statemachineGrammarAccess.getEventAccess();
+    Assignment _signalAssignment_0 = _eventAccess.getSignalAssignment_0();
+    if (Objects.equal(assignment, _signalAssignment_0)) {
+      _matched=true;
+      IScopeProvider _scopeProvider = this.getScopeProvider();
+      EObject _currentModel = context.getCurrentModel();
+      final IScope scope = _scopeProvider.getScope(_currentModel, StatemachinePackage.Literals.EVENT__SIGNAL);
+      Iterable<IEObjectDescription> _allElements = scope.getAllElements();
+      final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+        @Override
+        public Boolean apply(final IEObjectDescription it) {
+          EClass _eClass = it.getEClass();
+          return Boolean.valueOf(Objects.equal(_eClass, StatemachinePackage.Literals.INPUT_SIGNAL));
+        }
+      };
+      Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_allElements, _function);
+      for (final IEObjectDescription description : _filter) {
+        {
+          IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
+          QualifiedName _name = description.getName();
+          String _string = _name.toString();
+          final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
+            @Override
+            public void apply(final ContentAssistEntry it) {
+              it.setSource(description);
+              it.setDescription("input signal");
+            }
+          };
+          final ContentAssistEntry entry = _proposalCreator.createProposal(_string, context, _function_1);
+          IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
+          int _crossRefPriority = _proposalPriorities.getCrossRefPriority(description, entry);
+          acceptor.accept(entry, _crossRefPriority);
         }
       }
     }
@@ -153,20 +142,17 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
         Iterable<IEObjectDescription> _filter_1 = IterableExtensions.<IEObjectDescription>filter(_allElements_1, _function_1);
         for (final IEObjectDescription description_1 : _filter_1) {
           {
-            ContentAssistEntry _contentAssistEntry = new ContentAssistEntry();
+            IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
+            QualifiedName _name = description_1.getName();
+            String _string = _name.toString();
             final Procedure1<ContentAssistEntry> _function_2 = new Procedure1<ContentAssistEntry>() {
               @Override
               public void apply(final ContentAssistEntry it) {
                 it.setSource(description_1);
-                String _prefix = context.getPrefix();
-                it.setPrefix(_prefix);
-                QualifiedName _name = description_1.getName();
-                String _string = _name.toString();
-                it.setProposal(_string);
                 it.setDescription("output signal");
               }
             };
-            final ContentAssistEntry entry = ObjectExtensions.<ContentAssistEntry>operator_doubleArrow(_contentAssistEntry, _function_2);
+            final ContentAssistEntry entry = _proposalCreator.createProposal(_string, context, _function_2);
             IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
             int _crossRefPriority = _proposalPriorities.getCrossRefPriority(description_1, entry);
             acceptor.accept(entry, _crossRefPriority);
@@ -193,6 +179,22 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
     if (!_matched) {
       super._createProposals(assignment, context, acceptor);
     }
+  }
+  
+  @Override
+  protected boolean filterKeyword(final Keyword keyword, final ContentAssistContext context) {
+    boolean _switchResult = false;
+    boolean _matched = false;
+    StatemachineGrammarAccess.StateElements _stateAccess = this._statemachineGrammarAccess.getStateAccess();
+    Keyword _stateKeyword_0 = _stateAccess.getStateKeyword_0();
+    if (Objects.equal(keyword, _stateKeyword_0)) {
+      _matched=true;
+      _switchResult = false;
+    }
+    if (!_matched) {
+      _switchResult = super.filterKeyword(keyword, context);
+    }
+    return _switchResult;
   }
   
   public void createProposals(final AbstractElement assignment, final ContentAssistContext context, final IIdeContentProposalAcceptor acceptor) {

@@ -120,17 +120,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     
     public boolean shouldAddGetter(final FieldDeclaration it) {
-      boolean _and = false;
-      boolean _hasGetter = this.hasGetter(it);
-      boolean _not = (!_hasGetter);
-      if (!_not) {
-        _and = false;
-      } else {
-        AccessorType _getterType = this.getGetterType(it);
-        boolean _tripleNotEquals = (_getterType != AccessorType.NONE);
-        _and = _tripleNotEquals;
-      }
-      return _and;
+      return ((!this.hasGetter(it)) && (this.getGetterType(it) != AccessorType.NONE));
     }
     
     public AccessorType getGetterType(final FieldDeclaration it) {
@@ -189,44 +179,15 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     
     public List<String> getPossibleGetterNames(final FieldDeclaration it) {
       final ArrayList<String> names = CollectionLiterals.<String>newArrayList();
-      boolean _and = false;
-      boolean _and_1 = false;
-      boolean _and_2 = false;
+      if ((((this.isBooleanType(this.orObject(it.getType())) && it.getSimpleName().startsWith("is")) && (it.getSimpleName().length() > 2)) && Character.isUpperCase(it.getSimpleName().charAt(2)))) {
+        String _simpleName = it.getSimpleName();
+        names.add(_simpleName);
+      }
+      List<String> _xifexpression = null;
       TypeReference _type = it.getType();
       TypeReference _orObject = this.orObject(_type);
       boolean _isBooleanType = this.isBooleanType(_orObject);
-      if (!_isBooleanType) {
-        _and_2 = false;
-      } else {
-        String _simpleName = it.getSimpleName();
-        boolean _startsWith = _simpleName.startsWith("is");
-        _and_2 = _startsWith;
-      }
-      if (!_and_2) {
-        _and_1 = false;
-      } else {
-        String _simpleName_1 = it.getSimpleName();
-        int _length = _simpleName_1.length();
-        boolean _greaterThan = (_length > 2);
-        _and_1 = _greaterThan;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        String _simpleName_2 = it.getSimpleName();
-        char _charAt = _simpleName_2.charAt(2);
-        boolean _isUpperCase = Character.isUpperCase(_charAt);
-        _and = _isUpperCase;
-      }
-      if (_and) {
-        String _simpleName_3 = it.getSimpleName();
-        names.add(_simpleName_3);
-      }
-      List<String> _xifexpression = null;
-      TypeReference _type_1 = it.getType();
-      TypeReference _orObject_1 = this.orObject(_type_1);
-      boolean _isBooleanType_1 = this.isBooleanType(_orObject_1);
-      if (_isBooleanType_1) {
+      if (_isBooleanType) {
         _xifexpression = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("is", "get"));
       } else {
         _xifexpression = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("get"));
@@ -245,17 +206,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     
     public boolean isBooleanType(final TypeReference it) {
-      boolean _and = false;
-      boolean _isInferred = it.isInferred();
-      boolean _not = (!_isInferred);
-      if (!_not) {
-        _and = false;
-      } else {
-        TypeReference _primitiveBoolean = this.context.getPrimitiveBoolean();
-        boolean _equals = Objects.equal(it, _primitiveBoolean);
-        _and = _equals;
-      }
-      return _and;
+      return ((!it.isInferred()) && Objects.equal(it, this.context.getPrimitiveBoolean()));
     }
     
     public void addGetter(final MutableFieldDeclaration field, final Visibility visibility) {
@@ -362,25 +313,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     
     public boolean shouldAddSetter(final FieldDeclaration it) {
-      boolean _and = false;
-      boolean _and_1 = false;
-      boolean _isFinal = it.isFinal();
-      boolean _not = (!_isFinal);
-      if (!_not) {
-        _and_1 = false;
-      } else {
-        boolean _hasSetter = this.hasSetter(it);
-        boolean _not_1 = (!_hasSetter);
-        _and_1 = _not_1;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        AccessorType _setterType = this.getSetterType(it);
-        boolean _tripleNotEquals = (_setterType != AccessorType.NONE);
-        _and = _tripleNotEquals;
-      }
-      return _and;
+      return (((!it.isFinal()) && (!this.hasSetter(it))) && (this.getSetterType(it) != AccessorType.NONE));
     }
     
     public void validateSetter(final MutableFieldDeclaration field) {
@@ -388,17 +321,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       if (_isFinal) {
         this.context.addError(field, "Cannot set a final field");
       }
-      boolean _or = false;
-      TypeReference _type = field.getType();
-      boolean _tripleEquals = (_type == null);
-      if (_tripleEquals) {
-        _or = true;
-      } else {
-        TypeReference _type_1 = field.getType();
-        boolean _isInferred = _type_1.isInferred();
-        _or = _isInferred;
-      }
-      if (_or) {
+      if (((field.getType() == null) || field.getType().isInferred())) {
         this.context.addError(field, "Type cannot be inferred.");
         return;
       }
@@ -490,33 +413,14 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     @Extension
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
-    boolean _or = false;
-    boolean _needsFinalFieldConstructor = requiredArgsUtil.needsFinalFieldConstructor(it);
-    if (_needsFinalFieldConstructor) {
-      _or = true;
-    } else {
-      Type _findTypeGlobally_1 = context.findTypeGlobally(FinalFieldsConstructor.class);
-      AnnotationReference _findAnnotation_1 = it.findAnnotation(_findTypeGlobally_1);
-      boolean _tripleNotEquals_1 = (_findAnnotation_1 != null);
-      _or = _tripleNotEquals_1;
-    }
-    if (_or) {
+    if ((requiredArgsUtil.needsFinalFieldConstructor(it) || (it.findAnnotation(context.findTypeGlobally(FinalFieldsConstructor.class)) != null))) {
       requiredArgsUtil.addFinalFieldsConstructor(it);
     }
     Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
     final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
       @Override
       public Boolean apply(final MutableFieldDeclaration it) {
-        boolean _and = false;
-        boolean _isStatic = it.isStatic();
-        boolean _not = (!_isStatic);
-        if (!_not) {
-          _and = false;
-        } else {
-          boolean _isThePrimaryGeneratedJavaElement = context.isThePrimaryGeneratedJavaElement(it);
-          _and = _isThePrimaryGeneratedJavaElement;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((!it.isStatic()) && context.isThePrimaryGeneratedJavaElement(it)));
       }
     };
     Iterable<? extends MutableFieldDeclaration> _filter = IterableExtensions.filter(_declaredFields, _function);

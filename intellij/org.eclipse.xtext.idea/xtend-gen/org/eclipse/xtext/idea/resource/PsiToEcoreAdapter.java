@@ -98,15 +98,7 @@ public class PsiToEcoreAdapter {
       }
     }
     final List<ASTNode> astNodes = this.reverseNodesMapping.get(originalNode);
-    boolean _and = false;
-    if (!(astNodes == null)) {
-      _and = false;
-    } else {
-      ICompositeNode _rootNode = node.getRootNode();
-      boolean _tripleEquals = (_rootNode == node);
-      _and = _tripleEquals;
-    }
-    if (_and) {
+    if (((astNodes == null) && (node.getRootNode() == node))) {
       FileASTNode _node = this.xtextFile.getNode();
       return _node.getFirstChildNode();
     }

@@ -326,8 +326,8 @@ public class AntlrGrammarGenUtil {
 				}
 			};
 			AbstractElement clone = (AbstractElement) copier.copy(result);
-		    copier.copyReferences();
-		    return clone;
+			copier.copyReferences();
+			return clone;
 		}
 		return doGetPredicatedElement(element);
 	}
@@ -377,8 +377,8 @@ public class AntlrGrammarGenUtil {
 				}
 			};
 			AbstractElement clone = (AbstractElement) copier.copy(element);
-		    copier.copyReferences();
-		    return clone;
+			copier.copyReferences();
+			return clone;
 		}
 		return element;
 	}

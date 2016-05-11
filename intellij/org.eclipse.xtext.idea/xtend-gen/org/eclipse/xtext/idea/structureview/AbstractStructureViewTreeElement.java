@@ -162,15 +162,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
       {
         final PsiElement element = this.getInternalNavigationElement();
         PsiElement _xifexpression = null;
-        boolean _and = false;
-        boolean _notEquals = (!Objects.equal(element, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          boolean _isValid = element.isValid();
-          _and = _isValid;
-        }
-        if (_and) {
+        if (((!Objects.equal(element, null)) && element.isValid())) {
           _xifexpression = element;
         }
         _xblockexpression = _xifexpression;

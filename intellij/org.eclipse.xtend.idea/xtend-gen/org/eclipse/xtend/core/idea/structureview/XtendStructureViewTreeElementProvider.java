@@ -283,11 +283,9 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
   protected boolean isStatic(final EObject modelElement) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (modelElement instanceof JvmFeature) {
-        _matched=true;
-        _switchResult = ((JvmFeature)modelElement).isStatic();
-      }
+    if (modelElement instanceof JvmFeature) {
+      _matched=true;
+      _switchResult = ((JvmFeature)modelElement).isStatic();
     }
     if (!_matched) {
       if (modelElement instanceof JvmDeclaredType) {
@@ -311,12 +309,10 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
   protected boolean isLeaf(final EObject modelElement) {
     boolean _switchResult = false;
     boolean _matched = false;
-    if (!_matched) {
-      if (modelElement instanceof JvmDeclaredType) {
-        _matched=true;
-        EList<JvmMember> _members = ((JvmDeclaredType)modelElement).getMembers();
-        _switchResult = _members.isEmpty();
-      }
+    if (modelElement instanceof JvmDeclaredType) {
+      _matched=true;
+      EList<JvmMember> _members = ((JvmDeclaredType)modelElement).getMembers();
+      _switchResult = _members.isEmpty();
     }
     if (!_matched) {
       if (modelElement instanceof XtendTypeDeclaration) {

@@ -74,7 +74,7 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 			public «grammar.psiInternalParser.simpleName»(PsiBuilder builder, TokenStream input, «grammar.elementTypeProvider.simpleName» elementTypeProvider, «grammarAccess.simpleName» grammarAccess) {
 				this(input);
 				setPsiBuilder(builder);
-		    	this.grammarAccess = grammarAccess;
+				this.grammarAccess = grammarAccess;
 				this.elementTypeProvider = elementTypeProvider;
 			}
 		

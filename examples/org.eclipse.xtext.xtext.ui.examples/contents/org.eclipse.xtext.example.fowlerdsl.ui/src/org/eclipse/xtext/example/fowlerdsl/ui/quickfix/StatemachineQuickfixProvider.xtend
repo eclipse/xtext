@@ -12,7 +12,7 @@ import org.eclipse.xtext.example.fowlerdsl.validation.StatemachineValidator
 /**
  * Custom quickfixes.
  *
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#quick-fixes
+ * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 class StatemachineQuickfixProvider extends DefaultQuickfixProvider {
 

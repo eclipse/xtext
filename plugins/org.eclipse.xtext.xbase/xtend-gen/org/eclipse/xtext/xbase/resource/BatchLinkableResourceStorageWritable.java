@@ -241,27 +241,11 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
   protected String getFragment(final EObject obj) {
     String _xblockexpression = null;
     {
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _equals = Objects.equal(obj, null);
-      if (_equals) {
-        _or_1 = true;
-      } else {
-        boolean _eIsProxy = obj.eIsProxy();
-        _or_1 = _eIsProxy;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        Resource _eResource = obj.eResource();
-        boolean _equals_1 = Objects.equal(_eResource, null);
-        _or = _equals_1;
-      }
-      if (_or) {
+      if (((Objects.equal(obj, null) || obj.eIsProxy()) || Objects.equal(obj.eResource(), null))) {
         return "none";
       }
-      Resource _eResource_1 = obj.eResource();
-      _xblockexpression = _eResource_1.getURIFragment(obj);
+      Resource _eResource = obj.eResource();
+      _xblockexpression = _eResource.getURIFragment(obj);
     }
     return _xblockexpression;
   }

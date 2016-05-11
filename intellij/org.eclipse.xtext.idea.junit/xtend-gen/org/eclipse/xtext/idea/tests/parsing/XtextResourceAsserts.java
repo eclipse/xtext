@@ -15,7 +15,6 @@ import com.intellij.psi.PsiErrorElement;
 import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -114,24 +113,7 @@ public class XtextResourceAsserts extends Assert {
       if ((semanticElement != null)) {
         EClass _eClass = semanticElement.eClass();
         final EStructuralFeature feature = _eClass.getEStructuralFeature("name");
-        boolean _and = false;
-        boolean _and_1 = false;
-        if (!(feature instanceof EAttribute)) {
-          _and_1 = false;
-        } else {
-          boolean _isMany = feature.isMany();
-          boolean _not = (!_isMany);
-          _and_1 = _not;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          EClassifier _eType = feature.getEType();
-          Class<?> _instanceClass = _eType.getInstanceClass();
-          boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
-          _and = _isAssignableFrom;
-        }
-        if (_and) {
+        if ((((feature instanceof EAttribute) && (!feature.isMany())) && String.class.isAssignableFrom(feature.getEType().getInstanceClass()))) {
           EObject _semanticElement = node.getSemanticElement();
           final List<INode> nodes = NodeModelUtils.findNodesForFeature(_semanticElement, feature);
           final List<ASTNode> astNodes = this.astNodeExtension.findNodesForFeature(astNode, feature);

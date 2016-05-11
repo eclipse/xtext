@@ -31,16 +31,7 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuil
   
   @Override
   public boolean isValid() {
-    boolean _and = false;
-    boolean _isValid = super.isValid();
-    if (!_isValid) {
-      _and = false;
-    } else {
-      String _fieldName = this.getFieldName();
-      boolean _notEquals = (!Objects.equal(_fieldName, null));
-      _and = _notEquals;
-    }
-    return _and;
+    return (super.isValid() && (!Objects.equal(this.getFieldName(), null)));
   }
   
   @Override

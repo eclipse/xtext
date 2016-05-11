@@ -130,7 +130,7 @@ public class PsiInternalBeeLangTestLanguageParser extends AbstractPsiAntlrParser
     	public PsiInternalBeeLangTestLanguageParser(PsiBuilder builder, TokenStream input, BeeLangTestLanguageElementTypeProvider elementTypeProvider, BeeLangTestLanguageGrammarAccess grammarAccess) {
     		this(input);
     		setPsiBuilder(builder);
-        	this.grammarAccess = grammarAccess;
+    		this.grammarAccess = grammarAccess;
     		this.elementTypeProvider = elementTypeProvider;
     	}
 

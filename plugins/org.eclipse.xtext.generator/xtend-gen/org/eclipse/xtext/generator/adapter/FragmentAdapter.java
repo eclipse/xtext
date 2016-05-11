@@ -238,19 +238,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
     GuiceModuleAccess.Binding _xblockexpression = null;
     {
       GuiceModuleAccess.BindKey _xifexpression = null;
-      boolean _or = false;
-      BindValue _value = it.getValue();
-      String[] _statements = _value.getStatements();
-      boolean _tripleEquals = (_statements == null);
-      if (_tripleEquals) {
-        _or = true;
-      } else {
-        BindValue _value_1 = it.getValue();
-        String[] _statements_1 = _value_1.getStatements();
-        boolean _isEmpty = ((List<String>)Conversions.doWrapArray(_statements_1)).isEmpty();
-        _or = _isEmpty;
-      }
-      if (_or) {
+      if (((it.getValue().getStatements() == null) || ((List<String>)Conversions.doWrapArray(it.getValue().getStatements())).isEmpty())) {
         BindKey _key = it.getKey();
         String _type = _key.getType();
         TypeReference _guessTypeRef = null;
@@ -273,18 +261,18 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
         _xifexpression = new GuiceModuleAccess.BindKey(_className, null, _isSingleton_1, _isEagerSingleton_1);
       }
       final GuiceModuleAccess.BindKey newKey = _xifexpression;
-      BindValue _value_2 = it.getValue();
-      String _expression = _value_2.getExpression();
-      BindValue _value_3 = it.getValue();
-      String _typeName = _value_3.getTypeName();
+      BindValue _value = it.getValue();
+      String _expression = _value.getExpression();
+      BindValue _value_1 = it.getValue();
+      String _typeName = _value_1.getTypeName();
       TypeReference _guessTypeRef_1 = null;
       if (_typeName!=null) {
         _guessTypeRef_1=TypeReference.guessTypeRef(_typeName);
       }
-      BindValue _value_4 = it.getValue();
-      boolean _isProvider = _value_4.isProvider();
-      BindValue _value_5 = it.getValue();
-      String[] _statements_2 = _value_5.getStatements();
+      BindValue _value_2 = it.getValue();
+      boolean _isProvider = _value_2.isProvider();
+      BindValue _value_3 = it.getValue();
+      String[] _statements = _value_3.getStatements();
       final Function1<String, Object> _function = new Function1<String, Object>() {
         @Override
         public Object apply(final String s) {
@@ -298,7 +286,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
           return _xifexpression;
         }
       };
-      List<Object> _map = ListExtensions.<String, Object>map(((List<String>)Conversions.doWrapArray(_statements_2)), _function);
+      List<Object> _map = ListExtensions.<String, Object>map(((List<String>)Conversions.doWrapArray(_statements)), _function);
       final GuiceModuleAccess.BindValue newValue = new GuiceModuleAccess.BindValue(_expression, _guessTypeRef_1, _isProvider, _map);
       boolean _isFinal = it.isFinal();
       String _contributedBy = it.getContributedBy();
@@ -472,86 +460,66 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   }
   
   private void generateManifestIde(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    boolean _and = false;
-    if (!(this.fragment instanceof IGeneratorFragmentExtension3)) {
-      _and = false;
-    } else {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
-      ManifestAccess _manifest = _genericIde.getManifest();
-      boolean _tripleNotEquals = (_manifest != null);
-      _and = _tripleNotEquals;
-    }
-    if (_and) {
+    if (((this.fragment instanceof IGeneratorFragmentExtension3) && (this.getProjectConfig().getGenericIde().getManifest() != null))) {
       final IGeneratorFragmentExtension3 fr = ((IGeneratorFragmentExtension3) this.fragment);
       Grammar _grammar = config1.getGrammar();
       final String[] exported = fr.getExportedPackagesIde(_grammar);
       if ((exported != null)) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        IBundleProjectConfig _genericIde_1 = _projectConfig_1.getGenericIde();
-        ManifestAccess _manifest_1 = _genericIde_1.getManifest();
-        Set<String> _exportedPackages = _manifest_1.getExportedPackages();
+        IXtextProjectConfig _projectConfig = this.getProjectConfig();
+        IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
+        ManifestAccess _manifest = _genericIde.getManifest();
+        Set<String> _exportedPackages = _manifest.getExportedPackages();
         CollectionExtensions.<String>addAll(_exportedPackages, exported);
       }
       Grammar _grammar_1 = config1.getGrammar();
       final String[] required = fr.getRequiredBundlesIde(_grammar_1);
       if ((required != null)) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        IBundleProjectConfig _genericIde_2 = _projectConfig_2.getGenericIde();
-        ManifestAccess _manifest_2 = _genericIde_2.getManifest();
-        Set<String> _requiredBundles = _manifest_2.getRequiredBundles();
+        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        IBundleProjectConfig _genericIde_1 = _projectConfig_1.getGenericIde();
+        ManifestAccess _manifest_1 = _genericIde_1.getManifest();
+        Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
         CollectionExtensions.<String>addAll(_requiredBundles, required);
       }
       Grammar _grammar_2 = config1.getGrammar();
       final String[] imported = fr.getImportedPackagesIde(_grammar_2);
       if ((imported != null)) {
-        IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-        IBundleProjectConfig _genericIde_3 = _projectConfig_3.getGenericIde();
-        ManifestAccess _manifest_3 = _genericIde_3.getManifest();
-        Set<String> _importedPackages = _manifest_3.getImportedPackages();
+        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+        IBundleProjectConfig _genericIde_2 = _projectConfig_2.getGenericIde();
+        ManifestAccess _manifest_2 = _genericIde_2.getManifest();
+        Set<String> _importedPackages = _manifest_2.getImportedPackages();
         CollectionExtensions.<String>addAll(_importedPackages, imported);
       }
     }
   }
   
   private void generateManifestTests(final LanguageConfig config1, final XpandExecutionContext ctx) {
-    boolean _and = false;
-    if (!(this.fragment instanceof IGeneratorFragmentExtension)) {
-      _and = false;
-    } else {
-      IXtextProjectConfig _projectConfig = this.getProjectConfig();
-      IBundleProjectConfig _runtimeTest = _projectConfig.getRuntimeTest();
-      ManifestAccess _manifest = _runtimeTest.getManifest();
-      boolean _tripleNotEquals = (_manifest != null);
-      _and = _tripleNotEquals;
-    }
-    if (_and) {
+    if (((this.fragment instanceof IGeneratorFragmentExtension) && (this.getProjectConfig().getRuntimeTest().getManifest() != null))) {
       final IGeneratorFragmentExtension fr = ((IGeneratorFragmentExtension) this.fragment);
       Grammar _grammar = config1.getGrammar();
       final String[] exported = fr.getExportedPackagesTests(_grammar);
       if ((exported != null)) {
-        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-        IBundleProjectConfig _runtimeTest_1 = _projectConfig_1.getRuntimeTest();
-        ManifestAccess _manifest_1 = _runtimeTest_1.getManifest();
-        Set<String> _exportedPackages = _manifest_1.getExportedPackages();
+        IXtextProjectConfig _projectConfig = this.getProjectConfig();
+        IBundleProjectConfig _runtimeTest = _projectConfig.getRuntimeTest();
+        ManifestAccess _manifest = _runtimeTest.getManifest();
+        Set<String> _exportedPackages = _manifest.getExportedPackages();
         CollectionExtensions.<String>addAll(_exportedPackages, exported);
       }
       Grammar _grammar_1 = config1.getGrammar();
       final String[] required = fr.getRequiredBundlesTests(_grammar_1);
       if ((required != null)) {
-        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-        IBundleProjectConfig _runtimeTest_2 = _projectConfig_2.getRuntimeTest();
-        ManifestAccess _manifest_2 = _runtimeTest_2.getManifest();
-        Set<String> _requiredBundles = _manifest_2.getRequiredBundles();
+        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        IBundleProjectConfig _runtimeTest_1 = _projectConfig_1.getRuntimeTest();
+        ManifestAccess _manifest_1 = _runtimeTest_1.getManifest();
+        Set<String> _requiredBundles = _manifest_1.getRequiredBundles();
         CollectionExtensions.<String>addAll(_requiredBundles, required);
       }
       Grammar _grammar_2 = config1.getGrammar();
       final String[] imported = fr.getImportedPackagesTests(_grammar_2);
       if ((imported != null)) {
-        IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-        IBundleProjectConfig _runtimeTest_3 = _projectConfig_3.getRuntimeTest();
-        ManifestAccess _manifest_3 = _runtimeTest_3.getManifest();
-        Set<String> _importedPackages = _manifest_3.getImportedPackages();
+        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+        IBundleProjectConfig _runtimeTest_2 = _projectConfig_2.getRuntimeTest();
+        ManifestAccess _manifest_2 = _runtimeTest_2.getManifest();
+        Set<String> _importedPackages = _manifest_2.getImportedPackages();
         CollectionExtensions.<String>addAll(_importedPackages, imported);
       }
     }

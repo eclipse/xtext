@@ -128,22 +128,14 @@ public class IdeaDocumentationProvider extends AbstractDocumentationProvider {
   }
   
   protected IdeaDeclarationDocumentationProvider getCalleeDocumentationProvider(final EObject object) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(object, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _eIsProxy = object.eIsProxy();
-      _or = _eIsProxy;
-    }
-    if (_or) {
+    if ((Objects.equal(object, null) || object.eIsProxy())) {
       return null;
     }
     Resource _eResource = object.eResource();
     final URI uri = _eResource.getURI();
     final IResourceServiceProvider resourceServiceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(uri);
-    boolean _equals_1 = Objects.equal(resourceServiceProvider, null);
-    if (_equals_1) {
+    boolean _equals = Objects.equal(resourceServiceProvider, null);
+    if (_equals) {
       return null;
     }
     IdeaDeclarationDocumentationProvider _get = null;

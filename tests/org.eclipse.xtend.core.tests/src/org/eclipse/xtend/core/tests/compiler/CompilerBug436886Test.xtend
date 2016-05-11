@@ -47,11 +47,9 @@ class CompilerBug436886Test extends AbstractXtendCompilerTest {
 			      public Boolean apply(final Super it) {
 			        boolean _switchResult = false;
 			        boolean _matched = false;
-			        if (!_matched) {
-			          if (it instanceof Foo) {
-			            _matched=true;
-			            _switchResult = true;
-			          }
+			        if (it instanceof Foo) {
+			          _matched=true;
+			          _switchResult = true;
 			        }
 			        if (!_matched) {
 			          if (it instanceof Bar) {

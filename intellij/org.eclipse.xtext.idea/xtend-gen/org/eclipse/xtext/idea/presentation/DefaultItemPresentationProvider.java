@@ -19,8 +19,6 @@ import javax.swing.Icon;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
@@ -101,18 +99,7 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
     EAttribute result = null;
     EList<EAttribute> _eAllAttributes = eClass.getEAllAttributes();
     for (final EAttribute eAttribute : _eAllAttributes) {
-      boolean _and = false;
-      boolean _isMany = eAttribute.isMany();
-      boolean _not = (!_isMany);
-      if (!_not) {
-        _and = false;
-      } else {
-        EClassifier _eType = eAttribute.getEType();
-        Class<?> _instanceClass = _eType.getInstanceClass();
-        boolean _notEquals = (!Objects.equal(_instanceClass, FeatureMap.Entry.class));
-        _and = _notEquals;
-      }
-      if (_and) {
+      if (((!eAttribute.isMany()) && (!Objects.equal(eAttribute.getEType().getInstanceClass(), FeatureMap.Entry.class)))) {
         String _name = eAttribute.getName();
         boolean _equalsIgnoreCase = "name".equalsIgnoreCase(_name);
         if (_equalsIgnoreCase) {
@@ -122,19 +109,8 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
           if (_equals) {
             result = eAttribute;
           } else {
-            boolean _and_1 = false;
-            EDataType _eAttributeType = eAttribute.getEAttributeType();
-            Class<?> _instanceClass_1 = _eAttributeType.getInstanceClass();
-            boolean _equals_1 = Objects.equal(_instanceClass_1, String.class);
-            if (!_equals_1) {
-              _and_1 = false;
-            } else {
-              EDataType _eAttributeType_1 = result.getEAttributeType();
-              Class<?> _instanceClass_2 = _eAttributeType_1.getInstanceClass();
-              boolean _notEquals_1 = (!Objects.equal(_instanceClass_2, String.class));
-              _and_1 = _notEquals_1;
-            }
-            if (_and_1) {
+            if ((Objects.equal(eAttribute.getEAttributeType().getInstanceClass(), String.class) && 
+              (!Objects.equal(result.getEAttributeType().getInstanceClass(), String.class)))) {
               result = eAttribute;
             }
           }

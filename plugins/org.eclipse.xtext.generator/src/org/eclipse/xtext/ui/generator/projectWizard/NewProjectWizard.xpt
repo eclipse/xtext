@@ -20,7 +20,7 @@
 package «projectWizardClassName().toJavaPackage()»;
 
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
-import org.eclipse.xtext.ui.wizard.IProjectInfo;
+import org.eclipse.xtext.ui.wizard.IExtendedProjectInfo;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import com.google.inject.Inject;
 
@@ -50,9 +50,12 @@ public class «projectWizardClassName().toSimpleName()» extends org.eclipse.xtext
 	 * Use this method to read the project settings from the wizard pages and feed them into the project info class.
 	 */
 	@Override
-	protected IProjectInfo getProjectInfo() {
+	protected IExtendedProjectInfo getProjectInfo() {
 		«projectInfoClassName()» projectInfo = new «projectInfoClassName()»();
 		projectInfo.setProjectName(mainPage.getProjectName());
+		if (!mainPage.useDefaults()) {
+			projectInfo.setLocationPath(mainPage.getLocationPath());
+		}
 		return projectInfo;
 	}
 

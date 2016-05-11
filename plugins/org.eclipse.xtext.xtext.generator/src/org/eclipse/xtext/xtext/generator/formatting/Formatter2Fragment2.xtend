@@ -62,7 +62,9 @@ import org.eclipse.xtext.util.internal.Log
 			.addTypeToType('org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory'.typeRef,
 					'org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory'.typeRef)
 			.contributeTo(language.eclipsePluginGenModule)
-		
+		if (projectConfig.runtime.manifest !== null) {
+			projectConfig.runtime.manifest.exportedPackages += grammar.runtimeBasePackage + '.formatting2'
+		}
 		doGenerateStubFile()
 	}
 
@@ -94,7 +96,7 @@ import org.eclipse.xtext.util.internal.Log
 			'''
 			xtendFile.writeTo(projectConfig.runtime.src) 
 		} else {
-			LOG.error(this.class.name +  " has been configured to generate a Java stub, but that's not yet supported. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=481563")	
+			LOG.error(this.class.name + " has been configured to generate a Java stub, but that's not yet supported. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=481563")	
 		}
 	}
 	

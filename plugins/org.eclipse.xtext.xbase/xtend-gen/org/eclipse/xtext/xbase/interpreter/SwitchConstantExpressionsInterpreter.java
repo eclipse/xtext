@@ -90,11 +90,9 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     JvmIdentifiableElement _feature = it.getFeature();
     final JvmIdentifiableElement feature = _feature;
     boolean _matched = false;
-    if (!_matched) {
-      if (feature instanceof JvmType) {
-        _matched=true;
-        return this.toTypeReference(((JvmType)feature), 0);
-      }
+    if (feature instanceof JvmType) {
+      _matched=true;
+      return this.toTypeReference(((JvmType)feature), 0);
     }
     if (!_matched) {
       if (feature instanceof JvmEnumerationLiteral) {
@@ -112,21 +110,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
             return ((JvmField)feature).getConstantValue();
           }
         } else {
-          boolean _and = false;
-          boolean _isFinal = ((JvmField)feature).isFinal();
-          if (!_isFinal) {
-            _and = false;
-          } else {
-            boolean _or = false;
-            boolean _isStatic = ((JvmField)feature).isStatic();
-            if (_isStatic) {
-              _or = true;
-            } else {
-              _or = ((ctx instanceof SwitchConstantExpressionsInterpreter.SwitchContext) && ((SwitchConstantExpressionsInterpreter.SwitchContext) ctx).validationMode);
-            }
-            _and = _or;
-          }
-          if (_and) {
+          if ((((JvmField)feature).isFinal() && (((JvmField)feature).isStatic() || ((ctx instanceof SwitchConstantExpressionsInterpreter.SwitchContext) && ((SwitchConstantExpressionsInterpreter.SwitchContext) ctx).validationMode)))) {
             final XExpression associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
             boolean _notEquals = (!Objects.equal(associatedExpression, null));
             if (_notEquals) {
@@ -138,20 +122,10 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     }
     if (!_matched) {
       if (feature instanceof XVariableDeclaration) {
-        boolean _and = false;
-        boolean _isWriteable = ((XVariableDeclaration)feature).isWriteable();
-        boolean _not = (!_isWriteable);
-        if (!_not) {
-          _and = false;
-        } else {
-          XExpression _right = ((XVariableDeclaration)feature).getRight();
-          boolean _notEquals = (!Objects.equal(_right, null));
-          _and = _notEquals;
-        }
-        if (_and) {
+        if (((!((XVariableDeclaration)feature).isWriteable()) && (!Objects.equal(((XVariableDeclaration)feature).getRight(), null)))) {
           _matched=true;
-          XExpression _right_1 = ((XVariableDeclaration)feature).getRight();
-          return this.evaluateAssociatedExpression(_right_1, ctx);
+          XExpression _right = ((XVariableDeclaration)feature).getRight();
+          return this.evaluateAssociatedExpression(_right, ctx);
         }
       }
     }
@@ -161,15 +135,13 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
         EObject _eContainer = ((JvmFormalParameter)feature).eContainer();
         final EObject container = _eContainer;
         boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (container instanceof XSwitchExpression) {
-            XExpression _switch = ((XSwitchExpression)container).getSwitch();
-            boolean _notEquals = (!Objects.equal(_switch, null));
-            if (_notEquals) {
-              _matched_1=true;
-              XExpression _switch_1 = ((XSwitchExpression)container).getSwitch();
-              return this.evaluate(_switch_1, ctx);
-            }
+        if (container instanceof XSwitchExpression) {
+          XExpression _switch = ((XSwitchExpression)container).getSwitch();
+          boolean _notEquals = (!Objects.equal(_switch, null));
+          if (_notEquals) {
+            _matched_1=true;
+            XExpression _switch_1 = ((XSwitchExpression)container).getSwitch();
+            return this.evaluate(_switch_1, ctx);
           }
         }
       }
@@ -183,13 +155,11 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
   public Object evaluateAssociatedExpression(final XExpression it, final Context ctx) {
     Object _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof XAbstractFeatureCall) {
-        JvmIdentifiableElement _feature = ((XAbstractFeatureCall)it).getFeature();
-        if ((_feature instanceof JvmEnumerationLiteral)) {
-          _matched=true;
-          throw this.notConstantExpression(it);
-        }
+    if (it instanceof XAbstractFeatureCall) {
+      JvmIdentifiableElement _feature = ((XAbstractFeatureCall)it).getFeature();
+      if ((_feature instanceof JvmEnumerationLiteral)) {
+        _matched=true;
+        throw this.notConstantExpression(it);
       }
     }
     if (!_matched) {

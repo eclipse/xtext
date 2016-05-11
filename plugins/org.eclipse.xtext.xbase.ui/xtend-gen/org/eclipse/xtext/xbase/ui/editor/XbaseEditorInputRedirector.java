@@ -123,22 +123,11 @@ public class XbaseEditorInputRedirector {
             };
             Iterable<IClasspathEntry> _filter_1 = IterableExtensions.<IClasspathEntry>filter(((Iterable<IClasspathEntry>)Conversions.doWrapArray(_rawClasspath)), _function_1);
             for (final IClasspathEntry sourceFolder : _filter_1) {
-              boolean _and = false;
-              IPath _outputLocation_2 = sourceFolder.getOutputLocation();
-              boolean _notEquals_1 = (!Objects.equal(_outputLocation_2, null));
-              if (!_notEquals_1) {
-                _and = false;
-              } else {
-                IPath _outputLocation_3 = sourceFolder.getOutputLocation();
+              if (((!Objects.equal(sourceFolder.getOutputLocation(), null)) && sourceFolder.getOutputLocation().isPrefixOf(resource.getFullPath()))) {
                 IPath _fullPath_3 = resource.getFullPath();
-                boolean _isPrefixOf_1 = _outputLocation_3.isPrefixOf(_fullPath_3);
-                _and = _isPrefixOf_1;
-              }
-              if (_and) {
-                IPath _fullPath_4 = resource.getFullPath();
-                IPath _outputLocation_4 = sourceFolder.getOutputLocation();
-                int _segmentCount_1 = _outputLocation_4.segmentCount();
-                final IPath relative_1 = _fullPath_4.removeFirstSegments(_segmentCount_1);
+                IPath _outputLocation_2 = sourceFolder.getOutputLocation();
+                int _segmentCount_1 = _outputLocation_2.segmentCount();
+                final IPath relative_1 = _fullPath_3.removeFirstSegments(_segmentCount_1);
                 IPackageFragmentRoot[] _findPackageFragmentRoots = project.findPackageFragmentRoots(sourceFolder);
                 final IPackageFragmentRoot source_1 = IterableExtensions.<IPackageFragmentRoot>head(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_findPackageFragmentRoots)));
                 IResource _correspondingResource = source_1.getCorrespondingResource();

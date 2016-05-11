@@ -46,7 +46,7 @@
     <submoduleCfg class="list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
-        <relativeTargetDir>org.eclipse.xtext.git</relativeTargetDir>
+        <relativeTargetDir>git-repo</relativeTargetDir>
       </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
       <hudson.plugins.git.extensions.impl.CloneOption>
         <shallow>true</shallow>
@@ -60,9 +60,10 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <jdk>(Default)</jdk>
   <triggers>
-    <hudson.triggers.TimerTrigger>
-      <spec>H 17 * * *</spec>
-    </hudson.triggers.TimerTrigger>
+    <hudson.triggers.SCMTrigger>
+		<spec>H 17 * * *</spec>
+		<ignorePostCommitHooks>false</ignorePostCommitHooks>
+	</hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
@@ -99,14 +100,14 @@
       <includeFailedBuilds>false</includeFailedBuilds>
     </hudson.tasks.test.AggregatedTestResultPublisher>
     <hudson.tasks.Mailer plugin="mailer@1.15">
-      <recipients>alle-ki@itemis.de</recipients>
+      <recipients>dennis.huebner@gmail.com</recipients>
       <dontNotifyEveryUnstableBuild>true</dontNotifyEveryUnstableBuild>
-      <sendToIndividuals>true</sendToIndividuals>
+      <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.26">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.28">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
-          <pattern>org.eclipse.xtext.git/**</pattern>
+          <pattern>git-repo/**</pattern>
           <type>EXCLUDE</type>
         </hudson.plugins.ws__cleanup.Pattern>
       </patterns>

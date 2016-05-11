@@ -52,6 +52,7 @@ import org.eclipse.xtext.parser.antlr.UnorderedGroupHelper;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.IgnoreCaseKeywordSerializer;
+import org.eclipse.xtext.serializer.tokens.IKeywordSerializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -140,35 +141,12 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     if (_isSet) {
       _xifexpression = this.combinedGrammar.get();
     } else {
-      boolean _and = false;
-      boolean _and_1 = false;
-      AntlrOptions _options = this.getOptions();
-      boolean _isBacktrackLexer = _options.isBacktrackLexer();
-      boolean _not = (!_isBacktrackLexer);
-      if (!_not) {
-        _and_1 = false;
-      } else {
-        AntlrOptions _options_1 = this.getOptions();
-        boolean _isIgnoreCase = _options_1.isIgnoreCase();
-        boolean _not_1 = (!_isIgnoreCase);
-        _and_1 = _not_1;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        Grammar _grammar = this.getGrammar();
-        List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar);
-        final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-          @Override
-          public Boolean apply(final TerminalRule it) {
-            return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-          }
-        };
-        boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
-        boolean _not_2 = (!_exists);
-        _and = _not_2;
-      }
-      _xifexpression = _and;
+      _xifexpression = (((!this.getOptions().isBacktrackLexer()) && (!this.getOptions().isIgnoreCase())) && (!IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(this.getGrammar()), new Function1<TerminalRule, Boolean>() {
+        @Override
+        public Boolean apply(final TerminalRule it) {
+          return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+        }
+      })));
     }
     return _xifexpression;
   }
@@ -232,6 +210,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     this.addRuntimeBindingsAndImports();
     this.addUiBindingsAndImports();
+    this.addWebBindings();
   }
   
   public void setLookaheadThreshold(final String lookaheadThreshold) {
@@ -1360,46 +1339,18 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
-    boolean _and = false;
-    AntlrOptions _options = this.getOptions();
-    boolean _isBacktrackLexer = _options.isBacktrackLexer();
-    if (!_isBacktrackLexer) {
-      _and = false;
-    } else {
-      boolean _isCombinedGrammar = this.isCombinedGrammar();
-      _and = _isCombinedGrammar;
-    }
-    if (_and) {
+    if ((this.getOptions().isBacktrackLexer() && this.isCombinedGrammar())) {
       issues.addError("A combined grammar cannot have a backtracking lexer");
     }
-    boolean _and_1 = false;
-    AntlrOptions _options_1 = this.getOptions();
-    boolean _isIgnoreCase = _options_1.isIgnoreCase();
-    if (!_isIgnoreCase) {
-      _and_1 = false;
-    } else {
-      boolean _isCombinedGrammar_1 = this.isCombinedGrammar();
-      _and_1 = _isCombinedGrammar_1;
-    }
-    if (_and_1) {
+    if ((this.getOptions().isIgnoreCase() && this.isCombinedGrammar())) {
       issues.addError("A combined grammar cannot have an ignorecase lexer");
     }
-    boolean _and_2 = false;
-    AntlrOptions _options_2 = this.getOptions();
-    boolean _isBacktrackLexer_1 = _options_2.isBacktrackLexer();
-    if (!_isBacktrackLexer_1) {
-      _and_2 = false;
-    } else {
-      AntlrOptions _options_3 = this.getOptions();
-      boolean _isIgnoreCase_1 = _options_3.isIgnoreCase();
-      _and_2 = _isIgnoreCase_1;
-    }
-    if (_and_2) {
+    if ((this.getOptions().isBacktrackLexer() && this.getOptions().isIgnoreCase())) {
       issues.addError("Backtracking lexer and ignorecase cannot be combined for now.");
     }
   }
   
-  public void addRuntimeBindingsAndImports() {
+  protected void addRuntimeBindingsAndImports() {
     @Extension
     final GrammarNaming naming = this.productionNaming;
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
@@ -1501,16 +1452,19 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       TypeReference _typeRef_8 = TypeReference.typeRef(ITokenSerializer.IKeywordSerializer.class);
       TypeReference _typeRef_9 = TypeReference.typeRef(IgnoreCaseKeywordSerializer.class);
       GuiceModuleAccess.BindingFactory _addTypeToType_5 = rtBindings.addTypeToType(_typeRef_8, _typeRef_9);
-      TypeReference _typeRef_10 = TypeReference.typeRef(AbstractIDValueConverter.class);
-      TypeReference _typeRef_11 = TypeReference.typeRef(IgnoreCaseIDValueConverter.class);
-      _addTypeToType_5.addTypeToType(_typeRef_10, _typeRef_11);
+      TypeReference _typeRef_10 = TypeReference.typeRef(IKeywordSerializer.class);
+      TypeReference _typeRef_11 = TypeReference.typeRef(org.eclipse.xtext.serializer.tokens.IgnoreCaseKeywordSerializer.class);
+      GuiceModuleAccess.BindingFactory _addTypeToType_6 = _addTypeToType_5.addTypeToType(_typeRef_10, _typeRef_11);
+      TypeReference _typeRef_12 = TypeReference.typeRef(AbstractIDValueConverter.class);
+      TypeReference _typeRef_13 = TypeReference.typeRef(IgnoreCaseIDValueConverter.class);
+      _addTypeToType_6.addTypeToType(_typeRef_12, _typeRef_13);
     }
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     rtBindings.contributeTo(_runtimeGenModule);
   }
   
-  public void addUiBindingsAndImports() {
+  protected void addUiBindingsAndImports() {
     @Extension
     final ContentAssistGrammarNaming naming = this.contentAssistNaming;
     Grammar _grammar = this.getGrammar();
@@ -1645,6 +1599,49 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     uiBindings.contributeTo(_eclipsePluginGenModule);
+  }
+  
+  protected void addWebBindings() {
+    @Extension
+    final ContentAssistGrammarNaming naming = this.contentAssistNaming;
+    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
+    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper");
+    TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper");
+    GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _typeRef_1);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("binder.bind(");
+        Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
+        TypeReference _lexerSuperClass = naming.getLexerSuperClass(_grammar);
+        _builder.append(_lexerSuperClass, "");
+        _builder.append(".class)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".annotatedWith(");
+        _builder.append(Names.class, "\t");
+        _builder.append(".named(");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.LexerIdeBindings");
+        _builder.append(_typeRef, "\t");
+        _builder.append(".CONTENT_ASSIST))");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".to(");
+        Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
+        TypeReference _lexerClass = naming.getLexerClass(_grammar_1);
+        _builder.append(_lexerClass, "\t");
+        _builder.append(".class);");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToType.addConfiguredBinding("ContentAssistLexer", _client);
+    TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
+    Grammar _grammar = this.getGrammar();
+    TypeReference _parserClass = naming.getParserClass(_grammar);
+    final GuiceModuleAccess.BindingFactory webBindings = _addConfiguredBinding.addTypeToType(_typeRef_2, _parserClass);
+    IXtextGeneratorLanguage _language = this.getLanguage();
+    GuiceModuleAccess _webGenModule = _language.getWebGenModule();
+    webBindings.contributeTo(_webGenModule);
   }
   
   public void setDebugGrammar(final boolean debugGrammar) {

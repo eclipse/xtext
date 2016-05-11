@@ -3,15 +3,14 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-SymbolicName: org.eclipse.xtext.xbase.ide;singleton:=true
-Bundle-Version: 2.9.2.qualifier
+Bundle-Version: 2.10.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)",
- org.eclipse.core.runtime;bundle-version="3.6.0";resolution:=optional
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)"
 Export-Package: org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr;x-friends:="org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.xbase.annotations.ide.contentassist.antlr.internal;x-friends:="org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.xbase.ide.contentassist;x-friends:="org.eclipse.xtext.xbase.ui,org.eclipse.xtend.ide",

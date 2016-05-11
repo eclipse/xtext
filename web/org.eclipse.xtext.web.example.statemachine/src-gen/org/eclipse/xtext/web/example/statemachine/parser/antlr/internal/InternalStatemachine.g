@@ -324,9 +324,28 @@ ruleState returns [EObject current=null]
 				}
 			)
 		)*
-		otherlv_4='end'
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getStateAccess().getNestedStatesStateParserRuleCall_4_0());
+				}
+				lv_nestedStates_4_0=ruleState
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getStateRule());
+					}
+					add(
+						$current,
+						"nestedStates",
+						lv_nestedStates_4_0,
+						"org.eclipse.xtext.web.example.statemachine.Statemachine.State");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_5='end'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getStateAccess().getEndKeyword_4());
+			newLeafNode(otherlv_5, grammarAccess.getStateAccess().getEndKeyword_5());
 		}
 	)
 ;
@@ -381,9 +400,12 @@ ruleTransition returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getTransitionRule());
 					}
 				}
-				otherlv_3=RULE_ID
 				{
-					newLeafNode(otherlv_3, grammarAccess.getTransitionAccess().getStateStateCrossReference_3_0());
+					newCompositeNode(grammarAccess.getTransitionAccess().getStateStateCrossReference_3_0());
+				}
+				ruleQualifiedName
+				{
+					afterParserOrEnumRuleCall();
 				}
 			)
 		)
@@ -562,6 +584,46 @@ ruleCommand returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Entry rule entryRuleQualifiedName
+entryRuleQualifiedName returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getQualifiedNameRule()); }
+	iv_ruleQualifiedName=ruleQualifiedName
+	{ $current=$iv_ruleQualifiedName.current.getText(); }
+	EOF;
+
+// Rule QualifiedName
+ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		this_ID_0=RULE_ID
+		{
+			$current.merge(this_ID_0);
+		}
+		{
+			newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0());
+		}
+		(
+			kw='.'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0());
+			}
+			this_ID_2=RULE_ID
+			{
+				$current.merge(this_ID_2);
+			}
+			{
+				newLeafNode(this_ID_2, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1());
+			}
+		)*
 	)
 ;
 

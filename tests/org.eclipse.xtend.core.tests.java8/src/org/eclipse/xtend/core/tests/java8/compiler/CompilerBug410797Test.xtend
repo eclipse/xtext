@@ -255,26 +255,7 @@ class CompilerBug410797Test extends AbstractXtendCompilerTest {
 			  private final List<LeafInfo> _leafs = CollectionLiterals.<LeafInfo>newArrayList();
 			  
 			  public boolean isSingleWhitespace() {
-			    boolean _or = false;
-			    List<LeafInfo> _leafs = this.getLeafs();
-			    boolean _isEmpty = _leafs.isEmpty();
-			    if (_isEmpty) {
-			      _or = true;
-			    } else {
-			      boolean _and = false;
-			      List<LeafInfo> _leafs_1 = this.getLeafs();
-			      int _size = _leafs_1.size();
-			      boolean _equals = (_size == 1);
-			      if (!_equals) {
-			        _and = false;
-			      } else {
-			        List<LeafInfo> _leafs_2 = this.getLeafs();
-			        LeafInfo _head = IterableExtensions.<LeafInfo>head(_leafs_2);
-			        _and = (_head instanceof WhitespaceInfo);
-			      }
-			      _or = _and;
-			    }
-			    return _or;
+			    return (this.getLeafs().isEmpty() || ((this.getLeafs().size() == 1) && (IterableExtensions.<LeafInfo>head(this.getLeafs()) instanceof WhitespaceInfo)));
 			  }
 			  
 			  public int getLenght() {

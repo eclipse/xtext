@@ -24,16 +24,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 public class AbsoluteURI extends AbstractURIWrapper {
   public AbsoluteURI(final URI absoluteURI) {
     super(absoluteURI);
-    boolean _or = false;
-    boolean _isRelative = absoluteURI.isRelative();
-    if (_isRelative) {
-      _or = true;
-    } else {
-      boolean _isHierarchical = absoluteURI.isHierarchical();
-      boolean _not = (!_isHierarchical);
-      _or = _not;
-    }
-    if (_or) {
+    if ((absoluteURI.isRelative() || (!absoluteURI.isHierarchical()))) {
       String _valueOf = String.valueOf(absoluteURI);
       throw new IllegalArgumentException(_valueOf);
     }
@@ -77,24 +68,16 @@ public class AbsoluteURI extends AbstractURIWrapper {
   
   @Override
   public boolean equals(final Object obj) {
-    boolean _and = false;
-    if (!(obj != null)) {
-      _and = false;
-    } else {
-      Class<?> _class = obj.getClass();
-      boolean _notEquals = (!Objects.equal(_class, AbsoluteURI.class));
-      _and = _notEquals;
-    }
-    if (_and) {
+    if (((obj != null) && (!Objects.equal(obj.getClass(), AbsoluteURI.class)))) {
       String _valueOf = String.valueOf(obj);
       String _plus = (_valueOf + " instanceof ");
-      Class<?> _class_1 = null;
+      Class<?> _class = null;
       if (obj!=null) {
-        _class_1=obj.getClass();
+        _class=obj.getClass();
       }
       String _name = null;
-      if (_class_1!=null) {
-        _name=_class_1.getName();
+      if (_class!=null) {
+        _name=_class.getName();
       }
       String _plus_1 = (_plus + _name);
       throw new IllegalArgumentException(_plus_1);

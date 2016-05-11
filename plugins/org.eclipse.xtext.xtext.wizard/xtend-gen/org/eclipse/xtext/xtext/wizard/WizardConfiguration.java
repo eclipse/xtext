@@ -25,10 +25,12 @@ import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.SdkFeatureProject;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
 import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
@@ -75,6 +77,10 @@ public class WizardConfiguration {
   
   private final TargetPlatformProject targetPlatformProject = new TargetPlatformProject(this);
   
+  private final SdkFeatureProject sdkProject = new SdkFeatureProject(this);
+  
+  private final P2RepositoryProject p2Project = new P2RepositoryProject(this);
+  
   public Set<ProjectDescriptor> getEnabledProjects() {
     ImmutableSet<ProjectDescriptor> _xblockexpression = null;
     {
@@ -84,7 +90,7 @@ public class WizardConfiguration {
           return Boolean.valueOf(it.isEnabled());
         }
       };
-      final Iterable<? extends ProjectDescriptor> productionProjects = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.parentProject, this.runtimeProject, this.ideProject, this.uiProject, this.intellijProject, this.webProject, this.targetPlatformProject)), _function);
+      final Iterable<? extends ProjectDescriptor> productionProjects = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(this.parentProject, this.runtimeProject, this.ideProject, this.uiProject, this.intellijProject, this.webProject, this.targetPlatformProject, this.sdkProject, this.p2Project)), _function);
       Iterable<TestedProjectDescriptor> _filter = Iterables.<TestedProjectDescriptor>filter(productionProjects, TestedProjectDescriptor.class);
       final Function1<TestedProjectDescriptor, TestProjectDescriptor> _function_1 = new Function1<TestedProjectDescriptor, TestProjectDescriptor>() {
         @Override
@@ -96,15 +102,7 @@ public class WizardConfiguration {
       final Function1<TestProjectDescriptor, Boolean> _function_2 = new Function1<TestProjectDescriptor, Boolean>() {
         @Override
         public Boolean apply(final TestProjectDescriptor it) {
-          boolean _and = false;
-          boolean _isEnabled = it.isEnabled();
-          if (!_isEnabled) {
-            _and = false;
-          } else {
-            boolean _isSeparate = it.isSeparate();
-            _and = _isSeparate;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((it.isEnabled() && it.isSeparate()));
         }
       };
       final Iterable<TestProjectDescriptor> testProjects = IterableExtensions.<TestProjectDescriptor>filter(_map, _function_2);
@@ -115,57 +113,19 @@ public class WizardConfiguration {
   }
   
   public boolean needsMavenBuild() {
-    boolean _or = false;
-    boolean _equals = Objects.equal(this.preferredBuildSystem, BuildSystem.MAVEN);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _and = false;
-      boolean _equals_1 = Objects.equal(this.preferredBuildSystem, BuildSystem.GRADLE);
-      if (!_equals_1) {
-        _and = false;
-      } else {
-        boolean _isEnabled = this.uiProject.isEnabled();
-        _and = _isEnabled;
-      }
-      _or = _and;
-    }
-    return _or;
+    return (Objects.equal(this.preferredBuildSystem, BuildSystem.MAVEN) || (Objects.equal(this.preferredBuildSystem, BuildSystem.GRADLE) && this.uiProject.isEnabled()));
   }
   
   public boolean needsTychoBuild() {
-    boolean _and = false;
-    boolean _needsMavenBuild = this.needsMavenBuild();
-    if (!_needsMavenBuild) {
-      _and = false;
-    } else {
-      boolean _isEclipsePluginProject = this.runtimeProject.isEclipsePluginProject();
-      _and = _isEclipsePluginProject;
-    }
-    return _and;
+    return (this.needsMavenBuild() && this.runtimeProject.isEclipsePluginProject());
   }
   
   public boolean needsGradleBuild() {
-    boolean _or = false;
-    boolean _equals = Objects.equal(this.preferredBuildSystem, BuildSystem.GRADLE);
-    if (_equals) {
-      _or = true;
-    } else {
-      boolean _isEnabled = this.intellijProject.isEnabled();
-      _or = _isEnabled;
-    }
-    return _or;
+    return (Objects.equal(this.preferredBuildSystem, BuildSystem.GRADLE) || this.intellijProject.isEnabled());
   }
   
   public boolean isNeedsGradleWrapper() {
-    boolean _and = false;
-    if (!this.needsGradleWrapper) {
-      _and = false;
-    } else {
-      boolean _needsGradleBuild = this.needsGradleBuild();
-      _and = _needsGradleBuild;
-    }
-    return _and;
+    return (this.needsGradleWrapper && this.needsGradleBuild());
   }
   
   @Pure
@@ -287,5 +247,15 @@ public class WizardConfiguration {
   @Pure
   public TargetPlatformProject getTargetPlatformProject() {
     return this.targetPlatformProject;
+  }
+  
+  @Pure
+  public SdkFeatureProject getSdkProject() {
+    return this.sdkProject;
+  }
+  
+  @Pure
+  public P2RepositoryProject getP2Project() {
+    return this.p2Project;
   }
 }

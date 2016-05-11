@@ -117,13 +117,7 @@ class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingCompilerTes
 			{ val boolean bug = #[true, false, true].reduce[a,b|a && b] }
 		'''.compilesTo('''
 		    final org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean> _function = (Boolean a, Boolean b) -> {
-		      boolean _and = false;
-		      if (!(a).booleanValue()) {
-		        _and = false;
-		      } else {
-		        _and = (b).booleanValue();
-		      }
-		      return Boolean.valueOf(_and);
+		      return Boolean.valueOf(((a).booleanValue() && (b).booleanValue()));
 		    };
 		    final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);
 		''', JAVA8)

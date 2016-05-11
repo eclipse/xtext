@@ -254,16 +254,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
     IXtextGeneratorFileSystemAccess _root = _runtime_1.getRoot();
     final String rootPath = _root.getPath();
-    boolean _and = false;
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(rootPath);
-    boolean _not = (!_isNullOrEmpty);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _startsWith = srcGenPath.startsWith(rootPath);
-      _and = _startsWith;
-    }
-    if (_and) {
+    if (((!StringExtensions.isNullOrEmpty(rootPath)) && srcGenPath.startsWith(rootPath))) {
       String _modelPluginID = this.getModelPluginID();
       String _plus = ("/" + _modelPluginID);
       int _length = rootPath.length();
@@ -569,22 +560,11 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     for (final EPackage pack_1 : generatedPackages) {
       {
         final GenPackage genPackage = GenModelUtil2.getGenPackage(pack_1, rs);
-        boolean _and = false;
-        IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime_4 = _projectConfig_4.getRuntime();
-        ManifestAccess _manifest_2 = _runtime_4.getManifest();
-        boolean _tripleNotEquals_2 = (_manifest_2 != null);
-        if (!_tripleNotEquals_2) {
-          _and = false;
-        } else {
-          boolean _equals = Objects.equal(this.modelPluginID, null);
-          _and = _equals;
-        }
-        if (_and) {
-          IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
-          IRuntimeProjectConfig _runtime_5 = _projectConfig_5.getRuntime();
-          ManifestAccess _manifest_3 = _runtime_5.getManifest();
-          Set<String> _exportedPackages = _manifest_3.getExportedPackages();
+        if (((this.getProjectConfig().getRuntime().getManifest() != null) && Objects.equal(this.modelPluginID, null))) {
+          IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+          IRuntimeProjectConfig _runtime_4 = _projectConfig_4.getRuntime();
+          ManifestAccess _manifest_2 = _runtime_4.getManifest();
+          Set<String> _exportedPackages = _manifest_2.getExportedPackages();
           String _interfacePackageName = genPackage.getInterfacePackageName();
           String _classPackageName = genPackage.getClassPackageName();
           String _utilitiesPackageName = genPackage.getUtilitiesPackageName();
@@ -712,14 +692,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     for (final GenPackage genPackage : allGenPackages) {
       {
         final EPackage ecorePackage = genPackage.getEcorePackage();
-        boolean _or = false;
-        if ((ecorePackage == null)) {
-          _or = true;
-        } else {
-          boolean _eIsProxy = ecorePackage.eIsProxy();
-          _or = _eIsProxy;
-        }
-        if (_or) {
+        if (((ecorePackage == null) || ecorePackage.eIsProxy())) {
           Resource _eResource = genModel.eResource();
           URI _uRI = _eResource.getURI();
           String _plus = ((("Unresolved proxy: " + ecorePackage) + " in ") + _uRI);
@@ -751,14 +724,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   }
   
   private void putMappingData(final Map<EObject, EObject> result, final EPackage usedEPackage, final EPackage loadedEPackage) {
-    boolean _and = false;
-    if (!(loadedEPackage != null)) {
-      _and = false;
-    } else {
-      boolean _notEquals = (!Objects.equal(usedEPackage, loadedEPackage));
-      _and = _notEquals;
-    }
-    if (_and) {
+    if (((loadedEPackage != null) && (!Objects.equal(usedEPackage, loadedEPackage)))) {
       result.put(usedEPackage, loadedEPackage);
       EList<EClassifier> _eClassifiers = usedEPackage.getEClassifiers();
       for (final EClassifier usedClassifier : _eClassifiers) {
@@ -863,22 +829,10 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         if (this.suppressLoadInitialization) {
           genPackage.setLoadInitialization(false);
         }
-        boolean _and = false;
-        IXtextGeneratorLanguage _language = this.getLanguage();
-        List<String> _fileExtensions = _language.getFileExtensions();
-        boolean _isEmpty = _fileExtensions.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (!_not) {
-          _and = false;
-        } else {
-          EPackage _ecorePackage = genPackage.getEcorePackage();
-          boolean _contains = packs.contains(_ecorePackage);
-          _and = _contains;
-        }
-        if (_and) {
-          IXtextGeneratorLanguage _language_1 = this.getLanguage();
-          List<String> _fileExtensions_1 = _language_1.getFileExtensions();
-          String _join = IterableExtensions.join(_fileExtensions_1, ",");
+        if (((!this.getLanguage().getFileExtensions().isEmpty()) && packs.contains(genPackage.getEcorePackage()))) {
+          IXtextGeneratorLanguage _language = this.getLanguage();
+          List<String> _fileExtensions = _language.getFileExtensions();
+          String _join = IterableExtensions.join(_fileExtensions, ",");
           genPackage.setFileExtensions(_join);
         }
       }
@@ -1158,27 +1112,17 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
   
   private void updateBuildProperties() {
     try {
-      boolean _or = false;
-      if (((!this.updateBuildProperties) || (this.modelPluginID != null))) {
-        _or = true;
-      } else {
-        IXtextProjectConfig _projectConfig = this.getProjectConfig();
-        IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-        ManifestAccess _manifest = _runtime.getManifest();
-        boolean _tripleEquals = (_manifest == null);
-        _or = _tripleEquals;
-      }
-      if (_or) {
+      if ((((!this.updateBuildProperties) || (this.modelPluginID != null)) || (this.getProjectConfig().getRuntime().getManifest() == null))) {
         return;
       }
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
-      final IXtextGeneratorFileSystemAccess rootOutlet = _runtime_1.getRoot();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      final IXtextGeneratorFileSystemAccess rootOutlet = _runtime.getRoot();
       String _path = rootOutlet.getPath();
       final String buildPropertiesPath = (_path + "/build.properties");
-      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
-      final String modelContainer = _runtime_2.getEcoreModelFolder();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
+      final String modelContainer = _runtime_1.getEcoreModelFolder();
       final Properties buildProperties = new Properties();
       File _file = new File(buildPropertiesPath);
       FileInputStream _fileInputStream = new FileInputStream(_file);

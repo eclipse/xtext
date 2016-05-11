@@ -172,22 +172,7 @@ public class SemanticSequencerExtensions {
         boolean _tripleNotEquals_1 = (state != _start);
         if (_tripleNotEquals_1) {
           final EStructuralFeature feature = state.getFeature();
-          boolean _or = false;
-          boolean _or_1 = false;
-          if ((feature == null)) {
-            _or_1 = true;
-          } else {
-            boolean _isMany = feature.isMany();
-            _or_1 = _isMany;
-          }
-          if (_or_1) {
-            _or = true;
-          } else {
-            boolean _add = features.add(feature);
-            boolean _not = (!_add);
-            _or = _not;
-          }
-          if (_or) {
+          if ((((feature == null) || feature.isMany()) || (!features.add(feature)))) {
             return null;
           }
           result.add(state);

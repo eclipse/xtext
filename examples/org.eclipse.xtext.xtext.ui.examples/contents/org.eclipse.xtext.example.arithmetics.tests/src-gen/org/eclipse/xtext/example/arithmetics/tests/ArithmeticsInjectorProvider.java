@@ -25,7 +25,7 @@ public class ArithmeticsInjectorProvider implements IInjectorProvider, IRegistry
 	}
 
 	@Override
-	public Injector getInjector()	{
+	public Injector getInjector() {
 		if (injector == null) {
 			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
 			this.injector = internalCreateInjector();

@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
@@ -54,15 +53,7 @@ public class OverrideProposalUtil {
     LightweightTypeReference _type = resolvedFeatures.getType();
     ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(this.visibilityHelper, _type);
     this.addOperationCandidates(resolvedFeatures, contextualVisibilityHelper, result);
-    boolean _and = false;
-    if (!(!isAnonymous)) {
-      _and = false;
-    } else {
-      boolean _isInterface = ((JvmGenericType) type).isInterface();
-      boolean _not = (!_isInterface);
-      _and = _not;
-    }
-    if (_and) {
+    if (((!isAnonymous) && (!((JvmGenericType) type).isInterface()))) {
       this.addConstructorCandidates(resolvedFeatures, contextualVisibilityHelper, result);
     }
     return result;
@@ -116,56 +107,15 @@ public class OverrideProposalUtil {
   protected boolean isCandidate(final LightweightTypeReference type, final IResolvedExecutable executable, final IVisibilityHelper visibilityHelper) {
     JvmExecutable _declaration = executable.getDeclaration();
     JvmDeclaredType declaringType = _declaration.getDeclaringType();
-    boolean _and = false;
-    JvmType _type = type.getType();
-    boolean _tripleNotEquals = (_type != declaringType);
-    if (!_tripleNotEquals) {
-      _and = false;
-    } else {
-      boolean _isVisible = this.isVisible(executable, visibilityHelper);
-      _and = _isVisible;
-    }
-    if (_and) {
+    if (((type.getType() != declaringType) && this.isVisible(executable, visibilityHelper))) {
       JvmExecutable rawExecutable = executable.getDeclaration();
       if ((rawExecutable instanceof JvmOperation)) {
         JvmOperation operation = ((JvmOperation)rawExecutable);
-        boolean _or = false;
-        boolean _isFinal = operation.isFinal();
-        if (_isFinal) {
-          _or = true;
-        } else {
-          boolean _isStatic = operation.isStatic();
-          _or = _isStatic;
-        }
-        if (_or) {
+        if ((operation.isFinal() || operation.isStatic())) {
           return false;
         } else {
-          boolean _and_1 = false;
-          JvmType _type_1 = type.getType();
-          if (!(_type_1 instanceof JvmGenericType)) {
-            _and_1 = false;
-          } else {
-            JvmType _type_2 = type.getType();
-            boolean _isInterface = ((JvmGenericType) _type_2).isInterface();
-            _and_1 = _isInterface;
-          }
-          if (_and_1) {
-            boolean _and_2 = false;
-            boolean _and_3 = false;
-            if (!(declaringType instanceof JvmGenericType)) {
-              _and_3 = false;
-            } else {
-              boolean _isInterface_1 = ((JvmGenericType) declaringType).isInterface();
-              _and_3 = _isInterface_1;
-            }
-            if (!_and_3) {
-              _and_2 = false;
-            } else {
-              boolean _isAbstract = operation.isAbstract();
-              boolean _not = (!_isAbstract);
-              _and_2 = _not;
-            }
-            return _and_2;
+          if (((type.getType() instanceof JvmGenericType) && ((JvmGenericType) type.getType()).isInterface())) {
+            return (((declaringType instanceof JvmGenericType) && ((JvmGenericType) declaringType).isInterface()) && (!operation.isAbstract()));
           } else {
             return true;
           }

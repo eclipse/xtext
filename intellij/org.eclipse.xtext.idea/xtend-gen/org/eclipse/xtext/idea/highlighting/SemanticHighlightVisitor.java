@@ -14,7 +14,6 @@ import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
 import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
-import com.intellij.lang.Language;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.progress.ProgressIndicatorProvider;
 import com.intellij.openapi.project.Project;
@@ -106,16 +105,7 @@ public abstract class SemanticHighlightVisitor implements HighlightVisitor {
   
   @Override
   public boolean suitableForFile(final PsiFile file) {
-    boolean _and = false;
-    if (!(file instanceof BaseXtextFile)) {
-      _and = false;
-    } else {
-      Language _language = file.getLanguage();
-      String _iD = _language.getID();
-      boolean _equals = Objects.equal(this.languageId, _iD);
-      _and = _equals;
-    }
-    return _and;
+    return ((file instanceof BaseXtextFile) && Objects.equal(this.languageId, file.getLanguage().getID()));
   }
   
   private volatile long lastRun;

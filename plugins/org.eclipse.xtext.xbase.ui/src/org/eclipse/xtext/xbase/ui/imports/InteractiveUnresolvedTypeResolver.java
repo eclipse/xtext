@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.internal.compiler.env.AccessRestriction;
 import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
 import org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor;
+import org.eclipse.jdt.internal.corext.util.TypeFilter;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -149,8 +150,9 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 							char[][] enclosingTypeNames, String path, AccessRestriction access) {
 						final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
 								simpleTypeName);
-						if (access == null
-								|| (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter())) {
+						if ((access == null
+								|| (access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter()))
+							&& !TypeFilter.isFiltered(packageName, simpleTypeName)) {
 							JvmType importType = typeRefs.findDeclaredType(qualifiedTypeName, contextType.eResource());
 							if (importType instanceof JvmDeclaredType
 									&& contextualVisibilityHelper.isVisible((JvmDeclaredType) importType)) {

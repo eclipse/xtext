@@ -113,8 +113,8 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     ISemanticRegion _append = document.append(_assignment, _function_1);
     ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(state);
     StatemachineGrammarAccess.StateElements _stateAccess_2 = this._statemachineGrammarAccess.getStateAccess();
-    Keyword _endKeyword_4 = _stateAccess_2.getEndKeyword_4();
-    ISemanticRegion _keyword_1 = _regionFor_2.keyword(_endKeyword_4);
+    Keyword _endKeyword_5 = _stateAccess_2.getEndKeyword_5();
+    ISemanticRegion _keyword_1 = _regionFor_2.keyword(_endKeyword_5);
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
       @Override
       public void apply(final IHiddenRegionFormatter it) {
@@ -146,6 +146,19 @@ public class StatemachineFormatter extends AbstractFormatter2 {
           }
         };
         document.<Transition>append(transition, _function_3);
+      }
+    }
+    EList<State> _nestedStates = state.getNestedStates();
+    for (final State nestedState : _nestedStates) {
+      {
+        this.format(nestedState, document);
+        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.newLine();
+          }
+        };
+        document.<State>append(nestedState, _function_3);
       }
     }
   }

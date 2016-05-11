@@ -1251,36 +1251,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			          _elvis = Integer.valueOf(0);
 			        }
 			        final int newLines2 = (int) _elvis;
-			        boolean _or = false;
-			        boolean _and = false;
-			        boolean _equals = Objects.equal(it.space, null);
-			        if (!_equals) {
-			          _and = false;
-			        } else {
-			          boolean _equals_1 = Objects.equal(it.newLines, null);
-			          _and = _equals_1;
-			        }
-			        if (_and) {
-			          _or = true;
-			        } else {
-			          boolean _and_1 = false;
-			          int _newLinesInComments = leafs.getNewLinesInComments();
-			          boolean _equals_2 = (_newLinesInComments == 0);
-			          if (!_equals_2) {
-			            _and_1 = false;
-			          } else {
-			            boolean _or_1 = false;
-			            if ((newLines2 == 0)) {
-			              _or_1 = true;
-			            } else {
-			              boolean _equals_3 = Objects.equal(it.space, "");
-			              _or_1 = _equals_3;
-			            }
-			            _and_1 = _or_1;
-			          }
-			          _or = _and_1;
-			        }
-			        if (_or) {
+			        if (((Objects.equal(it.space, null) && Objects.equal(it.newLines, null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equal(it.space, ""))))) {
 			          boolean _isDebugConflicts = doc.isDebugConflicts();
 			          return FormattingDataFactory.this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
 			        } else {
@@ -1328,13 +1299,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			            _xifexpression = 0;
 			          }
 			          int _xifexpression_1 = (int) 0;
-			          boolean _or = false;
-			          if (preserve) {
-			            _or = true;
-			          } else {
-			            _or = newLine;
-			          }
-			          if (_or) {
+			          if ((preserve || newLine)) {
 			            _xifexpression_1 = 1;
 			          } else {
 			            _xifexpression_1 = 0;
@@ -1407,31 +1372,29 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			      List<LeafInfo> _leafs = leafs.getLeafs();
 			      for (final LeafInfo leaf : _leafs) {
 			        boolean _matched = false;
-			        if (!_matched) {
-			          if (leaf instanceof WhitespaceInfo) {
-			            _matched=true;
-			            int _offset = ((WhitespaceInfo)leaf).getOffset();
-			            int _length = ((WhitespaceInfo)leaf).getLength();
-			            int _xifexpression = (int) 0;
-			            if (isFirst) {
-			              _xifexpression = increaseIndentationChange;
-			            } else {
-			              _xifexpression = 0;
-			            }
-			            int _xifexpression_1 = (int) 0;
-			            if (isFirst) {
-			              _xifexpression_1 = decreaseIndentationChange;
-			            } else {
-			              _xifexpression_1 = 0;
-			            }
-			            RuntimeException _xifexpression_2 = null;
-			            if (trace) {
-			              _xifexpression_2 = new RuntimeException();
-			            }
-			            WhitespaceData _whitespaceData = new WhitespaceData(_offset, _length, _xifexpression, _xifexpression_1, _xifexpression_2, space);
-			            result.add(_whitespaceData);
-			            isFirst = false;
+			        if (leaf instanceof WhitespaceInfo) {
+			          _matched=true;
+			          int _offset = ((WhitespaceInfo)leaf).getOffset();
+			          int _length = ((WhitespaceInfo)leaf).getLength();
+			          int _xifexpression = (int) 0;
+			          if (isFirst) {
+			            _xifexpression = increaseIndentationChange;
+			          } else {
+			            _xifexpression = 0;
 			          }
+			          int _xifexpression_1 = (int) 0;
+			          if (isFirst) {
+			            _xifexpression_1 = decreaseIndentationChange;
+			          } else {
+			            _xifexpression_1 = 0;
+			          }
+			          RuntimeException _xifexpression_2 = null;
+			          if (trace) {
+			            _xifexpression_2 = new RuntimeException();
+			          }
+			          WhitespaceData _whitespaceData = new WhitespaceData(_offset, _length, _xifexpression, _xifexpression_1, _xifexpression_2, space);
+			          result.add(_whitespaceData);
+			          isFirst = false;
 			        }
 			        if (!_matched) {
 			          if (leaf instanceof CommentInfo) {
@@ -1452,214 +1415,186 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			      List<LeafInfo> _leafs = leafs.getLeafs();
 			      for (final LeafInfo leaf : _leafs) {
 			        boolean _matched = false;
-			        if (!_matched) {
-			          if (leaf instanceof WhitespaceInfo) {
-			            _matched=true;
-			            final boolean equalIndentationChange = (increaseIndentationChange == (decreaseIndentationChange * (-1)));
-			            boolean _and = false;
-			            CommentInfo _trailingComment = ((WhitespaceInfo)leaf).trailingComment();
-			            boolean _isTrailing = false;
-			            if (_trailingComment!=null) {
-			              _isTrailing=_trailingComment.isTrailing();
+			        if (leaf instanceof WhitespaceInfo) {
+			          _matched=true;
+			          final boolean equalIndentationChange = (increaseIndentationChange == (decreaseIndentationChange * (-1)));
+			          boolean _and = false;
+			          CommentInfo _trailingComment = ((WhitespaceInfo)leaf).trailingComment();
+			          boolean _isTrailing = false;
+			          if (_trailingComment!=null) {
+			            _isTrailing=_trailingComment.isTrailing();
+			          }
+			          if (!_isTrailing) {
+			            _and = false;
+			          } else {
+			            CommentInfo _trailingComment_1 = ((WhitespaceInfo)leaf).trailingComment();
+			            boolean _isMultiline = false;
+			            if (_trailingComment_1!=null) {
+			              _isMultiline=_trailingComment_1.isMultiline();
 			            }
-			            if (!_isTrailing) {
-			              _and = false;
+			            boolean _not = (!_isMultiline);
+			            _and = _not;
+			          }
+			          if (_and) {
+			            String _xifexpression = null;
+			            int _offset = ((WhitespaceInfo)leaf).getOffset();
+			            boolean _equals = (_offset == 0);
+			            if (_equals) {
+			              _xifexpression = "";
 			            } else {
-			              CommentInfo _trailingComment_1 = ((WhitespaceInfo)leaf).trailingComment();
-			              boolean _isMultiline = false;
-			              if (_trailingComment_1!=null) {
-			                _isMultiline=_trailingComment_1.isMultiline();
-			              }
-			              boolean _not = (!_isMultiline);
-			              _and = _not;
-			            }
-			            if (_and) {
-			              String _xifexpression = null;
-			              int _offset = ((WhitespaceInfo)leaf).getOffset();
-			              boolean _equals = (_offset == 0);
-			              if (_equals) {
-			                _xifexpression = "";
+			              String _xifexpression_1 = null;
+			              if ((maxNewLines == 0)) {
+			                _xifexpression_1 = null;
 			              } else {
-			                String _xifexpression_1 = null;
-			                if ((maxNewLines == 0)) {
-			                  _xifexpression_1 = null;
-			                } else {
-			                  _xifexpression_1 = " ";
-			                }
-			                _xifexpression = _xifexpression_1;
+			                _xifexpression_1 = " ";
 			              }
-			              final String space = _xifexpression;
-			              int _offset_1 = ((WhitespaceInfo)leaf).getOffset();
-			              int _length = ((WhitespaceInfo)leaf).getLength();
-			              RuntimeException _xifexpression_2 = null;
-			              if (trace) {
-			                _xifexpression_2 = new RuntimeException();
-			              }
-			              WhitespaceData _whitespaceData = new WhitespaceData(_offset_1, _length, 0, 0, _xifexpression_2, space);
-			              result.add(_whitespaceData);
-			            } else {
-			              if ((!applied)) {
-			                int _newLines = leafs.getNewLines();
-			                int _max = Math.max(_newLines, minNewLines);
-			                int newLines = Math.min(_max, maxNewLines);
-			                boolean _and_1 = false;
-			                boolean _and_2 = false;
-			                if (!(newLines < 1)) {
-			                  _and_2 = false;
-			                } else {
-			                  int _offset_2 = ((WhitespaceInfo)leaf).getOffset();
-			                  boolean _greaterThan = (_offset_2 > 0);
-			                  _and_2 = _greaterThan;
+			              _xifexpression = _xifexpression_1;
+			            }
+			            final String space = _xifexpression;
+			            int _offset_1 = ((WhitespaceInfo)leaf).getOffset();
+			            int _length = ((WhitespaceInfo)leaf).getLength();
+			            RuntimeException _xifexpression_2 = null;
+			            if (trace) {
+			              _xifexpression_2 = new RuntimeException();
+			            }
+			            WhitespaceData _whitespaceData = new WhitespaceData(_offset_1, _length, 0, 0, _xifexpression_2, space);
+			            result.add(_whitespaceData);
+			          } else {
+			            if ((!applied)) {
+			              int _newLines = leafs.getNewLines();
+			              int _max = Math.max(_newLines, minNewLines);
+			              int newLines = Math.min(_max, maxNewLines);
+			              boolean _and_1 = false;
+			              if (!((newLines < 1) && (((WhitespaceInfo)leaf).getOffset() > 0))) {
+			                _and_1 = false;
+			              } else {
+			                boolean _or = false;
+			                CommentInfo _leadingComment = ((WhitespaceInfo)leaf).leadingComment();
+			                boolean _isMultiline_1 = false;
+			                if (_leadingComment!=null) {
+			                  _isMultiline_1=_leadingComment.isMultiline();
 			                }
-			                if (!_and_2) {
-			                  _and_1 = false;
+			                if (_isMultiline_1) {
+			                  _or = true;
 			                } else {
-			                  boolean _or = false;
-			                  CommentInfo _leadingComment = ((WhitespaceInfo)leaf).leadingComment();
-			                  boolean _isMultiline_1 = false;
-			                  if (_leadingComment!=null) {
-			                    _isMultiline_1=_leadingComment.isMultiline();
+			                  CommentInfo _trailingComment_2 = ((WhitespaceInfo)leaf).trailingComment();
+			                  boolean _isMultiline_2 = false;
+			                  if (_trailingComment_2!=null) {
+			                    _isMultiline_2=_trailingComment_2.isMultiline();
 			                  }
-			                  if (_isMultiline_1) {
-			                    _or = true;
+			                  _or = _isMultiline_2;
+			                }
+			                _and_1 = _or;
+			              }
+			              if (_and_1) {
+			                newLines = 1;
+			              }
+			              CommentInfo _leadingComment_1 = ((WhitespaceInfo)leaf).leadingComment();
+			              boolean _endsWithNewLine = false;
+			              if (_leadingComment_1!=null) {
+			                _endsWithNewLine=_leadingComment_1.endsWithNewLine();
+			              }
+			              if (_endsWithNewLine) {
+			                newLines = (newLines - 1);
+			              }
+			              boolean _and_2 = false;
+			              CommentInfo _leadingComment_2 = ((WhitespaceInfo)leaf).leadingComment();
+			              boolean _endsWithNewLine_1 = false;
+			              if (_leadingComment_2!=null) {
+			                _endsWithNewLine_1=_leadingComment_2.endsWithNewLine();
+			              }
+			              boolean _not_1 = (!_endsWithNewLine_1);
+			              if (!_not_1) {
+			                _and_2 = false;
+			              } else {
+			                _and_2 = (newLines == 0);
+			              }
+			              if (_and_2) {
+			                int _offset_2 = ((WhitespaceInfo)leaf).getOffset();
+			                int _length_1 = ((WhitespaceInfo)leaf).getLength();
+			                RuntimeException _xifexpression_3 = null;
+			                if (trace) {
+			                  _xifexpression_3 = new RuntimeException();
+			                }
+			                String _xifexpression_4 = null;
+			                int _offset_3 = ((WhitespaceInfo)leaf).getOffset();
+			                boolean _equals_1 = (_offset_3 == 0);
+			                if (_equals_1) {
+			                  _xifexpression_4 = "";
+			                } else {
+			                  String _xifexpression_5 = null;
+			                  boolean _containsComment = leafs.containsComment();
+			                  if (_containsComment) {
+			                    _xifexpression_5 = null;
 			                  } else {
-			                    CommentInfo _trailingComment_2 = ((WhitespaceInfo)leaf).trailingComment();
-			                    boolean _isMultiline_2 = false;
-			                    if (_trailingComment_2!=null) {
-			                      _isMultiline_2=_trailingComment_2.isMultiline();
-			                    }
-			                    _or = _isMultiline_2;
+			                    _xifexpression_5 = " ";
 			                  }
-			                  _and_1 = _or;
+			                  _xifexpression_4 = _xifexpression_5;
 			                }
-			                if (_and_1) {
-			                  newLines = 1;
-			                }
-			                CommentInfo _leadingComment_1 = ((WhitespaceInfo)leaf).leadingComment();
-			                boolean _endsWithNewLine = false;
-			                if (_leadingComment_1!=null) {
-			                  _endsWithNewLine=_leadingComment_1.endsWithNewLine();
-			                }
-			                if (_endsWithNewLine) {
-			                  newLines = (newLines - 1);
-			                }
-			                boolean _and_3 = false;
-			                CommentInfo _leadingComment_2 = ((WhitespaceInfo)leaf).leadingComment();
-			                boolean _endsWithNewLine_1 = false;
-			                if (_leadingComment_2!=null) {
-			                  _endsWithNewLine_1=_leadingComment_2.endsWithNewLine();
-			                }
-			                boolean _not_1 = (!_endsWithNewLine_1);
-			                if (!_not_1) {
-			                  _and_3 = false;
-			                } else {
-			                  _and_3 = (newLines == 0);
-			                }
-			                if (_and_3) {
-			                  int _offset_3 = ((WhitespaceInfo)leaf).getOffset();
-			                  int _length_1 = ((WhitespaceInfo)leaf).getLength();
-			                  RuntimeException _xifexpression_3 = null;
-			                  if (trace) {
-			                    _xifexpression_3 = new RuntimeException();
-			                  }
-			                  String _xifexpression_4 = null;
+			                WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_2, _length_1, increaseIndentationChange, decreaseIndentationChange, _xifexpression_3, _xifexpression_4);
+			                result.add(_whitespaceData_1);
+			              } else {
+			                if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
 			                  int _offset_4 = ((WhitespaceInfo)leaf).getOffset();
-			                  boolean _equals_1 = (_offset_4 == 0);
-			                  if (_equals_1) {
-			                    _xifexpression_4 = "";
-			                  } else {
-			                    String _xifexpression_5 = null;
-			                    boolean _containsComment = leafs.containsComment();
-			                    if (_containsComment) {
-			                      _xifexpression_5 = null;
-			                    } else {
-			                      _xifexpression_5 = " ";
-			                    }
-			                    _xifexpression_4 = _xifexpression_5;
+			                  int _length_2 = ((WhitespaceInfo)leaf).getLength();
+			                  RuntimeException _xifexpression_6 = null;
+			                  if (trace) {
+			                    _xifexpression_6 = new RuntimeException();
 			                  }
-			                  WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset_3, _length_1, increaseIndentationChange, decreaseIndentationChange, _xifexpression_3, _xifexpression_4);
-			                  result.add(_whitespaceData_1);
+			                  NewLineData _newLineData = new NewLineData(_offset_4, _length_2, increaseIndentationChange, decreaseIndentationChange, _xifexpression_6, Integer.valueOf(newLines));
+			                  result.add(_newLineData);
 			                } else {
-			                  boolean _and_4 = false;
-			                  if (!equalIndentationChange) {
-			                    _and_4 = false;
+			                  int _offset_5 = ((WhitespaceInfo)leaf).getOffset();
+			                  int _length_3 = ((WhitespaceInfo)leaf).getLength();
+			                  int _xifexpression_7 = (int) 0;
+			                  if (equalIndentationChange) {
+			                    _xifexpression_7 = 0;
 			                  } else {
-			                    List<LeafInfo> _leafs_1 = leafs.getLeafs();
-			                    LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs_1);
-			                    boolean _notEquals = (!Objects.equal(_last, leaf));
-			                    _and_4 = _notEquals;
+			                    _xifexpression_7 = increaseIndentationChange;
 			                  }
-			                  if (_and_4) {
-			                    int _offset_5 = ((WhitespaceInfo)leaf).getOffset();
-			                    int _length_2 = ((WhitespaceInfo)leaf).getLength();
-			                    RuntimeException _xifexpression_6 = null;
-			                    if (trace) {
-			                      _xifexpression_6 = new RuntimeException();
-			                    }
-			                    NewLineData _newLineData = new NewLineData(_offset_5, _length_2, increaseIndentationChange, decreaseIndentationChange, _xifexpression_6, Integer.valueOf(newLines));
-			                    result.add(_newLineData);
+			                  int _xifexpression_8 = (int) 0;
+			                  if (equalIndentationChange) {
+			                    _xifexpression_8 = 0;
 			                  } else {
-			                    int _offset_6 = ((WhitespaceInfo)leaf).getOffset();
-			                    int _length_3 = ((WhitespaceInfo)leaf).getLength();
-			                    int _xifexpression_7 = (int) 0;
-			                    if (equalIndentationChange) {
-			                      _xifexpression_7 = 0;
-			                    } else {
-			                      _xifexpression_7 = increaseIndentationChange;
-			                    }
-			                    int _xifexpression_8 = (int) 0;
-			                    if (equalIndentationChange) {
-			                      _xifexpression_8 = 0;
-			                    } else {
-			                      _xifexpression_8 = decreaseIndentationChange;
-			                    }
-			                    RuntimeException _xifexpression_9 = null;
-			                    if (trace) {
-			                      _xifexpression_9 = new RuntimeException();
-			                    }
-			                    NewLineData _newLineData_1 = new NewLineData(_offset_6, _length_3, _xifexpression_7, _xifexpression_8, _xifexpression_9, Integer.valueOf(newLines));
-			                    result.add(_newLineData_1);
+			                    _xifexpression_8 = decreaseIndentationChange;
 			                  }
+			                  RuntimeException _xifexpression_9 = null;
+			                  if (trace) {
+			                    _xifexpression_9 = new RuntimeException();
+			                  }
+			                  NewLineData _newLineData_1 = new NewLineData(_offset_5, _length_3, _xifexpression_7, _xifexpression_8, _xifexpression_9, Integer.valueOf(newLines));
+			                  result.add(_newLineData_1);
 			                }
-			                applied = true;
+			              }
+			              applied = true;
+			            } else {
+			              int newLines_1 = 1;
+			              CommentInfo _leadingComment_3 = ((WhitespaceInfo)leaf).leadingComment();
+			              boolean _endsWithNewLine_2 = false;
+			              if (_leadingComment_3!=null) {
+			                _endsWithNewLine_2=_leadingComment_3.endsWithNewLine();
+			              }
+			              if (_endsWithNewLine_2) {
+			                newLines_1 = (newLines_1 - 1);
+			              }
+			              if ((equalIndentationChange && (!Objects.equal(IterableExtensions.<LeafInfo>last(leafs.getLeafs()), leaf)))) {
+			                int _offset_6 = ((WhitespaceInfo)leaf).getOffset();
+			                int _length_4 = ((WhitespaceInfo)leaf).getLength();
+			                RuntimeException _xifexpression_10 = null;
+			                if (trace) {
+			                  _xifexpression_10 = new RuntimeException();
+			                }
+			                NewLineData _newLineData_2 = new NewLineData(_offset_6, _length_4, increaseIndentationChange, decreaseIndentationChange, _xifexpression_10, Integer.valueOf(newLines_1));
+			                result.add(_newLineData_2);
 			              } else {
-			                int newLines_1 = 1;
-			                CommentInfo _leadingComment_3 = ((WhitespaceInfo)leaf).leadingComment();
-			                boolean _endsWithNewLine_2 = false;
-			                if (_leadingComment_3!=null) {
-			                  _endsWithNewLine_2=_leadingComment_3.endsWithNewLine();
+			                int _offset_7 = ((WhitespaceInfo)leaf).getOffset();
+			                int _length_5 = ((WhitespaceInfo)leaf).getLength();
+			                RuntimeException _xifexpression_11 = null;
+			                if (trace) {
+			                  _xifexpression_11 = new RuntimeException();
 			                }
-			                if (_endsWithNewLine_2) {
-			                  newLines_1 = (newLines_1 - 1);
-			                }
-			                boolean _and_5 = false;
-			                if (!equalIndentationChange) {
-			                  _and_5 = false;
-			                } else {
-			                  List<LeafInfo> _leafs_2 = leafs.getLeafs();
-			                  LeafInfo _last_1 = IterableExtensions.<LeafInfo>last(_leafs_2);
-			                  boolean _notEquals_1 = (!Objects.equal(_last_1, leaf));
-			                  _and_5 = _notEquals_1;
-			                }
-			                if (_and_5) {
-			                  int _offset_7 = ((WhitespaceInfo)leaf).getOffset();
-			                  int _length_4 = ((WhitespaceInfo)leaf).getLength();
-			                  RuntimeException _xifexpression_10 = null;
-			                  if (trace) {
-			                    _xifexpression_10 = new RuntimeException();
-			                  }
-			                  NewLineData _newLineData_2 = new NewLineData(_offset_7, _length_4, increaseIndentationChange, decreaseIndentationChange, _xifexpression_10, Integer.valueOf(newLines_1));
-			                  result.add(_newLineData_2);
-			                } else {
-			                  int _offset_8 = ((WhitespaceInfo)leaf).getOffset();
-			                  int _length_5 = ((WhitespaceInfo)leaf).getLength();
-			                  RuntimeException _xifexpression_11 = null;
-			                  if (trace) {
-			                    _xifexpression_11 = new RuntimeException();
-			                  }
-			                  NewLineData _newLineData_3 = new NewLineData(_offset_8, _length_5, 0, 0, _xifexpression_11, Integer.valueOf(newLines_1));
-			                  result.add(_newLineData_3);
-			                }
+			                NewLineData _newLineData_3 = new NewLineData(_offset_7, _length_5, 0, 0, _xifexpression_11, Integer.valueOf(newLines_1));
+			                result.add(_newLineData_3);
 			              }
 			            }
 			          }

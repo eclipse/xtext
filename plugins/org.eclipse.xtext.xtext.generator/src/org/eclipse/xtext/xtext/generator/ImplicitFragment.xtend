@@ -219,7 +219,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 						definitionId="«name».Editor.opened">
 					</reference>
 				</visibleWhen>
-			</command>  
+			</command>
 			</menuContribution>
 			<!-- copy qualified name -->
 			<menuContribution locationURI="popup:#TextEditorContext?after=copy">
@@ -228,7 +228,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 					<visibleWhen checkEnabled="false">
 						<reference definitionId="«name».Editor.opened" />
 					</visibleWhen>
-				</command>  
+				</command>
 			</menuContribution>
 			<menuContribution locationURI="menu:edit?after=copy">
 				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
@@ -236,7 +236,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 					<visibleWhen checkEnabled="false">
 						<reference definitionId="«name».Editor.opened" />
 					</visibleWhen>
-				</command>  
+				</command>
 			</menuContribution>
 			<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
 				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 

@@ -229,7 +229,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 
 	@Test public void testForLoopExpression_1() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (x : null) null");
-		assertExpected("java.lang.Iterable<?>", loop.getForExpression());
+		assertExpected("java.lang.Iterable<? extends java.lang.Object>", loop.getForExpression());
 		assertExpected(null, loop.getEachExpression());
 	}
 	

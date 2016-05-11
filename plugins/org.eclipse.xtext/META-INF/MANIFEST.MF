@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext;singleton:=true
-Bundle-Version: 2.9.2.qualifier
+Bundle-Version: 2.10.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -20,7 +20,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.diagnostics,
  org.eclipse.xtext.documentation,
  org.eclipse.xtext.documentation.impl,
- org.eclipse.xtext.findReferences;x-friends:="org.eclipse.xtext.xbase",
+ org.eclipse.xtext.findReferences,
  org.eclipse.xtext.formatting,
  org.eclipse.xtext.formatting.impl,
  org.eclipse.xtext.formatting2;

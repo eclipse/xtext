@@ -194,15 +194,7 @@ public class BlockExtension {
       final int offset = (_startOffset - _startOffset_1);
       final ASTNode leafElement = node.findLeafElementAt(offset);
       final BracePair bracePair = this.getBracePairForOpeningNode(leafElement);
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(bracePair, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _isStructural = bracePair.isStructural();
-        _and = _isStructural;
-      }
-      _xblockexpression = _and;
+      _xblockexpression = ((!Objects.equal(bracePair, null)) && bracePair.isStructural());
     }
     return _xblockexpression;
   }

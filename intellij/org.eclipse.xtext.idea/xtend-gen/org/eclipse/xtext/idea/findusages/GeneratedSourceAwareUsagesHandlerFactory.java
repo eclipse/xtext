@@ -157,16 +157,7 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
     for (final PsiElement generatedElement : _generatedElements) {
       {
         final PsiNamedElement parent = PsiTreeUtil.<PsiNamedElement>getParentOfType(generatedElement, PsiNamedElement.class, false);
-        boolean _and = false;
-        boolean _notEquals = (!Objects.equal(parent, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          boolean _contains = result.contains(parent);
-          boolean _not = (!_contains);
-          _and = _not;
-        }
-        if (_and) {
+        if (((!Objects.equal(parent, null)) && (!result.contains(parent)))) {
           result.add(parent);
         }
       }

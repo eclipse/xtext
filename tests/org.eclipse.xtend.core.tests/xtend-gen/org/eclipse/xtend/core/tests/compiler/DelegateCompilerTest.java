@@ -76,25 +76,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
             @Override
             public Boolean apply(final Method it) {
-              boolean _and = false;
-              boolean _and_1 = false;
-              String _name = it.getName();
-              boolean _equals = Objects.equal(_name, "m");
-              if (!_equals) {
-                _and_1 = false;
-              } else {
-                Class<?>[] _parameterTypes = it.getParameterTypes();
-                boolean _isEmpty = ((List<Class<?>>)Conversions.doWrapArray(_parameterTypes)).isEmpty();
-                _and_1 = _isEmpty;
-              }
-              if (!_and_1) {
-                _and = false;
-              } else {
-                Class<?> _returnType = it.getReturnType();
-                boolean _equals_1 = Objects.equal(_returnType, void.class);
-                _and = _equals_1;
-              }
-              return Boolean.valueOf(_and);
+              return Boolean.valueOf(((Objects.equal(it.getName(), "m") && ((List<Class<?>>)Conversions.doWrapArray(it.getParameterTypes())).isEmpty()) && Objects.equal(it.getReturnType(), void.class)));
             }
           };
           boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function);
@@ -145,25 +127,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
             @Override
             public Boolean apply(final Method it) {
-              boolean _and = false;
-              boolean _and_1 = false;
-              String _name = it.getName();
-              boolean _equals = Objects.equal(_name, "m");
-              if (!_equals) {
-                _and_1 = false;
-              } else {
-                Class<?>[] _parameterTypes = it.getParameterTypes();
-                boolean _isEmpty = ((List<Class<?>>)Conversions.doWrapArray(_parameterTypes)).isEmpty();
-                _and_1 = _isEmpty;
-              }
-              if (!_and_1) {
-                _and = false;
-              } else {
-                Class<?> _returnType = it.getReturnType();
-                boolean _equals_1 = Objects.equal(_returnType, int.class);
-                _and = _equals_1;
-              }
-              return Boolean.valueOf(_and);
+              return Boolean.valueOf(((Objects.equal(it.getName(), "m") && ((List<Class<?>>)Conversions.doWrapArray(it.getParameterTypes())).isEmpty()) && Objects.equal(it.getReturnType(), int.class)));
             }
           };
           boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function);
@@ -214,26 +178,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
             @Override
             public Boolean apply(final Method it) {
-              boolean _and = false;
-              boolean _and_1 = false;
-              String _name = it.getName();
-              boolean _equals = Objects.equal(_name, "m");
-              if (!_equals) {
-                _and_1 = false;
-              } else {
-                Class<?>[] _parameterTypes = it.getParameterTypes();
-                List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
-                boolean _equals_1 = Objects.equal(_list, Collections.<Class<?>>unmodifiableList(CollectionLiterals.<Class<?>>newArrayList(String.class, Object.class)));
-                _and_1 = _equals_1;
-              }
-              if (!_and_1) {
-                _and = false;
-              } else {
-                Class<?> _returnType = it.getReturnType();
-                boolean _equals_2 = Objects.equal(_returnType, void.class);
-                _and = _equals_2;
-              }
-              return Boolean.valueOf(_and);
+              return Boolean.valueOf(((Objects.equal(it.getName(), "m") && Objects.equal(IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(it.getParameterTypes()))), Collections.<Class<?>>unmodifiableList(CollectionLiterals.<Class<?>>newArrayList(String.class, Object.class)))) && Objects.equal(it.getReturnType(), void.class)));
             }
           };
           boolean _exists = IterableExtensions.<Method>exists(((Iterable<Method>)Conversions.doWrapArray(_declaredMethods)), _function);

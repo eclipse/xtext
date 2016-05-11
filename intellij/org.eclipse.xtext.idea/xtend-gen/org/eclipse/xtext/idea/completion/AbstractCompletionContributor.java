@@ -269,24 +269,14 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected void createTokenSetBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
-    boolean _or = false;
-    boolean _isEmpty = this.myContributors.isEmpty();
-    if (_isEmpty) {
-      _or = true;
-    } else {
-      CompletionType _completionType = parameters.getCompletionType();
-      boolean _containsKey = this.myContributors.containsKey(_completionType);
-      boolean _not = (!_containsKey);
-      _or = _not;
-    }
-    if (_or) {
+    if ((this.myContributors.isEmpty() || (!this.myContributors.containsKey(parameters.getCompletionType())))) {
       return;
     }
     Editor _editor = parameters.getEditor();
     int _offset = parameters.getOffset();
     final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), _offset);
-    CompletionType _completionType_1 = parameters.getCompletionType();
-    Multimap<TokenSet, CompletionProvider<CompletionParameters>> _get = this.myContributors.get(_completionType_1);
+    CompletionType _completionType = parameters.getCompletionType();
+    Multimap<TokenSet, CompletionProvider<CompletionParameters>> _get = this.myContributors.get(_completionType);
     final Collection<CompletionProvider<CompletionParameters>> providers = _get.get(tokenSet);
     boolean _equals = Objects.equal(providers, null);
     if (_equals) {
@@ -307,24 +297,14 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected void createFollowElementBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
-    boolean _or = false;
-    boolean _isEmpty = this.myFollowElementBasedContributors.isEmpty();
-    if (_isEmpty) {
-      _or = true;
-    } else {
-      CompletionType _completionType = parameters.getCompletionType();
-      boolean _containsKey = this.myFollowElementBasedContributors.containsKey(_completionType);
-      boolean _not = (!_containsKey);
-      _or = _not;
-    }
-    if (_or) {
+    if ((this.myFollowElementBasedContributors.isEmpty() || (!this.myFollowElementBasedContributors.containsKey(parameters.getCompletionType())))) {
       return;
     }
     Editor _editor = parameters.getEditor();
     int _offset = parameters.getOffset();
     final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), _offset);
-    CompletionType _completionType_1 = parameters.getCompletionType();
-    Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> _get = this.myFollowElementBasedContributors.get(_completionType_1);
+    CompletionType _completionType = parameters.getCompletionType();
+    Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> _get = this.myFollowElementBasedContributors.get(_completionType);
     final Multimap<AbstractElement, CompletionProvider<CompletionParameters>> element2provider = _get.get(tokenSet);
     boolean _equals = Objects.equal(element2provider, null);
     if (_equals) {
@@ -498,11 +478,9 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   protected void createProposal(final AbstractElement grammarElement, final ContentAssistContext context, final CompletionParameters parameters, final CompletionResultSet result) {
     boolean _matched = false;
-    if (!_matched) {
-      if (grammarElement instanceof Keyword) {
-        _matched=true;
-        this.createKeyWordProposal(((Keyword)grammarElement), context, parameters, result);
-      }
+    if (grammarElement instanceof Keyword) {
+      _matched=true;
+      this.createKeyWordProposal(((Keyword)grammarElement), context, parameters, result);
     }
   }
   

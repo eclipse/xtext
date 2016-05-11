@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -179,29 +178,14 @@ public class PsiToEcoreTransformationContext {
   public PsiToEcoreTransformationContext merge(final PsiToEcoreTransformationContext childTransformationContext, final boolean forced) {
     PsiToEcoreTransformationContext _xblockexpression = null;
     {
-      boolean _or = false;
-      boolean _equals = Objects.equal(this.current, null);
-      if (_equals) {
-        _or = true;
-      } else {
-        _or = forced;
-      }
-      if (_or) {
+      if ((Objects.equal(this.current, null) || forced)) {
         this.current = childTransformationContext.current;
       }
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(this.datatypeRuleToken, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _notEquals_1 = (!Objects.equal(childTransformationContext.datatypeRuleToken, null));
-        _and = _notEquals_1;
-      }
-      if (_and) {
+      if (((!Objects.equal(this.datatypeRuleToken, null)) && (!Objects.equal(childTransformationContext.datatypeRuleToken, null)))) {
         this.datatypeRuleToken.merge(childTransformationContext.datatypeRuleToken);
       }
-      boolean _equals_1 = Objects.equal(this.enumerator, null);
-      if (_equals_1) {
+      boolean _equals = Objects.equal(this.enumerator, null);
+      if (_equals) {
         this.enumerator = childTransformationContext.enumerator;
       }
       _xblockexpression = this;
@@ -316,20 +300,18 @@ public class PsiToEcoreTransformationContext {
       this.current = _create_2;
       ICompositeNode _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (this.createModelInParentNode) {
-          _matched=true;
-          ICompositeNode _xblockexpression_1 = null;
-          {
-            ICompositeNode node_1 = currentNode.getParent();
-            while ((node_1.getGrammarElement() instanceof Action)) {
-              ICompositeNode _parent_1 = node_1.getParent();
-              node_1 = _parent_1;
-            }
-            _xblockexpression_1 = node_1;
+      if (this.createModelInParentNode) {
+        _matched=true;
+        ICompositeNode _xblockexpression_1 = null;
+        {
+          ICompositeNode node_1 = currentNode.getParent();
+          while ((node_1.getGrammarElement() instanceof Action)) {
+            ICompositeNode _parent_1 = node_1.getParent();
+            node_1 = _parent_1;
           }
-          _switchResult = _xblockexpression_1;
+          _xblockexpression_1 = node_1;
         }
+        _switchResult = _xblockexpression_1;
       }
       if (!_matched) {
         boolean _isTerminalRuleCall = GrammarUtil.isTerminalRuleCall(grammarElement);
@@ -414,20 +396,10 @@ public class PsiToEcoreTransformationContext {
     if (_isAssigned) {
       INode _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (grammarElement instanceof RuleCall) {
-          boolean _or = false;
-          AbstractRule _rule = ((RuleCall)grammarElement).getRule();
-          if ((_rule instanceof EnumRule)) {
-            _or = true;
-          } else {
-            AbstractRule _rule_1 = ((RuleCall)grammarElement).getRule();
-            _or = (_rule_1 instanceof ParserRule);
-          }
-          if (_or) {
-            _matched=true;
-            _switchResult = this.currentNode;
-          }
+      if (grammarElement instanceof RuleCall) {
+        if (((((RuleCall)grammarElement).getRule() instanceof EnumRule) || (((RuleCall)grammarElement).getRule() instanceof ParserRule))) {
+          _matched=true;
+          _switchResult = this.currentNode;
         }
       }
       if (!_matched) {

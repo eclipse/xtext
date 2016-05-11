@@ -17,6 +17,7 @@ import org.eclipse.xtext.idea.tests.TestDecorator
 import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.junit.Test
+import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -68,5 +69,23 @@ class IdeaJavaConverterTest extends AbstractModelTestCase {
 		val result = converter.toXtend(javaCalzz.virtualFile.nameWithoutExtension, javaCalzz.text, myModule)
 		assertNotNull(result)
 		assertTrue(result.problems.empty)
+	}
+
+	@Test
+	def void testCollectJavaFilesInHandler() {
+		val javaCalzz = myFixture.addFileToProject('javaconverter/foo/JavaConverterTest.java', '''
+			package javaconverter.foo;
+			public class JavaConverterTest {}
+		''')
+		myFixture.addFileToProject('javaconverter/bar/JavaConverterTest.java', '''
+			package javaconverter.bar;
+			public class JavaConverterTest {}
+		''')
+		val otherClazz = myFixture.addFileToProject('JavaConverterTest.java', '''
+			public class JavaConverterTest {}
+		''')
+		val result = ConvertJavaCodeHandler.collectJavaFiles(#[javaCalzz.parent.parent, otherClazz])
+		assertTrue(result.iterator.hasNext)
+		assertEquals(3, result.iterator.size)
 	}
 }

@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.ProjectFileIndex;
@@ -99,26 +98,10 @@ public class XtendLibraryConfigurator {
     boolean _equals = Objects.equal(psiClass, null);
     if (_equals) {
       final boolean testScope = this.isTestScope(context);
-      boolean _and = false;
-      boolean _isMavenInstalled = this._platformUtil.isMavenInstalled();
-      if (!_isMavenInstalled) {
-        _and = false;
-      } else {
-        boolean _isMavenizedModule = this._mavenUtility.isMavenizedModule(module);
-        _and = _isMavenizedModule;
-      }
-      if (_and) {
+      if ((this._platformUtil.isMavenInstalled() && this._mavenUtility.isMavenizedModule(module))) {
         this._mavenUtility.addXtendLibMavenDependency(module, testScope);
       } else {
-        boolean _and_1 = false;
-        boolean _isGradleInstalled = this._platformUtil.isGradleInstalled();
-        if (!_isGradleInstalled) {
-          _and_1 = false;
-        } else {
-          boolean _isGradleedModule = this._gradleBuildFileUtility.isGradleedModule(module);
-          _and_1 = _isGradleedModule;
-        }
-        if (_and_1) {
+        if ((this._platformUtil.isGradleInstalled() && this._gradleBuildFileUtility.isGradleedModule(module))) {
           this._gradleBuildFileUtility.addXtendLibGradleDependency(module, testScope);
         } else {
           this.addJavaRuntimeLibrary(module, rootModel);
@@ -140,16 +123,7 @@ public class XtendLibraryConfigurator {
   
   public void addJavaRuntimeLibrary(final Module module, final ModifiableRootModel rootModel) {
     final Library library = this.createOrGetXtendJavaLibrary(rootModel, module);
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(library, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      LibraryOrderEntry _findLibraryOrderEntry = rootModel.findLibraryOrderEntry(library);
-      boolean _tripleEquals = (_findLibraryOrderEntry == null);
-      _and = _tripleEquals;
-    }
-    if (_and) {
+    if (((!Objects.equal(library, null)) && (rootModel.findLibraryOrderEntry(library) == null))) {
       boolean _isWritable = rootModel.isWritable();
       if (_isWritable) {
         rootModel.addLibraryEntry(library);

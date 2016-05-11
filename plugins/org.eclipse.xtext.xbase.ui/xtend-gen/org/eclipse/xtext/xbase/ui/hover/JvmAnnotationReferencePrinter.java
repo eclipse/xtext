@@ -333,22 +333,11 @@ public class JvmAnnotationReferencePrinter {
   
   protected String internalHandleAbstractFeatureCall(final String prefix, final XAbstractFeatureCall o) {
     String _xifexpression = null;
-    boolean _and = false;
-    JvmIdentifiableElement _feature = o.getFeature();
-    boolean _notEquals = (!Objects.equal(_feature, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      JvmIdentifiableElement _feature_1 = o.getFeature();
-      boolean _eIsProxy = _feature_1.eIsProxy();
-      boolean _not = (!_eIsProxy);
-      _and = _not;
-    }
-    if (_and) {
+    if (((!Objects.equal(o.getFeature(), null)) && (!o.getFeature().eIsProxy()))) {
       String _xblockexpression = null;
       {
-        JvmIdentifiableElement _feature_2 = o.getFeature();
-        final URI uri = EcoreUtil.getURI(_feature_2);
+        JvmIdentifiableElement _feature = o.getFeature();
+        final URI uri = EcoreUtil.getURI(_feature);
         String _concreteSyntaxFeatureName = o.getConcreteSyntaxFeatureName();
         _xblockexpression = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, _concreteSyntaxFeatureName);
       }

@@ -1,107 +1,143 @@
 com.google.common.base.Function -> org.eclipse.xtext.xbase.lib.internal.a:
     java.lang.Object apply(java.lang.Object) -> apply
+    boolean equals(java.lang.Object) -> equals
 com.google.common.base.Joiner -> org.eclipse.xtext.xbase.lib.internal.b:
     java.lang.String separator -> separator
     71:71:com.google.common.base.Joiner on(java.lang.String) -> on
-    121:129:java.lang.Appendable appendTo(java.lang.Appendable,java.util.Iterator) -> appendTo
-    169:169:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.lang.Iterable) -> appendTo
-    181:185:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.util.Iterator) -> appendTo
-    226:226:java.lang.String join(java.lang.Iterable) -> join
-    236:236:java.lang.String join(java.util.Iterator) -> join
-    261:262:com.google.common.base.Joiner useForNull(java.lang.String) -> useForNull
-    329:329:com.google.common.base.Joiner$MapJoiner withKeyValueSeparator(java.lang.String) -> withKeyValueSeparator
-    535:536:java.lang.CharSequence toString(java.lang.Object) -> toString
+    78:78:com.google.common.base.Joiner on(char) -> on
+    106:114:java.lang.Appendable appendTo(java.lang.Appendable,java.util.Iterator) -> appendTo
+    152:156:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.util.Iterator) -> appendTo
+    183:183:java.lang.String join(java.lang.Iterable) -> join
+    193:193:java.lang.String join(java.util.Iterator) -> join
+    218:219:com.google.common.base.Joiner useForNull(java.lang.String) -> useForNull
+    278:278:com.google.common.base.Joiner$MapJoiner withKeyValueSeparator(java.lang.String) -> withKeyValueSeparator
+    433:434:java.lang.CharSequence toString(java.lang.Object) -> toString
     66:66:java.lang.String access$100(com.google.common.base.Joiner) -> access$100
 com.google.common.base.Joiner$1 -> org.eclipse.xtext.xbase.lib.internal.b$1:
     java.lang.String val$nullText -> val$nullText
     com.google.common.base.Joiner this$0 -> this$0
-    265:265:java.lang.CharSequence toString(java.lang.Object) -> toString
-    270:271:com.google.common.base.Joiner useForNull(java.lang.String) -> useForNull
+    221:221:java.lang.CharSequence toString(java.lang.Object) -> toString
+    225:225:com.google.common.base.Joiner useForNull(java.lang.String) -> useForNull
 com.google.common.base.Joiner$MapJoiner -> org.eclipse.xtext.xbase.lib.internal.b$a:
     com.google.common.base.Joiner joiner -> joiner
     java.lang.String keyValueSeparator -> keyValueSeparator
-    373:373:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.util.Map) -> appendTo
-    422:436:java.lang.Appendable appendTo(java.lang.Appendable,java.util.Iterator) -> appendTo
-    465:465:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.lang.Iterable) -> appendTo
-    478:482:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.util.Iterator) -> appendTo
+    322:322:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.util.Map) -> appendTo
+    354:368:java.lang.Appendable appendTo(java.lang.Appendable,java.util.Iterator) -> appendTo
+    380:380:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.lang.Iterable) -> appendTo
+    393:397:java.lang.StringBuilder appendTo(java.lang.StringBuilder,java.util.Iterator) -> appendTo
 com.google.common.base.Objects -> org.eclipse.xtext.xbase.lib.internal.c:
-    55:55:boolean equal(java.lang.Object,java.lang.Object) -> equal
+    57:57:boolean equal(java.lang.Object,java.lang.Object) -> equal
+    78:78:int hashCode(java.lang.Object[]) -> hashCode
 com.google.common.base.Preconditions -> org.eclipse.xtext.xbase.lib.internal.d:
-    75:78:void checkArgument(boolean) -> checkArgument
-    90:93:void checkArgument(boolean,java.lang.Object) -> checkArgument
-    116:119:void checkArgument(boolean,java.lang.String,java.lang.Object[]) -> checkArgument
-    129:132:void checkState(boolean) -> checkState
-    144:147:void checkState(boolean,java.lang.Object) -> checkState
-    184:187:java.lang.Object checkNotNull(java.lang.Object) -> checkNotNull
-    201:204:java.lang.Object checkNotNull(java.lang.Object,java.lang.Object) -> checkNotNull
-    226:230:java.lang.Object checkNotNull(java.lang.Object,java.lang.String,java.lang.Object[]) -> checkNotNull
-    276:276:int checkElementIndex(int,int) -> checkElementIndex
-    295:298:int checkElementIndex(int,int,java.lang.String) -> checkElementIndex
-    302:307:java.lang.String badElementIndex(int,int,java.lang.String) -> badElementIndex
-    325:325:int checkPositionIndex(int,int) -> checkPositionIndex
-    344:347:int checkPositionIndex(int,int,java.lang.String) -> checkPositionIndex
-    351:356:java.lang.String badPositionIndex(int,int,java.lang.String) -> badPositionIndex
-    376:379:void checkPositionIndexes(int,int,int) -> checkPositionIndexes
-    382:389:java.lang.String badPositionIndexes(int,int,int) -> badPositionIndexes
-    406:434:java.lang.String format(java.lang.String,java.lang.Object[]) -> format
+    110:113:void checkArgument(boolean) -> checkArgument
+    124:127:void checkArgument(boolean,java.lang.Object) -> checkArgument
+    147:150:void checkArgument(boolean,java.lang.String,java.lang.Object[]) -> checkArgument
+    160:163:void checkState(boolean) -> checkState
+    175:178:void checkState(boolean,java.lang.Object) -> checkState
+    212:215:java.lang.Object checkNotNull(java.lang.Object) -> checkNotNull
+    228:231:java.lang.Object checkNotNull(java.lang.Object,java.lang.Object) -> checkNotNull
+    295:295:int checkElementIndex(int,int) -> checkElementIndex
+    312:315:int checkElementIndex(int,int,java.lang.String) -> checkElementIndex
+    319:324:java.lang.String badElementIndex(int,int,java.lang.String) -> badElementIndex
+    339:339:int checkPositionIndex(int,int) -> checkPositionIndex
+    355:358:int checkPositionIndex(int,int,java.lang.String) -> checkPositionIndex
+    362:367:java.lang.String badPositionIndex(int,int,java.lang.String) -> badPositionIndex
+    385:388:void checkPositionIndexes(int,int,int) -> checkPositionIndexes
+    391:398:java.lang.String badPositionIndexes(int,int,int) -> badPositionIndexes
+    413:441:java.lang.String format(java.lang.String,java.lang.Object[]) -> format
 com.google.common.base.Predicate -> org.eclipse.xtext.xbase.lib.internal.e:
     boolean apply(java.lang.Object) -> apply
+    boolean equals(java.lang.Object) -> equals
 com.google.common.base.Predicates -> org.eclipse.xtext.xbase.lib.internal.f:
     com.google.common.base.Joiner COMMA_JOINER -> COMMA_JOINER
+    76:76:com.google.common.base.Predicate isNull() -> isNull
     85:85:com.google.common.base.Predicate notNull() -> notNull
-    129:129:com.google.common.base.Predicate and(com.google.common.base.Predicate,com.google.common.base.Predicate) -> and
-    193:193:com.google.common.base.Predicate instanceOf(java.lang.Class) -> instanceOf
-    647:647:java.util.List asList(com.google.common.base.Predicate,com.google.common.base.Predicate) -> asList
+    93:93:com.google.common.base.Predicate not(com.google.common.base.Predicate) -> not
+    131:131:com.google.common.base.Predicate and(com.google.common.base.Predicate,com.google.common.base.Predicate) -> and
+    179:179:com.google.common.base.Predicate equalTo(java.lang.Object) -> equalTo
+    201:201:com.google.common.base.Predicate instanceOf(java.lang.Class) -> instanceOf
+    231:231:com.google.common.base.Predicate in(java.util.Collection) -> in
+    242:242:com.google.common.base.Predicate compose(com.google.common.base.Predicate,com.google.common.base.Function) -> compose
+    638:638:java.util.List asList(com.google.common.base.Predicate,com.google.common.base.Predicate) -> asList
     48:48:com.google.common.base.Joiner access$800() -> access$800
 com.google.common.base.Predicates$1 -> org.eclipse.xtext.xbase.lib.internal.f$1:
 com.google.common.base.Predicates$AndPredicate -> org.eclipse.xtext.xbase.lib.internal.f$a:
     java.util.List components -> components
-    342:347:boolean apply(java.lang.Object) -> apply
-    353:353:int hashCode() -> hashCode
-    358:362:boolean equals(java.lang.Object) -> equals
-    367:367:java.lang.String toString() -> toString
+    358:363:boolean apply(java.lang.Object) -> apply
+    367:367:int hashCode() -> hashCode
+    370:374:boolean equals(java.lang.Object) -> equals
+    377:377:java.lang.String toString() -> toString
+com.google.common.base.Predicates$CompositionPredicate -> org.eclipse.xtext.xbase.lib.internal.f$d:
+    com.google.common.base.Predicate p -> p
+    com.google.common.base.Function f -> f
+    552:552:boolean apply(java.lang.Object) -> apply
+    556:560:boolean equals(java.lang.Object) -> equals
+    564:564:int hashCode() -> hashCode
+    568:568:java.lang.String toString() -> toString
+com.google.common.base.Predicates$InPredicate -> org.eclipse.xtext.xbase.lib.internal.f$e:
+    java.util.Collection target -> target
+    513:517:boolean apply(java.lang.Object) -> apply
+    522:526:boolean equals(java.lang.Object) -> equals
+    530:530:int hashCode() -> hashCode
+    534:534:java.lang.String toString() -> toString
 com.google.common.base.Predicates$InstanceOfPredicate -> org.eclipse.xtext.xbase.lib.internal.f$b:
     java.lang.Class clazz -> clazz
-    458:458:boolean apply(java.lang.Object) -> apply
-    463:463:int hashCode() -> hashCode
-    468:472:boolean equals(java.lang.Object) -> equals
-    477:477:java.lang.String toString() -> toString
+    455:455:boolean apply(java.lang.Object) -> apply
+    458:458:int hashCode() -> hashCode
+    461:465:boolean equals(java.lang.Object) -> equals
+    468:468:java.lang.String toString() -> toString
+com.google.common.base.Predicates$IsEqualToPredicate -> org.eclipse.xtext.xbase.lib.internal.f$f:
+    java.lang.Object target -> target
+    426:426:boolean apply(java.lang.Object) -> apply
+    429:429:int hashCode() -> hashCode
+    432:436:boolean equals(java.lang.Object) -> equals
+    439:439:java.lang.String toString() -> toString
+com.google.common.base.Predicates$NotPredicate -> org.eclipse.xtext.xbase.lib.internal.f$g:
+    com.google.common.base.Predicate predicate -> predicate
+    328:328:boolean apply(java.lang.Object) -> apply
+    331:331:int hashCode() -> hashCode
+    334:338:boolean equals(java.lang.Object) -> equals
+    341:341:java.lang.String toString() -> toString
 com.google.common.base.Predicates$ObjectPredicate -> org.eclipse.xtext.xbase.lib.internal.f$c:
     com.google.common.base.Predicates$ObjectPredicate ALWAYS_TRUE -> ALWAYS_TRUE
     com.google.common.base.Predicates$ObjectPredicate ALWAYS_FALSE -> ALWAYS_FALSE
     com.google.common.base.Predicates$ObjectPredicate IS_NULL -> IS_NULL
     com.google.common.base.Predicates$ObjectPredicate NOT_NULL -> NOT_NULL
     com.google.common.base.Predicates$ObjectPredicate[] $VALUES -> $VALUES
-    292:292:com.google.common.base.Predicate withNarrowedType() -> withNarrowedType
+    315:315:com.google.common.base.Predicate withNarrowedType() -> withNarrowedType
 com.google.common.base.Predicates$ObjectPredicate$1 -> org.eclipse.xtext.xbase.lib.internal.f$c$1:
-    270:270:boolean apply(java.lang.Object) -> apply
+    279:279:boolean apply(java.lang.Object) -> apply
+    282:282:java.lang.String toString() -> toString
 com.google.common.base.Predicates$ObjectPredicate$2 -> org.eclipse.xtext.xbase.lib.internal.f$c$2:
-    275:275:boolean apply(java.lang.Object) -> apply
+    288:288:boolean apply(java.lang.Object) -> apply
+    291:291:java.lang.String toString() -> toString
 com.google.common.base.Predicates$ObjectPredicate$3 -> org.eclipse.xtext.xbase.lib.internal.f$c$3:
-    280:280:boolean apply(java.lang.Object) -> apply
+    297:297:boolean apply(java.lang.Object) -> apply
+    300:300:java.lang.String toString() -> toString
 com.google.common.base.Predicates$ObjectPredicate$4 -> org.eclipse.xtext.xbase.lib.internal.f$c$4:
-    285:285:boolean apply(java.lang.Object) -> apply
+    306:306:boolean apply(java.lang.Object) -> apply
+    309:309:java.lang.String toString() -> toString
 com.google.common.base.Strings -> org.eclipse.xtext.xbase.lib.internal.g:
-    155:178:java.lang.String repeat(java.lang.String,int) -> repeat
+    154:177:java.lang.String repeat(java.lang.String,int) -> repeat
 com.google.common.collect.AbstractIndexedListIterator -> org.eclipse.xtext.xbase.lib.internal.h:
     int size -> size
     int position -> position
     java.lang.Object get(int) -> get
-    74:74:boolean hasNext() -> hasNext
-    78:81:java.lang.Object next() -> next
-    85:85:int nextIndex() -> nextIndex
-    89:89:boolean hasPrevious() -> hasPrevious
-    93:96:java.lang.Object previous() -> previous
-    100:100:int previousIndex() -> previousIndex
+    76:76:boolean hasNext() -> hasNext
+    81:84:java.lang.Object next() -> next
+    89:89:int nextIndex() -> nextIndex
+    94:94:boolean hasPrevious() -> hasPrevious
+    99:102:java.lang.Object previous() -> previous
+    107:107:int previousIndex() -> previousIndex
 com.google.common.collect.AbstractIterator -> org.eclipse.xtext.xbase.lib.internal.i:
     com.google.common.collect.AbstractIterator$State state -> state
     java.lang.Object next -> next
     java.lang.Object computeNext() -> computeNext
     124:125:java.lang.Object endOfData() -> endOfData
-    129:137:boolean hasNext() -> hasNext
-    141:147:boolean tryToComputeNext() -> tryToComputeNext
-    151:155:java.lang.Object next() -> next
-    166:169:java.lang.Object peek() -> peek
+    130:138:boolean hasNext() -> hasNext
+    142:148:boolean tryToComputeNext() -> tryToComputeNext
+    153:159:java.lang.Object next() -> next
+    170:173:java.lang.Object peek() -> peek
 com.google.common.collect.AbstractIterator$1 -> org.eclipse.xtext.xbase.lib.internal.i$1:
     int[] $SwitchMap$com$google$common$collect$AbstractIterator$State -> $SwitchMap$com$google$common$collect$AbstractIterator$State
 com.google.common.collect.AbstractIterator$State -> org.eclipse.xtext.xbase.lib.internal.i$a:
@@ -114,449 +150,401 @@ com.google.common.collect.AbstractIterator$State -> org.eclipse.xtext.xbase.lib.
 com.google.common.collect.AbstractMapEntry -> org.eclipse.xtext.xbase.lib.internal.j:
     java.lang.Object getKey() -> getKey
     java.lang.Object getValue() -> getValue
-    40:40:java.lang.Object setValue(java.lang.Object) -> setValue
-    45:50:boolean equals(java.lang.Object) -> equals
-    55:57:int hashCode() -> hashCode
+    43:43:java.lang.Object setValue(java.lang.Object) -> setValue
+    47:52:boolean equals(java.lang.Object) -> equals
+    56:58:int hashCode() -> hashCode
     65:65:java.lang.String toString() -> toString
 com.google.common.collect.BiMap -> org.eclipse.xtext.xbase.lib.internal.k:
     com.google.common.collect.BiMap inverse() -> inverse
+com.google.common.collect.ByFunctionOrdering -> org.eclipse.xtext.xbase.lib.internal.n:
+    com.google.common.base.Function function -> function
+    com.google.common.collect.Ordering ordering -> ordering
+    46:46:int compare(java.lang.Object,java.lang.Object) -> compare
+    50:58:boolean equals(java.lang.Object) -> equals
+    62:62:int hashCode() -> hashCode
+    66:66:java.lang.String toString() -> toString
+com.google.common.collect.CollectPreconditions -> org.eclipse.xtext.xbase.lib.internal.bq:
+    30:35:void checkEntryNotNull(java.lang.Object,java.lang.Object) -> checkEntryNotNull
+    38:41:int checkNonnegative(int,java.lang.String) -> checkNonnegative
+    49:50:void checkRemove(boolean) -> checkRemove
 com.google.common.collect.Collections2 -> org.eclipse.xtext.xbase.lib.internal.l:
     com.google.common.base.Joiner STANDARD_JOINER -> STANDARD_JOINER
-    324:330:boolean containsAllImpl(java.util.Collection,java.util.Collection) -> containsAllImpl
-    337:343:java.lang.String toStringImpl(java.util.Collection) -> toStringImpl
-    350:351:java.lang.StringBuilder newStringBuilderForCollection(int) -> newStringBuilderForCollection
-    358:358:java.util.Collection cast(java.lang.Iterable) -> cast
-com.google.common.collect.Collections2$1 -> org.eclipse.xtext.xbase.lib.internal.l$1:
-    java.util.Collection val$collection -> val$collection
-    340:340:java.lang.Object apply(java.lang.Object) -> apply
+    108:114:boolean safeContains(java.util.Collection,java.lang.Object) -> safeContains
+    290:290:boolean containsAllImpl(java.util.Collection,java.util.Collection) -> containsAllImpl
+    312:313:java.lang.StringBuilder newStringBuilderForCollection(int) -> newStringBuilderForCollection
+    320:320:java.util.Collection cast(java.lang.Iterable) -> cast
 com.google.common.collect.Collections2$FilteredCollection -> org.eclipse.xtext.xbase.lib.internal.l$a:
     java.util.Collection unfiltered -> unfiltered
     com.google.common.base.Predicate predicate -> predicate
-    141:142:boolean add(java.lang.Object) -> add
-    146:149:boolean addAll(java.util.Collection) -> addAll
-    153:154:void clear() -> clear
-    164:175:boolean contains(java.lang.Object) -> contains
-    180:185:boolean containsAll(java.util.Collection) -> containsAll
-    189:189:boolean isEmpty() -> isEmpty
-    193:193:java.util.Iterator iterator() -> iterator
-    204:211:boolean remove(java.lang.Object) -> remove
-    216:223:boolean removeAll(java.util.Collection) -> removeAll
-    227:235:boolean retainAll(java.util.Collection) -> retainAll
-    239:239:int size() -> size
-    244:244:java.lang.Object[] toArray() -> toArray
-    248:248:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    253:253:java.lang.String toString() -> toString
-com.google.common.collect.Collections2$FilteredCollection$1 -> org.eclipse.xtext.xbase.lib.internal.l$a$1:
-    java.util.Collection val$collection -> val$collection
-    com.google.common.collect.Collections2$FilteredCollection this$0 -> this$0
-    220:220:boolean apply(java.lang.Object) -> apply
-com.google.common.collect.Collections2$FilteredCollection$2 -> org.eclipse.xtext.xbase.lib.internal.l$a$2:
-    java.util.Collection val$collection -> val$collection
-    com.google.common.collect.Collections2$FilteredCollection this$0 -> this$0
-    232:232:boolean apply(java.lang.Object) -> apply
+    152:153:boolean add(java.lang.Object) -> add
+    158:161:boolean addAll(java.util.Collection) -> addAll
+    166:167:void clear() -> clear
+    171:176:boolean contains(java.lang.Object) -> contains
+    181:181:boolean containsAll(java.util.Collection) -> containsAll
+    186:186:boolean isEmpty() -> isEmpty
+    191:191:java.util.Iterator iterator() -> iterator
+    196:196:boolean remove(java.lang.Object) -> remove
+    201:201:boolean removeAll(java.util.Collection) -> removeAll
+    206:206:boolean retainAll(java.util.Collection) -> retainAll
+    211:211:int size() -> size
+    217:217:java.lang.Object[] toArray() -> toArray
+    222:222:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+com.google.common.collect.ComparatorOrdering -> org.eclipse.xtext.xbase.lib.internal.br:
+    java.util.Comparator comparator -> comparator
+    38:38:int compare(java.lang.Object,java.lang.Object) -> compare
+    42:49:boolean equals(java.lang.Object) -> equals
+    53:53:int hashCode() -> hashCode
+    57:57:java.lang.String toString() -> toString
 com.google.common.collect.EmptyImmutableBiMap -> org.eclipse.xtext.xbase.lib.internal.m:
     com.google.common.collect.EmptyImmutableBiMap INSTANCE -> INSTANCE
-    38:38:com.google.common.collect.ImmutableBiMap inverse() -> inverse
-    42:42:int size() -> size
-    47:47:boolean isEmpty() -> isEmpty
-    52:52:java.lang.Object get(java.lang.Object) -> get
-    57:57:com.google.common.collect.ImmutableSet entrySet() -> entrySet
-    62:62:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
-    67:67:com.google.common.collect.ImmutableSet keySet() -> keySet
-    72:72:boolean isPartialView() -> isPartialView
+    36:36:com.google.common.collect.ImmutableBiMap inverse() -> inverse
+    41:41:int size() -> size
+    46:46:boolean isEmpty() -> isEmpty
+    51:51:java.lang.Object get(java.lang.Object) -> get
+    56:56:com.google.common.collect.ImmutableSet entrySet() -> entrySet
+    61:61:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    71:71:com.google.common.collect.ImmutableSet keySet() -> keySet
+    76:76:boolean isPartialView() -> isPartialView
     28:28:com.google.common.collect.BiMap inverse() -> inverse
     28:28:java.util.Set entrySet() -> entrySet
     28:28:java.util.Set keySet() -> keySet
-com.google.common.collect.EmptyImmutableList -> org.eclipse.xtext.xbase.lib.internal.n:
-    com.google.common.collect.EmptyImmutableList INSTANCE -> INSTANCE
-    42:42:int size() -> size
-    47:47:boolean isEmpty() -> isEmpty
-    52:52:boolean isPartialView() -> isPartialView
-    57:57:boolean contains(java.lang.Object) -> contains
-    62:62:boolean containsAll(java.util.Collection) -> containsAll
-    67:67:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    72:72:java.lang.Object[] toArray() -> toArray
-    77:80:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    85:86:java.lang.Object get(int) -> get
-    91:91:int indexOf(java.lang.Object) -> indexOf
-    96:96:int lastIndexOf(java.lang.Object) -> lastIndexOf
-    101:102:com.google.common.collect.ImmutableList subList(int,int) -> subList
-    107:107:com.google.common.collect.ImmutableList reverse() -> reverse
-    112:112:com.google.common.collect.UnmodifiableListIterator listIterator() -> listIterator
-    117:118:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
-    123:127:boolean equals(java.lang.Object) -> equals
-    132:132:int hashCode() -> hashCode
-    137:137:java.lang.String toString() -> toString
-    35:35:java.util.List subList(int,int) -> subList
-    35:35:java.util.ListIterator listIterator(int) -> listIterator
-    35:35:java.util.ListIterator listIterator() -> listIterator
-    35:35:java.util.Iterator iterator() -> iterator
 com.google.common.collect.EmptyImmutableSet -> org.eclipse.xtext.xbase.lib.internal.o:
     com.google.common.collect.EmptyImmutableSet INSTANCE -> INSTANCE
-    38:38:int size() -> size
+    39:39:int size() -> size
     43:43:boolean isEmpty() -> isEmpty
-    48:48:boolean contains(java.lang.Object) -> contains
-    53:53:boolean containsAll(java.util.Collection) -> containsAll
-    58:58:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    63:63:boolean isPartialView() -> isPartialView
-    68:68:java.lang.Object[] toArray() -> toArray
-    73:73:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    78:78:com.google.common.collect.ImmutableList asList() -> asList
-    83:87:boolean equals(java.lang.Object) -> equals
-    92:92:int hashCode() -> hashCode
-    97:97:boolean isHashCodeFast() -> isHashCodeFast
-    102:102:java.lang.String toString() -> toString
+    47:47:boolean contains(java.lang.Object) -> contains
+    51:51:boolean containsAll(java.util.Collection) -> containsAll
+    55:55:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    59:59:boolean isPartialView() -> isPartialView
+    64:64:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
+    69:69:com.google.common.collect.ImmutableList asList() -> asList
+    73:77:boolean equals(java.lang.Object) -> equals
+    81:81:int hashCode() -> hashCode
+    85:85:boolean isHashCodeFast() -> isHashCodeFast
+    89:89:java.lang.String toString() -> toString
     31:31:java.util.Iterator iterator() -> iterator
 com.google.common.collect.EmptyImmutableSortedMap -> org.eclipse.xtext.xbase.lib.internal.p:
     com.google.common.collect.ImmutableSortedSet keySet -> keySet
-    47:47:java.lang.Object get(java.lang.Object) -> get
-    52:52:com.google.common.collect.ImmutableSortedSet keySet() -> keySet
-    57:57:int size() -> size
-    62:62:boolean isEmpty() -> isEmpty
-    67:67:com.google.common.collect.ImmutableCollection values() -> values
-    72:72:java.lang.String toString() -> toString
-    77:77:boolean isPartialView() -> isPartialView
-    82:82:com.google.common.collect.ImmutableSet entrySet() -> entrySet
-    87:87:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
-    92:93:com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object,boolean) -> headMap
-    98:99:com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object,boolean) -> tailMap
+    48:48:java.lang.Object get(java.lang.Object) -> get
+    53:53:com.google.common.collect.ImmutableSortedSet keySet() -> keySet
+    58:58:int size() -> size
+    63:63:boolean isEmpty() -> isEmpty
+    68:68:com.google.common.collect.ImmutableCollection values() -> values
+    73:73:java.lang.String toString() -> toString
+    78:78:boolean isPartialView() -> isPartialView
+    83:83:com.google.common.collect.ImmutableSet entrySet() -> entrySet
+    88:88:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    98:99:com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object,boolean) -> headMap
+    104:105:com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object,boolean) -> tailMap
     31:31:java.util.Set entrySet() -> entrySet
     31:31:java.util.Collection values() -> values
     31:31:java.util.Set keySet() -> keySet
     31:31:com.google.common.collect.ImmutableSet keySet() -> keySet
 com.google.common.collect.EmptyImmutableSortedSet -> org.eclipse.xtext.xbase.lib.internal.q:
     43:43:int size() -> size
-    48:48:boolean isEmpty() -> isEmpty
-    53:53:boolean contains(java.lang.Object) -> contains
-    58:58:boolean containsAll(java.util.Collection) -> containsAll
-    63:63:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    69:69:com.google.common.collect.UnmodifiableIterator descendingIterator() -> descendingIterator
-    74:74:boolean isPartialView() -> isPartialView
-    79:79:com.google.common.collect.ImmutableList asList() -> asList
-    84:84:java.lang.Object[] toArray() -> toArray
-    89:89:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    94:98:boolean equals(java.lang.Object) -> equals
-    103:103:int hashCode() -> hashCode
-    108:108:java.lang.String toString() -> toString
-    113:113:java.lang.Object first() -> first
-    118:118:java.lang.Object last() -> last
-    123:123:com.google.common.collect.ImmutableSortedSet headSetImpl(java.lang.Object,boolean) -> headSetImpl
-    129:129:com.google.common.collect.ImmutableSortedSet subSetImpl(java.lang.Object,boolean,java.lang.Object,boolean) -> subSetImpl
-    134:134:com.google.common.collect.ImmutableSortedSet tailSetImpl(java.lang.Object,boolean) -> tailSetImpl
-    139:139:int indexOf(java.lang.Object) -> indexOf
+    47:47:boolean isEmpty() -> isEmpty
+    51:51:boolean contains(java.lang.Object) -> contains
+    55:55:boolean containsAll(java.util.Collection) -> containsAll
+    59:59:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    64:64:com.google.common.collect.UnmodifiableIterator descendingIterator() -> descendingIterator
+    68:68:boolean isPartialView() -> isPartialView
+    72:72:com.google.common.collect.ImmutableList asList() -> asList
+    77:77:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
+    81:85:boolean equals(java.lang.Object) -> equals
+    89:89:int hashCode() -> hashCode
+    93:93:java.lang.String toString() -> toString
+    98:98:java.lang.Object first() -> first
+    103:103:java.lang.Object last() -> last
+    108:108:com.google.common.collect.ImmutableSortedSet headSetImpl(java.lang.Object,boolean) -> headSetImpl
+    114:114:com.google.common.collect.ImmutableSortedSet subSetImpl(java.lang.Object,boolean,java.lang.Object,boolean) -> subSetImpl
+    119:119:com.google.common.collect.ImmutableSortedSet tailSetImpl(java.lang.Object,boolean) -> tailSetImpl
+    123:123:int indexOf(java.lang.Object) -> indexOf
     34:34:java.util.Iterator iterator() -> iterator
 com.google.common.collect.FluentIterable -> org.eclipse.xtext.xbase.lib.internal.r:
     java.lang.Iterable iterable -> iterable
     118:118:java.lang.String toString() -> toString
 com.google.common.collect.ForwardingCollection -> org.eclipse.xtext.xbase.lib.internal.s:
     java.util.Collection delegate() -> delegate
-    58:58:java.util.Iterator iterator() -> iterator
-    62:62:int size() -> size
-    66:66:boolean removeAll(java.util.Collection) -> removeAll
-    70:70:boolean isEmpty() -> isEmpty
-    74:74:boolean contains(java.lang.Object) -> contains
-    78:78:boolean add(java.lang.Object) -> add
-    82:82:boolean remove(java.lang.Object) -> remove
-    86:86:boolean containsAll(java.util.Collection) -> containsAll
-    90:90:boolean addAll(java.util.Collection) -> addAll
-    94:94:boolean retainAll(java.util.Collection) -> retainAll
-    98:99:void clear() -> clear
-    102:102:java.lang.Object[] toArray() -> toArray
-    106:106:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    59:59:java.util.Iterator iterator() -> iterator
+    64:64:int size() -> size
+    69:69:boolean removeAll(java.util.Collection) -> removeAll
+    74:74:boolean isEmpty() -> isEmpty
+    79:79:boolean contains(java.lang.Object) -> contains
+    84:84:boolean add(java.lang.Object) -> add
+    89:89:boolean remove(java.lang.Object) -> remove
+    94:94:boolean containsAll(java.util.Collection) -> containsAll
+    99:99:boolean addAll(java.util.Collection) -> addAll
+    104:104:boolean retainAll(java.util.Collection) -> retainAll
+    109:110:void clear() -> clear
+    114:114:java.lang.Object[] toArray() -> toArray
+    119:119:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
     47:47:java.lang.Object delegate() -> delegate
 com.google.common.collect.ForwardingMapEntry -> org.eclipse.xtext.xbase.lib.internal.t:
     java.util.Map$Entry delegate() -> delegate
-    65:65:java.lang.Object getKey() -> getKey
-    69:69:java.lang.Object getValue() -> getValue
-    73:73:java.lang.Object setValue(java.lang.Object) -> setValue
-    78:78:boolean equals(java.lang.Object) -> equals
-    83:83:int hashCode() -> hashCode
+    66:66:java.lang.Object getKey() -> getKey
+    71:71:java.lang.Object getValue() -> getValue
+    76:76:java.lang.Object setValue(java.lang.Object) -> setValue
+    80:80:boolean equals(java.lang.Object) -> equals
+    84:84:int hashCode() -> hashCode
     54:54:java.lang.Object delegate() -> delegate
 com.google.common.collect.ForwardingObject -> org.eclipse.xtext.xbase.lib.internal.u:
     java.lang.Object delegate() -> delegate
-    73:73:java.lang.String toString() -> toString
+    72:72:java.lang.String toString() -> toString
 com.google.common.collect.ForwardingSet -> org.eclipse.xtext.xbase.lib.internal.v:
     java.util.Set delegate() -> delegate
-    60:60:boolean equals(java.lang.Object) -> equals
-    65:65:int hashCode() -> hashCode
+    59:59:boolean equals(java.lang.Object) -> equals
+    63:63:int hashCode() -> hashCode
     48:48:java.util.Collection delegate() -> delegate
     48:48:java.lang.Object delegate() -> delegate
 com.google.common.collect.Hashing -> org.eclipse.xtext.xbase.lib.internal.w:
     int MAX_TABLE_SIZE -> MAX_TABLE_SIZE
-    45:45:int smear(int) -> smear
-    53:60:int closedTableSize(int,double) -> closedTableSize
+    47:47:int smear(int) -> smear
+    59:66:int closedTableSize(int,double) -> closedTableSize
 com.google.common.collect.ImmutableAsList -> org.eclipse.xtext.xbase.lib.internal.x:
     com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
-    42:42:boolean contains(java.lang.Object) -> contains
+    41:41:boolean contains(java.lang.Object) -> contains
     46:46:int size() -> size
     51:51:boolean isEmpty() -> isEmpty
     56:56:boolean isPartialView() -> isPartialView
 com.google.common.collect.ImmutableBiMap -> org.eclipse.xtext.xbase.lib.internal.y:
-    52:52:com.google.common.collect.ImmutableBiMap of() -> of
-    59:61:com.google.common.collect.ImmutableBiMap of(java.lang.Object,java.lang.Object) -> of
+    java.util.Map$Entry[] EMPTY_ENTRY_ARRAY -> EMPTY_ENTRY_ARRAY
+    50:50:com.google.common.collect.ImmutableBiMap of() -> of
+    57:57:com.google.common.collect.ImmutableBiMap of(java.lang.Object,java.lang.Object) -> of
     com.google.common.collect.ImmutableBiMap inverse() -> inverse
     232:232:com.google.common.collect.ImmutableSet values() -> values
-    43:43:com.google.common.collect.ImmutableCollection values() -> values
-    43:43:java.util.Collection values() -> values
-    43:43:com.google.common.collect.BiMap inverse() -> inverse
+    40:40:com.google.common.collect.ImmutableCollection values() -> values
+    40:40:java.util.Collection values() -> values
+    40:40:com.google.common.collect.BiMap inverse() -> inverse
 com.google.common.collect.ImmutableCollection -> org.eclipse.xtext.xbase.lib.internal.z:
-    com.google.common.collect.ImmutableCollection EMPTY_IMMUTABLE_COLLECTION -> EMPTY_IMMUTABLE_COLLECTION
     com.google.common.collect.ImmutableList asList -> asList
     com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    56:56:java.lang.Object[] toArray() -> toArray
-    60:60:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    64:64:boolean contains(java.lang.Object) -> contains
-    68:68:boolean containsAll(java.util.Collection) -> containsAll
-    72:72:boolean isEmpty() -> isEmpty
-    77:77:java.lang.String toString() -> toString
-    88:88:boolean add(java.lang.Object) -> add
-    99:99:boolean remove(java.lang.Object) -> remove
-    110:110:boolean addAll(java.util.Collection) -> addAll
-    121:121:boolean removeAll(java.util.Collection) -> removeAll
-    132:132:boolean retainAll(java.util.Collection) -> retainAll
-    143:143:void clear() -> clear
-    158:159:com.google.common.collect.ImmutableList asList() -> asList
-    163:169:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    60:66:java.lang.Object[] toArray() -> toArray
+    71:79:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    84:84:boolean contains(java.lang.Object) -> contains
+    96:96:boolean add(java.lang.Object) -> add
+    108:108:boolean remove(java.lang.Object) -> remove
+    120:120:boolean addAll(java.util.Collection) -> addAll
+    132:132:boolean removeAll(java.util.Collection) -> removeAll
+    144:144:boolean retainAll(java.util.Collection) -> retainAll
+    156:156:void clear() -> clear
+    171:172:com.google.common.collect.ImmutableList asList() -> asList
+    176:182:com.google.common.collect.ImmutableList createAsList() -> createAsList
     boolean isPartialView() -> isPartialView
-    41:41:java.util.Iterator iterator() -> iterator
-com.google.common.collect.ImmutableCollection$1 -> org.eclipse.xtext.xbase.lib.internal.z$1:
+    199:202:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
+    45:45:java.util.Iterator iterator() -> iterator
+com.google.common.collect.ImmutableCollection$ArrayBasedBuilder -> org.eclipse.xtext.xbase.lib.internal.z$b:
+    java.lang.Object[] contents -> contents
+    int size -> size
+    331:335:void ensureCapacity(int) -> ensureCapacity
+    339:342:com.google.common.collect.ImmutableCollection$ArrayBasedBuilder add(java.lang.Object) -> add
 com.google.common.collect.ImmutableCollection$Builder -> org.eclipse.xtext.xbase.lib.internal.z$a:
-    291:303:int expandedCapacity(int,int) -> expandedCapacity
-com.google.common.collect.ImmutableCollection$EmptyImmutableCollection -> org.eclipse.xtext.xbase.lib.internal.z$b:
-    java.lang.Object[] EMPTY_ARRAY -> EMPTY_ARRAY
-    178:178:int size() -> size
-    183:183:boolean isEmpty() -> isEmpty
-    188:188:boolean contains(java.lang.Object) -> contains
-    193:193:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    200:200:java.lang.Object[] toArray() -> toArray
-    205:208:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    213:213:com.google.common.collect.ImmutableList createAsList() -> createAsList
-    218:218:boolean isPartialView() -> isPartialView
-    175:175:java.util.Iterator iterator() -> iterator
+    219:231:int expandedCapacity(int,int) -> expandedCapacity
 com.google.common.collect.ImmutableEntry -> org.eclipse.xtext.xbase.lib.internal.aa:
     java.lang.Object key -> key
     java.lang.Object value -> value
-    41:41:java.lang.Object getKey() -> getKey
-    47:47:java.lang.Object getValue() -> getValue
-    52:52:java.lang.Object setValue(java.lang.Object) -> setValue
+    40:40:java.lang.Object getKey() -> getKey
+    44:44:java.lang.Object getValue() -> getValue
+    48:48:java.lang.Object setValue(java.lang.Object) -> setValue
 com.google.common.collect.ImmutableEnumMap -> org.eclipse.xtext.xbase.lib.internal.ab:
     java.util.EnumMap delegate -> delegate
-    39:47:com.google.common.collect.ImmutableMap asImmutable(java.util.EnumMap) -> asImmutable
-    60:60:com.google.common.collect.ImmutableSet createKeySet() -> createKeySet
-    84:84:int size() -> size
-    89:89:boolean containsKey(java.lang.Object) -> containsKey
-    94:94:java.lang.Object get(java.lang.Object) -> get
-    99:99:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
-    126:126:boolean isPartialView() -> isPartialView
-    37:37:java.util.EnumMap access$000(com.google.common.collect.ImmutableEnumMap) -> access$000
+    38:46:com.google.common.collect.ImmutableMap asImmutable(java.util.EnumMap) -> asImmutable
+    59:59:com.google.common.collect.ImmutableSet createKeySet() -> createKeySet
+    85:85:int size() -> size
+    90:90:boolean containsKey(java.lang.Object) -> containsKey
+    95:95:java.lang.Object get(java.lang.Object) -> get
+    100:100:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    129:129:boolean isPartialView() -> isPartialView
+    36:36:java.util.EnumMap access$000(com.google.common.collect.ImmutableEnumMap) -> access$000
 com.google.common.collect.ImmutableEnumMap$1 -> org.eclipse.xtext.xbase.lib.internal.ab$1:
     com.google.common.collect.ImmutableEnumMap this$0 -> this$0
-    64:64:boolean contains(java.lang.Object) -> contains
+    63:63:boolean contains(java.lang.Object) -> contains
     68:68:int size() -> size
     73:73:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
     78:78:boolean isPartialView() -> isPartialView
-    60:60:java.util.Iterator iterator() -> iterator
+    59:59:java.util.Iterator iterator() -> iterator
 com.google.common.collect.ImmutableEnumMap$2 -> org.eclipse.xtext.xbase.lib.internal.ab$2:
     com.google.common.collect.ImmutableEnumMap this$0 -> this$0
-    103:103:com.google.common.collect.ImmutableMap map() -> map
-    108:108:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    99:99:java.util.Iterator iterator() -> iterator
+    104:104:com.google.common.collect.ImmutableMap map() -> map
+    109:109:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    100:100:java.util.Iterator iterator() -> iterator
 com.google.common.collect.ImmutableEnumMap$2$1 -> org.eclipse.xtext.xbase.lib.internal.ab$2$1:
     java.util.Iterator backingIterator -> backingIterator
     com.google.common.collect.ImmutableEnumMap$2 this$1 -> this$1
-    112:112:boolean hasNext() -> hasNext
-    116:117:java.util.Map$Entry next() -> next
-    108:108:java.lang.Object next() -> next
+    114:114:boolean hasNext() -> hasNext
+    119:120:java.util.Map$Entry next() -> next
+    109:109:java.lang.Object next() -> next
 com.google.common.collect.ImmutableEnumSet -> org.eclipse.xtext.xbase.lib.internal.ac:
     java.util.EnumSet delegate -> delegate
     int hashCode -> hashCode
-    36:42:com.google.common.collect.ImmutableSet asImmutable(java.util.EnumSet) -> asImmutable
-    62:62:boolean isPartialView() -> isPartialView
-    67:67:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    71:71:int size() -> size
-    76:76:boolean contains(java.lang.Object) -> contains
-    81:81:boolean containsAll(java.util.Collection) -> containsAll
-    86:86:boolean isEmpty() -> isEmpty
-    91:91:java.lang.Object[] toArray() -> toArray
-    96:96:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    101:101:boolean equals(java.lang.Object) -> equals
-    108:109:int hashCode() -> hashCode
-    114:114:java.lang.String toString() -> toString
+    35:41:com.google.common.collect.ImmutableSet asImmutable(java.util.EnumSet) -> asImmutable
+    60:60:boolean isPartialView() -> isPartialView
+    64:64:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    69:69:int size() -> size
+    73:73:boolean contains(java.lang.Object) -> contains
+    77:77:boolean containsAll(java.util.Collection) -> containsAll
+    81:81:boolean isEmpty() -> isEmpty
+    85:85:boolean equals(java.lang.Object) -> equals
+    91:92:int hashCode() -> hashCode
+    96:96:java.lang.String toString() -> toString
     31:31:java.util.Iterator iterator() -> iterator
 com.google.common.collect.ImmutableList -> org.eclipse.xtext.xbase.lib.internal.ad:
-    75:75:com.google.common.collect.ImmutableList of() -> of
-    87:87:com.google.common.collect.ImmutableList of(java.lang.Object) -> of
-    243:249:com.google.common.collect.ImmutableList copyOf(java.util.Collection) -> copyOf
-    277:283:com.google.common.collect.ImmutableList copyOf(java.lang.Object[]) -> copyOf
-    293:302:com.google.common.collect.ImmutableList asImmutableList(java.lang.Object[]) -> asImmutableList
-    307:307:com.google.common.collect.ImmutableList copyFromCollection(java.util.Collection) -> copyFromCollection
-    312:315:com.google.common.collect.ImmutableList construct(java.lang.Object[]) -> construct
-    324:324:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    328:328:com.google.common.collect.UnmodifiableListIterator listIterator() -> listIterator
-    332:332:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
-    342:342:int indexOf(java.lang.Object) -> indexOf
-    346:346:int lastIndexOf(java.lang.Object) -> lastIndexOf
-    351:351:boolean contains(java.lang.Object) -> contains
-    364:372:com.google.common.collect.ImmutableList subList(int,int) -> subList
-    382:382:com.google.common.collect.ImmutableList subListUnchecked(int,int) -> subListUnchecked
-    423:423:boolean addAll(int,java.util.Collection) -> addAll
-    434:434:java.lang.Object set(int,java.lang.Object) -> set
-    445:445:void add(int,java.lang.Object) -> add
-    456:456:java.lang.Object remove(int) -> remove
-    466:466:com.google.common.collect.ImmutableList asList() -> asList
-    478:478:com.google.common.collect.ImmutableList reverse() -> reverse
-    584:584:boolean equals(java.lang.Object) -> equals
-    589:589:int hashCode() -> hashCode
-    624:624:com.google.common.collect.ImmutableList$Builder builder() -> builder
-    62:62:java.util.Iterator iterator() -> iterator
-    62:62:java.util.List subList(int,int) -> subList
-    62:62:java.util.ListIterator listIterator(int) -> listIterator
-    62:62:java.util.ListIterator listIterator() -> listIterator
+    com.google.common.collect.ImmutableList EMPTY -> EMPTY
+    77:77:com.google.common.collect.ImmutableList of() -> of
+    89:89:com.google.common.collect.ImmutableList of(java.lang.Object) -> of
+    98:98:com.google.common.collect.ImmutableList of(java.lang.Object,java.lang.Object) -> of
+    251:258:com.google.common.collect.ImmutableList copyOf(java.util.Collection) -> copyOf
+    289:295:com.google.common.collect.ImmutableList copyOf(java.lang.Object[]) -> copyOf
+    303:303:com.google.common.collect.ImmutableList construct(java.lang.Object[]) -> construct
+    312:312:com.google.common.collect.ImmutableList asImmutableList(java.lang.Object[]) -> asImmutableList
+    320:331:com.google.common.collect.ImmutableList asImmutableList(java.lang.Object[],int) -> asImmutableList
+    340:340:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    344:344:com.google.common.collect.UnmodifiableListIterator listIterator() -> listIterator
+    348:348:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
+    358:358:int indexOf(java.lang.Object) -> indexOf
+    363:363:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    368:368:boolean contains(java.lang.Object) -> contains
+    381:389:com.google.common.collect.ImmutableList subList(int,int) -> subList
+    399:399:com.google.common.collect.ImmutableList subListUnchecked(int,int) -> subListUnchecked
+    443:443:boolean addAll(int,java.util.Collection) -> addAll
+    455:455:java.lang.Object set(int,java.lang.Object) -> set
+    467:467:void add(int,java.lang.Object) -> add
+    479:479:java.lang.Object remove(int) -> remove
+    488:488:com.google.common.collect.ImmutableList asList() -> asList
+    494:498:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
+    510:510:com.google.common.collect.ImmutableList reverse() -> reverse
+    567:567:boolean equals(java.lang.Object) -> equals
+    571:579:int hashCode() -> hashCode
+    611:611:com.google.common.collect.ImmutableList$Builder builder() -> builder
+    61:61:java.util.Iterator iterator() -> iterator
+    61:61:java.util.List subList(int,int) -> subList
+    61:61:java.util.ListIterator listIterator(int) -> listIterator
+    61:61:java.util.ListIterator listIterator() -> listIterator
 com.google.common.collect.ImmutableList$1 -> org.eclipse.xtext.xbase.lib.internal.ad$1:
     com.google.common.collect.ImmutableList this$0 -> this$0
-    336:336:java.lang.Object get(int) -> get
+    351:351:java.lang.Object get(int) -> get
 com.google.common.collect.ImmutableList$Builder -> org.eclipse.xtext.xbase.lib.internal.ad$a:
-    java.lang.Object[] contents -> contents
-    int size -> size
-    666:670:com.google.common.collect.ImmutableList$Builder ensureCapacity(int) -> ensureCapacity
-    682:685:com.google.common.collect.ImmutableList$Builder add(java.lang.Object) -> add
-    745:758:com.google.common.collect.ImmutableList build() -> build
+    652:653:com.google.common.collect.ImmutableList$Builder add(java.lang.Object) -> add
+    700:700:com.google.common.collect.ImmutableList build() -> build
+    630:630:com.google.common.collect.ImmutableCollection$ArrayBasedBuilder add(java.lang.Object) -> add
 com.google.common.collect.ImmutableList$ReverseImmutableList -> org.eclipse.xtext.xbase.lib.internal.ad$b:
     com.google.common.collect.ImmutableList forwardList -> forwardList
-    int size -> size
-    491:491:int reverseIndex(int) -> reverseIndex
-    495:495:int reversePosition(int) -> reversePosition
-    500:500:com.google.common.collect.ImmutableList reverse() -> reverse
-    505:505:boolean contains(java.lang.Object) -> contains
-    510:510:boolean containsAll(java.util.Collection) -> containsAll
-    515:516:int indexOf(java.lang.Object) -> indexOf
-    521:522:int lastIndexOf(java.lang.Object) -> lastIndexOf
-    527:528:com.google.common.collect.ImmutableList subList(int,int) -> subList
-    532:533:java.lang.Object get(int) -> get
-    538:540:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
-    568:568:int size() -> size
-    573:573:boolean isEmpty() -> isEmpty
-    578:578:boolean isPartialView() -> isPartialView
-    481:481:java.util.List subList(int,int) -> subList
-    481:481:java.util.ListIterator listIterator(int) -> listIterator
-    481:481:java.util.ListIterator listIterator() -> listIterator
-    481:481:java.util.Iterator iterator() -> iterator
-    481:481:int access$000(com.google.common.collect.ImmutableList$ReverseImmutableList,int) -> access$000
-com.google.common.collect.ImmutableList$ReverseImmutableList$1 -> org.eclipse.xtext.xbase.lib.internal.ad$b$1:
-    com.google.common.collect.UnmodifiableListIterator val$forward -> val$forward
-    com.google.common.collect.ImmutableList$ReverseImmutableList this$0 -> this$0
-    542:542:boolean hasNext() -> hasNext
-    546:546:boolean hasPrevious() -> hasPrevious
-    550:550:java.lang.Object next() -> next
-    554:554:int nextIndex() -> nextIndex
-    558:558:java.lang.Object previous() -> previous
-    562:562:int previousIndex() -> previousIndex
+    521:521:int reverseIndex(int) -> reverseIndex
+    525:525:int reversePosition(int) -> reversePosition
+    529:529:com.google.common.collect.ImmutableList reverse() -> reverse
+    533:533:boolean contains(java.lang.Object) -> contains
+    537:538:int indexOf(java.lang.Object) -> indexOf
+    542:543:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    547:548:com.google.common.collect.ImmutableList subList(int,int) -> subList
+    553:554:java.lang.Object get(int) -> get
+    558:558:int size() -> size
+    562:562:boolean isPartialView() -> isPartialView
+    513:513:java.util.List subList(int,int) -> subList
+    513:513:java.util.ListIterator listIterator(int) -> listIterator
+    513:513:java.util.ListIterator listIterator() -> listIterator
+    513:513:java.util.Iterator iterator() -> iterator
 com.google.common.collect.ImmutableList$SubList -> org.eclipse.xtext.xbase.lib.internal.ad$c:
     int offset -> offset
     int length -> length
     com.google.common.collect.ImmutableList this$0 -> this$0
-    395:395:int size() -> size
-    399:400:java.lang.Object get(int) -> get
-    405:406:com.google.common.collect.ImmutableList subList(int,int) -> subList
-    411:411:boolean isPartialView() -> isPartialView
-    385:385:java.util.List subList(int,int) -> subList
-    385:385:java.util.ListIterator listIterator(int) -> listIterator
-    385:385:java.util.ListIterator listIterator() -> listIterator
-    385:385:java.util.Iterator iterator() -> iterator
+    413:413:int size() -> size
+    418:419:java.lang.Object get(int) -> get
+    424:425:com.google.common.collect.ImmutableList subList(int,int) -> subList
+    430:430:boolean isPartialView() -> isPartialView
+    402:402:java.util.List subList(int,int) -> subList
+    402:402:java.util.ListIterator listIterator(int) -> listIterator
+    402:402:java.util.ListIterator listIterator() -> listIterator
+    402:402:java.util.Iterator iterator() -> iterator
 com.google.common.collect.ImmutableMap -> org.eclipse.xtext.xbase.lib.internal.ae:
+    java.util.Map$Entry[] EMPTY_ENTRY_ARRAY -> EMPTY_ENTRY_ARRAY
     com.google.common.collect.ImmutableSet entrySet -> entrySet
     com.google.common.collect.ImmutableSet keySet -> keySet
     com.google.common.collect.ImmutableCollection values -> values
-    72:72:com.google.common.collect.ImmutableMap of() -> of
-    82:82:com.google.common.collect.ImmutableMap of(java.lang.Object,java.lang.Object) -> of
-    131:131:com.google.common.collect.ImmutableMap$Builder builder() -> builder
-    142:144:java.util.Map$Entry entryOf(java.lang.Object,java.lang.Object) -> entryOf
-    265:302:com.google.common.collect.ImmutableMap copyOf(java.util.Map) -> copyOf
-    316:316:java.lang.Object put(java.lang.Object,java.lang.Object) -> put
-    327:327:java.lang.Object remove(java.lang.Object) -> remove
-    338:338:void putAll(java.util.Map) -> putAll
-    349:349:void clear() -> clear
-    353:353:boolean isEmpty() -> isEmpty
-    357:357:boolean containsKey(java.lang.Object) -> containsKey
-    361:361:boolean containsValue(java.lang.Object) -> containsValue
+    70:70:com.google.common.collect.ImmutableMap of() -> of
+    80:80:com.google.common.collect.ImmutableMap of(java.lang.Object,java.lang.Object) -> of
+    135:136:com.google.common.collect.ImmutableMapEntry$TerminalEntry entryOf(java.lang.Object,java.lang.Object) -> entryOf
+    144:144:com.google.common.collect.ImmutableMap$Builder builder() -> builder
+    149:153:void checkNoConflict(boolean,java.lang.String,java.util.Map$Entry,java.util.Map$Entry) -> checkNoConflict
+    273:294:com.google.common.collect.ImmutableMap copyOf(java.util.Map) -> copyOf
+    301:301:com.google.common.collect.ImmutableMap copyOfEnumMapUnsafe(java.util.Map) -> copyOfEnumMapUnsafe
+    306:310:com.google.common.collect.ImmutableMap copyOfEnumMap(java.util.Map) -> copyOfEnumMap
+    326:326:java.lang.Object put(java.lang.Object,java.lang.Object) -> put
+    338:338:java.lang.Object remove(java.lang.Object) -> remove
+    350:350:void putAll(java.util.Map) -> putAll
+    362:362:void clear() -> clear
+    367:367:boolean isEmpty() -> isEmpty
+    372:372:boolean containsKey(java.lang.Object) -> containsKey
+    377:377:boolean containsValue(java.lang.Object) -> containsValue
     java.lang.Object get(java.lang.Object) -> get
-    376:377:com.google.common.collect.ImmutableSet entrySet() -> entrySet
+    392:393:com.google.common.collect.ImmutableSet entrySet() -> entrySet
     com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
-    390:391:com.google.common.collect.ImmutableSet keySet() -> keySet
-    395:395:com.google.common.collect.ImmutableSet createKeySet() -> createKeySet
-    406:407:com.google.common.collect.ImmutableCollection values() -> values
-    491:491:boolean equals(java.lang.Object) -> equals
+    406:407:com.google.common.collect.ImmutableSet keySet() -> keySet
+    411:411:com.google.common.collect.ImmutableSet createKeySet() -> createKeySet
+    422:423:com.google.common.collect.ImmutableCollection values() -> values
+    507:507:boolean equals(java.lang.Object) -> equals
     boolean isPartialView() -> isPartialView
-    500:500:int hashCode() -> hashCode
-    505:505:java.lang.String toString() -> toString
-    62:62:java.util.Set entrySet() -> entrySet
-    62:62:java.util.Collection values() -> values
-    62:62:java.util.Set keySet() -> keySet
+    515:515:int hashCode() -> hashCode
+    519:519:java.lang.String toString() -> toString
+    60:60:java.util.Set entrySet() -> entrySet
+    60:60:java.util.Collection values() -> values
+    60:60:java.util.Set keySet() -> keySet
 com.google.common.collect.ImmutableMap$Builder -> org.eclipse.xtext.xbase.lib.internal.ae$a:
-    java.util.ArrayList entries -> entries
-    181:182:com.google.common.collect.ImmutableMap$Builder put(java.lang.Object,java.lang.Object) -> put
-    235:235:com.google.common.collect.ImmutableMap build() -> build
-    239:247:com.google.common.collect.ImmutableMap fromEntryList(java.util.List) -> fromEntryList
+    com.google.common.collect.ImmutableMapEntry$TerminalEntry[] entries -> entries
+    int size -> size
+    194:198:void ensureCapacity(int) -> ensureCapacity
+    205:209:com.google.common.collect.ImmutableMap$Builder put(java.lang.Object,java.lang.Object) -> put
+    248:254:com.google.common.collect.ImmutableMap build() -> build
+com.google.common.collect.ImmutableMapEntry -> org.eclipse.xtext.xbase.lib.internal.bs:
+    com.google.common.collect.ImmutableMapEntry getNextInKeyBucket() -> getNextInKeyBucket
+com.google.common.collect.ImmutableMapEntry$TerminalEntry -> org.eclipse.xtext.xbase.lib.internal.bs$a:
+    63:63:com.google.common.collect.ImmutableMapEntry getNextInKeyBucket() -> getNextInKeyBucket
 com.google.common.collect.ImmutableMapEntrySet -> org.eclipse.xtext.xbase.lib.internal.af:
     com.google.common.collect.ImmutableMap map() -> map
-    40:40:int size() -> size
-    45:50:boolean contains(java.lang.Object) -> contains
-    55:55:boolean isPartialView() -> isPartialView
+    41:41:int size() -> size
+    46:51:boolean contains(java.lang.Object) -> contains
+    56:56:boolean isPartialView() -> isPartialView
 com.google.common.collect.ImmutableMapKeySet -> org.eclipse.xtext.xbase.lib.internal.ag:
     com.google.common.collect.ImmutableMap map -> map
-    42:42:int size() -> size
-    47:47:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    52:52:boolean contains(java.lang.Object) -> contains
-    57:58:com.google.common.collect.ImmutableList createAsList() -> createAsList
-    74:74:boolean isPartialView() -> isPartialView
+    43:43:int size() -> size
+    48:48:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    53:53:boolean contains(java.lang.Object) -> contains
+    58:59:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    76:76:boolean isPartialView() -> isPartialView
     33:33:java.util.Iterator iterator() -> iterator
 com.google.common.collect.ImmutableMapKeySet$1 -> org.eclipse.xtext.xbase.lib.internal.ag$1:
     com.google.common.collect.ImmutableList val$entryList -> val$entryList
     com.google.common.collect.ImmutableMapKeySet this$0 -> this$0
-    61:61:java.lang.Object get(int) -> get
-    66:66:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
+    63:63:java.lang.Object get(int) -> get
+    68:68:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
 com.google.common.collect.ImmutableMapValues -> org.eclipse.xtext.xbase.lib.internal.ah:
     com.google.common.collect.ImmutableMap map -> map
-    40:40:int size() -> size
-    45:45:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    50:50:boolean contains(java.lang.Object) -> contains
-    55:55:boolean isPartialView() -> isPartialView
-    60:61:com.google.common.collect.ImmutableList createAsList() -> createAsList
-    31:31:java.util.Iterator iterator() -> iterator
+    43:43:int size() -> size
+    48:48:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    53:53:boolean contains(java.lang.Object) -> contains
+    58:58:boolean isPartialView() -> isPartialView
+    63:64:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    33:33:java.util.Iterator iterator() -> iterator
 com.google.common.collect.ImmutableMapValues$1 -> org.eclipse.xtext.xbase.lib.internal.ah$1:
     com.google.common.collect.ImmutableList val$entryList -> val$entryList
     com.google.common.collect.ImmutableMapValues this$0 -> this$0
-    64:64:java.lang.Object get(int) -> get
-    69:69:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
+    67:67:java.lang.Object get(int) -> get
+    72:72:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
 com.google.common.collect.ImmutableSet -> org.eclipse.xtext.xbase.lib.internal.ai:
-    int CUTOFF -> CUTOFF
     84:84:com.google.common.collect.ImmutableSet of() -> of
     94:94:com.google.common.collect.ImmutableSet of(java.lang.Object) -> of
-    178:224:com.google.common.collect.ImmutableSet construct(int,java.lang.Object[]) -> construct
-    248:259:int chooseTableSize(int) -> chooseTableSize
-    273:279:com.google.common.collect.ImmutableSet copyOf(java.lang.Object[]) -> copyOf
-    357:371:com.google.common.collect.ImmutableSet copyOf(java.util.Collection) -> copyOf
-    375:387:com.google.common.collect.ImmutableSet copyFromCollection(java.util.Collection) -> copyFromCollection
-    395:395:boolean isHashCodeFast() -> isHashCodeFast
-    400:407:boolean equals(java.lang.Object) -> equals
-    412:412:int hashCode() -> hashCode
+    179:225:com.google.common.collect.ImmutableSet construct(int,java.lang.Object[]) -> construct
+    249:260:int chooseTableSize(int) -> chooseTableSize
+    272:278:com.google.common.collect.ImmutableSet copyOf(java.lang.Object[]) -> copyOf
+    364:375:com.google.common.collect.ImmutableSet copyOf(java.util.Collection) -> copyOf
+    380:380:com.google.common.collect.ImmutableSet copyOfEnumSet(java.util.EnumSet) -> copyOfEnumSet
+    387:387:boolean isHashCodeFast() -> isHashCodeFast
+    391:399:boolean equals(java.lang.Object) -> equals
+    403:403:int hashCode() -> hashCode
     com.google.common.collect.UnmodifiableIterator iterator() -> iterator
     72:72:java.util.Iterator iterator() -> iterator
-com.google.common.collect.ImmutableSet$ArrayImmutableSet -> org.eclipse.xtext.xbase.lib.internal.ai$a:
-    java.lang.Object[] elements -> elements
-    429:429:int size() -> size
-    434:434:boolean isEmpty() -> isEmpty
-    439:439:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    444:444:java.lang.Object[] toArray() -> toArray
-    449:449:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    454:468:boolean containsAll(java.util.Collection) -> containsAll
-    473:473:boolean isPartialView() -> isPartialView
-    478:478:com.google.common.collect.ImmutableList createAsList() -> createAsList
-    420:420:java.util.Iterator iterator() -> iterator
 com.google.common.collect.ImmutableSortedAsList -> org.eclipse.xtext.xbase.lib.internal.aj:
-    39:39:com.google.common.collect.ImmutableSortedSet delegateCollection() -> delegateCollection
-    43:43:java.util.Comparator comparator() -> comparator
-    52:59:int indexOf(java.lang.Object) -> indexOf
+    41:41:com.google.common.collect.ImmutableSortedSet delegateCollection() -> delegateCollection
+    45:45:java.util.Comparator comparator() -> comparator
+    53:60:int indexOf(java.lang.Object) -> indexOf
     65:65:int lastIndexOf(java.lang.Object) -> lastIndexOf
     71:71:boolean contains(java.lang.Object) -> contains
     82:82:com.google.common.collect.ImmutableList subListUnchecked(int,int) -> subListUnchecked
@@ -564,510 +552,539 @@ com.google.common.collect.ImmutableSortedAsList -> org.eclipse.xtext.xbase.lib.i
 com.google.common.collect.ImmutableSortedMap -> org.eclipse.xtext.xbase.lib.internal.ak:
     java.util.Comparator NATURAL_ORDER -> NATURAL_ORDER
     com.google.common.collect.ImmutableSortedMap NATURAL_EMPTY_MAP -> NATURAL_EMPTY_MAP
-    71:74:com.google.common.collect.ImmutableSortedMap emptyMap(java.util.Comparator) -> emptyMap
-    80:91:com.google.common.collect.ImmutableSortedMap fromSortedEntries(java.util.Comparator,java.util.Collection) -> fromSortedEntries
-    97:100:com.google.common.collect.ImmutableSortedMap from(com.google.common.collect.ImmutableSortedSet,com.google.common.collect.ImmutableList) -> from
-    111:111:com.google.common.collect.ImmutableSortedMap of() -> of
-    225:231:com.google.common.collect.ImmutableSortedMap copyOfSorted(java.util.SortedMap) -> copyOfSorted
-    236:272:com.google.common.collect.ImmutableSortedMap copyOfInternal(java.util.Map,java.util.Comparator) -> copyOfInternal
-    277:285:void sortEntries(java.util.List,java.util.Comparator) -> sortEntries
-    289:295:void validateEntries(java.util.List,java.util.Comparator) -> validateEntries
-    418:418:int size() -> size
-    423:423:boolean containsValue(java.lang.Object) -> containsValue
+    70:73:com.google.common.collect.ImmutableSortedMap emptyMap(java.util.Comparator) -> emptyMap
+    81:93:com.google.common.collect.ImmutableSortedMap fromSortedEntries(java.util.Comparator,int,java.util.Map$Entry[]) -> fromSortedEntries
+    100:103:com.google.common.collect.ImmutableSortedMap from(com.google.common.collect.ImmutableSortedSet,com.google.common.collect.ImmutableList) -> from
+    116:116:com.google.common.collect.ImmutableSortedMap of() -> of
+    238:244:com.google.common.collect.ImmutableSortedMap copyOfSorted(java.util.SortedMap) -> copyOfSorted
+    249:274:com.google.common.collect.ImmutableSortedMap copyOfInternal(java.util.Map,java.util.Comparator) -> copyOfInternal
+    279:288:com.google.common.collect.ImmutableSortedMap fromEntries(java.util.Comparator,boolean,int,java.util.Map$Entry[]) -> fromEntries
+    293:294:void sortEntries(java.util.Comparator,int,java.util.Map$Entry[]) -> sortEntries
+    298:302:void validateEntries(int,java.util.Map$Entry[],java.util.Comparator) -> validateEntries
+    420:420:int size() -> size
+    424:424:boolean containsValue(java.lang.Object) -> containsValue
     428:428:boolean isPartialView() -> isPartialView
-    437:437:com.google.common.collect.ImmutableSet entrySet() -> entrySet
+    436:436:com.google.common.collect.ImmutableSet entrySet() -> entrySet
     com.google.common.collect.ImmutableSortedSet keySet() -> keySet
     com.google.common.collect.ImmutableCollection values() -> values
-    461:461:java.util.Comparator comparator() -> comparator
-    465:465:java.lang.Object firstKey() -> firstKey
-    469:469:java.lang.Object lastKey() -> lastKey
-    484:484:com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object) -> headMap
+    458:458:java.util.Comparator comparator() -> comparator
+    463:463:java.lang.Object firstKey() -> firstKey
+    468:468:java.lang.Object lastKey() -> lastKey
+    483:483:com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object) -> headMap
     com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object,boolean) -> headMap
-    517:517:com.google.common.collect.ImmutableSortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
-    538:542:com.google.common.collect.ImmutableSortedMap subMap(java.lang.Object,boolean,java.lang.Object,boolean) -> subMap
-    557:557:com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object) -> tailMap
+    515:515:com.google.common.collect.ImmutableSortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
+    535:539:com.google.common.collect.ImmutableSortedMap subMap(java.lang.Object,boolean,java.lang.Object,boolean) -> subMap
+    554:554:com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object) -> tailMap
     com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object,boolean) -> tailMap
-    58:58:com.google.common.collect.ImmutableSet keySet() -> keySet
-    58:58:java.util.Set entrySet() -> entrySet
-    58:58:java.util.Collection values() -> values
-    58:58:java.util.Set keySet() -> keySet
-    58:58:java.util.SortedMap tailMap(java.lang.Object) -> tailMap
-    58:58:java.util.SortedMap headMap(java.lang.Object) -> headMap
-    58:58:java.util.SortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
-com.google.common.collect.ImmutableSortedMap$1 -> org.eclipse.xtext.xbase.lib.internal.ak$1:
-    java.util.Comparator val$comparator -> val$comparator
-    280:280:int compare(java.util.Map$Entry,java.util.Map$Entry) -> compare
-    277:277:int compare(java.lang.Object,java.lang.Object) -> compare
+    57:57:com.google.common.collect.ImmutableSet keySet() -> keySet
+    57:57:java.util.Set entrySet() -> entrySet
+    57:57:java.util.Collection values() -> values
+    57:57:java.util.Set keySet() -> keySet
+    57:57:java.util.SortedMap tailMap(java.lang.Object) -> tailMap
+    57:57:java.util.SortedMap headMap(java.lang.Object) -> headMap
+    57:57:java.util.SortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
 com.google.common.collect.ImmutableSortedMapFauxverideShim -> org.eclipse.xtext.xbase.lib.internal.al:
 com.google.common.collect.ImmutableSortedSet -> org.eclipse.xtext.xbase.lib.internal.am:
     java.util.Comparator NATURAL_ORDER -> NATURAL_ORDER
     com.google.common.collect.ImmutableSortedSet NATURAL_EMPTY_SET -> NATURAL_EMPTY_SET
     java.util.Comparator comparator -> comparator
-    105:105:com.google.common.collect.ImmutableSortedSet emptySet() -> emptySet
+    104:104:com.google.common.collect.ImmutableSortedSet emptySet() -> emptySet
     109:112:com.google.common.collect.ImmutableSortedSet emptySet(java.util.Comparator) -> emptySet
-    387:392:com.google.common.collect.ImmutableSortedSet copyOfSorted(java.util.SortedSet) -> copyOfSorted
-    581:581:int unsafeCompare(java.lang.Object,java.lang.Object) -> unsafeCompare
-    589:590:int unsafeCompare(java.util.Comparator,java.lang.Object,java.lang.Object) -> unsafeCompare
-    608:608:java.util.Comparator comparator() -> comparator
+    400:405:com.google.common.collect.ImmutableSortedSet copyOfSorted(java.util.SortedSet) -> copyOfSorted
+    568:568:int unsafeCompare(java.lang.Object,java.lang.Object) -> unsafeCompare
+    577:578:int unsafeCompare(java.util.Comparator,java.lang.Object,java.lang.Object) -> unsafeCompare
+    596:596:java.util.Comparator comparator() -> comparator
     com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    628:628:com.google.common.collect.ImmutableSortedSet headSet(java.lang.Object) -> headSet
-    636:636:com.google.common.collect.ImmutableSortedSet headSet(java.lang.Object,boolean) -> headSet
-    654:654:com.google.common.collect.ImmutableSortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
-    663:666:com.google.common.collect.ImmutableSortedSet subSet(java.lang.Object,boolean,java.lang.Object,boolean) -> subSet
-    682:682:com.google.common.collect.ImmutableSortedSet tailSet(java.lang.Object) -> tailSet
-    690:690:com.google.common.collect.ImmutableSortedSet tailSet(java.lang.Object,boolean) -> tailSet
+    615:615:com.google.common.collect.ImmutableSortedSet headSet(java.lang.Object) -> headSet
+    623:623:com.google.common.collect.ImmutableSortedSet headSet(java.lang.Object,boolean) -> headSet
+    641:641:com.google.common.collect.ImmutableSortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
+    650:653:com.google.common.collect.ImmutableSortedSet subSet(java.lang.Object,boolean,java.lang.Object,boolean) -> subSet
+    669:669:com.google.common.collect.ImmutableSortedSet tailSet(java.lang.Object) -> tailSet
+    677:677:com.google.common.collect.ImmutableSortedSet tailSet(java.lang.Object,boolean) -> tailSet
     com.google.common.collect.ImmutableSortedSet headSetImpl(java.lang.Object,boolean) -> headSetImpl
     com.google.common.collect.ImmutableSortedSet subSetImpl(java.lang.Object,boolean,java.lang.Object,boolean) -> subSetImpl
     com.google.common.collect.ImmutableSortedSet tailSetImpl(java.lang.Object,boolean) -> tailSetImpl
-    737:737:java.lang.Object first() -> first
-    741:741:java.lang.Object last() -> last
+    725:725:java.lang.Object first() -> first
+    730:730:java.lang.Object last() -> last
     com.google.common.collect.UnmodifiableIterator descendingIterator() -> descendingIterator
     int indexOf(java.lang.Object) -> indexOf
-    92:92:java.util.Iterator iterator() -> iterator
-    92:92:java.util.SortedSet tailSet(java.lang.Object) -> tailSet
-    92:92:java.util.SortedSet headSet(java.lang.Object) -> headSet
-    92:92:java.util.SortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
+    91:91:java.util.Iterator iterator() -> iterator
+    91:91:java.util.SortedSet tailSet(java.lang.Object) -> tailSet
+    91:91:java.util.SortedSet headSet(java.lang.Object) -> headSet
+    91:91:java.util.SortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
 com.google.common.collect.ImmutableSortedSetFauxverideShim -> org.eclipse.xtext.xbase.lib.internal.an:
 com.google.common.collect.Iterables -> org.eclipse.xtext.xbase.lib.internal.ao:
-    107:107:int size(java.lang.Iterable) -> size
-    135:135:boolean removeAll(java.lang.Iterable,java.util.Collection) -> removeAll
-    171:174:boolean removeIf(java.lang.Iterable,com.google.common.base.Predicate) -> removeIf
-    181:201:boolean removeIfFromRandomAccessList(java.util.List,com.google.common.base.Predicate) -> removeIfFromRandomAccessList
-    216:225:void slowRemoveIfForRemainingElements(java.util.List,com.google.common.base.Predicate,int,int) -> slowRemoveIfForRemainingElements
-    235:242:boolean elementsEqual(java.lang.Iterable,java.lang.Iterable) -> elementsEqual
-    250:250:java.lang.String toString(java.lang.Iterable) -> toString
-    261:261:java.lang.Object getOnlyElement(java.lang.Iterable) -> getOnlyElement
-    286:288:java.lang.Object[] toArray(java.lang.Iterable,java.lang.Class) -> toArray
-    308:308:java.util.Collection toCollection(java.lang.Iterable) -> toCollection
-    319:323:boolean addAll(java.util.Collection,java.lang.Iterable) -> addAll
-    407:409:java.lang.Iterable concat(java.lang.Iterable,java.lang.Iterable) -> concat
-    475:476:java.lang.Iterable concat(java.lang.Iterable) -> concat
-    489:490:com.google.common.collect.UnmodifiableIterator iterators(java.lang.Iterable) -> iterators
-    567:569:java.lang.Iterable filter(java.lang.Iterable,com.google.common.base.Predicate) -> filter
-    590:592:java.lang.Iterable filter(java.lang.Iterable,java.lang.Class) -> filter
-    685:687:java.lang.Iterable transform(java.lang.Iterable,com.google.common.base.Function) -> transform
-    62:62:com.google.common.collect.UnmodifiableIterator access$100(java.lang.Iterable) -> access$100
+    108:108:int size(java.lang.Iterable) -> size
+    138:138:boolean removeAll(java.lang.Iterable,java.util.Collection) -> removeAll
+    176:180:boolean removeIf(java.lang.Iterable,com.google.common.base.Predicate) -> removeIf
+    187:207:boolean removeIfFromRandomAccessList(java.util.List,com.google.common.base.Predicate) -> removeIfFromRandomAccessList
+    222:231:void slowRemoveIfForRemainingElements(java.util.List,com.google.common.base.Predicate,int,int) -> slowRemoveIfForRemainingElements
+    238:247:java.lang.Object removeFirstMatching(java.lang.Iterable,com.google.common.base.Predicate) -> removeFirstMatching
+    259:266:boolean elementsEqual(java.lang.Iterable,java.lang.Iterable) -> elementsEqual
+    278:278:java.lang.String toString(java.lang.Iterable) -> toString
+    289:289:java.lang.Object getOnlyElement(java.lang.Iterable) -> getOnlyElement
+    315:317:java.lang.Object[] toArray(java.lang.Iterable,java.lang.Class) -> toArray
+    337:337:java.util.Collection toCollection(java.lang.Iterable) -> toCollection
+    350:354:boolean addAll(java.util.Collection,java.lang.Iterable) -> addAll
+    435:435:java.lang.Iterable concat(java.lang.Iterable,java.lang.Iterable) -> concat
+    494:495:java.lang.Iterable concat(java.lang.Iterable) -> concat
+    508:508:java.util.Iterator iterators(java.lang.Iterable) -> iterators
+    584:586:java.lang.Iterable filter(java.lang.Iterable,com.google.common.base.Predicate) -> filter
+    608:610:java.lang.Iterable filter(java.lang.Iterable,java.lang.Class) -> filter
+    623:623:boolean any(java.lang.Iterable,com.google.common.base.Predicate) -> any
+    632:632:boolean all(java.lang.Iterable,com.google.common.base.Predicate) -> all
+    708:710:java.lang.Iterable transform(java.lang.Iterable,com.google.common.base.Function) -> transform
+    60:60:java.util.Iterator access$100(java.lang.Iterable) -> access$100
 com.google.common.collect.Iterables$2 -> org.eclipse.xtext.xbase.lib.internal.ao$1:
     java.lang.Iterable val$inputs -> val$inputs
-    479:479:java.util.Iterator iterator() -> iterator
+    498:498:java.util.Iterator iterator() -> iterator
 com.google.common.collect.Iterables$3 -> org.eclipse.xtext.xbase.lib.internal.ao$2:
-    java.util.Iterator val$iterableIterator -> val$iterableIterator
-    493:493:boolean hasNext() -> hasNext
-    497:497:java.util.Iterator next() -> next
-    490:490:java.lang.Object next() -> next
+    512:512:java.util.Iterator transform(java.lang.Iterable) -> transform
+    509:509:java.lang.Object transform(java.lang.Object) -> transform
 com.google.common.collect.Iterables$6 -> org.eclipse.xtext.xbase.lib.internal.ao$3:
     java.lang.Iterable val$unfiltered -> val$unfiltered
     com.google.common.base.Predicate val$predicate -> val$predicate
-    572:572:java.util.Iterator iterator() -> iterator
+    589:589:java.util.Iterator iterator() -> iterator
 com.google.common.collect.Iterables$7 -> org.eclipse.xtext.xbase.lib.internal.ao$4:
     java.lang.Iterable val$unfiltered -> val$unfiltered
     java.lang.Class val$type -> val$type
-    595:595:java.util.Iterator iterator() -> iterator
+    613:613:java.util.Iterator iterator() -> iterator
 com.google.common.collect.Iterables$8 -> org.eclipse.xtext.xbase.lib.internal.ao$5:
     java.lang.Iterable val$fromIterable -> val$fromIterable
     com.google.common.base.Function val$function -> val$function
-    690:690:java.util.Iterator iterator() -> iterator
+    713:713:java.util.Iterator iterator() -> iterator
 com.google.common.collect.Iterators -> org.eclipse.xtext.xbase.lib.internal.ap:
     com.google.common.collect.UnmodifiableListIterator EMPTY_LIST_ITERATOR -> EMPTY_LIST_ITERATOR
     java.util.Iterator EMPTY_MODIFIABLE_ITERATOR -> EMPTY_MODIFIABLE_ITERATOR
-    103:103:com.google.common.collect.UnmodifiableIterator emptyIterator() -> emptyIterator
-    115:115:com.google.common.collect.UnmodifiableListIterator emptyListIterator() -> emptyListIterator
-    146:150:com.google.common.collect.UnmodifiableIterator unmodifiableIterator(java.util.Iterator) -> unmodifiableIterator
-    179:184:int size(java.util.Iterator) -> size
-    191:204:boolean contains(java.util.Iterator,java.lang.Object) -> contains
-    217:225:boolean removeAll(java.util.Iterator,java.util.Collection) -> removeAll
-    240:248:boolean removeIf(java.util.Iterator,com.google.common.base.Predicate) -> removeIf
-    283:293:boolean elementsEqual(java.util.Iterator,java.util.Iterator) -> elementsEqual
-    302:302:java.lang.String toString(java.util.Iterator) -> toString
-    314:329:java.lang.Object getOnlyElement(java.util.Iterator) -> getOnlyElement
-    368:373:boolean addAll(java.util.Collection,java.util.Iterator) -> addAll
-    476:478:java.util.Iterator concat(java.util.Iterator,java.util.Iterator) -> concat
-    562:563:java.util.Iterator concat(java.util.Iterator) -> concat
-    673:675:com.google.common.collect.UnmodifiableIterator filter(java.util.Iterator,com.google.common.base.Predicate) -> filter
-    703:703:com.google.common.collect.UnmodifiableIterator filter(java.util.Iterator,java.lang.Class) -> filter
-    711:718:boolean any(java.util.Iterator,com.google.common.base.Predicate) -> any
-    827:828:java.util.Iterator transform(java.util.Iterator,com.google.common.base.Function) -> transform
-    1080:1091:com.google.common.collect.UnmodifiableListIterator forArray(java.lang.Object[],int,int,int) -> forArray
-    1106:1106:com.google.common.collect.UnmodifiableIterator singletonIterator(java.lang.Object) -> singletonIterator
-    1353:1353:java.util.ListIterator cast(java.util.Iterator) -> cast
+    107:107:com.google.common.collect.UnmodifiableIterator emptyIterator() -> emptyIterator
+    119:119:com.google.common.collect.UnmodifiableListIterator emptyListIterator() -> emptyListIterator
+    152:156:com.google.common.collect.UnmodifiableIterator unmodifiableIterator(java.util.Iterator) -> unmodifiableIterator
+    185:190:int size(java.util.Iterator) -> size
+    197:197:boolean contains(java.util.Iterator,java.lang.Object) -> contains
+    211:211:boolean removeAll(java.util.Iterator,java.util.Collection) -> removeAll
+    227:235:boolean removeIf(java.util.Iterator,com.google.common.base.Predicate) -> removeIf
+    264:274:boolean elementsEqual(java.util.Iterator,java.util.Iterator) -> elementsEqual
+    283:283:java.lang.String toString(java.util.Iterator) -> toString
+    297:312:java.lang.Object getOnlyElement(java.util.Iterator) -> getOnlyElement
+    353:359:boolean addAll(java.util.Collection,java.util.Iterator) -> addAll
+    449:449:java.util.Iterator concat(java.util.Iterator,java.util.Iterator) -> concat
+    526:527:java.util.Iterator concat(java.util.Iterator) -> concat
+    641:643:com.google.common.collect.UnmodifiableIterator filter(java.util.Iterator,com.google.common.base.Predicate) -> filter
+    670:670:com.google.common.collect.UnmodifiableIterator filter(java.util.Iterator,java.lang.Class) -> filter
+    679:679:boolean any(java.util.Iterator,com.google.common.base.Predicate) -> any
+    689:696:boolean all(java.util.Iterator,com.google.common.base.Predicate) -> all
+    770:777:int indexOf(java.util.Iterator,com.google.common.base.Predicate) -> indexOf
+    790:791:java.util.Iterator transform(java.util.Iterator,com.google.common.base.Function) -> transform
+    1026:1026:com.google.common.collect.UnmodifiableIterator forArray(java.lang.Object[]) -> forArray
+    1038:1053:com.google.common.collect.UnmodifiableListIterator forArray(java.lang.Object[],int,int,int) -> forArray
+    1068:1068:com.google.common.collect.UnmodifiableIterator singletonIterator(java.lang.Object) -> singletonIterator
+    1214:1221:com.google.common.collect.PeekingIterator peekingIterator(java.util.Iterator) -> peekingIterator
+    1311:1311:java.util.ListIterator cast(java.util.Iterator) -> cast
 com.google.common.collect.Iterators$1 -> org.eclipse.xtext.xbase.lib.internal.ap$1:
-    72:72:boolean hasNext() -> hasNext
-    76:76:java.lang.Object next() -> next
-    80:80:boolean hasPrevious() -> hasPrevious
-    84:84:java.lang.Object previous() -> previous
-    88:88:int nextIndex() -> nextIndex
-    92:92:int previousIndex() -> previousIndex
-com.google.common.collect.Iterators$12 -> org.eclipse.xtext.xbase.lib.internal.ap$2:
+    76:76:boolean hasNext() -> hasNext
+    80:80:java.lang.Object next() -> next
+    84:84:boolean hasPrevious() -> hasPrevious
+    88:88:java.lang.Object previous() -> previous
+    92:92:int nextIndex() -> nextIndex
+    96:96:int previousIndex() -> previousIndex
+com.google.common.collect.Iterators$11 -> org.eclipse.xtext.xbase.lib.internal.ap$3:
     java.lang.Object[] val$array -> val$array
     int val$offset -> val$offset
-    1094:1094:java.lang.Object get(int) -> get
-com.google.common.collect.Iterators$13 -> org.eclipse.xtext.xbase.lib.internal.ap$3:
+    1055:1055:java.lang.Object get(int) -> get
+com.google.common.collect.Iterators$12 -> org.eclipse.xtext.xbase.lib.internal.ap$2:
     boolean done -> done
     java.lang.Object val$value -> val$value
-    1110:1110:boolean hasNext() -> hasNext
-    1114:1118:java.lang.Object next() -> next
+    1072:1072:boolean hasNext() -> hasNext
+    1076:1080:java.lang.Object next() -> next
 com.google.common.collect.Iterators$2 -> org.eclipse.xtext.xbase.lib.internal.ap$4:
-    120:120:boolean hasNext() -> hasNext
-    124:124:java.lang.Object next() -> next
-    128:128:void remove() -> remove
+    125:125:boolean hasNext() -> hasNext
+    129:129:java.lang.Object next() -> next
+    133:134:void remove() -> remove
 com.google.common.collect.Iterators$3 -> org.eclipse.xtext.xbase.lib.internal.ap$5:
     java.util.Iterator val$iterator -> val$iterator
-    153:153:boolean hasNext() -> hasNext
-    157:157:java.lang.Object next() -> next
+    159:159:boolean hasNext() -> hasNext
+    163:163:java.lang.Object next() -> next
 com.google.common.collect.Iterators$5 -> org.eclipse.xtext.xbase.lib.internal.ap$6:
     java.util.Iterator current -> current
     java.util.Iterator removeFrom -> removeFrom
     java.util.Iterator val$inputs -> val$inputs
-    576:579:boolean hasNext() -> hasNext
-    583:587:java.lang.Object next() -> next
-    591:594:void remove() -> remove
+    542:545:boolean hasNext() -> hasNext
+    549:553:java.lang.Object next() -> next
+    557:560:void remove() -> remove
 com.google.common.collect.Iterators$7 -> org.eclipse.xtext.xbase.lib.internal.ap$7:
     java.util.Iterator val$unfiltered -> val$unfiltered
     com.google.common.base.Predicate val$predicate -> val$predicate
-    678:684:java.lang.Object computeNext() -> computeNext
+    645:651:java.lang.Object computeNext() -> computeNext
 com.google.common.collect.Iterators$8 -> org.eclipse.xtext.xbase.lib.internal.ap$8:
     com.google.common.base.Function val$function -> val$function
-    832:832:java.lang.Object transform(java.lang.Object) -> transform
+    794:794:java.lang.Object transform(java.lang.Object) -> transform
+com.google.common.collect.Iterators$PeekingImpl -> org.eclipse.xtext.xbase.lib.internal.ap$a:
+    java.util.Iterator iterator -> iterator
+    boolean hasPeeked -> hasPeeked
+    java.lang.Object peekedElement -> peekedElement
+    1144:1144:boolean hasNext() -> hasNext
+    1149:1155:java.lang.Object next() -> next
+    1160:1162:void remove() -> remove
+    1166:1170:java.lang.Object peek() -> peek
 com.google.common.collect.Lists -> org.eclipse.xtext.xbase.lib.internal.aq:
-    80:80:java.util.ArrayList newArrayList() -> newArrayList
-    96:101:java.util.ArrayList newArrayList(java.lang.Object[]) -> newArrayList
-    106:109:int computeArrayListCapacity(int) -> computeArrayListCapacity
-    124:126:java.util.ArrayList newArrayList(java.lang.Iterable) -> newArrayList
-    142:147:java.util.ArrayList newArrayList(java.util.Iterator) -> newArrayList
-    208:208:java.util.LinkedList newLinkedList() -> newLinkedList
-    219:223:java.util.LinkedList newLinkedList(java.lang.Iterable) -> newLinkedList
-    512:512:java.util.List transform(java.util.List,com.google.common.base.Function) -> transform
-    872:877:java.util.List reverse(java.util.List) -> reverse
-    1048:1055:int hashCodeImpl(java.util.List) -> hashCodeImpl
-    1062:1071:boolean equalsImpl(java.util.List,java.lang.Object) -> equalsImpl
-    1091:1097:int indexOfImpl(java.util.List,java.lang.Object) -> indexOfImpl
-    1104:1110:int lastIndexOfImpl(java.util.List,java.lang.Object) -> lastIndexOfImpl
+    84:84:java.util.ArrayList newArrayList() -> newArrayList
+    100:105:java.util.ArrayList newArrayList(java.lang.Object[]) -> newArrayList
+    109:112:int computeArrayListCapacity(int) -> computeArrayListCapacity
+    127:129:java.util.ArrayList newArrayList(java.lang.Iterable) -> newArrayList
+    146:148:java.util.ArrayList newArrayList(java.util.Iterator) -> newArrayList
+    211:211:java.util.LinkedList newLinkedList() -> newLinkedList
+    223:225:java.util.LinkedList newLinkedList(java.lang.Iterable) -> newLinkedList
+    508:508:java.util.List transform(java.util.List,com.google.common.base.Function) -> transform
+    752:759:java.util.List reverse(java.util.List) -> reverse
+    909:918:boolean equalsImpl(java.util.List,java.lang.Object) -> equalsImpl
+    940:946:int indexOfImpl(java.util.List,java.lang.Object) -> indexOfImpl
+    953:959:int lastIndexOfImpl(java.util.List,java.lang.Object) -> lastIndexOfImpl
 com.google.common.collect.Lists$RandomAccessReverseList -> org.eclipse.xtext.xbase.lib.internal.aq$a:
 com.google.common.collect.Lists$ReverseList -> org.eclipse.xtext.xbase.lib.internal.aq$b:
     java.util.List forwardList -> forwardList
-    889:889:java.util.List getForwardList() -> getForwardList
-    893:895:int reverseIndex(int) -> reverseIndex
-    899:901:int reversePosition(int) -> reversePosition
-    906:907:void add(int,java.lang.Object) -> add
-    911:912:void clear() -> clear
-    916:916:java.lang.Object remove(int) -> remove
-    921:922:void removeRange(int,int) -> removeRange
-    926:926:java.lang.Object set(int,java.lang.Object) -> set
-    931:931:java.lang.Object get(int) -> get
-    936:936:boolean isEmpty() -> isEmpty
-    941:941:int size() -> size
-    946:946:boolean contains(java.lang.Object) -> contains
-    951:951:boolean containsAll(java.util.Collection) -> containsAll
-    956:957:java.util.List subList(int,int) -> subList
-    962:963:int indexOf(java.lang.Object) -> indexOf
-    968:969:int lastIndexOf(java.lang.Object) -> lastIndexOf
-    974:974:java.util.Iterator iterator() -> iterator
-    979:981:java.util.ListIterator listIterator(int) -> listIterator
-    881:881:int access$000(com.google.common.collect.Lists$ReverseList,int) -> access$000
+    771:771:java.util.List getForwardList() -> getForwardList
+    775:777:int reverseIndex(int) -> reverseIndex
+    781:783:int reversePosition(int) -> reversePosition
+    787:788:void add(int,java.lang.Object) -> add
+    791:792:void clear() -> clear
+    795:795:java.lang.Object remove(int) -> remove
+    799:800:void removeRange(int,int) -> removeRange
+    803:803:java.lang.Object set(int,java.lang.Object) -> set
+    807:807:java.lang.Object get(int) -> get
+    811:811:int size() -> size
+    815:816:java.util.List subList(int,int) -> subList
+    821:821:java.util.Iterator iterator() -> iterator
+    825:827:java.util.ListIterator listIterator(int) -> listIterator
+    763:763:int access$000(com.google.common.collect.Lists$ReverseList,int) -> access$000
 com.google.common.collect.Lists$ReverseList$1 -> org.eclipse.xtext.xbase.lib.internal.aq$b$1:
-    boolean canRemove -> canRemove
-    boolean canSet -> canSet
+    boolean canRemoveOrSet -> canRemoveOrSet
     java.util.ListIterator val$forwardIterator -> val$forwardIterator
     com.google.common.collect.Lists$ReverseList this$0 -> this$0
-    987:990:void add(java.lang.Object) -> add
-    993:993:boolean hasNext() -> hasNext
-    997:997:boolean hasPrevious() -> hasPrevious
-    1001:1005:java.lang.Object next() -> next
-    1009:1009:int nextIndex() -> nextIndex
-    1013:1017:java.lang.Object previous() -> previous
-    1021:1021:int previousIndex() -> previousIndex
-    1025:1028:void remove() -> remove
-    1031:1033:void set(java.lang.Object) -> set
+    832:835:void add(java.lang.Object) -> add
+    838:838:boolean hasNext() -> hasNext
+    842:842:boolean hasPrevious() -> hasPrevious
+    846:850:java.lang.Object next() -> next
+    854:854:int nextIndex() -> nextIndex
+    858:862:java.lang.Object previous() -> previous
+    866:866:int previousIndex() -> previousIndex
+    870:873:void remove() -> remove
+    876:878:void set(java.lang.Object) -> set
 com.google.common.collect.Lists$TransformingRandomAccessList -> org.eclipse.xtext.xbase.lib.internal.aq$c:
     java.util.List fromList -> fromList
     com.google.common.base.Function function -> function
-    580:581:void clear() -> clear
-    585:585:java.lang.Object get(int) -> get
-    590:590:boolean isEmpty() -> isEmpty
-    595:595:java.lang.Object remove(int) -> remove
-    600:600:int size() -> size
+    570:571:void clear() -> clear
+    573:573:java.lang.Object get(int) -> get
+    576:576:java.util.Iterator iterator() -> iterator
+    579:579:java.util.ListIterator listIterator(int) -> listIterator
+    587:587:boolean isEmpty() -> isEmpty
+    590:590:java.lang.Object remove(int) -> remove
+    593:593:int size() -> size
+com.google.common.collect.Lists$TransformingRandomAccessList$1 -> org.eclipse.xtext.xbase.lib.internal.aq$c$1:
+    com.google.common.collect.Lists$TransformingRandomAccessList this$0 -> this$0
+    582:582:java.lang.Object transform(java.lang.Object) -> transform
 com.google.common.collect.Lists$TransformingSequentialList -> org.eclipse.xtext.xbase.lib.internal.aq$d:
     java.util.List fromList -> fromList
     com.google.common.base.Function function -> function
-    538:539:void clear() -> clear
-    543:543:int size() -> size
-    548:548:java.util.ListIterator listIterator(int) -> listIterator
+    534:535:void clear() -> clear
+    537:537:int size() -> size
+    540:540:java.util.ListIterator listIterator(int) -> listIterator
 com.google.common.collect.Lists$TransformingSequentialList$1 -> org.eclipse.xtext.xbase.lib.internal.aq$d$1:
     com.google.common.collect.Lists$TransformingSequentialList this$0 -> this$0
-    552:552:java.lang.Object transform(java.lang.Object) -> transform
+    543:543:java.lang.Object transform(java.lang.Object) -> transform
 com.google.common.collect.Maps -> org.eclipse.xtext.xbase.lib.internal.ar:
     com.google.common.base.Joiner$MapJoiner STANDARD_JOINER -> STANDARD_JOINER
-    159:159:java.util.HashMap newHashMapWithExpectedSize(int) -> newHashMapWithExpectedSize
-    168:175:int capacity(int) -> capacity
-    206:206:java.util.LinkedHashMap newLinkedHashMap() -> newLinkedHashMap
-    288:288:java.util.TreeMap newTreeMap(java.util.Comparator) -> newTreeMap
-    1009:1009:java.util.Map$Entry immutableEntry(java.lang.Object,java.lang.Object) -> immutableEntry
-    1270:1270:java.util.Map transformValues(java.util.Map,com.google.common.base.Function) -> transformValues
-    1319:1320:com.google.common.collect.Maps$EntryTransformer asEntryTransformer(com.google.common.base.Function) -> asEntryTransformer
-    1381:1384:java.util.Map transformEntries(java.util.Map,com.google.common.collect.Maps$EntryTransformer) -> transformEntries
-    1441:1441:java.util.SortedMap transformEntries(java.util.SortedMap,com.google.common.collect.Maps$EntryTransformer) -> transformEntries
-    1888:1894:java.util.Map filterEntries(java.util.Map,com.google.common.base.Predicate) -> filterEntries
-    1932:1933:java.util.SortedMap filterEntries(java.util.SortedMap,com.google.common.base.Predicate) -> filterEntries
-    1967:1969:com.google.common.collect.BiMap filterEntries(com.google.common.collect.BiMap,com.google.common.base.Predicate) -> filterEntries
-    1980:1981:java.util.Map filterFiltered(com.google.common.collect.Maps$AbstractFilteredMap,com.google.common.base.Predicate) -> filterFiltered
-    2137:2138:java.util.SortedMap filterFiltered(com.google.common.collect.Maps$FilteredEntrySortedMap,com.google.common.base.Predicate) -> filterFiltered
-    2192:2193:com.google.common.collect.BiMap filterFiltered(com.google.common.collect.Maps$FilteredEntryBiMap,com.google.common.base.Predicate) -> filterFiltered
-    2560:2567:boolean equalsImpl(java.util.Map,java.lang.Object) -> equalsImpl
-    2574:2576:java.lang.String toStringImpl(java.util.Map) -> toStringImpl
-    2599:2599:boolean containsValueImpl(java.util.Map,java.lang.Object) -> containsValueImpl
-    2661:2661:java.util.Iterator valueIterator(java.util.Iterator) -> valueIterator
-    2672:2672:com.google.common.collect.UnmodifiableIterator valueIterator(com.google.common.collect.UnmodifiableIterator) -> valueIterator
+    102:102:com.google.common.base.Function keyFunction() -> keyFunction
+    107:107:com.google.common.base.Function valueFunction() -> valueFunction
+    111:111:java.util.Iterator keyIterator(java.util.Iterator) -> keyIterator
+    115:115:java.util.Iterator valueIterator(java.util.Iterator) -> valueIterator
+    120:120:com.google.common.collect.UnmodifiableIterator valueIterator(com.google.common.collect.UnmodifiableIterator) -> valueIterator
+    193:193:java.util.HashMap newHashMapWithExpectedSize(int) -> newHashMapWithExpectedSize
+    202:209:int capacity(int) -> capacity
+    241:241:java.util.LinkedHashMap newLinkedHashMap() -> newLinkedHashMap
+    325:325:java.util.TreeMap newTreeMap(java.util.Comparator) -> newTreeMap
+    1034:1034:java.util.Map$Entry immutableEntry(java.lang.Object,java.lang.Object) -> immutableEntry
+    1321:1321:java.util.Map transformValues(java.util.Map,com.google.common.base.Function) -> transformValues
+    1422:1425:java.util.Map transformEntries(java.util.Map,com.google.common.collect.Maps$EntryTransformer) -> transformEntries
+    1483:1483:java.util.SortedMap transformEntries(java.util.SortedMap,com.google.common.collect.Maps$EntryTransformer) -> transformEntries
+    1489:1489:java.util.SortedMap transformEntriesIgnoreNavigable(java.util.SortedMap,com.google.common.collect.Maps$EntryTransformer) -> transformEntriesIgnoreNavigable
+    1528:1529:com.google.common.collect.Maps$EntryTransformer asEntryTransformer(com.google.common.base.Function) -> asEntryTransformer
+    1567:1569:java.util.Map$Entry transformEntry(com.google.common.collect.Maps$EntryTransformer,java.util.Map$Entry) -> transformEntry
+    1587:1588:com.google.common.base.Function asEntryToEntryFunction(com.google.common.collect.Maps$EntryTransformer) -> asEntryToEntryFunction
+    1695:1695:com.google.common.base.Predicate keyPredicateOnEntries(com.google.common.base.Predicate) -> keyPredicateOnEntries
+    1699:1699:com.google.common.base.Predicate valuePredicateOnEntries(com.google.common.base.Predicate) -> valuePredicateOnEntries
+    1952:1958:java.util.Map filterEntries(java.util.Map,com.google.common.base.Predicate) -> filterEntries
+    1997:1997:java.util.SortedMap filterEntries(java.util.SortedMap,com.google.common.base.Predicate) -> filterEntries
+    2003:2004:java.util.SortedMap filterSortedIgnoreNavigable(java.util.SortedMap,com.google.common.base.Predicate) -> filterSortedIgnoreNavigable
+    2038:2040:com.google.common.collect.BiMap filterEntries(com.google.common.collect.BiMap,com.google.common.base.Predicate) -> filterEntries
+    2051:2051:java.util.Map filterFiltered(com.google.common.collect.Maps$AbstractFilteredMap,com.google.common.base.Predicate) -> filterFiltered
+    2272:2274:java.util.SortedMap filterFiltered(com.google.common.collect.Maps$FilteredEntrySortedMap,com.google.common.base.Predicate) -> filterFiltered
+    2372:2373:com.google.common.collect.BiMap filterFiltered(com.google.common.collect.Maps$FilteredEntryBiMap,com.google.common.base.Predicate) -> filterFiltered
+    2481:2487:java.lang.Object safeGet(java.util.Map,java.lang.Object) -> safeGet
+    2579:2585:boolean equalsImpl(java.util.Map,java.lang.Object) -> equalsImpl
+    2595:2598:java.lang.String toStringImpl(java.util.Map) -> toStringImpl
 com.google.common.collect.Maps$1 -> org.eclipse.xtext.xbase.lib.internal.ar$1:
-    com.google.common.base.Function val$function -> val$function
-    784:784:java.util.Map$Entry transform(java.lang.Object) -> transform
-    781:781:java.lang.Object transform(java.lang.Object) -> transform
-com.google.common.collect.Maps$5 -> org.eclipse.xtext.xbase.lib.internal.ar$2:
-    com.google.common.base.Function val$function -> val$function
-    1323:1323:java.lang.Object transformEntry(java.lang.Object,java.lang.Object) -> transformEntry
-com.google.common.collect.Maps$7 -> org.eclipse.xtext.xbase.lib.internal.ar$3:
-    2665:2665:java.lang.Object transform(java.util.Map$Entry) -> transform
-    2661:2661:java.lang.Object transform(java.lang.Object) -> transform
-com.google.common.collect.Maps$8 -> org.eclipse.xtext.xbase.lib.internal.ar$4:
     com.google.common.collect.UnmodifiableIterator val$entryIterator -> val$entryIterator
-    2675:2675:boolean hasNext() -> hasNext
-    2679:2679:java.lang.Object next() -> next
+    123:123:boolean hasNext() -> hasNext
+    128:128:java.lang.Object next() -> next
+com.google.common.collect.Maps$10 -> org.eclipse.xtext.xbase.lib.internal.ar$2:
+    com.google.common.collect.Maps$EntryTransformer val$transformer -> val$transformer
+    1591:1591:java.util.Map$Entry apply(java.util.Map$Entry) -> apply
+    1588:1588:java.lang.Object apply(java.lang.Object) -> apply
+com.google.common.collect.Maps$6 -> org.eclipse.xtext.xbase.lib.internal.ar$3:
+    com.google.common.base.Function val$function -> val$function
+    1532:1532:java.lang.Object transformEntry(java.lang.Object,java.lang.Object) -> transformEntry
+com.google.common.collect.Maps$9 -> org.eclipse.xtext.xbase.lib.internal.ar$4:
+    java.util.Map$Entry val$entry -> val$entry
+    com.google.common.collect.Maps$EntryTransformer val$transformer -> val$transformer
+    1572:1572:java.lang.Object getKey() -> getKey
+    1577:1577:java.lang.Object getValue() -> getValue
 com.google.common.collect.Maps$AbstractFilteredMap -> org.eclipse.xtext.xbase.lib.internal.ar$a:
     java.util.Map unfiltered -> unfiltered
     com.google.common.base.Predicate predicate -> predicate
-    java.util.Collection values -> values
-    1997:1998:boolean apply(java.lang.Object,java.lang.Object) -> apply
-    2003:2004:java.lang.Object put(java.lang.Object,java.lang.Object) -> put
-    2009:2013:void putAll(java.util.Map) -> putAll
-    2017:2017:boolean containsKey(java.lang.Object) -> containsKey
-    2022:2023:java.lang.Object get(java.lang.Object) -> get
-    2028:2028:boolean isEmpty() -> isEmpty
-    2033:2033:java.lang.Object remove(java.lang.Object) -> remove
-    2040:2041:java.util.Collection values() -> values
-com.google.common.collect.Maps$AbstractFilteredMap$Values -> org.eclipse.xtext.xbase.lib.internal.ar$a$a:
-    com.google.common.collect.Maps$AbstractFilteredMap this$0 -> this$0
-    2047:2048:java.util.Iterator iterator() -> iterator
-    2062:2062:int size() -> size
-    2067:2068:void clear() -> clear
-    2072:2072:boolean isEmpty() -> isEmpty
-    2077:2085:boolean remove(java.lang.Object) -> remove
-    2090:2100:boolean removeAll(java.util.Collection) -> removeAll
-    2105:2115:boolean retainAll(java.util.Collection) -> retainAll
-    2121:2121:java.lang.Object[] toArray() -> toArray
-    2126:2126:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-com.google.common.collect.Maps$AbstractFilteredMap$Values$1 -> org.eclipse.xtext.xbase.lib.internal.ar$a$a$1:
-    java.util.Iterator val$entryIterator -> val$entryIterator
-    com.google.common.collect.Maps$AbstractFilteredMap$Values this$1 -> this$1
-    2051:2051:boolean hasNext() -> hasNext
-    2055:2055:java.lang.Object next() -> next
+    2070:2071:boolean apply(java.lang.Object,java.lang.Object) -> apply
+    2075:2076:java.lang.Object put(java.lang.Object,java.lang.Object) -> put
+    2080:2084:void putAll(java.util.Map) -> putAll
+    2087:2087:boolean containsKey(java.lang.Object) -> containsKey
+    2091:2092:java.lang.Object get(java.lang.Object) -> get
+    2096:2096:boolean isEmpty() -> isEmpty
+    2100:2100:java.lang.Object remove(java.lang.Object) -> remove
+    2105:2105:java.util.Collection createValues() -> createValues
+com.google.common.collect.Maps$EntryFunction -> org.eclipse.xtext.xbase.lib.internal.ar$j:
+    com.google.common.collect.Maps$EntryFunction KEY -> KEY
+    com.google.common.collect.Maps$EntryFunction VALUE -> VALUE
+    com.google.common.collect.Maps$EntryFunction[] $VALUES -> $VALUES
+com.google.common.collect.Maps$EntryFunction$1 -> org.eclipse.xtext.xbase.lib.internal.ar$j$1:
+    88:88:java.lang.Object apply(java.util.Map$Entry) -> apply
+    84:84:java.lang.Object apply(java.lang.Object) -> apply
+com.google.common.collect.Maps$EntryFunction$2 -> org.eclipse.xtext.xbase.lib.internal.ar$j$2:
+    95:95:java.lang.Object apply(java.util.Map$Entry) -> apply
+    91:91:java.lang.Object apply(java.lang.Object) -> apply
 com.google.common.collect.Maps$EntrySet -> org.eclipse.xtext.xbase.lib.internal.ar$b:
     java.util.Map map() -> map
-    2763:2763:int size() -> size
-    2768:2769:void clear() -> clear
-    2773:2779:boolean contains(java.lang.Object) -> contains
-    2784:2784:boolean isEmpty() -> isEmpty
-    2789:2793:boolean remove(java.lang.Object) -> remove
-    2799:2806:boolean removeAll(java.util.Collection) -> removeAll
-    2813:2823:boolean retainAll(java.util.Collection) -> retainAll
+    2781:2781:int size() -> size
+    2785:2786:void clear() -> clear
+    2789:2796:boolean contains(java.lang.Object) -> contains
+    2800:2800:boolean isEmpty() -> isEmpty
+    2804:2808:boolean remove(java.lang.Object) -> remove
+    2813:2816:boolean removeAll(java.util.Collection) -> removeAll
+    2822:2832:boolean retainAll(java.util.Collection) -> retainAll
 com.google.common.collect.Maps$EntryTransformer -> org.eclipse.xtext.xbase.lib.internal.ar$c:
     java.lang.Object transformEntry(java.lang.Object,java.lang.Object) -> transformEntry
 com.google.common.collect.Maps$FilteredEntryBiMap -> org.eclipse.xtext.xbase.lib.internal.ar$d:
     com.google.common.collect.BiMap inverse -> inverse
-    2201:2201:com.google.common.base.Predicate inversePredicate(com.google.common.base.Predicate) -> inversePredicate
-    2222:2222:com.google.common.collect.BiMap unfiltered() -> unfiltered
-    2231:2231:com.google.common.collect.BiMap inverse() -> inverse
-    2236:2236:java.util.Set values() -> values
-    2196:2196:java.util.Collection values() -> values
+    2382:2382:com.google.common.base.Predicate inversePredicate(com.google.common.base.Predicate) -> inversePredicate
+    2406:2406:com.google.common.collect.BiMap unfiltered() -> unfiltered
+    2417:2417:com.google.common.collect.BiMap inverse() -> inverse
+    2422:2422:java.util.Set values() -> values
+    2376:2376:java.util.Collection values() -> values
 com.google.common.collect.Maps$FilteredEntryBiMap$1 -> org.eclipse.xtext.xbase.lib.internal.ar$d$1:
     com.google.common.base.Predicate val$forwardPredicate -> val$forwardPredicate
-    2204:2204:boolean apply(java.util.Map$Entry) -> apply
-    2201:2201:boolean apply(java.lang.Object) -> apply
+    2385:2385:boolean apply(java.util.Map$Entry) -> apply
+    2382:2382:boolean apply(java.lang.Object) -> apply
 com.google.common.collect.Maps$FilteredEntryMap -> org.eclipse.xtext.xbase.lib.internal.ar$e:
     java.util.Set filteredEntrySet -> filteredEntrySet
-    java.util.Set entrySet -> entrySet
-    java.util.Set keySet -> keySet
-    2291:2292:java.util.Set entrySet() -> entrySet
-    2333:2334:java.util.Set keySet() -> keySet
-    2338:2338:java.util.Set createKeySet() -> createKeySet
+    2192:2192:java.util.Set createEntrySet() -> createEntrySet
+    2223:2223:java.util.Set createKeySet() -> createKeySet
 com.google.common.collect.Maps$FilteredEntryMap$EntrySet -> org.eclipse.xtext.xbase.lib.internal.ar$e$a:
     com.google.common.collect.Maps$FilteredEntryMap this$0 -> this$0
-    2298:2298:java.util.Set delegate() -> delegate
-    2303:2304:java.util.Iterator iterator() -> iterator
-    2295:2295:java.util.Collection delegate() -> delegate
-    2295:2295:java.lang.Object delegate() -> delegate
+    2197:2197:java.util.Set delegate() -> delegate
+    2201:2201:java.util.Iterator iterator() -> iterator
+    2195:2195:java.util.Collection delegate() -> delegate
+    2195:2195:java.lang.Object delegate() -> delegate
 com.google.common.collect.Maps$FilteredEntryMap$EntrySet$1 -> org.eclipse.xtext.xbase.lib.internal.ar$e$a$1:
-    java.util.Iterator val$iterator -> val$iterator
     com.google.common.collect.Maps$FilteredEntryMap$EntrySet this$1 -> this$1
-    2307:2307:boolean hasNext() -> hasNext
-    2311:2312:java.util.Map$Entry next() -> next
-    2304:2304:java.lang.Object next() -> next
+    2204:2204:java.util.Map$Entry transform(java.util.Map$Entry) -> transform
+    2201:2201:java.lang.Object transform(java.lang.Object) -> transform
 com.google.common.collect.Maps$FilteredEntryMap$EntrySet$1$1 -> org.eclipse.xtext.xbase.lib.internal.ar$e$a$1$1:
     java.util.Map$Entry val$entry -> val$entry
     com.google.common.collect.Maps$FilteredEntryMap$EntrySet$1 this$2 -> this$2
-    2315:2315:java.util.Map$Entry delegate() -> delegate
-    2320:2321:java.lang.Object setValue(java.lang.Object) -> setValue
-    2312:2312:java.lang.Object delegate() -> delegate
+    2207:2207:java.util.Map$Entry delegate() -> delegate
+    2212:2213:java.lang.Object setValue(java.lang.Object) -> setValue
+    2204:2204:java.lang.Object delegate() -> delegate
 com.google.common.collect.Maps$FilteredEntryMap$KeySet -> org.eclipse.xtext.xbase.lib.internal.ar$e$b:
     com.google.common.collect.Maps$FilteredEntryMap this$0 -> this$0
-    2344:2345:java.util.Iterator iterator() -> iterator
-    2359:2359:int size() -> size
-    2364:2365:void clear() -> clear
-    2369:2369:boolean contains(java.lang.Object) -> contains
-    2374:2378:boolean remove(java.lang.Object) -> remove
-    2383:2393:boolean retainAll(java.util.Collection) -> retainAll
-    2399:2399:java.lang.Object[] toArray() -> toArray
-    2404:2404:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-com.google.common.collect.Maps$FilteredEntryMap$KeySet$1 -> org.eclipse.xtext.xbase.lib.internal.ar$e$b$1:
-    java.util.Iterator val$iterator -> val$iterator
-    com.google.common.collect.Maps$FilteredEntryMap$KeySet this$1 -> this$1
-    2348:2348:boolean hasNext() -> hasNext
-    2352:2352:java.lang.Object next() -> next
+    2232:2236:boolean remove(java.lang.Object) -> remove
+    2240:2240:boolean removeIf(com.google.common.base.Predicate) -> removeIf
+    2246:2246:boolean removeAll(java.util.Collection) -> removeAll
+    2251:2251:boolean retainAll(java.util.Collection) -> retainAll
+    2256:2256:java.lang.Object[] toArray() -> toArray
+    2260:2260:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
 com.google.common.collect.Maps$FilteredEntrySortedMap -> org.eclipse.xtext.xbase.lib.internal.ar$f:
-    2149:2149:java.util.SortedMap sortedMap() -> sortedMap
-    2153:2153:java.util.Comparator comparator() -> comparator
-    2158:2158:java.lang.Object firstKey() -> firstKey
-    2162:2170:java.lang.Object lastKey() -> lastKey
-    2174:2174:java.util.SortedMap headMap(java.lang.Object) -> headMap
-    2178:2178:java.util.SortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
-    2182:2182:java.util.SortedMap tailMap(java.lang.Object) -> tailMap
+    2286:2286:java.util.SortedMap sortedMap() -> sortedMap
+    2290:2290:java.util.SortedSet keySet() -> keySet
+    2295:2295:java.util.SortedSet createKeySet() -> createKeySet
+    2331:2331:java.util.Comparator comparator() -> comparator
+    2336:2336:java.lang.Object firstKey() -> firstKey
+    2340:2348:java.lang.Object lastKey() -> lastKey
+    2352:2352:java.util.SortedMap headMap(java.lang.Object) -> headMap
+    2356:2356:java.util.SortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
+    2361:2361:java.util.SortedMap tailMap(java.lang.Object) -> tailMap
+    2277:2277:java.util.Set createKeySet() -> createKeySet
+    2277:2277:java.util.Set keySet() -> keySet
+com.google.common.collect.Maps$FilteredEntrySortedMap$SortedKeySet -> org.eclipse.xtext.xbase.lib.internal.ar$f$a:
+    com.google.common.collect.Maps$FilteredEntrySortedMap this$0 -> this$0
+    2301:2301:java.util.Comparator comparator() -> comparator
+    2306:2306:java.util.SortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
+    2311:2311:java.util.SortedSet headSet(java.lang.Object) -> headSet
+    2316:2316:java.util.SortedSet tailSet(java.lang.Object) -> tailSet
+    2321:2321:java.lang.Object first() -> first
+    2326:2326:java.lang.Object last() -> last
+com.google.common.collect.Maps$FilteredMapValues -> org.eclipse.xtext.xbase.lib.internal.ar$k:
+    java.util.Map unfiltered -> unfiltered
+    com.google.common.base.Predicate predicate -> predicate
+    2121:2121:boolean remove(java.lang.Object) -> remove
+    2127:2127:boolean removeIf(com.google.common.base.Predicate) -> removeIf
+    2132:2132:boolean removeAll(java.util.Collection) -> removeAll
+    2136:2136:boolean retainAll(java.util.Collection) -> retainAll
+    2141:2141:java.lang.Object[] toArray() -> toArray
+    2145:2145:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+com.google.common.collect.Maps$ImprovedAbstractMap -> org.eclipse.xtext.xbase.lib.internal.ar$l:
+    java.util.Set entrySet -> entrySet
+    java.util.Set keySet -> keySet
+    java.util.Collection values -> values
+    java.util.Set createEntrySet() -> createEntrySet
+    2449:2450:java.util.Set entrySet() -> entrySet
+    2456:2457:java.util.Set keySet() -> keySet
+    2461:2461:java.util.Set createKeySet() -> createKeySet
+    2467:2468:java.util.Collection values() -> values
+    2472:2472:java.util.Collection createValues() -> createValues
+com.google.common.collect.Maps$KeySet -> org.eclipse.xtext.xbase.lib.internal.ar$m:
+    java.util.Map map -> map
+    2619:2619:java.util.Map map() -> map
+    2623:2623:java.util.Iterator iterator() -> iterator
+    2627:2627:int size() -> size
+    2631:2631:boolean isEmpty() -> isEmpty
+    2635:2635:boolean contains(java.lang.Object) -> contains
+    2639:2643:boolean remove(java.lang.Object) -> remove
+    2647:2648:void clear() -> clear
 com.google.common.collect.Maps$TransformedEntriesMap -> org.eclipse.xtext.xbase.lib.internal.ar$g:
     java.util.Map fromMap -> fromMap
     com.google.common.collect.Maps$EntryTransformer transformer -> transformer
-    java.util.Set entrySet -> entrySet
-    java.util.Collection values -> values
-    1487:1487:int size() -> size
-    1492:1492:boolean containsKey(java.lang.Object) -> containsKey
-    1499:1500:java.lang.Object get(java.lang.Object) -> get
-    1508:1508:java.lang.Object remove(java.lang.Object) -> remove
-    1514:1515:void clear() -> clear
-    1519:1519:java.util.Set keySet() -> keySet
-    1526:1558:java.util.Set entrySet() -> entrySet
-    1565:1574:java.util.Collection values() -> values
+    1609:1609:int size() -> size
+    1613:1613:boolean containsKey(java.lang.Object) -> containsKey
+    1619:1620:java.lang.Object get(java.lang.Object) -> get
+    1628:1628:java.lang.Object remove(java.lang.Object) -> remove
+    1634:1635:void clear() -> clear
+    1638:1638:java.util.Set keySet() -> keySet
+    1643:1643:java.util.Set createEntrySet() -> createEntrySet
 com.google.common.collect.Maps$TransformedEntriesMap$1 -> org.eclipse.xtext.xbase.lib.internal.ar$g$1:
     com.google.common.collect.Maps$TransformedEntriesMap this$0 -> this$0
-    1531:1531:java.util.Map map() -> map
-    1536:1536:java.util.Iterator iterator() -> iterator
-com.google.common.collect.Maps$TransformedEntriesMap$1$1 -> org.eclipse.xtext.xbase.lib.internal.ar$g$1$1:
-    com.google.common.collect.Maps$TransformedEntriesMap$1 this$1 -> this$1
-    1541:1541:java.util.Map$Entry transform(java.util.Map$Entry) -> transform
-    1537:1537:java.lang.Object transform(java.lang.Object) -> transform
-com.google.common.collect.Maps$TransformedEntriesMap$1$1$1 -> org.eclipse.xtext.xbase.lib.internal.ar$g$1$1$1:
-    java.util.Map$Entry val$entry -> val$entry
-    com.google.common.collect.Maps$TransformedEntriesMap$1$1 this$2 -> this$2
-    1545:1545:java.lang.Object getKey() -> getKey
-    1550:1550:java.lang.Object getValue() -> getValue
-com.google.common.collect.Maps$TransformedEntriesMap$2 -> org.eclipse.xtext.xbase.lib.internal.ar$g$2:
-    com.google.common.collect.Maps$TransformedEntriesMap this$0 -> this$0
-    1570:1570:java.util.Map map() -> map
+    1645:1645:java.util.Map map() -> map
+    1649:1649:java.util.Iterator iterator() -> iterator
 com.google.common.collect.Maps$TransformedEntriesSortedMap -> org.eclipse.xtext.xbase.lib.internal.ar$h:
-    1582:1582:java.util.SortedMap fromMap() -> fromMap
-    1591:1591:java.util.Comparator comparator() -> comparator
-    1595:1595:java.lang.Object firstKey() -> firstKey
-    1599:1599:java.util.SortedMap headMap(java.lang.Object) -> headMap
-    1603:1603:java.lang.Object lastKey() -> lastKey
-    1607:1607:java.util.SortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
-    1611:1611:java.util.SortedMap tailMap(java.lang.Object) -> tailMap
+    1660:1660:java.util.SortedMap fromMap() -> fromMap
+    1669:1669:java.util.Comparator comparator() -> comparator
+    1673:1673:java.lang.Object firstKey() -> firstKey
+    1677:1677:java.util.SortedMap headMap(java.lang.Object) -> headMap
+    1681:1681:java.lang.Object lastKey() -> lastKey
+    1685:1685:java.util.SortedMap subMap(java.lang.Object,java.lang.Object) -> subMap
+    1690:1690:java.util.SortedMap tailMap(java.lang.Object) -> tailMap
 com.google.common.collect.Maps$Values -> org.eclipse.xtext.xbase.lib.internal.ar$i:
-    java.util.Map map() -> map
-    2689:2689:java.util.Iterator iterator() -> iterator
-    2695:2703:boolean remove(java.lang.Object) -> remove
-    2710:2718:boolean removeAll(java.util.Collection) -> removeAll
-    2725:2733:boolean retainAll(java.util.Collection) -> retainAll
-    2739:2739:int size() -> size
-    2744:2744:boolean isEmpty() -> isEmpty
-    2749:2749:boolean contains(java.lang.Object) -> contains
-    2754:2755:void clear() -> clear
+    java.util.Map map -> map
+    2710:2710:java.util.Map map() -> map
+    2714:2714:java.util.Iterator iterator() -> iterator
+    2719:2727:boolean remove(java.lang.Object) -> remove
+    2733:2741:boolean removeAll(java.util.Collection) -> removeAll
+    2747:2755:boolean retainAll(java.util.Collection) -> retainAll
+    2760:2760:int size() -> size
+    2764:2764:boolean isEmpty() -> isEmpty
+    2768:2768:boolean contains(java.lang.Object) -> contains
+    2772:2773:void clear() -> clear
 com.google.common.collect.Multiset -> org.eclipse.xtext.xbase.lib.internal.as:
     java.util.Set elementSet() -> elementSet
 com.google.common.collect.NaturalOrdering -> org.eclipse.xtext.xbase.lib.internal.at:
     com.google.common.collect.NaturalOrdering INSTANCE -> INSTANCE
-    36:42:int compare(java.lang.Comparable,java.lang.Comparable) -> compare
-    71:71:java.lang.String toString() -> toString
-    28:28:int compare(java.lang.Object,java.lang.Object) -> compare
+    33:35:int compare(java.lang.Comparable,java.lang.Comparable) -> compare
+    48:48:java.lang.String toString() -> toString
+    26:26:int compare(java.lang.Object,java.lang.Object) -> compare
 com.google.common.collect.ObjectArrays -> org.eclipse.xtext.xbase.lib.internal.au:
     java.lang.Object[] EMPTY_ARRAY -> EMPTY_ARRAY
-    48:48:java.lang.Object[] newArray(java.lang.Class,int) -> newArray
-    59:59:java.lang.Object[] newArray(java.lang.Object[],int) -> newArray
-    110:112:java.lang.Object[] arraysCopyOf(java.lang.Object[],int) -> arraysCopyOf
-    140:148:java.lang.Object[] toArrayImpl(java.util.Collection,java.lang.Object[]) -> toArrayImpl
-    166:166:java.lang.Object[] toArrayImpl(java.util.Collection) -> toArrayImpl
-    170:174:java.lang.Object[] fillArray(java.lang.Iterable,java.lang.Object[]) -> fillArray
-    189:192:java.lang.Object checkElementNotNull(java.lang.Object,int) -> checkElementNotNull
+    50:50:java.lang.Object[] newArray(java.lang.Class,int) -> newArray
+    61:61:java.lang.Object[] newArray(java.lang.Object[],int) -> newArray
+    112:115:java.lang.Object[] arraysCopyOf(java.lang.Object[],int) -> arraysCopyOf
+    226:226:java.lang.Object[] checkElementsNotNull(java.lang.Object[]) -> checkElementsNotNull
+    230:233:java.lang.Object[] checkElementsNotNull(java.lang.Object[],int) -> checkElementsNotNull
+    239:242:java.lang.Object checkElementNotNull(java.lang.Object,int) -> checkElementNotNull
 com.google.common.collect.Ordering -> org.eclipse.xtext.xbase.lib.internal.av:
-    90:90:com.google.common.collect.Ordering natural() -> natural
+    106:106:com.google.common.collect.Ordering natural() -> natural
+    124:124:com.google.common.collect.Ordering from(java.util.Comparator) -> from
+    367:367:com.google.common.collect.Ordering onResultOf(com.google.common.base.Function) -> onResultOf
+    371:371:com.google.common.collect.Ordering onKeys() -> onKeys
+    int compare(java.lang.Object,java.lang.Object) -> compare
+com.google.common.collect.PeekingIterator -> org.eclipse.xtext.xbase.lib.internal.bt:
+    java.lang.Object peek() -> peek
+    java.lang.Object next() -> next
 com.google.common.collect.Platform -> org.eclipse.xtext.xbase.lib.internal.aw:
     46:52:java.lang.Object[] newArray(java.lang.Object[],int) -> newArray
+    72:72:java.util.SortedMap mapsTransformEntriesSortedMap(java.util.SortedMap,com.google.common.collect.Maps$EntryTransformer) -> mapsTransformEntriesSortedMap
+    82:82:java.util.SortedSet setsFilterSortedSet(java.util.SortedSet,com.google.common.base.Predicate) -> setsFilterSortedSet
+    87:87:java.util.SortedMap mapsFilterSortedMap(java.util.SortedMap,com.google.common.base.Predicate) -> mapsFilterSortedMap
 com.google.common.collect.RegularImmutableAsList -> org.eclipse.xtext.xbase.lib.internal.ax:
     com.google.common.collect.ImmutableCollection delegate -> delegate
     com.google.common.collect.ImmutableList delegateList -> delegateList
     45:45:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
-    56:56:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
-    61:61:java.lang.Object[] toArray() -> toArray
-    66:66:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    71:71:int indexOf(java.lang.Object) -> indexOf
-    76:76:int lastIndexOf(java.lang.Object) -> lastIndexOf
-    81:81:boolean equals(java.lang.Object) -> equals
-    86:86:int hashCode() -> hashCode
-    90:90:java.lang.Object get(int) -> get
-    27:27:java.util.ListIterator listIterator(int) -> listIterator
+    55:55:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
+    61:61:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
+    66:66:java.lang.Object get(int) -> get
+    28:28:java.util.ListIterator listIterator(int) -> listIterator
 com.google.common.collect.RegularImmutableList -> org.eclipse.xtext.xbase.lib.internal.ay:
     int offset -> offset
     int size -> size
     java.lang.Object[] array -> array
-    50:50:int size() -> size
-    55:55:boolean isEmpty() -> isEmpty
-    60:60:boolean isPartialView() -> isPartialView
-    65:67:java.lang.Object[] toArray() -> toArray
-    72:78:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    85:86:java.lang.Object get(int) -> get
-    91:91:com.google.common.collect.ImmutableList subListUnchecked(int,int) -> subListUnchecked
-    99:99:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
-    104:131:boolean equals(java.lang.Object) -> equals
-    136:141:java.lang.String toString() -> toString
-    31:31:java.util.ListIterator listIterator(int) -> listIterator
+    48:48:int size() -> size
+    52:52:boolean isPartialView() -> isPartialView
+    57:58:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
+    65:66:java.lang.Object get(int) -> get
+    71:79:int indexOf(java.lang.Object) -> indexOf
+    84:92:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    97:97:com.google.common.collect.ImmutableList subListUnchecked(int,int) -> subListUnchecked
+    106:106:com.google.common.collect.UnmodifiableListIterator listIterator(int) -> listIterator
+    29:29:java.util.ListIterator listIterator(int) -> listIterator
 com.google.common.collect.RegularImmutableMap -> org.eclipse.xtext.xbase.lib.internal.az:
-    com.google.common.collect.RegularImmutableMap$LinkedEntry[] entries -> entries
-    com.google.common.collect.RegularImmutableMap$LinkedEntry[] table -> table
+    com.google.common.collect.ImmutableMapEntry[] entries -> entries
+    com.google.common.collect.ImmutableMapEntry[] table -> table
     int mask -> mask
-    88:88:com.google.common.collect.RegularImmutableMap$LinkedEntry[] createEntryArray(int) -> createEntryArray
-    93:93:com.google.common.collect.RegularImmutableMap$LinkedEntry newLinkedEntry(java.lang.Object,java.lang.Object,com.google.common.collect.RegularImmutableMap$LinkedEntry) -> newLinkedEntry
-    142:159:java.lang.Object get(java.lang.Object) -> get
-    163:163:int size() -> size
-    168:168:boolean isEmpty() -> isEmpty
-    173:181:boolean containsValue(java.lang.Object) -> containsValue
-    186:186:boolean isPartialView() -> isPartialView
-    191:191:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
-    34:34:com.google.common.collect.RegularImmutableMap$LinkedEntry[] access$100(com.google.common.collect.RegularImmutableMap) -> access$100
+    103:106:void checkNoConflictInBucket(java.lang.Object,com.google.common.collect.ImmutableMapEntry,com.google.common.collect.ImmutableMapEntry) -> checkNoConflictInBucket
+    148:148:com.google.common.collect.ImmutableMapEntry[] createEntryArray(int) -> createEntryArray
+    152:171:java.lang.Object get(java.lang.Object) -> get
+    176:176:int size() -> size
+    180:180:boolean isPartialView() -> isPartialView
+    185:185:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    34:34:com.google.common.collect.ImmutableMapEntry[] access$100(com.google.common.collect.RegularImmutableMap) -> access$100
 com.google.common.collect.RegularImmutableMap$1 -> org.eclipse.xtext.xbase.lib.internal.az$1:
 com.google.common.collect.RegularImmutableMap$EntrySet -> org.eclipse.xtext.xbase.lib.internal.az$a:
     com.google.common.collect.RegularImmutableMap this$0 -> this$0
-    199:199:com.google.common.collect.ImmutableMap map() -> map
-    204:204:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    209:209:com.google.common.collect.ImmutableList createAsList() -> createAsList
-    194:194:java.util.Iterator iterator() -> iterator
-com.google.common.collect.RegularImmutableMap$LinkedEntry -> org.eclipse.xtext.xbase.lib.internal.az$b:
-    com.google.common.collect.RegularImmutableMap$LinkedEntry next() -> next
-com.google.common.collect.RegularImmutableMap$NonTerminalEntry -> org.eclipse.xtext.xbase.lib.internal.az$c:
-    com.google.common.collect.RegularImmutableMap$LinkedEntry next -> next
-    117:117:com.google.common.collect.RegularImmutableMap$LinkedEntry next() -> next
-com.google.common.collect.RegularImmutableMap$TerminalEntry -> org.eclipse.xtext.xbase.lib.internal.az$d:
-    136:136:com.google.common.collect.RegularImmutableMap$LinkedEntry next() -> next
+    191:191:com.google.common.collect.ImmutableMap map() -> map
+    196:196:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    201:201:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    188:188:java.util.Iterator iterator() -> iterator
+com.google.common.collect.RegularImmutableMap$NonTerminalMapEntry -> org.eclipse.xtext.xbase.lib.internal.az$b:
+    com.google.common.collect.ImmutableMapEntry nextInKeyBucket -> nextInKeyBucket
+    123:123:com.google.common.collect.ImmutableMapEntry getNextInKeyBucket() -> getNextInKeyBucket
 com.google.common.collect.RegularImmutableSet -> org.eclipse.xtext.xbase.lib.internal.ba:
+    java.lang.Object[] elements -> elements
     java.lang.Object[] table -> table
     int mask -> mask
     int hashCode -> hashCode
-    48:57:boolean contains(java.lang.Object) -> contains
-    64:64:int hashCode() -> hashCode
-    69:69:boolean isHashCodeFast() -> isHashCodeFast
+    46:55:boolean contains(java.lang.Object) -> contains
+    62:62:int size() -> size
+    68:68:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    73:74:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
+    79:79:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    84:84:boolean isPartialView() -> isPartialView
+    88:88:int hashCode() -> hashCode
+    92:92:boolean isHashCodeFast() -> isHashCodeFast
+    27:27:java.util.Iterator iterator() -> iterator
 com.google.common.collect.RegularImmutableSortedMap -> org.eclipse.xtext.xbase.lib.internal.bb:
     com.google.common.collect.RegularImmutableSortedSet keySet -> keySet
     com.google.common.collect.ImmutableList valueList -> valueList
-    49:49:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
-    84:84:com.google.common.collect.ImmutableSortedSet keySet() -> keySet
-    89:89:com.google.common.collect.ImmutableCollection values() -> values
-    94:95:java.lang.Object get(java.lang.Object) -> get
-    99:104:com.google.common.collect.ImmutableSortedMap getSubMap(int,int) -> getSubMap
-    110:110:com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object,boolean) -> headMap
-    115:115:com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object,boolean) -> tailMap
+    51:51:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    86:86:com.google.common.collect.ImmutableSortedSet keySet() -> keySet
+    91:91:com.google.common.collect.ImmutableCollection values() -> values
+    96:97:java.lang.Object get(java.lang.Object) -> get
+    101:106:com.google.common.collect.ImmutableSortedMap getSubMap(int,int) -> getSubMap
+    114:114:com.google.common.collect.ImmutableSortedMap headMap(java.lang.Object,boolean) -> headMap
+    119:119:com.google.common.collect.ImmutableSortedMap tailMap(java.lang.Object,boolean) -> tailMap
     29:29:java.util.Collection values() -> values
     29:29:java.util.Set keySet() -> keySet
     29:29:com.google.common.collect.ImmutableSet keySet() -> keySet
@@ -1075,65 +1092,65 @@ com.google.common.collect.RegularImmutableSortedMap -> org.eclipse.xtext.xbase.l
 com.google.common.collect.RegularImmutableSortedMap$1 -> org.eclipse.xtext.xbase.lib.internal.bb$1:
 com.google.common.collect.RegularImmutableSortedMap$EntrySet -> org.eclipse.xtext.xbase.lib.internal.bb$a:
     com.google.common.collect.RegularImmutableSortedMap this$0 -> this$0
-    56:56:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    61:61:com.google.common.collect.ImmutableList createAsList() -> createAsList
-    78:78:com.google.common.collect.ImmutableMap map() -> map
-    52:52:java.util.Iterator iterator() -> iterator
+    57:57:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    62:62:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    80:80:com.google.common.collect.ImmutableMap map() -> map
+    54:54:java.util.Iterator iterator() -> iterator
 com.google.common.collect.RegularImmutableSortedMap$EntrySet$1 -> org.eclipse.xtext.xbase.lib.internal.bb$a$1:
     com.google.common.collect.ImmutableList keyList -> keyList
     com.google.common.collect.RegularImmutableSortedMap$EntrySet this$1 -> this$1
-    66:66:java.util.Map$Entry get(int) -> get
-    71:71:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
-    61:61:java.lang.Object get(int) -> get
+    68:68:java.util.Map$Entry get(int) -> get
+    73:73:com.google.common.collect.ImmutableCollection delegateCollection() -> delegateCollection
+    62:62:java.lang.Object get(int) -> get
 com.google.common.collect.RegularImmutableSortedSet -> org.eclipse.xtext.xbase.lib.internal.bc:
     com.google.common.collect.ImmutableList elements -> elements
     60:60:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    66:66:com.google.common.collect.UnmodifiableIterator descendingIterator() -> descendingIterator
-    71:71:boolean isEmpty() -> isEmpty
-    75:75:int size() -> size
-    80:82:boolean contains(java.lang.Object) -> contains
-    92:129:boolean containsAll(java.util.Collection) -> containsAll
-    133:133:int unsafeBinarySearch(java.lang.Object) -> unsafeBinarySearch
-    138:138:boolean isPartialView() -> isPartialView
-    143:143:java.lang.Object[] toArray() -> toArray
-    148:148:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    153:183:boolean equals(java.lang.Object) -> equals
-    188:188:java.lang.Object first() -> first
-    193:193:java.lang.Object last() -> last
-    222:222:com.google.common.collect.ImmutableSortedSet headSetImpl(java.lang.Object,boolean) -> headSetImpl
-    226:226:int headIndex(java.lang.Object,boolean) -> headIndex
-    233:233:com.google.common.collect.ImmutableSortedSet subSetImpl(java.lang.Object,boolean,java.lang.Object,boolean) -> subSetImpl
+    65:65:com.google.common.collect.UnmodifiableIterator descendingIterator() -> descendingIterator
+    69:69:boolean isEmpty() -> isEmpty
+    74:74:int size() -> size
+    79:81:boolean contains(java.lang.Object) -> contains
+    90:133:boolean containsAll(java.util.Collection) -> containsAll
+    137:137:int unsafeBinarySearch(java.lang.Object) -> unsafeBinarySearch
+    141:141:boolean isPartialView() -> isPartialView
+    146:146:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
+    150:181:boolean equals(java.lang.Object) -> equals
+    186:186:java.lang.Object first() -> first
+    191:191:java.lang.Object last() -> last
+    220:220:com.google.common.collect.ImmutableSortedSet headSetImpl(java.lang.Object,boolean) -> headSetImpl
+    224:224:int headIndex(java.lang.Object,boolean) -> headIndex
+    232:232:com.google.common.collect.ImmutableSortedSet subSetImpl(java.lang.Object,boolean,java.lang.Object,boolean) -> subSetImpl
     238:238:com.google.common.collect.ImmutableSortedSet tailSetImpl(java.lang.Object,boolean) -> tailSetImpl
     242:242:int tailIndex(java.lang.Object,boolean) -> tailIndex
-    251:251:java.util.Comparator unsafeComparator() -> unsafeComparator
-    255:261:com.google.common.collect.ImmutableSortedSet getSubSet(int,int) -> getSubSet
-    267:277:int indexOf(java.lang.Object) -> indexOf
-    282:282:com.google.common.collect.ImmutableList createAsList() -> createAsList
+    254:254:java.util.Comparator unsafeComparator() -> unsafeComparator
+    258:264:com.google.common.collect.ImmutableSortedSet getSubSet(int,int) -> getSubSet
+    269:279:int indexOf(java.lang.Object) -> indexOf
+    283:283:com.google.common.collect.ImmutableList createAsList() -> createAsList
     46:46:java.util.Iterator iterator() -> iterator
 com.google.common.collect.Sets -> org.eclipse.xtext.xbase.lib.internal.bd:
-    163:163:java.util.HashSet newHashSet() -> newHashSet
-    181:183:java.util.HashSet newHashSet(java.lang.Object[]) -> newHashSet
-    200:200:java.util.HashSet newHashSetWithExpectedSize(int) -> newHashSetWithExpectedSize
-    217:217:java.util.HashSet newHashSet(java.lang.Iterable) -> newHashSet
-    235:239:java.util.HashSet newHashSet(java.util.Iterator) -> newHashSet
-    253:253:java.util.LinkedHashSet newLinkedHashSet() -> newLinkedHashSet
-    286:293:java.util.LinkedHashSet newLinkedHashSet(java.lang.Iterable) -> newLinkedHashSet
-    831:842:java.util.Set filter(java.util.Set,com.google.common.base.Predicate) -> filter
-    891:899:java.util.SortedSet filter(java.util.SortedSet,com.google.common.base.Predicate) -> filter
-    1283:1290:int hashCodeImpl(java.util.Set) -> hashCodeImpl
-    1297:1311:boolean equalsImpl(java.util.Set,java.lang.Object) -> equalsImpl
-    1318:1322:boolean removeAllImpl(java.util.Set,java.util.Iterator) -> removeAllImpl
-    1326:1348:boolean removeAllImpl(java.util.Set,java.util.Collection) -> removeAllImpl
+    165:165:java.util.HashSet newHashSet() -> newHashSet
+    183:185:java.util.HashSet newHashSet(java.lang.Object[]) -> newHashSet
+    202:202:java.util.HashSet newHashSetWithExpectedSize(int) -> newHashSetWithExpectedSize
+    219:219:java.util.HashSet newHashSet(java.lang.Iterable) -> newHashSet
+    238:240:java.util.HashSet newHashSet(java.util.Iterator) -> newHashSet
+    290:290:java.util.LinkedHashSet newLinkedHashSet() -> newLinkedHashSet
+    325:330:java.util.LinkedHashSet newLinkedHashSet(java.lang.Iterable) -> newLinkedHashSet
+    844:857:java.util.Set filter(java.util.Set,com.google.common.base.Predicate) -> filter
+    907:907:java.util.SortedSet filter(java.util.SortedSet,com.google.common.base.Predicate) -> filter
+    912:922:java.util.SortedSet filterSortedIgnoreNavigable(java.util.SortedSet,com.google.common.base.Predicate) -> filterSortedIgnoreNavigable
+    1314:1321:int hashCodeImpl(java.util.Set) -> hashCodeImpl
+    1328:1342:boolean equalsImpl(java.util.Set,java.lang.Object) -> equalsImpl
+    1349:1353:boolean removeAllImpl(java.util.Set,java.util.Iterator) -> removeAllImpl
+    1357:1371:boolean removeAllImpl(java.util.Set,java.util.Collection) -> removeAllImpl
 com.google.common.collect.Sets$FilteredSet -> org.eclipse.xtext.xbase.lib.internal.bd$a:
-    852:852:boolean equals(java.lang.Object) -> equals
-    857:857:int hashCode() -> hashCode
+    868:868:boolean equals(java.lang.Object) -> equals
+    872:872:int hashCode() -> hashCode
 com.google.common.collect.Sets$FilteredSortedSet -> org.eclipse.xtext.xbase.lib.internal.bd$b:
-    909:909:java.util.Comparator comparator() -> comparator
-    913:913:java.util.SortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
-    918:918:java.util.SortedSet headSet(java.lang.Object) -> headSet
-    922:922:java.util.SortedSet tailSet(java.lang.Object) -> tailSet
-    926:926:java.lang.Object first() -> first
-    930:937:java.lang.Object last() -> last
+    935:935:java.util.Comparator comparator() -> comparator
+    940:940:java.util.SortedSet subSet(java.lang.Object,java.lang.Object) -> subSet
+    946:946:java.util.SortedSet headSet(java.lang.Object) -> headSet
+    951:951:java.util.SortedSet tailSet(java.lang.Object) -> tailSet
+    956:956:java.lang.Object first() -> first
+    961:968:java.lang.Object last() -> last
 com.google.common.collect.Sets$ImprovedAbstractSet -> org.eclipse.xtext.xbase.lib.internal.bd$c:
     75:75:boolean removeAll(java.util.Collection) -> removeAll
     80:80:boolean retainAll(java.util.Collection) -> retainAll
@@ -1141,48 +1158,46 @@ com.google.common.collect.SingletonImmutableBiMap -> org.eclipse.xtext.xbase.lib
     java.lang.Object singleKey -> singleKey
     java.lang.Object singleValue -> singleValue
     com.google.common.collect.ImmutableBiMap inverse -> inverse
-    54:54:java.lang.Object get(java.lang.Object) -> get
-    58:58:int size() -> size
-    62:62:boolean containsKey(java.lang.Object) -> containsKey
-    67:67:boolean containsValue(java.lang.Object) -> containsValue
-    72:72:boolean isPartialView() -> isPartialView
-    77:77:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
-    82:82:com.google.common.collect.ImmutableSet createKeySet() -> createKeySet
-    90:94:com.google.common.collect.ImmutableBiMap inverse() -> inverse
-    29:29:com.google.common.collect.BiMap inverse() -> inverse
+    56:56:java.lang.Object get(java.lang.Object) -> get
+    61:61:int size() -> size
+    65:65:boolean containsKey(java.lang.Object) -> containsKey
+    69:69:boolean containsValue(java.lang.Object) -> containsValue
+    73:73:boolean isPartialView() -> isPartialView
+    78:78:com.google.common.collect.ImmutableSet createEntrySet() -> createEntrySet
+    83:83:com.google.common.collect.ImmutableSet createKeySet() -> createKeySet
+    91:96:com.google.common.collect.ImmutableBiMap inverse() -> inverse
+    31:31:com.google.common.collect.BiMap inverse() -> inverse
 com.google.common.collect.SingletonImmutableList -> org.eclipse.xtext.xbase.lib.internal.bf:
     java.lang.Object element -> element
     45:46:java.lang.Object get(int) -> get
-    51:51:int indexOf(java.lang.Object) -> indexOf
-    56:56:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    61:61:int lastIndexOf(java.lang.Object) -> lastIndexOf
-    65:65:int size() -> size
-    70:71:com.google.common.collect.ImmutableList subList(int,int) -> subList
-    76:76:com.google.common.collect.ImmutableList reverse() -> reverse
-    81:81:boolean contains(java.lang.Object) -> contains
-    86:93:boolean equals(java.lang.Object) -> equals
-    100:100:int hashCode() -> hashCode
-    105:106:java.lang.String toString() -> toString
-    112:112:boolean isEmpty() -> isEmpty
-    117:117:boolean isPartialView() -> isPartialView
-    122:122:java.lang.Object[] toArray() -> toArray
-    127:135:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
+    50:50:int indexOf(java.lang.Object) -> indexOf
+    54:54:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    58:58:int lastIndexOf(java.lang.Object) -> lastIndexOf
+    63:63:int size() -> size
+    67:68:com.google.common.collect.ImmutableList subList(int,int) -> subList
+    72:72:com.google.common.collect.ImmutableList reverse() -> reverse
+    76:76:boolean contains(java.lang.Object) -> contains
+    80:87:boolean equals(java.lang.Object) -> equals
+    93:93:int hashCode() -> hashCode
+    97:98:java.lang.String toString() -> toString
+    106:106:boolean isEmpty() -> isEmpty
+    110:110:boolean isPartialView() -> isPartialView
+    115:116:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
     33:33:java.util.List subList(int,int) -> subList
     33:33:java.util.Iterator iterator() -> iterator
 com.google.common.collect.SingletonImmutableSet -> org.eclipse.xtext.xbase.lib.internal.bg:
     java.lang.Object element -> element
     int cachedHashCode -> cachedHashCode
     58:58:int size() -> size
-    63:63:boolean isEmpty() -> isEmpty
-    68:68:boolean contains(java.lang.Object) -> contains
-    73:73:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
-    78:78:boolean isPartialView() -> isPartialView
-    83:83:java.lang.Object[] toArray() -> toArray
-    88:96:java.lang.Object[] toArray(java.lang.Object[]) -> toArray
-    101:108:boolean equals(java.lang.Object) -> equals
-    114:118:int hashCode() -> hashCode
-    123:123:boolean isHashCodeFast() -> isHashCodeFast
-    128:129:java.lang.String toString() -> toString
+    62:62:boolean isEmpty() -> isEmpty
+    66:66:boolean contains(java.lang.Object) -> contains
+    70:70:com.google.common.collect.UnmodifiableIterator iterator() -> iterator
+    74:74:boolean isPartialView() -> isPartialView
+    79:80:int copyIntoArray(java.lang.Object[],int) -> copyIntoArray
+    84:91:boolean equals(java.lang.Object) -> equals
+    96:100:int hashCode() -> hashCode
+    104:104:boolean isHashCodeFast() -> isHashCodeFast
+    108:109:java.lang.String toString() -> toString
     32:32:java.util.Iterator iterator() -> iterator
 com.google.common.collect.SortedIterable -> org.eclipse.xtext.xbase.lib.internal.bh:
     java.util.Comparator comparator() -> comparator
@@ -1190,7 +1205,7 @@ com.google.common.collect.SortedIterables -> org.eclipse.xtext.xbase.lib.interna
     38:48:boolean hasSameComparator(java.util.Comparator,java.lang.Iterable) -> hasSameComparator
     54:58:java.util.Comparator comparator(java.util.SortedSet) -> comparator
 com.google.common.collect.SortedLists -> org.eclipse.xtext.xbase.lib.internal.bj:
-    256:281:int binarySearch(java.util.List,java.lang.Object,java.util.Comparator,com.google.common.collect.SortedLists$KeyPresentBehavior,com.google.common.collect.SortedLists$KeyAbsentBehavior) -> binarySearch
+    258:282:int binarySearch(java.util.List,java.lang.Object,java.util.Comparator,com.google.common.collect.SortedLists$KeyPresentBehavior,com.google.common.collect.SortedLists$KeyAbsentBehavior) -> binarySearch
 com.google.common.collect.SortedLists$1 -> org.eclipse.xtext.xbase.lib.internal.bj$1:
 com.google.common.collect.SortedLists$KeyAbsentBehavior -> org.eclipse.xtext.xbase.lib.internal.bj$a:
     com.google.common.collect.SortedLists$KeyAbsentBehavior NEXT_LOWER -> NEXT_LOWER
@@ -1199,11 +1214,11 @@ com.google.common.collect.SortedLists$KeyAbsentBehavior -> org.eclipse.xtext.xba
     com.google.common.collect.SortedLists$KeyAbsentBehavior[] $VALUES -> $VALUES
     int resultIndex(int) -> resultIndex
 com.google.common.collect.SortedLists$KeyAbsentBehavior$1 -> org.eclipse.xtext.xbase.lib.internal.bj$a$1:
-    154:154:int resultIndex(int) -> resultIndex
+    147:147:int resultIndex(int) -> resultIndex
 com.google.common.collect.SortedLists$KeyAbsentBehavior$2 -> org.eclipse.xtext.xbase.lib.internal.bj$a$2:
-    165:165:int resultIndex(int) -> resultIndex
+    157:157:int resultIndex(int) -> resultIndex
 com.google.common.collect.SortedLists$KeyAbsentBehavior$3 -> org.eclipse.xtext.xbase.lib.internal.bj$a$3:
-    184:184:int resultIndex(int) -> resultIndex
+    175:175:int resultIndex(int) -> resultIndex
 com.google.common.collect.SortedLists$KeyPresentBehavior -> org.eclipse.xtext.xbase.lib.internal.bj$b:
     com.google.common.collect.SortedLists$KeyPresentBehavior ANY_PRESENT -> ANY_PRESENT
     com.google.common.collect.SortedLists$KeyPresentBehavior LAST_PRESENT -> LAST_PRESENT
@@ -1213,38 +1228,39 @@ com.google.common.collect.SortedLists$KeyPresentBehavior -> org.eclipse.xtext.xb
     com.google.common.collect.SortedLists$KeyPresentBehavior[] $VALUES -> $VALUES
     int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
 com.google.common.collect.SortedLists$KeyPresentBehavior$1 -> org.eclipse.xtext.xbase.lib.internal.bj$b$1:
-    59:59:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+    57:57:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
 com.google.common.collect.SortedLists$KeyPresentBehavior$2 -> org.eclipse.xtext.xbase.lib.internal.bj$b$2:
-    72:84:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+    69:81:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
 com.google.common.collect.SortedLists$KeyPresentBehavior$3 -> org.eclipse.xtext.xbase.lib.internal.bj$b$3:
-    97:110:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+    93:106:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
 com.google.common.collect.SortedLists$KeyPresentBehavior$4 -> org.eclipse.xtext.xbase.lib.internal.bj$b$4:
-    122:122:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+    117:117:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
 com.google.common.collect.SortedLists$KeyPresentBehavior$5 -> org.eclipse.xtext.xbase.lib.internal.bj$b$5:
-    134:134:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
+    128:128:int resultIndex(java.util.Comparator,java.lang.Object,java.util.List,int) -> resultIndex
 com.google.common.collect.TransformedIterator -> org.eclipse.xtext.xbase.lib.internal.bk:
     java.util.Iterator backingIterator -> backingIterator
     java.lang.Object transform(java.lang.Object) -> transform
     43:43:boolean hasNext() -> hasNext
-    47:47:java.lang.Object next() -> next
-    51:52:void remove() -> remove
+    48:48:java.lang.Object next() -> next
+    53:54:void remove() -> remove
 com.google.common.collect.TransformedListIterator -> org.eclipse.xtext.xbase.lib.internal.bl:
     39:39:java.util.ListIterator backingIterator() -> backingIterator
-    43:43:boolean hasPrevious() -> hasPrevious
-    47:47:java.lang.Object previous() -> previous
-    51:51:int nextIndex() -> nextIndex
-    55:55:int previousIndex() -> previousIndex
-    59:59:void set(java.lang.Object) -> set
-    63:63:void add(java.lang.Object) -> add
+    44:44:boolean hasPrevious() -> hasPrevious
+    49:49:java.lang.Object previous() -> previous
+    54:54:int nextIndex() -> nextIndex
+    59:59:int previousIndex() -> previousIndex
+    64:64:void set(java.lang.Object) -> set
+    69:69:void add(java.lang.Object) -> add
 com.google.common.collect.UnmodifiableIterator -> org.eclipse.xtext.xbase.lib.internal.bm:
-    42:42:void remove() -> remove
+    43:43:void remove() -> remove
 com.google.common.collect.UnmodifiableListIterator -> org.eclipse.xtext.xbase.lib.internal.bn:
-    44:44:void add(java.lang.Object) -> add
-    55:55:void set(java.lang.Object) -> set
+    43:43:void add(java.lang.Object) -> add
+    53:53:void set(java.lang.Object) -> set
 com.google.common.primitives.Booleans -> org.eclipse.xtext.xbase.lib.internal.bo:
-    73:73:int compare(boolean,boolean) -> compare
+    77:77:int compare(boolean,boolean) -> compare
 com.google.common.primitives.Ints -> org.eclipse.xtext.xbase.lib.internal.bp:
-    101:107:int saturatedCast(long) -> saturatedCast
+    byte[] asciiDigits -> asciiDigits
+    105:111:int saturatedCast(long) -> saturatedCast
 org.eclipse.xtend2.lib.DefaultLineDelimiter -> org.eclipse.xtend2.lib.DefaultLineDelimiter:
     17:17:java.lang.String get() -> get
 org.eclipse.xtend2.lib.StringConcatenation -> org.eclipse.xtend2.lib.StringConcatenation:

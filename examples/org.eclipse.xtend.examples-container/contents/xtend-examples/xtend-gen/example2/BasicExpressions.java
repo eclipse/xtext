@@ -116,13 +116,11 @@ public class BasicExpressions {
     }
     final String t = "text";
     boolean _matched = false;
-    if (!_matched) {
-      int _length_1 = t.length();
-      boolean _greaterThan = (_length_1 > 8);
-      if (_greaterThan) {
-        _matched=true;
-        Assert.fail("Never happens!");
-      }
+    int _length_1 = t.length();
+    boolean _greaterThan = (_length_1 > 8);
+    if (_greaterThan) {
+      _matched=true;
+      Assert.fail("Never happens!");
     }
     if (!_matched) {
       if (Objects.equal(t, "text")) {
@@ -136,11 +134,9 @@ public class BasicExpressions {
     final Object someValue = "a string typed to Object";
     String _switchResult_1 = null;
     boolean _matched_1 = false;
-    if (!_matched_1) {
-      if (someValue instanceof Number) {
-        _matched_1=true;
-        _switchResult_1 = "number";
-      }
+    if (someValue instanceof Number) {
+      _matched_1=true;
+      _switchResult_1 = "number";
     }
     if (!_matched_1) {
       if (someValue instanceof String) {

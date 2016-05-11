@@ -30,11 +30,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="datatype" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//Mixed"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lit" eType="#//Enum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fragName" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Enum">
     <eLiterals name="lit1" literal="lit1"/>
     <eLiterals name="lit2" value="1" literal="lit2"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RootAction" eSuperTypes="#//Root"/>
   <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
         containment="true"/>

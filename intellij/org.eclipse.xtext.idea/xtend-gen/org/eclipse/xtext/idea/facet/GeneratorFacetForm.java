@@ -195,15 +195,7 @@ public class GeneratorFacetForm {
     ModuleRootManager _instance = ModuleRootManager.getInstance(this.module);
     VirtualFile[] _contentRoots = _instance.getContentRoots();
     final VirtualFile root = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
-    boolean _and = false;
-    if (!(root != null)) {
-      _and = false;
-    } else {
-      String _path = root.getPath();
-      boolean _isAncestor = FileUtil.isAncestor(_path, path, false);
-      _and = _isAncestor;
-    }
-    return _and;
+    return ((root != null) && FileUtil.isAncestor(root.getPath(), path, false));
   }
   
   public IdeaWidgetFactory.TwoColumnPanel createGeneralSection(@Extension final IdeaWidgetFactory.TwoColumnPanel it) {

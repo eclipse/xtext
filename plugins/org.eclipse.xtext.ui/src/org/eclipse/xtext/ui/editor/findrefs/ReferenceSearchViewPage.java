@@ -7,13 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
-import java.util.Iterator;
-
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.util.OpenStrategy;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.OpenEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.search.ui.IContextMenuConstants;
@@ -38,9 +34,8 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.part.PageBook;
-import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.ui.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.editor.navigation.NavigationService;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.inject.Inject;
 
@@ -78,7 +73,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	private ReferenceSearchViewSorter sorter;
 	
 	@Inject
-	private IURIEditorOpener uriEditorOpener;
+	private NavigationService navigationService;
 
 	private boolean isBusyShowing;
 
@@ -170,28 +165,14 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	}
 
 	protected OpenAndLinkWithEditorHelper createOpenAndLinkWithEditorHandler() {
-		return new OpenAndLinkWithEditorHelper(viewer) {
-			@Override
-			protected void activate(ISelection selection) {
-				final int currentMode = OpenStrategy.getOpenMethod();
-				try {
-					OpenStrategy.setOpenMethod(OpenStrategy.DOUBLE_CLICK);
-					handleOpen(new OpenEvent(viewer, selection));
-				} finally {
-					OpenStrategy.setOpenMethod(currentMode);
-				}
-			}
+		return navigationService.installNavigationSupport(viewer, new Procedures.Procedure1<OpenEvent>() {
 
 			@Override
-			protected void linkToEditor(ISelection selection) {
-				// not supported by this part
+			public void apply(OpenEvent openEvent) {
+				handleOpen(openEvent);
 			}
-
-			@Override
-			protected void open(ISelection selection, boolean activate) {
-				handleOpen(new OpenEvent(viewer, selection));
-			}
-		};
+			
+		});
 	}
 
 	protected IQueryListener createQueryListener() {
@@ -253,24 +234,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	}
 
 	protected void handleOpen(OpenEvent openEvent) {
-		ISelection selection = openEvent.getSelection();
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-			for (Iterator<?> i = structuredSelection.iterator(); i.hasNext();) {
-				Object selectedObject = i.next();
-				if (selectedObject instanceof ReferenceSearchViewTreeNode) {
-					ReferenceSearchViewTreeNode treeNode = (ReferenceSearchViewTreeNode) selectedObject;
-					Object description = treeNode.getDescription();
-					if (description instanceof IReferenceDescription) {
-						IReferenceDescription referenceDescription = (IReferenceDescription) description;
-						uriEditorOpener.open(referenceDescription.getSourceEObjectUri(),
-								referenceDescription.getEReference(), referenceDescription.getIndexInList(), true);
-					} else if (description instanceof IResourceDescription) {
-						uriEditorOpener.open(((IResourceDescription) description).getURI(), true);
-					}
-				}
-			}
-		}
+		navigationService.open(openEvent);
 	}
 
 	@Override

@@ -173,17 +173,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
     };
     final Iterable<IPackageFragmentRoot> sourceFolders = IterableExtensions.<IPackageFragmentRoot>filter(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_packageFragmentRoots)), _function);
     IndexManager indexManager = JavaModelManager.getIndexManager();
-    boolean _or = false;
-    int _length = ((Object[])Conversions.unwrapArray(sourceFolders, Object.class)).length;
-    boolean _equals = (_length == 0);
-    if (_equals) {
-      _or = true;
-    } else {
-      int _awaitingJobsCount = indexManager.awaitingJobsCount();
-      boolean _greaterThan = (_awaitingJobsCount > 0);
-      _or = _greaterThan;
-    }
-    if (_or) {
+    if (((((Object[])Conversions.unwrapArray(sourceFolders, Object.class)).length == 0) || (indexManager.awaitingJobsCount() > 0))) {
       String _elvis = null;
       if (packageName != null) {
         _elvis = packageName;
@@ -210,18 +200,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
       for (final ICompilationUnit workingCopy : copies) {
         {
           final IPath path = workingCopy.getPath();
-          boolean _and = false;
-          IPath _path = javaProject.getPath();
-          boolean _isPrefixOf = _path.isPrefixOf(path);
-          if (!_isPrefixOf) {
-            _and = false;
-          } else {
-            IResource _resource = workingCopy.getResource();
-            boolean _isDerived = this.isDerived(_resource);
-            boolean _not = (!_isDerived);
-            _and = _not;
-          }
-          if (_and) {
+          if ((javaProject.getPath().isPrefixOf(path) && (!this.isDerived(workingCopy.getResource())))) {
             IPackageDeclaration _packageDeclaration = workingCopy.getPackageDeclaration(packageName);
             boolean _exists = _packageDeclaration.exists();
             if (_exists) {
@@ -233,16 +212,16 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
                 return false;
               }
             }
-            IPath _path_1 = workingCopy.getPath();
-            String _string = _path_1.toString();
+            IPath _path = workingCopy.getPath();
+            String _string = _path.toString();
             workingCopyPaths.add(_string);
           }
         }
       }
     }
     char[] _xifexpression = null;
-    boolean _equals_1 = Objects.equal(packageName, null);
-    if (_equals_1) {
+    boolean _equals = Objects.equal(packageName, null);
+    if (_equals) {
       _xifexpression = CharOperation.NO_CHAR;
     } else {
       _xifexpression = packageName.toCharArray();
@@ -345,16 +324,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
         @Override
         public Boolean apply(final IEObjectDescription it) {
           final URI candidate = it.getEObjectURI();
-          boolean _and = false;
-          boolean _isPlatformResource = candidate.isPlatformResource();
-          if (!_isPlatformResource) {
-            _and = false;
-          } else {
-            String _segment = candidate.segment(1);
-            boolean _equals = Objects.equal(_segment, project);
-            _and = _equals;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((candidate.isPlatformResource() && Objects.equal(candidate.segment(1), project)));
         }
       };
       Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(descriptions, _function);

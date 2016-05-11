@@ -111,7 +111,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 			/**
 			 * Custom quickfixes.
 			 *
-			 * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#quick-fixes
+			 * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
 			 */
 			class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
@@ -133,7 +133,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 			/**
 			 * Custom quickfixes.
 			 *
-			 * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#quick-fixes
+			 * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
 			 */
 			public class «grammar.quickfixProviderClass.simpleName» extends «grammar.quickfixProviderSuperClass» {
 			
@@ -157,34 +157,34 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 		val executableExtensionFactory = grammar.eclipsePluginExecutableExtensionFactory
 
 		projectConfig.eclipsePlugin.pluginXml.entries += '''
-		    <!-- quickfix marker resolution generator for «grammar.name» -->
-		    <extension
-		            point="org.eclipse.ui.ide.markerResolution">
-		        <markerResolutionGenerator
-		            class="«executableExtensionFactory»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-		            markerType="«markerTypePrefix».check.fast">
-		            <attribute
-		                name="FIXABLE_KEY"
-		                value="true">
-		            </attribute>
-		        </markerResolutionGenerator>
-		        <markerResolutionGenerator
-		            class="«executableExtensionFactory»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-		            markerType="«markerTypePrefix».check.normal">
-		            <attribute
-		                name="FIXABLE_KEY"
-		                value="true">
-		            </attribute>
-		        </markerResolutionGenerator>
-		        <markerResolutionGenerator
-		            class="«executableExtensionFactory»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-		            markerType="«markerTypePrefix».check.expensive">
-		            <attribute
-		                name="FIXABLE_KEY"
-		                value="true">
-		            </attribute>
-		        </markerResolutionGenerator>
-		    </extension>
+			<!-- quickfix marker resolution generator for «grammar.name» -->
+			<extension
+					point="org.eclipse.ui.ide.markerResolution">
+				<markerResolutionGenerator
+					class="«executableExtensionFactory»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+					markerType="«markerTypePrefix».check.fast">
+					<attribute
+						name="FIXABLE_KEY"
+						value="true">
+					</attribute>
+				</markerResolutionGenerator>
+				<markerResolutionGenerator
+					class="«executableExtensionFactory»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+					markerType="«markerTypePrefix».check.normal">
+					<attribute
+						name="FIXABLE_KEY"
+						value="true">
+					</attribute>
+				</markerResolutionGenerator>
+				<markerResolutionGenerator
+					class="«executableExtensionFactory»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+					markerType="«markerTypePrefix».check.expensive">
+					<attribute
+						name="FIXABLE_KEY"
+						value="true">
+					</attribute>
+				</markerResolutionGenerator>
+			</extension>
 		'''		
 	}
 }

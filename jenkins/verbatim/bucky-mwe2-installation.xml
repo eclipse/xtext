@@ -15,14 +15,14 @@
         <hudson.model.StringParameterDefinition>
           <name>BUCKY_MWE2_HOME</name>
           <description></description>
-          <defaultValue>/opt/jenkins/tools/buckminster-mwe2-headless/</defaultValue>
+          <defaultValue>$JENKINS_HOME/tools/buckminster-mwe2-headless/</defaultValue>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
     <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
       <useJobPriority>true</useJobPriority>
-      <priority>-2147483647</priority>
+      <priority>2</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>

@@ -93,4 +93,47 @@ class OverrideHelperTest extends AbstractXtendTestCase {
 		assertNotNull(operation.findOverriddenOperation)
 	}
 	
+	@Test def checkFindOverriddenOperation_03() {
+		val xtendFile = file('''
+			package foo
+
+			import java.util.Map
+			
+			class Foo implements Bar {
+
+				override bar(Map<?, ?> map) {}
+
+			}
+			
+			interface Bar {
+				def void bar(Map<?, ?> map)
+			}
+		''')
+		
+		val operation = xtendFile.xtendTypes.head.members.filter(XtendFunction).head.getPrimaryJvmElement as JvmOperation
+		assertNotNull(operation.findOverriddenOperation)
+	}
+	
+	@Test def checkFindOverriddenOperation_04() {
+		val xtendFile = file('''
+			package foo
+			
+			class Foo implements Bar {
+			
+				override bar(T<?> map) {
+				}
+			
+			}
+			
+			interface Bar {
+				def void bar(T<?> map)
+			}
+
+			class T<E extends CharSequence> {}
+		''')
+		
+		val operation = xtendFile.xtendTypes.head.members.filter(XtendFunction).head.getPrimaryJvmElement as JvmOperation
+		assertNotNull(operation.findOverriddenOperation)
+	}
+	
 }

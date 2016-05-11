@@ -27,7 +27,6 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -165,14 +164,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   
   @Override
   public List<String> getFileExtensions() {
-    boolean _or = false;
-    if ((this.fileExtensions == null)) {
-      _or = true;
-    } else {
-      boolean _isEmpty = this.fileExtensions.isEmpty();
-      _or = _isEmpty;
-    }
-    if (_or) {
+    if (((this.fileExtensions == null) || this.fileExtensions.isEmpty())) {
       String _simpleName = GrammarUtil.getSimpleName(this.grammar);
       String _lowerCase = _simpleName.toLowerCase();
       this.setFileExtensions(_lowerCase);
@@ -382,18 +374,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   protected void validateReferencedMetamodel(final ReferencedMetamodel ref) {
-    boolean _and = false;
-    EPackage _ePackage = ref.getEPackage();
-    boolean _notEquals = (!Objects.equal(_ePackage, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      EPackage _ePackage_1 = ref.getEPackage();
-      boolean _eIsProxy = _ePackage_1.eIsProxy();
-      boolean _not = (!_eIsProxy);
-      _and = _not;
-    }
-    if (_and) {
+    if (((!Objects.equal(ref.getEPackage(), null)) && (!ref.getEPackage().eIsProxy()))) {
       return;
     }
     final EReference eref = XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;

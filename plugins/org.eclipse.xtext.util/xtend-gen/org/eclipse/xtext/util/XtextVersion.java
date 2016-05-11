@@ -80,17 +80,7 @@ public class XtextVersion {
    * 				For example 2.9.2 is a release, 2.9.2.beta3 is stable.
    */
   public boolean isStable() {
-    boolean _and = false;
-    boolean _isSnapshot = this.isSnapshot();
-    boolean _not = (!_isSnapshot);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _matches = this.version.matches("\\d+\\.\\d+(\\.\\d+)+");
-      boolean _not_1 = (!_matches);
-      _and = _not_1;
-    }
-    return _and;
+    return ((!this.isSnapshot()) && (!this.version.matches("\\d+\\.\\d+(\\.\\d+)+")));
   }
   
   @Override

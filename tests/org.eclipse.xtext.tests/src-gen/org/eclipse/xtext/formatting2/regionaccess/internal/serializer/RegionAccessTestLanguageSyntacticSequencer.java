@@ -22,6 +22,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected RegionAccessTestLanguageGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_Fragment_RecursionKeyword_2_0_a;
 	protected AbstractElementAlias match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__a;
 	protected AbstractElementAlias match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__p;
 	protected AbstractElementAlias match_Parenthesized_LeftParenthesisKeyword_0_a;
@@ -30,6 +31,7 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (RegionAccessTestLanguageGrammarAccess) access;
+		match_Fragment_RecursionKeyword_2_0_a = new TokenAlias(true, true, grammarAccess.getFragmentAccess().getRecursionKeyword_2_0());
 		match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getMixedAccess().getLeftParenthesisKeyword_0()), new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getMixedAccess().getUnassignedKeyword_1_0()), new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getMixedAccess().getDatatypeParserRuleCall_1_1_1()), new TokenAlias(false, false, grammarAccess.getMixedAccess().getIDTerminalRuleCall_1_1_0()))));
 		match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__p = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getMixedAccess().getLeftParenthesisKeyword_0()), new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getMixedAccess().getUnassignedKeyword_1_0()), new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getMixedAccess().getDatatypeParserRuleCall_1_1_1()), new TokenAlias(false, false, grammarAccess.getMixedAccess().getIDTerminalRuleCall_1_1_0()))));
 		match_Parenthesized_LeftParenthesisKeyword_0_a = new TokenAlias(true, true, grammarAccess.getParenthesizedAccess().getLeftParenthesisKeyword_0());
@@ -70,7 +72,9 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__a.equals(syntax))
+			if (match_Fragment_RecursionKeyword_2_0_a.equals(syntax))
+				emit_Fragment_RecursionKeyword_2_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__a.equals(syntax))
 				emit_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__p.equals(syntax))
 				emit_Mixed___LeftParenthesisKeyword_0___UnassignedKeyword_1_0___DatatypeParserRuleCall_1_1_1_or_IDTerminalRuleCall_1_1_0____q__p(semanticObject, getLastNavigableState(), syntaxNodes);
@@ -82,6 +86,20 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     'recursion'*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '6' ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) 'child' mixed=Mixed
+	 *     (rule start) '6' ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) fragName=ID
+	 *     (rule start) ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) 'child' mixed=Mixed
+	 *     (rule start) ('(' ('unassigned' (ID | Datatype))?)+ 'fragment' (ambiguity) fragName=ID
+	 */
+	protected void emit_Fragment_RecursionKeyword_2_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 	/**
 	 * Ambiguous syntax:
 	 *     ('(' ('unassigned' (ID | Datatype))?)*
@@ -101,12 +119,16 @@ public class RegionAccessTestLanguageSyntacticSequencer extends AbstractSyntacti
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) '6' (ambiguity) ')' (rule start)
 	 *     (rule start) '6' (ambiguity) 'child' eobj=Mixed
+	 *     (rule start) '6' (ambiguity) 'fragment' 'recursion'* 'child' mixed=Mixed
+	 *     (rule start) '6' (ambiguity) 'fragment' 'recursion'* fragName=ID
 	 *     (rule start) '6' (ambiguity) 'ref' ref=[Mixed|ID]
 	 *     (rule start) '6' (ambiguity) datatype=Datatype
 	 *     (rule start) '6' (ambiguity) lit=Enum
 	 *     (rule start) '6' (ambiguity) name=ID
 	 *     (rule start) (ambiguity) ')' (rule start)
 	 *     (rule start) (ambiguity) 'child' eobj=Mixed
+	 *     (rule start) (ambiguity) 'fragment' 'recursion'* 'child' mixed=Mixed
+	 *     (rule start) (ambiguity) 'fragment' 'recursion'* fragName=ID
 	 *     (rule start) (ambiguity) 'ref' ref=[Mixed|ID]
 	 *     (rule start) (ambiguity) datatype=Datatype
 	 *     (rule start) (ambiguity) lit=Enum

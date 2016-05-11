@@ -29,6 +29,7 @@ import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.Ignore
 
 @RunWith(XtextRunner)
 @InjectWith(JavaInjectorProvider)
@@ -101,6 +102,12 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 	@Test
 	override void testParameterNames_03() {
 		doTestParameterName(ClassWithVarArgs, "method(java.lang.String[])", "arg0");
+	}
+	
+	@Ignore()
+	@Test
+	override void testFindTypeByName_NestedTypeQualifiedWithSubType_02() {
+		super.testFindTypeByName_NestedTypeQualifiedWithSubType_02();
 	}
 	
 }

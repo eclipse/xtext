@@ -81,56 +81,19 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
   
   @Override
   public boolean isGenerateStub() {
-    boolean _and = false;
-    Grammar _grammar = this.getGrammar();
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
-    boolean _not = (!_inheritsXbase);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _isGenerateStub = super.isGenerateStub();
-      _and = _isGenerateStub;
-    }
-    return _and;
+    return ((!this._xbaseUsageDetector.inheritsXbase(this.getGrammar())) && super.isGenerateStub());
   }
   
   public boolean isGenerateJavaMain() {
-    boolean _and = false;
-    Grammar _grammar = this.getGrammar();
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
-    boolean _not = (!_inheritsXbase);
-    if (!_not) {
-      _and = false;
-    } else {
-      _and = this.generateJavaMain;
-    }
-    return _and;
+    return ((!this._xbaseUsageDetector.inheritsXbase(this.getGrammar())) && this.generateJavaMain);
   }
   
   public boolean isGenerateXtendMain() {
-    boolean _and = false;
-    Grammar _grammar = this.getGrammar();
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
-    boolean _not = (!_inheritsXbase);
-    if (!_not) {
-      _and = false;
-    } else {
-      _and = this.generateXtendMain;
-    }
-    return _and;
+    return ((!this._xbaseUsageDetector.inheritsXbase(this.getGrammar())) && this.generateXtendMain);
   }
   
   public boolean isGenerateMwe() {
-    boolean _and = false;
-    Grammar _grammar = this.getGrammar();
-    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(_grammar);
-    boolean _not = (!_inheritsXbase);
-    if (!_not) {
-      _and = false;
-    } else {
-      _and = this.generateMwe;
-    }
-    return _and;
+    return ((!this._xbaseUsageDetector.inheritsXbase(this.getGrammar())) && this.generateMwe);
   }
   
   protected TypeReference getGeneratorStub(final Grammar grammar) {
@@ -151,13 +114,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
   
   @Override
   public void checkConfiguration(final Issues issues) {
-    boolean _and = false;
-    if (!this.generateJavaMain) {
-      _and = false;
-    } else {
-      _and = this.generateXtendMain;
-    }
-    if (_and) {
+    if ((this.generateJavaMain && this.generateXtendMain)) {
       issues.addWarning(
         "Options \'generateJavaMain\' and \'generateXtendMain\' are mutually exclusive. Generating Xtend only.", this);
       this.generateJavaMain = false;
@@ -195,15 +152,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         this.doGenerateJavaStubFile();
       }
     }
-    boolean _or = false;
-    boolean _isGenerateStub_1 = this.isGenerateStub();
-    if (_isGenerateStub_1) {
-      _or = true;
-    } else {
-      boolean _isGenerateJavaMain = this.isGenerateJavaMain();
-      _or = _isGenerateJavaMain;
-    }
-    if (_or) {
+    if ((this.isGenerateStub() || this.isGenerateJavaMain())) {
       IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
       IRuntimeProjectConfig _runtime_2 = _projectConfig_2.getRuntime();
       ManifestAccess _manifest_2 = _runtime_2.getManifest();
@@ -220,8 +169,8 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         _exportedPackages.add(_packageName);
       }
     }
-    boolean _isGenerateJavaMain_1 = this.isGenerateJavaMain();
-    if (_isGenerateJavaMain_1) {
+    boolean _isGenerateJavaMain = this.isGenerateJavaMain();
+    if (_isGenerateJavaMain) {
       this.doGenerateJavaMain();
     }
     boolean _isGenerateXtendMain = this.isGenerateXtendMain();
@@ -537,7 +486,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         _builder.append(Resource.class, "\t\t");
         _builder.append(" resource = set.getResource(");
         _builder.append(URI.class, "\t\t");
-        _builder.append(".createURI(string), true);");
+        _builder.append(".createFileURI(string), true);");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t\t");
@@ -699,7 +648,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("\t\t");
         _builder.append("val resource = set.getResource(");
         _builder.append(URI.class, "\t\t");
-        _builder.append(".createURI(string), true)");
+        _builder.append(".createFileURI(string), true)");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("\t\t");

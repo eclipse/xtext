@@ -32,15 +32,7 @@ public class JavaResourceDescriptionManager implements IResourceDescription.Mana
   @Override
   public IResourceDescription getResourceDescription(final Resource resource) {
     if ((resource instanceof JavaResource)) {
-      boolean _or = false;
-      boolean _isInitialized = ((JavaResource)resource).isInitialized();
-      if (_isInitialized) {
-        _or = true;
-      } else {
-        boolean _isInitializing = ((JavaResource)resource).isInitializing();
-        _or = _isInitializing;
-      }
-      final boolean initialized = _or;
+      final boolean initialized = (((JavaResource)resource).isInitialized() || ((JavaResource)resource).isInitializing());
       try {
         if ((!initialized)) {
           ((JavaResource)resource).eSetDeliver(false);
@@ -80,17 +72,7 @@ public class JavaResourceDescriptionManager implements IResourceDescription.Mana
     for (final IResourceDescription.Delta delta : deltas) {
       boolean _hasChanges = this.hasChanges(delta, candidate);
       if (_hasChanges) {
-        boolean _or = false;
-        IResourceDescription _new = delta.getNew();
-        boolean _isAffected = this.isAffected(importedNames, _new);
-        if (_isAffected) {
-          _or = true;
-        } else {
-          IResourceDescription _old = delta.getOld();
-          boolean _isAffected_1 = this.isAffected(importedNames, _old);
-          _or = _isAffected_1;
-        }
-        if (_or) {
+        if ((this.isAffected(importedNames, delta.getNew()) || this.isAffected(importedNames, delta.getOld()))) {
           return true;
         }
       }

@@ -143,15 +143,7 @@ public class XtextWebDocumentAccess {
   }
   
   protected void checkStateId() throws InvalidRequestException.InvalidDocumentStateException {
-    boolean _and = false;
-    if (!(this.requiredStateId != null)) {
-      _and = false;
-    } else {
-      String _stateId = this.document.getStateId();
-      boolean _notEquals = (!Objects.equal(this.requiredStateId, _stateId));
-      _and = _notEquals;
-    }
-    if (_and) {
+    if (((this.requiredStateId != null) && (!Objects.equal(this.requiredStateId, this.document.getStateId())))) {
       throw new InvalidRequestException.InvalidDocumentStateException("The given state id does not match the current state.");
     }
   }
@@ -214,24 +206,7 @@ public class XtextWebDocumentAccess {
         result = _exec;
         String _stateId = this.document.getStateId();
         this.requiredStateId = _stateId;
-        boolean _and = false;
-        boolean _and_1 = false;
-        if (!(((!this.skipAsyncWork) && priority) && (documentAccess != null))) {
-          _and_1 = false;
-        } else {
-          boolean _isCanceled = synchronizer.isCanceled();
-          boolean _not = (!_isCanceled);
-          _and_1 = _not;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          Thread _currentThread = Thread.currentThread();
-          boolean _isInterrupted = _currentThread.isInterrupted();
-          boolean _not_1 = (!_isInterrupted);
-          _and = _not_1;
-        }
-        if (_and) {
+        if ((((((!this.skipAsyncWork) && priority) && (documentAccess != null)) && (!synchronizer.isCanceled())) && (!Thread.currentThread().isInterrupted()))) {
           final Procedure1<Object> _function = new Procedure1<Object>() {
             @Override
             public void apply(final Object it) {

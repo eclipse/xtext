@@ -3,24 +3,24 @@
     <resource path="META-INF/MANIFEST.MF">
         <filter id="927989779">
             <message_arguments>
-                <message_argument value="2.9.2"/>
+                <message_argument value="2.10.0"/>
                 <message_argument value="org.eclipse.xtext"/>
             </message_arguments>
         </filter>
     </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess">
-        <filter id="305422471">
+    <resource path="xtend-gen/org/eclipse/xtext/ide/editor/contentassist/IdeContentProposalProvider.java" type="org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider">
+        <filter id="338792546">
             <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.FileSystemSupportBasedFileSystemAccess"/>
-                <message_argument value="org.eclipse.xtext.ide_2.8.0"/>
+                <message_argument value="org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider"/>
+                <message_argument value="isAcceptable(ContentAssistContext)"/>
             </message_arguments>
         </filter>
     </resource>
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.IDerivedResourceMarkers">
-        <filter id="305422471">
+    <resource path="xtend-gen/org/eclipse/xtext/ide/editor/contentassist/IdeCrossrefProposalProvider.java" type="org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider">
+        <filter id="338792546">
             <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.IDerivedResourceMarkers"/>
-                <message_argument value="org.eclipse.xtext.ide_2.8.0"/>
+                <message_argument value="org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider"/>
+                <message_argument value="matchesPrefix(IEObjectDescription, QualifiedName)"/>
             </message_arguments>
         </filter>
     </resource>

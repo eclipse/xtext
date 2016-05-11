@@ -115,12 +115,10 @@ public class PsiToEcoreTransformator implements IParser {
   protected void _transformNode(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
     ProgressIndicatorProvider.checkCanceled();
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof GrammarAwarePsiErrorElement) {
-        _matched=true;
-        EObject _grammarElement = ((GrammarAwarePsiErrorElement)it).getGrammarElement();
-        transformationContext.ensureModelElementCreated(_grammarElement);
-      }
+    if (it instanceof GrammarAwarePsiErrorElement) {
+      _matched=true;
+      EObject _grammarElement = ((GrammarAwarePsiErrorElement)it).getGrammarElement();
+      transformationContext.ensureModelElementCreated(_grammarElement);
     }
     if (!_matched) {
       if (it instanceof PsiErrorElement) {
@@ -162,12 +160,10 @@ public class PsiToEcoreTransformator implements IParser {
     AbstractRule _rule = ruleCall.getRule();
     final AbstractRule rule = _rule;
     boolean _matched = false;
-    if (!_matched) {
-      if (rule instanceof TerminalRule) {
-        _matched=true;
-        String _qualifiedName = this.ruleNames.getQualifiedName(rule);
-        transformationContext.newLeafNode(it, ruleCall, _qualifiedName);
-      }
+    if (rule instanceof TerminalRule) {
+      _matched=true;
+      String _qualifiedName = this.ruleNames.getQualifiedName(rule);
+      transformationContext.newLeafNode(it, ruleCall, _qualifiedName);
     }
     if (!_matched) {
       throw new IllegalStateException(("Unexpected rule: " + rule));
@@ -190,25 +186,14 @@ public class PsiToEcoreTransformator implements IParser {
       final RuleCall actionRuleCall = actionTransformationContext.getActionRuleCall();
       boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(actionRuleCall);
       if (_ensureModelElementCreated) {
-        boolean _and = false;
-        EObject _current = transformationContext.getCurrent();
-        boolean _tripleNotEquals = (_current != null);
-        if (!_tripleNotEquals) {
-          _and = false;
+        if (((transformationContext.getCurrent() != null) && (transformationContext.getCurrent().eContainer() == null))) {
+          EObject _current = transformationContext.getCurrent();
+          actionTransformationContext.assign(_current, action);
         } else {
-          EObject _current_1 = transformationContext.getCurrent();
-          EObject _eContainer = _current_1.eContainer();
-          boolean _tripleEquals = (_eContainer == null);
-          _and = _tripleEquals;
-        }
-        if (_and) {
-          EObject _current_2 = transformationContext.getCurrent();
-          actionTransformationContext.assign(_current_2, action);
-        } else {
-          EObject _current_3 = actionTransformationContext.getCurrent();
+          EObject _current_1 = actionTransformationContext.getCurrent();
           AbstractRule _rule = actionRuleCall.getRule();
           String _qualifiedName = this.ruleNames.getQualifiedName(_rule);
-          transformationContext.assign(_current_3, actionRuleCall, _qualifiedName);
+          transformationContext.assign(_current_1, actionRuleCall, _qualifiedName);
         }
       }
       transformationContext.merge(actionTransformationContext, true);
@@ -221,10 +206,10 @@ public class PsiToEcoreTransformator implements IParser {
       final RuleCall actionRuleCall_1 = actionTransformationContext_1.getActionRuleCall();
       boolean _ensureModelElementCreated_1 = transformationContext.ensureModelElementCreated(actionRuleCall_1);
       if (_ensureModelElementCreated_1) {
-        EObject _current_4 = actionTransformationContext_1.getCurrent();
+        EObject _current_2 = actionTransformationContext_1.getCurrent();
         AbstractRule _rule_1 = actionRuleCall_1.getRule();
         String _qualifiedName_1 = this.ruleNames.getQualifiedName(_rule_1);
-        transformationContext.assign(_current_4, actionRuleCall_1, _qualifiedName_1);
+        transformationContext.assign(_current_2, actionRuleCall_1, _qualifiedName_1);
       }
       transformationContext.merge(actionTransformationContext_1);
       transformationContext.compress();
@@ -247,12 +232,10 @@ public class PsiToEcoreTransformator implements IParser {
   
   protected void _transformFirstNoneActionChild(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof GrammarAwarePsiErrorElement) {
-        _matched=true;
-        EObject _grammarElement = ((GrammarAwarePsiErrorElement)it).getGrammarElement();
-        transformationContext.ensureModelElementCreated(_grammarElement);
-      }
+    if (it instanceof GrammarAwarePsiErrorElement) {
+      _matched=true;
+      EObject _grammarElement = ((GrammarAwarePsiErrorElement)it).getGrammarElement();
+      transformationContext.ensureModelElementCreated(_grammarElement);
     }
     if (!_matched) {
       if (it instanceof PsiErrorElement) {
@@ -342,25 +325,23 @@ public class PsiToEcoreTransformator implements IParser {
     AbstractRule _rule = ruleCall.getRule();
     final AbstractRule rule = _rule;
     boolean _matched = false;
-    if (!_matched) {
-      if (rule instanceof ParserRule) {
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((ParserRule)rule));
-        if (_isDatatypeRule) {
-          _matched=true;
-          transformationContext.newCompositeNode(it);
-          PsiToEcoreTransformationContext _branch = transformationContext.branch();
-          final PsiToEcoreTransformationContext childTransformationContext = _branch.withDatatypeRule();
-          PsiToEcoreTransformationContext _transformChildren = this.transformChildren(it, childTransformationContext);
-          transformationContext.sync(_transformChildren);
-          boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(ruleCall);
-          if (_ensureModelElementCreated) {
-            final DatatypeRuleToken datatypeRuleToken = childTransformationContext.getDatatypeRuleToken();
-            String _qualifiedName = this.ruleNames.getQualifiedName(rule);
-            transformationContext.assign(datatypeRuleToken, ruleCall, _qualifiedName);
-          }
-          transformationContext.merge(childTransformationContext);
-          transformationContext.compress();
+    if (rule instanceof ParserRule) {
+      boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((ParserRule)rule));
+      if (_isDatatypeRule) {
+        _matched=true;
+        transformationContext.newCompositeNode(it);
+        PsiToEcoreTransformationContext _branch = transformationContext.branch();
+        final PsiToEcoreTransformationContext childTransformationContext = _branch.withDatatypeRule();
+        PsiToEcoreTransformationContext _transformChildren = this.transformChildren(it, childTransformationContext);
+        transformationContext.sync(_transformChildren);
+        boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(ruleCall);
+        if (_ensureModelElementCreated) {
+          final DatatypeRuleToken datatypeRuleToken = childTransformationContext.getDatatypeRuleToken();
+          String _qualifiedName = this.ruleNames.getQualifiedName(rule);
+          transformationContext.assign(datatypeRuleToken, ruleCall, _qualifiedName);
         }
+        transformationContext.merge(childTransformationContext);
+        transformationContext.compress();
       }
     }
     if (!_matched) {

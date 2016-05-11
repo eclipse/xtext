@@ -19,5 +19,5 @@
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value=""/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.xtend.idea.tests"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxPermSize=320m -Didea.system.path=../intellij-ce/test-system -Didea.home.path=../intellij-ce/ -Didea.config.path=../intellij-ce/test -Didea.test.group=ALL_EXCLUDE_DEFINED -Didea.plugins.path=../org.eclipse.xtend.idea/build/ideaSandbox"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxPermSize=320m -Didea.system.path=../org.eclipse.xtend.idea/build/idea-test-system -Didea.config.path=../org.eclipse.xtend.idea/build/tmp -Didea.test.group=ALL_EXCLUDE_DEFINED -Didea.plugins.path=../org.eclipse.xtend.idea/build/ideaSandbox"/>
 </launchConfiguration>

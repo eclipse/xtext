@@ -69,11 +69,9 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
       JvmType _type = this.getType(componentTypeReference);
       final JvmType componentType = _type;
       boolean _matched = false;
-      if (!_matched) {
-        if (componentType instanceof JvmComponentType) {
-          _matched=true;
-          _switchResult = ((JvmComponentType)componentType).getArrayType();
-        }
+      if (componentType instanceof JvmComponentType) {
+        _matched=true;
+        _switchResult = ((JvmComponentType)componentType).getArrayType();
       }
       if (!_matched) {
         _switchResult = null;
@@ -132,17 +130,15 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
     Object _eGet = it.eGet(reference, false);
     final Object proxy = _eGet;
     boolean _matched = false;
-    if (!_matched) {
-      if (proxy instanceof EObject) {
-        boolean _eIsProxy = ((EObject)proxy).eIsProxy();
-        if (_eIsProxy) {
-          _matched=true;
-          final URI uri = ((InternalEObject) proxy).eProxyURI();
-          Resource _eResource = it.eResource();
-          ResourceSet _resourceSet = _eResource.getResourceSet();
-          EObject _eObject = _resourceSet.getEObject(uri, true);
-          return ((JvmType) _eObject);
-        }
+    if (proxy instanceof EObject) {
+      boolean _eIsProxy = ((EObject)proxy).eIsProxy();
+      if (_eIsProxy) {
+        _matched=true;
+        final URI uri = ((InternalEObject) proxy).eProxyURI();
+        Resource _eResource = it.eResource();
+        ResourceSet _resourceSet = _eResource.getResourceSet();
+        EObject _eObject = _resourceSet.getEObject(uri, true);
+        return ((JvmType) _eObject);
       }
     }
     if (!_matched) {

@@ -244,7 +244,9 @@ public abstract class AbstractTraceRegionToString {
   protected void add(final Map<SourceRelativeURI, AbstractTraceRegionToString.File> files, final SourceRelativeURI uri, final ITextRegion it, final AbstractTraceRegionToString.RegionHandle region, final AbstractTraceRegionToString.LocationHandle location) {
     AbstractTraceRegionToString.File file = files.get(uri);
     if ((file == null)) {
-      files.put(uri, file = new AbstractTraceRegionToString.File(uri));
+      AbstractTraceRegionToString.File _file = new AbstractTraceRegionToString.File(uri);
+      AbstractTraceRegionToString.File _file_1 = file = _file;
+      files.put(uri, _file_1);
     }
     this.add(file, it, region, location);
   }
@@ -330,14 +332,7 @@ public abstract class AbstractTraceRegionToString {
   protected int sortKey(final AbstractTraceRegionToString.Insert it) {
     final int base = (it.region.id * Short.MAX_VALUE);
     int _xifexpression = (int) 0;
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(it.location, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      _and = (it.location.id >= 0);
-    }
-    if (_and) {
+    if (((!Objects.equal(it.location, null)) && (it.location.id >= 0))) {
       _xifexpression = (base + it.location.id);
     } else {
       _xifexpression = base;
@@ -439,19 +434,7 @@ public abstract class AbstractTraceRegionToString {
       final Function1<AbstractTraceRegionToString.Insert, Boolean> _function = new Function1<AbstractTraceRegionToString.Insert, Boolean>() {
         @Override
         public Boolean apply(final AbstractTraceRegionToString.Insert it) {
-          boolean _and = false;
-          int _offset = frame.getOffset();
-          boolean _greaterEqualsThan = (it.offset >= _offset);
-          if (!_greaterEqualsThan) {
-            _and = false;
-          } else {
-            int _offset_1 = frame.getOffset();
-            int _length = frame.getLength();
-            int _plus = (_offset_1 + _length);
-            boolean _lessEqualsThan = (it.offset <= _plus);
-            _and = _lessEqualsThan;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((it.offset >= frame.getOffset()) && (it.offset <= (frame.getOffset() + frame.getLength()))));
         }
       };
       final Iterable<AbstractTraceRegionToString.Insert> inframe = IterableExtensions.<AbstractTraceRegionToString.Insert>filter(file.inserts, _function);

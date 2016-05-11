@@ -14,19 +14,12 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.dom.ASTNode;
-import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer;
-import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer.JavaParseResult;
 import org.eclipse.xtend.core.javaconverter.JavaConverter;
-import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult;
-import org.eclipse.xtend.core.xtend.XtendExecutable;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
@@ -38,7 +31,6 @@ import org.eclipse.xtext.ui.util.ClipboardUtil;
 import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.ui.imports.ImportsUtil;
 
 import com.google.inject.Inject;
@@ -50,7 +42,6 @@ import com.google.inject.Provider;
 public class PasteJavaCodeHandler extends AbstractHandler {
 	private @Inject Provider<JavaConverter> javaConverterProvider;
 	private @Inject ImportsUtil importsUtil;
-	private @Inject JavaCodeAnalyzer codeAnalyzer;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -67,8 +58,8 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		return null;
 	}
 
-	private void doPasteJavaCode(final XtextEditor activeXtextEditor, final String javaCode,
-			final JavaImportData javaImports) throws ExecutionException {
+	private void doPasteJavaCode(final XtextEditor activeXtextEditor, final String javaCode, final JavaImportData javaImports)
+			throws ExecutionException {
 		ISourceViewer sourceViewer = activeXtextEditor.getInternalSourceViewer();
 		final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
 		IJavaProject project = null;
@@ -90,11 +81,12 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 				return leafNode.getSemanticElement();
 			}
 		});
-		final String xtendCode = convertToXtend(javaCode, javaImports, targetElement, project);
+		JavaConverter javaConverter = javaConverterProvider.get();
+		final String xtendCode = javaConverter.toXtend(javaCode, javaImports != null ? javaImports.getImports() : null,
+				targetElement, project);
 		if (!Strings.isEmpty(xtendCode)) {
 			if (javaImports != null) {
-				importsUtil.addImports(javaImports.getImports(), javaImports.getStaticImports(), new String[] {},
-						xtextDocument);
+				importsUtil.addImports(javaImports.getImports(), javaImports.getStaticImports(), new String[] {}, xtextDocument);
 			}
 			Point selection = sourceViewer.getSelectedRange();
 			try {
@@ -121,27 +113,4 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		sourceViewer.setSelectedRange(restoreCaretAtOffset, 0);
 	}
 
-	private String convertToXtend(final String javaCode, final JavaImportData javaImports, final EObject targetElement,
-			IJavaProject project) {
-		boolean forceStatement = targetElement != null && !(targetElement instanceof XAnnotation)
-				&& EcoreUtil2.getContainerOfType(targetElement, XtendExecutable.class) != null;
-		JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaCode);
-		if (parseResult == null) {
-			return javaCode;
-		}
-		JavaConverter javaConverter = javaConverterProvider.get();
-		ConversionResult conversionResult;
-		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
-			if (parseResult.getType() == ASTParser.K_EXPRESSION) {
-				conversionResult = javaConverter.expressionToXtend(javaCode, project);
-			} else {
-				conversionResult = javaConverter.statementToXtend(javaCode, project);
-			}
-		} else {
-			conversionResult = javaConverter.bodyDeclarationToXtend(javaCode,
-					javaImports != null ? javaImports.getImports() : null, project);
-		}
-		final String xtendCode = conversionResult.getXtendCode();
-		return xtendCode;
-	}
 }

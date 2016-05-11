@@ -308,22 +308,22 @@ public class WildcardTypeReference extends LightweightTypeReference {
 
 	@Override
 	public String getSimpleName() {
-		return getAsString(SimpleNameFunction.INSTANCE);
+		return getAsString(SimpleNameFunction.INSTANCE, true);
 	}
 	
 	@Override
 	public String getIdentifier() {
-		return getAsString(IdentifierFunction.INSTANCE);
+		return getAsString(IdentifierFunction.INSTANCE, false);
 	}
 	
 	@Override
 	public String getUniqueIdentifier() {
-		return getAsString(UniqueIdentifierFunction.INSTANCE);
+		return getAsString(UniqueIdentifierFunction.INSTANCE, false);
 	}
 	
 	@Override
 	public String getJavaIdentifier() {
-		return getAsString(JavaIdentifierFunction.INSTANCE);
+		return getAsString(JavaIdentifierFunction.INSTANCE, false);
 	}
 	
 	@Override
@@ -332,12 +332,14 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		return null;
 	}
 	
-	private String getAsString(Function<LightweightTypeReference, String> format) {
+	private String getAsString(Function<LightweightTypeReference, String> format, boolean simpleName) {
 		if (lowerBound != null) {
 			return "? super " + format.apply(lowerBound);
 		}
-		if (upperBounds != null && upperBounds.size() == 1 && upperBounds.get(0).isType(Object.class)) {
-			return "?";
+		if (simpleName) {
+			if (upperBounds != null && upperBounds.size() == 1 && upperBounds.get(0).isType(Object.class)) {
+				return "?";
+			}
 		}
 		return "?" + ( upperBounds != null ? " extends " + Joiner.on(" & ").join(Iterables.transform(upperBounds, format)) : "");
 	}

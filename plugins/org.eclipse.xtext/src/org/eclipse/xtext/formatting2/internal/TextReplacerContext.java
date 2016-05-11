@@ -43,8 +43,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		this(document, null, 0, null);
 	}
 
-	protected TextReplacerContext(IFormattableDocument document, ITextReplacerContext previous, int indentation,
-			ITextReplacer replacer) {
+	protected TextReplacerContext(IFormattableDocument document, ITextReplacerContext previous, int indentation, ITextReplacer replacer) {
 		super();
 		this.document = document;
 		this.indentation = indentation;
@@ -198,11 +197,15 @@ public class TextReplacerContext implements ITextReplacerContext {
 		String indentation = preferences.getPreference(FormatterPreferenceKeys.indentation);
 		if (!"\t".equals(indentation))
 			return text.length();
-		int indentationLength = preferences.getPreference(FormatterPreferenceKeys.indentationLength);
+		@SuppressWarnings("deprecation")
+		int tabWidth = preferences.getPreference(FormatterPreferenceKeys.indentationLength);
+		if (tabWidth < 0) {
+			tabWidth = preferences.getPreference(FormatterPreferenceKeys.tabWidth);
+		}
 		int length = 0;
 		for (int i = 0; i < text.length(); i++)
 			if (text.charAt(i) == '\t')
-				length += indentationLength;
+				length += tabWidth;
 			else
 				length++;
 		return length;
@@ -280,8 +283,8 @@ public class TextReplacerContext implements ITextReplacerContext {
 			items.add("canAutowrap");
 		if (replacer != null) {
 			ITextSegment region = replacer.getRegion();
-			items.add(format("replacer=[%d-%d-%s|%s]", region.getOffset(), region.getLength(),
-					replacer.getClass().getSimpleName(), replacer.toString()));
+			items.add(format("replacer=[%d-%d-%s|%s]", region.getOffset(), region.getLength(), replacer.getClass().getSimpleName(),
+					replacer.toString()));
 		}
 		if (replacements != null)
 			for (ITextReplacement r : replacements) {
@@ -313,8 +316,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 				if (nextReplacerIsChild) {
 					Preconditions.checkArgument(lastReplacer.getRegion().contains(replacer.getRegion()));
 				} else {
-					Preconditions
-							.checkArgument(lastReplacer.getRegion().getEndOffset() <= replacer.getRegion().getOffset());
+					Preconditions.checkArgument(lastReplacer.getRegion().getEndOffset() <= replacer.getRegion().getOffset());
 				}
 				break;
 			}

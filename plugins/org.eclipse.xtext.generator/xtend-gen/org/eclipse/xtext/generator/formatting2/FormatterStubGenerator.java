@@ -122,14 +122,7 @@ public class FormatterStubGenerator {
         if ((type instanceof EClass)) {
           String _feature = assignment.getFeature();
           final EStructuralFeature feature = ((EClass)type).getEStructuralFeature(_feature);
-          boolean _and = false;
-          if (!(feature instanceof EReference)) {
-            _and = false;
-          } else {
-            boolean _isContainment = ((EReference) feature).isContainment();
-            _and = _isContainment;
-          }
-          if (_and) {
+          if (((feature instanceof EReference) && ((EReference) feature).isContainment())) {
             type2ref.put(((EClass)type), ((EReference) feature));
           }
         }
@@ -145,14 +138,7 @@ public class FormatterStubGenerator {
           final EClassifier type = _type.getClassifier();
           if ((type instanceof EClass)) {
             final EStructuralFeature feature = ((EClass)type).getEStructuralFeature(featureName);
-            boolean _and = false;
-            if (!(feature instanceof EReference)) {
-              _and = false;
-            } else {
-              boolean _isContainment = ((EReference) feature).isContainment();
-              _and = _isContainment;
-            }
-            if (_and) {
+            if (((feature instanceof EReference) && ((EReference) feature).isContainment())) {
               type2ref.put(((EClass)type), ((EReference) feature));
             }
           }

@@ -7,11 +7,11 @@ import org.eclipse.xtext.xbase.junit.ui.AbstractContentAssistTest
 import org.junit.runner.RunWith
 import org.junit.Test
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(DomainmodelUiInjectorProvider))
 /**
  * @author Jan Koehnlein - copied and adapted form Xtend
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(DomainmodelUiInjectorProvider))
 class ContentAssistTest extends AbstractContentAssistTest {
 	
 	@Test def void testImportCompletion() {

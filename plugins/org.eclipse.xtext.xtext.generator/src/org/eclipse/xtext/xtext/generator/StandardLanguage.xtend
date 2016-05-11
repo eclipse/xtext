@@ -37,6 +37,7 @@ import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
 import java.util.List
+import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -73,7 +74,7 @@ import java.util.List
 	
 	OutlineTreeProviderFragment2 outline = new OutlineTreeProviderFragment2
 	
-	QuickfixProviderFragment2 quickFixProvider =  new QuickfixProviderFragment2
+	QuickfixProviderFragment2 quickFixProvider = new QuickfixProviderFragment2
 	
 	ContentAssistFragment2 contentAssist = new ContentAssistFragment2
 	
@@ -83,9 +84,9 @@ import java.util.List
 	
 	TypesGeneratorFragment2 commonTypesSupport = new TypesGeneratorFragment2
 	
-	XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2
-	
 	XbaseGeneratorFragment2 xbaseSupport = new XbaseGeneratorFragment2
+	
+	XtypeGeneratorFragment2 xtypeSupport = new XtypeGeneratorFragment2
 	
 	CodetemplatesGeneratorFragment2 codeTemplates = new CodetemplatesGeneratorFragment2
 	
@@ -97,7 +98,10 @@ import java.util.List
 	
 	WebIntegrationFragment webSupport = new WebIntegrationFragment
 	
+	SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2
+	
 	new() {
+		addReferencedResource("platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel")
 		try {
 			class.classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule")
 			addReferencedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel")
@@ -151,6 +155,7 @@ import java.util.List
 		fragments += ideaParser
 		fragments += ideaPlugin
 		fragments += webSupport
+		fragments += newProjectWizardForEclipse
 		fragments
 	}
 	

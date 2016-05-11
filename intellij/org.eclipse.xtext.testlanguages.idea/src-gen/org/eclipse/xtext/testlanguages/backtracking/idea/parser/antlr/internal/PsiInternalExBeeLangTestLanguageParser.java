@@ -21031,7 +21031,7 @@ public class PsiInternalExBeeLangTestLanguageParser extends PsiInternalExBeeLang
     	public PsiInternalExBeeLangTestLanguageParser(PsiBuilder builder, TokenStream input, ExBeeLangTestLanguageElementTypeProvider elementTypeProvider, ExBeeLangTestLanguageGrammarAccess grammarAccess) {
     		this(input);
     		setPsiBuilder(builder);
-        	this.grammarAccess = grammarAccess;
+    		this.grammarAccess = grammarAccess;
     		this.elementTypeProvider = elementTypeProvider;
     	}
 }

@@ -22,11 +22,9 @@ public class XtendIconProvider extends IconProvider {
   public Icon getIcon(final PsiElement element, final int flags) {
     Icon _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof XtendFileImpl) {
-        _matched=true;
-        _switchResult = XtendIcons.Xtend_ICON;
-      }
+    if (element instanceof XtendFileImpl) {
+      _matched=true;
+      _switchResult = XtendIcons.Xtend_ICON;
     }
     return _switchResult;
   }

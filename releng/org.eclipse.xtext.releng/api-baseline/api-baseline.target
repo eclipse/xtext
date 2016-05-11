@@ -2,9 +2,9 @@
 <?pde version="3.8"?><target name="api-baseline" sequenceNumber="3">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="false" type="InstallableUnit">
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.8.0.v201503090534"/>
-<unit id="org.eclipse.xtend.sdk.feature.group" version="2.8.0.v201503090534"/>
-<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/head/R201503090534/"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.9.0.v201512010527"/>
+<unit id="org.eclipse.xtend.sdk.feature.group" version="2.9.0.v201512010527"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.9.0/"/>
 </location>
 </locations>
 </target>

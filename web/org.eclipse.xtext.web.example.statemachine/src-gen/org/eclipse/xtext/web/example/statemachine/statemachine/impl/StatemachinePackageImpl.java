@@ -277,6 +277,16 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getState_NestedStates()
+  {
+    return (EReference)stateEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getTransition()
   {
     return transitionEClass;
@@ -427,6 +437,7 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
     createEAttribute(stateEClass, STATE__NAME);
     createEReference(stateEClass, STATE__COMMANDS);
     createEReference(stateEClass, STATE__TRANSITIONS);
+    createEReference(stateEClass, STATE__NESTED_STATES);
 
     transitionEClass = createEClass(TRANSITION);
     createEReference(transitionEClass, TRANSITION__CONDITION);
@@ -492,6 +503,7 @@ public class StatemachinePackageImpl extends EPackageImpl implements Statemachin
     initEAttribute(getState_Name(), ecorePackage.getEString(), "name", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getState_Commands(), this.getCommand(), null, "commands", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getState_Transitions(), this.getTransition(), null, "transitions", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getState_NestedStates(), this.getState(), null, "nestedStates", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTransition_Condition(), this.getCondition(), null, "condition", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

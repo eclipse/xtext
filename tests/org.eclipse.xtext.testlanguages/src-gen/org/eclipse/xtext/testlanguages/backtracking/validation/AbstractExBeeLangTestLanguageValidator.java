@@ -11,8 +11,8 @@ public abstract class AbstractExBeeLangTestLanguageValidator extends BeeLangTest
 	
 	@Override
 	protected List<EPackage> getEPackages() {
-	    List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
-	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/2010/tmf/xtext/beeLangTestLanguage"));
+		List<EPackage> result = new ArrayList<EPackage>(super.getEPackages());
+		result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/2010/tmf/xtext/beeLangTestLanguage"));
 		return result;
 	}
 	

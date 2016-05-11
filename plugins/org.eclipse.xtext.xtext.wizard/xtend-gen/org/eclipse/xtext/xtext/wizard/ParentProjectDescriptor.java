@@ -31,6 +31,7 @@ import org.eclipse.xtext.xtext.wizard.BinaryFile;
 import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.Outlet;
+import org.eclipse.xtext.xtext.wizard.P2RepositoryProject;
 import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -55,26 +56,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public boolean isEnabled() {
-    boolean _or = false;
-    boolean _or_1 = false;
-    WizardConfiguration _config = this.getConfig();
-    boolean _needsGradleBuild = _config.needsGradleBuild();
-    if (_needsGradleBuild) {
-      _or_1 = true;
-    } else {
-      WizardConfiguration _config_1 = this.getConfig();
-      boolean _needsMavenBuild = _config_1.needsMavenBuild();
-      _or_1 = _needsMavenBuild;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      WizardConfiguration _config_2 = this.getConfig();
-      ProjectLayout _projectLayout = _config_2.getProjectLayout();
-      boolean _equals = Objects.equal(_projectLayout, ProjectLayout.HIERARCHICAL);
-      _or = _equals;
-    }
-    return _or;
+    return ((this.getConfig().needsGradleBuild() || this.getConfig().needsMavenBuild()) || Objects.equal(this.getConfig().getProjectLayout(), ProjectLayout.HIERARCHICAL));
   }
   
   @Override
@@ -320,15 +302,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
         @Override
         public Boolean apply(final ProjectDescriptor it) {
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(it, ParentProjectDescriptor.this));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            boolean _isPartOfGradleBuild = it.isPartOfGradleBuild();
-            _and = _isPartOfGradleBuild;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((!Objects.equal(it, ParentProjectDescriptor.this)) && it.isPartOfGradleBuild()));
         }
       };
       Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
@@ -672,15 +646,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
           final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
             @Override
             public Boolean apply(final ProjectDescriptor it) {
-              boolean _and = false;
-              boolean _notEquals = (!Objects.equal(it, ParentProjectDescriptor.this));
-              if (!_notEquals) {
-                _and = false;
-              } else {
-                boolean _isPartOfMavenBuild = it.isPartOfMavenBuild();
-                _and = _isPartOfMavenBuild;
-              }
-              return Boolean.valueOf(_and);
+              return Boolean.valueOf(((!Objects.equal(it, ParentProjectDescriptor.this)) && it.isPartOfMavenBuild()));
             }
           };
           Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
@@ -736,6 +702,212 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
             _builder.append("\t");
             _builder.append("</plugin>");
             _builder.newLine();
+            {
+              WizardConfiguration _config_6 = ParentProjectDescriptor.this.getConfig();
+              P2RepositoryProject _p2Project = _config_6.getP2Project();
+              boolean _isEnabled = _p2Project.isEnabled();
+              if (_isEnabled) {
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<plugin>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<groupId>org.eclipse.tycho</groupId>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<artifactId>tycho-source-plugin</artifactId>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<version>${tycho-version}</version>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<executions>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t");
+                _builder.append("<execution>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("<id>plugin-source</id>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("<goals>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("<goal>plugin-source</goal>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("</goals>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t");
+                _builder.append("</execution>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("</executions>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("</plugin>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<plugin>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<groupId>org.eclipse.tycho.extras</groupId>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<artifactId>tycho-source-feature-plugin</artifactId>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<version>${tycho-version}</version>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<executions>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t");
+                _builder.append("<execution>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("<id>source-feature</id>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("<phase>package</phase>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("<goals>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("<goal>source-feature</goal>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("</goals>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t");
+                _builder.append("</execution>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("</executions>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("</plugin>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<plugin>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<groupId>org.eclipse.tycho</groupId>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<artifactId>tycho-p2-plugin</artifactId>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<version>${tycho-version}</version>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("<executions>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t");
+                _builder.append("<execution>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("<id>attach-p2-metadata</id>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("<phase>package</phase>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("<goals>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t\t");
+                _builder.append("<goal>p2-metadata</goal>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t\t");
+                _builder.append("</goals>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t\t");
+                _builder.append("</execution>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("</executions>");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("</plugin>");
+                _builder.newLine();
+              }
+            }
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("<plugin>");
@@ -767,16 +939,16 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
             _builder.append("\t");
             _builder.append("\t\t\t\t\t");
             _builder.append("<groupId>");
-            WizardConfiguration _config_6 = ParentProjectDescriptor.this.getConfig();
-            String _baseName = _config_6.getBaseName();
+            WizardConfiguration _config_7 = ParentProjectDescriptor.this.getConfig();
+            String _baseName = _config_7.getBaseName();
             _builder.append(_baseName, "\t\t\t\t\t\t");
             _builder.append("</groupId>");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t\t\t\t\t");
             _builder.append("<artifactId>");
-            WizardConfiguration _config_7 = ParentProjectDescriptor.this.getConfig();
-            TargetPlatformProject _targetPlatformProject = _config_7.getTargetPlatformProject();
+            WizardConfiguration _config_8 = ParentProjectDescriptor.this.getConfig();
+            TargetPlatformProject _targetPlatformProject = _config_8.getTargetPlatformProject();
             String _name_1 = _targetPlatformProject.getName();
             _builder.append(_name_1, "\t\t\t\t\t\t");
             _builder.append("</artifactId>");
@@ -1028,6 +1200,66 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("<groupId>");
         _builder.newLine();
         _builder.append("\t\t\t\t\t\t\t\t\t\t");
+        _builder.append("org.apache.maven.plugins");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t");
+        _builder.append("</groupId>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t");
+        _builder.append("<artifactId>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t\t");
+        _builder.append("maven-resources-plugin");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t");
+        _builder.append("</artifactId>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t");
+        _builder.append("<versionRange>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t\t");
+        _builder.append("[2.4.3,)");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t");
+        _builder.append("</versionRange>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t");
+        _builder.append("<goals>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t\t");
+        _builder.append("<goal>resources</goal>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t\t");
+        _builder.append("<goal>testResources</goal>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t");
+        _builder.append("</goals>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t");
+        _builder.append("</pluginExecutionFilter>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t");
+        _builder.append("<action>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t");
+        _builder.append("<ignore></ignore>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t");
+        _builder.append("</action>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t");
+        _builder.append("</pluginExecution>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t");
+        _builder.append("<pluginExecution>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t");
+        _builder.append("<pluginExecutionFilter>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t");
+        _builder.append("<groupId>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t\t\t\t\t");
         _builder.append("org.codehaus.mojo");
         _builder.newLine();
         _builder.append("\t\t\t\t\t\t\t\t\t");
@@ -1085,8 +1317,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("</pluginExecution>");
         _builder.newLine();
         {
-          WizardConfiguration _config_8 = ParentProjectDescriptor.this.getConfig();
-          boolean _needsTychoBuild_2 = _config_8.needsTychoBuild();
+          WizardConfiguration _config_9 = ParentProjectDescriptor.this.getConfig();
+          boolean _needsTychoBuild_2 = _config_9.needsTychoBuild();
           if (_needsTychoBuild_2) {
             _builder.append("\t\t\t\t\t\t\t");
             _builder.append("<pluginExecution>");
@@ -1215,6 +1447,10 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
             _builder.newLine();
             _builder.append("\t\t\t\t\t\t\t");
             _builder.append("\t\t\t");
+            _builder.append("<goal>build-qualifier-aggregator</goal>");
+            _builder.newLine();
+            _builder.append("\t\t\t\t\t\t\t");
+            _builder.append("\t\t\t");
             _builder.append("<goal>validate-id</goal>");
             _builder.newLine();
             _builder.append("\t\t\t\t\t\t\t");
@@ -1259,8 +1495,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("</plugin>");
         _builder.newLine();
         {
-          WizardConfiguration _config_9 = ParentProjectDescriptor.this.getConfig();
-          boolean _needsTychoBuild_3 = _config_9.needsTychoBuild();
+          WizardConfiguration _config_10 = ParentProjectDescriptor.this.getConfig();
+          boolean _needsTychoBuild_3 = _config_10.needsTychoBuild();
           if (_needsTychoBuild_3) {
             _builder.append("\t\t\t");
             _builder.append("<plugin>");
@@ -1354,8 +1590,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("</repository>");
         _builder.newLine();
         {
-          WizardConfiguration _config_10 = ParentProjectDescriptor.this.getConfig();
-          XtextVersion _xtextVersion_1 = _config_10.getXtextVersion();
+          WizardConfiguration _config_11 = ParentProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion_1 = _config_11.getXtextVersion();
           boolean _isSnapshot = _xtextVersion_1.isSnapshot();
           if (_isSnapshot) {
             _builder.append("\t");
@@ -1420,8 +1656,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("</pluginRepository>");
         _builder.newLine();
         {
-          WizardConfiguration _config_11 = ParentProjectDescriptor.this.getConfig();
-          XtextVersion _xtextVersion_2 = _config_11.getXtextVersion();
+          WizardConfiguration _config_12 = ParentProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion_2 = _config_12.getXtextVersion();
           boolean _isSnapshot_1 = _xtextVersion_2.isSnapshot();
           if (_isSnapshot_1) {
             _builder.append("\t");

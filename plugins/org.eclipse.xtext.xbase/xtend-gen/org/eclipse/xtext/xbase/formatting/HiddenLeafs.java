@@ -22,23 +22,7 @@ public class HiddenLeafs {
   private final List<LeafInfo> leafs = CollectionLiterals.<LeafInfo>newArrayList();
   
   public boolean isSingleWhitespace() {
-    boolean _or = false;
-    boolean _isEmpty = this.leafs.isEmpty();
-    if (_isEmpty) {
-      _or = true;
-    } else {
-      boolean _and = false;
-      int _size = this.leafs.size();
-      boolean _equals = (_size == 1);
-      if (!_equals) {
-        _and = false;
-      } else {
-        LeafInfo _head = IterableExtensions.<LeafInfo>head(this.leafs);
-        _and = (_head instanceof WhitespaceInfo);
-      }
-      _or = _and;
-    }
-    return _or;
+    return (this.leafs.isEmpty() || ((this.leafs.size() == 1) && (IterableExtensions.<LeafInfo>head(this.leafs) instanceof WhitespaceInfo)));
   }
   
   public int getLenght() {

@@ -7,17 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.core.resource
 
+import java.lang.reflect.InvocationTargetException
 import java.util.Map
 import org.eclipse.core.resources.IStorage
 import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.CoreException
+import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.emf.common.util.URI
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
+import org.eclipse.ui.actions.WorkspaceModifyOperation
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.TextFile
 import org.eclipse.xtext.ui.resource.JarEntryLocator
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl.PackageFragmentRootData
 import org.eclipse.xtext.ui.resource.UriValidator
+import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -57,6 +62,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 			}
 			locator = new JarEntryLocator()
 			workspace = ResourcesPlugin.workspace
+			javaProjectClasspathChangeAnalyzer = new JavaProjectClasspathChangeAnalyzer
 		]
 	}
 
@@ -158,6 +164,30 @@ class Storage2UriMapperJavaImplTest extends Assert {
 
 		project.project.delete(true, monitor)
 		project2.project.delete(true, monitor)
+		assertNonProjects
+	}
+	
+	@Test
+	def void testOnRemoveTwoProjects() {
+		val project = createJavaProject("testProject")
+		val project2 = createJavaProject("testProject2")
+		
+		val sizeBefore = cachedPackageFragmentRootData.size
+
+		val file = project.createJar
+		addJarToClasspath(project, file)
+		addJarToClasspath(project2, file)
+		assertBothProjects(sizeBefore)
+
+		val op = new WorkspaceModifyOperation() {
+			
+			override protected execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+				project.project.delete(true, monitor)
+				project2.project.delete(true, monitor)
+			}
+			
+		}
+		op.run(monitor);
 		assertNonProjects
 	}
 

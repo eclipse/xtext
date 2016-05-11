@@ -126,14 +126,7 @@ public class GeneratorConfigProvider implements IGeneratorConfigProvider {
     final ResourceSet resourceSet = _resourceSet;
     if ((resourceSet != null)) {
       final GeneratorConfigProvider.GeneratorConfigAdapter adapter = GeneratorConfigProvider.GeneratorConfigAdapter.findInEmfObject(resourceSet);
-      boolean _and = false;
-      if (!(adapter != null)) {
-        _and = false;
-      } else {
-        boolean _containsKey = adapter.language2GeneratorConfig.containsKey(this.languageId);
-        _and = _containsKey;
-      }
-      if (_and) {
+      if (((adapter != null) && adapter.language2GeneratorConfig.containsKey(this.languageId))) {
         return adapter.language2GeneratorConfig.get(this.languageId);
       }
     }

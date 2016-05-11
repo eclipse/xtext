@@ -13,23 +13,23 @@ import com.google.inject.Module
 import com.google.inject.Provider
 import com.google.inject.util.Modules
 import java.util.concurrent.ExecutorService
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
+import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 
 /** 
  * Initialization support for running Xtext languages in web applications.
  */
+@FinalFieldsConstructor
 class StatemachineWebSetup extends StatemachineStandaloneSetup {
 
-	final Provider<ExecutorService> executorServiceProvider
-
-	new(Provider<ExecutorService> executorServiceProvider) {
-		this.executorServiceProvider = executorServiceProvider
-	}
+	val Provider<ExecutorService> executorServiceProvider
+	val IResourceBaseProvider resourceBaseProvider
 
 	override Injector createInjector() {
 		var Module runtimeModule = new StatemachineRuntimeModule()
-		var Module webModule = new StatemachineWebModule(executorServiceProvider)
+		var Module webModule = new StatemachineWebModule(executorServiceProvider, resourceBaseProvider)
 		return Guice.createInjector(Modules.^override(runtimeModule).with(webModule))
 	}
 }

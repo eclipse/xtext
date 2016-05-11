@@ -50,16 +50,14 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
     Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
     for (final EObject content : _iterable) {
       boolean _matched = false;
-      if (!_matched) {
-        if (content instanceof XAbstractFeatureCall) {
-          _matched=true;
-          this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
-          XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
-          boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
-          if (_notEquals) {
-            XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
-            this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
-          }
+      if (content instanceof XAbstractFeatureCall) {
+        _matched=true;
+        this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
+        XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
+        boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
+        if (_notEquals) {
+          XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
+          this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
         }
       }
       if (!_matched) {
@@ -80,17 +78,15 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
       Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(_eAllContents_1);
       for (final EObject content_1 : _iterable_1) {
         boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (content_1 instanceof XConstructorCall) {
-            _matched_1=true;
-            Object _eGet = ((XConstructorCall)content_1).eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
-            final InternalEObject constructor = ((InternalEObject) _eGet);
-            String _string = ((XConstructorCall)content_1).toString();
-            Assert.assertNotNull(_string, constructor);
-            String _string_1 = ((XConstructorCall)content_1).toString();
-            boolean _eIsProxy = constructor.eIsProxy();
-            Assert.assertFalse(_string_1, _eIsProxy);
-          }
+        if (content_1 instanceof XConstructorCall) {
+          _matched_1=true;
+          Object _eGet = ((XConstructorCall)content_1).eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+          final InternalEObject constructor = ((InternalEObject) _eGet);
+          String _string = ((XConstructorCall)content_1).toString();
+          Assert.assertNotNull(_string, constructor);
+          String _string_1 = ((XConstructorCall)content_1).toString();
+          boolean _eIsProxy = constructor.eIsProxy();
+          Assert.assertFalse(_string_1, _eIsProxy);
         }
         if (!_matched_1) {
           if (content_1 instanceof XAbstractFeatureCall) {

@@ -123,32 +123,17 @@ public class TraceBasedApplicationConfigurationProducer extends JavaRunConfigura
   public boolean internalIsConfigurationFromContext(final ApplicationConfiguration appConfiguration, final ConfigurationContext context) {
     final PsiElement location = context.getPsiLocation();
     final PsiClass aClass = ApplicationConfigurationType.getMainClass(location);
-    boolean _and = false;
-    if (!(aClass != null)) {
-      _and = false;
-    } else {
-      String _runtimeQualifiedName = JavaExecutionUtil.getRuntimeQualifiedName(aClass);
-      boolean _equal = Comparing.equal(_runtimeQualifiedName, appConfiguration.MAIN_CLASS_NAME);
-      _and = _equal;
-    }
-    if (_and) {
+    if (((aClass != null) && 
+      Comparing.equal(JavaExecutionUtil.getRuntimeQualifiedName(aClass), appConfiguration.MAIN_CLASS_NAME))) {
       final PsiMethod method = PsiTreeUtil.<PsiMethod>getParentOfType(location, PsiMethod.class, false);
-      boolean _and_1 = false;
-      if (!(method != null)) {
-        _and_1 = false;
-      } else {
-        TestFrameworks _instance = TestFrameworks.getInstance();
-        boolean _isTestMethod = _instance.isTestMethod(method);
-        _and_1 = _isTestMethod;
-      }
-      if (_and_1) {
+      if (((method != null) && TestFrameworks.getInstance().isTestMethod(method))) {
         return false;
       }
       JavaRunConfigurationModule _configurationModule = appConfiguration.getConfigurationModule();
       final Module configurationModule = _configurationModule.getModule();
       Module _module = context.getModule();
-      boolean _equal_1 = Comparing.<Module>equal(_module, configurationModule);
-      if (_equal_1) {
+      boolean _equal = Comparing.<Module>equal(_module, configurationModule);
+      if (_equal) {
         return true;
       }
       RunManager _runManager = context.getRunManager();
@@ -158,8 +143,8 @@ public class TraceBasedApplicationConfigurationProducer extends JavaRunConfigura
       ApplicationConfiguration template = ((ApplicationConfiguration) _configuration);
       JavaRunConfigurationModule _configurationModule_1 = template.getConfigurationModule();
       final Module predefinedModule = _configurationModule_1.getModule();
-      boolean _equal_2 = Comparing.<Module>equal(predefinedModule, configurationModule);
-      if (_equal_2) {
+      boolean _equal_1 = Comparing.<Module>equal(predefinedModule, configurationModule);
+      if (_equal_1) {
         return true;
       }
     }

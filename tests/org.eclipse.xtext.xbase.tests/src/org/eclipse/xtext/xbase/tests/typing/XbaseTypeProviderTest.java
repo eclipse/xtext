@@ -142,7 +142,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testSwitchExpression_Bug343100() throws Exception {
-		assertResolvedType("java.lang.Class<?>",
+		assertResolvedType("java.lang.Class<? extends java.lang.Object>",
 			"switch 'a' {\n" + 
 			"  case null: typeof(java.lang.String)\n" + 
 			"  case 'a': typeof(java.lang.Void)\n" + 
@@ -294,7 +294,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testListLiteral_5() throws Exception {
-		assertResolvedType("java.util.List<? extends java.lang.Number & java.lang.Comparable<?>>", "#[1,2.0,3]");
+		assertResolvedType("java.util.List<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "#[1,2.0,3]");
 	}
 	
 	@Test public void testSetLiteral_0() throws Exception {
@@ -318,7 +318,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	@Test public void testSetLiteral_5() throws Exception {
-		assertResolvedType("java.util.Set<? extends java.lang.Number & java.lang.Comparable<?>>", "#{1,2.0,3}");
+		assertResolvedType("java.util.Set<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "#{1,2.0,3}");
 	}
 
 	@Test public void testCastExpression() throws Exception {
@@ -358,7 +358,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testFeatureCall_04() throws Exception {
-		assertResolvedType("java.util.List<java.lang.Comparable<?> & java.io.Serializable>", "new testdata.ClassWithVarArgs().toList('', 1)");
+		assertResolvedType("java.util.List<java.lang.Comparable<? extends java.lang.Object> & java.io.Serializable>", "new testdata.ClassWithVarArgs().toList('', 1)");
 	}
 	
 	@Test public void testFeatureCall_05() throws Exception {
@@ -366,7 +366,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("java.util.List<java.lang.Number>", "new testdata.ClassWithVarArgs().toNumberList()");
 		assertResolvedType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0)");
 		assertResolvedType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0, 1)");
-		assertResolvedType("java.util.List<java.lang.Number & java.lang.Comparable<?>>", "new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)");
+		assertResolvedType("java.util.List<java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)");
 	}
 	
 	@Test public void testFeatureCall_06() throws Exception {

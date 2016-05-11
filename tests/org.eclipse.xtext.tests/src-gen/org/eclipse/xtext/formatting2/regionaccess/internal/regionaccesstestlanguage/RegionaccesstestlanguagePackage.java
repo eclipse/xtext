@@ -373,13 +373,50 @@ public interface RegionaccesstestlanguagePackage extends EPackage
   int MIXED__LIT = ROOT_FEATURE_COUNT + 4;
 
   /**
+   * The feature id for the '<em><b>Frag Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MIXED__FRAG_NAME = ROOT_FEATURE_COUNT + 5;
+
+  /**
    * The number of structural features of the '<em>Mixed</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MIXED_FEATURE_COUNT = ROOT_FEATURE_COUNT + 5;
+  int MIXED_FEATURE_COUNT = ROOT_FEATURE_COUNT + 6;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RootActionImpl <em>Root Action</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RootActionImpl
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getRootAction()
+   * @generated
+   */
+  int ROOT_ACTION = 9;
+
+  /**
+   * The feature id for the '<em><b>Mixed</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOT_ACTION__MIXED = ROOT__MIXED;
+
+  /**
+   * The number of structural features of the '<em>Root Action</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOT_ACTION_FEATURE_COUNT = ROOT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl <em>Add</em>}' class.
@@ -389,7 +426,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAdd()
    * @generated
    */
-  int ADD = 9;
+  int ADD = 10;
 
   /**
    * The feature id for the '<em><b>Mixed</b></em>' containment reference.
@@ -435,7 +472,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getNamed()
    * @generated
    */
-  int NAMED = 10;
+  int NAMED = 11;
 
   /**
    * The feature id for the '<em><b>Mixed</b></em>' containment reference.
@@ -472,7 +509,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAction()
    * @generated
    */
-  int ACTION = 11;
+  int ACTION = 12;
 
   /**
    * The feature id for the '<em><b>Mixed</b></em>' containment reference.
@@ -529,6 +566,15 @@ public interface RegionaccesstestlanguagePackage extends EPackage
   int ACTION__LIT = MIXED__LIT;
 
   /**
+   * The feature id for the '<em><b>Frag Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__FRAG_NAME = MIXED__FRAG_NAME;
+
+  /**
    * The number of structural features of the '<em>Action</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -545,7 +591,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getAssignedAction()
    * @generated
    */
-  int ASSIGNED_ACTION = 12;
+  int ASSIGNED_ACTION = 13;
 
   /**
    * The feature id for the '<em><b>Mixed</b></em>' containment reference.
@@ -602,6 +648,15 @@ public interface RegionaccesstestlanguagePackage extends EPackage
   int ASSIGNED_ACTION__LIT = MIXED__LIT;
 
   /**
+   * The feature id for the '<em><b>Frag Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNED_ACTION__FRAG_NAME = MIXED__FRAG_NAME;
+
+  /**
    * The feature id for the '<em><b>Child</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -636,7 +691,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getEnum()
    * @generated
    */
-  int ENUM = 13;
+  int ENUM = 14;
 
 
   /**
@@ -838,6 +893,27 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * @generated
    */
   EAttribute getMixed_Lit();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getFragName <em>Frag Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Frag Name</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed#getFragName()
+   * @see #getMixed()
+   * @generated
+   */
+  EAttribute getMixed_FragName();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction <em>Root Action</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Root Action</em>'.
+   * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RootAction
+   * @generated
+   */
+  EClass getRootAction();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Add <em>Add</em>}'.
@@ -1136,6 +1212,24 @@ public interface RegionaccesstestlanguagePackage extends EPackage
      * @generated
      */
     EAttribute MIXED__LIT = eINSTANCE.getMixed_Lit();
+
+    /**
+     * The meta object literal for the '<em><b>Frag Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MIXED__FRAG_NAME = eINSTANCE.getMixed_FragName();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RootActionImpl <em>Root Action</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RootActionImpl
+     * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.RegionaccesstestlanguagePackageImpl#getRootAction()
+     * @generated
+     */
+    EClass ROOT_ACTION = eINSTANCE.getRootAction();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.AddImpl <em>Add</em>}' class.

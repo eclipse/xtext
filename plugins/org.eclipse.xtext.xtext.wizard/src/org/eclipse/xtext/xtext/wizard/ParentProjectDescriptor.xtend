@@ -230,6 +230,49 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 								<version>${tycho-version}</version>
 								<extensions>true</extensions>
 							</plugin>
+							«IF config.p2Project.enabled»
+							<plugin>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>tycho-source-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<executions>
+									<execution>
+										<id>plugin-source</id>
+										<goals>
+											<goal>plugin-source</goal>
+										</goals>
+									</execution>
+								</executions>
+							</plugin>
+							<plugin>
+								<groupId>org.eclipse.tycho.extras</groupId>
+								<artifactId>tycho-source-feature-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<executions>
+									<execution>
+										<id>source-feature</id>
+										<phase>package</phase>
+										<goals>
+											<goal>source-feature</goal>
+										</goals>
+									</execution>
+								</executions>
+							</plugin>
+							<plugin>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>tycho-p2-plugin</artifactId>
+								<version>${tycho-version}</version>
+								<executions>
+									<execution>
+										<id>attach-p2-metadata</id>
+										<phase>package</phase>
+										<goals>
+											<goal>p2-metadata</goal>
+										</goals>
+									</execution>
+								</executions>
+							</plugin>
+							«ENDIF»
 							<plugin>
 								<groupId>org.eclipse.tycho</groupId>
 								<artifactId>target-platform-configuration</artifactId>
@@ -309,6 +352,26 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 											<pluginExecution>
 												<pluginExecutionFilter>
 													<groupId>
+														org.apache.maven.plugins
+													</groupId>
+													<artifactId>
+														maven-resources-plugin
+													</artifactId>
+													<versionRange>
+														[2.4.3,)
+													</versionRange>
+													<goals>
+														<goal>resources</goal>
+														<goal>testResources</goal>
+													</goals>
+												</pluginExecutionFilter>
+												<action>
+													<ignore></ignore>
+												</action>
+											</pluginExecution>
+											<pluginExecution>
+												<pluginExecutionFilter>
+													<groupId>
 														org.codehaus.mojo
 													</groupId>
 													<artifactId>
@@ -361,6 +424,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 														</versionRange>
 														<goals>
 															<goal>build-qualifier</goal>
+															<goal>build-qualifier-aggregator</goal>
 															<goal>validate-id</goal>
 															<goal>validate-version</goal>
 														</goals>

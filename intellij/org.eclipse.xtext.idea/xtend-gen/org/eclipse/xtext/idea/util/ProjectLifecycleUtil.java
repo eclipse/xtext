@@ -43,17 +43,7 @@ public class ProjectLifecycleUtil {
    * @returns <code>true</code> when  project is fully initialized and the Index is ready (SmartMode).<br>
    */
   public boolean isProjectReadyForPsiAccess(final Project project) {
-    boolean _and = false;
-    boolean _isInitialized = project.isInitialized();
-    if (!_isInitialized) {
-      _and = false;
-    } else {
-      DumbService _instance = DumbService.getInstance(project);
-      boolean _isDumb = _instance.isDumb();
-      boolean _not = (!_isDumb);
-      _and = _not;
-    }
-    return _and;
+    return (project.isInitialized() && (!DumbService.getInstance(project).isDumb()));
   }
   
   /**
