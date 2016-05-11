@@ -420,13 +420,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("*            pre-indexing phase. This one is further initialized in the");
         _builder.newLine();
         _builder.append("\t ");
-        _builder.append("*            indexing phase using the closure you pass to the returned");
-        _builder.newLine();
-        _builder.append("\t ");
-        _builder.append("*            {@link org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing#initializeLater(org.eclipse.xtext.xbase.lib.Procedures.Procedure1)");
-        _builder.newLine();
-        _builder.append("\t ");
-        _builder.append("*            initializeLater(..)}.");
+        _builder.append("*            indexing phase using the lambda you pass as the last argument.");
         _builder.newLine();
         _builder.append("\t ");
         _builder.append("* @param isPreIndexingPhase");
