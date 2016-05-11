@@ -230,7 +230,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 
 	@Override
 	protected String getViewerFontName() {
-		return getLanguageName() + ".ui.editors.textfont"; //$NON-NLS-1$
+		return "org.eclipse.xtend.ui.editors.textfont"; //$NON-NLS-1$
 	}
 	
 	@Override
