@@ -18,7 +18,7 @@ public class SDomainValidator extends AbstractSDomainValidator {
   public final static String INVALID_NAME = "invalidName";
   
   @Check
-  public void checkGreetingStartsWithCapital(final Entity entity) {
+  public void checkEntityNameStartsWithCapital(final Entity entity) {
     String _name = entity.getName();
     char _charAt = _name.charAt(0);
     boolean _isUpperCase = Character.isUpperCase(_charAt);
