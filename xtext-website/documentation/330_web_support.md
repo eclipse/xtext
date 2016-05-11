@@ -256,7 +256,7 @@ The following functions are available, provided that the respective services are
  * `format()`
    Formats the current selection (or the whole document if the selection has zero length) and returns the formatted text.
  * `generate()`
-   Returns the document generated from the associated resource. If more than one document has been generated, an object with a property `documents` is returned, which is an array of objects with the properties `name`, `contentType`, and `content`.
+   Returns the specified code generator artifact. The artifact is chosen with the option `artifactId`, which must contain the name of the generated file prefixed with the name of the output configuration (see [IFileSystemAccess]({{site.src.xtext}}/plugins/org.eclipse.xtext/src/org/eclipse/xtext/generator/IFileSystemAccess.java)). If the option is not specified, the server looks for an artifact named `DEFAULT_OUTPUT/DEFAULT_ARTIFACT`.
  * `loadResource()`
    Loads the associated resource and returns an object with properties `fullText` and `dirty`. If the resource has been modified during the current session, the modified version is returned even if the page is reloaded.
  * `saveResource()`
