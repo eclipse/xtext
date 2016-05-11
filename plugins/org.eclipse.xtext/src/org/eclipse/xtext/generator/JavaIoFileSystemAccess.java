@@ -178,7 +178,7 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 	}
 
 	protected void createFolder(File parent) {
-		if (parent != null && !parent.exists() && !parent.mkdirs())
+		if (parent != null && !parent.mkdirs() && !parent.isDirectory())
 			throw new RuntimeIOException("Could not create directory " + parent);
 	}
 
