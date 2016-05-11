@@ -44,9 +44,9 @@ public abstract class StringConcatenationClient {
 	 *            invoked.
 	 * @param target
 	 *            the {@link TargetStringConcatenation} to-append-to. Never <code>null</code>.
-	 * @since 2.8
+	 * @since 2.10
 	 */
-	public static void appendToClient(StringConcatenationClient client, TargetStringConcatenation target) {
+	public static void appendTo(StringConcatenationClient client, TargetStringConcatenation target) {
 		client.appendTo(target);
 	}
 
