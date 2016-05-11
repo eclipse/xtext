@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -34,6 +35,9 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import com.google.inject.Inject;
 
 public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITreeAppendable> {
+	
+	@Inject
+	private JavaKeywords keywords;
 	
 	@Inject
 	private TypeReferences typeReferences;
@@ -205,11 +209,14 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 		a.append(")");
 	}
 
-	/**
-	 * TODO: we assume that names from the inferred JVM model are the same in the Java code. Does that assumption
-	 * hold?
-	 */
 	protected String getVarName(JvmIdentifiableElement ex, IAppendable appendable) {
-		return ex.getSimpleName();
+		final String name = ex.getSimpleName();
+		if (name == null) {
+			return "__unknown__";
+		} else if (keywords.isJavaKeyword(name)) {
+			return name+"_";
+		} else {
+			return name;
+		}
 	}
 }
