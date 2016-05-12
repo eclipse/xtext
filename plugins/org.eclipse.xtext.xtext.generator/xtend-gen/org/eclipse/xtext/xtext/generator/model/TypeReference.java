@@ -226,8 +226,18 @@ public class TypeReference {
       String _name = clazz.getName();
       _xifexpression = ("org.eclipse.xtext." + _name);
     } else {
-      GenClass _genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
-      _xifexpression = _genClass.getQualifiedInterfaceName();
+      String _xifexpression_1 = null;
+      EPackage _ePackage_1 = clazz.getEPackage();
+      String _nsURI_1 = _ePackage_1.getNsURI();
+      boolean _equals_1 = Objects.equal(_nsURI_1, "http://www.eclipse.org/emf/2002/Ecore");
+      if (_equals_1) {
+        String _name_1 = clazz.getName();
+        _xifexpression_1 = ("org.eclipse.emf.ecore." + _name_1);
+      } else {
+        GenClass _genClass = GenModelUtil2.getGenClass(clazz, resourceSet);
+        _xifexpression_1 = _genClass.getQualifiedInterfaceName();
+      }
+      _xifexpression = _xifexpression_1;
     }
     return _xifexpression;
   }

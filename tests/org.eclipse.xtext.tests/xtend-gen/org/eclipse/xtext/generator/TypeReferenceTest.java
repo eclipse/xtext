@@ -9,6 +9,8 @@ package org.eclipse.xtext.generator;
 
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
@@ -125,5 +127,13 @@ public class TypeReferenceTest {
     final TypeReference ref = TypeReference.typeRef("org.example.MyType");
     String _xtendPath = ref.getXtendPath();
     Assert.assertEquals("org/example/MyType.xtend", _xtendPath);
+  }
+  
+  @Test
+  public void testEObject() {
+    final ResourceSetImpl rs = new ResourceSetImpl();
+    final TypeReference ref = new TypeReference(EcorePackage.Literals.EOBJECT, rs);
+    String _name = ref.getName();
+    Assert.assertEquals("org.eclipse.emf.ecore.EObject", _name);
   }
 }
