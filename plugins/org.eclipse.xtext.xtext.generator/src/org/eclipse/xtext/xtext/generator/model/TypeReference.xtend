@@ -138,6 +138,8 @@ class TypeReference {
 	private static def getQualifiedName(EClass clazz, ResourceSet resourceSet) {
 		if (clazz.EPackage.nsURI == 'http://www.eclipse.org/2008/Xtext')
 			'org.eclipse.xtext.' + clazz.name
+		else if (clazz.EPackage.nsURI == 'http://www.eclipse.org/emf/2002/Ecore')
+			'org.eclipse.emf.ecore.' + clazz.name	
 		else
 			GenModelUtil2.getGenClass(clazz, resourceSet).qualifiedInterfaceName
 	}

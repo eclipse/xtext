@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator
 
+import org.eclipse.emf.ecore.EcorePackage
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.junit.Test
 
@@ -99,5 +101,12 @@ class TypeReferenceTest {
 	def void testXtendPath() {
 		val ref = "org.example.MyType".typeRef
 		assertEquals("org/example/MyType.xtend", ref.xtendPath)
+	}
+	
+	@Test
+	def void testEObject() {
+		val rs = new ResourceSetImpl
+		val ref = new TypeReference(EcorePackage.Literals.EOBJECT, rs)
+		assertEquals("org.eclipse.emf.ecore.EObject", ref.name)
 	}
 }
