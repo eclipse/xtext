@@ -17,6 +17,94 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class DispatchCompilerTest extends AbstractXtendCompilerTest {
   /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=434982
+   */
+  @Test
+  public void testReservedJavaKeywords() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch foo(Object assert) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch foo(String assert) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Arrays;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("protected Object _foo(final Object assert_) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("protected Object _foo(final String assert_) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object foo(final Object assert_) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (assert_ instanceof String) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _foo((String)assert_);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else if (assert_ != null) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _foo(assert_);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("Arrays.<Object>asList(assert_).toString());");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  /**
    * https://bugs.eclipse.org/bugs/show_bug.cgi?id=410329
    */
   @Test

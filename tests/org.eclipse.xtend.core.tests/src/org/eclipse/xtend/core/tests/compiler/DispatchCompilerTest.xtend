@@ -15,6 +15,46 @@ import org.junit.Test
 class DispatchCompilerTest extends AbstractXtendCompilerTest {
 	
 	/**
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=434982
+	 */
+	@Test
+	def testReservedJavaKeywords() {
+		assertCompilesTo('''
+			class Foo {
+				def dispatch foo(Object assert) {
+				}
+			
+				def dispatch foo(String assert) {
+				}
+			}
+		''','''
+		import java.util.Arrays;
+		
+		@SuppressWarnings("all")
+		public class Foo {
+		  protected Object _foo(final Object assert_) {
+		    return null;
+		  }
+		  
+		  protected Object _foo(final String assert_) {
+		    return null;
+		  }
+		  
+		  public Object foo(final Object assert_) {
+		    if (assert_ instanceof String) {
+		      return _foo((String)assert_);
+		    } else if (assert_ != null) {
+		      return _foo(assert_);
+		    } else {
+		      throw new IllegalArgumentException("Unhandled parameter types: " +
+		        Arrays.<Object>asList(assert_).toString());
+		    }
+		  }
+		}
+		''')
+	}
+	
+	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=410329
 	 */
 	@Test
