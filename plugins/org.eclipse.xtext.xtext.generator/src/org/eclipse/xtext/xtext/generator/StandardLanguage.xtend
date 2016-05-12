@@ -101,7 +101,6 @@ import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFra
 	SimpleProjectWizardFragment2 newProjectWizardForEclipse = new SimpleProjectWizardFragment2
 	
 	new() {
-		addReferencedResource("platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel")
 		try {
 			class.classLoader.loadClass("org.eclipse.xtext.xbase.XbaseRuntimeModule")
 			addReferencedResource("platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel")
