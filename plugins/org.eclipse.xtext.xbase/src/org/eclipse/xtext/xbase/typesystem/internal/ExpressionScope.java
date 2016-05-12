@@ -399,6 +399,9 @@ public class ExpressionScope implements IExpressionScope {
 		
 		protected LightweightTypeReference getFirstParameterType(IIdentifiableElementDescription candidate) {
 			JvmOperation operation = (JvmOperation) candidate.getElementOrProxy();
+			if (operation.getParameters().isEmpty()) {
+				return null;
+			}
 			return getParameterType(operation.getParameters().get(0));
 		}
 		
