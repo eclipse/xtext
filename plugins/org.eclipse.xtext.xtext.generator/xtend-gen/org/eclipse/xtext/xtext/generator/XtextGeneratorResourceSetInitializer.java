@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.utils.GenModelHelper;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
-import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -91,7 +90,23 @@ public class XtextGeneratorResourceSetInitializer {
         _matched=true;
         final IResourceServiceProvider resourceServiceProvider_1 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
         if ((resourceServiceProvider_1 == null)) {
-          EcoreSupportStandaloneSetup.setup();
+          try {
+            final Class<?> xcore = Class.forName("org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup");
+            Method _declaredMethod_1 = xcore.getDeclaredMethod("doSetup", new Class[] {});
+            _declaredMethod_1.invoke(null);
+          } catch (final Throwable _t_1) {
+            if (_t_1 instanceof ClassNotFoundException) {
+              final ClassNotFoundException e_2 = (ClassNotFoundException)_t_1;
+              XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Ecore support. Is \'org.eclipse.xtext.ecore\' on the classpath?");
+              String _message = e_2.getMessage();
+              XtextGeneratorResourceSetInitializer.LOG.debug(_message, e_2);
+            } else if (_t_1 instanceof Exception) {
+              final Exception e_3 = (Exception)_t_1;
+              XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Ecore support.", e_3);
+            } else {
+              throw Exceptions.sneakyThrow(_t_1);
+            }
+          }
         }
       }
     }
@@ -101,35 +116,35 @@ public class XtextGeneratorResourceSetInitializer {
         final IResourceServiceProvider resourceServiceProvider_2 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
         if ((resourceServiceProvider_2 == null)) {
           try {
-            final Class<?> xcore = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
-            Method _declaredMethod_1 = xcore.getDeclaredMethod("doSetup", new Class[] {});
-            _declaredMethod_1.invoke(null);
-          } catch (final Throwable _t_1) {
-            if (_t_1 instanceof ClassNotFoundException) {
-              final ClassNotFoundException e_2 = (ClassNotFoundException)_t_1;
+            final Class<?> xcore_1 = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
+            Method _declaredMethod_2 = xcore_1.getDeclaredMethod("doSetup", new Class[] {});
+            _declaredMethod_2.invoke(null);
+          } catch (final Throwable _t_2) {
+            if (_t_2 instanceof ClassNotFoundException) {
+              final ClassNotFoundException e_4 = (ClassNotFoundException)_t_2;
               XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support. Is it on the classpath?");
-              String _message = e_2.getMessage();
-              XtextGeneratorResourceSetInitializer.LOG.debug(_message, e_2);
-            } else if (_t_1 instanceof Exception) {
-              final Exception e_3 = (Exception)_t_1;
-              XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support.", e_3);
+              String _message_1 = e_4.getMessage();
+              XtextGeneratorResourceSetInitializer.LOG.debug(_message_1, e_4);
+            } else if (_t_2 instanceof Exception) {
+              final Exception e_5 = (Exception)_t_2;
+              XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize Xcore support.", e_5);
             } else {
-              throw Exceptions.sneakyThrow(_t_1);
+              throw Exceptions.sneakyThrow(_t_2);
             }
           }
         }
         final URI xcoreLangURI = URI.createPlatformResourceURI("/org.eclipse.emf.ecore.xcore.lib/model/XcoreLang.xcore", true);
         try {
           resourceSet.getResource(xcoreLangURI, true);
-        } catch (final Throwable _t_2) {
-          if (_t_2 instanceof WrappedException) {
-            final WrappedException e_4 = (WrappedException)_t_2;
-            XtextGeneratorResourceSetInitializer.LOG.error("Could not load XcoreLang.xcore.", e_4);
+        } catch (final Throwable _t_3) {
+          if (_t_3 instanceof WrappedException) {
+            final WrappedException e_6 = (WrappedException)_t_3;
+            XtextGeneratorResourceSetInitializer.LOG.error("Could not load XcoreLang.xcore.", e_6);
             final Resource brokenResource = resourceSet.getResource(xcoreLangURI, false);
             EList<Resource> _resources = resourceSet.getResources();
             _resources.remove(brokenResource);
           } else {
-            throw Exceptions.sneakyThrow(_t_2);
+            throw Exceptions.sneakyThrow(_t_3);
           }
         }
       }
