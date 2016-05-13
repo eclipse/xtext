@@ -64,7 +64,10 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	public IEditorPart open(URI uri, boolean select) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri.trimFragment());
 		if(resourceServiceProvider instanceof IResourceUIServiceProvider) {
-			return ((IResourceUIServiceProvider) resourceServiceProvider).getURIEditorOpener().open(uri, select);
+			IURIEditorOpener editorOpener = ((IResourceUIServiceProvider) resourceServiceProvider).getURIEditorOpener();
+			if (editorOpener != null) {
+				return editorOpener.open(uri, select);
+			}
 		}
 		return openDefaultEditor(uri, null, -1, select);
 	}
@@ -73,7 +76,10 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	public IEditorPart open(URI referenceOwnerURI, EReference reference, int indexInList, boolean select) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(referenceOwnerURI.trimFragment());
 		if(resourceServiceProvider instanceof IResourceUIServiceProvider) {
-			return ((IResourceUIServiceProvider) resourceServiceProvider).getURIEditorOpener().open(referenceOwnerURI, reference, indexInList, select);
+			IURIEditorOpener editorOpener = ((IResourceUIServiceProvider) resourceServiceProvider).getURIEditorOpener();
+			if (editorOpener != null) {
+				return editorOpener.open(referenceOwnerURI, reference, indexInList, select);
+			}
 		}
 		return openDefaultEditor(referenceOwnerURI, reference, indexInList, select);
 	}
