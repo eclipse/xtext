@@ -11,6 +11,7 @@
 		<module>../../plugins/org.eclipse.xtext.util</module>
 		<module>../../plugins/org.eclipse.xtext.xtext.generator</module>
 		<module>../../plugins/org.eclipse.xtext.xtext.wizard</module>
+		<module>../../tests/org.eclipse.xtext.ide.tests</module>
 
 		<!-- TODO check if can drop this deps -->
 		<module>../../plugins/org.eclipse.xtext.ecore</module>
