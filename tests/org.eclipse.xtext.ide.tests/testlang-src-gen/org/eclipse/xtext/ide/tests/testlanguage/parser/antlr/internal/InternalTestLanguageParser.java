@@ -748,7 +748,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             			
             otherlv_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
-            				newLeafNode(otherlv_0, grammarAccess.getTypeReferenceAccess().getTypeRefTypeCrossReference_0());
+            				newLeafNode(otherlv_0, grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationCrossReference_0());
             			
 
             }

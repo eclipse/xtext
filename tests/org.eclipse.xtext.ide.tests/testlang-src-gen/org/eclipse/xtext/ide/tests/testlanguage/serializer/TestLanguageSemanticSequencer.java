@@ -148,7 +148,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     TypeReference returns TypeReference
 	 *
 	 * Constraint:
-	 *     typeRef=[Type|ID]
+	 *     typeRef=[TypeDeclaration|ID]
 	 */
 	protected void sequence_TypeReference(ISerializationContext context, TypeReference semanticObject) {
 		if (errorAcceptor != null) {
@@ -156,7 +156,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.TYPE_REFERENCE__TYPE_REF));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTypeReferenceAccess().getTypeRefTypeIDTerminalRuleCall_0_1(), semanticObject.getTypeRef());
+		feeder.accept(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationIDTerminalRuleCall_0_1(), semanticObject.getTypeRef());
 		feeder.finish();
 	}
 	
@@ -166,7 +166,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     Type returns TypeReference
 	 *
 	 * Constraint:
-	 *     (typeRef=[Type|ID] arrayDiemensions+='['*)
+	 *     (typeRef=[TypeDeclaration|ID] arrayDiemensions+='['*)
 	 */
 	protected void sequence_Type_TypeReference(ISerializationContext context, TypeReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

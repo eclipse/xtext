@@ -1896,17 +1896,17 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             // InternalTestLanguage.g:650:2: ( ( RULE_ID ) )
             // InternalTestLanguage.g:651:3: ( RULE_ID )
             {
-             before(grammarAccess.getTypeReferenceAccess().getTypeRefTypeCrossReference_0()); 
+             before(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationCrossReference_0()); 
             // InternalTestLanguage.g:652:3: ( RULE_ID )
             // InternalTestLanguage.g:653:4: RULE_ID
             {
-             before(grammarAccess.getTypeReferenceAccess().getTypeRefTypeIDTerminalRuleCall_0_1()); 
+             before(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationIDTerminalRuleCall_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getTypeReferenceAccess().getTypeRefTypeIDTerminalRuleCall_0_1()); 
+             after(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationIDTerminalRuleCall_0_1()); 
 
             }
 
-             after(grammarAccess.getTypeReferenceAccess().getTypeRefTypeCrossReference_0()); 
+             after(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationCrossReference_0()); 
 
             }
 
