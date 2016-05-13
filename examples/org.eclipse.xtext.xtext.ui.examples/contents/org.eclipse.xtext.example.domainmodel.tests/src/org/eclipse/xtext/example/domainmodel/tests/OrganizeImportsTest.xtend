@@ -15,7 +15,7 @@ import static org.junit.Assert.*
 import org.eclipse.xtext.util.ReplaceRegion
 
 /**
- * @author Jan Koehnlein - copied and adapted form Xtend
+ * @author Jan Koehnlein - copied and adapted from Xtend
  */
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(DomainmodelInjectorProvider))
