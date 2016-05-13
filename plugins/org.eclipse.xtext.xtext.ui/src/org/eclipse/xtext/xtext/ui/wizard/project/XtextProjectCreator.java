@@ -154,7 +154,7 @@ public class XtextProjectCreator extends WorkspaceModifyOperation implements IPr
 		if (needsBuildshipIntegration(descriptor)) {
 			factory.addProjectNatures("org.eclipse.buildship.core.gradleprojectnature");
 			factory.addBuilderIds("org.eclipse.buildship.core.gradleprojectbuilder");
-			factory.addContributor(new GradleContributor(descriptor));
+			factory.addEarlyContributor(new GradleContributor(descriptor));
 		}
 	}
 
