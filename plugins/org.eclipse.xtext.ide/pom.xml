@@ -29,5 +29,10 @@
 			<artifactId>org.eclipse.xtext</artifactId>
 			<version>[${project.version}]</version>
 		</dependency>
+		<dependency>
+	        <groupId>io.typefox.lsapi</groupId>
+	        <artifactId>lsapi</artifactId>
+	        <version>0.1.0-SNAPSHOT</version>
+        </dependency>
 	</dependencies>
 </project>
