@@ -137,22 +137,22 @@ public interface TestLanguagePackage extends EPackage
   int PROPERTY = 2;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PROPERTY__NAME = 0;
-
-  /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROPERTY__TYPE = 1;
+  int PROPERTY__TYPE = 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROPERTY__NAME = 1;
 
   /**
    * The number of structural features of the '<em>Property</em>' class.
@@ -330,17 +330,6 @@ public interface TestLanguagePackage extends EPackage
   EClass getProperty();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property#getName()
-   * @see #getProperty()
-   * @generated
-   */
-  EAttribute getProperty_Name();
-
-  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -350,6 +339,17 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    */
   EReference getProperty_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property#getName()
+   * @see #getProperty()
+   * @generated
+   */
+  EAttribute getProperty_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Type <em>Type</em>}'.
@@ -492,20 +492,20 @@ public interface TestLanguagePackage extends EPackage
     EClass PROPERTY = eINSTANCE.getProperty();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PROPERTY__NAME = eINSTANCE.getProperty_Name();
-
-    /**
      * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference PROPERTY__TYPE = eINSTANCE.getProperty_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROPERTY__NAME = eINSTANCE.getProperty_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeImpl <em>Type</em>}' class.

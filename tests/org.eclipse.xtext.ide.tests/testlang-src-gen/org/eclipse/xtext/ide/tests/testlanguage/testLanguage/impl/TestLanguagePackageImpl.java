@@ -201,9 +201,9 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getProperty_Name()
+  public EReference getProperty_Type()
   {
-    return (EAttribute)propertyEClass.getEStructuralFeatures().get(0);
+    return (EReference)propertyEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -211,9 +211,9 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProperty_Type()
+  public EAttribute getProperty_Name()
   {
-    return (EReference)propertyEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -314,8 +314,8 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
     createEReference(typeDeclarationEClass, TYPE_DECLARATION__PROPERTIES);
 
     propertyEClass = createEClass(PROPERTY);
-    createEAttribute(propertyEClass, PROPERTY__NAME);
     createEReference(propertyEClass, PROPERTY__TYPE);
+    createEAttribute(propertyEClass, PROPERTY__NAME);
 
     typeEClass = createEClass(TYPE);
     createEAttribute(typeEClass, TYPE__ARRAY_DIEMENSIONS);
@@ -368,8 +368,8 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
     initEReference(getTypeDeclaration_Properties(), this.getProperty(), null, "properties", null, 0, -1, TypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProperty_Type(), this.getType(), null, "type", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getType_ArrayDiemensions(), ecorePackage.getEString(), "arrayDiemensions", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

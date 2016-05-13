@@ -28,14 +28,24 @@ import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Type;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PropertyImpl extends MinimalEObjectImpl.Container implements Property
 {
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected Type type;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -57,16 +67,6 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected Type type;
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -85,29 +85,6 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
   protected EClass eStaticClass()
   {
     return TestLanguagePackage.Literals.PROPERTY;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TestLanguagePackage.PROPERTY__NAME, oldName, name));
   }
 
   /**
@@ -163,6 +140,29 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TestLanguagePackage.PROPERTY__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -184,10 +184,10 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
   {
     switch (featureID)
     {
-      case TestLanguagePackage.PROPERTY__NAME:
-        return getName();
       case TestLanguagePackage.PROPERTY__TYPE:
         return getType();
+      case TestLanguagePackage.PROPERTY__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -202,11 +202,11 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
   {
     switch (featureID)
     {
-      case TestLanguagePackage.PROPERTY__NAME:
-        setName((String)newValue);
-        return;
       case TestLanguagePackage.PROPERTY__TYPE:
         setType((Type)newValue);
+        return;
+      case TestLanguagePackage.PROPERTY__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -222,11 +222,11 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
   {
     switch (featureID)
     {
-      case TestLanguagePackage.PROPERTY__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case TestLanguagePackage.PROPERTY__TYPE:
         setType((Type)null);
+        return;
+      case TestLanguagePackage.PROPERTY__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -242,10 +242,10 @@ public class PropertyImpl extends MinimalEObjectImpl.Container implements Proper
   {
     switch (featureID)
     {
-      case TestLanguagePackage.PROPERTY__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case TestLanguagePackage.PROPERTY__TYPE:
         return type != null;
+      case TestLanguagePackage.PROPERTY__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }

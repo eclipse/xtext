@@ -296,7 +296,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==RULE_ID) ) {
+                if ( (LA2_0==RULE_ID||(LA2_0>=16 && LA2_0<=18)) ) {
                     alt2=1;
                 }
 
@@ -402,61 +402,35 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleProperty"
-    // InternalTestLanguage.g:179:1: ruleProperty returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_type_1_0= ruleType ) ) ) ;
+    // InternalTestLanguage.g:179:1: ruleProperty returns [EObject current=null] : ( ( (lv_type_0_0= ruleType ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleProperty() throws RecognitionException {
         EObject current = null;
 
-        Token lv_name_0_0=null;
-        EObject lv_type_1_0 = null;
+        Token lv_name_1_0=null;
+        EObject lv_type_0_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalTestLanguage.g:185:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_type_1_0= ruleType ) ) ) )
-            // InternalTestLanguage.g:186:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_type_1_0= ruleType ) ) )
+            // InternalTestLanguage.g:185:2: ( ( ( (lv_type_0_0= ruleType ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalTestLanguage.g:186:2: ( ( (lv_type_0_0= ruleType ) ) ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalTestLanguage.g:186:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_type_1_0= ruleType ) ) )
-            // InternalTestLanguage.g:187:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_type_1_0= ruleType ) )
+            // InternalTestLanguage.g:186:2: ( ( (lv_type_0_0= ruleType ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalTestLanguage.g:187:3: ( (lv_type_0_0= ruleType ) ) ( (lv_name_1_0= RULE_ID ) )
             {
-            // InternalTestLanguage.g:187:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalTestLanguage.g:188:4: (lv_name_0_0= RULE_ID )
+            // InternalTestLanguage.g:187:3: ( (lv_type_0_0= ruleType ) )
+            // InternalTestLanguage.g:188:4: (lv_type_0_0= ruleType )
             {
-            // InternalTestLanguage.g:188:4: (lv_name_0_0= RULE_ID )
-            // InternalTestLanguage.g:189:5: lv_name_0_0= RULE_ID
+            // InternalTestLanguage.g:188:4: (lv_type_0_0= ruleType )
+            // InternalTestLanguage.g:189:5: lv_type_0_0= ruleType
             {
-            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_7); 
 
-            					newLeafNode(lv_name_0_0, grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_0_0());
+            					newCompositeNode(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_0_0());
             				
-
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getPropertyRule());
-            					}
-            					setWithLastConsumed(
-            						current,
-            						"name",
-            						lv_name_0_0,
-            						"org.eclipse.xtext.common.Terminals.ID");
-            				
-
-            }
-
-
-            }
-
-            // InternalTestLanguage.g:205:3: ( (lv_type_1_0= ruleType ) )
-            // InternalTestLanguage.g:206:4: (lv_type_1_0= ruleType )
-            {
-            // InternalTestLanguage.g:206:4: (lv_type_1_0= ruleType )
-            // InternalTestLanguage.g:207:5: lv_type_1_0= ruleType
-            {
-
-            					newCompositeNode(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_1_0());
-            				
-            pushFollow(FOLLOW_2);
-            lv_type_1_0=ruleType();
+            pushFollow(FOLLOW_4);
+            lv_type_0_0=ruleType();
 
             state._fsp--;
 
@@ -467,9 +441,35 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             					set(
             						current,
             						"type",
-            						lv_type_1_0,
+            						lv_type_0_0,
             						"org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.Type");
             					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            // InternalTestLanguage.g:206:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalTestLanguage.g:207:4: (lv_name_1_0= RULE_ID )
+            {
+            // InternalTestLanguage.g:207:4: (lv_name_1_0= RULE_ID )
+            // InternalTestLanguage.g:208:5: lv_name_1_0= RULE_ID
+            {
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_2); 
+
+            					newLeafNode(lv_name_1_0, grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getPropertyRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
             				
 
             }
@@ -580,7 +580,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
                     				newCompositeNode(grammarAccess.getTypeAccess().getTypeReferenceParserRuleCall_0_0());
                     			
-                    pushFollow(FOLLOW_8);
+                    pushFollow(FOLLOW_7);
                     this_TypeReference_0=ruleTypeReference();
 
                     state._fsp--;
@@ -598,7 +598,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
                     				newCompositeNode(grammarAccess.getTypeAccess().getPrimitiveTypeParserRuleCall_0_1());
                     			
-                    pushFollow(FOLLOW_8);
+                    pushFollow(FOLLOW_7);
                     this_PrimitiveType_1=rulePrimitiveType();
 
                     state._fsp--;
@@ -634,7 +634,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             	    // InternalTestLanguage.g:264:5: (lv_arrayDiemensions_2_0= '[' )
             	    // InternalTestLanguage.g:265:6: lv_arrayDiemensions_2_0= '['
             	    {
-            	    lv_arrayDiemensions_2_0=(Token)match(input,14,FOLLOW_9); 
+            	    lv_arrayDiemensions_2_0=(Token)match(input,14,FOLLOW_8); 
 
             	    						newLeafNode(lv_arrayDiemensions_2_0, grammarAccess.getTypeAccess().getArrayDiemensionsLeftSquareBracketKeyword_1_0_0());
             	    					
@@ -650,7 +650,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_3=(Token)match(input,15,FOLLOW_8); 
+            	    otherlv_3=(Token)match(input,15,FOLLOW_7); 
 
             	    				newLeafNode(otherlv_3, grammarAccess.getTypeAccess().getRightSquareBracketKeyword_1_1());
             	    			
@@ -944,9 +944,8 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000802L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000070010L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000072010L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000008000L});
 
 }

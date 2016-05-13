@@ -115,18 +115,18 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     Property returns Property
 	 *
 	 * Constraint:
-	 *     (name=ID type=Type)
+	 *     (type=Type name=ID)
 	 */
 	protected void sequence_Property(ISerializationContext context, Property semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, TestLanguagePackage.Literals.PROPERTY__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.PROPERTY__NAME));
 			if (transientValues.isValueTransient(semanticObject, TestLanguagePackage.Literals.PROPERTY__TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.PROPERTY__TYPE));
+			if (transientValues.isValueTransient(semanticObject, TestLanguagePackage.Literals.PROPERTY__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.PROPERTY__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_1_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_0_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

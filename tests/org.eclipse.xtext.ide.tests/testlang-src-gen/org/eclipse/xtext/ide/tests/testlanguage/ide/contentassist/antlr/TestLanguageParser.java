@@ -48,8 +48,8 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getModelAccess().getTypesAssignment(), "rule__Model__TypesAssignment");
 					put(grammarAccess.getTypeDeclarationAccess().getNameAssignment_1(), "rule__TypeDeclaration__NameAssignment_1");
 					put(grammarAccess.getTypeDeclarationAccess().getPropertiesAssignment_3(), "rule__TypeDeclaration__PropertiesAssignment_3");
-					put(grammarAccess.getPropertyAccess().getNameAssignment_0(), "rule__Property__NameAssignment_0");
-					put(grammarAccess.getPropertyAccess().getTypeAssignment_1(), "rule__Property__TypeAssignment_1");
+					put(grammarAccess.getPropertyAccess().getTypeAssignment_0(), "rule__Property__TypeAssignment_0");
+					put(grammarAccess.getPropertyAccess().getNameAssignment_1(), "rule__Property__NameAssignment_1");
 					put(grammarAccess.getTypeAccess().getArrayDiemensionsAssignment_1_0(), "rule__Type__ArrayDiemensionsAssignment_1_0");
 					put(grammarAccess.getTypeReferenceAccess().getTypeRefAssignment(), "rule__TypeReference__TypeRefAssignment");
 					put(grammarAccess.getPrimitiveTypeAccess().getNameAssignment(), "rule__PrimitiveType__NameAssignment");
