@@ -14,7 +14,6 @@
 		<module>../../tests/org.eclipse.xtext.ide.tests</module>
 
 		<!-- TODO check if can drop this deps -->
-		<module>../../plugins/org.eclipse.xtext.ecore</module>
 		<module>../../plugins/org.eclipse.xtext.smap</module>
 	</modules>
 </project>
