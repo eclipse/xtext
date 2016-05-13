@@ -14,8 +14,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//TypeDeclaration/properties"/>
     </genClasses>
     <genClasses ecoreClass="TestLanguage.ecore#//Property">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//Property/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Property/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//Property/name"/>
     </genClasses>
     <genClasses ecoreClass="TestLanguage.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//Type/arrayDiemensions"/>

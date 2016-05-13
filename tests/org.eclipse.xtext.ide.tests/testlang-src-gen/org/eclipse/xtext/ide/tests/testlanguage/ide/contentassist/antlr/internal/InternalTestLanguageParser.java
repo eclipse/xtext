@@ -1023,7 +1023,7 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==RULE_ID) ) {
+                if ( (LA4_0==RULE_ID||(LA4_0>=11 && LA4_0<=13)) ) {
                     alt4=1;
                 }
 
@@ -1148,7 +1148,7 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             // InternalTestLanguage.g:393:1: ( rule__Property__Group__0__Impl rule__Property__Group__1 )
             // InternalTestLanguage.g:394:2: rule__Property__Group__0__Impl rule__Property__Group__1
             {
-            pushFollow(FOLLOW_8);
+            pushFollow(FOLLOW_4);
             rule__Property__Group__0__Impl();
 
             state._fsp--;
@@ -1177,31 +1177,31 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group__0__Impl"
-    // InternalTestLanguage.g:401:1: rule__Property__Group__0__Impl : ( ( rule__Property__NameAssignment_0 ) ) ;
+    // InternalTestLanguage.g:401:1: rule__Property__Group__0__Impl : ( ( rule__Property__TypeAssignment_0 ) ) ;
     public final void rule__Property__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTestLanguage.g:405:1: ( ( ( rule__Property__NameAssignment_0 ) ) )
-            // InternalTestLanguage.g:406:1: ( ( rule__Property__NameAssignment_0 ) )
+            // InternalTestLanguage.g:405:1: ( ( ( rule__Property__TypeAssignment_0 ) ) )
+            // InternalTestLanguage.g:406:1: ( ( rule__Property__TypeAssignment_0 ) )
             {
-            // InternalTestLanguage.g:406:1: ( ( rule__Property__NameAssignment_0 ) )
-            // InternalTestLanguage.g:407:2: ( rule__Property__NameAssignment_0 )
+            // InternalTestLanguage.g:406:1: ( ( rule__Property__TypeAssignment_0 ) )
+            // InternalTestLanguage.g:407:2: ( rule__Property__TypeAssignment_0 )
             {
-             before(grammarAccess.getPropertyAccess().getNameAssignment_0()); 
-            // InternalTestLanguage.g:408:2: ( rule__Property__NameAssignment_0 )
-            // InternalTestLanguage.g:408:3: rule__Property__NameAssignment_0
+             before(grammarAccess.getPropertyAccess().getTypeAssignment_0()); 
+            // InternalTestLanguage.g:408:2: ( rule__Property__TypeAssignment_0 )
+            // InternalTestLanguage.g:408:3: rule__Property__TypeAssignment_0
             {
             pushFollow(FOLLOW_2);
-            rule__Property__NameAssignment_0();
+            rule__Property__TypeAssignment_0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPropertyAccess().getNameAssignment_0()); 
+             after(grammarAccess.getPropertyAccess().getTypeAssignment_0()); 
 
             }
 
@@ -1257,31 +1257,31 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start "rule__Property__Group__1__Impl"
-    // InternalTestLanguage.g:427:1: rule__Property__Group__1__Impl : ( ( rule__Property__TypeAssignment_1 ) ) ;
+    // InternalTestLanguage.g:427:1: rule__Property__Group__1__Impl : ( ( rule__Property__NameAssignment_1 ) ) ;
     public final void rule__Property__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTestLanguage.g:431:1: ( ( ( rule__Property__TypeAssignment_1 ) ) )
-            // InternalTestLanguage.g:432:1: ( ( rule__Property__TypeAssignment_1 ) )
+            // InternalTestLanguage.g:431:1: ( ( ( rule__Property__NameAssignment_1 ) ) )
+            // InternalTestLanguage.g:432:1: ( ( rule__Property__NameAssignment_1 ) )
             {
-            // InternalTestLanguage.g:432:1: ( ( rule__Property__TypeAssignment_1 ) )
-            // InternalTestLanguage.g:433:2: ( rule__Property__TypeAssignment_1 )
+            // InternalTestLanguage.g:432:1: ( ( rule__Property__NameAssignment_1 ) )
+            // InternalTestLanguage.g:433:2: ( rule__Property__NameAssignment_1 )
             {
-             before(grammarAccess.getPropertyAccess().getTypeAssignment_1()); 
-            // InternalTestLanguage.g:434:2: ( rule__Property__TypeAssignment_1 )
-            // InternalTestLanguage.g:434:3: rule__Property__TypeAssignment_1
+             before(grammarAccess.getPropertyAccess().getNameAssignment_1()); 
+            // InternalTestLanguage.g:434:2: ( rule__Property__NameAssignment_1 )
+            // InternalTestLanguage.g:434:3: rule__Property__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
-            rule__Property__TypeAssignment_1();
+            rule__Property__NameAssignment_1();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getPropertyAccess().getTypeAssignment_1()); 
+             after(grammarAccess.getPropertyAccess().getNameAssignment_1()); 
 
             }
 
@@ -1313,7 +1313,7 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             // InternalTestLanguage.g:447:1: ( rule__Type__Group__0__Impl rule__Type__Group__1 )
             // InternalTestLanguage.g:448:2: rule__Type__Group__0__Impl rule__Type__Group__1
             {
-            pushFollow(FOLLOW_9);
+            pushFollow(FOLLOW_8);
             rule__Type__Group__0__Impl();
 
             state._fsp--;
@@ -1450,7 +1450,7 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             	case 1 :
             	    // InternalTestLanguage.g:488:3: rule__Type__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_10);
+            	    pushFollow(FOLLOW_9);
             	    rule__Type__Group_1__0();
 
             	    state._fsp--;
@@ -1496,7 +1496,7 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             // InternalTestLanguage.g:501:1: ( rule__Type__Group_1__0__Impl rule__Type__Group_1__1 )
             // InternalTestLanguage.g:502:2: rule__Type__Group_1__0__Impl rule__Type__Group_1__1
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_10);
             rule__Type__Group_1__0__Impl();
 
             state._fsp--;
@@ -1760,63 +1760,26 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
     // $ANTLR end "rule__TypeDeclaration__PropertiesAssignment_3"
 
 
-    // $ANTLR start "rule__Property__NameAssignment_0"
-    // InternalTestLanguage.g:596:1: rule__Property__NameAssignment_0 : ( RULE_ID ) ;
-    public final void rule__Property__NameAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__Property__TypeAssignment_0"
+    // InternalTestLanguage.g:596:1: rule__Property__TypeAssignment_0 : ( ruleType ) ;
+    public final void rule__Property__TypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalTestLanguage.g:600:1: ( ( RULE_ID ) )
-            // InternalTestLanguage.g:601:2: ( RULE_ID )
+            // InternalTestLanguage.g:600:1: ( ( ruleType ) )
+            // InternalTestLanguage.g:601:2: ( ruleType )
             {
-            // InternalTestLanguage.g:601:2: ( RULE_ID )
-            // InternalTestLanguage.g:602:3: RULE_ID
+            // InternalTestLanguage.g:601:2: ( ruleType )
+            // InternalTestLanguage.g:602:3: ruleType
             {
-             before(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_0_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Property__NameAssignment_0"
-
-
-    // $ANTLR start "rule__Property__TypeAssignment_1"
-    // InternalTestLanguage.g:611:1: rule__Property__TypeAssignment_1 : ( ruleType ) ;
-    public final void rule__Property__TypeAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalTestLanguage.g:615:1: ( ( ruleType ) )
-            // InternalTestLanguage.g:616:2: ( ruleType )
-            {
-            // InternalTestLanguage.g:616:2: ( ruleType )
-            // InternalTestLanguage.g:617:3: ruleType
-            {
-             before(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_1_0()); 
+             before(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
             ruleType();
 
             state._fsp--;
 
-             after(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_1_0()); 
+             after(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_0_0()); 
 
             }
 
@@ -1835,7 +1798,44 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end "rule__Property__TypeAssignment_1"
+    // $ANTLR end "rule__Property__TypeAssignment_0"
+
+
+    // $ANTLR start "rule__Property__NameAssignment_1"
+    // InternalTestLanguage.g:611:1: rule__Property__NameAssignment_1 : ( RULE_ID ) ;
+    public final void rule__Property__NameAssignment_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalTestLanguage.g:615:1: ( ( RULE_ID ) )
+            // InternalTestLanguage.g:616:2: ( RULE_ID )
+            {
+            // InternalTestLanguage.g:616:2: ( RULE_ID )
+            // InternalTestLanguage.g:617:3: RULE_ID
+            {
+             before(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0()); 
+            match(input,RULE_ID,FOLLOW_2); 
+             after(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Property__NameAssignment_1"
 
 
     // $ANTLR start "rule__Type__ArrayDiemensionsAssignment_1_0"
@@ -1984,11 +1984,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000004002L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000003810L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000013810L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000003812L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000020000L});
 
 }

@@ -186,9 +186,28 @@ ruleProperty returns [EObject current=null]
 	(
 		(
 			(
-				lv_name_0_0=RULE_ID
 				{
-					newLeafNode(lv_name_0_0, grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_0_0());
+					newCompositeNode(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_0_0());
+				}
+				lv_type_0_0=ruleType
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getPropertyRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_0_0,
+						"org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.Type");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -197,27 +216,8 @@ ruleProperty returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"name",
-						lv_name_0_0,
+						lv_name_1_0,
 						"org.eclipse.xtext.common.Terminals.ID");
-				}
-			)
-		)
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_1_0());
-				}
-				lv_type_1_0=ruleType
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getPropertyRule());
-					}
-					set(
-						$current,
-						"type",
-						lv_type_1_0,
-						"org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.Type");
-					afterParserOrEnumRuleCall();
 				}
 			)
 		)
