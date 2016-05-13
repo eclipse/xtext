@@ -64,6 +64,8 @@ public class ProjectFactory {
 
 	private List<IProjectFactoryContributor> contributors;
 
+	private List<IProjectFactoryContributor> earlyContributors;
+
 	public ProjectFactory addBuilderIds(String... builderIds) {
 		if (this.builderIds == null)
 			this.builderIds = Lists.newArrayList();
@@ -118,7 +120,19 @@ public class ProjectFactory {
 		}
 		contributors.add(projectFactoryContributor);
 	}
-	
+
+	/**
+	 * These contributors will be executed before enhancing the project.
+	 * 
+	 * @since 2.10
+	 */
+	public void addEarlyContributor(IProjectFactoryContributor projectFactoryContributor) {
+		if (this.earlyContributors == null) {
+			earlyContributors = Lists.newArrayList();
+		}
+		earlyContributors.add(projectFactoryContributor);
+	}
+
 	/**
 	 * @since 2.4
 	 */
@@ -142,24 +156,33 @@ public class ProjectFactory {
 			project.setDefaultCharset(defaultCharset, subMonitor.newChild(1));
 			createFolders(project, subMonitor, shell);
 
-			// first run contributors...
-			if (contributors != null) {
-				IFileCreator fileCreator = new IFileCreator() {
+			IFileCreator fileCreator = new IFileCreator() {
+				@Override
+				public IFile writeToFile(CharSequence chars, String fileName) {
+					return ProjectFactory.this.writeToFile(chars, fileName, project, subMonitor);
+				}
+			};
 
-					@Override
-					public IFile writeToFile(CharSequence chars, String fileName) {
-						return ProjectFactory.this.writeToFile(chars, fileName, project, subMonitor);
-					}
-				};
-				for (IProjectFactoryContributor contributor : contributors) {
+			// first run early contributors...
+			// in some cases it is crucial to enhance the project
+			// only after contributions, like in the case of gradle projects
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492728
+			if (earlyContributors != null) {
+				for (IProjectFactoryContributor contributor : earlyContributors) {
 					contributor.contributeFiles(project, fileCreator);
 				}
 			}
 
-			// then enhance project; in some cases it is crucial to enhance the project
-			// only after contributions, like in the case of gradle projects
-			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492728
+			// then enhance project
 			enhanceProject(project, subMonitor, shell);
+
+			// then all the other contributors...
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493399
+			if (contributors != null) {
+				for (IProjectFactoryContributor contributor : contributors) {
+					contributor.contributeFiles(project, fileCreator);
+				}
+			}
 
 			return project;
 		} catch (final CoreException exception) {
