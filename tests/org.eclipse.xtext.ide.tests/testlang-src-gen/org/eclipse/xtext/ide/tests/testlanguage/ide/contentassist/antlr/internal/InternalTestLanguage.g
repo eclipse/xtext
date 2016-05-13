@@ -648,13 +648,13 @@ rule__TypeReference__TypeRefAssignment
 	}
 :
 	(
-		{ before(grammarAccess.getTypeReferenceAccess().getTypeRefTypeCrossReference_0()); }
+		{ before(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationCrossReference_0()); }
 		(
-			{ before(grammarAccess.getTypeReferenceAccess().getTypeRefTypeIDTerminalRuleCall_0_1()); }
+			{ before(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationIDTerminalRuleCall_0_1()); }
 			RULE_ID
-			{ after(grammarAccess.getTypeReferenceAccess().getTypeRefTypeIDTerminalRuleCall_0_1()); }
+			{ after(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationIDTerminalRuleCall_0_1()); }
 		)
-		{ after(grammarAccess.getTypeReferenceAccess().getTypeRefTypeCrossReference_0()); }
+		{ after(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationCrossReference_0()); }
 	)
 ;
 finally {

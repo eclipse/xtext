@@ -27,7 +27,7 @@ Type :
 ;
 
 TypeReference:
-    typeRef=[Type]
+    typeRef=[TypeDeclaration]
 ;
 
 PrimitiveType:

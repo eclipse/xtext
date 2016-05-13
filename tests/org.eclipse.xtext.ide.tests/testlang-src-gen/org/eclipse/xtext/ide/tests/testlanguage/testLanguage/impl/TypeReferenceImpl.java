@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
-import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Type;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeReference;
 
 /**
@@ -41,7 +41,7 @@ public class TypeReferenceImpl extends TypeImpl implements TypeReference
    * @generated
    * @ordered
    */
-  protected Type typeRef;
+  protected TypeDeclaration typeRef;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,12 +69,12 @@ public class TypeReferenceImpl extends TypeImpl implements TypeReference
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getTypeRef()
+  public TypeDeclaration getTypeRef()
   {
     if (typeRef != null && typeRef.eIsProxy())
     {
       InternalEObject oldTypeRef = (InternalEObject)typeRef;
-      typeRef = (Type)eResolveProxy(oldTypeRef);
+      typeRef = (TypeDeclaration)eResolveProxy(oldTypeRef);
       if (typeRef != oldTypeRef)
       {
         if (eNotificationRequired())
@@ -89,7 +89,7 @@ public class TypeReferenceImpl extends TypeImpl implements TypeReference
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type basicGetTypeRef()
+  public TypeDeclaration basicGetTypeRef()
   {
     return typeRef;
   }
@@ -99,9 +99,9 @@ public class TypeReferenceImpl extends TypeImpl implements TypeReference
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTypeRef(Type newTypeRef)
+  public void setTypeRef(TypeDeclaration newTypeRef)
   {
-    Type oldTypeRef = typeRef;
+    TypeDeclaration oldTypeRef = typeRef;
     typeRef = newTypeRef;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, TestLanguagePackage.TYPE_REFERENCE__TYPE_REF, oldTypeRef, typeRef));
@@ -135,7 +135,7 @@ public class TypeReferenceImpl extends TypeImpl implements TypeReference
     switch (featureID)
     {
       case TestLanguagePackage.TYPE_REFERENCE__TYPE_REF:
-        setTypeRef((Type)newValue);
+        setTypeRef((TypeDeclaration)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -152,7 +152,7 @@ public class TypeReferenceImpl extends TypeImpl implements TypeReference
     switch (featureID)
     {
       case TestLanguagePackage.TYPE_REFERENCE__TYPE_REF:
-        setTypeRef((Type)null);
+        setTypeRef((TypeDeclaration)null);
         return;
     }
     super.eUnset(featureID);

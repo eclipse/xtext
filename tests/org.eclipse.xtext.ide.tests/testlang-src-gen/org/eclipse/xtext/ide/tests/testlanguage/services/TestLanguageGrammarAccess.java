@@ -152,21 +152,21 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public class TypeReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.TypeReference");
 		private final Assignment cTypeRefAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cTypeRefTypeCrossReference_0 = (CrossReference)cTypeRefAssignment.eContents().get(0);
-		private final RuleCall cTypeRefTypeIDTerminalRuleCall_0_1 = (RuleCall)cTypeRefTypeCrossReference_0.eContents().get(1);
+		private final CrossReference cTypeRefTypeDeclarationCrossReference_0 = (CrossReference)cTypeRefAssignment.eContents().get(0);
+		private final RuleCall cTypeRefTypeDeclarationIDTerminalRuleCall_0_1 = (RuleCall)cTypeRefTypeDeclarationCrossReference_0.eContents().get(1);
 		
 		//TypeReference:
-		//	typeRef=[Type];
+		//	typeRef=[TypeDeclaration];
 		@Override public ParserRule getRule() { return rule; }
 		
-		//typeRef=[Type]
+		//typeRef=[TypeDeclaration]
 		public Assignment getTypeRefAssignment() { return cTypeRefAssignment; }
 		
-		//[Type]
-		public CrossReference getTypeRefTypeCrossReference_0() { return cTypeRefTypeCrossReference_0; }
+		//[TypeDeclaration]
+		public CrossReference getTypeRefTypeDeclarationCrossReference_0() { return cTypeRefTypeDeclarationCrossReference_0; }
 		
 		//ID
-		public RuleCall getTypeRefTypeIDTerminalRuleCall_0_1() { return cTypeRefTypeIDTerminalRuleCall_0_1; }
+		public RuleCall getTypeRefTypeDeclarationIDTerminalRuleCall_0_1() { return cTypeRefTypeDeclarationIDTerminalRuleCall_0_1; }
 	}
 	public class PrimitiveTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.PrimitiveType");
@@ -291,7 +291,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TypeReference:
-	//	typeRef=[Type];
+	//	typeRef=[TypeDeclaration];
 	public TypeReferenceElements getTypeReferenceAccess() {
 		return pTypeReference;
 	}

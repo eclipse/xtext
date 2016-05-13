@@ -35,12 +35,12 @@ public interface TypeReference extends Type
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type Ref</em>' reference.
-   * @see #setTypeRef(Type)
+   * @see #setTypeRef(TypeDeclaration)
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getTypeReference_TypeRef()
    * @model
    * @generated
    */
-  Type getTypeRef();
+  TypeDeclaration getTypeRef();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeReference#getTypeRef <em>Type Ref</em>}' reference.
@@ -50,6 +50,6 @@ public interface TypeReference extends Type
    * @see #getTypeRef()
    * @generated
    */
-  void setTypeRef(Type value);
+  void setTypeRef(TypeDeclaration value);
 
 } // TypeReference
