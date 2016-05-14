@@ -8,7 +8,7 @@ import org.junit.runner.RunWith
 import org.junit.Test
 
 /**
- * @author Jan Koehnlein - copied and adapted form Xtend
+ * @author Jan Koehnlein - copied and adapted from Xtend
  */
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(DomainmodelUiInjectorProvider))
