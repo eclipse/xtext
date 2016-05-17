@@ -15,7 +15,6 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.web.server.model.AbstractCachedService
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
-import org.eclipse.xtext.web.server.model.UpdateDocumentService
 
 /**
  * Service class for semantic highlighting. The syntactic highlighting is assumed
@@ -28,10 +27,9 @@ class HighlightingService extends AbstractCachedService<HighlightingResult> {
 	@Inject ISemanticHighlightingCalculator highlightingCalculator
 	
 	/**
-	 * Return the highlighting result for the given document. The actual highlighting may have
-	 * been computed as part of the background work scheduled after another service request,
-	 * e.g. {@link UpdateDocumentService}. If that background processing has not been done
-	 * yet, it is executed and then the validation issues are collected.
+	 * Compute the highlighting result for the given document. This method should not be called
+	 * directly from the service dispatcher; use {@link #getResult(XtextWebDocumentAccess)} instead
+	 * in order to avoid duplicate computations.
 	 */
 	override compute(IXtextWebDocument it, CancelIndicator cancelIndicator) {
 		val result = new HighlightingResult
@@ -45,4 +43,5 @@ class HighlightingService extends AbstractCachedService<HighlightingResult> {
 			positions += new HighlightingResult.Region(offset, length, ids)			
 		]
 	}
+	
 }
