@@ -145,7 +145,7 @@ define([
 		}
 		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
 			services.generatorService = new XtextService();
-			services.generatorService.initialize(options.serviceUrl, 'generate', options.resourceId, services.updateService);
+			services.generatorService.initialize(services, 'generate');
 			services.generatorService._initServerData = function(serverData, editorContext, params) {
 				if (params.allArtifacts)
 					serverData.allArtifacts = params.allArtifacts;
