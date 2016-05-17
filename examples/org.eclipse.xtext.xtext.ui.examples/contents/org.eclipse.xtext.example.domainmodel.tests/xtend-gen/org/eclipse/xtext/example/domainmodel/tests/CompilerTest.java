@@ -3,7 +3,7 @@ package org.eclipse.xtext.example.domainmodel.tests;
 import com.google.inject.Inject;
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.domainmodel.tests.InjectorProviderCustom;
+import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(XtextRunner.class)
-@InjectWith(InjectorProviderCustom.class)
+@InjectWith(DomainmodelInjectorProvider.class)
 @SuppressWarnings("all")
 public class CompilerTest {
   @Rule
