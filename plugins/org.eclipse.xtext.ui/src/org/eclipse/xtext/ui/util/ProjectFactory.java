@@ -163,26 +163,9 @@ public class ProjectFactory {
 				}
 			};
 
-			// first run early contributors...
-			// in some cases it is crucial to enhance the project
-			// only after contributions, like in the case of gradle projects
-			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492728
-			if (earlyContributors != null) {
-				for (IProjectFactoryContributor contributor : earlyContributors) {
-					contributor.contributeFiles(project, fileCreator);
-				}
-			}
-
-			// then enhance project
+			runContributors(earlyContributors, project, fileCreator);
 			enhanceProject(project, subMonitor, shell);
-
-			// then all the other contributors...
-			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493399
-			if (contributors != null) {
-				for (IProjectFactoryContributor contributor : contributors) {
-					contributor.contributeFiles(project, fileCreator);
-				}
-			}
+			runContributors(contributors, project, fileCreator);
 
 			return project;
 		} catch (final CoreException exception) {
@@ -190,6 +173,17 @@ public class ProjectFactory {
 			return null;
 		} finally {
 			subMonitor.done();
+		}
+	}
+
+	/**
+	 * @since 2.10
+	 */
+	protected void runContributors(List<IProjectFactoryContributor> contribs, final IProject project, IFileCreator fileCreator) {
+		if (contribs != null) {
+			for (IProjectFactoryContributor contributor : contribs) {
+				contributor.contributeFiles(project, fileCreator);
+			}
 		}
 	}
 
