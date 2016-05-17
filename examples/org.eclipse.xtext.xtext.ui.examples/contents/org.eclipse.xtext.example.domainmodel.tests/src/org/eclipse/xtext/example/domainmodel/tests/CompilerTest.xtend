@@ -11,9 +11,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
 
 @RunWith(XtextRunner)
-@InjectWith(InjectorProviderCustom)
+@InjectWith(DomainmodelInjectorProvider)
 class CompilerTest {
 	
 	@Rule

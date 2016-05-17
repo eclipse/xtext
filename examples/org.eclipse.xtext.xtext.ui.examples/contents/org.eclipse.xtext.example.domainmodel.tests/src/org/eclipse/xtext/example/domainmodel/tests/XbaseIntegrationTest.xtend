@@ -1,6 +1,7 @@
 package org.eclipse.xtext.example.domainmodel.tests
 
 import com.google.inject.Inject
+import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess
 import org.eclipse.xtext.junit4.InjectWith
@@ -23,7 +24,7 @@ import org.junit.runner.RunWith
  * @author Sven Efftinge
  */
 @RunWith(XtextRunner)
-@InjectWith(InjectorProviderCustom)
+@InjectWith(DomainmodelInjectorProvider)
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 
 	@Inject OnTheFlyJavaCompiler2 javaCompiler
