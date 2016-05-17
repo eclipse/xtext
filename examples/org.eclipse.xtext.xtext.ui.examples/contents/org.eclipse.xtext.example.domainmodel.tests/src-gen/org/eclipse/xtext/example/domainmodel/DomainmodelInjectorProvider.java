@@ -3,6 +3,8 @@
  */
 package org.eclipse.xtext.example.domainmodel;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.eclipse.xtext.junit4.GlobalRegistries;
 import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
@@ -11,8 +13,8 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import com.google.inject.Injector;
 
 public class DomainmodelInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
-	
-    protected GlobalStateMemento stateBeforeInjectorCreation;
+
+	protected GlobalStateMemento stateBeforeInjectorCreation;
 	protected GlobalStateMemento stateAfterInjectorCreation;
 	protected Injector injector;
 
@@ -30,9 +32,26 @@ public class DomainmodelInjectorProvider implements IInjectorProvider, IRegistry
 		}
 		return injector;
 	}
-	
+
 	protected Injector internalCreateInjector() {
-	    return new DomainmodelStandaloneSetup().createInjectorAndDoEMFRegistration();
+		return new DomainmodelStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(createRuntimeModule());
+			}
+		}.createInjectorAndDoEMFRegistration();
+	}
+
+	protected DomainmodelRuntimeModule createRuntimeModule() {
+		// make it work also with Maven/Tycho and OSGI
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
+		return new DomainmodelRuntimeModule() {
+			@Override
+			public ClassLoader bindClassLoaderToInstance() {
+				return DomainmodelInjectorProvider.class
+						.getClassLoader();
+			}
+		};
 	}
 
 	@Override
