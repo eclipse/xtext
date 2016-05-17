@@ -16,7 +16,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.web.server.model.AbstractCachedService;
 import org.eclipse.xtext.web.server.model.IXtextWebDocument;
-import org.eclipse.xtext.web.server.model.UpdateDocumentService;
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingResult;
 
 /**
@@ -31,10 +30,9 @@ public class HighlightingService extends AbstractCachedService<HighlightingResul
   private ISemanticHighlightingCalculator highlightingCalculator;
   
   /**
-   * Return the highlighting result for the given document. The actual highlighting may have
-   * been computed as part of the background work scheduled after another service request,
-   * e.g. {@link UpdateDocumentService}. If that background processing has not been done
-   * yet, it is executed and then the validation issues are collected.
+   * Compute the highlighting result for the given document. This method should not be called
+   * directly from the service dispatcher; use {@link #getResult(XtextWebDocumentAccess)} instead
+   * in order to avoid duplicate computations.
    */
   @Override
   public HighlightingResult compute(final IXtextWebDocument it, final CancelIndicator cancelIndicator) {
