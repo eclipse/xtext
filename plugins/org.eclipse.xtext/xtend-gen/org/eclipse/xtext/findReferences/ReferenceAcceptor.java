@@ -28,8 +28,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author kosyakov - Pulled up to the runtime project
- * 
- * @since 2.10
  */
 @FinalFieldsConstructor
 @SuppressWarnings("all")

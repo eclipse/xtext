@@ -37,8 +37,6 @@ import com.google.inject.ImplementedBy;
  * 
  * @author Jan Koehnlein - Initial contribution and API in xtext.ui
  * @author Sebastian Zarnekow - Extracted headless API
- * 
- * @since 2.10
  */
 @ImplementedBy(ReferenceFinder.class)
 public interface IReferenceFinder {

@@ -23,8 +23,6 @@ import org.eclipse.xtext.util.IAcceptor
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author kosyakov - Pulled up to the runtime project
- * 
- * @since 2.10
  */
 @FinalFieldsConstructor
 class ReferenceAcceptor implements IReferenceFinder.Acceptor {
