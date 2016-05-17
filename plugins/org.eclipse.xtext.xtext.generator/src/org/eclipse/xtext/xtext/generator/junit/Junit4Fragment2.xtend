@@ -121,11 +121,11 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 			
 				protected «Injector» internalCreateInjector() {
 					return new «grammar.runtimeSetup»() {
-								@Override
-								public Injector createInjector() {
-									return «guice».createInjector(createRuntimeModule());
-								}
-							}.createInjectorAndDoEMFRegistration();
+						@Override
+						public Injector createInjector() {
+							return «guice».createInjector(createRuntimeModule());
+						}
+					}.createInjectorAndDoEMFRegistration();
 				}
 			
 				protected «grammar.runtimeModule» createRuntimeModule() {
