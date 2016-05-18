@@ -375,7 +375,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (isVariableDeclarationRequired(getFeatureCall(expr), expr, b)) {
 			return true;
 		}
-		if (expr.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+		EStructuralFeature eContainingFeature = expr.eContainingFeature();
+		if (eContainingFeature == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
 			if (((XMemberFeatureCall) expr.eContainer()).isNullSafe()) {
 				if (expr instanceof XFeatureCall) {
 					JvmIdentifiableElement feature = ((XFeatureCall) expr).getFeature();
@@ -386,7 +387,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				return !b.hasName(expr);
 			}
 		}
-		if (expr.eContainingFeature() == XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND) {
+		if (eContainingFeature == XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND) {
 			XBinaryOperation binaryOperation = (XBinaryOperation) expr.eContainer();
 			if (binaryOperation.isReassignFirstArgument()) {
 				return true;
@@ -437,6 +438,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			JvmIdentifiableElement feature = featureCall.getFeature();
 			if (feature instanceof JvmField || feature instanceof JvmFormalParameter)
 				return false;
+			//  Bug 492072
+			if(eContainingFeature == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS ){
+				return false;
+			}
+			if(eContainingFeature == XbasePackage.Literals.XASSIGNMENT__VALUE){
+				return false;
+			}
 			return !b.hasName(feature);
 		}
 		return super.isVariableDeclarationRequired(expr, b);
