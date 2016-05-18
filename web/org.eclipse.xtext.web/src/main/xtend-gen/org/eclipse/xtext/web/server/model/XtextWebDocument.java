@@ -49,7 +49,12 @@ public class XtextWebDocument implements IXtextWebDocument {
   
   private final Map<Class<?>, IServiceResult> cachedServiceResults = CollectionLiterals.<Class<?>, IServiceResult>newHashMap();
   
-  protected void clearCachedServiceResults() {
+  /**
+   * Clear any cached result of {@link AbstractCachedService}. This method is called whenever the text
+   * content of the resource is modified, but it may be necessary to clear the cached services in other
+   * cases, too.
+   */
+  public void clearCachedServiceResults() {
     this.cachedServiceResults.clear();
   }
   
@@ -129,6 +134,9 @@ public class XtextWebDocument implements IXtextWebDocument {
     return Long.toString(_modificationStamp, 16);
   }
   
+  /**
+   * Replace the text contents of the contained resource with the given text.
+   */
   @Override
   public void setText(final String text) {
     try {
@@ -140,6 +148,9 @@ public class XtextWebDocument implements IXtextWebDocument {
     }
   }
   
+  /**
+   * Update a part of the text.
+   */
   @Override
   public void updateText(final String text, final int offset, final int replaceLength) {
     this.clearCachedServiceResults();
@@ -147,6 +158,11 @@ public class XtextWebDocument implements IXtextWebDocument {
     this.refreshText();
   }
   
+  /**
+   * A new state id should be created whenever the text content is changed. The client must know
+   * the correct state id in order to send proper requests. If a request with an outdated state id
+   * is received by the server, the request is rejected.
+   */
   @Override
   public void createNewStateId() {
     long _modificationStamp = this.resource.getModificationStamp();

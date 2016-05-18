@@ -15,7 +15,6 @@ import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.web.server.model.AbstractCachedService
 import org.eclipse.xtext.web.server.model.IXtextWebDocument
-import org.eclipse.xtext.web.server.model.UpdateDocumentService
 
 /**
  * Service class for model validation.
@@ -26,10 +25,9 @@ class ValidationService extends AbstractCachedService<ValidationResult> {
 	@Inject IResourceValidator resourceValidator
 
 	/**
-	 * Return the validation result for the given document. The actual validation may have
-	 * been computed as part of the background work scheduled after another service request,
-	 * e.g. {@link UpdateDocumentService}. If that background processing has not been done
-	 * yet, it is executed and then the validation issues are collected.
+	 * Compute the validation result for the given document.  This method should not be called
+	 * directly from the service dispatcher; use {@link #getResult(XtextWebDocumentAccess)} instead
+	 * in order to avoid duplicate computations.
 	 */
 	override compute(IXtextWebDocument it, CancelIndicator cancelIndicator) {
 		val issues = resourceValidator.validate(resource, CheckMode.ALL, cancelIndicator)
@@ -49,4 +47,5 @@ class ValidationService extends AbstractCachedService<ValidationResult> {
 			default: "ignore"
 		}
 	}
+	
 }

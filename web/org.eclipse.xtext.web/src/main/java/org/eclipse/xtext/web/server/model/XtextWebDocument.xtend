@@ -39,7 +39,12 @@ class XtextWebDocument implements IXtextWebDocument {
     
     val Map<Class<?>, IServiceResult> cachedServiceResults = newHashMap
     
-	protected def clearCachedServiceResults() {
+    /**
+     * Clear any cached result of {@link AbstractCachedService}. This method is called whenever the text
+     * content of the resource is modified, but it may be necessary to clear the cached services in other
+     * cases, too.
+     */
+	def clearCachedServiceResults() {
 		cachedServiceResults.clear
 	}
 	
@@ -74,19 +79,30 @@ class XtextWebDocument implements IXtextWebDocument {
 	override getStateId() {
 		return Long.toString(resource.modificationStamp, 16)
 	}
-		
+	
+	/**
+	 * Replace the text contents of the contained resource with the given text.
+	 */
 	override setText(String text) {
 		clearCachedServiceResults()
 		resource.reparse(text)
 		refreshText()
 	}
 	
+	/**
+	 * Update a part of the text.
+	 */
 	override updateText(String text, int offset, int replaceLength) {
 		clearCachedServiceResults()
 		resource.update(offset, replaceLength, text)
 		refreshText()
 	}
 	
+	/**
+	 * A new state id should be created whenever the text content is changed. The client must know
+	 * the correct state id in order to send proper requests. If a request with an outdated state id
+	 * is received by the server, the request is rejected.
+	 */
 	override createNewStateId() {
 		val newStateId = resource.modificationStamp + 1
 		resource.modificationStamp = newStateId
