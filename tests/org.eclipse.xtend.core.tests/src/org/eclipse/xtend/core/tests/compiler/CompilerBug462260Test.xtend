@@ -152,7 +152,6 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			}
 		'''.assertCompilesTo('''
 			import java.util.Collections;
-			import java.util.HashMap;
 			import java.util.Map;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			
@@ -161,8 +160,7 @@ class CompilerBug462260Test extends AbstractXtendCompilerTest {
 			  public abstract <E extends Object> void graph(final E e1, final E e2);
 			  
 			  public void test() {
-			    HashMap<Object, Object> _newHashMap = CollectionLiterals.<Object, Object>newHashMap();
-			    this.<Map<Object, Object>>graph(_newHashMap, Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap()));
+			    this.<Map<Object, Object>>graph(CollectionLiterals.<Object, Object>newHashMap(), Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap()));
 			  }
 			}
 		''')
