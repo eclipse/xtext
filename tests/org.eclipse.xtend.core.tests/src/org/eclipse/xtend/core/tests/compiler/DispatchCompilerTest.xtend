@@ -26,6 +26,12 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 			
 				def dispatch foo(String assert) {
 				}
+				
+				def dispatch bar(Object assert, String assert_) {
+				}
+			
+				def dispatch bar(String assert, String assert_) {
+				}
 			}
 		''','''
 		import java.util.Arrays;
@@ -40,6 +46,14 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		    return null;
 		  }
 		  
+		  protected Object _bar(final Object assert_, final String assert__1) {
+		    return null;
+		  }
+		  
+		  protected Object _bar(final String assert_, final String assert__1) {
+		    return null;
+		  }
+		  
 		  public Object foo(final Object assert_) {
 		    if (assert_ instanceof String) {
 		      return _foo((String)assert_);
@@ -48,6 +62,17 @@ class DispatchCompilerTest extends AbstractXtendCompilerTest {
 		    } else {
 		      throw new IllegalArgumentException("Unhandled parameter types: " +
 		        Arrays.<Object>asList(assert_).toString());
+		    }
+		  }
+		  
+		  public Object bar(final Object assert_, final String assert__1) {
+		    if (assert_ instanceof String) {
+		      return _bar((String)assert_, assert__1);
+		    } else if (assert_ != null) {
+		      return _bar(assert_, assert__1);
+		    } else {
+		      throw new IllegalArgumentException("Unhandled parameter types: " +
+		        Arrays.<Object>asList(assert_, assert__1).toString());
 		    }
 		  }
 		}
