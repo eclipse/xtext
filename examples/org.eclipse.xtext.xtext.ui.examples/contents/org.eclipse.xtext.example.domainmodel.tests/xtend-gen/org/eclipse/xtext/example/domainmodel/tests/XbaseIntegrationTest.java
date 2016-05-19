@@ -6,8 +6,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
-import org.eclipse.xtext.example.domainmodel.tests.InjectorProviderCustom;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
  * @author Sven Efftinge
  */
 @RunWith(XtextRunner.class)
-@InjectWith(InjectorProviderCustom.class)
+@InjectWith(DomainmodelInjectorProvider.class)
 @SuppressWarnings("all")
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
   @Inject

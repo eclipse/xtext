@@ -96,6 +96,8 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 		val globalRegistries = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries")
 		val globalStateMemento = new TypeReference("org.eclipse.xtext.junit4", "GlobalRegistries.GlobalStateMemento")
 		val iRegistryConfigurator = new TypeReference("org.eclipse.xtext.junit4.IRegistryConfigurator")
+		val classLoader = new TypeReference("java.lang.ClassLoader")
+		val guice = new TypeReference("com.google.inject.Guice")
 		file.content = '''
 			public class «injectorProvider.simpleName» implements «iInjectorProvider», «iRegistryConfigurator» {
 			
@@ -118,7 +120,24 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 				}
 			
 				protected «Injector» internalCreateInjector() {
-					return new «grammar.runtimeSetup»().createInjectorAndDoEMFRegistration();
+					return new «grammar.runtimeSetup»() {
+						@Override
+						public Injector createInjector() {
+							return «guice».createInjector(createRuntimeModule());
+						}
+					}.createInjectorAndDoEMFRegistration();
+				}
+			
+				protected «grammar.runtimeModule» createRuntimeModule() {
+					// make it work also with Maven/Tycho and OSGI
+					// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
+					return new «grammar.runtimeModule»() {
+						@Override
+						public «classLoader» bindClassLoaderToInstance() {
+							return «injectorProvider.simpleName».class
+									.getClassLoader();
+						}
+					};
 				}
 			
 				@Override

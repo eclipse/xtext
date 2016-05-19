@@ -52,6 +52,8 @@ public class «qualifiedTestName().toSimpleName()» {
 «fileHeader()»
 package «qualifiedInjectorProviderName().toJavaPackage()»;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 «annotationImports()-»
 import org.eclipse.xtext.junit4.GlobalRegistries;
 import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
@@ -61,8 +63,8 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import com.google.inject.Injector;
 
 «classAnnotations()»public class «qualifiedInjectorProviderName().toSimpleName()» implements IInjectorProvider, IRegistryConfigurator {
-	
-    protected GlobalStateMemento stateBeforeInjectorCreation;
+
+	protected GlobalStateMemento stateBeforeInjectorCreation;
 	protected GlobalStateMemento stateAfterInjectorCreation;
 	protected Injector injector;
 
@@ -80,9 +82,26 @@ import com.google.inject.Injector;
 		}
 		return injector;
 	}
-	
+
 	protected Injector internalCreateInjector() {
-	    return new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
+		return new «setup().toSimpleName()»() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(createRuntimeModule());
+			}
+		}.createInjectorAndDoEMFRegistration();
+	}
+
+	protected «guiceModuleRt().toSimpleName()» createRuntimeModule() {
+		// make it work also with Maven/Tycho and OSGI
+		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=493672
+		return new «guiceModuleRt().toSimpleName()»() {
+			@Override
+			public ClassLoader bindClassLoaderToInstance() {
+				return «qualifiedInjectorProviderName().toSimpleName()».class
+						.getClassLoader();
+			}
+		};
 	}
 
 	@Override
@@ -110,12 +129,12 @@ import org.eclipse.xtext.junit4.IInjectorProvider;
 import com.google.inject.Injector;
 
 «classAnnotations()»public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInjectorProvider {
-	
+
 	@Override
 	public Injector getInjector() {
 		return «activatorName()».getInstance().getInjector("«name»");
 	}
-	
+
 }
 «ENDFILE»
 «ENDIF»
