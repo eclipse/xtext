@@ -39,7 +39,7 @@ class TextDocumentServiceImpl implements TextDocumentService {
         }
     }
     
-    private def Diagnostic toDiagnostic(Issue issue) {
+    private def DiagnosticImpl toDiagnostic(Issue issue) {
         new DiagnosticImpl => [
             code = issue.code 
             severity = switch issue.severity {

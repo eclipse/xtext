@@ -44,14 +44,14 @@ public class TextDocumentServiceImpl implements TextDocumentService {
       public void apply(final PublishDiagnosticsParamsImpl it) {
         String _fileString = uri.toFileString();
         it.setUri(_fileString);
-        final Function1<Issue, Diagnostic> _function = new Function1<Issue, Diagnostic>() {
+        final Function1<Issue, DiagnosticImpl> _function = new Function1<Issue, DiagnosticImpl>() {
           @Override
-          public Diagnostic apply(final Issue it) {
+          public DiagnosticImpl apply(final Issue it) {
             return TextDocumentServiceImpl.this.toDiagnostic(it);
           }
         };
-        Iterable<Diagnostic> _map = IterableExtensions.map(issues, _function);
-        List<Diagnostic> _list = IterableExtensions.<Diagnostic>toList(_map);
+        Iterable<DiagnosticImpl> _map = IterableExtensions.map(issues, _function);
+        List<DiagnosticImpl> _list = IterableExtensions.<DiagnosticImpl>toList(_map);
         it.setDiagnostics(_list);
       }
     };
@@ -61,7 +61,7 @@ public class TextDocumentServiceImpl implements TextDocumentService {
     }
   }
   
-  private Diagnostic toDiagnostic(final Issue issue) {
+  private DiagnosticImpl toDiagnostic(final Issue issue) {
     DiagnosticImpl _diagnosticImpl = new DiagnosticImpl();
     final Procedure1<DiagnosticImpl> _function = new Procedure1<DiagnosticImpl>() {
       @Override
