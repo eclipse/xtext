@@ -169,6 +169,12 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 		highlightReferenceJvmType(acceptor, referencer, reference, resolvedReferencedObject, ANNOTATION);
 	}
 	
+	/**
+	 * @deprecated override {@link #highlightReferenceJvmType(IHighlightedPositionAcceptor, EObject, EReference, EObject)}
+	 * 		or {@link #highlightFeature(IHighlightedPositionAcceptor, EObject, org.eclipse.emf.ecore.EStructuralFeature, String...)}
+	 * 		in order to customize the coloring of references of {@link JvmType JvmTypes}.
+	 */
+	@Deprecated
 	protected void highlightReferenceJvmType(IHighlightedPositionAcceptor acceptor, EObject referencer,
 			EReference reference, EObject resolvedReferencedObject, String highlightingConfiguration) {
 		highlightDeprecation(acceptor, referencer, reference, resolvedReferencedObject);
