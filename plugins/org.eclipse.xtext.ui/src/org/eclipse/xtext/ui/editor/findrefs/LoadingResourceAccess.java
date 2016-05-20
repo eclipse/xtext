@@ -35,7 +35,8 @@ public class LoadingResourceAccess implements IReferenceFinder.ILocalResourceAcc
 	
 	@Override
 	public <R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
-		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(targetURI.trimFragment());
+		URI resourceURI = targetURI.trimFragment();
+		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(resourceURI);
 		Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
 		while(iterator.hasNext()) {
 			Pair<IStorage, IProject> pair = iterator.next();
@@ -43,7 +44,7 @@ public class LoadingResourceAccess implements IReferenceFinder.ILocalResourceAcc
 			if (project != null) {
 				ResourceSet resourceSet = resourceSetProvider.get(project);
 				if(resourceSet != null)
-					resourceSet.getResource(targetURI, true);
+					resourceSet.getResource(resourceURI, true);
 					try {
 						return work.exec(resourceSet);
 					} catch (Exception e) {
