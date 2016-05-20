@@ -248,8 +248,17 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 				
 			} else if (feature instanceof JvmFormalParameter) {
 				if (!SPECIAL_FEATURE_NAMES.contains(((JvmFormalParameter) feature).getName())) {
-					highlightFeatureCall(featureCall, acceptor, LOCAL_FINAL_VARIABLE);
 					// highlighting of special identifiers is done separately, so it's omitted here 
+					final EObject eContainingFeature = feature.eContainingFeature();
+					
+					if (eContainingFeature == TypesPackage.Literals.JVM_EXECUTABLE__PARAMETERS
+							|| eContainingFeature == XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS) {
+						// which is the case for constructors and methods
+						highlightFeatureCall(featureCall, acceptor, PARAMETER_VARIABLE);
+					} else {
+						// covers parameters of for and template expr FOR loops, as well as switch statements
+						highlightFeatureCall(featureCall, acceptor, LOCAL_FINAL_VARIABLE);
+					}
 				}
 				
 			} else if (feature instanceof JvmTypeParameter) {
@@ -334,8 +343,13 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	
 	protected void highlightFormalParameter(JvmFormalParameter parameterDecl, IHighlightedPositionAcceptor acceptor) {
 		if (!SPECIAL_FEATURE_NAMES.contains(parameterDecl.getName())) {
-			highlightFeature(acceptor, parameterDecl, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, LOCAL_FINAL_VARIABLE_DECLARATION);
 			// highlighting of special identifiers is done separately, so it's omitted here 
+			if (parameterDecl.eContainingFeature() == XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS) {
+				highlightFeature(acceptor, parameterDecl, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, PARAMETER_VARIABLE);
+			} else {
+				// covers parameters of for and template expr FOR loops, as well as switch statements
+				highlightFeature(acceptor, parameterDecl, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, LOCAL_FINAL_VARIABLE_DECLARATION);
+			}
 		}
 	}
 	
