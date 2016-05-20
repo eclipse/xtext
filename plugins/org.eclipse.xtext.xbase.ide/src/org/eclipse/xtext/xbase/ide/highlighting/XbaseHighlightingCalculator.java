@@ -132,6 +132,8 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 			}
 			operationCanceledManager.checkCanceled(cancelIndicator);
 			computeFeatureCallHighlighting((XAbstractFeatureCall) object, acceptor);
+		} else if (object instanceof JvmTypeParameter) {
+			highlightTypeParameter((JvmTypeParameter) object, acceptor);
 		} else if (object instanceof JvmFormalParameter) {
 			highlightFormalParameter((JvmFormalParameter) object, acceptor);
 		} else if (object instanceof XVariableDeclaration) {
@@ -234,9 +236,9 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 			if (feature instanceof XVariableDeclaration) {
 				if (!SPECIAL_FEATURE_NAMES.contains(((XVariableDeclaration) feature).getName())) {
 					// highlighting of special identifiers is done separately, so it's omitted here 
-					if (((XVariableDeclaration) feature).isWriteable()) {
-						highlightFeatureCall(featureCall, acceptor, LOCAL_VARIABLE);
-					} else {
+					highlightFeatureCall(featureCall, acceptor, LOCAL_VARIABLE);
+					
+					if (!((XVariableDeclaration) feature).isWriteable()) {
 						highlightFeatureCall(featureCall, acceptor, LOCAL_FINAL_VARIABLE);
 					}
 				}
@@ -252,6 +254,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 						highlightFeatureCall(featureCall, acceptor, PARAMETER_VARIABLE);
 					} else {
 						// covers parameters of for and template expr FOR loops, as well as switch statements
+						highlightFeatureCall(featureCall, acceptor, LOCAL_VARIABLE);
 						highlightFeatureCall(featureCall, acceptor, LOCAL_FINAL_VARIABLE);
 					}
 				}
@@ -260,30 +263,31 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 				highlightFeatureCall(featureCall, acceptor, TYPE_VARIABLE);
 				
 			} else if (feature instanceof JvmField) {
+				highlightFeatureCall(featureCall, acceptor, FIELD);
+				
 				if (((JvmField) feature).isStatic()) {
+					highlightFeatureCall(featureCall, acceptor, STATIC_FIELD);
+					
 					if (((JvmField) feature).isFinal()) {
 						highlightFeatureCall(featureCall, acceptor, STATIC_FINAL_FIELD);
-					} else {
-						highlightFeatureCall(featureCall, acceptor, STATIC_FIELD);
 					}
-				} else {
-					highlightFeatureCall(featureCall, acceptor, FIELD);
 				}
 				
 			} else if (feature instanceof JvmOperation && !featureCall.isOperation()) {
 				JvmOperation jvmOperation = (JvmOperation) feature;
 				
+				highlightFeatureCall(featureCall, acceptor, METHOD);
+				
+				if (jvmOperation.isAbstract()) {
+					highlightFeatureCall(featureCall, acceptor, ABSTRACT_METHOD_INVOCATION);
+				}
+				
 				if (jvmOperation.isStatic()) {
 					highlightFeatureCall(featureCall, acceptor, STATIC_METHOD_INVOCATION);
-					if (featureCall.isExtension() || isExtensionWithImplicitFirstArgument(featureCall)) {
-						highlightFeatureCall(featureCall, acceptor, EXTENSION_METHOD_INVOCATION);
-					}
-				} else if (featureCall.isExtension() || isExtensionWithImplicitFirstArgument(featureCall)) {
+				}
+				
+				if (featureCall.isExtension() || isExtensionWithImplicitFirstArgument(featureCall)) {
 					highlightFeatureCall(featureCall, acceptor, EXTENSION_METHOD_INVOCATION);
-				} else if (jvmOperation.isAbstract()) {
-					highlightFeatureCall(featureCall, acceptor, ABSTRACT_METHOD_INVOCATION);
-				} else {
-					highlightFeatureCall(featureCall, acceptor, METHOD);
 				}
 				
 			} else if (feature instanceof JvmDeclaredType) {
@@ -343,6 +347,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 				highlightFeature(acceptor, parameterDecl, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, PARAMETER_VARIABLE);
 			} else {
 				// covers parameters of for and template expr FOR loops, as well as switch statements
+				highlightFeature(acceptor, parameterDecl, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, LOCAL_VARIABLE_DECLARATION);
 				highlightFeature(acceptor, parameterDecl, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, LOCAL_FINAL_VARIABLE_DECLARATION);
 			}
 		}
@@ -351,9 +356,8 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	protected void highlightVariableDeclaration(XVariableDeclaration varDecl, IHighlightedPositionAcceptor acceptor) {
 		if (!SPECIAL_FEATURE_NAMES.contains(varDecl.getName())) {
 			// highlighting of special identifiers is done separately, so it's omitted here 
-			if (varDecl.isWriteable()) {
-				highlightFeature(acceptor, varDecl, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, LOCAL_VARIABLE_DECLARATION);
-			} else {
+			highlightFeature(acceptor, varDecl, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, LOCAL_VARIABLE_DECLARATION);
+			if (!varDecl.isWriteable()) {
 				highlightFeature(acceptor, varDecl, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, LOCAL_FINAL_VARIABLE_DECLARATION);
 			}
 		}

@@ -223,7 +223,9 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	@Test
 	def void testLocalFinalVariable() {
 		val model = "{ val int x = 1 println(x) }"
+		expectAbsolute(model.indexOf('x'), 1, LOCAL_VARIABLE_DECLARATION)
 		expectAbsolute(model.indexOf('x'), 1, LOCAL_FINAL_VARIABLE_DECLARATION)
+		expectAbsolute(model.lastIndexOf('x'), 1, LOCAL_VARIABLE)
 		expectAbsolute(model.lastIndexOf('x'), 1, LOCAL_FINAL_VARIABLE)
 		highlight(model)
 	}
@@ -239,7 +241,9 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	@Test
 	def void testLocalFinalVariableTE() {
 		val model = "''' «{val int x = 1 println(x)}» '''"
+		expectAbsolute(model.indexOf('x'), 1, LOCAL_VARIABLE_DECLARATION)
 		expectAbsolute(model.indexOf('x'), 1, LOCAL_FINAL_VARIABLE_DECLARATION)
+		expectAbsolute(model.lastIndexOf('x'), 1, LOCAL_VARIABLE)
 		expectAbsolute(model.lastIndexOf('x'), 1, LOCAL_FINAL_VARIABLE)
 		highlight(model)
 	}
@@ -255,6 +259,7 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	def void testClosureParameterIt() {
 		val model = "{ [ it | println(it) ] }"
 		expectAbsolute(model.indexOf("it"), 2, KEYWORD_ID)
+		expectAbsolute(model.indexOf("println"), 7, METHOD)
 		expectAbsolute(model.indexOf("println"), 7, STATIC_METHOD_INVOCATION)
 		expectAbsolute(model.lastIndexOf("it"), 2, KEYWORD_ID)
 		highlight(model)
@@ -272,6 +277,7 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	@Test
 	def void testLoopParameter() {
 		val model = "{ for(i: 0..42) { } }"
+		expectAbsolute(model.indexOf('i'), 1, LOCAL_VARIABLE_DECLARATION)
 		expectAbsolute(model.indexOf('i'), 1, LOCAL_FINAL_VARIABLE_DECLARATION)
 		highlight(model)
 	}
@@ -279,6 +285,7 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	@Test
 	def void testTELoopParameter() {
 		val model = "''' «FOR i: 0..42» «ENDFOR» '''"
+		expectAbsolute(model.indexOf('i'), 1, LOCAL_VARIABLE_DECLARATION)
 		expectAbsolute(model.indexOf('i'), 1, LOCAL_FINAL_VARIABLE_DECLARATION)
 		highlight(model)
 	}
@@ -286,6 +293,7 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	@Test
 	def void testSwitchParameter() {
 		val model = "{ switch( i: 0..47) { default: { } } }"
+		expectAbsolute(model.indexOf('i:'), 1, LOCAL_VARIABLE_DECLARATION)
 		expectAbsolute(model.indexOf('i:'), 1, LOCAL_FINAL_VARIABLE_DECLARATION)
 		highlight(model)
 	}

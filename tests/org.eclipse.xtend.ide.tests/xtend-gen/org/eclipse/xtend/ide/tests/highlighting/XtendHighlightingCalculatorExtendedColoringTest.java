@@ -254,9 +254,13 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
   public void testLocalFinalVariable() {
     final String model = "{ val int x = 1 println(x) }";
     int _indexOf = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    int _indexOf_1 = model.indexOf("x");
+    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
     int _lastIndexOf = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE);
+    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
+    int _lastIndexOf_1 = model.lastIndexOf("x");
+    this.helper.expectAbsolute(_lastIndexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE);
     this.helper.highlight(model);
   }
   
@@ -274,9 +278,13 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
   public void testLocalFinalVariableTE() {
     final String model = "\'\'\' «{val int x = 1 println(x)}» \'\'\'";
     int _indexOf = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    int _indexOf_1 = model.indexOf("x");
+    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
     int _lastIndexOf = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE);
+    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE);
+    int _lastIndexOf_1 = model.lastIndexOf("x");
+    this.helper.expectAbsolute(_lastIndexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE);
     this.helper.highlight(model);
   }
   
@@ -294,7 +302,9 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     int _indexOf = model.indexOf("it");
     this.helper.expectAbsolute(_indexOf, 2, HighlightingStyles.KEYWORD_ID);
     int _indexOf_1 = model.indexOf("println");
-    this.helper.expectAbsolute(_indexOf_1, 7, XbaseHighlightingStyles.STATIC_METHOD_INVOCATION);
+    this.helper.expectAbsolute(_indexOf_1, 7, XbaseHighlightingStyles.METHOD);
+    int _indexOf_2 = model.indexOf("println");
+    this.helper.expectAbsolute(_indexOf_2, 7, XbaseHighlightingStyles.STATIC_METHOD_INVOCATION);
     int _lastIndexOf = model.lastIndexOf("it");
     this.helper.expectAbsolute(_lastIndexOf, 2, HighlightingStyles.KEYWORD_ID);
     this.helper.highlight(model);
@@ -316,7 +326,9 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
   public void testLoopParameter() {
     final String model = "{ for(i: 0..42) { } }";
     int _indexOf = model.indexOf("i");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    int _indexOf_1 = model.indexOf("i");
+    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
     this.helper.highlight(model);
   }
   
@@ -324,7 +336,9 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
   public void testTELoopParameter() {
     final String model = "\'\'\' «FOR i: 0..42» «ENDFOR» \'\'\'";
     int _indexOf = model.indexOf("i");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    int _indexOf_1 = model.indexOf("i");
+    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
     this.helper.highlight(model);
   }
   
@@ -332,7 +346,9 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
   public void testSwitchParameter() {
     final String model = "{ switch( i: 0..47) { default: { } } }";
     int _indexOf = model.indexOf("i:");
-    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(_indexOf, 1, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION);
+    int _indexOf_1 = model.indexOf("i:");
+    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
     this.helper.highlight(model);
   }
 }
