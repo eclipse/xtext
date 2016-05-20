@@ -69,6 +69,13 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
   }
   
   @Test
+  public void testAbstractClass() {
+    this.helper.classDefString = "abstract class Foo";
+    this.expectAbstractClass(15, 3);
+    this.highlight();
+  }
+  
+  @Test
   public void testSimpleInterface() {
     this.helper.classDefString = "interface Foo";
     this.expectInterface(10, 3);
@@ -76,11 +83,101 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
   }
   
   @Test
-  public void testSimpleTypeWithTypeVariable() {
+  public void testSimpleClassWithTypeVariable() {
     this.helper.classDefString = "class Foo<Foo>";
     this.expectClass(6, 3);
     this.expectTypeVariable(10, 3);
     this.highlight();
+  }
+  
+  @Test
+  public void testAbstractClassWithTypeVariable() {
+    this.helper.classDefString = "abstract class Foo<Foo>";
+    this.expectAbstractClass(15, 3);
+    this.expectTypeVariable(19, 3);
+    this.highlight();
+  }
+  
+  @Test
+  public void testSimpleInterfaceWithTypeVariable() {
+    this.helper.classDefString = "interface Foo<Foo>";
+    this.expectInterface(10, 3);
+    this.expectTypeVariable(14, 3);
+    this.highlight();
+  }
+  
+  @Test
+  public void testSimpleClassConstructor() {
+    final String model = "{ new Foo() }";
+    this.expectClass(6, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Foo");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectClass(_plus, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testAbstractClassConstructor() {
+    this.helper.classDefString = "abstract class Foo";
+    final String model = "{ new Foo() } new() {}";
+    this.expectAbstractClass(15, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Foo");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectAbstractClass(_plus, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testAbstractClassImplicitConstructor() {
+    this.helper.classDefString = "abstract class Foo";
+    final String model = "{ new Foo() }";
+    this.expectAbstractClass(15, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Foo");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectAbstractClass(_plus, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testAbstractClassAnonymousClassImplicitConstructor() {
+    this.helper.classDefString = "abstract class Foo";
+    final String model = "{ new Foo() {} }";
+    this.expectAbstractClass(15, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Foo");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectAbstractClass(_plus, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testAbstractClassAnonymousClassConstructor() {
+    this.helper.classDefString = "abstract class Foo";
+    final String model = "{ new Foo() {} } new() {}";
+    this.expectAbstractClass(15, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Foo");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectAbstractClass(_plus, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testInterfaceAnonymousClassConstructor() {
+    final String model = "{ new Bar() {} } interface Bar {}";
+    this.expectClass(6, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Bar");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectInterface(_plus, 3);
+    int _prefixLength_1 = this.helper.getPrefixLength();
+    int _lastIndexOf = model.lastIndexOf("Bar");
+    int _plus_1 = (_prefixLength_1 + _lastIndexOf);
+    this.expectInterface(_plus_1, 3);
+    this.helper.highlight(model);
   }
   
   @Test
@@ -92,6 +189,18 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     this.helper.expectMethod(_plus, 3);
     int _indexOf_1 = model.indexOf("x");
     this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testMethodParamReference() {
+    final String model = "{} def foo(int x) { x }";
+    int _indexOf = model.indexOf("int");
+    this.helper.expectAbsolute(_indexOf, 3, HighlightingStyles.KEYWORD_ID);
+    int _indexOf_1 = model.indexOf("x");
+    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    int _lastIndexOf = model.lastIndexOf("x");
+    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
     this.helper.highlight(model);
   }
   
@@ -197,9 +306,9 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     int _indexOf = model.indexOf("int");
     this.helper.expectAbsolute(_indexOf, 3, HighlightingStyles.KEYWORD_ID);
     int _indexOf_1 = model.indexOf("x");
-    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION);
+    this.helper.expectAbsolute(_indexOf_1, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
     int _lastIndexOf = model.lastIndexOf("x");
-    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE);
+    this.helper.expectAbsolute(_lastIndexOf, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
     this.helper.highlight(model);
   }
   

@@ -46,6 +46,7 @@ import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -137,6 +138,8 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 			highlightVariableDeclaration((XVariableDeclaration) object, acceptor);
 		} else if (object instanceof XNumberLiteral) {
 			highlightNumberLiterals((XNumberLiteral) object, acceptor);
+		} else if (object instanceof XConstructorCall) {
+			highlightConstructorCall((XConstructorCall) object, acceptor);
 		} else if (object instanceof XAnnotation) {
 			// Handle XAnnotation in a special way because we want the @ highlighted too
 			highlightAnnotation((XAnnotation) object, acceptor);
@@ -206,15 +209,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 				highlightFeature(acceptor, referencer, reference, ENUM);
 				
 			} else if (resolvedReferencedObject instanceof JvmGenericType) {
-				
-				final JvmGenericType type = (JvmGenericType) resolvedReferencedObject;
-				if (type.isInterface()) {
-					highlightFeature(acceptor, referencer, reference, INTERFACE);
-				} else if (type.isAbstract()) {
-					highlightFeature(acceptor, referencer, reference, ABSTRACT_CLASS);
-				} else {
-					highlightFeature(acceptor, referencer, reference, CLASS);
-				}
+				highlightFeature(acceptor, referencer, reference, getStyle((JvmGenericType) resolvedReferencedObject));
 				
 			} else if (resolvedReferencedObject instanceof JvmAnnotationType) {
 				highlightFeature(acceptor, referencer, reference, highlightingConfiguration);
@@ -369,6 +364,26 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 		ITextRegion textRegion = node.getTextRegion();
 		acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), NUMBER_ID);
 	}
+	
+	protected void highlightConstructorCall(XConstructorCall constructorCall, IHighlightedPositionAcceptor acceptor) {
+		if (constructorCall.getConstructor() != null && !constructorCall.getConstructor().eIsProxy()) {
+			EObject declaringType = constructorCall.getConstructor().getDeclaringType();
+			if (declaringType instanceof JvmGenericType) {
+				highlightFeature(acceptor, constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, getStyle((JvmGenericType) declaringType));
+			}
+		}
+	}
+	
+	protected String getStyle(JvmGenericType type) {
+		if (type.isInterface()) {
+			return INTERFACE;
+		} else if (type.isAbstract()) {
+			return ABSTRACT_CLASS;
+		} else {
+			return CLASS;
+		}
+	}
+
 	
 	protected void highlightTypeParameter(JvmTypeParameter typeParameter, IHighlightedPositionAcceptor acceptor) {
 		highlightFeature(acceptor, typeParameter, TypesPackage.Literals.JVM_TYPE_PARAMETER__NAME, TYPE_VARIABLE);
