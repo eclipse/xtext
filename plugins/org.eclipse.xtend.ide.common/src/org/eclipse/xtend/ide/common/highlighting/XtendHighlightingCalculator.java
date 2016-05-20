@@ -15,15 +15,18 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtend.core.jvmmodel.AnonymousClassUtil;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
+import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
+import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -40,6 +43,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
@@ -52,6 +56,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -82,6 +87,9 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 	
 	@Inject
 	private XtendGrammarAccess xtendGrammarAccess;
+	
+	@Inject
+	private AnonymousClassUtil anonymousClassUtil;
 
 	@Inject
 	protected void setXtendGrammarAccess(IGrammarAccess grammarAccess) {
@@ -116,9 +124,12 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 			operationCanceledManager.checkCanceled(cancelIndicator);
 			
 			switch (object.eClass().getClassifierID()) {
-				case XtendPackage.ANONYMOUS_CLASS:
 				case XtendPackage.XTEND_CLASS:
-					highlightFeature(acceptor, object, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, CLASS);
+					if (((XtendClass) object).isAbstract()) {
+						highlightFeature(acceptor, object, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, ABSTRACT_CLASS);
+					} else {
+						highlightFeature(acceptor, object, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, CLASS);
+					}
 					break;
 				case XtendPackage.XTEND_ENUM:
 					highlightFeature(acceptor, object, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, ENUM);
@@ -218,6 +229,18 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 		super.highlightAnnotation(annotation, acceptor);
 	}
 
+	@Override
+	protected void highlightConstructorCall(XConstructorCall constructorCall, IHighlightedPositionAcceptor acceptor) {
+		if (constructorCall.eContainer() instanceof AnonymousClass) {
+			final JvmGenericType superType = anonymousClassUtil.getSuperType((AnonymousClass) constructorCall.eContainer());
+			if (superType != null) {
+				highlightFeature(acceptor, constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, getStyle(superType));
+			}
+		} else {
+			super.highlightConstructorCall(constructorCall, acceptor);
+		}
+	}
+	
 	protected void highlightDeprecatedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target, XAnnotation annotation){
 		JvmType annotationType = annotation.getAnnotationType();
 		if(annotationType instanceof JvmAnnotationType && DeprecationUtil.isDeprecatedAnnotation((JvmAnnotationType) annotationType)){

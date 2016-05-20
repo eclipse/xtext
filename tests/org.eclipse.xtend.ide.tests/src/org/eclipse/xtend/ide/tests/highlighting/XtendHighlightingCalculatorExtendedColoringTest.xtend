@@ -65,6 +65,14 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	}
 	
 	@Test
+	def void testAbstractClass() {
+		classDefString = "abstract class Foo"
+		expectAbstractClass(15, 3)
+		
+		highlight()
+	}
+	
+	@Test
 	def void testSimpleInterface() {
 		classDefString = "interface Foo"
 		expectInterface(10, 3)
@@ -73,12 +81,89 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	}
 	
 	@Test
-	def void testSimpleTypeWithTypeVariable() {
+	def void testSimpleClassWithTypeVariable() {
 		classDefString = "class Foo<Foo>"
 		expectClass(6, 3)
 		expectTypeVariable(10, 3)
 		
 		highlight()
+	}
+	
+	@Test
+	def void testAbstractClassWithTypeVariable() {
+		classDefString = "abstract class Foo<Foo>"
+		expectAbstractClass(15, 3)
+		expectTypeVariable(19, 3)
+		
+		highlight()
+	}
+	
+	@Test
+	def void testSimpleInterfaceWithTypeVariable() {
+		classDefString = "interface Foo<Foo>"
+		expectInterface(10, 3)
+		expectTypeVariable(14, 3)
+		
+		highlight()
+	}
+	
+	@Test
+	def void testSimpleClassConstructor() {
+		val model = "{ new Foo() }"
+		expectClass(6, 3)
+		expectClass(prefixLength + model.indexOf("Foo"), 3)
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testAbstractClassConstructor() {
+		classDefString = "abstract class Foo"
+		val model = "{ new Foo() } new() {}"
+		expectAbstractClass(15, 3)
+		expectAbstractClass(prefixLength + model.indexOf("Foo"), 3)
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testAbstractClassImplicitConstructor() {
+		classDefString = "abstract class Foo"
+		val model = "{ new Foo() }"
+		expectAbstractClass(15, 3)
+		expectAbstractClass(prefixLength + model.indexOf("Foo"), 3)
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testAbstractClassAnonymousClassImplicitConstructor() {
+		classDefString = "abstract class Foo"
+		val model = "{ new Foo() {} }"
+		expectAbstractClass(15, 3)
+		expectAbstractClass(prefixLength + model.indexOf("Foo"), 3)
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testAbstractClassAnonymousClassConstructor() {
+		classDefString = "abstract class Foo"
+		val model = "{ new Foo() {} } new() {}"
+		expectAbstractClass(15, 3)
+		expectAbstractClass(prefixLength + model.indexOf("Foo"), 3)
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testInterfaceAnonymousClassConstructor() {
+		val model = "{ new Bar() {} } interface Bar {}"
+		expectClass(6, 3)
+		expectInterface(prefixLength + model.indexOf("Bar"), 3)
+		expectInterface(prefixLength + model.lastIndexOf("Bar"), 3)
+		
+		highlight(model)
 	}
 	
 	@Test
