@@ -91,6 +91,16 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	}
 	
 	@Test
+	def void testMethodParamReference() {
+		val model = "{} def foo(int x) { x }"
+		expectAbsolute(model.indexOf("int"), 3, KEYWORD_ID)
+		expectAbsolute(model.indexOf("x"), 1, PARAMETER_VARIABLE)
+		expectAbsolute(model.lastIndexOf("x"), 1, PARAMETER_VARIABLE)
+
+		highlight(model)
+	}
+	
+	@Test
 	def void testMethodParamIt() {
 		val model = "{} def foo(int it) {}"
 		expectMethod(prefixLength + model.indexOf('foo'), 3)
@@ -169,8 +179,8 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	def void testClosureParameter() {
 		val model = "{ [ int x | x ] }"
 		expectAbsolute(model.indexOf('int'), 3, KEYWORD_ID)
-		expectAbsolute(model.indexOf('x'), 1, LOCAL_FINAL_VARIABLE_DECLARATION)
-		expectAbsolute(model.lastIndexOf('x'), 1, LOCAL_FINAL_VARIABLE)
+		expectAbsolute(model.indexOf('x'), 1, PARAMETER_VARIABLE)
+		expectAbsolute(model.lastIndexOf('x'), 1, PARAMETER_VARIABLE)
 		highlight(model)
 	}
 	
