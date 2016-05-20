@@ -45,7 +45,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
@@ -161,10 +160,6 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 			highlightAnnotations(acceptor, (XtendAnnotationTarget) object);
 			return false;
 			
-		} else if (object instanceof JvmTypeParameter) {
-			highlightTypeParameter((JvmTypeParameter) object, acceptor);
-			return false;
-			
 		} else {
 			return super.highlightElement(object, acceptor, cancelIndicator);
 		}
@@ -181,14 +176,14 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 	}
 	
 	protected void highlightElement(XtendField field, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {		
-		if(field.isStatic())
+		highlightFeature(acceptor, field, XtendPackage.Literals.XTEND_FIELD__NAME, FIELD);
+		
+		if(field.isStatic()) {
+			highlightFeature(acceptor, field, XtendPackage.Literals.XTEND_FIELD__NAME, STATIC_FIELD);
+			
 			if (field.isFinal()) {
 				highlightFeature(acceptor, field, XtendPackage.Literals.XTEND_FIELD__NAME, STATIC_FINAL_FIELD);
-			} else  {
-				highlightFeature(acceptor, field, XtendPackage.Literals.XTEND_FIELD__NAME, STATIC_FIELD);
 			}
-		else {
-			highlightFeature(acceptor, field, XtendPackage.Literals.XTEND_FIELD__NAME, FIELD);
 		}
 		
 		XExpression initializer = field.getInitialValue();
