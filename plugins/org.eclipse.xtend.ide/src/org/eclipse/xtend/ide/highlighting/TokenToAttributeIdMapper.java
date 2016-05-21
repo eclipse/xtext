@@ -39,7 +39,15 @@ public class TokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapp
 			"RULE_COMMENT_RICH_TEXT_END".equals(tokenName) ||
 			"RULE_COMMENT_RICH_TEXT_INBETWEEN".equals(tokenName)) {
 			return RICH_TEXT_ID;
+			
+		} else if ("RULE_SL_COMMENT".equals(tokenName)) {
+			return SINGLE_LINE_COMMENT;
+		
+		} else if("RULE_ML_COMMENT".equals(tokenName)) {
+			return MULTI_LINE_COMMENT;
+			
+		} else {
+			return super.calculateId(tokenName, tokenType);			
 		}
-		return super.calculateId(tokenName, tokenType);
 	}
 }
