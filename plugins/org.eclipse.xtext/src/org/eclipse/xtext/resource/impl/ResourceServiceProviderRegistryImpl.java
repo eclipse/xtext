@@ -49,7 +49,7 @@ public class ResourceServiceProviderRegistryImpl implements IResourceServiceProv
 				}
 				return (IResourceServiceProvider) object;
 			} catch (Exception e) {
-				LOG.error("Errorneous resource service provider registered for '"+uri+"'. Removing it from the registry.", e);
+				LOG.error("Erroneous resource service provider registered for '"+uri+"'. Removing it from the registry.", e);
 				Iterator<Entry<String, Object>> iterator = protocolToFactoryMap.entrySet().iterator();
 				while (iterator .hasNext()) {
 					Entry<String, Object> entry = iterator.next();
