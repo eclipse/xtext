@@ -14,8 +14,8 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.Collection;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingCalculator;
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.junit.After;
 import org.junit.Before;
@@ -45,7 +46,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	private static final String DEPRECATED_TEST_CLASS = "org.eclipse.xtend.ide.tests.data.highlighting.TestClassDeprecated";
 
-	private String classDefString = DEFAULT_CLASS_DEF;
+	String classDefString = DEFAULT_CLASS_DEF;
 
 	@Inject
 	private XtendHighlightingCalculator calculator;
@@ -106,18 +107,17 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		return getPrefix().length();
 	}
 	
-	protected XtendClass member(String string) throws Exception {
-		return clazz(getPrefix()+string+"}");
+	protected XtendTypeDeclaration member(String string) throws Exception {
+		return typeDecl(getPrefix()+string+"}");
 	}
+	
 	protected XtendTypeDeclaration secondMember(String string) throws Exception {
 		return file(getPrefix()+string+"}").getXtendTypes().get(1);
 	}
 	
-	@Override
-	protected XtendClass clazz(String string) throws Exception {
-		return (XtendClass) file(string).getXtendTypes().get(0);
+	protected XtendTypeDeclaration typeDecl(String string) throws Exception {
+		return file(string).getXtendTypes().get(0);
 	}
-
 	
 	@Test public void testEmptyString() {
 		expectInsignificant(0, 3);
@@ -133,6 +133,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	@Test public void testSingleLineLiteral() {
 		strictMode = true;
+		expectClass(6, 3);
+		expectMethod(16, 3);
 		expectInsignificant(0, 3);
 		expectInsignificant(9, 3);
 		highlight(
@@ -141,6 +143,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	@Test public void testLiteral() {
 		strictMode = true;
+		expectClass(6, 3);
+		expectMethod(16, 3);
 		expectInsignificant(0, 3);
 		expectInsignificant(3, 2);
 		expectInsignificant(5, 1);
@@ -155,6 +159,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	@Test public void testLiteralsWithComments() {
 		strictMode = true;
+		expectClass(6, 3);
+		expectMethod(16, 3);
 		expectInsignificant(0, 3);
 		expectInsignificant(3, 2);
 		expectInsignificant(5, 1);
@@ -178,6 +184,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	@Test public void testBug375272_01() {
 		strictMode = true;
+		expectClass(6, 3);
+		expectMethod(16, 3);
 		expectInsignificant(0, 3);
 		expectInsignificant(3, 1);
 		expectInsignificant(4, 6);
@@ -196,6 +204,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	@Test public void testBug375272_02() {
 		strictMode = true;
+		expectClass(6, 3);
+		expectMethod(16, 3);
 		expectInsignificant(0, 3);
 		expectInsignificant(3, 2);
 		expectInsignificant(5, 6);
@@ -218,6 +228,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 			"'''\n" +
 			"\t\t«'foobar'» \n" +
 			"  '''";
+		expectClass(6, 3);
+		expectMethod(16, 3);
 		expectInsignificant(0, 3);
 		expectInsignificant(3, 1);
 		expectInsignificant(model.indexOf('\t'), 2);
@@ -280,37 +292,44 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	@Test public void testStaticFieldAccess() throws Exception {
 		String model = "{ Integer::MAX_VALUE }";
-		expectAbsolute(model.lastIndexOf("MAX_VALUE"), 9, XbaseHighlightingConfiguration.STATIC_FIELD);
+		expectAbsolute(model.lastIndexOf("MAX_VALUE"), 9, FIELD);
+		expectAbsolute(model.lastIndexOf("MAX_VALUE"), 9, STATIC_FIELD);
+		expectAbsolute(model.lastIndexOf("MAX_VALUE"), 9, XbaseHighlightingStyles.STATIC_FINAL_FIELD);
 		highlight(model);
 	}
 	
 	@Test public void testStaticOperationInvocation() throws Exception {
 		addImport("java.util.Collections");
 		String model = "{ Collections::emptySet  }";
+		expectAbsolute(model.lastIndexOf("emptySet"), 8, METHOD);
 		expectAbsolute(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		notExpectAbsolute(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
 	@Test public void testQualifiedStaticOperationInvocation() throws Exception {
 		String model = "{ java::util::Collections::emptySet  }";
+		expectAbsolute(model.lastIndexOf("emptySet"), 8, METHOD);
 		expectAbsolute(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		notExpectAbsolute(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
 	@Test public void testQualifiedStaticOperationInvocationWithDot() throws Exception {
 		String model = "{ java.util.Collections::emptySet  }";
+		expectAbsolute(model.lastIndexOf("emptySet"), 8, METHOD);
 		expectAbsolute(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		notExpectAbsolute(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
 	@Test public void testQualifiedStaticOperationInvocationWithInstanceNotation() throws Exception {
 		String model = "{ java.util.Collections.emptySet  }";
+		expectAbsolute(model.lastIndexOf("emptySet"), 8, METHOD);
 		expectAbsolute(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		notExpectAbsolute(model.lastIndexOf("emptySet"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
 	@Test public void testStaticExtensionOperationInvocation() throws Exception {
 		String model = "{ 'FOO'.toFirstLower   }";
+		expectAbsolute(model.lastIndexOf("toFirstLower"), 12, METHOD);
 		expectAbsolute(model.lastIndexOf("toFirstLower"), 12, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		expectAbsolute(model.lastIndexOf("toFirstLower"), 12, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
@@ -320,6 +339,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		addImport("com.google.inject.Inject");
 		addInject("extension StringBuilder");
 		String model = "{ 'Foo'.append   }";
+		expectAbsolute(model.lastIndexOf("append"), 6, METHOD);
 		expectAbsolute(model.lastIndexOf("append"), 6, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		notExpectAbsolute(model.lastIndexOf("append"), 6, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		highlight(model);
@@ -328,8 +348,10 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	@Test public void testStaticImportedExtensionOperationInvocation() throws Exception {
 		addImport("static extension java.util.Collections.*");
 		String model = "{ newArrayList.shuffle   }";
+		expectAbsolute(model.lastIndexOf("newArrayList"), 12, METHOD);
 		expectAbsolute(model.lastIndexOf("newArrayList"), 12, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		notExpectAbsolute(model.lastIndexOf("newArrayList"), 12, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolute(model.lastIndexOf("shuffle"), 7, METHOD);
 		expectAbsolute(model.lastIndexOf("shuffle"), 7, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		expectAbsolute(model.lastIndexOf("shuffle"), 7, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		highlight(model);
@@ -338,6 +360,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	@Test public void testStaticExtensionOperationWithNoImplicitArguments() throws Exception {
 		addImport("java.util.List");
 		String model = "def toUpperCase(List<String> it) { map [ toUpperCase ]}";
+		expectAbsolute(model.lastIndexOf("map"), 3, METHOD);
 		expectAbsolute(model.lastIndexOf("map"), 3, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		expectAbsolute(model.lastIndexOf("map"), 3, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		highlight(model);
@@ -346,6 +369,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	@Test public void testLocalExtensionOperation() throws Exception {
 		addImport("java.util.List");
 		String model = "def void zonk(List<String> it) { zonk }";
+		expectAbsolute(model.lastIndexOf("zonk"), 4, METHOD);
 		expectAbsolute(model.lastIndexOf("zonk"), 4, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
@@ -353,7 +377,9 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	@Test public void testBug377413(){
 		addImport("java.util.List");
 		String model = "def void bar(Foo it){ zonk = '42' } def setZonk(String x){} def void fooBar(List<String> it) { fooBar }";
-		notExpectAbsolute(model.indexOf("zonk"),4,XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolute(model.indexOf("zonk"),4, METHOD);
+		notExpectAbsolute(model.indexOf("zonk"),4, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolute(model.lastIndexOf("fooBar"), 6, METHOD);
 		expectAbsolute(model.lastIndexOf("fooBar"), 6, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
@@ -409,6 +435,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		String model = "{}";
 		expect(getPrefix().lastIndexOf("@"), 1,XbaseHighlightingConfiguration.ANNOTATION);
 		expect(getPrefix().lastIndexOf("Deprecated"), 10, XbaseHighlightingConfiguration.ANNOTATION);
+		expectClass(getPrefix().indexOf("Bar"), 3);
 		expect(getPrefix().indexOf("Bar"), 3, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
 	}
@@ -425,6 +452,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		addImport(DEPRECATED_TEST_CLASS);
 		String model = "{TestClassDeprecated::DEPRECATED_CONSTANT}";
 		expectAbsolute(model.lastIndexOf("TestClassDeprecated"), "TestClassDeprecated".length(), XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, FIELD);
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.STATIC_FIELD);
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
@@ -439,6 +467,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectDeprecatedPackageFragment(model, "data", 2);
 		expectDeprecatedPackageFragment(model, "highlighting", 2);
 		expectAbsolute(model.lastIndexOf("TestClassDeprecated"), "TestClassDeprecated".length(), XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, FIELD);
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.STATIC_FIELD);
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
@@ -453,6 +482,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectDeprecatedPackageFragment(model, "data", 1);
 		expectDeprecatedPackageFragment(model, "highlighting", 1);
 		expectAbsolute(model.lastIndexOf("TestClassDeprecated"), "TestClassDeprecated".length(), XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, FIELD);
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.STATIC_FIELD);
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
@@ -467,6 +497,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectDeprecatedPackageFragment(model, "data", 1);
 		expectDeprecatedPackageFragment(model, "highlighting", 1);
 		expectAbsolute(model.lastIndexOf("TestClassDeprecated"), "TestClassDeprecated".length(), XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.FIELD);
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.STATIC_FIELD);
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
@@ -486,6 +517,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectAbsolute(model.indexOf("Inject"), 6,XbaseHighlightingConfiguration.ANNOTATION);
 		expectAbsolute(model.indexOf("clazz"), 5, XbaseHighlightingConfiguration.FIELD);
 		expectAbsolute(model.lastIndexOf("clazz"), 5, XbaseHighlightingConfiguration.FIELD);
+		expectMethod(model.lastIndexOf("testMethodDeprecated") + getPrefixLength(), 20);
 		expectAbsolute(model.lastIndexOf("testMethodDeprecated"), 20, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
 	}
@@ -514,6 +546,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		addImport(DEPRECATED_TEST_CLASS);
 		String model = "{TestClassDeprecated::testMethodStaticDeprecated() }";
 		expectAbsolute(model.lastIndexOf("TestClassDeprecated"), "TestClassDeprecated".length(), XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.lastIndexOf("testMethodStaticDeprecated"), 26, METHOD);
 		expectAbsolute(model.lastIndexOf("testMethodStaticDeprecated"), 26, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		expectAbsolute(model.lastIndexOf("testMethodStaticDeprecated"), 26, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
@@ -523,6 +556,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		addImport(DEPRECATED_TEST_CLASS);
 		String model = "{TestClassDeprecated::testMethodStaticNotDeprecated() }";
 		expectAbsolute(model.lastIndexOf("TestClassDeprecated"), "TestClassDeprecated".length(), XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
+		expectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, METHOD);
 		expectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		notExpectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
@@ -548,6 +582,10 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		String model = "{} @Deprecated def baz(){} def bar(){ baz()}";
 		expectAbsolute(model.lastIndexOf("@"), 1,XbaseHighlightingConfiguration.ANNOTATION);
 		expectAbsolute(model.indexOf("Deprecated"), 10,XbaseHighlightingConfiguration.ANNOTATION);
+		int prefixLength = getPrefixLength();
+		expectMethod(model.indexOf("baz") + prefixLength, 3);
+		expectMethod(model.lastIndexOf("baz") + prefixLength, 3);
+		expectMethod(model.indexOf("bar") + prefixLength, 3);
 		expectAbsolute(model.indexOf("baz"), 3, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		expectAbsolute(model.lastIndexOf("baz"), 3, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 		highlight(model);
@@ -555,7 +593,9 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	@Test public void testDeclaredStaticField() throws Exception {
 		String model = "{} private static String foo def bar() {foo}";
+		expectAbsolute(model.indexOf("foo"), 3,XbaseHighlightingConfiguration.FIELD);
 		expectAbsolute(model.indexOf("foo"), 3,XbaseHighlightingConfiguration.STATIC_FIELD);
+		expectAbsolute(model.lastIndexOf("foo"), 3,XbaseHighlightingConfiguration.FIELD);
 		expectAbsolute(model.lastIndexOf("foo"), 3,XbaseHighlightingConfiguration.STATIC_FIELD);
 		highlight(model);
 	}
@@ -618,7 +658,9 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		b.append("} extension Bar = new Bar{} ");
 		String model = b.toString();
 		
+		expectAbsolute(model.indexOf("property"), 8, METHOD);
 		expectAbsolute(model.indexOf("property"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolute(model.lastIndexOf("property"), 8, METHOD);
 		expectAbsolute(model.lastIndexOf("property"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		highlight(model);
 	}
@@ -639,6 +681,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		b.append("} extension Bar = new Bar{} ");
 		String model = b.toString();
 		
+		expectAbsolute(model.indexOf("contents"), 8, METHOD);
 		expectAbsolute(model.indexOf("contents"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		expectAbsolute(model.indexOf("1"), 1, HighlightingStyles.NUMBER_ID);
 		highlight(model);
@@ -693,7 +736,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 
 	protected void highlight(String functionBody) {
 		try {
-			XtendClass model = member(functionBody);
+			EObject model = member(functionBody);
 			calculator.provideHighlightingFor((XtextResource) model.eResource(), this, CancelIndicator.NullImpl);
 			assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
 		} catch(Exception e) {
@@ -703,7 +746,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	protected void highlightActiveAnnotation(String functionBody) {
 		try {
-			XtendTypeDeclaration model = secondMember(functionBody);
+			EObject model = secondMember(functionBody);
 			calculator.provideHighlightingFor((XtextResource) model.eResource(), this, CancelIndicator.NullImpl);
 			assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
 		} catch(Exception e) {
@@ -719,6 +762,14 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		injects.add("@Inject " + injectString);
 	}
 
+	protected void expectClass(int offset, int length) {
+		expect(offset, length, CLASS);
+	}
+	
+	protected void expectMethod(int offset, int length) {
+		expect(offset, length, METHOD);
+	}
+	
 	protected void expectInsignificant(int offset, int length) {
 		expectAbsolute(offset, length, INSIGNIFICANT_TEMPLATE_TEXT);
 	}
@@ -755,7 +806,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		assertTrue("length = " + length, length >= 0);
 		TextRegion region = new TextRegion(offset, length);
 		assertEquals(1, ids.length);
-		assertFalse(region.toString() + " is not contained in " + expectedRegions, expectedRegions.isEmpty());
+		// I deactivated the following check as it is to strict/to simple in the face of the new fine-grained coloring 
+		//  assertFalse(region.toString() + " is not contained in " + expectedRegions, expectedRegions.isEmpty());
 		Collection<String> expectedIds = expectedRegions.get(region);
 		if(strictMode && expectedIds.isEmpty())
 			fail("No Region for (offset: "+offset+", length : "+length+", id : "+ids[0]+") expected.");
