@@ -107,6 +107,83 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
   }
   
   @Test
+  public void testThis() {
+    this.helper.strictMode = true;
+    final String model = "{ this }";
+    this.expectClass(6, 3);
+    this.helper.expectMethod(16, 3);
+    this.helper.expectAbsolute(2, 4, HighlightingStyles.KEYWORD_ID);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testThisWithClassName() {
+    this.helper.strictMode = true;
+    final String model = "{ Foo.this }";
+    this.expectClass(6, 3);
+    this.helper.expectMethod(16, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _plus = (_prefixLength + 2);
+    this.expectClass(_plus, 3);
+    this.helper.expectAbsolute(6, 4, HighlightingStyles.KEYWORD_ID);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testSuper() {
+    this.helper.strictMode = true;
+    final String model = "{} } class Bar extends Foo { def foo() { super.foo }";
+    this.expectClass(6, 3);
+    this.helper.expectMethod(16, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Bar");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectClass(_plus, 3);
+    int _prefixLength_1 = this.helper.getPrefixLength();
+    int _indexOf_1 = model.indexOf("Foo");
+    int _plus_1 = (_prefixLength_1 + _indexOf_1);
+    this.expectClass(_plus_1, 3);
+    int _prefixLength_2 = this.helper.getPrefixLength();
+    int _indexOf_2 = model.indexOf("foo");
+    int _plus_2 = (_prefixLength_2 + _indexOf_2);
+    this.helper.expectMethod(_plus_2, 3);
+    int _prefixLength_3 = this.helper.getPrefixLength();
+    int _lastIndexOf = model.lastIndexOf("foo");
+    int _plus_3 = (_prefixLength_3 + _lastIndexOf);
+    this.helper.expectMethod(_plus_3, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testSuperWithClassName() {
+    this.helper.strictMode = true;
+    final String model = "{} } class Bar extends Foo { def foo() { Bar.super.foo }";
+    this.expectClass(6, 3);
+    this.helper.expectMethod(16, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Bar");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectClass(_plus, 3);
+    int _prefixLength_1 = this.helper.getPrefixLength();
+    int _indexOf_1 = model.indexOf("Foo");
+    int _plus_1 = (_prefixLength_1 + _indexOf_1);
+    this.expectClass(_plus_1, 3);
+    int _prefixLength_2 = this.helper.getPrefixLength();
+    int _indexOf_2 = model.indexOf("foo");
+    int _plus_2 = (_prefixLength_2 + _indexOf_2);
+    this.helper.expectMethod(_plus_2, 3);
+    int _prefixLength_3 = this.helper.getPrefixLength();
+    int _lastIndexOf = model.lastIndexOf("Bar");
+    int _plus_3 = (_prefixLength_3 + _lastIndexOf);
+    this.expectClass(_plus_3, 3);
+    int _prefixLength_4 = this.helper.getPrefixLength();
+    int _lastIndexOf_1 = model.lastIndexOf("foo");
+    int _plus_4 = (_prefixLength_4 + _lastIndexOf_1);
+    this.helper.expectMethod(_plus_4, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
   public void testSimpleClassConstructor() {
     final String model = "{ new Foo() }";
     this.expectClass(6, 3);
@@ -114,6 +191,90 @@ public class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXte
     int _indexOf = model.indexOf("Foo");
     int _plus = (_prefixLength + _indexOf);
     this.expectClass(_plus, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testSimpleClassDelegatingConstructorCall() {
+    this.helper.strictMode = true;
+    final String model = "{ new Foo() } new(Object o) { this }";
+    this.expectClass(6, 3);
+    this.helper.expectMethod(16, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Foo");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectClass(_plus, 3);
+    int _prefixLength_1 = this.helper.getPrefixLength();
+    int _indexOf_1 = model.indexOf("Object");
+    int _plus_1 = (_prefixLength_1 + _indexOf_1);
+    this.expectClass(_plus_1, 6);
+    int _indexOf_2 = model.indexOf("o)");
+    this.helper.expectAbsolute(_indexOf_2, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    int _indexOf_3 = model.indexOf("this");
+    this.helper.expectAbsolute(_indexOf_3, 4, HighlightingStyles.KEYWORD_ID);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testSimpleClassDelegatingConstructorCallWithClassName() {
+    this.helper.strictMode = true;
+    final String model = "{ new Foo() } new(Object o) { Foo.this }";
+    this.expectClass(6, 3);
+    this.helper.expectMethod(16, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Foo");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectClass(_plus, 3);
+    int _prefixLength_1 = this.helper.getPrefixLength();
+    int _indexOf_1 = model.indexOf("Object");
+    int _plus_1 = (_prefixLength_1 + _indexOf_1);
+    this.expectClass(_plus_1, 6);
+    int _indexOf_2 = model.indexOf("o)");
+    this.helper.expectAbsolute(_indexOf_2, 1, XbaseHighlightingStyles.PARAMETER_VARIABLE);
+    int _indexOf_3 = model.indexOf("this");
+    this.helper.expectAbsolute(_indexOf_3, 4, HighlightingStyles.KEYWORD_ID);
+    int _prefixLength_2 = this.helper.getPrefixLength();
+    int _lastIndexOf = model.lastIndexOf("Foo");
+    int _plus_2 = (_prefixLength_2 + _lastIndexOf);
+    this.expectClass(_plus_2, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testSuperClassConstructorCall() {
+    this.helper.strictMode = true;
+    final String model = "{} } class Bar extends Foo { new() { super }";
+    this.expectClass(6, 3);
+    this.helper.expectMethod(16, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Bar");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectClass(_plus, 3);
+    int _prefixLength_1 = this.helper.getPrefixLength();
+    int _indexOf_1 = model.indexOf("Foo");
+    int _plus_1 = (_prefixLength_1 + _indexOf_1);
+    this.expectClass(_plus_1, 3);
+    this.helper.highlight(model);
+  }
+  
+  @Test
+  public void testSuperClassConstructorCallWithClassName() {
+    this.helper.strictMode = true;
+    final String model = "{} } class Bar extends Foo { new() { Bar.super }";
+    this.expectClass(6, 3);
+    this.helper.expectMethod(16, 3);
+    int _prefixLength = this.helper.getPrefixLength();
+    int _indexOf = model.indexOf("Bar");
+    int _plus = (_prefixLength + _indexOf);
+    this.expectClass(_plus, 3);
+    int _prefixLength_1 = this.helper.getPrefixLength();
+    int _indexOf_1 = model.indexOf("Foo");
+    int _plus_1 = (_prefixLength_1 + _indexOf_1);
+    this.expectClass(_plus_1, 3);
+    int _prefixLength_2 = this.helper.getPrefixLength();
+    int _lastIndexOf = model.lastIndexOf("Bar");
+    int _plus_2 = (_prefixLength_2 + _lastIndexOf);
+    this.expectClass(_plus_2, 3);
     this.helper.highlight(model);
   }
   

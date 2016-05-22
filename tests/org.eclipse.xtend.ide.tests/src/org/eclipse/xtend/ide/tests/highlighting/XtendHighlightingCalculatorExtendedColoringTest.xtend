@@ -108,6 +108,62 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	}
 	
 	@Test
+	def void testThis() {
+		helper.strictMode = true
+		val model = "{ this }"
+		expectClass(6, 3)
+		expectMethod(16, 3)
+		expectAbsolute(2, 4, KEYWORD_ID)
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testThisWithClassName() {
+		helper.strictMode = true
+		val model = "{ Foo.this }"
+		expectClass(6, 3)
+		expectMethod(16, 3)
+		expectClass(prefixLength + 2, 3)
+		expectAbsolute(6, 4, KEYWORD_ID)
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testSuper() {
+		helper.strictMode = true
+		val model = "{} } class Bar extends Foo { def foo() { super.foo }"
+		expectClass(6, 3)
+		expectMethod(16, 3)
+		expectClass(prefixLength + model.indexOf('Bar'), 3)
+		expectClass(prefixLength + model.indexOf('Foo'), 3)
+		expectMethod(prefixLength + model.indexOf('foo'), 3)
+		expectMethod(prefixLength + model.lastIndexOf('foo'), 3)
+		// 'super' is a grammar keyword, so it colored via lexical highlighting
+		//  and, hence, a coloring must not be triggered by the semantic highlighting 
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testSuperWithClassName() {
+		helper.strictMode = true
+		val model = "{} } class Bar extends Foo { def foo() { Bar.super.foo }"
+		expectClass(6, 3)
+		expectMethod(16, 3)
+		expectClass(prefixLength + model.indexOf('Bar'), 3)
+		expectClass(prefixLength + model.indexOf('Foo'), 3)
+		expectMethod(prefixLength + model.indexOf('foo'), 3)
+		expectClass(prefixLength + model.lastIndexOf('Bar'), 3)
+		expectMethod(prefixLength + model.lastIndexOf('foo'), 3)
+		// 'super' is a grammar keyword, so it colored via lexical highlighting
+		//  and, hence, a coloring must not be triggered by the semantic highlighting 
+		
+		highlight(model)
+	}
+	
+	@Test
 	def void testSimpleClassConstructor() {
 		val model = "{ new Foo() }"
 		expectClass(6, 3)
@@ -117,6 +173,63 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	}
 	
 	@Test
+	def void testSimpleClassDelegatingConstructorCall() {
+		helper.strictMode = true
+		val model = "{ new Foo() } new(Object o) { this }"
+		expectClass(6, 3)
+		expectMethod(16, 3)
+		expectClass(prefixLength + model.indexOf("Foo"), 3)
+		expectClass(prefixLength + model.indexOf("Object"), 6)
+		expectAbsolute(model.indexOf("o)"), 1, PARAMETER_VARIABLE)
+		expectAbsolute(model.indexOf("this"), 4, KEYWORD_ID)
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testSimpleClassDelegatingConstructorCallWithClassName() {
+		helper.strictMode = true
+		val model = "{ new Foo() } new(Object o) { Foo.this }"
+		expectClass(6, 3)
+		expectMethod(16, 3)
+		expectClass(prefixLength + model.indexOf("Foo"), 3)
+		expectClass(prefixLength + model.indexOf("Object"), 6)
+		expectAbsolute(model.indexOf("o)"), 1, PARAMETER_VARIABLE)
+		expectAbsolute(model.indexOf("this"), 4, KEYWORD_ID)
+		expectClass(prefixLength + model.lastIndexOf("Foo"), 3)
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testSuperClassConstructorCall() {
+		helper.strictMode = true
+		val model = "{} } class Bar extends Foo { new() { super }"
+		expectClass(6, 3)
+		expectMethod(16, 3)
+		expectClass(prefixLength + model.indexOf('Bar'), 3)
+		expectClass(prefixLength + model.indexOf('Foo'), 3)
+		// 'super' is a grammar keyword, so it colored via lexical highlighting
+		//  and, hence, a coloring must not be triggered by the semantic highlighting 
+		
+		highlight(model)
+	}
+	
+	@Test
+	def void testSuperClassConstructorCallWithClassName() {
+		helper.strictMode = true
+		val model = "{} } class Bar extends Foo { new() { Bar.super }"
+		expectClass(6, 3)
+		expectMethod(16, 3)
+		expectClass(prefixLength + model.indexOf('Bar'), 3)
+		expectClass(prefixLength + model.indexOf('Foo'), 3)
+		expectClass(prefixLength + model.lastIndexOf('Bar'), 3)
+		// 'super' is a grammar keyword, so it colored via lexical highlighting
+		//  and, hence, a coloring must not be triggered by the semantic highlighting 
+		
+		highlight(model)
+	}
+		@Test
 	def void testAbstractClassConstructor() {
 		classDefString = "abstract class Foo"
 		val model = "{ new Foo() } new() {}"
