@@ -62,7 +62,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	/**
 	 * whether every accepted region must be expected
 	 */
-	private boolean strictMode = false;
+	boolean strictMode = false;
 
 	private boolean logEnabled = false;
 	
