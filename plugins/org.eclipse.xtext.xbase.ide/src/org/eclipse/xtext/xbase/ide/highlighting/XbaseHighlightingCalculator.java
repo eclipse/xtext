@@ -130,6 +130,9 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 			if (((XAbstractFeatureCall) object).isPackageFragment()) {
 				return true;
 			}
+			if (SPECIAL_FEATURE_NAMES.contains(((XAbstractFeatureCall) object).getConcreteSyntaxFeatureName())) {
+				return false;
+			}
 			operationCanceledManager.checkCanceled(cancelIndicator);
 			computeFeatureCallHighlighting((XAbstractFeatureCall) object, acceptor);
 		} else if (object instanceof JvmTypeParameter) {
@@ -431,10 +434,12 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	}
 
 	/**
-	 * A list of special feature names. 'super' missing as it is a keyword in the Xbase grammar 
+	 * A list of special feature names. Although 'super' is a keyword in the grammar it is contained
+	 *  here since this list is used for black list filtering, too.
 	 */
 	protected static final List<String> SPECIAL_FEATURE_NAMES = Lists.newArrayList(
-			IFeatureNames.THIS.getFirstSegment(), IFeatureNames.IT.getFirstSegment(), IFeatureNames.SELF.getFirstSegment());
+			IFeatureNames.THIS.getFirstSegment(), IFeatureNames.SUPER.getFirstSegment(),
+			IFeatureNames.IT.getFirstSegment(), IFeatureNames.SELF.getFirstSegment());
 	
 	/**
 	 * Returns a mapping from identifier (e.g. 'void', 'int', 'this') to highlighting ID. May not return
