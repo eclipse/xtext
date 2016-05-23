@@ -58,7 +58,7 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
         return file.absolutePath
     }
     
-    override onNotification(PublishDiagnosticsParams t) {
+    override call(PublishDiagnosticsParams t) {
         diagnostics.put(t.uri, t.diagnostics)
     }
     
