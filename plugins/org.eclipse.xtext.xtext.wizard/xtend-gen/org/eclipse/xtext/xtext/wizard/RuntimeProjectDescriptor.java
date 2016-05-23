@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
@@ -50,6 +52,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   private final Ecore2XtextGrammarCreator grammarCreator = new Ecore2XtextGrammarCreator();
   
   private final RuntimeTestProjectDescriptor testProject;
+  
+  @Accessors
+  private boolean withPluginXml = true;
   
   public RuntimeProjectDescriptor(final WizardConfiguration config) {
     super(config);
@@ -194,7 +199,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       final LinkedHashSet<String> includes = CollectionLiterals.<String>newLinkedHashSet();
       Set<String> _binIncludes = super.getBinIncludes();
       Iterables.<String>addAll(includes, _binIncludes);
-      includes.add("plugin.xml");
+      if (this.withPluginXml) {
+        includes.add("plugin.xml");
+      }
       _xblockexpression = includes;
     }
     return _xblockexpression;
@@ -1578,5 +1585,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     _builder.append("</assembly>");
     _builder.newLine();
     return _builder;
+  }
+  
+  @Pure
+  public boolean isWithPluginXml() {
+    return this.withPluginXml;
+  }
+  
+  public void setWithPluginXml(final boolean withPluginXml) {
+    this.withPluginXml = withPluginXml;
   }
 }
