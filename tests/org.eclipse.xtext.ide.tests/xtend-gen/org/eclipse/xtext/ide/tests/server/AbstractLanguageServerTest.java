@@ -13,13 +13,13 @@ import com.google.inject.Injector;
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.NotificationCallback;
 import io.typefox.lsapi.PublishDiagnosticsParams;
+import io.typefox.lsapi.TextDocumentService;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
-import org.eclipse.xtext.ide.server.TextDocumentServiceImpl;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -38,7 +38,7 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
       ServerModule _serverModule = new ServerModule();
       final Injector injector = Guice.createInjector(_serverModule);
       injector.injectMembers(this);
-      TextDocumentServiceImpl _textDocumentService = this.languageServer.getTextDocumentService();
+      TextDocumentService _textDocumentService = this.languageServer.getTextDocumentService();
       _textDocumentService.onPublishDiagnostics(this);
       File _file = new File("./test-data/test-project");
       this.root = _file;
@@ -87,7 +87,7 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
   }
   
   @Override
-  public void onNotification(final PublishDiagnosticsParams t) {
+  public void call(final PublishDiagnosticsParams t) {
     String _uri = t.getUri();
     List<? extends Diagnostic> _diagnostics = t.getDiagnostics();
     this.diagnostics.put(_uri, _diagnostics);

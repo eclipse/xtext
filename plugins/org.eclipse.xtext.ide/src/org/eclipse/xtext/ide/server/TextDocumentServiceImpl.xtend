@@ -19,6 +19,20 @@ import java.util.List
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.emf.common.util.URI
 import io.typefox.lsapi.PublishDiagnosticsParamsImpl
+import io.typefox.lsapi.CompletionItem
+import io.typefox.lsapi.ReferenceParams
+import io.typefox.lsapi.DocumentSymbolParams
+import io.typefox.lsapi.CodeActionParams
+import io.typefox.lsapi.CodeLensParams
+import io.typefox.lsapi.CodeLens
+import io.typefox.lsapi.DocumentFormattingParams
+import io.typefox.lsapi.DocumentRangeFormattingParams
+import io.typefox.lsapi.DocumentOnTypeFormattingParams
+import io.typefox.lsapi.RenameParams
+import io.typefox.lsapi.DidOpenTextDocumentParams
+import io.typefox.lsapi.DidChangeTextDocumentParams
+import io.typefox.lsapi.DidCloseTextDocumentParams
+import io.typefox.lsapi.DidSaveTextDocumentParams
 
 /**
  * @author efftinge - Initial contribution and API
@@ -35,7 +49,7 @@ class TextDocumentServiceImpl implements TextDocumentService {
             it.diagnostics = issues.map[toDiagnostic].toList
         ]
         for (diagnosticsCallback : diagnosticListeners) {
-            diagnosticsCallback.onNotification(diagnostics)
+            diagnosticsCallback.call(diagnostics)
         }
     }
     
@@ -67,5 +81,78 @@ class TextDocumentServiceImpl implements TextDocumentService {
     override onPublishDiagnostics(NotificationCallback<PublishDiagnosticsParams> callback) {
         diagnosticListeners.add(callback)
     }
+    
+    override resolveCompletionItem(CompletionItem unresolved) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override hover(TextDocumentPositionParams position) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override signatureHelp(TextDocumentPositionParams position) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override definition(TextDocumentPositionParams position) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override references(ReferenceParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override documentHighlight(TextDocumentPositionParams position) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override documentSymbol(DocumentSymbolParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override codeAction(CodeActionParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override codeLens(CodeLensParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override resolveCodeLens(CodeLens unresolved) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override formatting(DocumentFormattingParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override rangeFormatting(DocumentRangeFormattingParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override onTypeFormatting(DocumentOnTypeFormattingParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override rename(RenameParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override didOpen(DidOpenTextDocumentParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override didChange(DidChangeTextDocumentParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override didClose(DidCloseTextDocumentParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override didSave(DidSaveTextDocumentParams params) {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
     
 }

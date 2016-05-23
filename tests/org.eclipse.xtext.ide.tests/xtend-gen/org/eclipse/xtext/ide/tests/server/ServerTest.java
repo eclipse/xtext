@@ -14,13 +14,13 @@ import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl;
 import io.typefox.lsapi.FileEvent;
 import io.typefox.lsapi.FileEventImpl;
 import io.typefox.lsapi.InitializeParamsImpl;
+import io.typefox.lsapi.WorkspaceService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ide.server.WorkspaceServiceImpl;
 import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -148,7 +148,7 @@ public class ServerTest extends AbstractLanguageServerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
-    WorkspaceServiceImpl _workspaceService = this.languageServer.getWorkspaceService();
+    WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
     DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl();
     final Procedure1<DidChangeWatchedFilesParamsImpl> _function_1 = new Procedure1<DidChangeWatchedFilesParamsImpl>() {
       @Override

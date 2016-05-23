@@ -15,11 +15,13 @@ import io.typefox.lsapi.InitializeResultImpl;
 import io.typefox.lsapi.LanguageServer;
 import io.typefox.lsapi.ServerCapabilitiesImpl;
 import io.typefox.lsapi.TextDocumentService;
+import io.typefox.lsapi.WindowService;
 import io.typefox.lsapi.WorkspaceService;
 import java.util.Collections;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ide.server.TextDocumentServiceImpl;
+import org.eclipse.xtext.ide.server.WindowServiceImpl;
 import org.eclipse.xtext.ide.server.WorkspaceServiceImpl;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -41,6 +43,9 @@ public class LanguageServerImpl implements LanguageServer {
   
   @Inject
   private TextDocumentServiceImpl textDocumentService;
+  
+  @Inject
+  private WindowServiceImpl windowService;
   
   @Override
   public InitializeResult initialize(final InitializeParams params) {
@@ -84,13 +89,23 @@ public class LanguageServerImpl implements LanguageServer {
   }
   
   @Override
-  public TextDocumentService textDocumentService() {
+  public TextDocumentService getTextDocumentService() {
     return this.textDocumentService;
   }
   
   @Override
-  public WorkspaceService workspaceService() {
+  public WorkspaceService getWorkspaceService() {
     return this.workspaceService;
+  }
+  
+  @Override
+  public void exit() {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public WindowService getWindowService() {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Pure
@@ -102,21 +117,15 @@ public class LanguageServerImpl implements LanguageServer {
     this.params = params;
   }
   
-  @Pure
-  public WorkspaceServiceImpl getWorkspaceService() {
-    return this.workspaceService;
-  }
-  
   public void setWorkspaceService(final WorkspaceServiceImpl workspaceService) {
     this.workspaceService = workspaceService;
   }
   
-  @Pure
-  public TextDocumentServiceImpl getTextDocumentService() {
-    return this.textDocumentService;
-  }
-  
   public void setTextDocumentService(final TextDocumentServiceImpl textDocumentService) {
     this.textDocumentService = textDocumentService;
+  }
+  
+  public void setWindowService(final WindowServiceImpl windowService) {
+    this.windowService = windowService;
   }
 }

@@ -7,16 +7,37 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import io.typefox.lsapi.CodeActionParams;
+import io.typefox.lsapi.CodeLens;
+import io.typefox.lsapi.CodeLensParams;
+import io.typefox.lsapi.Command;
 import io.typefox.lsapi.CompletionItem;
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DiagnosticImpl;
+import io.typefox.lsapi.DidChangeTextDocumentParams;
+import io.typefox.lsapi.DidCloseTextDocumentParams;
+import io.typefox.lsapi.DidOpenTextDocumentParams;
+import io.typefox.lsapi.DidSaveTextDocumentParams;
+import io.typefox.lsapi.DocumentFormattingParams;
+import io.typefox.lsapi.DocumentHighlight;
+import io.typefox.lsapi.DocumentOnTypeFormattingParams;
+import io.typefox.lsapi.DocumentRangeFormattingParams;
+import io.typefox.lsapi.DocumentSymbolParams;
+import io.typefox.lsapi.Hover;
+import io.typefox.lsapi.Location;
 import io.typefox.lsapi.NotificationCallback;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.PublishDiagnosticsParamsImpl;
 import io.typefox.lsapi.RangeImpl;
+import io.typefox.lsapi.ReferenceParams;
+import io.typefox.lsapi.RenameParams;
+import io.typefox.lsapi.SignatureHelp;
+import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.TextDocumentPositionParams;
 import io.typefox.lsapi.TextDocumentService;
+import io.typefox.lsapi.TextEdit;
+import io.typefox.lsapi.WorkspaceEdit;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -57,7 +78,7 @@ public class TextDocumentServiceImpl implements TextDocumentService {
     };
     final PublishDiagnosticsParamsImpl diagnostics = ObjectExtensions.<PublishDiagnosticsParamsImpl>operator_doubleArrow(_publishDiagnosticsParamsImpl, _function);
     for (final NotificationCallback<PublishDiagnosticsParams> diagnosticsCallback : this.diagnosticListeners) {
-      diagnosticsCallback.onNotification(diagnostics);
+      diagnosticsCallback.call(diagnostics);
     }
   }
   
@@ -135,5 +156,95 @@ public class TextDocumentServiceImpl implements TextDocumentService {
   @Override
   public void onPublishDiagnostics(final NotificationCallback<PublishDiagnosticsParams> callback) {
     this.diagnosticListeners.add(callback);
+  }
+  
+  @Override
+  public CompletionItem resolveCompletionItem(final CompletionItem unresolved) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public Hover hover(final TextDocumentPositionParams position) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public SignatureHelp signatureHelp(final TextDocumentPositionParams position) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public List<? extends Location> definition(final TextDocumentPositionParams position) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public List<? extends Location> references(final ReferenceParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public DocumentHighlight documentHighlight(final TextDocumentPositionParams position) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public List<? extends SymbolInformation> documentSymbol(final DocumentSymbolParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public List<? extends Command> codeAction(final CodeActionParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public List<? extends CodeLens> codeLens(final CodeLensParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public CodeLens resolveCodeLens(final CodeLens unresolved) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public List<? extends TextEdit> formatting(final DocumentFormattingParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public List<? extends TextEdit> rangeFormatting(final DocumentRangeFormattingParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public List<? extends TextEdit> onTypeFormatting(final DocumentOnTypeFormattingParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public WorkspaceEdit rename(final RenameParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public void didOpen(final DidOpenTextDocumentParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public void didChange(final DidChangeTextDocumentParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public void didClose(final DidCloseTextDocumentParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  }
+  
+  @Override
+  public void didSave(final DidSaveTextDocumentParams params) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
 }

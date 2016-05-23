@@ -25,6 +25,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
     
     @Inject WorkspaceServiceImpl workspaceService
     @Inject TextDocumentServiceImpl textDocumentService
+    @Inject WindowServiceImpl windowService
     
     override InitializeResult initialize(InitializeParams params) {
         this.params = params
@@ -42,12 +43,20 @@ import org.eclipse.xtend.lib.annotations.Accessors
     override void shutdown() {
     }
     
-    override textDocumentService() {
+    override getTextDocumentService() {
         textDocumentService
     }
     
-    override workspaceService() {
+    override getWorkspaceService() {
         workspaceService
+    }
+    
+    override exit() {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    }
+    
+    override getWindowService() {
+        throw new UnsupportedOperationException("TODO: auto-generated method stub")
     }
     
 }
