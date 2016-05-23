@@ -10,8 +10,6 @@ import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 
-import com.google.inject.Injector;
-
 public class DomainmodelInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 
 	protected GlobalStateMemento stateBeforeInjectorCreation;
