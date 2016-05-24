@@ -108,6 +108,28 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 	}
 	
 	@Test
+	def void testExtendedInterfaceWithTypeVariable() {
+		classDefString = "interface Foo<Foo> extends Iterable<Foo>"
+		expectInterface(10, 3)
+		expectTypeVariable(14, 3)
+		expectInterface(classDefString.indexOf('Iterable'), 8)
+		expectTypeVariable(classDefString.lastIndexOf('Foo'), 3)
+		
+		highlight()
+	}
+	
+	@Test
+	def void testExtendedInterfaceWithTypeArg() {
+		classDefString = "interface Foo extends Iterable<Object>"
+		expectInterface(10, 3)
+		expectInterface(classDefString.indexOf('Iterable'), 8)
+		expectClass(classDefString.indexOf('Object'), 6)
+		expect(classDefString.indexOf('Object'), 6, TYPE_ARGUMENT)
+		
+		highlight()
+	}
+	
+	@Test
 	def void testThis() {
 		helper.strictMode = true
 		val model = "{ this }"
@@ -408,6 +430,35 @@ class XtendHighlightingCalculatorExtendedColoringTest extends AbstractXtendTestC
 		val model = "{ switch( i: 0..47) { default: { } } }"
 		expectAbsolute(model.indexOf('i:'), 1, LOCAL_VARIABLE_DECLARATION)
 		expectAbsolute(model.indexOf('i:'), 1, LOCAL_FINAL_VARIABLE_DECLARATION)
+		highlight(model)
+	}
+	
+	@Test
+	def void testMethodCallWithTypeArg() {
+		val model = "{ <Object>newArrayList() }"
+		expectAbsolute(model.indexOf('Object'), 6, CLASS)
+		expectAbsolute(model.indexOf('Object'), 6, TYPE_ARGUMENT)
+		expectAbsolute(model.indexOf('newArrayList'), 12, METHOD)
+		expectAbsolute(model.indexOf('newArrayList'), 12, STATIC_METHOD_INVOCATION)
+		highlight(model)
+	}
+	
+	@Test
+	def void testFieldDeclWithTypeArg() {
+		val model = "{ } Iterable<Object> foo"
+		expectAbsolute(model.indexOf('Iterable'), 8, INTERFACE)
+		expectAbsolute(model.indexOf('Object'), 6, CLASS)
+		expectAbsolute(model.indexOf('Object'), 6, TYPE_ARGUMENT)
+		expectAbsolute(model.indexOf('foo'), 3, FIELD)
+		highlight(model)
+	}
+		
+	@Test
+	def void testConstructorCallWithTypeArg() {
+		val model = "{ new Iterable<Object>{} }"
+		expectAbsolute(model.indexOf('Iterable'), 8, INTERFACE)
+		expectAbsolute(model.indexOf('Object'), 6, CLASS)
+		expectAbsolute(model.indexOf('Object'), 6, TYPE_ARGUMENT)
 		highlight(model)
 	}
 }
