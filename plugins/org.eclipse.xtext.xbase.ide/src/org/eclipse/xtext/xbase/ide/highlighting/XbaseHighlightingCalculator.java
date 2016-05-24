@@ -196,13 +196,23 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 		} else if (referencer instanceof JvmParameterizedTypeReference
 					&& (referencersContainingFeature == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS
 							|| referencersContainingFeature == TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE
-							|| referencersContainingFeature == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS)) {
+							|| referencersContainingFeature == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS
+							|| referencersContainingFeature == XbasePackage.Literals.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS)) {
 			// case 1: 'referencer' is a type reference within the arguments reference of another (parameterized) type reference
 			//  'referencer' definitely is a type argument and to be colored as such
 			//  (if 'resolvedReferencedObject' is not a type parameter, which is tested above)
 			// case 2: type reference is nested in a JvmWildcardTypeReference -> JvmTypeConstraint
 			// case 3: the type reference is part of the type arguments of a method call
 			
+			if (resolvedReferencedObject instanceof JvmEnumerationType) {
+				highlightFeature(acceptor, referencer, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, ENUM);
+				
+			} else if (resolvedReferencedObject instanceof JvmGenericType) {
+				highlightFeature(acceptor, referencer, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, getStyle((JvmGenericType) resolvedReferencedObject));
+				
+			} else if (resolvedReferencedObject instanceof JvmAnnotationType) {
+				highlightFeature(acceptor, referencer, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, highlightingConfiguration);
+			}
 			highlightFeature(acceptor, referencer, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, TYPE_ARGUMENT);
 			
 		} else if (resolvedReferencedObject instanceof JvmDeclaredType) {
@@ -395,16 +405,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	protected void highlightTypeParameter(JvmTypeParameter typeParameter, IHighlightedPositionAcceptor acceptor) {
 		highlightFeature(acceptor, typeParameter, TypesPackage.Literals.JVM_TYPE_PARAMETER__NAME, TYPE_VARIABLE);
 	}
-
-	protected void highlightTypeArguments(JvmParameterizedTypeReference typeRef, IHighlightedPositionAcceptor acceptor) {
-		if (typeRef.getType() instanceof JvmTypeParameter) {
-			highlightFeature(acceptor, typeRef, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, TYPE_VARIABLE);
-		} else {
-			highlightFeature(acceptor, typeRef, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, TYPE_ARGUMENT);
-		}
-	}
-
-
+	
 	protected void highlightSpecialIdentifiers(IHighlightedPositionAcceptor acceptor, ICompositeNode root) {
 		TerminalRule idRule = getIDRule();
 		for (ILeafNode leaf : root.getLeafNodes()) {
