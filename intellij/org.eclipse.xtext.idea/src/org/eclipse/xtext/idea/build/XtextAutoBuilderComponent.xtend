@@ -655,7 +655,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						val sourceUris = fileMappings?.getSource(uri)
 						if (sourceUris != null && !sourceUris.isEmpty) {
 							for (sourceUri : sourceUris) {
-								consistentAdd(sourceUri, changedUris, deletedUris)
+								if (!deletedUris.contains(sourceUri)) {
+									changedUris += sourceUri
+								}
 							}									
 						} else if (isJavaFile(uri)) {
 							deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
