@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.types.access;
 
+import java.util.Set;
+
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
@@ -18,7 +20,9 @@ import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.resource.IndexingAwareGlobalSearchScope;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Test;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;
 
@@ -64,6 +68,14 @@ abstract class StubJvmTypeProviderTestDelegate extends AbstractTypeProviderTest 
 	@Override
 	protected IJvmTypeProvider getTypeProvider() {
 		return typeProvider;
+	}
+
+	@Test
+	@Override
+	public void testFindTypeByName_javaLangCharSequence_02() {
+		String typeName = CharSequence.class.getName();
+		Set<String> memberNames = Sets.newHashSet("chars", "codePoints", "length", "charAt", "subSequence", "toString");
+		assertMembers(typeName, memberNames);
 	}
 
 }

@@ -7,10 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.common.types
 
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.Module
+import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.progress.ProgressIndicatorProvider
+import com.intellij.openapi.project.IndexNotReadyException
+import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiClass
 import com.intellij.psi.impl.compiled.SignatureParsing
+import com.intellij.psi.impl.compiled.StubBuildingVisitor
 import com.intellij.psi.search.GlobalSearchScope
 import java.text.StringCharacterIterator
 import org.eclipse.emf.common.util.URI
@@ -20,19 +25,15 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider
+import org.eclipse.xtext.common.types.access.impl.IClassMirror
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
+import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.resource.ISynchronizable
 import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.util.Strings
-import com.intellij.openapi.application.ApplicationManager
-import org.eclipse.xtext.common.types.access.impl.IClassMirror
-import com.intellij.psi.JavaPsiFacade
-import com.intellij.openapi.project.IndexNotReadyException
-import com.intellij.openapi.progress.ProcessCanceledException
-import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.UnknownNestedTypeException
 
 class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
@@ -92,7 +93,7 @@ class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
 
 	protected def normalize(String name) {
 		if (name.startsWith('[')) {
-			SignatureParsing.parseTypeString(new StringCharacterIterator(name))
+			SignatureParsing.parseTypeString(new StringCharacterIterator(name), StubBuildingVisitor.GUESSING_MAPPER)
 		} else {
 			name
 		}

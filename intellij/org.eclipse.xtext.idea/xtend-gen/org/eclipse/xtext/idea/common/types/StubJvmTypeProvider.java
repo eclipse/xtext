@@ -19,6 +19,7 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.impl.compiled.SignatureParsing;
+import com.intellij.psi.impl.compiled.StubBuildingVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import java.text.StringCharacterIterator;
 import java.util.List;
@@ -148,7 +149,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
       boolean _startsWith = name.startsWith("[");
       if (_startsWith) {
         StringCharacterIterator _stringCharacterIterator = new StringCharacterIterator(name);
-        _xifexpression = SignatureParsing.parseTypeString(_stringCharacterIterator);
+        _xifexpression = SignatureParsing.parseTypeString(_stringCharacterIterator, StubBuildingVisitor.GUESSING_MAPPER);
       } else {
         _xifexpression = name;
       }
