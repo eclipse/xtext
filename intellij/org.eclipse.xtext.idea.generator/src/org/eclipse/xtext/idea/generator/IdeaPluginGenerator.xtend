@@ -392,7 +392,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			<version>1.0.0</version>
 			<vendor>My Company</vendor>
 		
-			<idea-version since-build="131"/>
+			<idea-version since-build="145"/>
 			<depends>org.eclipse.xtext.idea</depends>
 		
 			<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
