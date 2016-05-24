@@ -1010,7 +1010,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<idea-version since-build=\"131\"/>");
+    _builder.append("<idea-version since-build=\"145\"/>");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<depends>org.eclipse.xtext.idea</depends>");
