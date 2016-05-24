@@ -224,6 +224,17 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		}
 	}
 
+	protected void assertMembers(String typeName, Set<String> memberNames) {
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(memberNames.size(), type.getMembers().size());
+		for (org.eclipse.xtext.common.types.JvmMember member : type.getMembers()) {
+			assertTrue(member.getIdentifier(), member instanceof JvmOperation);
+			JvmOperation op = (JvmOperation) member;
+			assertTrue(op.getSimpleName(), memberNames.remove(op.getSimpleName()));
+		}
+		assertTrue(memberNames.isEmpty());
+	}
+
 	@Test
 	public void testFindTypeByName_int() {
 		String typeName = "int";
@@ -307,14 +318,8 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test
 	public void testFindTypeByName_javaLangCharSequence_02() {
 		String typeName = CharSequence.class.getName();
-		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
-		assertEquals(4, type.getMembers().size());
-		Set<String> allNames = Sets.newHashSet("length", "charAt", "subSequence", "toString");
-		for (org.eclipse.xtext.common.types.JvmMember member : type.getMembers()) {
-			assertTrue(member.getIdentifier(), member instanceof JvmOperation);
-			JvmOperation op = (JvmOperation) member;
-			assertTrue(op.getSimpleName(), allNames.remove(op.getSimpleName()));
-		}
+		Set<String> memberNames = Sets.newHashSet("length", "charAt", "subSequence", "toString");
+		assertMembers(typeName, memberNames);
 	}
 
 	@Test
