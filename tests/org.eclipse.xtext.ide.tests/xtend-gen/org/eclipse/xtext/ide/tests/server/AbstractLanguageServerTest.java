@@ -80,7 +80,10 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
         }
       };
       ObjectExtensions.<FileWriter>operator_doubleArrow(_fileWriter, _function);
-      return file.getAbsolutePath();
+      String _absolutePath = file.getAbsolutePath();
+      String _absolutePath_1 = this.root.getAbsolutePath();
+      int _length = _absolutePath_1.length();
+      return _absolutePath.substring(_length);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

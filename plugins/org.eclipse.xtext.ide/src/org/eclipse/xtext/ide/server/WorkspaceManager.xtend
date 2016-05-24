@@ -9,13 +9,14 @@ package org.eclipse.xtext.ide.server
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import io.typefox.lsapi.DidChangeConfigurationParams
+import io.typefox.lsapi.DidChangeTextDocumentParams
 import io.typefox.lsapi.DidChangeWatchedFilesParams
+import io.typefox.lsapi.DidCloseTextDocumentParams
+import io.typefox.lsapi.DidOpenTextDocumentParams
+import io.typefox.lsapi.DidSaveTextDocumentParams
 import io.typefox.lsapi.FileEvent
-import io.typefox.lsapi.InitializeParams
-import io.typefox.lsapi.WorkspaceService
-import io.typefox.lsapi.WorkspaceSymbolParams
 import java.util.List
+import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.build.BuildRequest
 import org.eclipse.xtext.build.IncrementalBuilder
@@ -28,73 +29,92 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.validation.Issue
 
 /**
- * @author efftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-class WorkspaceServiceImpl implements WorkspaceService {
-    
-    @Inject
-    protected IncrementalBuilder incrementalBuilder
+class WorkspaceManager {
 
-    @Inject
-    protected Provider<XtextResourceSet> resourceSetProvider
-    
-    @Inject
-    protected IResourceServiceProvider.Registry languagesRegistry
-    
-    protected IndexState indexState = new IndexState
-    
-    @Inject IFileSystemScanner fileSystemScanner
-    
+    @Inject protected IncrementalBuilder incrementalBuilder
+    @Inject protected Provider<XtextResourceSet> resourceSetProvider
+    @Inject protected IResourceServiceProvider.Registry languagesRegistry
+    @Inject protected IFileSystemScanner fileSystemScanner
+
+    IndexState indexState = new IndexState
     URI baseDir
-    
     (URI, Iterable<Issue>)=>void issueAcceptor
-    
-    public def void initialize(InitializeParams params, (URI, Iterable<Issue>)=>void acceptor) {
+    Map<URI, Document> openDocuments = newHashMap()
+
+    def void initialize(URI baseDir, (URI, Iterable<Issue>)=>void acceptor) {
         val uris = newArrayList
-        this.baseDir = URI.createFileURI(params.rootPath)
+        this.baseDir = baseDir
         this.issueAcceptor = acceptor
-        fileSystemScanner.scan(URI.createFileURI(params.rootPath)) [uris += it]
-        val result = incrementalBuilder.build(newBuildRequest(uris, emptyList),[languagesRegistry.getResourceServiceProvider(it)])
-        indexState = result.indexState
+        this.fileSystemScanner.scan(baseDir)[uris += it]
+        doBuild(uris, emptyList)
     }
-    
-    override didChangeConfiguraton(DidChangeConfigurationParams param) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override didChangeWatchedFiles(DidChangeWatchedFilesParams fileChanges) {
+
+    def didChangeWatchedFiles(DidChangeWatchedFilesParams fileChanges) {
         val dirtyFiles = newArrayList
         val deletedFiles = newArrayList
         for (fileEvent : fileChanges.changes) {
             if (fileEvent.type === FileEvent.TYPE_DELETED) {
-                deletedFiles += URI.createFileURI(fileEvent.uri)
+                deletedFiles += toUri(fileEvent.uri)
             } else {
-                dirtyFiles += URI.createFileURI(fileEvent.uri)
+                dirtyFiles += toUri(fileEvent.uri)
             }
         }
-        val result = incrementalBuilder.build(newBuildRequest(dirtyFiles, deletedFiles),[languagesRegistry.getResourceServiceProvider(it)])
+        doBuild(dirtyFiles, deletedFiles)
+    }
+    
+    def void doBuild(List<URI> dirtyFiles, List<URI> deletedFiles) {
+        val result = incrementalBuilder.build(newBuildRequest(dirtyFiles, deletedFiles), [
+            languagesRegistry.getResourceServiceProvider(it)
+        ])
         indexState = result.indexState
     }
     
-    override symbol(WorkspaceSymbolParams param) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
+    def didChange(DidChangeTextDocumentParams changeEvent) {
+        val uri = toUri(changeEvent.textDocument.uri)
+        val contents = openDocuments.get(uri)
+        openDocuments.put(uri, contents.applyChanges(changeEvent.contentChanges))
+        doBuild(#[uri], newArrayList)
     }
     
+    def didOpen(DidOpenTextDocumentParams changeEvent) {
+        val uri = toUri(changeEvent.textDocument.uri)
+        openDocuments.put(uri, new Document(changeEvent.textDocument.version, changeEvent.textDocument.text))
+    }
+    
+    def URI toUri(String path) {
+        URI.createURI(baseDir.toString + path)
+    }
+    
+    def toPath(org.eclipse.emf.common.util.URI uri) {
+        uri.toString.substring(baseDir.toString.length)
+    }
+    
+    def didClose(DidCloseTextDocumentParams changeEvent) {
+        val uri = toUri(changeEvent.textDocument.uri)
+        openDocuments.remove(uri)        
+    }
+    
+    def didSave(DidSaveTextDocumentParams changeEvent) {
+        // do nothing for now
+    }
+
     protected def BuildRequest newBuildRequest(List<URI> changedFiles, List<URI> deletedFiles) {
         new BuildRequest => [
             it.baseDir = baseDir
             it.resourceSet = createFreshResourceSet(new ResourceDescriptionsData(emptyList))
             it.state = new IndexState(indexState.resourceDescriptions.copy, indexState.fileMappings.copy)
             it.resourceSet = createFreshResourceSet(state.resourceDescriptions)
-            it. dirtyFiles = changedFiles
+            it.dirtyFiles = changedFiles
             it.deletedFiles = deletedFiles
-            afterValidate = [ uri, issues|
+            afterValidate = [ uri, issues |
                 issueAcceptor.apply(uri, issues)
                 return true
             ]
         ]
     }
-    
+
     protected def XtextResourceSet createFreshResourceSet(ResourceDescriptionsData newIndex) {
         resourceSetProvider.get => [
             val projectDescription = new ProjectDescription => [
@@ -105,5 +125,7 @@ class WorkspaceServiceImpl implements WorkspaceService {
             index.setContainer(projectDescription.name, newIndex)
         ]
     }
+    
+
     
 }

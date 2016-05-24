@@ -13,7 +13,7 @@ import com.google.inject.ImplementedBy
 import java.io.File
 
 /**
- * @author efftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 @ImplementedBy(JavaIoFileSystemScanner)
 interface IFileSystemScanner {

@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.IAcceptor;
 
 /**
- * @author efftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 @ImplementedBy(IFileSystemScanner.JavaIoFileSystemScanner.class)
 @SuppressWarnings("all")

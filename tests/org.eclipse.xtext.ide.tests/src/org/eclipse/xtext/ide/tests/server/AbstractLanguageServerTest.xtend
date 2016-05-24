@@ -55,7 +55,7 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
           write(contents.toString)
           close  
         ]
-        return file.absolutePath
+        return file.absolutePath.substring(root.absolutePath.length)
     }
     
     override call(PublishDiagnosticsParams t) {

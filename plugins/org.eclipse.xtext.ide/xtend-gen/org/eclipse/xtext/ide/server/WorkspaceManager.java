@@ -9,14 +9,18 @@ package org.eclipse.xtext.ide.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import io.typefox.lsapi.DidChangeConfigurationParams;
+import io.typefox.lsapi.DidChangeTextDocumentParams;
 import io.typefox.lsapi.DidChangeWatchedFilesParams;
+import io.typefox.lsapi.DidCloseTextDocumentParams;
+import io.typefox.lsapi.DidOpenTextDocumentParams;
+import io.typefox.lsapi.DidSaveTextDocumentParams;
 import io.typefox.lsapi.FileEvent;
-import io.typefox.lsapi.InitializeParams;
-import io.typefox.lsapi.SymbolInformation;
-import io.typefox.lsapi.WorkspaceService;
-import io.typefox.lsapi.WorkspaceSymbolParams;
+import io.typefox.lsapi.TextDocumentContentChangeEvent;
+import io.typefox.lsapi.TextDocumentIdentifier;
+import io.typefox.lsapi.TextDocumentItem;
+import io.typefox.lsapi.VersionedTextDocumentIdentifier;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
@@ -24,6 +28,7 @@ import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
+import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.IFileSystemScanner;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -40,10 +45,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
- * @author efftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class WorkspaceServiceImpl implements WorkspaceService {
+public class WorkspaceManager {
   @Inject
   protected IncrementalBuilder incrementalBuilder;
   
@@ -53,49 +58,32 @@ public class WorkspaceServiceImpl implements WorkspaceService {
   @Inject
   protected IResourceServiceProvider.Registry languagesRegistry;
   
-  protected IndexState indexState = new IndexState();
-  
   @Inject
-  private IFileSystemScanner fileSystemScanner;
+  protected IFileSystemScanner fileSystemScanner;
+  
+  private IndexState indexState = new IndexState();
   
   private URI baseDir;
   
   private Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor;
   
-  public void initialize(final InitializeParams params, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor) {
+  private Map<URI, Document> openDocuments = CollectionLiterals.<URI, Document>newHashMap();
+  
+  public void initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor) {
     final ArrayList<URI> uris = CollectionLiterals.<URI>newArrayList();
-    String _rootPath = params.getRootPath();
-    URI _createFileURI = URI.createFileURI(_rootPath);
-    this.baseDir = _createFileURI;
+    this.baseDir = baseDir;
     this.issueAcceptor = acceptor;
-    String _rootPath_1 = params.getRootPath();
-    URI _createFileURI_1 = URI.createFileURI(_rootPath_1);
     final IAcceptor<URI> _function = new IAcceptor<URI>() {
       @Override
       public void accept(final URI it) {
         uris.add(it);
       }
     };
-    this.fileSystemScanner.scan(_createFileURI_1, _function);
+    this.fileSystemScanner.scan(baseDir, _function);
     List<URI> _emptyList = CollectionLiterals.<URI>emptyList();
-    BuildRequest _newBuildRequest = this.newBuildRequest(uris, _emptyList);
-    final Function1<URI, IResourceServiceProvider> _function_1 = new Function1<URI, IResourceServiceProvider>() {
-      @Override
-      public IResourceServiceProvider apply(final URI it) {
-        return WorkspaceServiceImpl.this.languagesRegistry.getResourceServiceProvider(it);
-      }
-    };
-    final IncrementalBuilder.Result result = this.incrementalBuilder.build(_newBuildRequest, _function_1);
-    IndexState _indexState = result.getIndexState();
-    this.indexState = _indexState;
+    this.doBuild(uris, _emptyList);
   }
   
-  @Override
-  public void didChangeConfiguraton(final DidChangeConfigurationParams param) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
   public void didChangeWatchedFiles(final DidChangeWatchedFilesParams fileChanges) {
     final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
     final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
@@ -105,19 +93,23 @@ public class WorkspaceServiceImpl implements WorkspaceService {
       boolean _tripleEquals = (_type == FileEvent.TYPE_DELETED);
       if (_tripleEquals) {
         String _uri = fileEvent.getUri();
-        URI _createFileURI = URI.createFileURI(_uri);
-        deletedFiles.add(_createFileURI);
+        URI _uri_1 = this.toUri(_uri);
+        deletedFiles.add(_uri_1);
       } else {
-        String _uri_1 = fileEvent.getUri();
-        URI _createFileURI_1 = URI.createFileURI(_uri_1);
-        dirtyFiles.add(_createFileURI_1);
+        String _uri_2 = fileEvent.getUri();
+        URI _uri_3 = this.toUri(_uri_2);
+        dirtyFiles.add(_uri_3);
       }
     }
+    this.doBuild(dirtyFiles, deletedFiles);
+  }
+  
+  public void doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles) {
     BuildRequest _newBuildRequest = this.newBuildRequest(dirtyFiles, deletedFiles);
     final Function1<URI, IResourceServiceProvider> _function = new Function1<URI, IResourceServiceProvider>() {
       @Override
       public IResourceServiceProvider apply(final URI it) {
-        return WorkspaceServiceImpl.this.languagesRegistry.getResourceServiceProvider(it);
+        return WorkspaceManager.this.languagesRegistry.getResourceServiceProvider(it);
       }
     };
     final IncrementalBuilder.Result result = this.incrementalBuilder.build(_newBuildRequest, _function);
@@ -125,9 +117,60 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     this.indexState = _indexState;
   }
   
-  @Override
-  public List<? extends SymbolInformation> symbol(final WorkspaceSymbolParams param) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  public void didChange(final DidChangeTextDocumentParams changeEvent) {
+    VersionedTextDocumentIdentifier _textDocument = changeEvent.getTextDocument();
+    String _uri = _textDocument.getUri();
+    final URI uri = this.toUri(_uri);
+    final Document contents = this.openDocuments.get(uri);
+    List<? extends TextDocumentContentChangeEvent> _contentChanges = changeEvent.getContentChanges();
+    Document _applyChanges = contents.applyChanges(_contentChanges);
+    this.openDocuments.put(uri, _applyChanges);
+    ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
+    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
+  }
+  
+  public Document didOpen(final DidOpenTextDocumentParams changeEvent) {
+    Document _xblockexpression = null;
+    {
+      TextDocumentItem _textDocument = changeEvent.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this.toUri(_uri);
+      TextDocumentItem _textDocument_1 = changeEvent.getTextDocument();
+      int _version = _textDocument_1.getVersion();
+      TextDocumentItem _textDocument_2 = changeEvent.getTextDocument();
+      String _text = _textDocument_2.getText();
+      Document _document = new Document(_version, _text);
+      _xblockexpression = this.openDocuments.put(uri, _document);
+    }
+    return _xblockexpression;
+  }
+  
+  public URI toUri(final String path) {
+    String _string = this.baseDir.toString();
+    String _plus = (_string + path);
+    return URI.createURI(_plus);
+  }
+  
+  public String toPath(final URI uri) {
+    String _string = uri.toString();
+    String _string_1 = this.baseDir.toString();
+    int _length = _string_1.length();
+    return _string.substring(_length);
+  }
+  
+  public Document didClose(final DidCloseTextDocumentParams changeEvent) {
+    Document _xblockexpression = null;
+    {
+      TextDocumentIdentifier _textDocument = changeEvent.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this.toUri(_uri);
+      _xblockexpression = this.openDocuments.remove(uri);
+    }
+    return _xblockexpression;
+  }
+  
+  public Object didSave(final DidSaveTextDocumentParams changeEvent) {
+    return null;
   }
   
   protected BuildRequest newBuildRequest(final List<URI> changedFiles, final List<URI> deletedFiles) {
@@ -135,27 +178,27 @@ public class WorkspaceServiceImpl implements WorkspaceService {
     final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
       @Override
       public void apply(final BuildRequest it) {
-        it.setBaseDir(WorkspaceServiceImpl.this.baseDir);
+        it.setBaseDir(WorkspaceManager.this.baseDir);
         List<IResourceDescription> _emptyList = CollectionLiterals.<IResourceDescription>emptyList();
         ResourceDescriptionsData _resourceDescriptionsData = new ResourceDescriptionsData(_emptyList);
-        XtextResourceSet _createFreshResourceSet = WorkspaceServiceImpl.this.createFreshResourceSet(_resourceDescriptionsData);
+        XtextResourceSet _createFreshResourceSet = WorkspaceManager.this.createFreshResourceSet(_resourceDescriptionsData);
         it.setResourceSet(_createFreshResourceSet);
-        ResourceDescriptionsData _resourceDescriptions = WorkspaceServiceImpl.this.indexState.getResourceDescriptions();
+        ResourceDescriptionsData _resourceDescriptions = WorkspaceManager.this.indexState.getResourceDescriptions();
         ResourceDescriptionsData _copy = _resourceDescriptions.copy();
-        Source2GeneratedMapping _fileMappings = WorkspaceServiceImpl.this.indexState.getFileMappings();
+        Source2GeneratedMapping _fileMappings = WorkspaceManager.this.indexState.getFileMappings();
         Source2GeneratedMapping _copy_1 = _fileMappings.copy();
         IndexState _indexState = new IndexState(_copy, _copy_1);
         it.setState(_indexState);
         IndexState _state = it.getState();
         ResourceDescriptionsData _resourceDescriptions_1 = _state.getResourceDescriptions();
-        XtextResourceSet _createFreshResourceSet_1 = WorkspaceServiceImpl.this.createFreshResourceSet(_resourceDescriptions_1);
+        XtextResourceSet _createFreshResourceSet_1 = WorkspaceManager.this.createFreshResourceSet(_resourceDescriptions_1);
         it.setResourceSet(_createFreshResourceSet_1);
         it.setDirtyFiles(changedFiles);
         it.setDeletedFiles(deletedFiles);
         final BuildRequest.IPostValidationCallback _function = new BuildRequest.IPostValidationCallback() {
           @Override
           public boolean afterValidate(final URI uri, final Iterable<Issue> issues) {
-            WorkspaceServiceImpl.this.issueAcceptor.apply(uri, issues);
+            WorkspaceManager.this.issueAcceptor.apply(uri, issues);
             return true;
           }
         };
