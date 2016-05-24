@@ -27,15 +27,18 @@ import io.typefox.lsapi.TextDocumentContentChangeEvent
         var column = 0
         for (var i = 0; i < l; i++) {
             val ch = contents.charAt(i)
+            if (position.line === line && position.character === column) {
+                return i
+            }
             if (ch === NL) {
                 line++
                 column = 0
             } else {
                 column++
             }
-            if (position.line === line && position.character === column) {
-                return i
-            }
+        }
+        if (position.line === line && position.character === column) {
+            return l
         }
         throw new IndexOutOfBoundsException(position.toString + " text was : "+contents)
     }

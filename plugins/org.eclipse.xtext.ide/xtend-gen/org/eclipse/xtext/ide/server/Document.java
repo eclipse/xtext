@@ -33,16 +33,19 @@ public class Document {
     for (int i = 0; (i < l); i++) {
       {
         final char ch = this.contents.charAt(i);
+        if (((position.getLine() == line) && (position.getCharacter() == column))) {
+          return i;
+        }
         if ((ch == NL)) {
           line++;
           column = 0;
         } else {
           column++;
         }
-        if (((position.getLine() == line) && (position.getCharacter() == column))) {
-          return i;
-        }
       }
+    }
+    if (((position.getLine() == line) && (position.getCharacter() == column))) {
+      return l;
     }
     String _string = position.toString();
     String _plus = (_string + " text was : ");
