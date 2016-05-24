@@ -30,6 +30,7 @@ import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.build.Source2GeneratedMapping;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.IFileSystemScanner;
+import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -60,6 +61,9 @@ public class WorkspaceManager {
   
   @Inject
   protected IFileSystemScanner fileSystemScanner;
+  
+  @Inject
+  protected IExternalContentSupport externalContentSupport;
   
   private IndexState indexState = new IndexState();
   
@@ -129,20 +133,18 @@ public class WorkspaceManager {
     this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
   }
   
-  public Document didOpen(final DidOpenTextDocumentParams changeEvent) {
-    Document _xblockexpression = null;
-    {
-      TextDocumentItem _textDocument = changeEvent.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this.toUri(_uri);
-      TextDocumentItem _textDocument_1 = changeEvent.getTextDocument();
-      int _version = _textDocument_1.getVersion();
-      TextDocumentItem _textDocument_2 = changeEvent.getTextDocument();
-      String _text = _textDocument_2.getText();
-      Document _document = new Document(_version, _text);
-      _xblockexpression = this.openDocuments.put(uri, _document);
-    }
-    return _xblockexpression;
+  public void didOpen(final DidOpenTextDocumentParams changeEvent) {
+    TextDocumentItem _textDocument = changeEvent.getTextDocument();
+    String _uri = _textDocument.getUri();
+    final URI uri = this.toUri(_uri);
+    TextDocumentItem _textDocument_1 = changeEvent.getTextDocument();
+    int _version = _textDocument_1.getVersion();
+    TextDocumentItem _textDocument_2 = changeEvent.getTextDocument();
+    String _text = _textDocument_2.getText();
+    Document _document = new Document(_version, _text);
+    this.openDocuments.put(uri, _document);
+    ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
+    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
   }
   
   public URI toUri(final String path) {
@@ -158,15 +160,13 @@ public class WorkspaceManager {
     return _string.substring(_length);
   }
   
-  public Document didClose(final DidCloseTextDocumentParams changeEvent) {
-    Document _xblockexpression = null;
-    {
-      TextDocumentIdentifier _textDocument = changeEvent.getTextDocument();
-      String _uri = _textDocument.getUri();
-      final URI uri = this.toUri(_uri);
-      _xblockexpression = this.openDocuments.remove(uri);
-    }
-    return _xblockexpression;
+  public void didClose(final DidCloseTextDocumentParams changeEvent) {
+    TextDocumentIdentifier _textDocument = changeEvent.getTextDocument();
+    String _uri = _textDocument.getUri();
+    final URI uri = this.toUri(_uri);
+    this.openDocuments.remove(uri);
+    ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
+    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
   }
   
   public Object didSave(final DidSaveTextDocumentParams changeEvent) {
@@ -226,6 +226,27 @@ public class WorkspaceManager {
         final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_emptyMap, it);
         String _name = projectDescription.getName();
         index.setContainer(_name, newIndex);
+        WorkspaceManager.this.externalContentSupport.configureResourceSet(it, new IExternalContentSupport.IExternalContentProvider() {
+          @Override
+          public IExternalContentSupport.IExternalContentProvider getActualContentProvider() {
+            return this;
+          }
+          
+          @Override
+          public String getContent(final URI uri) {
+            Document _get = WorkspaceManager.this.openDocuments.get(uri);
+            String _contents = null;
+            if (_get!=null) {
+              _contents=_get.getContents();
+            }
+            return _contents;
+          }
+          
+          @Override
+          public boolean hasContent(final URI uri) {
+            return WorkspaceManager.this.openDocuments.containsKey(uri);
+          }
+        });
       }
     };
     return ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);

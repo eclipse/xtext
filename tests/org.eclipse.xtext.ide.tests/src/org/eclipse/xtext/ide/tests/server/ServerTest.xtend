@@ -7,14 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import com.google.inject.Inject
 import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl
 import io.typefox.lsapi.FileEvent
 import io.typefox.lsapi.FileEventImpl
 import io.typefox.lsapi.InitializeParamsImpl
-import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetup
-import org.eclipse.xtext.resource.FileExtensionProvider
-import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -23,11 +19,6 @@ import static org.junit.Assert.*
  * @author Sven Efftinge - Initial contribution and API
  */
 class ServerTest extends AbstractLanguageServerTest {
-    
-    @Inject def voidRegisterTestLanguage(IResourceServiceProvider.Registry registry) {
-        val injector = new TestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration
-        registry.extensionToFactoryMap.put(injector.getInstance(FileExtensionProvider).primaryFileExtension, injector.getInstance(IResourceServiceProvider))   
-    }
     
     @Test
     def void testInitializeBuild() {
@@ -80,5 +71,7 @@ class ServerTest extends AbstractLanguageServerTest {
     	assertNotNull(diagnostics.get(path))
     	assertTrue(diagnostics.values.join(','), diagnostics.values.forall[empty])
     }
+    
+    
     
 }

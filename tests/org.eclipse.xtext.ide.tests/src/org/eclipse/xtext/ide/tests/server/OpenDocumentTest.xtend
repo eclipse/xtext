@@ -1,0 +1,76 @@
+/*******************************************************************************
+ * Copyright (c) 2016 TypeFox GmbH (http://www.typefox.io) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ide.tests.server
+
+import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl
+import io.typefox.lsapi.DidCloseTextDocumentParamsImpl
+import io.typefox.lsapi.DidOpenTextDocumentParamsImpl
+import io.typefox.lsapi.FileEvent
+import io.typefox.lsapi.FileEventImpl
+import io.typefox.lsapi.InitializeParamsImpl
+import io.typefox.lsapi.TextDocumentIdentifierImpl
+import io.typefox.lsapi.TextDocumentItemImpl
+import org.junit.Test
+
+import static org.junit.Assert.*
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+class OpenDocumentTest extends AbstractLanguageServerTest {
+    
+    @Test
+    def void testOpenDocument() {
+        val firstFile = 'MyType1.testlang' -> '''
+            type Test {
+                NonExisting foo
+            }
+        '''
+        languageServer.initialize(new InitializeParamsImpl => [
+            rootPath = root.absolutePath
+        ])
+        
+        assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
+        
+        val path = 'MyType2.testlang' -> '''
+            type Foo {
+            }
+        '''
+        languageServer.getWorkspaceService.didChangeWatchedFiles(new DidChangeWatchedFilesParamsImpl => [
+            changes = newArrayList(new FileEventImpl => [
+                uri = path
+                type = FileEvent.TYPE_CREATED
+            ])
+        ])
+        
+        // still errorneous
+        assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
+        
+        // let's open the document with a different content
+        languageServer.didOpen(new DidOpenTextDocumentParamsImpl => [
+            textDocument = new TextDocumentItemImpl => [
+                uri = path
+                version = 1
+                text = '''
+                    type NonExisting {
+                    }
+                '''
+            ]
+        ])
+        assertNull(diagnostics.get(firstFile).head)
+        
+        // let's close again
+        languageServer.didClose(new DidCloseTextDocumentParamsImpl => [
+            textDocument = new TextDocumentIdentifierImpl => [
+                uri = path
+            ]
+        ])
+        assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
+    }
+    
+}

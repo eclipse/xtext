@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl;
 import io.typefox.lsapi.FileEvent;
@@ -22,9 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
-import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetup;
-import org.eclipse.xtext.resource.FileExtensionProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -38,21 +33,6 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class ServerTest extends AbstractLanguageServerTest {
-  @Inject
-  public Object voidRegisterTestLanguage(final IResourceServiceProvider.Registry registry) {
-    Object _xblockexpression = null;
-    {
-      TestLanguageStandaloneSetup _testLanguageStandaloneSetup = new TestLanguageStandaloneSetup();
-      final Injector injector = _testLanguageStandaloneSetup.createInjectorAndDoEMFRegistration();
-      Map<String, Object> _extensionToFactoryMap = registry.getExtensionToFactoryMap();
-      FileExtensionProvider _instance = injector.<FileExtensionProvider>getInstance(FileExtensionProvider.class);
-      String _primaryFileExtension = _instance.getPrimaryFileExtension();
-      IResourceServiceProvider _instance_1 = injector.<IResourceServiceProvider>getInstance(IResourceServiceProvider.class);
-      _xblockexpression = _extensionToFactoryMap.put(_primaryFileExtension, _instance_1);
-    }
-    return _xblockexpression;
-  }
-  
   @Test
   public void testInitializeBuild() {
     StringConcatenation _builder = new StringConcatenation();
