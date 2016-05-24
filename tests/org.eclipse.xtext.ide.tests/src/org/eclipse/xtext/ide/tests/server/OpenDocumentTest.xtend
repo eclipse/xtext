@@ -18,6 +18,11 @@ import io.typefox.lsapi.TextDocumentItemImpl
 import org.junit.Test
 
 import static org.junit.Assert.*
+import io.typefox.lsapi.DidChangeTextDocumentParamsImpl
+import io.typefox.lsapi.VersionedTextDocumentIdentifierImpl
+import io.typefox.lsapi.TextDocumentContentChangeEventImpl
+import io.typefox.lsapi.RangeImpl
+import io.typefox.lsapi.PositionImpl
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -25,7 +30,7 @@ import static org.junit.Assert.*
 class OpenDocumentTest extends AbstractLanguageServerTest {
     
     @Test
-    def void testOpenDocument() {
+    def void testOpenedDocumentShadowsPersistedFile() {
         val firstFile = 'MyType1.testlang' -> '''
             type Test {
                 NonExisting foo
@@ -73,4 +78,54 @@ class OpenDocumentTest extends AbstractLanguageServerTest {
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
     }
     
+    
+     @Test
+    def void testDidChange() {
+        val firstFile = 'MyType1.testlang' -> '''
+            type Test {
+                NonExisting foo
+            }
+        '''
+        languageServer.initialize(new InitializeParamsImpl => [
+            rootPath = root.absolutePath
+        ])
+        
+        assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
+        
+        languageServer.didOpen(new DidOpenTextDocumentParamsImpl => [
+            textDocument = new TextDocumentItemImpl => [
+                uri = firstFile
+                version = 1
+                text = '''
+                    type Test {
+                        NonExisting foo
+                    }
+                '''
+            ]
+        ])
+        assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
+        
+        languageServer.didChange(new DidChangeTextDocumentParamsImpl => [
+            textDocument = new VersionedTextDocumentIdentifierImpl => [
+                uri = firstFile
+                version = 2
+            ]
+            contentChanges = #[
+                new TextDocumentContentChangeEventImpl => [
+                    range = new RangeImpl => [
+                        start = new PositionImpl => [
+                            line = 1
+                            character = 4
+                        ]
+                        end = new PositionImpl => [
+                            line = 1
+                            character = 15
+                        ]
+                    ]
+                    text = "Test"
+                ]
+            ]
+        ])
+        assertNull(diagnostics.get(firstFile).head)
+    }
 }
