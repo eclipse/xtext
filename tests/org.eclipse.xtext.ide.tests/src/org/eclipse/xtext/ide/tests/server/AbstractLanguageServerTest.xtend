@@ -18,6 +18,9 @@ import java.util.List
 import java.util.Map
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
+import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetup
+import org.eclipse.xtext.resource.FileExtensionProvider
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.Files
 import org.junit.Before
 
@@ -62,4 +65,8 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
         diagnostics.put(t.uri, t.diagnostics)
     }
     
+    @Inject def voidRegisterTestLanguage(IResourceServiceProvider.Registry registry) {
+        val injector = new TestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration
+        registry.extensionToFactoryMap.put(injector.getInstance(FileExtensionProvider).primaryFileExtension, injector.getInstance(IResourceServiceProvider))   
+    }
 }

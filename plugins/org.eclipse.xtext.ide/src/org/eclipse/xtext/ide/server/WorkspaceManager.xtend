@@ -27,6 +27,8 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.resource.IExternalContentSupport
+import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -37,6 +39,7 @@ class WorkspaceManager {
     @Inject protected Provider<XtextResourceSet> resourceSetProvider
     @Inject protected IResourceServiceProvider.Registry languagesRegistry
     @Inject protected IFileSystemScanner fileSystemScanner
+    @Inject protected IExternalContentSupport externalContentSupport
 
     IndexState indexState = new IndexState
     URI baseDir
@@ -81,6 +84,7 @@ class WorkspaceManager {
     def didOpen(DidOpenTextDocumentParams changeEvent) {
         val uri = toUri(changeEvent.textDocument.uri)
         openDocuments.put(uri, new Document(changeEvent.textDocument.version, changeEvent.textDocument.text))
+        doBuild(#[uri], newArrayList)
     }
     
     def URI toUri(String path) {
@@ -93,7 +97,8 @@ class WorkspaceManager {
     
     def didClose(DidCloseTextDocumentParams changeEvent) {
         val uri = toUri(changeEvent.textDocument.uri)
-        openDocuments.remove(uri)        
+        openDocuments.remove(uri)
+        doBuild(#[uri], newArrayList)    
     }
     
     def didSave(DidSaveTextDocumentParams changeEvent) {
@@ -123,9 +128,23 @@ class WorkspaceManager {
             projectDescription.attachToEmfObject(it)
             val index = new ChunkedResourceDescriptions(emptyMap, it)
             index.setContainer(projectDescription.name, newIndex)
+            externalContentSupport.configureResourceSet(it, new IExternalContentProvider() {
+                
+                override getActualContentProvider() {
+                    return this
+                }
+                
+                override getContent(URI uri) {
+                    openDocuments.get(uri)?.contents
+                }
+                
+                override hasContent(URI uri) {
+                    openDocuments.containsKey(uri)
+                }
+             })
         ]
     }
     
-
+    
     
 }
