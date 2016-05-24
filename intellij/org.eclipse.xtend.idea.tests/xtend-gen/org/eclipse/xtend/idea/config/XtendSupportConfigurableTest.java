@@ -35,6 +35,7 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.SourceFolder;
 import com.intellij.openapi.roots.ui.configuration.projectRoot.LibrariesContainer;
 import com.intellij.openapi.roots.ui.configuration.projectRoot.LibrariesContainerFactory;
+import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -104,75 +105,83 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
   }
   
   public void testPlainJavaOutputConfiguration_02() {
-    try {
-      final Module module = this.createModule("module1");
-      Project _project = module.getProject();
-      VirtualFile _baseDir = _project.getBaseDir();
-      String _name = module.getName();
-      final VirtualFile moduleRoot = VfsUtil.createDirectoryIfMissing(_baseDir, _name);
-      final VirtualFile srcDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/main/java");
-      final VirtualFile testDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/test/java");
-      PsiTestUtil.addContentRoot(module, moduleRoot);
-      PsiTestUtil.addSourceRoot(module, srcDirVf);
-      PsiTestUtil.addSourceRoot(module, testDirVf, true);
-      final ModuleRootManager manager = ModuleRootManager.getInstance(module);
-      final VirtualFile[] srcFolders = manager.getSourceRoots(true);
-      int _size = ((List<VirtualFile>)Conversions.doWrapArray(srcFolders)).size();
-      TestCase.assertEquals(2, _size);
-      this.addFrameworkSupport(module);
-      FacetManager _instance = FacetManager.getInstance(module);
-      Collection<Facet<XtendFacetConfiguration>> _facetsByType = _instance.<Facet<XtendFacetConfiguration>>getFacetsByType(XtendFacetType.TYPEID);
-      final Facet<XtendFacetConfiguration> facet = IterableExtensions.<Facet<XtendFacetConfiguration>>head(_facetsByType);
-      TestCase.assertNotNull(facet);
-      XtendFacetConfiguration _configuration = facet.getConfiguration();
-      final XbaseGeneratorConfigurationState xtendConfig = _configuration.getState();
-      String _outputDirectory = xtendConfig.getOutputDirectory();
-      String _testOutputDirectory = xtendConfig.getTestOutputDirectory();
-      boolean _equals = Objects.equal(_outputDirectory, _testOutputDirectory);
-      TestCase.assertFalse(_equals);
-      String _outputDirectory_1 = xtendConfig.getOutputDirectory();
-      boolean _endsWith = _outputDirectory_1.endsWith("module1/src/main/xtend-gen");
-      TestCase.assertTrue(_endsWith);
-      String _testOutputDirectory_1 = xtendConfig.getTestOutputDirectory();
-      boolean _endsWith_1 = _testOutputDirectory_1.endsWith("module1/src/test/xtend-gen");
-      TestCase.assertTrue(_endsWith_1);
-      ModuleRootManager _instance_1 = ModuleRootManager.getInstance(module);
-      final VirtualFile[] sourceRoots = _instance_1.getSourceRoots(true);
-      final Function1<VirtualFile, Boolean> _function = new Function1<VirtualFile, Boolean>() {
-        @Override
-        public Boolean apply(final VirtualFile it) {
-          boolean _xblockexpression = false;
-          {
-            String _path = it.getPath();
-            final String urlToCheck = _path.replace("file://", "");
-            String _outputDirectory = xtendConfig.getOutputDirectory();
-            _xblockexpression = Objects.equal(_outputDirectory, urlToCheck);
-          }
-          return Boolean.valueOf(_xblockexpression);
+    Project _project = this.getProject();
+    final Computable<Module> _function = new Computable<Module>() {
+      @Override
+      public Module compute() {
+        try {
+          final Module module = XtendSupportConfigurableTest.this.createModule("module1");
+          Project _project = module.getProject();
+          VirtualFile _baseDir = _project.getBaseDir();
+          String _name = module.getName();
+          final VirtualFile moduleRoot = VfsUtil.createDirectoryIfMissing(_baseDir, _name);
+          final VirtualFile srcDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/main/java");
+          final VirtualFile testDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/test/java");
+          PsiTestUtil.addContentRoot(module, moduleRoot);
+          PsiTestUtil.addSourceRoot(module, srcDirVf);
+          PsiTestUtil.addSourceRoot(module, testDirVf, true);
+          return module;
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
-      };
-      Iterable<VirtualFile> _filter = IterableExtensions.<VirtualFile>filter(((Iterable<VirtualFile>)Conversions.doWrapArray(sourceRoots)), _function);
-      int _size_1 = IterableExtensions.size(_filter);
-      TestCase.assertEquals(1, _size_1);
-      final Function1<VirtualFile, Boolean> _function_1 = new Function1<VirtualFile, Boolean>() {
-        @Override
-        public Boolean apply(final VirtualFile it) {
-          boolean _xblockexpression = false;
-          {
-            String _path = it.getPath();
-            final String urlToCheck = _path.replace("file://", "");
-            String _testOutputDirectory = xtendConfig.getTestOutputDirectory();
-            _xblockexpression = Objects.equal(_testOutputDirectory, urlToCheck);
-          }
-          return Boolean.valueOf(_xblockexpression);
+      }
+    };
+    final Module module = WriteCommandAction.<Module>runWriteCommandAction(_project, _function);
+    final ModuleRootManager manager = ModuleRootManager.getInstance(module);
+    final VirtualFile[] srcFolders = manager.getSourceRoots(true);
+    int _size = ((List<VirtualFile>)Conversions.doWrapArray(srcFolders)).size();
+    TestCase.assertEquals(2, _size);
+    this.addFrameworkSupport(module);
+    FacetManager _instance = FacetManager.getInstance(module);
+    Collection<Facet<XtendFacetConfiguration>> _facetsByType = _instance.<Facet<XtendFacetConfiguration>>getFacetsByType(XtendFacetType.TYPEID);
+    final Facet<XtendFacetConfiguration> facet = IterableExtensions.<Facet<XtendFacetConfiguration>>head(_facetsByType);
+    TestCase.assertNotNull(facet);
+    XtendFacetConfiguration _configuration = facet.getConfiguration();
+    final XbaseGeneratorConfigurationState xtendConfig = _configuration.getState();
+    String _outputDirectory = xtendConfig.getOutputDirectory();
+    String _testOutputDirectory = xtendConfig.getTestOutputDirectory();
+    boolean _equals = Objects.equal(_outputDirectory, _testOutputDirectory);
+    TestCase.assertFalse(_equals);
+    String _outputDirectory_1 = xtendConfig.getOutputDirectory();
+    boolean _endsWith = _outputDirectory_1.endsWith("module1/src/main/xtend-gen");
+    TestCase.assertTrue(_endsWith);
+    String _testOutputDirectory_1 = xtendConfig.getTestOutputDirectory();
+    boolean _endsWith_1 = _testOutputDirectory_1.endsWith("module1/src/test/xtend-gen");
+    TestCase.assertTrue(_endsWith_1);
+    ModuleRootManager _instance_1 = ModuleRootManager.getInstance(module);
+    final VirtualFile[] sourceRoots = _instance_1.getSourceRoots(true);
+    final Function1<VirtualFile, Boolean> _function_1 = new Function1<VirtualFile, Boolean>() {
+      @Override
+      public Boolean apply(final VirtualFile it) {
+        boolean _xblockexpression = false;
+        {
+          String _path = it.getPath();
+          final String urlToCheck = _path.replace("file://", "");
+          String _outputDirectory = xtendConfig.getOutputDirectory();
+          _xblockexpression = Objects.equal(_outputDirectory, urlToCheck);
         }
-      };
-      Iterable<VirtualFile> _filter_1 = IterableExtensions.<VirtualFile>filter(((Iterable<VirtualFile>)Conversions.doWrapArray(sourceRoots)), _function_1);
-      int _size_2 = IterableExtensions.size(_filter_1);
-      TestCase.assertEquals(1, _size_2);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+        return Boolean.valueOf(_xblockexpression);
+      }
+    };
+    Iterable<VirtualFile> _filter = IterableExtensions.<VirtualFile>filter(((Iterable<VirtualFile>)Conversions.doWrapArray(sourceRoots)), _function_1);
+    int _size_1 = IterableExtensions.size(_filter);
+    TestCase.assertEquals(1, _size_1);
+    final Function1<VirtualFile, Boolean> _function_2 = new Function1<VirtualFile, Boolean>() {
+      @Override
+      public Boolean apply(final VirtualFile it) {
+        boolean _xblockexpression = false;
+        {
+          String _path = it.getPath();
+          final String urlToCheck = _path.replace("file://", "");
+          String _testOutputDirectory = xtendConfig.getTestOutputDirectory();
+          _xblockexpression = Objects.equal(_testOutputDirectory, urlToCheck);
+        }
+        return Boolean.valueOf(_xblockexpression);
+      }
+    };
+    Iterable<VirtualFile> _filter_1 = IterableExtensions.<VirtualFile>filter(((Iterable<VirtualFile>)Conversions.doWrapArray(sourceRoots)), _function_2);
+    int _size_2 = IterableExtensions.size(_filter_1);
+    TestCase.assertEquals(1, _size_2);
   }
   
   public void testPlainJavaOutputConfiguration_03() {

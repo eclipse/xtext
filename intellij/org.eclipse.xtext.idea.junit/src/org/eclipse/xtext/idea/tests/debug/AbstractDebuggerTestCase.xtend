@@ -54,6 +54,17 @@ abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
 	DebugProcessImpl myDebugProcess
 
 	static val timeout = 10_000
+	
+	override protected tearDown() throws Exception {
+		try {
+			if (myDebugProcess !== null) {
+				myDebugProcess.stop(true)
+				myDebugProcess.waitFor
+			}			
+		} finally {
+			super.tearDown()
+		}
+	}
 
 	protected def void assertCurrentLine(VirtualFile file, String fragment) {
 		val sp = myDebuggerSession.contextManager.context.sourcePosition

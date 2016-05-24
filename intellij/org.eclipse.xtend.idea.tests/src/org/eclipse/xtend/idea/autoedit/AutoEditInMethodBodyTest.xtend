@@ -64,6 +64,12 @@ class AutoEditInMethodBodyTest extends AutoEditTest {
 		assertState("{\n\t\t|\n}")
 	}
 	
+	override void testCurlyBracesBlock_10() {
+		configureByText('/*{*/ foo|')
+		myFixture.type('\n')
+		assertState('/*{*/ foo\n\t|')
+	}
+	
 	override testCurlyBracesBlock_11() {
 		configureByText('{|}')
 		myFixture.type('\n')
@@ -116,12 +122,6 @@ class AutoEditInMethodBodyTest extends AutoEditTest {
 
 		myFixture.type('\n')
 		assertState("  // test\n|\n")
-	}
-
-	override testCurlyBracesBlock_10() {
-		configureByText('/*{*/ foo|')
-		myFixture.type('\n')
-		assertState('/*{*/ foo\n\t|')
 	}
 	
 	override testCurlyBracesBlock_14() {
@@ -205,6 +205,69 @@ class AutoEditInMethodBodyTest extends AutoEditTest {
 
 		myFixture.type('\n')
 		assertState("[{\n\t\t|\n}]")
+	}
+
+	override void testBug453205_01() {
+		configureByText("/*|\n" + "* comment\n" + "*/")
+
+		myFixture.type('\n')
+		assertState("/*\n" + "|\n */\n" + "* comment\n" + "*/")
+	}
+
+	override void testBug453205_02() {
+		configureByText("/**********|\n" + " * \"Fancy\"\n" + "**********/")
+
+		myFixture.type('\n')
+		assertState("/**********\n" + "|\n */\n" + " * \"Fancy\"\n" + "**********/")
+	}
+
+	override void testMLComments_08() {
+		configureByText("  /* foo | */")
+
+		myFixture.type('\n')
+		assertState("  /* foo \n   |*/\n    */")
+	}
+
+	override void testMLComments_09() {
+		configureByText("/* foo |*/")
+
+		myFixture.type('\n')
+		assertState("/* foo \n|*/\n */")
+	}
+
+	override void testMLComments_10() {
+		configureByText("   /* foo |*/")
+
+		myFixture.type('\n')
+		assertState("   /* foo \n   |*/\n    */")
+	}
+
+	override void testMLComments_13() {
+		configureByText("/* foo| */")
+
+		myFixture.type('\n')
+		assertState("/* foo\n |*/\n  */")
+	}
+
+	override void testMLComments_14() {
+		configureByText("/* foo|*/")
+
+		myFixture.type('\n')
+		assertState("/* foo\n|*/\n */")
+	}
+
+	override void testMLComments_15() {
+		configureByText("  /* foo| */")
+
+		myFixture.type('\n')
+		assertState("  /* foo\n   |*/\n    */")
+	}
+
+	override void testMLComments_16() {
+		configureByText("  /* foo|*/")
+
+		myFixture.type('\n')
+		assertState("  /* foo\n  |*/\n   */")
 	}
 
 }
