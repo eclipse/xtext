@@ -1,4 +1,4 @@
-version = '2.10.0-SNAPSHOT'
+version = '2.10.1-SNAPSHOT'
 
 ext.versions = [
   'ideaVersion' : project.hasProperty('ideaEAP') ? "LATEST-EAP-SNAPSHOT" : "145.972.3",
