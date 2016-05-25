@@ -54,12 +54,12 @@ import io.typefox.lsapi.TextDocumentItem;
 import io.typefox.lsapi.TextDocumentPositionParams;
 import io.typefox.lsapi.TextDocumentService;
 import io.typefox.lsapi.TextEdit;
-import io.typefox.lsapi.TextEditImpl;
 import io.typefox.lsapi.VersionedTextDocumentIdentifier;
 import io.typefox.lsapi.WindowService;
 import io.typefox.lsapi.WorkspaceEdit;
 import io.typefox.lsapi.WorkspaceService;
 import io.typefox.lsapi.WorkspaceSymbolParams;
+import io.typefox.lsapi.util.LsapiFactories;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -183,12 +183,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     final Function1<TextDocumentContentChangeEvent, TextEdit> _function = new Function1<TextDocumentContentChangeEvent, TextEdit>() {
       @Override
       public TextEdit apply(final TextDocumentContentChangeEvent event) {
-        final TextEditImpl edit = new TextEditImpl();
         Range _range = event.getRange();
-        edit.setRange(((RangeImpl) _range));
         String _text = event.getText();
-        edit.setNewText(_text);
-        return edit;
+        return LsapiFactories.newTextEdit(((RangeImpl) _range), _text);
       }
     };
     List<TextEdit> _map = ListExtensions.map(_contentChanges, _function);
@@ -303,40 +300,16 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         it.setSeverity(Integer.valueOf(_switchResult));
         String _message = issue.getMessage();
         it.setMessage(_message);
-        RangeImpl _rangeImpl = new RangeImpl();
-        final Procedure1<RangeImpl> _function = new Procedure1<RangeImpl>() {
-          @Override
-          public void apply(final RangeImpl it) {
-            PositionImpl _positionImpl = new PositionImpl();
-            final Procedure1<PositionImpl> _function = new Procedure1<PositionImpl>() {
-              @Override
-              public void apply(final PositionImpl it) {
-                Integer _lineNumber = issue.getLineNumber();
-                it.setLine((_lineNumber).intValue());
-                Integer _column = issue.getColumn();
-                it.setCharacter((_column).intValue());
-              }
-            };
-            PositionImpl _doubleArrow = ObjectExtensions.<PositionImpl>operator_doubleArrow(_positionImpl, _function);
-            it.setStart(_doubleArrow);
-            PositionImpl _positionImpl_1 = new PositionImpl();
-            final Procedure1<PositionImpl> _function_1 = new Procedure1<PositionImpl>() {
-              @Override
-              public void apply(final PositionImpl it) {
-                Integer _lineNumber = issue.getLineNumber();
-                it.setLine((_lineNumber).intValue());
-                Integer _column = issue.getColumn();
-                Integer _length = issue.getLength();
-                int _plus = ((_column).intValue() + (_length).intValue());
-                it.setCharacter(_plus);
-              }
-            };
-            PositionImpl _doubleArrow_1 = ObjectExtensions.<PositionImpl>operator_doubleArrow(_positionImpl_1, _function_1);
-            it.setEnd(_doubleArrow_1);
-          }
-        };
-        RangeImpl _doubleArrow = ObjectExtensions.<RangeImpl>operator_doubleArrow(_rangeImpl, _function);
-        it.setRange(_doubleArrow);
+        Integer _lineNumber = issue.getLineNumber();
+        Integer _column = issue.getColumn();
+        PositionImpl _newPosition = LsapiFactories.newPosition((_lineNumber).intValue(), (_column).intValue());
+        Integer _lineNumber_1 = issue.getLineNumber();
+        Integer _column_1 = issue.getColumn();
+        Integer _length = issue.getLength();
+        int _plus = ((_column_1).intValue() + (_length).intValue());
+        PositionImpl _newPosition_1 = LsapiFactories.newPosition((_lineNumber_1).intValue(), _plus);
+        RangeImpl _newRange = LsapiFactories.newRange(_newPosition, _newPosition_1);
+        it.setRange(_newRange);
       }
     };
     return ObjectExtensions.<DiagnosticImpl>operator_doubleArrow(_diagnosticImpl, _function);

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ide.server;
+package org.eclipse.xtext.util;
 
 import com.google.inject.ImplementedBy;
 import java.io.File;
