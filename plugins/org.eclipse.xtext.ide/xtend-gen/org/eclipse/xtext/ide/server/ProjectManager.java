@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
@@ -63,6 +64,8 @@ public class ProjectManager {
   
   private IExternalContentSupport.IExternalContentProvider openedDocumentsContentProvider;
   
+  private XtextResourceSet resourceSet;
+  
   public IncrementalBuilder.Result initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final IExternalContentSupport.IExternalContentProvider openedDocumentsContentProvider, final Provider<Map<String, ResourceDescriptionsData>> indexProvider) {
     final ArrayList<URI> uris = CollectionLiterals.<URI>newArrayList();
     this.baseDir = baseDir;
@@ -81,16 +84,18 @@ public class ProjectManager {
   }
   
   public IncrementalBuilder.Result doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles) {
-    BuildRequest _newBuildRequest = this.newBuildRequest(dirtyFiles, deletedFiles);
+    final BuildRequest request = this.newBuildRequest(dirtyFiles, deletedFiles);
     final Function1<URI, IResourceServiceProvider> _function = new Function1<URI, IResourceServiceProvider>() {
       @Override
       public IResourceServiceProvider apply(final URI it) {
         return ProjectManager.this.languagesRegistry.getResourceServiceProvider(it);
       }
     };
-    final IncrementalBuilder.Result result = this.incrementalBuilder.build(_newBuildRequest, _function);
+    final IncrementalBuilder.Result result = this.incrementalBuilder.build(request, _function);
     IndexState _indexState = result.getIndexState();
     this.indexState = _indexState;
+    XtextResourceSet _resourceSet = request.getResourceSet();
+    this.resourceSet = _resourceSet;
     return result;
   }
   
@@ -151,5 +156,9 @@ public class ProjectManager {
       }
     };
     return ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
+  }
+  
+  public Resource getResource(final URI uri) {
+    return this.resourceSet.getResource(uri, true);
   }
 }

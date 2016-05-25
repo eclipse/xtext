@@ -25,16 +25,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ProjectManager;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
@@ -232,5 +235,15 @@ public class WorkspaceManager {
   
   public Object didSave(final DidSaveTextDocumentParams changeEvent) {
     return null;
+  }
+  
+  public <T extends Object> void doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
+    final ProjectManager projectMnr = this.getProjectManager(uri);
+    final Document doc = this.openDocuments.get(uri);
+    Resource _resource = projectMnr.getResource(uri);
+    work.apply(doc, ((XtextResource) _resource));
+  }
+  
+  public <T extends Object> void doWrite(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
   }
 }

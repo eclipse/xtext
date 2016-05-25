@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.validation.Issue
 import java.util.Map
 import org.eclipse.xtext.build.IncrementalBuilder.Result
+import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -42,6 +43,7 @@ class ProjectManager {
     (URI, Iterable<Issue>)=>void issueAcceptor
     Provider<Map<String, ResourceDescriptionsData>> indexProvider
     IExternalContentProvider openedDocumentsContentProvider
+    XtextResourceSet resourceSet
     
     def Result initialize(URI baseDir, (URI, Iterable<Issue>)=>void acceptor, IExternalContentProvider openedDocumentsContentProvider, Provider<Map<String, ResourceDescriptionsData>> indexProvider) {
         val uris = newArrayList
@@ -54,10 +56,12 @@ class ProjectManager {
     }
     
     def Result doBuild(List<URI> dirtyFiles, List<URI> deletedFiles) {
-        val result = incrementalBuilder.build(newBuildRequest(dirtyFiles, deletedFiles), [
+        val request = newBuildRequest(dirtyFiles, deletedFiles)
+        val result = incrementalBuilder.build(request, [
             languagesRegistry.getResourceServiceProvider(it)
         ])
         indexState = result.indexState
+        resourceSet = request.resourceSet
         return result;
     }
 
@@ -87,4 +91,9 @@ class ProjectManager {
             externalContentSupport.configureResourceSet(it, openedDocumentsContentProvider)
         ]
     }
+    
+    def Resource getResource(org.eclipse.emf.common.util.URI uri) {
+        resourceSet.getResource(uri, true)
+    }
+    
 }

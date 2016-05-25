@@ -20,6 +20,7 @@ import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
+import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.validation.Issue
 
@@ -128,6 +129,16 @@ class WorkspaceManager {
     
     def didSave(DidSaveTextDocumentParams changeEvent) {
         // do nothing for now
+    }
+    
+    def <T> void doRead(URI uri, (Document, XtextResource)=>T work) {
+        val projectMnr = getProjectManager(uri)
+        val doc = openDocuments.get(uri)
+        work.apply(doc, projectMnr.getResource(uri) as XtextResource)
+    }
+    
+    def <T> void doWrite(URI uri, (Document, XtextResource)=>T work) {
+        
     }
 
 }
