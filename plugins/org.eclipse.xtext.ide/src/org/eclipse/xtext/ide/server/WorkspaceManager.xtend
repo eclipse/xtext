@@ -15,43 +15,48 @@ import io.typefox.lsapi.DidCloseTextDocumentParams
 import io.typefox.lsapi.DidOpenTextDocumentParams
 import io.typefox.lsapi.DidSaveTextDocumentParams
 import io.typefox.lsapi.FileEvent
+import java.util.ArrayList
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.build.BuildRequest
-import org.eclipse.xtext.build.IncrementalBuilder
-import org.eclipse.xtext.build.IndexState
-import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
-import org.eclipse.xtext.resource.impl.ProjectDescription
+import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.resource.IExternalContentSupport
-import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class WorkspaceManager {
 
-    @Inject protected IncrementalBuilder incrementalBuilder
-    @Inject protected Provider<XtextResourceSet> resourceSetProvider
-    @Inject protected IResourceServiceProvider.Registry languagesRegistry
-    @Inject protected IFileSystemScanner fileSystemScanner
-    @Inject protected IExternalContentSupport externalContentSupport
+    @Inject Provider<ProjectManager> projectManagerProvider
+    Map<URI, ProjectManager> baseDir2ProjectManager = newHashMap()
 
-    IndexState indexState = new IndexState
     URI baseDir
-    (URI, Iterable<Issue>)=>void issueAcceptor
     Map<URI, Document> openDocuments = newHashMap()
+    val openedDocumentsContentProvider = new IExternalContentProvider() {
+
+        override getActualContentProvider() {
+            return this
+        }
+
+        override getContent(URI uri) {
+            openDocuments.get(uri)?.contents
+        }
+
+        override hasContent(URI uri) {
+            openDocuments.containsKey(uri)
+        }
+    };
+    Map<String, ResourceDescriptionsData> fullIndex = newHashMap()
 
     def void initialize(URI baseDir, (URI, Iterable<Issue>)=>void acceptor) {
-        val uris = newArrayList
         this.baseDir = baseDir
-        this.issueAcceptor = acceptor
-        this.fileSystemScanner.scan(baseDir)[uris += it]
-        doBuild(uris, emptyList)
+        // TODO support multi-projects
+        // We will need to figure out how we can identify project structure, dependencies, source folders, etc...
+        val projectManager = projectManagerProvider.get
+        val indexResult = projectManager.initialize(baseDir, acceptor, openedDocumentsContentProvider, [fullIndex])
+        baseDir2ProjectManager.put(baseDir, projectManager)
+        fullIndex.put("DEFAULT", indexResult.indexState.resourceDescriptions)
     }
 
     def didChangeWatchedFiles(DidChangeWatchedFilesParams fileChanges) {
@@ -66,14 +71,42 @@ class WorkspaceManager {
         }
         doBuild(dirtyFiles, deletedFiles)
     }
-    
+
     def void doBuild(List<URI> dirtyFiles, List<URI> deletedFiles) {
-        val result = incrementalBuilder.build(newBuildRequest(dirtyFiles, deletedFiles), [
-            languagesRegistry.getResourceServiceProvider(it)
-        ])
-        indexState = result.indexState
+        //TODO sort projects by dependency
+        val allDirty = new ArrayList(dirtyFiles)
+        for (entry : baseDir2ProjectManager.entrySet) {
+            val result = entry.value.doBuild(allDirty.filter[isPrefix(entry.key)].toList, deletedFiles.filter[isPrefix(entry.key)].toList)
+            allDirty.addAll(result.affectedResources.map[uri])
+        }
+    }
+
+    def URI getProjectBaseDir(URI candidate) {
+        for (projectBaseDir : baseDir2ProjectManager.keySet.sortBy[-toString.length]) {
+            if (isPrefix(candidate, projectBaseDir)) {
+                return projectBaseDir
+            }
+        }
+        return baseDir
     }
     
+    protected def boolean isPrefix(URI candidate, URI prefix) {
+        candidate.toString.startsWith(prefix.toString)
+    }
+
+    def ProjectManager getProjectManager(URI uri) {
+        val projectBaseDir = getProjectBaseDir(uri)
+        return baseDir2ProjectManager.get(projectBaseDir)
+    }
+
+    def URI toUri(String path) {
+        URI.createURI(baseDir.toString + path)
+    }
+
+    def toPath(URI uri) {
+        uri.toString.substring(baseDir.toString.length)
+    }
+
     def didChange(DidChangeTextDocumentParams changeEvent) {
         val uri = toUri(changeEvent.textDocument.uri)
         val contents = openDocuments.get(uri)
@@ -87,14 +120,6 @@ class WorkspaceManager {
         doBuild(#[uri], newArrayList)
     }
     
-    def URI toUri(String path) {
-        URI.createURI(baseDir.toString + path)
-    }
-    
-    def toPath(org.eclipse.emf.common.util.URI uri) {
-        uri.toString.substring(baseDir.toString.length)
-    }
-    
     def didClose(DidCloseTextDocumentParams changeEvent) {
         val uri = toUri(changeEvent.textDocument.uri)
         openDocuments.remove(uri)
@@ -105,46 +130,4 @@ class WorkspaceManager {
         // do nothing for now
     }
 
-    protected def BuildRequest newBuildRequest(List<URI> changedFiles, List<URI> deletedFiles) {
-        new BuildRequest => [
-            it.baseDir = baseDir
-            it.resourceSet = createFreshResourceSet(new ResourceDescriptionsData(emptyList))
-            it.state = new IndexState(indexState.resourceDescriptions.copy, indexState.fileMappings.copy)
-            it.resourceSet = createFreshResourceSet(state.resourceDescriptions)
-            it.dirtyFiles = changedFiles
-            it.deletedFiles = deletedFiles
-            afterValidate = [ uri, issues |
-                issueAcceptor.apply(uri, issues)
-                return true
-            ]
-        ]
-    }
-
-    protected def XtextResourceSet createFreshResourceSet(ResourceDescriptionsData newIndex) {
-        resourceSetProvider.get => [
-            val projectDescription = new ProjectDescription => [
-                name = 'test-project'
-            ]
-            projectDescription.attachToEmfObject(it)
-            val index = new ChunkedResourceDescriptions(emptyMap, it)
-            index.setContainer(projectDescription.name, newIndex)
-            externalContentSupport.configureResourceSet(it, new IExternalContentProvider() {
-                
-                override getActualContentProvider() {
-                    return this
-                }
-                
-                override getContent(URI uri) {
-                    openDocuments.get(uri)?.contents
-                }
-                
-                override hasContent(URI uri) {
-                    openDocuments.containsKey(uri)
-                }
-             })
-        ]
-    }
-    
-    
-    
 }
