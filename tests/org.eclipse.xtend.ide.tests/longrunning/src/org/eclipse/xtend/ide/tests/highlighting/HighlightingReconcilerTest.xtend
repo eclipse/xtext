@@ -63,8 +63,9 @@ class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 		val highlighterCategory = document.positionCategories.findFirst[startsWith(HighlightingPresenter.canonicalName)]
 		val semanticSnippets = document.getPositions(highlighterCategory).map[document.get(offset, length)]
 		// this fails if the first highlighting job hasn't been skipped
-		assertEquals('Highlighting regions broken', 2, semanticSnippets.size)
-		assertEquals('foo', semanticSnippets.head)
+		assertEquals('Highlighting regions broken', 3, semanticSnippets.size)
+		assertEquals('Foo', semanticSnippets.head)
+		assertEquals('foo', semanticSnippets.tail.head)
 		assertEquals('3', semanticSnippets.last)
 	}
 	
@@ -87,7 +88,8 @@ class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 		val highlighterCategory = document.positionCategories.findFirst[startsWith(HighlightingPresenter.canonicalName)]
 		val semanticSnippets = document.getPositions(highlighterCategory).map[document.get(offset, length)]
 		// this fails if the first highlighting job didn't color the document
-		assertEquals('Highlighting regions broken ' + semanticSnippets.join(','), 1, semanticSnippets.size)
-		assertEquals('foo', semanticSnippets.head)
+		assertEquals('Highlighting regions broken ' + semanticSnippets.join(','), 2, semanticSnippets.size)
+		assertEquals('Foo', semanticSnippets.head)
+		assertEquals('foo', semanticSnippets.last)
 	}
 }
