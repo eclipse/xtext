@@ -1035,7 +1035,11 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 final List<URI> sourceUris = _source;
                 if (((!Objects.equal(sourceUris, null)) && (!sourceUris.isEmpty()))) {
                   for (final URI sourceUri : sourceUris) {
-                    this.consistentAdd(sourceUri, changedUris, deletedUris);
+                    boolean _contains = deletedUris.contains(sourceUri);
+                    boolean _not = (!_contains);
+                    if (_not) {
+                      changedUris.add(sourceUri);
+                    }
                   }
                 } else {
                   boolean _isJavaFile = this.isJavaFile(uri_1);

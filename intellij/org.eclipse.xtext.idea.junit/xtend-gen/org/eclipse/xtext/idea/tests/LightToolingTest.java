@@ -45,6 +45,7 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
@@ -57,6 +58,7 @@ import com.intellij.util.ui.tree.TreeUtil;
 import java.util.List;
 import javax.swing.JTree;
 import junit.framework.TestCase;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
@@ -64,8 +66,11 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -325,6 +330,58 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
       _xblockexpression = builder.toString();
     }
     return _xblockexpression;
+  }
+  
+  protected Iterable<PsiFile> getGeneratedSources(final PsiFile sourceFile, final Function1<? super VirtualFile, ? extends Boolean> filter) {
+    VirtualFile _virtualFile = sourceFile.getVirtualFile();
+    Iterable<VirtualFile> _generatedSources = this.getGeneratedSources(_virtualFile, filter);
+    final Function1<VirtualFile, PsiFile> _function = new Function1<VirtualFile, PsiFile>() {
+      @Override
+      public PsiFile apply(final VirtualFile it) {
+        PsiManager _psiManager = LightToolingTest.this.getPsiManager();
+        return _psiManager.findFile(it);
+      }
+    };
+    Iterable<PsiFile> _map = IterableExtensions.<VirtualFile, PsiFile>map(_generatedSources, _function);
+    return IterableExtensions.<PsiFile>filterNull(_map);
+  }
+  
+  protected Iterable<VirtualFile> getGeneratedSources(final VirtualFile sourceFile, final Function1<? super VirtualFile, ? extends Boolean> filter) {
+    Iterable<VirtualFile> _generatedSources = this.getGeneratedSources(sourceFile);
+    final Function1<VirtualFile, Boolean> _function = new Function1<VirtualFile, Boolean>() {
+      @Override
+      public Boolean apply(final VirtualFile it) {
+        return filter.apply(it);
+      }
+    };
+    return IterableExtensions.<VirtualFile>filter(_generatedSources, _function);
+  }
+  
+  protected Iterable<VirtualFile> getGeneratedSources(final VirtualFile sourceFile) {
+    XtextAutoBuilderComponent _builder = this.getBuilder();
+    URI _uRI = VirtualFileURIUtil.getURI(sourceFile);
+    Iterable<URI> _generatedSources = _builder.getGeneratedSources(_uRI);
+    final Function1<URI, VirtualFile> _function = new Function1<URI, VirtualFile>() {
+      @Override
+      public VirtualFile apply(final URI it) {
+        return VirtualFileURIUtil.getVirtualFile(it);
+      }
+    };
+    Iterable<VirtualFile> _map = IterableExtensions.<URI, VirtualFile>map(_generatedSources, _function);
+    return IterableExtensions.<VirtualFile>filterNull(_map);
+  }
+  
+  protected ChunkedResourceDescriptions getIndex() {
+    final XtextResourceSet rs = new XtextResourceSet();
+    XtextAutoBuilderComponent _builder = this.getBuilder();
+    _builder.installCopyOfResourceDescriptions(rs);
+    final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(rs);
+    return index;
+  }
+  
+  protected XtextAutoBuilderComponent getBuilder() {
+    Project _project = this.getProject();
+    return _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
   }
   
   @Pure

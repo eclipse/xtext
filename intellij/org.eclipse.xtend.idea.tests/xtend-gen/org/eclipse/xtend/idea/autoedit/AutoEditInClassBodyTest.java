@@ -91,6 +91,13 @@ public class AutoEditInClassBodyTest extends AutoEditTest {
   }
   
   @Override
+  public void testCurlyBracesBlock_10() {
+    this.configureByText("/*{*/ foo|");
+    this.myFixture.type("\n");
+    this.assertState("/*{*/ foo\n|");
+  }
+  
+  @Override
   public void testCurlyBracesBlock_17() {
     this.configureByText("{\n|");
     this.myFixture.type("\n");

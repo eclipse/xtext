@@ -55,13 +55,16 @@ class XtendSupportConfigurableTest extends PsiTestCase {
 	}
 
 	def testPlainJavaOutputConfiguration_02() {
-		val module = createModule("module1")
-		val moduleRoot = VfsUtil.createDirectoryIfMissing(module.project.baseDir, module.name)
-		val srcDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/main/java")
-		val testDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/test/java")
-		PsiTestUtil.addContentRoot(module, moduleRoot)
-		PsiTestUtil.addSourceRoot(module, srcDirVf)
-		PsiTestUtil.addSourceRoot(module, testDirVf, true)
+		val module = WriteCommandAction.<Module>runWriteCommandAction(project) [
+			val module = createModule("module1")
+			val moduleRoot = VfsUtil.createDirectoryIfMissing(module.project.baseDir, module.name)
+			val srcDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/main/java")
+			val testDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/test/java")
+			PsiTestUtil.addContentRoot(module, moduleRoot)
+			PsiTestUtil.addSourceRoot(module, srcDirVf)
+			PsiTestUtil.addSourceRoot(module, testDirVf, true)
+			return module
+		]
 
 		val manager = ModuleRootManager.getInstance(module)
 

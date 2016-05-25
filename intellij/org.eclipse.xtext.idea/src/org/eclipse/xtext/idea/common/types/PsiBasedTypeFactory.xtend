@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.common.types
 
 import com.google.inject.Inject
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.progress.ProgressIndicatorProvider
 import com.intellij.openapi.project.Project
 import com.intellij.psi.JavaPsiFacade
@@ -40,7 +41,6 @@ import com.intellij.psi.PsiType
 import com.intellij.psi.PsiTypeParameter
 import com.intellij.psi.PsiTypeParameterListOwner
 import com.intellij.psi.PsiWildcardType
-import com.intellij.psi.impl.compiled.StubBuildingVisitor
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.util.InternalEList
@@ -75,9 +75,18 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory
 import org.eclipse.xtext.common.types.impl.JvmTypeConstraintImplCustom
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.util.internal.Stopwatches
-import com.intellij.openapi.application.ApplicationManager
 
 class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
+	
+	/**
+	 * FIXME: Remove the constants below when com.intellij.psi.impl.compiled.ClsFieldImpl#computeConstantValue() is fixed.
+	 */
+	static val DOUBLE_POSITIVE_INF = "1.0 / 0.0"
+	static val DOUBLE_NEGATIVE_INF = "-1.0 / 0.0"
+	static val DOUBLE_NAN = "0.0d / 0.0"
+	static val FLOAT_POSITIVE_INF = "1.0f / 0.0"
+	static val FLOAT_NEGATIVE_INF = "-1.0f / 0.0"
+	static val FLOAT_NAN = "0.0f / 0.0"
 
 	val final createTypeTask = Stopwatches.forTask("PsiClassFactory.createType")
 
@@ -218,52 +227,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 				createJvmEnumerationLiteral
 			default:
 				createJvmField => [
-					val initializer = field.initializer
-					if (initializer instanceof PsiCompiledElement && initializer instanceof PsiBinaryExpression) {
-						val fieldType = field.getType.canonicalText
-						val PsiBinaryExpression binary = initializer as PsiBinaryExpression
-						if (binary.operationSign.tokenType == JavaTokenType.DIV) {
-							switch fieldType {
-								case Double.TYPE.simpleName:
-									switch binary.text {
-										case StubBuildingVisitor.DOUBLE_NAN: {
-											constant = true
-											constantValue = Double.NaN
-											return
-										}
-										case StubBuildingVisitor.DOUBLE_POSITIVE_INF: {
-											constant = true
-											constantValue = Double.POSITIVE_INFINITY
-											return
-										}
-										case StubBuildingVisitor.DOUBLE_NEGATIVE_INF: {
-											constant = true
-											constantValue = Double.NEGATIVE_INFINITY
-											return
-										}
-									}
-								case Float.TYPE.simpleName:
-									switch binary.text {
-										case StubBuildingVisitor.FLOAT_NAN: {
-											constant = true
-											constantValue = Float.NaN
-											return
-										}
-										case StubBuildingVisitor.FLOAT_POSITIVE_INF: {
-											constant = true
-											constantValue = Float.POSITIVE_INFINITY
-											return
-										}
-										case StubBuildingVisitor.FLOAT_NEGATIVE_INF: {
-											constant = true
-											constantValue = Float.NEGATIVE_INFINITY
-											return
-										}
-									}
-							}
-						}
-					}
-					val value = field.computeConstantValue
+					val value = field.constantValue
 					if (value != null) {
 						constant = true
 						constantValue = value
@@ -285,17 +249,46 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 			associate[|field]
 		]
 	}
+	
+	/**
+	 * FIXME: Remove this method when com.intellij.psi.impl.compiled.ClsFieldImpl#computeConstantValue() is fixed.
+	 */
+	private def Object getConstantValue(PsiField field) {
+		val initializer = field.initializer
+		if (initializer instanceof PsiCompiledElement) {
+			if (initializer instanceof PsiBinaryExpression) {
+				val fieldType = field.getType.canonicalText
+				if (initializer.operationSign.tokenType == JavaTokenType.DIV) {
+					switch fieldType {
+						case Double.TYPE.simpleName:
+							switch initializer.text {
+								case DOUBLE_NAN:
+									return Double.NaN
+								case DOUBLE_POSITIVE_INF:
+									return Double.POSITIVE_INFINITY
+								case DOUBLE_NEGATIVE_INF:
+									return Double.NEGATIVE_INFINITY
+							}
+						case Float.TYPE.simpleName:
+							switch initializer.text {
+								case FLOAT_NAN:
+									return Float.NaN
+								case FLOAT_POSITIVE_INF:
+									return Float.POSITIVE_INFINITY
+								case FLOAT_NEGATIVE_INF:
+									return Float.NEGATIVE_INFINITY
+							}
+					}
+				}
+			}
+		}
+		return field.computeConstantValue
+	}
 
 	protected def createSuperTypes(JvmDeclaredType it, PsiClass psiClass) {
 		for (superType : psiClass.superTypes) {
 			superTypes.addUnique(superType.createTypeReference)
 		}
-//		for (superType : psiClass.extendsListTypes) {
-//			superTypes.addUnique(superType.createTypeReference)
-//		}
-//		for (superType : psiClass.implementsListTypes) {
-//			superTypes.addUnique(superType.createTypeReference)
-//		}
 	}
 
 	protected def createMethods(JvmDeclaredType it, PsiClass psiClass, StringBuilder fqn) {

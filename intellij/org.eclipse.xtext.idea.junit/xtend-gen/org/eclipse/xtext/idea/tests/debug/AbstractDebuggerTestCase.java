@@ -82,6 +82,18 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   
   private final static int timeout = 10000;
   
+  @Override
+  protected void tearDown() throws Exception {
+    try {
+      if ((this.myDebugProcess != null)) {
+        this.myDebugProcess.stop(true);
+        this.myDebugProcess.waitFor();
+      }
+    } finally {
+      super.tearDown();
+    }
+  }
+  
   protected void assertCurrentLine(final VirtualFile file, final String fragment) {
     DebuggerStateManager _contextManager = this.myDebuggerSession.getContextManager();
     DebuggerContextImpl _context = _contextManager.getContext();

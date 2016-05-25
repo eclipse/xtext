@@ -55,7 +55,6 @@ import com.intellij.psi.PsiTypeElement;
 import com.intellij.psi.PsiTypeParameter;
 import com.intellij.psi.PsiTypeParameterListOwner;
 import com.intellij.psi.PsiWildcardType;
-import com.intellij.psi.impl.compiled.StubBuildingVisitor;
 import com.intellij.psi.tree.IElementType;
 import java.util.Arrays;
 import java.util.List;
@@ -123,6 +122,21 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredType> {
+  /**
+   * FIXME: Remove the constants below when com.intellij.psi.impl.compiled.ClsFieldImpl#computeConstantValue() is fixed.
+   */
+  private final static String DOUBLE_POSITIVE_INF = "1.0 / 0.0";
+  
+  private final static String DOUBLE_NEGATIVE_INF = "-1.0 / 0.0";
+  
+  private final static String DOUBLE_NAN = "0.0d / 0.0";
+  
+  private final static String FLOAT_POSITIVE_INF = "1.0f / 0.0";
+  
+  private final static String FLOAT_NEGATIVE_INF = "-1.0f / 0.0";
+  
+  private final static String FLOAT_NAN = "0.0f / 0.0";
+  
   private final Stopwatches.StoppedTask createTypeTask = Stopwatches.forTask("PsiClassFactory.createType");
   
   @Extension
@@ -393,77 +407,7 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
         final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
           @Override
           public void apply(final JvmField it) {
-            final PsiExpression initializer = field.getInitializer();
-            if (((initializer instanceof PsiCompiledElement) && (initializer instanceof PsiBinaryExpression))) {
-              PsiType _type = field.getType();
-              final String fieldType = _type.getCanonicalText();
-              final PsiBinaryExpression binary = ((PsiBinaryExpression) initializer);
-              PsiJavaToken _operationSign = binary.getOperationSign();
-              IElementType _tokenType = _operationSign.getTokenType();
-              boolean _equals = Objects.equal(_tokenType, JavaTokenType.DIV);
-              if (_equals) {
-                boolean _matched = false;
-                String _simpleName = Double.TYPE.getSimpleName();
-                if (Objects.equal(fieldType, _simpleName)) {
-                  _matched=true;
-                  String _text = binary.getText();
-                  boolean _matched_1 = false;
-                  if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_NAN)) {
-                    _matched_1=true;
-                    it.setConstant(true);
-                    it.setConstantValue(Double.valueOf(Double.NaN));
-                    return;
-                  }
-                  if (!_matched_1) {
-                    if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_POSITIVE_INF)) {
-                      _matched_1=true;
-                      it.setConstant(true);
-                      it.setConstantValue(Double.valueOf(Double.POSITIVE_INFINITY));
-                      return;
-                    }
-                  }
-                  if (!_matched_1) {
-                    if (Objects.equal(_text, StubBuildingVisitor.DOUBLE_NEGATIVE_INF)) {
-                      _matched_1=true;
-                      it.setConstant(true);
-                      it.setConstantValue(Double.valueOf(Double.NEGATIVE_INFINITY));
-                      return;
-                    }
-                  }
-                }
-                if (!_matched) {
-                  String _simpleName_1 = Float.TYPE.getSimpleName();
-                  if (Objects.equal(fieldType, _simpleName_1)) {
-                    _matched=true;
-                    String _text_1 = binary.getText();
-                    boolean _matched_2 = false;
-                    if (Objects.equal(_text_1, StubBuildingVisitor.FLOAT_NAN)) {
-                      _matched_2=true;
-                      it.setConstant(true);
-                      it.setConstantValue(Float.valueOf(Float.NaN));
-                      return;
-                    }
-                    if (!_matched_2) {
-                      if (Objects.equal(_text_1, StubBuildingVisitor.FLOAT_POSITIVE_INF)) {
-                        _matched_2=true;
-                        it.setConstant(true);
-                        it.setConstantValue(Float.valueOf(Float.POSITIVE_INFINITY));
-                        return;
-                      }
-                    }
-                    if (!_matched_2) {
-                      if (Objects.equal(_text_1, StubBuildingVisitor.FLOAT_NEGATIVE_INF)) {
-                        _matched_2=true;
-                        it.setConstant(true);
-                        it.setConstantValue(Float.valueOf(Float.NEGATIVE_INFINITY));
-                        return;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            final Object value = field.computeConstantValue();
+            final Object value = PsiBasedTypeFactory.this.getConstantValue(field);
             boolean _notEquals = (!Objects.equal(value, null));
             if (_notEquals) {
               it.setConstant(true);
@@ -511,6 +455,72 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       _xblockexpression = ObjectExtensions.<JvmField>operator_doubleArrow(_switchResult, _function_1);
     }
     return _xblockexpression;
+  }
+  
+  /**
+   * FIXME: Remove this method when com.intellij.psi.impl.compiled.ClsFieldImpl#computeConstantValue() is fixed.
+   */
+  private Object getConstantValue(final PsiField field) {
+    final PsiExpression initializer = field.getInitializer();
+    if ((initializer instanceof PsiCompiledElement)) {
+      if ((initializer instanceof PsiBinaryExpression)) {
+        PsiType _type = field.getType();
+        final String fieldType = _type.getCanonicalText();
+        PsiJavaToken _operationSign = ((PsiBinaryExpression)initializer).getOperationSign();
+        IElementType _tokenType = _operationSign.getTokenType();
+        boolean _equals = Objects.equal(_tokenType, JavaTokenType.DIV);
+        if (_equals) {
+          boolean _matched = false;
+          String _simpleName = Double.TYPE.getSimpleName();
+          if (Objects.equal(fieldType, _simpleName)) {
+            _matched=true;
+            String _text = initializer.getText();
+            boolean _matched_1 = false;
+            if (Objects.equal(_text, PsiBasedTypeFactory.DOUBLE_NAN)) {
+              _matched_1=true;
+              return Double.valueOf(Double.NaN);
+            }
+            if (!_matched_1) {
+              if (Objects.equal(_text, PsiBasedTypeFactory.DOUBLE_POSITIVE_INF)) {
+                _matched_1=true;
+                return Double.valueOf(Double.POSITIVE_INFINITY);
+              }
+            }
+            if (!_matched_1) {
+              if (Objects.equal(_text, PsiBasedTypeFactory.DOUBLE_NEGATIVE_INF)) {
+                _matched_1=true;
+                return Double.valueOf(Double.NEGATIVE_INFINITY);
+              }
+            }
+          }
+          if (!_matched) {
+            String _simpleName_1 = Float.TYPE.getSimpleName();
+            if (Objects.equal(fieldType, _simpleName_1)) {
+              _matched=true;
+              String _text_1 = initializer.getText();
+              boolean _matched_2 = false;
+              if (Objects.equal(_text_1, PsiBasedTypeFactory.FLOAT_NAN)) {
+                _matched_2=true;
+                return Float.valueOf(Float.NaN);
+              }
+              if (!_matched_2) {
+                if (Objects.equal(_text_1, PsiBasedTypeFactory.FLOAT_POSITIVE_INF)) {
+                  _matched_2=true;
+                  return Float.valueOf(Float.POSITIVE_INFINITY);
+                }
+              }
+              if (!_matched_2) {
+                if (Objects.equal(_text_1, PsiBasedTypeFactory.FLOAT_NEGATIVE_INF)) {
+                  _matched_2=true;
+                  return Float.valueOf(Float.NEGATIVE_INFINITY);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return field.computeConstantValue();
   }
   
   protected void createSuperTypes(final JvmDeclaredType it, final PsiClass psiClass) {

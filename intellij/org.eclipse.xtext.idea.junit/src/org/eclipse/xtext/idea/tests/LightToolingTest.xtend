@@ -26,7 +26,9 @@ import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl
 import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.LanguageLevelModuleExtension
 import com.intellij.openapi.roots.ModifiableRootModel
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.pom.java.LanguageLevel
+import com.intellij.psi.PsiFile
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager
 import com.intellij.psi.tree.IElementType
 import com.intellij.testFramework.LightProjectDescriptor
@@ -40,20 +42,23 @@ import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.idea.parser.TokenTypeProvider
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.psi.impl.BaseXtextFile
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension com.intellij.testFramework.PlatformTestUtil.*
 import static extension com.intellij.util.ui.tree.TreeUtil.*
+import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
 	@Inject extension TokenTypeProvider tokenTypeProvider
 	@Inject extension AbstractAntlrTokenToAttributeIdMapper tokenToAttributeIdMapper
-	
+
 	@Accessors
 	val LanguageFileType fileType
-	
+
 	new(LanguageFileType fileType) {
 		XtextAutoBuilderComponent.TEST_MODE = true
 		this.fileType = fileType
@@ -65,9 +70,10 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 		CodeInsightSettings.instance.AUTOCOMPLETE_ON_CODE_COMPLETION = false
 		codeStyleSettings.indentOptions.USE_TAB_CHARACTER = true
 	}
-	
+
 	override protected tearDown() throws Exception {
 		CodeInsightSettings.instance.AUTOCOMPLETE_ON_CODE_COMPLETION = true
+
 		super.tearDown
 	}
 
@@ -85,7 +91,6 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 				addFacetToModule(module, fileType.language.ID)
 				LightToolingTest.this.configureModule(module, model, contentEntry)
 			}
-	
 
 			override ModuleType<?> getModuleType() {
 				StdModuleTypes.JAVA
@@ -97,10 +102,10 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
 		}
 	}
-	
+
 	public static def void addFacetToModule(Module module, String languageId) {
 		val mnr = FacetManager.getInstance(module)
-		val facetType = FacetTypeRegistry.getInstance().facetTypes.findFirst [FacetType it|
+		val facetType = FacetTypeRegistry.getInstance().facetTypes.findFirst [ FacetType it |
 			it.stringId == languageId
 		]
 		ApplicationManager.application.runWriteAction [|
@@ -108,25 +113,24 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 			return;
 		]
 	}
-	
+
 	protected def getSdk() {
 		JavaAwareProjectJdkTableImpl.instanceEx.internalJdk
 	}
-	
+
 	protected def getLanguageLevel() {
 		LanguageLevel.JDK_1_6
 	}
-	
+
 	protected def void configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
-		
 	}
 
 	protected def configureByText(String code) {
 		myFixture.configureByText(fileType, LineDelimiters.toUnix(code))
 	}
-	
+
 	protected def configureByText(String path, String code) {
-		val psiFile = myFixture.addFileToProject(path +"." +fileType.defaultExtension, LineDelimiters.toUnix(code))
+		val psiFile = myFixture.addFileToProject(path + "." + fileType.defaultExtension, LineDelimiters.toUnix(code))
 		myFixture.configureFromExistingVirtualFile(psiFile.virtualFile)
 	}
 
@@ -138,21 +142,21 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	protected def assertLookupStrings(String... items) {
 		assertEquals(items.toList, myFixture.lookupElementStrings)
 	}
-	
+
 	protected def assertHighlights(String lineDelimitedHighlights) {
 		val expectedHighlights = LineDelimiters.toUnix(lineDelimitedHighlights)
 		val highlighter = HighlighterFactory.createHighlighter(project, myFixture.file.virtualFile) => [
-	    	text = myFixture.editor.document.text
-	    	colorScheme = myFixture.editor.colorsScheme
+			text = myFixture.editor.document.text
+			colorScheme = myFixture.editor.colorsScheme
 		]
 		val highlights = highlighter.createIterator(0)
 		val actualHighlights = compactHighlights(highlights)
 		assertEquals(expectedHighlights, actualHighlights)
 	}
-	
+
 	protected def compactHighlights(HighlighterIterator highlights) {
 		val compactHighlights = new StringBuilder
-		while(!highlights.atEnd) {
+		while (!highlights.atEnd) {
 			val start = highlights.start
 			val tokenType = highlights.tokenType
 			var end = highlights.end
@@ -160,18 +164,18 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 				end = highlights.end
 				highlights.advance
 			}
-			if(tokenType.xtextStyle != HighlightingStyles.DEFAULT_ID) {
+			if (tokenType.xtextStyle != HighlightingStyles.DEFAULT_ID) {
 				compactHighlights.append('''«start»-«end»:«tokenType.xtextStyle»''')
 				compactHighlights.append("\n")
 			}
 		}
 		compactHighlights.toString
 	}
-	
+
 	protected def getXtextStyle(IElementType tokenType) {
 		tokenType.antlrType.id
 	}
-	
+
 	protected def getXtextFile() {
 		myFixture.file as BaseXtextFile
 	}
@@ -191,7 +195,7 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 		myFixture.configureByText(fileType, model)
 		testStructureView(consumer)
 	}
-	
+
 	protected def void testStructureView(Consumer<StructureViewComponent> consumer) {
 		myFixture.testStructureView(consumer)
 	}
@@ -206,6 +210,29 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 		val builder = new StringBuilder
 		FormattingModelDumper.dumpFormattingModel(block, 0, builder)
 		builder.toString
+	}
+
+	protected def getGeneratedSources(PsiFile sourceFile, (VirtualFile)=>boolean filter) {
+		sourceFile.virtualFile.getGeneratedSources(filter).map[psiManager.findFile(it)].filterNull
+	}
+
+	protected def getGeneratedSources(VirtualFile sourceFile, (VirtualFile)=>boolean filter) {
+		sourceFile.generatedSources.filter[filter.apply(it)]
+	}
+
+	protected def getGeneratedSources(VirtualFile sourceFile) {
+		builder.getGeneratedSources(sourceFile.URI).map[virtualFile].filterNull
+	}
+
+	protected def getIndex() {
+		val rs = new XtextResourceSet()
+		builder.installCopyOfResourceDescriptions(rs)
+		val index = ChunkedResourceDescriptions.findInEmfObject(rs)
+		return index
+	}
+
+	protected def getBuilder() {
+		project.getComponent(XtextAutoBuilderComponent)
 	}
 
 }

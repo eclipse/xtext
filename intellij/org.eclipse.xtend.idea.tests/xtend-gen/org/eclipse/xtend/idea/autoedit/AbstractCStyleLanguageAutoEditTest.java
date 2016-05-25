@@ -376,7 +376,7 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
   public void testCurlyBracesBlock_10() {
     this.configureByText("/*{*/ foo|");
     this.myFixture.type("\n");
-    this.assertState("/*{*/ foo\n|");
+    this.assertState("/*{*/ foo\n|\n */");
   }
   
   public void testCurlyBracesBlock_11() {

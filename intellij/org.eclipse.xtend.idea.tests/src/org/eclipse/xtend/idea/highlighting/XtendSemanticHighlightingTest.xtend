@@ -31,8 +31,8 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 		]
 	}
 	
-	protected def $(String xtextStyle, String text) {
-		'<symbolName descr="'+xtextStyle+'">'+text+'</symbolName>'
+	protected def CharSequence $(String xtextStyle, CharSequence text) {
+		'''<symbolName descr="«xtextStyle»">«text»</symbolName>'''
 	}
 
  	protected def white(String whitespace) {
@@ -41,16 +41,16 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
  
 	def testPrimitiveTypeIsKeyword() {
 		'''
-			class Foo {
-				def «KEYWORD_ID.$('void')» foo() {}
+			class «CLASS.$('Foo')» {
+				def «KEYWORD_ID.$('void')» «METHOD.$('foo')»() {}
 			}
 		'''.checkHighlight
 	}
 
 	def testThisIsKeyword() {
 		'''
-			class Foo {
-				def foo() {
+			class «CLASS.$('Foo')» {
+				def «METHOD.$('foo')»() {
 					«KEYWORD_ID.$('this')»
 				}
 			}
@@ -59,8 +59,8 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	
 	def testItIsKeyword() {
 		'''
-			class Foo {
-				def foo(String «KEYWORD_ID.$('it')») {
+			class «CLASS.$('Foo')» {
+				def «METHOD.$('foo')»(«CLASS.$('String')» «KEYWORD_ID.$('it')») {
 				}
 			}
 		'''.checkHighlight
@@ -68,25 +68,25 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	
 	def void testStaticField() {
 		'''
-			class Foo {
-				static val «STATIC_FIELD.$('foo')» = true
-				def bar() { «STATIC_FIELD.$('foo')» }
+			class «CLASS.$('Foo')» {
+				static val «FIELD.$(STATIC_FIELD.$(STATIC_FINAL_FIELD.$('foo')))» = true
+				def «METHOD.$('bar')»() { «FIELD.$(STATIC_FIELD.$(STATIC_FINAL_FIELD.$('foo')))» }
 			}
 		'''.checkHighlight
 	}
 	
 	def void testStaticMethod() {
 		'''
-			class Foo {
-				static def foo() {}
-				def bar() { «STATIC_METHOD_INVOCATION.$('foo')» }
+			class «CLASS.$('Foo')» {
+				static def «METHOD.$('foo')»() {}
+				def «METHOD.$('bar')»() { «METHOD.$(STATIC_METHOD_INVOCATION.$('foo'))» }
 			}
 		'''.checkHighlight
 	}
 
 	def void testField() {
 		'''
-			class Foo {
+			class «CLASS.$('Foo')» {
 				val «FIELD.$('foo')» = null
 			}
 		'''.checkHighlight
@@ -95,19 +95,19 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	def void testAnnotation() {
 		'''
 			«ANNOTATION.$('@')»«ANNOTATION.$('SuppressWarnings')»("all")
-			class Foo {
+			class «CLASS.$('Foo')» {
 			}
 		'''.checkHighlight
 	}
 	
 	def void testExtensionMethod() {
 		'''
-			class Foo {
-				def foo(String x) {
+			class «CLASS.$('Foo')» {
+				def «METHOD.$('foo')»(«CLASS.$('String')» «PARAMETER_VARIABLE.$('x')») {
 				}
 				
-				def bar() {
-					''.«EXTENSION_METHOD_INVOCATION.$('foo')»
+				def «METHOD.$('bar')»() {
+					''.«EXTENSION_METHOD_INVOCATION.$(METHOD.$('foo'))»
 				}
 			}
 		'''.checkHighlight
@@ -115,8 +115,8 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	
 	def void testRichText_0() {
 		'''
-			class Foo {
-				def foo() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
+			class «CLASS.$('Foo')» {
+				def «METHOD.$('foo')»() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is a template«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t')»«white(Q3)»
 			}
@@ -125,8 +125,8 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	
 	def void testRichText_1() {
 		'''
-			class Foo {
-				def foo() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
+			class «CLASS.$('Foo')» {
+				def «METHOD.$('foo')»() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t\t')»	this is indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
@@ -137,10 +137,10 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	
 	def void testRichText_2() {
 		'''
-			class Foo {
-				def foo(String[] nums) «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
+			class «CLASS.$('Foo')» {
+				def «METHOD.$('foo')»(«CLASS.$('String')»[] «PARAMETER_VARIABLE.$('nums')») «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
-			»«white('\t\t')»«GL»FOR i:nums«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
+			»«white('\t\t')»«GL»FOR «LOCAL_FINAL_VARIABLE_DECLARATION.$(LOCAL_VARIABLE_DECLARATION.$('i'))»:«PARAMETER_VARIABLE.$('nums')»«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»«white('\t')»loop body«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t\t')»«GL»ENDFOR«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
@@ -151,10 +151,10 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	
 	def void testRichText_3() {
 		'''
-			class Foo {
-				def foo(String[] nums) «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
+			class «CLASS.$('Foo')» {
+				def «METHOD.$('foo')»(«CLASS.$('String')»[] «PARAMETER_VARIABLE.$('nums')») «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
-			»«white('\t\t\t')»«GL»FOR i:nums«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
+			»«white('\t\t\t')»«GL»FOR «LOCAL_FINAL_VARIABLE_DECLARATION.$(LOCAL_VARIABLE_DECLARATION.$('i'))»:«PARAMETER_VARIABLE.$('nums')»«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»	«white('\t')»loop body«SEMANTIC_LINE_BREAK.$(NL)
 			»«white('\t\t\t')»«GL»ENDFOR«GR»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
@@ -165,8 +165,8 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	
 	def void testRichText_4() {
 		'''
-			class Foo {
-				def foo() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
+			class «CLASS.$('Foo')» {
+				def «METHOD.$('foo')»() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
 			»«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)
 			»«COMMENT_ID.$(GL+GL+GL+' a comment')»
 			«white('\t\t')»this is not indented«SEMANTIC_LINE_BREAK.$(NL)

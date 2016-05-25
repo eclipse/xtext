@@ -77,6 +77,13 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
   }
   
   @Override
+  public void testCurlyBracesBlock_10() {
+    this.configureByText("/*{*/ foo|");
+    this.myFixture.type("\n");
+    this.assertState("/*{*/ foo\n\t|");
+  }
+  
+  @Override
   public void testCurlyBracesBlock_11() {
     this.configureByText("{|}");
     this.myFixture.type("\n");
@@ -130,13 +137,6 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
     this.configureByText("  // test|\n");
     this.myFixture.type("\n");
     this.assertState("  // test\n|\n");
-  }
-  
-  @Override
-  public void testCurlyBracesBlock_10() {
-    this.configureByText("/*{*/ foo|");
-    this.myFixture.type("\n");
-    this.assertState("/*{*/ foo\n\t|");
   }
   
   @Override
@@ -229,5 +229,68 @@ public class AutoEditInMethodBodyTest extends AutoEditTest {
     this.configureByText("[{|}]");
     this.myFixture.type("\n");
     this.assertState("[{\n\t\t|\n}]");
+  }
+  
+  @Override
+  public void testBug453205_01() {
+    this.configureByText((("/*|\n" + "* comment\n") + "*/"));
+    this.myFixture.type("\n");
+    this.assertState(((("/*\n" + "|\n */\n") + "* comment\n") + "*/"));
+  }
+  
+  @Override
+  public void testBug453205_02() {
+    this.configureByText((("/**********|\n" + " * \"Fancy\"\n") + "**********/"));
+    this.myFixture.type("\n");
+    this.assertState(((("/**********\n" + "|\n */\n") + " * \"Fancy\"\n") + "**********/"));
+  }
+  
+  @Override
+  public void testMLComments_08() {
+    this.configureByText("  /* foo | */");
+    this.myFixture.type("\n");
+    this.assertState("  /* foo \n   |*/\n    */");
+  }
+  
+  @Override
+  public void testMLComments_09() {
+    this.configureByText("/* foo |*/");
+    this.myFixture.type("\n");
+    this.assertState("/* foo \n|*/\n */");
+  }
+  
+  @Override
+  public void testMLComments_10() {
+    this.configureByText("   /* foo |*/");
+    this.myFixture.type("\n");
+    this.assertState("   /* foo \n   |*/\n    */");
+  }
+  
+  @Override
+  public void testMLComments_13() {
+    this.configureByText("/* foo| */");
+    this.myFixture.type("\n");
+    this.assertState("/* foo\n |*/\n  */");
+  }
+  
+  @Override
+  public void testMLComments_14() {
+    this.configureByText("/* foo|*/");
+    this.myFixture.type("\n");
+    this.assertState("/* foo\n|*/\n */");
+  }
+  
+  @Override
+  public void testMLComments_15() {
+    this.configureByText("  /* foo| */");
+    this.myFixture.type("\n");
+    this.assertState("  /* foo\n   |*/\n    */");
+  }
+  
+  @Override
+  public void testMLComments_16() {
+    this.configureByText("  /* foo|*/");
+    this.myFixture.type("\n");
+    this.assertState("  /* foo\n  |*/\n   */");
   }
 }

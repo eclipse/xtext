@@ -376,7 +376,7 @@ abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEditTest {
 	def void testCurlyBracesBlock_10() {
 		configureByText('/*{*/ foo|')
 		myFixture.type('\n')
-		assertState('/*{*/ foo\n|')
+		assertState('/*{*/ foo\n|\n */')
 	}
 
 	def void testCurlyBracesBlock_11() {

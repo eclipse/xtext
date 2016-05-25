@@ -5,7 +5,7 @@
 	<version>2.10.0-SNAPSHOT</version>
 	<vendor url="http://xtext.org" logo="/icons/dsl-package_16.png">Eclipse Xtext</vendor>
 	<category>Custom Languages</category>
-	<idea-version since-build="131"/>
+	<idea-version since-build="145"/>
 	<depends>JUnit</depends>
 
 

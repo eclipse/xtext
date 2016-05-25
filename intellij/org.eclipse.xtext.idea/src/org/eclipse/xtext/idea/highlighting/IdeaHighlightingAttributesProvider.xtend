@@ -44,7 +44,7 @@ class IdeaHighlightingAttributesProvider {
 			attributesDescriptors = newArrayList
 			name2highlightInfoType = newHashMap
 			xtextStyle2xtextStyleRedirectMap = newHashMap
-			highlightingConfiguration.configure( new IHighlightingStyleAcceptor() {
+			highlightingConfiguration.configure(new IHighlightingStyleAcceptor() {
 				
 				override addStyle(String xtextStyleId, String displayName, TextAttributesKey fallbackKey) {
 					addHighlightingConfiguration(xtextStyleId, displayName, fallbackKey).attributesKey

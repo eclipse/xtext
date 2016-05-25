@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.idea.highlighting;
 
 import com.intellij.ide.highlighter.JavaHighlightingColors;
-import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
@@ -31,11 +30,25 @@ public class XbaseHighlightingConfiguration extends DefaultHighlightingConfigura
     it.addStyle(HighlightingStyles.DEFAULT_ID, "Default", HighlighterColors.TEXT);
     it.addStyle(HighlightingStyles.INVALID_TOKEN_ID, "Error", CodeInsightColors.ERRORS_ATTRIBUTES);
     it.addStyle(HighlightingStyles.TASK_ID, "Todo", CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
-    it.addStyle(XbaseHighlightingStyles.STATIC_METHOD_INVOCATION, "Static method", CodeInsightColors.STATIC_METHOD_ATTRIBUTES);
-    it.addStyle(XbaseHighlightingStyles.STATIC_FIELD, "Static field", CodeInsightColors.STATIC_FIELD_ATTRIBUTES);
-    it.addStyle(XbaseHighlightingStyles.FIELD, "Field", DefaultLanguageHighlighterColors.INSTANCE_FIELD);
-    it.addStyle(XbaseHighlightingStyles.ANNOTATION, "Annotation", CodeInsightColors.ANNOTATION_NAME_ATTRIBUTES);
-    it.addStyle(XbaseHighlightingStyles.EXTENSION_METHOD_INVOCATION, "Extension method", CodeInsightColors.LOCAL_VARIABLE_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.INTERFACE, "Interfaces", JavaHighlightingColors.INTERFACE_NAME_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.ENUM, "Enums", JavaHighlightingColors.ENUM_NAME_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.CLASS, "Classes", JavaHighlightingColors.CLASS_NAME_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.ABSTRACT_CLASS, "Abstract classes", JavaHighlightingColors.ABSTRACT_CLASS_NAME_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.ANNOTATION, "Annotations", JavaHighlightingColors.ANNOTATION_NAME_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.FIELD, "Fields", JavaHighlightingColors.INSTANCE_FIELD_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.STATIC_FIELD, "Static fields", JavaHighlightingColors.STATIC_FIELD_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.STATIC_FINAL_FIELD, "Static final fields", JavaHighlightingColors.STATIC_FINAL_FIELD_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.METHOD, "Methods", JavaHighlightingColors.METHOD_DECLARATION_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.STATIC_METHOD_INVOCATION, "Static method invocations", JavaHighlightingColors.STATIC_METHOD_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.ABSTRACT_METHOD_INVOCATION, "Abstract method invocations", JavaHighlightingColors.ABSTRACT_METHOD_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.EXTENSION_METHOD_INVOCATION, "Extension method invocations", JavaHighlightingColors.LOCAL_VARIABLE_ATTRIBUTES);
     it.addStyle(XbaseHighlightingStyles.DEPRECATED_MEMBERS, "Deprecated members", CodeInsightColors.DEPRECATED_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.LOCAL_VARIABLE, "Local variables", JavaHighlightingColors.LOCAL_VARIABLE_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION, "Local variable declarations", JavaHighlightingColors.LOCAL_VARIABLE_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE, "Local final variables", JavaHighlightingColors.LOCAL_VARIABLE_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION, "Local final variable declarations", JavaHighlightingColors.LOCAL_VARIABLE_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.PARAMETER_VARIABLE, "Parameter variables", JavaHighlightingColors.PARAMETER_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.TYPE_VARIABLE, "Type variables", JavaHighlightingColors.TYPE_PARAMETER_NAME_ATTRIBUTES);
+    it.addStyle(XbaseHighlightingStyles.TYPE_ARGUMENT, "Type arguments", HighlighterColors.TEXT);
   }
 }
