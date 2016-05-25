@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.xtend.lib,
  org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.junit4,
  org.eclipse.jdt.core,
- org.eclipse.emf.codegen;bundle-version="2.10.1",
+ org.eclipse.emf.codegen;bundle-version="2.10.0",
  org.objectweb.asm;bundle-version="5.0.1";resolution:=optional
 Export-Package: extract,
  i18n,
