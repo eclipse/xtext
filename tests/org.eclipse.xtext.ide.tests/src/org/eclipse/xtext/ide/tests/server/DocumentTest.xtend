@@ -9,7 +9,7 @@ package org.eclipse.xtext.ide.tests.server
 
 import io.typefox.lsapi.PositionImpl
 import io.typefox.lsapi.RangeImpl
-import io.typefox.lsapi.TextDocumentContentChangeEventImpl
+import io.typefox.lsapi.TextEditImpl
 import org.eclipse.xtext.ide.server.Document
 import org.junit.Test
 
@@ -97,12 +97,12 @@ class DocumentTest {
     }
     
     private def change(PositionImpl startPos, PositionImpl endPos, String newText) {
-        new TextDocumentContentChangeEventImpl => [
+        new TextEditImpl => [
               range = new RangeImpl => [
                   start = startPos
                   end = endPos
               ]
-              text = newText
+              it.newText = newText
             ]
     }
     

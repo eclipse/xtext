@@ -8,9 +8,8 @@
 package org.eclipse.xtext.ide.server
 
 import io.typefox.lsapi.Position
+import io.typefox.lsapi.TextEdit
 import org.eclipse.xtend.lib.annotations.Data
-import java.util.List
-import io.typefox.lsapi.TextDocumentContentChangeEvent
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -43,12 +42,12 @@ import io.typefox.lsapi.TextDocumentContentChangeEvent
         throw new IndexOutOfBoundsException(position.toString + " text was : "+contents)
     }
     
-    def Document applyChanges(List<? extends TextDocumentContentChangeEvent> changes) {
+    def Document applyChanges(Iterable<? extends TextEdit> changes) {
         var newContent = contents
         for (change : changes) {
             val start = getOffSet(change.range.start)
             val end = getOffSet(change.range.end)
-            newContent = newContent.substring(0, start) + change.text + newContent.substring(end)
+            newContent = newContent.substring(0, start) + change.newText + newContent.substring(end)
         }
         return new Document(version + 1, newContent)
     }

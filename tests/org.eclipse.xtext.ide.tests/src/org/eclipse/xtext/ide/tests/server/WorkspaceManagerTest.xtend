@@ -9,63 +9,81 @@ package org.eclipse.xtext.ide.tests.server
 
 import com.google.inject.Guice
 import com.google.inject.Inject
-import io.typefox.lsapi.Diagnostic
-import io.typefox.lsapi.NotificationCallback
-import io.typefox.lsapi.PublishDiagnosticsParams
 import java.io.File
 import java.io.FileWriter
 import java.util.List
 import java.util.Map
-import org.eclipse.xtext.ide.server.LanguageServerImpl
+import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.ide.server.ServerModule
+import org.eclipse.xtext.ide.server.WorkspaceManager
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetup
 import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.Files
+import org.eclipse.xtext.validation.Issue
 import org.junit.Before
+import org.junit.Test
+import org.junit.Assert
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnosticsParams> {
-    
+class WorkspaceManagerTest {
+
+    @Test def void testDoRead() {
+        val path = 'MyType1.testlang' -> '''
+            type Test {
+                string foo
+            }
+        '''
+        
+        workspaceManger.doBuild(#[path], emptyList)
+        
+        val String inMemContents = '''
+            type Test {
+                Test foo
+            }
+        '''
+        
+        workspaceManger.didOpen(path, 1, inMemContents)
+        
+        Assert.assertEquals(inMemContents, workspaceManger.doRead(path, [$0.contents]))
+    }
+
+    @Inject protected WorkspaceManager workspaceManger
+
     @Before
     def void setup() {
         val injector = Guice.createInjector(new ServerModule())
         injector.injectMembers(this)
         // register notification callbacks
-        languageServer.getTextDocumentService.onPublishDiagnostics(this)
-        
         // create workingdir
         root = new File("./test-data/test-project")
         if (!root.mkdirs) {
             Files.cleanFolder(root, null, true, false)
         }
         root.deleteOnExit
+        workspaceManger.initialize(URI.createFileURI(root.absolutePath), [diagnostics.put($0, $1.toList)])
     }
-    
-    @Inject protected LanguageServerImpl languageServer 
-    protected Map<String, List<? extends Diagnostic>> diagnostics = newHashMap()
-    
+
+    protected Map<URI, List<Issue>> diagnostics = newHashMap()
     protected File root
-    
-    def String ->(String path, CharSequence contents) {
+
+    def URI ->(String path, CharSequence contents) {
         val file = new File(root, path)
         file.parentFile.mkdirs
         file.createNewFile
         new FileWriter(file) => [
-          write(contents.toString)
-          close  
+            write(contents.toString)
+            close
         ]
-        return file.absolutePath.substring(root.absolutePath.length)
+        return URI.createFileURI(file.absolutePath)
     }
-    
-    override call(PublishDiagnosticsParams t) {
-        diagnostics.put(t.uri, t.diagnostics)
-    }
-    
+
     @Inject def voidRegisterTestLanguage(IResourceServiceProvider.Registry registry) {
         val injector = new TestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration
-        registry.extensionToFactoryMap.put(injector.getInstance(FileExtensionProvider).primaryFileExtension, injector.getInstance(IResourceServiceProvider))   
+        registry.extensionToFactoryMap.put(injector.getInstance(FileExtensionProvider).primaryFileExtension,
+            injector.getInstance(IResourceServiceProvider))
     }
+
 }
