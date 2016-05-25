@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.util.IFileSystemScanner
 
 /**
  * @author Sven Efftinge - Initial contribution and API

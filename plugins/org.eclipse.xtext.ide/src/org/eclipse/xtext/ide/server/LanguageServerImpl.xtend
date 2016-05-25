@@ -33,7 +33,6 @@ import io.typefox.lsapi.InitializeResultImpl
 import io.typefox.lsapi.LanguageServer
 import io.typefox.lsapi.MessageParams
 import io.typefox.lsapi.NotificationCallback
-import io.typefox.lsapi.PositionImpl
 import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.PublishDiagnosticsParamsImpl
 import io.typefox.lsapi.RangeImpl
@@ -43,7 +42,6 @@ import io.typefox.lsapi.ServerCapabilitiesImpl
 import io.typefox.lsapi.ShowMessageRequestParams
 import io.typefox.lsapi.TextDocumentPositionParams
 import io.typefox.lsapi.TextDocumentService
-import io.typefox.lsapi.TextEditImpl
 import io.typefox.lsapi.WindowService
 import io.typefox.lsapi.WorkspaceService
 import io.typefox.lsapi.WorkspaceSymbolParams
@@ -51,6 +49,8 @@ import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.validation.Issue
+
+import static io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * 
@@ -101,10 +101,7 @@ import org.eclipse.xtext.validation.Issue
     
     override didChange(DidChangeTextDocumentParams params) {
         workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
-            val edit = new TextEditImpl 
-            edit.range = event.range as RangeImpl
-            edit.newText = event.text
-            return edit
+            newTextEdit(event.range as RangeImpl, event.text)
         ])
     }
     
@@ -166,16 +163,10 @@ import org.eclipse.xtext.validation.Issue
                 default : Diagnostic.SEVERITY_HINT
             }
             message = issue.message
-            range = new RangeImpl => [
-                start = new PositionImpl => [
-                    line = issue.lineNumber
-                    character = issue.column
-                ]
-                end = new PositionImpl => [
-                    line = issue.lineNumber
-                    character = issue.column + issue.length
-                ]
-            ]
+            range = newRange(
+                 newPosition(issue.lineNumber,issue.column),
+                 newPosition(issue.lineNumber,issue.column + issue.length)
+            )
         ]
     }
     
