@@ -26,6 +26,7 @@ import io.typefox.lsapi.DocumentFormattingParams
 import io.typefox.lsapi.DocumentOnTypeFormattingParams
 import io.typefox.lsapi.DocumentRangeFormattingParams
 import io.typefox.lsapi.DocumentSymbolParams
+import io.typefox.lsapi.FileEvent
 import io.typefox.lsapi.InitializeParams
 import io.typefox.lsapi.InitializeResult
 import io.typefox.lsapi.InitializeResultImpl
@@ -42,6 +43,7 @@ import io.typefox.lsapi.ServerCapabilitiesImpl
 import io.typefox.lsapi.ShowMessageRequestParams
 import io.typefox.lsapi.TextDocumentPositionParams
 import io.typefox.lsapi.TextDocumentService
+import io.typefox.lsapi.TextEditImpl
 import io.typefox.lsapi.WindowService
 import io.typefox.lsapi.WorkspaceService
 import io.typefox.lsapi.WorkspaceSymbolParams
@@ -59,9 +61,11 @@ import org.eclipse.xtext.validation.Issue
     InitializeParams params
     @Inject Provider<WorkspaceManager> workspaceManagerProvider
     WorkspaceManager workspaceManager
+    String rootPath
     
     override InitializeResult initialize(InitializeParams params) {
         this.params = params
+        this.rootPath = URI.createFileURI(params.rootPath).toString
         workspaceManager = workspaceManagerProvider.get
         workspaceManager.initialize(URI.createFileURI(params.rootPath), [ this.publishDiagnostics($0, $1) ])
         return new InitializeResultImpl => [
@@ -92,25 +96,47 @@ import org.eclipse.xtext.validation.Issue
     
     // file/content change events
     override didOpen(DidOpenTextDocumentParams params) {
-        workspaceManager.didOpen(params)
+        workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text)
     }
     
     override didChange(DidChangeTextDocumentParams params) {
-        workspaceManager.didChange(params)
+        workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
+            val edit = new TextEditImpl 
+            edit.range = event.range as RangeImpl
+            edit.newText = event.text
+            return edit
+        ])
     }
     
     override didClose(DidCloseTextDocumentParams params) {
-        workspaceManager.didClose(params)
+        workspaceManager.didClose(params.textDocument.uri.toUri)
     }
     
     override didSave(DidSaveTextDocumentParams params) {
-        workspaceManager.didSave(params)
+        workspaceManager.didSave(params.textDocument.uri.toUri)
     }
     
     override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {
-        workspaceManager.didChangeWatchedFiles(params)
+        val dirtyFiles = newArrayList
+        val deletedFiles = newArrayList
+        for (fileEvent : params.changes) {
+            if (fileEvent.type === FileEvent.TYPE_DELETED) {
+                deletedFiles += toUri(fileEvent.uri)
+            } else {
+                dirtyFiles += toUri(fileEvent.uri)
+            }
+        }
+        workspaceManager.doBuild(dirtyFiles, deletedFiles)
     }
     // end file/content change events
+    
+    def URI toUri(String path) {
+        URI.createURI(rootPath + path)
+    }
+
+    def toPath(URI uri) {
+        uri.toString.substring(rootPath.length)
+    }
     
     // validation stuff
     
@@ -122,7 +148,7 @@ import org.eclipse.xtext.validation.Issue
     
     private def void publishDiagnostics(URI uri, Iterable<? extends Issue> issues) {
         val diagnostics = new PublishDiagnosticsParamsImpl => [
-            it.uri = workspaceManager.toPath(uri)
+            it.uri = toPath(uri)
             it.diagnostics = issues.map[toDiagnostic].toList
         ]
         for (diagnosticsCallback : diagnosticListeners) {

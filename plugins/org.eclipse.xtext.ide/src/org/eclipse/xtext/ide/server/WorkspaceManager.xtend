@@ -9,12 +9,7 @@ package org.eclipse.xtext.ide.server
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import io.typefox.lsapi.DidChangeTextDocumentParams
-import io.typefox.lsapi.DidChangeWatchedFilesParams
-import io.typefox.lsapi.DidCloseTextDocumentParams
-import io.typefox.lsapi.DidOpenTextDocumentParams
-import io.typefox.lsapi.DidSaveTextDocumentParams
-import io.typefox.lsapi.FileEvent
+import io.typefox.lsapi.TextEdit
 import java.util.ArrayList
 import java.util.List
 import java.util.Map
@@ -60,19 +55,6 @@ class WorkspaceManager {
         fullIndex.put("DEFAULT", indexResult.indexState.resourceDescriptions)
     }
 
-    def didChangeWatchedFiles(DidChangeWatchedFilesParams fileChanges) {
-        val dirtyFiles = newArrayList
-        val deletedFiles = newArrayList
-        for (fileEvent : fileChanges.changes) {
-            if (fileEvent.type === FileEvent.TYPE_DELETED) {
-                deletedFiles += toUri(fileEvent.uri)
-            } else {
-                dirtyFiles += toUri(fileEvent.uri)
-            }
-        }
-        doBuild(dirtyFiles, deletedFiles)
-    }
-
     def void doBuild(List<URI> dirtyFiles, List<URI> deletedFiles) {
         //TODO sort projects by dependency
         val allDirty = new ArrayList(dirtyFiles)
@@ -100,38 +82,27 @@ class WorkspaceManager {
         return baseDir2ProjectManager.get(projectBaseDir)
     }
 
-    def URI toUri(String path) {
-        URI.createURI(baseDir.toString + path)
-    }
-
-    def toPath(URI uri) {
-        uri.toString.substring(baseDir.toString.length)
-    }
-
-    def didChange(DidChangeTextDocumentParams changeEvent) {
-        val uri = toUri(changeEvent.textDocument.uri)
+    def didChange(URI uri, int version, Iterable<TextEdit> changes) {
         val contents = openDocuments.get(uri)
-        openDocuments.put(uri, contents.applyChanges(changeEvent.contentChanges))
+        openDocuments.put(uri, contents.applyChanges(changes))
         doBuild(#[uri], newArrayList)
     }
     
-    def didOpen(DidOpenTextDocumentParams changeEvent) {
-        val uri = toUri(changeEvent.textDocument.uri)
-        openDocuments.put(uri, new Document(changeEvent.textDocument.version, changeEvent.textDocument.text))
+    def didOpen(URI uri, int version, String contents) {
+        openDocuments.put(uri, new Document(version, contents))
         doBuild(#[uri], newArrayList)
     }
     
-    def didClose(DidCloseTextDocumentParams changeEvent) {
-        val uri = toUri(changeEvent.textDocument.uri)
+    def didClose(URI uri) {
         openDocuments.remove(uri)
         doBuild(#[uri], newArrayList)    
     }
     
-    def didSave(DidSaveTextDocumentParams changeEvent) {
+    def didSave(URI uri) {
         // do nothing for now
     }
     
-    def <T> void doRead(URI uri, (Document, XtextResource)=>T work) {
+    def <T> T doRead(URI uri, (Document, XtextResource)=>T work) {
         val projectMnr = getProjectManager(uri)
         val doc = openDocuments.get(uri)
         work.apply(doc, projectMnr.getResource(uri) as XtextResource)

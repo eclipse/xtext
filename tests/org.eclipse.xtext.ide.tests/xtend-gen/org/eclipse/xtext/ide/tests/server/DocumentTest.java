@@ -9,8 +9,8 @@ package org.eclipse.xtext.ide.tests.server;
 
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.RangeImpl;
-import io.typefox.lsapi.TextDocumentContentChangeEvent;
-import io.typefox.lsapi.TextDocumentContentChangeEventImpl;
+import io.typefox.lsapi.TextEdit;
+import io.typefox.lsapi.TextEditImpl;
 import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.Document;
@@ -122,9 +122,9 @@ public class DocumentTest {
         String _string = _builder.toString();
         PositionImpl _position = DocumentTest.this.position(1, 0);
         PositionImpl _position_1 = DocumentTest.this.position(2, 0);
-        TextDocumentContentChangeEventImpl _change = DocumentTest.this.change(_position, _position_1, "");
+        TextEditImpl _change = DocumentTest.this.change(_position, _position_1, "");
         Document _applyChanges = it.applyChanges(
-          Collections.<TextDocumentContentChangeEvent>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEvent>newArrayList(_change)));
+          Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change)));
         String _contents = _applyChanges.getContents();
         Assert.assertEquals(_string, _contents);
       }
@@ -155,9 +155,9 @@ public class DocumentTest {
         String _string = _builder.toString();
         PositionImpl _position = DocumentTest.this.position(1, 1);
         PositionImpl _position_1 = DocumentTest.this.position(1, 3);
-        TextDocumentContentChangeEventImpl _change = DocumentTest.this.change(_position, _position_1, "uture");
+        TextEditImpl _change = DocumentTest.this.change(_position, _position_1, "uture");
         Document _applyChanges = it.applyChanges(
-          Collections.<TextDocumentContentChangeEvent>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEvent>newArrayList(_change)));
+          Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change)));
         String _contents = _applyChanges.getContents();
         Assert.assertEquals(_string, _contents);
       }
@@ -179,9 +179,9 @@ public class DocumentTest {
       public void apply(final Document it) {
         PositionImpl _position = DocumentTest.this.position(0, 0);
         PositionImpl _position_1 = DocumentTest.this.position(2, 3);
-        TextDocumentContentChangeEventImpl _change = DocumentTest.this.change(_position, _position_1, "");
+        TextEditImpl _change = DocumentTest.this.change(_position, _position_1, "");
         Document _applyChanges = it.applyChanges(
-          Collections.<TextDocumentContentChangeEvent>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEvent>newArrayList(_change)));
+          Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change)));
         String _contents = _applyChanges.getContents();
         Assert.assertEquals("", _contents);
       }
@@ -189,11 +189,11 @@ public class DocumentTest {
     ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
   }
   
-  private TextDocumentContentChangeEventImpl change(final PositionImpl startPos, final PositionImpl endPos, final String newText) {
-    TextDocumentContentChangeEventImpl _textDocumentContentChangeEventImpl = new TextDocumentContentChangeEventImpl();
-    final Procedure1<TextDocumentContentChangeEventImpl> _function = new Procedure1<TextDocumentContentChangeEventImpl>() {
+  private TextEditImpl change(final PositionImpl startPos, final PositionImpl endPos, final String newText) {
+    TextEditImpl _textEditImpl = new TextEditImpl();
+    final Procedure1<TextEditImpl> _function = new Procedure1<TextEditImpl>() {
       @Override
-      public void apply(final TextDocumentContentChangeEventImpl it) {
+      public void apply(final TextEditImpl it) {
         RangeImpl _rangeImpl = new RangeImpl();
         final Procedure1<RangeImpl> _function = new Procedure1<RangeImpl>() {
           @Override
@@ -204,10 +204,10 @@ public class DocumentTest {
         };
         RangeImpl _doubleArrow = ObjectExtensions.<RangeImpl>operator_doubleArrow(_rangeImpl, _function);
         it.setRange(_doubleArrow);
-        it.setText(newText);
+        it.setNewText(newText);
       }
     };
-    return ObjectExtensions.<TextDocumentContentChangeEventImpl>operator_doubleArrow(_textDocumentContentChangeEventImpl, _function);
+    return ObjectExtensions.<TextEditImpl>operator_doubleArrow(_textEditImpl, _function);
   }
   
   private PositionImpl position(final int l, final int c) {

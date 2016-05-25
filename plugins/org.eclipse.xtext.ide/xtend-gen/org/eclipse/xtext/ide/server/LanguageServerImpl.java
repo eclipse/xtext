@@ -28,6 +28,7 @@ import io.typefox.lsapi.DocumentHighlight;
 import io.typefox.lsapi.DocumentOnTypeFormattingParams;
 import io.typefox.lsapi.DocumentRangeFormattingParams;
 import io.typefox.lsapi.DocumentSymbolParams;
+import io.typefox.lsapi.FileEvent;
 import io.typefox.lsapi.Hover;
 import io.typefox.lsapi.InitializeParams;
 import io.typefox.lsapi.InitializeResult;
@@ -39,6 +40,7 @@ import io.typefox.lsapi.NotificationCallback;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.PublishDiagnosticsParamsImpl;
+import io.typefox.lsapi.Range;
 import io.typefox.lsapi.RangeImpl;
 import io.typefox.lsapi.ReferenceParams;
 import io.typefox.lsapi.RenameParams;
@@ -46,13 +48,19 @@ import io.typefox.lsapi.ServerCapabilitiesImpl;
 import io.typefox.lsapi.ShowMessageRequestParams;
 import io.typefox.lsapi.SignatureHelp;
 import io.typefox.lsapi.SymbolInformation;
+import io.typefox.lsapi.TextDocumentContentChangeEvent;
+import io.typefox.lsapi.TextDocumentIdentifier;
+import io.typefox.lsapi.TextDocumentItem;
 import io.typefox.lsapi.TextDocumentPositionParams;
 import io.typefox.lsapi.TextDocumentService;
 import io.typefox.lsapi.TextEdit;
+import io.typefox.lsapi.TextEditImpl;
+import io.typefox.lsapi.VersionedTextDocumentIdentifier;
 import io.typefox.lsapi.WindowService;
 import io.typefox.lsapi.WorkspaceEdit;
 import io.typefox.lsapi.WorkspaceService;
 import io.typefox.lsapi.WorkspaceSymbolParams;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
@@ -63,6 +71,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
@@ -81,20 +90,26 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   private WorkspaceManager workspaceManager;
   
+  private String rootPath;
+  
   @Override
   public InitializeResult initialize(final InitializeParams params) {
     this.params = params;
-    WorkspaceManager _get = this.workspaceManagerProvider.get();
-    this.workspaceManager = _get;
     String _rootPath = params.getRootPath();
     URI _createFileURI = URI.createFileURI(_rootPath);
+    String _string = _createFileURI.toString();
+    this.rootPath = _string;
+    WorkspaceManager _get = this.workspaceManagerProvider.get();
+    this.workspaceManager = _get;
+    String _rootPath_1 = params.getRootPath();
+    URI _createFileURI_1 = URI.createFileURI(_rootPath_1);
     final Procedure2<URI, Iterable<Issue>> _function = new Procedure2<URI, Iterable<Issue>>() {
       @Override
       public void apply(final URI $0, final Iterable<Issue> $1) {
         LanguageServerImpl.this.publishDiagnostics($0, $1);
       }
     };
-    this.workspaceManager.initialize(_createFileURI, _function);
+    this.workspaceManager.initialize(_createFileURI_1, _function);
     InitializeResultImpl _initializeResultImpl = new InitializeResultImpl();
     final Procedure1<InitializeResultImpl> _function_1 = new Procedure1<InitializeResultImpl>() {
       @Override
@@ -147,27 +162,84 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public void didOpen(final DidOpenTextDocumentParams params) {
-    this.workspaceManager.didOpen(params);
+    TextDocumentItem _textDocument = params.getTextDocument();
+    String _uri = _textDocument.getUri();
+    URI _uri_1 = this.toUri(_uri);
+    TextDocumentItem _textDocument_1 = params.getTextDocument();
+    int _version = _textDocument_1.getVersion();
+    TextDocumentItem _textDocument_2 = params.getTextDocument();
+    String _text = _textDocument_2.getText();
+    this.workspaceManager.didOpen(_uri_1, _version, _text);
   }
   
   @Override
   public void didChange(final DidChangeTextDocumentParams params) {
-    this.workspaceManager.didChange(params);
+    VersionedTextDocumentIdentifier _textDocument = params.getTextDocument();
+    String _uri = _textDocument.getUri();
+    URI _uri_1 = this.toUri(_uri);
+    VersionedTextDocumentIdentifier _textDocument_1 = params.getTextDocument();
+    int _version = _textDocument_1.getVersion();
+    List<? extends TextDocumentContentChangeEvent> _contentChanges = params.getContentChanges();
+    final Function1<TextDocumentContentChangeEvent, TextEdit> _function = new Function1<TextDocumentContentChangeEvent, TextEdit>() {
+      @Override
+      public TextEdit apply(final TextDocumentContentChangeEvent event) {
+        final TextEditImpl edit = new TextEditImpl();
+        Range _range = event.getRange();
+        edit.setRange(((RangeImpl) _range));
+        String _text = event.getText();
+        edit.setNewText(_text);
+        return edit;
+      }
+    };
+    List<TextEdit> _map = ListExtensions.map(_contentChanges, _function);
+    this.workspaceManager.didChange(_uri_1, _version, _map);
   }
   
   @Override
   public void didClose(final DidCloseTextDocumentParams params) {
-    this.workspaceManager.didClose(params);
+    TextDocumentIdentifier _textDocument = params.getTextDocument();
+    String _uri = _textDocument.getUri();
+    URI _uri_1 = this.toUri(_uri);
+    this.workspaceManager.didClose(_uri_1);
   }
   
   @Override
   public void didSave(final DidSaveTextDocumentParams params) {
-    this.workspaceManager.didSave(params);
+    TextDocumentIdentifier _textDocument = params.getTextDocument();
+    String _uri = _textDocument.getUri();
+    URI _uri_1 = this.toUri(_uri);
+    this.workspaceManager.didSave(_uri_1);
   }
   
   @Override
   public void didChangeWatchedFiles(final DidChangeWatchedFilesParams params) {
-    this.workspaceManager.didChangeWatchedFiles(params);
+    final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
+    final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
+    List<? extends FileEvent> _changes = params.getChanges();
+    for (final FileEvent fileEvent : _changes) {
+      int _type = fileEvent.getType();
+      boolean _tripleEquals = (_type == FileEvent.TYPE_DELETED);
+      if (_tripleEquals) {
+        String _uri = fileEvent.getUri();
+        URI _uri_1 = this.toUri(_uri);
+        deletedFiles.add(_uri_1);
+      } else {
+        String _uri_2 = fileEvent.getUri();
+        URI _uri_3 = this.toUri(_uri_2);
+        dirtyFiles.add(_uri_3);
+      }
+    }
+    this.workspaceManager.doBuild(dirtyFiles, deletedFiles);
+  }
+  
+  public URI toUri(final String path) {
+    return URI.createURI((this.rootPath + path));
+  }
+  
+  public String toPath(final URI uri) {
+    String _string = uri.toString();
+    int _length = this.rootPath.length();
+    return _string.substring(_length);
   }
   
   private List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners = CollectionLiterals.<NotificationCallback<PublishDiagnosticsParams>>newArrayList();
@@ -182,7 +254,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     final Procedure1<PublishDiagnosticsParamsImpl> _function = new Procedure1<PublishDiagnosticsParamsImpl>() {
       @Override
       public void apply(final PublishDiagnosticsParamsImpl it) {
-        String _path = LanguageServerImpl.this.workspaceManager.toPath(uri);
+        String _path = LanguageServerImpl.this.toPath(uri);
         it.setUri(_path);
         final Function1<Issue, DiagnosticImpl> _function = new Function1<Issue, DiagnosticImpl>() {
           @Override
@@ -395,6 +467,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   public void setWorkspaceManager(final WorkspaceManager workspaceManager) {
     this.workspaceManager = workspaceManager;
+  }
+  
+  @Pure
+  public String getRootPath() {
+    return this.rootPath;
+  }
+  
+  public void setRootPath(final String rootPath) {
+    this.rootPath = rootPath;
   }
   
   @Pure

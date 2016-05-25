@@ -9,8 +9,7 @@ package org.eclipse.xtext.ide.server;
 
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.Range;
-import io.typefox.lsapi.TextDocumentContentChangeEvent;
-import java.util.List;
+import io.typefox.lsapi.TextEdit;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -53,9 +52,9 @@ public class Document {
     throw new IndexOutOfBoundsException(_plus_1);
   }
   
-  public Document applyChanges(final List<? extends TextDocumentContentChangeEvent> changes) {
+  public Document applyChanges(final Iterable<? extends TextEdit> changes) {
     String newContent = this.contents;
-    for (final TextDocumentContentChangeEvent change : changes) {
+    for (final TextEdit change : changes) {
       {
         Range _range = change.getRange();
         Position _start = _range.getStart();
@@ -64,8 +63,8 @@ public class Document {
         Position _end = _range_1.getEnd();
         final int end = this.getOffSet(_end);
         String _substring = newContent.substring(0, start);
-        String _text = change.getText();
-        String _plus = (_substring + _text);
+        String _newText = change.getNewText();
+        String _plus = (_substring + _newText);
         String _substring_1 = newContent.substring(end);
         String _plus_1 = (_plus + _substring_1);
         newContent = _plus_1;

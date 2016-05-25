@@ -9,16 +9,7 @@ package org.eclipse.xtext.ide.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import io.typefox.lsapi.DidChangeTextDocumentParams;
-import io.typefox.lsapi.DidChangeWatchedFilesParams;
-import io.typefox.lsapi.DidCloseTextDocumentParams;
-import io.typefox.lsapi.DidOpenTextDocumentParams;
-import io.typefox.lsapi.DidSaveTextDocumentParams;
-import io.typefox.lsapi.FileEvent;
-import io.typefox.lsapi.TextDocumentContentChangeEvent;
-import io.typefox.lsapi.TextDocumentIdentifier;
-import io.typefox.lsapi.TextDocumentItem;
-import io.typefox.lsapi.VersionedTextDocumentIdentifier;
+import io.typefox.lsapi.TextEdit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -96,26 +87,6 @@ public class WorkspaceManager {
     this.fullIndex.put("DEFAULT", _resourceDescriptions);
   }
   
-  public void didChangeWatchedFiles(final DidChangeWatchedFilesParams fileChanges) {
-    final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
-    final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
-    List<? extends FileEvent> _changes = fileChanges.getChanges();
-    for (final FileEvent fileEvent : _changes) {
-      int _type = fileEvent.getType();
-      boolean _tripleEquals = (_type == FileEvent.TYPE_DELETED);
-      if (_tripleEquals) {
-        String _uri = fileEvent.getUri();
-        URI _uri_1 = this.toUri(_uri);
-        deletedFiles.add(_uri_1);
-      } else {
-        String _uri_2 = fileEvent.getUri();
-        URI _uri_3 = this.toUri(_uri_2);
-        dirtyFiles.add(_uri_3);
-      }
-    }
-    this.doBuild(dirtyFiles, deletedFiles);
-  }
-  
   public void doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles) {
     final ArrayList<URI> allDirty = new ArrayList<URI>(dirtyFiles);
     Set<Map.Entry<URI, ProjectManager>> _entrySet = this.baseDir2ProjectManager.entrySet();
@@ -185,63 +156,40 @@ public class WorkspaceManager {
     return this.baseDir2ProjectManager.get(projectBaseDir);
   }
   
-  public URI toUri(final String path) {
-    String _string = this.baseDir.toString();
-    String _plus = (_string + path);
-    return URI.createURI(_plus);
-  }
-  
-  public String toPath(final URI uri) {
-    String _string = uri.toString();
-    String _string_1 = this.baseDir.toString();
-    int _length = _string_1.length();
-    return _string.substring(_length);
-  }
-  
-  public void didChange(final DidChangeTextDocumentParams changeEvent) {
-    VersionedTextDocumentIdentifier _textDocument = changeEvent.getTextDocument();
-    String _uri = _textDocument.getUri();
-    final URI uri = this.toUri(_uri);
+  public void didChange(final URI uri, final int version, final Iterable<TextEdit> changes) {
     final Document contents = this.openDocuments.get(uri);
-    List<? extends TextDocumentContentChangeEvent> _contentChanges = changeEvent.getContentChanges();
-    Document _applyChanges = contents.applyChanges(_contentChanges);
+    Document _applyChanges = contents.applyChanges(changes);
     this.openDocuments.put(uri, _applyChanges);
     ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
     this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
   }
   
-  public void didOpen(final DidOpenTextDocumentParams changeEvent) {
-    TextDocumentItem _textDocument = changeEvent.getTextDocument();
-    String _uri = _textDocument.getUri();
-    final URI uri = this.toUri(_uri);
-    TextDocumentItem _textDocument_1 = changeEvent.getTextDocument();
-    int _version = _textDocument_1.getVersion();
-    TextDocumentItem _textDocument_2 = changeEvent.getTextDocument();
-    String _text = _textDocument_2.getText();
-    Document _document = new Document(_version, _text);
+  public void didOpen(final URI uri, final int version, final String contents) {
+    Document _document = new Document(version, contents);
     this.openDocuments.put(uri, _document);
     ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
     this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
   }
   
-  public void didClose(final DidCloseTextDocumentParams changeEvent) {
-    TextDocumentIdentifier _textDocument = changeEvent.getTextDocument();
-    String _uri = _textDocument.getUri();
-    final URI uri = this.toUri(_uri);
+  public void didClose(final URI uri) {
     this.openDocuments.remove(uri);
     ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
     this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
   }
   
-  public Object didSave(final DidSaveTextDocumentParams changeEvent) {
+  public Object didSave(final URI uri) {
     return null;
   }
   
-  public <T extends Object> void doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
-    final ProjectManager projectMnr = this.getProjectManager(uri);
-    final Document doc = this.openDocuments.get(uri);
-    Resource _resource = projectMnr.getResource(uri);
-    work.apply(doc, ((XtextResource) _resource));
+  public <T extends Object> T doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
+    T _xblockexpression = null;
+    {
+      final ProjectManager projectMnr = this.getProjectManager(uri);
+      final Document doc = this.openDocuments.get(uri);
+      Resource _resource = projectMnr.getResource(uri);
+      _xblockexpression = work.apply(doc, ((XtextResource) _resource));
+    }
+    return _xblockexpression;
   }
   
   public <T extends Object> void doWrite(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
