@@ -7,9 +7,31 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage
 
+import com.google.inject.Binder
+import com.google.inject.name.Names
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import org.eclipse.xtext.ide.LexerIdeBindings
+import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
+import org.eclipse.xtext.ide.tests.testlanguage.ide.contentassist.antlr.TestLanguageParser
+import org.eclipse.xtext.ide.tests.testlanguage.ide.contentassist.antlr.internal.InternalTestLanguageLexer
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule {
+
+	def void configureExecutorService(Binder binder) {
+		binder.bind(ExecutorService).toInstance(Executors.newCachedThreadPool)
+	}
+
+	def void configureContentAssistLexer(Binder binder) {
+		binder.bind(Lexer).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(InternalTestLanguageLexer)
+	}
+
+	def Class<? extends IContentAssistParser> bindIContentAssistParser() {
+		TestLanguageParser
+	}
+
 }

@@ -105,7 +105,7 @@ class WorkspaceManager {
     def <T> T doRead(URI uri, (Document, XtextResource)=>T work) {
         val projectMnr = getProjectManager(uri)
         val doc = openDocuments.get(uri)
-        work.apply(doc, projectMnr.getResource(uri) as XtextResource)
+        return work.apply(doc, projectMnr.getResource(uri) as XtextResource)
     }
     
     def <T> void doWrite(URI uri, (Document, XtextResource)=>T work) {

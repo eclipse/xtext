@@ -13,6 +13,7 @@ import io.typefox.lsapi.CodeActionParams
 import io.typefox.lsapi.CodeLens
 import io.typefox.lsapi.CodeLensParams
 import io.typefox.lsapi.CompletionItem
+import io.typefox.lsapi.CompletionItemImpl
 import io.typefox.lsapi.CompletionOptionsImpl
 import io.typefox.lsapi.Diagnostic
 import io.typefox.lsapi.DiagnosticImpl
@@ -48,6 +49,9 @@ import io.typefox.lsapi.WorkspaceSymbolParams
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
+import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
 import static io.typefox.lsapi.util.LsapiFactories.*
@@ -62,6 +66,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     @Inject Provider<WorkspaceManager> workspaceManagerProvider
     WorkspaceManager workspaceManager
     String rootPath
+    @Inject extension IResourceServiceProvider.Registry languagesRegistry
     
     override InitializeResult initialize(InitializeParams params) {
         this.params = params
@@ -71,7 +76,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
         return new InitializeResultImpl => [
             capabilities = new ServerCapabilitiesImpl => [
                 completionProvider = new CompletionOptionsImpl => [
-                    resolveProvider = true
+                    resolveProvider = false
                     triggerCharacters = #["."]
                 ]
             ]
@@ -172,6 +177,32 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     
     // end validation stuff
     
+    // completion stuff
+    
+    override completion(TextDocumentPositionParams params) {
+		val uri = toUri(params.textDocument?.uri ?: params.uri)
+		val resourceServiceProvider = uri.resourceServiceProvider
+		val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
+		if (contentAssistService === null)
+			return emptyList
+
+		val entries = workspaceManager.doRead(uri) [ document, resource |
+			val offset = document.getOffSet(params.position)
+			return contentAssistService.createProposals(document.contents, offset, resource)
+		]
+		return entries.map[toCompletionItem].toList
+	}
+
+	protected def CompletionItem toCompletionItem(ContentAssistEntry entry) {
+		val completionItem = new CompletionItemImpl
+		completionItem.label = entry.label ?: entry.proposal
+		completionItem.detail = entry.description
+		completionItem.insertText = entry.proposal
+		return completionItem
+	}
+    
+    // end completion stuff
+    
     override symbol(WorkspaceSymbolParams params) {
         throw new UnsupportedOperationException("TODO: auto-generated method stub")
     }
@@ -190,10 +221,6 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     }
     
     override onLogMessage(NotificationCallback<MessageParams> callback) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override completion(TextDocumentPositionParams position) {
         throw new UnsupportedOperationException("TODO: auto-generated method stub")
     }
     
