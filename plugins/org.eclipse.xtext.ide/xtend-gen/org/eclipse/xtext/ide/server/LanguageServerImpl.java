@@ -14,6 +14,7 @@ import io.typefox.lsapi.CodeLens;
 import io.typefox.lsapi.CodeLensParams;
 import io.typefox.lsapi.Command;
 import io.typefox.lsapi.CompletionItem;
+import io.typefox.lsapi.CompletionItemImpl;
 import io.typefox.lsapi.CompletionOptionsImpl;
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DiagnosticImpl;
@@ -37,6 +38,7 @@ import io.typefox.lsapi.LanguageServer;
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.MessageParams;
 import io.typefox.lsapi.NotificationCallback;
+import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.PublishDiagnosticsParamsImpl;
@@ -66,10 +68,17 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
+import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
+import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -91,6 +100,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   private WorkspaceManager workspaceManager;
   
   private String rootPath;
+  
+  @Inject
+  @Extension
+  private IResourceServiceProvider.Registry languagesRegistry;
   
   @Override
   public InitializeResult initialize(final InitializeParams params) {
@@ -122,7 +135,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
             final Procedure1<CompletionOptionsImpl> _function = new Procedure1<CompletionOptionsImpl>() {
               @Override
               public void apply(final CompletionOptionsImpl it) {
-                it.setResolveProvider(true);
+                it.setResolveProvider(false);
                 it.setTriggerCharacters(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(".")));
               }
             };
@@ -316,6 +329,68 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
+  public List<? extends CompletionItem> completion(final TextDocumentPositionParams params) {
+    String _elvis = null;
+    TextDocumentIdentifier _textDocument = params.getTextDocument();
+    String _uri = null;
+    if (_textDocument!=null) {
+      _uri=_textDocument.getUri();
+    }
+    if (_uri != null) {
+      _elvis = _uri;
+    } else {
+      String _uri_1 = params.getUri();
+      _elvis = _uri_1;
+    }
+    final URI uri = this.toUri(_elvis);
+    final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+    ContentAssistService _get = null;
+    if (resourceServiceProvider!=null) {
+      _get=resourceServiceProvider.<ContentAssistService>get(ContentAssistService.class);
+    }
+    final ContentAssistService contentAssistService = _get;
+    if ((contentAssistService == null)) {
+      return CollectionLiterals.<CompletionItem>emptyList();
+    }
+    final Function2<Document, XtextResource, Iterable<ContentAssistEntry>> _function = new Function2<Document, XtextResource, Iterable<ContentAssistEntry>>() {
+      @Override
+      public Iterable<ContentAssistEntry> apply(final Document document, final XtextResource resource) {
+        Position _position = params.getPosition();
+        final int offset = document.getOffSet(_position);
+        String _contents = document.getContents();
+        return contentAssistService.createProposals(_contents, offset, resource);
+      }
+    };
+    final Iterable<ContentAssistEntry> entries = this.workspaceManager.<Iterable<ContentAssistEntry>>doRead(uri, _function);
+    final Function1<ContentAssistEntry, CompletionItem> _function_1 = new Function1<ContentAssistEntry, CompletionItem>() {
+      @Override
+      public CompletionItem apply(final ContentAssistEntry it) {
+        return LanguageServerImpl.this.toCompletionItem(it);
+      }
+    };
+    Iterable<CompletionItem> _map = IterableExtensions.<ContentAssistEntry, CompletionItem>map(entries, _function_1);
+    return IterableExtensions.<CompletionItem>toList(_map);
+  }
+  
+  protected CompletionItem toCompletionItem(final ContentAssistEntry entry) {
+    final CompletionItemImpl completionItem = new CompletionItemImpl();
+    String _elvis = null;
+    String _label = entry.getLabel();
+    if (_label != null) {
+      _elvis = _label;
+    } else {
+      String _proposal = entry.getProposal();
+      _elvis = _proposal;
+    }
+    completionItem.setLabel(_elvis);
+    String _description = entry.getDescription();
+    completionItem.setDetail(_description);
+    String _proposal_1 = entry.getProposal();
+    completionItem.setInsertText(_proposal_1);
+    return completionItem;
+  }
+  
+  @Override
   public List<? extends SymbolInformation> symbol(final WorkspaceSymbolParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
@@ -337,11 +412,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public void onLogMessage(final NotificationCallback<MessageParams> callback) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
-  public List<? extends CompletionItem> completion(final TextDocumentPositionParams position) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
@@ -449,6 +519,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   public void setRootPath(final String rootPath) {
     this.rootPath = rootPath;
+  }
+  
+  @Pure
+  public IResourceServiceProvider.Registry getLanguagesRegistry() {
+    return this.languagesRegistry;
+  }
+  
+  public void setLanguagesRegistry(final IResourceServiceProvider.Registry languagesRegistry) {
+    this.languagesRegistry = languagesRegistry;
   }
   
   @Pure

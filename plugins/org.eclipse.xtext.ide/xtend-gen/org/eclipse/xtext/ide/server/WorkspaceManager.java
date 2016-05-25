@@ -182,14 +182,10 @@ public class WorkspaceManager {
   }
   
   public <T extends Object> T doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
-    T _xblockexpression = null;
-    {
-      final ProjectManager projectMnr = this.getProjectManager(uri);
-      final Document doc = this.openDocuments.get(uri);
-      Resource _resource = projectMnr.getResource(uri);
-      _xblockexpression = work.apply(doc, ((XtextResource) _resource));
-    }
-    return _xblockexpression;
+    final ProjectManager projectMnr = this.getProjectManager(uri);
+    final Document doc = this.openDocuments.get(uri);
+    Resource _resource = projectMnr.getResource(uri);
+    return work.apply(doc, ((XtextResource) _resource));
   }
   
   public <T extends Object> void doWrite(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
