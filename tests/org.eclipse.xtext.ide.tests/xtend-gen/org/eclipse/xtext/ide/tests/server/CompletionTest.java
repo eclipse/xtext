@@ -9,16 +9,16 @@ package org.eclipse.xtext.ide.tests.server;
 
 import com.google.common.base.Objects;
 import io.typefox.lsapi.CompletionItem;
-import io.typefox.lsapi.PositionImpl;
-import io.typefox.lsapi.TextDocumentIdentifierImpl;
+import io.typefox.lsapi.Location;
+import io.typefox.lsapi.Position;
+import io.typefox.lsapi.Range;
 import io.typefox.lsapi.TextDocumentPositionParamsImpl;
-import io.typefox.lsapi.util.LsapiFactories;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -160,35 +160,13 @@ public class CompletionTest extends AbstractLanguageServerTest {
     final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
     this.initialize();
     this.open(fileUri, configuration.model);
-    TextDocumentPositionParamsImpl _textDocumentPositionParamsImpl = new TextDocumentPositionParamsImpl();
-    final Procedure1<TextDocumentPositionParamsImpl> _function = new Procedure1<TextDocumentPositionParamsImpl>() {
-      @Override
-      public void apply(final TextDocumentPositionParamsImpl it) {
-        TextDocumentIdentifierImpl _createIdentifier = CompletionTest.this.createIdentifier(fileUri);
-        it.setTextDocument(_createIdentifier);
-        PositionImpl _newPosition = LsapiFactories.newPosition(configuration.line, configuration.column);
-        it.setPosition(_newPosition);
-      }
-    };
-    TextDocumentPositionParamsImpl _doubleArrow = ObjectExtensions.<TextDocumentPositionParamsImpl>operator_doubleArrow(_textDocumentPositionParamsImpl, _function);
-    final List<? extends CompletionItem> completionItems = this.languageServer.completion(_doubleArrow);
+    TextDocumentPositionParamsImpl _newPosition = this.newPosition(fileUri, configuration.line, configuration.column);
+    final List<? extends CompletionItem> completionItems = this.languageServer.completion(_newPosition);
     final String actualCompletionItems = this.toExpectation(completionItems);
     Assert.assertEquals(configuration.expectedCompletionItems, actualCompletionItems);
   }
   
-  protected String toExpectation(final List<? extends CompletionItem> completionItems) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      for(final CompletionItem completionItem : completionItems) {
-        String _expectation = this.<CompletionItem>toExpectation(completionItem);
-        _builder.append(_expectation, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder.toString();
-  }
-  
-  protected <T extends CompletionItem> String toExpectation(final T it) {
+  protected String _toExpectation(final CompletionItem it) {
     StringConcatenation _builder = new StringConcatenation();
     String _label = it.getLabel();
     _builder.append(_label, "");
@@ -215,5 +193,22 @@ public class CompletionTest extends AbstractLanguageServerTest {
     }
     _builder.newLineIfNotEmpty();
     return _builder.toString();
+  }
+  
+  protected String toExpectation(final Object it) {
+    if (it instanceof List) {
+      return _toExpectation((List<?>)it);
+    } else if (it instanceof CompletionItem) {
+      return _toExpectation((CompletionItem)it);
+    } else if (it instanceof Location) {
+      return _toExpectation((Location)it);
+    } else if (it instanceof Position) {
+      return _toExpectation((Position)it);
+    } else if (it instanceof Range) {
+      return _toExpectation((Range)it);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it).toString());
+    }
   }
 }

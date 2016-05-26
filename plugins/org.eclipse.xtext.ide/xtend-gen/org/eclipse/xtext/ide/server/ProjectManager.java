@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
@@ -33,6 +35,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -54,6 +57,7 @@ public class ProjectManager {
   @Inject
   protected IExternalContentSupport externalContentSupport;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private IndexState indexState = new IndexState();
   
   private URI baseDir;
@@ -64,6 +68,7 @@ public class ProjectManager {
   
   private IExternalContentSupport.IExternalContentProvider openedDocumentsContentProvider;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private XtextResourceSet resourceSet;
   
   public IncrementalBuilder.Result initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final IExternalContentSupport.IExternalContentProvider openedDocumentsContentProvider, final Provider<Map<String, ResourceDescriptionsData>> indexProvider) {
@@ -160,5 +165,15 @@ public class ProjectManager {
   
   public Resource getResource(final URI uri) {
     return this.resourceSet.getResource(uri, true);
+  }
+  
+  @Pure
+  public IndexState getIndexState() {
+    return this.indexState;
+  }
+  
+  @Pure
+  public XtextResourceSet getResourceSet() {
+    return this.resourceSet;
   }
 }

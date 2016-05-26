@@ -15,6 +15,7 @@ import io.typefox.lsapi.RangeImpl;
 import io.typefox.lsapi.util.LsapiFactories;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -67,9 +68,7 @@ public class DocumentExtensions {
     return this.newRange(resource, _offset, _plus);
   }
   
-  public LocationImpl newLocation(final EObject object) {
-    final Resource resource = object.eResource();
-    final ITextRegion textRegion = this.locationInFileProvider.getSignificantTextRegion(object);
+  public LocationImpl newLocation(final Resource resource, final ITextRegion textRegion) {
     final LocationImpl location = new LocationImpl();
     URI _uRI = resource.getURI();
     String _path = this._uriExtensions.toPath(_uRI);
@@ -77,5 +76,17 @@ public class DocumentExtensions {
     RangeImpl _newRange = this.newRange(resource, textRegion);
     location.setRange(_newRange);
     return location;
+  }
+  
+  public LocationImpl newLocation(final EObject object) {
+    final Resource resource = object.eResource();
+    final ITextRegion textRegion = this.locationInFileProvider.getSignificantTextRegion(object);
+    return this.newLocation(resource, textRegion);
+  }
+  
+  public LocationImpl newLocation(final EObject owner, final EStructuralFeature feature, final int indexInList) {
+    final Resource resource = owner.eResource();
+    final ITextRegion textRegion = this.locationInFileProvider.getSignificantTextRegion(owner, feature, indexInList);
+    return this.newLocation(resource, textRegion);
   }
 }

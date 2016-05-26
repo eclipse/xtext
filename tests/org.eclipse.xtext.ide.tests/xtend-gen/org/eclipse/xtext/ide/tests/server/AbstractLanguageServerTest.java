@@ -17,16 +17,20 @@ import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.NotificationCallback;
 import io.typefox.lsapi.Position;
+import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.Range;
 import io.typefox.lsapi.TextDocumentIdentifierImpl;
 import io.typefox.lsapi.TextDocumentItemImpl;
+import io.typefox.lsapi.TextDocumentPositionParamsImpl;
 import io.typefox.lsapi.TextDocumentService;
+import io.typefox.lsapi.util.LsapiFactories;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -161,13 +165,34 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
     this.diagnostics.put(_uri, _diagnostics);
   }
   
-  protected TextDocumentIdentifierImpl createIdentifier(final String uri) {
+  protected TextDocumentPositionParamsImpl newPosition(final String uri, final int line, final int column) {
+    final TextDocumentPositionParamsImpl params = new TextDocumentPositionParamsImpl();
+    TextDocumentIdentifierImpl _newIdentifier = this.newIdentifier(uri);
+    params.setTextDocument(_newIdentifier);
+    PositionImpl _newPosition = LsapiFactories.newPosition(line, column);
+    params.setPosition(_newPosition);
+    return params;
+  }
+  
+  protected TextDocumentIdentifierImpl newIdentifier(final String uri) {
     final TextDocumentIdentifierImpl identifier = new TextDocumentIdentifierImpl();
     identifier.setUri(uri);
     return identifier;
   }
   
-  protected String toExpectation(final Location it) {
+  protected String _toExpectation(final List<?> elements) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      for(final Object element : elements) {
+        String _expectation = this.toExpectation(element);
+        _builder.append(_expectation, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder.toString();
+  }
+  
+  protected String _toExpectation(final Location it) {
     StringConcatenation _builder = new StringConcatenation();
     String _uri = it.getUri();
     Path _relativize = this.relativize(_uri);
@@ -179,7 +204,7 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
     return _builder.toString();
   }
   
-  protected String toExpectation(final Range it) {
+  protected String _toExpectation(final Range it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[");
     Position _start = it.getStart();
@@ -193,7 +218,7 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
     return _builder.toString();
   }
   
-  protected String toExpectation(final Position it) {
+  protected String _toExpectation(final Position it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[");
     int _line = it.getLine();
@@ -203,5 +228,20 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
     _builder.append(_character, "");
     _builder.append("]");
     return _builder.toString();
+  }
+  
+  protected String toExpectation(final Object elements) {
+    if (elements instanceof List) {
+      return _toExpectation((List<?>)elements);
+    } else if (elements instanceof Location) {
+      return _toExpectation((Location)elements);
+    } else if (elements instanceof Position) {
+      return _toExpectation((Position)elements);
+    } else if (elements instanceof Range) {
+      return _toExpectation((Range)elements);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(elements).toString());
+    }
   }
 }

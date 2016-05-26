@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import io.typefox.lsapi.CodeActionParams;
@@ -44,6 +45,7 @@ import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.PublishDiagnosticsParamsImpl;
 import io.typefox.lsapi.Range;
 import io.typefox.lsapi.RangeImpl;
+import io.typefox.lsapi.ReferenceContext;
 import io.typefox.lsapi.ReferenceParams;
 import io.typefox.lsapi.RenameParams;
 import io.typefox.lsapi.ServerCapabilities;
@@ -75,6 +77,7 @@ import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.Issue;
@@ -132,6 +135,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         final Procedure1<ServerCapabilitiesImpl> _function = new Procedure1<ServerCapabilitiesImpl>() {
           @Override
           public void apply(final ServerCapabilitiesImpl it) {
+            it.setDefinitionProvider(Boolean.valueOf(true));
+            it.setReferencesProvider(Boolean.valueOf(true));
             it.setDocumentSymbolProvider(Boolean.valueOf(true));
             it.setTextDocumentSync(Integer.valueOf(ServerCapabilities.SYNC_INCREMENTAL));
             CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
@@ -390,6 +395,69 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
+  public List<? extends Location> definition(final TextDocumentPositionParams params) {
+    TextDocumentIdentifier _textDocument = params.getTextDocument();
+    String _uri = _textDocument.getUri();
+    final URI uri = this._uriExtensions.toUri(_uri);
+    final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+    DocumentSymbolService _get = null;
+    if (resourceServiceProvider!=null) {
+      _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
+    }
+    final DocumentSymbolService documentSymbolService = _get;
+    if ((documentSymbolService == null)) {
+      return CollectionLiterals.<Location>emptyList();
+    }
+    final Function2<Document, XtextResource, List<? extends Location>> _function = new Function2<Document, XtextResource, List<? extends Location>>() {
+      @Override
+      public List<? extends Location> apply(final Document document, final XtextResource resource) {
+        Position _position = params.getPosition();
+        final int offset = document.getOffSet(_position);
+        return documentSymbolService.getDefinitions(resource, offset, LanguageServerImpl.this.workspaceManager);
+      }
+    };
+    return this.workspaceManager.<List<? extends Location>>doRead(uri, _function);
+  }
+  
+  @Override
+  public List<? extends Location> references(final ReferenceParams params) {
+    TextDocumentIdentifier _textDocument = params.getTextDocument();
+    String _uri = _textDocument.getUri();
+    final URI uri = this._uriExtensions.toUri(_uri);
+    final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+    DocumentSymbolService _get = null;
+    if (resourceServiceProvider!=null) {
+      _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
+    }
+    final DocumentSymbolService documentSymbolService = _get;
+    if ((documentSymbolService == null)) {
+      return CollectionLiterals.<Location>emptyList();
+    }
+    final Function2<Document, XtextResource, List<Location>> _function = new Function2<Document, XtextResource, List<Location>>() {
+      @Override
+      public List<Location> apply(final Document document, final XtextResource resource) {
+        Position _position = params.getPosition();
+        final int offset = document.getOffSet(_position);
+        URI _uRI = resource.getURI();
+        final IResourceDescriptions indexData = LanguageServerImpl.this.workspaceManager.getIndexData(_uRI);
+        List<? extends Location> _xifexpression = null;
+        ReferenceContext _context = params.getContext();
+        boolean _isIncludeDeclaration = _context.isIncludeDeclaration();
+        if (_isIncludeDeclaration) {
+          _xifexpression = documentSymbolService.getDefinitions(resource, offset, LanguageServerImpl.this.workspaceManager);
+        } else {
+          _xifexpression = CollectionLiterals.emptyList();
+        }
+        final List<? extends Location> definitions = _xifexpression;
+        final List<? extends Location> references = documentSymbolService.getReferences(resource, offset, LanguageServerImpl.this.workspaceManager, indexData);
+        final Iterable<Location> result = Iterables.<Location>concat(definitions, references);
+        return IterableExtensions.<Location>toList(result);
+      }
+    };
+    return this.workspaceManager.<List<? extends Location>>doRead(uri, _function);
+  }
+  
+  @Override
   public List<? extends SymbolInformation> documentSymbol(final DocumentSymbolParams params) {
     TextDocumentIdentifier _textDocument = params.getTextDocument();
     String _uri = _textDocument.getUri();
@@ -434,16 +502,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public SignatureHelp signatureHelp(final TextDocumentPositionParams position) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
-  public List<? extends Location> definition(final TextDocumentPositionParams position) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
-  public List<? extends Location> references(final ReferenceParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   

@@ -9,8 +9,11 @@ package org.eclipse.xtext.ide.tests.server;
 
 import io.typefox.lsapi.DocumentSymbolParamsImpl;
 import io.typefox.lsapi.Location;
+import io.typefox.lsapi.Position;
+import io.typefox.lsapi.Range;
 import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.TextDocumentIdentifierImpl;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -162,8 +165,8 @@ public class DocumentSymbolTest extends AbstractLanguageServerTest {
     final Procedure1<DocumentSymbolParamsImpl> _function = new Procedure1<DocumentSymbolParamsImpl>() {
       @Override
       public void apply(final DocumentSymbolParamsImpl it) {
-        TextDocumentIdentifierImpl _createIdentifier = DocumentSymbolTest.this.createIdentifier(fileUri);
-        it.setTextDocument(_createIdentifier);
+        TextDocumentIdentifierImpl _newIdentifier = DocumentSymbolTest.this.newIdentifier(fileUri);
+        it.setTextDocument(_newIdentifier);
       }
     };
     DocumentSymbolParamsImpl _doubleArrow = ObjectExtensions.<DocumentSymbolParamsImpl>operator_doubleArrow(_documentSymbolParamsImpl, _function);
@@ -172,19 +175,7 @@ public class DocumentSymbolTest extends AbstractLanguageServerTest {
     Assert.assertEquals(configuration.expectedSymbols, actualSymbols);
   }
   
-  protected String toExpectation(final List<? extends SymbolInformation> symbols) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      for(final SymbolInformation symbol : symbols) {
-        String _expectation = this.<SymbolInformation>toExpectation(symbol);
-        _builder.append(_expectation, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    return _builder.toString();
-  }
-  
-  protected <T extends SymbolInformation> String toExpectation(final T it) {
+  protected String _toExpectation(final SymbolInformation it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("symbol \"");
     String _name = it.getName();
@@ -218,5 +209,22 @@ public class DocumentSymbolTest extends AbstractLanguageServerTest {
     _builder.append("}");
     _builder.newLine();
     return _builder.toString();
+  }
+  
+  protected String toExpectation(final Object it) {
+    if (it instanceof List) {
+      return _toExpectation((List<?>)it);
+    } else if (it instanceof Location) {
+      return _toExpectation((Location)it);
+    } else if (it instanceof Position) {
+      return _toExpectation((Position)it);
+    } else if (it instanceof Range) {
+      return _toExpectation((Range)it);
+    } else if (it instanceof SymbolInformation) {
+      return _toExpectation((SymbolInformation)it);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it).toString());
+    }
   }
 }
