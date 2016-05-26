@@ -10,7 +10,7 @@ package org.eclipse.xtext.ide.server;
 import com.google.inject.AbstractModule;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
+import org.eclipse.xtext.resource.ResourceServiceProviderServiceLoader;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -20,7 +20,6 @@ public class ServerModule extends AbstractModule {
   @Override
   protected void configure() {
     AnnotatedBindingBuilder<IResourceServiceProvider.Registry> _bind = this.<IResourceServiceProvider.Registry>bind(IResourceServiceProvider.Registry.class);
-    ResourceServiceProviderRegistryImpl _resourceServiceProviderRegistryImpl = new ResourceServiceProviderRegistryImpl();
-    _bind.toInstance(_resourceServiceProviderRegistryImpl);
+    _bind.toProvider(ResourceServiceProviderServiceLoader.class);
   }
 }

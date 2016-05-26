@@ -9,7 +9,7 @@ package org.eclipse.xtext.ide.server
 
 import com.google.inject.AbstractModule
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl
+import org.eclipse.xtext.resource.ResourceServiceProviderServiceLoader
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -17,7 +17,7 @@ import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl
 class ServerModule extends AbstractModule {
     
     override protected configure() {
-        bind(IResourceServiceProvider.Registry).toInstance(new ResourceServiceProviderRegistryImpl)
+        bind(IResourceServiceProvider.Registry).toProvider(ResourceServiceProviderServiceLoader)
     }
     
 }

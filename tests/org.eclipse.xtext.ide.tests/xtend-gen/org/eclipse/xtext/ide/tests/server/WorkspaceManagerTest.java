@@ -20,9 +20,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
-import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetup;
-import org.eclipse.xtext.resource.FileExtensionProvider;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.validation.Issue;
@@ -136,20 +133,5 @@ public class WorkspaceManagerTest {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  @Inject
-  public Object voidRegisterTestLanguage(final IResourceServiceProvider.Registry registry) {
-    Object _xblockexpression = null;
-    {
-      TestLanguageStandaloneSetup _testLanguageStandaloneSetup = new TestLanguageStandaloneSetup();
-      final Injector injector = _testLanguageStandaloneSetup.createInjectorAndDoEMFRegistration();
-      Map<String, Object> _extensionToFactoryMap = registry.getExtensionToFactoryMap();
-      FileExtensionProvider _instance = injector.<FileExtensionProvider>getInstance(FileExtensionProvider.class);
-      String _primaryFileExtension = _instance.getPrimaryFileExtension();
-      IResourceServiceProvider _instance_1 = injector.<IResourceServiceProvider>getInstance(IResourceServiceProvider.class);
-      _xblockexpression = _extensionToFactoryMap.put(_primaryFileExtension, _instance_1);
-    }
-    return _xblockexpression;
   }
 }
