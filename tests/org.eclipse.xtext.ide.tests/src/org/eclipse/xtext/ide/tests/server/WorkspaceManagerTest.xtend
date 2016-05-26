@@ -16,14 +16,11 @@ import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.WorkspaceManager
-import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetup
-import org.eclipse.xtext.resource.FileExtensionProvider
-import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.validation.Issue
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.Assert
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -78,12 +75,6 @@ class WorkspaceManagerTest {
             close
         ]
         return URI.createFileURI(file.absolutePath)
-    }
-
-    @Inject def voidRegisterTestLanguage(IResourceServiceProvider.Registry registry) {
-        val injector = new TestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration
-        registry.extensionToFactoryMap.put(injector.getInstance(FileExtensionProvider).primaryFileExtension,
-            injector.getInstance(IResourceServiceProvider))
     }
 
 }
