@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.tests.server
 
 import io.typefox.lsapi.DocumentSymbolParamsImpl
 import io.typefox.lsapi.SymbolInformation
-import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
 
@@ -68,7 +67,7 @@ class DocumentSymbolTest extends AbstractLanguageServerTest {
 		open(fileUri, model)
 
 		val symbols = languageServer.documentSymbol(new DocumentSymbolParamsImpl => [
-			textDocument = fileUri.createIdentifier
+			textDocument = fileUri.newIdentifier
 		])
 		val String actualSymbols = symbols.toExpectation
 		assertEquals(expectedSymbols, actualSymbols)
@@ -81,13 +80,7 @@ class DocumentSymbolTest extends AbstractLanguageServerTest {
 		String expectedSymbols = ''
 	}
 
-	protected def String toExpectation(List<? extends SymbolInformation> symbols) '''
-		«FOR symbol : symbols»
-			«symbol.toExpectation»
-		«ENDFOR»
-	'''
-
-	protected def <T extends SymbolInformation> String toExpectation(T it) '''
+	protected def dispatch String toExpectation(SymbolInformation it) '''
 		symbol "«name»" {
 			kind: «kind»
 			location: «location.toExpectation»

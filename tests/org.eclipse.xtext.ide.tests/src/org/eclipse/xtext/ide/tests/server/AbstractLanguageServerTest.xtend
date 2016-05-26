@@ -20,6 +20,7 @@ import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.Range
 import io.typefox.lsapi.TextDocumentIdentifierImpl
 import io.typefox.lsapi.TextDocumentItemImpl
+import io.typefox.lsapi.TextDocumentPositionParamsImpl
 import java.io.File
 import java.io.FileWriter
 import java.net.URI
@@ -32,6 +33,8 @@ import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
 import org.eclipse.xtext.util.Files
 import org.junit.Before
+
+import static io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -105,16 +108,31 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
 		diagnostics.put(t.uri, t.diagnostics)
 	}
 
-	protected def TextDocumentIdentifierImpl createIdentifier(String uri) {
+	// FIXME: move to LsapiFactories
+	protected def TextDocumentPositionParamsImpl newPosition(String uri, int line, int column) {
+		val params = new TextDocumentPositionParamsImpl
+		params.textDocument = uri.newIdentifier
+		params.position = newPosition(line, column)
+		return params
+	}
+
+	// 	FIXME: move to LsapiFactories
+	protected def TextDocumentIdentifierImpl newIdentifier(String uri) {
 		val identifier = new TextDocumentIdentifierImpl
 		identifier.uri = uri
 		return identifier
 	}
 
-	protected def String toExpectation(Location it) '''«uri.relativize» «range.toExpectation»'''
+	protected def dispatch String toExpectation(List<?> elements) '''
+		«FOR element : elements»
+			«element.toExpectation»
+		«ENDFOR»
+	'''
 
-	protected def String toExpectation(Range it) '''[«start.toExpectation» .. «end.toExpectation»]'''
+	protected def dispatch String toExpectation(Location it) '''«uri.relativize» «range.toExpectation»'''
 
-	protected def String toExpectation(Position it) '''[«line», «character»]'''
+	protected def dispatch String toExpectation(Range it) '''[«start.toExpectation» .. «end.toExpectation»]'''
+
+	protected def dispatch String toExpectation(Position it) '''[«line», «character»]'''
 
 }

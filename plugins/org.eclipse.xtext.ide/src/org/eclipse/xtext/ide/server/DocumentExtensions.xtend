@@ -13,6 +13,7 @@ import io.typefox.lsapi.LocationImpl
 import io.typefox.lsapi.PositionImpl
 import io.typefox.lsapi.RangeImpl
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
@@ -53,14 +54,23 @@ class DocumentExtensions {
 		return resource.newRange(region.offset, region.offset + region.length)
 	}
 
-	def LocationImpl newLocation(EObject object) {
-		val resource = object.eResource
-		val textRegion = locationInFileProvider.getSignificantTextRegion(object)
-
+	def LocationImpl newLocation(Resource resource, ITextRegion textRegion) {
 		val location = new LocationImpl
 		location.uri = resource.URI.toPath
 		location.range = resource.newRange(textRegion)
 		return location
+	}
+
+	def LocationImpl newLocation(EObject object) {
+		val resource = object.eResource
+		val textRegion = locationInFileProvider.getSignificantTextRegion(object)
+		return resource.newLocation(textRegion)
+	}
+
+	def LocationImpl newLocation(EObject owner, EStructuralFeature feature, int indexInList) {
+		val resource = owner.eResource
+		val textRegion = locationInFileProvider.getSignificantTextRegion(owner, feature, indexInList)
+		return resource.newLocation(textRegion)
 	}
 
 }

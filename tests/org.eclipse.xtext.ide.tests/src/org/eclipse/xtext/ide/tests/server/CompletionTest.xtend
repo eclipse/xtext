@@ -8,12 +8,9 @@
 package org.eclipse.xtext.ide.tests.server
 
 import io.typefox.lsapi.CompletionItem
-import io.typefox.lsapi.TextDocumentPositionParamsImpl
-import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
 
-import static io.typefox.lsapi.util.LsapiFactories.*
 import static org.junit.Assert.*
 
 /**
@@ -70,22 +67,13 @@ class CompletionTest extends AbstractLanguageServerTest {
 		initialize
 		open(fileUri, model)
 
-		val completionItems = languageServer.completion(new TextDocumentPositionParamsImpl => [
-			textDocument = fileUri.createIdentifier
-			position = newPosition(line, column)
-		])
+		val completionItems = languageServer.completion(newPosition(fileUri, line, column))
 
-		val actualCompletionItems = toExpectation(completionItems)
+		val actualCompletionItems = completionItems.toExpectation
 		assertEquals(expectedCompletionItems, actualCompletionItems)
 	}
 
-	protected def String toExpectation(List<? extends CompletionItem> completionItems) '''
-		«FOR completionItem : completionItems»
-			«completionItem.toExpectation»
-		«ENDFOR»
-	'''
-
-	protected def <T extends CompletionItem> String toExpectation(T it) '''
+	protected def dispatch String toExpectation(CompletionItem it) '''
 		«label»«IF !detail.nullOrEmpty» («detail»)«ENDIF»«IF insertText != label» -> «insertText»«ENDIF»
 	'''
 

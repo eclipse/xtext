@@ -63,137 +63,134 @@ import static io.typefox.lsapi.util.LsapiFactories.*
  * @author Sven Efftinge - Initial contribution and API
  */
 @Accessors class LanguageServerImpl implements LanguageServer, WorkspaceService, WindowService, TextDocumentService {
-    
-    InitializeParams params
-    @Inject Provider<WorkspaceManager> workspaceManagerProvider
-    WorkspaceManager workspaceManager
-    @Inject extension UriExtensions
-    @Inject extension IResourceServiceProvider.Registry languagesRegistry
-    
-    override InitializeResult initialize(InitializeParams params) {
-        this.params = params
-        workspaceManager = workspaceManagerProvider.get
-        val rootURI = URI.createFileURI(params.rootPath)
-        workspaceManager.initialize(rootURI)[this.publishDiagnostics($0, $1)]
-        return new InitializeResultImpl => [
-            capabilities = new ServerCapabilitiesImpl => [
-            	documentSymbolProvider = true
-            	textDocumentSync = ServerCapabilities.SYNC_INCREMENTAL
-                completionProvider = new CompletionOptionsImpl => [
-                    resolveProvider = false
-                    triggerCharacters = #["."]
-                ]
-            ]
-        ]
-    }
 
-    override exit() {
-    }
+	InitializeParams params
+	@Inject Provider<WorkspaceManager> workspaceManagerProvider
+	WorkspaceManager workspaceManager
+	@Inject extension UriExtensions
+	@Inject extension IResourceServiceProvider.Registry languagesRegistry
 
-    override void shutdown() {
-    }
+	override InitializeResult initialize(InitializeParams params) {
+		this.params = params
+		workspaceManager = workspaceManagerProvider.get
+		val rootURI = URI.createFileURI(params.rootPath)
+		workspaceManager.initialize(rootURI)[this.publishDiagnostics($0, $1)]
+		return new InitializeResultImpl => [
+			capabilities = new ServerCapabilitiesImpl => [
+				definitionProvider = true
+				referencesProvider = true
+				documentSymbolProvider = true
+				textDocumentSync = ServerCapabilities.SYNC_INCREMENTAL
+				completionProvider = new CompletionOptionsImpl => [
+					resolveProvider = false
+					triggerCharacters = #["."]
+				]
+			]
+		]
+	}
 
-    override getTextDocumentService() {
-        this
-    }
+	override exit() {
+	}
 
-    override getWorkspaceService() {
-        this
-    }
+	override void shutdown() {
+	}
 
-    override getWindowService() {
-        this
-    }
+	override getTextDocumentService() {
+		this
+	}
 
-    // notification callbacks
+	override getWorkspaceService() {
+		this
+	}
 
-    override onShowMessage(NotificationCallback<MessageParams> callback) {
-        // TODO: auto-generated method stub
-    }
+	override getWindowService() {
+		this
+	}
 
-    override onShowMessageRequest(NotificationCallback<ShowMessageRequestParams> callback) {
-        // TODO: auto-generated method stub
-    }
-    
-    override onLogMessage(NotificationCallback<MessageParams> callback) {
-        // TODO: auto-generated method stub
-    }
+	// notification callbacks
+	override onShowMessage(NotificationCallback<MessageParams> callback) {
+		// TODO: auto-generated method stub
+	}
 
-    // end notification callbacks
+	override onShowMessageRequest(NotificationCallback<ShowMessageRequestParams> callback) {
+		// TODO: auto-generated method stub
+	}
 
-    // file/content change events
-    override didOpen(DidOpenTextDocumentParams params) {
-        workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text)
-    }
-    
-    override didChange(DidChangeTextDocumentParams params) {
-        workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
-            newTextEdit(event.range as RangeImpl, event.text)
-        ])
-    }
-    
-    override didClose(DidCloseTextDocumentParams params) {
-        workspaceManager.didClose(params.textDocument.uri.toUri)
-    }
-    
-    override didSave(DidSaveTextDocumentParams params) {
-        workspaceManager.didSave(params.textDocument.uri.toUri)
-    }
-    
-    override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {
-        val dirtyFiles = newArrayList
-        val deletedFiles = newArrayList
-        for (fileEvent : params.changes) {
-            if (fileEvent.type === FileEvent.TYPE_DELETED) {
-                deletedFiles += toUri(fileEvent.uri)
-            } else {
-                dirtyFiles += toUri(fileEvent.uri)
-            }
-        }
-        workspaceManager.doBuild(dirtyFiles, deletedFiles)
-    }
-    // end file/content change events
-    
-    // validation stuff
-    
-    private List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners = newArrayList()
-    
-    override onPublishDiagnostics(NotificationCallback<PublishDiagnosticsParams> callback) {
-        diagnosticListeners.add(callback)
-    }
-    
-    private def void publishDiagnostics(URI uri, Iterable<? extends Issue> issues) {
-        val diagnostics = new PublishDiagnosticsParamsImpl => [
-            it.uri = toPath(uri)
-            it.diagnostics = issues.map[toDiagnostic].toList
-        ]
-        for (diagnosticsCallback : diagnosticListeners) {
-            diagnosticsCallback.call(diagnostics)
-        }
-    }
-    
-    private def DiagnosticImpl toDiagnostic(Issue issue) {
-        new DiagnosticImpl => [
-            code = issue.code 
-            severity = switch issue.severity {
-                case ERROR : Diagnostic.SEVERITY_ERROR
-                case WARNING : Diagnostic.SEVERITY_WARNING
-                case INFO : Diagnostic.SEVERITY_INFO
-                default : Diagnostic.SEVERITY_HINT
-            }
-            message = issue.message
-            range = newRange(
-                 newPosition(issue.lineNumber - 1, issue.column - 1),
-                 newPosition(issue.lineNumber - 1, issue.column - 1 + issue.length)
-            )
-        ]
-    }
-    
-    // end validation stuff
-    
-    // completion stuff
-    
-    override completion(TextDocumentPositionParams params) {
+	override onLogMessage(NotificationCallback<MessageParams> callback) {
+		// TODO: auto-generated method stub
+	}
+
+	// end notification callbacks
+	// file/content change events
+	override didOpen(DidOpenTextDocumentParams params) {
+		workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text)
+	}
+
+	override didChange(DidChangeTextDocumentParams params) {
+		workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
+			newTextEdit(event.range as RangeImpl, event.text)
+		])
+	}
+
+	override didClose(DidCloseTextDocumentParams params) {
+		workspaceManager.didClose(params.textDocument.uri.toUri)
+	}
+
+	override didSave(DidSaveTextDocumentParams params) {
+		workspaceManager.didSave(params.textDocument.uri.toUri)
+	}
+
+	override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {
+		val dirtyFiles = newArrayList
+		val deletedFiles = newArrayList
+		for (fileEvent : params.changes) {
+			if (fileEvent.type === FileEvent.TYPE_DELETED) {
+				deletedFiles += toUri(fileEvent.uri)
+			} else {
+				dirtyFiles += toUri(fileEvent.uri)
+			}
+		}
+		workspaceManager.doBuild(dirtyFiles, deletedFiles)
+	}
+
+	// end file/content change events
+	// validation stuff
+	private List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners = newArrayList()
+
+	override onPublishDiagnostics(NotificationCallback<PublishDiagnosticsParams> callback) {
+		diagnosticListeners.add(callback)
+	}
+
+	private def void publishDiagnostics(URI uri, Iterable<? extends Issue> issues) {
+		val diagnostics = new PublishDiagnosticsParamsImpl => [
+			it.uri = toPath(uri)
+			it.diagnostics = issues.map[toDiagnostic].toList
+		]
+		for (diagnosticsCallback : diagnosticListeners) {
+			diagnosticsCallback.call(diagnostics)
+		}
+	}
+
+	private def DiagnosticImpl toDiagnostic(Issue issue) {
+		new DiagnosticImpl => [
+			code = issue.code
+			severity = switch issue.severity {
+				case ERROR: Diagnostic.SEVERITY_ERROR
+				case WARNING: Diagnostic.SEVERITY_WARNING
+				case INFO: Diagnostic.SEVERITY_INFO
+				default: Diagnostic.SEVERITY_HINT
+			}
+			message = issue.message
+			range = newRange(
+				newPosition(issue.lineNumber - 1, issue.column - 1),
+				newPosition(issue.lineNumber - 1, issue.column - 1 + issue.length)
+			)
+		]
+	}
+
+	// end validation stuff
+	// completion stuff
+	override completion(TextDocumentPositionParams params) {
 		val uri = params.textDocument.uri.toUri
 		val resourceServiceProvider = uri.resourceServiceProvider
 		val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
@@ -214,83 +211,107 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 		completionItem.insertText = entry.proposal
 		return completionItem
 	}
-    
-    // end completion stuff
-    
-    // symbols
-    
-    override documentSymbol(DocumentSymbolParams params) {
-    	val uri = params.textDocument.uri.toUri
+
+	// end completion stuff
+	// symbols
+	override definition(TextDocumentPositionParams params) {
+		val uri = params.textDocument.uri.toUri
 		val resourceServiceProvider = uri.resourceServiceProvider
 		val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
 		if (documentSymbolService === null)
-        	return emptyList
-        	
-        return workspaceManager.doRead(uri) [ document, resource | 
-        	return documentSymbolService.getSymbols(resource) 
-        ]		
-    }
-    
-    // end symbols
-    
-    override symbol(WorkspaceSymbolParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override didChangeConfiguraton(DidChangeConfigurationParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override resolveCompletionItem(CompletionItem unresolved) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override hover(TextDocumentPositionParams position) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override signatureHelp(TextDocumentPositionParams position) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override definition(TextDocumentPositionParams position) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override references(ReferenceParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override documentHighlight(TextDocumentPositionParams position) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override codeAction(CodeActionParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override codeLens(CodeLensParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override resolveCodeLens(CodeLens unresolved) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override formatting(DocumentFormattingParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override rangeFormatting(DocumentRangeFormattingParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override onTypeFormatting(DocumentOnTypeFormattingParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override rename(RenameParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
+			return emptyList
+
+		return workspaceManager.doRead(uri) [ document, resource |
+			val offset = document.getOffSet(params.position)
+			return documentSymbolService.getDefinitions(resource, offset, workspaceManager)
+		]
+	}
+
+	override references(ReferenceParams params) {
+		val uri = params.textDocument.uri.toUri
+		val resourceServiceProvider = uri.resourceServiceProvider
+		val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
+		if (documentSymbolService === null)
+			return emptyList
+
+		return workspaceManager.doRead(uri) [ document, resource |
+			val offset = document.getOffSet(params.position)
+			val indexData = workspaceManager.getIndexData(resource.URI)
+
+			val definitions = if (params.context.includeDeclaration)
+					documentSymbolService.getDefinitions(resource, offset, workspaceManager)
+				else
+					emptyList
+
+			val references = documentSymbolService.getReferences(resource, offset, workspaceManager, indexData)
+			val result = definitions + references
+			return result.toList
+		]
+	}
+
+	override documentSymbol(DocumentSymbolParams params) {
+		val uri = params.textDocument.uri.toUri
+		val resourceServiceProvider = uri.resourceServiceProvider
+		val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
+		if (documentSymbolService === null)
+			return emptyList
+
+		return workspaceManager.doRead(uri) [ document, resource |
+			return documentSymbolService.getSymbols(resource)
+		]
+	}
+
+	// end symbols
+	override symbol(WorkspaceSymbolParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override didChangeConfiguraton(DidChangeConfigurationParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override resolveCompletionItem(CompletionItem unresolved) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override hover(TextDocumentPositionParams position) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override signatureHelp(TextDocumentPositionParams position) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override documentHighlight(TextDocumentPositionParams position) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override codeAction(CodeActionParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override codeLens(CodeLensParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override resolveCodeLens(CodeLens unresolved) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override formatting(DocumentFormattingParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override rangeFormatting(DocumentRangeFormattingParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override onTypeFormatting(DocumentOnTypeFormattingParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	override rename(RenameParams params) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
 }

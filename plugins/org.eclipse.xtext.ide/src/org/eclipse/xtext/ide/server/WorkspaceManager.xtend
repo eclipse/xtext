@@ -14,15 +14,19 @@ import java.util.ArrayList
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.util.concurrent.IUnitOfWork
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtext.resource.IResourceDescriptions
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class WorkspaceManager {
+class WorkspaceManager implements IResourceAccess {
 
     @Inject Provider<ProjectManager> projectManagerProvider
     Map<URI, ProjectManager> baseDir2ProjectManager = newHashMap()
@@ -113,5 +117,13 @@ class WorkspaceManager {
     def <T> void doWrite(URI uri, (Document, XtextResource)=>T work) {
         
     }
+				
+	override <R> readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
+		return work.exec(targetURI.projectManager.resourceSet)
+	}
+	
+	def IResourceDescriptions getIndexData(URI targetURI) {
+		return targetURI.projectManager.indexState.resourceDescriptions
+	}
 
 }

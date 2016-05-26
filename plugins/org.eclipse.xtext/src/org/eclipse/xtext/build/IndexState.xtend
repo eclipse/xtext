@@ -20,7 +20,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 	val Source2GeneratedMapping fileMappings
 	
 	new () {
-		this(new ResourceDescriptionsData(emptySet),new Source2GeneratedMapping)
+		this(new ResourceDescriptionsData(emptySet), new Source2GeneratedMapping)
 	}
 	
 }

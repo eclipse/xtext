@@ -26,6 +26,8 @@ import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.util.IFileSystemScanner
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.resource.IResourceDescriptions
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -38,11 +40,14 @@ class ProjectManager {
     @Inject protected IFileSystemScanner fileSystemScanner
     @Inject protected IExternalContentSupport externalContentSupport
     
+    @Accessors(PUBLIC_GETTER)
     IndexState indexState = new IndexState
     URI baseDir
     (URI, Iterable<Issue>)=>void issueAcceptor
     Provider<Map<String, ResourceDescriptionsData>> indexProvider
     IExternalContentProvider openedDocumentsContentProvider
+    
+    @Accessors(PUBLIC_GETTER)
     XtextResourceSet resourceSet
     
     def Result initialize(URI baseDir, (URI, Iterable<Issue>)=>void acceptor, IExternalContentProvider openedDocumentsContentProvider, Provider<Map<String, ResourceDescriptionsData>> indexProvider) {
