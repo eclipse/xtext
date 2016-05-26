@@ -11,11 +11,15 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import io.typefox.lsapi.Diagnostic;
+import io.typefox.lsapi.InitializeParamsImpl;
+import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.NotificationCallback;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.TextDocumentService;
 import java.io.File;
 import java.io.FileWriter;
+import java.net.URI;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
@@ -60,6 +64,23 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
   
   protected File root;
   
+  protected InitializeResult initialize() {
+    return this.initialize(null);
+  }
+  
+  protected InitializeResult initialize(final Procedure1<? super InitializeParamsImpl> initializer) {
+    final InitializeParamsImpl params = new InitializeParamsImpl();
+    Path _path = this.root.toPath();
+    Path _absolutePath = _path.toAbsolutePath();
+    Path _normalize = _absolutePath.normalize();
+    String _string = _normalize.toString();
+    params.setRootPath(_string);
+    if (initializer!=null) {
+      initializer.apply(params);
+    }
+    return this.languageServer.initialize(params);
+  }
+  
   public String operator_mappedTo(final String path, final CharSequence contents) {
     try {
       final File file = new File(this.root, path);
@@ -80,10 +101,10 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
         }
       };
       ObjectExtensions.<FileWriter>operator_doubleArrow(_fileWriter, _function);
-      String _absolutePath = file.getAbsolutePath();
-      String _absolutePath_1 = this.root.getAbsolutePath();
-      int _length = _absolutePath_1.length();
-      return _absolutePath.substring(_length);
+      Path _path = file.toPath();
+      final Path normalizedPath = _path.normalize();
+      URI _uri = normalizedPath.toUri();
+      return _uri.toString();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

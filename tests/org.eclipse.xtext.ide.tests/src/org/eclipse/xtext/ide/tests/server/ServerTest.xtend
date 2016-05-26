@@ -10,7 +10,6 @@ package org.eclipse.xtext.ide.tests.server
 import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl
 import io.typefox.lsapi.FileEvent
 import io.typefox.lsapi.FileEventImpl
-import io.typefox.lsapi.InitializeParamsImpl
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -27,9 +26,7 @@ class ServerTest extends AbstractLanguageServerTest {
                 string foo
             }
         '''
-    	languageServer.initialize(new InitializeParamsImpl => [
-    	    rootPath = root.absolutePath
-    	])
+    	initialize
     	assertTrue(diagnostics.entrySet.join(','), diagnostics.values.head.empty)
     }
     
@@ -40,9 +37,7 @@ class ServerTest extends AbstractLanguageServerTest {
                 NonExisting foo
             }
         '''
-    	languageServer.initialize(new InitializeParamsImpl => [
-    	    rootPath = root.absolutePath
-    	])
+    	initialize
     	assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.values.head.head?.message)
     }
     
@@ -53,9 +48,7 @@ class ServerTest extends AbstractLanguageServerTest {
                 NonExisting foo
             }
         '''
-    	languageServer.initialize(new InitializeParamsImpl => [
-    	    rootPath = root.absolutePath
-    	])
+    	initialize
     	assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.values.head.head.message)
     	
         val path = 'MyType2.testlang' -> '''

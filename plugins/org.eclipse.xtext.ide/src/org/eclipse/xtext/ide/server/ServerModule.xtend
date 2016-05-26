@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ide.server
 
 import com.google.inject.AbstractModule
+import io.typefox.lsapi.LanguageServer
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.ResourceServiceProviderServiceLoader
 
@@ -17,6 +18,7 @@ import org.eclipse.xtext.resource.ResourceServiceProviderServiceLoader
 class ServerModule extends AbstractModule {
     
     override protected configure() {
+    	bind(LanguageServer).to(LanguageServerImpl)
         bind(IResourceServiceProvider.Registry).toProvider(ResourceServiceProviderServiceLoader)
     }
     

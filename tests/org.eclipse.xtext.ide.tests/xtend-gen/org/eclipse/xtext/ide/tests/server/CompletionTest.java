@@ -10,7 +10,6 @@ package org.eclipse.xtext.ide.tests.server;
 import com.google.common.base.Objects;
 import io.typefox.lsapi.CompletionItem;
 import io.typefox.lsapi.DidOpenTextDocumentParamsImpl;
-import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.TextDocumentIdentifierImpl;
 import io.typefox.lsapi.TextDocumentItemImpl;
@@ -101,7 +100,7 @@ public class CompletionTest extends AbstractLanguageServerTest {
         it.expectedCompletionItems = _builder.toString();
       }
     };
-    this.testComletion(_function);
+    this.testCompletion(_function);
   }
   
   @Test
@@ -117,7 +116,7 @@ public class CompletionTest extends AbstractLanguageServerTest {
         it.expectedCompletionItems = _builder.toString();
       }
     };
-    this.testComletion(_function);
+    this.testCompletion(_function);
   }
   
   @Test
@@ -152,26 +151,17 @@ public class CompletionTest extends AbstractLanguageServerTest {
         it.expectedCompletionItems = _builder_1.toString();
       }
     };
-    this.testComletion(_function);
+    this.testCompletion(_function);
   }
   
-  protected void testComletion(final Procedure1<? super CompletionTest.TestCompletionConfiguration> configurator) {
+  protected void testCompletion(final Procedure1<? super CompletionTest.TestCompletionConfiguration> configurator) {
     @Extension
     final CompletionTest.TestCompletionConfiguration configuration = new CompletionTest.TestCompletionConfiguration();
     configurator.apply(configuration);
     final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
-    InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
-    final Procedure1<InitializeParamsImpl> _function = new Procedure1<InitializeParamsImpl>() {
-      @Override
-      public void apply(final InitializeParamsImpl it) {
-        String _absolutePath = CompletionTest.this.root.getAbsolutePath();
-        it.setRootPath(_absolutePath);
-      }
-    };
-    InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
-    this.languageServer.initialize(_doubleArrow);
+    this.initialize();
     DidOpenTextDocumentParamsImpl _didOpenTextDocumentParamsImpl = new DidOpenTextDocumentParamsImpl();
-    final Procedure1<DidOpenTextDocumentParamsImpl> _function_1 = new Procedure1<DidOpenTextDocumentParamsImpl>() {
+    final Procedure1<DidOpenTextDocumentParamsImpl> _function = new Procedure1<DidOpenTextDocumentParamsImpl>() {
       @Override
       public void apply(final DidOpenTextDocumentParamsImpl it) {
         TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
@@ -187,10 +177,10 @@ public class CompletionTest extends AbstractLanguageServerTest {
         it.setTextDocument(_doubleArrow);
       }
     };
-    DidOpenTextDocumentParamsImpl _doubleArrow_1 = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function_1);
-    this.languageServer.didOpen(_doubleArrow_1);
+    DidOpenTextDocumentParamsImpl _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function);
+    this.languageServer.didOpen(_doubleArrow);
     TextDocumentPositionParamsImpl _textDocumentPositionParamsImpl = new TextDocumentPositionParamsImpl();
-    final Procedure1<TextDocumentPositionParamsImpl> _function_2 = new Procedure1<TextDocumentPositionParamsImpl>() {
+    final Procedure1<TextDocumentPositionParamsImpl> _function_1 = new Procedure1<TextDocumentPositionParamsImpl>() {
       @Override
       public void apply(final TextDocumentPositionParamsImpl it) {
         TextDocumentIdentifierImpl _textDocumentIdentifierImpl = new TextDocumentIdentifierImpl();
@@ -214,8 +204,8 @@ public class CompletionTest extends AbstractLanguageServerTest {
         it.setPosition(_doubleArrow_1);
       }
     };
-    TextDocumentPositionParamsImpl _doubleArrow_2 = ObjectExtensions.<TextDocumentPositionParamsImpl>operator_doubleArrow(_textDocumentPositionParamsImpl, _function_2);
-    final List<? extends CompletionItem> completionItems = this.languageServer.completion(_doubleArrow_2);
+    TextDocumentPositionParamsImpl _doubleArrow_1 = ObjectExtensions.<TextDocumentPositionParamsImpl>operator_doubleArrow(_textDocumentPositionParamsImpl, _function_1);
+    final List<? extends CompletionItem> completionItems = this.languageServer.completion(_doubleArrow_1);
     final String actualCompletionItems = this.toExpectation(completionItems);
     Assert.assertEquals(configuration.expectedCompletionItems, actualCompletionItems);
   }

@@ -14,7 +14,6 @@ import io.typefox.lsapi.DidCloseTextDocumentParamsImpl;
 import io.typefox.lsapi.DidOpenTextDocumentParamsImpl;
 import io.typefox.lsapi.FileEvent;
 import io.typefox.lsapi.FileEventImpl;
-import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.RangeImpl;
 import io.typefox.lsapi.TextDocumentContentChangeEventImpl;
@@ -50,16 +49,7 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
     _builder.append("}");
     _builder.newLine();
     final String firstFile = this.operator_mappedTo("MyType1.testlang", _builder);
-    InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
-    final Procedure1<InitializeParamsImpl> _function = new Procedure1<InitializeParamsImpl>() {
-      @Override
-      public void apply(final InitializeParamsImpl it) {
-        String _absolutePath = OpenDocumentTest.this.root.getAbsolutePath();
-        it.setRootPath(_absolutePath);
-      }
-    };
-    InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
-    this.languageServer.initialize(_doubleArrow);
+    this.initialize();
     List<? extends Diagnostic> _get = this.diagnostics.get(firstFile);
     Diagnostic _head = IterableExtensions.head(_get);
     String _message = _head.getMessage();
@@ -72,7 +62,7 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
     final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
     DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl();
-    final Procedure1<DidChangeWatchedFilesParamsImpl> _function_1 = new Procedure1<DidChangeWatchedFilesParamsImpl>() {
+    final Procedure1<DidChangeWatchedFilesParamsImpl> _function = new Procedure1<DidChangeWatchedFilesParamsImpl>() {
       @Override
       public void apply(final DidChangeWatchedFilesParamsImpl it) {
         FileEventImpl _fileEventImpl = new FileEventImpl();
@@ -88,14 +78,14 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
         it.setChanges(_newArrayList);
       }
     };
-    DidChangeWatchedFilesParamsImpl _doubleArrow_1 = ObjectExtensions.<DidChangeWatchedFilesParamsImpl>operator_doubleArrow(_didChangeWatchedFilesParamsImpl, _function_1);
-    _workspaceService.didChangeWatchedFiles(_doubleArrow_1);
+    DidChangeWatchedFilesParamsImpl _doubleArrow = ObjectExtensions.<DidChangeWatchedFilesParamsImpl>operator_doubleArrow(_didChangeWatchedFilesParamsImpl, _function);
+    _workspaceService.didChangeWatchedFiles(_doubleArrow);
     List<? extends Diagnostic> _get_1 = this.diagnostics.get(firstFile);
     Diagnostic _head_1 = IterableExtensions.head(_get_1);
     String _message_1 = _head_1.getMessage();
     Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
     DidOpenTextDocumentParamsImpl _didOpenTextDocumentParamsImpl = new DidOpenTextDocumentParamsImpl();
-    final Procedure1<DidOpenTextDocumentParamsImpl> _function_2 = new Procedure1<DidOpenTextDocumentParamsImpl>() {
+    final Procedure1<DidOpenTextDocumentParamsImpl> _function_1 = new Procedure1<DidOpenTextDocumentParamsImpl>() {
       @Override
       public void apply(final DidOpenTextDocumentParamsImpl it) {
         TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
@@ -116,13 +106,13 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
         it.setTextDocument(_doubleArrow);
       }
     };
-    DidOpenTextDocumentParamsImpl _doubleArrow_2 = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function_2);
-    this.languageServer.didOpen(_doubleArrow_2);
+    DidOpenTextDocumentParamsImpl _doubleArrow_1 = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function_1);
+    this.languageServer.didOpen(_doubleArrow_1);
     List<? extends Diagnostic> _get_2 = this.diagnostics.get(firstFile);
     Diagnostic _head_2 = IterableExtensions.head(_get_2);
     Assert.assertNull(_head_2);
     DidCloseTextDocumentParamsImpl _didCloseTextDocumentParamsImpl = new DidCloseTextDocumentParamsImpl();
-    final Procedure1<DidCloseTextDocumentParamsImpl> _function_3 = new Procedure1<DidCloseTextDocumentParamsImpl>() {
+    final Procedure1<DidCloseTextDocumentParamsImpl> _function_2 = new Procedure1<DidCloseTextDocumentParamsImpl>() {
       @Override
       public void apply(final DidCloseTextDocumentParamsImpl it) {
         TextDocumentIdentifierImpl _textDocumentIdentifierImpl = new TextDocumentIdentifierImpl();
@@ -136,8 +126,8 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
         it.setTextDocument(_doubleArrow);
       }
     };
-    DidCloseTextDocumentParamsImpl _doubleArrow_3 = ObjectExtensions.<DidCloseTextDocumentParamsImpl>operator_doubleArrow(_didCloseTextDocumentParamsImpl, _function_3);
-    this.languageServer.didClose(_doubleArrow_3);
+    DidCloseTextDocumentParamsImpl _doubleArrow_2 = ObjectExtensions.<DidCloseTextDocumentParamsImpl>operator_doubleArrow(_didCloseTextDocumentParamsImpl, _function_2);
+    this.languageServer.didClose(_doubleArrow_2);
     List<? extends Diagnostic> _get_3 = this.diagnostics.get(firstFile);
     Diagnostic _head_3 = IterableExtensions.head(_get_3);
     String _message_2 = _head_3.getMessage();
@@ -155,22 +145,13 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
     _builder.append("}");
     _builder.newLine();
     final String firstFile = this.operator_mappedTo("MyType1.testlang", _builder);
-    InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
-    final Procedure1<InitializeParamsImpl> _function = new Procedure1<InitializeParamsImpl>() {
-      @Override
-      public void apply(final InitializeParamsImpl it) {
-        String _absolutePath = OpenDocumentTest.this.root.getAbsolutePath();
-        it.setRootPath(_absolutePath);
-      }
-    };
-    InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
-    this.languageServer.initialize(_doubleArrow);
+    this.initialize();
     List<? extends Diagnostic> _get = this.diagnostics.get(firstFile);
     Diagnostic _head = IterableExtensions.head(_get);
     String _message = _head.getMessage();
     Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
     DidOpenTextDocumentParamsImpl _didOpenTextDocumentParamsImpl = new DidOpenTextDocumentParamsImpl();
-    final Procedure1<DidOpenTextDocumentParamsImpl> _function_1 = new Procedure1<DidOpenTextDocumentParamsImpl>() {
+    final Procedure1<DidOpenTextDocumentParamsImpl> _function = new Procedure1<DidOpenTextDocumentParamsImpl>() {
       @Override
       public void apply(final DidOpenTextDocumentParamsImpl it) {
         TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
@@ -194,14 +175,14 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
         it.setTextDocument(_doubleArrow);
       }
     };
-    DidOpenTextDocumentParamsImpl _doubleArrow_1 = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function_1);
-    this.languageServer.didOpen(_doubleArrow_1);
+    DidOpenTextDocumentParamsImpl _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function);
+    this.languageServer.didOpen(_doubleArrow);
     List<? extends Diagnostic> _get_1 = this.diagnostics.get(firstFile);
     Diagnostic _head_1 = IterableExtensions.head(_get_1);
     String _message_1 = _head_1.getMessage();
     Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
     DidChangeTextDocumentParamsImpl _didChangeTextDocumentParamsImpl = new DidChangeTextDocumentParamsImpl();
-    final Procedure1<DidChangeTextDocumentParamsImpl> _function_2 = new Procedure1<DidChangeTextDocumentParamsImpl>() {
+    final Procedure1<DidChangeTextDocumentParamsImpl> _function_1 = new Procedure1<DidChangeTextDocumentParamsImpl>() {
       @Override
       public void apply(final DidChangeTextDocumentParamsImpl it) {
         VersionedTextDocumentIdentifierImpl _versionedTextDocumentIdentifierImpl = new VersionedTextDocumentIdentifierImpl();
@@ -253,8 +234,8 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
         it.setContentChanges(Collections.<TextDocumentContentChangeEventImpl>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEventImpl>newArrayList(_doubleArrow_1)));
       }
     };
-    DidChangeTextDocumentParamsImpl _doubleArrow_2 = ObjectExtensions.<DidChangeTextDocumentParamsImpl>operator_doubleArrow(_didChangeTextDocumentParamsImpl, _function_2);
-    this.languageServer.didChange(_doubleArrow_2);
+    DidChangeTextDocumentParamsImpl _doubleArrow_1 = ObjectExtensions.<DidChangeTextDocumentParamsImpl>operator_doubleArrow(_didChangeTextDocumentParamsImpl, _function_1);
+    this.languageServer.didChange(_doubleArrow_1);
     List<? extends Diagnostic> _get_2 = this.diagnostics.get(firstFile);
     Diagnostic _head_2 = IterableExtensions.head(_get_2);
     Assert.assertNull(_head_2);

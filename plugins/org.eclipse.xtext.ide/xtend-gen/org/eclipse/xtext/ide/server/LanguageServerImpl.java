@@ -46,6 +46,7 @@ import io.typefox.lsapi.Range;
 import io.typefox.lsapi.RangeImpl;
 import io.typefox.lsapi.ReferenceParams;
 import io.typefox.lsapi.RenameParams;
+import io.typefox.lsapi.ServerCapabilities;
 import io.typefox.lsapi.ServerCapabilitiesImpl;
 import io.typefox.lsapi.ShowMessageRequestParams;
 import io.typefox.lsapi.SignatureHelp;
@@ -62,6 +63,8 @@ import io.typefox.lsapi.WorkspaceEdit;
 import io.typefox.lsapi.WorkspaceService;
 import io.typefox.lsapi.WorkspaceSymbolParams;
 import io.typefox.lsapi.util.LsapiFactories;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -99,8 +102,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   private WorkspaceManager workspaceManager;
   
-  private String rootPath;
-  
   @Inject
   @Extension
   private IResourceServiceProvider.Registry languagesRegistry;
@@ -108,21 +109,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   @Override
   public InitializeResult initialize(final InitializeParams params) {
     this.params = params;
-    String _rootPath = params.getRootPath();
-    URI _createFileURI = URI.createFileURI(_rootPath);
-    String _string = _createFileURI.toString();
-    this.rootPath = _string;
     WorkspaceManager _get = this.workspaceManagerProvider.get();
     this.workspaceManager = _get;
-    String _rootPath_1 = params.getRootPath();
-    URI _createFileURI_1 = URI.createFileURI(_rootPath_1);
+    String _rootPath = params.getRootPath();
+    final URI rootURI = URI.createFileURI(_rootPath);
     final Procedure2<URI, Iterable<Issue>> _function = new Procedure2<URI, Iterable<Issue>>() {
       @Override
       public void apply(final URI $0, final Iterable<Issue> $1) {
         LanguageServerImpl.this.publishDiagnostics($0, $1);
       }
     };
-    this.workspaceManager.initialize(_createFileURI_1, _function);
+    this.workspaceManager.initialize(rootURI, _function);
     InitializeResultImpl _initializeResultImpl = new InitializeResultImpl();
     final Procedure1<InitializeResultImpl> _function_1 = new Procedure1<InitializeResultImpl>() {
       @Override
@@ -131,6 +128,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         final Procedure1<ServerCapabilitiesImpl> _function = new Procedure1<ServerCapabilitiesImpl>() {
           @Override
           public void apply(final ServerCapabilitiesImpl it) {
+            it.setTextDocumentSync(Integer.valueOf(ServerCapabilities.SYNC_INCREMENTAL));
             CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
             final Procedure1<CompletionOptionsImpl> _function = new Procedure1<CompletionOptionsImpl>() {
               @Override
@@ -242,14 +240,18 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     this.workspaceManager.doBuild(dirtyFiles, deletedFiles);
   }
   
-  public URI toUri(final String path) {
-    return URI.createURI((this.rootPath + path));
+  protected URI toUri(final String path) {
+    Path _get = Paths.get(path);
+    String _string = _get.toString();
+    return URI.createURI(_string);
   }
   
-  public String toPath(final URI uri) {
+  protected String toPath(final URI uri) {
     String _string = uri.toString();
-    int _length = this.rootPath.length();
-    return _string.substring(_length);
+    final java.net.URI javaURI = java.net.URI.create(_string);
+    final Path path = Paths.get(javaURI);
+    java.net.URI _uri = path.toUri();
+    return _uri.toString();
   }
   
   private List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners = CollectionLiterals.<NotificationCallback<PublishDiagnosticsParams>>newArrayList();
@@ -314,13 +316,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         String _message = issue.getMessage();
         it.setMessage(_message);
         Integer _lineNumber = issue.getLineNumber();
+        int _minus = ((_lineNumber).intValue() - 1);
         Integer _column = issue.getColumn();
-        PositionImpl _newPosition = LsapiFactories.newPosition((_lineNumber).intValue(), (_column).intValue());
+        int _minus_1 = ((_column).intValue() - 1);
+        PositionImpl _newPosition = LsapiFactories.newPosition(_minus, _minus_1);
         Integer _lineNumber_1 = issue.getLineNumber();
+        int _minus_2 = ((_lineNumber_1).intValue() - 1);
         Integer _column_1 = issue.getColumn();
+        int _minus_3 = ((_column_1).intValue() - 1);
         Integer _length = issue.getLength();
-        int _plus = ((_column_1).intValue() + (_length).intValue());
-        PositionImpl _newPosition_1 = LsapiFactories.newPosition((_lineNumber_1).intValue(), _plus);
+        int _plus = (_minus_3 + (_length).intValue());
+        PositionImpl _newPosition_1 = LsapiFactories.newPosition(_minus_2, _plus);
         RangeImpl _newRange = LsapiFactories.newRange(_newPosition, _newPosition_1);
         it.setRange(_newRange);
       }
@@ -330,19 +336,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public List<? extends CompletionItem> completion(final TextDocumentPositionParams params) {
-    String _elvis = null;
     TextDocumentIdentifier _textDocument = params.getTextDocument();
-    String _uri = null;
-    if (_textDocument!=null) {
-      _uri=_textDocument.getUri();
-    }
-    if (_uri != null) {
-      _elvis = _uri;
-    } else {
-      String _uri_1 = params.getUri();
-      _elvis = _uri_1;
-    }
-    final URI uri = this.toUri(_elvis);
+    String _uri = _textDocument.getUri();
+    final URI uri = this.toUri(_uri);
     final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
     ContentAssistService _get = null;
     if (resourceServiceProvider!=null) {
@@ -391,27 +387,24 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
+  public void onShowMessage(final NotificationCallback<MessageParams> callback) {
+  }
+  
+  @Override
+  public void onShowMessageRequest(final NotificationCallback<ShowMessageRequestParams> callback) {
+  }
+  
+  @Override
+  public void onLogMessage(final NotificationCallback<MessageParams> callback) {
+  }
+  
+  @Override
   public List<? extends SymbolInformation> symbol(final WorkspaceSymbolParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
   public void didChangeConfiguraton(final DidChangeConfigurationParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
-  public void onShowMessage(final NotificationCallback<MessageParams> callback) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
-  public void onShowMessageRequest(final NotificationCallback<ShowMessageRequestParams> callback) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
-  public void onLogMessage(final NotificationCallback<MessageParams> callback) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
@@ -510,15 +503,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   public void setWorkspaceManager(final WorkspaceManager workspaceManager) {
     this.workspaceManager = workspaceManager;
-  }
-  
-  @Pure
-  public String getRootPath() {
-    return this.rootPath;
-  }
-  
-  public void setRootPath(final String rootPath) {
-    this.rootPath = rootPath;
   }
   
   @Pure

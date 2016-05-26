@@ -11,7 +11,6 @@ import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl;
 import io.typefox.lsapi.FileEvent;
 import io.typefox.lsapi.FileEventImpl;
-import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.WorkspaceService;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,16 +44,7 @@ public class ServerTest extends AbstractLanguageServerTest {
     _builder.newLine();
     this.operator_mappedTo(
       "MyType1.testlang", _builder);
-    InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
-    final Procedure1<InitializeParamsImpl> _function = new Procedure1<InitializeParamsImpl>() {
-      @Override
-      public void apply(final InitializeParamsImpl it) {
-        String _absolutePath = ServerTest.this.root.getAbsolutePath();
-        it.setRootPath(_absolutePath);
-      }
-    };
-    InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
-    this.languageServer.initialize(_doubleArrow);
+    this.initialize();
     Set<Map.Entry<String, List<? extends Diagnostic>>> _entrySet = this.diagnostics.entrySet();
     String _join = IterableExtensions.join(_entrySet, ",");
     Collection<List<? extends Diagnostic>> _values = this.diagnostics.values();
@@ -75,16 +65,7 @@ public class ServerTest extends AbstractLanguageServerTest {
     _builder.newLine();
     this.operator_mappedTo(
       "MyType1.testlang", _builder);
-    InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
-    final Procedure1<InitializeParamsImpl> _function = new Procedure1<InitializeParamsImpl>() {
-      @Override
-      public void apply(final InitializeParamsImpl it) {
-        String _absolutePath = ServerTest.this.root.getAbsolutePath();
-        it.setRootPath(_absolutePath);
-      }
-    };
-    InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
-    this.languageServer.initialize(_doubleArrow);
+    this.initialize();
     Collection<List<? extends Diagnostic>> _values = this.diagnostics.values();
     List<? extends Diagnostic> _head = IterableExtensions.<List<? extends Diagnostic>>head(_values);
     Diagnostic _head_1 = IterableExtensions.head(_head);
@@ -107,16 +88,7 @@ public class ServerTest extends AbstractLanguageServerTest {
     _builder.newLine();
     this.operator_mappedTo(
       "MyType1.testlang", _builder);
-    InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
-    final Procedure1<InitializeParamsImpl> _function = new Procedure1<InitializeParamsImpl>() {
-      @Override
-      public void apply(final InitializeParamsImpl it) {
-        String _absolutePath = ServerTest.this.root.getAbsolutePath();
-        it.setRootPath(_absolutePath);
-      }
-    };
-    InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
-    this.languageServer.initialize(_doubleArrow);
+    this.initialize();
     Collection<List<? extends Diagnostic>> _values = this.diagnostics.values();
     List<? extends Diagnostic> _head = IterableExtensions.<List<? extends Diagnostic>>head(_values);
     Diagnostic _head_1 = IterableExtensions.head(_head);
@@ -130,7 +102,7 @@ public class ServerTest extends AbstractLanguageServerTest {
     final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
     DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl();
-    final Procedure1<DidChangeWatchedFilesParamsImpl> _function_1 = new Procedure1<DidChangeWatchedFilesParamsImpl>() {
+    final Procedure1<DidChangeWatchedFilesParamsImpl> _function = new Procedure1<DidChangeWatchedFilesParamsImpl>() {
       @Override
       public void apply(final DidChangeWatchedFilesParamsImpl it) {
         FileEventImpl _fileEventImpl = new FileEventImpl();
@@ -146,20 +118,20 @@ public class ServerTest extends AbstractLanguageServerTest {
         it.setChanges(_newArrayList);
       }
     };
-    DidChangeWatchedFilesParamsImpl _doubleArrow_1 = ObjectExtensions.<DidChangeWatchedFilesParamsImpl>operator_doubleArrow(_didChangeWatchedFilesParamsImpl, _function_1);
-    _workspaceService.didChangeWatchedFiles(_doubleArrow_1);
+    DidChangeWatchedFilesParamsImpl _doubleArrow = ObjectExtensions.<DidChangeWatchedFilesParamsImpl>operator_doubleArrow(_didChangeWatchedFilesParamsImpl, _function);
+    _workspaceService.didChangeWatchedFiles(_doubleArrow);
     List<? extends Diagnostic> _get = this.diagnostics.get(path);
     Assert.assertNotNull(_get);
     Collection<List<? extends Diagnostic>> _values_1 = this.diagnostics.values();
     String _join = IterableExtensions.join(_values_1, ",");
     Collection<List<? extends Diagnostic>> _values_2 = this.diagnostics.values();
-    final Function1<List<? extends Diagnostic>, Boolean> _function_2 = new Function1<List<? extends Diagnostic>, Boolean>() {
+    final Function1<List<? extends Diagnostic>, Boolean> _function_1 = new Function1<List<? extends Diagnostic>, Boolean>() {
       @Override
       public Boolean apply(final List<? extends Diagnostic> it) {
         return Boolean.valueOf(it.isEmpty());
       }
     };
-    boolean _forall = IterableExtensions.<List<? extends Diagnostic>>forall(_values_2, _function_2);
+    boolean _forall = IterableExtensions.<List<? extends Diagnostic>>forall(_values_2, _function_1);
     Assert.assertTrue(_join, _forall);
   }
 }

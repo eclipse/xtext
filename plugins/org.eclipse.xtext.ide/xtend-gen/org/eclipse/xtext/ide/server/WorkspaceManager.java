@@ -92,7 +92,6 @@ public class WorkspaceManager {
     Set<Map.Entry<URI, ProjectManager>> _entrySet = this.baseDir2ProjectManager.entrySet();
     for (final Map.Entry<URI, ProjectManager> entry : _entrySet) {
       {
-        ProjectManager _value = entry.getValue();
         final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
           @Override
           public Boolean apply(final URI it) {
@@ -101,7 +100,7 @@ public class WorkspaceManager {
           }
         };
         Iterable<URI> _filter = IterableExtensions.<URI>filter(allDirty, _function);
-        List<URI> _list = IterableExtensions.<URI>toList(_filter);
+        final List<URI> projectDirtyFiles = IterableExtensions.<URI>toList(_filter);
         final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
           @Override
           public Boolean apply(final URI it) {
@@ -110,8 +109,9 @@ public class WorkspaceManager {
           }
         };
         Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(deletedFiles, _function_1);
-        List<URI> _list_1 = IterableExtensions.<URI>toList(_filter_1);
-        final IncrementalBuilder.Result result = _value.doBuild(_list, _list_1);
+        final List<URI> projectDeletedFiles = IterableExtensions.<URI>toList(_filter_1);
+        ProjectManager _value = entry.getValue();
+        final IncrementalBuilder.Result result = _value.doBuild(projectDirtyFiles, projectDeletedFiles);
         List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
         final Function1<IResourceDescription.Delta, URI> _function_2 = new Function1<IResourceDescription.Delta, URI>() {
           @Override

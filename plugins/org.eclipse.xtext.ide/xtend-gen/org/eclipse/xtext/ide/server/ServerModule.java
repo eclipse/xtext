@@ -9,6 +9,8 @@ package org.eclipse.xtext.ide.server;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.binder.AnnotatedBindingBuilder;
+import io.typefox.lsapi.LanguageServer;
+import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ResourceServiceProviderServiceLoader;
 
@@ -19,7 +21,9 @@ import org.eclipse.xtext.resource.ResourceServiceProviderServiceLoader;
 public class ServerModule extends AbstractModule {
   @Override
   protected void configure() {
-    AnnotatedBindingBuilder<IResourceServiceProvider.Registry> _bind = this.<IResourceServiceProvider.Registry>bind(IResourceServiceProvider.Registry.class);
-    _bind.toProvider(ResourceServiceProviderServiceLoader.class);
+    AnnotatedBindingBuilder<LanguageServer> _bind = this.<LanguageServer>bind(LanguageServer.class);
+    _bind.to(LanguageServerImpl.class);
+    AnnotatedBindingBuilder<IResourceServiceProvider.Registry> _bind_1 = this.<IResourceServiceProvider.Registry>bind(IResourceServiceProvider.Registry.class);
+    _bind_1.toProvider(ResourceServiceProviderServiceLoader.class);
   }
 }
