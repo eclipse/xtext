@@ -63,8 +63,6 @@ import io.typefox.lsapi.WorkspaceEdit;
 import io.typefox.lsapi.WorkspaceService;
 import io.typefox.lsapi.WorkspaceSymbolParams;
 import io.typefox.lsapi.util.LsapiFactories;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -73,6 +71,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -101,6 +100,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   private Provider<WorkspaceManager> workspaceManagerProvider;
   
   private WorkspaceManager workspaceManager;
+  
+  @Inject
+  @Extension
+  private UriExtensions _uriExtensions;
   
   @Inject
   @Extension
@@ -175,7 +178,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   public void didOpen(final DidOpenTextDocumentParams params) {
     TextDocumentItem _textDocument = params.getTextDocument();
     String _uri = _textDocument.getUri();
-    URI _uri_1 = this.toUri(_uri);
+    URI _uri_1 = this._uriExtensions.toUri(_uri);
     TextDocumentItem _textDocument_1 = params.getTextDocument();
     int _version = _textDocument_1.getVersion();
     TextDocumentItem _textDocument_2 = params.getTextDocument();
@@ -187,7 +190,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   public void didChange(final DidChangeTextDocumentParams params) {
     VersionedTextDocumentIdentifier _textDocument = params.getTextDocument();
     String _uri = _textDocument.getUri();
-    URI _uri_1 = this.toUri(_uri);
+    URI _uri_1 = this._uriExtensions.toUri(_uri);
     VersionedTextDocumentIdentifier _textDocument_1 = params.getTextDocument();
     int _version = _textDocument_1.getVersion();
     List<? extends TextDocumentContentChangeEvent> _contentChanges = params.getContentChanges();
@@ -207,7 +210,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   public void didClose(final DidCloseTextDocumentParams params) {
     TextDocumentIdentifier _textDocument = params.getTextDocument();
     String _uri = _textDocument.getUri();
-    URI _uri_1 = this.toUri(_uri);
+    URI _uri_1 = this._uriExtensions.toUri(_uri);
     this.workspaceManager.didClose(_uri_1);
   }
   
@@ -215,7 +218,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   public void didSave(final DidSaveTextDocumentParams params) {
     TextDocumentIdentifier _textDocument = params.getTextDocument();
     String _uri = _textDocument.getUri();
-    URI _uri_1 = this.toUri(_uri);
+    URI _uri_1 = this._uriExtensions.toUri(_uri);
     this.workspaceManager.didSave(_uri_1);
   }
   
@@ -229,29 +232,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       boolean _tripleEquals = (_type == FileEvent.TYPE_DELETED);
       if (_tripleEquals) {
         String _uri = fileEvent.getUri();
-        URI _uri_1 = this.toUri(_uri);
+        URI _uri_1 = this._uriExtensions.toUri(_uri);
         deletedFiles.add(_uri_1);
       } else {
         String _uri_2 = fileEvent.getUri();
-        URI _uri_3 = this.toUri(_uri_2);
+        URI _uri_3 = this._uriExtensions.toUri(_uri_2);
         dirtyFiles.add(_uri_3);
       }
     }
     this.workspaceManager.doBuild(dirtyFiles, deletedFiles);
-  }
-  
-  protected URI toUri(final String path) {
-    Path _get = Paths.get(path);
-    String _string = _get.toString();
-    return URI.createURI(_string);
-  }
-  
-  protected String toPath(final URI uri) {
-    String _string = uri.toString();
-    final java.net.URI javaURI = java.net.URI.create(_string);
-    final Path path = Paths.get(javaURI);
-    java.net.URI _uri = path.toUri();
-    return _uri.toString();
   }
   
   private List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners = CollectionLiterals.<NotificationCallback<PublishDiagnosticsParams>>newArrayList();
@@ -266,7 +255,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     final Procedure1<PublishDiagnosticsParamsImpl> _function = new Procedure1<PublishDiagnosticsParamsImpl>() {
       @Override
       public void apply(final PublishDiagnosticsParamsImpl it) {
-        String _path = LanguageServerImpl.this.toPath(uri);
+        String _path = LanguageServerImpl.this._uriExtensions.toPath(uri);
         it.setUri(_path);
         final Function1<Issue, DiagnosticImpl> _function = new Function1<Issue, DiagnosticImpl>() {
           @Override
@@ -338,7 +327,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   public List<? extends CompletionItem> completion(final TextDocumentPositionParams params) {
     TextDocumentIdentifier _textDocument = params.getTextDocument();
     String _uri = _textDocument.getUri();
-    final URI uri = this.toUri(_uri);
+    final URI uri = this._uriExtensions.toUri(_uri);
     final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
     ContentAssistService _get = null;
     if (resourceServiceProvider!=null) {
@@ -503,6 +492,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   public void setWorkspaceManager(final WorkspaceManager workspaceManager) {
     this.workspaceManager = workspaceManager;
+  }
+  
+  @Pure
+  public UriExtensions get_uriExtensions() {
+    return this._uriExtensions;
+  }
+  
+  public void set_uriExtensions(final UriExtensions _uriExtensions) {
+    this._uriExtensions = _uriExtensions;
   }
   
   @Pure

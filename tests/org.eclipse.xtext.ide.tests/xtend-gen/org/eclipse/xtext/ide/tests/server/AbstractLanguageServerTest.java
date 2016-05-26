@@ -24,10 +24,11 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
+import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Before;
 
@@ -56,6 +57,10 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Inject
+  @Extension
+  private UriExtensions _uriExtensions;
   
   @Inject
   protected LanguageServerImpl languageServer;
@@ -87,24 +92,13 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
       File _parentFile = file.getParentFile();
       _parentFile.mkdirs();
       file.createNewFile();
-      FileWriter _fileWriter = new FileWriter(file);
-      final Procedure1<FileWriter> _function = new Procedure1<FileWriter>() {
-        @Override
-        public void apply(final FileWriter it) {
-          try {
-            String _string = contents.toString();
-            it.write(_string);
-            it.close();
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      ObjectExtensions.<FileWriter>operator_doubleArrow(_fileWriter, _function);
-      Path _path = file.toPath();
-      final Path normalizedPath = _path.normalize();
-      URI _uri = normalizedPath.toUri();
-      return _uri.toString();
+      final FileWriter writer = new FileWriter(file);
+      String _string = contents.toString();
+      writer.write(_string);
+      writer.close();
+      URI _uRI = file.toURI();
+      URI _normalize = _uRI.normalize();
+      return this._uriExtensions.toPath(_normalize);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
