@@ -7,22 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
+import io.typefox.lsapi.DidChangeTextDocumentParamsImpl
 import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl
 import io.typefox.lsapi.DidCloseTextDocumentParamsImpl
 import io.typefox.lsapi.DidOpenTextDocumentParamsImpl
 import io.typefox.lsapi.FileEvent
 import io.typefox.lsapi.FileEventImpl
-import io.typefox.lsapi.InitializeParamsImpl
+import io.typefox.lsapi.PositionImpl
+import io.typefox.lsapi.RangeImpl
+import io.typefox.lsapi.TextDocumentContentChangeEventImpl
 import io.typefox.lsapi.TextDocumentIdentifierImpl
 import io.typefox.lsapi.TextDocumentItemImpl
+import io.typefox.lsapi.VersionedTextDocumentIdentifierImpl
 import org.junit.Test
 
 import static org.junit.Assert.*
-import io.typefox.lsapi.DidChangeTextDocumentParamsImpl
-import io.typefox.lsapi.VersionedTextDocumentIdentifierImpl
-import io.typefox.lsapi.TextDocumentContentChangeEventImpl
-import io.typefox.lsapi.RangeImpl
-import io.typefox.lsapi.PositionImpl
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -36,9 +35,7 @@ class OpenDocumentTest extends AbstractLanguageServerTest {
                 NonExisting foo
             }
         '''
-        languageServer.initialize(new InitializeParamsImpl => [
-            rootPath = root.absolutePath
-        ])
+        initialize
         
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
         
@@ -86,9 +83,7 @@ class OpenDocumentTest extends AbstractLanguageServerTest {
                 NonExisting foo
             }
         '''
-        languageServer.initialize(new InitializeParamsImpl => [
-            rootPath = root.absolutePath
-        ])
+        initialize
         
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
         

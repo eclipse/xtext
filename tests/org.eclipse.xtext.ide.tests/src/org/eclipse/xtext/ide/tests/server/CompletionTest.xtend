@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.tests.server
 
 import io.typefox.lsapi.CompletionItem
 import io.typefox.lsapi.DidOpenTextDocumentParamsImpl
-import io.typefox.lsapi.InitializeParamsImpl
 import io.typefox.lsapi.PositionImpl
 import io.typefox.lsapi.TextDocumentIdentifierImpl
 import io.typefox.lsapi.TextDocumentItemImpl
@@ -27,7 +26,7 @@ class CompletionTest extends AbstractLanguageServerTest {
 
 	@Test
 	def void testCompletion_01() {
-		testComletion [
+		testCompletion [
 			expectedCompletionItems = '''
 				type
 			'''
@@ -36,7 +35,7 @@ class CompletionTest extends AbstractLanguageServerTest {
 
 	@Test
 	def void testCompletion_02() {
-		testComletion [
+		testCompletion [
 			model = 'type '
 			caretColumn = 5
 			expectedCompletionItems = '''
@@ -47,7 +46,7 @@ class CompletionTest extends AbstractLanguageServerTest {
 
 	@Test
 	def void testCompletion_03() {
-		testComletion [
+		testCompletion [
 			model = '''
 				type Foo {}
 				type Bar {}
@@ -66,14 +65,12 @@ class CompletionTest extends AbstractLanguageServerTest {
 		]
 	}
 
-	protected def testComletion((TestCompletionConfiguration)=>void configurator) {
+	protected def testCompletion((TestCompletionConfiguration)=>void configurator) {
 		val extension configuration = new TestCompletionConfiguration
 		configurator.apply(configuration)
 		val fileUri = filePath -> model
 
-		languageServer.initialize(new InitializeParamsImpl => [
-			rootPath = root.absolutePath
-		])
+		initialize
 
 		languageServer.didOpen(new DidOpenTextDocumentParamsImpl => [
 			textDocument = new TextDocumentItemImpl => [
@@ -95,7 +92,6 @@ class CompletionTest extends AbstractLanguageServerTest {
 
 		val actualCompletionItems = toExpectation(completionItems)
 		assertEquals(expectedCompletionItems, actualCompletionItems)
-
 	}
 
 	protected def String toExpectation(List<? extends CompletionItem> completionItems) '''

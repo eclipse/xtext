@@ -39,6 +39,7 @@ import io.typefox.lsapi.PublishDiagnosticsParamsImpl
 import io.typefox.lsapi.RangeImpl
 import io.typefox.lsapi.ReferenceParams
 import io.typefox.lsapi.RenameParams
+import io.typefox.lsapi.ServerCapabilities
 import io.typefox.lsapi.ServerCapabilitiesImpl
 import io.typefox.lsapi.ShowMessageRequestParams
 import io.typefox.lsapi.TextDocumentPositionParams
@@ -46,6 +47,7 @@ import io.typefox.lsapi.TextDocumentService
 import io.typefox.lsapi.WindowService
 import io.typefox.lsapi.WorkspaceService
 import io.typefox.lsapi.WorkspaceSymbolParams
+import java.nio.file.Paths
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -65,16 +67,16 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     InitializeParams params
     @Inject Provider<WorkspaceManager> workspaceManagerProvider
     WorkspaceManager workspaceManager
-    String rootPath
     @Inject extension IResourceServiceProvider.Registry languagesRegistry
     
     override InitializeResult initialize(InitializeParams params) {
         this.params = params
-        this.rootPath = URI.createFileURI(params.rootPath).toString
         workspaceManager = workspaceManagerProvider.get
-        workspaceManager.initialize(URI.createFileURI(params.rootPath), [ this.publishDiagnostics($0, $1) ])
+        val rootURI = URI.createFileURI(params.rootPath)
+        workspaceManager.initialize(rootURI)[this.publishDiagnostics($0, $1)]
         return new InitializeResultImpl => [
             capabilities = new ServerCapabilitiesImpl => [
+            	textDocumentSync = ServerCapabilities.SYNC_INCREMENTAL
                 completionProvider = new CompletionOptionsImpl => [
                     resolveProvider = false
                     triggerCharacters = #["."]
@@ -132,12 +134,14 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     }
     // end file/content change events
     
-    def URI toUri(String path) {
-        URI.createURI(rootPath + path)
+    protected def URI toUri(String path) {
+    	return URI.createURI(Paths.get(path).toString)
     }
 
-    def toPath(URI uri) {
-        uri.toString.substring(rootPath.length)
+    protected def String toPath(URI uri) {
+    	val javaURI = java.net.URI.create(uri.toString)
+        val path = Paths.get(javaURI)
+		return path.toUri.toString
     }
     
     // validation stuff
@@ -169,8 +173,8 @@ import static io.typefox.lsapi.util.LsapiFactories.*
             }
             message = issue.message
             range = newRange(
-                 newPosition(issue.lineNumber,issue.column),
-                 newPosition(issue.lineNumber,issue.column + issue.length)
+                 newPosition(issue.lineNumber - 1, issue.column - 1),
+                 newPosition(issue.lineNumber - 1, issue.column - 1 + issue.length)
             )
         ]
     }
@@ -180,7 +184,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     // completion stuff
     
     override completion(TextDocumentPositionParams params) {
-		val uri = toUri(params.textDocument?.uri ?: params.uri)
+		val uri = params.textDocument.uri.toUri
 		val resourceServiceProvider = uri.resourceServiceProvider
 		val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
 		if (contentAssistService === null)
@@ -203,24 +207,27 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     
     // end completion stuff
     
+    // notification callbacks
+    
+    override onShowMessage(NotificationCallback<MessageParams> callback) {
+        // TODO: auto-generated method stub
+    }
+    
+    override onShowMessageRequest(NotificationCallback<ShowMessageRequestParams> callback) {
+        // TODO: auto-generated method stub
+    }
+    
+    override onLogMessage(NotificationCallback<MessageParams> callback) {
+        // TODO: auto-generated method stub
+    }
+    
+    // end notification callbacks
+    
     override symbol(WorkspaceSymbolParams params) {
         throw new UnsupportedOperationException("TODO: auto-generated method stub")
     }
     
     override didChangeConfiguraton(DidChangeConfigurationParams params) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    
-    override onShowMessage(NotificationCallback<MessageParams> callback) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override onShowMessageRequest(NotificationCallback<ShowMessageRequestParams> callback) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override onLogMessage(NotificationCallback<MessageParams> callback) {
         throw new UnsupportedOperationException("TODO: auto-generated method stub")
     }
     

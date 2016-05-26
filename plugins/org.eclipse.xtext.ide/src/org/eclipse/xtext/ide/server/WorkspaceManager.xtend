@@ -59,7 +59,9 @@ class WorkspaceManager {
         //TODO sort projects by dependency
         val allDirty = new ArrayList(dirtyFiles)
         for (entry : baseDir2ProjectManager.entrySet) {
-            val result = entry.value.doBuild(allDirty.filter[isPrefix(entry.key)].toList, deletedFiles.filter[isPrefix(entry.key)].toList)
+            val projectDirtyFiles = allDirty.filter[isPrefix(entry.key)].toList
+			val projectDeletedFiles = deletedFiles.filter[isPrefix(entry.key)].toList
+			val result = entry.value.doBuild(projectDirtyFiles, projectDeletedFiles)
             allDirty.addAll(result.affectedResources.map[uri])
         }
     }
