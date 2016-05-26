@@ -52,6 +52,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
+import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
@@ -76,6 +77,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
         workspaceManager.initialize(rootURI)[this.publishDiagnostics($0, $1)]
         return new InitializeResultImpl => [
             capabilities = new ServerCapabilitiesImpl => [
+            	documentSymbolProvider = true
             	textDocumentSync = ServerCapabilities.SYNC_INCREMENTAL
                 completionProvider = new CompletionOptionsImpl => [
                     resolveProvider = false
@@ -102,7 +104,23 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     override getWindowService() {
         this
     }
+
+    // notification callbacks
+
+    override onShowMessage(NotificationCallback<MessageParams> callback) {
+        // TODO: auto-generated method stub
+    }
+
+    override onShowMessageRequest(NotificationCallback<ShowMessageRequestParams> callback) {
+        // TODO: auto-generated method stub
+    }
     
+    override onLogMessage(NotificationCallback<MessageParams> callback) {
+        // TODO: auto-generated method stub
+    }
+
+    // end notification callbacks
+
     // file/content change events
     override didOpen(DidOpenTextDocumentParams params) {
         workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text)
@@ -199,21 +217,21 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     
     // end completion stuff
     
-    // notification callbacks
+    // symbols
     
-    override onShowMessage(NotificationCallback<MessageParams> callback) {
-        // TODO: auto-generated method stub
+    override documentSymbol(DocumentSymbolParams params) {
+    	val uri = params.textDocument.uri.toUri
+		val resourceServiceProvider = uri.resourceServiceProvider
+		val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
+		if (documentSymbolService === null)
+        	return emptyList
+        	
+        return workspaceManager.doRead(uri) [ document, resource | 
+        	return documentSymbolService.getSymbols(resource) 
+        ]		
     }
     
-    override onShowMessageRequest(NotificationCallback<ShowMessageRequestParams> callback) {
-        // TODO: auto-generated method stub
-    }
-    
-    override onLogMessage(NotificationCallback<MessageParams> callback) {
-        // TODO: auto-generated method stub
-    }
-    
-    // end notification callbacks
+    // end symbols
     
     override symbol(WorkspaceSymbolParams params) {
         throw new UnsupportedOperationException("TODO: auto-generated method stub")
@@ -244,10 +262,6 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     }
     
     override documentHighlight(TextDocumentPositionParams position) {
-        throw new UnsupportedOperationException("TODO: auto-generated method stub")
-    }
-    
-    override documentSymbol(DocumentSymbolParams params) {
         throw new UnsupportedOperationException("TODO: auto-generated method stub")
     }
     

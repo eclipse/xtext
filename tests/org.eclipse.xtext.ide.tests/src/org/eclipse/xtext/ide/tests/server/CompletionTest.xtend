@@ -8,15 +8,12 @@
 package org.eclipse.xtext.ide.tests.server
 
 import io.typefox.lsapi.CompletionItem
-import io.typefox.lsapi.DidOpenTextDocumentParamsImpl
-import io.typefox.lsapi.PositionImpl
-import io.typefox.lsapi.TextDocumentIdentifierImpl
-import io.typefox.lsapi.TextDocumentItemImpl
 import io.typefox.lsapi.TextDocumentPositionParamsImpl
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
 
+import static io.typefox.lsapi.util.LsapiFactories.*
 import static org.junit.Assert.*
 
 /**
@@ -37,7 +34,7 @@ class CompletionTest extends AbstractLanguageServerTest {
 	def void testCompletion_02() {
 		testCompletion [
 			model = 'type '
-			caretColumn = 5
+			column = 5
 			expectedCompletionItems = '''
 				name (ID)
 			'''
@@ -51,8 +48,8 @@ class CompletionTest extends AbstractLanguageServerTest {
 				type Foo {}
 				type Bar {}
 			'''
-			caretLine = 1
-			caretColumn = 'type Bar {'.length
+			line = 1
+			column = 'type Bar {'.length
 			expectedCompletionItems = '''
 				Bar (TypeDeclaration)
 				Foo (TypeDeclaration)
@@ -71,23 +68,11 @@ class CompletionTest extends AbstractLanguageServerTest {
 		val fileUri = filePath -> model
 
 		initialize
-
-		languageServer.didOpen(new DidOpenTextDocumentParamsImpl => [
-			textDocument = new TextDocumentItemImpl => [
-				uri = fileUri
-				version = 1
-				text = model
-			]
-		])
+		open(fileUri, model)
 
 		val completionItems = languageServer.completion(new TextDocumentPositionParamsImpl => [
-			textDocument = new TextDocumentIdentifierImpl => [
-				uri = fileUri
-			]
-			position = new PositionImpl => [
-				line = caretLine
-				character = caretColumn
-			]
+			textDocument = fileUri.createIdentifier
+			position = newPosition(line, column)
 		])
 
 		val actualCompletionItems = toExpectation(completionItems)
@@ -108,8 +93,8 @@ class CompletionTest extends AbstractLanguageServerTest {
 	static class TestCompletionConfiguration {
 		String model = ''
 		String filePath = 'MyModel.testlang'
-		int caretLine = 0
-		int caretColumn = 0
+		int line = 0
+		int column = 0
 		String expectedCompletionItems = ''
 	}
 

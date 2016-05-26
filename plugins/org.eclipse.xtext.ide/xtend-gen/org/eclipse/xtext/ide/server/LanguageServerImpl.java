@@ -74,6 +74,7 @@ import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
+import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.Issue;
@@ -131,6 +132,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         final Procedure1<ServerCapabilitiesImpl> _function = new Procedure1<ServerCapabilitiesImpl>() {
           @Override
           public void apply(final ServerCapabilitiesImpl it) {
+            it.setDocumentSymbolProvider(Boolean.valueOf(true));
             it.setTextDocumentSync(Integer.valueOf(ServerCapabilities.SYNC_INCREMENTAL));
             CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
             final Procedure1<CompletionOptionsImpl> _function = new Procedure1<CompletionOptionsImpl>() {
@@ -172,6 +174,18 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   @Override
   public WindowService getWindowService() {
     return this;
+  }
+  
+  @Override
+  public void onShowMessage(final NotificationCallback<MessageParams> callback) {
+  }
+  
+  @Override
+  public void onShowMessageRequest(final NotificationCallback<ShowMessageRequestParams> callback) {
+  }
+  
+  @Override
+  public void onLogMessage(final NotificationCallback<MessageParams> callback) {
   }
   
   @Override
@@ -376,15 +390,26 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public void onShowMessage(final NotificationCallback<MessageParams> callback) {
-  }
-  
-  @Override
-  public void onShowMessageRequest(final NotificationCallback<ShowMessageRequestParams> callback) {
-  }
-  
-  @Override
-  public void onLogMessage(final NotificationCallback<MessageParams> callback) {
+  public List<? extends SymbolInformation> documentSymbol(final DocumentSymbolParams params) {
+    TextDocumentIdentifier _textDocument = params.getTextDocument();
+    String _uri = _textDocument.getUri();
+    final URI uri = this._uriExtensions.toUri(_uri);
+    final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+    DocumentSymbolService _get = null;
+    if (resourceServiceProvider!=null) {
+      _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
+    }
+    final DocumentSymbolService documentSymbolService = _get;
+    if ((documentSymbolService == null)) {
+      return CollectionLiterals.<SymbolInformation>emptyList();
+    }
+    final Function2<Document, XtextResource, List<? extends SymbolInformation>> _function = new Function2<Document, XtextResource, List<? extends SymbolInformation>>() {
+      @Override
+      public List<? extends SymbolInformation> apply(final Document document, final XtextResource resource) {
+        return documentSymbolService.getSymbols(resource);
+      }
+    };
+    return this.workspaceManager.<List<? extends SymbolInformation>>doRead(uri, _function);
   }
   
   @Override
@@ -424,11 +449,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public DocumentHighlight documentHighlight(final TextDocumentPositionParams position) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
-  public List<? extends SymbolInformation> documentSymbol(final DocumentSymbolParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   

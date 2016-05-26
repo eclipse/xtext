@@ -11,17 +11,25 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import io.typefox.lsapi.Diagnostic;
+import io.typefox.lsapi.DidOpenTextDocumentParamsImpl;
 import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.InitializeResult;
+import io.typefox.lsapi.Location;
 import io.typefox.lsapi.NotificationCallback;
+import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PublishDiagnosticsParams;
+import io.typefox.lsapi.Range;
+import io.typefox.lsapi.TextDocumentIdentifierImpl;
+import io.typefox.lsapi.TextDocumentItemImpl;
 import io.typefox.lsapi.TextDocumentService;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URI;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.UriExtensions;
@@ -29,6 +37,7 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Before;
 
@@ -69,21 +78,62 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
   
   protected File root;
   
+  protected Path getRootPath() {
+    Path _path = this.root.toPath();
+    Path _absolutePath = _path.toAbsolutePath();
+    return _absolutePath.normalize();
+  }
+  
+  protected Path relativize(final String uri) {
+    try {
+      Path _xblockexpression = null;
+      {
+        URI _uRI = new URI(uri);
+        final Path path = Paths.get(_uRI);
+        Path _rootPath = this.getRootPath();
+        _xblockexpression = _rootPath.relativize(path);
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected InitializeResult initialize() {
     return this.initialize(null);
   }
   
   protected InitializeResult initialize(final Procedure1<? super InitializeParamsImpl> initializer) {
     final InitializeParamsImpl params = new InitializeParamsImpl();
-    Path _path = this.root.toPath();
-    Path _absolutePath = _path.toAbsolutePath();
-    Path _normalize = _absolutePath.normalize();
-    String _string = _normalize.toString();
+    Path _rootPath = this.getRootPath();
+    String _string = _rootPath.toString();
     params.setRootPath(_string);
     if (initializer!=null) {
       initializer.apply(params);
     }
     return this.languageServer.initialize(params);
+  }
+  
+  protected void open(final String fileUri, final String model) {
+    DidOpenTextDocumentParamsImpl _didOpenTextDocumentParamsImpl = new DidOpenTextDocumentParamsImpl();
+    final Procedure1<DidOpenTextDocumentParamsImpl> _function = new Procedure1<DidOpenTextDocumentParamsImpl>() {
+      @Override
+      public void apply(final DidOpenTextDocumentParamsImpl it) {
+        TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
+        final Procedure1<TextDocumentItemImpl> _function = new Procedure1<TextDocumentItemImpl>() {
+          @Override
+          public void apply(final TextDocumentItemImpl it) {
+            it.setUri(fileUri);
+            it.setVersion(1);
+            it.setText(model);
+          }
+        };
+        TextDocumentItemImpl _doubleArrow = ObjectExtensions.<TextDocumentItemImpl>operator_doubleArrow(_textDocumentItemImpl, _function);
+        it.setTextDocument(_doubleArrow);
+      }
+    };
+    DidOpenTextDocumentParamsImpl _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function);
+    this.languageServer.didOpen(_doubleArrow);
   }
   
   public String operator_mappedTo(final String path, final CharSequence contents) {
@@ -109,5 +159,49 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
     String _uri = t.getUri();
     List<? extends Diagnostic> _diagnostics = t.getDiagnostics();
     this.diagnostics.put(_uri, _diagnostics);
+  }
+  
+  protected TextDocumentIdentifierImpl createIdentifier(final String uri) {
+    final TextDocumentIdentifierImpl identifier = new TextDocumentIdentifierImpl();
+    identifier.setUri(uri);
+    return identifier;
+  }
+  
+  protected String toExpectation(final Location it) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _uri = it.getUri();
+    Path _relativize = this.relativize(_uri);
+    _builder.append(_relativize, "");
+    _builder.append(" ");
+    Range _range = it.getRange();
+    String _expectation = this.toExpectation(_range);
+    _builder.append(_expectation, "");
+    return _builder.toString();
+  }
+  
+  protected String toExpectation(final Range it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[");
+    Position _start = it.getStart();
+    String _expectation = this.toExpectation(_start);
+    _builder.append(_expectation, "");
+    _builder.append(" .. ");
+    Position _end = it.getEnd();
+    String _expectation_1 = this.toExpectation(_end);
+    _builder.append(_expectation_1, "");
+    _builder.append("]");
+    return _builder.toString();
+  }
+  
+  protected String toExpectation(final Position it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("[");
+    int _line = it.getLine();
+    _builder.append(_line, "");
+    _builder.append(", ");
+    int _character = it.getCharacter();
+    _builder.append(_character, "");
+    _builder.append("]");
+    return _builder.toString();
   }
 }
