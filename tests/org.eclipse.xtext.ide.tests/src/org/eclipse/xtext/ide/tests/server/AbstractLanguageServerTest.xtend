@@ -20,6 +20,7 @@ import java.util.List
 import java.util.Map
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
+import org.eclipse.xtext.ide.server.UriExtensions
 import org.eclipse.xtext.util.Files
 import org.junit.Before
 
@@ -43,6 +44,7 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
         root.deleteOnExit
     }
     
+    @Inject extension UriExtensions
     @Inject protected LanguageServerImpl languageServer 
     protected Map<String, List<? extends Diagnostic>> diagnostics = newHashMap()
     
@@ -63,12 +65,12 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
         val file = new File(root, path)
         file.parentFile.mkdirs
         file.createNewFile
-        new FileWriter(file) => [
-          write(contents.toString)
-          close  
-        ]
-		val normalizedPath = file.toPath().normalize
-		return normalizedPath.toUri.toString
+        
+        val writer = new FileWriter(file)
+      	writer.write(contents.toString)
+      	writer.close
+
+		return file.toURI.normalize.toPath
     }
     
     override call(PublishDiagnosticsParams t) {

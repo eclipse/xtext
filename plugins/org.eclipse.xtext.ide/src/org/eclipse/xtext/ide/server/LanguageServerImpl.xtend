@@ -47,7 +47,6 @@ import io.typefox.lsapi.TextDocumentService
 import io.typefox.lsapi.WindowService
 import io.typefox.lsapi.WorkspaceService
 import io.typefox.lsapi.WorkspaceSymbolParams
-import java.nio.file.Paths
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -67,6 +66,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
     InitializeParams params
     @Inject Provider<WorkspaceManager> workspaceManagerProvider
     WorkspaceManager workspaceManager
+    @Inject extension UriExtensions
     @Inject extension IResourceServiceProvider.Registry languagesRegistry
     
     override InitializeResult initialize(InitializeParams params) {
@@ -87,16 +87,18 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 
     override exit() {
     }
-    
+
     override void shutdown() {
     }
-    
+
     override getTextDocumentService() {
         this
     }
+
     override getWorkspaceService() {
         this
     }
+
     override getWindowService() {
         this
     }
@@ -133,16 +135,6 @@ import static io.typefox.lsapi.util.LsapiFactories.*
         workspaceManager.doBuild(dirtyFiles, deletedFiles)
     }
     // end file/content change events
-    
-    protected def URI toUri(String path) {
-    	return URI.createURI(Paths.get(path).toString)
-    }
-
-    protected def String toPath(URI uri) {
-    	val javaURI = java.net.URI.create(uri.toString)
-        val path = Paths.get(javaURI)
-		return path.toUri.toString
-    }
     
     // validation stuff
     
