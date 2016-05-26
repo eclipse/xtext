@@ -121,9 +121,12 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       };
       final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_3);
       int _size = semanticSnippets.size();
-      Assert.assertEquals("Highlighting regions broken", 2, _size);
+      Assert.assertEquals("Highlighting regions broken", 3, _size);
       String _head = IterableExtensions.<String>head(semanticSnippets);
-      Assert.assertEquals("foo", _head);
+      Assert.assertEquals("Foo", _head);
+      Iterable<String> _tail = IterableExtensions.<String>tail(semanticSnippets);
+      String _head_1 = IterableExtensions.<String>head(_tail);
+      Assert.assertEquals("foo", _head_1);
       String _last = IterableExtensions.<String>last(semanticSnippets);
       Assert.assertEquals("3", _last);
     } catch (Throwable _e) {
@@ -206,9 +209,11 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       String _join = IterableExtensions.join(semanticSnippets, ",");
       String _plus = ("Highlighting regions broken " + _join);
       int _size = semanticSnippets.size();
-      Assert.assertEquals(_plus, 1, _size);
+      Assert.assertEquals(_plus, 2, _size);
       String _head = IterableExtensions.<String>head(semanticSnippets);
-      Assert.assertEquals("foo", _head);
+      Assert.assertEquals("Foo", _head);
+      String _last = IterableExtensions.<String>last(semanticSnippets);
+      Assert.assertEquals("foo", _last);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
