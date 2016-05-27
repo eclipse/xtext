@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
+import com.google.common.base.Objects;
 import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.json.JsonBasedLanguageServer;
@@ -14,9 +15,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import org.eclipse.xtext.ide.server.ServerLauncher;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -46,8 +47,9 @@ public class ServerLauncherTest {
           }
         };
         InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
-        InitializeResult _initialize = client.initialize(_doubleArrow);
-        InputOutput.<InitializeResult>println(_initialize);
+        final InitializeResult msg = client.initialize(_doubleArrow);
+        boolean _notEquals = (!Objects.equal(msg, null));
+        Assert.assertTrue(_notEquals);
       } finally {
         process.destroy();
       }

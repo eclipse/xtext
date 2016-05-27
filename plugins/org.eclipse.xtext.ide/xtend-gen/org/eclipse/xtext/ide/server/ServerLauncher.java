@@ -12,26 +12,40 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import io.typefox.lsapi.NotificationMessage;
+import io.typefox.lsapi.json.LanguageServerProtocol;
 import io.typefox.lsapi.json.LanguageServerToJsonAdapter;
 import io.typefox.lsapi.json.MessageMethods;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.apache.log4j.Logger;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class ServerLauncher {
-  private final Logger LOG = Logger.getLogger(ServerLauncher.class);
+  private static boolean IS_DEBUG = false;
   
   public static void main(final String[] args) {
+    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+      @Override
+      public Boolean apply(final String it) {
+        return Boolean.valueOf(Objects.equal(it, "debug"));
+      }
+    };
+    boolean _exists = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
+    ServerLauncher.IS_DEBUG = _exists;
     ServerModule _serverModule = new ServerModule();
     Injector _createInjector = Guice.createInjector(_serverModule);
     final ServerLauncher launcher = _createInjector.<ServerLauncher>getInstance(ServerLauncher.class);
@@ -47,19 +61,13 @@ public class ServerLauncher {
     try {
       final InputStream stdin = System.in;
       final PrintStream stdout = System.out;
-      byte[] _newByteArrayOfSize = new byte[0];
-      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
-      System.setIn(_byteArrayInputStream);
-      FileOutputStream _fileOutputStream = new FileOutputStream("out.log");
-      PrintStream _printStream = new PrintStream(_fileOutputStream);
-      System.setOut(_printStream);
+      this.redirectStandardStreams();
       System.err.println("Starting Xtext Language Server.");
       final LanguageServerToJsonAdapter messageAcceptor = new LanguageServerToJsonAdapter(this.languageServer) {
         @Override
         protected void _doAccept(final NotificationMessage message) {
-          boolean _isDebugEnabled = ServerLauncher.this.LOG.isDebugEnabled();
-          if (_isDebugEnabled) {
-            ServerLauncher.this.LOG.debug(message);
+          if (ServerLauncher.IS_DEBUG) {
+            InputOutput.<NotificationMessage>println(message);
           }
           String _method = message.getMethod();
           boolean _equals = Objects.equal(_method, MessageMethods.EXIT);
@@ -71,33 +79,38 @@ public class ServerLauncher {
         
         @Override
         protected void sendResponse(final String responseId, final Object resultValue) {
-          boolean _isDebugEnabled = ServerLauncher.this.LOG.isDebugEnabled();
-          if (_isDebugEnabled) {
-            ServerLauncher.this.LOG.debug(("response : " + resultValue));
+          if (ServerLauncher.IS_DEBUG) {
+            InputOutput.<String>println(("response : " + resultValue));
           }
           super.sendResponse(responseId, resultValue);
         }
         
         @Override
         protected void sendNotification(final String methodId, final Object parameter) {
-          boolean _isDebugEnabled = ServerLauncher.this.LOG.isDebugEnabled();
-          if (_isDebugEnabled) {
-            ServerLauncher.this.LOG.debug(("id" + methodId));
-            ServerLauncher.this.LOG.debug(("notification : " + parameter));
+          if (ServerLauncher.IS_DEBUG) {
+            InputOutput.<String>println(("id" + methodId));
+            InputOutput.<String>println(("notification : " + parameter));
           }
           super.sendNotification(methodId, parameter);
         }
         
         @Override
         protected void sendResponseError(final String responseId, final String errorMessage, final int errorCode, final Object errorData) {
-          boolean _isDebugEnabled = ServerLauncher.this.LOG.isDebugEnabled();
-          if (_isDebugEnabled) {
-            ServerLauncher.this.LOG.debug(("id" + responseId));
-            ServerLauncher.this.LOG.debug(("error : " + errorMessage));
+          if (ServerLauncher.IS_DEBUG) {
+            InputOutput.<String>println(("id" + responseId));
+            InputOutput.<String>println(("error : " + errorMessage));
           }
           super.sendResponseError(responseId, errorMessage, errorCode, errorData);
         }
       };
+      LanguageServerProtocol _protocol = messageAcceptor.getProtocol();
+      final Procedure2<String, Throwable> _function = new Procedure2<String, Throwable>() {
+        @Override
+        public void apply(final String p1, final Throwable p2) {
+          p2.printStackTrace(System.err);
+        }
+      };
+      _protocol.addErrorListener(_function);
       messageAcceptor.connect(stdin, stdout);
       messageAcceptor.start();
       System.err.println("started.");
@@ -106,6 +119,35 @@ public class ServerLauncher {
         Thread.sleep(10000l);
       }
       System.err.println("Exit notification received. Good Bye!");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void redirectStandardStreams() {
+    try {
+      byte[] _newByteArrayOfSize = new byte[0];
+      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
+      System.setIn(_byteArrayInputStream);
+      String _name = ServerLauncher.class.getName();
+      String _plus = (_name + "-");
+      long _currentTimeMillis = System.currentTimeMillis();
+      final String id = (_plus + Long.valueOf(_currentTimeMillis));
+      if (ServerLauncher.IS_DEBUG) {
+        final FileOutputStream stdFileOut = new FileOutputStream((("out-" + id) + ".log"));
+        PrintStream _printStream = new PrintStream(stdFileOut);
+        System.setOut(_printStream);
+        final FileOutputStream stdFileErr = new FileOutputStream((("error-" + id) + ".log"));
+        PrintStream _printStream_1 = new PrintStream(stdFileErr);
+        System.setErr(_printStream_1);
+      } else {
+        ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
+        PrintStream _printStream_2 = new PrintStream(_byteArrayOutputStream);
+        System.setOut(_printStream_2);
+        ByteArrayOutputStream _byteArrayOutputStream_1 = new ByteArrayOutputStream();
+        PrintStream _printStream_3 = new PrintStream(_byteArrayOutputStream_1);
+        System.setErr(_printStream_3);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -278,7 +278,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	}
 
 	override resolveCompletionItem(CompletionItem unresolved) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return unresolved
 	}
 
 	override hover(TextDocumentPositionParams position) {
@@ -302,7 +302,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	}
 
 	override resolveCodeLens(CodeLens unresolved) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return unresolved
 	}
 
 	override formatting(DocumentFormattingParams params) {

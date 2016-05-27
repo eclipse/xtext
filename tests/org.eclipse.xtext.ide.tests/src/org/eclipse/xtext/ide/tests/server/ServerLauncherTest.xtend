@@ -12,6 +12,7 @@ import io.typefox.lsapi.json.JsonBasedLanguageServer
 import org.eclipse.xtext.ide.server.ServerLauncher
 import org.junit.Test
 import java.lang.ProcessBuilder.Redirect
+import org.junit.Assert
 
 /**
  * @author efftinge - Initial contribution and API
@@ -19,15 +20,17 @@ import java.lang.ProcessBuilder.Redirect
 class ServerLauncherTest {
     
     @Test def void testServerLaunch() {
-        val process = new ProcessBuilder("java","-cp",System.getProperty("java.class.path"), "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044", ServerLauncher.name).redirectInput(Redirect.PIPE).redirectOutput(Redirect.PIPE).start
+        val process = new ProcessBuilder("java","-cp",System.getProperty("java.class.path"), "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044", ServerLauncher.name
+//            ,"debug"
+        ).redirectInput(Redirect.PIPE).redirectOutput(Redirect.PIPE).start
         
         try {
             val client = new JsonBasedLanguageServer()
             client.connect(process.inputStream, process.outputStream)
-            
-            println(client.initialize(new InitializeParamsImpl() => [
+            val msg = client.initialize(new InitializeParamsImpl() => [
                 rootPath = "."
-            ]))
+            ])
+            Assert.assertTrue(msg != null)
         } finally {
             process.destroy
         }

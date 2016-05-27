@@ -501,7 +501,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public CompletionItem resolveCompletionItem(final CompletionItem unresolved) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return unresolved;
   }
   
   @Override
@@ -531,7 +531,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public CodeLens resolveCodeLens(final CodeLens unresolved) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return unresolved;
   }
   
   @Override
