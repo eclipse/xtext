@@ -13,6 +13,7 @@ import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.build.BuildRequest
 import org.eclipse.xtext.build.IncrementalBuilder
 import org.eclipse.xtext.build.IncrementalBuilder.Result
@@ -24,10 +25,8 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
-import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.util.IFileSystemScanner
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.validation.Issue
 
 /**
  * @author Sven Efftinge - Initial contribution and API
