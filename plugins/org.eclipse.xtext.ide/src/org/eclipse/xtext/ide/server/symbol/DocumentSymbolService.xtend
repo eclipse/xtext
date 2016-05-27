@@ -21,11 +21,14 @@ import org.eclipse.xtext.findReferences.ReferenceAcceptor
 import org.eclipse.xtext.findReferences.TargetURICollector
 import org.eclipse.xtext.findReferences.TargetURIs
 import org.eclipse.xtext.ide.server.DocumentExtensions
+import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.service.OperationCanceledManager
+import org.eclipse.xtext.util.CancelIndicator
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
@@ -52,11 +55,19 @@ class DocumentSymbolService {
 
 	@Inject
 	Provider<TargetURIs> targetURIProvider
+	
+	@Inject
+	OperationCanceledManager operationCanceledManager
 
 	@Inject
 	IResourceServiceProvider.Registry resourceServiceProviderRegistry
 
-	def List<? extends Location> getDefinitions(XtextResource resource, int offset, IResourceAccess resourceAccess) {
+	def List<? extends Location> getDefinitions(
+		XtextResource resource,
+		int offset,
+		IResourceAccess resourceAccess,
+		CancelIndicator cancelIndicator
+	) {
 		val element = resource.resolveElementAt(offset)
 		if (element === null)
 			return emptyList
@@ -64,8 +75,13 @@ class DocumentSymbolService {
 		val locations = newArrayList
 		val targetURIs = element.collectTargetURIs
 		for (targetURI : targetURIs) {
+			operationCanceledManager.checkCanceled(cancelIndicator)
+
 			resourceAccess.readOnly(targetURI) [ resourceSet |
-				locations += resourceSet.getEObject(targetURI, true).newLocation
+				val object = resourceSet.getEObject(targetURI, true)
+				if (object !== null)
+					locations += object.newLocation
+				return null
 			]
 		}
 		return locations
@@ -75,7 +91,8 @@ class DocumentSymbolService {
 		XtextResource resource,
 		int offset,
 		IResourceAccess resourceAccess,
-		IResourceDescriptions indexData
+		IResourceDescriptions indexData,
+		CancelIndicator cancelIndicator
 	) {
 		val element = resource.resolveElementAt(offset)
 		if (element === null)
@@ -90,12 +107,13 @@ class DocumentSymbolService {
 			new ReferenceAcceptor(resourceServiceProviderRegistry) [ reference |
 				resourceAccess.readOnly(reference.sourceEObjectUri) [ resourceSet |
 					val targetObject = resourceSet.getEObject(reference.sourceEObjectUri, true)
-					locations += targetObject.newLocation(reference.EReference, reference.indexInList)
+					if (targetObject !== null)
+						locations += targetObject.newLocation(reference.EReference, reference.indexInList)
+					return null
 				]
 			],
-			null
+			new CancelIndicatorProgressMonitor(cancelIndicator)
 		)
-
 		return locations
 	}
 
@@ -105,10 +123,12 @@ class DocumentSymbolService {
 		return targetURIs
 	}
 
-	def List<? extends SymbolInformation> getSymbols(XtextResource resource) {
+	def List<? extends SymbolInformation> getSymbols(XtextResource resource, CancelIndicator cancelIndicator) {
 		val symbols = newLinkedHashMap
 		val contents = resource.getAllProperContents(true)
 		while (contents.hasNext) {
+			operationCanceledManager.checkCanceled(cancelIndicator)
+
 			val obj = contents.next
 			val symbol = obj.createSymbol
 			if (symbol !== null) {

@@ -51,7 +51,7 @@ public class WorkspaceManagerTest {
     _builder.newLine();
     final URI path = this.operator_mappedTo("MyType1.testlang", _builder);
     List<URI> _emptyList = CollectionLiterals.<URI>emptyList();
-    this.workspaceManger.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(path)), _emptyList);
+    this.workspaceManger.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(path)), _emptyList, null);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("type Test {");
     _builder_1.newLine();
@@ -61,7 +61,7 @@ public class WorkspaceManagerTest {
     _builder_1.append("}");
     _builder_1.newLine();
     final String inMemContents = _builder_1.toString();
-    this.workspaceManger.didOpen(path, 1, inMemContents);
+    this.workspaceManger.didOpen(path, 1, inMemContents, null);
     final Function2<Document, XtextResource, String> _function = new Function2<Document, XtextResource, String>() {
       @Override
       public String apply(final Document $0, final XtextResource $1) {
@@ -98,7 +98,7 @@ public class WorkspaceManagerTest {
           WorkspaceManagerTest.this.diagnostics.put($0, _list);
         }
       };
-      this.workspaceManger.initialize(_createFileURI, _function);
+      this.workspaceManger.initialize(_createFileURI, _function, null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

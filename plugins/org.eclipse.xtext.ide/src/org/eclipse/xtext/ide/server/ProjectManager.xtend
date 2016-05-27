@@ -27,6 +27,7 @@ import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.IFileSystemScanner
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -49,18 +50,18 @@ class ProjectManager {
     @Accessors(PUBLIC_GETTER)
     XtextResourceSet resourceSet
     
-    def Result initialize(URI baseDir, (URI, Iterable<Issue>)=>void acceptor, IExternalContentProvider openedDocumentsContentProvider, Provider<Map<String, ResourceDescriptionsData>> indexProvider) {
+    def Result initialize(URI baseDir, (URI, Iterable<Issue>)=>void acceptor, IExternalContentProvider openedDocumentsContentProvider, Provider<Map<String, ResourceDescriptionsData>> indexProvider, CancelIndicator cancelIndicator) {
         val uris = newArrayList
         this.baseDir = baseDir
         this.issueAcceptor = acceptor
         this.openedDocumentsContentProvider = openedDocumentsContentProvider
         this.indexProvider = indexProvider 
         this.fileSystemScanner.scan(baseDir)[uris += it]
-        return doBuild(uris, emptyList)
+        return doBuild(uris, emptyList, cancelIndicator)
     }
     
-    def Result doBuild(List<URI> dirtyFiles, List<URI> deletedFiles) {
-        val request = newBuildRequest(dirtyFiles, deletedFiles)
+    def Result doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
+        val request = newBuildRequest(dirtyFiles, deletedFiles, cancelIndicator)
         val result = incrementalBuilder.build(request, [
             languagesRegistry.getResourceServiceProvider(it)
         ])
@@ -69,7 +70,7 @@ class ProjectManager {
         return result;
     }
 
-    protected def BuildRequest newBuildRequest(List<URI> changedFiles, List<URI> deletedFiles) {
+    protected def BuildRequest newBuildRequest(List<URI> changedFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
         new BuildRequest => [
             it.baseDir = baseDir
             it.resourceSet = createFreshResourceSet(new ResourceDescriptionsData(emptyList))
@@ -81,6 +82,7 @@ class ProjectManager {
                 issueAcceptor.apply(uri, issues)
                 return true
             ]
+            it.cancelIndicator = cancelIndicator
         ]
     }
 

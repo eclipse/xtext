@@ -32,6 +32,7 @@ import io.typefox.lsapi.InitializeParams
 import io.typefox.lsapi.InitializeResult
 import io.typefox.lsapi.InitializeResultImpl
 import io.typefox.lsapi.LanguageServer
+import io.typefox.lsapi.Location
 import io.typefox.lsapi.MessageParams
 import io.typefox.lsapi.NotificationCallback
 import io.typefox.lsapi.PublishDiagnosticsParams
@@ -42,6 +43,7 @@ import io.typefox.lsapi.RenameParams
 import io.typefox.lsapi.ServerCapabilities
 import io.typefox.lsapi.ServerCapabilitiesImpl
 import io.typefox.lsapi.ShowMessageRequestParams
+import io.typefox.lsapi.SymbolInformation
 import io.typefox.lsapi.TextDocumentPositionParams
 import io.typefox.lsapi.TextDocumentService
 import io.typefox.lsapi.WindowService
@@ -51,6 +53,8 @@ import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
+import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator
+import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
@@ -65,6 +69,9 @@ import static io.typefox.lsapi.util.LsapiFactories.*
  */
 @Accessors class LanguageServerImpl implements LanguageServer, WorkspaceService, WindowService, TextDocumentService {
 
+	@Inject
+	RequestManager requestManager
+
 	InitializeParams params
 	@Inject Provider<WorkspaceManager> workspaceManagerProvider
 	WorkspaceManager workspaceManager
@@ -72,26 +79,31 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
 
 	override InitializeResult initialize(InitializeParams params) {
+		if (params.rootPath === null) {
+			throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.")
+		}
 		this.params = params
 		workspaceManager = workspaceManagerProvider.get
-		if (params.rootPath === null) {
-            throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.")
-        }
-		val rootURI = URI.createFileURI(params.rootPath)
 		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
-		workspaceManager.initialize(rootURI)[this.publishDiagnostics($0, $1)]
-		return new InitializeResultImpl => [
-			capabilities = new ServerCapabilitiesImpl => [
-				definitionProvider = true
-				referencesProvider = true
-				documentSymbolProvider = true
-				textDocumentSync = ServerCapabilities.SYNC_INCREMENTAL
-				completionProvider = new CompletionOptionsImpl => [
-					resolveProvider = false
-					triggerCharacters = #["."]
-				]
+
+		val result = new InitializeResultImpl
+		result.capabilities = new ServerCapabilitiesImpl => [
+			definitionProvider = true
+			referencesProvider = true
+			documentSymbolProvider = true
+			textDocumentSync = ServerCapabilities.SYNC_INCREMENTAL
+			completionProvider = new CompletionOptionsImpl => [
+				resolveProvider = false
+				triggerCharacters = #["."]
 			]
 		]
+
+		requestManager.runWrite([ cancelIndicator |
+			val rootURI = URI.createFileURI(params.rootPath)
+			workspaceManager.initialize(rootURI, [this.publishDiagnostics($0, $1)], cancelIndicator)
+		], CancellableIndicator.NullImpl)
+
+		return result
 	}
 
 	override exit() {
@@ -128,34 +140,44 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	// end notification callbacks
 	// file/content change events
 	override didOpen(DidOpenTextDocumentParams params) {
-		workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text)
+		requestManager.runWrite [ cancelIndicator |
+			workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text, cancelIndicator)
+		]
 	}
 
 	override didChange(DidChangeTextDocumentParams params) {
-		workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
-			newTextEdit(event.range as RangeImpl, event.text)
-		])
+		requestManager.runWrite [ cancelIndicator |
+			workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
+				newTextEdit(event.range as RangeImpl, event.text)
+			], cancelIndicator)
+		]
 	}
 
 	override didClose(DidCloseTextDocumentParams params) {
-		workspaceManager.didClose(params.textDocument.uri.toUri)
+		requestManager.runWrite [ cancelIndicator |
+			workspaceManager.didClose(params.textDocument.uri.toUri, cancelIndicator)
+		]
 	}
 
 	override didSave(DidSaveTextDocumentParams params) {
-		workspaceManager.didSave(params.textDocument.uri.toUri)
+		requestManager.runWrite [ cancelIndicator |
+			workspaceManager.didSave(params.textDocument.uri.toUri, cancelIndicator)
+		]
 	}
 
 	override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {
-		val dirtyFiles = newArrayList
-		val deletedFiles = newArrayList
-		for (fileEvent : params.changes) {
-			if (fileEvent.type === FileEvent.TYPE_DELETED) {
-				deletedFiles += toUri(fileEvent.uri)
-			} else {
-				dirtyFiles += toUri(fileEvent.uri)
+		requestManager.runWrite [ cancelIndicator |
+			val dirtyFiles = newArrayList
+			val deletedFiles = newArrayList
+			for (fileEvent : params.changes) {
+				if (fileEvent.type === FileEvent.TYPE_DELETED) {
+					deletedFiles += toUri(fileEvent.uri)
+				} else {
+					dirtyFiles += toUri(fileEvent.uri)
+				}
 			}
-		}
-		workspaceManager.doBuild(dirtyFiles, deletedFiles)
+			workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
+		]
 	}
 
 	// end file/content change events
@@ -198,17 +220,19 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	// end validation stuff
 	// completion stuff
 	override completion(TextDocumentPositionParams params) {
-		val uri = params.textDocument.uri.toUri
-		val resourceServiceProvider = uri.resourceServiceProvider
-		val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
-		if (contentAssistService === null)
-			return emptyList
-
-		val entries = workspaceManager.doRead(uri) [ document, resource |
-			val offset = document.getOffSet(params.position)
-			return contentAssistService.createProposals(document.contents, offset, resource)
-		]
-		return entries.map[toCompletionItem].toList
+		return requestManager.runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
+			if (contentAssistService === null)
+				return emptyList
+	
+			val entries = workspaceManager.doRead(uri) [ document, resource |
+				val offset = document.getOffSet(params.position)
+				return contentAssistService.createProposals(document.contents, offset, resource, cancelIndicator)
+			]
+			return entries.map[toCompletionItem].toList
+		].get
 	}
 
 	protected def CompletionItem toCompletionItem(ContentAssistEntry entry) {
@@ -222,50 +246,57 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	// end completion stuff
 	// symbols
 	override definition(TextDocumentPositionParams params) {
-		val uri = params.textDocument.uri.toUri
-		val resourceServiceProvider = uri.resourceServiceProvider
-		val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
-		if (documentSymbolService === null)
-			return emptyList
-
-		return workspaceManager.doRead(uri) [ document, resource |
-			val offset = document.getOffSet(params.position)
-			return documentSymbolService.getDefinitions(resource, offset, resourceAccess)
-		]
+		return requestManager.<List<? extends Location>>runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
+			if (documentSymbolService === null)
+				return emptyList
+	
+			val definitions = workspaceManager.doRead(uri) [ document, resource |
+				val offset = document.getOffSet(params.position)
+				return documentSymbolService.getDefinitions(resource, offset, resourceAccess, cancelIndicator)
+			]
+			return definitions
+		].get
 	}
 
 	override references(ReferenceParams params) {
-		val uri = params.textDocument.uri.toUri
-		val resourceServiceProvider = uri.resourceServiceProvider
-		val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
-		if (documentSymbolService === null)
-			return emptyList
-
-		return workspaceManager.doRead(uri) [ document, resource |
-			val offset = document.getOffSet(params.position)
-
-			val definitions = if (params.context.includeDeclaration)
-					documentSymbolService.getDefinitions(resource, offset, resourceAccess)
-				else
-					emptyList
-
-			val indexData = workspaceManager.index
-			val references = documentSymbolService.getReferences(resource, offset, resourceAccess, indexData)
-			val result = definitions + references
-			return result.toList
-		]
+		return requestManager.<List<? extends Location>>runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
+			if (documentSymbolService === null)
+				return emptyList
+	
+			return workspaceManager.doRead(uri) [ document, resource |
+				val offset = document.getOffSet(params.position)
+				
+				val definitions = if (params.context.includeDeclaration)
+						documentSymbolService.getDefinitions(resource, offset, resourceAccess, cancelIndicator)
+					else
+						emptyList
+				
+				val indexData = workspaceManager.index
+				val references = documentSymbolService.getReferences(resource, offset, resourceAccess, indexData, cancelIndicator)
+				val result = definitions + references
+				return result.toList
+			]
+		].get
 	}
 
 	override documentSymbol(DocumentSymbolParams params) {
-		val uri = params.textDocument.uri.toUri
-		val resourceServiceProvider = uri.resourceServiceProvider
-		val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
-		if (documentSymbolService === null)
-			return emptyList
-
-		return workspaceManager.doRead(uri) [ document, resource |
-			return documentSymbolService.getSymbols(resource)
-		]
+		return requestManager.<List<? extends SymbolInformation>>runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val documentSymbolService = resourceServiceProvider?.get(DocumentSymbolService)
+			if (documentSymbolService === null)
+				return emptyList
+	
+			return workspaceManager.doRead(uri) [ document, resource |
+				return documentSymbolService.getSymbols(resource, cancelIndicator)
+			]
+		].get
 	}
 
 	// end symbols

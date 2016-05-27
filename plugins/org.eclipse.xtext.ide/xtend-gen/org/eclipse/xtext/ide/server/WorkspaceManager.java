@@ -7,11 +7,14 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import io.typefox.lsapi.TextEdit;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +30,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -73,7 +77,16 @@ public class WorkspaceManager {
   
   private Map<String, ResourceDescriptionsData> fullIndex = CollectionLiterals.<String, ResourceDescriptionsData>newHashMap();
   
-  public void initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor) {
+  private final LinkedHashSet<URI> dirtyFiles = CollectionLiterals.<URI>newLinkedHashSet();
+  
+  private final LinkedHashSet<URI> deletedFiles = CollectionLiterals.<URI>newLinkedHashSet();
+  
+  protected void queue(final Set<URI> files, final Collection<URI> toRemove, final Collection<URI> toAdd) {
+    Iterables.removeAll(files, toRemove);
+    Iterables.<URI>addAll(files, toAdd);
+  }
+  
+  public void initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final CancelIndicator cancelIndicator) {
     this.baseDir = baseDir;
     final ProjectManager projectManager = this.projectManagerProvider.get();
     final Provider<Map<String, ResourceDescriptionsData>> _function = new Provider<Map<String, ResourceDescriptionsData>>() {
@@ -82,15 +95,21 @@ public class WorkspaceManager {
         return WorkspaceManager.this.fullIndex;
       }
     };
-    final IncrementalBuilder.Result indexResult = projectManager.initialize(baseDir, acceptor, this.openedDocumentsContentProvider, _function);
+    final IncrementalBuilder.Result indexResult = projectManager.initialize(baseDir, acceptor, this.openedDocumentsContentProvider, _function, cancelIndicator);
     this.baseDir2ProjectManager.put(baseDir, projectManager);
     IndexState _indexState = indexResult.getIndexState();
     ResourceDescriptionsData _resourceDescriptions = _indexState.getResourceDescriptions();
     this.fullIndex.put("DEFAULT", _resourceDescriptions);
   }
   
-  public void doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles) {
-    final ArrayList<URI> allDirty = new ArrayList<URI>(dirtyFiles);
+  public void doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
+    this.queue(this.dirtyFiles, deletedFiles, dirtyFiles);
+    this.queue(this.deletedFiles, dirtyFiles, deletedFiles);
+    this.internalBuild(cancelIndicator);
+  }
+  
+  protected void internalBuild(final CancelIndicator cancelIndicator) {
+    final ArrayList<URI> allDirty = new ArrayList<URI>(this.dirtyFiles);
     Set<Map.Entry<URI, ProjectManager>> _entrySet = this.baseDir2ProjectManager.entrySet();
     for (final Map.Entry<URI, ProjectManager> entry : _entrySet) {
       {
@@ -110,10 +129,10 @@ public class WorkspaceManager {
             return Boolean.valueOf(WorkspaceManager.this.isPrefix(it, _key));
           }
         };
-        Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(deletedFiles, _function_1);
+        Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(this.deletedFiles, _function_1);
         final List<URI> projectDeletedFiles = IterableExtensions.<URI>toList(_filter_1);
         ProjectManager _value = entry.getValue();
-        final IncrementalBuilder.Result result = _value.doBuild(projectDirtyFiles, projectDeletedFiles);
+        final IncrementalBuilder.Result result = _value.doBuild(projectDirtyFiles, projectDeletedFiles, cancelIndicator);
         List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
         final Function1<IResourceDescription.Delta, URI> _function_2 = new Function1<IResourceDescription.Delta, URI>() {
           @Override
@@ -123,6 +142,8 @@ public class WorkspaceManager {
         };
         List<URI> _map = ListExtensions.<IResourceDescription.Delta, URI>map(_affectedResources, _function_2);
         allDirty.addAll(_map);
+        Iterables.removeAll(this.dirtyFiles, projectDirtyFiles);
+        Iterables.removeAll(this.deletedFiles, projectDeletedFiles);
       }
     }
   }
@@ -162,28 +183,28 @@ public class WorkspaceManager {
     return this.baseDir2ProjectManager.get(projectBaseDir);
   }
   
-  public void didChange(final URI uri, final int version, final Iterable<TextEdit> changes) {
+  public void didChange(final URI uri, final int version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
     final Document contents = this.openDocuments.get(uri);
     Document _applyChanges = contents.applyChanges(changes);
     this.openDocuments.put(uri, _applyChanges);
     ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
+    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
   }
   
-  public void didOpen(final URI uri, final int version, final String contents) {
+  public void didOpen(final URI uri, final int version, final String contents, final CancelIndicator cancelIndicator) {
     Document _document = new Document(version, contents);
     this.openDocuments.put(uri, _document);
     ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
+    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
   }
   
-  public void didClose(final URI uri) {
+  public void didClose(final URI uri, final CancelIndicator cancelIndicator) {
     this.openDocuments.remove(uri);
     ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList);
+    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
   }
   
-  public Object didSave(final URI uri) {
+  public Object didSave(final URI uri, final CancelIndicator cancelIndicator) {
     return null;
   }
   

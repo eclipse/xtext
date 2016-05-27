@@ -20,6 +20,8 @@ import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -43,16 +45,19 @@ public class ContentAssistService {
   @Inject
   private IdeContentProposalProvider proposalProvider;
   
-  public Iterable<ContentAssistEntry> createProposals(final String document, final int caretOffset, final XtextResource resource) {
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
+  
+  public Iterable<ContentAssistEntry> createProposals(final String document, final int caretOffset, final XtextResource resource, final CancelIndicator cancelIndicator) {
     final TextRegion selection = new TextRegion(caretOffset, 0);
-    return this.createProposals(document, selection, caretOffset, resource);
+    return this.createProposals(document, selection, caretOffset, resource, cancelIndicator);
   }
   
-  public Iterable<ContentAssistEntry> createProposals(final String document, final TextRegion selection, final int caretOffset, final XtextResource resource) {
-    return this.createProposals(document, selection, caretOffset, resource, ContentAssistService.DEFAULT_PROPOSALS_LIMIT);
+  public Iterable<ContentAssistEntry> createProposals(final String document, final TextRegion selection, final int caretOffset, final XtextResource resource, final CancelIndicator cancelIndicator) {
+    return this.createProposals(document, selection, caretOffset, resource, ContentAssistService.DEFAULT_PROPOSALS_LIMIT, cancelIndicator);
   }
   
-  public Iterable<ContentAssistEntry> createProposals(final String document, final TextRegion selection, final int caretOffset, final XtextResource resource, final int proposalsLimit) {
+  public Iterable<ContentAssistEntry> createProposals(final String document, final TextRegion selection, final int caretOffset, final XtextResource resource, final int proposalsLimit, final CancelIndicator cancelIndicator) {
     final Comparator<Pair<Integer, ContentAssistEntry>> _function = new Comparator<Pair<Integer, ContentAssistEntry>>() {
       @Override
       public int compare(final Pair<Integer, ContentAssistEntry> p1, final Pair<Integer, ContentAssistEntry> p2) {
@@ -100,6 +105,7 @@ public class ContentAssistService {
           Pair<Integer, ContentAssistEntry> _mappedTo = Pair.<Integer, ContentAssistEntry>of(Integer.valueOf(priority), entry);
           entries.add(_mappedTo);
         }
+        ContentAssistService.this.operationCanceledManager.checkCanceled(cancelIndicator);
       }
       
       @Override

@@ -7,9 +7,13 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
+import com.google.common.util.concurrent.Futures;
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.binder.AnnotatedBindingBuilder;
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DidOpenTextDocumentParamsImpl;
 import io.typefox.lsapi.InitializeParamsImpl;
@@ -33,14 +37,20 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.UriExtensions;
+import org.eclipse.xtext.ide.server.concurrent.RequestManager;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Before;
@@ -54,7 +64,20 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
   public void setup() {
     try {
       ServerModule _serverModule = new ServerModule();
-      final Injector injector = Guice.createInjector(_serverModule);
+      final Module module = Modules2.mixin(_serverModule, new AbstractModule() {
+        @Override
+        protected void configure() {
+          AnnotatedBindingBuilder<RequestManager> _bind = this.<RequestManager>bind(RequestManager.class);
+          _bind.toInstance(new RequestManager() {
+            @Override
+            protected <V extends Object> Future<V> run(final ExecutorService executorService, final Function1<? super CancelIndicator, ? extends V> request, final int permits, final CancelIndicator cancelIndicator) {
+              V _apply = request.apply(cancelIndicator);
+              return Futures.<V, Exception>immediateCheckedFuture(_apply);
+            }
+          });
+        }
+      });
+      final Injector injector = Guice.createInjector(module);
       injector.injectMembers(this);
       TextDocumentService _textDocumentService = this.languageServer.getTextDocumentService();
       _textDocumentService.onPublishDiagnostics(this);

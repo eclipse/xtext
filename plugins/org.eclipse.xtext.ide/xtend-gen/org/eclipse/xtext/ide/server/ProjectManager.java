@@ -27,6 +27,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.IFileSystemScanner;
 import org.eclipse.xtext.validation.Issue;
@@ -71,7 +72,7 @@ public class ProjectManager {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private XtextResourceSet resourceSet;
   
-  public IncrementalBuilder.Result initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final IExternalContentSupport.IExternalContentProvider openedDocumentsContentProvider, final Provider<Map<String, ResourceDescriptionsData>> indexProvider) {
+  public IncrementalBuilder.Result initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final IExternalContentSupport.IExternalContentProvider openedDocumentsContentProvider, final Provider<Map<String, ResourceDescriptionsData>> indexProvider, final CancelIndicator cancelIndicator) {
     final ArrayList<URI> uris = CollectionLiterals.<URI>newArrayList();
     this.baseDir = baseDir;
     this.issueAcceptor = acceptor;
@@ -85,11 +86,11 @@ public class ProjectManager {
     };
     this.fileSystemScanner.scan(baseDir, _function);
     List<URI> _emptyList = CollectionLiterals.<URI>emptyList();
-    return this.doBuild(uris, _emptyList);
+    return this.doBuild(uris, _emptyList, cancelIndicator);
   }
   
-  public IncrementalBuilder.Result doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles) {
-    final BuildRequest request = this.newBuildRequest(dirtyFiles, deletedFiles);
+  public IncrementalBuilder.Result doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
+    final BuildRequest request = this.newBuildRequest(dirtyFiles, deletedFiles, cancelIndicator);
     final Function1<URI, IResourceServiceProvider> _function = new Function1<URI, IResourceServiceProvider>() {
       @Override
       public IResourceServiceProvider apply(final URI it) {
@@ -104,7 +105,7 @@ public class ProjectManager {
     return result;
   }
   
-  protected BuildRequest newBuildRequest(final List<URI> changedFiles, final List<URI> deletedFiles) {
+  protected BuildRequest newBuildRequest(final List<URI> changedFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
     BuildRequest _buildRequest = new BuildRequest();
     final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
       @Override
@@ -134,6 +135,7 @@ public class ProjectManager {
           }
         };
         it.setAfterValidate(_function);
+        it.setCancelIndicator(cancelIndicator);
       }
     };
     return ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function);

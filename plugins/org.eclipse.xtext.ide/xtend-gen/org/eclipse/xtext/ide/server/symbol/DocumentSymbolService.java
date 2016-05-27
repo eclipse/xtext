@@ -29,6 +29,7 @@ import org.eclipse.xtext.findReferences.ReferenceAcceptor;
 import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.findReferences.TargetURIs;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
+import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -36,6 +37,8 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -70,9 +73,12 @@ public class DocumentSymbolService {
   private Provider<TargetURIs> targetURIProvider;
   
   @Inject
+  private OperationCanceledManager operationCanceledManager;
+  
+  @Inject
   private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
   
-  public List<? extends Location> getDefinitions(final XtextResource resource, final int offset, final IReferenceFinder.IResourceAccess resourceAccess) {
+  public List<? extends Location> getDefinitions(final XtextResource resource, final int offset, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
     final EObject element = this._eObjectAtOffsetHelper.resolveElementAt(resource, offset);
     if ((element == null)) {
       return CollectionLiterals.<Location>emptyList();
@@ -80,20 +86,26 @@ public class DocumentSymbolService {
     final ArrayList<LocationImpl> locations = CollectionLiterals.<LocationImpl>newArrayList();
     final TargetURIs targetURIs = this.collectTargetURIs(element);
     for (final URI targetURI : targetURIs) {
-      final IUnitOfWork<Boolean, ResourceSet> _function = new IUnitOfWork<Boolean, ResourceSet>() {
-        @Override
-        public Boolean exec(final ResourceSet resourceSet) throws Exception {
-          EObject _eObject = resourceSet.getEObject(targetURI, true);
-          LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(_eObject);
-          return Boolean.valueOf(locations.add(_newLocation));
-        }
-      };
-      resourceAccess.<Boolean>readOnly(targetURI, _function);
+      {
+        this.operationCanceledManager.checkCanceled(cancelIndicator);
+        final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
+          @Override
+          public Object exec(final ResourceSet resourceSet) throws Exception {
+            final EObject object = resourceSet.getEObject(targetURI, true);
+            if ((object != null)) {
+              LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(object);
+              locations.add(_newLocation);
+            }
+            return null;
+          }
+        };
+        resourceAccess.<Object>readOnly(targetURI, _function);
+      }
     }
     return locations;
   }
   
-  public List<? extends Location> getReferences(final XtextResource resource, final int offset, final IReferenceFinder.IResourceAccess resourceAccess, final IResourceDescriptions indexData) {
+  public List<? extends Location> getReferences(final XtextResource resource, final int offset, final IReferenceFinder.IResourceAccess resourceAccess, final IResourceDescriptions indexData, final CancelIndicator cancelIndicator) {
     final EObject element = this._eObjectAtOffsetHelper.resolveElementAt(resource, offset);
     if ((element == null)) {
       return CollectionLiterals.<Location>emptyList();
@@ -104,27 +116,26 @@ public class DocumentSymbolService {
       @Override
       public void accept(final IReferenceDescription reference) {
         URI _sourceEObjectUri = reference.getSourceEObjectUri();
-        final IUnitOfWork<Boolean, ResourceSet> _function = new IUnitOfWork<Boolean, ResourceSet>() {
+        final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
           @Override
-          public Boolean exec(final ResourceSet resourceSet) throws Exception {
-            boolean _xblockexpression = false;
-            {
-              URI _sourceEObjectUri = reference.getSourceEObjectUri();
-              final EObject targetObject = resourceSet.getEObject(_sourceEObjectUri, true);
+          public Object exec(final ResourceSet resourceSet) throws Exception {
+            URI _sourceEObjectUri = reference.getSourceEObjectUri();
+            final EObject targetObject = resourceSet.getEObject(_sourceEObjectUri, true);
+            if ((targetObject != null)) {
               EReference _eReference = reference.getEReference();
               int _indexInList = reference.getIndexInList();
               LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(targetObject, _eReference, _indexInList);
-              _xblockexpression = locations.add(_newLocation);
+              locations.add(_newLocation);
             }
-            return Boolean.valueOf(_xblockexpression);
+            return null;
           }
         };
-        resourceAccess.<Boolean>readOnly(_sourceEObjectUri, _function);
+        resourceAccess.<Object>readOnly(_sourceEObjectUri, _function);
       }
     };
     ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(this.resourceServiceProviderRegistry, _function);
-    this.referenceFinder.findAllReferences(targetURIs, resourceAccess, indexData, _referenceAcceptor, 
-      null);
+    CancelIndicatorProgressMonitor _cancelIndicatorProgressMonitor = new CancelIndicatorProgressMonitor(cancelIndicator);
+    this.referenceFinder.findAllReferences(targetURIs, resourceAccess, indexData, _referenceAcceptor, _cancelIndicatorProgressMonitor);
     return locations;
   }
   
@@ -134,11 +145,12 @@ public class DocumentSymbolService {
     return targetURIs;
   }
   
-  public List<? extends SymbolInformation> getSymbols(final XtextResource resource) {
+  public List<? extends SymbolInformation> getSymbols(final XtextResource resource, final CancelIndicator cancelIndicator) {
     final LinkedHashMap<EObject, SymbolInformationImpl> symbols = CollectionLiterals.<EObject, SymbolInformationImpl>newLinkedHashMap();
     final TreeIterator<EObject> contents = EcoreUtil.<EObject>getAllProperContents(resource, true);
     while (contents.hasNext()) {
       {
+        this.operationCanceledManager.checkCanceled(cancelIndicator);
         final EObject obj = contents.next();
         final SymbolInformationImpl symbol = this.createSymbol(obj);
         if ((symbol != null)) {
