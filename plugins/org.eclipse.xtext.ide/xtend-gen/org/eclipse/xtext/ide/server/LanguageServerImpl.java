@@ -71,7 +71,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.UriExtensions;
@@ -107,8 +106,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   private WorkspaceManager workspaceManager;
   
-  private IReferenceFinder.IResourceAccess resourceAccess;
-  
   @Inject
   @Extension
   private UriExtensions _uriExtensions;
@@ -123,7 +120,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     WorkspaceManager _get = this.workspaceManagerProvider.get();
     this.workspaceManager = _get;
     String _rootPath = params.getRootPath();
-    final URI rootURI = URI.createFileURI(_rootPath);
+    boolean _tripleEquals = (_rootPath == null);
+    if (_tripleEquals) {
+      throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.");
+    }
+    String _rootPath_1 = params.getRootPath();
+    final URI rootURI = URI.createFileURI(_rootPath_1);
+    WorkspaceResourceAccess _workspaceResourceAccess = new WorkspaceResourceAccess(this.workspaceManager);
+    this.resourceAccess = _workspaceResourceAccess;
     final Procedure2<URI, Iterable<Issue>> _function = new Procedure2<URI, Iterable<Issue>>() {
       @Override
       public void apply(final URI $0, final Iterable<Issue> $1) {
@@ -131,8 +135,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       }
     };
     this.workspaceManager.initialize(rootURI, _function);
-    WorkspaceResourceAccess _workspaceResourceAccess = new WorkspaceResourceAccess(this.workspaceManager);
-    this.resourceAccess = _workspaceResourceAccess;
     InitializeResultImpl _initializeResultImpl = new InitializeResultImpl();
     final Procedure1<InitializeResultImpl> _function_1 = new Procedure1<InitializeResultImpl>() {
       @Override
@@ -269,6 +271,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   private List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners = CollectionLiterals.<NotificationCallback<PublishDiagnosticsParams>>newArrayList();
+  
+  private WorkspaceResourceAccess resourceAccess;
   
   @Override
   public void onPublishDiagnostics(final NotificationCallback<PublishDiagnosticsParams> callback) {
@@ -578,15 +582,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Pure
-  public IReferenceFinder.IResourceAccess getResourceAccess() {
-    return this.resourceAccess;
-  }
-  
-  public void setResourceAccess(final IReferenceFinder.IResourceAccess resourceAccess) {
-    this.resourceAccess = resourceAccess;
-  }
-  
-  @Pure
   public UriExtensions get_uriExtensions() {
     return this._uriExtensions;
   }
@@ -611,5 +606,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   public void setDiagnosticListeners(final List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners) {
     this.diagnosticListeners = diagnosticListeners;
+  }
+  
+  @Pure
+  public WorkspaceResourceAccess getResourceAccess() {
+    return this.resourceAccess;
+  }
+  
+  public void setResourceAccess(final WorkspaceResourceAccess resourceAccess) {
+    this.resourceAccess = resourceAccess;
   }
 }

@@ -11,6 +11,8 @@ import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl;
 import io.typefox.lsapi.FileEvent;
 import io.typefox.lsapi.FileEventImpl;
+import io.typefox.lsapi.Position;
+import io.typefox.lsapi.Range;
 import io.typefox.lsapi.WorkspaceService;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -74,6 +76,34 @@ public class ServerTest extends AbstractLanguageServerTest {
       _message=_head_1.getMessage();
     }
     Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
+    Collection<List<? extends Diagnostic>> _values_1 = this.diagnostics.values();
+    List<? extends Diagnostic> _head_2 = IterableExtensions.<List<? extends Diagnostic>>head(_values_1);
+    Diagnostic _head_3 = IterableExtensions.head(_head_2);
+    Range _range = _head_3.getRange();
+    Position _start = _range.getStart();
+    int _line = _start.getLine();
+    Assert.assertEquals(1, _line);
+    Collection<List<? extends Diagnostic>> _values_2 = this.diagnostics.values();
+    List<? extends Diagnostic> _head_4 = IterableExtensions.<List<? extends Diagnostic>>head(_values_2);
+    Diagnostic _head_5 = IterableExtensions.head(_head_4);
+    Range _range_1 = _head_5.getRange();
+    Position _start_1 = _range_1.getStart();
+    int _character = _start_1.getCharacter();
+    Assert.assertEquals(4, _character);
+    Collection<List<? extends Diagnostic>> _values_3 = this.diagnostics.values();
+    List<? extends Diagnostic> _head_6 = IterableExtensions.<List<? extends Diagnostic>>head(_values_3);
+    Diagnostic _head_7 = IterableExtensions.head(_head_6);
+    Range _range_2 = _head_7.getRange();
+    Position _end = _range_2.getEnd();
+    int _line_1 = _end.getLine();
+    Assert.assertEquals(1, _line_1);
+    Collection<List<? extends Diagnostic>> _values_4 = this.diagnostics.values();
+    List<? extends Diagnostic> _head_8 = IterableExtensions.<List<? extends Diagnostic>>head(_values_4);
+    Diagnostic _head_9 = IterableExtensions.head(_head_8);
+    Range _range_3 = _head_9.getRange();
+    Position _end_1 = _range_3.getEnd();
+    int _character_1 = _end_1.getCharacter();
+    Assert.assertEquals(15, _character_1);
   }
   
   @Test
