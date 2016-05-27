@@ -17,22 +17,18 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.build.IndexState;
-import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ProjectManager;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -43,7 +39,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class WorkspaceManager implements IReferenceFinder.IResourceAccess {
+public class WorkspaceManager {
   @Inject
   private Provider<ProjectManager> projectManagerProvider;
   
@@ -131,6 +127,10 @@ public class WorkspaceManager implements IReferenceFinder.IResourceAccess {
     }
   }
   
+  public IResourceDescriptions getIndex() {
+    return new ChunkedResourceDescriptions(this.fullIndex);
+  }
+  
   public URI getProjectBaseDir(final URI candidate) {
     Set<URI> _keySet = this.baseDir2ProjectManager.keySet();
     final Function1<URI, Integer> _function = new Function1<URI, Integer>() {
@@ -188,29 +188,13 @@ public class WorkspaceManager implements IReferenceFinder.IResourceAccess {
   }
   
   public <T extends Object> T doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
-    final ProjectManager projectMnr = this.getProjectManager(uri);
-    final Document doc = this.openDocuments.get(uri);
-    Resource _resource = projectMnr.getResource(uri);
+    final URI resourceURI = uri.trimFragment();
+    final ProjectManager projectMnr = this.getProjectManager(resourceURI);
+    final Document doc = this.openDocuments.get(resourceURI);
+    Resource _resource = projectMnr.getResource(resourceURI);
     return work.apply(doc, ((XtextResource) _resource));
   }
   
   public <T extends Object> void doWrite(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
-  }
-  
-  @Override
-  public <R extends Object> R readOnly(final URI targetURI, final IUnitOfWork<R, ResourceSet> work) {
-    try {
-      ProjectManager _projectManager = this.getProjectManager(targetURI);
-      XtextResourceSet _resourceSet = _projectManager.getResourceSet();
-      return work.exec(_resourceSet);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  public IResourceDescriptions getIndexData(final URI targetURI) {
-    ProjectManager _projectManager = this.getProjectManager(targetURI);
-    IndexState _indexState = _projectManager.getIndexState();
-    return _indexState.getResourceDescriptions();
   }
 }

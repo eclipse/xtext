@@ -50,6 +50,7 @@ import io.typefox.lsapi.WorkspaceSymbolParams
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
@@ -57,6 +58,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
 import static io.typefox.lsapi.util.LsapiFactories.*
+import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 
 /**
  * 
@@ -67,6 +69,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	InitializeParams params
 	@Inject Provider<WorkspaceManager> workspaceManagerProvider
 	WorkspaceManager workspaceManager
+	IResourceAccess resourceAccess
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
 
@@ -75,6 +78,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 		workspaceManager = workspaceManagerProvider.get
 		val rootURI = URI.createFileURI(params.rootPath)
 		workspaceManager.initialize(rootURI)[this.publishDiagnostics($0, $1)]
+		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
 		return new InitializeResultImpl => [
 			capabilities = new ServerCapabilitiesImpl => [
 				definitionProvider = true
@@ -214,6 +218,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 
 	// end completion stuff
 	// symbols
+	
 	override definition(TextDocumentPositionParams params) {
 		val uri = params.textDocument.uri.toUri
 		val resourceServiceProvider = uri.resourceServiceProvider
@@ -223,7 +228,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 
 		return workspaceManager.doRead(uri) [ document, resource |
 			val offset = document.getOffSet(params.position)
-			return documentSymbolService.getDefinitions(resource, offset, workspaceManager)
+			return documentSymbolService.getDefinitions(resource, offset, resourceAccess)
 		]
 	}
 
@@ -236,14 +241,15 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 
 		return workspaceManager.doRead(uri) [ document, resource |
 			val offset = document.getOffSet(params.position)
-			val indexData = workspaceManager.getIndexData(resource.URI)
-
+			
 			val definitions = if (params.context.includeDeclaration)
-					documentSymbolService.getDefinitions(resource, offset, workspaceManager)
+					documentSymbolService.getDefinitions(resource, offset, resourceAccess)
 				else
-					emptyList
 
-			val references = documentSymbolService.getReferences(resource, offset, workspaceManager, indexData)
+					emptyList
+			
+			val indexData = workspaceManager.index
+			val references = documentSymbolService.getReferences(resource, offset, resourceAccess, indexData)
 			val result = definitions + references
 			return result.toList
 		]

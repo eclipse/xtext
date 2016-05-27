@@ -71,11 +71,13 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
+import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -105,6 +107,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   private WorkspaceManager workspaceManager;
   
+  private IReferenceFinder.IResourceAccess resourceAccess;
+  
   @Inject
   @Extension
   private UriExtensions _uriExtensions;
@@ -127,6 +131,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       }
     };
     this.workspaceManager.initialize(rootURI, _function);
+    WorkspaceResourceAccess _workspaceResourceAccess = new WorkspaceResourceAccess(this.workspaceManager);
+    this.resourceAccess = _workspaceResourceAccess;
     InitializeResultImpl _initializeResultImpl = new InitializeResultImpl();
     final Procedure1<InitializeResultImpl> _function_1 = new Procedure1<InitializeResultImpl>() {
       @Override
@@ -413,7 +419,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       public List<? extends Location> apply(final Document document, final XtextResource resource) {
         Position _position = params.getPosition();
         final int offset = document.getOffSet(_position);
-        return documentSymbolService.getDefinitions(resource, offset, LanguageServerImpl.this.workspaceManager);
+        return documentSymbolService.getDefinitions(resource, offset, LanguageServerImpl.this.resourceAccess);
       }
     };
     return this.workspaceManager.<List<? extends Location>>doRead(uri, _function);
@@ -438,18 +444,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       public List<Location> apply(final Document document, final XtextResource resource) {
         Position _position = params.getPosition();
         final int offset = document.getOffSet(_position);
-        URI _uRI = resource.getURI();
-        final IResourceDescriptions indexData = LanguageServerImpl.this.workspaceManager.getIndexData(_uRI);
         List<? extends Location> _xifexpression = null;
         ReferenceContext _context = params.getContext();
         boolean _isIncludeDeclaration = _context.isIncludeDeclaration();
         if (_isIncludeDeclaration) {
-          _xifexpression = documentSymbolService.getDefinitions(resource, offset, LanguageServerImpl.this.workspaceManager);
+          _xifexpression = documentSymbolService.getDefinitions(resource, offset, LanguageServerImpl.this.resourceAccess);
         } else {
           _xifexpression = CollectionLiterals.emptyList();
         }
         final List<? extends Location> definitions = _xifexpression;
-        final List<? extends Location> references = documentSymbolService.getReferences(resource, offset, LanguageServerImpl.this.workspaceManager, indexData);
+        final IResourceDescriptions indexData = LanguageServerImpl.this.workspaceManager.getIndex();
+        final List<? extends Location> references = documentSymbolService.getReferences(resource, offset, LanguageServerImpl.this.resourceAccess, indexData);
         final Iterable<Location> result = Iterables.<Location>concat(definitions, references);
         return IterableExtensions.<Location>toList(result);
       }
@@ -570,6 +575,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   public void setWorkspaceManager(final WorkspaceManager workspaceManager) {
     this.workspaceManager = workspaceManager;
+  }
+  
+  @Pure
+  public IReferenceFinder.IResourceAccess getResourceAccess() {
+    return this.resourceAccess;
+  }
+  
+  public void setResourceAccess(final IReferenceFinder.IResourceAccess resourceAccess) {
+    this.resourceAccess = resourceAccess;
   }
   
   @Pure
