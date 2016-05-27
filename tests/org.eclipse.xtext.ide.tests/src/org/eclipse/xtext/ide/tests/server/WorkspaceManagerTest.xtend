@@ -34,7 +34,7 @@ class WorkspaceManagerTest {
             }
         '''
         
-        workspaceManger.doBuild(#[path], emptyList)
+        workspaceManger.doBuild(#[path], emptyList, null)
         
         val String inMemContents = '''
             type Test {
@@ -42,7 +42,7 @@ class WorkspaceManagerTest {
             }
         '''
         
-        workspaceManger.didOpen(path, 1, inMemContents)
+        workspaceManger.didOpen(path, 1, inMemContents, null)
         
         Assert.assertEquals(inMemContents, workspaceManger.doRead(path, [$0.contents]))
     }
@@ -60,7 +60,7 @@ class WorkspaceManagerTest {
             Files.cleanFolder(root, null, true, false)
         }
         root.deleteOnExit
-        workspaceManger.initialize(URI.createFileURI(root.absolutePath), [diagnostics.put($0, $1.toList)])
+        workspaceManger.initialize(URI.createFileURI(root.absolutePath), [diagnostics.put($0, $1.toList)], null)
     }
 
     protected Map<URI, List<Issue>> diagnostics = newHashMap()

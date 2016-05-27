@@ -18,6 +18,8 @@ import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.TextRegion
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -32,23 +34,17 @@ class ContentAssistService {
 	@Inject ExecutorService executorService
 
 	@Inject IdeContentProposalProvider proposalProvider
+	
+	@Inject OperationCanceledManager operationCanceledManager
 
 	def Iterable<ContentAssistEntry> createProposals(
 		String document,
 		int caretOffset,
-		XtextResource resource
+		XtextResource resource,
+		CancelIndicator cancelIndicator
 	) {
 		val selection = new TextRegion(caretOffset, 0)
-		return createProposals(document, selection, caretOffset, resource)
-	}
-
-	def Iterable<ContentAssistEntry> createProposals(
-		String document,
-		TextRegion selection,
-		int caretOffset,
-		XtextResource resource
-	) {
-		return createProposals(document, selection, caretOffset, resource, DEFAULT_PROPOSALS_LIMIT)
+		return createProposals(document, selection, caretOffset, resource, cancelIndicator)
 	}
 
 	def Iterable<ContentAssistEntry> createProposals(
@@ -56,7 +52,18 @@ class ContentAssistService {
 		TextRegion selection,
 		int caretOffset,
 		XtextResource resource,
-		int proposalsLimit
+		CancelIndicator cancelIndicator
+	) {
+		return createProposals(document, selection, caretOffset, resource, DEFAULT_PROPOSALS_LIMIT, cancelIndicator)
+	}
+
+	def Iterable<ContentAssistEntry> createProposals(
+		String document,
+		TextRegion selection,
+		int caretOffset,
+		XtextResource resource,
+		int proposalsLimit,
+		CancelIndicator cancelIndicator
 	) {
 		val entries = new TreeSet<Pair<Integer, ContentAssistEntry>> [ p1, p2 |
 			val prioResult = p2.key.compareTo(p1.key)
@@ -74,6 +81,7 @@ class ContentAssistService {
 						throw new IllegalArgumentException('proposal must not be null.')
 					entries.add(priority -> entry)
 				}
+				operationCanceledManager.checkCanceled(cancelIndicator)
 			}
 
 			override canAcceptMoreProposals() {
