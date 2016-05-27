@@ -39,6 +39,10 @@ class ServerTest extends AbstractLanguageServerTest {
         '''
     	initialize
     	assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.values.head.head?.message)
+    	assertEquals(1, diagnostics.values.head.head.range.start.line)
+    	assertEquals(4, diagnostics.values.head.head.range.start.character)
+    	assertEquals(1, diagnostics.values.head.head.range.end.line)
+    	assertEquals(15, diagnostics.values.head.head.range.end.character)
     }
     
     @Test

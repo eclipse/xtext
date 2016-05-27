@@ -50,15 +50,14 @@ import io.typefox.lsapi.WorkspaceSymbolParams
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
+import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
 import static io.typefox.lsapi.util.LsapiFactories.*
-import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 
 /**
  * 
@@ -69,16 +68,18 @@ import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 	InitializeParams params
 	@Inject Provider<WorkspaceManager> workspaceManagerProvider
 	WorkspaceManager workspaceManager
-	IResourceAccess resourceAccess
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
 
 	override InitializeResult initialize(InitializeParams params) {
 		this.params = params
 		workspaceManager = workspaceManagerProvider.get
+		if (params.rootPath === null) {
+            throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.")
+        }
 		val rootURI = URI.createFileURI(params.rootPath)
-		workspaceManager.initialize(rootURI)[this.publishDiagnostics($0, $1)]
 		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
+		workspaceManager.initialize(rootURI)[this.publishDiagnostics($0, $1)]
 		return new InitializeResultImpl => [
 			capabilities = new ServerCapabilitiesImpl => [
 				definitionProvider = true
@@ -160,6 +161,8 @@ import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 	// end file/content change events
 	// validation stuff
 	private List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners = newArrayList()
+    
+    WorkspaceResourceAccess resourceAccess
 
 	override onPublishDiagnostics(NotificationCallback<PublishDiagnosticsParams> callback) {
 		diagnosticListeners.add(callback)
@@ -218,7 +221,6 @@ import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 
 	// end completion stuff
 	// symbols
-	
 	override definition(TextDocumentPositionParams params) {
 		val uri = params.textDocument.uri.toUri
 		val resourceServiceProvider = uri.resourceServiceProvider
@@ -241,13 +243,12 @@ import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 
 		return workspaceManager.doRead(uri) [ document, resource |
 			val offset = document.getOffSet(params.position)
-			
+
 			val definitions = if (params.context.includeDeclaration)
 					documentSymbolService.getDefinitions(resource, offset, resourceAccess)
 				else
-
 					emptyList
-			
+
 			val indexData = workspaceManager.index
 			val references = documentSymbolService.getReferences(resource, offset, resourceAccess, indexData)
 			val result = definitions + references
