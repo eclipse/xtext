@@ -68,7 +68,7 @@ import io.typefox.lsapi.util.LsapiFactories;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -136,40 +136,28 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     this.resourceAccess = _workspaceResourceAccess;
     final InitializeResultImpl result = new InitializeResultImpl();
     ServerCapabilitiesImpl _serverCapabilitiesImpl = new ServerCapabilitiesImpl();
-    final Procedure1<ServerCapabilitiesImpl> _function = new Procedure1<ServerCapabilitiesImpl>() {
-      @Override
-      public void apply(final ServerCapabilitiesImpl it) {
-        it.setDefinitionProvider(Boolean.valueOf(true));
-        it.setReferencesProvider(Boolean.valueOf(true));
-        it.setDocumentSymbolProvider(Boolean.valueOf(true));
-        it.setTextDocumentSync(Integer.valueOf(ServerCapabilities.SYNC_INCREMENTAL));
-        CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
-        final Procedure1<CompletionOptionsImpl> _function = new Procedure1<CompletionOptionsImpl>() {
-          @Override
-          public void apply(final CompletionOptionsImpl it) {
-            it.setResolveProvider(false);
-            it.setTriggerCharacters(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(".")));
-          }
-        };
-        CompletionOptionsImpl _doubleArrow = ObjectExtensions.<CompletionOptionsImpl>operator_doubleArrow(_completionOptionsImpl, _function);
-        it.setCompletionProvider(_doubleArrow);
-      }
+    final Procedure1<ServerCapabilitiesImpl> _function = (ServerCapabilitiesImpl it) -> {
+      it.setDefinitionProvider(Boolean.valueOf(true));
+      it.setReferencesProvider(Boolean.valueOf(true));
+      it.setDocumentSymbolProvider(Boolean.valueOf(true));
+      it.setTextDocumentSync(Integer.valueOf(ServerCapabilities.SYNC_INCREMENTAL));
+      CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
+      final Procedure1<CompletionOptionsImpl> _function_1 = (CompletionOptionsImpl it_1) -> {
+        it_1.setResolveProvider(false);
+        it_1.setTriggerCharacters(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(".")));
+      };
+      CompletionOptionsImpl _doubleArrow = ObjectExtensions.<CompletionOptionsImpl>operator_doubleArrow(_completionOptionsImpl, _function_1);
+      it.setCompletionProvider(_doubleArrow);
     };
     ServerCapabilitiesImpl _doubleArrow = ObjectExtensions.<ServerCapabilitiesImpl>operator_doubleArrow(_serverCapabilitiesImpl, _function);
     result.setCapabilities(_doubleArrow);
-    final Procedure1<CancelIndicator> _function_1 = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator cancelIndicator) {
-        String _rootPath = params.getRootPath();
-        final URI rootURI = URI.createFileURI(_rootPath);
-        final Procedure2<URI, Iterable<Issue>> _function = new Procedure2<URI, Iterable<Issue>>() {
-          @Override
-          public void apply(final URI $0, final Iterable<Issue> $1) {
-            LanguageServerImpl.this.publishDiagnostics($0, $1);
-          }
-        };
-        LanguageServerImpl.this.workspaceManager.initialize(rootURI, _function, cancelIndicator);
-      }
+    final Procedure1<CancelIndicator> _function_1 = (CancelIndicator cancelIndicator) -> {
+      String _rootPath_1 = params.getRootPath();
+      final URI rootURI = URI.createFileURI(_rootPath_1);
+      final Procedure2<URI, Iterable<Issue>> _function_2 = (URI $0, Iterable<Issue> $1) -> {
+        this.publishDiagnostics($0, $1);
+      };
+      this.workspaceManager.initialize(rootURI, _function_2, cancelIndicator);
     };
     this.requestManager.runWrite(_function_1, CancellableIndicator.NullImpl);
     return result;
@@ -212,99 +200,81 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public void didOpen(final DidOpenTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator cancelIndicator) {
-        TextDocumentItem _textDocument = params.getTextDocument();
-        String _uri = _textDocument.getUri();
-        URI _uri_1 = LanguageServerImpl.this._uriExtensions.toUri(_uri);
-        TextDocumentItem _textDocument_1 = params.getTextDocument();
-        int _version = _textDocument_1.getVersion();
-        TextDocumentItem _textDocument_2 = params.getTextDocument();
-        String _text = _textDocument_2.getText();
-        LanguageServerImpl.this.workspaceManager.didOpen(_uri_1, _version, _text, cancelIndicator);
-      }
+    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentItem _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      URI _uri_1 = this._uriExtensions.toUri(_uri);
+      TextDocumentItem _textDocument_1 = params.getTextDocument();
+      int _version = _textDocument_1.getVersion();
+      TextDocumentItem _textDocument_2 = params.getTextDocument();
+      String _text = _textDocument_2.getText();
+      this.workspaceManager.didOpen(_uri_1, _version, _text, cancelIndicator);
     };
     this.requestManager.runWrite(_function);
   }
   
   @Override
   public void didChange(final DidChangeTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator cancelIndicator) {
-        VersionedTextDocumentIdentifier _textDocument = params.getTextDocument();
-        String _uri = _textDocument.getUri();
-        URI _uri_1 = LanguageServerImpl.this._uriExtensions.toUri(_uri);
-        VersionedTextDocumentIdentifier _textDocument_1 = params.getTextDocument();
-        int _version = _textDocument_1.getVersion();
-        List<? extends TextDocumentContentChangeEvent> _contentChanges = params.getContentChanges();
-        final Function1<TextDocumentContentChangeEvent, TextEdit> _function = new Function1<TextDocumentContentChangeEvent, TextEdit>() {
-          @Override
-          public TextEdit apply(final TextDocumentContentChangeEvent event) {
-            Range _range = event.getRange();
-            String _text = event.getText();
-            return LsapiFactories.newTextEdit(((RangeImpl) _range), _text);
-          }
-        };
-        List<TextEdit> _map = ListExtensions.map(_contentChanges, _function);
-        LanguageServerImpl.this.workspaceManager.didChange(_uri_1, _version, _map, cancelIndicator);
-      }
+    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+      VersionedTextDocumentIdentifier _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      URI _uri_1 = this._uriExtensions.toUri(_uri);
+      VersionedTextDocumentIdentifier _textDocument_1 = params.getTextDocument();
+      int _version = _textDocument_1.getVersion();
+      List<? extends TextDocumentContentChangeEvent> _contentChanges = params.getContentChanges();
+      final Function1<TextDocumentContentChangeEvent, TextEdit> _function_1 = (TextDocumentContentChangeEvent event) -> {
+        Range _range = event.getRange();
+        String _text = event.getText();
+        return LsapiFactories.newTextEdit(((RangeImpl) _range), _text);
+      };
+      List<TextEdit> _map = ListExtensions.map(_contentChanges, _function_1);
+      this.workspaceManager.didChange(_uri_1, _version, _map, cancelIndicator);
     };
     this.requestManager.runWrite(_function);
   }
   
   @Override
   public void didClose(final DidCloseTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator cancelIndicator) {
-        TextDocumentIdentifier _textDocument = params.getTextDocument();
-        String _uri = _textDocument.getUri();
-        URI _uri_1 = LanguageServerImpl.this._uriExtensions.toUri(_uri);
-        LanguageServerImpl.this.workspaceManager.didClose(_uri_1, cancelIndicator);
-      }
+    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      URI _uri_1 = this._uriExtensions.toUri(_uri);
+      this.workspaceManager.didClose(_uri_1, cancelIndicator);
     };
     this.requestManager.runWrite(_function);
   }
   
   @Override
   public void didSave(final DidSaveTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator cancelIndicator) {
-        TextDocumentIdentifier _textDocument = params.getTextDocument();
-        String _uri = _textDocument.getUri();
-        URI _uri_1 = LanguageServerImpl.this._uriExtensions.toUri(_uri);
-        LanguageServerImpl.this.workspaceManager.didSave(_uri_1, cancelIndicator);
-      }
+    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      URI _uri_1 = this._uriExtensions.toUri(_uri);
+      this.workspaceManager.didSave(_uri_1, cancelIndicator);
     };
     this.requestManager.runWrite(_function);
   }
   
   @Override
   public void didChangeWatchedFiles(final DidChangeWatchedFilesParams params) {
-    final Procedure1<CancelIndicator> _function = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator cancelIndicator) {
-        final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
-        final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
-        List<? extends FileEvent> _changes = params.getChanges();
-        for (final FileEvent fileEvent : _changes) {
-          int _type = fileEvent.getType();
-          boolean _tripleEquals = (_type == FileEvent.TYPE_DELETED);
-          if (_tripleEquals) {
-            String _uri = fileEvent.getUri();
-            URI _uri_1 = LanguageServerImpl.this._uriExtensions.toUri(_uri);
-            deletedFiles.add(_uri_1);
-          } else {
-            String _uri_2 = fileEvent.getUri();
-            URI _uri_3 = LanguageServerImpl.this._uriExtensions.toUri(_uri_2);
-            dirtyFiles.add(_uri_3);
-          }
+    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+      final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
+      final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
+      List<? extends FileEvent> _changes = params.getChanges();
+      for (final FileEvent fileEvent : _changes) {
+        int _type = fileEvent.getType();
+        boolean _tripleEquals = (_type == FileEvent.TYPE_DELETED);
+        if (_tripleEquals) {
+          String _uri = fileEvent.getUri();
+          URI _uri_1 = this._uriExtensions.toUri(_uri);
+          deletedFiles.add(_uri_1);
+        } else {
+          String _uri_2 = fileEvent.getUri();
+          URI _uri_3 = this._uriExtensions.toUri(_uri_2);
+          dirtyFiles.add(_uri_3);
         }
-        LanguageServerImpl.this.workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
       }
+      this.workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
     };
     this.requestManager.runWrite(_function);
   }
@@ -320,21 +290,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   private void publishDiagnostics(final URI uri, final Iterable<? extends Issue> issues) {
     PublishDiagnosticsParamsImpl _publishDiagnosticsParamsImpl = new PublishDiagnosticsParamsImpl();
-    final Procedure1<PublishDiagnosticsParamsImpl> _function = new Procedure1<PublishDiagnosticsParamsImpl>() {
-      @Override
-      public void apply(final PublishDiagnosticsParamsImpl it) {
-        String _path = LanguageServerImpl.this._uriExtensions.toPath(uri);
-        it.setUri(_path);
-        final Function1<Issue, DiagnosticImpl> _function = new Function1<Issue, DiagnosticImpl>() {
-          @Override
-          public DiagnosticImpl apply(final Issue it) {
-            return LanguageServerImpl.this.toDiagnostic(it);
-          }
-        };
-        Iterable<DiagnosticImpl> _map = IterableExtensions.map(issues, _function);
-        List<DiagnosticImpl> _list = IterableExtensions.<DiagnosticImpl>toList(_map);
-        it.setDiagnostics(_list);
-      }
+    final Procedure1<PublishDiagnosticsParamsImpl> _function = (PublishDiagnosticsParamsImpl it) -> {
+      String _path = this._uriExtensions.toPath(uri);
+      it.setUri(_path);
+      final Function1<Issue, DiagnosticImpl> _function_1 = (Issue it_1) -> {
+        return this.toDiagnostic(it_1);
+      };
+      Iterable<DiagnosticImpl> _map = IterableExtensions.map(issues, _function_1);
+      List<DiagnosticImpl> _list = IterableExtensions.<DiagnosticImpl>toList(_map);
+      it.setDiagnostics(_list);
     };
     final PublishDiagnosticsParamsImpl diagnostics = ObjectExtensions.<PublishDiagnosticsParamsImpl>operator_doubleArrow(_publishDiagnosticsParamsImpl, _function);
     for (final NotificationCallback<PublishDiagnosticsParams> diagnosticsCallback : this.diagnosticListeners) {
@@ -344,49 +308,46 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   private DiagnosticImpl toDiagnostic(final Issue issue) {
     DiagnosticImpl _diagnosticImpl = new DiagnosticImpl();
-    final Procedure1<DiagnosticImpl> _function = new Procedure1<DiagnosticImpl>() {
-      @Override
-      public void apply(final DiagnosticImpl it) {
-        String _code = issue.getCode();
-        it.setCode(_code);
-        int _switchResult = (int) 0;
-        Severity _severity = issue.getSeverity();
-        if (_severity != null) {
-          switch (_severity) {
-            case ERROR:
-              _switchResult = Diagnostic.SEVERITY_ERROR;
-              break;
-            case WARNING:
-              _switchResult = Diagnostic.SEVERITY_WARNING;
-              break;
-            case INFO:
-              _switchResult = Diagnostic.SEVERITY_INFO;
-              break;
-            default:
-              _switchResult = Diagnostic.SEVERITY_HINT;
-              break;
-          }
-        } else {
-          _switchResult = Diagnostic.SEVERITY_HINT;
+    final Procedure1<DiagnosticImpl> _function = (DiagnosticImpl it) -> {
+      String _code = issue.getCode();
+      it.setCode(_code);
+      int _switchResult = (int) 0;
+      Severity _severity = issue.getSeverity();
+      if (_severity != null) {
+        switch (_severity) {
+          case ERROR:
+            _switchResult = Diagnostic.SEVERITY_ERROR;
+            break;
+          case WARNING:
+            _switchResult = Diagnostic.SEVERITY_WARNING;
+            break;
+          case INFO:
+            _switchResult = Diagnostic.SEVERITY_INFO;
+            break;
+          default:
+            _switchResult = Diagnostic.SEVERITY_HINT;
+            break;
         }
-        it.setSeverity(Integer.valueOf(_switchResult));
-        String _message = issue.getMessage();
-        it.setMessage(_message);
-        Integer _lineNumber = issue.getLineNumber();
-        int _minus = ((_lineNumber).intValue() - 1);
-        Integer _column = issue.getColumn();
-        int _minus_1 = ((_column).intValue() - 1);
-        PositionImpl _newPosition = LsapiFactories.newPosition(_minus, _minus_1);
-        Integer _lineNumber_1 = issue.getLineNumber();
-        int _minus_2 = ((_lineNumber_1).intValue() - 1);
-        Integer _column_1 = issue.getColumn();
-        int _minus_3 = ((_column_1).intValue() - 1);
-        Integer _length = issue.getLength();
-        int _plus = (_minus_3 + (_length).intValue());
-        PositionImpl _newPosition_1 = LsapiFactories.newPosition(_minus_2, _plus);
-        RangeImpl _newRange = LsapiFactories.newRange(_newPosition, _newPosition_1);
-        it.setRange(_newRange);
+      } else {
+        _switchResult = Diagnostic.SEVERITY_HINT;
       }
+      it.setSeverity(Integer.valueOf(_switchResult));
+      String _message = issue.getMessage();
+      it.setMessage(_message);
+      Integer _lineNumber = issue.getLineNumber();
+      int _minus = ((_lineNumber).intValue() - 1);
+      Integer _column = issue.getColumn();
+      int _minus_1 = ((_column).intValue() - 1);
+      PositionImpl _newPosition = LsapiFactories.newPosition(_minus, _minus_1);
+      Integer _lineNumber_1 = issue.getLineNumber();
+      int _minus_2 = ((_lineNumber_1).intValue() - 1);
+      Integer _column_1 = issue.getColumn();
+      int _minus_3 = ((_column_1).intValue() - 1);
+      Integer _length = issue.getLength();
+      int _plus = (_minus_3 + (_length).intValue());
+      PositionImpl _newPosition_1 = LsapiFactories.newPosition(_minus_2, _plus);
+      RangeImpl _newRange = LsapiFactories.newRange(_newPosition, _newPosition_1);
+      it.setRange(_newRange);
     };
     return ObjectExtensions.<DiagnosticImpl>operator_doubleArrow(_diagnosticImpl, _function);
   }
@@ -394,42 +355,33 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   @Override
   public List<? extends CompletionItem> completion(final TextDocumentPositionParams params) {
     try {
-      final Function1<CancelIndicator, List<CompletionItem>> _function = new Function1<CancelIndicator, List<CompletionItem>>() {
-        @Override
-        public List<CompletionItem> apply(final CancelIndicator cancelIndicator) {
-          TextDocumentIdentifier _textDocument = params.getTextDocument();
-          String _uri = _textDocument.getUri();
-          final URI uri = LanguageServerImpl.this._uriExtensions.toUri(_uri);
-          final IResourceServiceProvider resourceServiceProvider = LanguageServerImpl.this.languagesRegistry.getResourceServiceProvider(uri);
-          ContentAssistService _get = null;
-          if (resourceServiceProvider!=null) {
-            _get=resourceServiceProvider.<ContentAssistService>get(ContentAssistService.class);
-          }
-          final ContentAssistService contentAssistService = _get;
-          if ((contentAssistService == null)) {
-            return CollectionLiterals.<CompletionItem>emptyList();
-          }
-          final Function2<Document, XtextResource, Iterable<ContentAssistEntry>> _function = new Function2<Document, XtextResource, Iterable<ContentAssistEntry>>() {
-            @Override
-            public Iterable<ContentAssistEntry> apply(final Document document, final XtextResource resource) {
-              Position _position = params.getPosition();
-              final int offset = document.getOffSet(_position);
-              String _contents = document.getContents();
-              return contentAssistService.createProposals(_contents, offset, resource, cancelIndicator);
-            }
-          };
-          final Iterable<ContentAssistEntry> entries = LanguageServerImpl.this.workspaceManager.<Iterable<ContentAssistEntry>>doRead(uri, _function);
-          final Function1<ContentAssistEntry, CompletionItem> _function_1 = new Function1<ContentAssistEntry, CompletionItem>() {
-            @Override
-            public CompletionItem apply(final ContentAssistEntry it) {
-              return LanguageServerImpl.this.toCompletionItem(it);
-            }
-          };
-          Iterable<CompletionItem> _map = IterableExtensions.<ContentAssistEntry, CompletionItem>map(entries, _function_1);
-          return IterableExtensions.<CompletionItem>toList(_map);
+      final Function1<CancelIndicator, List<CompletionItem>> _function = (CancelIndicator cancelIndicator) -> {
+        TextDocumentIdentifier _textDocument = params.getTextDocument();
+        String _uri = _textDocument.getUri();
+        final URI uri = this._uriExtensions.toUri(_uri);
+        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+        ContentAssistService _get = null;
+        if (resourceServiceProvider!=null) {
+          _get=resourceServiceProvider.<ContentAssistService>get(ContentAssistService.class);
         }
+        final ContentAssistService contentAssistService = _get;
+        if ((contentAssistService == null)) {
+          return CollectionLiterals.<CompletionItem>emptyList();
+        }
+        final Function2<Document, XtextResource, Iterable<ContentAssistEntry>> _function_1 = (Document document, XtextResource resource) -> {
+          Position _position = params.getPosition();
+          final int offset = document.getOffSet(_position);
+          String _contents = document.getContents();
+          return contentAssistService.createProposals(_contents, offset, resource, cancelIndicator);
+        };
+        final Iterable<ContentAssistEntry> entries = this.workspaceManager.<Iterable<ContentAssistEntry>>doRead(uri, _function_1);
+        final Function1<ContentAssistEntry, CompletionItem> _function_2 = (ContentAssistEntry it) -> {
+          return this.toCompletionItem(it);
+        };
+        Iterable<CompletionItem> _map = IterableExtensions.<ContentAssistEntry, CompletionItem>map(entries, _function_2);
+        return IterableExtensions.<CompletionItem>toList(_map);
       };
-      Future<List<CompletionItem>> _runRead = this.requestManager.<List<CompletionItem>>runRead(_function);
+      CompletableFuture<List<CompletionItem>> _runRead = this.requestManager.<List<CompletionItem>>runRead(_function);
       return _runRead.get();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -457,34 +409,28 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   @Override
   public List<? extends Location> definition(final TextDocumentPositionParams params) {
     try {
-      final Function1<CancelIndicator, List<? extends Location>> _function = new Function1<CancelIndicator, List<? extends Location>>() {
-        @Override
-        public List<? extends Location> apply(final CancelIndicator cancelIndicator) {
-          TextDocumentIdentifier _textDocument = params.getTextDocument();
-          String _uri = _textDocument.getUri();
-          final URI uri = LanguageServerImpl.this._uriExtensions.toUri(_uri);
-          final IResourceServiceProvider resourceServiceProvider = LanguageServerImpl.this.languagesRegistry.getResourceServiceProvider(uri);
-          DocumentSymbolService _get = null;
-          if (resourceServiceProvider!=null) {
-            _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
-          }
-          final DocumentSymbolService documentSymbolService = _get;
-          if ((documentSymbolService == null)) {
-            return CollectionLiterals.<Location>emptyList();
-          }
-          final Function2<Document, XtextResource, List<? extends Location>> _function = new Function2<Document, XtextResource, List<? extends Location>>() {
-            @Override
-            public List<? extends Location> apply(final Document document, final XtextResource resource) {
-              Position _position = params.getPosition();
-              final int offset = document.getOffSet(_position);
-              return documentSymbolService.getDefinitions(resource, offset, LanguageServerImpl.this.resourceAccess, cancelIndicator);
-            }
-          };
-          final List<? extends Location> definitions = LanguageServerImpl.this.workspaceManager.<List<? extends Location>>doRead(uri, _function);
-          return definitions;
+      final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
+        TextDocumentIdentifier _textDocument = params.getTextDocument();
+        String _uri = _textDocument.getUri();
+        final URI uri = this._uriExtensions.toUri(_uri);
+        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+        DocumentSymbolService _get = null;
+        if (resourceServiceProvider!=null) {
+          _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
         }
+        final DocumentSymbolService documentSymbolService = _get;
+        if ((documentSymbolService == null)) {
+          return CollectionLiterals.<Location>emptyList();
+        }
+        final Function2<Document, XtextResource, List<? extends Location>> _function_1 = (Document document, XtextResource resource) -> {
+          Position _position = params.getPosition();
+          final int offset = document.getOffSet(_position);
+          return documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
+        };
+        final List<? extends Location> definitions = this.workspaceManager.<List<? extends Location>>doRead(uri, _function_1);
+        return definitions;
       };
-      Future<List<? extends Location>> _runRead = this.requestManager.<List<? extends Location>>runRead(_function);
+      CompletableFuture<List<? extends Location>> _runRead = this.requestManager.<List<? extends Location>>runRead(_function);
       return _runRead.get();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -494,45 +440,39 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   @Override
   public List<? extends Location> references(final ReferenceParams params) {
     try {
-      final Function1<CancelIndicator, List<? extends Location>> _function = new Function1<CancelIndicator, List<? extends Location>>() {
-        @Override
-        public List<? extends Location> apply(final CancelIndicator cancelIndicator) {
-          TextDocumentIdentifier _textDocument = params.getTextDocument();
-          String _uri = _textDocument.getUri();
-          final URI uri = LanguageServerImpl.this._uriExtensions.toUri(_uri);
-          final IResourceServiceProvider resourceServiceProvider = LanguageServerImpl.this.languagesRegistry.getResourceServiceProvider(uri);
-          DocumentSymbolService _get = null;
-          if (resourceServiceProvider!=null) {
-            _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
-          }
-          final DocumentSymbolService documentSymbolService = _get;
-          if ((documentSymbolService == null)) {
-            return CollectionLiterals.<Location>emptyList();
-          }
-          final Function2<Document, XtextResource, List<Location>> _function = new Function2<Document, XtextResource, List<Location>>() {
-            @Override
-            public List<Location> apply(final Document document, final XtextResource resource) {
-              Position _position = params.getPosition();
-              final int offset = document.getOffSet(_position);
-              List<? extends Location> _xifexpression = null;
-              ReferenceContext _context = params.getContext();
-              boolean _isIncludeDeclaration = _context.isIncludeDeclaration();
-              if (_isIncludeDeclaration) {
-                _xifexpression = documentSymbolService.getDefinitions(resource, offset, LanguageServerImpl.this.resourceAccess, cancelIndicator);
-              } else {
-                _xifexpression = CollectionLiterals.emptyList();
-              }
-              final List<? extends Location> definitions = _xifexpression;
-              final IResourceDescriptions indexData = LanguageServerImpl.this.workspaceManager.getIndex();
-              final List<? extends Location> references = documentSymbolService.getReferences(resource, offset, LanguageServerImpl.this.resourceAccess, indexData, cancelIndicator);
-              final Iterable<Location> result = Iterables.<Location>concat(definitions, references);
-              return IterableExtensions.<Location>toList(result);
-            }
-          };
-          return LanguageServerImpl.this.workspaceManager.<List<Location>>doRead(uri, _function);
+      final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
+        TextDocumentIdentifier _textDocument = params.getTextDocument();
+        String _uri = _textDocument.getUri();
+        final URI uri = this._uriExtensions.toUri(_uri);
+        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+        DocumentSymbolService _get = null;
+        if (resourceServiceProvider!=null) {
+          _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
         }
+        final DocumentSymbolService documentSymbolService = _get;
+        if ((documentSymbolService == null)) {
+          return CollectionLiterals.<Location>emptyList();
+        }
+        final Function2<Document, XtextResource, List<Location>> _function_1 = (Document document, XtextResource resource) -> {
+          Position _position = params.getPosition();
+          final int offset = document.getOffSet(_position);
+          List<? extends Location> _xifexpression = null;
+          ReferenceContext _context = params.getContext();
+          boolean _isIncludeDeclaration = _context.isIncludeDeclaration();
+          if (_isIncludeDeclaration) {
+            _xifexpression = documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
+          } else {
+            _xifexpression = CollectionLiterals.emptyList();
+          }
+          final List<? extends Location> definitions = _xifexpression;
+          final IResourceDescriptions indexData = this.workspaceManager.getIndex();
+          final List<? extends Location> references = documentSymbolService.getReferences(resource, offset, this.resourceAccess, indexData, cancelIndicator);
+          final Iterable<Location> result = Iterables.<Location>concat(definitions, references);
+          return IterableExtensions.<Location>toList(result);
+        };
+        return this.workspaceManager.<List<Location>>doRead(uri, _function_1);
       };
-      Future<List<? extends Location>> _runRead = this.requestManager.<List<? extends Location>>runRead(_function);
+      CompletableFuture<List<? extends Location>> _runRead = this.requestManager.<List<? extends Location>>runRead(_function);
       return _runRead.get();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -542,31 +482,25 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   @Override
   public List<? extends SymbolInformation> documentSymbol(final DocumentSymbolParams params) {
     try {
-      final Function1<CancelIndicator, List<? extends SymbolInformation>> _function = new Function1<CancelIndicator, List<? extends SymbolInformation>>() {
-        @Override
-        public List<? extends SymbolInformation> apply(final CancelIndicator cancelIndicator) {
-          TextDocumentIdentifier _textDocument = params.getTextDocument();
-          String _uri = _textDocument.getUri();
-          final URI uri = LanguageServerImpl.this._uriExtensions.toUri(_uri);
-          final IResourceServiceProvider resourceServiceProvider = LanguageServerImpl.this.languagesRegistry.getResourceServiceProvider(uri);
-          DocumentSymbolService _get = null;
-          if (resourceServiceProvider!=null) {
-            _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
-          }
-          final DocumentSymbolService documentSymbolService = _get;
-          if ((documentSymbolService == null)) {
-            return CollectionLiterals.<SymbolInformation>emptyList();
-          }
-          final Function2<Document, XtextResource, List<? extends SymbolInformation>> _function = new Function2<Document, XtextResource, List<? extends SymbolInformation>>() {
-            @Override
-            public List<? extends SymbolInformation> apply(final Document document, final XtextResource resource) {
-              return documentSymbolService.getSymbols(resource, cancelIndicator);
-            }
-          };
-          return LanguageServerImpl.this.workspaceManager.<List<? extends SymbolInformation>>doRead(uri, _function);
+      final Function1<CancelIndicator, List<? extends SymbolInformation>> _function = (CancelIndicator cancelIndicator) -> {
+        TextDocumentIdentifier _textDocument = params.getTextDocument();
+        String _uri = _textDocument.getUri();
+        final URI uri = this._uriExtensions.toUri(_uri);
+        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+        DocumentSymbolService _get = null;
+        if (resourceServiceProvider!=null) {
+          _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
         }
+        final DocumentSymbolService documentSymbolService = _get;
+        if ((documentSymbolService == null)) {
+          return CollectionLiterals.<SymbolInformation>emptyList();
+        }
+        final Function2<Document, XtextResource, List<? extends SymbolInformation>> _function_1 = (Document document, XtextResource resource) -> {
+          return documentSymbolService.getSymbols(resource, cancelIndicator);
+        };
+        return this.workspaceManager.<List<? extends SymbolInformation>>doRead(uri, _function_1);
       };
-      Future<List<? extends SymbolInformation>> _runRead = this.requestManager.<List<? extends SymbolInformation>>runRead(_function);
+      CompletableFuture<List<? extends SymbolInformation>> _runRead = this.requestManager.<List<? extends SymbolInformation>>runRead(_function);
       return _runRead.get();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

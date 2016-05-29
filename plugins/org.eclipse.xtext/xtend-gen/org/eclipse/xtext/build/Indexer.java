@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -52,7 +53,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -139,35 +139,32 @@ public class Indexer {
       URI _uRI = original.getURI();
       this.URI = _uRI;
       Iterable<IEObjectDescription> _exportedObjects = original.getExportedObjects();
-      final Function1<IEObjectDescription, IEObjectDescription> _function = new Function1<IEObjectDescription, IEObjectDescription>() {
-        @Override
-        public IEObjectDescription apply(final IEObjectDescription from) {
-          EObject _eObjectOrProxy = from.getEObjectOrProxy();
-          boolean _eIsProxy = _eObjectOrProxy.eIsProxy();
-          if (_eIsProxy) {
-            return from;
-          }
-          EClass _eClass = from.getEClass();
-          EObject _create = EcoreUtil.create(_eClass);
-          InternalEObject result = ((InternalEObject) _create);
-          URI _eObjectURI = from.getEObjectURI();
-          result.eSetProxyURI(_eObjectURI);
-          Map<String, String> userData = null;
-          String[] _userDataKeys = from.getUserDataKeys();
-          for (final String key : _userDataKeys) {
-            {
-              boolean _equals = Objects.equal(userData, null);
-              if (_equals) {
-                HashMap<String, String> _newHashMapWithExpectedSize = Maps.<String, String>newHashMapWithExpectedSize(2);
-                userData = _newHashMapWithExpectedSize;
-              }
-              String _userData = from.getUserData(key);
-              userData.put(key, _userData);
-            }
-          }
-          QualifiedName _name = from.getName();
-          return EObjectDescription.create(_name, result, userData);
+      final Function1<IEObjectDescription, IEObjectDescription> _function = (IEObjectDescription from) -> {
+        EObject _eObjectOrProxy = from.getEObjectOrProxy();
+        boolean _eIsProxy = _eObjectOrProxy.eIsProxy();
+        if (_eIsProxy) {
+          return from;
         }
+        EClass _eClass = from.getEClass();
+        EObject _create = EcoreUtil.create(_eClass);
+        InternalEObject result = ((InternalEObject) _create);
+        URI _eObjectURI = from.getEObjectURI();
+        result.eSetProxyURI(_eObjectURI);
+        Map<String, String> userData = null;
+        String[] _userDataKeys = from.getUserDataKeys();
+        for (final String key : _userDataKeys) {
+          {
+            boolean _equals = Objects.equal(userData, null);
+            if (_equals) {
+              HashMap<String, String> _newHashMapWithExpectedSize = Maps.<String, String>newHashMapWithExpectedSize(2);
+              userData = _newHashMapWithExpectedSize;
+            }
+            String _userData = from.getUserData(key);
+            userData.put(key, _userData);
+          }
+        }
+        QualifiedName _name = from.getName();
+        return EObjectDescription.create(_name, result, userData);
       };
       Iterable<IEObjectDescription> _map = IterableExtensions.<IEObjectDescription, IEObjectDescription>map(_exportedObjects, _function);
       ImmutableList<IEObjectDescription> _copyOf = ImmutableList.<IEObjectDescription>copyOf(_map);
@@ -249,31 +246,22 @@ public class Indexer {
       allDeltas.addAll(_externalDeltas_1);
     }
     Iterable<IResourceDescription> _allResourceDescriptions = previousIndex.getAllResourceDescriptions();
-    final Function1<IResourceDescription, URI> _function = new Function1<IResourceDescription, URI>() {
-      @Override
-      public URI apply(final IResourceDescription it) {
-        return it.getURI();
-      }
+    final Function1<IResourceDescription, URI> _function = (IResourceDescription it) -> {
+      return it.getURI();
     };
     Iterable<URI> _map = IterableExtensions.<IResourceDescription, URI>map(_allResourceDescriptions, _function);
     final Set<URI> remainingURIs = IterableExtensions.<URI>toSet(_map);
-    final Function1<IResourceDescription.Delta, URI> _function_1 = new Function1<IResourceDescription.Delta, URI>() {
-      @Override
-      public URI apply(final IResourceDescription.Delta it) {
-        return it.getUri();
-      }
+    final Function1<IResourceDescription.Delta, URI> _function_1 = (IResourceDescription.Delta it) -> {
+      return it.getUri();
     };
     List<URI> _map_1 = ListExtensions.<IResourceDescription.Delta, URI>map(deltas, _function_1);
     remainingURIs.removeAll(_map_1);
-    final Function1<URI, Boolean> _function_2 = new Function1<URI, Boolean>() {
-      @Override
-      public Boolean apply(final URI it) {
-        IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
-        final IResourceDescription.Manager manager = _resourceServiceProvider.getResourceDescriptionManager();
-        final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
-        final boolean isAffected = Indexer.this.isAffected(resourceDescription, manager, allDeltas, allDeltas, newIndex);
-        return Boolean.valueOf(isAffected);
-      }
+    final Function1<URI, Boolean> _function_2 = (URI it) -> {
+      IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
+      final IResourceDescription.Manager manager = _resourceServiceProvider.getResourceDescriptionManager();
+      final IResourceDescription resourceDescription = previousIndex.getResourceDescription(it);
+      final boolean isAffected = this.isAffected(resourceDescription, manager, allDeltas, allDeltas, newIndex);
+      return Boolean.valueOf(isAffected);
     };
     Iterable<URI> _filter = IterableExtensions.<URI>filter(remainingURIs, _function_2);
     final List<URI> allAffected = IterableExtensions.<URI>toList(_filter);
@@ -291,32 +279,26 @@ public class Indexer {
   protected List<IResourceDescription.Delta> getDeltasForDeletedResources(final BuildRequest request, final ResourceDescriptionsData oldIndex, @Extension final BuildContext context) {
     final ArrayList<IResourceDescription.Delta> deltas = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     List<URI> _deletedFiles = request.getDeletedFiles();
-    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-      @Override
-      public Boolean apply(final URI it) {
-        IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
-        return Boolean.valueOf((!Objects.equal(_resourceServiceProvider, null)));
-      }
+    final Function1<URI, Boolean> _function = (URI it) -> {
+      IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
+      return Boolean.valueOf((!Objects.equal(_resourceServiceProvider, null)));
     };
     Iterable<URI> _filter = IterableExtensions.<URI>filter(_deletedFiles, _function);
-    final Procedure1<URI> _function_1 = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI it) {
-        CancelIndicator _cancelIndicator = context.getCancelIndicator();
-        Indexer.this._operationCanceledManager.checkCanceled(_cancelIndicator);
-        IResourceDescription _resourceDescription = null;
-        if (oldIndex!=null) {
-          _resourceDescription=oldIndex.getResourceDescription(it);
-        }
-        final IResourceDescription oldDescription = _resourceDescription;
-        boolean _notEquals = (!Objects.equal(oldDescription, null));
-        if (_notEquals) {
-          final DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(oldDescription, null);
-          deltas.add(delta);
-        }
+    final Consumer<URI> _function_1 = (URI it) -> {
+      CancelIndicator _cancelIndicator = context.getCancelIndicator();
+      this._operationCanceledManager.checkCanceled(_cancelIndicator);
+      IResourceDescription _resourceDescription = null;
+      if (oldIndex!=null) {
+        _resourceDescription=oldIndex.getResourceDescription(it);
+      }
+      final IResourceDescription oldDescription = _resourceDescription;
+      boolean _notEquals = (!Objects.equal(oldDescription, null));
+      if (_notEquals) {
+        final DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(oldDescription, null);
+        deltas.add(delta);
       }
     };
-    IterableExtensions.<URI>forEach(_filter, _function_1);
+    _filter.forEach(_function_1);
     return deltas;
   }
   
@@ -324,11 +306,8 @@ public class Indexer {
     try {
       XtextResourceSet _resourceSet = context.getResourceSet();
       this.compilerPhases.setIndexing(_resourceSet, true);
-      final Function1<Resource, IResourceDescription.Delta> _function = new Function1<Resource, IResourceDescription.Delta>() {
-        @Override
-        public IResourceDescription.Delta apply(final Resource it) {
-          return Indexer.this.addToIndex(it, true, oldIndex, context);
-        }
+      final Function1<Resource, IResourceDescription.Delta> _function = (Resource it) -> {
+        return this.addToIndex(it, true, oldIndex, context);
       };
       Iterable<IResourceDescription.Delta> _executeClustered = context.<IResourceDescription.Delta>executeClustered(affectedUris, _function);
       return IterableExtensions.<IResourceDescription.Delta>toList(_executeClustered);

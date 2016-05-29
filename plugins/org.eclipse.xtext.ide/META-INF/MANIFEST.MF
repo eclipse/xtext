@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.ide;singleton:=true
 Bundle-Version: 2.10.0.qualifier
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,

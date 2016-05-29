@@ -45,12 +45,9 @@ public interface IShouldGenerate {
         return false;
       }
       final List<Issue> issues = this.resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, cancelIndicator);
-      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
-        @Override
-        public Boolean apply(final Issue it) {
-          Severity _severity = it.getSeverity();
-          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
-        }
+      final Function1<Issue, Boolean> _function = (Issue it) -> {
+        Severity _severity = it.getSeverity();
+        return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
       };
       boolean _exists = IterableExtensions.<Issue>exists(issues, _function);
       return (!_exists);

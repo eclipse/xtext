@@ -62,21 +62,15 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
     final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
     DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl();
-    final Procedure1<DidChangeWatchedFilesParamsImpl> _function = new Procedure1<DidChangeWatchedFilesParamsImpl>() {
-      @Override
-      public void apply(final DidChangeWatchedFilesParamsImpl it) {
-        FileEventImpl _fileEventImpl = new FileEventImpl();
-        final Procedure1<FileEventImpl> _function = new Procedure1<FileEventImpl>() {
-          @Override
-          public void apply(final FileEventImpl it) {
-            it.setUri(path);
-            it.setType(FileEvent.TYPE_CREATED);
-          }
-        };
-        FileEventImpl _doubleArrow = ObjectExtensions.<FileEventImpl>operator_doubleArrow(_fileEventImpl, _function);
-        ArrayList<FileEventImpl> _newArrayList = CollectionLiterals.<FileEventImpl>newArrayList(_doubleArrow);
-        it.setChanges(_newArrayList);
-      }
+    final Procedure1<DidChangeWatchedFilesParamsImpl> _function = (DidChangeWatchedFilesParamsImpl it) -> {
+      FileEventImpl _fileEventImpl = new FileEventImpl();
+      final Procedure1<FileEventImpl> _function_1 = (FileEventImpl it_1) -> {
+        it_1.setUri(path);
+        it_1.setType(FileEvent.TYPE_CREATED);
+      };
+      FileEventImpl _doubleArrow = ObjectExtensions.<FileEventImpl>operator_doubleArrow(_fileEventImpl, _function_1);
+      ArrayList<FileEventImpl> _newArrayList = CollectionLiterals.<FileEventImpl>newArrayList(_doubleArrow);
+      it.setChanges(_newArrayList);
     };
     DidChangeWatchedFilesParamsImpl _doubleArrow = ObjectExtensions.<DidChangeWatchedFilesParamsImpl>operator_doubleArrow(_didChangeWatchedFilesParamsImpl, _function);
     _workspaceService.didChangeWatchedFiles(_doubleArrow);
@@ -85,26 +79,20 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
     String _message_1 = _head_1.getMessage();
     Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
     DidOpenTextDocumentParamsImpl _didOpenTextDocumentParamsImpl = new DidOpenTextDocumentParamsImpl();
-    final Procedure1<DidOpenTextDocumentParamsImpl> _function_1 = new Procedure1<DidOpenTextDocumentParamsImpl>() {
-      @Override
-      public void apply(final DidOpenTextDocumentParamsImpl it) {
-        TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
-        final Procedure1<TextDocumentItemImpl> _function = new Procedure1<TextDocumentItemImpl>() {
-          @Override
-          public void apply(final TextDocumentItemImpl it) {
-            it.setUri(path);
-            it.setVersion(1);
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("type NonExisting {");
-            _builder.newLine();
-            _builder.append("}");
-            _builder.newLine();
-            it.setText(_builder.toString());
-          }
-        };
-        TextDocumentItemImpl _doubleArrow = ObjectExtensions.<TextDocumentItemImpl>operator_doubleArrow(_textDocumentItemImpl, _function);
-        it.setTextDocument(_doubleArrow);
-      }
+    final Procedure1<DidOpenTextDocumentParamsImpl> _function_1 = (DidOpenTextDocumentParamsImpl it) -> {
+      TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
+      final Procedure1<TextDocumentItemImpl> _function_2 = (TextDocumentItemImpl it_1) -> {
+        it_1.setUri(path);
+        it_1.setVersion(1);
+        StringConcatenation _builder_2 = new StringConcatenation();
+        _builder_2.append("type NonExisting {");
+        _builder_2.newLine();
+        _builder_2.append("}");
+        _builder_2.newLine();
+        it_1.setText(_builder_2.toString());
+      };
+      TextDocumentItemImpl _doubleArrow_1 = ObjectExtensions.<TextDocumentItemImpl>operator_doubleArrow(_textDocumentItemImpl, _function_2);
+      it.setTextDocument(_doubleArrow_1);
     };
     DidOpenTextDocumentParamsImpl _doubleArrow_1 = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function_1);
     this.languageServer.didOpen(_doubleArrow_1);
@@ -112,19 +100,13 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
     Diagnostic _head_2 = IterableExtensions.head(_get_2);
     Assert.assertNull(_head_2);
     DidCloseTextDocumentParamsImpl _didCloseTextDocumentParamsImpl = new DidCloseTextDocumentParamsImpl();
-    final Procedure1<DidCloseTextDocumentParamsImpl> _function_2 = new Procedure1<DidCloseTextDocumentParamsImpl>() {
-      @Override
-      public void apply(final DidCloseTextDocumentParamsImpl it) {
-        TextDocumentIdentifierImpl _textDocumentIdentifierImpl = new TextDocumentIdentifierImpl();
-        final Procedure1<TextDocumentIdentifierImpl> _function = new Procedure1<TextDocumentIdentifierImpl>() {
-          @Override
-          public void apply(final TextDocumentIdentifierImpl it) {
-            it.setUri(path);
-          }
-        };
-        TextDocumentIdentifierImpl _doubleArrow = ObjectExtensions.<TextDocumentIdentifierImpl>operator_doubleArrow(_textDocumentIdentifierImpl, _function);
-        it.setTextDocument(_doubleArrow);
-      }
+    final Procedure1<DidCloseTextDocumentParamsImpl> _function_2 = (DidCloseTextDocumentParamsImpl it) -> {
+      TextDocumentIdentifierImpl _textDocumentIdentifierImpl = new TextDocumentIdentifierImpl();
+      final Procedure1<TextDocumentIdentifierImpl> _function_3 = (TextDocumentIdentifierImpl it_1) -> {
+        it_1.setUri(path);
+      };
+      TextDocumentIdentifierImpl _doubleArrow_2 = ObjectExtensions.<TextDocumentIdentifierImpl>operator_doubleArrow(_textDocumentIdentifierImpl, _function_3);
+      it.setTextDocument(_doubleArrow_2);
     };
     DidCloseTextDocumentParamsImpl _doubleArrow_2 = ObjectExtensions.<DidCloseTextDocumentParamsImpl>operator_doubleArrow(_didCloseTextDocumentParamsImpl, _function_2);
     this.languageServer.didClose(_doubleArrow_2);
@@ -151,29 +133,23 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
     String _message = _head.getMessage();
     Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
     DidOpenTextDocumentParamsImpl _didOpenTextDocumentParamsImpl = new DidOpenTextDocumentParamsImpl();
-    final Procedure1<DidOpenTextDocumentParamsImpl> _function = new Procedure1<DidOpenTextDocumentParamsImpl>() {
-      @Override
-      public void apply(final DidOpenTextDocumentParamsImpl it) {
-        TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
-        final Procedure1<TextDocumentItemImpl> _function = new Procedure1<TextDocumentItemImpl>() {
-          @Override
-          public void apply(final TextDocumentItemImpl it) {
-            it.setUri(firstFile);
-            it.setVersion(1);
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("type Test {");
-            _builder.newLine();
-            _builder.append("    ");
-            _builder.append("NonExisting foo");
-            _builder.newLine();
-            _builder.append("}");
-            _builder.newLine();
-            it.setText(_builder.toString());
-          }
-        };
-        TextDocumentItemImpl _doubleArrow = ObjectExtensions.<TextDocumentItemImpl>operator_doubleArrow(_textDocumentItemImpl, _function);
-        it.setTextDocument(_doubleArrow);
-      }
+    final Procedure1<DidOpenTextDocumentParamsImpl> _function = (DidOpenTextDocumentParamsImpl it) -> {
+      TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
+      final Procedure1<TextDocumentItemImpl> _function_1 = (TextDocumentItemImpl it_1) -> {
+        it_1.setUri(firstFile);
+        it_1.setVersion(1);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("type Test {");
+        _builder_1.newLine();
+        _builder_1.append("    ");
+        _builder_1.append("NonExisting foo");
+        _builder_1.newLine();
+        _builder_1.append("}");
+        _builder_1.newLine();
+        it_1.setText(_builder_1.toString());
+      };
+      TextDocumentItemImpl _doubleArrow = ObjectExtensions.<TextDocumentItemImpl>operator_doubleArrow(_textDocumentItemImpl, _function_1);
+      it.setTextDocument(_doubleArrow);
     };
     DidOpenTextDocumentParamsImpl _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function);
     this.languageServer.didOpen(_doubleArrow);
@@ -182,57 +158,39 @@ public class OpenDocumentTest extends AbstractLanguageServerTest {
     String _message_1 = _head_1.getMessage();
     Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
     DidChangeTextDocumentParamsImpl _didChangeTextDocumentParamsImpl = new DidChangeTextDocumentParamsImpl();
-    final Procedure1<DidChangeTextDocumentParamsImpl> _function_1 = new Procedure1<DidChangeTextDocumentParamsImpl>() {
-      @Override
-      public void apply(final DidChangeTextDocumentParamsImpl it) {
-        VersionedTextDocumentIdentifierImpl _versionedTextDocumentIdentifierImpl = new VersionedTextDocumentIdentifierImpl();
-        final Procedure1<VersionedTextDocumentIdentifierImpl> _function = new Procedure1<VersionedTextDocumentIdentifierImpl>() {
-          @Override
-          public void apply(final VersionedTextDocumentIdentifierImpl it) {
-            it.setUri(firstFile);
-            it.setVersion(2);
-          }
+    final Procedure1<DidChangeTextDocumentParamsImpl> _function_1 = (DidChangeTextDocumentParamsImpl it) -> {
+      VersionedTextDocumentIdentifierImpl _versionedTextDocumentIdentifierImpl = new VersionedTextDocumentIdentifierImpl();
+      final Procedure1<VersionedTextDocumentIdentifierImpl> _function_2 = (VersionedTextDocumentIdentifierImpl it_1) -> {
+        it_1.setUri(firstFile);
+        it_1.setVersion(2);
+      };
+      VersionedTextDocumentIdentifierImpl _doubleArrow_1 = ObjectExtensions.<VersionedTextDocumentIdentifierImpl>operator_doubleArrow(_versionedTextDocumentIdentifierImpl, _function_2);
+      it.setTextDocument(_doubleArrow_1);
+      TextDocumentContentChangeEventImpl _textDocumentContentChangeEventImpl = new TextDocumentContentChangeEventImpl();
+      final Procedure1<TextDocumentContentChangeEventImpl> _function_3 = (TextDocumentContentChangeEventImpl it_1) -> {
+        RangeImpl _rangeImpl = new RangeImpl();
+        final Procedure1<RangeImpl> _function_4 = (RangeImpl it_2) -> {
+          PositionImpl _positionImpl = new PositionImpl();
+          final Procedure1<PositionImpl> _function_5 = (PositionImpl it_3) -> {
+            it_3.setLine(1);
+            it_3.setCharacter(4);
+          };
+          PositionImpl _doubleArrow_2 = ObjectExtensions.<PositionImpl>operator_doubleArrow(_positionImpl, _function_5);
+          it_2.setStart(_doubleArrow_2);
+          PositionImpl _positionImpl_1 = new PositionImpl();
+          final Procedure1<PositionImpl> _function_6 = (PositionImpl it_3) -> {
+            it_3.setLine(1);
+            it_3.setCharacter(15);
+          };
+          PositionImpl _doubleArrow_3 = ObjectExtensions.<PositionImpl>operator_doubleArrow(_positionImpl_1, _function_6);
+          it_2.setEnd(_doubleArrow_3);
         };
-        VersionedTextDocumentIdentifierImpl _doubleArrow = ObjectExtensions.<VersionedTextDocumentIdentifierImpl>operator_doubleArrow(_versionedTextDocumentIdentifierImpl, _function);
-        it.setTextDocument(_doubleArrow);
-        TextDocumentContentChangeEventImpl _textDocumentContentChangeEventImpl = new TextDocumentContentChangeEventImpl();
-        final Procedure1<TextDocumentContentChangeEventImpl> _function_1 = new Procedure1<TextDocumentContentChangeEventImpl>() {
-          @Override
-          public void apply(final TextDocumentContentChangeEventImpl it) {
-            RangeImpl _rangeImpl = new RangeImpl();
-            final Procedure1<RangeImpl> _function = new Procedure1<RangeImpl>() {
-              @Override
-              public void apply(final RangeImpl it) {
-                PositionImpl _positionImpl = new PositionImpl();
-                final Procedure1<PositionImpl> _function = new Procedure1<PositionImpl>() {
-                  @Override
-                  public void apply(final PositionImpl it) {
-                    it.setLine(1);
-                    it.setCharacter(4);
-                  }
-                };
-                PositionImpl _doubleArrow = ObjectExtensions.<PositionImpl>operator_doubleArrow(_positionImpl, _function);
-                it.setStart(_doubleArrow);
-                PositionImpl _positionImpl_1 = new PositionImpl();
-                final Procedure1<PositionImpl> _function_1 = new Procedure1<PositionImpl>() {
-                  @Override
-                  public void apply(final PositionImpl it) {
-                    it.setLine(1);
-                    it.setCharacter(15);
-                  }
-                };
-                PositionImpl _doubleArrow_1 = ObjectExtensions.<PositionImpl>operator_doubleArrow(_positionImpl_1, _function_1);
-                it.setEnd(_doubleArrow_1);
-              }
-            };
-            RangeImpl _doubleArrow = ObjectExtensions.<RangeImpl>operator_doubleArrow(_rangeImpl, _function);
-            it.setRange(_doubleArrow);
-            it.setText("Test");
-          }
-        };
-        TextDocumentContentChangeEventImpl _doubleArrow_1 = ObjectExtensions.<TextDocumentContentChangeEventImpl>operator_doubleArrow(_textDocumentContentChangeEventImpl, _function_1);
-        it.setContentChanges(Collections.<TextDocumentContentChangeEventImpl>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEventImpl>newArrayList(_doubleArrow_1)));
-      }
+        RangeImpl _doubleArrow_2 = ObjectExtensions.<RangeImpl>operator_doubleArrow(_rangeImpl, _function_4);
+        it_1.setRange(_doubleArrow_2);
+        it_1.setText("Test");
+      };
+      TextDocumentContentChangeEventImpl _doubleArrow_2 = ObjectExtensions.<TextDocumentContentChangeEventImpl>operator_doubleArrow(_textDocumentContentChangeEventImpl, _function_3);
+      it.setContentChanges(Collections.<TextDocumentContentChangeEventImpl>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEventImpl>newArrayList(_doubleArrow_2)));
     };
     DidChangeTextDocumentParamsImpl _doubleArrow_1 = ObjectExtensions.<DidChangeTextDocumentParamsImpl>operator_doubleArrow(_didChangeTextDocumentParamsImpl, _function_1);
     this.languageServer.didChange(_doubleArrow_1);

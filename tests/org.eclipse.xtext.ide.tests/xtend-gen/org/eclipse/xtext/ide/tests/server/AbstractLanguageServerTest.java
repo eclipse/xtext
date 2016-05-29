@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-import com.google.common.util.concurrent.Futures;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -37,8 +36,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
@@ -70,9 +68,15 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
           AnnotatedBindingBuilder<RequestManager> _bind = this.<RequestManager>bind(RequestManager.class);
           _bind.toInstance(new RequestManager() {
             @Override
-            protected <V extends Object> Future<V> run(final ExecutorService executorService, final Function1<? super CancelIndicator, ? extends V> request, final int permits, final CancelIndicator cancelIndicator) {
-              V _apply = request.apply(cancelIndicator);
-              return Futures.<V, Exception>immediateCheckedFuture(_apply);
+            public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest, final CancelIndicator cancelIndicator) {
+              writeRequest.apply(cancelIndicator);
+              return CompletableFuture.<Void>completedFuture(null);
+            }
+            
+            @Override
+            public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest, final CancelIndicator cancelIndicator) {
+              V _apply = readRequest.apply(cancelIndicator);
+              return CompletableFuture.<V>completedFuture(_apply);
             }
           });
         }
@@ -143,21 +147,15 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
   
   protected void open(final String fileUri, final String model) {
     DidOpenTextDocumentParamsImpl _didOpenTextDocumentParamsImpl = new DidOpenTextDocumentParamsImpl();
-    final Procedure1<DidOpenTextDocumentParamsImpl> _function = new Procedure1<DidOpenTextDocumentParamsImpl>() {
-      @Override
-      public void apply(final DidOpenTextDocumentParamsImpl it) {
-        TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
-        final Procedure1<TextDocumentItemImpl> _function = new Procedure1<TextDocumentItemImpl>() {
-          @Override
-          public void apply(final TextDocumentItemImpl it) {
-            it.setUri(fileUri);
-            it.setVersion(1);
-            it.setText(model);
-          }
-        };
-        TextDocumentItemImpl _doubleArrow = ObjectExtensions.<TextDocumentItemImpl>operator_doubleArrow(_textDocumentItemImpl, _function);
-        it.setTextDocument(_doubleArrow);
-      }
+    final Procedure1<DidOpenTextDocumentParamsImpl> _function = (DidOpenTextDocumentParamsImpl it) -> {
+      TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
+      final Procedure1<TextDocumentItemImpl> _function_1 = (TextDocumentItemImpl it_1) -> {
+        it_1.setUri(fileUri);
+        it_1.setVersion(1);
+        it_1.setText(model);
+      };
+      TextDocumentItemImpl _doubleArrow = ObjectExtensions.<TextDocumentItemImpl>operator_doubleArrow(_textDocumentItemImpl, _function_1);
+      it.setTextDocument(_doubleArrow);
     };
     DidOpenTextDocumentParamsImpl _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function);
     this.languageServer.didOpen(_doubleArrow);

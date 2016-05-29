@@ -90,65 +90,56 @@ public class CompletionTest extends AbstractLanguageServerTest {
   
   @Test
   public void testCompletion_01() {
-    final Procedure1<CompletionTest.TestCompletionConfiguration> _function = new Procedure1<CompletionTest.TestCompletionConfiguration>() {
-      @Override
-      public void apply(final CompletionTest.TestCompletionConfiguration it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("type");
-        _builder.newLine();
-        it.expectedCompletionItems = _builder.toString();
-      }
+    final Procedure1<CompletionTest.TestCompletionConfiguration> _function = (CompletionTest.TestCompletionConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type");
+      _builder.newLine();
+      it.expectedCompletionItems = _builder.toString();
     };
     this.testCompletion(_function);
   }
   
   @Test
   public void testCompletion_02() {
-    final Procedure1<CompletionTest.TestCompletionConfiguration> _function = new Procedure1<CompletionTest.TestCompletionConfiguration>() {
-      @Override
-      public void apply(final CompletionTest.TestCompletionConfiguration it) {
-        it.model = "type ";
-        it.column = 5;
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("name (ID)");
-        _builder.newLine();
-        it.expectedCompletionItems = _builder.toString();
-      }
+    final Procedure1<CompletionTest.TestCompletionConfiguration> _function = (CompletionTest.TestCompletionConfiguration it) -> {
+      it.model = "type ";
+      it.column = 5;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("name (ID)");
+      _builder.newLine();
+      it.expectedCompletionItems = _builder.toString();
     };
     this.testCompletion(_function);
   }
   
   @Test
   public void testCompletion_03() {
-    final Procedure1<CompletionTest.TestCompletionConfiguration> _function = new Procedure1<CompletionTest.TestCompletionConfiguration>() {
-      @Override
-      public void apply(final CompletionTest.TestCompletionConfiguration it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("type Foo {}");
-        _builder.newLine();
-        _builder.append("type Bar {}");
-        _builder.newLine();
-        it.model = _builder.toString();
-        it.line = 1;
-        int _length = "type Bar {".length();
-        it.column = _length;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("Bar (TypeDeclaration)");
-        _builder_1.newLine();
-        _builder_1.append("Foo (TypeDeclaration)");
-        _builder_1.newLine();
-        _builder_1.append("boolean");
-        _builder_1.newLine();
-        _builder_1.append("int");
-        _builder_1.newLine();
-        _builder_1.append("string");
-        _builder_1.newLine();
-        _builder_1.append("}");
-        _builder_1.newLine();
-        _builder_1.append("{");
-        _builder_1.newLine();
-        it.expectedCompletionItems = _builder_1.toString();
-      }
+    final Procedure1<CompletionTest.TestCompletionConfiguration> _function = (CompletionTest.TestCompletionConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type Foo {}");
+      _builder.newLine();
+      _builder.append("type Bar {}");
+      _builder.newLine();
+      it.model = _builder.toString();
+      it.line = 1;
+      int _length = "type Bar {".length();
+      it.column = _length;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Bar (TypeDeclaration)");
+      _builder_1.newLine();
+      _builder_1.append("Foo (TypeDeclaration)");
+      _builder_1.newLine();
+      _builder_1.append("boolean");
+      _builder_1.newLine();
+      _builder_1.append("int");
+      _builder_1.newLine();
+      _builder_1.append("string");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      it.expectedCompletionItems = _builder_1.toString();
     };
     this.testCompletion(_function);
   }

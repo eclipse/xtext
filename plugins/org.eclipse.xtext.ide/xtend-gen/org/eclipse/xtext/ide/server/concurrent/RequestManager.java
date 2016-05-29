@@ -10,16 +10,17 @@ package org.eclipse.xtext.ide.server.concurrent;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
-import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Semaphore;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
 import org.eclipse.xtext.ide.server.concurrent.RequestCancelIndicator;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -46,60 +47,53 @@ public class RequestManager {
   
   private final Semaphore semaphore = new Semaphore(this.MAX_PERMITS);
   
-  public Future<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest) {
+  public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest) {
     RequestCancelIndicator _requestCancelIndicator = new RequestCancelIndicator();
     return this.runWrite(writeRequest, _requestCancelIndicator);
   }
   
-  public Future<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest, final CancelIndicator cancelIndicator) {
-    Future<Void> _xblockexpression = null;
-    {
-      final Procedure1<CancellableIndicator> _function = new Procedure1<CancellableIndicator>() {
-        @Override
-        public void apply(final CancellableIndicator it) {
-          it.cancel();
-        }
+  public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest, final CancelIndicator cancelIndicator) {
+    final Consumer<CancellableIndicator> _function = (CancellableIndicator it) -> {
+      it.cancel();
+    };
+    this.cancelIndicators.forEach(_function);
+    final Runnable _function_1 = () -> {
+      final Function1<CancelIndicator, Procedure1<? super CancelIndicator>> _function_2 = (CancelIndicator it) -> {
+        return writeRequest;
       };
-      IterableExtensions.<CancellableIndicator>forEach(this.cancelIndicators, _function);
-      final Function1<CancelIndicator, Void> _function_1 = new Function1<CancelIndicator, Void>() {
-        @Override
-        public Void apply(final CancelIndicator it) {
-          writeRequest.apply(it);
-          return null;
-        }
-      };
-      _xblockexpression = this.<Void>run(this.writeExecutorService, _function_1, this.MAX_PERMITS, cancelIndicator);
-    }
-    return _xblockexpression;
+      this.<Procedure1<? super CancelIndicator>>run(_function_2, this.MAX_PERMITS, cancelIndicator);
+    };
+    return CompletableFuture.runAsync(_function_1, this.writeExecutorService);
   }
   
-  public <V extends Object> Future<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
+  public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
     RequestCancelIndicator _requestCancelIndicator = new RequestCancelIndicator();
     return this.<V>runRead(readRequest, _requestCancelIndicator);
   }
   
-  public <V extends Object> Future<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest, final CancelIndicator cancelIndicator) {
-    return this.<V>run(this.readExecutorService, readRequest, 1, cancelIndicator);
+  public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest, final CancelIndicator cancelIndicator) {
+    final Supplier<V> _function = () -> {
+      return this.<V>run(readRequest, 1, cancelIndicator);
+    };
+    return CompletableFuture.<V>supplyAsync(_function, this.readExecutorService);
   }
   
-  protected <V extends Object> Future<V> run(final ExecutorService executorService, final Function1<? super CancelIndicator, ? extends V> request, final int permits, final CancelIndicator cancelIndicator) {
-    final Callable<V> _function = new Callable<V>() {
-      @Override
-      public V call() throws Exception {
-        RequestManager.this.semaphore.acquire(permits);
-        try {
-          if ((cancelIndicator instanceof CancellableIndicator)) {
-            RequestManager.this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
-          }
-          return request.apply(cancelIndicator);
-        } finally {
-          if ((cancelIndicator instanceof CancellableIndicator)) {
-            RequestManager.this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
-          }
-          RequestManager.this.semaphore.release(permits);
+  protected <V extends Object> V run(final Function1<? super CancelIndicator, ? extends V> request, final int permits, final CancelIndicator cancelIndicator) {
+    try {
+      this.semaphore.acquire(permits);
+      try {
+        if ((cancelIndicator instanceof CancellableIndicator)) {
+          this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
         }
+        return request.apply(cancelIndicator);
+      } finally {
+        if ((cancelIndicator instanceof CancellableIndicator)) {
+          this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+        }
+        this.semaphore.release(permits);
       }
-    };
-    return executorService.<V>submit(_function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

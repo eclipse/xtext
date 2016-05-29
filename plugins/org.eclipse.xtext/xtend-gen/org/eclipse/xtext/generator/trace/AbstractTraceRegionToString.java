@@ -274,11 +274,8 @@ public abstract class AbstractTraceRegionToString {
       ITextRegionWithLineInformation _myRegion = reg.getMyRegion();
       this.add(lFile, _myRegion, regHandle, null);
       List<ILocationData> _associatedLocations = reg.getAssociatedLocations();
-      final Function1<ILocationData, Boolean> _function = new Function1<ILocationData, Boolean>() {
-        @Override
-        public Boolean apply(final ILocationData it) {
-          return Boolean.valueOf(AbstractTraceRegionToString.this.shouldInclude(reg, it));
-        }
+      final Function1<ILocationData, Boolean> _function = (ILocationData it) -> {
+        return Boolean.valueOf(this.shouldInclude(reg, it));
       };
       Iterable<ILocationData> _filter = IterableExtensions.<ILocationData>filter(_associatedLocations, _function);
       final List<ILocationData> locs = IterableExtensions.<ILocationData>toList(_filter);
@@ -341,48 +338,30 @@ public abstract class AbstractTraceRegionToString {
   }
   
   protected String render(final Collection<AbstractTraceRegionToString.Insert> inserts, final int width) {
-    final Function1<AbstractTraceRegionToString.Insert, Boolean> _function = new Function1<AbstractTraceRegionToString.Insert, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractTraceRegionToString.Insert it) {
-        return Boolean.valueOf(it.open);
-      }
+    final Function1<AbstractTraceRegionToString.Insert, Boolean> _function = (AbstractTraceRegionToString.Insert it) -> {
+      return Boolean.valueOf(it.open);
     };
     Iterable<AbstractTraceRegionToString.Insert> _filter = IterableExtensions.<AbstractTraceRegionToString.Insert>filter(inserts, _function);
-    final Function1<AbstractTraceRegionToString.Insert, Integer> _function_1 = new Function1<AbstractTraceRegionToString.Insert, Integer>() {
-      @Override
-      public Integer apply(final AbstractTraceRegionToString.Insert it) {
-        return Integer.valueOf(AbstractTraceRegionToString.this.sortKey(it));
-      }
+    final Function1<AbstractTraceRegionToString.Insert, Integer> _function_1 = (AbstractTraceRegionToString.Insert it) -> {
+      return Integer.valueOf(this.sortKey(it));
     };
     List<AbstractTraceRegionToString.Insert> _sortBy = IterableExtensions.<AbstractTraceRegionToString.Insert, Integer>sortBy(_filter, _function_1);
-    final Function1<AbstractTraceRegionToString.Insert, String> _function_2 = new Function1<AbstractTraceRegionToString.Insert, String>() {
-      @Override
-      public String apply(final AbstractTraceRegionToString.Insert it) {
-        return AbstractTraceRegionToString.this.render(it, width);
-      }
+    final Function1<AbstractTraceRegionToString.Insert, String> _function_2 = (AbstractTraceRegionToString.Insert it) -> {
+      return this.render(it, width);
     };
     List<String> _map = ListExtensions.<AbstractTraceRegionToString.Insert, String>map(_sortBy, _function_2);
     final String opens = IterableExtensions.join(_map, ",");
-    final Function1<AbstractTraceRegionToString.Insert, Boolean> _function_3 = new Function1<AbstractTraceRegionToString.Insert, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractTraceRegionToString.Insert it) {
-        return Boolean.valueOf((!it.open));
-      }
+    final Function1<AbstractTraceRegionToString.Insert, Boolean> _function_3 = (AbstractTraceRegionToString.Insert it) -> {
+      return Boolean.valueOf((!it.open));
     };
     Iterable<AbstractTraceRegionToString.Insert> _filter_1 = IterableExtensions.<AbstractTraceRegionToString.Insert>filter(inserts, _function_3);
-    final Function1<AbstractTraceRegionToString.Insert, Integer> _function_4 = new Function1<AbstractTraceRegionToString.Insert, Integer>() {
-      @Override
-      public Integer apply(final AbstractTraceRegionToString.Insert it) {
-        int _sortKey = AbstractTraceRegionToString.this.sortKey(it);
-        return Integer.valueOf((-_sortKey));
-      }
+    final Function1<AbstractTraceRegionToString.Insert, Integer> _function_4 = (AbstractTraceRegionToString.Insert it) -> {
+      int _sortKey = this.sortKey(it);
+      return Integer.valueOf((-_sortKey));
     };
     List<AbstractTraceRegionToString.Insert> _sortBy_1 = IterableExtensions.<AbstractTraceRegionToString.Insert, Integer>sortBy(_filter_1, _function_4);
-    final Function1<AbstractTraceRegionToString.Insert, String> _function_5 = new Function1<AbstractTraceRegionToString.Insert, String>() {
-      @Override
-      public String apply(final AbstractTraceRegionToString.Insert it) {
-        return AbstractTraceRegionToString.this.render(it, width);
-      }
+    final Function1<AbstractTraceRegionToString.Insert, String> _function_5 = (AbstractTraceRegionToString.Insert it) -> {
+      return this.render(it, width);
     };
     List<String> _map_1 = ListExtensions.<AbstractTraceRegionToString.Insert, String>map(_sortBy_1, _function_5);
     final String closes = IterableExtensions.join(_map_1, ",");
@@ -431,28 +410,19 @@ public abstract class AbstractTraceRegionToString {
         _elvis = _textRegion;
       }
       final ITextRegion frame = _elvis;
-      final Function1<AbstractTraceRegionToString.Insert, Boolean> _function = new Function1<AbstractTraceRegionToString.Insert, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractTraceRegionToString.Insert it) {
-          return Boolean.valueOf(((it.offset >= frame.getOffset()) && (it.offset <= (frame.getOffset() + frame.getLength()))));
-        }
+      final Function1<AbstractTraceRegionToString.Insert, Boolean> _function = (AbstractTraceRegionToString.Insert it) -> {
+        return Boolean.valueOf(((it.offset >= frame.getOffset()) && (it.offset <= (frame.getOffset() + frame.getLength()))));
       };
       final Iterable<AbstractTraceRegionToString.Insert> inframe = IterableExtensions.<AbstractTraceRegionToString.Insert>filter(file.inserts, _function);
-      final Function<AbstractTraceRegionToString.Insert, Integer> _function_1 = new Function<AbstractTraceRegionToString.Insert, Integer>() {
-        @Override
-        public Integer apply(final AbstractTraceRegionToString.Insert it) {
-          return Integer.valueOf(it.offset);
-        }
+      final Function<AbstractTraceRegionToString.Insert, Integer> _function_1 = (AbstractTraceRegionToString.Insert it) -> {
+        return Integer.valueOf(it.offset);
       };
       ImmutableListMultimap<Integer, AbstractTraceRegionToString.Insert> _index = Multimaps.<Integer, AbstractTraceRegionToString.Insert>index(inframe, _function_1);
       ImmutableMap<Integer, Collection<AbstractTraceRegionToString.Insert>> _asMap = _index.asMap();
       ImmutableSet<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>> _entrySet = _asMap.entrySet();
       List<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>> _list = IterableExtensions.<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>>toList(_entrySet);
-      final Function1<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>, Integer> _function_2 = new Function1<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>, Integer>() {
-        @Override
-        public Integer apply(final Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>> it) {
-          return it.getKey();
-        }
+      final Function1<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>, Integer> _function_2 = (Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>> it) -> {
+        return it.getKey();
       };
       final List<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>> offsets = IterableExtensions.<Map.Entry<Integer, Collection<AbstractTraceRegionToString.Insert>>, Integer>sortBy(_list, _function_2);
       int last = frame.getOffset();
@@ -570,11 +540,8 @@ public abstract class AbstractTraceRegionToString {
     final String space = Strings.repeat(" ", indent);
     Class<? extends AbstractTraceRegion> _class = region.region.getClass();
     final String name = _class.getSimpleName();
-    final Function1<AbstractTraceRegionToString.LocationHandle, String> _function = new Function1<AbstractTraceRegionToString.LocationHandle, String>() {
-      @Override
-      public String apply(final AbstractTraceRegionToString.LocationHandle it) {
-        return AbstractTraceRegionToString.this.render(it);
-      }
+    final Function1<AbstractTraceRegionToString.LocationHandle, String> _function = (AbstractTraceRegionToString.LocationHandle it) -> {
+      return this.render(it);
     };
     List<String> _map = ListExtensions.<AbstractTraceRegionToString.LocationHandle, String>map(region.locations, _function);
     final String locations = IterableExtensions.join(_map, ", ");
@@ -611,11 +578,8 @@ public abstract class AbstractTraceRegionToString {
       List<String> _render_1 = this.render(file, idwidth);
       Iterables.<String>addAll(file.lines, _render_1);
     }
-    final Function1<String, Integer> _function = new Function1<String, Integer>() {
-      @Override
-      public Integer apply(final String it) {
-        return Integer.valueOf(it.length());
-      }
+    final Function1<String, Integer> _function = (String it) -> {
+      return Integer.valueOf(it.length());
     };
     List<Integer> _map = ListExtensions.<String, Integer>map(localFile.lines, _function);
     Integer _max = IterableExtensions.<Integer>max(_map);
@@ -624,22 +588,16 @@ public abstract class AbstractTraceRegionToString {
     int _plus = (_length + 2);
     final int localWidth = Math.max((_max).intValue(), _plus);
     Collection<AbstractTraceRegionToString.File> _values_1 = remoteFiles.values();
-    final Function1<AbstractTraceRegionToString.File, Integer> _function_1 = new Function1<AbstractTraceRegionToString.File, Integer>() {
-      @Override
-      public Integer apply(final AbstractTraceRegionToString.File it) {
-        final Function1<String, Integer> _function = new Function1<String, Integer>() {
-          @Override
-          public Integer apply(final String it) {
-            return Integer.valueOf(it.length());
-          }
-        };
-        List<Integer> _map = ListExtensions.<String, Integer>map(it.lines, _function);
-        Integer _max = IterableExtensions.<Integer>max(_map);
-        String _remoteTitle = AbstractTraceRegionToString.this.getRemoteTitle(it.uri);
-        int _length = _remoteTitle.length();
-        int _plus = (_length + 2);
-        return Integer.valueOf(Math.max((_max).intValue(), _plus));
-      }
+    final Function1<AbstractTraceRegionToString.File, Integer> _function_1 = (AbstractTraceRegionToString.File it) -> {
+      final Function1<String, Integer> _function_2 = (String it_1) -> {
+        return Integer.valueOf(it_1.length());
+      };
+      List<Integer> _map_1 = ListExtensions.<String, Integer>map(it.lines, _function_2);
+      Integer _max_1 = IterableExtensions.<Integer>max(_map_1);
+      String _remoteTitle = this.getRemoteTitle(it.uri);
+      int _length_1 = _remoteTitle.length();
+      int _plus_1 = (_length_1 + 2);
+      return Integer.valueOf(Math.max((_max_1).intValue(), _plus_1));
     };
     Iterable<Integer> _map_1 = IterableExtensions.<AbstractTraceRegionToString.File, Integer>map(_values_1, _function_1);
     final Integer remoteWidth = IterableExtensions.<Integer>max(_map_1);
@@ -652,11 +610,8 @@ public abstract class AbstractTraceRegionToString {
     }
     final List<String> left = localFile.lines;
     Collection<AbstractTraceRegionToString.File> _values_3 = remoteFiles.values();
-    final Function1<AbstractTraceRegionToString.File, List<String>> _function_2 = new Function1<AbstractTraceRegionToString.File, List<String>>() {
-      @Override
-      public List<String> apply(final AbstractTraceRegionToString.File it) {
-        return it.lines;
-      }
+    final Function1<AbstractTraceRegionToString.File, List<String>> _function_2 = (AbstractTraceRegionToString.File it) -> {
+      return it.lines;
     };
     Iterable<List<String>> _map_2 = IterableExtensions.<AbstractTraceRegionToString.File, List<String>>map(_values_3, _function_2);
     Iterable<String> _flatten = Iterables.<String>concat(_map_2);
@@ -696,35 +651,23 @@ public abstract class AbstractTraceRegionToString {
         result.add(
           "<N>: <isDebug> <offset>-<length> <RegionJavaClass> -> <LocationJavaClass>[<offset>,<length>,<uri>]");
       }
-      final Function1<AbstractTraceRegionToString.RegionHandle, Set<AbstractTraceRegionToString.RegionHandle>> _function_3 = new Function1<AbstractTraceRegionToString.RegionHandle, Set<AbstractTraceRegionToString.RegionHandle>>() {
-        @Override
-        public Set<AbstractTraceRegionToString.RegionHandle> apply(final AbstractTraceRegionToString.RegionHandle it) {
-          final Function1<AbstractTraceRegionToString.RegionHandle, Iterable<AbstractTraceRegionToString.RegionHandle>> _function = new Function1<AbstractTraceRegionToString.RegionHandle, Iterable<AbstractTraceRegionToString.RegionHandle>>() {
-            @Override
-            public Iterable<AbstractTraceRegionToString.RegionHandle> apply(final AbstractTraceRegionToString.RegionHandle it) {
-              return it.children;
-            }
-          };
-          return AbstractTraceRegionToString.this.<AbstractTraceRegionToString.RegionHandle>collect(it, _function);
-        }
+      final Function1<AbstractTraceRegionToString.RegionHandle, Set<AbstractTraceRegionToString.RegionHandle>> _function_3 = (AbstractTraceRegionToString.RegionHandle it) -> {
+        final Function1<AbstractTraceRegionToString.RegionHandle, Iterable<AbstractTraceRegionToString.RegionHandle>> _function_4 = (AbstractTraceRegionToString.RegionHandle it_1) -> {
+          return it_1.children;
+        };
+        return this.<AbstractTraceRegionToString.RegionHandle>collect(it, _function_4);
       };
       List<Set<AbstractTraceRegionToString.RegionHandle>> _map_3 = ListExtensions.<AbstractTraceRegionToString.RegionHandle, Set<AbstractTraceRegionToString.RegionHandle>>map(roothandles, _function_3);
       final Iterable<AbstractTraceRegionToString.RegionHandle> allhandles = Iterables.<AbstractTraceRegionToString.RegionHandle>concat(_map_3);
-      final Function1<AbstractTraceRegionToString.RegionHandle, Integer> _function_4 = new Function1<AbstractTraceRegionToString.RegionHandle, Integer>() {
-        @Override
-        public Integer apply(final AbstractTraceRegionToString.RegionHandle it) {
-          return Integer.valueOf(it.region.getMyOffset());
-        }
+      final Function1<AbstractTraceRegionToString.RegionHandle, Integer> _function_4 = (AbstractTraceRegionToString.RegionHandle it) -> {
+        return Integer.valueOf(it.region.getMyOffset());
       };
       Iterable<Integer> _map_4 = IterableExtensions.<AbstractTraceRegionToString.RegionHandle, Integer>map(allhandles, _function_4);
       Integer _max_1 = IterableExtensions.<Integer>max(_map_4);
       String _valueOf = String.valueOf(_max_1);
       final int offsetWidth = _valueOf.length();
-      final Function1<AbstractTraceRegionToString.RegionHandle, Integer> _function_5 = new Function1<AbstractTraceRegionToString.RegionHandle, Integer>() {
-        @Override
-        public Integer apply(final AbstractTraceRegionToString.RegionHandle it) {
-          return Integer.valueOf(it.region.getMyLength());
-        }
+      final Function1<AbstractTraceRegionToString.RegionHandle, Integer> _function_5 = (AbstractTraceRegionToString.RegionHandle it) -> {
+        return Integer.valueOf(it.region.getMyLength());
       };
       Iterable<Integer> _map_5 = IterableExtensions.<AbstractTraceRegionToString.RegionHandle, Integer>map(allhandles, _function_5);
       Integer _max_2 = IterableExtensions.<Integer>max(_map_5);

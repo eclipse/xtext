@@ -88,16 +88,13 @@ public class DocumentSymbolService {
     for (final URI targetURI : targetURIs) {
       {
         this.operationCanceledManager.checkCanceled(cancelIndicator);
-        final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
-          @Override
-          public Object exec(final ResourceSet resourceSet) throws Exception {
-            final EObject object = resourceSet.getEObject(targetURI, true);
-            if ((object != null)) {
-              LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(object);
-              locations.add(_newLocation);
-            }
-            return null;
+        final IUnitOfWork<Object, ResourceSet> _function = (ResourceSet resourceSet) -> {
+          final EObject object = resourceSet.getEObject(targetURI, true);
+          if ((object != null)) {
+            LocationImpl _newLocation = this._documentExtensions.newLocation(object);
+            locations.add(_newLocation);
           }
+          return null;
         };
         resourceAccess.<Object>readOnly(targetURI, _function);
       }
@@ -112,26 +109,20 @@ public class DocumentSymbolService {
     }
     final ArrayList<LocationImpl> locations = CollectionLiterals.<LocationImpl>newArrayList();
     final TargetURIs targetURIs = this.collectTargetURIs(element);
-    final IAcceptor<IReferenceDescription> _function = new IAcceptor<IReferenceDescription>() {
-      @Override
-      public void accept(final IReferenceDescription reference) {
-        URI _sourceEObjectUri = reference.getSourceEObjectUri();
-        final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
-          @Override
-          public Object exec(final ResourceSet resourceSet) throws Exception {
-            URI _sourceEObjectUri = reference.getSourceEObjectUri();
-            final EObject targetObject = resourceSet.getEObject(_sourceEObjectUri, true);
-            if ((targetObject != null)) {
-              EReference _eReference = reference.getEReference();
-              int _indexInList = reference.getIndexInList();
-              LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(targetObject, _eReference, _indexInList);
-              locations.add(_newLocation);
-            }
-            return null;
-          }
-        };
-        resourceAccess.<Object>readOnly(_sourceEObjectUri, _function);
-      }
+    final IAcceptor<IReferenceDescription> _function = (IReferenceDescription reference) -> {
+      URI _sourceEObjectUri = reference.getSourceEObjectUri();
+      final IUnitOfWork<Object, ResourceSet> _function_1 = (ResourceSet resourceSet) -> {
+        URI _sourceEObjectUri_1 = reference.getSourceEObjectUri();
+        final EObject targetObject = resourceSet.getEObject(_sourceEObjectUri_1, true);
+        if ((targetObject != null)) {
+          EReference _eReference = reference.getEReference();
+          int _indexInList = reference.getIndexInList();
+          LocationImpl _newLocation = this._documentExtensions.newLocation(targetObject, _eReference, _indexInList);
+          locations.add(_newLocation);
+        }
+        return null;
+      };
+      resourceAccess.<Object>readOnly(_sourceEObjectUri, _function_1);
     };
     ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(this.resourceServiceProviderRegistry, _function);
     CancelIndicatorProgressMonitor _cancelIndicatorProgressMonitor = new CancelIndicatorProgressMonitor(cancelIndicator);

@@ -132,21 +132,15 @@ public class ServerTest extends AbstractLanguageServerTest {
     final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
     DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl();
-    final Procedure1<DidChangeWatchedFilesParamsImpl> _function = new Procedure1<DidChangeWatchedFilesParamsImpl>() {
-      @Override
-      public void apply(final DidChangeWatchedFilesParamsImpl it) {
-        FileEventImpl _fileEventImpl = new FileEventImpl();
-        final Procedure1<FileEventImpl> _function = new Procedure1<FileEventImpl>() {
-          @Override
-          public void apply(final FileEventImpl it) {
-            it.setUri(path);
-            it.setType(FileEvent.TYPE_CREATED);
-          }
-        };
-        FileEventImpl _doubleArrow = ObjectExtensions.<FileEventImpl>operator_doubleArrow(_fileEventImpl, _function);
-        ArrayList<FileEventImpl> _newArrayList = CollectionLiterals.<FileEventImpl>newArrayList(_doubleArrow);
-        it.setChanges(_newArrayList);
-      }
+    final Procedure1<DidChangeWatchedFilesParamsImpl> _function = (DidChangeWatchedFilesParamsImpl it) -> {
+      FileEventImpl _fileEventImpl = new FileEventImpl();
+      final Procedure1<FileEventImpl> _function_1 = (FileEventImpl it_1) -> {
+        it_1.setUri(path);
+        it_1.setType(FileEvent.TYPE_CREATED);
+      };
+      FileEventImpl _doubleArrow = ObjectExtensions.<FileEventImpl>operator_doubleArrow(_fileEventImpl, _function_1);
+      ArrayList<FileEventImpl> _newArrayList = CollectionLiterals.<FileEventImpl>newArrayList(_doubleArrow);
+      it.setChanges(_newArrayList);
     };
     DidChangeWatchedFilesParamsImpl _doubleArrow = ObjectExtensions.<DidChangeWatchedFilesParamsImpl>operator_doubleArrow(_didChangeWatchedFilesParamsImpl, _function);
     _workspaceService.didChangeWatchedFiles(_doubleArrow);
@@ -155,11 +149,8 @@ public class ServerTest extends AbstractLanguageServerTest {
     Collection<List<? extends Diagnostic>> _values_1 = this.diagnostics.values();
     String _join = IterableExtensions.join(_values_1, ",");
     Collection<List<? extends Diagnostic>> _values_2 = this.diagnostics.values();
-    final Function1<List<? extends Diagnostic>, Boolean> _function_1 = new Function1<List<? extends Diagnostic>, Boolean>() {
-      @Override
-      public Boolean apply(final List<? extends Diagnostic> it) {
-        return Boolean.valueOf(it.isEmpty());
-      }
+    final Function1<List<? extends Diagnostic>, Boolean> _function_1 = (List<? extends Diagnostic> it) -> {
+      return Boolean.valueOf(it.isEmpty());
     };
     boolean _forall = IterableExtensions.<List<? extends Diagnostic>>forall(_values_2, _function_1);
     Assert.assertTrue(_join, _forall);

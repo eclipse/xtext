@@ -62,11 +62,8 @@ public class WorkspaceManagerTest {
     _builder_1.newLine();
     final String inMemContents = _builder_1.toString();
     this.workspaceManger.didOpen(path, 1, inMemContents, null);
-    final Function2<Document, XtextResource, String> _function = new Function2<Document, XtextResource, String>() {
-      @Override
-      public String apply(final Document $0, final XtextResource $1) {
-        return $0.getContents();
-      }
+    final Function2<Document, XtextResource, String> _function = (Document $0, XtextResource $1) -> {
+      return $0.getContents();
     };
     String _doRead = this.workspaceManger.<String>doRead(path, _function);
     Assert.assertEquals(inMemContents, _doRead);
@@ -91,12 +88,9 @@ public class WorkspaceManagerTest {
       this.root.deleteOnExit();
       String _absolutePath = this.root.getAbsolutePath();
       URI _createFileURI = URI.createFileURI(_absolutePath);
-      final Procedure2<URI, Iterable<Issue>> _function = new Procedure2<URI, Iterable<Issue>>() {
-        @Override
-        public void apply(final URI $0, final Iterable<Issue> $1) {
-          List<Issue> _list = IterableExtensions.<Issue>toList($1);
-          WorkspaceManagerTest.this.diagnostics.put($0, _list);
-        }
+      final Procedure2<URI, Iterable<Issue>> _function = (URI $0, Iterable<Issue> $1) -> {
+        List<Issue> _list = IterableExtensions.<Issue>toList($1);
+        this.diagnostics.put($0, _list);
       };
       this.workspaceManger.initialize(_createFileURI, _function, null);
     } catch (Throwable _e) {
@@ -115,16 +109,13 @@ public class WorkspaceManagerTest {
       _parentFile.mkdirs();
       file.createNewFile();
       FileWriter _fileWriter = new FileWriter(file);
-      final Procedure1<FileWriter> _function = new Procedure1<FileWriter>() {
-        @Override
-        public void apply(final FileWriter it) {
-          try {
-            String _string = contents.toString();
-            it.write(_string);
-            it.close();
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<FileWriter> _function = (FileWriter it) -> {
+        try {
+          String _string = contents.toString();
+          it.write(_string);
+          it.close();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       ObjectExtensions.<FileWriter>operator_doubleArrow(_fileWriter, _function);

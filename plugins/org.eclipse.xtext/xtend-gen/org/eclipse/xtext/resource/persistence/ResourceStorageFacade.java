@@ -213,11 +213,8 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     final AbstractFileSystemAccess2 fsa = this.fileSystemAccessProvider.get();
     fsa.setContext(resource);
     Set<OutputConfiguration> _outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(resource);
-    final Function1<OutputConfiguration, String> _function = new Function1<OutputConfiguration, String>() {
-      @Override
-      public String apply(final OutputConfiguration it) {
-        return it.getName();
-      }
+    final Function1<OutputConfiguration, String> _function = (OutputConfiguration it) -> {
+      return it.getName();
     };
     Map<String, OutputConfiguration> _map = IterableExtensions.<String, OutputConfiguration>toMap(_outputConfigurations, _function);
     fsa.setOutputConfigurations(_map);
