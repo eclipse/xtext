@@ -71,7 +71,7 @@ class ReferenceTest extends AbstractLanguageServerTest {
 			position = newPosition(line, column)
 			context = referenceContext
 		])
-		val actualDefinitions = definitions.toExpectation
+		val actualDefinitions = definitions.get.toExpectation
 		assertEquals(expectedReferences, actualDefinitions)
 	}
 

@@ -69,7 +69,7 @@ class CompletionTest extends AbstractLanguageServerTest {
 
 		val completionItems = languageServer.completion(newPosition(fileUri, line, column))
 
-		val actualCompletionItems = completionItems.toExpectation
+		val actualCompletionItems = completionItems.get.items.toExpectation
 		assertEquals(expectedCompletionItems, actualCompletionItems)
 	}
 

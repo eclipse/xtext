@@ -10,13 +10,13 @@ package org.eclipse.xtext.ide.server
 import com.google.inject.Guice
 import com.google.inject.Inject
 import io.typefox.lsapi.NotificationMessage
-import io.typefox.lsapi.json.LanguageServerToJsonAdapter
-import io.typefox.lsapi.json.MessageMethods
+import io.typefox.lsapi.services.json.LanguageServerToJsonAdapter
+import io.typefox.lsapi.services.json.MessageMethods
 import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 import java.io.PrintStream
 import java.util.concurrent.atomic.AtomicBoolean
-import java.io.ByteArrayOutputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API

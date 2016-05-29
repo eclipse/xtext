@@ -44,7 +44,7 @@ class DefinitionTest extends AbstractLanguageServerTest {
 		open(fileUri, model)
 
 		val definitions = languageServer.definition(newPosition(fileUri, line, column))
-		val actualDefinitions = definitions.toExpectation
+		val actualDefinitions = definitions.get.toExpectation
 		assertEquals(expectedDefinitions, actualDefinitions)
 	}
 
