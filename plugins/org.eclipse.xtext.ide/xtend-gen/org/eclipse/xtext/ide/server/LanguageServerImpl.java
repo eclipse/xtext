@@ -16,6 +16,8 @@ import io.typefox.lsapi.CodeLensParams;
 import io.typefox.lsapi.Command;
 import io.typefox.lsapi.CompletionItem;
 import io.typefox.lsapi.CompletionItemImpl;
+import io.typefox.lsapi.CompletionList;
+import io.typefox.lsapi.CompletionListImpl;
 import io.typefox.lsapi.CompletionOptionsImpl;
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DiagnosticImpl;
@@ -35,10 +37,8 @@ import io.typefox.lsapi.Hover;
 import io.typefox.lsapi.InitializeParams;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.InitializeResultImpl;
-import io.typefox.lsapi.LanguageServer;
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.MessageParams;
-import io.typefox.lsapi.NotificationCallback;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.PublishDiagnosticsParams;
@@ -57,18 +57,20 @@ import io.typefox.lsapi.TextDocumentContentChangeEvent;
 import io.typefox.lsapi.TextDocumentIdentifier;
 import io.typefox.lsapi.TextDocumentItem;
 import io.typefox.lsapi.TextDocumentPositionParams;
-import io.typefox.lsapi.TextDocumentService;
 import io.typefox.lsapi.TextEdit;
 import io.typefox.lsapi.VersionedTextDocumentIdentifier;
-import io.typefox.lsapi.WindowService;
 import io.typefox.lsapi.WorkspaceEdit;
-import io.typefox.lsapi.WorkspaceService;
 import io.typefox.lsapi.WorkspaceSymbolParams;
+import io.typefox.lsapi.services.LanguageServer;
+import io.typefox.lsapi.services.TextDocumentService;
+import io.typefox.lsapi.services.WindowService;
+import io.typefox.lsapi.services.WorkspaceService;
 import io.typefox.lsapi.util.LsapiFactories;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -87,7 +89,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -123,7 +124,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   private IResourceServiceProvider.Registry languagesRegistry;
   
   @Override
-  public InitializeResult initialize(final InitializeParams params) {
+  public CompletableFuture<InitializeResult> initialize(final InitializeParams params) {
     String _rootPath = params.getRootPath();
     boolean _tripleEquals = (_rootPath == null);
     if (_tripleEquals) {
@@ -160,7 +161,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       this.workspaceManager.initialize(rootURI, _function_2, cancelIndicator);
     };
     this.requestManager.runWrite(_function_1, CancellableIndicator.NullImpl);
-    return result;
+    return CompletableFuture.<InitializeResult>completedFuture(result);
   }
   
   @Override
@@ -187,15 +188,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public void onShowMessage(final NotificationCallback<MessageParams> callback) {
+  public void onShowMessage(final Consumer<MessageParams> callback) {
   }
   
   @Override
-  public void onShowMessageRequest(final NotificationCallback<ShowMessageRequestParams> callback) {
+  public void onShowMessageRequest(final Consumer<ShowMessageRequestParams> callback) {
   }
   
   @Override
-  public void onLogMessage(final NotificationCallback<MessageParams> callback) {
+  public void onLogMessage(final Consumer<MessageParams> callback) {
   }
   
   @Override
@@ -279,12 +280,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     this.requestManager.runWrite(_function);
   }
   
-  private List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners = CollectionLiterals.<NotificationCallback<PublishDiagnosticsParams>>newArrayList();
+  private List<Consumer<PublishDiagnosticsParams>> diagnosticListeners = CollectionLiterals.<Consumer<PublishDiagnosticsParams>>newArrayList();
   
   private WorkspaceResourceAccess resourceAccess;
   
   @Override
-  public void onPublishDiagnostics(final NotificationCallback<PublishDiagnosticsParams> callback) {
+  public void onPublishDiagnostics(final Consumer<PublishDiagnosticsParams> callback) {
     this.diagnosticListeners.add(callback);
   }
   
@@ -301,8 +302,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       it.setDiagnostics(_list);
     };
     final PublishDiagnosticsParamsImpl diagnostics = ObjectExtensions.<PublishDiagnosticsParamsImpl>operator_doubleArrow(_publishDiagnosticsParamsImpl, _function);
-    for (final NotificationCallback<PublishDiagnosticsParams> diagnosticsCallback : this.diagnosticListeners) {
-      diagnosticsCallback.call(diagnostics);
+    for (final Consumer<PublishDiagnosticsParams> diagnosticsCallback : this.diagnosticListeners) {
+      diagnosticsCallback.accept(diagnostics);
     }
   }
   
@@ -353,42 +354,40 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public List<? extends CompletionItem> completion(final TextDocumentPositionParams params) {
-    try {
-      final Function1<CancelIndicator, List<CompletionItem>> _function = (CancelIndicator cancelIndicator) -> {
-        TextDocumentIdentifier _textDocument = params.getTextDocument();
-        String _uri = _textDocument.getUri();
-        final URI uri = this._uriExtensions.toUri(_uri);
-        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-        ContentAssistService _get = null;
-        if (resourceServiceProvider!=null) {
-          _get=resourceServiceProvider.<ContentAssistService>get(ContentAssistService.class);
-        }
-        final ContentAssistService contentAssistService = _get;
-        if ((contentAssistService == null)) {
-          return CollectionLiterals.<CompletionItem>emptyList();
-        }
-        final Function2<Document, XtextResource, Iterable<ContentAssistEntry>> _function_1 = (Document document, XtextResource resource) -> {
-          Position _position = params.getPosition();
-          final int offset = document.getOffSet(_position);
-          String _contents = document.getContents();
-          return contentAssistService.createProposals(_contents, offset, resource, cancelIndicator);
-        };
-        final Iterable<ContentAssistEntry> entries = this.workspaceManager.<Iterable<ContentAssistEntry>>doRead(uri, _function_1);
-        final Function1<ContentAssistEntry, CompletionItem> _function_2 = (ContentAssistEntry it) -> {
-          return this.toCompletionItem(it);
-        };
-        Iterable<CompletionItem> _map = IterableExtensions.<ContentAssistEntry, CompletionItem>map(entries, _function_2);
-        return IterableExtensions.<CompletionItem>toList(_map);
+  public CompletableFuture<CompletionList> completion(final TextDocumentPositionParams params) {
+    final Function1<CancelIndicator, CompletionList> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this._uriExtensions.toUri(_uri);
+      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      ContentAssistService _get = null;
+      if (resourceServiceProvider!=null) {
+        _get=resourceServiceProvider.<ContentAssistService>get(ContentAssistService.class);
+      }
+      final ContentAssistService contentAssistService = _get;
+      final CompletionListImpl result = new CompletionListImpl();
+      if ((contentAssistService == null)) {
+        return result;
+      }
+      final Function2<Document, XtextResource, Iterable<ContentAssistEntry>> _function_1 = (Document document, XtextResource resource) -> {
+        Position _position = params.getPosition();
+        final int offset = document.getOffSet(_position);
+        String _contents = document.getContents();
+        return contentAssistService.createProposals(_contents, offset, resource, cancelIndicator);
       };
-      CompletableFuture<List<CompletionItem>> _runRead = this.requestManager.<List<CompletionItem>>runRead(_function);
-      return _runRead.get();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+      final Iterable<ContentAssistEntry> entries = this.workspaceManager.<Iterable<ContentAssistEntry>>doRead(uri, _function_1);
+      final Function1<ContentAssistEntry, CompletionItemImpl> _function_2 = (ContentAssistEntry it) -> {
+        return this.toCompletionItem(it);
+      };
+      Iterable<CompletionItemImpl> _map = IterableExtensions.<ContentAssistEntry, CompletionItemImpl>map(entries, _function_2);
+      List<CompletionItemImpl> _list = IterableExtensions.<CompletionItemImpl>toList(_map);
+      result.setItems(_list);
+      return result;
+    };
+    return this.requestManager.<CompletionList>runRead(_function);
   }
   
-  protected CompletionItem toCompletionItem(final ContentAssistEntry entry) {
+  protected CompletionItemImpl toCompletionItem(final ContentAssistEntry entry) {
     final CompletionItemImpl completionItem = new CompletionItemImpl();
     String _elvis = null;
     String _label = entry.getLabel();
@@ -407,108 +406,93 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public List<? extends Location> definition(final TextDocumentPositionParams params) {
-    try {
-      final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
-        TextDocumentIdentifier _textDocument = params.getTextDocument();
-        String _uri = _textDocument.getUri();
-        final URI uri = this._uriExtensions.toUri(_uri);
-        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-        DocumentSymbolService _get = null;
-        if (resourceServiceProvider!=null) {
-          _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
-        }
-        final DocumentSymbolService documentSymbolService = _get;
-        if ((documentSymbolService == null)) {
-          return CollectionLiterals.<Location>emptyList();
-        }
-        final Function2<Document, XtextResource, List<? extends Location>> _function_1 = (Document document, XtextResource resource) -> {
-          Position _position = params.getPosition();
-          final int offset = document.getOffSet(_position);
-          return documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
-        };
-        final List<? extends Location> definitions = this.workspaceManager.<List<? extends Location>>doRead(uri, _function_1);
-        return definitions;
+  public CompletableFuture<List<? extends Location>> definition(final TextDocumentPositionParams params) {
+    final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this._uriExtensions.toUri(_uri);
+      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      DocumentSymbolService _get = null;
+      if (resourceServiceProvider!=null) {
+        _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
+      }
+      final DocumentSymbolService documentSymbolService = _get;
+      if ((documentSymbolService == null)) {
+        return CollectionLiterals.<Location>emptyList();
+      }
+      final Function2<Document, XtextResource, List<? extends Location>> _function_1 = (Document document, XtextResource resource) -> {
+        Position _position = params.getPosition();
+        final int offset = document.getOffSet(_position);
+        return documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
       };
-      CompletableFuture<List<? extends Location>> _runRead = this.requestManager.<List<? extends Location>>runRead(_function);
-      return _runRead.get();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+      final List<? extends Location> definitions = this.workspaceManager.<List<? extends Location>>doRead(uri, _function_1);
+      return definitions;
+    };
+    return this.requestManager.<List<? extends Location>>runRead(_function);
   }
   
   @Override
-  public List<? extends Location> references(final ReferenceParams params) {
-    try {
-      final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
-        TextDocumentIdentifier _textDocument = params.getTextDocument();
-        String _uri = _textDocument.getUri();
-        final URI uri = this._uriExtensions.toUri(_uri);
-        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-        DocumentSymbolService _get = null;
-        if (resourceServiceProvider!=null) {
-          _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
+  public CompletableFuture<List<? extends Location>> references(final ReferenceParams params) {
+    final Function1<CancelIndicator, List<? extends Location>> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this._uriExtensions.toUri(_uri);
+      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      DocumentSymbolService _get = null;
+      if (resourceServiceProvider!=null) {
+        _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
+      }
+      final DocumentSymbolService documentSymbolService = _get;
+      if ((documentSymbolService == null)) {
+        return CollectionLiterals.<Location>emptyList();
+      }
+      final Function2<Document, XtextResource, List<Location>> _function_1 = (Document document, XtextResource resource) -> {
+        Position _position = params.getPosition();
+        final int offset = document.getOffSet(_position);
+        List<? extends Location> _xifexpression = null;
+        ReferenceContext _context = params.getContext();
+        boolean _isIncludeDeclaration = _context.isIncludeDeclaration();
+        if (_isIncludeDeclaration) {
+          _xifexpression = documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
+        } else {
+          _xifexpression = CollectionLiterals.emptyList();
         }
-        final DocumentSymbolService documentSymbolService = _get;
-        if ((documentSymbolService == null)) {
-          return CollectionLiterals.<Location>emptyList();
-        }
-        final Function2<Document, XtextResource, List<Location>> _function_1 = (Document document, XtextResource resource) -> {
-          Position _position = params.getPosition();
-          final int offset = document.getOffSet(_position);
-          List<? extends Location> _xifexpression = null;
-          ReferenceContext _context = params.getContext();
-          boolean _isIncludeDeclaration = _context.isIncludeDeclaration();
-          if (_isIncludeDeclaration) {
-            _xifexpression = documentSymbolService.getDefinitions(resource, offset, this.resourceAccess, cancelIndicator);
-          } else {
-            _xifexpression = CollectionLiterals.emptyList();
-          }
-          final List<? extends Location> definitions = _xifexpression;
-          final IResourceDescriptions indexData = this.workspaceManager.getIndex();
-          final List<? extends Location> references = documentSymbolService.getReferences(resource, offset, this.resourceAccess, indexData, cancelIndicator);
-          final Iterable<Location> result = Iterables.<Location>concat(definitions, references);
-          return IterableExtensions.<Location>toList(result);
-        };
-        return this.workspaceManager.<List<Location>>doRead(uri, _function_1);
+        final List<? extends Location> definitions = _xifexpression;
+        final IResourceDescriptions indexData = this.workspaceManager.getIndex();
+        final List<? extends Location> references = documentSymbolService.getReferences(resource, offset, this.resourceAccess, indexData, cancelIndicator);
+        final Iterable<Location> result = Iterables.<Location>concat(definitions, references);
+        return IterableExtensions.<Location>toList(result);
       };
-      CompletableFuture<List<? extends Location>> _runRead = this.requestManager.<List<? extends Location>>runRead(_function);
-      return _runRead.get();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+      return this.workspaceManager.<List<Location>>doRead(uri, _function_1);
+    };
+    return this.requestManager.<List<? extends Location>>runRead(_function);
   }
   
   @Override
-  public List<? extends SymbolInformation> documentSymbol(final DocumentSymbolParams params) {
-    try {
-      final Function1<CancelIndicator, List<? extends SymbolInformation>> _function = (CancelIndicator cancelIndicator) -> {
-        TextDocumentIdentifier _textDocument = params.getTextDocument();
-        String _uri = _textDocument.getUri();
-        final URI uri = this._uriExtensions.toUri(_uri);
-        final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-        DocumentSymbolService _get = null;
-        if (resourceServiceProvider!=null) {
-          _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
-        }
-        final DocumentSymbolService documentSymbolService = _get;
-        if ((documentSymbolService == null)) {
-          return CollectionLiterals.<SymbolInformation>emptyList();
-        }
-        final Function2<Document, XtextResource, List<? extends SymbolInformation>> _function_1 = (Document document, XtextResource resource) -> {
-          return documentSymbolService.getSymbols(resource, cancelIndicator);
-        };
-        return this.workspaceManager.<List<? extends SymbolInformation>>doRead(uri, _function_1);
+  public CompletableFuture<List<? extends SymbolInformation>> documentSymbol(final DocumentSymbolParams params) {
+    final Function1<CancelIndicator, List<? extends SymbolInformation>> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this._uriExtensions.toUri(_uri);
+      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      DocumentSymbolService _get = null;
+      if (resourceServiceProvider!=null) {
+        _get=resourceServiceProvider.<DocumentSymbolService>get(DocumentSymbolService.class);
+      }
+      final DocumentSymbolService documentSymbolService = _get;
+      if ((documentSymbolService == null)) {
+        return CollectionLiterals.<SymbolInformation>emptyList();
+      }
+      final Function2<Document, XtextResource, List<? extends SymbolInformation>> _function_1 = (Document document, XtextResource resource) -> {
+        return documentSymbolService.getSymbols(resource, cancelIndicator);
       };
-      CompletableFuture<List<? extends SymbolInformation>> _runRead = this.requestManager.<List<? extends SymbolInformation>>runRead(_function);
-      return _runRead.get();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+      return this.workspaceManager.<List<? extends SymbolInformation>>doRead(uri, _function_1);
+    };
+    return this.requestManager.<List<? extends SymbolInformation>>runRead(_function);
   }
   
   @Override
-  public List<? extends SymbolInformation> symbol(final WorkspaceSymbolParams params) {
+  public CompletableFuture<List<? extends SymbolInformation>> symbol(final WorkspaceSymbolParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
@@ -518,57 +502,57 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public CompletionItem resolveCompletionItem(final CompletionItem unresolved) {
-    return unresolved;
+  public CompletableFuture<CompletionItem> resolveCompletionItem(final CompletionItem unresolved) {
+    return CompletableFuture.<CompletionItem>completedFuture(unresolved);
   }
   
   @Override
-  public Hover hover(final TextDocumentPositionParams position) {
+  public CompletableFuture<Hover> hover(final TextDocumentPositionParams position) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
-  public SignatureHelp signatureHelp(final TextDocumentPositionParams position) {
+  public CompletableFuture<SignatureHelp> signatureHelp(final TextDocumentPositionParams position) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
-  public DocumentHighlight documentHighlight(final TextDocumentPositionParams position) {
+  public CompletableFuture<DocumentHighlight> documentHighlight(final TextDocumentPositionParams position) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
-  public List<? extends Command> codeAction(final CodeActionParams params) {
+  public CompletableFuture<List<? extends Command>> codeAction(final CodeActionParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
-  public List<? extends CodeLens> codeLens(final CodeLensParams params) {
+  public CompletableFuture<List<? extends CodeLens>> codeLens(final CodeLensParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
-  public CodeLens resolveCodeLens(final CodeLens unresolved) {
-    return unresolved;
+  public CompletableFuture<CodeLens> resolveCodeLens(final CodeLens unresolved) {
+    return CompletableFuture.<CodeLens>completedFuture(unresolved);
   }
   
   @Override
-  public List<? extends TextEdit> formatting(final DocumentFormattingParams params) {
+  public CompletableFuture<List<? extends TextEdit>> formatting(final DocumentFormattingParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
-  public List<? extends TextEdit> rangeFormatting(final DocumentRangeFormattingParams params) {
+  public CompletableFuture<List<? extends TextEdit>> rangeFormatting(final DocumentRangeFormattingParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
-  public List<? extends TextEdit> onTypeFormatting(final DocumentOnTypeFormattingParams params) {
+  public CompletableFuture<List<? extends TextEdit>> onTypeFormatting(final DocumentOnTypeFormattingParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
-  public WorkspaceEdit rename(final RenameParams params) {
+  public CompletableFuture<WorkspaceEdit> rename(final RenameParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
@@ -627,11 +611,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Pure
-  public List<NotificationCallback<PublishDiagnosticsParams>> getDiagnosticListeners() {
+  public List<Consumer<PublishDiagnosticsParams>> getDiagnosticListeners() {
     return this.diagnosticListeners;
   }
   
-  public void setDiagnosticListeners(final List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners) {
+  public void setDiagnosticListeners(final List<Consumer<PublishDiagnosticsParams>> diagnosticListeners) {
     this.diagnosticListeners = diagnosticListeners;
   }
   

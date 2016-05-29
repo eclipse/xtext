@@ -14,6 +14,8 @@ import io.typefox.lsapi.CodeLens
 import io.typefox.lsapi.CodeLensParams
 import io.typefox.lsapi.CompletionItem
 import io.typefox.lsapi.CompletionItemImpl
+import io.typefox.lsapi.CompletionList
+import io.typefox.lsapi.CompletionListImpl
 import io.typefox.lsapi.CompletionOptionsImpl
 import io.typefox.lsapi.Diagnostic
 import io.typefox.lsapi.DiagnosticImpl
@@ -31,10 +33,8 @@ import io.typefox.lsapi.FileEvent
 import io.typefox.lsapi.InitializeParams
 import io.typefox.lsapi.InitializeResult
 import io.typefox.lsapi.InitializeResultImpl
-import io.typefox.lsapi.LanguageServer
 import io.typefox.lsapi.Location
 import io.typefox.lsapi.MessageParams
-import io.typefox.lsapi.NotificationCallback
 import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.PublishDiagnosticsParamsImpl
 import io.typefox.lsapi.RangeImpl
@@ -45,11 +45,14 @@ import io.typefox.lsapi.ServerCapabilitiesImpl
 import io.typefox.lsapi.ShowMessageRequestParams
 import io.typefox.lsapi.SymbolInformation
 import io.typefox.lsapi.TextDocumentPositionParams
-import io.typefox.lsapi.TextDocumentService
-import io.typefox.lsapi.WindowService
-import io.typefox.lsapi.WorkspaceService
 import io.typefox.lsapi.WorkspaceSymbolParams
+import io.typefox.lsapi.services.LanguageServer
+import io.typefox.lsapi.services.TextDocumentService
+import io.typefox.lsapi.services.WindowService
+import io.typefox.lsapi.services.WorkspaceService
 import java.util.List
+import java.util.concurrent.CompletableFuture
+import java.util.function.Consumer
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
@@ -78,7 +81,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
 
-	override InitializeResult initialize(InitializeParams params) {
+	override CompletableFuture<InitializeResult> initialize(InitializeParams params) {
 		if (params.rootPath === null) {
 			throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.")
 		}
@@ -103,7 +106,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 			workspaceManager.initialize(rootURI, [this.publishDiagnostics($0, $1)], cancelIndicator)
 		], CancellableIndicator.NullImpl)
 
-		return result
+		return CompletableFuture.completedFuture(result)
 	}
 
 	override exit() {
@@ -112,28 +115,28 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	override void shutdown() {
 	}
 
-	override getTextDocumentService() {
-		this
+	override TextDocumentService getTextDocumentService() {
+		return this
 	}
 
-	override getWorkspaceService() {
-		this
+	override WorkspaceService getWorkspaceService() {
+		return this
 	}
 
-	override getWindowService() {
-		this
+	override WindowService getWindowService() {
+		return this
 	}
 
 	// notification callbacks
-	override onShowMessage(NotificationCallback<MessageParams> callback) {
+	override onShowMessage(Consumer<MessageParams> callback) {
 		// TODO: auto-generated method stub
 	}
 
-	override onShowMessageRequest(NotificationCallback<ShowMessageRequestParams> callback) {
+	override onShowMessageRequest(Consumer<ShowMessageRequestParams> callback) {
 		// TODO: auto-generated method stub
 	}
 
-	override onLogMessage(NotificationCallback<MessageParams> callback) {
+	override onLogMessage(Consumer<MessageParams> callback) {
 		// TODO: auto-generated method stub
 	}
 
@@ -182,11 +185,11 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 
 	// end file/content change events
 	// validation stuff
-	private List<NotificationCallback<PublishDiagnosticsParams>> diagnosticListeners = newArrayList()
+	private List<Consumer<PublishDiagnosticsParams>> diagnosticListeners = newArrayList()
     
     WorkspaceResourceAccess resourceAccess
 
-	override onPublishDiagnostics(NotificationCallback<PublishDiagnosticsParams> callback) {
+	override onPublishDiagnostics(Consumer<PublishDiagnosticsParams> callback) {
 		diagnosticListeners.add(callback)
 	}
 
@@ -196,7 +199,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 			it.diagnostics = issues.map[toDiagnostic].toList
 		]
 		for (diagnosticsCallback : diagnosticListeners) {
-			diagnosticsCallback.call(diagnostics)
+			diagnosticsCallback.accept(diagnostics)
 		}
 	}
 
@@ -219,23 +222,25 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 
 	// end validation stuff
 	// completion stuff
-	override completion(TextDocumentPositionParams params) {
+	override CompletableFuture<CompletionList> completion(TextDocumentPositionParams params) {
 		return requestManager.runRead[ cancelIndicator |
 			val uri = params.textDocument.uri.toUri
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
+			val result = new CompletionListImpl
 			if (contentAssistService === null)
-				return emptyList
+				return result
 	
 			val entries = workspaceManager.doRead(uri) [ document, resource |
 				val offset = document.getOffSet(params.position)
 				return contentAssistService.createProposals(document.contents, offset, resource, cancelIndicator)
 			]
-			return entries.map[toCompletionItem].toList
-		].get
+			result.items = entries.map[toCompletionItem].toList 
+			return result
+		]
 	}
 
-	protected def CompletionItem toCompletionItem(ContentAssistEntry entry) {
+	protected def CompletionItemImpl toCompletionItem(ContentAssistEntry entry) {
 		val completionItem = new CompletionItemImpl
 		completionItem.label = entry.label ?: entry.proposal
 		completionItem.detail = entry.description
@@ -258,7 +263,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 				return documentSymbolService.getDefinitions(resource, offset, resourceAccess, cancelIndicator)
 			]
 			return definitions
-		].get
+		]
 	}
 
 	override references(ReferenceParams params) {
@@ -282,7 +287,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 				val result = definitions + references
 				return result.toList
 			]
-		].get
+		]
 	}
 
 	override documentSymbol(DocumentSymbolParams params) {
@@ -296,7 +301,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 			return workspaceManager.doRead(uri) [ document, resource |
 				return documentSymbolService.getSymbols(resource, cancelIndicator)
 			]
-		].get
+		]
 	}
 
 	// end symbols
@@ -309,7 +314,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	}
 
 	override resolveCompletionItem(CompletionItem unresolved) {
-		return unresolved
+		return CompletableFuture.completedFuture(unresolved)
 	}
 
 	override hover(TextDocumentPositionParams position) {
@@ -333,7 +338,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 	}
 
 	override resolveCodeLens(CodeLens unresolved) {
-		return unresolved
+		return CompletableFuture.completedFuture(unresolved)
 	}
 
 	override formatting(DocumentFormattingParams params) {

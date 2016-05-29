@@ -15,9 +15,11 @@ import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.TextDocumentIdentifierImpl;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -152,21 +154,26 @@ public class DocumentSymbolTest extends AbstractLanguageServerTest {
   }
   
   protected void testDocumentSymbol(final Procedure1<? super DocumentSymbolTest.DocumentSymbolConfiguraiton> configurator) {
-    @Extension
-    final DocumentSymbolTest.DocumentSymbolConfiguraiton configuration = new DocumentSymbolTest.DocumentSymbolConfiguraiton();
-    configurator.apply(configuration);
-    final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
-    this.initialize();
-    this.open(fileUri, configuration.model);
-    DocumentSymbolParamsImpl _documentSymbolParamsImpl = new DocumentSymbolParamsImpl();
-    final Procedure1<DocumentSymbolParamsImpl> _function = (DocumentSymbolParamsImpl it) -> {
-      TextDocumentIdentifierImpl _newIdentifier = this.newIdentifier(fileUri);
-      it.setTextDocument(_newIdentifier);
-    };
-    DocumentSymbolParamsImpl _doubleArrow = ObjectExtensions.<DocumentSymbolParamsImpl>operator_doubleArrow(_documentSymbolParamsImpl, _function);
-    final List<? extends SymbolInformation> symbols = this.languageServer.documentSymbol(_doubleArrow);
-    final String actualSymbols = this.toExpectation(symbols);
-    Assert.assertEquals(configuration.expectedSymbols, actualSymbols);
+    try {
+      @Extension
+      final DocumentSymbolTest.DocumentSymbolConfiguraiton configuration = new DocumentSymbolTest.DocumentSymbolConfiguraiton();
+      configurator.apply(configuration);
+      final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
+      this.initialize();
+      this.open(fileUri, configuration.model);
+      DocumentSymbolParamsImpl _documentSymbolParamsImpl = new DocumentSymbolParamsImpl();
+      final Procedure1<DocumentSymbolParamsImpl> _function = (DocumentSymbolParamsImpl it) -> {
+        TextDocumentIdentifierImpl _newIdentifier = this.newIdentifier(fileUri);
+        it.setTextDocument(_newIdentifier);
+      };
+      DocumentSymbolParamsImpl _doubleArrow = ObjectExtensions.<DocumentSymbolParamsImpl>operator_doubleArrow(_documentSymbolParamsImpl, _function);
+      final CompletableFuture<List<? extends SymbolInformation>> symbols = this.languageServer.documentSymbol(_doubleArrow);
+      List<? extends SymbolInformation> _get = symbols.get();
+      final String actualSymbols = this.toExpectation(_get);
+      Assert.assertEquals(configuration.expectedSymbols, actualSymbols);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected String _toExpectation(final SymbolInformation it) {

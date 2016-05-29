@@ -13,7 +13,7 @@ import io.typefox.lsapi.FileEvent;
 import io.typefox.lsapi.FileEventImpl;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.Range;
-import io.typefox.lsapi.WorkspaceService;
+import io.typefox.lsapi.services.WorkspaceService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

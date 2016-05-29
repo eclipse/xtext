@@ -12,7 +12,7 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
-import io.typefox.lsapi.LanguageServer;
+import io.typefox.lsapi.services.LanguageServer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;

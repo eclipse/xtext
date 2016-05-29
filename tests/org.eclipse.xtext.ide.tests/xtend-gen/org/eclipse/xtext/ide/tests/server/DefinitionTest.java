@@ -10,9 +10,11 @@ package org.eclipse.xtext.ide.tests.server;
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.TextDocumentPositionParamsImpl;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -107,15 +109,20 @@ public class DefinitionTest extends AbstractLanguageServerTest {
   }
   
   protected void testDefinition(final Procedure1<? super DefinitionTest.DefinitionTestConfiguration> configurator) {
-    @Extension
-    final DefinitionTest.DefinitionTestConfiguration configuration = new DefinitionTest.DefinitionTestConfiguration();
-    configurator.apply(configuration);
-    final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
-    this.initialize();
-    this.open(fileUri, configuration.model);
-    TextDocumentPositionParamsImpl _newPosition = this.newPosition(fileUri, configuration.line, configuration.column);
-    final List<? extends Location> definitions = this.languageServer.definition(_newPosition);
-    final String actualDefinitions = this.toExpectation(definitions);
-    Assert.assertEquals(configuration.expectedDefinitions, actualDefinitions);
+    try {
+      @Extension
+      final DefinitionTest.DefinitionTestConfiguration configuration = new DefinitionTest.DefinitionTestConfiguration();
+      configurator.apply(configuration);
+      final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
+      this.initialize();
+      this.open(fileUri, configuration.model);
+      TextDocumentPositionParamsImpl _newPosition = this.newPosition(fileUri, configuration.line, configuration.column);
+      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.definition(_newPosition);
+      List<? extends Location> _get = definitions.get();
+      final String actualDefinitions = this.toExpectation(_get);
+      Assert.assertEquals(configuration.expectedDefinitions, actualDefinitions);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

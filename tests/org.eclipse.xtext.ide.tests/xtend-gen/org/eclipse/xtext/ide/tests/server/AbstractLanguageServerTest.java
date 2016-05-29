@@ -18,7 +18,6 @@ import io.typefox.lsapi.DidOpenTextDocumentParamsImpl;
 import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.Location;
-import io.typefox.lsapi.NotificationCallback;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.PublishDiagnosticsParams;
@@ -26,7 +25,7 @@ import io.typefox.lsapi.Range;
 import io.typefox.lsapi.TextDocumentIdentifierImpl;
 import io.typefox.lsapi.TextDocumentItemImpl;
 import io.typefox.lsapi.TextDocumentPositionParamsImpl;
-import io.typefox.lsapi.TextDocumentService;
+import io.typefox.lsapi.services.TextDocumentService;
 import io.typefox.lsapi.util.LsapiFactories;
 import java.io.File;
 import java.io.FileWriter;
@@ -37,6 +36,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
@@ -57,7 +57,7 @@ import org.junit.Before;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnosticsParams> {
+public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsParams> {
   @Before
   public void setup() {
     try {
@@ -135,14 +135,19 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
   }
   
   protected InitializeResult initialize(final Procedure1<? super InitializeParamsImpl> initializer) {
-    final InitializeParamsImpl params = new InitializeParamsImpl();
-    Path _rootPath = this.getRootPath();
-    String _string = _rootPath.toString();
-    params.setRootPath(_string);
-    if (initializer!=null) {
-      initializer.apply(params);
+    try {
+      final InitializeParamsImpl params = new InitializeParamsImpl();
+      Path _rootPath = this.getRootPath();
+      String _string = _rootPath.toString();
+      params.setRootPath(_string);
+      if (initializer!=null) {
+        initializer.apply(params);
+      }
+      CompletableFuture<InitializeResult> _initialize = this.languageServer.initialize(params);
+      return _initialize.get();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return this.languageServer.initialize(params);
   }
   
   protected void open(final String fileUri, final String model) {
@@ -180,7 +185,7 @@ public class AbstractLanguageServerTest implements NotificationCallback<PublishD
   }
   
   @Override
-  public void call(final PublishDiagnosticsParams t) {
+  public void accept(final PublishDiagnosticsParams t) {
     String _uri = t.getUri();
     List<? extends Diagnostic> _diagnostics = t.getDiagnostics();
     this.diagnostics.put(_uri, _diagnostics);

@@ -9,15 +9,18 @@ package org.eclipse.xtext.ide.tests.server;
 
 import com.google.common.base.Objects;
 import io.typefox.lsapi.CompletionItem;
+import io.typefox.lsapi.CompletionList;
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.Range;
 import io.typefox.lsapi.TextDocumentPositionParamsImpl;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -145,16 +148,22 @@ public class CompletionTest extends AbstractLanguageServerTest {
   }
   
   protected void testCompletion(final Procedure1<? super CompletionTest.TestCompletionConfiguration> configurator) {
-    @Extension
-    final CompletionTest.TestCompletionConfiguration configuration = new CompletionTest.TestCompletionConfiguration();
-    configurator.apply(configuration);
-    final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
-    this.initialize();
-    this.open(fileUri, configuration.model);
-    TextDocumentPositionParamsImpl _newPosition = this.newPosition(fileUri, configuration.line, configuration.column);
-    final List<? extends CompletionItem> completionItems = this.languageServer.completion(_newPosition);
-    final String actualCompletionItems = this.toExpectation(completionItems);
-    Assert.assertEquals(configuration.expectedCompletionItems, actualCompletionItems);
+    try {
+      @Extension
+      final CompletionTest.TestCompletionConfiguration configuration = new CompletionTest.TestCompletionConfiguration();
+      configurator.apply(configuration);
+      final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
+      this.initialize();
+      this.open(fileUri, configuration.model);
+      TextDocumentPositionParamsImpl _newPosition = this.newPosition(fileUri, configuration.line, configuration.column);
+      final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_newPosition);
+      CompletionList _get = completionItems.get();
+      List<? extends CompletionItem> _items = _get.getItems();
+      final String actualCompletionItems = this.toExpectation(_items);
+      Assert.assertEquals(configuration.expectedCompletionItems, actualCompletionItems);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected String _toExpectation(final CompletionItem it) {

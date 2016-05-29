@@ -12,9 +12,9 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import io.typefox.lsapi.NotificationMessage;
-import io.typefox.lsapi.json.LanguageServerProtocol;
-import io.typefox.lsapi.json.LanguageServerToJsonAdapter;
-import io.typefox.lsapi.json.MessageMethods;
+import io.typefox.lsapi.services.json.LanguageServerProtocol;
+import io.typefox.lsapi.services.json.LanguageServerToJsonAdapter;
+import io.typefox.lsapi.services.json.MessageMethods;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -62,16 +62,20 @@ public class ServerLauncher {
       System.err.println("Starting Xtext Language Server.");
       final LanguageServerToJsonAdapter messageAcceptor = new LanguageServerToJsonAdapter(this.languageServer) {
         @Override
-        protected void _doAccept(final NotificationMessage message) {
-          if (ServerLauncher.IS_DEBUG) {
-            InputOutput.<NotificationMessage>println(message);
+        protected Object _doAccept(final NotificationMessage message) {
+          Object _xblockexpression = null;
+          {
+            if (ServerLauncher.IS_DEBUG) {
+              InputOutput.<NotificationMessage>println(message);
+            }
+            String _method = message.getMethod();
+            boolean _equals = Objects.equal(_method, MessageMethods.EXIT);
+            if (_equals) {
+              ServerLauncher.this.hasExitNotification.set(true);
+            }
+            _xblockexpression = super._doAccept(message);
           }
-          String _method = message.getMethod();
-          boolean _equals = Objects.equal(_method, MessageMethods.EXIT);
-          if (_equals) {
-            ServerLauncher.this.hasExitNotification.set(true);
-          }
-          super._doAccept(message);
+          return _xblockexpression;
         }
         
         @Override

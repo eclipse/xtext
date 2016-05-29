@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ide.tests.server
 
 import io.typefox.lsapi.InitializeParamsImpl
-import io.typefox.lsapi.json.JsonBasedLanguageServer
+import io.typefox.lsapi.services.json.JsonBasedLanguageServer
 import java.lang.ProcessBuilder.Redirect
 import org.eclipse.xtext.ide.server.ServerLauncher
 import org.junit.After

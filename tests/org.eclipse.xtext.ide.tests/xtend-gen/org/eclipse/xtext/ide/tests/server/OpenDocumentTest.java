@@ -20,7 +20,7 @@ import io.typefox.lsapi.TextDocumentContentChangeEventImpl;
 import io.typefox.lsapi.TextDocumentIdentifierImpl;
 import io.typefox.lsapi.TextDocumentItemImpl;
 import io.typefox.lsapi.VersionedTextDocumentIdentifierImpl;
-import io.typefox.lsapi.WorkspaceService;
+import io.typefox.lsapi.services.WorkspaceService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

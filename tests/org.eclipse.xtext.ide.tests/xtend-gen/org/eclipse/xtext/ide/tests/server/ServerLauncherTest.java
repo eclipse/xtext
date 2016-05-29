@@ -10,9 +10,10 @@ package org.eclipse.xtext.ide.tests.server;
 import com.google.common.base.Objects;
 import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.InitializeResult;
-import io.typefox.lsapi.json.JsonBasedLanguageServer;
+import io.typefox.lsapi.services.json.JsonBasedLanguageServer;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.concurrent.CompletableFuture;
 import org.eclipse.xtext.ide.server.ServerLauncher;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -62,7 +63,7 @@ public class ServerLauncherTest {
       it.setRootPath(".");
     };
     InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
-    final InitializeResult msg = client.initialize(_doubleArrow);
+    final CompletableFuture<InitializeResult> msg = client.initialize(_doubleArrow);
     boolean _notEquals = (!Objects.equal(msg, null));
     Assert.assertTrue(_notEquals);
   }

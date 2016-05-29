@@ -14,9 +14,11 @@ import io.typefox.lsapi.ReferenceParamsImpl;
 import io.typefox.lsapi.TextDocumentIdentifierImpl;
 import io.typefox.lsapi.util.LsapiFactories;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -150,25 +152,30 @@ public class ReferenceTest extends AbstractLanguageServerTest {
   }
   
   protected void testReferences(final Procedure1<? super ReferenceTest.ReferenceTestConfiguration> configurator) {
-    @Extension
-    final ReferenceTest.ReferenceTestConfiguration configuration = new ReferenceTest.ReferenceTestConfiguration();
-    configurator.apply(configuration);
-    final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
-    this.initialize();
-    this.open(fileUri, configuration.model);
-    final ReferenceContextImpl referenceContext = new ReferenceContextImpl();
-    referenceContext.setIncludeDeclaration(configuration.includeDeclaration);
-    ReferenceParamsImpl _referenceParamsImpl = new ReferenceParamsImpl();
-    final Procedure1<ReferenceParamsImpl> _function = (ReferenceParamsImpl it) -> {
-      TextDocumentIdentifierImpl _newIdentifier = this.newIdentifier(fileUri);
-      it.setTextDocument(_newIdentifier);
-      PositionImpl _newPosition = LsapiFactories.newPosition(configuration.line, configuration.column);
-      it.setPosition(_newPosition);
-      it.setContext(referenceContext);
-    };
-    ReferenceParamsImpl _doubleArrow = ObjectExtensions.<ReferenceParamsImpl>operator_doubleArrow(_referenceParamsImpl, _function);
-    final List<? extends Location> definitions = this.languageServer.references(_doubleArrow);
-    final String actualDefinitions = this.toExpectation(definitions);
-    Assert.assertEquals(configuration.expectedReferences, actualDefinitions);
+    try {
+      @Extension
+      final ReferenceTest.ReferenceTestConfiguration configuration = new ReferenceTest.ReferenceTestConfiguration();
+      configurator.apply(configuration);
+      final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
+      this.initialize();
+      this.open(fileUri, configuration.model);
+      final ReferenceContextImpl referenceContext = new ReferenceContextImpl();
+      referenceContext.setIncludeDeclaration(configuration.includeDeclaration);
+      ReferenceParamsImpl _referenceParamsImpl = new ReferenceParamsImpl();
+      final Procedure1<ReferenceParamsImpl> _function = (ReferenceParamsImpl it) -> {
+        TextDocumentIdentifierImpl _newIdentifier = this.newIdentifier(fileUri);
+        it.setTextDocument(_newIdentifier);
+        PositionImpl _newPosition = LsapiFactories.newPosition(configuration.line, configuration.column);
+        it.setPosition(_newPosition);
+        it.setContext(referenceContext);
+      };
+      ReferenceParamsImpl _doubleArrow = ObjectExtensions.<ReferenceParamsImpl>operator_doubleArrow(_referenceParamsImpl, _function);
+      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.references(_doubleArrow);
+      List<? extends Location> _get = definitions.get();
+      final String actualDefinitions = this.toExpectation(_get);
+      Assert.assertEquals(configuration.expectedReferences, actualDefinitions);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

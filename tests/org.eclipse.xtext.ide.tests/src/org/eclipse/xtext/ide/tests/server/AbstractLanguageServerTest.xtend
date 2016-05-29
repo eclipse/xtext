@@ -15,7 +15,6 @@ import io.typefox.lsapi.DidOpenTextDocumentParamsImpl
 import io.typefox.lsapi.InitializeParamsImpl
 import io.typefox.lsapi.InitializeResult
 import io.typefox.lsapi.Location
-import io.typefox.lsapi.NotificationCallback
 import io.typefox.lsapi.Position
 import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.Range
@@ -29,6 +28,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.List
 import java.util.Map
+import java.util.concurrent.CompletableFuture
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
@@ -39,12 +39,12 @@ import org.eclipse.xtext.util.Modules2
 import org.junit.Before
 
 import static io.typefox.lsapi.util.LsapiFactories.*
-import java.util.concurrent.CompletableFuture
+import java.util.function.Consumer
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnosticsParams> {
+class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsParams> {
 
 	@Before
 	def void setup() {
@@ -70,7 +70,7 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
 		val injector = Guice.createInjector(module)
 		injector.injectMembers(this)
 		// register notification callbacks
-		languageServer.getTextDocumentService.onPublishDiagnostics(this)
+		languageServer.getTextDocumentService().onPublishDiagnostics(this)
 
 		// create workingdir
 		root = new File("./test-data/test-project")
@@ -103,7 +103,7 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
 		val params = new InitializeParamsImpl
 		params.rootPath = rootPath.toString
 		initializer?.apply(params)
-		return languageServer.initialize(params)
+		return languageServer.initialize(params).get
 	}
 
 	protected def void open(String fileUri, String model) {
@@ -128,7 +128,7 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
 		return file.toURI.normalize.toPath
 	}
 
-	override call(PublishDiagnosticsParams t) {
+	override accept(PublishDiagnosticsParams t) {
 		diagnostics.put(t.uri, t.diagnostics)
 	}
 

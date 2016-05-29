@@ -69,7 +69,7 @@ class DocumentSymbolTest extends AbstractLanguageServerTest {
 		val symbols = languageServer.documentSymbol(new DocumentSymbolParamsImpl => [
 			textDocument = fileUri.newIdentifier
 		])
-		val String actualSymbols = symbols.toExpectation
+		val String actualSymbols = symbols.get.toExpectation
 		assertEquals(expectedSymbols, actualSymbols)
 	}
 
