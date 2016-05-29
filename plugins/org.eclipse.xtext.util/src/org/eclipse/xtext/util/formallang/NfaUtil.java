@@ -506,7 +506,7 @@ public class NfaUtil {
 	//		return result;
 	//	}
 
-	protected <S, ITERABLE extends Iterable<? extends S>> S find(Nfa<S> nfa, S state, Predicate<S> matcher,
+	protected <S> S find(Nfa<S> nfa, S state, Predicate<S> matcher,
 			Set<S> visited) {
 		if (!visited.add(state))
 			return null;

@@ -10,8 +10,8 @@ package org.eclipse.xtext.ide.server.concurrent
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.google.inject.name.Named
+import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Future
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.Semaphore
 import org.eclipse.xtext.util.CancelIndicator
@@ -39,46 +39,44 @@ class RequestManager {
 
 	val semaphore = new Semaphore(MAX_PERMITS)
 
-	def Future<Void> runWrite((CancelIndicator)=>void writeRequest) {
-		runWrite(writeRequest, new RequestCancelIndicator)
+	def CompletableFuture<Void> runWrite((CancelIndicator)=>void writeRequest) {
+		return runWrite(writeRequest, new RequestCancelIndicator)
 	}
 
-	def Future<Void> runWrite((CancelIndicator)=>void writeRequest, CancelIndicator cancelIndicator) {
+	def CompletableFuture<Void> runWrite((CancelIndicator)=>void writeRequest, CancelIndicator cancelIndicator) {
 		cancelIndicators.forEach[cancel]
-		writeExecutorService.run([
-			writeRequest.apply(it)
-			return null
-		], MAX_PERMITS, cancelIndicator)
+		return CompletableFuture.runAsync([
+			run([writeRequest], MAX_PERMITS, cancelIndicator)
+		], writeExecutorService)
 	}
 
-	def <V> Future<V> runRead((CancelIndicator)=>V readRequest) {
-		runRead(readRequest, new RequestCancelIndicator)
+	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest) {
+		return runRead(readRequest, new RequestCancelIndicator)
 	}
 
-	def <V> Future<V> runRead((CancelIndicator)=>V readRequest, CancelIndicator cancelIndicator) {
-		readExecutorService.run(readRequest, 1, cancelIndicator)
+	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest, CancelIndicator cancelIndicator) {
+		return CompletableFuture.supplyAsync([
+			run(readRequest, 1, cancelIndicator)
+		], readExecutorService)
 	}
 
-	protected def <V> Future<V> run(
-		ExecutorService executorService,
+	protected def <V> V run(
 		(CancelIndicator)=>V request,
 		int permits,
 		CancelIndicator cancelIndicator
 	) {
-		return executorService.submit [
-			semaphore.acquire(permits)
-			try {
-				if (cancelIndicator instanceof CancellableIndicator)
-					cancelIndicators += cancelIndicator
+		semaphore.acquire(permits)
+		try {
+			if (cancelIndicator instanceof CancellableIndicator)
+				cancelIndicators += cancelIndicator
 
-				return request.apply(cancelIndicator)
-			} finally {
-				if (cancelIndicator instanceof CancellableIndicator)
-					cancelIndicators -= cancelIndicator
+			return request.apply(cancelIndicator)
+		} finally {
+			if (cancelIndicator instanceof CancellableIndicator)
+				cancelIndicators -= cancelIndicator
 
-				semaphore.release(permits)
-			}
-		]
+			semaphore.release(permits)
+		}
 	}
 
 }

@@ -29,7 +29,6 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.List
 import java.util.Map
-import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
@@ -40,7 +39,7 @@ import org.eclipse.xtext.util.Modules2
 import org.junit.Before
 
 import static io.typefox.lsapi.util.LsapiFactories.*
-import com.google.common.util.concurrent.Futures
+import java.util.concurrent.CompletableFuture
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -54,14 +53,20 @@ class AbstractLanguageServerTest implements NotificationCallback<PublishDiagnost
 			override protected configure() {
 				bind(RequestManager).toInstance(new RequestManager() {
 					
-					override protected <V> run(ExecutorService executorService, (CancelIndicator)=>V request, int permits, CancelIndicator cancelIndicator) {
-						Futures.immediateCheckedFuture(request.apply(cancelIndicator))
+					override runWrite((CancelIndicator)=>void writeRequest, CancelIndicator cancelIndicator) {
+						writeRequest.apply(cancelIndicator)
+						return CompletableFuture.completedFuture(null)
+					}
+					
+					override <V> runRead((CancelIndicator)=>V readRequest, CancelIndicator cancelIndicator) {
+						return CompletableFuture.completedFuture(readRequest.apply(cancelIndicator))
 					}
 					
 				})
 			}
 			
 		})
+		
 		val injector = Guice.createInjector(module)
 		injector.injectMembers(this)
 		// register notification callbacks
