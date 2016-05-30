@@ -14,6 +14,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Semaphore;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
@@ -47,21 +48,55 @@ public class RequestManager {
   
   private final Semaphore semaphore = new Semaphore(this.MAX_PERMITS);
   
+  public void shutdown() {
+    this.readExecutorService.shutdown();
+    this.writeExecutorService.shutdown();
+  }
+  
   public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest) {
     RequestCancelIndicator _requestCancelIndicator = new RequestCancelIndicator();
     return this.runWrite(writeRequest, _requestCancelIndicator);
   }
   
+  /**
+   * <p>
+   * The given <i>write request</i> will be ran first when <i>all running requests</i> completed.
+   * </p>
+   * <p>
+   * Currently <i>running requests</i> will be cancelled.
+   * </p>
+   * <p>
+   * A provided cancel indicator should implement {@link org.eclipse.xtext.ide.server.concurrent.CancellableIndicator CancellableIndicator}
+   * to let the given request to be cancelled by a write request.
+   * </p>
+   */
   public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest, final CancelIndicator cancelIndicator) {
     final Consumer<CancellableIndicator> _function = (CancellableIndicator it) -> {
       it.cancel();
     };
     this.cancelIndicators.forEach(_function);
+    if ((cancelIndicator instanceof CancellableIndicator)) {
+      this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
+    }
     final Runnable _function_1 = () -> {
-      Function1<? super CancelIndicator, ? extends Void> _withVoidAsReturnType = this.withVoidAsReturnType(writeRequest);
-      this.<Void>run(_withVoidAsReturnType, this.MAX_PERMITS, cancelIndicator);
+      try {
+        this.semaphore.acquire(this.MAX_PERMITS);
+        try {
+          writeRequest.apply(cancelIndicator);
+        } finally {
+          this.semaphore.release(this.MAX_PERMITS);
+        }
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
     };
-    return CompletableFuture.runAsync(_function_1, this.writeExecutorService);
+    CompletableFuture<Void> _runAsync = CompletableFuture.runAsync(_function_1, this.writeExecutorService);
+    final BiConsumer<Void, Throwable> _function_2 = (Void $0, Throwable $1) -> {
+      if ((cancelIndicator instanceof CancellableIndicator)) {
+        this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+      }
+    };
+    return _runAsync.whenComplete(_function_2);
   }
   
   public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
@@ -69,37 +104,41 @@ public class RequestManager {
     return this.<V>runRead(readRequest, _requestCancelIndicator);
   }
   
+  /**
+   * <p>
+   * The given <i>read request</i> will be ran:
+   * <ul>
+   * 	<li>concurrent with <i>running read requests</i>;</li>
+   * 	<li>first when <i>running write requests</i> completed.</li>
+   * </ul>
+   * </p>
+   * <p>
+   * A provided cancel indicator should implement {@link org.eclipse.xtext.ide.server.concurrent.CancellableIndicator CancellableIndicator}
+   * to let the given request to be cancelled by a write request.
+   * </p>
+   */
   public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest, final CancelIndicator cancelIndicator) {
-    final Supplier<V> _function = () -> {
-      return this.<V>run(readRequest, 1, cancelIndicator);
-    };
-    return CompletableFuture.<V>supplyAsync(_function, this.readExecutorService);
-  }
-  
-  protected <V extends Object> V run(final Function1<? super CancelIndicator, ? extends V> request, final int permits, final CancelIndicator cancelIndicator) {
-    try {
-      this.semaphore.acquire(permits);
-      try {
-        if ((cancelIndicator instanceof CancellableIndicator)) {
-          this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
-        }
-        return request.apply(cancelIndicator);
-      } finally {
-        if ((cancelIndicator instanceof CancellableIndicator)) {
-          this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
-        }
-        this.semaphore.release(permits);
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    if ((cancelIndicator instanceof CancellableIndicator)) {
+      this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
     }
-  }
-  
-  protected Function1<? super CancelIndicator, ? extends Void> withVoidAsReturnType(final Procedure1<? super CancelIndicator> request) {
-    final Function1<CancelIndicator, Void> _function = (CancelIndicator cancelIindicator) -> {
-      request.apply(cancelIindicator);
-      return null;
+    final Supplier<V> _function = () -> {
+      try {
+        this.semaphore.acquire(1);
+        try {
+          return readRequest.apply(cancelIndicator);
+        } finally {
+          this.semaphore.release(1);
+        }
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
     };
-    return _function;
+    CompletableFuture<V> _supplyAsync = CompletableFuture.<V>supplyAsync(_function, this.readExecutorService);
+    final BiConsumer<V, Throwable> _function_1 = (V $0, Throwable $1) -> {
+      if ((cancelIndicator instanceof CancellableIndicator)) {
+        this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+      }
+    };
+    return _supplyAsync.whenComplete(_function_1);
   }
 }

@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class RequestCancelIndicator implements CancellableIndicator {
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private boolean canceled;
+  private volatile boolean canceled;
   
   @Override
   public void cancel() {

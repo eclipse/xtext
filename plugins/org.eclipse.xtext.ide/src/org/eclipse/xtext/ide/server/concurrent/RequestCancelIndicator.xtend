@@ -13,10 +13,10 @@ import org.eclipse.xtend.lib.annotations.Accessors
  * @author kosyakov - Initial contribution and API
  */
 class RequestCancelIndicator implements CancellableIndicator {
-	
+
 	@Accessors(PUBLIC_GETTER)
-	boolean canceled
-	
+	volatile boolean canceled
+
 	override cancel() {
 		canceled = true
 	}
