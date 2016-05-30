@@ -1,0 +1,42 @@
+{
+    "name": "testlang",
+    "displayName": "testlang",
+    "description": "Test Language Support",
+    "version": "0.0.1",
+    "publisher": "TypeFox",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:testlang"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "languages": [{
+            "id": "testlang",
+            "aliases": ["testlang"],
+            "extensions": [".testlang"],
+            "configuration": "./testlang.configuration.json"
+        }],
+        "grammars": [{
+            "language": "testlang",
+            "scopeName": "text.testlang",
+            "path": "./testlang.tmLanguage"
+        }]
+    },
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^1.8.5",
+        "vscode": "^0.11.0"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^2.2.1"
+    }
+}
