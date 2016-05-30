@@ -39,50 +39,77 @@ class RequestManager {
 
 	val semaphore = new Semaphore(MAX_PERMITS)
 
+	def void shutdown() {
+		readExecutorService.shutdown()
+		writeExecutorService.shutdown()
+	}
+
 	def CompletableFuture<Void> runWrite((CancelIndicator)=>void writeRequest) {
 		return runWrite(writeRequest, new RequestCancelIndicator)
 	}
 
+	/**
+	 * <p>
+	 * The given <i>write request</i> will be ran first when <i>all running requests</i> completed.
+	 * </p>
+	 * <p>
+	 * Currently <i>running requests</i> will be cancelled.
+	 * </p>
+	 * <p>
+	 * A provided cancel indicator should implement {@link org.eclipse.xtext.ide.server.concurrent.CancellableIndicator CancellableIndicator} 
+	 * to let the given request to be cancelled by a write request.
+	 * </p>
+	 */
 	def CompletableFuture<Void> runWrite((CancelIndicator)=>void writeRequest, CancelIndicator cancelIndicator) {
 		cancelIndicators.forEach[cancel]
+
+		if (cancelIndicator instanceof CancellableIndicator)
+			cancelIndicators += cancelIndicator
+
 		return CompletableFuture.runAsync([
-			writeRequest.withVoidAsReturnType.run(MAX_PERMITS, cancelIndicator)
-		], writeExecutorService)
+			semaphore.acquire(MAX_PERMITS)
+			try {
+				writeRequest.apply(cancelIndicator)
+			} finally {
+				semaphore.release(MAX_PERMITS)
+			}
+		], writeExecutorService).whenComplete [
+			if (cancelIndicator instanceof CancellableIndicator)
+				cancelIndicators -= cancelIndicator
+		]
 	}
 
 	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest) {
 		return runRead(readRequest, new RequestCancelIndicator)
 	}
 
+	/**
+	 * <p>
+	 * The given <i>read request</i> will be ran:
+	 * <ul>
+	 * 	<li>concurrent with <i>running read requests</i>;</li>
+	 * 	<li>first when <i>running write requests</i> completed.</li>
+	 * </ul>
+	 * </p>
+	 * <p>
+	 * A provided cancel indicator should implement {@link org.eclipse.xtext.ide.server.concurrent.CancellableIndicator CancellableIndicator} 
+	 * to let the given request to be cancelled by a write request.
+	 * </p>
+	 */
 	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest, CancelIndicator cancelIndicator) {
+		if (cancelIndicator instanceof CancellableIndicator)
+			cancelIndicators += cancelIndicator
+
 		return CompletableFuture.supplyAsync([
-			readRequest.run(1, cancelIndicator)
-		], readExecutorService)
-	}
-
-	protected def <V> V run(
-		(CancelIndicator)=>V request,
-		int permits,
-		CancelIndicator cancelIndicator
-	) {
-		semaphore.acquire(permits)
-		try {
-			if (cancelIndicator instanceof CancellableIndicator)
-				cancelIndicators += cancelIndicator
-
-			return request.apply(cancelIndicator)
-		} finally {
+			semaphore.acquire(1)
+			try {
+				return readRequest.apply(cancelIndicator)
+			} finally {
+				semaphore.release(1)
+			}
+		], readExecutorService).whenComplete [
 			if (cancelIndicator instanceof CancellableIndicator)
 				cancelIndicators -= cancelIndicator
-
-			semaphore.release(permits)
-		}
-	}
-
-	protected def (CancelIndicator)=>Void withVoidAsReturnType((CancelIndicator)=>void request) {
-		return [ cancelIindicator |
-			request.apply(cancelIindicator)
-			return null
 		]
 	}
 
