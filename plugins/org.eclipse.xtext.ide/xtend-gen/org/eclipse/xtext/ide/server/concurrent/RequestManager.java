@@ -58,10 +58,8 @@ public class RequestManager {
     };
     this.cancelIndicators.forEach(_function);
     final Runnable _function_1 = () -> {
-      final Function1<CancelIndicator, Procedure1<? super CancelIndicator>> _function_2 = (CancelIndicator it) -> {
-        return writeRequest;
-      };
-      this.<Procedure1<? super CancelIndicator>>run(_function_2, this.MAX_PERMITS, cancelIndicator);
+      Function1<? super CancelIndicator, ? extends Void> _withVoidAsReturnType = this.withVoidAsReturnType(writeRequest);
+      this.<Void>run(_withVoidAsReturnType, this.MAX_PERMITS, cancelIndicator);
     };
     return CompletableFuture.runAsync(_function_1, this.writeExecutorService);
   }
@@ -95,5 +93,13 @@ public class RequestManager {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected Function1<? super CancelIndicator, ? extends Void> withVoidAsReturnType(final Procedure1<? super CancelIndicator> request) {
+    final Function1<CancelIndicator, Void> _function = (CancelIndicator cancelIindicator) -> {
+      request.apply(cancelIindicator);
+      return null;
+    };
+    return _function;
   }
 }
