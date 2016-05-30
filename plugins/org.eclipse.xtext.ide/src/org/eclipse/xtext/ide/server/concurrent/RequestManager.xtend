@@ -46,7 +46,7 @@ class RequestManager {
 	def CompletableFuture<Void> runWrite((CancelIndicator)=>void writeRequest, CancelIndicator cancelIndicator) {
 		cancelIndicators.forEach[cancel]
 		return CompletableFuture.runAsync([
-			run([writeRequest], MAX_PERMITS, cancelIndicator)
+			writeRequest.withVoidAsReturnType.run(MAX_PERMITS, cancelIndicator)
 		], writeExecutorService)
 	}
 
@@ -56,7 +56,7 @@ class RequestManager {
 
 	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest, CancelIndicator cancelIndicator) {
 		return CompletableFuture.supplyAsync([
-			run(readRequest, 1, cancelIndicator)
+			readRequest.run(1, cancelIndicator)
 		], readExecutorService)
 	}
 
@@ -77,6 +77,13 @@ class RequestManager {
 
 			semaphore.release(permits)
 		}
+	}
+
+	protected def (CancelIndicator)=>Void withVoidAsReturnType((CancelIndicator)=>void request) {
+		return [ cancelIindicator |
+			request.apply(cancelIindicator)
+			return null
+		]
 	}
 
 }
