@@ -65,6 +65,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
 import static io.typefox.lsapi.util.LsapiFactories.*
+import io.typefox.lsapi.LanguageDescriptionImpl
+import org.eclipse.xtext.resource.FileExtensionProvider
+import org.eclipse.xtext.LanguageInfo
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurationProvider
 
 /**
  * 
@@ -100,6 +104,19 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 				triggerCharacters = #["."]
 			]
 		]
+		result.supportedLanguages = newArrayList()
+		for (serviceProvider : languagesRegistry.extensionToFactoryMap.values.filter(IResourceServiceProvider).toSet) {
+		    val extensionProvider = serviceProvider.get(FileExtensionProvider)
+		    val langInfo = serviceProvider.get(LanguageInfo)
+		    val highlightingProvider = serviceProvider.get(IEditorHighlightingConfigurationProvider)
+		    val language = new LanguageDescriptionImpl => [
+		        fileExtensions = extensionProvider.fileExtensions.toList
+		        languageId = langInfo.languageName
+		        if (highlightingProvider !== null)
+		          highlightingConfiguration = highlightingProvider.getConfiguration(params.clientName)
+		    ]
+		    result.supportedLanguages.add(language)
+		}
 
 		requestManager.runWrite([ cancelIndicator |
 			val rootURI = URI.createFileURI(params.rootPath)
