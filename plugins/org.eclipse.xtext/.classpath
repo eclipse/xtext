@@ -11,5 +11,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="packrat"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
