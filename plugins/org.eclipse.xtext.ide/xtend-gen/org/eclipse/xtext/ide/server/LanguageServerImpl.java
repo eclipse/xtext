@@ -37,6 +37,7 @@ import io.typefox.lsapi.Hover;
 import io.typefox.lsapi.InitializeParams;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.InitializeResultImpl;
+import io.typefox.lsapi.LanguageDescriptionImpl;
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.MessageParams;
 import io.typefox.lsapi.Position;
@@ -67,14 +68,19 @@ import io.typefox.lsapi.services.WindowService;
 import io.typefox.lsapi.services.WorkspaceService;
 import io.typefox.lsapi.util.LsapiFactories;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurationProvider;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
@@ -83,6 +89,7 @@ import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -152,6 +159,35 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     };
     ServerCapabilitiesImpl _doubleArrow = ObjectExtensions.<ServerCapabilitiesImpl>operator_doubleArrow(_serverCapabilitiesImpl, _function);
     result.setCapabilities(_doubleArrow);
+    ArrayList<LanguageDescriptionImpl> _newArrayList = CollectionLiterals.<LanguageDescriptionImpl>newArrayList();
+    result.setSupportedLanguages(_newArrayList);
+    Map<String, Object> _extensionToFactoryMap = this.languagesRegistry.getExtensionToFactoryMap();
+    Collection<Object> _values = _extensionToFactoryMap.values();
+    Iterable<IResourceServiceProvider> _filter = Iterables.<IResourceServiceProvider>filter(_values, IResourceServiceProvider.class);
+    Set<IResourceServiceProvider> _set = IterableExtensions.<IResourceServiceProvider>toSet(_filter);
+    for (final IResourceServiceProvider serviceProvider : _set) {
+      {
+        final FileExtensionProvider extensionProvider = serviceProvider.<FileExtensionProvider>get(FileExtensionProvider.class);
+        final LanguageInfo langInfo = serviceProvider.<LanguageInfo>get(LanguageInfo.class);
+        final IEditorHighlightingConfigurationProvider highlightingProvider = serviceProvider.<IEditorHighlightingConfigurationProvider>get(IEditorHighlightingConfigurationProvider.class);
+        LanguageDescriptionImpl _languageDescriptionImpl = new LanguageDescriptionImpl();
+        final Procedure1<LanguageDescriptionImpl> _function_1 = (LanguageDescriptionImpl it) -> {
+          Set<String> _fileExtensions = extensionProvider.getFileExtensions();
+          List<String> _list = IterableExtensions.<String>toList(_fileExtensions);
+          it.setFileExtensions(_list);
+          String _languageName = langInfo.getLanguageName();
+          it.setLanguageId(_languageName);
+          if ((highlightingProvider != null)) {
+            String _clientName = params.getClientName();
+            String _configuration = highlightingProvider.getConfiguration(_clientName);
+            it.setHighlightingConfiguration(_configuration);
+          }
+        };
+        final LanguageDescriptionImpl language = ObjectExtensions.<LanguageDescriptionImpl>operator_doubleArrow(_languageDescriptionImpl, _function_1);
+        List<LanguageDescriptionImpl> _supportedLanguages = result.getSupportedLanguages();
+        _supportedLanguages.add(language);
+      }
+    }
     final Procedure1<CancelIndicator> _function_1 = (CancelIndicator cancelIndicator) -> {
       String _rootPath_1 = params.getRootPath();
       final URI rootURI = URI.createFileURI(_rootPath_1);
