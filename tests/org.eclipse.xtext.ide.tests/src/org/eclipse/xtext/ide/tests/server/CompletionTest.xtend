@@ -11,6 +11,7 @@ import io.typefox.lsapi.CompletionItem
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
 
+import static io.typefox.lsapi.util.LsapiFactories.*
 import static org.junit.Assert.*
 
 /**
@@ -67,7 +68,7 @@ class CompletionTest extends AbstractLanguageServerTest {
 		initialize
 		open(fileUri, model)
 
-		val completionItems = languageServer.completion(newPosition(fileUri, line, column))
+		val completionItems = languageServer.completion(newTextDocumentPositionParams(fileUri, line, column))
 
 		val actualCompletionItems = completionItems.get.items.toExpectation
 		assertEquals(expectedCompletionItems, actualCompletionItems)

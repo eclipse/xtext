@@ -50,7 +50,7 @@ class RequestManager {
 
 	/**
 	 * <p>
-	 * The given <i>write request</i> will be ran first when <i>all running requests</i> completed.
+	 * The given <i>write request</i> will be run first when <i>all running requests</i> completed.
 	 * </p>
 	 * <p>
 	 * Currently <i>running requests</i> will be cancelled.
@@ -85,7 +85,7 @@ class RequestManager {
 
 	/**
 	 * <p>
-	 * The given <i>read request</i> will be ran:
+	 * The given <i>read request</i> will be run:
 	 * <ul>
 	 * 	<li>concurrent with <i>running read requests</i>;</li>
 	 * 	<li>first when <i>running write requests</i> completed.</li>

@@ -11,6 +11,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
 
 import static org.junit.Assert.*
+import static io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -43,7 +44,7 @@ class DefinitionTest extends AbstractLanguageServerTest {
 		initialize
 		open(fileUri, model)
 
-		val definitions = languageServer.definition(newPosition(fileUri, line, column))
+		val definitions = languageServer.definition(newTextDocumentPositionParams(fileUri, line, column))
 		val actualDefinitions = definitions.get.toExpectation
 		assertEquals(expectedDefinitions, actualDefinitions)
 	}

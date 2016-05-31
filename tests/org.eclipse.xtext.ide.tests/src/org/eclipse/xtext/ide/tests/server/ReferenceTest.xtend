@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide.tests.server
 
 import io.typefox.lsapi.ReferenceContextImpl
-import io.typefox.lsapi.ReferenceParamsImpl
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
 
@@ -53,7 +52,6 @@ class ReferenceTest extends AbstractLanguageServerTest {
 			'''
 		]
 	}
-	
 
 	protected def void testReferences((ReferenceTestConfiguration)=>void configurator) {
 		val extension configuration = new ReferenceTestConfiguration
@@ -66,11 +64,7 @@ class ReferenceTest extends AbstractLanguageServerTest {
 
 		val referenceContext = new ReferenceContextImpl
 		referenceContext.includeDeclaration = includeDeclaration
-		val definitions = languageServer.references(new ReferenceParamsImpl => [
-			textDocument = fileUri.newIdentifier
-			position = newPosition(line, column)
-			context = referenceContext
-		])
+		val definitions = languageServer.references(newReferenceParams(fileUri, line, column, referenceContext))
 		val actualDefinitions = definitions.get.toExpectation
 		assertEquals(expectedReferences, actualDefinitions)
 	}

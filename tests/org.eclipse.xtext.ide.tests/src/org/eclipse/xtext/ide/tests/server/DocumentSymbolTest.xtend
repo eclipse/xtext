@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.DocumentSymbolParamsImpl
 import io.typefox.lsapi.SymbolInformation
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
 
 import static org.junit.Assert.*
+
+import static extension io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -66,9 +67,7 @@ class DocumentSymbolTest extends AbstractLanguageServerTest {
 		initialize
 		open(fileUri, model)
 
-		val symbols = languageServer.documentSymbol(new DocumentSymbolParamsImpl => [
-			textDocument = fileUri.newIdentifier
-		])
+		val symbols = languageServer.documentSymbol(fileUri.newDocumentSymbolParams)
 		val String actualSymbols = symbols.get.toExpectation
 		assertEquals(expectedSymbols, actualSymbols)
 	}
