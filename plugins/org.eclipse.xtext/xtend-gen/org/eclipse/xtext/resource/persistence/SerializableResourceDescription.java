@@ -45,48 +45,60 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class SerializableResourceDescription extends AbstractResourceDescription implements Externalizable {
   public static SerializableResourceDescription createCopy(final IResourceDescription desc) {
     SerializableResourceDescription _serializableResourceDescription = new SerializableResourceDescription();
-    final Procedure1<SerializableResourceDescription> _function = (SerializableResourceDescription it) -> {
-      URI _uRI = desc.getURI();
-      it.setURI(_uRI);
-      Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
-      final Function1<IEObjectDescription, SerializableEObjectDescription> _function_1 = (IEObjectDescription it_1) -> {
-        return SerializableResourceDescription.createCopy(it_1);
-      };
-      Iterable<SerializableEObjectDescription> _map = IterableExtensions.<IEObjectDescription, SerializableEObjectDescription>map(_exportedObjects, _function_1);
-      List<SerializableEObjectDescription> _list = IterableExtensions.<SerializableEObjectDescription>toList(_map);
-      it.descriptions = _list;
-      Iterable<IReferenceDescription> _referenceDescriptions = desc.getReferenceDescriptions();
-      final Function1<IReferenceDescription, SerializableReferenceDescription> _function_2 = (IReferenceDescription it_1) -> {
-        return SerializableResourceDescription.createCopy(it_1);
-      };
-      Iterable<SerializableReferenceDescription> _map_1 = IterableExtensions.<IReferenceDescription, SerializableReferenceDescription>map(_referenceDescriptions, _function_2);
-      List<SerializableReferenceDescription> _list_1 = IterableExtensions.<SerializableReferenceDescription>toList(_map_1);
-      it.references = _list_1;
-      Iterable<QualifiedName> _importedNames = desc.getImportedNames();
-      ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(((QualifiedName[])Conversions.unwrapArray(_importedNames, QualifiedName.class)));
-      it.importedNames = _newArrayList;
+    final Procedure1<SerializableResourceDescription> _function = new Procedure1<SerializableResourceDescription>() {
+      @Override
+      public void apply(final SerializableResourceDescription it) {
+        URI _uRI = desc.getURI();
+        it.setURI(_uRI);
+        Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
+        final Function1<IEObjectDescription, SerializableEObjectDescription> _function = new Function1<IEObjectDescription, SerializableEObjectDescription>() {
+          @Override
+          public SerializableEObjectDescription apply(final IEObjectDescription it) {
+            return SerializableResourceDescription.createCopy(it);
+          }
+        };
+        Iterable<SerializableEObjectDescription> _map = IterableExtensions.<IEObjectDescription, SerializableEObjectDescription>map(_exportedObjects, _function);
+        List<SerializableEObjectDescription> _list = IterableExtensions.<SerializableEObjectDescription>toList(_map);
+        it.descriptions = _list;
+        Iterable<IReferenceDescription> _referenceDescriptions = desc.getReferenceDescriptions();
+        final Function1<IReferenceDescription, SerializableReferenceDescription> _function_1 = new Function1<IReferenceDescription, SerializableReferenceDescription>() {
+          @Override
+          public SerializableReferenceDescription apply(final IReferenceDescription it) {
+            return SerializableResourceDescription.createCopy(it);
+          }
+        };
+        Iterable<SerializableReferenceDescription> _map_1 = IterableExtensions.<IReferenceDescription, SerializableReferenceDescription>map(_referenceDescriptions, _function_1);
+        List<SerializableReferenceDescription> _list_1 = IterableExtensions.<SerializableReferenceDescription>toList(_map_1);
+        it.references = _list_1;
+        Iterable<QualifiedName> _importedNames = desc.getImportedNames();
+        ArrayList<QualifiedName> _newArrayList = CollectionLiterals.<QualifiedName>newArrayList(((QualifiedName[])Conversions.unwrapArray(_importedNames, QualifiedName.class)));
+        it.importedNames = _newArrayList;
+      }
     };
     return ObjectExtensions.<SerializableResourceDescription>operator_doubleArrow(_serializableResourceDescription, _function);
   }
   
   private static SerializableEObjectDescription createCopy(final IEObjectDescription desc) {
     SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
-    final Procedure1<SerializableEObjectDescription> _function = (SerializableEObjectDescription it) -> {
-      EClass _eClass = desc.getEClass();
-      it.setEClass(_eClass);
-      URI _eObjectURI = desc.getEObjectURI();
-      it.setEObjectURI(_eObjectURI);
-      QualifiedName _qualifiedName = desc.getQualifiedName();
-      it.setQualifiedName(_qualifiedName);
-      String[] _userDataKeys = desc.getUserDataKeys();
-      int _size = ((List<String>)Conversions.doWrapArray(_userDataKeys)).size();
-      HashMap<String, String> _hashMap = new HashMap<String, String>(_size);
-      it.setUserData(_hashMap);
-      String[] _userDataKeys_1 = desc.getUserDataKeys();
-      for (final String key : _userDataKeys_1) {
-        HashMap<String, String> _userData = it.getUserData();
-        String _userData_1 = desc.getUserData(key);
-        _userData.put(key, _userData_1);
+    final Procedure1<SerializableEObjectDescription> _function = new Procedure1<SerializableEObjectDescription>() {
+      @Override
+      public void apply(final SerializableEObjectDescription it) {
+        EClass _eClass = desc.getEClass();
+        it.setEClass(_eClass);
+        URI _eObjectURI = desc.getEObjectURI();
+        it.setEObjectURI(_eObjectURI);
+        QualifiedName _qualifiedName = desc.getQualifiedName();
+        it.setQualifiedName(_qualifiedName);
+        String[] _userDataKeys = desc.getUserDataKeys();
+        int _size = ((List<String>)Conversions.doWrapArray(_userDataKeys)).size();
+        HashMap<String, String> _hashMap = new HashMap<String, String>(_size);
+        it.setUserData(_hashMap);
+        String[] _userDataKeys_1 = desc.getUserDataKeys();
+        for (final String key : _userDataKeys_1) {
+          HashMap<String, String> _userData = it.getUserData();
+          String _userData_1 = desc.getUserData(key);
+          _userData.put(key, _userData_1);
+        }
       }
     };
     return ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function);
@@ -94,17 +106,20 @@ public class SerializableResourceDescription extends AbstractResourceDescription
   
   private static SerializableReferenceDescription createCopy(final IReferenceDescription desc) {
     SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
-    final Procedure1<SerializableReferenceDescription> _function = (SerializableReferenceDescription it) -> {
-      URI _sourceEObjectUri = desc.getSourceEObjectUri();
-      it.setSourceEObjectUri(_sourceEObjectUri);
-      URI _targetEObjectUri = desc.getTargetEObjectUri();
-      it.setTargetEObjectUri(_targetEObjectUri);
-      EReference _eReference = desc.getEReference();
-      it.setEReference(_eReference);
-      int _indexInList = desc.getIndexInList();
-      it.setIndexInList(_indexInList);
-      URI _containerEObjectURI = desc.getContainerEObjectURI();
-      it.setContainerEObjectURI(_containerEObjectURI);
+    final Procedure1<SerializableReferenceDescription> _function = new Procedure1<SerializableReferenceDescription>() {
+      @Override
+      public void apply(final SerializableReferenceDescription it) {
+        URI _sourceEObjectUri = desc.getSourceEObjectUri();
+        it.setSourceEObjectUri(_sourceEObjectUri);
+        URI _targetEObjectUri = desc.getTargetEObjectUri();
+        it.setTargetEObjectUri(_targetEObjectUri);
+        EReference _eReference = desc.getEReference();
+        it.setEReference(_eReference);
+        int _indexInList = desc.getIndexInList();
+        it.setIndexInList(_indexInList);
+        URI _containerEObjectURI = desc.getContainerEObjectURI();
+        it.setContainerEObjectURI(_containerEObjectURI);
+      }
     };
     return ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription, _function);
   }

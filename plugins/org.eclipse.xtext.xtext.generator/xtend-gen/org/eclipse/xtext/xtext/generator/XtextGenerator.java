@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -229,13 +230,13 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   private void handleException(final Exception ex, final Issues issues) {
     if ((ex instanceof CompositeGeneratorException)) {
       List<Exception> _exceptions = ((CompositeGeneratorException)ex).getExceptions();
-      final Procedure1<Exception> _function = new Procedure1<Exception>() {
+      final Consumer<Exception> _function = new Consumer<Exception>() {
         @Override
-        public void apply(final Exception it) {
+        public void accept(final Exception it) {
           XtextGenerator.this.handleException(it, issues);
         }
       };
-      IterableExtensions.<Exception>forEach(_exceptions, _function);
+      _exceptions.forEach(_function);
     } else {
       issues.addError(this, "GeneratorException: ", null, ex, null);
     }

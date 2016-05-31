@@ -43,8 +43,11 @@ public class OutdatedStateManager {
     if ((rs instanceof XtextResourceSet)) {
       final boolean cancelationAllowed = (this.cancelationAllowed.get()).booleanValue();
       final int current = ((XtextResourceSet)rs).getModificationStamp();
-      final CancelIndicator _function = () -> {
-        return (cancelationAllowed && (((XtextResourceSet)rs).isOutdated() || (current != ((XtextResourceSet)rs).getModificationStamp())));
+      final CancelIndicator _function = new CancelIndicator() {
+        @Override
+        public boolean isCanceled() {
+          return (cancelationAllowed && (((XtextResourceSet)rs).isOutdated() || (current != ((XtextResourceSet)rs).getModificationStamp())));
+        }
       };
       return _function;
     } else {
@@ -77,8 +80,11 @@ public class OutdatedStateManager {
             if ((work instanceof CancelableUnitOfWork<?, ?>)) {
               CancelIndicator _xifexpression = null;
               if ((param == null)) {
-                final CancelIndicator _function = () -> {
-                  return true;
+                final CancelIndicator _function = new CancelIndicator() {
+                  @Override
+                  public boolean isCanceled() {
+                    return true;
+                  }
                 };
                 _xifexpression = _function;
               } else {

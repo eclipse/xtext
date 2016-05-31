@@ -21,24 +21,27 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class LogProcessor extends AbstractClassProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration cls, @Extension final TransformationContext context) {
-    final Procedure1<MutableFieldDeclaration> _function = (MutableFieldDeclaration it) -> {
-      it.setStatic(true);
-      it.setFinal(true);
-      TypeReference _newTypeReference = context.newTypeReference(Logger.class);
-      it.setType(_newTypeReference);
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append(Logger.class, "");
-          _builder.append(".getLogger(");
-          String _simpleName = cls.getSimpleName();
-          _builder.append(_simpleName, "");
-          _builder.append(".class)");
-          _builder.newLineIfNotEmpty();
-        }
-      };
-      it.setInitializer(_client);
-      context.setPrimarySourceElement(it, cls);
+    final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+      @Override
+      public void apply(final MutableFieldDeclaration it) {
+        it.setStatic(true);
+        it.setFinal(true);
+        TypeReference _newTypeReference = context.newTypeReference(Logger.class);
+        it.setType(_newTypeReference);
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append(Logger.class, "");
+            _builder.append(".getLogger(");
+            String _simpleName = cls.getSimpleName();
+            _builder.append(_simpleName, "");
+            _builder.append(".class)");
+            _builder.newLineIfNotEmpty();
+          }
+        };
+        it.setInitializer(_client);
+        context.setPrimarySourceElement(it, cls);
+      }
     };
     cls.addField("LOG", _function);
   }

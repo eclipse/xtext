@@ -81,14 +81,17 @@ public class IdeCrossrefProposalProvider {
   protected ContentAssistEntry createProposal(final IEObjectDescription candidate, final CrossReference crossRef, final ContentAssistContext context) {
     QualifiedName _name = candidate.getName();
     String _string = this.qualifiedNameConverter.toString(_name);
-    final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry it) -> {
-      it.setSource(candidate);
-      EClass _eClass = candidate.getEClass();
-      String _name_1 = null;
-      if (_eClass!=null) {
-        _name_1=_eClass.getName();
+    final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
+      @Override
+      public void apply(final ContentAssistEntry it) {
+        it.setSource(candidate);
+        EClass _eClass = candidate.getEClass();
+        String _name = null;
+        if (_eClass!=null) {
+          _name=_eClass.getName();
+        }
+        it.setDescription(_name);
       }
-      it.setDescription(_name_1);
     };
     return this.proposalCreator.createProposal(_string, context, _function);
   }

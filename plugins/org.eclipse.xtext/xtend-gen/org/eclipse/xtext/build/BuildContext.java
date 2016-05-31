@@ -51,9 +51,12 @@ public class BuildContext {
       ClusteringStorageAwareResourceLoader _clusteringStorageAwareResourceLoader = new ClusteringStorageAwareResourceLoader(this);
       this.loader = _clusteringStorageAwareResourceLoader;
     }
-    final Function1<URI, Boolean> _function = (URI it) -> {
-      IResourceServiceProvider _resourceServiceProvider = this.getResourceServiceProvider(it);
-      return Boolean.valueOf((!Objects.equal(_resourceServiceProvider, null)));
+    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+      @Override
+      public Boolean apply(final URI it) {
+        IResourceServiceProvider _resourceServiceProvider = BuildContext.this.getResourceServiceProvider(it);
+        return Boolean.valueOf((!Objects.equal(_resourceServiceProvider, null)));
+      }
     };
     Iterable<URI> _filter = IterableExtensions.<URI>filter(uri, _function);
     return this.loader.<T>executeClustered(_filter, operation);

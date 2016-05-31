@@ -135,9 +135,12 @@ public class FlattenedGrammarAccess {
         copy.setDefinesHiddenTokens(true);
         EList<AbstractRule> _hiddenTokens = copy.getHiddenTokens();
         EList<AbstractRule> _hiddenTokens_1 = orig.getHiddenTokens();
-        final Function1<AbstractRule, AbstractRule> _function = (AbstractRule hidden) -> {
-          RuleWithParameterValues _ruleWithParameterValues = new RuleWithParameterValues(hidden);
-          return origToCopy.get(_ruleWithParameterValues);
+        final Function1<AbstractRule, AbstractRule> _function = new Function1<AbstractRule, AbstractRule>() {
+          @Override
+          public AbstractRule apply(final AbstractRule hidden) {
+            RuleWithParameterValues _ruleWithParameterValues = new RuleWithParameterValues(hidden);
+            return origToCopy.get(_ruleWithParameterValues);
+          }
         };
         List<AbstractRule> _map = ListExtensions.<AbstractRule, AbstractRule>map(_hiddenTokens_1, _function);
         Iterables.<AbstractRule>addAll(_hiddenTokens, _map);
@@ -147,25 +150,37 @@ public class FlattenedGrammarAccess {
   
   private void markAsFragment(final Multimap<TerminalRule, AbstractRule> calledFrom) {
     Set<TerminalRule> _keySet = calledFrom.keySet();
-    final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
-      boolean _isFragment = it.isFragment();
-      return Boolean.valueOf((!_isFragment));
+    final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+      @Override
+      public Boolean apply(final TerminalRule it) {
+        boolean _isFragment = it.isFragment();
+        return Boolean.valueOf((!_isFragment));
+      }
     };
     Iterable<TerminalRule> _filter = IterableExtensions.<TerminalRule>filter(_keySet, _function);
-    final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
-      Collection<AbstractRule> _get = calledFrom.get(it);
-      return Boolean.valueOf(this.allAreTerminalRules(_get));
+    final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
+      @Override
+      public Boolean apply(final TerminalRule it) {
+        Collection<AbstractRule> _get = calledFrom.get(it);
+        return Boolean.valueOf(FlattenedGrammarAccess.this.allAreTerminalRules(_get));
+      }
     };
     Iterable<TerminalRule> _filter_1 = IterableExtensions.<TerminalRule>filter(_filter, _function_1);
-    final Function1<TerminalRule, Boolean> _function_2 = (TerminalRule it) -> {
-      EObject _eContainer = it.eContainer();
-      EList<AbstractRule> _hiddenTokens = ((Grammar) _eContainer).getHiddenTokens();
-      boolean _contains = _hiddenTokens.contains(it);
-      return Boolean.valueOf((!_contains));
+    final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
+      @Override
+      public Boolean apply(final TerminalRule it) {
+        EObject _eContainer = it.eContainer();
+        EList<AbstractRule> _hiddenTokens = ((Grammar) _eContainer).getHiddenTokens();
+        boolean _contains = _hiddenTokens.contains(it);
+        return Boolean.valueOf((!_contains));
+      }
     };
     Iterable<TerminalRule> _filter_2 = IterableExtensions.<TerminalRule>filter(_filter_1, _function_2);
-    final Consumer<TerminalRule> _function_3 = (TerminalRule it) -> {
-      it.setFragment(true);
+    final Consumer<TerminalRule> _function_3 = new Consumer<TerminalRule>() {
+      @Override
+      public void accept(final TerminalRule it) {
+        it.setFragment(true);
+      }
     };
     _filter_2.forEach(_function_3);
   }
@@ -214,13 +229,19 @@ public class FlattenedGrammarAccess {
               return Collections.<Parameter>emptySet();
             }
             EList<NamedArgument> _arguments_1 = origRuleCall.getArguments();
-            final Function1<NamedArgument, Boolean> _function = (NamedArgument it) -> {
-              Condition _value = it.getValue();
-              return Boolean.valueOf(this.evaluate(_value));
+            final Function1<NamedArgument, Boolean> _function = new Function1<NamedArgument, Boolean>() {
+              @Override
+              public Boolean apply(final NamedArgument it) {
+                Condition _value = it.getValue();
+                return Boolean.valueOf(_this__FlattenedGrammarAccess_1.evaluate(_value));
+              }
             };
             Iterable<NamedArgument> _filter = IterableExtensions.<NamedArgument>filter(_arguments_1, _function);
-            final Function1<NamedArgument, Parameter> _function_1 = (NamedArgument it) -> {
-              return it.getParameter();
+            final Function1<NamedArgument, Parameter> _function_1 = new Function1<NamedArgument, Parameter>() {
+              @Override
+              public Parameter apply(final NamedArgument it) {
+                return it.getParameter();
+              }
             };
             Iterable<Parameter> _map = IterableExtensions.<NamedArgument, Parameter>map(_filter, _function_1);
             Set<Parameter> result = IterableExtensions.<Parameter>toSet(_map);
@@ -414,23 +435,26 @@ public class FlattenedGrammarAccess {
           } else {
             ImmutableSet<Parameter> _copyOf = ImmutableSet.<Parameter>copyOf(params);
             Set<Set<Parameter>> _powerSet = Sets.<Parameter>powerSet(_copyOf);
-            final Procedure2<Set<Parameter>, Integer> _function = (Set<Parameter> parameterConfig, Integer i) -> {
-              RuleWithParameterValues parameterValues = new RuleWithParameterValues(rule, parameterConfig);
-              ParserRule copy_1 = this.<ParserRule>copy(((ParserRule)rule));
-              String _antlrRuleName = names.getAntlrRuleName(rule, (i).intValue());
-              copy_1.setName(_antlrRuleName);
-              boolean _isFragment_1 = ((ParserRule)rule).isFragment();
-              copy_1.setFragment(_isFragment_1);
-              boolean _isWildcard_1 = ((ParserRule)rule).isWildcard();
-              copy_1.setWildcard(_isWildcard_1);
-              if ((!discardTypeRef)) {
-                TypeRef _type_1 = ((ParserRule)rule).getType();
-                TypeRef _copyTypeRef_1 = this.copyTypeRef(_type_1);
-                copy_1.setType(_copyTypeRef_1);
+            final Procedure2<Set<Parameter>, Integer> _function = new Procedure2<Set<Parameter>, Integer>() {
+              @Override
+              public void apply(final Set<Parameter> parameterConfig, final Integer i) {
+                RuleWithParameterValues parameterValues = new RuleWithParameterValues(rule, parameterConfig);
+                ParserRule copy = FlattenedGrammarAccess.this.<ParserRule>copy(((ParserRule)rule));
+                String _antlrRuleName = names.getAntlrRuleName(rule, (i).intValue());
+                copy.setName(_antlrRuleName);
+                boolean _isFragment = ((ParserRule)rule).isFragment();
+                copy.setFragment(_isFragment);
+                boolean _isWildcard = ((ParserRule)rule).isWildcard();
+                copy.setWildcard(_isWildcard);
+                if ((!discardTypeRef)) {
+                  TypeRef _type = ((ParserRule)rule).getType();
+                  TypeRef _copyTypeRef = FlattenedGrammarAccess.this.copyTypeRef(_type);
+                  copy.setType(_copyTypeRef);
+                }
+                origToCopy.put(parameterValues, copy);
+                parameterValues.attachToEmfObject(copy);
+                result.add(copy);
               }
-              origToCopy.put(parameterValues, copy_1);
-              parameterValues.attachToEmfObject(copy_1);
-              result.add(copy_1);
             };
             IterableExtensions.<Set<Parameter>>forEach(_powerSet, _function);
           }
@@ -472,8 +496,11 @@ public class FlattenedGrammarAccess {
   }
   
   private boolean allAreTerminalRules(final Collection<AbstractRule> callers) {
-    final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
-      return Boolean.valueOf((it instanceof TerminalRule));
+    final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+      @Override
+      public Boolean apply(final AbstractRule it) {
+        return Boolean.valueOf((it instanceof TerminalRule));
+      }
     };
     return IterableExtensions.<AbstractRule>forall(callers, _function);
   }

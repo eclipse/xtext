@@ -2,13 +2,13 @@ package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.collect.Iterables;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
@@ -54,14 +54,14 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
     CharSequence _xblockexpression = null;
     {
       Iterable<IClassAnnotation> _classAnnotations = this.getClassAnnotations();
-      final Procedure1<IClassAnnotation> _function = new Procedure1<IClassAnnotation>() {
+      final Consumer<IClassAnnotation> _function = new Consumer<IClassAnnotation>() {
         @Override
-        public void apply(final IClassAnnotation it) {
+        public void accept(final IClassAnnotation it) {
           TypeReference _annotationImport = it.getAnnotationImport();
           GeneratedJavaFileAccess.this.importType(_annotationImport);
         }
       };
-      IterableExtensions.<IClassAnnotation>forEach(_classAnnotations, _function);
+      _classAnnotations.forEach(_function);
       _xblockexpression = super.getContent();
     }
     return _xblockexpression;

@@ -81,8 +81,11 @@ public class DefaultTaskFinder implements ITaskFinder {
   
   protected List<Task> findTasks(final ICompositeNode it, final TaskTags taskTags) {
     Iterable<ILeafNode> _leafNodes = it.getLeafNodes();
-    final Function1<ILeafNode, List<Task>> _function = (ILeafNode it_1) -> {
-      return this.findTasks(it_1, taskTags);
+    final Function1<ILeafNode, List<Task>> _function = new Function1<ILeafNode, List<Task>>() {
+      @Override
+      public List<Task> apply(final ILeafNode it) {
+        return DefaultTaskFinder.this.findTasks(it, taskTags);
+      }
     };
     Iterable<List<Task>> _map = IterableExtensions.<ILeafNode, List<Task>>map(_leafNodes, _function);
     Iterable<Task> _flatten = Iterables.<Task>concat(_map);
@@ -94,16 +97,19 @@ public class DefaultTaskFinder implements ITaskFinder {
     if (_canContainTaskTags) {
       String _text = node.getText();
       final List<Task> tasks = this.parser.parseTasks(_text, taskTags);
-      final Consumer<Task> _function = (Task it) -> {
-        int _offset = it.getOffset();
-        int _offset_1 = node.getOffset();
-        int _plus = (_offset + _offset_1);
-        it.setOffset(_plus);
-        int _lineNumber = it.getLineNumber();
-        int _startLine = node.getStartLine();
-        int _plus_1 = (_lineNumber + _startLine);
-        int _minus = (_plus_1 - 1);
-        it.setLineNumber(_minus);
+      final Consumer<Task> _function = new Consumer<Task>() {
+        @Override
+        public void accept(final Task it) {
+          int _offset = it.getOffset();
+          int _offset_1 = node.getOffset();
+          int _plus = (_offset + _offset_1);
+          it.setOffset(_plus);
+          int _lineNumber = it.getLineNumber();
+          int _startLine = node.getStartLine();
+          int _plus_1 = (_lineNumber + _startLine);
+          int _minus = (_plus_1 - 1);
+          it.setLineNumber(_minus);
+        }
       };
       tasks.forEach(_function);
       return tasks;

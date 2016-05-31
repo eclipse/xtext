@@ -72,19 +72,28 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   private TraceFileNameProvider traceFileNameProvider;
   
   @Accessors
-  private URIBasedFileSystemAccess.BeforeDelete beforeDelete = ((URIBasedFileSystemAccess.BeforeDelete) (URI it) -> {
-    return true;
-  });
+  private URIBasedFileSystemAccess.BeforeDelete beforeDelete = new URIBasedFileSystemAccess.BeforeDelete() {
+    @Override
+    public boolean beforeDelete(final URI it) {
+      return true;
+    }
+  };
   
   @Accessors
-  private URIBasedFileSystemAccess.BeforeWrite beforeWrite = ((URIBasedFileSystemAccess.BeforeWrite) (URI $0, String $1, InputStream $2) -> {
-    return $2;
-  });
+  private URIBasedFileSystemAccess.BeforeWrite beforeWrite = new URIBasedFileSystemAccess.BeforeWrite() {
+    @Override
+    public InputStream beforeWrite(final URI $0, final String $1, final InputStream $2) {
+      return $2;
+    }
+  };
   
   @Accessors
-  private URIBasedFileSystemAccess.BeforeRead beforeRead = ((URIBasedFileSystemAccess.BeforeRead) (URI $0, InputStream $1) -> {
-    return $1;
-  });
+  private URIBasedFileSystemAccess.BeforeRead beforeRead = new URIBasedFileSystemAccess.BeforeRead() {
+    @Override
+    public InputStream beforeRead(final URI $0, final InputStream $1) {
+      return $1;
+    }
+  };
   
   @Override
   public void setPostProcessor(final IFilePostProcessor filePostProcessor) {

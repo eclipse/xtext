@@ -69,8 +69,11 @@ public class Source2GeneratedMapping implements Externalizable {
   public Set<URI> deleteSource(final URI source) {
     Collection<URI> _removeAll = this.source2generated.removeAll(source);
     final HashSet<URI> generated = new HashSet<URI>(_removeAll);
-    final Consumer<URI> _function = (URI it) -> {
-      this.generated2source.remove(it, source);
+    final Consumer<URI> _function = new Consumer<URI>() {
+      @Override
+      public void accept(final URI it) {
+        Source2GeneratedMapping.this.generated2source.remove(it, source);
+      }
     };
     generated.forEach(_function);
     return generated;
@@ -78,8 +81,11 @@ public class Source2GeneratedMapping implements Externalizable {
   
   public void deleteGenerated(final URI generated) {
     Collection<URI> _removeAll = this.generated2source.removeAll(generated);
-    final Consumer<URI> _function = (URI it) -> {
-      this.source2generated.remove(it, generated);
+    final Consumer<URI> _function = new Consumer<URI>() {
+      @Override
+      public void accept(final URI it) {
+        Source2GeneratedMapping.this.source2generated.remove(it, generated);
+      }
     };
     _removeAll.forEach(_function);
     this.generated2OutputConfigName.remove(generated);
@@ -132,34 +138,40 @@ public class Source2GeneratedMapping implements Externalizable {
     final Set<Map.Entry<URI, Collection<URI>>> entries = _asMap.entrySet();
     int _size = entries.size();
     out.writeInt(_size);
-    final Consumer<Map.Entry<URI, Collection<URI>>> _function = (Map.Entry<URI, Collection<URI>> it) -> {
-      try {
-        URI _key = it.getKey();
-        String _string = _key.toString();
-        out.writeUTF(_string);
-        Collection<URI> _value = it.getValue();
-        int _size_1 = _value.size();
-        out.writeInt(_size_1);
-        Collection<URI> _value_1 = it.getValue();
-        final Consumer<URI> _function_1 = (URI it_1) -> {
-          try {
-            String _string_1 = it_1.toString();
-            out.writeUTF(_string_1);
-            String _elvis = null;
-            String _get = this.generated2OutputConfigName.get(it_1);
-            if (_get != null) {
-              _elvis = _get;
-            } else {
-              _elvis = IFileSystemAccess.DEFAULT_OUTPUT;
+    final Consumer<Map.Entry<URI, Collection<URI>>> _function = new Consumer<Map.Entry<URI, Collection<URI>>>() {
+      @Override
+      public void accept(final Map.Entry<URI, Collection<URI>> it) {
+        try {
+          URI _key = it.getKey();
+          String _string = _key.toString();
+          out.writeUTF(_string);
+          Collection<URI> _value = it.getValue();
+          int _size = _value.size();
+          out.writeInt(_size);
+          Collection<URI> _value_1 = it.getValue();
+          final Consumer<URI> _function = new Consumer<URI>() {
+            @Override
+            public void accept(final URI it) {
+              try {
+                String _string = it.toString();
+                out.writeUTF(_string);
+                String _elvis = null;
+                String _get = Source2GeneratedMapping.this.generated2OutputConfigName.get(it);
+                if (_get != null) {
+                  _elvis = _get;
+                } else {
+                  _elvis = IFileSystemAccess.DEFAULT_OUTPUT;
+                }
+                out.writeUTF(_elvis);
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
+              }
             }
-            out.writeUTF(_elvis);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        };
-        _value_1.forEach(_function_1);
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
+          };
+          _value_1.forEach(_function);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
       }
     };
     entries.forEach(_function);

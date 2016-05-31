@@ -71,29 +71,38 @@ public class RequestManager {
    * </p>
    */
   public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest, final CancelIndicator cancelIndicator) {
-    final Consumer<CancellableIndicator> _function = (CancellableIndicator it) -> {
-      it.cancel();
+    final Consumer<CancellableIndicator> _function = new Consumer<CancellableIndicator>() {
+      @Override
+      public void accept(final CancellableIndicator it) {
+        it.cancel();
+      }
     };
     this.cancelIndicators.forEach(_function);
     if ((cancelIndicator instanceof CancellableIndicator)) {
       this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
     }
-    final Runnable _function_1 = () -> {
-      try {
-        this.semaphore.acquire(this.MAX_PERMITS);
+    final Runnable _function_1 = new Runnable() {
+      @Override
+      public void run() {
         try {
-          writeRequest.apply(cancelIndicator);
-        } finally {
-          this.semaphore.release(this.MAX_PERMITS);
+          RequestManager.this.semaphore.acquire(RequestManager.this.MAX_PERMITS);
+          try {
+            writeRequest.apply(cancelIndicator);
+          } finally {
+            RequestManager.this.semaphore.release(RequestManager.this.MAX_PERMITS);
+          }
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
       }
     };
     CompletableFuture<Void> _runAsync = CompletableFuture.runAsync(_function_1, this.writeExecutorService);
-    final BiConsumer<Void, Throwable> _function_2 = (Void $0, Throwable $1) -> {
-      if ((cancelIndicator instanceof CancellableIndicator)) {
-        this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+    final BiConsumer<Void, Throwable> _function_2 = new BiConsumer<Void, Throwable>() {
+      @Override
+      public void accept(final Void $0, final Throwable $1) {
+        if ((cancelIndicator instanceof CancellableIndicator)) {
+          RequestManager.this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+        }
       }
     };
     return _runAsync.whenComplete(_function_2);
@@ -121,22 +130,28 @@ public class RequestManager {
     if ((cancelIndicator instanceof CancellableIndicator)) {
       this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
     }
-    final Supplier<V> _function = () -> {
-      try {
-        this.semaphore.acquire(1);
+    final Supplier<V> _function = new Supplier<V>() {
+      @Override
+      public V get() {
         try {
-          return readRequest.apply(cancelIndicator);
-        } finally {
-          this.semaphore.release(1);
+          RequestManager.this.semaphore.acquire(1);
+          try {
+            return readRequest.apply(cancelIndicator);
+          } finally {
+            RequestManager.this.semaphore.release(1);
+          }
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
       }
     };
     CompletableFuture<V> _supplyAsync = CompletableFuture.<V>supplyAsync(_function, this.readExecutorService);
-    final BiConsumer<V, Throwable> _function_1 = (V $0, Throwable $1) -> {
-      if ((cancelIndicator instanceof CancellableIndicator)) {
-        this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+    final BiConsumer<V, Throwable> _function_1 = new BiConsumer<V, Throwable>() {
+      @Override
+      public void accept(final V $0, final Throwable $1) {
+        if ((cancelIndicator instanceof CancellableIndicator)) {
+          RequestManager.this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+        }
       }
     };
     return _supplyAsync.whenComplete(_function_1);

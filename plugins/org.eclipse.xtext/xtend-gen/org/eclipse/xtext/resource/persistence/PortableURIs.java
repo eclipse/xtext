@@ -263,15 +263,18 @@ public class PortableURIs {
       return null;
     }
     Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
-    final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
-      boolean _xblockexpression = false;
-      {
-        EObject _eObjectOrProxy = it.getEObjectOrProxy();
-        Resource _eResource_2 = obj.eResource();
-        final EObject possibleContainer = EcoreUtil.resolve(_eObjectOrProxy, _eResource_2);
-        _xblockexpression = (Objects.equal(obj, possibleContainer) || EcoreUtil.isAncestor(obj, possibleContainer));
+    final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
+      public Boolean apply(final IEObjectDescription it) {
+        boolean _xblockexpression = false;
+        {
+          EObject _eObjectOrProxy = it.getEObjectOrProxy();
+          Resource _eResource = obj.eResource();
+          final EObject possibleContainer = EcoreUtil.resolve(_eObjectOrProxy, _eResource);
+          _xblockexpression = (Objects.equal(obj, possibleContainer) || EcoreUtil.isAncestor(obj, possibleContainer));
+        }
+        return Boolean.valueOf(_xblockexpression);
       }
-      return Boolean.valueOf(_xblockexpression);
     };
     final IEObjectDescription containerDesc = IterableExtensions.<IEObjectDescription>findFirst(_exportedObjects, _function);
     boolean _notEquals = (!Objects.equal(containerDesc, null));
@@ -405,8 +408,11 @@ public class PortableURIs {
     }
     Splitter _on = Splitter.on("/");
     final Iterable<String> splitted = _on.split(toFragment);
-    final Function2<EObject, String, EObject> _function = (EObject $0, String $1) -> {
-      return ((InternalEObject) $0).eObjectForURIFragmentSegment($1);
+    final Function2<EObject, String, EObject> _function = new Function2<EObject, String, EObject>() {
+      @Override
+      public EObject apply(final EObject $0, final String $1) {
+        return ((InternalEObject) $0).eObjectForURIFragmentSegment($1);
+      }
     };
     return IterableExtensions.<String, EObject>fold(splitted, from, _function);
   }

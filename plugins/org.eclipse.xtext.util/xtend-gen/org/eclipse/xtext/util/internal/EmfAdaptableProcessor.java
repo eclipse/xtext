@@ -37,168 +37,189 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     String _adapterClassName = this.getAdapterClassName(annotatedClass);
     final MutableClassDeclaration adapterClass = context.findClass(_adapterClassName);
-    final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-      TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
-      it.addParameter("emfObject", _newTypeReference);
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.setReturnType(_newTypeReference_1);
-      it.setStatic(true);
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("for (");
-          _builder.append(Adapter.class, "");
-          _builder.append(" adapter : emfObject.eAdapters()) {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("if (adapter instanceof ");
-          _builder.append(adapterClass, "\t");
-          _builder.append(") {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("return ((");
-          _builder.append(adapterClass, "\t\t");
-          _builder.append(") adapter).get();");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("return null;");
-          _builder.newLine();
-        }
-      };
-      it.setBody(_client);
+    final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+      @Override
+      public void apply(final MutableMethodDeclaration it) {
+        TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
+        it.addParameter("emfObject", _newTypeReference);
+        TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
+        it.setReturnType(_newTypeReference_1);
+        it.setStatic(true);
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("for (");
+            _builder.append(Adapter.class, "");
+            _builder.append(" adapter : emfObject.eAdapters()) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("if (adapter instanceof ");
+            _builder.append(adapterClass, "\t");
+            _builder.append(") {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("return ((");
+            _builder.append(adapterClass, "\t\t");
+            _builder.append(") adapter).get();");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("return null;");
+            _builder.newLine();
+          }
+        };
+        it.setBody(_client);
+      }
     };
     annotatedClass.addMethod("findInEmfObject", _function);
-    final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
-      TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
-      it.addParameter("emfObject", _newTypeReference);
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.setReturnType(_newTypeReference_1);
-      it.setStatic(true);
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append(List.class, "");
-          _builder.append("<");
-          _builder.append(Adapter.class, "");
-          _builder.append("> adapters = emfObject.eAdapters();");
-          _builder.newLineIfNotEmpty();
-          _builder.append("for(int i = 0, max = adapters.size(); i < max; i++) {");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append(Adapter.class, "\t");
-          _builder.append(" adapter = adapters.get(i);");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("if (adapter instanceof ");
-          _builder.append(adapterClass, "\t");
-          _builder.append(") {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("emfObject.eAdapters().remove(i);");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("return ((");
-          _builder.append(adapterClass, "\t\t");
-          _builder.append(") adapter).get();");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
-          _builder.append("return null;");
-          _builder.newLine();
-        }
-      };
-      it.setBody(_client);
+    final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
+      public void apply(final MutableMethodDeclaration it) {
+        TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
+        it.addParameter("emfObject", _newTypeReference);
+        TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
+        it.setReturnType(_newTypeReference_1);
+        it.setStatic(true);
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append(List.class, "");
+            _builder.append("<");
+            _builder.append(Adapter.class, "");
+            _builder.append("> adapters = emfObject.eAdapters();");
+            _builder.newLineIfNotEmpty();
+            _builder.append("for(int i = 0, max = adapters.size(); i < max; i++) {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append(Adapter.class, "\t");
+            _builder.append(" adapter = adapters.get(i);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("if (adapter instanceof ");
+            _builder.append(adapterClass, "\t");
+            _builder.append(") {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("emfObject.eAdapters().remove(i);");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("return ((");
+            _builder.append(adapterClass, "\t\t");
+            _builder.append(") adapter).get();");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("return null;");
+            _builder.newLine();
+          }
+        };
+        it.setBody(_client);
+      }
     };
     annotatedClass.addMethod("removeFromEmfObject", _function_1);
-    final Procedure1<MutableMethodDeclaration> _function_2 = (MutableMethodDeclaration it) -> {
-      TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
-      it.addParameter("emfObject", _newTypeReference);
-      TypeReference _primitiveVoid = context.getPrimitiveVoid();
-      it.setReturnType(_primitiveVoid);
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          String _simpleName = annotatedClass.getSimpleName();
-          _builder.append(_simpleName, "");
-          _builder.append(" result = findInEmfObject(emfObject);");
-          _builder.newLineIfNotEmpty();
-          _builder.append("if (result != null)");
-          _builder.newLine();
-          _builder.append("\t");
-          _builder.append("throw new IllegalStateException(\"The given EMF object already contains an adapter for ");
-          String _simpleName_1 = annotatedClass.getSimpleName();
-          _builder.append(_simpleName_1, "\t");
-          _builder.append("\");");
-          _builder.newLineIfNotEmpty();
-          _builder.append(adapterClass, "");
-          _builder.append(" adapter = new ");
-          _builder.append(adapterClass, "");
-          _builder.append("(this);");
-          _builder.newLineIfNotEmpty();
-          _builder.append("emfObject.eAdapters().add(adapter);");
-          _builder.newLine();
-        }
-      };
-      it.setBody(_client);
+    final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
+      public void apply(final MutableMethodDeclaration it) {
+        TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
+        it.addParameter("emfObject", _newTypeReference);
+        TypeReference _primitiveVoid = context.getPrimitiveVoid();
+        it.setReturnType(_primitiveVoid);
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            String _simpleName = annotatedClass.getSimpleName();
+            _builder.append(_simpleName, "");
+            _builder.append(" result = findInEmfObject(emfObject);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("if (result != null)");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("throw new IllegalStateException(\"The given EMF object already contains an adapter for ");
+            String _simpleName_1 = annotatedClass.getSimpleName();
+            _builder.append(_simpleName_1, "\t");
+            _builder.append("\");");
+            _builder.newLineIfNotEmpty();
+            _builder.append(adapterClass, "");
+            _builder.append(" adapter = new ");
+            _builder.append(adapterClass, "");
+            _builder.append("(this);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("emfObject.eAdapters().add(adapter);");
+            _builder.newLine();
+          }
+        };
+        it.setBody(_client);
+      }
     };
     annotatedClass.addMethod("attachToEmfObject", _function_2);
     TypeReference _newTypeReference = context.newTypeReference(AdapterImpl.class);
     adapterClass.setExtendedClass(_newTypeReference);
-    final Procedure1<MutableFieldDeclaration> _function_3 = (MutableFieldDeclaration it) -> {
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.setType(_newTypeReference_1);
+    final Procedure1<MutableFieldDeclaration> _function_3 = new Procedure1<MutableFieldDeclaration>() {
+      @Override
+      public void apply(final MutableFieldDeclaration it) {
+        TypeReference _newTypeReference = context.newTypeReference(annotatedClass);
+        it.setType(_newTypeReference);
+      }
     };
     adapterClass.addField("element", _function_3);
-    final Procedure1<MutableConstructorDeclaration> _function_4 = (MutableConstructorDeclaration it) -> {
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.addParameter("element", _newTypeReference_1);
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("this.element = element;");
-          _builder.newLine();
-        }
-      };
-      it.setBody(_client);
+    final Procedure1<MutableConstructorDeclaration> _function_4 = new Procedure1<MutableConstructorDeclaration>() {
+      @Override
+      public void apply(final MutableConstructorDeclaration it) {
+        TypeReference _newTypeReference = context.newTypeReference(annotatedClass);
+        it.addParameter("element", _newTypeReference);
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("this.element = element;");
+            _builder.newLine();
+          }
+        };
+        it.setBody(_client);
+      }
     };
     adapterClass.addConstructor(_function_4);
-    final Procedure1<MutableMethodDeclaration> _function_5 = (MutableMethodDeclaration it) -> {
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.setReturnType(_newTypeReference_1);
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("return this.element;");
-          _builder.newLine();
-        }
-      };
-      it.setBody(_client);
+    final Procedure1<MutableMethodDeclaration> _function_5 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
+      public void apply(final MutableMethodDeclaration it) {
+        TypeReference _newTypeReference = context.newTypeReference(annotatedClass);
+        it.setReturnType(_newTypeReference);
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("return this.element;");
+            _builder.newLine();
+          }
+        };
+        it.setBody(_client);
+      }
     };
     adapterClass.addMethod("get", _function_5);
-    final Procedure1<MutableMethodDeclaration> _function_6 = (MutableMethodDeclaration it) -> {
-      AnnotationReference _newAnnotationReference = context.newAnnotationReference(Override.class);
-      it.addAnnotation(_newAnnotationReference);
-      TypeReference _newTypeReference_1 = context.newTypeReference(Object.class);
-      it.addParameter("object", _newTypeReference_1);
-      TypeReference _primitiveBoolean = context.getPrimitiveBoolean();
-      it.setReturnType(_primitiveBoolean);
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("return object == ");
-          _builder.append(annotatedClass, "");
-          _builder.append(".class;");
-          _builder.newLineIfNotEmpty();
-        }
-      };
-      it.setBody(_client);
+    final Procedure1<MutableMethodDeclaration> _function_6 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
+      public void apply(final MutableMethodDeclaration it) {
+        AnnotationReference _newAnnotationReference = context.newAnnotationReference(Override.class);
+        it.addAnnotation(_newAnnotationReference);
+        TypeReference _newTypeReference = context.newTypeReference(Object.class);
+        it.addParameter("object", _newTypeReference);
+        TypeReference _primitiveBoolean = context.getPrimitiveBoolean();
+        it.setReturnType(_primitiveBoolean);
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("return object == ");
+            _builder.append(annotatedClass, "");
+            _builder.append(".class;");
+            _builder.newLineIfNotEmpty();
+          }
+        };
+        it.setBody(_client);
+      }
     };
     adapterClass.addMethod("isAdapterForType", _function_6);
   }

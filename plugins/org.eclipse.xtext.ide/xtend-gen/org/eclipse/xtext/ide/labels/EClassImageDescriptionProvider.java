@@ -31,8 +31,11 @@ public class EClassImageDescriptionProvider implements IImageDescriptionProvider
       _matched=true;
       String _name = ((EClass)element).getName();
       EList<EClass> _eAllSuperTypes = ((EClass)element).getEAllSuperTypes();
-      final Function1<EClass, String> _function = (EClass it) -> {
-        return it.getName();
+      final Function1<EClass, String> _function = new Function1<EClass, String>() {
+        @Override
+        public String apply(final EClass it) {
+          return it.getName();
+        }
       };
       List<String> _map = ListExtensions.<EClass, String>map(_eAllSuperTypes, _function);
       Iterable<String> _plus = Iterables.<String>concat(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_name)), _map);

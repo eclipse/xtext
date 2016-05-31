@@ -38,8 +38,11 @@ public class ServerLauncher {
   private static boolean IS_DEBUG = false;
   
   public static void main(final String[] args) {
-    final Function1<String, Boolean> _function = (String it) -> {
-      return Boolean.valueOf(Objects.equal(it, "debug"));
+    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+      @Override
+      public Boolean apply(final String it) {
+        return Boolean.valueOf(Objects.equal(it, "debug"));
+      }
     };
     boolean _exists = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
     ServerLauncher.IS_DEBUG = _exists;
@@ -101,8 +104,11 @@ public class ServerLauncher {
         }
       };
       LanguageServerProtocol _protocol = messageAcceptor.getProtocol();
-      final Procedure2<String, Throwable> _function = (String p1, Throwable p2) -> {
-        p2.printStackTrace(System.err);
+      final Procedure2<String, Throwable> _function = new Procedure2<String, Throwable>() {
+        @Override
+        public void apply(final String p1, final Throwable p2) {
+          p2.printStackTrace(System.err);
+        }
       };
       _protocol.addErrorListener(_function);
       messageAcceptor.connect(stdin, stdout);
@@ -110,7 +116,7 @@ public class ServerLauncher {
       System.err.println("started.");
       messageAcceptor.join();
       while ((!this.hasExitNotification.get())) {
-        Thread.sleep(10_000l);
+        Thread.sleep(10000l);
       }
       System.err.println("Exit notification received. Good Bye!");
     } catch (Throwable _e) {

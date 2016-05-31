@@ -138,8 +138,11 @@ public class ServerTest extends AbstractLanguageServerTest {
     Collection<List<? extends Diagnostic>> _values_1 = this.diagnostics.values();
     String _join = IterableExtensions.join(_values_1, ",");
     Collection<List<? extends Diagnostic>> _values_2 = this.diagnostics.values();
-    final Function1<List<? extends Diagnostic>, Boolean> _function = (List<? extends Diagnostic> it) -> {
-      return Boolean.valueOf(it.isEmpty());
+    final Function1<List<? extends Diagnostic>, Boolean> _function = new Function1<List<? extends Diagnostic>, Boolean>() {
+      @Override
+      public Boolean apply(final List<? extends Diagnostic> it) {
+        return Boolean.valueOf(it.isEmpty());
+      }
     };
     boolean _forall = IterableExtensions.<List<? extends Diagnostic>>forall(_values_2, _function);
     Assert.assertTrue(_join, _forall);

@@ -39,9 +39,12 @@ public class DefaultTaskParser implements ITaskParser {
       if (_isEmpty) {
         return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
       }
-      final Function<TaskTag, String> _function = (TaskTag it) -> {
-        String _name = it.getName();
-        return _name.toLowerCase();
+      final Function<TaskTag, String> _function = new Function<TaskTag, String>() {
+        @Override
+        public String apply(final TaskTag it) {
+          String _name = it.getName();
+          return _name.toLowerCase();
+        }
       };
       final ImmutableMap<String, TaskTag> taskTagsByName = Maps.<String, TaskTag>uniqueIndex(taskTags, _function);
       Pattern _pattern = this.toPattern(taskTags);
@@ -87,9 +90,12 @@ public class DefaultTaskParser implements ITaskParser {
       }
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("^.*((");
-      final Function1<TaskTag, String> _function = (TaskTag it) -> {
-        String _name = it.getName();
-        return Pattern.quote(_name);
+      final Function1<TaskTag, String> _function = new Function1<TaskTag, String>() {
+        @Override
+        public String apply(final TaskTag it) {
+          String _name = it.getName();
+          return Pattern.quote(_name);
+        }
       };
       Iterable<String> _map = IterableExtensions.<TaskTag, String>map(taskTags, _function);
       String _join = IterableExtensions.join(_map, "|");

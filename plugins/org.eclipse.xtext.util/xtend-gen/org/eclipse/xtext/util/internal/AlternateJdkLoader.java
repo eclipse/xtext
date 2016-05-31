@@ -25,14 +25,17 @@ public class AlternateJdkLoader extends URLClassLoader {
   private final ConcurrentMap<String, Object> locks = Maps.<String, Object>newConcurrentMap();
   
   public AlternateJdkLoader(final Iterable<File> files) {
-    super(((URL[])Conversions.unwrapArray(IterableExtensions.<File, URL>map(files, ((Function1<File, URL>) (File it) -> {
-      try {
-        URI _uRI = it.toURI();
-        return _uRI.toURL();
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
+    super(((URL[])Conversions.unwrapArray(IterableExtensions.<File, URL>map(files, new Function1<File, URL>() {
+      @Override
+      public URL apply(final File it) {
+        try {
+          URI _uRI = it.toURI();
+          return _uRI.toURL();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
       }
-    })), URL.class)));
+    }), URL.class)));
   }
   
   @Override

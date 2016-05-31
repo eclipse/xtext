@@ -51,9 +51,12 @@ public class SourceLevelURIsAdapter extends AdapterImpl {
       _elvis = _findInstalledAdapter;
     } else {
       SourceLevelURIsAdapter _sourceLevelURIsAdapter = new SourceLevelURIsAdapter();
-      final Procedure1<SourceLevelURIsAdapter> _function = (SourceLevelURIsAdapter it) -> {
-        EList<Adapter> _eAdapters = resourceSet.eAdapters();
-        _eAdapters.add(it);
+      final Procedure1<SourceLevelURIsAdapter> _function = new Procedure1<SourceLevelURIsAdapter>() {
+        @Override
+        public void apply(final SourceLevelURIsAdapter it) {
+          EList<Adapter> _eAdapters = resourceSet.eAdapters();
+          _eAdapters.add(it);
+        }
       };
       SourceLevelURIsAdapter _doubleArrow = ObjectExtensions.<SourceLevelURIsAdapter>operator_doubleArrow(_sourceLevelURIsAdapter, _function);
       _elvis = _doubleArrow;

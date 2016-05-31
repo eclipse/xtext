@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -22,7 +23,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IRuntimeProjectConfig;
@@ -91,16 +91,16 @@ public class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
     Iterables.<String>addAll(directories, this.extraDirectories);
     final DirectoryCleaner delegate = new DirectoryCleaner();
     delegate.setUseDefaultExcludes(this.useDefaultExcludes);
-    final Procedure1<String> _function_3 = new Procedure1<String>() {
+    final Consumer<String> _function_3 = new Consumer<String>() {
       @Override
-      public void apply(final String it) {
+      public void accept(final String it) {
         delegate.addExclude(it);
       }
     };
-    IterableExtensions.<String>forEach(this.excludes, _function_3);
-    final Procedure1<String> _function_4 = new Procedure1<String>() {
+    this.excludes.forEach(_function_3);
+    final Consumer<String> _function_4 = new Consumer<String>() {
       @Override
-      public void apply(final String it) {
+      public void accept(final String it) {
         try {
           delegate.cleanFolder(it);
         } catch (Throwable _e) {
@@ -108,7 +108,7 @@ public class XtextDirectoryCleaner implements IGuiceAwareGeneratorComponent {
         }
       }
     };
-    IterableExtensions.<String>forEach(directories, _function_4);
+    directories.forEach(_function_4);
   }
   
   @Override

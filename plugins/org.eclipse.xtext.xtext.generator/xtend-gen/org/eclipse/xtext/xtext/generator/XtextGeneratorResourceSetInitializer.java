@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
@@ -27,7 +28,6 @@ import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -42,13 +42,13 @@ public class XtextGeneratorResourceSetInitializer {
     delegate.setResourceSet(resourceSet);
     EPackage.Registry _packageRegistry = resourceSet.getPackageRegistry();
     _packageRegistry.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
-    final Procedure1<String> _function = new Procedure1<String>() {
+    final Consumer<String> _function = new Consumer<String>() {
       @Override
-      public void apply(final String it) {
+      public void accept(final String it) {
         XtextGeneratorResourceSetInitializer.this.loadResource(it, resourceSet);
       }
     };
-    IterableExtensions.<String>forEach(referencedResources, _function);
+    referencedResources.forEach(_function);
     this.registerGenModels(resourceSet);
     this.registerEPackages(resourceSet);
   }
@@ -196,13 +196,13 @@ public class XtextGeneratorResourceSetInitializer {
         final Resource resource = _resources.get(i);
         EList<EObject> _contents = resource.getContents();
         Iterable<Type> _filter = Iterables.<Type>filter(_contents, type);
-        final Procedure1<Type> _function = new Procedure1<Type>() {
+        final Consumer<Type> _function = new Consumer<Type>() {
           @Override
-          public void apply(final Type it) {
+          public void accept(final Type it) {
             strategy.apply(it);
           }
         };
-        IterableExtensions.<Type>forEach(_filter, _function);
+        _filter.forEach(_function);
       }
     }
   }

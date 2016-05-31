@@ -60,9 +60,12 @@ public abstract class AbstractHierarchyBuilder implements IHierarchyBuilder {
   
   protected <R extends Object> R readOnly(final URI objectURI, final IUnitOfWork<R, EObject> work) {
     IReferenceFinder.IResourceAccess _resourceAccess = this.getResourceAccess();
-    final IUnitOfWork<R, ResourceSet> _function = (ResourceSet resourceSet) -> {
-      final EObject targetObject = resourceSet.getEObject(objectURI, true);
-      return work.exec(targetObject);
+    final IUnitOfWork<R, ResourceSet> _function = new IUnitOfWork<R, ResourceSet>() {
+      @Override
+      public R exec(final ResourceSet resourceSet) throws Exception {
+        final EObject targetObject = resourceSet.getEObject(objectURI, true);
+        return work.exec(targetObject);
+      }
     };
     return _resourceAccess.<R>readOnly(objectURI, _function);
   }
@@ -75,9 +78,12 @@ public abstract class AbstractHierarchyBuilder implements IHierarchyBuilder {
       return null;
     }
     Iterable<IEObjectDescription> _exportedObjects = resourceDescription.getExportedObjects();
-    final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
-      URI _eObjectURI = it.getEObjectURI();
-      return Boolean.valueOf(Objects.equal(_eObjectURI, objectURI));
+    final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
+      public Boolean apply(final IEObjectDescription it) {
+        URI _eObjectURI = it.getEObjectURI();
+        return Boolean.valueOf(Objects.equal(_eObjectURI, objectURI));
+      }
     };
     return IterableExtensions.<IEObjectDescription>findFirst(_exportedObjects, _function);
   }

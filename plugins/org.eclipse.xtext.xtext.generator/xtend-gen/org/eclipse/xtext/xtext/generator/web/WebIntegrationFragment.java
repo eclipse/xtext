@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
@@ -35,7 +36,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
@@ -355,9 +355,9 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
       }
     };
     Iterable<String> _filter = IterableExtensions.<String>filter(allKeywords, _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
+    final Consumer<String> _function_1 = new Consumer<String>() {
       @Override
-      public void apply(final String it) {
+      public void accept(final String it) {
         Matcher _matcher = wordKeywordPattern.matcher(it);
         boolean _matches = _matcher.matches();
         if (_matches) {
@@ -367,7 +367,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         }
       }
     };
-    IterableExtensions.<String>forEach(_filter, _function_1);
+    _filter.forEach(_function_1);
     Collections.<String>sort(wordKeywords);
     Collections.<String>sort(nonWordKeywords);
     final TextFileAccess jsFile = this.fileAccessFactory.createTextFile();

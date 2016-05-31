@@ -59,8 +59,11 @@ public class ServerLauncherTest {
     OutputStream _outputStream = this.process.getOutputStream();
     client.connect(_inputStream, _outputStream);
     InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
-    final Procedure1<InitializeParamsImpl> _function = (InitializeParamsImpl it) -> {
-      it.setRootPath(".");
+    final Procedure1<InitializeParamsImpl> _function = new Procedure1<InitializeParamsImpl>() {
+      @Override
+      public void apply(final InitializeParamsImpl it) {
+        it.setRootPath(".");
+      }
     };
     InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
     final CompletableFuture<InitializeResult> msg = client.initialize(_doubleArrow);
