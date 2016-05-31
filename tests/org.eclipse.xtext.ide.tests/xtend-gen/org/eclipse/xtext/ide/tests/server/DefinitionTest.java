@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.tests.server;
 
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.TextDocumentPositionParamsImpl;
+import io.typefox.lsapi.util.LsapiFactories;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -116,8 +117,8 @@ public class DefinitionTest extends AbstractLanguageServerTest {
       final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
       this.initialize();
       this.open(fileUri, configuration.model);
-      TextDocumentPositionParamsImpl _newPosition = this.newPosition(fileUri, configuration.line, configuration.column);
-      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.definition(_newPosition);
+      TextDocumentPositionParamsImpl _newTextDocumentPositionParams = LsapiFactories.newTextDocumentPositionParams(fileUri, configuration.line, configuration.column);
+      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.definition(_newTextDocumentPositionParams);
       List<? extends Location> _get = definitions.get();
       final String actualDefinitions = this.toExpectation(_get);
       Assert.assertEquals(configuration.expectedDefinitions, actualDefinitions);

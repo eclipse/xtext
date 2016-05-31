@@ -8,10 +8,8 @@
 package org.eclipse.xtext.ide.tests.server;
 
 import io.typefox.lsapi.Location;
-import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.ReferenceContextImpl;
 import io.typefox.lsapi.ReferenceParamsImpl;
-import io.typefox.lsapi.TextDocumentIdentifierImpl;
 import io.typefox.lsapi.util.LsapiFactories;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -20,7 +18,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.junit.Assert;
@@ -161,16 +158,8 @@ public class ReferenceTest extends AbstractLanguageServerTest {
       this.open(fileUri, configuration.model);
       final ReferenceContextImpl referenceContext = new ReferenceContextImpl();
       referenceContext.setIncludeDeclaration(configuration.includeDeclaration);
-      ReferenceParamsImpl _referenceParamsImpl = new ReferenceParamsImpl();
-      final Procedure1<ReferenceParamsImpl> _function = (ReferenceParamsImpl it) -> {
-        TextDocumentIdentifierImpl _newIdentifier = this.newIdentifier(fileUri);
-        it.setTextDocument(_newIdentifier);
-        PositionImpl _newPosition = LsapiFactories.newPosition(configuration.line, configuration.column);
-        it.setPosition(_newPosition);
-        it.setContext(referenceContext);
-      };
-      ReferenceParamsImpl _doubleArrow = ObjectExtensions.<ReferenceParamsImpl>operator_doubleArrow(_referenceParamsImpl, _function);
-      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.references(_doubleArrow);
+      ReferenceParamsImpl _newReferenceParams = LsapiFactories.newReferenceParams(fileUri, configuration.line, configuration.column, referenceContext);
+      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.references(_newReferenceParams);
       List<? extends Location> _get = definitions.get();
       final String actualDefinitions = this.toExpectation(_get);
       Assert.assertEquals(configuration.expectedReferences, actualDefinitions);

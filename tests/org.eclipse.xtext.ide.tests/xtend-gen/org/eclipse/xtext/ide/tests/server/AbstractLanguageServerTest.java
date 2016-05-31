@@ -14,17 +14,14 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import io.typefox.lsapi.Diagnostic;
+import io.typefox.lsapi.DidCloseTextDocumentParamsImpl;
 import io.typefox.lsapi.DidOpenTextDocumentParamsImpl;
 import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.Position;
-import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.Range;
-import io.typefox.lsapi.TextDocumentIdentifierImpl;
-import io.typefox.lsapi.TextDocumentItemImpl;
-import io.typefox.lsapi.TextDocumentPositionParamsImpl;
 import io.typefox.lsapi.services.TextDocumentService;
 import io.typefox.lsapi.util.LsapiFactories;
 import java.io.File;
@@ -49,7 +46,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Before;
 
@@ -136,10 +132,9 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
   
   protected InitializeResult initialize(final Procedure1<? super InitializeParamsImpl> initializer) {
     try {
-      final InitializeParamsImpl params = new InitializeParamsImpl();
       Path _rootPath = this.getRootPath();
       String _string = _rootPath.toString();
-      params.setRootPath(_string);
+      final InitializeParamsImpl params = LsapiFactories.newInitializeParams(1, _string);
       if (initializer!=null) {
         initializer.apply(params);
       }
@@ -151,19 +146,13 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
   }
   
   protected void open(final String fileUri, final String model) {
-    DidOpenTextDocumentParamsImpl _didOpenTextDocumentParamsImpl = new DidOpenTextDocumentParamsImpl();
-    final Procedure1<DidOpenTextDocumentParamsImpl> _function = (DidOpenTextDocumentParamsImpl it) -> {
-      TextDocumentItemImpl _textDocumentItemImpl = new TextDocumentItemImpl();
-      final Procedure1<TextDocumentItemImpl> _function_1 = (TextDocumentItemImpl it_1) -> {
-        it_1.setUri(fileUri);
-        it_1.setVersion(1);
-        it_1.setText(model);
-      };
-      TextDocumentItemImpl _doubleArrow = ObjectExtensions.<TextDocumentItemImpl>operator_doubleArrow(_textDocumentItemImpl, _function_1);
-      it.setTextDocument(_doubleArrow);
-    };
-    DidOpenTextDocumentParamsImpl _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParamsImpl>operator_doubleArrow(_didOpenTextDocumentParamsImpl, _function);
-    this.languageServer.didOpen(_doubleArrow);
+    DidOpenTextDocumentParamsImpl _newDidOpenTextDocumentParams = LsapiFactories.newDidOpenTextDocumentParams(fileUri, "testlang", 1, model);
+    this.languageServer.didOpen(_newDidOpenTextDocumentParams);
+  }
+  
+  protected void close(final String fileUri) {
+    DidCloseTextDocumentParamsImpl _newDidCloseTextDocumentParams = LsapiFactories.newDidCloseTextDocumentParams(fileUri);
+    this.languageServer.didClose(_newDidCloseTextDocumentParams);
   }
   
   public String operator_mappedTo(final String path, final CharSequence contents) {
@@ -189,21 +178,6 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
     String _uri = t.getUri();
     List<? extends Diagnostic> _diagnostics = t.getDiagnostics();
     this.diagnostics.put(_uri, _diagnostics);
-  }
-  
-  protected TextDocumentPositionParamsImpl newPosition(final String uri, final int line, final int column) {
-    final TextDocumentPositionParamsImpl params = new TextDocumentPositionParamsImpl();
-    TextDocumentIdentifierImpl _newIdentifier = this.newIdentifier(uri);
-    params.setTextDocument(_newIdentifier);
-    PositionImpl _newPosition = LsapiFactories.newPosition(line, column);
-    params.setPosition(_newPosition);
-    return params;
-  }
-  
-  protected TextDocumentIdentifierImpl newIdentifier(final String uri) {
-    final TextDocumentIdentifierImpl identifier = new TextDocumentIdentifierImpl();
-    identifier.setUri(uri);
-    return identifier;
   }
   
   protected String _toExpectation(final List<?> elements) {

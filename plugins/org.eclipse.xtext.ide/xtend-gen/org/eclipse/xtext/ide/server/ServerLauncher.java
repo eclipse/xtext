@@ -62,20 +62,16 @@ public class ServerLauncher {
       System.err.println("Starting Xtext Language Server.");
       final LanguageServerToJsonAdapter messageAcceptor = new LanguageServerToJsonAdapter(this.languageServer) {
         @Override
-        protected Object _doAccept(final NotificationMessage message) {
-          Object _xblockexpression = null;
-          {
-            if (ServerLauncher.IS_DEBUG) {
-              InputOutput.<NotificationMessage>println(message);
-            }
-            String _method = message.getMethod();
-            boolean _equals = Objects.equal(_method, MessageMethods.EXIT);
-            if (_equals) {
-              ServerLauncher.this.hasExitNotification.set(true);
-            }
-            _xblockexpression = super._doAccept(message);
+        protected void _doAccept(final NotificationMessage message) {
+          if (ServerLauncher.IS_DEBUG) {
+            InputOutput.<NotificationMessage>println(message);
           }
-          return _xblockexpression;
+          String _method = message.getMethod();
+          boolean _equals = Objects.equal(_method, MessageMethods.EXIT);
+          if (_equals) {
+            ServerLauncher.this.hasExitNotification.set(true);
+          }
+          super._doAccept(message);
         }
         
         @Override

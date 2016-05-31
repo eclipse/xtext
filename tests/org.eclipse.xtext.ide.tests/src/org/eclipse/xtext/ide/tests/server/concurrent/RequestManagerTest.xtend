@@ -55,10 +55,9 @@ class RequestManagerTest {
 			}
 			sharedState.incrementAndGet
 		]
-		val future2 = requestManager.runRead [
+		requestManager.runRead [
 			sharedState.incrementAndGet
 		]
-		future2.join
 		future.join
 		assertEquals(2, sharedState.get)
 	}
@@ -87,15 +86,13 @@ class RequestManagerTest {
 
 	@Test
 	def void testRunWriteAfterWrite() {
-		val future = requestManager.runWrite [
+		requestManager.runWrite [
 			sharedState.incrementAndGet
 		]
-		val future2 = requestManager.runWrite [
+		requestManager.runWrite [
 			if (sharedState.get != 0)
 				sharedState.incrementAndGet
-		]
-		future2.join
-		future.join
+		].join
 		assertEquals(2, sharedState.get)
 	}
 

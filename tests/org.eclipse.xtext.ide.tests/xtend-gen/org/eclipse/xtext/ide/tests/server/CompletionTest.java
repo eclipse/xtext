@@ -14,6 +14,7 @@ import io.typefox.lsapi.Location;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.Range;
 import io.typefox.lsapi.TextDocumentPositionParamsImpl;
+import io.typefox.lsapi.util.LsapiFactories;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -155,8 +156,8 @@ public class CompletionTest extends AbstractLanguageServerTest {
       final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
       this.initialize();
       this.open(fileUri, configuration.model);
-      TextDocumentPositionParamsImpl _newPosition = this.newPosition(fileUri, configuration.line, configuration.column);
-      final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_newPosition);
+      TextDocumentPositionParamsImpl _newTextDocumentPositionParams = LsapiFactories.newTextDocumentPositionParams(fileUri, configuration.line, configuration.column);
+      final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_newTextDocumentPositionParams);
       CompletionList _get = completionItems.get();
       List<? extends CompletionItem> _items = _get.getItems();
       final String actualCompletionItems = this.toExpectation(_items);

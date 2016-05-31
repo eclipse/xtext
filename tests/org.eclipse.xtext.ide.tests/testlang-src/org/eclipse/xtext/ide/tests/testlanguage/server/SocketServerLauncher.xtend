@@ -8,13 +8,9 @@
 package org.eclipse.xtext.ide.tests.testlanguage.server
 
 import com.google.inject.Guice
-import java.io.IOException
-import java.io.PrintWriter
+import io.typefox.lsapi.services.LanguageServer
+import io.typefox.lsapi.services.json.LanguageServerLauncher
 import java.net.InetSocketAddress
-import java.nio.channels.AsynchronousServerSocketChannel
-import java.nio.channels.AsynchronousSocketChannel
-import java.nio.channels.Channels
-import java.nio.channels.CompletionHandler
 import org.eclipse.xtext.ide.server.ServerModule
 
 /**
@@ -23,51 +19,13 @@ import org.eclipse.xtext.ide.server.ServerModule
 class SocketServerLauncher {
 
 	def static void main(String[] args) {
-		var AsynchronousServerSocketChannel serverSocket
-		try {
-			val injector = Guice.createInjector(new ServerModule)
-			val server = injector.getInstance(VSCodeJsonAdapter)
-			server.errorLog = new PrintWriter(System.err)
-			server.messageLog = new PrintWriter(System.out)
-
-			serverSocket = AsynchronousServerSocketChannel.open
-
-			val address = new InetSocketAddress('localhost', 5007)
-			serverSocket.bind(address)
-			println('Listening to ' + address)
-			serverSocket.accept(null, new CompletionHandler<AsynchronousSocketChannel, Object>() {
-
-				override completed(AsynchronousSocketChannel channel, Object attachment) {
-					val in = Channels.newInputStream(channel)
-					val out = Channels.newOutputStream(channel)
-					println('Connection accepted')
-
-					server.connect(in, out)
-					server.start()
-					server.join()
-
-					channel.close()
-					println('Connection closed')
-				}
-
-				override failed(Throwable exc, Object attachment) {
-					exc.printStackTrace
-				}
-
-			})
-			while (!server.exitRequested) {
-				Thread.sleep(2000)
-			}
-		} catch (Throwable t) {
-			t.printStackTrace()
-		} finally {
-			if (serverSocket !== null) {
-				try {
-					serverSocket.close()
-				} catch (IOException e) {
-				}
-			}
-		}
+		val injector = Guice.createInjector(new ServerModule)
+		val languageServer = injector.getInstance(LanguageServer)
+		val launcher = LanguageServerLauncher.newLoggingLauncher(
+			languageServer,
+			new InetSocketAddress('localhost', 5007)
+		)
+		launcher.launch
 	}
 
 }

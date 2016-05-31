@@ -77,8 +77,7 @@ public class RequestManagerTest {
     final Function1<CancelIndicator, Integer> _function_1 = (CancelIndicator it) -> {
       return Integer.valueOf(this.sharedState.incrementAndGet());
     };
-    final CompletableFuture<Integer> future2 = this.requestManager.<Integer>runRead(_function_1);
-    future2.join();
+    this.requestManager.<Integer>runRead(_function_1);
     future.join();
     int _get = this.sharedState.get();
     Assert.assertEquals(2, _get);
@@ -121,7 +120,7 @@ public class RequestManagerTest {
     final Procedure1<CancelIndicator> _function = (CancelIndicator it) -> {
       this.sharedState.incrementAndGet();
     };
-    final CompletableFuture<Void> future = this.requestManager.runWrite(_function);
+    this.requestManager.runWrite(_function);
     final Procedure1<CancelIndicator> _function_1 = (CancelIndicator it) -> {
       int _get = this.sharedState.get();
       boolean _notEquals = (_get != 0);
@@ -129,9 +128,8 @@ public class RequestManagerTest {
         this.sharedState.incrementAndGet();
       }
     };
-    final CompletableFuture<Void> future2 = this.requestManager.runWrite(_function_1);
-    future2.join();
-    future.join();
+    CompletableFuture<Void> _runWrite = this.requestManager.runWrite(_function_1);
+    _runWrite.join();
     int _get = this.sharedState.get();
     Assert.assertEquals(2, _get);
   }

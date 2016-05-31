@@ -11,16 +11,12 @@ import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Inject
 import io.typefox.lsapi.Diagnostic
-import io.typefox.lsapi.DidOpenTextDocumentParamsImpl
 import io.typefox.lsapi.InitializeParamsImpl
 import io.typefox.lsapi.InitializeResult
 import io.typefox.lsapi.Location
 import io.typefox.lsapi.Position
 import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.Range
-import io.typefox.lsapi.TextDocumentIdentifierImpl
-import io.typefox.lsapi.TextDocumentItemImpl
-import io.typefox.lsapi.TextDocumentPositionParamsImpl
 import java.io.File
 import java.io.FileWriter
 import java.net.URI
@@ -29,6 +25,7 @@ import java.nio.file.Paths
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
+import java.util.function.Consumer
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
@@ -39,7 +36,6 @@ import org.eclipse.xtext.util.Modules2
 import org.junit.Before
 
 import static io.typefox.lsapi.util.LsapiFactories.*
-import java.util.function.Consumer
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -100,20 +96,17 @@ class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsParams> {
 	}
 
 	protected def InitializeResult initialize((InitializeParamsImpl)=>void initializer) {
-		val params = new InitializeParamsImpl
-		params.rootPath = rootPath.toString
+		val params = newInitializeParams(1, rootPath.toString)
 		initializer?.apply(params)
 		return languageServer.initialize(params).get
 	}
 
 	protected def void open(String fileUri, String model) {
-		languageServer.didOpen(new DidOpenTextDocumentParamsImpl => [
-			textDocument = new TextDocumentItemImpl => [
-				uri = fileUri
-				version = 1
-				text = model
-			]
-		])
+		languageServer.didOpen(newDidOpenTextDocumentParams(fileUri, "testlang", 1, model))
+	}
+	
+	protected def void close(String fileUri) {
+		languageServer.didClose(newDidCloseTextDocumentParams(fileUri))
 	}
 
 	def String ->(String path, CharSequence contents) {
@@ -130,21 +123,6 @@ class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsParams> {
 
 	override accept(PublishDiagnosticsParams t) {
 		diagnostics.put(t.uri, t.diagnostics)
-	}
-
-	// FIXME: move to LsapiFactories
-	protected def TextDocumentPositionParamsImpl newPosition(String uri, int line, int column) {
-		val params = new TextDocumentPositionParamsImpl
-		params.textDocument = uri.newIdentifier
-		params.position = newPosition(line, column)
-		return params
-	}
-
-	// 	FIXME: move to LsapiFactories
-	protected def TextDocumentIdentifierImpl newIdentifier(String uri) {
-		val identifier = new TextDocumentIdentifierImpl
-		identifier.uri = uri
-		return identifier
 	}
 
 	protected def dispatch String toExpectation(List<?> elements) '''

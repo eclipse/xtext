@@ -14,8 +14,9 @@ import io.typefox.lsapi.FileEventImpl;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.Range;
 import io.typefox.lsapi.services.WorkspaceService;
-import java.util.ArrayList;
+import io.typefox.lsapi.util.LsapiFactories;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,8 +25,6 @@ import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -131,28 +130,18 @@ public class ServerTest extends AbstractLanguageServerTest {
     _builder_1.newLine();
     final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
-    DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl();
-    final Procedure1<DidChangeWatchedFilesParamsImpl> _function = (DidChangeWatchedFilesParamsImpl it) -> {
-      FileEventImpl _fileEventImpl = new FileEventImpl();
-      final Procedure1<FileEventImpl> _function_1 = (FileEventImpl it_1) -> {
-        it_1.setUri(path);
-        it_1.setType(FileEvent.TYPE_CREATED);
-      };
-      FileEventImpl _doubleArrow = ObjectExtensions.<FileEventImpl>operator_doubleArrow(_fileEventImpl, _function_1);
-      ArrayList<FileEventImpl> _newArrayList = CollectionLiterals.<FileEventImpl>newArrayList(_doubleArrow);
-      it.setChanges(_newArrayList);
-    };
-    DidChangeWatchedFilesParamsImpl _doubleArrow = ObjectExtensions.<DidChangeWatchedFilesParamsImpl>operator_doubleArrow(_didChangeWatchedFilesParamsImpl, _function);
-    _workspaceService.didChangeWatchedFiles(_doubleArrow);
+    FileEventImpl _newFileEvent = LsapiFactories.newFileEvent(path, FileEvent.TYPE_CREATED);
+    DidChangeWatchedFilesParamsImpl _newDidChangeWatchedFilesParams = LsapiFactories.newDidChangeWatchedFilesParams(Collections.<FileEventImpl>unmodifiableList(CollectionLiterals.<FileEventImpl>newArrayList(_newFileEvent)));
+    _workspaceService.didChangeWatchedFiles(_newDidChangeWatchedFilesParams);
     List<? extends Diagnostic> _get = this.diagnostics.get(path);
     Assert.assertNotNull(_get);
     Collection<List<? extends Diagnostic>> _values_1 = this.diagnostics.values();
     String _join = IterableExtensions.join(_values_1, ",");
     Collection<List<? extends Diagnostic>> _values_2 = this.diagnostics.values();
-    final Function1<List<? extends Diagnostic>, Boolean> _function_1 = (List<? extends Diagnostic> it) -> {
+    final Function1<List<? extends Diagnostic>, Boolean> _function = (List<? extends Diagnostic> it) -> {
       return Boolean.valueOf(it.isEmpty());
     };
-    boolean _forall = IterableExtensions.<List<? extends Diagnostic>>forall(_values_2, _function_1);
+    boolean _forall = IterableExtensions.<List<? extends Diagnostic>>forall(_values_2, _function);
     Assert.assertTrue(_join, _forall);
   }
 }
