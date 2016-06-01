@@ -6,6 +6,10 @@
 	<version>IT-SNAPSHOT</version>
 	<artifactId>org.eclipse.xtext.purexbase</artifactId>
 	<packaging>jar</packaging>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 	<build>
 		<resources>
 			<!-- Add XMI and other to bin jar -->
