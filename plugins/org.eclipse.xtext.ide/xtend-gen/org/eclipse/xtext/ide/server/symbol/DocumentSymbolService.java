@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 @SuppressWarnings("all")

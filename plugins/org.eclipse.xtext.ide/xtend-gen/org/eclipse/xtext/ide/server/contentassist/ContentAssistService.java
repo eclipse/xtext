@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 @SuppressWarnings("all")

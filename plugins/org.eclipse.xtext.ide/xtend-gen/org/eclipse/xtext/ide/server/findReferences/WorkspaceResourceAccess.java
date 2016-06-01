@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @FinalFieldsConstructor
 @SuppressWarnings("all")

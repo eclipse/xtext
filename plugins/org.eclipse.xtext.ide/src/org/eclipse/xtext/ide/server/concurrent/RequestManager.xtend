@@ -18,6 +18,7 @@ import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 class RequestManager {

@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.editor.syntaxcoloring;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 @SuppressWarnings("all")
 public interface IEditorHighlightingConfigurationProvider {

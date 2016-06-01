@@ -11,6 +11,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @SuppressWarnings("all")
 public interface CancellableIndicator extends CancelIndicator {

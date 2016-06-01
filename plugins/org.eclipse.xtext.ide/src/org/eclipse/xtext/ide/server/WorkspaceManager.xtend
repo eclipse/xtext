@@ -26,6 +26,7 @@ import org.eclipse.xtext.validation.Issue
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 class WorkspaceManager {
 

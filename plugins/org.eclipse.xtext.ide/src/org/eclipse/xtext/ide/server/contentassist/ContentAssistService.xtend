@@ -23,6 +23,7 @@ import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 class ContentAssistService {

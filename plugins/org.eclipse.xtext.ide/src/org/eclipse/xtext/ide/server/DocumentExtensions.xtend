@@ -25,6 +25,7 @@ import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 class DocumentExtensions {

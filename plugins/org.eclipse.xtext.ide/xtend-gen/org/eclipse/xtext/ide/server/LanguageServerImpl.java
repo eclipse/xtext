@@ -110,6 +110,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 @Accessors
 @SuppressWarnings("all")

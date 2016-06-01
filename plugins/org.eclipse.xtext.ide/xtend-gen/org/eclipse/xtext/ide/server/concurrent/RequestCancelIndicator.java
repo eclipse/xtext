@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @SuppressWarnings("all")
 public class RequestCancelIndicator implements CancellableIndicator {

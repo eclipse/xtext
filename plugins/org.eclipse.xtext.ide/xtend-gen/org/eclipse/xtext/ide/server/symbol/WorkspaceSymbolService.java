@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 @SuppressWarnings("all")

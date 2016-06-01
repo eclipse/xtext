@@ -22,6 +22,7 @@ import org.eclipse.xtext.resource.ResourceServiceProviderServiceLoader;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 @SuppressWarnings("all")
 public class ServerModule extends AbstractModule {

@@ -11,6 +11,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 class RequestCancelIndicator implements CancellableIndicator {
 

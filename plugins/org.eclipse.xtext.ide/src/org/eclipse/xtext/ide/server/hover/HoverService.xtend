@@ -20,6 +20,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 class HoverService {
