@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.mwe.utils.GenModelHelper
 import org.eclipse.emf.mwe.utils.StandaloneSetup
-import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.emf.ecore.EcorePackage
@@ -65,7 +64,15 @@ class XtextGeneratorResourceSetInitializer {
 			case 'ecore': {
 				val resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource)
 				if (resourceServiceProvider === null) {
-					EcoreSupportStandaloneSetup.setup()
+					try {
+                        val xcore = Class.forName('org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup')
+                        xcore.getDeclaredMethod('doSetup', #[]).invoke(null)
+                    } catch (ClassNotFoundException e) {
+                        LOG.error("Couldn't initialize Ecore support. Is 'org.eclipse.xtext.ecore' on the classpath?")
+                        LOG.debug(e.getMessage(), e)
+                    } catch (Exception e) {
+                        LOG.error("Couldn't initialize Ecore support.", e)
+                    }
 				}
 			}
 			case 'xcore': {
