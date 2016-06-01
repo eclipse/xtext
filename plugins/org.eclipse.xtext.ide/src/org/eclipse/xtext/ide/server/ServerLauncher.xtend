@@ -15,6 +15,8 @@ import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 import java.io.PrintStream
+import java.io.OutputStream
+import java.io.InputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -25,16 +27,16 @@ class ServerLauncher {
     
     def static void main(String[] args) {
         IS_DEBUG = args.exists[it == 'debug']
+        val stdin = System.in
+        val stdout = System.out
+        redirectStandardStreams()
     	val launcher = Guice.createInjector(new ServerModule).getInstance(ServerLauncher)
-    	launcher.start()
+    	launcher.start(stdin, stdout)
     }
     
     @Inject LanguageServerImpl languageServer 
     
-    def void start() {
-        val stdin = System.in
-        val stdout = System.out
-        redirectStandardStreams()
+    def void start(InputStream in, OutputStream out) {
         
         System.err.println("Starting Xtext Language Server.")
         val messageAcceptor = new LanguageServerToJsonAdapter(languageServer) {
@@ -77,7 +79,7 @@ class ServerLauncher {
         messageAcceptor.protocol.addErrorListener[p1, p2|
             p2.printStackTrace(System.err)
         ]
-        messageAcceptor.connect(stdin, stdout)
+        messageAcceptor.connect(in, out)
         System.err.println("started.")
         messageAcceptor.join
         while (true) {
@@ -85,7 +87,7 @@ class ServerLauncher {
         }
     }
     
-    def redirectStandardStreams() {
+    def static redirectStandardStreams() {
         System.setIn(new ByteArrayInputStream(newByteArrayOfSize(0)))
         val id = ServerLauncher.name+"-"+System.currentTimeMillis
         if (IS_DEBUG) {
