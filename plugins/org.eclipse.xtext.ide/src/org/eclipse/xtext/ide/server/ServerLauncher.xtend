@@ -11,12 +11,10 @@ import com.google.inject.Guice
 import com.google.inject.Inject
 import io.typefox.lsapi.NotificationMessage
 import io.typefox.lsapi.services.json.LanguageServerToJsonAdapter
-import io.typefox.lsapi.services.json.MessageMethods
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
 import java.io.PrintStream
-import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -33,8 +31,6 @@ class ServerLauncher {
     
     @Inject LanguageServerImpl languageServer 
     
-    private final AtomicBoolean hasExitNotification = new AtomicBoolean(false) 
-    
     def void start() {
         val stdin = System.in
         val stdout = System.out
@@ -45,9 +41,6 @@ class ServerLauncher {
             override protected _doAccept(NotificationMessage message) {
                 if (IS_DEBUG) {
                     println(message)
-                }
-                if (message.method == MessageMethods.EXIT) {
-                    hasExitNotification.set(true);
                 }
                 super._doAccept(message)
             }
@@ -75,6 +68,11 @@ class ServerLauncher {
                 super.sendResponseError(responseId, errorMessage, errorCode, errorData)
             }
             
+			override exit() {
+        		System.err.println("Exit notification received. Good Bye!")
+				super.exit()
+			}
+            
         }
         messageAcceptor.protocol.addErrorListener[p1, p2|
             p2.printStackTrace(System.err)
@@ -82,10 +80,9 @@ class ServerLauncher {
         messageAcceptor.connect(stdin, stdout)
         System.err.println("started.")
         messageAcceptor.join
-        while (!hasExitNotification.get) {
+        while (true) {
             Thread.sleep(10_000l)
         }
-        System.err.println("Exit notification received. Good Bye!")
     }
     
     def redirectStandardStreams() {
