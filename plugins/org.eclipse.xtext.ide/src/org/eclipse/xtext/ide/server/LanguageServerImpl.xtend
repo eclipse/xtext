@@ -94,6 +94,9 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 		if (params.rootPath === null) {
 			throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.")
 		}
+		if (languagesRegistry.extensionToFactoryMap.isEmpty) {
+			throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages's setup class in '/META-INF/services/org.eclipse.xtext.ISetup'")
+		}
 		this.params = params
 		workspaceManager = workspaceManagerProvider.get
 		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
