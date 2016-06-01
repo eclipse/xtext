@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ide" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter comment="broken API in 2.11" id="0"/>
         <filter id="927989779">
             <message_arguments>
                 <message_argument value="2.11.0"/>

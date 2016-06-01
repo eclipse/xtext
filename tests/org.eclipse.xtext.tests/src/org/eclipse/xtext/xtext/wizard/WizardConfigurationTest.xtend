@@ -349,7 +349,7 @@ class WizardConfigurationTest {
 		assertTrue(parentGradle.contains("sourceCompatibility = '1.6'"))
 		assertTrue(parentGradle.contains("targetCompatibility = '1.6'"))
 		allJavaProjects.map[manifest].forEach[
-			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.6"))
+			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8"))
 		]
 	}
 	
