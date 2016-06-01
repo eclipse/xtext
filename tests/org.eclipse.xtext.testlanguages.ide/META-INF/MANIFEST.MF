@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Common Xtext Testlanguages For UI and Runtime - IDE
 Bundle-SymbolicName: org.eclipse.xtext.testlanguages.ide;singleton:=true
 Bundle-Version: 2.11.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse Xtext
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr,
