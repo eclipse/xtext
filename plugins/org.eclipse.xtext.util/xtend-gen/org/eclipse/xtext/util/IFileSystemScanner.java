@@ -14,6 +14,7 @@ import org.eclipse.xtext.util.IAcceptor;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 @ImplementedBy(IFileSystemScanner.JavaIoFileSystemScanner.class)
 @SuppressWarnings("all")

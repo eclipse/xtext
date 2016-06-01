@@ -11,7 +11,18 @@
 
 	<name>Xtext IDE Library</name>
 	<artifactId>org.eclipse.xtext.ide</artifactId>
-
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<pomDependencies>consider</pomDependencies>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
