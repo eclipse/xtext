@@ -14,13 +14,11 @@ import com.google.inject.Injector;
 import io.typefox.lsapi.NotificationMessage;
 import io.typefox.lsapi.services.json.LanguageServerProtocol;
 import io.typefox.lsapi.services.json.LanguageServerToJsonAdapter;
-import io.typefox.lsapi.services.json.MessageMethods;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -55,8 +53,6 @@ public class ServerLauncher {
   @Inject
   private LanguageServerImpl languageServer;
   
-  private final AtomicBoolean hasExitNotification = new AtomicBoolean(false);
-  
   public void start() {
     try {
       final InputStream stdin = System.in;
@@ -68,11 +64,6 @@ public class ServerLauncher {
         protected void _doAccept(final NotificationMessage message) {
           if (ServerLauncher.IS_DEBUG) {
             InputOutput.<NotificationMessage>println(message);
-          }
-          String _method = message.getMethod();
-          boolean _equals = Objects.equal(_method, MessageMethods.EXIT);
-          if (_equals) {
-            ServerLauncher.this.hasExitNotification.set(true);
           }
           super._doAccept(message);
         }
@@ -102,6 +93,12 @@ public class ServerLauncher {
           }
           super.sendResponseError(responseId, errorMessage, errorCode, errorData);
         }
+        
+        @Override
+        public void exit() {
+          System.err.println("Exit notification received. Good Bye!");
+          super.exit();
+        }
       };
       LanguageServerProtocol _protocol = messageAcceptor.getProtocol();
       final Procedure2<String, Throwable> _function = new Procedure2<String, Throwable>() {
@@ -114,10 +111,9 @@ public class ServerLauncher {
       messageAcceptor.connect(stdin, stdout);
       System.err.println("started.");
       messageAcceptor.join();
-      while ((!this.hasExitNotification.get())) {
+      while (true) {
         Thread.sleep(10000l);
       }
-      System.err.println("Exit notification received. Good Bye!");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
