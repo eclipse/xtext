@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.services.json.JsonBasedLanguageServer;
+import io.typefox.lsapi.services.json.LanguageServerProtocol;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.concurrent.CompletableFuture;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.ide.server.ServerLauncher;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,7 +37,7 @@ public class ServerLauncherTest {
     try {
       String _property = System.getProperty("java.class.path");
       String _name = ServerLauncher.class.getName();
-      ProcessBuilder _processBuilder = new ProcessBuilder("java", "-cp", _property, "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044", _name);
+      ProcessBuilder _processBuilder = new ProcessBuilder("java", "-cp", _property, _name);
       ProcessBuilder _redirectInput = _processBuilder.redirectInput(ProcessBuilder.Redirect.PIPE);
       ProcessBuilder _redirectOutput = _redirectInput.redirectOutput(ProcessBuilder.Redirect.PIPE);
       Process _start = _redirectOutput.start();
@@ -52,22 +54,38 @@ public class ServerLauncherTest {
     }
   }
   
-  @Test(timeout = 5000)
+  @Test(timeout = 3000)
   public void testServerLaunch() {
-    final JsonBasedLanguageServer client = new JsonBasedLanguageServer();
-    InputStream _inputStream = this.process.getInputStream();
-    OutputStream _outputStream = this.process.getOutputStream();
-    client.connect(_inputStream, _outputStream);
-    InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
-    final Procedure1<InitializeParamsImpl> _function = new Procedure1<InitializeParamsImpl>() {
-      @Override
-      public void apply(final InitializeParamsImpl it) {
-        it.setRootPath(".");
-      }
-    };
-    InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function);
-    final CompletableFuture<InitializeResult> msg = client.initialize(_doubleArrow);
-    boolean _notEquals = (!Objects.equal(msg, null));
-    Assert.assertTrue(_notEquals);
+    try {
+      final JsonBasedLanguageServer client = new JsonBasedLanguageServer();
+      LanguageServerProtocol _protocol = client.getProtocol();
+      final Procedure2<String, Throwable> _function = new Procedure2<String, Throwable>() {
+        @Override
+        public void apply(final String p1, final Throwable p2) {
+          System.err.println(p1);
+          if (p2!=null) {
+            p2.printStackTrace();
+          }
+        }
+      };
+      _protocol.addErrorListener(_function);
+      InputStream _inputStream = this.process.getInputStream();
+      OutputStream _outputStream = this.process.getOutputStream();
+      client.connect(_inputStream, _outputStream);
+      InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
+      final Procedure1<InitializeParamsImpl> _function_1 = new Procedure1<InitializeParamsImpl>() {
+        @Override
+        public void apply(final InitializeParamsImpl it) {
+          it.setRootPath(".");
+        }
+      };
+      InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function_1);
+      CompletableFuture<InitializeResult> _initialize = client.initialize(_doubleArrow);
+      final InitializeResult msg = _initialize.get();
+      boolean _notEquals = (!Objects.equal(msg, null));
+      Assert.assertTrue(_notEquals);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

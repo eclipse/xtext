@@ -16,6 +16,8 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
 import org.eclipse.xtext.ide.tests.testlanguage.ide.contentassist.antlr.TestLanguageParser
 import org.eclipse.xtext.ide.tests.testlanguage.ide.contentassist.antlr.internal.InternalTestLanguageLexer
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurationProvider
+import org.eclipse.xtext.ide.tests.testlanguage.highlighting.TestLanguageHighlightingProvider
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -32,6 +34,10 @@ class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule {
 
 	def Class<? extends IContentAssistParser> bindIContentAssistParser() {
 		TestLanguageParser
+	}
+	
+	def Class<? extends IEditorHighlightingConfigurationProvider> bindIEditorHighlightingConfigurationProvider() {
+		TestLanguageHighlightingProvider
 	}
 
 }

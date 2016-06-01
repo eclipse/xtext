@@ -25,7 +25,8 @@ class ServerLauncherTest {
 	
 	@Before
 	def void setUp() {
-		this.process = new ProcessBuilder("java","-cp",System.getProperty("java.class.path"), "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1044", ServerLauncher.name
+		this.process = new ProcessBuilder("java","-cp",System.getProperty("java.class.path")
+		      , ServerLauncher.name
 //            ,"debug"
         ).redirectInput(Redirect.PIPE).redirectOutput(Redirect.PIPE).start
 	}
@@ -35,13 +36,17 @@ class ServerLauncherTest {
 		process?.destroy	
 	}
     
-    @Test(timeout = 5000) 
+    @Test(timeout = 3000) 
     def void testServerLaunch() {
         val client = new JsonBasedLanguageServer()
+        client.protocol.addErrorListener[p1, p2|
+            System.err.println(p1)
+            p2?.printStackTrace
+        ]
         client.connect(process.inputStream, process.outputStream)
         val msg = client.initialize(new InitializeParamsImpl() => [
             rootPath = "."
-        ])
+        ]).get
         Assert.assertTrue(msg != null)
     }
 

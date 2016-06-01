@@ -112,7 +112,6 @@ public class ServerLauncher {
       };
       _protocol.addErrorListener(_function);
       messageAcceptor.connect(stdin, stdout);
-      messageAcceptor.start();
       System.err.println("started.");
       messageAcceptor.join();
       while ((!this.hasExitNotification.get())) {

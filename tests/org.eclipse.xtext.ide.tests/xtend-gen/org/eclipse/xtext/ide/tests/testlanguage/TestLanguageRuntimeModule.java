@@ -17,7 +17,9 @@ import java.util.concurrent.Executors;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurationProvider;
 import org.eclipse.xtext.ide.tests.testlanguage.AbstractTestLanguageRuntimeModule;
+import org.eclipse.xtext.ide.tests.testlanguage.highlighting.TestLanguageHighlightingProvider;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.contentassist.antlr.TestLanguageParser;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.contentassist.antlr.internal.InternalTestLanguageLexer;
 
@@ -41,5 +43,9 @@ public class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule
   
   public Class<? extends IContentAssistParser> bindIContentAssistParser() {
     return TestLanguageParser.class;
+  }
+  
+  public Class<? extends IEditorHighlightingConfigurationProvider> bindIEditorHighlightingConfigurationProvider() {
+    return TestLanguageHighlightingProvider.class;
   }
 }
