@@ -11,6 +11,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
@@ -27,7 +28,6 @@ import org.eclipse.xtext.tasks.TaskTags;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -97,9 +97,9 @@ public class DefaultTaskFinder implements ITaskFinder {
     if (_canContainTaskTags) {
       String _text = node.getText();
       final List<Task> tasks = this.parser.parseTasks(_text, taskTags);
-      final Procedure1<Task> _function = new Procedure1<Task>() {
+      final Consumer<Task> _function = new Consumer<Task>() {
         @Override
-        public void apply(final Task it) {
+        public void accept(final Task it) {
           int _offset = it.getOffset();
           int _offset_1 = node.getOffset();
           int _plus = (_offset + _offset_1);
@@ -111,7 +111,7 @@ public class DefaultTaskFinder implements ITaskFinder {
           it.setLineNumber(_minus);
         }
       };
-      IterableExtensions.<Task>forEach(tasks, _function);
+      tasks.forEach(_function);
       return tasks;
     }
     return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());

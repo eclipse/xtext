@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -52,7 +53,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -299,9 +299,9 @@ public class Indexer {
       }
     };
     Iterable<URI> _filter = IterableExtensions.<URI>filter(_deletedFiles, _function);
-    final Procedure1<URI> _function_1 = new Procedure1<URI>() {
+    final Consumer<URI> _function_1 = new Consumer<URI>() {
       @Override
-      public void apply(final URI it) {
+      public void accept(final URI it) {
         CancelIndicator _cancelIndicator = context.getCancelIndicator();
         Indexer.this._operationCanceledManager.checkCanceled(_cancelIndicator);
         IResourceDescription _resourceDescription = null;
@@ -316,7 +316,7 @@ public class Indexer {
         }
       }
     };
-    IterableExtensions.<URI>forEach(_filter, _function_1);
+    _filter.forEach(_function_1);
     return deltas;
   }
   

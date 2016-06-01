@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -51,7 +52,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.ConditionEvaluator;
@@ -176,13 +176,13 @@ public class FlattenedGrammarAccess {
       }
     };
     Iterable<TerminalRule> _filter_2 = IterableExtensions.<TerminalRule>filter(_filter_1, _function_2);
-    final Procedure1<TerminalRule> _function_3 = new Procedure1<TerminalRule>() {
+    final Consumer<TerminalRule> _function_3 = new Consumer<TerminalRule>() {
       @Override
-      public void apply(final TerminalRule it) {
+      public void accept(final TerminalRule it) {
         it.setFragment(true);
       }
     };
-    IterableExtensions.<TerminalRule>forEach(_filter_2, _function_3);
+    _filter_2.forEach(_function_3);
   }
   
   private Multimap<TerminalRule, AbstractRule> copyRuleBodies(final List<AbstractRule> copies, final Map<RuleWithParameterValues, AbstractRule> origToCopy) {

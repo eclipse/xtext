@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -162,13 +163,13 @@ public class IncrementalBuilder {
       IndexState _state = this.request.getState();
       final Source2GeneratedMapping newSource2GeneratedMapping = _state.getFileMappings();
       List<URI> _deletedFiles = this.request.getDeletedFiles();
-      final Procedure1<URI> _function = new Procedure1<URI>() {
+      final Consumer<URI> _function = new Consumer<URI>() {
         @Override
-        public void apply(final URI source) {
+        public void accept(final URI source) {
           Set<URI> _deleteSource = newSource2GeneratedMapping.deleteSource(source);
-          final Procedure1<URI> _function = new Procedure1<URI>() {
+          final Consumer<URI> _function = new Consumer<URI>() {
             @Override
-            public void apply(final URI generated) {
+            public void accept(final URI generated) {
               try {
                 boolean _isInfoEnabled = IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.isInfoEnabled();
                 if (_isInfoEnabled) {
@@ -200,10 +201,10 @@ public class IncrementalBuilder {
               }
             }
           };
-          IterableExtensions.<URI>forEach(_deleteSource, _function);
+          _deleteSource.forEach(_function);
         }
       };
-      IterableExtensions.<URI>forEach(_deletedFiles, _function);
+      _deletedFiles.forEach(_function);
       final Indexer.IndexResult result = this.indexer.computeAndIndexAffected(this.request, this.context);
       CancelIndicator _cancelIndicator = this.request.getCancelIndicator();
       this._operationCanceledManager.checkCanceled(_cancelIndicator);
@@ -348,9 +349,9 @@ public class IncrementalBuilder {
       CancelIndicator _cancelIndicator = request.getCancelIndicator();
       generatorContext.setCancelIndicator(_cancelIndicator);
       generator.generate(resource, fileSystemAccess, generatorContext);
-      final Procedure1<URI> _function_1 = new Procedure1<URI>() {
+      final Consumer<URI> _function_1 = new Consumer<URI>() {
         @Override
-        public void apply(final URI it) {
+        public void accept(final URI it) {
           try {
             IncrementalBuilder.InternalStatefulIncrementalBuilder.LOG.info(("Deleting stale generated file " + it));
             XtextResourceSet _resourceSet = InternalStatefulIncrementalBuilder.this.context.getResourceSet();
@@ -364,7 +365,7 @@ public class IncrementalBuilder {
           }
         }
       };
-      IterableExtensions.<URI>forEach(previous, _function_1);
+      previous.forEach(_function_1);
     }
     
     protected URIBasedFileSystemAccess createFileSystemAccess(final IResourceServiceProvider serviceProvider, final Resource resource) {

@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -39,7 +40,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * A IResourceDescriptions implementation that holds its resource description in chunks, each identified by a string.
@@ -209,9 +209,9 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
     int _size = _entrySet.size();
     out.writeInt(_size);
     Set<Map.Entry<String, ResourceDescriptionsData>> _entrySet_1 = copy.entrySet();
-    final Procedure1<Map.Entry<String, ResourceDescriptionsData>> _function = new Procedure1<Map.Entry<String, ResourceDescriptionsData>>() {
+    final Consumer<Map.Entry<String, ResourceDescriptionsData>> _function = new Consumer<Map.Entry<String, ResourceDescriptionsData>>() {
       @Override
-      public void apply(final Map.Entry<String, ResourceDescriptionsData> it) {
+      public void accept(final Map.Entry<String, ResourceDescriptionsData> it) {
         try {
           String _key = it.getKey();
           out.writeUTF(_key);
@@ -232,9 +232,9 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
           final Iterable<Object> descriptions = IterableExtensions.<IResourceDescription, Object>map(_allResourceDescriptions, _function);
           int _size = IterableExtensions.size(descriptions);
           out.writeInt(_size);
-          final Procedure1<Object> _function_1 = new Procedure1<Object>() {
+          final Consumer<Object> _function_1 = new Consumer<Object>() {
             @Override
-            public void apply(final Object it) {
+            public void accept(final Object it) {
               try {
                 out.writeObject(it);
               } catch (Throwable _e) {
@@ -242,13 +242,13 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
               }
             }
           };
-          IterableExtensions.<Object>forEach(descriptions, _function_1);
+          descriptions.forEach(_function_1);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }
       }
     };
-    IterableExtensions.<Map.Entry<String, ResourceDescriptionsData>>forEach(_entrySet_1, _function);
+    _entrySet_1.forEach(_function);
   }
   
   public static ChunkedResourceDescriptions findInEmfObject(final Notifier emfObject) {
