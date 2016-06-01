@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext IDEA Generator
 Bundle-SymbolicName: org.eclipse.xtext.idea.generator;singleton:=true
-Bundle-Version: 2.10.1.qualifier
+Bundle-Version: 2.11.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Eclipse Xtext
 Bundle-ActivationPolicy: lazy
