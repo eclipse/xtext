@@ -142,6 +142,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     if (_tripleEquals) {
       throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.");
     }
+    Map<String, Object> _extensionToFactoryMap = this.languagesRegistry.getExtensionToFactoryMap();
+    boolean _isEmpty = _extensionToFactoryMap.isEmpty();
+    if (_isEmpty) {
+      throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages\'s setup class in \'/META-INF/services/org.eclipse.xtext.ISetup\'");
+    }
     this.params = params;
     WorkspaceManager _get = this.workspaceManagerProvider.get();
     this.workspaceManager = _get;
@@ -174,8 +179,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     result.setCapabilities(_doubleArrow);
     ArrayList<LanguageDescriptionImpl> _newArrayList = CollectionLiterals.<LanguageDescriptionImpl>newArrayList();
     result.setSupportedLanguages(_newArrayList);
-    Map<String, Object> _extensionToFactoryMap = this.languagesRegistry.getExtensionToFactoryMap();
-    Collection<Object> _values = _extensionToFactoryMap.values();
+    Map<String, Object> _extensionToFactoryMap_1 = this.languagesRegistry.getExtensionToFactoryMap();
+    Collection<Object> _values = _extensionToFactoryMap_1.values();
     Iterable<IResourceServiceProvider> _filter = Iterables.<IResourceServiceProvider>filter(_values, IResourceServiceProvider.class);
     Set<IResourceServiceProvider> _set = IterableExtensions.<IResourceServiceProvider>toSet(_filter);
     for (final IResourceServiceProvider serviceProvider : _set) {

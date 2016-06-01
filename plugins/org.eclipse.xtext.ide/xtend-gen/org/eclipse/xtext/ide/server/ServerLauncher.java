@@ -18,6 +18,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
@@ -44,20 +45,20 @@ public class ServerLauncher {
     };
     boolean _exists = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
     ServerLauncher.IS_DEBUG = _exists;
+    final InputStream stdin = System.in;
+    final PrintStream stdout = System.out;
+    ServerLauncher.redirectStandardStreams();
     ServerModule _serverModule = new ServerModule();
     Injector _createInjector = Guice.createInjector(_serverModule);
     final ServerLauncher launcher = _createInjector.<ServerLauncher>getInstance(ServerLauncher.class);
-    launcher.start();
+    launcher.start(stdin, stdout);
   }
   
   @Inject
   private LanguageServerImpl languageServer;
   
-  public void start() {
+  public void start(final InputStream in, final OutputStream out) {
     try {
-      final InputStream stdin = System.in;
-      final PrintStream stdout = System.out;
-      this.redirectStandardStreams();
       System.err.println("Starting Xtext Language Server.");
       final LanguageServerToJsonAdapter messageAcceptor = new LanguageServerToJsonAdapter(this.languageServer) {
         @Override
@@ -108,7 +109,7 @@ public class ServerLauncher {
         }
       };
       _protocol.addErrorListener(_function);
-      messageAcceptor.connect(stdin, stdout);
+      messageAcceptor.connect(in, out);
       System.err.println("started.");
       messageAcceptor.join();
       while (true) {
@@ -119,7 +120,7 @@ public class ServerLauncher {
     }
   }
   
-  public void redirectStandardStreams() {
+  public static void redirectStandardStreams() {
     try {
       byte[] _newByteArrayOfSize = new byte[0];
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
