@@ -80,7 +80,6 @@ class ServerLauncher {
             p2.printStackTrace(System.err)
         ]
         messageAcceptor.connect(stdin, stdout)
-        messageAcceptor.start
         System.err.println("started.")
         messageAcceptor.join
         while (!hasExitNotification.get) {
