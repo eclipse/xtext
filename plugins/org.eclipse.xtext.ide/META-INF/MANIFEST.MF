@@ -10,8 +10,8 @@ Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtend.lib,
  org.eclipse.core.runtime;bundle-version="3.6.0",
- io.typefox.lsapi,
- io.typefox.lsapi.services
+ io.typefox.lsapi;resolution:=optional,
+ io.typefox.lsapi.services;resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15"
 Export-Package: org.eclipse.xtext.ide;x-friends:="org.eclipse.xtend.ide",
  org.eclipse.xtext.ide.editor.bracketmatching;x-friends:="org.eclipse.xtend.ide.common,org.eclipse.xtend.ide",
