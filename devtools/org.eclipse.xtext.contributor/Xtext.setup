@@ -55,7 +55,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="emf.update.site"
-      value="http://download.eclipse.org/modeling/emf/emf/updates/2.12milestones/"/>
+      value="http://download.eclipse.org/modeling/emf/emf/updates/2.12/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="antlr-gen.update.site"
@@ -783,9 +783,9 @@
       <setupTask
           xsi:type="pde:APIBaselineTask"
           name="xtext"
-          version="2.9"
-          location="${installation.location}/api/v2.9/"
-          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.9.0/R201512010527/tmf-xtext-Update-2.9.0.zip&amp;r=1"/>
+          version="2.10"
+          location="${installation.location}/api/v2.10/"
+          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.10.0/R201605250459/tmf-xtext-Update-2.10.0.zip&amp;r=1"/>
     </stream>
     <stream
         name="maintenance">
@@ -804,9 +804,9 @@
       <setupTask
           xsi:type="pde:APIBaselineTask"
           name="xtext"
-          version="2.8"
-          location="${installation.location}/api/v2.8/"
-          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.8.0/R201503090534/tmf-xtext-Update-2.8.0.zip&amp;r=1"/>
+          version="2.9"
+          location="${installation.location}/api/v2.9/"
+          remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.9.0/R201512010527/tmf-xtext-Update-2.9.0.zip&amp;r=1"/>
     </stream>
     <description>Provide the core grammar infrastructure</description>
   </project>
