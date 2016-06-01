@@ -14,6 +14,7 @@ import java.io.File
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 @ImplementedBy(JavaIoFileSystemScanner)
 interface IFileSystemScanner {

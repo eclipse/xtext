@@ -17,6 +17,7 @@ import com.google.inject.Singleton
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 class ResourceServiceProviderServiceLoader implements Provider<IResourceServiceProvider.Registry> {
