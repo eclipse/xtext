@@ -194,6 +194,10 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
     return _builder.toString();
   }
   
+  protected String _toExpectation(final Void it) {
+    return "";
+  }
+  
   protected String _toExpectation(final Location it) {
     StringConcatenation _builder = new StringConcatenation();
     String _uri = it.getUri();
@@ -279,6 +283,8 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
       return _toExpectation((Range)elements);
     } else if (elements instanceof SymbolInformation) {
       return _toExpectation((SymbolInformation)elements);
+    } else if (elements == null) {
+      return _toExpectation((Void)null);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(elements).toString());

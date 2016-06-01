@@ -61,6 +61,9 @@ public class DocumentExtensions {
   }
   
   public RangeImpl newRange(final Resource resource, final ITextRegion region) {
+    if ((region == null)) {
+      return null;
+    }
     int _offset = region.getOffset();
     int _offset_1 = region.getOffset();
     int _length = region.getLength();

@@ -219,6 +219,8 @@ public class CompletionTest extends AbstractLanguageServerTest {
       return _toExpectation((Range)it);
     } else if (it instanceof SymbolInformation) {
       return _toExpectation((SymbolInformation)it);
+    } else if (it == null) {
+      return _toExpectation((Void)null);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it).toString());
