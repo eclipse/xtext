@@ -88,6 +88,7 @@ import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
+import org.eclipse.xtext.ide.server.hover.HoverService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -151,6 +152,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     final Procedure1<ServerCapabilitiesImpl> _function = new Procedure1<ServerCapabilitiesImpl>() {
       @Override
       public void apply(final ServerCapabilitiesImpl it) {
+        it.setHoverProvider(Boolean.valueOf(true));
         it.setDefinitionProvider(Boolean.valueOf(true));
         it.setReferencesProvider(Boolean.valueOf(true));
         it.setDocumentSymbolProvider(Boolean.valueOf(true));
@@ -615,6 +617,37 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
+  public CompletableFuture<Hover> hover(final TextDocumentPositionParams params) {
+    final Function1<CancelIndicator, Hover> _function = new Function1<CancelIndicator, Hover>() {
+      @Override
+      public Hover apply(final CancelIndicator cancelIndicator) {
+        TextDocumentIdentifier _textDocument = params.getTextDocument();
+        String _uri = _textDocument.getUri();
+        final URI uri = LanguageServerImpl.this._uriExtensions.toUri(_uri);
+        final IResourceServiceProvider resourceServiceProvider = LanguageServerImpl.this.languagesRegistry.getResourceServiceProvider(uri);
+        HoverService _get = null;
+        if (resourceServiceProvider!=null) {
+          _get=resourceServiceProvider.<HoverService>get(HoverService.class);
+        }
+        final HoverService hoverService = _get;
+        if ((hoverService == null)) {
+          return LsapiFactories.emptyHover();
+        }
+        final Function2<Document, XtextResource, Hover> _function = new Function2<Document, XtextResource, Hover>() {
+          @Override
+          public Hover apply(final Document document, final XtextResource resource) {
+            Position _position = params.getPosition();
+            final int offset = document.getOffSet(_position);
+            return hoverService.hover(resource, offset);
+          }
+        };
+        return LanguageServerImpl.this.workspaceManager.<Hover>doRead(uri, _function);
+      }
+    };
+    return this.requestManager.<Hover>runRead(_function);
+  }
+  
+  @Override
   public void didChangeConfiguraton(final DidChangeConfigurationParams params) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
@@ -622,11 +655,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   @Override
   public CompletableFuture<CompletionItem> resolveCompletionItem(final CompletionItem unresolved) {
     return CompletableFuture.<CompletionItem>completedFuture(unresolved);
-  }
-  
-  @Override
-  public CompletableFuture<Hover> hover(final TextDocumentPositionParams position) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override
