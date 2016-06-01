@@ -89,6 +89,7 @@ import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
+import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -114,6 +115,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class LanguageServerImpl implements LanguageServer, WorkspaceService, WindowService, TextDocumentService {
   @Inject
   private RequestManager requestManager;
+  
+  @Inject
+  private WorkspaceSymbolService workspaceSymbolService;
   
   private InitializeParams params;
   
@@ -150,6 +154,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         it.setDefinitionProvider(Boolean.valueOf(true));
         it.setReferencesProvider(Boolean.valueOf(true));
         it.setDocumentSymbolProvider(Boolean.valueOf(true));
+        it.setWorkspaceSymbolProvider(Boolean.valueOf(true));
         it.setTextDocumentSync(Integer.valueOf(ServerCapabilities.SYNC_INCREMENTAL));
         CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
         final Procedure1<CompletionOptionsImpl> _function = new Procedure1<CompletionOptionsImpl>() {
@@ -598,7 +603,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public CompletableFuture<List<? extends SymbolInformation>> symbol(final WorkspaceSymbolParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    final Function1<CancelIndicator, List<? extends SymbolInformation>> _function = new Function1<CancelIndicator, List<? extends SymbolInformation>>() {
+      @Override
+      public List<? extends SymbolInformation> apply(final CancelIndicator cancelIndicator) {
+        final IResourceDescriptions indexData = LanguageServerImpl.this.workspaceManager.getIndex();
+        String _query = params.getQuery();
+        return LanguageServerImpl.this.workspaceSymbolService.getSymbols(_query, LanguageServerImpl.this.resourceAccess, indexData, cancelIndicator);
+      }
+    };
+    return this.requestManager.<List<? extends SymbolInformation>>runRead(_function);
   }
   
   @Override
@@ -668,6 +681,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   public void setRequestManager(final RequestManager requestManager) {
     this.requestManager = requestManager;
+  }
+  
+  @Pure
+  public WorkspaceSymbolService getWorkspaceSymbolService() {
+    return this.workspaceSymbolService;
+  }
+  
+  public void setWorkspaceSymbolService(final WorkspaceSymbolService workspaceSymbolService) {
+    this.workspaceSymbolService = workspaceSymbolService;
   }
   
   @Pure

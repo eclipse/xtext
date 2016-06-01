@@ -13,6 +13,7 @@ import io.typefox.lsapi.CompletionList;
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.Range;
+import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.TextDocumentPositionParamsImpl;
 import io.typefox.lsapi.util.LsapiFactories;
 import java.util.Arrays;
@@ -216,6 +217,8 @@ public class CompletionTest extends AbstractLanguageServerTest {
       return _toExpectation((Position)it);
     } else if (it instanceof Range) {
       return _toExpectation((Range)it);
+    } else if (it instanceof SymbolInformation) {
+      return _toExpectation((SymbolInformation)it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it).toString());

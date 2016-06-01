@@ -61,6 +61,7 @@ import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
+import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
@@ -78,6 +79,9 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurat
 
 	@Inject
 	RequestManager requestManager
+	
+	@Inject
+	WorkspaceSymbolService workspaceSymbolService
 
 	InitializeParams params
 	@Inject Provider<WorkspaceManager> workspaceManagerProvider
@@ -98,6 +102,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurat
 			definitionProvider = true
 			referencesProvider = true
 			documentSymbolProvider = true
+			workspaceSymbolProvider = true
 			textDocumentSync = ServerCapabilities.SYNC_INCREMENTAL
 			completionProvider = new CompletionOptionsImpl => [
 				resolveProvider = false
@@ -247,7 +252,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurat
 			val result = new CompletionListImpl
 			if (contentAssistService === null)
 				return result
-	
+
 			val entries = workspaceManager.doRead(uri) [ document, resource |
 				val offset = document.getOffSet(params.position)
 				return contentAssistService.createProposals(document.contents, offset, resource, cancelIndicator)
@@ -321,10 +326,14 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurat
 		]
 	}
 
-	// end symbols
 	override symbol(WorkspaceSymbolParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.<List<? extends SymbolInformation>>runRead [ cancelIndicator |
+			val indexData = workspaceManager.index
+			return workspaceSymbolService.getSymbols(params.query, resourceAccess, indexData, cancelIndicator)
+		]
 	}
+
+	// end symbols
 
 	override didChangeConfiguraton(DidChangeConfigurationParams params) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")

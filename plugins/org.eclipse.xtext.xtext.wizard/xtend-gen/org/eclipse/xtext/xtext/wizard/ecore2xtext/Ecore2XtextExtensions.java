@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -25,6 +24,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.ecore2xtext.UniqueNameUtil;
@@ -219,13 +219,13 @@ public class Ecore2XtextExtensions {
     } else {
       Iterables.<EClassifier>addAll(acceptor, classifiers);
       Iterable<EClass> _filter_1 = Iterables.<EClass>filter(classifiers, EClass.class);
-      final Consumer<EClass> _function_2 = new Consumer<EClass>() {
+      final Procedure1<EClass> _function_2 = new Procedure1<EClass>() {
         @Override
-        public void accept(final EClass c) {
+        public void apply(final EClass c) {
           Ecore2XtextExtensions.allAssignedClassifiers(c, acceptor);
         }
       };
-      _filter_1.forEach(_function_2);
+      IterableExtensions.<EClass>forEach(_filter_1, _function_2);
     }
   }
   

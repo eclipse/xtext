@@ -13,10 +13,11 @@ import java.io.File;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.AbstractFile;
 import org.eclipse.xtext.xtext.wizard.BinaryFile;
@@ -35,13 +36,13 @@ public class CliProjectsCreator implements ProjectsCreator {
   @Override
   public void createProjects(final WizardConfiguration config) {
     Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
-    final Consumer<ProjectDescriptor> _function = new Consumer<ProjectDescriptor>() {
+    final Procedure1<ProjectDescriptor> _function = new Procedure1<ProjectDescriptor>() {
       @Override
-      public void accept(final ProjectDescriptor it) {
+      public void apply(final ProjectDescriptor it) {
         CliProjectsCreator.this.createProject(it);
       }
     };
-    _enabledProjects.forEach(_function);
+    IterableExtensions.<ProjectDescriptor>forEach(_enabledProjects, _function);
   }
   
   public void createProject(final ProjectDescriptor project) {
@@ -49,9 +50,9 @@ public class CliProjectsCreator implements ProjectsCreator {
     final File projectRoot = new File(_location);
     projectRoot.mkdirs();
     Iterable<? extends AbstractFile> _files = project.getFiles();
-    final Consumer<AbstractFile> _function = new Consumer<AbstractFile>() {
+    final Procedure1<AbstractFile> _function = new Procedure1<AbstractFile>() {
       @Override
-      public void accept(final AbstractFile it) {
+      public void apply(final AbstractFile it) {
         try {
           WizardConfiguration _config = project.getConfig();
           SourceLayout _sourceLayout = _config.getSourceLayout();
@@ -90,16 +91,16 @@ public class CliProjectsCreator implements ProjectsCreator {
         }
       }
     };
-    _files.forEach(_function);
+    IterableExtensions.forEach(_files, _function);
     Set<String> _sourceFolders = project.getSourceFolders();
-    final Consumer<String> _function_1 = new Consumer<String>() {
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
       @Override
-      public void accept(final String it) {
+      public void apply(final String it) {
         File _file = new File(projectRoot, it);
         _file.mkdirs();
       }
     };
-    _sourceFolders.forEach(_function_1);
+    IterableExtensions.<String>forEach(_sourceFolders, _function_1);
   }
   
   @Pure

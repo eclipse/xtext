@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -40,6 +39,8 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
@@ -206,13 +207,13 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
   }
   
   protected void suppressWarnings(final IXtextGeneratorFileSystemAccess fsa, final TypeReference... types) {
-    final Consumer<TypeReference> _function = new Consumer<TypeReference>() {
+    final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
       @Override
-      public void accept(final TypeReference it) {
+      public void apply(final TypeReference it) {
         AbstractAntlrGeneratorFragment2.this.suppressWarnings(fsa, it);
       }
     };
-    ((List<TypeReference>)Conversions.doWrapArray(types)).forEach(_function);
+    IterableExtensions.<TypeReference>forEach(((Iterable<TypeReference>)Conversions.doWrapArray(types)), _function);
   }
   
   protected void normalizeLineDelimiters(final IXtextGeneratorFileSystemAccess fsa, final TypeReference type) {
@@ -231,13 +232,13 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
   }
   
   protected void normalizeLineDelimiters(final IXtextGeneratorFileSystemAccess fsa, final TypeReference... types) {
-    final Consumer<TypeReference> _function = new Consumer<TypeReference>() {
+    final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
       @Override
-      public void accept(final TypeReference it) {
+      public void apply(final TypeReference it) {
         AbstractAntlrGeneratorFragment2.this.normalizeLineDelimiters(fsa, it);
       }
     };
-    ((List<TypeReference>)Conversions.doWrapArray(types)).forEach(_function);
+    IterableExtensions.<TypeReference>forEach(((Iterable<TypeReference>)Conversions.doWrapArray(types)), _function);
   }
   
   protected void normalizeTokens(final IXtextGeneratorFileSystemAccess fsa, final String tokenFile) {

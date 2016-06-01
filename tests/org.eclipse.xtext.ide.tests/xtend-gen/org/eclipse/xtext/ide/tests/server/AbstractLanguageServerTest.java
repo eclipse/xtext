@@ -22,6 +22,7 @@ import io.typefox.lsapi.Location;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.Range;
+import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.services.TextDocumentService;
 import io.typefox.lsapi.util.LsapiFactories;
 import java.io.File;
@@ -47,6 +48,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Before;
 
 /**
@@ -230,6 +232,42 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
     return _builder.toString();
   }
   
+  protected String _toExpectation(final SymbolInformation it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("symbol \"");
+    String _name = it.getName();
+    _builder.append(_name, "");
+    _builder.append("\" {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("kind: ");
+    int _kind = it.getKind();
+    _builder.append(_kind, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("location: ");
+    Location _location = it.getLocation();
+    String _expectation = this.toExpectation(_location);
+    _builder.append(_expectation, "\t");
+    _builder.newLineIfNotEmpty();
+    {
+      String _container = it.getContainer();
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_container);
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        _builder.append("\t");
+        _builder.append("container: \"");
+        String _container_1 = it.getContainer();
+        _builder.append(_container_1, "\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("}");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
   protected String toExpectation(final Object elements) {
     if (elements instanceof List) {
       return _toExpectation((List<?>)elements);
@@ -239,6 +277,8 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
       return _toExpectation((Position)elements);
     } else if (elements instanceof Range) {
       return _toExpectation((Range)elements);
+    } else if (elements instanceof SymbolInformation) {
+      return _toExpectation((SymbolInformation)elements);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(elements).toString());

@@ -17,9 +17,11 @@ import io.typefox.lsapi.SymbolInformationImpl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -33,7 +35,9 @@ import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -44,6 +48,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -88,18 +93,14 @@ public class DocumentSymbolService {
     for (final URI targetURI : targetURIs) {
       {
         this.operationCanceledManager.checkCanceled(cancelIndicator);
-        final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
+        final Procedure1<EObject> _function = new Procedure1<EObject>() {
           @Override
-          public Object exec(final ResourceSet resourceSet) throws Exception {
-            final EObject object = resourceSet.getEObject(targetURI, true);
-            if ((object != null)) {
-              LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(object);
-              locations.add(_newLocation);
-            }
-            return null;
+          public void apply(final EObject obj) {
+            LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(obj);
+            locations.add(_newLocation);
           }
         };
-        resourceAccess.<Object>readOnly(targetURI, _function);
+        this.doRead(resourceAccess, targetURI, _function);
       }
     }
     return locations;
@@ -116,21 +117,16 @@ public class DocumentSymbolService {
       @Override
       public void accept(final IReferenceDescription reference) {
         URI _sourceEObjectUri = reference.getSourceEObjectUri();
-        final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
+        final Procedure1<EObject> _function = new Procedure1<EObject>() {
           @Override
-          public Object exec(final ResourceSet resourceSet) throws Exception {
-            URI _sourceEObjectUri = reference.getSourceEObjectUri();
-            final EObject targetObject = resourceSet.getEObject(_sourceEObjectUri, true);
-            if ((targetObject != null)) {
-              EReference _eReference = reference.getEReference();
-              int _indexInList = reference.getIndexInList();
-              LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(targetObject, _eReference, _indexInList);
-              locations.add(_newLocation);
-            }
-            return null;
+          public void apply(final EObject obj) {
+            EReference _eReference = reference.getEReference();
+            int _indexInList = reference.getIndexInList();
+            LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(obj, _eReference, _indexInList);
+            locations.add(_newLocation);
           }
         };
-        resourceAccess.<Object>readOnly(_sourceEObjectUri, _function);
+        DocumentSymbolService.this.doRead(resourceAccess, _sourceEObjectUri, _function);
       }
     };
     ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(this.resourceServiceProviderRegistry, _function);
@@ -147,11 +143,12 @@ public class DocumentSymbolService {
   
   public List<? extends SymbolInformation> getSymbols(final XtextResource resource, final CancelIndicator cancelIndicator) {
     final LinkedHashMap<EObject, SymbolInformationImpl> symbols = CollectionLiterals.<EObject, SymbolInformationImpl>newLinkedHashMap();
-    final TreeIterator<EObject> contents = EcoreUtil.<EObject>getAllProperContents(resource, true);
+    final TreeIterator<Object> contents = EcoreUtil.<Object>getAllProperContents(resource, true);
     while (contents.hasNext()) {
       {
         this.operationCanceledManager.checkCanceled(cancelIndicator);
-        final EObject obj = contents.next();
+        Object _next = contents.next();
+        final EObject obj = ((EObject) _next);
         final SymbolInformationImpl symbol = this.createSymbol(obj);
         if ((symbol != null)) {
           symbols.put(obj, symbol);
@@ -189,14 +186,94 @@ public class DocumentSymbolService {
   
   protected String getSymbolName(final EObject object) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(object);
+    return this.getSymbolName(_fullyQualifiedName);
+  }
+  
+  protected int getSymbolKind(final EObject object) {
+    EClass _eClass = object.eClass();
+    return this.getSymbolKind(_eClass);
+  }
+  
+  public List<? extends SymbolInformation> getSymbols(final IResourceDescription resourceDescription, final String query, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
+    final LinkedList<SymbolInformationImpl> symbols = CollectionLiterals.<SymbolInformationImpl>newLinkedList();
+    Iterable<IEObjectDescription> _exportedObjects = resourceDescription.getExportedObjects();
+    for (final IEObjectDescription description : _exportedObjects) {
+      {
+        this.operationCanceledManager.checkCanceled(cancelIndicator);
+        boolean _filter = this.filter(description, query);
+        if (_filter) {
+          final SymbolInformationImpl symbol = this.createSymbol(description);
+          if ((symbol != null)) {
+            symbols.add(symbol);
+            URI _eObjectURI = description.getEObjectURI();
+            final Procedure1<EObject> _function = new Procedure1<EObject>() {
+              @Override
+              public void apply(final EObject obj) {
+                LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(obj);
+                symbol.setLocation(_newLocation);
+              }
+            };
+            this.doRead(resourceAccess, _eObjectURI, _function);
+          }
+        }
+      }
+    }
+    return symbols;
+  }
+  
+  protected boolean filter(final IEObjectDescription description, final String query) {
+    QualifiedName _qualifiedName = description.getQualifiedName();
+    QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+    String _string = _lowerCase.toString();
+    String _lowerCase_1 = query.toLowerCase();
+    return _string.contains(_lowerCase_1);
+  }
+  
+  protected SymbolInformationImpl createSymbol(final IEObjectDescription description) {
+    final String symbolName = this.getSymbolName(description);
+    if ((symbolName == null)) {
+      return null;
+    }
+    final SymbolInformationImpl symbol = new SymbolInformationImpl();
+    symbol.setName(symbolName);
+    int _symbolKind = this.getSymbolKind(description);
+    symbol.setKind(_symbolKind);
+    return symbol;
+  }
+  
+  protected String getSymbolName(final IEObjectDescription description) {
+    QualifiedName _qualifiedName = description.getQualifiedName();
+    return this.getSymbolName(_qualifiedName);
+  }
+  
+  protected int getSymbolKind(final IEObjectDescription description) {
+    EClass _eClass = description.getEClass();
+    return this.getSymbolKind(_eClass);
+  }
+  
+  protected String getSymbolName(final QualifiedName qualifiedName) {
     String _string = null;
-    if (_fullyQualifiedName!=null) {
-      _string=_fullyQualifiedName.toString();
+    if (qualifiedName!=null) {
+      _string=qualifiedName.toString();
     }
     return _string;
   }
   
-  protected int getSymbolKind(final EObject object) {
+  protected int getSymbolKind(final EClass type) {
     return 0;
+  }
+  
+  protected void doRead(final IReferenceFinder.IResourceAccess resourceAccess, final URI objectURI, final Procedure1<? super EObject> acceptor) {
+    final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
+      @Override
+      public Object exec(final ResourceSet resourceSet) throws Exception {
+        final EObject object = resourceSet.getEObject(objectURI, true);
+        if ((object != null)) {
+          acceptor.apply(object);
+        }
+        return null;
+      }
+    };
+    resourceAccess.<Object>readOnly(objectURI, _function);
   }
 }

@@ -9,9 +9,10 @@ package org.eclipse.xtext.xtext.generator.model.project;
 
 import com.google.common.base.Objects;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
@@ -64,9 +65,9 @@ public class StandardProjectConfig extends XtextProjectConfig {
   public void setDefaults() {
     super.setDefaults();
     List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
-    final Consumer<SubProjectConfig> _function = new Consumer<SubProjectConfig>() {
+    final Procedure1<SubProjectConfig> _function = new Procedure1<SubProjectConfig>() {
       @Override
-      public void accept(final SubProjectConfig it) {
+      public void apply(final SubProjectConfig it) {
         String _name = it.getName();
         boolean _tripleEquals = (_name == null);
         if (_tripleEquals) {
@@ -131,7 +132,7 @@ public class StandardProjectConfig extends XtextProjectConfig {
         }
       }
     };
-    _enabledProjects.forEach(_function);
+    IterableExtensions.forEach(_enabledProjects, _function);
   }
   
   protected String computeName(final SubProjectConfig project) {

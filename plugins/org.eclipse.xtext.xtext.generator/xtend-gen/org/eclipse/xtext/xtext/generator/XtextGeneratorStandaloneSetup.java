@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.List;
-import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.mwe.utils.ProjectMapping;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
@@ -50,9 +49,9 @@ public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorCompon
     final StandaloneSetup delegate = new StandaloneSetup();
     delegate.setScanClassPath(this.scanClasspath);
     Iterable<Pair<String, String>> _projectMappings = this.getProjectMappings();
-    final Consumer<Pair<String, String>> _function = new Consumer<Pair<String, String>>() {
+    final Procedure1<Pair<String, String>> _function = new Procedure1<Pair<String, String>>() {
       @Override
-      public void accept(final Pair<String, String> mapping) {
+      public void apply(final Pair<String, String> mapping) {
         ProjectMapping _projectMapping = new ProjectMapping();
         final Procedure1<ProjectMapping> _function = new Procedure1<ProjectMapping>() {
           @Override
@@ -67,7 +66,7 @@ public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorCompon
         delegate.addProjectMapping(_doubleArrow);
       }
     };
-    _projectMappings.forEach(_function);
+    IterableExtensions.<Pair<String, String>>forEach(_projectMappings, _function);
   }
   
   private Iterable<Pair<String, String>> getProjectMappings() {

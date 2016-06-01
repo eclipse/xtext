@@ -14,6 +14,8 @@ import io.typefox.lsapi.Location
 import io.typefox.lsapi.SymbolInformation
 import io.typefox.lsapi.SymbolInformationImpl
 import java.util.List
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.findReferences.IReferenceFinder
 import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
@@ -23,7 +25,10 @@ import org.eclipse.xtext.findReferences.TargetURIs
 import org.eclipse.xtext.ide.server.DocumentExtensions
 import org.eclipse.xtext.ide.util.CancelIndicatorProgressMonitor
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
+import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResource
@@ -55,7 +60,7 @@ class DocumentSymbolService {
 
 	@Inject
 	Provider<TargetURIs> targetURIProvider
-	
+
 	@Inject
 	OperationCanceledManager operationCanceledManager
 
@@ -77,11 +82,8 @@ class DocumentSymbolService {
 		for (targetURI : targetURIs) {
 			operationCanceledManager.checkCanceled(cancelIndicator)
 
-			resourceAccess.readOnly(targetURI) [ resourceSet |
-				val object = resourceSet.getEObject(targetURI, true)
-				if (object !== null)
-					locations += object.newLocation
-				return null
+			resourceAccess.doRead(targetURI) [ obj |
+				locations += obj.newLocation
 			]
 		}
 		return locations
@@ -105,11 +107,8 @@ class DocumentSymbolService {
 			resourceAccess,
 			indexData,
 			new ReferenceAcceptor(resourceServiceProviderRegistry) [ reference |
-				resourceAccess.readOnly(reference.sourceEObjectUri) [ resourceSet |
-					val targetObject = resourceSet.getEObject(reference.sourceEObjectUri, true)
-					if (targetObject !== null)
-						locations += targetObject.newLocation(reference.EReference, reference.indexInList)
-					return null
+				resourceAccess.doRead(reference.sourceEObjectUri) [ obj |
+					locations += obj.newLocation(reference.EReference, reference.indexInList)
 				]
 			],
 			new CancelIndicatorProgressMonitor(cancelIndicator)
@@ -129,7 +128,7 @@ class DocumentSymbolService {
 		while (contents.hasNext) {
 			operationCanceledManager.checkCanceled(cancelIndicator)
 
-			val obj = contents.next
+			val obj = contents.next as EObject
 			val symbol = obj.createSymbol
 			if (symbol !== null) {
 				symbols.put(obj, symbol)
@@ -158,11 +157,74 @@ class DocumentSymbolService {
 	}
 
 	protected def String getSymbolName(EObject object) {
-		return object.fullyQualifiedName?.toString
+		return object.fullyQualifiedName.symbolName
 	}
 
 	protected def int getSymbolKind(EObject object) {
+		return object.eClass.symbolKind
+	}
+
+	def List<? extends SymbolInformation> getSymbols(
+		IResourceDescription resourceDescription,
+		String query,
+		IResourceAccess resourceAccess,
+		CancelIndicator cancelIndicator
+	) {
+		val symbols = newLinkedList
+		for (description : resourceDescription.exportedObjects) {
+			operationCanceledManager.checkCanceled(cancelIndicator)
+			if (description.filter(query)) {
+				val symbol = description.createSymbol
+				if (symbol !== null) {
+					symbols += symbol
+					resourceAccess.doRead(description.EObjectURI) [ obj |
+						symbol.location = obj.newLocation
+					]
+				}
+			}
+		}
+		return symbols
+	}
+
+	protected def boolean filter(IEObjectDescription description, String query) {
+		return description.qualifiedName.toLowerCase.toString.contains(query.toLowerCase)
+	}
+
+	protected def SymbolInformationImpl createSymbol(IEObjectDescription description) {
+		val symbolName = description.symbolName
+		if(symbolName === null) return null
+
+		val symbol = new SymbolInformationImpl
+		symbol.name = symbolName
+		symbol.kind = description.symbolKind
+		return symbol
+	}
+
+	protected def String getSymbolName(IEObjectDescription description) {
+		return description.qualifiedName.symbolName
+	}
+
+	protected def int getSymbolKind(IEObjectDescription description) {
+		return description.EClass.symbolKind
+	}
+
+	protected def String getSymbolName(QualifiedName qualifiedName) {
+		return qualifiedName?.toString
+	}
+
+	protected def int getSymbolKind(EClass type) {
 		return 0
+//		return SymbolInformation.KIND_PROPERTY
+	}
+
+	protected def void doRead(IResourceAccess resourceAccess, URI objectURI, (EObject)=>void acceptor) {
+		resourceAccess.readOnly(objectURI) [ resourceSet |
+			val object = resourceSet.getEObject(objectURI, true)
+			if (object !== null) {
+				acceptor.apply(object)
+			}
+			return null
+		]
 	}
 
 }

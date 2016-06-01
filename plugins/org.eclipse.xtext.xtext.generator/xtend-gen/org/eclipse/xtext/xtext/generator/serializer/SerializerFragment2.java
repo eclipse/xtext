@@ -19,7 +19,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.common.util.EList;
@@ -73,6 +72,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
@@ -936,14 +936,14 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     {
       final List<ISerializationContext> sorted = IterableExtensions.<ISerializationContext>sort(contexts);
       final LinkedHashMultimap<EObject, ISerializationContext> index = LinkedHashMultimap.<EObject, ISerializationContext>create();
-      final Consumer<ISerializationContext> _function = new Consumer<ISerializationContext>() {
+      final Procedure1<ISerializationContext> _function = new Procedure1<ISerializationContext>() {
         @Override
-        public void accept(final ISerializationContext it) {
+        public void apply(final ISerializationContext it) {
           EObject _contextObject = SerializerFragment2.this.getContextObject(it);
           index.put(_contextObject, it);
         }
       };
-      sorted.forEach(_function);
+      IterableExtensions.<ISerializationContext>forEach(sorted, _function);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {

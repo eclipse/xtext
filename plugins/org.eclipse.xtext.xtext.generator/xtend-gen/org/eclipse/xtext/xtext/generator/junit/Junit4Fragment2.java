@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Collections;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -109,9 +108,9 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     IBundleProjectConfig _eclipsePluginTest_2 = _projectConfig_7.getEclipsePluginTest();
     ManifestAccess _manifest_7 = _eclipsePluginTest_2.getManifest();
     Iterable<ManifestAccess> _filterNull = IterableExtensions.<ManifestAccess>filterNull(Collections.<ManifestAccess>unmodifiableList(CollectionLiterals.<ManifestAccess>newArrayList(_manifest_6, _manifest_7)));
-    final Consumer<ManifestAccess> _function_2 = new Consumer<ManifestAccess>() {
+    final Procedure1<ManifestAccess> _function_2 = new Procedure1<ManifestAccess>() {
       @Override
-      public void accept(final ManifestAccess it) {
+      public void apply(final ManifestAccess it) {
         Set<String> _importedPackages = it.getImportedPackages();
         CollectionExtensions.<String>addAll(_importedPackages, 
           "org.junit;version=\"4.5.0\"", 
@@ -123,7 +122,7 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
           "org.hamcrest.core");
       }
     };
-    _filterNull.forEach(_function_2);
+    IterableExtensions.<ManifestAccess>forEach(_filterNull, _function_2);
     JavaFileAccess _generateInjectorProvider = this.generateInjectorProvider();
     IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
     IBundleProjectConfig _runtimeTest_3 = _projectConfig_8.getRuntimeTest();

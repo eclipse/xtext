@@ -17,6 +17,7 @@ import io.typefox.lsapi.Location
 import io.typefox.lsapi.Position
 import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.Range
+import io.typefox.lsapi.SymbolInformation
 import java.io.File
 import java.io.FileWriter
 import java.net.URI
@@ -136,5 +137,15 @@ class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsParams> {
 	protected def dispatch String toExpectation(Range it) '''[«start.toExpectation» .. «end.toExpectation»]'''
 
 	protected def dispatch String toExpectation(Position it) '''[«line», «character»]'''
+
+	protected def dispatch String toExpectation(SymbolInformation it) '''
+		symbol "«name»" {
+			kind: «kind»
+			location: «location.toExpectation»
+			«IF !container.nullOrEmpty»
+				container: "«container»"
+			«ENDIF»
+		}
+	'''
 
 }
