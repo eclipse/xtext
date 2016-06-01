@@ -17,7 +17,7 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
 /**
  * @author kosyakov - Initial contribution and API
  */
-class DocumentSymbolTest extends AbstractLanguageServerTest {
+class WorkspaceSymbolTest extends AbstractLanguageServerTest {
 
 	@Test
 	def void testDocumentSymbol_01() {
@@ -30,6 +30,7 @@ class DocumentSymbolTest extends AbstractLanguageServerTest {
 					Foo foo
 				}
 			'''
+			query = 'F'
 			expectedSymbols = '''
 				symbol "Foo" {
 					kind: 0
@@ -38,44 +39,72 @@ class DocumentSymbolTest extends AbstractLanguageServerTest {
 				symbol "Foo.bar" {
 					kind: 0
 					location: MyModel.testlang [[1, 5] .. [1, 8]]
-					container: "Foo"
 				}
 				symbol "Foo.bar.int" {
 					kind: 0
 					location: MyModel.testlang [[1, 1] .. [1, 4]]
-					container: "Foo.bar"
-				}
-				symbol "Bar" {
-					kind: 0
-					location: MyModel.testlang [[3, 5] .. [3, 8]]
 				}
 				symbol "Bar.foo" {
 					kind: 0
 					location: MyModel.testlang [[4, 5] .. [4, 8]]
-					container: "Bar"
 				}
 			'''
 		]
 	}
 
-	protected def void testDocumentSymbol((DocumentSymbolConfiguraiton)=>void configurator) {
-		val extension configuration = new DocumentSymbolConfiguraiton
+	@Test
+	def void testDocumentSymbol_02() {
+		testDocumentSymbol[
+			model = '''
+				type Foo {
+					int bar
+				}
+				type Bar {
+					Foo foo
+				}
+			'''
+			query = 'oO'
+			expectedSymbols = '''
+				symbol "Foo" {
+					kind: 0
+					location: MyModel.testlang [[0, 5] .. [0, 8]]
+				}
+				symbol "Foo.bar" {
+					kind: 0
+					location: MyModel.testlang [[1, 5] .. [1, 8]]
+				}
+				symbol "Foo.bar.int" {
+					kind: 0
+					location: MyModel.testlang [[1, 1] .. [1, 4]]
+				}
+				symbol "Bar.foo" {
+					kind: 0
+					location: MyModel.testlang [[4, 5] .. [4, 8]]
+				}
+			'''
+		]
+	}
+
+	protected def void testDocumentSymbol((WorkspaceSymbolConfiguraiton)=>void configurator) {
+		val extension configuration = new WorkspaceSymbolConfiguraiton
 		configurator.apply(configuration)
 		val fileUri = filePath -> model
 
 		initialize
 		open(fileUri, model)
 
-		val symbols = languageServer.documentSymbol(fileUri.newDocumentSymbolParams)
-		val String actualSymbols = symbols.get.toExpectation
+		val symbols = languageServer.symbol(query.newWorkspaceSymbolParams).get
+		
+		val String actualSymbols = symbols.toExpectation
 		assertEquals(expectedSymbols, actualSymbols)
 	}
 
 	@Accessors
-	static class DocumentSymbolConfiguraiton {
+	static class WorkspaceSymbolConfiguraiton {
 		String model = ''
 		String filePath = 'MyModel.testlang'
+		String query = ''
 		String expectedSymbols = ''
 	}
-
+	
 }
