@@ -13,6 +13,7 @@ import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 @Data class Document {
     

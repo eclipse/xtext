@@ -31,6 +31,7 @@ import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 class ProjectManager {
     

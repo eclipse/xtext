@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 class UriExtensions {

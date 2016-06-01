@@ -16,6 +16,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @FinalFieldsConstructor
 class WorkspaceResourceAccess implements IResourceAccess {

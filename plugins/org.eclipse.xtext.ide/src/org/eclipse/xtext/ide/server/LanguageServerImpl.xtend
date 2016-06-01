@@ -73,8 +73,8 @@ import org.eclipse.xtext.validation.Issue
 import static io.typefox.lsapi.util.LsapiFactories.*
 
 /**
- * 
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 @Accessors class LanguageServerImpl implements LanguageServer, WorkspaceService, WindowService, TextDocumentService {
 

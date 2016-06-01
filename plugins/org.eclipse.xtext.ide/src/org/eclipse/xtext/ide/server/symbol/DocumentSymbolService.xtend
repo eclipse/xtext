@@ -39,6 +39,7 @@ import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 /**
  * @author kosyakov - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 class DocumentSymbolService {
