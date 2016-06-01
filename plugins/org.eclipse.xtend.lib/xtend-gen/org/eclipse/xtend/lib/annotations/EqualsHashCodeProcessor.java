@@ -55,8 +55,11 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     
     public boolean hasEquals(final ClassDeclaration it) {
       Iterable<? extends MethodDeclaration> _declaredMethods = it.getDeclaredMethods();
-      final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration it_1) -> {
-        return Boolean.valueOf(((Objects.equal(it_1.getSimpleName(), "equals") && (IterableExtensions.size(it_1.getParameters()) == 1)) && Objects.equal(IterableExtensions.head(it_1.getParameters()).getType(), this.context.getObject())));
+      final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
+        @Override
+        public Boolean apply(final MethodDeclaration it) {
+          return Boolean.valueOf(((Objects.equal(it.getSimpleName(), "equals") && (IterableExtensions.size(it.getParameters()) == 1)) && Objects.equal(IterableExtensions.head(it.getParameters()).getType(), Util.this.context.getObject())));
+        }
       };
       return IterableExtensions.exists(_declaredMethods, _function);
     }
@@ -116,72 +119,78 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     }
     
     public void addEquals(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
-      final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(cls);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _primitiveBoolean = this.context.getPrimitiveBoolean();
-        it.setReturnType(_primitiveBoolean);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Override.class);
-        it.addAnnotation(_newAnnotationReference);
-        AnnotationReference _newAnnotationReference_1 = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference_1);
-        TypeReference _object = this.context.getObject();
-        it.addParameter("obj", _object);
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("if (this == obj)");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("return true;");
-            _builder.newLine();
-            _builder.append("if (obj == null)");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("return false;");
-            _builder.newLine();
-            _builder.append("if (getClass() != obj.getClass())");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("return false;");
-            _builder.newLine();
-            {
-              if (includeSuper) {
-                _builder.append("if (!super.equals(obj))");
-                _builder.newLine();
-                _builder.append("  ");
-                _builder.append("return false;");
-                _builder.newLine();
+      final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
+        public void apply(final MutableMethodDeclaration it) {
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
+          Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
+          TypeReference _primitiveBoolean = Util.this.context.getPrimitiveBoolean();
+          it.setReturnType(_primitiveBoolean);
+          AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Override.class);
+          it.addAnnotation(_newAnnotationReference);
+          AnnotationReference _newAnnotationReference_1 = Util.this.context.newAnnotationReference(Pure.class);
+          it.addAnnotation(_newAnnotationReference_1);
+          TypeReference _object = Util.this.context.getObject();
+          it.addParameter("obj", _object);
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("if (this == obj)");
+              _builder.newLine();
+              _builder.append("  ");
+              _builder.append("return true;");
+              _builder.newLine();
+              _builder.append("if (obj == null)");
+              _builder.newLine();
+              _builder.append("  ");
+              _builder.append("return false;");
+              _builder.newLine();
+              _builder.append("if (getClass() != obj.getClass())");
+              _builder.newLine();
+              _builder.append("  ");
+              _builder.append("return false;");
+              _builder.newLine();
+              {
+                if (includeSuper) {
+                  _builder.append("if (!super.equals(obj))");
+                  _builder.newLine();
+                  _builder.append("  ");
+                  _builder.append("return false;");
+                  _builder.newLine();
+                }
               }
-            }
-            TypeReference _newWildCardSelfTypeReference = Util.this.newWildCardSelfTypeReference(cls);
-            _builder.append(_newWildCardSelfTypeReference, "");
-            _builder.append(" other = (");
-            TypeReference _newWildCardSelfTypeReference_1 = Util.this.newWildCardSelfTypeReference(cls);
-            _builder.append(_newWildCardSelfTypeReference_1, "");
-            _builder.append(") obj;");
-            _builder.newLineIfNotEmpty();
-            {
-              for(final FieldDeclaration field : includedFields) {
-                StringConcatenationClient _contributeToEquals = Util.this.contributeToEquals(field);
-                _builder.append(_contributeToEquals, "");
-                _builder.newLineIfNotEmpty();
+              TypeReference _newWildCardSelfTypeReference = Util.this.newWildCardSelfTypeReference(cls);
+              _builder.append(_newWildCardSelfTypeReference, "");
+              _builder.append(" other = (");
+              TypeReference _newWildCardSelfTypeReference_1 = Util.this.newWildCardSelfTypeReference(cls);
+              _builder.append(_newWildCardSelfTypeReference_1, "");
+              _builder.append(") obj;");
+              _builder.newLineIfNotEmpty();
+              {
+                for(final FieldDeclaration field : includedFields) {
+                  StringConcatenationClient _contributeToEquals = Util.this.contributeToEquals(field);
+                  _builder.append(_contributeToEquals, "");
+                  _builder.newLineIfNotEmpty();
+                }
               }
+              _builder.append("return true;");
+              _builder.newLine();
             }
-            _builder.append("return true;");
-            _builder.newLine();
-          }
-        };
-        it.setBody(_client);
+          };
+          it.setBody(_client);
+        }
       };
       cls.addMethod("equals", _function);
     }
     
     private TypeReference newWildCardSelfTypeReference(final ClassDeclaration cls) {
       Iterable<? extends TypeParameterDeclaration> _typeParameters = cls.getTypeParameters();
-      final Function1<TypeParameterDeclaration, TypeReference> _function = (TypeParameterDeclaration it) -> {
-        TypeReference _object = this.context.getObject();
-        return this.context.newWildcardTypeReference(_object);
+      final Function1<TypeParameterDeclaration, TypeReference> _function = new Function1<TypeParameterDeclaration, TypeReference>() {
+        @Override
+        public TypeReference apply(final TypeParameterDeclaration it) {
+          TypeReference _object = Util.this.context.getObject();
+          return Util.this.context.newWildcardTypeReference(_object);
+        }
       };
       Iterable<TypeReference> _map = IterableExtensions.map(_typeParameters, _function);
       return this.context.newTypeReference(cls, ((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));
@@ -393,42 +402,45 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     }
     
     public void addHashCode(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
-      final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(cls);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _primitiveInt = this.context.getPrimitiveInt();
-        it.setReturnType(_primitiveInt);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Override.class);
-        it.addAnnotation(_newAnnotationReference);
-        AnnotationReference _newAnnotationReference_1 = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference_1);
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("final int prime = 31;");
-            _builder.newLine();
-            _builder.append("int result = ");
-            {
-              if (includeSuper) {
-                _builder.append("super.hashCode()");
-              } else {
-                _builder.append("1");
+      final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
+        public void apply(final MutableMethodDeclaration it) {
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
+          Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
+          TypeReference _primitiveInt = Util.this.context.getPrimitiveInt();
+          it.setReturnType(_primitiveInt);
+          AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Override.class);
+          it.addAnnotation(_newAnnotationReference);
+          AnnotationReference _newAnnotationReference_1 = Util.this.context.newAnnotationReference(Pure.class);
+          it.addAnnotation(_newAnnotationReference_1);
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("final int prime = 31;");
+              _builder.newLine();
+              _builder.append("int result = ");
+              {
+                if (includeSuper) {
+                  _builder.append("super.hashCode()");
+                } else {
+                  _builder.append("1");
+                }
               }
-            }
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-            {
-              for(final FieldDeclaration field : includedFields) {
-                StringConcatenationClient _contributeToHashCode = Util.this.contributeToHashCode(field);
-                _builder.append(_contributeToHashCode, "");
-                _builder.newLineIfNotEmpty();
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              {
+                for(final FieldDeclaration field : includedFields) {
+                  StringConcatenationClient _contributeToHashCode = Util.this.contributeToHashCode(field);
+                  _builder.append(_contributeToHashCode, "");
+                  _builder.newLineIfNotEmpty();
+                }
               }
+              _builder.append("return result;");
+              _builder.newLine();
             }
-            _builder.append("return result;");
-            _builder.newLine();
-          }
-        };
-        it.setBody(_client);
+          };
+          it.setBody(_client);
+        }
       };
       cls.addMethod("hashCode", _function);
     }
@@ -654,8 +666,11 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
         context.addWarning(it, "hashCode is already defined, this annotation has no effect");
       } else {
         Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
-        final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
-          return Boolean.valueOf((((!it_1.isStatic()) && (!it_1.isTransient())) && context.isThePrimaryGeneratedJavaElement(it_1)));
+        final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+          @Override
+          public Boolean apply(final MutableFieldDeclaration it) {
+            return Boolean.valueOf((((!it.isStatic()) && (!it.isTransient())) && context.isThePrimaryGeneratedJavaElement(it)));
+          }
         };
         final Iterable<? extends MutableFieldDeclaration> fields = IterableExtensions.filter(_declaredFields, _function);
         boolean _hasSuperEquals = util.hasSuperEquals(it);

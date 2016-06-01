@@ -69,132 +69,138 @@ public class ToStringProcessor extends AbstractClassProcessor {
     }
     
     public void addReflectiveToString(final MutableClassDeclaration cls, final ToStringConfiguration config) {
-      final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(cls);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _string = this.context.getString();
-        it.setReturnType(_string);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Override.class);
-        it.addAnnotation(_newAnnotationReference);
-        AnnotationReference _newAnnotationReference_1 = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference_1);
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("String result = new ");
-            _builder.append(ToStringBuilder.class, "");
-            _builder.append("(this)");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append(".addAllFields()");
-            _builder.newLine();
-            _builder.append("\t");
-            {
-              boolean _isSkipNulls = config.isSkipNulls();
-              if (_isSkipNulls) {
-                _builder.append(".skipNulls()");
+      final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
+        public void apply(final MutableMethodDeclaration it) {
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
+          Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
+          TypeReference _string = Util.this.context.getString();
+          it.setReturnType(_string);
+          AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Override.class);
+          it.addAnnotation(_newAnnotationReference);
+          AnnotationReference _newAnnotationReference_1 = Util.this.context.newAnnotationReference(Pure.class);
+          it.addAnnotation(_newAnnotationReference_1);
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("String result = new ");
+              _builder.append(ToStringBuilder.class, "");
+              _builder.append("(this)");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append(".addAllFields()");
+              _builder.newLine();
+              _builder.append("\t");
+              {
+                boolean _isSkipNulls = config.isSkipNulls();
+                if (_isSkipNulls) {
+                  _builder.append(".skipNulls()");
+                }
               }
-            }
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            {
-              boolean _isSingleLine = config.isSingleLine();
-              if (_isSingleLine) {
-                _builder.append(".singleLine()");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              {
+                boolean _isSingleLine = config.isSingleLine();
+                if (_isSingleLine) {
+                  _builder.append(".singleLine()");
+                }
               }
-            }
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            {
-              boolean _isHideFieldNames = config.isHideFieldNames();
-              if (_isHideFieldNames) {
-                _builder.append(".hideFieldNames()");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              {
+                boolean _isHideFieldNames = config.isHideFieldNames();
+                if (_isHideFieldNames) {
+                  _builder.append(".hideFieldNames()");
+                }
               }
-            }
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            {
-              boolean _isVerbatimValues = config.isVerbatimValues();
-              if (_isVerbatimValues) {
-                _builder.append(".verbatimValues()");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              {
+                boolean _isVerbatimValues = config.isVerbatimValues();
+                if (_isVerbatimValues) {
+                  _builder.append(".verbatimValues()");
+                }
               }
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append(".toString();");
+              _builder.newLine();
+              _builder.append("return result;");
+              _builder.newLine();
             }
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append(".toString();");
-            _builder.newLine();
-            _builder.append("return result;");
-            _builder.newLine();
-          }
-        };
-        it.setBody(_client);
+          };
+          it.setBody(_client);
+        }
       };
       cls.addMethod("toString", _function);
     }
     
     public void addToString(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> fields, final ToStringConfiguration config) {
-      final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(cls);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _string = this.context.getString();
-        it.setReturnType(_string);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Override.class);
-        it.addAnnotation(_newAnnotationReference);
-        AnnotationReference _newAnnotationReference_1 = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference_1);
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append(ToStringBuilder.class, "");
-            _builder.append(" b = new ");
-            _builder.append(ToStringBuilder.class, "");
-            _builder.append("(this);");
-            _builder.newLineIfNotEmpty();
-            {
-              boolean _isSkipNulls = config.isSkipNulls();
-              if (_isSkipNulls) {
-                _builder.append("b.skipNulls();");
+      final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
+        public void apply(final MutableMethodDeclaration it) {
+          Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
+          Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
+          TypeReference _string = Util.this.context.getString();
+          it.setReturnType(_string);
+          AnnotationReference _newAnnotationReference = Util.this.context.newAnnotationReference(Override.class);
+          it.addAnnotation(_newAnnotationReference);
+          AnnotationReference _newAnnotationReference_1 = Util.this.context.newAnnotationReference(Pure.class);
+          it.addAnnotation(_newAnnotationReference_1);
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append(ToStringBuilder.class, "");
+              _builder.append(" b = new ");
+              _builder.append(ToStringBuilder.class, "");
+              _builder.append("(this);");
+              _builder.newLineIfNotEmpty();
+              {
+                boolean _isSkipNulls = config.isSkipNulls();
+                if (_isSkipNulls) {
+                  _builder.append("b.skipNulls();");
+                }
               }
-            }
-            _builder.newLineIfNotEmpty();
-            {
-              boolean _isSingleLine = config.isSingleLine();
-              if (_isSingleLine) {
-                _builder.append("b.singleLine();");
+              _builder.newLineIfNotEmpty();
+              {
+                boolean _isSingleLine = config.isSingleLine();
+                if (_isSingleLine) {
+                  _builder.append("b.singleLine();");
+                }
               }
-            }
-            _builder.newLineIfNotEmpty();
-            {
-              boolean _isHideFieldNames = config.isHideFieldNames();
-              if (_isHideFieldNames) {
-                _builder.append("b.hideFieldNames();");
+              _builder.newLineIfNotEmpty();
+              {
+                boolean _isHideFieldNames = config.isHideFieldNames();
+                if (_isHideFieldNames) {
+                  _builder.append("b.hideFieldNames();");
+                }
               }
-            }
-            _builder.newLineIfNotEmpty();
-            {
-              boolean _isVerbatimValues = config.isVerbatimValues();
-              if (_isVerbatimValues) {
-                _builder.append("b.verbatimValues();");
+              _builder.newLineIfNotEmpty();
+              {
+                boolean _isVerbatimValues = config.isVerbatimValues();
+                if (_isVerbatimValues) {
+                  _builder.append("b.verbatimValues();");
+                }
               }
-            }
-            _builder.newLineIfNotEmpty();
-            {
-              for(final FieldDeclaration field : fields) {
-                _builder.append("b.add(\"");
-                String _simpleName = field.getSimpleName();
-                _builder.append(_simpleName, "");
-                _builder.append("\", this.");
-                String _simpleName_1 = field.getSimpleName();
-                _builder.append(_simpleName_1, "");
-                _builder.append(");");
-                _builder.newLineIfNotEmpty();
+              _builder.newLineIfNotEmpty();
+              {
+                for(final FieldDeclaration field : fields) {
+                  _builder.append("b.add(\"");
+                  String _simpleName = field.getSimpleName();
+                  _builder.append(_simpleName, "");
+                  _builder.append("\", this.");
+                  String _simpleName_1 = field.getSimpleName();
+                  _builder.append(_simpleName_1, "");
+                  _builder.append(");");
+                  _builder.newLineIfNotEmpty();
+                }
               }
+              _builder.append("return b.toString();");
+              _builder.newLine();
             }
-            _builder.append("return b.toString();");
-            _builder.newLine();
-          }
-        };
-        it.setBody(_client);
+          };
+          it.setBody(_client);
+        }
       };
       cls.addMethod("toString", _function);
     }
@@ -224,8 +230,11 @@ public class ToStringProcessor extends AbstractClassProcessor {
         util.addReflectiveToString(it, configuration);
       } else {
         Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
-        final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
-          return Boolean.valueOf(((context.isThePrimaryGeneratedJavaElement(it_1) && (!it_1.isStatic())) && (!it_1.isTransient())));
+        final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+          @Override
+          public Boolean apply(final MutableFieldDeclaration it) {
+            return Boolean.valueOf(((context.isThePrimaryGeneratedJavaElement(it) && (!it.isStatic())) && (!it.isTransient())));
+          }
         };
         Iterable<? extends MutableFieldDeclaration> _filter = IterableExtensions.filter(_declaredFields, _function);
         util.addToString(it, _filter, configuration);

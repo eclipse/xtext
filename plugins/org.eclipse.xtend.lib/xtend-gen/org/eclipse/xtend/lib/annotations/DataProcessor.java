@@ -2,7 +2,6 @@ package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.AccessorsProcessor;
 import org.eclipse.xtend.lib.annotations.EqualsHashCodeProcessor;
@@ -22,6 +21,7 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @since 2.7
@@ -47,8 +47,11 @@ public class DataProcessor extends AbstractClassProcessor {
     
     public Iterable<? extends MutableFieldDeclaration> getDataFields(final MutableClassDeclaration it) {
       Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
-      final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
-        return Boolean.valueOf((((!it_1.isStatic()) && (!it_1.isTransient())) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
+      final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+        @Override
+        public Boolean apply(final MutableFieldDeclaration it) {
+          return Boolean.valueOf((((!it.isStatic()) && (!it.isTransient())) && Util.this.context.isThePrimaryGeneratedJavaElement(it)));
+        }
       };
       return IterableExtensions.filter(_declaredFields, _function);
     }
@@ -67,16 +70,19 @@ public class DataProcessor extends AbstractClassProcessor {
     @Extension
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
     Iterable<? extends MutableFieldDeclaration> _dataFields = util.getDataFields(it);
-    final Consumer<MutableFieldDeclaration> _function = (MutableFieldDeclaration it_1) -> {
-      Element _primarySourceElement = context.getPrimarySourceElement(it_1);
-      Set<Modifier> _modifiers = ((FieldDeclaration) _primarySourceElement).getModifiers();
-      boolean _contains = _modifiers.contains(Modifier.VAR);
-      if (_contains) {
-        context.addError(it_1, "Cannot use the \'var\' keyword on a data field");
+    final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+      @Override
+      public void apply(final MutableFieldDeclaration it) {
+        Element _primarySourceElement = context.getPrimarySourceElement(it);
+        Set<Modifier> _modifiers = ((FieldDeclaration) _primarySourceElement).getModifiers();
+        boolean _contains = _modifiers.contains(Modifier.VAR);
+        if (_contains) {
+          context.addError(it, "Cannot use the \'var\' keyword on a data field");
+        }
+        it.setFinal(true);
       }
-      it_1.setFinal(true);
     };
-    _dataFields.forEach(_function);
+    IterableExtensions.forEach(_dataFields, _function);
     if ((requiredArgsUtil.needsFinalFieldConstructor(it) || (it.findAnnotation(context.findTypeGlobally(FinalFieldsConstructor.class)) != null))) {
       requiredArgsUtil.addFinalFieldsConstructor(it);
     }
@@ -123,23 +129,26 @@ public class DataProcessor extends AbstractClassProcessor {
       }
     }
     Iterable<? extends MutableFieldDeclaration> _dataFields_4 = util.getDataFields(it);
-    final Consumer<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration it_1) -> {
-      boolean _shouldAddGetter = getterUtil.shouldAddGetter(it_1);
-      if (_shouldAddGetter) {
-        Visibility _elvis_2 = null;
-        AccessorType _getterType = getterUtil.getGetterType(it_1);
-        Visibility _visibility = null;
-        if (_getterType!=null) {
-          _visibility=getterUtil.toVisibility(_getterType);
+    final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
+      @Override
+      public void apply(final MutableFieldDeclaration it) {
+        boolean _shouldAddGetter = getterUtil.shouldAddGetter(it);
+        if (_shouldAddGetter) {
+          Visibility _elvis = null;
+          AccessorType _getterType = getterUtil.getGetterType(it);
+          Visibility _visibility = null;
+          if (_getterType!=null) {
+            _visibility=getterUtil.toVisibility(_getterType);
+          }
+          if (_visibility != null) {
+            _elvis = _visibility;
+          } else {
+            _elvis = Visibility.PUBLIC;
+          }
+          getterUtil.addGetter(it, _elvis);
         }
-        if (_visibility != null) {
-          _elvis_2 = _visibility;
-        } else {
-          _elvis_2 = Visibility.PUBLIC;
-        }
-        getterUtil.addGetter(it_1, _elvis_2);
       }
     };
-    _dataFields_4.forEach(_function_1);
+    IterableExtensions.forEach(_dataFields_4, _function_1);
   }
 }

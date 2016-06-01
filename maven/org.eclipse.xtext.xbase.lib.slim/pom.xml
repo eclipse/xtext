@@ -8,6 +8,8 @@
 	</parent>
 	<properties>
 		<java.runtime.lib>${java.home}/lib/rt.jar</java.runtime.lib>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.eclipse.xtext.xbase.lib.slim</artifactId>
