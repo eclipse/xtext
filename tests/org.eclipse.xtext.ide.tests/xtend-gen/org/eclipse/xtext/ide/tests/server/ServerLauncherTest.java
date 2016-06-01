@@ -84,6 +84,8 @@ public class ServerLauncherTest {
       final InitializeResult msg = _initialize.get();
       boolean _notEquals = (!Objects.equal(msg, null));
       Assert.assertTrue(_notEquals);
+      client.shutdown();
+      client.exit();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

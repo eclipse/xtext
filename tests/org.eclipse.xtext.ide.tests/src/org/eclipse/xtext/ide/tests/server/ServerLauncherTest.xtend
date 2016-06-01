@@ -48,6 +48,8 @@ class ServerLauncherTest {
             rootPath = "."
         ]).get
         Assert.assertTrue(msg != null)
+        client.shutdown
+        client.exit
     }
 
 }
