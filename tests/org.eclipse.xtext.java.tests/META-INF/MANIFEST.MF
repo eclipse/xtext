@@ -4,7 +4,7 @@ Bundle-Name: Xtext Java Language Tests
 Bundle-SymbolicName: org.eclipse.xtext.java.tests
 Bundle-Version: 2.11.0.qualifier
 Bundle-Vendor: eclipse.org
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext.java,
  org.eclipse.xtext.common.types.tests,
  com.google.inject;bundle-version="3.0.0",

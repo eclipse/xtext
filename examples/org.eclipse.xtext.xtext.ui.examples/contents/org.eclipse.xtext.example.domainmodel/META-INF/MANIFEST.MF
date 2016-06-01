@@ -28,5 +28,5 @@ Export-Package: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.services,
  org.eclipse.xtext.example.domainmodel.validation,
  org.eclipse.xtext.example.domainmodel.serializer
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j;version="1.2.15"

@@ -88,10 +88,10 @@ public class MethodOverrides4 extends MethodOverrides3<List<String>> {
 	public static <T extends Iterable<CharSequence>> String staticM4(T t) {
 		return "m4(t)";
 	}
-	
-	public static <T extends Serializable> Iterable<T> staticM5() {
-		return null;
-	}
+	//FIXME
+//	public static <T extends Serializable> Iterable<T> staticM5() {
+//		return null;
+//	}
 	
 	private void withVarArgs(String[] s) {}
 	private void withArray(String... s) {}
